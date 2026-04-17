@@ -247,9 +247,129 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   .particle-ref-grid{grid-template-columns:1fr;}
   .flashcard-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
 }
+
+/* ── ATTENDANCE BAR ── */
+.attendance-bar {
+  background: white;
+  border-bottom: 1.5px solid #E8EFF5;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.att-label {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.88rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.att-students {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.att-chip {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.92rem;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 2px solid #E0E7EF;
+  background: white;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.att-chip:hover:not(.checked) { border-color: var(--sky); color: var(--sky); }
+.att-chip.checked {
+  background: var(--green-light);
+  border-color: var(--green);
+  color: #1B5E20;
+  cursor: default;
+}
+.att-chip.checked::before { content: '✅ '; font-size: 0.85rem; }
+.att-chip.absent { color: #BDBDBD; border-color: #E0E7EF; cursor: default; }
+.att-date {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+const SUPABASE_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const STUDENTS = ['리아', '카요', '리암'];
+let myName = null;
+let checkedToday = new Set();
+
+function todayStr() {
+  return new Date().toLocaleDateString('sv-SE');
+}
+
+async function loadAttendance() {
+  const { data } = await _supabase
+    .from('attendance')
+    .select('student_name')
+    .eq('class_date', todayStr());
+  if (data) {
+    checkedToday = new Set(data.map(r => r.student_name));
+    renderAttendance();
+  }
+}
+
+async function checkIn(name) {
+  if (checkedToday.has(name)) return;
+  const { error } = await _supabase
+    .from('attendance')
+    .upsert({ student_name: name, class_date: todayStr() }, { onConflict: 'student_name,class_date' });
+  if (!error) {
+    myName = name;
+    checkedToday.add(name);
+    renderAttendance();
+  }
+}
+
+function renderAttendance() {
+  const container = document.getElementById('att-students');
+  if (!container) return;
+  container.innerHTML = '';
+  STUDENTS.forEach(name => {
+    const chip = document.createElement('div');
+    chip.className = 'att-chip' + (checkedToday.has(name) ? ' checked' : '');
+    chip.textContent = name;
+    if (!checkedToday.has(name)) {
+      chip.onclick = () => {
+        if (myName) return;
+        if (confirm(name + '으로 출석 체크할까요?')) checkIn(name);
+      };
+    }
+    container.appendChild(chip);
+  });
+}
+
+_supabase.channel('attendance-changes')
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'attendance' }, payload => {
+    if (payload.new.class_date === todayStr()) {
+      checkedToday.add(payload.new.student_name);
+      renderAttendance();
+    }
+  })
+  .subscribe();
+
+document.addEventListener('DOMContentLoaded', loadAttendance);
+</script>
 
 <header class="app-header">
   <div class="logo" onclick="showTOC()">📚 한글학교 한국어 2</div>
@@ -262,6 +382,19 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
     <button class="home-btn" onclick="showTOC()">🏠 목차</button>
   </div>
 </header>
+
+<!-- 출석 바 -->
+<div class="attendance-bar">
+  <span class="att-label">📋 출석</span>
+  <div class="att-students" id="att-students">
+    <span style="font-size:0.85rem;color:var(--muted);">로딩 중...</span>
+  </div>
+  <span class="att-date" id="att-date"></span>
+</div>
+<script>
+  document.getElementById('att-date').textContent =
+    new Date().toLocaleDateString('ko-KR', {month:'long', day:'numeric', weekday:'short'});
+</script>
 
 <!-- ══════ 목차 TOC ══════ -->
 <div class="toc-screen active" id="toc-screen">
