@@ -418,8 +418,11 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.practice-bar.visible { display: flex; }
+.practice-bar.visible { display: flex !important; }
 .practice-status { font-family:'Jua',sans-serif; font-size:0.95rem; color:#1A5FA8; flex:1; }
 .practice-my-turn {
   font-family:'Jua',sans-serif; font-size:1rem; color:white;
@@ -743,6 +746,14 @@ document.addEventListener('DOMContentLoaded', loadPracticeSession);
     new Date().toLocaleDateString('ko-KR', {month:'long', day:'numeric', weekday:'short'});
 </script>
 
+<!-- 연습 실시간 바 -->
+<div class="practice-bar" id="practice-bar">
+  <span style="font-family:'Jua',sans-serif;font-size:0.88rem;color:#1A5FA8;white-space:nowrap;">✏️ 연습</span>
+  <span class="practice-status" id="practice-status">대기 중...</span>
+  <span class="practice-my-turn" id="practice-my-turn" style="display:none;">🎯 내 차례!</span>
+  <button class="nominate-btn" id="practice-nominate-btn" onclick="openNominateModal()">🎯 지목</button>
+</div>
+
 <!-- 학생 관리 모달 -->
 <div class="modal-overlay" id="student-modal" onclick="if(event.target===this)closeEditModal()">
   <div class="modal-box">
@@ -755,14 +766,6 @@ document.addEventListener('DOMContentLoaded', loadPracticeSession);
     </div>
     <button class="modal-close-btn" onclick="closeEditModal()">닫기</button>
   </div>
-</div>
-
-<!-- 연습 실시간 바 -->
-<div class="practice-bar" id="practice-bar">
-  <span style="font-family:'Jua',sans-serif;font-size:0.88rem;color:#1A5FA8;white-space:nowrap;">✏️ 연습</span>
-  <span class="practice-status" id="practice-status">대기 중...</span>
-  <span class="practice-my-turn" id="practice-my-turn" style="display:none;">🎯 내 차례!</span>
-  <button class="nominate-btn" id="practice-nominate-btn" onclick="openNominateModal()">🎯 지목</button>
 </div>
 
 <!-- 지목 모달 -->
