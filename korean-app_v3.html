@@ -35,11 +35,33 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
   padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
   box-shadow: 0 3px 16px rgba(91,184,245,0.35);
 }
-.logo { font-family:'Jua',sans-serif; font-size:1.6rem; color:white; text-shadow:2px 2px 0 rgba(0,0,0,0.12); display:flex; align-items:center; gap:10px; }
-.unit-tabs { display:flex; gap:8px; }
+.logo { font-family:'Jua',sans-serif; font-size:1.6rem; color:white; text-shadow:2px 2px 0 rgba(0,0,0,0.12); display:flex; align-items:center; gap:10px; cursor:pointer; }
+.unit-tabs { display:flex; gap:8px; flex-wrap:wrap; }
 .unit-tab { font-family:'Jua',sans-serif; font-size:0.95rem; padding:8px 20px; border:none; border-radius:30px; background:rgba(255,255,255,0.25); color:white; cursor:pointer; transition:all 0.2s; }
 .unit-tab.active { background:white; color:#5BB8F5; box-shadow:0 3px 12px rgba(0,0,0,0.15); }
 .unit-tab:hover:not(.active) { background:rgba(255,255,255,0.4); }
+.home-btn { font-family:'Jua',sans-serif; font-size:0.9rem; padding:7px 16px; border:2px solid rgba(255,255,255,0.6); border-radius:30px; background:transparent; color:white; cursor:pointer; transition:all 0.2s; }
+.home-btn:hover { background:rgba(255,255,255,0.2); }
+
+/* TOC (목차) */
+.toc-screen { display:none; }
+.toc-screen.active { display:block; }
+.toc-header { text-align:center; padding:30px 20px 10px; }
+.toc-title { font-family:'Jua',sans-serif; font-size:1.8rem; color:var(--sky); margin-bottom:4px; }
+.toc-sub { font-size:0.9rem; color:var(--muted); margin-bottom:28px; }
+.toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; padding:0 20px 60px; max-width:980px; margin:0 auto; }
+.toc-card { background:white; border-radius:20px; padding:20px 22px; box-shadow:var(--shadow); cursor:pointer; transition:all 0.2s; border-left:6px solid var(--sky); display:flex; align-items:center; gap:16px; }
+.toc-card:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(0,0,0,0.13); }
+.toc-card.done { border-left-color:var(--green); }
+.toc-card.locked { border-left-color:#E0E7EF; opacity:0.6; cursor:not-allowed; }
+.toc-card:hover.locked { transform:none; box-shadow:var(--shadow); }
+.toc-num { font-family:'Jua',sans-serif; font-size:2rem; min-width:48px; text-align:center; }
+.toc-info { flex:1; }
+.toc-lesson { font-family:'Jua',sans-serif; font-size:0.78rem; color:var(--muted); margin-bottom:2px; }
+.toc-name { font-family:'Jua',sans-serif; font-size:1.05rem; color:var(--text); }
+.toc-badge { font-size:0.72rem; padding:3px 10px; border-radius:20px; font-family:'Jua',sans-serif; margin-top:6px; display:inline-block; }
+.toc-badge.done   { background:var(--green-light); color:#1B5E20; }
+.toc-badge.locked { background:#F0F4F8; color:var(--muted); }
 
 /* MAIN */
 main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
@@ -230,16 +252,110 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 <body>
 
 <header class="app-header">
-  <div class="logo">🌟 한국어 배워요!</div>
-  <div class="unit-tabs">
-    <button class="unit-tab active" onclick="switchUnit(1)">1과 — 누가 뭘해요?</button>
-    <button class="unit-tab" onclick="switchUnit(2)">2과 — 어디에서 뭘해요?</button>
-    <button class="unit-tab" onclick="switchUnit(3)">3과 — 언제 수영을 해요?</button>
+  <div class="logo" onclick="showTOC()">📚 한글학교 한국어 2</div>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <div class="unit-tabs" id="unit-tabs-wrap">
+      <button class="unit-tab active" onclick="switchUnit(1)">1과</button>
+      <button class="unit-tab" onclick="switchUnit(2)">2과</button>
+      <button class="unit-tab" onclick="switchUnit(3)">3과</button>
+    </div>
+    <button class="home-btn" onclick="showTOC()">🏠 목차</button>
   </div>
 </header>
 
-<main>
+<!-- ══════ 목차 TOC ══════ -->
+<div class="toc-screen active" id="toc-screen">
+  <div class="toc-header">
+    <div class="toc-title">📖 한글학교 한국어 2</div>
+    <div class="toc-sub">단원을 선택하세요 — Choose a unit</div>
+  </div>
+  <div class="toc-grid">
+    <div class="toc-card done" onclick="switchUnit(1)">
+      <div class="toc-num">1️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">1과</div>
+        <div class="toc-name">누가 뭘해요?</div>
+        <span class="toc-badge done">✅ 학습 가능</span>
+      </div>
+    </div>
+    <div class="toc-card done" onclick="switchUnit(2)">
+      <div class="toc-num">2️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">2과</div>
+        <div class="toc-name">어디에서 뭘해요?</div>
+        <span class="toc-badge done">✅ 학습 가능</span>
+      </div>
+    </div>
+    <div class="toc-card done" onclick="switchUnit(3)">
+      <div class="toc-num">3️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">3과</div>
+        <div class="toc-name">언제 수영을 해요?</div>
+        <span class="toc-badge done">✅ 학습 가능</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">4️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">4과</div>
+        <div class="toc-name">장난감 기차가 있어요.</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">5️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">5과</div>
+        <div class="toc-name">구두가 아니에요.</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">6️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">6과</div>
+        <div class="toc-name">친구 집에서 장난감 배를 만들어요.</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">7️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">7과</div>
+        <div class="toc-name">하나, 둘, 셋, 넷</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">8️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">8과</div>
+        <div class="toc-name">저는 여섯 살이에요.</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">9️⃣</div>
+      <div class="toc-info">
+        <div class="toc-lesson">9과</div>
+        <div class="toc-name">코끼리는 커요.</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+    <div class="toc-card locked">
+      <div class="toc-num">🔟</div>
+      <div class="toc-info">
+        <div class="toc-lesson">10과</div>
+        <div class="toc-name">종합연습</div>
+        <span class="toc-badge locked">🔒 준비중</span>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+
+<div id="main-content" style="max-width:980px;margin:0 auto;padding:28px 20px 60px;display:none;">
 <!-- ══════ UNIT 1 ══════ -->
 <div class="unit active" id="unit1">
   <nav class="section-nav">
@@ -632,6 +748,7 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 </div>
 
 </main>
+</div>
 <div class="confetti-wrap" id="confetti"></div>
 
 <script>
@@ -801,11 +918,20 @@ function buildFlashcards(containerId, items, bgKey) {
 // ══════════════════════════════════════════
 // NAV
 // ══════════════════════════════════════════
+function showTOC(){
+  document.getElementById('toc-screen').classList.add('active');
+  document.getElementById('main-content').style.display='none';
+  document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+}
+
 function switchUnit(n){
+  document.getElementById('toc-screen').classList.remove('active');
+  document.getElementById('main-content').style.display='block';
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
   document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('unit'+n).classList.add('active');
   document.querySelectorAll('.unit-tab')[n-1].classList.add('active');
+  window.scrollTo(0,0);
 }function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
   u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
