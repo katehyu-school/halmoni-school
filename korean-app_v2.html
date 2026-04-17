@@ -1373,9 +1373,9 @@ const u2Questions = [
     types: ['name','particle','name','particle','place','particle','verb']
   },
   {
-    scene:'📞', english:'Junyeong and Boram make a phone call at home.',
+    scene:'🥋', english:'Riam and Kayo do taekwondo at the taekwondo gym.',
     hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
-    answer:['준영','하고','보람','은','집','에서','전화','를','해요'],
+    answer:['리암','하고','카요','는','태권도장','에서','태권도','를','해요'],
     types: ['name','particle','name','particle','place','particle','name','particle','verb']
   },
   {
@@ -1455,8 +1455,7 @@ function switchUnit(n){
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
   // 연습 탭이면 바 표시, 아니면 숨김
   const bar = document.getElementById('practice-bar');
-  if (sec === 'quiz') { bar && bar.classList.add('visible'); }
-  else { bar && bar.classList.remove('visible'); }
+  if (bar) bar.style.display = (sec === 'quiz') ? 'flex' : 'none';
 }
 
 // ══════════════════════════════════════════
