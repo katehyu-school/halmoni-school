@@ -22,7 +22,7 @@ body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow
 #title-screen{
   background:linear-gradient(135deg,#FFE4F0 0%,#FFF9E6 40%,#E4F9FF 100%);
   align-items:center;justify-content:center;text-align:center;
-  position:relative;overflow:hidden;
+  position:relative;
 }
 .title-banner{
   background:white;border:4px solid var(--yellow);border-radius:30px;
@@ -329,10 +329,71 @@ body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow
   <div class="stars" id="stars-wrap"></div>
   <div style="display:flex;flex-direction:column;align-items:center;padding:40px 20px;">
     <div class="title-bus">🚌</div>
-    <div class="title-banner">
-      <div class="title-text">할머니 스쿨</div>
+    <div style="width:100%;max-width:580px;margin:0 auto 16px;padding:0 10px;">
+      <svg width="100%" viewBox="0 0 680 160" role="img">
+        <title>할머니 스쿨</title>
+        <defs>
+          <pattern id="p-check" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+            <rect width="5" height="5" fill="#FF8FAB"/><rect x="5" y="5" width="5" height="5" fill="#FF8FAB"/>
+            <rect x="5" y="0" width="5" height="5" fill="#FFB3C6"/><rect x="0" y="5" width="5" height="5" fill="#FFB3C6"/>
+          </pattern>
+          <pattern id="p-stripe" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="10" x2="10" y2="0" stroke="#80CBC4" stroke-width="3"/>
+            <line x1="-5" y1="10" x2="5" y2="0" stroke="#80CBC4" stroke-width="3"/>
+            <line x1="5" y1="10" x2="15" y2="0" stroke="#80CBC4" stroke-width="3"/>
+          </pattern>
+          <pattern id="p-dot" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+            <rect width="10" height="10" fill="#FFD93D"/>
+            <circle cx="5" cy="5" r="2.5" fill="#FFB300"/>
+          </pattern>
+          <pattern id="p-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+            <rect width="10" height="10" fill="#A5D6A7"/>
+            <line x1="0" y1="5" x2="10" y2="5" stroke="#66BB6A" stroke-width="1.5"/>
+            <line x1="5" y1="0" x2="5" y2="10" stroke="#66BB6A" stroke-width="1.5"/>
+          </pattern>
+          <pattern id="p-zz" x="0" y="0" width="12" height="10" patternUnits="userSpaceOnUse">
+            <rect width="12" height="10" fill="#CE93D8"/>
+            <polyline points="0,5 3,2 6,5 9,2 12,5" fill="none" stroke="#AB47BC" stroke-width="1.5"/>
+            <polyline points="0,8 3,5 6,8 9,5 12,8" fill="none" stroke="#AB47BC" stroke-width="1.5"/>
+          </pattern>
+        </defs>
+        <rect width="680" height="160" fill="white" rx="20"/>
+        <g>
+          <rect x="15" y="20" width="100" height="118" rx="14" fill="url(#p-check)" stroke="#FF8FAB" stroke-width="3"/>
+          <text x="65" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="white" opacity="0.92">할</text>
+          <text x="65" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#FF6B9D" stroke-width="2.5">할</text>
+        </g>
+        <g>
+          <rect x="128" y="20" width="100" height="118" rx="14" fill="url(#p-stripe)" stroke="#4ECDC4" stroke-width="3"/>
+          <rect x="128" y="20" width="100" height="118" rx="14" fill="#B2DFDB" opacity="0.35"/>
+          <text x="178" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="white" opacity="0.92">머</text>
+          <text x="178" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#00897B" stroke-width="2.5">머</text>
+        </g>
+        <g>
+          <rect x="241" y="20" width="100" height="118" rx="14" fill="url(#p-dot)" stroke="#FFD93D" stroke-width="3"/>
+          <text x="291" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="white" opacity="0.92">니</text>
+          <text x="291" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#F9A825" stroke-width="2.5">니</text>
+        </g>
+        <text x="354" y="95" text-anchor="middle" font-size="28" fill="#FFD93D">✦</text>
+        <g>
+          <rect x="374" y="20" width="100" height="118" rx="14" fill="url(#p-grid)" stroke="#66BB6A" stroke-width="3"/>
+          <text x="424" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="white" opacity="0.92">스</text>
+          <text x="424" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#2E7D32" stroke-width="2.5">스</text>
+        </g>
+        <g>
+          <rect x="487" y="20" width="100" height="118" rx="14" fill="url(#p-zz)" stroke="#CE93D8" stroke-width="3"/>
+          <text x="537" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="white" opacity="0.92">쿨</text>
+          <text x="537" y="108" text-anchor="middle" font-family="'Nanum Gothic','Malgun Gothic',sans-serif" font-size="88" font-weight="900" fill="none" stroke="#7B1FA2" stroke-width="2.5">쿨</text>
+        </g>
+        <circle cx="608" cy="40" r="10" fill="#FFD93D"/>
+        <circle cx="630" cy="70" r="7" fill="#FF8FAB"/>
+        <circle cx="650" cy="45" r="8" fill="#80CBC4"/>
+        <circle cx="620" cy="100" r="6" fill="#A5D6A7"/>
+        <circle cx="648" cy="110" r="9" fill="#CE93D8"/>
+        <circle cx="665" cy="75" r="5" fill="#FFD93D"/>
+      </svg>
     </div>
-    <div class="title-chicks" style="margin-top:20px;">🐥🐥</div>
+    <div class="title-chicks">🐥🐥</div>
     <button class="start-btn" onclick="goHome()">시작해요! ▶</button>
   </div>
 </div>
@@ -540,10 +601,13 @@ const vocabData = {
       {e:'🦶', w:'발',  speak:'발'},
       {e:'💪', w:'팔',  speak:'팔'},
       {e:'🦵', w:'다리',speak:'다리'},
-      {e:'🧠', w:'머리',speak:'머리'},
+      {e:'🧒', w:'머리',speak:'머리'},
       {e:'❤️', w:'심장',speak:'심장'},
       {e:'🦷', w:'이',  speak:'이'},
-      {e:'🫦', w:'배',  speak:'배'},
+      {e:'🫃', w:'배',  speak:'배'},
+      {w:'어깨', speak:'어깨', svg:`<svg viewBox="0 0 120 150" style="width:80px;height:auto;"><rect x="38" y="75" width="44" height="55" rx="10" fill="#FFCC80"/><ellipse cx="28" cy="80" rx="16" ry="12" fill="#FF5252"/><ellipse cx="92" cy="80" rx="16" ry="12" fill="#FF5252"/><rect x="12" y="80" width="16" height="42" rx="8" fill="#FFCC80"/><rect x="92" y="80" width="16" height="42" rx="8" fill="#FFCC80"/><rect x="38" y="125" width="18" height="22" rx="8" fill="#FFCC80"/><rect x="64" y="125" width="18" height="22" rx="8" fill="#FFCC80"/><circle cx="60" cy="52" r="26" fill="#FFCC80"/><circle cx="50" cy="50" r="4" fill="white"/><circle cx="52" cy="51" r="2.5" fill="#333"/><circle cx="70" cy="50" r="4" fill="white"/><circle cx="72" cy="51" r="2.5" fill="#333"/><path d="M52 62 Q60 68 68 62" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="28" rx="26" ry="10" fill="#5D4037"/><ellipse cx="40" cy="34" rx="8" ry="14" fill="#5D4037"/><ellipse cx="80" cy="34" rx="8" ry="14" fill="#5D4037"/></svg>`},
+      {w:'무릎', speak:'무릎', svg:`<svg viewBox="0 0 120 150" style="width:80px;height:auto;"><rect x="38" y="58" width="44" height="50" rx="10" fill="#FFCC80"/><rect x="20" y="62" width="18" height="38" rx="8" fill="#FFCC80"/><rect x="82" y="62" width="18" height="38" rx="8" fill="#FFCC80"/><rect x="38" y="104" width="18" height="22" rx="6" fill="#FFCC80"/><rect x="64" y="104" width="18" height="22" rx="6" fill="#FFCC80"/><circle cx="47" cy="126" r="10" fill="#FF5252"/><circle cx="73" cy="126" r="10" fill="#FF5252"/><rect x="38" y="126" width="18" height="18" rx="6" fill="#FFCC80"/><rect x="64" y="126" width="18" height="18" rx="6" fill="#FFCC80"/><circle cx="60" cy="36" r="24" fill="#FFCC80"/><circle cx="51" cy="34" r="4" fill="white"/><circle cx="53" cy="35" r="2.5" fill="#333"/><circle cx="69" cy="34" r="4" fill="white"/><circle cx="71" cy="35" r="2.5" fill="#333"/><path d="M53 45 Q60 51 67 45" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="14" rx="24" ry="9" fill="#5D4037"/><ellipse cx="38" cy="20" rx="7" ry="12" fill="#5D4037"/><ellipse cx="82" cy="20" rx="7" ry="12" fill="#5D4037"/></svg>`},
+      {w:'허리', speak:'허리', svg:`<svg viewBox="0 0 120 150" style="width:80px;height:auto;"><rect x="36" y="55" width="48" height="36" rx="10" fill="#FFCC80"/><rect x="30" y="85" width="60" height="14" rx="7" fill="#FF5252"/><rect x="36" y="93" width="48" height="36" rx="10" fill="#FFCC80"/><rect x="16" y="58" width="20" height="40" rx="8" fill="#FFCC80"/><rect x="84" y="58" width="20" height="40" rx="8" fill="#FFCC80"/><rect x="36" y="125" width="20" height="22" rx="8" fill="#FFCC80"/><rect x="64" y="125" width="20" height="22" rx="8" fill="#FFCC80"/><circle cx="60" cy="34" r="24" fill="#FFCC80"/><circle cx="51" cy="32" r="4" fill="white"/><circle cx="53" cy="33" r="2.5" fill="#333"/><circle cx="69" cy="32" r="4" fill="white"/><circle cx="71" cy="33" r="2.5" fill="#333"/><path d="M53 43 Q60 49 67 43" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="12" rx="24" ry="9" fill="#5D4037"/><ellipse cx="38" cy="18" rx="7" ry="12" fill="#5D4037"/><ellipse cx="82" cy="18" rx="7" ry="12" fill="#5D4037"/><text x="60" y="96" text-anchor="middle" font-size="9" fill="white" font-weight="700">허리</text></svg>`},
     ]
   },
   fruits: {
@@ -851,8 +915,15 @@ function openVocab(cat){
     card.style.animationDelay=(i*0.05)+'s';
     card.style.borderColor=data.color+'44';
 
-    // 숫자 카드: 사과를 갯수대로 표시
-    if(item.count !== undefined){
+    // SVG 커스텀 그림 카드
+    if(item.svg){
+      card.innerHTML=`
+        <div style="display:flex;align-items:center;justify-content:center;min-height:90px;">
+          ${item.svg}
+        </div>
+        <div class="vocab-word">${item.w}</div>
+      `;
+    } else if(item.count !== undefined){
       const rows=[];
       for(let r=0;r<item.count;r+=5) rows.push('🍎'.repeat(Math.min(5,item.count-r)));
       card.innerHTML=`
