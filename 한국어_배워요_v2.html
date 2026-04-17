@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 배워요! — 한글학교 한국어 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #5BB8F5;
+  --sky-light: #E8F6FF;
+  --coral: #FF6B6B;
+  --coral-light: #FFF0F0;
+  --mint: #4ECDC4;
+  --mint-light: #E8FAF9;
+  --sun: #FFD93D;
+  --sun-light: #FFFBE6;
+  --lavender: #A78BFA;
+  --lavender-light: #F3EEFF;
+  --green: #6BCB77;
+  --green-light: #EDFAEF;
+  --bg: #FFF9F2;
+  --card: #FFFFFF;
+  --text: #2D3436;
+  --muted: #8E9AAB;
+  --radius: 20px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-height: 100vh; color: var(--text); }
+
+/* HEADER */
+.app-header {
+  background: linear-gradient(135deg, #5BB8F5 0%, #4ECDC4 50%, #6BCB77 100%);
+  padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 3px 16px rgba(91,184,245,0.35);
+}
+.logo { font-family:'Jua',sans-serif; font-size:1.6rem; color:white; text-shadow:2px 2px 0 rgba(0,0,0,0.12); display:flex; align-items:center; gap:10px; }
+.unit-tabs { display:flex; gap:8px; }
+.unit-tab { font-family:'Jua',sans-serif; font-size:0.95rem; padding:8px 20px; border:none; border-radius:30px; background:rgba(255,255,255,0.25); color:white; cursor:pointer; transition:all 0.2s; }
+.unit-tab.active { background:white; color:#5BB8F5; box-shadow:0 3px 12px rgba(0,0,0,0.15); }
+.unit-tab:hover:not(.active) { background:rgba(255,255,255,0.4); }
+
+/* MAIN */
+main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
+.unit { display:none; }
+.unit.active { display:block; }
+
+/* SECTION NAV */
+.section-nav { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+.snav-btn { font-family:'Jua',sans-serif; font-size:0.9rem; padding:9px 18px; border:2.5px solid #E0E7EF; border-radius:30px; background:white; color:var(--muted); cursor:pointer; transition:all 0.2s; }
+.snav-btn.active { border-color:var(--sky); background:var(--sky-light); color:var(--sky); }
+.snav-btn:hover:not(.active) { border-color:#C0CDD8; color:var(--text); }
+.section { display:none; }
+.section.active { display:block; }
+
+/* CARDS */
+.card { background:var(--card); border-radius:var(--radius); padding:26px; margin-bottom:22px; box-shadow:var(--shadow); }
+.section-title { font-family:'Jua',sans-serif; font-size:1.15rem; color:var(--text); margin-bottom:6px; }
+.section-sub { font-size:0.88rem; color:var(--muted); margin-bottom:18px; }
+
+/* GRAMMAR BOX */
+.grammar-intro { background:var(--sun-light); border-left:6px solid var(--sun); border-radius:var(--radius); padding:20px 26px; margin-bottom:26px; box-shadow:var(--shadow); }
+.grammar-intro h2 { font-family:'Jua',sans-serif; font-size:1.2rem; color:#C47D00; margin-bottom:10px; }
+.grammar-intro p { font-size:0.93rem; line-height:1.85; color:#5D4037; }
+.hl { font-weight:800; color:var(--coral); }
+
+/* GRAMMAR RULE BOX */
+.rule-box { border-radius:14px; padding:16px; border:2px solid; margin-bottom:12px; }
+.rule-box.red { background:var(--coral-light); border-color:var(--coral); }
+.rule-box.blue { background:var(--sky-light); border-color:var(--sky); }
+.rule-box.purple { background:var(--lavender-light); border-color:var(--lavender); }
+.rule-label { font-family:'Jua',sans-serif; font-size:0.85rem; margin-bottom:8px; }
+.rule-examples { display:flex; flex-direction:column; gap:5px; font-family:'Jua',sans-serif; font-size:0.97rem; }
+
+/* FLASHCARDS */
+.flashcard-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(130px,1fr)); gap:12px; margin-bottom:10px; }
+.flashcard { perspective:800px; height:130px; cursor:pointer; }
+.flashcard-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform 0.45s ease; border-radius:16px; }
+.flashcard.flipped .flashcard-inner { transform:rotateY(180deg); }
+.flashcard-front, .flashcard-back { position:absolute; inset:0; border-radius:16px; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px; box-shadow:0 4px 14px rgba(0,0,0,0.08); }
+.flashcard-front { background:white; border:2.5px solid #E8EFF5; }
+.flashcard-back { transform:rotateY(180deg); }
+.fc-emoji { font-size:2.2rem; margin-bottom:6px; }
+.fc-korean { font-family:'Jua',sans-serif; font-size:1rem; color:var(--text); text-align:center; }
+.fc-english { font-family:'Gaegu',cursive; font-size:0.95rem; text-align:center; font-weight:700; }
+.fc-romanize { font-size:0.72rem; color:var(--muted); margin-top:3px; text-align:center; }
+.fc-flip-hint { font-size:0.68rem; color:var(--muted); margin-top:5px; }
+
+/* EXAMPLE LIST */
+.example-list { display:flex; flex-direction:column; gap:10px; }
+.example-row { background:#F8FAFC; border-radius:14px; padding:13px 18px; border-left:5px solid var(--sky); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.example-row.coral { border-left-color:var(--coral); }
+.example-row.mint  { border-left-color:var(--mint); }
+.example-row.lav   { border-left-color:var(--lavender); }
+.example-row.green { border-left-color:var(--green); }
+.example-kr { font-family:'Jua',sans-serif; font-size:1rem; color:var(--text); }
+.example-kr .p { color:var(--coral); font-weight:800; }
+.example-en { font-size:0.83rem; color:var(--muted); }
+
+/* PARTICLE REFERENCE */
+.particle-ref-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
+.particle-group { background:#F8FAFC; border-radius:14px; padding:14px 16px; border:1.5px solid #E8EFF5; }
+.particle-group-title { font-family:'Jua',sans-serif; font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; }
+.particle-chips { display:flex; gap:8px; flex-wrap:wrap; }
+.p-chip { font-family:'Jua',sans-serif; font-size:1rem; padding:5px 13px; border-radius:10px; color:white; }
+.p-chip.subj { background:var(--coral); }
+.p-chip.obj  { background:var(--sky); }
+.p-chip.link { background:var(--green); }
+.p-chip.place { background:var(--lavender); }
+
+/* PROGRESS */
+.progress-wrap { background:white; border-radius:16px; padding:12px 20px; margin-bottom:22px; box-shadow:var(--shadow); display:flex; align-items:center; gap:14px; }
+.prog-label { font-family:'Jua',sans-serif; font-size:0.95rem; color:var(--sky); white-space:nowrap; }
+.prog-bar { flex:1; height:10px; background:#E8EFF5; border-radius:5px; overflow:hidden; }
+.prog-fill { height:100%; background:linear-gradient(90deg,var(--sky),var(--mint)); border-radius:5px; transition:width 0.5s ease; }
+.prog-score { font-family:'Jua',sans-serif; font-size:1rem; color:var(--green); white-space:nowrap; }
+
+/* QUIZ BADGE */
+.quiz-badge { display:inline-block; font-family:'Jua',sans-serif; font-size:0.82rem; border-radius:20px; padding:3px 13px; margin-bottom:10px; color:white; }
+.quiz-badge.sky { background:var(--sky); }
+.quiz-badge.coral { background:var(--coral); }
+
+/* SCENE + QUESTION */
+.scene-box { font-size:3.5rem; text-align:center; margin-bottom:10px; }
+.question-english {
+  background: #F0F7FF; border-radius: 12px; padding: 12px 16px;
+  font-family:'Gaegu',cursive; font-size:1.1rem; color:#1A5FA8;
+  text-align:center; margin-bottom:14px; font-weight:700;
+  border: 2px solid #C5DFF8;
+}
+
+/* ── UNIT 1: SLOTS ── */
+.slots-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#F8FAFC; border-radius:14px; padding:14px 18px; margin-bottom:16px; }
+.slot { min-width:90px; height:46px; border:2.5px dashed #C8D5E0; border-radius:11px; display:flex; align-items:center; justify-content:center; font-family:'Jua',sans-serif; font-size:0.95rem; color:#B0BEC5; transition:all 0.2s; padding:0 10px; }
+.slot.filled { border-style:solid; border-color:var(--sky); background:var(--sky-light); color:#1A7DC4; }
+.slot.filled.is-particle { border-color:var(--coral); background:var(--coral-light); color:#C0392B; }
+.slot.filled.is-verb { border-color:var(--green); background:var(--green-light); color:#2E7D32; }
+.slot-plus { color:#C8D5E0; font-size:1.1rem; }
+
+/* PARTICLE SELECTOR */
+.particle-selector { margin-bottom:16px; }
+.p-sel-label { font-family:'Jua',sans-serif; font-size:0.92rem; color:#C0392B; margin-bottom:8px; }
+.p-sel-opts { display:flex; gap:10px; flex-wrap:wrap; }
+.psel-btn { font-family:'Jua',sans-serif; font-size:1.05rem; padding:7px 20px; border-radius:11px; border:2.5px solid var(--coral); background:var(--coral-light); color:#C0392B; cursor:pointer; transition:all 0.18s; }
+.psel-btn:hover { background:var(--coral); color:white; }
+.psel-btn.selected { background:var(--coral); color:white; }
+
+/* WORD BANK */
+.word-bank { display:flex; flex-wrap:wrap; gap:10px; min-height:58px; padding:12px 14px; background:#F0F4F8; border-radius:14px; border:2px dashed #C8D5E0; margin-bottom:18px; }
+.wcard { font-family:'Jua',sans-serif; font-size:1.02rem; padding:7px 14px; border-radius:10px; border:2.5px solid var(--sky); background:white; color:#1A7DC4; cursor:grab; user-select:none; transition:transform 0.15s, box-shadow 0.15s, opacity 0.2s; box-shadow:0 2px 8px rgba(91,184,245,0.18); white-space:nowrap; }
+.wcard:hover { transform:translateY(-3px) scale(1.04); box-shadow:0 5px 16px rgba(91,184,245,0.3); }
+.wcard.particle { border-color:var(--coral); color:#C0392B; background:var(--coral-light); }
+.wcard.verb     { border-color:var(--green); color:#2E7D32; background:var(--green-light); }
+.wcard.place    { border-color:var(--lavender); color:#6D28D9; background:var(--lavender-light); }
+.wcard.used     { opacity:0.28; pointer-events:none; cursor:default; }
+.wcard.dragging { opacity:0.4; transform:scale(0.95); }
+
+/* DROP ZONE — reorderable */
+.drop-zone {
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+  min-height:66px; padding:12px 16px;
+  background:var(--sky-light); border:3px dashed var(--sky);
+  border-radius:14px; margin-bottom:14px;
+  transition:background 0.2s, border-color 0.2s;
+  position: relative;
+}
+.drop-zone.drag-over { background:#C5E8FB; border-color:#1A8CDF; }
+.drop-zone.dz-over   { background:#BBDEFB; border-color:#1565C0; }
+.drop-zone-placeholder { color:var(--muted); font-size:0.9rem; font-style:italic; pointer-events:none; }
+.dropped-card {
+  font-family:'Jua',sans-serif; font-size:1.02rem; padding:7px 12px;
+  border-radius:10px; background:white; border:2.5px solid var(--sky); color:#1A7DC4;
+  display:flex; align-items:center; gap:5px;
+  animation:popIn 0.2s ease; cursor:grab; user-select:none;
+  position:relative; white-space:nowrap;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.dropped-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.12); }
+.dropped-card.particle { border-color:var(--coral); color:#C0392B; background:var(--coral-light); }
+.dropped-card.verb     { border-color:var(--green); color:#2E7D32; background:var(--green-light); }
+.dropped-card.place    { border-color:var(--lavender); color:#6D28D9; background:var(--lavender-light); }
+.rm-btn { width:17px; height:17px; background:var(--coral); border:none; border-radius:50%; color:white; font-size:0.68rem; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s; }
+.rm-btn:hover { background:#C0392B; }
+@keyframes popIn { from{transform:scale(0.75);opacity:0} to{transform:scale(1);opacity:1} }
+
+/* BUTTONS */
+.btn-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:4px; }
+.btn { font-family:'Jua',sans-serif; font-size:0.97rem; padding:10px 22px; border:none; border-radius:30px; cursor:pointer; transition:all 0.2s; box-shadow:0 3px 10px rgba(0,0,0,0.10); }
+.btn:hover { transform:translateY(-2px); box-shadow:0 5px 16px rgba(0,0,0,0.14); }
+.btn:disabled { opacity:0.45; cursor:not-allowed; transform:none !important; }
+.btn-check { background:var(--coral); color:white; }
+.btn-hint  { background:var(--sun); color:#7A5500; }
+.btn-reset { background:#ECEFF1; color:#607D8B; }
+.btn-next  { background:var(--sky); color:white; }
+
+/* FEEDBACK */
+.feedback { margin-top:14px; padding:14px 18px; border-radius:14px; font-family:'Jua',sans-serif; font-size:0.95rem; display:none; animation:fadeUp 0.3s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.feedback.correct { background:var(--green-light); border-left:5px solid var(--green); color:#1B5E20; display:block; }
+.feedback.wrong   { background:#FFF3E0; border-left:5px solid #FFA726; color:#E65100; display:block; }
+.feedback.hint    { background:var(--sun-light); border-left:5px solid var(--sun); color:#7A5500; display:block; }
+.answer-display   { font-size:1.2rem; color:var(--sky); margin-top:6px; }
+
+/* LEGEND */
+.legend { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+.legend-item { display:flex; align-items:center; gap:5px; font-size:0.82rem; color:var(--muted); }
+.legend-dot { width:11px; height:11px; border-radius:3px; flex-shrink:0; }
+
+/* COMPLETE */
+.complete-screen { text-align:center; padding:40px 20px; display:none; animation:fadeUp 0.4s ease; }
+.complete-screen.show { display:block; }
+.complete-emoji { font-size:4rem; margin-bottom:14px; animation:bounce 1s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.complete-title { font-family:'Jua',sans-serif; font-size:1.9rem; color:var(--sky); margin-bottom:8px; }
+.complete-score { font-size:1.1rem; color:var(--green); margin-bottom:22px; }
+
+/* CONFETTI */
+.confetti-wrap { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
+.confetti-piece { position:absolute; width:11px; height:11px; border-radius:3px; animation:fall 1.2s ease-in forwards; }
+@keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+
+@media(max-width:620px){
+  .app-header{flex-direction:column;gap:12px;}
+  .particle-ref-grid{grid-template-columns:1fr;}
+  .flashcard-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="logo">🌟 한국어 배워요!</div>
+  <div class="unit-tabs">
+    <button class="unit-tab active" onclick="switchUnit(1)">1과 — 누가 뭘해요?</button>
+    <button class="unit-tab" onclick="switchUnit(2)">2과 — 어디에서 뭘해요?</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════ UNIT 1 ══════ -->
+<div class="unit active" id="unit1">
+  <nav class="section-nav">
+    <button class="snav-btn active" onclick="switchSection(1,'vocab')">📚 새단어</button>
+    <button class="snav-btn" onclick="switchSection(1,'grammar')">📌 문법</button>
+    <button class="snav-btn" onclick="switchSection(1,'quiz')">✏️ 연습</button>
+  </nav>
+
+  <!-- VOCAB -->
+  <div class="section active" id="u1-vocab">
+    <div class="card">
+      <div class="section-title">👫 우리 반 친구들 — Classmates</div>
+      <div class="section-sub">Click each card to flip it! 카드를 클릭하세요.</div>
+      <div class="flashcard-grid" id="fc-names"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">🏃 뭘해요? — What do they do?</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc-verbs"></div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="section" id="u1-grammar">
+    <div class="grammar-intro">
+      <h2>📌 Grammar — Subject Marker <span class="hl">이 / 가</span></h2>
+      <p>
+        In Korean, we put a special marker after a person's name to show <strong>who is doing the action</strong>.<br>
+        Think of it like the word <em>"is"</em> hiding inside the name — it tells us the subject!<br><br>
+        🔴 If the name ends in a <strong>consonant</strong> (받침) → add <span class="hl">이</span><br>
+        🔵 If the name ends in a <strong>vowel</strong> (no 받침) → add <span class="hl">가</span>
+      </p>
+    </div>
+    <div class="card">
+      <div class="section-title">🔍 The Rule — How to choose 이 or 가</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+        <div class="rule-box red">
+          <div class="rule-label" style="color:var(--coral);">Ends in a consonant → <strong>이</strong></div>
+          <div class="rule-examples">
+            <span>준영 → 준영<strong style="color:var(--coral)">이</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅇ = consonant)</span></span>
+            <span>성진 → 성진<strong style="color:var(--coral)">이</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㄴ = consonant)</span></span>
+            <span>보람 → 보람<strong style="color:var(--coral)">이</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅁ = consonant)</span></span>
+          </div>
+        </div>
+        <div class="rule-box blue">
+          <div class="rule-label" style="color:var(--sky);">Ends in a vowel → <strong>가</strong></div>
+          <div class="rule-examples">
+            <span>민수 → 민수<strong style="color:var(--sky)">가</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅜ = vowel)</span></span>
+            <span>슬기 → 슬기<strong style="color:var(--sky)">가</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅣ = vowel)</span></span>
+            <span>재우 → 재우<strong style="color:var(--sky)">가</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅜ = vowel)</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
+      <div class="example-list">
+        <div class="example-row"><span class="example-kr">민수<span class="p">가</span> 전화해요.</span><span class="example-en">Minsu makes a phone call.</span></div>
+        <div class="example-row coral"><span class="example-kr">준영<span class="p">이</span> 공부해요.</span><span class="example-en">Junyeong studies.</span></div>
+        <div class="example-row mint"><span class="example-kr">재우<span class="p">가</span> 일어나요.</span><span class="example-en">Jaewoo wakes up.</span></div>
+        <div class="example-row lav"><span class="example-kr">슬기<span class="p">가</span> 수영해요.</span><span class="example-en">Seulgi swims.</span></div>
+        <div class="example-row green"><span class="example-kr">성진<span class="p">이</span> 학교에 가요.</span><span class="example-en">Seongjin goes to school.</span></div>
+        <div class="example-row"><span class="example-kr">할아버지<span class="p">가</span> 텔레비전을 봐요.</span><span class="example-en">Grandpa watches TV.</span></div>
+        <div class="example-row coral"><span class="example-kr">미라<span class="p">가</span> 운동해요.</span><span class="example-en">Mira exercises.</span></div>
+        <div class="example-row mint"><span class="example-kr">수연<span class="p">이</span> 이야기해요.</span><span class="example-en">Suyeon is talking.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="u1-quiz">
+    <div class="progress-wrap">
+      <span class="prog-label" id="u1-prog-label">문제 1 / 8</span>
+      <div class="prog-bar"><div class="prog-fill" id="u1-prog-fill" style="width:0%"></div></div>
+      <span class="prog-score" id="u1-prog-score">⭐ 0점</span>
+    </div>
+    <div class="card" id="u1-qcard">
+      <span class="quiz-badge coral">1과 · Subject Marker 이/가</span>
+      <div class="scene-box" id="u1-scene">📞</div>
+      <div class="question-english" id="u1-qenglish">Who is doing what?</div>
+      <div class="section-sub" id="u1-qsub">Click a name card, choose 이 or 가, then click the verb card!</div>
+
+      <div style="background:var(--sun-light);border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:0.88rem;color:#7A5500;">
+        Consonant ending → <strong style="color:var(--coral)">이</strong> &nbsp;|&nbsp; Vowel ending → <strong style="color:var(--coral)">가</strong>
+      </div>
+
+      <div class="slots-row">
+        <div class="slot" id="u1-slot-subj">누가? (who?)</div>
+        <span class="slot-plus">+</span>
+        <div class="slot" id="u1-slot-part">이 / 가</div>
+        <span class="slot-plus">+</span>
+        <div class="slot" id="u1-slot-verb">뭘해요? (does what?)</div>
+      </div>
+
+      <div class="particle-selector">
+        <div class="p-sel-label">🚩 Choose the right marker:</div>
+        <div class="p-sel-opts">
+          <button class="psel-btn" onclick="selectParticle('이')">이 (consonant)</button>
+          <button class="psel-btn" onclick="selectParticle('가')">가 (vowel)</button>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--sky)"></div>Name 이름</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Verb 동사</div>
+      </div>
+      <div class="word-bank" id="u1-wordbank"></div>
+
+      <div class="feedback" id="u1-fb"></div>
+      <div class="btn-row">
+        <button class="btn btn-hint" onclick="hintU1()">💡 Hint</button>
+        <button class="btn btn-reset" onclick="resetU1()">🔄 Reset</button>
+        <button class="btn btn-check" onclick="checkU1()">✅ Check!</button>
+        <button class="btn btn-next" id="u1-next" onclick="nextU1()" disabled>Next ▶</button>
+      </div>
+    </div>
+    <div class="complete-screen" id="u1-complete">
+      <div class="complete-emoji">🎉</div>
+      <div class="complete-title">잘했어요! Great job!</div>
+      <div class="complete-score" id="u1-complete-score"></div>
+      <button class="btn btn-next" onclick="switchUnit(2)">2과로 가요! ▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ UNIT 2 ══════ -->
+<div class="unit" id="unit2">
+  <nav class="section-nav">
+    <button class="snav-btn active" onclick="switchSection(2,'vocab')">📚 새단어</button>
+    <button class="snav-btn" onclick="switchSection(2,'grammar')">📌 문법</button>
+    <button class="snav-btn" onclick="switchSection(2,'quiz')">✏️ 연습</button>
+  </nav>
+
+  <!-- VOCAB -->
+  <div class="section active" id="u2-vocab">
+    <div class="card">
+      <div class="section-title">🔗 하고 — Linking people</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc2-link"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">🏞️ 장소 — Places</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc2-places"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">⚽ 동사 — Action Verbs</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc2-verbs"></div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="section" id="u2-grammar">
+    <div class="grammar-intro">
+      <h2>📌 Grammar — Marking Particles (조사)</h2>
+      <p>
+        In Korean, little words called <strong>particles</strong> are added after nouns to show their role in the sentence.<br>
+        Think of them like labels — they tell you <em>who</em> does it, <em>what</em> they do it to, and <em>where</em>!
+      </p>
+    </div>
+    <div class="card">
+      <div class="section-title">🏷️ Particle Quick Guide — 조사 정리</div>
+      <div class="particle-ref-grid" style="margin-bottom:18px;">
+        <div class="particle-group">
+          <div class="particle-group-title">Subject — WHO does it?</div>
+          <div class="particle-chips" style="margin-bottom:8px;">
+            <span class="p-chip subj">이</span><span class="p-chip subj">가</span><span class="p-chip subj">은</span><span class="p-chip subj">는</span>
+          </div>
+          <div style="font-size:0.82rem;color:var(--muted);">After consonant: 이/은 &nbsp;|&nbsp; After vowel: 가/는</div>
+        </div>
+        <div class="particle-group">
+          <div class="particle-group-title">Object — WHAT receives the action?</div>
+          <div class="particle-chips" style="margin-bottom:8px;">
+            <span class="p-chip obj">을</span><span class="p-chip obj">를</span>
+          </div>
+          <div style="font-size:0.82rem;color:var(--muted);">After consonant: 을 &nbsp;|&nbsp; After vowel: 를</div>
+        </div>
+        <div class="particle-group">
+          <div class="particle-group-title">Linking — AND / WITH</div>
+          <div class="particle-chips">
+            <span class="p-chip link">하고</span>
+          </div>
+        </div>
+        <div class="particle-group">
+          <div class="particle-group-title">Place — WHERE?</div>
+          <div class="particle-chips">
+            <span class="p-chip place">에</span><span class="p-chip place">에서</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-box purple" style="margin-bottom:14px;">
+        <div class="rule-label" style="color:#6D28D9;">💡 에 vs 에서 — This is the tricky one!</div>
+        <div style="font-size:0.88rem;line-height:1.9;color:#5B21B6;">
+          <strong>에</strong> = <em>"at"</em> — used with <strong>있어요</strong> (is/are somewhere). Just existing, not doing!<br>
+          &nbsp;&nbsp;→ 리아하고 애라는 놀이터<strong>에</strong> 있어요. (Ria and Aera <u>are at</u> the playground.)<br><br>
+          <strong>에서</strong> = <em>"at"</em> — used when someone is <strong>doing an action</strong> at a place!<br>
+          &nbsp;&nbsp;→ 아빠하고 엄마는 공원<strong>에서</strong> 자전거를 타요. (Mom and Dad <u>ride bikes</u> at the park.)
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
+      <div class="example-list">
+        <div class="example-row"><span class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에서</span> 그네<span class="p">를</span> 타요.</span><span class="example-en">Ria and Aera ride the swing at the playground.</span></div>
+        <div class="example-row coral"><span class="example-kr">아빠<span class="p">하고</span> 엄마<span class="p">는</span> 공원<span class="p">에서</span> 자전거<span class="p">를</span> 타요.</span><span class="example-en">Dad and Mom ride bikes at the park.</span></div>
+        <div class="example-row mint"><span class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에</span> 있어요.</span><span class="example-en">Ria and Aera are at the playground.</span></div>
+        <div class="example-row lav"><span class="example-kr">보람<span class="p">이</span> 교실<span class="p">에서</span> 책<span class="p">을</span> 읽어요.</span><span class="example-en">Boram reads a book in the classroom.</span></div>
+        <div class="example-row green"><span class="example-kr">미라<span class="p">는</span> 수영장<span class="p">에서</span> 수영<span class="p">을</span> 해요.</span><span class="example-en">Mira swims at the pool.</span></div>
+        <div class="example-row"><span class="example-kr">성진<span class="p">이</span> 운동장<span class="p">에서</span> 운동<span class="p">을</span> 해요.</span><span class="example-en">Seongjin exercises at the field.</span></div>
+        <div class="example-row coral"><span class="example-kr">할아버지<span class="p">하고</span> 할머니<span class="p">는</span> 공원<span class="p">에</span> 있어요.</span><span class="example-en">Grandpa and grandma are at the park.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="u2-quiz">
+    <div class="progress-wrap">
+      <span class="prog-label" id="u2-prog-label">문제 1 / 9</span>
+      <div class="prog-bar"><div class="prog-fill" id="u2-prog-fill" style="width:0%"></div></div>
+      <span class="prog-score" id="u2-prog-score">⭐ 0점</span>
+    </div>
+    <div class="card" id="u2-qcard">
+      <span class="quiz-badge sky">2과 · Particles 조사</span>
+      <div class="scene-box" id="u2-scene">🛝</div>
+      <div class="question-english" id="u2-qenglish">Build the sentence!</div>
+      <div class="section-sub" id="u2-qsub">Drag cards below — and drag to reorder inside the sentence!</div>
+
+      <div style="background:var(--sun-light);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.83rem;color:#7A5500;display:flex;gap:14px;flex-wrap:wrap;">
+        <span>이/가, 은/는 = Subject</span>
+        <span>을/를 = Object</span>
+        <span>하고 = And/With</span>
+        <span>에 = at (있어요)</span>
+        <span>에서 = at (action)</span>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--sky)"></div>Name/Noun 이름</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>Particle 조사</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--lavender)"></div>Place 장소</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Verb 동사</div>
+      </div>
+
+      <div class="drop-zone" id="u2-dropzone">
+        <span class="drop-zone-placeholder">Drag cards here in order — you can reorder by dragging!</span>
+      </div>
+      <div class="word-bank" id="u2-wordbank"></div>
+
+      <div class="feedback" id="u2-fb"></div>
+      <div class="btn-row">
+        <button class="btn btn-hint" onclick="hintU2()">💡 Hint</button>
+        <button class="btn btn-reset" onclick="resetU2()">🔄 Reset</button>
+        <button class="btn btn-check" onclick="checkU2()">✅ Check!</button>
+        <button class="btn btn-next" id="u2-next" onclick="nextU2()" disabled>Next ▶</button>
+      </div>
+    </div>
+    <div class="complete-screen" id="u2-complete">
+      <div class="complete-emoji">🏆</div>
+      <div class="complete-title">최고예요! Amazing!</div>
+      <div class="complete-score" id="u2-complete-score"></div>
+      <button class="btn btn-next" onclick="restartAll()">처음부터 다시! 🔄</button>
+    </div>
+  </div>
+</div>
+
+</main>
+<div class="confetti-wrap" id="confetti"></div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const names = [
+  {emoji:'👦',kr:'민수',en:'Minsu',rom:'Min-su'},
+  {emoji:'👧',kr:'슬기',en:'Seulgi',rom:'Seul-gi'},
+  {emoji:'👦',kr:'준영',en:'Junyeong',rom:'Jun-yeong'},
+  {emoji:'👧',kr:'수연',en:'Suyeon',rom:'Su-yeon'},
+  {emoji:'👦',kr:'재우',en:'Jaewoo',rom:'Jae-u'},
+  {emoji:'👧',kr:'보람',en:'Boram',rom:'Bo-ram'},
+  {emoji:'👦',kr:'성진',en:'Seongjin',rom:'Seong-jin'},
+  {emoji:'👧',kr:'미라',en:'Mira',rom:'Mi-ra'},
+];
+const verbs1 = [
+  {emoji:'📞',kr:'전화해요',en:'makes a phone call',rom:'jeonhwahaeyo'},
+  {emoji:'📖',kr:'공부해요',en:'studies',rom:'gongbuhaeyo'},
+  {emoji:'🏊',kr:'수영해요',en:'swims',rom:'suyeonghaeyo'},
+  {emoji:'🏃',kr:'운동해요',en:'exercises',rom:'undonghaeyo'},
+  {emoji:'💬',kr:'이야기해요',en:'talks / chats',rom:'iyagihaeyo'},
+  {emoji:'😴',kr:'자요',en:'sleeps',rom:'jayo'},
+  {emoji:'🌅',kr:'일어나요',en:'wakes up',rom:'ireonayo'},
+  {emoji:'🚶',kr:'가요',en:'goes',rom:'gayo'},
+  {emoji:'🏃',kr:'와요',en:'comes',rom:'wayo'},
+  {emoji:'📺',kr:'봐요',en:'watches',rom:'bwayo'},
+];
+const linkWords = [
+  {emoji:'👴👵',kr:'할아버지하고 할머니',en:'grandpa and grandma',rom:'harabeoji hago halmeoni'},
+  {emoji:'👨👩',kr:'엄마하고 아빠',en:'mom and dad',rom:'eomma hago appa'},
+  {emoji:'👧👧',kr:'리아하고 애라',en:'Ria and Aera',rom:'Ria hago Aera'},
+  {emoji:'👦👦',kr:'리암하고 카요',en:'Riam and Kayo',rom:'Riam hago Kayo'},
+];
+const places = [
+  {emoji:'🛝',kr:'놀이터',en:'playground',rom:'noriteo'},
+  {emoji:'🌳',kr:'공원',en:'park',rom:'gongwon'},
+  {emoji:'🏫',kr:'교실',en:'classroom',rom:'gyosil'},
+  {emoji:'🏊',kr:'수영장',en:'swimming pool',rom:'suyeongjang'},
+  {emoji:'🏃',kr:'운동장',en:'sports field',rom:'undongjang'},
+  {emoji:'🏠',kr:'집',en:'home / house',rom:'jip'},
+];
+const verbs2 = [
+  {emoji:'🛝',kr:'타요',en:'rides',rom:'tayo'},
+  {emoji:'📚',kr:'읽어요',en:'reads',rom:'ilgeoyo'},
+  {emoji:'🏊',kr:'수영해요',en:'swims',rom:'suyeonghaeyo'},
+  {emoji:'🏃',kr:'운동해요',en:'exercises',rom:'undonghaeyo'},
+  {emoji:'📞',kr:'전화해요',en:'makes a phone call',rom:'jeonhwahaeyo'},
+  {emoji:'📸',kr:'사진을 찍어요',en:'takes a photo',rom:'sajin-eul jjigeoyo'},
+  {emoji:'📍',kr:'있어요',en:'is/are (at a place)',rom:'isseoyo'},
+];
+
+// Unit 1 questions — all have proper transitive sentences with objects
+const u1Questions = [
+  {scene:'📞', english:'Minsu makes a phone call.',     subject:'민수', verb:'전화해요',          particle:'가', hint:'민수 ends in ㅜ → vowel → 가', answer:'민수가 전화해요'},
+  {scene:'📖', english:'Junyeong studies.',              subject:'준영', verb:'공부해요',          particle:'이', hint:'준영 ends in ㅇ → consonant → 이', answer:'준영이 공부해요'},
+  {scene:'🌅', english:'Jaewoo wakes up.',               subject:'재우', verb:'일어나요',          particle:'가', hint:'재우 ends in ㅜ → vowel → 가', answer:'재우가 일어나요'},
+  {scene:'🏊', english:'Seulgi swims.',                  subject:'슬기', verb:'수영해요',          particle:'가', hint:'슬기 ends in ㅣ → vowel → 가', answer:'슬기가 수영해요'},
+  {scene:'🏫', english:'Seongjin goes to school.',       subject:'성진', verb:'학교에 가요',       particle:'이', hint:'성진 ends in ㄴ → consonant → 이', answer:'성진이 학교에 가요'},
+  {scene:'📺', english:'Grandpa watches TV.',            subject:'할아버지', verb:'텔레비전을 봐요', particle:'가', hint:'할아버지 ends in ㅣ → vowel → 가', answer:'할아버지가 텔레비전을 봐요'},
+  {scene:'💬', english:'Mira talks with friends.',       subject:'미라', verb:'이야기해요',        particle:'가', hint:'미라 ends in ㅏ → vowel → 가', answer:'미라가 이야기해요'},
+  {scene:'🏃', english:'Suyeon exercises.',              subject:'수연', verb:'운동해요',          particle:'이', hint:'수연 ends in ㄴ → consonant → 이', answer:'수연이 운동해요'},
+];
+
+// Unit 2 questions — ALL particles are separate cards
+// types: name | particle | place | verb
+const u2Questions = [
+  {
+    scene:'🛝', english:'Ria and Aera ride the swing at the playground.',
+    hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
+    answer:['리아','하고','애라','는','놀이터','에서','그네','를','타요'],
+    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+  },
+  {
+    scene:'🌳', english:'Dad and Mom ride bikes at the park.',
+    hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
+    answer:['아빠','하고','엄마','는','공원','에서','자전거','를','타요'],
+    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+  },
+  {
+    scene:'🛝', english:'Ria and Aera are at the playground.',
+    hint:'에 = location (just being there). Use 있어요, not 타요!',
+    answer:['리아하고 애라','는','놀이터','에','있어요'],
+    types: ['name','particle','place','particle','verb']
+  },
+  {
+    scene:'📚', english:'Boram reads a book in the classroom.',
+    hint:'보람 ends in ㅁ → 이. 에서 = action place. 을 = object.',
+    answer:['보람','이','교실','에서','책','을','읽어요'],
+    types: ['name','particle','place','particle','name','particle','verb']
+  },
+  {
+    scene:'🏊', english:'Mira swims at the pool.',
+    hint:'미라 ends in ㅏ → 는 (topic). 에서 = action place.',
+    answer:['미라','는','수영장','에서','수영해요'],
+    types: ['name','particle','place','particle','verb']
+  },
+  {
+    scene:'🏃', english:'Seongjin exercises at the field.',
+    hint:'성진 ends in ㄴ → 이. 에서 = action place.',
+    answer:['성진','이','운동장','에서','운동해요'],
+    types: ['name','particle','place','particle','verb']
+  },
+  {
+    scene:'👴👵', english:'Grandpa and grandma are at the park.',
+    hint:'하고 = and, 는 = topic, 에 = location (just being there), 있어요!',
+    answer:['할아버지','하고','할머니','는','공원','에','있어요'],
+    types: ['name','particle','name','particle','place','particle','verb']
+  },
+  {
+    scene:'📞', english:'Junyeong and Boram make a phone call at home.',
+    hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
+    answer:['준영','하고','보람','은','집','에서','전화','를','해요'],
+    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+  },
+  {
+    scene:'📸', english:'Mira and Seulgi take photos at the park.',
+    hint:'하고 = and, 는 = topic, 에서 = action place, 을 = object',
+    answer:['미라','하고','슬기','는','공원','에서','사진','을','찍어요'],
+    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+  },
+];
+
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let u1Idx=0, u1Score=0;
+let u1SelectedSubj=null, u1SelectedVerb=null, u1SelectedParticle=null;
+let u2Idx=0, u2Score=0;
+let u2Dropped=[]; // [{text,type,id}]
+let u2IdCounter=0;
+
+// drag state
+let dragSrcType=null; // 'bank' | 'zone'
+let dragSrcEl=null;
+let dragSrcZoneId=null; // id in u2Dropped when from zone
+
+// ══════════════════════════════════════════
+// FLASHCARDS
+// ══════════════════════════════════════════
+const bgMap = {
+  sky:'var(--sky-light)', mint:'var(--mint-light)',
+  sun:'var(--sun-light)', lav:'var(--lavender-light)', green:'var(--green-light)'
+};
+function buildFlashcards(containerId, items, bgKey) {
+  const el=document.getElementById(containerId); el.innerHTML='';
+  const bg=bgMap[bgKey]||'var(--sky-light)';
+  items.forEach(item=>{
+    const fc=document.createElement('div'); fc.className='flashcard';
+    fc.innerHTML=`<div class="flashcard-inner">
+      <div class="flashcard-front">
+        <div class="fc-emoji">${item.emoji}</div>
+        <div class="fc-korean">${item.kr}</div>
+        <div class="fc-flip-hint">tap to flip →</div>
+      </div>
+      <div class="flashcard-back" style="background:${bg};border:2px solid #C0D8F0;">
+        <div class="fc-emoji">${item.emoji}</div>
+        <div class="fc-english">${item.en}</div>
+        <div class="fc-romanize">[${item.rom}]</div>
+      </div>
+    </div>`;
+    fc.addEventListener('click',()=>fc.classList.toggle('flipped'));
+    el.appendChild(fc);
+  });
+}
+
+// ══════════════════════════════════════════
+// NAV
+// ══════════════════════════════════════════
+function switchUnit(n){
+  document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
+  document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('unit'+n).classList.add('active');
+  document.querySelectorAll('.unit-tab')[n-1].classList.add('active');
+}
+function switchSection(unit,sec){
+  const u=document.getElementById('unit'+unit);
+  u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('u'+unit+'-'+sec).classList.add('active');
+  const map={vocab:0,grammar:1,quiz:2};
+  u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// UNIT 1 QUIZ
+// ══════════════════════════════════════════
+function renderU1(){
+  const q=u1Questions[u1Idx];
+  u1SelectedSubj=null; u1SelectedVerb=null; u1SelectedParticle=null;
+  document.getElementById('u1-scene').textContent=q.scene;
+  document.getElementById('u1-qenglish').textContent='👉 '+q.english;
+  document.getElementById('u1-qsub').textContent='Click a name card, choose 이 or 가, then click the verb card!';
+
+  // reset slots
+  ['u1-slot-subj','u1-slot-part','u1-slot-verb'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.className='slot';
+    el.textContent=id==='u1-slot-subj'?'누가? (who?)':id==='u1-slot-part'?'이 / 가':'뭘해요? (does what?)';
+  });
+  document.querySelectorAll('.psel-btn').forEach(b=>b.classList.remove('selected'));
+
+  const fb=document.getElementById('u1-fb');
+  fb.className='feedback'; fb.innerHTML='';
+  document.getElementById('u1-next').disabled=true;
+
+  // build word bank: correct + decoys
+  const bank=document.getElementById('u1-wordbank'); bank.innerHTML='';
+  const decoySubjs=u1Questions.filter((_,i)=>i!==u1Idx).map(x=>x.subject).sort(()=>Math.random()-0.5).slice(0,2);
+  const decoyVerbs=u1Questions.filter((_,i)=>i!==u1Idx).map(x=>x.verb).sort(()=>Math.random()-0.5).slice(0,2);
+  const words=[
+    {text:q.subject,type:'name'},
+    {text:q.verb,type:'verb'},
+    ...decoySubjs.map(s=>({text:s,type:'name'})),
+    ...decoyVerbs.map(v=>({text:v,type:'verb'})),
+  ].sort(()=>Math.random()-0.5);
+
+  words.forEach(w=>{
+    const c=document.createElement('div');
+    c.className='wcard'+(w.type==='verb'?' verb':'');
+    c.textContent=w.text;
+    c.addEventListener('click',()=>handleU1Click(w.text,w.type));
+    bank.appendChild(c);
+  });
+  updateU1Progress();
+}
+
+function handleU1Click(text,type){
+  if(type==='name'){
+    u1SelectedSubj=text;
+    const el=document.getElementById('u1-slot-subj');
+    el.textContent=text; el.className='slot filled';
+  } else if(type==='verb'){
+    u1SelectedVerb=text;
+    const el=document.getElementById('u1-slot-verb');
+    el.textContent=text; el.className='slot filled is-verb';
+  }
+}
+
+function selectParticle(p){
+  u1SelectedParticle=p;
+  const el=document.getElementById('u1-slot-part');
+  el.textContent=p; el.className='slot filled is-particle';
+  document.querySelectorAll('.psel-btn').forEach(b=>b.classList.toggle('selected',b.textContent.startsWith(p)));
+}
+
+function checkU1(){
+  const q=u1Questions[u1Idx];
+  const fb=document.getElementById('u1-fb');
+  if(!u1SelectedSubj||!u1SelectedVerb||!u1SelectedParticle){
+    fb.className='feedback wrong'; fb.textContent='⚠️ Fill in all three slots first!'; return;
+  }
+  const built=`${u1SelectedSubj}${u1SelectedParticle} ${u1SelectedVerb}`;
+  if(built===q.answer){
+    fb.className='feedback correct';
+    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer}</div>`;
+    u1Score++; document.getElementById('u1-next').disabled=false;
+    document.getElementById('u1-prog-score').textContent=`⭐ ${u1Score}점`;
+    launchConfetti();
+  } else {
+    fb.className='feedback wrong';
+    fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+  }
+}
+function hintU1(){ const q=u1Questions[u1Idx]; const fb=document.getElementById('u1-fb'); fb.className='feedback hint'; fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`; }
+function resetU1(){ renderU1(); }
+function nextU1(){
+  u1Idx++;
+  if(u1Idx>=u1Questions.length){
+    document.getElementById('u1-qcard').style.display='none';
+    document.getElementById('u1-complete').classList.add('show');
+    document.getElementById('u1-complete-score').textContent=`You got ${u1Score} out of ${u1Questions.length}! (${u1Score}/${u1Questions.length})`;
+  } else { renderU1(); }
+}
+function updateU1Progress(){
+  const pct=Math.round((u1Idx/u1Questions.length)*100);
+  document.getElementById('u1-prog-fill').style.width=pct+'%';
+  document.getElementById('u1-prog-label').textContent=`문제 ${u1Idx+1} / ${u1Questions.length}`;
+  document.getElementById('u1-prog-score').textContent=`⭐ ${u1Score}점`;
+}
+
+// ══════════════════════════════════════════
+// UNIT 2 QUIZ — pointer-based reordering
+// ══════════════════════════════════════════
+const typeClass={name:'',particle:'particle',place:'place',verb:'verb'};
+
+// Ghost insert indicator
+let insertIndicator = null;
+function getOrCreateIndicator(){
+  if(!insertIndicator){
+    insertIndicator=document.createElement('div');
+    insertIndicator.style.cssText='width:3px;min-height:36px;background:#1565C0;border-radius:3px;flex-shrink:0;transition:none;pointer-events:none;';
+  }
+  return insertIndicator;
+}
+
+// Row-aware insert index
+function getInsertIndex(dz, clientX, clientY){
+  const allCards=[...dz.querySelectorAll('.dropped-card')];
+  if(allCards.length===0) return 0;
+
+  // Group cards into rows by their top position
+  const rows=[];
+  allCards.forEach((card,i)=>{
+    const r=card.getBoundingClientRect();
+    const rowTop=Math.round(r.top);
+    let row=rows.find(rw=>Math.abs(rw.top-rowTop)<14);
+    if(!row){ row={top:rowTop,bottom:r.bottom,cards:[]}; rows.push(row); }
+    row.cards.push({card,idx:i,r});
+    row.bottom=Math.max(row.bottom,r.bottom);
+  });
+
+  // Find closest row by vertical distance to row midpoint
+  let bestRow=rows[0], bestVDist=Infinity;
+  rows.forEach(row=>{
+    const mid=(row.top+row.bottom)/2;
+    const d=Math.abs(clientY-mid);
+    if(d<bestVDist){ bestVDist=d; bestRow=row; }
+  });
+
+  // Within best row, find horizontal insert position
+  for(let i=0;i<bestRow.cards.length;i++){
+    const {r,idx}=bestRow.cards[i];
+    if(clientX < r.left+r.width/2) return idx;
+  }
+  // Past last card in this row
+  const lastIdx=bestRow.cards[bestRow.cards.length-1].idx;
+  // If last row → append to very end
+  if(bestRow===rows[rows.length-1]) return allCards.length;
+  return lastIdx+1;
+}
+
+function renderU2(){
+  const q=u2Questions[u2Idx];
+  u2Dropped=[]; u2IdCounter=0;
+  document.getElementById('u2-scene').textContent=q.scene;
+  document.getElementById('u2-qenglish').textContent='👉 '+q.english;
+  document.getElementById('u2-qsub').textContent='Click or drag cards to build the sentence. Drag inside to reorder!';
+
+  const fb=document.getElementById('u2-fb'); fb.className='feedback'; fb.innerHTML='';
+  document.getElementById('u2-next').disabled=true;
+  renderU2Zone();
+
+  // Build word bank
+  const bank=document.getElementById('u2-wordbank'); bank.innerHTML='';
+  const words=q.answer.map((w,i)=>({text:w,type:q.types[i]})).sort(()=>Math.random()-0.5);
+  words.forEach(w=>{ bank.appendChild(makeBankCard(w.text,w.type)); });
+
+  // Attach dropzone handlers once
+  setupDropzone();
+  updateU2Progress();
+}
+
+function setupDropzone(){
+  const dz=document.getElementById('u2-dropzone');
+  // Remove old listeners by cloning — then re-attach
+  const newDz=dz.cloneNode(false); // shallow clone, no children
+  dz.parentNode.replaceChild(newDz,dz);
+  // Re-render children into new dz
+  renderU2ZoneChildren(newDz);
+
+  newDz.addEventListener('dragover',e=>{
+    e.preventDefault();
+    newDz.classList.add('drag-over');
+    const ind=getOrCreateIndicator();
+    // Remove indicator first so it doesn't affect getBoundingClientRect of cards
+    if(ind.parentNode) ind.parentNode.removeChild(ind);
+    const idx=getInsertIndex(newDz, e.clientX, e.clientY);
+    const cards=[...newDz.querySelectorAll('.dropped-card')];
+    if(idx>=cards.length) newDz.appendChild(ind);
+    else newDz.insertBefore(ind, cards[idx]);
+  });
+
+  newDz.addEventListener('dragleave',e=>{
+    if(!newDz.contains(e.relatedTarget)){
+      newDz.classList.remove('drag-over');
+      if(insertIndicator && insertIndicator.parentNode===newDz) newDz.removeChild(insertIndicator);
+    }
+  });
+
+  newDz.addEventListener('drop',e=>{
+    e.preventDefault();
+    newDz.classList.remove('drag-over');
+    if(insertIndicator && insertIndicator.parentNode===newDz) newDz.removeChild(insertIndicator);
+
+    const insertIdx=getInsertIndex(newDz, e.clientX, e.clientY);
+
+    if(dragSrcType==='bank'){
+      if(dragSrcEl && !dragSrcEl.dataset.used){
+        const id=++u2IdCounter;
+        const item={text:dragSrcEl.dataset.text, type:dragSrcEl.dataset.type, id};
+        u2Dropped.splice(insertIdx,0,item);
+        dragSrcEl.dataset.used='1'; dragSrcEl.classList.add('used');
+        renderU2Zone();
+      }
+    } else if(dragSrcType==='zone'){
+      const fromIdx=u2Dropped.findIndex(x=>x.id===dragSrcZoneId);
+      if(fromIdx===-1) return;
+      const [moved]=u2Dropped.splice(fromIdx,1);
+      // recalculate insertIdx after removal
+      const adjustedIdx=insertIdx>fromIdx ? insertIdx-1 : insertIdx;
+      u2Dropped.splice(adjustedIdx,0,moved);
+      renderU2Zone();
+    }
+  });
+}
+
+function makeBankCard(text,type){
+  const c=document.createElement('div');
+  c.className='wcard '+(typeClass[type]||'');
+  c.textContent=text; c.draggable=true;
+  c.dataset.text=text; c.dataset.type=type;
+  c.addEventListener('dragstart',e=>{
+    dragSrcType='bank'; dragSrcEl=c;
+    c.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',text);
+  });
+  c.addEventListener('dragend',()=>c.classList.remove('dragging'));
+  c.addEventListener('click',()=>{
+    if(!c.dataset.used){
+      const id=++u2IdCounter;
+      u2Dropped.push({text,type,id});
+      c.dataset.used='1'; c.classList.add('used');
+      renderU2Zone();
+    }
+  });
+  return c;
+}
+
+function removeFromZone(id){
+  const idx=u2Dropped.findIndex(w=>w.id===id);
+  if(idx===-1) return;
+  const {text}=u2Dropped[idx];
+  u2Dropped.splice(idx,1);
+  const bankCards=document.querySelectorAll('#u2-wordbank .wcard');
+  for(const bc of bankCards){
+    if(bc.dataset.text===text && bc.dataset.used==='1'){
+      bc.dataset.used=''; bc.classList.remove('used'); break;
+    }
+  }
+  renderU2Zone();
+}
+
+function renderU2Zone(){
+  // setupDropzone replaces the dz node and re-renders children
+  setupDropzone();
+}
+
+function renderU2ZoneChildren(dz){
+  dz.innerHTML='';
+  if(u2Dropped.length===0){
+    dz.innerHTML='<span class="drop-zone-placeholder">Click or drag cards here — drag inside to reorder!</span>';
+    return;
+  }
+  u2Dropped.forEach(w=>{
+    const dc=document.createElement('div');
+    dc.className='dropped-card '+(typeClass[w.type]||'');
+    dc.draggable=true;
+    dc.dataset.zoneId=String(w.id);
+
+    const txt=document.createTextNode(w.text);
+    dc.appendChild(txt);
+
+    const rm=document.createElement('button');
+    rm.className='rm-btn'; rm.title='remove'; rm.textContent='✕';
+    rm.addEventListener('mousedown',e=>e.stopPropagation());
+    rm.addEventListener('click',e=>{ e.stopPropagation(); removeFromZone(w.id); });
+    dc.appendChild(rm);
+
+    dc.addEventListener('dragstart',e=>{
+      dragSrcType='zone'; dragSrcEl=dc; dragSrcZoneId=w.id;
+      dc.classList.add('dragging');
+      e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.setData('text/plain',w.text);
+    });
+    dc.addEventListener('dragend',()=>{
+      dc.classList.remove('dragging');
+      const dz2=document.getElementById('u2-dropzone');
+      if(insertIndicator && insertIndicator.parentNode===dz2) dz2.removeChild(insertIndicator);
+    });
+
+    dz.appendChild(dc);
+  });
+}
+
+function checkU2(){
+  const q=u2Questions[u2Idx];
+  const fb=document.getElementById('u2-fb');
+  if(u2Dropped.length===0){ fb.className='feedback wrong'; fb.textContent='⚠️ Drop some cards first!'; return; }
+  const built=u2Dropped.map(w=>w.text).join('');
+  const correct=q.answer.join('');
+  if(built===correct){
+    fb.className='feedback correct';
+    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer.join('')}</div><div style="font-size:0.85rem;margin-top:4px;color:#388E3C;">${q.english}</div>`;
+    u2Score++; document.getElementById('u2-next').disabled=false;
+    document.getElementById('u2-prog-score').textContent=`⭐ ${u2Score}점`;
+    launchConfetti();
+  } else {
+    fb.className='feedback wrong';
+    fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+  }
+}
+function hintU2(){ const q=u2Questions[u2Idx]; const fb=document.getElementById('u2-fb'); fb.className='feedback hint'; fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`; }
+function resetU2(){ renderU2(); }
+function nextU2(){
+  u2Idx++;
+  if(u2Idx>=u2Questions.length){
+    document.getElementById('u2-qcard').style.display='none';
+    document.getElementById('u2-complete').classList.add('show');
+    const total=u1Score+u2Score, max=u1Questions.length+u2Questions.length;
+    document.getElementById('u2-complete-score').textContent=`Total: ${total} out of ${max}! (${total}/${max})`;
+  } else { renderU2(); }
+}
+function updateU2Progress(){
+  const pct=Math.round((u2Idx/u2Questions.length)*100);
+  document.getElementById('u2-prog-fill').style.width=pct+'%';
+  document.getElementById('u2-prog-label').textContent=`문제 ${u2Idx+1} / ${u2Questions.length}`;
+  document.getElementById('u2-prog-score').textContent=`⭐ ${u2Score}점`;
+}
+
+function restartAll(){
+  u1Idx=0;u1Score=0;u2Idx=0;u2Score=0;
+  document.getElementById('u1-qcard').style.display='block';
+  document.getElementById('u1-complete').classList.remove('show');
+  document.getElementById('u2-qcard').style.display='block';
+  document.getElementById('u2-complete').classList.remove('show');
+  renderU1(); renderU2();
+  switchUnit(1); switchSection(1,'quiz');
+}
+
+// ══════════════════════════════════════════
+// CONFETTI
+// ══════════════════════════════════════════
+function launchConfetti(){
+  const wrap=document.getElementById('confetti'); wrap.innerHTML='';
+  const colors=['#5BB8F5','#FF6B6B','#4ECDC4','#FFD93D','#A78BFA','#6BCB77'];
+  for(let i=0;i<44;i++){
+    const p=document.createElement('div'); p.className='confetti-piece';
+    p.style.cssText=`left:${Math.random()*100}%;top:-20px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.4}s;animation-duration:${0.9+Math.random()*0.7}s;transform:rotate(${Math.random()*360}deg);`;
+    wrap.appendChild(p);
+  }
+  setTimeout(()=>wrap.innerHTML='',2200);
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+function init(){
+  buildFlashcards('fc-names',names,'sky');
+  buildFlashcards('fc-verbs',verbs1,'mint');
+  buildFlashcards('fc2-link',linkWords,'sun');
+  buildFlashcards('fc2-places',places,'lav');
+  buildFlashcards('fc2-verbs',verbs2,'green');
+  renderU1(); renderU2();
+}
+init();
+</script>
+</body>
+</html>

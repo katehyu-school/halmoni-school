@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>할머니 스쿨 🌟 애라야!</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pink:#FF6B9D;--yellow:#FFD93D;--mint:#4ECDC4;--sky:#5BB8F5;
+  --orange:#FF8C42;--purple:#A78BFA;--green:#6BCB77;--coral:#FF6B6B;
+  --bg:#FFF8F0;
+}
+body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow-x:hidden;}
+
+/* ── SCREENS ── */
+.screen{display:none;min-height:100vh;}
+.screen.active{display:flex;flex-direction:column;}
+
+/* ══════════════ TITLE SCREEN ══════════════ */
+#title-screen{
+  background:linear-gradient(135deg,#FFE4F0 0%,#FFF9E6 40%,#E4F9FF 100%);
+  align-items:center;justify-content:center;text-align:center;
+  position:relative;overflow:hidden;
+}
+.title-banner{
+  background:white;border:4px solid var(--yellow);border-radius:30px;
+  padding:18px 50px;margin-bottom:30px;
+  box-shadow:0 6px 30px rgba(255,200,0,0.3);
+  position:relative;
+}
+.title-banner::before,.title-banner::after{
+  content:'';position:absolute;top:50%;width:24px;height:100%;
+  background:var(--yellow);transform:translateY(-50%);border-radius:4px;
+}
+.title-banner::before{left:-16px;}
+.title-banner::after{right:-16px;}
+.title-text{
+  font-family:'Black Han Sans',sans-serif;
+  font-size:clamp(3rem,8vw,6rem);
+  background:linear-gradient(90deg,var(--pink),var(--orange),var(--yellow),var(--mint));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:4px;line-height:1.1;
+}
+.title-name{
+  font-size:clamp(2rem,6vw,4rem);
+  color:var(--pink);
+  margin-top:8px;
+  animation:bounce 1.5s infinite;
+}
+.title-bus{font-size:8rem;margin-bottom:16px;animation:wiggle 2s infinite;}
+.title-chicks{font-size:5rem;animation:hop 1.2s infinite alternate;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes wiggle{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes hop{0%{transform:translateY(0) scaleX(1)}100%{transform:translateY(-16px) scaleX(0.95)}}
+.stars{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.star{position:absolute;font-size:1.6rem;animation:twinkle 2s infinite;}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
+.start-btn{
+  background:linear-gradient(135deg,var(--pink),var(--orange));
+  color:white;border:none;border-radius:50px;
+  padding:18px 60px;font-family:'Jua',sans-serif;font-size:1.8rem;
+  cursor:pointer;box-shadow:0 8px 24px rgba(255,107,157,0.4);
+  transition:all 0.2s;margin-top:20px;
+}
+.start-btn:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 30px rgba(255,107,157,0.5);}
+
+/* ══════════════ HOME SCREEN ══════════════ */
+#home-screen{background:linear-gradient(160deg,#FFF0FB 0%,#FFF9E6 50%,#E8F9FF 100%);}
+.home-header{
+  padding:20px 24px;display:flex;align-items:center;justify-content:space-between;
+  background:white;box-shadow:0 3px 16px rgba(0,0,0,0.08);
+}
+.home-logo{font-family:'Black Han Sans',sans-serif;font-size:1.6rem;
+  background:linear-gradient(90deg,var(--pink),var(--orange));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.home-greeting{font-size:1.1rem;color:var(--pink);}
+.home-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;padding:30px 24px;flex:1;
+}
+.home-card{
+  background:white;border-radius:28px;padding:30px 20px;
+  text-align:center;cursor:pointer;
+  box-shadow:0 6px 24px rgba(0,0,0,0.08);
+  transition:all 0.25s;border:3px solid transparent;
+  position:relative;overflow:hidden;
+}
+.home-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 60%,rgba(255,255,255,0.3));
+}
+.home-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 14px 40px rgba(0,0,0,0.15);}
+.home-card.animals{border-color:var(--orange);background:linear-gradient(135deg,#FFF4E6,#FFF9F0);}
+.home-card.food{border-color:var(--coral);background:linear-gradient(135deg,#FFF0F0,#FFF8F8);}
+.home-card.colors{border-color:var(--purple);background:linear-gradient(135deg,#F5F0FF,#FAF8FF);}
+.home-card.numbers{border-color:var(--sky);background:linear-gradient(135deg,#F0F8FF,#F8FBFF);}
+.home-card.body{border-color:var(--pink);background:linear-gradient(135deg,#FFF0F7,#FFF8FC);}
+.home-card.fruits{border-color:var(--green);background:linear-gradient(135deg,#F0FFF4,#F8FFF9);}
+.home-card.transport{border-color:var(--mint);background:linear-gradient(135deg,#F0FFFE,#F8FFFF);}
+.home-card.songs{border-color:var(--yellow);background:linear-gradient(135deg,#FFFBF0,#FFFDF8);}
+.home-card.match{border-color:var(--pink);background:linear-gradient(135deg,#FFF0F7,#FFF5FA);}
+.card-emoji{font-size:4rem;margin-bottom:12px;display:block;
+  animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.card-title{font-size:1.5rem;color:#333;font-weight:700;}
+.card-sub{font-size:0.85rem;color:#999;margin-top:4px;}
+
+/* ══════════════ VOCAB SCREEN ══════════════ */
+#vocab-screen{background:var(--bg);}
+.vocab-header{
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  background:white;box-shadow:0 3px 16px rgba(0,0,0,0.07);
+}
+.back-btn{
+  background:none;border:2.5px solid #ddd;border-radius:50%;
+  width:44px;height:44px;font-size:1.3rem;cursor:pointer;
+  transition:all 0.2s;display:flex;align-items:center;justify-content:center;
+}
+.back-btn:hover{background:#f5f5f5;border-color:#bbb;}
+.vocab-title{font-size:1.5rem;color:#333;}
+.vocab-cat-badge{
+  font-size:0.85rem;padding:4px 14px;border-radius:20px;color:white;
+  background:var(--orange);margin-left:auto;
+}
+.vocab-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:16px;padding:24px;
+}
+.vocab-card{
+  background:white;border-radius:22px;padding:16px 12px 12px;
+  text-align:center;cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,0,0,0.08);
+  transition:all 0.2s;border:3px solid #f0f0f0;
+  animation:fadeInUp 0.4s ease both;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.vocab-card:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 10px 28px rgba(0,0,0,0.14);}
+.vocab-card:active{transform:scale(0.96);}
+.vocab-emoji{font-size:3.2rem;display:block;}
+.vocab-word{font-size:1.3rem;color:#333;font-weight:700;}
+.vocab-song-btn{
+  display:flex;align-items:center;gap:5px;
+  background:linear-gradient(135deg,#FF6B9D,#FF8C42);
+  color:white;border:none;border-radius:20px;
+  padding:5px 12px;font-family:'Jua',sans-serif;font-size:0.78rem;
+  cursor:pointer;transition:all 0.2s;margin-top:2px;
+  white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;
+}
+.vocab-song-btn:hover{transform:scale(1.08);box-shadow:0 3px 12px rgba(255,107,157,0.4);}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════ SONGS SCREEN ══════════════ */
+#songs-screen{background:linear-gradient(135deg,#FFF0FB,#FFF9E6);}
+.songs-header{
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  background:white;box-shadow:0 3px 16px rgba(0,0,0,0.07);
+}
+.channel-tabs{display:flex;gap:10px;padding:16px 20px;flex-wrap:wrap;}
+.ch-tab{
+  font-family:'Jua',sans-serif;font-size:1rem;
+  padding:10px 22px;border-radius:30px;border:2.5px solid #ddd;
+  background:white;cursor:pointer;transition:all 0.2s;
+}
+.ch-tab.active{background:var(--pink);border-color:var(--pink);color:white;
+  box-shadow:0 4px 14px rgba(255,107,157,0.4);}
+.songs-list{padding:10px 20px 30px;display:flex;flex-direction:column;gap:12px;}
+.song-row{
+  background:white;border-radius:18px;padding:14px 20px;
+  display:flex;align-items:center;gap:16px;
+  box-shadow:0 3px 14px rgba(0,0,0,0.07);
+  cursor:pointer;transition:all 0.2s;border:2.5px solid transparent;
+}
+.song-row:hover{transform:translateX(6px);border-color:var(--pink);
+  box-shadow:0 6px 20px rgba(255,107,157,0.2);}
+.song-thumb{
+  width:72px;height:52px;border-radius:10px;object-fit:cover;
+  background:#f0f0f0;display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;flex-shrink:0;overflow:hidden;
+}
+.song-thumb img{width:100%;height:100%;object-fit:cover;}
+.song-info{flex:1;}
+.song-title{font-size:1.15rem;color:#333;}
+.song-ch{font-size:0.8rem;color:#aaa;margin-top:2px;}
+.song-play{
+  font-size:1.6rem;color:var(--pink);flex-shrink:0;
+  transition:transform 0.2s;
+}
+.song-row:hover .song-play{transform:scale(1.3);}
+
+/* ══════════════ MATCH SCREEN ══════════════ */
+#match-screen{background:var(--bg);}
+.match-header{
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  background:white;box-shadow:0 3px 16px rgba(0,0,0,0.07);
+}
+.match-area{padding:20px;flex:1;}
+.match-instruction{
+  text-align:center;font-size:1.1rem;color:#666;margin-bottom:16px;
+}
+.match-cat-select{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;
+}
+.mcat-btn{
+  font-family:'Jua',sans-serif;font-size:0.9rem;
+  padding:8px 18px;border-radius:20px;border:2px solid #ddd;
+  background:white;cursor:pointer;transition:all 0.2s;
+}
+.mcat-btn.active{background:var(--mint);border-color:var(--mint);color:white;}
+.match-game{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.match-col-title{font-size:1rem;color:#999;text-align:center;margin-bottom:10px;}
+.match-items{display:flex;flex-direction:column;gap:10px;}
+.match-emoji-card{
+  background:white;border-radius:16px;padding:14px;
+  text-align:center;font-size:2.8rem;
+  box-shadow:0 3px 12px rgba(0,0,0,0.08);
+  cursor:grab;border:3px solid transparent;
+  transition:all 0.2s;user-select:none;
+}
+.match-emoji-card:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,0.14);}
+.match-emoji-card.dragging{opacity:0.4;transform:scale(0.95);}
+.match-emoji-card.matched{border-color:var(--green);background:var(--green);
+  opacity:0.5;pointer-events:none;cursor:default;}
+.match-word-card{
+  background:white;border-radius:16px;padding:14px 18px;
+  font-size:1.3rem;text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,0.08);
+  border:3px dashed #ccc;transition:all 0.2s;min-height:58px;
+  display:flex;align-items:center;justify-content:center;
+}
+.match-word-card.drag-over{border-color:var(--mint);background:var(--mint-light,#E8FAF9);}
+.match-word-card.correct{border-color:var(--green);background:#E8FFE8;border-style:solid;
+  animation:correct-pop 0.4s ease;}
+.match-word-card.wrong{border-color:var(--coral);background:#FFE8E8;border-style:solid;
+  animation:shake 0.4s ease;}
+@keyframes correct-pop{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.match-score{
+  text-align:center;font-size:1.2rem;color:var(--green);
+  margin-top:14px;font-weight:700;
+}
+.match-reset{
+  display:block;margin:12px auto 0;
+  background:var(--mint);color:white;border:none;border-radius:30px;
+  padding:10px 30px;font-family:'Jua',sans-serif;font-size:1rem;
+  cursor:pointer;transition:all 0.2s;
+}
+.match-reset:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(78,205,196,0.4);}
+
+/* ══════════════ CONFETTI ══════════════ */
+.confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+.cp{position:absolute;width:12px;height:12px;border-radius:3px;
+  animation:cffall 1.4s ease-in forwards;}
+@keyframes cffall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px;}
+
+/* ══════════════ YOUTUBE MODAL ══════════════ */
+
+
+/* ══════════════ EDIT MODAL ══════════════ */
+.edit-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  z-index:1100;align-items:flex-start;justify-content:center;
+  padding:20px;overflow-y:auto;
+}
+.edit-overlay.open{display:flex;}
+.edit-box{
+  background:white;border-radius:20px;width:100%;max-width:640px;
+  box-shadow:0 16px 50px rgba(0,0,0,0.3);margin:auto;
+}
+.edit-header{
+  padding:16px 20px;background:linear-gradient(135deg,#667eea,#764ba2);
+  border-radius:20px 20px 0 0;display:flex;align-items:center;justify-content:space-between;
+}
+.edit-header span{color:white;font-size:1.1rem;}
+.edit-close{background:rgba(255,255,255,0.2);border:none;border-radius:50%;
+  width:34px;height:34px;color:white;font-size:1.2rem;cursor:pointer;}
+.edit-body{padding:20px;max-height:70vh;overflow-y:auto;}
+.edit-group{margin-bottom:20px;}
+.edit-group-title{
+  font-size:0.85rem;color:#888;margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid #eee;
+}
+.edit-row{
+  display:flex;align-items:center;gap:10px;margin-bottom:8px;
+}
+.edit-label{font-size:0.9rem;color:#444;min-width:80px;flex-shrink:0;}
+.edit-emoji{font-size:1.4rem;min-width:32px;text-align:center;}
+.edit-input{
+  flex:1;padding:8px 12px;border:1.5px solid #ddd;border-radius:10px;
+  font-family:'Jua',sans-serif;font-size:0.85rem;color:#333;
+}
+.edit-input:focus{outline:none;border-color:#667eea;}
+.edit-save{
+  display:block;width:100%;padding:13px;margin-top:16px;
+  background:linear-gradient(135deg,#667eea,#764ba2);
+  color:white;border:none;border-radius:14px;
+  font-family:'Jua',sans-serif;font-size:1.1rem;cursor:pointer;
+  transition:all 0.2s;
+}
+.edit-save:hover{opacity:0.9;transform:translateY(-1px);}
+.edit-btn{
+  position:fixed;bottom:20px;right:20px;
+  background:#667eea;color:white;border:none;border-radius:50%;
+  width:52px;height:52px;font-size:1.4rem;cursor:pointer;
+  box-shadow:0 4px 18px rgba(102,126,234,0.5);z-index:500;
+  transition:all 0.2s;display:none;
+}
+.edit-btn:hover{transform:scale(1.1);}
+.edit-btn.visible{display:flex;align-items:center;justify-content:center;}
+
+@media(max-width:600px){
+  .home-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:16px;}
+  .vocab-grid{grid-template-columns:repeat(3,1fr);gap:10px;padding:14px;}
+  .title-text{font-size:2.8rem;}
+  .match-game{gap:10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ TITLE ═══════ -->
+<div class="screen active" id="title-screen">
+  <div class="stars" id="stars-wrap"></div>
+  <div style="display:flex;flex-direction:column;align-items:center;padding:40px 20px;">
+    <div class="title-bus">🚌</div>
+    <div class="title-banner">
+      <div class="title-text">할머니 스쿨</div>
+    </div>
+    <div class="title-chicks" style="margin-top:20px;">🐥🐥</div>
+    <button class="start-btn" onclick="goHome()">시작해요! ▶</button>
+  </div>
+</div>
+
+<!-- ═══════ HOME ═══════ -->
+<div class="screen" id="home-screen">
+  <div class="home-header">
+    <div class="home-logo">🌟 할머니 스쿨</div>
+    <div class="home-greeting">안녕 애라야! 👋</div>
+  </div>
+  <div class="home-grid">
+    <div class="home-card animals" onclick="openVocab('animals')">
+      <span class="card-emoji">🦁</span>
+      <div class="card-title">동물</div>
+      <div class="card-sub">12가지 동물 친구들</div>
+    </div>
+    <div class="home-card food" onclick="openVocab('food')">
+      <span class="card-emoji">🍚</span>
+      <div class="card-title">음식</div>
+      <div class="card-sub">맛있는 음식들</div>
+    </div>
+    <div class="home-card colors" onclick="openVocab('colors')">
+      <span class="card-emoji">🌈</span>
+      <div class="card-title">색깔</div>
+      <div class="card-sub">예쁜 색깔들</div>
+    </div>
+    <div class="home-card numbers" onclick="openVocab('numbers')">
+      <span class="card-emoji">🔢</span>
+      <div class="card-title">숫자</div>
+      <div class="card-sub">1부터 10까지</div>
+    </div>
+    <div class="home-card body" onclick="openVocab('body')">
+      <span class="card-emoji">👁️</span>
+      <div class="card-title">신체</div>
+      <div class="card-sub">우리 몸</div>
+    </div>
+    <div class="home-card fruits" onclick="openVocab('fruits')">
+      <span class="card-emoji">🍎</span>
+      <div class="card-title">과일</div>
+      <div class="card-sub">달콤한 과일들</div>
+    </div>
+    <div class="home-card transport" onclick="openVocab('transport')">
+      <span class="card-emoji">🚌</span>
+      <div class="card-title">교통수단</div>
+      <div class="card-sub">타고 다녀요</div>
+    </div>
+    <div class="home-card songs" onclick="openSongs()">
+      <span class="card-emoji">🎵</span>
+      <div class="card-title">노래</div>
+      <div class="card-sub">베베핀·핑크퐁·상어가족</div>
+    </div>
+    <div class="home-card match" onclick="openMatch()">
+      <span class="card-emoji">🎯</span>
+      <div class="card-title">매칭 게임</div>
+      <div class="card-sub">그림과 이름 맞추기</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ VOCAB ═══════ -->
+<div class="screen" id="vocab-screen">
+  <div class="vocab-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="vocab-title" id="vocab-title">동물</div>
+    <div class="vocab-cat-badge" id="vocab-badge">🦁</div>
+  </div>
+  <div class="vocab-grid" id="vocab-grid"></div>
+</div>
+
+<!-- ═══════ SONGS ═══════ -->
+<div class="screen" id="songs-screen">
+  <div class="songs-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="vocab-title">🎵 노래</div>
+  </div>
+  <div class="channel-tabs" id="channel-tabs"></div>
+  <div style="margin:0 20px 10px;padding:10px 16px;background:#FFF9E6;border-radius:14px;border:2px solid #FFD93D;font-size:0.85rem;color:#7A5500;display:flex;align-items:center;gap:8px;">
+    <span style="font-size:1.2rem;">✏️</span>
+    <span>노래 링크가 안 열리면 오른쪽 아래 <strong>✏️ 버튼</strong>을 눌러서 유튜브 주소를 직접 넣어주세요!</span>
+  </div>
+  <div class="songs-list" id="songs-list"></div>
+</div>
+
+<!-- ═══════ MATCH ═══════ -->
+<div class="screen" id="match-screen">
+  <div class="match-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="vocab-title">🎯 매칭 게임</div>
+  </div>
+  <div class="match-area">
+    <div class="match-instruction">그림을 오른쪽 이름에 드래그하세요! 🐾</div>
+    <div class="match-cat-select" id="match-cat-select"></div>
+    <div class="match-game">
+      <div>
+        <div class="match-col-title">그림 🖼️</div>
+        <div class="match-items" id="match-emojis"></div>
+      </div>
+      <div>
+        <div class="match-col-title">이름 📝</div>
+        <div class="match-items" id="match-words"></div>
+      </div>
+    </div>
+    <div class="match-score" id="match-score"></div>
+    <button class="match-reset" onclick="resetMatch()">🔄 다시 하기</button>
+  </div>
+</div>
+
+<div class="confetti-wrap" id="confetti"></div>
+
+
+
+<!-- ═══════ EDIT MODAL ═══════ -->
+<div class="edit-overlay" id="edit-overlay" onclick="closeEditOverlay(event)">
+  <div class="edit-box">
+    <div class="edit-header">
+      <span>✏️ 링크 수정 (선생님 전용)</span>
+      <button class="edit-close" onclick="closeEdit()">✕</button>
+    </div>
+    <div class="edit-body" id="edit-body"></div>
+  </div>
+</div>
+
+<!-- 편집 버튼 (연필 아이콘) -->
+<button class="edit-btn" id="edit-btn" onclick="openEdit()" title="링크 수정">✏️</button>
+
+<script>
+// ══════════════════════════════
+// DATA
+// ══════════════════════════════
+const vocabData = {
+  animals: {
+    title:'동물', badge:'🦁', color:'#FF8C42',
+    items:[
+      {e:'🦋',w:'나비',   song:'나비야',          url:'https://www.youtube.com/watch?v=oiJK5TMIeVc'},
+      {e:'🐻',w:'곰',     song:'곰 세 마리',       url:'https://www.youtube.com/watch?v=sLqbMXTSD8s'},
+      {e:'🐷',w:'돼지',   song:'아기 돼지 삼형제', url:'https://www.youtube.com/watch?v=p8_2d1gv4xI'},
+      {e:'🐊',w:'악어',   song:'악어떼',           url:'https://www.youtube.com/watch?v=mEDkjhbAIGU'},
+      {e:'🐣',w:'병아리', song:'병아리 댄스',       url:'https://www.youtube.com/watch?v=oJmhLlYJmhY'},
+      {e:'🦈',w:'상어',   song:'아기상어',          url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+      {e:'🐘',w:'코끼리', song:'코끼리 아저씨',    url:'https://www.youtube.com/watch?v=X6DvGpz2HsY'},
+      {e:'🦓',w:'얼룩말', song:'동물 세어봐요',    url:'https://www.youtube.com/watch?v=UBvdlkFXLx0'},
+      {e:'🐰',w:'토끼',   song:'산토끼',            url:'https://www.youtube.com/watch?v=EIAaYQtJMGU'},
+      {e:'🦁',w:'사자',   song:'사자왕',            url:'https://www.youtube.com/watch?v=N8_L-LUaMpA'},
+      {e:'🐒',w:'원숭이', song:'원숭이 엉덩이',    url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🏛️',w:'동물원', song:'동물 세어봐요',    url:'https://www.youtube.com/watch?v=UBvdlkFXLx0'},
+    ]
+  },
+  food: {
+    title:'음식', badge:'🍚', color:'#FF6B6B',
+    items:[
+      {e:'🍚',w:'밥',        song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍜',w:'국수',      song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🥚',w:'계란',      song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍞',w:'빵',        song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🥛',w:'우유',      song:'나는야 토마토',   url:'https://www.youtube.com/watch?v=N8_L-LUaMpA'},
+      {e:'🍰',w:'케이크',    song:'생일 축하해',      url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🍕',w:'피자',      song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍦',w:'아이스크림',song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍩',w:'도넛',      song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🥗',w:'샐러드',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍗',w:'닭고기',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍫',w:'초콜릿',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+    ]
+  },
+  colors: {
+    title:'색깔', badge:'🌈', color:'#A78BFA',
+    items:[
+      {e:'🔴',w:'빨강', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🟠',w:'주황', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🟡',w:'노랑', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🟢',w:'초록', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🔵',w:'파랑', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🟣',w:'보라', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'⚫',w:'검정', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'⚪',w:'하양', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🩷',w:'분홍', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🟤',w:'갈색', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🩵',w:'하늘색',song:'색깔 노래',url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+      {e:'🟩',w:'연두', song:'색깔 노래', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+    ]
+  },
+  numbers: {
+    title:'숫자', badge:'🔢', color:'#5BB8F5',
+    items:[
+      {e:'🍎',w:'1 — 일', count:1,  speak:'일'},
+      {e:'🍎',w:'2 — 이', count:2,  speak:'이'},
+      {e:'🍎',w:'3 — 삼', count:3,  speak:'삼'},
+      {e:'🍎',w:'4 — 사', count:4,  speak:'사'},
+      {e:'🍎',w:'5 — 오', count:5,  speak:'오'},
+      {e:'🍎',w:'6 — 육', count:6,  speak:'육'},
+      {e:'🍎',w:'7 — 칠', count:7,  speak:'칠'},
+      {e:'🍎',w:'8 — 팔', count:8,  speak:'팔'},
+      {e:'🍎',w:'9 — 구', count:9,  speak:'구'},
+      {e:'🍎',w:'10 — 십',count:10, speak:'십'},
+    ]
+  },
+  body: {
+    title:'신체', badge:'👁️', color:'#FF6B9D',
+    items:[
+      {e:'👁️', w:'눈',  speak:'눈'},
+      {e:'👃', w:'코',  speak:'코'},
+      {e:'👂', w:'귀',  speak:'귀'},
+      {e:'👄', w:'입',  speak:'입'},
+      {e:'✋', w:'손',  speak:'손'},
+      {e:'🦶', w:'발',  speak:'발'},
+      {e:'💪', w:'팔',  speak:'팔'},
+      {e:'🦵', w:'다리',speak:'다리'},
+      {e:'🧠', w:'머리',speak:'머리'},
+      {e:'❤️', w:'심장',speak:'심장'},
+      {e:'🦷', w:'이',  speak:'이'},
+      {e:'🫦', w:'배',  speak:'배'},
+    ]
+  },
+  fruits: {
+    title:'과일', badge:'🍎', color:'#6BCB77',
+    items:[
+      {e:'🍎',w:'사과',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍌',w:'바나나',  song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍇',w:'포도',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍓',w:'딸기',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍊',w:'귤',      song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍋',w:'레몬',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍉',w:'수박',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍑',w:'복숭아',  song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍍',w:'파인애플',song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🥝',w:'키위',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🍒',w:'체리',    song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {e:'🫐',w:'블루베리',song:'알록달록 음식송', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+    ]
+  },
+  transport: {
+    title:'교통수단', badge:'🚌', color:'#4ECDC4',
+    items:[
+      {e:'🚌',w:'버스',    song:'바퀴가 달린 버스', url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚗',w:'자동차',  song:'부릉부릉 자동차',  url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚂',w:'기차',    song:'기차 노래',         url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'✈️',w:'비행기',  song:'비행기 노래',       url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚢',w:'배',      song:'배 노래',           url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚲',w:'자전거',  song:'자전거 노래',       url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🛵',w:'오토바이',song:'교통수단 노래',     url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚕',w:'택시',    song:'교통수단 노래',     url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚒',w:'소방차',  song:'소방차 노래',       url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚑',w:'구급차',  song:'구급차 노래',       url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚁',w:'헬리콥터',song:'교통수단 노래',     url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {e:'🚀',w:'로켓',    song:'로켓 노래',         url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+    ]
+  },
+};
+
+// 노래 데이터 — 유튜브 링크는 공식 채널 기준
+const songsData = {
+  bebefinn: {
+    label:'베베핀', color:'#FF6B9D',
+    songs:[
+      {title:'치카 송',        thumb:'🦷', url:'https://www.youtube.com/watch?v=3D9Z2P19SgQ'},
+      {title:'그대로 멈춰라',   thumb:'🙅', url:'https://www.youtube.com/watch?v=vB8QCZeMhlE'},
+      {title:'머리 어깨 무릎 발',thumb:'💃', url:'https://www.youtube.com/watch?v=h4eueDYPTIg'},
+      {title:'아야 아야 아파',  thumb:'🤕', url:'https://www.youtube.com/watch?v=JlTMtBbFST0'},
+      {title:'나는야 토마토',   thumb:'🍅', url:'https://www.youtube.com/watch?v=N8_L-LUaMpA'},
+      {title:'참지말고 응가해요',thumb:'💩', url:'https://www.youtube.com/watch?v=RoMDknW6nkE'},
+      {title:'아침이야 일어나', thumb:'🌅', url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
+      {title:'내 꼬리 어디 갔나',thumb:'🐾', url:'https://www.youtube.com/watch?v=oJmhLlYJmhY'},
+      {title:'다섯 마리 아기 오리',thumb:'🦆',url:'https://www.youtube.com/watch?v=O_5L0F6Lfow'},
+      {title:'알록달록 음식송',  thumb:'🌈', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
+      {title:'잘잘잘',          thumb:'👏', url:'https://www.youtube.com/watch?v=nFd5j3-EVMU'},
+      {title:'동물 세어 봐요',  thumb:'🐘', url:'https://www.youtube.com/watch?v=UBvdlkFXLx0'},
+    ]
+  },
+  pinkfong: {
+    label:'핑크퐁', color:'#FF8C42',
+    songs:[
+      {title:'나비야',          thumb:'🦋', url:'https://www.youtube.com/watch?v=oiJK5TMIeVc'},
+      {title:'아기상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+      {title:'상어가족',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+      {title:'동물의 소리',      thumb:'🐄', url:'https://www.youtube.com/watch?v=LBE7DQJHPNI'},
+      {title:'머리 어깨 무릎 발',thumb:'💃', url:'https://www.youtube.com/watch?v=h4eueDYPTIg'},
+      {title:'색깔 노래',        thumb:'🌈', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
+    ]
+  },
+  babyshark: {
+    label:'상어가족', color:'#5BB8F5',
+    songs:[
+      {title:'아기상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+      {title:'Baby Shark Dance', thumb:'🎵', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+      {title:'엄마상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+      {title:'아빠상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
+    ]
+  },
+  ebs: {
+    label:'EBS 한글', color:'#6BCB77',
+    songs:[
+      {title:'한글이 야호 - 가나다',thumb:'🇰🇷', url:'https://www.youtube.com/watch?v=ozl3LPXWH4Q'},
+      {title:'한글이 야호 - 자음송',thumb:'🔤', url:'https://www.youtube.com/watch?v=ozl3LPXWH4Q'},
+      {title:'자음 모음 노래',      thumb:'✏️', url:'https://www.youtube.com/watch?v=ozl3LPXWH4Q'},
+    ]
+  },
+};
+
+// ══════════════════════════════
+// STATE
+// ══════════════════════════════
+let currentCat = 'animals';
+let currentChannel = 'bebefinn';
+let matchCat = 'animals';
+let matchScore = 0;
+let matchTotal = 0;
+let dragSrcWord = null;
+
+// ══════════════════════════════
+// YOUTUBE PLAYER
+// ══════════════════════════════
+function getVideoId(url){
+  if(!url) return null;
+  const m = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function playVideo(url, title){
+  if(!url) return;
+  // 팝업 창으로 열기 — 앱 화면은 그대로 유지됨
+  const w = Math.min(900, screen.width * 0.85);
+  const h = Math.min(600, screen.height * 0.8);
+  const left = (screen.width - w) / 2;
+  const top  = (screen.height - h) / 2;
+  window.open(
+    url,
+    'youtube_popup',
+    `width=${Math.round(w)},height=${Math.round(h)},left=${Math.round(left)},top=${Math.round(top)},resizable=yes,scrollbars=yes`
+  );
+}
+
+// ══════════════════════════════
+// EDIT MODE
+// ══════════════════════════════
+function openEdit(){
+  const body = document.getElementById('edit-body');
+  body.innerHTML = '';
+
+  // 단어 카드 링크 편집
+  const vocabGroup = document.createElement('div');
+  vocabGroup.className = 'edit-group';
+  vocabGroup.innerHTML = '<div class="edit-group-title">📚 단어 카드 노래 링크</div>';
+
+  Object.entries(vocabData).forEach(([catKey, cat]) => {
+    const catTitle = document.createElement('div');
+    catTitle.style.cssText = 'font-size:0.82rem;color:'+cat.color+';margin:10px 0 6px;font-weight:700;';
+    catTitle.textContent = cat.badge + ' ' + cat.title;
+    vocabGroup.appendChild(catTitle);
+
+    cat.items.forEach((item, i) => {
+      if(!item.song) return;
+      const row = document.createElement('div');
+      row.className = 'edit-row';
+      row.innerHTML = `
+        <span class="edit-emoji">${item.e}</span>
+        <span class="edit-label">${item.w}</span>
+        <input class="edit-input" type="text"
+          placeholder="YouTube URL"
+          value="${item.url||''}"
+          data-cat="${catKey}" data-idx="${i}" data-field="url">
+      `;
+      vocabGroup.appendChild(row);
+    });
+  });
+  body.appendChild(vocabGroup);
+
+  // 노래 목록 링크 편집
+  const songGroup = document.createElement('div');
+  songGroup.className = 'edit-group';
+  songGroup.innerHTML = '<div class="edit-group-title">🎵 노래 목록 링크</div>';
+
+  Object.entries(songsData).forEach(([chKey, ch]) => {
+    const chTitle = document.createElement('div');
+    chTitle.style.cssText = 'font-size:0.82rem;color:'+ch.color+';margin:10px 0 6px;font-weight:700;';
+    chTitle.textContent = ch.label;
+    songGroup.appendChild(chTitle);
+
+    ch.songs.forEach((song, i) => {
+      const row = document.createElement('div');
+      row.className = 'edit-row';
+      row.innerHTML = `
+        <span class="edit-emoji">${song.thumb}</span>
+        <span class="edit-label" style="font-size:0.78rem;">${song.title}</span>
+        <input class="edit-input" type="text"
+          placeholder="YouTube URL"
+          value="${song.url||''}"
+          data-ch="${chKey}" data-idx="${i}" data-field="song-url">
+      `;
+      songGroup.appendChild(row);
+    });
+  });
+  body.appendChild(songGroup);
+
+  // 저장 버튼
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'edit-save';
+  saveBtn.textContent = '✅ 저장하기';
+  saveBtn.onclick = saveEdit;
+  body.appendChild(saveBtn);
+
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+function saveEdit(){
+  // vocab 링크 업데이트
+  document.querySelectorAll('[data-field="url"]').forEach(input => {
+    const cat = input.dataset.cat;
+    const idx = parseInt(input.dataset.idx);
+    if(vocabData[cat] && vocabData[cat].items[idx]){
+      vocabData[cat].items[idx].url = input.value.trim();
+    }
+  });
+  // song 링크 업데이트
+  document.querySelectorAll('[data-field="song-url"]').forEach(input => {
+    const ch = input.dataset.ch;
+    const idx = parseInt(input.dataset.idx);
+    if(songsData[ch] && songsData[ch].songs[idx]){
+      songsData[ch].songs[idx].url = input.value.trim();
+    }
+  });
+  closeEdit();
+  // 현재 화면 새로고침
+  if(document.getElementById('vocab-screen').classList.contains('active')) openVocab(currentCat);
+  if(document.getElementById('songs-screen').classList.contains('active')) renderSongs(currentChannel);
+  alert('✅ 링크가 저장됐어요!');
+}
+
+function closeEdit(){
+  document.getElementById('edit-overlay').classList.remove('open');
+}
+function closeEditOverlay(e){
+  if(e.target === document.getElementById('edit-overlay')) closeEdit();
+}
+
+// 편집 버튼은 vocab/songs 화면에서만 표시
+function showEditBtn(show){
+  const btn = document.getElementById('edit-btn');
+  if(show) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+}
+
+
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  showEditBtn(id==='vocab-screen'||id==='songs-screen');
+}
+function goHome(){ showScreen('home-screen'); }
+
+// ══════════════════════════════
+// TTS
+// ══════════════════════════════
+let koVoice = null;
+function loadVoice(){
+  const voices = speechSynthesis.getVoices();
+  koVoice = voices.find(v=>v.lang==='ko-KR' && v.name.includes('여'))
+    || voices.find(v=>v.lang==='ko-KR' && /female|woman|girl/i.test(v.name))
+    || voices.find(v=>v.lang==='ko-KR')
+    || null;
+}
+if(speechSynthesis.onvoiceschanged !== undefined){
+  speechSynthesis.onvoiceschanged = loadVoice;
+}
+loadVoice();
+
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang    = 'ko-KR';
+  u.rate    = 0.5;   // 더 천천히
+  u.pitch   = 1.1;   // 약간 높지만 자연스럽게
+  u.volume  = 1.0;
+  if(koVoice) u.voice = koVoice;
+  // 음성 목록이 아직 안 로드됐을 경우 재시도
+  if(!koVoice){
+    setTimeout(()=>{
+      loadVoice();
+      if(koVoice) u.voice = koVoice;
+      speechSynthesis.speak(u);
+    }, 200);
+  } else {
+    speechSynthesis.speak(u);
+  }
+}
+
+
+function makeStars(){
+  const wrap=document.getElementById('stars-wrap');
+  const emojis=['⭐','🌟','✨','💫','🌙','☀️','🌸','🌺'];
+  for(let i=0;i<18;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    s.style.cssText=`left:${Math.random()*95}%;top:${Math.random()*95}%;animation-delay:${Math.random()*2}s;font-size:${1+Math.random()*1.5}rem;`;
+    wrap.appendChild(s);
+  }
+}
+makeStars();
+
+// ══════════════════════════════
+// VOCAB
+// ══════════════════════════════
+function openVocab(cat){
+  currentCat=cat;
+  const data=vocabData[cat];
+  document.getElementById('vocab-title').textContent=data.title;
+  document.getElementById('vocab-badge').textContent=data.badge;
+  document.getElementById('vocab-badge').style.background=data.color;
+  const grid=document.getElementById('vocab-grid');
+  grid.innerHTML='';
+  data.items.forEach((item,i)=>{
+    const card=document.createElement('div');
+    card.className='vocab-card';
+    card.style.animationDelay=(i*0.05)+'s';
+    card.style.borderColor=data.color+'44';
+
+    // 숫자 카드: 사과를 갯수대로 표시
+    if(item.count !== undefined){
+      const rows=[];
+      for(let r=0;r<item.count;r+=5) rows.push('🍎'.repeat(Math.min(5,item.count-r)));
+      card.innerHTML=`
+        <div style="font-size:${item.count<=5?'1.6rem':'1.2rem'};line-height:1.5;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
+          ${rows.map(r=>`<div>${r}</div>`).join('')}
+        </div>
+        <div class="vocab-word">${item.w}</div>
+      `;
+    } else {
+      card.innerHTML=`
+        <span class="vocab-emoji">${item.e}</span>
+        <div class="vocab-word">${item.w}</div>
+      `;
+    }
+    card.addEventListener('click',()=>{
+      card.style.transform='scale(1.15)';
+      card.style.borderColor=data.color;
+      setTimeout(()=>{card.style.transform='';card.style.borderColor=data.color+'44';},300);
+      // speak 필드 있으면 우선 사용, 없으면 단어 그대로
+      const txt = item.speak || item.w;
+      speak(txt);
+    });
+    grid.appendChild(card);
+  });
+  showScreen('vocab-screen');
+}
+
+// ══════════════════════════════
+// SONGS
+// ══════════════════════════════
+function openSongs(){
+  renderChannelTabs();
+  renderSongs(currentChannel);
+  showScreen('songs-screen');
+}
+
+function renderChannelTabs(){
+  const wrap=document.getElementById('channel-tabs');
+  wrap.innerHTML='';
+  Object.entries(songsData).forEach(([key,ch])=>{
+    const btn=document.createElement('button');
+    btn.className='ch-tab'+(key===currentChannel?' active':'');
+    btn.textContent=ch.label;
+    btn.style.setProperty('--ch-color',ch.color);
+    btn.onclick=()=>{
+      currentChannel=key;
+      document.querySelectorAll('.ch-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderSongs(key);
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function renderSongs(chKey){
+  const ch=songsData[chKey];
+  const list=document.getElementById('songs-list');
+  list.innerHTML='';
+  ch.songs.forEach((song,i)=>{
+    const row=document.createElement('div');
+    row.className='song-row';
+    row.style.animationDelay=(i*0.05)+'s';
+    row.innerHTML=`
+      <div class="song-thumb">${song.thumb}</div>
+      <div class="song-info">
+        <div class="song-title">${song.title}</div>
+        <div class="song-ch">${ch.label}</div>
+      </div>
+      <div class="song-play">▶</div>`;
+    row.onclick=()=>playVideo(song.url, song.title);
+    list.appendChild(row);
+  });
+}
+
+// ══════════════════════════════
+// MATCH GAME
+// ══════════════════════════════
+function openMatch(){
+  renderMatchCatBtns();
+  buildMatch(matchCat);
+  showScreen('match-screen');
+}
+
+function renderMatchCatBtns(){
+  const wrap=document.getElementById('match-cat-select');
+  wrap.innerHTML='';
+  Object.entries(vocabData).forEach(([key,cat])=>{
+    const btn=document.createElement('button');
+    btn.className='mcat-btn'+(key===matchCat?' active':'');
+    btn.textContent=cat.badge+' '+cat.title;
+    btn.onclick=()=>{
+      matchCat=key;
+      document.querySelectorAll('.mcat-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      buildMatch(key);
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function buildMatch(cat){
+  const data=vocabData[cat];
+  // pick 6 random items
+  const pool=[...data.items].sort(()=>Math.random()-0.5).slice(0,6);
+  matchTotal=pool.length; matchScore=0;
+  document.getElementById('match-score').textContent='';
+
+  // emojis left col
+  const emojiCol=document.getElementById('match-emojis');
+  emojiCol.innerHTML='';
+  const shuffledEmojis=[...pool].sort(()=>Math.random()-0.5);
+  shuffledEmojis.forEach(item=>{
+    const card=document.createElement('div');
+    card.className='match-emoji-card';
+    card.dataset.word=item.w;
+    card.draggable=true;
+
+    // 숫자 카테고리: 사과 갯수 표시
+    if(item.count !== undefined){
+      const rows=[];
+      for(let r=0;r<item.count;r+=5) rows.push('🍎'.repeat(Math.min(5,item.count-r)));
+      card.style.fontSize = item.count<=5 ? '1.4rem' : '1.1rem';
+      card.style.lineHeight = '1.4';
+      card.innerHTML = rows.map(r=>`<div>${r}</div>`).join('');
+    } else {
+      card.textContent=item.e;
+    }
+
+    card.addEventListener('dragstart',e=>{
+      dragSrcWord=item.w;
+      card.classList.add('dragging');
+      e.dataTransfer.setData('text/plain',item.w);
+    });
+    card.addEventListener('dragend',()=>card.classList.remove('dragging'));
+    card.addEventListener('touchstart',e=>{ dragSrcWord=item.w; card.classList.add('dragging'); },{passive:true});
+    card.addEventListener('touchend',()=>card.classList.remove('dragging'));
+    emojiCol.appendChild(card);
+  });
+
+  // words right col — 숫자는 "1 — 일" 형태로 표시
+  const wordCol=document.getElementById('match-words');
+  wordCol.innerHTML='';
+  const shuffledWords=[...pool].sort(()=>Math.random()-0.5);
+  shuffledWords.forEach(item=>{
+    const card=document.createElement('div');
+    card.className='match-word-card';
+    card.textContent=item.w;
+    card.dataset.word=item.w;
+    card.addEventListener('dragover',e=>{ e.preventDefault(); card.classList.add('drag-over'); });
+    card.addEventListener('dragleave',()=>card.classList.remove('drag-over'));
+    card.addEventListener('drop',e=>{
+      e.preventDefault(); card.classList.remove('drag-over');
+      checkMatch(card, item.w);
+    });
+    wordCol.appendChild(card);
+  });
+}
+
+function checkMatch(wordCard, targetWord){
+  if(!dragSrcWord) return;
+  if(dragSrcWord===targetWord){
+    // correct!
+    wordCard.classList.add('correct');
+    // find and mark emoji card
+    document.querySelectorAll('.match-emoji-card').forEach(ec=>{
+      if(ec.dataset.word===dragSrcWord) ec.classList.add('matched');
+    });
+    matchScore++;
+    document.getElementById('match-score').textContent=`✅ ${matchScore} / ${matchTotal}`;
+    if(matchScore===matchTotal){ setTimeout(()=>{launchConfetti(); document.getElementById('match-score').textContent='🎉 완벽해요! 다 맞혔어요!';},300); }
+  } else {
+    wordCard.classList.add('wrong');
+    setTimeout(()=>wordCard.classList.remove('wrong'),500);
+  }
+  dragSrcWord=null;
+}
+
+function resetMatch(){ buildMatch(matchCat); }
+
+// ══════════════════════════════
+// CONFETTI
+// ══════════════════════════════
+function launchConfetti(){
+  const wrap=document.getElementById('confetti'); wrap.innerHTML='';
+  const colors=['#FF6B9D','#FFD93D','#4ECDC4','#5BB8F5','#A78BFA','#FF8C42','#6BCB77'];
+  for(let i=0;i<55;i++){
+    const p=document.createElement('div'); p.className='cp';
+    p.style.cssText=`left:${Math.random()*100}%;top:-20px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.5}s;animation-duration:${1+Math.random()*0.8}s;transform:rotate(${Math.random()*360}deg);border-radius:${Math.random()>0.5?'50%':'3px'};`;
+    wrap.appendChild(p);
+  }
+  setTimeout(()=>wrap.innerHTML='',2800);
+}
+</script>
+</body>
+</html>
