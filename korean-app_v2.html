@@ -408,6 +408,58 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   cursor: pointer;
 }
 .modal-close-btn:hover { background: #CFD8DC; }
+
+/* ── 연습 실시간 바 ── */
+.practice-bar {
+  background: var(--sky-light);
+  border-bottom: 1.5px solid #C5DFF8;
+  padding: 10px 24px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.practice-bar.visible { display: flex; }
+.practice-status { font-family:'Jua',sans-serif; font-size:0.95rem; color:#1A5FA8; flex:1; }
+.practice-my-turn {
+  font-family:'Jua',sans-serif; font-size:1rem; color:white;
+  background:var(--coral); padding:5px 16px; border-radius:20px;
+  animation:pulse 1s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.75} }
+.nominate-btn {
+  font-family:'Jua',sans-serif; font-size:0.85rem; padding:5px 14px;
+  border-radius:20px; border:none; background:var(--sky); color:white;
+  cursor:pointer; transition:all 0.2s;
+}
+.nominate-btn:hover { background:#1A7DC4; }
+/* 지목 모달 */
+.nominate-modal {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.35); z-index:1001;
+  align-items:center; justify-content:center;
+}
+.nominate-modal.open { display:flex; }
+.nominate-box {
+  background:white; border-radius:20px; padding:28px;
+  width:300px; max-width:90vw;
+  box-shadow:0 8px 40px rgba(0,0,0,0.18); text-align:center;
+}
+.nominate-title { font-family:'Jua',sans-serif; font-size:1.1rem; color:var(--text); margin-bottom:16px; }
+.nominate-students { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.nom-btn {
+  font-family:'Jua',sans-serif; font-size:1rem; padding:10px;
+  border:2px solid #E0E7EF; border-radius:12px; background:white;
+  cursor:pointer; transition:all 0.2s; color:var(--text);
+}
+.nom-btn:hover { border-color:var(--sky); background:var(--sky-light); color:#1A5FA8; }
+.nom-cancel {
+  font-family:'Jua',sans-serif; font-size:0.9rem; padding:8px; width:100%;
+  border:none; border-radius:30px; background:#ECEFF1; color:#607D8B; cursor:pointer;
+}
+/* 내 차례 강조 / 남 차례 흐리기 */
+.my-turn-highlight { outline: 3px solid var(--coral); border-radius:var(--radius); box-shadow:0 0 0 6px rgba(255,107,107,0.12); }
+.other-turn-dim { opacity:0.5; pointer-events:none; }
 </style>
 </head>
 <body>
@@ -532,6 +584,139 @@ async function deleteStudent(name) {
 document.addEventListener('DOMContentLoaded', loadStudents);
 </script>
 
+<script>
+// ══════════════════════════════════════════
+// 연습 실시간 동기화
+// ══════════════════════════════════════════
+let practiceSession = null; // { id, unit, q_index, current_player, status }
+let practiceSessionId = null;
+
+// 세션 로드
+async function loadPracticeSession() {
+  const { data } = await _supabase
+    .from('practice_session')
+    .select('*')
+    .order('id')
+    .limit(1)
+    .single();
+  if (data) {
+    practiceSession = data;
+    practiceSessionId = data.id;
+    applyPracticeState(data);
+  }
+}
+
+// 상태 적용 — 모든 화면에서 동일하게
+function applyPracticeState(session) {
+  practiceSession = session;
+  const bar = document.getElementById('practice-bar');
+  const statusEl = document.getElementById('practice-status');
+  const myTurnEl = document.getElementById('practice-my-turn');
+  const nomBtn = document.getElementById('practice-nominate-btn');
+  if (!bar) return;
+
+  const activeUnit = session.unit;
+  const player = session.current_player;
+  const isMyTurn = player && myName && player === myName;
+
+  // 연습 섹션이 활성화 중일 때만 바 표시
+  const quizSection = document.getElementById('u' + activeUnit + '-quiz');
+  if (quizSection && quizSection.classList.contains('active')) {
+    bar.classList.add('visible');
+  } else {
+    bar.classList.remove('visible');
+  }
+
+  // 문제 번호 동기화
+  if (activeUnit === 1 && session.q_index !== u1Idx) { u1Idx = session.q_index; renderU1(); }
+  if (activeUnit === 2 && session.q_index !== u2Idx) { u2Idx = session.q_index; renderU2(); }
+  if (activeUnit === 3 && session.q_index !== u3Idx) { u3Idx = session.q_index; renderU3(); }
+
+  // 상태 표시
+  if (!player) {
+    statusEl.textContent = '선생님이 지목 중...';
+    myTurnEl.style.display = 'none';
+  } else if (isMyTurn) {
+    statusEl.textContent = '🎯 내 차례!';
+    myTurnEl.style.display = 'inline-block';
+  } else {
+    statusEl.textContent = `👀 ${player} 차례`;
+    myTurnEl.style.display = 'none';
+  }
+
+  // 퀴즈 카드 강조/흐리기
+  const qcards = document.querySelectorAll('.card');
+  qcards.forEach(c => {
+    c.classList.remove('my-turn-highlight', 'other-turn-dim');
+    if (player) {
+      if (isMyTurn) c.classList.add('my-turn-highlight');
+      else c.classList.add('other-turn-dim');
+    }
+  });
+}
+
+// 선생님: 지목 모달 열기
+function openNominateModal() {
+  const modal = document.getElementById('nominate-modal');
+  const list = document.getElementById('nominate-list');
+  list.innerHTML = '';
+  STUDENTS.forEach(name => {
+    const btn = document.createElement('button');
+    btn.className = 'nom-btn';
+    btn.textContent = (checkedToday.has(name) ? '✅ ' : '⬜ ') + name;
+    btn.onclick = () => nominateStudent(name);
+    list.appendChild(btn);
+  });
+  modal.classList.add('open');
+}
+function closeNominateModal() {
+  document.getElementById('nominate-modal').classList.remove('open');
+}
+
+// 선생님: 학생 지목
+async function nominateStudent(name) {
+  closeNominateModal();
+  if (!practiceSessionId) return;
+
+  // 현재 활성 유닛 파악
+  let activeUnit = 1;
+  [1,2,3].forEach(n => {
+    if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n;
+  });
+  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : u3Idx;
+
+  await _supabase.from('practice_session').update({
+    current_player: name,
+    unit: activeUnit,
+    q_index: qIdx,
+    status: 'playing',
+    updated_at: new Date().toISOString()
+  }).eq('id', practiceSessionId);
+}
+
+// 연습 바 → 연습 탭 클릭 시 표시
+function showPracticeBar(unitNum) {
+  const bar = document.getElementById('practice-bar');
+  if (practiceSession && practiceSession.unit === unitNum) {
+    bar.classList.add('visible');
+  } else {
+    bar.classList.add('visible');
+  }
+}
+function hidePracticeBar() {
+  document.getElementById('practice-bar')?.classList.remove('visible');
+}
+
+// 실시간 구독
+_supabase.channel('practice-live')
+  .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'practice_session' }, payload => {
+    applyPracticeState(payload.new);
+  })
+  .subscribe();
+
+document.addEventListener('DOMContentLoaded', loadPracticeSession);
+</script>
+
 <header class="app-header">
   <div class="logo" onclick="showTOC()">📚 한글학교 한국어 2</div>
   <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -569,6 +754,23 @@ document.addEventListener('DOMContentLoaded', loadStudents);
       <button onclick="addStudent()">추가</button>
     </div>
     <button class="modal-close-btn" onclick="closeEditModal()">닫기</button>
+  </div>
+</div>
+
+<!-- 연습 실시간 바 -->
+<div class="practice-bar" id="practice-bar">
+  <span style="font-family:'Jua',sans-serif;font-size:0.88rem;color:#1A5FA8;white-space:nowrap;">✏️ 연습</span>
+  <span class="practice-status" id="practice-status">대기 중...</span>
+  <span class="practice-my-turn" id="practice-my-turn" style="display:none;">🎯 내 차례!</span>
+  <button class="nominate-btn" id="practice-nominate-btn" onclick="openNominateModal()">🎯 지목</button>
+</div>
+
+<!-- 지목 모달 -->
+<div class="nominate-modal" id="nominate-modal" onclick="if(event.target===this)closeNominateModal()">
+  <div class="nominate-box">
+    <div class="nominate-title">🎯 누구 차례?</div>
+    <div class="nominate-students" id="nominate-list"></div>
+    <button class="nom-cancel" onclick="closeNominateModal()">취소</button>
   </div>
 </div>
 
@@ -1248,6 +1450,10 @@ function switchUnit(n){
   document.getElementById('u'+unit+'-'+sec).classList.add('active');
   const map={vocab:0,grammar:1,quiz:2};
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
+  // 연습 탭이면 바 표시, 아니면 숨김
+  const bar = document.getElementById('practice-bar');
+  if (sec === 'quiz') { bar && bar.classList.add('visible'); }
+  else { bar && bar.classList.remove('visible'); }
 }
 
 // ══════════════════════════════════════════
