@@ -422,7 +422,7 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   top: 0;
   z-index: 100;
 }
-.practice-bar.visible { display: flex !important; }
+.practice-bar.visible { display: flex; }
 .practice-status { font-family:'Jua',sans-serif; font-size:0.95rem; color:#1A5FA8; flex:1; }
 .practice-my-turn {
   font-family:'Jua',sans-serif; font-size:1rem; color:white;
@@ -462,7 +462,12 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 }
 /* 내 차례 강조 / 남 차례 흐리기 */
 .my-turn-highlight { outline: 3px solid var(--coral); border-radius:var(--radius); box-shadow:0 0 0 6px rgba(255,107,107,0.12); }
-.other-turn-dim { opacity:0.5; pointer-events:none; }
+.other-turn-dim { opacity:0.45; }
+.other-turn-dim .btn-check,
+.other-turn-dim .btn-next,
+.other-turn-dim .psel-btn,
+.other-turn-dim .wcard,
+.other-turn-dim .drop-zone { pointer-events:none; }
 </style>
 </head>
 <body>
@@ -648,7 +653,9 @@ function applyPracticeState(session, showPopup = true) {
   lastPlayer = player;
 
   // 바 상태
-  statusEl.textContent = player ? `🎯 ${player} 차례` : '선생님이 지목 중...';
+  const bar = document.getElementById('practice-bar');
+  if (bar) bar.classList.add('visible');
+  statusEl.textContent = player ? `🎯 ${player} 차례` : (isTeacher ? '지목해 주세요 ☝️' : '선생님이 지목 중...');
 
   // 결과 배너 — status가 correct/wrong 일 때만
   if (showPopup && (session.status === 'correct' || session.status === 'wrong')) {
@@ -669,11 +676,22 @@ function applyPracticeState(session, showPopup = true) {
   if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
   if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
 
-  // 카드 강조
+  // 카드 강조 — 내 차례면 highlight, 남 차례면 dim
+  const myName = urlName;
   document.querySelectorAll('.card').forEach(c => {
     c.classList.remove('my-turn-highlight', 'other-turn-dim');
-    if (player) c.classList.add('my-turn-highlight');
+    if (player) {
+      if (!myName || myName === player) {
+        c.classList.add('my-turn-highlight');
+      } else {
+        c.classList.add('other-turn-dim');
+      }
+    }
   });
+
+  // 내 차례 배지 표시
+  const myTurnEl = document.getElementById('practice-my-turn');
+  if (myTurnEl) myTurnEl.style.display = (player && myName && myName === player) ? 'inline-block' : 'none';
 
   // 손들기 UI
   renderRaisedHands(hands);
@@ -1043,7 +1061,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="complete-emoji">🎉</div>
       <div class="complete-title">잘했어요! Great job!</div>
       <div class="complete-score" id="u1-complete-score"></div>
-      <button class="btn btn-next" onclick="switchUnit(2)">2과로 가요! ▶</button>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-reset" onclick="restartAll()">🔄 1과부터 다시</button>
+        <button class="btn btn-next" onclick="switchUnit(2)">2과로 가요! ▶</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1183,7 +1204,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="complete-emoji">🏆</div>
       <div class="complete-title">최고예요! Amazing!</div>
       <div class="complete-score" id="u2-complete-score"></div>
-      <button class="btn btn-next" onclick="restartAll()">처음부터 다시! 🔄</button>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-reset" onclick="restartAll()">🔄 1과부터 다시</button>
+        <button class="btn btn-next" onclick="switchUnit(3)">3과로 가요! ▶</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1311,7 +1335,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="complete-emoji">🌟</div>
       <div class="complete-title">완벽해요! Perfect!</div>
       <div class="complete-score" id="u3-complete-score"></div>
-      <button class="btn btn-next" onclick="restartAll()">처음부터 다시! 🔄</button>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-reset" onclick="restartAll()">🔄 1과부터 다시</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1509,7 +1535,13 @@ function switchUnit(n){
   const map={vocab:0,grammar:1,quiz:2};
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
   const bar = document.getElementById('practice-bar');
-  if (bar) bar.style.display = (sec === 'quiz') ? 'flex' : 'none';
+  if (bar) {
+    if (sec === 'quiz') {
+      bar.classList.add('visible');
+    } else {
+      bar.classList.remove('visible');
+    }
+  }
   // 연습 탭 열리면 학생 손들기 버튼 렌더
   if (sec === 'quiz' && !isTeacher) renderRaiseHandBtns();
 }
@@ -1534,7 +1566,7 @@ function renderU1(){
 
   const fb=document.getElementById('u1-fb');
   fb.className='feedback'; fb.innerHTML='';
-  document.getElementById('u1-next').disabled=true;
+  document.getElementById('u1-next').disabled = !isTeacher;
 
   // build word bank: correct + decoys
   const bank=document.getElementById('u1-wordbank'); bank.innerHTML='';
@@ -1585,15 +1617,16 @@ function checkU1(){
   const built=`${u1SelectedSubj}${u1SelectedParticle} ${u1SelectedVerb}`;
   if(built===q.answer){
     fb.className='feedback correct';
-    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer}</div>`;
-    u1Score++; document.getElementById('u1-next').disabled=false;
+    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer}</div><div style="font-size:0.85rem;margin-top:4px;color:#388E3C;">${q.english}</div>`;
+    u1Score++;
+    document.getElementById('u1-next').disabled=false;
     document.getElementById('u1-prog-score').textContent=`⭐ ${u1Score}점`;
     launchConfetti();
-    syncResult(true, q.answer);
+    syncResult(true);
   } else {
     fb.className='feedback wrong';
     fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
-    syncResult(false, built);
+    syncResult(false);
   }
 }
 function hintU1(){ const q=u1Questions[u1Idx]; const fb=document.getElementById('u1-fb'); fb.className='feedback hint'; fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`; }
@@ -1673,7 +1706,7 @@ function renderU2(){
   document.getElementById('u2-qsub').textContent='Click or drag cards to build the sentence. Drag inside to reorder!';
 
   const fb=document.getElementById('u2-fb'); fb.className='feedback'; fb.innerHTML='';
-  document.getElementById('u2-next').disabled=true;
+  document.getElementById('u2-next').disabled = !isTeacher;
 
   // Build word bank
   const bank=document.getElementById('u2-wordbank'); bank.innerHTML='';
@@ -1767,14 +1800,11 @@ function updateU2Progress(){
 
 function restartAll(){
   u1Idx=0;u1Score=0;u2Idx=0;u2Score=0;u3Idx=0;u3Score=0;
-  document.getElementById('u1-qcard').style.display='block';
-  document.getElementById('u1-complete').classList.remove('show');
-  document.getElementById('u2-qcard').style.display='block';
-  document.getElementById('u2-complete').classList.remove('show');
-  document.getElementById('u3-qcard').style.display='block';
-  document.getElementById('u3-complete').classList.remove('show');
+  ['u1-qcard','u2-qcard','u3-qcard'].forEach(id=>document.getElementById(id).style.display='block');
+  ['u1-complete','u2-complete','u3-complete'].forEach(id=>document.getElementById(id).classList.remove('show'));
   renderU1(); renderU2(); renderU3();
   switchUnit(1); switchSection(1,'quiz');
+  syncNext(1, 0);
 }
 
 // ══════════════════════════════════════════
@@ -1996,7 +2026,7 @@ function renderU3(){
   document.getElementById('u3-scene').textContent=q.scene;
   document.getElementById('u3-qenglish').textContent='👉 '+q.english;
   const fb=document.getElementById('u3-fb'); fb.className='feedback'; fb.innerHTML='';
-  document.getElementById('u3-next').disabled=true;
+  document.getElementById('u3-next').disabled = !isTeacher;
   renderU3Zone();
 
   const bank=document.getElementById('u3-wordbank'); bank.innerHTML='';
@@ -2026,7 +2056,7 @@ function checkU3(){
 }
 
 // ── 결과 동기화 ──
-async function syncResult(isCorrect) {
+async function syncResult(isCorrect, answer) {
   if (!practiceSessionId) return;
   await _supabase.from('practice_session').update({
     status: isCorrect ? 'correct' : 'wrong',
