@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yu Family Korean School</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0d1b2a;
+  --navy2:  #1b2d42;
+  --gold:   #c9a84c;
+  --gold-lt:#e8d5a3;
+  --gold-dk:#a07830;
+  --white:  #ffffff;
+  --muted:  rgba(255,255,255,.52);
+  --border: rgba(201,168,76,.25);
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--navy);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--white);
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(201,168,76,.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 85%, rgba(201,168,76,.07) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+
+.corner {
+  position: fixed; width: 72px; height: 72px;
+  opacity: .28; z-index: 1;
+}
+.corner.tl { top:20px; left:20px;   border-top:1.5px solid var(--gold); border-left:1.5px solid var(--gold); }
+.corner.tr { top:20px; right:20px;  border-top:1.5px solid var(--gold); border-right:1.5px solid var(--gold); }
+.corner.bl { bottom:20px; left:20px;  border-bottom:1.5px solid var(--gold); border-left:1.5px solid var(--gold); }
+.corner.br { bottom:20px; right:20px; border-bottom:1.5px solid var(--gold); border-right:1.5px solid var(--gold); }
+
+.wrap {
+  position: relative; z-index: 2;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 48px 24px;
+}
+
+/* ── HEADER ── */
+.site-header { text-align: center; margin-bottom: 44px; animation: fadeDown .8s ease both; }
+
+.crest {
+  width: 92px; height: 92px; border-radius: 50%;
+  border: 1.5px solid rgba(201,168,76,.45);
+  background: radial-gradient(circle, rgba(201,168,76,.13), rgba(201,168,76,.03));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 0 32px rgba(201,168,76,.13);
+}
+
+.site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 4.5vw, 44px);
+  font-weight: 600; letter-spacing: .05em;
+  color: var(--white); line-height: 1.18; margin-bottom: 8px;
+}
+.site-title em { font-style: italic; color: var(--gold-lt); }
+
+.site-subtitle {
+  font-size: 11px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+}
+
+.divider { display: flex; align-items: center; gap: 10px; justify-content: center; }
+.divider-line { width: 44px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider-line.r { background: linear-gradient(90deg, var(--gold), transparent); }
+.divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+
+/* ── LOGIN ── */
+#loginBox { width: 100%; max-width: 360px; animation: fadeUp .9s .15s ease both; }
+
+.login-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border); border-radius: 16px;
+  padding: 34px 30px; backdrop-filter: blur(12px); text-align: center;
+}
+
+.login-label {
+  font-size: 10px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 16px; display: block;
+}
+
+.pw-wrap { position: relative; margin-bottom: 14px; }
+
+.pw-input {
+  width: 100%; padding: 13px 46px 13px 18px;
+  border-radius: 10px; border: 1px solid rgba(201,168,76,.3);
+  background: rgba(255,255,255,.06); color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif; font-size: 15px;
+  letter-spacing: .1em; outline: none; text-align: center;
+  transition: border-color .2s, background .2s;
+}
+.pw-input::placeholder { color: rgba(255,255,255,.22); letter-spacing: .05em; }
+.pw-input:focus { border-color: var(--gold); background: rgba(255,255,255,.09); }
+
+.eye-btn {
+  position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); font-size: 15px; padding: 4px; transition: color .2s;
+}
+.eye-btn:hover { color: var(--gold-lt); }
+
+.enter-btn {
+  width: 100%; padding: 13px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold-dk), var(--gold));
+  color: var(--navy); font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; border: none; cursor: pointer;
+  transition: opacity .18s, transform .12s;
+}
+.enter-btn:hover { opacity: .88; }
+.enter-btn:active { transform: scale(.98); }
+
+.error-msg { margin-top: 11px; font-size: 12px; color: #ff8a8a; min-height: 16px; }
+
+/* ── APP CARDS ── */
+#appBox { display: none; width: 100%; max-width: 840px; animation: fadeUp .7s ease both; }
+
+.welcome-text { text-align: center; margin-bottom: 28px; }
+.welcome-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 600; color: var(--gold-lt); margin-bottom: 5px;
+}
+.welcome-text p { font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+
+.app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+
+.app-card {
+  background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  border-radius: 16px; padding: 30px 22px 26px;
+  text-align: center; cursor: pointer;
+  transition: all .25s; text-decoration: none;
+  display: block; position: relative; overflow: hidden;
+}
+.app-card::before {
+  content: ''; position: absolute; inset: 0; opacity: 0;
+  transition: opacity .25s; border-radius: 16px;
+}
+.app-card.kinder::before { background: linear-gradient(135deg, rgba(255,107,157,.12), rgba(255,217,61,.08)); }
+.app-card.elem::before   { background: linear-gradient(135deg, rgba(91,184,245,.12), rgba(78,205,196,.08)); }
+.app-card.adult::before  { background: linear-gradient(135deg, rgba(15,124,110,.15), rgba(26,95,168,.08)); }
+.app-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,.52); }
+.app-card:hover::before { opacity: 1; }
+
+.app-icon  { font-size: 34px; margin-bottom: 12px; display: block; position: relative; z-index: 1; }
+.app-level { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; position: relative; z-index: 1; }
+.app-name  { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 6px; line-height: 1.4; position: relative; z-index: 1; }
+.app-desc  { font-size: 11.5px; color: var(--muted); line-height: 1.6; position: relative; z-index: 1; }
+.app-arrow { margin-top: 14px; font-size: 10px; letter-spacing: .14em; color: var(--gold); text-transform: uppercase; position: relative; z-index: 1; transition: letter-spacing .2s; }
+.app-card:hover .app-arrow { letter-spacing: .22em; }
+
+/* edit pencil */
+.edit-icon {
+  position: absolute; top: 10px; right: 10px; z-index: 10;
+  background: rgba(201,168,76,.18); border: 1px solid rgba(201,168,76,.3);
+  border-radius: 6px; padding: 4px 7px; font-size: 12px;
+  cursor: pointer; display: none; transition: background .15s;
+}
+.edit-icon:hover { background: rgba(201,168,76,.38); }
+.edit-mode .edit-icon { display: block; }
+
+/* ── EDIT MODAL ── */
+.modal-bg {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(5px);
+  align-items: center; justify-content: center;
+}
+.modal-bg.open { display: flex; }
+
+.modal {
+  background: var(--navy2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px 28px 22px;
+  width: 90%; max-width: 400px; animation: fadeUp .3s ease;
+}
+.modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold-lt); margin-bottom: 18px; }
+.modal label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 5px; }
+.modal input, .modal textarea {
+  width: 100%; padding: 10px 12px; margin-bottom: 13px;
+  border-radius: 8px; border: 1px solid rgba(201,168,76,.3);
+  background: rgba(255,255,255,.06); color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif; font-size: 13px;
+  outline: none; resize: vertical; transition: border-color .2s;
+}
+.modal input:focus, .modal textarea:focus { border-color: var(--gold); }
+.modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
+.modal-cancel {
+  padding: 9px 18px; border-radius: 8px;
+  background: transparent; border: 1px solid rgba(255,255,255,.2);
+  color: var(--muted); font-size: 12px; cursor: pointer;
+}
+.modal-cancel:hover { border-color: var(--muted); color: var(--white); }
+.modal-save {
+  padding: 9px 20px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--gold-dk), var(--gold));
+  color: var(--navy); font-size: 12px; font-weight: 700;
+  border: none; cursor: pointer; transition: opacity .15s;
+}
+.modal-save:hover { opacity: .88; }
+
+/* ── ADMIN BAR ── */
+.admin-bar {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,27,42,.92); border-top: 1px solid rgba(201,168,76,.3);
+  padding: 10px 20px; text-align: center;
+  font-size: 11px; color: var(--gold); letter-spacing: .08em;
+  backdrop-filter: blur(8px);
+}
+.admin-bar.show { display: block; }
+.admin-bar button {
+  margin-left: 14px; padding: 4px 14px;
+  border-radius: 20px; border: 1px solid var(--gold);
+  background: transparent; color: var(--gold);
+  font-size: 11px; cursor: pointer; transition: background .15s;
+}
+.admin-bar button:hover { background: rgba(201,168,76,.2); }
+
+/* ── FOOTER ── */
+.site-footer {
+  margin-top: 44px; text-align: center;
+  font-size: 11px; color: rgba(255,255,255,.22);
+  letter-spacing: .06em; line-height: 1.9;
+  animation: fadeUp 1s .4s ease both;
+}
+
+@keyframes fadeDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp   { from{opacity:0;transform:translateY(18px)}  to{opacity:1;transform:translateY(0)} }
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)} 40%{transform:translateX(8px)}
+  60%{transform:translateX(-5px)} 80%{transform:translateX(5px)}
+}
+
+@media (max-width: 600px) {
+  .login-card { padding: 26px 18px; }
+  .app-grid { grid-template-columns: 1fr; }
+  .corner { width: 48px; height: 48px; }
+}
+</style>
+</head>
+<body>
+
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="crest">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- body -->
+        <ellipse cx="28" cy="36" rx="14" ry="12" fill="#c9a84c"/>
+        <!-- head -->
+        <ellipse cx="28" cy="21" rx="12" ry="11" fill="#c9a84c"/>
+        <!-- ears -->
+        <polygon points="18,13 13,5 21,11" fill="#c9a84c"/>
+        <polygon points="38,13 43,5 35,11" fill="#c9a84c"/>
+        <polygon points="18,13 15,7 21,11" fill="#e8d5a3" opacity=".55"/>
+        <polygon points="38,13 41,7 35,11" fill="#e8d5a3" opacity=".55"/>
+        <!-- face whites -->
+        <ellipse cx="28" cy="24" rx="7" ry="5" fill="#e8d5a3" opacity=".3"/>
+        <!-- eyes -->
+        <ellipse cx="23" cy="20" rx="2.8" ry="3.2" fill="#1b2d42"/>
+        <ellipse cx="33" cy="20" rx="2.8" ry="3.2" fill="#1b2d42"/>
+        <!-- pupils / highlight -->
+        <ellipse cx="23" cy="21" rx="1.2" ry="2" fill="#e8d5a3"/>
+        <ellipse cx="33" cy="21" rx="1.2" ry="2" fill="#e8d5a3"/>
+        <circle cx="23.8" cy="19.5" r=".6" fill="white" opacity=".8"/>
+        <circle cx="33.8" cy="19.5" r=".6" fill="white" opacity=".8"/>
+        <!-- nose -->
+        <ellipse cx="28" cy="25.5" rx="2.2" ry="1.4" fill="#a07830"/>
+        <!-- mouth -->
+        <path d="M25 27.5 Q28 30 31 27.5" stroke="#a07830" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        <!-- whiskers -->
+        <line x1="13" y1="24" x2="23" y2="25" stroke="#e8d5a3" stroke-width=".9" opacity=".65"/>
+        <line x1="13" y1="26.5" x2="23" y2="26.5" stroke="#e8d5a3" stroke-width=".9" opacity=".65"/>
+        <line x1="43" y1="24" x2="33" y2="25" stroke="#e8d5a3" stroke-width=".9" opacity=".65"/>
+        <line x1="43" y1="26.5" x2="33" y2="26.5" stroke="#e8d5a3" stroke-width=".9" opacity=".65"/>
+        <!-- forehead stripes -->
+        <path d="M25 12 Q28 10 31 12" stroke="#a07830" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        <line x1="28" y1="10" x2="28" y2="13" stroke="#a07830" stroke-width="1.1"/>
+        <!-- body stripes -->
+        <path d="M17,31 Q19,28 21,32" stroke="#a07830" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".7"/>
+        <path d="M39,31 Q37,28 35,32" stroke="#a07830" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".7"/>
+        <path d="M21,38 Q23,35 25,39" stroke="#a07830" stroke-width="1" fill="none" stroke-linecap="round" opacity=".5"/>
+        <path d="M35,38 Q33,35 31,39" stroke="#a07830" stroke-width="1" fill="none" stroke-linecap="round" opacity=".5"/>
+        <!-- tail -->
+        <path d="M41,40 Q48,36 47,44" stroke="#c9a84c" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <path d="M41,40 Q48,36 47,44" stroke="#a07830" stroke-width="1" fill="none" stroke-linecap="round" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <h1 class="site-title"><em>Yu Family</em><br>Korean School</h1>
+    <p class="site-subtitle">Kate HaeOk Shin Yu · 신해옥</p>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line r"></div>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <div id="loginBox">
+    <div class="login-card">
+      <span class="login-label">Enter Access Code · 비밀번호</span>
+      <div class="pw-wrap">
+        <input class="pw-input" type="password" id="pwInput"
+          placeholder="비밀번호를 입력하세요"
+          onkeydown="if(event.key==='Enter')checkPw()">
+        <button class="eye-btn" onclick="toggleEye()" id="eyeBtn">👁</button>
+      </div>
+      <button class="enter-btn" onclick="checkPw()">Enter</button>
+      <div class="error-msg" id="errMsg"></div>
+    </div>
+  </div>
+
+  <!-- APP CARDS -->
+  <div id="appBox">
+    <div class="welcome-text">
+      <h2>어서 오세요! 환영합니다 🐯</h2>
+      <p>수업을 선택해 주세요 · Please select your class</p>
+    </div>
+    <div class="app-grid" id="appGrid">
+
+      <a class="app-card kinder" href="halmoni_kinder.html" id="card0">
+        <span class="edit-icon" onclick="openEdit(event,0)">✏️</span>
+        <span class="app-icon" id="icon0">🌷</span>
+        <div class="app-level" id="level0">Kindergarten · 유아반</div>
+        <div class="app-name"  id="name0">할머니 스쿨</div>
+        <div class="app-desc"  id="desc0">한글 기초 · 노래 · 그림<br>Hangul Basics & Fun</div>
+        <div class="app-arrow">입장하기 →</div>
+      </a>
+
+      <a class="app-card elem" href="korean-app_v2.html" id="card1">
+        <span class="edit-icon" onclick="openEdit(event,1)">✏️</span>
+        <span class="app-icon" id="icon1">📖</span>
+        <div class="app-level" id="level1">Elementary · 초등반</div>
+        <div class="app-name"  id="name1">한글학교 한국어 2권</div>
+        <div class="app-desc"  id="desc1">어휘 · 문법 · 말하기<br>Vocabulary & Grammar</div>
+        <div class="app-arrow">입장하기 →</div>
+      </a>
+
+      <a class="app-card adult" href="sejong-korean_v1.html" id="card2">
+        <span class="edit-icon" onclick="openEdit(event,2)">✏️</span>
+        <span class="app-icon" id="icon2">🏛</span>
+        <div class="app-level" id="level2">Adult · 성인반</div>
+        <div class="app-name"  id="name2">세종 한국어 1A (2022)</div>
+        <div class="app-desc"  id="desc2">새 어휘 · 문법 · 실생활<br>Sejong Korean</div>
+        <div class="app-arrow">입장하기 →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    © 2025 Kate HaeOk Shin Yu · All rights reserved<br>
+    Yu Family Korean School
+  </footer>
+
+</div>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  🐯 편집 모드 — 카드의 ✏️ 를 클릭해서 수정하세요
+  <button onclick="openPwModal()">🔑 비밀번호 변경</button>
+  <button onclick="exitAdmin()">편집 종료</button>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3>카드 편집</h3>
+    <label>아이콘 (이모지)</label>
+    <input type="text" id="editIcon" maxlength="4">
+    <label>레벨 텍스트</label>
+    <input type="text" id="editLevel">
+    <label>카드 제목</label>
+    <input type="text" id="editName">
+    <label>설명 (줄바꿈은 엔터)</label>
+    <textarea id="editDesc" rows="3"></textarea>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">취소</button>
+      <button class="modal-save"   onclick="saveEdit()">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD CHANGE MODAL -->
+<div class="modal-bg" id="pwModalBg">
+  <div class="modal">
+    <h3>🔑 비밀번호 변경</h3>
+    <label>일반 접속 비밀번호 (현재: <span id="curPwDisplay">yufamily</span>)</label>
+    <input type="text" id="newPw" placeholder="새 비밀번호 입력">
+    <label>관리자 비밀번호 (현재: <span id="curAdminDisplay">0109</span>)</label>
+    <input type="text" id="newAdmin" placeholder="새 관리자 비밀번호 입력">
+    <div style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:12px;line-height:1.6;">
+      ⚠️ 변경은 이 세션에서만 유효해요.<br>
+      영구 저장하려면 index.html 파일의 PW / ADMIN 값을 직접 수정 후 GitHub에 올려주세요.
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closePwModal()">취소</button>
+      <button class="modal-save"   onclick="savePw()">변경</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let PW    = 'yufamily';
+let ADMIN = '0109';
+let editingIdx = -1;
+
+function checkPw() {
+  const val = document.getElementById('pwInput').value.trim();
+  const err = document.getElementById('errMsg');
+  if (val === PW || val === ADMIN) {
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('appBox').style.display = 'block';
+    if (val === ADMIN) activateAdmin();
+  } else {
+    err.textContent = '비밀번호가 맞지 않아요. Please try again.';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+    const card = document.querySelector('.login-card');
+    card.style.animation = 'none';
+    void card.offsetHeight;
+    card.style.animation = 'shake .4s ease';
+  }
+}
+
+function toggleEye() {
+  const inp = document.getElementById('pwInput');
+  const btn = document.getElementById('eyeBtn');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+
+function activateAdmin() {
+  document.getElementById('appGrid').classList.add('edit-mode');
+  document.getElementById('adminBar').classList.add('show');
+}
+
+function exitAdmin() {
+  document.getElementById('appGrid').classList.remove('edit-mode');
+  document.getElementById('adminBar').classList.remove('show');
+}
+
+// ── CARD EDIT ──
+function openEdit(e, idx) {
+  e.preventDefault(); e.stopPropagation();
+  editingIdx = idx;
+  document.getElementById('editIcon').value  = document.getElementById('icon'+idx).textContent.trim();
+  document.getElementById('editLevel').value = document.getElementById('level'+idx).textContent.trim();
+  document.getElementById('editName').value  = document.getElementById('name'+idx).textContent.trim();
+  document.getElementById('editDesc').value  = document.getElementById('desc'+idx).innerText.trim();
+  document.getElementById('modalBg').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  editingIdx = -1;
+}
+
+function saveEdit() {
+  if (editingIdx < 0) return;
+  const i = editingIdx;
+  document.getElementById('icon'+i).textContent  = document.getElementById('editIcon').value;
+  document.getElementById('level'+i).textContent = document.getElementById('editLevel').value;
+  document.getElementById('name'+i).textContent  = document.getElementById('editName').value;
+  document.getElementById('desc'+i).innerHTML    = document.getElementById('editDesc').value.replace(/\n/g,'<br>');
+  closeModal();
+}
+
+document.getElementById('modalBg').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ── PASSWORD CHANGE ──
+function openPwModal() {
+  document.getElementById('newPw').value    = '';
+  document.getElementById('newAdmin').value = '';
+  document.getElementById('curPwDisplay').textContent    = PW;
+  document.getElementById('curAdminDisplay').textContent = ADMIN;
+  document.getElementById('pwModalBg').classList.add('open');
+}
+
+function closePwModal() {
+  document.getElementById('pwModalBg').classList.remove('open');
+}
+
+function savePw() {
+  const newPw    = document.getElementById('newPw').value.trim();
+  const newAdmin = document.getElementById('newAdmin').value.trim();
+  if (newPw)    PW    = newPw;
+  if (newAdmin) ADMIN = newAdmin;
+  document.getElementById('curPwDisplay').textContent    = PW;
+  document.getElementById('curAdminDisplay').textContent = ADMIN;
+  closePwModal();
+  // show confirmation in admin bar
+  const bar = document.getElementById('adminBar');
+  const orig = bar.childNodes[0].textContent;
+  bar.childNodes[0].textContent = '✅ 비밀번호가 변경됐어요! (이 세션에서만 유효)';
+  setTimeout(() => { bar.childNodes[0].textContent = orig; }, 3000);
+}
+
+document.getElementById('pwModalBg').addEventListener('click', function(e) {
+  if (e.target === this) closePwModal();
+});
+</script>
+</body>
+</html>
