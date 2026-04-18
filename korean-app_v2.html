@@ -474,7 +474,10 @@ const SUPABASE_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let STUDENTS = [];
+// URL 역할 파악 — 여기서 먼저 선언
+const urlParams = new URLSearchParams(window.location.search);
+const isTeacher = urlParams.has('teacher');
+const urlName   = urlParams.get('name');
 let myName = null;
 let checkedToday = new Set();
 
@@ -497,42 +500,55 @@ async function loadAttendance() {
   renderAttendance();
 }
 
-// ── 출석 체크인 ── (한 컴퓨터에서 여러 명 가능)
+// ── 출석 체크인 (토글 가능) ──
 async function checkIn(name) {
-  if (checkedToday.has(name)) return;
-  const { error } = await _supabase.from('attendance')
-    .upsert({ student_name: name, class_date: todayStr() }, { onConflict: 'student_name,class_date' });
-  if (!error) { checkedToday.add(name); renderAttendance(); }
+  if (checkedToday.has(name)) {
+    // 토글: 체크 취소
+    const { error } = await _supabase.from('attendance')
+      .delete().eq('student_name', name).eq('class_date', todayStr());
+    if (!error) { checkedToday.delete(name); renderAttendance(); }
+  } else {
+    // 체크인
+    const { error } = await _supabase.from('attendance')
+      .upsert({ student_name: name, class_date: todayStr() }, { onConflict: 'student_name,class_date' });
+    if (!error) { checkedToday.add(name); renderAttendance(); }
+  }
 }
 
-// ── 출석 UI 렌더 ── (myName 체크 제거 → 여러 명 체크 가능)
+// ── 출석 UI 렌더 ──
 function renderAttendance() {
   const container = document.getElementById('att-students');
   if (!container) return;
   container.innerHTML = '';
   if (STUDENTS.length === 0) {
-    container.innerHTML = '<span style="font-size:0.85rem;color:var(--muted);">학생 없음 — 🔧 버튼으로 추가하세요</span>';
+    container.innerHTML = '<span style="font-size:0.85rem;color:var(--muted);">학생 없음</span>';
     return;
   }
   STUDENTS.forEach(name => {
     const chip = document.createElement('div');
     chip.className = 'att-chip' + (checkedToday.has(name) ? ' checked' : '');
     chip.textContent = name;
-    if (!checkedToday.has(name)) {
-      chip.onclick = () => {
-        if (confirm(name + '으로 출석 체크할까요?')) checkIn(name);
-      };
-    }
+    chip.onclick = () => {
+      const action = checkedToday.has(name) ? '출석 취소할까요?' : '으로 출석 체크할까요?';
+      if (confirm(name + (checkedToday.has(name) ? ' 출석 취소할까요?' : ' 출석 체크할까요?'))) checkIn(name);
+    };
     container.appendChild(chip);
   });
+
+  // 선생님만 학생관리 버튼 표시
+  const editBtn = document.getElementById('att-edit-btn');
+  if (editBtn) editBtn.style.display = isTeacher ? 'inline-block' : 'none';
 }
 
-// ── 실시간 구독 (INSERT + UPDATE 둘 다) ──
+// ── 실시간 구독 (INSERT + UPDATE + DELETE) ──
 _supabase.channel('att-live')
-  .on('postgres_changes', { event: '*', schema: 'public', table: 'attendance' }, payload => {
+  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'attendance' }, payload => {
     if (payload.new && payload.new.class_date === todayStr()) {
       checkedToday.add(payload.new.student_name); renderAttendance();
     }
+  })
+  .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'attendance' }, payload => {
+    if (payload.old) { checkedToday.delete(payload.old.student_name); renderAttendance(); }
   })
   .subscribe();
 
@@ -588,29 +604,19 @@ document.addEventListener('DOMContentLoaded', loadStudents);
 
 <script>
 // ══════════════════════════════════════════
-// URL 역할 파악
-// ?teacher  → 선생님 모드
-// ?name=리아 → 리아로 자동 로그인
+// URL 역할 / 자동 로그인 초기화
+// isTeacher, urlName 은 위 스크립트에서 선언됨
 // ══════════════════════════════════════════
-const urlParams = new URLSearchParams(window.location.search);
-const isTeacher = urlParams.has('teacher');
-const urlName   = urlParams.get('name'); // 학생 자동 로그인
-
-// 선생님이면 지목 버튼 표시, 아니면 숨김
 document.addEventListener('DOMContentLoaded', () => {
   const nomBtn = document.getElementById('practice-nominate-btn');
   if (nomBtn) nomBtn.style.display = isTeacher ? 'inline-block' : 'none';
 
   // URL에 이름 있으면 자동 출석 체크
   if (urlName && !isTeacher) {
-    // loadStudents 완료 후 자동 체크인
     const tryAutoCheckin = setInterval(() => {
       if (STUDENTS.length > 0) {
         clearInterval(tryAutoCheckin);
-        if (STUDENTS.includes(urlName)) {
-          myName = urlName;
-          checkIn(urlName);
-        }
+        if (STUDENTS.includes(urlName)) checkIn(urlName);
       }
     }, 300);
   }
@@ -766,7 +772,7 @@ document.addEventListener('DOMContentLoaded', loadPracticeSession);
     <span style="font-size:0.85rem;color:var(--muted);">로딩 중...</span>
   </div>
   <span class="att-date" id="att-date"></span>
-  <button class="att-edit-btn" onclick="openEditModal()">🔧 학생 관리</button>
+  <button class="att-edit-btn" id="att-edit-btn" onclick="openEditModal()">🔧 학생 관리</button>
 </div>
 <script>
   document.getElementById('att-date').textContent =
