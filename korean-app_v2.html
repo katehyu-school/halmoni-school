@@ -50,16 +50,15 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
 .toc-title { font-family:'Jua',sans-serif; font-size:1.8rem; color:var(--sky); margin-bottom:4px; }
 .toc-sub { font-size:0.9rem; color:var(--muted); margin-bottom:28px; }
 .toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; padding:0 20px 60px; max-width:980px; margin:0 auto; }
-.toc-card { background:white; border-radius:20px; padding:20px 22px; box-shadow:var(--shadow); cursor:pointer; transition:all 0.2s; border-left:6px solid var(--sky); display:flex; align-items:center; gap:16px; }
+.toc-card { background:white; border-radius:20px; padding:22px 24px; box-shadow:var(--shadow); cursor:pointer; transition:all 0.2s; border-left:6px solid var(--sky); display:flex; align-items:center; gap:18px; }
 .toc-card:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(0,0,0,0.13); }
 .toc-card.done { border-left-color:var(--green); }
 .toc-card.locked { border-left-color:#E0E7EF; opacity:0.6; cursor:not-allowed; }
 .toc-card:hover.locked { transform:none; box-shadow:var(--shadow); }
-.toc-num { font-family:'Jua',sans-serif; font-size:2rem; min-width:48px; text-align:center; }
+.toc-num { font-family:'Jua',sans-serif; font-size:2.2rem; min-width:48px; text-align:center; }
 .toc-info { flex:1; }
-.toc-lesson { font-family:'Jua',sans-serif; font-size:0.78rem; color:var(--muted); margin-bottom:2px; }
-.toc-name { font-family:'Jua',sans-serif; font-size:1.05rem; color:var(--text); }
-.toc-badge { font-size:0.72rem; padding:3px 10px; border-radius:20px; font-family:'Jua',sans-serif; margin-top:6px; display:inline-block; }
+.toc-name { font-family:'Jua',sans-serif; font-size:1.25rem; color:var(--text); margin-bottom:6px; }
+.toc-badge { font-size:0.72rem; padding:3px 10px; border-radius:20px; font-family:'Jua',sans-serif; display:inline-block; }
 .toc-badge.done   { background:var(--green-light); color:#1B5E20; }
 .toc-badge.locked { background:#F0F4F8; color:var(--muted); }
 
@@ -153,8 +152,19 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 }
 
 /* ── UNIT 1: SLOTS ── */
-.slots-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#F8FAFC; border-radius:14px; padding:14px 18px; margin-bottom:16px; }
-.slot { min-width:90px; height:46px; border:2.5px dashed #C8D5E0; border-radius:11px; display:flex; align-items:center; justify-content:center; font-family:'Jua',sans-serif; font-size:0.95rem; color:#B0BEC5; transition:all 0.2s; padding:0 10px; }
+.slots-row {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  background: var(--sky-light); border: 3px dashed var(--sky);
+  border-radius:16px; padding:18px 20px; margin-bottom:16px;
+}
+.slot {
+  min-width:110px; height:52px;
+  border:2.5px dashed #C8D5E0; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Jua',sans-serif; font-size:0.92rem; color:#B0BEC5;
+  transition:all 0.2s; padding:0 12px;
+  background: white;
+}
 .slot.filled { border-style:solid; border-color:var(--sky); background:var(--sky-light); color:#1A7DC4; }
 .slot.filled.is-particle { border-color:var(--coral); background:var(--coral-light); color:#C0392B; }
 .slot.filled.is-verb { border-color:var(--green); background:var(--green-light); color:#2E7D32; }
@@ -230,12 +240,12 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .legend-dot { width:11px; height:11px; border-radius:3px; flex-shrink:0; }
 
 /* COMPLETE */
-.complete-screen { text-align:center; padding:40px 20px; display:none; animation:fadeUp 0.4s ease; }
+.complete-screen { text-align:center; padding:48px 20px; display:none; animation:fadeUp 0.4s ease; }
 .complete-screen.show { display:block; }
-.complete-emoji { font-size:4rem; margin-bottom:14px; animation:bounce 1s infinite; }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-.complete-title { font-family:'Jua',sans-serif; font-size:1.9rem; color:var(--sky); margin-bottom:8px; }
-.complete-score { font-size:1.1rem; color:var(--green); margin-bottom:22px; }
+.complete-emoji { font-size:5rem; margin-bottom:16px; animation:bounce 1s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.complete-title { font-family:'Jua',sans-serif; font-size:2.2rem; color:var(--sky); margin-bottom:10px; }
+.complete-score { font-size:1.15rem; color:var(--green); margin-bottom:28px; }
 
 /* CONFETTI */
 .confetti-wrap { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
@@ -860,7 +870,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card done" onclick="switchUnit(1)">
       <div class="toc-num">1️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">1과</div>
         <div class="toc-name">누가 뭘해요?</div>
         <span class="toc-badge done">✅ 학습 가능</span>
       </div>
@@ -868,7 +877,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card done" onclick="switchUnit(2)">
       <div class="toc-num">2️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">2과</div>
         <div class="toc-name">어디에서 뭘해요?</div>
         <span class="toc-badge done">✅ 학습 가능</span>
       </div>
@@ -876,7 +884,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card done" onclick="switchUnit(3)">
       <div class="toc-num">3️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">3과</div>
         <div class="toc-name">언제 수영을 해요?</div>
         <span class="toc-badge done">✅ 학습 가능</span>
       </div>
@@ -884,7 +891,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">4️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">4과</div>
         <div class="toc-name">장난감 기차가 있어요.</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -892,7 +898,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">5️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">5과</div>
         <div class="toc-name">구두가 아니에요.</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -900,7 +905,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">6️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">6과</div>
         <div class="toc-name">친구 집에서 장난감 배를 만들어요.</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -908,7 +912,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">7️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">7과</div>
         <div class="toc-name">하나, 둘, 셋, 넷</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -916,7 +919,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">8️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">8과</div>
         <div class="toc-name">저는 여섯 살이에요.</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -924,7 +926,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">9️⃣</div>
       <div class="toc-info">
-        <div class="toc-lesson">9과</div>
         <div class="toc-name">코끼리는 커요.</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -932,7 +933,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card locked">
       <div class="toc-num">🔟</div>
       <div class="toc-info">
-        <div class="toc-lesson">10과</div>
         <div class="toc-name">종합연습</div>
         <span class="toc-badge locked">🔒 준비중</span>
       </div>
@@ -1059,10 +1059,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
     <div class="complete-screen" id="u1-complete">
       <div class="complete-emoji">🎉</div>
-      <div class="complete-title">잘했어요! Great job!</div>
+      <div class="complete-title">참 잘했어요! Great job!</div>
       <div class="complete-score" id="u1-complete-score"></div>
-      <div class="btn-row" style="justify-content:center;">
-        <button class="btn btn-reset" onclick="restartAll()">🔄 1과부터 다시</button>
+      <div class="btn-row" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-reset" onclick="restartUnit(1)">🔄 1과 다시</button>
+        <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
         <button class="btn btn-next" onclick="switchUnit(2)">2과로 가요! ▶</button>
       </div>
     </div>
@@ -1202,10 +1203,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
     <div class="complete-screen" id="u2-complete">
       <div class="complete-emoji">🏆</div>
-      <div class="complete-title">최고예요! Amazing!</div>
+      <div class="complete-title">참 잘했어요! Amazing!</div>
       <div class="complete-score" id="u2-complete-score"></div>
-      <div class="btn-row" style="justify-content:center;">
-        <button class="btn btn-reset" onclick="restartAll()">🔄 1과부터 다시</button>
+      <div class="btn-row" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-reset" onclick="restartUnit(2)">🔄 2과 다시</button>
+        <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
         <button class="btn btn-next" onclick="switchUnit(3)">3과로 가요! ▶</button>
       </div>
     </div>
@@ -1335,8 +1337,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="complete-emoji">🌟</div>
       <div class="complete-title">완벽해요! Perfect!</div>
       <div class="complete-score" id="u3-complete-score"></div>
-      <div class="btn-row" style="justify-content:center;">
-        <button class="btn btn-reset" onclick="restartAll()">🔄 1과부터 다시</button>
+      <div class="btn-row" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-reset" onclick="restartUnit(3)">🔄 3과 다시</button>
+        <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
+        <button class="btn btn-next" onclick="showTOC()">📖 목차로</button>
       </div>
     </div>
   </div>
@@ -1566,7 +1570,7 @@ function renderU1(){
 
   const fb=document.getElementById('u1-fb');
   fb.className='feedback'; fb.innerHTML='';
-  document.getElementById('u1-next').disabled = !isTeacher;
+  document.getElementById('u1-next').disabled = false;
 
   // build word bank: correct + decoys
   const bank=document.getElementById('u1-wordbank'); bank.innerHTML='';
@@ -1638,6 +1642,7 @@ function nextU1(){
     document.getElementById('u1-qcard').style.display='none';
     document.getElementById('u1-complete').classList.add('show');
     document.getElementById('u1-complete-score').textContent=`You got ${u1Score} out of ${u1Questions.length}! (${u1Score}/${u1Questions.length})`;
+    launchConfetti();
   } else { renderU1(); }
 }
 function updateU1Progress(){
@@ -1706,7 +1711,7 @@ function renderU2(){
   document.getElementById('u2-qsub').textContent='Click or drag cards to build the sentence. Drag inside to reorder!';
 
   const fb=document.getElementById('u2-fb'); fb.className='feedback'; fb.innerHTML='';
-  document.getElementById('u2-next').disabled = !isTeacher;
+  document.getElementById('u2-next').disabled = false;
 
   // Build word bank
   const bank=document.getElementById('u2-wordbank'); bank.innerHTML='';
@@ -1789,6 +1794,7 @@ function nextU2(){
     document.getElementById('u2-complete').classList.add('show');
     const total=u1Score+u2Score, max=u1Questions.length+u2Questions.length;
     document.getElementById('u2-complete-score').textContent=`Total: ${total} out of ${max}! (${total}/${max})`;
+    launchConfetti();
   } else { renderU2(); }
 }
 function updateU2Progress(){
@@ -1796,6 +1802,12 @@ function updateU2Progress(){
   document.getElementById('u2-prog-fill').style.width=pct+'%';
   document.getElementById('u2-prog-label').textContent=`문제 ${u2Idx+1} / ${u2Questions.length}`;
   document.getElementById('u2-prog-score').textContent=`⭐ ${u2Score}점`;
+}
+
+function restartUnit(n){
+  if(n===1){ u1Idx=0; u1Score=0; document.getElementById('u1-qcard').style.display='block'; document.getElementById('u1-complete').classList.remove('show'); renderU1(); switchUnit(1); switchSection(1,'quiz'); syncNext(1,0); }
+  if(n===2){ u2Idx=0; u2Score=0; document.getElementById('u2-qcard').style.display='block'; document.getElementById('u2-complete').classList.remove('show'); renderU2(); switchUnit(2); switchSection(2,'quiz'); syncNext(2,0); }
+  if(n===3){ u3Idx=0; u3Score=0; document.getElementById('u3-qcard').style.display='block'; document.getElementById('u3-complete').classList.remove('show'); renderU3(); switchUnit(3); switchSection(3,'quiz'); syncNext(3,0); }
 }
 
 function restartAll(){
@@ -2026,7 +2038,7 @@ function renderU3(){
   document.getElementById('u3-scene').textContent=q.scene;
   document.getElementById('u3-qenglish').textContent='👉 '+q.english;
   const fb=document.getElementById('u3-fb'); fb.className='feedback'; fb.innerHTML='';
-  document.getElementById('u3-next').disabled = !isTeacher;
+  document.getElementById('u3-next').disabled = false;
   renderU3Zone();
 
   const bank=document.getElementById('u3-wordbank'); bank.innerHTML='';
@@ -2085,6 +2097,7 @@ function nextU3(){
     document.getElementById('u3-qcard').style.display='none';
     document.getElementById('u3-complete').classList.add('show');
     document.getElementById('u3-complete-score').textContent=`You got ${u3Score} out of ${u3Questions.length}! (${u3Score}/${u3Questions.length})`;
+    launchConfetti();
   } else {renderU3();}
 }
 
