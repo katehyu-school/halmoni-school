@@ -655,6 +655,13 @@ function applyPracticeState(session, showPopup = true) {
     showResultBanner(session.status, player);
   }
 
+  // 선생님 Next 버튼 — correct 이면 활성화
+  if (isTeacher && session.status === 'correct') {
+    const unit = session.unit || 1;
+    const nextBtn = document.getElementById('u' + unit + '-next');
+    if (nextBtn) nextBtn.disabled = false;
+  }
+
   // 문제 번호 동기화
   const unit = session.unit || 1;
   const qIdx = session.q_index || 0;
@@ -696,7 +703,7 @@ async function raiseHand(name) {
   const hands = data?.raised_hands || [];
   const newHands = hands.includes(name) ? hands.filter(h => h !== name) : [...hands, name];
   await _supabase.from('practice_session')
-    .update({ raised_hands: newHands, updated_at: new Date().toISOString() })
+    .update({ raised_hands: newHands, status: 'waiting', updated_at: new Date().toISOString() })
     .eq('id', practiceSessionId);
 }
 
@@ -2032,7 +2039,7 @@ async function syncNext(unit, newIdx) {
   if (!practiceSessionId) return;
   await _supabase.from('practice_session').update({
     unit, q_index: newIdx,
-    status: 'playing',
+    status: 'waiting',
     current_player: null,
     raised_hands: [],
     updated_at: new Date().toISOString()
