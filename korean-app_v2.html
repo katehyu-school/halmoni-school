@@ -1593,6 +1593,7 @@ function hintU1(){ const q=u1Questions[u1Idx]; const fb=document.getElementById(
 function resetU1(){ renderU1(); }
 function nextU1(){
   u1Idx++;
+  syncNext(1, u1Idx);
   if(u1Idx>=u1Questions.length){
     document.getElementById('u1-qcard').style.display='none';
     document.getElementById('u1-complete').classList.add('show');
@@ -1742,6 +1743,7 @@ function hintU2(){ const q=u2Questions[u2Idx]; const fb=document.getElementById(
 function resetU2(){ renderU2(); }
 function nextU2(){
   u2Idx++;
+  syncNext(2, u2Idx);
   if(u2Idx>=u2Questions.length){
     document.getElementById('u2-qcard').style.display='none';
     document.getElementById('u2-complete').classList.add('show');
@@ -2017,12 +2019,36 @@ function checkU3(){
 }
 
 // ── 결과 동기화 ──
-async function syncResult(isCorrect, answer) {
+async function syncResult(isCorrect) {
   if (!practiceSessionId) return;
   await _supabase.from('practice_session').update({
     status: isCorrect ? 'correct' : 'wrong',
     updated_at: new Date().toISOString()
   }).eq('id', practiceSessionId);
+}
+
+// ── 다음 문제 동기화 (Next 버튼) ──
+async function syncNext(unit, newIdx) {
+  if (!practiceSessionId) return;
+  await _supabase.from('practice_session').update({
+    unit, q_index: newIdx,
+    status: 'playing',
+    current_player: null,
+    raised_hands: [],
+    updated_at: new Date().toISOString()
+  }).eq('id', practiceSessionId);
+}
+
+function hintU3(){const q=u3Questions[u3Idx];const fb=document.getElementById('u3-fb');fb.className='feedback hint';fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`;}
+function resetU3(){renderU3();}
+function nextU3(){
+  u3Idx++;
+  syncNext(3, u3Idx);
+  if(u3Idx>=u3Questions.length){
+    document.getElementById('u3-qcard').style.display='none';
+    document.getElementById('u3-complete').classList.add('show');
+    document.getElementById('u3-complete-score').textContent=`You got ${u3Score} out of ${u3Questions.length}! (${u3Score}/${u3Questions.length})`;
+  } else {renderU3();}
 }
 
 // 결과 표시 배너 (다른 화면에서 볼 때)
@@ -2045,16 +2071,6 @@ function showResultBanner(status, player) {
     : `❌ ${player} — Try again!`;
   document.body.appendChild(banner);
   setTimeout(() => banner.remove(), 3000);
-}
-function hintU3(){const q=u3Questions[u3Idx];const fb=document.getElementById('u3-fb');fb.className='feedback hint';fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`;}
-function resetU3(){renderU3();}
-function nextU3(){
-  u3Idx++;
-  if(u3Idx>=u3Questions.length){
-    document.getElementById('u3-qcard').style.display='none';
-    document.getElementById('u3-complete').classList.add('show');
-    document.getElementById('u3-complete-score').textContent=`You got ${u3Score} out of ${u3Questions.length}! (${u3Score}/${u3Questions.length})`;
-  } else {renderU3();}
 }
 function updateU3Progress(){
   const pct=Math.round((u3Idx/u3Questions.length)*100);
