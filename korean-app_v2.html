@@ -532,7 +532,7 @@ function renderAttendance() {
       chip.className = 'att-chip' + (isChecked ? ' checked' : '');
       chip.textContent = name;
       chip.onclick = () => {
-        const msg = isChecked ? name + ' 출석 취소할까요?' : name + ' 출석 체크할까요?';
+        const msg = isChecked ? 'Remove ' + name + '?' : 'Check in ' + name + '?';
         if (confirm(msg)) checkIn(name);
       };
       container.appendChild(chip);
@@ -619,12 +619,10 @@ async function loadPracticeSession() {
 function showNominatePopup(name) {
   document.getElementById('nominate-popup')?.remove();
   document.getElementById('nominate-overlay')?.remove();
-
   const overlay = document.createElement('div');
   overlay.id = 'nominate-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:1999;';
   document.body.appendChild(overlay);
-
   const popup = document.createElement('div');
   popup.id = 'nominate-popup';
   popup.style.cssText = `position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -634,7 +632,6 @@ function showNominatePopup(name) {
   popup.innerHTML = `<div style="font-size:3rem;margin-bottom:12px;">🎯</div>
     <div style="font-family:'Jua',sans-serif;font-size:2rem;color:var(--sky);">${name} 차례!</div>`;
   document.body.appendChild(popup);
-
   const close = () => { popup.remove(); overlay.remove(); };
   overlay.onclick = close;
   setTimeout(close, 2500);
@@ -644,12 +641,78 @@ function applyPracticeState(session, showPopup = true) {
   const statusEl = document.getElementById('practice-status');
   if (!statusEl) return;
   const player = session.current_player;
+  const hands = session.raised_hands || [];
+
+  // 지목 팝업
   if (showPopup && player && player !== lastPlayer) showNominatePopup(player);
   lastPlayer = player;
+
+  // 바 상태
   statusEl.textContent = player ? `🎯 ${player} 차례` : '선생님이 지목 중...';
+
+  // 문제 번호 동기화
+  const unit = session.unit || 1;
+  const qIdx = session.q_index || 0;
+  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx) { u1Idx = qIdx; if(typeof renderU1==='function') renderU1(); }
+  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
+  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
+
+  // 카드 강조
   document.querySelectorAll('.card').forEach(c => {
     c.classList.remove('my-turn-highlight', 'other-turn-dim');
     if (player) c.classList.add('my-turn-highlight');
+  });
+
+  // 손들기 UI
+  renderRaisedHands(hands);
+}
+
+// ── 학생 손들기 버튼 렌더 ──
+function renderRaiseHandBtns() {
+  const container = document.getElementById('raise-hand-btns');
+  if (!container || isTeacher) return;
+  container.innerHTML = '';
+  STUDENTS.forEach(name => {
+    const btn = document.createElement('button');
+    btn.id = 'raise-btn-' + name;
+    btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.88rem;padding:5px 12px;
+      border-radius:20px;border:2px solid #E0E7EF;background:white;
+      color:var(--muted);cursor:pointer;transition:all 0.2s;`;
+    btn.textContent = '🙋 ' + name;
+    btn.onclick = () => raiseHand(name);
+    container.appendChild(btn);
+  });
+}
+
+async function raiseHand(name) {
+  if (!practiceSessionId) return;
+  const { data } = await _supabase
+    .from('practice_session').select('raised_hands').eq('id', practiceSessionId).single();
+  const hands = data?.raised_hands || [];
+  const newHands = hands.includes(name) ? hands.filter(h => h !== name) : [...hands, name];
+  await _supabase.from('practice_session')
+    .update({ raised_hands: newHands, updated_at: new Date().toISOString() })
+    .eq('id', practiceSessionId);
+}
+
+function renderRaisedHands(hands) {
+  const container = document.getElementById('raised-hands-area');
+  if (!container) return;
+  container.innerHTML = '';
+  container.style.display = hands.length > 0 ? 'flex' : 'none';
+  hands.forEach(name => {
+    const btn = document.createElement('button');
+    btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.9rem;padding:5px 14px;
+      border-radius:20px;border:2px solid var(--coral);background:var(--coral-light);
+      color:#C0392B;cursor:${isTeacher ? 'pointer' : 'default'};transition:all 0.2s;`;
+    btn.textContent = '🙋 ' + name;
+    if (isTeacher) {
+      btn.title = 'Click to nominate';
+      btn.onmouseover = () => btn.style.background = 'var(--coral)';
+      btn.onmouseout  = () => btn.style.background = 'var(--coral-light)';
+      btn.onclick = () => nominateStudent(name);
+    }
+    container.appendChild(btn);
   });
 }
 
@@ -675,7 +738,7 @@ async function nominateStudent(name) {
   const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : u3Idx;
   await _supabase.from('practice_session').update({
     current_player: name, unit: activeUnit, q_index: qIdx,
-    status: 'playing', updated_at: new Date().toISOString()
+    raised_hands: [], status: 'playing', updated_at: new Date().toISOString()
   }).eq('id', practiceSessionId);
 }
 
@@ -689,14 +752,10 @@ _supabase.channel('practice-live')
 // 초기화
 // ══════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', async () => {
-  // 선생님/학생 UI 설정
   const nomBtn = document.getElementById('practice-nominate-btn');
   if (nomBtn) nomBtn.style.display = isTeacher ? 'inline-block' : 'none';
-
   await loadStudents();
   await loadPracticeSession();
-
-  // URL에 이름 있으면 자동 출석
   if (urlName && STUDENTS.includes(urlName)) checkIn(urlName);
 });
 </script>
@@ -732,7 +791,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="practice-bar" id="practice-bar">
   <span style="font-family:'Jua',sans-serif;font-size:0.88rem;color:#1A5FA8;white-space:nowrap;">✏️ 연습</span>
   <span class="practice-status" id="practice-status">대기 중...</span>
+  <div id="raised-hands-area" style="display:none;gap:8px;flex-wrap:wrap;align-items:center;"></div>
   <span class="practice-my-turn" id="practice-my-turn" style="display:none;">🎯 내 차례!</span>
+  <div id="raise-hand-btns" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
   <button class="nominate-btn" id="practice-nominate-btn" onclick="openNominateModal()">🎯 지목</button>
 </div>
 
@@ -1435,9 +1496,10 @@ function switchUnit(n){
   document.getElementById('u'+unit+'-'+sec).classList.add('active');
   const map={vocab:0,grammar:1,quiz:2};
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
-  // 연습 탭이면 바 표시, 아니면 숨김
   const bar = document.getElementById('practice-bar');
   if (bar) bar.style.display = (sec === 'quiz') ? 'flex' : 'none';
+  // 연습 탭 열리면 학생 손들기 버튼 렌더
+  if (sec === 'quiz' && !isTeacher) renderRaiseHandBtns();
 }
 
 // ══════════════════════════════════════════
