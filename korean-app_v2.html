@@ -528,17 +528,17 @@ function renderAttendance() {
   } else {
     STUDENTS.forEach(name => {
       const chip = document.createElement('div');
-      const isChecked = checkedToday.has(name);
-      chip.className = 'att-chip' + (isChecked ? ' checked' : '');
+      chip.className = 'att-chip' + (checkedToday.has(name) ? ' checked' : '');
       chip.textContent = name;
       chip.onclick = () => {
-        const msg = isChecked ? 'Remove ' + name + '?' : 'Check in ' + name + '?';
+        // 클릭 시점에 현재 상태 새로 확인
+        const currently = checkedToday.has(name);
+        const msg = currently ? 'Remove ' + name + '?' : 'Check in ' + name + '?';
         if (confirm(msg)) checkIn(name);
       };
       container.appendChild(chip);
     });
   }
-  // 학생관리 버튼: 선생님만
   const editBtn = document.getElementById('att-edit-btn');
   if (editBtn) editBtn.style.display = isTeacher ? 'inline-block' : 'none';
 }
@@ -649,6 +649,9 @@ function applyPracticeState(session, showPopup = true) {
 
   // 바 상태
   statusEl.textContent = player ? `🎯 ${player} 차례` : '선생님이 지목 중...';
+
+  // 결과 배너 (다른 화면용)
+  if (showPopup) showResultBanner(session.status, player);
 
   // 문제 번호 동기화
   const unit = session.unit || 1;
@@ -1577,9 +1580,11 @@ function checkU1(){
     u1Score++; document.getElementById('u1-next').disabled=false;
     document.getElementById('u1-prog-score').textContent=`⭐ ${u1Score}점`;
     launchConfetti();
+    syncResult(true, q.answer);
   } else {
     fb.className='feedback wrong';
     fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+    syncResult(false, built);
   }
 }
 function hintU1(){ const q=u1Questions[u1Idx]; const fb=document.getElementById('u1-fb'); fb.className='feedback hint'; fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`; }
@@ -1724,9 +1729,11 @@ function checkU2(){
     u2Score++; document.getElementById('u2-next').disabled=false;
     document.getElementById('u2-prog-score').textContent=`⭐ ${u2Score}점`;
     launchConfetti();
+    syncResult(true, correct);
   } else {
     fb.className='feedback wrong';
     fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+    syncResult(false, built);
   }
 }
 function hintU2(){ const q=u2Questions[u2Idx]; const fb=document.getElementById('u2-fb'); fb.className='feedback hint'; fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`; }
@@ -1999,10 +2006,43 @@ function checkU3(){
     u3Score++; document.getElementById('u3-next').disabled=false;
     document.getElementById('u3-prog-score').textContent=`⭐ ${u3Score}점`;
     launchConfetti();
+    syncResult(true, correct);
   } else {
     fb.className='feedback wrong';
     fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+    syncResult(false, built);
   }
+}
+
+// ── 결과 동기화 ──
+async function syncResult(isCorrect, answer) {
+  if (!practiceSessionId) return;
+  await _supabase.from('practice_session').update({
+    status: isCorrect ? 'correct' : 'wrong',
+    updated_at: new Date().toISOString()
+  }).eq('id', practiceSessionId);
+}
+
+// 결과 표시 배너 (다른 화면에서 볼 때)
+function showResultBanner(status, player) {
+  document.getElementById('result-banner')?.remove();
+  if (!player || status === 'playing' || status === 'waiting') return;
+  const isCorrect = status === 'correct';
+  const banner = document.createElement('div');
+  banner.id = 'result-banner';
+  banner.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+    background:${isCorrect ? '#EDFAEF' : '#FFF3E0'};
+    border:2px solid ${isCorrect ? 'var(--green)' : '#FFA726'};
+    border-radius:16px;padding:14px 28px;z-index:1500;
+    font-family:'Jua',sans-serif;font-size:1.1rem;
+    color:${isCorrect ? '#1B5E20' : '#E65100'};
+    box-shadow:0 4px 20px rgba(0,0,0,0.12);
+    animation:fadeUp 0.3s ease;`;
+  banner.textContent = isCorrect
+    ? `🎉 ${player} — Correct!`
+    : `❌ ${player} — Try again!`;
+  document.body.appendChild(banner);
+  setTimeout(() => banner.remove(), 3000);
 }
 function hintU3(){const q=u3Questions[u3Idx];const fb=document.getElementById('u3-fb');fb.className='feedback hint';fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`;}
 function resetU3(){renderU3();}
