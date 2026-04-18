@@ -470,29 +470,36 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 <!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
+// ══════════════════════════════════════════
+// 설정
+// ══════════════════════════════════════════
 const SUPABASE_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// URL 역할 파악 — 여기서 먼저 선언
 const urlParams = new URLSearchParams(window.location.search);
 const isTeacher = urlParams.has('teacher');
 const urlName   = urlParams.get('name');
-let myName = null;
+
+let STUDENTS    = [];
 let checkedToday = new Set();
 
 function todayStr() {
   return new Date().toLocaleDateString('sv-SE');
 }
 
-// ── 학생 목록 로드 ──
+// ══════════════════════════════════════════
+// 학생 목록
+// ══════════════════════════════════════════
 async function loadStudents() {
   const { data } = await _supabase.from('students').select('name').order('created_at');
   if (data) STUDENTS = data.map(r => r.name);
   await loadAttendance();
 }
 
-// ── 출석 로드 ──
+// ══════════════════════════════════════════
+// 출석
+// ══════════════════════════════════════════
 async function loadAttendance() {
   const { data } = await _supabase
     .from('attendance').select('student_name').eq('class_date', todayStr());
@@ -500,55 +507,55 @@ async function loadAttendance() {
   renderAttendance();
 }
 
-// ── 출석 체크인 (토글 가능) ──
 async function checkIn(name) {
   if (checkedToday.has(name)) {
-    // 토글: 체크 취소
-    const { error } = await _supabase.from('attendance')
+    await _supabase.from('attendance')
       .delete().eq('student_name', name).eq('class_date', todayStr());
-    if (!error) { checkedToday.delete(name); renderAttendance(); }
   } else {
-    // 체크인
-    const { error } = await _supabase.from('attendance')
+    await _supabase.from('attendance')
       .upsert({ student_name: name, class_date: todayStr() }, { onConflict: 'student_name,class_date' });
-    if (!error) { checkedToday.add(name); renderAttendance(); }
   }
+  // 서버에서 다시 로드 (토글 정확성 보장)
+  await loadAttendance();
 }
 
-// ── 출석 UI 렌더 ──
 function renderAttendance() {
   const container = document.getElementById('att-students');
   if (!container) return;
   container.innerHTML = '';
   if (STUDENTS.length === 0) {
     container.innerHTML = '<span style="font-size:0.85rem;color:var(--muted);">학생 없음</span>';
-    return;
+  } else {
+    STUDENTS.forEach(name => {
+      const chip = document.createElement('div');
+      const isChecked = checkedToday.has(name);
+      chip.className = 'att-chip' + (isChecked ? ' checked' : '');
+      chip.textContent = name;
+      chip.onclick = () => {
+        const msg = isChecked ? name + ' 출석 취소할까요?' : name + ' 출석 체크할까요?';
+        if (confirm(msg)) checkIn(name);
+      };
+      container.appendChild(chip);
+    });
   }
-  STUDENTS.forEach(name => {
-    const chip = document.createElement('div');
-    chip.className = 'att-chip' + (checkedToday.has(name) ? ' checked' : '');
-    chip.textContent = name;
-    chip.onclick = () => {
-      const action = checkedToday.has(name) ? '출석 취소할까요?' : '으로 출석 체크할까요?';
-      if (confirm(name + (checkedToday.has(name) ? ' 출석 취소할까요?' : ' 출석 체크할까요?'))) checkIn(name);
-    };
-    container.appendChild(chip);
-  });
-
-  // 선생님만 학생관리 버튼 표시
+  // 학생관리 버튼: 선생님만
   const editBtn = document.getElementById('att-edit-btn');
   if (editBtn) editBtn.style.display = isTeacher ? 'inline-block' : 'none';
 }
 
-// ── 실시간 구독 (INSERT + UPDATE + DELETE) ──
+// 실시간 — 출석 변경 시 모든 화면 자동 갱신
 _supabase.channel('att-live')
   .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'attendance' }, payload => {
-    if (payload.new && payload.new.class_date === todayStr()) {
-      checkedToday.add(payload.new.student_name); renderAttendance();
+    if (payload.new?.class_date === todayStr()) {
+      checkedToday.add(payload.new.student_name);
+      renderAttendance();
     }
   })
   .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'attendance' }, payload => {
-    if (payload.old) { checkedToday.delete(payload.old.student_name); renderAttendance(); }
+    if (payload.old?.student_name) {
+      checkedToday.delete(payload.old.student_name);
+      renderAttendance();
+    }
   })
   .subscribe();
 
@@ -558,18 +565,19 @@ _supabase.channel('students-live')
   })
   .subscribe();
 
-// ── 학생 관리 모달 ──
-function openEditModal() {
-  renderEditList();
-  document.getElementById('student-modal').classList.add('open');
-}
-function closeEditModal() {
-  document.getElementById('student-modal').classList.remove('open');
-}
+// ══════════════════════════════════════════
+// 학생 관리 모달
+// ══════════════════════════════════════════
+function openEditModal() { renderEditList(); document.getElementById('student-modal').classList.add('open'); }
+function closeEditModal() { document.getElementById('student-modal').classList.remove('open'); }
 
 function renderEditList() {
   const list = document.getElementById('student-edit-list');
   list.innerHTML = '';
+  if (STUDENTS.length === 0) {
+    list.innerHTML = '<span style="font-size:0.85rem;color:var(--muted);padding:8px;">학생이 없어요</span>';
+    return;
+  }
   STUDENTS.forEach(name => {
     const row = document.createElement('div');
     row.className = 'student-edit-row';
@@ -577,9 +585,6 @@ function renderEditList() {
       <button class="del-btn" onclick="deleteStudent('${name}')">✕</button>`;
     list.appendChild(row);
   });
-  if (STUDENTS.length === 0) {
-    list.innerHTML = '<span style="font-size:0.85rem;color:var(--muted);padding:8px;">학생이 없어요</span>';
-  }
 }
 
 async function addStudent() {
@@ -599,119 +604,57 @@ async function deleteStudent(name) {
   renderEditList();
 }
 
-document.addEventListener('DOMContentLoaded', loadStudents);
-</script>
-
-<script>
-// ══════════════════════════════════════════
-// URL 역할 / 자동 로그인 초기화
-// isTeacher, urlName 은 위 스크립트에서 선언됨
-// ══════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  const nomBtn = document.getElementById('practice-nominate-btn');
-  if (nomBtn) nomBtn.style.display = isTeacher ? 'inline-block' : 'none';
-
-  // URL에 이름 있으면 자동 출석 체크
-  if (urlName && !isTeacher) {
-    const tryAutoCheckin = setInterval(() => {
-      if (STUDENTS.length > 0) {
-        clearInterval(tryAutoCheckin);
-        if (STUDENTS.includes(urlName)) checkIn(urlName);
-      }
-    }, 300);
-  }
-});
-
 // ══════════════════════════════════════════
 // 연습 실시간 동기화
 // ══════════════════════════════════════════
-let practiceSession = null;
 let practiceSessionId = null;
-let lastPlayer = null; // 팝업 중복 방지
+let lastPlayer = null;
 
 async function loadPracticeSession() {
   const { data } = await _supabase
-    .from('practice_session')
-    .select('*')
-    .order('id')
-    .limit(1)
-    .single();
-  if (data) {
-    practiceSession = data;
-    practiceSessionId = data.id;
-    applyPracticeState(data, false); // 초기 로드는 팝업 없이
-  }
+    .from('practice_session').select('*').order('id').limit(1).single();
+  if (data) { practiceSessionId = data.id; applyPracticeState(data, false); }
 }
 
-// 지목 팝업 표시
 function showNominatePopup(name) {
-  const existing = document.getElementById('nominate-popup');
-  if (existing) existing.remove();
-  const existingOverlay = document.getElementById('nominate-overlay');
-  if (existingOverlay) existingOverlay.remove();
-
-  const popup = document.createElement('div');
-  popup.id = 'nominate-popup';
-  popup.style.cssText = `
-    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-    background:white; border-radius:24px; padding:36px 48px;
-    box-shadow:0 12px 48px rgba(0,0,0,0.22); z-index:2000;
-    text-align:center; animation:popIn 0.3s ease;
-    border: 3px solid var(--sky);
-  `;
-  popup.innerHTML = `
-    <div style="font-size:3rem;margin-bottom:12px;">🎯</div>
-    <div style="font-family:'Jua',sans-serif;font-size:2rem;color:var(--sky);">
-      ${name} 차례!
-    </div>
-  `;
-  document.body.appendChild(popup);
+  document.getElementById('nominate-popup')?.remove();
+  document.getElementById('nominate-overlay')?.remove();
 
   const overlay = document.createElement('div');
   overlay.id = 'nominate-overlay';
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:1999;';
-  overlay.onclick = () => { popup.remove(); overlay.remove(); };
-  document.body.insertBefore(overlay, popup);
+  document.body.appendChild(overlay);
 
-  setTimeout(() => { popup.remove(); overlay.remove(); }, 2500);
+  const popup = document.createElement('div');
+  popup.id = 'nominate-popup';
+  popup.style.cssText = `position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:white;border-radius:24px;padding:36px 48px;
+    box-shadow:0 12px 48px rgba(0,0,0,0.22);z-index:2000;
+    text-align:center;animation:popIn 0.3s ease;border:3px solid var(--sky);`;
+  popup.innerHTML = `<div style="font-size:3rem;margin-bottom:12px;">🎯</div>
+    <div style="font-family:'Jua',sans-serif;font-size:2rem;color:var(--sky);">${name} 차례!</div>`;
+  document.body.appendChild(popup);
+
+  const close = () => { popup.remove(); overlay.remove(); };
+  overlay.onclick = close;
+  setTimeout(close, 2500);
 }
 
-// 상태 적용
 function applyPracticeState(session, showPopup = true) {
-  practiceSession = session;
   const statusEl = document.getElementById('practice-status');
-  const myTurnEl = document.getElementById('practice-my-turn');
   if (!statusEl) return;
-
   const player = session.current_player;
-  const isMyTurn = player && myName && player === myName;
-
-  // 지목 팝업 — 새로 지목됐을 때만
-  if (showPopup && player && player !== lastPlayer) {
-    showNominatePopup(player);
-  }
+  if (showPopup && player && player !== lastPlayer) showNominatePopup(player);
   lastPlayer = player;
-
-  // 바 상태 텍스트
-  if (!player) {
-    statusEl.textContent = '선생님이 지목 중...';
-    if (myTurnEl) myTurnEl.style.display = 'none';
-  } else {
-    statusEl.textContent = `🎯 ${player} 차례`;
-    if (myTurnEl) myTurnEl.style.display = 'none';
-  }
-
-  // 퀴즈 카드 — 지목되면 모두 같은 강조
+  statusEl.textContent = player ? `🎯 ${player} 차례` : '선생님이 지목 중...';
   document.querySelectorAll('.card').forEach(c => {
     c.classList.remove('my-turn-highlight', 'other-turn-dim');
     if (player) c.classList.add('my-turn-highlight');
   });
 }
 
-// 선생님: 지목 모달
 function openNominateModal() {
-  const modal = document.getElementById('nominate-modal');
-  const list  = document.getElementById('nominate-list');
+  const list = document.getElementById('nominate-list');
   list.innerHTML = '';
   STUDENTS.forEach(name => {
     const btn = document.createElement('button');
@@ -720,38 +663,44 @@ function openNominateModal() {
     btn.onclick = () => nominateStudent(name);
     list.appendChild(btn);
   });
-  modal.classList.add('open');
+  document.getElementById('nominate-modal').classList.add('open');
 }
-function closeNominateModal() {
-  document.getElementById('nominate-modal').classList.remove('open');
-}
+function closeNominateModal() { document.getElementById('nominate-modal').classList.remove('open'); }
 
 async function nominateStudent(name) {
   closeNominateModal();
   if (!practiceSessionId) return;
   let activeUnit = 1;
-  [1,2,3].forEach(n => {
-    if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n;
-  });
+  [1,2,3].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
   const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : u3Idx;
   await _supabase.from('practice_session').update({
-    current_player: name,
-    unit: activeUnit,
-    q_index: qIdx,
-    status: 'playing',
-    updated_at: new Date().toISOString()
+    current_player: name, unit: activeUnit, q_index: qIdx,
+    status: 'playing', updated_at: new Date().toISOString()
   }).eq('id', practiceSessionId);
 }
 
-// 실시간 구독
 _supabase.channel('practice-live')
   .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'practice_session' }, payload => {
     applyPracticeState(payload.new, true);
   })
   .subscribe();
 
-document.addEventListener('DOMContentLoaded', loadPracticeSession);
+// ══════════════════════════════════════════
+// 초기화
+// ══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', async () => {
+  // 선생님/학생 UI 설정
+  const nomBtn = document.getElementById('practice-nominate-btn');
+  if (nomBtn) nomBtn.style.display = isTeacher ? 'inline-block' : 'none';
+
+  await loadStudents();
+  await loadPracticeSession();
+
+  // URL에 이름 있으면 자동 출석
+  if (urlName && STUDENTS.includes(urlName)) checkIn(urlName);
+});
 </script>
+
 
 <header class="app-header">
   <div class="logo" onclick="showTOC()">📚 한글학교 한국어 2</div>
