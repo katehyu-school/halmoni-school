@@ -589,12 +589,41 @@ document.addEventListener('DOMContentLoaded', loadStudents);
 
 <script>
 // ══════════════════════════════════════════
+// URL 역할 파악
+// ?teacher  → 선생님 모드
+// ?name=리아 → 리아로 자동 로그인
+// ══════════════════════════════════════════
+const urlParams = new URLSearchParams(window.location.search);
+const isTeacher = urlParams.has('teacher');
+const urlName   = urlParams.get('name'); // 학생 자동 로그인
+
+// 선생님이면 지목 버튼 표시, 아니면 숨김
+document.addEventListener('DOMContentLoaded', () => {
+  const nomBtn = document.getElementById('practice-nominate-btn');
+  if (nomBtn) nomBtn.style.display = isTeacher ? 'inline-block' : 'none';
+
+  // URL에 이름 있으면 자동 출석 체크
+  if (urlName && !isTeacher) {
+    // loadStudents 완료 후 자동 체크인
+    const tryAutoCheckin = setInterval(() => {
+      if (STUDENTS.length > 0) {
+        clearInterval(tryAutoCheckin);
+        if (STUDENTS.includes(urlName)) {
+          myName = urlName;
+          checkIn(urlName);
+        }
+      }
+    }, 300);
+  }
+});
+
+// ══════════════════════════════════════════
 // 연습 실시간 동기화
 // ══════════════════════════════════════════
-let practiceSession = null; // { id, unit, q_index, current_player, status }
+let practiceSession = null;
 let practiceSessionId = null;
+let lastPlayer = null; // 팝업 중복 방지
 
-// 세션 로드
 async function loadPracticeSession() {
   const { data } = await _supabase
     .from('practice_session')
@@ -605,63 +634,79 @@ async function loadPracticeSession() {
   if (data) {
     practiceSession = data;
     practiceSessionId = data.id;
-    applyPracticeState(data);
+    applyPracticeState(data, false); // 초기 로드는 팝업 없이
   }
 }
 
-// 상태 적용 — 모든 화면에서 동일하게
-function applyPracticeState(session) {
+// 지목 팝업 표시
+function showNominatePopup(name) {
+  const existing = document.getElementById('nominate-popup');
+  if (existing) existing.remove();
+  const existingOverlay = document.getElementById('nominate-overlay');
+  if (existingOverlay) existingOverlay.remove();
+
+  const popup = document.createElement('div');
+  popup.id = 'nominate-popup';
+  popup.style.cssText = `
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    background:white; border-radius:24px; padding:36px 48px;
+    box-shadow:0 12px 48px rgba(0,0,0,0.22); z-index:2000;
+    text-align:center; animation:popIn 0.3s ease;
+    border: 3px solid var(--sky);
+  `;
+  popup.innerHTML = `
+    <div style="font-size:3rem;margin-bottom:12px;">🎯</div>
+    <div style="font-family:'Jua',sans-serif;font-size:2rem;color:var(--sky);">
+      ${name} 차례!
+    </div>
+  `;
+  document.body.appendChild(popup);
+
+  const overlay = document.createElement('div');
+  overlay.id = 'nominate-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.25);z-index:1999;';
+  overlay.onclick = () => { popup.remove(); overlay.remove(); };
+  document.body.insertBefore(overlay, popup);
+
+  setTimeout(() => { popup.remove(); overlay.remove(); }, 2500);
+}
+
+// 상태 적용
+function applyPracticeState(session, showPopup = true) {
   practiceSession = session;
-  const bar = document.getElementById('practice-bar');
   const statusEl = document.getElementById('practice-status');
   const myTurnEl = document.getElementById('practice-my-turn');
-  const nomBtn = document.getElementById('practice-nominate-btn');
-  if (!bar) return;
+  if (!statusEl) return;
 
-  const activeUnit = session.unit;
   const player = session.current_player;
   const isMyTurn = player && myName && player === myName;
 
-  // 연습 섹션이 활성화 중일 때만 바 표시
-  const quizSection = document.getElementById('u' + activeUnit + '-quiz');
-  if (quizSection && quizSection.classList.contains('active')) {
-    bar.classList.add('visible');
-  } else {
-    bar.classList.remove('visible');
+  // 지목 팝업 — 새로 지목됐을 때만
+  if (showPopup && player && player !== lastPlayer) {
+    showNominatePopup(player);
   }
+  lastPlayer = player;
 
-  // 문제 번호 동기화
-  if (activeUnit === 1 && session.q_index !== u1Idx) { u1Idx = session.q_index; renderU1(); }
-  if (activeUnit === 2 && session.q_index !== u2Idx) { u2Idx = session.q_index; renderU2(); }
-  if (activeUnit === 3 && session.q_index !== u3Idx) { u3Idx = session.q_index; renderU3(); }
-
-  // 상태 표시
+  // 바 상태 텍스트
   if (!player) {
     statusEl.textContent = '선생님이 지목 중...';
-    myTurnEl.style.display = 'none';
-  } else if (isMyTurn) {
-    statusEl.textContent = '🎯 내 차례!';
-    myTurnEl.style.display = 'inline-block';
+    if (myTurnEl) myTurnEl.style.display = 'none';
   } else {
-    statusEl.textContent = `👀 ${player} 차례`;
-    myTurnEl.style.display = 'none';
+    statusEl.textContent = `🎯 ${player} 차례`;
+    if (myTurnEl) myTurnEl.style.display = 'none';
   }
 
-  // 퀴즈 카드 강조/흐리기
-  const qcards = document.querySelectorAll('.card');
-  qcards.forEach(c => {
+  // 퀴즈 카드 — 지목되면 모두 같은 강조
+  document.querySelectorAll('.card').forEach(c => {
     c.classList.remove('my-turn-highlight', 'other-turn-dim');
-    if (player) {
-      if (isMyTurn) c.classList.add('my-turn-highlight');
-      else c.classList.add('other-turn-dim');
-    }
+    if (player) c.classList.add('my-turn-highlight');
   });
 }
 
-// 선생님: 지목 모달 열기
+// 선생님: 지목 모달
 function openNominateModal() {
   const modal = document.getElementById('nominate-modal');
-  const list = document.getElementById('nominate-list');
+  const list  = document.getElementById('nominate-list');
   list.innerHTML = '';
   STUDENTS.forEach(name => {
     const btn = document.createElement('button');
@@ -676,18 +721,14 @@ function closeNominateModal() {
   document.getElementById('nominate-modal').classList.remove('open');
 }
 
-// 선생님: 학생 지목
 async function nominateStudent(name) {
   closeNominateModal();
   if (!practiceSessionId) return;
-
-  // 현재 활성 유닛 파악
   let activeUnit = 1;
   [1,2,3].forEach(n => {
     if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n;
   });
   const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : u3Idx;
-
   await _supabase.from('practice_session').update({
     current_player: name,
     unit: activeUnit,
@@ -697,23 +738,10 @@ async function nominateStudent(name) {
   }).eq('id', practiceSessionId);
 }
 
-// 연습 바 → 연습 탭 클릭 시 표시
-function showPracticeBar(unitNum) {
-  const bar = document.getElementById('practice-bar');
-  if (practiceSession && practiceSession.unit === unitNum) {
-    bar.classList.add('visible');
-  } else {
-    bar.classList.add('visible');
-  }
-}
-function hidePracticeBar() {
-  document.getElementById('practice-bar')?.classList.remove('visible');
-}
-
 // 실시간 구독
 _supabase.channel('practice-live')
   .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'practice_session' }, payload => {
-    applyPracticeState(payload.new);
+    applyPracticeState(payload.new, true);
   })
   .subscribe();
 
