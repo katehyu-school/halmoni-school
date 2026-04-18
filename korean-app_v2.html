@@ -650,8 +650,10 @@ function applyPracticeState(session, showPopup = true) {
   // 바 상태
   statusEl.textContent = player ? `🎯 ${player} 차례` : '선생님이 지목 중...';
 
-  // 결과 배너 (다른 화면용)
-  if (showPopup) showResultBanner(session.status, player);
+  // 결과 배너 — status가 correct/wrong 일 때만
+  if (showPopup && (session.status === 'correct' || session.status === 'wrong')) {
+    showResultBanner(session.status, player);
+  }
 
   // 문제 번호 동기화
   const unit = session.unit || 1;
