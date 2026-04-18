@@ -210,14 +210,14 @@ body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow
 .mcat-btn.active{background:var(--mint);border-color:var(--mint);color:white;}
 .match-game-wrap{display:flex;flex-direction:column;gap:4px;}
 .match-col-title{font-size:1rem;color:#999;text-align:center;margin-bottom:10px;}
-.match-items{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.match-items{display:flex;flex-direction:row;gap:8px;justify-content:center;flex-wrap:nowrap;}
 .match-emoji-card{
-  background:white;border-radius:16px;padding:10px 6px;
-  text-align:center;font-size:2.4rem;
+  background:white;border-radius:14px;padding:8px 6px;
+  text-align:center;font-size:2rem;
   box-shadow:0 3px 12px rgba(0,0,0,0.08);
   cursor:grab;border:3px solid transparent;
   transition:all 0.2s;user-select:none;
-  aspect-ratio:1/1;
+  width:60px;height:60px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
 }
 .match-emoji-card:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(0,0,0,0.14);}
@@ -225,11 +225,11 @@ body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow
 .match-emoji-card.matched{border-color:var(--green);background:var(--green);
   opacity:0.5;pointer-events:none;cursor:default;}
 .match-word-card{
-  background:white;border-radius:16px;padding:10px 6px;
-  font-size:1.2rem;text-align:center;
+  background:white;border-radius:14px;padding:8px 6px;
+  font-size:1rem;text-align:center;
   box-shadow:0 3px 12px rgba(0,0,0,0.08);
   border:3px dashed #ccc;transition:all 0.2s;
-  aspect-ratio:1/1;
+  width:60px;height:60px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
 }
 .match-word-card.drag-over{border-color:var(--mint);background:var(--mint-light,#E8FAF9);}
@@ -322,7 +322,9 @@ body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow
   .vocab-grid{grid-template-columns:repeat(3,1fr);gap:10px;padding:14px;}
   .title-text{font-size:2.8rem;}
   .match-game-wrap{gap:4px;}
-  .match-items{grid-template-columns:repeat(3,1fr);gap:8px;}
+  .match-items{gap:6px;}
+  .match-emoji-card{width:50px;height:50px;font-size:1.7rem;}
+  .match-word-card{width:50px;height:50px;font-size:0.85rem;}
 }
 </style>
 </head>
