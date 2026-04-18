@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>할머니 스쿨 🌟 애라야!</title>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -651,59 +652,93 @@ const vocabData = {
 };
 
 // 노래 데이터 — 유튜브 링크는 공식 채널 기준
-const songsData = {
-  bebefinn: {
-    label:'베베핀', color:'#FF6B9D',
-    songs:[
-      {title:'치카 송',        thumb:'🦷', url:'https://www.youtube.com/watch?v=3D9Z2P19SgQ'},
-      {title:'그대로 멈춰라',   thumb:'🙅', url:'https://www.youtube.com/watch?v=vB8QCZeMhlE'},
-      {title:'머리 어깨 무릎 발',thumb:'💃', url:'https://www.youtube.com/watch?v=h4eueDYPTIg'},
-      {title:'아야 아야 아파',  thumb:'🤕', url:'https://www.youtube.com/watch?v=JlTMtBbFST0'},
-      {title:'나는야 토마토',   thumb:'🍅', url:'https://www.youtube.com/watch?v=N8_L-LUaMpA'},
-      {title:'참지말고 응가해요',thumb:'💩', url:'https://www.youtube.com/watch?v=RoMDknW6nkE'},
-      {title:'아침이야 일어나', thumb:'🌅', url:'https://www.youtube.com/watch?v=aaDQXqztkBQ'},
-      {title:'내 꼬리 어디 갔나',thumb:'🐾', url:'https://www.youtube.com/watch?v=oJmhLlYJmhY'},
-      {title:'다섯 마리 아기 오리',thumb:'🦆',url:'https://www.youtube.com/watch?v=O_5L0F6Lfow'},
-      {title:'알록달록 음식송',  thumb:'🌈', url:'https://www.youtube.com/watch?v=VJJfMeAVFLM'},
-      {title:'잘잘잘',          thumb:'👏', url:'https://www.youtube.com/watch?v=nFd5j3-EVMU'},
-      {title:'동물 세어 봐요',  thumb:'🐘', url:'https://www.youtube.com/watch?v=UBvdlkFXLx0'},
-    ]
-  },
-  pinkfong: {
-    label:'핑크퐁', color:'#FF8C42',
-    songs:[
-      {title:'나비야',          thumb:'🦋', url:'https://www.youtube.com/watch?v=oiJK5TMIeVc'},
-      {title:'아기상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
-      {title:'상어가족',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
-      {title:'동물의 소리',      thumb:'🐄', url:'https://www.youtube.com/watch?v=LBE7DQJHPNI'},
-      {title:'머리 어깨 무릎 발',thumb:'💃', url:'https://www.youtube.com/watch?v=h4eueDYPTIg'},
-      {title:'색깔 노래',        thumb:'🌈', url:'https://www.youtube.com/watch?v=2E3a8bWQEZc'},
-    ]
-  },
-  babyshark: {
-    label:'상어가족', color:'#5BB8F5',
-    songs:[
-      {title:'아기상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
-      {title:'Baby Shark Dance', thumb:'🎵', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
-      {title:'엄마상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
-      {title:'아빠상어',         thumb:'🦈', url:'https://www.youtube.com/watch?v=XqZsoesa55w'},
-    ]
-  },
-  ebs: {
-    label:'EBS 한글', color:'#6BCB77',
-    songs:[
-      {title:'한글이 야호 - 가나다',thumb:'🇰🇷', url:'https://www.youtube.com/watch?v=ozl3LPXWH4Q'},
-      {title:'한글이 야호 - 자음송',thumb:'🔤', url:'https://www.youtube.com/watch?v=ozl3LPXWH4Q'},
-      {title:'자음 모음 노래',      thumb:'✏️', url:'https://www.youtube.com/watch?v=ozl3LPXWH4Q'},
-    ]
-  },
+// ══════════════════════════════
+// SUPABASE
+// ══════════════════════════════
+const SUPA_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
+const SUPA_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
+const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// 탭 정의 (순서/색상/이모지)
+const songTabs = {
+  animals:  { label:'🐾 동물',    color:'#FF8C42' },
+  bebefinn: { label:'🧒 베베핀',  color:'#FF6B9D' },
+  dance:    { label:'💃 율동',    color:'#A78BFA' },
+  numbers:  { label:'🔢 숫자놀이', color:'#5BB8F5' },
+  letters:  { label:'✏️ 글자놀이', color:'#6BCB77' },
 };
+
+// 초기 시드 데이터 (Supabase가 비어있을 때만 사용)
+const songsSeed = [
+  // 동물
+  {tab:'animals', title:'나비야',            thumb:'🦋', url:'', sort_order:1},
+  {tab:'animals', title:'곰 세 마리',         thumb:'🐻', url:'', sort_order:2},
+  {tab:'animals', title:'아기 돼지',          thumb:'🐷', url:'', sort_order:3},
+  {tab:'animals', title:'악어 떼',            thumb:'🐊', url:'', sort_order:4},
+  {tab:'animals', title:'병아리 행진',        thumb:'🐥', url:'', sort_order:5},
+  {tab:'animals', title:'아기상어',           thumb:'🦈', url:'', sort_order:6},
+  {tab:'animals', title:'코끼리 아저씨',      thumb:'🐘', url:'', sort_order:7},
+  {tab:'animals', title:'얼룩말',             thumb:'🦓', url:'', sort_order:8},
+  {tab:'animals', title:'산토끼',             thumb:'🐰', url:'', sort_order:9},
+  {tab:'animals', title:'사자왕',             thumb:'🦁', url:'', sort_order:10},
+  {tab:'animals', title:'원숭이 엉덩이',      thumb:'🐒', url:'', sort_order:11},
+  {tab:'animals', title:'동물원에 가요',      thumb:'🦒', url:'', sort_order:12},
+  // 베베핀
+  {tab:'bebefinn', title:'치카 송',           thumb:'🦷', url:'', sort_order:1},
+  {tab:'bebefinn', title:'그대로 멈춰라',     thumb:'🙅', url:'', sort_order:2},
+  {tab:'bebefinn', title:'머리 어깨 무릎 발', thumb:'💃', url:'', sort_order:3},
+  {tab:'bebefinn', title:'아야 아야 아파',    thumb:'🤕', url:'', sort_order:4},
+  {tab:'bebefinn', title:'나는야 토마토',     thumb:'🍅', url:'', sort_order:5},
+  {tab:'bebefinn', title:'참지말고 응가해요', thumb:'💩', url:'', sort_order:6},
+  {tab:'bebefinn', title:'아침이야 일어나',   thumb:'🌅', url:'', sort_order:7},
+  {tab:'bebefinn', title:'내 꼬리 어디 갔나', thumb:'🐾', url:'', sort_order:8},
+  {tab:'bebefinn', title:'다섯 마리 아기 오리',thumb:'🦆', url:'', sort_order:9},
+  {tab:'bebefinn', title:'알록달록 음식송',   thumb:'🌈', url:'', sort_order:10},
+  // 율동
+  {tab:'dance', title:'모양따라 춤춰요',      thumb:'🔷', url:'', sort_order:1},
+  {tab:'dance', title:'팅팅 탱탱 댄스',       thumb:'🕺', url:'', sort_order:2},
+  {tab:'dance', title:'깡깡총 체조',          thumb:'💪', url:'', sort_order:3},
+  {tab:'dance', title:'둥글게 둥글게',        thumb:'⭕', url:'', sort_order:4},
+  {tab:'dance', title:'짝짝쿵 체조',         thumb:'👐', url:'', sort_order:5},
+  {tab:'dance', title:'머리 어깨 무릎 짝',   thumb:'🙆', url:'', sort_order:6},
+  {tab:'dance', title:'빠라빠빠 동물흉내',   thumb:'🦊', url:'', sort_order:7},
+  // 숫자놀이
+  {tab:'numbers', title:'잘잘잘',             thumb:'👏', url:'', sort_order:1},
+  {tab:'numbers', title:'동물 세어 봐요',     thumb:'🐘', url:'', sort_order:2},
+  // 글자놀이 (비워둠)
+];
+
+// 런타임 songs 캐시
+let songsCache = {}; // { tab: [{id, tab, title, thumb, url, sort_order}] }
+
+async function loadSongsFromSupabase() {
+  const { data, error } = await supa.from('songs').select('*').order('sort_order');
+  if (error) { console.error('songs load error', error); return false; }
+  if (data.length === 0) {
+    // 시드 데이터 삽입
+    const { error: seedErr } = await supa.from('songs').insert(songsSeed);
+    if (seedErr) { console.error('seed error', seedErr); return false; }
+    const { data: seeded } = await supa.from('songs').select('*').order('sort_order');
+    buildSongsCache(seeded || []);
+  } else {
+    buildSongsCache(data);
+  }
+  return true;
+}
+
+function buildSongsCache(rows) {
+  songsCache = {};
+  Object.keys(songTabs).forEach(tab => songsCache[tab] = []);
+  rows.forEach(r => {
+    if (songsCache[r.tab]) songsCache[r.tab].push(r);
+  });
+}
 
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
 let currentCat = 'animals';
-let currentChannel = 'bebefinn';
+let currentChannel = 'animals';
 let matchCat = 'animals';
 let matchScore = 0;
 let matchTotal = 0;
@@ -735,99 +770,6 @@ function playVideo(url, title){
 // ══════════════════════════════
 // EDIT MODE
 // ══════════════════════════════
-function openEdit(){
-  const body = document.getElementById('edit-body');
-  body.innerHTML = '';
-
-  // 단어 카드 링크 편집
-  const vocabGroup = document.createElement('div');
-  vocabGroup.className = 'edit-group';
-  vocabGroup.innerHTML = '<div class="edit-group-title">📚 단어 카드 노래 링크</div>';
-
-  Object.entries(vocabData).forEach(([catKey, cat]) => {
-    const catTitle = document.createElement('div');
-    catTitle.style.cssText = 'font-size:0.82rem;color:'+cat.color+';margin:10px 0 6px;font-weight:700;';
-    catTitle.textContent = cat.badge + ' ' + cat.title;
-    vocabGroup.appendChild(catTitle);
-
-    cat.items.forEach((item, i) => {
-      if(!item.song) return;
-      const row = document.createElement('div');
-      row.className = 'edit-row';
-      row.innerHTML = `
-        <span class="edit-emoji">${item.e}</span>
-        <span class="edit-label">${item.w}</span>
-        <input class="edit-input" type="text"
-          placeholder="YouTube URL"
-          value="${item.url||''}"
-          data-cat="${catKey}" data-idx="${i}" data-field="url">
-      `;
-      vocabGroup.appendChild(row);
-    });
-  });
-  body.appendChild(vocabGroup);
-
-  // 노래 목록 링크 편집
-  const songGroup = document.createElement('div');
-  songGroup.className = 'edit-group';
-  songGroup.innerHTML = '<div class="edit-group-title">🎵 노래 목록 링크</div>';
-
-  Object.entries(songsData).forEach(([chKey, ch]) => {
-    const chTitle = document.createElement('div');
-    chTitle.style.cssText = 'font-size:0.82rem;color:'+ch.color+';margin:10px 0 6px;font-weight:700;';
-    chTitle.textContent = ch.label;
-    songGroup.appendChild(chTitle);
-
-    ch.songs.forEach((song, i) => {
-      const row = document.createElement('div');
-      row.className = 'edit-row';
-      row.innerHTML = `
-        <span class="edit-emoji">${song.thumb}</span>
-        <span class="edit-label" style="font-size:0.78rem;">${song.title}</span>
-        <input class="edit-input" type="text"
-          placeholder="YouTube URL"
-          value="${song.url||''}"
-          data-ch="${chKey}" data-idx="${i}" data-field="song-url">
-      `;
-      songGroup.appendChild(row);
-    });
-  });
-  body.appendChild(songGroup);
-
-  // 저장 버튼
-  const saveBtn = document.createElement('button');
-  saveBtn.className = 'edit-save';
-  saveBtn.textContent = '✅ 저장하기';
-  saveBtn.onclick = saveEdit;
-  body.appendChild(saveBtn);
-
-  document.getElementById('edit-overlay').classList.add('open');
-}
-
-function saveEdit(){
-  // vocab 링크 업데이트
-  document.querySelectorAll('[data-field="url"]').forEach(input => {
-    const cat = input.dataset.cat;
-    const idx = parseInt(input.dataset.idx);
-    if(vocabData[cat] && vocabData[cat].items[idx]){
-      vocabData[cat].items[idx].url = input.value.trim();
-    }
-  });
-  // song 링크 업데이트
-  document.querySelectorAll('[data-field="song-url"]').forEach(input => {
-    const ch = input.dataset.ch;
-    const idx = parseInt(input.dataset.idx);
-    if(songsData[ch] && songsData[ch].songs[idx]){
-      songsData[ch].songs[idx].url = input.value.trim();
-    }
-  });
-  closeEdit();
-  // 현재 화면 새로고침
-  if(document.getElementById('vocab-screen').classList.contains('active')) openVocab(currentCat);
-  if(document.getElementById('songs-screen').classList.contains('active')) renderSongs(currentChannel);
-  alert('✅ 링크가 저장됐어요!');
-}
-
 function closeEdit(){
   document.getElementById('edit-overlay').classList.remove('open');
 }
@@ -958,23 +900,28 @@ function openVocab(cat){
 // ══════════════════════════════
 // SONGS
 // ══════════════════════════════
-function openSongs(){
+// ══════════════════════════════
+// SONGS
+// ══════════════════════════════
+async function openSongs(){
+  showScreen('songs-screen');
+  document.getElementById('songs-list').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">⏳ 불러오는 중...</div>';
+  await loadSongsFromSupabase();
   renderChannelTabs();
   renderSongs(currentChannel);
-  showScreen('songs-screen');
 }
 
 function renderChannelTabs(){
-  const wrap=document.getElementById('channel-tabs');
-  wrap.innerHTML='';
-  Object.entries(songsData).forEach(([key,ch])=>{
-    const btn=document.createElement('button');
-    btn.className='ch-tab'+(key===currentChannel?' active':'');
-    btn.textContent=ch.label;
-    btn.style.setProperty('--ch-color',ch.color);
-    btn.onclick=()=>{
-      currentChannel=key;
-      document.querySelectorAll('.ch-tab').forEach(b=>b.classList.remove('active'));
+  const wrap = document.getElementById('channel-tabs');
+  wrap.innerHTML = '';
+  Object.entries(songTabs).forEach(([key, tab]) => {
+    const btn = document.createElement('button');
+    btn.className = 'ch-tab' + (key === currentChannel ? ' active' : '');
+    btn.textContent = tab.label;
+    btn.style.setProperty('--ch-color', tab.color);
+    btn.onclick = () => {
+      currentChannel = key;
+      document.querySelectorAll('.ch-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderSongs(key);
     };
@@ -982,24 +929,137 @@ function renderChannelTabs(){
   });
 }
 
-function renderSongs(chKey){
-  const ch=songsData[chKey];
-  const list=document.getElementById('songs-list');
-  list.innerHTML='';
-  ch.songs.forEach((song,i)=>{
-    const row=document.createElement('div');
-    row.className='song-row';
-    row.style.animationDelay=(i*0.05)+'s';
-    row.innerHTML=`
+function renderSongs(tabKey){
+  const tab = songTabs[tabKey];
+  const songs = songsCache[tabKey] || [];
+  const list = document.getElementById('songs-list');
+  list.innerHTML = '';
+  if(songs.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:30px;color:#bbb;font-size:1rem;">아직 노래가 없어요 ✏️ 버튼으로 추가해보세요!</div>';
+    return;
+  }
+  songs.forEach((song, i) => {
+    const row = document.createElement('div');
+    row.className = 'song-row';
+    row.style.animationDelay = (i * 0.05) + 's';
+    row.innerHTML = `
       <div class="song-thumb">${song.thumb}</div>
       <div class="song-info">
         <div class="song-title">${song.title}</div>
-        <div class="song-ch">${ch.label}</div>
+        <div class="song-ch">${tab.label}</div>
       </div>
       <div class="song-play">▶</div>`;
-    row.onclick=()=>playVideo(song.url, song.title);
+    row.onclick = () => playVideo(song.url, song.title);
     list.appendChild(row);
   });
+}
+
+// ══════════════════════════════
+// EDIT MODAL (노래 추가/수정/삭제)
+// ══════════════════════════════
+function openEdit(){
+  buildEditPanel();
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+function buildEditPanel(){
+  const body = document.getElementById('edit-body');
+  body.innerHTML = '';
+
+  // ── 탭별 노래 편집 ──
+  Object.entries(songTabs).forEach(([tabKey, tab]) => {
+    const group = document.createElement('div');
+    group.className = 'edit-group';
+    group.innerHTML = `<div class="edit-group-title" style="color:${tab.color}">${tab.label}</div>`;
+
+    const songs = songsCache[tabKey] || [];
+    songs.forEach(song => {
+      const row = document.createElement('div');
+      row.className = 'edit-row';
+      row.style.cssText = 'flex-wrap:wrap;gap:6px;';
+      row.innerHTML = `
+        <span class="edit-emoji" contenteditable="true" style="cursor:text;min-width:36px;text-align:center;" data-id="${song.id}" data-field="thumb">${song.thumb}</span>
+        <input class="edit-input" style="flex:2;min-width:80px;" type="text" placeholder="노래 제목" value="${song.title}" data-id="${song.id}" data-field="title">
+        <input class="edit-input" style="flex:3;min-width:120px;" type="text" placeholder="YouTube URL" value="${song.url||''}" data-id="${song.id}" data-field="url">
+        <button onclick="deleteSong(${song.id},'${tabKey}')" style="background:#FFE8E8;border:none;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:1rem;">🗑️</button>
+      `;
+      group.appendChild(row);
+    });
+
+    // 새 노래 추가 행
+    const addRow = document.createElement('div');
+    addRow.className = 'edit-row';
+    addRow.style.cssText = 'flex-wrap:wrap;gap:6px;background:#F0FFF4;border-radius:10px;padding:8px;';
+    addRow.innerHTML = `
+      <input class="edit-input" style="width:52px;" type="text" placeholder="🎵" data-new-tab="${tabKey}" data-new-field="thumb" maxlength="2">
+      <input class="edit-input" style="flex:2;min-width:80px;" type="text" placeholder="노래 제목" data-new-tab="${tabKey}" data-new-field="title">
+      <input class="edit-input" style="flex:3;min-width:120px;" type="text" placeholder="YouTube URL" data-new-tab="${tabKey}" data-new-field="url">
+      <button onclick="addSong('${tabKey}')" style="background:#6BCB77;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:1rem;color:white;font-family:'Jua',sans-serif;">＋추가</button>
+    `;
+    group.appendChild(addRow);
+    body.appendChild(group);
+  });
+
+  // 저장 버튼
+  const saveBtn = document.createElement('button');
+  saveBtn.className = 'edit-save';
+  saveBtn.textContent = '✅ 저장하기';
+  saveBtn.onclick = saveEdit;
+  body.appendChild(saveBtn);
+}
+
+async function addSong(tabKey){
+  const thumbInput = document.querySelector(`[data-new-tab="${tabKey}"][data-new-field="thumb"]`);
+  const titleInput = document.querySelector(`[data-new-tab="${tabKey}"][data-new-field="title"]`);
+  const urlInput   = document.querySelector(`[data-new-tab="${tabKey}"][data-new-field="url"]`);
+  const title = titleInput.value.trim();
+  const thumb = thumbInput.value.trim() || '🎵';
+  const url   = urlInput.value.trim();
+  if(!title){ titleInput.focus(); return; }
+  const maxOrder = (songsCache[tabKey]||[]).reduce((m,s)=>Math.max(m,s.sort_order||0),0);
+  const { data, error } = await supa.from('songs').insert([{tab:tabKey, title, thumb, url, sort_order: maxOrder+1}]).select();
+  if(error){ alert('추가 실패 😢 ' + error.message); return; }
+  songsCache[tabKey].push(data[0]);
+  thumbInput.value=''; titleInput.value=''; urlInput.value='';
+  buildEditPanel();
+  renderSongs(currentChannel);
+  alert('✅ 추가됐어요!');
+}
+
+async function deleteSong(id, tabKey){
+  if(!confirm('이 노래를 삭제할까요?')) return;
+  const { error } = await supa.from('songs').delete().eq('id', id);
+  if(error){ alert('삭제 실패 😢'); return; }
+  songsCache[tabKey] = songsCache[tabKey].filter(s => s.id !== id);
+  buildEditPanel();
+  renderSongs(currentChannel);
+}
+
+async function saveEdit(){
+  const updates = [];
+  // 기존 노래 수정
+  document.querySelectorAll('[data-id][data-field="title"]').forEach(input => {
+    const id = parseInt(input.dataset.id);
+    const title = input.value.trim();
+    const thumbEl = document.querySelector(`[data-id="${id}"][data-field="thumb"]`);
+    const urlEl   = document.querySelector(`input[data-id="${id}"][data-field="url"]`);
+    const thumb = thumbEl ? thumbEl.textContent.trim() : '🎵';
+    const url   = urlEl ? urlEl.value.trim() : '';
+    updates.push({ id, title, thumb, url });
+  });
+  let hasError = false;
+  for(const u of updates){
+    const { error } = await supa.from('songs').update({title:u.title, thumb:u.thumb, url:u.url}).eq('id', u.id);
+    if(error){ hasError = true; console.error(error); }
+    // 캐시 업데이트
+    Object.values(songsCache).forEach(arr => {
+      const s = arr.find(x => x.id === u.id);
+      if(s){ s.title=u.title; s.thumb=u.thumb; s.url=u.url; }
+    });
+  }
+  closeEdit();
+  renderSongs(currentChannel);
+  alert(hasError ? '⚠️ 일부 저장 실패' : '✅ 저장됐어요!');
 }
 
 // ══════════════════════════════
