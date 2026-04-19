@@ -466,6 +466,12 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   cursor:pointer; transition:all 0.2s; color:var(--text);
 }
 .nom-btn:hover { border-color:var(--sky); background:var(--sky-light); color:#1A5FA8; }
+.nom-reset {
+  font-family:'Jua',sans-serif; font-size:0.92rem; padding:10px; width:100%;
+  border:2px solid var(--coral); border-radius:30px; background:var(--coral-light);
+  color:#C0392B; cursor:pointer; margin-bottom:8px; transition:all 0.2s;
+}
+.nom-reset:hover { background:var(--coral); color:white; }
 .nom-cancel {
   font-family:'Jua',sans-serif; font-size:0.9rem; padding:8px; width:100%;
   border:none; border-radius:30px; background:#ECEFF1; color:#607D8B; cursor:pointer;
@@ -856,6 +862,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="nominate-box">
     <div class="nominate-title">🎯 누구 차례?</div>
     <div class="nominate-students" id="nominate-list"></div>
+    <button class="nom-reset" onclick="resetNomination()">🔄 지목 리셋</button>
     <button class="nom-cancel" onclick="closeNominateModal()">취소</button>
   </div>
 </div>
