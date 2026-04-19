@@ -775,7 +775,32 @@ function openNominateModal() {
   document.getElementById('nominate-modal').classList.add('open');
 }
 function closeNominateModal() { document.getElementById('nominate-modal').classList.remove('open'); }
-
+async function resetNomination() {
+  if (!practiceSessionId) return;
+  
+  if (!confirm('🔄 지목을 모두 리셋할까요?\n\n• 현재 지목 해제\n• 손든 학생 목록 초기화')) return;
+  
+  const resetQuestion = confirm('📝 문제 번호도 첫 문제(1번)로 되돌릴까요?\n\n• 확인 → 1번 문제부터 다시 시작\n• 취소 → 현재 문제 그대로 유지');
+  
+  const updateData = {
+    current_player: null,
+    raised_hands: [],
+    status: 'waiting',
+    updated_at: new Date().toISOString()
+  };
+  if (resetQuestion) updateData.q_index = 0;
+  
+  const { error } = await _supabase.from('practice_session')
+    .update(updateData).eq('id', practiceSessionId);
+  
+  if (error) {
+    alert('리셋 실패: ' + error.message);
+    return;
+  }
+  
+  lastPlayer = null;
+  closeNominateModal();
+}
 async function nominateStudent(name) {
   closeNominateModal();
   if (!practiceSessionId) return;
