@@ -2120,7 +2120,7 @@ function renderQuiz() {
   }
 
   document.getElementById('prevBtn').disabled = currentQuiz === 0;
-  document.getElementById('nextBtn').textContent = currentQuiz === quizData.length-1 ? '결과 보기' : '다음 →';
+ document.getElementById('nextBtn').textContent = currentQuiz === (window._qd || quizData).length-1 ? '결과 보기' : '다음 →';
 }
 
 function answerQuiz(i) {
