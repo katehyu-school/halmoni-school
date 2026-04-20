@@ -166,28 +166,30 @@ body{font-family:'Jua',sans-serif;background:var(--bg);min-height:100vh;overflow
 }
 .ch-tab.active{background:var(--pink);border-color:var(--pink);color:white;
   box-shadow:0 4px 14px rgba(255,107,157,0.4);}
-.songs-list{padding:10px 20px 30px;display:flex;flex-direction:column;gap:12px;}
+.songs-list{
+  padding:10px 16px 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:12px;
+}
 .song-row{
-  background:white;border-radius:18px;padding:14px 20px;
-  display:flex;align-items:center;gap:16px;
+  background:white;border-radius:18px;padding:16px 10px 12px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
   box-shadow:0 3px 14px rgba(0,0,0,0.07);
   cursor:pointer;transition:all 0.2s;border:2.5px solid transparent;
+  text-align:center;
 }
-.song-row:hover{transform:translateX(6px);border-color:var(--pink);
-  box-shadow:0 6px 20px rgba(255,107,157,0.2);}
+.song-row:hover{transform:translateY(-4px);border-color:var(--pink);
+  box-shadow:0 8px 22px rgba(255,107,157,0.22);}
 .song-thumb{
-  width:72px;height:52px;border-radius:10px;object-fit:cover;
-  background:#f0f0f0;display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;flex-shrink:0;overflow:hidden;
+  width:64px;height:64px;border-radius:14px;
+  background:#FFF0F7;display:flex;align-items:center;justify-content:center;
+  font-size:2.4rem;flex-shrink:0;
 }
-.song-thumb img{width:100%;height:100%;object-fit:cover;}
-.song-info{flex:1;}
-.song-title{font-size:1.15rem;color:#333;}
-.song-ch{font-size:0.8rem;color:#aaa;margin-top:2px;}
-.song-play{
-  font-size:1.6rem;color:var(--pink);flex-shrink:0;
-  transition:transform 0.2s;
-}
+.song-info{width:100%;}
+.song-title{font-size:0.95rem;color:#333;line-height:1.3;word-break:keep-all;}
+.song-ch{font-size:0.75rem;color:#aaa;margin-top:2px;}
+.song-play{font-size:1.2rem;color:var(--pink);transition:transform 0.2s;}
 .song-row:hover .song-play{transform:scale(1.3);}
 
 /* ══════════════ MATCH SCREEN ══════════════ */
@@ -583,16 +585,16 @@ const vocabData = {
   numbers: {
     title:'숫자', badge:'🔢', color:'#5BB8F5',
     items:[
-      {e:'🍎',w:'1 — 일', count:1,  speak:'일'},
-      {e:'🍎',w:'2 — 이', count:2,  speak:'이'},
-      {e:'🍎',w:'3 — 삼', count:3,  speak:'삼'},
-      {e:'🍎',w:'4 — 사', count:4,  speak:'사'},
-      {e:'🍎',w:'5 — 오', count:5,  speak:'오'},
-      {e:'🍎',w:'6 — 육', count:6,  speak:'육'},
-      {e:'🍎',w:'7 — 칠', count:7,  speak:'칠'},
-      {e:'🍎',w:'8 — 팔', count:8,  speak:'팔'},
-      {e:'🍎',w:'9 — 구', count:9,  speak:'구'},
-      {e:'🍎',w:'10 — 십',count:10, speak:'십'},
+      {e:'🍎',w:'1 — 일', sub:'하나', count:1,  speak:'일'},
+      {e:'🍎',w:'2 — 이', sub:'둘',   count:2,  speak:'이'},
+      {e:'🍎',w:'3 — 삼', sub:'셋',   count:3,  speak:'삼'},
+      {e:'🍎',w:'4 — 사', sub:'넷',   count:4,  speak:'사'},
+      {e:'🍎',w:'5 — 오', sub:'다섯', count:5,  speak:'오'},
+      {e:'🍎',w:'6 — 육', sub:'여섯', count:6,  speak:'육'},
+      {e:'🍎',w:'7 — 칠', sub:'일곱', count:7,  speak:'칠'},
+      {e:'🍎',w:'8 — 팔', sub:'여덟', count:8,  speak:'팔'},
+      {e:'🍎',w:'9 — 구', sub:'아홉', count:9,  speak:'구'},
+      {e:'🍎',w:'10 — 십',sub:'열',   count:10, speak:'십'},
     ]
   },
   body: {
@@ -753,18 +755,25 @@ function getVideoId(url){
   return m ? m[1] : null;
 }
 
+let _ytWin = null;
+
 function playVideo(url, title){
-  if(!url) return;
-  // 팝업 창으로 열기 — 앱 화면은 그대로 유지됨
-  const w = Math.min(900, screen.width * 0.85);
-  const h = Math.min(600, screen.height * 0.8);
-  const left = (screen.width - w) / 2;
-  const top  = (screen.height - h) / 2;
-  window.open(
-    url,
-    'youtube_popup',
-    `width=${Math.round(w)},height=${Math.round(h)},left=${Math.round(left)},top=${Math.round(top)},resizable=yes,scrollbars=yes`
-  );
+  if(!url){ alert('링크가 없어요! ✏️ 버튼으로 추가해 주세요.'); return; }
+  // 이미 열려있는 창 재사용, 닫혔으면 새로 열기
+  if(_ytWin && !_ytWin.closed){
+    _ytWin.location.href = url;
+    _ytWin.focus();
+  } else {
+    const w = Math.min(900, screen.width * 0.85);
+    const h = Math.min(600, screen.height * 0.8);
+    const left = (screen.width - w) / 2;
+    const top  = (screen.height - h) / 2;
+    _ytWin = window.open(
+      url,
+      'halmoni_youtube',
+      `width=${Math.round(w)},height=${Math.round(h)},left=${Math.round(left)},top=${Math.round(top)},resizable=yes`
+    );
+  }
 }
 
 // ══════════════════════════════
@@ -877,6 +886,7 @@ function openVocab(cat){
           ${rows.map(r=>`<div>${r}</div>`).join('')}
         </div>
         <div class="vocab-word">${item.w}</div>
+        ${item.sub ? `<div style="font-size:1rem;color:#5BB8F5;font-weight:700;margin-top:-2px;">${item.sub}</div>` : ''}
       `;
     } else {
       card.innerHTML=`
@@ -1181,11 +1191,5 @@ function launchConfetti(){
   setTimeout(()=>wrap.innerHTML='',2800);
 }
 </script>
-
-<footer style="text-align:center;padding:20px;font-family:'Jua',sans-serif;font-size:0.78rem;color:#aaa;border-top:2px dashed #FFD93D;margin-top:16px;">
-  할머니 스쿨<br>
-  © 2025 Kate HaeOk Shin Yu · All rights reserved
-</footer>
-
 </body>
 </html>
