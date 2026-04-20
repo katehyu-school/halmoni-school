@@ -2126,7 +2126,7 @@ function renderQuiz() {
 function answerQuiz(i) {
   if (quizAnswered[currentQuiz] !== null) return;
   quizAnswered[currentQuiz] = i;
-  if (i === quizData[currentQuiz].ans) quizScore++;
+  if (i === (window._qd || quizData)[currentQuiz].ans) quizScore++;
   renderQuiz();
 }
 function nextQuiz() {
@@ -2136,7 +2136,7 @@ function nextQuiz() {
     const pct = Math.round(quizScore/__qd.length*100);
     document.getElementById('quizOptions').innerHTML = '';
     document.getElementById('quizQuestion').textContent =
-      `퀴즈 완료! 🎉 점수: ${quizScore} / ${quizData.length} (${pct}%)`;
+       `퀴즈 완료! 🎉 점수: ${quizScore} / ${__qd.length} (${pct}%)`;
     document.getElementById('quizExplanation').classList.remove('show');
     document.getElementById('nextBtn').disabled = true;
   }
