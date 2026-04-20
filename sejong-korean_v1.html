@@ -2082,14 +2082,14 @@ function buildQuiz() {
 }
 
 function renderQuiz() {
-  const q = quizData[currentQuiz];
+  const q = (window._qd || quizData)[currentQuiz];
   const prog = document.getElementById('quizProgress');
   prog.innerHTML = (window._qd || quizData).map((_,i) =>
     `<div class="progress-dot ${i < currentQuiz ? 'done' : i===currentQuiz ? 'current' : ''}"></div>`
   ).join('') + `<span class="quiz-score" style="margin-left:auto">점수: <strong>${quizScore}</strong> / ${currentQuiz}</span>`;
 
   document.getElementById('quizQuestion').textContent = q.q;
-  document.getElementById('totalDisplay').textContent = quizData.length;
+  document.getElementById('totalDisplay').textContent = (window._qd || quizData).length;
   document.getElementById('scoreDisplay').textContent = quizScore;
 
   const opts = document.getElementById('quizOptions');
