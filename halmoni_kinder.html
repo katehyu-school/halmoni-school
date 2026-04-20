@@ -759,20 +759,11 @@ let _ytWin = null;
 
 function playVideo(url, title){
   if(!url){ alert('링크가 없어요! ✏️ 버튼으로 추가해 주세요.'); return; }
-  // 이미 열려있는 창 재사용, 닫혔으면 새로 열기
   if(_ytWin && !_ytWin.closed){
     _ytWin.location.href = url;
     _ytWin.focus();
   } else {
-    const w = Math.min(900, screen.width * 0.85);
-    const h = Math.min(600, screen.height * 0.8);
-    const left = (screen.width - w) / 2;
-    const top  = (screen.height - h) / 2;
-    _ytWin = window.open(
-      url,
-      'halmoni_youtube',
-      `width=${Math.round(w)},height=${Math.round(h)},left=${Math.round(left)},top=${Math.round(top)},resizable=yes`
-    );
+    _ytWin = window.open(url, 'halmoni_youtube');
   }
 }
 
@@ -886,7 +877,7 @@ function openVocab(cat){
           ${rows.map(r=>`<div>${r}</div>`).join('')}
         </div>
         <div class="vocab-word">${item.w}</div>
-        ${item.sub ? `<div style="font-size:1rem;color:#5BB8F5;font-weight:700;margin-top:-2px;">${item.sub}</div>` : ''}
+        ${item.sub ? `<div style="font-size:1.3rem;color:#5BB8F5;font-weight:700;margin-top:-2px;">${item.sub}</div>` : ''}
       `;
     } else {
       card.innerHTML=`
