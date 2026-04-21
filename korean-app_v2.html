@@ -793,18 +793,32 @@ function applyPracticeState(session, showPopup = true) {
 // ── 학생 손들기 버튼 렌더 ──
 function renderRaiseHandBtns() {
   const container = document.getElementById('raise-hand-btns');
-  if (!container || isTeacher) return;
+  if (!container) return;
   container.innerHTML = '';
-  STUDENTS.forEach(name => {
+
+  if (isTeacher) {
+    // 선생님: 지목 버튼만 있으면 되므로 손들기 버튼 불필요
+    return;
+  }
+
+  // 학생: 내 이름 버튼만 표시 (urlName 있으면 내 것만, 없으면 전체)
+  const myNames = urlName ? STUDENTS.filter(n => n === urlName) : STUDENTS;
+  myNames.forEach(name => {
     const btn = document.createElement('button');
     btn.id = 'raise-btn-' + name;
-    btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.88rem;padding:5px 12px;
-      border-radius:20px;border:2px solid #E0E7EF;background:white;
-      color:var(--muted);cursor:pointer;transition:all 0.2s;`;
     btn.textContent = '🙋 ' + name;
     btn.onclick = () => raiseHand(name);
+    _applyRaiseBtnStyle(btn, false);
     container.appendChild(btn);
   });
+}
+
+function _applyRaiseBtnStyle(btn, isRaised) {
+  btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.88rem;padding:5px 14px;
+    border-radius:20px;border:2px solid ${isRaised ? 'var(--mint)' : '#E0E7EF'};
+    background:${isRaised ? 'var(--mint-light)' : 'white'};
+    color:${isRaised ? '#1A7A74' : 'var(--muted)'};
+    cursor:pointer;transition:all 0.2s;font-weight:${isRaised ? '700' : '400'};`;
 }
 
 async function raiseHand(name) {
@@ -819,24 +833,36 @@ async function raiseHand(name) {
 }
 
 function renderRaisedHands(hands) {
-  const container = document.getElementById('raised-hands-area');
-  if (!container) return;
-  container.innerHTML = '';
-  container.style.display = hands.length > 0 ? 'flex' : 'none';
-  hands.forEach(name => {
-    const btn = document.createElement('button');
-    btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.9rem;padding:5px 14px;
-      border-radius:20px;border:2px solid var(--mint);background:var(--mint-light);
-      color:#1A7A74;cursor:${isTeacher ? 'pointer' : 'default'};transition:all 0.2s;`;
-    btn.textContent = '🙋 ' + name;
-    if (isTeacher) {
-      btn.title = 'Click to nominate';
+  if (isTeacher) {
+    // 선생님: 손든 학생 목록을 지목 버튼 앞에 표시
+    let area = document.getElementById('raised-hands-area');
+    if (!area) {
+      area = document.createElement('div');
+      area.id = 'raised-hands-area';
+      area.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;align-items:center;';
+      const nomBtn = document.getElementById('practice-nominate-btn');
+      nomBtn?.parentNode.insertBefore(area, nomBtn);
+    }
+    area.innerHTML = '';
+    area.style.display = hands.length > 0 ? 'flex' : 'none';
+    hands.forEach(name => {
+      const btn = document.createElement('button');
+      btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.9rem;padding:5px 14px;
+        border-radius:20px;border:2px solid var(--mint);background:var(--mint-light);
+        color:#1A7A74;cursor:pointer;transition:all 0.2s;`;
+      btn.textContent = '🙋 ' + name;
       btn.onmouseover = () => btn.style.background = 'var(--mint)';
       btn.onmouseout  = () => btn.style.background = 'var(--mint-light)';
       btn.onclick = () => nominateStudent(name);
-    }
-    container.appendChild(btn);
-  });
+      area.appendChild(btn);
+    });
+  } else {
+    // 학생: 내 버튼 색 토글
+    STUDENTS.forEach(name => {
+      const btn = document.getElementById('raise-btn-' + name);
+      if (btn) _applyRaiseBtnStyle(btn, hands.includes(name));
+    });
+  }
 }
 
 function openNominateModal() {
@@ -914,7 +940,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="practice-bar" id="practice-bar">
   <span style="font-family:'Jua',sans-serif;font-size:0.88rem;color:#1A5FA8;white-space:nowrap;">✏️ 연습</span>
   <span class="practice-status" id="practice-status">대기 중...</span>
-  <div id="raised-hands-area" style="display:none;gap:8px;flex-wrap:wrap;align-items:center;"></div>
   <span class="practice-my-turn" id="practice-my-turn" style="display:none;">🎯 내 차례!</span>
   <div id="raise-hand-btns" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
   <button class="nominate-btn" id="practice-nominate-btn" onclick="openNominateModal()">🎯 지목</button>
@@ -1692,8 +1717,8 @@ function switchUnit(n){
       bar.classList.remove('visible');
     }
   }
-  // 연습 탭 열리면 학생 손들기 버튼 렌더
-  if (sec === 'quiz' && !isTeacher) renderRaiseHandBtns();
+  // 연습 탭 열리면 손들기/지목 버튼 렌더
+  if (sec === 'quiz') renderRaiseHandBtns();
 }
 
 // ══════════════════════════════════════════
