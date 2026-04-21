@@ -49,7 +49,7 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
 .toc-header { text-align:center; padding:30px 20px 10px; }
 .toc-title { font-family:'Jua',sans-serif; font-size:1.8rem; color:var(--sky); margin-bottom:4px; }
 .toc-sub { font-size:0.9rem; color:var(--muted); margin-bottom:28px; }
-.toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; padding:0 20px 60px; max-width:980px; margin:0 auto; }
+.toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; padding:0 20px 60px; max-width:860px; margin:0 auto; }
 .toc-card { background:white; border-radius:20px; padding:22px 24px; box-shadow:var(--shadow); cursor:pointer; transition:all 0.2s; border-left:6px solid var(--sky); display:flex; align-items:center; gap:18px; }
 .toc-card:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(0,0,0,0.13); }
 .toc-card.done { border-left-color:var(--green); }
@@ -102,10 +102,10 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .flashcard-front, .flashcard-back { position:absolute; inset:0; border-radius:16px; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px; box-shadow:0 4px 14px rgba(0,0,0,0.08); }
 .flashcard-front { background:white; border:2.5px solid #E8EFF5; }
 .flashcard-back { transform:rotateY(180deg); }
-.fc-emoji { font-size:2.2rem; margin-bottom:6px; }
-.fc-korean { font-family:'Jua',sans-serif; font-size:1rem; color:var(--text); text-align:center; }
-.fc-english { font-family:'Gaegu',cursive; font-size:0.95rem; text-align:center; font-weight:700; }
-.fc-romanize { font-size:0.72rem; color:var(--muted); margin-top:3px; text-align:center; }
+.fc-emoji { font-size:2.6rem; margin-bottom:8px; }
+.fc-korean { font-family:'Jua',sans-serif; font-size:1.25rem; color:var(--text); text-align:center; }
+.fc-english { font-family:'Gaegu',cursive; font-size:1.1rem; text-align:center; font-weight:700; }
+.fc-romanize { font-size:0.82rem; color:var(--muted); margin-top:4px; text-align:center; }
 .fc-flip-hint { font-size:0.68rem; color:var(--muted); margin-top:5px; }
 
 /* EXAMPLE LIST */
@@ -466,16 +466,89 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   cursor:pointer; transition:all 0.2s; color:var(--text);
 }
 .nom-btn:hover { border-color:var(--sky); background:var(--sky-light); color:#1A5FA8; }
-.nom-reset {
-  font-family:'Jua',sans-serif; font-size:0.92rem; padding:10px; width:100%;
-  border:2px solid var(--coral); border-radius:30px; background:var(--coral-light);
-  color:#C0392B; cursor:pointer; margin-bottom:8px; transition:all 0.2s;
-}
-.nom-reset:hover { background:var(--coral); color:white; }
 .nom-cancel {
   font-family:'Jua',sans-serif; font-size:0.9rem; padding:8px; width:100%;
   border:none; border-radius:30px; background:#ECEFF1; color:#607D8B; cursor:pointer;
 }
+/* ── 사이드바 레이아웃 ── */
+.app-body {
+  display: flex;
+  min-height: calc(100vh - 120px);
+}
+.sidebar {
+  width: 160px;
+  flex-shrink: 0;
+  background: white;
+  border-right: 1.5px solid #E8EFF5;
+  padding: 20px 12px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+  padding: 0 6px;
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.18s;
+  margin-bottom: 4px;
+  font-family: 'Jua', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text);
+  border: 1.5px solid transparent;
+}
+.sidebar-item:hover:not(.locked) {
+  background: var(--sky-light);
+  color: var(--sky);
+  border-color: #C5DFF8;
+}
+.sidebar-item.active {
+  background: var(--sky-light);
+  color: var(--sky);
+  border-color: var(--sky);
+  font-weight: 700;
+}
+.sidebar-item.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.sidebar-num {
+  font-size: 1rem;
+  min-width: 22px;
+}
+.sidebar-label { line-height: 1.2; }
+.sidebar-sub {
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
+}
+.sidebar-divider {
+  height: 1px;
+  background: #E8EFF5;
+  margin: 12px 0;
+}
+.app-content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media(max-width: 700px) {
+  .sidebar { display: none; }
+}
+
 /* 내 차례 강조 / 남 차례 흐리기 */
 .my-turn-highlight { outline: 3px solid var(--coral); border-radius:var(--radius); box-shadow:0 0 0 6px rgba(255,107,107,0.12); }
 .other-turn-dim { opacity:0.45; }
@@ -685,12 +758,16 @@ function applyPracticeState(session, showPopup = true) {
     if (nextBtn) nextBtn.disabled = false;
   }
 
-  // 문제 번호 동기화
+  // 문제 번호 동기화 — 정답 피드백 표시 중이면 재렌더 건너뜀
   const unit = session.unit || 1;
   const qIdx = session.q_index || 0;
-  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx) { u1Idx = qIdx; if(typeof renderU1==='function') renderU1(); }
-  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
-  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
+  const isFeedbackShowing = (id) => {
+    const el = document.getElementById(id);
+    return el && el.classList.contains('correct');
+  };
+  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx && !isFeedbackShowing('u1-fb')) { u1Idx = qIdx; if(typeof renderU1==='function') renderU1(); }
+  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx && !isFeedbackShowing('u2-fb')) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
+  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx && !isFeedbackShowing('u3-fb')) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
 
   // 카드 강조 — 내 차례면 highlight, 남 차례면 dim
   const myName = urlName;
@@ -726,7 +803,6 @@ function renderRaiseHandBtns() {
       color:var(--muted);cursor:pointer;transition:all 0.2s;`;
     btn.textContent = '🙋 ' + name;
     btn.onclick = () => raiseHand(name);
-    container.appendChild(btn);
   });
 }
 
@@ -749,13 +825,13 @@ function renderRaisedHands(hands) {
   hands.forEach(name => {
     const btn = document.createElement('button');
     btn.style.cssText = `font-family:'Jua',sans-serif;font-size:0.9rem;padding:5px 14px;
-      border-radius:20px;border:2px solid var(--coral);background:var(--coral-light);
-      color:#C0392B;cursor:${isTeacher ? 'pointer' : 'default'};transition:all 0.2s;`;
+      border-radius:20px;border:2px solid var(--mint);background:var(--mint-light);
+      color:#1A7A74;cursor:${isTeacher ? 'pointer' : 'default'};transition:all 0.2s;`;
     btn.textContent = '🙋 ' + name;
     if (isTeacher) {
       btn.title = 'Click to nominate';
-      btn.onmouseover = () => btn.style.background = 'var(--coral)';
-      btn.onmouseout  = () => btn.style.background = 'var(--coral-light)';
+      btn.onmouseover = () => btn.style.background = 'var(--mint)';
+      btn.onmouseout  = () => btn.style.background = 'var(--mint-light)';
       btn.onclick = () => nominateStudent(name);
     }
     container.appendChild(btn);
@@ -775,32 +851,7 @@ function openNominateModal() {
   document.getElementById('nominate-modal').classList.add('open');
 }
 function closeNominateModal() { document.getElementById('nominate-modal').classList.remove('open'); }
-async function resetNomination() {
-  if (!practiceSessionId) return;
-  
-  if (!confirm('🔄 지목을 모두 리셋할까요?\n\n• 현재 지목 해제\n• 손든 학생 목록 초기화')) return;
-  
-  const resetQuestion = confirm('📝 문제 번호도 첫 문제(1번)로 되돌릴까요?\n\n• 확인 → 1번 문제부터 다시 시작\n• 취소 → 현재 문제 그대로 유지');
-  
-  const updateData = {
-    current_player: null,
-    raised_hands: [],
-    status: 'waiting',
-    updated_at: new Date().toISOString()
-  };
-  if (resetQuestion) updateData.q_index = 0;
-  
-  const { error } = await _supabase.from('practice_session')
-    .update(updateData).eq('id', practiceSessionId);
-  
-  if (error) {
-    alert('리셋 실패: ' + error.message);
-    return;
-  }
-  
-  lastPlayer = null;
-  closeNominateModal();
-}
+
 async function nominateStudent(name) {
   closeNominateModal();
   if (!practiceSessionId) return;
@@ -833,7 +884,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 <header class="app-header">
-  <div class="logo" onclick="showTOC()">📚 한글학교 한국어 2</div>
+  <div class="logo" onclick="showTOC()">📚 한글학교 한국어</div>
   <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
     <div class="unit-tabs" id="unit-tabs-wrap">
       <button class="unit-tab active" onclick="switchUnit(1)">1과</button>
@@ -887,10 +938,67 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="nominate-box">
     <div class="nominate-title">🎯 누구 차례?</div>
     <div class="nominate-students" id="nominate-list"></div>
-    <button class="nom-reset" onclick="resetNomination()">🔄 지목 리셋</button>
     <button class="nom-cancel" onclick="closeNominateModal()">취소</button>
   </div>
 </div>
+
+<!-- ══════ APP BODY (사이드바 + 컨텐츠) ══════ -->
+<div class="app-body">
+
+<!-- 사이드바 — 1~6권 인덱스 -->
+<nav class="sidebar">
+  <div class="sidebar-title">한국어 교재</div>
+
+  <div class="sidebar-item locked">
+    <span class="sidebar-num">1️⃣</span>
+    <div class="sidebar-label">
+      1권
+      <div class="sidebar-sub">준비중 🔒</div>
+    </div>
+  </div>
+
+  <div class="sidebar-item active" onclick="selectBook(2)">
+    <span class="sidebar-num">2️⃣</span>
+    <div class="sidebar-label">
+      2권
+      <div class="sidebar-sub">학습 중 ✅</div>
+    </div>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-item locked">
+    <span class="sidebar-num">3️⃣</span>
+    <div class="sidebar-label">
+      3권
+      <div class="sidebar-sub">준비중 🔒</div>
+    </div>
+  </div>
+  <div class="sidebar-item locked">
+    <span class="sidebar-num">4️⃣</span>
+    <div class="sidebar-label">
+      4권
+      <div class="sidebar-sub">준비중 🔒</div>
+    </div>
+  </div>
+  <div class="sidebar-item locked">
+    <span class="sidebar-num">5️⃣</span>
+    <div class="sidebar-label">
+      5권
+      <div class="sidebar-sub">준비중 🔒</div>
+    </div>
+  </div>
+  <div class="sidebar-item locked">
+    <span class="sidebar-num">6️⃣</span>
+    <div class="sidebar-label">
+      6권
+      <div class="sidebar-sub">준비중 🔒</div>
+    </div>
+  </div>
+</nav>
+
+<!-- 컨텐츠 영역 -->
+<div class="app-content">
 
 <!-- ══════ 목차 TOC ══════ -->
 <div class="toc-screen active" id="toc-screen">
@@ -974,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-<div id="main-content" style="max-width:980px;margin:0 auto;padding:28px 20px 60px;display:none;">
+<div id="main-content" style="max-width:900px;margin:0 auto;padding:28px 20px 60px;display:none;">
 <!-- ══════ UNIT 1 ══════ -->
 <div class="unit active" id="unit1">
   <nav class="section-nav">
@@ -1070,8 +1178,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="particle-selector">
         <div class="p-sel-label">🚩 Choose the right marker:</div>
         <div class="p-sel-opts">
-          <button class="psel-btn" onclick="selectParticle('이')">이</button>
-          <button class="psel-btn" onclick="selectParticle('가')">가</button>
+          <button class="psel-btn" onclick="selectParticle('이')">이 (consonant)</button>
+          <button class="psel-btn" onclick="selectParticle('가')">가 (vowel)</button>
         </div>
       </div>
 
@@ -1549,6 +1657,11 @@ function buildFlashcards(containerId, items, bgKey) {
 // ══════════════════════════════════════════
 // NAV
 // ══════════════════════════════════════════
+function selectBook(n) {
+  // 현재는 2권만 활성화 — 나중에 각 권별 콘텐츠 연결
+  if (n === 2) showTOC();
+}
+
 function showTOC(){
   document.getElementById('toc-screen').classList.add('active');
   document.getElementById('main-content').style.display='none';
@@ -2175,10 +2288,8 @@ function init(){
 init();
 </script>
 
-<footer style="text-align:center;padding:20px 16px;font-family:'Jua',sans-serif;font-size:0.78rem;color:#aaa;border-top:2px solid #E0E7EF;margin-top:16px;">
-  한글학교 한국어 2권 · 초등반<br>
-  © 2025 Kate HaeOk Shin Yu · All rights reserved
-</footer>
+</div><!-- /app-content -->
+</div><!-- /app-body -->
 
 </body>
 </html>
