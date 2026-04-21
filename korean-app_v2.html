@@ -803,6 +803,7 @@ function renderRaiseHandBtns() {
       color:var(--muted);cursor:pointer;transition:all 0.2s;`;
     btn.textContent = '🙋 ' + name;
     btn.onclick = () => raiseHand(name);
+    container.appendChild(btn);
   });
 }
 
