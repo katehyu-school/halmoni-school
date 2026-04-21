@@ -107,6 +107,22 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .fc-english { font-family:'Gaegu',cursive; font-size:1.1rem; text-align:center; font-weight:700; }
 .fc-romanize { font-size:0.82rem; color:var(--muted); margin-top:4px; text-align:center; }
 .fc-flip-hint { font-size:0.68rem; color:var(--muted); margin-top:5px; }
+.fc-audio-btn {
+  margin-top:6px;
+  background: var(--sky-light);
+  border: 1.5px solid var(--sky);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--sky);
+  transition: all 0.18s;
+  font-family: 'Jua', sans-serif;
+}
+.fc-audio-btn:hover {
+  background: var(--sky);
+  color: white;
+}
 
 /* EXAMPLE LIST */
 .example-list { display:flex; flex-direction:column; gap:10px; }
@@ -1658,6 +1674,17 @@ const bgMap = {
   sky:'var(--sky-light)', mint:'var(--mint-light)',
   sun:'var(--sun-light)', lav:'var(--lavender-light)', green:'var(--green-light)'
 };
+// ── 한국어 음성 재생 ──
+function speakKorean(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ko-KR';
+  utter.rate = 0.9;
+  utter.pitch = 1.1;
+  window.speechSynthesis.speak(utter);
+}
+
 function buildFlashcards(containerId, items, bgKey) {
   const el=document.getElementById(containerId); el.innerHTML='';
   const bg=bgMap[bgKey]||'var(--sky-light)';
@@ -1667,6 +1694,7 @@ function buildFlashcards(containerId, items, bgKey) {
       <div class="flashcard-front">
         <div class="fc-emoji">${item.emoji}</div>
         <div class="fc-korean">${item.kr}</div>
+        <button class="fc-audio-btn" title="발음 듣기">🔊</button>
         <div class="fc-flip-hint">tap to flip →</div>
       </div>
       <div class="flashcard-back" style="background:${bg};border:2px solid #C0D8F0;">
@@ -1675,7 +1703,16 @@ function buildFlashcards(containerId, items, bgKey) {
         <div class="fc-romanize">[${item.rom}]</div>
       </div>
     </div>`;
-    fc.addEventListener('click',()=>fc.classList.toggle('flipped'));
+    // 뒤집기: 카드 클릭 (🔊 버튼 제외)
+    fc.addEventListener('click', (e) => {
+      if (e.target.classList.contains('fc-audio-btn')) return;
+      fc.classList.toggle('flipped');
+    });
+    // 🔊 버튼: 음성 재생
+    fc.querySelector('.fc-audio-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      speakKorean(item.kr);
+    });
     el.appendChild(fc);
   });
 }
