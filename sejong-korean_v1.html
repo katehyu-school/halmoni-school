@@ -1039,6 +1039,16 @@ body {
 .pron-ex .pron  { color: var(--coral); font-weight: 700; }
 .pron-ex .play-icon { font-size: 13px; }
 
+/* Section tab English label */
+.tab-en {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gray-500);
+  margin-left: 4px;
+  opacity: 0.85;
+}
+.section-tab.active .tab-en { color: rgba(255,255,255,0.85); }
+
 @media (max-width: 720px) {
   .main { grid-template-columns: 1fr; }
   .sidebar { position: static; }
@@ -1074,8 +1084,8 @@ body {
     <button class="level-btn" onclick="selectLevel(this,'4B')">4B</button>
   </div>
   <div class="nav-spacer"></div>
-  <button class="hangul-nav-btn" onclick="openHangul()">한글 기초</button>
-  <div class="nav-badge">🖥 화면 공유 최적화</div>
+  <button class="hangul-nav-btn" onclick="openHangul()">한글 기초 · Hangul Basics</button>
+  <div class="nav-badge">🖥 Screen-share optimized</div>
 </nav>
 
 <!-- ══ 한글 기초 OVERLAY ══ -->
@@ -1086,66 +1096,66 @@ body {
     <div style="background:linear-gradient(135deg,#0f7c6e,#1a5fa8);padding:22px 28px;display:flex;align-items:center;gap:12px;">
       <div style="flex:1">
         <div style="font-family:var(--font-serif);font-size:20px;font-weight:700;color:#fff;">한글 기초 — How to Read Korean</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.75);margin-top:3px;">클릭하면 발음을 들을 수 있어요 · Click any letter to hear its sound</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.75);margin-top:3px;">Click any letter to hear its sound</div>
       </div>
       <button onclick="closeHangul()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;">✕</button>
     </div>
 
     <!-- Sub-tabs -->
     <div style="display:flex;gap:0;border-bottom:2px solid var(--gray-100);padding:0 20px;background:#fafaf8;">
-      <button class="htab active" onclick="hTab(this,'h-consonants')">자음 Consonants</button>
-      <button class="htab" onclick="hTab(this,'h-vowels')">모음 Vowels</button>
-      <button class="htab" onclick="hTab(this,'h-syllable')">음절 구조 Syllable</button>
-      <button class="htab" onclick="hTab(this,'h-batchim')">받침소리 Batchim</button>
-      <button class="htab" onclick="hTab(this,'h-pronunciation')">연음 Pronunciation</button>
+      <button class="htab active" onclick="hTab(this,'h-consonants')">Consonants 자음</button>
+      <button class="htab" onclick="hTab(this,'h-vowels')">Vowels 모음</button>
+      <button class="htab" onclick="hTab(this,'h-syllable')">Syllable 음절</button>
+      <button class="htab" onclick="hTab(this,'h-batchim')">Batchim 받침</button>
+      <button class="htab" onclick="hTab(this,'h-pronunciation')">Pronunciation 발음</button>
     </div>
 
     <div style="padding:24px 28px;">
 
       <!-- ── 자음 ── -->
       <div class="hpanel active" id="h-consonants">
-        <div class="h-section-title">단순 자음 Simple Consonants (14)</div>
+        <div class="h-section-title">Simple Consonants (14) — 단순 자음</div>
         <div class="jamo-grid" id="consonantGrid"></div>
-        <div class="h-section-title" style="margin-top:20px;">쌍자음 Double Consonants (5)</div>
+        <div class="h-section-title" style="margin-top:20px;">Double Consonants (5) — 쌍자음</div>
         <div class="jamo-grid" id="doubleGrid"></div>
-        <div class="h-tip">💡 자음만으로는 소리를 낼 수 없어요. 모음과 결합해야 해요. Consonants need a vowel to make a sound.</div>
+        <div class="h-tip">💡 A consonant alone makes no sound — it needs a vowel.</div>
       </div>
 
       <!-- ── 모음 ── -->
       <div class="hpanel" id="h-vowels">
-        <div class="h-section-title">단순 모음 Simple Vowels (10)</div>
+        <div class="h-section-title">Simple Vowels (10) — 단순 모음</div>
         <div class="jamo-grid" id="simpleVowelGrid"></div>
-        <div class="h-section-title" style="margin-top:20px;">복합 모음 Compound Vowels (11)</div>
+        <div class="h-section-title" style="margin-top:20px;">Compound Vowels (11) — 복합 모음</div>
         <div class="jamo-grid" id="compoundVowelGrid"></div>
-        <div class="h-tip">💡 세로 모음 (ㅏ ㅑ ㅓ ㅕ ㅣ) → 자음 옆에 위치<br>가로 모음 (ㅗ ㅛ ㅜ ㅠ ㅡ) → 자음 아래에 위치</div>
+        <div class="h-tip">💡 Vertical vowels (ㅏ ㅑ ㅓ ㅕ ㅣ) sit <strong>beside</strong> the consonant.<br>Horizontal vowels (ㅗ ㅛ ㅜ ㅠ ㅡ) sit <strong>below</strong> the consonant.</div>
       </div>
 
       <!-- ── 음절 구조 ── -->
       <div class="hpanel" id="h-syllable">
-        <div class="h-section-title">한국어 음절은 레고 블록처럼 쌓아요</div>
+        <div class="h-section-title">Korean syllables stack like Lego blocks — 한국어 음절은 레고 블록처럼 쌓아요</div>
 
         <!-- 천지인 설명 -->
         <div style="background:#fafaf7;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:16px;">
-          <div style="font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:10px;">한글 모음의 창제 원리 — 天地人 (천지인)</div>
+          <div style="font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:10px;">The origin of Hangul vowels — 天地人 (Heaven · Earth · Human)</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
             <div style="flex:1;min-width:130px;background:var(--amber-lt);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;">
               <div style="font-size:22px;font-weight:700;color:var(--amber);margin-bottom:4px;">•</div>
-              <div style="font-size:12px;font-weight:700;color:var(--amber);">天 (하늘)</div>
-              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">아래아 · 하늘의 둥근 모양</div>
+              <div style="font-size:12px;font-weight:700;color:var(--amber);">天 Heaven (하늘)</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">Round shape of the sky</div>
             </div>
             <div style="flex:1;min-width:130px;background:var(--blue-lt);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;">
               <div style="font-size:22px;font-weight:700;color:var(--blue);margin-bottom:4px;">ㅡ</div>
-              <div style="font-size:12px;font-weight:700;color:var(--blue);">地 (땅)</div>
-              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">평평한 땅의 형상</div>
+              <div style="font-size:12px;font-weight:700;color:var(--blue);">地 Earth (땅)</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">The flat earth</div>
             </div>
             <div style="flex:1;min-width:130px;background:var(--teal-lt);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;">
               <div style="font-size:22px;font-weight:700;color:var(--teal);margin-bottom:4px;">ㅣ</div>
-              <div style="font-size:12px;font-weight:700;color:var(--teal);">人 (사람)</div>
-              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">서 있는 사람의 형상</div>
+              <div style="font-size:12px;font-weight:700;color:var(--teal);">人 Human (사람)</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">A person standing upright</div>
             </div>
           </div>
           <!-- 모음 조합 원리 -->
-          <div style="font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:8px;">세 요소를 결합해서 모든 모음을 만들어요:</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:8px;">Combining these three makes every vowel:</div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
             <div class="vowel-origin-pill" style="background:var(--teal-lt);border-color:#81c784">
               <span style="color:var(--teal);font-weight:700">ㅏ</span>
@@ -1180,7 +1190,7 @@ body {
               <span style="color:var(--gray-500)">=</span>
               <span style="color:var(--blue)">ㅡ</span><span style="color:var(--gray-400);font-size:10px">(地)</span>
               <span style="color:var(--gray-500)">+</span>
-              <span style="color:var(--amber)">•</span><span style="color:var(--gray-400);font-size:10px">(天 아래)</span>
+              <span style="color:var(--amber)">•</span><span style="color:var(--gray-400);font-size:10px">(天 below)</span>
             </div>
             <div class="vowel-origin-pill" style="background:var(--blue-lt);border-color:#90caf9">
               <span style="color:var(--blue);font-weight:700">ㅛ</span>
@@ -1193,13 +1203,13 @@ body {
               <span style="color:var(--teal);font-weight:700">ㅣ</span>
               <span style="color:var(--gray-500)">=</span>
               <span style="color:var(--teal)">人</span>
-              <span style="color:var(--gray-500);font-size:11px">그 자체</span>
+              <span style="color:var(--gray-500);font-size:11px">as is</span>
             </div>
             <div class="vowel-origin-pill" style="background:var(--blue-lt);border-color:var(--blue)">
               <span style="color:var(--blue);font-weight:700">ㅡ</span>
               <span style="color:var(--gray-500)">=</span>
               <span style="color:var(--blue)">地</span>
-              <span style="color:var(--gray-500);font-size:11px">그 자체</span>
+              <span style="color:var(--gray-500);font-size:11px">as is</span>
             </div>
           </div>
         </div>
@@ -1209,7 +1219,7 @@ body {
 
           <!-- 세로 모음 (人 계열): 자음 옆에 -->
           <div style="background:var(--teal-lt);border-radius:var(--radius-sm);padding:16px;">
-            <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px;">ㅣ(人) 계열 — 자음 <u>옆에</u></div>
+            <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px;">ㅣ (人 Human) group — <u>beside</u> the consonant</div>
             <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">ㅏ ㅑ ㅓ ㅕ ㅣ</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
 
@@ -1257,7 +1267,7 @@ body {
 
           <!-- 가로 모음 (地 계열): 자음 아래에 -->
           <div style="background:var(--blue-lt);border-radius:var(--radius-sm);padding:16px;">
-            <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;">ㅡ(地) 계열 — 자음 <u>아래에</u></div>
+            <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;">ㅡ (地 Earth) group — <u>below</u> the consonant</div>
             <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">ㅗ ㅛ ㅜ ㅠ ㅡ</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
 
@@ -1302,14 +1312,14 @@ body {
           </div>
         </div>
 
-        <div class="h-tip">💡 읽는 순서: ① 초성(자음) → ② 모음 → ③ 받침 (있으면)<br>
-        <span style="color:var(--teal);font-weight:700">ㅣ(人) 계열</span> 모음은 서 있는 사람처럼 세로 → 자음 <strong>옆</strong> &nbsp;|&nbsp;
-        <span style="color:var(--blue);font-weight:700">ㅡ(地) 계열</span> 모음은 평평한 땅처럼 가로 → 자음 <strong>아래</strong></div>
+        <div class="h-tip">💡 Reading order: ① initial consonant → ② vowel → ③ final consonant (if any)<br>
+        <span style="color:var(--teal);font-weight:700">ㅣ (人) group</span> vowels are vertical, like a standing person → <strong>beside</strong> the consonant &nbsp;|&nbsp;
+        <span style="color:var(--blue);font-weight:700">ㅡ (地) group</span> vowels are horizontal, like flat earth → <strong>below</strong> the consonant</div>
 
-        <div class="h-section-title" style="margin-top:18px;">직접 만들어 보세요! Build a syllable</div>
+        <div class="h-section-title" style="margin-top:18px;">Build a syllable yourself! — 직접 만들어 보세요</div>
         <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px;">
           <div>
-            <div style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">① 초성 선택</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">① Initial consonant</div>
             <select id="sylC" onchange="buildSyl()" style="padding:8px 12px;border-radius:8px;border:1.5px solid var(--gray-200);font-family:var(--font-sans);font-size:15px;">
               <option value="ㄱ">ㄱ</option><option value="ㄴ">ㄴ</option><option value="ㄷ">ㄷ</option>
               <option value="ㄹ">ㄹ</option><option value="ㅁ">ㅁ</option><option value="ㅂ">ㅂ</option>
@@ -1317,7 +1327,7 @@ body {
             </select>
           </div>
           <div>
-            <div style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">② 모음 선택</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">② Vowel</div>
             <select id="sylV" onchange="buildSyl()" style="padding:8px 12px;border-radius:8px;border:1.5px solid var(--gray-200);font-family:var(--font-sans);font-size:15px;">
               <option value="아">아 (ㅏ)</option><option value="야">야 (ㅑ)</option>
               <option value="어">어 (ㅓ)</option><option value="여">여 (ㅕ)</option>
@@ -1327,37 +1337,37 @@ body {
             </select>
           </div>
           <div>
-            <div style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">③ 받침 (선택)</div>
+            <div style="font-size:12px;color:var(--gray-500);margin-bottom:6px;">③ Final (optional)</div>
             <select id="sylB" onchange="buildSyl()" style="padding:8px 12px;border-radius:8px;border:1.5px solid var(--gray-200);font-family:var(--font-sans);font-size:15px;">
-              <option value="">없음</option>
+              <option value="">None</option>
               <option value="ㄱ">ㄱ</option><option value="ㄴ">ㄴ</option><option value="ㄷ">ㄷ</option>
               <option value="ㄹ">ㄹ</option><option value="ㅁ">ㅁ</option><option value="ㅂ">ㅂ</option>
               <option value="ㅇ">ㅇ</option>
             </select>
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4px;">
-            <div id="sylPreview" onclick="speakSyl()" style="font-family:var(--font-serif);font-size:52px;font-weight:700;color:var(--teal);cursor:pointer;min-width:60px;text-align:center;line-height:1;" title="클릭해서 발음 듣기">가</div>
-            <div style="font-size:11px;color:var(--gray-500)">클릭 → 발음</div>
+            <div id="sylPreview" onclick="speakSyl()" style="font-family:var(--font-serif);font-size:52px;font-weight:700;color:var(--teal);cursor:pointer;min-width:60px;text-align:center;line-height:1;" title="Click to hear it">가</div>
+            <div style="font-size:11px;color:var(--gray-500)">Click → hear</div>
           </div>
         </div>
       </div>
 
       <!-- ── 받침소리 ── -->
       <div class="hpanel" id="h-batchim">
-        <div class="h-section-title">받침소리 — 7가지 대표 소리</div>
-        <div style="font-size:13px;color:var(--gray-500);margin-bottom:16px;">같은 받침 소리는 같은 색으로 표시했어요. 클릭하면 발음을 들을 수 있어요.</div>
+        <div class="h-section-title">Batchim sounds — 7 representative sounds</div>
+        <div style="font-size:13px;color:var(--gray-500);margin-bottom:16px;">Finals that share a sound share a color. Click to hear.</div>
         <div id="batchimGrid"></div>
-        <div class="h-tip" style="margin-top:16px;">💡 받침 뒤에 모음이 오면 → 그 받침이 다음 음절의 첫소리가 돼요! (연음화)<br>
-        예: 목<strong>에</strong> → 모<strong>게</strong> &nbsp;|&nbsp; 집<strong>에</strong> → 지<strong>베</strong> &nbsp;|&nbsp; 꽃<strong>이</strong> → 꼬<strong>치</strong></div>
+        <div class="h-tip" style="margin-top:16px;">💡 When a vowel follows a final consonant, that consonant becomes the first sound of the next syllable (liaison / 연음화).<br>
+        e.g. 목<strong>에</strong> → 모<strong>게</strong> &nbsp;|&nbsp; 집<strong>에</strong> → 지<strong>베</strong> &nbsp;|&nbsp; 꽃<strong>이</strong> → 꼬<strong>치</strong></div>
       </div>
 
       <!-- ── 연음 발음 ── -->
       <div class="hpanel" id="h-pronunciation">
-        <div class="h-section-title">발음 규칙 — Pronunciation Rules</div>
+        <div class="h-section-title">Pronunciation Rules — 발음 규칙</div>
 
         <div class="pron-card">
-          <div class="pron-rule-title">① 연음화 (Liaison) — 받침 + 모음</div>
-          <div class="pron-desc">받침 뒤에 모음으로 시작하는 음절이 오면, 받침이 뒤 음절의 첫소리가 돼요.</div>
+          <div class="pron-rule-title">① Liaison (연음화) — final consonant + vowel</div>
+          <div class="pron-desc">When a vowel follows a final consonant, that consonant moves to the next syllable as its first sound.</div>
           <div class="pron-examples">
             <div class="pron-ex" onclick="speak('마자요')"><span class="spell">맞아요</span><span class="arrow">→</span><span class="pron">마자요</span><span class="play-icon">🔊</span></div>
             <div class="pron-ex" onclick="speak('이르미')"><span class="spell">이름이</span><span class="arrow">→</span><span class="pron">이르미</span><span class="play-icon">🔊</span></div>
@@ -1368,8 +1378,8 @@ body {
         </div>
 
         <div class="pron-card">
-          <div class="pron-rule-title">② 격음화 (Aspiration) — ㄷ + ㅎ → ㅌ</div>
-          <div class="pron-desc">받침 ㄷ 뒤에 ㅎ이 오면 ㅌ 소리가 나요.</div>
+          <div class="pron-rule-title">② Aspiration (격음화) — ㄷ + ㅎ → ㅌ</div>
+          <div class="pron-desc">When ㅎ follows final ㄷ, the sound becomes ㅌ.</div>
           <div class="pron-examples">
             <div class="pron-ex" onclick="speak('며토')"><span class="spell">몇호</span><span class="arrow">→</span><span class="pron">며토</span><span class="play-icon">🔊</span></div>
             <div class="pron-ex" onclick="speak('조아요')"><span class="spell">좋아요</span><span class="arrow">→</span><span class="pron">조아요</span><span class="play-icon">🔊</span></div>
@@ -1377,15 +1387,15 @@ body {
         </div>
 
         <div class="pron-card">
-          <div class="pron-rule-title">③ 비음화 특수 — 십육 (16)</div>
-          <div class="pron-desc">십육 → 심뉵 (O) &nbsp;|&nbsp; 시뷱 (X) — ㄱ받침 뒤 ㄹ은 ㄴ으로 바뀌고, ㅂ받침은 ㅁ으로 비음화돼요.</div>
+          <div class="pron-rule-title">③ Nasalization special case — 십육 (16)</div>
+          <div class="pron-desc">십육 → 심뉵 (✓) &nbsp;|&nbsp; 시뷱 (✗) — after the ㄱ-final, ㄹ changes to ㄴ, and the ㅂ-final nasalizes to ㅁ.</div>
           <div class="pron-examples">
             <div class="pron-ex" onclick="speak('심뉵')"><span class="spell">십육 (16)</span><span class="arrow">→</span><span class="pron">심뉵</span><span class="play-icon">🔊</span></div>
             <div class="pron-ex" onclick="speak('며둴')"><span class="spell">몇월</span><span class="arrow">→</span><span class="pron">며둴</span><span class="play-icon">🔊</span></div>
           </div>
         </div>
 
-        <div class="h-tip">💡 이 발음 규칙들은 세종 한국어 교재 전반에 걸쳐 계속 나와요. 귀로 많이 듣고 따라 하는 것이 가장 중요해요!</div>
+        <div class="h-tip">💡 These pronunciation rules appear throughout the Sejong textbook. Listening and repeating out loud is the best way to learn them!</div>
       </div>
 
     </div><!-- /padding wrapper -->
@@ -1397,90 +1407,90 @@ body {
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="sidebar-header">세종 한국어 1A · 2022</div>
+    <div class="sidebar-header">세종 한국어 · 2022</div>
     <ul class="unit-list" id="unitList">
 
       <!-- 입문 -->
       <li class="unit-item">
-        <div class="unit-topic-label">입문</div>
+        <div class="unit-topic-label">입문 · Intro</div>
         <button class="unit-btn" onclick="selectUnit(this,0)">
           <span class="unit-num unit-num-intro">0</span>
-          <span>한글을 배워요<span class="unit-subtitle">자모·음절·발음</span></span>
+          <span>한글을 배워요<span class="unit-subtitle">Let's learn Korean</span></span>
         </button>
       </li>
 
       <!-- 자기소개 -->
       <li class="unit-item">
-        <div class="unit-topic-label">자기소개</div>
+        <div class="unit-topic-label">자기소개 · Introducing Yourself</div>
         <button class="unit-btn active" onclick="selectUnit(this,1);loadUnit(1)">
           <span class="unit-num">01</span>
-          <span>안녕하세요? 저는 안나예요<span class="unit-subtitle">이에요/예요 · 은/는</span></span>
+          <span>안녕하세요? 저는 안나예요<span class="unit-subtitle">Hi, I'm Anna</span></span>
         </button>
       </li>
       <li class="unit-item">
         <button class="unit-btn" onclick="selectUnit(this,2);loadUnit(2)">
           <span class="unit-num">02</span>
-          <span>전화번호가 뭐예요?<span class="unit-subtitle">이/가 · 숫자</span></span>
+          <span>전화번호가 뭐예요?<span class="unit-subtitle">Can I have your phone number?</span></span>
         </button>
       </li>
 
       <!-- 사물과 동작 -->
       <li class="unit-item">
-        <div class="unit-topic-label">사물과 동작</div>
+        <div class="unit-topic-label">사물과 동작 · Objects and Movements</div>
         <button class="unit-btn" onclick="selectUnit(this,3);loadUnit(3)">
           <span class="unit-num">03</span>
-          <span>제 가방은 책상 옆에 있어요<span class="unit-subtitle">이/가 있어요 · 위치</span></span>
+          <span>제 가방은 책상 옆에 있어요<span class="unit-subtitle">My bag is next to the desk</span></span>
         </button>
       </li>
       <li class="unit-item">
         <button class="unit-btn" onclick="selectUnit(this,4)">
           <span class="unit-num">04</span>
-          <span>한국어를 공부해요<span class="unit-subtitle">을/를 · 동사</span></span>
+          <span>한국어를 공부해요<span class="unit-subtitle">I'm studying Korean</span></span>
         </button>
       </li>
 
       <!-- 물건 사기 -->
       <li class="unit-item">
-        <div class="unit-topic-label">물건 사기</div>
+        <div class="unit-topic-label">물건 사기 · Buying Things</div>
         <button class="unit-btn" onclick="selectUnit(this,5)">
           <span class="unit-num">05</span>
-          <span>빵하고 우유를 사요<span class="unit-subtitle">하고 · 을/를</span></span>
+          <span>빵하고 우유를 사요<span class="unit-subtitle">I buy bread and milk</span></span>
         </button>
       </li>
       <li class="unit-item">
         <button class="unit-btn" onclick="selectUnit(this,6)">
           <span class="unit-num">06</span>
-          <span>사과 다섯 개 주세요<span class="unit-subtitle">고유어 수 · 단위명사</span></span>
+          <span>사과 다섯 개 주세요<span class="unit-subtitle">Give me five apples</span></span>
         </button>
       </li>
 
       <!-- 시간과 날씨 -->
       <li class="unit-item">
-        <div class="unit-topic-label">시간과 날씨</div>
+        <div class="unit-topic-label">시간과 날씨 · Time and Weather</div>
         <button class="unit-btn" onclick="selectUnit(this,7)">
           <span class="unit-num">07</span>
-          <span>일곱 시에 시작해요<span class="unit-subtitle">에 · 시간 표현</span></span>
+          <span>일곱 시에 시작해요<span class="unit-subtitle">It begins at seven o'clock</span></span>
         </button>
       </li>
       <li class="unit-item">
         <button class="unit-btn" onclick="selectUnit(this,8)">
           <span class="unit-num">08</span>
-          <span>날씨가 더워요?<span class="unit-subtitle">형용사 · 날씨</span></span>
+          <span>날씨가 더워요?<span class="unit-subtitle">Is the weather hot?</span></span>
         </button>
       </li>
 
       <!-- 주말 활동 -->
       <li class="unit-item">
-        <div class="unit-topic-label">주말 활동</div>
+        <div class="unit-topic-label">주말 활동 · Weekend Activities</div>
         <button class="unit-btn" onclick="selectUnit(this,9)">
           <span class="unit-num">09</span>
-          <span>공원에서 산책했어요<span class="unit-subtitle">에서 · 과거형</span></span>
+          <span>공원에서 산책했어요<span class="unit-subtitle">I took a walk in the park</span></span>
         </button>
       </li>
       <li class="unit-item">
         <button class="unit-btn" onclick="selectUnit(this,10)">
           <span class="unit-num">10</span>
-          <span>우리 같이 놀이공원에 갈까요?<span class="unit-subtitle">을까요? · 제안</span></span>
+          <span>우리 같이 놀이공원에 갈까요?<span class="unit-subtitle">Shall we go to an amusement park together?</span></span>
         </button>
       </li>
 
@@ -1495,7 +1505,7 @@ body {
       <div class="unit-header-badge" id="unitBadge">01</div>
       <div class="unit-header-text">
         <h1 id="unitTitle">안녕하세요? 저는 안나예요</h1>
-        <div class="unit-topic" id="unitTopic">주제: 자기소개 | 세종 한국어 1A — 01과 · p.35</div>
+        <div class="unit-topic" id="unitTopic">Hi, I'm Anna · Introducing Yourself</div>
         <div class="unit-goals" id="unitGoals">
           <span class="goal-tag amber">새 어휘</span>
           <span class="goal-tag blue">N이에요/예요</span>
@@ -1508,30 +1518,30 @@ body {
 
     <!-- Section tabs -->
     <div class="section-tabs">
-      <button class="section-tab active" data-section="vocab" onclick="switchTab(this,'vocab')">📚 새 어휘<span class="tab-en">Vocabulary</span></button>
-      <button class="section-tab" data-section="grammar" onclick="switchTab(this,'grammar')">📝 문법<span class="tab-en">Grammar</span></button>
-      <button class="section-tab" data-section="usage" onclick="switchTab(this,'usage')">💬 활용 예시<span class="tab-en">Usage</span></button>
-      <button class="section-tab" data-section="quiz" onclick="switchTab(this,'quiz')">🎯 연습 퀴즈<span class="tab-en">Quiz</span></button>
-      <button class="section-tab" data-section="real" onclick="switchTab(this,'real')">🌏 실생활 적용<span class="tab-en">Real Life</span></button>
+      <button class="section-tab active" data-section="vocab" onclick="switchTab(this,'vocab')">📚 Vocabulary<span class="tab-en">새 어휘</span></button>
+      <button class="section-tab" data-section="grammar" onclick="switchTab(this,'grammar')">📝 Grammar<span class="tab-en">문법</span></button>
+      <button class="section-tab" data-section="usage" onclick="switchTab(this,'usage')">💬 Usage<span class="tab-en">활용 예시</span></button>
+      <button class="section-tab" data-section="quiz" onclick="switchTab(this,'quiz')">🎯 Quiz<span class="tab-en">연습 퀴즈</span></button>
+      <button class="section-tab" data-section="real" onclick="switchTab(this,'real')">🌏 Real Life<span class="tab-en">실생활 적용</span></button>
     </div>
 
     <!-- ══ 1. VOCAB PANEL ══ -->
     <div class="section-panel active" id="panel-vocab">
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--amber)"></span>새 어휘 — 카드를 클릭하면 뜻이 나와요</div>
+        <div class="panel-title"><span class="dot" style="background:var(--amber)"></span>Vocabulary — click a card to see the meaning</div>
         <div class="vocab-grid" id="vocabGrid">
           <!-- cards injected by JS -->
         </div>
 
         <!-- Word Matching Game -->
         <div class="matching-area">
-          <div class="matching-title">🎮 단어 매칭 게임 — 한국어와 영어를 연결하세요</div>
+          <div class="matching-title">🎮 Word matching — connect Korean with English</div>
           <div class="matching-grid">
             <div class="match-col" id="krCol"></div>
             <div class="match-col" id="enCol"></div>
           </div>
           <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-            <button class="check-btn" style="background:var(--amber)" onclick="resetMatching()">🔄 다시 하기</button>
+            <button class="check-btn" style="background:var(--amber)" onclick="resetMatching()">🔄 Restart</button>
             <span id="matchScore" style="font-size:13px;color:var(--gray-500)"></span>
           </div>
         </div>
@@ -1541,39 +1551,39 @@ body {
     <!-- ══ 2. GRAMMAR PANEL ══ -->
     <div class="section-panel" id="panel-grammar">
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>문법 1 — N이에요 / N예요</div>
-        <div class="grammar-pattern">명사 + 이에요 / 예요</div>
-        <div class="grammar-note"><strong>규칙:</strong> 받침이 있으면 <strong>이에요</strong>, 받침이 없으면 <strong>예요</strong></div>
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 1 — N이에요 / N예요</div>
+        <div class="grammar-pattern">Noun + 이에요 / 예요</div>
+        <div class="grammar-note"><strong>Rule:</strong> Use <strong>이에요</strong> after a final consonant, <strong>예요</strong> after a vowel.</div>
         <table class="grammar-table">
-          <thead><tr><th>명사</th><th>받침</th><th>형태</th><th>예문</th></tr></thead>
+          <thead><tr><th>Noun</th><th>Final consonant?</th><th>Form</th><th>Example</th></tr></thead>
           <tbody>
-            <tr><td>학생</td><td>✅ 있음 (ㅇ)</td><td><strong>학생이에요</strong></td><td>저는 학생이에요.</td></tr>
-            <tr><td>의사</td><td>❌ 없음</td><td><strong>의사예요</strong></td><td>저는 의사예요.</td></tr>
-            <tr><td>선생님</td><td>✅ 있음 (ㅁ)</td><td><strong>선생님이에요</strong></td><td>저는 선생님이에요.</td></tr>
-            <tr><td>캐나다 사람</td><td>✅ 있음 (ㅁ)</td><td><strong>캐나다 사람이에요</strong></td><td>저는 캐나다 사람이에요.</td></tr>
+            <tr><td>학생 (student)</td><td>✅ Yes (ㅇ)</td><td><strong>학생이에요</strong></td><td>저는 학생이에요.</td></tr>
+            <tr><td>의사 (doctor)</td><td>❌ No</td><td><strong>의사예요</strong></td><td>저는 의사예요.</td></tr>
+            <tr><td>선생님 (teacher)</td><td>✅ Yes (ㅁ)</td><td><strong>선생님이에요</strong></td><td>저는 선생님이에요.</td></tr>
+            <tr><td>캐나다 사람 (Canadian)</td><td>✅ Yes (ㅁ)</td><td><strong>캐나다 사람이에요</strong></td><td>저는 캐나다 사람이에요.</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>문법 2 — N은 / N는</div>
-        <div class="grammar-pattern">명사 + 은 / 는 (주제 조사)</div>
-        <div class="grammar-note"><strong>규칙:</strong> 받침이 있으면 <strong>은</strong>, 받침이 없으면 <strong>는</strong></div>
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 2 — N은 / N는</div>
+        <div class="grammar-pattern">Noun + 은 / 는 (topic marker)</div>
+        <div class="grammar-note"><strong>Rule:</strong> Use <strong>은</strong> after a final consonant, <strong>는</strong> after a vowel.</div>
         <table class="grammar-table">
-          <thead><tr><th>명사</th><th>받침</th><th>형태</th><th>예문</th></tr></thead>
+          <thead><tr><th>Noun</th><th>Final consonant?</th><th>Form</th><th>Example</th></tr></thead>
           <tbody>
-            <tr><td>저</td><td>❌ 없음</td><td><strong>저는</strong></td><td>저는 김민준이에요.</td></tr>
-            <tr><td>이름</td><td>✅ 있음 (ㅁ)</td><td><strong>이름은</strong></td><td>이름은 뭐예요?</td></tr>
-            <tr><td>나라</td><td>❌ 없음</td><td><strong>나라는</strong></td><td>나라는 어디예요?</td></tr>
+            <tr><td>저 (I)</td><td>❌ No</td><td><strong>저는</strong></td><td>저는 김민준이에요.</td></tr>
+            <tr><td>이름 (name)</td><td>✅ Yes (ㅁ)</td><td><strong>이름은</strong></td><td>이름은 뭐예요?</td></tr>
+            <tr><td>나라 (country)</td><td>❌ No</td><td><strong>나라는</strong></td><td>나라는 어디예요?</td></tr>
           </tbody>
         </table>
 
         <div class="blank-exercise">
-          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">✏️ 빈칸 채우기 연습</div>
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">✏️ Fill in the blanks</div>
           <div id="blankExercises"></div>
           <div style="margin-top:14px;display:flex;gap:0;align-items:center">
-            <button class="check-btn" onclick="checkBlanks()">✅ 확인하기</button>
-            <button class="hint-btn" onclick="showHint()">💡 힌트</button>
+            <button class="check-btn" onclick="checkBlanks()">✅ Check</button>
+            <button class="hint-btn" onclick="showHint()">💡 Hint</button>
           </div>
           <div class="feedback-row" id="blankFeedback"></div>
         </div>
@@ -1583,7 +1593,7 @@ body {
     <!-- ══ 3. USAGE PANEL ══ -->
     <div class="section-panel" id="panel-usage">
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>활용 예시 — 자기소개 대화</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>Usage — Self-introduction dialogue</div>
 
         <div class="usage-dialogue">
           <div class="dialogue-line">
@@ -1625,13 +1635,13 @@ body {
 
         <!-- Word order builder -->
         <div class="word-builder">
-          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">🔀 문장 만들기 — 단어를 순서대로 클릭하세요</div>
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">🔀 Sentence builder — click the words in the correct order</div>
           <div class="builder-target" id="builderTarget"></div>
-          <div class="word-tiles-answer" id="answerZone"><span style="color:var(--gray-500);font-size:13px">여기에 단어를 놓으세요</span></div>
+          <div class="word-tiles-answer" id="answerZone"><span style="color:var(--gray-500);font-size:13px">Place words here</span></div>
           <div class="word-tiles-pool" id="tilesPool"></div>
           <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-            <button class="check-btn" style="background:var(--teal)" onclick="checkSentence()">✅ 확인</button>
-            <button class="hint-btn" onclick="nextSentence()">다음 문장 →</button>
+            <button class="check-btn" style="background:var(--teal)" onclick="checkSentence()">✅ Check</button>
+            <button class="hint-btn" onclick="nextSentence()">Next sentence →</button>
             <span id="builderFeedback" style="font-size:13px"></span>
           </div>
         </div>
@@ -1641,15 +1651,16 @@ body {
     <!-- ══ 4. QUIZ PANEL ══ -->
     <div class="section-panel" id="panel-quiz">
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>연습 퀴즈 — 객관식</div>
+        <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>Quiz — multiple choice</div>
         <div class="quiz-progress" id="quizProgress"></div>
         <div class="quiz-question" id="quizQuestion"></div>
         <div class="quiz-options" id="quizOptions"></div>
         <div class="quiz-explanation" id="quizExplanation"></div>
         <div class="nav-btns">
-          <button class="btn-secondary" onclick="prevQuiz()" id="prevBtn">← 이전</button>
-          <button class="btn-primary" onclick="nextQuiz()" id="nextBtn">다음 →</button>
-          <span class="quiz-score">점수: <strong id="scoreDisplay">0</strong> / <span id="totalDisplay">0</span></span>
+          <button class="btn-secondary" onclick="prevQuiz()" id="prevBtn">← Previous</button>
+          <button class="btn-primary" onclick="checkQuiz()" id="checkQuizBtn">✅ Check answer</button>
+          <button class="btn-primary" onclick="nextQuiz()" id="nextBtn" style="display:none">Next →</button>
+          <span class="quiz-score">Score: <strong id="scoreDisplay">0</strong> / <span id="totalDisplay">0</span></span>
         </div>
       </div>
     </div>
@@ -1657,43 +1668,43 @@ body {
     <!-- ══ 5. REAL LIFE PANEL ══ -->
     <div class="section-panel" id="panel-real">
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>실생활 적용 — 상황 연습</div>
+        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>Real Life — situation practice</div>
 
         <div class="scenario-card">
-          <div class="scenario-title">📍 활동 1 — 인사하기</div>
-          <div class="scenario-prompt">처음 만난 사람에게 인사해 보세요. 이름과 나라를 소개하세요.<br><em style="font-size:12px;color:var(--gray-500)">(안녕하세요 + 이름 + 나라 또는 직업)</em></div>
+          <div class="scenario-title">📍 Activity 1 — Say hello</div>
+          <div class="scenario-prompt">Greet someone you're meeting for the first time. Introduce your name and country.<br><em style="font-size:12px;color:var(--gray-500)">(안녕하세요 + name + country or job)</em></div>
           <textarea class="response-area" placeholder="안녕하세요!&#10;저는 ___예요/이에요.&#10;저는 ___ 사람이에요." id="real1"></textarea>
           <div>
-            <button class="show-answer-btn" onclick="toggleSample('sample1')">샘플 답변 보기</button>
+            <button class="show-answer-btn" onclick="toggleSample('sample1')">Show sample answer</button>
           </div>
           <div class="sample-answer" id="sample1">
-            <strong>샘플 답변:</strong>
+            <strong>Sample answer:</strong>
             안녕하세요! 저는 안나예요. 저는 미국 사람이에요. 만나서 반갑습니다!
           </div>
         </div>
 
         <div class="scenario-card">
-          <div class="scenario-title">📍 활동 2 — 자기소개하기</div>
-          <div class="scenario-prompt">이름, 나라, 직업을 모두 포함해서 자기소개를 써 보세요.<br><em style="font-size:12px;color:var(--gray-500)">(Self check: 자신의 나라와 직업을 말할 수 있어요?)</em></div>
+          <div class="scenario-title">📍 Activity 2 — Introduce yourself</div>
+          <div class="scenario-prompt">Write a self-introduction that includes your name, country, and job.<br><em style="font-size:12px;color:var(--gray-500)">(Self check: can you say your country and job?)</em></div>
           <textarea class="response-area" placeholder="안녕하세요!&#10;저는 ___예요/이에요.&#10;저는 ___ 사람이에요.&#10;저는 ___예요/이에요.&#10;만나서 반갑습니다!" id="real2"></textarea>
           <div>
-            <button class="show-answer-btn" onclick="toggleSample('sample2')">샘플 답변 보기</button>
+            <button class="show-answer-btn" onclick="toggleSample('sample2')">Show sample answer</button>
           </div>
           <div class="sample-answer" id="sample2">
-            <strong>샘플 자기소개:</strong>
+            <strong>Sample self-introduction:</strong>
             안녕하세요! 저는 마이클이에요. 저는 캐나다 사람이에요. 저는 대학생이에요. 만나서 반갑습니다!
           </div>
         </div>
 
         <div class="scenario-card">
-          <div class="scenario-title">📍 활동 3 — 파트너 인터뷰</div>
-          <div class="scenario-prompt">파트너에게 물어보는 질문 3개를 써 보세요.<br><em style="font-size:12px;color:var(--gray-500)">(이름? 나라? 직업?)</em></div>
+          <div class="scenario-title">📍 Activity 3 — Partner interview</div>
+          <div class="scenario-prompt">Write 3 questions to ask your partner.<br><em style="font-size:12px;color:var(--gray-500)">(name? country? job?)</em></div>
           <textarea class="response-area" placeholder="1. 이름이 뭐예요?&#10;2. 어느 나라 사람이에요?&#10;3. 직업이 뭐예요?" id="real3"></textarea>
           <div>
-            <button class="show-answer-btn" onclick="toggleSample('sample3')">샘플 답변 보기</button>
+            <button class="show-answer-btn" onclick="toggleSample('sample3')">Show sample answer</button>
           </div>
           <div class="sample-answer" id="sample3">
-            <strong>샘플 질문 + 답변:</strong>
+            <strong>Sample questions + answers:</strong>
             Q: 이름이 뭐예요? → A: 저는 안나예요.<br>
             Q: 어느 나라 사람이에요? → A: 저는 미국 사람이에요.<br>
             Q: 직업이 뭐예요? → A: 저는 대학생이에요.
@@ -1716,98 +1727,98 @@ body {
 // 어휘 카테고리별 분류
 const vocabData = [
   // 기본 표현
-  {kr:'안녕하세요', en:'Hello / How are you?',     eg:'안녕하세요! 저는 안나예요.', cat:'인사'},
-  {kr:'네',         en:'Yes',                       eg:'네, 맞아요.',                 cat:'기본'},
-  {kr:'아니요',     en:'No',                        eg:'아니요, 저는 학생이 아니에요.',cat:'기본'},
-  {kr:'나',         en:'I / me (casual)',            eg:'나는 한국 사람이야.',          cat:'기본'},
-  {kr:'저',         en:'I / me (formal)',            eg:'저는 안나예요.',               cat:'기본'},
-  {kr:'씨',         en:'Mr. / Ms. (name suffix)',   eg:'안나 씨, 안녕하세요!',         cat:'호칭'},
-  {kr:'제',         en:'my (formal)',                eg:'제 이름은 안나예요.',           cat:'기본'},
-  {kr:'이름',       en:'name',                       eg:'이름이 뭐예요?',               cat:'기본'},
+  {kr:'안녕하세요', en:'Hello / How are you?',     eg:'안녕하세요! 저는 안나예요.', cat:'Greetings'},
+  {kr:'네',         en:'Yes',                       eg:'네, 맞아요.',                 cat:'Basics'},
+  {kr:'아니요',     en:'No',                        eg:'아니요, 저는 학생이 아니에요.',cat:'Basics'},
+  {kr:'나',         en:'I / me (casual)',            eg:'나는 한국 사람이야.',          cat:'Basics'},
+  {kr:'저',         en:'I / me (formal)',            eg:'저는 안나예요.',               cat:'Basics'},
+  {kr:'씨',         en:'Mr. / Ms. (name suffix)',   eg:'안나 씨, 안녕하세요!',         cat:'Titles'},
+  {kr:'제',         en:'my (formal)',                eg:'제 이름은 안나예요.',           cat:'Basics'},
+  {kr:'이름',       en:'name',                       eg:'이름이 뭐예요?',               cat:'Basics'},
   // 가족·관계
-  {kr:'아버지',     en:'father',                    eg:'저는 아버지예요.',             cat:'가족'},
-  {kr:'어머니',     en:'mother',                    eg:'어머니는 선생님이에요.',        cat:'가족'},
-  {kr:'언니',       en:'older sister (female speaker)',eg:'언니는 의사예요.',           cat:'가족'},
-  {kr:'동생',       en:'younger sibling',           eg:'동생은 학생이에요.',            cat:'가족'},
-  {kr:'누구',       en:'who',                       eg:'저 사람은 누구예요?',           cat:'기본'},
-  {kr:'친구',       en:'friend',                    eg:'제 친구예요.',                  cat:'관계'},
+  {kr:'아버지',     en:'father',                    eg:'저는 아버지예요.',             cat:'Family'},
+  {kr:'어머니',     en:'mother',                    eg:'어머니는 선생님이에요.',        cat:'Family'},
+  {kr:'언니',       en:'older sister (female speaker)',eg:'언니는 의사예요.',           cat:'Family'},
+  {kr:'동생',       en:'younger sibling',           eg:'동생은 학생이에요.',            cat:'Family'},
+  {kr:'누구',       en:'who',                       eg:'저 사람은 누구예요?',           cat:'Basics'},
+  {kr:'친구',       en:'friend',                    eg:'제 친구예요.',                  cat:'People'},
   // 사물
-  {kr:'모자',       en:'hat / cap',                 eg:'이것은 모자예요.',              cat:'사물'},
-  {kr:'책',         en:'book',                      eg:'이것은 책이에요.',              cat:'사물'},
-  {kr:'공책',       en:'notebook',                  eg:'저것은 공책이에요.',            cat:'사물'},
-  {kr:'한복',       en:'Korean traditional clothes',eg:'이것은 한복이에요.',            cat:'사물'},
-  {kr:'커피',       en:'coffee',                    eg:'커피예요.',                     cat:'사물'},
+  {kr:'모자',       en:'hat / cap',                 eg:'이것은 모자예요.',              cat:'Things'},
+  {kr:'책',         en:'book',                      eg:'이것은 책이에요.',              cat:'Things'},
+  {kr:'공책',       en:'notebook',                  eg:'저것은 공책이에요.',            cat:'Things'},
+  {kr:'한복',       en:'Korean traditional clothes',eg:'이것은 한복이에요.',            cat:'Things'},
+  {kr:'커피',       en:'coffee',                    eg:'커피예요.',                     cat:'Things'},
   // 나라
-  {kr:'한국',       en:'Korea',                     eg:'저는 한국 사람이에요.',         cat:'나라'},
-  {kr:'미국',       en:'USA',                       eg:'저는 미국 사람이에요.',         cat:'나라'},
-  {kr:'영국',       en:'UK',                        eg:'영국 사람이에요.',              cat:'나라'},
-  {kr:'중국',       en:'China',                     eg:'중국 사람이에요.',              cat:'나라'},
-  {kr:'일본',       en:'Japan',                     eg:'일본 사람이에요.',              cat:'나라'},
-  {kr:'캐나다',     en:'Canada',                    eg:'캐나다 사람이에요.',            cat:'나라'},
-  {kr:'독일',       en:'Germany',                   eg:'독일 사람이에요.',              cat:'나라'},
-  {kr:'프랑스',     en:'France',                    eg:'프랑스 사람이에요.',            cat:'나라'},
-  {kr:'베트남',     en:'Vietnam',                   eg:'베트남 사람이에요.',            cat:'나라'},
-  {kr:'인도네시아', en:'Indonesia',                 eg:'인도네시아 사람이에요.',        cat:'나라'},
-  {kr:'러시아',     en:'Russia',                    eg:'러시아 사람이에요.',            cat:'나라'},
-  {kr:'케냐',       en:'Kenya',                     eg:'케냐 사람이에요.',              cat:'나라'},
-  {kr:'태국',       en:'Thailand',                  eg:'태국 사람이에요.',              cat:'나라'},
+  {kr:'한국',       en:'Korea',                     eg:'저는 한국 사람이에요.',         cat:'Countries'},
+  {kr:'미국',       en:'USA',                       eg:'저는 미국 사람이에요.',         cat:'Countries'},
+  {kr:'영국',       en:'UK',                        eg:'영국 사람이에요.',              cat:'Countries'},
+  {kr:'중국',       en:'China',                     eg:'중국 사람이에요.',              cat:'Countries'},
+  {kr:'일본',       en:'Japan',                     eg:'일본 사람이에요.',              cat:'Countries'},
+  {kr:'캐나다',     en:'Canada',                    eg:'캐나다 사람이에요.',            cat:'Countries'},
+  {kr:'독일',       en:'Germany',                   eg:'독일 사람이에요.',              cat:'Countries'},
+  {kr:'프랑스',     en:'France',                    eg:'프랑스 사람이에요.',            cat:'Countries'},
+  {kr:'베트남',     en:'Vietnam',                   eg:'베트남 사람이에요.',            cat:'Countries'},
+  {kr:'인도네시아', en:'Indonesia',                 eg:'인도네시아 사람이에요.',        cat:'Countries'},
+  {kr:'러시아',     en:'Russia',                    eg:'러시아 사람이에요.',            cat:'Countries'},
+  {kr:'케냐',       en:'Kenya',                     eg:'케냐 사람이에요.',              cat:'Countries'},
+  {kr:'태국',       en:'Thailand',                  eg:'태국 사람이에요.',              cat:'Countries'},
   // 직업
-  {kr:'학생',       en:'student',                   eg:'저는 학생이에요.',              cat:'직업'},
-  {kr:'인사',       en:'greeting',                  eg:'인사해요.',                     cat:'표현'},
-  {kr:'자기소개',   en:'self-introduction',         eg:'자기소개를 해요.',              cat:'표현'},
-  {kr:'회사원',     en:'office worker',             eg:'저는 회사원이에요.',            cat:'직업'},
-  {kr:'대학생',     en:'university student',        eg:'저는 대학생이에요.',            cat:'직업'},
-  {kr:'선생님',     en:'teacher',                   eg:'선생님, 안녕하세요!',           cat:'직업'},
-  {kr:'의사',       en:'doctor',                    eg:'저는 의사예요.',                cat:'직업'},
-  {kr:'경찰',       en:'police officer',            eg:'경찰이에요.',                   cat:'직업'},
-  {kr:'가수',       en:'singer',                    eg:'가수예요.',                     cat:'직업'},
-  {kr:'요리사',     en:'chef / cook',               eg:'요리사예요.',                   cat:'직업'},
+  {kr:'학생',       en:'student',                   eg:'저는 학생이에요.',              cat:'Jobs'},
+  {kr:'인사',       en:'greeting',                  eg:'인사해요.',                     cat:'Phrases'},
+  {kr:'자기소개',   en:'self-introduction',         eg:'자기소개를 해요.',              cat:'Phrases'},
+  {kr:'회사원',     en:'office worker',             eg:'저는 회사원이에요.',            cat:'Jobs'},
+  {kr:'대학생',     en:'university student',        eg:'저는 대학생이에요.',            cat:'Jobs'},
+  {kr:'선생님',     en:'teacher',                   eg:'선생님, 안녕하세요!',           cat:'Jobs'},
+  {kr:'의사',       en:'doctor',                    eg:'저는 의사예요.',                cat:'Jobs'},
+  {kr:'경찰',       en:'police officer',            eg:'경찰이에요.',                   cat:'Jobs'},
+  {kr:'가수',       en:'singer',                    eg:'가수예요.',                     cat:'Jobs'},
+  {kr:'요리사',     en:'chef / cook',               eg:'요리사예요.',                   cat:'Jobs'},
 ];
 
 const blankData = [
-  {sentence:'저___ 안나예요.',           blank:'는',   hint:'저 = 받침 없음 → 는'},
-  {sentence:'이름___ 뭐예요?',           blank:'은',   hint:'이름 = 받침 있음 (ㅁ) → 은'},
-  {sentence:'저는 학생___.',             blank:'이에요',hint:'학생 = 받침 있음 (ㅇ) → 이에요'},
-  {sentence:'저는 의사___.',             blank:'예요',  hint:'의사 = 받침 없음 → 예요'},
-  {sentence:'저는 캐나다 사람___.',      blank:'이에요',hint:'사람 = 받침 있음 (ㅁ) → 이에요'},
-  {sentence:'제___ 이름은 마이클이에요.',blank:'의',    hint:'제 = 저의 줄임말 (my)'},
+  {sentence:'저___ 안나예요.',           blank:'는',   hint:'저 ends in a vowel → 는'},
+  {sentence:'이름___ 뭐예요?',           blank:'은',   hint:'이름 ends in ㅁ → 은'},
+  {sentence:'저는 학생___.',             blank:'이에요',hint:'학생 ends in ㅇ → 이에요'},
+  {sentence:'저는 의사___.',             blank:'예요',  hint:'의사 ends in a vowel → 예요'},
+  {sentence:'저는 캐나다 사람___.',      blank:'이에요',hint:'사람 ends in ㅁ → 이에요'},
+  {sentence:'제___ 이름은 마이클이에요.',blank:'의',    hint:'제 = short for 저의 (my)'},
 ];
 
 const sentences = [
-  {words:['저는','캐나다','사람이에요','.'],         target:'나라를 소개해 보세요'},
-  {words:['저는','대학생이에요','.'],                target:'직업을 소개해 보세요'},
-  {words:['이름이','뭐예요','?'],                    target:'이름을 물어보세요'},
-  {words:['만나서','반갑습니다','.'],                target:'처음 만났을 때 인사해 보세요'},
-  {words:['저는','안나예요','.','안녕하세요','!'],   target:'인사와 자기소개를 합쳐서'},
+  {words:['저는','캐나다','사람이에요','.'],         target:'Introduce your country'},
+  {words:['저는','대학생이에요','.'],                target:'Introduce your job'},
+  {words:['이름이','뭐예요','?'],                    target:'Ask for a name'},
+  {words:['만나서','반갑습니다','.'],                target:'Greet someone you just met'},
+  {words:['저는','안나예요','.','안녕하세요','!'],   target:'Greeting + self-introduction together'},
 ];
 
 const quizData = [
   {
-    q:'빈칸에 알맞은 것을 고르세요: 저___ 안나예요.',
+    q:'Fill in the blank: 저___ 안나예요.',
     opts:['은','는','이','가'],
     ans:1,
-    ex:'저(받침 없음) + 는 → 저는. 받침이 없으면 "는"을 써요.'
+    ex:'저 ends in a vowel, so use 는 → 저는. Use 는 after a vowel.'
   },
   {
-    q:'"저는 의사예요"에서 왜 "예요"를 쓸까요?',
-    opts:['의사가 높은 직업이라서','의사 = 받침 없음이라서','예요가 더 공손해서','의가 모음으로 끝나서'],
+    q:'In "저는 의사예요", why do we use "예요"?',
+    opts:['Because 의사 is a respected job','Because 의사 ends in a vowel','Because 예요 is more polite','Because 의 ends in a vowel'],
     ans:1,
-    ex:'의사(醫師)의 마지막 글자 "사"는 받침이 없어요 → 예요'
+    ex:'The last syllable of 의사 ("사") ends in a vowel → 예요.'
   },
   {
-    q:'다음 중 "이에요"를 써야 하는 단어는?',
+    q:'Which word needs "이에요"?',
     opts:['의사','가수','요리사','학생'],
     ans:3,
-    ex:'학생(學生)의 마지막 글자 "생"은 받침 ㅇ이 있어요 → 이에요'
+    ex:'The last syllable of 학생 ("생") ends in ㅇ (a consonant) → 이에요.'
   },
   {
-    q:'"제 이름___  안나예요." 빈칸에 알맞은 것은?',
+    q:'Fill in: "제 이름___  안나예요."',
     opts:['이','가','은','를'],
     ans:2,
-    ex:'이름(받침 ㅁ 있음) + 은 → 이름은. 주제 조사 은/는을 써요.'
+    ex:'이름 ends in ㅁ, so use 은 → 이름은. The topic marker is 은/는.'
   },
   {
-    q:'자기소개 순서로 자연스러운 것은?',
+    q:'Which order for a self-introduction sounds most natural?',
     opts:[
       '저는 학생이에요. 안녕하세요! 저는 안나예요.',
       '안녕하세요! 저는 안나예요. 저는 학생이에요.',
@@ -1815,13 +1826,13 @@ const quizData = [
       '학생이에요. 안나예요. 안녕하세요!'
     ],
     ans:1,
-    ex:'인사(안녕하세요) → 이름(저는 ___예요) → 직업/나라 순서가 자연스러워요.'
+    ex:'Greeting (안녕하세요) → name (저는 ___예요) → job/country is the natural order.'
   },
   {
-    q:'"저는 선생님___ 아니에요." 빈칸에 알맞은 것은?',
+    q:'Fill in: "저는 선생님___ 아니에요."',
     opts:['은','가','이','를'],
     ans:2,
-    ex:'선생님(받침 ㅁ) + 이 → 선생님이. "이/가 아니에요"는 부정 표현이에요. (2과에서 배워요)'
+    ex:'선생님 ends in ㅁ, so use 이 → 선생님이. "이/가 아니에요" is the negative form (covered in Unit 2).'
   },
 ];
 
@@ -1830,7 +1841,7 @@ const quizData = [
 let selectedKr = null, selectedEn = null, matchedPairs = 0;
 let currentSentence = 0;
 let placedWords = [], poolWords = [];
-let currentQuiz = 0, quizScore = 0, quizAnswered = [];
+let currentQuiz = 0, quizScore = 0, quizAnswered = [], quizSelected = null;
 
 // ══ INIT ══
 window.addEventListener('DOMContentLoaded', () => {
@@ -1866,8 +1877,8 @@ function switchTab(btn, section) {
 }
 
 // ── VOCAB CARDS ──
-const vocabCats = ['전체','인사','기본','호칭','가족','관계','사물','나라','직업','표현'];
-let activeVocabCat = '전체';
+const vocabCats = ['All','Greetings','Basics','Titles','Family','People','Things','Countries','Jobs','Phrases'];
+let activeVocabCat = 'All';
 
 function buildVocabCards() {
   // Build category filter if not built yet
@@ -1881,7 +1892,7 @@ function buildVocabCards() {
       btn.textContent = cat;
       btn.dataset.cat = cat;
       btn.style.cssText = 'padding:4px 12px;border-radius:20px;border:1.5px solid var(--gray-200);background:transparent;font-family:var(--font-sans);font-size:12px;cursor:pointer;transition:all .15s;color:var(--gray-500);';
-      if (cat === '전체') { btn.style.background='var(--amber)'; btn.style.color='#fff'; btn.style.borderColor='var(--amber)'; }
+      if (cat === 'All' || cat === '전체') { btn.style.background='var(--amber)'; btn.style.color='#fff'; btn.style.borderColor='var(--amber)'; }
       btn.onclick = () => filterVocab(cat);
       filterDiv.appendChild(btn);
     });
@@ -1905,12 +1916,12 @@ function renderVocabCards() {
   const grid = document.getElementById('vocabGrid');
   grid.innerHTML = '';
   const _vd = window._vd || vocabData;
-  const filtered = activeVocabCat === '전체' ? _vd : _vd.filter(v => v.cat === activeVocabCat);
+  const filtered = (activeVocabCat === 'All' || activeVocabCat === '전체') ? _vd : _vd.filter(v => v.cat === activeVocabCat);
   filtered.forEach(v => {
     const card = document.createElement('div');
     card.className = 'vocab-card';
     card.innerHTML = `
-      <button class="audio-btn" onclick="event.stopPropagation();speak('${v.kr}')" title="발음 듣기">🔊</button>
+      <button class="audio-btn" onclick="event.stopPropagation();speak('${v.kr}')" title="Play pronunciation">🔊</button>
       <div style="position:absolute;top:8px;left:10px;font-size:9px;font-weight:700;color:var(--amber);opacity:.7">${v.cat}</div>
       <div class="vocab-kr">${v.kr}</div>
       <div class="vocab-en">${v.en}</div>
@@ -1923,7 +1934,7 @@ function renderVocabCards() {
 
 // ── MATCHING ──
 function buildMatching() {
-  // 직업 + 나라 카테고리에서 6개 선택
+  // 6 random words
   const pool = (window._vd || vocabData).slice().sort(() => Math.random()-.5).slice(0,6);
   const shuffledEn = [...pool].sort(() => Math.random()-.5);
   const krCol = document.getElementById('krCol');
@@ -1973,7 +1984,7 @@ function tryMatch() {
     selectedKr.classList.remove('selected'); selectedKr.classList.add('correct');
     selectedEn.classList.remove('selected'); selectedEn.classList.add('correct');
     matchedPairs++;
-    if (matchedPairs === 6) document.getElementById('matchScore').textContent = '🎉 완벽해요!';
+    if (matchedPairs === 6) document.getElementById('matchScore').textContent = '🎉 Perfect!';
   } else {
     selectedKr.classList.add('wrong'); selectedEn.classList.add('wrong');
     setTimeout(() => {
@@ -2005,8 +2016,8 @@ function checkBlanks() {
     else { inp.classList.add('wrong'); allCorrect = false; }
   });
   document.getElementById('blankFeedback').innerHTML = allCorrect
-    ? '<span class="fb-correct">🎉 모두 정답이에요!</span>'
-    : '<span class="fb-wrong">틀린 답이 있어요. 다시 확인해 보세요.</span>';
+    ? '<span class="fb-correct">🎉 All correct!</span>'
+    : '<span class="fb-wrong">Some answers are wrong. Check them again.</span>';
 }
 function showHint() {
   const hints = [];
@@ -2027,7 +2038,7 @@ function buildSentence(idx) {
 
   const pool = document.getElementById('tilesPool');
   const answer = document.getElementById('answerZone');
-  pool.innerHTML = ''; answer.innerHTML = '<span style="color:var(--gray-500);font-size:13px">여기에 단어를 놓으세요</span>';
+  pool.innerHTML = ''; answer.innerHTML = '<span style="color:var(--gray-500);font-size:13px">Place words here</span>';
   document.getElementById('builderFeedback').textContent = '';
 
   poolWords.forEach(w => {
@@ -2060,10 +2071,10 @@ function checkSentence() {
   const feedback = document.getElementById('builderFeedback');
   if (placedWords.join(' ') === s.words.join(' ')) {
     document.querySelectorAll('#answerZone .word-tile').forEach(t => { t.classList.remove('wrong-order'); t.style.background='var(--teal)'; t.style.borderColor='var(--teal)'; });
-    feedback.innerHTML = '<span class="fb-correct">🎉 정확해요!</span>';
+    feedback.innerHTML = '<span class="fb-correct">🎉 Correct!</span>';
   } else {
     document.querySelectorAll('#answerZone .word-tile').forEach(t => t.classList.add('wrong-order'));
-    feedback.innerHTML = '<span class="fb-wrong">순서를 다시 확인해 보세요.</span>';
+    feedback.innerHTML = '<span class="fb-wrong">Check the word order again.</span>';
   }
 }
 function nextSentence() {
@@ -2072,10 +2083,13 @@ function nextSentence() {
 }
 
 // ── QUIZ ──
+// Changed behavior: User selects an option → clicks "Check answer" → feedback shown → clicks "Next" to continue
 function buildQuiz() {
   const __qd = window._qd || quizData;
   quizAnswered = new Array(__qd.length).fill(null);
   quizScore = 0;
+  quizSelected = null;
+  currentQuiz = 0;
   renderQuiz();
 }
 
@@ -2084,11 +2098,13 @@ function renderQuiz() {
   const prog = document.getElementById('quizProgress');
   prog.innerHTML = (window._qd || quizData).map((_,i) =>
     `<div class="progress-dot ${i < currentQuiz ? 'done' : i===currentQuiz ? 'current' : ''}"></div>`
-  ).join('') + `<span class="quiz-score" style="margin-left:auto">점수: <strong>${quizScore}</strong> / ${currentQuiz}</span>`;
+  ).join('') + `<span class="quiz-score" style="margin-left:auto">Score: <strong>${quizScore}</strong> / ${currentQuiz}</span>`;
 
   document.getElementById('quizQuestion').textContent = q.q;
   document.getElementById('totalDisplay').textContent = (window._qd || quizData).length;
   document.getElementById('scoreDisplay').textContent = quizScore;
+
+  quizSelected = null;
 
   const opts = document.getElementById('quizOptions');
   opts.innerHTML = '';
@@ -2104,29 +2120,53 @@ function renderQuiz() {
     }
     const div = document.createElement('div');
     div.className = cls;
+    div.dataset.idx = i;
     div.innerHTML = `<span class="option-letter">${'ABCD'[i]}</span>${opt}`;
-    if (!answered) div.onclick = () => answerQuiz(i);
+    if (!answered) div.onclick = () => selectQuizOption(div, i);
     opts.appendChild(div);
   });
 
   const ex = document.getElementById('quizExplanation');
+  const checkBtn = document.getElementById('checkQuizBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
   if (quizAnswered[currentQuiz] !== null) {
     ex.textContent = '💡 ' + q.ex;
     ex.classList.add('show');
+    checkBtn.style.display = 'none';
+    nextBtn.style.display = 'inline-flex';
+    nextBtn.textContent = currentQuiz === (window._qd || quizData).length-1 ? 'Show results' : 'Next →';
   } else {
     ex.classList.remove('show');
+    checkBtn.style.display = 'inline-flex';
+    checkBtn.disabled = true;
+    checkBtn.style.opacity = '0.5';
+    nextBtn.style.display = 'none';
   }
 
   document.getElementById('prevBtn').disabled = currentQuiz === 0;
- document.getElementById('nextBtn').textContent = currentQuiz === (window._qd || quizData).length-1 ? '결과 보기' : '다음 →';
 }
 
-function answerQuiz(i) {
+// User selects an option (highlights it, does NOT reveal answer yet)
+function selectQuizOption(div, i) {
   if (quizAnswered[currentQuiz] !== null) return;
-  quizAnswered[currentQuiz] = i;
-  if (i === (window._qd || quizData)[currentQuiz].ans) quizScore++;
+  document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+  div.classList.add('selected');
+  quizSelected = i;
+  const checkBtn = document.getElementById('checkQuizBtn');
+  checkBtn.disabled = false;
+  checkBtn.style.opacity = '1';
+}
+
+// User clicks "Check answer" — NOW reveal right/wrong and explanation
+function checkQuiz() {
+  if (quizSelected === null) return;
+  if (quizAnswered[currentQuiz] !== null) return;
+  quizAnswered[currentQuiz] = quizSelected;
+  if (quizSelected === (window._qd || quizData)[currentQuiz].ans) quizScore++;
   renderQuiz();
 }
+
 function nextQuiz() {
   const __qd = window._qd || quizData;
   if (currentQuiz < __qd.length - 1) { currentQuiz++; renderQuiz(); }
@@ -2134,9 +2174,10 @@ function nextQuiz() {
     const pct = Math.round(quizScore/__qd.length*100);
     document.getElementById('quizOptions').innerHTML = '';
     document.getElementById('quizQuestion').textContent =
-       `퀴즈 완료! 🎉 점수: ${quizScore} / ${__qd.length} (${pct}%)`;
+       `Quiz complete! 🎉 Score: ${quizScore} / ${__qd.length} (${pct}%)`;
     document.getElementById('quizExplanation').classList.remove('show');
     document.getElementById('nextBtn').disabled = true;
+    document.getElementById('checkQuizBtn').style.display = 'none';
   }
 }
 function prevQuiz() { if (currentQuiz > 0) { currentQuiz--; renderQuiz(); } }
@@ -2188,13 +2229,13 @@ const compoundVowels = [
   {char:'ㅞ',name:'웨',rom:'we'},
 ];
 const batchimGroups = [
-  {sound:'ㄱ 소리',color:'#e57373',members:[{char:'ㄱ',ex:'목'},{char:'ㅋ',ex:'부엌'},{char:'ㄲ',ex:'밖'}]},
-  {sound:'ㄴ 소리',color:'#d4a835',members:[{char:'ㄴ',ex:'눈'}]},
-  {sound:'ㄷ 소리',color:'#a1887f',members:[{char:'ㄷ',ex:'갇'},{char:'ㅅ',ex:'갓'},{char:'ㅆ',ex:'갔'},{char:'ㅈ',ex:'갖'},{char:'ㅊ',ex:'갗'},{char:'ㅌ',ex:'같'},{char:'ㅎ',ex:'갛'}]},
-  {sound:'ㄹ 소리',color:'#5c7ec9',members:[{char:'ㄹ',ex:'물'}]},
-  {sound:'ㅁ 소리',color:'#4caf6e',members:[{char:'ㅁ',ex:'음식'}]},
-  {sound:'ㅂ 소리',color:'#4db6ac',members:[{char:'ㅂ',ex:'집'},{char:'ㅍ',ex:'짚'}]},
-  {sound:'ㅇ 소리',color:'#9c5bb5',members:[{char:'ㅇ',ex:'강'}]},
+  {sound:'ㄱ sound',color:'#e57373',members:[{char:'ㄱ',ex:'목'},{char:'ㅋ',ex:'부엌'},{char:'ㄲ',ex:'밖'}]},
+  {sound:'ㄴ sound',color:'#d4a835',members:[{char:'ㄴ',ex:'눈'}]},
+  {sound:'ㄷ sound',color:'#a1887f',members:[{char:'ㄷ',ex:'갇'},{char:'ㅅ',ex:'갓'},{char:'ㅆ',ex:'갔'},{char:'ㅈ',ex:'갖'},{char:'ㅊ',ex:'갗'},{char:'ㅌ',ex:'같'},{char:'ㅎ',ex:'갛'}]},
+  {sound:'ㄹ sound',color:'#5c7ec9',members:[{char:'ㄹ',ex:'물'}]},
+  {sound:'ㅁ sound',color:'#4caf6e',members:[{char:'ㅁ',ex:'음식'}]},
+  {sound:'ㅂ sound',color:'#4db6ac',members:[{char:'ㅂ',ex:'집'},{char:'ㅍ',ex:'짚'}]},
+  {sound:'ㅇ sound',color:'#9c5bb5',members:[{char:'ㅇ',ex:'강'}]},
 ];
 
 const vowelSyllableMap = {
@@ -2281,30 +2322,30 @@ document.getElementById('hangulOverlay').addEventListener('click', function(e){
 const unitMeta = {
   1: {
     badge:'01', title:'안녕하세요? 저는 안나예요',
-    topic:'주제: 자기소개 | 세종 한국어 1A — 01과 · p.35',
+    topic:"Hi, I'm Anna · Introducing Yourself",
     goals:[
-      {color:'amber',label:'나라 & 직업 어휘'},{color:'blue',label:'N이에요/예요'},
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'N이에요/예요'},
       {color:'blue',label:'N은/는'},{color:'teal',label:'자기소개 대화'},{color:'coral',label:'실생활 적용'}
     ],
-    cats:['전체','인사','기본','호칭','가족','관계','사물','나라','직업','표현'],
+    cats:['All','Greetings','Basics','Titles','Family','People','Things','Countries','Jobs','Phrases'],
   },
   2: {
     badge:'02', title:'전화번호가 뭐예요?',
-    topic:'주제: 전화번호 묻고 답하기 | 세종 한국어 1A — 02과 · p.45',
+    topic:'Can I have your phone number? · Introducing Yourself',
     goals:[
-      {color:'amber',label:'숫자 & 어휘'},{color:'blue',label:'N이/가'},
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'N이/가'},
       {color:'blue',label:'N이/가 아니에요'},{color:'teal',label:'전화번호 대화'},{color:'coral',label:'실생활 적용'}
     ],
-    cats:['전체','숫자','장소','사물','표현'],
+    cats:['All','Numbers','Places','Things','Phrases'],
   },
   3: {
     badge:'03', title:'제 가방은 책상 옆에 있어요',
-    topic:'주제: 물건 위치 묻고 답하기 | 세종 한국어 1A — 03과 · p.53',
+    topic:'My bag is next to the desk · Objects and Movements',
     goals:[
-      {color:'amber',label:'물건 & 위치 어휘'},{color:'blue',label:'이/그/저'},
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'이/그/저'},
       {color:'blue',label:'N에 있다/없다'},{color:'teal',label:'위치 대화'},{color:'coral',label:'실생활 적용'}
     ],
-    cats:['전체','물건','위치','사람','표현'],
+    cats:['All','Objects','Location','People','Phrases'],
   },
 };
 
@@ -2312,147 +2353,147 @@ const unitMeta = {
 // 2과 VOCAB
 // ══════════════════════════════════════════
 const vocabData2 = [
-  {kr:'영/공',en:'zero (0)',           eg:'전화번호에서 0은 "공"이라고 해요.',     cat:'숫자'},
-  {kr:'일',   en:'one (1)',             eg:'일 번.',                               cat:'숫자'},
-  {kr:'이',   en:'two (2)',             eg:'이 번.',                               cat:'숫자'},
-  {kr:'삼',   en:'three (3)',           eg:'삼 번.',                               cat:'숫자'},
-  {kr:'사',   en:'four (4)',            eg:'사 번.',                               cat:'숫자'},
-  {kr:'오',   en:'five (5)',            eg:'오 번.',                               cat:'숫자'},
-  {kr:'육',   en:'six (6)',             eg:'십육 → [심뉵] 발음 주의!',            cat:'숫자'},
-  {kr:'칠',   en:'seven (7)',           eg:'칠 번.',                               cat:'숫자'},
-  {kr:'팔',   en:'eight (8)',           eg:'팔 번.',                               cat:'숫자'},
-  {kr:'구',   en:'nine (9)',            eg:'구 번.',                               cat:'숫자'},
-  {kr:'십',   en:'ten (10)',            eg:'십 번.',                               cat:'숫자'},
-  {kr:'백',   en:'hundred (100)',       eg:'백 원.',                               cat:'숫자'},
-  {kr:'천',   en:'thousand (1,000)',    eg:'천 원.',                               cat:'숫자'},
-  {kr:'만',   en:'ten thousand (10,000)',eg:'일만 원.',                            cat:'숫자'},
-  {kr:'카페', en:'café',                eg:'카페 전화번호가 뭐예요?',              cat:'장소'},
-  {kr:'식당', en:'restaurant',          eg:'이 식당 전화번호를 알아요?',           cat:'장소'},
-  {kr:'영화관',en:'movie theater',      eg:'영화관이 어디예요?',                   cat:'장소'},
-  {kr:'노래방',en:'karaoke room',       eg:'노래방 전화번호가 뭐예요?',            cat:'장소'},
-  {kr:'PC방', en:'internet/PC café',    eg:'PC방이 어디예요?',                     cat:'장소'},
-  {kr:'교실', en:'classroom',           eg:'교실이 어디예요?',                     cat:'장소'},
-  {kr:'전화번호',en:'phone number',     eg:'전화번호가 뭐예요?',                   cat:'사물'},
-  {kr:'이메일',en:'email',              eg:'이메일 주소가 뭐예요?',                cat:'사물'},
-  {kr:'주소', en:'address',             eg:'주소가 어디예요?',                     cat:'사물'},
-  {kr:'물',   en:'water',               eg:'물이에요, 주스가 아니에요.',           cat:'사물'},
-  {kr:'컴퓨터',en:'computer',           eg:'컴퓨터가 있어요.',                     cat:'사물'},
-  {kr:'몇',   en:'how many / which number',eg:'전화번호가 몇 번이에요?',          cat:'표현'},
-  {kr:'맞아요',en:'That\'s right',      eg:'네, 맞아요. [마자요]',                cat:'표현'},
-  {kr:'형',   en:'older brother (male speaker)',eg:'형이 있어요.',                 cat:'표현'},
-  {kr:'동생', en:'younger sibling',     eg:'동생이 아니에요, 형이에요.',           cat:'표현'},
+  {kr:'영/공',en:'zero (0)',           eg:'전화번호에서 0은 "공"이라고 해요.',     cat:'Numbers'},
+  {kr:'일',   en:'one (1)',             eg:'일 번.',                               cat:'Numbers'},
+  {kr:'이',   en:'two (2)',             eg:'이 번.',                               cat:'Numbers'},
+  {kr:'삼',   en:'three (3)',           eg:'삼 번.',                               cat:'Numbers'},
+  {kr:'사',   en:'four (4)',            eg:'사 번.',                               cat:'Numbers'},
+  {kr:'오',   en:'five (5)',            eg:'오 번.',                               cat:'Numbers'},
+  {kr:'육',   en:'six (6)',             eg:'십육 → [심뉵] — mind the pronunciation!',cat:'Numbers'},
+  {kr:'칠',   en:'seven (7)',           eg:'칠 번.',                               cat:'Numbers'},
+  {kr:'팔',   en:'eight (8)',           eg:'팔 번.',                               cat:'Numbers'},
+  {kr:'구',   en:'nine (9)',            eg:'구 번.',                               cat:'Numbers'},
+  {kr:'십',   en:'ten (10)',            eg:'십 번.',                               cat:'Numbers'},
+  {kr:'백',   en:'hundred (100)',       eg:'백 원.',                               cat:'Numbers'},
+  {kr:'천',   en:'thousand (1,000)',    eg:'천 원.',                               cat:'Numbers'},
+  {kr:'만',   en:'ten thousand (10,000)',eg:'일만 원.',                            cat:'Numbers'},
+  {kr:'카페', en:'café',                eg:'카페 전화번호가 뭐예요?',              cat:'Places'},
+  {kr:'식당', en:'restaurant',          eg:'이 식당 전화번호를 알아요?',           cat:'Places'},
+  {kr:'영화관',en:'movie theater',      eg:'영화관이 어디예요?',                   cat:'Places'},
+  {kr:'노래방',en:'karaoke room',       eg:'노래방 전화번호가 뭐예요?',            cat:'Places'},
+  {kr:'PC방', en:'internet/PC café',    eg:'PC방이 어디예요?',                     cat:'Places'},
+  {kr:'교실', en:'classroom',           eg:'교실이 어디예요?',                     cat:'Places'},
+  {kr:'전화번호',en:'phone number',     eg:'전화번호가 뭐예요?',                   cat:'Things'},
+  {kr:'이메일',en:'email',              eg:'이메일 주소가 뭐예요?',                cat:'Things'},
+  {kr:'주소', en:'address',             eg:'주소가 어디예요?',                     cat:'Things'},
+  {kr:'물',   en:'water',               eg:'물이에요, 주스가 아니에요.',           cat:'Things'},
+  {kr:'컴퓨터',en:'computer',           eg:'컴퓨터가 있어요.',                     cat:'Things'},
+  {kr:'몇',   en:'how many / which number',eg:'전화번호가 몇 번이에요?',          cat:'Phrases'},
+  {kr:'맞아요',en:"That's right",       eg:'네, 맞아요. [마자요]',                cat:'Phrases'},
+  {kr:'형',   en:'older brother (male speaker)',eg:'형이 있어요.',                 cat:'Phrases'},
+  {kr:'동생', en:'younger sibling',     eg:'동생이 아니에요, 형이에요.',           cat:'Phrases'},
 ];
 
 const blankData2 = [
-  {sentence:'전화번호___ 뭐예요?',       blank:'가',   hint:'전화번호 = 받침 없음 → 가'},
-  {sentence:'이름___ 안나예요.',          blank:'이',   hint:'이름 = 받침 있음 (ㅁ) → 이'},
-  {sentence:'저는 학생___ 아니에요.',     blank:'이',   hint:'학생 = 받침 있음 (ㅇ) → 이 (보격조사)'},
-  {sentence:'커피___ 아니에요, 물이에요.',blank:'가',   hint:'커피 = 받침 없음 → 가'},
-  {sentence:'친구___ 아니에요, 동생이에요.',blank:'가', hint:'친구 = 받침 없음 → 가'},
-  {sentence:'영화관___ 어디예요?',        blank:'이',   hint:'영화관 = 받침 있음 (ㄴ) → 이'},
+  {sentence:'전화번호___ 뭐예요?',       blank:'가',   hint:'전화번호 ends in a vowel → 가'},
+  {sentence:'이름___ 안나예요.',          blank:'이',   hint:'이름 ends in ㅁ → 이'},
+  {sentence:'저는 학생___ 아니에요.',     blank:'이',   hint:'학생 ends in ㅇ → 이 (complement marker)'},
+  {sentence:'커피___ 아니에요, 물이에요.',blank:'가',   hint:'커피 ends in a vowel → 가'},
+  {sentence:'친구___ 아니에요, 동생이에요.',blank:'가', hint:'친구 ends in a vowel → 가'},
+  {sentence:'영화관___ 어디예요?',        blank:'이',   hint:'영화관 ends in ㄴ → 이'},
 ];
 
 const sentences2 = [
-  {words:['전화번호가','뭐예요','?'],                   target:'전화번호를 물어보세요'},
-  {words:['제','전화번호는','010-1234-5678이에요','.'], target:'전화번호를 알려 주세요'},
-  {words:['저는','학생이','아니에요','.'],              target:'부정 표현을 써 보세요'},
-  {words:['영화관이','어디예요','?'],                   target:'장소를 물어보세요'},
-  {words:['네',',','맞아요','.'],                       target:'확인할 때 대답해 보세요'},
+  {words:['전화번호가','뭐예요','?'],                   target:'Ask for a phone number'},
+  {words:['제','전화번호는','010-1234-5678이에요','.'], target:'Give your phone number'},
+  {words:['저는','학생이','아니에요','.'],              target:'Use a negative sentence'},
+  {words:['영화관이','어디예요','?'],                   target:'Ask where a place is'},
+  {words:['네',',','맞아요','.'],                       target:'Confirm an answer'},
 ];
 
 const quizData2 = [
-  {q:'"전화번호___ 뭐예요?" 빈칸에 알맞은 것은?',
+  {q:'Fill in: "전화번호___ 뭐예요?"',
    opts:['은','는','이','가'], ans:3,
-   ex:'전화번호(받침 없음) + 가 → 전화번호가. 받침이 없으면 "가"를 써요.'},
-  {q:'"저는 학생___ 아니에요." 빈칸에 알맞은 것은?',
+   ex:'전화번호 ends in a vowel, so use 가 → 전화번호가.'},
+  {q:'Fill in: "저는 학생___ 아니에요."',
    opts:['는','가','이','을'], ans:2,
-   ex:'학생(받침 있음 ㅇ) + 이 → 학생이. "이/가 아니에요"는 부정 표현이에요.'},
-  {q:'16(십육)의 올바른 발음은?',
+   ex:'학생 ends in ㅇ, so use 이 → 학생이. "이/가 아니에요" is the negative form.'},
+  {q:'How do you pronounce 16 (십육)?',
    opts:['십육','시뷱','심뉵','시육'], ans:2,
-   ex:'십육 → 비음화+연음화 → [심뉵]. 받침 ㅂ이 ㄴ 앞에서 ㅁ으로 바뀌어요.'},
-  {q:'"이/가 아니에요"에서 이/가는 무엇?',
-   opts:['주격 조사','보격 조사','목적격 조사','처소격 조사'], ans:1,
-   ex:'여기서 이/가는 보격 조사(complement marker)예요. 주격 조사가 아니에요!'},
-  {q:'전화번호에서 0을 읽는 방법은?',
-   opts:['오','이','영 또는 공','일'], ans:2,
-   ex:'전화번호에서 0은 "공"이라고 읽어요. 예: 010 → 공일공.'},
-  {q:'"맞아요"의 올바른 발음은?',
+   ex:'십육 → nasalization + liaison → [심뉵]. The final ㅂ nasalizes to ㅁ before ㄴ.'},
+  {q:'What kind of marker is 이/가 in "이/가 아니에요"?',
+   opts:['Subject marker','Complement marker','Object marker','Location marker'], ans:1,
+   ex:'Here 이/가 is the complement marker — not the subject marker!'},
+  {q:'How do you read "0" in a phone number?',
+   opts:['오','이','영 or 공','일'], ans:2,
+   ex:'"0" in a phone number is read as "공". e.g. 010 → 공일공.'},
+  {q:'How do you pronounce "맞아요"?',
    opts:['마자요','마사요','맞아요','마타요'], ans:0,
-   ex:'받침 ㅈ + 모음 → 연음화 → [마자요]. 받침이 뒤 음절 첫소리로 발음돼요.'},
+   ex:'Final ㅈ + vowel → liaison → [마자요]. The final consonant becomes the next syllable\'s first sound.'},
 ];
 
 // ══════════════════════════════════════════
 // 3과 VOCAB
 // ══════════════════════════════════════════
 const vocabData3 = [
-  {kr:'가방',  en:'bag',               eg:'제 가방은 책상 옆에 있어요.',           cat:'물건'},
-  {kr:'책',    en:'book',              eg:'책이 책상 위에 있어요.',                cat:'물건'},
-  {kr:'공책',  en:'notebook',          eg:'공책이 가방 안에 있어요.',              cat:'물건'},
-  {kr:'책상',  en:'desk',              eg:'책상 위에 뭐가 있어요?',               cat:'물건'},
-  {kr:'의자',  en:'chair',             eg:'의자 밑에 가방이 있어요.',              cat:'물건'},
-  {kr:'필통',  en:'pencil case',       eg:'이게 필통이에요.',                      cat:'물건'},
-  {kr:'시계',  en:'clock / watch',     eg:'시계가 어디에 있어요?',                cat:'물건'},
-  {kr:'핸드폰',en:'mobile phone',      eg:'핸드폰이 어디에 있어요?',              cat:'물건'},
-  {kr:'우산',  en:'umbrella',          eg:'우산이 의자 옆에 있어요.',              cat:'물건'},
-  {kr:'침대',  en:'bed',               eg:'침대 옆에 시계가 있어요.',             cat:'물건'},
-  {kr:'피아노',en:'piano',             eg:'피아노가 방 안에 있어요.',              cat:'물건'},
-  {kr:'칠판',  en:'blackboard',        eg:'칠판에 뭐가 있어요?',                  cat:'물건'},
-  {kr:'앞',    en:'front',             eg:'학교 앞에 카페가 있어요.',              cat:'위치'},
-  {kr:'뒤',    en:'behind / back',     eg:'의자 뒤에 가방이 있어요.',              cat:'위치'},
-  {kr:'위',    en:'on top / above',    eg:'책상 위에 책이 있어요.',                cat:'위치'},
-  {kr:'아래/밑',en:'below / under',    eg:'책상 밑에 가방이 있어요.',              cat:'위치'},
-  {kr:'옆',    en:'beside / next to',  eg:'침대 옆에 시계가 있어요.',             cat:'위치'},
-  {kr:'안',    en:'inside',            eg:'가방 안에 공책이 있어요.',              cat:'위치'},
-  {kr:'밖/바깥',en:'outside',          eg:'교실 밖에 있어요.',                     cat:'위치'},
-  {kr:'사이',  en:'between',           eg:'책상과 의자 사이에 있어요.',            cat:'위치'},
-  {kr:'오른쪽',en:'right side',        eg:'오른쪽에 뭐가 있어요?',               cat:'위치'},
-  {kr:'왼쪽',  en:'left side',         eg:'왼쪽에 가방이 있어요.',                cat:'위치'},
-  {kr:'이 사람',en:'this person',      eg:'이 사람이 누구예요?',                  cat:'사람'},
-  {kr:'그 사람',en:'that person (near listener)',eg:'그 사람 이름이 뭐예요?',     cat:'사람'},
-  {kr:'저 사람',en:'that person (far)', eg:'저 사람은 누구예요?',                 cat:'사람'},
-  {kr:'이것/이거',en:'this thing',     eg:'이게 뭐예요? / 이것은 책이에요.',      cat:'표현'},
-  {kr:'그것/그거',en:'that (near listener)',eg:'그게 뭐예요?',                    cat:'표현'},
-  {kr:'저것/저거',en:'that thing (far)',eg:'저게 뭐예요?',                        cat:'표현'},
-  {kr:'있어요', en:'there is / have',  eg:'책이 있어요.',                          cat:'표현'},
-  {kr:'없어요', en:'there is not',     eg:'책이 없어요.',                          cat:'표현'},
+  {kr:'가방',  en:'bag',               eg:'제 가방은 책상 옆에 있어요.',           cat:'Objects'},
+  {kr:'책',    en:'book',              eg:'책이 책상 위에 있어요.',                cat:'Objects'},
+  {kr:'공책',  en:'notebook',          eg:'공책이 가방 안에 있어요.',              cat:'Objects'},
+  {kr:'책상',  en:'desk',              eg:'책상 위에 뭐가 있어요?',               cat:'Objects'},
+  {kr:'의자',  en:'chair',             eg:'의자 밑에 가방이 있어요.',              cat:'Objects'},
+  {kr:'필통',  en:'pencil case',       eg:'이게 필통이에요.',                      cat:'Objects'},
+  {kr:'시계',  en:'clock / watch',     eg:'시계가 어디에 있어요?',                cat:'Objects'},
+  {kr:'핸드폰',en:'mobile phone',      eg:'핸드폰이 어디에 있어요?',              cat:'Objects'},
+  {kr:'우산',  en:'umbrella',          eg:'우산이 의자 옆에 있어요.',              cat:'Objects'},
+  {kr:'침대',  en:'bed',               eg:'침대 옆에 시계가 있어요.',             cat:'Objects'},
+  {kr:'피아노',en:'piano',             eg:'피아노가 방 안에 있어요.',              cat:'Objects'},
+  {kr:'칠판',  en:'blackboard',        eg:'칠판에 뭐가 있어요?',                  cat:'Objects'},
+  {kr:'앞',    en:'front',             eg:'학교 앞에 카페가 있어요.',              cat:'Location'},
+  {kr:'뒤',    en:'behind / back',     eg:'의자 뒤에 가방이 있어요.',              cat:'Location'},
+  {kr:'위',    en:'on top / above',    eg:'책상 위에 책이 있어요.',                cat:'Location'},
+  {kr:'아래/밑',en:'below / under',    eg:'책상 밑에 가방이 있어요.',              cat:'Location'},
+  {kr:'옆',    en:'beside / next to',  eg:'침대 옆에 시계가 있어요.',             cat:'Location'},
+  {kr:'안',    en:'inside',            eg:'가방 안에 공책이 있어요.',              cat:'Location'},
+  {kr:'밖/바깥',en:'outside',          eg:'교실 밖에 있어요.',                     cat:'Location'},
+  {kr:'사이',  en:'between',           eg:'책상과 의자 사이에 있어요.',            cat:'Location'},
+  {kr:'오른쪽',en:'right side',        eg:'오른쪽에 뭐가 있어요?',               cat:'Location'},
+  {kr:'왼쪽',  en:'left side',         eg:'왼쪽에 가방이 있어요.',                cat:'Location'},
+  {kr:'이 사람',en:'this person',      eg:'이 사람이 누구예요?',                  cat:'People'},
+  {kr:'그 사람',en:'that person (near listener)',eg:'그 사람 이름이 뭐예요?',     cat:'People'},
+  {kr:'저 사람',en:'that person (far)', eg:'저 사람은 누구예요?',                 cat:'People'},
+  {kr:'이것/이거',en:'this thing',     eg:'이게 뭐예요? / 이것은 책이에요.',      cat:'Phrases'},
+  {kr:'그것/그거',en:'that (near listener)',eg:'그게 뭐예요?',                    cat:'Phrases'},
+  {kr:'저것/저거',en:'that thing (far)',eg:'저게 뭐예요?',                        cat:'Phrases'},
+  {kr:'있어요', en:'there is / have',  eg:'책이 있어요.',                          cat:'Phrases'},
+  {kr:'없어요', en:'there is not',     eg:'책이 없어요.',                          cat:'Phrases'},
 ];
 
 const blankData3 = [
-  {sentence:'책이 책상 ___에 있어요.',       blank:'위',  hint:'책상 ON TOP → 위'},
-  {sentence:'가방이 의자 ___에 있어요.',     blank:'옆',  hint:'의자 NEXT TO → 옆'},
-  {sentence:'공책이 가방 ___에 있어요.',     blank:'안',  hint:'가방 INSIDE → 안'},
-  {sentence:'___ 사람이 누구예요? (가까이)',  blank:'이',  hint:'말하는 사람 근처 → 이'},
-  {sentence:'___ 핸드폰은 주노 씨 거예요. (멀리)',blank:'저',hint:'두 사람 모두에게 멀리 → 저'},
-  {sentence:'시계가 침대 ___ 에 있어요.',    blank:'옆',  hint:'침대 NEXT TO → 옆'},
+  {sentence:'책이 책상 ___에 있어요.',       blank:'위',  hint:'Desk — ON TOP → 위'},
+  {sentence:'가방이 의자 ___에 있어요.',     blank:'옆',  hint:'Chair — NEXT TO → 옆'},
+  {sentence:'공책이 가방 ___에 있어요.',     blank:'안',  hint:'Bag — INSIDE → 안'},
+  {sentence:'___ 사람이 누구예요? (nearby)', blank:'이',  hint:'Near the speaker → 이'},
+  {sentence:'___ 핸드폰은 주노 씨 거예요. (far)',blank:'저',hint:'Far from both → 저'},
+  {sentence:'시계가 침대 ___ 에 있어요.',    blank:'옆',  hint:'Bed — NEXT TO → 옆'},
 ];
 
 const sentences3 = [
-  {words:['책이','책상','위에','있어요','.'],         target:'위치를 말해 보세요'},
-  {words:['가방이','어디에','있어요','?'],             target:'위치를 물어보세요'},
-  {words:['이','사람은','제','동생이에요','.'],        target:'이/그/저를 써 보세요'},
-  {words:['저','핸드폰은','주노','씨','거예요','.'],   target:'저(먼 것)를 써 보세요'},
-  {words:['시계가','침대','옆에','없어요','.'],        target:'없어요를 써 보세요'},
+  {words:['책이','책상','위에','있어요','.'],         target:'Say where something is'},
+  {words:['가방이','어디에','있어요','?'],             target:'Ask where something is'},
+  {words:['이','사람은','제','동생이에요','.'],        target:'Use 이 / 그 / 저'},
+  {words:['저','핸드폰은','주노','씨','거예요','.'],   target:'Use 저 (far)'},
+  {words:['시계가','침대','옆에','없어요','.'],        target:'Use 없어요 (not there)'},
 ];
 
 const quizData3 = [
-  {q:'"책이 책상 ___ 에 있어요." 빈칸에 알맞은 것은?',
+  {q:'Fill in: "책이 책상 ___ 에 있어요."',
    opts:['앞','위','안','밖'], ans:1,
-   ex:'책상 ON TOP = 위. 책이 책상 위에 있어요.'},
-  {q:'"이/그/저" 중 말하는 사람에게서 가장 먼 것은?',
-   opts:['이','그','저','다 같음'], ans:2,
-   ex:'이(near speaker) / 그(near listener) / 저(far from both). 저가 가장 멀어요.'},
-  {q:'"이것은"의 줄임말은?',
+   ex:'Desk ON TOP = 위. 책이 책상 위에 있어요.'},
+  {q:'Of 이/그/저, which is farthest from the speaker?',
+   opts:['이','그','저','all equal'], ans:2,
+   ex:'이 (near speaker) / 그 (near listener) / 저 (far from both). 저 is the farthest.'},
+  {q:'What\'s the contracted form of "이것은"?',
    opts:['이거','이건','이게','이걸'], ans:1,
-   ex:'이것은 → 이건. 이것이 → 이게. 이것을 → 이걸. 조사에 따라 달라져요!'},
-  {q:'"침대 옆에"의 올바른 발음은?',
+   ex:'이것은 → 이건. 이것이 → 이게. 이것을 → 이걸. The contraction depends on the particle!'},
+  {q:'How do you pronounce "침대 옆에"?',
    opts:['침대 옆에','침대 여페','침대 엽에','침대 여베'], ans:1,
-   ex:'옆(받침 ㅂ) + 에(모음) → 연음화 → [여페]. 받침이 다음 음절 첫소리가 돼요.'},
-  {q:'수지 씨가 학교에 있어요. 같은 의미의 문장은?',
+   ex:'옆 (final ㅂ) + 에 (vowel) → liaison → [여페]. The final consonant moves to the next syllable.'},
+  {q:'"수지 씨가 학교에 있어요." — which sentence has the same meaning?',
    opts:['학교에 수지 씨가 없어요','학교에 수지 씨가 있어요','수지 씨가 집에 있어요','수지 씨가 교실에 없어요'], ans:1,
-   ex:'주어와 부사어의 순서를 바꿔도 의미가 같아요!'},
-  {q:'다음 중 가방 "안"에 있을 수 있는 것은?',
+   ex:'The subject and location can swap order with the same meaning!'},
+  {q:'Which item can fit INSIDE (안) a bag?',
    opts:['책상','공책','침대','교실'], ans:1,
-   ex:'공책은 가방 안에 있어요. 책상, 침대, 교실은 너무 커요!'},
+   ex:'A notebook (공책) fits inside a bag. A desk, bed, or classroom is way too big!'},
 ];
 
 // ══════════════════════════════════════════
@@ -2465,33 +2506,33 @@ function loadUnit(num) {
   const meta = unitMeta[num];
   if (!meta) return;
 
-  // Header 업데이트
+  // Update header
   document.getElementById('unitBadge').textContent  = meta.badge;
   document.getElementById('unitTitle').textContent  = meta.title;
   document.getElementById('unitTopic').textContent  = meta.topic;
   document.getElementById('unitGoals').innerHTML =
     meta.goals.map(g => `<span class="goal-tag ${g.color}">${g.label}</span>`).join('');
 
-  // 데이터 교체
+  // Swap data
   window._vd   = num===1 ? vocabData   : num===2 ? vocabData2   : vocabData3;
   window._bd   = num===1 ? blankData   : num===2 ? blankData2   : blankData3;
   window._ss   = num===1 ? sentences   : num===2 ? sentences2   : sentences3;
   window._qd   = num===1 ? quizData    : num===2 ? quizData2    : quizData3;
   window._cats = meta.cats;
 
-  // vocab 탭으로 초기화
+  // Reset to vocab tab
   document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
   document.querySelector('[data-section="vocab"]').classList.add('active');
   document.getElementById('panel-vocab').classList.add('active');
 
-  // 상태 초기화
+  // Reset state
   selectedKr = null; selectedEn = null; matchedPairs = 0;
-  activeVocabCat = '전체';
+  activeVocabCat = 'All';
   currentSentence = 0;
-  currentQuiz = 0; quizScore = 0; quizAnswered = [];
+  currentQuiz = 0; quizScore = 0; quizAnswered = []; quizSelected = null;
 
-  // 패널 다시 빌드
+  // Rebuild panels
   buildVocabCards();
   buildMatching();
   buildBlanks();
@@ -2504,77 +2545,171 @@ function loadUnit(num) {
   document.querySelector('.content-area').scrollTop = 0;
 }
 
-// ── Grammar 패널 ──
+// ── Grammar panel ──
 function updateGrammarPanel(num) {
   const el = document.getElementById('panel-grammar');
-  if (num === 2) {
+  if (num === 1) {
     el.innerHTML = `
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>문법 1 — N이/가 (Subject Marker)</div>
-        <div class="grammar-pattern">명사 + 이 / 가</div>
-        <div class="grammar-note"><strong>규칙:</strong> 받침이 있으면 <strong>이</strong>, 받침이 없으면 <strong>가</strong>.</div>
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 1 — N이에요 / N예요</div>
+        <div class="grammar-pattern">Noun + 이에요 / 예요</div>
+        <div class="grammar-note"><strong>Rule:</strong> Use <strong>이에요</strong> after a final consonant, <strong>예요</strong> after a vowel.</div>
         <table class="grammar-table">
-          <thead><tr><th>명사</th><th>받침</th><th>형태</th><th>예문</th></tr></thead>
+          <thead><tr><th>Noun</th><th>Final consonant?</th><th>Form</th><th>Example</th></tr></thead>
           <tbody>
-            <tr><td>이름</td><td>✅ 있음 (ㅁ)</td><td><strong>이름이</strong></td><td>이름이 뭐예요?</td></tr>
-            <tr><td>전화번호</td><td>❌ 없음</td><td><strong>전화번호가</strong></td><td>전화번호가 뭐예요?</td></tr>
-            <tr><td>영화관</td><td>✅ 있음 (ㄴ)</td><td><strong>영화관이</strong></td><td>영화관이 어디예요?</td></tr>
-            <tr><td>친구</td><td>❌ 없음</td><td><strong>친구가</strong></td><td>친구가 누구예요?</td></tr>
+            <tr><td>학생 (student)</td><td>✅ Yes (ㅇ)</td><td><strong>학생이에요</strong></td><td>저는 학생이에요.</td></tr>
+            <tr><td>의사 (doctor)</td><td>❌ No</td><td><strong>의사예요</strong></td><td>저는 의사예요.</td></tr>
+            <tr><td>선생님 (teacher)</td><td>✅ Yes (ㅁ)</td><td><strong>선생님이에요</strong></td><td>저는 선생님이에요.</td></tr>
+            <tr><td>캐나다 사람 (Canadian)</td><td>✅ Yes (ㅁ)</td><td><strong>캐나다 사람이에요</strong></td><td>저는 캐나다 사람이에요.</td></tr>
           </tbody>
         </table>
-        <div class="grammar-note" style="margin-top:12px">💡 특수: 저+가 → <strong>제가</strong> | 나+가 → <strong>내가</strong></div>
       </div>
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>문법 2 — N이/가 아니에요 (Negation)</div>
-        <div class="grammar-pattern">명사 + 이/가 아니에요</div>
-        <div class="grammar-note"><strong>의미:</strong> "is not ___". 여기서 이/가는 <em>보격 조사</em>(complement marker)예요.</div>
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 2 — N은 / N는</div>
+        <div class="grammar-pattern">Noun + 은 / 는 (topic marker)</div>
+        <div class="grammar-note"><strong>Rule:</strong> Use <strong>은</strong> after a final consonant, <strong>는</strong> after a vowel.</div>
         <table class="grammar-table">
-          <thead><tr><th>명사</th><th>받침</th><th>부정형</th><th>예문</th></tr></thead>
+          <thead><tr><th>Noun</th><th>Final consonant?</th><th>Form</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>저 (I)</td><td>❌ No</td><td><strong>저는</strong></td><td>저는 김민준이에요.</td></tr>
+            <tr><td>이름 (name)</td><td>✅ Yes (ㅁ)</td><td><strong>이름은</strong></td><td>이름은 뭐예요?</td></tr>
+            <tr><td>나라 (country)</td><td>❌ No</td><td><strong>나라는</strong></td><td>나라는 어디예요?</td></tr>
+          </tbody>
+        </table>
+        <div class="blank-exercise">
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">✏️ Fill in the blanks</div>
+          <div id="blankExercises"></div>
+          <div style="margin-top:14px;display:flex;gap:0;align-items:center">
+            <button class="check-btn" onclick="checkBlanks()">✅ Check</button>
+            <button class="hint-btn" onclick="showHint()">💡 Hint</button>
+          </div>
+          <div class="feedback-row" id="blankFeedback"></div>
+        </div>
+      </div>`;
+    buildBlanks();
+  } else if (num === 2) {
+    el.innerHTML = `
+      <div class="panel-card">
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 1 — N이/가 (subject marker)</div>
+        <div class="grammar-pattern">Noun + 이 / 가</div>
+        <div class="grammar-note"><strong>Rule:</strong> Use <strong>이</strong> after a final consonant, <strong>가</strong> after a vowel.</div>
+        <table class="grammar-table">
+          <thead><tr><th>Noun</th><th>Final consonant?</th><th>Form</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>이름 (name)</td><td>✅ Yes (ㅁ)</td><td><strong>이름이</strong></td><td>이름이 뭐예요?</td></tr>
+            <tr><td>전화번호 (phone no.)</td><td>❌ No</td><td><strong>전화번호가</strong></td><td>전화번호가 뭐예요?</td></tr>
+            <tr><td>영화관 (movie theater)</td><td>✅ Yes (ㄴ)</td><td><strong>영화관이</strong></td><td>영화관이 어디예요?</td></tr>
+            <tr><td>친구 (friend)</td><td>❌ No</td><td><strong>친구가</strong></td><td>친구가 누구예요?</td></tr>
+          </tbody>
+        </table>
+        <div class="grammar-note" style="margin-top:12px">💡 Special forms: 저+가 → <strong>제가</strong> | 나+가 → <strong>내가</strong></div>
+      </div>
+      <div class="panel-card">
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 2 — N이/가 아니에요 (negation)</div>
+        <div class="grammar-pattern">Noun + 이/가 아니에요</div>
+        <div class="grammar-note"><strong>Meaning:</strong> "is not ___". Here 이/가 is the <em>complement marker</em>, not the subject marker.</div>
+        <table class="grammar-table">
+          <thead><tr><th>Noun</th><th>Final consonant?</th><th>Negative</th><th>Example</th></tr></thead>
           <tbody>
             <tr><td>학생</td><td>✅ (ㅇ)</td><td><strong>학생이 아니에요</strong></td><td>저는 학생이 아니에요.</td></tr>
             <tr><td>동생</td><td>✅ (ㅇ)</td><td><strong>동생이 아니에요</strong></td><td>동생이 아니에요, 형이에요.</td></tr>
-            <tr><td>커피</td><td>❌ 없음</td><td><strong>커피가 아니에요</strong></td><td>커피가 아니에요, 물이에요.</td></tr>
+            <tr><td>커피</td><td>❌ No</td><td><strong>커피가 아니에요</strong></td><td>커피가 아니에요, 물이에요.</td></tr>
           </tbody>
         </table>
       </div>`;
   } else if (num === 3) {
     el.innerHTML = `
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>문법 1 — 이, 그, 저 (Demonstratives)</div>
-        <div class="grammar-pattern">이 / 그 / 저 + 명사</div>
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 1 — 이, 그, 저 (demonstratives)</div>
+        <div class="grammar-pattern">이 / 그 / 저 + noun</div>
         <div class="grammar-note"><strong>이</strong> = this (near speaker) · <strong>그</strong> = that (near listener) · <strong>저</strong> = that (far from both)</div>
         <table class="grammar-table">
-          <thead><tr><th>거리</th><th>사람</th><th>물건</th><th>줄임</th></tr></thead>
+          <thead><tr><th>Distance</th><th>Person</th><th>Thing</th><th>Contraction</th></tr></thead>
           <tbody>
-            <tr><td>가까이 (speaker)</td><td><strong>이 사람</strong></td><td><strong>이 책</strong></td><td>이것→<strong>이건/이게/이걸</strong></td></tr>
-            <tr><td>청자 근처 (listener)</td><td><strong>그 사람</strong></td><td><strong>그 책</strong></td><td>그것→<strong>그건/그게/그걸</strong></td></tr>
-            <tr><td>멀리 (far)</td><td><strong>저 사람</strong></td><td><strong>저 책</strong></td><td>저것→<strong>저건/저게/저걸</strong></td></tr>
+            <tr><td>Near (speaker)</td><td><strong>이 사람</strong></td><td><strong>이 책</strong></td><td>이것 → <strong>이건 / 이게 / 이걸</strong></td></tr>
+            <tr><td>Near listener</td><td><strong>그 사람</strong></td><td><strong>그 책</strong></td><td>그것 → <strong>그건 / 그게 / 그걸</strong></td></tr>
+            <tr><td>Far from both</td><td><strong>저 사람</strong></td><td><strong>저 책</strong></td><td>저것 → <strong>저건 / 저게 / 저걸</strong></td></tr>
           </tbody>
         </table>
       </div>
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>문법 2 — N에 있다 / 없다 (Location)</div>
-        <div class="grammar-pattern">장소 + 에 있어요 / 없어요</div>
-        <div class="grammar-note"><strong>의미:</strong> "~에 있다" = "is/are at ___". 위치를 나타낼 때 써요.</div>
+        <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>Grammar 2 — N에 있다 / 없다 (location)</div>
+        <div class="grammar-pattern">Place + 에 있어요 / 없어요</div>
+        <div class="grammar-note"><strong>Meaning:</strong> "~에 있다" = "is/are at ___". Use it to describe where something is.</div>
         <table class="grammar-table">
-          <thead><tr><th>질문</th><th>긍정</th><th>부정</th></tr></thead>
+          <thead><tr><th>Question</th><th>Affirmative</th><th>Negative</th></tr></thead>
           <tbody>
             <tr><td>책이 어디에 있어요?</td><td>책이 책상 <strong>위에 있어요</strong>.</td><td>책이 가방 안에 <strong>없어요</strong>.</td></tr>
             <tr><td>리아가 어디에 있어요?</td><td>리아는 학교에 <strong>있어요</strong>.</td><td>리아는 집에 <strong>없어요</strong>.</td></tr>
           </tbody>
         </table>
-        <div class="grammar-note" style="margin-top:12px">💡 순서 바꿔도 OK: 수지 씨가 학교에 있어요 ↔ 학교에 수지 씨가 있어요</div>
+        <div class="grammar-note" style="margin-top:12px">💡 Order doesn't matter: 수지 씨가 학교에 있어요 ↔ 학교에 수지 씨가 있어요</div>
       </div>`;
   }
 }
 
-// ── Usage 패널 ──
+// ── Usage panel ──
 function updateUsagePanel(num) {
   const el = document.getElementById('panel-usage');
-  if (num === 2) {
+  if (num === 1) {
+    // Unit 1's usage panel is the original hardcoded content — reset it
     el.innerHTML = `
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>대화 1 — 전화번호 묻고 답하기</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>Usage — Self-introduction dialogue</div>
+        <div class="usage-dialogue">
+          <div class="dialogue-line">
+            <span class="speaker-badge speaker-a">A</span>
+            <div>
+              <div class="dialogue-text">안녕하세요! 저는 <span class="highlight">마이클이에요</span>. 만나서 반가워요.</div>
+              <div class="dialogue-translation">Hello! I'm Michael. Nice to meet you.</div>
+            </div>
+          </div>
+          <div class="dialogue-line">
+            <span class="speaker-badge speaker-b">B</span>
+            <div>
+              <div class="dialogue-text">안녕하세요! 저는 <span class="highlight">수진이에요</span>. 반가워요. 어느 나라 사람이에요?</div>
+              <div class="dialogue-translation">Hello! I'm Sujin. Nice to meet you. Where are you from?</div>
+            </div>
+          </div>
+          <div class="dialogue-line">
+            <span class="speaker-badge speaker-a">A</span>
+            <div>
+              <div class="dialogue-text">저는 <span class="highlight">캐나다 사람이에요</span>. 수진 씨는 한국 사람이에요?</div>
+              <div class="dialogue-translation">I'm Canadian. Are you Korean, Sujin?</div>
+            </div>
+          </div>
+          <div class="dialogue-line">
+            <span class="speaker-badge speaker-b">B</span>
+            <div>
+              <div class="dialogue-text">네, 저는 <span class="highlight">한국 사람이에요</span>. 직업이 뭐예요?</div>
+              <div class="dialogue-translation">Yes, I'm Korean. What do you do?</div>
+            </div>
+          </div>
+          <div class="dialogue-line">
+            <span class="speaker-badge speaker-a">A</span>
+            <div>
+              <div class="dialogue-text">저는 <span class="highlight">학생이에요</span>.</div>
+              <div class="dialogue-translation">I'm a student.</div>
+            </div>
+          </div>
+        </div>
+        <div class="word-builder">
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">🔀 Sentence builder — click the words in the correct order</div>
+          <div class="builder-target" id="builderTarget"></div>
+          <div class="word-tiles-answer" id="answerZone"><span style="color:var(--gray-500);font-size:13px">Place words here</span></div>
+          <div class="word-tiles-pool" id="tilesPool"></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <button class="check-btn" style="background:var(--teal)" onclick="checkSentence()">✅ Check</button>
+            <button class="hint-btn" onclick="nextSentence()">Next sentence →</button>
+            <span id="builderFeedback" style="font-size:13px"></span>
+          </div>
+        </div>
+      </div>`;
+    buildSentence(0);
+  } else if (num === 2) {
+    el.innerHTML = `
+      <div class="panel-card">
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>Dialogue 1 — Asking for a phone number</div>
         <div class="dialogue-box">
           <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text">재민 씨, <strong>전화번호가 뭐예요?</strong></span></div>
           <div class="dlg-line dlg-b"><span class="dlg-speaker">B</span><span class="dlg-text">제 전화번호는 <strong>010-1213-7505예요.</strong></span></div>
@@ -2583,7 +2718,7 @@ function updateUsagePanel(num) {
         </div>
       </div>
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>대화 2 — 부정하고 확인하기</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>Dialogue 2 — Correcting and confirming</div>
         <div class="dialogue-box">
           <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text">교실이 203호예요?</span></div>
           <div class="dlg-line dlg-b"><span class="dlg-speaker">B</span><span class="dlg-text">아니요, <strong>203호가 아니에요. 204호예요.</strong></span></div>
@@ -2591,21 +2726,21 @@ function updateUsagePanel(num) {
         </div>
       </div>
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>💡 발음 — 받침의 연음화</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>💡 Pronunciation — liaison of final consonants</div>
         <table class="grammar-table">
-          <thead><tr><th>표기</th><th>발음</th><th>규칙</th></tr></thead>
+          <thead><tr><th>Spelling</th><th>Pronunciation</th><th>Rule</th></tr></thead>
           <tbody>
             <tr><td>맞아요</td><td><strong>[마자요]</strong></td><td>ㅈ + 아 → 자</td></tr>
-            <tr><td>십육</td><td><strong>[심뉵]</strong></td><td>비음화 + 연음화</td></tr>
+            <tr><td>십육</td><td><strong>[심뉵]</strong></td><td>Nasalization + liaison</td></tr>
             <tr><td>몇 월</td><td><strong>[며둴]</strong></td><td>ㄷ + 월 → 둴</td></tr>
-            <tr><td>몇 호</td><td><strong>[며토]</strong></td><td>ㄷ + ㅎ → ㅌ (격음화)</td></tr>
+            <tr><td>몇 호</td><td><strong>[며토]</strong></td><td>ㄷ + ㅎ → ㅌ (aspiration)</td></tr>
           </tbody>
         </table>
       </div>`;
   } else if (num === 3) {
     el.innerHTML = `
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>대화 1 — 물건 위치 묻고 답하기</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>Dialogue 1 — Asking where things are</div>
         <div class="dialogue-box">
           <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text"><strong>책이 어디에 있어요?</strong></span></div>
           <div class="dlg-line dlg-b"><span class="dlg-speaker">B</span><span class="dlg-text">책이 <strong>책상 위에 있어요.</strong></span></div>
@@ -2614,69 +2749,112 @@ function updateUsagePanel(num) {
         </div>
       </div>
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>대화 2 — 이/그/저로 가리키기</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>Dialogue 2 — Pointing with 이 / 그 / 저</div>
         <div class="dialogue-box">
-          <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text">(그림 가리키며) <strong>이 사람</strong>이 누구예요?</span></div>
+          <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text">(pointing at a picture) <strong>이 사람</strong>이 누구예요?</span></div>
           <div class="dlg-line dlg-b"><span class="dlg-speaker">B</span><span class="dlg-text">제 동생이에요.</span></div>
           <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text"><strong>저 핸드폰</strong>은 누구 거예요?</span></div>
           <div class="dlg-line dlg-b"><span class="dlg-speaker">B</span><span class="dlg-text">주노 씨 핸드폰이에요.</span></div>
         </div>
       </div>
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>💡 발음 — 침대 옆에</div>
+        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>💡 Pronunciation — 침대 옆에</div>
         <table class="grammar-table">
-          <thead><tr><th>표기</th><th>발음</th><th>규칙</th></tr></thead>
+          <thead><tr><th>Spelling</th><th>Pronunciation</th><th>Rule</th></tr></thead>
           <tbody>
-            <tr><td>침대 옆</td><td><strong>[침대 엽]</strong></td><td>받침 ㅂ 발음</td></tr>
-            <tr><td>침대 옆에</td><td><strong>[침대 여페]</strong></td><td>ㅂ + 에 → 페 (연음)</td></tr>
+            <tr><td>침대 옆</td><td><strong>[침대 엽]</strong></td><td>Final ㅂ sound</td></tr>
+            <tr><td>침대 옆에</td><td><strong>[침대 여페]</strong></td><td>ㅂ + 에 → 페 (liaison)</td></tr>
           </tbody>
         </table>
       </div>`;
   }
 }
 
-// ── Real Life 패널 ──
+// ── Real Life panel ──
 function updateRealPanel(num) {
   const el = document.getElementById('panel-real');
-  if (num === 2) {
+  if (num === 1) {
     el.innerHTML = `
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>🌏 실생활 적용 — 전화번호 교환하기</div>
+        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>Real Life — situation practice</div>
+        <div class="scenario-card">
+          <div class="scenario-title">📍 Activity 1 — Say hello</div>
+          <div class="scenario-prompt">Greet someone you're meeting for the first time. Introduce your name and country.<br><em style="font-size:12px;color:var(--gray-500)">(안녕하세요 + name + country or job)</em></div>
+          <textarea class="response-area" placeholder="안녕하세요!&#10;저는 ___예요/이에요.&#10;저는 ___ 사람이에요." id="real1"></textarea>
+          <div>
+            <button class="show-answer-btn" onclick="toggleSample('sample1')">Show sample answer</button>
+          </div>
+          <div class="sample-answer" id="sample1">
+            <strong>Sample answer:</strong>
+            안녕하세요! 저는 안나예요. 저는 미국 사람이에요. 만나서 반갑습니다!
+          </div>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-title">📍 Activity 2 — Introduce yourself</div>
+          <div class="scenario-prompt">Write a self-introduction that includes your name, country, and job.<br><em style="font-size:12px;color:var(--gray-500)">(Self check: can you say your country and job?)</em></div>
+          <textarea class="response-area" placeholder="안녕하세요!&#10;저는 ___예요/이에요.&#10;저는 ___ 사람이에요.&#10;저는 ___예요/이에요.&#10;만나서 반갑습니다!" id="real2"></textarea>
+          <div>
+            <button class="show-answer-btn" onclick="toggleSample('sample2')">Show sample answer</button>
+          </div>
+          <div class="sample-answer" id="sample2">
+            <strong>Sample self-introduction:</strong>
+            안녕하세요! 저는 마이클이에요. 저는 캐나다 사람이에요. 저는 대학생이에요. 만나서 반갑습니다!
+          </div>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-title">📍 Activity 3 — Partner interview</div>
+          <div class="scenario-prompt">Write 3 questions to ask your partner.<br><em style="font-size:12px;color:var(--gray-500)">(name? country? job?)</em></div>
+          <textarea class="response-area" placeholder="1. 이름이 뭐예요?&#10;2. 어느 나라 사람이에요?&#10;3. 직업이 뭐예요?" id="real3"></textarea>
+          <div>
+            <button class="show-answer-btn" onclick="toggleSample('sample3')">Show sample answer</button>
+          </div>
+          <div class="sample-answer" id="sample3">
+            <strong>Sample questions + answers:</strong>
+            Q: 이름이 뭐예요? → A: 저는 안나예요.<br>
+            Q: 어느 나라 사람이에요? → A: 저는 미국 사람이에요.<br>
+            Q: 직업이 뭐예요? → A: 저는 대학생이에요.
+          </div>
+        </div>
+      </div>`;
+  } else if (num === 2) {
+    el.innerHTML = `
+      <div class="panel-card">
+        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>🌏 Real Life — Exchanging phone numbers</div>
         <div class="real-activity">
           <div class="activity-step">
             <div class="step-num">1</div>
-            <div class="step-text">짝과 서로 전화번호를 물어보세요.<br><em>"___씨, 전화번호가 뭐예요?"</em></div>
+            <div class="step-text">Ask your partner for their phone number.<br><em>"___ 씨, 전화번호가 뭐예요?"</em></div>
           </div>
           <div class="activity-step">
             <div class="step-num">2</div>
-            <div class="step-text">말하는 전화번호를 받아 적고 확인하세요.<br><em>"___이에요? 맞아요?"</em></div>
+            <div class="step-text">Write down the number they say and confirm it.<br><em>"___이에요? 맞아요?"</em></div>
           </div>
           <div class="activity-step">
             <div class="step-num">3</div>
-            <div class="step-text">틀렸으면 정정하세요.<br><em>"아니요, ___가 아니에요. ___이에요."</em></div>
+            <div class="step-text">If wrong, correct it.<br><em>"아니요, ___가 아니에요. ___이에요."</em></div>
           </div>
         </div>
-        <div class="real-tip">📞 한국 번호 형식: 010-XXXX-XXXX (공일공-XXXX-XXXX)</div>
+        <div class="real-tip">📞 Korean phone format: 010-XXXX-XXXX (공일공-XXXX-XXXX)</div>
       </div>`;
   } else if (num === 3) {
     el.innerHTML = `
       <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>🌏 실생활 적용 — 방 안 물건 위치 설명하기</div>
+        <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>🌏 Real Life — Describing where things are in a room</div>
         <div class="real-activity">
           <div class="activity-step">
             <div class="step-num">1</div>
-            <div class="step-text">자신의 방이나 교실 물건 위치를 설명해 보세요.<br><em>"___은/는 ___에 있어요."</em></div>
+            <div class="step-text">Describe where objects are in your room or classroom.<br><em>"___은/는 ___에 있어요."</em></div>
           </div>
           <div class="activity-step">
             <div class="step-num">2</div>
-            <div class="step-text">짝에게 위치를 물어보세요.<br><em>"___이/가 어디에 있어요?"</em></div>
+            <div class="step-text">Ask your partner where something is.<br><em>"___이/가 어디에 있어요?"</em></div>
           </div>
           <div class="activity-step">
             <div class="step-num">3</div>
-            <div class="step-text">이/그/저를 써서 교실 물건을 가리키며 말해 보세요.<br><em>"이 ___은/는 뭐예요?"</em></div>
+            <div class="step-text">Use 이 / 그 / 저 to point at classroom objects.<br><em>"이 ___은/는 뭐예요?"</em></div>
           </div>
         </div>
-        <div class="real-tip">💬 "핸드폰 어디 있어?" = Where's my phone? (편한 말)<br>"핸드폰이 어디에 있어요?" = 존댓말</div>
+        <div class="real-tip">💬 "핸드폰 어디 있어?" = Where's my phone? (casual)<br>"핸드폰이 어디에 있어요?" = polite</div>
       </div>`;
   }
 }
