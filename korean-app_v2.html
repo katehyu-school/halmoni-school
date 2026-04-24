@@ -72,6 +72,7 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .snav-btn { font-family:'Jua',sans-serif; font-size:0.9rem; padding:9px 18px; border:2.5px solid #E0E7EF; border-radius:30px; background:white; color:var(--muted); cursor:pointer; transition:all 0.2s; }
 .snav-btn.active { border-color:var(--sky); background:var(--sky-light); color:var(--sky); }
 .snav-btn:hover:not(.active) { border-color:#C0CDD8; color:var(--text); }
+.snav-en { font-family:'Nanum Gothic',sans-serif; font-size:0.68rem; opacity:0.7; margin-left:3px; }
 .section { display:none; }
 .section.active { display:block; }
 
@@ -486,7 +487,23 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   font-family:'Jua',sans-serif; font-size:0.9rem; padding:8px; width:100%;
   border:none; border-radius:30px; background:#ECEFF1; color:#607D8B; cursor:pointer;
 }
-/* ── 사이드바 레이아웃 ── */
+/* ── STEP INDICATOR ── */
+.step-indicator { display:flex; align-items:center; gap:8px; padding:14px 20px 6px; flex-wrap:wrap; }
+.step-dot { width:28px; height:28px; border-radius:50%; background:#E0E7EF; color:#B0BEC5; font-family:'Jua',sans-serif; font-size:0.82rem; display:flex; align-items:center; justify-content:center; font-weight:700; transition:all 0.3s; }
+.step-dot.active { background:var(--sky); color:white; box-shadow:0 2px 8px rgba(91,184,245,0.4); }
+.step-dot.done { background:var(--green); color:white; }
+.step-line { width:32px; height:3px; background:#E0E7EF; border-radius:2px; }
+.step-label { font-family:'Jua',sans-serif; font-size:0.88rem; color:var(--muted); margin-left:4px; }
+
+/* ── STEP 1 PAIRS ── */
+.s1-pair-row { display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+.s1-word { font-family:'Jua',sans-serif; font-size:1.05rem; background:var(--sky-light); border:2px solid var(--sky); border-radius:12px; padding:8px 16px; min-width:100px; text-align:center; }
+.s1-plus { font-size:1.1rem; color:var(--muted); }
+.s1-select { font-family:'Jua',sans-serif; font-size:1rem; padding:8px 12px; border-radius:12px; border:2px solid #E0E7EF; background:white; cursor:pointer; min-width:90px; transition:all 0.2s; }
+.s1-select:focus { border-color:var(--sky); outline:none; }
+.s1-select.correct { border-color:var(--green); background:var(--green-light); }
+.s1-select.wrong { border-color:var(--coral); background:#FFF0F0; }
+.s1-hint { font-size:0.78rem; color:var(--muted); margin-left:4px; }
 .app-body {
   display: flex;
   min-height: calc(100vh - 120px);
@@ -1128,9 +1145,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ UNIT 1 ══════ -->
 <div class="unit active" id="unit1">
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(1,'vocab')">📚 새단어</button>
-    <button class="snav-btn" onclick="switchSection(1,'grammar')">📌 문법</button>
-    <button class="snav-btn" onclick="switchSection(1,'quiz')">✏️ 연습</button>
+    <button class="snav-btn active" onclick="switchSection(1,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection(1,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection(1,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
@@ -1255,9 +1272,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ UNIT 2 ══════ -->
 <div class="unit" id="unit2">
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(2,'vocab')">📚 새단어</button>
-    <button class="snav-btn" onclick="switchSection(2,'grammar')">📌 문법</button>
-    <button class="snav-btn" onclick="switchSection(2,'quiz')">✏️ 연습</button>
+    <button class="snav-btn active" onclick="switchSection(2,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection(2,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection(2,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
@@ -1344,13 +1361,48 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- QUIZ -->
   <div class="section" id="u2-quiz">
+
+    <!-- 스텝 표시 -->
+    <div class="step-indicator" id="u2-step-indicator">
+      <div class="step-dot active" id="u2-step-dot-1">1</div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="u2-step-dot-2">2</div>
+      <div class="step-label" id="u2-step-label">Step 1 — 단어 + 조사 짝맞추기</div>
+    </div>
+
+    <!-- ── STEP 1: 명사+조사 덩어리 drag & drop ── -->
+    <div id="u2-step1">
+      <div class="progress-wrap">
+        <span class="prog-label" id="u2-s1-prog-label">문제 1 / 9</span>
+        <div class="prog-bar"><div class="prog-fill" id="u2-s1-prog-fill" style="width:0%"></div></div>
+      </div>
+      <div class="card" id="u2-s1card">
+        <span class="quiz-badge sky">2과 · Step 1 — 덩어리 카드 맞추기</span>
+        <div class="scene-box" id="u2-s1-scene">🛝</div>
+        <div class="question-english" id="u2-s1-english"></div>
+        <div class="section-sub">카드를 순서대로 드래그해서 문장을 만들어요! Drag the chunks in order.</div>
+        <div class="drop-zone" id="u2-s1-dropzone">
+          <span class="drop-zone-placeholder">Drag cards here!</span>
+        </div>
+        <div class="word-bank" id="u2-s1-wordbank"></div>
+        <div class="feedback" id="u2-s1-fb"></div>
+        <div class="btn-row">
+          <button class="btn btn-reset" onclick="resetS1()">🔄 Reset</button>
+          <button class="btn btn-check" onclick="checkS1()">✅ Check!</button>
+          <button class="btn btn-next" id="u2-s1-next" onclick="nextS1()" style="display:none;">Next ▶</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: 문장 만들기 (기존) ── -->
+    <div id="u2-step2" style="display:none;">
     <div class="progress-wrap">
       <span class="prog-label" id="u2-prog-label">문제 1 / 9</span>
       <div class="prog-bar"><div class="prog-fill" id="u2-prog-fill" style="width:0%"></div></div>
       <span class="prog-score" id="u2-prog-score">⭐ 0점</span>
     </div>
     <div class="card" id="u2-qcard">
-      <span class="quiz-badge sky">2과 · Particles 조사</span>
+      <span class="quiz-badge sky">2과 · Step 2 — 문장 만들기</span>
       <div class="scene-box" id="u2-scene">🛝</div>
       <div class="question-english" id="u2-qenglish">Build the sentence!</div>
       <div class="section-sub" id="u2-qsub">Drag cards below — and drag to reorder inside the sentence!</div>
@@ -1383,6 +1435,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         <button class="btn btn-next" id="u2-next" onclick="nextU2()" disabled>Next ▶</button>
       </div>
     </div>
+    </div><!-- /u2-step2 -->
+
     <div class="complete-screen" id="u2-complete">
       <div class="complete-emoji">🏆</div>
       <div class="complete-title">참 잘했어요! Amazing!</div>
@@ -1399,9 +1453,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ UNIT 3 ══════ -->
 <div class="unit" id="unit3">
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(3,'vocab')">📚 새단어</button>
-    <button class="snav-btn" onclick="switchSection(3,'grammar')">📌 문법</button>
-    <button class="snav-btn" onclick="switchSection(3,'quiz')">✏️ 연습</button>
+    <button class="snav-btn active" onclick="switchSection(3,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection(3,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection(3,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
@@ -1562,7 +1616,7 @@ const linkWords = [
   {emoji:'👴👵',kr:'할아버지하고 할머니',en:'grandpa and grandma',rom:'harabeoji hago halmeoni'},
   {emoji:'👨👩',kr:'엄마하고 아빠',en:'mom and dad',rom:'eomma hago appa'},
   {emoji:'👧👧',kr:'리아하고 애라',en:'Ria and Aera',rom:'Ria hago Aera'},
-  {emoji:'👦👦',kr:'리암하고 카요',en:'Riam and Kayo',rom:'Riam hago Kayo'},
+  {emoji:'👦👦',kr:'리암하고 카요',en:'Liam and Kayo',rom:'Liam hago Kayo'},
 ];
 const places = [
   {emoji:'🛝',kr:'놀이터',en:'playground',rom:'noriteo'},
@@ -1596,60 +1650,111 @@ const u1Questions = [
 
 // Unit 2 questions — ALL particles are separate cards
 // types: name | particle | place | verb
+// chunks: Step 1용 덩어리 카드 [{text, type, en}]
 const u2Questions = [
   {
-    scene:'🛝', english:'Ria and Aera ride the swing at the playground.',
+    scene:'🛝', english:'Lia and Aera ride the swing at the playground.',
     hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
     answer:['리아','하고','애라','는','놀이터','에서','그네','를','타요'],
-    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+    types: ['name','particle','name','particle','place','particle','name','particle','verb'],
+    chunks: [
+      {text:'리아하고 애라는', type:'name',  en:'Lia and Aera'},
+      {text:'놀이터에서',      type:'place', en:'at the playground'},
+      {text:'그네를',          type:'name',  en:'the swing'},
+      {text:'타요',            type:'verb',  en:'ride'},
+    ]
   },
   {
     scene:'🌳', english:'Dad and Mom ride bikes at the park.',
     hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
     answer:['아빠','하고','엄마','는','공원','에서','자전거','를','타요'],
-    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+    types: ['name','particle','name','particle','place','particle','name','particle','verb'],
+    chunks: [
+      {text:'아빠하고 엄마는', type:'name',  en:'Dad and Mom'},
+      {text:'공원에서',        type:'place', en:'at the park'},
+      {text:'자전거를',        type:'name',  en:'bikes'},
+      {text:'타요',            type:'verb',  en:'ride'},
+    ]
   },
   {
-    scene:'🛝', english:'Ria and Aera are at the playground.',
+    scene:'🛝', english:'Lia and Aera are at the playground.',
     hint:'에 = location (just being there). Use 있어요, not 타요!',
     answer:['리아하고 애라','는','놀이터','에','있어요'],
-    types: ['name','particle','place','particle','verb']
+    types: ['name','particle','place','particle','verb'],
+    chunks: [
+      {text:'리아하고 애라는', type:'name',  en:'Lia and Aera'},
+      {text:'놀이터에',        type:'place', en:'at the playground'},
+      {text:'있어요',          type:'verb',  en:'are'},
+    ]
   },
   {
     scene:'📚', english:'Boram reads a book in the classroom.',
     hint:'보람 ends in ㅁ → 이. 에서 = action place. 을 = object.',
     answer:['보람','이','교실','에서','책','을','읽어요'],
-    types: ['name','particle','place','particle','name','particle','verb']
+    types: ['name','particle','place','particle','name','particle','verb'],
+    chunks: [
+      {text:'보람이',   type:'name',  en:'Boram'},
+      {text:'교실에서', type:'place', en:'in the classroom'},
+      {text:'책을',     type:'name',  en:'a book'},
+      {text:'읽어요',   type:'verb',  en:'reads'},
+    ]
   },
   {
     scene:'🏊', english:'Mira swims at the pool.',
     hint:'미라 ends in ㅏ → 는 (topic). 에서 = action place.',
     answer:['미라','는','수영장','에서','수영해요'],
-    types: ['name','particle','place','particle','verb']
+    types: ['name','particle','place','particle','verb'],
+    chunks: [
+      {text:'미라는',    type:'name',  en:'Mira'},
+      {text:'수영장에서', type:'place', en:'at the pool'},
+      {text:'수영해요',  type:'verb',  en:'swims'},
+    ]
   },
   {
     scene:'🏃', english:'Seongjin exercises at the field.',
     hint:'성진 ends in ㄴ → 이. 에서 = action place.',
     answer:['성진','이','운동장','에서','운동해요'],
-    types: ['name','particle','place','particle','verb']
+    types: ['name','particle','place','particle','verb'],
+    chunks: [
+      {text:'성진이',    type:'name',  en:'Seongjin'},
+      {text:'운동장에서', type:'place', en:'at the field'},
+      {text:'운동해요',  type:'verb',  en:'exercises'},
+    ]
   },
   {
     scene:'👴👵', english:'Grandpa and grandma are at the park.',
     hint:'하고 = and, 는 = topic, 에 = location (just being there), 있어요!',
     answer:['할아버지','하고','할머니','는','공원','에','있어요'],
-    types: ['name','particle','name','particle','place','particle','verb']
+    types: ['name','particle','name','particle','place','particle','verb'],
+    chunks: [
+      {text:'할아버지하고 할머니는', type:'name',  en:'Grandpa and grandma'},
+      {text:'공원에',               type:'place', en:'at the park'},
+      {text:'있어요',               type:'verb',  en:'are'},
+    ]
   },
   {
-    scene:'🥋', english:'Riam and Kayo do taekwondo at the taekwondo gym.',
+    scene:'🥋', english:'Liam and Kayo do taekwondo at the taekwondo gym.',
     hint:'하고 = and, 는 = topic, 에서 = action place, 를 = object',
     answer:['리암','하고','카요','는','태권도장','에서','태권도','를','해요'],
-    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+    types: ['name','particle','name','particle','place','particle','name','particle','verb'],
+    chunks: [
+      {text:'리암하고 카요는', type:'name',  en:'Liam and Kayo'},
+      {text:'태권도장에서',    type:'place', en:'at the taekwondo gym'},
+      {text:'태권도를',        type:'name',  en:'taekwondo'},
+      {text:'해요',            type:'verb',  en:'do'},
+    ]
   },
   {
     scene:'📸', english:'Mira and Seulgi take photos at the park.',
     hint:'하고 = and, 는 = topic, 에서 = action place, 을 = object',
     answer:['미라','하고','슬기','는','공원','에서','사진','을','찍어요'],
-    types: ['name','particle','name','particle','place','particle','name','particle','verb']
+    types: ['name','particle','name','particle','place','particle','name','particle','verb'],
+    chunks: [
+      {text:'미라하고 슬기는', type:'name',  en:'Mira and Seulgi'},
+      {text:'공원에서',        type:'place', en:'at the park'},
+      {text:'사진을',          type:'name',  en:'photos'},
+      {text:'찍어요',          type:'verb',  en:'take'},
+    ]
   },
 ];
 
@@ -2014,7 +2119,15 @@ function updateU2Progress(){
 
 function restartUnit(n){
   if(n===1){ u1Idx=0; u1Score=0; document.getElementById('u1-qcard').style.display='block'; document.getElementById('u1-complete').classList.remove('show'); renderU1(); switchUnit(1); switchSection(1,'quiz'); syncNext(1,0); }
-  if(n===2){ u2Idx=0; u2Score=0; document.getElementById('u2-qcard').style.display='block'; document.getElementById('u2-complete').classList.remove('show'); renderU2(); switchUnit(2); switchSection(2,'quiz'); syncNext(2,0); }
+  if(n===2){ u2Idx=0; u2Score=0;
+    document.getElementById('u2-step1').style.display='block';
+    document.getElementById('u2-step2').style.display='none';
+    document.getElementById('u2-qcard').style.display='block';
+    document.getElementById('u2-complete').classList.remove('show');
+    document.getElementById('u2-step-dot-1').className='step-dot active';
+    document.getElementById('u2-step-dot-2').className='step-dot';
+    document.getElementById('u2-step-label').textContent='Step 1 — 단어 + 조사 짝맞추기';
+    renderS1(); switchUnit(2); switchSection(2,'quiz'); syncNext(2,0); }
   if(n===3){ u3Idx=0; u3Score=0; document.getElementById('u3-qcard').style.display='block'; document.getElementById('u3-complete').classList.remove('show'); renderU3(); switchUnit(3); switchSection(3,'quiz'); syncNext(3,0); }
 }
 
@@ -2338,6 +2451,148 @@ function updateU3Progress(){
 }
 
 
+function updateU3Progress(){
+  const pct=Math.round((u3Idx/u3Questions.length)*100);
+  document.getElementById('u3-prog-fill').style.width=pct+'%';
+  document.getElementById('u3-prog-label').textContent=`문제 ${u3Idx+1} / ${u3Questions.length}`;
+  document.getElementById('u3-prog-score').textContent=`⭐ ${u3Score}점`;
+}
+
+// ══════════════════════════════════════════
+// UNIT 2 — STEP 1: 청크 drag & drop
+// ══════════════════════════════════════════
+let s1Idx = 0;
+let s1Dropped = []; // [{text, type}]
+let s1DragSrc = null;
+let s1DragFrom = null; // 'bank' | 'zone'
+
+function renderS1() {
+  if (!document.getElementById('u2-s1-wordbank')) return;
+  const q = u2Questions[s1Idx];
+  // 진행 표시
+  const pct = Math.round((s1Idx / u2Questions.length) * 100);
+  document.getElementById('u2-s1-prog-fill').style.width = pct + '%';
+  document.getElementById('u2-s1-prog-label').textContent = `문제 ${s1Idx+1} / ${u2Questions.length}`;
+  document.getElementById('u2-s1-scene').textContent = q.scene;
+  document.getElementById('u2-s1-english').textContent = '👉 ' + q.english;
+
+  s1Dropped = [];
+  renderS1Zone();
+
+  // 단어 은행 — 청크 섞기
+  const bank = document.getElementById('u2-s1-wordbank');
+  bank.innerHTML = '';
+  const shuffled = [...q.chunks].sort(() => Math.random() - 0.5);
+  shuffled.forEach(chunk => {
+    bank.appendChild(makeS1Card(chunk, 'bank'));
+  });
+
+  const fb = document.getElementById('u2-s1-fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('u2-s1-next').style.display = 'none';
+}
+
+function makeS1Card(chunk, from) {
+  const colorMap = { name:'var(--sky)', place:'var(--lavender)', verb:'var(--green)', particle:'var(--coral)' };
+  const card = document.createElement('div');
+  card.className = 'wcard';
+  card.draggable = true;
+  card.dataset.text = chunk.text;
+  card.dataset.type = chunk.type;
+  card.style.borderColor = colorMap[chunk.type] || 'var(--sky)';
+  card.innerHTML = `<span style="font-size:1rem;">${chunk.text}</span><span style="font-size:0.7rem;color:var(--muted);display:block;">${chunk.en}</span>`;
+
+  card.addEventListener('dragstart', e => {
+    s1DragSrc = chunk;
+    s1DragFrom = from;
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  card.addEventListener('click', () => {
+    if (from === 'bank') {
+      s1Dropped.push(chunk);
+      renderS1Zone();
+      // 은행에서 제거
+      card.remove();
+    } else {
+      // zone에서 클릭 → 은행으로 돌려보내기
+      s1Dropped = s1Dropped.filter(c => c !== chunk);
+      renderS1Zone();
+      document.getElementById('u2-s1-wordbank').appendChild(makeS1Card(chunk, 'bank'));
+    }
+  });
+  return card;
+}
+
+function renderS1Zone() {
+  const zone = document.getElementById('u2-s1-dropzone');
+  zone.innerHTML = '';
+  if (s1Dropped.length === 0) {
+    zone.innerHTML = '<span class="drop-zone-placeholder">Drag cards here!</span>';
+  } else {
+    s1Dropped.forEach((chunk, i) => {
+      const card = makeS1Card(chunk, 'zone');
+      zone.appendChild(card);
+    });
+  }
+  // drop 이벤트
+  zone.ondragover = e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; };
+  zone.ondrop = e => {
+    e.preventDefault();
+    if (s1DragFrom === 'bank') {
+      s1Dropped.push(s1DragSrc);
+      renderS1Zone();
+      // 은행에서 해당 카드 제거
+      [...document.querySelectorAll('#u2-s1-wordbank .wcard')].forEach(el => {
+        if (el.dataset.text === s1DragSrc.text) el.remove();
+      });
+    }
+    s1DragSrc = null;
+  };
+}
+
+function checkS1() {
+  const q = u2Questions[s1Idx];
+  // 청크 순서가 맞는지 확인
+  const correct = q.chunks.map(c => c.text);
+  const given   = s1Dropped.map(c => c.text);
+  const fb = document.getElementById('u2-s1-fb');
+  if (JSON.stringify(correct) === JSON.stringify(given)) {
+    fb.className = 'feedback correct';
+    fb.innerHTML = '🎉 완벽해요! Perfect!';
+    document.getElementById('u2-s1-next').style.display = 'inline-block';
+  } else if (given.length === 0) {
+    fb.className = 'feedback wrong';
+    fb.innerHTML = '❌ 카드를 드래그해서 놓아 주세요!';
+  } else {
+    fb.className = 'feedback wrong';
+    fb.innerHTML = `❌ Try again! 힌트: ${q.hint}`;
+  }
+}
+
+function resetS1() {
+  renderS1();
+}
+
+function nextS1() {
+  s1Idx++;
+  if (s1Idx >= u2Questions.length) {
+    // Step 1 완료 → Step 2로
+    goToStep2();
+  } else {
+    renderS1();
+  }
+}
+
+function goToStep2() {
+  document.getElementById('u2-step1').style.display = 'none';
+  document.getElementById('u2-step2').style.display = 'block';
+  document.getElementById('u2-step-dot-1').classList.replace('active','done');
+  document.getElementById('u2-step-dot-2').classList.add('active');
+  document.getElementById('u2-step-label').textContent = 'Step 2 — 문장 만들기';
+  u2Idx = 0; u2Score = 0;
+  renderU2();
+}
+
 function init(){
   buildFlashcards('fc-names',names,'sky');
   buildFlashcards('fc-verbs',verbs1,'mint');
@@ -2346,7 +2601,7 @@ function init(){
   buildFlashcards('fc2-verbs',verbs2,'green');
   buildFlashcards('fc3-time',timeWords,'mint');
   buildFlashcards('fc3-verbs',verbs3,'green');
-  renderU1(); renderU2(); renderU3();
+  renderU1(); renderU2(); renderU3(); renderS1();
 }
 init();
 </script>
