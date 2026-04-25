@@ -590,6 +590,24 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .other-turn-dim .psel-btn,
 .other-turn-dim .wcard,
 .other-turn-dim .drop-zone { pointer-events:none; }
+/* Example sentence audio button */
+.example-audio-btn {
+  background: var(--sky-light);
+  border: 1.5px solid var(--sky);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  color: var(--sky);
+  transition: all 0.18s;
+  font-family: 'Jua', sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.example-audio-btn:hover {
+  background: var(--sky);
+  color: white;
+}
 </style>
 </head>
 <body>
@@ -1196,16 +1214,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
       </div>
       <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-      <div class="example-list">
-        <div class="example-row"><span class="example-kr">민수<span class="p">가</span> 전화해요.</span><span class="example-en">Minsu makes a phone call.</span></div>
-        <div class="example-row coral"><span class="example-kr">준영<span class="p">이</span> 공부해요.</span><span class="example-en">Junyeong studies.</span></div>
-        <div class="example-row mint"><span class="example-kr">재우<span class="p">가</span> 일어나요.</span><span class="example-en">Jaewoo wakes up.</span></div>
-        <div class="example-row lav"><span class="example-kr">슬기<span class="p">가</span> 수영해요.</span><span class="example-en">Seulgi swims.</span></div>
-        <div class="example-row green"><span class="example-kr">성진<span class="p">이</span> 학교에 가요.</span><span class="example-en">Seongjin goes to school.</span></div>
-        <div class="example-row"><span class="example-kr">할아버지<span class="p">가</span> 텔레비전을 봐요.</span><span class="example-en">Grandpa watches TV.</span></div>
-        <div class="example-row coral"><span class="example-kr">미라<span class="p">가</span> 운동해요.</span><span class="example-en">Mira exercises.</span></div>
-        <div class="example-row mint"><span class="example-kr">수연<span class="p">이</span> 이야기해요.</span><span class="example-en">Suyeon is talking.</span></div>
-      </div>
+     <div class="example-list"> <div class="example-row"> <div> <div class="example-kr">민수<span class="p">가</span> 전화해요.</div> <div class="example-en">Minsu makes a phone call.</div> </div> <button class="example-audio-btn" onclick="speakExample('민수가 전화해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">준영<span class="p">이</span> 공부해요.</div> <div class="example-en">Junyeong studies.</div> </div> <button class="example-audio-btn" onclick="speakExample('준영이 공부해요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">재우<span class="p">가</span> 일어나요.</div> <div class="example-en">Jaewoo wakes up.</div> </div> <button class="example-audio-btn" onclick="speakExample('재우가 일어나요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">슬기<span class="p">가</span> 수영해요.</div> <div class="example-en">Seulgi swims.</div> </div> <button class="example-audio-btn" onclick="speakExample('슬기가 수영해요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">성진<span class="p">이</span> 학교에 가요.</div> <div class="example-en">Seongjin goes to school.</div> </div> <button class="example-audio-btn" onclick="speakExample('성진이 학교에 가요.')">🔊</button> </div> <div class="example-row coral"> 
+<div> <div class="example-kr">할아버지<span class="p">가</span> 텔레비전을 봐요.</div> <div class="example-en">Grandpa watches TV.</div> </div> <button class="example-audio-btn" onclick="speakExample('할아버지가 텔레비전을 봐요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">미라<span class="p">가</span> 운동해요.</div> <div class="example-en">Mira exercises.</div> </div> <button class="example-audio-btn" onclick="speakExample('미라가 운동해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">수연<span class="p">이</span> 이야기해요.</div> <div class="example-en">Suyeon is talking.</div> </div> <button class="example-audio-btn" onclick="speakExample('수연이 이야기해요.')">🔊</button> </div> </div> 
+
     </div>
   </div>
 
@@ -1347,15 +1358,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
 
       <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-      <div class="example-list">
-        <div class="example-row"><span class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에서</span> 그네<span class="p">를</span> 타요.</span><span class="example-en">Ria and Aera ride the swing at the playground.</span></div>
-        <div class="example-row coral"><span class="example-kr">아빠<span class="p">하고</span> 엄마<span class="p">는</span> 공원<span class="p">에서</span> 자전거<span class="p">를</span> 타요.</span><span class="example-en">Dad and Mom ride bikes at the park.</span></div>
-        <div class="example-row mint"><span class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에</span> 있어요.</span><span class="example-en">Ria and Aera are at the playground.</span></div>
-        <div class="example-row lav"><span class="example-kr">보람<span class="p">이</span> 교실<span class="p">에서</span> 책<span class="p">을</span> 읽어요.</span><span class="example-en">Boram reads a book in the classroom.</span></div>
-        <div class="example-row green"><span class="example-kr">미라<span class="p">는</span> 수영장<span class="p">에서</span> 수영<span class="p">을</span> 해요.</span><span class="example-en">Mira swims at the pool.</span></div>
-        <div class="example-row"><span class="example-kr">성진<span class="p">이</span> 운동장<span class="p">에서</span> 운동<span class="p">을</span> 해요.</span><span class="example-en">Seongjin exercises at the field.</span></div>
-        <div class="example-row coral"><span class="example-kr">할아버지<span class="p">하고</span> 할머니<span class="p">는</span> 공원<span class="p">에</span> 있어요.</span><span class="example-en">Grandpa and grandma are at the park.</span></div>
-      </div>
+      <div class="example-list"> <div class="example-row"> <div> <div class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에서</span> 그네<span class="p">를</span> 타요.</div> <div class="example-en">Ria and Aera ride the swing at the playground.</div> </div> <button class="example-audio-btn" onclick="speakExample('리아하고 애라는 놀이터에서 그네를 타요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">아빠<span class="p">하고</span> 엄마<span class="p">는</span> 공원<span class="p">에서</span> 자전거<span class="p">를</span> 타요.</div> <div class="example-en">Dad and Mom ride bikes at the park.</div> </div> <button class="example-audio-btn" onclick="speakExample('아빠하고 엄마는 공원에서 자전거를 타요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에</span> 있어요.</div> <div class="example-en">Ria and Aera are at the playground.</div> </div> <button class="example-audio-btn" onclick="speakExample('리아하고 애라는 놀이터에 있어요.')">🔊</button> </div> 
+<div class="example-row coral"> <div> <div class="example-kr">보람<span class="p">이는</span> 교실<span class="p">에서</span> 책<span class="p">을</span> 읽어요.</div> <div class="example-en">Boram reads a book in the classroom.</div> </div> <button class="example-audio-btn" onclick="speakExample('보람이는 교실에서 책을 읽어요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">미라<span class="p">는</span> 수영장<span class="p">에서</span> 수영<span class="p">을</span> 해요.</div> <div class="example-en">Mira swims at the pool.</div> </div> <button class="example-audio-btn" onclick="speakExample('미라는 수영장에서 수영을 해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">성진<span class="p">이</span> 운동장<span class="p">에서</span> 운동<span class="p">을</span> 해요.</div> <div class="example-en">Seongjin exercises at the field.</div> </div> <button class="example-audio-btn" onclick="speakExample('성진이 운동장에서 운동을 해요.')">🔊</button> </div> 
+<div class="example-row"> <div> <div class="example-kr">할아버지<span class="p">하고</span> 할머니<span class="p">는</span> 공원<span class="p">에</span> 있어요.</div> <div class="example-en">Grandpa and grandma are at the park.</div> </div> <button class="example-audio-btn" onclick="speakExample('할아버지하고 할머니는 공원에 있어요.')">🔊</button> </div> </div> 
+
     </div>
   </div>
 
@@ -1519,14 +1525,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
 
       <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-      <div class="example-list">
-        <div class="example-row"><span class="example-kr">아침<span class="p">에</span> 수영<span class="p">을</span> 해요.</span><span class="example-en">I swim in the morning.</span></div>
-        <div class="example-row coral"><span class="example-kr">저녁<span class="p">에</span> 운동<span class="p">을</span> 해요.</span><span class="example-en">I exercise in the evening.</span></div>
-        <div class="example-row mint"><span class="example-kr">내일 바다에 가요.</span><span class="example-en">I go to the beach tomorrow.</span></div>
-        <div class="example-row lav"><span class="example-kr">오늘 숙제<span class="p">를</span> 해요.</span><span class="example-en">I do homework today.</span></div>
-        <div class="example-row green"><span class="example-kr">아침<span class="p">에</span> 전화<span class="p">를</span> 해요.</span><span class="example-en">I make a phone call in the morning.</span></div>
-        <div class="example-row"><span class="example-kr">내일 산에 가요.</span><span class="example-en">I go to the mountain tomorrow.</span></div>
-      </div>
+     <div class="example-list"> <div class="example-row"> <div> <div class="example-kr">아침<span class="p">에</span> 수영<span class="p">을</span> 해요.</div> <div class="example-en">I swim in the morning.</div> </div> <button class="example-audio-btn" onclick="speakExample('아침에 수영을 해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">저녁<span class="p">에</span> 운동<span class="p">을</span> 해요.</div> <div class="example-en">I exercise in the evening.</div> </div> <button class="example-audio-btn" onclick="speakExample('저녁에 운동을 해요.')">🔊</button> </div> <div class="example-row"> 
+<div> <div class="example-kr">내일 바다<span class="p">에</span> 가요.</div> <div class="example-en">I go to the beach tomorrow.</div> </div> <button class="example-audio-btn" onclick="speakExample('내일 바다에 가요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">오늘 숙제<span class="p">를</span> 해요.</div> <div class="example-en">I do homework today.</div> </div> <button class="example-audio-btn" onclick="speakExample('오늘 숙제를 해요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">아침<span class="p">에</span> 전화<span class="p">를</span> 해요.</div> <div class="example-en">I make a phone call in the morning.</div> </div> <button class="example-audio-btn" onclick="speakExample('아침에 전화를 해요.')">🔊</button> </div> <div class="example-row coral"> 
+<div> <div class="example-kr">내일 산<span class="p">에</span> 가요.</div> <div class="example-en">I go to the mountain tomorrow.</div> </div> <button class="example-audio-btn" onclick="speakExample('내일 산에 가요.')">🔊</button> </div> </div> 
+
     </div>
   </div>
 
@@ -1790,6 +1792,14 @@ function speakKorean(text) {
   window.speechSynthesis.speak(utter);
 }
 
+  function speakExample(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR';
+  u.rate = 0.85;
+  window.speechSynthesis.speak(u);
+}
 function buildFlashcards(containerId, items, bgKey) {
   const el=document.getElementById(containerId); el.innerHTML='';
   const bg=bgMap[bgKey]||'var(--sky-light)';
