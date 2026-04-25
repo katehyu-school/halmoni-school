@@ -608,6 +608,30 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   background: var(--sky);
   color: white;
 }
+/* UNIT HEADING */
+.unit-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding: 16px 22px;
+  background: linear-gradient(135deg, var(--sky-light), var(--mint-light));
+  border-radius: var(--radius);
+  border-left: 6px solid var(--sky);
+  box-shadow: var(--shadow);
+}
+.unit-num {
+  font-family: 'Jua', sans-serif;
+  font-size: 2rem;
+  color: var(--sky);
+  min-width: 40px;
+  text-align: center;
+}
+.unit-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.4rem;
+  color: var(--text);
+}
 </style>
 </head>
 <body>
@@ -1162,6 +1186,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div id="main-content" style="max-width:900px;margin:0 auto;padding:28px 20px 60px;display:none;">
 <!-- ══════ UNIT 1 ══════ -->
 <div class="unit active" id="unit1">
+ <div class="unit-heading">
+  <span class="unit-num">1</span>
+  <span class="unit-title">1. 누가 노래해요?</span>
+</div>
   <nav class="section-nav">
     <button class="snav-btn active" onclick="switchSection(1,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(1,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
@@ -1282,6 +1310,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 <!-- ══════ UNIT 2 ══════ -->
 <div class="unit" id="unit2">
+  <div class="unit-heading">
+  <span class="unit-num">2</span>
+  <span class="unit-title">2. 아빠하고 엄마는 자전거를 타요</span>
+</div>
   <nav class="section-nav">
     <button class="snav-btn active" onclick="switchSection(2,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(2,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
@@ -1520,6 +1552,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 <!-- ══════ UNIT 3 ══════ -->
 <div class="unit" id="unit3">
+ <div class="unit-heading">
+  <span class="unit-num">3</span>
+  <span class="unit-title">3. 언제 수영을 해요?</span>
+</div>
   <nav class="section-nav">
     <button class="snav-btn active" onclick="switchSection(3,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(3,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
