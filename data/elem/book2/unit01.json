@@ -1,0 +1,233 @@
+{
+  "unit": 1,
+  "title": "누가 노래해요?",
+  "book": 2,
+  "sections": {
+    "vocab": {
+      "items": [
+        {
+          "id": "v01_01",
+          "category": "동사",
+          "emoji": "🎵",
+          "korean": "노래해요",
+          "english": "sing",
+          "romanization": "no-rae-hae-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_02",
+          "category": "동사",
+          "emoji": "🎨",
+          "korean": "그림을 그려요",
+          "english": "draw a picture",
+          "romanization": "geu-rim-eul geu-ryeo-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_03",
+          "category": "동사",
+          "emoji": "📖",
+          "korean": "책을 읽어요",
+          "english": "read a book",
+          "romanization": "chae-geul il-geo-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_04",
+          "category": "동사",
+          "emoji": "🍽️",
+          "korean": "밥을 먹어요",
+          "english": "eat a meal",
+          "romanization": "ba-beul meo-geo-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_05",
+          "category": "동사",
+          "emoji": "💤",
+          "korean": "자요",
+          "english": "sleep",
+          "romanization": "ja-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_06",
+          "category": "동사",
+          "emoji": "🏃",
+          "korean": "달려요",
+          "english": "run",
+          "romanization": "dal-lyeo-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_07",
+          "category": "명사",
+          "emoji": "👦",
+          "korean": "남자아이",
+          "english": "boy",
+          "romanization": "nam-ja-a-i",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_08",
+          "category": "명사",
+          "emoji": "👧",
+          "korean": "여자아이",
+          "english": "girl",
+          "romanization": "yeo-ja-a-i",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_09",
+          "category": "명사",
+          "emoji": "👨‍🏫",
+          "korean": "선생님",
+          "english": "teacher",
+          "romanization": "seon-saeng-nim",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_10",
+          "category": "명사",
+          "emoji": "👫",
+          "korean": "친구",
+          "english": "friend",
+          "romanization": "chin-gu",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v01_11",
+          "category": "명사",
+          "emoji": "🐶",
+          "korean": "강아지",
+          "english": "puppy",
+          "romanization": "gang-a-ji",
+          "audio": null,
+          "exampleSentence": null
+        }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g01_i_ga",
+          "title": "이/가",
+          "subtitle": "주어를 표시하는 조사예요",
+          "pattern": "받침 O → 이 / 받침 X → 가",
+          "meaning": "subject marker",
+          "examples": [
+            {
+              "korean": "남자아이가 노래해요.",
+              "english": "The boy sings.",
+              "highlight": "가"
+            },
+            {
+              "korean": "선생님이 책을 읽어요.",
+              "english": "The teacher reads a book.",
+              "highlight": "이"
+            },
+            {
+              "korean": "강아지가 달려요.",
+              "english": "The puppy runs.",
+              "highlight": "가"
+            },
+            {
+              "korean": "친구가 그림을 그려요.",
+              "english": "My friend draws a picture.",
+              "highlight": "가"
+            }
+          ],
+          "qna": [
+            {
+              "question": "누가 노래해요?",
+              "answer": "여자아이가 노래해요."
+            },
+            {
+              "question": "누가 밥을 먹어요?",
+              "answer": "선생님이 밥을 먹어요."
+            },
+            {
+              "question": "누가 달려요?",
+              "answer": "강아지가 달려요."
+            }
+          ],
+          "rule_table": [
+            { "example": "남자아이", "ending": "받침 없음 (이)", "result": "남자아이가" },
+            { "example": "선생님", "ending": "받침 있음 (님)", "result": "선생님이" },
+            { "example": "친구", "ending": "받침 없음 (구)", "result": "친구가" },
+            { "example": "강아지", "ending": "받침 없음 (지)", "result": "강아지가" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "exercises": [
+        {
+          "id": "p01_01",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 조사를 골라요.",
+          "blank_sentence": "남자아이___ 노래해요.",
+          "choices": ["이", "가", "은", "는"],
+          "answer": "가",
+          "explanation": "남자아이는 받침이 없어서 '가'를 써요."
+        },
+        {
+          "id": "p01_02",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 조사를 골라요.",
+          "blank_sentence": "선생님___ 책을 읽어요.",
+          "choices": ["이", "가", "을", "를"],
+          "answer": "이",
+          "explanation": "선생님은 받침(ㅁ)이 있어서 '이'를 써요."
+        },
+        {
+          "id": "p01_03",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 조사를 골라요.",
+          "blank_sentence": "강아지___ 달려요.",
+          "choices": ["이", "가", "은", "는"],
+          "answer": "가",
+          "explanation": "강아지는 받침이 없어서 '가'를 써요."
+        },
+        {
+          "id": "p01_04",
+          "type": "particle_choice",
+          "question": "누가 그림을 그려요? 알맞은 말을 골라요.",
+          "choices": [
+            { "text": "여자아이가 그림을 그려요.", "correct": true },
+            { "text": "여자아이이 그림을 그려요.", "correct": false }
+          ],
+          "explanation": "여자아이는 받침이 없어서 '가'를 써요."
+        },
+        {
+          "id": "p01_05",
+          "type": "particle_choice",
+          "question": "알맞은 문장을 골라요.",
+          "choices": [
+            { "text": "친구가 자요.", "correct": true },
+            { "text": "친구이 자요.", "correct": false }
+          ],
+          "explanation": "친구는 받침이 없어서 '가'를 써요."
+        },
+        {
+          "id": "p01_06",
+          "type": "drag_sentence",
+          "question": "단어를 순서대로 놓아서 문장을 만들어요.",
+          "words": ["선생님이", "밥을", "먹어요."],
+          "answer": ["선생님이", "밥을", "먹어요."],
+          "english": "The teacher eats a meal."
+        }
+      ]
+    }
+  }
+}
