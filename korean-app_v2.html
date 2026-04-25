@@ -632,6 +632,24 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   font-size: 1.4rem;
   color: var(--text);
 }
+/* 하고 예문 카드 스타일 */
+.hago-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.hago-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 14px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--sky);
+  text-align: center;
+}
+.hago-card:nth-child(even) { border-top-color: var(--coral); }
+.hago-card .example-kr { font-size: 1.05rem; margin-bottom: 6px; }
+.hago-card .example-en { font-size: 0.8rem; }
 </style>
 </head>
 <body>
@@ -1359,36 +1377,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
       </div>
       <div class="example-list">
-        <div class="example-row">
-          <div>
-            <div class="example-kr">할아버지<span class="p">하고</span> 할머니</div>
-            <div class="example-en">Grandpa and Grandma</div>
-          </div>
-        </div>
-        <div class="example-row coral">
-          <div>
-            <div class="example-kr">엄마<span class="p">하고</span> 아빠</div>
-            <div class="example-en">Mom and Dad</div>
-          </div>
-        </div>
-        <div class="example-row">
-          <div>
-            <div class="example-kr">리아<span class="p">하고</span> 애라</div>
-            <div class="example-en">Lia and Aera</div>
-          </div>
-        </div>
-        <div class="example-row coral">
-          <div>
-            <div class="example-kr">리암<span class="p">하고</span> 카요</div>
-            <div class="example-en">Liam and Kayo</div>
-          </div>
-        </div>
-        <div class="example-row">
-          <div>
-            <div class="example-kr">고양이<span class="p">하고</span> 강아지</div>
-            <div class="example-en">Cat and Dog</div>
-          </div>
-        </div>
+       <div class="hago-card-grid">
+  <div class="hago-card">
+    <div class="example-kr">할아버지<span class="p">하고</span> 할머니</div>
+    <div class="example-en">Grandpa and Grandma</div>
+  </div>
+  <div class="hago-card">
+    <div class="example-kr">엄마<span class="p">하고</span> 아빠</div>
+    <div class="example-en">Mom and Dad</div>
+  </div>
+  <div class="hago-card">
+    <div class="example-kr">리아<span class="p">하고</span> 애라</div>
+    <div class="example-en">Lia and Aera</div>
+  </div>
+  <div class="hago-card">
+    <div class="example-kr">리암<span class="p">하고</span> 카요</div>
+    <div class="example-en">Liam and Kayo</div>
+  </div>
+  <div class="hago-card">
+    <div class="example-kr">고양이<span class="p">하고</span> 강아지</div>
+    <div class="example-en">Cat and Dog</div>
+  </div>
+</div>
       </div>
     </div>
 
