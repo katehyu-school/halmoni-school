@@ -1307,64 +1307,126 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
   </div>
 
-  <!-- GRAMMAR -->
+ <!-- GRAMMAR -->
   <div class="section" id="u2-grammar">
+
+    <!-- 문법 1: 하고 -->
     <div class="grammar-intro">
-      <h2>📌 Grammar — Marking Particles (조사)</h2>
+      <h2>📌 Grammar 1 — _하고 &nbsp;<span style="font-size:0.85rem;color:#7A5500;">(Linking people)</span></h2>
       <p>
-        In Korean, little words called <strong>particles</strong> are added after nouns to show their role in the sentence.<br>
-        Think of them like labels — they tell you <em>who</em> does it, <em>what</em> they do it to, and <em>where</em>!
+        <strong>하고</strong> means <em>"and"</em> — it connects two people or things together.<br>
+        Just attach it right after the first noun. No vowel/consonant rule needed!
       </p>
     </div>
     <div class="card">
-      <div class="section-title">🏷️ Particle Quick Guide — 조사 정리</div>
-      <div class="particle-ref-grid" style="margin-bottom:18px;">
-        <div class="particle-group">
-          <div class="particle-group-title">Subject — WHO does it?</div>
-          <div class="particle-chips" style="margin-bottom:8px;">
-            <span class="p-chip subj">이</span><span class="p-chip subj">가</span><span class="p-chip subj">은</span><span class="p-chip subj">는</span>
-          </div>
-          <div style="font-size:0.82rem;color:var(--muted);">After consonant: 이/은 &nbsp;|&nbsp; After vowel: 가/는</div>
+      <div class="section-title">👫 Examples — 하고로 연결하기</div>
+      <div class="rule-box blue" style="margin-bottom:16px;">
+        <div class="rule-label" style="color:#1A5FA8;">📐 Pattern</div>
+        <div style="font-family:'Jua',sans-serif;font-size:1.1rem;text-align:center;padding:8px 0;">
+          [Person A] <span style="color:var(--coral);font-size:1.2rem;">하고</span> [Person B]
         </div>
-        <div class="particle-group">
-          <div class="particle-group-title">Object — WHAT receives the action?</div>
-          <div class="particle-chips" style="margin-bottom:8px;">
-            <span class="p-chip obj">을</span><span class="p-chip obj">를</span>
-          </div>
-          <div style="font-size:0.82rem;color:var(--muted);">After consonant: 을 &nbsp;|&nbsp; After vowel: 를</div>
-        </div>
-        <div class="particle-group">
-          <div class="particle-group-title">Linking — AND / WITH</div>
-          <div class="particle-chips">
-            <span class="p-chip link">하고</span>
+      </div>
+      <div class="example-list">
+        <div class="example-row">
+          <div>
+            <div class="example-kr">할아버지<span class="p">하고</span> 할머니</div>
+            <div class="example-en">Grandpa and Grandma</div>
           </div>
         </div>
-        <div class="particle-group">
-          <div class="particle-group-title">Place — WHERE?</div>
-          <div class="particle-chips">
-            <span class="p-chip place">에</span><span class="p-chip place">에서</span>
+        <div class="example-row coral">
+          <div>
+            <div class="example-kr">엄마<span class="p">하고</span> 아빠</div>
+            <div class="example-en">Mom and Dad</div>
+          </div>
+        </div>
+        <div class="example-row">
+          <div>
+            <div class="example-kr">리아<span class="p">하고</span> 애라</div>
+            <div class="example-en">Lia and Aera</div>
+          </div>
+        </div>
+        <div class="example-row coral">
+          <div>
+            <div class="example-kr">리암<span class="p">하고</span> 카요</div>
+            <div class="example-en">Liam and Kayo</div>
+          </div>
+        </div>
+        <div class="example-row">
+          <div>
+            <div class="example-kr">고양이<span class="p">하고</span> 강아지</div>
+            <div class="example-en">Cat and Dog</div>
           </div>
         </div>
       </div>
-
-      <div class="rule-box purple" style="margin-bottom:14px;">
-        <div class="rule-label" style="color:#6D28D9;">💡 에 vs 에서 — This is the tricky one!</div>
-        <div style="font-size:0.88rem;line-height:1.9;color:#5B21B6;">
-          <strong>에</strong> = <em>"at"</em> — used with <strong>있어요</strong> (is/are somewhere). Just existing, not doing!<br>
-          &nbsp;&nbsp;→ 리아하고 애라는 놀이터<strong>에</strong> 있어요. (Lia and Aera <u>are at</u> the playground.)<br><br>
-          <strong>에서</strong> = <em>"at"</em> — used when someone is <strong>doing an action</strong> at a place!<br>
-          &nbsp;&nbsp;→ 아빠하고 엄마는 공원<strong>에서</strong> 자전거를 타요. (Mom and Dad <u>ride bikes</u> at the park.)
-        </div>
-      </div>
-
-      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-      <div class="example-list"> <div class="example-row"> <div> <div class="example-kr">리아<span class="p">하고</span> 애라<span class="p">는</span> 놀이터<span class="p">에서</span> 그네<span class="p">를</span> 타요.</div> <div class="example-en">Lia and Aera ride the swing at the playground.</div> </div> <button class="example-audio-btn" onclick="speakExample('리아하고 애라는 놀이터에서 그네를 타요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">아빠<span class="p">하고</span> 엄마<span class="p">는</span> 공원<span class="p">에서</span> 자전거<span class="p">를</span> 타요.</div> <div class="example-en">Dad and Mom ride bikes at the park.</div> </div> <button class="example-audio-btn" onclick="speakExample('아빠하고 엄마는 공원에서 자전거를 타요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">리암<span class="p">하고</span> 카요<span class="p">는</span> 놀이터<span class="p">에</span> 있어요.</div> <div class="example-en">Liam and Kayo are at the playground.</div> </div> <button class="example-audio-btn" onclick="speakExample('리암하고 카요는 놀이터에 있어요.')">🔊</button> </div> 
-<div class="example-row coral"> <div> <div class="example-kr">보람<span class="p">이는</span> 교실<span class="p">에서</span> 책<span class="p">을</span> 읽어요.</div> <div class="example-en">Boram reads a book in the classroom.</div> </div> <button class="example-audio-btn" onclick="speakExample('보람이는 교실에서 책을 읽어요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">미라<span class="p">는</span> 수영장<span class="p">에서</span> 수영<span class="p">을</span> 해요.</div> <div class="example-en">Mira swims at the pool.</div> </div> <button class="example-audio-btn" onclick="speakExample('미라는 수영장에서 수영을 해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">성진<span class="p">이</span> 운동장<span class="p">에서</span> 운동<span class="p">을</span> 해요.</div> <div class="example-en">Seongjin exercises at the field.</div> </div> <button class="example-audio-btn" onclick="speakExample('성진이 운동장에서 운동을 해요.')">🔊</button> </div> 
-<div class="example-row"> <div> <div class="example-kr">할아버지<span class="p">하고</span> 할머니<span class="p">는</span> 공원<span class="p">에</span> 있어요.</div> <div class="example-en">Grandpa and grandma are at the park.</div> </div> <button class="example-audio-btn" onclick="speakExample('할아버지하고 할머니는 공원에 있어요.')">🔊</button> </div> </div> 
-
     </div>
-  </div>
 
+    <!-- 문법 2: 은/는 -->
+    <div class="grammar-intro" style="margin-top:10px;">
+      <h2>📌 Grammar 2 — _은/는 &nbsp;<span style="font-size:0.85rem;color:#7A5500;">(Topic marker)</span></h2>
+      <p>
+        <strong>은/는</strong> marks the <em>topic</em> of the sentence — who or what we're talking about.<br>
+        It can also work like a subject marker (<strong>이/가</strong>)!<br><br>
+        <strong>Rule:</strong> &nbsp;ends in consonant → <span class="hl">은</span> &nbsp;|&nbsp; ends in vowel → <span class="hl">는</span>
+      </p>
+    </div>
+    <div class="card">
+      <div class="rule-box red" style="margin-bottom:14px;">
+        <div class="rule-label" style="color:#C0392B;">consonant + 은 &nbsp;/&nbsp; vowel + 는</div>
+        <div class="rule-examples">
+          <span>할아버지 → 할아버지<span class="hl">는</span> &nbsp;(ends in vowel ㅣ)</span>
+          <span>할머니 → 할머니<span class="hl">는</span> &nbsp;(ends in vowel ㅣ)</span>
+          <span>엄마 → 엄마<span class="hl">는</span> &nbsp;(ends in vowel ㅏ)</span>
+          <span>아빠 → 아빠<span class="hl">는</span> &nbsp;(ends in vowel ㅏ)</span>
+        </div>
+      </div>
+      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
+      <div class="example-list">
+        <div class="example-row">
+          <div>
+            <div class="example-kr">할아버지<span class="p">하고</span> 할머니<span class="p">는</span> 사진을 찍어요.</div>
+            <div class="example-en">Grandpa and Grandma take photos.</div>
+          </div>
+          <button class="example-audio-btn" onclick="speakExample('할아버지하고 할머니는 사진을 찍어요.')">🔊</button>
+        </div>
+        <div class="example-row coral">
+          <div>
+            <div class="example-kr">아빠<span class="p">하고</span> 엄마<span class="p">는</span> 자전거를 타요.</div>
+            <div class="example-en">Dad and Mom ride bikes.</div>
+          </div>
+          <button class="example-audio-btn" onclick="speakExample('아빠하고 엄마는 자전거를 타요.')">🔊</button>
+        </div>
+        <div class="example-row">
+          <div>
+            <div class="example-kr">동생<span class="p">하고</span> 저<span class="p">는</span> 그네를 타요.</div>
+            <div class="example-en">My sibling and I ride the swing.</div>
+          </div>
+          <button class="example-audio-btn" onclick="speakExample('동생하고 저는 그네를 타요.')">🔊</button>
+        </div>
+        <div class="example-row coral">
+          <div>
+            <div class="example-kr">엄마<span class="p">하고</span> 동생<span class="p">은</span> 책을 읽어요.</div>
+            <div class="example-en">Mom and my sibling read a book.</div>
+          </div>
+          <button class="example-audio-btn" onclick="speakExample('엄마하고 동생은 책을 읽어요.')">🔊</button>
+        </div>
+        <div class="example-row">
+          <div>
+            <div class="example-kr">형<span class="p">하고</span> 나<span class="p">는</span> 태권도를 해요.</div>
+            <div class="example-en">My brother and I do Taekwondo.</div>
+          </div>
+          <button class="example-audio-btn" onclick="speakExample('형하고 나는 태권도를 해요.')">🔊</button>
+        </div>
+        <div class="example-row coral">
+          <div>
+            <div class="example-kr">언니<span class="p">하고</span> 나<span class="p">는</span> 배구를 해요.</div>
+            <div class="example-en">My sister and I play volleyball.</div>
+          </div>
+          <button class="example-audio-btn" onclick="speakExample('언니하고 나는 배구를 해요.')">🔊</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <!-- QUIZ -->
   <div class="section" id="u2-quiz">
 
