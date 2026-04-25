@@ -1,0 +1,263 @@
+{
+  "unit": 2,
+  "title": "어디에 가요?",
+  "book": 2,
+  "sections": {
+    "vocab": {
+      "items": [
+        {
+          "id": "v02_01",
+          "category": "장소",
+          "emoji": "🛝",
+          "korean": "놀이터",
+          "english": "playground",
+          "romanization": "nol-i-teo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_02",
+          "category": "장소",
+          "emoji": "🌳",
+          "korean": "공원",
+          "english": "park",
+          "romanization": "gong-won",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_03",
+          "category": "장소",
+          "emoji": "🏫",
+          "korean": "교실",
+          "english": "classroom",
+          "romanization": "gyo-sil",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_04",
+          "category": "장소",
+          "emoji": "🏊",
+          "korean": "수영장",
+          "english": "swimming pool",
+          "romanization": "su-yeong-jang",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_05",
+          "category": "장소",
+          "emoji": "⚽",
+          "korean": "운동장",
+          "english": "sports field",
+          "romanization": "un-dong-jang",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_06",
+          "category": "장소",
+          "emoji": "🏠",
+          "korean": "집",
+          "english": "home / house",
+          "romanization": "jip",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_07",
+          "category": "동사구",
+          "emoji": "📸",
+          "korean": "사진을 찍어요",
+          "english": "take photos",
+          "romanization": "sa-jin-eul jji-geo-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_08",
+          "category": "동사구",
+          "emoji": "🛝",
+          "korean": "그네를 타요",
+          "english": "ride the swings",
+          "romanization": "geu-ne-reul ta-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_09",
+          "category": "동사구",
+          "emoji": "🚲",
+          "korean": "자전거를 타요",
+          "english": "ride a bicycle",
+          "romanization": "ja-jeon-geo-reul ta-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v02_10",
+          "category": "동사구",
+          "emoji": "📖",
+          "korean": "책을 읽어요",
+          "english": "read a book",
+          "romanization": "chae-geul il-geo-yo",
+          "audio": null,
+          "exampleSentence": null
+        }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g02_hago",
+          "title": "하고",
+          "subtitle": "두 장소나 사람을 연결해요",
+          "pattern": "명사 + 하고 + 명사",
+          "meaning": "and (connecting two nouns)",
+          "examples": [
+            {
+              "korean": "놀이터하고 공원에 가요.",
+              "english": "I go to the playground and the park.",
+              "highlight": "하고"
+            },
+            {
+              "korean": "친구하고 수영장에 가요.",
+              "english": "I go to the swimming pool with my friend.",
+              "highlight": "하고"
+            },
+            {
+              "korean": "엄마하고 집에 있어요.",
+              "english": "I am at home with Mom.",
+              "highlight": "하고"
+            }
+          ],
+          "qna": [
+            {
+              "question": "누구하고 가요?",
+              "answer": "친구하고 가요."
+            },
+            {
+              "question": "어디하고 어디에 가요?",
+              "answer": "놀이터하고 공원에 가요."
+            }
+          ]
+        },
+        {
+          "id": "g02_eunneun",
+          "title": "은/는",
+          "subtitle": "이야기의 주제를 표시해요",
+          "pattern": "받침 O → 은 / 받침 X → 는",
+          "meaning": "topic marker (as for ~)",
+          "examples": [
+            {
+              "korean": "저는 공원에 가요.",
+              "english": "As for me, I go to the park.",
+              "highlight": "는"
+            },
+            {
+              "korean": "친구는 수영장에 가요.",
+              "english": "As for my friend, they go to the pool.",
+              "highlight": "는"
+            },
+            {
+              "korean": "선생님은 교실에 있어요.",
+              "english": "As for the teacher, they are in the classroom.",
+              "highlight": "은"
+            }
+          ],
+          "qna": [
+            {
+              "question": "어디에 가요?",
+              "answer": "저는 놀이터에 가요."
+            },
+            {
+              "question": "친구는 어디에 가요?",
+              "answer": "친구는 운동장에 가요."
+            }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "exercises": [
+        {
+          "id": "p02_01",
+          "type": "three_bank_sentence",
+          "instruction": "단어를 골라서 문장을 완성해요!",
+          "noun_bank": [
+            { "id": "n1", "text": "저는", "particles_compatible": ["p1"] },
+            { "id": "n2", "text": "친구는", "particles_compatible": ["p1"] },
+            { "id": "n3", "text": "우리는", "particles_compatible": ["p1"] }
+          ],
+          "particle_bank": [
+            { "id": "p1", "text": "놀이터에", "target_place": "놀이터" },
+            { "id": "p2", "text": "공원에", "target_place": "공원" },
+            { "id": "p3", "text": "수영장에", "target_place": "수영장" },
+            { "id": "p4", "text": "운동장에", "target_place": "운동장" },
+            { "id": "p5", "text": "교실에", "target_place": "교실" },
+            { "id": "p6", "text": "집에", "target_place": "집" }
+          ],
+          "verb_bank": [
+            { "id": "v1", "text": "가요.", "meaning": "go" },
+            { "id": "v2", "text": "있어요.", "meaning": "am/are (there)" }
+          ],
+          "valid_sentences": [
+            ["n1", "p1", "v1"],
+            ["n1", "p2", "v1"],
+            ["n1", "p3", "v1"],
+            ["n1", "p4", "v1"],
+            ["n1", "p5", "v1"],
+            ["n1", "p6", "v1"],
+            ["n1", "p6", "v2"],
+            ["n2", "p1", "v1"],
+            ["n2", "p2", "v1"],
+            ["n2", "p3", "v1"],
+            ["n2", "p4", "v1"],
+            ["n2", "p5", "v1"],
+            ["n2", "p6", "v1"],
+            ["n2", "p6", "v2"],
+            ["n3", "p1", "v1"],
+            ["n3", "p2", "v1"],
+            ["n3", "p3", "v1"],
+            ["n3", "p4", "v1"],
+            ["n3", "p5", "v1"],
+            ["n3", "p6", "v1"],
+            ["n3", "p6", "v2"]
+          ],
+          "invalid_feedback": "다시 해봐요! 어울리는 단어를 골라요."
+        },
+        {
+          "id": "p02_02",
+          "type": "multiple_choice",
+          "question": "공원에 가요. 밑줄 친 곳에 알맞은 것은?",
+          "blank_sentence": "저___ 공원에 가요.",
+          "choices": ["은", "는", "이", "가"],
+          "answer": "는",
+          "explanation": "저(발음: jeo)는 받침이 없어서 '는'을 써요."
+        },
+        {
+          "id": "p02_03",
+          "type": "multiple_choice",
+          "question": "두 장소를 연결하는 말은?",
+          "blank_sentence": "놀이터___ 공원에 가요.",
+          "choices": ["하고", "이고", "에서", "한테"],
+          "answer": "하고",
+          "explanation": "'하고'는 두 명사를 연결할 때 써요."
+        },
+        {
+          "id": "p02_04",
+          "type": "picture_match",
+          "instruction": "그림을 보고 알맞은 장소를 골라요.",
+          "items": [
+            { "emoji": "🛝", "answer": "놀이터" },
+            { "emoji": "🏊", "answer": "수영장" },
+            { "emoji": "⚽", "answer": "운동장" },
+            { "emoji": "🏫", "answer": "교실" }
+          ],
+          "choices_pool": ["놀이터", "공원", "수영장", "운동장", "교실", "집"]
+        }
+      ]
+    }
+  }
+}
