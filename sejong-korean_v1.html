@@ -1082,6 +1082,114 @@ body {
   .unit-header { flex-direction: column; }
 }
 
+/* ── Correct Answers button ── */
+.answers-btn {
+  padding: 9px 18px;
+  border-radius: 30px;
+  background: transparent;
+  border: 1.5px solid var(--teal);
+  color: var(--teal);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .18s;
+  margin-left: 8px;
+}
+.answers-btn:hover { background: var(--teal); color: #fff; }
+
+.answers-reveal {
+  display: none;
+  margin-top: 14px;
+  background: var(--teal-lt);
+  border: 1.5px solid var(--teal);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  animation: fadeInUp .2s ease;
+}
+.answers-reveal.show { display: block; }
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(6px); }
+  to   { opacity:1; transform:none; }
+}
+.answers-reveal-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 10px;
+}
+.answer-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gray-700);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(15,124,110,.1);
+  line-height: 1.6;
+}
+.answer-item:last-child { border-bottom: none; }
+.answer-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  background: rgba(15,124,110,.12);
+  border-radius: 20px;
+  padding: 1px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.answer-kr {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--teal);
+}
+
+/* ── Sentence Builder — multi-exercise navigation ── */
+.builder-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.builder-count {
+  font-size: 12px;
+  color: var(--gray-500);
+  flex: 1;
+  text-align: center;
+}
+.builder-dot-row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.builder-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  transition: background .2s;
+  cursor: pointer;
+}
+.builder-dot.active { background: var(--teal); }
+.builder-dot.done   { background: var(--teal-md); }
+.builder-nav-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-500);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .18s;
+}
+.builder-nav-btn:hover:not(:disabled) { border-color: var(--teal); color: var(--teal); }
+.builder-nav-btn:disabled { opacity: .32; cursor: default; }
+
 .dialogue-box { background:#f8fafb; border-radius:12px; padding:16px 18px; margin:12px 0; border-left:4px solid var(--teal); }
 .dlg-line { display:flex; gap:10px; margin:8px 0; align-items:flex-start; }
 .dlg-speaker { background:var(--teal); color:#fff; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; margin-top:2px; }
@@ -1865,6 +1973,7 @@ const quizData = [
 // ══ STATE ══
 let selectedKr = null, selectedEn = null, matchedPairs = 0;
 let currentSentence = 0;
+let builderDone = [];
 let placedWords = [], poolWords = [];
 let currentQuiz = 0, quizScore = 0, quizAnswered = [], quizSelected = null;
 
@@ -2023,6 +2132,7 @@ function tryMatch() {
 // ── BLANKS ──
 function buildBlanks() {
   const container = document.getElementById('blankExercises');
+  if (!container) return;
   container.innerHTML = '';
   (window._bd || blankData).forEach((b,i) => {
     const parts = b.sentence.split('___');
@@ -2031,6 +2141,11 @@ function buildBlanks() {
     p.innerHTML = `${i+1}. ${parts[0]}<input class="blank-input" data-ans="${b.blank}" data-hint="${b.hint}" placeholder="___" autocomplete="off">${parts[1]}`;
     container.appendChild(p);
   });
+  // Reset answers reveal
+  const rev = document.getElementById('answersReveal');
+  if (rev) { rev.classList.remove('show'); rev.innerHTML = ''; }
+  const fb = document.getElementById('blankFeedback');
+  if (fb) fb.innerHTML = '';
 }
 function checkBlanks() {
   let allCorrect = true;
@@ -2051,12 +2166,53 @@ function showHint() {
   });
   document.getElementById('blankFeedback').innerHTML = `<span style="color:var(--amber)">💡 ${hints.join(' | ')}</span>`;
 }
+function toggleAnswers() {
+  const rev = document.getElementById('answersReveal');
+  const btn = document.querySelector('.answers-btn');
+  if (!rev) return;
+  if (rev.classList.contains('show')) {
+    rev.classList.remove('show');
+    if (btn) btn.textContent = '🔑 Correct Answers';
+    return;
+  }
+  // Build answers list from current blank data
+  const bd = window._bd || blankData;
+  rev.innerHTML = `<div class="answers-reveal-title">🔑 Correct Answers</div>` +
+    bd.map((b, i) => {
+      const parts = b.sentence.split('___');
+      return `<div class="answer-item">
+        <span class="answer-num">${i+1}</span>
+        <span>${parts[0]}<span class="answer-kr">${b.blank}</span>${parts[1]}</span>
+      </div>`;
+    }).join('');
+  rev.classList.add('show');
+  if (btn) btn.textContent = '✕ Hide Answers';
+}
 
 // ── SENTENCE BUILDER ──
+// sentences 배열에 객체를 추가하기만 하면 자동으로 문제 늘어남
 function buildSentence(idx) {
   currentSentence = idx;
   const __ss = window._ss || sentences;
   const s = __ss[idx];
+  const total = __ss.length;
+
+  // Nav dots HTML
+  const dotsHtml = __ss.map((_, i) =>
+    `<span class="builder-dot ${i === idx ? 'active' : (builderDone[i] ? 'done' : '')}"
+      onclick="buildSentence(${i})" title="문제 ${i+1}"></span>`
+  ).join('');
+
+  // Nav bar (2개 이상일 때만)
+  const navHtml = total > 1 ? `
+    <div class="builder-nav">
+      <button class="builder-nav-btn" onclick="buildSentence(${idx-1})" ${idx===0?'disabled':''}>← Prev</button>
+      <div class="builder-dot-row">${dotsHtml}</div>
+      <span class="builder-count">${idx+1} / ${total}</span>
+      <button class="builder-nav-btn" onclick="buildSentence(${idx+1})" ${idx===total-1?'disabled':''}>Next →</button>
+    </div>` : '';
+
+  document.getElementById('builderNav').innerHTML = navHtml;
   document.getElementById('builderTarget').textContent = '📌 ' + s.target;
   placedWords = [];
   poolWords = [...s.words].sort(() => Math.random()-.5);
@@ -2078,7 +2234,6 @@ function buildSentence(idx) {
 function moveTile(tile, word, correct) {
   const answer = document.getElementById('answerZone');
   const pool   = document.getElementById('tilesPool');
-
   if (tile.parentElement === pool) {
     placedWords.push(word);
     tile.classList.add('placed');
@@ -2095,13 +2250,29 @@ function checkSentence() {
   const s = (window._ss || sentences)[currentSentence];
   const feedback = document.getElementById('builderFeedback');
   if (placedWords.join(' ') === s.words.join(' ')) {
-    document.querySelectorAll('#answerZone .word-tile').forEach(t => { t.classList.remove('wrong-order'); t.style.background='var(--teal)'; t.style.borderColor='var(--teal)'; });
+    builderDone[currentSentence] = true;
+    document.querySelectorAll('#answerZone .word-tile').forEach(t => {
+      t.classList.remove('wrong-order');
+      t.style.background='var(--teal)';
+      t.style.borderColor='var(--teal)';
+    });
     feedback.innerHTML = '<span class="fb-correct">🎉 Correct!</span>';
+    // dot 상태 갱신
+    buildSentenceNav();
   } else {
     document.querySelectorAll('#answerZone .word-tile').forEach(t => t.classList.add('wrong-order'));
     feedback.innerHTML = '<span class="fb-wrong">Check the word order again.</span>';
   }
 }
+
+function buildSentenceNav() {
+  // dot만 갱신 (전체 rebuild 없이)
+  const __ss = window._ss || sentences;
+  document.querySelectorAll('.builder-dot').forEach((dot, i) => {
+    dot.className = `builder-dot ${i === currentSentence ? 'active' : (builderDone[i] ? 'done' : '')}`;
+  });
+}
+
 function nextSentence() {
   const __ss = window._ss || sentences;
   buildSentence((currentSentence + 1) % __ss.length);
@@ -2555,6 +2726,7 @@ function loadUnit(num) {
   selectedKr = null; selectedEn = null; matchedPairs = 0;
   activeVocabCat = 'All';
   currentSentence = 0;
+  builderDone = new Array(((window._ss || sentences) || []).length).fill(false);
   currentQuiz = 0; quizScore = 0; quizAnswered = []; quizSelected = null;
 
   // Rebuild panels
@@ -2604,11 +2776,13 @@ function updateGrammarPanel(num) {
         <div class="blank-exercise">
           <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">✏️ Fill in the blanks</div>
           <div id="blankExercises"></div>
-          <div style="margin-top:14px;display:flex;gap:0;align-items:center">
+          <div style="margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="check-btn" onclick="checkBlanks()">✅ Check</button>
             <button class="hint-btn" onclick="showHint()">💡 Hint</button>
+            <button class="answers-btn" onclick="toggleAnswers()">🔑 Correct Answers</button>
           </div>
           <div class="feedback-row" id="blankFeedback"></div>
+          <div class="answers-reveal" id="answersReveal"></div>
         </div>
       </div>`;
     buildBlanks();
@@ -2641,7 +2815,19 @@ function updateGrammarPanel(num) {
             <tr><td>커피</td><td>❌ No</td><td><strong>커피가 아니에요</strong></td><td>커피가 아니에요, 물이에요.</td></tr>
           </tbody>
         </table>
+        <div class="blank-exercise">
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">✏️ Fill in the blanks</div>
+          <div id="blankExercises"></div>
+          <div style="margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button class="check-btn" onclick="checkBlanks()">✅ Check</button>
+            <button class="hint-btn" onclick="showHint()">💡 Hint</button>
+            <button class="answers-btn" onclick="toggleAnswers()">🔑 Correct Answers</button>
+          </div>
+          <div class="feedback-row" id="blankFeedback"></div>
+          <div class="answers-reveal" id="answersReveal"></div>
+        </div>
       </div>`;
+    buildBlanks();
   } else if (num === 3) {
     el.innerHTML = `
       <div class="panel-card">
@@ -2669,7 +2855,19 @@ function updateGrammarPanel(num) {
           </tbody>
         </table>
         <div class="grammar-note" style="margin-top:12px">💡 Order doesn't matter: 수지 씨가 학교에 있어요 ↔ 학교에 수지 씨가 있어요</div>
+        <div class="blank-exercise">
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">✏️ Fill in the blanks</div>
+          <div id="blankExercises"></div>
+          <div style="margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button class="check-btn" onclick="checkBlanks()">✅ Check</button>
+            <button class="hint-btn" onclick="showHint()">💡 Hint</button>
+            <button class="answers-btn" onclick="toggleAnswers()">🔑 Correct Answers</button>
+          </div>
+          <div class="feedback-row" id="blankFeedback"></div>
+          <div class="answers-reveal" id="answersReveal"></div>
+        </div>
       </div>`;
+    buildBlanks();
   }
 }
 
