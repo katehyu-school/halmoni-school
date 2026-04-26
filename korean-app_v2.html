@@ -267,10 +267,8 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .complete-title { font-family:'Jua',sans-serif; font-size:2.2rem; color:var(--sky); margin-bottom:10px; }
 .complete-score { font-size:1.15rem; color:var(--green); margin-bottom:28px; }
 
-/* CONFETTI */
+/* CONFETTI — @keyframes는 core.js가 자동 주입 */
 .confetti-wrap { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
-.confetti-piece { position:absolute; width:11px; height:11px; border-radius:3px; animation:fall 1.2s ease-in forwards; }
-@keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
 
 @media(max-width:620px){
   .app-header{flex-direction:column;gap:12px;}
@@ -756,13 +754,14 @@ async function deleteStudent(name) {
 // ══════════════════════════════════════════
 // 연습 실시간 동기화
 // ══════════════════════════════════════════
-let practiceSessionId = null;
+// ── 지목/손들기 (core.js Stage 5) ──
+let practice = null;
 let lastPlayer = null;
 
 async function loadPracticeSession() {
-  const { data } = await _supabase
-    .from('practice_session').select('*').order('id').limit(1).single();
-  if (data) { practiceSessionId = data.id; applyPracticeState(data, false); }
+  practice = HalmoniCore.createPracticeSession({
+    onStateChange: applyPracticeState
+  });
 }
 
 function showNominatePopup(name) {
@@ -877,14 +876,7 @@ function _applyRaiseBtnStyle(btn, isRaised) {
 }
 
 async function raiseHand(name) {
-  if (!practiceSessionId) return;
-  const { data } = await _supabase
-    .from('practice_session').select('raised_hands').eq('id', practiceSessionId).single();
-  const hands = data?.raised_hands || [];
-  const newHands = hands.includes(name) ? hands.filter(h => h !== name) : [...hands, name];
-  await _supabase.from('practice_session')
-    .update({ raised_hands: newHands, status: 'waiting', updated_at: new Date().toISOString() })
-    .eq('id', practiceSessionId);
+  await practice?.raiseHand(name);
 }
 
 function renderRaisedHands(hands) {
@@ -936,21 +928,13 @@ function closeNominateModal() { document.getElementById('nominate-modal').classL
 
 async function nominateStudent(name) {
   closeNominateModal();
-  if (!practiceSessionId) return;
   let activeUnit = 1;
   [1,2,3].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
   const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : u3Idx;
-  await _supabase.from('practice_session').update({
-    current_player: name, unit: activeUnit, q_index: qIdx,
-    raised_hands: [], status: 'playing', updated_at: new Date().toISOString()
-  }).eq('id', practiceSessionId);
+  await practice?.nominate(name, activeUnit, qIdx);
 }
 
-_supabase.channel('practice-live')
-  .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'practice_session' }, payload => {
-    applyPracticeState(payload.new, true);
-  })
-  .subscribe();
+// 실시간 구독은 HalmoniCore.createPracticeSession() 내부에서 처리
 
 // ══════════════════════════════════════════
 // 초기화
@@ -1854,24 +1838,13 @@ const bgMap = {
   sky:'var(--sky-light)', mint:'var(--mint-light)',
   sun:'var(--sun-light)', lav:'var(--lavender-light)', green:'var(--green-light)'
 };
-// ── 한국어 음성 재생 ──
+// ── 한국어 음성 재생 (core.js Stage 3) ──
 function speakKorean(text) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'ko-KR';
-  utter.rate = 0.9;
-  utter.pitch = 1.1;
-  window.speechSynthesis.speak(utter);
+  HalmoniCore.speak(text, { preset: 'elem' });
 }
 
-  function speakExample(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ko-KR';
-  u.rate = 0.85;
-  window.speechSynthesis.speak(u);
+function speakExample(text) {
+  HalmoniCore.speak(text, { rate: 0.85 });
 }
 function buildFlashcards(containerId, items, bgKey) {
   const el=document.getElementById(containerId); el.innerHTML='';
@@ -1950,6 +1923,7 @@ function switchUnit(n){
 // UNIT 1 QUIZ
 // ══════════════════════════════════════════
 function renderU1(){
+  if(u1Idx >= u1Questions.length) return; // 완료 상태일 때 범위 초과 방어
   const q=u1Questions[u1Idx];
   u1SelectedSubj=null; u1SelectedVerb=null; u1SelectedParticle=null;
   document.getElementById('u1-scene').textContent=q.scene;
@@ -2100,6 +2074,7 @@ function getInsertIndex(dz, clientX, clientY){
 }
 
 function renderU2(){
+  if(u2Idx >= u2Questions.length) return; // 완료 상태일 때 범위 초과 방어
   const q=u2Questions[u2Idx];
   u2Dropped=[]; u2IdCounter=0;
   document.getElementById('u2-scene').textContent=q.scene;
@@ -2226,15 +2201,9 @@ function restartAll(){
 // ══════════════════════════════════════════
 // CONFETTI
 // ══════════════════════════════════════════
+// ── 컨페티 (core.js Stage 4) ──
 function launchConfetti(){
-  const wrap=document.getElementById('confetti'); wrap.innerHTML='';
-  const colors=['#5BB8F5','#FF6B6B','#4ECDC4','#FFD93D','#A78BFA','#6BCB77'];
-  for(let i=0;i<44;i++){
-    const p=document.createElement('div'); p.className='confetti-piece';
-    p.style.cssText=`left:${Math.random()*100}%;top:-20px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.4}s;animation-duration:${0.9+Math.random()*0.7}s;transform:rotate(${Math.random()*360}deg);`;
-    wrap.appendChild(p);
-  }
-  setTimeout(()=>wrap.innerHTML='',2200);
+  HalmoniCore.launchConfetti();
 }
 
 // ══════════════════════════════════════════
@@ -2437,6 +2406,7 @@ function renderZoneChildren(dz, dropped, removeFn, tcMap, extraStyle){
 }
 
 function renderU3(){
+  if(u3Idx >= u3Questions.length) return; // 완료 상태일 때 범위 초과 방어
   const q=u3Questions[u3Idx];
   u3Dropped=[]; u3IdCounter3=0;
   document.getElementById('u3-scene').textContent=q.scene;
@@ -2473,23 +2443,19 @@ function checkU3(){
 
 // ── 결과 동기화 ──
 async function syncResult(isCorrect, answer) {
-  if (!practiceSessionId) return;
-  await _supabase.from('practice_session').update({
-    status: isCorrect ? 'correct' : 'wrong',
-    updated_at: new Date().toISOString()
-  }).eq('id', practiceSessionId);
+  await practice?.setStatus(isCorrect ? 'correct' : 'wrong');
 }
 
 // ── 다음 문제 동기화 (Next 버튼) ──
 async function syncNext(unit, newIdx) {
-  if (!practiceSessionId) return;
-  await _supabase.from('practice_session').update({
+  if (!practice?.state?.sessionId) return;
+  await HalmoniCore.getSupabase().from('practice_session').update({
     unit, q_index: newIdx,
     status: 'waiting',
     current_player: null,
     raised_hands: [],
     updated_at: new Date().toISOString()
-  }).eq('id', practiceSessionId);
+  }).eq('id', practice.state.sessionId);
 }
 
 function hintU3(){const q=u3Questions[u3Idx];const fb=document.getElementById('u3-fb');fb.className='feedback hint';fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`;}
