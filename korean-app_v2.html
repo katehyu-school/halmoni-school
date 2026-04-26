@@ -689,34 +689,6 @@ const _attManager = HalmoniCore.createAttendanceManager({
 function checkIn(name) {
   _attManager.checkIn(name);
 }
-// ══════════════════════════════════════════
-// 출석
-// ══════════════════════════════════════════
-const _attManager = HalmoniCore.createAttendanceManager({
-  onStudentsChange(students) {
-    STUDENTS = students;
-  },
-  onAttendanceChange(checked) {
-    checkedToday = checked;
-    renderAttendance();
-  }
-});
-
-function checkIn(name) {
-  _attManager.checkIn(name);
-}const _attManager = HalmoniCore.createAttendanceManager({
-  onStudentsChange(students) {
-    STUDENTS = students;
-  },
-  onAttendanceChange(checked) {
-    checkedToday = checked;
-    renderAttendance();
-  }
-});
-
-function checkIn(name) {
-  _attManager.checkIn(name);
-}
 
 function renderAttendance() {
   const container = document.getElementById('att-students');
@@ -757,19 +729,6 @@ function checkIn(name) {
   _attManager.checkIn(name);
 }
 
-const _attManager = HalmoniCore.createAttendanceManager({
-  onStudentsChange(students) {
-    STUDENTS = students;
-  },
-  onAttendanceChange(checked) {
-    checkedToday = checked;
-    renderAttendance();
-  }
-});
-
-function checkIn(name) {
-  _attManager.checkIn(name);
-}
 
 // ══════════════════════════════════════════
 // 학생 관리 모달
