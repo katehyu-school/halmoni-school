@@ -686,7 +686,7 @@ async function loadStudents() {
 // ══════════════════════════════════════════
 async function loadAttendance() {
   const { data } = await _supabase
-    .from('attendance').select('student_name').eq('class_date', todayStr());
+    .from('attendance').select('student_name').eq('class_date', HalmoniCore.todayStr());
   if (data) checkedToday = new Set(data.map(r => r.student_name));
   renderAttendance();
 }
@@ -694,10 +694,10 @@ async function loadAttendance() {
 async function checkIn(name) {
   if (checkedToday.has(name)) {
     await _supabase.from('attendance')
-      .delete().eq('student_name', name).eq('class_date', todayStr());
+      .delete().eq('student_name', name).eq('class_date', HalmoniCore.todayStr());
   } else {
     await _supabase.from('attendance')
-      .upsert({ student_name: name, class_date: todayStr() }, { onConflict: 'student_name,class_date' });
+      .upsert({ student_name: name, class_date: HalmoniCore.todayStr() }, { onConflict: 'student_name,class_date' });
   }
   // 서버에서 다시 로드 (토글 정확성 보장)
   await loadAttendance();
@@ -730,7 +730,7 @@ function renderAttendance() {
 // 실시간 — 출석 변경 시 모든 화면 자동 갱신
 _supabase.channel('att-live')
   .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'attendance' }, payload => {
-    if (payload.new?.class_date === todayStr()) {
+    if (payload.new?.class_date === HalmoniCore.todayStr()) {
       checkedToday.add(payload.new.student_name);
       renderAttendance();
     }
