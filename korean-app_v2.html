@@ -1339,8 +1339,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <button class="snav-btn active" onclick="switchSection(2,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(2,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection(2,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
-    <button class="snav-btn" onclick="switchSection(2,'bank')">🎯 문장만들기 <span class="snav-en">Build</span>
-    </button>
+   
   </nav>
 
   <!-- VOCAB -->
@@ -1475,13 +1474,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   </div>
   <!-- QUIZ -->
-  <div class="section" id="u2-bank">
-  <div class="card">
-    <div class="section-title">🎯 문장을 만들어요!</div>
-    <div class="section-sub">단어를 하나씩 골라서 문장을 완성해요.</div>
-    <div id="u2-bank-container"></div>
-  </div>
-</div>
+
   <div class="section" id="u2-quiz">
 
     <!-- 스텝 표시 -->
@@ -1980,7 +1973,7 @@ function switchUnit(n){
   u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('u'+unit+'-'+sec).classList.add('active');
-  const map={vocab:0,grammar:1,quiz:2,bank:3};
+  const map = {vocab:0, grammar:1, quiz:2};
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
   const bar = document.getElementById('practice-bar');
   if (bar) {
