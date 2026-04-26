@@ -1980,7 +1980,7 @@ function switchUnit(n){
   u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('u'+unit+'-'+sec).classList.add('active');
-  const map={vocab:0,grammar:1,quiz:2};
+  const map={vocab:0,grammar:1,quiz:2,bank:3};
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
   const bar = document.getElementById('practice-bar');
   if (bar) {
