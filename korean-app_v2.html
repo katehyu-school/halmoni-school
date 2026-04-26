@@ -714,20 +714,6 @@ function renderAttendance() {
   if (editBtn) editBtn.style.display = isTeacher ? 'inline-block' : 'none';
 }
 
-// 실시간 — 출석 변경 시 모든 화면 자동 갱신
-const _attManager = HalmoniCore.createAttendanceManager({
-  onStudentsChange(students) {
-    STUDENTS = students;
-  },
-  onAttendanceChange(checked) {
-    checkedToday = checked;
-    renderAttendance();
-  }
-});
-
-function checkIn(name) {
-  _attManager.checkIn(name);
-}
 
 
 // ══════════════════════════════════════════
