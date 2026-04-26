@@ -32,19 +32,66 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-height: 100vh; color: var(--text); }
 
-/* HEADER */
-.app-header {
-  background: linear-gradient(135deg, #5BB8F5 0%, #4ECDC4 50%, #6BCB77 100%);
-  padding: 16px 24px; display: flex; align-items: center; justify-content: space-between;
+/* TOP NAV */
+.top-nav {
+  background: linear-gradient(135deg, #5BB8F5 0%, #4ECDC4 60%, #6BCB77 100%);
+  display: flex;
+  align-items: stretch;
   box-shadow: 0 3px 16px rgba(91,184,245,0.35);
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
 }
-.logo { font-family:'Jua',sans-serif; font-size:1.6rem; color:white; text-shadow:2px 2px 0 rgba(0,0,0,0.12); display:flex; align-items:center; gap:10px; cursor:pointer; }
-.unit-tabs { display:flex; gap:8px; flex-wrap:wrap; }
-.unit-tab { font-family:'Jua',sans-serif; font-size:0.95rem; padding:8px 20px; border:none; border-radius:30px; background:rgba(255,255,255,0.25); color:white; cursor:pointer; transition:all 0.2s; }
-.unit-tab.active { background:white; color:#5BB8F5; box-shadow:0 3px 12px rgba(0,0,0,0.15); }
-.unit-tab:hover:not(.active) { background:rgba(255,255,255,0.4); }
-.home-btn { font-family:'Jua',sans-serif; font-size:0.9rem; padding:7px 16px; border:2px solid rgba(255,255,255,0.6); border-radius:30px; background:transparent; color:white; cursor:pointer; transition:all 0.2s; }
-.home-btn:hover { background:rgba(255,255,255,0.2); }
+.top-nav-brand {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.05rem;
+  color: white;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px 14px 0;
+  margin-right: 16px;
+  border-right: 1.5px solid rgba(255,255,255,0.3);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+.top-nav-brand:hover { opacity: 0.88; }
+.book-tabs {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  gap: 0;
+}
+.book-tab {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.92rem;
+  padding: 0 16px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.book-tab:hover:not(.active):not(.locked) {
+  color: white;
+  background: rgba(255,255,255,0.12);
+}
+.book-tab.active {
+  color: white;
+  border-bottom-color: white;
+  font-weight: 700;
+}
+.book-tab.locked {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
 
 /* TOC (목차) */
 .toc-screen { display:none; }
@@ -271,7 +318,8 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .confetti-wrap { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
 
 @media(max-width:620px){
-  .app-header{flex-direction:column;gap:12px;}
+  .top-nav { flex-wrap: wrap; padding: 0 12px; }
+  .book-tab { padding: 0 10px; font-size: 0.82rem; }
   .particle-ref-grid{grid-template-columns:1fr;}
   .flashcard-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
 }
@@ -447,7 +495,7 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   gap: 14px;
   flex-wrap: wrap;
   position: sticky;
-  top: 0;
+  top: 52px;
   z-index: 100;
 }
 .practice-bar.visible { display: flex; }
@@ -507,72 +555,87 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .s1-hint { font-size:0.78rem; color:var(--muted); margin-left:4px; }
 .app-body {
   display: flex;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 52px);
 }
 .sidebar {
-  width: 160px;
+  width: 210px;
   flex-shrink: 0;
   background: white;
   border-right: 1.5px solid #E8EFF5;
-  padding: 20px 12px;
+  padding: 18px 10px 24px;
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 52px;
+  height: calc(100vh - 52px);
   overflow-y: auto;
 }
 .sidebar-title {
   font-family: 'Jua', sans-serif;
-  font-size: 0.72rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 12px;
-  padding: 0 6px;
-}
-.sidebar-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.18s;
-  margin-bottom: 4px;
-  font-family: 'Jua', sans-serif;
-  font-size: 0.88rem;
-  color: var(--text);
-  border: 1.5px solid transparent;
-}
-.sidebar-item:hover:not(.locked) {
-  background: var(--sky-light);
-  color: var(--sky);
-  border-color: #C5DFF8;
-}
-.sidebar-item.active {
-  background: var(--sky-light);
-  color: var(--sky);
-  border-color: var(--sky);
-  font-weight: 700;
-}
-.sidebar-item.locked {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-.sidebar-num {
-  font-size: 1rem;
-  min-width: 22px;
-}
-.sidebar-label { line-height: 1.2; }
-.sidebar-sub {
   font-size: 0.68rem;
   color: var(--muted);
-  font-family: 'Nanum Gothic', sans-serif;
-  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+.sidebar-book-label {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.78rem;
+  color: var(--sky);
+  padding: 6px 8px 4px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.lesson-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.18s;
+  margin-bottom: 3px;
+  border: 1.5px solid transparent;
+}
+.lesson-item:hover:not(.locked) {
+  background: var(--sky-light);
+  border-color: #C5DFF8;
+}
+.lesson-item.active {
+  background: var(--sky-light);
+  border-color: var(--sky);
+}
+.lesson-item.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.lesson-num {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.8rem;
+  color: var(--sky);
+  font-weight: 700;
+  min-width: 26px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+.lesson-item.locked .lesson-num { color: var(--muted); }
+.lesson-title-text {
+  font-family: 'Jua', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+.lesson-item.active .lesson-title-text { color: #1A7DC4; font-weight: 700; }
+.lesson-item.locked .lesson-title-text { color: var(--muted); }
+.lesson-lock-badge {
+  font-size: 0.62rem;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
 }
 .sidebar-divider {
   height: 1px;
   background: #E8EFF5;
-  margin: 12px 0;
+  margin: 10px 0;
 }
 .app-content {
   flex: 1;
@@ -949,17 +1012,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 </script>
 
 
-<header class="app-header">
-  <div class="logo" onclick="showTOC()">📚 한글학교 한국어</div>
-  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-    <div class="unit-tabs" id="unit-tabs-wrap">
-      <button class="unit-tab active" onclick="switchUnit(1)">1과</button>
-      <button class="unit-tab" onclick="switchUnit(2)">2과</button>
-      <button class="unit-tab" onclick="switchUnit(3)">3과</button>
-    </div>
-    <button class="home-btn" onclick="showTOC()">🏠 목차</button>
+<nav class="top-nav">
+  <div class="top-nav-brand" onclick="showTOC()">📚 한글학교 한국어</div>
+  <div class="book-tabs" id="book-tabs-wrap">
+    <button class="book-tab locked">1권</button>
+    <button class="book-tab active" onclick="selectBook(2)">2권</button>
+    <button class="book-tab locked">3권</button>
+    <button class="book-tab locked">4권</button>
+    <button class="book-tab locked">5권</button>
+    <button class="book-tab locked">6권</button>
   </div>
-</header>
+</nav>
 
 <!-- 출석 바 -->
 <div class="attendance-bar">
@@ -1010,55 +1073,52 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ APP BODY (사이드바 + 컨텐츠) ══════ -->
 <div class="app-body">
 
-<!-- 사이드바 — 1~6권 인덱스 -->
-<nav class="sidebar">
-  <div class="sidebar-title">한국어 교재</div>
+<!-- 사이드바 — 1~10과 목록 -->
+<nav class="sidebar" id="lesson-sidebar">
+  <div class="sidebar-title">한국어 2권</div>
 
-  <div class="sidebar-item locked">
-    <span class="sidebar-num">1️⃣</span>
-    <div class="sidebar-label">
-      1권
-      <div class="sidebar-sub">준비중 🔒</div>
-    </div>
+  <div class="lesson-item active" id="lesson-1" onclick="switchUnit(1)">
+    <span class="lesson-num">1과</span>
+    <span class="lesson-title-text">누가 노래해요?</span>
   </div>
-
-  <div class="sidebar-item active" onclick="selectBook(2)">
-    <span class="sidebar-num">2️⃣</span>
-    <div class="sidebar-label">
-      2권
-      <div class="sidebar-sub">학습 중 ✅</div>
-    </div>
+  <div class="lesson-item" id="lesson-2" onclick="switchUnit(2)">
+    <span class="lesson-num">2과</span>
+    <span class="lesson-title-text">아빠하고 엄마는 자전거를 타요</span>
+  </div>
+  <div class="lesson-item" id="lesson-3" onclick="switchUnit(3)">
+    <span class="lesson-num">3과</span>
+    <span class="lesson-title-text">언제 수영을 해요?</span>
   </div>
 
   <div class="sidebar-divider"></div>
 
-  <div class="sidebar-item locked">
-    <span class="sidebar-num">3️⃣</span>
-    <div class="sidebar-label">
-      3권
-      <div class="sidebar-sub">준비중 🔒</div>
-    </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">4과</span>
+    <div><span class="lesson-title-text">장난감 기차가 있어요.</span><span class="lesson-lock-badge">🔒 준비중</span></div>
   </div>
-  <div class="sidebar-item locked">
-    <span class="sidebar-num">4️⃣</span>
-    <div class="sidebar-label">
-      4권
-      <div class="sidebar-sub">준비중 🔒</div>
-    </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">5과</span>
+    <div><span class="lesson-title-text">구두가 아니에요.</span><span class="lesson-lock-badge">🔒 준비중</span></div>
   </div>
-  <div class="sidebar-item locked">
-    <span class="sidebar-num">5️⃣</span>
-    <div class="sidebar-label">
-      5권
-      <div class="sidebar-sub">준비중 🔒</div>
-    </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">6과</span>
+    <div><span class="lesson-title-text">친구 집에서 배를 만들어요.</span><span class="lesson-lock-badge">🔒 준비중</span></div>
   </div>
-  <div class="sidebar-item locked">
-    <span class="sidebar-num">6️⃣</span>
-    <div class="sidebar-label">
-      6권
-      <div class="sidebar-sub">준비중 🔒</div>
-    </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">7과</span>
+    <div><span class="lesson-title-text">하나, 둘, 셋, 넷</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+  </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">8과</span>
+    <div><span class="lesson-title-text">저는 여섯 살이에요.</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+  </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">9과</span>
+    <div><span class="lesson-title-text">코끼리는 커요.</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+  </div>
+  <div class="lesson-item locked">
+    <span class="lesson-num">10과</span>
+    <div><span class="lesson-title-text">종합연습</span><span class="lesson-lock-badge">🔒 준비중</span></div>
   </div>
 </nav>
 
@@ -1066,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="app-content">
 
 <!-- ══════ 목차 TOC ══════ -->
-<div class="toc-screen active" id="toc-screen">
+<div class="toc-screen" id="toc-screen">
   <div class="toc-header">
     <div class="toc-title">📖 한글학교 한국어 2</div>
     <div class="toc-sub">단원을 선택하세요 — Choose a unit</div>
@@ -1147,7 +1207,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-<div id="main-content" style="max-width:900px;margin:0 auto;padding:28px 20px 60px;display:none;">
+<div id="main-content" style="max-width:900px;margin:0 auto;padding:28px 20px 60px;">
 <!-- ══════ UNIT 1 ══════ -->
 <div class="unit active" id="unit1">
  <div class="unit-heading">
@@ -1882,23 +1942,24 @@ function buildFlashcards(containerId, items, bgKey) {
 // NAV
 // ══════════════════════════════════════════
 function selectBook(n) {
-  // 현재는 2권만 활성화 — 나중에 각 권별 콘텐츠 연결
-  if (n === 2) showTOC();
+  // 현재는 2권만 활성화
+  if (n === 2) switchUnit(1);
 }
 
 function showTOC(){
-  document.getElementById('toc-screen').classList.add('active');
-  document.getElementById('main-content').style.display='none';
-  document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+  // 목차는 사이드바로 대체 — 브랜드 클릭 시 1과로 이동
+  switchUnit(1);
 }
 
 function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
-  document.getElementById('main-content').style.display='block';
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
-  document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+  // 사이드바 lesson-item 활성화 (1~3과만 id 존재)
+  [1,2,3].forEach(i=>{
+    const el = document.getElementById('lesson-'+i);
+    if (el) el.classList.toggle('active', i===n);
+  });
   document.getElementById('unit'+n).classList.add('active');
-  document.querySelectorAll('.unit-tab')[n-1].classList.add('active');
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
