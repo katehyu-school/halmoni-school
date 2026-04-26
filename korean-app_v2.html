@@ -7,7 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?fami아ly=Jua&family=Nanum+Gothic:wght@400;700;800&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 <script src="/halmoni-school/core/core.js"></script>
 <script src="/halmoni-school/core/data-loader.js"></script>
-  <script src="/halmoni-school/core/vocab-renderer.js"></script>
+<script src="/halmoni-school/core/vocab-renderer.js"></script>
+<script src="/halmoni-school/core/grammar-renderer.js"></script>
   <style>
 :root {
   --sky: #5BB8F5;
@@ -1236,40 +1237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- GRAMMAR -->
   <div class="section" id="u1-grammar">
-    <div class="grammar-intro">
-      <h2>📌 Grammar — Subject Marker <span class="hl">이 / 가</span></h2>
-      <p>
-        In Korean, we put a special marker after a person's name to show <strong>who is doing the action</strong>.<br>
-        Think of it like the word <em>"is"</em> hiding inside the name — it tells us the subject!<br><br>
-        🔴 If the name ends in a <strong>consonant</strong> (받침) → add <span class="hl">이</span><br>
-        🔵 If the name ends in a <strong>vowel</strong> (no 받침) → add <span class="hl">가</span>
-      </p>
-    </div>
-    <div class="card">
-      <div class="section-title">🔍 The Rule — How to choose 이 or 가</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
-        <div class="rule-box red">
-          <div class="rule-label" style="color:var(--coral);">Ends in a consonant → <strong>이</strong></div>
-          <div class="rule-examples">
-            <span>준영 → 준영<strong style="color:var(--coral)">이</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅇ = consonant)</span></span>
-            <span>성진 → 성진<strong style="color:var(--coral)">이</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㄴ = consonant)</span></span>
-            <span>보람 → 보람<strong style="color:var(--coral)">이</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅁ = consonant)</span></span>
-          </div>
-        </div>
-        <div class="rule-box blue">
-          <div class="rule-label" style="color:var(--sky);">Ends in a vowel → <strong>가</strong></div>
-          <div class="rule-examples">
-            <span>민수 → 민수<strong style="color:var(--sky)">가</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅜ = vowel)</span></span>
-            <span>슬기 → 슬기<strong style="color:var(--sky)">가</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅣ = vowel)</span></span>
-            <span>재우 → 재우<strong style="color:var(--sky)">가</strong> <span style="font-size:0.82rem;color:var(--muted);">(ㅜ = vowel)</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-     <div class="example-list"> <div class="example-row"> <div> <div class="example-kr">민수<span class="p">가</span> 전화해요.</div> <div class="example-en">Minsu makes a phone call.</div> </div> <button class="example-audio-btn" onclick="speakExample('민수가 전화해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">준영<span class="p">이</span> 공부해요.</div> <div class="example-en">Junyeong studies.</div> </div> <button class="example-audio-btn" onclick="speakExample('준영이 공부해요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">재우<span class="p">가</span> 일어나요.</div> <div class="example-en">Jaewoo wakes up.</div> </div> <button class="example-audio-btn" onclick="speakExample('재우가 일어나요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">슬기<span class="p">가</span> 수영해요.</div> <div class="example-en">Seulgi swims.</div> </div> <button class="example-audio-btn" onclick="speakExample('슬기가 수영해요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">성진<span class="p">이</span> 학교에 가요.</div> <div class="example-en">Seongjin goes to school.</div> </div> <button class="example-audio-btn" onclick="speakExample('성진이 학교에 가요.')">🔊</button> </div> <div class="example-row coral"> 
-<div> <div class="example-kr">할아버지<span class="p">가</span> 텔레비전을 봐요.</div> <div class="example-en">Grandpa watches TV.</div> </div> <button class="example-audio-btn" onclick="speakExample('할아버지가 텔레비전을 봐요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">미라<span class="p">가</span> 운동해요.</div> <div class="example-en">Mira exercises.</div> </div> <button class="example-audio-btn" onclick="speakExample('미라가 운동해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">수연<span class="p">이</span> 이야기해요.</div> <div class="example-en">Suyeon is talking.</div> </div> <button class="example-audio-btn" onclick="speakExample('수연이 이야기해요.')">🔊</button> </div> </div> 
-
-    </div>
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
   </div>
 
   <!-- QUIZ -->
@@ -1366,115 +1334,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
  <!-- GRAMMAR -->
   <div class="section" id="u2-grammar">
-
-    <!-- 문법 1: 하고 -->
-    <div class="grammar-intro">
-      <h2>📌 Grammar 1 — _하고 &nbsp;<span style="font-size:0.85rem;color:#7A5500;">(Linking people)</span></h2>
-      <p>
-        <strong>하고</strong> means <em>"and"</em> — it connects two people or things together.<br>
-        Just attach it right after the first noun. No vowel/consonant rule needed!
-      </p>
-    </div>
-    <div class="card">
-      <div class="section-title">👫 Examples — 하고로 연결하기</div>
-      <div class="rule-box blue" style="margin-bottom:16px;">
-        <div class="rule-label" style="color:#1A5FA8;">📐 Pattern</div>
-        <div style="font-family:'Jua',sans-serif;font-size:1.1rem;text-align:center;padding:8px 0;">
-          [Person A] <span style="color:var(--coral);font-size:1.2rem;">하고</span> [Person B]
-        </div>
-      </div>
-      <div class="example-list">
-       <div class="hago-card-grid">
-  <div class="hago-card">
-    <div class="example-kr">할아버지<span class="p">하고</span> 할머니</div>
-    <div class="example-en">Grandpa and Grandma</div>
-  </div>
-  <div class="hago-card">
-    <div class="example-kr">엄마<span class="p">하고</span> 아빠</div>
-    <div class="example-en">Mom and Dad</div>
-  </div>
-  <div class="hago-card">
-    <div class="example-kr">리아<span class="p">하고</span> 애라</div>
-    <div class="example-en">Lia and Aera</div>
-  </div>
-  <div class="hago-card">
-    <div class="example-kr">리암<span class="p">하고</span> 카요</div>
-    <div class="example-en">Liam and Kayo</div>
-  </div>      
-  <div class="hago-card">
-    <div class="example-kr">고양이<span class="p">하고</span> 강아지</div>
-    <div class="example-en">Cat and Dog</div>
-  </div>
-</div>
-      </div>
-    </div>
-
-    <!-- 문법 2: 은/는 -->
-    <div class="grammar-intro" style="margin-top:10px;">
-      <h2>📌 Grammar 2 — _은/는 &nbsp;<span style="font-size:0.85rem;color:#7A5500;">(Topic marker)</span></h2>
-      <p>
-        <strong>은/는</strong> marks the <em>topic</em> of the sentence — who or what we're talking about.<br>
-        It can also work like a subject marker (<strong>이/가</strong>)!<br><br>
-        <strong>Rule:</strong> &nbsp;ends in consonant → <span class="hl">은</span> &nbsp;|&nbsp; ends in vowel → <span class="hl">는</span>
-      </p>
-    </div>
-    <div class="card">
-      <div class="rule-box red" style="margin-bottom:14px;">
-        <div class="rule-label" style="color:#C0392B;">consonant + 은 &nbsp;/&nbsp; vowel + 는</div>
-        <div class="rule-examples">
-          <span>할아버지 → 할아버지<span class="hl">는</span> &nbsp;(ends in vowel ㅣ)</span>
-          <span>할머니 → 할머니<span class="hl">는</span> &nbsp;(ends in vowel ㅣ)</span>
-          <span>엄마 → 엄마<span class="hl">는</span> &nbsp;(ends in vowel ㅏ)</span>
-          <span>아빠 → 아빠<span class="hl">는</span> &nbsp;(ends in vowel ㅏ)</span>
-        </div>
-      </div>
-      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-      <div class="example-list">
-        <div class="example-row">
-          <div>
-            <div class="example-kr">할아버지<span class="p">하고</span> 할머니<span class="p">는</span> 사진을 찍어요.</div>
-            <div class="example-en">Grandpa and Grandma take photos.</div>
-          </div>
-          <button class="example-audio-btn" onclick="speakExample('할아버지하고 할머니는 사진을 찍어요.')">🔊</button>
-        </div>
-        <div class="example-row coral">
-          <div>
-            <div class="example-kr">아빠<span class="p">하고</span> 엄마<span class="p">는</span> 자전거를 타요.</div>
-            <div class="example-en">Dad and Mom ride bikes.</div>
-          </div>
-          <button class="example-audio-btn" onclick="speakExample('아빠하고 엄마는 자전거를 타요.')">🔊</button>
-        </div>
-        <div class="example-row">
-          <div>
-            <div class="example-kr">동생<span class="p">하고</span> 저<span class="p">는</span> 그네를 타요.</div>
-            <div class="example-en">My sibling and I ride the swing.</div>
-          </div>
-          <button class="example-audio-btn" onclick="speakExample('동생하고 저는 그네를 타요.')">🔊</button>
-        </div>
-        <div class="example-row coral">
-          <div>
-            <div class="example-kr">엄마<span class="p">하고</span> 동생<span class="p">은</span> 책을 읽어요.</div>
-            <div class="example-en">Mom and my sibling read a book.</div>
-          </div>
-          <button class="example-audio-btn" onclick="speakExample('엄마하고 동생은 책을 읽어요.')">🔊</button>
-        </div>
-        <div class="example-row">
-          <div>
-            <div class="example-kr">형<span class="p">하고</span> 나<span class="p">는</span> 태권도를 해요.</div>
-            <div class="example-en">My brother and I do Taekwondo.</div>
-          </div>
-          <button class="example-audio-btn" onclick="speakExample('형하고 나는 태권도를 해요.')">🔊</button>
-        </div>
-        <div class="example-row coral">
-          <div>
-            <div class="example-kr">언니<span class="p">하고</span> 나<span class="p">는</span> 배구를 해요.</div>
-            <div class="example-en">My sister and I play volleyball.</div>
-          </div>
-          <button class="example-audio-btn" onclick="speakExample('언니하고 나는 배구를 해요.')">🔊</button>
-        </div>
-      </div>
-    </div>
-
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
   </div>
   <!-- QUIZ -->
 
@@ -1596,56 +1456,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- GRAMMAR -->
   <div class="section" id="u3-grammar">
-    <div class="grammar-intro">
-      <h2>📌 Grammar 1 — Time Word + <span class="hl">에</span></h2>
-      <p>
-        In Korean, we add <strong>에</strong> after a time word to say <em>when</em> something happens.<br>
-        Think of it like the English words <em>"in the morning"</em> or <em>"in the evening"</em> — 에 does that job!<br><br>
-        🌅 아침<span class="hl">에</span> = in the morning &nbsp;|&nbsp;
-        🌙 저녁<span class="hl">에</span> = in the evening<br>
-        ☀️ 오늘 = today (no 에!) &nbsp;|&nbsp;
-        📅 내일 = tomorrow (no 에!)
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="section-title">🔍 아침에 / 저녁에 vs 오늘 / 내일</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
-        <div class="rule-box red">
-          <div class="rule-label" style="color:var(--coral);">Time of day → add <strong>에</strong></div>
-          <div class="rule-examples">
-            <span>아침<strong style="color:var(--coral)">에</strong> 수영을 해요.</span>
-            <span>저녁<strong style="color:var(--coral)">에</strong> 운동을 해요.</span>
-          </div>
-        </div>
-        <div class="rule-box blue">
-          <div class="rule-label" style="color:var(--sky);">Day words → NO 에</div>
-          <div class="rule-examples">
-            <span>오늘 바다에 가요.</span>
-            <span>내일 산에 가요.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="grammar-intro" style="margin-bottom:20px;">
-        <h2>📌 Grammar 2 — 수영해요 vs 수영<span class="hl">을</span> 해요</h2>
-        <p>
-          Remember how we learned <strong>수영해요</strong> in Unit 1? Now we can split it!<br><br>
-          When a noun (thing) comes before 해요, we add <span class="hl">을/를</span> to show it's the <strong>object</strong>.<br>
-          Think of 을/를 as a label that says <em>"this is the THING being done!"</em><br><br>
-          🏊 수영<span class="hl">을</span> 해요 → swimming (the thing) + do<br>
-          🏃 운동<span class="hl">을</span> 해요 → exercise (the thing) + do<br>
-          📞 전화<span class="hl">를</span> 해요 → phone call (the thing) + do<br><br>
-          After consonant → <span class="hl">을</span> &nbsp;|&nbsp; After vowel → <span class="hl">를</span>
-        </p>
-      </div>
-
-      <div class="section-title" style="margin-bottom:10px;">📖 Example Sentences</div>
-     <div class="example-list"> <div class="example-row"> <div> <div class="example-kr">아침<span class="p">에</span> 수영<span class="p">을</span> 해요.</div> <div class="example-en">I swim in the morning.</div> </div> <button class="example-audio-btn" onclick="speakExample('아침에 수영을 해요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">저녁<span class="p">에</span> 운동<span class="p">을</span> 해요.</div> <div class="example-en">I exercise in the evening.</div> </div> <button class="example-audio-btn" onclick="speakExample('저녁에 운동을 해요.')">🔊</button> </div> <div class="example-row"> 
-<div> <div class="example-kr">내일 바다<span class="p">에</span> 가요.</div> <div class="example-en">I go to the beach tomorrow.</div> </div> <button class="example-audio-btn" onclick="speakExample('내일 바다에 가요.')">🔊</button> </div> <div class="example-row coral"> <div> <div class="example-kr">오늘 숙제<span class="p">를</span> 해요.</div> <div class="example-en">I do homework today.</div> </div> <button class="example-audio-btn" onclick="speakExample('오늘 숙제를 해요.')">🔊</button> </div> <div class="example-row"> <div> <div class="example-kr">아침<span class="p">에</span> 전화<span class="p">를</span> 해요.</div> <div class="example-en">I make a phone call in the morning.</div> </div> <button class="example-audio-btn" onclick="speakExample('아침에 전화를 해요.')">🔊</button> </div> <div class="example-row coral"> 
-<div> <div class="example-kr">내일 산<span class="p">에</span> 가요.</div> <div class="example-en">I go to the mountain tomorrow.</div> </div> <button class="example-audio-btn" onclick="speakExample('내일 산에 가요.')">🔊</button> </div> </div> 
-
-    </div>
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
   </div>
 
   <!-- QUIZ -->
@@ -1755,8 +1566,11 @@ const verbs2 = [
   {emoji:'📍',kr:'있어요',en:'is/are (at a place)',rom:'isseoyo'},
 ];
 
-// Unit 1 questions — all have proper transitive sentences with objects
-const u1Questions = [
+// Quiz 문제 데이터 — JSON에서 로드 (아래 init()에서 채워짐)
+let u1Questions = [];
+
+// [LEGACY FALLBACK] JSON 로드 실패 시 사용
+const _u1QFallback = [
   {scene:'📞', english:'Minsu makes a phone call.',     subject:'민수', verb:'전화해요',          particle:'가', hint:'민수 ends in ㅜ → vowel → 가', answer:'민수가 전화해요'},
   {scene:'📖', english:'Junyeong studies.',              subject:'준영', verb:'공부해요',          particle:'이', hint:'준영 ends in ㅇ → consonant → 이', answer:'준영이 공부해요'},
   {scene:'🌅', english:'Jaewoo wakes up.',               subject:'재우', verb:'일어나요',          particle:'가', hint:'재우 ends in ㅜ → vowel → 가', answer:'재우가 일어나요'},
@@ -1767,7 +1581,10 @@ const u1Questions = [
   {scene:'🏃', english:'Suyeon exercises.',              subject:'수연', verb:'운동해요',          particle:'이', hint:'수연 ends in ㄴ → consonant → 이', answer:'수연이 운동해요'},
 ];
 
-// Unit 2 questions — ALL particles are separate cards
+let u2Questions = [];
+
+// [LEGACY FALLBACK]
+const _u2QFallback = [
 // types: name | particle | place | verb
 // chunks: Step 1용 덩어리 카드 [{text, type, en}]
 const u2Questions = [
@@ -2286,8 +2103,10 @@ const verbs3 = [
   {emoji:'📞',kr:'전화를 해요',en:'makes a phone call',rom:'jeonhwa-reul haeyo'},
 ];
 
+let u3Questions = [];
+// [LEGACY FALLBACK]
+const _u3QFallback = [
 // types: name | time | particle | place | verb
-const u3Questions = [
   {
     scene:'🌙🏊', english:'When does Seulgi swim? → She swims in the evening.',
     hint:'슬기 ends in ㅣ → 는 (topic). 저녁에 = in the evening. 수영을 해요.',
@@ -2336,7 +2155,7 @@ const u3Questions = [
     answer:['준영','이','아침에','운동','을','해요'],
     types:['name','particle','time','name','particle','verb']
   },
-];
+]; // end _u3QFallback
 
 // ── Unit 3 state ──
 let u3Idx=0, u3Score=0;
@@ -2703,7 +2522,19 @@ function goToStep2() {
   renderU2();
 }
 
-function init(){
+async function init(){
+  // Load quiz data from JSON, fall back to hardcoded arrays if unavailable
+  try {
+    const [d1, d2, d3] = await Promise.all([1,2,3].map(n => HalmoniCore.loadUnit(n)));
+    u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
+    u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
+    u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
+  } catch(e) {
+    console.warn('[init] quiz data load failed, using fallback', e);
+    u1Questions = _u1QFallback;
+    u2Questions = _u2QFallback;
+    u3Questions = _u3QFallback;
+  }
   buildFlashcards('fc-names',names,'sky');
   buildFlashcards('fc-verbs',verbs1,'mint');
   buildFlashcards('fc2-link',linkWords,'sun');
@@ -2720,6 +2551,7 @@ init();
 </div><!-- /app-body -->
 <script>
   VocabRenderer.renderAll();
+  GrammarRenderer.renderAll();
 </script>
 </body>
 </html>
