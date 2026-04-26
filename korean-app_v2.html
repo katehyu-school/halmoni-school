@@ -678,6 +678,7 @@ HalmoniCore.todayStr()
 const _attManager = HalmoniCore.createAttendanceManager({
   onStudentsChange(students) {
     STUDENTS = students;
+    renderEditList();
   },
   onAttendanceChange(checked) {
     checkedToday = checked;
