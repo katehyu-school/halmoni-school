@@ -663,20 +663,14 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 // ══════════════════════════════════════════
 // 설정
 // ══════════════════════════════════════════
-const SUPABASE_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-const urlParams = new URLSearchParams(window.location.search);
-const isTeacher = urlParams.has('teacher');
-const urlName   = urlParams.get('name');
+const _supabase = HalmoniCore.getSupabase();
+const isTeacher = HalmoniCore.isTeacher;
+const urlName   = HalmoniCore.urlName;
 
 let STUDENTS    = [];
 let checkedToday = new Set();
 
-function todayStr() {
-  return new Date().toLocaleDateString('sv-SE');
-}
+HalmoniCore.todayStr()
 
 // ══════════════════════════════════════════
 // 학생 목록
