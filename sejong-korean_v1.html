@@ -2193,6 +2193,7 @@ function toggleAnswers() {
 // ── SENTENCE BUILDER ──
 // sentences 배열에 객체를 추가하기만 하면 자동으로 문제 늘어남
 function buildSentence(idx) {
+  if (!document.getElementById('builderNav')) return; // 빌더 HTML 없으면 중단
   currentSentence = idx;
   const __ss = window._ss || sentences;
   const s = __ss[idx];
@@ -2734,11 +2735,11 @@ function loadUnit(num) {
   buildVocabCards();
   buildMatching();
   buildBlanks();
-  buildSentence(0);
   buildQuiz();
   updateGrammarPanel(num);
-  updateUsagePanel(num);
+  updateUsagePanel(num);   // 이 안에 빌더 HTML이 생성됨
   updateRealPanel(num);
+  buildSentence(0);        // 빌더 HTML 생성 후에 실행
 
   document.querySelector('.content-area').scrollTop = 0;
 }
@@ -2961,6 +2962,20 @@ function updateUsagePanel(num) {
             <tr><td>몇 호</td><td><strong>[며토]</strong></td><td>ㄷ + ㅎ → ㅌ (aspiration)</td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="panel-card">
+        <div class="word-builder">
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">🔀 Sentence builder — click the words in the correct order</div>
+          <div id="builderNav"></div>
+          <div class="builder-target" id="builderTarget"></div>
+          <div class="word-tiles-answer" id="answerZone"><span style="color:var(--gray-500);font-size:13px">Place words here</span></div>
+          <div class="word-tiles-pool" id="tilesPool"></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <button class="check-btn" style="background:var(--teal)" onclick="checkSentence()">✅ Check</button>
+            <button class="hint-btn" onclick="nextSentence()">Next sentence →</button>
+            <span id="builderFeedback" style="font-size:13px"></span>
+          </div>
+        </div>
       </div>`;
   } else if (num === 3) {
     el.innerHTML = `
@@ -2991,6 +3006,20 @@ function updateUsagePanel(num) {
             <tr><td>침대 옆에</td><td><strong>[침대 여페]</strong></td><td>ㅂ + 에 → 페 (liaison)</td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="panel-card">
+        <div class="word-builder">
+          <div class="panel-title" style="font-size:14px;border-bottom:none;padding-bottom:4px">🔀 Sentence builder — click the words in the correct order</div>
+          <div id="builderNav"></div>
+          <div class="builder-target" id="builderTarget"></div>
+          <div class="word-tiles-answer" id="answerZone"><span style="color:var(--gray-500);font-size:13px">Place words here</span></div>
+          <div class="word-tiles-pool" id="tilesPool"></div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+            <button class="check-btn" style="background:var(--teal)" onclick="checkSentence()">✅ Check</button>
+            <button class="hint-btn" onclick="nextSentence()">Next sentence →</button>
+            <span id="builderFeedback" style="font-size:13px"></span>
+          </div>
+        </div>
       </div>`;
   }
 }
