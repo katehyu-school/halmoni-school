@@ -675,32 +675,46 @@ HalmoniCore.todayStr()
 // ══════════════════════════════════════════
 // 학생 목록
 // ══════════════════════════════════════════
-async function loadStudents() {
-  const { data } = await _supabase.from('students').select('name').order('created_at');
-  if (data) STUDENTS = data.map(r => r.name);
-  await loadAttendance();
-}
+const _attManager = HalmoniCore.createAttendanceManager({
+  onStudentsChange(students) {
+    STUDENTS = students;
+  },
+  onAttendanceChange(checked) {
+    checkedToday = checked;
+    renderAttendance();
+  }
+});
 
+function checkIn(name) {
+  _attManager.checkIn(name);
+}
 // ══════════════════════════════════════════
 // 출석
 // ══════════════════════════════════════════
-async function loadAttendance() {
-  const { data } = await _supabase
-    .from('attendance').select('student_name').eq('class_date', HalmoniCore.todayStr());
-  if (data) checkedToday = new Set(data.map(r => r.student_name));
-  renderAttendance();
-}
-
-async function checkIn(name) {
-  if (checkedToday.has(name)) {
-    await _supabase.from('attendance')
-      .delete().eq('student_name', name).eq('class_date', HalmoniCore.todayStr());
-  } else {
-    await _supabase.from('attendance')
-      .upsert({ student_name: name, class_date: HalmoniCore.todayStr() }, { onConflict: 'student_name,class_date' });
+const _attManager = HalmoniCore.createAttendanceManager({
+  onStudentsChange(students) {
+    STUDENTS = students;
+  },
+  onAttendanceChange(checked) {
+    checkedToday = checked;
+    renderAttendance();
   }
-  // 서버에서 다시 로드 (토글 정확성 보장)
-  await loadAttendance();
+});
+
+function checkIn(name) {
+  _attManager.checkIn(name);
+}const _attManager = HalmoniCore.createAttendanceManager({
+  onStudentsChange(students) {
+    STUDENTS = students;
+  },
+  onAttendanceChange(checked) {
+    checkedToday = checked;
+    renderAttendance();
+  }
+});
+
+function checkIn(name) {
+  _attManager.checkIn(name);
 }
 
 function renderAttendance() {
@@ -728,26 +742,33 @@ function renderAttendance() {
 }
 
 // 실시간 — 출석 변경 시 모든 화면 자동 갱신
-_supabase.channel('att-live')
-  .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'attendance' }, payload => {
-    if (payload.new?.class_date === HalmoniCore.todayStr()) {
-      checkedToday.add(payload.new.student_name);
-      renderAttendance();
-    }
-  })
-  .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'attendance' }, payload => {
-    if (payload.old?.student_name) {
-      checkedToday.delete(payload.old.student_name);
-      renderAttendance();
-    }
-  })
-  .subscribe();
+const _attManager = HalmoniCore.createAttendanceManager({
+  onStudentsChange(students) {
+    STUDENTS = students;
+  },
+  onAttendanceChange(checked) {
+    checkedToday = checked;
+    renderAttendance();
+  }
+});
 
-_supabase.channel('students-live')
-  .on('postgres_changes', { event: '*', schema: 'public', table: 'students' }, () => {
-    loadStudents();
-  })
-  .subscribe();
+function checkIn(name) {
+  _attManager.checkIn(name);
+}
+
+const _attManager = HalmoniCore.createAttendanceManager({
+  onStudentsChange(students) {
+    STUDENTS = students;
+  },
+  onAttendanceChange(checked) {
+    checkedToday = checked;
+    renderAttendance();
+  }
+});
+
+function checkIn(name) {
+  _attManager.checkIn(name);
+}
 
 // ══════════════════════════════════════════
 // 학생 관리 모달
@@ -775,16 +796,14 @@ async function addStudent() {
   const input = document.getElementById('new-student-input');
   const name = input.value.trim();
   if (!name) return;
-  if (STUDENTS.includes(name)) { alert(name + '은 이미 있어요!'); return; }
-  const { error } = await _supabase.from('students').insert({ name });
-  if (!error) { input.value = ''; await loadStudents(); renderEditList(); }
-  else alert('추가 실패: ' + error.message);
+  const result = await _attManager.addStudent(name);
+  if (result.ok) { input.value = ''; renderEditList(); }
+  else alert('추가 실패: ' + result.error);
 }
 
 async function deleteStudent(name) {
   if (!confirm(name + '을 삭제할까요?')) return;
-  await _supabase.from('students').delete().eq('name', name);
-  await loadStudents();
+  await _attManager.deleteStudent(name);
   renderEditList();
 }
 
@@ -993,7 +1012,7 @@ _supabase.channel('practice-live')
 document.addEventListener('DOMContentLoaded', async () => {
   const nomBtn = document.getElementById('practice-nominate-btn');
   if (nomBtn) nomBtn.style.display = isTeacher ? 'inline-block' : 'none';
-  await loadStudents();
+
   await loadPracticeSession();
   if (urlName && STUDENTS.includes(urlName)) checkIn(urlName);
 });
