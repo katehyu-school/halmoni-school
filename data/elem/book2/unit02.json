@@ -186,44 +186,189 @@
           "type": "three_bank_sentence",
           "instruction": "단어를 골라서 문장을 완성해요!",
           "noun_bank": [
-            { "id": "n1", "text": "저는", "particles_compatible": ["p1"] },
-            { "id": "n2", "text": "친구는", "particles_compatible": ["p1"] },
-            { "id": "n3", "text": "우리는", "particles_compatible": ["p1"] }
+            {
+              "id": "n1",
+              "text": "저는",
+              "particles_compatible": [
+                "p1"
+              ],
+              "english": "I"
+            },
+            {
+              "id": "n2",
+              "text": "친구는",
+              "particles_compatible": [
+                "p1"
+              ],
+              "english": "My friend"
+            },
+            {
+              "id": "n3",
+              "text": "우리는",
+              "particles_compatible": [
+                "p1"
+              ],
+              "english": "We"
+            }
           ],
           "particle_bank": [
-            { "id": "p1", "text": "놀이터에", "target_place": "놀이터" },
-            { "id": "p2", "text": "공원에", "target_place": "공원" },
-            { "id": "p3", "text": "수영장에", "target_place": "수영장" },
-            { "id": "p4", "text": "운동장에", "target_place": "운동장" },
-            { "id": "p5", "text": "교실에", "target_place": "교실" },
-            { "id": "p6", "text": "집에", "target_place": "집" }
+            {
+              "id": "p1",
+              "text": "놀이터에",
+              "target_place": "놀이터",
+              "english": "to the playground"
+            },
+            {
+              "id": "p2",
+              "text": "공원에",
+              "target_place": "공원",
+              "english": "to the park"
+            },
+            {
+              "id": "p3",
+              "text": "수영장에",
+              "target_place": "수영장",
+              "english": "to the swimming pool"
+            },
+            {
+              "id": "p4",
+              "text": "운동장에",
+              "target_place": "운동장",
+              "english": "to the sports field"
+            },
+            {
+              "id": "p5",
+              "text": "교실에",
+              "target_place": "교실",
+              "english": "to the classroom"
+            },
+            {
+              "id": "p6",
+              "text": "집에",
+              "target_place": "집",
+              "english": "home"
+            }
           ],
           "verb_bank": [
-            { "id": "v1", "text": "가요.", "meaning": "go" },
-            { "id": "v2", "text": "있어요.", "meaning": "am/are (there)" }
+            {
+              "id": "v1",
+              "text": "가요.",
+              "meaning": "go",
+              "english": "go."
+            },
+            {
+              "id": "v2",
+              "text": "있어요.",
+              "meaning": "am/are (there)",
+              "english": "am/are."
+            }
           ],
           "valid_sentences": [
-            ["n1", "p1", "v1"],
-            ["n1", "p2", "v1"],
-            ["n1", "p3", "v1"],
-            ["n1", "p4", "v1"],
-            ["n1", "p5", "v1"],
-            ["n1", "p6", "v1"],
-            ["n1", "p6", "v2"],
-            ["n2", "p1", "v1"],
-            ["n2", "p2", "v1"],
-            ["n2", "p3", "v1"],
-            ["n2", "p4", "v1"],
-            ["n2", "p5", "v1"],
-            ["n2", "p6", "v1"],
-            ["n2", "p6", "v2"],
-            ["n3", "p1", "v1"],
-            ["n3", "p2", "v1"],
-            ["n3", "p3", "v1"],
-            ["n3", "p4", "v1"],
-            ["n3", "p5", "v1"],
-            ["n3", "p6", "v1"],
-            ["n3", "p6", "v2"]
+            [
+              "n1",
+              "p1",
+              "v1"
+            ],
+            [
+              "n1",
+              "p2",
+              "v1"
+            ],
+            [
+              "n1",
+              "p3",
+              "v1"
+            ],
+            [
+              "n1",
+              "p4",
+              "v1"
+            ],
+            [
+              "n1",
+              "p5",
+              "v1"
+            ],
+            [
+              "n1",
+              "p6",
+              "v1"
+            ],
+            [
+              "n1",
+              "p6",
+              "v2"
+            ],
+            [
+              "n2",
+              "p1",
+              "v1"
+            ],
+            [
+              "n2",
+              "p2",
+              "v1"
+            ],
+            [
+              "n2",
+              "p3",
+              "v1"
+            ],
+            [
+              "n2",
+              "p4",
+              "v1"
+            ],
+            [
+              "n2",
+              "p5",
+              "v1"
+            ],
+            [
+              "n2",
+              "p6",
+              "v1"
+            ],
+            [
+              "n2",
+              "p6",
+              "v2"
+            ],
+            [
+              "n3",
+              "p1",
+              "v1"
+            ],
+            [
+              "n3",
+              "p2",
+              "v1"
+            ],
+            [
+              "n3",
+              "p3",
+              "v1"
+            ],
+            [
+              "n3",
+              "p4",
+              "v1"
+            ],
+            [
+              "n3",
+              "p5",
+              "v1"
+            ],
+            [
+              "n3",
+              "p6",
+              "v1"
+            ],
+            [
+              "n3",
+              "p6",
+              "v2"
+            ]
           ],
           "invalid_feedback": "다시 해봐요! 어울리는 단어를 골라요."
         },
@@ -232,7 +377,12 @@
           "type": "multiple_choice",
           "question": "공원에 가요. 밑줄 친 곳에 알맞은 것은?",
           "blank_sentence": "저___ 공원에 가요.",
-          "choices": ["은", "는", "이", "가"],
+          "choices": [
+            "은",
+            "는",
+            "이",
+            "가"
+          ],
           "answer": "는",
           "explanation": "저(발음: jeo)는 받침이 없어서 '는'을 써요."
         },
@@ -241,7 +391,12 @@
           "type": "multiple_choice",
           "question": "두 장소를 연결하는 말은?",
           "blank_sentence": "놀이터___ 공원에 가요.",
-          "choices": ["하고", "이고", "에서", "한테"],
+          "choices": [
+            "하고",
+            "이고",
+            "에서",
+            "한테"
+          ],
           "answer": "하고",
           "explanation": "'하고'는 두 명사를 연결할 때 써요."
         },
@@ -250,12 +405,31 @@
           "type": "picture_match",
           "instruction": "그림을 보고 알맞은 장소를 골라요.",
           "items": [
-            { "emoji": "🛝", "answer": "놀이터" },
-            { "emoji": "🏊", "answer": "수영장" },
-            { "emoji": "⚽", "answer": "운동장" },
-            { "emoji": "🏫", "answer": "교실" }
+            {
+              "emoji": "🛝",
+              "answer": "놀이터"
+            },
+            {
+              "emoji": "🏊",
+              "answer": "수영장"
+            },
+            {
+              "emoji": "⚽",
+              "answer": "운동장"
+            },
+            {
+              "emoji": "🏫",
+              "answer": "교실"
+            }
           ],
-          "choices_pool": ["놀이터", "공원", "수영장", "운동장", "교실", "집"]
+          "choices_pool": [
+            "놀이터",
+            "공원",
+            "수영장",
+            "운동장",
+            "교실",
+            "집"
+          ]
         }
       ]
     }
