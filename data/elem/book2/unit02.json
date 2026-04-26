@@ -112,9 +112,17 @@
         {
           "id": "g02_hago",
           "title": "하고",
-          "subtitle": "두 장소나 사람을 연결해요",
+          "subtitle": "두 사람이나 장소를 연결해요",
           "pattern": "명사 + 하고 + 명사",
           "meaning": "and (connecting two nouns)",
+          "pattern_box": "[Person A] <span style='color:var(--coral);font-size:1.2rem;'>하고</span> [Person B]",
+          "pairs": [
+            {"korean": "할아버지하고 할머니", "english": "Grandpa and Grandma", "highlight": "하고"},
+            {"korean": "엄마하고 아빠", "english": "Mom and Dad", "highlight": "하고"},
+            {"korean": "리아하고 애라", "english": "Lia and Aera", "highlight": "하고"},
+            {"korean": "리암하고 카요", "english": "Liam and Kayo", "highlight": "하고"},
+            {"korean": "고양이하고 강아지", "english": "Cat and Dog", "highlight": "하고"}
+          ],
           "examples": [
             {
               "korean": "놀이터하고 공원에 가요.",
@@ -149,6 +157,18 @@
           "subtitle": "이야기의 주제를 표시해요",
           "pattern": "받침 O → 은 / 받침 X → 는",
           "meaning": "topic marker (as for ~)",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "받침 있음 (consonant) → 은",
+              "examples": ["동생 → 동생은 (받침 ㅇ)", "선생님 → 선생님은 (받침 ㅁ)"]
+            },
+            {
+              "color": "blue",
+              "label": "받침 없음 (vowel) → 는",
+              "examples": ["엄마 → 엄마는 (모음 ㅏ)", "저 → 저는 (모음 ㅓ)", "친구 → 친구는 (모음 ㅜ)"]
+            }
+          ],
           "examples": [
             {
               "korean": "저는 공원에 가요.",
@@ -431,6 +451,17 @@
             "집"
           ]
         }
+      ],
+      "quiz_items": [
+        {"scene":"🛝","english":"Lia and Aera ride the swing at the playground.","hint":"하고 = and, 는 = topic, 에서 = action place, 를 = object","answer":["리아","하고","애라","는","놀이터","에서","그네","를","타요"],"types":["name","particle","name","particle","place","particle","name","particle","verb"],"chunks":[{"text":"리아하고 애라는","type":"name","en":"Lia and Aera"},{"text":"놀이터에서","type":"place","en":"at the playground"},{"text":"그네를","type":"name","en":"the swing"},{"text":"타요","type":"verb","en":"ride"}]},
+        {"scene":"🌳","english":"Dad and Mom ride bikes at the park.","hint":"하고 = and, 는 = topic, 에서 = action place, 를 = object","answer":["아빠","하고","엄마","는","공원","에서","자전거","를","타요"],"types":["name","particle","name","particle","place","particle","name","particle","verb"],"chunks":[{"text":"아빠하고 엄마는","type":"name","en":"Dad and Mom"},{"text":"공원에서","type":"place","en":"at the park"},{"text":"자전거를","type":"name","en":"bikes"},{"text":"타요","type":"verb","en":"ride"}]},
+        {"scene":"🛝","english":"Lia and Aera are at the playground.","hint":"에 = location (just being there). Use 있어요, not 타요!","answer":["리아하고 애라","는","놀이터","에","있어요"],"types":["name","particle","place","particle","verb"],"chunks":[{"text":"리아하고 애라는","type":"name","en":"Lia and Aera"},{"text":"놀이터에","type":"place","en":"at the playground"},{"text":"있어요","type":"verb","en":"are"}]},
+        {"scene":"📚","english":"Boram reads a book in the classroom.","hint":"보람 ends in ㅁ → 이. 에서 = action place. 을 = object.","answer":["보람","이","교실","에서","책","을","읽어요"],"types":["name","particle","place","particle","name","particle","verb"],"chunks":[{"text":"보람이","type":"name","en":"Boram"},{"text":"교실에서","type":"place","en":"in the classroom"},{"text":"책을","type":"name","en":"a book"},{"text":"읽어요","type":"verb","en":"reads"}]},
+        {"scene":"🏊","english":"Mira swims at the pool.","hint":"미라 ends in ㅏ → 는 (topic). 에서 = action place.","answer":["미라","는","수영장","에서","수영해요"],"types":["name","particle","place","particle","verb"],"chunks":[{"text":"미라는","type":"name","en":"Mira"},{"text":"수영장에서","type":"place","en":"at the pool"},{"text":"수영해요","type":"verb","en":"swims"}]},
+        {"scene":"🏃","english":"Seongjin exercises at the field.","hint":"성진 ends in ㄴ → 이. 에서 = action place.","answer":["성진","이","운동장","에서","운동해요"],"types":["name","particle","place","particle","verb"],"chunks":[{"text":"성진이","type":"name","en":"Seongjin"},{"text":"운동장에서","type":"place","en":"at the field"},{"text":"운동해요","type":"verb","en":"exercises"}]},
+        {"scene":"👴👵","english":"Grandpa and grandma are at the park.","hint":"하고 = and, 는 = topic, 에 = location (just being there), 있어요!","answer":["할아버지","하고","할머니","는","공원","에","있어요"],"types":["name","particle","name","particle","place","particle","verb"],"chunks":[{"text":"할아버지하고 할머니는","type":"name","en":"Grandpa and grandma"},{"text":"공원에","type":"place","en":"at the park"},{"text":"있어요","type":"verb","en":"are"}]},
+        {"scene":"🥋","english":"Liam and Kayo do taekwondo at the taekwondo gym.","hint":"하고 = and, 는 = topic, 에서 = action place, 를 = object","answer":["리암","하고","카요","는","태권도장","에서","태권도","를","해요"],"types":["name","particle","name","particle","place","particle","name","particle","verb"],"chunks":[{"text":"리암하고 카요는","type":"name","en":"Liam and Kayo"},{"text":"태권도장에서","type":"place","en":"at the taekwondo gym"},{"text":"태권도를","type":"name","en":"taekwondo"},{"text":"해요","type":"verb","en":"do"}]},
+        {"scene":"📸","english":"Mira and Seulgi take photos at the park.","hint":"하고 = and, 는 = topic, 에서 = action place, 을 = object","answer":["미라","하고","슬기","는","공원","에서","사진","을","찍어요"],"types":["name","particle","name","particle","place","particle","name","particle","verb"],"chunks":[{"text":"미라하고 슬기는","type":"name","en":"Mira and Seulgi"},{"text":"공원에서","type":"place","en":"at the park"},{"text":"사진을","type":"name","en":"photos"},{"text":"찍어요","type":"verb","en":"take"}]}
       ]
     }
   }

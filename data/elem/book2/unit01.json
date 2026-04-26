@@ -125,6 +125,18 @@
           "subtitle": "주어를 표시하는 조사예요",
           "pattern": "받침 O → 이 / 받침 X → 가",
           "meaning": "subject marker",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "받침 있음 (consonant ending) → 이",
+              "examples": ["준영 → 준영이 (받침 ㅇ)", "선생님 → 선생님이 (받침 ㅁ)", "보람 → 보람이 (받침 ㅁ)"]
+            },
+            {
+              "color": "blue",
+              "label": "받침 없음 (vowel ending) → 가",
+              "examples": ["민수 → 민수가 (모음 ㅜ)", "슬기 → 슬기가 (모음 ㅣ)", "재우 → 재우가 (모음 ㅜ)"]
+            }
+          ],
           "examples": [
             {
               "korean": "남자아이가 노래해요.",
@@ -227,6 +239,16 @@
           "answer": ["선생님이", "밥을", "먹어요."],
           "english": "The teacher eats a meal."
         }
+      ],
+      "quiz_items": [
+        {"scene":"📞","english":"Minsu makes a phone call.","subject":"민수","verb":"전화해요","particle":"가","hint":"민수 ends in ㅜ → vowel → 가","answer":"민수가 전화해요"},
+        {"scene":"📖","english":"Junyeong studies.","subject":"준영","verb":"공부해요","particle":"이","hint":"준영 ends in ㅇ → consonant → 이","answer":"준영이 공부해요"},
+        {"scene":"🌅","english":"Jaewoo wakes up.","subject":"재우","verb":"일어나요","particle":"가","hint":"재우 ends in ㅜ → vowel → 가","answer":"재우가 일어나요"},
+        {"scene":"🏊","english":"Seulgi swims.","subject":"슬기","verb":"수영해요","particle":"가","hint":"슬기 ends in ㅣ → vowel → 가","answer":"슬기가 수영해요"},
+        {"scene":"🏫","english":"Seongjin goes to school.","subject":"성진","verb":"학교에 가요","particle":"이","hint":"성진 ends in ㄴ → consonant → 이","answer":"성진이 학교에 가요"},
+        {"scene":"📺","english":"Grandpa watches TV.","subject":"할아버지","verb":"텔레비전을 봐요","particle":"가","hint":"할아버지 ends in ㅣ → vowel → 가","answer":"할아버지가 텔레비전을 봐요"},
+        {"scene":"💬","english":"Mira talks with friends.","subject":"미라","verb":"이야기해요","particle":"가","hint":"미라 ends in ㅏ → vowel → 가","answer":"미라가 이야기해요"},
+        {"scene":"🏃","english":"Suyeon exercises.","subject":"수연","verb":"운동해요","particle":"이","hint":"수연 ends in ㄴ → consonant → 이","answer":"수연이 운동해요"}
       ]
     }
   }
