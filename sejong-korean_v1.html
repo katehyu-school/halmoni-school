@@ -1576,7 +1576,7 @@ body {
         </button>
       </li>
       <li class="unit-item">
-        <button class="unit-btn" onclick="selectUnit(this,4)">
+        <button class="unit-btn" onclick="selectUnit(this,4);loadUnit(4)">
           <span class="unit-num">04</span>
           <span>한국어를 공부해요<span class="unit-subtitle">I'm studying Korean</span></span>
         </button>
@@ -2545,6 +2545,15 @@ const unitMeta = {
     ],
     cats:['All','Objects','Location','People','Phrases'],
   },
+  4: {
+    badge:'04', title:'한국어를 공부해요',
+    topic:"I'm studying Korean · Daily Verbs and Activities",
+    goals:[
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'V-아/어요'},
+      {color:'blue',label:'N을/를'},{color:'teal',label:'일상 대화'},{color:'coral',label:'실생활 적용'}
+    ],
+    cats:['All'],
+  },
 };
 
 // ══════════════════════════════════════════
@@ -2699,7 +2708,7 @@ const quizData3 = [
 // ══════════════════════════════════════════
 let currentUnit = 1;
 
-function loadUnit(num) {
+async function loadUnit(num) {
   currentUnit = num;
   const meta = unitMeta[num];
   if (!meta) return;
@@ -2711,18 +2720,37 @@ function loadUnit(num) {
   document.getElementById('unitGoals').innerHTML =
     meta.goals.map(g => `<span class="goal-tag ${g.color}">${g.label}</span>`).join('');
 
+  // Reset to vocab tab
+  document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-section="vocab"]').classList.add('active');
+  document.getElementById('panel-vocab').classList.add('active');
+
+  document.querySelector('.content-area').scrollTop = 0;
+
+  // ── JSON-driven units (4+) use AdultRenderer ──
+  if (num >= 4) {
+    if (window.AdultRenderer) {
+      try {
+        await AdultRenderer.renderAll(num);
+      } catch(e) {
+        console.error('[loadUnit] AdultRenderer 오류:', e);
+        document.getElementById('panel-vocab').innerHTML =
+          `<div class="panel-card" style="color:var(--coral)">⚠️ 유닛 ${num} 데이터를 불러오지 못했습니다.<br><small>${e.message}</small></div>`;
+      }
+    } else {
+      console.warn('[loadUnit] AdultRenderer가 아직 로드되지 않았습니다.');
+    }
+    return;
+  }
+
+  // ── Hardcoded units 1-3 ──
   // Swap data
   window._vd   = num===1 ? vocabData   : num===2 ? vocabData2   : vocabData3;
   window._bd   = num===1 ? blankData   : num===2 ? blankData2   : blankData3;
   window._ss   = num===1 ? sentences   : num===2 ? sentences2   : sentences3;
   window._qd   = num===1 ? quizData    : num===2 ? quizData2    : quizData3;
   window._cats = meta.cats;
-
-  // Reset to vocab tab
-  document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-  document.querySelector('[data-section="vocab"]').classList.add('active');
-  document.getElementById('panel-vocab').classList.add('active');
 
   // Reset state
   selectedKr = null; selectedEn = null; matchedPairs = 0;
@@ -2740,8 +2768,6 @@ function loadUnit(num) {
   updateUsagePanel(num);   // 이 안에 빌더 HTML이 생성됨
   updateRealPanel(num);
   buildSentence(0);        // 빌더 HTML 생성 후에 실행
-
-  document.querySelector('.content-area').scrollTop = 0;
 }
 
 // ── Grammar panel ──
@@ -3115,5 +3141,10 @@ function updateRealPanel(num) {
 
 
 </script>
+
+<!-- ── HalmoniCore 공통 라이브러리 + 성인반 JSON 로더 / 렌더러 ── -->
+<script src="/halmoni-school/core/core.js"></script>
+<script src="/halmoni-school/core/adult-data-loader.js"></script>
+<script src="/halmoni-school/core/adult-renderer.js"></script>
 </body>
 </html>
