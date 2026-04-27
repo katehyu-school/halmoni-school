@@ -2327,6 +2327,7 @@ function renderQuiz() {
   const ex = document.getElementById('quizExplanation');
   const checkBtn = document.getElementById('checkQuizBtn');
   const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = false;
 
   if (quizAnswered[currentQuiz] !== null) {
     ex.textContent = '💡 ' + q.ex;
