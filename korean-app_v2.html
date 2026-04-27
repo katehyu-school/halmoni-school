@@ -2199,14 +2199,14 @@ const dolls4 = [
 let u4Questions = [];
 // [LEGACY FALLBACK]
 const _u4QFallback = [
-  {scene:'🚂✅', english:'There is a toy train.',        hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','있어요'],   types:['noun','particle','verb']},
-  {scene:'✈️❌', english:'There is no toy airplane.',    hint:'비행기 ends in ㅣ → vowel → 가',     answer:['장난감 비행기','가','없어요'], types:['noun','particle','verb']},
-  {scene:'🧸✅', english:'There is a teddy bear.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','있어요'],       types:['noun','particle','verb']},
-  {scene:'🐰❌', english:'There is no rabbit doll.',     hint:'인형 ends in ㅇ → consonant → 이',   answer:['토끼 인형','이','없어요'],     types:['noun','particle','verb']},
-  {scene:'🚗✅', english:'There is a toy car.',          hint:'자동차 ends in ㅏ → vowel → 가',     answer:['장난감 자동차','가','있어요'], types:['noun','particle','verb']},
-  {scene:'🐶✅', english:'There is a puppy doll.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['강아지 인형','이','있어요'],   types:['noun','particle','verb']},
-  {scene:'🚂❌', english:'There is no toy train.',       hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','없어요'],   types:['noun','particle','verb']},
-  {scene:'🧸❌', english:'There is no teddy bear.',      hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','없어요'],       types:['noun','particle','verb']},
+  {scene:'🚂✅', english:'There is a toy train.',        hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','있어요'],   types:['noun','particle','verb'],   distractors:[{text:'이',type:'particle'},{text:'없어요',type:'verb'},{text:'곰 인형',type:'noun'}]},
+  {scene:'✈️❌', english:'There is no toy airplane.',    hint:'비행기 ends in ㅣ → vowel → 가',     answer:['장난감 비행기','가','없어요'], types:['noun','particle','verb'],   distractors:[{text:'이',type:'particle'},{text:'있어요',type:'verb'},{text:'토끼 인형',type:'noun'}]},
+  {scene:'🧸✅', english:'There is a teddy bear.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','있어요'],       types:['noun','particle','verb'],   distractors:[{text:'가',type:'particle'},{text:'없어요',type:'verb'},{text:'장난감 기차',type:'noun'}]},
+  {scene:'🐰❌', english:'There is no rabbit doll.',     hint:'인형 ends in ㅇ → consonant → 이',   answer:['토끼 인형','이','없어요'],     types:['noun','particle','verb'],   distractors:[{text:'가',type:'particle'},{text:'있어요',type:'verb'},{text:'장난감 비행기',type:'noun'}]},
+  {scene:'🚗✅', english:'There is a toy car.',          hint:'자동차 ends in ㅏ → vowel → 가',     answer:['장난감 자동차','가','있어요'], types:['noun','particle','verb'],   distractors:[{text:'이',type:'particle'},{text:'없어요',type:'verb'},{text:'강아지 인형',type:'noun'}]},
+  {scene:'🐶✅', english:'There is a puppy doll.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['강아지 인형','이','있어요'],   types:['noun','particle','verb'],   distractors:[{text:'가',type:'particle'},{text:'없어요',type:'verb'},{text:'장난감 자동차',type:'noun'}]},
+  {scene:'🚂❌', english:'There is no toy train.',       hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','없어요'],   types:['noun','particle','verb'],   distractors:[{text:'이',type:'particle'},{text:'있어요',type:'verb'},{text:'강아지 인형',type:'noun'}]},
+  {scene:'🧸❌', english:'There is no teddy bear.',      hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','없어요'],       types:['noun','particle','verb'],   distractors:[{text:'가',type:'particle'},{text:'있어요',type:'verb'},{text:'장난감 자동차',type:'noun'}]},
 ];
 
 let u3Questions = [];
