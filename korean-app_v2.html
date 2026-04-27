@@ -1093,9 +1093,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <div class="sidebar-divider"></div>
 
-  <div class="lesson-item locked">
+  <div class="lesson-item" id="lesson-4" onclick="switchUnit(4)">
     <span class="lesson-num">4과</span>
-    <div><span class="lesson-title-text">장난감 기차가 있어요</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+    <span class="lesson-title-text">장난감 기차가 있어요</span>
   </div>
   <div class="lesson-item locked">
     <span class="lesson-num">5과</span>
@@ -1511,6 +1511,87 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
 </div>
 
+<!-- ══════ UNIT 4 ══════ -->
+<div class="unit" id="unit4">
+  <div class="unit-heading">
+    <span class="unit-num">4</span>
+    <span class="unit-title">장난감 기차가 있어요</span>
+  </div>
+  <nav class="section-nav">
+    <button class="snav-btn active" onclick="switchSection(4,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection(4,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection(4,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
+  </nav>
+
+  <!-- VOCAB -->
+  <div class="section active" id="u4-vocab">
+    <div class="card">
+      <div class="section-title">🚂 장난감 — Toys</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc4-toys"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">🧸 인형 — Dolls</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc4-dolls"></div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="section" id="u4-grammar">
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="u4-quiz">
+    <div class="progress-wrap">
+      <span class="prog-label" id="u4-prog-label">문제 1 / 8</span>
+      <div class="prog-bar"><div class="prog-fill" id="u4-prog-fill" style="width:0%"></div></div>
+      <span class="prog-score" id="u4-prog-score">⭐ 0점</span>
+    </div>
+    <div class="card" id="u4-qcard">
+      <span class="quiz-badge" style="background:var(--lav);">4과 · 있어요 / 없어요</span>
+      <div class="scene-box" id="u4-scene">🚂</div>
+      <div class="question-english" id="u4-qenglish">Build the sentence!</div>
+      <div class="section-sub">Click or drag cards to build the sentence. Drag inside to reorder!</div>
+
+      <div style="background:var(--lav-light);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.83rem;color:#5A3F7A;display:flex;gap:14px;flex-wrap:wrap;">
+        <span>받침 있음 → 이 있어요/없어요</span>
+        <span>받침 없음 → 가 있어요/없어요</span>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--sky)"></div>Noun 명사</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>Particle 조사</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Verb 동사</div>
+      </div>
+
+      <div class="drop-zone" id="u4-dropzone">
+        <span class="drop-zone-placeholder">Click or drag cards here — drag inside to reorder!</span>
+      </div>
+      <div class="word-bank" id="u4-wordbank"></div>
+
+      <div class="feedback" id="u4-fb"></div>
+      <div class="btn-row">
+        <button class="btn btn-hint" onclick="hintU4()">💡 Hint</button>
+        <button class="btn btn-reset" onclick="resetU4()">🔄 Reset</button>
+        <button class="btn btn-check" onclick="checkU4()">✅ Check!</button>
+        <button class="btn btn-next" id="u4-next" onclick="nextU4()" disabled>Next ▶</button>
+      </div>
+    </div>
+    <div class="complete-screen" id="u4-complete">
+      <div class="complete-emoji">🌟</div>
+      <div class="complete-title">완벽해요! Perfect!</div>
+      <div class="complete-score" id="u4-complete-score"></div>
+      <div class="btn-row" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-reset" onclick="restartUnit(4)">🔄 4과 다시</button>
+        <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
+        <button class="btn btn-next" onclick="showTOC()">📖 목차로</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </main>
 </div>
 <div class="confetti-wrap" id="confetti"></div>
@@ -1770,8 +1851,8 @@ function showTOC(){
 function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
-  // 사이드바 lesson-item 활성화 (1~3과만 id 존재)
-  [1,2,3].forEach(i=>{
+  // 사이드바 lesson-item 활성화
+  [1,2,3,4].forEach(i=>{
     const el = document.getElementById('lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
@@ -2064,13 +2145,14 @@ function restartUnit(n){
     document.getElementById('u2-step-label').textContent='Step 1 — 단어 + 조사 짝맞추기';
     renderS1(); switchUnit(2); switchSection(2,'quiz'); syncNext(2,0); }
   if(n===3){ u3Idx=0; u3Score=0; document.getElementById('u3-qcard').style.display='block'; document.getElementById('u3-complete').classList.remove('show'); renderU3(); switchUnit(3); switchSection(3,'quiz'); syncNext(3,0); }
+  if(n===4){ u4Idx=0; u4Score=0; document.getElementById('u4-qcard').style.display='block'; document.getElementById('u4-complete').classList.remove('show'); renderU4(); switchUnit(4); switchSection(4,'quiz'); syncNext(4,0); }
 }
 
 function restartAll(){
-  u1Idx=0;u1Score=0;u2Idx=0;u2Score=0;u3Idx=0;u3Score=0;
-  ['u1-qcard','u2-qcard','u3-qcard'].forEach(id=>document.getElementById(id).style.display='block');
-  ['u1-complete','u2-complete','u3-complete'].forEach(id=>document.getElementById(id).classList.remove('show'));
-  renderU1(); renderU2(); renderU3();
+  u1Idx=0;u1Score=0;u2Idx=0;u2Score=0;u3Idx=0;u3Score=0;u4Idx=0;u4Score=0;
+  ['u1-qcard','u2-qcard','u3-qcard','u4-qcard'].forEach(id=>document.getElementById(id).style.display='block');
+  ['u1-complete','u2-complete','u3-complete','u4-complete'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  renderU1(); renderU2(); renderU3(); renderU4();
   switchUnit(1); switchSection(1,'quiz');
   syncNext(1, 0);
 }
@@ -2100,6 +2182,33 @@ const verbs3 = [
   {emoji:'⛰️',kr:'산에 가요',en:'goes to the mountain',rom:'san-e gayo'},
   {emoji:'📝',kr:'숙제를 해요',en:'does homework',rom:'sukje-reul haeyo'},
   {emoji:'📞',kr:'전화를 해요',en:'makes a phone call',rom:'jeonhwa-reul haeyo'},
+];
+
+// ══════════════════════════════════════════
+// UNIT 4 DATA
+// ══════════════════════════════════════════
+const toys4 = [
+  {emoji:'🚂', kr:'장난감 기차', en:'toy train', rom:'jangnan-gam gi-cha'},
+  {emoji:'✈️', kr:'장난감 비행기', en:'toy airplane', rom:'jangnan-gam bi-haeng-gi'},
+  {emoji:'🚗', kr:'장난감 자동차', en:'toy car', rom:'jangnan-gam ja-dong-cha'},
+];
+const dolls4 = [
+  {emoji:'🧸', kr:'곰 인형', en:'teddy bear', rom:'gom in-hyeong'},
+  {emoji:'🐰', kr:'토끼 인형', en:'rabbit doll', rom:'to-kki in-hyeong'},
+  {emoji:'🐶', kr:'강아지 인형', en:'puppy doll', rom:'gang-a-ji in-hyeong'},
+];
+
+let u4Questions = [];
+// [LEGACY FALLBACK]
+const _u4QFallback = [
+  {scene:'🚂✅', english:'There is a toy train.',        hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','있어요'],   types:['noun','particle','verb']},
+  {scene:'✈️❌', english:'There is no toy airplane.',    hint:'비행기 ends in ㅣ → vowel → 가',     answer:['장난감 비행기','가','없어요'], types:['noun','particle','verb']},
+  {scene:'🧸✅', english:'There is a teddy bear.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','있어요'],       types:['noun','particle','verb']},
+  {scene:'🐰❌', english:'There is no rabbit doll.',     hint:'인형 ends in ㅇ → consonant → 이',   answer:['토끼 인형','이','없어요'],     types:['noun','particle','verb']},
+  {scene:'🚗✅', english:'There is a toy car.',          hint:'자동차 ends in ㅏ → vowel → 가',     answer:['장난감 자동차','가','있어요'], types:['noun','particle','verb']},
+  {scene:'🐶✅', english:'There is a puppy doll.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['강아지 인형','이','있어요'],   types:['noun','particle','verb']},
+  {scene:'🚂❌', english:'There is no toy train.',       hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','없어요'],   types:['noun','particle','verb']},
+  {scene:'🧸❌', english:'There is no teddy bear.',      hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','없어요'],       types:['noun','particle','verb']},
 ];
 
 let u3Questions = [];
@@ -2387,6 +2496,107 @@ function updateU3Progress(){
 }
 
 // ══════════════════════════════════════════
+// UNIT 4 — QUIZ LOGIC
+// ══════════════════════════════════════════
+let u4Idx=0, u4Score=0;
+let u4Dropped=[], u4IdCounter=0;
+const typeClass4={noun:'',particle:'particle',verb:'verb'};
+
+function makeBankCard4(text, type){
+  const c=document.createElement('div');
+  c.className='wcard '+(typeClass4[type]||'');
+  c.textContent=text; c.draggable=true;
+  c.dataset.text=text; c.dataset.type=type;
+  c.addEventListener('dragstart',e=>{
+    dragSrcType='bank'; dragSrcEl=c;
+    c.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',text);
+  });
+  c.addEventListener('dragend',()=>c.classList.remove('dragging'));
+  c.addEventListener('click',()=>{
+    if(!c.dataset.used){
+      const id=++u4IdCounter;
+      u4Dropped.push({text,type,id});
+      c.dataset.used='1'; c.classList.add('used');
+      renderU4Zone();
+    }
+  });
+  return c;
+}
+
+function removeFromZone4(id){
+  const idx=u4Dropped.findIndex(w=>w.id===id);
+  if(idx===-1) return;
+  const {text}=u4Dropped[idx];
+  u4Dropped.splice(idx,1);
+  const bankCards=document.querySelectorAll('#u4-wordbank .wcard');
+  for(const bc of bankCards){
+    if(bc.dataset.text===text && bc.dataset.used==='1'){
+      bc.dataset.used=''; bc.classList.remove('used'); break;
+    }
+  }
+  renderU4Zone();
+}
+
+function renderU4Zone(){ setupDropzoneFor('u4-dropzone', u4Dropped, u4IdCounter, removeFromZone4, typeClass4, null); }
+
+function updateU4Progress(){
+  const pct=Math.round((u4Idx/u4Questions.length)*100);
+  document.getElementById('u4-prog-fill').style.width=pct+'%';
+  document.getElementById('u4-prog-label').textContent=`문제 ${u4Idx+1} / ${u4Questions.length}`;
+  document.getElementById('u4-prog-score').textContent=`⭐ ${u4Score}점`;
+}
+
+function renderU4(){
+  if(u4Idx >= u4Questions.length) return;
+  const q=u4Questions[u4Idx];
+  u4Dropped=[]; u4IdCounter=0;
+  document.getElementById('u4-scene').textContent=q.scene;
+  document.getElementById('u4-qenglish').textContent='👉 '+q.english;
+  const fb=document.getElementById('u4-fb'); fb.className='feedback'; fb.innerHTML='';
+  document.getElementById('u4-next').disabled=true;
+  renderU4Zone();
+  const bank=document.getElementById('u4-wordbank'); bank.innerHTML='';
+  const words=q.answer.map((w,i)=>({text:w,type:q.types[i]})).sort(()=>Math.random()-0.5);
+  words.forEach(w=>bank.appendChild(makeBankCard4(w.text,w.type)));
+  updateU4Progress();
+}
+
+function checkU4(){
+  const q=u4Questions[u4Idx];
+  const fb=document.getElementById('u4-fb');
+  if(u4Dropped.length===0){fb.className='feedback wrong';fb.textContent='⚠️ Drop some cards first!';return;}
+  const built=u4Dropped.map(w=>w.text).join('');
+  const correct=q.answer.join('');
+  if(built===correct){
+    fb.className='feedback correct';
+    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer.join('')}</div><div style="font-size:0.85rem;margin-top:4px;color:#388E3C;">${q.english}</div>`;
+    u4Score++; document.getElementById('u4-next').disabled=false;
+    document.getElementById('u4-prog-score').textContent=`⭐ ${u4Score}점`;
+    launchConfetti();
+    syncResult(true, correct);
+  } else {
+    fb.className='feedback wrong';
+    fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+    syncResult(false, built);
+  }
+}
+
+function hintU4(){const q=u4Questions[u4Idx];const fb=document.getElementById('u4-fb');fb.className='feedback hint';fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`;}
+function resetU4(){renderU4();}
+function nextU4(){
+  u4Idx++;
+  syncNext(4, u4Idx);
+  if(u4Idx>=u4Questions.length){
+    document.getElementById('u4-qcard').style.display='none';
+    document.getElementById('u4-complete').classList.add('show');
+    document.getElementById('u4-complete-score').textContent=`You got ${u4Score} out of ${u4Questions.length}! (${u4Score}/${u4Questions.length})`;
+    launchConfetti();
+  } else {renderU4();}
+}
+
+// ══════════════════════════════════════════
 // UNIT 2 — STEP 1: 청크 drag & drop
 // ══════════════════════════════════════════
 let s1Idx = 0;
@@ -2524,15 +2734,17 @@ function goToStep2() {
 async function init(){
   // Load quiz data from JSON, fall back to hardcoded arrays if unavailable
   try {
-    const [d1, d2, d3] = await Promise.all([1,2,3].map(n => HalmoniCore.loadUnit(n)));
+    const [d1, d2, d3, d4] = await Promise.all([1,2,3,4].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
+    u4Questions = (d4 && d4.practice && d4.practice.quiz_items) || _u4QFallback;
   } catch(e) {
     console.warn('[init] quiz data load failed, using fallback', e);
     u1Questions = _u1QFallback;
     u2Questions = _u2QFallback;
     u3Questions = _u3QFallback;
+    u4Questions = _u4QFallback;
   }
   buildFlashcards('fc-names',names,'sky');
   buildFlashcards('fc-verbs',verbs1,'mint');
@@ -2541,7 +2753,9 @@ async function init(){
   buildFlashcards('fc2-verbs',verbs2,'green');
   buildFlashcards('fc3-time',timeWords,'mint');
   buildFlashcards('fc3-verbs',verbs3,'green');
-  renderU1(); renderU2(); renderU3(); renderS1();
+  buildFlashcards('fc4-toys',toys4,'lav');
+  buildFlashcards('fc4-dolls',dolls4,'coral');
+  renderU1(); renderU2(); renderU3(); renderU4(); renderS1();
 }
 init();
 </script>
