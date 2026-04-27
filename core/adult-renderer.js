@@ -148,10 +148,10 @@ const AdultRenderer = (() => {
   <table style="width:100%;border-collapse:collapse;font-family:var(--font-sans);">
     <thead>
       <tr style="background:#f5f5f3;">
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">기본형 (Dictionary Form)</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">어간 (Verb Stem)</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">규칙 (Ending Suffix)</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">활용형 (Conjugated Form)</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">기본형</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">어간</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">규칙</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">활용형</th>
       </tr>
     </thead>
     <tbody style="border-top:1px solid #e8e8e8;">${rows}</tbody>
@@ -319,13 +319,13 @@ ${buildQnA(section.qna)}`;
 
       return `
 <div class="quiz-question" id="quiz-q-${item.id}">
-  <div style="font-size:0.82rem;color:#888;margin-bottom:6px;">문제 ${idx + 1} / ${_quizItems.length}</div>
+  <div style="font-size:0.82rem;color:#888;margin-bottom:6px;">Question ${idx + 1} of ${_quizItems.length}</div>
   <div style="font-size:0.95rem;font-weight:600;margin-bottom:4px;">${item.question}</div>
   ${sentenceDisplay}
   <div class="quiz-options">${opts}</div>
   <div class="quiz-explanation" id="exp-${item.id}" style="display:none;"></div>
   <div style="text-align:right;margin-top:8px;">
-    <button class="adult-next-btn" id="next-${item.id}" onclick="AdultRenderer._nextQuestion('${item.id}')" style="display:none;">다음 ▶</button>
+    <button class="adult-next-btn" id="next-${item.id}" onclick="AdultRenderer._nextQuestion('${item.id}')" style="display:none;">Next ▶</button>
   </div>
 </div>`;
     }
@@ -333,20 +333,20 @@ ${buildQnA(section.qna)}`;
     if (item.type === 'conjugation') {
       return `
 <div class="quiz-question" id="quiz-q-${item.id}">
-  <div style="font-size:0.82rem;color:#888;margin-bottom:6px;">문제 ${idx + 1} / ${_quizItems.length}</div>
+  <div style="font-size:0.82rem;color:#888;margin-bottom:6px;">Question ${idx + 1} of ${_quizItems.length}</div>
   <div style="font-size:0.95rem;font-weight:600;margin-bottom:4px;">${item.question}</div>
   <div style="font-size:1.1rem;font-family:var(--font-serif);margin:10px 0;color:var(--blue);">${item.base}</div>
   <div style="display:flex;gap:10px;align-items:center;">
-    <input type="text" id="conj-${item.id}" placeholder="활용형을 입력하세요"
+    <input type="text" id="conj-${item.id}" placeholder="Type the verb form"
       style="flex:1;padding:10px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:1rem;font-family:var(--font-serif);"
       onkeydown="if(event.key==='Enter') AdultRenderer._checkConjugation('${item.id}')">
     <button onclick="AdultRenderer._checkConjugation('${item.id}')"
-      style="padding:10px 18px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:0.9rem;cursor:pointer;">확인</button>
+      style="padding:10px 18px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:0.9rem;cursor:pointer;">Check</button>
   </div>
   <div style="font-size:0.8rem;color:#888;margin-top:6px;">💡 ${item.hint}</div>
   <div class="quiz-explanation" id="exp-${item.id}" style="display:none;margin-top:10px;"></div>
   <div style="text-align:right;margin-top:8px;">
-    <button class="adult-next-btn" id="next-${item.id}" onclick="AdultRenderer._nextQuestion('${item.id}')" style="display:none;">다음 ▶</button>
+    <button class="adult-next-btn" id="next-${item.id}" onclick="AdultRenderer._nextQuestion('${item.id}')" style="display:none;">Next ▶</button>
   </div>
 </div>`;
     }
@@ -363,7 +363,7 @@ ${buildQnA(section.qna)}`;
       prog.style.width = pct + '%';
     }
     const scoreEl = document.getElementById('adult-quiz-score');
-    if (scoreEl) scoreEl.textContent = `⭐ ${_quizScore}점`;
+    if (scoreEl) scoreEl.textContent = `⭐ ${_quizScore} pts`;
   }
 
   function _selectOption(btn, itemId) {
@@ -385,7 +385,7 @@ ${buildQnA(section.qna)}`;
 
     const expEl = document.getElementById(`exp-${itemId}`);
     if (expEl) {
-      expEl.innerHTML = `${isCorrect ? '🎉 정답!' : '❌ 오답!'} — ${item.explanation || ''}`;
+      expEl.innerHTML = `${isCorrect ? '🎉 Correct!' : '❌ Incorrect!'} — ${item.explanation || ''}`;
       expEl.style.display = 'block';
       expEl.className = 'quiz-explanation show ' + (isCorrect ? 'correct' : 'incorrect');
     }
@@ -411,8 +411,8 @@ ${buildQnA(section.qna)}`;
     const expEl = document.getElementById(`exp-${itemId}`);
     if (expEl) {
       expEl.innerHTML = isCorrect
-        ? `🎉 정답! <strong>${item.answer}</strong>`
-        : `❌ 오답. 정답: <strong>${item.answer}</strong>`;
+        ? `🎉 Correct! <strong>${item.answer}</strong>`
+        : `❌ Incorrect. Answer: <strong>${item.answer}</strong>`;
       expEl.style.display = 'block';
     }
     if (isCorrect) _quizScore++;
@@ -436,11 +436,11 @@ ${buildQnA(section.qna)}`;
     el.innerHTML = `
 <div class="panel-card" style="text-align:center;padding:40px 20px;">
   <div style="font-size:3rem;margin-bottom:12px;">🌟</div>
-  <div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:8px;">완료! Well done!</div>
-  <div style="font-size:1rem;color:#555;margin-bottom:20px;">${_quizScore} / ${_quizItems.length} 정답</div>
+  <div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;margin-bottom:8px;">Complete! Well done!</div>
+  <div style="font-size:1rem;color:#555;margin-bottom:20px;">${_quizScore} / ${_quizItems.length} correct</div>
   <button onclick="AdultRenderer._restartQuiz()"
     style="padding:12px 28px;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:1rem;cursor:pointer;">
-    🔄 다시 풀기
+    🔄 Try again
   </button>
 </div>`;
   }
@@ -457,8 +457,8 @@ ${buildQnA(section.qna)}`;
     el.innerHTML = `
 <div class="panel-card" style="padding-bottom:6px;">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-    <span style="font-size:0.85rem;color:#888;">문제 ${_quizIdx + 1} / ${_quizItems.length}</span>
-    <span id="adult-quiz-score" style="font-size:0.9rem;font-weight:700;color:var(--purple);">⭐ 0점</span>
+    <span style="font-size:0.85rem;color:#888;">Question ${_quizIdx + 1} of ${_quizItems.length}</span>
+    <span id="adult-quiz-score" style="font-size:0.9rem;font-weight:700;color:var(--purple);">⭐ 0 pts</span>
   </div>
   <div style="background:#eee;border-radius:4px;height:6px;">
     <div id="adult-quiz-progress" style="height:6px;background:var(--purple);border-radius:4px;width:0%;transition:width .3s;"></div>
