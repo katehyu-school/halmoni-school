@@ -2748,7 +2748,7 @@ async function loadUnit(num) {
   // 진행 중인 AdultRenderer 렌더 취소 (race condition 방지)
   if (window.AdultRenderer) AdultRenderer.cancelRender();
 
-  // AdultRenderer가 panel-vocab을 통째로 교체했을 수 있으므로 구조 복원
+  // AdultRenderer가 패널들을 통째로 교체했을 수 있으므로 구조 복원
   if (!document.getElementById('vocabGrid')) {
     document.getElementById('panel-vocab').innerHTML = `
       <div class="panel-card">
@@ -2764,6 +2764,22 @@ async function loadUnit(num) {
             <button class="check-btn" style="background:var(--amber)" onclick="resetMatching()">🔄 Restart</button>
             <span id="matchScore" style="font-size:13px;color:var(--gray-500)"></span>
           </div>
+        </div>
+      </div>`;
+  }
+  if (!document.getElementById('quizProgress')) {
+    document.getElementById('panel-quiz').innerHTML = `
+      <div class="panel-card">
+        <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>Quiz — multiple choice</div>
+        <div class="quiz-progress" id="quizProgress"></div>
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-explanation" id="quizExplanation"></div>
+        <div class="nav-btns">
+          <button class="btn-secondary" onclick="prevQuiz()" id="prevBtn">← Previous</button>
+          <button class="btn-primary" onclick="checkQuiz()" id="checkQuizBtn">✅ Check answer</button>
+          <button class="btn-primary" onclick="nextQuiz()" id="nextBtn" style="display:none">Next →</button>
+          <span class="quiz-score">Score: <strong id="scoreDisplay">0</strong> / <span id="totalDisplay">0</span></span>
         </div>
       </div>`;
   }
