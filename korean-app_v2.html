@@ -1091,8 +1091,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-title-text">언제 수영을 해요?</span>
   </div>
 
-  <div class="sidebar-divider"></div>
-
   <div class="lesson-item" id="lesson-4" onclick="switchUnit(4)">
     <span class="lesson-num">4과</span>
     <span class="lesson-title-text">장난감 기차가 있어요</span>
@@ -2558,8 +2556,11 @@ function renderU4(){
   document.getElementById('u4-next').disabled=true;
   renderU4Zone();
   const bank=document.getElementById('u4-wordbank'); bank.innerHTML='';
-  const words=q.answer.map((w,i)=>({text:w,type:q.types[i]})).sort(()=>Math.random()-0.5);
-  words.forEach(w=>bank.appendChild(makeBankCard4(w.text,w.type)));
+  // 정답 카드 + distractors 합쳐서 섞기
+  const answerCards = q.answer.map((w,i)=>({text:w, type:q.types[i]}));
+  const distractorCards = (q.distractors||[]).map(d=>({text:d.text, type:d.type}));
+  const allCards = [...answerCards, ...distractorCards].sort(()=>Math.random()-0.5);
+  allCards.forEach(w=>bank.appendChild(makeBankCard4(w.text,w.type)));
   updateU4Progress();
 }
 
