@@ -2745,6 +2745,9 @@ async function loadUnit(num) {
   }
 
   // ── Hardcoded units 1-3 ──
+  // 진행 중인 AdultRenderer 렌더 취소 (race condition 방지)
+  if (window.AdultRenderer) AdultRenderer.cancelRender();
+
   // AdultRenderer가 panel-vocab을 통째로 교체했을 수 있으므로 구조 복원
   if (!document.getElementById('vocabGrid')) {
     document.getElementById('panel-vocab').innerHTML = `
