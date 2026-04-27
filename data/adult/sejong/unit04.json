@@ -189,8 +189,8 @@
           "lines": [
             { "speaker": "마리", "korean": "재민 씨, 오늘 뭐 해요?", "english": "Jaemin, what are you doing today?" },
             { "speaker": "재민", "korean": "저는 친구를 만나요. 한국 영화를 봐요.", "english": "I'm meeting a friend. We're watching a Korean movie." },
-            { "speaker": "재민", "korean": "마리 씨는 뭐 해요?", "english": "What are you doing, Jaemin?" },
-            { "speaker": "마리", "korean": "저는 요리해요.", "english": "I'm meeting friends and watching Korean movies." }
+            { "speaker": "마리", "korean": "재민 씨는 뭐 해요?", "english": "What are you doing, Jaemin?" },
+            { "speaker": "재민", "korean": "저는 친구를 만나요. 한국 영화를 봐요.", "english": "I'm meeting friends and watching Korean movies." }
           ]
         },
         {
@@ -199,8 +199,8 @@
           "lines": [
             { "speaker": "안나", "korean": "유진 씨, 지금 뭐 해요?", "english": "Yujin, what are you doing now?" },
             { "speaker": "유진", "korean": "영화를 봐요.", "english": "I'm watching a movie." },
-            { "speaker": "유진", "korean": "안나 씨는 지금 뭐 해요?", "english": "What are you doing now, Yujin?" },
-            { "speaker": "안나", "korean": "공부해요.", "english": "I'm studying." }
+            { "speaker": "안나", "korean": "유진 씨는 지금 뭐 해요?", "english": "What are you doing now, Yujin?" },
+            { "speaker": "유진", "korean": "공부해요.", "english": "I'm studying." }
           ]
         },
         {
@@ -261,25 +261,25 @@
         {
           "id": "q04_01",
           "type": "multiple_choice",
-          "question": "빈칸에 알맞은 것을 고르세요.",
+          "question": "Choose the correct object marker.",
           "sentence": "저는 한국 영화___ 좋아해요.",
           "choices": ["을", "를", "이", "가"],
           "answer": "를",
-          "explanation": "영화는 받침이 없어서 '를'을 써요."
+          "explanation": "영화 ends with a vowel (no final consonant), so use '를'."
         },
         {
           "id": "q04_02",
           "type": "multiple_choice",
-          "question": "빈칸에 알맞은 것을 고르세요.",
+          "question": "Choose the correct object marker.",
           "sentence": "저는 책___ 읽어요.",
           "choices": ["을", "를", "이", "가"],
           "answer": "을",
-          "explanation": "책은 받침(ㄱ)이 있어서 '을'을 써요."
+          "explanation": "책 ends with a final consonant (ㄱ), so use '을'."
         },
         {
           "id": "q04_03",
           "type": "conjugation",
-          "question": "알맞은 형태로 바꾸세요.",
+          "question": "Conjugate into the present tense (해요 form).",
           "base": "먹다",
           "answer": "먹어요",
           "hint": "stem ends with ㄱ → 어요"
@@ -287,7 +287,7 @@
         {
           "id": "q04_04",
           "type": "conjugation",
-          "question": "알맞은 형태로 바꾸세요.",
+          "question": "Conjugate into the present tense (해요 form).",
           "base": "공부하다",
           "answer": "공부해요",
           "hint": "하다 verbs → 해요"
@@ -295,37 +295,37 @@
         {
           "id": "q04_05",
           "type": "multiple_choice",
-          "question": "대화를 완성하세요.",
+          "question": "Complete the conversation.",
           "sentence": "가: 오늘 뭐 해요?\n나: ___.",
           "choices": ["친구를 만나요", "친구가 만나요", "친구를 만나", "친구이 만나요"],
           "answer": "친구를 만나요",
-          "explanation": "친구는 받침이 없어서 '를', 동사는 '만나요'."
+          "explanation": "친구 ends with a vowel, so use '를'. The verb needs the polite ending → 만나요."
         },
         {
           "id": "q04_06",
           "type": "multiple_choice",
-          "question": "'무엇을 해요?'와 같은 의미는?",
+          "question": "Which has the same meaning as '무엇을 해요?'",
           "choices": ["뭐 해요?", "무슨 해요?", "무엇이 해요?", "뭐가 해요?"],
           "answer": "뭐 해요?",
-          "explanation": "무엇 → 뭐, 무엇을 → 뭘 / 뭐"
+          "explanation": "무엇 (formal) = 뭐 (casual). 무엇을 해요? → 뭐 해요? (object marker dropped in casual speech)"
         },
         {
           "id": "q04_07",
           "type": "multiple_choice",
-          "question": "어떤 발음이 맞아요?",
+          "question": "Which is the correct pronunciation?",
           "sentence": "한국어",
           "choices": ["한국어", "한구거", "항국어", "한국여"],
           "answer": "한구거",
-          "explanation": "받침 ㄱ + 어 → 연음 규칙으로 '한구거'로 발음해요."
+          "explanation": "Liaison rule: final consonant ㄱ links to the next vowel → 한국어 is pronounced '한구거'."
         },
         {
           "id": "q04_08",
           "type": "multiple_choice",
-          "question": "빈칸에 알맞은 것을 고르세요.",
+          "question": "Choose the correct object marker.",
           "sentence": "저는 음악___ 들어요.",
           "choices": ["을", "를", "이", "가"],
           "answer": "을",
-          "explanation": "음악은 받침(ㄱ)이 있어서 '을'을 써요."
+          "explanation": "음악 ends with a final consonant (ㄱ), so use '을'."
         }
       ]
     },
