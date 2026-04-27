@@ -755,16 +755,21 @@ function getVideoId(url){
   return m ? m[1] : null;
 }
 
-let _ytWin = null;
-
 function playVideo(url, title){
   if(!url){ alert('링크가 없어요! ✏️ 버튼으로 추가해 주세요.'); return; }
-  if(_ytWin && !_ytWin.closed){
-    _ytWin.location.href = url;
-    _ytWin.focus();
-  } else {
-    _ytWin = window.open(url, 'halmoni_youtube');
-  }
+  const id = getVideoId(url);
+  if(!id){ window.open(url, '_blank'); return; }
+  const embedUrl = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+  document.getElementById('yt-iframe').src = embedUrl;
+  const modal = document.getElementById('yt-modal');
+  modal.style.display = 'flex';
+}
+
+function closeYTModal(e){
+  // 배경 클릭 또는 닫기 버튼일 때만 닫기
+  if(e && e.target !== document.getElementById('yt-modal') && e.target.tagName !== 'BUTTON') return;
+  document.getElementById('yt-iframe').src = ''; // 영상 정지
+  document.getElementById('yt-modal').style.display = 'none';
 }
 
 // ══════════════════════════════
@@ -1182,5 +1187,25 @@ function launchConfetti(){
   setTimeout(()=>wrap.innerHTML='',2800);
 }
 </script>
+
+<!-- ── YOUTUBE 임베드 모달 ── -->
+<div id="yt-modal" onclick="closeYTModal(event)" style="
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.85); z-index:9999;
+  align-items:center; justify-content:center; flex-direction:column; gap:12px;">
+  <div style="position:relative; width:min(92vw,820px); aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.6);">
+    <iframe id="yt-iframe" width="100%" height="100%"
+      src="" frameborder="0"
+      allow="autoplay; encrypted-media; fullscreen"
+      allowfullscreen
+      style="display:block;"></iframe>
+  </div>
+  <button onclick="closeYTModal()" style="
+    background:white; border:none; border-radius:50px;
+    padding:10px 28px; font-family:'Jua',sans-serif;
+    font-size:1.1rem; cursor:pointer; color:#FF6B9D;
+    box-shadow:0 4px 16px rgba(0,0,0,0.3);">✕ 닫기</button>
+</div>
+
 </body>
 </html>
