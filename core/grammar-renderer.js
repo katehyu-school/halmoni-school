@@ -162,7 +162,7 @@ const GrammarRenderer = (() => {
   }
 
   async function renderAll() {
-    await Promise.all([1, 2, 3].map(render));
+    await Promise.all([1, 2, 3, 4].map(render));
   }
 
   return { render, renderAll };
