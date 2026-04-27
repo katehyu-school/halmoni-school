@@ -151,7 +151,7 @@ const AdultRenderer = (() => {
         <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">기본형 (Dictionary Form)</th>
         <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">어간 (Verb Stem)</th>
         <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">규칙 (Ending Suffix)</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">활용형 (Conjugated)</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">활용형 (Conjugated Form)</th>
       </tr>
     </thead>
     <tbody style="border-top:1px solid #e8e8e8;">${rows}</tbody>
