@@ -14,6 +14,12 @@
 
 const AdultRenderer = (() => {
 
+  // ── 렌더 세대 카운터 (race condition 방지) ─────────────────────
+  // renderAll 호출마다 증가. 각 render 함수는 DOM 쓰기 전에 세대가 맞는지 확인.
+  let _renderGen = 0;
+
+  function cancelRender() { _renderGen++; }
+
   // ── 공통 유틸 ─────────────────────────────────────────────────
 
   function speak(text) {
@@ -64,11 +70,12 @@ const AdultRenderer = (() => {
 </div>`;
   }
 
-  async function renderVocab(unitNumber) {
+  async function renderVocab(unitNumber, gen) {
     const el = document.getElementById('panel-vocab');
     if (!el) return;
     try {
       const categories = await HalmoniCore.adult.getVocab(unitNumber);
+      if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
       let html = '';
       for (const cat of categories) {
         const color = CAT_COLORS[cat.id] || CAT_COLORS.nouns;
@@ -204,11 +211,12 @@ ${buildExamples(section.examples)}
 ${buildQnA(section.qna)}`;
   }
 
-  async function renderGrammar(unitNumber) {
+  async function renderGrammar(unitNumber, gen) {
     const el = document.getElementById('panel-grammar');
     if (!el) return;
     try {
       const sections = await HalmoniCore.adult.getGrammar(unitNumber);
+      if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
       el.innerHTML = sections.map((s, i) => buildGrammarSection(s, i)).join('<hr style="border:none;border-top:1px solid #eee;margin:20px 0;">');
       _attachSpeakBtns(el);
       console.log(`[AdultRenderer] grammar: ${sections.length}개 섹션 완료`);
@@ -268,7 +276,7 @@ ${buildQnA(section.qna)}`;
     }).join('');
   }
 
-  async function renderUsage(unitNumber) {
+  async function renderUsage(unitNumber, gen) {
     const el = document.getElementById('panel-usage');
     if (!el) return;
     try {
@@ -276,6 +284,7 @@ ${buildQnA(section.qna)}`;
         HalmoniCore.adult.getDialogue(unitNumber),
         HalmoniCore.adult.getKeyPoints(unitNumber),
       ]);
+      if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
       el.innerHTML = scenes.map(buildDialogueScene).join('') + buildKeyPoints(keyPoints);
       _attachSpeakBtns(el);
       console.log(`[AdultRenderer] usage: 대화 ${scenes.length}개 완료`);
@@ -459,11 +468,12 @@ ${questions}`;
     _showQuestion(_quizIdx);
   }
 
-  async function renderQuiz(unitNumber) {
+  async function renderQuiz(unitNumber, gen) {
     const el = document.getElementById('panel-quiz');
     if (!el) return;
     try {
       _quizItems = await HalmoniCore.adult.getPractice(unitNumber);
+      if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
       _quizIdx = 0; _quizScore = 0; _quizAnswered = [];
       _renderQuizPanel();
       console.log(`[AdultRenderer] quiz: ${_quizItems.length}문제 완료`);
@@ -528,7 +538,7 @@ ${questions}`;
 </div>`;
   }
 
-  async function renderReal(unitNumber) {
+  async function renderReal(unitNumber, gen) {
     const el = document.getElementById('panel-real');
     if (!el) return;
     try {
@@ -536,6 +546,7 @@ ${questions}`;
         HalmoniCore.adult.getPronunciation(unitNumber),
         HalmoniCore.adult.getSelfCheck(unitNumber),
       ]);
+      if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
       el.innerHTML = buildPronunciation(pronSections) + buildSelfCheck(selfCheck);
       _attachSpeakBtns(el);
       console.log(`[AdultRenderer] real: 발음 ${pronSections.length}개 + 자기점검 ${selfCheck.length}개`);
@@ -563,13 +574,15 @@ ${questions}`;
 
   async function renderAll(unitNumber) {
     const n = unitNumber || (window._currentAdultUnit) || 4;
-    console.log(`[AdultRenderer] Unit ${n} 전체 렌더링 시작`);
+    _renderGen++;                    // 새 세대 발급
+    const myGen = _renderGen;        // 이 렌더 호출의 세대 번호
+    console.log(`[AdultRenderer] Unit ${n} 전체 렌더링 시작 (gen ${myGen})`);
     await Promise.all([
-      renderVocab(n),
-      renderGrammar(n),
-      renderUsage(n),
-      renderQuiz(n),
-      renderReal(n),
+      renderVocab(n, myGen),
+      renderGrammar(n, myGen),
+      renderUsage(n, myGen),
+      renderQuiz(n, myGen),
+      renderReal(n, myGen),
     ]);
     console.log(`[AdultRenderer] Unit ${n} 완료 ✅`);
   }
@@ -602,6 +615,7 @@ ${questions}`;
 
   return {
     renderAll,
+    cancelRender,  // 진행 중인 렌더 취소
     renderVocab,
     renderGrammar,
     renderUsage,
