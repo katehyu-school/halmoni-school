@@ -1,216 +1,339 @@
 {
   "unit": 4,
-  "title": "장난감 기차가 있어요",
-  "book": 2,
+  "title": "한국어를 공부해요",
+  "title_en": "I'm studying Korean",
+  "book": "세종한국어 1A",
+  "level": "adult",
+  "goal": {
+    "ko": "일상 생활에서 하는 일을 묻고 답할 수 있어요.",
+    "en": "Ask and answer questions about everyday activities."
+  },
+
   "sections": {
+
     "vocab": {
-      "items": [
+      "categories": [
         {
-          "id": "v04_01",
-          "category": "장난감",
-          "emoji": "🚂",
-          "korean": "장난감 기차",
-          "english": "toy train",
-          "romanization": "jang-nan-gam gi-cha",
-          "audio": null,
-          "exampleSentence": null
+          "id": "verbs",
+          "label": "기본 동사",
+          "label_en": "Basic Verbs",
+          "items": [
+            { "id": "v04_01", "korean": "먹어요",   "base": "먹다",   "english": "eat",             "romanization": "meo-geo-yo",    "emoji": "🍚" },
+            { "id": "v04_02", "korean": "읽어요",   "base": "읽다",   "english": "read",            "romanization": "il-geo-yo",     "emoji": "📖" },
+            { "id": "v04_03", "korean": "봐요",     "base": "보다",   "english": "watch / see",     "romanization": "bwa-yo",        "emoji": "📺" },
+            { "id": "v04_04", "korean": "마셔요",   "base": "마시다", "english": "drink",           "romanization": "ma-syeo-yo",    "emoji": "☕" },
+            { "id": "v04_05", "korean": "들어요",   "base": "듣다",   "english": "listen",          "romanization": "deu-reo-yo",    "emoji": "🎵" },
+            { "id": "v04_06", "korean": "만나요",   "base": "만나다", "english": "meet",            "romanization": "man-na-yo",     "emoji": "🤝" },
+            { "id": "v04_07", "korean": "자요",     "base": "자다",   "english": "sleep",           "romanization": "ja-yo",         "emoji": "😴" },
+            { "id": "v04_08", "korean": "일어나요", "base": "일어나다","english": "wake up",        "romanization": "i-reo-na-yo",   "emoji": "⏰" },
+            { "id": "v04_09", "korean": "일해요",   "base": "일하다", "english": "work",            "romanization": "il-hae-yo",     "emoji": "💼" },
+            { "id": "v04_10", "korean": "요리해요", "base": "요리하다","english": "cook",           "romanization": "yo-ri-hae-yo",  "emoji": "🍳" },
+            { "id": "v04_11", "korean": "공부해요", "base": "공부하다","english": "study",          "romanization": "gong-bu-hae-yo","emoji": "📝" }
+          ]
         },
         {
-          "id": "v04_02",
-          "category": "장난감",
-          "emoji": "✈️",
-          "korean": "장난감 비행기",
-          "english": "toy airplane",
-          "romanization": "jang-nan-gam bi-haeng-gi",
-          "audio": null,
-          "exampleSentence": null
+          "id": "adjectives",
+          "label": "형용사",
+          "label_en": "Adjectives",
+          "items": [
+            { "id": "v04_12", "korean": "맛있어요", "base": "맛있다", "english": "delicious / tasty", "romanization": "ma-si-sseo-yo", "emoji": "😋" },
+            { "id": "v04_13", "korean": "좋아해요", "base": "좋아하다","english": "like",             "romanization": "jo-a-hae-yo",   "emoji": "❤️" }
+          ]
         },
         {
-          "id": "v04_03",
-          "category": "장난감",
-          "emoji": "🚗",
-          "korean": "장난감 자동차",
-          "english": "toy car",
-          "romanization": "jang-nan-gam ja-dong-cha",
-          "audio": null,
-          "exampleSentence": null
+          "id": "nouns",
+          "label": "명사",
+          "label_en": "Nouns",
+          "items": [
+            { "id": "v04_14", "korean": "영화",   "english": "movie",   "romanization": "yeong-hwa", "emoji": "🎬" },
+            { "id": "v04_15", "korean": "한국어", "english": "Korean (language)", "romanization": "han-gu-geo", "emoji": "🇰🇷" },
+            { "id": "v04_16", "korean": "음악",   "english": "music",   "romanization": "eu-mak",    "emoji": "🎶" },
+            { "id": "v04_17", "korean": "게임",   "english": "game",    "romanization": "ge-im",     "emoji": "🎮" },
+            { "id": "v04_18", "korean": "쇼핑",   "english": "shopping","romanization": "syo-ping",  "emoji": "🛍️" },
+            { "id": "v04_19", "korean": "꽃",     "english": "flower",  "romanization": "kkot",      "emoji": "🌸" },
+            { "id": "v04_20", "korean": "고양이", "english": "cat",     "romanization": "go-yang-i", "emoji": "🐱" },
+            { "id": "v04_21", "korean": "김치",   "english": "kimchi",  "romanization": "gim-chi",   "emoji": "🌶️" },
+            { "id": "v04_22", "korean": "불고기", "english": "bulgogi", "romanization": "bul-go-gi", "emoji": "🥩" },
+            { "id": "v04_23", "korean": "피자",   "english": "pizza",   "romanization": "pi-ja",     "emoji": "🍕" },
+            { "id": "v04_24", "korean": "옷",     "english": "clothes", "romanization": "ot",        "emoji": "👗" }
+          ]
         },
         {
-          "id": "v04_04",
-          "category": "인형",
-          "emoji": "🧸",
-          "korean": "곰 인형",
-          "english": "teddy bear",
-          "romanization": "gom in-hyeong",
-          "audio": null,
-          "exampleSentence": null
-        },
-        {
-          "id": "v04_05",
-          "category": "인형",
-          "emoji": "🐰",
-          "korean": "토끼 인형",
-          "english": "rabbit doll",
-          "romanization": "to-kki in-hyeong",
-          "audio": null,
-          "exampleSentence": null
-        },
-        {
-          "id": "v04_06",
-          "category": "인형",
-          "emoji": "🐶",
-          "korean": "강아지 인형",
-          "english": "puppy doll",
-          "romanization": "gang-a-ji in-hyeong",
-          "audio": null,
-          "exampleSentence": null
+          "id": "expressions",
+          "label": "표현",
+          "label_en": "Expressions & Time Words",
+          "items": [
+            { "id": "v04_25", "korean": "오늘",   "english": "today",   "romanization": "o-neul",  "emoji": "📅" },
+            { "id": "v04_26", "korean": "지금",   "english": "now",     "romanization": "ji-geum", "emoji": "🕐" },
+            { "id": "v04_27", "korean": "정말",   "english": "really",  "romanization": "jeong-mal","emoji": "✨" },
+            { "id": "v04_28", "korean": "무슨",   "english": "what (kind of)", "romanization": "mu-seun", "emoji": "❓" },
+            { "id": "v04_29", "korean": "뭐 / 무엇", "english": "what", "romanization": "mwo / mu-eot", "emoji": "❓" }
+          ]
         }
       ]
     },
+
     "grammar": {
       "sections": [
         {
-          "id": "g04_isseoyo_eopseoyo",
-          "title": "있어요 / 없어요",
-          "subtitle": "소유와 존재를 나타내요",
-          "pattern": "N이/가 있어요 ↔ N이/가 없어요",
-          "meaning": "have / don't have",
-          "description": "있어요 means 'there is' or 'I have'. 없어요 means 'there isn't' or 'I don't have'. The subject marker 이/가 follows the same consonant/vowel rule from Unit 1.",
+          "id": "g04_a_eo_yo",
+          "title": "-아요/어요",
+          "subtitle": "동사·형용사 뒤에 붙어서 동작이나 상태를 나타내요",
+          "pattern": "Verb/Adj stem + 아요/어요",
+          "meaning": "present tense ending",
+          "description": "Attach to verb or adjective stems. Stems with ㅏ or ㅗ → 아요. All others → 어요. 하다 verbs → 해요.",
           "rule_boxes": [
             {
               "color": "red",
-              "label": "받침 있음 (consonant) → 이",
+              "label": "ㅏ / ㅗ 로 끝나면 → 아요",
               "examples": [
-                "인형 → 인형이 있어요 (받침 ㅇ)",
-                "인형 → 인형이 없어요 (받침 ㅇ)"
+                "가다 → 가요",
+                "살다 → 살아요",
+                "보다 → 봐요",
+                "만나다 → 만나요"
               ]
             },
             {
               "color": "blue",
-              "label": "받침 없음 (vowel) → 가",
+              "label": "그 외 → 어요",
               "examples": [
-                "기차 → 기차가 있어요 (모음 ㅏ)",
-                "기차 → 기차가 없어요 (모음 ㅏ)"
+                "먹다 → 먹어요",
+                "읽다 → 읽어요",
+                "맛있다 → 맛있어요",
+                "*듣다 → 들어요 (불규칙)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "하다 동사 → 해요",
+              "examples": [
+                "일하다 → 일해요",
+                "요리하다 → 요리해요",
+                "공부하다 → 공부해요"
+              ]
+            }
+          ],
+          "conjugation_table": [
+            { "base": "가다",     "stem": "가",   "rule": "ㅏ → 아요",  "result": "가요" },
+            { "base": "보다",     "stem": "보",   "rule": "ㅗ → 아요",  "result": "봐요" },
+            { "base": "만나다",   "stem": "만나", "rule": "ㅏ → 아요",  "result": "만나요" },
+            { "base": "먹다",     "stem": "먹",   "rule": "→ 어요",     "result": "먹어요" },
+            { "base": "읽다",     "stem": "읽",   "rule": "→ 어요",     "result": "읽어요" },
+            { "base": "맛있다",   "stem": "맛있", "rule": "→ 어요",     "result": "맛있어요" },
+            { "base": "듣다",     "stem": "들",   "rule": "불규칙 → 어요", "result": "들어요" },
+            { "base": "공부하다", "stem": "공부", "rule": "하다 → 해요", "result": "공부해요" }
+          ],
+          "examples": [
+            { "korean": "오늘 친구 만나요.",         "english": "I'm meeting a friend today.",       "highlight": "만나요" },
+            { "korean": "동생은 자요.",              "english": "My younger sibling is sleeping.",   "highlight": "자요" },
+            { "korean": "저는 빵 먹어요.",           "english": "I'm eating bread.",                 "highlight": "먹어요" },
+            { "korean": "책 읽어요.",               "english": "I'm reading a book.",              "highlight": "읽어요" },
+            { "korean": "주노 씨는 매일 요리해요.", "english": "Juno cooks every day.",             "highlight": "요리해요" },
+            { "korean": "불고기 맛있어요.",          "english": "The bulgogi is delicious.",         "highlight": "맛있어요" }
+          ],
+          "qna": [
+            { "question": "오늘 무엇을 해요?",   "answer": "친구 만나요." },
+            { "question": "지금 뭐 해요?",       "answer": "한국어 공부해요." },
+            { "question": "불고기 맛있어요?",     "answer": "네, 정말 맛있어요." }
+          ]
+        },
+        {
+          "id": "g04_eul_reul",
+          "title": "을/를",
+          "subtitle": "명사 뒤에 붙어서 목적어를 나타내요",
+          "pattern": "Noun + 을/를",
+          "meaning": "object marker",
+          "description": "Attach 을/를 after a noun to mark it as the object of the sentence. 받침 있음 → 을, 받침 없음 → 를.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "받침 있음 (consonant ending) → 을",
+              "examples": [
+                "책 → 책을",
+                "꽃 → 꽃을",
+                "게임 → 게임을"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "받침 없음 (vowel ending) → 를",
+              "examples": [
+                "영화 → 영화를",
+                "친구 → 친구를",
+                "불고기 → 불고기를",
+                "한국어 → 한국어를"
               ]
             }
           ],
           "examples": [
-            { "korean": "장난감 기차가 있어요.", "english": "There is a toy train. / I have a toy train.", "highlight": "가 있어요" },
-            { "korean": "장난감 비행기가 있어요.", "english": "There is a toy airplane.", "highlight": "가 있어요" },
-            { "korean": "곰 인형이 있어요.", "english": "There is a teddy bear. / I have a teddy bear.", "highlight": "이 있어요" },
-            { "korean": "토끼 인형이 없어요.", "english": "There is no rabbit doll. / I don't have a rabbit doll.", "highlight": "이 없어요" },
-            { "korean": "장난감 자동차가 없어요.", "english": "There is no toy car. / I don't have a toy car.", "highlight": "가 없어요" },
-            { "korean": "강아지 인형이 있어요.", "english": "There is a puppy doll.", "highlight": "이 있어요" }
+            { "korean": "책을 읽어요.",           "english": "I'm reading a book.",              "highlight": "을" },
+            { "korean": "음악을 들어요.",          "english": "I'm listening to music.",          "highlight": "을" },
+            { "korean": "한국 영화를 좋아해요.",   "english": "I like Korean movies.",            "highlight": "를" },
+            { "korean": "물을 마셔요.",            "english": "I'm drinking water.",              "highlight": "을" },
+            { "korean": "텔레비전을 봐요.",        "english": "I'm watching TV.",                "highlight": "을" },
+            { "korean": "노래를 들어요.",          "english": "I'm listening to a song.",         "highlight": "를" }
           ],
           "qna": [
-            { "question": "장난감 기차가 있어요?", "answer": "네, 있어요." },
-            { "question": "곰 인형이 있어요?", "answer": "아니요, 없어요." },
-            { "question": "토끼 인형이 있어요?", "answer": "네, 있어요." },
-            { "question": "장난감 자동차가 있어요?", "answer": "아니요, 없어요." }
+            { "question": "오늘 무엇을 해요?",     "answer": "책을 읽어요." },
+            { "question": "무엇을 좋아해요?",      "answer": "한국 영화를 좋아해요." }
           ]
         }
       ]
     },
-    "practice": {
-      "exercises": [],
-      "quiz_items": [
+
+    "dialogue": {
+      "scenes": [
         {
-          "scene": "🚂✅",
-          "english": "There is a toy train.",
-          "hint": "기차 ends in ㅏ → vowel → 가",
-          "answer": ["장난감 기차", "가", "있어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "이", "type": "particle"},
-            {"text": "없어요", "type": "verb"},
-            {"text": "곰 인형", "type": "noun"}
+          "id": "dlg04_01",
+          "title": "재민 씨와 마리 씨의 오늘",
+          "lines": [
+            { "speaker": "마리", "korean": "재민 씨, 오늘 뭐 해요?", "english": "Jaemin, what are you doing today?" },
+            { "speaker": "재민", "korean": "저는 친구를 만나요. 한국 영화를 봐요.", "english": "I'm meeting a friend. We're watching a Korean movie." },
+            { "speaker": "마리", "korean": "재민 씨는 뭐 해요?", "english": "What are you doing, Jaemin?" },
+            { "speaker": "재민", "korean": "저는 친구를 만나요. 한국 영화를 봐요.", "english": "I'm meeting friends and watching Korean movies." }
           ]
         },
         {
-          "scene": "✈️❌",
-          "english": "There is no toy airplane.",
-          "hint": "비행기 ends in ㅣ → vowel → 가",
-          "answer": ["장난감 비행기", "가", "없어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "이", "type": "particle"},
-            {"text": "있어요", "type": "verb"},
-            {"text": "토끼 인형", "type": "noun"}
+          "id": "dlg04_02",
+          "title": "유진 씨와 안나 씨의 오늘",
+          "lines": [
+            { "speaker": "안나", "korean": "유진 씨, 지금 뭐 해요?", "english": "Yujin, what are you doing now?" },
+            { "speaker": "유진", "korean": "영화를 봐요.", "english": "I'm watching a movie." },
+            { "speaker": "안나", "korean": "유진 씨는 지금 뭐 해요?", "english": "What are you doing now, Yujin?" },
+            { "speaker": "유진", "korean": "공부해요.", "english": "I'm studying." }
           ]
         },
         {
-          "scene": "🧸✅",
-          "english": "There is a teddy bear.",
-          "hint": "인형 ends in ㅇ → consonant → 이",
-          "answer": ["곰 인형", "이", "있어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "가", "type": "particle"},
-            {"text": "없어요", "type": "verb"},
-            {"text": "장난감 기차", "type": "noun"}
-          ]
-        },
-        {
-          "scene": "🐰❌",
-          "english": "There is no rabbit doll.",
-          "hint": "인형 ends in ㅇ → consonant → 이",
-          "answer": ["토끼 인형", "이", "없어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "가", "type": "particle"},
-            {"text": "있어요", "type": "verb"},
-            {"text": "장난감 비행기", "type": "noun"}
-          ]
-        },
-        {
-          "scene": "🚗✅",
-          "english": "There is a toy car.",
-          "hint": "자동차 ends in ㅏ → vowel → 가",
-          "answer": ["장난감 자동차", "가", "있어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "이", "type": "particle"},
-            {"text": "없어요", "type": "verb"},
-            {"text": "강아지 인형", "type": "noun"}
-          ]
-        },
-        {
-          "scene": "🐶✅",
-          "english": "There is a puppy doll.",
-          "hint": "인형 ends in ㅇ → consonant → 이",
-          "answer": ["강아지 인형", "이", "있어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "가", "type": "particle"},
-            {"text": "없어요", "type": "verb"},
-            {"text": "장난감 자동차", "type": "noun"}
-          ]
-        },
-        {
-          "scene": "🚂❌",
-          "english": "There is no toy train.",
-          "hint": "기차 ends in ㅏ → vowel → 가",
-          "answer": ["장난감 기차", "가", "없어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "이", "type": "particle"},
-            {"text": "있어요", "type": "verb"},
-            {"text": "강아지 인형", "type": "noun"}
-          ]
-        },
-        {
-          "scene": "🧸❌",
-          "english": "There is no teddy bear.",
-          "hint": "인형 ends in ㅇ → consonant → 이",
-          "answer": ["곰 인형", "이", "없어요"],
-          "types": ["noun", "particle", "verb"],
-          "distractors": [
-            {"text": "가", "type": "particle"},
-            {"text": "있어요", "type": "verb"},
-            {"text": "장난감 자동차", "type": "noun"}
+          "id": "dlg04_03",
+          "title": "오늘 무엇을 해요?",
+          "subtitle": "기본 대화 패턴",
+          "lines": [
+            { "speaker": "가", "korean": "지금 무엇을 해요?", "english": "What are you doing now?" },
+            { "speaker": "나", "korean": "책 읽어요.", "english": "I'm reading a book." },
+            { "speaker": "가", "korean": "안나 씨는 한국 영화를 좋아해요?", "english": "Anna, do you like Korean movies?" },
+            { "speaker": "나", "korean": "네, 저도 한국 영화를 좋아해요.", "english": "Yes, I like Korean movies too." }
           ]
         }
       ]
-    }
+    },
+
+    "pronunciation": {
+      "sections": [
+        {
+          "id": "pron04_01",
+          "title": "억양 — Intonation",
+          "rule": "Questions rise ↗, statements fall ↘",
+          "rule_ko": "질문할 때는 끝을 올려서, 질문이 아닐 때는 내려서 말해요.",
+          "examples": [
+            { "korean": "공부해요?", "intonation": "↗", "note": "question — rising tone" },
+            { "korean": "공부해요.", "intonation": "↘", "note": "statement — falling tone" },
+            { "korean": "책을 읽어요?", "intonation": "↗", "note": "question" },
+            { "korean": "네, 책을 읽어요.", "intonation": "↘", "note": "answer" }
+          ]
+        },
+        {
+          "id": "pron04_02",
+          "title": "연음 — Liaison",
+          "rule": "받침 ㄱ + ㄴ/ㄹ/ㅁ/ㅇ → ㅇ으로 발음",
+          "rule_en": "Final consonant ㄱ followed by ㄴ, ㄹ, ㅁ, or ㅇ is pronounced as ㅇ",
+          "examples": [
+            { "written": "한국어", "pronounced": "한구거", "romanization": "han-gu-geo" },
+            { "written": "한국말", "pronounced": "한궁말", "romanization": "han-gung-mal" }
+          ]
+        }
+      ]
+    },
+
+    "key_points": [
+      {
+        "id": "kp04_01",
+        "title": "무엇 → 뭐",
+        "note": "In everyday speech, '무엇' is often replaced with '뭐'. '무엇을' → '뭘' or '뭐'.",
+        "examples": [
+          { "formal": "무엇을 해요?", "casual": "뭘 해요? / 뭐 해요?", "english": "What are you doing?" },
+          { "formal": "무엇을 먹어요?", "casual": "뭘 먹어요? / 뭐 먹어요?", "english": "What are you eating?" }
+        ]
+      }
+    ],
+
+    "practice": {
+      "quiz_items": [
+        {
+          "id": "q04_01",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 것을 고르세요.",
+          "sentence": "저는 한국 영화___ 좋아해요.",
+          "choices": ["을", "를", "이", "가"],
+          "answer": "를",
+          "explanation": "영화는 받침이 없어서 '를'을 써요."
+        },
+        {
+          "id": "q04_02",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 것을 고르세요.",
+          "sentence": "저는 책___ 읽어요.",
+          "choices": ["을", "를", "이", "가"],
+          "answer": "을",
+          "explanation": "책은 받침(ㄱ)이 있어서 '을'을 써요."
+        },
+        {
+          "id": "q04_03",
+          "type": "conjugation",
+          "question": "알맞은 형태로 바꾸세요.",
+          "base": "먹다",
+          "answer": "먹어요",
+          "hint": "stem ends with ㄱ → 어요"
+        },
+        {
+          "id": "q04_04",
+          "type": "conjugation",
+          "question": "알맞은 형태로 바꾸세요.",
+          "base": "공부하다",
+          "answer": "공부해요",
+          "hint": "하다 verbs → 해요"
+        },
+        {
+          "id": "q04_05",
+          "type": "multiple_choice",
+          "question": "대화를 완성하세요.",
+          "sentence": "가: 오늘 뭐 해요?\n나: ___.",
+          "choices": ["친구를 만나요", "친구가 만나요", "친구를 만나", "친구이 만나요"],
+          "answer": "친구를 만나요",
+          "explanation": "친구는 받침이 없어서 '를', 동사는 '만나요'."
+        },
+        {
+          "id": "q04_06",
+          "type": "multiple_choice",
+          "question": "'무엇을 해요?'와 같은 의미는?",
+          "choices": ["뭐 해요?", "무슨 해요?", "무엇이 해요?", "뭐가 해요?"],
+          "answer": "뭐 해요?",
+          "explanation": "무엇 → 뭐, 무엇을 → 뭘 / 뭐"
+        },
+        {
+          "id": "q04_07",
+          "type": "multiple_choice",
+          "question": "어떤 발음이 맞아요?",
+          "sentence": "한국어",
+          "choices": ["한국어", "한구거", "항국어", "한국여"],
+          "answer": "한구거",
+          "explanation": "받침 ㄱ + 어 → 연음 규칙으로 '한구거'로 발음해요."
+        },
+        {
+          "id": "q04_08",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 것을 고르세요.",
+          "sentence": "저는 음악___ 들어요.",
+          "choices": ["을", "를", "이", "가"],
+          "answer": "을",
+          "explanation": "음악은 받침(ㄱ)이 있어서 '을'을 써요."
+        }
+      ]
+    },
+
+    "self_check": [
+      { "id": "sc04_01", "ko": "지금 무엇을 하는지 말할 수 있어요?",          "en": "Can you say what you are doing right now?" },
+      { "id": "sc04_02", "ko": "일상생활에서 무엇을 하는지 묻고 답할 수 있어요?", "en": "Can you ask and answer questions about everyday activities?" }
+    ]
+
   }
 }
