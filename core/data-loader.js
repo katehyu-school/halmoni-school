@@ -13,7 +13,7 @@
  */
 
 (function () {
-  const BASE_PATH = '/halmoni-school/data/elem/book2';
+  const BASE_PATH = 'data/elem/book2';
 
   /** 이미 로드된 unit 캐시 */
   const _cache = {};
