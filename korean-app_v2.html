@@ -821,6 +821,7 @@ async function deleteStudent(name) {
 // ── 지목/손들기 (core.js Stage 5) ──
 let practice = null;
 let lastPlayer = null;
+let knownPlayer = null;   // current_player가 null로 들어와도 배너에 쓸 수 있도록 캐시
 
 async function loadPracticeSession() {
   practice = HalmoniCore.createPracticeSession({
@@ -855,6 +856,9 @@ function applyPracticeState(session, showPopup = true) {
   const player = session.current_player;
   const hands = session.raised_hands || [];
 
+  // 지목된 학생 이름을 캐시 — correct/wrong 이벤트에서 player가 null로 올 때 fallback 사용
+  if (player) knownPlayer = player;
+
   // 지목 팝업
   if (showPopup && player && player !== lastPlayer) showNominatePopup(player);
   lastPlayer = player;
@@ -866,7 +870,7 @@ function applyPracticeState(session, showPopup = true) {
 
   // 결과 배너 — status가 correct/wrong 일 때만
   if (showPopup && (session.status === 'correct' || session.status === 'wrong')) {
-    showResultBanner(session.status, player);
+    showResultBanner(session.status, player || knownPlayer);
   }
 
   // 선생님 Next 버튼 — correct 이면 활성화
@@ -886,6 +890,7 @@ function applyPracticeState(session, showPopup = true) {
   if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx && !isFeedbackShowing('u1-fb')) { u1Idx = qIdx; if(typeof renderU1==='function') renderU1(); }
   if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx && !isFeedbackShowing('u2-fb')) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
   if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx && !isFeedbackShowing('u3-fb')) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
+  if (unit === 4 && typeof u4Idx !== 'undefined' && qIdx !== u4Idx && !isFeedbackShowing('u4-fb')) { u4Idx = qIdx; if(typeof renderU4==='function') renderU4(); }
 
   // 카드 강조 — 내 차례면 highlight, 남 차례면 dim
   const myName = urlName;
@@ -993,8 +998,8 @@ function closeNominateModal() { document.getElementById('nominate-modal').classL
 async function nominateStudent(name) {
   closeNominateModal();
   let activeUnit = 1;
-  [1,2,3].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
-  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : u3Idx;
+  [1,2,3,4].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
+  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : activeUnit===3 ? u3Idx : u4Idx;
   await practice?.nominate(name, activeUnit, qIdx);
 }
 
@@ -2435,6 +2440,7 @@ async function syncResult(isCorrect, answer) {
 // ── 다음 문제 동기화 (Next 버튼) ──
 async function syncNext(unit, newIdx) {
   if (!practice?.state?.sessionId) return;
+  knownPlayer = null;  // 다음 지목을 위해 초기화
   await HalmoniCore.getSupabase().from('practice_session').update({
     unit, q_index: newIdx,
     status: 'waiting',
@@ -2478,14 +2484,6 @@ function showResultBanner(status, player) {
   document.body.appendChild(banner);
   setTimeout(() => banner.remove(), 3000);
 }
-function updateU3Progress(){
-  const pct=Math.round((u3Idx/u3Questions.length)*100);
-  document.getElementById('u3-prog-fill').style.width=pct+'%';
-  document.getElementById('u3-prog-label').textContent=`문제 ${u3Idx+1} / ${u3Questions.length}`;
-  document.getElementById('u3-prog-score').textContent=`⭐ ${u3Score}점`;
-}
-
-
 function updateU3Progress(){
   const pct=Math.round((u3Idx/u3Questions.length)*100);
   document.getElementById('u3-prog-fill').style.width=pct+'%';
