@@ -122,7 +122,7 @@
         {
           "id": "g03_time_e",
           "title": "Time + 에",
-          "subtitle": "시간 표현 뒤에 에를 붙여요",
+          "subtitle": "Add 에 after time expressions",
           "pattern": "아침에 / 저녁에 → but: 오늘 / 내일 (no 에!)",
           "meaning": "time particle",
           "description": "We add 에 after time-of-day words (morning, evening). Day words like 오늘/내일 don't use 에.",
@@ -154,20 +154,20 @@
         {
           "id": "g03_eul_reul",
           "title": "을/를",
-          "subtitle": "목적어를 표시하는 조사예요",
-          "pattern": "받침 O → 을 / 받침 X → 를",
+          "subtitle": "Marks the object of the sentence",
+          "pattern": "Consonant ending → 을 / Vowel ending → 를",
           "meaning": "object marker",
           "description": "수영해요 → 수영을 해요. When a noun precedes 해요, add 을/를 to mark it as the object.",
           "rule_boxes": [
             {
               "color": "red",
-              "label": "받침 있음 (consonant) → 을",
-              "examples": ["수영 → 수영을 (받침 ㅇ)", "운동 → 운동을 (받침 ㅇ)", "사진 → 사진을 (받침 ㄴ)"]
+              "label": "Consonant ending → 을",
+              "examples": ["수영 → 수영을 (ends in ㅇ)", "운동 → 운동을 (ends in ㅇ)", "사진 → 사진을 (ends in ㄴ)"]
             },
             {
               "color": "blue",
-              "label": "받침 없음 (vowel) → 를",
-              "examples": ["숙제 → 숙제를 (모음 ㅔ)", "전화 → 전화를 (모음 ㅏ)", "태권도 → 태권도를 (모음 ㅗ)"]
+              "label": "Vowel ending → 를",
+              "examples": ["숙제 → 숙제를 (ends in ㅔ)", "전화 → 전화를 (ends in ㅏ)", "태권도 → 태권도를 (ends in ㅗ)"]
             }
           ],
           "examples": [
