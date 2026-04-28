@@ -887,17 +887,44 @@ function applyPracticeState(session, showPopup = true) {
     const el = document.getElementById(id);
     return el && el.classList.contains('correct');
   };
-  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx && !isFeedbackShowing('u1-fb')) { u1Idx = qIdx; if(typeof renderU1==='function') renderU1(); }
-  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx && !isFeedbackShowing('u2-fb')) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
-  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx && !isFeedbackShowing('u3-fb')) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
-  if (unit === 4 && typeof u4Idx !== 'undefined' && qIdx !== u4Idx && !isFeedbackShowing('u4-fb')) { u4Idx = qIdx; if(typeof renderU4==='function') renderU4(); }
+  // 유닛별 next 동기화 — 마지막 문제 이후엔 complete 화면도 동기화
+  function syncComplete(cardId, completeId) {
+    const card = document.getElementById(cardId);
+    const comp = document.getElementById(completeId);
+    if (card) card.style.display = 'none';
+    if (comp) { comp.classList.add('show'); launchConfetti(); }
+  }
+  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx && !isFeedbackShowing('u1-fb')) {
+    u1Idx = qIdx;
+    if (u1Idx >= u1Questions.length) syncComplete('u1-qcard','u1-complete');
+    else if(typeof renderU1==='function') renderU1();
+  }
+  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx && !isFeedbackShowing('u2-fb')) {
+    u2Idx = qIdx;
+    if (u2Idx >= u2Questions.length) syncComplete('u2-qcard','u2-complete');
+    else if(typeof renderU2==='function') renderU2();
+  }
+  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx && !isFeedbackShowing('u3-fb')) {
+    u3Idx = qIdx;
+    if (u3Idx >= u3Questions.length) syncComplete('u3-qcard','u3-complete');
+    else if(typeof renderU3==='function') renderU3();
+  }
+  if (unit === 4 && typeof u4Idx !== 'undefined' && qIdx !== u4Idx && !isFeedbackShowing('u4-fb')) {
+    u4Idx = qIdx;
+    if (u4Idx >= u4Questions.length) syncComplete('u4-qcard','u4-complete');
+    else if(typeof renderU4==='function') renderU4();
+  }
   if (unit === 5) {
     if (qIdx >= 10) {
       // step2 문제 동기화
       const step2Idx = qIdx - 10;
       const step1El = document.getElementById('u5-step1');
       if (step1El && step1El.style.display !== 'none' && typeof goToU5Step2==='function') goToU5Step2(true);
-      if (step2Idx !== u5Idx && !isFeedbackShowing('u5-fb')) { u5Idx = step2Idx; if(typeof renderU5==='function') renderU5(); }
+      if (step2Idx !== u5Idx && !isFeedbackShowing('u5-fb')) {
+        u5Idx = step2Idx;
+        if (u5Idx >= u5Questions.length) syncComplete('u5-qcard','u5-complete');
+        else if(typeof renderU5==='function') renderU5();
+      }
     } else {
       // step1 문제 동기화
       if (typeof s5Idx !== 'undefined' && qIdx !== s5Idx) { s5Idx = qIdx; if(typeof renderS5==='function') renderS5(); }
