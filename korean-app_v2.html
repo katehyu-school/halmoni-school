@@ -856,6 +856,8 @@ function applyPracticeState(session, showPopup = true) {
   const player = session.current_player;
   const hands = session.raised_hands || [];
 
+  // 새 문제(waiting)로 넘어가면 이전 지목자 캐시 초기화
+  if (session.status === 'waiting') knownPlayer = null;
   // 지목된 학생 이름을 캐시 — correct/wrong 이벤트에서 player가 null로 올 때 fallback 사용
   if (player) knownPlayer = player;
 
@@ -880,13 +882,9 @@ function applyPracticeState(session, showPopup = true) {
     if (nextBtn) nextBtn.disabled = false;
   }
 
-  // 문제 번호 동기화 — 정답 피드백 표시 중이면 재렌더 건너뜀
+  // 문제 번호 동기화
   const unit = session.unit || 1;
   const qIdx = session.q_index || 0;
-  const isFeedbackShowing = (id) => {
-    const el = document.getElementById(id);
-    return el && el.classList.contains('correct');
-  };
   // 유닛별 next 동기화 — 마지막 문제 이후엔 complete 화면도 동기화
   function syncComplete(cardId, completeId) {
     const card = document.getElementById(cardId);
@@ -894,22 +892,22 @@ function applyPracticeState(session, showPopup = true) {
     if (card) card.style.display = 'none';
     if (comp) { comp.classList.add('show'); launchConfetti(); }
   }
-  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx && !isFeedbackShowing('u1-fb')) {
+  if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx) {
     u1Idx = qIdx;
     if (u1Idx >= u1Questions.length) syncComplete('u1-qcard','u1-complete');
     else if(typeof renderU1==='function') renderU1();
   }
-  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx && !isFeedbackShowing('u2-fb')) {
+  if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx) {
     u2Idx = qIdx;
     if (u2Idx >= u2Questions.length) syncComplete('u2-qcard','u2-complete');
     else if(typeof renderU2==='function') renderU2();
   }
-  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx && !isFeedbackShowing('u3-fb')) {
+  if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx) {
     u3Idx = qIdx;
     if (u3Idx >= u3Questions.length) syncComplete('u3-qcard','u3-complete');
     else if(typeof renderU3==='function') renderU3();
   }
-  if (unit === 4 && typeof u4Idx !== 'undefined' && qIdx !== u4Idx && !isFeedbackShowing('u4-fb')) {
+  if (unit === 4 && typeof u4Idx !== 'undefined' && qIdx !== u4Idx) {
     u4Idx = qIdx;
     if (u4Idx >= u4Questions.length) syncComplete('u4-qcard','u4-complete');
     else if(typeof renderU4==='function') renderU4();
@@ -920,7 +918,7 @@ function applyPracticeState(session, showPopup = true) {
       const step2Idx = qIdx - 10;
       const step1El = document.getElementById('u5-step1');
       if (step1El && step1El.style.display !== 'none' && typeof goToU5Step2==='function') goToU5Step2(true);
-      if (step2Idx !== u5Idx && !isFeedbackShowing('u5-fb')) {
+      if (step2Idx !== u5Idx) {
         u5Idx = step2Idx;
         if (u5Idx >= u5Questions.length) syncComplete('u5-qcard','u5-complete');
         else if(typeof renderU5==='function') renderU5();
