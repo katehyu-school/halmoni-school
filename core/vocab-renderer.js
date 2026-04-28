@@ -77,6 +77,10 @@ const VocabRenderer = (() => {
     3: [
       { gridId: 'fc3-time',   categories: ['시간'] },
       { gridId: 'fc3-verbs',  categories: ['동사구'] }
+    ],
+    5: [
+      { gridId: 'fc5-clothes',     categories: ['의류'] },
+      { gridId: 'fc5-accessories', categories: ['소품'] }
     ]
   };
 
@@ -122,7 +126,7 @@ const VocabRenderer = (() => {
 
   /** 전체 과 렌더링 */
   async function renderAll() {
-    await Promise.all([1, 2, 3].map(render));
+    await Promise.all([1, 2, 3, 5].map(render));
   }
 
   return { render, renderAll };
