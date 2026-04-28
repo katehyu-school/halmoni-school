@@ -2434,6 +2434,7 @@ function checkU3(){
 
 // ── 결과 동기화 ──
 async function syncResult(isCorrect, answer) {
+  showResultBanner(isCorrect ? 'correct' : 'wrong', knownPlayer);
   await practice?.setStatus(isCorrect ? 'correct' : 'wrong');
 }
 
@@ -2466,7 +2467,7 @@ function nextU3(){
 // 결과 표시 배너 (다른 화면에서 볼 때)
 function showResultBanner(status, player) {
   document.getElementById('result-banner')?.remove();
-  if (!player || status === 'playing' || status === 'waiting') return;
+  if (status === 'playing' || status === 'waiting') return;
   const isCorrect = status === 'correct';
   const banner = document.createElement('div');
   banner.id = 'result-banner';
@@ -2479,8 +2480,8 @@ function showResultBanner(status, player) {
     box-shadow:0 4px 20px rgba(0,0,0,0.12);
     animation:fadeUp 0.3s ease;`;
   banner.textContent = isCorrect
-    ? `🎉 ${player} — Correct!`
-    : `❌ ${player} — Try again!`;
+    ? `🎉 ${player ? player + ' — ' : ''}Correct!`
+    : `❌ ${player ? player + ' — ' : ''}Try again!`;
   document.body.appendChild(banner);
   setTimeout(() => banner.remove(), 3000);
 }
