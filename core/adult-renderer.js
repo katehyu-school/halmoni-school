@@ -148,10 +148,10 @@ const AdultRenderer = (() => {
   <table style="width:100%;border-collapse:collapse;font-family:var(--font-sans);">
     <thead>
       <tr style="background:#f5f5f3;">
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">기본형</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">어간</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">규칙</th>
-        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">활용형</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">기본형 Base form</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">어간 Verb stem</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">규칙 Ending suffix</th>
+        <th style="padding:8px 12px;text-align:left;font-size:0.82rem;color:#888;">활용형 Conjugation</th>
       </tr>
     </thead>
     <tbody style="border-top:1px solid #e8e8e8;">${rows}</tbody>
