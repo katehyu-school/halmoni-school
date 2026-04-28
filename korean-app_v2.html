@@ -891,6 +891,7 @@ function applyPracticeState(session, showPopup = true) {
   if (unit === 2 && typeof u2Idx !== 'undefined' && qIdx !== u2Idx && !isFeedbackShowing('u2-fb')) { u2Idx = qIdx; if(typeof renderU2==='function') renderU2(); }
   if (unit === 3 && typeof u3Idx !== 'undefined' && qIdx !== u3Idx && !isFeedbackShowing('u3-fb')) { u3Idx = qIdx; if(typeof renderU3==='function') renderU3(); }
   if (unit === 4 && typeof u4Idx !== 'undefined' && qIdx !== u4Idx && !isFeedbackShowing('u4-fb')) { u4Idx = qIdx; if(typeof renderU4==='function') renderU4(); }
+  if (unit === 5 && typeof u5Idx !== 'undefined' && qIdx !== u5Idx && !isFeedbackShowing('u5-fb')) { u5Idx = qIdx; if(typeof renderU5==='function') renderU5(); }
 
   // 카드 강조 — 내 차례면 highlight, 남 차례면 dim
   const myName = urlName;
@@ -998,8 +999,8 @@ function closeNominateModal() { document.getElementById('nominate-modal').classL
 async function nominateStudent(name) {
   closeNominateModal();
   let activeUnit = 1;
-  [1,2,3,4].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
-  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : activeUnit===3 ? u3Idx : u4Idx;
+  [1,2,3,4,5].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
+  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : activeUnit===3 ? u3Idx : activeUnit===4 ? u4Idx : u5Idx;
   await practice?.nominate(name, activeUnit, qIdx);
 }
 
@@ -1100,9 +1101,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">4과</span>
     <span class="lesson-title-text">장난감 기차가 있어요</span>
   </div>
-  <div class="lesson-item locked">
+  <div class="lesson-item" id="lesson-5" onclick="switchUnit(5)">
     <span class="lesson-num">5과</span>
-    <div><span class="lesson-title-text">구두가 아니에요</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+    <span class="lesson-title-text">구두가 아니에요</span>
   </div>
   <div class="lesson-item locked">
     <span class="lesson-num">6과</span>
@@ -1588,6 +1589,123 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="complete-score" id="u4-complete-score"></div>
       <div class="btn-row" style="justify-content:center;margin-top:16px;">
         <button class="btn btn-reset" onclick="restartUnit(4)">🔄 4과 다시</button>
+        <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
+        <button class="btn btn-next" onclick="showTOC()">📖 목차로</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ UNIT 5 ══════ -->
+<div class="unit" id="unit5">
+  <div class="unit-heading">
+    <span class="unit-num">5</span>
+    <span class="unit-title">구두가 아니에요</span>
+  </div>
+  <nav class="section-nav">
+    <button class="snav-btn active" onclick="switchSection(5,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection(5,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection(5,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
+  </nav>
+
+  <!-- VOCAB -->
+  <div class="section active" id="u5-vocab">
+    <div class="card">
+      <div class="section-title">👗 의류 — Clothes</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc5-clothes"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">👓 소품 — Accessories</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc5-accessories"></div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="section" id="u5-grammar">
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="u5-quiz">
+
+    <!-- 스텝 표시 -->
+    <div class="step-indicator" id="u5-step-indicator">
+      <div class="step-dot active" id="u5-step-dot-1">1</div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="u5-step-dot-2">2</div>
+      <div class="step-label" id="u5-step-label">Step 1 — 덩어리 카드 맞추기</div>
+    </div>
+
+    <!-- ── STEP 1: 청크 drag & drop ── -->
+    <div id="u5-step1">
+      <div class="progress-wrap">
+        <span class="prog-label" id="u5-s1-prog-label">문제 1 / 6</span>
+        <div class="prog-bar"><div class="prog-fill" id="u5-s1-prog-fill" style="width:0%"></div></div>
+      </div>
+      <div class="card" id="u5-s1card">
+        <span class="quiz-badge" style="background:#FFF0E6;color:#E67E22;">5과 · Step 1 — 덩어리 카드 맞추기</span>
+        <div class="scene-box" id="u5-s1-scene">👗</div>
+        <div class="question-english" id="u5-s1-english"></div>
+        <div class="section-sub">카드를 순서대로 드래그해서 문장을 만들어요! Drag the chunks in order.</div>
+        <div class="drop-zone" id="u5-s1-dropzone">
+          <span class="drop-zone-placeholder">Drag cards here!</span>
+        </div>
+        <div class="word-bank" id="u5-s1-wordbank"></div>
+        <div class="feedback" id="u5-s1-fb"></div>
+        <div class="btn-row">
+          <button class="btn btn-reset" onclick="resetS5()">🔄 Reset</button>
+          <button class="btn btn-check" onclick="checkS5()">✅ Check!</button>
+          <button class="btn btn-next" id="u5-s1-next" onclick="nextS5()" style="display:none;">Next ▶</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: 문장 만들기 ── -->
+    <div id="u5-step2" style="display:none;">
+      <div class="progress-wrap">
+        <span class="prog-label" id="u5-prog-label">문제 1 / 6</span>
+        <div class="prog-bar"><div class="prog-fill" id="u5-prog-fill" style="width:0%"></div></div>
+        <span class="prog-score" id="u5-prog-score">⭐ 0점</span>
+      </div>
+      <div class="card" id="u5-qcard">
+        <span class="quiz-badge" style="background:#FFF0E6;color:#E67E22;">5과 · Step 2 — 문장 만들기</span>
+        <div class="scene-box" id="u5-scene">👗</div>
+        <div class="question-english" id="u5-qenglish">Build the sentence!</div>
+        <div class="section-sub">Click or drag cards to build the sentence. Drag inside to reorder!</div>
+
+        <div style="background:#FFF0E6;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.83rem;color:#A04010;display:flex;gap:14px;flex-wrap:wrap;">
+          <span>Consonant ending → 이 아니에요</span>
+          <span>Vowel ending → 가 아니에요</span>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--sky)"></div>Noun 명사</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>Particle 조사</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Verb 동사</div>
+        </div>
+
+        <div class="drop-zone" id="u5-dropzone">
+          <span class="drop-zone-placeholder">Click or drag cards here — drag inside to reorder!</span>
+        </div>
+        <div class="word-bank" id="u5-wordbank"></div>
+        <div class="feedback" id="u5-fb"></div>
+        <div class="btn-row">
+          <button class="btn btn-hint" onclick="hintU5()">💡 Hint</button>
+          <button class="btn btn-reset" onclick="resetU5()">🔄 Reset</button>
+          <button class="btn btn-check" onclick="checkU5()">✅ Check!</button>
+          <button class="btn btn-next" id="u5-next" onclick="nextU5()" disabled>Next ▶</button>
+        </div>
+      </div>
+    </div><!-- /u5-step2 -->
+
+    <div class="complete-screen" id="u5-complete">
+      <div class="complete-emoji">🎉</div>
+      <div class="complete-title">완벽해요! Perfect!</div>
+      <div class="complete-score" id="u5-complete-score"></div>
+      <div class="btn-row" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-reset" onclick="restartUnit(5)">🔄 5과 다시</button>
         <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
         <button class="btn btn-next" onclick="showTOC()">📖 목차로</button>
       </div>
@@ -2149,13 +2267,27 @@ function restartUnit(n){
     renderS1(); switchUnit(2); switchSection(2,'quiz'); syncNext(2,0); }
   if(n===3){ u3Idx=0; u3Score=0; document.getElementById('u3-qcard').style.display='block'; document.getElementById('u3-complete').classList.remove('show'); renderU3(); switchUnit(3); switchSection(3,'quiz'); syncNext(3,0); }
   if(n===4){ u4Idx=0; u4Score=0; document.getElementById('u4-qcard').style.display='block'; document.getElementById('u4-complete').classList.remove('show'); renderU4(); switchUnit(4); switchSection(4,'quiz'); syncNext(4,0); }
+  if(n===5){ u5Idx=0; u5Score=0; s5Idx=0;
+    document.getElementById('u5-step1').style.display='block';
+    document.getElementById('u5-step2').style.display='none';
+    document.getElementById('u5-qcard').style.display='block';
+    document.getElementById('u5-complete').classList.remove('show');
+    document.getElementById('u5-step-dot-1').className='step-dot active';
+    document.getElementById('u5-step-dot-2').className='step-dot';
+    document.getElementById('u5-step-label').textContent='Step 1 — 덩어리 카드 맞추기';
+    renderS5(); switchUnit(5); switchSection(5,'quiz'); syncNext(5,0); }
 }
 
 function restartAll(){
-  u1Idx=0;u1Score=0;u2Idx=0;u2Score=0;u3Idx=0;u3Score=0;u4Idx=0;u4Score=0;
-  ['u1-qcard','u2-qcard','u3-qcard','u4-qcard'].forEach(id=>document.getElementById(id).style.display='block');
-  ['u1-complete','u2-complete','u3-complete','u4-complete'].forEach(id=>document.getElementById(id).classList.remove('show'));
-  renderU1(); renderU2(); renderU3(); renderU4();
+  u1Idx=0;u1Score=0;u2Idx=0;u2Score=0;u3Idx=0;u3Score=0;u4Idx=0;u4Score=0;u5Idx=0;u5Score=0;s5Idx=0;
+  ['u1-qcard','u2-qcard','u3-qcard','u4-qcard','u5-qcard'].forEach(id=>document.getElementById(id).style.display='block');
+  ['u1-complete','u2-complete','u3-complete','u4-complete','u5-complete'].forEach(id=>document.getElementById(id).classList.remove('show'));
+  document.getElementById('u5-step1').style.display='block';
+  document.getElementById('u5-step2').style.display='none';
+  document.getElementById('u5-step-dot-1').className='step-dot active';
+  document.getElementById('u5-step-dot-2').className='step-dot';
+  document.getElementById('u5-step-label').textContent='Step 1 — 덩어리 카드 맞추기';
+  renderU1(); renderU2(); renderU3(); renderU4(); renderS5();
   switchUnit(1); switchSection(1,'quiz');
   syncNext(1, 0);
 }
@@ -2597,6 +2729,247 @@ function nextU4(){
 }
 
 // ══════════════════════════════════════════
+// UNIT 5 DATA
+// ══════════════════════════════════════════
+let u5Questions = [];
+const _u5QFallback = [
+  {scene:'👗', english:"No, it's not pants. It's a skirt.", hint:'바지 ends in ㅣ → vowel → 가',
+   answer:['바지','가','아니에요.','치마','예요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'바지가 아니에요.',type:'verb',en:"it's not pants."},{text:'치마예요.',type:'noun',en:"it's a skirt."}]},
+  {scene:'👖', english:"No, it's not a skirt. It's pants.", hint:'치마 ends in ㅏ → vowel → 가',
+   answer:['치마','가','아니에요.','바지','예요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'치마가 아니에요.',type:'verb',en:"it's not a skirt."},{text:'바지예요.',type:'noun',en:"it's pants."}]},
+  {scene:'👟', english:"No, it's not dress shoes. It's sneakers.", hint:'구두 ends in ㅜ → vowel → 가',
+   answer:['구두','가','아니에요.','운동화','예요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'구두가 아니에요.',type:'verb',en:"it's not dress shoes."},{text:'운동화예요.',type:'noun',en:"it's sneakers."}]},
+  {scene:'👠', english:"No, it's not sneakers. It's dress shoes.", hint:'운동화 ends in ㅏ → vowel → 가',
+   answer:['운동화','가','아니에요.','구두','예요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'운동화가 아니에요.',type:'verb',en:"it's not sneakers."},{text:'구두예요.',type:'noun',en:"it's dress shoes."}]},
+  {scene:'👓', english:"No, it's not socks. It's glasses.", hint:'양말 ends in ㄹ → consonant → 이',
+   answer:['양말','이','아니에요.','안경','이에요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'양말이 아니에요.',type:'verb',en:"it's not socks."},{text:'안경이에요.',type:'noun',en:"it's glasses."}]},
+  {scene:'🧦', english:"No, it's not glasses. It's socks.", hint:'안경 ends in ㅇ → consonant → 이',
+   answer:['안경','이','아니에요.','양말','이에요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'안경이 아니에요.',type:'verb',en:"it's not glasses."},{text:'양말이에요.',type:'noun',en:"it's socks."}]}
+];
+
+// ══════════════════════════════════════════
+// UNIT 5 — QUIZ LOGIC (Step 2: individual cards)
+// ══════════════════════════════════════════
+let u5Idx=0, u5Score=0;
+let u5Dropped=[], u5IdCounter=0;
+const typeClass5={noun:'',particle:'particle',verb:'verb'};
+
+function makeBankCard5(text, type){
+  const c=document.createElement('div');
+  c.className='wcard '+(typeClass5[type]||'');
+  c.textContent=text; c.draggable=true;
+  c.dataset.text=text; c.dataset.type=type;
+  c.addEventListener('dragstart',e=>{
+    dragSrcType='bank'; dragSrcEl=c;
+    c.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',text);
+  });
+  c.addEventListener('dragend',()=>c.classList.remove('dragging'));
+  c.addEventListener('click',()=>{
+    if(!c.dataset.used){
+      const id=++u5IdCounter;
+      u5Dropped.push({text,type,id});
+      c.dataset.used='1'; c.classList.add('used');
+      renderU5Zone();
+    }
+  });
+  return c;
+}
+
+function removeFromZone5(id){
+  const idx=u5Dropped.findIndex(w=>w.id===id);
+  if(idx===-1) return;
+  const {text}=u5Dropped[idx];
+  u5Dropped.splice(idx,1);
+  const bankCards=document.querySelectorAll('#u5-wordbank .wcard');
+  for(const bc of bankCards){
+    if(bc.dataset.text===text && bc.dataset.used==='1'){
+      bc.dataset.used=''; bc.classList.remove('used'); break;
+    }
+  }
+  renderU5Zone();
+}
+
+function renderU5Zone(){ setupDropzoneFor('u5-dropzone', u5Dropped, u5IdCounter, removeFromZone5, typeClass5, null); }
+
+function updateU5Progress(){
+  const pct=Math.round((u5Idx/u5Questions.length)*100);
+  document.getElementById('u5-prog-fill').style.width=pct+'%';
+  document.getElementById('u5-prog-label').textContent=`문제 ${u5Idx+1} / ${u5Questions.length}`;
+  document.getElementById('u5-prog-score').textContent=`⭐ ${u5Score}점`;
+}
+
+function renderU5(){
+  if(u5Idx >= u5Questions.length) return;
+  const q=u5Questions[u5Idx];
+  u5Dropped=[]; u5IdCounter=0;
+  document.getElementById('u5-scene').textContent=q.scene;
+  document.getElementById('u5-qenglish').textContent='👉 '+q.english;
+  const fb=document.getElementById('u5-fb'); fb.className='feedback'; fb.innerHTML='';
+  document.getElementById('u5-next').disabled=true;
+  renderU5Zone();
+  const bank=document.getElementById('u5-wordbank'); bank.innerHTML='';
+  const words=q.answer.map((w,i)=>({text:w,type:q.types[i]})).sort(()=>Math.random()-0.5);
+  words.forEach(w=>bank.appendChild(makeBankCard5(w.text,w.type)));
+  updateU5Progress();
+}
+
+function checkU5(){
+  const q=u5Questions[u5Idx];
+  const fb=document.getElementById('u5-fb');
+  if(u5Dropped.length===0){fb.className='feedback wrong';fb.textContent='⚠️ Drop some cards first!';return;}
+  const built=u5Dropped.map(w=>w.text).join('');
+  const correct=q.answer.join('');
+  if(built===correct){
+    fb.className='feedback correct';
+    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer.join('')}</div><div style="font-size:0.85rem;margin-top:4px;color:#388E3C;">${q.english}</div>`;
+    u5Score++; document.getElementById('u5-next').disabled=false;
+    document.getElementById('u5-prog-score').textContent=`⭐ ${u5Score}점`;
+    launchConfetti();
+    syncResult(true, correct);
+  } else {
+    fb.className='feedback wrong';
+    fb.innerHTML=`❌ Try again! <div style="font-size:0.85rem;margin-top:5px;color:#888;">💡 ${q.hint}</div>`;
+    syncResult(false, built);
+  }
+}
+
+function hintU5(){const q=u5Questions[u5Idx];const fb=document.getElementById('u5-fb');fb.className='feedback hint';fb.innerHTML=`💡 <strong>Hint:</strong> ${q.hint}`;}
+function resetU5(){renderU5();}
+function nextU5(){
+  u5Idx++;
+  syncNext(5, u5Idx);
+  if(u5Idx>=u5Questions.length){
+    document.getElementById('u5-qcard').style.display='none';
+    document.getElementById('u5-complete').classList.add('show');
+    document.getElementById('u5-complete-score').textContent=`You got ${u5Score} out of ${u5Questions.length}! (${u5Score}/${u5Questions.length})`;
+    launchConfetti();
+  } else { renderU5(); }
+}
+
+// ══════════════════════════════════════════
+// UNIT 5 — STEP 1: 청크 drag & drop
+// ══════════════════════════════════════════
+let s5Idx = 0;
+let s5Dropped = [];
+let s5DragSrc = null;
+let s5DragFrom = null;
+
+function renderS5() {
+  if (!document.getElementById('u5-s1-wordbank')) return;
+  const q = u5Questions[s5Idx];
+  const pct = Math.round((s5Idx / u5Questions.length) * 100);
+  document.getElementById('u5-s1-prog-fill').style.width = pct + '%';
+  document.getElementById('u5-s1-prog-label').textContent = `문제 ${s5Idx+1} / ${u5Questions.length}`;
+  document.getElementById('u5-s1-scene').textContent = q.scene;
+  document.getElementById('u5-s1-english').textContent = '👉 ' + q.english;
+  s5Dropped = [];
+  renderS5Zone();
+  const bank = document.getElementById('u5-s1-wordbank');
+  bank.innerHTML = '';
+  const shuffled = [...q.chunks].sort(() => Math.random() - 0.5);
+  shuffled.forEach(chunk => { bank.appendChild(makeS5Card(chunk, 'bank')); });
+  const fb = document.getElementById('u5-s1-fb');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  document.getElementById('u5-s1-next').style.display = 'none';
+}
+
+function makeS5Card(chunk, from) {
+  const colorMap = { name:'var(--sky)', place:'var(--lavender)', verb:'var(--green)', particle:'var(--coral)' };
+  const card = document.createElement('div');
+  card.className = 'wcard';
+  card.draggable = true;
+  card.dataset.text = chunk.text;
+  card.dataset.type = chunk.type;
+  card.style.borderColor = colorMap[chunk.type] || 'var(--sky)';
+  card.innerHTML = `<span style="font-size:1rem;">${chunk.text}</span><span style="font-size:0.7rem;color:var(--muted);display:block;">${chunk.en}</span>`;
+  card.addEventListener('dragstart', e => {
+    s5DragSrc = chunk; s5DragFrom = from;
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  card.addEventListener('click', () => {
+    if (from === 'bank') {
+      s5Dropped.push(chunk);
+      renderS5Zone();
+      card.remove();
+    } else {
+      s5Dropped = s5Dropped.filter(c => c !== chunk);
+      renderS5Zone();
+      document.getElementById('u5-s1-wordbank').appendChild(makeS5Card(chunk, 'bank'));
+    }
+  });
+  return card;
+}
+
+function renderS5Zone() {
+  const zone = document.getElementById('u5-s1-dropzone');
+  zone.innerHTML = '';
+  if (s5Dropped.length === 0) {
+    zone.innerHTML = '<span class="drop-zone-placeholder">Drag cards here!</span>';
+  } else {
+    s5Dropped.forEach(chunk => { zone.appendChild(makeS5Card(chunk, 'zone')); });
+  }
+  zone.ondragover = e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; };
+  zone.ondrop = e => {
+    e.preventDefault();
+    if (s5DragFrom === 'bank') {
+      s5Dropped.push(s5DragSrc);
+      renderS5Zone();
+      [...document.querySelectorAll('#u5-s1-wordbank .wcard')].forEach(el => {
+        if (el.dataset.text === s5DragSrc.text) el.remove();
+      });
+    }
+    s5DragSrc = null;
+  };
+}
+
+function checkS5() {
+  const q = u5Questions[s5Idx];
+  const correct = q.chunks.map(c => c.text);
+  const given = s5Dropped.map(c => c.text);
+  const fb = document.getElementById('u5-s1-fb');
+  if (JSON.stringify(correct) === JSON.stringify(given)) {
+    fb.className = 'feedback correct';
+    fb.innerHTML = '🎉 완벽해요! Perfect!';
+    document.getElementById('u5-s1-next').style.display = 'inline-block';
+  } else if (given.length === 0) {
+    fb.className = 'feedback wrong';
+    fb.innerHTML = '❌ 카드를 드래그해서 놓아 주세요!';
+  } else {
+    fb.className = 'feedback wrong';
+    fb.innerHTML = `❌ Try again! 힌트: ${q.hint}`;
+  }
+}
+
+function resetS5() { renderS5(); }
+
+function nextS5() {
+  s5Idx++;
+  if (s5Idx >= u5Questions.length) {
+    goToU5Step2();
+  } else {
+    renderS5();
+  }
+}
+
+function goToU5Step2() {
+  document.getElementById('u5-step1').style.display = 'none';
+  document.getElementById('u5-step2').style.display = 'block';
+  document.getElementById('u5-step-dot-1').classList.replace('active', 'done');
+  document.getElementById('u5-step-dot-2').classList.add('active');
+  document.getElementById('u5-step-label').textContent = 'Step 2 — 문장 만들기';
+  u5Idx = 0; u5Score = 0;
+  renderU5();
+}
+
+// ══════════════════════════════════════════
 // UNIT 2 — STEP 1: 청크 drag & drop
 // ══════════════════════════════════════════
 let s1Idx = 0;
@@ -2734,17 +3107,19 @@ function goToStep2() {
 async function init(){
   // Load quiz data from JSON, fall back to hardcoded arrays if unavailable
   try {
-    const [d1, d2, d3, d4] = await Promise.all([1,2,3,4].map(n => HalmoniCore.loadUnit(n)));
+    const [d1, d2, d3, d4, d5] = await Promise.all([1,2,3,4,5].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
     u4Questions = (d4 && d4.practice && d4.practice.quiz_items) || _u4QFallback;
+    u5Questions = (d5 && d5.practice && d5.practice.quiz_items) || _u5QFallback;
   } catch(e) {
     console.warn('[init] quiz data load failed, using fallback', e);
     u1Questions = _u1QFallback;
     u2Questions = _u2QFallback;
     u3Questions = _u3QFallback;
     u4Questions = _u4QFallback;
+    u5Questions = _u5QFallback;
   }
   buildFlashcards('fc-names',names,'sky');
   buildFlashcards('fc-verbs',verbs1,'mint');
@@ -2755,7 +3130,7 @@ async function init(){
   buildFlashcards('fc3-verbs',verbs3,'green');
   buildFlashcards('fc4-toys',toys4,'lav');
   buildFlashcards('fc4-dolls',dolls4,'coral');
-  renderU1(); renderU2(); renderU3(); renderU4(); renderS1();
+  renderU1(); renderU2(); renderU3(); renderU4(); renderS1(); renderS5();
 }
 init();
 </script>
