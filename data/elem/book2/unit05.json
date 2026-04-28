@@ -1,0 +1,138 @@
+{
+  "unit": 5,
+  "title": "구두가 아니에요",
+  "book": 2,
+  "sections": {
+    "vocab": {
+      "items": [
+        {"id":"v05_01","category":"의류","emoji":"👗","korean":"치마","english":"skirt","romanization":"chi-ma","audio":null,"exampleSentence":null},
+        {"id":"v05_02","category":"의류","emoji":"👖","korean":"바지","english":"pants","romanization":"ba-ji","audio":null,"exampleSentence":null},
+        {"id":"v05_03","category":"의류","emoji":"👟","korean":"운동화","english":"sneakers","romanization":"un-dong-hwa","audio":null,"exampleSentence":null},
+        {"id":"v05_04","category":"의류","emoji":"👠","korean":"구두","english":"dress shoes","romanization":"gu-du","audio":null,"exampleSentence":null},
+        {"id":"v05_05","category":"소품","emoji":"👓","korean":"안경","english":"glasses","romanization":"an-gyeong","audio":null,"exampleSentence":null},
+        {"id":"v05_06","category":"소품","emoji":"🧦","korean":"양말","english":"socks","romanization":"yang-mal","audio":null,"exampleSentence":null}
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g05_aniéyo",
+          "title": "N이/가 아니에요",
+          "subtitle": "Negative form of 예요/이에요",
+          "pattern": "Consonant ending → 이 아니에요 / Vowel ending → 가 아니에요",
+          "meaning": "it is not ~",
+          "description": "아니에요 is the negative form of 예요/이에요. The same consonant/vowel rule applies: use 이 after a consonant-ending noun, 가 after a vowel-ending noun.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "Consonant ending → 이 아니에요",
+              "examples": [
+                "안경 → 안경이 아니에요 (ends in ㅇ)",
+                "양말 → 양말이 아니에요 (ends in ㄹ)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "Vowel ending → 가 아니에요",
+              "examples": [
+                "치마 → 치마가 아니에요 (ends in ㅏ)",
+                "구두 → 구두가 아니에요 (ends in ㅜ)"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "이게 치마예요?", "english": "Is this a skirt?", "highlight": "예요" },
+            { "korean": "네, 치마예요.", "english": "Yes, it's a skirt.", "highlight": "예요" },
+            { "korean": "저게 모자예요?", "english": "Is that a hat?", "highlight": "예요" },
+            { "korean": "아니요, 모자가 아니에요.", "english": "No, it's not a hat.", "highlight": "가 아니에요" },
+            { "korean": "안경이 아니에요. 양말이에요.", "english": "It's not glasses. It's socks.", "highlight": "이 아니에요" },
+            { "korean": "구두가 아니에요. 운동화예요.", "english": "It's not dress shoes. It's sneakers.", "highlight": "가 아니에요" }
+          ],
+          "qna": [
+            { "question": "이게 구두예요?", "answer": "아니요, 구두가 아니에요. 운동화예요." },
+            { "question": "이게 안경이에요?", "answer": "아니요, 안경이 아니에요. 양말이에요." },
+            { "question": "저게 치마예요?", "answer": "아니요, 치마가 아니에요. 바지예요." },
+            { "question": "이게 양말이에요?", "answer": "네, 양말이에요." }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "exercises": [],
+      "quiz_items": [
+        {
+          "scene": "👗",
+          "english": "No, it's not pants. It's a skirt.",
+          "hint": "바지 ends in ㅣ → vowel → 가",
+          "answer": ["바지", "가", "아니에요.", "치마", "예요."],
+          "types": ["noun", "particle", "verb", "noun", "verb"],
+          "chunks": [
+            {"text": "아니요,", "type": "particle", "en": "No,"},
+            {"text": "바지가 아니에요.", "type": "verb", "en": "it's not pants."},
+            {"text": "치마예요.", "type": "noun", "en": "it's a skirt."}
+          ]
+        },
+        {
+          "scene": "👖",
+          "english": "No, it's not a skirt. It's pants.",
+          "hint": "치마 ends in ㅏ → vowel → 가",
+          "answer": ["치마", "가", "아니에요.", "바지", "예요."],
+          "types": ["noun", "particle", "verb", "noun", "verb"],
+          "chunks": [
+            {"text": "아니요,", "type": "particle", "en": "No,"},
+            {"text": "치마가 아니에요.", "type": "verb", "en": "it's not a skirt."},
+            {"text": "바지예요.", "type": "noun", "en": "it's pants."}
+          ]
+        },
+        {
+          "scene": "👟",
+          "english": "No, it's not dress shoes. It's sneakers.",
+          "hint": "구두 ends in ㅜ → vowel → 가",
+          "answer": ["구두", "가", "아니에요.", "운동화", "예요."],
+          "types": ["noun", "particle", "verb", "noun", "verb"],
+          "chunks": [
+            {"text": "아니요,", "type": "particle", "en": "No,"},
+            {"text": "구두가 아니에요.", "type": "verb", "en": "it's not dress shoes."},
+            {"text": "운동화예요.", "type": "noun", "en": "it's sneakers."}
+          ]
+        },
+        {
+          "scene": "👠",
+          "english": "No, it's not sneakers. It's dress shoes.",
+          "hint": "운동화 ends in ㅏ → vowel → 가",
+          "answer": ["운동화", "가", "아니에요.", "구두", "예요."],
+          "types": ["noun", "particle", "verb", "noun", "verb"],
+          "chunks": [
+            {"text": "아니요,", "type": "particle", "en": "No,"},
+            {"text": "운동화가 아니에요.", "type": "verb", "en": "it's not sneakers."},
+            {"text": "구두예요.", "type": "noun", "en": "it's dress shoes."}
+          ]
+        },
+        {
+          "scene": "👓",
+          "english": "No, it's not socks. It's glasses.",
+          "hint": "양말 ends in ㄹ → consonant → 이",
+          "answer": ["양말", "이", "아니에요.", "안경", "이에요."],
+          "types": ["noun", "particle", "verb", "noun", "verb"],
+          "chunks": [
+            {"text": "아니요,", "type": "particle", "en": "No,"},
+            {"text": "양말이 아니에요.", "type": "verb", "en": "it's not socks."},
+            {"text": "안경이에요.", "type": "noun", "en": "it's glasses."}
+          ]
+        },
+        {
+          "scene": "🧦",
+          "english": "No, it's not glasses. It's socks.",
+          "hint": "안경 ends in ㅇ → consonant → 이",
+          "answer": ["안경", "이", "아니에요.", "양말", "이에요."],
+          "types": ["noun", "particle", "verb", "noun", "verb"],
+          "chunks": [
+            {"text": "아니요,", "type": "particle", "en": "No,"},
+            {"text": "안경이 아니에요.", "type": "verb", "en": "it's not glasses."},
+            {"text": "양말이에요.", "type": "noun", "en": "it's socks."}
+          ]
+        }
+      ]
+    }
+  }
+}
