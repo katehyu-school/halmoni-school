@@ -118,7 +118,7 @@ const GrammarRenderer = (() => {
   </div>
 </div>`).join('');
     return `<div class="card">
-  <div class="section-title">💬 Q&A 연습</div>
+  <div class="section-title">💬 Q&A Practice</div>
   ${items}
 </div>`;
   }
