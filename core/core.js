@@ -208,14 +208,17 @@
 
     async function nominate(studentName, unit, qIndex) {
       if (!state.sessionId) return;
-      await supa.from('practice_session').update({
+      const update = {
         current_player: studentName,
         unit,
         q_index: qIndex,
         raised_hands: [],
         status: 'playing',
         updated_at: new Date().toISOString(),
-      }).eq('id', state.sessionId);
+      };
+      await supa.from('practice_session').update(update).eq('id', state.sessionId);
+      // 로컬 캐시에도 반영해 두어야 setStatus가 current_player를 알 수 있음
+      state.last = { ...(state.last || {}), ...update };
     }
 
     async function raiseHand(name) {
@@ -233,8 +236,11 @@
 
     async function setStatus(status) {
       if (!state.sessionId) return;
+      // current_player를 함께 보내야 realtime payload.new에 포함됨
+      // (Supabase는 변경된 컬럼만 payload.new에 담으므로, 보내지 않으면 수신 측에서 player가 null이 됨)
       await supa.from('practice_session').update({
         status,
+        current_player: state.last?.current_player ?? null,
         updated_at: new Date().toISOString(),
       }).eq('id', state.sessionId);
     }
@@ -242,10 +248,15 @@
     supa.channel('core-prac-' + Math.random().toString(36).slice(2, 8))
       .on('postgres_changes',
           { event: 'UPDATE', schema: 'public', table: 'practice_session' },
-          payload => options.onStateChange?.(payload.new, true))
-      .subscribe();
-
-    load();
+          payload => {
+            // payload.new는 변경된 컬럼만 올 수 있으므로, 기존 state.last와 머지해서 완전한 상태 유지
+            state.last = { ...(state.last || {}), ...payload.new };
+            options.onStateChange?.(state.last, true);
+          })
+      .subscribe((status) => {
+        // 구독 확인 후 초기 상태 로드 — 구독 전에 발생한 이벤트를 놓치지 않음
+        if (status === 'SUBSCRIBED') load();
+      });
 
     return { state, nominate, raiseHand, setStatus, reload: load };
   }
