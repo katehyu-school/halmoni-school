@@ -843,6 +843,167 @@ body {
   font-size: 10px !important;
 }
 
+/* ── 0과 intro 패널 STYLES ── */
+.intro-panel {
+  display: none;
+  padding: 0;
+}
+.intro-panel.active { display: block; }
+
+.intro-hero {
+  background: linear-gradient(135deg, #0f7c6e 0%, #1a5fa8 100%);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 32px 28px 28px;
+  color: #fff;
+  margin-bottom: 0;
+}
+.intro-hero-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.intro-hero-sub {
+  font-size: 13px;
+  opacity: .8;
+  line-height: 1.6;
+}
+.intro-facts {
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.intro-fact {
+  background: rgba(255,255,255,.15);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.intro-fact strong { font-size: 20px; font-weight: 700; }
+
+.intro-body {
+  background: var(--white);
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 24px 24px 28px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+}
+.intro-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--gray-500);
+  margin: 24px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.intro-section-title:first-child { margin-top: 0; }
+
+.intro-tip {
+  background: var(--teal-lt);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 9px 14px;
+  font-size: 12.5px;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.intro-hg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 8px;
+}
+.intro-hg-card {
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 10px 6px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .18s;
+  user-select: none;
+}
+.intro-hg-card:hover { border-color: var(--purple); background: var(--purple-lt); }
+.intro-hg-letter {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--gray-900);
+}
+.intro-hg-rom {
+  font-size: 11px;
+  color: var(--gray-500);
+  margin-top: 3px;
+}
+.intro-hg-name {
+  font-size: 10px;
+  color: var(--gray-500);
+}
+
+.intro-builder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--gray-100);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+}
+.intro-builder-label {
+  font-size: 11px;
+  color: var(--gray-500);
+  margin-bottom: 4px;
+}
+.intro-builder select {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  background: var(--white);
+  cursor: pointer;
+  min-width: 110px;
+}
+.intro-builder-plus {
+  font-size: 20px;
+  color: var(--gray-500);
+  font-weight: 300;
+  padding-top: 18px;
+}
+.intro-builder-result {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--purple);
+  cursor: pointer;
+  padding-top: 14px;
+  transition: transform .15s;
+}
+.intro-builder-result:hover { transform: scale(1.12); }
+
+.intro-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 13px;
+  background: linear-gradient(135deg, #0f7c6e, #1a5fa8);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .18s;
+  letter-spacing: .02em;
+}
+.intro-more-btn:hover { opacity: .88; }
+
 /* ── 0과 STYLES ── */
 .u0-tabs {
   display: flex;
@@ -1056,6 +1217,124 @@ body {
 .u0-quiz-opt:hover { background: var(--teal-lt); border-color: var(--teal); }
 .u0-quiz-opt.correct { background: #e8f5e9; border-color: #43a047; color: #2e7d32; }
 .u0-quiz-opt.wrong   { background: #ffebee; border-color: #e53935; color: #c62828; }
+
+/* ── 0과 한글 탭 ── */
+.u0-hg-step {
+  margin-bottom: 24px;
+}
+.u0-hg-step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px solid;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 10px 14px;
+  flex-wrap: wrap;
+}
+.u0-hg-step-num {
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 50%;
+  width: 24px; height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.u0-hg-step-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gray-900);
+}
+.u0-hg-step-sub {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-left: auto;
+}
+.u0-hg-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+.u0-hg-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .15s;
+  min-width: 64px;
+}
+.u0-hg-card:hover { border-color: var(--purple); background: var(--purple-lt); }
+.u0-hg-letter {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--purple);
+  line-height: 1;
+}
+.u0-hg-rom  { font-size: 0.72rem; color: var(--gray-500); margin-top: 3px; }
+.u0-hg-name { font-size: 0.7rem;  color: var(--gray-400); margin-top: 1px; }
+
+/* 음절 만들기 */
+.u0-hg-builder {
+  padding: 16px 14px;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-top: none;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+.u0-hg-builder-selects {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.u0-hg-select-label {
+  font-size: 11px;
+  color: var(--gray-500);
+  margin-bottom: 5px;
+}
+.u0-hg-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--gray-200);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  background: var(--white);
+  cursor: pointer;
+}
+.u0-hg-plus {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  margin-top: 18px;
+}
+.u0-hg-result-wrap { text-align: center; }
+.u0-hg-result {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--white);
+  border: 2px solid #90caf9;
+  border-radius: var(--radius-sm);
+  width: 80px; height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s;
+  margin: 0 auto;
+}
+.u0-hg-result:hover { background: var(--blue-lt); }
 
 /* ── 한글 기초 NAV BUTTON ── */
 .hangul-nav-btn {
@@ -1760,7 +2039,7 @@ body {
       <!-- 입문 -->
       <li class="unit-item">
         <div class="unit-topic-label">입문 · Intro</div>
-        <button class="unit-btn" onclick="selectUnit(this,0)">
+        <button class="unit-btn" onclick="showHangulIntro(this)">
           <span class="unit-num unit-num-intro">0</span>
           <span>한글을 배워요<span class="unit-subtitle">Let's learn Korean</span></span>
         </button>
@@ -1770,7 +2049,7 @@ body {
       <!-- 0과 -->
       <li class="unit-item">
         <div class="unit-topic-label">한국어 첫걸음 · First Steps</div>
-        <button class="unit-btn" onclick="selectUnit(this,0);loadUnit(0)">
+        <button class="unit-btn active" onclick="selectUnit(this,0);loadUnit(0)">
           <span class="unit-num" style="background:var(--teal-md);">00</span>
           <span>안녕하세요! 처음 뵙겠습니다<span class="unit-subtitle">Greetings & Classroom Korean</span></span>
         </button>
@@ -1778,7 +2057,7 @@ body {
 
       <li class="unit-item">
         <div class="unit-topic-label">자기소개 · Introducing Yourself</div>
-        <button class="unit-btn active" onclick="selectUnit(this,1);loadUnit(1)">
+        <button class="unit-btn" onclick="selectUnit(this,1);loadUnit(1)">
           <span class="unit-num">01</span>
           <span>안녕하세요? 저는 안나예요<span class="unit-subtitle">Hi, I'm Anna</span></span>
         </button>
@@ -1881,13 +2160,81 @@ body {
       <button class="section-tab" data-section="real" onclick="switchTab(this,'real')">🌏 Real Life<span class="tab-en">실생활 적용</span></button>
     </div>
 
+    <!-- ══ 입문 0과: 한글을 배워요 PANEL ══ -->
+    <div class="intro-panel" id="panel-intro">
+
+      <!-- Hero 헤더 -->
+      <div class="intro-hero">
+        <div class="intro-hero-title">✏️ 한글을 배워요</div>
+        <div class="intro-hero-sub">Korean is written in <strong>한글 (Hangeul)</strong> — a phonetic alphabet invented in 1443.<br>Just 24 letters, combined into syllable blocks. Click any letter to hear it!</div>
+        <div class="intro-facts">
+          <div class="intro-fact"><strong>14</strong>자음 Consonants</div>
+          <div class="intro-fact"><strong>10</strong>기본 모음 Vowels</div>
+          <div class="intro-fact"><strong>1443</strong>년 창제</div>
+          <div class="intro-fact"><strong>~2hrs</strong>to read basics</div>
+        </div>
+      </div>
+
+      <div class="intro-body">
+
+        <!-- 모음 -->
+        <div class="intro-section-title">① 모음 · Vowels — 기본 10개</div>
+        <div class="intro-tip">💡 세로 모음 (ㅏ ㅓ ㅣ…) 은 자음 <strong>옆</strong>에, 가로 모음 (ㅗ ㅜ ㅡ…) 은 자음 <strong>아래</strong>에 와요.</div>
+        <div class="intro-hg-grid" id="intro-vowels"></div>
+
+        <!-- 자음 -->
+        <div class="intro-section-title">② 자음 · Consonants — 기본 14개</div>
+        <div class="intro-tip">💡 자음만으로는 소리가 없어요 — 항상 모음과 함께 써야 해요.</div>
+        <div class="intro-hg-grid" id="intro-consonants"></div>
+
+        <!-- 음절 조합기 -->
+        <div class="intro-section-title">③ 음절 만들기 · Build a Syllable</div>
+        <div class="intro-builder">
+          <div>
+            <div class="intro-builder-label">자음 Consonant</div>
+            <select id="introC" onchange="buildIntroSyl()">
+              <option value="ㄱ">ㄱ g</option><option value="ㄴ">ㄴ n</option>
+              <option value="ㄷ">ㄷ d</option><option value="ㄹ">ㄹ r/l</option>
+              <option value="ㅁ">ㅁ m</option><option value="ㅂ">ㅂ b</option>
+              <option value="ㅅ">ㅅ s</option><option value="ㅇ">ㅇ (silent)</option>
+              <option value="ㅈ">ㅈ j</option><option value="ㅊ">ㅊ ch</option>
+              <option value="ㅋ">ㅋ k</option><option value="ㅌ">ㅌ t</option>
+              <option value="ㅍ">ㅍ p</option><option value="ㅎ">ㅎ h</option>
+            </select>
+          </div>
+          <div class="intro-builder-plus">+</div>
+          <div>
+            <div class="intro-builder-label">모음 Vowel</div>
+            <select id="introV" onchange="buildIntroSyl()">
+              <option value="ㅏ">ㅏ a</option><option value="ㅓ">ㅓ eo</option>
+              <option value="ㅗ">ㅗ o</option><option value="ㅜ">ㅜ u</option>
+              <option value="ㅡ">ㅡ eu</option><option value="ㅣ">ㅣ i</option>
+              <option value="ㅐ">ㅐ ae</option><option value="ㅔ">ㅔ e</option>
+              <option value="ㅑ">ㅑ ya</option><option value="ㅕ">ㅕ yeo</option>
+              <option value="ㅛ">ㅛ yo</option><option value="ㅠ">ㅠ yu</option>
+            </select>
+          </div>
+          <div class="intro-builder-plus">=</div>
+          <div>
+            <div class="intro-builder-label" style="text-align:center;">🔊 tap!</div>
+            <div class="intro-builder-result" id="introResult" onclick="speakIntroSyl()">가</div>
+          </div>
+        </div>
+
+        <!-- 더 자세히 -->
+        <button class="intro-more-btn" onclick="openHangul()">📖 더 자세히 배우기 — 받침 · 발음 규칙 · 복합 모음 →</button>
+
+      </div>
+    </div><!-- /panel-intro -->
+
     <!-- ══ 0과 PANEL ══ -->
-    <div class="section-panel" id="panel-unit0">
+    <div class="section-panel active" id="panel-unit0">
 
       <!-- 0과 내부 탭 -->
       <div class="u0-tabs">
         <button class="u0-tab active" onclick="u0Tab(this,'u0-greetings')">🙏 인사</button>
         <button class="u0-tab" onclick="u0Tab(this,'u0-classroom')">💬 교실 표현</button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-hangul')">✏️ 한글</button>
         <button class="u0-tab" onclick="u0Tab(this,'u0-numbers')">🔢 숫자</button>
         <button class="u0-tab" onclick="u0Tab(this,'u0-reading')">🇰🇷 이름 읽기</button>
         <button class="u0-tab" onclick="u0Tab(this,'u0-quiz');renderU0Quiz()">🎯 퀴즈</button>
@@ -1916,6 +2263,76 @@ body {
               <div id="studentPhrases"></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- ── 한글 ── -->
+      <div class="u0-panel" id="u0-hangul">
+        <div class="panel-card">
+          <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>한글 — Learn to Read Korean · 단계별로 배워요</div>
+          <div class="u0-tip">💡 한글은 24개의 글자로 이루어져 있어요. 모음 → 자음 → 음절 순서로 배우면 금방 읽을 수 있어요!</div>
+
+          <!-- STEP 1: 기본 모음 -->
+          <div class="u0-hg-step">
+            <div class="u0-hg-step-header" style="background:var(--teal-lt);border-color:var(--teal-md);">
+              <span class="u0-hg-step-num" style="background:var(--teal);">1</span>
+              <span class="u0-hg-step-title">기본 모음 · Basic Vowels</span>
+              <span class="u0-hg-step-sub">Vertical: sit <strong>beside</strong> a consonant &nbsp;|&nbsp; Horizontal: sit <strong>below</strong> a consonant</span>
+            </div>
+            <div class="u0-hg-grid" id="hg-vowels"></div>
+          </div>
+
+          <!-- STEP 2: 기본 자음 -->
+          <div class="u0-hg-step">
+            <div class="u0-hg-step-header" style="background:var(--amber-lt);border-color:#e8c07a;">
+              <span class="u0-hg-step-num" style="background:var(--amber);">2</span>
+              <span class="u0-hg-step-title">기본 자음 · Basic Consonants</span>
+              <span class="u0-hg-step-sub">A consonant alone makes no sound — it always needs a vowel</span>
+            </div>
+            <div class="u0-hg-grid" id="hg-consonants"></div>
+          </div>
+
+          <!-- STEP 3: 음절 만들기 -->
+          <div class="u0-hg-step">
+            <div class="u0-hg-step-header" style="background:var(--blue-lt);border-color:#90caf9;">
+              <span class="u0-hg-step-num" style="background:var(--blue);">3</span>
+              <span class="u0-hg-step-title">음절 만들기 · Build a Syllable</span>
+              <span class="u0-hg-step-sub">자음 + 모음 = 음절 · Click to hear it!</span>
+            </div>
+            <div class="u0-hg-builder">
+              <div class="u0-hg-builder-selects">
+                <div>
+                  <div class="u0-hg-select-label">① 자음 Consonant</div>
+                  <select id="hgC" onchange="buildHgSyl()" class="u0-hg-select">
+                    <option value="ㄱ">ㄱ g</option><option value="ㄴ">ㄴ n</option>
+                    <option value="ㄷ">ㄷ d</option><option value="ㄹ">ㄹ r/l</option>
+                    <option value="ㅁ">ㅁ m</option><option value="ㅂ">ㅂ b</option>
+                    <option value="ㅅ">ㅅ s</option><option value="ㅇ">ㅇ (silent)</option>
+                    <option value="ㅈ">ㅈ j</option><option value="ㅊ">ㅊ ch</option>
+                    <option value="ㅎ">ㅎ h</option>
+                  </select>
+                </div>
+                <div class="u0-hg-plus">+</div>
+                <div>
+                  <div class="u0-hg-select-label">② 모음 Vowel</div>
+                  <select id="hgV" onchange="buildHgSyl()" class="u0-hg-select">
+                    <option value="ㅏ">ㅏ a</option><option value="ㅓ">ㅓ eo</option>
+                    <option value="ㅗ">ㅗ o</option><option value="ㅜ">ㅜ u</option>
+                    <option value="ㅡ">ㅡ eu</option><option value="ㅣ">ㅣ i</option>
+                    <option value="ㅐ">ㅐ ae</option><option value="ㅔ">ㅔ e</option>
+                    <option value="ㅑ">ㅑ ya</option><option value="ㅕ">ㅕ yeo</option>
+                    <option value="ㅛ">ㅛ yo</option><option value="ㅠ">ㅠ yu</option>
+                  </select>
+                </div>
+                <div class="u0-hg-plus">=</div>
+                <div class="u0-hg-result-wrap">
+                  <div id="hgResult" class="u0-hg-result" onclick="speakHgSyl()">가</div>
+                  <div style="font-size:11px;color:var(--gray-500);text-align:center;margin-top:4px;">tap to hear 🔊</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -1975,7 +2392,7 @@ body {
     </div><!-- /panel-unit0 -->
 
     <!-- ══ 1. VOCAB PANEL ══ -->
-    <div class="section-panel active" id="panel-vocab">
+    <div class="section-panel" id="panel-vocab">
       <div class="panel-card">
         <div class="panel-title"><span class="dot" style="background:var(--amber)"></span>Vocabulary — click a card to see the meaning</div>
         <div class="vocab-grid" id="vocabGrid">
@@ -2167,8 +2584,8 @@ body {
 </div><!-- /main -->
 
 <footer class="footer">
-  세종 한국어 1A (2022) · 01과 안녕하세요? 저는 안나예요<br>
-  © 2025 Kate HaeOk Shin Yu · All rights reserved
+  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
+  Yu Family Korean School
 </footer>
 
 <script>
@@ -2760,6 +3177,62 @@ const UNI_INITIAL = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ'
 const UNI_VOWEL  = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
 const UNI_FINAL  = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
+// ── 0과 입문 패널 ──
+function showHangulIntro(btn) {
+  // 사이드바 active 버튼 변경
+  document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // unit header + section tabs 숨기기
+  document.getElementById('unitHeader').style.display = 'none';
+  document.querySelector('.section-tabs').style.display = 'none';
+
+  // 모든 패널 숨기기
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-unit0').classList.remove('active');
+
+  // intro 패널 보이기
+  document.getElementById('panel-intro').classList.add('active');
+
+  // 내용 렌더
+  renderIntroHangul();
+}
+
+function renderIntroHangul() {
+  const vg = document.getElementById('intro-vowels');
+  const cg = document.getElementById('intro-consonants');
+  if (!vg || vg.children.length) return;  // 이미 렌더됨
+
+  const card = (item) => `
+    <div class="intro-hg-card" onclick="speak('${item.name}')">
+      <div class="intro-hg-letter">${item.l}</div>
+      <div class="intro-hg-rom">[${item.rom}]</div>
+      <div class="intro-hg-name">${item.name}</div>
+    </div>`;
+
+  vg.innerHTML = u0Vowels.map(v => card(v)).join('');
+  cg.innerHTML = u0Consonants.map(c => card(c)).join('');
+  buildIntroSyl();
+}
+
+function buildIntroSyl() {
+  const c = document.getElementById('introC')?.value;
+  const v = document.getElementById('introV')?.value;
+  if (!c || !v) return;
+  const cho  = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+  const jung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+  const ci = cho.indexOf(c), vi = jung.indexOf(v);
+  if (ci < 0 || vi < 0) return;
+  const syl = String.fromCharCode(0xAC00 + (ci * 21 + vi) * 28);
+  const el = document.getElementById('introResult');
+  if (el) el.textContent = syl;
+}
+
+function speakIntroSyl() {
+  const el = document.getElementById('introResult');
+  if (el) speak(el.textContent);
+}
+
 function openHangul() {
   document.getElementById('hangulOverlay').style.display = 'block';
   document.body.style.overflow = 'hidden';
@@ -3049,6 +3522,8 @@ async function loadUnit(num) {
   // Reset to vocab tab
   document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-intro').classList.remove('active');
+  document.getElementById('unitHeader').style.display = '';
   document.querySelector('.content-area').scrollTop = 0;
 
   // ── 0과: 특수 패널 ──
@@ -3701,10 +4176,90 @@ function nextU0Quiz() {
   renderU0Quiz();
 }
 
+// ── 한글 데이터 ──
+const u0Vowels = [
+  {l:'ㅏ', rom:'a',   name:'아'},
+  {l:'ㅓ', rom:'eo',  name:'어'},
+  {l:'ㅗ', rom:'o',   name:'오'},
+  {l:'ㅜ', rom:'u',   name:'우'},
+  {l:'ㅡ', rom:'eu',  name:'으'},
+  {l:'ㅣ', rom:'i',   name:'이'},
+  {l:'ㅐ', rom:'ae',  name:'애'},
+  {l:'ㅔ', rom:'e',   name:'에'},
+  {l:'ㅑ', rom:'ya',  name:'야'},
+  {l:'ㅕ', rom:'yeo', name:'여'},
+  {l:'ㅛ', rom:'yo',  name:'요'},
+  {l:'ㅠ', rom:'yu',  name:'유'},
+];
+const u0Consonants = [
+  {l:'ㄱ', rom:'g/k',  name:'기역'},
+  {l:'ㄴ', rom:'n',    name:'니은'},
+  {l:'ㄷ', rom:'d/t',  name:'디귿'},
+  {l:'ㄹ', rom:'r/l',  name:'리을'},
+  {l:'ㅁ', rom:'m',    name:'미음'},
+  {l:'ㅂ', rom:'b/p',  name:'비읍'},
+  {l:'ㅅ', rom:'s',    name:'시옷'},
+  {l:'ㅇ', rom:'silent/ng', name:'이응'},
+  {l:'ㅈ', rom:'j',    name:'지읒'},
+  {l:'ㅊ', rom:'ch',   name:'치읓'},
+  {l:'ㅋ', rom:'k',    name:'키읔'},
+  {l:'ㅌ', rom:'t',    name:'티읕'},
+  {l:'ㅍ', rom:'p',    name:'피읖'},
+  {l:'ㅎ', rom:'h',    name:'히읗'},
+];
+
+// ── 한글 탭 렌더 ──
+function renderU0Hangul() {
+  const vg = document.getElementById('hg-vowels');
+  const cg = document.getElementById('hg-consonants');
+  if (!vg || vg.children.length) return;
+
+  const card = (item, speakText) => `
+    <div class="u0-hg-card" onclick="speak('${speakText}')">
+      <div class="u0-hg-letter">${item.l}</div>
+      <div class="u0-hg-rom">[${item.rom}]</div>
+      <div class="u0-hg-name">${item.name}</div>
+    </div>`;
+
+  vg.innerHTML = u0Vowels.map(v => card(v, v.name)).join('');
+  cg.innerHTML = u0Consonants.map(c => card(c, c.name)).join('');
+  buildHgSyl();
+}
+
+// 음절 조합기
+const hgSylMap = {
+  'ㄱ':'가나다라마바사아자차카타파하'.split('').map((_,i)=>String.fromCharCode(0xAC00 + i*588)),
+};
+function buildHgSyl() {
+  const c = document.getElementById('hgC')?.value;
+  const v = document.getElementById('hgV')?.value;
+  if (!c || !v) return;
+  // 유니코드 한글 음절 조합: (초성idx * 21 + 중성idx) * 28 + 0xAC00
+  const cho  = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+  const jung = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+  const ci = cho.indexOf(c);
+  const vi = jung.indexOf(v);
+  if (ci < 0 || vi < 0) return;
+  const syl = String.fromCharCode(0xAC00 + (ci * 21 + vi) * 28);
+  const el = document.getElementById('hgResult');
+  if (el) el.textContent = syl;
+}
+function speakHgSyl() {
+  const el = document.getElementById('hgResult');
+  if (el) speak(el.textContent);
+}
+
+// ── 페이지 로드 시 0과를 기본으로 ──
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.section-tabs').style.display = 'none';
+  initUnit0();
+});
+
 // ── 0과 초기화 (loadUnit(0) 호출 시) ──
 function initUnit0() {
   renderU0Greetings();
   renderU0Classroom();
+  renderU0Hangul();
   renderU0Numbers();
   renderU0Reading();
   // 탭을 인사로 초기화
