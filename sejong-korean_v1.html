@@ -2087,7 +2087,7 @@ body {
       <!-- 물건 사기 -->
       <li class="unit-item">
         <div class="unit-topic-label">물건 사기 · Buying Things</div>
-        <button class="unit-btn" onclick="selectUnit(this,5)">
+        <button class="unit-btn" onclick="selectUnit(this,5);loadUnit(5)">
           <span class="unit-num">05</span>
           <span>빵하고 우유를 사요<span class="unit-subtitle">I buy bread and milk</span></span>
         </button>
@@ -3350,6 +3350,15 @@ const unitMeta = {
     goals:[
       {color:'amber',label:'새 어휘'},{color:'blue',label:'V-아/어요'},
       {color:'blue',label:'N을/를'},{color:'teal',label:'일상 대화'},{color:'coral',label:'실생활 적용'}
+    ],
+    cats:['All'],
+  },
+  5: {
+    badge:'05', title:'빵하고 우유를 사요',
+    topic:"I buy bread and milk · Buying Things",
+    goals:[
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'N에 가다'},
+      {color:'blue',label:'N하고/와·과'},{color:'teal',label:'쇼핑 대화'},{color:'coral',label:'실생활 적용'}
     ],
     cats:['All'],
   },
