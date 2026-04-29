@@ -843,6 +843,220 @@ body {
   font-size: 10px !important;
 }
 
+/* ── 0과 STYLES ── */
+.u0-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 14px 0 10px;
+  margin-bottom: 4px;
+}
+.u0-tab {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  color: var(--gray-500);
+  border-radius: 20px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.u0-tab.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+.u0-panel { display: none; }
+.u0-panel.active { display: block; }
+
+.u0-tip {
+  background: var(--teal-lt);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--gray-700);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* 인사 카드 */
+.u0-greeting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.u0-greeting-card {
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  transition: box-shadow .15s;
+}
+.u0-greeting-card:hover { box-shadow: var(--shadow-md); }
+.u0-greeting-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.u0-greeting-kr {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+.u0-greeting-rom { font-size: 0.78rem; color: var(--gray-500); margin-bottom: 3px; font-style: italic; }
+.u0-greeting-en  { font-size: 0.88rem; color: var(--gray-700); margin-bottom: 5px; }
+.u0-greeting-usage {
+  font-size: 0.75rem;
+  color: var(--white);
+  background: var(--teal-md);
+  border-radius: 10px;
+  padding: 2px 8px;
+  display: inline-block;
+}
+.u0-audio-btn {
+  background: none;
+  border: 1.5px solid var(--teal-md);
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.u0-audio-btn:hover { background: var(--teal-lt); }
+
+/* 교실 표현 */
+.u0-classroom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 620px) { .u0-classroom-grid { grid-template-columns: 1fr; } }
+.u0-classroom-header {
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+.u0-phrase-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  gap: 8px;
+}
+.u0-phrase-row:last-child { border-bottom: none; }
+.u0-phrase-kr  { font-family: var(--font-serif); font-size: 1rem; font-weight: 700; color: var(--gray-900); }
+.u0-phrase-rom { font-size: 0.72rem; color: var(--gray-500); font-style: italic; }
+.u0-phrase-en  { font-size: 0.8rem; color: var(--gray-500); margin-top: 2px; }
+
+/* 숫자 */
+.u0-num-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 580px) { .u0-num-grid { grid-template-columns: 1fr; } }
+.u0-num-header {
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+.u0-num-usage {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 2px;
+  opacity: .75;
+}
+.u0-num-row {
+  display: flex;
+  align-items: center;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  gap: 10px;
+  cursor: pointer;
+  transition: background .12s;
+}
+.u0-num-row:hover { background: var(--gray-100); }
+.u0-num-n    { font-size: 1.05rem; font-weight: 700; color: var(--gray-500); width: 24px; text-align: right; }
+.u0-num-kr   { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: var(--teal); min-width: 50px; }
+.u0-num-rom  { font-size: 0.75rem; color: var(--gray-500); font-style: italic; }
+
+/* 이름 읽기 */
+.u0-reading-section { }
+.u0-reading-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin-bottom: 10px;
+}
+.u0-reading-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.u0-reading-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .15s;
+  min-width: 80px;
+}
+.u0-reading-card:hover { border-color: var(--coral); background: var(--coral-lt); }
+.u0-reading-kr { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--coral); }
+.u0-reading-rom { font-size: 0.72rem; color: var(--gray-500); margin-top: 2px; }
+.u0-reading-en  { font-size: 0.78rem; color: var(--gray-700); margin-top: 1px; }
+
+/* 퀴즈 */
+.u0-quiz-scene {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.u0-quiz-q {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.u0-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.u0-quiz-opt {
+  background: var(--gray-100);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  text-align: center;
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  transition: all .15s;
+}
+.u0-quiz-opt:hover { background: var(--teal-lt); border-color: var(--teal); }
+.u0-quiz-opt.correct { background: #e8f5e9; border-color: #43a047; color: #2e7d32; }
+.u0-quiz-opt.wrong   { background: #ffebee; border-color: #e53935; color: #c62828; }
+
 /* ── 한글 기초 NAV BUTTON ── */
 .hangul-nav-btn {
   font-family: var(--font-sans);
@@ -1553,6 +1767,15 @@ body {
       </li>
 
       <!-- 자기소개 -->
+      <!-- 0과 -->
+      <li class="unit-item">
+        <div class="unit-topic-label">한국어 첫걸음 · First Steps</div>
+        <button class="unit-btn" onclick="selectUnit(this,0);loadUnit(0)">
+          <span class="unit-num" style="background:var(--teal-md);">00</span>
+          <span>안녕하세요! 처음 뵙겠습니다<span class="unit-subtitle">Greetings & Classroom Korean</span></span>
+        </button>
+      </li>
+
       <li class="unit-item">
         <div class="unit-topic-label">자기소개 · Introducing Yourself</div>
         <button class="unit-btn active" onclick="selectUnit(this,1);loadUnit(1)">
@@ -1657,6 +1880,99 @@ body {
       <button class="section-tab" data-section="quiz" onclick="switchTab(this,'quiz')">🎯 Quiz<span class="tab-en">연습 퀴즈</span></button>
       <button class="section-tab" data-section="real" onclick="switchTab(this,'real')">🌏 Real Life<span class="tab-en">실생활 적용</span></button>
     </div>
+
+    <!-- ══ 0과 PANEL ══ -->
+    <div class="section-panel" id="panel-unit0">
+
+      <!-- 0과 내부 탭 -->
+      <div class="u0-tabs">
+        <button class="u0-tab active" onclick="u0Tab(this,'u0-greetings')">🙏 인사</button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-classroom')">💬 교실 표현</button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-numbers')">🔢 숫자</button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-reading')">🇰🇷 이름 읽기</button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-quiz');renderU0Quiz()">🎯 퀴즈</button>
+      </div>
+
+      <!-- ── 인사 ── -->
+      <div class="u0-panel active" id="u0-greetings">
+        <div class="panel-card">
+          <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>인사 표현 — Essential Greetings</div>
+          <div class="u0-tip">💡 Korean has one greeting for all times of day — <strong>안녕하세요</strong> works morning, noon, and night!</div>
+          <div class="u0-greeting-grid" id="greetingGrid"></div>
+        </div>
+      </div>
+
+      <!-- ── 교실 표현 ── -->
+      <div class="u0-panel" id="u0-classroom">
+        <div class="panel-card">
+          <div class="panel-title"><span class="dot" style="background:var(--amber)"></span>교실 한국어 — Classroom Korean</div>
+          <div class="u0-classroom-grid">
+            <div class="u0-classroom-col">
+              <div class="u0-classroom-header" style="background:var(--teal);color:#fff;">🎓 선생님이 말해요 · Teacher says</div>
+              <div id="teacherPhrases"></div>
+            </div>
+            <div class="u0-classroom-col">
+              <div class="u0-classroom-header" style="background:var(--amber);color:#fff;">🙋 학생이 말해요 · Student says</div>
+              <div id="studentPhrases"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 숫자 ── -->
+      <div class="u0-panel" id="u0-numbers">
+        <div class="panel-card">
+          <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>숫자 — Korean Numbers</div>
+          <div class="u0-tip">💡 Korean has <strong>two number systems</strong>. Pure Korean for counting people & age; Sino-Korean for phone numbers & money.</div>
+          <div class="u0-num-grid">
+            <div class="u0-num-col">
+              <div class="u0-num-header" style="background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-md);">
+                순우리말 수 · Pure Korean
+                <span class="u0-num-usage">나이(age) · 명(people) · 시(o'clock)</span>
+              </div>
+              <div id="nativeNumbers"></div>
+            </div>
+            <div class="u0-num-col">
+              <div class="u0-num-header" style="background:var(--blue-lt);color:var(--blue);border:1px solid #90caf9;">
+                한자어 수 · Sino-Korean
+                <span class="u0-num-usage">전화번호 · 원(money) · 분(minutes)</span>
+              </div>
+              <div id="sinoNumbers"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 이름 읽기 ── -->
+      <div class="u0-panel" id="u0-reading">
+        <div class="panel-card">
+          <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>이름 읽기 — Reading Korean Names & Places</div>
+          <div class="u0-tip">💡 You already know these places! Try reading them before clicking to hear.</div>
+          <div class="u0-reading-section">
+            <div class="u0-reading-label">🗺️ 도시와 나라 · Cities & Countries</div>
+            <div class="u0-reading-grid" id="placesGrid"></div>
+          </div>
+          <div class="u0-reading-section" style="margin-top:20px;">
+            <div class="u0-reading-label">👤 한국 이름 · Korean Names</div>
+            <div class="u0-reading-grid" id="namesGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 퀴즈 ── -->
+      <div class="u0-panel" id="u0-quiz">
+        <div class="panel-card">
+          <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>상황 퀴즈 — What would you say?</div>
+          <div id="u0quizArea"></div>
+          <div style="margin-top:16px;display:flex;gap:10px;align-items:center;">
+            <button class="check-btn" style="background:var(--teal)" id="u0QuizCheck" onclick="checkU0Quiz()">✅ 확인</button>
+            <button class="check-btn" style="background:var(--gray-500)" onclick="nextU0Quiz()">→ 다음</button>
+            <span id="u0quizScore" style="font-size:13px;color:var(--gray-500);margin-left:6px;"></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panel-unit0 -->
 
     <!-- ══ 1. VOCAB PANEL ══ -->
     <div class="section-panel active" id="panel-vocab">
@@ -2519,6 +2835,15 @@ document.getElementById('hangulOverlay').addEventListener('click', function(e){
 // UNIT META
 // ══════════════════════════════════════════
 const unitMeta = {
+  0: {
+    badge:'00', title:'안녕하세요! 처음 뵙겠습니다',
+    topic:'Greetings & Classroom Korean · 한국어 첫걸음',
+    goals:[
+      {color:'teal',label:'인사 표현'},{color:'amber',label:'교실 한국어'},
+      {color:'blue',label:'숫자 읽기'},{color:'coral',label:'이름 읽기'}
+    ],
+    cats:['All'],
+  },
   1: {
     badge:'01', title:'안녕하세요? 저는 안나예요',
     topic:"Hi, I'm Anna · Introducing Yourself",
@@ -2724,10 +3049,19 @@ async function loadUnit(num) {
   // Reset to vocab tab
   document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.content-area').scrollTop = 0;
+
+  // ── 0과: 특수 패널 ──
+  if (num === 0) {
+    document.querySelector('.section-tabs').style.display = 'none';
+    document.getElementById('panel-unit0').classList.add('active');
+    initUnit0();
+    return;
+  }
+  // 다른 유닛: section-tabs 복원
+  document.querySelector('.section-tabs').style.display = '';
   document.querySelector('[data-section="vocab"]').classList.add('active');
   document.getElementById('panel-vocab').classList.add('active');
-
-  document.querySelector('.content-area').scrollTop = 0;
 
   // ── JSON-driven units (4+) use AdultRenderer ──
   if (num >= 4) {
@@ -3179,6 +3513,207 @@ function updateRealPanel(num) {
   }
 }
 
+
+
+// ══════════════════════════════════════════
+// 0과 DATA & FUNCTIONS
+// ══════════════════════════════════════════
+
+// ── 인사 데이터 ──
+const u0Greetings = [
+  { kr:'안녕하세요',        rom:'an-nyeong-ha-se-yo',      en:'Hello / Hi',                          usage:'Any time of day, to anyone',          emoji:'👋' },
+  { kr:'안녕히 가세요',     rom:'an-nyeong-hi ga-se-yo',   en:'Goodbye (to the person leaving)',      usage:'Said by the one who stays',           emoji:'🚶' },
+  { kr:'안녕히 계세요',     rom:'an-nyeong-hi gye-se-yo',  en:'Goodbye (to the person staying)',      usage:'Said by the one who leaves',          emoji:'🏠' },
+  { kr:'처음 뵙겠습니다',   rom:'cheo-eum boep-ge-sseum-ni-da', en:'Nice to meet you (formal)',      usage:'First-time meeting',                  emoji:'🤝' },
+  { kr:'감사합니다',        rom:'gam-sa-ham-ni-da',        en:'Thank you',                            usage:'Formal thank you',                    emoji:'🙏' },
+  { kr:'천만에요',          rom:'cheon-man-e-yo',          en:"You're welcome / Not at all",          usage:'Reply to 감사합니다',                  emoji:'😊' },
+  { kr:'죄송합니다',        rom:'joe-song-ham-ni-da',      en:"I'm sorry (formal)",                   usage:'Formal apology',                      emoji:'😔' },
+  { kr:'괜찮아요',          rom:'gwaen-chan-a-yo',         en:"It's okay / No problem",               usage:'Reply to 죄송합니다',                  emoji:'👌' },
+  { kr:'네',               rom:'ne',                      en:'Yes',                                  usage:'Agree or confirm',                    emoji:'✅' },
+  { kr:'아니요',            rom:'a-ni-yo',                 en:'No',                                   usage:'Disagree or decline',                 emoji:'❌' },
+];
+
+// ── 교실 표현 ──
+const u0Teacher = [
+  { kr:'따라 하세요',          rom:'tta-ra ha-se-yo',              en:'Repeat after me' },
+  { kr:'읽어 보세요',          rom:'il-geo bo-se-yo',              en:'Please read' },
+  { kr:'들어 보세요',          rom:'deu-reo bo-se-yo',             en:'Please listen' },
+  { kr:'보세요',               rom:'bo-se-yo',                     en:'Look at this' },
+  { kr:'써 보세요',            rom:'sseo bo-se-yo',                en:'Please write it' },
+  { kr:'다시 한 번',           rom:'da-si han beon',               en:'One more time' },
+  { kr:'같이 해요',            rom:'ga-chi hae-yo',                en:"Let's do it together" },
+];
+const u0Student = [
+  { kr:'모르겠어요',           rom:'mo-reu-ge-sseo-yo',            en:"I'm not sure / I don't know" },
+  { kr:'다시 말해 주세요',      rom:'da-si mal-hae ju-se-yo',       en:'Please say it again' },
+  { kr:'천천히 말해 주세요',    rom:'cheon-cheon-hi mal-hae ju-se-yo', en:'Please speak slowly' },
+  { kr:'잠깐만요',             rom:'jam-kkan-man-yo',              en:'Just a moment' },
+  { kr:'질문 있어요',          rom:'jil-mun i-sseo-yo',            en:'I have a question' },
+  { kr:'이게 뭐예요?',         rom:'i-ge mwo-ye-yo',               en:'What is this?' },
+];
+
+// ── 숫자 데이터 ──
+const u0Native = [
+  {n:1,kr:'하나',rom:'ha-na'},{n:2,kr:'둘',rom:'dul'},{n:3,kr:'셋',rom:'set'},
+  {n:4,kr:'넷',rom:'net'},{n:5,kr:'다섯',rom:'da-seot'},{n:6,kr:'여섯',rom:'yeo-seot'},
+  {n:7,kr:'일곱',rom:'il-gop'},{n:8,kr:'여덟',rom:'yeo-deol'},{n:9,kr:'아홉',rom:'a-hop'},
+  {n:10,kr:'열',rom:'yeol'},
+];
+const u0Sino = [
+  {n:1,kr:'일',rom:'il'},{n:2,kr:'이',rom:'i'},{n:3,kr:'삼',rom:'sam'},
+  {n:4,kr:'사',rom:'sa'},{n:5,kr:'오',rom:'o'},{n:6,kr:'육',rom:'yuk'},
+  {n:7,kr:'칠',rom:'chil'},{n:8,kr:'팔',rom:'pal'},{n:9,kr:'구',rom:'gu'},
+  {n:10,kr:'십',rom:'sip'},
+];
+
+// ── 이름 읽기 데이터 ──
+const u0Places = [
+  {kr:'서울',rom:'seo-ul',en:'Seoul'},{kr:'부산',rom:'bu-san',en:'Busan'},
+  {kr:'한국',rom:'han-guk',en:'Korea'},{kr:'미국',rom:'mi-guk',en:'USA'},
+  {kr:'일본',rom:'il-bon',en:'Japan'},{kr:'중국',rom:'jung-guk',en:'China'},
+  {kr:'영국',rom:'yeong-guk',en:'UK'},{kr:'캐나다',rom:'kae-na-da',en:'Canada'},
+  {kr:'호주',rom:'ho-ju',en:'Australia'},{kr:'프랑스',rom:'peu-rang-seu',en:'France'},
+];
+const u0Names = [
+  {kr:'김민준',rom:'gim min-jun',en:"Kim Minjun (M)"},{kr:'이서연',rom:'i seo-yeon',en:"Lee Seoyeon (F)"},
+  {kr:'박지호',rom:'bak ji-ho',en:"Park Jiho (M)"},{kr:'최유진',rom:'choe yu-jin',en:"Choi Yujin (F)"},
+  {kr:'정은지',rom:'jeong eun-ji',en:"Jeong Eunji (F)"},{kr:'강준서',rom:'gang jun-seo',en:"Kang Junseo (M)"},
+];
+
+// ── 퀴즈 데이터 ──
+const u0Quiz = [
+  { scene:'🚶', q:'수업이 끝났어요. 선생님이 떠나요.\n뭐라고 해요?', options:['안녕히 가세요','안녕히 계세요','처음 뵙겠습니다','죄송합니다'], answer:0 },
+  { scene:'🏠', q:'당신이 교실을 나가요. 선생님은 남아요.\n뭐라고 해요?', options:['안녕히 가세요','안녕히 계세요','감사합니다','괜찮아요'], answer:1 },
+  { scene:'😊', q:'선생님이 도와줬어요.\n뭐라고 해요?', options:['죄송합니다','천만에요','감사합니다','모르겠어요'], answer:2 },
+  { scene:'🤷', q:'선생님이 뭔가를 물어봤는데 모르겠어요.\n뭐라고 해요?', options:['잠깐만요','모르겠어요','읽어 보세요','따라 하세요'], answer:1 },
+  { scene:'🐢', q:'선생님이 너무 빨리 말해요.\n뭐라고 해요?', options:['다시 말해 주세요','천천히 말해 주세요','질문 있어요','이게 뭐예요?'], answer:1 },
+  { scene:'🤝', q:'처음 만난 사람이에요.\n뭐라고 해요?', options:['안녕하세요','처음 뵙겠습니다','괜찮아요','아니요'], answer:1 },
+];
+let u0QuizIdx = 0, u0QuizScore = 0, u0QuizAnswered = false;
+
+// ── 탭 전환 ──
+function u0Tab(btn, panelId) {
+  document.querySelectorAll('.u0-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.u0-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ── 인사 렌더 ──
+function renderU0Greetings() {
+  const grid = document.getElementById('greetingGrid');
+  if (!grid || grid.children.length) return;
+  grid.innerHTML = u0Greetings.map(g => `
+    <div class="u0-greeting-card">
+      <div class="u0-greeting-top">
+        <div>
+          <div class="u0-greeting-kr">${g.emoji} ${g.kr}</div>
+          <div class="u0-greeting-rom">[${g.rom}]</div>
+          <div class="u0-greeting-en">${g.en}</div>
+          <span class="u0-greeting-usage">${g.usage}</span>
+        </div>
+        <button class="u0-audio-btn" onclick="speak('${g.kr}')">🔊</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── 교실 표현 렌더 ──
+function renderU0Classroom() {
+  const tp = document.getElementById('teacherPhrases');
+  const sp = document.getElementById('studentPhrases');
+  if (!tp || tp.children.length) return;
+  const row = arr => arr.map(p => `
+    <div class="u0-phrase-row">
+      <div>
+        <div class="u0-phrase-kr">${p.kr}</div>
+        <div class="u0-phrase-rom">[${p.rom}]</div>
+        <div class="u0-phrase-en">${p.en}</div>
+      </div>
+      <button class="u0-audio-btn" onclick="speak('${p.kr}')">🔊</button>
+    </div>`).join('');
+  tp.innerHTML = row(u0Teacher);
+  sp.innerHTML = row(u0Student);
+}
+
+// ── 숫자 렌더 ──
+function renderU0Numbers() {
+  const nn = document.getElementById('nativeNumbers');
+  const sn = document.getElementById('sinoNumbers');
+  if (!nn || nn.children.length) return;
+  const row = arr => arr.map(r => `
+    <div class="u0-num-row" onclick="speak('${r.kr}')">
+      <span class="u0-num-n">${r.n}</span>
+      <span class="u0-num-kr">${r.kr}</span>
+      <span class="u0-num-rom">[${r.rom}]</span>
+      <span style="margin-left:auto;font-size:14px;opacity:.5;">🔊</span>
+    </div>`).join('');
+  nn.innerHTML = row(u0Native);
+  sn.innerHTML = row(u0Sino);
+}
+
+// ── 이름 읽기 렌더 ──
+function renderU0Reading() {
+  const pg = document.getElementById('placesGrid');
+  const ng = document.getElementById('namesGrid');
+  if (!pg || pg.children.length) return;
+  const card = arr => arr.map(r => `
+    <div class="u0-reading-card" onclick="speak('${r.kr}')">
+      <div class="u0-reading-kr">${r.kr}</div>
+      <div class="u0-reading-rom">${r.rom}</div>
+      <div class="u0-reading-en">${r.en}</div>
+    </div>`).join('');
+  pg.innerHTML = card(u0Places);
+  ng.innerHTML = card(u0Names);
+}
+
+// ── 퀴즈 렌더 ──
+function renderU0Quiz() {
+  const q = u0Quiz[u0QuizIdx];
+  u0QuizAnswered = false;
+  document.getElementById('u0quizArea').innerHTML = `
+    <div class="u0-quiz-scene">${q.scene}</div>
+    <div class="u0-quiz-q">${q.q.replace(/\n/g,'<br>')}</div>
+    <div class="u0-quiz-options">
+      ${q.options.map((o,i) => `<div class="u0-quiz-opt" onclick="selectU0Opt(this,${i})" data-i="${i}">${o}</div>`).join('')}
+    </div>`;
+  document.getElementById('u0quizScore').textContent = `${u0QuizIdx+1} / ${u0Quiz.length}  ✅ ${u0QuizScore}`;
+}
+
+function selectU0Opt(el, i) {
+  if (u0QuizAnswered) return;
+  u0QuizAnswered = true;
+  const correct = u0Quiz[u0QuizIdx].answer;
+  document.querySelectorAll('.u0-quiz-opt').forEach((o,j) => {
+    if (j === correct) o.classList.add('correct');
+    else if (j === i)  o.classList.add('wrong');
+  });
+  if (i === correct) {
+    u0QuizScore++;
+    speak(u0Quiz[u0QuizIdx].options[correct]);
+  }
+  document.getElementById('u0quizScore').textContent = `${u0QuizIdx+1} / ${u0Quiz.length}  ✅ ${u0QuizScore}`;
+}
+
+function checkU0Quiz()  { /* handled by selectU0Opt */ }
+function nextU0Quiz() {
+  u0QuizIdx = (u0QuizIdx + 1) % u0Quiz.length;
+  if (u0QuizIdx === 0) u0QuizScore = 0;
+  renderU0Quiz();
+}
+
+// ── 0과 초기화 (loadUnit(0) 호출 시) ──
+function initUnit0() {
+  renderU0Greetings();
+  renderU0Classroom();
+  renderU0Numbers();
+  renderU0Reading();
+  // 탭을 인사로 초기화
+  document.querySelectorAll('.u0-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.u0-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.u0-tab').classList.add('active');
+  document.getElementById('u0-greetings').classList.add('active');
+  u0QuizIdx = 0; u0QuizScore = 0;
+}
 
 </script>
 
