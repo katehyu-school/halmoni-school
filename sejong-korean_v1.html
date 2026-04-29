@@ -1566,6 +1566,7 @@ body {
   opacity: 0.85;
 }
 .section-tab.active .tab-en { color: rgba(255,255,255,0.85); }
+.u0-tab.active .tab-en { color: rgba(255,255,255,0.85); }
 
 @media (max-width: 720px) {
   .main { grid-template-columns: 1fr; }
@@ -2051,7 +2052,7 @@ body {
         <div class="unit-topic-label">한국어 첫걸음 · First Steps</div>
         <button class="unit-btn active" onclick="selectUnit(this,0);loadUnit(0)">
           <span class="unit-num" style="background:var(--teal-md);">00</span>
-          <span>안녕하세요! 처음 뵙겠습니다<span class="unit-subtitle">Greetings & Classroom Korean</span></span>
+          <span>안녕하세요! 처음 뵙겠습니다<span class="unit-subtitle">Hi, nice to meet you!</span></span>
         </button>
       </li>
 
@@ -2140,7 +2141,7 @@ body {
       <div class="unit-header-badge" id="unitBadge">00</div>
       <div class="unit-header-text">
         <h1 id="unitTitle">안녕하세요! 처음 뵙겠습니다</h1>
-        <div class="unit-topic" id="unitTopic">Greetings & Classroom Korean · 한국어 첫걸음</div>
+        <div class="unit-topic" id="unitTopic">Hi, nice to meet you! · 한국어 첫걸음</div>
         <div class="unit-goals" id="unitGoals">
           <span class="goal-tag teal">인사 표현</span>
           <span class="goal-tag amber">교실 한국어</span>
@@ -2178,12 +2179,12 @@ body {
 
         <!-- 모음 -->
         <div class="intro-section-title">① 모음 · Vowels — 기본 10개</div>
-        <div class="intro-tip">💡 세로 모음 (ㅏ ㅓ ㅣ…) 은 자음 <strong>옆</strong>에, 가로 모음 (ㅗ ㅜ ㅡ…) 은 자음 <strong>아래</strong>에 와요.</div>
+        <div class="intro-tip">💡 Vertical vowels (ㅏ ㅓ ㅣ…) go <strong>beside</strong> the consonant. Horizontal vowels (ㅗ ㅜ ㅡ…) go <strong>below</strong> the consonant.</div>
         <div class="intro-hg-grid" id="intro-vowels"></div>
 
         <!-- 자음 -->
         <div class="intro-section-title">② 자음 · Consonants — 기본 14개</div>
-        <div class="intro-tip">💡 자음만으로는 소리가 없어요 — 항상 모음과 함께 써야 해요.</div>
+        <div class="intro-tip">💡 A consonant alone has no sound — it always needs a vowel to be pronounced.</div>
         <div class="intro-hg-grid" id="intro-consonants"></div>
 
         <!-- 음절 조합기 -->
@@ -2221,7 +2222,7 @@ body {
         </div>
 
         <!-- 더 자세히 -->
-        <button class="intro-more-btn" onclick="openHangul()">📖 더 자세히 배우기 — 받침 · 발음 규칙 · 복합 모음 →</button>
+        <button class="intro-more-btn" onclick="openHangul()">📖 Learn more — Batchim · Pronunciation rules · Compound vowels →</button>
 
       </div>
     </div><!-- /panel-intro -->
@@ -2231,12 +2232,12 @@ body {
 
       <!-- 0과 내부 탭 -->
       <div class="u0-tabs">
-        <button class="u0-tab active" onclick="u0Tab(this,'u0-greetings')">🙏 인사</button>
-        <button class="u0-tab" onclick="u0Tab(this,'u0-classroom')">💬 교실 표현</button>
-        <button class="u0-tab" onclick="u0Tab(this,'u0-hangul')">✏️ 한글</button>
-        <button class="u0-tab" onclick="u0Tab(this,'u0-numbers')">🔢 숫자</button>
-        <button class="u0-tab" onclick="u0Tab(this,'u0-reading')">🇰🇷 이름 읽기</button>
-        <button class="u0-tab" onclick="u0Tab(this,'u0-quiz');renderU0Quiz()">🎯 퀴즈</button>
+        <button class="u0-tab active" onclick="u0Tab(this,'u0-greetings')">🙏 Greetings<span class="tab-en">인사</span></button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-classroom')">💬 Classroom<span class="tab-en">교실 표현</span></button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-hangul')">✏️ Hangeul<span class="tab-en">한글</span></button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-numbers')">🔢 Numbers<span class="tab-en">숫자</span></button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-reading')">🇰🇷 Names<span class="tab-en">이름 읽기</span></button>
+        <button class="u0-tab" onclick="u0Tab(this,'u0-quiz');renderU0Quiz()">🎯 Quiz<span class="tab-en">퀴즈</span></button>
       </div>
 
       <!-- ── 인사 ── -->
@@ -3309,7 +3310,7 @@ document.getElementById('hangulOverlay').addEventListener('click', function(e){
 const unitMeta = {
   0: {
     badge:'00', title:'안녕하세요! 처음 뵙겠습니다',
-    topic:'Greetings & Classroom Korean · 한국어 첫걸음',
+    topic:'Hi, nice to meet you! · 한국어 첫걸음',
     goals:[
       {color:'teal',label:'인사 표현'},{color:'amber',label:'교실 한국어'},
       {color:'blue',label:'숫자 읽기'},{color:'coral',label:'이름 읽기'}
