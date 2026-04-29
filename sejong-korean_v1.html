@@ -2137,16 +2137,15 @@ body {
 
     <!-- Unit header -->
     <div class="unit-header" id="unitHeader">
-      <div class="unit-header-badge" id="unitBadge">01</div>
+      <div class="unit-header-badge" id="unitBadge">00</div>
       <div class="unit-header-text">
-        <h1 id="unitTitle">안녕하세요? 저는 안나예요</h1>
-        <div class="unit-topic" id="unitTopic">Hi, I'm Anna · Introducing Yourself</div>
+        <h1 id="unitTitle">안녕하세요! 처음 뵙겠습니다</h1>
+        <div class="unit-topic" id="unitTopic">Greetings & Classroom Korean · 한국어 첫걸음</div>
         <div class="unit-goals" id="unitGoals">
-          <span class="goal-tag amber">새 어휘</span>
-          <span class="goal-tag blue">N이에요/예요</span>
-          <span class="goal-tag blue">N은/는</span>
-          <span class="goal-tag teal">자기소개 대화</span>
-          <span class="goal-tag coral">실생활 적용</span>
+          <span class="goal-tag teal">인사 표현</span>
+          <span class="goal-tag amber">교실 한국어</span>
+          <span class="goal-tag blue">숫자 읽기</span>
+          <span class="goal-tag coral">이름 읽기</span>
         </div>
       </div>
     </div>
@@ -4260,8 +4259,7 @@ function speakHgSyl() {
 
 // ── 페이지 로드 시 0과를 기본으로 ──
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.section-tabs').style.display = 'none';
-  initUnit0();
+  loadUnit(0);
 });
 
 // ── 0과 초기화 (loadUnit(0) 호출 시) ──
