@@ -1037,17 +1037,14 @@ body {
   align-items: center;
   gap: 6px;
 }
-.u0-tab:hover { border-color: var(--teal); color: var(--teal); }
-.u0-tab.active {
-  border-color: transparent;
-  color: #fff;
-}
-.u0-tab:nth-child(1).active { background: var(--teal); }
-.u0-tab:nth-child(2).active { background: var(--amber); }
-.u0-tab:nth-child(3).active { background: var(--purple); }
-.u0-tab:nth-child(4).active { background: var(--blue); }
-.u0-tab:nth-child(5).active { background: var(--coral); }
-.u0-tab:nth-child(6).active { background: var(--teal-md); }
+.u0-tab:hover { border-color: var(--amber); color: var(--amber); }
+.u0-tab.active { border-color: transparent; color: #fff; }
+.u0-tab:nth-child(1).active { background: var(--amber); }
+.u0-tab:nth-child(2).active { background: var(--purple); }
+.u0-tab:nth-child(3).active { background: var(--blue); }
+.u0-tab:nth-child(4).active { background: var(--coral); }
+.u0-tab:nth-child(5).active { background: var(--teal-md); }
+.u0-tab:nth-child(6).active { background: var(--teal); }
 .u0-panel { display: none; }
 .u0-panel.active { display: block; }
 
@@ -1960,9 +1957,120 @@ body {
           </div>
         </div>
 
+        <!-- 복합 모음 (ㅡ+ㅣ 결합): 자음 아래에 (넓게) -->
+        <div style="background:#f3e5f5;border-radius:var(--radius-sm);padding:16px;margin-bottom:16px;">
+          <div style="font-size:13px;font-weight:700;color:#7b1fa2;margin-bottom:4px;">ㅡ+ㅣ Compound group — <u>below</u> the consonant (wider)</div>
+          <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">These vowels are formed by combining an ㅡ-group vowel (地) + an ㅣ-group vowel (人)</div>
+          <!-- 조합 공식 -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅘ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅗ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅏ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅙ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅗ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅐ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅚ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅗ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅝ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅜ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅓ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅞ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅜ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅔ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅟ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅜ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#7b1fa2">
+              <span style="color:#7b1fa2;font-weight:700">ㅢ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅡ</span><span style="color:var(--gray-400);font-size:10px">(地)</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span><span style="color:var(--gray-400);font-size:10px">(人)</span>
+            </div>
+          </div>
+          <!-- 예시 블록 -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+
+            <!-- 봐 (ㅂ+ㅘ = ㅂ+ㅗ+ㅏ) -->
+            <div class="syl-block" onclick="speak('봐')">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div class="syl-c" style="background:#f5a623;width:56px;height:28px;font-size:15px;">ㅂ</div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:20px;font-size:12px;">ㅗ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:20px;font-size:12px;">ㅏ</div>
+                </div>
+              </div>
+              <div class="syl-label">봐 (ㅗ+ㅏ)</div>
+            </div>
+
+            <!-- 뭐 (ㅁ+ㅝ = ㅁ+ㅜ+ㅓ) -->
+            <div class="syl-block" onclick="speak('뭐')">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div class="syl-c" style="background:#f5a623;width:56px;height:28px;font-size:15px;">ㅁ</div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:20px;font-size:12px;">ㅜ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:20px;font-size:12px;">ㅓ</div>
+                </div>
+              </div>
+              <div class="syl-label">뭐 (ㅜ+ㅓ)</div>
+            </div>
+
+            <!-- 의 (ㅇ+ㅢ = ㅇ+ㅡ+ㅣ) -->
+            <div class="syl-block" onclick="speak('의')">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div class="syl-c" style="background:#f5a623;width:56px;height:28px;font-size:15px;">ㅇ</div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:20px;font-size:12px;">ㅡ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:20px;font-size:12px;">ㅣ</div>
+                </div>
+              </div>
+              <div class="syl-label">의 (ㅡ+ㅣ)</div>
+            </div>
+
+            <!-- 왜 (ㅇ+ㅙ = ㅇ+ㅗ+ㅐ) -->
+            <div class="syl-block" onclick="speak('왜')">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div class="syl-c" style="background:#f5a623;width:56px;height:28px;font-size:15px;">ㅇ</div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:20px;font-size:12px;">ㅗ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:20px;font-size:12px;">ㅐ</div>
+                </div>
+              </div>
+              <div class="syl-label">왜 (ㅗ+ㅐ)</div>
+            </div>
+
+          </div>
+        </div>
+
         <div class="h-tip">💡 Reading order: ① initial consonant → ② vowel → ③ final consonant (if any)<br>
-        <span style="color:var(--teal);font-weight:700">ㅣ (人) group</span> vowels are vertical, like a standing person → <strong>beside</strong> the consonant &nbsp;|&nbsp;
-        <span style="color:var(--blue);font-weight:700">ㅡ (地) group</span> vowels are horizontal, like flat earth → <strong>below</strong> the consonant</div>
+        <span style="color:var(--teal);font-weight:700">ㅣ (人) group</span> — vertical vowels → <strong>beside</strong> the consonant &nbsp;|&nbsp;
+        <span style="color:var(--blue);font-weight:700">ㅡ (地) group</span> — horizontal vowels → <strong>below</strong> the consonant &nbsp;|&nbsp;
+        <span style="color:#7b1fa2;font-weight:700">ㅡ+ㅣ Compound group</span> — two vowels fused together → <strong>below</strong> (wider)</div>
 
         <div class="h-section-title" style="margin-top:18px;">Build a syllable yourself! — 직접 만들어 보세요</div>
         <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px;">
@@ -2112,7 +2220,7 @@ body {
       <li class="unit-item">
         <div class="unit-topic-label">한국어 첫걸음 · First Steps</div>
         <button class="unit-btn active" onclick="selectUnit(this,0);loadUnit(0)">
-          <span class="unit-num" style="background:var(--teal-md);">00</span>
+          <span class="unit-num">00</span>
           <span>안녕하세요! 처음 뵙겠습니다<span class="unit-subtitle">Hi, nice to meet you!</span></span>
         </button>
       </li>
