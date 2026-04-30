@@ -1231,6 +1231,7 @@ body {
   transition: all .15s;
 }
 .u0-quiz-opt:hover { background: var(--teal-lt); border-color: var(--teal); }
+.u0-quiz-opt.selected { background: var(--teal-lt); border-color: var(--teal); color: var(--teal); font-weight:700; }
 .u0-quiz-opt.correct { background: #e8f5e9; border-color: #43a047; color: #2e7d32; }
 .u0-quiz-opt.wrong   { background: #ffebee; border-color: #e53935; color: #c62828; }
 
@@ -2579,8 +2580,8 @@ body {
           <div class="panel-title"><span class="dot" style="background:var(--purple)"></span>상황 퀴즈 — What would you say?</div>
           <div id="u0quizArea"></div>
           <div style="margin-top:16px;display:flex;gap:10px;align-items:center;">
-            <button class="check-btn" style="background:var(--teal)" id="u0QuizCheck" onclick="checkU0Quiz()">✅ 확인</button>
-            <button class="check-btn" style="background:var(--gray-500)" onclick="nextU0Quiz()">→ 다음</button>
+            <button class="check-btn" style="background:var(--teal)" id="u0QuizCheck" onclick="checkU0Quiz()">✅ 확인 <small style="font-size:11px;opacity:.8">Check</small></button>
+            <button class="check-btn" style="background:var(--gray-500);opacity:.5;cursor:not-allowed" id="u0QuizNext" onclick="nextU0Quiz()">→ 다음 <small style="font-size:11px;opacity:.8">Next</small></button>
             <span id="u0quizScore" style="font-size:13px;color:var(--gray-500);margin-left:6px;"></span>
           </div>
         </div>
@@ -4270,7 +4271,7 @@ const u0Quiz = [
   { scene:'🐢', q:'The teacher is speaking too fast.\nWhat do you say?', options:['다시 말해 주세요','천천히 말해 주세요','질문 있어요','이게 뭐예요?'], answer:1 },
   { scene:'🤝', q:'You are meeting someone for the very first time.\nWhat do you say?', options:['안녕하세요','만나서 반가워요','괜찮아요','아니요'], answer:1 },
 ];
-let u0QuizIdx = 0, u0QuizScore = 0, u0QuizAnswered = false;
+let u0QuizIdx = 0, u0QuizScore = 0, u0QuizAnswered = false, u0QuizSelected = -1;
 
 // ── 탭 전환 ──
 function u0Tab(btn, panelId) {
@@ -4351,6 +4352,9 @@ function renderU0Reading() {
 function renderU0Quiz() {
   const q = u0Quiz[u0QuizIdx];
   u0QuizAnswered = false;
+  u0QuizSelected = -1;
+  const nb = document.getElementById('u0QuizNext');
+  if (nb) { nb.style.background = 'var(--gray-500)'; nb.style.opacity = '.5'; nb.style.cursor = 'not-allowed'; }
   document.getElementById('u0quizArea').innerHTML = `
     <div class="u0-quiz-scene">${q.scene}</div>
     <div class="u0-quiz-q">${q.q.replace(/\n/g,'<br>')}</div>
@@ -4362,21 +4366,30 @@ function renderU0Quiz() {
 
 function selectU0Opt(el, i) {
   if (u0QuizAnswered) return;
+  u0QuizSelected = i;
+  document.querySelectorAll('.u0-quiz-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function checkU0Quiz() {
+  if (u0QuizAnswered || u0QuizSelected < 0) return;
   u0QuizAnswered = true;
   const correct = u0Quiz[u0QuizIdx].answer;
   document.querySelectorAll('.u0-quiz-opt').forEach((o,j) => {
+    o.classList.remove('selected');
     if (j === correct) o.classList.add('correct');
-    else if (j === i)  o.classList.add('wrong');
+    else if (j === u0QuizSelected) o.classList.add('wrong');
   });
-  if (i === correct) {
+  if (u0QuizSelected === correct) {
     u0QuizScore++;
     speak(u0Quiz[u0QuizIdx].options[correct]);
   }
   document.getElementById('u0quizScore').textContent = `${u0QuizIdx+1} / ${u0Quiz.length}  ✅ ${u0QuizScore}`;
+  const nb = document.getElementById('u0QuizNext');
+  if (nb) { nb.style.background = 'var(--amber)'; nb.style.opacity = '1'; nb.style.cursor = 'pointer'; }
 }
-
-function checkU0Quiz()  { /* handled by selectU0Opt */ }
 function nextU0Quiz() {
+  if (!u0QuizAnswered) return;
   u0QuizIdx = (u0QuizIdx + 1) % u0Quiz.length;
   if (u0QuizIdx === 0) u0QuizScore = 0;
   renderU0Quiz();
@@ -4480,6 +4493,4 @@ function initUnit0() {
 <!-- ── HalmoniCore 공통 라이브러리 + 성인반 JSON 로더 / 렌더러 ── -->
 <script src="/halmoni-school/core/core.js"></script>
 <script src="/halmoni-school/core/adult-data-loader.js"></script>
-<script src="/halmoni-school/core/adult-renderer.js"></script>
-</body>
-</html>
+<script src="/halmoni-school/core/adult-renderer.js"><
