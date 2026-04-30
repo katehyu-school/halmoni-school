@@ -3506,7 +3506,7 @@ document.getElementById('hangulOverlay').addEventListener('click', function(e){
 // ══════════════════════════════════════════
 const unitMeta = {
   0: {
-    badge:'00', title:'안녕하세요! 처음 뵙겠습니다',
+    badge:'00', title:'안녕하세요! 만나서 반가워요',
     topic:'Hi, nice to meet you! · 한국어 첫걸음',
     goals:[
       {color:'teal',label:'인사 표현'},{color:'amber',label:'교실 한국어'},
@@ -4205,7 +4205,7 @@ const u0Greetings = [
   { kr:'안녕하세요',        rom:'an-nyeong-ha-se-yo',      en:'Hello / Hi',                          usage:'Any time of day, to anyone',          emoji:'👋' },
   { kr:'안녕히 가세요',     rom:'an-nyeong-hi ga-se-yo',   en:'Goodbye (to the person leaving)',      usage:'Said by the one who stays',           emoji:'🚶' },
   { kr:'안녕히 계세요',     rom:'an-nyeong-hi gye-se-yo',  en:'Goodbye (to the person staying)',      usage:'Said by the one who leaves',          emoji:'🏠' },
-  { kr:'처음 뵙겠습니다',   rom:'cheo-eum boep-ge-sseum-ni-da', en:'Nice to meet you (formal)',      usage:'First-time meeting',                  emoji:'🤝' },
+  { kr:'만나서 반가워요',   rom:'cheo-eum boep-ge-sseum-ni-da', en:'Nice to meet you (formal)',      usage:'First-time meeting',                  emoji:'🤝' },
   { kr:'감사합니다',        rom:'gam-sa-ham-ni-da',        en:'Thank you',                            usage:'Formal thank you',                    emoji:'🙏' },
   { kr:'천만에요',          rom:'cheon-man-e-yo',          en:"You're welcome / Not at all",          usage:'Reply to 감사합니다',                  emoji:'😊' },
   { kr:'죄송합니다',        rom:'joe-song-ham-ni-da',      en:"I'm sorry (formal)",                   usage:'Formal apology',                      emoji:'😔' },
@@ -4263,12 +4263,12 @@ const u0Names = [
 
 // ── 퀴즈 데이터 ──
 const u0Quiz = [
-  { scene:'🚶', q:'Class is over. The teacher is leaving.\nWhat do you say?', options:['안녕히 가세요','안녕히 계세요','처음 뵙겠습니다','죄송합니다'], answer:0 },
-  { scene:'🏠', q:'You are leaving the classroom. The teacher stays.\nWhat do you say?', options:['안녕히 가세요','안녕히 계세요','감사합니다','괜찮아요'], answer:1 },
+  { scene:'🚶', q:'Class is over. The teacher is leaving.\nWhat do you say?', options:['안녕히 가세요','안녕히 계세요','','죄송합니다'], answer:0 },
+  { scene:'🏠', q:'You are leaving the classroom. The teacher stays.\nWhat do you say?', options:['안녕히 가세요','안녕히 계세요','감사합니다','만나서 반가워요','괜찮아요'], answer:1 },
   { scene:'😊', q:'The teacher just helped you.\nWhat do you say?', options:['죄송합니다','천만에요','감사합니다','모르겠어요'], answer:2 },
   { scene:'🤷', q:'The teacher asked you something but you don\'t know the answer.\nWhat do you say?', options:['잠깐만요','모르겠어요','읽어 보세요','따라 하세요'], answer:1 },
   { scene:'🐢', q:'The teacher is speaking too fast.\nWhat do you say?', options:['다시 말해 주세요','천천히 말해 주세요','질문 있어요','이게 뭐예요?'], answer:1 },
-  { scene:'🤝', q:'You are meeting someone for the very first time.\nWhat do you say?', options:['안녕하세요','처음 뵙겠습니다','괜찮아요','아니요'], answer:1 },
+  { scene:'🤝', q:'You are meeting someone for the very first time.\nWhat do you say?', options:['안녕하세요','만나서 반가워요','괜찮아요','아니요'], answer:1 },
 ];
 let u0QuizIdx = 0, u0QuizScore = 0, u0QuizAnswered = false;
 
