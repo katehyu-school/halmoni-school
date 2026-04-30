@@ -1959,7 +1959,7 @@ body {
 
         <!-- 복합 모음 (ㅡ+ㅣ 결합): 자음 아래에 (넓게) -->
         <div style="background:#f3e5f5;border-radius:var(--radius-sm);padding:16px;margin-bottom:16px;">
-          <div style="font-size:13px;font-weight:700;color:#7b1fa2;margin-bottom:4px;">ㅡ+ㅣ Compound group — <u>below</u> the consonant (wider)</div>
+          <div style="font-size:13px;font-weight:700;color:#7b1fa2;margin-bottom:4px;">ㅡ + ㅣ Compound group — <u>below</u> the consonant (wider)</div>
           <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">These vowels are formed by combining an ㅡ-group vowel (地) + an ㅣ-group vowel (人)</div>
           <!-- 조합 공식 -->
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
@@ -2016,18 +2016,6 @@ body {
           <!-- 예시 블록 -->
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
 
-            <!-- 봐 (ㅂ+ㅘ = ㅂ+ㅗ+ㅏ) -->
-            <div class="syl-block" onclick="speak('봐')">
-              <div style="display:flex;flex-direction:column;gap:2px;">
-                <div class="syl-c" style="background:#f5a623;width:56px;height:28px;font-size:15px;">ㅂ</div>
-                <div style="display:flex;gap:1px;">
-                  <div class="syl-c" style="background:#90caf9;width:28px;height:20px;font-size:12px;">ㅗ</div>
-                  <div class="syl-c" style="background:#81c784;width:28px;height:20px;font-size:12px;">ㅏ</div>
-                </div>
-              </div>
-              <div class="syl-label">봐 (ㅗ+ㅏ)</div>
-            </div>
-
             <!-- 뭐 (ㅁ+ㅝ = ㅁ+ㅜ+ㅓ) -->
             <div class="syl-block" onclick="speak('뭐')">
               <div style="display:flex;flex-direction:column;gap:2px;">
@@ -2052,16 +2040,46 @@ body {
               <div class="syl-label">의 (ㅡ+ㅣ)</div>
             </div>
 
-            <!-- 왜 (ㅇ+ㅙ = ㅇ+ㅗ+ㅐ) -->
-            <div class="syl-block" onclick="speak('왜')">
+            <!-- 곽 (ㄱ+ㅘ+ㄱ) — 받침 포함 -->
+            <div class="syl-block" onclick="speak('곽')">
               <div style="display:flex;flex-direction:column;gap:2px;">
-                <div class="syl-c" style="background:#f5a623;width:56px;height:28px;font-size:15px;">ㅇ</div>
+                <div class="syl-c" style="background:#f5a623;width:56px;height:24px;font-size:14px;">ㄱ</div>
                 <div style="display:flex;gap:1px;">
-                  <div class="syl-c" style="background:#90caf9;width:28px;height:20px;font-size:12px;">ㅗ</div>
-                  <div class="syl-c" style="background:#81c784;width:28px;height:20px;font-size:12px;">ㅐ</div>
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:18px;font-size:11px;">ㅗ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:18px;font-size:11px;">ㅏ</div>
+                </div>
+                <div class="syl-c" style="background:#f5a623;width:56px;height:18px;font-size:12px;border-radius:4px;">ㄱ</div>
+              </div>
+              <div class="syl-label">곽 (ㅗ+ㅏ+받침)</div>
+            </div>
+
+            <!-- 원 (ㅇ+ㅝ+ㄴ) — 받침 포함 -->
+            <div class="syl-block" onclick="speak('원')">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div class="syl-c" style="background:#f5a623;width:56px;height:24px;font-size:14px;">ㅇ</div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:18px;font-size:11px;">ㅜ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:18px;font-size:11px;">ㅓ</div>
+                </div>
+                <div class="syl-c" style="background:#f5a623;width:56px;height:18px;font-size:12px;border-radius:4px;">ㄴ</div>
+              </div>
+              <div class="syl-label">원 (ㅜ+ㅓ+받침)</div>
+            </div>
+
+            <!-- 괅 (ㄱ+ㅘ+ㄺ) — 복합모음 + 겹받침 = 최고 복잡 -->
+            <div class="syl-block" onclick="speak('괅')" style="position:relative;">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <div class="syl-c" style="background:#f5a623;width:56px;height:22px;font-size:13px;">ㄱ</div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#90caf9;width:28px;height:17px;font-size:11px;">ㅗ</div>
+                  <div class="syl-c" style="background:#81c784;width:28px;height:17px;font-size:11px;">ㅏ</div>
+                </div>
+                <div style="display:flex;gap:1px;">
+                  <div class="syl-c" style="background:#f5a623;width:28px;height:17px;font-size:11px;border-radius:4px 0 0 4px;">ㄹ</div>
+                  <div class="syl-c" style="background:#e8965a;width:28px;height:17px;font-size:11px;border-radius:0 4px 4px 0;">ㄱ</div>
                 </div>
               </div>
-              <div class="syl-label">왜 (ㅗ+ㅐ)</div>
+              <div class="syl-label">괅 (ㅘ+겹받침 ㄺ)</div>
             </div>
 
           </div>
