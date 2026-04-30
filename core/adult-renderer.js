@@ -47,16 +47,20 @@ const AdultRenderer = (() => {
   // ════════════════════════════════════════════════════════════
 
   const CAT_COLORS = {
-    verbs:       { bg: '#E0F5F2', border: '#0f7c6e', label: '#0f7c6e' },
-    adjectives:  { bg: '#FDF3E0', border: '#c47a1a', label: '#c47a1a' },
-    nouns:       { bg: '#E6F0FB', border: '#1a5fa8', label: '#1a5fa8' },
-    expressions: { bg: '#EEEBFB', border: '#5a3fa0', label: '#5a3fa0' },
+    verbs:       { bg: '#E0F5F2', border: '#5bbfb0', label: '#0f7c6e' },
+    adjectives:  { bg: '#FDF3E0', border: '#e8c07a', label: '#c47a1a' },
+    nouns:       { bg: '#E6F0FB', border: '#90caf9', label: '#1a5fa8' },
+    expressions: { bg: '#EEEBFB', border: '#b39ddb', label: '#5a3fa0' },
+    places:      { bg: '#E0F5F2', border: '#5bbfb0', label: '#0f7c6e' },
+    food:        { bg: '#FDF3E0', border: '#e8c07a', label: '#c47a1a' },
+    shopping:    { bg: '#E6F0FB', border: '#90caf9', label: '#1a5fa8' },
+    pronouns:    { bg: '#EEEBFB', border: '#b39ddb', label: '#5a3fa0' },
   };
 
   function buildVocabCard(item, color) {
     const c = color || { bg: '#f5f5f5', border: '#ccc', label: '#333' };
     return `
-<div class="adult-vocab-card" style="background:${c.bg};border:2px solid ${c.border};border-radius:12px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform .15s;" onclick="this.classList.toggle('flipped')">
+<div class="adult-vocab-card" style="background:${c.bg};border:1px solid ${c.border};border-radius:12px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform .15s;" onclick="this.classList.toggle('flipped')">
   <div class="card-front" style="text-align:center;">
     <div style="font-size:2.2rem;">${item.emoji || '📌'}</div>
     <div style="font-family:'Noto Serif KR',serif;font-size:1.2rem;font-weight:700;color:${c.label};margin-top:4px;">${item.korean}</div>
