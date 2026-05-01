@@ -2367,7 +2367,7 @@ body {
         <div class="intro-hero-sub">Korean is written in <strong>한글 (Hangeul)</strong> — a phonetic alphabet invented in 1443.<br>Just 24 letters, combined into syllable blocks. Click any letter to hear it!</div>
         <div class="intro-facts">
           <div class="intro-fact"><strong>14</strong>자음 Consonants</div>
-          <div class="intro-fact"><strong>10</strong>기본 모음 Vowels</div>
+          <div class="intro-fact"><strong>10+11</strong>모음 Vowels</div>
           <div class="intro-fact"><strong>1443</strong>년 창제</div>
           <div class="intro-fact"><strong>~2hrs</strong>to read basics</div>
         </div>
@@ -2379,6 +2379,10 @@ body {
         <div class="intro-section-title">① 모음 · Vowels — 기본 10개</div>
         <div class="intro-tip">💡 Vertical vowels (ㅏ ㅓ ㅣ…) go <strong>beside</strong> the consonant. Horizontal vowels (ㅗ ㅜ ㅡ…) go <strong>below</strong> the consonant.</div>
         <div class="intro-hg-grid" id="intro-vowels"></div>
+
+        <div class="intro-section-title" style="margin-top:14px;">복합 모음 · Compound Vowels — 11개</div>
+        <div class="intro-tip">💡 Two vowels combined — ㅐ ㅒ ㅔ ㅖ are similar in sound; ㅘ ㅙ ㅚ ㅝ ㅞ ㅟ ㅢ blend two shapes.</div>
+        <div class="intro-hg-grid" id="intro-compound-vowels"></div>
 
         <!-- 자음 -->
         <div class="intro-section-title">② 자음 · Consonants — 기본 14개</div>
@@ -2478,6 +2482,16 @@ body {
               <span class="u0-hg-step-sub">Vertical: sit <strong>beside</strong> a consonant &nbsp;|&nbsp; Horizontal: sit <strong>below</strong> a consonant</span>
             </div>
             <div class="u0-hg-grid" id="hg-vowels"></div>
+          </div>
+
+          <!-- STEP 1b: 복합 모음 -->
+          <div class="u0-hg-step">
+            <div class="u0-hg-step-header" style="background:#f3e5f5;border-color:#ce93d8;">
+              <span class="u0-hg-step-num" style="background:#9c27b0;">1+</span>
+              <span class="u0-hg-step-title">복합 모음 · Compound Vowels</span>
+              <span class="u0-hg-step-sub">Two vowels combined — ㅐ ㅒ ㅔ ㅖ blend vertically; ㅘ ㅙ ㅚ ㅝ ㅞ ㅟ ㅢ blend horizontally + vertically</span>
+            </div>
+            <div class="u0-hg-grid" id="hg-compound-vowels"></div>
           </div>
 
           <!-- STEP 2: 기본 자음 -->
@@ -3351,12 +3365,12 @@ const simpleVowels = [
   {char:'ㅡ',name:'으',rom:'eu'},{char:'ㅣ',name:'이',rom:'i'},
 ];
 const compoundVowels = [
-  {char:'ㅐ',name:'애',rom:'ae'},{char:'ㅔ',name:'에',rom:'e'},
-  {char:'ㅒ',name:'얘',rom:'yae'},{char:'ㅖ',name:'예',rom:'ye'},
-  {char:'ㅢ',name:'의',rom:'ui'},{char:'ㅘ',name:'와',rom:'wa'},
-  {char:'ㅝ',name:'워',rom:'wo'},{char:'ㅚ',name:'외',rom:'oe'},
-  {char:'ㅙ',name:'왜',rom:'wae'},{char:'ㅟ',name:'위',rom:'wi'},
-  {char:'ㅞ',name:'웨',rom:'we'},
+  {char:'ㅐ',name:'애',rom:'ae'},{char:'ㅒ',name:'얘',rom:'yae'},
+  {char:'ㅔ',name:'에',rom:'e'},{char:'ㅖ',name:'예',rom:'ye'},
+  {char:'ㅘ',name:'와',rom:'wa'},{char:'ㅙ',name:'왜',rom:'wae'},
+  {char:'ㅚ',name:'외',rom:'oe'},{char:'ㅝ',name:'워',rom:'wo'},
+  {char:'ㅞ',name:'웨',rom:'we'},{char:'ㅟ',name:'위',rom:'wi'},
+  {char:'ㅢ',name:'의',rom:'ui'},
 ];
 const batchimGroups = [
   {sound:'ㄱ sound',color:'#e57373',members:[{char:'ㄱ',ex:'목'},{char:'ㅋ',ex:'부엌'},{char:'ㄲ',ex:'밖'}]},
@@ -3409,6 +3423,8 @@ function renderIntroHangul() {
     </div>`;
 
   vg.innerHTML = u0Vowels.map(v => card(v)).join('');
+  const cvg = document.getElementById('intro-compound-vowels');
+  if (cvg) cvg.innerHTML = u0CompoundVowels.map(v => card(v)).join('');
   cg.innerHTML = u0Consonants.map(c => card(c)).join('');
   buildIntroSyl();
 }
@@ -4398,17 +4414,28 @@ function nextU0Quiz() {
 // ── 한글 데이터 ──
 const u0Vowels = [
   {l:'ㅏ', rom:'a',   name:'아'},
+  {l:'ㅑ', rom:'ya',  name:'야'},
   {l:'ㅓ', rom:'eo',  name:'어'},
+  {l:'ㅕ', rom:'yeo', name:'여'},
   {l:'ㅗ', rom:'o',   name:'오'},
+  {l:'ㅛ', rom:'yo',  name:'요'},
   {l:'ㅜ', rom:'u',   name:'우'},
+  {l:'ㅠ', rom:'yu',  name:'유'},
   {l:'ㅡ', rom:'eu',  name:'으'},
   {l:'ㅣ', rom:'i',   name:'이'},
+];
+const u0CompoundVowels = [
   {l:'ㅐ', rom:'ae',  name:'애'},
+  {l:'ㅒ', rom:'yae', name:'얘'},
   {l:'ㅔ', rom:'e',   name:'에'},
-  {l:'ㅑ', rom:'ya',  name:'야'},
-  {l:'ㅕ', rom:'yeo', name:'여'},
-  {l:'ㅛ', rom:'yo',  name:'요'},
-  {l:'ㅠ', rom:'yu',  name:'유'},
+  {l:'ㅖ', rom:'ye',  name:'예'},
+  {l:'ㅘ', rom:'wa',  name:'와'},
+  {l:'ㅙ', rom:'wae', name:'왜'},
+  {l:'ㅚ', rom:'oe',  name:'외'},
+  {l:'ㅝ', rom:'wo',  name:'워'},
+  {l:'ㅞ', rom:'we',  name:'웨'},
+  {l:'ㅟ', rom:'wi',  name:'위'},
+  {l:'ㅢ', rom:'ui',  name:'의'},
 ];
 const u0Consonants = [
   {l:'ㄱ', rom:'g/k',  name:'기역'},
@@ -4441,6 +4468,8 @@ function renderU0Hangul() {
     </div>`;
 
   vg.innerHTML = u0Vowels.map(v => card(v, v.name)).join('');
+  const cvg = document.getElementById('hg-compound-vowels');
+  if (cvg) cvg.innerHTML = u0CompoundVowels.map(v => card(v, v.name)).join('');
   cg.innerHTML = u0Consonants.map(c => card(c, c.name)).join('');
   buildHgSyl();
 }
