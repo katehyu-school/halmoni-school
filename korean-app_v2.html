@@ -125,7 +125,12 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .snav-btn { font-family:'Jua',sans-serif; font-size:0.9rem; padding:9px 18px; border:2.5px solid #E0E7EF; border-radius:30px; background:white; color:var(--muted); cursor:pointer; transition:all 0.2s; }
 .snav-btn.active { border-color:var(--sky); background:var(--sky-light); color:var(--sky); }
 .snav-btn:hover:not(.active) { border-color:#C0CDD8; color:var(--text); }
+#u6-choice-0:hover, #u6-choice-1:hover, #u6-choice-2:hover { border-color:var(--mint) !important; transform:translateY(-3px); box-shadow:0 4px 14px rgba(78,205,196,0.25); }
 .snav-en { font-family:'Nanum Gothic',sans-serif; font-size:0.68rem; opacity:0.7; margin-left:3px; }
+/* 6과: 탭 6개 한 줄 */
+#u6-snav { gap:5px; }
+#u6-snav .snav-btn { font-size:0.78rem; padding:7px 10px; }
+#u6-snav .snav-en { display:none; }
 .section { display:none; }
 .section.active { display:block; }
 
@@ -727,19 +732,21 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 // ══════════════════════════════════════════
 // 설정
 // ══════════════════════════════════════════
-const _supabase = HalmoniCore.getSupabase();
-const isTeacher = HalmoniCore.isTeacher;
-const urlName   = HalmoniCore.urlName;
+// HalmoniCore 안전 초기화 (로컬 파일 열기 시 HalmoniCore 없어도 동작)
+const _hc = (typeof HalmoniCore !== 'undefined') ? HalmoniCore : null;
+const _supabase = _hc ? _hc.getSupabase() : null;
+const isTeacher = _hc ? _hc.isTeacher : false;
+const urlName   = _hc ? _hc.urlName : null;
 
 let STUDENTS    = [];
 let checkedToday = new Set();
 
-HalmoniCore.todayStr()
+if (_hc) _hc.todayStr();
 
 // ══════════════════════════════════════════
 // 학생 목록
 // ══════════════════════════════════════════
-const _attManager = HalmoniCore.createAttendanceManager({
+const _attManager = _hc ? _hc.createAttendanceManager({
   onStudentsChange(students) {
     STUDENTS = students;
     renderEditList();
@@ -748,7 +755,7 @@ const _attManager = HalmoniCore.createAttendanceManager({
     checkedToday = checked;
     renderAttendance();
   }
-});
+}) : null;
 
 function checkIn(name) {
   _attManager.checkIn(name);
@@ -1037,8 +1044,8 @@ function closeNominateModal() { document.getElementById('nominate-modal').classL
 async function nominateStudent(name) {
   closeNominateModal();
   let activeUnit = 1;
-  [1,2,3,4,5].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
-  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : activeUnit===3 ? u3Idx : activeUnit===4 ? u4Idx : u5Idx;
+  [1,2,3,4,5,6].forEach(n => { if (document.getElementById('unit'+n)?.classList.contains('active')) activeUnit = n; });
+  const qIdx = activeUnit===1 ? u1Idx : activeUnit===2 ? u2Idx : activeUnit===3 ? u3Idx : activeUnit===4 ? u4Idx : activeUnit===5 ? u5Idx : u6GameQIdx;
   await practice?.nominate(name, activeUnit, qIdx);
 }
 
@@ -1143,9 +1150,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">5과</span>
     <span class="lesson-title-text">구두가 아니에요</span>
   </div>
-  <div class="lesson-item locked">
+  <div class="lesson-item" id="lesson-6" onclick="switchUnit(6)">
     <span class="lesson-num">6과</span>
-    <div><span class="lesson-title-text">친구 집에서 장난감 배를 만들어요</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+    <span class="lesson-title-text">친구 집에서 장난감 배를 만들어요</span>
   </div>
   <div class="lesson-item locked">
     <span class="lesson-num">7과</span>
@@ -1751,6 +1758,310 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
 </div>
 
+
+<div class="unit" id="unit6">
+  <div class="unit-heading">
+    <span class="unit-num">6</span>
+    <span class="unit-title">친구 집에서 장난감 배를 만들어요</span>
+  </div>
+  <nav class="section-nav" id="u6-snav">
+    <button class="snav-btn active" onclick="switchSection6('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection6('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection6('quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
+    <button class="snav-btn" onclick="switchSection6('life')">🌍 실생활 <span class="snav-en">Real Life</span></button>
+    <button class="snav-btn" onclick="switchSection6('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
+    <button class="snav-btn" onclick="switchSection6('build')">🧩 만들기 <span class="snav-en">Build</span></button>
+  </nav>
+
+  <!-- ── VOCAB ── -->
+  <div class="section active" id="u6-vocab">
+    <div class="card">
+      <div class="section-title">📍 장소 — Places</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc6-places"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">🏃 동사 — Verbs</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc6-verbs"></div>
+    </div>
+  </div>
+
+  <!-- ── GRAMMAR ── -->
+  <div class="section" id="u6-grammar">
+    <div class="card">
+      <div class="grammar-intro">
+        <h2>📌 Grammar 1 — N<span style="color:var(--coral);font-family:'Jua',sans-serif;">에</span>
+          <small style="font-size:0.82rem;color:#8a6500;font-family:'Nanum Gothic',sans-serif;">(destination or existence)</small></h2>
+        <p><span style="font-family:'Jua',sans-serif;font-size:1rem;color:#C47D00;">N에 가요 / N에 있어요 / N에 없어요</span></p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:16px;">
+        <div class="rule-box red">
+          <div class="rule-label" style="color:var(--coral);">N에 가요 — going TO</div>
+          <div class="rule-examples">
+            <span>학교에 가요. (going to school)</span>
+            <span>친구 집에 가요. (going to friend's house)</span>
+          </div>
+        </div>
+        <div class="rule-box blue">
+          <div class="rule-label" style="color:var(--sky);">N에 있어요/없어요 — existence</div>
+          <div class="rule-examples">
+            <span>호랑이가 동물원에 있어요.</span>
+            <span>준영이 공원에 없어요.</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-row">
+        <div><div class="example-kr">오늘 뭘 해요?</div><div class="example-en">What are you doing today?</div></div>
+        <button class="example-audio-btn" onclick="speakKorean('오늘 뭘 해요?')">🔊</button>
+      </div>
+      <div class="example-row coral">
+        <div><div class="example-kr">친구 집<span class="p">에</span> 가요.</div><div class="example-en">I'm going to my friend's house.</div></div>
+        <button class="example-audio-btn" onclick="speakKorean('친구 집에 가요.')">🔊</button>
+      </div>
+      <div class="example-row mint">
+        <div><div class="example-kr">호랑이가 동물원<span class="p">에</span> 있어요.</div><div class="example-en">There's a tiger at the zoo.</div></div>
+        <button class="example-audio-btn" onclick="speakKorean('호랑이가 동물원에 있어요.')">🔊</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="grammar-intro">
+        <h2>📌 Grammar 2 — N<span style="color:var(--mint);font-family:'Jua',sans-serif;">에서</span>
+          <small style="font-size:0.82rem;color:#167A74;font-family:'Nanum Gothic',sans-serif;">(place of action)</small></h2>
+        <p><span style="font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;">N에서 + action verb</span></p>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="rule-box blue" style="border-color:var(--mint);">
+          <div class="rule-label" style="color:var(--mint);">N에서 + 동작 — doing AT a place</div>
+          <div class="rule-examples">
+            <span>방에서 책을 읽어요. (reading in the room)</span>
+            <span>빵가게에서 빵을 사요. (buying bread at the bakery)</span>
+          </div>
+        </div>
+      </div>
+      <div class="example-row">
+        <div><div class="example-kr">친구 집<span class="p">에서</span> 뭘 해요?</div><div class="example-en">What do you do at your friend's house?</div></div>
+        <button class="example-audio-btn" onclick="speakKorean('친구 집에서 뭘 해요?')">🔊</button>
+      </div>
+      <div class="example-row mint">
+        <div><div class="example-kr">저는 친구 집<span class="p">에서</span> 장난감 배를 만들어요.</div><div class="example-en">I make a toy boat at my friend's house.</div></div>
+        <button class="example-audio-btn" onclick="speakKorean('저는 친구 집에서 장난감 배를 만들어요.')">🔊</button>
+      </div>
+    </div>
+
+    <!-- 비교 테이블 -->
+    <div class="card" style="margin-top:16px;background:linear-gradient(135deg,#FFF8E1 0%,#E8FAF9 100%);">
+      <div class="section-title">💡 N에 vs N에서 — 한 눈에 비교</div>
+      <div style="overflow-x:auto;margin-top:12px;">
+        <table style="width:100%;border-collapse:collapse;font-family:'Nanum Gothic',sans-serif;font-size:0.9rem;">
+          <thead>
+            <tr style="background:#FFF0E6;">
+              <th style="padding:8px 12px;border:1px solid #F0D0C0;text-align:left;font-family:'Jua',sans-serif;">조사</th>
+              <th style="padding:8px 12px;border:1px solid #F0D0C0;text-align:left;font-family:'Jua',sans-serif;">쓰임 (Usage)</th>
+              <th style="padding:8px 12px;border:1px solid #F0D0C0;text-align:left;font-family:'Jua',sans-serif;">예문</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 12px;border:1px solid #EEE;font-family:'Jua',sans-serif;color:var(--coral);font-size:1.2rem;">에</td>
+              <td style="padding:8px 12px;border:1px solid #EEE;">destination (가요)<br>existence (있어요/없어요)</td>
+              <td style="padding:8px 12px;border:1px solid #EEE;">학교<b style="color:var(--coral);">에</b> 가요<br>동물원<b style="color:var(--coral);">에</b> 있어요</td>
+            </tr>
+            <tr style="background:#F0FDFB;">
+              <td style="padding:8px 12px;border:1px solid #EEE;font-family:'Jua',sans-serif;color:var(--mint);font-size:1.2rem;">에서</td>
+              <td style="padding:8px 12px;border:1px solid #EEE;">location of action<br>(something happens here)</td>
+              <td style="padding:8px 12px;border:1px solid #EEE;">방<b style="color:var(--mint);">에서</b> 읽어요<br>가게<b style="color:var(--mint);">에서</b> 사요</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 연습 ── -->
+  <div class="section" id="u6-quiz">
+    <div class="card">
+      <span class="quiz-badge" style="background:#E8FAF9;color:#0D7B75;">6과 · 연습 — 어디에서 뭘 해요?</span>
+      <div class="section-sub" style="margin-bottom:16px;">알맞은 장소를 고르세요! Choose the right place.</div>
+      <div id="u6-fill-container"></div>
+      <div class="btn-row" style="margin-top:8px;">
+        <button class="btn btn-reset" onclick="resetU6Fill()">🔄 다시 해요</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 실생활 ── -->
+  <div class="section" id="u6-life">
+    <div class="card">
+      <div class="section-title">🗣️ 실생활 대화 — Real Life Dialogues</div>
+      <div class="section-sub">어디에 있어요? 거기에서 뭘 해요?</div>
+
+      <!-- 대화 1 -->
+      <div style="background:#F8F4FF;border-radius:14px;padding:18px;margin:16px 0;">
+        <div style="font-family:'Jua',sans-serif;font-size:1rem;color:#6B48D4;margin-bottom:14px;">🐰 대화 1 — 동생</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#A78BFA;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">Q</span>
+            <div><div style="font-family:'Jua',sans-serif;">동생은 어디에 있어요?</div><div style="font-size:0.8rem;color:#888;">Where is your sibling?</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding-left:16px;">
+            <span style="background:#6B48D4;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">A</span>
+            <div><div style="font-family:'Jua',sans-serif;">방<b style="color:var(--coral);">에</b> 있어요.</div><div style="font-size:0.8rem;color:#888;">(Sibling) is in the room.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#A78BFA;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">Q</span>
+            <div><div style="font-family:'Jua',sans-serif;">동생은 방에서 뭘 해요?</div><div style="font-size:0.8rem;color:#888;">What does your sibling do in the room?</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding-left:16px;">
+            <span style="background:#6B48D4;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">A</span>
+            <div><div style="font-family:'Jua',sans-serif;">그림을 그려요.</div><div style="font-size:0.8rem;color:#888;">(Sibling) draws pictures.</div></div>
+          </div>
+          <div style="background:#EDE7FF;border-radius:10px;padding:12px 16px;margin-top:4px;">
+            <div style="font-family:'Jua',sans-serif;font-size:1.05rem;">동생은 방<b style="color:var(--mint);">에서</b> 그림을 그려요.</div>
+            <div style="font-size:0.82rem;color:#555;margin-top:2px;">My sibling draws pictures in the room.</div>
+            <button onclick="speakKorean('동생은 방에서 그림을 그려요.')" style="margin-top:8px;background:none;border:1.5px solid #A78BFA;border-radius:14px;padding:4px 12px;color:#6B48D4;cursor:pointer;font-size:0.8rem;font-family:'Jua',sans-serif;">🔊 듣기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 대화 2 -->
+      <div style="background:#FFF0F6;border-radius:14px;padding:18px;margin:16px 0;">
+        <div style="font-family:'Jua',sans-serif;font-size:1rem;color:#C2185B;margin-bottom:14px;">🛒 대화 2 — 민수</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#F48FB1;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">Q</span>
+            <div><div style="font-family:'Jua',sans-serif;">민수는 어디에 있어요?</div><div style="font-size:0.8rem;color:#888;">Where is Minsu?</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding-left:16px;">
+            <span style="background:#C2185B;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">A</span>
+            <div><div style="font-family:'Jua',sans-serif;">가게<b style="color:var(--coral);">에</b> 있어요.</div><div style="font-size:0.8rem;color:#888;">Minsu is at the store.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#F48FB1;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">Q</span>
+            <div><div style="font-family:'Jua',sans-serif;">가게에서 뭘 해요?</div><div style="font-size:0.8rem;color:#888;">What does (Minsu) do at the store?</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding-left:16px;">
+            <span style="background:#C2185B;color:white;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">A</span>
+            <div><div style="font-family:'Jua',sans-serif;">우유를 사요.</div><div style="font-size:0.8rem;color:#888;">(Minsu) buys milk.</div></div>
+          </div>
+          <div style="background:#FCE4EC;border-radius:10px;padding:12px 16px;margin-top:4px;">
+            <div style="font-family:'Jua',sans-serif;font-size:1.05rem;">민수는 가게<b style="color:var(--mint);">에서</b> 우유를 사요.</div>
+            <div style="font-size:0.82rem;color:#555;margin-top:2px;">Minsu buys milk at the store.</div>
+            <button onclick="speakKorean('민수는 가게에서 우유를 사요.')" style="margin-top:8px;background:none;border:1.5px solid #F48FB1;border-radius:14px;padding:4px 12px;color:#C2185B;cursor:pointer;font-size:0.8rem;font-family:'Jua',sans-serif;">🔊 듣기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 게임 ── -->
+  <!-- ── 듣기 탭 ── -->
+  <div class="section" id="u6-listen">
+      <div class="progress-wrap">
+        <span class="prog-label" id="u6-p1-prog-label">문제 1 / 3</span>
+        <div class="prog-bar"><div class="prog-fill" id="u6-p1-prog-fill" style="width:0%"></div></div>
+      </div>
+      <div class="card" id="u6-p1card">
+        <span class="quiz-badge" style="background:#E8FAF9;color:#0D7B75;">6과 · 듣기 — 소리 듣고 그림 고르기</span>
+        <div style="text-align:center;margin:14px 0 10px;">
+          <button id="u6-audio-btn" onclick="u6PlayAudio()" style="font-family:'Jua',sans-serif;font-size:1.1rem;padding:12px 28px;background:var(--mint);color:white;border:none;border-radius:24px;cursor:pointer;box-shadow:0 2px 8px rgba(78,205,196,0.3);">🔊 듣기 Listen!</button>
+        </div>
+        <div id="u6-p1-choices" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0;"></div>
+        <div id="u6-p1-teacher-ctrl" style="text-align:center;margin-top:10px;display:none;">
+          <button onclick="u6RevealAnswer()" style="font-family:'Jua',sans-serif;font-size:1rem;padding:10px 24px;background:var(--coral);color:white;border:none;border-radius:20px;cursor:pointer;box-shadow:0 2px 8px rgba(255,107,107,0.3);">✅ 정답 공개</button>
+        </div>
+        <div class="feedback" id="u6-p1-fb"></div>
+        <div class="btn-row" style="margin-top:10px;">
+          <button class="btn btn-next" id="u6-p1-next" onclick="nextU6Part1()" style="display:none;">Next ▶</button>
+        </div>
+        <div style="text-align:center;margin-top:16px;">
+          <button onclick="switchSection6('build')" style="font-family:'Jua',sans-serif;font-size:0.9rem;padding:8px 20px;background:white;border:2px solid var(--mint);color:#0D7B75;border-radius:20px;cursor:pointer;">🧩 문장 만들기로 →</button>
+        </div>
+      </div>
+  </div>
+
+  <!-- ── 문장 만들기 탭 ── -->
+  <div class="section" id="u6-build">
+
+      <!-- Step indicator 2 -->
+      <div class="step-indicator" id="u6-step2-indicator" style="margin-top:0;">
+        <div class="step-dot active" id="u6-s2-dot-1">1</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="u6-s2-dot-2">2</div>
+        <div class="step-label" id="u6-s2-label">Step 1 — 덩어리 카드 맞추기</div>
+      </div>
+
+      <!-- Step 1: 청크 드래그앤드랍 -->
+      <div id="u6-step1">
+        <div class="progress-wrap">
+          <span class="prog-label" id="u6-s1-prog-label">문제 1 / 6</span>
+          <div class="prog-bar"><div class="prog-fill" id="u6-s1-prog-fill" style="width:0%"></div></div>
+        </div>
+        <div class="card" id="u6-s1card">
+          <span class="quiz-badge" style="background:#FFF0E6;color:#E67E22;">6과 · Step 1 — 덩어리 카드 맞추기</span>
+          <div class="scene-box" id="u6-s1-scene">🏠</div>
+          <div class="question-english" id="u6-s1-english"></div>
+          <div class="section-sub">카드를 순서대로 드래그해서 문장을 만들어요! Drag the chunks in order.</div>
+          <div class="drop-zone" id="u6-s1-dropzone"><span class="drop-zone-placeholder">Drag cards here!</span></div>
+          <div class="word-bank" id="u6-s1-wordbank"></div>
+          <div class="feedback" id="u6-s1-fb"></div>
+          <div class="btn-row">
+            <button class="btn btn-reset" onclick="resetS6()">🔄 Reset</button>
+            <button class="btn btn-check" onclick="checkS6()">✅ Check!</button>
+            <button class="btn btn-next" id="u6-s1-next" onclick="nextS6()" style="display:none;">Next ▶</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 낱말 드래그앤드랍 -->
+      <div id="u6-step2" style="display:none;">
+        <div class="progress-wrap">
+          <span class="prog-label" id="u6-prog-label">문제 1 / 3</span>
+          <div class="prog-bar"><div class="prog-fill" id="u6-prog-fill" style="width:0%"></div></div>
+          <span class="prog-score" id="u6-prog-score">⭐ 0점</span>
+        </div>
+        <div class="card" id="u6-qcard">
+          <span class="quiz-badge" style="background:#FFF0E6;color:#E67E22;">6과 · Step 2 — 문장 만들기</span>
+          <div class="scene-box" id="u6-scene">🏠</div>
+          <div class="question-english" id="u6-qenglish">Build the sentence!</div>
+          <div class="section-sub">에 또는 에서를 잘 골라서 문장을 만들어요!</div>
+          <div style="background:#E8FAF9;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.83rem;color:#0D7B75;display:flex;gap:14px;flex-wrap:wrap;">
+            <span>가다/있다/없다 → <b>에</b></span>
+            <span>동작 (action) → <b>에서</b></span>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--sky)"></div>Name 이름</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--lavender)"></div>Place 장소</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div>Particle 조사</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Verb 동사</div>
+          </div>
+          <div class="drop-zone" id="u6-dropzone"><span class="drop-zone-placeholder">Click or drag cards here!</span></div>
+          <div class="word-bank" id="u6-wordbank"></div>
+          <div class="feedback" id="u6-fb"></div>
+          <div class="btn-row">
+            <button class="btn btn-hint" onclick="hintU6()">💡 Hint</button>
+            <button class="btn btn-reset" onclick="resetU6()">🔄 Reset</button>
+            <button class="btn btn-check" onclick="checkU6()">✅ Check!</button>
+            <button class="btn btn-next" id="u6-next" onclick="nextU6()" disabled>Next ▶</button>
+          </div>
+        </div>
+      </div>
+
+    <div class="complete-screen" id="u6-complete">
+      <div class="complete-emoji">🎉</div>
+      <div class="complete-title">완벽해요! Perfect!</div>
+      <div class="complete-score" id="u6-complete-score"></div>
+      <div class="btn-row" style="justify-content:center;margin-top:16px;">
+        <button class="btn btn-reset" onclick="restartUnit(6)">🔄 6과 다시</button>
+        <button class="btn btn-hint" onclick="restartAll()">↩️ 처음부터</button>
+        <button class="btn btn-next" onclick="showTOC()">📖 목차로</button>
+      </div>
+    </div>
+
+  </div><!-- /u6-build -->
+</div><!-- /unit6 -->
+
 </main>
 </div>
 <div class="confetti-wrap" id="confetti"></div>
@@ -2011,12 +2322,12 @@ function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
   // 사이드바 lesson-item 활성화
-  [1,2,3,4,5].forEach(i=>{
+  [1,2,3,4,5,6].forEach(i=>{
     const el = document.getElementById('lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
   document.getElementById('unit'+n).classList.add('active');
-  switchSection(n, 'vocab');  // 항상 새단어로 이동
+  if (n === 6) { switchSection6('listen'); } else { switchSection(n, 'vocab'); }
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
@@ -2315,6 +2626,18 @@ function restartUnit(n){
     document.getElementById('u5-step-dot-2').className='step-dot';
     document.getElementById('u5-step-label').textContent='Step 1 — 덩어리 카드 맞추기';
     renderS5(); switchUnit(5); switchSection(5,'quiz'); syncNext(5,0); }
+  if(n===6){
+    u6GameQIdx=0; u6Idx=0; u6Score=0; s6Idx=0;
+    document.getElementById('u6-part1').style.display='block';
+    document.getElementById('u6-part2').style.display='none';
+    document.getElementById('u6-step-dot-1').className='step-dot active';
+    document.getElementById('u6-step-dot-2').className='step-dot';
+    document.getElementById('u6-step-label').textContent='Part 1 — 소리 듣고 그림 고르기';
+    document.getElementById('u6-qcard').style.display='block';
+    document.getElementById('u6-complete').classList.remove('show');
+    document.getElementById('u6-step1').style.display='block';
+    document.getElementById('u6-step2').style.display='none';
+    renderU6Part1(); switchUnit(6); switchSection6('listen'); syncNext(6,0); }
 }
 
 function restartAll(){
@@ -3145,8 +3468,552 @@ function goToStep2() {
   renderU2();
 }
 
+
+// ══════════════════════════════════════════
+// UNIT 6 — 데이터
+// ══════════════════════════════════════════
+const u6PlaceVocab = [
+  {emoji:'🦁', kr:'동물원',      en:'zoo',             rom:'dong-mul-weon'},
+  {emoji:'🥖', kr:'빵가게',      en:'bakery',          rom:'ppang-ga-ge'},
+  {emoji:'👗', kr:'옷가게',      en:'clothing store',  rom:'ot-ga-ge'},
+  {emoji:'🌸', kr:'꽃집',        en:'flower shop',     rom:'kkot-jip'},
+  {emoji:'🏠', kr:'친구 집',     en:"friend's house",  rom:'chin-gu jip'}
+];
+const u6VerbVocab = [
+  {emoji:'🛠️', kr:'만들어요',   en:'make(s)',         rom:'man-deul-eo-yo'},
+  {emoji:'🧃',  kr:'사요',       en:'buy(s)',          rom:'sa-yo'}
+];
+
+// 연습 — 빈칸 채우기
+const u6FillQ = [
+  {q:'어디에서 주스를 사요?', suffix:'에서 주스를 사요.',   ans:'가게',   opts:['가게','수영장','공원'],   en:'Where do you buy juice?'},
+  {q:'어디에서 수영을 해요?', suffix:'에서 수영을 해요.',   ans:'수영장', opts:['학교','수영장','가게'],   en:'Where do you swim?'},
+  {q:'어디에서 운동을 해요?', suffix:'에서 운동을 해요.',   ans:'공원',   opts:['집','교실','공원'],       en:'Where do you exercise?'},
+  {q:'어디에서 책을 읽어요?', suffix:'에서 책을 읽어요.',   ans:'교실',   opts:['교실','동물원','가게'],   en:'Where do you read books?'},
+  {q:'어디에서 옷을 사요?',   suffix:'에서 옷을 사요.',     ans:'옷가게', opts:['빵가게','꽃집','옷가게'], en:'Where do you buy clothes?'}
+];
+
+// 게임 Part 1 — 듣기 퀴즈
+const u6ListenQ = [
+  {audio:'민수가 책을 읽어요.', correct:0,
+   choices:[
+     {emoji:'📖', kr:'책을 읽어요', en:'reading a book'},
+     {emoji:'😴', kr:'잠을 자요',   en:'sleeping'},
+     {emoji:'📺', kr:'TV를 봐요',   en:'watching TV'}
+   ]},
+  {audio:'보람이 우유를 마셔요.', correct:1,
+   choices:[
+     {emoji:'🧃', kr:'주스를 마셔요',   en:'drinking juice'},
+     {emoji:'🥛', kr:'우유를 마셔요',   en:'drinking milk'},
+     {emoji:'🍪', kr:'과자를 먹어요',   en:'eating cookies'}
+   ]},
+  {audio:'보람이 가게에서 우유를 사요.', correct:0,
+   choices:[
+     {emoji:'🏪', kr:'가게에서 우유를 사요',       en:'buying milk at store'},
+     {emoji:'🦁', kr:'동물원에서 코끼리를 봐요', en:'seeing elephant at zoo'},
+     {emoji:'🍽️', kr:'식당에서 음식을 먹어요',   en:'eating at restaurant'}
+   ]}
+];
+
+// 게임 Part 2 Step 1 — 덩어리 드래그앤드랍
+const u6S1Q = [
+  {scene:'🏫', english:'Seulgi goes to school.', hint:'destination → 에', sentence:'슬기는 학교에 가요.',
+   chunks:[{text:'슬기는',type:'name',en:'Seulgi'},{text:'학교에',type:'place',en:'to school'},{text:'가요.',type:'verb',en:'goes'}]},
+  {scene:'🦁', english:'A tiger is at the zoo.', hint:'existence → 에', sentence:'호랑이가 동물원에 있어요.',
+   chunks:[{text:'호랑이가',type:'name',en:'a tiger'},{text:'동물원에',type:'place',en:'at the zoo'},{text:'있어요.',type:'verb',en:'is'}]},
+  {scene:'📚', english:'I read a book in my room.', hint:'action location → 에서', sentence:'방에서 책을 읽어요.',
+   chunks:[{text:'방에서',type:'place',en:'in the room'},{text:'책을',type:'name',en:'a book'},{text:'읽어요.',type:'verb',en:'read'}]},
+  {scene:'🥖', english:'I buy bread at the bakery.', hint:'action location → 에서', sentence:'빵가게에서 빵을 사요.',
+   chunks:[{text:'빵가게에서',type:'place',en:'at the bakery'},{text:'빵을',type:'name',en:'bread'},{text:'사요.',type:'verb',en:'buy'}]},
+  {scene:'🏠', english:"I make a toy boat at my friend's house.", hint:'action location → 에서', sentence:'친구 집에서 장난감 배를 만들어요.',
+   chunks:[{text:'친구 집에서',type:'place',en:"at friend's house"},{text:'장난감 배를',type:'name',en:'a toy boat'},{text:'만들어요.',type:'verb',en:'make'}]},
+  {scene:'🐅', english:'Mira sees a tiger at the zoo.', hint:'action location → 에서', sentence:'미라는 동물원에서 호랑이를 봐요.',
+   chunks:[{text:'미라는',type:'name',en:'Mira'},{text:'동물원에서',type:'place',en:'at the zoo'},{text:'호랑이를',type:'name',en:'a tiger'},{text:'봐요.',type:'verb',en:'sees'}]}
+];
+
+// 게임 Part 2 Step 2 — 낱말 드래그앤드랍 (에/에서 집중)
+const u6Questions = [
+  {scene:'🦁', english:'Liam and Kayo go to the zoo.', hint:'zoo = destination → 에', sentence:'리암하고 카요는 동물원에 가요.',
+   answer:['리암하고','카요는','동물원','에','가요.'],
+   types:['name','name','place','particle','verb']},
+  {scene:'🐯', english:'Mira sees a tiger at the zoo.', hint:'zoo = action location → 에서', sentence:'미라는 동물원에서 호랑이를 봐요.',
+   answer:['미라는','동물원','에서','호랑이를','봐요.'],
+   types:['name','place','particle','name','verb']},
+  {scene:'🐰', english:'Mom and sibling make a rabbit doll in the room.', hint:'에서 = action location · watch all the particles! 👀', sentence:'엄마하고 동생은 방에서 토끼 인형을 만들어요.',
+   answer:['엄마','하고','동생','은','방','에서','토끼','인형','을','만들어요.'],
+   types:['name','particle','name','particle','place','particle','name','name','particle','verb']}
+];
+
+// ══════════════════════════════════════════
+// UNIT 6 — 탭 전환
+// ══════════════════════════════════════════
+function switchSection6(sec) {
+  const u = document.getElementById('unit6');
+  u.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('u6-' + sec).classList.add('active');
+  const map = { vocab:0, grammar:1, quiz:2, life:3, listen:4, build:5 };
+  const btns = document.querySelectorAll('#u6-snav .snav-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if (btns[map[sec]]) btns[map[sec]].classList.add('active');
+  const bar = document.getElementById('practice-bar');
+  if (bar) {
+    if (sec === 'listen' || sec === 'build') bar.classList.add('visible');
+    else bar.classList.remove('visible');
+  }
+  if (sec === 'listen') {
+    try { renderRaiseHandBtns(); } catch(e) { /* HalmoniCore 없을 때 무시 */ }
+    renderU6Part1();
+  }
+  if (sec === 'build') {
+    try { renderRaiseHandBtns(); } catch(e) {}
+  }
+}
+
+// ══════════════════════════════════════════
+// UNIT 6 — 연습: 빈칸 채우기
+// ══════════════════════════════════════════
+function renderU6Fill() {
+  const con = document.getElementById('u6-fill-container');
+  if (!con) return;
+  con.innerHTML = '';
+  u6FillQ.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'border:2px solid #E8E8E8;border-radius:12px;padding:14px 16px;margin-bottom:14px;background:#FAFAFA;';
+    div.innerHTML = `
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:4px;font-family:'Nanum Gothic',sans-serif;">Q${i+1}. ${q.en}</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.05rem;margin-bottom:10px;">${q.q}</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.05rem;margin-bottom:10px;">
+        <span id="u6fb-blank-${i}" style="border-bottom:2.5px solid var(--mint);padding:2px 10px;color:var(--muted);min-width:48px;display:inline-block;text-align:center;">_____</span>
+        ${q.suffix}
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="u6fb-opts-${i}">
+        ${q.opts.map((opt,j) => `<button onclick="u6FillPick(${i},${j},'${opt}')" id="u6fb-btn-${i}-${j}" style="font-family:'Jua',sans-serif;font-size:0.95rem;padding:7px 18px;border:2px solid #DDD;border-radius:20px;background:white;cursor:pointer;transition:all 0.2s;">${opt}</button>`).join('')}
+      </div>
+      <div id="u6fb-fb-${i}" style="margin-top:6px;font-size:0.88rem;min-height:18px;"></div>
+    `;
+    con.appendChild(div);
+  });
+}
+
+function u6FillPick(qi, oi, val) {
+  const q = u6FillQ[qi];
+  const blank = document.getElementById(`u6fb-blank-${qi}`);
+  const fb = document.getElementById(`u6fb-fb-${qi}`);
+  // 옵션 버튼 리셋
+  q.opts.forEach((_,j) => {
+    const b = document.getElementById(`u6fb-btn-${qi}-${j}`);
+    if (b) { b.style.border='2px solid #DDD'; b.style.background='white'; b.style.color='var(--text)'; }
+  });
+  blank.textContent = val;
+  const btn = document.getElementById(`u6fb-btn-${qi}-${oi}`);
+  if (val === q.ans) {
+    btn.style.border = '2px solid var(--mint)'; btn.style.background = 'var(--mint-light)'; btn.style.color = '#0D7B75';
+    blank.style.borderBottomColor = 'var(--mint)'; blank.style.color = '#0D7B75';
+    fb.innerHTML = '✅ 맞아요!'; fb.style.color = '#2E7D32';
+    speakKorean(val + q.suffix);
+  } else {
+    btn.style.border = '2px solid var(--coral)'; btn.style.background = 'var(--coral-light)'; btn.style.color = '#C0392B';
+    blank.style.borderBottomColor = 'var(--coral)'; blank.style.color = '#C0392B';
+    fb.innerHTML = '❌ 다시 해 봐요!'; fb.style.color = '#C0392B';
+  }
+}
+
+function resetU6Fill() { renderU6Fill(); }
+
+// ══════════════════════════════════════════
+// UNIT 6 — 게임 PART 1: 듣기 퀴즈
+// ══════════════════════════════════════════
+let u6GameQIdx = 0;
+let u6GameVotes = {};   // {studentName: choiceIndex}
+let u6GameRevealed = false;
+
+function u6PlayAudio() {
+  if (u6GameQIdx >= u6ListenQ.length) return;
+  const text = u6ListenQ[u6GameQIdx].audio;
+  // speechSynthesis 직접 사용 (안정성 확보)
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ko-KR';
+    u.rate = 0.85;
+    u.pitch = 1.1;
+    speechSynthesis.speak(u);
+  }
+}
+
+function renderU6Part1() {
+  // 진행바
+  var _len = 3;
+  var idx = (typeof u6GameQIdx === 'number') ? u6GameQIdx : 0;
+  var pct = Math.round((idx / _len) * 100);
+  var progFill = document.getElementById('u6-p1-prog-fill');
+  var progLabel = document.getElementById('u6-p1-prog-label');
+  if (progFill) progFill.style.width = pct + '%';
+  if (progLabel) progLabel.textContent = '문제 ' + (idx+1) + ' / ' + _len;
+
+  // 상태 리셋
+  u6GameVotes = {};
+  u6GameRevealed = false;
+  var fb = document.getElementById('u6-p1-fb');
+  if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+  var nextBtn = document.getElementById('u6-p1-next');
+  if (nextBtn) nextBtn.style.display = 'none';
+
+  // 카드 데이터
+  var allQ = [
+    { choices: [
+      { emoji: '📖', kr: '책을 읽어요', en: 'reading a book' },
+      { emoji: '😴', kr: '잘을 자요', en: 'sleeping' },
+      { emoji: '📺', kr: 'TV를 봐요', en: 'watching TV' }
+    ]},
+    { choices: [
+      { emoji: '🥤', kr: '주스를 마셔요', en: 'drinking juice' },
+      { emoji: '🥛', kr: '우유를 마셔요', en: 'drinking milk' },
+      { emoji: '🍪', kr: '과자를 먹어요', en: 'eating cookies' }
+    ]},
+    { choices: [
+      { emoji: '🏪', kr: '가게에서 우유를 사요', en: 'buying milk at store' },
+      { emoji: '🦁', kr: '동물원에서 코끼리를 봐요', en: 'seeing elephant at zoo' },
+      { emoji: '🍽️', kr: '식당에서 음식을 먹어요', en: 'eating at restaurant' }
+    ]}
+  ];
+
+  var q = allQ[idx];
+  if (!q) return;
+
+  // 컨테이너 새로 그리기
+  var choicesEl = document.getElementById('u6-p1-choices');
+  if (!choicesEl) { console.error('u6-p1-choices NOT FOUND'); return; }
+
+  var html = '';
+  for (var i = 0; i < q.choices.length; i++) {
+    var c = q.choices[i];
+    html += '<div id="u6-choice-' + i + '" onclick="u6SelfStudyPick(' + i + ')"'
+          + ' style="border:3px solid #E8E8E8;border-radius:14px;padding:16px 10px;'
+          + 'background:white;text-align:center;cursor:pointer;transition:all 0.25s;">'
+          + '<div style="font-size:2.6rem;margin-bottom:10px;">' + c.emoji + '</div>'
+          + '<div style="font-family:Jua,sans-serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;">' + c.kr + '</div>'
+          + '<div style="font-size:0.75rem;color:#888;">' + c.en + '</div>'
+          + '</div>';
+  }
+  console.log('renderU6Part1: idx=' + idx + ', html length=' + html.length);
+  choicesEl.innerHTML = html;
+  console.log('renderU6Part1: done, choicesEl children=' + choicesEl.children.length);
+}
+
+
+function u6Vote(e, name, ci) {
+  e.stopPropagation();
+  if (u6GameRevealed) return;
+  // 이전 투표 취소
+  const prev = u6GameVotes[name];
+  if (prev !== undefined) {
+    const pb = document.getElementById(`u6v-${name.replace(/\s/g,'_')}-${prev}`);
+    if (pb) { pb.style.background='white'; pb.style.border='2px solid #DDD'; pb.style.color='var(--text)'; }
+  }
+  u6GameVotes[name] = ci;
+  const btn = document.getElementById(`u6v-${name.replace(/\s/g,'_')}-${ci}`);
+  if (btn) { btn.style.background='var(--mint-light)'; btn.style.border='2px solid var(--mint)'; btn.style.color='#0D7B75'; }
+}
+
+function u6SelfStudyPick(ci) {
+  if (u6GameRevealed) return;
+  u6GameRevealed = true;
+  u6ShowResult(ci);
+}
+
+function u6RevealAnswer() {
+  if (u6GameRevealed) return;
+  u6GameRevealed = true;
+  u6ShowResult(null);
+}
+
+function u6ShowResult(picked) {
+  const q = u6ListenQ[u6GameQIdx];
+  const correct = q.correct;
+  // 카드 하이라이트
+  for (let i = 0; i < 3; i++) {
+    const card = document.getElementById(`u6-choice-${i}`);
+    if (!card) continue;
+    if (i === correct) {
+      card.style.borderColor = 'var(--mint)'; card.style.background = 'var(--mint-light)';
+    } else {
+      card.style.borderColor = '#EEE'; card.style.background = '#F6F6F6'; card.style.opacity = '0.55';
+    }
+  }
+  // 학생 버튼 결과
+  Object.entries(u6GameVotes).forEach(([nm, ci]) => {
+    const btn = document.getElementById(`u6v-${nm.replace(/\s/g,'_')}-${ci}`);
+    if (!btn) return;
+    if (ci === correct) { btn.style.background='var(--mint)'; btn.style.color='white'; btn.textContent='⭐ '+nm; }
+    else { btn.style.opacity='0.35'; }
+  });
+  // 혼자 공부할 때 피드백
+  if (picked !== null) {
+    const fb = document.getElementById('u6-p1-fb');
+    if (picked === correct) {
+      fb.className='feedback correct'; fb.innerHTML='🎉 맞아요! Correct!';
+    } else {
+      fb.className='feedback wrong'; fb.innerHTML=`❌ 아니에요! → ${q.choices[correct].kr}`;
+    }
+  }
+  // 정답 소리 재생 (speechSynthesis 직접 사용)
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(q.audio);
+    utt.lang = 'ko-KR'; utt.rate = 0.85; utt.pitch = 1.1;
+    speechSynthesis.speak(utt);
+  }
+  const nxt = document.getElementById('u6-p1-next');
+  if (nxt) nxt.style.display = 'inline-block';
+}
+
+function nextU6Part1() {
+  u6GameQIdx++;
+  if (u6GameQIdx >= u6ListenQ.length) {
+    goToU6Part2();
+  } else {
+    renderU6Part1();
+  }
+}
+
+function goToU6Part2() {
+  switchSection6('build');
+  renderS6();
+}
+
+// ══════════════════════════════════════════
+// UNIT 6 — 게임 PART 2 / STEP 1: 청크 드래그앤드랍
+// ══════════════════════════════════════════
+let s6Idx = 0;
+let s6Dropped = [];
+let s6DragSrc = null;
+let s6DragFrom = null;
+
+function renderS6() {
+  if (!document.getElementById('u6-s1-wordbank')) return;
+  const q = u6S1Q[s6Idx];
+  const pct = Math.round((s6Idx / u6S1Q.length) * 100);
+  document.getElementById('u6-s1-prog-fill').style.width = pct + '%';
+  document.getElementById('u6-s1-prog-label').textContent = `문제 ${s6Idx+1} / ${u6S1Q.length}`;
+  document.getElementById('u6-s1-scene').textContent = q.scene;
+  document.getElementById('u6-s1-english').textContent = '👉 ' + q.english;
+  s6Dropped = [];
+  renderS6Zone();
+  const bank = document.getElementById('u6-s1-wordbank'); bank.innerHTML='';
+  [...q.chunks].sort(() => Math.random()-0.5).forEach(ch => bank.appendChild(makeS6Card(ch, 'bank')));
+  const fb = document.getElementById('u6-s1-fb'); fb.className='feedback'; fb.innerHTML='';
+  document.getElementById('u6-s1-next').style.display = 'none';
+}
+
+function makeS6Card(chunk, from) {
+  const colorMap = {name:'var(--sky)', place:'var(--lavender)', verb:'var(--green)', particle:'var(--coral)'};
+  const card = document.createElement('div');
+  card.className = 'wcard';
+  card.draggable = true;
+  card.dataset.text = chunk.text; card.dataset.type = chunk.type;
+  card.style.borderColor = colorMap[chunk.type] || 'var(--sky)';
+  card.innerHTML = `<span style="font-size:1rem;">${chunk.text}</span><span style="font-size:0.7rem;color:var(--muted);display:block;">${chunk.en}</span>`;
+  card.addEventListener('dragstart', e => { s6DragSrc=chunk; s6DragFrom=from; e.dataTransfer.effectAllowed='move'; });
+  card.addEventListener('click', () => {
+    if (from==='bank') { s6Dropped.push(chunk); renderS6Zone(); card.remove(); }
+    else { s6Dropped=s6Dropped.filter(c=>c!==chunk); renderS6Zone(); document.getElementById('u6-s1-wordbank').appendChild(makeS6Card(chunk,'bank')); }
+  });
+  return card;
+}
+
+function renderS6Zone() {
+  const zone = document.getElementById('u6-s1-dropzone');
+  zone.innerHTML='';
+  if (s6Dropped.length===0) { zone.innerHTML='<span class="drop-zone-placeholder">Drag cards here!</span>'; }
+  else { s6Dropped.forEach(ch => zone.appendChild(makeS6Card(ch,'zone'))); }
+
+  zone.ondragover = e => {
+    e.preventDefault(); e.dataTransfer.dropEffect='move';
+    // 삽입 위치 시각적 표시
+    zone.classList.add('drag-over');
+    const cards = [...zone.querySelectorAll('.wcard')];
+    const insertIdx = getInsertIdx(cards, e.clientX);
+    cards.forEach((c,i) => { c.style.outline = i===insertIdx ? '2px dashed var(--mint)' : ''; });
+  };
+  zone.ondragleave = () => { zone.classList.remove('drag-over'); zone.querySelectorAll('.wcard').forEach(c=>c.style.outline=''); };
+
+  zone.ondrop = e => {
+    e.preventDefault(); zone.classList.remove('drag-over'); zone.querySelectorAll('.wcard').forEach(c=>c.style.outline='');
+    if (!s6DragSrc) return;
+    const cards = [...zone.querySelectorAll('.wcard')];
+    const insertIdx = getInsertIdx(cards, e.clientX);
+    if (s6DragFrom==='bank') {
+      // 워드뱅크에서 드랍 → 지정 위치에 삽입
+      s6Dropped.splice(insertIdx, 0, s6DragSrc);
+      renderS6Zone();
+      [...document.querySelectorAll('#u6-s1-wordbank .wcard')].forEach(el => { if(el.dataset.text===s6DragSrc.text) el.remove(); });
+    } else if (s6DragFrom==='zone') {
+      // 존 안에서 재배치
+      const fromIdx = s6Dropped.indexOf(s6DragSrc);
+      if (fromIdx !== -1) {
+        s6Dropped.splice(fromIdx, 1);
+        const adj = insertIdx > fromIdx ? insertIdx-1 : insertIdx;
+        s6Dropped.splice(adj, 0, s6DragSrc);
+        renderS6Zone();
+      }
+    }
+    s6DragSrc=null;
+  };
+}
+
+function getInsertIdx(cards, clientX) {
+  for (let i=0; i<cards.length; i++) {
+    const rect = cards[i].getBoundingClientRect();
+    if (clientX < rect.left + rect.width/2) return i;
+  }
+  return cards.length;
+}
+
+function checkS6() {
+  const q = u6S1Q[s6Idx];
+  const correct = q.chunks.map(c=>c.text);
+  const given = s6Dropped.map(c=>c.text);
+  const fb = document.getElementById('u6-s1-fb');
+  if (JSON.stringify(correct)===JSON.stringify(given)) {
+    fb.className='feedback correct'; fb.innerHTML='🎉 완벽해요! Perfect!';
+    document.getElementById('u6-s1-next').style.display='inline-block';
+    speakKorean(q.sentence);
+  } else if (given.length===0) {
+    fb.className='feedback wrong'; fb.innerHTML='❌ 카드를 드래그해서 놓아 주세요!';
+  } else {
+    fb.className='feedback wrong'; fb.innerHTML=`❌ Try again! 힌트: ${q.hint}`;
+  }
+}
+
+function resetS6() { renderS6(); }
+
+function nextS6() {
+  s6Idx++;
+  if (s6Idx >= u6S1Q.length) { goToU6Step2(); }
+  else { syncNext(6, s6Idx); renderS6(); }
+}
+
+function goToU6Step2() {
+  document.getElementById('u6-step1').style.display = 'none';
+  document.getElementById('u6-step2').style.display = 'block';
+  document.getElementById('u6-s2-dot-1').classList.replace('active','done');
+  document.getElementById('u6-s2-dot-2').classList.add('active');
+  document.getElementById('u6-s2-label').textContent = 'Step 2 — 문장 만들기';
+  u6Idx=0; u6Score=0;
+  syncNext(6, 20);
+  renderU6();
+}
+
+// ══════════════════════════════════════════
+// UNIT 6 — 게임 PART 2 / STEP 2: 낱말 드래그앤드랍
+// ══════════════════════════════════════════
+let u6Idx = 0, u6Score = 0;
+let u6Dropped = [], u6IdCounter = 0;
+const u6TypeClass = {name:'', place:'place', particle:'particle', verb:'verb', object:''};
+
+function makeBankCard6(text, type) {
+  const c = document.createElement('div');
+  c.className = 'wcard ' + (u6TypeClass[type] || '');
+  c.textContent = text; c.draggable = true;
+  c.dataset.text = text; c.dataset.type = type;
+  c.addEventListener('dragstart', e => {
+    dragSrcType='bank'; dragSrcEl=c; c.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',text);
+  });
+  c.addEventListener('dragend', () => c.classList.remove('dragging'));
+  c.addEventListener('click', () => {
+    if (!c.dataset.used) {
+      const id = ++u6IdCounter;
+      u6Dropped.push({text, type, id});
+      c.dataset.used='1'; c.classList.add('used');
+      renderU6Zone();
+    }
+  });
+  return c;
+}
+
+function removeFromZone6(id) {
+  const idx = u6Dropped.findIndex(w => w.id===id);
+  if (idx===-1) return;
+  const {text} = u6Dropped[idx];
+  u6Dropped.splice(idx,1);
+  for (const bc of document.querySelectorAll('#u6-wordbank .wcard')) {
+    if (bc.dataset.text===text && bc.dataset.used==='1') { bc.dataset.used=''; bc.classList.remove('used'); break; }
+  }
+  renderU6Zone();
+}
+
+function renderU6Zone() {
+  setupDropzoneFor('u6-dropzone', u6Dropped, u6IdCounter, removeFromZone6, u6TypeClass, null);
+}
+
+function updateU6Progress() {
+  document.getElementById('u6-prog-fill').style.width = Math.round((u6Idx/u6Questions.length)*100)+'%';
+  document.getElementById('u6-prog-label').textContent = `문제 ${u6Idx+1} / ${u6Questions.length}`;
+  document.getElementById('u6-prog-score').textContent = `⭐ ${u6Score}점`;
+}
+
+function renderU6() {
+  if (u6Idx >= u6Questions.length) return;
+  const q = u6Questions[u6Idx];
+  u6Dropped=[]; u6IdCounter=0;
+  document.getElementById('u6-scene').textContent = q.scene;
+  document.getElementById('u6-qenglish').textContent = '👉 ' + q.english;
+  const fb = document.getElementById('u6-fb'); fb.className='feedback'; fb.innerHTML='';
+  document.getElementById('u6-next').disabled = true;
+  renderU6Zone();
+  const bank = document.getElementById('u6-wordbank'); bank.innerHTML='';
+  q.answer.map((w,i)=>({text:w,type:q.types[i]})).sort(()=>Math.random()-0.5).forEach(w => bank.appendChild(makeBankCard6(w.text,w.type)));
+  updateU6Progress();
+}
+
+function checkU6() {
+  const q = u6Questions[u6Idx];
+  const fb = document.getElementById('u6-fb');
+  if (u6Dropped.length===0) { fb.className='feedback wrong'; fb.textContent='⚠️ Drop some cards first!'; return; }
+  const built = u6Dropped.map(w=>w.text).join('');
+  const correct = q.answer.join('');
+  if (built===correct) {
+    fb.className='feedback correct';
+    fb.innerHTML=`🎉 Correct! <div class="answer-display">✨ ${q.answer.join('')}</div><div style="font-size:0.85rem;margin-top:4px;color:#388E3C;">${q.english}</div>`;
+    u6Score++; document.getElementById('u6-next').disabled=false;
+    document.getElementById('u6-prog-score').textContent=`⭐ ${u6Score}점`;
+    speakKorean(q.answer.join(''));
+    launchConfetti();
+  } else {
+    fb.className='feedback wrong';
+    fb.innerHTML=`❌ Not quite! 힌트: ${q.hint || ''} — <span style="font-size:0.8rem;">에 vs 에서 확인!</span>`;
+  }
+}
+
+function hintU6() {
+  const q = u6Questions[u6Idx];
+  document.getElementById('u6-fb').className='feedback';
+  document.getElementById('u6-fb').innerHTML=`💡 ${q.hint}`;
+}
+
+function resetU6() { renderU6(); }
+
+function nextU6() {
+  if (document.getElementById('u6-next').disabled) return;
+  document.getElementById('u6-next').disabled = true;
+  u6Idx++;
+  if (u6Idx >= u6Questions.length) {
+    document.getElementById('u6-qcard').style.display = 'none';
+    const cs = document.getElementById('u6-complete');
+    cs.classList.add('show');
+    document.getElementById('u6-complete-score').textContent = `⭐ ${u6Score} / ${u6Questions.length}`;
+  } else {
+    syncNext(6, u6Idx);
+    renderU6();
+  }
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
 async function init(){
-  // Load quiz data from JSON, fall back to hardcoded arrays if unavailable
   try {
     const [d1, d2, d3, d4, d5] = await Promise.all([1,2,3,4,5].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
@@ -3162,6 +4029,8 @@ async function init(){
     u4Questions = _u4QFallback;
     u5Questions = _u5QFallback;
   }
+  buildFlashcards('fc6-places', u6PlaceVocab, 'lav');
+  buildFlashcards('fc6-verbs',  u6VerbVocab, 'green');
   buildFlashcards('fc-names',names,'sky');
   buildFlashcards('fc-verbs',verbs1,'mint');
   buildFlashcards('fc2-link',linkWords,'sun');
@@ -3172,6 +4041,7 @@ async function init(){
   buildFlashcards('fc4-toys',toys4,'lav');
   buildFlashcards('fc4-dolls',dolls4,'coral');
   renderU1(); renderU2(); renderU3(); renderU4(); renderS1(); renderS5();
+  renderU6Fill(); renderU6Part1();
 }
 init();
 </script>
@@ -3182,10 +4052,5 @@ init();
   VocabRenderer.renderAll();
   GrammarRenderer.renderAll();
 </script>
-
-<footer style="text-align:center;padding:24px;font-size:12px;color:#888;border-top:1px solid #e8e8e8;margin-top:32px;font-family:'Nanum Gothic',sans-serif;">
-  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-  Yu Family Korean School
-</footer>
 </body>
 </html>
