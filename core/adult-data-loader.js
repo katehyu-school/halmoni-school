@@ -17,7 +17,7 @@
  */
 
 (function () {
-  const BASE_PATH = '/halmoni-school/data/adult/sejong';
+  const BASE_PATH = 'data/adult/sejong';
 
   const _cache = {};
 

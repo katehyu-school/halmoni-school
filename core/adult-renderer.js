@@ -581,6 +581,11 @@ ${questions}`;
     _renderGen++;                    // 새 세대 발급
     const myGen = _renderGen;        // 이 렌더 호출의 세대 번호
     console.log(`[AdultRenderer] Unit ${n} 전체 렌더링 시작 (gen ${myGen})`);
+    // 이전 유닛 콘텐츠 즉시 지우기 — stale content 방지
+    ['panel-vocab','panel-grammar','panel-usage','panel-quiz','panel-real'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<div style="padding:32px;text-align:center;color:#bbb;font-size:0.9rem;">⏳ 로딩 중...</div>';
+    });
     await Promise.all([
       renderVocab(n, myGen),
       renderGrammar(n, myGen),
@@ -621,6 +626,22 @@ ${questions}`;
     renderAll,
     cancelRender,  // 진행 중인 렌더 취소
     renderVocab,
+    renderGrammar,
+    renderUsage,
+    renderQuiz,
+    renderReal,
+    // quiz 내부 함수 노출 (onclick에서 사용)
+    _selectOption,
+    _checkConjugation,
+    _nextQuestion,
+    _restartQuiz,
+  };
+
+})();
+
+// window에 명시적으로 등록 (onclick 핸들러에서 접근 가능하도록)
+window.AdultRenderer = AdultRenderer;
+erVocab,
     renderGrammar,
     renderUsage,
     renderQuiz,
