@@ -641,19 +641,3 @@ ${questions}`;
 
 // window에 명시적으로 등록 (onclick 핸들러에서 접근 가능하도록)
 window.AdultRenderer = AdultRenderer;
-erVocab,
-    renderGrammar,
-    renderUsage,
-    renderQuiz,
-    renderReal,
-    // quiz 내부 함수 노출 (onclick에서 사용)
-    _selectOption,
-    _checkConjugation,
-    _nextQuestion,
-    _restartQuiz,
-  };
-
-})();
-
-// window에 명시적으로 등록 (onclick 핸들러에서 접근 가능하도록)
-window.AdultRenderer = AdultRenderer;
