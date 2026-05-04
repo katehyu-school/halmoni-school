@@ -3827,6 +3827,9 @@ async function u6Vote(e, name, ci) {
     currentHands.push(name + ':' + ci);
     await _supabase.from('practice_session').update({
       raised_hands: currentHands,
+      unit: 6,
+      q_index: u6GameQIdx,      // 듣기 범위(0-2) 고정 — stale q_index로 만들기 전환 방지
+      status: 'waiting',
       updated_at: new Date().toISOString()
     }).eq('id', practice.state.sessionId);
   }
