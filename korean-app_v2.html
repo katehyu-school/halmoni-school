@@ -871,13 +871,18 @@ function applyPracticeState(session, showPopup = true) {
   const player = session.current_player;
   const hands = session.raised_hands || [];
 
+  // unit·qIdx는 아래에서 여러 곳에서 쓰이므로 상단에 선언
+  const unit = session.unit || 1;
+  const qIdx = session.q_index ?? 0;
+  const isU6Listen = (unit === 6 && qIdx < 10);  // 06과 듣기 퀴즈 여부
+
   // 새 문제(waiting)로 넘어가면 이전 지목자 캐시 초기화
   if (session.status === 'waiting') knownPlayer = null;
   // 지목된 학생 이름을 캐시 — correct/wrong 이벤트에서 player가 null로 올 때 fallback 사용
   if (player) knownPlayer = player;
 
-  // 지목 팝업
-  if (showPopup && player && player !== lastPlayer) showNominatePopup(player);
+  // 지목 팝업 — unit6 듣기에서는 투표 UI가 따로 있으므로 생략
+  if (showPopup && player && player !== lastPlayer && !isU6Listen) showNominatePopup(player);
   lastPlayer = player;
 
   // 바 상태
@@ -885,24 +890,18 @@ function applyPracticeState(session, showPopup = true) {
   if (bar) bar.classList.add('visible');
   statusEl.textContent = player ? `🎯 ${player} 차례` : (isTeacher ? '지목해 주세요 ☝️' : '선생님이 지목 중...');
 
-  // 결과 배너 — status가 correct/wrong 일 때만
-  if (showPopup && (session.status === 'correct' || session.status === 'wrong')) {
-    // unit 6 듣기(qIdx<10)는 u6RevealAnswer가 처리하므로 배너 생략
-    if (!(unit === 6 && qIdx < 10)) {
-      showResultBanner(session.status, player || knownPlayer);
-    }
+  // 결과 배너 — unit6 듣기(u6RevealAnswer 처리)는 제외
+  if (showPopup && (session.status === 'correct' || session.status === 'wrong') && !isU6Listen) {
+    showResultBanner(session.status, player || knownPlayer);
   }
 
-  // 선생님 Next 버튼 — correct 이면 활성화
-  if (isTeacher && session.status === 'correct') {
-    const unit = session.unit || 1;
+  // 선생님 Next 버튼 — correct 이면 활성화 (unit6 듣기 제외)
+  if (isTeacher && session.status === 'correct' && !isU6Listen) {
     const nextBtn = document.getElementById('u' + unit + '-next');
     if (nextBtn) nextBtn.disabled = false;
   }
 
-  // 문제 번호 동기화
-  const unit = session.unit || 1;
-  const qIdx = session.q_index || 0;
+  // 문제 번호 동기화 (unit·qIdx는 상단에서 이미 선언)
   // 유닛별 next 동기화 — 마지막 문제 이후엔 complete 화면도 동기화
   function syncComplete(cardId, completeId) {
     const card = document.getElementById(cardId);
@@ -3820,9 +3819,11 @@ async function u6Vote(e, name, ci) {
   u6GameVotes[name] = ci;
   const btn = document.getElementById(`u6v-${name.replace(/\s/g,'_')}-${ci}`);
   if (btn) { btn.style.background='var(--mint-light)'; btn.style.border='2px solid var(--mint)'; btn.style.color='#0D7B75'; }
-  // Supabase 동기화: raised_hands에 "이름:카드번호" 형식으로 투표 전파
+  // Supabase 동기화: 최신값 읽고 쓰기 (race condition 방지)
   if (practice?.state?.sessionId && _supabase) {
-    const currentHands = (practice.state.raised_hands || []).filter(h => !h.startsWith(name + ':'));
+    const { data: latest } = await _supabase.from('practice_session')
+      .select('raised_hands').eq('id', practice.state.sessionId).single();
+    const currentHands = ((latest?.raised_hands) || []).filter(h => !h.startsWith(name + ':'));
     currentHands.push(name + ':' + ci);
     await _supabase.from('practice_session').update({
       raised_hands: currentHands,
@@ -3845,6 +3846,7 @@ async function u6RevealAnswer() {
   if (isTeacher && practice?.state?.sessionId && _supabase) {
     await _supabase.from('practice_session').update({
       status: 'correct',
+      current_player: null,   // 지목 팝업이 뜨지 않도록
       updated_at: new Date().toISOString()
     }).eq('id', practice.state.sessionId);
   }
@@ -3911,6 +3913,7 @@ function nextU6Part1() {
 }
 
 function goToU6Part2() {
+  syncNext(6, 10);          // 학생 화면도 만들기(Step 1)로 전환
   switchSection6('build');
   renderS6();
 }
