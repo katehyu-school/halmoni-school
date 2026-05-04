@@ -2292,7 +2292,7 @@ body {
         </button>
       </li>
       <li class="unit-item">
-        <button class="unit-btn" onclick="selectUnit(this,6)">
+        <button class="unit-btn" onclick="selectUnit(this,6);loadUnit(6)">
           <span class="unit-num">06</span>
           <span>사과 다섯 개 주세요<span class="unit-subtitle">Give me five apples</span></span>
         </button>
@@ -3576,6 +3576,15 @@ const unitMeta = {
     ],
     cats:['All'],
   },
+  6: {
+    badge:'06', title:'사과 다섯 개 주세요',
+    topic:"Give me five apples · Numbers & Shopping",
+    goals:[
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'고유어 수사'},
+      {color:'blue',label:'단위명사'},{color:'teal',label:'-(으)세요'},{color:'coral',label:'쇼핑 대화'}
+    ],
+    cats:['All'],
+  },
 };
 
 // ══════════════════════════════════════════
@@ -3763,6 +3772,11 @@ async function loadUnit(num) {
 
   // ── JSON-driven units (4+) use AdultRenderer ──
   if (num >= 4) {
+    // 이전 유닛 콘텐츠 즉시 지우기 — stale content 방지 (AdultRenderer 로드 여부와 무관하게)
+    ['panel-vocab','panel-grammar','panel-usage','panel-quiz','panel-real'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<div style="padding:32px;text-align:center;color:#bbb;font-size:0.9rem;">⏳ 로딩 중...</div>';
+    });
     if (window.AdultRenderer) {
       try {
         await AdultRenderer.renderAll(num);
@@ -3773,6 +3787,8 @@ async function loadUnit(num) {
       }
     } else {
       console.warn('[loadUnit] AdultRenderer가 아직 로드되지 않았습니다.');
+      document.getElementById('panel-vocab').innerHTML =
+        `<div class="panel-card" style="color:var(--coral)">⚠️ 렌더러를 로드하지 못했습니다. 페이지를 새로고침해 주세요.<br><small>adult-renderer.js not loaded</small></div>`;
     }
     return;
   }
@@ -4516,10 +4532,11 @@ function initUnit0() {
   document.getElementById('u0-greetings').classList.add('active');
   u0QuizIdx = 0; u0QuizScore = 0;
 }
-
 </script>
 
 <!-- ── HalmoniCore 공통 라이브러리 + 성인반 JSON 로더 / 렌더러 ── -->
-<script src="/halmoni-school/core/core.js"></script>
-<script src="/halmoni-school/core/adult-data-loader.js"></script>
-<script src="/halmoni-school/core/adult-renderer.js"><
+<script src="core/core.js"></script>
+<script src="core/adult-data-loader.js"></script>
+<script src="core/adult-renderer.js"></script>
+</body>
+</html>
