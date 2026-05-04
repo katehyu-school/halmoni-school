@@ -887,7 +887,10 @@ function applyPracticeState(session, showPopup = true) {
 
   // 결과 배너 — status가 correct/wrong 일 때만
   if (showPopup && (session.status === 'correct' || session.status === 'wrong')) {
-    showResultBanner(session.status, player || knownPlayer);
+    // unit 6 듣기(qIdx<10)는 u6RevealAnswer가 처리하므로 배너 생략
+    if (!(unit === 6 && qIdx < 10)) {
+      showResultBanner(session.status, player || knownPlayer);
+    }
   }
 
   // 선생님 Next 버튼 — correct 이면 활성화
@@ -964,18 +967,49 @@ function applyPracticeState(session, showPopup = true) {
           const comp = document.getElementById('u6-complete');
           if (card) card.style.display = 'none';
           if (comp) { comp.classList.add('show'); if(typeof launchConfetti==='function') launchConfetti(); }
-        } else if (typeof renderU6 === 'function') renderU6();
+        } else if (typeof renderU6 === 'function') {
+          renderU6();
+          if (typeof launchConfetti==='function') launchConfetti();
+        }
       }
     } else if (qIdx >= 10) {
       // Step 1 — 청크 드래그
       const s1Idx = qIdx - 10;
       switchSection6('build');
-      if (s1Idx !== s6Idx) { s6Idx = s1Idx; if(typeof renderS6==='function') renderS6(); }
+      if (s1Idx !== s6Idx) {
+        s6Idx = s1Idx;
+        if (typeof renderS6==='function') renderS6();
+        if (typeof launchConfetti==='function') launchConfetti();
+      }
     } else {
-      // 듣기 퀴즈
+      // 듣기 퀴즈 — 질문 동기화 + 투표 현황 + 정답 공개
       const listenEl = document.getElementById('u6-listen');
-      if (listenEl && listenEl.classList.contains('active') && qIdx !== u6GameQIdx) {
-        u6GameQIdx = qIdx; if(typeof renderU6Part1==='function') renderU6Part1();
+      if (!listenEl?.classList.contains('active')) return;
+      // 질문 번호 변경
+      if (qIdx !== u6GameQIdx) {
+        u6GameQIdx = qIdx;
+        if (typeof renderU6Part1 === 'function') renderU6Part1();
+      }
+      // 투표 현황 동기화 (raised_hands: ["이름:카드번호", ...])
+      const u6Votes = {};
+      (session.raised_hands || []).forEach(h => {
+        const sep = h.lastIndexOf(':');
+        if (sep > 0) u6Votes[h.slice(0,sep)] = parseInt(h.slice(sep+1));
+      });
+      Object.entries(u6Votes).forEach(([nm, ci]) => {
+        if (u6GameVotes[nm] !== ci) {
+          if (u6GameVotes[nm] !== undefined) {
+            const pb = document.getElementById('u6v-' + nm.replace(/\s/g,'_') + '-' + u6GameVotes[nm]);
+            if (pb) { pb.style.background='white'; pb.style.border='2px solid #DDD'; pb.style.color='var(--text)'; }
+          }
+          u6GameVotes[nm] = ci;
+          const vb = document.getElementById('u6v-' + nm.replace(/\s/g,'_') + '-' + ci);
+          if (vb) { vb.style.background='var(--mint-light)'; vb.style.border='2px solid var(--mint)'; vb.style.color='#0D7B75'; }
+        }
+      });
+      // 정답 공개 동기화 (선생님이 공개하면 학생 화면에도 반영)
+      if (session.status === 'correct' && !u6GameRevealed && !isTeacher) {
+        u6RevealAnswer();
       }
     }
   }
@@ -2369,7 +2403,7 @@ function switchUnit(n){
     if (el) el.classList.toggle('active', i===n);
   });
   document.getElementById('unit'+n).classList.add('active');
-  if (n === 6) { switchSection6('listen'); } else { switchSection(n, 'vocab'); }
+  if (n === 6) { switchSection6('vocab'); } else { switchSection(n, 'vocab'); }
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
@@ -3774,7 +3808,7 @@ function renderU6Part1() {
 }
 
 
-function u6Vote(e, name, ci) {
+async function u6Vote(e, name, ci) {
   e.stopPropagation();
   if (u6GameRevealed) return;
   // 이전 투표 취소
@@ -3786,6 +3820,15 @@ function u6Vote(e, name, ci) {
   u6GameVotes[name] = ci;
   const btn = document.getElementById(`u6v-${name.replace(/\s/g,'_')}-${ci}`);
   if (btn) { btn.style.background='var(--mint-light)'; btn.style.border='2px solid var(--mint)'; btn.style.color='#0D7B75'; }
+  // Supabase 동기화: raised_hands에 "이름:카드번호" 형식으로 투표 전파
+  if (practice?.state?.sessionId && _supabase) {
+    const currentHands = (practice.state.raised_hands || []).filter(h => !h.startsWith(name + ':'));
+    currentHands.push(name + ':' + ci);
+    await _supabase.from('practice_session').update({
+      raised_hands: currentHands,
+      updated_at: new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
 }
 
 function u6SelfStudyPick(ci) {
@@ -3794,10 +3837,17 @@ function u6SelfStudyPick(ci) {
   u6ShowResult(ci);
 }
 
-function u6RevealAnswer() {
+async function u6RevealAnswer() {
   if (u6GameRevealed) return;
   u6GameRevealed = true;
   u6ShowResult(null);
+  // 선생님이 공개 버튼 클릭 시 Supabase에 동기화 → 학생 화면에도 정답 표시
+  if (isTeacher && practice?.state?.sessionId && _supabase) {
+    await _supabase.from('practice_session').update({
+      status: 'correct',
+      updated_at: new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
 }
 
 function u6ShowResult(picked) {
@@ -3855,6 +3905,7 @@ function nextU6Part1() {
   if (u6GameQIdx >= u6ListenQ.length) {
     goToU6Part2();
   } else {
+    syncNext(6, u6GameQIdx);   // 다음 문제로 동기화 (raised_hands 초기화 포함)
     renderU6Part1();
   }
 }
