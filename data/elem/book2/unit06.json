@@ -1,0 +1,74 @@
+{
+  "unit": 6,
+  "title": "친구 집에서 장난감 배를 만들어요",
+  "book": 2,
+  "sections": {
+    "vocab": {
+      "places": [
+        {"emoji":"🦁","kr":"동물원","en":"zoo","rom":"dong-mul-weon"},
+        {"emoji":"🥖","kr":"빵가게","en":"bakery","rom":"ppang-ga-ge"},
+        {"emoji":"👗","kr":"옷가게","en":"clothing store","rom":"ot-ga-ge"},
+        {"emoji":"🌸","kr":"꽃집","en":"flower shop","rom":"kkot-jip"},
+        {"emoji":"🏠","kr":"친구 집","en":"friend's house","rom":"chin-gu jip"}
+      ],
+      "verbs": [
+        {"emoji":"🛠️","kr":"만들어요","en":"make(s)","rom":"man-deul-eo-yo"},
+        {"emoji":"🧃","kr":"사요","en":"buy(s)","rom":"sa-yo"}
+      ]
+    },
+    "practice": {
+      "fill_items": [
+        {"q":"어디에서 주스를 사요?","suffix":"에서 주스를 사요.","ans":"가게","opts":["가게","수영장","공원"],"en":"Where do you buy juice?"},
+        {"q":"어디에서 수영을 해요?","suffix":"에서 수영을 해요.","ans":"수영장","opts":["학교","수영장","가게"],"en":"Where do you swim?"},
+        {"q":"어디에서 운동을 해요?","suffix":"에서 운동을 해요.","ans":"공원","opts":["집","교실","공원"],"en":"Where do you exercise?"},
+        {"q":"어디에서 책을 읽어요?","suffix":"에서 책을 읽어요.","ans":"교실","opts":["교실","동물원","가게"],"en":"Where do you read books?"},
+        {"q":"어디에서 옷을 사요?","suffix":"에서 옷을 사요.","ans":"옷가게","opts":["빵가게","꽃집","옷가게"],"en":"Where do you buy clothes?"}
+      ],
+      "listen_quiz": [
+        {"audio":"민수가 책을 읽어요.","correct":0,
+         "choices":[
+           {"emoji":"📖","kr":"책을 읽어요","en":"reading a book"},
+           {"emoji":"😴","kr":"잠을 자요","en":"sleeping"},
+           {"emoji":"📺","kr":"TV를 봐요","en":"watching TV"}
+         ]},
+        {"audio":"보람이 우유를 마셔요.","correct":1,
+         "choices":[
+           {"emoji":"🧃","kr":"주스를 마셔요","en":"drinking juice"},
+           {"emoji":"🥛","kr":"우유를 마셔요","en":"drinking milk"},
+           {"emoji":"🍪","kr":"과자를 먹어요","en":"eating cookies"}
+         ]},
+        {"audio":"보람이 가게에서 우유를 사요.","correct":0,
+         "choices":[
+           {"emoji":"🏪","kr":"가게에서 우유를 사요","en":"buying milk at store"},
+           {"emoji":"🦁","kr":"동물원에서 코끼리를 봐요","en":"seeing elephant at zoo"},
+           {"emoji":"🍽️","kr":"식당에서 음식을 먹어요","en":"eating at restaurant"}
+         ]}
+      ],
+      "step1_chunks": [
+        {"scene":"🏫","english":"Seulgi goes to school.","hint":"destination → 에","sentence":"슬기는 학교에 가요.",
+         "chunks":[{"text":"슬기는","type":"name","en":"Seulgi"},{"text":"학교에","type":"place","en":"to school"},{"text":"가요.","type":"verb","en":"goes"}]},
+        {"scene":"🦁","english":"A tiger is at the zoo.","hint":"existence → 에","sentence":"호랑이가 동물원에 있어요.",
+         "chunks":[{"text":"호랑이가","type":"name","en":"a tiger"},{"text":"동물원에","type":"place","en":"at the zoo"},{"text":"있어요.","type":"verb","en":"is"}]},
+        {"scene":"📚","english":"I read a book in my room.","hint":"action location → 에서","sentence":"방에서 책을 읽어요.",
+         "chunks":[{"text":"방에서","type":"place","en":"in the room"},{"text":"책을","type":"name","en":"a book"},{"text":"읽어요.","type":"verb","en":"read"}]},
+        {"scene":"🥖","english":"I buy bread at the bakery.","hint":"action location → 에서","sentence":"빵가게에서 빵을 사요.",
+         "chunks":[{"text":"빵가게에서","type":"place","en":"at the bakery"},{"text":"빵을","type":"name","en":"bread"},{"text":"사요.","type":"verb","en":"buy"}]},
+        {"scene":"🏠","english":"I make a toy boat at my friend's house.","hint":"action location → 에서","sentence":"친구 집에서 장난감 배를 만들어요.",
+         "chunks":[{"text":"친구 집에서","type":"place","en":"at friend's house"},{"text":"장난감 배를","type":"name","en":"a toy boat"},{"text":"만들어요.","type":"verb","en":"make"}]},
+        {"scene":"🐅","english":"Mira sees a tiger at the zoo.","hint":"action location → 에서","sentence":"미라는 동물원에서 호랑이를 봐요.",
+         "chunks":[{"text":"미라는","type":"name","en":"Mira"},{"text":"동물원에서","type":"place","en":"at the zoo"},{"text":"호랑이를","type":"name","en":"a tiger"},{"text":"봐요.","type":"verb","en":"sees"}]}
+      ],
+      "step2_words": [
+        {"scene":"🦁","english":"Liam and Kayo go to the zoo.","hint":"zoo = destination → 에","sentence":"리암하고 카요는 동물원에 가요.",
+         "answer":["리암하고","카요는","동물원","에","가요."],
+         "types":["name","name","place","particle","verb"]},
+        {"scene":"🐯","english":"Mira sees a tiger at the zoo.","hint":"zoo = action location → 에서","sentence":"미라는 동물원에서 호랑이를 봐요.",
+         "answer":["미라는","동물원","에서","호랑이를","봐요."],
+         "types":["name","place","particle","name","verb"]},
+        {"scene":"🐰","english":"Mom and sibling make a rabbit doll in the room.","hint":"에서 = action location · watch all the particles! 👀","sentence":"엄마하고 동생은 방에서 토끼 인형을 만들어요.",
+         "answer":["엄마","하고","동생","은","방","에서","토끼","인형","을","만들어요."],
+         "types":["name","particle","name","particle","place","particle","name","name","particle","verb"]}
+      ]
+    }
+  }
+}
