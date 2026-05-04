@@ -750,6 +750,9 @@ const _attManager = _hc ? _hc.createAttendanceManager({
   onStudentsChange(students) {
     STUDENTS = students;
     renderEditList();
+    // 듣기탭 활성화 중이면 학생 버튼 즉시 반영
+    const listenEl = document.getElementById('u6-listen');
+    if (listenEl && listenEl.classList.contains('active')) renderU6Part1();
   },
   onAttendanceChange(checked) {
     checkedToday = checked;
@@ -942,7 +945,10 @@ function applyPracticeState(session, showPopup = true) {
   }
 
   if (unit === 6) {
-    switchUnit(6);
+    // 현재 unit6이 활성화된 경우만 동기화 (앱 시작 시 자동 전환 없음)
+    const _u6panel = document.getElementById('unit6');
+    const _u6active = _u6panel && (_u6panel.style.display === 'block' || _u6panel.classList.contains('active'));
+    if (!_u6active) return;
     if (qIdx >= 20) {
       // Step 2 — 낱말 드래그
       const s2Idx = qIdx - 20;
@@ -967,8 +973,10 @@ function applyPracticeState(session, showPopup = true) {
       if (s1Idx !== s6Idx) { s6Idx = s1Idx; if(typeof renderS6==='function') renderS6(); }
     } else {
       // 듣기 퀴즈
-      switchSection6('listen');
-      if (qIdx !== u6GameQIdx) { u6GameQIdx = qIdx; if(typeof renderU6Part1==='function') renderU6Part1(); }
+      const listenEl = document.getElementById('u6-listen');
+      if (listenEl && listenEl.classList.contains('active') && qIdx !== u6GameQIdx) {
+        u6GameQIdx = qIdx; if(typeof renderU6Part1==='function') renderU6Part1();
+      }
     }
   }
 
@@ -3727,20 +3735,42 @@ function renderU6Part1() {
   var choicesEl = document.getElementById('u6-p1-choices');
   if (!choicesEl) { console.error('u6-p1-choices NOT FOUND'); return; }
 
+  // 모드 확인
+  var _isSolo = !isTeacher && checkedToday.size === 0;
+
   var html = '';
   for (var i = 0; i < q.choices.length; i++) {
     var c = q.choices[i];
-    html += '<div id="u6-choice-' + i + '" onclick="u6SelfStudyPick(' + i + ')"'
+    var clickAttr = _isSolo ? ' onclick="u6SelfStudyPick(' + i + ')"' : '';
+    var cursorStyle = _isSolo ? 'cursor:pointer;' : 'cursor:default;';
+    html += '<div id="u6-choice-' + i + '"' + clickAttr
           + ' style="border:3px solid #E8E8E8;border-radius:14px;padding:16px 10px;'
-          + 'background:white;text-align:center;cursor:pointer;transition:all 0.25s;">'
+          + 'background:white;text-align:center;' + cursorStyle + 'transition:all 0.25s;">'
           + '<div style="font-size:2.6rem;margin-bottom:10px;">' + c.emoji + '</div>'
           + '<div style="font-family:Jua,sans-serif;font-size:0.95rem;font-weight:700;margin-bottom:4px;">' + c.kr + '</div>'
-          + '<div style="font-size:0.75rem;color:#888;">' + c.en + '</div>'
-          + '</div>';
+          + '<div style="font-size:0.75rem;color:#888;">' + c.en + '</div>';
+    // 수업모드: 학생 투표 버튼
+    if (!_isSolo) {
+      html += '<div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px;">';
+      STUDENTS.forEach(function(name) {
+        var safeId = 'u6v-' + name.replace(/\s/g,'_') + '-' + i;
+        html += '<button id="' + safeId + '" onclick="u6Vote(event,\''
+              + name.replace(/\'/g, "\\'") + '\',' + i + ')"'
+              + ' style="font-family:Jua,sans-serif;font-size:0.75rem;padding:3px 10px;'
+              + 'border-radius:14px;border:2px solid #DDD;background:white;'
+              + 'color:var(--text);cursor:pointer;">' + name + '</button>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
   }
   console.log('renderU6Part1: idx=' + idx + ', html length=' + html.length);
   choicesEl.innerHTML = html;
   console.log('renderU6Part1: done, choicesEl children=' + choicesEl.children.length);
+
+  // 선생님 컨트롤 표시/숨김
+  var teacherCtrl = document.getElementById('u6-p1-teacher-ctrl');
+  if (teacherCtrl) teacherCtrl.style.display = isTeacher ? 'block' : 'none';
 }
 
 
@@ -3943,7 +3973,7 @@ function resetS6() { renderS6(); }
 function nextS6() {
   s6Idx++;
   if (s6Idx >= u6S1Q.length) { goToU6Step2(); }
-  else { syncNext(6, s6Idx); renderS6(); }
+  else { syncNext(6, s6Idx + 10); renderS6(); }
 }
 
 function goToU6Step2() {
@@ -4057,7 +4087,7 @@ function nextU6() {
     cs.classList.add('show');
     document.getElementById('u6-complete-score').textContent = `⭐ ${u6Score} / ${u6Questions.length}`;
   } else {
-    syncNext(6, u6Idx);
+    syncNext(6, u6Idx + 20);
     renderU6();
   }
 }
