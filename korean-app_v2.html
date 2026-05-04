@@ -754,6 +754,9 @@ const _attManager = _hc ? _hc.createAttendanceManager({
   onAttendanceChange(checked) {
     checkedToday = checked;
     renderAttendance();
+    // 듣기탭 활성화 중이면 학생 버튼 반영하여 재렌더
+    const listenEl = document.getElementById('u6-listen');
+    if (listenEl && listenEl.classList.contains('active')) renderU6Part1();
   }
 }) : null;
 
@@ -935,6 +938,37 @@ function applyPracticeState(session, showPopup = true) {
     } else {
       // step1 문제 동기화
       if (typeof s5Idx !== 'undefined' && qIdx !== s5Idx) { s5Idx = qIdx; if(typeof renderS5==='function') renderS5(); }
+    }
+  }
+
+  if (unit === 6) {
+    switchUnit(6);
+    if (qIdx >= 20) {
+      // Step 2 — 낱말 드래그
+      const s2Idx = qIdx - 20;
+      switchSection6('build');
+      const step2El = document.getElementById('u6-step2');
+      const step1El = document.getElementById('u6-step1');
+      if (step1El) step1El.style.display = 'none';
+      if (step2El) step2El.style.display = 'block';
+      if (s2Idx !== u6Idx) {
+        u6Idx = s2Idx;
+        if (u6Idx >= u6Questions.length) {
+          const card = document.getElementById('u6-qcard');
+          const comp = document.getElementById('u6-complete');
+          if (card) card.style.display = 'none';
+          if (comp) { comp.classList.add('show'); if(typeof launchConfetti==='function') launchConfetti(); }
+        } else if (typeof renderU6 === 'function') renderU6();
+      }
+    } else if (qIdx >= 10) {
+      // Step 1 — 청크 드래그
+      const s1Idx = qIdx - 10;
+      switchSection6('build');
+      if (s1Idx !== s6Idx) { s6Idx = s1Idx; if(typeof renderS6==='function') renderS6(); }
+    } else {
+      // 듣기 퀴즈
+      switchSection6('listen');
+      if (qIdx !== u6GameQIdx) { u6GameQIdx = qIdx; if(typeof renderU6Part1==='function') renderU6Part1(); }
     }
   }
 
@@ -3756,13 +3790,23 @@ function u6ShowResult(picked) {
     if (ci === correct) { btn.style.background='var(--mint)'; btn.style.color='white'; btn.textContent='⭐ '+nm; }
     else { btn.style.opacity='0.35'; }
   });
+  // 모드 확인
+  const _isSolo = !isTeacher && checkedToday.size === 0;
   // 혼자 공부할 때 피드백
-  if (picked !== null) {
+  if (_isSolo && picked !== null) {
     const fb = document.getElementById('u6-p1-fb');
     if (picked === correct) {
       fb.className='feedback correct'; fb.innerHTML='🎉 맞아요! Correct!';
     } else {
       fb.className='feedback wrong'; fb.innerHTML=`❌ 아니에요! → ${q.choices[correct].kr}`;
+    }
+  }
+  // 수업모드: 정답자 컨페티 + 팝업
+  if (!_isSolo) {
+    const winners = Object.entries(u6GameVotes).filter(([,ci]) => ci === correct).map(([nm]) => nm);
+    if (winners.length > 0) {
+      if (typeof launchConfetti === 'function') launchConfetti();
+      if (winners.length === 1 && typeof showNominatePopup === 'function') showNominatePopup(winners[0]);
     }
   }
   // 정답 소리 재생 (speechSynthesis 직접 사용)
