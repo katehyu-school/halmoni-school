@@ -865,6 +865,29 @@ function showNominatePopup(name) {
   setTimeout(close, 2500);
 }
 
+function showCorrectPopup(names) {
+  document.getElementById('correct-popup')?.remove();
+  document.getElementById('correct-overlay')?.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'correct-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.15);z-index:1999;';
+  document.body.appendChild(overlay);
+  const popup = document.createElement('div');
+  popup.id = 'correct-popup';
+  const namesStr = names.join(' · ');
+  popup.style.cssText = `position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:white;border-radius:28px;padding:40px 56px;
+    box-shadow:0 12px 48px rgba(0,0,0,0.22);z-index:2000;
+    text-align:center;animation:popIn 0.3s ease;border:3px solid var(--mint);`;
+  popup.innerHTML = `<div style="font-size:3.2rem;margin-bottom:10px;">🎉</div>
+    <div style="font-family:'Jua',sans-serif;font-size:2rem;color:#0D7B75;">${namesStr}</div>
+    <div style="font-family:'Jua',sans-serif;font-size:1.3rem;color:var(--mint);margin-top:10px;">정답! ⭐ Correct!</div>`;
+  document.body.appendChild(popup);
+  const close = () => { popup.remove(); overlay.remove(); };
+  overlay.onclick = close;
+  setTimeout(close, 3000);
+}
+
 function applyPracticeState(session, showPopup = true) {
   const statusEl = document.getElementById('practice-status');
   if (!statusEl) return;
@@ -3891,7 +3914,7 @@ function u6ShowResult(picked) {
     const winners = Object.entries(u6GameVotes).filter(([,ci]) => ci === correct).map(([nm]) => nm);
     if (winners.length > 0) {
       if (typeof launchConfetti === 'function') launchConfetti();
-      if (winners.length === 1 && typeof showNominatePopup === 'function') showNominatePopup(winners[0]);
+      showCorrectPopup(winners);   // 정답자 이름 + "Correct!" 팝업
     }
   }
   // 정답 소리 재생 (speechSynthesis 직접 사용)
