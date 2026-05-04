@@ -3472,20 +3472,20 @@ function goToStep2() {
 // ══════════════════════════════════════════
 // UNIT 6 — 데이터
 // ══════════════════════════════════════════
-const u6PlaceVocab = [
+let u6PlaceVocab = [
   {emoji:'🦁', kr:'동물원',      en:'zoo',             rom:'dong-mul-weon'},
   {emoji:'🥖', kr:'빵가게',      en:'bakery',          rom:'ppang-ga-ge'},
   {emoji:'👗', kr:'옷가게',      en:'clothing store',  rom:'ot-ga-ge'},
   {emoji:'🌸', kr:'꽃집',        en:'flower shop',     rom:'kkot-jip'},
   {emoji:'🏠', kr:'친구 집',     en:"friend's house",  rom:'chin-gu jip'}
 ];
-const u6VerbVocab = [
+let u6VerbVocab = [
   {emoji:'🛠️', kr:'만들어요',   en:'make(s)',         rom:'man-deul-eo-yo'},
   {emoji:'🧃',  kr:'사요',       en:'buy(s)',          rom:'sa-yo'}
 ];
 
 // 연습 — 빈칸 채우기
-const u6FillQ = [
+let u6FillQ = [
   {q:'어디에서 주스를 사요?', suffix:'에서 주스를 사요.',   ans:'가게',   opts:['가게','수영장','공원'],   en:'Where do you buy juice?'},
   {q:'어디에서 수영을 해요?', suffix:'에서 수영을 해요.',   ans:'수영장', opts:['학교','수영장','가게'],   en:'Where do you swim?'},
   {q:'어디에서 운동을 해요?', suffix:'에서 운동을 해요.',   ans:'공원',   opts:['집','교실','공원'],       en:'Where do you exercise?'},
@@ -3494,7 +3494,7 @@ const u6FillQ = [
 ];
 
 // 게임 Part 1 — 듣기 퀴즈
-const u6ListenQ = [
+let u6ListenQ = [
   {audio:'민수가 책을 읽어요.', correct:0,
    choices:[
      {emoji:'📖', kr:'책을 읽어요', en:'reading a book'},
@@ -3516,7 +3516,7 @@ const u6ListenQ = [
 ];
 
 // 게임 Part 2 Step 1 — 덩어리 드래그앤드랍
-const u6S1Q = [
+let u6S1Q = [
   {scene:'🏫', english:'Seulgi goes to school.', hint:'destination → 에', sentence:'슬기는 학교에 가요.',
    chunks:[{text:'슬기는',type:'name',en:'Seulgi'},{text:'학교에',type:'place',en:'to school'},{text:'가요.',type:'verb',en:'goes'}]},
   {scene:'🦁', english:'A tiger is at the zoo.', hint:'existence → 에', sentence:'호랑이가 동물원에 있어요.',
@@ -3532,7 +3532,7 @@ const u6S1Q = [
 ];
 
 // 게임 Part 2 Step 2 — 낱말 드래그앤드랍 (에/에서 집중)
-const u6Questions = [
+let u6Questions = [
   {scene:'🦁', english:'Liam and Kayo go to the zoo.', hint:'zoo = destination → 에', sentence:'리암하고 카요는 동물원에 가요.',
    answer:['리암하고','카요는','동물원','에','가요.'],
    types:['name','name','place','particle','verb']},
@@ -3566,6 +3566,14 @@ function switchSection6(sec) {
   }
   if (sec === 'build') {
     try { renderRaiseHandBtns(); } catch(e) {}
+    // 만들기 탭 열릴 때 Step1 렌더 (직접 탭 클릭 시)
+    const step1El = document.getElementById('u6-step1');
+    const step2El = document.getElementById('u6-step2');
+    if (step1El && step2El) {
+      if (step2El.style.display === 'none' || step2El.style.display === '') {
+        renderS6();
+      }
+    }
   }
 }
 
@@ -4015,12 +4023,24 @@ function nextU6() {
 // ══════════════════════════════════════════
 async function init(){
   try {
-    const [d1, d2, d3, d4, d5] = await Promise.all([1,2,3,4,5].map(n => HalmoniCore.loadUnit(n)));
+    const [d1, d2, d3, d4, d5, d6] = await Promise.all([1,2,3,4,5,6].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
     u4Questions = (d4 && d4.practice && d4.practice.quiz_items) || _u4QFallback;
     u5Questions = (d5 && d5.practice && d5.practice.quiz_items) || _u5QFallback;
+    if (d6 && d6.sections && d6.sections.practice) {
+      const p6 = d6.sections.practice;
+      if (p6.fill_items)   u6FillQ     = p6.fill_items;
+      if (p6.listen_quiz)  u6ListenQ   = p6.listen_quiz;
+      if (p6.step1_chunks) u6S1Q       = p6.step1_chunks;
+      if (p6.step2_words)  u6Questions = p6.step2_words;
+    }
+    if (d6 && d6.sections && d6.sections.vocab) {
+      const v6 = d6.sections.vocab;
+      if (v6.places) u6PlaceVocab = v6.places;
+      if (v6.verbs)  u6VerbVocab  = v6.verbs;
+    }
   } catch(e) {
     console.warn('[init] quiz data load failed, using fallback', e);
     u1Questions = _u1QFallback;
