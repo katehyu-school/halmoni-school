@@ -1,0 +1,397 @@
+{
+  "unit": 6,
+  "title": "사과 다섯 개 주세요",
+  "title_en": "Give me five apples",
+  "book": "세종한국어 1A",
+  "level": "adult",
+  "goal": {
+    "ko": "물건의 개수와 가격을 묻고 답할 수 있어요.",
+    "en": "Ask and answer questions about the number and price of items."
+  },
+
+  "sections": {
+
+    "vocab": {
+      "categories": [
+        {
+          "id": "native_numbers",
+          "label": "고유어 수",
+          "label_en": "Native Korean Numbers",
+          "items": [
+            { "id": "v06_n01", "korean": "하나 (한)",  "english": "one",   "romanization": "ha-na (han)",  "emoji": "1️⃣" },
+            { "id": "v06_n02", "korean": "둘 (두)",    "english": "two",   "romanization": "dul (du)",     "emoji": "2️⃣" },
+            { "id": "v06_n03", "korean": "셋 (세)",    "english": "three", "romanization": "set (se)",     "emoji": "3️⃣" },
+            { "id": "v06_n04", "korean": "넷 (네)",    "english": "four",  "romanization": "net (ne)",     "emoji": "4️⃣" },
+            { "id": "v06_n05", "korean": "다섯",       "english": "five",  "romanization": "da-seot",      "emoji": "5️⃣" },
+            { "id": "v06_n06", "korean": "여섯",       "english": "six",   "romanization": "yeo-seot",     "emoji": "6️⃣" },
+            { "id": "v06_n07", "korean": "일곱",       "english": "seven", "romanization": "il-gop",       "emoji": "7️⃣" },
+            { "id": "v06_n08", "korean": "여덟",       "english": "eight", "romanization": "yeo-deol",     "emoji": "8️⃣" },
+            { "id": "v06_n09", "korean": "아홉",       "english": "nine",  "romanization": "a-hop",        "emoji": "9️⃣" },
+            { "id": "v06_n10", "korean": "열",         "english": "ten",   "romanization": "yeol",         "emoji": "🔟" },
+            { "id": "v06_n11", "korean": "스물",       "english": "twenty","romanization": "seu-mul",      "emoji": "✌️" },
+            { "id": "v06_n12", "korean": "서른",       "english": "thirty","romanization": "seo-reun",     "emoji": "🔢" }
+          ]
+        },
+        {
+          "id": "counting_units",
+          "label": "단위 명사",
+          "label_en": "Counting Units",
+          "items": [
+            { "id": "v06_u01", "korean": "개",  "english": "piece / item (things)",   "romanization": "gae",   "emoji": "📦" },
+            { "id": "v06_u02", "korean": "명",  "english": "person (formal counter)", "romanization": "myeong","emoji": "🧑" },
+            { "id": "v06_u03", "korean": "마리","english": "animal (counter)",         "romanization": "ma-ri", "emoji": "🐱" },
+            { "id": "v06_u04", "korean": "잔",  "english": "cup / glass (drinks)",    "romanization": "jan",   "emoji": "☕" },
+            { "id": "v06_u05", "korean": "병",  "english": "bottle",                  "romanization": "byeong","emoji": "🍶" },
+            { "id": "v06_u06", "korean": "권",  "english": "volume (books)",          "romanization": "gwon",  "emoji": "📚" },
+            { "id": "v06_u07", "korean": "장",  "english": "sheet (paper / card)",    "romanization": "jang",  "emoji": "🃏" },
+            { "id": "v06_u08", "korean": "살",  "english": "year (age counter)",      "romanization": "sal",   "emoji": "🎂" }
+          ]
+        },
+        {
+          "id": "shopping",
+          "label": "쇼핑 명사",
+          "label_en": "Shopping Nouns",
+          "items": [
+            { "id": "v06_s01", "korean": "사과",    "english": "apple",           "romanization": "sa-gwa",      "emoji": "🍎" },
+            { "id": "v06_s02", "korean": "배",      "english": "pear",            "romanization": "bae",         "emoji": "🍐" },
+            { "id": "v06_s03", "korean": "바나나",  "english": "banana",          "romanization": "ba-na-na",    "emoji": "🍌" },
+            { "id": "v06_s04", "korean": "계란",    "english": "egg",             "romanization": "gye-ran",     "emoji": "🥚" },
+            { "id": "v06_s05", "korean": "빵",      "english": "bread",           "romanization": "ppang",       "emoji": "🍞" },
+            { "id": "v06_s06", "korean": "우유",    "english": "milk",            "romanization": "u-yu",        "emoji": "🥛" },
+            { "id": "v06_s07", "korean": "주스",    "english": "juice",           "romanization": "ju-seu",      "emoji": "🧃" },
+            { "id": "v06_s08", "korean": "아이스크림","english": "ice cream",     "romanization": "a-i-seu-keu-rim","emoji": "🍦" },
+            { "id": "v06_s09", "korean": "치약",    "english": "toothpaste",      "romanization": "chi-yak",     "emoji": "🪥" },
+            { "id": "v06_s10", "korean": "칫솔",    "english": "toothbrush",      "romanization": "chit-sol",    "emoji": "🪥" },
+            { "id": "v06_s11", "korean": "편의점",  "english": "convenience store","romanization": "pyeo-ni-jeom","emoji": "🏪" },
+            { "id": "v06_s12", "korean": "가게",    "english": "store / shop",    "romanization": "ga-ge",       "emoji": "🛒" }
+          ]
+        },
+        {
+          "id": "verbs",
+          "label": "동사 & 표현",
+          "label_en": "Verbs & Expressions",
+          "items": [
+            { "id": "v06_v01", "korean": "주다",      "base": "주다",      "english": "give",         "romanization": "ju-da",       "emoji": "🎁" },
+            { "id": "v06_v02", "korean": "앉다",      "base": "앉다",      "english": "sit",          "romanization": "an-da",       "emoji": "🪑" },
+            { "id": "v06_v03", "korean": "오다",      "base": "오다",      "english": "come",         "romanization": "o-da",        "emoji": "🚶" },
+            { "id": "v06_v04", "korean": "타다",      "base": "타다",      "english": "ride / take",  "romanization": "ta-da",       "emoji": "🚌" },
+            { "id": "v06_v05", "korean": "읽다",      "base": "읽다",      "english": "read",         "romanization": "ik-da",       "emoji": "📖" },
+            { "id": "v06_v06", "korean": "듣다",      "base": "듣다",      "english": "listen",       "romanization": "deut-da",     "emoji": "🎵" },
+            { "id": "v06_v07", "korean": "얼마예요?", "english": "How much is it?", "romanization": "eol-ma-ye-yo", "emoji": "💰" },
+            { "id": "v06_v08", "korean": "어서 오세요","english": "Welcome! (to a store)", "romanization": "eo-seo o-se-yo", "emoji": "🏪" },
+            { "id": "v06_v09", "korean": "내일",      "english": "tomorrow",     "romanization": "nae-il",      "emoji": "📅" },
+            { "id": "v06_v10", "korean": "일찍",      "english": "early",        "romanization": "il-jjik",     "emoji": "⏰" }
+          ]
+        }
+      ]
+    },
+
+    "grammar": {
+      "sections": [
+        {
+          "id": "g06_numbers",
+          "title": "고유어 vs. 한자어 숫자",
+          "subtitle": "두 가지 숫자 시스템 — 상황에 따라 다르게 사용해요",
+          "pattern": "고유어 (하나, 둘…) / 한자어 (일, 이…)",
+          "meaning": "two number systems used in different situations",
+          "description": "Korean has two counting systems. The key rule: use native numbers (고유어) for counting everyday objects and people; use sino-Korean numbers (한자어) for prices, dates, phone numbers, and measurements.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "고유어 — 물건·사람·나이 셀 때",
+              "examples": [
+                "사과 두 개 (two apples)",
+                "학생 세 명 (three students)",
+                "고양이 네 마리 (four cats)",
+                "커피 다섯 잔 (five cups of coffee)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "한자어 — 가격·날짜·전화번호",
+              "examples": [
+                "이천 원 (2,000 won)",
+                "삼월 (March — 3rd month)",
+                "02-1234-5678 (phone number)",
+                "오 층 (5th floor)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "⚠️ 하나/둘/셋/넷 → 단위명사 앞에서 변형!",
+              "examples": [
+                "하나 → 한  (한 개, 한 명, 한 잔)",
+                "둘  → 두  (두 개, 두 명, 두 마리)",
+                "셋  → 세  (세 개, 세 마리, 세 잔)",
+                "넷  → 네  (네 개, 네 병, 네 권)"
+              ]
+            }
+          ],
+          "conjugation_table": [
+            { "base": "하나", "stem": "한", "rule": "단위명사 앞에서", "result": "한 개 / 한 명 / 한 잔" },
+            { "base": "둘",   "stem": "두", "rule": "단위명사 앞에서", "result": "두 개 / 두 명 / 두 마리" },
+            { "base": "셋",   "stem": "세", "rule": "단위명사 앞에서", "result": "세 개 / 세 마리 / 세 잔" },
+            { "base": "넷",   "stem": "네", "rule": "단위명사 앞에서", "result": "네 개 / 네 병 / 네 권" },
+            { "base": "다섯", "stem": "다섯", "rule": "변형 없음", "result": "다섯 개 / 다섯 명" },
+            { "base": "열하나","stem": "열한", "rule": "단위명사 앞에서", "result": "열한 개 / 열한 명" }
+          ],
+          "examples": [
+            { "korean": "빵 한 개 주세요.",      "english": "Give me one loaf of bread.",        "highlight": "한 개" },
+            { "korean": "학생이 두 명 있어요.",  "english": "There are two students.",            "highlight": "두 명" },
+            { "korean": "고양이 세 마리예요.",   "english": "There are three cats.",              "highlight": "세 마리" },
+            { "korean": "커피 네 잔 주세요.",    "english": "Please give me four cups of coffee.","highlight": "네 잔" },
+            { "korean": "사과 다섯 개 주세요.",  "english": "Give me five apples.",              "highlight": "다섯 개" },
+            { "korean": "이 사과 얼마예요?",     "english": "How much are these apples?",         "highlight": "얼마예요" },
+            { "korean": "이천 원이에요.",        "english": "It's 2,000 won.",                    "highlight": "이천 원" }
+          ],
+          "qna": [
+            { "question": "지우개를 몇 개 사요?",     "answer": "지우개를 두 개 사요." },
+            { "question": "학생이 몇 명 있어요?",     "answer": "학생이 세 명 있어요." },
+            { "question": "커피 한 잔 얼마예요?",     "answer": "삼천 원이에요." }
+          ]
+        },
+        {
+          "id": "g06_seyo",
+          "title": "-(으)세요",
+          "subtitle": "동사 뒤에 붙어서 부드러운 명령/요청을 나타내요",
+          "pattern": "받침 있음 → 으세요 / 받침 없음 · 받침 ㄹ → 세요",
+          "meaning": "polite command or request",
+          "description": "Add -(으)세요 to the verb stem to make a polite request or command. If the stem ends in a consonant (받침), add 으세요. If it ends in a vowel or ㄹ, add 세요.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "받침 있음 → 으세요",
+              "examples": [
+                "앉다 → 앉으세요 (Please sit)",
+                "읽다 → 읽으세요 (Please read)",
+                "먹다 → 먹으세요 (Please eat)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "받침 없음 / ㄹ 받침 → 세요",
+              "examples": [
+                "오다 → 오세요 (Please come)",
+                "주다 → 주세요 (Please give)",
+                "마시다 → 마시세요 (Please drink)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "⚠️ 불규칙 — 주의!",
+              "examples": [
+                "듣다 → 들으세요 (ㄷ → ㄹ irregular)",
+                "놀다 → 노세요 (ㄹ dropped)"
+              ]
+            }
+          ],
+          "conjugation_table": [
+            { "base": "앉다",   "stem": "앉",   "rule": "받침 있음 → 으세요", "result": "앉으세요" },
+            { "base": "읽다",   "stem": "읽",   "rule": "받침 있음 → 으세요", "result": "읽으세요" },
+            { "base": "먹다",   "stem": "먹",   "rule": "받침 있음 → 으세요", "result": "먹으세요" },
+            { "base": "오다",   "stem": "오",   "rule": "받침 없음 → 세요",   "result": "오세요" },
+            { "base": "주다",   "stem": "주",   "rule": "받침 없음 → 세요",   "result": "주세요" },
+            { "base": "마시다", "stem": "마시", "rule": "받침 없음 → 세요",   "result": "마시세요" },
+            { "base": "타다",   "stem": "타",   "rule": "받침 없음 → 세요",   "result": "타세요" },
+            { "base": "듣다",   "stem": "들",   "rule": "ㄷ 불규칙 → 들+으세요","result": "들으세요" },
+            { "base": "놀다",   "stem": "노",   "rule": "ㄹ 탈락 → 세요",    "result": "노세요" }
+          ],
+          "examples": [
+            { "korean": "안나 씨, 여기 앉으세요.",    "english": "Anna, please sit here.",          "highlight": "앉으세요" },
+            { "korean": "라면 세 개 주세요.",          "english": "Please give me three ramens.",    "highlight": "주세요" },
+            { "korean": "음악을 들으세요.",            "english": "Please listen to the music.",     "highlight": "들으세요" },
+            { "korean": "내일 일찍 오세요.",           "english": "Please come early tomorrow.",     "highlight": "오세요" },
+            { "korean": "35쪽을 읽으세요.",            "english": "Please read page 35.",            "highlight": "읽으세요" },
+            { "korean": "5번 버스를 타세요.",          "english": "Please take bus number 5.",       "highlight": "타세요" }
+          ],
+          "qna": [
+            { "question": "학생에게 뭐라고 해요? (읽다 + 으세요)",   "answer": "35쪽을 읽으세요." },
+            { "question": "손님에게 뭐라고 해요? (주다 + 세요)",     "answer": "여기 있어요. / 커피 드세요." },
+            { "question": "듣다의 (으)세요 형은?",                  "answer": "들으세요 (ㄷ 불규칙)" }
+          ]
+        }
+      ]
+    },
+
+    "dialogue": {
+      "scenes": [
+        {
+          "id": "dlg06_01",
+          "title": "과일 가게에서",
+          "subtitle": "Anna goes to a fruit store",
+          "lines": [
+            { "speaker": "주인", "korean": "어서 오세요.", "english": "Welcome!" },
+            { "speaker": "안나", "korean": "이 사과 얼마예요?", "english": "How much are these apples?" },
+            { "speaker": "주인", "korean": "이천 원이에요.", "english": "They are 2,000 won." },
+            { "speaker": "안나", "korean": "배는 얼마예요?", "english": "How much are the pears?" },
+            { "speaker": "주인", "korean": "오천 원이에요.", "english": "They are 5,000 won." },
+            { "speaker": "안나", "korean": "그럼 사과 두 개하고 배 한 개 주세요.", "english": "Then give me two apples and one pear please." },
+            { "speaker": "주인", "korean": "여기 있어요.", "english": "Here you go." }
+          ]
+        },
+        {
+          "id": "dlg06_02",
+          "title": "편의점에서",
+          "subtitle": "Eugene goes to a convenience store",
+          "lines": [
+            { "speaker": "유진", "korean": "저는 편의점에 가요.", "english": "I'm going to the convenience store." },
+            { "speaker": "유진", "korean": "치약 두 개하고 칫솔 다섯 개를 사요.", "english": "I'm buying two toothpastes and five toothbrushes." },
+            { "speaker": "유진", "korean": "그리고 아이스크림을 한 개 사요.", "english": "And I'm buying one ice cream." }
+          ]
+        },
+        {
+          "id": "dlg06_03",
+          "title": "교실에서",
+          "subtitle": "Classroom — (으)세요 patterns",
+          "lines": [
+            { "speaker": "선생님", "korean": "유진 씨, 35쪽을 읽으세요.", "english": "Yujin, please read page 35." },
+            { "speaker": "유진",   "korean": "네, 선생님.", "english": "Yes, teacher." },
+            { "speaker": "선생님", "korean": "재민 씨, 내일 일찍 오세요.", "english": "Jaemin, please come early tomorrow." },
+            { "speaker": "재민",   "korean": "네, 알겠어요.", "english": "Yes, I understand." }
+          ]
+        }
+      ]
+    },
+
+    "pronunciation": {
+      "sections": [
+        {
+          "id": "pron06_01",
+          "title": "받침 발음 규칙 — Final Consonant Simplification",
+          "rule_en": "In Korean, final consonants are pronounced as one of only 7 sounds: [ㄱ], [ㄴ], [ㄷ], [ㄹ], [ㅁ], [ㅂ], [ㅇ]. Multiple consonants get simplified.",
+          "rule_ko": "받침은 7가지 소리([ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ])로만 발음돼요. ㅅ·ㅆ·ㅈ·ㅊ·ㅌ → [ㄷ], ㅍ → [ㅂ], ㅋ·ㄲ → [ㄱ]",
+          "examples": [
+            { "written": "다섯", "pronounced": "다섣",  "romanization": "da-seot" },
+            { "written": "여섯", "pronounced": "여섣",  "romanization": "yeo-seot" },
+            { "written": "옷",   "pronounced": "옫",    "romanization": "ot" },
+            { "written": "꽃",   "pronounced": "꼳",    "romanization": "kkot" },
+            { "written": "책",   "pronounced": "책",    "romanization": "chaek" },
+            { "written": "앞",   "pronounced": "압",    "romanization": "ap" }
+          ]
+        },
+        {
+          "id": "pron06_02",
+          "title": "연음 — Liaison (받침 + 모음)",
+          "rule_en": "When a syllable ending in a consonant (받침) is followed by a vowel, the consonant sound moves to the next syllable.",
+          "rule_ko": "받침 뒤에 모음이 오면 받침이 다음 음절의 첫소리가 돼요.",
+          "examples": [
+            { "written": "한 개",    "pronounced": "한개",   "romanization": "han-gae" },
+            { "written": "몇 개",    "pronounced": "며때",   "romanization": "myeot-kkae" },
+            { "written": "다섯 개",  "pronounced": "다서개", "romanization": "da-seo-gae" }
+          ]
+        }
+      ]
+    },
+
+    "key_points": [
+      {
+        "id": "kp06_01",
+        "title": "한국 돈 읽기 — Korean Money",
+        "note": "Korean currency is read using sino-Korean (한자어) numbers. The won (원) comes after the number.",
+        "examples": [
+          { "formal": "10원",       "casual": "십 원",       "english": "10 won (coin)" },
+          { "formal": "100원",      "casual": "백 원",        "english": "100 won (coin)" },
+          { "formal": "500원",      "casual": "오백 원",      "english": "500 won (coin)" },
+          { "formal": "1,000원",    "casual": "천 원",        "english": "1,000 won (bill — Yi Hwang)" },
+          { "formal": "5,000원",    "casual": "오천 원",      "english": "5,000 won (bill — Yi I)" },
+          { "formal": "10,000원",   "casual": "만 원",        "english": "10,000 won (bill — King Sejong)" },
+          { "formal": "50,000원",   "casual": "오만 원",      "english": "50,000 won (bill — Shin Saimdang)" }
+        ]
+      },
+      {
+        "id": "kp06_02",
+        "title": "큰 숫자 읽기 — Reading Large Numbers",
+        "note": "Korean groups numbers in units of 10,000 (만), not 1,000. Learn: 일→십→백→천→만.",
+        "examples": [
+          { "formal": "1",          "casual": "일",           "english": "1" },
+          { "formal": "10",         "casual": "십",           "english": "10" },
+          { "formal": "100",        "casual": "백",           "english": "100" },
+          { "formal": "1,000",      "casual": "천",           "english": "1,000" },
+          { "formal": "10,000",     "casual": "만",           "english": "10,000 (key unit!)" },
+          { "formal": "100,000",    "casual": "십만",         "english": "100,000" },
+          { "formal": "1,000,000",  "casual": "백만",         "english": "1,000,000" }
+        ]
+      }
+    ],
+
+    "practice": {
+      "quiz_items": [
+        {
+          "id": "q06_01",
+          "type": "multiple_choice",
+          "question": "Choose the correct counting form.",
+          "sentence": "사과 ___ 개 주세요.",
+          "choices": ["하나", "한", "일", "한나"],
+          "answer": "한",
+          "explanation": "하나 → 한 when followed by a counting unit (단위명사). So: 한 개, not 하나 개."
+        },
+        {
+          "id": "q06_02",
+          "type": "multiple_choice",
+          "question": "Which number system do you use for prices?",
+          "sentence": "이 커피 ___이에요.",
+          "choices": ["삼천 원", "셋천 원", "세천 원", "셋 원"],
+          "answer": "삼천 원",
+          "explanation": "Prices use 한자어 (sino-Korean): 삼천 원 (3,000 won), not 셋천 원."
+        },
+        {
+          "id": "q06_03",
+          "type": "multiple_choice",
+          "question": "What is the correct counter for animals?",
+          "sentence": "고양이 두 ___.",
+          "choices": ["개", "마리", "명", "잔"],
+          "answer": "마리",
+          "explanation": "마리 is used for animals. 개 = things, 명 = people, 잔 = drinks."
+        },
+        {
+          "id": "q06_04",
+          "type": "conjugation",
+          "question": "Make a polite request using -(으)세요.",
+          "base": "앉다",
+          "answer": "앉으세요",
+          "hint": "앉다 has 받침 ㄷ → add 으세요"
+        },
+        {
+          "id": "q06_05",
+          "type": "conjugation",
+          "question": "Make a polite request using -(으)세요.",
+          "base": "주다",
+          "answer": "주세요",
+          "hint": "주다 ends in vowel → add 세요"
+        },
+        {
+          "id": "q06_06",
+          "type": "multiple_choice",
+          "question": "How do you say '3,000 won' in Korean?",
+          "choices": ["셋천 원", "삼천 원", "세천 원", "세 원"],
+          "answer": "삼천 원",
+          "explanation": "Money is read with 한자어: 삼(3) + 천(1,000) = 삼천 원."
+        },
+        {
+          "id": "q06_07",
+          "type": "multiple_choice",
+          "question": "완성하세요: 유진 씨, 내일 일찍 ___ (오다).",
+          "choices": ["오세요", "오으세요", "오여요", "옵세요"],
+          "answer": "오세요",
+          "explanation": "오다 stem is 오 (vowel ending) → 세요. So: 오세요."
+        },
+        {
+          "id": "q06_08",
+          "type": "multiple_choice",
+          "question": "듣다 + (으)세요 = ?",
+          "choices": ["듣으세요", "듣세요", "들으세요", "들세요"],
+          "answer": "들으세요",
+          "explanation": "듣다 is a ㄷ-irregular verb: ㄷ → ㄹ before vowel. So: 들 + 으세요 = 들으세요."
+        }
+      ]
+    },
+
+    "self_check": [
+      { "id": "sc06_01", "ko": "물건의 개수를 고유어로 말할 수 있어요?", "en": "Can you count objects using native Korean numbers?" },
+      { "id": "sc06_02", "ko": "하나/둘/셋/넷이 단위명사 앞에서 어떻게 변하는지 알아요?", "en": "Do you know how 하나/둘/셋/넷 change before counting units?" },
+      { "id": "sc06_03", "ko": "가격을 묻고 답할 수 있어요?", "en": "Can you ask and answer about prices?" },
+      { "id": "sc06_04", "ko": "-(으)세요를 써서 공손한 요청을 할 수 있어요?", "en": "Can you make polite requests using -(으)세요?" }
+    ]
+
+  }
+}
