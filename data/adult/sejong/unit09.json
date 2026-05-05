@@ -282,29 +282,29 @@
           "rule_boxes": [
             {
               "color": "blue",
-              "text": "N에서 = 'at / in / from' — used when an action takes place at a location"
+              "label": "N에서 = 'at / in / from' — used when an action takes place at a location"
             },
             {
               "color": "green",
-              "text": "N에 있어요 = something EXISTS at a location\nN에서 해요 = an action HAPPENS at a location"
+              "label": "N에 있어요 = something EXISTS at a location\nN에서 해요 = an action HAPPENS at a location"
             }
           ],
           "examples": [
             {
-              "ko": "공원에서 자전거를 타요.",
-              "en": "I ride a bicycle in the park."
+              "korean": "공원에서 자전거를 타요.",
+              "english": "I ride a bicycle in the park."
             },
             {
-              "ko": "도서관에서 책을 읽어요.",
-              "en": "I read books at the library."
+              "korean": "도서관에서 책을 읽어요.",
+              "english": "I read books at the library."
             },
             {
-              "ko": "집에서 쉬었어요.",
-              "en": "I rested at home."
+              "korean": "집에서 쉬었어요.",
+              "english": "I rested at home."
             },
             {
-              "ko": "회사에서 일해요.",
-              "en": "I work at the company."
+              "korean": "회사에서 일해요.",
+              "english": "I work at the company."
             }
           ]
         },
@@ -315,101 +315,95 @@
           "rule_boxes": [
             {
               "color": "blue",
-              "text": "어간의 마지막 모음이 ㅏ 또는 ㅗ → 았어요\nLast vowel of stem is ㅏ or ㅗ → 았어요"
+              "label": "어간의 마지막 모음이 ㅏ 또는 ㅗ → 았어요\nLast vowel of stem is ㅏ or ㅗ → 았어요"
             },
             {
               "color": "blue",
-              "text": "그 외 (other vowels) → 었어요"
+              "label": "그 외 (other vowels) → 었어요"
             },
             {
               "color": "teal",
-              "text": "하다 → 하 + 였어요 → 했어요 (contracted)"
+              "label": "하다 → 하 + 였어요 → 했어요 (contracted)"
             },
             {
               "color": "amber",
-              "text": "ㅂ 불규칙: 덥다 → 더 + 웠어요 → 더웠어요\nㅡ 탈락: 바쁘다 → 바ㅃ + 았어요 → 바빴어요"
+              "label": "ㅂ 불규칙: 덥다 → 더 + 웠어요 → 더웠어요\nㅡ 탈락: 바쁘다 → 바ㅃ + 았어요 → 바빴어요"
             }
           ],
           "conjugation_table": {
-            "headers": [
-              "기본형",
-              "어간",
-              "규칙",
-              "활용형"
-            ],
             "rows": [
-              [
-                "가다",
-                "가",
-                "ㅏ → 았",
-                "갔어요"
-              ],
-              [
-                "오다",
-                "오",
-                "ㅗ → 았",
-                "왔어요"
-              ],
-              [
-                "보다",
-                "보",
-                "ㅗ → 았",
-                "봤어요"
-              ],
-              [
-                "살다",
-                "살",
-                "ㅏ → 았",
-                "살았어요"
-              ],
-              [
-                "먹다",
-                "먹",
-                "→ 었",
-                "먹었어요"
-              ],
-              [
-                "읽다",
-                "읽",
-                "→ 었",
-                "읽었어요"
-              ],
-              [
-                "있다",
-                "있",
-                "→ 었",
-                "있었어요"
-              ],
-              [
-                "없다",
-                "없",
-                "→ 었",
-                "없었어요"
-              ],
-              [
-                "하다",
-                "하",
-                "하 → 했",
-                "했어요"
-              ]
+              {
+                "base": "가다",
+                "stem": "가",
+                "rule": "ㅏ → 았",
+                "result": "갔어요"
+              },
+              {
+                "base": "오다",
+                "stem": "오",
+                "rule": "ㅗ → 았",
+                "result": "왔어요"
+              },
+              {
+                "base": "보다",
+                "stem": "보",
+                "rule": "ㅗ → 았",
+                "result": "봤어요"
+              },
+              {
+                "base": "살다",
+                "stem": "살",
+                "rule": "ㅏ → 았",
+                "result": "살았어요"
+              },
+              {
+                "base": "먹다",
+                "stem": "먹",
+                "rule": "→ 었",
+                "result": "먹었어요"
+              },
+              {
+                "base": "읽다",
+                "stem": "읽",
+                "rule": "→ 었",
+                "result": "읽었어요"
+              },
+              {
+                "base": "있다",
+                "stem": "있",
+                "rule": "→ 었",
+                "result": "있었어요"
+              },
+              {
+                "base": "없다",
+                "stem": "없",
+                "rule": "→ 었",
+                "result": "없었어요"
+              },
+              {
+                "base": "하다",
+                "stem": "하",
+                "rule": "하 → 했",
+                "result": "했어요"
+              }
             ]
           },
           "examples": [
             {
-              "ko": "토요일에 뭐 했어요?",
-              "en": "What did you do on Saturday?"
+              "korean": "토요일에 뭐 했어요?",
+              "english": "What did you do on Saturday?"
             },
             {
-              "ko": "도서관에서 책을 읽었어요.",
-              "en": "I read books at the library."
+              "korean": "도서관에서 책을 읽었어요.",
+              "english": "I read books at the library."
             },
             {
-              "ko": "어제 날씨가 어땠어요?",
-              "en": "How was the weather yesterday?"
+              "korean": "어제 날씨가 어땠어요?",
+              "english": "How was the weather yesterday?"
             },
             {
-              "ko": "아주 좋았어요.",
-              "en": "It was very nice."
+              "korean": "아주 좋았어요.",
+              "english": "It was very nice."
             }
           ]
         }
@@ -424,23 +418,23 @@
           "lines": [
             {
               "speaker": "가",
-              "text": "주말에 어디에 가요?",
-              "translation": "Where do you go on weekends?"
+              "korean": "주말에 어디에 가요?",
+              "english": "Where do you go on weekends?"
             },
             {
               "speaker": "나",
-              "text": "공원에 가요.",
-              "translation": "I go to the park."
+              "korean": "공원에 가요.",
+              "english": "I go to the park."
             },
             {
               "speaker": "가",
-              "text": "공원에서 뭐 해요?",
-              "translation": "What do you do at the park?"
+              "korean": "공원에서 뭐 해요?",
+              "english": "What do you do at the park?"
             },
             {
               "speaker": "나",
-              "text": "공원에서 자전거를 타요.",
-              "translation": "I ride a bicycle in the park."
+              "korean": "공원에서 자전거를 타요.",
+              "english": "I ride a bicycle in the park."
             }
           ]
         },
@@ -451,18 +445,18 @@
           "lines": [
             {
               "speaker": "가",
-              "text": "토요일에 뭐 했어요?",
-              "translation": "What did you do on Saturday?"
+              "korean": "토요일에 뭐 했어요?",
+              "english": "What did you do on Saturday?"
             },
             {
               "speaker": "나",
-              "text": "바다에서 수영을 했어요. 아주 재미있었어요.",
-              "translation": "I swam in the sea. It was really fun."
+              "korean": "바다에서 수영을 했어요. 아주 재미있었어요.",
+              "english": "I swam in the sea. It was really fun."
             },
             {
               "speaker": "가",
-              "text": "저는 집에서 쉬었어요. 좋았어요.",
-              "translation": "I rested at home. It was nice."
+              "korean": "저는 집에서 쉬었어요. 좋았어요.",
+              "english": "I rested at home. It was nice."
             }
           ]
         }
@@ -471,42 +465,55 @@
     "pronunciation": {
       "sections": [
         {
-          "id": "pron09_1",
-          "rule": "자음 축약 (Consonant Aspiration)",
-          "description": "ㄱ + ㅎ → ㅋ : When ㄱ meets ㅎ, they merge into the aspirated ㅋ",
+          "rule": "ㄱ + ㅎ → ㅋ : When ㄱ meets ㅎ, they merge into the aspirated ㅋ",
           "examples": [
             {
-              "before": "백화점",
-              "after": "배콰점",
-              "note": "ㄱ + ㅎ → ㅋ"
+              "note": "ㄱ + ㅎ → ㅋ",
+              "written": "백화점",
+              "pronounced": "배콰점"
             }
-          ]
+          ],
+          "title": "자음 축약 (Consonant Aspiration)"
         },
         {
-          "id": "pron09_2",
-          "rule": "비음화 (Nasalization)",
-          "description": "ㄱ + ㅁ → ㅇ + ㅁ : When ㄱ comes before the nasal consonant ㅁ, it becomes ㅇ",
+          "rule": "ㄱ + ㅁ → ㅇ + ㅁ : When ㄱ comes before the nasal consonant ㅁ, it becomes ㅇ",
           "examples": [
             {
-              "before": "박물관",
-              "after": "방물관",
-              "note": "ㄱ + ㅁ → ㅇ"
+              "note": "ㄱ + ㅁ → ㅇ",
+              "written": "박물관",
+              "pronounced": "방물관"
             }
-          ]
+          ],
+          "title": "비음화 (Nasalization)"
         }
       ]
     },
     "key_points": [
       {
         "id": "kp09_1",
-        "icon": "🏞️",
         "title": "한국의 주말 문화",
-        "title_en": "Korean Weekend Culture",
-        "points": [
-          "한강공원 (Hangang Park) — 서울 시민들의 주말 명소. 자전거, 피크닉, 치킨 & 맥주!",
-          "노래방 (Karaoke room) — 혼자 or 친구들과 함께. 한국 주말의 필수 코스",
-          "등산 (Hiking) — 한국인들이 가장 좋아하는 주말 활동 중 하나. 전국에 등산로 가득!",
-          "주말 시장 (Weekend market) — 먹거리와 구경거리가 넘치는 활기찬 장소"
+        "note": "한강공원 (Hangang Park) — 서울 시민들의 주말 명소. 자전거, 피크닉, 치킨 & 맥주! / 노래방 (Karaoke room) — 혼자 or 친구들과 함께. 한국 주말의 필수 코스 / 등산 (Hiking) — 한국인들이 가장 좋아하는 주말 활동 중 하나. 전국에 등산로 가득! / 주말 시장 (Weekend market) — 먹거리와 구경거리가 넘치는 활기찬 장소",
+        "examples": [
+          {
+            "formal": "한강공원",
+            "casual": "자전거 타요 🚲",
+            "english": "Cycling at Han River Park"
+          },
+          {
+            "formal": "노래방",
+            "casual": "친구랑 같이 가요 🎤",
+            "english": "Karaoke with friends"
+          },
+          {
+            "formal": "등산",
+            "casual": "주말에 자주 해요 🏔️",
+            "english": "Hiking on weekends"
+          },
+          {
+            "formal": "주말 시장",
+            "casual": "먹거리가 많아요 🍢",
+            "english": "Weekend market food stalls"
+          }
         ]
       }
     ],
