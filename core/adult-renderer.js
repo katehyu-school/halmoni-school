@@ -65,7 +65,7 @@ const AdultRenderer = (() => {
   <div class="card-front" style="text-align:center;">
     <div style="font-size:2.2rem;">${item.emoji || '📌'}</div>
     <div style="font-family:'Noto Serif KR',serif;font-size:1.2rem;font-weight:700;color:${c.label};margin-top:4px;">${item.korean}</div>
-    ${item.warning ? `<div style="font-size:0.72rem;font-weight:700;color:#c74d36;background:#FDEAE6;border-radius:4px;padding:1px 6px;margin-top:3px;display:inline-block;">⚠️ ${item.warning}</div>` : ''}
+    ${item.warning ? `<div style="font-size:0.75rem;font-weight:700;color:#fff;background:#c74d36;border-radius:6px;padding:2px 8px;margin-top:4px;">⚠️ ${item.warning}</div>` : ''}
     ${item.base ? `<div style="font-size:0.78rem;color:#888;margin-top:2px;">기본형: ${item.base}</div>` : ''}
   </div>
   <div class="card-back" style="display:none;text-align:center;">
