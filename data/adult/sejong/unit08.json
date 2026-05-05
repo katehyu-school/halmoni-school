@@ -1,0 +1,976 @@
+{
+  "unit": 8,
+  "title": "날씨가 더워요?",
+  "title_en": "Is the weather hot?",
+  "book": "세종한국어 1A",
+  "level": "adult",
+  "goal": {
+    "ko": "날씨와 계절을 묻고 답할 수 있어요.",
+    "en": "Ask and answer questions about the weather and seasons."
+  },
+  "sections": {
+    "vocab": {
+      "categories": [
+        {
+          "id": "weather",
+          "label": "날씨 표현",
+          "label_en": "Weather Expressions",
+          "items": [
+            {
+              "id": "v08_w01",
+              "korean": "맑아요",
+              "base": "맑다",
+              "english": "sunny / clear",
+              "romanization": "mal-ga-yo",
+              "emoji": "☀️"
+            },
+            {
+              "id": "v08_w02",
+              "korean": "흐려요",
+              "base": "흐리다",
+              "english": "cloudy",
+              "romanization": "heu-ryeo-yo",
+              "emoji": "☁️"
+            },
+            {
+              "id": "v08_w03",
+              "korean": "바람이 불어요",
+              "base": "불다",
+              "english": "windy",
+              "romanization": "ba-ra-mi bu-reo-yo",
+              "emoji": "💨"
+            },
+            {
+              "id": "v08_w04",
+              "korean": "비가 와요",
+              "base": "오다",
+              "english": "it rains / rainy",
+              "romanization": "bi-ga wa-yo",
+              "emoji": "🌧️"
+            },
+            {
+              "id": "v08_w05",
+              "korean": "눈이 와요",
+              "base": "오다",
+              "english": "it snows / snowy",
+              "romanization": "nu-ni wa-yo",
+              "emoji": "❄️"
+            },
+            {
+              "id": "v08_w06",
+              "korean": "따뜻해요",
+              "base": "따뜻하다",
+              "english": "warm",
+              "romanization": "tta-tteu-tae-yo",
+              "emoji": "🌤️"
+            },
+            {
+              "id": "v08_w07",
+              "korean": "더워요",
+              "base": "덥다",
+              "english": "hot",
+              "romanization": "deo-wo-yo",
+              "emoji": "🥵"
+            },
+            {
+              "id": "v08_w08",
+              "korean": "시원해요",
+              "base": "시원하다",
+              "english": "cool / refreshing",
+              "romanization": "si-won-hae-yo",
+              "emoji": "😌"
+            },
+            {
+              "id": "v08_w09",
+              "korean": "쌀쌀해요",
+              "base": "쌀쌀하다",
+              "english": "chilly",
+              "romanization": "ssal-ssal-hae-yo",
+              "emoji": "🧥"
+            },
+            {
+              "id": "v08_w10",
+              "korean": "추워요",
+              "base": "춥다",
+              "english": "cold",
+              "romanization": "chu-wo-yo",
+              "emoji": "🥶"
+            }
+          ]
+        },
+        {
+          "id": "seasons",
+          "label": "계절 & 자연",
+          "label_en": "Seasons & Nature",
+          "items": [
+            {
+              "id": "v08_s01",
+              "korean": "봄",
+              "english": "spring",
+              "romanization": "bom",
+              "emoji": "🌸"
+            },
+            {
+              "id": "v08_s02",
+              "korean": "여름",
+              "english": "summer",
+              "romanization": "yeo-reum",
+              "emoji": "🏖️"
+            },
+            {
+              "id": "v08_s03",
+              "korean": "가을",
+              "english": "autumn / fall",
+              "romanization": "ga-eul",
+              "emoji": "🍂"
+            },
+            {
+              "id": "v08_s04",
+              "korean": "겨울",
+              "english": "winter",
+              "romanization": "gyeo-ul",
+              "emoji": "⛄"
+            },
+            {
+              "id": "v08_s05",
+              "korean": "날씨",
+              "english": "weather",
+              "romanization": "nal-ssi",
+              "emoji": "🌡️"
+            },
+            {
+              "id": "v08_s06",
+              "korean": "계절",
+              "english": "season",
+              "romanization": "gye-jeol",
+              "emoji": "🗓️"
+            },
+            {
+              "id": "v08_s07",
+              "korean": "사계절",
+              "english": "four seasons",
+              "romanization": "sa-gye-jeol",
+              "emoji": "🌍"
+            },
+            {
+              "id": "v08_s08",
+              "korean": "단풍",
+              "english": "autumn leaves",
+              "romanization": "dan-pung",
+              "emoji": "🍁"
+            },
+            {
+              "id": "v08_s09",
+              "korean": "바다",
+              "english": "sea / ocean",
+              "romanization": "ba-da",
+              "emoji": "🌊"
+            },
+            {
+              "id": "v08_s10",
+              "korean": "우산",
+              "english": "umbrella",
+              "romanization": "u-san",
+              "emoji": "☂️"
+            }
+          ]
+        },
+        {
+          "id": "adjectives",
+          "label": "ㅂ 불규칙 형용사",
+          "label_en": "ㅂ-irregular Adjectives",
+          "items": [
+            {
+              "id": "v08_a01",
+              "korean": "무거워요",
+              "base": "무겁다",
+              "english": "heavy",
+              "romanization": "mu-geo-wo-yo",
+              "emoji": "🏋️"
+            },
+            {
+              "id": "v08_a02",
+              "korean": "가벼워요",
+              "base": "가볍다",
+              "english": "light",
+              "romanization": "ga-byeo-wo-yo",
+              "emoji": "🪶"
+            },
+            {
+              "id": "v08_a03",
+              "korean": "어려워요",
+              "base": "어렵다",
+              "english": "difficult",
+              "romanization": "eo-ryeo-wo-yo",
+              "emoji": "😰"
+            },
+            {
+              "id": "v08_a04",
+              "korean": "쉬워요",
+              "base": "쉽다",
+              "english": "easy",
+              "romanization": "swi-wo-yo",
+              "emoji": "😊"
+            },
+            {
+              "id": "v08_a05",
+              "korean": "매워요",
+              "base": "맵다",
+              "english": "spicy",
+              "romanization": "mae-wo-yo",
+              "emoji": "🌶️"
+            },
+            {
+              "id": "v08_a06",
+              "korean": "예뻐요",
+              "base": "예쁘다",
+              "english": "pretty",
+              "romanization": "ye-ppeo-yo",
+              "emoji": "💐"
+            },
+            {
+              "id": "v08_a07",
+              "korean": "아름다워요",
+              "base": "아름답다",
+              "english": "beautiful",
+              "romanization": "a-reum-da-wo-yo",
+              "emoji": "🌺"
+            },
+            {
+              "id": "v08_a08",
+              "korean": "바빠요",
+              "base": "바쁘다",
+              "english": "busy",
+              "romanization": "ba-ppa-yo",
+              "emoji": "😤"
+            }
+          ]
+        },
+        {
+          "id": "expressions",
+          "label": "부사 & 표현",
+          "label_en": "Adverbs & Expressions",
+          "items": [
+            {
+              "id": "v08_e01",
+              "korean": "요즘",
+              "english": "these days / lately",
+              "romanization": "yo-jeum",
+              "emoji": "📅"
+            },
+            {
+              "id": "v08_e02",
+              "korean": "이번",
+              "english": "this time / this (upcoming)",
+              "romanization": "i-beon",
+              "emoji": "👉"
+            },
+            {
+              "id": "v08_e03",
+              "korean": "저번",
+              "english": "last time",
+              "romanization": "jeo-beon",
+              "emoji": "👈"
+            },
+            {
+              "id": "v08_e04",
+              "korean": "좀",
+              "english": "a little / somewhat",
+              "romanization": "jom",
+              "emoji": "🤏"
+            },
+            {
+              "id": "v08_e05",
+              "korean": "아주",
+              "english": "very / quite",
+              "romanization": "a-ju",
+              "emoji": "💯"
+            },
+            {
+              "id": "v08_e06",
+              "korean": "자주",
+              "english": "often / frequently",
+              "romanization": "ja-ju",
+              "emoji": "🔄"
+            },
+            {
+              "id": "v08_e07",
+              "korean": "많이",
+              "english": "a lot / much",
+              "romanization": "ma-ni",
+              "emoji": "📈"
+            },
+            {
+              "id": "v08_e08",
+              "korean": "그런데",
+              "english": "but / by the way",
+              "romanization": "geu-reon-de",
+              "emoji": "↔️"
+            },
+            {
+              "id": "v08_e09",
+              "korean": "그렇지만",
+              "english": "however / but",
+              "romanization": "geu-reot-ji-man",
+              "emoji": "🔀"
+            },
+            {
+              "id": "v08_e10",
+              "korean": "잘 지내요",
+              "english": "I'm doing well",
+              "romanization": "jal ji-nae-yo",
+              "emoji": "😄"
+            }
+          ]
+        }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g08_an",
+          "title": "안 — 부정",
+          "subtitle": "동사나 형용사 앞에 놓아서 부정을 나타내요",
+          "pattern": "안 + 동사/형용사",
+          "meaning": "negation (not)",
+          "description": "Place 안 directly before a verb or adjective to negate it. For 하다 verbs, 안 goes between the noun and 하다: '운동 안 해요' (not '안 운동해요').",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "일반 동사/형용사 → 안 + V/A",
+              "examples": [
+                "가요 → 안 가요 (don't go)",
+                "먹어요 → 안 먹어요 (don't eat)",
+                "더워요 → 안 더워요 (not hot)",
+                "좋아요 → 안 좋아요 (not good)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "하다 동사 → 명사 + 안 + 해요",
+              "examples": [
+                "운동해요 → 운동 안 해요 ✅",
+                "안 운동해요 ❌",
+                "공부해요 → 공부 안 해요 ✅",
+                "요리해요 → 요리 안 해요 ✅"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "서울은 날씨가 좋아요?",
+              "english": "Is the weather nice in Seoul?",
+              "highlight": ""
+            },
+            {
+              "korean": "아니요, 안 좋아요. 비가 와요.",
+              "english": "No, it's not nice. It's raining.",
+              "highlight": "안 좋아요"
+            },
+            {
+              "korean": "오늘 운동해요?",
+              "english": "Are you exercising today?",
+              "highlight": ""
+            },
+            {
+              "korean": "아니요. 오늘은 운동 안 해요.",
+              "english": "No. I'm not exercising today.",
+              "highlight": "운동 안 해요"
+            },
+            {
+              "korean": "밤에는 좀 쌀쌀해요?",
+              "english": "Is it a bit chilly at night?",
+              "highlight": ""
+            },
+            {
+              "korean": "네, 낮에는 안 추워요. 밤에는 좀 쌀쌀해요.",
+              "english": "Yes, it's not cold in the daytime. It's a bit chilly at night.",
+              "highlight": "안 추워요"
+            }
+          ],
+          "qna": [
+            {
+              "question": "오늘 학교에 가요?",
+              "answer": "아니요. 오늘은 안 가요."
+            },
+            {
+              "question": "김치가 매워요?",
+              "answer": "아니요. 안 매워요. 맛있어요."
+            },
+            {
+              "question": "요즘 바빠요?",
+              "answer": "아니요. 요즘은 안 바빠요."
+            }
+          ]
+        },
+        {
+          "id": "g08_bieup",
+          "title": "ㅂ 불규칙",
+          "subtitle": "받침 ㅂ이 모음 앞에서 '우'로 바뀌어요",
+          "pattern": "ㅂ 받침 + 어/아요 → ㅂ → 우 + 어요",
+          "meaning": "ㅂ irregular conjugation",
+          "description": "When a verb or adjective stem ends in ㅂ and is followed by a vowel ending (like 아요/어요), the ㅂ changes to 우. Then 우+어 contracts to 워. Exception: 돕다 (to help) → 도와요. Regular ㅂ verbs (잡다, 입다) do NOT change.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "ㅂ → 우 + 어요 → 워요 (불규칙)",
+              "examples": [
+                "춥다 → 추우+어요 → 추워요",
+                "덥다 → 더우+어요 → 더워요",
+                "어렵다 → 어려우+어요 → 어려워요",
+                "쉽다 → 쉬우+어요 → 쉬워요"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "예외 — 돕다 → 도와요",
+              "examples": [
+                "돕다 → 도오+아요 → 도와요",
+                "(ㅂ → 오, not 우 — memorize this!)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "규칙 활용 ㅂ — 변화 없음",
+              "examples": [
+                "잡다 → 잡아요 (catch — no change)",
+                "입다 → 입어요 (wear — no change)",
+                "씹다 → 씹어요 (chew — no change)"
+              ]
+            }
+          ],
+          "conjugation_table": [
+            {
+              "base": "춥다",
+              "stem": "추우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "추워요"
+            },
+            {
+              "base": "덥다",
+              "stem": "더우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "더워요"
+            },
+            {
+              "base": "무겁다",
+              "stem": "무거우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "무거워요"
+            },
+            {
+              "base": "가볍다",
+              "stem": "가벼우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "가벼워요"
+            },
+            {
+              "base": "어렵다",
+              "stem": "어려우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "어려워요"
+            },
+            {
+              "base": "쉽다",
+              "stem": "쉬우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "쉬워요"
+            },
+            {
+              "base": "맵다",
+              "stem": "매우",
+              "rule": "ㅂ → 우 + 어요",
+              "result": "매워요"
+            },
+            {
+              "base": "돕다",
+              "stem": "도오",
+              "rule": "ㅂ → 오 + 아요 ⚠️",
+              "result": "도와요"
+            }
+          ],
+          "examples": [
+            {
+              "korean": "날씨가 어때요?",
+              "english": "How's the weather?",
+              "highlight": "어때요"
+            },
+            {
+              "korean": "좀 추워요. 그런데 맑아요.",
+              "english": "It's a bit cold. But it's clear.",
+              "highlight": "추워요"
+            },
+            {
+              "korean": "가방이 무거워요?",
+              "english": "Is the bag heavy?",
+              "highlight": "무거워요"
+            },
+            {
+              "korean": "아니요. 가벼워요.",
+              "english": "No, it's light.",
+              "highlight": "가벼워요"
+            },
+            {
+              "korean": "한국어가 어려워요?",
+              "english": "Is Korean difficult?",
+              "highlight": "어려워요"
+            },
+            {
+              "korean": "처음에는 좀 어렵지만, 재미있어요!",
+              "english": "It's a bit difficult at first, but it's fun!",
+              "highlight": "어렵지만"
+            }
+          ],
+          "qna": [
+            {
+              "question": "겨울에 날씨가 어때요?",
+              "answer": "아주 추워요. 눈도 와요."
+            },
+            {
+              "question": "한국어 수업이 어려워요?",
+              "answer": "좀 어렵지만 재미있어요."
+            },
+            {
+              "question": "이 김치찌개 어때요?",
+              "answer": "맛있어요. 그런데 좀 매워요."
+            }
+          ]
+        }
+      ]
+    },
+    "dialogue": {
+      "scenes": [
+        {
+          "id": "dlg08_01",
+          "title": "날씨가 어때요?",
+          "subtitle": "Talking about today's weather",
+          "lines": [
+            {
+              "speaker": "안나",
+              "korean": "유진 씨, 요즘 날씨가 어때요?",
+              "english": "Yujin, how's the weather lately?"
+            },
+            {
+              "speaker": "유진",
+              "korean": "좀 추워요. 매일 비가 와요. 안나 씨 고향은요?",
+              "english": "It's a bit cold. It rains every day. How about your hometown, Anna?"
+            },
+            {
+              "speaker": "안나",
+              "korean": "제 고향은 지금 여름이에요. 아주 더워요.",
+              "english": "My hometown is in summer now. It's very hot."
+            },
+            {
+              "speaker": "유진",
+              "korean": "그래요? 저는 더운 날씨를 안 좋아해요.",
+              "english": "Really? I don't like hot weather."
+            },
+            {
+              "speaker": "안나",
+              "korean": "저도 더위는 좀 힘들어요. 그렇지만 바다에 갈 수 있어서 좋아요!",
+              "english": "I find the heat a bit tough too. But I like that I can go to the beach!"
+            }
+          ]
+        },
+        {
+          "id": "dlg08_02",
+          "title": "한국의 사계절",
+          "subtitle": "Asking about Korea's four seasons",
+          "lines": [
+            {
+              "speaker": "마리",
+              "korean": "재민 씨, 한국은 사계절이 있어요?",
+              "english": "Jaemin, does Korea have four seasons?"
+            },
+            {
+              "speaker": "재민",
+              "korean": "네, 있어요. 봄, 여름, 가을, 겨울이 있어요.",
+              "english": "Yes, it does. There's spring, summer, autumn, and winter."
+            },
+            {
+              "speaker": "마리",
+              "korean": "어떤 계절이 제일 좋아요?",
+              "english": "Which season do you like best?"
+            },
+            {
+              "speaker": "재민",
+              "korean": "가을이요! 날씨가 시원하고 단풍이 아름다워요.",
+              "english": "Autumn! The weather is cool and the autumn leaves are beautiful."
+            },
+            {
+              "speaker": "마리",
+              "korean": "겨울은요? 눈이 많이 와요?",
+              "english": "What about winter? Does it snow a lot?"
+            },
+            {
+              "speaker": "재민",
+              "korean": "서울은 좀 와요. 그런데 제주도는 안 와요. 거기는 따뜻해요.",
+              "english": "In Seoul, it snows a little. But in Jeju Island, it doesn't snow. It's warm there."
+            },
+            {
+              "speaker": "마리",
+              "korean": "와, 제주도에 가고 싶어요!",
+              "english": "Wow, I want to go to Jeju Island!"
+            }
+          ]
+        },
+        {
+          "id": "dlg08_03",
+          "title": "이번 주말 날씨",
+          "subtitle": "Planning around the weekend weather",
+          "lines": [
+            {
+              "speaker": "선생님",
+              "korean": "여러분, 이번 주말에 날씨가 어때요?",
+              "english": "Everyone, what's the weather like this weekend?"
+            },
+            {
+              "speaker": "재민",
+              "korean": "토요일은 맑아요. 일요일은 비가 와요.",
+              "english": "Saturday is clear. Sunday it will rain."
+            },
+            {
+              "speaker": "선생님",
+              "korean": "그럼 토요일에 뭐 해요?",
+              "english": "So what are you doing Saturday?"
+            },
+            {
+              "speaker": "재민",
+              "korean": "친구하고 한강에 가요. 자전거를 타요.",
+              "english": "I'm going to the Han River with a friend. We'll ride bikes."
+            },
+            {
+              "speaker": "선생님",
+              "korean": "좋겠네요! 일요일은요?",
+              "english": "That sounds nice! And Sunday?"
+            },
+            {
+              "speaker": "재민",
+              "korean": "비가 오니까 집에서 영화 봐요. 밖에 안 나가요.",
+              "english": "Since it's raining, I'll watch movies at home. I'm not going out."
+            }
+          ]
+        }
+      ]
+    },
+    "pronunciation": {
+      "sections": [
+        {
+          "id": "pron08_01",
+          "title": "안 연음 — 안 + 자음/모음",
+          "rule_en": "'안' is written with a space before the next word, but in natural speech it connects smoothly — especially before vowel-initial words.",
+          "rule_ko": "'안'은 띄어쓰기를 해도 실제 발음할 때 다음 단어와 자연스럽게 연결돼요. 안+모음으로 시작하는 단어는 특히 더 붙어서 읽혀요.",
+          "examples": [
+            {
+              "written": "안 더워요",
+              "pronounced": "안더워요",
+              "romanization": "an-deo-wo-yo"
+            },
+            {
+              "written": "안 와요",
+              "pronounced": "안와요",
+              "romanization": "an-wa-yo"
+            },
+            {
+              "written": "안 좋아요",
+              "pronounced": "안조아요",
+              "romanization": "an-jo-a-yo"
+            }
+          ]
+        }
+      ]
+    },
+    "key_points": [
+      {
+        "id": "kp08_01",
+        "title": "한국의 날씨 — Korea's Seasons",
+        "note": "Korea has distinct four seasons. Each has its own character and associated activities.",
+        "examples": [
+          {
+            "formal": "봄 (Spring)",
+            "casual": "3~5월",
+            "english": "Warm & flowers — cherry blossoms 🌸"
+          },
+          {
+            "formal": "여름 (Summer)",
+            "casual": "6~8월",
+            "english": "Hot & humid — beaches, festivals ☀️"
+          },
+          {
+            "formal": "가을 (Autumn)",
+            "casual": "9~11월",
+            "english": "Cool & dry — autumn leaves 단풍 🍂"
+          },
+          {
+            "formal": "겨울 (Winter)",
+            "casual": "12~2월",
+            "english": "Cold & dry — skiing, hot food ⛄"
+          }
+        ]
+      }
+    ],
+    "practice": {
+      "quiz_items": [
+        {
+          "id": "q08_01",
+          "type": "multiple_choice",
+          "question": "Choose the correct negation.",
+          "sentence": "저는 오늘 학교에 ___ 가요.",
+          "choices": [
+            "없",
+            "안",
+            "못",
+            "아니"
+          ],
+          "answer": "안",
+          "explanation": "'안' comes directly before the verb to negate it: 안 가요 (don't go)."
+        },
+        {
+          "id": "q08_02",
+          "type": "multiple_choice",
+          "question": "Which sentence is grammatically correct? (하다 verb negation)",
+          "choices": [
+            "안 공부해요",
+            "공부 안 해요",
+            "공부 안 해요 / 안 공부해요 둘 다",
+            "공부해요 안"
+          ],
+          "answer": "공부 안 해요",
+          "explanation": "For 하다 verbs, 안 goes between the noun and 해요: 공부 안 해요 ✅. '안 공부해요' is incorrect."
+        },
+        {
+          "id": "q08_03",
+          "type": "conjugation",
+          "question": "Conjugate using 아요/어요 form. (ㅂ irregular)",
+          "base": "춥다",
+          "answer": "추워요",
+          "hint": "춥다: ㅂ → 우 + 어요 → 추워요"
+        },
+        {
+          "id": "q08_04",
+          "type": "conjugation",
+          "question": "Conjugate using 아요/어요 form. (ㅂ irregular)",
+          "base": "어렵다",
+          "answer": "어려워요",
+          "hint": "어렵다: ㅂ → 우 + 어요 → 어려워요"
+        },
+        {
+          "id": "q08_05",
+          "type": "multiple_choice",
+          "question": "Which is the correct conjugation of 돕다?",
+          "choices": [
+            "도워요",
+            "도봐요",
+            "도와요",
+            "돕어요"
+          ],
+          "answer": "도와요",
+          "explanation": "돕다 is a special exception: ㅂ → 오 (not 우). 도오+아요 → 도와요."
+        },
+        {
+          "id": "q08_06",
+          "type": "multiple_choice",
+          "question": "Which verb does NOT have ㅂ irregular conjugation?",
+          "choices": [
+            "춥다",
+            "어렵다",
+            "잡다",
+            "무겁다"
+          ],
+          "answer": "잡다",
+          "explanation": "잡다 is a regular ㅂ verb: 잡아요 (no change). 춥다, 어렵다, 무겁다 are all ㅂ irregular."
+        },
+        {
+          "id": "q08_07",
+          "type": "multiple_choice",
+          "question": "Complete: 오늘 날씨가 어때요? — ___",
+          "choices": [
+            "맑고 따뜻해요",
+            "맑고 따뜻어요",
+            "맑이고 따뜻해요",
+            "맑는 따뜻해요"
+          ],
+          "answer": "맑고 따뜻해요",
+          "explanation": "맑다 + 고 = 맑고 (and). To connect two adjectives, use -고: 맑고 따뜻해요 (clear and warm)."
+        },
+        {
+          "id": "q08_08",
+          "type": "multiple_choice",
+          "question": "가방이 무거워요? — 아니요, ___",
+          "choices": [
+            "무거워요",
+            "가벼워요",
+            "가볍아요",
+            "가볍어요"
+          ],
+          "answer": "가벼워요",
+          "explanation": "가볍다 (light) is ㅂ irregular: 가볍 → 가벼우 + 어요 → 가벼워요."
+        }
+      ]
+    },
+    "self_check": [
+      {
+        "id": "sc08_01",
+        "ko": "날씨와 계절을 묻고 답할 수 있어요?",
+        "en": "Can you ask and answer questions about weather and seasons?"
+      },
+      {
+        "id": "sc08_02",
+        "ko": "고향의 날씨가 어떤지 말할 수 있어요?",
+        "en": "Can you talk about the weather in your hometown?"
+      },
+      {
+        "id": "sc08_03",
+        "ko": "ㅂ 불규칙 동사/형용사를 활용할 수 있어요?",
+        "en": "Can you conjugate ㅂ-irregular verbs and adjectives?"
+      }
+    ],
+    "real_life": {
+      "intro": "Weather comes up in every conversation — forecasts, hometowns, travel plans. Listen, read, and chat your way through these real-world situations!",
+      "scenes": [
+        {
+          "id": "rl08_01",
+          "type": "listening",
+          "title": "📻 오늘의 날씨 예보",
+          "context": "라디오에서 오늘 날씨를 알려줘요. 잘 듣고 질문에 답하세요.",
+          "audio_text": "안녕하세요? 오늘 날씨를 알려 드려요. 오늘 아침에는 하늘이 맑아요. 바람도 안 불어요. 낮에는 따뜻해요. 그런데 오후에는 구름이 많이 와요. 밤에는 비가 와요. 우산을 꼭 준비하세요. 내일은 날씨가 맑고 시원해요. 좋은 하루 보내세요!",
+          "questions": [
+            {
+              "id": "rl08_q1",
+              "question": "오늘 아침 날씨는 어때요?",
+              "type": "multiple_choice",
+              "choices": [
+                "비가 와요",
+                "흐려요",
+                "맑아요",
+                "눈이 와요"
+              ],
+              "answer": "맑아요",
+              "explanation": "'오늘 아침에는 하늘이 맑아요'라고 했어요."
+            },
+            {
+              "id": "rl08_q2",
+              "question": "밤에는 날씨가 어때요?",
+              "type": "multiple_choice",
+              "choices": [
+                "맑아요",
+                "바람이 불어요",
+                "비가 와요",
+                "눈이 와요"
+              ],
+              "answer": "비가 와요",
+              "explanation": "'밤에는 비가 와요'라고 했어요."
+            },
+            {
+              "id": "rl08_q3",
+              "question": "무엇을 꼭 준비해야 해요?",
+              "type": "multiple_choice",
+              "choices": [
+                "모자",
+                "우산",
+                "장갑",
+                "선글라스"
+              ],
+              "answer": "우산",
+              "explanation": "'우산을 꼭 준비하세요'라고 했어요. 밤에 비가 오니까요."
+            }
+          ],
+          "tip": "Korean weather forecasts use the same vocabulary you just learned! '꼭' means 'definitely/for sure' — '우산을 꼭 챙기세요!' is something you'll hear Korean forecasters say whenever rain is coming."
+        },
+        {
+          "id": "rl08_02",
+          "type": "reading",
+          "title": "🌏 서울과 부산, 날씨가 달라요",
+          "context": "민호 씨가 친구 지은 씨에게 이메일을 보냈어요. 읽고 질문에 답하세요.",
+          "passage": "지은 씨, 잘 지내요? 저는 요즘 부산에 있어요. 부산 날씨가 정말 좋아요. 맑고 시원해요. 바람도 조금 불어요. 그런데 비는 안 와요. 지은 씨, 서울은 날씨가 어때요? 요즘 서울 날씨가 많이 더워요? 저는 더운 날씨를 별로 안 좋아해요. 빨리 부산에 오세요! 여기서 같이 바다에 가요.",
+          "questions": [
+            {
+              "id": "rl08_q4",
+              "question": "민호 씨는 지금 어디에 있어요?",
+              "type": "multiple_choice",
+              "choices": [
+                "서울",
+                "제주도",
+                "부산",
+                "인천"
+              ],
+              "answer": "부산",
+              "explanation": "'저는 요즘 부산에 있어요.' — Minho is currently in Busan."
+            },
+            {
+              "id": "rl08_q5",
+              "question": "부산 날씨는 어때요?",
+              "type": "multiple_choice",
+              "choices": [
+                "덥고 비가 와요",
+                "맑고 시원해요",
+                "흐리고 추워요",
+                "눈이 와요"
+              ],
+              "answer": "맑고 시원해요",
+              "explanation": "'부산 날씨가 정말 좋아요. 맑고 시원해요.' — Busan weather is clear and cool."
+            },
+            {
+              "id": "rl08_q6",
+              "question": "민호 씨가 안 좋아하는 날씨는 뭐예요?",
+              "type": "multiple_choice",
+              "choices": [
+                "추운 날씨",
+                "흐린 날씨",
+                "더운 날씨",
+                "바람 부는 날씨"
+              ],
+              "answer": "더운 날씨",
+              "explanation": "'저는 더운 날씨를 별로 안 좋아해요.' — Minho doesn't like hot weather."
+            }
+          ],
+          "tip": "'별로 안 ~' means 'not really / not particularly': 별로 안 좋아해요 = I don't really like it. It's a very natural and soft way to express a negative preference without sounding too blunt."
+        },
+        {
+          "id": "rl08_03",
+          "type": "kakao",
+          "title": "💬 고향 날씨 어때요?",
+          "context": "수업 후에 안나와 마리가 고향 날씨에 대해 카카오톡으로 이야기해요.",
+          "lines": [
+            {
+              "speaker": "안나",
+              "korean": "마리 씨~ 지금 고향은 날씨가 어때요? 🌍",
+              "english": "Marie~ what's the weather like in your hometown now? 🌍"
+            },
+            {
+              "speaker": "마리",
+              "korean": "아주 더워요!! 35도예요 ㅠㅠ 마리 씨는요?",
+              "english": "It's super hot!! 35 degrees ㅠㅠ How about you, Marie?"
+            },
+            {
+              "speaker": "안나",
+              "korean": "저도 더워요. 비도 자주 와요. 여름이에요 ☔",
+              "english": "Mine is hot too. It rains a lot too. It's summer ☔"
+            },
+            {
+              "speaker": "마리",
+              "korean": "한국은 지금 날씨가 어때요?",
+              "english": "What's the weather like in Korea right now?"
+            },
+            {
+              "speaker": "안나",
+              "korean": "요즘 가을이에요! 시원하고 날씨가 정말 좋아요 🍂",
+              "english": "It's autumn now! It's cool and the weather is really nice 🍂"
+            },
+            {
+              "speaker": "마리",
+              "korean": "와, 부러워요! 저는 더운 날씨 안 좋아해요 😭",
+              "english": "Wow, I'm jealous! I don't like hot weather 😭"
+            },
+            {
+              "speaker": "안나",
+              "korean": "ㅋㅋ 빨리 한국 오세요! 같이 단풍 구경해요 🍁",
+              "english": "Haha come to Korea soon! Let's go see the autumn leaves together 🍁"
+            }
+          ],
+          "tip": "'ㅠㅠ' is Korean texting for crying/sad face (the ㅠ looks like tears falling). '부러워요' (I'm jealous) comes from 부럽다 — another ㅂ irregular! 부럽다 → 부러워요."
+        }
+      ]
+    }
+  }
+}
