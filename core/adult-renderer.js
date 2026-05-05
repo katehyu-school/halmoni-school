@@ -550,12 +550,144 @@ ${questions}`;
     }).join('');
   }
 
+  // ── Real Life 에피소드 타입별 빌더 ───────────────────────────────
+
+  // 공통 팁 박스
+  function _tipBox(tip) {
+    if (!tip) return '';
+    return `<div style="background:#FFFBEA;border:1px solid #F6D860;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:0.85rem;color:#7A5C00;">💡 ${tip}</div>`;
+  }
+
+  // 듣기 에피소드 — TTS 재생 + 객관식 질문
+  function buildListeningScene(scene) {
+    const sceneId = scene.id;
+    const qs = (scene.questions || []).map((q, qi) => {
+      const correctAnswer = q.answer;
+      const expText = (q.explanation || '').replace(/'/g, "\'");
+      const opts = (q.choices || []).map((c, ci) => {
+        const letter = String.fromCharCode(65 + ci);
+        const isC = c === correctAnswer;
+        return `<div class="rl-quiz-opt" data-scene="${sceneId}" data-q="${q.id}" data-answer="${c}" data-is-correct="${isC}"
+          onclick="AdultRenderer._rlSelectOpt(this)"
+          style="border:1.5px solid #ddd;border-radius:8px;padding:8px 12px;margin:4px 0;cursor:pointer;display:flex;align-items:center;gap:8px;">
+          <span style="font-weight:700;color:#aaa;">${letter}</span>${c}
+        </div>`;
+      }).join('');
+      return `
+<div class="rl-question" id="rlq-${q.id}" style="margin:16px 0;">
+  <div style="font-size:0.92rem;font-weight:600;margin-bottom:8px;">${qi + 1}. ${q.question}</div>
+  <div class="rl-opts">${opts}</div>
+  <div id="rl-exp-${q.id}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:8px;font-size:0.85rem;"></div>
+</div>`;
+    }).join('');
+
+    return `
+<div class="panel-card">
+  <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>${scene.title}</div>
+  <p style="font-size:0.83rem;color:#888;margin-bottom:12px;">📍 ${scene.context || ''}</p>
+  <div style="background:#F0F8FF;border-radius:12px;padding:16px;margin-bottom:16px;">
+    <div style="font-size:0.82rem;color:#888;margin-bottom:10px;font-weight:600;">🔊 음성 메시지</div>
+    <button onclick="AdultRenderer._playAudio('${sceneId}')"
+      style="display:flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:0.9rem;cursor:pointer;margin-bottom:10px;">
+      ▶ 듣기 Play
+    </button>
+    <div id="script-${sceneId}" style="display:none;font-family:var(--font-serif);font-size:0.95rem;line-height:1.7;color:#333;border-top:1px solid #ddd;padding-top:10px;margin-top:4px;">
+      ${scene.audio_text || ''}
+    </div>
+    <button onclick="AdultRenderer._toggleScript('${sceneId}')"
+      style="font-size:0.78rem;color:#888;background:none;border:none;cursor:pointer;margin-top:6px;padding:0;">
+      📄 스크립트 보기/숨기기
+    </button>
+  </div>
+  <div style="font-weight:700;font-size:0.9rem;color:var(--blue);margin-bottom:4px;">✏️ 질문에 답하세요</div>
+  ${qs}
+  ${_tipBox(scene.tip)}
+</div>`;
+  }
+
+  // 읽기 에피소드 — 지문 + 객관식 질문
+  function buildReadingScene(scene) {
+    const sceneId = scene.id;
+    const qs = (scene.questions || []).map((q, qi) => {
+      const correctAnswer = q.answer;
+      const expText = (q.explanation || '').replace(/'/g, "\'");
+      const opts = (q.choices || []).map((c, ci) => {
+        const letter = String.fromCharCode(65 + ci);
+        const isC = c === correctAnswer;
+        return `<div class="rl-quiz-opt" data-scene="${sceneId}" data-q="${q.id}" data-answer="${c}" data-is-correct="${isC}"
+          onclick="AdultRenderer._rlSelectOpt(this)"
+          style="border:1.5px solid #ddd;border-radius:8px;padding:8px 12px;margin:4px 0;cursor:pointer;display:flex;align-items:center;gap:8px;">
+          <span style="font-weight:700;color:#aaa;">${letter}</span>${c}
+        </div>`;
+      }).join('');
+      return `
+<div class="rl-question" id="rlq-${q.id}" style="margin:16px 0;">
+  <div style="font-size:0.92rem;font-weight:600;margin-bottom:8px;">${qi + 1}. ${q.question}</div>
+  <div class="rl-opts">${opts}</div>
+  <div id="rl-exp-${q.id}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:8px;font-size:0.85rem;"></div>
+</div>`;
+    }).join('');
+
+    return `
+<div class="panel-card">
+  <div class="panel-title"><span class="dot" style="background:var(--blue)"></span>${scene.title}</div>
+  <p style="font-size:0.83rem;color:#888;margin-bottom:12px;">📍 ${scene.context || ''}</p>
+  <div style="background:#F8FAFC;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:16px;font-family:var(--font-serif);font-size:0.97rem;line-height:1.8;color:#333;">
+    ${scene.passage || ''}
+    <button onclick="speak('${(scene.passage||'').replace(/'/g,"\'")}');"
+      style="display:block;margin-top:10px;font-size:0.78rem;color:#888;background:none;border:1px solid #ddd;border-radius:6px;padding:3px 10px;cursor:pointer;">
+      🔊 읽어 주기
+    </button>
+  </div>
+  <div style="font-weight:700;font-size:0.9rem;color:var(--blue);margin-bottom:4px;">✏️ 질문에 답하세요</div>
+  ${qs}
+  ${_tipBox(scene.tip)}
+</div>`;
+  }
+
+  // 카카오톡 스타일 대화
+  function buildKakaoScene(scene) {
+    const lines = (scene.lines || []).map((line, i) => {
+      const isA = i % 2 === 0;
+      const bg = isA ? '#F9E000' : '#fff';
+      const border = isA ? 'none' : '1px solid #e0e0e0';
+      const align = isA ? 'flex-end' : 'flex-start';
+      const nameAlign = isA ? 'text-align:right;' : '';
+      return `
+<div style="display:flex;flex-direction:column;align-items:${align};margin:6px 0;">
+  <div style="font-size:0.68rem;color:#aaa;margin-bottom:2px;${nameAlign}">${line.speaker}</div>
+  <div style="display:flex;align-items:flex-end;gap:6px;${isA ? 'flex-direction:row-reverse;' : ''}">
+    <div style="max-width:72%;background:${bg};border:${border};border-radius:${isA ? '16px 4px 16px 16px' : '4px 16px 16px 16px'};padding:10px 14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+      <div style="font-size:0.97rem;font-family:var(--font-serif);color:#1a1a1a;">${line.korean}</div>
+      <div style="font-size:0.76rem;color:#888;margin-top:3px;">${line.english}</div>
+    </div>
+    <button class="adult-speak-btn" data-speak="${line.korean}" style="font-size:0.7rem;padding:2px 6px;flex-shrink:0;">🔊</button>
+  </div>
+</div>`;
+    }).join('');
+
+    return `
+<div class="panel-card">
+  <div class="panel-title"><span class="dot" style="background:#F9E000;outline:1px solid #ccc;"></span>${scene.title}</div>
+  <p style="font-size:0.83rem;color:#888;margin-bottom:12px;">📍 ${scene.context || ''}</p>
+  <div style="background:#B2C7D9;border-radius:14px;padding:14px 12px;min-height:100px;">
+    ${lines}
+  </div>
+  ${_tipBox(scene.tip)}
+</div>`;
+  }
+
+  // 메인 buildRealLife — 타입별 분기
   function buildRealLife(realLife) {
     if (!realLife) return '';
     const intro = realLife.intro
       ? `<div style="background:#EFF8FF;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;font-size:0.88rem;color:#1a5fa8;margin-bottom:16px;">${realLife.intro}</div>`
       : '';
     const scenes = (realLife.scenes || []).map(scene => {
+      if (scene.type === 'listening') return buildListeningScene(scene);
+      if (scene.type === 'reading')   return buildReadingScene(scene);
+      if (scene.type === 'kakao')     return buildKakaoScene(scene);
+      // 기본 대화형
       const lines = (scene.lines || []).map((line, i) => {
         const isA = i % 2 === 0;
         return `
@@ -570,18 +702,63 @@ ${questions}`;
   </div>
 </div>`;
       }).join('');
-      const tip = scene.tip
-        ? `<div style="background:#FFFBEA;border:1px solid #F6D860;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:0.85rem;color:#7A5C00;">💡 ${scene.tip}</div>`
-        : '';
       return `
 <div class="panel-card">
   <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>${scene.title}</div>
   ${scene.context ? `<p style="font-size:0.83rem;color:#888;margin-bottom:8px;">📍 ${scene.context}</p>` : ''}
   ${lines}
-  ${tip}
+  ${_tipBox(scene.tip)}
 </div>`;
     }).join('');
     return intro + scenes;
+  }
+
+  // ── Real Life 인터랙션 함수 ───────────────────────────────────────
+  const _rlAnswers = {};  // sceneId → { qId: answer }
+
+  function _playAudio(sceneId) {
+    const scriptEl = document.getElementById(`script-${sceneId}`);
+    if (scriptEl) speak(scriptEl.textContent.trim());
+  }
+
+  function _toggleScript(sceneId) {
+    const el = document.getElementById(`script-${sceneId}`);
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function _rlSelectOpt(btn) {
+    const qId = btn.dataset.q;
+    const expEl = document.getElementById(`rl-exp-${qId}`);
+    // 이미 답한 경우 무시
+    if (expEl && expEl.style.display === 'block') return;
+
+    // 같은 질문의 모든 옵션 비활성화
+    btn.closest('.rl-opts').querySelectorAll('.rl-quiz-opt').forEach(o => {
+      o.style.pointerEvents = 'none';
+    });
+
+    // 정답 찾기 — JSON 데이터에서 직접 읽지 않고 data-answer와 정답 표시로 처리
+    // 정답은 별도로 표시 (렌더링 시 data-correct 속성 추가 방식은 보안상 안 좋으니 서버리스 답안 처리)
+    // 대신: 답 버튼에 data-is-correct 속성을 렌더링 시점에 넣기 방식 사용
+    const isCorrect = btn.dataset.isCorrect === 'true';
+    btn.style.background = isCorrect ? 'var(--teal-lt)' : '#FDEAE6';
+    btn.style.borderColor = isCorrect ? 'var(--teal)' : 'var(--coral)';
+
+    // 정답 버튼 표시
+    if (!isCorrect) {
+      btn.closest('.rl-opts').querySelectorAll('[data-is-correct="true"]').forEach(o => {
+        o.style.background = 'var(--teal-lt)';
+        o.style.borderColor = 'var(--teal)';
+      });
+    }
+
+    if (expEl) {
+      expEl.style.display = 'block';
+      expEl.style.background = isCorrect ? '#E0F5F2' : '#FDEAE6';
+      expEl.style.color = isCorrect ? 'var(--teal)' : 'var(--coral)';
+      // explanation은 data-exp 속성에서 읽기
+      expEl.innerHTML = (isCorrect ? '🎉 Correct! — ' : '❌ Incorrect. — ') + (btn.closest('.rl-question').dataset.exp || '');
+    }
   }
 
   function buildSelfCheck(selfCheck) {
@@ -695,6 +872,9 @@ ${questions}`;
     _checkConjugation,
     _nextQuestion,
     _restartQuiz,
+    _playAudio,
+    _toggleScript,
+    _rlSelectOpt,
   };
 
 })();
