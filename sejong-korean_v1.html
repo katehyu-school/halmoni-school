@@ -2307,7 +2307,7 @@ body {
         </button>
       </li>
       <li class="unit-item">
-        <button class="unit-btn" onclick="selectUnit(this,8)">
+        <button class="unit-btn" onclick="selectUnit(this,8);loadUnit(8)">
           <span class="unit-num">08</span>
           <span>날씨가 더워요?<span class="unit-subtitle">Is the weather hot?</span></span>
         </button>
@@ -3591,6 +3591,15 @@ const unitMeta = {
     goals:[
       {color:'amber',label:'날짜 & 시간 어휘'},{color:'blue',label:'N에 (시간 조사)'},
       {color:'blue',label:'O시 O분'},{color:'teal',label:'유월/시월 발음'},{color:'coral',label:'실생활 적용'}
+    ],
+    cats:['All'],
+  },
+  8: {
+    badge:'08', title:'날씨가 어때요?',
+    topic:"How's the weather? · Weather & Seasons",
+    goals:[
+      {color:'amber',label:'날씨 & 계절 어휘'},{color:'blue',label:'안 부정문'},
+      {color:'blue',label:'ㅂ 불규칙'},{color:'teal',label:'날씨 대화'},{color:'coral',label:'실생활 적용'}
     ],
     cats:['All'],
   },
