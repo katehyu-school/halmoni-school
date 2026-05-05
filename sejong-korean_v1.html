@@ -1711,6 +1711,47 @@ body {
 .step-num { background:var(--coral); color:#fff; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
 .step-text { font-size:14px; line-height:1.65; padding-top:3px; }
 .real-tip { background:#fff8f0; border:1px solid #fde8c8; border-radius:10px; padding:12px 14px; font-size:13px; line-height:1.7; margin-top:14px; }
+
+/* ── VOCAB INDEX TAB ── */
+.section-tab[data-section="index"].active { background: #3d6b8e; }
+.vi-search {
+  width: 100%; box-sizing: border-box;
+  padding: 10px 16px; border: 2px solid var(--teal);
+  border-radius: 12px; font-size: 1rem; margin-bottom: 10px;
+  outline: none; font-family: inherit;
+}
+.vi-search:focus { border-color: #2a7f8f; box-shadow: 0 0 0 3px rgba(58,163,175,.15); }
+.vi-jump-bar { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:16px; }
+.vi-jump-btn {
+  padding: 4px 10px; border: 1.5px solid #ddd; border-radius: 8px;
+  background: #f7f7f7; cursor: pointer; font-size: 0.82rem; font-weight: 600;
+  transition: all .15s;
+}
+.vi-jump-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+.vi-section-hdr {
+  font-size: 1.3rem; font-weight: 800; color: var(--teal);
+  padding: 18px 0 6px; border-bottom: 2.5px solid var(--teal);
+  margin-bottom: 6px;
+}
+.vi-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid #f0f0f0;
+}
+.vi-emoji { font-size: 1.25rem; width: 30px; text-align: center; flex-shrink:0; }
+.vi-korean { font-size: 1.05rem; font-weight: 700; min-width: 110px; }
+.vi-rom { color: #999; font-size: 0.8rem; min-width: 110px; }
+.vi-en { flex: 1; color: #555; font-size: 0.9rem; }
+.vi-ubadge {
+  background: #3d6b8e; color: #fff; border: none; border-radius: 8px;
+  padding: 3px 10px; font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  flex-shrink: 0;
+}
+.vi-ubadge:hover { opacity: 0.8; }
+.vi-warn {
+  font-size: 0.68rem; background: #c74d36; color: #fff;
+  border-radius: 4px; padding: 1px 5px; margin-left: 5px;
+}
+.vi-empty { padding: 40px; text-align: center; color: #bbb; font-size: 0.95rem; }
 </style>
 </head>
 <body>
@@ -2356,6 +2397,7 @@ body {
       <button class="section-tab" data-section="usage" onclick="switchTab(this,'usage')">💬 Usage<span class="tab-en">활용 예시</span></button>
       <button class="section-tab" data-section="quiz" onclick="switchTab(this,'quiz')">🎯 Quiz<span class="tab-en">연습 퀴즈</span></button>
       <button class="section-tab" data-section="real" onclick="switchTab(this,'real')">🌏 Real Life<span class="tab-en">실생활 적용</span></button>
+      <button class="section-tab" data-section="index" onclick="switchTab(this,'index');renderVocabIndex()">📖 Index<span class="tab-en">단어 인덱스</span></button>
     </div>
 
     <!-- ══ 입문 0과: 한글을 배워요 PANEL ══ -->
@@ -2745,6 +2787,8 @@ body {
     </div>
 
     <!-- ══ 5. REAL LIFE PANEL ══ -->
+    <div class="section-panel" id="panel-index"></div>
+
     <div class="section-panel" id="panel-real">
       <div class="panel-card">
         <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>Real Life — situation practice</div>
@@ -2955,6 +2999,105 @@ function switchTab(btn, section) {
   btn.classList.add('active');
   document.getElementById('panel-'+section).classList.add('active');
 }
+
+// ── VOCAB INDEX ──
+const ONSETS = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+function getOnset(str) {
+  const c = (str || '').charCodeAt(0);
+  if (c >= 44032 && c <= 55203) return ONSETS[Math.floor((c - 44032) / 588)];
+  return (str || '?')[0].toUpperCase();
+}
+
+let _viWords = null; // 캐시
+
+async function renderVocabIndex() {
+  const panel = document.getElementById('panel-index');
+  if (_viWords) { _viRender(_viWords); return; }
+
+  panel.innerHTML = '<div class="vi-empty">⏳ 단어 모으는 중...</div>';
+
+  const unitNums = [4,5,6,7,8];
+  const allWords = [];
+
+  for (const n of unitNums) {
+    try {
+      const unit = await HalmoniCore.adult.loadUnit(n);
+      for (const cat of unit.sections.vocab.categories) {
+        for (const item of cat.items) {
+          allWords.push({
+            display : item.korean,
+            sort    : item.base || item.korean,
+            english : item.english,
+            rom     : item.romanization || '',
+            emoji   : item.emoji || '',
+            warning : item.warning || '',
+            unit    : n,
+          });
+        }
+      }
+    } catch(e) { console.warn('[VocabIndex] unit' + n + ' 실패', e); }
+  }
+
+  allWords.sort((a, b) => a.sort.localeCompare(b.sort, 'ko'));
+  _viWords = allWords;
+
+  // 패널 구조 삽입
+  const onsets = [...new Set(allWords.map(w => getOnset(w.sort)))];
+  const jumpBar = onsets.map(o =>
+    `<button class="vi-jump-btn" onclick="document.getElementById('vi-${o}')?.scrollIntoView({behavior:'smooth'})">${o}</button>`
+  ).join('');
+
+  panel.innerHTML = `
+    <div style="padding:16px 24px 0;">
+      <input type="text" id="vi-search" class="vi-search"
+        placeholder="🔍 한국어 또는 영어로 검색..."
+        oninput="_viFilter(this.value)">
+      <div class="vi-jump-bar">${jumpBar}</div>
+    </div>
+    <div id="vi-list" style="padding:0 24px 40px;"></div>
+  `;
+
+  _viRender(allWords);
+}
+
+function _viRender(words) {
+  const el = document.getElementById('vi-list');
+  if (!el) return;
+  let html = '', cur = null;
+  for (const w of words) {
+    const onset = getOnset(w.sort);
+    if (onset !== cur) {
+      cur = onset;
+      html += `<div class="vi-section-hdr" id="vi-${onset}">${onset}</div>`;
+    }
+    html += `<div class="vi-row">
+      <span class="vi-emoji">${w.emoji}</span>
+      <span class="vi-korean">${w.display}${w.warning ? `<span class="vi-warn">⚠️ ${w.warning}</span>` : ''}</span>
+      <span class="vi-rom">[${w.rom}]</span>
+      <span class="vi-en">${w.english}</span>
+      <button class="vi-ubadge" onclick="goToUnitVocab(${w.unit})">0${w.unit}</button>
+    </div>`;
+  }
+  if (!html) html = '<div class="vi-empty">검색 결과가 없어요 🤔</div>';
+  el.innerHTML = html;
+}
+
+function _viFilter(q) {
+  if (!_viWords) return;
+  const t = q.trim().toLowerCase();
+  const filtered = t
+    ? _viWords.filter(w =>
+        w.display.includes(t) || w.sort.includes(t) ||
+        w.english.toLowerCase().includes(t))
+    : _viWords;
+  _viRender(filtered);
+}
+
+function goToUnitVocab(num) {
+  const btn = document.querySelector('.unit-btn[onclick*="selectUnit(this,' + num + ')"]');
+  if (btn) { selectUnit(btn, num); loadUnit(num); }
+}
+
 
 // ── VOCAB CARDS ──
 const vocabCats = ['All','Greetings','Basics','Titles','Family','People','Things','Countries','Jobs','Phrases'];
