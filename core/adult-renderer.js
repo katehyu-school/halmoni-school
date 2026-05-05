@@ -7,7 +7,8 @@
  *   grammar    → #panel-grammar    (문법 규칙 + 활용표 + 예문)
  *   usage      → #panel-usage      (대화 예시 + 핵심 포인트)
  *   quiz       → #panel-quiz       (객관식 + 활용형 퀴즈)
- *   real       → #panel-real       (발음 + 자기점검)
+ *   real       → #panel-real       (실생활 대화 + 자기점검)
+ *   usage      → #panel-usage      (대화 + 핵심 포인트 + 발음 팁)
  *
  * 의존: core.js, adult-data-loader.js 가 먼저 로드되어야 함
  */
@@ -163,6 +164,29 @@ const AdultRenderer = (() => {
 </div>`;
   }
 
+
+  function buildNumberForms(forms) {
+    if (!forms?.length) return '';
+    const rows = forms.map(f => {
+      const exs = (f.examples || []).map(e =>
+        `<span style="background:#E0F5F2;border-radius:6px;padding:3px 8px;font-size:0.9rem;font-weight:700;color:var(--teal);">${e}</span>`
+      ).join(' ');
+      return `
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;">
+  <div style="min-width:50px;font-size:1rem;font-family:var(--font-serif);color:#555;">${f.base}</div>
+  <div style="color:#bbb;font-size:1.2rem;">+</div>
+  <div style="font-size:0.82rem;color:#888;white-space:nowrap;">단위명사</div>
+  <div style="color:var(--teal);font-size:1.2rem;font-weight:700;">→</div>
+  <div style="min-width:40px;font-size:1.1rem;font-family:var(--font-serif);font-weight:700;color:#222;">${f.short} ○</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;">${exs}</div>
+</div>`;
+    }).join('');
+    return `
+<div style="background:#F8FAFC;border-radius:10px;padding:4px 16px;margin:14px 0;">
+  ${rows}
+</div>`;
+  }
+
   function buildExamples(examples) {
     if (!examples?.length) return '';
     const rows = examples.map(ex => `
@@ -209,7 +233,7 @@ const AdultRenderer = (() => {
   <div class="grammar-pattern">${section.pattern || ''}</div>
   ${section.description ? `<p style="font-size:0.88rem;color:#555;margin:8px 0 4px;">${section.description}</p>` : ''}
   ${buildRuleBoxes(section.rule_boxes)}
-  ${buildConjugationTable(section.conjugation_table)}
+  ${section.number_forms ? buildNumberForms(section.number_forms) : buildConjugationTable(section.conjugation_table)}
 </div>
 ${buildExamples(section.examples)}
 ${buildQnA(section.qna)}`;
@@ -284,14 +308,15 @@ ${buildQnA(section.qna)}`;
     const el = document.getElementById('panel-usage');
     if (!el) return;
     try {
-      const [scenes, keyPoints] = await Promise.all([
+      const [scenes, keyPoints, pronSections] = await Promise.all([
         HalmoniCore.adult.getDialogue(unitNumber),
         HalmoniCore.adult.getKeyPoints(unitNumber),
+        HalmoniCore.adult.getPronunciation(unitNumber),
       ]);
       if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
-      el.innerHTML = scenes.map(buildDialogueScene).join('') + buildKeyPoints(keyPoints);
+      el.innerHTML = scenes.map(buildDialogueScene).join('') + buildKeyPoints(keyPoints) + buildPronunciation(pronSections);
       _attachSpeakBtns(el);
-      console.log(`[AdultRenderer] usage: 대화 ${scenes.length}개 완료`);
+      console.log(`[AdultRenderer] usage: 대화 ${scenes.length}개, 발음 ${pronSections.length}개 완료`);
     } catch (err) {
       console.warn('[AdultRenderer] usage 렌더링 실패:', err);
     }
@@ -525,6 +550,40 @@ ${questions}`;
     }).join('');
   }
 
+  function buildRealLife(realLife) {
+    if (!realLife) return '';
+    const intro = realLife.intro
+      ? `<div style="background:#EFF8FF;border-left:4px solid var(--blue);padding:12px 16px;border-radius:0 8px 8px 0;font-size:0.88rem;color:#1a5fa8;margin-bottom:16px;">${realLife.intro}</div>`
+      : '';
+    const scenes = (realLife.scenes || []).map(scene => {
+      const lines = (scene.lines || []).map((line, i) => {
+        const isA = i % 2 === 0;
+        return `
+<div style="display:flex;gap:10px;margin:8px 0;${isA ? '' : 'flex-direction:row-reverse;'}">
+  <div style="width:28px;height:28px;border-radius:50%;background:${isA ? 'var(--teal)' : 'var(--blue)'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">${line.speaker?.charAt(0) || (isA ? 'A' : 'B')}</div>
+  <div style="max-width:80%;">
+    <div style="font-size:0.72rem;color:#aaa;margin-bottom:2px;${isA ? '' : 'text-align:right;'}">${line.speaker || ''}</div>
+    <div style="background:${isA ? 'var(--teal-lt)' : 'var(--blue-lt)'};border-radius:12px;padding:10px 14px;">
+      <div style="font-size:1rem;font-family:var(--font-serif);color:#1a1a1a;">${line.korean} ${speakBtn(line.korean, true)}</div>
+      <div style="font-size:0.8rem;color:#888;margin-top:3px;">${line.english}</div>
+    </div>
+  </div>
+</div>`;
+      }).join('');
+      const tip = scene.tip
+        ? `<div style="background:#FFFBEA;border:1px solid #F6D860;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:0.85rem;color:#7A5C00;">💡 ${scene.tip}</div>`
+        : '';
+      return `
+<div class="panel-card">
+  <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>${scene.title}</div>
+  ${scene.context ? `<p style="font-size:0.83rem;color:#888;margin-bottom:8px;">📍 ${scene.context}</p>` : ''}
+  ${lines}
+  ${tip}
+</div>`;
+    }).join('');
+    return intro + scenes;
+  }
+
   function buildSelfCheck(selfCheck) {
     if (!selfCheck?.length) return '';
     const items = selfCheck.map(sc => `
@@ -546,14 +605,15 @@ ${questions}`;
     const el = document.getElementById('panel-real');
     if (!el) return;
     try {
-      const [pronSections, selfCheck] = await Promise.all([
-        HalmoniCore.adult.getPronunciation(unitNumber),
+      const [realLife, selfCheck] = await Promise.all([
+        HalmoniCore.adult.getReal(unitNumber),
         HalmoniCore.adult.getSelfCheck(unitNumber),
       ]);
       if (_renderGen !== gen) return;  // 유닛 전환됨 → 무시
-      el.innerHTML = buildPronunciation(pronSections) + buildSelfCheck(selfCheck);
+      el.innerHTML = buildRealLife(realLife) + buildSelfCheck(selfCheck);
       _attachSpeakBtns(el);
-      console.log(`[AdultRenderer] real: 발음 ${pronSections.length}개 + 자기점검 ${selfCheck.length}개`);
+      const sceneCount = realLife?.scenes?.length || 0;
+      console.log(`[AdultRenderer] real: 실생활 대화 ${sceneCount}개 + 자기점검 ${selfCheck.length}개`);
     } catch (err) {
       console.warn('[AdultRenderer] real 렌더링 실패:', err);
     }
