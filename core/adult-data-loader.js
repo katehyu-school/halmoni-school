@@ -70,6 +70,11 @@
     return unit.sections.self_check || [];
   }
 
+  async function getReal(unitNumber) {
+    const unit = await loadUnit(unitNumber);
+    return unit.sections.real_life || null;
+  }
+
   // ── HalmoniCore.adult 네임스페이스에 붙이기 ──
   if (!window.HalmoniCore) {
     window.HalmoniCore = {};
@@ -85,6 +90,7 @@
     getPronunciation,
     getKeyPoints,
     getSelfCheck,
+    getReal,
   };
 
   console.log('[HalmoniCore] adult-data-loader v0.1.0 초기화 완료');
