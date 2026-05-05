@@ -2357,7 +2357,7 @@ body {
       <!-- 주말 활동 -->
       <li class="unit-item">
         <div class="unit-topic-label">주말 활동 · Weekend Activities</div>
-        <button class="unit-btn" onclick="selectUnit(this,9)">
+        <button class="unit-btn" onclick="selectUnit(this,9);loadUnit(9)">
           <span class="unit-num">09</span>
           <span>공원에서 산책했어요<span class="unit-subtitle">I took a walk in the park</span></span>
         </button>
@@ -3016,7 +3016,7 @@ async function renderVocabIndex() {
 
   panel.innerHTML = '<div class="vi-empty">⏳ 단어 모으는 중...</div>';
 
-  const unitNums = [4,5,6,7,8];
+  const unitNums = [4,5,6,7,8,9];
   const allWords = [];
 
   for (const n of unitNums) {
@@ -3743,6 +3743,15 @@ const unitMeta = {
     goals:[
       {color:'amber',label:'날씨 & 계절 어휘'},{color:'blue',label:'안 부정문'},
       {color:'blue',label:'ㅂ 불규칙'},{color:'teal',label:'날씨 대화'},{color:'coral',label:'실생활 적용'}
+    ],
+    cats:['All'],
+  },
+  9: {
+    badge:'09', title:'공원에서 산책했어요',
+    topic:"I took a walk in the park · Weekend Activities",
+    goals:[
+      {color:'amber',label:'주말 활동 어휘'},{color:'blue',label:'N에서'},
+      {color:'blue',label:'-았/었어요'},{color:'teal',label:'주말 대화'},{color:'coral',label:'실생활 적용'}
     ],
     cats:['All'],
   },
