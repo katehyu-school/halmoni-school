@@ -2296,6 +2296,10 @@ body {
           <span class="unit-num">06</span>
           <span>사과 다섯 개 주세요<span class="unit-subtitle">Give me five apples</span></span>
         </button>
+        <button class="unit-btn" onclick="selectUnit(this,7);loadUnit(7)">
+          <span class="unit-badge">07</span>
+          <span class="unit-name">일곱 시에 시작해요</span>
+        </button>
       </li>
 
       <!-- 시간과 날씨 -->
@@ -3582,6 +3586,15 @@ const unitMeta = {
     goals:[
       {color:'amber',label:'새 어휘'},{color:'blue',label:'고유어 수사'},
       {color:'blue',label:'단위명사'},{color:'teal',label:'-(으)세요'},{color:'coral',label:'쇼핑 대화'}
+    ],
+    cats:['All'],
+  },
+  7: {
+    badge:'07', title:'일곱 시에 시작해요',
+    topic:"It begins at 7 o'clock · Dates & Time",
+    goals:[
+      {color:'amber',label:'날짜 & 시간 어휘'},{color:'blue',label:'N에 (시간 조사)'},
+      {color:'blue',label:'O시 O분'},{color:'teal',label:'유월/시월 발음'},{color:'coral',label:'실생활 적용'}
     ],
     cats:['All'],
   },
