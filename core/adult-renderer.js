@@ -172,6 +172,15 @@ const AdultRenderer = (() => {
       const exs = (f.examples || []).map(e =>
         `<span style="background:#E0F5F2;border-radius:6px;padding:3px 8px;font-size:0.9rem;font-weight:700;color:var(--teal);">${e}</span>`
       ).join(' ');
+      if (f.no_change) {
+        return `
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;background:#F0FFF4;margin:0 -16px;padding-left:16px;padding-right:16px;">
+  <div style="min-width:50px;font-size:1rem;font-family:var(--font-serif);color:#2E7D32;font-weight:700;">다섯 이상</div>
+  <div style="font-size:0.85rem;font-weight:700;color:#2E7D32;background:#C8E6C9;border-radius:6px;padding:2px 10px;white-space:nowrap;">✓ 변형 없음</div>
+  <div style="font-size:0.8rem;color:#555;white-space:nowrap;">단위명사 앞에서 그대로 사용</div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;">${exs}</div>
+</div>`;
+      }
       return `
 <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;">
   <div style="min-width:50px;font-size:1rem;font-family:var(--font-serif);color:#555;">${f.base}</div>
@@ -183,7 +192,7 @@ const AdultRenderer = (() => {
 </div>`;
     }).join('');
     return `
-<div style="background:#F8FAFC;border-radius:10px;padding:4px 16px;margin:14px 0;">
+<div style="background:#F8FAFC;border-radius:10px;padding:4px 16px;margin:14px 0;overflow:hidden;">
   ${rows}
 </div>`;
   }
