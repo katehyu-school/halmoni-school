@@ -2423,7 +2423,7 @@ body {
         <div class="unit-topic-label">약속 & 제안 · Making Plans</div>
         <button class="unit-btn" onclick="selectUnit(this,10);loadUnit(10)">
           <span class="unit-num">10</span>
-          <span>우리 같이 갈까요?<span class="unit-subtitle">Shall we go together?</span></span>
+          <span>우리 같이 놀이공원에 갈까요?<span class="unit-subtitle">Shall we go to an amusement park together?</span></span>
         </button>
       </li>
 
@@ -3915,8 +3915,8 @@ const unitMeta = {
     cats:['All'],
   },
   10: {
-    badge:'10', title:'우리 같이 갈까요?',
-    topic:"Shall we go together? · Making Plans & Suggestions",
+    badge:'10', title:'우리 같이 놀이공원에 갈까요?',
+    topic:"Shall we go to an amusement park together? · Making Plans & Suggestions",
     goals:[
       {color:'amber',label:'새 어휘'},{color:'blue',label:'-ㄹ/을까요?'},
       {color:'blue',label:'-ㅂ/읍시다'},{color:'teal',label:'약속 대화'},{color:'coral',label:'실생활 적용'}
@@ -4870,13 +4870,18 @@ function initUnit0() {
   document.querySelectorAll('.u0-panel').forEach(p => p.classList.remove('active'));
   document.querySelector('.u0-tab').classList.add('active');
   document.getElementById('u0-greetings').classList.add('active');
-  u0QuizIdx = 0; u0QuizScore = 0;
+  u0QuizIdx = 0;
+  u0QuizScore = 0;
+  u0QuizAnswered = false;
+  u0QuizSelected = -1;
 }
+
 </script>
 
-<!-- ── HalmoniCore 공통 라이브러리 + 성인반 JSON 로더 / 렌더러 ── -->
-<script src="core/core.js"></script>
-<script src="core/adult-data-loader.js"></script>
-<script src="core/adult-renderer.js"></script>
+<!-- ── Core scripts ── -->
+<script src="/halmoni-school/core/core.js"></script>
+<script src="/halmoni-school/core/adult-data-loader.js"></script>
+<script src="/halmoni-school/core/adult-renderer.js"></script>
+
 </body>
 </html>
