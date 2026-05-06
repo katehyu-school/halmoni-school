@@ -1751,6 +1751,14 @@ body {
   font-size: 0.68rem; background: #c74d36; color: #fff;
   border-radius: 4px; padding: 1px 5px; margin-left: 5px;
 }
+.vi-book-bar { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.vi-book-btn {
+  padding: 4px 14px; border: 1.5px solid #3d6b8e; border-radius: 20px;
+  background: #fff; color: #3d6b8e; cursor: pointer;
+  font-size: 0.8rem; font-weight: 700; transition: all .15s;
+}
+.vi-book-btn.active { background: #3d6b8e; color: #fff; }
+.vi-book-btn:hover { background: #3d6b8e; color: #fff; }
 .vi-empty { padding: 40px; text-align: center; color: #bbb; font-size: 0.95rem; }
 </style>
 </head>
@@ -3008,30 +3016,41 @@ function getOnset(str) {
   return (str || '?')[0].toUpperCase();
 }
 
-let _viWords = null; // 캐시
+let _viWords = null;     // 캐시
+let _viBookFilter = 'all'; // 책 필터
+
+function _viSetBook(btn, book) {
+  _viBookFilter = book;
+  document.querySelectorAll('.vi-book-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _viFilter(document.getElementById('vi-search')?.value || '');
+}
 
 async function renderVocabIndex() {
   const panel = document.getElementById('panel-index');
-  if (_viWords) { _viRender(_viWords); return; }
+  if (_viWords) { _viRebuildUI(); return; }
 
   panel.innerHTML = '<div class="vi-empty">⏳ 단어 모으는 중...</div>';
 
-  const unitNums = [4,5,6,7,8,9];
+  // ── 로드할 유닛 목록 (앞으로 책이 늘어나면 여기만 추가) ──
+  const unitNums = [1,2,3,4,5,6,7,8,9];
   const allWords = [];
 
   for (const n of unitNums) {
     try {
       const unit = await HalmoniCore.adult.loadUnit(n);
+      const bookCode = unit.book_code || '1A';
       for (const cat of unit.sections.vocab.categories) {
         for (const item of cat.items) {
           allWords.push({
-            display : item.korean,
-            sort    : item.base || item.korean,
-            english : item.english,
-            rom     : item.romanization || '',
-            emoji   : item.emoji || '',
-            warning : item.warning || '',
-            unit    : n,
+            display  : item.korean,
+            sort     : item.base || item.korean,
+            english  : item.english,
+            rom      : item.romanization || '',
+            emoji    : item.emoji || '',
+            warning  : item.warning || '',
+            unit     : n,
+            book_code: bookCode,
           });
         }
       }
@@ -3040,8 +3059,21 @@ async function renderVocabIndex() {
 
   allWords.sort((a, b) => a.sort.localeCompare(b.sort, 'ko'));
   _viWords = allWords;
+  _viRebuildUI();
+}
 
-  // 패널 구조 삽입
+function _viRebuildUI() {
+  const allWords = _viWords;
+  const panel = document.getElementById('panel-index');
+
+  // ── 책 종류 동적 수집 (로드된 유닛 기준) ──
+  const books = [...new Set(allWords.map(w => w.book_code))];
+  const bookBtns = [
+    `<button class="vi-book-btn active" onclick="_viSetBook(this,'all')">모든 책</button>`,
+    ...books.map(b => `<button class="vi-book-btn" onclick="_viSetBook(this,'${b}')">${b}</button>`)
+  ].join('');
+
+  // ── 초성 점프바 (전체 단어 기준) ──
   const onsets = [...new Set(allWords.map(w => getOnset(w.sort)))];
   const jumpBar = onsets.map(o =>
     `<button class="vi-jump-btn" onclick="document.getElementById('vi-${o}')?.scrollIntoView({behavior:'smooth'})">${o}</button>`
@@ -3052,11 +3084,13 @@ async function renderVocabIndex() {
       <input type="text" id="vi-search" class="vi-search"
         placeholder="🔍 한국어 또는 영어로 검색..."
         oninput="_viFilter(this.value)">
+      <div class="vi-book-bar" id="vi-book-bar">${bookBtns}</div>
       <div class="vi-jump-bar">${jumpBar}</div>
     </div>
     <div id="vi-list" style="padding:0 24px 40px;"></div>
   `;
 
+  _viBookFilter = 'all';
   _viRender(allWords);
 }
 
@@ -3075,7 +3109,7 @@ function _viRender(words) {
       <span class="vi-korean">${w.display}${w.warning ? `<span class="vi-warn">⚠️ ${w.warning}</span>` : ''}</span>
       <span class="vi-rom">[${w.rom}]</span>
       <span class="vi-en">${w.english}</span>
-      <button class="vi-ubadge" onclick="goToUnitVocab(${w.unit})">0${w.unit}</button>
+      <button class="vi-ubadge" onclick="goToUnitVocab(${w.unit})">${w.book_code}-${String(w.unit).padStart(2,'0')}</button>
     </div>`;
   }
   if (!html) html = '<div class="vi-empty">검색 결과가 없어요 🤔</div>';
@@ -3085,11 +3119,12 @@ function _viRender(words) {
 function _viFilter(q) {
   if (!_viWords) return;
   const t = q.trim().toLowerCase();
-  const filtered = t
-    ? _viWords.filter(w =>
-        w.display.includes(t) || w.sort.includes(t) ||
-        w.english.toLowerCase().includes(t))
+  let filtered = (_viBookFilter && _viBookFilter !== 'all')
+    ? _viWords.filter(w => w.book_code === _viBookFilter)
     : _viWords;
+  if (t) filtered = filtered.filter(w =>
+    w.display.includes(t) || w.sort.includes(t) ||
+    w.english.toLowerCase().includes(t));
   _viRender(filtered);
 }
 
