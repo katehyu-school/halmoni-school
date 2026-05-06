@@ -469,6 +469,40 @@ body {
 }
 .grammar-table tr:hover td { background: var(--gray-100); }
 
+/* ── 발음 전용 테이블 카드 ── */
+.pron-table-card {
+  background: #fff;
+  border: 1.5px solid var(--amber);
+  border-radius: var(--radius-md);
+  padding: 14px 16px 10px;
+  margin-bottom: 16px;
+}
+.pron-table-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--amber);
+  background: var(--amber-lt);
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin-bottom: 6px;
+}
+.pron-table-title {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+}
+.pron-table-card .grammar-table th {
+  background: var(--amber-lt);
+  color: var(--amber);
+  border-bottom: 2px solid var(--amber);
+}
+
 .grammar-note {
   background: var(--amber-lt);
   border-radius: var(--radius-sm);
@@ -1728,6 +1762,19 @@ body {
   transition: all .15s;
 }
 .vi-jump-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
+.vi-page-num {
+  padding: 5px 11px; border: 1.5px solid #ddd; border-radius: 8px;
+  background: #f7f7f7; cursor: pointer; font-size: 0.82rem; font-weight: 600;
+  transition: all .15s;
+}
+.vi-page-num:hover { background: var(--teal-lt); border-color: var(--teal); }
+.vi-page-nav {
+  padding: 5px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+  background: #f7f7f7; cursor: pointer; font-size: 0.82rem; font-weight: 600;
+  transition: all .15s;
+}
+.vi-page-nav:hover:not(:disabled) { background: var(--teal); color: #fff; border-color: var(--teal); }
+.vi-page-nav:disabled { opacity: 0.35; cursor: default; }
 .vi-section-hdr {
   font-size: 1.3rem; font-weight: 800; color: var(--teal);
   padding: 18px 0 6px; border-bottom: 2.5px solid var(--teal);
@@ -3019,8 +3066,11 @@ function getOnset(str) {
   return (str || '?')[0].toUpperCase();
 }
 
-let _viWords = null;     // 캐시
+let _viWords = null;       // 캐시
 let _viBookFilter = 'all'; // 책 필터
+let _viMerged = [];        // 병합된 전체 단어 (페이지네이션용)
+let _viPage = 0;           // 현재 페이지
+const _viPageSize = 30;    // 페이지당 단어 수
 
 function _viSetBook(btn, book) {
   _viBookFilter = book;
@@ -3076,19 +3126,13 @@ function _viRebuildUI() {
     ...books.map(b => `<button class="vi-book-btn" onclick="_viSetBook(this,'${b}')">${b}</button>`)
   ].join('');
 
-  // ── 초성 점프바 (전체 단어 기준) ──
-  const onsets = [...new Set(allWords.map(w => getOnset(w.sort)))];
-  const jumpBar = onsets.map(o =>
-    `<button class="vi-jump-btn" onclick="document.getElementById('vi-${o}')?.scrollIntoView({behavior:'smooth'})">${o}</button>`
-  ).join('');
-
   panel.innerHTML = `
     <div style="padding:16px 24px 0;">
       <input type="text" id="vi-search" class="vi-search"
         placeholder="🔍 한국어 또는 영어로 검색..."
         oninput="_viFilter(this.value)">
       <div class="vi-book-bar" id="vi-book-bar">${bookBtns}</div>
-      <div class="vi-jump-bar">${jumpBar}</div>
+      <div class="vi-jump-bar" id="vi-jump-bar"></div>
     </div>
     <div id="vi-list" style="padding:0 24px 40px;"></div>
   `;
@@ -3098,21 +3142,16 @@ function _viRebuildUI() {
 }
 
 function _viRender(words) {
-  const el = document.getElementById('vi-list');
-  if (!el) return;
-
   // ── 중복 단어 병합: sort 기준으로 묶고 배지 여러 개 ──
   const merged = [];
-  const seen = new Map(); // sort → merged index
+  const seen = new Map();
   for (const w of words) {
     const key = w.sort;
     if (seen.has(key)) {
       const existing = merged[seen.get(key)];
-      // 같은 unit 배지는 중복 추가 안 함
       if (!existing.units.some(u => u.unit === w.unit && u.book_code === w.book_code)) {
         existing.units.push({ unit: w.unit, book_code: w.book_code });
       }
-      // emoji/rom이 나중 것에 있으면 채움
       if (!existing.emoji && w.emoji) existing.emoji = w.emoji;
       if (!existing.rom   && w.rom)   existing.rom   = w.rom;
     } else {
@@ -3128,15 +3167,44 @@ function _viRender(words) {
       });
     }
   }
+  _viMerged = merged;
+  _viPage = 0;
+  _viUpdateJumpBar(merged);
+  _viShowPage(0);
+}
+
+// 초성 점프바 업데이트 — 각 글자가 속한 페이지로 이동
+function _viUpdateJumpBar(merged) {
+  const bar = document.getElementById('vi-jump-bar');
+  if (!bar) return;
+  // 각 초성의 첫 번째 등장 인덱스 계산
+  const onsetPage = {};
+  merged.forEach((w, i) => {
+    const o = getOnset(w.sort);
+    if (!(o in onsetPage)) onsetPage[o] = Math.floor(i / _viPageSize);
+  });
+  const btns = Object.entries(onsetPage).map(([o, pg]) =>
+    `<button class="vi-jump-btn" onclick="_viShowPage(${pg})">${o}</button>`
+  ).join('');
+  bar.innerHTML = btns;
+}
+
+function _viShowPage(page) {
+  const el = document.getElementById('vi-list');
+  if (!el) return;
+  const total = _viMerged.length;
+  const totalPages = Math.max(1, Math.ceil(total / _viPageSize));
+  _viPage = Math.max(0, Math.min(page, totalPages - 1));
+
+  const slice = _viMerged.slice(_viPage * _viPageSize, (_viPage + 1) * _viPageSize);
 
   let html = '', cur = null;
-  for (const w of merged) {
+  for (const w of slice) {
     const onset = getOnset(w.sort);
     if (onset !== cur) {
       cur = onset;
-      html += `<div class="vi-section-hdr" id="vi-${onset}">${onset}</div>`;
+      html += `<div class="vi-section-hdr">${onset}</div>`;
     }
-    // 배지: 첫 번째 유닛으로 이동 (클릭 시)
     const badges = w.units.map(u =>
       `<button class="vi-ubadge" onclick="goToUnitVocab(${u.unit})">${u.book_code}-${String(u.unit).padStart(2,'0')}</button>`
     ).join('');
@@ -3149,7 +3217,27 @@ function _viRender(words) {
     </div>`;
   }
   if (!html) html = '<div class="vi-empty">검색 결과가 없어요 🤔</div>';
-  el.innerHTML = html;
+
+  // ── 페이지네이션 컨트롤 ──
+  const rangeStart = _viPage * _viPageSize + 1;
+  const rangeEnd   = Math.min((_viPage + 1) * _viPageSize, total);
+  const pageNums = Array.from({length: totalPages}, (_, i) => {
+    const active = i === _viPage ? 'style="background:var(--teal);color:#fff;border-color:var(--teal);"' : '';
+    return `<button class="vi-page-num" ${active} onclick="_viShowPage(${i})">${i + 1}</button>`;
+  }).join('');
+
+  const pagination = totalPages <= 1 ? '' : `
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:20px 0 8px;flex-wrap:wrap;">
+  <button class="vi-page-nav" onclick="_viShowPage(${_viPage - 1})" ${_viPage === 0 ? 'disabled' : ''}>◀ 이전</button>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;">${pageNums}</div>
+  <button class="vi-page-nav" onclick="_viShowPage(${_viPage + 1})" ${_viPage >= totalPages - 1 ? 'disabled' : ''}>다음 ▶</button>
+</div>
+<div style="text-align:center;font-size:0.78rem;color:#aaa;padding-bottom:20px;">${rangeStart}–${rangeEnd} / 전체 ${total}개 단어</div>`;
+
+  el.innerHTML = html + pagination;
+  // 인덱스 패널 상단으로 스크롤
+  const _idxEl = document.getElementById('panel-index');
+  if (_idxEl) window.scrollTo({ top: _idxEl.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
 }
 
 function _viFilter(q) {
@@ -4315,10 +4403,11 @@ function updateUsagePanel(num) {
           <div class="dlg-line dlg-a"><span class="dlg-speaker">A</span><span class="dlg-text">맞아요. 203호가 아니에요, 204호예요.</span></div>
         </div>
       </div>
-      <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>💡 Pronunciation — liaison of final consonants</div>
+      <div class="pron-table-card">
+        <div class="pron-table-label">🔊 발음 Pronunciation</div>
+        <div class="pron-table-title">받침의 연음 — Liaison of final consonants</div>
         <table class="grammar-table">
-          <thead><tr><th>Spelling</th><th>Pronunciation</th><th>Rule</th></tr></thead>
+          <thead><tr><th>Spelling 표기</th><th>Pronunciation 발음</th><th>Rule 규칙</th></tr></thead>
           <tbody>
             <tr><td>맞아요</td><td><strong>[마자요]</strong></td><td>ㅈ + 아 → 자</td></tr>
             <tr><td>십육</td><td><strong>[심뉵]</strong></td><td>Nasalization + liaison</td></tr>
@@ -4361,10 +4450,11 @@ function updateUsagePanel(num) {
           <div class="dlg-line dlg-b"><span class="dlg-speaker">B</span><span class="dlg-text">주노 씨 핸드폰이에요.</span></div>
         </div>
       </div>
-      <div class="panel-card">
-        <div class="panel-title"><span class="dot" style="background:var(--teal)"></span>💡 Pronunciation — 침대 옆에</div>
+      <div class="pron-table-card">
+        <div class="pron-table-label">🔊 발음 Pronunciation</div>
+        <div class="pron-table-title">받침의 연음 — 침대 옆에</div>
         <table class="grammar-table">
-          <thead><tr><th>Spelling</th><th>Pronunciation</th><th>Rule</th></tr></thead>
+          <thead><tr><th>Spelling 표기</th><th>Pronunciation 발음</th><th>Rule 규칙</th></tr></thead>
           <tbody>
             <tr><td>침대 옆</td><td><strong>[침대 엽]</strong></td><td>Final ㅂ sound</td></tr>
             <tr><td>침대 옆에</td><td><strong>[침대 여페]</strong></td><td>ㅂ + 에 → 페 (liaison)</td></tr>
