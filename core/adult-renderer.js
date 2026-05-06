@@ -13,7 +13,7 @@
  * 의존: core.js, adult-data-loader.js 가 먼저 로드되어야 함
  */
 
-const AdultRenderer = (() => {
+window.AdultRenderer = (() => {
 
   // ── 렌더 세대 카운터 (race condition 방지) ─────────────────────
   // renderAll 호출마다 증가. 각 render 함수는 DOM 쓰기 전에 세대가 맞는지 확인.
