@@ -131,6 +131,31 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 #u6-snav { gap:5px; }
 #u6-snav .snav-btn { font-size:0.78rem; padding:7px 10px; }
 #u6-snav .snav-en { display:none; }
+/* 7과: 받침 게임 */
+#u7-snav { gap:5px; }
+#u7-snav .snav-btn { font-size:0.82rem; padding:8px 12px; }
+.u7-word-card { background:var(--card); border-radius:18px; box-shadow:var(--shadow); padding:30px 24px 20px; text-align:center; margin-bottom:24px; }
+.u7-syllable-wrap { display:inline-flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:18px; }
+.u7-syl-top { font-family:'Noto Sans KR',sans-serif; font-size:3.2rem; font-weight:700; color:var(--text); background:#F4F6FF; border-radius:12px 12px 0 0; padding:14px 28px 8px; line-height:1; min-width:120px; }
+.u7-syl-slot { font-size:2rem; font-weight:700; min-width:120px; min-height:64px; border-radius:0 0 12px 12px; border:3px dashed #B0B8D8; background:#FAFBFF; display:flex; align-items:center; justify-content:center; color:#B0B8D8; transition:background 0.2s, border-color 0.2s; }
+.u7-syl-slot.dragover { border-color:var(--mint); background:var(--mint-light); }
+.u7-syl-slot.filled  { border-color:#7B93F5; background:#EEF1FF; color:#3D5AFE; }
+.u7-syl-slot.correct { border-color:var(--mint); background:var(--mint-light); color:var(--mint); }
+.u7-syl-slot.wrong   { border-color:var(--coral); background:#FDEAE6; color:var(--coral); }
+.u7-batchim-pool { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:8px 0 20px; }
+.u7-bc-card { font-family:'Noto Sans KR',sans-serif; font-size:1.6rem; font-weight:700; padding:12px 20px; border-radius:12px; border:2.5px solid #C9CDE8; background:white; cursor:grab; transition:transform 0.15s, border-color 0.15s, box-shadow 0.15s; user-select:none; }
+.u7-bc-card:hover { transform:translateY(-3px); border-color:#7B93F5; box-shadow:0 4px 12px rgba(123,147,245,0.25); }
+.u7-bc-card.dragging { opacity:0.4; }
+.u7-bc-card.used    { opacity:0.25; pointer-events:none; }
+.u7-bc-card.correct { border-color:var(--mint) !important; background:var(--mint-light) !important; color:var(--mint); pointer-events:none; }
+.u7-bc-card.wrong   { border-color:var(--coral) !important; background:#FDEAE6 !important; color:var(--coral); }
+.u7-vote-row { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+.u7-vote-btn { font-size:0.82rem; padding:5px 14px; border-radius:20px; border:2px solid #DDD; background:white; color:var(--text); }
+.u7-vote-btn.voted   { border-color:#7B93F5; background:#EEF1FF; color:#3D5AFE; }
+.u7-vote-btn.correct { border-color:var(--mint); background:var(--mint-light); color:var(--mint); font-weight:700; }
+.u7-vote-btn.wrong   { opacity:0.35; }
+.u7-prog { font-size:0.9rem; color:var(--muted); margin-bottom:6px; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 20%{transform:translateX(-6px);} 40%{transform:translateX(6px);} 60%{transform:translateX(-4px);} 80%{transform:translateX(4px);} }
 .section { display:none; }
 .section.active { display:block; }
 
@@ -1036,6 +1061,40 @@ function applyPracticeState(session, showPopup = true) {
     }
   }
 
+  if (unit === 7) {
+    const _u7panel = document.getElementById('unit7');
+    const _u7active = _u7panel && (_u7panel.style.display === 'block' || _u7panel.classList.contains('active'));
+    if (!_u7active) return;
+    // raised_hands 동기화: 학생 투표 반영
+    (hands).forEach(h => {
+      const sep = h.indexOf(':');
+      if (sep < 0) return;
+      const nm = h.slice(0, sep);
+      const ans = h.slice(sep + 1);
+      u7BVotes[nm] = ans;
+    });
+    _u7BUpdateVoteRow();
+    // 문제 번호 동기화
+    if (qIdx !== u7BIdx) {
+      u7BIdx = qIdx;
+      u7BStep = 0;
+      if (u7BIdx >= u7BGame.length) _u7BShowComplete();
+      else renderU7B();
+    }
+    // 정답 공개 동기화 (학생 화면)
+    if (!isTeacher && session.status === 'correct' && !u7BRevealed) {
+      u7BRevealed = true;
+      const q = u7BGame[u7BIdx] || {};
+      const correctAns = (q.steps||[]).join('+');
+      const winners = Object.entries(u7BVotes).filter(([,a])=>a===correctAns).map(([n])=>n);
+      if (winners.length > 0 && typeof showCorrectPopup === 'function') {
+        if (typeof launchConfetti==='function') launchConfetti();
+        showCorrectPopup(winners);
+      }
+    }
+  }
+
+
   // 카드 강조 — 내 차례면 highlight, 남 차례면 dim
   const myName = urlName;
   document.querySelectorAll('.card').forEach(c => {
@@ -1252,9 +1311,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">6과</span>
     <span class="lesson-title-text">친구 집에서 장난감 배를 만들어요</span>
   </div>
-  <div class="lesson-item locked">
+  <div class="lesson-item" id="lesson-7" onclick="switchUnit(7)">
     <span class="lesson-num">7과</span>
-    <div><span class="lesson-title-text">하나, 둘, 셋, 넷</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+    <span class="lesson-title-text">하나, 둘, 셋, 넷</span>
   </div>
   <div class="lesson-item locked">
     <span class="lesson-num">8과</span>
@@ -2159,6 +2218,67 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   </div><!-- /u6-build -->
 </div><!-- /unit6 -->
+<div class="unit" id="unit7">
+  <div class="unit-heading">
+    <span class="unit-num">7</span>
+    <span class="unit-title">하나, 둘, 셋, 넷</span>
+  </div>
+  <nav class="section-nav" id="u7-snav">
+    <button class="snav-btn active" onclick="switchSection7('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection7('batchim')">🧩 받침 게임 <span class="snav-en">Game</span></button>
+  </nav>
+
+  <!-- ── VOCAB ── -->
+  <div class="section active" id="u7-vocab">
+    <div class="card">
+      <div class="section-title">📌 한자어 숫자 Sino-Korean Numbers</div>
+      <div class="section-sub">날짜, 전화번호, 주소에 사용해요</div>
+      <div id="u7-sino-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin-bottom:24px;"></div>
+      <div class="section-title">📌 고유어 숫자 Native Korean Numbers</div>
+      <div class="section-sub">개수를 셀 때 사용해요</div>
+      <div id="u7-native-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">📌 단위명사 Counters</div>
+      <div class="section-sub">고유어 숫자와 함께 써요</div>
+      <div id="u7-counter-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;"></div>
+    </div>
+  </div>
+
+  <!-- ── 받침 게임 ── -->
+  <div class="section" id="u7-batchim">
+    <div class="u7-word-card">
+      <div class="u7-prog" id="u7b-prog">1 / 6</div>
+      <div class="u7-syllable-wrap" id="u7b-syl-wrap">
+        <!-- JS로 렌더링 -->
+      </div>
+      <!-- 선생님 정답 공개 버튼 -->
+      <div id="u7b-teacher-ctrl" style="display:none;margin-top:12px;">
+        <button onclick="u7BReveal()" id="u7b-reveal-btn"
+          style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">
+          ✅ 정답 공개
+        </button>
+        <button onclick="nextU7B()" id="u7b-next-btn" disabled
+          style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">
+          다음 ▶
+        </button>
+      </div>
+      <!-- 학생 투표 현황 -->
+      <div class="u7-vote-row" id="u7b-vote-row"></div>
+    </div>
+    <!-- 받침 카드 풀 -->
+    <div class="u7-batchim-pool" id="u7b-pool"></div>
+    <!-- 완료 화면 -->
+    <div id="u7b-complete" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">받침 마스터!</div>
+      <div style="color:var(--muted);font-size:0.95rem;">모든 받침을 완성했어요!</div>
+      <button onclick="restartU7B()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+    </div>
+  </div>
+
+</div><!-- /unit7 -->
+
 
 </main>
 </div>
@@ -2420,12 +2540,14 @@ function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
   // 사이드바 lesson-item 활성화
-  [1,2,3,4,5,6].forEach(i=>{
+  [1,2,3,4,5,6,7].forEach(i=>{
     const el = document.getElementById('lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
   document.getElementById('unit'+n).classList.add('active');
-  if (n === 6) { switchSection6('vocab'); } else { switchSection(n, 'vocab'); }
+  if (n === 6) { switchSection6('vocab'); }
+  else if (n === 7) { switchSection7('vocab'); }
+  else { switchSection(n, 'vocab'); }
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
@@ -2736,6 +2858,7 @@ function restartUnit(n){
     document.getElementById('u6-step1').style.display='block';
     document.getElementById('u6-step2').style.display='none';
     renderU6Part1(); switchUnit(6); switchSection6('listen'); syncNext(6,0); }
+  if(n===7){ u7BIdx=0; u7BStep=0; u7BRevealed=false; u7BVotes={}; u7BPlaced={}; switchUnit(7); switchSection7('vocab'); }
 }
 
 function restartAll(){
@@ -3645,6 +3768,370 @@ let u6Questions = [
 // ══════════════════════════════════════════
 // UNIT 6 — 탭 전환
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════════
+// 7과 — 받침 게임
+// ══════════════════════════════════════════════
+
+let u7BGame   = [];   // batchim_game data from JSON
+let u7BIdx    = 0;    // 현재 문제 인덱스 (0~5)
+let u7BStep   = 0;    // 여덟은 2단계: 0=ㄹ, 1=ㅂ
+let u7BRevealed = false;
+let u7BVotes  = {};   // { "안나": "ㄹ" }
+let u7BPlaced = {};   // { "안나": ["ㄹ","ㅂ"] } 학생이 놓은 받침
+
+function switchSection7(sec) {
+  document.querySelectorAll('#u7-snav .snav-btn').forEach((b,i) => {
+    b.classList.toggle('active', (i===0&&sec==='vocab')||(i===1&&sec==='batchim'));
+  });
+  document.querySelectorAll('#unit7 .section').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('u7-' + sec);
+  if (el) el.classList.add('active');
+  if (sec === 'batchim') renderU7B();
+}
+
+// ── 렌더: 단어 카드 + 받침 풀 ──────────────────
+function renderU7B() {
+  if (!u7BGame.length) return;
+  const q = u7BGame[u7BIdx];
+  const wrap = document.getElementById('u7b-syl-wrap');
+  const pool = document.getElementById('u7b-pool');
+  const prog = document.getElementById('u7b-prog');
+  const complete = document.getElementById('u7b-complete');
+  const card = document.querySelector('#u7-batchim .u7-word-card');
+  if (!wrap || !pool) return;
+
+  u7BRevealed = false;
+  u7BVotes = {};
+  u7BPlaced = {};
+
+  if (complete) complete.style.display = 'none';
+  if (card) card.style.display = 'block';
+  if (prog) prog.textContent = (u7BIdx+1) + ' / ' + u7BGame.length;
+
+  // 선생님 컨트롤 버튼
+  const ctrl = document.getElementById('u7b-teacher-ctrl');
+  if (ctrl) ctrl.style.display = isTeacher ? 'block' : 'none';
+  const nextBtn = document.getElementById('u7b-next-btn');
+  if (nextBtn) { nextBtn.disabled = true; nextBtn.style.background='#E8E8E8'; nextBtn.style.color='#999'; }
+  const revealBtn = document.getElementById('u7b-reveal-btn');
+  if (revealBtn) { revealBtn.disabled = false; revealBtn.style.background='#5B6AF0'; }
+
+  // 음절 카드 렌더
+  wrap.innerHTML = _buildSylCard(q, 0);
+
+  // 받침 풀: 정답 + 오답 섞기
+  const all = [...q.steps, ...q.distractors];
+  // 셔플
+  for (let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
+  pool.innerHTML = all.map(bc => `
+    <div class="u7-bc-card" id="u7bc-${bc}"
+      draggable="true"
+      ondragstart="u7BDragStart(event,'${bc}')"
+      ontouchstart="u7BTouchStart(event,'${bc}')"
+      ontouchmove="u7BTouchMove(event)"
+      ontouchend="u7BTouchEnd(event)">
+      ${bc}
+    </div>`).join('');
+
+  // 투표 현황 초기화
+  _u7BUpdateVoteRow();
+}
+
+function _buildSylCard(q, step) {
+  // step: 여덟은 0=첫번째슬롯, 1=두번째슬롯
+  const slots = q.steps.map((bc, i) => {
+    if (i < step) {
+      return `<div class="u7-syl-slot filled" id="u7slot-${i}">${bc}</div>`;
+    } else if (i === step) {
+      return `<div class="u7-syl-slot" id="u7slot-${i}"
+        ondragover="event.preventDefault();this.classList.add('dragover')"
+        ondragleave="this.classList.remove('dragover')"
+        ondrop="u7BDrop(event,${i})">?</div>`;
+    } else {
+      return `<div class="u7-syl-slot" id="u7slot-${i}" style="border-color:#DDE">?</div>`;
+    }
+  });
+  return `
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;">${q.word}</div>
+    <div class="u7-syl-top">${q.base}</div>
+    ${slots.join('')}`;
+}
+
+// ── 드래그 (데스크톱) ───────────────────────────
+let _u7DragBC = null;
+function u7BDragStart(e, bc) {
+  _u7DragBC = bc;
+  e.dataTransfer.setData('text/plain', bc);
+  setTimeout(() => { const el = document.getElementById('u7bc-'+bc); if(el) el.classList.add('dragging'); }, 0);
+}
+
+async function u7BDrop(e, slotIdx) {
+  e.preventDefault();
+  const slot = document.getElementById('u7slot-'+slotIdx);
+  if (slot) slot.classList.remove('dragover');
+  const bc = _u7DragBC || e.dataTransfer.getData('text/plain');
+  const el = document.getElementById('u7bc-'+bc); if(el) el.classList.remove('dragging');
+  if (!bc || u7BRevealed) return;
+
+  // 자기 화면: 슬롯에 배치
+  if (!_isSolo) {
+    // 수업모드: urlName으로 자신의 투표 기록
+    if (!urlName) return;
+    await _u7BSubmitVote(urlName, bc, slotIdx);
+  } else {
+    // 자습모드: 즉시 피드백
+    _u7BSelfStudyDrop(bc, slotIdx);
+  }
+}
+
+async function _u7BSubmitVote(name, bc, slotIdx) {
+  const q = u7BGame[u7BIdx];
+  // 현재 단계 정답 확인
+  const expected = q.steps[slotIdx];
+  if (bc !== expected) {
+    // 틀린 받침: 슬롯 흔들기
+    const slot = document.getElementById('u7slot-'+slotIdx);
+    if (slot) { slot.textContent='✗'; slot.classList.add('wrong'); setTimeout(()=>{slot.textContent='?';slot.classList.remove('wrong');},700); }
+    const bcEl = document.getElementById('u7bc-'+bc); if(bcEl){ bcEl.style.animation='shake 0.4s'; setTimeout(()=>bcEl.style.animation='',500); }
+    return;
+  }
+  // 슬롯 채우기
+  const slot = document.getElementById('u7slot-'+slotIdx);
+  if (slot) { slot.textContent=bc; slot.classList.add('filled'); }
+  const bcEl = document.getElementById('u7bc-'+bc); if(bcEl) bcEl.classList.add('used');
+
+  // 2단계 단어(여덟): 두 받침 다 채웠을 때 Supabase 저장
+  if (!u7BPlaced[name]) u7BPlaced[name] = [];
+  u7BPlaced[name].push(bc);
+
+  const totalSteps = q.steps.length;
+  const placed = u7BPlaced[name];
+  if (placed.length < totalSteps) {
+    // 아직 다음 슬롯 남음 — 다음 슬롯 활성화
+    u7BStep = slotIdx + 1;
+    const wrap = document.getElementById('u7b-syl-wrap');
+    if (wrap) wrap.innerHTML = _buildSylCard(q, u7BStep);
+    // 이미 채운 슬롯 다시 표시
+    for (let i=0; i<u7BStep; i++) {
+      const s = document.getElementById('u7slot-'+i);
+      if (s) { s.textContent=q.steps[i]; s.classList.add('filled'); }
+    }
+    return;
+  }
+  // 모든 슬롯 완성 → Supabase 저장
+  const answer = placed.join('+');
+  u7BVotes[name] = answer;
+  _u7BUpdateVoteRow();
+  if (practice?.state?.sessionId && _supabase) {
+    const { data: latest } = await _supabase.from('practice_session')
+      .select('raised_hands').eq('id', practice.state.sessionId).single();
+    const currentHands = ((latest?.raised_hands)||[]).filter(h=>!h.startsWith(name+':'));
+    currentHands.push(name+':'+answer);
+    await _supabase.from('practice_session').update({
+      raised_hands: currentHands,
+      unit: 7,
+      q_index: u7BIdx,
+      status: 'waiting',
+      updated_at: new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
+}
+
+function _u7BSelfStudyDrop(bc, slotIdx) {
+  const q = u7BGame[u7BIdx];
+  const expected = q.steps[slotIdx];
+  const slot = document.getElementById('u7slot-'+slotIdx);
+  const bcEl = document.getElementById('u7bc-'+bc);
+  if (bc === expected) {
+    if (slot) { slot.textContent=bc; slot.classList.add('filled'); }
+    if (bcEl) bcEl.classList.add('used');
+    // 다음 슬롯?
+    if (slotIdx + 1 < q.steps.length) {
+      u7BStep = slotIdx + 1;
+      const wrap = document.getElementById('u7b-syl-wrap');
+      if (wrap) wrap.innerHTML = _buildSylCard(q, u7BStep);
+      for (let i=0;i<u7BStep;i++){const s=document.getElementById('u7slot-'+i);if(s){s.textContent=q.steps[i];s.classList.add('filled');}}
+    } else {
+      // 완성!
+      setTimeout(()=>{ if(typeof launchConfetti==='function') launchConfetti(); }, 200);
+      setTimeout(()=>{ u7BIdx++; if(u7BIdx>=u7BGame.length){_u7BShowComplete();}else{u7BStep=0;renderU7B();} }, 1200);
+    }
+  } else {
+    if (slot) { slot.textContent='✗'; slot.classList.add('wrong'); setTimeout(()=>{slot.textContent='?';slot.classList.remove('wrong');},700); }
+    if (bcEl) { bcEl.style.animation='shake 0.4s'; setTimeout(()=>bcEl.style.animation='',500); }
+  }
+}
+
+// ── 터치 드래그 지원 ────────────────────────────
+let _u7TouchBC = null;
+let _u7TouchEl = null;
+let _u7TouchClone = null;
+
+function u7BTouchStart(e, bc) {
+  _u7TouchBC = bc;
+  _u7TouchEl = e.currentTarget;
+  const clone = _u7TouchEl.cloneNode(true);
+  clone.style.cssText = 'position:fixed;z-index:9999;opacity:0.85;pointer-events:none;font-size:1.6rem;padding:10px 18px;border-radius:12px;background:#EEF1FF;border:2px solid #7B93F5;';
+  document.body.appendChild(clone);
+  _u7TouchClone = clone;
+  e.preventDefault();
+}
+function u7BTouchMove(e) {
+  if (!_u7TouchClone) return;
+  const t = e.touches[0];
+  _u7TouchClone.style.left = (t.clientX - 30) + 'px';
+  _u7TouchClone.style.top  = (t.clientY - 30) + 'px';
+  e.preventDefault();
+}
+function u7BTouchEnd(e) {
+  if (_u7TouchClone) { _u7TouchClone.remove(); _u7TouchClone = null; }
+  if (!_u7TouchBC) return;
+  const t = e.changedTouches[0];
+  // 어느 슬롯 위에서 손을 뗐는지 확인
+  const q = u7BGame[u7BIdx];
+  for (let i=0; i<q.steps.length; i++) {
+    const slot = document.getElementById('u7slot-'+i);
+    if (!slot) continue;
+    const r = slot.getBoundingClientRect();
+    if (t.clientX>=r.left && t.clientX<=r.right && t.clientY>=r.top && t.clientY<=r.bottom) {
+      u7BDrop({preventDefault:()=>{}, dataTransfer:{getData:()=>_u7TouchBC}}, i);
+      break;
+    }
+  }
+  _u7TouchBC = null;
+}
+
+// ── 투표 현황 UI ────────────────────────────────
+function _u7BUpdateVoteRow() {
+  const row = document.getElementById('u7b-vote-row');
+  if (!row || !isTeacher) return;
+  const names = (typeof practice !== 'undefined' && practice?.state?.players) || [];
+  row.innerHTML = names.map(nm => {
+    const ans = u7BVotes[nm];
+    const cls = ans ? 'voted' : '';
+    return `<div class="u7-vote-btn ${cls}" id="u7vb-${nm.replace(/\s/g,'_')}">${ans ? nm+'✓' : nm}</div>`;
+  }).join('');
+}
+
+// ── 정답 공개 (선생님) ──────────────────────────
+async function u7BReveal() {
+  if (u7BRevealed) return;
+  u7BRevealed = true;
+  const q = u7BGame[u7BIdx];
+  const correctAns = q.steps.join('+');
+  const winners = [];
+
+  // 각 학생 정답 여부 표시
+  Object.entries(u7BVotes).forEach(([nm, ans]) => {
+    const btn = document.getElementById('u7vb-'+nm.replace(/\s/g,'_'));
+    if (ans === correctAns) {
+      if (btn) { btn.classList.add('correct'); btn.textContent='⭐ '+nm; }
+      winners.push(nm);
+    } else {
+      if (btn) btn.classList.add('wrong');
+    }
+  });
+
+  // 슬롯 색상 처리
+  q.steps.forEach((bc,i) => {
+    const slot = document.getElementById('u7slot-'+i);
+    if (slot) { slot.textContent=bc; slot.classList.add('correct'); slot.classList.remove('filled','wrong'); }
+  });
+  // 정답 받침 카드 표시
+  q.steps.forEach(bc => {
+    const el = document.getElementById('u7bc-'+bc);
+    if (el) { el.classList.add('correct'); el.classList.remove('used'); }
+  });
+
+  // 컨페티 + 팝업
+  if (winners.length > 0) {
+    if (typeof launchConfetti === 'function') launchConfetti();
+    if (typeof showCorrectPopup === 'function') showCorrectPopup(winners);
+  }
+
+  // 버튼 상태
+  const revealBtn = document.getElementById('u7b-reveal-btn');
+  if (revealBtn) { revealBtn.disabled=true; revealBtn.style.background='#B0B0B0'; }
+  const nextBtn = document.getElementById('u7b-next-btn');
+  if (nextBtn) { nextBtn.disabled=false; nextBtn.style.background='var(--mint)'; nextBtn.style.color='white'; }
+
+  // Supabase 동기화
+  if (practice?.state?.sessionId && _supabase) {
+    await _supabase.from('practice_session').update({
+      status: 'correct',
+      current_player: null,
+      updated_at: new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
+}
+
+// ── 다음 문제 (선생님) ──────────────────────────
+async function nextU7B() {
+  u7BIdx++;
+  u7BStep = 0;
+  if (u7BIdx >= u7BGame.length) {
+    _u7BShowComplete();
+  } else {
+    renderU7B();
+    if (practice?.state?.sessionId && _supabase) {
+      await _supabase.from('practice_session').update({
+        unit: 7, q_index: u7BIdx, status: 'waiting',
+        raised_hands: [], current_player: null,
+        updated_at: new Date().toISOString()
+      }).eq('id', practice.state.sessionId);
+    }
+  }
+}
+
+function _u7BShowComplete() {
+  const card = document.querySelector('#u7-batchim .u7-word-card');
+  if (card) card.style.display='none';
+  const pool = document.getElementById('u7b-pool');
+  if (pool) pool.style.display='none';
+  const comp = document.getElementById('u7b-complete');
+  if (comp) comp.style.display='block';
+  if (typeof launchConfetti==='function') launchConfetti();
+}
+
+function restartU7B() {
+  u7BIdx=0; u7BStep=0; u7BRevealed=false; u7BVotes={}; u7BPlaced={};
+  const pool = document.getElementById('u7b-pool');
+  if (pool) pool.style.display='flex';
+  renderU7B();
+}
+
+// ── Vocab 렌더 ─────────────────────────────────
+function renderU7Vocab(data) {
+  const sinoGrid = document.getElementById('u7-sino-grid');
+  const nativeGrid = document.getElementById('u7-native-grid');
+  const counterGrid = document.getElementById('u7-counter-grid');
+  if (sinoGrid && data.sino) {
+    sinoGrid.innerHTML = data.sino.map(w => `
+      <div style="background:#F4F6FF;border-radius:12px;padding:14px;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:700;color:#3D5AFE;">${w.korean}</div>
+        <div style="font-size:0.85rem;color:var(--muted);">${w.english}</div>
+        ${w.note?`<div style="font-size:0.75rem;color:#888;margin-top:4px;">${w.note}</div>`:''}
+      </div>`).join('');
+  }
+  if (nativeGrid && data.native) {
+    nativeGrid.innerHTML = data.native.map(w => `
+      <div style="background:#F0FBF9;border-radius:12px;padding:14px;">
+        <div style="font-size:1.5rem;font-weight:700;color:var(--mint);">${w.korean}</div>
+        <div style="font-size:0.82rem;color:var(--muted);">${w.english}</div>
+        ${w.counter!==w.korean?`<div style="font-size:0.78rem;color:#888;margin-top:4px;">셀 때: <b>${w.counter}</b></div>`:''}
+        <div style="font-size:0.8rem;color:#666;margin-top:4px;">예) ${w.example}</div>
+      </div>`).join('');
+  }
+  if (counterGrid && data.counters) {
+    counterGrid.innerHTML = data.counters.map(c => `
+      <div style="background:#FFF8F0;border-radius:12px;padding:14px;">
+        <span style="font-size:1.3rem;font-weight:700;color:var(--amber);">${c.unit}</span>
+        <span style="font-size:0.85rem;color:var(--muted);margin-left:8px;">${c.english}</span>
+        <div style="font-size:0.8rem;color:#888;margin-top:4px;">${c.example}</div>
+      </div>`).join('');
+  }
+}
+
 function switchSection6(sec) {
   const u = document.getElementById('unit6');
   u.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -4177,7 +4664,7 @@ function nextU6() {
 // ══════════════════════════════════════════
 async function init(){
   try {
-    const [d1, d2, d3, d4, d5, d6] = await Promise.all([1,2,3,4,5,6].map(n => HalmoniCore.loadUnit(n)));
+    const [d1, d2, d3, d4, d5, d6, d7] = await Promise.all([1,2,3,4,5,6,7].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
@@ -4189,6 +4676,13 @@ async function init(){
       if (p6.listen_quiz)  u6ListenQ   = p6.listen_quiz;
       if (p6.step1_chunks) u6S1Q       = p6.step1_chunks;
       if (p6.step2_words)  u6Questions = p6.step2_words;
+    }
+    if (d7 && d7.sections && d7.sections.practice) {
+      const p7 = d7.sections.practice;
+      if (p7.batchim_game) u7BGame = p7.batchim_game;
+    }
+    if (d7 && d7.sections && d7.sections.vocab) {
+      renderU7Vocab(d7.sections.vocab);
     }
     if (d6 && d6.sections && d6.sections.vocab) {
       const v6 = d6.sections.vocab;
