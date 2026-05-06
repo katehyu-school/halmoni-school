@@ -933,13 +933,13 @@ ${questions}`;
 
   return {
     renderAll,
-    cancelRender,  // 진행 중인 렌더 취소
+    cancelRender,
     renderVocab,
     renderGrammar,
     renderUsage,
     renderQuiz,
-    renderReal,
-    // onclick에서 직접 호출되는 내부 함수들
+    renderRealLife,
+    renderIndex,
     _selectOption,
     _checkConjugation,
     _nextQuestion,
@@ -950,4 +950,5 @@ ${questions}`;
     _toggleScript,
     _rlSelectOpt,
   };
+
 })();
