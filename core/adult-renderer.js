@@ -23,11 +23,17 @@ window.AdultRenderer = (() => {
 
   // ── 공통 유틸 ─────────────────────────────────────────────────
 
+  // 이모지 제거 — TTS가 이모지를 텍스트로 읽지 않도록
+  function stripEmoji(text) {
+    return (text || '').replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '').trim();
+  }
+
   function speak(text) {
+    const clean = stripEmoji(text);
     if (window.HalmoniCore?.speak) {
-      HalmoniCore.speak(text, { preset: 'adult' });
+      HalmoniCore.speak(clean, { preset: 'adult' });
     } else if (window.speechSynthesis) {
-      const u = new SpeechSynthesisUtterance(text);
+      const u = new SpeechSynthesisUtterance(clean);
       u.lang = 'ko-KR'; u.rate = 0.9;
       speechSynthesis.speak(u);
     }
