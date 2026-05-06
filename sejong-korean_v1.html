@@ -1747,6 +1747,7 @@ body {
   flex-shrink: 0;
 }
 .vi-ubadge:hover { opacity: 0.8; }
+.vi-badges { display:flex; gap:4px; flex-shrink:0; flex-wrap:wrap; justify-content:flex-end; }
 .vi-warn {
   font-size: 0.68rem; background: #c74d36; color: #fff;
   border-radius: 4px; padding: 1px 5px; margin-left: 5px;
@@ -2370,10 +2371,12 @@ body {
           <span>공원에서 산책했어요<span class="unit-subtitle">I took a walk in the park</span></span>
         </button>
       </li>
+      <!-- 약속 & 제안 -->
       <li class="unit-item">
-        <button class="unit-btn" onclick="selectUnit(this,10)">
+        <div class="unit-topic-label">약속 & 제안 · Making Plans</div>
+        <button class="unit-btn" onclick="selectUnit(this,10);loadUnit(10)">
           <span class="unit-num">10</span>
-          <span>우리 같이 놀이공원에 갈까요?<span class="unit-subtitle">Shall we go to an amusement park together?</span></span>
+          <span>같이 갈까요?<span class="unit-subtitle">Shall we go together?</span></span>
         </button>
       </li>
 
@@ -3033,7 +3036,7 @@ async function renderVocabIndex() {
   panel.innerHTML = '<div class="vi-empty">⏳ 단어 모으는 중...</div>';
 
   // ── 로드할 유닛 목록 (앞으로 책이 늘어나면 여기만 추가) ──
-  const unitNums = [1,2,3,4,5,6,7,8,9];
+  const unitNums = [1,2,3,4,5,6,7,8,9,10];
   const allWords = [];
 
   for (const n of unitNums) {
@@ -3097,19 +3100,52 @@ function _viRebuildUI() {
 function _viRender(words) {
   const el = document.getElementById('vi-list');
   if (!el) return;
-  let html = '', cur = null;
+
+  // ── 중복 단어 병합: sort 기준으로 묶고 배지 여러 개 ──
+  const merged = [];
+  const seen = new Map(); // sort → merged index
   for (const w of words) {
+    const key = w.sort;
+    if (seen.has(key)) {
+      const existing = merged[seen.get(key)];
+      // 같은 unit 배지는 중복 추가 안 함
+      if (!existing.units.some(u => u.unit === w.unit && u.book_code === w.book_code)) {
+        existing.units.push({ unit: w.unit, book_code: w.book_code });
+      }
+      // emoji/rom이 나중 것에 있으면 채움
+      if (!existing.emoji && w.emoji) existing.emoji = w.emoji;
+      if (!existing.rom   && w.rom)   existing.rom   = w.rom;
+    } else {
+      seen.set(key, merged.length);
+      merged.push({
+        display : w.display,
+        sort    : w.sort,
+        english : w.english,
+        rom     : w.rom,
+        emoji   : w.emoji,
+        warning : w.warning,
+        units   : [{ unit: w.unit, book_code: w.book_code }],
+      });
+    }
+  }
+
+  let html = '', cur = null;
+  for (const w of merged) {
     const onset = getOnset(w.sort);
     if (onset !== cur) {
       cur = onset;
       html += `<div class="vi-section-hdr" id="vi-${onset}">${onset}</div>`;
     }
+    // 배지: 첫 번째 유닛으로 이동 (클릭 시)
+    const badges = w.units.map(u =>
+      `<button class="vi-ubadge" onclick="goToUnitVocab(${u.unit})">${u.book_code}-${String(u.unit).padStart(2,'0')}</button>`
+    ).join('');
     html += `<div class="vi-row">
       <span class="vi-emoji">${w.emoji}</span>
       <span class="vi-korean">${w.display}${w.warning ? `<span class="vi-warn">⚠️ ${w.warning}</span>` : ''}</span>
-      <span class="vi-rom">[${w.rom}]</span>
+      <span class="vi-rom">${w.rom ? `[${w.rom}]` : ''}</span>
       <span class="vi-en">${w.english}</span>
-      <button class="vi-ubadge" onclick="goToUnitVocab(${w.unit})">${w.book_code}-${String(w.unit).padStart(2,'0')}</button>
+      <span class="vi-badges">${badges}</span>
     </div>`;
   }
   if (!html) html = '<div class="vi-empty">검색 결과가 없어요 🤔</div>';
@@ -3787,6 +3823,15 @@ const unitMeta = {
     goals:[
       {color:'amber',label:'주말 활동 어휘'},{color:'blue',label:'N에서'},
       {color:'blue',label:'-았/었어요'},{color:'teal',label:'주말 대화'},{color:'coral',label:'실생활 적용'}
+    ],
+    cats:['All'],
+  },
+  10: {
+    badge:'10', title:'같이 갈까요?',
+    topic:"Shall we go together? · Making Plans & Suggestions",
+    goals:[
+      {color:'amber',label:'새 어휘'},{color:'blue',label:'-ㄹ/을까요?'},
+      {color:'blue',label:'-ㅂ/읍시다'},{color:'teal',label:'약속 대화'},{color:'coral',label:'실생활 적용'}
     ],
     cats:['All'],
   },
