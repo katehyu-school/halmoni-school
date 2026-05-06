@@ -291,6 +291,11 @@
           ],
           "examples": [
             {
+              "korean": "공원에 있어요.",
+              "english": "I am at the park. (existence → N에)",
+              "highlight": "에"
+            },
+            {
               "korean": "공원에서 자전거를 타요.",
               "english": "I ride a bicycle in the park."
             },
@@ -315,19 +320,36 @@
           "rule_boxes": [
             {
               "color": "blue",
-              "label": "어간의 마지막 모음이 ㅏ 또는 ㅗ → 았어요\nLast vowel of stem is ㅏ or ㅗ → 았어요"
+              "label": "어간의 마지막 모음이 ㅏ 또는 ㅗ → 았어요\nLast vowel of stem is ㅏ or ㅗ → 았어요",
+              "examples": [
+                "살다 → 살 + 았어요 → 살았어요",
+                "가다 → 가 + 았어요 → 갔어요",
+                "보다 → 보 + 았어요 → 봤어요"
+              ]
             },
             {
               "color": "blue",
-              "label": "그 외 (other vowels) → 었어요"
+              "label": "그 외 (other vowels) → 었어요",
+              "examples": [
+                "없다 → 없 + 었어요 → 없었어요",
+                "웃다 → 웃 + 었어요 → 웃었어요",
+                "있다 → 있 + 었어요 → 있었어요"
+              ]
             },
             {
               "color": "teal",
-              "label": "하다 → 하 + 였어요 → 했어요 (contracted)"
+              "label": "하다 → 하 + 였어요 → 했어요 (contracted)",
+              "examples": [
+                "하다 → 하 + 였어요 → 했어요"
+              ]
             },
             {
               "color": "amber",
-              "label": "ㅂ 불규칙: 덥다 → 더 + 웠어요 → 더웠어요\nㅡ 탈락: 바쁘다 → 바ㅃ + 았어요 → 바빴어요"
+              "label": "ㅂ 불규칙: 덥다 → 더 + 웠어요 → 더웠어요\nㅡ 탈락: 바쁘다 → 바ㅃ + 았어요 → 바빴어요",
+              "examples": [
+                "ㅂ 불규칙: 덥다 → 더 + (ㅂ→우) + 었어요 → 더웠어요",
+                "ㅡ 탈락: 바쁘다 → 바ㅃ (ㅡ 탈락) + 았어요 → 바빴어요"
+              ]
             }
           ],
           "conjugation_table": {
@@ -521,63 +543,83 @@
       "quiz_items": [
         {
           "id": "q09_01",
-          "type": "fill",
-          "question": "공원___ 자전거를 타요. (at)",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 조사를 고르세요.",
+          "sentence": "공원___ 자전거를 타요.",
+          "choices": [
+            "에",
+            "에서",
+            "을",
+            "와"
+          ],
           "answer": "에서",
-          "hint": "장소 + 에서 = action takes place there"
+          "explanation": "장소에서 동작이 일어날 때는 '에서'를 사용해요. (action → 에서)"
         },
         {
           "id": "q09_02",
-          "type": "conjugate",
-          "question": "과거형으로 바꾸세요: 먹다",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "먹다",
           "answer": "먹었어요",
-          "hint": "ㅓ → 었"
+          "hint": "어간 '먹' — 모음이 ㅓ → 었어요"
         },
         {
           "id": "q09_03",
-          "type": "conjugate",
-          "question": "과거형으로 바꾸세요: 가다",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "가다",
           "answer": "갔어요",
-          "hint": "ㅏ → 았, 가+았=갔"
+          "hint": "어간 '가' — ㅏ → 았어요, 가 + 았 = 갔"
         },
         {
           "id": "q09_04",
-          "type": "conjugate",
-          "question": "과거형으로 바꾸세요: 하다",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "하다",
           "answer": "했어요",
-          "hint": "하다 → 했어요 (contracted)"
+          "hint": "하다 → 하 + 였어요 → 했어요 (축약)"
         },
         {
           "id": "q09_05",
-          "type": "translate",
-          "question": "'I watched a movie at the movie theater.' 를 한국어로",
+          "type": "multiple_choice",
+          "question": "'I watched a movie at the movie theater.' 를 한국어로 고르세요.",
+          "choices": [
+            "영화관에서 영화를 봤어요.",
+            "영화관에 영화를 봤어요.",
+            "영화관에서 영화를 봐요.",
+            "영화관에 영화를 봐요."
+          ],
           "answer": "영화관에서 영화를 봤어요.",
-          "hint": "영화관 + 에서 + 영화를 보다(과거)"
+          "explanation": "동작 장소 → 에서, 과거형 → 봤어요 (보다 → 봤어요)"
         },
         {
           "id": "q09_06",
-          "type": "fill",
-          "question": "어제 날씨가 어_____어요? (어떻다 + 과거)",
-          "answer": "땠",
-          "hint": "어떻다 → 어땠어요"
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "어떻다",
+          "answer": "어땠어요",
+          "hint": "어떻다 → 어떻 + 았어요 → 어땠어요"
         },
         {
           "id": "q09_07",
-          "type": "choice",
+          "type": "multiple_choice",
           "question": "다음 중 '에서'를 써야 하는 문장은?",
-          "options": [
-            "도서관___ 책이 있어요.",
-            "도서관___ 책을 읽어요."
+          "choices": [
+            "도서관에 책이 있어요.",
+            "도서관에서 책을 읽어요.",
+            "공원에 있어요.",
+            "집에 가요."
           ],
-          "answer": 1,
-          "hint": "action → 에서, existence → 에"
+          "answer": "도서관에서 책을 읽어요.",
+          "explanation": "동작(읽다)이 일어나는 장소 → 에서. 존재(있어요)/방향(가요) → 에"
         },
         {
           "id": "q09_08",
-          "type": "conjugate",
-          "question": "과거형으로 바꾸세요: 바쁘다 (ㅡ 탈락)",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요 (ㅡ 탈락)",
+          "base": "바쁘다",
           "answer": "바빴어요",
-          "hint": "바쁘다 → ㅡ 탈락 → 바ㅃ + 았어요"
+          "hint": "바쁘다 → ㅡ 탈락 → 바ㅃ + 았어요 → 바빴어요"
         }
       ]
     },
