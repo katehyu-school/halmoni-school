@@ -527,7 +527,19 @@ ${questions}`;
 
   function buildPronunciation(pronSections) {
     if (!pronSections?.length) return '';
-    return pronSections.map(section => {
+
+    // 섹션 구분용 헤더 배너 (Usage 탭 안에서 발음 영역을 시각적으로 분리)
+    const header = `
+<div style="display:flex;align-items:center;gap:12px;margin:28px 0 16px;">
+  <div style="flex:1;height:2px;background:linear-gradient(to right,#c9730a,transparent);"></div>
+  <div style="background:#c9730a;color:#fff;font-size:0.82rem;font-weight:700;
+              padding:5px 16px;border-radius:20px;letter-spacing:0.04em;white-space:nowrap;">
+    🔊 Pronunciation — 발음
+  </div>
+  <div style="flex:1;height:2px;background:linear-gradient(to left,#c9730a,transparent);"></div>
+</div>`;
+
+    const cards = pronSections.map(section => {
       const exs = (section.examples || []).map(ex => {
         // 억양 예시
         if (ex.intonation) {
@@ -542,22 +554,24 @@ ${questions}`;
         return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;flex-wrap:wrap;">
   <div style="font-family:var(--font-serif);font-size:1rem;">${ex.written}</div>
   <div style="color:#888;">→</div>
-  <div style="font-family:var(--font-serif);font-size:1rem;color:var(--coral);font-weight:700;">${ex.pronounced}</div>
+  <div style="font-family:var(--font-serif);font-size:1rem;color:#c9730a;font-weight:700;">${ex.pronounced}</div>
   <div style="font-size:0.78rem;color:#aaa;">[${ex.romanization || ''}]</div>
   ${speakBtn(ex.pronounced, true)}
 </div>`;
       }).join('');
 
       return `
-<div class="panel-card">
-  <div class="panel-title"><span class="dot" style="background:var(--coral)"></span>${section.title}</div>
-  <div style="background:#FFF5F3;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:0.88rem;color:#8B3020;">
+<div class="panel-card" style="border-left:4px solid #c9730a;">
+  <div class="panel-title"><span class="dot" style="background:#c9730a"></span>${section.title}</div>
+  <div style="background:#FFF8F0;border:1px solid #f0c898;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:0.88rem;color:#7a4010;">
     ${section.rule_en || section.rule}
   </div>
   ${section.rule_ko ? `<div style="font-size:0.85rem;color:#555;margin-bottom:10px;">${section.rule_ko}</div>` : ''}
   ${exs}
 </div>`;
     }).join('');
+
+    return header + cards;
   }
 
   // ── Real Life 에피소드 타입별 빌더 ───────────────────────────────
@@ -597,10 +611,16 @@ ${questions}`;
   <p style="font-size:0.83rem;color:#888;margin-bottom:12px;">📍 ${scene.context || ''}</p>
   <div style="background:#F0F8FF;border-radius:12px;padding:16px;margin-bottom:16px;">
     <div style="font-size:0.82rem;color:#888;margin-bottom:10px;font-weight:600;">🔊 음성 메시지</div>
-    <button onclick="AdultRenderer._playAudio('${sceneId}')"
-      style="display:flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:0.9rem;cursor:pointer;margin-bottom:10px;">
-      ▶ 듣기 Play
-    </button>
+    <div style="display:flex;gap:8px;margin-bottom:10px;">
+      <button id="play-btn-${sceneId}" onclick="AdultRenderer._playAudio('${sceneId}')"
+        style="display:flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:0.9rem;cursor:pointer;">
+        ▶ 듣기 Play
+      </button>
+      <button id="stop-btn-${sceneId}" onclick="AdultRenderer._stopAudio('${sceneId}')"
+        style="display:flex;align-items:center;gap:6px;background:#e0e0e0;color:#555;border:none;border-radius:10px;padding:10px 16px;font-size:0.9rem;cursor:pointer;">
+        ⏹ Stop
+      </button>
+    </div>
     <div id="script-${sceneId}" style="display:none;font-family:var(--font-serif);font-size:0.95rem;line-height:1.7;color:#333;border-top:1px solid #ddd;padding-top:10px;margin-top:4px;">
       ${scene.audio_text || ''}
     </div>
@@ -726,9 +746,45 @@ ${questions}`;
   // ── Real Life 인터랙션 함수 ───────────────────────────────────────
   const _rlAnswers = {};  // sceneId → { qId: answer }
 
+  let _currentPlayingScene = null;
+
   function _playAudio(sceneId) {
+    // 이미 재생 중이면 먼저 중지
+    if (_currentPlayingScene) _stopAudio(_currentPlayingScene);
+
     const scriptEl = document.getElementById(`script-${sceneId}`);
-    if (scriptEl) speak(scriptEl.textContent.trim());
+    if (!scriptEl) return;
+    _currentPlayingScene = sceneId;
+
+    // 버튼 상태 변경
+    const playBtn = document.getElementById(`play-btn-${sceneId}`);
+    const stopBtn = document.getElementById(`stop-btn-${sceneId}`);
+    if (playBtn) { playBtn.style.background = '#888'; playBtn.disabled = true; playBtn.textContent = '🔊 재생 중...'; }
+    if (stopBtn) { stopBtn.style.background = '#c74d36'; stopBtn.style.color = '#fff'; }
+
+    // TTS 재생 — 완료 시 버튼 복원
+    const text = scriptEl.textContent.trim();
+    if (window.HalmoniCore?.speak) {
+      HalmoniCore.speak(text, { preset: 'adult', onend: () => _onAudioEnd(sceneId) });
+    } else if (window.speechSynthesis) {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ko-KR'; u.rate = 0.85;
+      u.onend = () => _onAudioEnd(sceneId);
+      speechSynthesis.speak(u);
+    }
+  }
+
+  function _stopAudio(sceneId) {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    _onAudioEnd(sceneId);
+  }
+
+  function _onAudioEnd(sceneId) {
+    _currentPlayingScene = null;
+    const playBtn = document.getElementById(`play-btn-${sceneId}`);
+    const stopBtn = document.getElementById(`stop-btn-${sceneId}`);
+    if (playBtn) { playBtn.style.background = 'var(--teal)'; playBtn.disabled = false; playBtn.innerHTML = '▶ 듣기 Play'; }
+    if (stopBtn) { stopBtn.style.background = '#e0e0e0'; stopBtn.style.color = '#555'; }
   }
 
   function _toggleScript(sceneId) {
@@ -877,17 +933,15 @@ ${questions}`;
     renderUsage,
     renderQuiz,
     renderReal,
-    // quiz 내부 함수 노출 (onclick에서 사용)
+    // onclick에서 직접 호출되는 내부 함수들
     _selectOption,
     _checkConjugation,
     _nextQuestion,
     _restartQuiz,
     _playAudio,
+    _stopAudio,
+    _onAudioEnd,
     _toggleScript,
     _rlSelectOpt,
   };
-
 })();
-
-// window에 명시적으로 등록 (onclick 핸들러에서 접근 가능하도록)
-window.AdultRenderer = AdultRenderer;
