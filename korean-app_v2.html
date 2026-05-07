@@ -2380,6 +2380,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div id="u7l-complete" style="display:none;text-align:center;padding:40px 20px;">
       <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
       <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">Listening Complete!</div>
+      <div class="u7l-score-msg" style="font-family:'Jua',sans-serif;font-size:1.3rem;color:#5B6AF0;margin:8px 0 4px;">🎯 0 / 12 점</div>
       <button onclick="restartU7L()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
     </div>
   </div>
@@ -2411,7 +2412,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div id="u7b-complete" style="display:none;text-align:center;padding:40px 20px;">
       <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
       <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">받침 마스터!</div>
-      <div style="color:var(--muted);font-size:0.95rem;">모든 받침을 완성했어요!</div>
+      <div id="u7b-score-msg" style="font-family:'Jua',sans-serif;font-size:1.3rem;color:#5B6AF0;margin:8px 0 4px;">🎯 0 / 6 점</div>
       <button onclick="restartU7B()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
     </div>
 
@@ -3964,6 +3965,27 @@ const _u7BFallback = [
   {"word":"여덟","arabic":8,"base":"여더","steps":["ㄹ","ㅂ"],"distractors":["ㄴ","ㄷ","ㅅ","ㅈ","ㅎ"]},
   {"word":"아홉","arabic":9,"base":"아호","steps":["ㅂ"],"distractors":["ㄱ","ㄴ","ㄷ","ㅍ","ㅅ"]}
 ];
+// ── fallback: 서버 없을 때 사용 ──────────────────────────────────────
+const _u7LFallbackSino = [
+  {"audio":"오",   "answer":5,  "choices":[3,5,9,2,7]},
+  {"audio":"십이", "answer":12, "choices":[2,12,20,15,8]},
+  {"audio":"팔",   "answer":8,  "choices":[6,8,4,18,3]},
+  {"audio":"이십", "answer":20, "choices":[12,20,2,15,11]},
+  {"audio":"삼",   "answer":3,  "choices":[13,3,6,9,7]},
+  {"audio":"십육", "answer":16, "choices":[6,16,14,19,11]}
+];
+const _u7LFallbackNative = [
+  {"audio":"다섯", "answer":5,  "choices":[3,5,7,9,2]},
+  {"audio":"여덟", "answer":8,  "choices":[6,8,4,10,3]},
+  {"audio":"둘",   "answer":2,  "choices":[2,4,6,8,10]},
+  {"audio":"열",   "answer":10, "choices":[7,9,10,6,8]},
+  {"audio":"아홉", "answer":9,  "choices":[7,9,6,3,5]},
+  {"audio":"일곱", "answer":7,  "choices":[5,7,9,4,6]}
+];
+
+// ── 점수 트래커 ────────────────────────────────────────────────────────
+let u7Score = { listen: 0, batchim: 0 };
+
 let u7BIdx    = 0;    // 현재 문제 인덱스 (0~5)
 let u7BStep   = 0;    // 여덟은 2단계: 0=ㄹ, 1=ㅂ
 let u7BRevealed = false;
@@ -4027,13 +4049,14 @@ function renderU7L() {
     }).join('');
   }
 
-  // 선생님 컨트롤
+  // 컨트롤: solo엔 reveal 숨기고 next만, 선생님엔 둘 다
+  const _isSoloL = !isTeacher && checkedToday.size === 0;
   const ctrl = document.getElementById('u7l-teacher-ctrl');
-  if (ctrl) ctrl.style.display = isTeacher ? 'block' : 'none';
+  if (ctrl) ctrl.style.display = 'block';
   const nb = document.getElementById('u7l-next-btn');
   if (nb) { nb.disabled=true; nb.style.background='#E8E8E8'; nb.style.color='#999'; }
   const rb = document.getElementById('u7l-reveal-btn');
-  if (rb) { rb.disabled=false; rb.style.background='#5B6AF0'; }
+  if (rb) { rb.style.display = isTeacher ? 'inline-block' : 'none'; }
 
   _u7LUpdateVoteRow();
 }
@@ -4084,6 +4107,9 @@ async function u7LVote(name, n) {
 function u7LSelfPick(n) {
   if (u7LRevealed) return;
   u7LVotes['나'] = n;
+  const allQ = u7LPhase==='sino' ? u7LData.sino : u7LData.native;
+  const q = allQ[u7LIdx];
+  if (n === q.answer) u7Score.listen++;
   u7LReveal();
 }
 
@@ -4133,7 +4159,7 @@ async function u7LReveal() {
   const rb = document.getElementById('u7l-reveal-btn');
   if (rb) { rb.disabled=true; rb.style.background='#B0B0B0'; }
   const nb = document.getElementById('u7l-next-btn');
-  if (nb) { nb.disabled=false; nb.style.background='var(--mint)'; nb.style.color='white'; }
+  if (nb) { nb.disabled=false; nb.style.background='var(--mint)'; nb.style.color='white'; nb.style.display='inline-block'; }
 
   if (isTeacher && practice?.state?.sessionId && _supabase) {
     await _supabase.from('practice_session').update({
@@ -4152,7 +4178,13 @@ async function nextU7L() {
     } else {
       // 완료
       const card=document.getElementById('u7l-card'); if(card) card.style.display='none';
-      const comp=document.getElementById('u7l-complete'); if(comp) comp.style.display='block';
+      const comp=document.getElementById('u7l-complete');
+      if(comp){
+        comp.style.display='block';
+        const _sc=comp.querySelector('.u7l-score-msg');
+        const _total=(u7LData.sino.length||6)+(u7LData.native.length||6);
+        if(_sc) _sc.textContent='🎯 '+u7Score.listen+' / '+_total+' 점';
+      }
       if (typeof launchConfetti==='function') launchConfetti();
     }
   } else {
@@ -4567,6 +4599,7 @@ function _u7BSelfStudyDrop(bc, slotIdx) {
       for (let i=0;i<u7BStep;i++){const s=document.getElementById('u7slot-'+i);if(s){s.textContent=q.steps[i];s.classList.add('filled');}}
     } else {
       // 완성!
+      u7Score.batchim++;
       setTimeout(()=>{ if(typeof launchConfetti==='function') launchConfetti(); }, 200);
       setTimeout(()=>{ u7BIdx++; if(u7BIdx>=u7BGame.length){_u7BShowComplete();}else{u7BStep=0;renderU7B();} }, 1200);
     }
@@ -4705,6 +4738,8 @@ function _u7BShowComplete() {
   const comp = document.getElementById('u7b-complete');
   if (comp) {
     comp.style.display='block';
+    const _bsc = document.getElementById('u7b-score-msg');
+    if (_bsc) _bsc.textContent = '🎯 ' + u7Score.batchim + ' / ' + u7BGame.length + ' 점';
     // 두번째 게임 버튼 추가
     if (!document.getElementById('u7b-next-game-btn')) {
       const btn = document.createElement('button');
@@ -5331,7 +5366,9 @@ async function init(){
     u3Questions = _u3QFallback;
     u4Questions = _u4QFallback;
     u5Questions = _u5QFallback;
-    if (!u7BGame.length) u7BGame = _u7BFallback;
+    if (!u7BGame.length)     u7BGame = _u7BFallback;
+    if (!u7LData.sino.length)   u7LData.sino   = _u7LFallbackSino;
+    if (!u7LData.native.length) u7LData.native = _u7LFallbackNative;
   }
   buildFlashcards('fc6-places', u6PlaceVocab, 'lav');
   buildFlashcards('fc6-verbs',  u6VerbVocab, 'green');
