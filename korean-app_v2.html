@@ -133,7 +133,54 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 #u6-snav .snav-en { display:none; }
 /* 7과: 받침 게임 */
 #u7-snav { gap:5px; }
-#u7-snav .snav-btn { font-size:0.82rem; padding:8px 12px; }
+#u7-snav .snav-btn { font-size:0.78rem; padding:7px 10px; }
+#u7-snav .snav-en { display:none; }
+.u7-sort-zone {
+  min-height: 120px;
+  border-radius: 12px;
+  border: 2.5px dashed #B0B8D8;
+  background: #FAFBFF;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-content: flex-start;
+  transition: border-color 0.2s, background 0.2s;
+}
+.u7-sort-zone.dragover { border-color: #7B93F5; background: #EEF1FF; }
+.u7-sort-card {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 2px solid #C9CDE8;
+  background: white;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.u7-sort-card:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
+.u7-sort-card.sino   { border-color: #7B93F5; color: #3D5AFE; }
+.u7-sort-card.native { border-color: var(--mint); color: var(--teal); }
+.u7-sort-card.correct { border-color: var(--mint) !important; background: var(--mint-light) !important; }
+.u7-sort-card.wrong   { border-color: var(--coral) !important; background: #FDEAE6 !important; animation: shake 0.4s; }
+.u7-listen-choice {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: 2.5px solid #C9CDE8;
+  background: white;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  min-width: 70px;
+}
+.u7-listen-choice:hover { transform: translateY(-3px); border-color: #7B93F5; }
+.u7-listen-choice.selected { border-color: #7B93F5; background: #EEF1FF; color: #3D5AFE; }
+.u7-listen-choice.correct  { border-color: var(--mint) !important; background: var(--mint-light) !important; color: var(--teal); }
+.u7-listen-choice.wrong    { border-color: var(--coral) !important; background: #FDEAE6 !important; opacity:0.55; }
 .u7-word-card { background:var(--card); border-radius:18px; box-shadow:var(--shadow); padding:30px 24px 20px; text-align:center; margin-bottom:24px; }
 .u7-syllable-wrap { display:inline-flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:18px; }
 .u7-syl-top { font-family:'Noto Sans KR',sans-serif; font-size:3.2rem; font-weight:700; color:var(--text); background:#F4F6FF; border-radius:12px 12px 0 0; padding:14px 28px 8px; line-height:1; min-width:120px; }
@@ -2225,23 +2272,52 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <nav class="section-nav" id="u7-snav">
     <button class="snav-btn active" onclick="switchSection7('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection7('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
     <button class="snav-btn" onclick="switchSection7('batchim')">🧩 받침 게임 <span class="snav-en">Game</span></button>
   </nav>
 
   <!-- ── VOCAB ── -->
   <div class="section active" id="u7-vocab">
     <div class="card">
-      <div class="section-title">📌 한자어 숫자 Sino-Korean Numbers</div>
-      <div class="section-sub">날짜, 전화번호, 주소에 사용해요</div>
-      <div id="u7-sino-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px;margin-bottom:24px;"></div>
-      <div class="section-title">📌 고유어 숫자 Native Korean Numbers</div>
-      <div class="section-sub">개수를 셀 때 사용해요</div>
-      <div id="u7-native-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;"></div>
+      <div class="section-title">📌 Sino-Korean Numbers <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">한자어 숫자</span></div>
+      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">Used for dates, phone numbers, and addresses</div>
+      <div id="u7-sino-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px;"></div>
+      <div class="section-title" style="margin-top:8px;">📌 Native Korean Numbers <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">고유어 숫자</span></div>
+      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">Used for counting objects</div>
+      <div id="u7-native-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;"></div>
     </div>
-    <div class="card">
-      <div class="section-title">📌 단위명사 Counters</div>
-      <div class="section-sub">고유어 숫자와 함께 써요</div>
-      <div id="u7-counter-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;"></div>
+  </div>
+
+  <!-- ── 듣기 ── -->
+  <div class="section" id="u7-listen">
+    <div class="u7-word-card" id="u7l-card">
+      <div class="u7-prog" id="u7l-prog">1 / 6</div>
+      <div style="margin:12px 0 6px;font-size:0.85rem;color:var(--muted);" id="u7l-type-label">Sino-Korean</div>
+      <!-- 재생 버튼 -->
+      <button onclick="u7LPlay()" id="u7l-play-btn"
+        style="background:var(--mint);color:white;border:none;border-radius:12px;padding:12px 28px;font-size:1rem;cursor:pointer;margin-bottom:18px;">
+        🔊 Play
+      </button>
+      <!-- 선택지 카드 -->
+      <div id="u7l-choices" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:16px;"></div>
+      <!-- 선생님 버튼 -->
+      <div id="u7l-teacher-ctrl" style="display:none;margin-top:12px;">
+        <button onclick="u7LReveal()" id="u7l-reveal-btn"
+          style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">
+          ✅ Check
+        </button>
+        <button onclick="nextU7L()" id="u7l-next-btn" disabled
+          style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">
+          다음 ▶
+        </button>
+      </div>
+      <!-- 학생 투표 현황 -->
+      <div class="u7-vote-row" id="u7l-vote-row"></div>
+    </div>
+    <div id="u7l-complete" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">Listening Complete!</div>
+      <button onclick="restartU7L()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
     </div>
   </div>
 
@@ -2274,6 +2350,50 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">받침 마스터!</div>
       <div style="color:var(--muted);font-size:0.95rem;">모든 받침을 완성했어요!</div>
       <button onclick="restartU7B()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+    </div>
+
+    <!-- ── 두번째 게임: 숫자 정렬 ── -->
+    <div id="u7-sort-game" style="display:none;margin-top:8px;">
+      <div class="u7-word-card">
+        <div class="u7-prog" id="u7s-prog">1 / 6</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;">Sort the cards in order in each box!</div>
+        <!-- 카드 풀 -->
+        <div id="u7s-pool" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px;min-height:56px;padding:10px;background:#F8F9FF;border-radius:12px;border:2px dashed #C9CDE8;"></div>
+        <!-- 두 드랍존 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+          <div>
+            <div style="font-size:0.8rem;color:#5B6AF0;font-weight:700;margin-bottom:6px;">한자어 순서 Sino-Korean</div>
+            <div id="u7s-sino-zone" class="u7-sort-zone"
+              ondragover="event.preventDefault();this.classList.add('dragover')"
+              ondragleave="this.classList.remove('dragover')"
+              ondrop="u7SDrop(event,'sino')"></div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem;color:var(--mint);font-weight:700;margin-bottom:6px;">고유어 순서 Native Korean</div>
+            <div id="u7s-native-zone" class="u7-sort-zone"
+              ondragover="event.preventDefault();this.classList.add('dragover')"
+              ondragleave="this.classList.remove('dragover')"
+              ondrop="u7SDrop(event,'native')"></div>
+          </div>
+        </div>
+        <!-- 선생님 컨트롤 -->
+        <div id="u7s-teacher-ctrl" style="display:none;margin-top:8px;">
+          <button onclick="u7SReveal()" id="u7s-reveal-btn"
+            style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">
+            ✅ Check
+          </button>
+          <button onclick="nextU7S()" id="u7s-next-btn" disabled
+            style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">
+            다음 ▶
+          </button>
+        </div>
+        <div class="u7-vote-row" id="u7s-nominate-row"></div>
+      </div>
+      <div id="u7s-complete" style="display:none;text-align:center;padding:40px 20px;">
+        <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+        <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);">Sort Master!</div>
+        <button onclick="restartU7S()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+      </div>
     </div>
   </div>
 
@@ -3780,13 +3900,405 @@ let u7BVotes  = {};   // { "안나": "ㄹ" }
 let u7BPlaced = {};   // { "안나": ["ㄹ","ㅂ"] } 학생이 놓은 받침
 
 function switchSection7(sec) {
+  const tabs = ['vocab','listen','batchim'];
   document.querySelectorAll('#u7-snav .snav-btn').forEach((b,i) => {
-    b.classList.toggle('active', (i===0&&sec==='vocab')||(i===1&&sec==='batchim'));
+    b.classList.toggle('active', tabs[i]===sec);
   });
   document.querySelectorAll('#unit7 .section').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('u7-' + sec);
   if (el) el.classList.add('active');
   if (sec === 'batchim') renderU7B();
+  if (sec === 'listen') renderU7L();
+}
+
+// ══════════════════════════════════════════════
+// 7과 듣기 게임
+// ══════════════════════════════════════════════
+let u7LData    = { sino: [], native: [] };
+let u7LPhase   = 'sino';   // 'sino' → 'native'
+let u7LIdx     = 0;
+let u7LRevealed = false;
+let u7LVotes   = {};       // { "이름": choiceNum }
+
+function renderU7L() {
+  const allQ = u7LPhase==='sino' ? u7LData.sino : u7LData.native;
+  if (!allQ.length) return;
+  const q = allQ[u7LIdx];
+  u7LRevealed = false;
+  u7LVotes = {};
+  const prog = document.getElementById('u7l-prog');
+  const label = document.getElementById('u7l-type-label');
+  const choicesDiv = document.getElementById('u7l-choices');
+  const card = document.getElementById('u7l-card');
+  const comp = document.getElementById('u7l-complete');
+  if (prog) prog.textContent = (u7LIdx+1) + ' / ' + allQ.length + (u7LPhase==='sino'?' (한자어)':' (고유어)');
+  if (label) label.textContent = u7LPhase==='sino' ? 'Sino-Korean 한자어' : 'Native Korean 고유어';
+  if (card) card.style.display='block';
+  if (comp) comp.style.display='none';
+
+  // 선택지: 고유어는 사과 이모지 개수, 한자어는 아라비아 숫자
+  if (choicesDiv) {
+    const choices = [...q.choices].sort(()=>Math.random()-0.5);
+    choicesDiv.innerHTML = choices.map(n => {
+      const label = u7LPhase==='sino' ? n : _apples(n);
+      return `<button class="u7-listen-choice" id="u7lc-${n}" onclick="u7LVote(${n})">${label}</button>`;
+    }).join('');
+  }
+
+  // 선생님 컨트롤
+  const ctrl = document.getElementById('u7l-teacher-ctrl');
+  if (ctrl) ctrl.style.display = isTeacher ? 'block' : 'none';
+  const nb = document.getElementById('u7l-next-btn');
+  if (nb) { nb.disabled=true; nb.style.background='#E8E8E8'; nb.style.color='#999'; }
+  const rb = document.getElementById('u7l-reveal-btn');
+  if (rb) { rb.disabled=false; rb.style.background='#5B6AF0'; }
+
+  _u7LUpdateVoteRow();
+}
+
+function _apples(n) {
+  if (n <= 10) return '🍎'.repeat(n);
+  return '🍎×' + n;
+}
+
+function u7LPlay() {
+  const allQ = u7LPhase==='sino' ? u7LData.sino : u7LData.native;
+  if (!allQ.length) return;
+  const text = allQ[u7LIdx].audio;
+  if (window.HalmoniCore?.speak) HalmoniCore.speak(text, {preset:'child'});
+  else if (window.speechSynthesis) {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang='ko-KR'; u.rate=0.85;
+    speechSynthesis.speak(u);
+  }
+}
+
+async function u7LVote(n) {
+  if (u7LRevealed) return;
+  u7LVotes[urlName || '나'] = n;
+  document.querySelectorAll('.u7-listen-choice').forEach(b => b.classList.remove('selected'));
+  const sel = document.getElementById('u7lc-'+n);
+  if (sel) sel.classList.add('selected');
+
+  if (!_isSolo && practice?.state?.sessionId && _supabase) {
+    const { data: latest } = await _supabase.from('practice_session')
+      .select('raised_hands').eq('id', practice.state.sessionId).single();
+    const currentHands = ((latest?.raised_hands)||[]).filter(h=>!h.startsWith((urlName||'나')+':'));
+    currentHands.push((urlName||'나')+':'+n);
+    await _supabase.from('practice_session').update({
+      raised_hands: currentHands, unit:7, q_index: 100+u7LIdx,
+      status:'waiting', updated_at: new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
+}
+
+function _u7LUpdateVoteRow() {
+  const row = document.getElementById('u7l-vote-row');
+  if (!row || !isTeacher) return;
+  const names = practice?.state?.players || [];
+  row.innerHTML = names.map(nm => {
+    const ans = u7LVotes[nm];
+    const label = ans !== undefined ? (u7LPhase==='sino'?ans:_apples(ans)) : nm;
+    return `<div class="u7-vote-btn ${ans!==undefined?'voted':''}" id="u7lvb-${nm.replace(/\s/g,'_')}">${ans!==undefined?nm+'✓':nm}</div>`;
+  }).join('');
+}
+
+async function u7LReveal() {
+  if (u7LRevealed) return;
+  u7LRevealed = true;
+  const allQ = u7LPhase==='sino' ? u7LData.sino : u7LData.native;
+  const q = allQ[u7LIdx];
+  const correct = q.answer;
+  const winners = [];
+
+  // 선택지 색상
+  document.querySelectorAll('.u7-listen-choice').forEach(btn => {
+    const n = parseInt(btn.id.replace('u7lc-',''));
+    if (n===correct) btn.classList.add('correct');
+    else btn.classList.add('wrong');
+  });
+
+  // 투표 결과
+  Object.entries(u7LVotes).forEach(([nm, ans]) => {
+    const btn = document.getElementById('u7lvb-'+nm.replace(/\s/g,'_'));
+    if (ans===correct) { if(btn){btn.classList.add('correct');btn.textContent='⭐ '+nm;} winners.push(nm); }
+    else { if(btn) btn.classList.add('wrong'); }
+  });
+
+  if (winners.length>0) {
+    if (typeof launchConfetti==='function') launchConfetti();
+    if (typeof showCorrectPopup==='function') showCorrectPopup(winners);
+  }
+
+  const rb = document.getElementById('u7l-reveal-btn');
+  if (rb) { rb.disabled=true; rb.style.background='#B0B0B0'; }
+  const nb = document.getElementById('u7l-next-btn');
+  if (nb) { nb.disabled=false; nb.style.background='var(--mint)'; nb.style.color='white'; }
+
+  if (isTeacher && practice?.state?.sessionId && _supabase) {
+    await _supabase.from('practice_session').update({
+      status:'correct', current_player:null, updated_at: new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
+}
+
+async function nextU7L() {
+  const allQ = u7LPhase==='sino' ? u7LData.sino : u7LData.native;
+  u7LIdx++;
+  if (u7LIdx >= allQ.length) {
+    if (u7LPhase==='sino') {
+      // 고유어로 전환
+      u7LPhase='native'; u7LIdx=0; renderU7L();
+    } else {
+      // 완료
+      const card=document.getElementById('u7l-card'); if(card) card.style.display='none';
+      const comp=document.getElementById('u7l-complete'); if(comp) comp.style.display='block';
+      if (typeof launchConfetti==='function') launchConfetti();
+    }
+  } else {
+    renderU7L();
+  }
+  if (isTeacher && practice?.state?.sessionId && _supabase) {
+    await _supabase.from('practice_session').update({
+      unit:7, q_index:100+u7LIdx, status:'waiting',
+      raised_hands:[], current_player:null, updated_at:new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
+}
+
+function restartU7L() {
+  u7LPhase='sino'; u7LIdx=0; u7LRevealed=false; u7LVotes={};
+  renderU7L();
+}
+
+// ══════════════════════════════════════════════
+// 7과 받침 게임 — 두번째: 정렬 게임
+// ══════════════════════════════════════════════
+let u7SortData  = [];
+let u7SIdx      = 0;
+let u7SRevealed = false;
+let u7SSinoDrop = [];   // 한자어 드랍존에 놓인 카드들
+let u7SNativeDrop = []; // 고유어 드랍존에 놓인 카드들
+let _u7SDragCard = null;
+
+function showSortGame() {
+  const bGame = document.getElementById('u7b-complete');
+  const sortGame = document.getElementById('u7-sort-game');
+  if (bGame) bGame.style.display='none';
+  if (sortGame) sortGame.style.display='block';
+  renderU7S();
+}
+
+function renderU7S() {
+  if (!u7SortData.length) return;
+  const q = u7SortData[u7SIdx];
+  u7SRevealed = false;
+  u7SSinoDrop = [];
+  u7SNativeDrop = [];
+
+  const prog = document.getElementById('u7s-prog');
+  if (prog) prog.textContent = (u7SIdx+1)+' / '+u7SortData.length;
+
+  // 카드 풀: 모든 카드를 섞어서
+  const sinoCards   = q.sino_pool.map(w=>({word:w, type:'sino'}));
+  const nativeCards = q.native_pool.map(w=>({word:w, type:'native'}));
+  const all = [...sinoCards, ...nativeCards].sort(()=>Math.random()-0.5);
+
+  const pool = document.getElementById('u7s-pool');
+  if (pool) pool.innerHTML = all.map(c=>`
+    <div class="u7-sort-card ${c.type}" id="u7sc-${c.word}"
+      draggable="true"
+      ondragstart="u7SDragStart(event,'${c.word}','${c.type}')"
+      ontouchstart="u7STouchStart(event,'${c.word}','${c.type}')"
+      ontouchmove="u7STouchMove(event)"
+      ontouchend="u7STouchEnd(event,'${c.type}')">
+      ${c.word}
+    </div>`).join('');
+
+  // 드랍존 초기화
+  const sz = document.getElementById('u7s-sino-zone');
+  const nz = document.getElementById('u7s-native-zone');
+  if (sz) sz.innerHTML='';
+  if (nz) nz.innerHTML='';
+
+  // 선생님 컨트롤
+  const ctrl = document.getElementById('u7s-teacher-ctrl');
+  if (ctrl) ctrl.style.display = isTeacher ? 'block' : 'none';
+  const nb = document.getElementById('u7s-next-btn');
+  if (nb) { nb.disabled=true; nb.style.background='#E8E8E8'; nb.style.color='#999'; }
+  const rb = document.getElementById('u7s-reveal-btn');
+  if (rb) { rb.disabled=false; rb.style.background='#5B6AF0'; }
+
+  // 지목 현황
+  const nom = document.getElementById('u7s-nominate-row');
+  if (nom) nom.innerHTML='';
+  document.getElementById('u7s-complete') && (document.getElementById('u7s-complete').style.display='none');
+}
+
+let _u7STouchWord=null, _u7STouchType=null, _u7STouchClone=null;
+function u7SDragStart(e, word, type) {
+  _u7SDragCard = {word, type};
+  e.dataTransfer.setData('text/plain', JSON.stringify({word,type}));
+  setTimeout(()=>{const el=document.getElementById('u7sc-'+word);if(el)el.classList.add('dragging');},0);
+}
+function u7STouchStart(e, word, type) {
+  _u7STouchWord=word; _u7STouchType=type;
+  const clone = e.currentTarget.cloneNode(true);
+  clone.style.cssText='position:fixed;z-index:9999;opacity:0.85;pointer-events:none;';
+  document.body.appendChild(clone); _u7STouchClone=clone;
+  e.preventDefault();
+}
+function u7STouchMove(e) {
+  if (!_u7STouchClone) return;
+  const t=e.touches[0];
+  _u7STouchClone.style.left=(t.clientX-30)+'px';
+  _u7STouchClone.style.top=(t.clientY-20)+'px';
+  e.preventDefault();
+}
+function u7STouchEnd(e, hintType) {
+  if (_u7STouchClone){_u7STouchClone.remove();_u7STouchClone=null;}
+  if (!_u7STouchWord) return;
+  const t=e.changedTouches[0];
+  for (const zoneId of ['u7s-sino-zone','u7s-native-zone']) {
+    const zone=document.getElementById(zoneId);
+    if (!zone) continue;
+    const r=zone.getBoundingClientRect();
+    if (t.clientX>=r.left&&t.clientX<=r.right&&t.clientY>=r.top&&t.clientY<=r.bottom) {
+      const ztype = zoneId.includes('sino')?'sino':'native';
+      u7SDrop({preventDefault:()=>{}},ztype,_u7STouchWord,_u7STouchType);
+      break;
+    }
+  }
+  _u7STouchWord=null;
+}
+
+function u7SDrop(e, zoneType, word, type) {
+  e.preventDefault();
+  const zoneEl = document.getElementById('u7s-'+(zoneType==='sino'?'sino':'native')+'-zone');
+  if (zoneEl) zoneEl.classList.remove('dragover');
+
+  // dataTransfer에서 가져오기 (드래그)
+  if (!word && e.dataTransfer) {
+    try { const d=JSON.parse(e.dataTransfer.getData('text/plain')); word=d.word; type=d.type; } catch(ex){}
+  }
+  if (!word) return;
+
+  const cardEl = document.getElementById('u7sc-'+word);
+  if (!cardEl) return;
+
+  // 풀에서 제거 후 존에 추가
+  cardEl.remove();
+
+  // 존에 새 카드 생성 (드래그 가능 — 돌려보낼 수 있도록)
+  const newCard = document.createElement('div');
+  newCard.className = 'u7-sort-card ' + type;
+  newCard.id = 'u7sc-'+word;
+  newCard.textContent = word;
+  newCard.draggable = true;
+  newCard.setAttribute('ondragstart', `u7SDragStart(event,'${word}','${type}')`);
+  newCard.setAttribute('ondblclick', `u7SReturn('${word}','${type}')`); // 더블클릭으로 풀로 돌려보내기
+  zoneEl.appendChild(newCard);
+
+  // 추적
+  if (zoneType==='sino') { u7SSinoDrop.push({word,type}); }
+  else { u7SNativeDrop.push({word,type}); }
+}
+
+function u7SReturn(word, type) {
+  // 드랍존에서 풀로 돌려보내기
+  const cardEl = document.getElementById('u7sc-'+word);
+  if (!cardEl) return;
+  const pool = document.getElementById('u7s-pool');
+  if (!pool) return;
+  cardEl.remove();
+  const newCard = document.createElement('div');
+  newCard.className = 'u7-sort-card '+type;
+  newCard.id='u7sc-'+word;
+  newCard.textContent=word;
+  newCard.draggable=true;
+  newCard.setAttribute('ondragstart',`u7SDragStart(event,'${word}','${type}')`);
+  newCard.setAttribute('ondblclick',`u7SReturn('${word}','${type}')`);
+  pool.appendChild(newCard);
+  u7SSinoDrop   = u7SSinoDrop.filter(c=>c.word!==word);
+  u7SNativeDrop = u7SNativeDrop.filter(c=>c.word!==word);
+}
+
+async function u7SReveal() {
+  if (u7SRevealed) return;
+  u7SRevealed = true;
+  const q = u7SortData[u7SIdx];
+
+  // 한자어 존 검증
+  const sinoOrdered = u7SSinoDrop.map(c=>c.word);
+  const sinoCorrect = _checkOrder(sinoOrdered, q.sino_pool);
+  // 고유어 존 검증
+  const nativeOrdered = u7SNativeDrop.map(c=>c.word);
+  const nativeCorrect = _checkOrder(nativeOrdered, q.native_pool);
+
+  const allCorrect = sinoCorrect && nativeCorrect;
+
+  // 카드 색상 처리
+  [...u7SSinoDrop,...u7SNativeDrop].forEach(c => {
+    const el = document.getElementById('u7sc-'+c.word);
+    if (!el) return;
+    const zoneCorrect = u7SSinoDrop.includes(c) ? sinoCorrect : nativeCorrect;
+    el.classList.add(zoneCorrect ? 'correct' : 'wrong');
+  });
+
+  if (allCorrect) {
+    if (typeof launchConfetti==='function') launchConfetti();
+    const player = practice?.state?.current_player;
+    if (player && typeof showCorrectPopup==='function') showCorrectPopup([player]);
+  }
+
+  const rb=document.getElementById('u7s-reveal-btn');
+  if(rb){rb.disabled=true;rb.style.background='#B0B0B0';}
+  const nb=document.getElementById('u7s-next-btn');
+  if(nb){nb.disabled=false;nb.style.background='var(--mint)';nb.style.color='white';}
+
+  if (isTeacher && practice?.state?.sessionId && _supabase) {
+    await _supabase.from('practice_session').update({
+      status: allCorrect?'correct':'wrong', current_player:null,
+      updated_at:new Date().toISOString()
+    }).eq('id', practice.state.sessionId);
+  }
+}
+
+function _checkOrder(placed, pool) {
+  // placed가 pool의 순서와 일치하는지 (일부 카드 없어도 순차면 정답)
+  const allSorted = [...pool]; // pool은 이미 정렬된 순서
+  let pi=0;
+  for (let i=0;i<placed.length;i++) {
+    while (pi<allSorted.length && allSorted[pi]!==placed[i]) pi++;
+    if (pi>=allSorted.length) return false;
+    pi++;
+  }
+  return placed.length > 0;
+}
+
+async function nextU7S() {
+  u7SIdx++;
+  if (u7SIdx >= u7SortData.length) {
+    document.querySelector('#u7-sort-game .u7-word-card').style.display='none';
+    document.getElementById('u7s-complete').style.display='block';
+    if (typeof launchConfetti==='function') launchConfetti();
+  } else {
+    renderU7S();
+    if (isTeacher && practice?.state?.sessionId && _supabase) {
+      await _supabase.from('practice_session').update({
+        unit:7, q_index:200+u7SIdx, status:'waiting',
+        raised_hands:[], current_player:null, updated_at:new Date().toISOString()
+      }).eq('id', practice.state.sessionId);
+    }
+  }
+}
+
+function restartU7S() {
+  u7SIdx=0; u7SRevealed=false;
+  document.querySelector('#u7-sort-game .u7-word-card').style.display='block';
+  document.getElementById('u7s-complete').style.display='none';
+  renderU7S();
 }
 
 // ── 렌더: 단어 카드 + 받침 풀 ──────────────────
@@ -3852,7 +4364,10 @@ function _buildSylCard(q, step) {
     }
   });
   return `
-    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;">${q.word}</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;">
+      <span style="font-size:2rem;font-weight:700;color:#5B6AF0;">${q.arabic}</span>
+      <span style="font-size:0.85rem;color:var(--muted);">→ ${q.word}</span>
+    </div>
     <div class="u7-syl-top">${q.base}</div>
     ${slots.join('')}`;
 }
@@ -4089,7 +4604,18 @@ function _u7BShowComplete() {
   const pool = document.getElementById('u7b-pool');
   if (pool) pool.style.display='none';
   const comp = document.getElementById('u7b-complete');
-  if (comp) comp.style.display='block';
+  if (comp) {
+    comp.style.display='block';
+    // 두번째 게임 버튼 추가
+    if (!document.getElementById('u7b-next-game-btn')) {
+      const btn = document.createElement('button');
+      btn.id='u7b-next-game-btn';
+      btn.textContent='⬇️ 숫자 정렬 게임으로!';
+      btn.style.cssText='margin-top:12px;background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;';
+      btn.onclick = showSortGame;
+      comp.appendChild(btn);
+    }
+  }
   if (typeof launchConfetti==='function') launchConfetti();
 }
 
@@ -4104,30 +4630,31 @@ function restartU7B() {
 function renderU7Vocab(data) {
   const sinoGrid = document.getElementById('u7-sino-grid');
   const nativeGrid = document.getElementById('u7-native-grid');
-  const counterGrid = document.getElementById('u7-counter-grid');
+  function _speak(text) {
+    if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
+    else if (window.speechSynthesis) {
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
+      speechSynthesis.speak(u);
+    }
+  }
+  window._u7Speak = _speak;
   if (sinoGrid && data.sino) {
     sinoGrid.innerHTML = data.sino.map(w => `
-      <div style="background:#F4F6FF;border-radius:12px;padding:14px;text-align:center;">
+      <div style="background:#F4F6FF;border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;" onclick="_u7Speak('${w.korean}')">
+        <div style="font-size:0.75rem;color:#B0B4D8;margin-bottom:2px;">${w.num}</div>
         <div style="font-size:1.8rem;font-weight:700;color:#3D5AFE;">${w.korean}</div>
-        <div style="font-size:0.85rem;color:var(--muted);">${w.english}</div>
-        ${w.note?`<div style="font-size:0.75rem;color:#888;margin-top:4px;">${w.note}</div>`:''}
+        <div style="font-size:0.78rem;color:var(--muted);">${w.english}</div>
+        <div style="font-size:0.8rem;margin-top:4px;">🔊</div>
       </div>`).join('');
   }
   if (nativeGrid && data.native) {
     nativeGrid.innerHTML = data.native.map(w => `
-      <div style="background:#F0FBF9;border-radius:12px;padding:14px;">
-        <div style="font-size:1.5rem;font-weight:700;color:var(--mint);">${w.korean}</div>
-        <div style="font-size:0.82rem;color:var(--muted);">${w.english}</div>
-        ${w.counter!==w.korean?`<div style="font-size:0.78rem;color:#888;margin-top:4px;">셀 때: <b>${w.counter}</b></div>`:''}
-        <div style="font-size:0.8rem;color:#666;margin-top:4px;">예) ${w.example}</div>
-      </div>`).join('');
-  }
-  if (counterGrid && data.counters) {
-    counterGrid.innerHTML = data.counters.map(c => `
-      <div style="background:#FFF8F0;border-radius:12px;padding:14px;">
-        <span style="font-size:1.3rem;font-weight:700;color:var(--amber);">${c.unit}</span>
-        <span style="font-size:0.85rem;color:var(--muted);margin-left:8px;">${c.english}</span>
-        <div style="font-size:0.8rem;color:#888;margin-top:4px;">${c.example}</div>
+      <div style="background:#F0FBF9;border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer;" onclick="_u7Speak('${w.korean}')">
+        <div style="font-size:0.75rem;color:#9DD4CC;margin-bottom:2px;">${w.num}</div>
+        <div style="font-size:1.6rem;font-weight:700;color:var(--mint);">${w.korean}</div>
+        <div style="font-size:0.78rem;color:var(--muted);">${w.english}</div>
+        <div style="font-size:0.8rem;margin-top:4px;">🔊</div>
       </div>`).join('');
   }
 }
@@ -4679,7 +5206,10 @@ async function init(){
     }
     if (d7 && d7.sections && d7.sections.practice) {
       const p7 = d7.sections.practice;
-      if (p7.batchim_game) u7BGame = p7.batchim_game;
+      if (p7.batchim_game)  u7BGame = p7.batchim_game;
+      if (p7.listen_sino)   u7LData.sino = p7.listen_sino;
+      if (p7.listen_native) u7LData.native = p7.listen_native;
+      if (p7.sort_game)     u7SortData = p7.sort_game;
     }
     if (d7 && d7.sections && d7.sections.vocab) {
       renderU7Vocab(d7.sections.vocab);
