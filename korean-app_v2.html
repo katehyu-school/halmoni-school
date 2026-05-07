@@ -4008,6 +4008,7 @@ function renderU7L() {
   if (comp) comp.style.display='none';
 
   // 선택지: 6과 구조처럼 각 카드 안에 학생 이름 버튼
+  const _isSolo = !isTeacher && checkedToday.size === 0;
   if (choicesDiv) {
     const choices = [...q.choices].sort(()=>Math.random()-0.5);
     const players = (typeof practice !== 'undefined' && practice?.state?.players) || [];
@@ -4484,6 +4485,7 @@ async function u7BDrop(e, slotIdx) {
   const bc = _u7DragBC || e.dataTransfer.getData('text/plain');
   const el = document.getElementById('u7bc-'+bc); if(el) el.classList.remove('dragging');
   if (!bc || u7BRevealed) return;
+  const _isSolo = !isTeacher && checkedToday.size === 0;
 
   // 자기 화면: 슬롯에 배치
   if (!_isSolo) {
