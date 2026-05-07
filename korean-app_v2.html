@@ -162,7 +162,7 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 }
 .u7-sort-card:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
 .u7-sort-card.sino   { border-color: #7B93F5; color: #3D5AFE; }
-.u7-sort-card.native { border-color: var(--mint); color: var(--teal); }
+.u7-sort-card.native { border-color: #7B93F5; color: #3D5AFE; }
 .u7-sort-card.correct { border-color: var(--mint) !important; background: var(--mint-light) !important; }
 .u7-sort-card.wrong   { border-color: var(--coral) !important; background: #FDEAE6 !important; animation: shake 0.4s; }
 .u7-listen-choice {
@@ -1113,6 +1113,68 @@ function applyPracticeState(session, showPopup = true) {
     const _u7panel = document.getElementById('unit7');
     const _u7active = _u7panel && (_u7panel.style.display === 'block' || _u7panel.classList.contains('active'));
     if (!_u7active) return;
+
+    // ── 정렬 게임 구간 (q_index 200+) ──────────────────────────
+    if (qIdx >= 200) {
+      const sortIdx = qIdx - 200;
+      switchSection7('batchim');
+      // 정렬 게임이 아직 안 보이면 표시
+      const _sortGameEl = document.getElementById('u7-sort-game');
+      if (_sortGameEl && _sortGameEl.style.display !== 'block') showSortGame();
+      if (sortIdx !== u7SIdx) {
+        u7SIdx = sortIdx;
+        renderU7S();
+        if (typeof launchConfetti === 'function') launchConfetti();
+      }
+      // 정답 공개 동기화 (학생 화면)
+      if (!isTeacher && session.status === 'correct' && !u7SRevealed) {
+        u7SRevealed = true;
+        if (typeof launchConfetti === 'function') launchConfetti();
+        const _sortPlayer = session.current_player || knownPlayer;
+        if (_sortPlayer && typeof showCorrectPopup === 'function') showCorrectPopup([_sortPlayer]);
+      }
+      return;
+    }
+
+    // ── 듣기 구간 (q_index 100-111) ─────────────────────────────
+    if (qIdx >= 100) {
+      const _isNative = qIdx >= 106;
+      const _listenIdx = qIdx - (_isNative ? 106 : 100);
+      // 듣기 탭으로 전환
+      const _listenEl = document.getElementById('u7-listen');
+      if (!_listenEl?.classList.contains('active')) switchSection7('listen');
+      // phase/문제 번호 동기화
+      if (u7LPhase !== (_isNative ? 'native' : 'sino') || u7LIdx !== _listenIdx) {
+        u7LPhase = _isNative ? 'native' : 'sino';
+        u7LIdx = _listenIdx;
+        renderU7L();
+      }
+      // 투표 동기화 (raised_hands: ["이름:숫자", ...])
+      const _lVotes = {};
+      (session.raised_hands || []).forEach(h => {
+        const sep = h.lastIndexOf(':');
+        if (sep > 0) _lVotes[h.slice(0, sep)] = parseInt(h.slice(sep + 1));
+      });
+      Object.entries(_lVotes).forEach(([nm, n]) => {
+        if (u7LVotes[nm] !== n) {
+          const _prev = u7LVotes[nm];
+          if (_prev !== undefined) {
+            const _pb = document.getElementById('u7lvb-' + nm.replace(/\s/g,'_') + '-' + _prev);
+            if (_pb) { _pb.style.background='white'; _pb.style.borderColor='#DDD'; _pb.style.color='var(--text)'; }
+          }
+          u7LVotes[nm] = n;
+          const _vb = document.getElementById('u7lvb-' + nm.replace(/\s/g,'_') + '-' + n);
+          if (_vb) { _vb.style.background='#EEF1FF'; _vb.style.borderColor='#7B93F5'; _vb.style.color='#3D5AFE'; }
+        }
+      });
+      // 정답 공개 동기화 (학생 화면)
+      if (!isTeacher && session.status === 'correct' && !u7LRevealed) {
+        u7LReveal();
+      }
+      return;
+    }
+
+    // ── 받침 게임 구간 (q_index 0-5) ─────────────────────────────
     // raised_hands 동기화: 학생 투표 반영
     (hands).forEach(h => {
       const sep = h.indexOf(':');
@@ -4012,7 +4074,7 @@ async function u7LVote(name, n) {
     const currentHands = ((latest?.raised_hands)||[]).filter(h=>!h.startsWith(name+':'));
     currentHands.push(name+':'+n);
     await _supabase.from('practice_session').update({
-      raised_hands: currentHands, unit:7, q_index: 100+u7LIdx,
+      raised_hands: currentHands, unit:7, q_index: (u7LPhase==='sino' ? 100 : 106)+u7LIdx,
       status:'waiting', updated_at: new Date().toISOString()
     }).eq('id', practice.state.sessionId);
   }
@@ -4097,7 +4159,7 @@ async function nextU7L() {
   }
   if (isTeacher && practice?.state?.sessionId && _supabase) {
     await _supabase.from('practice_session').update({
-      unit:7, q_index:100+u7LIdx, status:'waiting',
+      unit:7, q_index:(u7LPhase==='sino' ? 100 : 106)+u7LIdx, status:'waiting',
       raised_hands:[], current_player:null, updated_at:new Date().toISOString()
     }).eq('id', practice.state.sessionId);
   }
