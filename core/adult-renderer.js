@@ -638,12 +638,6 @@ ${questions}`;
   <div style="font-weight:700;font-size:0.9rem;color:var(--blue);margin-bottom:4px;">✏️ 질문에 답하세요</div>
   ${qs}
   ${_tipBox(scene.tip)}
-  <div style="margin-top:14px;text-align:right;">
-    <button onclick="AdultRenderer._stopAudio('${sceneId}')"
-      style="font-size:0.82rem;color:#888;background:#f0f0f0;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;">
-      ⏹ Stop
-    </button>
-  </div>
 </div>`;
   }
 
@@ -676,10 +670,16 @@ ${questions}`;
   <p style="font-size:0.83rem;color:#888;margin-bottom:12px;">📍 ${scene.context || ''}</p>
   <div style="background:#F8FAFC;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:16px;font-family:var(--font-serif);font-size:0.97rem;line-height:1.8;color:#333;">
     ${scene.passage || ''}
-    <button onclick="speak('${(scene.passage||'').replace(/'/g,"\'")}');"
-      style="display:block;margin-top:10px;font-size:0.78rem;color:#888;background:none;border:1px solid #ddd;border-radius:6px;padding:3px 10px;cursor:pointer;">
-      🔊 읽어 주기
-    </button>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:10px;">
+      <button onclick="speak('${(scene.passage||'').replace(/'/g,"\'")}');"
+        style="font-size:0.78rem;color:#888;background:none;border:1px solid #ddd;border-radius:6px;padding:3px 10px;cursor:pointer;">
+        🔊 읽어 주기
+      </button>
+      <button onclick="window.speechSynthesis?.cancel();"
+        style="font-size:0.78rem;color:#888;background:#f0f0f0;border:none;border-radius:6px;padding:3px 10px;cursor:pointer;">
+        ⏹ Stop
+      </button>
+    </div>
   </div>
   <div style="font-weight:700;font-size:0.9rem;color:var(--blue);margin-bottom:4px;">✏️ 질문에 답하세요</div>
   ${qs}
