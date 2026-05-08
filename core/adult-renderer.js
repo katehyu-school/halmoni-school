@@ -638,6 +638,12 @@ ${questions}`;
   <div style="font-weight:700;font-size:0.9rem;color:var(--blue);margin-bottom:4px;">✏️ 질문에 답하세요</div>
   ${qs}
   ${_tipBox(scene.tip)}
+  <div style="margin-top:14px;text-align:right;">
+    <button onclick="AdultRenderer._stopAudio('${sceneId}')"
+      style="font-size:0.82rem;color:#888;background:#f0f0f0;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;">
+      ⏹ Stop
+    </button>
+  </div>
 </div>`;
   }
 
