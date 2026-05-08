@@ -93,17 +93,17 @@ body {
 .arrow-down { font-size: 14px; color: var(--muted); line-height: 1; }
 
 /* S3 — Three classes */
-.s3 { background: var(--light); display: flex; flex-direction: column; align-items:center; padding: 44px 40px 28px; }
-.s3-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; width: 100%; margin-top: 30px; flex: 1; }
-.class-card { border-radius: 18px; padding: 20px 14px; text-align:center; color: white; display:flex; flex-direction:column; align-items:center; box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+.s3 { background: var(--light); display: flex; flex-direction: column; align-items:center; padding: 60px 40px 28px; }
+.s3-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; width: 100%; margin-top: 28px; }
+.class-card { border-radius: 18px; padding: 16px 12px; text-align:center; color: white; display:flex; flex-direction:column; align-items:center; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
 .class-card.c-gold  { background: #c9902a; color: #3d2a1a; }
 .class-card.c-elem  { background: #c4a8d4; color: #3d2a1a; }
 .class-card.c-adult { background: #c8d8e8; color: #3d2a1a; }
-.class-emoji { font-size: 38px; margin-bottom: 8px; }
-.class-name { font-size: 22px; font-weight: 900; margin-bottom: 3px; }
-.class-en { font-size: 12px; font-style: italic; opacity: 0.8; margin-bottom: 12px; }
-.class-divider { width: 50%; height: 2px; background: currentColor; opacity: 0.25; margin-bottom: 12px; }
-.class-desc { font-size: 12px; line-height: 1.7; opacity: 0.9; }
+.class-emoji { font-size: 30px; margin-bottom: 6px; }
+.class-name { font-size: 16px; font-weight: 900; margin-bottom: 2px; }
+.class-en { font-size: 9px; font-style: italic; opacity: 0.8; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.class-divider { width: 50%; height: 2px; background: currentColor; opacity: 0.25; margin-bottom: 8px; }
+.class-desc { font-size: 11px; line-height: 1.6; opacity: 0.9; }
 
 /* S4 — Built with AI */
 .s4 { background: white; display: flex; flex-direction: column; padding: 32px 44px 28px; }
@@ -170,6 +170,16 @@ body {
 .s9-badges { display:flex; gap:12px; margin-bottom:16px; }
 .s9-badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight:700; }
 .s9-footer { font-size: 11px; color: var(--muted); }
+
+/* Tiger mascot */
+.tiger-mascot {
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.30);
+  border: 3px solid rgba(255,255,255,0.25);
+}
+.tiger-sm { width: 72px; height: 72px; margin-bottom: 10px; }
+.tiger-lg { width: 110px; height: 110px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -180,7 +190,7 @@ body {
   <div class="slide s1 active" id="s1">
     <div class="blob1"></div>
     <div class="blob2"></div>
-    <div class="big-emoji">🏫</div>
+    <img src="tiger.png" class="tiger-mascot tiger-sm" alt="할머니 학교 마스코트">
     <h1>할머니 학교</h1>
     <div class="en-title">Halmoni School</div>
     <div class="tagline-ko">AI로 만드는 우리 가족 한국어 학교</div>
@@ -449,7 +459,7 @@ body {
   <div class="slide s9" id="s9">
     <div class="blob1"></div>
     <div class="blob2"></div>
-    <div class="s9-emoji">🏫</div>
+    <img src="tiger.png" class="tiger-mascot tiger-lg" alt="할머니 학교 마스코트">
     <div class="s9-title">할머니 학교는 계속됩니다</div>
     <div class="s9-en">Halmoni School — Ongoing, Growing, Loved</div>
     <div class="quote-box">
