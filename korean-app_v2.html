@@ -1329,9 +1329,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">7과</span>
     <span class="lesson-title-text">하나, 둘, 셋, 넷</span>
   </div>
-  <div class="lesson-item locked">
+  <div class="lesson-item" id="lesson-8" onclick="switchUnit(8)">
     <span class="lesson-num">8과</span>
-    <div><span class="lesson-title-text">저는 여섯 살이에요</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+    <span class="lesson-title-text">저는 여섯 살이에요</span>
   </div>
   <div class="lesson-item locked">
     <span class="lesson-num">9과</span>
@@ -2368,6 +2368,97 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 </div><!-- /unit7 -->
 
+<div class="unit" id="unit8">
+  <div class="unit-heading">
+    <span class="unit-num">8</span>
+    <span class="unit-title">저는 여섯 살이에요</span>
+  </div>
+  <nav class="section-nav" id="u8-snav">
+    <button class="snav-btn active" onclick="switchSection8('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection8('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection8('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
+    <button class="snav-btn" onclick="switchSection8('batchim')">🧩 받침 <span class="snav-en">Game</span></button>
+  </nav>
+
+  <!-- ── VOCAB ── -->
+  <div class="section active" id="u8-vocab">
+    <div class="card">
+      <div class="section-title">📌 단위명사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Counting Words</span></div>
+      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">In Korean, the counting word changes depending on what you count!</div>
+      <div id="u8-counter-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:16px;"></div>
+    </div>
+    <div class="card" style="margin-top:12px;">
+      <div class="section-title" style="margin-bottom:4px;">🔄 숫자가 바뀌어요! <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Number Form Changes</span></div>
+      <div class="section-sub" style="margin-bottom:12px;font-family:'Nanum Gothic',sans-serif;">하나 둘 셋 넷 change their form before a counter</div>
+      <div id="u8-form-table" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;"></div>
+    </div>
+  </div>
+
+  <!-- ── GRAMMAR ── -->
+  <div class="section" id="u8-grammar">
+    <div class="card" id="u8-grammar-content"></div>
+  </div>
+
+  <!-- ── 듣기 ── -->
+  <div class="section" id="u8-listen">
+    <div class="u7-word-card" id="u8l-card">
+      <div class="u7-prog" id="u8l-prog">1 / 7</div>
+      <div style="margin:12px 0 6px;font-size:0.85rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">What counter do you hear?</div>
+      <button onclick="u8LPlay()" style="background:var(--mint);color:white;border:none;border-radius:12px;padding:12px 28px;font-size:1rem;cursor:pointer;margin-bottom:18px;">🔊 Play</button>
+      <div id="u8l-choices" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:16px;"></div>
+      <div id="u8l-teacher-ctrl" style="margin-top:12px;">
+        <button onclick="u8LReveal()" id="u8l-reveal-btn" style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">✅ Check</button>
+        <button onclick="nextU8L()" id="u8l-next-btn" disabled style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">다음 ▶</button>
+      </div>
+    </div>
+    <div id="u8l-complete" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">Listening Complete!</div>
+      <div id="u8l-score-msg" style="font-family:'Jua',sans-serif;font-size:1.3rem;color:#5B6AF0;margin:8px 0 4px;">🎯 0 / 7 점</div>
+      <button onclick="restartU8L()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+    </div>
+  </div>
+
+  <!-- ── 받침 + 문장 만들기 ── -->
+  <div class="section" id="u8-batchim">
+    <div class="u7-word-card">
+      <div class="u7-prog" id="u8b-prog">1 / 6</div>
+      <div class="u7-syllable-wrap" id="u8b-syl-wrap"></div>
+      <div id="u8b-teacher-ctrl" style="margin-top:12px;">
+        <button onclick="u8BReveal()" id="u8b-reveal-btn" style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">✅ 정답 공개</button>
+        <button onclick="nextU8B()" id="u8b-next-btn" disabled style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">다음 ▶</button>
+      </div>
+    </div>
+    <div class="u7-batchim-pool" id="u8b-pool"></div>
+    <div id="u8b-complete" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">받침 마스터!</div>
+      <div id="u8b-score-msg" style="font-family:'Jua',sans-serif;font-size:1.3rem;color:#5B6AF0;margin:8px 0 4px;">🎯 0 / 6 점</div>
+      <button onclick="restartU8B()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+    </div>
+    <!-- 문장 만들기 게임 -->
+    <div id="u8-sort-game" style="display:none;margin-top:8px;">
+      <div class="u7-word-card">
+        <div class="u7-prog" id="u8s-prog">1 / 7</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;font-family:'Nanum Gothic',sans-serif;">단어 카드를 순서대로 클릭해서 문장을 만들어요!</div>
+        <div id="u8s-answer-zone" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;min-height:52px;padding:10px;background:#F8F9FF;border-radius:12px;border:2px dashed #C9CDE8;margin-bottom:14px;"></div>
+        <div id="u8s-pool" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px;"></div>
+        <div style="margin-top:8px;">
+          <button onclick="u8SCheck()" id="u8s-check-btn" style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">✅ Check</button>
+          <button onclick="nextU8S()" id="u8s-next-btn" disabled style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">다음 ▶</button>
+        </div>
+      </div>
+      <div id="u8s-complete" style="display:none;text-align:center;padding:40px 20px;">
+        <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+        <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);">문장 마스터!</div>
+        <div id="u8s-score-msg" style="font-size:1.1rem;color:#5B6AF0;font-weight:700;margin-top:8px;"></div>
+        <button onclick="restartU8S()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /unit8 -->
+
 
 </main>
 </div>
@@ -2629,13 +2720,14 @@ function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
   // 사이드바 lesson-item 활성화
-  [1,2,3,4,5,6,7].forEach(i=>{
+  [1,2,3,4,5,6,7,8].forEach(i=>{
     const el = document.getElementById('lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
   document.getElementById('unit'+n).classList.add('active');
   if (n === 6) { switchSection6('vocab'); }
   else if (n === 7) { switchSection7('vocab'); }
+  else if (n === 8) { switchSection8('vocab'); }
   else { switchSection(n, 'vocab'); }
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
@@ -5177,9 +5269,446 @@ function nextU6() {
 // ══════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════════════════════
+// UNIT 8 — 저는 여섯 살이에요 (단위명사)
+// ══════════════════════════════════════════════════════════
+
+let u8Data   = null;
+let u8Score  = { listen: 0, batchim: 0, sort: 0 };
+
+function switchSection8(sec) {
+  const tabs = ['vocab','grammar','listen','batchim'];
+  document.querySelectorAll('#u8-snav .snav-btn').forEach((b,i) => {
+    b.classList.toggle('active', tabs[i]===sec);
+  });
+  document.querySelectorAll('#unit8 .section').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('u8-' + sec);
+  if (el) el.classList.add('active');
+  if (sec === 'batchim') renderU8B();
+  if (sec === 'listen')  renderU8L();
+}
+
+function renderU8Vocab(data) {
+  function _speak(text) {
+    if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
+    else if (window.speechSynthesis) {
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
+      speechSynthesis.speak(u);
+    }
+  }
+  window._u8Speak = _speak;
+  const grid = document.getElementById('u8-counter-grid');
+  if (grid && data.counters) {
+    grid.innerHTML = data.counters.map(c => `
+      <div onclick="_u8Speak('${c.phrase}')"
+        style="background:#F4F6FF;border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:transform 0.15s;"
+        onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">
+        <div style="font-size:2.4rem;margin-bottom:4px;">${c.emoji}</div>
+        <div style="font-size:1rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;margin-bottom:2px;">${c.noun}</div>
+        <div style="font-size:1.5rem;font-weight:900;color:#3D5AFE;">${c.phrase}</div>
+        <div style="font-size:0.75rem;color:#7B93F5;margin-top:2px;font-family:'Nanum Gothic',sans-serif;">${c.counter_en}</div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;font-family:'Nanum Gothic',sans-serif;">${c.example_en}</div>
+        <div style="font-size:0.85rem;margin-top:6px;color:var(--teal);">🔊</div>
+      </div>`).join('');
+  }
+  const tbl = document.getElementById('u8-form-table');
+  if (tbl && data.counters) {
+    tbl.innerHTML = data.counters.map(c => `
+      <div style="background:#FFF;border-radius:10px;padding:8px 4px;border:1.5px solid ${c.changes?'#FFCDD2':'#C8E6C9'};">
+        <div style="font-size:0.78rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">${c.number}</div>
+        <div style="font-size:0.65rem;color:var(--muted);">↓</div>
+        <div style="font-size:1.1rem;font-weight:900;color:${c.changes?'#FF5252':'#4CAF50'};">${c.number_form}</div>
+        ${c.changes ? '<div style="font-size:0.6rem;color:#FF5252;margin-top:2px;">변해요!</div>' : '<div style="font-size:0.6rem;color:#4CAF50;margin-top:2px;">그대로</div>'}
+      </div>`).join('');
+  }
+}
+
+function renderU8Grammar(g) {
+  const panel = document.getElementById('u8-grammar-content');
+  if (!panel || !g) return;
+  const colorMap = {red:'#FF5252',blue:'#2196F3',green:'#4CAF50',amber:'#FFA726'};
+  const bgMap    = {red:'#FFF8F8',blue:'#F0F7FF',green:'#F1FFF5',amber:'#FFF8EF'};
+  let html = `<div class="section-title">${g.title} <span style="font-size:0.85rem;font-family:'Nanum Gothic',sans-serif;color:var(--muted);">${g.title_en}</span></div>`;
+  html += `<div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;margin-bottom:16px;">${g.explanation}<br><span style="color:var(--muted);font-size:0.88rem;">${g.explanation_en}</span></div>`;
+  for (const rb of g.rule_boxes) {
+    const c = colorMap[rb.color]||'#555';
+    const bg = bgMap[rb.color]||'#F9F9F9';
+    html += `<div style="border-left:4px solid ${c};background:${bg};border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;">
+      <div style="font-weight:700;color:${c};margin-bottom:6px;font-family:'Nanum Gothic',sans-serif;">${rb.label}</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;font-family:'Nanum Gothic',sans-serif;">${rb.label_en}</div>
+      <ul style="margin:0;padding-left:18px;">
+        ${rb.examples.map(ex=>`<li style="font-size:0.9rem;margin-bottom:4px;font-family:'Nanum Gothic',sans-serif;">${ex}</li>`).join('')}
+      </ul>
+    </div>`;
+  }
+  panel.innerHTML = html;
+}
+
+// ── 듣기 게임 ──────────────────────────────────────────
+let u8ListenQ   = [];
+let u8LIdx      = 0;
+let u8LRevealed = false;
+
+function renderU8L() {
+  if (!u8ListenQ.length) return;
+  const q = u8ListenQ[u8LIdx];
+  u8LRevealed = false;
+  const prog = document.getElementById('u8l-prog');
+  const choicesDiv = document.getElementById('u8l-choices');
+  const card = document.getElementById('u8l-card');
+  const comp = document.getElementById('u8l-complete');
+  if (prog) prog.textContent = (u8LIdx+1) + ' / ' + u8ListenQ.length;
+  if (card) card.style.display = 'block';
+  if (comp) comp.style.display = 'none';
+  if (choicesDiv) {
+    const choices = [...q.choices].sort(()=>Math.random()-0.5);
+    choicesDiv.innerHTML = choices.map(ch => `
+      <div class="u7-listen-card" id="u8lcard-${ch}"
+        style="border:2.5px solid #C9CDE8;border-radius:14px;padding:16px 20px;background:white;cursor:pointer;min-width:80px;text-align:center;transition:border-color 0.2s;"
+        onclick="u8LSelfPick('${ch}')">
+        <span style="font-size:1.4rem;font-weight:900;color:#3D5AFE;">${ch}</span>
+      </div>`).join('');
+  }
+  const nb = document.getElementById('u8l-next-btn');
+  if (nb) { nb.disabled=true; nb.style.background='#E8E8E8'; nb.style.color='#999'; }
+  const rb = document.getElementById('u8l-reveal-btn');
+  if (rb) rb.style.display = 'none';
+}
+
+function u8LPlay() {
+  if (!u8ListenQ.length) return;
+  const text = u8ListenQ[u8LIdx].audio;
+  if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
+  else if (window.speechSynthesis) {
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
+    speechSynthesis.speak(u);
+  }
+}
+
+function u8LSelfPick(ch) {
+  if (u8LRevealed) return;
+  u8LRevealed = true;
+  const q = u8ListenQ[u8LIdx];
+  q.choices.forEach(c => {
+    const card = document.getElementById('u8lcard-'+c);
+    if (!card) return;
+    if (c===q.answer) { card.style.borderColor='var(--mint)'; card.style.background='#E8FFF8'; }
+    else { card.style.opacity='0.4'; card.style.borderColor='#EEE'; }
+  });
+  if (ch===q.answer) {
+    u8Score.listen++;
+    if(typeof launchConfetti==='function') launchConfetti();
+  }
+  const nb = document.getElementById('u8l-next-btn');
+  if (nb) { nb.disabled=false; nb.style.background='var(--mint)'; nb.style.color='white'; }
+}
+
+function u8LReveal() { u8LSelfPick(null); }
+
+function nextU8L() {
+  u8LIdx++;
+  if (u8LIdx >= u8ListenQ.length) {
+    const card=document.getElementById('u8l-card'); if(card) card.style.display='none';
+    const comp=document.getElementById('u8l-complete');
+    if(comp) {
+      comp.style.display='block';
+      const sc=document.getElementById('u8l-score-msg');
+      if(sc) sc.textContent='🎯 '+u8Score.listen+' / '+u8ListenQ.length+' 점';
+    }
+    if(typeof launchConfetti==='function') launchConfetti();
+  } else {
+    renderU8L();
+  }
+}
+
+function restartU8L() {
+  u8LIdx=0; u8LRevealed=false; u8Score.listen=0;
+  renderU8L();
+}
+
+// ── 받침 게임 ──────────────────────────────────────────
+let u8BGame    = [];
+let u8BIdx     = 0;
+let u8BStep    = 0;
+let u8BRevealed= false;
+let u8BPlaced  = {};
+
+function renderU8B() {
+  if (!u8BGame.length) return;
+  const q = u8BGame[u8BIdx];
+  const wrap    = document.getElementById('u8b-syl-wrap');
+  const pool    = document.getElementById('u8b-pool');
+  const prog    = document.getElementById('u8b-prog');
+  const complete= document.getElementById('u8b-complete');
+  const card    = document.querySelector('#u8-batchim .u7-word-card');
+  if (!wrap || !pool) return;
+  u8BRevealed=false; u8BPlaced={}; u8BStep=0;
+  if(complete) complete.style.display='none';
+  if(card) card.style.display='block';
+  if(prog) prog.textContent=(u8BIdx+1)+' / '+u8BGame.length;
+  const ctrl=document.getElementById('u8b-teacher-ctrl');
+  if(ctrl) ctrl.style.display='block';
+  const nb=document.getElementById('u8b-next-btn');
+  if(nb){nb.disabled=true;nb.style.background='#E8E8E8';nb.style.color='#999';}
+  const rb=document.getElementById('u8b-reveal-btn');
+  if(rb){rb.disabled=false;rb.style.background='#5B6AF0';}
+  wrap.innerHTML = _buildSylCard8(q, 0);
+  const all=[...q.steps,...q.distractors];
+  for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
+  pool.innerHTML = all.map(bc=>`
+    <div class="u7-bc-card" id="u8bc-${bc}"
+      draggable="true"
+      ondragstart="u8BDragStart(event,'${bc}')"
+      ontouchstart="u8BTouchStart(event,'${bc}')"
+      ontouchmove="u8BTouchMove(event)"
+      ontouchend="u8BTouchEnd(event)">
+      ${bc}
+    </div>`).join('');
+}
+
+function _buildSylCard8(q, step) {
+  const slots = q.steps.map((bc,i) => {
+    if (i < step) {
+      return `<div class="u7-syl-slot filled" id="u8slot-${i}">${bc}</div>`;
+    } else if (i === step) {
+      return `<div class="u7-syl-slot" id="u8slot-${i}"
+        ondragover="event.preventDefault();this.classList.add('dragover')"
+        ondragleave="this.classList.remove('dragover')"
+        ondrop="u8BDrop(event,${i})">?</div>`;
+    } else {
+      return `<div class="u7-syl-slot" id="u8slot-${i}" style="border-color:#DDE">?</div>`;
+    }
+  });
+  return `
+    <div style="margin-bottom:10px;">
+      <span style="font-size:2.2rem;font-weight:900;color:#5B6AF0;">${q.word}</span>
+    </div>
+    <div class="u7-syl-top">${q.base}</div>
+    ${slots.join('')}`;
+}
+
+let _u8DragBC=null;
+function u8BDragStart(e,bc){
+  _u8DragBC=bc;
+  e.dataTransfer.setData('text/plain',bc);
+  setTimeout(()=>{const el=document.getElementById('u8bc-'+bc);if(el)el.classList.add('dragging');},0);
+}
+async function u8BDrop(e,slotIdx){
+  e.preventDefault();
+  const slot=document.getElementById('u8slot-'+slotIdx);
+  if(slot) slot.classList.remove('dragover');
+  const bc=_u8DragBC||e.dataTransfer.getData('text/plain');
+  const el=document.getElementById('u8bc-'+bc);if(el)el.classList.remove('dragging');
+  if(!bc||u8BRevealed) return;
+  _u8BSelfStudyDrop(bc,slotIdx);
+}
+function _u8BSelfStudyDrop(bc,slotIdx){
+  const q=u8BGame[u8BIdx];
+  const slot=document.getElementById('u8slot-'+slotIdx);
+  const bcEl=document.getElementById('u8bc-'+bc);
+  if(bc===q.steps[slotIdx]){
+    if(slot){slot.textContent=bc;slot.classList.add('filled');}
+    if(bcEl) bcEl.classList.add('used');
+    if(slotIdx+1<q.steps.length){
+      u8BStep=slotIdx+1;
+      const wrap=document.getElementById('u8b-syl-wrap');
+      if(wrap) wrap.innerHTML=_buildSylCard8(q,u8BStep);
+      for(let i=0;i<u8BStep;i++){const s=document.getElementById('u8slot-'+i);if(s){s.textContent=q.steps[i];s.classList.add('filled');}}
+    } else {
+      u8Score.batchim++;
+      if(typeof launchConfetti==='function') launchConfetti();
+      const nb=document.getElementById('u8b-next-btn');
+      if(nb){nb.disabled=false;nb.style.background='var(--mint)';nb.style.color='white';}
+    }
+  } else {
+    if(slot){slot.textContent='✗';slot.classList.add('wrong');setTimeout(()=>{slot.textContent='?';slot.classList.remove('wrong');},700);}
+    if(bcEl){bcEl.style.animation='shake 0.4s';setTimeout(()=>bcEl.style.animation='',500);}
+  }
+}
+let _u8TouchBC=null,_u8TouchClone=null;
+function u8BTouchStart(e,bc){
+  _u8TouchBC=bc;
+  const clone=e.currentTarget.cloneNode(true);
+  clone.style.cssText='position:fixed;z-index:9999;opacity:0.85;pointer-events:none;font-size:1.6rem;padding:10px 18px;border-radius:12px;background:#EEF1FF;border:2px solid #7B93F5;';
+  document.body.appendChild(clone);_u8TouchClone=clone;
+  e.preventDefault();
+}
+function u8BTouchMove(e){
+  if(!_u8TouchClone) return;
+  const t=e.touches[0];
+  _u8TouchClone.style.left=(t.clientX-30)+'px';
+  _u8TouchClone.style.top=(t.clientY-30)+'px';
+  e.preventDefault();
+}
+function u8BTouchEnd(e){
+  if(_u8TouchClone){_u8TouchClone.remove();_u8TouchClone=null;}
+  if(!_u8TouchBC) return;
+  const t=e.changedTouches[0];
+  const q=u8BGame[u8BIdx];
+  for(let i=0;i<q.steps.length;i++){
+    const slot=document.getElementById('u8slot-'+i);
+    if(!slot) continue;
+    const r=slot.getBoundingClientRect();
+    if(t.clientX>=r.left&&t.clientX<=r.right&&t.clientY>=r.top&&t.clientY<=r.bottom){
+      u8BDrop({preventDefault:()=>{},dataTransfer:{getData:()=>_u8TouchBC}},i);
+      break;
+    }
+  }
+  _u8TouchBC=null;
+}
+async function u8BReveal(){
+  if(u8BRevealed) return;
+  u8BRevealed=true;
+  const q=u8BGame[u8BIdx];
+  q.steps.forEach((bc,i)=>{
+    const slot=document.getElementById('u8slot-'+i);
+    if(slot){slot.textContent=bc;slot.classList.add('correct');slot.classList.remove('filled','wrong');}
+    const el=document.getElementById('u8bc-'+bc);
+    if(el){el.classList.add('correct');el.classList.remove('used');}
+  });
+  const rb=document.getElementById('u8b-reveal-btn');
+  if(rb){rb.disabled=true;rb.style.background='#B0B0B0';}
+  const nb=document.getElementById('u8b-next-btn');
+  if(nb){nb.disabled=false;nb.style.background='var(--mint)';nb.style.color='white';}
+}
+async function nextU8B(){
+  u8BIdx++; u8BStep=0;
+  if(u8BIdx>=u8BGame.length){ _u8BShowComplete(); } else { renderU8B(); }
+}
+function _u8BShowComplete(){
+  const card=document.querySelector('#u8-batchim .u7-word-card');
+  if(card) card.style.display='none';
+  const pool=document.getElementById('u8b-pool');
+  if(pool) pool.style.display='none';
+  const comp=document.getElementById('u8b-complete');
+  if(comp){
+    comp.style.display='block';
+    const sc=document.getElementById('u8b-score-msg');
+    if(sc) sc.textContent='🎯 '+u8Score.batchim+' / '+u8BGame.length+' 점';
+    if(!document.getElementById('u8b-next-game-btn')){
+      const btn=document.createElement('button');
+      btn.id='u8b-next-game-btn';
+      btn.textContent='⬇️ 문장 만들기 게임으로!';
+      btn.style.cssText='margin-top:12px;background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;';
+      btn.onclick=showSortGame8;
+      comp.appendChild(btn);
+    }
+  }
+  if(typeof launchConfetti==='function') launchConfetti();
+}
+function restartU8B(){
+  u8BIdx=0;u8BStep=0;u8BRevealed=false;u8BPlaced={};
+  const pool=document.getElementById('u8b-pool');
+  if(pool) pool.style.display='flex';
+  renderU8B();
+}
+
+// ── 문장 만들기 게임 ──────────────────────────────────
+let u8SortData = [];
+let u8SIdx     = 0;
+let u8SAnswer  = [];
+
+function showSortGame8(){
+  const comp=document.getElementById('u8b-complete');
+  const sg=document.getElementById('u8-sort-game');
+  if(comp) comp.style.display='none';
+  if(sg)   sg.style.display='block';
+  renderU8S();
+}
+function renderU8S(){
+  if(!u8SortData.length) return;
+  const q=u8SortData[u8SIdx];
+  u8SAnswer=[];
+  const prog=document.getElementById('u8s-prog');
+  if(prog) prog.textContent=(u8SIdx+1)+' / '+u8SortData.length;
+  const az=document.getElementById('u8s-answer-zone');
+  if(az) az.innerHTML='';
+  const all=[...q.answer,...q.distractors].sort(()=>Math.random()-0.5);
+  const pool=document.getElementById('u8s-pool');
+  if(pool) pool.innerHTML=all.map(w=>`
+    <div class="u7-sort-card sino" id="u8sc-${w}"
+      style="cursor:pointer;" onclick="u8SPickCard('${w}')">
+      ${w}
+    </div>`).join('');
+  const nb=document.getElementById('u8s-next-btn');
+  if(nb){nb.disabled=true;nb.style.background='#E8E8E8';nb.style.color='#999';}
+  const cb=document.getElementById('u8s-check-btn');
+  if(cb){cb.disabled=false;cb.style.background='#5B6AF0';}
+  const comp=document.getElementById('u8s-complete');
+  if(comp) comp.style.display='none';
+  const wc=document.querySelector('#u8-sort-game .u7-word-card');
+  if(wc) wc.style.display='block';
+}
+function u8SPickCard(w){
+  const card=document.getElementById('u8sc-'+w);
+  if(!card||card.classList.contains('used')) return;
+  card.classList.add('used');
+  u8SAnswer.push(w);
+  const az=document.getElementById('u8s-answer-zone');
+  if(az){
+    const chip=document.createElement('div');
+    chip.className='u7-sort-card sino';
+    chip.id='u8ac-'+w;
+    chip.textContent=w;
+    chip.style.cursor='pointer';
+    chip.onclick=()=>u8SReturnCard(w);
+    az.appendChild(chip);
+  }
+}
+function u8SReturnCard(w){
+  const chip=document.getElementById('u8ac-'+w);
+  if(chip) chip.remove();
+  u8SAnswer=u8SAnswer.filter(x=>x!==w);
+  const card=document.getElementById('u8sc-'+w);
+  if(card) card.classList.remove('used');
+}
+function u8SCheck(){
+  const q=u8SortData[u8SIdx];
+  const correct=JSON.stringify(u8SAnswer)===JSON.stringify(q.answer);
+  const az=document.getElementById('u8s-answer-zone');
+  if(az){
+    Array.from(az.children).forEach((chip,i)=>{
+      chip.classList.remove('correct','wrong');
+      chip.classList.add(q.answer[i]===chip.textContent?'correct':'wrong');
+    });
+  }
+  if(correct){
+    u8Score.sort++;
+    if(typeof launchConfetti==='function') launchConfetti();
+  }
+  const cb=document.getElementById('u8s-check-btn');
+  if(cb){cb.disabled=true;cb.style.background='#B0B0B0';}
+  const nb=document.getElementById('u8s-next-btn');
+  if(nb){nb.disabled=false;nb.style.background='var(--mint)';nb.style.color='white';}
+}
+function nextU8S(){
+  u8SIdx++;
+  if(u8SIdx>=u8SortData.length){
+    const wc=document.querySelector('#u8-sort-game .u7-word-card');
+    if(wc) wc.style.display='none';
+    const comp=document.getElementById('u8s-complete');
+    if(comp){
+      comp.style.display='block';
+      const sc=document.getElementById('u8s-score-msg');
+      if(sc) sc.textContent='🎯 '+u8Score.sort+' / '+u8SortData.length+' 점';
+    }
+    if(typeof launchConfetti==='function') launchConfetti();
+  } else { renderU8S(); }
+}
+function restartU8S(){
+  u8SIdx=0;u8SAnswer=[];u8Score.sort=0;
+  const wc=document.querySelector('#u8-sort-game .u7-word-card');
+  if(wc) wc.style.display='block';
+  const comp=document.getElementById('u8s-complete');
+  if(comp) comp.style.display='none';
+  renderU8S();
+}
+
 async function init(){
   try {
-    const [d1, d2, d3, d4, d5, d6, d7] = await Promise.all([1,2,3,4,5,6,7].map(n => HalmoniCore.loadUnit(n)));
+    const [d1, d2, d3, d4, d5, d6, d7, d8] = await Promise.all([1,2,3,4,5,6,7,8].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
@@ -5201,6 +5730,17 @@ async function init(){
     }
     if (d7 && d7.sections && d7.sections.vocab) {
       renderU7Vocab(d7.sections.vocab);
+    }
+    if (d8 && d8.sections) {
+      u8Data = d8.sections;
+      if (d8.sections.vocab)    renderU8Vocab(d8.sections.vocab);
+      if (d8.sections.grammar)  renderU8Grammar(d8.sections.grammar);
+      if (d8.sections.practice) {
+        const p8 = d8.sections.practice;
+        if (p8.listen_quiz)  u8ListenQ  = p8.listen_quiz;
+        if (p8.batchim_game) u8BGame    = p8.batchim_game;
+        if (p8.sort_game)    u8SortData = p8.sort_game;
+      }
     }
     if (d6 && d6.sections && d6.sections.vocab) {
       const v6 = d6.sections.vocab;
@@ -5231,6 +5771,7 @@ async function init(){
   buildFlashcards('fc4-dolls',dolls4,'coral');
   renderU1(); renderU2(); renderU3(); renderU4(); renderS1(); renderS5();
   renderU6Fill(); renderU6Part1();
+  renderU8L(); renderU8B();
 }
 init();
 </script>
