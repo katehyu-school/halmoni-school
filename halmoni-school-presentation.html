@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>할머니 학교 — Halmoni School</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:  #1B2B4B;
+  --coral: #FF6B6B;
+  --teal:  #4ECDC4;
+  --gold:  #FFD93D;
+  --purple:#9B59B6;
+  --white: #FFFFFF;
+  --light: #F7F9FC;
+  --muted: #8899AA;
+}
+
+body {
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  background: #0d1117;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.deck { position: relative; width: 960px; height: 540px; }
+
+.slide {
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.45s ease;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.slide.active { opacity: 1; pointer-events: all; }
+
+/* ── nav ── */
+.nav {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 20px; color: #aaa;
+  font-size: 14px; user-select: none;
+}
+.nav button {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white; border-radius: 8px;
+  padding: 8px 18px; cursor: pointer; font-size: 15px;
+  transition: background 0.2s;
+}
+.nav button:hover { background: rgba(255,255,255,0.22); }
+.dots { display: flex; gap: 7px; }
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.25); cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.dot.active { background: var(--teal); transform: scale(1.3); }
+
+/* ══ SLIDE STYLES ══════════════════════════════════ */
+
+/* S1 — Title */
+.s1 { background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.s1 .blob1 { position:absolute; width:320px; height:320px; border-radius:50%; background:var(--teal); opacity:0.12; top:-80px; right:-60px; }
+.s1 .blob2 { position:absolute; width:260px; height:260px; border-radius:50%; background:var(--coral); opacity:0.12; bottom:-70px; left:-50px; }
+.s1 .big-emoji { font-size: 56px; margin-bottom: 8px; }
+.s1 h1 { font-size: 58px; font-weight: 900; color: var(--white); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+.s1 .en-title { font-size: 26px; color: var(--teal); font-style: italic; margin-bottom: 14px; }
+.s1 .tagline-ko { font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 4px; }
+.s1 .tagline-en { font-size: 13px; color: var(--teal); margin-bottom: 22px; }
+.s1 .badges { display:flex; gap:12px; }
+.s1 .badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.s1 .badge-gold { background: var(--gold); color: var(--navy); }
+.s1 .badge-coral { background: var(--coral); color: white; }
+
+/* S2 — Story */
+.s2 { background: white; display: grid; grid-template-columns: 1fr 1fr; }
+.s2 .left { padding: 44px 40px 30px; }
+.s2 .right { background: var(--light); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding: 18px 24px; overflow:hidden; }
+.slide-title { font-size: 30px; font-weight: 900; color: var(--navy); line-height: 1.1; }
+.slide-title-en { font-size: 13px; color: var(--teal); font-style: italic; margin-top: 3px; margin-bottom: 20px; }
+.story-text { font-size: 15px; color: #333; line-height: 1.8; }
+.story-text strong { color: var(--coral); }
+.story-text b { color: var(--navy); }
+.step-card { background: white; border-radius: 12px; padding: 8px 14px; text-align:center; box-shadow: 0 3px 10px rgba(0,0,0,0.07); width: 100%; }
+.step-card .step-emoji { font-size: 20px; }
+.step-card .step-label { font-size: 12px; font-weight: 700; color: var(--navy); margin-top: 2px; }
+.step-card .step-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+.arrow-down { font-size: 14px; color: var(--muted); line-height: 1; }
+
+/* S3 — Three classes */
+.s3 { background: var(--light); display: flex; flex-direction: column; align-items:center; padding: 32px 40px 28px; }
+.s3-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; width: 100%; margin-top: 18px; flex: 1; }
+.class-card { border-radius: 18px; padding: 28px 18px; text-align:center; color: white; display:flex; flex-direction:column; align-items:center; box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+.class-card.c-gold  { background: #c9902a; color: #3d2a1a; }
+.class-card.c-elem  { background: #c4a8d4; color: #3d2a1a; }
+.class-card.c-adult { background: #c8d8e8; color: #3d2a1a; }
+.class-emoji { font-size: 46px; margin-bottom: 10px; }
+.class-name { font-size: 26px; font-weight: 900; margin-bottom: 3px; }
+.class-en { font-size: 12px; font-style: italic; opacity: 0.8; margin-bottom: 12px; }
+.class-divider { width: 50%; height: 2px; background: currentColor; opacity: 0.25; margin-bottom: 12px; }
+.class-desc { font-size: 12px; line-height: 1.7; opacity: 0.9; }
+
+/* S4 — Built with AI */
+.s4 { background: white; display: flex; flex-direction: column; padding: 32px 44px 28px; }
+.s4-cols { display:grid; grid-template-columns: 1fr 60px 1fr; align-items:center; gap:0; margin-top:18px; flex:1; }
+.ai-card { border-radius: 16px; padding: 24px; height: 100%; display:flex; flex-direction:column; }
+.ai-card.teacher { background: #FFF8F8; }
+.ai-card.claude { background: #F0FFFE; }
+.ai-card-icon { font-size: 36px; margin-bottom: 8px; }
+.ai-card-name { font-size: 18px; font-weight: 900; margin-bottom: 16px; }
+.ai-card.teacher .ai-card-name { color: var(--coral); }
+.ai-card.claude .ai-card-name { color: var(--teal); }
+.ai-item { font-size: 13px; color: #333; padding: 5px 0; display:flex; gap:8px; align-items:baseline; }
+.ai-item::before { content: "✦"; font-size: 10px; color: var(--muted); flex-shrink:0; }
+.plus-center { text-align:center; font-size: 32px; font-weight:900; color: var(--navy); }
+.school-badge { background: var(--gold); border-radius: 50%; width: 44px; height: 44px; display:flex; align-items:center; justify-content:center; font-size: 24px; margin: 8px auto 0; }
+
+/* S5 / S6 — App slides */
+.app-slide { background: white; display: grid; grid-template-columns: 1fr 1fr; }
+.app-left { padding: 34px 32px 28px; display:flex; flex-direction:column; }
+.app-accent { width: 6px; height: 100%; position:absolute; left:0; top:0; border-radius:0; }
+.app-right { padding: 20px; display:flex; align-items:center; justify-content:center; }
+.phone-frame { background: var(--light); border-radius: 16px; border: 2px solid #dde; width: 100%; height: 100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; font-size:13px; color:var(--muted); text-align:center; padding: 20px; }
+.phone-frame .ph-emoji { font-size: 32px; }
+.feature-list { margin-top: 16px; display:flex; flex-direction:column; gap: 8px; flex:1; }
+.feat-item { background: var(--light); border-radius: 12px; padding: 10px 14px; display:flex; gap: 10px; align-items:center; }
+.feat-emoji { font-size: 20px; flex-shrink:0; }
+.feat-text { flex:1; }
+.feat-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.feat-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+/* S7 — Philosophy */
+.s7 { background: var(--light); display:flex; flex-direction:column; padding: 32px 40px 28px; align-items:center; }
+.phil-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; width:100%; margin-top:18px; flex:1; }
+.phil-card { background: white; border-radius: 16px; padding: 20px; display:flex; gap: 14px; align-items:flex-start; box-shadow:0 4px 14px rgba(0,0,0,0.06); position:relative; overflow:hidden; }
+.phil-stripe { position:absolute; left:0; top:0; bottom:0; width:6px; border-radius:3px 0 0 3px; }
+.phil-icon { font-size: 28px; flex-shrink:0; }
+.phil-body { padding-left: 2px; }
+.phil-title { font-size: 15px; font-weight: 700; color: var(--navy); }
+.phil-en { font-size: 10px; color: var(--muted); font-style:italic; margin-bottom: 6px; }
+.phil-desc { font-size: 12px; color: #444; line-height: 1.6; }
+
+/* S8 — Stats */
+.s8 { background: white; display:flex; flex-direction:column; padding: 32px 44px 24px; align-items:center; }
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; width:100%; margin-top:18px; }
+.stat-card { border-radius: 18px; padding: 22px 14px; text-align:center; color:white; box-shadow:0 8px 22px rgba(0,0,0,0.13); }
+.stat-emoji { font-size: 28px; margin-bottom:8px; }
+.stat-num { font-size: 52px; font-weight:900; line-height:1; }
+.stat-label { font-size: 13px; font-weight:700; margin-top: 6px; }
+.stat-en { font-size: 9px; opacity:0.8; font-style:italic; margin-top:2px; }
+.next-banner { background: var(--light); border-radius: 14px; padding: 14px 24px; width: 100%; text-align:center; margin-top: 18px; }
+.next-banner .nb-main { font-size: 13px; font-weight:700; color: var(--navy); }
+.next-banner .nb-en { font-size: 11px; color: var(--teal); font-style:italic; margin-top:3px; }
+
+/* S9 — Closing */
+.s9 { background: var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+.s9 .blob1 { position:absolute; width:340px; height:340px; border-radius:50%; background:var(--coral); opacity:0.1; top:-90px; right:-70px; }
+.s9 .blob2 { position:absolute; width:300px; height:300px; border-radius:50%; background:var(--teal); opacity:0.1; bottom:-80px; left:-60px; }
+.s9-emoji { font-size: 48px; margin-bottom:8px; }
+.s9-title { font-size: 36px; font-weight:900; color:white; margin-bottom:6px; }
+.s9-en { font-size: 16px; color: var(--teal); font-style:italic; margin-bottom:24px; }
+.quote-box { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(78,205,196,0.4); border-radius: 16px; padding: 18px 32px; max-width: 680px; margin-bottom:22px; }
+.quote-text { font-size: 15px; color: rgba(255,255,255,0.9); line-height:1.7; font-style:italic; }
+.quote-mark { font-size: 28px; color: var(--teal); font-weight:900; }
+.s9-badges { display:flex; gap:12px; margin-bottom:16px; }
+.s9-badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight:700; }
+.s9-footer { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ── SLIDE 1: Title ── -->
+  <div class="slide s1 active" id="s1">
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="big-emoji">🏫</div>
+    <h1>할머니 학교</h1>
+    <div class="en-title">Halmoni School</div>
+    <div class="tagline-ko">AI로 만드는 우리 가족 한국어 학교</div>
+    <div class="tagline-en">A Family Korean Language School, Built with AI</div>
+    <div class="badges">
+      <div class="badge badge-gold">내가 제일 잘나가</div>
+      <div class="badge badge-coral">I Am the Best  🏆</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2: Story ── -->
+  <div class="slide s2" id="s2">
+    <div class="left">
+      <div class="slide-title">이야기의 시작</div>
+      <div class="slide-title-en">How It All Started</div>
+      <div class="story-text">
+        우리 이모가 컨테스트를 열었어요.<br>
+        <strong>"새로운 AI로 멋진 프로젝트 만들어봐요!"</strong><br>
+        상금도 걸고, 기한은 <b>2026년 5월 27일</b>.<br><br>
+        그래서 우리가 만든 건?<br>
+        <strong>진짜 운영되는 온라인 한국어 학교! 🎉</strong><br><br>
+        처음엔 작은 아이디어였지만, 지금은 세 개 반에<br>
+        실제 학생들이 다니고 있어요.
+      </div>
+    </div>
+    <div class="right">
+      <div class="step-card">
+        <div class="step-emoji">💡</div>
+        <div class="step-label">아이디어</div>
+        <div class="step-sub">가족 AI 컨테스트</div>
+      </div>
+      <div class="arrow-down">↓</div>
+      <div class="step-card">
+        <div class="step-emoji">✍️</div>
+        <div class="step-label">기획</div>
+        <div class="step-sub">선생님 커리큘럼 설계</div>
+      </div>
+      <div class="arrow-down">↓</div>
+      <div class="step-card">
+        <div class="step-emoji">🤖</div>
+        <div class="step-label">AI 협업</div>
+        <div class="step-sub">Claude와 함께 구현</div>
+      </div>
+      <div class="arrow-down">↓</div>
+      <div class="step-card" style="border:2px solid var(--coral);">
+        <div class="step-emoji">🎓</div>
+        <div class="step-label">실제 수업 운영!</div>
+        <div class="step-sub">지금 이 순간도 계속</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3: Three Classes ── -->
+  <div class="slide s3" id="s3">
+    <div class="slide-title" style="text-align:center;">세 개의 반</div>
+    <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Three Classes for Every Age</div>
+    <div class="s3-grid">
+      <div class="class-card c-gold">
+        <div class="class-emoji">🌷</div>
+        <div class="class-name">유아반</div>
+        <div class="class-en">Kindergarten</div>
+        <div class="class-divider"></div>
+        <div class="class-desc">노래, 색깔, 숫자<br>기초 단어 익히기<br>Hangul Basics &amp; Fun</div>
+      </div>
+      <div class="class-card c-elem">
+        <div class="class-emoji">📖</div>
+        <div class="class-name">초등반</div>
+        <div class="class-en">Elementary</div>
+        <div class="class-divider"></div>
+        <div class="class-desc">게임으로 배우는 문법<br>받침·조사·문장 만들기<br>Vocabulary &amp; Grammar</div>
+      </div>
+      <div class="class-card c-adult">
+        <div class="class-emoji">🏛</div>
+        <div class="class-name">성인반</div>
+        <div class="class-en">Adult</div>
+        <div class="class-divider"></div>
+        <div class="class-desc">어휘·문법·발음<br>Real Life 대화까지<br>Conversational Korean</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4: Built with AI ── -->
+  <div class="slide s4" id="s4">
+    <div class="slide-title">어떻게 만들었나요?</div>
+    <div class="slide-title-en">How We Built It — Teacher + AI Collaboration</div>
+    <div class="s4-cols">
+      <div class="ai-card teacher">
+        <div class="ai-card-icon">👩‍🏫</div>
+        <div class="ai-card-name">선생님 Haeok</div>
+        <div class="ai-item">커리큘럼 설계 &amp; 내용 기획</div>
+        <div class="ai-item">언어 정확도 검토 (매 문장!)</div>
+        <div class="ai-item">실제 수업 진행 &amp; 피드백</div>
+        <div class="ai-item">아이디어 무한 제공 💡</div>
+      </div>
+      <div class="plus-center">
+        +
+        <div class="school-badge">🏫</div>
+      </div>
+      <div class="ai-card claude">
+        <div class="ai-card-icon">🤖</div>
+        <div class="ai-card-name">AI Claude</div>
+        <div class="ai-item">HTML / CSS / JS 코딩 구현</div>
+        <div class="ai-item">게임 로직 &amp; UX 설계</div>
+        <div class="ai-item">실시간 동기화 시스템</div>
+        <div class="ai-item">데이터 구조 설계 📐</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5: Elementary App ── -->
+  <div class="slide app-slide" id="s5">
+    <div class="app-left" style="position:relative;padding-left:36px;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--coral);border-radius:0 4px 4px 0;"></div>
+      <div class="slide-title">초등반 앱</div>
+      <div class="slide-title-en">Elementary Class App</div>
+      <div class="feature-list">
+        <div class="feat-item">
+          <div class="feat-emoji">🃏</div>
+          <div class="feat-text"><div class="feat-title">플래시카드</div><div class="feat-desc">단어 앞뒤 뒤집기 — 이모지 힌트 포함</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">🔊</div>
+          <div class="feat-text"><div class="feat-title">듣기 게임</div><div class="feat-desc">TTS 소리 듣고 정답 고르기</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">🧩</div>
+          <div class="feat-text"><div class="feat-title">받침 게임</div><div class="feat-desc">드래그로 받침 완성 — 이모지 힌트</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">📝</div>
+          <div class="feat-text"><div class="feat-title">문장 만들기</div><div class="feat-desc">단어 카드 클릭 순서 맞추기</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">⚡</div>
+          <div class="feat-text"><div class="feat-title">실시간 수업</div><div class="feat-desc">손들기·지목·정답 공개 동기화</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="app-right" style="background:#F4F6FF;padding:14px;">
+      <img src="screenshot-elem.png" style="width:100%;height:100%;object-fit:cover;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,0.13);">
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6: Adult App ── -->
+  <div class="slide app-slide" id="s6">
+    <div class="app-left" style="position:relative;padding-left:36px;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--teal);border-radius:0 4px 4px 0;"></div>
+      <div class="slide-title">성인반 앱</div>
+      <div class="slide-title-en">Adult Class App</div>
+      <div class="feature-list">
+        <div class="feat-item">
+          <div class="feat-emoji">📖</div>
+          <div class="feat-text"><div class="feat-title">어휘 색인</div><div class="feat-desc">가나다순 전체 단어 검색 + 초성 점프</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">📌</div>
+          <div class="feat-text"><div class="feat-title">문법 &amp; 발음 패널</div><div class="feat-desc">설명 + 예문 + Usage + 발음 규칙 인덱스</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">🌍</div>
+          <div class="feat-text"><div class="feat-title">Real Life 대화</div><div class="feat-desc">카카오톡·듣기·읽기 에피소드</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">🔊</div>
+          <div class="feat-text"><div class="feat-title">TTS 발음</div><div class="feat-desc">모든 단어·예문 한국어 TTS 재생</div></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-emoji">⚡</div>
+          <div class="feat-text"><div class="feat-title">실시간 수업</div><div class="feat-desc">선생님·학생 화면 실시간 동기화</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="app-right" style="background:#F0FFF9;padding:14px;">
+      <img src="screenshot-adult.png" style="width:100%;height:100%;object-fit:cover;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,0.13);">
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: Philosophy ── -->
+  <div class="slide s7" id="s7">
+    <div class="slide-title" style="text-align:center;">교육 철학</div>
+    <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Education Philosophy</div>
+    <div class="phil-grid">
+      <div class="phil-card">
+        <div class="phil-stripe" style="background:var(--coral);"></div>
+        <div style="width:8px;"></div>
+        <div class="phil-icon">🎮</div>
+        <div class="phil-body">
+          <div class="phil-title">게임 기반 학습</div>
+          <div class="phil-en">Game-Based Learning</div>
+          <div class="phil-desc">설명보다 게임으로! 드래그, 클릭, 듣기 퀴즈로 자연스럽게 체득</div>
+        </div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-stripe" style="background:var(--teal);"></div>
+        <div style="width:8px;"></div>
+        <div class="phil-icon">🌏</div>
+        <div class="phil-body">
+          <div class="phil-title">문화 + 언어 함께</div>
+          <div class="phil-en">Culture &amp; Language Together</div>
+          <div class="phil-desc">한국 문화 맥락 속에서 언어를 자연스럽게 배워요</div>
+        </div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-stripe" style="background:var(--purple);"></div>
+        <div style="width:8px;"></div>
+        <div class="phil-icon">🎯</div>
+        <div class="phil-body">
+          <div class="phil-title">언어 정확도 최우선</div>
+          <div class="phil-en">Linguistic Accuracy First</div>
+          <div class="phil-desc">작은 오류도 놓치지 않는 철저한 검수 — 신뢰가 곧 학습</div>
+        </div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-stripe" style="background:var(--gold);"></div>
+        <div style="width:8px;"></div>
+        <div class="phil-icon">👐</div>
+        <div class="phil-body">
+          <div class="phil-title">초보자 친화</div>
+          <div class="phil-en">Beginner-Friendly Design</div>
+          <div class="phil-desc">영어 병기, 직관적 UI, 단계적 난이도로 누구나 쉽게</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 8: Stats ── -->
+  <div class="slide s8" id="s8">
+    <div class="slide-title" style="text-align:center;">지금 이 순간</div>
+    <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Halmoni School — Right Now</div>
+    <div class="stats-grid">
+      <div class="stat-card" style="background:var(--navy);">
+        <div class="stat-emoji">🏫</div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">개 반 운영</div>
+        <div class="stat-en">Active Classes</div>
+      </div>
+      <div class="stat-card" style="background:var(--coral);">
+        <div class="stat-emoji">🎓</div>
+        <div class="stat-num">5</div>
+        <div class="stat-label">명 학생</div>
+        <div class="stat-en">Students Enrolled</div>
+      </div>
+      <div class="stat-card" style="background:var(--teal);">
+        <div class="stat-emoji">📚</div>
+        <div class="stat-num">17</div>
+        <div class="stat-label">개 Unit</div>
+        <div class="stat-en">Lessons Built</div>
+      </div>
+      <div class="stat-card" style="background:var(--purple);">
+        <div class="stat-emoji">❤️</div>
+        <div class="stat-num">∞</div>
+        <div class="stat-label">열정</div>
+        <div class="stat-en">Passion &amp; Love</div>
+      </div>
+    </div>
+    <div class="next-banner">
+      <div class="nb-main">🚀  다음 단계: 완전 오리지널 커리큘럼으로 새판 제작 예정! 장면 기반, AI 이미지, 저작권 Free</div>
+      <div class="nb-en">Next: A brand-new platform with 100% original, scene-first curriculum — AI-illustrated!</div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 9: Closing ── -->
+  <div class="slide s9" id="s9">
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="s9-emoji">🏫</div>
+    <div class="s9-title">할머니 학교는 계속됩니다</div>
+    <div class="s9-en">Halmoni School — Ongoing, Growing, Loved</div>
+    <div class="quote-box">
+      <span class="quote-mark">"</span>
+      <span class="quote-text"> 선생님 아이디어 + AI 구현력 =<br>세상에 하나뿐인 우리 가족 한국어 학교 </span>
+      <span class="quote-mark">"</span>
+    </div>
+    <div class="s9-badges">
+      <div class="s9-badge" style="background:#c9902a;color:#3d2a1a;">🌷 유아반</div>
+      <div class="s9-badge" style="background:#c4a8d4;color:#3d2a1a;">📖 초등반</div>
+      <div class="s9-badge" style="background:#c8d8e8;color:#3d2a1a;">🏛 성인반</div>
+    </div>
+    <div class="s9-footer">내가 제일 잘나가  ·  I Am the Best  ·  2026 Family AI Contest</div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- ── Navigation ── -->
+<div class="nav">
+  <button id="btn-prev">◀ 이전</button>
+  <div class="dots" id="dots"></div>
+  <button id="btn-next">다음 ▶</button>
+  <span id="pg-label" style="min-width:50px;text-align:center;"></span>
+</div>
+
+<script>
+const TOTAL = 9;
+let current = 1;
+
+function show(n) {
+  document.querySelectorAll('.slide').forEach((s,i) => {
+    s.classList.toggle('active', i+1 === n);
+  });
+  document.querySelectorAll('.dot').forEach((d,i) => {
+    d.classList.toggle('active', i+1 === n);
+  });
+  document.getElementById('pg-label').textContent = n + ' / ' + TOTAL;
+  current = n;
+}
+
+// build dots
+const dotsEl = document.getElementById('dots');
+for (let i = 1; i <= TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot';
+  d.onclick = () => show(i);
+  dotsEl.appendChild(d);
+}
+
+document.getElementById('btn-prev').onclick = () => { if (current > 1) show(current - 1); };
+document.getElementById('btn-next').onclick = () => { if (current < TOTAL) show(current + 1); };
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault(); if (current < TOTAL) show(current + 1);
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault(); if (current > 1) show(current - 1);
+  }
+  if (e.key === 'Home') show(1);
+  if (e.key === 'End') show(TOTAL);
+});
+
+show(1);
+</script>
+</body>
+</html>
