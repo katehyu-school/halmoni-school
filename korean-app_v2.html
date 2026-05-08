@@ -1333,9 +1333,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">8과</span>
     <span class="lesson-title-text">저는 여섯 살이에요</span>
   </div>
-  <div class="lesson-item locked">
+  <div class="lesson-item" id="lesson-9" onclick="switchUnit(9)">
     <span class="lesson-num">9과</span>
-    <div><span class="lesson-title-text">코끼리는 커요</span><span class="lesson-lock-badge">🔒 준비중</span></div>
+    <span class="lesson-title-text">코끼리가 커요!</span>
   </div>
   <div class="lesson-item locked">
     <span class="lesson-num">10과</span>
@@ -2459,6 +2459,107 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 </div><!-- /unit8 -->
 
+<!-- ══════ UNIT 9 ══════ -->
+<div class="unit" id="unit9">
+  <div class="unit-heading">
+    <span class="unit-num">9</span>
+    <span class="unit-title">코끼리가 커요!</span>
+  </div>
+  <nav class="section-nav" id="u9-snav">
+    <button class="snav-btn active" onclick="switchSection9('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection9('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection9('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
+    <button class="snav-btn" onclick="switchSection9('game')">✅ 게임 <span class="snav-en">Game</span></button>
+  </nav>
+
+  <!-- ── VOCAB ── -->
+  <div class="section active" id="u9-vocab">
+    <div class="card">
+      <div class="section-title">📌 형용사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Describing Words</span></div>
+      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">반대말도 같이 익혀요! Learn opposite pairs!</div>
+      <div id="u9-pair-grid" style="margin-top:16px;display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+  </div>
+
+  <!-- ── GRAMMAR ── -->
+  <div class="section" id="u9-grammar">
+    <div class="card" id="u9-grammar-content"></div>
+  </div>
+
+  <!-- ── 듣기 ── -->
+  <div class="section" id="u9-listen">
+    <div class="u7-word-card" id="u9l-card">
+      <div class="u7-prog" id="u9l-prog">1 / 7</div>
+      <div style="margin:12px 0 6px;font-size:0.85rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">어떤 형용사가 들려요? Which adjective do you hear?</div>
+      <button onclick="u9LPlay()" style="background:var(--mint);color:white;border:none;border-radius:12px;padding:12px 28px;font-size:1rem;cursor:pointer;margin-bottom:18px;">🔊 Play</button>
+      <div id="u9l-choices" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:16px;"></div>
+      <div style="margin-top:8px;">
+        <button onclick="nextU9L()" id="u9l-next-btn" disabled style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">다음 ▶</button>
+      </div>
+    </div>
+    <div id="u9l-complete" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">Listening Complete!</div>
+      <div id="u9l-score-msg" style="font-family:'Jua',sans-serif;font-size:1.3rem;color:#5B6AF0;margin:8px 0 4px;">🎯 0 / 7 점</div>
+      <button onclick="restartU9L()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+    </div>
+  </div>
+
+  <!-- ── 게임 (OX → Sort) ── -->
+  <div class="section" id="u9-game">
+    <!-- O/X 게임 -->
+    <div id="u9-ox-game">
+      <div class="u7-word-card" id="u9ox-card">
+        <div class="u7-prog" id="u9ox-prog">1 / 12</div>
+        <div id="u9ox-emoji" style="font-size:4rem;margin:12px 0;line-height:1.1;">🐘</div>
+        <div id="u9ox-sentence" style="font-size:1.35rem;font-weight:900;font-family:'Nanum Gothic',sans-serif;margin-bottom:18px;color:#222;">코끼리가 커요.</div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-bottom:16px;">
+          <button onclick="u9OXPick(true)" id="u9ox-yes-btn"
+            style="background:#4CAF50;color:white;border:none;border-radius:14px;padding:14px 28px;font-size:1.1rem;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;min-width:110px;">
+            맞아요 ✅
+          </button>
+          <button onclick="u9OXPick(false)" id="u9ox-no-btn"
+            style="background:#F44336;color:white;border:none;border-radius:14px;padding:14px 28px;font-size:1.1rem;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;min-width:110px;">
+            틀려요 ❌
+          </button>
+        </div>
+        <div id="u9ox-feedback" style="min-height:32px;font-size:1.1rem;font-weight:700;font-family:'Jua',sans-serif;margin-bottom:8px;"></div>
+        <button onclick="nextU9OX()" id="u9ox-next-btn" disabled
+          style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">
+          다음 ▶
+        </button>
+      </div>
+      <div id="u9ox-complete" style="display:none;text-align:center;padding:40px 20px;">
+        <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+        <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);margin-bottom:8px;">O/X 마스터!</div>
+        <div id="u9ox-score-msg" style="font-family:'Jua',sans-serif;font-size:1.3rem;color:#5B6AF0;margin:8px 0 4px;">🎯 0 / 12 점</div>
+        <button onclick="restartU9OX()" style="margin-top:12px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;margin-right:8px;">다시 하기 🔄</button>
+      </div>
+    </div>
+    <!-- 문장 만들기 게임 (OX 완료 후 표시) -->
+    <div id="u9-sort-game" style="display:none;margin-top:8px;">
+      <div class="u7-word-card">
+        <div class="u7-prog" id="u9s-prog">1 / 6</div>
+        <div id="u9s-emoji" style="font-size:2.5rem;margin-bottom:6px;">🐘</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-bottom:12px;font-family:'Nanum Gothic',sans-serif;">단어 카드를 순서대로 클릭해서 문장을 만들어요!</div>
+        <div id="u9s-answer-zone" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;min-height:52px;padding:10px;background:#F8F9FF;border-radius:12px;border:2px dashed #C9CDE8;margin-bottom:14px;"></div>
+        <div id="u9s-pool" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px;"></div>
+        <div style="margin-top:8px;">
+          <button onclick="u9SCheck()" id="u9s-check-btn" style="background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;margin-right:8px;">✅ Check</button>
+          <button onclick="nextU9S()" id="u9s-next-btn" disabled style="background:#E8E8E8;color:#999;border:none;border-radius:10px;padding:10px 24px;font-size:0.95rem;cursor:pointer;">다음 ▶</button>
+        </div>
+      </div>
+      <div id="u9s-complete" style="display:none;text-align:center;padding:40px 20px;">
+        <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+        <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:var(--mint);">문장 마스터!</div>
+        <div id="u9s-score-msg" style="font-size:1.1rem;color:#5B6AF0;font-weight:700;margin-top:8px;"></div>
+        <button onclick="restartU9S()" style="margin-top:20px;background:var(--mint);color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;">다시 하기 🔄</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /unit9 -->
+
 
 </main>
 </div>
@@ -2720,7 +2821,7 @@ function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
   // 사이드바 lesson-item 활성화
-  [1,2,3,4,5,6,7,8].forEach(i=>{
+  [1,2,3,4,5,6,7,8,9].forEach(i=>{
     const el = document.getElementById('lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
@@ -2728,6 +2829,7 @@ function switchUnit(n){
   if (n === 6) { switchSection6('vocab'); }
   else if (n === 7) { switchSection7('vocab'); }
   else if (n === 8) { switchSection8('vocab'); }
+  else if (n === 9) { switchSection9('vocab'); }
   else { switchSection(n, 'vocab'); }
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
@@ -5693,9 +5795,354 @@ function restartU8S(){
   renderU8S();
 }
 
+// ══════════════════════════════════════════════════════════
+// UNIT 9 — 코끼리가 커요! (형용사 Adjectives)
+// ══════════════════════════════════════════════════════════
+
+let u9Score = { listen: 0, ox: 0, sort: 0 };
+
+function switchSection9(sec) {
+  const tabs = ['vocab','grammar','listen','game'];
+  document.querySelectorAll('#u9-snav .snav-btn').forEach((b,i) => {
+    b.classList.toggle('active', tabs[i]===sec);
+  });
+  document.querySelectorAll('#unit9 .section').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('u9-' + sec);
+  if (el) el.classList.add('active');
+  if (sec === 'listen') renderU9L();
+  if (sec === 'game')   renderU9OX();
+}
+
+// ── VOCAB: Adjective pair cards ──────────────────────────
+function renderU9Vocab(data) {
+  const grid = document.getElementById('u9-pair-grid');
+  if (!grid || !data.pairs) return;
+  grid.innerHTML = data.pairs.map(p => `
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="flex:1;background:linear-gradient(135deg,#E8FFF0,#C8F5E0);border-radius:16px;padding:14px 10px;text-align:center;border:2px solid #4CAF50;">
+        <div style="font-size:2.2rem;line-height:1.1;">${p.emoji_pos}</div>
+        <div style="font-size:0.8rem;color:#666;font-family:'Nanum Gothic',sans-serif;margin:2px 0;">${p.subj_pos}</div>
+        <div style="font-size:1.35rem;font-weight:900;color:#2E7D32;font-family:'Nanum Gothic',sans-serif;">${p.positive}</div>
+        <div style="font-size:0.75rem;color:#555;font-family:'Nanum Gothic',sans-serif;">${p.positive_en}</div>
+      </div>
+      <div style="font-size:1.4rem;color:#999;font-weight:700;flex-shrink:0;">↔</div>
+      <div style="flex:1;background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:16px;padding:14px 10px;text-align:center;border:2px solid #FF9800;">
+        <div style="font-size:2.2rem;line-height:1.1;">${p.emoji_neg}</div>
+        <div style="font-size:0.8rem;color:#666;font-family:'Nanum Gothic',sans-serif;margin:2px 0;">${p.subj_neg}</div>
+        <div style="font-size:1.35rem;font-weight:900;color:#E65100;font-family:'Nanum Gothic',sans-serif;">${p.negative}</div>
+        <div style="font-size:0.75rem;color:#555;font-family:'Nanum Gothic',sans-serif;">${p.negative_en}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── GRAMMAR ──────────────────────────────────────────────
+function renderU9Grammar(g) {
+  const panel = document.getElementById('u9-grammar-content');
+  if (!panel || !g) return;
+  const colorMap = {red:'#FF5252',blue:'#2196F3',green:'#4CAF50',amber:'#FFA726'};
+  const bgMap    = {red:'#FFF8F8',blue:'#F0F7FF',green:'#F1FFF5',amber:'#FFF8EF'};
+  let html = `<div class="section-title">${g.title} <span style="font-size:0.85rem;font-family:'Nanum Gothic',sans-serif;color:var(--muted);">${g.title_en}</span></div>`;
+  html += `<div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;margin-bottom:16px;">${g.explanation}<br><span style="color:var(--muted);font-size:0.88rem;">${g.explanation_en}</span></div>`;
+  for (const rb of g.rule_boxes) {
+    const c  = colorMap[rb.color]||'#555';
+    const bg = bgMap[rb.color]||'#F9F9F9';
+    html += `<div style="border-left:4px solid ${c};background:${bg};border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;">
+      <div style="font-weight:700;color:${c};margin-bottom:6px;font-family:'Nanum Gothic',sans-serif;">${rb.label}</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;font-family:'Nanum Gothic',sans-serif;">${rb.label_en}</div>
+      <ul style="margin:0;padding-left:18px;">
+        ${rb.examples.map(ex=>`<li style="font-size:0.9rem;margin-bottom:4px;font-family:'Nanum Gothic',sans-serif;">${ex}</li>`).join('')}
+      </ul>
+    </div>`;
+  }
+  panel.innerHTML = html;
+}
+
+// ── 듣기 게임 ──────────────────────────────────────────
+let u9ListenQ   = [];
+let u9LIdx      = 0;
+let u9LRevealed = false;
+
+function renderU9L() {
+  if (!u9ListenQ.length) return;
+  const q = u9ListenQ[u9LIdx];
+  u9LRevealed = false;
+  const prog = document.getElementById('u9l-prog');
+  const choicesDiv = document.getElementById('u9l-choices');
+  const card = document.getElementById('u9l-card');
+  const comp = document.getElementById('u9l-complete');
+  if (prog) prog.textContent = (u9LIdx+1) + ' / ' + u9ListenQ.length;
+  if (card) card.style.display = 'block';
+  if (comp) comp.style.display = 'none';
+  if (choicesDiv) {
+    const choices = [...q.choices].sort(()=>Math.random()-0.5);
+    choicesDiv.innerHTML = choices.map(ch => `
+      <div class="u7-listen-card" id="u9lcard-${ch.replace(/\s/g,'_')}"
+        style="border:2.5px solid #C9CDE8;border-radius:14px;padding:14px 18px;background:white;cursor:pointer;min-width:80px;text-align:center;transition:border-color 0.2s;"
+        onclick="u9LSelfPick('${ch}')">
+        <span style="font-size:1.3rem;font-weight:900;color:#3D5AFE;font-family:'Nanum Gothic',sans-serif;">${ch}</span>
+      </div>`).join('');
+  }
+  const nb = document.getElementById('u9l-next-btn');
+  if (nb) { nb.disabled=true; nb.style.background='#E8E8E8'; nb.style.color='#999'; }
+}
+
+function u9LPlay() {
+  if (!u9ListenQ.length) return;
+  const text = u9ListenQ[u9LIdx].audio;
+  if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
+  else if (window.speechSynthesis) {
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
+    speechSynthesis.speak(u);
+  }
+}
+
+function u9LSelfPick(ch) {
+  if (u9LRevealed) return;
+  u9LRevealed = true;
+  const q = u9ListenQ[u9LIdx];
+  q.choices.forEach(c => {
+    const card = document.getElementById('u9lcard-'+c.replace(/\s/g,'_'));
+    if (!card) return;
+    if (c===q.answer) { card.style.borderColor='var(--mint)'; card.style.background='#E8FFF8'; }
+    else { card.style.opacity='0.4'; card.style.borderColor='#EEE'; }
+  });
+  if (ch===q.answer) {
+    u9Score.listen++;
+    if(typeof launchConfetti==='function') launchConfetti();
+  }
+  const nb = document.getElementById('u9l-next-btn');
+  if (nb) { nb.disabled=false; nb.style.background='var(--mint)'; nb.style.color='white'; }
+}
+
+function nextU9L() {
+  u9LIdx++;
+  if (u9LIdx >= u9ListenQ.length) {
+    const card=document.getElementById('u9l-card'); if(card) card.style.display='none';
+    const comp=document.getElementById('u9l-complete');
+    if(comp) {
+      comp.style.display='block';
+      const sc=document.getElementById('u9l-score-msg');
+      if(sc) sc.textContent='🎯 '+u9Score.listen+' / '+u9ListenQ.length+' 점';
+    }
+    if(typeof launchConfetti==='function') launchConfetti();
+  } else {
+    renderU9L();
+  }
+}
+
+function restartU9L() {
+  u9LIdx=0; u9LRevealed=false; u9Score.listen=0;
+  renderU9L();
+}
+
+// ── O/X 게임 ─────────────────────────────────────────────
+let u9OXData  = [];
+let u9OXIdx   = 0;
+let u9OXPicked= false;
+
+function renderU9OX() {
+  if (!u9OXData.length) return;
+  const q = u9OXData[u9OXIdx];
+  u9OXPicked = false;
+  const prog  = document.getElementById('u9ox-prog');
+  const emoEl = document.getElementById('u9ox-emoji');
+  const senEl = document.getElementById('u9ox-sentence');
+  const fbEl  = document.getElementById('u9ox-feedback');
+  const card  = document.getElementById('u9ox-card');
+  const comp  = document.getElementById('u9ox-complete');
+  if (prog)  prog.textContent  = (u9OXIdx+1) + ' / ' + u9OXData.length;
+  if (emoEl) emoEl.textContent = q.emoji;
+  if (senEl) senEl.textContent = q.sentence;
+  if (fbEl)  fbEl.textContent  = '';
+  if (card)  card.style.display= 'block';
+  if (comp)  comp.style.display= 'none';
+  const nb = document.getElementById('u9ox-next-btn');
+  if (nb) { nb.disabled=true; nb.style.background='#E8E8E8'; nb.style.color='#999'; }
+  // re-enable buttons
+  ['u9ox-yes-btn','u9ox-no-btn'].forEach(id => {
+    const b=document.getElementById(id);
+    if(b){ b.style.opacity='1'; b.style.cursor='pointer'; }
+  });
+}
+
+function u9OXPick(picked) {
+  if (u9OXPicked) return;
+  u9OXPicked = true;
+  const q = u9OXData[u9OXIdx];
+  const correct = (picked === q.answer);
+  const fbEl = document.getElementById('u9ox-feedback');
+  if (fbEl) {
+    if (correct) {
+      fbEl.textContent = '⭐ 맞아요! Correct!';
+      fbEl.style.color = '#4CAF50';
+      if(typeof launchConfetti==='function') launchConfetti();
+      u9Score.ox++;
+    } else {
+      // show correct answer
+      const hint = q.answer ? '맞는 문장이에요 ✅' : '틀린 문장이에요 ❌';
+      fbEl.textContent = '아니요! ' + hint;
+      fbEl.style.color = '#F44336';
+    }
+  }
+  // dim buttons
+  ['u9ox-yes-btn','u9ox-no-btn'].forEach(id => {
+    const b=document.getElementById(id);
+    if(b){ b.style.opacity='0.5'; b.style.cursor='default'; }
+  });
+  const nb = document.getElementById('u9ox-next-btn');
+  if (nb) { nb.disabled=false; nb.style.background='var(--mint)'; nb.style.color='white'; }
+}
+
+function nextU9OX() {
+  u9OXIdx++;
+  if (u9OXIdx >= u9OXData.length) {
+    const card=document.getElementById('u9ox-card');
+    if(card) card.style.display='none';
+    const comp=document.getElementById('u9ox-complete');
+    if(comp) {
+      comp.style.display='block';
+      const sc=document.getElementById('u9ox-score-msg');
+      if(sc) sc.textContent='🎯 '+u9Score.ox+' / '+u9OXData.length+' 점';
+      if(!document.getElementById('u9ox-next-game-btn')){
+        const btn=document.createElement('button');
+        btn.id='u9ox-next-game-btn';
+        btn.textContent='⬇️ 문장 만들기 게임으로!';
+        btn.style.cssText='margin-top:12px;background:#5B6AF0;color:white;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;cursor:pointer;margin-left:8px;';
+        btn.onclick=showSortGame9;
+        comp.appendChild(btn);
+      }
+    }
+    if(typeof launchConfetti==='function') launchConfetti();
+  } else {
+    renderU9OX();
+  }
+}
+
+function restartU9OX() {
+  u9OXIdx=0; u9OXPicked=false; u9Score.ox=0;
+  renderU9OX();
+}
+
+// ── 문장 만들기 게임 ──────────────────────────────────
+let u9SortData = [];
+let u9SIdx     = 0;
+let u9SAnswer  = [];
+
+function showSortGame9() {
+  const comp=document.getElementById('u9ox-complete');
+  const oxGame=document.getElementById('u9-ox-game');
+  const sg=document.getElementById('u9-sort-game');
+  if(comp)   comp.style.display='none';
+  if(oxGame) oxGame.style.display='none';
+  if(sg)     sg.style.display='block';
+  renderU9S();
+}
+
+function renderU9S() {
+  if(!u9SortData.length) return;
+  const q=u9SortData[u9SIdx];
+  u9SAnswer=[];
+  const prog=document.getElementById('u9s-prog');
+  const emoEl=document.getElementById('u9s-emoji');
+  if(prog) prog.textContent=(u9SIdx+1)+' / '+u9SortData.length;
+  if(emoEl) emoEl.textContent=q.emoji;
+  const az=document.getElementById('u9s-answer-zone');
+  if(az) az.innerHTML='';
+  const all=[...q.answer,...q.distractors].sort(()=>Math.random()-0.5);
+  const pool=document.getElementById('u9s-pool');
+  if(pool) pool.innerHTML=all.map(w=>`
+    <div class="u7-sort-card sino" id="u9sc-${w.replace(/\s/g,'_')}"
+      style="cursor:pointer;" onclick="u9SPickCard('${w}')">
+      ${w}
+    </div>`).join('');
+  const nb=document.getElementById('u9s-next-btn');
+  if(nb){nb.disabled=true;nb.style.background='#E8E8E8';nb.style.color='#999';}
+  const cb=document.getElementById('u9s-check-btn');
+  if(cb){cb.disabled=false;cb.style.background='#5B6AF0';}
+  const comp=document.getElementById('u9s-complete');
+  if(comp) comp.style.display='none';
+  const wc=document.querySelector('#u9-sort-game .u7-word-card');
+  if(wc) wc.style.display='block';
+}
+
+function u9SPickCard(w) {
+  const id='u9sc-'+w.replace(/\s/g,'_');
+  const card=document.getElementById(id);
+  if(!card||card.classList.contains('used')) return;
+  card.classList.add('used');
+  u9SAnswer.push(w);
+  const az=document.getElementById('u9s-answer-zone');
+  if(az){
+    const chip=document.createElement('div');
+    chip.className='u7-sort-card sino';
+    chip.id='u9ac-'+w.replace(/\s/g,'_');
+    chip.textContent=w;
+    chip.style.cursor='pointer';
+    chip.onclick=()=>u9SReturnCard(w);
+    az.appendChild(chip);
+  }
+}
+
+function u9SReturnCard(w) {
+  const chip=document.getElementById('u9ac-'+w.replace(/\s/g,'_'));
+  if(chip) chip.remove();
+  u9SAnswer=u9SAnswer.filter(x=>x!==w);
+  const card=document.getElementById('u9sc-'+w.replace(/\s/g,'_'));
+  if(card) card.classList.remove('used');
+}
+
+function u9SCheck() {
+  const q=u9SortData[u9SIdx];
+  const correct=JSON.stringify(u9SAnswer)===JSON.stringify(q.answer);
+  const az=document.getElementById('u9s-answer-zone');
+  if(az){
+    Array.from(az.children).forEach((chip,i)=>{
+      chip.classList.remove('correct','wrong');
+      chip.classList.add(q.answer[i]===chip.textContent?'correct':'wrong');
+    });
+  }
+  if(correct){
+    u9Score.sort++;
+    if(typeof launchConfetti==='function') launchConfetti();
+  }
+  const cb=document.getElementById('u9s-check-btn');
+  if(cb){cb.disabled=true;cb.style.background='#B0B0B0';}
+  const nb=document.getElementById('u9s-next-btn');
+  if(nb){nb.disabled=false;nb.style.background='var(--mint)';nb.style.color='white';}
+}
+
+function nextU9S() {
+  u9SIdx++;
+  if(u9SIdx>=u9SortData.length){
+    const wc=document.querySelector('#u9-sort-game .u7-word-card');
+    if(wc) wc.style.display='none';
+    const comp=document.getElementById('u9s-complete');
+    if(comp){
+      comp.style.display='block';
+      const sc=document.getElementById('u9s-score-msg');
+      if(sc) sc.textContent='🎯 '+u9Score.sort+' / '+u9SortData.length+' 점';
+    }
+    if(typeof launchConfetti==='function') launchConfetti();
+  } else { renderU9S(); }
+}
+
+function restartU9S() {
+  u9SIdx=0;u9SAnswer=[];u9Score.sort=0;
+  const oxGame=document.getElementById('u9-ox-game');
+  if(oxGame) oxGame.style.display='block';
+  const sg=document.getElementById('u9-sort-game');
+  if(sg) sg.style.display='none';
+  const wc=document.querySelector('#u9-sort-game .u7-word-card');
+  if(wc) wc.style.display='block';
+  const comp=document.getElementById('u9s-complete');
+  if(comp) comp.style.display='none';
+  renderU9S();
+}
+
 async function init(){
   try {
-    const [d1, d2, d3, d4, d5, d6, d7, d8] = await Promise.all([1,2,3,4,5,6,7,8].map(n => HalmoniCore.loadUnit(n)));
+    const [d1, d2, d3, d4, d5, d6, d7, d8, d9] = await Promise.all([1,2,3,4,5,6,7,8,9].map(n => HalmoniCore.loadUnit(n)));
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
@@ -5729,6 +6176,16 @@ async function init(){
         if (p8.sort_game)    u8SortData = p8.sort_game;
       }
     }
+    if (d9 && d9.sections) {
+      if (d9.sections.vocab)    renderU9Vocab(d9.sections.vocab);
+      if (d9.sections.grammar)  renderU9Grammar(d9.sections.grammar);
+      if (d9.sections.practice) {
+        const p9 = d9.sections.practice;
+        if (p9.listen_quiz) u9ListenQ = p9.listen_quiz;
+        if (p9.ox_game)     u9OXData  = p9.ox_game;
+        if (p9.sort_game)   u9SortData= p9.sort_game;
+      }
+    }
     if (d6 && d6.sections && d6.sections.vocab) {
       const v6 = d6.sections.vocab;
       if (v6.places) u6PlaceVocab = v6.places;
@@ -5759,6 +6216,7 @@ async function init(){
   renderU1(); renderU2(); renderU3(); renderU4(); renderS1(); renderS5();
   renderU6Fill(); renderU6Part1();
   renderU8L(); renderU8B();
+  renderU9L(); renderU9OX();
 }
 init();
 </script>
