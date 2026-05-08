@@ -102,6 +102,48 @@
           "example": "장미 일곱 송이",
           "example_en": "seven roses",
           "emoji": "🌹"
+        },
+        {
+          "num": 8,
+          "number": "여덟",
+          "number_form": "여덟",
+          "changes": false,
+          "counter": "명",
+          "counter_en": "people (formal)",
+          "noun": "학생",
+          "noun_en": "student",
+          "phrase": "여덟 명",
+          "example": "학생 여덟 명",
+          "example_en": "eight students",
+          "emoji": "🧑‍🎓"
+        },
+        {
+          "num": 9,
+          "number": "아홉",
+          "number_form": "아홉",
+          "changes": false,
+          "counter": "권",
+          "counter_en": "books",
+          "noun": "책",
+          "noun_en": "book",
+          "phrase": "아홉 권",
+          "example": "책 아홉 권",
+          "example_en": "nine books",
+          "emoji": "📚"
+        },
+        {
+          "num": 10,
+          "number": "열",
+          "number_form": "열",
+          "changes": false,
+          "counter": "장",
+          "counter_en": "sheets (paper)",
+          "noun": "종이",
+          "noun_en": "paper",
+          "phrase": "열 장",
+          "example": "종이 열 장",
+          "example_en": "ten sheets of paper",
+          "emoji": "📄"
         }
       ]
     },
@@ -155,12 +197,12 @@
         {"audio": "일곱 송이", "answer": "송이", "choices": ["송이","잔","마리","개","살"]}
       ],
       "batchim_game": [
-        {"word": "살",   "base": "사",   "steps": ["ㄹ"], "distractors": ["ㄴ","ㄷ","ㅅ","ㅂ","ㅈ"]},
-        {"word": "잔",   "base": "자",   "steps": ["ㄴ"], "distractors": ["ㄱ","ㄷ","ㄹ","ㅂ","ㅅ"]},
-        {"word": "곰",   "base": "고",   "steps": ["ㅁ"], "distractors": ["ㄴ","ㄷ","ㄹ","ㅅ","ㅂ"]},
-        {"word": "한",   "base": "하",   "steps": ["ㄴ"], "distractors": ["ㄱ","ㄷ","ㄹ","ㅂ","ㅅ"]},
-        {"word": "일곱", "base": "일고", "steps": ["ㅂ"], "distractors": ["ㄱ","ㄴ","ㄷ","ㅍ","ㅅ"]},
-        {"word": "사람", "base": "사라", "steps": ["ㅁ"], "distractors": ["ㄴ","ㄷ","ㄹ","ㅅ","ㅂ"]}
+        {"word": "살",   "emoji": "🎂", "base": "사",   "steps": ["ㄹ"], "distractors": ["ㄴ","ㄷ","ㅅ","ㅂ","ㅈ"]},
+        {"word": "잔",   "emoji": "🥛", "base": "자",   "steps": ["ㄴ"], "distractors": ["ㄱ","ㄷ","ㄹ","ㅂ","ㅅ"]},
+        {"word": "곰",   "emoji": "🐻", "base": "고",   "steps": ["ㅁ"], "distractors": ["ㄴ","ㄷ","ㄹ","ㅅ","ㅂ"]},
+        {"word": "한",   "emoji": "1️⃣", "base": "하",   "steps": ["ㄴ"], "distractors": ["ㄱ","ㄷ","ㄹ","ㅂ","ㅅ"]},
+        {"word": "일곱", "emoji": "🌹", "base": "일고", "steps": ["ㅂ"], "distractors": ["ㄱ","ㄴ","ㄷ","ㅍ","ㅅ"]},
+        {"word": "사람", "emoji": "👫", "base": "사라", "steps": ["ㅁ"], "distractors": ["ㄴ","ㄷ","ㄹ","ㅅ","ㅂ"]}
       ],
       "sort_game": [
         {"id": 0, "answer": ["나이",  "한",   "살"],   "distractors": ["두",   "마리", "개"]},
