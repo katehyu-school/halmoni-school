@@ -478,11 +478,12 @@ body {
 </div><!-- /deck -->
 
 <!-- ── Navigation ── -->
-<div class="nav">
+<div class="nav" id="nav-bar">
   <button id="btn-prev">◀ 이전</button>
   <div class="dots" id="dots"></div>
   <button id="btn-next">다음 ▶</button>
   <span id="pg-label" style="min-width:50px;text-align:center;"></span>
+  <button id="btn-fs" title="Fullscreen (F)">⛶ 전체화면</button>
 </div>
 
 <script>
@@ -512,6 +513,45 @@ for (let i = 1; i <= TOTAL; i++) {
 document.getElementById('btn-prev').onclick = () => { if (current > 1) show(current - 1); };
 document.getElementById('btn-next').onclick = () => { if (current < TOTAL) show(current + 1); };
 
+// ── 자동 스케일 (창 크기에 맞게) ──────────────────────────
+const DECK_W = 960, DECK_H = 540;
+const deck = document.getElementById('deck');
+const nav  = document.getElementById('nav-bar');
+
+function scaleToFit() {
+  const isFS = !!document.fullscreenElement;
+  const navH = isFS ? 0 : (nav.offsetHeight + 24);
+  const scaleX = window.innerWidth / DECK_W;
+  const scaleY = (window.innerHeight - navH) / DECK_H;
+  const scale  = Math.min(scaleX, scaleY) * 0.97; // 3% 여백
+  deck.style.transform = `scale(${scale})`;
+  deck.style.transformOrigin = 'center top';
+  deck.style.marginBottom = isFS ? '0' : `${(scale - 1) * DECK_H * 0.5}px`;
+}
+
+window.addEventListener('resize', scaleToFit);
+scaleToFit();
+
+// ── 전체화면 ──────────────────────────────────────────────
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+document.getElementById('btn-fs').onclick = toggleFullscreen;
+
+document.addEventListener('fullscreenchange', () => {
+  const isFS = !!document.fullscreenElement;
+  nav.style.display = isFS ? 'none' : 'flex';
+  document.body.style.justifyContent = isFS ? 'center' : 'center';
+  deck.style.transformOrigin = isFS ? 'center center' : 'center top';
+  setTimeout(scaleToFit, 50);
+});
+
+// ── 키보드 ────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
     e.preventDefault(); if (current < TOTAL) show(current + 1);
@@ -521,6 +561,7 @@ document.addEventListener('keydown', e => {
   }
   if (e.key === 'Home') show(1);
   if (e.key === 'End') show(TOTAL);
+  if (e.key === 'f' || e.key === 'F') toggleFullscreen();
 });
 
 show(1);
