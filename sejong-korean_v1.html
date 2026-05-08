@@ -1808,6 +1808,18 @@ body {
 .vi-book-btn.active { background: #3d6b8e; color: #fff; }
 .vi-book-btn:hover { background: #3d6b8e; color: #fff; }
 .vi-empty { padding: 40px; text-align: center; color: #bbb; font-size: 0.95rem; }
+.idx-tabs { display:flex; gap:8px; padding:16px 24px 0; border-bottom:2px solid var(--gray-100); margin-bottom:0; }
+.idx-tab { padding:8px 20px; border:none; background:transparent; font-family:var(--font-sans); font-size:0.92rem; font-weight:600; color:var(--gray-400); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all .15s; }
+.idx-tab:hover { color:var(--teal); }
+.idx-tab.active { color:var(--teal); border-bottom-color:var(--teal); }
+.gi-row { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-100); }
+.gi-title { font-size:1rem; font-weight:700; color:var(--gray-800); min-width:130px; }
+.gi-desc { font-size:0.85rem; color:var(--gray-500); flex:1; line-height:1.5; }
+.gi-pattern { font-size:0.78rem; color:var(--teal); margin-top:2px; font-style:italic; }
+.pi-row { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--gray-100); }
+.pi-title { font-size:1rem; font-weight:700; color:var(--gray-800); min-width:180px; }
+.pi-rule { font-size:0.85rem; color:var(--gray-500); flex:1; line-height:1.5; }
+.idx-unit-hdr { font-size:0.8rem; font-weight:700; color:#fff; background:var(--teal); display:inline-block; padding:2px 10px; border-radius:20px; margin:16px 0 6px; }
 </style>
 </head>
 <body>
@@ -2845,7 +2857,16 @@ body {
     </div>
 
     <!-- ══ 5. REAL LIFE PANEL ══ -->
-    <div class="section-panel" id="panel-index"></div>
+    <div class="section-panel" id="panel-index">
+      <div class="idx-tabs">
+        <button class="idx-tab active" onclick="switchIdxTab(this,'vocab')">📖 단어</button>
+        <button class="idx-tab" onclick="switchIdxTab(this,'grammar');renderGrammarIndex()">📌 문법</button>
+        <button class="idx-tab" onclick="switchIdxTab(this,'pron');renderPronIndex()">🔊 발음</button>
+      </div>
+      <div id="idx-vocab"></div>
+      <div id="idx-grammar" style="display:none"></div>
+      <div id="idx-pron" style="display:none"></div>
+    </div>
 
     <div class="section-panel" id="panel-real">
       <div class="panel-card">
@@ -3080,7 +3101,7 @@ function _viSetBook(btn, book) {
 }
 
 async function renderVocabIndex() {
-  const panel = document.getElementById('panel-index');
+  const panel = document.getElementById('idx-vocab');
   if (_viWords) { _viRebuildUI(); return; }
 
   panel.innerHTML = '<div class="vi-empty">⏳ 단어 모으는 중...</div>';
@@ -3117,7 +3138,7 @@ async function renderVocabIndex() {
 
 function _viRebuildUI() {
   const allWords = _viWords;
-  const panel = document.getElementById('panel-index');
+  const panel = document.getElementById('idx-vocab');
 
   // ── 책 종류 동적 수집 (로드된 유닛 기준) ──
   const books = [...new Set(allWords.map(w => w.book_code))];
@@ -3184,7 +3205,7 @@ function _viUpdateJumpBar(merged) {
     if (!(o in onsetPage)) onsetPage[o] = Math.floor(i / _viPageSize);
   });
   const btns = Object.entries(onsetPage).map(([o, pg]) =>
-    `<button class="vi-jump-btn" onclick="_viShowPage(${pg})">${o}</button>`
+    `<button class="vi-jump-btn" onclick="_viJumpToOnset('${o}',${pg})">${o}</button>`
   ).join('');
   bar.innerHTML = btns;
 }
@@ -3203,7 +3224,7 @@ function _viShowPage(page) {
     const onset = getOnset(w.sort);
     if (onset !== cur) {
       cur = onset;
-      html += `<div class="vi-section-hdr">${onset}</div>`;
+      html += `<div class="vi-section-hdr" data-onset="${onset}">${onset}</div>`;
     }
     const badges = w.units.map(u =>
       `<button class="vi-ubadge" onclick="goToUnitVocab(${u.unit})">${u.book_code}-${String(u.unit).padStart(2,'0')}</button>`
@@ -3238,6 +3259,103 @@ function _viShowPage(page) {
   // 인덱스 패널 상단으로 스크롤
   const _idxEl = document.getElementById('panel-index');
   if (_idxEl) window.scrollTo({ top: _idxEl.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+}
+
+function switchIdxTab(btn, tab) {
+  document.querySelectorAll('.idx-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['vocab','grammar','pron'].forEach(t => {
+    const el = document.getElementById('idx-' + t);
+    if (el) el.style.display = (t === tab) ? '' : 'none';
+  });
+  if (tab === 'vocab' && !_viWords) renderVocabIndex();
+}
+
+let _giLoaded = false;
+async function renderGrammarIndex() {
+  const panel = document.getElementById('idx-grammar');
+  if (_giLoaded) return;
+  panel.innerHTML = '<div class="vi-empty">⏳ 문법 모으는 중...</div>';
+  const unitNums = [4,5,6,7,8,9,10];
+  let html = '';
+  for (const n of unitNums) {
+    try {
+      const unit = await HalmoniCore.adult.loadUnit(n);
+      const sections = unit.sections?.grammar?.sections || [];
+      if (!sections.length) continue;
+      html += `<div style="padding:0 24px"><div class="idx-unit-hdr">${unit.book_code} Unit ${n} — ${unit.title}</div>`;
+      for (const g of sections) {
+        html += `<div class="gi-row">
+          <div class="gi-title">${g.title}</div>
+          <div class="gi-desc">
+            ${g.subtitle || g.meaning || ''}
+            ${g.pattern ? `<div class="gi-pattern">${g.pattern}</div>` : ''}
+          </div>
+          <button class="vi-ubadge" onclick="goToUnitGrammar(${n})">${unit.book_code}-${String(n).padStart(2,'0')}</button>
+        </div>`;
+      }
+      html += '</div>';
+    } catch(e) { console.warn('[GrammarIndex] unit' + n + ' 실패', e); }
+  }
+  panel.innerHTML = html || '<div class="vi-empty">문법 데이터가 없어요</div>';
+  _giLoaded = true;
+}
+
+let _piLoaded = false;
+async function renderPronIndex() {
+  const panel = document.getElementById('idx-pron');
+  if (_piLoaded) return;
+  panel.innerHTML = '<div class="vi-empty">⏳ 발음 규칙 모으는 중...</div>';
+  const unitNums = [4,5,6,7,8,9,10];
+  let html = '';
+  for (const n of unitNums) {
+    try {
+      const unit = await HalmoniCore.adult.loadUnit(n);
+      const sections = unit.sections?.pronunciation?.sections || [];
+      if (!sections.length) continue;
+      html += `<div style="padding:0 24px"><div class="idx-unit-hdr">${unit.book_code} Unit ${n} — ${unit.title}</div>`;
+      for (const p of sections) {
+        html += `<div class="pi-row">
+          <div class="pi-title">${p.title}</div>
+          <div class="pi-rule">
+            ${p.rule || ''}
+            ${p.rule_en ? `<div style="color:#aaa;font-size:0.8rem;margin-top:2px;">${p.rule_en}</div>` : ''}
+            ${p.rule_ko ? `<div style="color:#aaa;font-size:0.8rem;margin-top:2px;">${p.rule_ko}</div>` : ''}
+          </div>
+          <button class="vi-ubadge" onclick="goToUnitUsage(${n})">${unit.book_code}-${String(n).padStart(2,'0')}</button>
+        </div>`;
+      }
+      html += '</div>';
+    } catch(e) { console.warn('[PronIndex] unit' + n + ' 실패', e); }
+  }
+  panel.innerHTML = html || '<div class="vi-empty">발음 데이터가 없어요</div>';
+  _piLoaded = true;
+}
+
+function goToUnitGrammar(num) {
+  const btn = document.querySelector(`.unit-btn[onclick*="selectUnit(this,${num})"]`);
+  if (btn) { selectUnit(btn, num); loadUnit(num); }
+  setTimeout(() => {
+    const tab = document.querySelector('.section-tab[data-section="grammar"]');
+    if (tab) { switchTab(tab, 'grammar'); }
+  }, 600);
+}
+
+function goToUnitUsage(num) {
+  const btn = document.querySelector(`.unit-btn[onclick*="selectUnit(this,${num})"]`);
+  if (btn) { selectUnit(btn, num); loadUnit(num); }
+  setTimeout(() => {
+    const tab = document.querySelector('.section-tab[data-section="usage"]');
+    if (tab) { switchTab(tab, 'usage'); }
+  }, 600);
+}
+
+function _viJumpToOnset(onset, pg) {
+  _viShowPage(pg);
+  setTimeout(() => {
+    const hdr = document.querySelector(`.vi-section-hdr[data-onset="${onset}"]`);
+    if (hdr) hdr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
 }
 
 function _viFilter(q) {
