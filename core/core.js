@@ -41,7 +41,7 @@
   const TTS_PRESETS = {
     kinder: { rate: 0.5, pitch: 1.1 },  // 유아반: 아주 천천히
     elem:   { rate: 0.9, pitch: 1.1 },  // 초등반: 약간 천천히
-    adult:  { rate: 1.0, pitch: 1.0 },  // 성인반: 보통 속도
+    adult:  { rate: 0.85, pitch: 1.0 }, // 성인반: 약간 천천히 (학생 피드백 반영)
   };
 
   let _koVoice = null;
