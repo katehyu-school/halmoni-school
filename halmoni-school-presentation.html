@@ -158,7 +158,9 @@ body {
 .next-banner .nb-en { font-size: 11px; color: var(--teal); font-style:italic; margin-top:3px; }
 
 /* S9 — Closing */
-.s9 { background: var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+.s9 { background: var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding: 40px 48px; }
+.s9-link { text-decoration: none; display:flex; flex-direction:column; align-items:center; }
+.s9-link:hover .s9-badge { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
 .s9 .blob1 { position:absolute; width:340px; height:340px; border-radius:50%; background:var(--coral); opacity:0.1; top:-90px; right:-70px; }
 .s9 .blob2 { position:absolute; width:300px; height:300px; border-radius:50%; background:var(--teal); opacity:0.1; bottom:-80px; left:-60px; }
 .s9-emoji { font-size: 48px; margin-bottom:8px; }
@@ -168,7 +170,7 @@ body {
 .quote-text { font-size: 15px; color: rgba(255,255,255,0.9); line-height:1.7; font-style:italic; }
 .quote-mark { font-size: 28px; color: var(--teal); font-weight:900; }
 .s9-badges { display:flex; gap:12px; margin-bottom:16px; }
-.s9-badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight:700; }
+.s9-badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight:700; transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
 .s9-footer { font-size: 11px; color: var(--muted); }
 
 /* Tiger mascot */
@@ -467,12 +469,13 @@ body {
       <span class="quote-text"> 선생님 아이디어 + AI 구현력 =<br>세상에 하나뿐인 우리 가족 한국어 학교<br><em style="font-size:0.82em;font-style:italic;opacity:0.7;">Teacher's vision + AI capability =<br>A one-of-a-kind family Korean school</em> </span>
       <span class="quote-mark">"</span>
     </div>
-    <a href="https://katehyu-school.github.io/halmoni-school/" style"text-dcoration: none;"></ㅁ>
-    <div class="s9-badges">
-      <div class="s9-badge" style="background:#c9902a;color:#3d2a1a;">🌷 유아반</div>
-      <div class="s9-badge" style="background:#c4a8d4;color:#3d2a1a;">📖 초등반</div>
-      <div class="s9-badge" style="background:#c8d8e8;color:#3d2a1a;">🏛 성인반</div>
-    </div></a>
+    <a href="https://katehyu-school.github.io/halmoni-school/" class="s9-link" target="_blank">
+      <div class="s9-badges">
+        <div class="s9-badge" style="background:#c9902a;color:#3d2a1a;">🌷 유아반</div>
+        <div class="s9-badge" style="background:#c4a8d4;color:#3d2a1a;">📖 초등반</div>
+        <div class="s9-badge" style="background:#c8d8e8;color:#3d2a1a;">🏛 성인반</div>
+      </div>
+    </a>
     <div class="s9-footer">내가 제일 잘나가  ·  I Am the Best  ·  2026 Family AI Contest</div>
   </div>
 
