@@ -1440,11 +1440,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   <!-- VOCAB -->
   <div class="section active" id="u1-vocab">
     <div class="card">
-      <div class="section-title">👫 우리 반 친구들 — Classmates</div>
-      <div class="section-sub">Click each card to flip it! 카드를 클릭하세요.</div>
-      <div class="flashcard-grid" id="fc-names"></div>
-    </div>
-    <div class="card">
       <div class="section-title">🏃 뭘해요? — What do they do?</div>
       <div class="section-sub">Click each card to flip it!</div>
       <div class="flashcard-grid" id="fc-verbs"></div>
@@ -4144,13 +4139,13 @@ function _u7WCard(){
   const q  = qs[u7WIdx];
   const total = qs.length;
   const modeCol = u7WMode==='native' ? '#7B93F5' : '#F5837B';
-  const modeLabel = u7WMode==='native' ? '고유어' : '한자어';
+  const modeLabel = u7WMode==='native' ? 'Native Korean' : 'Sino-Korean';
   const el = document.getElementById('u7-write-content');
   if(!el) return;
   el.innerHTML = `
     <div style="display:flex;gap:8px;margin-bottom:16px;justify-content:center;">
-      <button onclick="u7WSwitchMode('native')" style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='native'?'#7B93F5':'#DDD'};background:${u7WMode==='native'?'#EEF1FF':'white'};color:${u7WMode==='native'?'#3D5AFE':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">고유어</button>
-      <button onclick="u7WSwitchMode('sino')"   style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='sino'?'#F5837B':'#DDD'};background:${u7WMode==='sino'?'#FFF0EE':'white'};color:${u7WMode==='sino'?'#D84315':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">한자어</button>
+      <button onclick="u7WSwitchMode('native')" style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='native'?'#7B93F5':'#DDD'};background:${u7WMode==='native'?'#EEF1FF':'white'};color:${u7WMode==='native'?'#3D5AFE':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">Native Korean</button>
+      <button onclick="u7WSwitchMode('sino')"   style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='sino'?'#F5837B':'#DDD'};background:${u7WMode==='sino'?'#FFF0EE':'white'};color:${u7WMode==='sino'?'#D84315':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">Sino-Korean</button>
     </div>
     <div style="background:white;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:24px 20px;text-align:center;">
       <div style="font-size:0.78rem;color:var(--muted);margin-bottom:8px;">${u7WIdx+1} / ${total} &nbsp;·&nbsp; <span style="color:${modeCol};font-weight:700;">${modeLabel}</span></div>
@@ -4200,7 +4195,7 @@ function u7WNext(ok){
     if(u7WIdx < qs.length-1){ u7WIdx++; _u7WCard(); }
     else {
       const other = u7WMode==='native' ? 'sino' : 'native';
-      const otherLabel = u7WMode==='native' ? '한자어' : '고유어';
+      const otherLabel = u7WMode==='native' ? 'Sino-Korean' : 'Native Korean';
       const total = qs.length;
       const pct = Math.round((u7WScore/total)*100);
       const emoji = pct===100?'🏆':pct>=80?'🥇':pct>=60?'🥈':'🥉';
@@ -6351,7 +6346,6 @@ async function init(){
   }
   buildFlashcards('fc6-places', u6PlaceVocab, 'lav');
   buildFlashcards('fc6-verbs',  u6VerbVocab, 'green');
-  buildFlashcards('fc-names',names,'sky');
   buildFlashcards('fc-verbs',verbs1,'mint');
   buildFlashcards('fc2-link',linkWords,'sun');
   buildFlashcards('fc2-places',places,'lav');
