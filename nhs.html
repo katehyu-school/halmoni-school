@@ -81,14 +81,14 @@ body { font-family: var(--font-kr); background: var(--cream-100); min-height: 10
 .tab-panel.active { display: block; }
 
 /* ── SCENE VIEWER ── */
-.scene-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.scene-wrap { display: flex; flex-direction: column; gap: 14px; max-width: 640px; }
 
 /* Left column: image + caption + nav stacked */
 .scene-col { display: flex; flex-direction: column; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
 
 .scene-panel {
   background: #B8DDD5 center/cover no-repeat;
-  height: 260px;
+  height: 380px;
   position: relative;
   flex-shrink: 0;
 }
@@ -366,10 +366,6 @@ function buildScript() {
           <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
         </div>
       </div>
-      <div class="script-list-panel">
-        <div class="script-list-hdr">Full Script</div>
-        <div class="script-list" id="script-list"></div>
-      </div>
     </div>`;
 }
 
@@ -414,31 +410,9 @@ function renderScene() {
   document.getElementById('nav-prev').disabled = sceneIdx === 0;
   document.getElementById('nav-next').disabled = sceneIdx === total-1;
 
-  document.querySelectorAll('.script-row').forEach((el,i) => el.classList.toggle('current', i===sceneIdx));
 }
 
 function initSceneViewer() {
-  const sl = document.getElementById('script-list');
-  if (sl) {
-    const charMap = {};
-    DATA.characters.forEach(c => { charMap[c.id] = c; });
-    sl.innerHTML = DATA.script.map((line,i) => {
-      const cfg = CHAR_CFG[line.speaker] || CHAR_CFG.narrator;
-      const tag = line.speech_type
-        ? `<span class="row-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`
-        : '';
-      return `
-        <div class="script-row${i===sceneIdx?' current':''}" onclick="jumpScene(${i})">
-          <div class="row-avatar" style="background:${cfg.bg}">${cfg.emoji}</div>
-          <div class="row-text">
-            <div class="row-kr">${esc(line.text)}</div>
-            <div class="row-en">${esc(line.en)}</div>
-            ${tag}
-          </div>
-          <button class="row-speak" onclick="event.stopPropagation();speak('${escA(line.text)}')">🔊</button>
-        </div>`;
-    }).join('');
-  }
   renderScene();
 }
 
@@ -447,7 +421,6 @@ function moveScene(dir) {
   if (next < 0 || next >= DATA.script.length) return;
   sceneIdx = next;
   renderScene();
-  document.querySelectorAll('.script-row')[sceneIdx]?.scrollIntoView({block:'nearest',behavior:'smooth'});
   speak(DATA.script[sceneIdx].text);
 }
 
