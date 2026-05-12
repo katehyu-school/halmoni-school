@@ -1,6 +1,6 @@
 {
   "id": "ep01",
-  "title": "안녕? 만나서 반가워!",
+  "title": "안녕, 만나서 반가워!",
   "title_en": "Hello, Nice to Meet You!",
   "level": "초급",
   "scene": "🏞️ 공원 · Park",
@@ -33,7 +33,7 @@
     { "speaker": "mirae",    "text": "인사해. 우리 엄마야.", "en": "Say hi. This is my mom.", "speech_type": "반말" },
     { "speaker": "jeongmin", "text": "안녕하세요? 저는 정민이에요.", "en": "Hello! I'm Jeongmin.", "speech_type": "존댓말" },
     { "speaker": "mom",      "text": "안녕? 나는 미래 엄마야. 만나서 반가워.", "en": "Hi! I'm Mirae's mom. Nice to meet you!", "speech_type": "반말" },
-    { "speaker": "jeongmin", "text": "네, 저도 만나서 반가워요!", "en": "Yes, nice to meet you too!", "speech_type": "존댓말" }
+    { "speaker": "jeongmin", "text": "네, 만나서 반가워요!", "en": "Yes, nice to meet you too!", "speech_type": "존댓말" }
   ],
   "vocab": [
     { "korean": "공원",      "romanization": "gong-won",         "english": "park",                    "emoji": "🏞️" },
@@ -79,6 +79,65 @@
         { "ko": "만나서 반가워.",      "en": "Nice to meet you. (informal)" },
         { "ko": "만나서 반가워요.",    "en": "Nice to meet you. (polite)" },
         { "ko": "만나서 반갑습니다.", "en": "Nice to meet you. (very formal)" }
+      ]
+    },
+    {
+      "id": "g3",
+      "title": "은/는 — 주제 조사 (Topic Marker)",
+      "title_en": "은/는 · The Topic Marker",
+      "icon": "🏷️",
+      "explanation_ko": "'은/는'은 문장의 주제를 나타내는 조사예요.\n받침이 있는 단어 뒤에는 '은', 받침이 없는 단어 뒤에는 '는'을 써요.\n'나는', '저는'처럼 주어 뒤에 많이 붙어요.",
+      "explanation_en": "은/는 marks the topic of a sentence — what you're talking about.\nUse 은 after a consonant-ending word, 는 after a vowel-ending word.",
+      "rule": "받침 있음 → ~은   ·   받침 없음 → ~는",
+      "examples": [
+        { "ko": "나는 정민이야.",    "en": "I'm Jeongmin. (나 ends in vowel → 는)" },
+        { "ko": "저는 미래예요.",    "en": "I'm Mirae. (저 ends in vowel → 는)" },
+        { "ko": "정민은 학생이에요.", "en": "Jeongmin is a student. (정민 ends in consonant ㄴ → 은)" }
+      ]
+    },
+    {
+      "id": "g4",
+      "title": "저도 — 'Me too / I also'",
+      "title_en": "저도 · Me too!",
+      "icon": "🙋",
+      "explanation_ko": "'도'는 '~도 (too / also / as well)'의 뜻이에요.\n'저는' 대신 '저도'를 쓰면 '나도 마찬가지예요'라는 의미가 돼요.\n반말에서는 '나도'라고 해요.",
+      "explanation_en": "'도' means 'too / also / as well.' It replaces 은/는 when you want to say 'me too' or 'also.'\nInformal: 나도 · Formal: 저도",
+      "rule": "나 + 도 → 나도   ·   저 + 도 → 저도",
+      "examples": [
+        { "ko": "네, 만나서 반가워요!", "en": "Yes, nice to meet you too! (정민's line in the episode)" },
+        { "ko": "나도 반가워!",         "en": "Nice to meet you too! (informal)" },
+        { "ko": "저도 반가워요.",        "en": "Nice to meet you too! (polite)" },
+        { "ko": "저도 학생이에요.",      "en": "I'm also a student." }
+      ]
+    },
+    {
+      "id": "g5",
+      "title": "우리 엄마 — '우리' (our / my)",
+      "title_en": "우리 · More than just 'our'",
+      "icon": "👨‍👩‍👧",
+      "explanation_ko": "영어에서는 'my mom'이라고 하지만, 한국어에서는 '우리 엄마'라고 해요!\n한국은 공동체 의식이 강해서 가족이나 가까운 것은 '내'보다 '우리'를 더 자연스럽게 써요.\n'우리 집', '우리 학교', '우리 나라'처럼요.\n'내 동생', '내 남자친구'처럼 '내'를 쓸 수도 있지만, '우리'가 더 자연스럽고 안전해요.",
+      "explanation_en": "While English says 'my mom,' Korean naturally says 우리 엄마 (our mom).\nKorean culture is community-oriented — family and close things are shared, so 우리 (our) feels more natural than 내 (my).\nYou'll hear: 우리 집 (my/our house), 우리 학교 (my/our school), 우리 나라 (my/our country).",
+      "rule": "우리 엄마 · 우리 집 · 우리 학교 · 우리 나라",
+      "examples": [
+        { "ko": "인사해. 우리 엄마야.",  "en": "Say hi. This is my mom. (from the episode)" },
+        { "ko": "우리 집에 와!",          "en": "Come to my house!" },
+        { "ko": "우리 학교가 좋아.",      "en": "I like my school." },
+        { "ko": "우리 나라는 한국이에요.", "en": "My country is Korea." }
+      ]
+    },
+    {
+      "id": "g6",
+      "title": "에 vs 에서 — 장소 조사",
+      "title_en": "에 vs 에서 · Location Particles",
+      "icon": "📍",
+      "explanation_ko": "둘 다 장소 뒤에 붙지만 의미가 달라요!\n'에'는 방향(어디로 가다)이나 위치(어디에 있다)를 나타내요.\n'에서'는 동작이 일어나는 장소(어디서 ~하다)를 나타내요.",
+      "explanation_en": "Both attach to places, but they mean different things!\n에 = direction (going TO) or existence (IS at a place)\n에서 = the location where an action HAPPENS",
+      "rule": "가다/있다 → 에   ·   행동하다 → 에서",
+      "examples": [
+        { "ko": "정민이 공원에 있어요.", "en": "Jeongmin IS in the park. (존재 → 에)" },
+        { "ko": "공원에 가요.",          "en": "I'm going TO the park. (방향 → 에)" },
+        { "ko": "공원에서 놀아요.",      "en": "I PLAY in the park. (동작 → 에서)" },
+        { "ko": "학교에서 공부해요.",    "en": "I study AT school. (동작 → 에서)" }
       ]
     }
   ],
