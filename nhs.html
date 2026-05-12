@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>새로운 한글 학교</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:    #6BA8A9;
+  --teal-dk: #4A8889;
+  --teal-lt: #D4EAEB;
+  --amber:   #F5C842;
+  --amber-lt:#FDF6D0;
+  --navy:    #1C2B3A;
+  --blue:    #3A7BD5;
+  --coral:   #E05A4A;
+  --green:   #4CAF7D;
+  --purple:  #7C5CBF;
+  --gray:    #F2F2F2;
+  --gray2:   #E0E0E0;
+  --text:    #2C3E50;
+  --muted:   #888;
+  --font-sans:  'Noto Sans KR', sans-serif;
+  --font-serif: 'Noto Serif KR', serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: var(--font-sans);
+  background: #C8DCDC;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── TOP BAR ─── */
+.top-bar {
+  background: var(--teal-dk);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 48px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.level-tabs { display: flex; gap: 4px; }
+.level-btn {
+  padding: 5px 14px;
+  border: none; border-radius: 6px;
+  font-size: 13px; font-weight: 700;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  transition: background .2s;
+}
+.level-btn.active { background: #fff; color: var(--teal-dk); }
+.level-btn:hover:not(.active) { background: rgba(255,255,255,0.25); }
+.school-title {
+  flex: 1; text-align: center;
+  font-size: 17px; font-weight: 700;
+  color: #fff; letter-spacing: 0.06em;
+  font-family: var(--font-serif);
+}
+.index-btn {
+  padding: 5px 16px;
+  background: rgba(255,255,255,0.2);
+  color: #fff; border: none;
+  border-radius: 6px; font-size: 13px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-sans);
+  transition: background .2s;
+}
+.index-btn:hover { background: rgba(255,255,255,0.35); }
+
+/* ─── MAIN LAYOUT ─── */
+.main-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: 160px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(4px);
+  padding: 16px 12px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(0,0,0,0.08);
+}
+.sidebar-hdr {
+  font-size: 13px; font-weight: 700;
+  color: var(--navy); margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--teal);
+}
+.ep-list { list-style: none; }
+.ep-list li {
+  font-size: 12px; color: var(--text);
+  padding: 7px 8px; border-radius: 8px;
+  cursor: pointer; transition: background .15s;
+  line-height: 1.4;
+}
+.ep-list li:hover { background: rgba(107,168,169,0.2); }
+.ep-list li.active {
+  background: var(--teal);
+  color: #fff; font-weight: 700;
+}
+.ep-list li::before {
+  content: '·';
+  margin-right: 5px;
+  color: var(--teal);
+}
+.ep-list li.active::before { color: #fff; }
+
+/* ─── CONTENT AREA ─── */
+.content-area {
+  flex: 1;
+  padding: 14px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* ─── EPISODE HEADER ─── */
+.ep-header {
+  background: var(--amber-lt);
+  border: 1.5px solid var(--amber);
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ep-badge {
+  background: var(--amber); color: var(--navy);
+  font-size: 10px; font-weight: 700;
+  padding: 2px 10px; border-radius: 20px;
+  white-space: nowrap;
+}
+.ep-title-text {
+  font-family: var(--font-serif);
+  font-size: 17px; font-weight: 700;
+  color: var(--navy);
+}
+.ep-scene {
+  font-size: 12px; color: var(--muted);
+  margin-left: auto;
+}
+
+/* ─── TAB BAR ─── */
+.tab-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  padding: 7px 14px;
+  background: #fff;
+  border: 1.5px solid var(--gray2);
+  border-radius: 8px;
+  font-size: 12px; font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: all .15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--teal); color: var(--teal-dk); }
+.tab-btn.active {
+  background: var(--teal-dk);
+  border-color: var(--teal-dk);
+  color: #fff; font-weight: 700;
+}
+
+/* ─── MEDIA + CONTENT ROW ─── */
+.media-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Animation / Video box */
+.anim-box {
+  flex: 0 0 55%;
+  background: #E8E8E8;
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.anim-box video {
+  width: 100%; height: auto;
+  max-height: 380px;
+  display: block;
+  border-radius: 14px;
+}
+.anim-placeholder {
+  color: #aaa; font-size: 14px;
+  text-align: center; padding: 30px;
+}
+
+/* Script box */
+.script-box {
+  flex: 1;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 14px 10px;
+  min-height: 220px;
+  overflow-y: auto;
+  max-height: 380px;
+}
+.script-hdr {
+  font-size: 12px; font-weight: 700;
+  color: var(--muted); margin-bottom: 10px;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.script-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.script-line:last-child { border-bottom: none; }
+.spk-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center;
+  justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  margin-top: 1px;
+}
+.script-text { flex: 1; }
+.script-kr {
+  font-family: var(--font-serif);
+  font-size: 13px; font-weight: 700;
+  color: var(--navy); line-height: 1.5;
+}
+.script-en {
+  font-size: 11px; color: var(--muted);
+  margin-top: 1px; line-height: 1.4;
+}
+.script-tag {
+  font-size: 9px; padding: 1px 6px;
+  border-radius: 8px; font-weight: 700;
+  white-space: nowrap; margin-top: 3px;
+  display: inline-block;
+}
+.tag-banmal   { background: #FFE0D8; color: var(--coral); }
+.tag-jondaemal{ background: #DDE8FF; color: var(--blue); }
+.speak-btn {
+  background: none; border: none;
+  font-size: 16px; cursor: pointer;
+  padding: 2px 4px; opacity: .65;
+  transition: opacity .15s, transform .15s;
+  flex-shrink: 0; margin-top: 2px;
+}
+.speak-btn:hover { opacity: 1; transform: scale(1.15); }
+
+/* ─── TAB PANELS ─── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* --- VOCAB panel --- */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+.vocab-card {
+  background: #fff;
+  border: 1.5px solid var(--gray2);
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+}
+.vocab-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--teal);
+  box-shadow: 0 4px 12px rgba(107,168,169,0.2);
+}
+.vocab-card.flipped .vc-front { display: none; }
+.vocab-card.flipped .vc-back  { display: block; }
+.vc-back { display: none; }
+.vc-emoji { font-size: 22px; margin-bottom: 4px; }
+.vc-kr {
+  font-family: var(--font-serif);
+  font-size: 15px; font-weight: 700; color: var(--navy);
+}
+.vc-rom { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.vc-hint { font-size: 10px; color: #bbb; margin-top: 5px; }
+.vc-en  { font-size: 13px; color: var(--teal-dk); font-weight: 600; }
+
+/* --- GRAMMAR panel --- */
+.grammar-card {
+  background: #fff;
+  border-radius: 12px;
+  border-left: 4px solid var(--purple);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.gram-title {
+  font-family: var(--font-serif);
+  font-size: 16px; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px;
+}
+.gram-title-en {
+  font-size: 12px; color: var(--muted);
+  margin-bottom: 10px;
+}
+.gram-exp {
+  font-size: 13px; color: var(--text);
+  line-height: 1.8; white-space: pre-line;
+  margin-bottom: 10px;
+}
+.gram-rule {
+  background: #F4F0FF;
+  border: 1px solid #D8CCFF;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px; font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+.gram-examples { list-style: none; }
+.gram-ex {
+  display: flex; gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.gram-ex:last-child { border: none; }
+.gram-ko {
+  font-family: var(--font-serif);
+  font-size: 14px; font-weight: 700;
+  color: var(--navy); min-width: 160px;
+}
+.gram-en { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* --- BANMAL/JONDAEMAL panel --- */
+.bj-intro {
+  background: #FFF8E6;
+  border: 1.5px solid var(--amber);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px; color: var(--navy);
+  line-height: 1.7; margin-bottom: 14px;
+}
+.bj-intro .en { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.bj-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.bj-table th {
+  padding: 10px 14px;
+  font-size: 12px; font-weight: 700;
+  text-align: center;
+}
+.bj-table th:nth-child(1) { background: #f5f5f5; color: var(--muted); text-align: left; }
+.bj-table th:nth-child(2) { background: #FFE8E0; color: var(--coral); }
+.bj-table th:nth-child(3) { background: #DDE8FF; color: var(--blue); }
+.bj-table td {
+  padding: 10px 14px;
+  border-top: 1px solid #f0f0f0;
+  vertical-align: top;
+}
+.bj-table td:nth-child(1) { color: var(--muted); font-size: 12px; }
+.bj-table td:nth-child(2) {
+  font-family: var(--font-serif);
+  font-weight: 700; color: var(--coral);
+  text-align: center;
+}
+.bj-table td:nth-child(3) {
+  font-family: var(--font-serif);
+  font-weight: 700; color: var(--blue);
+  text-align: center;
+}
+.bj-tip {
+  background: #E8F8F0;
+  border: 1.5px solid var(--green);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px; color: #1a5c3a;
+  font-weight: 600;
+}
+
+/* --- USAGE panel --- */
+.usage-section { margin-bottom: 18px; }
+.usage-section-title {
+  font-size: 13px; font-weight: 700;
+  color: var(--teal-dk); margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--teal-lt);
+}
+.usage-row {
+  display: flex; gap: 10px;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+}
+.usage-ctx {
+  font-size: 11px; color: var(--muted);
+  min-width: 70px; padding-top: 2px;
+}
+.usage-text { flex: 1; }
+.usage-kr {
+  font-family: var(--font-serif);
+  font-size: 14px; font-weight: 700; color: var(--navy);
+}
+.usage-en { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.usage-tip {
+  background: #FFF8E6;
+  border: 1.5px solid var(--amber);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px; line-height: 1.7; color: var(--navy);
+}
+.usage-tip .en { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+/* --- QUIZ panel --- */
+.quiz-wrapper { max-width: 560px; }
+.quiz-q {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  border: 1.5px solid var(--gray2);
+}
+.q-num {
+  font-size: 11px; font-weight: 700;
+  color: var(--teal-dk); margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.q-text {
+  font-family: var(--font-serif);
+  font-size: 14px; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px; line-height: 1.5;
+}
+.q-text-en { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+.q-options { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.q-opt {
+  padding: 9px 14px;
+  background: #f8f8f8;
+  border: 1.5px solid var(--gray2);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px; color: var(--text);
+  transition: all .15s;
+  font-family: var(--font-sans);
+}
+.q-opt:hover { border-color: var(--teal); background: var(--teal-lt); }
+.q-opt.correct { background: #E6F9EE; border-color: var(--green); color: #1a5c3a; font-weight: 700; }
+.q-opt.wrong   { background: #FFF0EE; border-color: var(--coral); color: var(--coral); }
+.q-explanation {
+  display: none;
+  margin-top: 10px;
+  background: #F0F8FF;
+  border-left: 3px solid var(--blue);
+  padding: 8px 12px;
+  font-size: 12px; color: var(--navy);
+  border-radius: 0 8px 8px 0;
+  line-height: 1.6;
+}
+.q-explanation.show { display: block; }
+.quiz-reset-btn {
+  margin-top: 6px;
+  padding: 10px 28px;
+  background: var(--teal-dk); color: #fff;
+  border: none; border-radius: 10px;
+  font-size: 13px; font-family: var(--font-sans);
+  cursor: pointer; font-weight: 700;
+  transition: opacity .2s;
+}
+.quiz-reset-btn:hover { opacity: .85; }
+
+/* --- REAL LIFE panel --- */
+.rl-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  border: 1.5px solid var(--gray2);
+}
+.rl-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px;
+}
+.rl-setup {
+  font-size: 12px; color: var(--muted);
+  margin-bottom: 12px; line-height: 1.5;
+}
+.rl-dialogue { display: flex; flex-direction: column; gap: 8px; }
+.rl-line { display: flex; gap: 10px; align-items: flex-start; }
+.rl-spk {
+  font-size: 11px; font-weight: 700;
+  color: var(--teal-dk); min-width: 56px;
+  padding-top: 3px;
+}
+.rl-bubble {
+  background: #F5F5F5;
+  border-radius: 0 10px 10px 10px;
+  padding: 8px 12px; flex: 1;
+}
+.rl-kr {
+  font-family: var(--font-serif);
+  font-size: 13px; font-weight: 700; color: var(--navy);
+}
+.rl-en { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.rl-tip {
+  background: #FFF8E6;
+  border: 1.5px solid var(--amber);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 13px; line-height: 1.8; color: var(--navy);
+  margin-bottom: 12px;
+}
+.rl-tip .en { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+/* ─── LOADING / ERROR ─── */
+.loading-msg {
+  text-align: center; padding: 40px;
+  color: var(--muted); font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<div class="top-bar">
+  <div class="level-tabs">
+    <button class="level-btn active" onclick="setLevel('초급', this)">초급</button>
+    <button class="level-btn" onclick="setLevel('중급', this)">중급</button>
+    <button class="level-btn" onclick="setLevel('고급', this)">고급</button>
+  </div>
+  <div class="school-title">새로운 한글 학교</div>
+  <a href="index.html" class="index-btn">index</a>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="main-layout">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-hdr">Episode</div>
+    <ul class="ep-list" id="ep-list">
+      <li class="active" onclick="loadEp('ep01', this)">1. 안녕, 만나서 반가워!</li>
+      <li onclick="alert('준비 중이에요!')">2. (coming soon)</li>
+      <li onclick="alert('준비 중이에요!')">3. </li>
+      <li onclick="alert('준비 중이에요!')">4. </li>
+      <li onclick="alert('준비 중이에요!')">5. </li>
+    </ul>
+  </div>
+
+  <!-- Content area -->
+  <div class="content-area" id="content-area">
+    <div class="loading-msg">⏳ 에피소드 로딩 중...</div>
+  </div>
+</div>
+
+<script>
+// ─── State ───────────────────────────────────────────────
+let DATA = null;
+let currentTab = 'script';
+let quizAnswered = {};
+
+// ─── Load episode data ────────────────────────────────────
+async function loadEp(epId, liEl) {
+  document.querySelectorAll('.ep-list li').forEach(l => l.classList.remove('active'));
+  if (liEl) liEl.classList.add('active');
+  document.getElementById('content-area').innerHTML = '<div class="loading-msg">⏳ 로딩 중...</div>';
+  try {
+    const res = await fetch(`data/nhs/${epId}.json`);
+    if (!res.ok) throw new Error('fetch failed');
+    DATA = await res.json();
+    quizAnswered = {};
+    currentTab = 'script';
+    renderContent();
+  } catch(e) {
+    document.getElementById('content-area').innerHTML =
+      '<div class="loading-msg">⚠️ 서버에서 실행해 주세요 (로컬 파일로는 JSON 로드가 안 돼요).<br><small>Run via a local server or GitHub Pages.</small></div>';
+  }
+}
+
+// ─── Render full content ──────────────────────────────────
+function renderContent() {
+  const ca = document.getElementById('content-area');
+  ca.innerHTML = `
+    <!-- Episode header -->
+    <div class="ep-header">
+      <div class="ep-badge">에피소드 1 · ${DATA.level}</div>
+      <div class="ep-title-text">${DATA.title}</div>
+      <div class="ep-scene">${DATA.scene}</div>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="tab-bar" id="tab-bar">
+      <button class="tab-btn${currentTab==='script'?' active':''}" onclick="showTab('script')">📽 영상 · Script</button>
+      <button class="tab-btn${currentTab==='vocab'?' active':''}"  onclick="showTab('vocab')">새어휘 vocab</button>
+      <button class="tab-btn${currentTab==='grammar'?' active':''}" onclick="showTab('grammar')">문법 grammar</button>
+      <button class="tab-btn${currentTab==='banmal'?' active':''}" onclick="showTab('banmal')">반말/존댓말</button>
+      <button class="tab-btn${currentTab==='usage'?' active':''}"  onclick="showTab('usage')">Usage</button>
+      <button class="tab-btn${currentTab==='quiz'?' active':''}"   onclick="showTab('quiz')">Quiz</button>
+      <button class="tab-btn${currentTab==='reallife'?' active':''}" onclick="showTab('reallife')">Real Life</button>
+    </div>
+
+    <!-- Tab panels -->
+    <div id="panel-script"  class="tab-panel${currentTab==='script'?' active':''}">${buildScript()}</div>
+    <div id="panel-vocab"   class="tab-panel${currentTab==='vocab'?' active':''}">${buildVocab()}</div>
+    <div id="panel-grammar" class="tab-panel${currentTab==='grammar'?' active':''}">${buildGrammar()}</div>
+    <div id="panel-banmal"  class="tab-panel${currentTab==='banmal'?' active':''}">${buildBanmal()}</div>
+    <div id="panel-usage"   class="tab-panel${currentTab==='usage'?' active':''}">${buildUsage()}</div>
+    <div id="panel-quiz"    class="tab-panel${currentTab==='quiz'?' active':''}">${buildQuiz()}</div>
+    <div id="panel-reallife"class="tab-panel${currentTab==='reallife'?' active':''}">${buildRealLife()}</div>
+  `;
+}
+
+// ─── Tab switch ───────────────────────────────────────────
+function showTab(name) {
+  currentTab = name;
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    const tabs = ['script','vocab','grammar','banmal','usage','quiz','reallife'];
+    b.classList.toggle('active', tabs[i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('panel-' + name);
+  if (panel) panel.classList.add('active');
+}
+
+// ─── BUILD: Script + Video ────────────────────────────────
+function buildScript() {
+  const charMap = {};
+  DATA.characters.forEach(c => { charMap[c.id] = c; });
+
+  const scriptLines = DATA.script.map(line => {
+    const ch = charMap[line.speaker] || { name:'', emoji:'💬', color:'#888' };
+    const tagHtml = line.speech_type
+      ? `<span class="script-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`
+      : '';
+    return `
+      <div class="script-line">
+        <div class="spk-dot" style="background:${ch.color}20; font-size:16px;">${ch.emoji}</div>
+        <div class="script-text">
+          <div class="script-kr">${escHtml(line.text)}</div>
+          <div class="script-en">${escHtml(line.en)}</div>
+          ${tagHtml}
+        </div>
+        <button class="speak-btn" onclick="speak('${escAttr(line.text)}')" title="듣기">🔊</button>
+      </div>`;
+  }).join('');
+
+  const videoPath = DATA.video ? `data/nhs/videos/${escAttr(DATA.video)}` : '';
+  // Try sibling path too (video might be in root)
+  const videoSrc = DATA.video || '';
+
+  return `
+    <div class="media-row">
+      <div class="anim-box">
+        <video id="ep-video" controls preload="metadata"
+          onerror="this.parentElement.innerHTML='<div class=anim-placeholder>🎬 Animation with voice<br><small>영상 파일: ${escHtml(videoSrc)}</small></div>'">
+          <source src="${escAttr(videoSrc)}" type="video/mp4">
+          <source src="안녕_만나서 반가워.mp4" type="video/mp4">
+          <div class="anim-placeholder">🎬 Animation with voice</div>
+        </video>
+      </div>
+      <div class="script-box">
+        <div class="script-hdr">script</div>
+        ${scriptLines}
+      </div>
+    </div>`;
+}
+
+// ─── BUILD: Vocabulary ────────────────────────────────────
+function buildVocab() {
+  const cards = DATA.vocab.map(v => `
+    <div class="vocab-card" onclick="this.classList.toggle('flipped')">
+      <div class="vc-front">
+        <div class="vc-emoji">${v.emoji || '📝'}</div>
+        <div class="vc-kr">${escHtml(v.korean)}</div>
+        <div class="vc-rom">[${escHtml(v.romanization)}]</div>
+        <button class="speak-btn" onclick="event.stopPropagation();speak('${escAttr(v.korean)}')" style="margin-top:4px;">🔊</button>
+        <div class="vc-hint">탭 → 뜻 보기</div>
+      </div>
+      <div class="vc-back">
+        <div class="vc-emoji">${v.emoji || '📝'}</div>
+        <div class="vc-en">${escHtml(v.english)}</div>
+        <div class="vc-kr" style="font-size:13px;margin-top:6px;">${escHtml(v.korean)}</div>
+        <div class="vc-rom">[${escHtml(v.romanization)}]</div>
+      </div>
+    </div>`).join('');
+  return `<div class="vocab-grid">${cards}</div>`;
+}
+
+// ─── BUILD: Grammar ───────────────────────────────────────
+function buildGrammar() {
+  return DATA.grammar.map(g => {
+    const examples = g.examples.map(ex => `
+      <li class="gram-ex">
+        <div class="gram-ko">${escHtml(ex.ko)}</div>
+        <div class="gram-en">${escHtml(ex.en)}</div>
+      </li>`).join('');
+    return `
+      <div class="grammar-card">
+        <div class="gram-title">${escHtml(g.title)} ${g.icon || ''}</div>
+        <div class="gram-title-en">${escHtml(g.title_en)}</div>
+        <div class="gram-exp">${escHtml(g.explanation_ko)}</div>
+        <div class="gram-rule">📐 ${escHtml(g.rule)}</div>
+        <ul class="gram-examples">${examples}</ul>
+      </div>`;
+  }).join('');
+}
+
+// ─── BUILD: 반말/존댓말 ───────────────────────────────────
+function buildBanmal() {
+  const bj = DATA.banmal_jondaemal;
+  const rows = bj.rows.map(r => `
+    <tr>
+      <td>${escHtml(r.situation_ko)}<br><span style="font-size:10px;">${escHtml(r.situation_en)}</span></td>
+      <td>${escHtml(r.banmal)}
+        <button class="speak-btn" onclick="speak('${escAttr(r.banmal)}')">🔊</button>
+      </td>
+      <td>${escHtml(r.jondaemal)}
+        <button class="speak-btn" onclick="speak('${escAttr(r.jondaemal)}')">🔊</button>
+      </td>
+    </tr>`).join('');
+  return `
+    <div class="bj-intro">
+      ${escHtml(bj.intro_ko)}
+      <div class="en">${escHtml(bj.intro_en)}</div>
+    </div>
+    <table class="bj-table">
+      <thead>
+        <tr>
+          <th>상황</th>
+          <th>반말 👧</th>
+          <th>존댓말 🙇</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="bj-tip">${escHtml(bj.tip)}</div>`;
+}
+
+// ─── BUILD: Usage ─────────────────────────────────────────
+function buildUsage() {
+  return DATA.usage.map(sec => {
+    if (sec.type === 'tip') {
+      return `
+        <div class="usage-tip">
+          <strong>${escHtml(sec.section)}</strong><br>
+          ${escHtml(sec.content_ko)}
+          <div class="en">${escHtml(sec.content_en)}</div>
+        </div>`;
+    }
+    const items = sec.items.map(it => `
+      <div class="usage-row">
+        <div class="usage-ctx">${escHtml(it.context_ko)}<br><span style="font-size:10px;color:#bbb;">${escHtml(it.context_en)}</span></div>
+        <div class="usage-text">
+          <div class="usage-kr">${escHtml(it.korean)}</div>
+          <div class="usage-en">${escHtml(it.english)}</div>
+        </div>
+        <button class="speak-btn" onclick="speak('${escAttr(it.korean)}')">🔊</button>
+      </div>`).join('');
+    return `
+      <div class="usage-section">
+        <div class="usage-section-title">${escHtml(sec.section)}</div>
+        ${items}
+      </div>`;
+  }).join('');
+}
+
+// ─── BUILD: Quiz ──────────────────────────────────────────
+function buildQuiz() {
+  const questions = DATA.quiz.map((q, qi) => {
+    const opts = q.options.map((opt, oi) => `
+      <li class="q-opt" id="opt-${q.id}-${oi}"
+        onclick="answerQuiz('${q.id}', ${oi}, ${q.answer}, '${escAttr(q.explanation)}')">
+        ${oi+1}. ${escHtml(opt)}
+      </li>`).join('');
+    return `
+      <div class="quiz-q">
+        <div class="q-num">문제 ${qi+1}</div>
+        <div class="q-text">${escHtml(q.question_ko)}</div>
+        <div class="q-text-en">${escHtml(q.question_en)}</div>
+        <ul class="q-options">${opts}</ul>
+        <div class="q-explanation" id="exp-${q.id}"></div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="quiz-wrapper">
+      ${questions}
+      <button class="quiz-reset-btn" onclick="resetQuiz()">↺ 다시 풀기</button>
+    </div>`;
+}
+
+function answerQuiz(qId, chosen, correct, explanation) {
+  if (quizAnswered[qId]) return;
+  quizAnswered[qId] = true;
+  DATA.quiz.forEach(q => {
+    if (q.id !== qId) return;
+    q.options.forEach((_, i) => {
+      const el = document.getElementById(`opt-${qId}-${i}`);
+      if (!el) return;
+      if (i === correct) el.classList.add('correct');
+      else if (i === chosen) el.classList.add('wrong');
+    });
+  });
+  const expEl = document.getElementById(`exp-${qId}`);
+  if (expEl) {
+    expEl.textContent = explanation;
+    expEl.classList.add('show');
+  }
+}
+
+function resetQuiz() {
+  quizAnswered = {};
+  document.getElementById('panel-quiz').innerHTML = buildQuiz();
+}
+
+// ─── BUILD: Real Life ─────────────────────────────────────
+function buildRealLife() {
+  return DATA.real_life.map(item => {
+    if (item.type === 'tip') {
+      return `
+        <div class="rl-tip">
+          <strong>${escHtml(item.title)}</strong><br>
+          ${escHtml(item.content_ko)}
+          <div class="en">${escHtml(item.content_en)}</div>
+        </div>`;
+    }
+    const lines = item.lines.map(l => `
+      <div class="rl-line">
+        <div class="rl-spk">${escHtml(l.speaker)}</div>
+        <div class="rl-bubble">
+          <div class="rl-kr">${escHtml(l.text)}</div>
+          <div class="rl-en">${escHtml(l.en)}</div>
+        </div>
+        <button class="speak-btn" onclick="speak('${escAttr(l.text)}')">🔊</button>
+      </div>`).join('');
+    return `
+      <div class="rl-card">
+        <div class="rl-title">${escHtml(item.title)}</div>
+        <div class="rl-setup">${escHtml(item.setup_ko)} <span style="color:#bbb;">· ${escHtml(item.setup_en)}</span></div>
+        <div class="rl-dialogue">${lines}</div>
+      </div>`;
+  }).join('');
+}
+
+// ─── TTS ─────────────────────────────────────────────────
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR'; u.rate = 0.88; u.pitch = 1.0;
+  const trySpeak = () => {
+    const voices = speechSynthesis.getVoices();
+    const v = voices.find(v => v.lang === 'ko-KR') || null;
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  };
+  speechSynthesis.getVoices().length ? trySpeak()
+    : (speechSynthesis.onvoiceschanged = () => { trySpeak(); speechSynthesis.onvoiceschanged = null; });
+}
+
+// ─── Level tabs ───────────────────────────────────────────
+function setLevel(level, btn) {
+  document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─── Helpers ─────────────────────────────────────────────
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  if (!s) return '';
+  return String(s).replace(/'/g,"\\'").replace(/"/g,'\\"');
+}
+
+// ─── Init ─────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  loadEp('ep01', document.querySelector('.ep-list li.active'));
+});
+</script>
+</body>
+</html>
