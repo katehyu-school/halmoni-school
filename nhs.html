@@ -678,6 +678,87 @@ const EPISODE_DATA = {
     "data/nhs/slides/안녕_만나서 반가워8.png",
     "data/nhs/slides/안녕_만나서 반가워9.png",
     "data/nhs/slides/안녕_만나서 반가워10.png"
+  ],
+  "banmal_jondaemal": {
+    "intro_ko": "한국어에는 반말(친구에게)과 존댓말(어른에게)이 있어요!",
+    "intro_en": "Korean has two speech levels: casual (반말) with friends, and polite (존댓말) with adults.",
+    "rows": [
+      {
+        "situation_ko": "인사",
+        "situation_en": "Greeting",
+        "banmal": "안녕?",
+        "jondaemal": "안녕하세요?"
+      },
+      {
+        "situation_ko": "나 소개",
+        "situation_en": "Introducing yourself",
+        "banmal": "나는 정민이야.",
+        "jondaemal": "저는 정민이에요."
+      },
+      {
+        "situation_ko": "처음 만날 때",
+        "situation_en": "First meeting",
+        "banmal": "만나서 반가워!",
+        "jondaemal": "만나서 반가워요!"
+      },
+      {
+        "situation_ko": "나도/저도",
+        "situation_en": "Me too",
+        "banmal": "나도 반가워!",
+        "jondaemal": "저도 반가워요!"
+      }
+    ],
+    "tip": "💡 같은 나이 친구 → 반말 / 어른·선생님·처음 만나는 사람 → 존댓말"
+  },
+  "usage": [
+    {
+      "type": "section",
+      "section": "👋 처음 만날 때 First Meeting",
+      "items": [
+        {
+          "context_ko": "친구에게",
+          "korean": "안녕? 나는 ___이야!",
+          "english": "Hi! I'm ___!"
+        },
+        {
+          "context_ko": "어른에게",
+          "korean": "안녕하세요? 저는 ___이에요.",
+          "english": "Hello! I'm ___."
+        },
+        {
+          "context_ko": "반응",
+          "korean": "만나서 반가워(요)!",
+          "english": "Nice to meet you!"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "section": "📍 장소 말할 때 Talking About Places",
+      "items": [
+        {
+          "context_ko": "어디 가요?",
+          "korean": "공원에 가요.",
+          "english": "I'm going to the park."
+        },
+        {
+          "context_ko": "어디서?",
+          "korean": "공원에서 놀아요.",
+          "english": "I play at the park."
+        },
+        {
+          "context_ko": "어디 있어요?",
+          "korean": "공원에 나무하고 연못이 있어요.",
+          "english": "There are trees and a pond at the park."
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "section": "💡 Tip",
+      "content_ko": "이름을 말할 때: 이름 끝이 받침(자음)으로 끝나면 '이야/이에요', 모음으로 끝나면 '야/예요'",
+      "content_en": "Name ending in consonant → 이야 / 이에요 · Name ending in vowel → 야 / 예요"
+    }
   ]
 }
 };
@@ -711,8 +792,8 @@ function loadEp(epId){
 }
 
 function render(){
-  const tabs=['script','vocab','grammar','quiz','reallife'];
-  const labels=['📽 영상·대사','새어휘 Vocab','문법 Grammar','Quiz','Real Life'];
+  const tabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
+  const labels=['📽 영상·Script','새어휘 Vocab','문법 Grammar','반말/존댓말','Usage','Quiz','Real Life'];
   document.getElementById('content-area').innerHTML=`
     <div class="ep-header">
       <div class="ep-num-badge">EP.${DATA.episode} · ${esc(DATA.level)}</div>
@@ -728,6 +809,8 @@ function fillAllPanels(){
   document.getElementById('panel-script').innerHTML=buildScript();
   document.getElementById('panel-vocab').innerHTML=buildVocab();
   document.getElementById('panel-grammar').innerHTML=buildGrammar();
+  document.getElementById('panel-banmal').innerHTML=buildBanmal();
+  document.getElementById('panel-usage').innerHTML=buildUsage();
   document.getElementById('panel-quiz').innerHTML=buildQuiz();
   document.getElementById('panel-reallife').innerHTML=buildRealLife();
   requestAnimationFrame(initSceneViewer);
@@ -736,7 +819,7 @@ function fillAllPanels(){
 function showTab(name){
   curTab=name;
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const tabs=['script','vocab','grammar','quiz','reallife'];
+  const tabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
   const idx=tabs.indexOf(name);
   if(idx>=0)document.querySelectorAll('.tab-btn')[idx].classList.add('active');
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
@@ -936,6 +1019,48 @@ function answerQ(qi,chosen,correct,hint){
   if(exp&&hint){exp.textContent='💡 '+hint;exp.classList.add('show');}
 }
 function resetQuiz(){qAnswered={};document.getElementById('panel-quiz').innerHTML=buildQuiz();}
+
+// ── BANMAL / JONDAEMAL ─────────────────────────────────
+function buildBanmal(){
+  const bj=DATA.banmal_jondaemal;
+  if(!bj)return'<div class="loading">데이터 준비 중이에요.</div>';
+  const rows=bj.rows.map(r=>`<tr>
+    <td>${esc(r.situation_ko)}<br><span style="font-size:10px;color:var(--cream-500)">${esc(r.situation_en)}</span></td>
+    <td><span style="font-family:var(--font-serif);font-weight:700;color:var(--coral)">${esc(r.banmal)}</span> <button onclick="speakTTS('${escA(r.banmal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></td>
+    <td><span style="font-family:var(--font-serif);font-weight:700;color:var(--blue)">${esc(r.jondaemal)}</span> <button onclick="speakTTS('${escA(r.jondaemal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></td>
+  </tr>`).join('');
+  return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:14px 18px;margin-bottom:16px;">
+    <p style="font-size:13px;color:var(--cream-900);line-height:1.75">${esc(bj.intro_ko)}</p>
+    <div style="font-size:11px;color:var(--cream-500);margin-top:4px">${esc(bj.intro_en)}</div>
+  </div>
+  <table style="width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);font-size:13px;margin-bottom:14px;">
+    <thead><tr>
+      <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--cream-200);background:var(--cream-50);color:var(--cream-500)">상황</th>
+      <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:center;border-bottom:2px solid var(--cream-200);background:#FFF4F3;color:var(--coral)">반말 👧👦</th>
+      <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:center;border-bottom:2px solid var(--cream-200);background:#F0F6FF;color:var(--blue)">존댓말 🙇</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div style="background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:var(--radius-md);padding:12px 16px;font-size:13px;color:var(--sage);font-weight:600">${esc(bj.tip)}</div>`;
+}
+
+// ── USAGE ──────────────────────────────────────────────
+function buildUsage(){
+  const usage=DATA.usage;
+  if(!usage)return'<div class="loading">데이터 준비 중이에요.</div>';
+  return usage.map(sec=>{
+    if(sec.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--cream-900);line-height:1.75;margin-bottom:14px"><strong>${esc(sec.section)}</strong><br>${esc(sec.content_ko)}<div style="font-size:11px;color:var(--cream-500);margin-top:6px">${esc(sec.content_en)}</div></div>`;
+    return`<div style="margin-bottom:20px">
+      <div style="font-size:12.5px;font-weight:700;color:var(--mint-700);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--mint-100)">${esc(sec.section)}</div>
+      ${sec.items.map(it=>`<div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:11px 15px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
+        <div style="font-size:10.5px;color:var(--cream-500);min-width:64px;line-height:1.4">${esc(it.context_ko)}</div>
+        <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900)">${esc(it.korean)}</div><div style="font-size:11px;color:var(--cream-500);margin-top:2px">${esc(it.english)}</div></div>
+        <button onclick="speakTTS('${escA(it.korean)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5;transition:opacity .15s">🔊</button>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
 
 // ── REAL LIFE ──────────────────────────────────────────
 function buildRealLife(){
