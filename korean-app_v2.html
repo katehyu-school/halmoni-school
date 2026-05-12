@@ -4133,11 +4133,11 @@ const U7W_SINO = [
   {num:'9',en:'nine',  answer:'구'},
   {num:'10',en:'ten',  answer:'십'},
 ];
-let u7WIdx=0, u7WIsDrawing=false, u7WLastX=0, u7WLastY=0, u7WMode='native';
+let u7WIdx=0, u7WIsDrawing=false, u7WLastX=0, u7WLastY=0, u7WMode='native', u7WScore=0;
 
-function renderU7Write(){ u7WIdx=0; u7WMode='native'; _u7WCard(); }
+function renderU7Write(){ u7WIdx=0; u7WMode='native'; u7WScore=0; _u7WCard(); }
 
-function u7WSwitchMode(m){ u7WMode=m; u7WIdx=0; _u7WCard(); }
+function u7WSwitchMode(m){ u7WMode=m; u7WIdx=0; u7WScore=0; _u7WCard(); }
 
 function _u7WCard(){
   const qs = u7WMode==='native' ? U7W_NATIVE : U7W_SINO;
@@ -4153,10 +4153,16 @@ function _u7WCard(){
       <button onclick="u7WSwitchMode('sino')"   style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='sino'?'#F5837B':'#DDD'};background:${u7WMode==='sino'?'#FFF0EE':'white'};color:${u7WMode==='sino'?'#D84315':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">한자어</button>
     </div>
     <div style="background:white;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:24px 20px;text-align:center;">
-      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px;">${u7WIdx+1} / ${total} &nbsp;·&nbsp; <span style="color:${modeCol};font-weight:700;">${modeLabel}</span></div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:8px;">${u7WIdx+1} / ${total} &nbsp;·&nbsp; <span style="color:${modeCol};font-weight:700;">${modeLabel}</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:0 4px;">
+        <div style="flex:1;height:10px;background:#EEF1FF;border-radius:10px;overflow:hidden;">
+          <div style="height:100%;width:${Math.round((u7WScore/total)*100)}%;background:linear-gradient(90deg,#7B93F5,var(--mint));border-radius:10px;transition:width 0.4s;"></div>
+        </div>
+        <div style="font-size:0.82rem;font-weight:700;color:#7B93F5;min-width:32px;text-align:right;">⭐ ${u7WScore}</div>
+      </div>
       <div style="font-size:3.6rem;font-weight:900;color:#3D5AFE;line-height:1;">${q.num}</div>
       <div style="font-size:1rem;color:var(--muted);margin:6px 0 18px;">${q.en}</div>
-      <div style="font-size:0.85rem;color:#888;margin-bottom:10px;">아래 칸에 한국어로 써 보세요 ✏️</div>
+      <div style="font-size:0.85rem;color:#888;margin-bottom:10px;">Write in Korean below ✏️</div>
       <div style="position:relative;display:inline-block;margin-bottom:16px;">
         <canvas id="u7wc" width="280" height="200"
           style="border:3px dashed #C5CAE9;border-radius:16px;background:#FAFBFF;touch-action:none;cursor:crosshair;display:block;"></canvas>
@@ -4186,22 +4192,36 @@ function u7WReveal(){
 
 function u7WNext(ok){
   const qs = u7WMode==='native' ? U7W_NATIVE : U7W_SINO;
+  if(ok) u7WScore++;
   const msg = document.getElementById('u7w-msg');
-  if(ok){ msg.innerHTML='<span style="font-size:1.3rem;">🎉 잘 썼어요!</span>'; }
+  if(ok){ msg.innerHTML='<span style="font-size:1.3rem;">🎉 잘 썼어요! +1⭐</span>'; }
   else  { msg.innerHTML='<span style="color:var(--coral);font-size:1rem;">괜찮아요! 연습하면 돼요 💪</span>'; }
   setTimeout(()=>{
     if(u7WIdx < qs.length-1){ u7WIdx++; _u7WCard(); }
     else {
       const other = u7WMode==='native' ? 'sino' : 'native';
       const otherLabel = u7WMode==='native' ? '한자어' : '고유어';
+      const total = qs.length;
+      const pct = Math.round((u7WScore/total)*100);
+      const emoji = pct===100?'🏆':pct>=80?'🥇':pct>=60?'🥈':'🥉';
+      const comment = pct===100?'Perfect! 완벽해요!':pct>=80?'Great job! 잘 했어요!':pct>=60?'Good! 잘 하고 있어요!':'Keep practicing! 더 연습해요!';
+      const stars = '⭐'.repeat(u7WScore) + '☆'.repeat(total-u7WScore);
       document.getElementById('u7-write-content').innerHTML=`
-        <div style="text-align:center;padding:40px 20px;background:white;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
-          <div style="font-size:2.8rem;margin-bottom:10px;">🏆</div>
-          <div style="font-family:'Jua',sans-serif;font-size:1.4rem;color:#3D5AFE;margin-bottom:6px;">모두 연습했어요!</div>
-          <div style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Great job! All done!</div>
-          <button onclick="u7WSwitchMode('${other}')" style="padding:12px 28px;background:#7B93F5;color:white;border:none;border-radius:24px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(123,147,245,0.3);">
-            ${otherLabel}도 연습하기 →
-          </button>
+        <div style="text-align:center;padding:32px 20px;background:white;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+          <div style="font-size:3rem;margin-bottom:8px;">${emoji}</div>
+          <div style="font-family:'Jua',sans-serif;font-size:1.5rem;color:#3D5AFE;margin-bottom:6px;">${u7WScore} / ${total}</div>
+          <div style="font-size:1.1rem;letter-spacing:2px;margin-bottom:10px;">${stars}</div>
+          <div style="background:linear-gradient(90deg,#EEF1FF,#E8F8F5);border-radius:12px;padding:10px 18px;display:inline-block;margin-bottom:6px;">
+            <div style="height:14px;background:#EEF1FF;border-radius:10px;overflow:hidden;width:200px;margin:0 auto 6px;">
+              <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#7B93F5,var(--mint));border-radius:10px;"></div>
+            </div>
+            <div style="font-family:'Jua',sans-serif;font-size:0.9rem;color:#3D5AFE;">${pct}%</div>
+          </div>
+          <div style="font-family:'Jua',sans-serif;font-size:1rem;color:var(--teal);margin:10px 0 20px;">${comment}</div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <button onclick="u7WSwitchMode('${u7WMode}')" style="padding:10px 22px;background:white;border:2px solid #7B93F5;color:#3D5AFE;border-radius:24px;font-family:'Jua',sans-serif;font-size:0.9rem;cursor:pointer;">🔄 다시 도전!</button>
+            <button onclick="u7WSwitchMode('${other}')" style="padding:10px 22px;background:#7B93F5;color:white;border:none;border-radius:24px;font-family:'Jua',sans-serif;font-size:0.9rem;cursor:pointer;box-shadow:0 2px 8px rgba(123,147,245,0.3);">${otherLabel} 연습 →</button>
+          </div>
         </div>`;
     }
   }, 1100);
