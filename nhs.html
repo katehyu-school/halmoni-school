@@ -143,6 +143,9 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
 .rl-tip{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:15px 18px;font-size:13px;line-height:1.8;color:var(--cream-900);margin-bottom:14px;}
 .rl-tip-body{font-size:13px;color:var(--cream-900);line-height:1.8;margin-top:6px;}
 .loading{padding:50px;text-align:center;color:var(--cream-500);font-size:13px;}
+
+.clova-credit{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.55);color:rgba(255,255,255,0.9);font-size:10px;padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);transition:opacity 1s;pointer-events:none;}
+.clova-credit.hidden{opacity:0;}
 </style>
 </head>
 <body>
@@ -169,56 +172,74 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
 // ── EMBEDDED EPISODE DATA ──────────────────────────────
 const EPISODE_DATA = {
   ep01: {
-  "episode": 1,
-  "title": "안녕? 나는 정민이야!",
-  "title_en": "Hi! I'm Jeongmin!",
-  "level": "기초반",
-  "scene": "공원",
-  "scene_en": "At the park",
+  "id": "ep01",
+  "title": "안녕, 만나서 반가워!",
+  "title_en": "Hello, Nice to Meet You!",
+  "level": "초급",
+  "scene": "🏞️ 공원 · Park",
+  "video": "안녕_만나서 반가워.mp4",
+  "slides": [
+    "data/nhs/slides/안녕_만나서 반가워1.png",
+    "data/nhs/slides/안녕_만나서 반가워2.png",
+    "data/nhs/slides/안녕_만나서 반가워3.png",
+    "data/nhs/slides/안녕_만나서 반가워4.png",
+    "data/nhs/slides/안녕_만나서 반가워5.png",
+    "data/nhs/slides/안녕_만나서 반가워6.png",
+    "data/nhs/slides/안녕_만나서 반가워7.png",
+    "data/nhs/slides/안녕_만나서 반가워8.png",
+    "data/nhs/slides/안녕_만나서 반가워9.png",
+    "data/nhs/slides/안녕_만나서 반가워10.png"
+  ],
   "characters": [
     {
       "id": "jeongmin",
       "name": "정민",
-      "role": "나 (주인공)",
-      "image": "img/jeongmin.png"
+      "emoji": "👦",
+      "color": "#5B9BD5",
+      "description": "남자아이 (boy)"
     },
     {
       "id": "mirae",
       "name": "미래",
-      "role": "친구",
-      "image": "img/mirae.png"
+      "emoji": "👧",
+      "color": "#E85D9A",
+      "description": "여자아이 (girl)"
     },
     {
       "id": "mom",
       "name": "미래 엄마",
-      "role": "친구 엄마",
-      "image": "img/mom.png"
+      "emoji": "👩",
+      "color": "#6BAF6B",
+      "description": "미래의 엄마 (Mirae's mom)"
+    },
+    {
+      "id": "narrator",
+      "name": "내레이터",
+      "emoji": "📢",
+      "color": "#888888",
+      "description": "narrator"
     }
   ],
   "script": [
     {
       "speaker": "narrator",
       "text": "여기는 공원이에요. 공원에 나무하고 연못이 있어요.",
-      "en": "This is a park. There are trees and a pond in the park.",
-      "speech_type": "narrator"
+      "en": "This is a park. There are trees and a pond in the park."
     },
     {
       "speaker": "narrator",
       "text": "정민이 공원에 있어요.",
-      "en": "Jeongmin is at the park.",
-      "speech_type": "narrator"
+      "en": "Jeongmin is in the park."
     },
     {
       "speaker": "narrator",
       "text": "정민이 공원에서 누구를 만나요.",
-      "en": "Jeongmin meets someone at the park.",
-      "speech_type": "narrator"
+      "en": "Jeongmin meets someone in the park."
     },
     {
       "speaker": "narrator",
       "text": "정민이 인사해요.",
-      "en": "Jeongmin says hello.",
-      "speech_type": "narrator"
+      "en": "Jeongmin greets them."
     },
     {
       "speaker": "jeongmin",
@@ -257,7 +278,7 @@ const EPISODE_DATA = {
     },
     {
       "speaker": "jeongmin",
-      "text": "네, 저도 만나서 반가워요!",
+      "text": "네, 만나서 반가워요!",
       "en": "Yes, nice to meet you too!",
       "speech_type": "존댓말",
       "audio": "data/nhs/TTS/06_네_만나서_반가워요.mp3"
@@ -265,327 +286,426 @@ const EPISODE_DATA = {
   ],
   "vocab": [
     {
+      "korean": "공원",
+      "romanization": "gong-won",
+      "english": "park",
+      "emoji": "🏞️"
+    },
+    {
+      "korean": "나무",
+      "romanization": "na-mu",
+      "english": "tree",
+      "emoji": "🌳"
+    },
+    {
+      "korean": "연못",
+      "romanization": "yeon-mot",
+      "english": "pond",
+      "emoji": "🪷"
+    },
+    {
+      "korean": "인사하다",
+      "romanization": "in-sa-ha-da",
+      "english": "to greet",
+      "emoji": "🙇"
+    },
+    {
       "korean": "안녕",
-      "romanization": "annyeong",
-      "en": "hi / hello (casual)",
-      "example": "안녕? 잘 지냈어?"
+      "romanization": "an-nyeong",
+      "english": "hi / hello (informal)",
+      "emoji": "👋"
     },
     {
       "korean": "안녕하세요",
-      "romanization": "annyeonghaseyo",
-      "en": "hello (formal)",
-      "example": "안녕하세요? 처음 뵙겠습니다."
+      "romanization": "an-nyeong-ha-se-yo",
+      "english": "hello (formal/polite)",
+      "emoji": "🙏"
     },
     {
       "korean": "나",
       "romanization": "na",
-      "en": "I / me (casual)",
-      "example": "나는 학생이야."
+      "english": "I / me (informal)",
+      "emoji": "👤"
     },
     {
       "korean": "저",
       "romanization": "jeo",
-      "en": "I / me (formal)",
-      "example": "저는 정민이에요."
+      "english": "I / me (formal/humble)",
+      "emoji": "🧑"
     },
     {
-      "korean": "이름",
-      "romanization": "ireum",
-      "en": "name",
-      "example": "이름이 뭐예요?"
+      "korean": "만나다",
+      "romanization": "man-na-da",
+      "english": "to meet",
+      "emoji": "🤝"
     },
     {
-      "korean": "만나서 반가워",
-      "romanization": "mannaseo bangawo",
-      "en": "Nice to meet you (casual)",
-      "example": "만나서 반가워!"
-    },
-    {
-      "korean": "만나서 반가워요",
-      "romanization": "mannaseo bangawoyo",
-      "en": "Nice to meet you (polite)",
-      "example": "만나서 반가워요!"
-    },
-    {
-      "korean": "우리",
-      "romanization": "uri",
-      "en": "our / we",
-      "example": "우리 엄마야."
+      "korean": "반갑다",
+      "romanization": "ban-gap-da",
+      "english": "to be glad / pleased",
+      "emoji": "😊"
     },
     {
       "korean": "엄마",
-      "romanization": "eomma",
-      "en": "mom",
-      "example": "우리 엄마야."
+      "romanization": "eom-ma",
+      "english": "mom / mother",
+      "emoji": "👩"
+    },
+    {
+      "korean": "우리",
+      "romanization": "u-ri",
+      "english": "our / we",
+      "emoji": "👨‍👩‍👧"
+    },
+    {
+      "korean": "이름",
+      "romanization": "i-reum",
+      "english": "name",
+      "emoji": "🏷️"
     },
     {
       "korean": "네",
       "romanization": "ne",
-      "en": "yes",
-      "example": "네, 알겠어요."
+      "english": "yes",
+      "emoji": "✅"
     }
   ],
   "grammar": [
     {
       "id": "g7",
-      "title": "하고 — And (Noun + Noun)",
-      "explanation_en": "하고 connects two nouns together, meaning 'and.' It's the simplest way to list things in Korean. Unlike English, it goes between and after each item!",
-      "pattern": "Noun + 하고 + Noun",
+      "title": "하고 — 'and / with' (연결 조사)",
+      "title_en": "하고 · And / With",
+      "icon": "🔗",
+      "explanation_en": "하고 connects two nouns: A + 하고 + B = A and B.\nIt's the conversational version of 와/과 (and).\nBonus: 하고 can also mean 'with' — 친구하고 가요 = I go with a friend.",
+      "rule": "Noun + 하고 + Noun",
       "examples": [
         {
-          "korean": "나무하고 연못이 있어요.",
-          "en": "There are trees and a pond."
+          "ko": "공원에 나무하고 연못이 있어요.",
+          "en": "There are trees and a pond in the park."
         },
         {
-          "korean": "엄마하고 아빠",
+          "ko": "엄마하고 아빠",
           "en": "mom and dad"
         },
         {
-          "korean": "사과하고 바나나",
-          "en": "apple and banana"
-        }
-      ],
-      "tip": "하고 can also mean 'with' — '친구하고 가요' = 'I go with a friend.'",
-      "usage": [
-        {
-          "situation": "물건 나열",
-          "example": "연필하고 지우개 있어요?",
-          "en": "Do you have a pencil and eraser?"
-        },
-        {
-          "situation": "같이 하는 사람",
-          "example": "누구하고 왔어요?",
-          "en": "Who did you come with?"
+          "ko": "친구하고 공원에 가요.",
+          "en": "I go to the park with a friend."
         }
       ]
     },
     {
       "id": "g3",
-      "title": "은/는 — Topic Marker",
-      "explanation_en": "은/는 marks the topic of a sentence — what we're talking about. Use 은 after a consonant, 는 after a vowel.",
-      "pattern": "Noun + 은/는",
+      "title": "은/는 — 주제 조사 (Topic Marker)",
+      "title_en": "은/는 · The Topic Marker",
+      "icon": "🏷️",
+      "explanation_en": "은/는 marks the topic of a sentence — what you're talking about.\nUse 은 after a consonant-ending word, 는 after a vowel-ending word.",
+      "rule": "받침 있음 → ~은   ·   받침 없음 → ~는",
       "examples": [
         {
-          "korean": "나는 정민이야.",
-          "en": "I'm Jeongmin. (topic: me)"
+          "ko": "나는 정민이야.",
+          "en": "I'm Jeongmin. (나 ends in vowel → 는)"
         },
         {
-          "korean": "저는 학생이에요.",
-          "en": "I'm a student. (topic: me)"
+          "ko": "저는 미래예요.",
+          "en": "I'm Mirae. (저 ends in vowel → 는)"
         },
         {
-          "korean": "미래는 내 친구야.",
-          "en": "Mirae is my friend. (topic: Mirae)"
-        }
-      ],
-      "tip": "은 comes after consonants (학생은), 는 comes after vowels (나는, 저는).",
-      "usage": [
-        {
-          "situation": "자기소개할 때",
-          "example": "저는 케이트예요.",
-          "en": "I'm Kate."
-        },
-        {
-          "situation": "이름 물어볼 때",
-          "example": "이름이 뭐예요?",
-          "en": "What's your name?"
+          "ko": "정민은 학생이에요.",
+          "en": "Jeongmin is a student. (정민 ends in consonant ㄴ → 은)"
         }
       ]
     },
     {
       "id": "g1",
-      "title": "나는/저는 — I am (반말 vs 존댓말)",
-      "explanation_en": "나는 is casual (used with friends, younger people). 저는 is polite (used with adults, strangers). Both mean 'I' but the level of politeness is different!",
-      "pattern": "나는 + Noun + 이야 / 저는 + Noun + 이에요",
+      "title": "나는/저는 ~이야/이에요",
+      "title_en": "I am ~ (Introducing yourself)",
+      "icon": "👤",
+      "explanation_en": "나 is informal, 저 is formal/humble. After a name ending in a consonant, add 이야/이에요. After a vowel, add 야/예요.",
+      "rule": "받침 있음 → ~이야 / ~이에요   ·   받침 없음 → ~야 / ~예요",
       "examples": [
         {
-          "korean": "나는 정민이야.",
-          "en": "I'm Jeongmin. (casual)"
+          "ko": "나는 정민이야.",
+          "en": "I'm Jeongmin. (informal, name ends in consonant ㄴ)"
         },
         {
-          "korean": "저는 정민이에요.",
-          "en": "I'm Jeongmin. (polite)"
+          "ko": "저는 정민이에요.",
+          "en": "I'm Jeongmin. (formal)"
         },
         {
-          "korean": "나는 미래야.",
-          "en": "I'm Mirae. (casual)"
-        }
-      ],
-      "tip": "With friends your age → 나는 ...이야. With adults or strangers → 저는 ...이에요.",
-      "usage": [
-        {
-          "situation": "친구에게 (casual)",
-          "example": "나는 제이크야!",
-          "en": "I'm Jake!"
+          "ko": "나는 미래야.",
+          "en": "I'm Mirae. (informal, name ends in vowel ㅐ)"
         },
         {
-          "situation": "어른에게 (polite)",
-          "example": "저는 제이크예요.",
-          "en": "I'm Jake."
+          "ko": "저는 미래예요.",
+          "en": "I'm Mirae. (formal)"
         }
       ]
     },
     {
       "id": "g6",
-      "title": "에 vs 에서 — Location Markers",
-      "explanation_en": "에 marks a destination or location of existence (where something is / where you go TO). 에서 marks where an action happens (where you DO something).",
-      "pattern": "Place + 에 (destination/existence) / Place + 에서 (action location)",
+      "title": "에 vs 에서 — 장소 조사",
+      "title_en": "에 vs 에서 · Location Particles",
+      "icon": "📍",
+      "explanation_en": "Both attach to places, but they mean different things!\n에 = direction (going TO) or existence (IS at a place)\n에서 = the location where an action HAPPENS",
+      "rule": "가다/있다 → 에   ·   행동하다 → 에서",
       "examples": [
         {
-          "korean": "학교에 가요.",
-          "en": "I go to school. (destination)"
+          "ko": "정민이 공원에 있어요.",
+          "en": "Jeongmin IS in the park. (존재 → 에)"
         },
         {
-          "korean": "학교에서 공부해요.",
-          "en": "I study at school. (action)"
+          "ko": "공원에 가요.",
+          "en": "I'm going TO the park. (방향 → 에)"
         },
         {
-          "korean": "집에 있어요.",
-          "en": "I'm at home. (existence)"
-        }
-      ],
-      "tip": "에 = where you GO or ARE. 에서 = where you DO something.",
-      "usage": [
-        {
-          "situation": "어디 가요?",
-          "example": "도서관에 가요.",
-          "en": "I'm going to the library."
+          "ko": "공원에서 놀아요.",
+          "en": "I PLAY in the park. (동작 → 에서)"
         },
         {
-          "situation": "어디서 먹어요?",
-          "example": "학교에서 먹어요.",
-          "en": "I eat at school."
+          "ko": "학교에서 공부해요.",
+          "en": "I study AT school. (동작 → 에서)"
         }
       ]
     },
     {
       "id": "g2",
-      "title": "만나서 반가워(요) — Nice to meet you",
-      "explanation_en": "만나서 means 'having met' and 반가워(요) means 'I'm glad / happy.' Together: 'I'm glad to have met you!' Use 반가워 with friends, 반가워요 with adults.",
-      "pattern": "만나서 반가워 (casual) / 만나서 반가워요 (polite)",
+      "title": "만나서 반가워(요) — -아서/어서",
+      "title_en": "Nice to meet you · the -아서/어서 connection",
+      "icon": "🔗",
+      "explanation_en": "'만나서 반가워' = meet (만나다) + because (아서) + glad (반갑다).\n-아서/어서 connects reasons or sequential actions.",
+      "rule": "만나다 → 만나 + 아서 → 만나서",
       "examples": [
         {
-          "korean": "만나서 반가워!",
-          "en": "Nice to meet you! (casual)"
+          "ko": "만나서 반가워.",
+          "en": "Nice to meet you. (informal)"
         },
         {
-          "korean": "만나서 반가워요!",
-          "en": "Nice to meet you! (polite)"
+          "ko": "만나서 반가워요.",
+          "en": "Nice to meet you. (polite)"
         },
         {
-          "korean": "처음 만나서 반가워요.",
-          "en": "Nice to meet you for the first time."
-        }
-      ],
-      "tip": "반가워 for friends, 반가워요 for adults — same rule as 이야/이에요!",
-      "usage": [
-        {
-          "situation": "처음 만나는 친구에게",
-          "example": "안녕? 만나서 반가워!",
-          "en": "Hi! Nice to meet you!"
-        },
-        {
-          "situation": "어른에게",
-          "example": "안녕하세요? 만나서 반가워요!",
-          "en": "Hello! Nice to meet you!"
+          "ko": "만나서 반갑습니다.",
+          "en": "Nice to meet you. (very formal)"
         }
       ]
     },
     {
       "id": "g4",
-      "title": "저도 — Me too / I also",
-      "explanation_en": "도 is a particle meaning 'also' or 'too.' 저도 means 'me too' or 'I also.' It replaces 는 when you want to say 'also.'",
-      "pattern": "Noun + 도",
+      "title": "저도 — 'Me too / I also'",
+      "title_en": "저도 · Me too!",
+      "icon": "🙋",
+      "explanation_en": "'도' means 'too / also / as well.' It replaces 은/는 when you want to say 'me too' or 'also.'\nInformal: 나도 · Formal: 저도",
+      "rule": "나 + 도 → 나도   ·   저 + 도 → 저도",
       "examples": [
         {
-          "korean": "저도 반가워요!",
-          "en": "Nice to meet you too!"
+          "ko": "네, 만나서 반가워요!",
+          "en": "Yes, nice to meet you too! (정민's line in the episode)"
         },
         {
-          "korean": "나도 학생이야.",
+          "ko": "나도 반가워!",
+          "en": "Nice to meet you too! (informal)"
+        },
+        {
+          "ko": "저도 반가워요.",
+          "en": "Nice to meet you too! (polite)"
+        },
+        {
+          "ko": "저도 학생이에요.",
           "en": "I'm also a student."
-        },
-        {
-          "korean": "미래도 왔어?",
-          "en": "Did Mirae come too?"
-        }
-      ],
-      "tip": "도 replaces 은/는. Don't say 저는도 — just 저도!",
-      "usage": [
-        {
-          "situation": "같은 감정 표현",
-          "example": "저도 반가워요!",
-          "en": "Nice to meet you too!"
-        },
-        {
-          "situation": "나도 같아요",
-          "example": "나도 배고파!",
-          "en": "I'm hungry too!"
         }
       ]
     },
     {
       "id": "g5",
-      "title": "우리 — Our / We",
-      "explanation_en": "우리 literally means 'we' or 'our,' but Koreans use it even when talking about one person! 우리 엄마 means 'my mom' (literally 'our mom'). This is a uniquely Korean cultural habit.",
-      "pattern": "우리 + Family/Close relationship",
+      "title": "우리 엄마 — '우리' (our / my)",
+      "title_en": "우리 · More than just 'our'",
+      "icon": "👨‍👩‍👧",
+      "explanation_en": "While English says 'my mom,' Korean naturally says 우리 엄마 (our mom).\nKorean culture is community-oriented — family and close things are shared, so 우리 (our) feels more natural than 내 (my).\nYou'll hear: 우리 집 (my/our house), 우리 학교 (my/our school), 우리 나라 (my/our country).",
+      "rule": "우리 엄마 · 우리 집 · 우리 학교 · 우리 나라",
       "examples": [
         {
-          "korean": "우리 엄마야.",
-          "en": "This is my mom. (lit: our mom)"
+          "ko": "인사해. 우리 엄마야.",
+          "en": "Say hi. This is my mom. (from the episode)"
         },
         {
-          "korean": "우리 학교야.",
-          "en": "This is my school. (lit: our school)"
+          "ko": "우리 집에 와!",
+          "en": "Come to my house!"
         },
         {
-          "korean": "우리 집에 와!",
-          "en": "Come to my house! (lit: our house)"
-        }
-      ],
-      "tip": "Koreans say 우리 엄마, not 나의 엄마. It shows closeness and belonging!",
-      "usage": [
-        {
-          "situation": "가족 소개",
-          "example": "우리 엄마야, 인사해!",
-          "en": "This is my mom, say hi!"
+          "ko": "우리 학교가 좋아.",
+          "en": "I like my school."
         },
         {
-          "situation": "내 물건/장소",
-          "example": "우리 학교 정말 좋아!",
-          "en": "I really like my school!"
+          "ko": "우리 나라는 한국이에요.",
+          "en": "My country is Korea."
         }
       ]
+    }
+  ],
+  "banmal_jondaemal": {
+    "intro_ko": "정민이가 미래에게는 반말, 미래 엄마에게는 존댓말을 써요. 같은 상황인데 말투가 달라요!",
+    "intro_en": "Jeongmin uses informal speech (반말) with Mirae, but formal speech (존댓말) with Mirae's mom — same situation, different speech levels!",
+    "rows": [
+      {
+        "situation_ko": "인사할 때",
+        "situation_en": "Greeting",
+        "banmal": "안녕?",
+        "jondaemal": "안녕하세요?",
+        "note": "친구에게는 '안녕', 어른에게는 '안녕하세요'"
+      },
+      {
+        "situation_ko": "나 소개할 때",
+        "situation_en": "Introducing yourself",
+        "banmal": "나는 정민이야.",
+        "jondaemal": "저는 정민이에요.",
+        "note": "나 → 저, ~이야 → ~이에요"
+      },
+      {
+        "situation_ko": "처음 만났을 때",
+        "situation_en": "First meeting",
+        "banmal": "만나서 반가워.",
+        "jondaemal": "만나서 반가워요.",
+        "note": "반가워 → 반가워요"
+      }
+    ],
+    "tip": "💡 같은 나이 친구 → 반말 OK  |  나이 많은 어른 → 꼭 존댓말!"
+  },
+  "usage": [
+    {
+      "section": "처음 만났을 때 (First meeting)",
+      "items": [
+        {
+          "context_ko": "친구에게",
+          "context_en": "To a friend",
+          "korean": "안녕? 나는 ___야/이야. 만나서 반가워!",
+          "english": "Hi! I'm ___. Nice to meet you!"
+        },
+        {
+          "context_ko": "어른에게",
+          "context_en": "To an adult",
+          "korean": "안녕하세요? 저는 ___이에요/예요. 만나서 반가워요!",
+          "english": "Hello! I'm ___. Nice to meet you!"
+        }
+      ]
+    },
+    {
+      "section": "이름 묻기 (Asking someone's name)",
+      "items": [
+        {
+          "context_ko": "친구에게",
+          "context_en": "To a friend",
+          "korean": "이름이 뭐야?",
+          "english": "What's your name?"
+        },
+        {
+          "context_ko": "어른에게",
+          "context_en": "To an adult",
+          "korean": "이름이 어떻게 되세요?",
+          "english": "What is your name? (polite)"
+        }
+      ]
+    },
+    {
+      "section": "🇰🇷 문화 팁",
+      "type": "tip",
+      "content_ko": "한국에서는 처음 만나는 어른에게 고개를 살짝 숙여서 인사해요. 정민이가 미래 엄마에게 인사할 때 고개를 숙인 것을 봤나요?",
+      "content_en": "In Korea, you bow slightly when greeting adults you meet for the first time. Did you notice Jeongmin bow when he met Mirae's mom in the video?"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question_ko": "정민이가 미래에게 처음 한 인사는?",
+      "question_en": "What did Jeongmin first say to Mirae?",
+      "options": [
+        "안녕하세요? 저는 정민이에요.",
+        "안녕? 나는 정민이야.",
+        "만나서 반갑습니다.",
+        "저는 정민이야."
+      ],
+      "answer": 1,
+      "explanation": "정민이와 미래는 또래 친구니까 반말을 써요. ✅ 안녕? 나는 정민이야."
+    },
+    {
+      "id": "q2",
+      "question_ko": "미래 엄마에게 인사할 때 올바른 표현은?",
+      "question_en": "Which greeting is correct for Mirae's mom (an adult)?",
+      "options": [
+        "안녕? 나는 정민이야.",
+        "만나서 반가워!",
+        "안녕하세요? 저는 정민이에요.",
+        "안녕? 반가워."
+      ],
+      "answer": 2,
+      "explanation": "어른에게는 존댓말을 써야 해요. ✅ 안녕하세요? 저는 정민이에요."
+    },
+    {
+      "id": "q3",
+      "question_ko": "'나는 미래야.'를 존댓말로 바꾸면?",
+      "question_en": "How do you say '나는 미래야.' formally?",
+      "options": [
+        "저는 미래야.",
+        "나는 미래이에요.",
+        "저는 미래예요.",
+        "저는 미래이야."
+      ],
+      "answer": 2,
+      "explanation": "미래 뒤에 받침이 없으니 '이에요' 대신 '예요'를 써요. ✅ 저는 미래예요."
+    },
+    {
+      "id": "q4",
+      "question_ko": "처음 만난 친구에게 어울리는 표현은?",
+      "question_en": "Which phrase fits when meeting a new friend for the first time?",
+      "options": [
+        "안녕히 계세요.",
+        "만나서 반가워!",
+        "다음에 봐!",
+        "잘 지냈어?"
+      ],
+      "answer": 1,
+      "explanation": "'만나서 반가워!'는 처음 만날 때 써요. ✅ Nice to meet you!"
+    },
+    {
+      "id": "q5",
+      "question_ko": "이름을 소개할 때 받침 규칙으로 알맞은 것은?",
+      "question_en": "Which shows the correct 받침 rule for introducing your name?",
+      "options": [
+        "나는 준서야. / 나는 소연야.",
+        "나는 준서이야. / 나는 소연야.",
+        "나는 준서야. / 나는 소연이야.",
+        "나는 준서이야. / 나는 소연이야."
+      ],
+      "answer": 2,
+      "explanation": "준서 → 받침 없음 → '야'. 소연 → 받침 있음 → '이야'. ✅ 준서야 / 소연이야"
     }
   ],
   "real_life": [
     {
       "type": "dialogue",
-      "title": "🏫 학교에서 처음 만났어요",
-      "scene": "교실 앞에서 새 친구를 만났어요.",
-      "dialogue": [
+      "title": "🏫 새 학교 첫날",
+      "title_en": "First Day at a New School",
+      "setup_ko": "새 반에서 짝꿍을 처음 만났어요.",
+      "setup_en": "You meet your desk partner for the first time.",
+      "lines": [
         {
           "speaker": "나",
-          "text": "안녕? 나는 에바야.",
-          "en": "Hi! I'm Eva."
+          "text": "안녕? 나는 ___야/이야. 만나서 반가워!",
+          "en": "Hi! I'm ___. Nice to meet you!"
         },
         {
-          "speaker": "친구",
-          "text": "안녕? 나는 지호야. 만나서 반가워!",
-          "en": "Hi! I'm Jiho. Nice to meet you!"
-        },
-        {
-          "speaker": "나",
-          "text": "나도 반가워!",
-          "en": "Nice to meet you too!"
+          "speaker": "짝꿍",
+          "text": "나도 반가워! 나는 ___야/이야.",
+          "en": "Nice to meet you too! I'm ___."
         }
       ]
     },
     {
       "type": "dialogue",
-      "title": "🏠 친구 집에 놀러 갔어요",
-      "scene": "친구 집에 갔는데 엄마가 나왔어요.",
-      "dialogue": [
+      "title": "🏠 친구 집 방문",
+      "title_en": "Visiting a Friend's Home",
+      "setup_ko": "친구 집에 처음 갔을 때 부모님을 만났어요.",
+      "setup_en": "You visit a friend's house and meet their parents.",
+      "lines": [
         {
           "speaker": "친구 엄마",
           "text": "어서 와! 네가 정민이야?",
@@ -606,158 +726,8 @@ const EPISODE_DATA = {
     {
       "type": "tip",
       "title": "🇰🇷 인사할 때 고개를 숙여요",
-      "content": "When you greet someone in Korea, you bow your head slightly. With close friends your age, a small nod is fine. With adults or elders, bow more deeply — it shows respect!",
-      "emoji": "🙇"
-    }
-  ],
-  "quiz": [
-    {
-      "q": "나는 정민이___.",
-      "choices": [
-        "이야",
-        "이에요",
-        "야",
-        "예요"
-      ],
-      "answer": 0,
-      "hint": "casual speech ending"
-    },
-    {
-      "q": "저는 미래___.",
-      "choices": [
-        "이야",
-        "이에요",
-        "야",
-        "예요"
-      ],
-      "answer": 3,
-      "hint": "polite speech, ends in vowel"
-    },
-    {
-      "q": "만나서 ___!",
-      "choices": [
-        "반가워요",
-        "반가워",
-        "감사해요",
-        "괜찮아요"
-      ],
-      "answer": 1,
-      "hint": "casual 'nice to meet you'"
-    },
-    {
-      "q": "우리 ___ 야.",
-      "choices": [
-        "엄마",
-        "이름",
-        "학교",
-        "친구"
-      ],
-      "answer": 0,
-      "hint": "Mirae said this to introduce her mom"
-    },
-    {
-      "q": "___도 반가워요!",
-      "choices": [
-        "나",
-        "저",
-        "우리",
-        "이름"
-      ],
-      "answer": 1,
-      "hint": "polite 'me too'"
-    }
-  ],
-  "slides": [
-    "data/nhs/slides/안녕_만나서 반가워1.png",
-    "data/nhs/slides/안녕_만나서 반가워2.png",
-    "data/nhs/slides/안녕_만나서 반가워3.png",
-    "data/nhs/slides/안녕_만나서 반가워4.png",
-    "data/nhs/slides/안녕_만나서 반가워5.png",
-    "data/nhs/slides/안녕_만나서 반가워6.png",
-    "data/nhs/slides/안녕_만나서 반가워7.png",
-    "data/nhs/slides/안녕_만나서 반가워8.png",
-    "data/nhs/slides/안녕_만나서 반가워9.png",
-    "data/nhs/slides/안녕_만나서 반가워10.png"
-  ],
-  "banmal_jondaemal": {
-    "intro_ko": "한국어에는 반말(친구에게)과 존댓말(어른에게)이 있어요!",
-    "intro_en": "Korean has two speech levels: casual (반말) with friends, and polite (존댓말) with adults.",
-    "rows": [
-      {
-        "situation_ko": "인사",
-        "situation_en": "Greeting",
-        "banmal": "안녕?",
-        "jondaemal": "안녕하세요?"
-      },
-      {
-        "situation_ko": "나 소개",
-        "situation_en": "Introducing yourself",
-        "banmal": "나는 정민이야.",
-        "jondaemal": "저는 정민이에요."
-      },
-      {
-        "situation_ko": "처음 만날 때",
-        "situation_en": "First meeting",
-        "banmal": "만나서 반가워!",
-        "jondaemal": "만나서 반가워요!"
-      },
-      {
-        "situation_ko": "나도/저도",
-        "situation_en": "Me too",
-        "banmal": "나도 반가워!",
-        "jondaemal": "저도 반가워요!"
-      }
-    ],
-    "tip": "💡 같은 나이 친구 → 반말 / 어른·선생님·처음 만나는 사람 → 존댓말"
-  },
-  "usage": [
-    {
-      "type": "section",
-      "section": "👋 처음 만날 때 First Meeting",
-      "items": [
-        {
-          "context_ko": "친구에게",
-          "korean": "안녕? 나는 ___이야!",
-          "english": "Hi! I'm ___!"
-        },
-        {
-          "context_ko": "어른에게",
-          "korean": "안녕하세요? 저는 ___이에요.",
-          "english": "Hello! I'm ___."
-        },
-        {
-          "context_ko": "반응",
-          "korean": "만나서 반가워(요)!",
-          "english": "Nice to meet you!"
-        }
-      ]
-    },
-    {
-      "type": "section",
-      "section": "📍 장소 말할 때 Talking About Places",
-      "items": [
-        {
-          "context_ko": "어디 가요?",
-          "korean": "공원에 가요.",
-          "english": "I'm going to the park."
-        },
-        {
-          "context_ko": "어디서?",
-          "korean": "공원에서 놀아요.",
-          "english": "I play at the park."
-        },
-        {
-          "context_ko": "어디 있어요?",
-          "korean": "공원에 나무하고 연못이 있어요.",
-          "english": "There are trees and a pond at the park."
-        }
-      ]
-    },
-    {
-      "type": "tip",
-      "section": "💡 Tip",
-      "content_ko": "이름을 말할 때: 이름 끝이 받침(자음)으로 끝나면 '이야/이에요', 모음으로 끝나면 '야/예요'",
-      "content_en": "Name ending in consonant → 이야 / 이에요 · Name ending in vowel → 야 / 예요"
+      "content_ko": "한국에서는 어른에게 인사할 때 고개를 숙여요. 친구에게는 살짝만, 어른에게는 좀 더 깊게요. 영상에서 정민이가 미래 엄마를 만났을 때 고개를 숙인 것처럼요!",
+      "content_en": "In Korea, you bow when greeting adults — a slight nod for acquaintances, a deeper bow for elders. Notice how Jeongmin bowed when meeting Mirae's mom in the video!"
     }
   ]
 }
@@ -831,7 +801,7 @@ function showTab(name){
 // ── SCRIPT / SCENE VIEWER ──────────────────────────────
 function buildScript(){
   return `<div class="scene-wrap"><div class="scene-col">
-    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div></div>
+    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div><div class="clova-credit" id="clova-credit">클로바더빙의 AI 보이스가 사용되었습니다.</div></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
       <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
@@ -845,7 +815,11 @@ function buildScript(){
   </div></div>`;
 }
 
-function initSceneViewer(){renderScene();}
+function initSceneViewer(){
+  renderScene();
+  const credit=document.getElementById('clova-credit');
+  if(credit){credit.classList.remove('hidden');setTimeout(()=>credit.classList.add('hidden'),5000);}
+}
 
 function renderScene(){
   const panel=document.getElementById('scene-panel');
@@ -957,7 +931,7 @@ function buildVocab(){
       </div>
       <div class="vc-back">
         <div class="vc-emoji">${v.emoji||'📝'}</div>
-        <div class="vc-en">${esc(v.en)}</div>
+        <div class="vc-en">${esc(v.english)}</div>
         <div class="vc-kr" style="font-size:13px;margin-top:6px">${esc(v.korean)}</div>
         <div class="vc-rom">[${esc(v.romanization)}]</div>
       </div>
@@ -970,10 +944,10 @@ function buildGrammar(){
     <div class="gram-card">
       <div class="gram-title">${esc(g.title)}</div>
       <div class="gram-exp">${esc(g.explanation_en)}</div>
-      <div class="gram-rule">📐 ${esc(g.pattern)}</div>
+      <div class="gram-rule">📐 ${esc(g.rule)}</div>
       <ul class="gram-ex-list">${(g.examples||[]).map(ex=>`
         <li class="gram-ex">
-          <div class="gram-ko">${esc(ex.korean)} <button onclick="speakTTS('${escA(ex.korean)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></div>
+          <div class="gram-ko">${esc(ex.ko)} <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></div>
           <div class="gram-en">${esc(ex.en)}</div>
         </li>`).join('')}
       </ul>
@@ -994,9 +968,9 @@ function buildQuiz(){
   return`<div class="quiz-wrap">${DATA.quiz.map((q,qi)=>`
     <div class="quiz-q">
       <div class="q-num">문제 ${qi+1}</div>
-      <div class="q-text">${esc(q.q)}</div>
-      <ul class="q-options">${(q.choices||[]).map((opt,oi)=>`
-        <li class="q-opt" id="opt-${qi}-${oi}" onclick="answerQ(${qi},${oi},${q.answer},'${escA(q.hint||'')}')">
+      <div class="q-text">${esc(q.question_ko)}</div><div class="q-text-en">${esc(q.question_en)}</div>
+      <ul class="q-options">${(q.options||[]).map((opt,oi)=>`
+        <li class="q-opt" id="opt-${qi}-${oi}" onclick="answerQ(${qi},${oi},${q.answer},'${escA(q.explanation||'')}')">
           <span style="font-weight:700;color:var(--mint-500);margin-right:6px">${oi+1}.</span>${esc(opt)}
         </li>`).join('')}
       </ul>
@@ -1009,7 +983,7 @@ function buildQuiz(){
 function answerQ(qi,chosen,correct,hint){
   if(qAnswered[qi])return;
   qAnswered[qi]=true;
-  DATA.quiz[qi].choices.forEach((_,i)=>{
+  DATA.quiz[qi].options.forEach((_,i)=>{
     const el=document.getElementById(`opt-${qi}-${i}`);
     if(!el)return;
     if(i===correct)el.classList.add('correct');
@@ -1066,10 +1040,10 @@ function buildUsage(){
 function buildRealLife(){
   return DATA.real_life.map(item=>{
     if(item.type==='tip')return`<div class="rl-tip"><strong>${esc(item.title)}</strong><div class="rl-tip-body">${esc(item.content)}</div></div>`;
-    const lines=item.dialogue||[];
+    const lines=item.lines||[];
     return`<div class="rl-card">
       <div class="rl-title">${esc(item.title)}</div>
-      ${item.scene?`<div class="rl-setup">${esc(item.scene)}</div>`:''}
+      ${item.setup_ko?`<div class="rl-setup">${esc(item.setup_ko)}<span style='color:var(--cream-500);font-size:10.5px;margin-left:6px'>${esc(item.setup_en||'')}</span></div>`:''}
       <div class="rl-dialogue">${lines.map(l=>`
         <div class="rl-line">
           <div class="rl-spk">${esc(l.speaker)}</div>
