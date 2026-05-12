@@ -232,12 +232,42 @@ body { font-family: var(--font-kr); background: var(--cream-100); min-height: 10
 .rl-tip .en { font-size: 11px; color: var(--cream-500); margin-top: 5px; }
 
 .loading { padding: 50px; text-align: center; color: var(--cream-500); font-size: 13px; }
+
+/* ── 한글 기초 탭 ── */
+.level-btn-basis { background: rgba(255,220,130,0.18) !important; color: rgba(255,240,180,0.85) !important; }
+.level-btn-basis.active { background: rgba(255,210,80,0.28) !important; color: #FFE066 !important; }
+
+/* ── COMPACT SCRIPT STRIP ── */
+.script-toggle-btn {
+  width: 100%; background: var(--cream-50); border: none; border-top: 1px solid var(--cream-200);
+  padding: 7px 14px; font-size: 11px; font-weight: 700; color: var(--cream-500);
+  cursor: pointer; text-align: left; display: flex; align-items: center; gap: 6px;
+  transition: background .15s; font-family: var(--font-kr);
+}
+.script-toggle-btn:hover { background: var(--mint-50); color: var(--mint-700); }
+.script-strip {
+  display: none; max-height: 160px; overflow-y: auto;
+  background: var(--cream-50); border-top: 1px solid var(--cream-100);
+}
+.script-strip.open { display: block; }
+.strip-row {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 6px 14px; border-bottom: 1px solid var(--cream-100);
+  cursor: pointer; transition: background .1s;
+}
+.strip-row:last-child { border: none; }
+.strip-row:hover { background: var(--mint-50); }
+.strip-row.current { background: var(--mint-100); }
+.strip-avatar { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+.strip-kr { font-family: var(--font-serif); font-size: 12px; font-weight: 700; color: var(--cream-900); line-height: 1.45; }
+.strip-en { font-size: 10px; color: var(--cream-500); margin-top: 1px; }
 </style>
 </head>
 <body>
 
 <div class="top-bar">
   <div class="level-tabs">
+    <button class="level-btn level-btn-basis" onclick="setLevel(this)">한글 기초</button>
     <button class="level-btn active" onclick="setLevel(this)">초급</button>
     <button class="level-btn" onclick="setLevel(this)">중급</button>
     <button class="level-btn" onclick="setLevel(this)">고급</button>
@@ -267,7 +297,7 @@ const CHAR_CFG = {
 };
 
 const EPISODES = [
-  { id:'ep01', label:'안녕? 만나서 반가워!' },
+  { id:'ep01', label:'안녕, 만나서 반가워!' },
   { id:'ep02', label:'coming soon', disabled:true },
   { id:'ep03', label:'', disabled:true },
   { id:'ep04', label:'', disabled:true },
@@ -362,9 +392,14 @@ function buildScript() {
             <div class="nav-steps" id="nav-steps"></div>
             <div class="nav-count" id="nav-count"></div>
           </div>
+          <button class="nav-speak-btn" title="랜덤" onclick="randomScene()">🎲</button>
           <button class="nav-speak-btn" onclick="speakCurrent()">🔊</button>
           <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
         </div>
+        <button class="script-toggle-btn" id="script-toggle-btn" onclick="toggleStrip()">
+          <span id="strip-arrow">▶</span> 전체 스크립트 보기
+        </button>
+        <div class="script-strip" id="script-strip"></div>
       </div>
     </div>`;
 }
@@ -409,7 +444,7 @@ function renderScene() {
   document.getElementById('nav-count').textContent = `${sceneIdx+1} / ${total}`;
   document.getElementById('nav-prev').disabled = sceneIdx === 0;
   document.getElementById('nav-next').disabled = sceneIdx === total-1;
-
+  updateStripHighlight();
 }
 
 function initSceneViewer() {
@@ -431,6 +466,42 @@ function jumpScene(i) {
 }
 
 function speakCurrent() { if (DATA) speak(DATA.script[sceneIdx].text); }
+
+function randomScene() {
+  const total = DATA.script.length;
+  let next;
+  do { next = Math.floor(Math.random() * total); } while (next === sceneIdx && total > 1);
+  sceneIdx = next;
+  renderScene();
+  speak(DATA.script[sceneIdx].text);
+}
+
+function toggleStrip() {
+  const strip = document.getElementById('script-strip');
+  const arrow = document.getElementById('strip-arrow');
+  const isOpen = strip.classList.toggle('open');
+  arrow.textContent = isOpen ? '▼' : '▶';
+  if (isOpen && !strip.innerHTML) buildStrip();
+}
+
+function buildStrip() {
+  const strip = document.getElementById('script-strip');
+  if (!strip) return;
+  strip.innerHTML = DATA.script.map((line, i) => {
+    const cfg = CHAR_CFG[line.speaker] || CHAR_CFG.narrator;
+    return `<div class="strip-row${i===sceneIdx?' current':''}" onclick="jumpScene(${i});updateStripHighlight()">
+      <div class="strip-avatar">${cfg.emoji}</div>
+      <div>
+        <div class="strip-kr">${esc(line.text)}</div>
+        <div class="strip-en">${esc(line.en)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateStripHighlight() {
+  document.querySelectorAll('.strip-row').forEach((el,i) => el.classList.toggle('current', i===sceneIdx));
+}
 
 // ── VOCAB ──────────────────────────────────────────────
 function buildVocab() {

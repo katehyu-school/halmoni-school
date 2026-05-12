@@ -1236,7 +1236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 <nav class="top-nav">
-  <div class="top-nav-brand" onclick="showTOC()">📚 어린이 한글교실</div>
+  <div class="top-nav-brand" onclick="showTOC()">📚 한글학교 한국어</div>
   <div class="book-tabs" id="book-tabs-wrap">
     <button class="book-tab locked">1권</button>
     <button class="book-tab active" onclick="selectBook(2)">2권</button>
@@ -4034,11 +4034,11 @@ let u6S1Q = [
 // 게임 Part 2 Step 2 — 낱말 드래그앤드랍 (에/에서 집중)
 let u6Questions = [
   {scene:'🦁', english:'Liam and Kayo go to the zoo.', hint:'zoo = destination → 에', sentence:'리암하고 카요는 동물원에 가요.',
-   answer:['리암하고','카요는','동물원','에','가요.'],
-   types:['name','name','place','particle','verb']},
+   answer:['리암','하고','카요','는','동물원','에','가요.'],
+   types:['name','particle','name','particle','place','particle','verb']},
   {scene:'🐯', english:'Mira sees a tiger at the zoo.', hint:'zoo = action location → 에서', sentence:'미라는 동물원에서 호랑이를 봐요.',
-   answer:['미라는','동물원','에서','호랑이를','봐요.'],
-   types:['name','place','particle','name','verb']},
+   answer:['미라','는','동물원','에서','호랑이','를','봐요.'],
+   types:['name','particle','place','particle','name','particle','verb']},
   {scene:'🐰', english:'Mom and sibling make a rabbit doll in the room.', hint:'에서 = action location · watch all the particles! 👀', sentence:'엄마하고 동생은 방에서 토끼 인형을 만들어요.',
    answer:['엄마','하고','동생','은','방','에서','토끼','인형','을','만들어요.'],
    types:['name','particle','name','particle','place','particle','name','name','particle','verb']}
@@ -4168,7 +4168,7 @@ function u7LPlay() {
   else if (window.speechSynthesis) {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang='ko-KR'; u.rate=0.85;
+    u.lang='ko-KR'; u.rate=0.72;
     speechSynthesis.speak(u);
   }
 }
@@ -4933,7 +4933,7 @@ function u6PlayAudio() {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'ko-KR';
-    u.rate = 0.85;
+    u.rate = 0.72;
     u.pitch = 1.1;
     speechSynthesis.speak(u);
   }
@@ -5113,7 +5113,7 @@ function u6ShowResult(picked) {
   if ('speechSynthesis' in window) {
     speechSynthesis.cancel();
     const utt = new SpeechSynthesisUtterance(q.audio);
-    utt.lang = 'ko-KR'; utt.rate = 0.85; utt.pitch = 1.1;
+    utt.lang = 'ko-KR'; utt.rate = 0.72; utt.pitch = 1.1;
     speechSynthesis.speak(utt);
   }
   const nxt = document.getElementById('u6-p1-next');
@@ -5467,7 +5467,7 @@ function u8LPlay() {
   if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
   else if (window.speechSynthesis) {
     speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
+    const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.72;
     speechSynthesis.speak(u);
   }
 }
@@ -5888,7 +5888,7 @@ function u9LPlay() {
   if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
   else if (window.speechSynthesis) {
     speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
+    const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.72;
     speechSynthesis.speak(u);
   }
 }
