@@ -7,264 +7,167 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --mint-900: #1A4A42;
-  --mint-700: #2D7A6E;
-  --mint-500: #4A9E8E;
-  --mint-300: #8ECBC2;
-  --mint-100: #D4EDE9;
-  --mint-50:  #EDF7F5;
-  --cream-900: #3A3228;
-  --cream-700: #6B5E4E;
-  --cream-500: #9C8C7A;
-  --cream-200: #E8E0D0;
-  --cream-100: #F0EAE0;
-  --cream-50:  #FAF7F2;
-  --amber-lt: #FEF3E4;
-  --coral:  #D95F50;
-  --blue:   #3E7EC4;
-  --sage:   #4A8A5E;
-  --shadow-sm: 0 1px 4px rgba(45,122,110,0.08);
-  --shadow-md: 0 3px 12px rgba(45,122,110,0.12);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --font-kr: 'Noto Sans KR', sans-serif;
-  --font-serif: 'Noto Serif KR', serif;
+  --mint-900:#1A4A42;--mint-700:#2D7A6E;--mint-500:#4A9E8E;--mint-300:#8ECBC2;--mint-100:#D4EDE9;--mint-50:#EDF7F5;
+  --cream-900:#3A3228;--cream-700:#6B5E4E;--cream-500:#9C8C7A;--cream-200:#E8E0D0;--cream-100:#F0EAE0;--cream-50:#FAF7F2;
+  --amber-lt:#FEF3E4;--coral:#D95F50;--blue:#3E7EC4;--sage:#4A8A5E;
+  --shadow-sm:0 1px 4px rgba(45,122,110,0.08);--shadow-md:0 3px 12px rgba(45,122,110,0.12);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:24px;
+  --font-kr:'Noto Sans KR',sans-serif;--font-serif:'Noto Serif KR',serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 15px; }
-body { font-family: var(--font-kr); background: var(--cream-100); min-height: 100vh; display: flex; flex-direction: column; color: var(--cream-900); }
-
-/* ── TOP BAR ── */
-.top-bar { background: var(--mint-700); display: flex; align-items: center; padding: 0 20px; height: 52px; gap: 10px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-.level-tabs { display: flex; gap: 3px; }
-.level-btn { padding: 5px 16px; border: none; border-radius: var(--radius-xl); font-size: 12.5px; font-weight: 700; font-family: var(--font-kr); cursor: pointer; color: rgba(255,255,255,0.7); background: transparent; transition: all .2s; letter-spacing: 0.03em; }
-.level-btn.active { background: rgba(255,255,255,0.2); color: #fff; }
-.level-btn:hover:not(.active) { color: #fff; }
-.school-title { flex: 1; text-align: center; font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: #fff; letter-spacing: 0.08em; }
-.index-btn { padding: 6px 18px; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius-xl); font-size: 12px; font-family: var(--font-kr); text-decoration: none; cursor: pointer; transition: all .2s; }
-.index-btn:hover { background: rgba(255,255,255,0.28); color: #fff; }
-
-/* ── LAYOUT ── */
-.main-layout { display: flex; flex: 1; min-height: 0; }
-
-/* ── SIDEBAR ── */
-.sidebar { width: 220px; flex-shrink: 0; background: var(--cream-50); border-right: 1px solid var(--cream-200); padding: 20px 14px; display: flex; flex-direction: column; gap: 4px; }
-.sidebar-hdr { font-size: 10px; font-weight: 700; color: var(--mint-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--mint-100); }
-.ep-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: var(--radius-sm); cursor: pointer; transition: all .15s; border: 1px solid transparent; }
-.ep-item:hover { background: var(--mint-50); border-color: var(--mint-100); }
-.ep-item.active { background: var(--mint-100); border-color: var(--mint-300); }
-.ep-num { font-size: 10px; font-weight: 700; color: #fff; background: var(--mint-300); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-.ep-item.active .ep-num { background: var(--mint-700); }
-.ep-name { font-size: 12.5px; color: var(--cream-700); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ep-item.active .ep-name { color: var(--mint-900); font-weight: 700; }
-
-/* ── CONTENT AREA ── */
-.content-area { flex: 1; min-width: 0; padding: 20px 22px 28px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
-
-/* ── EPISODE HEADER ── */
-.ep-header { background: linear-gradient(135deg, var(--mint-700) 0%, var(--mint-500) 100%); border-radius: var(--radius-lg); padding: 18px 22px; color: #fff; display: flex; align-items: center; gap: 14px; box-shadow: var(--shadow-md); }
-.ep-num-badge { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-xl); padding: 3px 12px; font-size: 11px; font-weight: 700; white-space: nowrap; letter-spacing: 0.04em; }
-.ep-title-wrap { flex: 1; }
-.ep-title-kr { font-family: var(--font-serif); font-size: 19px; font-weight: 700; letter-spacing: 0.02em; line-height: 1.3; }
-.ep-title-en { font-size: 11px; opacity: 0.75; margin-top: 2px; }
-.ep-scene-badge { background: rgba(255,255,255,0.15); border-radius: var(--radius-xl); padding: 5px 14px; font-size: 12px; white-space: nowrap; }
-
-/* ── TAB BAR ── */
-.tab-bar { display: flex; gap: 0; border-bottom: 2px solid var(--cream-200); }
-.tab-btn { padding: 10px 16px; border: none; background: none; font-size: 12.5px; font-weight: 500; color: var(--cream-500); cursor: pointer; font-family: var(--font-kr); border-bottom: 2.5px solid transparent; margin-bottom: -2px; transition: all .18s; white-space: nowrap; }
-.tab-btn:hover { color: var(--mint-700); }
-.tab-btn.active { color: var(--mint-700); font-weight: 700; border-bottom-color: var(--mint-700); }
-.tab-panels { min-height: 300px; padding-top: 16px; }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* ── SCENE VIEWER ── */
-.scene-wrap { display: flex; flex-direction: column; gap: 14px; max-width: 640px; }
-
-/* Left column: image + caption + nav stacked */
-.scene-col { display: flex; flex-direction: column; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
-
-.scene-panel {
-  background: #B8DDD5 center/cover no-repeat;
-  height: 380px;
-  position: relative;
-  flex-shrink: 0;
-}
-.scene-loc { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.75); border-radius: var(--radius-xl); padding: 4px 12px; font-size: 11px; color: var(--mint-900); font-weight: 600; backdrop-filter: blur(4px); }
-
-/* Caption below the image */
-.scene-caption {
-  background: #fff;
-  border-top: 2px solid var(--mint-100);
-  padding: 14px 16px;
-  display: flex; gap: 12px; align-items: flex-start;
-  animation: fadeUp .2s ease-out;
-}
-@keyframes fadeUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
-.caption-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; border: 2px solid var(--cream-200); }
-.caption-name { font-size: 9px; font-weight: 700; color: var(--cream-500); margin-top: 2px; text-align: center; line-height: 1; }
-.caption-body { flex: 1; }
-.caption-kr { font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: var(--cream-900); line-height: 1.55; }
-.caption-en { font-size: 11px; color: var(--cream-500); margin-top: 3px; }
-.caption-tag { display: inline-block; margin-top: 6px; font-size: 9.5px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
-.tag-banmal    { background: #FFDAD5; color: var(--coral); }
-.tag-jondaemal { background: #D5E4F8; color: var(--blue); }
-
-/* Navigation bar */
-.scene-nav { background: #fff; border-top: 1px solid var(--cream-200); padding: 10px 14px; display: flex; align-items: center; gap: 8px; }
-.nav-btn { width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--mint-700); color: #fff; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: opacity .15s; flex-shrink: 0; }
-.nav-btn:disabled { opacity: .3; cursor: default; }
-.nav-btn:not(:disabled):hover { opacity: .82; }
-.nav-progress { flex: 1; }
-.nav-steps { display: flex; gap: 3px; align-items: center; }
-.nav-step { height: 3px; flex: 1; background: var(--mint-100); border-radius: 3px; transition: background .2s; }
-.nav-step.done { background: var(--mint-700); }
-.nav-count { font-size: 10px; color: var(--cream-500); white-space: nowrap; margin-top: 3px; text-align: center; }
-.nav-speak-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--cream-200); background: #fff; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all .15s; flex-shrink: 0; }
-.nav-speak-btn:hover { background: var(--mint-50); }
-
-/* Script list panel */
-.script-list-panel { background: var(--cream-50); border-radius: var(--radius-lg); border: 1px solid var(--cream-200); overflow: hidden; box-shadow: var(--shadow-sm); }
-.script-list-hdr { background: #fff; padding: 12px 16px; font-size: 11px; font-weight: 700; color: var(--mint-700); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--cream-200); }
-.script-list { max-height: 380px; overflow-y: auto; }
-.script-row { display: flex; gap: 10px; padding: 9px 14px; border-bottom: 1px solid var(--cream-100); cursor: pointer; transition: background .12s; align-items: flex-start; }
-.script-row:last-child { border-bottom: none; }
-.script-row:hover { background: var(--mint-50); }
-.script-row.current { background: var(--mint-100); }
-.row-avatar { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-.row-text { flex: 1; }
-.row-kr { font-family: var(--font-serif); font-size: 13px; font-weight: 700; color: var(--cream-900); line-height: 1.5; }
-.row-en { font-size: 10.5px; color: var(--cream-500); margin-top: 1px; }
-.row-tag { font-size: 9px; font-weight: 700; padding: 1px 7px; border-radius: 8px; display: inline-block; margin-top: 4px; }
-.row-speak { background: none; border: none; font-size: 14px; cursor: pointer; opacity: .55; transition: opacity .15s; padding: 2px; flex-shrink: 0; }
-.row-speak:hover { opacity: 1; }
-
-/* ── VOCAB ── */
-.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 10px; }
-.vocab-card { background: #fff; border-radius: var(--radius-md); border: 1.5px solid var(--cream-200); padding: 14px 10px; text-align: center; cursor: pointer; transition: all .18s; box-shadow: var(--shadow-sm); }
-.vocab-card:hover { border-color: var(--mint-300); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.vc-hint { font-size: 9.5px; color: var(--cream-200); margin-top: 7px; }
-.vocab-card.flipped .vc-front { display: none; }
-.vocab-card.flipped .vc-back  { display: block; }
-.vc-back { display: none; }
-.vc-emoji { font-size: 26px; margin-bottom: 6px; line-height: 1; }
-.vc-kr { font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: var(--cream-900); }
-.vc-rom { font-size: 9.5px; color: var(--cream-500); margin-top: 3px; }
-.vc-en  { font-size: 12.5px; color: var(--mint-700); font-weight: 700; margin-top: 5px; }
-.vc-speak { background: none; border: none; font-size: 15px; cursor: pointer; margin-top: 6px; opacity: .5; transition: opacity .15s; }
-.vc-speak:hover { opacity: 1; }
-
-/* ── GRAMMAR ── */
-.gram-card { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--cream-200); padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border-top: 3px solid var(--mint-500); }
-.gram-title { font-family: var(--font-serif); font-size: 16.5px; font-weight: 700; color: var(--cream-900); margin-bottom: 3px; }
-.gram-title-en { font-size: 11.5px; color: var(--cream-500); margin-bottom: 12px; }
-.gram-exp { font-size: 13px; line-height: 1.85; color: var(--cream-700); white-space: pre-line; margin-bottom: 13px; }
-.gram-rule { background: var(--mint-50); border: 1px solid var(--mint-100); border-radius: var(--radius-sm); padding: 9px 14px; font-size: 12px; font-weight: 700; color: var(--mint-700); margin-bottom: 14px; }
-.gram-ex-list { list-style: none; }
-.gram-ex { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--cream-100); align-items: flex-start; }
-.gram-ex:last-child { border: none; }
-.gram-ko { font-family: var(--font-serif); font-size: 13.5px; font-weight: 700; color: var(--cream-900); min-width: 150px; flex-shrink: 0; }
-.gram-en { font-size: 11.5px; color: var(--cream-500); line-height: 1.55; }
-
-/* ── BANMAL/JONDAEMAL ── */
-.bj-intro { background: var(--amber-lt); border: 1.5px solid #F0C980; border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 16px; }
-.bj-intro p { font-size: 13px; color: var(--cream-900); line-height: 1.75; }
-.bj-intro .en { font-size: 11px; color: var(--cream-500); margin-top: 4px; }
-.bj-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); font-size: 13px; margin-bottom: 14px; }
-.bj-table th { padding: 11px 16px; font-size: 11.5px; font-weight: 700; text-align: center; border-bottom: 2px solid var(--cream-200); }
-.bj-table th:nth-child(1) { text-align: left; color: var(--cream-500); background: var(--cream-50); }
-.bj-table th:nth-child(2) { color: var(--coral); background: #FFF4F3; }
-.bj-table th:nth-child(3) { color: var(--blue); background: #F0F6FF; }
-.bj-table td { padding: 11px 16px; border-bottom: 1px solid var(--cream-100); }
-.bj-table tr:last-child td { border: none; }
-.bj-table td:nth-child(1) { color: var(--cream-700); font-size: 12px; }
-.bj-table td:nth-child(2) { font-family: var(--font-serif); font-weight: 700; color: var(--coral); text-align: center; }
-.bj-table td:nth-child(3) { font-family: var(--font-serif); font-weight: 700; color: var(--blue); text-align: center; }
-.bj-speak { background: none; border: none; font-size: 13px; cursor: pointer; opacity: .5; transition: opacity .15s; }
-.bj-speak:hover { opacity: 1; }
-.bj-tip { background: #EDF7F2; border: 1.5px solid #A8D8B5; border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; color: var(--sage); font-weight: 600; }
-
-/* ── USAGE ── */
-.usage-section { margin-bottom: 20px; }
-.usage-section-title { font-size: 12.5px; font-weight: 700; color: var(--mint-700); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--mint-100); }
-.usage-row { background: #fff; border-radius: var(--radius-sm); border: 1px solid var(--cream-200); padding: 11px 15px; margin-bottom: 6px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-sm); }
-.usage-ctx { font-size: 10.5px; color: var(--cream-500); min-width: 64px; line-height: 1.4; }
-.usage-text { flex: 1; }
-.usage-kr { font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--cream-900); }
-.usage-en { font-size: 11px; color: var(--cream-500); margin-top: 2px; }
-.usage-speak { background: none; border: none; font-size: 15px; cursor: pointer; opacity: .5; transition: opacity .15s; }
-.usage-speak:hover { opacity: 1; }
-.usage-tip { background: var(--amber-lt); border: 1.5px solid #F0C980; border-radius: var(--radius-md); padding: 13px 17px; font-size: 13px; color: var(--cream-900); line-height: 1.75; }
-.usage-tip .en { font-size: 11px; color: var(--cream-500); margin-top: 6px; }
-
-/* ── QUIZ ── */
-.quiz-wrap { max-width: 580px; }
-.quiz-q { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--cream-200); padding: 18px 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
-.q-num { font-size: 10.5px; font-weight: 700; color: var(--mint-500); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 7px; }
-.q-text { font-family: var(--font-serif); font-size: 14.5px; font-weight: 700; color: var(--cream-900); margin-bottom: 3px; line-height: 1.5; }
-.q-text-en { font-size: 11px; color: var(--cream-500); margin-bottom: 13px; }
-.q-options { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-.q-opt { padding: 10px 15px; background: var(--cream-50); border: 1.5px solid var(--cream-200); border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; color: var(--cream-700); transition: all .15s; font-family: var(--font-kr); text-align: left; }
-.q-opt:hover { border-color: var(--mint-300); background: var(--mint-50); color: var(--mint-900); }
-.q-opt.correct { background: #EDF7F2; border-color: var(--sage); color: var(--sage); font-weight: 700; pointer-events: none; }
-.q-opt.wrong   { background: #FFF3F2; border-color: var(--coral); color: var(--coral); pointer-events: none; }
-.q-exp { display: none; margin-top: 11px; background: var(--mint-50); border-left: 3px solid var(--mint-500); padding: 9px 13px; font-size: 12px; color: var(--mint-900); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; line-height: 1.65; }
-.q-exp.show { display: block; }
-.quiz-reset { margin-top: 4px; padding: 11px 32px; background: var(--mint-700); color: #fff; border: none; border-radius: var(--radius-xl); font-size: 13px; font-weight: 700; font-family: var(--font-kr); cursor: pointer; transition: opacity .2s; box-shadow: var(--shadow-sm); }
-.quiz-reset:hover { opacity: .85; }
-
-/* ── REAL LIFE ── */
-.rl-card { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--cream-200); padding: 18px 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
-.rl-title { font-size: 14px; font-weight: 700; color: var(--cream-900); margin-bottom: 4px; }
-.rl-setup { font-size: 11.5px; color: var(--cream-500); margin-bottom: 13px; line-height: 1.5; }
-.rl-dialogue { display: flex; flex-direction: column; gap: 8px; }
-.rl-line { display: flex; gap: 10px; align-items: flex-start; }
-.rl-spk { font-size: 11px; font-weight: 700; color: var(--mint-700); min-width: 58px; padding-top: 4px; }
-.rl-bubble { flex: 1; background: var(--cream-50); border: 1px solid var(--cream-200); border-radius: 4px 12px 12px 12px; padding: 8px 13px; }
-.rl-kr { font-family: var(--font-serif); font-size: 13px; font-weight: 700; color: var(--cream-900); }
-.rl-en { font-size: 10.5px; color: var(--cream-500); margin-top: 2px; }
-.rl-speak { background: none; border: none; font-size: 14px; cursor: pointer; opacity: .5; transition: opacity .15s; flex-shrink: 0; }
-.rl-speak:hover { opacity: 1; }
-.rl-tip { background: var(--amber-lt); border: 1.5px solid #F0C980; border-radius: var(--radius-md); padding: 15px 18px; font-size: 13px; line-height: 1.8; color: var(--cream-900); margin-bottom: 14px; }
-.rl-tip .en { font-size: 11px; color: var(--cream-500); margin-top: 5px; }
-
-.loading { padding: 50px; text-align: center; color: var(--cream-500); font-size: 13px; }
-
-/* ── 한글 기초 탭 ── */
-.level-btn-basis { background: rgba(255,220,130,0.18) !important; color: rgba(255,240,180,0.85) !important; }
-.level-btn-basis.active { background: rgba(255,210,80,0.28) !important; color: #FFE066 !important; }
-
-/* ── COMPACT SCRIPT STRIP ── */
-.script-toggle-btn {
-  width: 100%; background: var(--cream-50); border: none; border-top: 1px solid var(--cream-200);
-  padding: 7px 14px; font-size: 11px; font-weight: 700; color: var(--cream-500);
-  cursor: pointer; text-align: left; display: flex; align-items: center; gap: 6px;
-  transition: background .15s; font-family: var(--font-kr);
-}
-.script-toggle-btn:hover { background: var(--mint-50); color: var(--mint-700); }
-.script-strip {
-  display: none; max-height: 160px; overflow-y: auto;
-  background: var(--cream-50); border-top: 1px solid var(--cream-100);
-}
-.script-strip.open { display: block; }
-.strip-row {
-  display: flex; gap: 8px; align-items: flex-start;
-  padding: 6px 14px; border-bottom: 1px solid var(--cream-100);
-  cursor: pointer; transition: background .1s;
-}
-.strip-row:last-child { border: none; }
-.strip-row:hover { background: var(--mint-50); }
-.strip-row.current { background: var(--mint-100); }
-.strip-avatar { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
-.strip-kr { font-family: var(--font-serif); font-size: 12px; font-weight: 700; color: var(--cream-900); line-height: 1.45; }
-.strip-en { font-size: 10px; color: var(--cream-500); margin-top: 1px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:15px;}
+body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;display:flex;flex-direction:column;color:var(--cream-900);}
+.top-bar{background:var(--mint-700);display:flex;align-items:center;padding:0 20px;height:52px;gap:10px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+.level-tabs{display:flex;gap:3px;}
+.level-btn{padding:5px 16px;border:none;border-radius:var(--radius-xl);font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;color:rgba(255,255,255,0.7);background:transparent;transition:all .2s;letter-spacing:0.03em;}
+.level-btn.active{background:rgba(255,255,255,0.2);color:#fff;}
+.level-btn:hover:not(.active){color:#fff;}
+.level-btn-basis{background:rgba(255,220,130,0.18)!important;color:rgba(255,240,180,0.85)!important;}
+.level-btn-basis.active{background:rgba(255,210,80,0.28)!important;color:#FFE066!important;}
+.school-title{flex:1;text-align:center;font-family:var(--font-serif);font-size:17px;font-weight:700;color:#fff;letter-spacing:0.08em;}
+.index-btn{padding:6px 18px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:var(--radius-xl);font-size:12px;font-family:var(--font-kr);text-decoration:none;cursor:pointer;transition:all .2s;}
+.index-btn:hover{background:rgba(255,255,255,0.28);color:#fff;}
+.main-layout{display:flex;flex:1;min-height:0;}
+.sidebar{width:220px;flex-shrink:0;background:var(--cream-50);border-right:1px solid var(--cream-200);padding:20px 14px;display:flex;flex-direction:column;gap:4px;}
+.sidebar-hdr{font-size:10px;font-weight:700;color:var(--mint-500);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--mint-100);}
+.ep-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1px solid transparent;}
+.ep-item:hover{background:var(--mint-50);border-color:var(--mint-100);}
+.ep-item.active{background:var(--mint-100);border-color:var(--mint-300);}
+.ep-num{font-size:10px;font-weight:700;color:#fff;background:var(--mint-300);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.ep-item.active .ep-num{background:var(--mint-700);}
+.ep-name{font-size:12.5px;color:var(--cream-700);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ep-item.active .ep-name{color:var(--mint-900);font-weight:700;}
+.content-area{flex:1;min-width:0;padding:20px 22px 28px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
+.ep-header{background:linear-gradient(135deg,var(--mint-700) 0%,var(--mint-500) 100%);border-radius:var(--radius-lg);padding:18px 22px;color:#fff;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-md);}
+.ep-num-badge{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:var(--radius-xl);padding:3px 12px;font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:0.04em;}
+.ep-title-wrap{flex:1;}
+.ep-title-kr{font-family:var(--font-serif);font-size:19px;font-weight:700;letter-spacing:0.02em;line-height:1.3;}
+.ep-title-en{font-size:11px;opacity:0.75;margin-top:2px;}
+.ep-scene-badge{background:rgba(255,255,255,0.15);border-radius:var(--radius-xl);padding:5px 14px;font-size:12px;white-space:nowrap;}
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--cream-200);}
+.tab-btn{padding:10px 16px;border:none;background:none;font-size:12.5px;font-weight:500;color:var(--cream-500);cursor:pointer;font-family:var(--font-kr);border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:all .18s;white-space:nowrap;}
+.tab-btn:hover{color:var(--mint-700);}
+.tab-btn.active{color:var(--mint-700);font-weight:700;border-bottom-color:var(--mint-700);}
+.tab-panels{min-height:300px;padding-top:16px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.scene-wrap{display:flex;flex-direction:column;gap:14px;max-width:640px;}
+.scene-col{display:flex;flex-direction:column;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);}
+.scene-panel{background:#B8DDD5 center/cover no-repeat;height:380px;position:relative;flex-shrink:0;}
+.scene-loc{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.75);border-radius:var(--radius-xl);padding:4px 12px;font-size:11px;color:var(--mint-900);font-weight:600;backdrop-filter:blur(4px);}
+.scene-caption{background:#fff;border-top:2px solid var(--mint-100);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;animation:fadeUp .2s ease-out;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.caption-avatar{width:40px;height:40px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:2px solid var(--cream-200);}
+.caption-name{font-size:9px;font-weight:700;color:var(--cream-500);margin-top:2px;text-align:center;line-height:1;}
+.caption-body{flex:1;}
+.caption-kr{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--cream-900);line-height:1.55;}
+.caption-en{font-size:11px;color:var(--cream-500);margin-top:3px;}
+.caption-tag{display:inline-block;margin-top:6px;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:10px;}
+.tag-banmal{background:#FFDAD5;color:var(--coral);}
+.tag-jondaemal{background:#D5E4F8;color:var(--blue);}
+.scene-nav{background:#fff;border-top:1px solid var(--cream-200);padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.nav-btn{width:32px;height:32px;border-radius:50%;border:none;background:var(--mint-700);color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:opacity .15s;flex-shrink:0;}
+.nav-btn:disabled{opacity:.3;cursor:default;}
+.nav-btn:not(:disabled):hover{opacity:.82;}
+.nav-progress{flex:1;}
+.nav-steps{display:flex;gap:3px;align-items:center;}
+.nav-step{height:3px;flex:1;background:var(--mint-100);border-radius:3px;transition:background .2s;}
+.nav-step.done{background:var(--mint-700);}
+.nav-count{font-size:10px;color:var(--cream-500);white-space:nowrap;margin-top:3px;text-align:center;}
+.nav-speak-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--cream-200);background:#fff;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.nav-speak-btn:hover{background:var(--mint-50);}
+.script-toggle-btn{width:100%;background:var(--cream-50);border:none;border-top:1px solid var(--cream-200);padding:7px 14px;font-size:11px;font-weight:700;color:var(--cream-500);cursor:pointer;text-align:left;display:flex;align-items:center;gap:6px;transition:background .15s;font-family:var(--font-kr);}
+.script-toggle-btn:hover{background:var(--mint-50);color:var(--mint-700);}
+.script-strip{display:none;max-height:160px;overflow-y:auto;background:var(--cream-50);border-top:1px solid var(--cream-100);}
+.script-strip.open{display:block;}
+.strip-row{display:flex;gap:8px;align-items:flex-start;padding:6px 14px;border-bottom:1px solid var(--cream-100);cursor:pointer;transition:background .1s;}
+.strip-row:last-child{border:none;}
+.strip-row:hover{background:var(--mint-50);}
+.strip-row.current{background:var(--mint-100);}
+.strip-avatar{font-size:13px;flex-shrink:0;margin-top:1px;}
+.strip-kr{font-family:var(--font-serif);font-size:12px;font-weight:700;color:var(--cream-900);line-height:1.45;}
+.strip-en{font-size:10px;color:var(--cream-500);margin-top:1px;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;}
+.vocab-card{background:#fff;border-radius:var(--radius-md);border:1.5px solid var(--cream-200);padding:14px 10px;text-align:center;cursor:pointer;transition:all .18s;box-shadow:var(--shadow-sm);}
+.vocab-card:hover{border-color:var(--mint-300);box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.vc-hint{font-size:9.5px;color:var(--cream-200);margin-top:7px;}
+.vocab-card.flipped .vc-front{display:none;}
+.vocab-card.flipped .vc-back{display:block;}
+.vc-back{display:none;}
+.vc-emoji{font-size:26px;margin-bottom:6px;line-height:1;}
+.vc-kr{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--cream-900);}
+.vc-rom{font-size:9.5px;color:var(--cream-500);margin-top:3px;}
+.vc-en{font-size:12.5px;color:var(--mint-700);font-weight:700;margin-top:5px;}
+.vc-speak{background:none;border:none;font-size:15px;cursor:pointer;margin-top:6px;opacity:.5;transition:opacity .15s;}
+.vc-speak:hover{opacity:1;}
+.gram-card{background:#fff;border-radius:var(--radius-md);border:1px solid var(--cream-200);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow-sm);border-top:3px solid var(--mint-500);}
+.gram-title{font-family:var(--font-serif);font-size:16.5px;font-weight:700;color:var(--cream-900);margin-bottom:3px;}
+.gram-title-en{font-size:11.5px;color:var(--cream-500);margin-bottom:12px;}
+.gram-exp{font-size:13px;line-height:1.85;color:var(--cream-700);white-space:pre-line;margin-bottom:13px;}
+.gram-rule{background:var(--mint-50);border:1px solid var(--mint-100);border-radius:var(--radius-sm);padding:9px 14px;font-size:12px;font-weight:700;color:var(--mint-700);margin-bottom:14px;}
+.gram-ex-list{list-style:none;}
+.gram-ex{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--cream-100);align-items:flex-start;}
+.gram-ex:last-child{border:none;}
+.gram-ko{font-family:var(--font-serif);font-size:13.5px;font-weight:700;color:var(--cream-900);min-width:150px;flex-shrink:0;}
+.gram-en{font-size:11.5px;color:var(--cream-500);line-height:1.55;}
+.bj-intro{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:14px 18px;margin-bottom:16px;}
+.bj-intro p{font-size:13px;color:var(--cream-900);line-height:1.75;}
+.bj-intro .en{font-size:11px;color:var(--cream-500);margin-top:4px;}
+.bj-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);font-size:13px;margin-bottom:14px;}
+.bj-table th{padding:11px 16px;font-size:11.5px;font-weight:700;text-align:center;border-bottom:2px solid var(--cream-200);}
+.bj-table th:nth-child(1){text-align:left;color:var(--cream-500);background:var(--cream-50);}
+.bj-table th:nth-child(2){color:var(--coral);background:#FFF4F3;}
+.bj-table th:nth-child(3){color:var(--blue);background:#F0F6FF;}
+.bj-table td{padding:11px 16px;border-bottom:1px solid var(--cream-100);}
+.bj-table tr:last-child td{border:none;}
+.bj-table td:nth-child(1){color:var(--cream-700);font-size:12px;}
+.bj-table td:nth-child(2){font-family:var(--font-serif);font-weight:700;color:var(--coral);text-align:center;}
+.bj-table td:nth-child(3){font-family:var(--font-serif);font-weight:700;color:var(--blue);text-align:center;}
+.bj-speak{background:none;border:none;font-size:13px;cursor:pointer;opacity:.5;transition:opacity .15s;}
+.bj-speak:hover{opacity:1;}
+.bj-tip{background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:var(--radius-md);padding:12px 16px;font-size:13px;color:var(--sage);font-weight:600;}
+.usage-section{margin-bottom:20px;}
+.usage-section-title{font-size:12.5px;font-weight:700;color:var(--mint-700);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--mint-100);}
+.usage-row{background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:11px 15px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm);}
+.usage-ctx{font-size:10.5px;color:var(--cream-500);min-width:64px;line-height:1.4;}
+.usage-text{flex:1;}
+.usage-kr{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900);}
+.usage-en{font-size:11px;color:var(--cream-500);margin-top:2px;}
+.usage-speak{background:none;border:none;font-size:15px;cursor:pointer;opacity:.5;transition:opacity .15s;}
+.usage-speak:hover{opacity:1;}
+.usage-tip{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--cream-900);line-height:1.75;}
+.usage-tip .en{font-size:11px;color:var(--cream-500);margin-top:6px;}
+.quiz-wrap{max-width:580px;}
+.quiz-q{background:#fff;border-radius:var(--radius-md);border:1px solid var(--cream-200);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm);}
+.q-num{font-size:10.5px;font-weight:700;color:var(--mint-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px;}
+.q-text{font-family:var(--font-serif);font-size:14.5px;font-weight:700;color:var(--cream-900);margin-bottom:3px;line-height:1.5;}
+.q-text-en{font-size:11px;color:var(--cream-500);margin-bottom:13px;}
+.q-options{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.q-opt{padding:10px 15px;background:var(--cream-50);border:1.5px solid var(--cream-200);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--cream-700);transition:all .15s;font-family:var(--font-kr);text-align:left;}
+.q-opt:hover{border-color:var(--mint-300);background:var(--mint-50);color:var(--mint-900);}
+.q-opt.correct{background:#EDF7F2;border-color:var(--sage);color:var(--sage);font-weight:700;pointer-events:none;}
+.q-opt.wrong{background:#FFF3F2;border-color:var(--coral);color:var(--coral);pointer-events:none;}
+.q-exp{display:none;margin-top:11px;background:var(--mint-50);border-left:3px solid var(--mint-500);padding:9px 13px;font-size:12px;color:var(--mint-900);border-radius:0 var(--radius-sm) var(--radius-sm) 0;line-height:1.65;}
+.q-exp.show{display:block;}
+.quiz-reset{margin-top:4px;padding:11px 32px;background:var(--mint-700);color:#fff;border:none;border-radius:var(--radius-xl);font-size:13px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:opacity .2s;box-shadow:var(--shadow-sm);}
+.quiz-reset:hover{opacity:.85;}
+.rl-card{background:#fff;border-radius:var(--radius-md);border:1px solid var(--cream-200);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm);}
+.rl-title{font-size:14px;font-weight:700;color:var(--cream-900);margin-bottom:4px;}
+.rl-setup{font-size:11.5px;color:var(--cream-500);margin-bottom:13px;line-height:1.5;}
+.rl-dialogue{display:flex;flex-direction:column;gap:8px;}
+.rl-line{display:flex;gap:10px;align-items:flex-start;}
+.rl-spk{font-size:11px;font-weight:700;color:var(--mint-700);min-width:58px;padding-top:4px;}
+.rl-bubble{flex:1;background:var(--cream-50);border:1px solid var(--cream-200);border-radius:4px 12px 12px 12px;padding:8px 13px;}
+.rl-kr{font-family:var(--font-serif);font-size:13px;font-weight:700;color:var(--cream-900);}
+.rl-en{font-size:10.5px;color:var(--cream-500);margin-top:2px;}
+.rl-speak{background:none;border:none;font-size:14px;cursor:pointer;opacity:.5;transition:opacity .15s;flex-shrink:0;}
+.rl-speak:hover{opacity:1;}
+.rl-tip{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:15px 18px;font-size:13px;line-height:1.8;color:var(--cream-900);margin-bottom:14px;}
+.rl-tip .en{font-size:11px;color:var(--cream-500);margin-top:5px;}
+.loading{padding:50px;text-align:center;color:var(--cream-500);font-size:13px;}
 </style>
 </head>
 <body>
-
 <div class="top-bar">
   <div class="level-tabs">
     <button class="level-btn level-btn-basis" onclick="setLevel(this)">한글 기초</button>
@@ -275,7 +178,6 @@ body { font-family: var(--font-kr); background: var(--cream-100); min-height: 10
   <div class="school-title">새로운 한글 학교</div>
   <a href="index.html" class="index-btn">index</a>
 </div>
-
 <div class="main-layout">
   <div class="sidebar">
     <div class="sidebar-hdr">Episodes</div>
@@ -285,147 +187,99 @@ body { font-family: var(--font-kr); background: var(--cream-100); min-height: 10
     <div class="loading">⏳ 로딩 중…</div>
   </div>
 </div>
-
 <script>
-let DATA = null, curTab = 'script', sceneIdx = 0, qAnswered = {};
+let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
+const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'}};
+const EPISODES=[{id:'ep01',label:'안녕? 만나서 반가워!'},{id:'ep02',label:'coming soon',disabled:true},{id:'ep03',label:'',disabled:true},{id:'ep04',label:'',disabled:true}];
 
-const CHAR_CFG = {
-  jeongmin: { bg:'#B8D4F0', emoji:'👦' },
-  mirae:    { bg:'#F0B8D4', emoji:'👧' },
-  mom:      { bg:'#B8D4B8', emoji:'👩' },
-  narrator: { bg:'#E0E0E0', emoji:'📢' }
-};
-
-const EPISODES = [
-  { id:'ep01', label:'안녕? 만나서 반가워!' },
-  { id:'ep02', label:'coming soon', disabled:true },
-  { id:'ep03', label:'', disabled:true },
-  { id:'ep04', label:'', disabled:true },
-];
-
-function buildSidebar() {
-  document.getElementById('ep-list').innerHTML = EPISODES.map((ep,i) =>
-    ep.disabled
-    ? `<div class="ep-item" onclick="alert('준비 중이에요 😊')">
-         <div class="ep-num" style="background:var(--cream-200);color:var(--cream-500)">${i+1}</div>
-         <div class="ep-name" style="color:var(--cream-200)">${ep.label||'…'}</div>
-       </div>`
-    : `<div class="ep-item${i===0?' active':''}" id="ep-item-${ep.id}" onclick="loadEp('${ep.id}')">
-         <div class="ep-num">${i+1}</div>
-         <div class="ep-name">${ep.label}</div>
-       </div>`
+function buildSidebar(){
+  document.getElementById('ep-list').innerHTML=EPISODES.map((ep,i)=>ep.disabled
+    ?`<div class="ep-item" onclick="alert('준비 중이에요 😊')"><div class="ep-num" style="background:var(--cream-200);color:var(--cream-500)">${i+1}</div><div class="ep-name" style="color:var(--cream-200)">${ep.label||'…'}</div></div>`
+    :`<div class="ep-item${i===0?' active':''}" id="ep-item-${ep.id}" onclick="loadEp('${ep.id}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div></div>`
   ).join('');
 }
 
-async function loadEp(epId) {
-  document.querySelectorAll('.ep-item').forEach(el => el.classList.remove('active'));
-  const item = document.getElementById('ep-item-'+epId);
-  if (item) item.classList.add('active');
-  document.getElementById('content-area').innerHTML = '<div class="loading">⏳ 로딩 중…</div>';
-  try {
-    const res = await fetch(`data/nhs/${epId}.json`);
-    if (!res.ok) throw new Error();
-    DATA = await res.json();
-    qAnswered = {}; curTab = 'script'; sceneIdx = 0;
-    render();
-  } catch {
-    document.getElementById('content-area').innerHTML =
-      '<div class="loading">⚠️ 서버에서 실행해 주세요.<br><small>GitHub Pages나 로컬 서버가 필요해요.</small></div>';
+async function loadEp(epId){
+  document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
+  const item=document.getElementById('ep-item-'+epId);
+  if(item)item.classList.add('active');
+  document.getElementById('content-area').innerHTML='<div class="loading">⏳ 로딩 중…</div>';
+  try{
+    const res=await fetch(`data/nhs/${epId}.json`);
+    if(!res.ok)throw new Error();
+    DATA=await res.json();
+    qAnswered={};curTab='script';sceneIdx=0;render();
+  }catch{
+    document.getElementById('content-area').innerHTML='<div class="loading">⚠️ 서버에서 실행해 주세요.<br><small>GitHub Pages나 로컬 서버가 필요해요.</small></div>';
   }
 }
 
-function render() {
-  const tabs = ['script','vocab','grammar','banmal','usage','quiz','reallife'];
-  const labels = ['📽 영상·Script','새어휘 vocab','문법 grammar','반말/존댓말','Usage','Quiz','Real Life'];
-  const tabBtns = tabs.map((t,i) =>
-    `<button class="tab-btn${curTab===t?' active':''}" onclick="showTab('${t}')">${labels[i]}</button>`
-  ).join('');
-  document.getElementById('content-area').innerHTML = `
+function render(){
+  const tabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
+  const labels=['📽 영상·Script','새어휘 vocab','문법 grammar','반말/존댓말','Usage','Quiz','Real Life'];
+  document.getElementById('content-area').innerHTML=`
     <div class="ep-header">
       <div class="ep-num-badge">EP.1 · ${esc(DATA.level)}</div>
-      <div class="ep-title-wrap">
-        <div class="ep-title-kr">${esc(DATA.title)}</div>
-        <div class="ep-title-en">${esc(DATA.title_en)}</div>
-      </div>
+      <div class="ep-title-wrap"><div class="ep-title-kr">${esc(DATA.title)}</div><div class="ep-title-en">${esc(DATA.title_en)}</div></div>
       <div class="ep-scene-badge">${esc(DATA.scene)}</div>
     </div>
-    <div class="tab-bar" id="tab-bar">${tabBtns}</div>
-    <div class="tab-panels">
-      ${tabs.map(t=>`<div id="panel-${t}" class="tab-panel${curTab===t?' active':''}"></div>`).join('')}
-    </div>`;
+    <div class="tab-bar">${tabs.map((t,i)=>`<button class="tab-btn${curTab===t?' active':''}" onclick="showTab('${t}')">${labels[i]}</button>`).join('')}</div>
+    <div class="tab-panels">${tabs.map(t=>`<div id="panel-${t}" class="tab-panel${curTab===t?' active':''}"></div>`).join('')}</div>`;
   fillAllPanels();
 }
 
-function fillAllPanels() {
-  document.getElementById('panel-script').innerHTML   = buildScript();
-  document.getElementById('panel-vocab').innerHTML    = buildVocab();
-  document.getElementById('panel-grammar').innerHTML  = buildGrammar();
-  document.getElementById('panel-banmal').innerHTML   = buildBanmal();
-  document.getElementById('panel-usage').innerHTML    = buildUsage();
-  document.getElementById('panel-quiz').innerHTML     = buildQuiz();
-  document.getElementById('panel-reallife').innerHTML = buildRealLife();
+function fillAllPanels(){
+  document.getElementById('panel-script').innerHTML=buildScript();
+  document.getElementById('panel-vocab').innerHTML=buildVocab();
+  document.getElementById('panel-grammar').innerHTML=buildGrammar();
+  document.getElementById('panel-banmal').innerHTML=buildBanmal();
+  document.getElementById('panel-usage').innerHTML=buildUsage();
+  document.getElementById('panel-quiz').innerHTML=buildQuiz();
+  document.getElementById('panel-reallife').innerHTML=buildRealLife();
   requestAnimationFrame(initSceneViewer);
 }
 
-function showTab(name) {
-  curTab = name;
-  const tabs = ['script','vocab','grammar','banmal','usage','quiz','reallife'];
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', tabs[i]===name));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  const p = document.getElementById('panel-'+name);
-  if (p) p.classList.add('active');
-  if (name === 'script') requestAnimationFrame(initSceneViewer);
+function showTab(name){
+  curTab=name;
+  const tabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tabs[i]===name));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  const p=document.getElementById('panel-'+name);
+  if(p)p.classList.add('active');
+  if(name==='script')requestAnimationFrame(initSceneViewer);
 }
 
-// ── SCENE VIEWER ──────────────────────────────────────
-function buildScript() {
-  return `
-    <div class="scene-wrap">
-      <div class="scene-col">
-        <div class="scene-panel" id="scene-panel">
-          <div class="scene-loc">${esc(DATA.scene)}</div>
-        </div>
-        <div class="scene-caption" id="scene-caption"></div>
-        <div class="scene-nav">
-          <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
-          <div class="nav-progress">
-            <div class="nav-steps" id="nav-steps"></div>
-            <div class="nav-count" id="nav-count"></div>
-          </div>
-          <button class="nav-speak-btn" title="랜덤" onclick="randomScene()">🎲</button>
-          <button class="nav-speak-btn" onclick="speakCurrent()">🔊</button>
-          <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
-        </div>
-        <button class="script-toggle-btn" id="script-toggle-btn" onclick="toggleStrip()">
-          <span id="strip-arrow">▶</span> 전체 스크립트 보기
-        </button>
-        <div class="script-strip" id="script-strip"></div>
-      </div>
-    </div>`;
+function buildScript(){
+  return `<div class="scene-wrap"><div class="scene-col">
+    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div></div>
+    <div class="scene-caption" id="scene-caption"></div>
+    <div class="scene-nav">
+      <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
+      <div class="nav-progress"><div class="nav-steps" id="nav-steps"></div><div class="nav-count" id="nav-count"></div></div>
+      <button class="nav-speak-btn" title="랜덤" onclick="randomScene()">🎲</button>
+      <button class="nav-speak-btn" onclick="speakCurrent()">🔊</button>
+      <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
+    </div>
+    <button class="script-toggle-btn" onclick="toggleStrip()"><span id="strip-arrow">▶</span> 전체 스크립트 보기</button>
+    <div class="script-strip" id="script-strip"></div>
+  </div></div>`;
 }
 
-function updateSlide() {
-  const panel = document.getElementById('scene-panel');
-  if (!panel) return;
-  const src = DATA.slides && DATA.slides[sceneIdx]
-    ? DATA.slides[sceneIdx]
-    : (DATA.slides && DATA.slides[0]) || '';
-  if (src) panel.style.backgroundImage = `url('${src}')`;
+function updateSlide(){
+  const panel=document.getElementById('scene-panel');
+  if(!panel)return;
+  const src=DATA.slides&&DATA.slides[sceneIdx]?DATA.slides[sceneIdx]:(DATA.slides&&DATA.slides[0])||'';
+  if(src)panel.style.backgroundImage=`url('${src}')`;
 }
 
-function renderScene() {
+function renderScene(){
   updateSlide();
-  const line = DATA.script[sceneIdx];
-  const cfg  = CHAR_CFG[line.speaker] || CHAR_CFG.narrator;
-  const charMap = {};
-  DATA.characters.forEach(c => { charMap[c.id] = c; });
-  const ch = charMap[line.speaker] || { name:'' };
-
-  const tagHtml = line.speech_type
-    ? `<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`
-    : '';
-
-  document.getElementById('scene-caption').innerHTML = `
+  const line=DATA.script[sceneIdx];
+  const cfg=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
+  const charMap={};DATA.characters.forEach(c=>{charMap[c.id]=c;});
+  const ch=charMap[line.speaker]||{name:''};
+  const tagHtml=line.speech_type?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`:'';
+  document.getElementById('scene-caption').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center">
       <div class="caption-avatar" style="background:${cfg.bg}">${cfg.emoji}</div>
       <div class="caption-name">${esc(ch.name)}</div>
@@ -436,82 +290,94 @@ function renderScene() {
       ${tagHtml}
     </div>
     <button onclick="speakCurrent()" style="background:none;border:none;font-size:18px;cursor:pointer;opacity:.55;align-self:center;flex-shrink:0;">🔊</button>`;
-
-  // progress bar
-  const total = DATA.script.length;
-  document.getElementById('nav-steps').innerHTML =
-    DATA.script.map((_,i) => `<div class="nav-step${i<=sceneIdx?' done':''}"></div>`).join('');
-  document.getElementById('nav-count').textContent = `${sceneIdx+1} / ${total}`;
-  document.getElementById('nav-prev').disabled = sceneIdx === 0;
-  document.getElementById('nav-next').disabled = sceneIdx === total-1;
+  const total=DATA.script.length;
+  document.getElementById('nav-steps').innerHTML=DATA.script.map((_,i)=>`<div class="nav-step${i<=sceneIdx?' done':''}"></div>`).join('');
+  document.getElementById('nav-count').textContent=`${sceneIdx+1} / ${total}`;
+  document.getElementById('nav-prev').disabled=sceneIdx===0;
+  document.getElementById('nav-next').disabled=sceneIdx===total-1;
   updateStripHighlight();
 }
 
-function initSceneViewer() {
-  renderScene();
+function initSceneViewer(){renderScene();}
+
+function moveScene(dir){
+  const next=sceneIdx+dir;
+  if(next<0||next>=DATA.script.length)return;
+  sceneIdx=next;renderScene();
+  const line=DATA.script[sceneIdx];speak(line.text,line.audio);
 }
 
-function moveScene(dir) {
-  const next = sceneIdx + dir;
-  if (next < 0 || next >= DATA.script.length) return;
-  sceneIdx = next;
-  renderScene();
-  speak(DATA.script[sceneIdx].text);
+function jumpScene(i){
+  sceneIdx=i;renderScene();
+  const line=DATA.script[i];speak(line.text,line.audio);
 }
 
-function jumpScene(i) {
-  sceneIdx = i;
-  renderScene();
-  speak(DATA.script[i].text);
+function speakCurrent(){
+  if(!DATA)return;
+  const line=DATA.script[sceneIdx];speak(line.text,line.audio);
 }
 
-function speakCurrent() { if (DATA) speak(DATA.script[sceneIdx].text); }
-
-function randomScene() {
-  const total = DATA.script.length;
+function randomScene(){
+  const total=DATA.script.length;
   let next;
-  do { next = Math.floor(Math.random() * total); } while (next === sceneIdx && total > 1);
-  sceneIdx = next;
-  renderScene();
-  speak(DATA.script[sceneIdx].text);
+  do{next=Math.floor(Math.random()*total);}while(next===sceneIdx&&total>1);
+  sceneIdx=next;renderScene();
+  const line=DATA.script[sceneIdx];speak(line.text,line.audio);
 }
 
-function toggleStrip() {
-  const strip = document.getElementById('script-strip');
-  const arrow = document.getElementById('strip-arrow');
-  const isOpen = strip.classList.toggle('open');
-  arrow.textContent = isOpen ? '▼' : '▶';
-  if (isOpen && !strip.innerHTML) buildStrip();
+function toggleStrip(){
+  const strip=document.getElementById('script-strip');
+  const arrow=document.getElementById('strip-arrow');
+  const isOpen=strip.classList.toggle('open');
+  arrow.textContent=isOpen?'▼':'▶';
+  if(isOpen&&!strip.innerHTML)buildStrip();
 }
 
-function buildStrip() {
-  const strip = document.getElementById('script-strip');
-  if (!strip) return;
-  strip.innerHTML = DATA.script.map((line, i) => {
-    const cfg = CHAR_CFG[line.speaker] || CHAR_CFG.narrator;
+function buildStrip(){
+  const strip=document.getElementById('script-strip');
+  if(!strip)return;
+  strip.innerHTML=DATA.script.map((line,i)=>{
+    const cfg=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
     return `<div class="strip-row${i===sceneIdx?' current':''}" onclick="jumpScene(${i});updateStripHighlight()">
       <div class="strip-avatar">${cfg.emoji}</div>
-      <div>
-        <div class="strip-kr">${esc(line.text)}</div>
-        <div class="strip-en">${esc(line.en)}</div>
-      </div>
+      <div><div class="strip-kr">${esc(line.text)}</div><div class="strip-en">${esc(line.en)}</div></div>
     </div>`;
   }).join('');
 }
 
-function updateStripHighlight() {
-  document.querySelectorAll('.strip-row').forEach((el,i) => el.classList.toggle('current', i===sceneIdx));
+function updateStripHighlight(){
+  document.querySelectorAll('.strip-row').forEach((el,i)=>el.classList.toggle('current',i===sceneIdx));
+}
+
+// ── AUDIO ──────────────────────────────────────────────
+function speak(text,audioSrc){
+  if(audioSrc){
+    if(_audio){_audio.pause();_audio=null;}
+    _audio=new Audio(audioSrc);
+    _audio.play().catch(()=>speakTTS(text));
+  }else{
+    speakTTS(text);
+  }
+}
+
+function speakTTS(text){
+  if(!window.speechSynthesis)return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ko-KR';u.rate=0.88;
+  const go=()=>{const v=speechSynthesis.getVoices().find(v=>v.lang==='ko-KR');if(v)u.voice=v;speechSynthesis.speak(u);};
+  speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
 
 // ── VOCAB ──────────────────────────────────────────────
-function buildVocab() {
+function buildVocab(){
   return `<div class="vocab-grid">${DATA.vocab.map(v=>`
     <div class="vocab-card" onclick="this.classList.toggle('flipped')">
       <div class="vc-front">
         <div class="vc-emoji">${v.emoji||'📝'}</div>
         <div class="vc-kr">${esc(v.korean)}</div>
         <div class="vc-rom">[${esc(v.romanization)}]</div>
-        <button class="vc-speak" onclick="event.stopPropagation();speak('${escA(v.korean)}')">🔊</button>
+        <button class="vc-speak" onclick="event.stopPropagation();speakTTS('${escA(v.korean)}')">🔊</button>
         <div class="vc-hint">탭하면 뜻 보기</div>
       </div>
       <div class="vc-back">
@@ -524,7 +390,7 @@ function buildVocab() {
 }
 
 // ── GRAMMAR ────────────────────────────────────────────
-function buildGrammar() {
+function buildGrammar(){
   return DATA.grammar.map(g=>`
     <div class="gram-card">
       <div class="gram-title">${esc(g.title)}</div>
@@ -541,47 +407,36 @@ function buildGrammar() {
 }
 
 // ── BANMAL/JONDAEMAL ───────────────────────────────────
-function buildBanmal() {
-  const bj = DATA.banmal_jondaemal;
-  const rows = bj.rows.map(r=>`
-    <tr>
-      <td>${esc(r.situation_ko)}<br><span style="font-size:10px;color:var(--cream-200)">${esc(r.situation_en)}</span></td>
-      <td>${esc(r.banmal)} <button class="bj-speak" onclick="speak('${escA(r.banmal)}')">🔊</button></td>
-      <td>${esc(r.jondaemal)} <button class="bj-speak" onclick="speak('${escA(r.jondaemal)}')">🔊</button></td>
-    </tr>`).join('');
-  return `
-    <div class="bj-intro"><p>${esc(bj.intro_ko)}</p><div class="en">${esc(bj.intro_en)}</div></div>
-    <table class="bj-table">
-      <thead><tr><th>상황</th><th>반말 👧👦</th><th>존댓말 🙇</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
+function buildBanmal(){
+  const bj=DATA.banmal_jondaemal;
+  const rows=bj.rows.map(r=>`<tr>
+    <td>${esc(r.situation_ko)}<br><span style="font-size:10px;color:var(--cream-200)">${esc(r.situation_en)}</span></td>
+    <td>${esc(r.banmal)} <button class="bj-speak" onclick="speakTTS('${escA(r.banmal)}')">🔊</button></td>
+    <td>${esc(r.jondaemal)} <button class="bj-speak" onclick="speakTTS('${escA(r.jondaemal)}')">🔊</button></td>
+  </tr>`).join('');
+  return `<div class="bj-intro"><p>${esc(bj.intro_ko)}</p><div class="en">${esc(bj.intro_en)}</div></div>
+    <table class="bj-table"><thead><tr><th>상황</th><th>반말 👧👦</th><th>존댓말 🙇</th></tr></thead><tbody>${rows}</tbody></table>
     <div class="bj-tip">${esc(bj.tip)}</div>`;
 }
 
 // ── USAGE ──────────────────────────────────────────────
-function buildUsage() {
+function buildUsage(){
   return DATA.usage.map(sec=>{
-    if (sec.type==='tip') return `
-      <div class="usage-tip"><strong>${esc(sec.section)}</strong><br>${esc(sec.content_ko)}<div class="en">${esc(sec.content_en)}</div></div>`;
-    return `
-      <div class="usage-section">
-        <div class="usage-section-title">${esc(sec.section)}</div>
-        ${sec.items.map(it=>`
-          <div class="usage-row">
-            <div class="usage-ctx">${esc(it.context_ko)}</div>
-            <div class="usage-text">
-              <div class="usage-kr">${esc(it.korean)}</div>
-              <div class="usage-en">${esc(it.english)}</div>
-            </div>
-            <button class="usage-speak" onclick="speak('${escA(it.korean)}')">🔊</button>
-          </div>`).join('')}
-      </div>`;
+    if(sec.type==='tip')return`<div class="usage-tip"><strong>${esc(sec.section)}</strong><br>${esc(sec.content_ko)}<div class="en">${esc(sec.content_en)}</div></div>`;
+    return`<div class="usage-section">
+      <div class="usage-section-title">${esc(sec.section)}</div>
+      ${sec.items.map(it=>`<div class="usage-row">
+        <div class="usage-ctx">${esc(it.context_ko)}</div>
+        <div class="usage-text"><div class="usage-kr">${esc(it.korean)}</div><div class="usage-en">${esc(it.english)}</div></div>
+        <button class="usage-speak" onclick="speakTTS('${escA(it.korean)}')">🔊</button>
+      </div>`).join('')}
+    </div>`;
   }).join('');
 }
 
 // ── QUIZ ───────────────────────────────────────────────
-function buildQuiz() {
-  return `<div class="quiz-wrap">${DATA.quiz.map((q,qi)=>`
+function buildQuiz(){
+  return`<div class="quiz-wrap">${DATA.quiz.map((q,qi)=>`
     <div class="quiz-q">
       <div class="q-num">문제 ${qi+1}</div>
       <div class="q-text">${esc(q.question_ko)}</div>
@@ -597,57 +452,42 @@ function buildQuiz() {
   </div>`;
 }
 
-function answerQ(qId, chosen, correct, explanation) {
-  if (qAnswered[qId]) return;
-  qAnswered[qId] = true;
+function answerQ(qId,chosen,correct,explanation){
+  if(qAnswered[qId])return;
+  qAnswered[qId]=true;
   DATA.quiz.find(q=>q.id===qId)?.options.forEach((_,i)=>{
-    const el = document.getElementById(`opt-${qId}-${i}`);
-    if (i===correct) el.classList.add('correct');
-    else if (i===chosen) el.classList.add('wrong');
+    const el=document.getElementById(`opt-${qId}-${i}`);
+    if(i===correct)el.classList.add('correct');
+    else if(i===chosen)el.classList.add('wrong');
   });
-  const exp = document.getElementById(`exp-${qId}`);
-  if (exp) { exp.textContent = explanation; exp.classList.add('show'); }
+  const exp=document.getElementById(`exp-${qId}`);
+  if(exp){exp.textContent=explanation;exp.classList.add('show');}
 }
-function resetQuiz() { qAnswered={}; document.getElementById('panel-quiz').innerHTML=buildQuiz(); }
+function resetQuiz(){qAnswered={};document.getElementById('panel-quiz').innerHTML=buildQuiz();}
 
 // ── REAL LIFE ──────────────────────────────────────────
-function buildRealLife() {
+function buildRealLife(){
   return DATA.real_life.map(item=>{
-    if (item.type==='tip') return `
-      <div class="rl-tip"><strong>${esc(item.title)}</strong><br>${esc(item.content_ko)}<div class="en">${esc(item.content_en)}</div></div>`;
-    return `
-      <div class="rl-card">
-        <div class="rl-title">${esc(item.title)}</div>
-        <div class="rl-setup">${esc(item.setup_ko)} · <span style="color:var(--cream-500)">${esc(item.setup_en)}</span></div>
-        <div class="rl-dialogue">${item.lines.map(l=>`
-          <div class="rl-line">
-            <div class="rl-spk">${esc(l.speaker)}</div>
-            <div class="rl-bubble">
-              <div class="rl-kr">${esc(l.text)}</div>
-              <div class="rl-en">${esc(l.en)}</div>
-            </div>
-            <button class="rl-speak" onclick="speak('${escA(l.text)}')">🔊</button>
-          </div>`).join('')}
-        </div>
-      </div>`;
+    if(item.type==='tip')return`<div class="rl-tip"><strong>${esc(item.title)}</strong><br>${esc(item.content_ko)}<div class="en">${esc(item.content_en)}</div></div>`;
+    return`<div class="rl-card">
+      <div class="rl-title">${esc(item.title)}</div>
+      <div class="rl-setup">${esc(item.setup_ko)} · <span style="color:var(--cream-500)">${esc(item.setup_en)}</span></div>
+      <div class="rl-dialogue">${item.lines.map(l=>`
+        <div class="rl-line">
+          <div class="rl-spk">${esc(l.speaker)}</div>
+          <div class="rl-bubble"><div class="rl-kr">${esc(l.text)}</div><div class="rl-en">${esc(l.en)}</div></div>
+          <button class="rl-speak" onclick="speakTTS('${escA(l.text)}')">🔊</button>
+        </div>`).join('')}
+      </div>
+    </div>`;
   }).join('');
 }
 
-// ── TTS ────────────────────────────────────────────────
-function speak(text) {
-  if (!window.speechSynthesis) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang='ko-KR'; u.rate=0.88;
-  const go = ()=>{ const v=speechSynthesis.getVoices().find(v=>v.lang==='ko-KR'); if(v) u.voice=v; speechSynthesis.speak(u); };
-  speechSynthesis.getVoices().length ? go() : (speechSynthesis.onvoiceschanged=()=>{ go(); speechSynthesis.onvoiceschanged=null; });
-}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function escA(s){return String(s||'').replace(/'/g,"\\'");}
+function setLevel(btn){document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function escA(s) { return String(s||'').replace(/'/g,"\\'"); }
-function setLevel(btn) { document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-
-window.addEventListener('DOMContentLoaded', ()=>{ buildSidebar(); loadEp('ep01'); });
+window.addEventListener('DOMContentLoaded',()=>{buildSidebar();loadEp('ep01');});
 </script>
 </body>
 </html>
