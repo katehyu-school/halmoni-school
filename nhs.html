@@ -35,7 +35,7 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
 .ep-item.active{background:var(--mint-100);border-color:var(--mint-300);}
 .ep-num{font-size:10px;font-weight:700;color:#fff;background:var(--mint-300);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .ep-item.active .ep-num{background:var(--mint-700);}
-.ep-name{font-size:12.5px;color:var(--cream-700);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ep-name{font-size:12.5px;color:var(--cream-700);line-height:1.35;}
 .ep-item.active .ep-name{color:var(--mint-900);font-weight:700;}
 .content-area{flex:1;min-width:0;padding:20px 22px 28px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
 .ep-header{background:linear-gradient(135deg,var(--mint-700) 0%,var(--mint-500) 100%);border-radius:var(--radius-lg);padding:18px 22px;color:#fff;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-md);}
@@ -44,7 +44,7 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
 .ep-title-kr{font-family:var(--font-serif);font-size:19px;font-weight:700;letter-spacing:0.02em;line-height:1.3;}
 .ep-title-en{font-size:11px;opacity:0.75;margin-top:2px;}
 .ep-scene-badge{background:rgba(255,255,255,0.15);border-radius:var(--radius-xl);padding:5px 14px;font-size:12px;white-space:nowrap;}
-.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--cream-200);}
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--cream-200);flex-wrap:wrap;}
 .tab-btn{padding:10px 16px;border:none;background:none;font-size:12.5px;font-weight:500;color:var(--cream-500);cursor:pointer;font-family:var(--font-kr);border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:all .18s;white-space:nowrap;}
 .tab-btn:hover{color:var(--mint-700);}
 .tab-btn.active{color:var(--mint-700);font-weight:700;border-bottom-color:var(--mint-700);}
@@ -101,49 +101,27 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
 .vc-speak{background:none;border:none;font-size:15px;cursor:pointer;margin-top:6px;opacity:.5;transition:opacity .15s;}
 .vc-speak:hover{opacity:1;}
 .gram-card{background:#fff;border-radius:var(--radius-md);border:1px solid var(--cream-200);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow-sm);border-top:3px solid var(--mint-500);}
-.gram-title{font-family:var(--font-serif);font-size:16.5px;font-weight:700;color:var(--cream-900);margin-bottom:3px;}
-.gram-title-en{font-size:11.5px;color:var(--cream-500);margin-bottom:12px;}
-.gram-exp{font-size:13px;line-height:1.85;color:var(--cream-700);white-space:pre-line;margin-bottom:13px;}
+.gram-title{font-family:var(--font-serif);font-size:16.5px;font-weight:700;color:var(--cream-900);margin-bottom:12px;}
+.gram-exp{font-size:13px;line-height:1.85;color:var(--cream-700);margin-bottom:13px;}
 .gram-rule{background:var(--mint-50);border:1px solid var(--mint-100);border-radius:var(--radius-sm);padding:9px 14px;font-size:12px;font-weight:700;color:var(--mint-700);margin-bottom:14px;}
-.gram-ex-list{list-style:none;}
+.gram-ex-list{list-style:none;margin-bottom:12px;}
 .gram-ex{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--cream-100);align-items:flex-start;}
 .gram-ex:last-child{border:none;}
 .gram-ko{font-family:var(--font-serif);font-size:13.5px;font-weight:700;color:var(--cream-900);min-width:150px;flex-shrink:0;}
 .gram-en{font-size:11.5px;color:var(--cream-500);line-height:1.55;}
-.bj-intro{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:14px 18px;margin-bottom:16px;}
-.bj-intro p{font-size:13px;color:var(--cream-900);line-height:1.75;}
-.bj-intro .en{font-size:11px;color:var(--cream-500);margin-top:4px;}
-.bj-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);font-size:13px;margin-bottom:14px;}
-.bj-table th{padding:11px 16px;font-size:11.5px;font-weight:700;text-align:center;border-bottom:2px solid var(--cream-200);}
-.bj-table th:nth-child(1){text-align:left;color:var(--cream-500);background:var(--cream-50);}
-.bj-table th:nth-child(2){color:var(--coral);background:#FFF4F3;}
-.bj-table th:nth-child(3){color:var(--blue);background:#F0F6FF;}
-.bj-table td{padding:11px 16px;border-bottom:1px solid var(--cream-100);}
-.bj-table tr:last-child td{border:none;}
-.bj-table td:nth-child(1){color:var(--cream-700);font-size:12px;}
-.bj-table td:nth-child(2){font-family:var(--font-serif);font-weight:700;color:var(--coral);text-align:center;}
-.bj-table td:nth-child(3){font-family:var(--font-serif);font-weight:700;color:var(--blue);text-align:center;}
-.bj-speak{background:none;border:none;font-size:13px;cursor:pointer;opacity:.5;transition:opacity .15s;}
-.bj-speak:hover{opacity:1;}
-.bj-tip{background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:var(--radius-md);padding:12px 16px;font-size:13px;color:var(--sage);font-weight:600;}
-.usage-section{margin-bottom:20px;}
-.usage-section-title{font-size:12.5px;font-weight:700;color:var(--mint-700);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--mint-100);}
-.usage-row{background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:11px 15px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm);}
-.usage-ctx{font-size:10.5px;color:var(--cream-500);min-width:64px;line-height:1.4;}
-.usage-text{flex:1;}
-.usage-kr{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900);}
-.usage-en{font-size:11px;color:var(--cream-500);margin-top:2px;}
-.usage-speak{background:none;border:none;font-size:15px;cursor:pointer;opacity:.5;transition:opacity .15s;}
-.usage-speak:hover{opacity:1;}
-.usage-tip{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--cream-900);line-height:1.75;}
-.usage-tip .en{font-size:11px;color:var(--cream-500);margin-top:6px;}
+.gram-tip{background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:var(--radius-md);padding:10px 14px;font-size:12.5px;color:var(--sage);font-weight:600;margin-bottom:12px;}
+.gram-usage{display:flex;flex-direction:column;gap:6px;}
+.gram-usage-row{background:var(--cream-50);border:1px solid var(--cream-200);border-radius:var(--radius-sm);padding:9px 13px;display:flex;gap:10px;align-items:center;}
+.gram-usage-ctx{font-size:10.5px;color:var(--cream-500);min-width:80px;}
+.gram-usage-text{flex:1;}
+.gram-usage-kr{font-family:var(--font-serif);font-size:13px;font-weight:700;color:var(--cream-900);}
+.gram-usage-en{font-size:11px;color:var(--cream-500);margin-top:2px;}
 .quiz-wrap{max-width:580px;}
 .quiz-q{background:#fff;border-radius:var(--radius-md);border:1px solid var(--cream-200);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm);}
 .q-num{font-size:10.5px;font-weight:700;color:var(--mint-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px;}
-.q-text{font-family:var(--font-serif);font-size:14.5px;font-weight:700;color:var(--cream-900);margin-bottom:3px;line-height:1.5;}
-.q-text-en{font-size:11px;color:var(--cream-500);margin-bottom:13px;}
+.q-text{font-family:var(--font-serif);font-size:14.5px;font-weight:700;color:var(--cream-900);margin-bottom:13px;line-height:1.5;}
 .q-options{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.q-opt{padding:10px 15px;background:var(--cream-50);border:1.5px solid var(--cream-200);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--cream-700);transition:all .15s;font-family:var(--font-kr);text-align:left;}
+.q-opt{padding:10px 15px;background:var(--cream-50);border:1.5px solid var(--cream-200);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;font-family:var(--font-serif);color:var(--cream-700);transition:all .15s;text-align:left;}
 .q-opt:hover{border-color:var(--mint-300);background:var(--mint-50);color:var(--mint-900);}
 .q-opt.correct{background:#EDF7F2;border-color:var(--sage);color:var(--sage);font-weight:700;pointer-events:none;}
 .q-opt.wrong{background:#FFF3F2;border-color:var(--coral);color:var(--coral);pointer-events:none;}
@@ -163,7 +141,7 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
 .rl-speak{background:none;border:none;font-size:14px;cursor:pointer;opacity:.5;transition:opacity .15s;flex-shrink:0;}
 .rl-speak:hover{opacity:1;}
 .rl-tip{background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:15px 18px;font-size:13px;line-height:1.8;color:var(--cream-900);margin-bottom:14px;}
-.rl-tip .en{font-size:11px;color:var(--cream-500);margin-top:5px;}
+.rl-tip-body{font-size:13px;color:var(--cream-900);line-height:1.8;margin-top:6px;}
 .loading{padding:50px;text-align:center;color:var(--cream-500);font-size:13px;}
 </style>
 </head>
@@ -188,9 +166,485 @@ body{font-family:var(--font-kr);background:var(--cream-100);min-height:100vh;dis
   </div>
 </div>
 <script>
+// ── EMBEDDED EPISODE DATA ──────────────────────────────
+const EPISODE_DATA = {
+  ep01: {
+  "episode": 1,
+  "title": "안녕? 나는 정민이야!",
+  "title_en": "Hi! I'm Jeongmin!",
+  "level": "기초반",
+  "scene": "친구 집 앞",
+  "scene_en": "In front of a friend's house",
+  "characters": [
+    {
+      "id": "jeongmin",
+      "name": "정민",
+      "role": "나 (주인공)",
+      "image": "img/jeongmin.png"
+    },
+    {
+      "id": "mirae",
+      "name": "미래",
+      "role": "친구",
+      "image": "img/mirae.png"
+    },
+    {
+      "id": "mom",
+      "name": "미래 엄마",
+      "role": "친구 엄마",
+      "image": "img/mom.png"
+    }
+  ],
+  "script": [
+    {
+      "speaker": "narrator",
+      "text": "정민이는 친구 미래 집에 놀러 갔어요.",
+      "en": "Jeongmin went to visit her friend Mirae's house.",
+      "speech_type": "narrator"
+    },
+    {
+      "speaker": "narrator",
+      "text": "미래가 문을 열었어요.",
+      "en": "Mirae opened the door.",
+      "speech_type": "narrator"
+    },
+    {
+      "speaker": "narrator",
+      "text": "그리고 미래 엄마도 나왔어요.",
+      "en": "And Mirae's mom came out too.",
+      "speech_type": "narrator"
+    },
+    {
+      "speaker": "narrator",
+      "text": "정민이는 뭐라고 할까요?",
+      "en": "What will Jeongmin say?",
+      "speech_type": "narrator"
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "안녕? 나는 정민이야.",
+      "en": "Hi! I'm Jeongmin.",
+      "speech_type": "반말",
+      "audio": "data/nhs/TTS/01_안녕_나는_정민이야.mp3"
+    },
+    {
+      "speaker": "mirae",
+      "text": "안녕? 나는 미래야. 만나서 반가워.",
+      "en": "Hi! I'm Mirae. Nice to meet you!",
+      "speech_type": "반말",
+      "audio": "data/nhs/TTS/02_안녕_나는_미래야_만나서_반가워.mp3"
+    },
+    {
+      "speaker": "mirae",
+      "text": "인사해. 우리 엄마야.",
+      "en": "Say hi. This is my mom.",
+      "speech_type": "반말",
+      "audio": "data/nhs/TTS/03_인사해_우리_엄마야.mp3"
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "안녕하세요? 저는 정민이에요.",
+      "en": "Hello! I'm Jeongmin.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/TTS/04_안녕하세요_저는_정민이에요.mp3"
+    },
+    {
+      "speaker": "mom",
+      "text": "안녕? 나는 미래 엄마야. 만나서 반가워.",
+      "en": "Hi! I'm Mirae's mom. Nice to meet you!",
+      "speech_type": "반말",
+      "audio": "data/nhs/TTS/05_안녕_나는_미래_엄마야_만나서_반가워.mp3"
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "네, 만나서 반가워요!",
+      "en": "Yes, nice to meet you too!",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/TTS/06_네_만나서_반가워요.mp3"
+    }
+  ],
+  "vocab": [
+    {
+      "korean": "안녕",
+      "romanization": "annyeong",
+      "en": "hi / hello (casual)",
+      "example": "안녕? 잘 지냈어?"
+    },
+    {
+      "korean": "안녕하세요",
+      "romanization": "annyeonghaseyo",
+      "en": "hello (formal)",
+      "example": "안녕하세요? 처음 뵙겠습니다."
+    },
+    {
+      "korean": "나",
+      "romanization": "na",
+      "en": "I / me (casual)",
+      "example": "나는 학생이야."
+    },
+    {
+      "korean": "저",
+      "romanization": "jeo",
+      "en": "I / me (formal)",
+      "example": "저는 정민이에요."
+    },
+    {
+      "korean": "이름",
+      "romanization": "ireum",
+      "en": "name",
+      "example": "이름이 뭐예요?"
+    },
+    {
+      "korean": "만나서 반가워",
+      "romanization": "mannaseo bangawo",
+      "en": "Nice to meet you (casual)",
+      "example": "만나서 반가워!"
+    },
+    {
+      "korean": "만나서 반가워요",
+      "romanization": "mannaseo bangawoyo",
+      "en": "Nice to meet you (polite)",
+      "example": "만나서 반가워요!"
+    },
+    {
+      "korean": "우리",
+      "romanization": "uri",
+      "en": "our / we",
+      "example": "우리 엄마야."
+    },
+    {
+      "korean": "엄마",
+      "romanization": "eomma",
+      "en": "mom",
+      "example": "우리 엄마야."
+    },
+    {
+      "korean": "네",
+      "romanization": "ne",
+      "en": "yes",
+      "example": "네, 알겠어요."
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g3",
+      "title": "은/는 — Topic Marker",
+      "explanation_en": "은/는 marks the topic of a sentence — what we're talking about. Use 은 after a consonant, 는 after a vowel.",
+      "pattern": "Noun + 은/는",
+      "examples": [
+        {
+          "korean": "나는 정민이야.",
+          "en": "I'm Jeongmin. (topic: me)"
+        },
+        {
+          "korean": "저는 학생이에요.",
+          "en": "I'm a student. (topic: me)"
+        },
+        {
+          "korean": "미래는 내 친구야.",
+          "en": "Mirae is my friend. (topic: Mirae)"
+        }
+      ],
+      "tip": "은 comes after consonants (학생은), 는 comes after vowels (나는, 저는).",
+      "usage": [
+        {
+          "situation": "자기소개할 때",
+          "example": "저는 케이트예요.",
+          "en": "I'm Kate."
+        },
+        {
+          "situation": "이름 물어볼 때",
+          "example": "이름이 뭐예요?",
+          "en": "What's your name?"
+        }
+      ]
+    },
+    {
+      "id": "g1",
+      "title": "나는/저는 — I am (반말 vs 존댓말)",
+      "explanation_en": "나는 is casual (used with friends, younger people). 저는 is polite (used with adults, strangers). Both mean 'I' but the level of politeness is different!",
+      "pattern": "나는 + Noun + 이야 / 저는 + Noun + 이에요",
+      "examples": [
+        {
+          "korean": "나는 정민이야.",
+          "en": "I'm Jeongmin. (casual)"
+        },
+        {
+          "korean": "저는 정민이에요.",
+          "en": "I'm Jeongmin. (polite)"
+        },
+        {
+          "korean": "나는 미래야.",
+          "en": "I'm Mirae. (casual)"
+        }
+      ],
+      "tip": "With friends your age → 나는 ...이야. With adults or strangers → 저는 ...이에요.",
+      "usage": [
+        {
+          "situation": "친구에게 (casual)",
+          "example": "나는 제이크야!",
+          "en": "I'm Jake!"
+        },
+        {
+          "situation": "어른에게 (polite)",
+          "example": "저는 제이크예요.",
+          "en": "I'm Jake."
+        }
+      ]
+    },
+    {
+      "id": "g6",
+      "title": "에 vs 에서 — Location Markers",
+      "explanation_en": "에 marks a destination or location of existence (where something is / where you go TO). 에서 marks where an action happens (where you DO something).",
+      "pattern": "Place + 에 (destination/existence) / Place + 에서 (action location)",
+      "examples": [
+        {
+          "korean": "학교에 가요.",
+          "en": "I go to school. (destination)"
+        },
+        {
+          "korean": "학교에서 공부해요.",
+          "en": "I study at school. (action)"
+        },
+        {
+          "korean": "집에 있어요.",
+          "en": "I'm at home. (existence)"
+        }
+      ],
+      "tip": "에 = where you GO or ARE. 에서 = where you DO something.",
+      "usage": [
+        {
+          "situation": "어디 가요?",
+          "example": "도서관에 가요.",
+          "en": "I'm going to the library."
+        },
+        {
+          "situation": "어디서 먹어요?",
+          "example": "학교에서 먹어요.",
+          "en": "I eat at school."
+        }
+      ]
+    },
+    {
+      "id": "g2",
+      "title": "만나서 반가워(요) — Nice to meet you",
+      "explanation_en": "만나서 means 'having met' and 반가워(요) means 'I'm glad / happy.' Together: 'I'm glad to have met you!' Use 반가워 with friends, 반가워요 with adults.",
+      "pattern": "만나서 반가워 (casual) / 만나서 반가워요 (polite)",
+      "examples": [
+        {
+          "korean": "만나서 반가워!",
+          "en": "Nice to meet you! (casual)"
+        },
+        {
+          "korean": "만나서 반가워요!",
+          "en": "Nice to meet you! (polite)"
+        },
+        {
+          "korean": "처음 만나서 반가워요.",
+          "en": "Nice to meet you for the first time."
+        }
+      ],
+      "tip": "반가워 for friends, 반가워요 for adults — same rule as 이야/이에요!",
+      "usage": [
+        {
+          "situation": "처음 만나는 친구에게",
+          "example": "안녕? 만나서 반가워!",
+          "en": "Hi! Nice to meet you!"
+        },
+        {
+          "situation": "어른에게",
+          "example": "안녕하세요? 만나서 반가워요!",
+          "en": "Hello! Nice to meet you!"
+        }
+      ]
+    },
+    {
+      "id": "g4",
+      "title": "저도 — Me too / I also",
+      "explanation_en": "도 is a particle meaning 'also' or 'too.' 저도 means 'me too' or 'I also.' It replaces 는 when you want to say 'also.'",
+      "pattern": "Noun + 도",
+      "examples": [
+        {
+          "korean": "저도 반가워요!",
+          "en": "Nice to meet you too!"
+        },
+        {
+          "korean": "나도 학생이야.",
+          "en": "I'm also a student."
+        },
+        {
+          "korean": "미래도 왔어?",
+          "en": "Did Mirae come too?"
+        }
+      ],
+      "tip": "도 replaces 은/는. Don't say 저는도 — just 저도!",
+      "usage": [
+        {
+          "situation": "같은 감정 표현",
+          "example": "저도 반가워요!",
+          "en": "Nice to meet you too!"
+        },
+        {
+          "situation": "나도 같아요",
+          "example": "나도 배고파!",
+          "en": "I'm hungry too!"
+        }
+      ]
+    },
+    {
+      "id": "g5",
+      "title": "우리 — Our / We",
+      "explanation_en": "우리 literally means 'we' or 'our,' but Koreans use it even when talking about one person! 우리 엄마 means 'my mom' (literally 'our mom'). This is a uniquely Korean cultural habit.",
+      "pattern": "우리 + Family/Close relationship",
+      "examples": [
+        {
+          "korean": "우리 엄마야.",
+          "en": "This is my mom. (lit: our mom)"
+        },
+        {
+          "korean": "우리 학교야.",
+          "en": "This is my school. (lit: our school)"
+        },
+        {
+          "korean": "우리 집에 와!",
+          "en": "Come to my house! (lit: our house)"
+        }
+      ],
+      "tip": "Koreans say 우리 엄마, not 나의 엄마. It shows closeness and belonging!",
+      "usage": [
+        {
+          "situation": "가족 소개",
+          "example": "우리 엄마야, 인사해!",
+          "en": "This is my mom, say hi!"
+        },
+        {
+          "situation": "내 물건/장소",
+          "example": "우리 학교 정말 좋아!",
+          "en": "I really like my school!"
+        }
+      ]
+    }
+  ],
+  "real_life": [
+    {
+      "type": "dialogue",
+      "title": "🏫 학교에서 처음 만났어요",
+      "scene": "교실 앞에서 새 친구를 만났어요.",
+      "dialogue": [
+        {
+          "speaker": "나",
+          "text": "안녕? 나는 에바야.",
+          "en": "Hi! I'm Eva."
+        },
+        {
+          "speaker": "친구",
+          "text": "안녕? 나는 지호야. 만나서 반가워!",
+          "en": "Hi! I'm Jiho. Nice to meet you!"
+        },
+        {
+          "speaker": "나",
+          "text": "나도 반가워!",
+          "en": "Nice to meet you too!"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "title": "🏠 친구 집에 놀러 갔어요",
+      "scene": "친구 집에 갔는데 엄마가 나왔어요.",
+      "dialogue": [
+        {
+          "speaker": "친구 엄마",
+          "text": "어서 와! 네가 정민이야?",
+          "en": "Welcome! Are you Jeongmin?"
+        },
+        {
+          "speaker": "나",
+          "text": "안녕하세요? 저는 정민이에요. 만나서 반가워요!",
+          "en": "Hello! I'm Jeongmin. Nice to meet you!"
+        },
+        {
+          "speaker": "친구 엄마",
+          "text": "반가워. 많이 놀다 가~",
+          "en": "Nice to meet you. Have fun!"
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "title": "🇰🇷 인사할 때 고개를 숙여요",
+      "content": "When you greet someone in Korea, you bow your head slightly. With close friends your age, a small nod is fine. With adults or elders, bow more deeply — it shows respect!",
+      "emoji": "🙇"
+    }
+  ],
+  "quiz": [
+    {
+      "q": "나는 정민이___.",
+      "choices": [
+        "이야",
+        "이에요",
+        "야",
+        "예요"
+      ],
+      "answer": 0,
+      "hint": "casual speech ending"
+    },
+    {
+      "q": "저는 미래___.",
+      "choices": [
+        "이야",
+        "이에요",
+        "야",
+        "예요"
+      ],
+      "answer": 3,
+      "hint": "polite speech, ends in vowel"
+    },
+    {
+      "q": "만나서 ___!",
+      "choices": [
+        "반가워요",
+        "반가워",
+        "감사해요",
+        "괜찮아요"
+      ],
+      "answer": 1,
+      "hint": "casual 'nice to meet you'"
+    },
+    {
+      "q": "우리 ___ 야.",
+      "choices": [
+        "엄마",
+        "이름",
+        "학교",
+        "친구"
+      ],
+      "answer": 0,
+      "hint": "Mirae said this to introduce her mom"
+    },
+    {
+      "q": "___도 반가워요!",
+      "choices": [
+        "나",
+        "저",
+        "우리",
+        "이름"
+      ],
+      "answer": 1,
+      "hint": "polite 'me too'"
+    }
+  ]
+}
+};
+
 let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'}};
-const EPISODES=[{id:'ep01',label:'안녕? 만나서 반가워!'},{id:'ep02',label:'coming soon',disabled:true},{id:'ep03',label:'',disabled:true},{id:'ep04',label:'',disabled:true}];
+const EPISODES=[
+  {id:'ep01',label:'안녕? 만나서 반가워!'},
+  {id:'ep02',label:'coming soon',disabled:true},
+  {id:'ep03',label:'',disabled:true},
+  {id:'ep04',label:'',disabled:true}
+];
 
 function buildSidebar(){
   document.getElementById('ep-list').innerHTML=EPISODES.map((ep,i)=>ep.disabled
@@ -199,27 +653,24 @@ function buildSidebar(){
   ).join('');
 }
 
-async function loadEp(epId){
+function loadEp(epId){
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById('ep-item-'+epId);
   if(item)item.classList.add('active');
-  document.getElementById('content-area').innerHTML='<div class="loading">⏳ 로딩 중…</div>';
-  try{
-    const res=await fetch(`data/nhs/${epId}.json`);
-    if(!res.ok)throw new Error();
-    DATA=await res.json();
-    qAnswered={};curTab='script';sceneIdx=0;render();
-  }catch{
-    document.getElementById('content-area').innerHTML='<div class="loading">⚠️ 서버에서 실행해 주세요.<br><small>GitHub Pages나 로컬 서버가 필요해요.</small></div>';
+  DATA=EPISODE_DATA[epId]||null;
+  if(!DATA){
+    document.getElementById('content-area').innerHTML='<div class="loading">⚠️ 에피소드 데이터가 없어요.</div>';
+    return;
   }
+  qAnswered={};curTab='script';sceneIdx=0;render();
 }
 
 function render(){
-  const tabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
-  const labels=['📽 영상·Script','새어휘 vocab','문법 grammar','반말/존댓말','Usage','Quiz','Real Life'];
+  const tabs=['script','vocab','grammar','quiz','reallife'];
+  const labels=['📽 영상·대사','새어휘 Vocab','문법 Grammar','Quiz','Real Life'];
   document.getElementById('content-area').innerHTML=`
     <div class="ep-header">
-      <div class="ep-num-badge">EP.1 · ${esc(DATA.level)}</div>
+      <div class="ep-num-badge">EP.${DATA.episode} · ${esc(DATA.level)}</div>
       <div class="ep-title-wrap"><div class="ep-title-kr">${esc(DATA.title)}</div><div class="ep-title-en">${esc(DATA.title_en)}</div></div>
       <div class="ep-scene-badge">${esc(DATA.scene)}</div>
     </div>
@@ -232,8 +683,6 @@ function fillAllPanels(){
   document.getElementById('panel-script').innerHTML=buildScript();
   document.getElementById('panel-vocab').innerHTML=buildVocab();
   document.getElementById('panel-grammar').innerHTML=buildGrammar();
-  document.getElementById('panel-banmal').innerHTML=buildBanmal();
-  document.getElementById('panel-usage').innerHTML=buildUsage();
   document.getElementById('panel-quiz').innerHTML=buildQuiz();
   document.getElementById('panel-reallife').innerHTML=buildRealLife();
   requestAnimationFrame(initSceneViewer);
@@ -241,14 +690,17 @@ function fillAllPanels(){
 
 function showTab(name){
   curTab=name;
-  const tabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tabs[i]===name));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const tabs=['script','vocab','grammar','quiz','reallife'];
+  const idx=tabs.indexOf(name);
+  if(idx>=0)document.querySelectorAll('.tab-btn')[idx].classList.add('active');
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   const p=document.getElementById('panel-'+name);
   if(p)p.classList.add('active');
   if(name==='script')requestAnimationFrame(initSceneViewer);
 }
 
+// ── SCRIPT / SCENE VIEWER ──────────────────────────────
 function buildScript(){
   return `<div class="scene-wrap"><div class="scene-col">
     <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div></div>
@@ -265,20 +717,18 @@ function buildScript(){
   </div></div>`;
 }
 
-function updateSlide(){
+function initSceneViewer(){renderScene();}
+
+function renderScene(){
   const panel=document.getElementById('scene-panel');
   if(!panel)return;
   const src=DATA.slides&&DATA.slides[sceneIdx]?DATA.slides[sceneIdx]:(DATA.slides&&DATA.slides[0])||'';
   if(src)panel.style.backgroundImage=`url('${src}')`;
-}
-
-function renderScene(){
-  updateSlide();
   const line=DATA.script[sceneIdx];
   const cfg=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
   const charMap={};DATA.characters.forEach(c=>{charMap[c.id]=c;});
-  const ch=charMap[line.speaker]||{name:''};
-  const tagHtml=line.speech_type?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`:'';
+  const ch=charMap[line.speaker]||{name:line.speaker};
+  const tagHtml=line.speech_type&&line.speech_type!=='narrator'?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`:'';
   document.getElementById('scene-caption').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center">
       <div class="caption-avatar" style="background:${cfg.bg}">${cfg.emoji}</div>
@@ -297,8 +747,6 @@ function renderScene(){
   document.getElementById('nav-next').disabled=sceneIdx===total-1;
   updateStripHighlight();
 }
-
-function initSceneViewer(){renderScene();}
 
 function moveScene(dir){
   const next=sceneIdx+dir;
@@ -359,7 +807,6 @@ function speak(text,audioSrc){
     speakTTS(text);
   }
 }
-
 function speakTTS(text){
   if(!window.speechSynthesis)return;
   speechSynthesis.cancel();
@@ -382,7 +829,7 @@ function buildVocab(){
       </div>
       <div class="vc-back">
         <div class="vc-emoji">${v.emoji||'📝'}</div>
-        <div class="vc-en">${esc(v.english)}</div>
+        <div class="vc-en">${esc(v.en)}</div>
         <div class="vc-kr" style="font-size:13px;margin-top:6px">${esc(v.korean)}</div>
         <div class="vc-rom">[${esc(v.romanization)}]</div>
       </div>
@@ -394,44 +841,24 @@ function buildGrammar(){
   return DATA.grammar.map(g=>`
     <div class="gram-card">
       <div class="gram-title">${esc(g.title)}</div>
-      <div class="gram-title-en">${esc(g.title_en)}</div>
       <div class="gram-exp">${esc(g.explanation_en)}</div>
-      <div class="gram-rule">📐 ${esc(g.rule)}</div>
-      <ul class="gram-ex-list">${g.examples.map(ex=>`
+      <div class="gram-rule">📐 ${esc(g.pattern)}</div>
+      <ul class="gram-ex-list">${(g.examples||[]).map(ex=>`
         <li class="gram-ex">
-          <div class="gram-ko">${esc(ex.ko)}</div>
+          <div class="gram-ko">${esc(ex.korean)} <button onclick="speakTTS('${escA(ex.korean)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></div>
           <div class="gram-en">${esc(ex.en)}</div>
         </li>`).join('')}
       </ul>
+      ${g.tip?`<div class="gram-tip">💡 ${esc(g.tip)}</div>`:''}
+      ${g.usage&&g.usage.length?`<div class="gram-usage">${g.usage.map(u=>`
+        <div class="gram-usage-row">
+          <div class="gram-usage-ctx">${esc(u.situation)}</div>
+          <div class="gram-usage-text">
+            <div class="gram-usage-kr">${esc(u.example)} <button onclick="speakTTS('${escA(u.example)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></div>
+            <div class="gram-usage-en">${esc(u.en)}</div>
+          </div>
+        </div>`).join('')}</div>`:''}
     </div>`).join('');
-}
-
-// ── BANMAL/JONDAEMAL ───────────────────────────────────
-function buildBanmal(){
-  const bj=DATA.banmal_jondaemal;
-  const rows=bj.rows.map(r=>`<tr>
-    <td>${esc(r.situation_ko)}<br><span style="font-size:10px;color:var(--cream-200)">${esc(r.situation_en)}</span></td>
-    <td>${esc(r.banmal)} <button class="bj-speak" onclick="speakTTS('${escA(r.banmal)}')">🔊</button></td>
-    <td>${esc(r.jondaemal)} <button class="bj-speak" onclick="speakTTS('${escA(r.jondaemal)}')">🔊</button></td>
-  </tr>`).join('');
-  return `<div class="bj-intro"><p>${esc(bj.intro_ko)}</p><div class="en">${esc(bj.intro_en)}</div></div>
-    <table class="bj-table"><thead><tr><th>상황</th><th>반말 👧👦</th><th>존댓말 🙇</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="bj-tip">${esc(bj.tip)}</div>`;
-}
-
-// ── USAGE ──────────────────────────────────────────────
-function buildUsage(){
-  return DATA.usage.map(sec=>{
-    if(sec.type==='tip')return`<div class="usage-tip"><strong>${esc(sec.section)}</strong><br>${esc(sec.content_ko)}<div class="en">${esc(sec.content_en)}</div></div>`;
-    return`<div class="usage-section">
-      <div class="usage-section-title">${esc(sec.section)}</div>
-      ${sec.items.map(it=>`<div class="usage-row">
-        <div class="usage-ctx">${esc(it.context_ko)}</div>
-        <div class="usage-text"><div class="usage-kr">${esc(it.korean)}</div><div class="usage-en">${esc(it.english)}</div></div>
-        <button class="usage-speak" onclick="speakTTS('${escA(it.korean)}')">🔊</button>
-      </div>`).join('')}
-    </div>`;
-  }).join('');
 }
 
 // ── QUIZ ───────────────────────────────────────────────
@@ -439,40 +866,41 @@ function buildQuiz(){
   return`<div class="quiz-wrap">${DATA.quiz.map((q,qi)=>`
     <div class="quiz-q">
       <div class="q-num">문제 ${qi+1}</div>
-      <div class="q-text">${esc(q.question_ko)}</div>
-      <div class="q-text-en">${esc(q.question_en)}</div>
-      <ul class="q-options">${q.options.map((opt,oi)=>`
-        <li class="q-opt" id="opt-${q.id}-${oi}" onclick="answerQ('${q.id}',${oi},${q.answer},'${escA(q.explanation)}')">
+      <div class="q-text">${esc(q.q)}</div>
+      <ul class="q-options">${(q.choices||[]).map((opt,oi)=>`
+        <li class="q-opt" id="opt-${qi}-${oi}" onclick="answerQ(${qi},${oi},${q.answer},'${escA(q.hint||'')}')">
           <span style="font-weight:700;color:var(--mint-500);margin-right:6px">${oi+1}.</span>${esc(opt)}
         </li>`).join('')}
       </ul>
-      <div class="q-exp" id="exp-${q.id}"></div>
+      <div class="q-exp" id="exp-${qi}"></div>
     </div>`).join('')}
     <button class="quiz-reset" onclick="resetQuiz()">↺ 다시 풀기</button>
   </div>`;
 }
 
-function answerQ(qId,chosen,correct,explanation){
-  if(qAnswered[qId])return;
-  qAnswered[qId]=true;
-  DATA.quiz.find(q=>q.id===qId)?.options.forEach((_,i)=>{
-    const el=document.getElementById(`opt-${qId}-${i}`);
+function answerQ(qi,chosen,correct,hint){
+  if(qAnswered[qi])return;
+  qAnswered[qi]=true;
+  DATA.quiz[qi].choices.forEach((_,i)=>{
+    const el=document.getElementById(`opt-${qi}-${i}`);
+    if(!el)return;
     if(i===correct)el.classList.add('correct');
     else if(i===chosen)el.classList.add('wrong');
   });
-  const exp=document.getElementById(`exp-${qId}`);
-  if(exp){exp.textContent=explanation;exp.classList.add('show');}
+  const exp=document.getElementById(`exp-${qi}`);
+  if(exp&&hint){exp.textContent='💡 '+hint;exp.classList.add('show');}
 }
 function resetQuiz(){qAnswered={};document.getElementById('panel-quiz').innerHTML=buildQuiz();}
 
 // ── REAL LIFE ──────────────────────────────────────────
 function buildRealLife(){
   return DATA.real_life.map(item=>{
-    if(item.type==='tip')return`<div class="rl-tip"><strong>${esc(item.title)}</strong><br>${esc(item.content_ko)}<div class="en">${esc(item.content_en)}</div></div>`;
+    if(item.type==='tip')return`<div class="rl-tip"><strong>${esc(item.title)}</strong><div class="rl-tip-body">${esc(item.content)}</div></div>`;
+    const lines=item.dialogue||[];
     return`<div class="rl-card">
       <div class="rl-title">${esc(item.title)}</div>
-      <div class="rl-setup">${esc(item.setup_ko)} · <span style="color:var(--cream-500)">${esc(item.setup_en)}</span></div>
-      <div class="rl-dialogue">${item.lines.map(l=>`
+      ${item.scene?`<div class="rl-setup">${esc(item.scene)}</div>`:''}
+      <div class="rl-dialogue">${lines.map(l=>`
         <div class="rl-line">
           <div class="rl-spk">${esc(l.speaker)}</div>
           <div class="rl-bubble"><div class="rl-kr">${esc(l.text)}</div><div class="rl-en">${esc(l.en)}</div></div>
@@ -484,7 +912,7 @@ function buildRealLife(){
 }
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function escA(s){return String(s||'').replace(/'/g,"\\'");}
+function escA(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
 function setLevel(btn){document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 
 window.addEventListener('DOMContentLoaded',()=>{buildSidebar();loadEp('ep01');});
