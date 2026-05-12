@@ -2236,6 +2236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <nav class="section-nav" id="u7-snav">
     <button class="snav-btn active" onclick="switchSection7('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection7('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
+    <button class="snav-btn" onclick="switchSection7('write')">✏️ 쓰기 Write</button>
     <button class="snav-btn" onclick="switchSection7('batchim')">🧩 받침 게임 <span class="snav-en">Game</span></button>
   </nav>
 
@@ -2286,6 +2287,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
 
   <!-- ── 받침 게임 ── -->
+
+  <div class="section" id="u7-write">
+    <div id="u7-write-content" style="max-width:480px;margin:0 auto;padding:8px 0;"></div>
+  </div>
   <div class="section" id="u7-batchim">
     <div class="u7-word-card">
       <div class="u7-prog" id="u7b-prog">1 / 6</div>
@@ -4088,7 +4093,7 @@ let u7BVotes  = {};   // { "안나": "ㄹ" }
 let u7BPlaced = {};   // { "안나": ["ㄹ","ㅂ"] } 학생이 놓은 받침
 
 function switchSection7(sec) {
-  const tabs = ['vocab','listen','batchim'];
+  const tabs = ['vocab','listen','write','batchim'];
   document.querySelectorAll('#u7-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
   });
@@ -4097,6 +4102,132 @@ function switchSection7(sec) {
   if (el) el.classList.add('active');
   if (sec === 'batchim') renderU7B();
   if (sec === 'listen') renderU7L();
+  if (sec === 'write') renderU7Write();
+}
+
+
+// ══════════════════════════════════════════════
+// 7과 쓰기 게임 — 캔버스 손글씨 자가 채점
+// ══════════════════════════════════════════════
+const U7W_NATIVE = [
+  {num:'1',en:'one',   answer:'하나'},
+  {num:'2',en:'two',   answer:'둘'},
+  {num:'3',en:'three', answer:'셋'},
+  {num:'4',en:'four',  answer:'넷'},
+  {num:'5',en:'five',  answer:'다섯'},
+  {num:'6',en:'six',   answer:'여섯'},
+  {num:'7',en:'seven', answer:'일곱'},
+  {num:'8',en:'eight', answer:'여덟'},
+  {num:'9',en:'nine',  answer:'아홉'},
+  {num:'10',en:'ten',  answer:'열'},
+];
+const U7W_SINO = [
+  {num:'1',en:'one',   answer:'일'},
+  {num:'2',en:'two',   answer:'이'},
+  {num:'3',en:'three', answer:'삼'},
+  {num:'4',en:'four',  answer:'사'},
+  {num:'5',en:'five',  answer:'오'},
+  {num:'6',en:'six',   answer:'육'},
+  {num:'7',en:'seven', answer:'칠'},
+  {num:'8',en:'eight', answer:'팔'},
+  {num:'9',en:'nine',  answer:'구'},
+  {num:'10',en:'ten',  answer:'십'},
+];
+let u7WIdx=0, u7WIsDrawing=false, u7WLastX=0, u7WLastY=0, u7WMode='native';
+
+function renderU7Write(){ u7WIdx=0; u7WMode='native'; _u7WCard(); }
+
+function u7WSwitchMode(m){ u7WMode=m; u7WIdx=0; _u7WCard(); }
+
+function _u7WCard(){
+  const qs = u7WMode==='native' ? U7W_NATIVE : U7W_SINO;
+  const q  = qs[u7WIdx];
+  const total = qs.length;
+  const modeCol = u7WMode==='native' ? '#7B93F5' : '#F5837B';
+  const modeLabel = u7WMode==='native' ? '고유어' : '한자어';
+  const el = document.getElementById('u7-write-content');
+  if(!el) return;
+  el.innerHTML = `
+    <div style="display:flex;gap:8px;margin-bottom:16px;justify-content:center;">
+      <button onclick="u7WSwitchMode('native')" style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='native'?'#7B93F5':'#DDD'};background:${u7WMode==='native'?'#EEF1FF':'white'};color:${u7WMode==='native'?'#3D5AFE':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">고유어</button>
+      <button onclick="u7WSwitchMode('sino')"   style="padding:6px 18px;border-radius:20px;border:2px solid ${u7WMode==='sino'?'#F5837B':'#DDD'};background:${u7WMode==='sino'?'#FFF0EE':'white'};color:${u7WMode==='sino'?'#D84315':'var(--muted)'};font-family:'Jua',sans-serif;cursor:pointer;font-size:0.9rem;">한자어</button>
+    </div>
+    <div style="background:white;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);padding:24px 20px;text-align:center;">
+      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px;">${u7WIdx+1} / ${total} &nbsp;·&nbsp; <span style="color:${modeCol};font-weight:700;">${modeLabel}</span></div>
+      <div style="font-size:3.6rem;font-weight:900;color:#3D5AFE;line-height:1;">${q.num}</div>
+      <div style="font-size:1rem;color:var(--muted);margin:6px 0 18px;">${q.en}</div>
+      <div style="font-size:0.85rem;color:#888;margin-bottom:10px;">아래 칸에 한국어로 써 보세요 ✏️</div>
+      <div style="position:relative;display:inline-block;margin-bottom:16px;">
+        <canvas id="u7wc" width="280" height="200"
+          style="border:3px dashed #C5CAE9;border-radius:16px;background:#FAFBFF;touch-action:none;cursor:crosshair;display:block;"></canvas>
+        <button onclick="u7WClear()" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.9);border:1.5px solid #DDD;border-radius:10px;padding:3px 9px;font-size:0.72rem;cursor:pointer;color:var(--muted);">지우기 ✕</button>
+      </div>
+      <div id="u7-ans-box" style="display:none;margin-bottom:16px;padding:12px;background:#F0F4FF;border-radius:14px;">
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:4px;">정답 Answer</div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:2.8rem;font-weight:700;color:#3D5AFE;">${q.answer}</div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button id="u7w-reveal" onclick="u7WReveal()" style="padding:10px 24px;background:#7B93F5;color:white;border:none;border-radius:24px;font-family:'Jua',sans-serif;font-size:0.95rem;cursor:pointer;box-shadow:0 2px 8px rgba(123,147,245,0.3);">정답 보기 👀</button>
+        <button id="u7w-ok"    onclick="u7WNext(true)"  style="display:none;padding:10px 20px;background:var(--mint);color:white;border:none;border-radius:24px;font-family:'Jua',sans-serif;font-size:0.95rem;cursor:pointer;">✅ 맞았어요!</button>
+        <button id="u7w-retry" onclick="u7WNext(false)" style="display:none;padding:10px 20px;background:white;border:2.5px solid var(--coral);color:var(--coral);border-radius:24px;font-family:'Jua',sans-serif;font-size:0.95rem;cursor:pointer;">🔄 다시 써볼게요</button>
+      </div>
+    </div>
+    <div id="u7w-msg" style="margin-top:14px;text-align:center;min-height:36px;"></div>
+  `;
+  requestAnimationFrame(_u7WInitCanvas);
+}
+
+function u7WReveal(){
+  document.getElementById('u7-ans-box').style.display='block';
+  document.getElementById('u7w-reveal').style.display='none';
+  document.getElementById('u7w-ok').style.display='inline-block';
+  document.getElementById('u7w-retry').style.display='inline-block';
+}
+
+function u7WNext(ok){
+  const qs = u7WMode==='native' ? U7W_NATIVE : U7W_SINO;
+  const msg = document.getElementById('u7w-msg');
+  if(ok){ msg.innerHTML='<span style="font-size:1.3rem;">🎉 잘 썼어요!</span>'; }
+  else  { msg.innerHTML='<span style="color:var(--coral);font-size:1rem;">괜찮아요! 연습하면 돼요 💪</span>'; }
+  setTimeout(()=>{
+    if(u7WIdx < qs.length-1){ u7WIdx++; _u7WCard(); }
+    else {
+      const other = u7WMode==='native' ? 'sino' : 'native';
+      const otherLabel = u7WMode==='native' ? '한자어' : '고유어';
+      document.getElementById('u7-write-content').innerHTML=`
+        <div style="text-align:center;padding:40px 20px;background:white;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+          <div style="font-size:2.8rem;margin-bottom:10px;">🏆</div>
+          <div style="font-family:'Jua',sans-serif;font-size:1.4rem;color:#3D5AFE;margin-bottom:6px;">모두 연습했어요!</div>
+          <div style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Great job! All done!</div>
+          <button onclick="u7WSwitchMode('${other}')" style="padding:12px 28px;background:#7B93F5;color:white;border:none;border-radius:24px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(123,147,245,0.3);">
+            ${otherLabel}도 연습하기 →
+          </button>
+        </div>`;
+    }
+  }, 1100);
+}
+
+function u7WClear(){
+  const c=document.getElementById('u7wc'); if(!c)return;
+  c.getContext('2d').clearRect(0,0,c.width,c.height);
+}
+
+function _u7WInitCanvas(){
+  const c=document.getElementById('u7wc'); if(!c)return;
+  const ctx=c.getContext('2d');
+  ctx.strokeStyle='#3D5AFE'; ctx.lineWidth=5; ctx.lineCap='round'; ctx.lineJoin='round';
+  function pos(e){
+    const r=c.getBoundingClientRect(), sx=c.width/r.width, sy=c.height/r.height;
+    if(e.touches) return [(e.touches[0].clientX-r.left)*sx,(e.touches[0].clientY-r.top)*sy];
+    return [(e.clientX-r.left)*sx,(e.clientY-r.top)*sy];
+  }
+  c.onmousedown =e=>{ u7WIsDrawing=true; [u7WLastX,u7WLastY]=pos(e); };
+  c.onmousemove =e=>{ if(!u7WIsDrawing)return; const[x,y]=pos(e); ctx.beginPath();ctx.moveTo(u7WLastX,u7WLastY);ctx.lineTo(x,y);ctx.stroke();[u7WLastX,u7WLastY]=[x,y]; };
+  c.onmouseup   =()=>u7WIsDrawing=false;
+  c.onmouseleave=()=>u7WIsDrawing=false;
+  c.addEventListener('touchstart',e=>{e.preventDefault();u7WIsDrawing=true;[u7WLastX,u7WLastY]=pos(e);},{passive:false});
+  c.addEventListener('touchmove', e=>{if(!u7WIsDrawing)return;e.preventDefault();const[x,y]=pos(e);ctx.beginPath();ctx.moveTo(u7WLastX,u7WLastY);ctx.lineTo(x,y);ctx.stroke();[u7WLastX,u7WLastY]=[x,y];},{passive:false});
+  c.addEventListener('touchend', ()=>u7WIsDrawing=false);
 }
 
 // ══════════════════════════════════════════════
@@ -6221,7 +6352,3 @@ init();
 </div><!-- /app-body -->
 <script>
   VocabRenderer.renderAll();
-  GrammarRenderer.renderAll();
-</script>
-</body>
-</html>
