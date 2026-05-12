@@ -759,6 +759,7 @@ function loadEp(epId){
     return;
   }
   qAnswered={};curTab='script';sceneIdx=0;render();
+  setTimeout(()=>{const line=DATA.script[0];speak(line.text,line.audio);},400);
 }
 
 function render(){
