@@ -278,7 +278,7 @@ const EPISODE_DATA = {
     },
     {
       "speaker": "jeongmin",
-      "text": "네, 만나서 반가워요!",
+      "text": "네, 저도 만나서 반가워요!",
       "en": "Yes, nice to meet you too!",
       "speech_type": "존댓말",
       "audio": "data/nhs/TTS/06_네_만나서_반가워요.mp3"
@@ -999,7 +999,7 @@ function buildBanmal(){
   const bj=DATA.banmal_jondaemal;
   if(!bj)return'<div class="loading">데이터 준비 중이에요.</div>';
   const rows=bj.rows.map(r=>`<tr>
-    <td>${esc(r.situation_ko)}<br><span style="font-size:10px;color:var(--cream-500)">${esc(r.situation_en)}</span></td>
+    <td style="padding:11px 20px">${esc(r.situation_ko)}<br><span style="font-size:10px;color:var(--cream-500)">${esc(r.situation_en)}</span></td>
     <td><span style="font-family:var(--font-serif);font-weight:700;color:var(--coral)">${esc(r.banmal)}</span> <button onclick="speakTTS('${escA(r.banmal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></td>
     <td><span style="font-family:var(--font-serif);font-weight:700;color:var(--blue)">${esc(r.jondaemal)}</span> <button onclick="speakTTS('${escA(r.jondaemal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></td>
   </tr>`).join('');
@@ -1009,7 +1009,7 @@ function buildBanmal(){
   </div>
   <table style="width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);font-size:13px;margin-bottom:14px;">
     <thead><tr>
-      <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--cream-200);background:var(--cream-50);color:var(--cream-500)">상황</th>
+      <th style="padding:11px 20px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--cream-200);background:var(--cream-50);color:var(--cream-500)">상황</th>
       <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:center;border-bottom:2px solid var(--cream-200);background:#FFF4F3;color:var(--coral)">반말 👧👦</th>
       <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:center;border-bottom:2px solid var(--cream-200);background:#F0F6FF;color:var(--blue)">존댓말 🙇</th>
     </tr></thead>
