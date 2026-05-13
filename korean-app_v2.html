@@ -6290,6 +6290,8 @@ async function init(){
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
     u4Questions = (d4 && d4.practice && d4.practice.quiz_items) || _u4QFallback;
     u5Questions = (d5 && d5.practice && d5.practice.quiz_items) || _u5QFallback;
+    // 1~5과 문법 렌더링
+    [1,2,3,4,5].forEach(n => GrammarRenderer.render(n));
     if (d6 && d6.sections && d6.sections.practice) {
       const p6 = d6.sections.practice;
       if (p6.fill_items)   u6FillQ     = p6.fill_items;
