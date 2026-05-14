@@ -153,6 +153,33 @@ body{font-family:var(--font-kr);background:var(--warm-100);min-height:100vh;disp
 .loading{padding:50px;text-align:center;color:var(--warm-500);font-size:13px;}
 .clova-credit{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.5);color:rgba(255,255,255,0.85);font-size:10px;padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);transition:opacity 1s;pointer-events:none;}
 .clova-credit.hidden{opacity:0;}
+
+/* ── 색인 모달 ─────────────────────────────────────────── */
+.idx-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;}
+.idx-overlay.open{display:flex;}
+.idx-modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:760px;max-height:82vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;}
+.idx-header{background:var(--sky-500);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.idx-header h2{font-size:15px;font-weight:700;margin:0;}
+.idx-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
+.idx-tabs{display:flex;border-bottom:2px solid var(--cream-200);flex-shrink:0;background:#fafafa;}
+.idx-tab{padding:10px 20px;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--cream-500);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;}
+.idx-tab.active{color:var(--sky-600);border-bottom-color:var(--sky-500);}
+.idx-search{padding:10px 16px;border-bottom:1px solid var(--cream-200);flex-shrink:0;}
+.idx-search input{width:100%;padding:8px 12px;border:1.5px solid var(--cream-200);border-radius:var(--radius-md);font-size:13px;font-family:var(--font-kr);outline:none;box-sizing:border-box;}
+.idx-search input:focus{border-color:var(--sky-400);}
+.idx-body{overflow-y:auto;padding:16px 20px;flex:1;}
+.idx-section-hdr{font-size:10.5px;font-weight:700;color:var(--cream-400);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--cream-200);}
+.idx-section-hdr:first-child{margin-top:0;}
+.idx-vocab-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--cream-100);}
+.idx-vocab-kr{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900);min-width:90px;}
+.idx-vocab-en{font-size:12px;color:var(--cream-500);flex:1;}
+.idx-ep-badge{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--sky-100);color:var(--sky-600);flex-shrink:0;}
+.idx-gram-row{padding:9px 0;border-bottom:1px solid var(--cream-100);}
+.idx-gram-title{font-size:13px;font-weight:700;color:var(--cream-900);}
+.idx-gram-rule{font-size:11.5px;color:var(--blue);margin-top:2px;}
+.idx-pron-row{padding:9px 0;border-bottom:1px solid var(--cream-100);}
+.idx-pron-word{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900);}
+.idx-pron-note{font-size:12px;color:var(--coral);margin-top:2px;}
 </style>
 </head>
 <body>
@@ -164,8 +191,25 @@ body{font-family:var(--font-kr);background:var(--warm-100);min-height:100vh;disp
     <button class="level-btn" onclick="setLevel(this)">Advanced</button>
   </div>
   <div class="school-title"><span class="kq-logo">K</span>-Quest</div>
-  <a href="index.html" class="index-btn">index</a>
+  <button class="index-btn" onclick="openIndex()">📖 색인</button>
 </div>
+<!-- 색인 모달 -->
+<div class="idx-overlay" id="idx-overlay" onclick="if(event.target===this)closeIndex()">
+  <div class="idx-modal">
+    <div class="idx-header">
+      <h2>📖 K-Quest 색인</h2>
+      <button class="idx-close" onclick="closeIndex()">✕</button>
+    </div>
+    <div class="idx-tabs">
+      <div class="idx-tab active" id="idx-tab-vocab" onclick="switchIdxTab('vocab')">📚 단어</div>
+      <div class="idx-tab" id="idx-tab-grammar" onclick="switchIdxTab('grammar')">📌 문법</div>
+      <div class="idx-tab" id="idx-tab-pron" onclick="switchIdxTab('pron')">🔤 발음</div>
+    </div>
+    <div class="idx-search"><input id="idx-search-input" placeholder="검색..." oninput="renderIdxBody()"></div>
+    <div class="idx-body" id="idx-body"></div>
+  </div>
+</div>
+
 <div class="main-layout">
   <div class="sidebar">
     <div class="sidebar-hdr">📺 Episodes</div>
@@ -1075,8 +1119,9 @@ const EPISODE_DATA = {
         {
           "korean": "불러요",
           "romanization": "bul-leo-yo",
-          "english": "call (a person)",
-          "emoji": "📣"
+          "english": "call · sing · be full",
+          "emoji": "📣",
+          "note": "노래를 불러요 (sing) · 배가 불러요 (be full) · 엄마가 불러요 (call)"
         },
         {
           "korean": "있어요",
@@ -1759,7 +1804,7 @@ function renderScene(){
       <div class="caption-en">${esc(line.en)}</div>
       ${tagHtml}
     </div>
-    <button onclick="speakCurrent()" style="background:none;border:none;font-size:18px;cursor:pointer;opacity:.55;align-self:center;flex-shrink:0;">🔊</button>`;
+`;
   const total=DATA.script.length;
   document.getElementById('nav-steps').innerHTML=DATA.script.map((_,i)=>`<div class="nav-step${i<=sceneIdx?' done':''}"></div>`).join('');
   document.getElementById('nav-count').textContent=`${sceneIdx+1} / ${total}`;
@@ -1848,6 +1893,7 @@ function vocabCardHtml(v){
         <div class="vc-en">${esc(v.english)}</div>
         <div class="vc-kr" style="font-size:13px;margin-top:6px">${esc(v.korean)}</div>
         <div class="vc-rom">[${esc(v.romanization)}]</div>
+        ${v.note?`<div style="font-size:10.5px;color:var(--sky-600);margin-top:7px;line-height:1.55;padding:4px 6px;background:var(--sky-50);border-radius:6px">${esc(v.note)}</div>`:''}
       </div>
     </div>`;
 }
@@ -2203,6 +2249,143 @@ function toggleSC(el){
   const checked=box.textContent==='✅';
   box.textContent=checked?'⬜':'✅';
   el.style.borderColor=checked?'var(--cream-200)':'var(--mint-500)';
+}
+
+
+// ── 색인 모달 ───────────────────────────────────────────
+let idxTab='vocab';
+
+function openIndex(){
+  document.getElementById('idx-overlay').classList.add('open');
+  document.getElementById('idx-search-input').value='';
+  renderIdxBody();
+}
+function closeIndex(){
+  document.getElementById('idx-overlay').classList.remove('open');
+}
+function switchIdxTab(tab){
+  idxTab=tab;
+  document.querySelectorAll('.idx-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('idx-tab-'+tab).classList.add('active');
+  document.getElementById('idx-search-input').value='';
+  renderIdxBody();
+}
+
+function renderIdxBody(){
+  const q=(document.getElementById('idx-search-input').value||'').toLowerCase();
+  const body=document.getElementById('idx-body');
+  if(!body)return;
+
+  // 전체 에피소드 데이터 수집
+  const allEps=Object.values(EPISODE_DATA).filter(ep=>ep&&ep.id);
+
+  if(idxTab==='vocab'){
+    // 전체 단어 수집 → 가나다 정렬
+    let allWords=[];
+    allEps.forEach(ep=>{
+      const vocab=ep.vocab||[];
+      const isGrouped=vocab.length>0&&vocab[0].items;
+      if(isGrouped){
+        vocab.forEach(g=>g.items.forEach(v=>allWords.push({...v,ep:ep.id,epTitle:ep.title})));
+      } else {
+        vocab.forEach(v=>allWords.push({...v,ep:ep.id,epTitle:ep.title}));
+      }
+    });
+    // 검색 필터
+    if(q) allWords=allWords.filter(v=>(v.korean||'').toLowerCase().includes(q)||(v.english||v.en||'').toLowerCase().includes(q));
+    // 정렬
+    allWords.sort((a,b)=>(a.korean||'').localeCompare(b.korean||'','ko'));
+    // 초성 그룹핑
+    const groups={};
+    allWords.forEach(v=>{
+      const first=(v.korean||'')[0]||'#';
+      if(!groups[first])groups[first]=[];
+      groups[first].push(v);
+    });
+    let html='';
+    if(!allWords.length){html='<div style="color:var(--cream-400);font-size:13px;text-align:center;padding:30px">검색 결과 없음</div>';}
+    else{
+      Object.keys(groups).sort((a,b)=>a.localeCompare(b,'ko')).forEach(ch=>{
+        html+=`<div class="idx-section-hdr">${esc(ch)}</div>`;
+        html+=groups[ch].map(v=>`
+          <div class="idx-vocab-row">
+            <div class="idx-vocab-kr">${esc(v.korean||'')} ${v.emoji||''}</div>
+            <div style="font-size:11px;color:var(--cream-400);min-width:80px">${esc(v.romanization||'')}</div>
+            <div class="idx-vocab-en">${esc(v.english||v.en||'')}</div>
+            <span class="idx-ep-badge">EP.${esc((v.ep||'').replace('ep',''))}</span>
+            <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
+          </div>`).join('');
+      });
+    }
+    body.innerHTML=html;
+
+  } else if(idxTab==='grammar'){
+    let allGram=[];
+    allEps.forEach(ep=>{
+      (ep.grammar||[]).forEach(g=>allGram.push({...g,ep:ep.id,epTitle:ep.title}));
+    });
+    if(q) allGram=allGram.filter(g=>(g.title||'').toLowerCase().includes(q)||(g.explanation_en||'').toLowerCase().includes(q));
+    let html='';
+    if(!allGram.length){html='<div style="color:var(--cream-400);font-size:13px;text-align:center;padding:30px">검색 결과 없음</div>';}
+    else{
+      // 에피소드별 그룹
+      const byEp={};
+      allGram.forEach(g=>{
+        if(!byEp[g.ep])byEp[g.ep]=[];
+        byEp[g.ep].push(g);
+      });
+      Object.keys(byEp).sort().forEach(epId=>{
+        const ep=allEps.find(e=>e.id===epId);
+        html+=`<div class="idx-section-hdr">EP.${esc(epId.replace('ep',''))} · ${esc(ep?ep.title:'')}</div>`;
+        html+=byEp[epId].map(g=>`
+          <div class="idx-gram-row">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:16px">${esc(g.icon||'📌')}</span>
+              <div>
+                <div class="idx-gram-title">${esc(g.title||'')} <span class="idx-ep-badge">EP.${esc((g.ep||'').replace('ep',''))}</span></div>
+                ${g.rule?`<div class="idx-gram-rule">📐 ${esc(g.rule)}</div>`:''}
+                <div style="font-size:11.5px;color:var(--cream-500);margin-top:2px">${esc(g.explanation_en||'')}</div>
+              </div>
+            </div>
+          </div>`).join('');
+      });
+    }
+    body.innerHTML=html;
+
+  } else if(idxTab==='pron'){
+    // 발음 — grammar 중 발음 관련 항목 + 불규칙 동사 패턴 자동 추출
+    const pronKeywords=['불규칙','발음','pronunciation','irregular','받침','연음','liaison','sound'];
+    let allPron=[];
+    allEps.forEach(ep=>{
+      (ep.grammar||[]).forEach(g=>{
+        const txt=((g.title||'')+(g.explanation_en||'')).toLowerCase();
+        if(pronKeywords.some(k=>txt.includes(k))){
+          allPron.push({...g,ep:ep.id});
+        }
+      });
+    });
+    if(q) allPron=allPron.filter(g=>(g.title||'').toLowerCase().includes(q));
+    let html='';
+    if(!allPron.length){
+      html=`<div style="text-align:center;padding:30px;color:var(--cream-400)">
+        <div style="font-size:32px;margin-bottom:10px">🔤</div>
+        <div style="font-size:13px">발음·불규칙 관련 문법 항목이 자동으로 표시돼요.<br>아직 해당 항목이 없거나 검색 결과가 없어요.</div>
+      </div>`;
+    } else {
+      html=allPron.map(g=>`
+        <div class="idx-pron-row">
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <span style="font-size:18px">${esc(g.icon||'🔤')}</span>
+            <div>
+              <div class="idx-pron-word">${esc(g.title||'')} <span class="idx-ep-badge">EP.${esc((g.ep||'').replace('ep',''))}</span></div>
+              ${g.rule?`<div class="idx-pron-note">📐 ${esc(g.rule)}</div>`:''}
+              ${(g.examples||[]).slice(0,2).map(ex=>`<div style="font-size:12px;color:var(--cream-700);margin-top:3px">${esc(ex.ko)} <span style="color:var(--cream-400)">— ${esc(ex.en)}</span></div>`).join('')}
+            </div>
+          </div>
+        </div>`).join('');
+    }
+    body.innerHTML=html;
+  }
 }
 
 // ── INIT ───────────────────────────────────────────────
