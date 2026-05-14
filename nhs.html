@@ -180,6 +180,50 @@ body{font-family:var(--font-kr);background:var(--warm-100);min-height:100vh;disp
 .idx-pron-row{padding:9px 0;border-bottom:1px solid var(--cream-100);}
 .idx-pron-word{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900);}
 .idx-pron-note{font-size:12px;color:var(--coral);margin-top:2px;}
+
+/* ── 퀴즈 재설계 ───────────────────────────────────── */
+.quiz-mode-bar{display:flex;gap:8px;margin-bottom:18px;}
+.quiz-mode-btn{flex:1;padding:9px 0;border:2px solid var(--cream-200);border-radius:var(--radius-md);background:#fff;font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;color:var(--cream-500);transition:all .2s;}
+.quiz-mode-btn.active{border-color:var(--sky-500);background:var(--sky-500);color:#fff;}
+.quiz-progress{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.quiz-prog-dots{display:flex;gap:5px;}
+.quiz-prog-dot{width:9px;height:9px;border-radius:50%;background:var(--cream-200);transition:all .3s;}
+.quiz-prog-dot.done{background:var(--mint-500);}
+.quiz-prog-dot.current{background:var(--sky-500);transform:scale(1.2);}
+.quiz-card{background:#fff;border:2px solid var(--cream-200);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm);}
+.quiz-q-num{font-size:11px;font-weight:700;color:var(--sky-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+.quiz-q-text{font-size:15px;font-weight:700;color:var(--cream-900);line-height:1.6;margin-bottom:4px;font-family:var(--font-serif);}
+.quiz-q-en{font-size:11.5px;color:var(--cream-400);margin-bottom:14px;}
+.quiz-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.quiz-opt{padding:11px 15px;background:var(--warm-50);border:2px solid var(--warm-300);border-radius:var(--radius-sm);cursor:pointer;font-size:13px;font-family:var(--font-serif);color:var(--warm-700);transition:all .15s;text-align:left;}
+.quiz-opt:hover:not(.locked){border-color:var(--sky-300);background:var(--sky-50);}
+.quiz-opt.correct{background:#EDF7F2;border-color:var(--mint-500);color:#2E7D52;font-weight:700;}
+.quiz-opt.wrong{background:#FFF0F0;border-color:var(--coral);color:var(--coral);}
+.quiz-opt.locked{pointer-events:none;}
+.quiz-exp{background:var(--sky-50);border-left:3px solid var(--sky-400);padding:10px 14px;font-size:12.5px;color:var(--sky-900);border-radius:0 var(--radius-sm) var(--radius-sm) 0;line-height:1.7;margin-bottom:12px;display:none;}
+.quiz-exp.show{display:block;}
+.quiz-next-btn{width:100%;padding:12px;background:var(--sky-500);color:#fff;border:none;border-radius:var(--radius-md);font-size:13.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:all .2s;display:none;}
+.quiz-next-btn.show{display:block;}
+.quiz-next-btn:hover{background:var(--sky-700);}
+.quiz-listen-wrap{background:var(--sky-50);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px;text-align:center;}
+.quiz-listen-btn{background:var(--sky-500);color:#fff;border:none;border-radius:var(--radius-xl);padding:10px 24px;font-size:13px;font-weight:700;font-family:var(--font-kr);cursor:pointer;}
+.quiz-write-input{width:100%;padding:11px 14px;border:2px solid var(--cream-200);border-radius:var(--radius-md);font-size:15px;font-family:var(--font-serif);outline:none;box-sizing:border-box;margin-bottom:8px;}
+.quiz-write-input:focus{border-color:var(--sky-400);}
+.quiz-check-btn{width:100%;padding:11px;background:var(--mint-500);color:#fff;border:none;border-radius:var(--radius-md);font-size:13px;font-weight:700;font-family:var(--font-kr);cursor:pointer;margin-bottom:10px;}
+.quiz-score-wrap{text-align:center;padding:24px 16px;}
+.quiz-score-num{font-size:52px;font-weight:900;color:var(--sky-500);}
+.quiz-score-lbl{font-size:14px;color:var(--cream-500);margin-top:4px;}
+.quiz-retry-btn{margin-top:18px;padding:12px 36px;background:var(--sky-500);color:#fff;border:none;border-radius:var(--radius-xl);font-size:13.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;}
+
+/* ── 발음 탭 ───────────────────────────────────────── */
+.pron-card{background:#fff;border:2px solid var(--cream-200);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm);}
+.pron-title{font-size:14px;font-weight:700;color:var(--cream-900);margin-bottom:4px;}
+.pron-rule{font-size:12.5px;color:var(--coral);font-weight:600;margin-bottom:8px;}
+.pron-ex{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--cream-100);}
+.pron-before{font-family:var(--font-serif);font-size:14px;color:var(--cream-400);text-decoration:line-through;min-width:80px;}
+.pron-arrow{color:var(--cream-400);font-size:12px;}
+.pron-after{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--coral);}
+.pron-note{font-size:11px;color:var(--cream-500);flex:1;}
 </style>
 </head>
 <body>
@@ -1678,6 +1722,7 @@ const EPISODE_DATA = {
 };
 
 let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
+let quizMode='mc',quizIdx=0,quizScore=0;
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function escA(s){return s==null?'':String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'}};
@@ -1716,8 +1761,8 @@ async function loadEp(epId){
 }
 
 function render(){
-  const baseTabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
-  const baseLabels=['📽 영상·Script','새어휘 Vocab','문법 Grammar','반말/존댓말','Usage','Quiz','Real Life'];
+  const baseTabs=['script','vocab','grammar','pron','banmal','usage','quiz','reallife'];
+  const baseLabels=['📽 영상·Script','새어휘 Vocab','문법 Grammar','발음 Pron','반말/존댓말','Usage','Quiz','Real Life'];
   const tabs=DATA.self_check&&DATA.self_check.length?[...baseTabs,'selfcheck']:[...baseTabs];
   const labels=DATA.self_check&&DATA.self_check.length?[...baseLabels,'✅ 자기점검']:[...baseLabels];
   document.getElementById('content-area').innerHTML=`
@@ -1737,6 +1782,7 @@ function fillAllPanels(){
   document.getElementById('panel-grammar').innerHTML=buildGrammar();
   document.getElementById('panel-banmal').innerHTML=buildBanmal();
   document.getElementById('panel-usage').innerHTML=buildUsage();
+  document.getElementById('panel-pron').innerHTML=buildPron();
   document.getElementById('panel-quiz').innerHTML=buildQuiz();
   document.getElementById('panel-reallife').innerHTML=buildRealLife();
   if(DATA.self_check&&DATA.self_check.length){
@@ -1749,7 +1795,7 @@ function fillAllPanels(){
 function showTab(name){
   curTab=name;
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const baseTabs=['script','vocab','grammar','banmal','usage','quiz','reallife'];
+  const baseTabs=['script','vocab','grammar','pron','banmal','usage','quiz','reallife'];
   const tabs=DATA.self_check&&DATA.self_check.length?[...baseTabs,'selfcheck']:[...baseTabs];
   const idx=tabs.indexOf(name);
   if(idx>=0)document.querySelectorAll('.tab-btn')[idx].classList.add('active');
@@ -1757,6 +1803,7 @@ function showTab(name){
   const p=document.getElementById('panel-'+name);
   if(p)p.classList.add('active');
   if(name==='script')requestAnimationFrame(initSceneViewer);
+  if(name==='quiz'){quizIdx=0;quizScore=0;const qp=document.getElementById('panel-quiz');if(qp)qp.innerHTML=buildQuiz();renderQuizQ();}
 }
 
 // ── SCRIPT / SCENE VIEWER ──────────────────────────────
@@ -1977,34 +2024,145 @@ function buildGrammar(){
 
 // ── QUIZ ───────────────────────────────────────────────
 function buildQuiz(){
-  return`<div class="quiz-wrap">${DATA.quiz.map((q,qi)=>`
-    <div class="quiz-q">
-      <div class="q-num">문제 ${qi+1}</div>
-      <div class="q-text">${esc(q.question_ko)}</div><div class="q-text-en">${esc(q.question_en)}</div>
-      <ul class="q-options">${(q.options||[]).map((opt,oi)=>`
-        <li class="q-opt" id="opt-${qi}-${oi}" onclick="answerQ(${qi},${oi},${q.answer},'${escA(q.explanation||'')}')">
-          <span style="font-weight:700;color:var(--mint-500);margin-right:6px">${oi+1}.</span>${esc(opt)}
-        </li>`).join('')}
-      </ul>
-      <div class="q-exp" id="exp-${qi}"></div>
-    </div>`).join('')}
-    <button class="quiz-reset" onclick="resetQuiz()">↺ 다시 풀기</button>
+  if(!DATA.quiz||!DATA.quiz.length)return'<div class="loading">데이터 준비 중이에요.</div>';
+  return`<div style="max-width:580px">
+    <div class="quiz-mode-bar">
+      <button class="quiz-mode-btn${quizMode==='mc'?' active':''}" onclick="setQuizMode('mc')">📝 객관식</button>
+      <button class="quiz-mode-btn${quizMode==='listen'?' active':''}" onclick="setQuizMode('listen')">🎧 듣기·쓰기</button>
+    </div>
+    <div id="quiz-content"></div>
   </div>`;
 }
-
-function answerQ(qi,chosen,correct,hint){
-  if(qAnswered[qi])return;
-  qAnswered[qi]=true;
-  DATA.quiz[qi].options.forEach((_,i)=>{
-    const el=document.getElementById(`opt-${qi}-${i}`);
-    if(!el)return;
+function renderQuizQ(){
+  const total=DATA.quiz.length;
+  const qi=quizIdx;
+  if(qi>=total){renderQuizScore();return;}
+  const q=DATA.quiz[qi];
+  const dots=Array.from({length:total},(_,i)=>`<div class="quiz-prog-dot${i<qi?' done':i===qi?' current':''}"></div>`).join('');
+  let inner='';
+  if(quizMode==='mc'){
+    const opts=(q.options||[]).map((opt,oi)=>`
+      <button class="quiz-opt" id="qopt-${oi}" onclick="answerMC(${oi},${q.answer},'${escA(q.explanation||'')}')">
+        <span style="font-weight:700;color:var(--mint-500);margin-right:7px">${oi+1}.</span>${esc(opt)}
+      </button>`).join('');
+    inner=`<div class="quiz-opts">${opts}</div>
+      <div class="quiz-exp" id="quiz-exp"></div>
+      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 →':'결과 보기 🎉'}</button>`;
+  } else {
+    inner=`<div class="quiz-listen-wrap">
+        <div style="font-size:12px;color:var(--sky-700);margin-bottom:10px">🔊 버튼을 눌러 문제를 들어보세요</div>
+        <button class="quiz-listen-btn" onclick="speakTTS('${escA(q.question_ko)}')">🔊 문제 듣기</button>
+      </div>
+      <input class="quiz-write-input" id="quiz-write-input" placeholder="정답을 한국어로 써보세요..." autocomplete="off">
+      <button class="quiz-check-btn" onclick="checkWriteAnswer(${q.answer},'${escA(q.explanation||'')}','${escA((q.options||[])[q.answer]||'')}')">✅ 확인</button>
+      <div class="quiz-exp" id="quiz-exp"></div>
+      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 →':'결과 보기 🎉'}</button>`;
+  }
+  document.getElementById('quiz-content').innerHTML=`
+    <div class="quiz-progress">
+      <div class="quiz-prog-dots">${dots}</div>
+      <div style="font-size:11.5px;color:var(--cream-400);margin-left:4px">${qi+1} / ${total}</div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-q-num">문제 ${qi+1}</div>
+      <div class="quiz-q-text">${esc(q.question_ko)}</div>
+      <div class="quiz-q-en">${esc(q.question_en||'')}</div>
+      ${inner}
+    </div>`;
+}
+function answerMC(chosen,correct,hint){
+  for(let i=0;i<10;i++){
+    const el=document.getElementById(`qopt-${i}`);
+    if(!el)break;
+    el.classList.add('locked');
     if(i===correct)el.classList.add('correct');
     else if(i===chosen)el.classList.add('wrong');
-  });
-  const exp=document.getElementById(`exp-${qi}`);
-  if(exp&&hint){exp.textContent='💡 '+hint;exp.classList.add('show');}
+  }
+  if(chosen===correct)quizScore++;
+  showQuizExp(hint);
 }
-function resetQuiz(){qAnswered={};document.getElementById('panel-quiz').innerHTML=buildQuiz();}
+function checkWriteAnswer(correct,hint,correctText){
+  const input=document.getElementById('quiz-write-input');
+  if(!input)return;
+  const val=(input.value||'').trim().replace(/\s+/g,' ');
+  const exp=correctText.trim().replace(/\s+/g,' ');
+  const ok=val===exp||(val&&exp&&exp.includes(val))||val.toLowerCase()===exp.toLowerCase();
+  input.disabled=true;
+  input.style.borderColor=ok?'var(--mint-500)':'var(--coral)';
+  input.style.background=ok?'#EDF7F2':'#FFF0F0';
+  if(ok)quizScore++;
+  const fullHint=(ok?'✅ 정답! ':'❌ 오답. 정답: '+correctText+'\n')+hint;
+  showQuizExp(fullHint);
+}
+function showQuizExp(hint){
+  const exp=document.getElementById('quiz-exp');
+  const btn=document.getElementById('quiz-next');
+  if(exp&&hint){exp.textContent='💡 '+hint;exp.classList.add('show');}
+  if(btn)btn.classList.add('show');
+}
+function nextQuizQ(){
+  quizIdx++;
+  renderQuizQ();
+}
+function renderQuizScore(){
+  const total=DATA.quiz.length;
+  const pct=Math.round(quizScore/total*100);
+  const msg=pct===100?'🏆 완벽해요!':pct>=80?'🌟 잘했어요!':pct>=60?'👍 좋아요!':'💪 다시 도전!';
+  document.getElementById('quiz-content').innerHTML=`
+    <div class="quiz-score-wrap">
+      <div class="quiz-score-num">${quizScore}<span style="font-size:24px;color:var(--cream-400)">/${total}</span></div>
+      <div class="quiz-score-lbl">${msg}</div>
+      <div style="font-size:13px;color:var(--cream-500);margin-top:8px">${pct}% 정답</div>
+      <button class="quiz-retry-btn" onclick="resetQuiz()">↺ 다시 풀기</button>
+    </div>`;
+}
+function setQuizMode(mode){
+  quizMode=mode;
+  quizIdx=0;quizScore=0;
+  document.getElementById('panel-quiz').innerHTML=buildQuiz();
+  renderQuizQ();
+}
+function resetQuiz(){
+  quizIdx=0;quizScore=0;
+  document.getElementById('panel-quiz').innerHTML=buildQuiz();
+  renderQuizQ();
+}
+
+// ── PRONUNCIATION ─────────────────────────────────────
+function buildPron(){
+  const items=DATA.pronunciation||[];
+  if(!items.length){
+    // 문법에서 발음·불규칙 관련 자동 추출
+    const keywords=['불규칙','발음','pronunciation','irregular','받침','연음','liaison'];
+    const auto=(DATA.grammar||[]).filter(g=>{
+      const txt=((g.title||'')+(g.explanation_en||'')).toLowerCase();
+      return keywords.some(k=>txt.includes(k));
+    });
+    if(!auto.length)return`<div style="text-align:center;padding:40px;color:var(--cream-400)">
+      <div style="font-size:36px;margin-bottom:10px">🔤</div>
+      <div style="font-size:13px">이 에피소드의 발음 내용은 준비 중이에요.<br>JSON에 <code>pronunciation</code> 배열을 추가하면 표시됩니다.</div></div>`;
+    return`<div style="font-size:12px;color:var(--cream-400);margin-bottom:12px">📌 문법에서 발음·불규칙 관련 항목을 자동으로 가져왔어요</div>`+
+      auto.map(g=>`<div class="gram-card">
+        <div class="gram-title">${esc(g.title)}</div>
+        <div class="gram-exp">${esc(g.explanation_en)}</div>
+        ${g.rule?`<div class="gram-rule">📐 ${esc(g.rule)}</div>`:''}
+        <ul class="gram-ex-list">${(g.examples||[]).slice(0,3).map(ex=>`<li class="gram-ex">
+          <div class="gram-ko">${esc(ex.ko)} <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5">🔊</button></div>
+          <div class="gram-en">${esc(ex.en)}</div></li>`).join('')}</ul>
+      </div>`).join('');
+  }
+  return items.map(item=>`<div class="pron-card">
+    <div class="pron-title">${esc(item.title||'')} ${item.icon||''}</div>
+    <div class="pron-rule">${esc(item.rule||'')}</div>
+    ${(item.examples||[]).map(ex=>`<div class="pron-ex">
+      <div class="pron-before">${esc(ex.before||ex.ko||'')}</div>
+      <div class="pron-arrow">→</div>
+      <div class="pron-after">${esc(ex.after||'')} <button onclick="speakTTS('${escA(ex.after||'')}')" style="background:none;border:none;font-size:12px;cursor:pointer;opacity:.5">🔊</button></div>
+      <div class="pron-note">${esc(ex.note||ex.en||'')}</div>
+    </div>`).join('')}
+    ${item.tip?`<div style="margin-top:10px;background:var(--amber-lt);border-radius:var(--radius-sm);padding:9px 13px;font-size:12px;color:var(--cream-700)">💡 ${esc(item.tip)}</div>`:''}
+  </div>`).join('');
+}
 
 // ── BANMAL / JONDAEMAL ─────────────────────────────────
 function buildBanmal(){
@@ -2252,6 +2410,16 @@ function toggleSC(el){
 }
 
 
+
+function getEpLabel(epId){
+  const ep=EPISODE_DATA[epId];
+  if(!ep)return epId;
+  const lvl=ep.level||'';
+  const num=(epId||'').replace('ep','');
+  const lvlMap={'초급':'Beginner','중급':'Intermediate','고급':'Advanced','기초':'Starter'};
+  return (lvlMap[lvl]||lvl)+' · ep'+num;
+}
+
 // ── 색인 모달 ───────────────────────────────────────────
 let idxTab='vocab';
 
@@ -2312,7 +2480,7 @@ function renderIdxBody(){
             <div class="idx-vocab-kr">${esc(v.korean||'')} ${v.emoji||''}</div>
             <div style="font-size:11px;color:var(--cream-400);min-width:80px">${esc(v.romanization||'')}</div>
             <div class="idx-vocab-en">${esc(v.english||v.en||'')}</div>
-            <span class="idx-ep-badge">EP.${esc((v.ep||'').replace('ep',''))}</span>
+            <span class="idx-ep-badge" style="cursor:pointer" onclick="closeIndex();loadEp('${escA(v.ep||'')}')">${esc(getEpLabel(v.ep||''))}</span>
             <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
           </div>`).join('');
       });
@@ -2342,7 +2510,7 @@ function renderIdxBody(){
             <div style="display:flex;align-items:center;gap:8px">
               <span style="font-size:16px">${esc(g.icon||'📌')}</span>
               <div>
-                <div class="idx-gram-title">${esc(g.title||'')} <span class="idx-ep-badge">EP.${esc((g.ep||'').replace('ep',''))}</span></div>
+                <div class="idx-gram-title">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="closeIndex();loadEp('${escA(g.ep||'')}')">${esc(getEpLabel(g.ep||''))}</span></div>
                 ${g.rule?`<div class="idx-gram-rule">📐 ${esc(g.rule)}</div>`:''}
                 <div style="font-size:11.5px;color:var(--cream-500);margin-top:2px">${esc(g.explanation_en||'')}</div>
               </div>
@@ -2377,7 +2545,7 @@ function renderIdxBody(){
           <div style="display:flex;align-items:flex-start;gap:10px">
             <span style="font-size:18px">${esc(g.icon||'🔤')}</span>
             <div>
-              <div class="idx-pron-word">${esc(g.title||'')} <span class="idx-ep-badge">EP.${esc((g.ep||'').replace('ep',''))}</span></div>
+              <div class="idx-pron-word">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="closeIndex();loadEp('${escA(g.ep||'')}')">${esc(getEpLabel(g.ep||''))}</span></div>
               ${g.rule?`<div class="idx-pron-note">📐 ${esc(g.rule)}</div>`:''}
               ${(g.examples||[]).slice(0,2).map(ex=>`<div style="font-size:12px;color:var(--cream-700);margin-top:3px">${esc(ex.ko)} <span style="color:var(--cream-400)">— ${esc(ex.en)}</span></div>`).join('')}
             </div>
