@@ -241,13 +241,13 @@ body{font-family:var(--font-kr);background:var(--warm-100);min-height:100vh;disp
 <div class="idx-overlay" id="idx-overlay" onclick="if(event.target===this)closeIndex()">
   <div class="idx-modal">
     <div class="idx-header">
-      <h2>📖 K-Quest 색인</h2>
+      <h2>📖 색인 · Index</h2>
       <button class="idx-close" onclick="closeIndex()">✕</button>
     </div>
     <div class="idx-tabs">
-      <div class="idx-tab active" id="idx-tab-vocab" onclick="switchIdxTab('vocab')">📚 단어</div>
-      <div class="idx-tab" id="idx-tab-grammar" onclick="switchIdxTab('grammar')">📌 문법</div>
-      <div class="idx-tab" id="idx-tab-pron" onclick="switchIdxTab('pron')">🔤 발음</div>
+      <div class="idx-tab active" id="idx-tab-vocab" onclick="switchIdxTab('vocab')">📚 단어 · Vocab</div>
+      <div class="idx-tab" id="idx-tab-grammar" onclick="switchIdxTab('grammar')">📌 문법 · Grammar</div>
+      <div class="idx-tab" id="idx-tab-pron" onclick="switchIdxTab('pron')">🔤 발음 · Pronunciation</div>
     </div>
     <div class="idx-search"><input id="idx-search-input" placeholder="검색..." oninput="renderIdxBody()"></div>
     <div class="idx-body" id="idx-body"></div>
@@ -2411,6 +2411,13 @@ function toggleSC(el){
 
 
 
+
+async function loadEpAndTab(epId, tabName){
+  closeIndex();
+  await loadEp(epId);
+  showTab(tabName);
+}
+
 function getEpLabel(epId){
   const ep=EPISODE_DATA[epId];
   if(!ep)return epId;
@@ -2480,7 +2487,7 @@ function renderIdxBody(){
             <div class="idx-vocab-kr">${esc(v.korean||'')} ${v.emoji||''}</div>
             <div style="font-size:11px;color:var(--cream-400);min-width:80px">${esc(v.romanization||'')}</div>
             <div class="idx-vocab-en">${esc(v.english||v.en||'')}</div>
-            <span class="idx-ep-badge" style="cursor:pointer" onclick="closeIndex();loadEp('${escA(v.ep||'')}')">${esc(getEpLabel(v.ep||''))}</span>
+            <span class="idx-ep-badge" style="cursor:pointer" onclick="loadEpAndTab('${escA(v.ep||'')}','vocab')">${esc(getEpLabel(v.ep||''))}</span>
             <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
           </div>`).join('');
       });
@@ -2510,7 +2517,7 @@ function renderIdxBody(){
             <div style="display:flex;align-items:center;gap:8px">
               <span style="font-size:16px">${esc(g.icon||'📌')}</span>
               <div>
-                <div class="idx-gram-title">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="closeIndex();loadEp('${escA(g.ep||'')}')">${esc(getEpLabel(g.ep||''))}</span></div>
+                <div class="idx-gram-title">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="loadEpAndTab('${escA(g.ep||'')}','grammar')">${esc(getEpLabel(g.ep||''))}</span></div>
                 ${g.rule?`<div class="idx-gram-rule">📐 ${esc(g.rule)}</div>`:''}
                 <div style="font-size:11.5px;color:var(--cream-500);margin-top:2px">${esc(g.explanation_en||'')}</div>
               </div>
@@ -2545,7 +2552,7 @@ function renderIdxBody(){
           <div style="display:flex;align-items:flex-start;gap:10px">
             <span style="font-size:18px">${esc(g.icon||'🔤')}</span>
             <div>
-              <div class="idx-pron-word">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="closeIndex();loadEp('${escA(g.ep||'')}')">${esc(getEpLabel(g.ep||''))}</span></div>
+              <div class="idx-pron-word">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="loadEpAndTab('${escA(g.ep||'')}','pron')">${esc(getEpLabel(g.ep||''))}</span></div>
               ${g.rule?`<div class="idx-pron-note">📐 ${esc(g.rule)}</div>`:''}
               ${(g.examples||[]).slice(0,2).map(ex=>`<div style="font-size:12px;color:var(--cream-700);margin-top:3px">${esc(ex.ko)} <span style="color:var(--cream-400)">— ${esc(ex.en)}</span></div>`).join('')}
             </div>
