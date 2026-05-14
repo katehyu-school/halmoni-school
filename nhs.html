@@ -1680,7 +1680,7 @@ function renderScene(){
   const line=DATA.script[sceneIdx];
   const slideIdx=(line.slide!==undefined)?line.slide:sceneIdx;
   const src=DATA.slides&&DATA.slides[slideIdx]?DATA.slides[slideIdx]:(DATA.slides&&DATA.slides[0])||'';
-  if(src)panel.style.backgroundImage=`url('${src}')`;
+  if(src)panel.style.backgroundImage=`url('${encodeURI(src)}')`;
   const charMap={};DATA.characters.forEach(c=>{charMap[c.id]=c;});
   const ch=charMap[line.speaker]||{name:line.speaker};
   const cfg_def=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
@@ -1885,11 +1885,26 @@ function buildUsage(){
   const usage=DATA.usage;
   if(!usage)return'<div class="loading">데이터 준비 중이에요.</div>';
   return usage.map(sec=>{
-    if(sec.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--cream-900);line-height:1.75;margin-bottom:14px"><strong>${esc(sec.section)}</strong><br>${esc(sec.content_ko)}<div style="font-size:11px;color:var(--cream-500);margin-top:6px">${esc(sec.content_en)}</div></div>`;
+    // tip block
+    if(sec.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--cream-900);line-height:1.75;margin-bottom:14px"><strong>${esc(sec.section||sec.title||'')}</strong><br>${esc(sec.content_ko||sec.content||'')}<div style="font-size:11px;color:var(--cream-500);margin-top:6px">${esc(sec.content_en||'')}</div></div>`;
+    // new format: title + explanation_en + examples[]
+    if(sec.title&&sec.explanation_en){
+      const exHtml=(sec.examples||[]).map(ex=>`
+        <div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
+          <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900)">${esc(ex.ko)}</div><div style="font-size:11px;color:var(--cream-500);margin-top:2px">${esc(ex.en)}</div></div>
+          <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
+        </div>`).join('');
+      return`<div style="margin-bottom:22px">
+        <div style="font-size:12.5px;font-weight:700;color:var(--sky-700);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--sky-100)">${esc(sec.title)}</div>
+        <div style="font-size:12px;color:var(--cream-700);line-height:1.7;margin-bottom:10px">${esc(sec.explanation_en)}</div>
+        ${exHtml}
+      </div>`;
+    }
+    // old format: section + items[]
     return`<div style="margin-bottom:20px">
-      <div style="font-size:12.5px;font-weight:700;color:var(--mint-700);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--mint-100)">${esc(sec.section)}</div>
-      ${sec.items.map(it=>`<div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:11px 15px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
-        <div style="font-size:10.5px;color:var(--cream-500);min-width:64px;line-height:1.4">${esc(it.context_ko)}</div>
+      <div style="font-size:12.5px;font-weight:700;color:var(--sky-700);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--sky-100)">${esc(sec.section||'')}</div>
+      ${(sec.items||[]).map(it=>`<div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:11px 15px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
+        <div style="font-size:10.5px;color:var(--cream-500);min-width:64px;line-height:1.4">${esc(it.context_ko||'')}</div>
         <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900)">${esc(it.korean)}</div><div style="font-size:11px;color:var(--cream-500);margin-top:2px">${esc(it.english)}</div></div>
         <button onclick="speakTTS('${escA(it.korean)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5;transition:opacity .15s">🔊</button>
       </div>`).join('')}
@@ -1901,7 +1916,7 @@ function buildUsage(){
 // ── REAL LIFE ──────────────────────────────────────────
 function buildRealLife(){
   return DATA.real_life.map(item=>{
-    if(item.type==='tip')return`<div class="rl-tip"><strong>${esc(item.title)}</strong><div class="rl-tip-body">${esc(item.content)}</div></div>`;
+    if(item.type==='tip')return`<div class="rl-tip"><strong>${esc(item.title)}</strong><div class="rl-tip-body">${esc(item.content_ko||item.content||'')}</div><div style="font-size:11px;color:var(--cream-500);margin-top:6px">${esc(item.content_en||'')}</div></div>`;
     const lines=item.lines||[];
     return`<div class="rl-card">
       <div class="rl-title">${esc(item.title)}</div>
