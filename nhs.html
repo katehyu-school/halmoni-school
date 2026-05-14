@@ -1633,6 +1633,8 @@ const EPISODE_DATA = {
 };
 
 let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
+function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function escA(s){return s==null?'':String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'}};
 const EPISODES=[
   {id:'ep01',label:'안녕? 만나서 반가워!'},
