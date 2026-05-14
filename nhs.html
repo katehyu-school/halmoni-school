@@ -2054,12 +2054,20 @@ function buildUsage(){
         ${exHtml}
       </div>`;
     }
-    // old format: section + items[]
-    const itemHtml=(sec.items||[]).map(it=>`
-      <div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
-        <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900)">${esc(it.ko)}</div><div style="font-size:11px;color:var(--cream-500);margin-top:2px">${esc(it.en)}</div></div>
-        <button onclick="speakTTS('${escA(it.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
-      </div>`).join('');
+    // old format: section + items[] — supports ko/en OR korean/english fields
+    const itemHtml=(sec.items||[]).map(it=>{
+      const kr=it.ko||it.korean||'';
+      const en=it.en||it.english||'';
+      const ctx=it.context_ko||'';
+      return`<div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--cream-200);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
+        <div style="flex:1">
+          ${ctx?`<div style="font-size:10.5px;color:var(--mint-500);font-weight:700;margin-bottom:3px">${esc(ctx)}</div>`:''}
+          <div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--cream-900)">${esc(kr)}</div>
+          <div style="font-size:11px;color:var(--cream-500);margin-top:2px">${esc(en)}</div>
+        </div>
+        <button onclick="speakTTS('${escA(kr)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
+      </div>`;
+    }).join('');
     return`<div style="margin-bottom:22px">
       <div style="font-size:12.5px;font-weight:700;color:var(--sky-700);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--sky-100)">${esc(sec.section||sec.title||'')}</div>
       ${itemHtml}
