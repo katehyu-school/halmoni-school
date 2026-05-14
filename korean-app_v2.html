@@ -822,6 +822,12 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .u2-script-ko { font-family:'Noto Sans KR',sans-serif;font-size:1.05rem;font-weight:600;color:#1a2a3a; }
 .u2-script-en { font-size:0.82rem;color:#6b7b8c;margin-left:4px; }
 .u2-script-empty { color:#aaa;font-size:0.9rem;text-align:center;padding:10px 0; }
+.u2-replay-btn { display:flex;align-items:center;gap:7px;margin:10px auto 0;
+  padding:9px 22px;border-radius:30px;border:none;font-family:'Jua',sans-serif;font-size:0.95rem;
+  background:var(--mint);color:#0D7B75;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12);
+  transition:transform .15s,background .15s; }
+.u2-replay-btn:hover { transform:scale(1.07); background:var(--teal); color:white; }
+.u2-replay-btn.playing { background:var(--coral); color:white; }
 </style>
 </head>
 <body>
@@ -1334,7 +1340,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <div class="lesson-item" id="lesson-2" onclick="switchUnit(2)">
     <span class="lesson-num">2과</span>
-    <span class="lesson-title-text">아빠하고 엄마는 자전거를 타요</span>
+    <span class="lesson-title-text">형하고 나는 태권도를 해요</span>
   </div>
   <div class="lesson-item" id="lesson-3" onclick="switchUnit(3)">
     <span class="lesson-num">3과</span>
@@ -1387,7 +1393,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="toc-card done" onclick="switchUnit(2)">
       <div class="toc-num">2️⃣</div>
       <div class="toc-info">
-        <div class="toc-name">아빠하고 엄마는 자전거를 타요</div>
+        <div class="toc-name">형하고 나는 태권도를 해요</div>
         <span class="toc-badge done">✅ 학습 가능</span>
       </div>
     </div>
@@ -1543,7 +1549,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit2">
   <div class="unit-heading">
   <span class="unit-num">2</span>
-  <span class="unit-title">아빠하고 엄마는 자전거를 타요</span>
+  <span class="unit-title">형하고 나는 태권도를 해요</span>
 </div>
   <nav class="section-nav" id="u2-snav">
     <button class="snav-btn" onclick="switchSection2('scene')">🎬 영상 <span class="snav-en">Scene</span></button>
@@ -1570,6 +1576,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <!-- Script lines -->
         <div class="u2-script-box" id="u2-script-box"></div>
+        <button class="u2-replay-btn" id="u2-replay-btn" onclick="u2ReplaySlide()">🔁 Replay</button>
       </div>
     </div>
   </div>
@@ -6500,6 +6507,35 @@ function u2PlayLine(slideIdx, lineIdx){
   u2SceneAudio.play().catch(()=>{});
   if (btn) btn.classList.add('playing');
   u2SceneAudio.onended = () => { if (btn) btn.classList.remove('playing'); u2SceneAudio = null; };
+}
+
+function u2ReplaySlide(){
+  const lines = U2_SCENE.script[u2SlideIdx] || [];
+  if (!lines.length) return;
+  const btn = document.getElementById('u2-replay-btn');
+  if (u2SceneAudio) { u2SceneAudio.pause(); u2SceneAudio = null; }
+  document.querySelectorAll('.u2-script-play').forEach(b=>b.classList.remove('playing'));
+  let i = 0;
+  function playNext(){
+    if (i >= lines.length) {
+      if (btn) btn.classList.remove('playing');
+      return;
+    }
+    const line = lines[i];
+    const playBtn = document.getElementById(`u2-play-${u2SlideIdx}-${i}`);
+    document.querySelectorAll('.u2-script-play').forEach(b=>b.classList.remove('playing'));
+    if (playBtn) playBtn.classList.add('playing');
+    u2SceneAudio = new Audio(line.audio);
+    u2SceneAudio.play().catch(()=>{});
+    u2SceneAudio.onended = () => {
+      if (playBtn) playBtn.classList.remove('playing');
+      u2SceneAudio = null;
+      i++;
+      setTimeout(playNext, 400);
+    };
+  }
+  if (btn) btn.classList.add('playing');
+  playNext();
 }
 
 function switchSection2(sec){
