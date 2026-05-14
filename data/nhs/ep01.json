@@ -73,152 +73,182 @@
       "text": "안녕? 나는 정민이야.",
       "en": "Hi! I'm Jeongmin.",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/01_안녕_나는_정민이야.mp3"
+      "audio": "data/nhs/TTS/ep1/01_안녕_나는_정민이야.mp3"
     },
     {
       "speaker": "mirae",
       "text": "안녕? 나는 미래야. 만나서 반가워.",
       "en": "Hi! I'm Mirae. Nice to meet you!",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/02_안녕_나는_미래야_만나서_반가워.mp3"
+      "audio": "data/nhs/TTS/ep1/02_안녕_나는_미래야_만나서_반가워.mp3"
     },
     {
       "speaker": "mirae",
       "text": "인사해. 우리 엄마야.",
       "en": "Say hi. This is my mom.",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/03_인사해_우리_엄마야.mp3"
+      "audio": "data/nhs/TTS/ep1/03_인사해_우리_엄마야.mp3"
     },
     {
       "speaker": "jeongmin",
       "text": "안녕하세요? 저는 정민이에요.",
       "en": "Hello! I'm Jeongmin.",
       "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/04_안녕하세요_저는_정민이에요.mp3"
+      "audio": "data/nhs/TTS/ep1/04_안녕하세요_저는_정민이에요.mp3"
     },
     {
       "speaker": "mom",
       "text": "안녕? 나는 미래 엄마야. 만나서 반가워.",
       "en": "Hi! I'm Mirae's mom. Nice to meet you!",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/05_안녕_나는_미래_엄마야_만나서_반가워.mp3"
+      "audio": "data/nhs/TTS/ep1/05_안녕_나는_미래_엄마야_만나서_반가워.mp3"
     },
     {
       "speaker": "jeongmin",
       "text": "네, 저도 만나서 반가워요!",
       "en": "Yes, nice to meet you too!",
       "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/06_네_만나서_반가워요.mp3"
+      "audio": "data/nhs/TTS/ep1/06_네_만나서_반가워요.mp3"
     }
   ],
   "vocab": [
     {
-      "korean": "공원",
-      "romanization": "gong-won",
-      "english": "park",
-      "emoji": "🏞️"
+      "category": "🏞️ 장소 · Places",
+      "items": [
+        {
+          "korean": "공원",
+          "romanization": "gong-won",
+          "english": "park",
+          "emoji": "🏞️"
+        },
+        {
+          "korean": "나무",
+          "romanization": "na-mu",
+          "english": "tree",
+          "emoji": "🌳"
+        },
+        {
+          "korean": "연못",
+          "romanization": "yeon-mot",
+          "english": "pond",
+          "emoji": "🪷"
+        }
+      ]
     },
     {
-      "korean": "나무",
-      "romanization": "na-mu",
-      "english": "tree",
-      "emoji": "🌳"
+      "category": "📍 지시어 · Location Words",
+      "items": [
+        {
+          "korean": "여기",
+          "romanization": "yeo-gi",
+          "english": "here",
+          "emoji": "📍"
+        },
+        {
+          "korean": "거기",
+          "romanization": "geo-gi",
+          "english": "there (near you)",
+          "emoji": "👉"
+        },
+        {
+          "korean": "저기",
+          "romanization": "jeo-gi",
+          "english": "over there",
+          "emoji": "👆"
+        }
+      ]
     },
     {
-      "korean": "연못",
-      "romanization": "yeon-mot",
-      "english": "pond",
-      "emoji": "🪷"
+      "category": "👋 인사말 · Greetings",
+      "items": [
+        {
+          "korean": "안녕",
+          "romanization": "an-nyeong",
+          "english": "hi / hello (informal)",
+          "emoji": "👋"
+        },
+        {
+          "korean": "안녕하세요",
+          "romanization": "an-nyeong-ha-se-yo",
+          "english": "hello (formal/polite)",
+          "emoji": "🙏"
+        }
+      ]
     },
     {
-      "korean": "인사하다",
-      "romanization": "in-sa-ha-da",
-      "english": "to greet",
-      "emoji": "🙇"
+      "category": "👤 대명사 · Pronouns",
+      "items": [
+        {
+          "korean": "나",
+          "romanization": "na",
+          "english": "I / me (informal)",
+          "emoji": "👤"
+        },
+        {
+          "korean": "저",
+          "romanization": "jeo",
+          "english": "I / me (formal/humble)",
+          "emoji": "🧑"
+        },
+        {
+          "korean": "우리",
+          "romanization": "u-ri",
+          "english": "our / we",
+          "emoji": "👨‍👩‍👧"
+        },
+        {
+          "korean": "누구",
+          "romanization": "nu-gu",
+          "english": "who / someone",
+          "emoji": "🙋"
+        }
+      ]
     },
     {
-      "korean": "안녕",
-      "romanization": "an-nyeong",
-      "english": "hi / hello (informal)",
-      "emoji": "👋"
+      "category": "🔤 동사 · Verbs",
+      "items": [
+        {
+          "korean": "인사하다",
+          "romanization": "in-sa-ha-da",
+          "english": "to greet",
+          "emoji": "🙇"
+        },
+        {
+          "korean": "만나다",
+          "romanization": "man-na-da",
+          "english": "to meet",
+          "emoji": "🤝"
+        },
+        {
+          "korean": "반갑다",
+          "romanization": "ban-gap-da",
+          "english": "to be glad / pleased",
+          "emoji": "😊"
+        }
+      ]
     },
     {
-      "korean": "안녕하세요",
-      "romanization": "an-nyeong-ha-se-yo",
-      "english": "hello (formal/polite)",
-      "emoji": "🙏"
-    },
-    {
-      "korean": "나",
-      "romanization": "na",
-      "english": "I / me (informal)",
-      "emoji": "👤"
-    },
-    {
-      "korean": "저",
-      "romanization": "jeo",
-      "english": "I / me (formal/humble)",
-      "emoji": "🧑"
-    },
-    {
-      "korean": "만나다",
-      "romanization": "man-na-da",
-      "english": "to meet",
-      "emoji": "🤝"
-    },
-    {
-      "korean": "반갑다",
-      "romanization": "ban-gap-da",
-      "english": "to be glad / pleased",
-      "emoji": "😊"
-    },
-    {
-      "korean": "엄마",
-      "romanization": "eom-ma",
-      "english": "mom / mother",
-      "emoji": "👩"
-    },
-    {
-      "korean": "우리",
-      "romanization": "u-ri",
-      "english": "our / we",
-      "emoji": "👨‍👩‍👧"
-    },
-    {
-      "korean": "이름",
-      "romanization": "i-reum",
-      "english": "name",
-      "emoji": "🏷️"
-    },
-    {
-      "korean": "네",
-      "romanization": "ne",
-      "english": "yes",
-      "emoji": "✅"
-    },
-    {
-      "korean": "여기",
-      "romanization": "yeo-gi",
-      "english": "here",
-      "emoji": "📍"
-    },
-    {
-      "korean": "거기",
-      "romanization": "geo-gi",
-      "english": "there (near you)",
-      "emoji": "👉"
-    },
-    {
-      "korean": "저기",
-      "romanization": "jeo-gi",
-      "english": "over there",
-      "emoji": "👆"
-    },
-    {
-      "korean": "누구",
-      "romanization": "nu-gu",
-      "english": "who / someone",
-      "emoji": "🙋"
+      "category": "💬 기타 · Other",
+      "items": [
+        {
+          "korean": "엄마",
+          "romanization": "eom-ma",
+          "english": "mom / mother",
+          "emoji": "👩"
+        },
+        {
+          "korean": "이름",
+          "romanization": "i-reum",
+          "english": "name",
+          "emoji": "🏷️"
+        },
+        {
+          "korean": "네",
+          "romanization": "ne",
+          "english": "yes",
+          "emoji": "✅"
+        }
+      ]
     }
   ],
   "grammar": [
