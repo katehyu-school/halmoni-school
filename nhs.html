@@ -2042,7 +2042,7 @@ function renderQuizQ(){
   let inner='';
   if(quizMode==='mc'){
     const opts=(q.options||[]).map((opt,oi)=>`
-      <button class="quiz-opt" id="qopt-${oi}" onclick="answerMC(${oi},${q.answer},'${escA(q.explanation||'')}')">
+      <button class="quiz-opt" id="qopt-${oi}" onclick="answerMC(${oi},${qi})">
         <span style="font-weight:700;color:var(--mint-500);margin-right:7px">${oi+1}.</span>${esc(opt)}
       </button>`).join('');
     inner=`<div class="quiz-opts">${opts}</div>
@@ -2054,7 +2054,7 @@ function renderQuizQ(){
         <button class="quiz-listen-btn" onclick="speakTTS('${escA(q.question_ko)}')">🔊 문제 듣기</button>
       </div>
       <input class="quiz-write-input" id="quiz-write-input" placeholder="정답을 한국어로 써보세요..." autocomplete="off">
-      <button class="quiz-check-btn" onclick="checkWriteAnswer(${q.answer},'${escA(q.explanation||'')}','${escA((q.options||[])[q.answer]||'')}')">✅ 확인</button>
+      <button class="quiz-check-btn" onclick="checkWriteAnswer(${qi})">✅ 확인</button>
       <div class="quiz-exp" id="quiz-exp"></div>
       <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 →':'결과 보기 🎉'}</button>`;
   }
@@ -2070,7 +2070,10 @@ function renderQuizQ(){
       ${inner}
     </div>`;
 }
-function answerMC(chosen,correct,hint){
+function answerMC(chosen,qi){
+  const q=DATA.quiz[qi];
+  const correct=q.answer;
+  const hint=q.explanation||'';
   for(let i=0;i<10;i++){
     const el=document.getElementById(`qopt-${i}`);
     if(!el)break;
@@ -2081,7 +2084,10 @@ function answerMC(chosen,correct,hint){
   if(chosen===correct)quizScore++;
   showQuizExp(hint);
 }
-function checkWriteAnswer(correct,hint,correctText){
+function checkWriteAnswer(qi){
+  const q=DATA.quiz[qi];
+  const correctText=(q.options||[])[q.answer]||'';
+  const hint=q.explanation||'';
   const input=document.getElementById('quiz-write-input');
   if(!input)return;
   const val=(input.value||'').trim().replace(/\s+/g,' ');
