@@ -794,6 +794,34 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .hago-card:nth-child(even) { border-top-color: var(--coral); }
 .hago-card .example-kr { font-size: 1.05rem; margin-bottom: 6px; }
 .hago-card .example-en { font-size: 0.8rem; }
+
+/* ═══ Unit 2 Scene Viewer ═══ */
+.u2-scene-viewer { display:flex; flex-direction:column; align-items:center; gap:16px; padding:8px 0; }
+.u2-slide-wrap { position:relative; width:100%; max-width:640px; border-radius:20px; overflow:hidden;
+  box-shadow:0 6px 24px rgba(0,0,0,0.15); background:#f0f4ff; }
+.u2-slide-img { width:100%; height:auto; display:block; min-height:200px; object-fit:contain; }
+.u2-slide-nav { display:flex; align-items:center; justify-content:center; gap:18px; }
+.u2-nav-btn { width:44px;height:44px;border-radius:50%;border:none;font-size:1.4rem;
+  background:var(--sky);color:white;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18);
+  transition:transform .15s,background .15s; display:flex;align-items:center;justify-content:center; }
+.u2-nav-btn:hover { transform:scale(1.12); background:var(--teal); }
+.u2-nav-btn:disabled { background:#ccc; cursor:default; transform:none; }
+.u2-slide-dots { display:flex; gap:8px; }
+.u2-slide-dot { width:10px;height:10px;border-radius:50%;background:#cdd6e0;transition:background .2s; cursor:pointer; }
+.u2-slide-dot.active { background:var(--sky); }
+.u2-script-box { width:100%;max-width:640px;background:white;border-radius:16px;
+  padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.08); }
+.u2-script-line { display:flex;align-items:center;gap:10px;padding:8px 0;
+  border-bottom:1px solid #f0f4ff; }
+.u2-script-line:last-child { border-bottom:none; }
+.u2-script-play { width:34px;height:34px;border-radius:50%;border:none;font-size:1rem;
+  background:var(--sun);color:#7A5500;cursor:pointer;flex-shrink:0;
+  transition:transform .15s; display:flex;align-items:center;justify-content:center; }
+.u2-script-play:hover { transform:scale(1.15); background:var(--amber); color:white; }
+.u2-script-play.playing { background:var(--coral); color:white; }
+.u2-script-ko { font-family:'Noto Sans KR',sans-serif;font-size:1.05rem;font-weight:600;color:#1a2a3a; }
+.u2-script-en { font-size:0.82rem;color:#6b7b8c;margin-left:4px; }
+.u2-script-empty { color:#aaa;font-size:0.9rem;text-align:center;padding:10px 0; }
 </style>
 </head>
 <body>
@@ -1517,15 +1545,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   <span class="unit-num">2</span>
   <span class="unit-title">아빠하고 엄마는 자전거를 타요</span>
 </div>
-  <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(2,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
-    <button class="snav-btn" onclick="switchSection(2,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
-    <button class="snav-btn" onclick="switchSection(2,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
-   
+  <nav class="section-nav" id="u2-snav">
+    <button class="snav-btn" onclick="switchSection2('scene')">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn active" onclick="switchSection2('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchSection2('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
+    <button class="snav-btn" onclick="switchSection2('quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
-  <!-- VOCAB -->
-  <div class="section active" id="u2-vocab">
+  <!-- SCENE VIEWER -->
+  <div class="section" id="u2-scene">
+    <div class="card">
+      <div class="section-title">🎬 2과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u2-slide-subtitle">형하고 나는 태권도를 해요</div>
+      <div class="u2-scene-viewer">
+        <!-- Slide Image -->
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u2-slide-img" src="" alt="slide" />
+        </div>
+        <!-- Nav row -->
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u2-prev-btn" onclick="u2SlideGo(-1)">◀</button>
+          <div class="u2-slide-dots" id="u2-slide-dots"></div>
+          <button class="u2-nav-btn" id="u2-next-btn" onclick="u2SlideGo(1)">▶</button>
+        </div>
+        <!-- Script lines -->
+        <div class="u2-script-box" id="u2-script-box"></div>
+      </div>
+    </div>
+  </div>
+
+    <!-- VOCAB -->
+  <div class="section" id="u2-vocab">
     <div class="card">
       <div class="section-title">🔗 하고 — Linking people</div>
       <div class="section-sub">Click each card to flip it!</div>
@@ -1592,7 +1642,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
     <div class="card" id="u2-qcard">
       <span class="quiz-badge sky">2과 · Step 2 — 문장 만들기</span>
-      <div class="scene-box" id="u2-scene">🛝</div>
+      <div class="scene-box" id="u2-qscene">🛝</div>
       <div class="question-english" id="u2-qenglish">Build the sentence!</div>
       <div class="section-sub" id="u2-qsub">Drag cards below — and drag to reorder inside the sentence!</div>
 
@@ -2826,6 +2876,7 @@ function switchUnit(n){
   else if (n === 7) { switchSection7('vocab'); }
   else if (n === 8) { switchSection8('vocab'); }
   else if (n === 9) { switchSection9('vocab'); }
+  else if (n === 2) { switchSection2('scene'); }
   else { switchSection(n, 'vocab'); }
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
@@ -3005,7 +3056,7 @@ function renderU2(){
   if(u2Idx >= u2Questions.length) return; // 완료 상태일 때 범위 초과 방어
   const q=u2Questions[u2Idx];
   u2Dropped=[]; u2IdCounter=0;
-  document.getElementById('u2-scene').textContent=q.scene;
+  document.getElementById('u2-qscene').textContent=q.scene;
   document.getElementById('u2-qenglish').textContent='👉 '+q.english;
   document.getElementById('u2-qsub').textContent='Click or drag cards to build the sentence. Drag inside to reorder!';
 
@@ -6362,6 +6413,110 @@ async function init(){
   renderU9L(); renderU9OX();
 }
 init();
+
+// ══════════════════════════════════════════
+// UNIT 2 SCENE VIEWER
+// ══════════════════════════════════════════
+const U2_SCENE = {
+  slides: [
+    'data/elem/slides/L2_02/형하고나는태권도를해요1.png',
+    'data/elem/slides/L2_02/형하고나는태권도를해요2.png',
+    'data/elem/slides/L2_02/형하고나는태권도를해요3.png',
+    'data/elem/slides/L2_02/형하고나는태권도를해요4.png'
+  ],
+  script: [
+    [
+      { ko:'누구예요?', en:'Who is it?', audio:'data/elem/TTS/L2_02/누구예요1_slide1.mp3' },
+      { ko:'형하고 나.', en:'My brother and I.', audio:'data/elem/TTS/L2_02/형하고나2_slide1.mp3' }
+    ],
+    [
+      { ko:'뭘 해요?', en:'What do you do?', audio:'data/elem/TTS/L2_02/뭘해요3_slide2.mp3' },
+      { ko:'태권도를 해요.', en:'We do taekwondo.', audio:'data/elem/TTS/L2_02/태권도를해요4_slide2.mp3' }
+    ],
+    [
+      { ko:'누가 뭘 해요?', en:'Who does what?', audio:'data/elem/TTS/L2_02/누가뭘해요5_slide3.mp3' },
+      { ko:'형하고 나는 태권도를 해요.', en:'My brother and I do taekwondo.', audio:'data/elem/TTS/L2_02/형하고나는태권도를해요6_slide3.mp3' }
+    ],
+    [
+      { ko:'합!', en:'Hah! (kiai)', audio:'data/elem/TTS/L2_02/합7_slide4.mp3' }
+    ]
+  ]
+};
+let u2SlideIdx = 0;
+let u2SceneAudio = null;
+
+function u2SceneInit(){
+  u2SlideIdx = 0;
+  // build dots
+  const dots = document.getElementById('u2-slide-dots');
+  dots.innerHTML = U2_SCENE.slides.map((_, i) =>
+    `<div class="u2-slide-dot${i===0?' active':''}" onclick="u2SlideTo(${i})"></div>`
+  ).join('');
+  u2SlideTo(0);
+}
+
+function u2SlideTo(idx){
+  u2SlideIdx = idx;
+  const slides = U2_SCENE.slides;
+  const img = document.getElementById('u2-slide-img');
+  img.src = slides[idx];
+  // dots
+  document.querySelectorAll('.u2-slide-dot').forEach((d,i)=>
+    d.classList.toggle('active', i===idx));
+  // nav buttons
+  document.getElementById('u2-prev-btn').disabled = (idx === 0);
+  document.getElementById('u2-next-btn').disabled = (idx === slides.length - 1);
+  // script lines
+  const box = document.getElementById('u2-script-box');
+  const lines = U2_SCENE.script[idx] || [];
+  if (lines.length === 0) {
+    box.innerHTML = '<div class="u2-script-empty">— 대사 없음 —</div>';
+  } else {
+    box.innerHTML = lines.map((l, li) => `
+      <div class="u2-script-line">
+        <button class="u2-script-play" id="u2-play-${idx}-${li}" onclick="u2PlayLine(${idx},${li})">🔊</button>
+        <span class="u2-script-ko">${l.ko}</span>
+        <span class="u2-script-en">${l.en}</span>
+      </div>`).join('');
+  }
+  // stop any playing audio
+  if (u2SceneAudio) { u2SceneAudio.pause(); u2SceneAudio = null; }
+  document.querySelectorAll('.u2-script-play').forEach(b=>b.classList.remove('playing'));
+}
+
+function u2SlideGo(dir){
+  const next = u2SlideIdx + dir;
+  if (next >= 0 && next < U2_SCENE.slides.length) u2SlideTo(next);
+}
+
+function u2PlayLine(slideIdx, lineIdx){
+  const line = U2_SCENE.script[slideIdx][lineIdx];
+  if (!line || !line.audio) return;
+  // stop previous
+  if (u2SceneAudio) { u2SceneAudio.pause(); u2SceneAudio = null; }
+  document.querySelectorAll('.u2-script-play').forEach(b=>b.classList.remove('playing'));
+  const btn = document.getElementById(`u2-play-${slideIdx}-${lineIdx}`);
+  u2SceneAudio = new Audio(line.audio);
+  u2SceneAudio.play().catch(()=>{});
+  if (btn) btn.classList.add('playing');
+  u2SceneAudio.onended = () => { if (btn) btn.classList.remove('playing'); u2SceneAudio = null; };
+}
+
+function switchSection2(sec){
+  const u = document.getElementById('unit2');
+  u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  const snav = document.getElementById('u2-snav');
+  snav.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
+  const map = { scene:0, vocab:1, grammar:2, quiz:3 };
+  document.getElementById('u2-'+sec).classList.add('active');
+  snav.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
+  // practice bar
+  const bar = document.getElementById('practice-bar');
+  if (bar) { bar.classList.toggle('visible', sec==='quiz'); }
+  if (sec === 'quiz') renderRaiseHandBtns();
+  if (sec === 'scene') u2SceneInit();
+}
+
 </script>
 
 </div><!-- /app-content -->
