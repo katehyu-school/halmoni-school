@@ -15,800 +15,217 @@
     "data/nhs/slides/ep2/미래의 저녁식사 (7).png"
   ],
   "characters": [
-    {
-      "id": "narrator",
-      "name": "나레이터",
-      "emoji": "📢",
-      "color": "#C8C8C8"
-    },
-    {
-      "id": "na",
-      "name": "나",
-      "emoji": "🙋",
-      "color": "#A8D8EA"
-    },
-    {
-      "id": "dongsaeng",
-      "name": "동생",
-      "emoji": "👦",
-      "color": "#B8D4F0"
-    },
-    {
-      "id": "mom",
-      "name": "엄마",
-      "emoji": "👩",
-      "color": "#B8D4B8"
-    },
-    {
-      "id": "dad",
-      "name": "아빠",
-      "emoji": "👨",
-      "color": "#D4C5A0"
-    }
+    {"id":"narrator","name":"나레이터","emoji":"📢","color":"#C8C8C8"},
+    {"id":"na",      "name":"나",      "emoji":"🙋","color":"#A8D8EA"},
+    {"id":"dongsaeng","name":"동생",   "emoji":"👦","color":"#B8D4F0"},
+    {"id":"mom",     "name":"엄마",    "emoji":"👩","color":"#B8D4B8"},
+    {"id":"dad",     "name":"아빠",    "emoji":"👨","color":"#D4C5A0"}
   ],
   "script": [
-    {
-      "speaker": "narrator",
-      "text": "여기는 우리 집 마당이에요. 마당에는 오렌지 나무가 있어요.",
-      "en": "This is our backyard. There is an orange tree in the yard.",
-      "slide": 0
-    },
-    {
-      "speaker": "narrator",
-      "text": "저는 동생하고 마당에서 배구를 해요.",
-      "en": "I'm playing volleyball with my sibling in the yard.",
-      "slide": 1
-    },
-    {
-      "speaker": "na",
-      "text": "내 공 받아!",
-      "en": "Catch my ball!",
-      "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep2/1내공+받아_slide2.mp3",
-      "slide": 2
-    },
-    {
-      "speaker": "dongsaeng",
-      "text": "알았어!",
-      "en": "Got it!",
-      "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep2/2알았어_slide2.mp3",
-      "slide": 2
-    },
-    {
-      "speaker": "narrator",
-      "text": "엄마가 우리를 불러요.",
-      "en": "Mom calls us.",
-      "slide": 3
-    },
-    {
-      "speaker": "mom",
-      "text": "얘들아~ 밥 먹어!",
-      "en": "Kids~ time to eat!",
-      "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep2/3얘들아~+밥+먹어slide3.mp3",
-      "slide": 3
-    },
-    {
-      "speaker": "narrator",
-      "text": "모두 저녁 밥을 먹어요.",
-      "en": "Everyone eats dinner.",
-      "slide": 4
-    },
-    {
-      "speaker": "mom",
-      "text": "모두들 맛있게 먹어요.",
-      "en": "Everyone, enjoy your meal!",
-      "speech_type": "casual 존댓말",
-      "audio": "data/nhs/TTS/ep2/4모두들+맛있게+먹어요slide5.mp3",
-      "slide": 5
-    },
-    {
-      "speaker": "dongsaeng",
-      "text": "잘 먹겠습니다!",
-      "en": "Thank you for the food! (before eating)",
-      "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep2/5잘+먹겠습니다slide5.mp3",
-      "slide": 5
-    },
-    {
-      "speaker": "na",
-      "text": "잘 먹겠습니다!",
-      "en": "Thank you for the food! (before eating)",
-      "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep2/6잘+먹겠습니다slide5.mp3",
-      "slide": 5
-    },
-    {
-      "speaker": "na",
-      "text": "엄마, 이거 너무 맛있어요!",
-      "en": "Mom, this is so delicious!",
-      "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep2/7엄마이거너무맛있어요slide6.mp3",
-      "slide": 6
-    },
-    {
-      "speaker": "dongsaeng",
-      "text": "잘 먹었습니다, 엄마!",
-      "en": "Thank you for the meal, Mom!",
-      "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep2/8잘+먹었습니다+엄마slide7.mp3",
-      "slide": 7
-    },
-    {
-      "speaker": "na",
-      "text": "잘 먹었습니다, 엄마!",
-      "en": "Thank you for the meal, Mom!",
-      "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep2/9잘+먹었습니다+엄마slide7.mp3",
-      "slide": 7
-    },
-    {
-      "speaker": "dad",
-      "text": "나도 잘 먹었어요.",
-      "en": "I enjoyed the meal too.",
-      "speech_type": "casual 존댓말",
-      "audio": "data/nhs/TTS/ep2/10나도+잘+먹었어요slide7.mp3",
-      "slide": 7
-    }
+    {"speaker":"narrator","text":"여기는 우리 집 마당이에요. 마당에는 오렌지 나무가 있어요.","en":"This is our backyard. There is an orange tree in the yard.","slide":0},
+    {"speaker":"narrator","text":"저는 동생하고 마당에서 배구를 해요.","en":"I'm playing volleyball with my sibling in the yard.","slide":1},
+    {"speaker":"na","text":"내 공 받아!","en":"Catch my ball!","speech_type":"반말","audio":"data/nhs/TTS/ep2/1내공+받아_slide2.mp3","slide":2},
+    {"speaker":"dongsaeng","text":"알았어!","en":"Got it!","speech_type":"반말","audio":"data/nhs/TTS/ep2/2알았어_slide2.mp3","slide":2},
+    {"speaker":"narrator","text":"엄마가 우리를 불러요.","en":"Mom calls us.","slide":3},
+    {"speaker":"mom","text":"얘들아~ 밥 먹어!","en":"Kids~ time to eat!","speech_type":"반말","audio":"data/nhs/TTS/ep2/3얘들아~+밥+먹어slide3.mp3","slide":3},
+    {"speaker":"narrator","text":"모두 저녁 밥을 먹어요.","en":"Everyone eats dinner.","slide":4},
+    {"speaker":"mom","text":"모두들 맛있게 먹어요.","en":"Everyone, enjoy your meal!","speech_type":"casual 존댓말","audio":"data/nhs/TTS/ep2/4모두들+맛있게+먹어요slide5.mp3","slide":5},
+    {"speaker":"dongsaeng","text":"잘 먹겠습니다!","en":"Thank you for the food! (before eating)","speech_type":"존댓말","audio":"data/nhs/TTS/ep2/5잘+먹겠습니다slide5.mp3","slide":5},
+    {"speaker":"na","text":"잘 먹겠습니다!","en":"Thank you for the food! (before eating)","speech_type":"존댓말","audio":"data/nhs/TTS/ep2/6잘+먹겠습니다slide5.mp3","slide":5},
+    {"speaker":"na","text":"엄마, 이거 너무 맛있어요!","en":"Mom, this is so delicious!","speech_type":"존댓말","audio":"data/nhs/TTS/ep2/7엄마이거너무맛있어요slide6.mp3","slide":6},
+    {"speaker":"dongsaeng","text":"잘 먹었습니다, 엄마!","en":"Thank you for the meal, Mom!","speech_type":"존댓말","audio":"data/nhs/TTS/ep2/8잘+먹었습니다+엄마slide7.mp3","slide":7},
+    {"speaker":"na","text":"잘 먹었습니다, 엄마!","en":"Thank you for the meal, Mom!","speech_type":"존댓말","audio":"data/nhs/TTS/ep2/9잘+먹었습니다+엄마slide7.mp3","slide":7},
+    {"speaker":"dad","text":"나도 잘 먹었어요.","en":"I enjoyed the meal too.","speech_type":"casual 존댓말","audio":"data/nhs/TTS/ep2/10나도+잘+먹었어요slide7.mp3","slide":7}
   ],
   "vocab": [
-    {
-      "category": "👨‍👩‍👧‍👦 가족 · Family",
-      "items": [
-        {
-          "korean": "엄마",
-          "romanization": "eom-ma",
-          "english": "mom",
-          "emoji": "👩"
-        },
-        {
-          "korean": "아빠",
-          "romanization": "a-ppa",
-          "english": "dad",
-          "emoji": "👨"
-        },
-        {
-          "korean": "동생",
-          "romanization": "dong-saeng",
-          "english": "younger sibling",
-          "emoji": "👦"
-        },
-        {
-          "korean": "언니",
-          "romanization": "eon-ni",
-          "english": "older sister (girl says)",
-          "emoji": "👧"
-        },
-        {
-          "korean": "오빠",
-          "romanization": "op-pa",
-          "english": "older brother (girl says)",
-          "emoji": "🧑"
-        },
-        {
-          "korean": "형",
-          "romanization": "hyeong",
-          "english": "older brother (boy says)",
-          "emoji": "🧑"
-        },
-        {
-          "korean": "할머니",
-          "romanization": "hal-meo-ni",
-          "english": "grandmother",
-          "emoji": "👵"
-        },
-        {
-          "korean": "할아버지",
-          "romanization": "hal-a-beo-ji",
-          "english": "grandfather",
-          "emoji": "👴"
-        }
-      ]
-    },
-    {
-      "category": "👥 사람 · People",
-      "items": [
-        {
-          "korean": "친구",
-          "romanization": "chin-gu",
-          "english": "friend",
-          "emoji": "🤝"
-        },
-        {
-          "korean": "우리",
-          "romanization": "u-ri",
-          "english": "we / our",
-          "emoji": "🫂"
-        },
-        {
-          "korean": "모두",
-          "romanization": "mo-du",
-          "english": "everyone / all",
-          "emoji": "🙌"
-        }
-      ]
-    },
-    {
-      "category": "🏠 명사 · Nouns",
-      "items": [
-        {
-          "korean": "집",
-          "romanization": "jip",
-          "english": "house / home",
-          "emoji": "🏠"
-        },
-        {
-          "korean": "마당",
-          "romanization": "ma-dang",
-          "english": "yard / garden",
-          "emoji": "🌳"
-        },
-        {
-          "korean": "밥",
-          "romanization": "bap",
-          "english": "rice / meal",
-          "emoji": "🍚"
-        },
-        {
-          "korean": "배구",
-          "romanization": "bae-gu",
-          "english": "volleyball",
-          "emoji": "🏐"
-        }
-      ]
-    },
-    {
-      "category": "⏰ 시간 · Time",
-      "items": [
-        {
-          "korean": "아침",
-          "romanization": "a-chim",
-          "english": "morning / breakfast",
-          "emoji": "🌅"
-        },
-        {
-          "korean": "점심",
-          "romanization": "jeom-sim",
-          "english": "noon / lunch",
-          "emoji": "☀️"
-        },
-        {
-          "korean": "저녁",
-          "romanization": "jeo-nyeok",
-          "english": "evening / dinner",
-          "emoji": "🌙"
-        },
-        {
-          "korean": "어제",
-          "romanization": "eo-je",
-          "english": "yesterday",
-          "emoji": "⬅️"
-        },
-        {
-          "korean": "오늘",
-          "romanization": "o-neul",
-          "english": "today",
-          "emoji": "📅"
-        }
-      ]
-    },
-    {
-      "category": "🔤 동사 · Verbs",
-      "items": [
-        {
-          "korean": "먹어요",
-          "romanization": "meo-geo-yo",
-          "english": "eat (polite)",
-          "emoji": "🍽️"
-        },
-        {
-          "korean": "불러요",
-          "romanization": "bul-leo-yo",
-          "english": "call (a person)",
-          "emoji": "📣"
-        },
-        {
-          "korean": "있어요",
-          "romanization": "i-sseo-yo",
-          "english": "there is / have",
-          "emoji": "✅"
-        },
-        {
-          "korean": "없어요",
-          "romanization": "eop-sseo-yo",
-          "english": "there isn't / don't have",
-          "emoji": "❌"
-        },
-        {
-          "korean": "알아요",
-          "romanization": "a-ra-yo",
-          "english": "know / understand",
-          "emoji": "💡"
-        },
-        {
-          "korean": "몰라요",
-          "romanization": "mol-la-yo",
-          "english": "don't know",
-          "emoji": "🤷"
-        }
-      ]
-    },
-    {
-      "category": "😋 형용사 · Adjectives",
-      "items": [
-        {
-          "korean": "맛있어요",
-          "romanization": "ma-si-sseo-yo",
-          "english": "delicious / tasty",
-          "emoji": "😋"
-        },
-        {
-          "korean": "맛없어요",
-          "romanization": "ma-deop-sseo-yo",
-          "english": "not tasty / bland",
-          "emoji": "😞"
-        }
-      ]
-    },
-    {
-      "category": "💬 표현 · Expressions",
-      "items": [
-        {
-          "korean": "얘들아",
-          "romanization": "yae-deul-a",
-          "english": "hey kids! (calling out)",
-          "emoji": "👋"
-        },
-        {
-          "korean": "잘 먹겠습니다",
-          "romanization": "jal meok-get-seum-ni-da",
-          "english": "thank you for the food (before)",
-          "emoji": "🙏"
-        },
-        {
-          "korean": "잘 먹었습니다",
-          "romanization": "jal meo-geot-seum-ni-da",
-          "english": "thank you for the meal (after)",
-          "emoji": "🙇"
-        }
-      ]
-    }
+    {"category":"👨‍👩‍👧‍👦 가족 · Family","items":[
+      {"korean":"엄마","romanization":"eom-ma","english":"mom","emoji":"👩"},
+      {"korean":"아빠","romanization":"a-ppa","english":"dad","emoji":"👨"},
+      {"korean":"동생","romanization":"dong-saeng","english":"younger sibling","emoji":"👦"},
+      {"korean":"언니","romanization":"eon-ni","english":"older sister (girl says)","emoji":"👧"},
+      {"korean":"오빠","romanization":"op-pa","english":"older brother (girl says)","emoji":"🧑"},
+      {"korean":"형","romanization":"hyeong","english":"older brother (boy says)","emoji":"🧑"},
+      {"korean":"할머니","romanization":"hal-meo-ni","english":"grandmother","emoji":"👵"},
+      {"korean":"할아버지","romanization":"hal-a-beo-ji","english":"grandfather","emoji":"👴"}
+    ]},
+    {"category":"👥 사람 · People","items":[
+      {"korean":"친구","romanization":"chin-gu","english":"friend","emoji":"🤝"},
+      {"korean":"우리","romanization":"u-ri","english":"we / our","emoji":"🫂"},
+      {"korean":"모두","romanization":"mo-du","english":"everyone / all","emoji":"🙌"}
+    ]},
+    {"category":"🏠 명사 · Nouns","items":[
+      {"korean":"집","romanization":"jip","english":"house / home","emoji":"🏠"},
+      {"korean":"마당","romanization":"ma-dang","english":"yard / garden","emoji":"🌳"},
+      {"korean":"밥","romanization":"bap","english":"rice / meal","emoji":"🍚"},
+      {"korean":"배구","romanization":"bae-gu","english":"volleyball","emoji":"🏐"}
+    ]},
+    {"category":"⏰ 시간 · Time","items":[
+      {"korean":"아침","romanization":"a-chim","english":"morning / breakfast","emoji":"🌅"},
+      {"korean":"점심","romanization":"jeom-sim","english":"noon / lunch","emoji":"☀️"},
+      {"korean":"저녁","romanization":"jeo-nyeok","english":"evening / dinner","emoji":"🌙"},
+      {"korean":"어제","romanization":"eo-je","english":"yesterday","emoji":"⬅️"},
+      {"korean":"오늘","romanization":"o-neul","english":"today","emoji":"📅"}
+    ]},
+    {"category":"🔤 동사 · Verbs","items":[
+      {"korean":"먹어요","romanization":"meo-geo-yo","english":"eat (polite)","emoji":"🍽️"},
+      {"korean":"불러요","romanization":"bul-leo-yo","english":"call (a person)","emoji":"📣"},
+      {"korean":"있어요","romanization":"i-sseo-yo","english":"there is / have","emoji":"✅"},
+      {"korean":"없어요","romanization":"eop-sseo-yo","english":"there isn't / don't have","emoji":"❌"},
+      {"korean":"알아요","romanization":"a-ra-yo","english":"know / understand","emoji":"💡"},
+      {"korean":"몰라요","romanization":"mol-la-yo","english":"don't know","emoji":"🤷"}
+    ]},
+    {"category":"😋 형용사 · Adjectives","items":[
+      {"korean":"맛있어요","romanization":"ma-si-sseo-yo","english":"delicious / tasty","emoji":"😋"},
+      {"korean":"맛없어요","romanization":"ma-deop-sseo-yo","english":"not tasty / bland","emoji":"😞"}
+    ]},
+    {"category":"💬 표현 · Expressions","items":[
+      {"korean":"얘들아","romanization":"yae-deul-a","english":"hey kids! (calling out)","emoji":"👋"},
+      {"korean":"잘 먹겠습니다","romanization":"jal meok-get-seum-ni-da","english":"thank you for the food (before)","emoji":"🙏"},
+      {"korean":"잘 먹었습니다","romanization":"jal meo-geot-seum-ni-da","english":"thank you for the meal (after)","emoji":"🙇"}
+    ]}
   ],
   "grammar": [
-    {
-      "id": "g1",
-      "title": "잘 먹겠습니다 / 잘 먹었습니다",
-      "title_en": "Korean Meal Expressions",
-      "icon": "🍽️",
-      "rule": "식사 전: 잘 먹겠습니다  |  식사 후: 잘 먹었습니다",
-      "explanation_en": "Essential Korean mealtime expressions. Say 잘 먹겠습니다 before eating and 잘 먹었습니다 after. For these greetings, the formal -습니다 ending is more natural than casual -어요. Always say them to the person who prepared the food!",
-      "examples": [
-        {
-          "ko": "잘 먹겠습니다!",
-          "en": "Thank you for the food! (before eating)"
-        },
-        {
-          "ko": "잘 먹었습니다, 엄마!",
-          "en": "Thank you for the meal, Mom! (after eating)"
-        },
-        {
-          "ko": "잘 먹었어요. (casual polite)",
-          "en": "I enjoyed the meal. (softer tone)"
-        },
-        {
-          "ko": "잘 먹었어! (반말)",
-          "en": "That was good! (to friends/siblings)"
-        }
-      ]
-    },
-    {
-      "id": "g2",
-      "title": "배구하다 vs 배구를 하다",
-      "title_en": "Sports Verbs: Compact vs. Separate",
-      "icon": "🏐",
-      "rule": "스포츠 + 하다  OR  스포츠 + 를/을 + 하다",
-      "explanation_en": "Sports and activities can be expressed two ways in Korean. Attach 하다 directly (배구하다) or keep the noun separate with object particle 를/을 (배구를 하다). Both are correct! The separate form is more common in everyday speech.",
-      "examples": [
-        {
-          "ko": "저는 배구를 해요.",
-          "en": "I play volleyball. (separate — natural in speech)"
-        },
-        {
-          "ko": "저는 배구해요.",
-          "en": "I play volleyball. (compact form)"
-        },
-        {
-          "ko": "축구를 해요.",
-          "en": "I play soccer."
-        },
-        {
-          "ko": "숙제를 해요.",
-          "en": "I do homework."
-        }
-      ]
-    },
-    {
-      "id": "g3",
-      "title": "아침에 / 저녁에 vs 어제 / 오늘",
-      "title_en": "Time Words — When to Use 에",
-      "icon": "🕐",
-      "rule": "시간대 (아침/점심/저녁) + 에  |  날짜어 (어제/오늘/내일) — 에 없음",
-      "explanation_en": "Time-of-day words (아침, 점심, 저녁) take the particle 에. But relative date words (어제, 오늘, 내일) do NOT take 에 — they stand alone!",
-      "examples": [
-        {
-          "ko": "저녁에 밥을 먹어요.",
-          "en": "I eat dinner in the evening. (에 ✅)"
-        },
-        {
-          "ko": "아침에 학교에 가요.",
-          "en": "I go to school in the morning. (에 ✅)"
-        },
-        {
-          "ko": "오늘 밥을 먹어요.",
-          "en": "I eat today. (에 ❌ — no particle!)"
-        },
-        {
-          "ko": "어제 배구를 했어요.",
-          "en": "I played volleyball yesterday. (에 ❌)"
-        }
-      ]
-    },
-    {
-      "id": "g4",
-      "title": "맛있어요 / 맛없어요",
-      "title_en": "맛 + 있다 / 없다",
-      "icon": "😋",
-      "rule": "맛 + 있어요 = delicious  |  맛 + 없어요 = not tasty",
-      "explanation_en": "맛 means 'taste/flavor'. 맛있어요 literally means 'taste exists' = delicious! 맛없어요 = 'taste doesn't exist' = bland. Pronunciation note: 맛있어요 sounds like 마시써요 (the ㅅ links to the next vowel).",
-      "examples": [
-        {
-          "ko": "이거 너무 맛있어요!",
-          "en": "This is SO delicious!"
-        },
-        {
-          "ko": "맛없어요.",
-          "en": "It doesn't taste good."
-        },
-        {
-          "ko": "한국 음식은 맛있어요.",
-          "en": "Korean food is delicious."
-        },
-        {
-          "ko": "알아요? 맛있어요!",
-          "en": "You know what? It's delicious!"
-        }
-      ]
-    },
-    {
-      "id": "g5",
-      "title": "알아요 / 몰라요",
-      "title_en": "알다 / 모르다 — Know / Don't Know",
-      "icon": "💡",
-      "rule": "알다 → 알아요  |  모르다 → 몰라요 (ㄹ irregular)",
-      "explanation_en": "알아요 means 'I know / I understand.' 몰라요 means 'I don't know.' Watch the spelling change: 모르다 → 몰라요 (not 모르어요). This ㄹ-irregular pattern also appears in 부르다 → 불러요 (to call/sing).",
-      "examples": [
-        {
-          "ko": "알아요!",
-          "en": "I know! / Got it!"
-        },
-        {
-          "ko": "몰라요.",
-          "en": "I don't know."
-        },
-        {
-          "ko": "한국어 알아요?",
-          "en": "Do you know Korean?"
-        },
-        {
-          "ko": "이름을 몰라요.",
-          "en": "I don't know the name."
-        }
-      ]
-    },
-    {
-      "id": "g6",
-      "title": "이거 / 그거 / 저거 — 지시대명사",
-      "title_en": "This / That / That over there",
-      "icon": "👆",
-      "rule": "이거 (near me) · 그거 (near you) · 저거 (far from both)",
-      "explanation_en": "이거 = this thing (near the speaker), 그거 = that thing (near the listener), 저거 = that thing over there (far from both). For places, use 여기/거기/저기 instead.",
-      "examples": [
-        {
-          "ko": "엄마, 이거 너무 맛있어요!",
-          "en": "Mom, this is so delicious!"
-        },
-        {
-          "ko": "그거 뭐야?",
-          "en": "What's that (near you)?"
-        },
-        {
-          "ko": "저거 봐!",
-          "en": "Look at that over there!"
-        },
-        {
-          "ko": "이거 얼마예요?",
-          "en": "How much is this?"
-        }
-      ]
-    }
+    {"id":"g1","title":"잘 먹겠습니다 / 잘 먹었습니다","title_en":"Korean Meal Expressions","icon":"🍽️",
+     "rule":"식사 전: 잘 먹겠습니다  |  식사 후: 잘 먹었습니다",
+     "explanation_en":"Essential Korean mealtime expressions. Say 잘 먹겠습니다 before eating and 잘 먹었습니다 after. The formal -습니다 ending is more natural than casual -어요 for these greetings. Always say them to the person who prepared the food!",
+     "examples":[
+       {"ko":"잘 먹겠습니다!","en":"Thank you for the food! (before eating)"},
+       {"ko":"잘 먹었습니다, 엄마!","en":"Thank you for the meal, Mom!"},
+       {"ko":"잘 먹었어요.","en":"I enjoyed the meal. (casual polite)"},
+       {"ko":"잘 먹었어!","en":"That was good! (반말, to siblings)"}
+     ]},
+    {"id":"g2","title":"배구하다 vs 배구를 하다","title_en":"Sports Verbs: Compact vs. Separate","icon":"🏐",
+     "rule":"스포츠 + 하다  OR  스포츠 + 를/을 + 하다",
+     "explanation_en":"Sports and activities can be expressed two ways. Attach 하다 directly (배구하다) or use object particle 를/을 + 하다 (배구를 하다). Both are correct — the separate form is more natural in speech.",
+     "examples":[
+       {"ko":"저는 배구를 해요.","en":"I play volleyball."},
+       {"ko":"저는 배구해요.","en":"I play volleyball. (compact)"},
+       {"ko":"축구를 해요.","en":"I play soccer."},
+       {"ko":"숙제를 해요.","en":"I do homework."}
+     ]},
+    {"id":"g3","title":"아침에 / 저녁에 vs 어제 / 오늘","title_en":"Time Words — When to Use 에","icon":"🕐",
+     "rule":"시간대 (아침/점심/저녁) + 에  |  날짜어 (어제/오늘/내일) — 에 없음",
+     "explanation_en":"Time-of-day words take particle 에. But relative date words (어제, 오늘, 내일) stand alone — no 에!",
+     "examples":[
+       {"ko":"저녁에 밥을 먹어요.","en":"I eat dinner in the evening. (에 ✅)"},
+       {"ko":"아침에 학교에 가요.","en":"I go to school in the morning. (에 ✅)"},
+       {"ko":"오늘 밥을 먹어요.","en":"I eat today. (에 ❌)"},
+       {"ko":"어제 배구를 했어요.","en":"I played volleyball yesterday. (에 ❌)"}
+     ]},
+    {"id":"g4","title":"맛있어요 / 맛없어요","title_en":"맛 + 있다 / 없다","icon":"😋",
+     "rule":"맛 + 있어요 = delicious  |  맛 + 없어요 = not tasty",
+     "explanation_en":"맛 means taste/flavor. 맛있어요 = taste exists = delicious! 맛없어요 = taste doesn't exist = bland. Pronunciation: 맛있어요 sounds like 마시써요.",
+     "examples":[
+       {"ko":"이거 너무 맛있어요!","en":"This is SO delicious!"},
+       {"ko":"맛없어요.","en":"It doesn't taste good."},
+       {"ko":"한국 음식은 맛있어요.","en":"Korean food is delicious."},
+       {"ko":"맛이 없어요.","en":"There is no taste. (separated form)"}
+     ]},
+    {"id":"g5","title":"알아요 / 몰라요","title_en":"알다 / 모르다 — Know / Don't Know","icon":"💡",
+     "rule":"알다 → 알아요  |  모르다 → 몰라요 (ㄹ irregular)",
+     "explanation_en":"알아요 = I know. 몰라요 = I don't know. Note: 모르다 → 몰라요 (not 모르어요). Same ㄹ-irregular pattern as 부르다 → 불러요.",
+     "examples":[
+       {"ko":"알아요!","en":"I know! / Got it!"},
+       {"ko":"몰라요.","en":"I don't know."},
+       {"ko":"한국어 알아요?","en":"Do you know Korean?"},
+       {"ko":"이름을 몰라요.","en":"I don't know the name."}
+     ]},
+    {"id":"g6","title":"이거 / 그거 / 저거","title_en":"This / That / That over there","icon":"👆",
+     "rule":"이거 (near me) · 그거 (near you) · 저거 (far from both)",
+     "explanation_en":"이거 = this thing, 그거 = that thing (near listener), 저거 = that thing over there. For places, use 여기/거기/저기.",
+     "examples":[
+       {"ko":"엄마, 이거 너무 맛있어요!","en":"Mom, this is so delicious!"},
+       {"ko":"그거 뭐야?","en":"What's that?"},
+       {"ko":"저거 봐!","en":"Look at that over there!"},
+       {"ko":"이거 얼마예요?","en":"How much is this?"}
+     ]}
   ],
   "banmal_jondaemal": {
-    "intro_ko": "가족 사이에서도 말투가 달라요! 부모님한테는 존댓말, 동생한테는 반말을 써요.",
-    "intro_en": "Even within a family, speech levels change! Use 존댓말 with parents, 반말 with younger siblings.",
-    "rows": [
-      {
-        "situation_ko": "공 던질 때 (동생에게)",
-        "situation_en": "Throwing the ball (to sibling)",
-        "banmal": "내 공 받아!",
-        "jondaemal": "공 받으세요!",
-        "note": "동생에게는 반말, 어른에게는 존댓말"
-      },
-      {
-        "situation_ko": "밥 먹기 전 (부모님께)",
-        "situation_en": "Before eating (to parents)",
-        "banmal": "잘 먹을게!",
-        "jondaemal": "잘 먹겠습니다!",
-        "note": "인사할 때는 formal 존댓말이 보편적"
-      },
-      {
-        "situation_ko": "밥 먹은 후 (부모님께)",
-        "situation_en": "After eating (to parents)",
-        "banmal": "잘 먹었어!",
-        "jondaemal": "잘 먹었습니다!",
-        "note": "casual 존댓말(잘 먹었어요)도 OK"
-      },
-      {
-        "situation_ko": "음식 칭찬할 때",
-        "situation_en": "Complimenting the food",
-        "banmal": "이거 너무 맛있어!",
-        "jondaemal": "이거 너무 맛있어요!",
-        "note": "-요만 붙이면 존댓말이 돼요"
-      }
+    "intro_ko":"가족 사이에서도 말투가 달라요! 부모님한테는 존댓말, 동생한테는 반말을 써요.",
+    "intro_en":"Even within a family, speech levels change! 존댓말 with parents, 반말 with younger siblings.",
+    "rows":[
+      {"situation_ko":"공 던질 때 (동생에게)","situation_en":"Throwing the ball (to sibling)","banmal":"내 공 받아!","jondaemal":"공 받으세요!","note":"동생에게는 반말, 어른에게는 존댓말"},
+      {"situation_ko":"밥 먹기 전 (부모님께)","situation_en":"Before eating (to parents)","banmal":"잘 먹을게!","jondaemal":"잘 먹겠습니다!","note":"인사할 때는 formal 존댓말이 보편적"},
+      {"situation_ko":"밥 먹은 후 (부모님께)","situation_en":"After eating (to parents)","banmal":"잘 먹었어!","jondaemal":"잘 먹었습니다!","note":"casual 존댓말(잘 먹었어요)도 OK"},
+      {"situation_ko":"음식 칭찬할 때","situation_en":"Complimenting the food","banmal":"이거 너무 맛있어!","jondaemal":"이거 너무 맛있어요!","note":"-요만 붙이면 존댓말이 돼요"}
     ],
-    "tip": "💡 인사말(잘 먹겠습니다 / 잘 먹었습니다)은 casual 존댓말(-어요)보다 formal 존댓말(-습니다)이 더 자연스러워요!"
+    "tip":"💡 인사말(잘 먹겠습니다 / 잘 먹었습니다)은 -어요보다 -습니다가 더 자연스러워요!"
   },
   "usage": [
-    {
-      "title": "먹어 / 먹어요 / 드세요",
-      "title_en": "Three Ways to Say 'Eat'",
-      "explanation_en": "Korean has multiple speech levels for eating. 먹어 is casual (반말) — use with younger siblings or close friends your age. 먹어요 is polite (존댓말) — use with parents, teachers, elders. 드세요 is the honorific form — extra respect, for grandparents or very formal situations. Dictionary form: 먹다.",
-      "examples": [
-        {
-          "ko": "동생아, 빨리 먹어!",
-          "en": "Sibling, eat quickly! (반말)"
-        },
-        {
-          "ko": "밥 먹어요~",
-          "en": "Let's eat~ (polite)"
-        },
-        {
-          "ko": "할머니, 드세요.",
-          "en": "Grandma, please eat. (honorific)"
-        },
-        {
-          "ko": "모두들 맛있게 먹어요.",
-          "en": "Everyone, eat well! (mom to kids)"
-        }
-      ]
-    },
-    {
-      "title": "알아요 vs 알았어!",
-      "title_en": "알다 in Different Situations",
-      "explanation_en": "알아요 = 'I know' or 'I understand' (present, polite). When responding to a request or instruction, 알았어! (반말) or 알았어요! (polite) means 'Got it! / Okay!' — it's the past tense of 알다, meaning 'I have understood.' This is very common in everyday Korean!",
-      "examples": [
-        {
-          "ko": "알았어! (동생에게)",
-          "en": "Got it! (반말, to sibling)"
-        },
-        {
-          "ko": "알았어요! (부모님께)",
-          "en": "Got it! (polite, to parents)"
-        },
-        {
-          "ko": "한국어 알아요?",
-          "en": "Do you know Korean?"
-        },
-        {
-          "ko": "네, 알아요!",
-          "en": "Yes, I know!"
-        }
-      ]
-    },
-    {
-      "title": "부르다 — 불러요 (ㄹ irregular)",
-      "title_en": "부르다 · To Call / To Sing",
-      "explanation_en": "부르다 means both 'to call (a person)' and 'to sing.' In the polite present form: 부르다 → 불러요. The ㄹ and vowel merge: 부르 + 어요 → 불러요. Same pattern: 모르다 → 몰라요. This ㄹ-irregular pattern appears in many common verbs!",
-      "examples": [
-        {
-          "ko": "엄마가 우리를 불러요.",
-          "en": "Mom calls us."
-        },
-        {
-          "ko": "선생님이 내 이름을 불러요.",
-          "en": "The teacher calls my name."
-        },
-        {
-          "ko": "노래를 불러요.",
-          "en": "I sing a song. (부르다 = to sing too!)"
-        },
-        {
-          "ko": "몰라요. (모르다 → 몰라요)",
-          "en": "I don't know. (same pattern)"
-        }
-      ]
-    },
-    {
-      "title": "있어요 / 없어요",
-      "title_en": "있다 · 없다 — To Have / Not Have",
-      "explanation_en": "있어요 and 없어요 mean both 'there is / isn't' (existence) AND 'I have / don't have' (possession). The subject or topic tells you which meaning applies.",
-      "examples": [
-        {
-          "ko": "마당에 오렌지 나무가 있어요.",
-          "en": "There is an orange tree in the yard. (existence)"
-        },
-        {
-          "ko": "저는 동생이 있어요.",
-          "en": "I have a younger sibling. (possession)"
-        },
-        {
-          "ko": "숙제가 없어요.",
-          "en": "There is no homework. / I don't have homework."
-        },
-        {
-          "ko": "맛이 없어요.",
-          "en": "There is no taste. = It's not tasty."
-        }
-      ]
-    },
-    {
-      "title": "얘들아 — 호격조사 -아 / -야",
-      "title_en": "Calling Someone — -아 / -야",
-      "explanation_en": "When calling out to someone, add a vocative ending: -아 after a consonant, -야 after a vowel. 얘들아 = 얘들 + -아. Apply to names too: 민수야~ (ends in vowel), 정민아~ (ends in consonant). This is always 반말 — never used with adults or strangers.",
-      "examples": [
-        {
-          "ko": "얘들아~ 밥 먹어!",
-          "en": "Kids~ time to eat!"
-        },
-        {
-          "ko": "민수야, 이리 와!",
-          "en": "Minsu, come here!"
-        },
-        {
-          "ko": "정민아, 공 받아!",
-          "en": "Jeongmin, catch the ball!"
-        },
-        {
-          "ko": "친구야~",
-          "en": "Hey friend~"
-        }
-      ]
-    }
+    {"title":"먹어 / 먹어요 / 드세요","title_en":"Three Ways to Say Eat",
+     "explanation_en":"먹어 is casual (반말) — use with younger siblings or friends your age. 먹어요 is polite — use with parents and teachers. 드세요 is honorific — extra respect for grandparents. Dictionary form: 먹다.",
+     "examples":[
+       {"ko":"동생아, 빨리 먹어!","en":"Sibling, eat quickly! (반말)"},
+       {"ko":"밥 먹어요~","en":"Let's eat~ (polite)"},
+       {"ko":"할머니, 드세요.","en":"Grandma, please eat. (honorific)"},
+       {"ko":"모두들 맛있게 먹어요.","en":"Everyone, eat well!"}
+     ]},
+    {"title":"알아요 vs 알았어!","title_en":"알다 in Different Situations",
+     "explanation_en":"알아요 = I know (present). 알았어! (반말) or 알았어요! (polite) = Got it! — past tense of 알다, meaning I have understood. Very common in everyday Korean!",
+     "examples":[
+       {"ko":"알았어! (동생에게)","en":"Got it! (반말)"},
+       {"ko":"알았어요! (부모님께)","en":"Got it! (polite)"},
+       {"ko":"한국어 알아요?","en":"Do you know Korean?"},
+       {"ko":"네, 알아요!","en":"Yes, I know!"}
+     ]},
+    {"title":"부르다 → 불러요 (ㄹ irregular)","title_en":"부르다 · To Call / To Sing",
+     "explanation_en":"부르다 means both to call a person and to sing. Polite form: 부르다 → 불러요. Same ㄹ-irregular pattern: 모르다 → 몰라요.",
+     "examples":[
+       {"ko":"엄마가 우리를 불러요.","en":"Mom calls us."},
+       {"ko":"선생님이 내 이름을 불러요.","en":"The teacher calls my name."},
+       {"ko":"노래를 불러요.","en":"I sing a song."},
+       {"ko":"몰라요. (모르다 → 몰라요)","en":"I don't know."}
+     ]},
+    {"title":"있어요 / 없어요","title_en":"있다 · 없다 — Have / Don't Have",
+     "explanation_en":"있어요 and 없어요 mean both there is/isn't AND I have/don't have. The sentence subject tells you which meaning applies.",
+     "examples":[
+       {"ko":"마당에 오렌지 나무가 있어요.","en":"There is an orange tree in the yard."},
+       {"ko":"저는 동생이 있어요.","en":"I have a younger sibling."},
+       {"ko":"숙제가 없어요.","en":"I don't have homework."},
+       {"ko":"맛이 없어요.","en":"It has no taste."}
+     ]},
+    {"title":"얘들아 — 호격조사 -아 / -야","title_en":"Calling Someone — -아 / -야",
+     "explanation_en":"Add -아 after a consonant, -야 after a vowel when calling out to someone. 얘들아 = 얘들 + -아. Apply to names: 민수야~ (vowel), 정민아~ (consonant). Always 반말.",
+     "examples":[
+       {"ko":"얘들아~ 밥 먹어!","en":"Kids~ time to eat!"},
+       {"ko":"민수야, 이리 와!","en":"Minsu, come here!"},
+       {"ko":"정민아, 공 받아!","en":"Jeongmin, catch the ball!"},
+       {"ko":"친구야~","en":"Hey friend~"}
+     ]}
   ],
   "quiz": [
-    {
-      "id": "q1",
-      "question_ko": "밥을 먹기 전에 뭐라고 해요?",
-      "question_en": "What do you say BEFORE eating?",
-      "options": [
-        "잘 먹었습니다",
-        "잘 먹겠습니다",
-        "맛있게 먹어요",
-        "감사합니다"
-      ],
-      "answer": 1,
-      "explanation": "식사 전 → 잘 먹겠습니다! 식사 후 → 잘 먹었습니다! 순서를 기억하세요 😊"
-    },
-    {
-      "id": "q2",
-      "question_ko": "'저는 배구를 해요' — 여기서 '를'은 무슨 조사예요?",
-      "question_en": "What kind of particle is '를' in '저는 배구를 해요'?",
-      "options": [
-        "주격 조사 (subject)",
-        "목적격 조사 (object)",
-        "장소 조사 (location)",
-        "시간 조사 (time)"
-      ],
-      "answer": 1,
-      "explanation": "를/을 은 목적격 조사예요. 배구를 하다 = play volleyball. 배구하다도 맞아요!"
-    },
-    {
-      "id": "q3",
-      "question_ko": "'오늘' 뒤에 어떤 조사가 와요?",
-      "question_en": "Which particle comes after 오늘?",
-      "options": [
-        "오늘에",
-        "오늘에서",
-        "오늘 (조사 없음)",
-        "오늘로"
-      ],
-      "answer": 2,
-      "explanation": "어제/오늘/내일에는 -에를 쓰지 않아요! 저녁에 (O) / 오늘에 (X)"
-    },
-    {
-      "id": "q4",
-      "question_ko": "식사 후에 엄마한테 뭐라고 해요?",
-      "question_en": "What do you say to Mom AFTER the meal?",
-      "options": [
-        "잘 먹겠습니다!",
-        "맛있어요!",
-        "잘 먹었습니다!",
-        "고마워요!"
-      ],
-      "answer": 2,
-      "explanation": "식사 후 → 잘 먹었습니다! 항상 음식 만든 분께 인사해요 🙇"
-    },
-    {
-      "id": "q5",
-      "question_ko": "동생을 부를 때 어떻게 해요? (이름: 지수)",
-      "question_en": "How do you call out to your sibling named 지수?",
-      "options": [
-        "지수씨~",
-        "지수아~",
-        "지수야~",
-        "지수님~"
-      ],
-      "answer": 2,
-      "explanation": "지수 = 모음(ㅜ)으로 끝남 → 지수야! 받침 있으면 -아, 없으면 -야 😊"
-    },
-    {
-      "id": "q6",
-      "question_ko": "'모르다'의 존댓말 현재형은?",
-      "question_en": "What is the polite present form of 모르다?",
-      "options": [
-        "모르어요",
-        "모르요",
-        "몰라요",
-        "모릅니다"
-      ],
-      "answer": 2,
-      "explanation": "모르다 → 몰라요 (ㄹ 불규칙). 알다 → 알아요 도 기억하세요!"
-    }
+    {"id":"q1","question_ko":"밥을 먹기 전에 뭐라고 해요?","question_en":"What do you say BEFORE eating?",
+     "options":["잘 먹었습니다","잘 먹겠습니다","맛있게 먹어요","감사합니다"],"answer":1,
+     "explanation":"식사 전 → 잘 먹겠습니다! 식사 후 → 잘 먹었습니다! 😊"},
+    {"id":"q2","question_ko":"'저는 배구를 해요' — '를'은 무슨 조사예요?","question_en":"What kind of particle is 를 here?",
+     "options":["주격 조사 (subject)","목적격 조사 (object)","장소 조사 (location)","시간 조사 (time)"],"answer":1,
+     "explanation":"를/을 은 목적격 조사예요. 배구를 하다 = play volleyball!"},
+    {"id":"q3","question_ko":"'오늘' 뒤에 어떤 조사가 와요?","question_en":"Which particle comes after 오늘?",
+     "options":["오늘에","오늘에서","오늘 (조사 없음)","오늘로"],"answer":2,
+     "explanation":"어제/오늘/내일에는 -에를 쓰지 않아요! 저녁에 (O) / 오늘에 (X)"},
+    {"id":"q4","question_ko":"식사 후에 엄마한테 뭐라고 해요?","question_en":"What do you say to Mom AFTER the meal?",
+     "options":["잘 먹겠습니다!","맛있어요!","잘 먹었습니다!","고마워요!"],"answer":2,
+     "explanation":"식사 후 → 잘 먹었습니다! 🙇"},
+    {"id":"q5","question_ko":"동생을 부를 때 어떻게 해요? (이름: 지수)","question_en":"How do you call out to your sibling named 지수?",
+     "options":["지수씨~","지수아~","지수야~","지수님~"],"answer":2,
+     "explanation":"지수 = 모음(ㅜ)으로 끝남 → 지수야! 받침 있으면 -아, 없으면 -야 😊"},
+    {"id":"q6","question_ko":"'모르다'의 존댓말 현재형은?","question_en":"Polite present form of 모르다?",
+     "options":["모르어요","모르요","몰라요","모릅니다"],"answer":2,
+     "explanation":"모르다 → 몰라요 (ㄹ 불규칙). 알다 → 알아요 도 기억하세요!"}
   ],
   "real_life": [
-    {
-      "title": "🍽️ 친구 집에서 밥 먹기",
-      "title_en": "Eating at a Friend's House",
-      "setup_ko": "친구 집에 초대받았어요. 식탁에 앉았을 때!",
-      "setup_en": "You are invited to a friend's house for dinner. Time to sit at the table!",
-      "lines": [
-        {
-          "speaker": "친구 엄마",
-          "text": "어서 와! 같이 먹자.",
-          "en": "Welcome! Let's eat together."
-        },
-        {
-          "speaker": "나",
-          "text": "감사합니다. 잘 먹겠습니다!",
-          "en": "Thank you. I'll enjoy the meal!"
-        },
-        {
-          "speaker": "친구 엄마",
-          "text": "많이 먹어~",
-          "en": "Eat a lot~"
-        },
-        {
-          "speaker": "나",
-          "text": "엄마, 이거 너무 맛있어요!",
-          "en": "Ma'am, this is so delicious!"
-        },
-        {
-          "speaker": "친구 엄마",
-          "text": "정말? 다행이다~",
-          "en": "Really? I'm glad~"
-        },
-        {
-          "speaker": "나",
-          "text": "잘 먹었습니다!",
-          "en": "Thank you for the meal!"
-        }
-      ]
-    },
-    {
-      "type": "tip",
-      "title": "🇰🇷 한국의 밥상 예절",
-      "content_ko": "한국에서는 식사 전에 '잘 먹겠습니다', 식사 후에 '잘 먹었습니다'라고 꼭 말해요. 어른이 있을 때는 어른이 먼저 숟가락을 드신 후에 먹기 시작해요. 인사말은 casual 존댓말(-어요)보다 formal 존댓말(-습니다)이 더 자연스러워요!",
-      "content_en": "In Korea, always say 잘 먹겠습니다 before eating and 잘 먹었습니다 after. When elders are present, wait for them to start first. For these greetings, the formal -습니다 ending sounds more natural than the casual -어요 form."
-    }
+    {"title":"🍽️ 친구 집에서 밥 먹기","title_en":"Eating at a Friend's House",
+     "setup_ko":"친구 집에 초대받았어요. 식탁에 앉았을 때!","setup_en":"You are invited to a friend's house for dinner.",
+     "lines":[
+       {"speaker":"친구 엄마","text":"어서 와! 같이 먹자.","en":"Welcome! Let's eat together."},
+       {"speaker":"나","text":"감사합니다. 잘 먹겠습니다!","en":"Thank you. I'll enjoy the meal!"},
+       {"speaker":"친구 엄마","text":"많이 먹어~","en":"Eat a lot~"},
+       {"speaker":"나","text":"엄마, 이거 너무 맛있어요!","en":"Ma'am, this is so delicious!"},
+       {"speaker":"친구 엄마","text":"정말? 다행이다~","en":"Really? I'm glad~"},
+       {"speaker":"나","text":"잘 먹었습니다!","en":"Thank you for the meal!"}
+     ]},
+    {"type":"tip","title":"🇰🇷 한국의 밥상 예절",
+     "content_ko":"한국에서는 식사 전에 잘 먹겠습니다, 식사 후에 잘 먹었습니다라고 꼭 말해요. 어른이 있을 때는 어른이 먼저 숟가락을 드신 후에 먹기 시작해요. 인사말은 -어요보다 -습니다가 더 자연스러워요!",
+     "content_en":"Always say 잘 먹겠습니다 before eating and 잘 먹었습니다 after. When elders are present, wait for them to start. The formal -습니다 sounds more natural than -어요 for these greetings."}
   ]
 }
