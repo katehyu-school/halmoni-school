@@ -1594,17 +1594,24 @@ function buildSidebar(){
   ).join('');
 }
 
-function loadEp(epId){
+async function loadEp(epId){
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById('ep-item-'+epId);
   if(item)item.classList.add('active');
-  DATA=EPISODE_DATA[epId]||null;
+  document.getElementById('content-area').innerHTML='<div class="loading">로딩 중…</div>';
+  // Try fetching JSON file first (works on GitHub Pages); fall back to inline EPISODE_DATA (works locally)
+  try{
+    const res=await fetch(`data/nhs/${epId}.json`);
+    if(res.ok) DATA=await res.json();
+    else DATA=EPISODE_DATA[epId]||null;
+  }catch(e){
+    DATA=EPISODE_DATA[epId]||null;
+  }
   if(!DATA){
     document.getElementById('content-area').innerHTML='<div class="loading">⚠️ 에피소드 데이터가 없어요.</div>';
     return;
   }
   qAnswered={};curTab='script';sceneIdx=0;render();
-  setTimeout(()=>{const line=DATA.script[0];speak(line.text,line.audio);},400);
 }
 
 function render(){
@@ -1612,7 +1619,7 @@ function render(){
   const labels=['📽 영상·Script','새어휘 Vocab','문법 Grammar','반말/존댓말','Usage','Quiz','Real Life'];
   document.getElementById('content-area').innerHTML=`
     <div class="ep-header">
-      <div class="ep-num-badge">EP.${DATA.episode} · ${esc(DATA.level)}</div>
+      <div class="ep-num-badge">EP.${(DATA.id||'ep01').replace('ep','')} · ${esc(DATA.level)}</div>
       <div class="ep-title-wrap"><div class="ep-title-kr">${esc(DATA.title)}</div><div class="ep-title-en">${esc(DATA.title_en)}</div></div>
       <div class="ep-scene-badge">${esc(DATA.scene)}</div>
     </div>
@@ -1702,12 +1709,10 @@ function moveScene(dir){
   const next=sceneIdx+dir;
   if(next<0||next>=DATA.script.length)return;
   sceneIdx=next;renderScene();
-  const line=DATA.script[sceneIdx];speak(line.text,line.audio);
 }
 
 function jumpScene(i){
   sceneIdx=i;renderScene();
-  const line=DATA.script[i];speak(line.text,line.audio);
 }
 
 function speakCurrent(){
@@ -1720,7 +1725,6 @@ function randomScene(){
   let next;
   do{next=Math.floor(Math.random()*total);}while(next===sceneIdx&&total>1);
   sceneIdx=next;renderScene();
-  const line=DATA.script[sceneIdx];speak(line.text,line.audio);
 }
 
 function toggleStrip(){
@@ -1918,6 +1922,7 @@ function escA(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 function setLevel(btn){document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 
 window.addEventListener('DOMContentLoaded',()=>{buildSidebar();loadEp('ep01');});
+// moveScene/jumpScene auto-speak removed — 🔊 button only
 </script>
 </body>
 </html>
