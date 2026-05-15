@@ -1336,7 +1336,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <div class="lesson-item active" id="lesson-1" onclick="switchUnit(1)">
     <span class="lesson-num">1과</span>
-    <span class="lesson-title-text">누가 노래해요?</span>
+    <span class="lesson-title-text">강아지가 뭘 해요?</span>
   </div>
   <div class="lesson-item" id="lesson-2" onclick="switchUnit(2)">
     <span class="lesson-num">2과</span>
@@ -1344,32 +1344,32 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <div class="lesson-item" id="lesson-3" onclick="switchUnit(3)">
     <span class="lesson-num">3과</span>
-    <span class="lesson-title-text">언제 수영을 해요?</span>
+    <span class="lesson-title-text">언제 할머니 댁에 가요?</span>
   </div>
 
   <div class="lesson-item" id="lesson-4" onclick="switchUnit(4)">
     <span class="lesson-num">4과</span>
-    <span class="lesson-title-text">장난감 기차가 있어요</span>
+    <span class="lesson-title-text">사과가 어디에 있어요?</span>
   </div>
   <div class="lesson-item" id="lesson-5" onclick="switchUnit(5)">
     <span class="lesson-num">5과</span>
-    <span class="lesson-title-text">구두가 아니에요</span>
+    <span class="lesson-title-text">동물원에 가요</span>
   </div>
   <div class="lesson-item" id="lesson-6" onclick="switchUnit(6)">
     <span class="lesson-num">6과</span>
-    <span class="lesson-title-text">친구 집에서 장난감 배를 만들어요</span>
+    <span class="lesson-title-text">형은 방에서 숙제를 해요</span>
   </div>
   <div class="lesson-item" id="lesson-7" onclick="switchUnit(7)">
     <span class="lesson-num">7과</span>
-    <span class="lesson-title-text">하나, 둘, 셋, 넷</span>
+    <span class="lesson-title-text">숫자 게임을 해요</span>
   </div>
   <div class="lesson-item" id="lesson-8" onclick="switchUnit(8)">
     <span class="lesson-num">8과</span>
-    <span class="lesson-title-text">저는 여섯 살이에요</span>
+    <span class="lesson-title-text">세어 보아요</span>
   </div>
   <div class="lesson-item" id="lesson-9" onclick="switchUnit(9)">
     <span class="lesson-num">9과</span>
-    <span class="lesson-title-text">코끼리가 커요!</span>
+    <span class="lesson-title-text">갈비 너무 맛있어요!</span>
   </div>
 </nav>
 
@@ -1514,7 +1514,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
     <div class="card" id="u1-qcard">
       <span class="quiz-badge coral">1과 · Subject Marker 이/가</span>
-      <div class="scene-box" id="u1-scene">📞</div>
+      <div class="scene-box" id="u1-quiz-deco">📞</div>
       <div class="question-english" id="u1-qenglish">Who is doing what?</div>
       <div class="section-sub" id="u1-qsub">Click a name card, choose 이 or 가, then click the verb card!</div>
 
@@ -1760,6 +1760,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="section-sub">Click each card to flip it!</div>
       <div class="flashcard-grid" id="fc3-verbs"></div>
     </div>
+
+    <div class="card">
+      <div class="section-title">💬 핵심 단어 — Key Words</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc3-words"></div>
+    </div>
   </div>
 
   <!-- GRAMMAR -->
@@ -1776,7 +1782,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
     <div class="card" id="u3-qcard">
       <span class="quiz-badge" style="background:var(--mint);">3과 · 언제 + 을/를</span>
-      <div class="scene-box" id="u3-scene">🏊</div>
+      <div class="scene-box" id="u3-quiz-deco">🏊</div>
       <div class="question-english" id="u3-qenglish">Build the sentence!</div>
       <div class="section-sub" id="u3-qsub">Click or drag cards to build the sentence. Drag inside to reorder!</div>
 
@@ -1863,6 +1869,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="section-sub">Click each card to flip it!</div>
       <div class="flashcard-grid" id="fc4-dolls"></div>
     </div>
+
+    <div class="card">
+      <div class="section-title">📍 위치 & 모양 — Position & Shape Words</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc4-positions"></div>
+    </div>
   </div>
 
   <!-- GRAMMAR -->
@@ -1879,7 +1891,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
     <div class="card" id="u4-qcard">
       <span class="quiz-badge" style="background:var(--lav);">4과 · 있어요 / 없어요</span>
-      <div class="scene-box" id="u4-scene">🚂</div>
+      <div class="scene-box" id="u4-quiz-deco">🚂</div>
       <div class="question-english" id="u4-qenglish">Build the sentence!</div>
       <div class="section-sub">Click or drag cards to build the sentence. Drag inside to reorder!</div>
 
@@ -2015,7 +2027,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="card" id="u5-qcard">
         <span class="quiz-badge" style="background:#FFF0E6;color:#E67E22;">5과 · Step 2 — 문장 만들기</span>
-        <div class="scene-box" id="u5-scene">👗</div>
+        <div class="scene-box" id="u5-quiz-deco">👗</div>
         <div class="question-english" id="u5-qenglish">Build the sentence!</div>
         <div class="section-sub">Click or drag cards to build the sentence. Drag inside to reorder!</div>
 
@@ -2691,6 +2703,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="section-title">📌 형용사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Describing Words</span></div>
       <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">반대말도 같이 익혀요! Learn opposite pairs!</div>
       <div id="u9-pair-grid" style="margin-top:16px;display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🍖 핵심 단어 — Key Words</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc9-words"></div>
     </div>
   </div>
 
@@ -3378,6 +3396,15 @@ function launchConfetti(){
 // ══════════════════════════════════════════
 // UNIT 3 DATA
 // ══════════════════════════════════════════
+
+const newWords3 = [
+  {emoji:'🏠', kr:'집',      en:'house',              rom:'jip'},
+  {emoji:'🏡', kr:'댁',      en:'home (honorific)',    rom:'daek'},
+  {emoji:'🎉', kr:'신난다!', en:'How exciting! / Yay!',rom:'sin-nan-da'},
+  {emoji:'👉', kr:'그럼',    en:'then / well then',   rom:'geu-reom'},
+  {emoji:'📝', kr:'숙제',    en:'homework',            rom:'suk-je'},
+  {emoji:'▶️', kr:'부터',   en:'from / starting with',rom:'bu-teo'},
+];
 const timeWords = [
   {emoji:'🌅',kr:'아침',en:'morning',rom:'achim'},
   {emoji:'🌙',kr:'저녁',en:'evening',rom:'jeonyeok'},
@@ -3397,6 +3424,22 @@ const verbs3 = [
 // ══════════════════════════════════════════
 // UNIT 4 DATA
 // ══════════════════════════════════════════
+
+const positions4 = [
+  {emoji:'❓', kr:'어디',     en:'where?',              rom:'eo-di'},
+  {emoji:'🍎', kr:'사과',     en:'apple',               rom:'sa-gwa'},
+  {emoji:'⬆️', kr:'위',       en:'above / on top',      rom:'wi'},
+  {emoji:'⬇️', kr:'아래',     en:'below / under',       rom:'a-rae'},
+  {emoji:'⬅️', kr:'앞',       en:'in front',            rom:'ap'},
+  {emoji:'➡️', kr:'뒤',       en:'behind / back',       rom:'dwi'},
+  {emoji:'↔️', kr:'옆',       en:'next to / beside',    rom:'yeop'},
+  {emoji:'🔵', kr:'안',       en:'inside',              rom:'an'},
+  {emoji:'⚪', kr:'밖',       en:'outside',             rom:'bak'},
+  {emoji:'↕️', kr:'사이',     en:'between',             rom:'sa-i'},
+  {emoji:'⭕', kr:'동그라미', en:'circle',              rom:'dong-geu-ra-mi'},
+  {emoji:'🟥', kr:'네모',     en:'square / rectangle',  rom:'ne-mo'},
+  {emoji:'🔺', kr:'세모',     en:'triangle',            rom:'se-mo'},
+];
 const toys4 = [
   {emoji:'🚂', kr:'장난감 기차', en:'toy train', rom:'jangnan-gam gi-cha'},
   {emoji:'✈️', kr:'장난감 비행기', en:'toy airplane', rom:'jangnan-gam bi-haeng-gi'},
@@ -4194,7 +4237,10 @@ let u6PlaceVocab = [
 ];
 let u6VerbVocab = [
   {emoji:'🛠️', kr:'만들어요',   en:'make(s)',         rom:'man-deul-eo-yo'},
-  {emoji:'🧃',  kr:'사요',       en:'buy(s)',          rom:'sa-yo'}
+  {emoji:'🧃',  kr:'사요',       en:'buy(s)',          rom:'sa-yo'},
+  {emoji:'🍳',  kr:'요리를 해요',en:'cook(s)',         rom:'yo-ri-reul hae-yo'},
+  {emoji:'🍽️', kr:'준비해요',   en:'prepare(s)',      rom:'jun-bi-hae-yo'},
+  {emoji:'📝',  kr:'숙제',       en:'homework',        rom:'suk-je'},
 ];
 
 // 연습 — 빈칸 채우기
@@ -6190,7 +6236,13 @@ function renderU9Vocab(data) {
         <div style="font-size:0.8rem;color:#666;font-family:'Nanum Gothic',sans-serif;margin:2px 0;">${p.subj_neg}</div>
         <div style="font-size:1.35rem;font-weight:900;color:#E65100;font-family:'Nanum Gothic',sans-serif;">${p.negative}</div>
         <div style="font-size:0.75rem;color:#555;font-family:'Nanum Gothic',sans-serif;">${p.negative_en}</div>
-      </div>
+    
+    <div class="card">
+      <div class="section-title">💬 핵심 단어 — Key Words</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc7-words"></div>
+    </div>
+  </div>
     </div>`).join('');
 }
 
@@ -6571,8 +6623,12 @@ async function init(){
   buildFlashcards('fc2-verbs',verbs2,'green');
   buildFlashcards('fc3-time',timeWords,'mint');
   buildFlashcards('fc3-verbs',verbs3,'green');
+  buildFlashcards('fc3-words',newWords3,'sun');
+  buildFlashcards('fc4-positions',positions4,'sky');
   buildFlashcards('fc4-toys',toys4,'lav');
   buildFlashcards('fc4-dolls',dolls4,'coral');
+  buildFlashcards('fc7-words',words7,'mint');
+  buildFlashcards('fc9-words',words9,'coral');
   renderU1(); renderU2(); renderU3(); renderU4(); renderS1(); renderS5();
   renderU6Fill(); renderU6Part1();
   renderU8L(); renderU8B();
@@ -6842,8 +6898,8 @@ function sceneTo(n, idx) {
   } else {
     // combined: 한 파일에 여러 문장 합쳐진 경우 — 텍스트 나눠 표시, 재생 버튼 하나
     if(lines[0].combined){
-      const sentences = lines[0].ko.split(/\. +|(?<=요)\. |(?<=요)\.|(?<=아)\. /);
-      const enSentences = lines[0].en.split(/\. +/);
+      const sentences = lines[0].ko.split(/\. +|(?<=요)\. |(?<=요)\.|(?<=아)\. /).filter(s=>s.trim());
+      const enSentences = lines[0].en.split(/\. +/).filter(s=>s.trim());
       const textHtml = sentences.map((s,si)=>`
         <div class="u2-script-line" style="border-bottom:${si<sentences.length-1?'1px dashed #eee':'none'}">
           ${si===0?'<button class="u2-script-play" id="u'+n+'-play-'+idx+'-0" onclick="scenePlayAudio('+n+','+idx+')">🔊</button>':'<span style="width:34px;flex-shrink:0"></span>'}
@@ -6885,7 +6941,8 @@ function sceneGo(n, dir){
 function scenePlayLine(n, slideIdx, lineIdx){
   const d=SCENE_DATA[n]; if(!d) return;
   const line=(d.script[slideIdx]||[])[lineIdx];
-  if(!line||!line.audio) return;
+  if(!line) return;
+  if(!line.audio){ _sceneTTS(line.ko); return; }
   const st=sceneState[n]||{idx:slideIdx,audio:null};
   if(st.audio){st.audio.pause();st.audio=null;}
   document.querySelectorAll('#u'+n+'-script-box .u2-script-play').forEach(b=>b.classList.remove('playing'));
@@ -6961,6 +7018,30 @@ function sceneReplay(n){
   playNext();
 }
 
+
+const words7 = [
+  {emoji:'🔢', kr:'숫자',      en:'number',          rom:'sut-ja'},
+  {emoji:'👫', kr:'우리',      en:'we / our',        rom:'u-ri'},
+  {emoji:'👥', kr:'모두',      en:'everyone / all',  rom:'mo-du'},
+  {emoji:'🧑', kr:'사람',      en:'person / people', rom:'sa-ram'},
+  {emoji:'🎮', kr:'놀이',      en:'game / play',     rom:'no-ri'},
+  {emoji:'📖', kr:'읽어 봐요', en:"let's read",      rom:'il-geo bwa-yo'},
+  {emoji:'🔢', kr:'세어 봐요', en:"let's count",     rom:'se-eo bwa-yo'},
+];
+
+const words9 = [
+  {emoji:'🎂', kr:'생일',      en:'birthday',              rom:'saeng-il'},
+  {emoji:'🎊', kr:'생신',      en:'birthday (honorific)',   rom:'saeng-sin'},
+  {emoji:'🏡', kr:'마당',      en:'yard / garden',         rom:'ma-dang'},
+  {emoji:'🥩', kr:'갈비',      en:'ribs / galbi',          rom:'gal-bi'},
+  {emoji:'🔥', kr:'숯불 갈비', en:'charcoal BBQ ribs',     rom:'sut-bul gal-bi'},
+  {emoji:'🌽', kr:'옥수수',    en:'corn',                  rom:'ok-su-su'},
+  {emoji:'🐟', kr:'생선',      en:'fish (food)',            rom:'saeng-seon'},
+  {emoji:'😊', kr:'좋아요',    en:'like it / good',        rom:'jo-a-yo'},
+  {emoji:'😒', kr:'싫어요',    en:"don't like it",         rom:'si-reo-yo'},
+  {emoji:'💚', kr:'좋아해요',  en:'likes',                 rom:'jo-a-hae-yo'},
+  {emoji:'💔', kr:'싫어해요',  en:'dislikes',              rom:'si-reo-hae-yo'},
+];
 // ══════════════════════════════════════════
 // UNIT 2 SCENE VIEWER
 // ══════════════════════════════════════════
