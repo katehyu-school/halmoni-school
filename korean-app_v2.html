@@ -1463,15 +1463,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit active" id="unit1">
  <div class="unit-heading">
   <span class="unit-num">1</span>
-  <span class="unit-title">누가 노래해요?</span>
+  <span class="unit-title">강아지가 뭘 해요?</span>
 </div>
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(1,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(1)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection(1,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(1,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection(1,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
+  <!-- SCENE VIEWER u1 -->
+  <div class="section" id="u1-scene">
+    <div class="card">
+      <div class="section-title">🎬 1과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u1-slide-subtitle">강아지가 뭘 해요?</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u1-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u1-prev-btn" onclick="sceneGo(1,-1)">◀</button>
+          <div class="u2-slide-dots" id="u1-slide-dots"></div>
+          <button class="u2-nav-btn" id="u1-next-btn" onclick="sceneGo(1,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u1-script-box"></div>
+        <button class="u2-replay-btn" id="u1-replay-btn" onclick="sceneReplay(1)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u1-vocab">
     <div class="card">
       <div class="section-title">🏃 뭘해요? — What do they do?</div>
@@ -1700,15 +1720,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit3">
  <div class="unit-heading">
   <span class="unit-num">3</span>
-  <span class="unit-title">언제 수영을 해요?</span>
+  <span class="unit-title">언제 할머니 댁에 가요?</span>
 </div>
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(3,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(3)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection(3,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(3,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection(3,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
+  <!-- SCENE VIEWER u3 -->
+  <div class="section" id="u3-scene">
+    <div class="card">
+      <div class="section-title">🎬 3과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u3-slide-subtitle">언제 할머니 댁에 가요?</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u3-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u3-prev-btn" onclick="sceneGo(3,-1)">◀</button>
+          <div class="u2-slide-dots" id="u3-slide-dots"></div>
+          <button class="u2-nav-btn" id="u3-next-btn" onclick="sceneGo(3,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u3-script-box"></div>
+        <button class="u2-replay-btn" id="u3-replay-btn" onclick="sceneReplay(3)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u3-vocab">
     <div class="card">
       <div class="section-title">⏰ 언제? — Time Expressions</div>
@@ -1783,15 +1823,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit4">
   <div class="unit-heading">
     <span class="unit-num">4</span>
-    <span class="unit-title">장난감 기차가 있어요</span>
+    <span class="unit-title">사과가 어디에 있어요?</span>
   </div>
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(4,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(4)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection(4,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(4,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection(4,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
+  <!-- SCENE VIEWER u4 -->
+  <div class="section" id="u4-scene">
+    <div class="card">
+      <div class="section-title">🎬 4과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u4-slide-subtitle">사과가 어디에 있어요?</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u4-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u4-prev-btn" onclick="sceneGo(4,-1)">◀</button>
+          <div class="u2-slide-dots" id="u4-slide-dots"></div>
+          <button class="u2-nav-btn" id="u4-next-btn" onclick="sceneGo(4,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u4-script-box"></div>
+        <button class="u2-replay-btn" id="u4-replay-btn" onclick="sceneReplay(4)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u4-vocab">
     <div class="card">
       <div class="section-title">🚂 장난감 — Toys</div>
@@ -1864,15 +1924,35 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit5">
   <div class="unit-heading">
     <span class="unit-num">5</span>
-    <span class="unit-title">구두가 아니에요</span>
+    <span class="unit-title">동물원에 가요</span>
   </div>
   <nav class="section-nav">
-    <button class="snav-btn active" onclick="switchSection(5,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(5)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection(5,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(5,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection(5,'quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
   </nav>
 
   <!-- VOCAB -->
+  <!-- SCENE VIEWER u5 -->
+  <div class="section" id="u5-scene">
+    <div class="card">
+      <div class="section-title">🎬 5과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u5-slide-subtitle">동물원에 가요</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u5-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u5-prev-btn" onclick="sceneGo(5,-1)">◀</button>
+          <div class="u2-slide-dots" id="u5-slide-dots"></div>
+          <button class="u2-nav-btn" id="u5-next-btn" onclick="sceneGo(5,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u5-script-box"></div>
+        <button class="u2-replay-btn" id="u5-replay-btn" onclick="sceneReplay(5)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u5-vocab">
     <div class="card">
       <div class="section-title">👗 의류 — Clothes</div>
@@ -1981,10 +2061,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit6">
   <div class="unit-heading">
     <span class="unit-num">6</span>
-    <span class="unit-title">친구 집에서 장난감 배를 만들어요</span>
+    <span class="unit-title">형은 방에서 숙제를 해요</span>
   </div>
   <nav class="section-nav" id="u6-snav">
-    <button class="snav-btn active" onclick="switchSection6('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(6)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection6('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection6('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection6('quiz')">✏️ 연습 <span class="snav-en">Practice</span></button>
     <button class="snav-btn" onclick="switchSection6('life')">🌍 실생활 <span class="snav-en">Real Life</span></button>
@@ -1993,6 +2074,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   </nav>
 
   <!-- ── VOCAB ── -->
+  <!-- SCENE VIEWER u6 -->
+  <div class="section" id="u6-scene">
+    <div class="card">
+      <div class="section-title">🎬 6과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u6-slide-subtitle">형은 방에서 숙제를 해요</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u6-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u6-prev-btn" onclick="sceneGo(6,-1)">◀</button>
+          <div class="u2-slide-dots" id="u6-slide-dots"></div>
+          <button class="u2-nav-btn" id="u6-next-btn" onclick="sceneGo(6,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u6-script-box"></div>
+        <button class="u2-replay-btn" id="u6-replay-btn" onclick="sceneReplay(6)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u6-vocab">
     <div class="card">
       <div class="section-title">📍 장소 — Places</div>
@@ -2283,16 +2383,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit7">
   <div class="unit-heading">
     <span class="unit-num">7</span>
-    <span class="unit-title">하나, 둘, 셋, 넷</span>
+    <span class="unit-title">숫자 게임을 해요</span>
   </div>
   <nav class="section-nav" id="u7-snav">
-    <button class="snav-btn active" onclick="switchSection7('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(7)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection7('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection7('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
     <button class="snav-btn" onclick="switchSection7('write')">✏️ 쓰기 Write</button>
     <button class="snav-btn" onclick="switchSection7('batchim')">🧩 받침 게임 <span class="snav-en">Game</span></button>
   </nav>
 
   <!-- ── VOCAB ── -->
+  <!-- SCENE VIEWER u7 -->
+  <div class="section" id="u7-scene">
+    <div class="card">
+      <div class="section-title">🎬 7과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u7-slide-subtitle">숫자 게임을 해요</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u7-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u7-prev-btn" onclick="sceneGo(7,-1)">◀</button>
+          <div class="u2-slide-dots" id="u7-slide-dots"></div>
+          <button class="u2-nav-btn" id="u7-next-btn" onclick="sceneGo(7,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u7-script-box"></div>
+        <button class="u2-replay-btn" id="u7-replay-btn" onclick="sceneReplay(7)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u7-vocab">
     <div class="card">
       <div class="section-title">📌 Sino-Korean Numbers <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">한자어 숫자</span></div>
@@ -2424,16 +2544,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit8">
   <div class="unit-heading">
     <span class="unit-num">8</span>
-    <span class="unit-title">저는 여섯 살이에요</span>
+    <span class="unit-title">세어 보아요</span>
   </div>
   <nav class="section-nav" id="u8-snav">
-    <button class="snav-btn active" onclick="switchSection8('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(8)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection8('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection8('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection8('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
     <button class="snav-btn" onclick="switchSection8('batchim')">🧩 받침 <span class="snav-en">Game</span></button>
   </nav>
 
   <!-- ── VOCAB ── -->
+  <!-- SCENE VIEWER u8 -->
+  <div class="section" id="u8-scene">
+    <div class="card">
+      <div class="section-title">🎬 8과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u8-slide-subtitle">세어 보아요</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u8-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u8-prev-btn" onclick="sceneGo(8,-1)">◀</button>
+          <div class="u2-slide-dots" id="u8-slide-dots"></div>
+          <button class="u2-nav-btn" id="u8-next-btn" onclick="sceneGo(8,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u8-script-box"></div>
+        <button class="u2-replay-btn" id="u8-replay-btn" onclick="sceneReplay(8)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u8-vocab">
     <div class="card">
       <div class="section-title">📌 단위명사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Counting Words</span></div>
@@ -2516,16 +2656,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit9">
   <div class="unit-heading">
     <span class="unit-num">9</span>
-    <span class="unit-title">코끼리가 커요!</span>
+    <span class="unit-title">갈비 너무 맛있어요!</span>
   </div>
   <nav class="section-nav" id="u9-snav">
-    <button class="snav-btn active" onclick="switchSection9('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
+    <button class="snav-btn" onclick="switchScene(9)">🎬 영상 <span class="snav-en">Scene</span></button>
+    <button class="snav-btn" onclick="switchSection9('vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection9('grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
     <button class="snav-btn" onclick="switchSection9('listen')">🔊 듣기 <span class="snav-en">Listen</span></button>
     <button class="snav-btn" onclick="switchSection9('game')">✅ 게임 <span class="snav-en">Game</span></button>
   </nav>
 
   <!-- ── VOCAB ── -->
+  <!-- SCENE VIEWER u9 -->
+  <div class="section" id="u9-scene">
+    <div class="card">
+      <div class="section-title">🎬 9과 영상 · Scene Viewer</div>
+      <div class="section-sub" id="u9-slide-subtitle">갈비 너무 맛있어요!</div>
+      <div class="u2-scene-viewer">
+        <div class="u2-slide-wrap">
+          <img class="u2-slide-img" id="u9-slide-img" src="" alt="slide" />
+        </div>
+        <div class="u2-slide-nav">
+          <button class="u2-nav-btn" id="u9-prev-btn" onclick="sceneGo(9,-1)">◀</button>
+          <div class="u2-slide-dots" id="u9-slide-dots"></div>
+          <button class="u2-nav-btn" id="u9-next-btn" onclick="sceneGo(9,1)">▶</button>
+        </div>
+        <div class="u2-script-box" id="u9-script-box"></div>
+        <button class="u2-replay-btn" id="u9-replay-btn" onclick="sceneReplay(9)">🔁 Replay</button>
+      </div>
+    </div>
+  </div>
   <div class="section active" id="u9-vocab">
     <div class="card">
       <div class="section-title">📌 형용사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Describing Words</span></div>
@@ -2879,19 +3039,14 @@ function switchUnit(n){
     if (el) el.classList.toggle('active', i===n);
   });
   document.getElementById('unit'+n).classList.add('active');
-  if (n === 6) { switchSection6('vocab'); }
-  else if (n === 7) { switchSection7('vocab'); }
-  else if (n === 8) { switchSection8('vocab'); }
-  else if (n === 9) { switchSection9('vocab'); }
-  else if (n === 2) { switchSection2('scene'); }
-  else { switchSection(n, 'vocab'); }
+  switchScene(n);
   window.scrollTo(0,0);
 }function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
   u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('u'+unit+'-'+sec).classList.add('active');
-  const map = {vocab:0, grammar:1, quiz:2};
+  const map = {scene:0, vocab:1, grammar:2, quiz:3};
   u.querySelectorAll('.snav-btn')[map[sec]].classList.add('active');
   const bar = document.getElementById('practice-bar');
   if (bar) {
@@ -4146,6 +4301,7 @@ let u7BVotes  = {};   // { "안나": "ㄹ" }
 let u7BPlaced = {};   // { "안나": ["ㄹ","ㅂ"] } 학생이 놓은 받침
 
 function switchSection7(sec) {
+  if(sec==='scene'){switchScene(7);return;}
   const tabs = ['vocab','listen','write','batchim'];
   document.querySelectorAll('#u7-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
@@ -5045,7 +5201,8 @@ function switchSection6(sec) {
   const u = document.getElementById('unit6');
   u.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('u6-' + sec).classList.add('active');
-  const map = { vocab:0, grammar:1, quiz:2, life:3, listen:4, build:5 };
+  const map = { scene:-1, vocab:0, grammar:1, quiz:2, life:3, listen:4, build:5 };
+  if(sec==='scene'){switchScene(6);return;}
   const btns = document.querySelectorAll('#u6-snav .snav-btn');
   btns.forEach(b => b.classList.remove('active'));
   if (btns[map[sec]]) btns[map[sec]].classList.add('active');
@@ -5579,6 +5736,7 @@ let u8Data   = null;
 let u8Score  = { listen: 0, batchim: 0, sort: 0 };
 
 function switchSection8(sec) {
+  if(sec==='scene'){switchScene(8);return;}
   const tabs = ['vocab','grammar','listen','batchim'];
   document.querySelectorAll('#u8-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
@@ -6002,6 +6160,7 @@ function restartU8S(){
 let u9Score = { listen: 0, ox: 0, sort: 0 };
 
 function switchSection9(sec) {
+  if(sec==='scene'){switchScene(9);return;}
   const tabs = ['vocab','grammar','listen','game'];
   document.querySelectorAll('#u9-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
@@ -6421,6 +6580,387 @@ async function init(){
 }
 init();
 
+
+// ══════════════════════════════════════════════════════
+// SCENE ENGINE — Units 1,3,4,5,6,7,8,9
+// ══════════════════════════════════════════════════════
+
+// TTS 헬퍼: speakKorean 이미 존재하면 그대로 사용
+function _sceneTTS(text){ if(typeof speakKorean==='function')speakKorean(text); }
+
+// 씬 데이터 (슬라이드·스크립트 매핑)
+// audio:null → Web Speech TTS  /  combined:true → 한 파일에 여러 문장 합침
+const SCENE_DATA = {
+
+  1: {
+    title: '강아지가 뭘 해요?',
+    slides: [
+      'data/elem/slides/L2_01/강아지가뭘해요1.png',
+      'data/elem/slides/L2_01/강아지가뭘해요2.png',
+      'data/elem/slides/L2_01/강아지가뭘해요3.png',
+      'data/elem/slides/L2_01/강아지가뭘해요4.png',
+    ],
+    script: [
+      [{ko:'강아지가 뭘 해요?',              en:'What does the dog do?',          audio:'data/elem/TTS/L2_01/강아지가뭘해요1_slide1.mp3'}],
+      [{ko:'강아지가 자요.',                  en:'The dog sleeps.',                audio:'data/elem/TTS/L2_01/강아지가자요2_slide2_.mp3'}],
+      [{ko:'고양이가 뭘 해요?',              en:'What does the cat do?',          audio:'data/elem/TTS/L2_01/고양이가뭘해요3_slide3.mp3'}],
+      [{ko:'고양이가 텔레비전을 봐요.',      en:'The cat watches TV.',            audio:'data/elem/TTS/L2_01/고양이가텔레비전을봐요4_slide4.mp3'}],
+    ]
+  },
+
+  3: {
+    title: '언제 할머니 댁에 가요?',
+    slides: [
+      'data/elem/slides/L2_03/언제할머니댁에가요1.png',
+      'data/elem/slides/L2_03/언제할머니댁에가요2.png',
+      'data/elem/slides/L2_03/언제할머니댁에가요3.png',
+      'data/elem/slides/L2_03/언제할머니댁에가요4.png',
+    ],
+    script: [
+      [{ko:'엄마가 할머니하고 전화를 해요.',        en:'Mom is on the phone with grandma.',      audio:'data/elem/TTS/L2_03/엄마가+할머니하고+전화를+해요_slide1.mp3'}],
+      [
+        {ko:'엄마, 언제 할머니 댁에 가요?',         en:'Mom, when are we going to grandma\'s?',  audio:'data/elem/TTS/L2_03/엄마+언제+할머니+댁에+가요_slide2.mp3'},
+        {ko:'내일 할머니 댁에 가.',                en:'We\'re going to grandma\'s tomorrow.',    audio:'data/elem/TTS/L2_03/내일+할머니+댁에+가_slide2.mp3'},
+      ],
+      [
+        {ko:'우아! 신난다!',                       en:'Wow! I\'m so excited!',                  audio:'data/elem/TTS/L2_03/우아+신난다!slide3.mp3'},
+        {ko:'그럼 숙제부터 할까?',                  en:'Then shall we do homework first?',       audio:'data/elem/TTS/L2_03/그럼+숙제부터+할까_slide3.mp3'},
+      ],
+      [{ko:'네!',                               en:'Yes!',                                   audio:'data/elem/TTS/L2_03/네_slide4.mp3'}],
+    ]
+  },
+
+  4: {
+    title: '사과가 어디에 있어요?',
+    slides: [
+      'data/elem/slides/L2_04/사과가어디에있어요1.png',
+      'data/elem/slides/L2_04/사과가어디에있어요2.png',
+      'data/elem/slides/L2_04/사과가어디에있어요3.png',
+      'data/elem/slides/L2_04/사과가어디에있어요4.png',
+      'data/elem/slides/L2_04/사과가어디에있어요5.png',
+      'data/elem/slides/L2_04/사과가어디에있어요6.png',
+      'data/elem/slides/L2_04/사과가어디에있어요7.png',
+      'data/elem/slides/L2_04/사과가어디에있어요8.png',
+      'data/elem/slides/L2_04/사과가어디에있어요9.png',
+      'data/elem/slides/L2_04/사과가어디에있어요10.png',
+    ],
+    script: [
+      [{ko:'사과가 어디에 있어요?',            en:'Where is the apple?',                        audio:null}],
+      [{ko:'위. 사과가 의자 위에 있어요.',      en:'Above. The apple is above the chair.',       audio:null}],
+      [{ko:'아래. 사과가 의자 아래에 있어요.',  en:'Below. The apple is below the chair.',       audio:null}],
+      [{ko:'옆. 사과가 의자 옆에 있어요.',     en:'Next to. The apple is next to the chair.',  audio:null}],
+      [{ko:'앞. 사과가 의자 앞에 있어요.',     en:'In front. The apple is in front of the chair.', audio:null}],
+      [{ko:'뒤. 사과가 의자 뒤에 있어요.',     en:'Behind. The apple is behind the chair.',    audio:null}],
+      [{ko:'사이. 사과가 아이들 사이에 있어요.',en:'Between. The apple is between the children.',audio:null}],
+      [{ko:'안. 사과가 동그라미 안에 있어요.',  en:'Inside. The apple is inside the circle.',   audio:null}],
+      [{ko:'밖. 사과가 동그라미 밖에 있어요.',  en:'Outside. The apple is outside the circle.', audio:null}],
+      [
+        {ko:'사과가 있어요?',                  en:'Is there an apple?',                        audio:null},
+        {ko:'아니요. 없어요.',                 en:'No. There isn\'t.',                         audio:null},
+      ],
+    ]
+  },
+
+  5: {
+    title: '동물원에 가요',
+    slides: [
+      'data/elem/slides/L2_05/동물원에가요1.png',
+      'data/elem/slides/L2_05/동물원에가요2.png',
+      'data/elem/slides/L2_05/동물원에가요3.png',
+    ],
+    script: [
+      [{ko:'오늘 우리 가족은 동물원에 가요.',          en:'Today our family goes to the zoo.',              audio:'data/elem/TTS/L2_05/오늘+우리+가족은+동물원에+가요1_slide1.mp3'}],
+      [
+        {ko:'호랑이가 무서워.',                       en:'The tiger is scary.',                            audio:'data/elem/TTS/L2_05/호랑이가+무서워2_slide2.mp3'},
+        {ko:'엄마, 호랑이가 아니에요. 표범이에요.',    en:'Mom, that\'s not a tiger. It\'s a leopard.',     audio:'data/elem/TTS/L2_05/엄마+호랑이가+아니에요_+표범이에요3_slide2.mp3'},
+      ],
+      [{ko:'표범은 빨라요.',                         en:'The leopard is fast.',                            audio:'data/elem/TTS/L2_05/표범은+빨라요4_slide3.mp3'}],
+    ]
+  },
+
+  6: {
+    title: '형은 방에서 숙제를 해요',
+    slides: [
+      'data/elem/slides/L2_06/형은방에서숙제를해요1.png',
+      'data/elem/slides/L2_06/형은방에서숙제를해요2.png',
+      'data/elem/slides/L2_06/형은방에서숙제를해요3.png',
+      'data/elem/slides/L2_06/형은방에서숙제를해요4.png',
+      'data/elem/slides/L2_06/형은방에서숙제를해요5.png',
+    ],
+    script: [
+      // Slide 1: 두 문장이 한 파일에 합쳐짐 (combined)
+      [{ko:'아빠는 요리를 해요. 엄마는 식탁을 준비해요.', en:'Dad is cooking. Mom is setting the table.', audio:'data/elem/TTS/L2_06/1아빠는+요리를+해요_+엄마는+식탁을+준비해요_slide1.mp3', combined:true}],
+      [{ko:'누리야, 형은 어디 있어?',                    en:'Nuri, where is older brother?',              audio:'data/elem/TTS/L2_06/2누라야+형은+어디+있어_slide2.mp3'}],
+      [{ko:'형은 방에 있어요.',                          en:'Older brother is in his room.',              audio:'data/elem/TTS/L2_06/3형은+방에+있어요_slide3.mp3'}],
+      [{ko:'방에서 뭐 해?',                             en:'What is he doing in the room?',              audio:'data/elem/TTS/L2_06/4방에서+뭐+해_slide4.mp3'}],
+      [{ko:'형은 방에서 숙제를 해요.',                   en:'Older brother is doing homework in his room.', audio:'data/elem/TTS/L2_06/5형은+방에서+숙제를+해요_sllie5.mp3'}],
+    ]
+  },
+
+  7: {
+    title: '숫자 게임을 해요',
+    slides: [
+      'data/elem/slides/L2_07/숫자게임을해요1.png',
+      'data/elem/slides/L2_07/숫자게임을해요2.png',
+      'data/elem/slides/L2_07/숫자게임을해요3.png',
+      'data/elem/slides/L2_07/숫자게임을해요4.png',
+      'data/elem/slides/L2_07/숫자게임을해요5.png',
+    ],
+    script: [
+      [{ko:'우리는 숫자 게임을 해요.',                          en:'We play a number game.',              audio:null}],
+      [
+        {ko:'숫자를 읽어 봐요.',                               en:'Let\'s read the numbers.',            audio:null},
+        {ko:'일, 이, 삼, 사, 오, 육, 칠, 팔, 구, 십',         en:'1, 2, 3, 4, 5, 6, 7, 8, 9, 10',      audio:null},
+      ],
+      [{ko:'3, 6, 9 놀이를 해요.',                            en:'Let\'s play the 3-6-9 game.',         audio:null}],
+      [
+        {ko:'숫자를 세어 봐요.',                               en:'Let\'s count the numbers.',           audio:null},
+        {ko:'하나, 둘, 셋, 넷, 다섯, 여섯, 일곱, 여덟, 아홉, 열', en:'1, 2, 3, 4, 5, 6, 7, 8, 9, 10',  audio:null},
+      ],
+      [{ko:'모두 같이 세어 봐요!',                             en:'Let\'s all count together!',          audio:null}],
+    ]
+  },
+
+  8: {
+    title: '세어 보아요',
+    slides: [
+      'data/elem/slides/L2_08/세어보아요1.png',
+      'data/elem/slides/L2_08/세어보아요2.png',
+      'data/elem/slides/L2_08/세어보아요3.png',
+      'data/elem/slides/L2_08/세어보아요4.png',
+      'data/elem/slides/L2_08/세어보아요5.png',
+    ],
+    script: [
+      [{ko:'몇 살? 하나 — 한 살',    en:'How old? One — 1 year old',         audio:null}],
+      [{ko:'몇 개? 둘 — 두 개',      en:'How many things? Two — 2 things',   audio:null}],
+      [{ko:'몇 사람? 셋 — 세 사람',  en:'How many people? Three — 3 people', audio:null}],
+      [{ko:'몇 마리? 넷 — 네 마리',  en:'How many animals? Four — 4 animals',audio:null}],
+      [{ko:'몇 잔? 다섯 — 다섯 잔',  en:'How many cups? Five — 5 cups',      audio:null}],
+    ]
+  },
+
+  9: {
+    title: '갈비 너무 맛있어요!',
+    slides: [
+      'data/elem/slides/L2_09/갈비가맛있어요1.png',
+      'data/elem/slides/L2_09/갈비가맛있어요2.png',
+      'data/elem/slides/L2_09/갈비가맛있어요3.png',
+      'data/elem/slides/L2_09/갈비가맛있어요4.png',
+    ],
+    script: [
+      // 각 슬라이드마다 여러 문장이 한 파일에 합쳐짐 (combined)
+      [{ko:'할아버지 생신이에요. 마당에서 갈비를 구워요.',         en:"It's grandpa's birthday. We grill galbi in the yard.",                audio:'data/elem/TTS/L2_09/1할아버지+생신이에요_+마당에서+갈비를+구워요_slide1.mp3', combined:true}],
+      [{ko:'숯불 갈비가 맛있어요. 옥수수는 더 맛있어요.',         en:'Charcoal galbi is delicious. Corn is even more delicious.',           audio:'data/elem/TTS/L2_09/2숯불+갈비가+맛있어요_+옥수수는+더+맛있어요_slide2.mp3', combined:true}],
+      [{ko:'생선은 싫어요. 맛없어요. 형은 모두 좋아해요.',        en:"I don't like fish. It's not tasty. Older brother likes everything.",  audio:'data/elem/TTS/L2_09/3생선은+싫어요_+맛없어요_+형은+모두+좋아해요_slide3.mp3', combined:true}],
+      [{ko:'할아버지, 고맙습니다!',                              en:'Grandpa, thank you!',                                                 audio:'data/elem/TTS/L2_09/4할아버지+고맙습니다_slide4.mp3'}],
+    ]
+  },
+};
+
+// 씬 상태
+const sceneState = {};
+
+// 씬 탭 진입 함수 — switchUnit에서 호출
+function switchScene(n) {
+  // 각 unit의 section/nav 활성화
+  if(n===2){ switchSection2('scene'); return; }
+  if(n===6){ 
+    const u=document.getElementById('unit6');
+    u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById('u6-scene').classList.add('active');
+    const btns=document.querySelectorAll('#u6-snav .snav-btn');
+    btns.forEach(b=>b.classList.remove('active'));
+    btns[0].classList.add('active');
+    sceneInit(6); return;
+  }
+  if(n===7){
+    document.querySelectorAll('#unit7 .section').forEach(s=>s.classList.remove('active'));
+    document.getElementById('u7-scene').classList.add('active');
+    document.querySelectorAll('#u7-snav .snav-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+    sceneInit(7); return;
+  }
+  if(n===8){
+    document.querySelectorAll('#unit8 .section').forEach(s=>s.classList.remove('active'));
+    document.getElementById('u8-scene').classList.add('active');
+    document.querySelectorAll('#u8-snav .snav-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+    sceneInit(8); return;
+  }
+  if(n===9){
+    document.querySelectorAll('#unit9 .section').forEach(s=>s.classList.remove('active'));
+    document.getElementById('u9-scene').classList.add('active');
+    document.querySelectorAll('#u9-snav .snav-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+    sceneInit(9); return;
+  }
+  // Units 1,3,4,5 — generic
+  const u=document.getElementById('unit'+n);
+  u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('u'+n+'-scene').classList.add('active');
+  u.querySelectorAll('.snav-btn')[0].classList.add('active');
+  const bar=document.getElementById('practice-bar');
+  if(bar)bar.classList.remove('visible');
+  sceneInit(n);
+}
+
+function sceneInit(n) {
+  const d = SCENE_DATA[n];
+  if(!d) return;
+  sceneState[n] = {idx:0, audio:null};
+  // 제목 업데이트
+  const sub = document.getElementById('u'+n+'-slide-subtitle');
+  if(sub) sub.textContent = d.title;
+  // 도트 생성
+  const dots = document.getElementById('u'+n+'-slide-dots');
+  if(!dots) return;
+  dots.innerHTML = d.slides.map((_,i)=>
+    '<div class="u2-slide-dot'+(i===0?' active':'')+'" onclick="sceneTo('+n+','+i+')"></div>'
+  ).join('');
+  sceneTo(n, 0);
+}
+
+function sceneTo(n, idx) {
+  const d = SCENE_DATA[n];
+  if(!d || !sceneState[n]) return;
+  sceneState[n].idx = idx;
+  // 이미지
+  const img = document.getElementById('u'+n+'-slide-img');
+  if(img) img.src = d.slides[idx];
+  // 도트
+  document.querySelectorAll('#u'+n+'-slide-dots .u2-slide-dot').forEach((dot,i)=>
+    dot.classList.toggle('active', i===idx));
+  // 버튼
+  const prev = document.getElementById('u'+n+'-prev-btn');
+  const next = document.getElementById('u'+n+'-next-btn');
+  if(prev) prev.disabled = (idx===0);
+  if(next) next.disabled = (idx===d.slides.length-1);
+  // 스크립트 렌더
+  const box = document.getElementById('u'+n+'-script-box');
+  if(!box) return;
+  const lines = d.script[idx] || [];
+  if(lines.length===0){
+    box.innerHTML = '<div class="u2-script-empty">— 대사 없음 —</div>';
+  } else {
+    // combined: 한 파일에 여러 문장 합쳐진 경우 — 텍스트 나눠 표시, 재생 버튼 하나
+    if(lines[0].combined){
+      const sentences = lines[0].ko.split(/\. +|(?<=요)\. |(?<=요)\.|(?<=아)\. /);
+      const enSentences = lines[0].en.split(/\. +/);
+      const textHtml = sentences.map((s,si)=>`
+        <div class="u2-script-line" style="border-bottom:${si<sentences.length-1?'1px dashed #eee':'none'}">
+          ${si===0?'<button class="u2-script-play" id="u'+n+'-play-'+idx+'-0" onclick="scenePlayAudio('+n+','+idx+')">🔊</button>':'<span style="width:34px;flex-shrink:0"></span>'}
+          <span class="u2-script-ko">${s.trim().replace(/[.。]$/,'')}。</span>
+          <span class="u2-script-en">${(enSentences[si]||'').trim()}</span>
+        </div>`).join('');
+      box.innerHTML = textHtml;
+    } else {
+      box.innerHTML = lines.map((l,li)=>{
+        if(l.audio){
+          return '<div class="u2-script-line">'
+            +'<button class="u2-script-play" id="u'+n+'-play-'+idx+'-'+li+'" onclick="scenePlayLine('+n+','+idx+','+li+')">🔊</button>'
+            +'<span class="u2-script-ko">'+l.ko+'</span>'
+            +'<span class="u2-script-en">'+l.en+'</span>'
+            +'</div>';
+        } else {
+          return '<div class="u2-script-line">'
+            +'<button class="u2-script-play" onclick="_sceneTTS(\''+l.ko.replace(/'/g,"\\'")+'\')" title="TTS">🔊</button>'
+            +'<span class="u2-script-ko">'+l.ko+'</span>'
+            +'<span class="u2-script-en">'+l.en+'</span>'
+            +'</div>';
+        }
+      }).join('');
+    }
+  }
+  // 재생 중지
+  const st = sceneState[n];
+  if(st.audio){ st.audio.pause(); st.audio=null; }
+  document.querySelectorAll('#u'+n+'-script-box .u2-script-play').forEach(b=>b.classList.remove('playing'));
+}
+
+function sceneGo(n, dir){
+  const d=SCENE_DATA[n]; const st=sceneState[n];
+  if(!d||!st) return;
+  const next=st.idx+dir;
+  if(next>=0&&next<d.slides.length) sceneTo(n,next);
+}
+
+function scenePlayLine(n, slideIdx, lineIdx){
+  const d=SCENE_DATA[n]; if(!d) return;
+  const line=(d.script[slideIdx]||[])[lineIdx];
+  if(!line||!line.audio) return;
+  const st=sceneState[n]||{idx:slideIdx,audio:null};
+  if(st.audio){st.audio.pause();st.audio=null;}
+  document.querySelectorAll('#u'+n+'-script-box .u2-script-play').forEach(b=>b.classList.remove('playing'));
+  const btn=document.getElementById('u'+n+'-play-'+slideIdx+'-'+lineIdx);
+  st.audio=new Audio(line.audio);
+  st.audio.play().catch(()=>{});
+  if(btn)btn.classList.add('playing');
+  st.audio.onended=()=>{if(btn)btn.classList.remove('playing');st.audio=null;};
+  sceneState[n]=st;
+}
+
+function scenePlayAudio(n, slideIdx){
+  // combined 오디오 재생
+  const d=SCENE_DATA[n]; if(!d) return;
+  const line=(d.script[slideIdx]||[])[0];
+  if(!line||!line.audio) return;
+  const st=sceneState[n]||{idx:slideIdx,audio:null};
+  if(st.audio){st.audio.pause();st.audio=null;}
+  document.querySelectorAll('#u'+n+'-script-box .u2-script-play').forEach(b=>b.classList.remove('playing'));
+  const btn=document.getElementById('u'+n+'-play-'+slideIdx+'-0');
+  st.audio=new Audio(line.audio);
+  st.audio.play().catch(()=>{});
+  if(btn)btn.classList.add('playing');
+  st.audio.onended=()=>{if(btn)btn.classList.remove('playing');st.audio=null;};
+  sceneState[n]=st;
+}
+
+function sceneReplay(n){
+  const d=SCENE_DATA[n]; const st=sceneState[n];
+  if(!d||!st) return;
+  const lines=d.script[st.idx]||[];
+  if(!lines.length) return;
+  const btn=document.getElementById('u'+n+'-replay-btn');
+  if(st.audio){st.audio.pause();st.audio=null;}
+  document.querySelectorAll('#u'+n+'-script-box .u2-script-play').forEach(b=>b.classList.remove('playing'));
+  // combined → play single audio
+  if(lines[0].combined && lines[0].audio){
+    if(btn)btn.classList.add('playing');
+    st.audio=new Audio(lines[0].audio);
+    st.audio.play().catch(()=>{});
+    const pbtn=document.getElementById('u'+n+'-play-'+st.idx+'-0');
+    if(pbtn)pbtn.classList.add('playing');
+    st.audio.onended=()=>{if(btn)btn.classList.remove('playing');if(pbtn)pbtn.classList.remove('playing');st.audio=null;};
+    return;
+  }
+  // TTS only (no audio files)
+  const audioLines=lines.filter(l=>l.audio);
+  if(!audioLines.length){
+    if(btn)btn.classList.add('playing');
+    let i=0;
+    function ttsNext(){
+      if(i>=lines.length){if(btn)btn.classList.remove('playing');return;}
+      _sceneTTS(lines[i].ko); i++;
+      setTimeout(ttsNext, lines[i-1].ko.length*120+400);
+    }
+    ttsNext(); return;
+  }
+  // sequential audio
+  if(btn)btn.classList.add('playing');
+  let i=0;
+  function playNext(){
+    if(i>=lines.length){if(btn)btn.classList.remove('playing');return;}
+    const l=lines[i];
+    if(!l.audio){i++;playNext();return;}
+    const pb=document.getElementById('u'+n+'-play-'+st.idx+'-'+i);
+    document.querySelectorAll('#u'+n+'-script-box .u2-script-play').forEach(b=>b.classList.remove('playing'));
+    if(pb)pb.classList.add('playing');
+    st.audio=new Audio(l.audio);
+    st.audio.play().catch(()=>{});
+    st.audio.onended=()=>{i++;playNext();};
+    sceneState[n]=st;
+  }
+  playNext();
+}
+
 // ══════════════════════════════════════════
 // UNIT 2 SCENE VIEWER
 // ══════════════════════════════════════════
@@ -6559,3 +7099,6 @@ function switchSection2(sec){
 </div><!-- /app-body -->
 <script>
   VocabRenderer.renderAll();
+</script>
+</body>
+</html>
