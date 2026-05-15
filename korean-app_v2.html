@@ -1465,7 +1465,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <span class="unit-num">1</span>
   <span class="unit-title">강아지가 뭘 해요?</span>
 </div>
-  <nav class="section-nav">
+  <nav class="section-nav" id="u1-snav">
     <button class="snav-btn" onclick="switchScene(1)">🎬 영상 <span class="snav-en">Scene</span></button>
     <button class="snav-btn" onclick="switchSection(1,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(1,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
@@ -1474,7 +1474,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- VOCAB -->
   <!-- SCENE VIEWER u1 -->
-  <div class="section" id="u1-scene">
+  <div class="section active" id="u1-scene">
     <div class="card">
       <div class="section-title">🎬 1과 영상 · Scene Viewer</div>
       <div class="section-sub" id="u1-slide-subtitle">강아지가 뭘 해요?</div>
@@ -1492,7 +1492,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     </div>
   </div>
-  <div class="section active" id="u1-vocab">
+  <div class="section" id="u1-vocab">
     <div class="card">
       <div class="section-title">🏃 뭘해요? — What do they do?</div>
       <div class="section-sub">Click each card to flip it!</div>
@@ -1722,7 +1722,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <span class="unit-num">3</span>
   <span class="unit-title">언제 할머니 댁에 가요?</span>
 </div>
-  <nav class="section-nav">
+  <nav class="section-nav" id="u3-snav">
     <button class="snav-btn" onclick="switchScene(3)">🎬 영상 <span class="snav-en">Scene</span></button>
     <button class="snav-btn" onclick="switchSection(3,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(3,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
@@ -1731,7 +1731,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- VOCAB -->
   <!-- SCENE VIEWER u3 -->
-  <div class="section" id="u3-scene">
+  <div class="section active" id="u3-scene">
     <div class="card">
       <div class="section-title">🎬 3과 영상 · Scene Viewer</div>
       <div class="section-sub" id="u3-slide-subtitle">언제 할머니 댁에 가요?</div>
@@ -1749,7 +1749,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     </div>
   </div>
-  <div class="section active" id="u3-vocab">
+  <div class="section" id="u3-vocab">
     <div class="card">
       <div class="section-title">⏰ 언제? — Time Expressions</div>
       <div class="section-sub">Click each card to flip it!</div>
@@ -1831,7 +1831,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="unit-num">4</span>
     <span class="unit-title">사과가 어디에 있어요?</span>
   </div>
-  <nav class="section-nav">
+  <nav class="section-nav" id="u4-snav">
     <button class="snav-btn" onclick="switchScene(4)">🎬 영상 <span class="snav-en">Scene</span></button>
     <button class="snav-btn" onclick="switchSection(4,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(4,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
@@ -1840,7 +1840,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- VOCAB -->
   <!-- SCENE VIEWER u4 -->
-  <div class="section" id="u4-scene">
+  <div class="section active" id="u4-scene">
     <div class="card">
       <div class="section-title">🎬 4과 영상 · Scene Viewer</div>
       <div class="section-sub" id="u4-slide-subtitle">사과가 어디에 있어요?</div>
@@ -1858,7 +1858,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     </div>
   </div>
-  <div class="section active" id="u4-vocab">
+  <div class="section" id="u4-vocab">
     <div class="card">
       <div class="section-title">🚂 장난감 — Toys</div>
       <div class="section-sub">Click each card to flip it!</div>
@@ -1938,7 +1938,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="unit-num">5</span>
     <span class="unit-title">동물원에 가요</span>
   </div>
-  <nav class="section-nav">
+  <nav class="section-nav" id="u5-snav">
     <button class="snav-btn" onclick="switchScene(5)">🎬 영상 <span class="snav-en">Scene</span></button>
     <button class="snav-btn" onclick="switchSection(5,'vocab')">📚 새단어 <span class="snav-en">Vocab</span></button>
     <button class="snav-btn" onclick="switchSection(5,'grammar')">📌 문법 <span class="snav-en">Grammar</span></button>
@@ -1947,7 +1947,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- VOCAB -->
   <!-- SCENE VIEWER u5 -->
-  <div class="section" id="u5-scene">
+  <div class="section active" id="u5-scene">
     <div class="card">
       <div class="section-title">🎬 5과 영상 · Scene Viewer</div>
       <div class="section-sub" id="u5-slide-subtitle">동물원에 가요</div>
@@ -1965,7 +1965,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     </div>
   </div>
-  <div class="section active" id="u5-vocab">
+  <div class="section" id="u5-vocab">
     <div class="card">
       <div class="section-title">👗 의류 — Clothes</div>
       <div class="section-sub">Click each card to flip it!</div>
@@ -6847,12 +6847,13 @@ function switchScene(n) {
     document.querySelectorAll('#u9-snav .snav-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
     sceneInit(9); return;
   }
-  // Units 1,3,4,5 — generic
+  // Units 1,3,4,5 — snav ID 기반
   const u=document.getElementById('unit'+n);
   u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('u'+n+'-scene').classList.add('active');
-  u.querySelectorAll('.snav-btn')[0].classList.add('active');
+  const snavBtns=document.querySelectorAll('#u'+n+'-snav .snav-btn');
+  snavBtns.forEach(b=>b.classList.remove('active'));
+  if(snavBtns[0]) snavBtns[0].classList.add('active');
   const bar=document.getElementById('practice-bar');
   if(bar)bar.classList.remove('visible');
   sceneInit(n);
