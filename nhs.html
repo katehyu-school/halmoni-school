@@ -229,6 +229,32 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .pron-arrow{color:var(--warm-500);font-size:12px;}
 .pron-after{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--coral);}
 .pron-note{font-size:11px;color:var(--warm-500);flex:1;}
+
+/* ── SPEAKING PRACTICE ─────────────────────────────────── */
+.speak-btn{display:flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-xl);font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:all .2s;}
+.speak-btn:hover{background:var(--teal-dark);}
+.speak-btn:disabled{background:var(--warm-300);cursor:default;}
+.speak-btn.listening{background:var(--coral);animation:pulse .8s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
+.speak-result{margin-top:10px;padding:12px 14px;background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-md);display:none;}
+.speak-result.show{display:block;}
+.speak-said{font-size:12px;color:var(--warm-500);margin-bottom:6px;}
+.speak-said span{font-family:var(--font-serif);font-weight:700;color:var(--warm-900);}
+.speak-feedback{font-size:12.5px;color:var(--warm-700);line-height:1.7;}
+/* ── API KEY MODAL ─────────────────────────────────────── */
+.apikey-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;display:none;align-items:center;justify-content:center;}
+.apikey-overlay.open{display:flex;}
+.apikey-modal{background:#fff;border-radius:var(--radius-lg);width:90%;max-width:440px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.2);}
+.apikey-modal h3{font-size:16px;font-weight:700;color:var(--warm-900);margin-bottom:6px;}
+.apikey-modal p{font-size:12.5px;color:var(--warm-500);margin-bottom:16px;line-height:1.65;}
+.apikey-input{width:100%;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:var(--radius-sm);font-size:13px;font-family:monospace;outline:none;box-sizing:border-box;margin-bottom:12px;}
+.apikey-input:focus{border-color:var(--teal);}
+.apikey-save{width:100%;padding:11px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-md);font-size:13.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;}
+.apikey-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;margin-left:8px;}
+.apikey-status.set{background:var(--teal-lt);color:var(--teal);}
+.apikey-status.unset{background:var(--coral-lt);color:var(--coral);}
+.settings-btn{padding:6px 12px;background:transparent;color:var(--gray-500);border:1px solid var(--gray-200);border-radius:var(--radius-xl);font-size:11.5px;font-family:var(--font-kr);cursor:pointer;transition:all .2s;}
+.settings-btn:hover{border-color:var(--teal);color:var(--teal);}
 </style>
 </head>
 <body>
@@ -241,6 +267,16 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
   </div>
   <div class="school-title"><span class="kq-logo">K</span>-Quest</div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
+  <button class="settings-btn" onclick="openApiKey()" id="apikey-status-btn">⚙️ AI</button>
+</div>
+<!-- API Key 모달 -->
+<div class="apikey-overlay" id="apikey-overlay" onclick="if(event.target===this)closeApiKey()">
+  <div class="apikey-modal">
+    <h3>🔑 Claude API 키 설정</h3>
+    <p>스피킹 피드백 기능을 사용하려면 API 키가 필요해요.<br>키는 이 기기에만 저장되며 외부로 전송되지 않아요.</p>
+    <input class="apikey-input" id="apikey-input" type="password" placeholder="sk-ant-api03-..." />
+    <button class="apikey-save" onclick="saveApiKey()">저장하기</button>
+  </div>
 </div>
 <!-- 색인 모달 -->
 <div class="idx-overlay" id="idx-overlay" onclick="if(event.target===this)closeIndex()">
@@ -1851,10 +1887,15 @@ function renderScene(){
       <div class="caption-avatar" style="background:${cfg.bg}">${cfg.emoji}</div>
       <div class="caption-name">${esc(ch.name)}</div>
     </div>
-    <div class="caption-body">
+    <div class="caption-body" style="flex:1">
       <div class="caption-kr">${esc(line.text)}</div>
       <div class="caption-en">${esc(line.en)}</div>
       ${tagHtml}
+      <button class="speak-btn" id="speak-btn" onclick="startSpeak(${JSON.stringify(line.text)},${JSON.stringify(line.en)})">🎤 말해보기</button>
+      <div class="speak-result" id="speak-result">
+        <div class="speak-said">들린 내용: <span id="speak-said-text"></span></div>
+        <div class="speak-feedback" id="speak-feedback">분석 중...</div>
+      </div>
     </div>
 `;
   const total=DATA.script.length;
@@ -2579,6 +2620,110 @@ document.addEventListener('DOMContentLoaded', ()=>{
   buildSidebar();
   loadEp('ep01');
 });
+
+
+// ── SPEAKING PRACTICE ────────────────────────────────────
+function getApiKey(){return localStorage.getItem('nhs_api_key')||'';}
+function openApiKey(){
+  document.getElementById('apikey-input').value=getApiKey();
+  document.getElementById('apikey-overlay').classList.add('open');
+}
+function closeApiKey(){document.getElementById('apikey-overlay').classList.remove('open');}
+function saveApiKey(){
+  const v=document.getElementById('apikey-input').value.trim();
+  if(!v)return;
+  localStorage.setItem('nhs_api_key',v);
+  closeApiKey();
+  updateApiKeyBtn();
+  alert('✅ API 키 저장됐어요! 이제 스피킹 기능을 사용할 수 있어요.');
+}
+function updateApiKeyBtn(){
+  const btn=document.getElementById('apikey-status-btn');
+  if(!btn)return;
+  btn.textContent=getApiKey()?'⚙️ AI ✓':'⚙️ AI';
+  btn.style.color=getApiKey()?'var(--teal)':'var(--gray-500)';
+  btn.style.borderColor=getApiKey()?'var(--teal)':'var(--gray-200)';
+}
+
+let _recog=null;
+function _initRecog(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR)return false;
+  _recog=new SR();
+  _recog.lang='ko-KR';
+  _recog.continuous=false;
+  _recog.interimResults=false;
+  return true;
+}
+
+async function startSpeak(targetKr, targetEn){
+  if(!getApiKey()){openApiKey();return;}
+  if(!_recog&&!_initRecog()){
+    alert('음성 인식은 Chrome 브라우저에서만 지원돼요!');return;
+  }
+  const btn=document.getElementById('speak-btn');
+  const result=document.getElementById('speak-result');
+  const saidEl=document.getElementById('speak-said-text');
+  const fbEl=document.getElementById('speak-feedback');
+  btn.textContent='🔴 듣는 중...';
+  btn.classList.add('listening');
+  btn.disabled=true;
+  result.classList.remove('show');
+
+  _recog.onresult=async(e)=>{
+    const said=e.results[0][0].transcript;
+    saidEl.textContent=said;
+    fbEl.textContent='분석 중...';
+    result.classList.add('show');
+    btn.textContent='⏳ 분석 중...';
+    btn.classList.remove('listening');
+    const fb=await _callClaude(targetKr,targetEn,said);
+    fbEl.textContent=fb;
+    btn.textContent='🎤 다시 말해보기';
+    btn.disabled=false;
+  };
+  _recog.onerror=()=>{
+    btn.textContent='🎤 말해보기';
+    btn.classList.remove('listening');
+    btn.disabled=false;
+  };
+  _recog.onend=()=>{
+    if(btn.disabled&&btn.textContent==='🔴 듣는 중...'){
+      btn.textContent='🎤 말해보기';
+      btn.classList.remove('listening');
+      btn.disabled=false;
+    }
+  };
+  _recog.start();
+}
+
+async function _callClaude(targetKr, targetEn, said){
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'x-api-key':getApiKey(),
+        'anthropic-version':'2023-06-01',
+        'content-type':'application/json',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-haiku-4-5-20251001',
+        max_tokens:180,
+        messages:[{role:'user',content:`You are a warm Korean language tutor for English-speaking students.
+Target sentence: "${targetKr}" (${targetEn})
+Student said: "${said}"
+Give encouraging feedback in English, 2 sentences max. If correct or close, celebrate! If different, note 1 key thing to fix and give a quick tip. Be specific and kind.`}]
+      })
+    });
+    const d=await res.json();
+    return d.content?.[0]?.text||'피드백을 가져오지 못했어요.';
+  }catch(e){
+    return '❌ 오류가 발생했어요. API 키를 확인해주세요 (⚙️ AI 버튼).';
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{updateApiKeyBtn();});
 
 </script>
 </body>
