@@ -231,10 +231,10 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .pron-note{font-size:11px;color:var(--warm-500);flex:1;}
 
 /* ── SPEAKING PRACTICE ─────────────────────────────────── */
-.speak-btn{display:flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-xl);font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:all .2s;}
-.speak-btn:hover{background:var(--teal-dark);}
+.speak-btn{position:absolute;bottom:12px;right:12px;display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--amber);color:#fff;border:none;border-radius:var(--radius-xl);font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:10;}
+.speak-btn:hover{background:var(--amber-600);}
 .speak-btn:disabled{background:var(--warm-300);cursor:default;}
-.speak-btn.listening{background:var(--coral);animation:pulse .8s ease-in-out infinite;}
+.speak-btn.listening{background:var(--coral)!important;animation:pulse .8s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
 .speak-result{margin-top:10px;padding:12px 14px;background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-md);display:none;}
 .speak-result.show{display:block;}
@@ -1850,7 +1850,7 @@ function showTab(name){
 // ── SCRIPT / SCENE VIEWER ──────────────────────────────
 function buildScript(){
   return `<div class="scene-wrap"><div class="scene-col">
-    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div><div class="clova-credit" id="clova-credit">클로바더빙의 AI 보이스가 사용되었습니다.</div></div>
+    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div><div class="clova-credit" id="clova-credit">클로바더빙의 AI 보이스가 사용되었습니다.</div><button class="speak-btn" id="speak-btn">🎤 말해보기</button></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
       <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
@@ -1891,7 +1891,6 @@ function renderScene(){
       <div class="caption-kr">${esc(line.text)}</div>
       <div class="caption-en">${esc(line.en)}</div>
       ${tagHtml}
-      <button class="speak-btn" id="speak-btn" onclick="startSpeak(${JSON.stringify(line.text)},${JSON.stringify(line.en)})">🎤 말해보기</button>
       <div class="speak-result" id="speak-result">
         <div class="speak-said">들린 내용: <span id="speak-said-text"></span></div>
         <div class="speak-feedback" id="speak-feedback">분석 중...</div>
@@ -1903,6 +1902,8 @@ function renderScene(){
   document.getElementById('nav-count').textContent=`${sceneIdx+1} / ${total}`;
   document.getElementById('nav-prev').disabled=sceneIdx===0;
   document.getElementById('nav-next').disabled=sceneIdx===total-1;
+  const sb=document.getElementById('speak-btn');
+  if(sb){sb.onclick=()=>startSpeak(line.text,line.en);sb.textContent='🎤 말해보기';sb.classList.remove('listening');sb.disabled=false;}
   updateStripHighlight();
 }
 
