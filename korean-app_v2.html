@@ -2364,7 +2364,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <div class="card" id="u6-qcard">
           <span class="quiz-badge" style="background:#FFF0E6;color:#E67E22;">6과 · Step 2 — 문장 만들기</span>
-          <div class="scene-box" id="u6-scene">🏠</div>
+          <div class="scene-box" id="u6-quiz-deco">🏠</div>
           <div class="question-english" id="u6-qenglish">Build the sentence!</div>
           <div class="section-sub">에 또는 에서를 잘 골라서 문장을 만들어요!</div>
           <div style="background:#E8FAF9;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:0.83rem;color:#0D7B75;display:flex;gap:14px;flex-wrap:wrap;">
@@ -3102,7 +3102,7 @@ function renderU1(){
   if(u1Idx >= u1Questions.length) return; // 완료 상태일 때 범위 초과 방어
   const q=u1Questions[u1Idx];
   u1SelectedSubj=null; u1SelectedVerb=null; u1SelectedParticle=null;
-  document.getElementById('u1-scene').textContent=q.scene;
+  document.getElementById('u1-quiz-deco').textContent=q.scene;
   document.getElementById('u1-qenglish').textContent='👉 '+q.english;
   document.getElementById('u1-qsub').textContent='Click a name card, choose 이 or 가, then click the verb card!';
 
@@ -3667,7 +3667,7 @@ function renderU3(){
   if(u3Idx >= u3Questions.length) return; // 완료 상태일 때 범위 초과 방어
   const q=u3Questions[u3Idx];
   u3Dropped=[]; u3IdCounter3=0;
-  document.getElementById('u3-scene').textContent=q.scene;
+  document.getElementById('u3-quiz-deco').textContent=q.scene;
   document.getElementById('u3-qenglish').textContent='👉 '+q.english;
   const fb=document.getElementById('u3-fb'); fb.className='feedback'; fb.innerHTML='';
   document.getElementById('u3-next').disabled = false;
@@ -3816,7 +3816,7 @@ function renderU4(){
   if(u4Idx >= u4Questions.length) return;
   const q=u4Questions[u4Idx];
   u4Dropped=[]; u4IdCounter=0;
-  document.getElementById('u4-scene').textContent=q.scene;
+  document.getElementById('u4-quiz-deco').textContent=q.scene;
   document.getElementById('u4-qenglish').textContent='👉 '+q.english;
   const fb=document.getElementById('u4-fb'); fb.className='feedback'; fb.innerHTML='';
   document.getElementById('u4-next').disabled=true;
@@ -3945,7 +3945,7 @@ function renderU5(){
   if(u5Idx >= u5Questions.length) return;
   const q=u5Questions[u5Idx];
   u5Dropped=[]; u5IdCounter=0;
-  document.getElementById('u5-scene').textContent=q.scene;
+  document.getElementById('u5-quiz-deco').textContent=q.scene;
   document.getElementById('u5-qenglish').textContent='👉 '+q.english;
   const fb=document.getElementById('u5-fb'); fb.className='feedback'; fb.innerHTML='';
   document.getElementById('u5-next').disabled=true;
@@ -5736,7 +5736,7 @@ function renderU6() {
   if (u6Idx >= u6Questions.length) return;
   const q = u6Questions[u6Idx];
   u6Dropped=[]; u6IdCounter=0;
-  document.getElementById('u6-scene').textContent = q.scene;
+  document.getElementById('u6-quiz-deco').textContent = q.scene;
   document.getElementById('u6-qenglish').textContent = '👉 ' + q.english;
   const fb = document.getElementById('u6-fb'); fb.className='feedback'; fb.innerHTML='';
   document.getElementById('u6-next').disabled = true;
@@ -7186,14 +7186,4 @@ function switchSection2(sec){
   // practice bar
   const bar = document.getElementById('practice-bar');
   if (bar) { bar.classList.toggle('visible', sec==='quiz'); }
-  if (sec === 'quiz') renderRaiseHandBtns();
-  if (sec === 'scene') u2SceneInit();
-}
-
-</script>
-
-</div><!-- /app-content -->
-</div><!-- /app-body -->
-<script>
-  VocabRenderer.renderAll();
-</script>
+  if (sec === 'qu
