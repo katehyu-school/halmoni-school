@@ -34,8 +34,10 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .level-btn:hover:not(.active){border-color:var(--teal);color:var(--teal);}
 .level-btn-basis{color:var(--amber)!important;border-color:var(--amber-lt)!important;}
 .level-btn-basis.active{background:var(--amber)!important;border-color:var(--amber)!important;color:#fff!important;}
-.school-title{flex:1;text-align:center;font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--teal);letter-spacing:0.03em;}
-.kq-logo{display:inline-block;background:var(--teal);color:#fff;width:26px;height:26px;border-radius:8px;text-align:center;line-height:26px;font-size:14px;font-weight:900;margin-right:2px;vertical-align:middle;}
+.school-title{flex:1;text-align:center;line-height:1;}
+.kq-logo{font-family:Impact,'Arial Black',sans-serif;font-size:22px;font-weight:normal;letter-spacing:0.03em;}
+.kq-logo .kq-k{color:var(--teal-dark);}
+.kq-logo .kq-q{color:#5a8c3c;}
 .index-btn{padding:6px 16px;background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-300);border-radius:var(--radius-xl);font-size:11.5px;font-family:var(--font-kr);text-decoration:none;cursor:pointer;transition:all .2s;}
 .index-btn:hover{background:rgba(255,255,255,0.32);}
 .main-layout{display:flex;flex:1;min-height:0;}
@@ -406,7 +408,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
     <button class="level-btn" onclick="setLevel(this)">Intermediate</button>
     <button class="level-btn" onclick="setLevel(this)">Advanced</button>
   </div>
-  <div class="school-title"><span class="kq-logo">K</span>-Quest</div>
+  <div class="school-title"><span class="kq-logo"><span class="kq-k">K-</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
   <button class="settings-btn" onclick="openApiKey()" id="apikey-status-btn">⚙️ AI</button>
 </div>
