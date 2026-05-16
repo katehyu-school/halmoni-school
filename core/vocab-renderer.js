@@ -80,7 +80,9 @@ const VocabRenderer = (() => {
     ],
     5: [
       { gridId: 'fc5-clothes',     categories: ['의류'] },
-      { gridId: 'fc5-accessories', categories: ['소품'] }
+      { gridId: 'fc5-accessories', categories: ['소품'] },
+      { gridId: 'fc5-animals',     categories: ['동물'] },
+      { gridId: 'fc5-adjectives',  categories: ['형용사'] }
     ]
   };
 
