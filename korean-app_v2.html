@@ -2434,6 +2434,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">Used for counting objects</div>
       <div id="u7-native-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;"></div>
     </div>
+
+    <div class="card">
+      <div class="section-title">💬 핵심 단어 — Key Words</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc7-words"></div>
+    </div>
   </div>
 
   <!-- ── 듣기 ── -->
@@ -2699,11 +2705,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
   </div>
   <div class="section active" id="u9-vocab">
-    <div class="card">
-      <div class="section-title">📌 형용사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Describing Words</span></div>
-      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">반대말도 같이 익혀요! Learn opposite pairs!</div>
-      <div id="u9-pair-grid" style="margin-top:16px;display:flex;flex-direction:column;gap:12px;"></div>
-    </div>
 
     <div class="card">
       <div class="section-title">🍖 핵심 단어 — Key Words</div>
@@ -2711,6 +2712,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="flashcard-grid" id="fc9-words"></div>
     </div>
   </div>
+    <div class="card">
+      <div class="section-title">📌 형용사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Describing Words</span></div>
+      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">반대말도 같이 익혀요! Learn opposite pairs!</div>
+      <div id="u9-pair-grid" style="margin-top:16px;display:flex;flex-direction:column;gap:12px;"></div>
+    </div>
+
 
   <!-- ── GRAMMAR ── -->
   <div class="section" id="u9-grammar">
@@ -4348,7 +4355,7 @@ let u7BPlaced = {};   // { "안나": ["ㄹ","ㅂ"] } 학생이 놓은 받침
 
 function switchSection7(sec) {
   if(sec==='scene'){switchScene(7);return;}
-  const tabs = ['vocab','listen','write','batchim'];
+  const tabs = ['scene','vocab','listen','write','batchim'];
   document.querySelectorAll('#u7-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
   });
@@ -5244,11 +5251,11 @@ function renderU7Vocab(data) {
 }
 
 function switchSection6(sec) {
+  if(sec==='scene'){switchScene(6);return;}
   const u = document.getElementById('unit6');
   u.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('u6-' + sec).classList.add('active');
-  const map = { scene:-1, vocab:0, grammar:1, quiz:2, life:3, listen:4, build:5 };
-  if(sec==='scene'){switchScene(6);return;}
+  const map = { vocab:1, grammar:2, quiz:3, life:4, listen:5, build:6 };
   const btns = document.querySelectorAll('#u6-snav .snav-btn');
   btns.forEach(b => b.classList.remove('active'));
   if (btns[map[sec]]) btns[map[sec]].classList.add('active');
@@ -5783,7 +5790,7 @@ let u8Score  = { listen: 0, batchim: 0, sort: 0 };
 
 function switchSection8(sec) {
   if(sec==='scene'){switchScene(8);return;}
-  const tabs = ['vocab','grammar','listen','batchim'];
+  const tabs = ['scene','vocab','grammar','listen','batchim'];
   document.querySelectorAll('#u8-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
   });
@@ -6207,7 +6214,7 @@ let u9Score = { listen: 0, ox: 0, sort: 0 };
 
 function switchSection9(sec) {
   if(sec==='scene'){switchScene(9);return;}
-  const tabs = ['vocab','grammar','listen','game'];
+  const tabs = ['scene','vocab','grammar','listen','game'];
   document.querySelectorAll('#u9-snav .snav-btn').forEach((b,i) => {
     b.classList.toggle('active', tabs[i]===sec);
   });
@@ -6236,12 +6243,6 @@ function renderU9Vocab(data) {
         <div style="font-size:0.8rem;color:#666;font-family:'Nanum Gothic',sans-serif;margin:2px 0;">${p.subj_neg}</div>
         <div style="font-size:1.35rem;font-weight:900;color:#E65100;font-family:'Nanum Gothic',sans-serif;">${p.negative}</div>
         <div style="font-size:0.75rem;color:#555;font-family:'Nanum Gothic',sans-serif;">${p.negative_en}</div>
-    
-    <div class="card">
-      <div class="section-title">💬 핵심 단어 — Key Words</div>
-      <div class="section-sub">Click each card to flip it!</div>
-      <div class="flashcard-grid" id="fc7-words"></div>
-    </div>
   </div>
     </div>`).join('');
 }
@@ -7182,5 +7183,3 @@ function switchSection2(sec){
 <script>
   VocabRenderer.renderAll();
 </script>
-</body>
-</html>
