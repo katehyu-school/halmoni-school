@@ -235,6 +235,14 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .flashcard-back { transform:rotateY(180deg); }
 .fc-emoji { font-size:2.6rem; margin-bottom:8px; }
 .fc-korean { font-family:'Jua',sans-serif; font-size:1.25rem; color:var(--text); text-align:center; }
+/* ── Native counting cards ── */
+.fc-count-card{background:white;border:2.5px solid #A8DDD0;border-radius:16px;padding:14px 10px 10px;display:flex;flex-direction:column;align-items:center;gap:5px;box-shadow:0 4px 14px rgba(0,0,0,0.08);}
+.fc-count-visual{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px;min-height:52px;width:100%;}
+.fc-basket-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;font-size:2rem;line-height:1;}
+.fc-basket-badge{position:absolute;top:-8px;left:-6px;background:#e74c3c;color:white;border-radius:10px;font-size:9px;font-weight:900;padding:1px 5px;line-height:1.5;font-family:sans-serif;}
+.fc-apple-row{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;max-width:76px;}
+.fc-count-num{font-size:1.3rem;font-weight:900;color:#1a9485;font-family:sans-serif;line-height:1;}
+.fc-count-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--text);text-align:center;}
 .fc-english { font-family:'Gaegu',cursive; font-size:1.1rem; text-align:center; font-weight:700; }
 .fc-romanize { font-size:0.82rem; color:var(--muted); margin-top:4px; text-align:center; }
 .fc-flip-hint { font-size:0.68rem; color:var(--muted); margin-top:5px; }
@@ -5273,6 +5281,38 @@ function restartU7B() {
 }
 
 // ── Vocab 렌더 ─────────────────────────────────
+function buildNativeCountCards(containerId, items, romArr) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '';
+  items.forEach((w, i) => {
+    const n = w.num;
+    const baskets = Math.floor(n / 10);
+    const apples  = n % 10;
+    let visualHtml = '';
+    for (let b = 0; b < baskets; b++) {
+      visualHtml += '<div class="fc-basket-wrap"><span class="fc-basket-badge">10</span>🧺</div>';
+    }
+    if (apples > 0) {
+      const sz = apples > 5 ? '1.1rem' : '1.4rem';
+      let aHtml = '';
+      for (let a = 0; a < apples; a++) aHtml += '<span style="font-size:' + sz + ';line-height:1;">🍎</span>';
+      visualHtml += '<div class="fc-apple-row">' + aHtml + '</div>';
+    }
+    const card = document.createElement('div');
+    card.className = 'fc-count-card';
+    card.innerHTML =
+      '<div class="fc-count-visual">' + visualHtml + '</div>' +
+      '<div class="fc-count-num">' + n + '</div>' +
+      '<div class="fc-count-kr">' + w.korean + '</div>' +
+      '<button class="fc-audio-btn" title="발음 듣기">🔊</button>';
+    card.querySelector('.fc-audio-btn').addEventListener('click', function(e) {
+      e.stopPropagation(); speakKorean(w.korean);
+    });
+    el.appendChild(card);
+  });
+}
+
 function renderU7Vocab(data) {
   const sinoRom   = ['il','i','sam','sa','o','yuk','chil','pal','gu','sip',
                      'sip-il','sip-i','sip-sam','sip-sa','sip-o',
@@ -5291,13 +5331,7 @@ function renderU7Vocab(data) {
     buildFlashcards('u7-sino-grid', items, 'sky');
   }
   if (data.native) {
-    const items = data.native.map((w, i) => ({
-      emoji: String(w.num),
-      kr:    w.korean,
-      en:    w.english,
-      rom:   nativeRom[i] || ''
-    }));
-    buildFlashcards('u7-native-grid', items, 'mint');
+    buildNativeCountCards('u7-native-grid', data.native, nativeRom);
   }
 }
 
@@ -7238,3 +7272,4 @@ function switchSection2(sec){
 </script>
 </body>
 </html>
+       
