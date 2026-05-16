@@ -2445,11 +2445,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="section active" id="u7-vocab">
     <div class="card">
       <div class="section-title">📌 Sino-Korean Numbers <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">한자어 숫자</span></div>
-      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">Used for dates, phone numbers, and addresses</div>
-      <div id="u7-sino-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px;"></div>
-      <div class="section-title" style="margin-top:8px;">📌 Native Korean Numbers <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">고유어 숫자</span></div>
-      <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">Used for counting objects</div>
-      <div id="u7-native-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;"></div>
+      <div class="section-sub">Used for dates, phone numbers, and addresses — Click to flip!</div>
+      <div class="flashcard-grid" id="u7-sino-grid"></div>
+      <div class="section-title" style="margin-top:24px;">📌 Native Korean Numbers <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">고유어 숫자</span></div>
+      <div class="section-sub">Used for counting objects — Click to flip!</div>
+      <div class="flashcard-grid" id="u7-native-grid"></div>
     </div>
 
     <div class="card">
@@ -2730,12 +2730,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="section-sub">Click each card to flip it!</div>
       <div class="flashcard-grid" id="fc9-words"></div>
     </div>
-  </div>
     <div class="card">
       <div class="section-title">📌 형용사 <span style="font-size:0.8rem;color:var(--muted);font-family:'Nanum Gothic',sans-serif;">Describing Words</span></div>
       <div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;">반대말도 같이 익혀요! Learn opposite pairs!</div>
       <div id="u9-pair-grid" style="margin-top:16px;display:flex;flex-direction:column;gap:12px;"></div>
     </div>
+  </div>
 
 
   <!-- ── GRAMMAR ── -->
@@ -5274,40 +5274,30 @@ function restartU7B() {
 
 // ── Vocab 렌더 ─────────────────────────────────
 function renderU7Vocab(data) {
-  const sinoGrid = document.getElementById('u7-sino-grid');
-  const nativeGrid = document.getElementById('u7-native-grid');
-  function _speak(text) {
-    if (window.HalmoniCore?.speak) HalmoniCore.speak(text,{preset:'child'});
-    else if (window.speechSynthesis) {
-      speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(text); u.lang='ko-KR'; u.rate=0.85;
-      speechSynthesis.speak(u);
-    }
+  const sinoRom   = ['il','i','sam','sa','o','yuk','chil','pal','gu','sip',
+                     'sip-il','sip-i','sip-sam','sip-sa','sip-o',
+                     'sip-yuk','sip-chil','sip-pal','sip-gu','i-sip'];
+  const nativeRom = ['ha-na','dul','set','net','da-seot','yeo-seot',
+                     'il-gop','yeo-deol','a-hop','yeol',
+                     'yeol-ha-na','yeol-dul','yeol-set','yeol-net','yeol-da-seot',
+                     'yeol-yeo-seot','yeol-il-gop','yeol-yeo-deol','yeol-a-hop','seu-mul'];
+  if (data.sino) {
+    const items = data.sino.map((w, i) => ({
+      emoji: String(w.num),
+      kr:    w.korean,
+      en:    w.english,
+      rom:   sinoRom[i] || ''
+    }));
+    buildFlashcards('u7-sino-grid', items, 'sky');
   }
-  window._u7Speak = _speak;
-  function _appleIcons(n) {
-    const baskets = Math.floor(n/10);
-    const rest = n % 10;
-    return '🧺'.repeat(baskets) + '🍎'.repeat(rest);
-  }
-  if (sinoGrid && data.sino) {
-    sinoGrid.innerHTML = data.sino.map(w => `
-      <div style="background:#F4F6FF;border-radius:14px;padding:14px 8px;text-align:center;cursor:pointer;transition:transform 0.15s;" onclick="_u7Speak('${w.korean}')" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">
-        <div style="font-size:2.2rem;font-weight:900;color:#3D5AFE;line-height:1;">${w.num}</div>
-        <div style="font-size:1.4rem;font-weight:700;color:#5B6AF0;margin-top:4px;">${w.korean}</div>
-        <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">${w.english}</div>
-        <div style="font-size:0.85rem;margin-top:6px;color:#7B93F5;">🔊</div>
-      </div>`).join('');
-  }
-  if (nativeGrid && data.native) {
-    nativeGrid.innerHTML = data.native.map(w => `
-      <div style="background:#F0FBF9;border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:transform 0.15s;" onclick="_u7Speak('${w.korean}')" onmouseenter="this.style.transform='translateY(-2px)'" onmouseleave="this.style.transform=''">
-        <div style="font-size:1rem;letter-spacing:-1px;margin-bottom:2px;">${_appleIcons(w.num)}</div>
-        <div style="font-size:0.78rem;color:#9DD4CC;font-weight:700;">${w.num}</div>
-        <div style="font-size:1.4rem;font-weight:700;color:var(--mint);margin-top:2px;">${w.korean}</div>
-        <div style="font-size:0.72rem;color:var(--muted);margin-top:2px;">${w.english}</div>
-        <div style="font-size:0.85rem;margin-top:4px;color:var(--teal);">🔊</div>
-      </div>`).join('');
+  if (data.native) {
+    const items = data.native.map((w, i) => ({
+      emoji: String(w.num),
+      kr:    w.korean,
+      en:    w.english,
+      rom:   nativeRom[i] || ''
+    }));
+    buildFlashcards('u7-native-grid', items, 'mint');
   }
 }
 
