@@ -96,7 +96,7 @@ body {
 .s3 { background: var(--light); display: flex; flex-direction: column; align-items:center; justify-content: center; padding: 40px 40px; }
 .s3-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; width: 100%; margin-top: 28px; }
 .class-card { border-radius: 18px; padding: 16px 12px; text-align:center; color: white; display:flex; flex-direction:column; align-items:center; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-.class-card.c-gold  { background: #c9902a; color: #3d2a1a; }
+.class-card.c-kquest  { background: linear-gradient(135deg,#3D5AFE,#7C4DFF); color: white; }
 .class-card.c-elem  { background: #c4a8d4; color: #3d2a1a; }
 .class-card.c-adult { background: #c8d8e8; color: #3d2a1a; }
 .class-emoji { font-size: 30px; margin-bottom: 6px; }
@@ -106,36 +106,44 @@ body {
 .class-desc { font-size: 11px; line-height: 1.6; opacity: 0.9; }
 
 /* S4 — Built with AI */
-.s4 { background: white; display: flex; flex-direction: column; padding: 32px 44px 28px; }
-.s4-cols { display:grid; grid-template-columns: 1fr 60px 1fr; align-items:center; gap:0; margin-top:18px; flex:1; }
-.ai-card { border-radius: 16px; padding: 24px; height: 100%; display:flex; flex-direction:column; }
+.s4 { background: white; display: flex; flex-direction: column; padding: 28px 44px 22px; }
+.s4-cols { display:grid; grid-template-columns: 1fr 50px 1fr; align-items:center; gap:0; margin-top:14px; flex:1; }
+.ai-card { border-radius: 16px; padding: 20px; height: 100%; display:flex; flex-direction:column; }
 .ai-card.teacher { background: #FFF8F8; }
 .ai-card.claude { background: #F0FFFE; }
-.ai-card-icon { font-size: 36px; margin-bottom: 8px; }
-.ai-card-name { font-size: 18px; font-weight: 900; margin-bottom: 16px; }
+.ai-card-icon { font-size: 32px; margin-bottom: 6px; }
+.ai-card-name { font-size: 17px; font-weight: 900; margin-bottom: 12px; }
 .ai-card.teacher .ai-card-name { color: var(--coral); }
 .ai-card.claude .ai-card-name { color: var(--teal); }
-.ai-item { font-size: 13px; color: #333; padding: 5px 0; display:flex; gap:8px; align-items:baseline; }
+.ai-item { font-size: 12px; color: #333; padding: 4px 0; display:flex; gap:8px; align-items:baseline; }
 .ai-item::before { content: "✦"; font-size: 10px; color: var(--muted); flex-shrink:0; }
 .plus-center { text-align:center; font-size: 32px; font-weight:900; color: var(--navy); }
 .school-badge { background: var(--gold); border-radius: 50%; width: 44px; height: 44px; display:flex; align-items:center; justify-content:center; font-size: 24px; margin: 8px auto 0; }
+.ai-credit { background: #FFFBF0; border: 1px solid #FFE082; border-radius: 10px; padding: 8px 16px; margin-top: 12px; font-size: 11px; color: #6D4C00; text-align:center; }
 
-/* S5 / S6 — App slides */
+/* S5 / S6 / S7 — App slides */
 .app-slide { background: white; display: grid; grid-template-columns: 1fr 1fr; }
-.app-left { padding: 34px 32px 28px; display:flex; flex-direction:column; }
+.app-left { padding: 30px 28px 24px; display:flex; flex-direction:column; }
 .app-accent { width: 6px; height: 100%; position:absolute; left:0; top:0; border-radius:0; }
 .app-right { padding: 20px; display:flex; align-items:center; justify-content:center; }
-.phone-frame { background: var(--light); border-radius: 16px; border: 2px solid #dde; width: 100%; height: 100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; font-size:13px; color:var(--muted); text-align:center; padding: 20px; }
-.phone-frame .ph-emoji { font-size: 32px; }
-.feature-list { margin-top: 16px; display:flex; flex-direction:column; gap: 8px; flex:1; }
-.feat-item { background: var(--light); border-radius: 12px; padding: 10px 14px; display:flex; gap: 10px; align-items:center; }
-.feat-emoji { font-size: 20px; flex-shrink:0; }
+.feature-list { margin-top: 12px; display:flex; flex-direction:column; gap: 7px; flex:1; }
+.feat-item { background: var(--light); border-radius: 12px; padding: 9px 12px; display:flex; gap: 10px; align-items:center; }
+.feat-emoji { font-size: 18px; flex-shrink:0; }
 .feat-text { flex:1; }
-.feat-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.feat-title { font-size: 12px; font-weight: 700; color: var(--navy); }
 .feat-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
-/* S7 — Philosophy */
-.s7 { background: var(--light); display:flex; flex-direction:column; padding: 32px 40px 28px; align-items:center; }
+/* S6 — K-Quest episode card */
+.ep-card { background: linear-gradient(135deg,#3D5AFE15,#7C4DFF15); border: 2px solid #7C4DFF33; border-radius: 18px; padding: 20px; width: 100%; }
+.ep-badge { display:inline-block; background:#3D5AFE; color:white; border-radius:8px; font-size:10px; font-weight:700; padding:3px 10px; margin-bottom:10px; letter-spacing:0.08em; }
+.ep-title { font-size:20px; font-weight:900; color:#3D2080; margin-bottom:6px; }
+.ep-scene { font-size:13px; color:#5B4EB0; margin-bottom:12px; }
+.ep-tags { display:flex; flex-wrap:wrap; gap:6px; }
+.ep-tag { background:white; border:1.5px solid #C5B8F0; border-radius:20px; font-size:10px; color:#5B4EB0; padding:3px 10px; font-weight:600; }
+.credit-nano { margin-top:14px; font-size:10px; color:#9B59B6; background:#F8F0FF; border-radius:8px; padding:5px 10px; display:inline-block; }
+
+/* S8 — Philosophy */
+.s8 { background: var(--light); display:flex; flex-direction:column; padding: 32px 40px 28px; align-items:center; }
 .phil-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; width:100%; margin-top:18px; flex:1; }
 .phil-card { background: white; border-radius: 16px; padding: 20px; display:flex; gap: 14px; align-items:flex-start; box-shadow:0 4px 14px rgba(0,0,0,0.06); position:relative; overflow:hidden; }
 .phil-stripe { position:absolute; left:0; top:0; bottom:0; width:6px; border-radius:3px 0 0 3px; }
@@ -145,33 +153,32 @@ body {
 .phil-en { font-size: 10px; color: var(--muted); font-style:italic; margin-bottom: 6px; }
 .phil-desc { font-size: 12px; color: #444; line-height: 1.6; }
 
-/* S8 — Stats */
-.s8 { background: white; display:flex; flex-direction:column; padding: 32px 44px; align-items:center; justify-content: center; }
+/* S9 — Stats */
+.s9-stats { background: white; display:flex; flex-direction:column; padding: 32px 44px; align-items:center; justify-content: center; }
 .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; width:100%; margin-top:18px; }
 .stat-card { border-radius: 18px; padding: 22px 14px; text-align:center; color:white; box-shadow:0 8px 22px rgba(0,0,0,0.13); }
 .stat-emoji { font-size: 28px; margin-bottom:8px; }
 .stat-num { font-size: 52px; font-weight:900; line-height:1; }
 .stat-label { font-size: 13px; font-weight:700; margin-top: 6px; }
 .stat-en { font-size: 9px; opacity:0.8; font-style:italic; margin-top:2px; }
-.next-banner { background: var(--light); border-radius: 14px; padding: 14px 24px; width: 100%; text-align:center; margin-top: 18px; }
-.next-banner .nb-main { font-size: 13px; font-weight:700; color: var(--navy); }
-.next-banner .nb-en { font-size: 11px; color: var(--teal); font-style:italic; margin-top:3px; }
+.now-banner { background: linear-gradient(90deg,#3D5AFE18,#7C4DFF18); border: 1.5px solid #7C4DFF44; border-radius: 14px; padding: 12px 24px; width: 100%; text-align:center; margin-top: 16px; }
+.now-banner .nb-main { font-size: 13px; font-weight:700; color: #3D2080; }
+.now-banner .nb-en { font-size: 11px; color: var(--purple); font-style:italic; margin-top:3px; }
 
-/* S9 — Closing */
-.s9 { background: var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding: 40px 48px; }
-.s9-link { text-decoration: none; display:flex; flex-direction:column; align-items:center; }
-.s9-link:hover .s9-badge { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
-.s9 .blob1 { position:absolute; width:340px; height:340px; border-radius:50%; background:var(--coral); opacity:0.1; top:-90px; right:-70px; }
-.s9 .blob2 { position:absolute; width:300px; height:300px; border-radius:50%; background:var(--teal); opacity:0.1; bottom:-80px; left:-60px; }
-.s9-emoji { font-size: 48px; margin-bottom:8px; }
-.s9-title { font-size: 36px; font-weight:900; color:white; margin-bottom:6px; }
-.s9-en { font-size: 16px; color: var(--teal); font-style:italic; margin-bottom:24px; }
-.quote-box { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(78,205,196,0.4); border-radius: 16px; padding: 18px 32px; max-width: 680px; margin-bottom:22px; }
+/* S10 — Closing */
+.s10 { background: var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding: 40px 48px; }
+.s10-link { text-decoration: none; display:flex; flex-direction:column; align-items:center; }
+.s10-link:hover .s10-badge { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+.s10 .blob1 { position:absolute; width:340px; height:340px; border-radius:50%; background:var(--coral); opacity:0.1; top:-90px; right:-70px; }
+.s10 .blob2 { position:absolute; width:300px; height:300px; border-radius:50%; background:var(--teal); opacity:0.1; bottom:-80px; left:-60px; }
+.s10-title { font-size: 36px; font-weight:900; color:white; margin-bottom:6px; }
+.s10-en { font-size: 16px; color: var(--teal); font-style:italic; margin-bottom:20px; }
+.quote-box { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(78,205,196,0.4); border-radius: 16px; padding: 16px 32px; max-width: 680px; margin-bottom:18px; }
 .quote-text { font-size: 15px; color: rgba(255,255,255,0.9); line-height:1.7; font-style:italic; }
 .quote-mark { font-size: 28px; color: var(--teal); font-weight:900; }
-.s9-badges { display:flex; gap:12px; margin-bottom:16px; }
-.s9-badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight:700; transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
-.s9-footer { font-size: 11px; color: var(--muted); }
+.s10-badges { display:flex; gap:12px; margin-bottom:14px; }
+.s10-badge { padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight:700; transition: filter 0.2s, transform 0.2s, box-shadow 0.2s; }
+.s10-footer { font-size: 11px; color: var(--muted); }
 
 /* Tiger mascot */
 .tiger-mascot {
@@ -181,7 +188,7 @@ body {
   border: 3px solid rgba(255,255,255,0.25);
 }
 .tiger-sm { width: 72px; height: 72px; margin-bottom: 10px; }
-.tiger-lg { width: 110px; height: 110px; margin-bottom: 10px; }
+.tiger-lg { width: 100px; height: 100px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -216,9 +223,9 @@ body {
         그래서 우리가 만든 건? <em style="font-size:0.85em;color:#888;">So what did we build?</em><br>
         <strong>진짜 운영되는 온라인 한국어 학교! 🎉</strong><br>
         <em style="font-size:0.85em;color:#888;">A real, live online Korean language school!</em><br><br>
-        처음엔 작은 아이디어였지만, 지금은 세 개 반에<br>
+        처음엔 작은 아이디어였지만, 지금은 세 개 플랫폼에<br>
         실제 학생들이 다니고 있어요.<br>
-        <em style="font-size:0.85em;color:#888;">What started small now has three classes with real students enrolled.</em>
+        <em style="font-size:0.85em;color:#888;">What started small now runs across three platforms with real students enrolled.</em>
       </div>
     </div>
     <div class="right">
@@ -237,7 +244,7 @@ body {
       <div class="step-card">
         <div class="step-emoji">🤖</div>
         <div class="step-label">AI 협업 <span style="font-size:0.8em;color:#888;font-weight:400;">Collaboration</span></div>
-        <div class="step-sub">Claude와 함께 구현 · Built with Claude</div>
+        <div class="step-sub">Claude + nano banana와 함께 구현</div>
       </div>
       <div class="arrow-down">↓</div>
       <div class="step-card" style="border:2px solid var(--coral);">
@@ -248,31 +255,31 @@ body {
     </div>
   </div>
 
-  <!-- ── SLIDE 3: Three Classes ── -->
+  <!-- ── SLIDE 3: Three Platforms ── -->
   <div class="slide s3" id="s3">
-    <div class="slide-title" style="text-align:center;">세 개의 반</div>
-    <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Three Classes for Every Age</div>
+    <div class="slide-title" style="text-align:center;">세 개의 플랫폼</div>
+    <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Three Platforms — One School</div>
     <div class="s3-grid">
-      <div class="class-card c-gold">
-        <div class="class-emoji">🌷</div>
-        <div class="class-name">유아반</div>
-        <div class="class-en">Kindergarten</div>
+      <div class="class-card c-kquest">
+        <div class="class-emoji">🎬</div>
+        <div class="class-name">K-Quest</div>
+        <div class="class-en">Scene-First · Original</div>
         <div class="class-divider"></div>
-        <div class="class-desc">노래, 색깔, 숫자<br>기초 단어 익히기<br>Hangul Basics &amp; Fun</div>
+        <div class="class-desc">장면 기반 오리지널 커리큘럼<br>AI 이미지 · Clova Dubbing TTS<br>저작권 Free · 중고등 이상</div>
       </div>
       <div class="class-card c-elem">
         <div class="class-emoji">📖</div>
-        <div class="class-name">초등반</div>
-        <div class="class-en">Elementary</div>
+        <div class="class-name">K-Quest Kids</div>
+        <div class="class-en">Elementary · Game-Based</div>
         <div class="class-divider"></div>
-        <div class="class-desc">게임으로 배우는 문법<br>받침·조사·문장 만들기<br>Vocabulary &amp; Grammar</div>
+        <div class="class-desc">게임으로 배우는 문법<br>영상·받침·문장 만들기<br>9개 Unit 완성 · 초등</div>
       </div>
       <div class="class-card c-adult">
         <div class="class-emoji">🏛</div>
         <div class="class-name">성인반</div>
-        <div class="class-en">Adult</div>
+        <div class="class-en">Adult · Conversational</div>
         <div class="class-divider"></div>
-        <div class="class-desc">어휘·문법·발음<br>Real Life 대화까지<br>Conversational Korean</div>
+        <div class="class-desc">어휘·문법·발음<br>Real Life 카카오톡·듣기·읽기<br>9개 Unit · 성인</div>
       </div>
     </div>
   </div>
@@ -303,34 +310,37 @@ body {
         <div class="ai-item">데이터 구조 설계 📐 <span style="font-size:0.82em;color:#aaa;">Data Architecture</span></div>
       </div>
     </div>
+    <div class="ai-credit">
+      🎨 &nbsp;장면 이미지 제작: <strong>nano banana</strong> — AI 이미지 생성으로 저작권 걱정 없는 한국적 장면 시각화 &nbsp;·&nbsp; <em>Scene illustrations by nano banana AI image generation</em>
+    </div>
   </div>
 
-  <!-- ── SLIDE 5: Elementary App ── -->
+  <!-- ── SLIDE 5: K-Quest Kids ── -->
   <div class="slide app-slide" id="s5">
-    <div class="app-left" style="position:relative;padding-left:36px;">
+    <div class="app-left" style="position:relative;padding-left:32px;">
       <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--coral);border-radius:0 4px 4px 0;"></div>
-      <div class="slide-title">초등반 앱</div>
-      <div class="slide-title-en">Elementary Class App</div>
+      <div class="slide-title">K-Quest Kids</div>
+      <div class="slide-title-en">Elementary App — 9 Units Complete</div>
       <div class="feature-list">
         <div class="feat-item">
+          <div class="feat-emoji">🎬</div>
+          <div class="feat-text"><div class="feat-title">영상 Scene Viewer</div><div class="feat-desc">슬라이드쇼 + 대사 + TTS — 모든 과(1~9과) 도입 영상 · Slideshow with script &amp; audio for every unit</div></div>
+        </div>
+        <div class="feat-item">
           <div class="feat-emoji">🃏</div>
-          <div class="feat-text"><div class="feat-title">플래시카드 Flashcards</div><div class="feat-desc">단어 앞뒤 뒤집기 — 이모지 힌트 포함 · Flip cards with emoji hints</div></div>
+          <div class="feat-text"><div class="feat-title">플래시카드 + 문장 만들기 Flashcards &amp; Sentence Builder</div><div class="feat-desc">단어 뒤집기 · 드래그로 문장 조립 · Flip cards &amp; drag-to-build sentences</div></div>
         </div>
         <div class="feat-item">
           <div class="feat-emoji">🔊</div>
-          <div class="feat-text"><div class="feat-title">듣기 게임 Listening Quiz</div><div class="feat-desc">TTS 소리 듣고 정답 고르기 · Hear it, pick the answer</div></div>
+          <div class="feat-text"><div class="feat-title">듣기 게임 + 받침 게임 Listening &amp; Batchim</div><div class="feat-desc">TTS 듣고 고르기 · 드래그로 받침 완성 · Audio quiz &amp; final-consonant drag game</div></div>
         </div>
         <div class="feat-item">
-          <div class="feat-emoji">🧩</div>
-          <div class="feat-text"><div class="feat-title">받침 게임 Batchim Game</div><div class="feat-desc">드래그로 받침 완성 — 이모지 힌트 · Drag to complete the final consonant</div></div>
-        </div>
-        <div class="feat-item">
-          <div class="feat-emoji">📝</div>
-          <div class="feat-text"><div class="feat-title">문장 만들기 Sentence Builder</div><div class="feat-desc">단어 카드 클릭 순서 맞추기 · Tap word cards in the right order</div></div>
+          <div class="feat-emoji">✍️</div>
+          <div class="feat-text"><div class="feat-title">쓰기 탭 Writing Practice (7과)</div><div class="feat-desc">캔버스 직접 필기 · 자기채점 ⭐ · Canvas handwriting with self-scoring</div></div>
         </div>
         <div class="feat-item">
           <div class="feat-emoji">⚡</div>
-          <div class="feat-text"><div class="feat-title">실시간 수업 Live Class</div><div class="feat-desc">손들기·지목·정답 공개 동기화 · Raise hand, call on students, sync answers</div></div>
+          <div class="feat-text"><div class="feat-title">실시간 수업 Live Class Sync</div><div class="feat-desc">손들기·지목·정답 공개 동기화 · Raise hand, call on students, sync answers</div></div>
         </div>
       </div>
     </div>
@@ -339,28 +349,71 @@ body {
     </div>
   </div>
 
-  <!-- ── SLIDE 6: Adult App ── -->
+  <!-- ── SLIDE 6: K-Quest NEW ── -->
   <div class="slide app-slide" id="s6">
-    <div class="app-left" style="position:relative;padding-left:36px;">
+    <div class="app-left" style="position:relative;padding-left:32px;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:#7C4DFF;border-radius:0 4px 4px 0;"></div>
+      <div class="slide-title" style="color:#3D2080;">K-Quest ✨ 새판</div>
+      <div class="slide-title-en">Scene-First Original Curriculum — Launched!</div>
+      <div class="feature-list">
+        <div class="feat-item" style="background:#F3F0FF;">
+          <div class="feat-emoji">🎬</div>
+          <div class="feat-text"><div class="feat-title" style="color:#3D2080;">장면 기반 학습 Scene-First Learning</div><div class="feat-desc">생활 속 한 장면이 유닛 전체를 이끔 — 맥락 먼저, 문법 나중 · One scene drives an entire unit — context before grammar</div></div>
+        </div>
+        <div class="feat-item" style="background:#F3F0FF;">
+          <div class="feat-emoji">🖼</div>
+          <div class="feat-text"><div class="feat-title" style="color:#3D2080;">AI 이미지 AI-Generated Scenes</div><div class="feat-desc">nano banana로 제작한 한국적 장면 일러스트 — 저작권 Free · Korean scene illustrations, copyright-free</div></div>
+        </div>
+        <div class="feat-item" style="background:#F3F0FF;">
+          <div class="feat-emoji">🔊</div>
+          <div class="feat-text"><div class="feat-title" style="color:#3D2080;">Clova Dubbing TTS</div><div class="feat-desc">NAVER Clova 한국어 TTS 음성 — 자연스러운 대화체 · Natural conversational Korean voices</div></div>
+        </div>
+        <div class="feat-item" style="background:#F3F0FF;">
+          <div class="feat-emoji">📖</div>
+          <div class="feat-text"><div class="feat-title" style="color:#3D2080;">오리지널 커리큘럼 100% Original</div><div class="feat-desc">저작권 제약 없는 선생님 직접 기획 — 어휘·문법·대화·퀴즈·실생활 7탭 · 7-tab layout: script, vocab, grammar, usage, quiz &amp; real life</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="app-right" style="background:#F3F0FF;padding:20px;flex-direction:column;gap:12px;">
+      <div class="ep-card">
+        <div class="ep-badge">EP. 01 · 초급</div>
+        <div class="ep-title">안녕? 만나서 반가워! 👋</div>
+        <div class="ep-scene">🏞️ 공원 · Park — 첫 만남 First Meeting</div>
+        <div class="ep-tags">
+          <span class="ep-tag">어휘 18개</span>
+          <span class="ep-tag">문법 7개</span>
+          <span class="ep-tag">반말/존댓말</span>
+          <span class="ep-tag">슬라이드 10장</span>
+          <span class="ep-tag">TTS 6개</span>
+          <span class="ep-tag">실생활 대화</span>
+        </div>
+        <div class="credit-nano">🎨 이미지: nano banana</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: Adult App ── -->
+  <div class="slide app-slide" id="s7">
+    <div class="app-left" style="position:relative;padding-left:32px;">
       <div style="position:absolute;left:0;top:0;bottom:0;width:7px;background:var(--teal);border-radius:0 4px 4px 0;"></div>
       <div class="slide-title">성인반 앱</div>
-      <div class="slide-title-en">Adult Class App</div>
+      <div class="slide-title-en">Adult Class App — 9 Units</div>
       <div class="feature-list">
         <div class="feat-item">
           <div class="feat-emoji">📖</div>
-          <div class="feat-text"><div class="feat-title">어휘 색인 Vocab Index</div><div class="feat-desc">가나다순 전체 단어 검색 + 초성 점프 · Full searchable dictionary with initial-consonant jump</div></div>
+          <div class="feat-text"><div class="feat-title">어휘 색인 Vocab Index</div><div class="feat-desc">전 과 가나다순 + 초성 점프 + 과 이동 · Full searchable dictionary across all units</div></div>
         </div>
         <div class="feat-item">
           <div class="feat-emoji">📌</div>
-          <div class="feat-text"><div class="feat-title">문법 &amp; 발음 패널 Grammar &amp; Pronunciation</div><div class="feat-desc">설명 + 예문 + Usage + 발음 규칙 인덱스 · Explanation, examples, usage notes &amp; pronunciation rules</div></div>
+          <div class="feat-text"><div class="feat-title">문법 &amp; 발음 패널 Grammar &amp; Pronunciation</div><div class="feat-desc">설명 + 예문 + Usage + 발음 규칙 · Explanation, examples, usage &amp; pronunciation rules</div></div>
         </div>
         <div class="feat-item">
-          <div class="feat-emoji">🌍</div>
-          <div class="feat-text"><div class="feat-title">Real Life 대화 Real-World Dialogue</div><div class="feat-desc">카카오톡·듣기·읽기 에피소드 · KakaoTalk, listening &amp; reading episodes</div></div>
+          <div class="feat-emoji">💬</div>
+          <div class="feat-text"><div class="feat-title">Real Life 에피소드 Real-World Episodes</div><div class="feat-desc">카카오톡 말풍선 · 듣기 (TTS+스크립트+퀴즈) · 읽기 지문 · KakaoTalk, listening &amp; reading</div></div>
         </div>
         <div class="feat-item">
-          <div class="feat-emoji">🔊</div>
-          <div class="feat-text"><div class="feat-title">TTS 발음 Text-to-Speech</div><div class="feat-desc">모든 단어·예문 한국어 TTS 재생 · Native Korean TTS for every word &amp; example</div></div>
+          <div class="feat-emoji">🗓</div>
+          <div class="feat-text"><div class="feat-title">Unit 07–09 신규 New Units</div><div class="feat-desc">날짜·시간 / 날씨·계절 / 주말 활동 — 과거형·불규칙 활용 포함 · Dates, weather &amp; weekend activities</div></div>
         </div>
         <div class="feat-item">
           <div class="feat-emoji">⚡</div>
@@ -373,8 +426,8 @@ body {
     </div>
   </div>
 
-  <!-- ── SLIDE 7: Philosophy ── -->
-  <div class="slide s7" id="s7">
+  <!-- ── SLIDE 8: Philosophy ── -->
+  <div class="slide s8" id="s8">
     <div class="slide-title" style="text-align:center;">교육 철학</div>
     <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Education Philosophy</div>
     <div class="phil-grid">
@@ -391,11 +444,11 @@ body {
       <div class="phil-card">
         <div class="phil-stripe" style="background:var(--teal);"></div>
         <div style="width:8px;"></div>
-        <div class="phil-icon">🌏</div>
+        <div class="phil-icon">🎬</div>
         <div class="phil-body">
-          <div class="phil-title">문화 + 언어 함께</div>
-          <div class="phil-en">Culture &amp; Language Together</div>
-          <div class="phil-desc">한국 문화 맥락 속에서 언어를 자연스럽게 배워요<br><em style="font-size:0.88em;color:#aaa;">Language learned through the context of Korean culture</em></div>
+          <div class="phil-title">장면 먼저, 문법 나중</div>
+          <div class="phil-en">Scene-First, Grammar Second</div>
+          <div class="phil-desc">"왜 이걸 배우는지" 맥락 먼저 — 장면에서 단어, 문법이 자연스럽게 파생<br><em style="font-size:0.88em;color:#aaa;">Context before content — vocabulary &amp; grammar emerge from real scenes</em></div>
         </div>
       </div>
       <div class="phil-card">
@@ -411,26 +464,26 @@ body {
       <div class="phil-card">
         <div class="phil-stripe" style="background:var(--gold);"></div>
         <div style="width:8px;"></div>
-        <div class="phil-icon">👐</div>
+        <div class="phil-icon">🌏</div>
         <div class="phil-body">
-          <div class="phil-title">초보자 친화</div>
-          <div class="phil-en">Beginner-Friendly Design</div>
-          <div class="phil-desc">영어 병기, 직관적 UI, 단계적 난이도로 누구나 쉽게<br><em style="font-size:0.88em;color:#aaa;">Bilingual labels, intuitive UI, and gradual difficulty for everyone</em></div>
+          <div class="phil-title">문화 + 언어 함께</div>
+          <div class="phil-en">Culture &amp; Language Together</div>
+          <div class="phil-desc">한국 문화 맥락 속에서 언어를 자연스럽게 배워요<br><em style="font-size:0.88em;color:#aaa;">Language learned through the living context of Korean culture</em></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── SLIDE 8: Stats ── -->
-  <div class="slide s8" id="s8">
+  <!-- ── SLIDE 9: Stats ── -->
+  <div class="slide s9-stats" id="s9">
     <div class="slide-title" style="text-align:center;">지금 이 순간</div>
     <div class="slide-title-en" style="text-align:center;margin-bottom:0;">Halmoni School — Right Now</div>
     <div class="stats-grid">
       <div class="stat-card" style="background:var(--navy);">
         <div class="stat-emoji">🏫</div>
         <div class="stat-num">3</div>
-        <div class="stat-label">개 반 운영</div>
-        <div class="stat-en">Active Classes</div>
+        <div class="stat-label">개 플랫폼</div>
+        <div class="stat-en">Live Platforms</div>
       </div>
       <div class="stat-card" style="background:var(--coral);">
         <div class="stat-emoji">🎓</div>
@@ -438,45 +491,45 @@ body {
         <div class="stat-label">명 학생</div>
         <div class="stat-en">Students Enrolled</div>
       </div>
-      <div class="stat-card" style="background:var(--teal);">
+      <div class="stat-card" style="background:#7C4DFF;">
         <div class="stat-emoji">📚</div>
-        <div class="stat-num">17</div>
-        <div class="stat-label">개 Unit</div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">개 레슨</div>
         <div class="stat-en">Lessons Built</div>
       </div>
-      <div class="stat-card" style="background:var(--purple);">
-        <div class="stat-emoji">❤️</div>
-        <div class="stat-num">∞</div>
-        <div class="stat-label">열정</div>
-        <div class="stat-en">Passion &amp; Love</div>
+      <div class="stat-card" style="background:var(--teal);">
+        <div class="stat-emoji">🎨</div>
+        <div class="stat-num">AI</div>
+        <div class="stat-label">이미지 제작</div>
+        <div class="stat-en">nano banana</div>
       </div>
     </div>
-    <div class="next-banner">
-      <div class="nb-main">🚀  다음 단계: 완전 오리지널 커리큘럼으로 새판 제작 예정! 장면 기반, AI 이미지, 저작권 Free</div>
-      <div class="nb-en">Next: A brand-new platform with 100% original, scene-first curriculum — AI-illustrated!</div>
+    <div class="now-banner">
+      <div class="nb-main">✨ K-Quest 새판 런칭! 장면 기반 · AI 이미지(nano banana) · Clova Dubbing · 오리지널 커리큘럼 · 저작권 Free</div>
+      <div class="nb-en">K-Quest is LIVE — scene-first, AI-illustrated, 100% original curriculum, copyright-free</div>
     </div>
   </div>
 
-  <!-- ── SLIDE 9: Closing ── -->
-  <div class="slide s9" id="s9">
+  <!-- ── SLIDE 10: Closing ── -->
+  <div class="slide s10" id="s10">
     <div class="blob1"></div>
     <div class="blob2"></div>
     <img src="tiger.png" class="tiger-mascot tiger-lg" alt="할머니 학교 마스코트">
-    <div class="s9-title">할머니 학교는 계속됩니다</div>
-    <div class="s9-en">Halmoni School — Ongoing, Growing, Loved</div>
+    <div class="s10-title">할머니 학교는 계속됩니다</div>
+    <div class="s10-en">Halmoni School — Ongoing, Growing, Loved</div>
     <div class="quote-box">
       <span class="quote-mark">"</span>
-      <span class="quote-text"> 선생님 아이디어 + AI 구현력 =<br>세상에 하나뿐인 우리 가족 한국어 학교<br><em style="font-size:0.82em;font-style:italic;opacity:0.7;">Teacher's vision + AI capability =<br>A one-of-a-kind family Korean school</em> </span>
+      <span class="quote-text"> 선생님 아이디어 + Claude 구현력 + nano banana 이미지 =<br>세상에 하나뿐인 우리 가족 한국어 학교<br><em style="font-size:0.82em;font-style:italic;opacity:0.7;">Teacher's vision + Claude's code + nano banana's art =<br>A one-of-a-kind family Korean school</em> </span>
       <span class="quote-mark">"</span>
     </div>
-    <a href="https://katehyu-school.github.io/halmoni-school/" class="s9-link" target="_blank">
-      <div class="s9-badges">
-        <div class="s9-badge" style="background:#c9902a;color:#3d2a1a;">🌷 유아반</div>
-        <div class="s9-badge" style="background:#c4a8d4;color:#3d2a1a;">📖 초등반</div>
-        <div class="s9-badge" style="background:#c8d8e8;color:#3d2a1a;">🏛 성인반</div>
+    <a href="https://katehyu-school.github.io/halmoni-school/" class="s10-link" target="_blank">
+      <div class="s10-badges">
+        <div class="s10-badge" style="background:linear-gradient(135deg,#3D5AFE,#7C4DFF);color:white;">🎬 K-Quest</div>
+        <div class="s10-badge" style="background:#c4a8d4;color:#3d2a1a;">📖 K-Quest Kids</div>
+        <div class="s10-badge" style="background:#c8d8e8;color:#3d2a1a;">🏛 성인반</div>
       </div>
     </a>
-    <div class="s9-footer">내가 제일 잘나가  ·  I Am the Best  ·  2026 Family AI Contest</div>
+    <div class="s10-footer">내가 제일 잘나가  ·  I Am the Best  ·  2026 Family AI Contest</div>
   </div>
 
 </div><!-- /deck -->
@@ -486,11 +539,11 @@ body {
   <button id="btn-prev">◀ 이전</button>
   <div class="dots" id="dots"></div>
   <button id="btn-next">다음 ▶</button>
-  <span id="pg-label" style="min-width:50px;text-align:center;"></span>
+  <span id="pg-label" style="min-width:55px;text-align:center;"></span>
 </div>
 
 <script>
-const TOTAL = 9;
+const TOTAL = 10;
 let current = 1;
 
 function show(n) {
@@ -504,7 +557,6 @@ function show(n) {
   current = n;
 }
 
-// build dots
 const dotsEl = document.getElementById('dots');
 for (let i = 1; i <= TOTAL; i++) {
   const d = document.createElement('div');
