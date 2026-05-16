@@ -1369,7 +1369,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <div class="lesson-item" id="lesson-9" onclick="switchUnit(9)">
     <span class="lesson-num">9과</span>
-    <span class="lesson-title-text">갈비 너무 맛있어요!</span>
+    <span class="lesson-title-text">갈비가 맛있어요</span>
   </div>
 </nav>
 
@@ -1972,16 +1972,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <div class="section" id="u5-vocab">
     <div class="card">
-      <div class="section-title">👗 의류 — Clothes</div>
-      <div class="section-sub">Click each card to flip it!</div>
-      <div class="flashcard-grid" id="fc5-clothes"></div>
-    </div>
-    <div class="card">
-      <div class="section-title">👓 소품 — Accessories</div>
-      <div class="section-sub">Click each card to flip it!</div>
-      <div class="flashcard-grid" id="fc5-accessories"></div>
-    </div>
-    <div class="card">
       <div class="section-title">🦁 동물 — Animals</div>
       <div class="section-sub">Click each card to flip it!</div>
       <div class="flashcard-grid" id="fc5-animals"></div>
@@ -1990,6 +1980,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="section-title">⚡ 형용사 — Describing Words</div>
       <div class="section-sub">Click each card to flip it!</div>
       <div class="flashcard-grid" id="fc5-adjectives"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">👗 의류 — Clothes</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc5-clothes"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">👓 소품 — Accessories</div>
+      <div class="section-sub">Click each card to flip it!</div>
+      <div class="flashcard-grid" id="fc5-accessories"></div>
     </div>
   </div>
 
@@ -2692,7 +2692,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit9">
   <div class="unit-heading">
     <span class="unit-num">9</span>
-    <span class="unit-title">갈비 너무 맛있어요!</span>
+    <span class="unit-title">갈비가 맛있어요</span>
   </div>
   <nav class="section-nav" id="u9-snav">
     <button class="snav-btn" onclick="switchScene(9)">🎬 영상 <span class="snav-en">Scene</span></button>
@@ -2707,7 +2707,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="section" id="u9-scene">
     <div class="card">
       <div class="section-title">🎬 9과 영상 · Scene Viewer</div>
-      <div class="section-sub" id="u9-slide-subtitle">갈비 너무 맛있어요!</div>
+      <div class="section-sub" id="u9-slide-subtitle">갈비가 맛있어요</div>
       <div class="u2-scene-viewer">
         <div class="u2-slide-wrap">
           <img class="u2-slide-img" id="u9-slide-img" alt="slide" onerror="var fb=this.parentElement.querySelector('.slide-load-err');if(fb)fb.style.display='block';" />
@@ -2886,6 +2886,9 @@ const _u1QFallback = [
   {scene:'📺', english:'Grandpa watches TV.',            subject:'할아버지', verb:'텔레비전을 봐요', particle:'가', hint:'할아버지 ends in ㅣ → vowel → 가', answer:'할아버지가 텔레비전을 봐요'},
   {scene:'💬', english:'Mira talks with friends.',       subject:'미라', verb:'이야기해요',        particle:'가', hint:'미라 ends in ㅏ → vowel → 가', answer:'미라가 이야기해요'},
   {scene:'🏃', english:'Suyeon exercises.',              subject:'수연', verb:'운동해요',          particle:'이', hint:'수연 ends in ㄴ → consonant → 이', answer:'수연이 운동해요'},
+  // 🎬 도입부 장면 연습
+  {scene:'🐶', english:'The dog sleeps.',                subject:'강아지', verb:'자요',              particle:'가', hint:'강아지 ends in ㅣ → vowel → 가', answer:'강아지가 자요'},
+  {scene:'🐱', english:'The cat watches TV.',            subject:'고양이', verb:'텔레비전을 봐요',    particle:'가', hint:'고양이 ends in ㅣ → vowel → 가. Full phrase = object + verb!', answer:'고양이가 텔레비전을 봐요'},
 ];
 
 let u2Questions = [];
@@ -2996,6 +2999,18 @@ const _u2QFallback = [
       {text:'공원에서',        type:'place', en:'at the park'},
       {text:'사진을',          type:'name',  en:'photos'},
       {text:'찍어요',          type:'verb',  en:'take'},
+    ]
+  },
+  // 🎬 도입부 장면 연습
+  {
+    scene:'🥋', english:'Hyung and I do taekwondo.',
+    hint:'하고 = and (between nouns). 는 = topic. 태권도를 = object (vowel → 를). 해요 = do.',
+    answer:['형','하고','나','는','태권도','를','해요'],
+    types:['name','particle','name','particle','name','particle','verb'],
+    chunks:[
+      {text:'형하고 나는', type:'name',  en:'Hyung and I'},
+      {text:'태권도를',    type:'name',  en:'taekwondo (obj.)'},
+      {text:'해요',        type:'verb',  en:'do'},
     ]
   },
 ];
@@ -3488,6 +3503,13 @@ const _u4QFallback = [
   {scene:'🐶✅', english:'There is a puppy doll.',       hint:'인형 ends in ㅇ → consonant → 이',   answer:['강아지 인형','이','있어요'],   types:['noun','particle','verb'],   distractors:[{text:'가',type:'particle'},{text:'없어요',type:'verb'},{text:'장난감 자동차',type:'noun'}]},
   {scene:'🚂❌', english:'There is no toy train.',       hint:'기차 ends in ㅏ → vowel → 가',       answer:['장난감 기차','가','없어요'],   types:['noun','particle','verb'],   distractors:[{text:'이',type:'particle'},{text:'있어요',type:'verb'},{text:'강아지 인형',type:'noun'}]},
   {scene:'🧸❌', english:'There is no teddy bear.',      hint:'인형 ends in ㅇ → consonant → 이',   answer:['곰 인형','이','없어요'],       types:['noun','particle','verb'],   distractors:[{text:'가',type:'particle'},{text:'있어요',type:'verb'},{text:'장난감 자동차',type:'noun'}]},
+  // 🎬 도입부 장면 연습 (위치 표현 — 가장 어려운 유형)
+  {scene:'🍎⬆️', english:'The apple is above the chair.',    hint:'사과 ends in ㅏ → vowel → 가. 위에 = above/on top of.',
+   answer:['사과','가','의자 위에','있어요'],   types:['noun','particle','place','verb'],
+   distractors:[{text:'이',type:'particle'},{text:'없어요',type:'verb'},{text:'의자 아래에',type:'place'}]},
+  {scene:'🍎🔘', english:'The apple is inside the circle.',  hint:'사과 ends in ㅏ → vowel → 가. 안에 = inside. Opposite: 밖에 = outside.',
+   answer:['사과','가','동그라미 안에','있어요'], types:['noun','particle','place','verb'],
+   distractors:[{text:'이',type:'particle'},{text:'없어요',type:'verb'},{text:'동그라미 밖에',type:'place'}]},
 ];
 
 let u3Questions = [];
@@ -3541,6 +3563,19 @@ const _u3QFallback = [
     hint:'준영 ends in ㅇ → 이 (subject). 아침에 = in the morning. 운동을 해요.',
     answer:['준영','이','아침에','운동','을','해요'],
     types:['name','particle','time','name','particle','verb']
+  },
+  // 🎬 도입부 장면 연습 (할머니 댁 = 복합 장소 표현)
+  {
+    scene:'🏠🌙', english:"When does Mira go to grandma's house? → She goes tomorrow.",
+    hint:"내일 = tomorrow — NO 에! 할머니 댁에 = to grandma's house (댁 + 에 = destination).",
+    answer:['미라','는','내일','할머니 댁에','가요'],
+    types:['name','particle','time','place','verb']
+  },
+  {
+    scene:'🏠☀️', english:"When does Jaewoo go to grandma's house? → He goes today.",
+    hint:"오늘 = today — NO 에! 할머니 댁에 = to grandma's house. 재우 ends in ㅜ → vowel → 는.",
+    answer:['재우','는','오늘','할머니 댁에','가요'],
+    types:['name','particle','time','place','verb']
   },
 ]; // end _u3QFallback
 
@@ -3894,7 +3929,14 @@ const _u5QFallback = [
    chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'양말이 아니에요.',type:'verb',en:"it's not socks."},{text:'안경이에요.',type:'noun',en:"it's glasses."}]},
   {scene:'🧦', english:"No, it's not glasses. It's socks.", hint:'안경 ends in ㅇ → consonant → 이',
    answer:['안경','이','아니에요.','양말','이에요.'], types:['noun','particle','verb','noun','verb'],
-   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'안경이 아니에요.',type:'verb',en:"it's not glasses."},{text:'양말이에요.',type:'noun',en:"it's socks."}]}
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'안경이 아니에요.',type:'verb',en:"it's not glasses."},{text:'양말이에요.',type:'noun',en:"it's socks."}]},
+  // 🎬 도입부 장면 연습 (동물 이름 부정 — 가장 어려운 유형)
+  {scene:'🐯', english:"No, it's not a tiger. It's a leopard.", hint:'호랑이 ends in ㅣ → vowel → 가. 표범 ends in ㅁ → consonant → 이에요.',
+   answer:['호랑이','가','아니에요.','표범','이에요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'호랑이가 아니에요.',type:'verb',en:"it's not a tiger."},{text:'표범이에요.',type:'noun',en:"it's a leopard."}]},
+  {scene:'🦁', english:"No, it's not a leopard. It's a lion.",  hint:'표범 ends in ㅁ → consonant → 이. 사자 ends in ㅏ → vowel → 예요.',
+   answer:['표범','이','아니에요.','사자','예요.'], types:['noun','particle','verb','noun','verb'],
+   chunks:[{text:'아니요,',type:'particle',en:'No,'},{text:'표범이 아니에요.',type:'verb',en:"it's not a leopard."},{text:'사자예요.',type:'noun',en:"it's a lion."}]}
 ];
 
 // ══════════════════════════════════════════
@@ -6820,12 +6862,13 @@ const SCENE_DATA = {
   },
 
   9: {
-    title: '갈비 너무 맛있어요!',
+    title: '갈비가 맛있어요',
     slides: [
       'data/elem/slides/L2_09/갈비가맛있어요1.png',
       'data/elem/slides/L2_09/갈비가맛있어요2.png',
       'data/elem/slides/L2_09/갈비가맛있어요3.png',
       'data/elem/slides/L2_09/갈비가맛있어요4.png',
+      'data/elem/slides/L2_09/갈비가맛있어요5.png',
     ],
     script: [
       // 각 슬라이드마다 여러 문장이 한 파일에 합쳐짐 (combined)
@@ -6833,6 +6876,7 @@ const SCENE_DATA = {
       [{ko:'숯불 갈비가 맛있어요. 옥수수는 더 맛있어요.',         en:'Charcoal galbi is delicious. Corn is even more delicious.',           audio:'data/elem/TTS/L2_09/2숯불+갈비가+맛있어요_+옥수수는+더+맛있어요_slide2.mp3', combined:true}],
       [{ko:'생선은 싫어요. 맛없어요. 형은 모두 좋아해요.',        en:"I don't like fish. It's not tasty. Older brother likes everything.",  audio:'data/elem/TTS/L2_09/3생선은+싫어요_+맛없어요_+형은+모두+좋아해요_slide3.mp3', combined:true}],
       [{ko:'할아버지, 고맙습니다!',                              en:'Grandpa, thank you!',                                                 audio:'data/elem/TTS/L2_09/4할아버지+고맙습니다_slide4.mp3'}],
+      [{ko:'할아버지! 생신 축하합니다!',                          en:'Grandpa! Happy birthday!',                                            audio:'data/elem/TTS/L2_09/5할아버지!+생신+축하합니다_slide5.mp3'}],
     ]
   },
 };
