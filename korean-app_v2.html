@@ -62,6 +62,39 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
   user-select: none;
 }
 .top-nav-brand:hover { opacity: 0.88; }
+
+/* ── 단어 인덱스 패널 ── */
+.kids-idx-btn{padding:5px 11px;border:1.5px solid rgba(255,255,255,.5);border-radius:7px;background:rgba(255,255,255,.18);color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;transition:all .15s;white-space:nowrap;}
+.kids-idx-btn:hover{background:rgba(255,255,255,.32);}
+.kids-idx-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:3000;}
+.kids-idx-overlay.open{display:block;}
+.kids-idx-panel{position:fixed;top:0;right:-420px;width:min(420px,100vw);height:100%;background:#fdf8f2;z-index:3001;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.18);transition:right .25s cubic-bezier(.4,0,.2,1);}
+.kids-idx-panel.open{right:0;}
+.kids-idx-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--teal);color:#fff;flex-shrink:0;}
+.kids-idx-hdr h3{margin:0;font-size:15px;font-family:'Jua',sans-serif;}
+.kids-idx-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;}
+.kids-idx-search{padding:10px 14px;border-bottom:1px solid #e8e0d8;flex-shrink:0;}
+.kids-idx-search input{width:100%;padding:7px 11px;border:1.5px solid #d8d0c8;border-radius:8px;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none;box-sizing:border-box;}
+.kids-idx-search input:focus{border-color:var(--teal);}
+.kids-idx-unit-bar{display:flex;flex-wrap:wrap;gap:4px;padding:7px 14px;border-bottom:1px solid #e8e0d8;flex-shrink:0;}
+.kids-unit-btn{padding:2px 9px;border:1.5px solid #d8d0c8;border-radius:6px;background:#fff;font-size:12px;font-weight:700;cursor:pointer;color:#666;transition:all .12s;}
+.kids-unit-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.kids-idx-jump-bar{display:flex;flex-wrap:wrap;gap:3px;padding:6px 14px;border-bottom:1px solid #e8e0d8;flex-shrink:0;}
+.kids-jump-btn{padding:2px 8px;border:1.5px solid #d8d0c8;border-radius:5px;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#555;font-family:'Noto Sans KR',sans-serif;transition:all .12s;}
+.kids-jump-btn:hover{border-color:var(--teal);color:var(--teal);background:#edfbf7;}
+.kids-idx-body{overflow-y:auto;padding:12px 16px 20px;flex:1;}
+.kids-idx-section-hdr{font-size:17px;font-weight:900;color:var(--teal);padding:10px 0 4px;border-bottom:2px solid var(--teal);margin-bottom:6px;margin-top:12px;font-family:'Jua',sans-serif;}
+.kids-idx-section-hdr:first-child{margin-top:0;}
+.kids-idx-row{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid #f0ebe4;}
+.kids-idx-kr{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:700;color:#1a1a1a;min-width:90px;}
+.kids-idx-rom{font-size:11px;color:#888;min-width:90px;}
+.kids-idx-en{font-size:12.5px;color:#555;flex:1;}
+.kids-idx-badge{padding:2px 7px;border-radius:5px;background:var(--teal);color:#fff;font-size:10.5px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.kids-idx-page-ctrl{display:none;align-items:center;justify-content:center;gap:10px;padding:8px 14px;border-top:1px solid #e8e0d8;flex-shrink:0;}
+.kids-idx-page-btn{padding:4px 14px;border:1.5px solid #d8d0c8;border-radius:6px;background:#fff;cursor:pointer;font-size:13px;}
+.kids-idx-page-btn:disabled{opacity:.3;cursor:default;}
+.kids-idx-page-info{font-size:12px;color:#888;}
+
 .book-tabs {
   display: flex;
   align-items: stretch;
@@ -1287,7 +1320,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     <button class="book-tab locked">Level 5</button>
     <button class="book-tab locked">Level 6</button>
   </div>
+  <button class="kids-idx-btn" onclick="openKidsIndex()">📖 단어</button>
 </nav>
+
+
+<!-- ── 단어 인덱스 패널 ── -->
+<div class="kids-idx-overlay" id="kids-idx-overlay" onclick="closeKidsIndex()"></div>
+<div class="kids-idx-panel" id="kids-idx-panel">
+  <div class="kids-idx-hdr">
+    <h3>📖 단어 인덱스</h3>
+    <button class="kids-idx-close" onclick="closeKidsIndex()">✕</button>
+  </div>
+  <div class="kids-idx-search">
+    <input id="kids-idx-search" placeholder="🔍 한국어 또는 영어로 검색..." oninput="_kidsIdxFilter()">
+  </div>
+  <div class="kids-idx-unit-bar" id="kids-unit-bar"></div>
+  <div class="kids-idx-jump-bar" id="kids-jump-bar"></div>
+  <div class="kids-idx-body" id="kids-idx-body"></div>
+  <div class="kids-idx-page-ctrl" id="kids-idx-page-ctrl">
+    <button class="kids-idx-page-btn" id="kids-pg-prev" onclick="_kidsIdxGoPage(_kidsIdxPage-1)">◀</button>
+    <span class="kids-idx-page-info" id="kids-pg-info"></span>
+    <button class="kids-idx-page-btn" id="kids-pg-next" onclick="_kidsIdxGoPage(_kidsIdxPage+1)">▶</button>
+  </div>
+</div>
 
 <!-- 출석 바 -->
 <div class="attendance-bar">
@@ -6637,9 +6692,117 @@ function restartU9S() {
   renderU9S();
 }
 
-async function init(){
+async // ── 국어사전 정렬 (Unicode 코드포인트 기반) ──
+function _koCompare(a,b){
+  for(let i=0;i<Math.min(a.length,b.length);i++){const d=a.charCodeAt(i)-b.charCodeAt(i);if(d!==0)return d;}
+  return a.length-b.length;
+}
+// ── 초성 추출 ──
+function getOnset(ch){
+  const c=(ch||'').charCodeAt(0);
+  if(c<0xAC00||c>0xD7A3) return (ch||'#').toUpperCase();
+  return ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'][Math.floor((c-0xAC00)/588)];
+}
+// ── 단어 인덱스 상태 ──
+let _kidsUnits=[], _kidsIdxAll=[], _kidsIdxFiltered=[], _kidsIdxPage=0, _kidsIdxUnit='all';
+const _KIDS_PG=35;
+
+function openKidsIndex(){
+  document.getElementById('kids-idx-overlay').classList.add('open');
+  document.getElementById('kids-idx-panel').classList.add('open');
+  if(!_kidsIdxAll.length) _kidsIdxBuild();
+}
+function closeKidsIndex(){
+  document.getElementById('kids-idx-overlay').classList.remove('open');
+  document.getElementById('kids-idx-panel').classList.remove('open');
+}
+function _kidsIdxBuild(){
+  const words=[];
+  _kidsUnits.forEach((d,idx)=>{
+    if(!d) return;
+    const n=idx+1;
+    const vocab=(d.sections&&d.sections.vocab)?d.sections.vocab:d.vocab;
+    if(!vocab) return;
+    const items=vocab.items||vocab;
+    if(Array.isArray(items)){
+      items.forEach(v=>words.push({korean:v.korean,english:v.english,romanization:v.romanization,emoji:v.emoji||'',unit:n}));
+    } else if(vocab.categories){
+      vocab.categories.forEach(cat=>cat.items.forEach(v=>words.push({korean:v.korean,english:v.english,romanization:v.romanization,emoji:v.emoji||'',unit:n})));
+    }
+  });
+  words.sort((a,b)=>_koCompare(a.korean||'',b.korean||''));
+  _kidsIdxAll=words;
+  // 과 필터 버튼
+  const units=[...new Set(words.map(w=>w.unit))].sort((a,b)=>a-b);
+  const bar=document.getElementById('kids-unit-bar');
+  if(bar) bar.innerHTML='<button class="kids-unit-btn active" onclick="_kidsIdxSetUnit(this,\'all\')">전체</button>'+
+    units.map(n=>`<button class="kids-unit-btn" onclick="_kidsIdxSetUnit(this,${n})">${n}과</button>`).join('');
+  _kidsIdxFilter();
+}
+function _kidsIdxSetUnit(btn, unit){
+  _kidsIdxUnit=unit;
+  document.querySelectorAll('.kids-unit-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  _kidsIdxFilter();
+}
+function _kidsIdxFilter(){
+  const q=(document.getElementById('kids-idx-search').value||'').toLowerCase();
+  let words=_kidsIdxAll.slice();
+  if(_kidsIdxUnit!=='all') words=words.filter(w=>w.unit===_kidsIdxUnit);
+  if(q) words=words.filter(w=>(w.korean||'').includes(q)||(w.english||'').toLowerCase().includes(q));
+  _kidsIdxFiltered=words;
+  _kidsIdxPage=0;
+  // 점프바
+  const onsetPage={};
+  words.forEach((w,i)=>{
+    const o=getOnset((w.korean||'')[0]||'');
+    if(!(o in onsetPage)) onsetPage[o]=Math.floor(i/_KIDS_PG);
+  });
+  const jbar=document.getElementById('kids-jump-bar');
+  if(jbar) jbar.innerHTML=Object.entries(onsetPage).map(([o,pg])=>
+    `<button class="kids-jump-btn" onclick="_kidsIdxGoPage(${pg})">${o}</button>`).join('');
+  _kidsIdxRenderPage();
+}
+function _kidsIdxGoPage(pg){
+  _kidsIdxPage=pg;
+  _kidsIdxRenderPage();
+}
+function _kidsIdxRenderPage(){
+  const words=_kidsIdxFiltered;
+  const totalPg=Math.max(1,Math.ceil(words.length/_KIDS_PG));
+  _kidsIdxPage=Math.max(0,Math.min(_kidsIdxPage,totalPg-1));
+  const slice=words.slice(_kidsIdxPage*_KIDS_PG,(_kidsIdxPage+1)*_KIDS_PG);
+  let html='',cur=null;
+  slice.forEach(w=>{
+    const o=getOnset((w.korean||'')[0]||'');
+    if(o!==cur){cur=o;html+=`<div class="kids-idx-section-hdr">${o}</div>`;}
+    html+=`<div class="kids-idx-row">
+      <div class="kids-idx-kr">${w.korean||''} ${w.emoji}</div>
+      <div class="kids-idx-rom">${w.romanization||''}</div>
+      <div class="kids-idx-en">${w.english||''}</div>
+      <span class="kids-idx-badge" onclick="switchUnit(${w.unit})">${w.unit}과</span>
+    </div>`;
+  });
+  const body=document.getElementById('kids-idx-body');
+  if(body) body.innerHTML=html||'<div style="padding:30px;text-align:center;color:#999">검색 결과 없음</div>';
+  body.scrollTop=0;
+  // 페이지 컨트롤
+  const pc=document.getElementById('kids-idx-page-ctrl');
+  const prev=document.getElementById('kids-pg-prev');
+  const next=document.getElementById('kids-pg-next');
+  const info=document.getElementById('kids-pg-info');
+  if(pc){
+    pc.style.display=totalPg>1?'flex':'none';
+    if(prev) prev.disabled=_kidsIdxPage===0;
+    if(next) next.disabled=_kidsIdxPage===totalPg-1;
+    if(info) info.textContent=`${_kidsIdxPage+1} / ${totalPg}`;
+  }
+}
+
+function init(){
   try {
     const [d1, d2, d3, d4, d5, d6, d7, d8, d9] = await Promise.all([1,2,3,4,5,6,7,8,9].map(n => HalmoniCore.loadUnit(n)));
+    _kidsUnits=[d1,d2,d3,d4,d5,d6,d7,d8,d9];
     u1Questions = (d1 && d1.practice && d1.practice.quiz_items) || _u1QFallback;
     u2Questions = (d2 && d2.practice && d2.practice.quiz_items) || _u2QFallback;
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
