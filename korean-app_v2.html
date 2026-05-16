@@ -7195,4 +7195,9 @@ function switchSection2(sec){
   // practice bar
   const bar = document.getElementById('practice-bar');
   if (bar) { bar.classList.toggle('visible', sec==='quiz'); }
-  if (sec === 'qu
+  if (sec === 'quiz') renderRaiseHandBtns();
+  if (sec === 'scene') sceneInit(2);
+}
+</script>
+</body>
+</html>
