@@ -3143,7 +3143,16 @@ function switchUnit(n){
   document.getElementById('unit'+n).classList.add('active');
   switchScene(n);
   window.scrollTo(0,0);
-}function switchSection(unit,sec){
+}// 단어 인덱스에서 해당 과 새단어 탭으로 직접 이동
+function openUnitVocab(n){
+  switchUnit(n);
+  // 유닛별 분기
+  if(n===6) switchSection6('vocab');
+  else if(n===7) switchSection7('vocab');
+  else if(n===8) switchSection8('vocab');
+  else switchSection(n,'vocab');
+}
+function switchSection(unit,sec){
   const u=document.getElementById('unit'+unit);
   u.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   u.querySelectorAll('.snav-btn').forEach(b=>b.classList.remove('active'));
@@ -7358,10 +7367,19 @@ function _kidsIdxFilter(){
   const op={};
   w.forEach((x,i)=>{const o=_getOnset(x.korean[0]);if(!(o in op))op[o]=Math.floor(i/_KIDS_PG);});
   const jb=document.getElementById('kids-jump-bar');
-  if(jb)jb.innerHTML=Object.entries(op).map(([o,pg])=>`<button class="kids-jump-btn" onclick="_kidsIdxGoPage(${pg})">${o}</button>`).join('');
+  if(jb)jb.innerHTML=Object.entries(op).map(([o,pg])=>`<button class="kids-jump-btn" onclick="_kidsIdxGoPage(${pg},'${o}')">${o}</button>`).join('');
   _kidsIdxRenderPage();
 }
-function _kidsIdxGoPage(pg){_kidsIdxPage=pg;_kidsIdxRenderPage();}
+function _kidsIdxGoPage(pg, onset){
+  _kidsIdxPage=pg;
+  _kidsIdxRenderPage();
+  if(onset){
+    const body=document.getElementById('kids-idx-body');
+    if(!body)return;
+    const hdrs=body.querySelectorAll('.kids-idx-section-hdr');
+    for(const h of hdrs){if(h.textContent.trim()===onset){body.scrollTop=h.offsetTop-body.offsetTop-8;break;}}
+  }
+}
 function _kidsIdxRenderPage(){
   const w=_kidsIdxFiltered;
   const tot=Math.max(1,Math.ceil(w.length/_KIDS_PG));
@@ -7371,7 +7389,7 @@ function _kidsIdxRenderPage(){
   sl.forEach(v=>{
     const o=_getOnset(v.korean[0]);
     if(o!==cur){cur=o;h+=`<div class="kids-idx-section-hdr">${o}</div>`;}
-    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="switchUnit(${v.unit})">${v.unit}과</button></div>`;
+    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit});closeKidsIndex()">${v.unit}과</button></div>`;
   });
   const body=document.getElementById('kids-idx-body');
   if(body){body.innerHTML=h||'<div style="padding:30px;text-align:center;color:#aaa">검색 결과 없음</div>';body.scrollTop=0;}
