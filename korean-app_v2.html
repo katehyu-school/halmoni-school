@@ -7339,7 +7339,7 @@ async function _kidsIdxLoad(){
       const vocab=(d.sections&&d.sections.vocab)?d.sections.vocab:d.vocab;
       if(!vocab)continue;
       const items=vocab.items||(Array.isArray(vocab)?vocab:[]);
-      items.forEach(v=>{if(v.korean)words.push({korean:v.korean,english:v.english||'',romanization:v.romanization||'',emoji:v.emoji||'',unit:n});});
+      items.forEach(v=>{if(v.korean)words.push({korean:v.korean,english:v.english||'',romanization:v.romanization||'',emoji:v.emoji||'',unit:n,book:d.book||2});});
     }catch(e){console.warn('idx unit'+n,e);}
   }
   words.sort((a,b)=>_koCompare(a.korean,b.korean));
@@ -7374,10 +7374,17 @@ function _kidsIdxGoPage(pg, onset){
   _kidsIdxPage=pg;
   _kidsIdxRenderPage();
   if(onset){
-    const body=document.getElementById('kids-idx-body');
-    if(!body)return;
-    const hdrs=body.querySelectorAll('.kids-idx-section-hdr');
-    for(const h of hdrs){if(h.textContent.trim()===onset){body.scrollTop=h.offsetTop-body.offsetTop-8;break;}}
+    requestAnimationFrame(()=>{
+      const body=document.getElementById('kids-idx-body');
+      if(!body)return;
+      const hdrs=body.querySelectorAll('.kids-idx-section-hdr');
+      for(const h of hdrs){
+        if(h.textContent.trim()===onset){
+          body.scrollTop=h.offsetTop-body.offsetTop-8;
+          break;
+        }
+      }
+    });
   }
 }
 function _kidsIdxRenderPage(){
@@ -7389,7 +7396,7 @@ function _kidsIdxRenderPage(){
   sl.forEach(v=>{
     const o=_getOnset(v.korean[0]);
     if(o!==cur){cur=o;h+=`<div class="kids-idx-section-hdr">${o}</div>`;}
-    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit});closeKidsIndex()">${v.unit}과</button></div>`;
+    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit});closeKidsIndex()">Book ${v.book||2} · ${v.unit}과</button></div>`;
   });
   const body=document.getElementById('kids-idx-body');
   if(body){body.innerHTML=h||'<div style="padding:30px;text-align:center;color:#aaa">검색 결과 없음</div>';body.scrollTop=0;}
