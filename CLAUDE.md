@@ -14,12 +14,19 @@
 ## 📁 프로젝트 구조
 **위치**: `C:\Users\kateh\Desktop\halmoni-school\`
 
+### 브랜드
+| 브랜드 | 파일 | 타겟 |
+|--------|------|------|
+| **K-Quest** | `nhs.html` | 중고등 이상 — Scene-First 오리지널 커리큘럼 |
+| **K-Quest Kids** | `korean-app_v2.html` | 초등 — 게임 중심, Level 1 / Level 2 |
+| (구) 성인반 | `sejong-korean_v1.html` | 현재 유지 |
+
 ### 핵심 파일
 | 파일 | 설명 |
 |------|------|
-| `sejong-korean_v1.html` | 성인반 앱 (메인 작업 파일) |
-| `korean-app_v2.html` | 초등반 앱 (현재 약 6300줄) |
-| `nhs.html` | 새판 앱 — Scene-First 플랫폼 (범용 렌더러) |
+| `sejong-korean_v1.html` | 성인반 앱 — **더 이상 수정 안 함, 참고용으로만 유지** |
+| `korean-app_v2.html` | K-Quest Kids — 초등반 앱 (현재 약 7400줄) |
+| `nhs.html` | K-Quest — Scene-First 플랫폼 (범용 렌더러) |
 | `index.html` | 메인 인덱스 |
 | `CLAUDE.md` | 이 파일 — 프로젝트 인수인계 문서 |
 
@@ -29,10 +36,12 @@
 | `contents/sejong/` | 세종한국어 성인반 교재 PDF + txt |
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
 | `data/elem/book2/unit0N.json` | 초등반 unit별 데이터 (unit01~06.json) |
+| `data/elem/book3/unit01.json` | **Book 3 표준 템플릿** (unit06 구조 기반) |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
-| `data/nhs/ep01.json` | 새판 ep01 데이터 (공원 · 첫 만남) |
-| `data/nhs/slides/` | 새판 슬라이드 이미지 (PNG) |
-| `data/nhs/TTS/` | 새판 TTS 음성 파일 (MP3) |
+| `data/nhs/ep01.json` | K-Quest ep01 데이터 (공원 · 첫 만남) |
+| `data/nhs/ep02.json` | K-Quest ep02 데이터 (저녁 식사) |
+| `data/nhs/slides/` | K-Quest 슬라이드 이미지 (PNG) |
+| `data/nhs/TTS/` | K-Quest TTS 음성 파일 (MP3) |
 
 ### 성인반 아키텍처 핵심
 - `core/adult-renderer.js` — 5개 패널 렌더러 (AdultRenderer)
@@ -172,8 +181,9 @@ const urlName   = _hc ? _hc.urlName : null;
 - **script 경로 상대경로화** — 로컬/서버 모두 동작
 - **📖 단어 인덱스 탭 신설** — 04~08과 전체 어휘 가나다순, 검색/초성점프/과 이동 기능
 
-## 📋 완료된 주요 작업 (nhs.html + data/nhs/ep01.json)
+## 📋 완료된 주요 작업 (nhs.html + data/nhs/)
 
+### ep01 (공원 · 첫 만남)
 - **ep01 초급 1화 완성** — 공원·첫 만남 (안녕? 만나서 반가워!)
 - 7탭 구조: 영상·대본 / 새어휘 / 문법 / 반말·존댓말 / 사용법 / 퀴즈 / 실생활
 - 슬라이드 10장 연결 (data/nhs/slides/)
@@ -183,6 +193,35 @@ const urlName   = _hc ? _hc.urlName : null;
 - 페이지 로드 시 첫 슬라이드 음성 자동재생
 - Clova Dubbing 5초 출처 자막
 - file:// 로컬 호환: ep01 데이터 nhs.html에 인라인 내장
+
+### ep02 (저녁 식사)
+- **ep02 초급 2화 완성** — 집·저녁 식사 (잘 먹겠습니다!)
+- 슬라이드 8장, TTS 10개 연결
+- 어휘 카테고리형 구조 (가족/사람/명사/시간/동사/형용사/표현 7개 카테고리)
+- 문법 7개 — **절충 포맷**: `pattern` + `table` + `fill_blanks` 3종 세트
+  - 을/를 목적격 조사 (신규) / 이거·그거·저거 / 아침에·저녁에 vs 어제·오늘
+  - 잘 먹겠습니다·잘 먹었습니다 / 배구하다 vs 배구를 하다 / 맛있어요·맛없어요 / 알아요·몰라요
+- `banmal_jondaemal` 확장: `vocab_comparison`(밥 vs 식사) + `greeting_comparison`(밥 먹었어?) 섹션 추가
+- `pronunciation` 섹션 신설 — 받침 연음화 (먹어요→[머거요], 알아요→[아라요])
+- ep02 데이터 nhs.html 인라인 동기화 완료
+
+### nhs.html 렌더러 개선
+- **📖 단어 인덱스** — 초성 점프 클릭 시 해당 섹션 스크롤 (`_idxGoPage(pg, onset)`)
+- **Build a Syllable TTS** — 음절 완성 시 🔊 듣기 버튼 표시, 미완성 시 숨김
+- **받침 패널 그룹 재설계** — 7대표음 그룹 카드 + 🔊 TTS 버튼 (윽/은/읃/을/음/읍/응)
+  - 각 그룹: 대표 자음 + 같은 소리로 발음되는 자음들 카드로 묶음 (예: ㄷ 그룹 → ㄷ ㅅ ㅆ ㅈ ㅊ ㅌ ㅎ)
+- **퀴즈 시스템 전면 개편** — `renderQuizQ()` 완전 재작성
+  - `mc` 모드: 개념 질문 + 영어 병기 + 객관식 (음성 없음)
+  - `listen` 모드: 에피소드 대사 TTS(🔊) + 객관식 (타이핑 없음 → 쉼표/느낌표 오답 문제 해결)
+  - ep01 퀴즈: `audio_text` 추가 — 실제 대사 활용 (예: "안녕? 나는 정민이야.")
+  - ep02 퀴즈: 전면 교체 — 6개 listen 문항 (잘 먹겠습니다, 맛있어요, 배구를 해요 등)
+- **K-Quest 표준 템플릿 생성** — `data/nhs/ep_TEMPLATE.json`
+  - ep01 + ep02 통합 기반, 모든 섹션 `_note` 주석 포함
+  - `slides` 배열 + `video: null` 공존 (mp4 대비)
+  - 미래 ep03+ 제작 시 이 파일 복사해서 사용
+
+> ⚠️ **현재 상태**: ep01, ep02 리뷰 중. 공개용 (학생 친구들에게도 오픈 예정).
+> K-Quest 표준 템플릿 **`data/nhs/ep_TEMPLATE.json` 생성 완료** ✅
 
 ## 📋 완료된 주요 작업 (korean-app_v2.html)
 
@@ -196,6 +235,13 @@ const urlName   = _hc ? _hc.urlName : null;
 - goToU6Part2에 syncNext(6,10) 추가 (마지막 듣기→만들기 전환)
 - **07과 ✏️ 쓰기 탭 추가** — 고유어(Native Korean)/한자어(Sino-Korean) 모드, 캔버스 필기, 자기채점(⭐ 점수), 최종 결과 화면
 - **1과 '우리 반 친구들' 카드 제거** — 불필요 섹션 삭제
+- **📖 단어 인덱스 추가** — 과 필터 + 초성 점프바 + 35단어/페이지 페이지네이션
+  - `openKidsIndex()` — lazy loading (init() 무수정, 슬라이드 뷰어 안전)
+  - `_kidsIdxLoad()` — `HalmoniCore.loadUnit(n)` 으로 unit 1~9 병렬 로드
+  - 초성 점프: `_kidsIdxGoPage(pg, onset)` → 페이지 이동 후 해당 초성 섹션 스크롤
+  - `openUnitVocab(n)` — 배지 클릭 시 해당 과 **새단어 탭으로 직접 이동** (unit별 분기: 6/7/8과는 각 전용 함수)
+  - 초성 점프 scroll: `requestAnimationFrame()` 래핑 → DOM 렌더 후 `h.offsetTop - body.offsetTop - 8`
+  - 배지 표시: "몇과" → "Book N · 몇과" (`book` 필드 — `_kidsIdxLoad()`에서 `d.book||2` 저장)
 
 ---
 
@@ -231,16 +277,24 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ## 🔜 다음 작업 예정
 
+### K-Quest (nhs.html) — 메인 개발 타겟
+- ep01, ep02 **리뷰 진행 중** — 공개 전 심사숙고 단계
+- 공개 대상: 학생 + 학생 친구들 (외부 공개용)
+- **K-Quest 표준 템플릿 완성** ✅ — `data/nhs/ep_TEMPLATE.json` 생성 완료
+- ep03 준비 예정: 어휘/문법 구성 → 스크립트 → 슬라이드/mp4 → TTS 순서
+  - ep03부터 슬라이드 대신 mp4(영상) 방식 가능 — 템플릿에 `video` 필드 이미 포함
+- **nhs.html 렌더러**: mp4 video 필드 지원 추가 필요 (현재 slides만 처리)
+
 ### 초등반 korean-app_v2.html
-- **2과 마무리 후 콘텐츠 동결** — UI/기능은 유지, 새 단원 추가 중단
-- 학생들은 현재 UI 그대로 사용
+- **콘텐츠 동결** — UI/기능 유지, 새 단원 추가 중단
+- Book 3 데이터 준비 중: `data/elem/book3/unit01.json` 템플릿 생성 완료
 
 ### 성인반 sejong-korean_v1.html
-- 현재 콘텐츠 유지 (새 단원 추가 중단)
+- **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
 
 ---
 
-## 🆕 새판 (NHS — New Halmoni School) — 개발 중
+## 🆕 K-Quest (구 NHS — New Halmoni School) — 개발 중
 
 ### 배경
 - 세종한국어2022 / 한글학교 한국어 → CC 4유형 (출처표시 + 상업적이용금지 + 변경금지)
@@ -292,29 +346,56 @@ halmoni-school/
 ```
 
 ### 현재 상태 (로컬 테스트 단계)
-- ep01 데이터가 **nhs.html에 인라인 내장** — file:// 로컬 호환용
-- `data/nhs/ep01.json` 별도 파일도 유지 (나중에 fetch() 방식으로 전환 시 사용)
+- ep01, ep02 데이터가 **nhs.html에 인라인 내장** — file:// 로컬 호환용
+- `data/nhs/ep01.json`, `data/nhs/ep02.json` 별도 파일도 유지
 - **GitHub Pages 배포 후**: fetch() 방식으로 전환 → json 하나만 관리
-- 두 파일(nhs.html 인라인 + ep01.json) 수정 시 **반드시 동기화** 필요
+- 두 파일(nhs.html 인라인 + epNN.json) 수정 시 **반드시 동기화** 필요
+- 동기화 방법: Python bash로 `EPISODE_DATA.epNN` 블록 교체
 
-### ep01.json 데이터 구조
+### ep JSON 데이터 구조 (ep02 기준 — 표준)
 ```json
 {
-  "id": "ep01",
-  "title": "안녕? 만나서 반가워!",
+  "id": "ep02",
+  "title": "저녁 식사",
+  "title_en": "Dinner Time",
   "level": "초급",
-  "scene": "🏞️ 공원 · Park",
-  "slides": ["data/nhs/slides/...1.png", ...],
+  "scene": "🍚 저녁 식사 · Dinner Time",
+  "slides": ["data/nhs/slides/ep2/....png"],  ← 슬라이드 방식 (PNG 배열)
+  "video": null,                               ← mp4 방식 (둘 중 하나만 — video 우선)
   "characters": [{ "id", "name", "emoji", "color" }],
-  "script": [{ "speaker", "text", "en", "speech_type", "audio" }],
-  "vocab": [{ "korean", "romanization", "english", "emoji" }],
-  "grammar": [{ "id", "title", "title_en", "icon", "rule", "explanation_en", "examples": [{"ko","en"}] }],
-  "banmal_jondaemal": { "intro_ko", "intro_en", "rows": [{ "situation_ko", "situation_en", "banmal", "jondaemal", "note" }], "tip" },
+  "script": [{ "speaker", "text", "en", "speech_type", "audio", "slide" }],
+  "vocab": [{ "category": "카테고리명", "items": [{ "korean", "romanization", "english", "emoji", "note"(옵션) }] }],
+  "grammar": [{
+    "id", "title", "title_en", "icon",
+    "rule",           ← 한 줄 규칙 요약
+    "pattern",        ← 렌더러 패턴박스용
+    "explanation_en", ← 영어 설명
+    "table": { "columns": [], "rows": [[]] },
+    "examples": [{ "ko", "en" }],
+    "fill_blanks": [{ "sentence"(___로 빈칸), "answer", "hint" }]
+  }],
+  "banmal_jondaemal": {
+    "intro_ko", "intro_en",
+    "rows": [{ "situation_ko", "situation_en", "banmal", "jondaemal", "note" }],
+    "tip",
+    "vocab_comparison": { "title_ko", "title_en", "intro_ko", "intro_en", "table": [{"banmal","jondaemal","en"}] },
+    "greeting_comparison": { "title_ko", "title_en", "intro_ko", "intro_en", "rows": [{"speech_level","example","en"}], "note_ko", "note_en" }
+  },
   "usage": [{ "title", "title_en", "explanation_en", "examples": [{"ko","en"}] }],
-  "quiz": [{ "id", "question_ko", "question_en", "options", "answer", "explanation" }],
-  "real_life": [{ "title", "title_en", "setup_ko", "setup_en", "lines": [{"speaker","text","en"}] }]
+  "quiz": [{ "id", "audio_text"(listen 모드용 TTS 대사 — 있으면 🔊+객관식, 없으면 mc모드+영어병기), "question_ko", "question_en", "options": [], "answer"(0-based index), "explanation" }],
+  "real_life": [
+    { "title", "title_en", "setup_ko", "setup_en", "lines": [{"speaker","text","en"}] },
+    { "type": "tip", "title", "content_ko", "content_en" }
+  ],
+  "pronunciation": [{
+    "id", "title", "rule",
+    "table": { "columns": [], "rows": [[표기, 발음, 규칙]] },
+    "tip"
+  }]
 }
 ```
+
+> `fill_blanks` 빈칸은 `___` (언더바 **정확히 3개**) 사용 — 렌더러가 split('___')으로 파싱
 
 ### nhs.html 7탭 구조
 ```

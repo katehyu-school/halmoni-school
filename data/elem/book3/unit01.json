@@ -1,0 +1,293 @@
+{
+  "unit": 1,
+  "title": "📝 유닛 제목 (예: 오늘 뭐 먹었어요?)",
+  "book": 3,
+
+  "sections": {
+
+    "vocab": {
+      "___GUIDE___": "단어를 카테고리별로 묶어요. 카테고리 이름은 자유롭게. 각 단어: emoji + kr + en + rom",
+
+      "category1": [
+        {
+          "emoji": "🍚",
+          "kr": "밥",
+          "en": "rice / meal",
+          "rom": "bap"
+        },
+        {
+          "emoji": "🍜",
+          "kr": "국수",
+          "en": "noodles",
+          "rom": "guk-su"
+        },
+        {
+          "emoji": "🥗",
+          "kr": "WORD3",
+          "en": "English meaning",
+          "rom": "romanization"
+        }
+      ],
+
+      "category2": [
+        {
+          "emoji": "😋",
+          "kr": "맛있어요",
+          "en": "delicious / it's tasty",
+          "rom": "ma-si-sseo-yo"
+        },
+        {
+          "emoji": "😞",
+          "kr": "맛없어요",
+          "en": "not tasty",
+          "rom": "ma-deop-sseo-yo"
+        }
+      ]
+    },
+
+    "grammar": {
+      "___GUIDE___": "문법 항목 배열. 각 항목: id, title, subtitle, pattern, meaning, description, rule_boxes[], examples[]",
+
+      "sections": [
+        {
+          "id": "g_UNITNUM_grammar01",
+          "title": "문법 제목 (예: -았/었어요 과거형)",
+          "subtitle": "한 줄 설명 (예: Past tense ending)",
+          "pattern": "Verb stem + 았/었어요",
+          "meaning": "did / was (past tense)",
+          "description": "영어로 간단한 설명. When to use this grammar point and how it works.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 Rule Label (예: ㅏ/ㅗ stems → 았어요)",
+              "examples": [
+                "먹었어요. = I ate. (먹다 → 먹었어요)",
+                "갔어요. = I went. (가다 → 갔어요)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 Rule Label 2 (옵션 — 필요 없으면 삭제)",
+              "examples": [
+                "마셨어요. = I drank.",
+                "했어요. = I did."
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "어제 뭐 먹었어요?",
+              "english": "What did you eat yesterday?",
+              "highlight": "먹었어요"
+            },
+            {
+              "korean": "학교에 갔어요.",
+              "english": "I went to school.",
+              "highlight": "갔어요"
+            },
+            {
+              "korean": "친구를 만났어요.",
+              "english": "I met a friend.",
+              "highlight": "만났어요"
+            }
+          ]
+        },
+
+        {
+          "id": "g_UNITNUM_grammar02",
+          "title": "문법 제목 2 (옵션 — 필요 없으면 이 블록 삭제)",
+          "subtitle": "한 줄 설명",
+          "pattern": "Pattern here",
+          "meaning": "meaning here",
+          "description": "Description in English.",
+          "rule_boxes": [
+            {
+              "color": "green",
+              "label": "🟢 Rule Label",
+              "examples": [
+                "Example sentence 1",
+                "Example sentence 2"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "한국어 예문",
+              "english": "English translation",
+              "highlight": "하이라이트할 부분"
+            }
+          ]
+        }
+      ]
+    },
+
+    "practice": {
+      "___GUIDE___": "3가지 연습 타입: fill_items(빈칸채우기) · listen_quiz(듣기) · step1_chunks(청크 드래그) · step2_words(낱말 드래그)",
+
+      "fill_items": [
+        {
+          "q": "질문 (예: 어제 뭐 했어요?)",
+          "suffix": "빈칸 뒤 문장 (예: 에서 밥을 먹었어요.)",
+          "ans": "정답 (예: 집)",
+          "opts": ["집", "학교", "공원"],
+          "en": "English translation of the question"
+        },
+        {
+          "q": "질문 2",
+          "suffix": "빈칸 뒤 문장",
+          "ans": "정답",
+          "opts": ["정답", "오답1", "오답2"],
+          "en": "English translation"
+        },
+        {
+          "q": "질문 3",
+          "suffix": "빈칸 뒤 문장",
+          "ans": "정답",
+          "opts": ["정답", "오답1", "오답2"],
+          "en": "English translation"
+        },
+        {
+          "q": "질문 4",
+          "suffix": "빈칸 뒤 문장",
+          "ans": "정답",
+          "opts": ["정답", "오답1", "오답2"],
+          "en": "English translation"
+        },
+        {
+          "q": "질문 5",
+          "suffix": "빈칸 뒤 문장",
+          "ans": "정답",
+          "opts": ["정답", "오답1", "오답2"],
+          "en": "English translation"
+        }
+      ],
+
+      "listen_quiz": [
+        {
+          "___GUIDE___": "audio = TTS로 읽을 문장. correct = 정답 선택지 index(0/1/2). choices = 3개 선택지",
+          "audio": "민수가 밥을 먹어요.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🍚", "kr": "밥을 먹어요",   "en": "eating rice" },
+            { "emoji": "🍜", "kr": "국수를 먹어요", "en": "eating noodles" },
+            { "emoji": "🥤", "kr": "주스를 마셔요", "en": "drinking juice" }
+          ]
+        },
+        {
+          "audio": "보람이 학교에 갔어요.",
+          "correct": 1,
+          "choices": [
+            { "emoji": "🏠", "kr": "집에 갔어요",   "en": "went home" },
+            { "emoji": "🏫", "kr": "학교에 갔어요", "en": "went to school" },
+            { "emoji": "🛒", "kr": "가게에 갔어요", "en": "went to the store" }
+          ]
+        },
+        {
+          "audio": "듣기 문장 3 (TTS 재생 텍스트)",
+          "correct": 2,
+          "choices": [
+            { "emoji": "😊", "kr": "선택지1", "en": "choice 1" },
+            { "emoji": "😊", "kr": "선택지2", "en": "choice 2" },
+            { "emoji": "✅", "kr": "정답 선택지", "en": "correct choice" }
+          ]
+        }
+      ],
+
+      "step1_chunks": [
+        {
+          "___GUIDE___": "청크(덩어리) 드래그. scene=이모지, english=영어 전체 문장, hint=문법 힌트, sentence=완성 문장, chunks=각 조각",
+          "scene": "🍽️",
+          "english": "I ate rice at home.",
+          "hint": "action location → 에서",
+          "sentence": "집에서 밥을 먹었어요.",
+          "chunks": [
+            { "text": "집에서",    "type": "place", "en": "at home" },
+            { "text": "밥을",      "type": "name",  "en": "rice" },
+            { "text": "먹었어요.", "type": "verb",  "en": "ate" }
+          ]
+        },
+        {
+          "scene": "🏫",
+          "english": "I went to school.",
+          "hint": "destination → 에",
+          "sentence": "학교에 갔어요.",
+          "chunks": [
+            { "text": "학교에",   "type": "place", "en": "to school" },
+            { "text": "갔어요.",  "type": "verb",  "en": "went" }
+          ]
+        },
+        {
+          "scene": "👫",
+          "english": "I met a friend.",
+          "hint": "object → 를",
+          "sentence": "친구를 만났어요.",
+          "chunks": [
+            { "text": "친구를",    "type": "name", "en": "a friend" },
+            { "text": "만났어요.", "type": "verb", "en": "met" }
+          ]
+        },
+        {
+          "scene": "📚",
+          "english": "문장 4",
+          "hint": "문법 힌트",
+          "sentence": "완성 문장",
+          "chunks": [
+            { "text": "조각1", "type": "name",  "en": "English 1" },
+            { "text": "조각2", "type": "place", "en": "English 2" },
+            { "text": "조각3.", "type": "verb",  "en": "English 3" }
+          ]
+        },
+        {
+          "scene": "🎈",
+          "english": "문장 5",
+          "hint": "문법 힌트",
+          "sentence": "완성 문장",
+          "chunks": [
+            { "text": "조각1", "type": "name", "en": "English 1" },
+            { "text": "조각2.", "type": "verb", "en": "English 2" }
+          ]
+        },
+        {
+          "scene": "🌸",
+          "english": "문장 6",
+          "hint": "문법 힌트",
+          "sentence": "완성 문장",
+          "chunks": [
+            { "text": "조각1", "type": "name",     "en": "English 1" },
+            { "text": "조각2", "type": "particle",  "en": "English 2" },
+            { "text": "조각3.", "type": "verb",     "en": "English 3" }
+          ]
+        }
+      ],
+
+      "step2_words": [
+        {
+          "___GUIDE___": "낱말 단위 드래그. answer=정답 순서대로 낱말 배열, types=각 낱말 타입(name/place/particle/verb)",
+          "scene": "🍚",
+          "english": "I ate rice at home yesterday.",
+          "hint": "어제 = yesterday · 에서 = action location",
+          "sentence": "어제 집에서 밥을 먹었어요.",
+          "answer": ["어제", "집에서", "밥을", "먹었어요."],
+          "types": ["name", "place", "name", "verb"]
+        },
+        {
+          "scene": "👫",
+          "english": "Mira met a friend at school.",
+          "hint": "에서 = action location",
+          "sentence": "미라는 학교에서 친구를 만났어요.",
+          "answer": ["미라는", "학교에서", "친구를", "만났어요."],
+          "types": ["name", "place", "name", "verb"]
+        },
+        {
+          "___GUIDE___": "🐰 마지막 문장은 복잡한 10조각짜리로! (완전 분해)",
+          "scene": "🐰",
+          "english": "Jisoo and Minho ate delicious noodles at the restaurant.",
+          "hint": "모든 조사를 잘 봐요! 👀",
+          "sentence": "지수하고 민호는 식당에서 맛있는 국수를 먹었어요.",
+          "answer": ["지수", "하고", "민호", "는", "식당", "에서", "맛있는", "국수", "를", "먹었어요."],
+          "types": ["name", "particle", "name", "particle", "place", "particle", "name", "name", "particle", "verb"]
+        }
+      ]
+    }
+  }
+}
