@@ -329,6 +329,18 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .syl-slot.optional.filled{opacity:1;}
 .syl-slot-label{font-size:9px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:4px;}
 .syl-plus{font-size:20px;color:var(--gray-200);font-weight:300;margin-top:-20px;}
+.batchim-groups{display:flex;flex-direction:column;gap:12px;margin:12px 0;}
+.batchim-group{border:1.5px solid var(--warm-200);border-radius:12px;overflow:hidden;}
+.batchim-group-hdr{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--teal-50);border-bottom:1px solid var(--warm-200);}
+.batchim-group-sound{font-size:28px;font-weight:900;color:var(--teal-dark);min-width:36px;font-family:var(--font-kr);}
+.batchim-group-rom{font-size:13px;font-weight:700;color:var(--teal);min-width:80px;font-family:monospace;}
+.batchim-group-ex{font-size:12px;color:var(--warm-600);flex:1;}
+.batchim-group-tts{padding:5px 12px;border:none;border-radius:7px;background:var(--teal);color:#fff;font-size:14px;cursor:pointer;font-weight:700;}
+.batchim-group-tts:hover{background:var(--teal-dark);}
+.batchim-members{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;background:#fff;}
+.batchim-member{display:flex;flex-direction:column;align-items:center;padding:8px 12px;border-radius:8px;background:var(--warm-50);border:1.5px solid var(--warm-200);min-width:52px;}
+.batchim-member-kr{font-size:24px;font-weight:900;color:var(--warm-800);font-family:var(--font-kr);}
+.batchim-member-ex{font-size:10px;color:var(--warm-500);margin-top:2px;}
 .syl-result-box{text-align:center;padding:18px 24px;background:var(--teal-50);border-radius:var(--radius-md);border:2px solid var(--teal-lt);min-width:100px;}
 .syl-result-char{font-size:72px;font-weight:900;color:var(--teal-dark);line-height:1;}
 .syl-result-rom{font-size:13px;color:var(--teal);margin-top:4px;font-weight:600;}
@@ -3363,9 +3375,16 @@ function getOnset(ch){
   return ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'][Math.floor((c-0xAC00)/588)];
 }
 let _idxPage=0; const _IDX_PG=30; let _idxFiltered=[];
-function _idxGoPage(pg){
+function _idxGoPage(pg, onset){
   _idxPage=pg;
   _renderIdxVocabPage();
+  // scroll to onset section after render
+  if(onset){
+    const body=document.getElementById('idx-body');
+    if(!body)return;
+    const hdrs=body.querySelectorAll('.idx-section-hdr');
+    for(const h of hdrs){if(h.textContent.trim()===onset){h.scrollIntoView({block:'start'});body.scrollTop=body.scrollTop-8;break;}}
+  }
 }
 function _renderIdxVocabPage(){
   const words=_idxFiltered;
@@ -3439,7 +3458,7 @@ function renderIdxBody(){
     });
     const jbar=document.getElementById('idx-jump-bar');
     if(jbar) jbar.innerHTML=Object.entries(onsetPage).map(([o,pg])=>
-      `<button class="idx-jump-btn" onclick="_idxGoPage(${pg})">${o}</button>`).join('');
+      `<button class="idx-jump-btn" onclick="_idxGoPage(${pg},'${o}')">${o}</button>`).join('');
     _renderIdxVocabPage();
 
   } else if(idxTab==='grammar'){
@@ -3581,9 +3600,15 @@ function updateSylResult(){
   cd.closest('.syl-slot').classList.toggle('filled',!!sylCoda);
   if(sylOnset&&sylNucleus){
     const ch=combineSyl(sylOnset,sylNucleus,sylCoda||'');
-    if(ch){rc.textContent=ch;rr.textContent=(ONSET_ROM[sylOnset]||'')+(NUC_ROM[sylNucleus]||'')+(CODA_ROM[sylCoda]||'');}
-    else{rc.textContent='…';rr.textContent='';}
-  }else{rc.textContent='…';rr.textContent='';}
+    if(ch){
+      rc.textContent=ch;
+      rr.textContent=(ONSET_ROM[sylOnset]||'')+(NUC_ROM[sylNucleus]||'')+(CODA_ROM[sylCoda]||'');
+      const tb=document.getElementById('syl-tts-btn');if(tb)tb.style.display='';
+    }else{
+      rc.textContent='…';rr.textContent='';
+      const tb=document.getElementById('syl-tts-btn');if(tb)tb.style.display='none';
+    }
+  }else{rc.textContent='…';rr.textContent='';const tb=document.getElementById('syl-tts-btn');if(tb)tb.style.display='none';}
   document.querySelectorAll('#syl-onset-picker .spick').forEach(b=>b.classList.toggle('sel',b.dataset.v===sylOnset));
   document.querySelectorAll('#syl-nuc-picker .spick').forEach(b=>b.classList.toggle('sel',b.dataset.v===sylNucleus));
   document.querySelectorAll('#syl-coda-picker .spick').forEach(b=>b.classList.toggle('sel',b.dataset.v===sylCoda));
@@ -3849,7 +3874,7 @@ function buildSylPanel(){
     +'<div class="syl-plus">+</div>'
     +'<div class="syl-slot-group"><div class="syl-slot optional"><span id="syl-coda-display">∅</span></div><div class="syl-slot-label">받침(opt)</div></div>'
     +'<div class="syl-plus">=</div>'
-    +'<div class="syl-result-box"><div class="syl-result-char" id="syl-result-char">…</div><div class="syl-result-rom" id="syl-result-rom"></div></div>'
+    +'<div class="syl-result-box"><div class="syl-result-char" id="syl-result-char">…</div><div class="syl-result-rom" id="syl-result-rom"></div><button id="syl-tts-btn" onclick="speakTTS(document.getElementById(\'syl-result-char\').textContent)" style="display:none;margin-top:10px;padding:6px 18px;border-radius:9px;border:none;background:var(--teal);color:#fff;font-size:16px;cursor:pointer;font-weight:700;">🔊 듣기</button></div>'
     +'</div>'
     +'<div class="syl-picker-label">① 초성 고르기 (Consonant)</div>'
     +'<div class="syl-picker" id="syl-onset-picker">'+SYL_CONS.map(c=>'<button class="spick" data-v="'+c+'" onclick="pickSylOnset(\''+c+'\')">'+c+'</button>').join('')+'</div>'
@@ -3861,16 +3886,31 @@ function buildSylPanel(){
     +'</div>';
 }
 function buildBatchimPanel(){
-  const b7=[
-    {kr:'ㄱ',rom:'k',ex:'국(soup)'},{kr:'ㄴ',rom:'n',ex:'산(mountain)'},
-    {kr:'ㄷ',rom:'t',ex:'곧(soon)'},{kr:'ㄹ',rom:'l',ex:'말(horse)'},
-    {kr:'ㅁ',rom:'m',ex:'봄(spring)'},{kr:'ㅂ',rom:'p',ex:'밥(rice/meal)'},
-    {kr:'ㅇ',rom:'ng',ex:'강(river)'},
+  // 7대표음 그룹 — 같은 소리로 발음되는 받침들
+  const groups=[
+    {sound:'ㄱ',rom:'k  (윽)',tts:'윽',ex:'국 (soup)',members:[{kr:'ㄱ',ex:'국'},{kr:'ㅋ',ex:'부엌'},{kr:'ㄲ',ex:'닭'}]},
+    {sound:'ㄴ',rom:'n  (은)',tts:'은',ex:'산 (mountain)',members:[{kr:'ㄴ',ex:'산'}]},
+    {sound:'ㄷ',rom:'t  (읃)',tts:'읃',ex:'곧 (straight)',members:[{kr:'ㄷ',ex:'곧'},{kr:'ㅅ',ex:'옷'},{kr:'ㅆ',ex:'있다'},{kr:'ㅈ',ex:'낮'},{kr:'ㅊ',ex:'꽃'},{kr:'ㅌ',ex:'끝'},{kr:'ㅎ',ex:'좋다'}]},
+    {sound:'ㄹ',rom:'l  (을)',tts:'을',ex:'말 (horse)',members:[{kr:'ㄹ',ex:'말'}]},
+    {sound:'ㅁ',rom:'m  (음)',tts:'음',ex:'봄 (spring)',members:[{kr:'ㅁ',ex:'봄'}]},
+    {sound:'ㅂ',rom:'p  (읍)',tts:'읍',ex:'밥 (rice)',members:[{kr:'ㅂ',ex:'밥'},{kr:'ㅍ',ex:'앞'}]},
+    {sound:'ㅇ',rom:'ng (응)',tts:'응',ex:'강 (river)',members:[{kr:'ㅇ',ex:'강'}]},
   ];
-  return '<div class="basics-intro" style="margin-bottom:16px;"><strong>받침</strong>은 음절 맨 아래에 오는 자음. 7가지 소리로 발음돼요.<br><em>Batchim = final consonant in a syllable. All pronounced as one of 7 sounds.</em></div>'
-    +'<div class="hangul-grid">'+b7.map(x=>'<div class="hcard" onclick="speakTTS(\''+x.ex.split('(')[0]+'\')">'
-    +'<div class="hcard-kr">'+x.kr+'</div><div class="hcard-rom">-'+x.rom+'</div><div class="hcard-ex">'+x.ex+'</div></div>').join('')+'</div>'
-    +'<div class="structure-note">💡 받침 뒤에 모음이 오면 연음(연결 발음)이 돼요!<br><em>When batchim is followed by a vowel syllable, it links over: 국어 → [구거]</em></div>';
+  const grpHtml=groups.map(g=>{
+    const mems=g.members.map(m=>'<div class="batchim-member"><div class="batchim-member-kr">'+m.kr+'</div><div class="batchim-member-ex">'+m.ex+'</div></div>').join('');
+    return '<div class="batchim-group">'
+      +'<div class="batchim-group-hdr">'
+      +'<div class="batchim-group-sound">'+g.sound+'</div>'
+      +'<div class="batchim-group-rom">'+g.rom+'</div>'
+      +'<div class="batchim-group-ex">'+g.ex+'</div>'
+      +'<button class="batchim-group-tts" onclick="speakTTS(\''+g.tts+'\')">🔊 '+g.tts+'</button>'
+      +'</div>'
+      +'<div class="batchim-members">'+mems+'</div>'
+      +'</div>';
+  }).join('');
+  return '<div class="basics-intro" style="margin-bottom:16px;"><strong>받침</strong>은 음절 아래에 오는 자음이에요. 어떤 자음이 와도 <strong>7가지 소리</strong>로만 발음돼요!<br><em>Batchim = final consonant. No matter which consonant, only 7 sounds are used.</em></div>'
+    +'<div class="batchim-groups">'+grpHtml+'</div>'
+    +'<div class="structure-note">💡 받침 뒤에 모음이 오면 연음이 돼요! <em>국어 → [구거], 음악 → [으막]</em><br><em>When batchim is followed by a vowel, the sound carries over!</em></div>';
 }
 
 // ══════════════════════════════════════════════════════
