@@ -322,6 +322,26 @@ const urlName   = _hc ? _hc.urlName : null;
 - **Sejong은 가능한 한 건드리지 않음**
 - → 다음 세션 메인 작업
 
+### 🆕 Ep4 준비 완료 — 작업 대기 (2026-05-18)
+- **장면**: 🏪 포장마차 (Korean street food cart) — 떡볶이 + 김밥 주문/식사 장면
+- **위치**: `C:\Users\kateh\Documents\halmoni-school_standby\nhs\`
+  - slides/ep4/: 포장마차1~6.png (6장)
+  - TTS/ep4/: 11개 mp3 (slide 매핑됨 — slide3, 5에 여러 라인)
+- **스토리**: 들어감 → 주문(떡볶이 1인분 + 김밥 2인분) → 맛있게 먹음 → 계산(15,000원) → 인사하고 나옴
+- **핵심 학습 포인트**:
+  - 주문 표현 (`N인분 + 주세요`)
+  - 단위 (인분, 원)
+  - 음식 vocab (떡볶이, 김밥)
+  - 인사/배웅 (어서 오세요, 안녕히 계세요, 또 놀러 와요)
+  - 가격 (얼마예요, 만오천 원)
+  - 감탄 슬랭 (환상이야)
+- **작업 순서**:
+  1. `cp ep_TEMPLATE.json ep04.json` → 채우기
+  2. slides/TTS 폴더를 standby → working folder로 이동 (PowerShell Copy-Item)
+  3. nhs.html EPISODE_DATA에 ep04 인라인 추가
+  4. 사이드바 메뉴에 ep04 추가
+  5. commit + push
+
 ### ⏳ 미처리 수정 사항 (다음 세션 우선)
 1. **Ep1 영상 포맷을 ep2/ep3과 통일** (nhs.html 렌더링 / data)
 2. **Ep1, Ep2 듣기 퀴즈 수정**:
