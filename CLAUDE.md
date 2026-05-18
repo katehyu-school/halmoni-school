@@ -275,6 +275,16 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
+## 🌐 도메인 (2026-05-18 구매, 미연결)
+
+- **hangeulquest.com** — K-Quest 메인 (nhs.html 연결 예정)
+- **hangeulquestkids.com** — K-Quest Kids (korean-app_v2.html 연결 예정)
+- Namecheap 구매, Free Domain Privacy 적용, 1년 유효
+- **GitHub Pages 연결 미완료** — 콘텐츠 정돈 후 다음 단계에서 진행
+- 권장 구조: 도메인 2개 → 리포 2개 분리 (현재 같은 리포에 있어서 분리 작업 필요)
+
+---
+
 ## 🌱 프로젝트 비전 & 진화 흐름 (2026-05-18 추가)
 
 ### 시작점

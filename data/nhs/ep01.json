@@ -4,7 +4,7 @@
   "title_en": "Hello, Nice to Meet You!",
   "level": "초급",
   "scene": "🏞️ 공원 · Park",
-  "video": "안녕_만나서 반가워.mp4",
+  "video": null,
   "slides": [
     "data/nhs/slides/ep1/안녕_만나서 반가워1.png",
     "data/nhs/slides/ep1/안녕_만나서 반가워2.png",
@@ -51,64 +51,74 @@
     {
       "speaker": "narrator",
       "text": "여기는 공원이에요. 공원에 나무하고 연못이 있어요.",
-      "en": "This is a park. There are trees and a pond in the park."
+      "en": "This is a park. There are trees and a pond in the park.",
+      "slide": 0
     },
     {
       "speaker": "narrator",
       "text": "정민이 공원에 있어요.",
-      "en": "Jeongmin is in the park."
+      "en": "Jeongmin is in the park.",
+      "slide": 1
     },
     {
       "speaker": "narrator",
       "text": "정민이 공원에서 누구를 만나요.",
-      "en": "Jeongmin meets someone in the park."
+      "en": "Jeongmin meets someone in the park.",
+      "slide": 2
     },
     {
       "speaker": "narrator",
       "text": "정민이 인사해요.",
-      "en": "Jeongmin greets them."
+      "en": "Jeongmin greets them.",
+      "slide": 3
     },
     {
       "speaker": "jeongmin",
       "text": "안녕? 나는 정민이야.",
       "en": "Hi! I'm Jeongmin.",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep1/01_안녕_나는_정민이야.mp3"
+      "audio": "data/nhs/TTS/ep1/01_안녕_나는_정민이야.mp3",
+      "slide": 4
     },
     {
       "speaker": "mirae",
       "text": "안녕? 나는 미래야. 만나서 반가워.",
       "en": "Hi! I'm Mirae. Nice to meet you!",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep1/02_안녕_나는_미래야_만나서_반가워.mp3"
+      "audio": "data/nhs/TTS/ep1/02_안녕_나는_미래야_만나서_반가워.mp3",
+      "slide": 5
     },
     {
       "speaker": "mirae",
       "text": "인사해. 우리 엄마야.",
       "en": "Say hi. This is my mom.",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep1/03_인사해_우리_엄마야.mp3"
+      "audio": "data/nhs/TTS/ep1/03_인사해_우리_엄마야.mp3",
+      "slide": 6
     },
     {
       "speaker": "jeongmin",
       "text": "안녕하세요? 저는 정민이에요.",
       "en": "Hello! I'm Jeongmin.",
       "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep1/04_안녕하세요_저는_정민이에요.mp3"
+      "audio": "data/nhs/TTS/ep1/04_안녕하세요_저는_정민이에요.mp3",
+      "slide": 7
     },
     {
       "speaker": "mom",
       "text": "안녕? 나는 미래 엄마야. 만나서 반가워.",
       "en": "Hi! I'm Mirae's mom. Nice to meet you!",
       "speech_type": "반말",
-      "audio": "data/nhs/TTS/ep1/05_안녕_나는_미래_엄마야_만나서_반가워.mp3"
+      "audio": "data/nhs/TTS/ep1/05_안녕_나는_미래_엄마야_만나서_반가워.mp3",
+      "slide": 8
     },
     {
       "speaker": "jeongmin",
       "text": "네, 저도 만나서 반가워요!",
       "en": "Yes, nice to meet you too!",
       "speech_type": "존댓말",
-      "audio": "data/nhs/TTS/ep1/06_네_만나서_반가워요.mp3"
+      "audio": "data/nhs/TTS/ep1/06_네_만나서_반가워요.mp3",
+      "slide": 9
     }
   ],
   "vocab": [
@@ -735,68 +745,73 @@
   "quiz": [
     {
       "id": "q1",
-      "question_ko": "정민이가 미래에게 처음 한 인사는?",
-      "question_en": "What did Jeongmin first say to Mirae?",
+      "audio_text": "안녕? 나는 정민이야.",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
       "options": [
-        "안녕하세요? 저는 정민이에요.",
+        "안녕? 저는 정민이야.",
         "안녕? 나는 정민이야.",
-        "만나서 반갑습니다.",
-        "저는 정민이야."
+        "안녕하세요? 저는 정민이에요.",
+        "안녕? 나는 미래야."
       ],
       "answer": 1,
-      "explanation": "정민이와 미래는 또래 친구니까 반말을 써요. ✅ 안녕? 나는 정민이야."
+      "explanation": "정민이가 미래에게 반말로 자기 소개를 해요. 나 (반말) vs 저 (존댓말). ✅ 안녕? 나는 정민이야."
     },
     {
       "id": "q2",
-      "question_ko": "미래 엄마에게 인사할 때 올바른 표현은?",
-      "question_en": "Which greeting is correct for Mirae's mom (an adult)?",
+      "audio_text": "안녕? 나는 미래야. 만나서 반가워.",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
       "options": [
-        "안녕? 나는 정민이야.",
-        "만나서 반가워!",
-        "안녕하세요? 저는 정민이에요.",
-        "안녕? 반가워."
+        "안녕하세요? 저는 미래예요. 만나서 반가워요.",
+        "안녕? 나는 미래야. 반가워.",
+        "안녕? 저는 미래야. 만나서 반가워.",
+        "안녕? 나는 미래야. 만나서 반가워."
       ],
-      "answer": 2,
-      "explanation": "어른에게는 존댓말을 써야 해요. ✅ 안녕하세요? 저는 정민이에요."
+      "answer": 3,
+      "explanation": "미래가 정민에게 반말로 인사해요. '만나서 반가워'는 처음 만날 때 쓰는 표현이에요. ✅ Nice to meet you!"
     },
     {
       "id": "q3",
-      "question_ko": "'나는 미래야.'를 존댓말로 바꾸면?",
-      "question_en": "How do you say '나는 미래야.' formally?",
+      "audio_text": "안녕하세요? 저는 정민이에요.",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
       "options": [
-        "저는 미래야.",
-        "나는 미래이에요.",
-        "저는 미래예요.",
-        "저는 미래이야."
+        "안녕? 나는 정민이야.",
+        "안녕하세요? 저는 정민이야.",
+        "안녕하세요? 저는 정민이에요.",
+        "안녕하세요? 나는 정민이에요."
       ],
       "answer": 2,
-      "explanation": "미래 뒤에 받침이 없으니 '이에요' 대신 '예요'를 써요. ✅ 저는 미래예요."
+      "explanation": "정민이가 어른(미래 엄마)에게는 존댓말을 써요. 나는 → 저는, -야 → -이에요. ✅ 안녕하세요? 저는 정민이에요."
     },
     {
       "id": "q4",
-      "question_ko": "처음 만난 친구에게 어울리는 표현은?",
-      "question_en": "Which phrase fits when meeting a new friend for the first time?",
+      "audio_text": "인사해. 우리 엄마야.",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
       "options": [
-        "안녕히 계세요.",
-        "만나서 반가워!",
-        "다음에 봐!",
-        "잘 지냈어?"
+        "인사해. 우리 엄마야.",
+        "인사하세요. 우리 엄마예요.",
+        "인사해. 우리 아빠야.",
+        "인사하자. 우리 엄마야."
       ],
-      "answer": 1,
-      "explanation": "'만나서 반가워!'는 처음 만날 때 써요. ✅ Nice to meet you!"
+      "answer": 0,
+      "explanation": "미래가 정민에게 친구 사이라 반말로 말해요. '우리 엄마' = my mom (Korean often uses 우리 instead of 내). ✅ 인사해. 우리 엄마야."
     },
     {
       "id": "q5",
-      "question_ko": "이름을 소개할 때 받침 규칙으로 알맞은 것은?",
-      "question_en": "Which shows the correct 받침 rule for introducing your name?",
+      "audio_text": "네, 저도 만나서 반가워요!",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
       "options": [
-        "나는 준서야. / 나는 소연야.",
-        "나는 준서이야. / 나는 소연야.",
-        "나는 준서야. / 나는 소연이야.",
-        "나는 준서이야. / 나는 소연이야."
+        "네, 저는 만나서 반가워요!",
+        "응, 나도 만나서 반가워!",
+        "네, 저도 만나서 반가워요!",
+        "네, 저도 반가워요!"
       ],
       "answer": 2,
-      "explanation": "준서 → 받침 없음 → '야'. 소연 → 받침 있음 → '이야'. ✅ 준서야 / 소연이야"
+      "explanation": "정민이가 어른에게 존댓말로 대답해요. 저도 = me too (저 = polite 'I' + 도 = also). ✅ 네, 저도 만나서 반가워요!"
     }
   ],
   "real_life": [
