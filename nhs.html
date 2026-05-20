@@ -464,7 +464,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
     <button class="level-btn" onclick="setLevel(this)">Intermediate</button>
     <button class="level-btn" onclick="setLevel(this)">Advanced</button>
   </div>
-  <div class="school-title"><span class="kq-logo"><span class="kq-k">K-</span><span class="kq-q">Quest</span></span></div>
+  <div class="school-title"><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
   <button class="settings-btn" onclick="openApiKey()" id="apikey-status-btn">⚙️ AI</button>
 </div>
@@ -510,10 +510,14 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 const EPISODE_DATA = {
   ep01: {
   "id": "ep01",
-  "title": "안녕? 만나서 반가워!",
+  "title": "안녕? 만나서 반가워",
   "title_en": "Hello, Nice to Meet You!",
   "level": "초급",
   "scene": "🏞️ 공원 · Park",
+  "goal": {
+    "ko": "자기 소개를 할 수 있어요.",
+    "en": "I can introduce myself."
+  },
   "video": null,
   "slides": [
     "data/nhs/slides/ep1/안녕_만나서 반가워1.png",
@@ -1400,9 +1404,13 @@ const EPISODE_DATA = {
 },
   ep02: {
     "id": "ep02",
-    "title": "저녁 식사",
-    "title_en": "Dinner Time",
+    "title": "잘 먹겠습니다",
+    "title_en": "Time for Dinner",
     "level": "초급",
+    "goal": {
+      "ko": "식사 예절을 따라 해봐요.",
+      "en": "I can follow Korean mealtime etiquette."
+    },
     "scene": "🍚 저녁 식사 · Dinner Time",
     "slides": [
       "data/nhs/slides/ep2/미래의 저녁식사 (0).png",
@@ -2624,9 +2632,13 @@ const EPISODE_DATA = {
   },
   ep03: {
   "id": "ep03",
-  "title": "놀이공원",
-  "title_en": "Amusement Park",
+  "title": "모두 얼마예요?",
+  "title_en": "How much is it altogether?",
   "level": "초급",
+  "goal": {
+    "ko": "물건을 살 수 있어요.",
+    "en": "I can buy things."
+  },
   "scene": "🎡 놀이공원에 가자! · Let's Go to the Amusement Park!",
   "slides": [
     "data/nhs/slides/ep3/놀이공원1.png",
@@ -4105,9 +4117,9 @@ function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'
 function escA(s){return s==null?'':String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'},jungmin:{bg:'#A8D8EA',emoji:'👦'},mina:{bg:'#FFB7C5',emoji:'👧'},staff:{bg:'#D4E8D0',emoji:'🎫'}};
 const EPISODES=[
-  {id:'ep01',label:'안녕? 만나서 반가워!'},
-  {id:'ep02',label:'저녁 식사'},
-  {id:'ep03',label:'놀이공원'},
+  {id:'ep01',label:'안녕? 만나서 반가워'},
+  {id:'ep02',label:'잘 먹겠습니다'},
+  {id:'ep03',label:'모두 얼마예요?'},
   {id:'ep04',label:'김밥 주세요'},
   {id:'ep05',label:'',disabled:true}
 ];
