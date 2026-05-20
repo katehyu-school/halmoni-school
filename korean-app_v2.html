@@ -1312,7 +1312,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 <nav class="top-nav">
-  <div class="top-nav-brand" onclick="showTOC()">🎮 K-Quest Kids</div>
+  <div class="top-nav-brand" onclick="showTOC()">🎮 Hangeul Quest Kids</div>
   <div class="book-tabs" id="book-tabs-wrap">
     <button class="book-tab locked">Level 1</button>
     <button class="book-tab active" onclick="selectBook(2)">Level 2</button>
@@ -1322,6 +1322,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <button class="book-tab locked">Level 6</button>
   </div>
   <button class="kids-idx-btn" onclick="openKidsIndex()">📖 단어</button>
+  <button class="kids-speak-settings-btn" id="kids-ai-btn" onclick="kidsOpenApiKey()" title="AI 말해보기 설정">⚙️ AI</button>
 </nav>
 
 <!-- 출석 바 -->
@@ -1422,7 +1423,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ 목차 TOC ══════ -->
 <div class="toc-screen" id="toc-screen">
   <div class="toc-header">
-    <div class="toc-title">📖 K-Quest Kids · Level 2</div>
+    <div class="toc-title">📖 Hangeul Quest Kids · Level 2</div>
     <div class="toc-sub">단원을 선택하세요 — Choose a unit</div>
   </div>
   <div class="toc-grid">
@@ -7046,15 +7047,20 @@ function sceneTo(n, idx) {
       box.innerHTML = textHtml;
     } else {
       box.innerHTML = lines.map((l,li)=>{
+        const koEsc = l.ko.replace(/'/g,"\\'");
+        const enEsc = (l.en||'').replace(/'/g,"\\'");
+        const speakBtn = '<button class="u2-script-speak" onclick="kidsSpeak(\''+koEsc+'\',\''+enEsc+'\')" title="말해보기">🎤</button>';
         if(l.audio){
           return '<div class="u2-script-line">'
             +'<button class="u2-script-play" id="u'+n+'-play-'+idx+'-'+li+'" onclick="scenePlayLine('+n+','+idx+','+li+')">🔊</button>'
+            +speakBtn
             +'<span class="u2-script-ko">'+l.ko+'</span>'
             +'<span class="u2-script-en">'+l.en+'</span>'
             +'</div>';
         } else {
           return '<div class="u2-script-line">'
-            +'<button class="u2-script-play" onclick="_sceneTTS(\''+l.ko.replace(/'/g,"\\'")+'\')" title="TTS">🔊</button>'
+            +'<button class="u2-script-play" onclick="_sceneTTS(\''+koEsc+'\')" title="TTS">🔊</button>'
+            +speakBtn
             +'<span class="u2-script-ko">'+l.ko+'</span>'
             +'<span class="u2-script-en">'+l.en+'</span>'
             +'</div>';
@@ -7408,6 +7414,135 @@ function _kidsIdxRenderPage(){
 }
 // ═══════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════
+// 🎤 말해보기 (Speaking Practice with Claude API)
+// ═══════════════════════════════════════════════════════════════
+
+function kidsGetApiKey(){ return localStorage.getItem('kids_api_key') || ''; }
+function kidsSetApiKey(v){ localStorage.setItem('kids_api_key', v); }
+
+function kidsOpenApiKey(){
+  const ov = document.getElementById('kids-apikey-overlay');
+  const inp = document.getElementById('kids-apikey-input');
+  if(inp) inp.value = kidsGetApiKey();
+  if(ov) ov.classList.add('open');
+}
+function kidsCloseApiKey(){
+  const ov = document.getElementById('kids-apikey-overlay');
+  if(ov) ov.classList.remove('open');
+}
+function kidsSaveApiKey(){
+  const inp = document.getElementById('kids-apikey-input');
+  const v = (inp.value||'').trim();
+  if(!v) return;
+  kidsSetApiKey(v);
+  kidsCloseApiKey();
+  kidsUpdateApiBtn();
+  alert('✅ API 키 저장됐어요! 이제 말해보기 기능 사용 가능해요. 🎤');
+}
+function kidsUpdateApiBtn(){
+  const btn = document.getElementById('kids-ai-btn');
+  if(!btn) return;
+  btn.textContent = kidsGetApiKey() ? '⚙️ AI ✓' : '⚙️ AI';
+  btn.style.color = kidsGetApiKey() ? '#0D7B75' : '#888';
+}
+
+let _kidsRecog = null;
+function _kidsInitRecog(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR) return false;
+  _kidsRecog = new SR();
+  _kidsRecog.lang = 'ko-KR';
+  _kidsRecog.continuous = false;
+  _kidsRecog.interimResults = false;
+  return true;
+}
+
+async function kidsSpeak(targetKr, targetEn){
+  if(!kidsGetApiKey()){ kidsOpenApiKey(); return; }
+  if(!_kidsRecog && !_kidsInitRecog()){
+    alert('음성 인식은 Chrome 브라우저에서만 지원돼요! 🌐');
+    return;
+  }
+  // 결과 팝업 표시
+  const popup = document.getElementById('kids-speak-popup');
+  const target = document.getElementById('kids-speak-target');
+  const said = document.getElementById('kids-speak-said');
+  const fb = document.getElementById('kids-speak-feedback');
+  const status = document.getElementById('kids-speak-status');
+  if(target) target.textContent = targetKr;
+  if(said) said.textContent = '...';
+  if(fb) fb.textContent = '';
+  if(status) status.textContent = '🔴 듣는 중... 한국어로 말해 보세요!';
+  if(popup) popup.classList.add('open');
+
+  _kidsRecog.onresult = async (e) => {
+    const heard = e.results[0][0].transcript;
+    if(said) said.textContent = heard;
+    if(status) status.textContent = '⏳ 분석 중...';
+    const result = await _kidsCallClaude(targetKr, targetEn, heard);
+    if(fb) fb.textContent = result;
+    if(status) status.textContent = '✨ 결과';
+  };
+  _kidsRecog.onerror = () => {
+    if(status) status.textContent = '❌ 음성 인식 실패. 다시 해보세요!';
+  };
+  _kidsRecog.onend = () => {
+    if(status && status.textContent === '🔴 듣는 중... 한국어로 말해 보세요!'){
+      status.textContent = '❌ 못 들었어요. 다시!';
+    }
+  };
+  _kidsRecog.start();
+}
+
+function kidsRetrySpeak(){
+  const target = document.getElementById('kids-speak-target');
+  if(!target) return;
+  const kr = target.textContent || '';
+  if(kr) kidsSpeak(kr, '');
+}
+
+function kidsCloseSpeak(){
+  const popup = document.getElementById('kids-speak-popup');
+  if(popup) popup.classList.remove('open');
+}
+
+async function _kidsCallClaude(targetKr, targetEn, said){
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': kidsGetApiKey(),
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 150,
+        messages: [{
+          role: 'user',
+          content: `You are a super warm, encouraging Korean tutor for kids (Grade 2-5).
+The kid is trying to say: "${targetKr}" ${targetEn ? '(' + targetEn + ')' : ''}
+The kid actually said: "${said}"
+Give 1-2 sentences of feedback in friendly English. Use emojis 🌟😊👏 to celebrate. If correct or close, cheer loudly! If different, gently note ONE thing to fix with a fun tip. Be KIND and ENCOURAGING — kids should feel proud!`
+        }]
+      })
+    });
+    const d = await res.json();
+    return d.content?.[0]?.text || '⚠️ 피드백을 가져오지 못했어요.';
+  } catch(e){
+    return '❌ 오류가 났어요. API 키를 확인해주세요 (⚙️ AI 버튼).';
+  }
+}
+
+// 페이지 로드 시 API 버튼 상태 업데이트
+if(document.readyState !== 'loading'){
+  setTimeout(kidsUpdateApiBtn, 100);
+} else {
+  document.addEventListener('DOMContentLoaded', kidsUpdateApiBtn);
+}
+
 </script>
 
 <!-- ── 단어 인덱스 패널 ── -->
@@ -7429,6 +7564,80 @@ function _kidsIdxRenderPage(){
     <button class="kids-idx-page-btn" id="kids-pg-next" onclick="_kidsIdxGoPage(_kidsIdxPage+1)">▶</button>
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 🎤 말해보기 — API 키 모달 + 결과 팝업 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="kids-apikey-overlay" id="kids-apikey-overlay">
+  <div class="kids-apikey-modal">
+    <div class="kids-apikey-title">🤖 Claude AI 키 입력</div>
+    <div class="kids-apikey-desc">
+      말해보기 기능을 사용하려면 Anthropic API 키가 필요해요.<br>
+      <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:#0D7B75;">키 발급받기 →</a>
+    </div>
+    <input type="password" class="kids-apikey-input" id="kids-apikey-input" placeholder="sk-ant-..." autocomplete="off">
+    <div class="kids-apikey-btns">
+      <button class="kids-apikey-btn kids-apikey-cancel" onclick="kidsCloseApiKey()">취소</button>
+      <button class="kids-apikey-btn kids-apikey-save" onclick="kidsSaveApiKey()">저장</button>
+    </div>
+    <div class="kids-apikey-tip">💡 API 키는 이 브라우저에만 저장돼요 (외부 전송 X)</div>
+  </div>
+</div>
+
+<div class="kids-speak-popup" id="kids-speak-popup">
+  <div class="kids-speak-card">
+    <button class="kids-speak-close" onclick="kidsCloseSpeak()">✕</button>
+    <div class="kids-speak-target-label">📝 따라 말하기:</div>
+    <div class="kids-speak-target" id="kids-speak-target">—</div>
+    <div class="kids-speak-status" id="kids-speak-status">준비 중...</div>
+    <div class="kids-speak-said-label">🎤 들린 내용:</div>
+    <div class="kids-speak-said" id="kids-speak-said">—</div>
+    <div class="kids-speak-feedback" id="kids-speak-feedback"></div>
+    <button class="kids-speak-retry-btn" onclick="kidsRetrySpeak()">🎤 다시 말해보기</button>
+  </div>
+</div>
+
+<style>
+/* ── 말해보기 settings 버튼 ── */
+.kids-speak-settings-btn{background:white;border:1.5px solid #ddd;border-radius:20px;padding:6px 12px;font-size:0.85rem;cursor:pointer;font-family:'Jua',sans-serif;color:#888;transition:all .2s;margin-left:6px;}
+.kids-speak-settings-btn:hover{background:#e0f5f2;border-color:#0D7B75;}
+
+/* ── script line 안의 🎤 버튼 ── */
+.u2-script-speak{background:none;border:1.5px solid #FFB347;border-radius:50%;width:32px;height:32px;font-size:0.95rem;cursor:pointer;margin:0 4px;transition:all .2s;flex-shrink:0;}
+.u2-script-speak:hover{background:#FFE5C2;transform:scale(1.1);}
+.u2-script-speak:active{transform:scale(0.95);}
+
+/* ── API 키 모달 ── */
+.kids-apikey-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
+.kids-apikey-overlay.open{display:flex;}
+.kids-apikey-modal{background:white;border-radius:20px;padding:28px;max-width:440px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.3);}
+.kids-apikey-title{font-family:'Jua',sans-serif;font-size:1.3rem;color:#0D7B75;margin-bottom:12px;}
+.kids-apikey-desc{font-size:0.9rem;color:#666;line-height:1.6;margin-bottom:18px;}
+.kids-apikey-input{width:100%;padding:12px 16px;border:2px solid #ddd;border-radius:12px;font-size:0.95rem;font-family:monospace;margin-bottom:16px;box-sizing:border-box;}
+.kids-apikey-input:focus{outline:none;border-color:#0D7B75;}
+.kids-apikey-btns{display:flex;gap:10px;justify-content:flex-end;}
+.kids-apikey-btn{padding:10px 22px;border:none;border-radius:14px;font-size:0.95rem;cursor:pointer;font-family:'Jua',sans-serif;transition:all .15s;}
+.kids-apikey-cancel{background:#f0f0f0;color:#666;}
+.kids-apikey-cancel:hover{background:#e0e0e0;}
+.kids-apikey-save{background:#0D7B75;color:white;}
+.kids-apikey-save:hover{background:#0a6862;}
+.kids-apikey-tip{font-size:0.78rem;color:#aaa;margin-top:12px;text-align:center;}
+
+/* ── 말해보기 결과 팝업 ── */
+.kids-speak-popup{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
+.kids-speak-popup.open{display:flex;}
+.kids-speak-card{background:white;border-radius:24px;padding:28px;max-width:480px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.3);position:relative;}
+.kids-speak-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#999;width:36px;height:36px;border-radius:50%;}
+.kids-speak-close:hover{background:#f0f0f0;color:#333;}
+.kids-speak-target-label{font-size:0.85rem;color:#888;font-family:'Jua',sans-serif;}
+.kids-speak-target{font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;background:#e0f5f2;padding:14px 18px;border-radius:14px;margin:6px 0 16px 0;text-align:center;}
+.kids-speak-status{font-size:0.9rem;color:#FF8C00;text-align:center;font-family:'Jua',sans-serif;margin-bottom:14px;padding:8px;background:#FFF7E6;border-radius:10px;}
+.kids-speak-said-label{font-size:0.85rem;color:#888;font-family:'Jua',sans-serif;}
+.kids-speak-said{font-family:'Jua',sans-serif;font-size:1.05rem;color:#333;background:#f8f8f8;padding:10px 14px;border-radius:10px;margin:6px 0 14px 0;min-height:28px;}
+.kids-speak-feedback{font-size:0.92rem;color:#333;line-height:1.6;background:#FFF9E6;padding:14px 16px;border-radius:12px;border-left:4px solid #FFB347;min-height:50px;margin-bottom:14px;}
+.kids-speak-retry-btn{display:block;width:100%;padding:12px;background:#FFB347;color:white;border:none;border-radius:14px;font-size:1rem;cursor:pointer;font-family:'Jua',sans-serif;transition:all .15s;}
+.kids-speak-retry-btn:hover{background:#FFA033;}
+</style>
 
 </body>
 </html>

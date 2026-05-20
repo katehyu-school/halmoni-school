@@ -17,16 +17,16 @@
 ### 브랜드
 | 브랜드 | 파일 | 타겟 |
 |--------|------|------|
-| **K-Quest** | `nhs.html` | 중고등 이상 — Scene-First 오리지널 커리큘럼 |
-| **K-Quest Kids** | `korean-app_v2.html` | 초등 — 게임 중심, Level 1 / Level 2 |
+| **Hangeul Quest** | `nhs.html` | 중고등 이상 — Scene-First 오리지널 커리큘럼 |
+| **Hangeul Quest Kids** | `korean-app_v2.html` | 초등 — 게임 중심, Level 1 / Level 2 |
 | (구) 성인반 | `sejong-korean_v1.html` | 현재 유지 |
 
 ### 핵심 파일
 | 파일 | 설명 |
 |------|------|
 | `sejong-korean_v1.html` | 성인반 앱 — **더 이상 수정 안 함, 참고용으로만 유지** |
-| `korean-app_v2.html` | K-Quest Kids — 초등반 앱 (현재 약 7400줄) |
-| `nhs.html` | K-Quest — Scene-First 플랫폼 (범용 렌더러) |
+| `korean-app_v2.html` | Hangeul Quest Kids — 초등반 앱 (현재 약 7400줄) |
+| `nhs.html` | Hangeul Quest — Scene-First 플랫폼 (범용 렌더러) |
 | `index.html` | 메인 인덱스 |
 | `CLAUDE.md` | 이 파일 — 프로젝트 인수인계 문서 |
 
@@ -38,10 +38,10 @@
 | `data/elem/book2/unit0N.json` | 초등반 unit별 데이터 (unit01~06.json) |
 | `data/elem/book3/unit01.json` | **Book 3 표준 템플릿** (unit06 구조 기반) |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
-| `data/nhs/ep01.json` | K-Quest ep01 데이터 (공원 · 첫 만남) |
-| `data/nhs/ep02.json` | K-Quest ep02 데이터 (저녁 식사) |
-| `data/nhs/slides/` | K-Quest 슬라이드 이미지 (PNG) |
-| `data/nhs/TTS/` | K-Quest TTS 음성 파일 (MP3) |
+| `data/nhs/ep01.json` | Hangeul Quest ep01 데이터 (공원 · 첫 만남) |
+| `data/nhs/ep02.json` | Hangeul Quest ep02 데이터 (저녁 식사) |
+| `data/nhs/slides/` | Hangeul Quest 슬라이드 이미지 (PNG) |
+| `data/nhs/TTS/` | Hangeul Quest TTS 음성 파일 (MP3) |
 
 ### 성인반 아키텍처 핵심
 - `core/adult-renderer.js` — 5개 패널 렌더러 (AdultRenderer)
@@ -215,13 +215,13 @@ const urlName   = _hc ? _hc.urlName : null;
   - `listen` 모드: 에피소드 대사 TTS(🔊) + 객관식 (타이핑 없음 → 쉼표/느낌표 오답 문제 해결)
   - ep01 퀴즈: `audio_text` 추가 — 실제 대사 활용 (예: "안녕? 나는 정민이야.")
   - ep02 퀴즈: 전면 교체 — 6개 listen 문항 (잘 먹겠습니다, 맛있어요, 배구를 해요 등)
-- **K-Quest 표준 템플릿 생성** — `data/nhs/ep_TEMPLATE.json`
+- **Hangeul Quest 표준 템플릿 생성** — `data/nhs/ep_TEMPLATE.json`
   - ep01 + ep02 통합 기반, 모든 섹션 `_note` 주석 포함
   - `slides` 배열 + `video: null` 공존 (mp4 대비)
   - 미래 ep03+ 제작 시 이 파일 복사해서 사용
 
 > ⚠️ **현재 상태**: ep01, ep02 리뷰 중. 공개용 (학생 친구들에게도 오픈 예정).
-> K-Quest 표준 템플릿 **`data/nhs/ep_TEMPLATE.json` 생성 완료** ✅
+> Hangeul Quest 표준 템플릿 **`data/nhs/ep_TEMPLATE.json` 생성 완료** ✅
 
 ## 📋 완료된 주요 작업 (korean-app_v2.html)
 
@@ -277,11 +277,65 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ## 🌐 도메인 (2026-05-18 구매, 미연결)
 
-- **hangeulquest.com** — K-Quest 메인 (nhs.html 연결 예정)
-- **hangeulquestkids.com** — K-Quest Kids (korean-app_v2.html 연결 예정)
+- **hangeulquest.com** — Hangeul Quest 메인 (nhs.html 연결 예정)
+- **hangeulquestkids.com** — Hangeul Quest Kids (korean-app_v2.html 연결 예정)
 - Namecheap 구매, Free Domain Privacy 적용, 1년 유효
 - **GitHub Pages 연결 미완료** — 콘텐츠 정돈 후 다음 단계에서 진행
 - 권장 구조: 도메인 2개 → 리포 2개 분리 (현재 같은 리포에 있어서 분리 작업 필요)
+
+---
+
+## 🎭 Hangeul Quest 캐릭터 세계관 (2026-05-19 추가, PDF 기반)
+
+### 메인 캐릭터 — 두 가족 + 친구들 (저작권 안전, 100% 오리지널)
+
+**가족 1 (미래네)**
+- 엄마, 아빠
+- **미래** (15세) 👧
+- **리아** (13세)
+- **애라** (5세)
+
+**가족 2 (리암네)**
+- 엄마, 아빠
+- **리암** (13세)
+- **카요** (11세)
+
+**조부모**
+- 할머니, 할아버지
+
+**친구 그룹들 (다인종)**
+- 보미·나비 친구들
+- 가온·누리 친구들 (정민 포함)
+
+### 핵심 설계 원칙 (PDF에서)
+
+> **"scene이 틴에이저 아이들이 중심이니까 Real Life에서는 어른들 대화를 많이 예를 들어서 내용을 보충한다.  
+> 어른들 사이에는 친분이 깊지 않으면 기본적으로 존댓말을 쓴다."**
+
+→ 메인 장면 = 틴에이저 (반말 + 친근) + Real Life = 어른들 (존댓말 노출)  
+→ 한국어 가장 어려운 부분(존대 변환)이 자연스럽게 학습됨
+
+### ⚠️ 피해야 할 이름 (Sejong 캐릭터)
+- 안나, 마이클, 재민, 마리, 유진 — 사용 금지
+
+---
+
+## 📺 Hangeul Quest 에피소드 로드맵 (PDF 마스터플랜)
+
+| ep | 장면 | 제목 | Goal | 상태 |
+|----|------|------|------|------|
+| 1 | 🏞️ 공원 | 안녕? 만나서 반가워 | 자기 소개를 할 수 있어요 | ✅ 완성 |
+| 2 | 🍚 저녁 식사 | 잘 먹겠습니다 | 식사 예절을 따라 해봐요 | ✅ 완성 |
+| 3 | 🎢 놀이공원 | 모두 얼마예요? | 물건을 살 수 있어요 | ✅ 완성 |
+| 4 | 🏪 포장마차 | 김밥 주세요 | 음식을 주문할 수 있어요 (ep3 연속) | 🔜 자료 준비됨 |
+| 5 | 🏫 학교 교실 | 한국어 스터디 그룹을 만들어요 | 한국어 자체를 소개 (BTS 활용) | 📝 PDF에 스크립트 |
+| 6 | 🛏️ 미래의 방 | 우리 몇 시에 만날까? | 친구와 만날 약속을 할 수 있어요 | 📝 PDF에 스크립트 |
+| 7 | 🍳 미래네 부엌 | 엄마, 내 도시락 어디 있어요? | 위치를 말할 수 있어요 (등교 시간) | 📝 PDF에 스크립트 |
+| 8 | 🏮 재래 시장 | 딸기 한 박스하고 사과 다섯 개 주세요 | 고유어 숫자로 셀 수 있어요 | 📝 PDF에 스크립트 |
+| 9 | 🌸 한강공원 | 한강 공원에 소풍을 가요 | 날씨 표현 (리암 가족) | 📝 PDF에 스크립트 |
+| 10 | 🏠 리암네 집 | 어서 오세요 | 손님을 초대할 수 있어요 (어른들 대화 시범) | 📝 PDF에 스크립트 |
+
+**원본 PDF**: `C:\Users\kateh\Documents\halmoni-school_standby\HQ에피소드 스크립.pdf`
 
 ---
 
@@ -300,9 +354,9 @@ const urlName   = _hc ? _hc.urlName : null;
 |----|------|------|
 | **korean-app (초등)** | 도입부에 생생한 실생활 영상 → 거기서 파생된 어휘/문법을 기존 게임과 시너지 | UI/기능 동결, 콘텐츠만 유지 |
 | **sejong-korean** | 더 이상 update 없음. 좋은 컨텐츠 이미 많고 학생도 좋아함 | 그대로 유지 — 가능한 한 건드리지 않음 |
-| **nhs (K-Quest)** | 에피소드 중심. Sejong의 모든 장점을 녹여낸 새로운 개념 앱 | 현재 메인 개발 (에피소드 3개 완성) |
+| **nhs (Hangeul Quest)** | 에피소드 중심. Sejong의 모든 장점을 녹여낸 새로운 개념 앱 | 현재 메인 개발 (에피소드 3개 완성) |
 
-### nhs (K-Quest) 설계 철학
+### nhs (Hangeul Quest) 설계 철학
 1. **도입부 = 생활 밀착형 에피소드** (Scene-First)
 2. **어휘 + 문법으로 에피소드 해석** — 왜 이 표현이 쓰였는지
 3. **Usage / Real Life에서 또 다른 상황 제시** — 응용 확장
@@ -359,7 +413,7 @@ const urlName   = _hc ? _hc.urlName : null;
 - ep03 vocab 수정: '얼마나' 추가 ('얼마' 뒤), '헐' 추가 (감탄사 맨 앞)
   - ep03.json + nhs.html 인라인 양쪽 수정
 
-### K-Quest (nhs.html) — 메인 개발 타겟
+### Hangeul Quest (nhs.html) — 메인 개발 타겟
 - ep01, ep02 **리뷰 진행 중** — 공개 전 심사숙고 단계
 - 공개 대상: 학생 + 학생 친구들 (외부 공개용)
 - ep03 작업 중 (vocab 수정 완료, 영상 포맷/퀴즈 수정 대기)
@@ -374,7 +428,7 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
-## 🆕 K-Quest (구 NHS — New Halmoni School) — 개발 중
+## 🆕 Hangeul Quest (구 NHS — New Halmoni School) — 개발 중
 
 ### 배경
 - 세종한국어2022 / 한글학교 한국어 → CC 4유형 (출처표시 + 상업적이용금지 + 변경금지)
