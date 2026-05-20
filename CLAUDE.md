@@ -303,9 +303,11 @@ const urlName   = _hc ? _hc.urlName : null;
 **조부모**
 - 할머니, 할아버지
 
-**친구 그룹들 (다인종)**
-- 보미·나비 친구들
-- 가온·누리 친구들 (정민 포함)
+**친구들 (다인종 — 2026-05-19 PDF 확정)**
+- 👧 여자 친구들: **올리비아, 마야, 아바**
+- 👦 남자 친구들: **조던, 루카스**
+- 정민 (ep1/3/4 등장 — 기존 캐릭터)
+- ⚠️ ep6에 '조이'라는 이름 등장 (캐릭터 목록엔 없음 — 조던 오타? 확인 필요)
 
 ### 핵심 설계 원칙 (PDF에서)
 
@@ -423,6 +425,11 @@ const urlName   = _hc ? _hc.urlName : null;
 - **ep_TEMPLATE.json v3.0**: goal/key_points/self_check/qna 추가 (Sejong 통합)
 - **book3/unit01.json v2.1**: 탭 순서 반영 (vocab→grammar→practice), 영상/실생활 하드코딩 위치 명시
 - **도메인 구매**: hangeulquest.com + hangeulquestkids.com (Namecheap, 1년)
+
+### 📌 ep5+ 콘텐츠 작성 규칙 (2026-05-19 추가)
+- **모든 rule, hint, tip, note에 영어 병기 필수** (초보 학습자 배려)
+- 패턴: `"한국어 설명 · English equivalent"` (가운데 점 구분)
+- ep1~4는 위/아래 영어 설명 있으니 그대로 두기 (선생님 결정)
 
 ### 🆕 Ep5 자료 준비됨 (다음 세션 작업 대기)
 - **장면**: 🏫 학교 교실 (PDF: BTS '보고 싶다' 활용 한국어 소개 + 스터디 그룹 만들기)

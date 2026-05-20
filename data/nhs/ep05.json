@@ -1,0 +1,400 @@
+{
+  "id": "ep05",
+  "title": "한국어 스터디 그룹을 만들어요",
+  "title_en": "Let's Make a Korean Study Group",
+  "level": "초급",
+  "scene": "🏫 학교 교실 · School Classroom",
+  "video": null,
+  "slides": [
+    "data/nhs/slides/ep5/스터디그룹1.png",
+    "data/nhs/slides/ep5/스터디그룹2.png",
+    "data/nhs/slides/ep5/스터디그룹3.png",
+    "data/nhs/slides/ep5/스터디그룹4.png",
+    "data/nhs/slides/ep5/스터디그룹5.png",
+    "data/nhs/slides/ep5/스터디그룹6.png",
+    "data/nhs/slides/ep5/스터디그룹7.png",
+    "data/nhs/slides/ep5/스터디그룹8.png",
+    "data/nhs/slides/ep5/스터디그룹9.png",
+    "data/nhs/slides/ep5/스터디그룹10.png",
+    "data/nhs/slides/ep5/스터디그룹11.png"
+  ],
+  "goal": {
+    "ko": "한국어가 어떤 언어인지 설명하고, 같이 공부하자고 제안할 수 있어요.",
+    "en": "I can describe what Korean is like and suggest studying together."
+  },
+  "characters": [
+    { "id": "maya", "name": "마야", "emoji": "👧", "color": "#E8956B", "description": "미래의 친구, K-pop 팬 (Mirae's friend, K-pop fan)" },
+    { "id": "mirae", "name": "미래", "emoji": "👩", "color": "#E85D9A", "description": "한국어를 공부하는 학생 (a student learning Korean)" }
+  ],
+  "script": [
+    { "speaker": "maya", "text": "BTS 노래 들어 봤어?", "en": "Have you listened to BTS songs?", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/1BTS+노래+들어+봤어_slide1.mp3", "slide": 0 },
+    { "speaker": "maya", "text": "'보고 싶다'가 무슨 뜻일까?", "en": "What does '보고 싶다' mean?", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/2‘보고+싶다'가+무슨+뜻일까_slide2.mp3", "slide": 1 },
+    { "speaker": "mirae", "text": "'I miss you'라는 뜻이야.", "en": "It means 'I miss you'.", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/3I+miss+you+라는+뜻이야_slide3.mp3", "slide": 2 },
+    { "speaker": "mirae", "text": "한국말은 주어가 사라지기도 하고, 동사는 항상 문장 끝에 있어.", "en": "In Korean, the subject sometimes disappears, and the verb is always at the end of the sentence.", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/4한국말은+주어가+사라지기도+하고%2C+동사는+항상+문장+끝에+있어_slide4.mp3", "slide": 3 },
+    { "speaker": "mirae", "text": "그런데 '조사'를 알면 쉽게 이해할 수 있어.", "en": "But if you know 'particles', you can understand it easily.", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/5그런데+‘조사'를+알면+쉽게+이해할+수+있어_slide5.mp3", "slide": 4 },
+    { "speaker": "maya", "text": "응? 너는 한국말을 알아?", "en": "Huh? You know Korean?", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/6응_+너는+한국말을+알아_slide6.mp3", "slide": 5 },
+    { "speaker": "mirae", "text": "잘 알지는 못하지만, 지금 공부하고 있어.", "en": "I don't know it well, but I'm studying it now.", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/7잘+알지는+못하지만+지금+공부하고+있어_slide7.mp3", "slide": 6 },
+    { "speaker": "maya", "text": "혼자 공부하는거야?", "en": "Are you studying by yourself?", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/8혼자+공부하는거야_slide8.mp3", "slide": 7 },
+    { "speaker": "mirae", "text": "아니, 할머니의 도움을 받고 있어.", "en": "No, I'm getting help from my grandma.", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/9아니%2C+할머니의+도움을+받고+있어_slide9.mp3", "slide": 8 },
+    { "speaker": "maya", "text": "나도 배우고 싶다.", "en": "I want to learn too.", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/10나도+배우고+싶다_slide10.mp3", "slide": 9 },
+    { "speaker": "mirae", "text": "그럼 우리 스터디 그룹을 만들어 같이 공부할까?", "en": "Then shall we make a study group and study together?", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/11그럼+우리+스터디+그룹을+만들어+같이+공부할까_slide11.mp3", "slide": 10 },
+    { "speaker": "maya", "text": "그래! 좋아!", "en": "Yes! Sounds great!", "speech_type": "반말", "audio": "data/nhs/TTS/ep5/12그래!+좋아_slide11.mp3", "slide": 10 }
+  ],
+  "vocab": [
+    {
+      "category": "🔤 동사 · Verbs",
+      "items": [
+        { "korean": "듣다 / 들어요", "romanization": "deut-da / deu-reo-yo", "english": "to listen / hear", "emoji": "👂", "note": "ㄷ 불규칙 · ㄷ-irregular: 듣 + 어 → 들어요" },
+        { "korean": "보다 / 봐요", "romanization": "bo-da / bwa-yo", "english": "to see / watch", "emoji": "👀" },
+        { "korean": "싶다", "romanization": "sip-da", "english": "to want (to do)", "emoji": "💭", "note": "동사 + 고 싶다 · verb + 고 싶다 = want to do" },
+        { "korean": "알다 / 알아요", "romanization": "al-da / a-ra-yo", "english": "to know", "emoji": "💡" },
+        { "korean": "모르다 / 몰라요", "romanization": "mo-reu-da / mol-la-yo", "english": "to not know", "emoji": "🤷", "note": "르 불규칙 · 르-irregular: 모르 → 몰라요" },
+        { "korean": "주다 / 줘요", "romanization": "ju-da / jwo-yo", "english": "to give", "emoji": "🤲" },
+        { "korean": "받다 / 받아요", "romanization": "bat-da / ba-da-yo", "english": "to receive / get", "emoji": "📥" },
+        { "korean": "만들다 / 만들어요", "romanization": "man-deul-da / man-deu-reo-yo", "english": "to make / create", "emoji": "🛠️" },
+        { "korean": "이해하다 / 이해해요", "romanization": "i-hae-ha-da / i-hae-hae-yo", "english": "to understand", "emoji": "🧠" },
+        { "korean": "공부하다 / 공부해요", "romanization": "gong-bu-ha-da / gong-bu-hae-yo", "english": "to study", "emoji": "📖" },
+        { "korean": "배우다 / 배워요", "romanization": "bae-u-da / bae-wo-yo", "english": "to learn", "emoji": "🎓" }
+      ]
+    },
+    {
+      "category": "⚖️ 형용사 · Adjectives",
+      "items": [
+        { "korean": "쉽다 / 쉬워요", "romanization": "swip-da / swi-wo-yo", "english": "to be easy", "emoji": "😌", "note": "ㅂ 불규칙 · ㅂ-irregular: 쉽 → 쉬워요" },
+        { "korean": "어렵다 / 어려워요", "romanization": "eo-ryeop-da / eo-ryeo-wo-yo", "english": "to be difficult", "emoji": "😰", "note": "ㅂ 불규칙 · ㅂ-irregular: 어렵 → 어려워요" },
+        { "korean": "좋아 / 좋아요", "romanization": "jo-a / jo-a-yo", "english": "good / I like it", "emoji": "👍" },
+        { "korean": "싫어 / 싫어요", "romanization": "si-reo / si-reo-yo", "english": "I don't like it / dislike", "emoji": "👎" }
+      ]
+    },
+    {
+      "category": "🙋 사람·대명사 · People & Pronouns",
+      "items": [
+        { "korean": "나", "romanization": "na", "english": "I / me (casual)", "emoji": "🙋", "note": "반말 · casual. 존댓말 polite = 저" },
+        { "korean": "너", "romanization": "neo", "english": "you (casual)", "emoji": "👉", "note": "반말 · casual, used between friends" },
+        { "korean": "우리", "romanization": "u-ri", "english": "we / us / our", "emoji": "👫" },
+        { "korean": "혼자", "romanization": "hon-ja", "english": "alone / by oneself", "emoji": "🧍" }
+      ]
+    },
+    {
+      "category": "📚 문법 용어 · Grammar Terms",
+      "items": [
+        { "korean": "뜻", "romanization": "tteut", "english": "meaning", "emoji": "📖" },
+        { "korean": "문장", "romanization": "mun-jang", "english": "sentence", "emoji": "📝" },
+        { "korean": "주어", "romanization": "ju-eo", "english": "subject (grammar)", "emoji": "🔵" },
+        { "korean": "동사", "romanization": "dong-sa", "english": "verb", "emoji": "🏃" },
+        { "korean": "조사", "romanization": "jo-sa", "english": "particle (grammar marker)", "emoji": "🔗", "note": "한국어의 핵심! 단어 역할 표시 · Key to Korean! marks word roles" },
+        { "korean": "명사", "romanization": "myeong-sa", "english": "noun", "emoji": "📦" },
+        { "korean": "끝", "romanization": "kkeut", "english": "end", "emoji": "🔚" }
+      ]
+    },
+    {
+      "category": "🔗 연결어·표현 · Connectors & Expressions",
+      "items": [
+        { "korean": "노래", "romanization": "no-rae", "english": "song", "emoji": "🎵" },
+        { "korean": "도움", "romanization": "do-um", "english": "help", "emoji": "🆘" },
+        { "korean": "같이", "romanization": "ga-chi", "english": "together", "emoji": "🤝", "note": "발음 주의 · pronounced [가치] not [가티]" },
+        { "korean": "응", "romanization": "eung", "english": "yeah / uh-huh (casual yes)", "emoji": "🙂" },
+        { "korean": "아니", "romanization": "a-ni", "english": "no (casual)", "emoji": "🙅" },
+        { "korean": "그래", "romanization": "geu-rae", "english": "okay / sure / yeah", "emoji": "👌" },
+        { "korean": "그런데", "romanization": "geu-reon-de", "english": "but / by the way", "emoji": "🔀" },
+        { "korean": "그리고", "romanization": "geu-ri-go", "english": "and", "emoji": "➕" },
+        { "korean": "그래서", "romanization": "geu-rae-seo", "english": "so / therefore", "emoji": "➡️" },
+        { "korean": "그렇지만", "romanization": "geu-reo-chi-man", "english": "however", "emoji": "↩️" },
+        { "korean": "그래도", "romanization": "geu-rae-do", "english": "even so / still", "emoji": "🤷" }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g_ep05_01",
+      "title": "한국어 문장 구조 — SOV",
+      "title_en": "Korean Sentence Structure",
+      "icon": "🏗️",
+      "rule": "한국어는 동사가 항상 문장 끝에 와요 (주어-목적어-동사) · Korean verbs always come last (Subject-Object-Verb)",
+      "pattern": "주어(S) + 목적어(O) + 동사(V)",
+      "explanation_en": "English is SVO (I eat rice), but Korean is SOV (I rice eat / 나는 밥을 먹어요). The verb ALWAYS comes at the very end. Also, the subject is often dropped when it's clear from context.",
+      "table": {
+        "columns": ["English (SVO)", "Korean (SOV)", "직역 · Literal"],
+        "rows": [
+          ["I listen to songs", "나는 노래를 들어요", "I songs listen"],
+          ["I study Korean", "나는 한국어를 공부해요", "I Korean study"],
+          ["I want to learn", "나는 배우고 싶어요", "I learn want"]
+        ]
+      },
+      "examples": [
+        { "ko": "나는 노래를 들어요.", "en": "I listen to songs. (literally: I song listen)" },
+        { "ko": "마야는 한국어를 배워요.", "en": "Maya learns Korean. (literally: Maya Korean learns)" },
+        { "ko": "우리는 같이 공부해요.", "en": "We study together. (verb at end!)" }
+      ],
+      "fill_blanks": [
+        { "sentence": "나는 노래___ 들어요.", "answer": "를", "hint": "목적격 조사 (받침 X) · object particle (no 받침)" },
+        { "sentence": "동사는 항상 문장 ___에 있어요.", "answer": "끝", "hint": "문장의 마지막 · the end of the sentence" }
+      ]
+    },
+    {
+      "id": "g_ep05_02",
+      "title": "조사의 힘 — Particles",
+      "title_en": "The Power of Particles",
+      "icon": "🔗",
+      "rule": "조사가 단어의 역할(주어·목적어 등)을 표시해요 · Particles mark each word's role (subject, object, etc.)",
+      "pattern": "명사 + 조사 (은/는, 이/가, 을/를...)",
+      "explanation_en": "Because particles mark roles, Korean word order can be flexible and subjects can be dropped. The particle tells you WHO does WHAT, even without strict word order.",
+      "table": {
+        "columns": ["조사", "역할 · Role", "예시 · Example"],
+        "rows": [
+          ["은/는", "주제 · topic", "나는 (as for me)"],
+          ["이/가", "주어 · subject", "동사가 (the verb)"],
+          ["을/를", "목적어 · object", "노래를 (the song)"],
+          ["의", "소유 · possessive", "할머니의 (grandma's)"]
+        ]
+      },
+      "examples": [
+        { "ko": "할머니의 도움을 받아요.", "en": "I receive grandma's help. (의 = 's, 을 = object)" },
+        { "ko": "조사를 알면 쉬워요.", "en": "If you know particles, it's easy." }
+      ],
+      "fill_blanks": [
+        { "sentence": "할머니___ 도움을 받아요.", "answer": "의", "hint": "소유 조사 (~의 = 's) · possessive particle" }
+      ]
+    },
+    {
+      "id": "g_ep05_03",
+      "title": "-(으)ㄹ까? / -(으)ㄹ까요? — Shall we?",
+      "title_en": "Making Suggestions",
+      "icon": "💭",
+      "rule": "같이 하자고 제안할 때 · For suggesting we do something together (반말 -ㄹ까? / 존댓말 -ㄹ까요?)",
+      "pattern": "동사 어간 + (으)ㄹ까(요)?",
+      "explanation_en": "Use -(으)ㄹ까? to suggest doing something together, like 'Shall we...?'. Add 요 for polite speech. Drop 요 for casual speech with friends.",
+      "table": {
+        "columns": ["동사", "반말 · Casual", "존댓말 · Polite"],
+        "rows": [
+          ["공부하다", "공부할까?", "공부할까요?"],
+          ["만들다", "만들까?", "만들까요?"],
+          ["가다", "갈까?", "갈까요?"]
+        ]
+      },
+      "examples": [
+        { "ko": "우리 같이 공부할까?", "en": "Shall we study together? (casual)" },
+        { "ko": "스터디 그룹을 만들까요?", "en": "Shall we make a study group? (polite)" }
+      ],
+      "fill_blanks": [
+        { "sentence": "우리 같이 공부___?", "answer": "할까", "hint": "제안 어미 (반말) · suggestion ending (casual)" }
+      ]
+    },
+    {
+      "id": "g_ep05_04",
+      "title": "-고 싶다 — want to do",
+      "title_en": "Expressing Desire",
+      "icon": "⭐",
+      "rule": "동사 + 고 싶다 = ~하고 싶다 · verb stem + 고 싶다 = want to do",
+      "pattern": "동사 어간 + 고 싶다 / 싶어요",
+      "explanation_en": "Attach -고 싶다 to a verb stem to say you want to do that action. 배우다 (learn) → 배우고 싶다 (want to learn).",
+      "table": {
+        "columns": ["동사", "+ 고 싶다", "뜻 · Meaning"],
+        "rows": [
+          ["배우다", "배우고 싶다", "want to learn"],
+          ["보다", "보고 싶다", "want to see / miss"],
+          ["먹다", "먹고 싶다", "want to eat"]
+        ]
+      },
+      "examples": [
+        { "ko": "나도 배우고 싶어.", "en": "I want to learn too. (casual)" },
+        { "ko": "보고 싶다.", "en": "I miss you. (literally: I want to see you — the BTS song!)" }
+      ],
+      "fill_blanks": [
+        { "sentence": "나도 한국어를 배우___ 싶어.", "answer": "고", "hint": "동사 + 고 싶다 · verb + 고 싶다 = want to" }
+      ]
+    }
+  ],
+  "banmal_jondaemal": {
+    "intro_ko": "미래와 마야는 같은 반 친구라서 둘 다 반말을 써요.",
+    "intro_en": "Mirae and Maya are classmates, so they both use casual speech (반말).",
+    "rows": [
+      { "situation_ko": "친구에게 질문", "situation_en": "Asking a friend", "banmal": "한국말을 알아?", "jondaemal": "한국말을 아세요?", "note": "친구끼린 반말 · casual between friends" },
+      { "situation_ko": "제안하기", "situation_en": "Suggesting", "banmal": "같이 공부할까?", "jondaemal": "같이 공부할까요?", "note": "요만 붙이면 존댓말 · add 요 for polite" },
+      { "situation_ko": "긍정 대답", "situation_en": "Saying yes", "banmal": "응 / 그래", "jondaemal": "네 / 그래요", "note": "응(casual yes) vs 네(polite yes)" }
+    ],
+    "tip": "💡 반말 → 존댓말 변환은 보통 '요'를 붙이면 돼요. 응→네, 나→저로도 바뀌어요. · To go polite, often just add 요. Also 응→네, 나→저."
+  },
+  "pronunciation": [
+    {
+      "id": "pron_ep05_01",
+      "title": "같이 → [가치] (구개음화 · Palatalization)",
+      "rule": "받침 ㄷ/ㅌ + 이 → ㅈ/ㅊ 소리로 바뀜 · 받침 ㄷ/ㅌ + 이 changes to ㅈ/ㅊ sound",
+      "table": {
+        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
+        "rows": [
+          ["같이", "[가치]", "ㅌ + 이 → 치"],
+          ["굳이", "[구지]", "ㄷ + 이 → 지"],
+          ["해돋이", "[해도지]", "ㄷ + 이 → 지"]
+        ]
+      },
+      "tip": "💡 'ㅣ' 모음을 만나면 ㄷ/ㅌ이 ㅈ/ㅊ으로 부드럽게 바뀌어요. · Before 'ㅣ', ㄷ/ㅌ softens to ㅈ/ㅊ."
+    }
+  ],
+  "usage": [
+    {
+      "title": "왜 한국어를 배우는 사람이 많을까? — K-pop과 한국어",
+      "title_en": "K-pop as a Gateway to Korean",
+      "explanation_en": "Many learners start Korean because of K-pop and K-dramas. Understanding lyrics like BTS's '보고 싶다' (I miss you) makes learning meaningful and fun. Maya's curiosity is how many real learners begin!",
+      "examples": [
+        { "ko": "BTS 노래를 듣고 한국어를 배우고 싶었어.", "en": "I wanted to learn Korean after listening to BTS songs." },
+        { "ko": "가사 뜻을 알면 더 재미있어.", "en": "It's more fun when you know what the lyrics mean." }
+      ]
+    },
+    {
+      "title": "주어 생략 — Dropping the Subject",
+      "title_en": "When Korean drops 'I' and 'you'",
+      "explanation_en": "Korean often drops the subject when it's obvious. '보고 싶다' has no 'I' or 'you' — context fills it in. This is very different from English, which almost always needs a subject.",
+      "examples": [
+        { "ko": "보고 싶다.", "en": "(I) miss (you). — no subject needed!" },
+        { "ko": "공부하고 있어.", "en": "(I)'m studying. — subject dropped" }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "audio_text": "BTS 노래 들어 봤어?",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
+      "options": [
+        "BTS 노래 들어 봤어?",
+        "BTS 노래 들어 봐요?",
+        "BTS 노래 들어 봤어요?",
+        "BTS 영화 봤어?"
+      ],
+      "answer": 0,
+      "explanation": "반말 과거 경험: 들어 봤어? (Have you tried listening?). 봤어(casual) vs 봤어요(polite)."
+    },
+    {
+      "id": "q2",
+      "audio_text": "한국말은 주어가 사라지기도 하고, 동사는 항상 문장 끝에 있어.",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
+      "options": [
+        "한국말은 동사가 사라지기도 하고, 주어는 항상 문장 끝에 있어.",
+        "한국말은 주어가 사라지기도 하고, 동사는 항상 문장 끝에 있어.",
+        "한국말은 주어가 사라지기도 하고, 동사는 항상 문장 앞에 있어.",
+        "영어는 주어가 사라지기도 하고, 동사는 항상 문장 끝에 있어."
+      ],
+      "answer": 1,
+      "explanation": "한국어 핵심: 주어(subject)는 생략 가능, 동사(verb)는 끝(end)에 위치. SOV 구조!"
+    },
+    {
+      "id": "q3",
+      "audio_text": "혼자 공부하는거야?",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
+      "options": [
+        "같이 공부하는거야?",
+        "혼자 공부하는거야?",
+        "혼자 공부하는거예요?",
+        "혼자 공부할거야?"
+      ],
+      "answer": 1,
+      "explanation": "혼자(alone) vs 같이(together). -는거야? = casual '~ing?' question form."
+    },
+    {
+      "id": "q4",
+      "audio_text": "그럼 우리 스터디 그룹을 만들어 같이 공부할까?",
+      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+      "question_en": "Listen and choose what you heard.",
+      "options": [
+        "그럼 우리 스터디 그룹을 만들어 같이 공부할까요?",
+        "그럼 우리 스터디 그룹을 만들어 혼자 공부할까?",
+        "그럼 우리 스터디 그룹을 만들어 같이 공부할까?",
+        "그럼 우리 스터디 그룹을 사서 같이 공부할까?"
+      ],
+      "answer": 2,
+      "explanation": "-ㄹ까? = 제안 (Shall we?). 같이(together) + 공부할까(shall we study). 반말이라 요 없음."
+    },
+    {
+      "id": "q5_mc",
+      "question_ko": "한국어 문장에서 동사는 보통 어디에 와요?",
+      "question_en": "Where does the verb usually come in a Korean sentence?",
+      "options": [
+        "문장 끝 (the end)",
+        "문장 처음 (the beginning)",
+        "주어 바로 앞 (right before the subject)",
+        "아무 데나 (anywhere)"
+      ],
+      "answer": 0,
+      "explanation": "한국어는 SOV 구조 — 동사가 항상 문장 끝에! 영어(SVO)와 가장 큰 차이예요."
+    },
+    {
+      "id": "q6_mc",
+      "question_ko": "'보고 싶다'의 뜻은?",
+      "question_en": "What does '보고 싶다' mean?",
+      "options": [
+        "I want to see / I miss you",
+        "I want to eat",
+        "I am sleepy",
+        "I want to go"
+      ],
+      "answer": 0,
+      "explanation": "보다(see) + 고 싶다(want to) = want to see → 'I miss you'. BTS 노래 제목이기도 해요!"
+    }
+  ],
+  "real_life": [
+    {
+      "type": "tip",
+      "title": "🎵 K-pop이 여는 한국어의 문 — Why BTS Makes Korean Click",
+      "content_ko": "전 세계 수많은 사람들이 K-pop과 K-드라마로 한국어를 시작해요. BTS의 '보고 싶다', '봄날' 같은 노래 가사를 이해하고 싶어서 공부를 시작하는 경우가 많아요. 좋아하는 것에서 시작하면 언어가 훨씬 빨리, 재미있게 늘어요. 마야처럼요!",
+      "content_en": "Countless people worldwide start learning Korean through K-pop and K-dramas. Many begin because they want to understand lyrics like BTS's '보고 싶다' or '봄날'. Starting from something you love makes a language grow faster and more fun — just like Maya!"
+    },
+    {
+      "type": "reading",
+      "id": "rl_read_ep05",
+      "title": "📖 한국어는 어떤 언어일까? — What is Korean Like?",
+      "title_en": "A short reading about the Korean language",
+      "setup_ko": "한국어의 특징을 짧게 읽어봐요.",
+      "setup_en": "A short reading about features of Korean.",
+      "passage": "한국어는 영어와 많이 달라요. 영어는 '주어 + 동사 + 목적어' 순서지만, 한국어는 '주어 + 목적어 + 동사' 순서예요. 그리고 동사는 항상 문장 끝에 와요. 또, 한국어에는 '조사'가 있어요. 조사는 단어가 문장에서 무슨 역할을 하는지 알려줘요. 그래서 주어를 생략해도 뜻을 이해할 수 있어요.",
+      "questions": [
+        {
+          "question_ko": "한국어 문장에서 동사의 위치는?",
+          "question_en": "Where is the verb in a Korean sentence?",
+          "options": ["문장 끝 · the end", "문장 처음 · the beginning", "주어 앞 · before subject", "목적어 앞 · before object"],
+          "answer": 0,
+          "explanation": "한국어 동사는 항상 문장 끝! · Korean verbs always come at the end."
+        },
+        {
+          "question_ko": "조사가 하는 일은?",
+          "question_en": "What do particles (조사) do?",
+          "options": [
+            "단어의 역할을 표시 · mark the word's role",
+            "발음을 바꿈 · change pronunciation",
+            "문장을 끝냄 · end the sentence",
+            "노래를 만듦 · make songs"
+          ],
+          "answer": 0,
+          "explanation": "조사 = 단어가 주어인지 목적어인지 표시. 그래서 주어 생략도 가능! · Particles mark roles, allowing subject drop."
+        }
+      ]
+    },
+    {
+      "type": "kakao",
+      "title": "💬 스터디 그룹 만들기 카톡",
+      "messages": [
+        { "speaker": "마야", "side": "left", "text": "미래야! 우리 한국어 스터디 언제 시작해?", "en": "Mirae! When do we start our Korean study group?" },
+        { "speaker": "나", "side": "right", "text": "이번 주 토요일 어때?", "en": "How about this Saturday?" },
+        { "speaker": "마야", "side": "left", "text": "좋아! 조던이랑 올리비아도 부를까?", "en": "Great! Should we invite Jordan and Olivia too?" },
+        { "speaker": "나", "side": "right", "text": "응! 같이 하면 더 재미있지 👍", "en": "Yeah! It's more fun together 👍" }
+      ]
+    }
+  ],
+  "key_points": [
+    { "icon": "🏗️", "ko": "한국어는 SOV — 동사가 항상 문장 끝! · Korean is SOV — verb always last!", "en": "Korean is SOV — the verb always comes at the end!" },
+    { "icon": "🔗", "ko": "조사가 단어 역할을 표시해서 주어 생략 가능 · Particles mark roles, so the subject can be dropped", "en": "Particles mark word roles, so the subject can be dropped" },
+    { "icon": "💭", "ko": "동사 + 고 싶다 = ~하고 싶다 (want to do)", "en": "verb + 고 싶다 = want to do" },
+    { "icon": "🤝", "ko": "-(으)ㄹ까? = 같이 하자는 제안 (Shall we?)", "en": "-(으)ㄹ까? = suggestion 'Shall we?'" },
+    { "icon": "🎵", "ko": "K-pop은 한국어 학습의 좋은 시작점! · K-pop is a great gateway to Korean!", "en": "K-pop is a great gateway to learning Korean!" }
+  ],
+  "self_check": [
+    { "ko": "한국어가 영어와 어떻게 다른지 (SOV) 설명할 수 있어요.", "en": "I can explain how Korean differs from English (SOV)." },
+    { "ko": "조사가 무엇인지, 왜 중요한지 이해해요.", "en": "I understand what particles are and why they matter." },
+    { "ko": "'~고 싶다'로 하고 싶은 것을 말할 수 있어요.", "en": "I can use '~고 싶다' to say what I want to do." },
+    { "ko": "친구에게 '같이 ~할까?'로 제안할 수 있어요.", "en": "I can suggest doing something with '같이 ~할까?'." },
+    { "ko": "'보고 싶다'의 뜻을 알아요.", "en": "I know what '보고 싶다' means." }
+  ]
+}
