@@ -406,6 +406,37 @@ const urlName   = _hc ? _hc.urlName : null;
    - nhs.html 감탄사: 헐, 야호, 대박, 너무좋아 (4개, 헉 없음)
    - 어느 게 정답인지 결정 후 동기화 필요
 
+### ✅ 2026-05-19 완료 작업 (오늘 세션)
+- **브랜드 리네이밍**: K-Quest → **Hangeul Quest** (모든 파일, 로고 포함)
+- **Ep4 (포장마차) 완성**: ep04.json + nhs.html 인라인 + 사이드바 + 슬라이드 6장 + TTS 11개
+- **Goal 배지 시스템**: 영상 상단에 학습 목표 강조 표시 (teal 배지)
+- **Ep1-3 PDF 통일**: 제목/사이드바 라벨 변경, goal 필드 추가
+  - ep1: 안녕? 만나서 반가워 (자기 소개)
+  - ep2: 잘 먹겠습니다 (식사 예절)
+  - ep3: 모두 얼마예요? (물건 사기)
+  - ep4: 김밥 주세요 (음식 주문)
+- **말해보기 Kids반 이식**: korean-app_v2.html 영상 탭에 🎤 버튼 + Claude API + 결과 팝업 (kids-friendly 프롬프트)
+- **종합 리뷰 docs 3개 작성**:
+  - `docs/V2_ARCHITECTURE.md` (데이터 분리 설계)
+  - `docs/K_QUEST_CURRICULUM_MAP.md` (커리큘럼 맵)
+  - `docs/BASICS_NUMBERS_DESIGN.md` (한국 숫자 깊이 확장)
+- **ep_TEMPLATE.json v3.0**: goal/key_points/self_check/qna 추가 (Sejong 통합)
+- **book3/unit01.json v2.1**: 탭 순서 반영 (vocab→grammar→practice), 영상/실생활 하드코딩 위치 명시
+- **도메인 구매**: hangeulquest.com + hangeulquestkids.com (Namecheap, 1년)
+
+### 🆕 Ep5 자료 준비됨 (다음 세션 작업 대기)
+- **장면**: 🏫 학교 교실 (PDF: BTS '보고 싶다' 활용 한국어 소개 + 스터디 그룹 만들기)
+- **위치**: `C:\Users\kateh\Documents\halmoni-school_standby\nhs\`
+  - slides/ep5/: 스터디그룹1~11.png (11장)
+  - TTS/ep5/: 12개 mp3
+- **메타적 학습**: 미래가 친구에게 한국어 자체를 소개 (주어 생략, 동사 끝, 조사 등)
+- **PDF 마지막 부분에 한국어 yes/no 답변 패턴 명시** (밥 안 먹었어요? → 아니요, 먹었어요)
+- **작업 순서**:
+  1. PowerShell로 자료를 ep5/ 폴더에 복사 (이미 일부 됐을 수도 있음)
+  2. PDF 보면서 ep05.json 작성 (BTS 인용 + 한국어 메타 소개 흐름)
+  3. nhs.html EPISODE_DATA에 인라인 추가, 사이드바 활성화 + ep06 disabled로
+  4. commit + push
+
 ### ✅ 2026-05-18 완료 작업
 - 새 컴퓨터로 이사 (D:\halmoni-school 백업 → C:\Users\kateh\Desktop\halmoni-school 클론)
 - VS Code + Git 설치, GitHub 인증 완료
