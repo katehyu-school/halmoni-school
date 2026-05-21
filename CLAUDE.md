@@ -275,6 +275,42 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
+## 🧭 작업 전략 & 로드맵 (2026-05-21, 선생님 수립)
+
+### 모델 사용 전략
+- **Opus** = 기초/설계/전략 (시야 넓음, 세션 빨리 소모)
+- **Sonnet** = 루틴 작업 (에피소드 데이터 채우기, 반복 작업)
+
+### 🎯 Opus 담당 (기초 설계)
+
+**1. Basics 기능 확장**
+- (a) 한국어 기본 설명 = reference book 역할 (현재 + 보충)
+- (b) step-by-step 입문 가이드 = Beginners 진입 온램프
+- (c) `docs/BASICS_ONRAMP_DESIGN.md` 설계 문서 작성 예정
+- (d) Basics 한국 숫자 깊이 확장 (설계 완료 `docs/BASICS_NUMBERS_DESIGN.md`, 구현 대기)
+
+**2. Korean-app(Kids) Level 3부터 도입 — template 업그레이드**
+- Goal → 제목(title) 아래에 표시
+- Key point → practice 탭에서 연습
+- Self check → 마지막에 자기 점검
+- (nhs의 goal/key_points/self_check 패턴을 Kids에도 이식)
+
+**3. Korean-app(Kids) Level 1 설계 + 테스트 콘텐츠**
+
+### 🔧 Sonnet 담당 (루틴)
+- nhs 에피소드 추가 (ep7~10) — 템플릿 채우기
+- 슬라이드/TTS 복사 + commit/push
+- 어휘/문법 데이터 입력
+
+### ⏳ ep6 진행 상태 (다음 작업자 인계)
+- ✅ `data/nhs/ep06.json` 작성 완료 (올리비아+미래, 와/과 문법 포함)
+- ⬜ nhs.html EPISODE_DATA 인라인 추가 필요
+- ⬜ 사이드바 ep06 활성화 + ep07 disabled
+- ⬜ PowerShell로 ep6 슬라이드(미래의방1~4)/TTS(7개) 복사
+- ⬜ commit + push (ep5 수정사항도 함께)
+
+---
+
 ## 🌐 도메인 (2026-05-18 구매, 미연결)
 
 - **hangeulquest.com** — Hangeul Quest 메인 (nhs.html 연결 예정)
@@ -307,7 +343,12 @@ const urlName   = _hc ? _hc.urlName : null;
 - 👧 여자 친구들: **올리비아, 마야, 아바**
 - 👦 남자 친구들: **조던, 루카스**
 - 정민 (ep1/3/4 등장 — 기존 캐릭터)
-- ⚠️ ep6에 '조이'라는 이름 등장 (캐릭터 목록엔 없음 — 조던 오타? 확인 필요)
+- ep6 친구 = **올리비아** (PDF '조이'는 구버전 — TTS 최신본 기준 올리비아로 확정)
+
+### 📌 스크립트 최신본 규칙 (2026-05-21 추가)
+- **TTS 파일명 = 가장 최신 대본 기준** (PDF는 뒤처질 수 있음)
+- 선생님이 TTS 만들 때 대사를 수정하므로, TTS 파일명에서 대사 복원 → 확인받기
+- 예: ep6 PDF는 '조이/오후 2시/출구'였으나 TTS는 '올리비아/오후 1시/입구'
 
 ### 핵심 설계 원칙 (PDF에서)
 
@@ -425,6 +466,12 @@ const urlName   = _hc ? _hc.urlName : null;
 - **ep_TEMPLATE.json v3.0**: goal/key_points/self_check/qna 추가 (Sejong 통합)
 - **book3/unit01.json v2.1**: 탭 순서 반영 (vocab→grammar→practice), 영상/실생활 하드코딩 위치 명시
 - **도메인 구매**: hangeulquest.com + hangeulquestkids.com (Namecheap, 1년)
+
+### 🎯 한국어 yes/no 답변 패턴 — 미래 에피소드에 자연 노출 예정 (중요!)
+- **영어와 정반대**라 핵심 포인트: "밥 안 먹었어요?" → "네, 안 먹었어요" (질문에 동의)
+- ep5에 억지로 넣지 않기로 결정 (이미 SOV+조사로 충분 — 학생 부담)
+- **딱 맞는 장면에서 자연스럽게 노출** (예: ep7 부엌 "아침 안 먹었어?" 같은 부정 질문 장면)
+- 한 번 추상 설명 + 한 번 실제 대화 = 반복 노출이 이상적
 
 ### 📌 ep5+ 콘텐츠 작성 규칙 (2026-05-19 추가)
 - **모든 rule, hint, tip, note에 영어 병기 필수** (초보 학습자 배려)
