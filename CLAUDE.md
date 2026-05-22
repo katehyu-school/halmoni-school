@@ -302,12 +302,12 @@ const urlName   = _hc ? _hc.urlName : null;
 - 슬라이드/TTS 복사 + commit/push
 - 어휘/문법 데이터 입력
 
-### ⏳ ep6 진행 상태 (다음 작업자 인계)
-- ✅ `data/nhs/ep06.json` 작성 완료 (올리비아+미래, 와/과 문법 포함)
-- ⬜ nhs.html EPISODE_DATA 인라인 추가 필요
-- ⬜ 사이드바 ep06 활성화 + ep07 disabled
-- ⬜ PowerShell로 ep6 슬라이드(미래의방1~4)/TTS(7개) 복사
-- ⬜ commit + push (ep5 수정사항도 함께)
+### ✅ ep6 진행 상태 (2026-05-21 완료)
+- ✅ `data/nhs/ep06.json` 작성 (올리비아+미래, 와/과 문법 포함)
+- ✅ nhs.html EPISODE_DATA 인라인 추가
+- ✅ 사이드바 ep06 활성화 + ep07 disabled
+- ⬜ PowerShell로 ep6 슬라이드(미래의방1~4)/TTS(7개) 복사 — 선생님 실행 필요
+- ⬜ commit + push (ep5 수정 + ep6 + docs 함께)
 
 ---
 
