@@ -205,6 +205,31 @@
       "fill_blanks": [
         { "sentence": "오후 ___ 시에 만나. (1시)", "answer": "한", "hint": "시는 고유어! 1 → 한 · hours use Native Korean: 1 → 한" }
       ]
+    },
+    {
+      "id": "g_ep06_06",
+      "title": "한국식 대답 — 네/아니요 (영어와 반대!)",
+      "title_en": "Answering Yes/No the Korean Way",
+      "icon": "🔄",
+      "rule": "네/응 = 질문 내용에 동의 | 아니요/아니 = 질문 내용에 부정 · 네/응 agrees with the question; 아니요/아니 disagrees — opposite of English for negative questions!",
+      "pattern": "질문 → 네/응 (동의) 또는 아니요/아니 (부정)",
+      "explanation_en": "Korean yes/no answers respond to the QUESTION'S content, not the fact itself. For NEGATIVE questions this is the OPPOSITE of English! '밥 안 먹었어요?' (Haven't you eaten?) → '네, 안 먹었어요' (Right, I haven't) / '아니요, 먹었어요' (No, I have). English would flip 네 and 아니요 here. This trips up almost every learner!",
+      "table": {
+        "columns": ["질문 · Question", "긍정(동의) 대답", "부정 대답"],
+        "rows": [
+          ["약속 없어? · Are you free?", "응, 약속 없어 · Yeah, I'm free", "아니, 약속 있어 · No, I'm busy"],
+          ["밥 먹었어요? · Did you eat?", "네, 먹었어요 · Yes, I ate", "아니요, 안 먹었어요 · No, I didn't"],
+          ["밥 안 먹었어요? · Haven't you eaten?", "네, 안 먹었어요 · Right, I haven't", "아니요, 먹었어요 · No, I have"]
+        ]
+      },
+      "examples": [
+        { "ko": "A: 약속 없어?  B: 응, 약속 없어.", "en": "A: Are you free? B: Yeah, I'm free. (응 agrees: yes, no plans)" },
+        { "ko": "A: 밥 안 먹었어요?  B: 아니요, 먹었어요.", "en": "A: Haven't you eaten? B: No, I have. (아니요 disagrees with the negative question — opposite of English!)" },
+        { "ko": "A: 밥 안 먹었어요?  B: 네, 안 먹었어요.", "en": "A: Haven't you eaten? B: Right, I haven't. (네 agrees with the negative)" }
+      ],
+      "fill_blanks": [
+        { "sentence": "A: 약속 없어? B: ___, 약속 없어. (free, agreeing)", "answer": "응", "hint": "질문에 동의 (반말 yes) · agree with question (casual yes)" }
+      ]
     }
   ],
   "banmal_jondaemal": {
@@ -215,7 +240,23 @@
       { "situation_ko": "제안하기", "situation_en": "Suggesting", "banmal": "자전거 타러 갈까?", "jondaemal": "자전거 타러 갈까요?", "note": "요 붙이면 존댓말 · add 요 for polite" },
       { "situation_ko": "약속 확정", "situation_en": "Confirming", "banmal": "거기서 만나!", "jondaemal": "거기서 만나요!", "note": "만나 → 만나요" }
     ],
-    "tip": "💡 약속을 잡을 땐 '몇 시에(when) + 어디에서(where)'를 정하는 게 핵심! · When making plans, the key is deciding 몇 시에 (when) + 어디에서 (where)."
+    "tip": "💡 약속을 잡을 땐 '몇 시에(when) + 어디에서(where)'를 정하는 게 핵심! · When making plans, the key is deciding 몇 시에 (when) + 어디에서 (where).",
+    "adult_dialogue": {
+      "title_ko": "어른들은 어떻게 약속할까? (존댓말)",
+      "title_en": "How adults make plans (polite speech)",
+      "setup_ko": "미래 엄마와 올리비아 엄마가 주말 약속을 정해요. 친하지 않은 어른들은 기본적으로 존댓말을 써요.",
+      "setup_en": "Mirae's mom and Olivia's mom arrange weekend plans. Adults who aren't close use polite speech by default.",
+      "lines": [
+        { "speaker": "미래 엄마", "text": "이번 주말에 시간 있으세요?", "en": "Do you have time this weekend?" },
+        { "speaker": "올리비아 엄마", "text": "네, 괜찮아요. 무슨 일이세요?", "en": "Yes, I'm free. What's the occasion?" },
+        { "speaker": "미래 엄마", "text": "아이들이랑 같이 한강에 갈까요?", "en": "Shall we go to the Han River with the kids?" },
+        { "speaker": "올리비아 엄마", "text": "좋아요! 몇 시에 만날까요?", "en": "Sounds great! What time shall we meet?" },
+        { "speaker": "미래 엄마", "text": "오후 한 시에 정문 앞에서 뵐까요?", "en": "Shall we meet at 1 PM in front of the main gate?" },
+        { "speaker": "올리비아 엄마", "text": "네, 그때 뵙겠습니다.", "en": "Yes, see you then." }
+      ],
+      "note_ko": "같은 약속이지만 어른들은 존댓말(-요, -으세요, 뵙겠습니다)을 써요. 아이들(미래·올리비아)의 반말과 비교해 보세요! · 갈까? → 갈까요?, 만나? → 만날까요?, 봐 → 뵙겠습니다",
+      "note_en": "Same plan, but adults use polite forms (-요, -으세요, 뵙겠습니다). Compare with the kids' casual speech: 갈까? → 갈까요?, 봐 → 뵙겠습니다!"
+    }
   },
   "pronunciation": [
     {
