@@ -3450,6 +3450,8 @@ function renderBook3Unit(data) {
 
   b3RenderS1();
   b3RenderS2();
+  // 영상 탭 초기화 — 첫 슬라이드 스크립트 채우기
+  setTimeout(() => b3SceneTo(0), 0);
 }
 
 function b3SwitchTab(tab) {
