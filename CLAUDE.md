@@ -305,9 +305,18 @@ const urlName   = _hc ? _hc.urlName : null;
 ### ✅ ep6 진행 상태 (2026-05-21 완료)
 - ✅ `data/nhs/ep06.json` 작성 (올리비아+미래, 와/과 문법 포함)
 - ✅ nhs.html EPISODE_DATA 인라인 추가
-- ✅ 사이드바 ep06 활성화 + ep07 disabled
-- ⬜ PowerShell로 ep6 슬라이드(미래의방1~4)/TTS(7개) 복사 — 선생님 실행 필요
-- ⬜ commit + push (ep5 수정 + ep6 + docs 함께)
+- ✅ 사이드바 ep06 활성화
+- ✅ 슬라이드/TTS 복사 완료
+
+### ✅ ep7 진행 상태 (2026-05-22~23 완료)
+- ✅ `data/nhs/ep07.json` 작성 (미래네 부엌, 위치 표현)
+- ✅ goal {ko, en} object 형식
+- ✅ pronunciation: 위치 단어 연음화 (앞에→[아페] 등) + 있어요/없어요
+- ✅ self_check: 5개 체크 항목
+- ✅ banmal_jondaemal: adult_dialogue 추가 (직장 위치 표현, 존댓말)
+- ✅ nhs.html EPISODE_DATA 인라인 동기화
+- ✅ 사이드바 ep07 활성화 + ep08 disabled
+- ✅ 슬라이드 7장 (리아네 부엌1~7.png) / TTS 8개 복사 완료
 
 ---
 
@@ -583,6 +592,10 @@ halmoni-school/
   "video": null,                               ← mp4 방식 (둘 중 하나만 — video 우선)
   "characters": [{ "id", "name", "emoji", "color" }],
   "script": [{ "speaker", "text", "en", "speech_type", "audio", "slide" }],
+  // ⚠️ slide 필드는 0-indexed (slides[] 배열 인덱스) — 파일명의 번호와 다름!
+  // 슬라이드 파일명: 다운로드 디폴트 번호 (1),(2),(3)... → slides[0], slides[1], slides[2]...
+  // TTS 파일명 규칙: {TTS순서}{내용}_slide{슬라이드번호}.mp3
+  //   예: "2엄마+늦었어요_slide2.mp3" = TTS 2번째, 슬라이드 파일 (2) → slide:1 (0-indexed)
   "vocab": [{ "category": "카테고리명", "items": [{ "korean", "romanization", "english", "emoji", "note"(옵션) }] }],
   "grammar": [{
     "id", "title", "title_en", "icon",
