@@ -91,6 +91,49 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
   border-bottom-color: white;
   font-weight: 700;
 }
+.lt-sidebar-btn { border-top: 1px solid var(--border); margin-top: 6px; }
+.lt-sidebar-btn .lesson-title-text { color: #B47E11 !important; font-weight: 500; }
+.lt-sidebar-btn.active { background: #FAEEDA !important; }
+
+/* Level Test */
+#level-test-section { display:none; }
+.lt-wrap { max-width: 560px; margin: 0 auto; padding: 20px 0 60px; }
+.lt-progress { display:flex; gap:5px; margin-bottom:24px; }
+.lt-dot { height:5px; flex:1; border-radius:3px; background:var(--border); transition:background .3s; }
+.lt-dot.done { background:var(--teal); }
+.lt-dot.current { background:var(--amber); }
+.lt-q-card { background:#fff; border:1.5px solid var(--border); border-radius:16px; padding:28px 24px 24px; }
+.lt-q-scene { font-size:2.2rem; text-align:center; margin-bottom:10px; }
+.lt-q-text { font-size:1.15rem; font-weight:600; color:var(--text); text-align:center; margin-bottom:6px; }
+.lt-q-en { font-size:.82rem; color:var(--text-muted); text-align:center; margin-bottom:20px; }
+.lt-opts { display:flex; flex-direction:column; gap:10px; }
+.lt-opt { padding:12px 18px; border:1.5px solid var(--border); border-radius:12px; font-size:1rem;
+          cursor:pointer; background:#fff; color:var(--text); text-align:center; transition:all .15s; }
+.lt-opt:hover { border-color:var(--teal); background:#f0faf6; }
+.lt-opt.correct { border-color:#1D9E75; background:#E1F5EE; color:#0F6E56; }
+.lt-opt.wrong   { border-color:#E24B4A; background:#FCEBEB; color:#A32D2D; animation:lt-shake .35s; }
+@keyframes lt-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+.lt-counter { font-size:.8rem; color:var(--text-muted); text-align:right; margin-bottom:10px; }
+
+/* Result screen */
+.lt-result { display:none; }
+.lt-result-hero { text-align:center; padding:20px 0 16px; }
+.lt-result-title { font-size:1.4rem; font-weight:700; color:var(--text); margin:10px 0 4px; }
+.lt-result-sub { font-size:.9rem; color:var(--text-muted); }
+.lt-compare { display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:start; margin:20px 0; }
+.lt-compare-col { display:flex; flex-direction:column; gap:7px; }
+.lt-compare-head { font-size:.75rem; font-weight:600; text-align:center; margin-bottom:2px; }
+.lt-bubble { padding:9px 13px; border-radius:13px; font-size:.85rem; line-height:1.45; }
+.lt-bubble-l2 { background:#f3f4f6; color:#6b7280; border-bottom-left-radius:3px; }
+.lt-bubble-l3 { background:#E1F5EE; color:#0F6E56; border-bottom-right-radius:3px; }
+.lt-arrow { display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:#9ca3af; padding-top:10px; }
+.lt-cando { background:#f0faf6; border:1px solid #9FE1CB; border-radius:12px; padding:14px 16px; margin:12px 0; }
+.lt-cando-item { display:flex; gap:8px; font-size:.85rem; color:var(--text); margin-bottom:8px; line-height:1.4; }
+.lt-cando-item:last-child { margin-bottom:0; }
+.lt-cta { width:100%; padding:14px; background:var(--teal); color:#fff; border:none; border-radius:12px;
+           font-size:1rem; font-weight:600; cursor:pointer; margin-top:16px; transition:opacity .15s; }
+.lt-cta:hover { opacity:.9; }
+
 .book-tab.locked {
   opacity: 0.38;
   cursor: not-allowed;
@@ -1316,7 +1359,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="book-tabs" id="book-tabs-wrap">
     <button class="book-tab locked">Level 1</button>
     <button class="book-tab active" onclick="selectBook(2)">Level 2</button>
-    <button class="book-tab locked">Level 3</button>
+    <button class="book-tab" onclick="selectBook(3)">Level 3</button>
     <button class="book-tab locked">Level 4</button>
     <button class="book-tab locked">Level 5</button>
     <button class="book-tab locked">Level 6</button>
@@ -1414,6 +1457,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="lesson-item" id="lesson-9" onclick="switchUnit(9)">
     <span class="lesson-num">9과</span>
     <span class="lesson-title-text">갈비가 맛있어요</span>
+  </div>
+  <div class="lesson-item lt-sidebar-btn" id="lt-sidebar-btn" onclick="showLevelTest()">
+    <span class="lesson-num" style="color:#B47E11">🏆</span>
+    <span class="lesson-title-text">레벨 테스트</span>
+  </div>
+</nav>
+<!-- ══════ Book 3 사이드바 ══════ -->
+<nav class="sidebar" id="book3-sidebar" style="display:none;">
+  <div class="sidebar-title">Level 3</div>
+  <div class="lesson-item active" id="b3-lesson-1" onclick="switchBook3Unit(1)">
+    <span class="lesson-num">1과</span>
+    <span class="lesson-title-text">🐻 곰 세 마리</span>
+  </div>
+  <div class="lesson-item" id="b3-lesson-2" onclick="switchBook3Unit(2)">
+    <span class="lesson-num">2과</span>
+    <span class="lesson-title-text">🍦 아이스크림 두 개 주세요</span>
+  </div>
+  <div class="lesson-item" id="b3-lesson-3" onclick="switchBook3Unit(3)">
+    <span class="lesson-num">3과</span>
+    <span class="lesson-title-text">🗝️ 마법 열쇠를 찾아라</span>
+  </div>
+  <div class="lesson-item" id="b3-lesson-4" onclick="switchBook3Unit(4)">
+    <span class="lesson-num">4과</span>
+    <span class="lesson-title-text">⚽ 토요일에 결승전이 있어요</span>
   </div>
 </nav>
 
@@ -2862,6 +2929,60 @@ document.addEventListener('DOMContentLoaded', async () => {
 </div><!-- /unit9 -->
 
 
+<!-- ══════ Level Test ══════ -->
+<div id="level-test-section">
+<div class="lt-wrap">
+
+  <!-- 퀴즈 화면 -->
+  <div id="lt-quiz">
+    <div class="lt-progress" id="lt-dots"></div>
+    <div class="lt-counter" id="lt-counter"></div>
+    <div class="lt-q-card">
+      <div class="lt-q-scene" id="lt-scene"></div>
+      <div class="lt-q-text"  id="lt-qtxt"></div>
+      <div class="lt-q-en"   id="lt-qen"></div>
+      <div class="lt-opts"   id="lt-opts"></div>
+    </div>
+  </div>
+
+  <!-- 결과 화면 -->
+  <div class="lt-result" id="lt-result">
+    <div class="lt-result-hero">
+      <div style="font-size:3rem">🎉</div>
+      <div class="lt-result-title">Level 2 완주했어요!</div>
+      <div class="lt-result-sub">이제 진짜 한국어로 말할 수 있어요 🇰🇷</div>
+    </div>
+
+    <div style="font-size:.8rem;color:var(--text-muted);margin:20px 0 8px;font-weight:600;">Level 2에서 배운 문장들 ✓</div>
+    <div class="lt-cando" style="background:#f0faf6;border-color:#9FE1CB;">
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>강아지가 <strong>노래해요</strong>.</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>놀이터에 <strong>가요</strong>.</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span><strong>언제</strong> 할머니 댁에 가요?</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>장난감 기차가 <strong>있어요</strong>.</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>구두가 <strong>아니에요</strong>.</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>저는 여덟 <strong>살이에요</strong>.</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>코끼리가 <strong>커요</strong>!</span></div>
+    </div>
+
+    <div style="font-size:.8rem;color:var(--text-muted);margin:16px 0 8px;font-weight:600;">Level 3 힌트 🔍</div>
+    <div class="lt-cando" style="background:#fef9ee;border-color:#FAC775;">
+      <div class="lt-cando-item"><span style="font-size:.9rem">🛒</span><span>아이스크림 두 개 <span style="background:#FAC775;color:#633806;border-radius:4px;padding:1px 8px;font-size:.85rem">주___요</span> ...</span></div>
+      <div class="lt-cando-item"><span style="font-size:.9rem">🔑</span><span>마법 열쇠가 <span style="background:#FAC775;color:#633806;border-radius:4px;padding:1px 8px;font-size:.85rem">어___ 있___요?</span></span></div>
+      <div class="lt-cando-item"><span style="font-size:.9rem">🏐</span><span>토요일에 결승전이 <span style="background:#FAC775;color:#633806;border-radius:4px;padding:1px 8px;font-size:.85rem">___어요!</span></span></div>
+    </div>
+
+    <button class="lt-cta" onclick="selectBook(3)">Level 3 시작하기 →</button>
+  </div>
+
+</div>
+</div>
+<!-- ══════ Book 3 CONTENT ══════ -->
+<div id="book3-main" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px;">
+  <div id="b3-unit-container">
+    <div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>
+  </div>
+</div>
+
 </main>
 </div>
 <div class="confetti-wrap" id="confetti"></div>
@@ -3120,12 +3241,620 @@ function buildFlashcards(containerId, items, bgKey) {
   });
 }
 
+
+// ══════════════════════════════════════════
+// LEVEL TEST
+// ══════════════════════════════════════════
+const LT_QUESTIONS = [
+  { scene:'🐕', q:'강아지가 뭘 해요?',           q_en:'What is the dog doing?',
+    opts:['노래해요','자요','커요'], ans:0 },
+  { scene:'🛝', q:'여기는 어디예요?',              q_en:'Where is this place?',
+    opts:['놀이터','아침','맛있어요'], ans:0 },
+  { scene:'🗓️', q:'할머니 댁에 ___ 가요?',        q_en:'___ do you go to grandma\'s?',
+    opts:['언제','어디에','뭐'], ans:0 },
+  { scene:'🚂', q:'장난감 기차가 ___',             q_en:'There ___ a toy train.',
+    opts:['있어요','가요','해요'], ans:0 },
+  { scene:'👟', q:'이거 구두예요? 아니요, ___',    q_en:'Are these shoes? No, ___',
+    opts:['구두가 아니에요','구두예요','운동화가 있어요'], ans:0 },
+  { scene:'🔢', q:'일, 이, 삼, ___',               q_en:'1, 2, 3, ___',
+    opts:['사','오','육'], ans:0 },
+  { scene:'🎂', q:'저는 여덟 살이에요 = I\'m ___ years old',  q_en:'How old?',
+    opts:['7살','8살','9살'], ans:1 },
+  { scene:'🐘', q:'코끼리가 ___',                  q_en:'The elephant is ___',
+    opts:['커요','작아요','없어요'], ans:0 }
+];
+
+let _ltIdx = 0;
+let _ltAnswered = false;
+
+function showLevelTest() {
+  document.querySelectorAll('.unit').forEach(u => u.classList.remove('active'));
+  document.querySelectorAll('#lesson-sidebar .lesson-item').forEach(l => l.classList.remove('active'));
+  const tocScr = document.getElementById('toc-screen');
+  if (tocScr) tocScr.style.display = 'none';
+  document.getElementById('lt-sidebar-btn').classList.add('active');
+  document.getElementById('level-test-section').style.display = 'block';
+  _ltIdx = 0;
+  _ltAnswered = false;
+  document.getElementById('lt-quiz').style.display = 'block';
+  document.getElementById('lt-result').style.display = 'none';
+  _ltRender();
+}
+
+function _ltRender() {
+  const total = LT_QUESTIONS.length;
+  _ltAnswered = false;
+
+  // 진행 dots
+  let dots = '';
+  for (let i = 0; i < total; i++) {
+    const cls = i < _ltIdx ? 'done' : i === _ltIdx ? 'current' : '';
+    dots += '<div class="lt-dot ' + cls + '"></div>';
+  }
+  document.getElementById('lt-dots').innerHTML = dots;
+  document.getElementById('lt-counter').textContent = (_ltIdx + 1) + ' / ' + total;
+
+  const q = LT_QUESTIONS[_ltIdx];
+  document.getElementById('lt-scene').textContent = q.scene;
+  document.getElementById('lt-qtxt').textContent = q.q;
+  document.getElementById('lt-qen').textContent = q.q_en;
+
+  let optsHTML = '';
+  q.opts.forEach((o, i) => {
+    optsHTML += '<button class="lt-opt" onclick="_ltAnswer(' + i + ')">' + o + '</button>';
+  });
+  document.getElementById('lt-opts').innerHTML = optsHTML;
+}
+
+function _ltAnswer(idx) {
+  if (_ltAnswered) return;
+  _ltAnswered = true;
+  const q = LT_QUESTIONS[_ltIdx];
+  const btns = document.querySelectorAll('.lt-opt');
+  if (idx === q.ans) {
+    btns[idx].classList.add('correct');
+    if (typeof speak === 'function') speak(q.opts[idx]);
+    setTimeout(() => {
+      _ltIdx++;
+      if (_ltIdx >= LT_QUESTIONS.length) {
+        _ltShowResult();
+      } else {
+        _ltRender();
+      }
+    }, 900);
+  } else {
+    btns[idx].classList.add('wrong');
+    setTimeout(() => {
+      btns[idx].classList.remove('wrong');
+      _ltAnswered = false;
+    }, 600);
+  }
+}
+
+function _ltShowResult() {
+  document.getElementById('lt-quiz').style.display = 'none';
+  document.getElementById('lt-result').style.display = 'block';
+  if (typeof launchConfetti === 'function') launchConfetti();
+}
+
 // ══════════════════════════════════════════
 // NAV
 // ══════════════════════════════════════════
 function selectBook(n) {
-  // 현재는 2권만 활성화
-  if (n === 2) switchUnit(1);
+  // 탭 active 클래스 전환
+  document.querySelectorAll('.book-tab').forEach(btn => {
+    const isTarget = btn.textContent.trim() === 'Level ' + n;
+    if (!btn.classList.contains('locked')) {
+      btn.classList.toggle('active', isTarget);
+    }
+  });
+  const sidebar2 = document.getElementById('lesson-sidebar');
+  const main2    = document.getElementById('main-content');
+  const tocScr   = document.getElementById('toc-screen');
+  const sidebar3 = document.getElementById('book3-sidebar');
+  const main3    = document.getElementById('book3-main');
+  if (n === 2) {
+    if (sidebar2) sidebar2.style.display = '';
+    if (main2)    main2.style.display    = '';
+    if (tocScr)   tocScr.style.display   = '';
+    if (sidebar3) sidebar3.style.display = 'none';
+    if (main3)    main3.style.display    = 'none';
+    switchUnit(1);
+  } else if (n === 3) {
+    if (sidebar2) sidebar2.style.display = 'none';
+    if (main2)    main2.style.display    = 'none';
+    if (tocScr)   tocScr.style.display   = 'none';
+    if (sidebar3) sidebar3.style.display = '';
+    if (main3)    main3.style.display    = '';
+    if (!b3CurrentUnit) switchBook3Unit(1);
+  }
+}
+
+// ══════════════════════════════════════════
+// BOOK 3 — Level 3 렌더러
+// ══════════════════════════════════════════
+let b3CurrentUnit = 0;
+let b3DataCache   = {};
+let b3PracticeCache = null;
+let b3FillAnswered = {};
+let b3ListenAnswered = {};
+let b3S1Idx = 0, b3S2Idx = 0;
+let b3S1Placed = [], b3S2Placed = [];
+
+async function loadBook3Unit(n) {
+  if (b3DataCache[n]) return b3DataCache[n];
+  const pad = String(n).padStart(2,'0');
+  const resp = await fetch('data/elem/book3/unit'+pad+'.json');
+  if (!resp.ok) throw new Error('Cannot load book3 unit '+n);
+  const data = await resp.json();
+  b3DataCache[n] = data;
+  return data;
+}
+
+async function switchBook3Unit(n) {
+  [1,2,3,4].forEach(i => {
+    const el = document.getElementById('b3-lesson-'+i);
+    if (el) el.classList.toggle('active', i===n);
+  });
+  b3CurrentUnit = n;
+  b3SceneUnit = n;
+  b3SceneIdx = 0;
+  const container = document.getElementById('b3-unit-container');
+  container.innerHTML = '<div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>';
+  try {
+    const data = await loadBook3Unit(n);
+    renderBook3Unit(data);
+  } catch(e) {
+    container.innerHTML = '<div style="text-align:center;padding:60px;color:#f88;font-family:Jua,sans-serif;">⚠️ 데이터 로드 실패: '+e.message+'</div>';
+    console.error(e);
+  }
+}
+
+function renderBook3Unit(data) {
+  const container = document.getElementById('b3-unit-container');
+  const goal      = data.goal || {};
+  const selfCheck = data.self_check || [];
+  const sections  = data.sections || {};
+  b3PracticeCache  = sections.practice || null;
+  b3FillAnswered   = {};
+  b3ListenAnswered  = {};
+  b3DlgAnswered    = {};
+  b3DlgAnswered    = {};
+  b3S1Idx = 0; b3S2Idx = 0;
+  b3S1Placed = []; b3S2Placed = [];
+
+  const scTab = selfCheck.length
+    ? '<button class="snav-btn" onclick="b3SwitchTab(\'selfcheck\')">✅ 자기점검 <span class="snav-en">Self Check</span></button>'
+    : '';
+  const scDiv = selfCheck.length
+    ? '<div class="section" id="b3-tab-selfcheck">'+renderB3SelfCheck(selfCheck, goal)+'</div>'
+    : '';
+
+  container.innerHTML =
+    '<div class="unit active">' +
+    '<div class="unit-heading"><span class="unit-num">'+data.unit+'</span><span class="unit-title">'+(data.title||'')+'</span></div>' +
+    (goal.en ? '<div class="b3-goal-badge">🎯 '+goal.en+'</div>' : '') +
+    '<nav class="section-nav" id="b3-snav">' +
+      '<button class="snav-btn active" onclick="b3SwitchTab(\'scene\')">🎬 영상 <span class="snav-en">Story</span></button>' +
+      '<button class="snav-btn" onclick="b3SwitchTab(\'vocab\')">📕 새단어 <span class="snav-en">Vocab</span></button>' +
+      '<button class="snav-btn" onclick="b3SwitchTab(\'grammar\')">📌 문법 <span class="snav-en">Grammar</span></button>' +
+      '<button class="snav-btn" onclick="b3SwitchTab(\'practice\')">✏️ 연습 <span class="snav-en">Practice</span></button>' +
+      scTab +
+    '</nav>' +
+    '<div class="section active" id="b3-tab-scene">'+renderB3Scene(data.unit)+'</div>' +
+    '<div class="section" id="b3-tab-vocab">'+renderB3Vocab(sections.vocab)+'</div>' +
+    '<div class="section" id="b3-tab-grammar">'+renderB3Grammar(sections.grammar)+'</div>' +
+    '<div class="section" id="b3-tab-practice">'+renderB3Practice()+'</div>' +
+    scDiv +
+    '</div>';
+
+  b3RenderS1();
+  b3RenderS2();
+}
+
+function b3SwitchTab(tab) {
+  ['scene','vocab','grammar','practice','selfcheck'].forEach(t => {
+    const el = document.getElementById('b3-tab-'+t);
+    if (el) el.classList.toggle('active', t===tab);
+  });
+  const nav = document.getElementById('b3-snav');
+  if (nav) nav.querySelectorAll('.snav-btn').forEach(btn => {
+    btn.classList.toggle('active', (btn.getAttribute('onclick')||'').includes("'"+tab+"'"));
+  });
+}
+
+function renderB3Vocab(vocab) {
+  if (!vocab) return '<div class="card"><p style="color:#aaa;text-align:center;padding:40px;">어휘 준비 중...</p></div>';
+  let out = '';
+  for (const [cat, items] of Object.entries(vocab)) {
+    out += '<div class="card"><div class="section-title">'+cat+'</div><div class="flashcard-grid">';
+    items.forEach(item => {
+      const kr = (item.kr||'').replace(/'/g,"&#39;");
+      out +=
+        '<div class="flashcard" onclick="this.classList.toggle(\'flipped\')">' +
+        '<div class="flashcard-inner">' +
+        '<div class="flashcard-front">' +
+        '<div class="fc-emoji">'+(item.emoji||'📖')+'</div>' +
+        '<div class="fc-korean">'+(item.kr||'')+'</div>' +
+        '<button class="fc-audio-btn" onclick="event.stopPropagation();speakKorean(\''+kr+'\')">🔊</button>' +
+        '<div class="fc-flip-hint">tap to flip →</div>' +
+        '</div>' +
+        '<div class="flashcard-back" style="background:var(--mint-light);border:2px solid #A8D5CC;">' +
+        '<div class="fc-emoji">'+(item.emoji||'📖')+'</div>' +
+        '<div class="fc-english">'+(item.en||'')+'</div>' +
+        '<div class="fc-romanize">['+(item.rom||'')+']</div>' +
+        '</div></div></div>';
+    });
+    out += '</div></div>';
+  }
+  return out;
+}
+
+function renderB3Grammar(grammar) {
+  if (!grammar||!grammar.sections) return '<div class="card"><p style="color:#aaa;text-align:center;padding:40px;">문법 준비 중...</p></div>';
+  let out = '';
+  grammar.sections.forEach(g => {
+    out += '<div class="card"><div class="section-title">'+(g.title||'')+'</div>';
+    if (g.subtitle) out += '<div class="section-sub">'+g.subtitle+'</div>';
+    if (g.pattern)  out += '<div class="b3-pattern-box">'+g.pattern+'</div>';
+    if (g.description) out += '<p style="font-size:.95rem;color:#555;line-height:1.7;margin:12px 0;">'+g.description+'</p>';
+    (g.rule_boxes||[]).forEach(rb => {
+      const cls = rb.color==='red'?'b3-rule-red':rb.color==='blue'?'b3-rule-blue':'b3-rule-green';
+      out += '<div class="b3-rule-box '+cls+'"><div class="b3-rule-label">'+(rb.label||'')+'</div><ul class="b3-rule-list">';
+      (rb.examples||[]).forEach(ex => { out += '<li>'+ex+'</li>'; });
+      out += '</ul></div>';
+    });
+    if (g.examples&&g.examples.length) {
+      out += '<div class="b3-examples">';
+      g.examples.forEach(ex => {
+        let kr = ex.korean||'';
+        if (ex.highlight) kr = kr.replace(ex.highlight,'<span class="b3-highlight">'+ex.highlight+'</span>');
+        const spk = (ex.korean||'').replace(/'/g,"&#39;");
+        out += '<div class="b3-ex-row"><button class="b3-speak-btn" onclick="speakKorean(\''+spk+'\')">🔊</button><div><div class="b3-ex-kr">'+kr+'</div><div class="b3-ex-en">'+(ex.english||'')+'</div></div></div>';
+      });
+      out += '</div>';
+    }
+    out += '</div>';
+  });
+  return out;
+}
+
+function renderB3Practice() {
+  const p = b3PracticeCache;
+  if (!p) return '<div class="card"><p style="color:#aaa;text-align:center;padding:40px;">연습 준비 중...</p></div>';
+
+  // dialogue_practice 있으면 대화 연습, 없으면 fill_items fallback
+  let pracHTML = '';
+  if (p.dialogue_practice && p.dialogue_practice.length) {
+    pracHTML = renderB3Dialogue(p.dialogue_practice);
+  } else {
+    let fillHTML = '';
+    (p.fill_items||[]).forEach((fi,i) => {
+      fillHTML += '<div class="b3-fill-item" id="b3fi-'+i+'"><div class="b3-fill-en">'+(fi.en||'')+'</div>' +
+        '<div class="b3-fill-sentence"><span class="b3-fill-q">'+(fi.q||'')+'</span>' +
+        '<span class="b3-fill-blank" id="b3fb-'+i+'">___</span>' +
+        '<span class="b3-fill-suffix">'+(fi.suffix||'')+'</span></div>' +
+        '<div class="b3-fill-opts">';
+      (fi.opts||[]).forEach((opt,oi) => {
+        fillHTML += '<button class="b3-opt-btn" onclick="b3FillCheck('+i+','+oi+')">'+opt+'</button>';
+      });
+      fillHTML += '</div></div>';
+    });
+    pracHTML = fillHTML;
+  }
+
+  let listenHTML = '';
+  (p.listen_quiz||[]).forEach((lq,i) => {
+    listenHTML += '<div class="b3-listen-item" id="b3li-'+i+'"><div class="b3-listen-prompt">' +
+      '<button class="b3-listen-btn" onclick="b3Speak('+i+')">🔊 들어보세요</button></div>' +
+      '<div class="b3-listen-choices">';
+    (lq.choices||[]).forEach((ch,ci) => {
+      listenHTML += '<button class="b3-choice-btn" onclick="b3ListenCheck('+i+','+ci+')">' +
+        '<div class="b3-choice-emoji">'+(ch.emoji||'')+'</div>' +
+        '<div class="b3-choice-kr">'+(ch.kr||'')+'</div>' +
+        '<div class="b3-choice-en">'+(ch.en||'')+'</div></button>';
+    });
+    listenHTML += '</div></div>';
+  });
+
+  return '<div class="card">' +
+    '<div class="b3-prac-tabs">' +
+    '<button class="b3-ptab active" onclick="b3PTab(this,\'prac\')">🎭 연습</button>' +
+    '<button class="b3-ptab" onclick="b3PTab(this,\'listen\')">🔊 듣기</button>' +
+    '<button class="b3-ptab" onclick="b3PTab(this,\'step1\')">🧩 문장 1</button>' +
+    '<button class="b3-ptab" onclick="b3PTab(this,\'step2\')">🧩 문장 2</button>' +
+    '</div>' +
+    '<div class="b3-psec active" id="b3-p-prac">'+pracHTML+'</div>' +
+    '<div class="b3-psec" id="b3-p-listen">'+listenHTML+'</div>' +
+    '<div class="b3-psec" id="b3-p-step1"><div id="b3-s1-wrap"></div></div>' +
+    '<div class="b3-psec" id="b3-p-step2"><div id="b3-s2-wrap"></div></div>' +
+    '</div>';
+}
+
+// ── Dialogue renderer ──
+let b3DlgAnswered = {};
+
+function renderB3Dialogue(scenarios) {
+  b3DlgAnswered = {};
+  let html = '<div class="b3-dlg-wrap">';
+  scenarios.forEach((sc, si) => {
+    html += '<div class="b3-dlg-scenario">' +
+      '<div class="b3-dlg-scene-label">' + sc.scene + ' <span class="b3-dlg-scene-en">\xb7 ' + sc.scene_en + '</span></div>';
+    sc.lines.forEach((line, li) => {
+      const isMe = (line.color === 'teal');
+      const sideClass = isMe ? 'b3-dlg-me' : 'b3-dlg-other';
+      const bubbleColor = 'b3-bubble-' + (line.color||'blue');
+      if (line.type === 'given') {
+        html += '<div class="b3-dlg-line ' + sideClass + '">' +
+          (isMe ? '' : '<span class="b3-dlg-name">' + line.speaker + '</span>') +
+          '<div class="b3-dlg-bubble ' + bubbleColor + '">' +
+          '<div class="b3-dlg-kr">' + line.text + '</div>' +
+          '<div class="b3-dlg-en">' + (line.en||'') + '</div>' +
+          '</div>' +
+          (isMe ? '<span class="b3-dlg-name">' + line.speaker + '</span>' : '') +
+          '</div>';
+      } else if (line.type === 'fill') {
+        const parts = (line.text||'').split('___');
+        const before = parts[0]||'';
+        const after  = parts[1]||'';
+        let opts = '';
+        (line.opts||[]).forEach((opt,oi) => {
+          opts += '<button class="b3-dlg-opt" onclick="b3DlgCheck('+si+','+li+','+oi+')">' + opt + '</button>';
+        });
+        html += '<div class="b3-dlg-line ' + sideClass + '" id="b3dlg-line-'+si+'-'+li+'">' +
+          (isMe ? '' : '<span class="b3-dlg-name">' + line.speaker + '</span>') +
+          '<div class="b3-dlg-bubble ' + bubbleColor + ' b3-dlg-fill-bubble">' +
+          '<div class="b3-dlg-kr">' + before + '<span class="b3-dlg-blank" id="b3dlg-blank-'+si+'-'+li+'">___</span>' + after + '</div>' +
+          '<div class="b3-dlg-en">' + (line.en||'') + '</div>' +
+          '<div class="b3-dlg-opts" id="b3dlg-opts-'+si+'-'+li+'">' + opts + '</div>' +
+          '</div>' +
+          (isMe ? '<span class="b3-dlg-name">' + line.speaker + '</span>' : '') +
+          '</div>';
+      }
+    });
+    html += '</div>';
+  });
+  html += '<div class="b3-dlg-result" id="b3-dlg-result"></div></div>';
+  return html;
+}
+
+function b3DlgCheck(si, li, chosenIdx) {
+  const key = si + '-' + li;
+  if (b3DlgAnswered[key]) return;
+  const p = b3PracticeCache;
+  if (!p || !p.dialogue_practice) return;
+  const line = p.dialogue_practice[si].lines[li];
+  const chosen = (line.opts||[])[chosenIdx];
+  const correct = (chosen === line.ans);
+
+  const blank  = document.getElementById('b3dlg-blank-' + si + '-' + li);
+  const optsEl = document.getElementById('b3dlg-opts-'  + si + '-' + li);
+
+  if (correct) {
+    b3DlgAnswered[key] = true;
+    if (blank)  { blank.textContent = chosen; blank.className = 'b3-dlg-blank b3-dlg-correct'; }
+    if (optsEl) optsEl.style.display = 'none';
+    speakKorean((line.text||'').replace('___', chosen));
+    const total = b3DlgTotalFills();
+    const done  = Object.keys(b3DlgAnswered).length;
+    if (done >= total && total > 0) {
+      setTimeout(() => {
+        const res = document.getElementById('b3-dlg-result');
+        if (res) res.innerHTML = '<div class="b3-dlg-complete">🎉 모든 대화 완성! Great conversation!</div>';
+        launchConfetti();
+      }, 700);
+    }
+  } else {
+    if (optsEl) {
+      const btns = optsEl.querySelectorAll('.b3-dlg-opt');
+      if (btns[chosenIdx]) {
+        btns[chosenIdx].classList.add('b3-dlg-opt-wrong');
+        setTimeout(() => btns[chosenIdx].classList.remove('b3-dlg-opt-wrong'), 700);
+      }
+    }
+    if (blank) {
+      blank.classList.add('b3-dlg-blank-shake');
+      setTimeout(() => blank.classList.remove('b3-dlg-blank-shake'), 500);
+    }
+  }
+}
+
+function b3DlgTotalFills() {
+  const p = b3PracticeCache;
+  if (!p || !p.dialogue_practice) return 0;
+  let n = 0;
+  p.dialogue_practice.forEach(sc => sc.lines.forEach(l => { if (l.type === 'fill') n++; }));
+  return n;
+}
+
+
+function renderB3SelfCheck(selfCheck, goal) {
+  let out = '<div class="card"><div class="section-title">✅ 자기 점검</div>';
+  if (goal&&goal.ko) out += '<div class="b3-goal-recap">🎯 '+goal.ko+'</div>';
+  out += '<div class="b3-checklist">';
+  selfCheck.forEach((item,i) => {
+    out += '<label class="b3-check-item">' +
+      '<input type="checkbox" id="b3chk-'+i+'" onchange="b3CheckScore()">' +
+      '<span class="b3-check-box"></span>' +
+      '<div class="b3-check-text"><div class="b3-check-ko">'+(item.ko||'')+'</div><div class="b3-check-en">'+(item.en||'')+'</div></div>' +
+      '</label>';
+  });
+  out += '</div><div class="b3-check-result" id="b3-check-result"></div></div>';
+  return out;
+}
+
+function b3PTab(btn,sec) {
+  const card = btn.closest('.card');
+  card.querySelectorAll('.b3-ptab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  card.querySelectorAll('.b3-psec').forEach(s=>s.classList.remove('active'));
+  const el = card.querySelector('#b3-p-'+sec);
+  if(el) el.classList.add('active');
+}
+
+function b3Speak(idx) {
+  const lq = (b3PracticeCache&&b3PracticeCache.listen_quiz||[])[idx];
+  if (lq&&lq.audio) speakKorean(lq.audio);
+}
+
+function b3FillCheck(idx,chosenIdx) {
+  if (b3FillAnswered[idx]) return;
+  const fi = (b3PracticeCache&&b3PracticeCache.fill_items||[])[idx];
+  if (!fi) return;
+  const chosen = fi.opts[chosenIdx];
+  const correct = chosen===fi.ans;
+  const blank = document.getElementById('b3fb-'+idx);
+  if (blank) { blank.textContent=chosen; blank.style.color=correct?'#0D7B75':'#e44'; blank.style.fontWeight='700'; }
+  const item = document.getElementById('b3fi-'+idx);
+  if (item) item.querySelectorAll('.b3-opt-btn').forEach((btn,i)=>{
+    btn.disabled=true;
+    if (fi.opts[i]===fi.ans) btn.classList.add('correct');
+    else if (i===chosenIdx&&!correct) btn.classList.add('wrong');
+  });
+  b3FillAnswered[idx]=true;
+  if (correct) speakKorean(fi.ans);
+}
+
+function b3ListenCheck(idx,chosenIdx) {
+  if (b3ListenAnswered[idx]) return;
+  b3ListenAnswered[idx]=true;
+  const lq = (b3PracticeCache&&b3PracticeCache.listen_quiz||[])[idx];
+  if (!lq) return;
+  const item = document.getElementById('b3li-'+idx);
+  if (item) item.querySelectorAll('.b3-choice-btn').forEach((btn,ci)=>{
+    btn.disabled=true;
+    if (ci===lq.correct) btn.classList.add('correct');
+    else if (ci===chosenIdx) btn.classList.add('wrong');
+  });
+  if (chosenIdx===lq.correct) launchConfetti();
+}
+
+function b3RenderS1() {
+  const wrap = document.getElementById('b3-s1-wrap');
+  if (!wrap) return;
+  const items = (b3PracticeCache&&b3PracticeCache.step1_chunks)||[];
+  if (!items.length) { wrap.innerHTML='<p style="text-align:center;color:#aaa;padding:40px;">준비 중...</p>'; return; }
+  if (b3S1Idx>=items.length) { wrap.innerHTML='<div class="b3-complete">🎉 완료! All done!</div>'; launchConfetti(); return; }
+  b3S1Placed=[];
+  const q=items[b3S1Idx];
+  const shuffled=[...q.chunks].map((c,i)=>({...c,_si:i})).sort(()=>Math.random()-0.5);
+  wrap.innerHTML=
+    '<div class="b3-s1-progress">'+(b3S1Idx+1)+' / '+items.length+'</div>'+
+    '<div class="b3-s1-scene">'+(q.scene||'')+'</div>'+
+    '<div class="b3-s1-english">'+(q.english||'')+'</div>'+
+    (q.hint?'<div class="b3-s1-hint">💡 '+q.hint+'</div>':'')+
+    '<div class="b3-s1-zone" id="b3-s1-zone"><span class="b3-zone-placeholder">여기에 조각을 놓으세요</span></div>'+
+    '<div class="b3-s1-bank" id="b3-s1-bank"></div>'+
+    '<button class="b3-check-btn" onclick="b3S1Check()">✅ 확인</button>';
+  const bank=wrap.querySelector('#b3-s1-bank');
+  shuffled.forEach((ch,si)=>{
+    const btn=document.createElement('button');
+    btn.className='b3-chunk-btn b3-type-'+ch.type;
+    btn.textContent=ch.text;
+    btn.onclick=()=>b3S1Pick(btn,ch.text,ch.type,si);
+    bank.appendChild(btn);
+  });
+}
+
+function b3S1Pick(btn,text,type,si) {
+  if(btn.classList.contains('used'))return;
+  btn.classList.add('used');
+  b3S1Placed.push({text,type,si,btn});
+  const zone=document.getElementById('b3-s1-zone');
+  const ph=zone.querySelector('.b3-zone-placeholder');
+  if(ph)ph.remove();
+  const chip=document.createElement('span');
+  chip.className='b3-placed-chunk b3-type-'+type;
+  chip.textContent=text;
+  chip.onclick=()=>{ btn.classList.remove('used'); b3S1Placed=b3S1Placed.filter(p=>p.si!==si); chip.remove(); if(!zone.children.length)zone.innerHTML='<span class="b3-zone-placeholder">여기에 조각을 놓으세요</span>'; };
+  zone.appendChild(chip);
+}
+
+function b3S1Check() {
+  const items=(b3PracticeCache&&b3PracticeCache.step1_chunks)||[];
+  if(b3S1Idx>=items.length)return;
+  const q=items[b3S1Idx];
+  const built=b3S1Placed.map(p=>p.text).join('');
+  if(built.replace(/\s+/g,'')===(q.sentence||'').replace(/\s+/g,'')) {
+    speakKorean(q.sentence); launchConfetti();
+    setTimeout(()=>{b3S1Idx++;b3RenderS1();},1800);
+  } else {
+    const zone=document.getElementById('b3-s1-zone');
+    if(zone){zone.style.borderColor='#e44';setTimeout(()=>zone.style.borderColor='',1000);}
+    const wrap=document.getElementById('b3-s1-wrap');
+    if(wrap&&!wrap.querySelector('.b3-ans-hint')){
+      const h=document.createElement('div');h.className='b3-ans-hint';h.textContent='✨ 정답: '+q.sentence;
+      const cb=wrap.querySelector('.b3-check-btn');if(cb){cb.parentNode.insertBefore(h,cb.nextSibling);cb.disabled=true;}
+    }
+  }
+}
+
+function b3RenderS2() {
+  const wrap=document.getElementById('b3-s2-wrap');
+  if(!wrap)return;
+  const items=(b3PracticeCache&&b3PracticeCache.step2_words)||[];
+  if(!items.length){wrap.innerHTML='<p style="text-align:center;color:#aaa;padding:40px;">준비 중...</p>';return;}
+  if(b3S2Idx>=items.length){wrap.innerHTML='<div class="b3-complete">🎉 모두 완료! Amazing!</div>';launchConfetti();return;}
+  b3S2Placed=[];
+  const q=items[b3S2Idx];
+  const words=q.answer.map((w,i)=>({w,t:q.types[i]}));
+  const shuffled=[...words].sort(()=>Math.random()-0.5);
+  wrap.innerHTML=
+    '<div class="b3-s1-progress">'+(b3S2Idx+1)+' / '+items.length+'</div>'+
+    '<div class="b3-s1-scene">'+(q.scene||'')+'</div>'+
+    '<div class="b3-s1-english">'+(q.english||'')+'</div>'+
+    (q.hint?'<div class="b3-s1-hint">💡 '+q.hint+'</div>':'')+
+    '<div class="b3-s1-zone" id="b3-s2-zone"><span class="b3-zone-placeholder">낱말을 순서대로 놓으세요</span></div>'+
+    '<div class="b3-s1-bank" id="b3-s2-bank"></div>'+
+    '<button class="b3-check-btn" onclick="b3S2Check()">✅ 확인</button>';
+  const bank=wrap.querySelector('#b3-s2-bank');
+  shuffled.forEach((obj,si)=>{
+    const btn=document.createElement('button');
+    btn.className='b3-chunk-btn b3-type-'+obj.t;
+    btn.textContent=obj.w;
+    btn.onclick=()=>b3S2Pick(btn,obj.w,obj.t,si);
+    bank.appendChild(btn);
+  });
+}
+
+function b3S2Pick(btn,word,type,si) {
+  if(btn.classList.contains('used'))return;
+  btn.classList.add('used');
+  b3S2Placed.push({word,type,si,btn});
+  const zone=document.getElementById('b3-s2-zone');
+  const ph=zone.querySelector('.b3-zone-placeholder');if(ph)ph.remove();
+  const chip=document.createElement('span');
+  chip.className='b3-placed-chunk b3-type-'+type;chip.textContent=word;
+  chip.onclick=()=>{ btn.classList.remove('used');b3S2Placed=b3S2Placed.filter(p=>p.si!==si);chip.remove();if(!zone.children.length)zone.innerHTML='<span class="b3-zone-placeholder">낱말을 순서대로 놓으세요</span>'; };
+  zone.appendChild(chip);
+}
+
+function b3S2Check() {
+  const items=(b3PracticeCache&&b3PracticeCache.step2_words)||[];
+  if(b3S2Idx>=items.length)return;
+  const q=items[b3S2Idx];
+  const built=b3S2Placed.map(p=>p.word).join(' ');
+  if(built.replace(/\s+/g,'')===(q.answer.join(' ')).replace(/\s+/g,'')) {
+    speakKorean(q.sentence);launchConfetti();
+    setTimeout(()=>{b3S2Idx++;b3RenderS2();},1800);
+  } else {
+    const zone=document.getElementById('b3-s2-zone');
+    if(zone){zone.style.borderColor='#e44';setTimeout(()=>zone.style.borderColor='',1000);}
+    const wrap=document.getElementById('b3-s2-wrap');
+    if(wrap&&!wrap.querySelector('.b3-ans-hint')){
+      const h=document.createElement('div');h.className='b3-ans-hint';h.textContent='✨ 정답: '+q.sentence;
+      const cb=wrap.querySelector('.b3-check-btn');if(cb){cb.parentNode.insertBefore(h,cb.nextSibling);cb.disabled=true;}
+    }
+  }
+}
+
+function b3CheckScore() {
+  const checks=document.querySelectorAll('[id^="b3chk-"]');
+  const total=checks.length,done=[...checks].filter(c=>c.checked).length;
+  const result=document.getElementById('b3-check-result');if(!result)return;
+  if(done===total&&total>0){result.innerHTML='<div class="b3-check-all">🌟 완벽해요! '+done+'/'+total+' 모두 달성! Amazing job! 🎉</div>';launchConfetti();}
+  else if(done>0) result.innerHTML='<div style="color:#888;text-align:center;font-family:Jua,sans-serif;margin-top:12px;">'+done+'/'+total+' 달성 중...</div>';
+  else result.innerHTML='';
 }
 
 function showTOC(){
@@ -3136,6 +3865,11 @@ function showTOC(){
 function switchUnit(n){
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
+  // 레벨 테스트 숨기기
+  const lts = document.getElementById('level-test-section');
+  if (lts) lts.style.display = 'none';
+  const ltBtn = document.getElementById('lt-sidebar-btn');
+  if (ltBtn) ltBtn.classList.remove('active');
   // 사이드바 lesson-item 활성화
   [1,2,3,4,5,6,7,8,9].forEach(i=>{
     const el = document.getElementById('lesson-'+i);
@@ -6781,6 +7515,195 @@ function _sceneTTS(text){ if(typeof speakKorean==='function')speakKorean(text); 
 
 // 씬 데이터 (슬라이드·스크립트 매핑)
 // audio:null → Web Speech TTS  /  combined:true → 한 파일에 여러 문장 합침
+
+// ══════════════════════════════════════════
+// BOOK 3 SCENE DATA
+// ══════════════════════════════════════════
+const B3_SCENE_DATA = {
+  1: {
+    title: '곰 세 마리',
+    slides: [
+      'data/elem/slides/L3_01/곰세마리1.png',
+      'data/elem/slides/L3_01/곰세마리2.png',
+      'data/elem/slides/L3_01/곰세마리3.png',
+      'data/elem/slides/L3_01/곰세마리4.png',
+      'data/elem/slides/L3_01/곰세마리5.png',
+      'data/elem/slides/L3_01/곰세마리6.png',
+      'data/elem/slides/L3_01/곰세마리7.png',
+    ],
+    script: [
+      [{ko:'곰 세 마리가 한 집에 있어요.', en:'Three bears live in one house.', audio:null}],
+      [{ko:'아빠 곰은 뚱뚱해요.', en:'Papa bear is chubby.', audio:null}],
+      [{ko:'엄마 곰은 날씬해요.', en:'Mama bear is slim.', audio:null}],
+      [{ko:'아기 곰은 너무 귀여워요.', en:'Baby bear is so cute.', audio:null}],
+      [{ko:'꽃이 예뻐요.', en:'The flowers are pretty.', audio:null}],
+      [{ko:'꽃이 모두 몇 송이예요?', en:'How many flowers are there?', audio:null}],
+      [{ko:'사람은 모두 몇 명이에요?', en:'How many people are there?', audio:null}],
+    ]
+  },
+  2: {
+    title: '아이스크림 두 개 주세요',
+    slides: [
+      'data/elem/slides/L3_02/아이스크림두개주세요1.png',
+      'data/elem/slides/L3_02/아이스크림두개주세요2.png',
+      'data/elem/slides/L3_02/아이스크림두개주세요3.png',
+      'data/elem/slides/L3_02/아이스크림두개주세요4.png',
+      'data/elem/slides/L3_02/아이스크림두개주세요5.png',
+      'data/elem/slides/L3_02/아이스크림두개주세요6.png',
+      'data/elem/slides/L3_02/아이스크림두개주세요7.png',
+    ],
+    script: [
+      [{ko:'여기는 공원이에요.', en:'This is a park.', audio:'data/elem/TTS/L3_02/1여기는+공원이에요_slide1.mp3'}],
+      [{ko:'저기 아이스크림 트럭이 있어요.', en:"There's an ice cream truck over there.", audio:'data/elem/TTS/L3_02/2저기+아이스크림+트럭이+있어요_slide2.mp3'}],
+      [{ko:'동생과 나는 목이 말라요.', en:'My sibling and I are thirsty.', audio:'data/elem/TTS/L3_02/3동생과+나는+목이+말라요_slide3.mp3'}],
+      [{ko:'엄마, 아이스크림이 먹고 싶어요. 아이스크림 사 주세요.', en:'Mom, I want ice cream. Please buy it for me.', audio:'data/elem/TTS/L3_02/4엄마+아이스크림이+먹고+싶어요_+아이스크림+사+주세요_slide4.mp3'}],
+      [{ko:'나는 주스를 마시고 싶어.', en:'I want to drink juice.', audio:'data/elem/TTS/L3_02/5나는+주스를+마시고+싶어_slide5.mp3'}],
+      [{ko:'아저씨! 아이스크림 두 개하고 주스 한 잔 주세요!', en:'Uncle! Two ice creams and one juice, please!', audio:'data/elem/TTS/L3_02/6아저씨!+아이스크림+두+개하고+주스+한+잔+주세요_slide6.mp3'}],
+      [{ko:'고맙습니다!', en:'Thank you!', audio:'data/elem/TTS/L3_02/7고맙습니다_slide7.mp3'}],
+    ]
+  },
+  3: {
+    title: '마법 열쇠를 찾아라',
+    slides: [
+      'data/elem/slides/L3_03/마법열쇠1.png',
+      'data/elem/slides/L3_03/마법열쇠2.png',
+      'data/elem/slides/L3_03/마법열쇠3.png',
+      'data/elem/slides/L3_03/마법열쇠4.png',
+      'data/elem/slides/L3_03/마법열쇠5.png',
+      'data/elem/slides/L3_03/마법열쇠6.png',
+      'data/elem/slides/L3_03/마법열쇠7.png',
+      'data/elem/slides/L3_03/마법열쇠8.png',
+      'data/elem/slides/L3_03/마법열쇠9.png',
+    ],
+    script: [
+      [{ko:'할머니 집에 옛날 반닫이가 있어요.', en:"There is an old chest at grandma's house.", audio:'data/elem/TTS/L3_03/1할머니+집에+옛날+반닫이가+있어요_slide1.mp3'}],
+      [{ko:'반닫이에는 이상한 자물통이 있어요.', en:'The chest has a strange lock.', audio:'data/elem/TTS/L3_03/2반닫이에는+이상한+자물통이+있어요_slide2.mp3'}],
+      [{ko:'이 자물통은 마법 열쇠가 필요해요.', en:'This lock needs a magic key.', audio:'data/elem/TTS/L3_03/3이+자물통은+마법+열쇠가+필요해요_slide3.mp3'}],
+      [{ko:'마법 열쇠가 안 보여요.', en:"I can't see the magic key.", audio:'data/elem/TTS/L3_03/4마법+열쇠가+안+보여요_slide4.mp3'}],
+      [{ko:'내가 찾아야 해요!', en:'I have to find it!', audio:'data/elem/TTS/L3_03/5내가+찾아야+해요!_slide5.mp3'}],
+      [{ko:'할머니의 항아리 속에 없어요.', en:"It's not inside grandma's jar.", audio:'data/elem/TTS/L3_03/6할머니의+항아리+속에+없어요_slide6.mp3'}],
+      [{ko:'반닫이 아래에도 없어요.', en:"It's not under the chest either.", audio:'data/elem/TTS/L3_03/7반닫이+아래에도+없어요_slide7.mp3'}],
+      [{ko:'탁자 위에도 없어요.', en:"It's not on top of the table either.", audio:'data/elem/TTS/L3_03/8탁자+위에도+없어요_slide8.mp3'}],
+      [{ko:'마법 열쇠는 어디에 있을까요?', en:'Where could the magic key be?', audio:'data/elem/TTS/L3_03/9마법+열쇠는+어디에+있을까요_slide9.mp3'}],
+    ]
+  },
+  4: {
+    title: '토요일에 결승전이 있어요',
+    slides: [
+      'data/elem/slides/L3_04/배구 결승전1.png',
+      'data/elem/slides/L3_04/배구 결승전2.png',
+      'data/elem/slides/L3_04/배구 결승전3.png',
+      'data/elem/slides/L3_04/배구 결승전4.png',
+    ],
+    script: [
+      [{ko:'엄마, 이번 토요일에 배구 결승전이 있어요.', en:'Mom, there is a volleyball final this Saturday.', audio:'data/elem/TTS/L3_04/1엄마+이번+토요일에+배구+결승전이+있어요_slide1.mp3'}],
+      [{ko:'정말? 엄마는 우리 리아가 너무 자랑스러워!', en:"Really? Mom is so proud of our Ria!", audio:'data/elem/TTS/L3_04/2정말_+엄마는+우리+리아가+너무+자랑스러워-slide2.mp3'}],
+      [{ko:'그래서 일요일에는 쉬고 싶어요.', en:'So I want to rest on Sunday.', audio:'data/elem/TTS/L3_04/3그래서+일요일에는+쉬고+싶어요_slide3.mp3'}],
+      [{ko:'조이랑 같이 놀 거예요.', en:"I'll play with Zoe.", audio:'data/elem/TTS/L3_04/4조이랑+같이+놀+거예요_slide4.mp3'}],
+    ]
+  },
+  5: {
+    title: '내일은 친구하고 레모네이드를 팔 거예요',
+    slides: [
+      'data/elem/slides/L3_05/어린이사업가1.png',
+      'data/elem/slides/L3_05/어린이사업가2.png',
+      'data/elem/slides/L3_05/어린이사업가3.png',
+      'data/elem/slides/L3_05/어린이사업가4.png',
+      'data/elem/slides/L3_05/어린이사업가5.png',
+      'data/elem/slides/L3_05/어린이사업가6.png',
+      'data/elem/slides/L3_05/어린이사업가7.png',
+    ],
+    script: [
+      [{ko:'어제는 우리 가족이 모두 함께 앱을 만들었어요.', en:'Yesterday, our whole family made an app together.', audio:'data/elem/TTS/L3_05/1어제는+우리+가족이+모두+함께+앱을+만들었어요_slide1.mp3'}],
+      [{ko:'레모네이드를 파는 앱이에요.', en:"It's an app for selling lemonade.", audio:'data/elem/TTS/L3_05/2레모네이드를+파는+앱이에요_slide2.mp3'}],
+      [{ko:'메뉴를 만들 수 있어요. 주문을 받을 수 있어요.', en:'We can make a menu. We can take orders.', audio:'data/elem/TTS/L3_05/3메뉴를+만들+수+있어요_+주문을+받을+수+있어요slide3.mp3'}],
+      [{ko:'우리가 만들어서 더 좋아요.', en:'We like it more because we made it.', audio:'data/elem/TTS/L3_05/4우리가+만들어서+더+좋아요_slide4.mp3'}],
+      [{ko:'내일은 친구랑 같이 레모네이드를 팔 거예요. 우리가 만든 앱을 쓸 거예요.', en:"Tomorrow I'll sell lemonade with my friend. We'll use the app we made.", audio:'data/elem/TTS/L3_05/5내일은+친구랑+같이+레모네이드를+팔+거예요_+우리가+만든+앱을+쓸+거예요_slide5.mp3'}],
+      [{ko:'너무 신나요!', en:"I'm so excited!", audio:'data/elem/TTS/L3_05/6너무+신나요!_slide6.mp3'}],
+      [
+        {ko:'뭘 드릴까요?', en:'What can I get you?', audio:'data/elem/TTS/L3_05/7뭘+드릴까요_slide7.mp3'},
+        {ko:'레모네이드 하나 주세요.', en:'One lemonade, please.', audio:'data/elem/TTS/L3_05/8레모네이드+하나+주세요_slide7.mp3'}
+      ],
+    ]
+  }
+};
+
+let b3SceneUnit = 1;
+let b3SceneIdx  = 0;
+let b3SceneAudio = null;
+
+function b3SceneTo(idx) {
+  const d = B3_SCENE_DATA[b3SceneUnit];
+  if (!d) return;
+  idx = Math.max(0, Math.min(idx, d.slides.length - 1));
+  b3SceneIdx = idx;
+
+  const img = document.getElementById('b3-scene-img');
+  if (img) { img.src = d.slides[idx]; img.style.display = ''; }
+
+  // 도트
+  document.querySelectorAll('#b3-scene-dots .u2-slide-dot')
+    .forEach((dot, i) => dot.classList.toggle('active', i === idx));
+
+  // 버튼
+  const prev = document.getElementById('b3-scene-prev');
+  const next = document.getElementById('b3-scene-next');
+  if (prev) prev.disabled = (idx === 0);
+  if (next) next.disabled = (idx === d.slides.length - 1);
+
+  // 스크립트
+  const box = document.getElementById('b3-script-box');
+  if (!box) return;
+  const lines = d.script[idx] || [];
+  box.innerHTML = lines.map((ln, li) =>
+    '<div class="u2-script-line">' +
+    (ln.audio ? '<button class="u2-script-play" onclick="b3ScenePlay(' + idx + ',' + li + ')" aria-label="재생">▶</button>' : '<span style="width:28px;display:inline-block"></span>') +
+    '<span class="u2-script-ko">' + ln.ko + '</span>' +
+    '<span class="u2-script-en">' + ln.en + '</span>' +
+    '</div>'
+  ).join('');
+}
+
+function b3SceneGo(dir) {
+  b3SceneTo(b3SceneIdx + dir);
+}
+
+function b3ScenePlay(slideIdx, lineIdx) {
+  const d = B3_SCENE_DATA[b3SceneUnit];
+  if (!d) return;
+  const line = (d.script[slideIdx] || [])[lineIdx];
+  if (!line || !line.audio) return;
+  if (b3SceneAudio) { b3SceneAudio.pause(); b3SceneAudio = null; }
+  document.querySelectorAll('#b3-script-box .u2-script-play').forEach(b => b.classList.remove('playing'));
+  const btn = document.querySelectorAll('#b3-script-box .u2-script-play')[lineIdx];
+  b3SceneAudio = new Audio(line.audio);
+  b3SceneAudio.play();
+  if (btn) { btn.classList.add('playing'); b3SceneAudio.onended = () => btn.classList.remove('playing'); }
+}
+
+function renderB3Scene(unitNum) {
+  const d = B3_SCENE_DATA[unitNum];
+  if (!d) return '<div class="card"><p style="color:#aaa;text-align:center;padding:24px">슬라이드 준비 중...</p></div>';
+  const dots = d.slides.map((_,i) =>
+    '<div class="u2-slide-dot' + (i===0?' active':'') + '" onclick="b3SceneTo(' + i + ')"></div>'
+  ).join('');
+  return '<div class="card" style="padding:0;overflow:hidden">' +
+    '<div class="u2-scene-viewer">' +
+      '<div class="u2-slide-wrap">' +
+        '<img class="u2-slide-img" id="b3-scene-img" src="' + d.slides[0] + '" alt="slide" ' +
+          'onerror="var fb=this.parentElement.querySelector(\'.slide-load-err\');if(fb)fb.style.display=\'block\'" />' +
+        '<div class="slide-load-err" style="display:none;padding:24px;text-align:center;color:#888;font-size:.9rem">⏳ 이미지 로딩 중...<br><small>(슬라이드 파일을 GitHub에 업로드해주세요)</small></div>' +
+      '</div>' +
+      '<div class="u2-slide-nav">' +
+        '<button class="u2-nav-btn" id="b3-scene-prev" onclick="b3SceneGo(-1)" disabled>◀</button>' +
+        '<div class="u2-slide-dots" id="b3-scene-dots">' + dots + '</div>' +
+        '<button class="u2-nav-btn" id="b3-scene-next" onclick="b3SceneGo(1)">▶</button>' +
+      '</div>' +
+      '<div class="u2-script-box" id="b3-script-box"></div>' +
+    '</div>' +
+  '</div>';
+}
+
 const SCENE_DATA = {
 
   1: {
@@ -7637,8 +8560,127 @@ if(document.readyState !== 'loading'){
 .kids-speak-feedback{font-size:0.92rem;color:#333;line-height:1.6;background:#FFF9E6;padding:14px 16px;border-radius:12px;border-left:4px solid #FFB347;min-height:50px;margin-bottom:14px;}
 .kids-speak-retry-btn{display:block;width:100%;padding:12px;background:#FFB347;color:white;border:none;border-radius:14px;font-size:1rem;cursor:pointer;font-family:'Jua',sans-serif;transition:all .15s;}
 .kids-speak-retry-btn:hover{background:#FFA033;}
+/* ════════════════════════
+   Book 3 — Level 3 스타일
+   ════════════════════════ */
+.b3-goal-badge{display:inline-block;background:linear-gradient(135deg,#0D7B75,#1AAB9A);color:white;border-radius:20px;padding:6px 18px;font-family:'Jua',sans-serif;font-size:.9rem;margin:4px 0 16px 0;}
+.b3-pattern-box{background:#EBF7F6;border:2px solid #0D7B75;border-radius:12px;padding:12px 18px;font-family:'Jua',sans-serif;font-size:1.05rem;color:#0D7B75;text-align:center;margin:12px 0;}
+.b3-rule-box{border-radius:12px;padding:14px 18px;margin:10px 0;}
+.b3-rule-red{background:#FFF0F0;border-left:4px solid #e44;}
+.b3-rule-blue{background:#F0F4FF;border-left:4px solid #5B6AF0;}
+.b3-rule-green{background:#F0FBF7;border-left:4px solid #0D7B75;}
+.b3-rule-label{font-weight:700;margin-bottom:8px;font-family:'Jua',sans-serif;font-size:.95rem;}
+.b3-rule-list{margin:0;padding-left:20px;}
+.b3-rule-list li{margin:4px 0;font-size:.93rem;color:#444;}
+.b3-examples{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+.b3-ex-row{display:flex;align-items:flex-start;gap:10px;background:#f9f9f9;border-radius:10px;padding:12px;}
+.b3-speak-btn{background:none;border:1.5px solid #FFB347;border-radius:50%;width:32px;height:32px;font-size:.9rem;cursor:pointer;flex-shrink:0;transition:all .2s;}
+.b3-speak-btn:hover{background:#FFE5C2;}
+.b3-ex-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;}
+.b3-ex-en{font-size:.85rem;color:#888;margin-top:3px;}
+.b3-highlight{background:#FFE5C2;border-radius:4px;padding:1px 4px;color:#CC6600;font-weight:700;}
+/* Practice tabs */
+.b3-prac-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.b3-ptab{background:#f0f0f0;border:none;border-radius:20px;padding:8px 14px;font-family:'Jua',sans-serif;font-size:.85rem;cursor:pointer;transition:all .2s;}
+.b3-ptab.active{background:#0D7B75;color:white;}
+.b3-ptab:hover:not(.active){background:#e0f5f2;}
+.b3-psec{display:none;}
+.b3-psec.active{display:block;}
+/* Fill */
+.b3-fill-item{background:#fafafa;border-radius:14px;padding:16px 20px;margin-bottom:12px;border:1.5px solid #eee;}
+.b3-fill-en{font-size:.85rem;color:#aaa;margin-bottom:8px;}
+.b3-fill-sentence{font-family:'Jua',sans-serif;font-size:1.1rem;margin-bottom:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;line-height:1.8;}
+.b3-fill-blank{display:inline-block;min-width:64px;border-bottom:3px solid #0D7B75;text-align:center;color:#0D7B75;padding:2px 8px;font-weight:700;}
+.b3-fill-opts{display:flex;gap:8px;flex-wrap:wrap;}
+.b3-opt-btn{background:#EBF7F6;border:2px solid #A8D5CC;border-radius:20px;padding:8px 18px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
+.b3-opt-btn:hover:not(:disabled){background:#0D7B75;color:white;}
+.b3-opt-btn.correct{background:#0D7B75;color:white;border-color:#0D7B75;}
+.b3-opt-btn.wrong{background:#ffe0e0;border-color:#e44;color:#e44;}
+/* Listen */
+.b3-listen-item{background:#fafafa;border-radius:14px;padding:20px;margin-bottom:14px;border:1.5px solid #eee;}
+.b3-listen-prompt{text-align:center;margin-bottom:16px;}
+.b3-listen-btn{background:#EBF7F6;border:2px solid #0D7B75;border-radius:20px;padding:12px 24px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;color:#0D7B75;transition:all .2s;}
+.b3-listen-btn:hover{background:#0D7B75;color:white;}
+.b3-listen-choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.b3-choice-btn{background:#f8f8f8;border:2px solid #ddd;border-radius:16px;padding:14px 20px;cursor:pointer;transition:all .2s;text-align:center;min-width:100px;font-family:'Jua',sans-serif;}
+.b3-choice-btn:hover:not(:disabled){border-color:#0D7B75;background:#EBF7F6;}
+.b3-choice-btn.correct{background:#EBF7F6;border-color:#0D7B75;}
+.b3-choice-btn.wrong{background:#ffe0e0;border-color:#e44;}
+.b3-choice-emoji{font-size:1.8rem;margin-bottom:4px;}
+.b3-choice-kr{font-size:.9rem;color:#333;}
+.b3-choice-en{font-size:.75rem;color:#999;}
+/* Steps */
+.b3-s1-progress{font-family:'Jua',sans-serif;font-size:.85rem;color:#aaa;text-align:right;margin-bottom:8px;}
+.b3-s1-scene{font-size:2.2rem;text-align:center;margin:8px 0 4px 0;}
+.b3-s1-english{font-size:.95rem;color:#555;text-align:center;margin-bottom:6px;}
+.b3-s1-hint{font-size:.85rem;color:#888;text-align:center;background:#FFF9E6;border-radius:8px;padding:6px 12px;margin-bottom:12px;border-left:3px solid #FFD580;}
+.b3-s1-zone{min-height:52px;border:2px dashed #0D7B75;border-radius:14px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;transition:border-color .3s;align-items:center;}
+.b3-zone-placeholder{color:#ccc;font-family:'Jua',sans-serif;font-size:.9rem;}
+.b3-s1-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.b3-chunk-btn{background:#EBF7F6;border:2px solid #A8D5CC;border-radius:20px;padding:8px 16px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
+.b3-chunk-btn:hover:not(.used){background:#0D7B75;color:white;}
+.b3-chunk-btn.used{opacity:.35;cursor:default;pointer-events:none;}
+.b3-chunk-btn.b3-type-place{background:#F0F4FF;border-color:#B0BAFF;}
+.b3-chunk-btn.b3-type-verb{background:#FFF0F8;border-color:#FFB8E0;}
+.b3-chunk-btn.b3-type-name{background:#FFF9E6;border-color:#FFD580;}
+.b3-placed-chunk{background:#0D7B75;color:white;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
+.b3-placed-chunk:hover{background:#0a6862;text-decoration:line-through;}
+.b3-placed-chunk.b3-type-place{background:#5B6AF0;}
+.b3-placed-chunk.b3-type-verb{background:#C46EA8;}
+.b3-placed-chunk.b3-type-name{background:#E8A020;}
+.b3-check-btn{display:block;margin:0 auto;background:#0D7B75;color:white;border:none;border-radius:20px;padding:10px 30px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;transition:all .2s;}
+.b3-check-btn:hover:not(:disabled){background:#0a6862;}
+.b3-check-btn:disabled{opacity:.5;}
+.b3-complete{text-align:center;font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;padding:40px;background:#EBF7F6;border-radius:20px;}
+.b3-ans-hint{color:#0D7B75;font-weight:700;margin:10px 0 6px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.95rem;}
+/* Self check */
+.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bottom:16px;font-size:.95rem;}
+.b3-checklist{display:flex;flex-direction:column;gap:10px;margin:16px 0;}
+.b3-check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 16px;border-radius:12px;background:#f9f9f9;transition:background .2s;user-select:none;}
+.b3-check-item:hover{background:#EBF7F6;}
+.b3-check-item input[type="checkbox"]{display:none;}
+.b3-check-box{width:24px;height:24px;border:2.5px solid #A8D5CC;border-radius:6px;flex-shrink:0;margin-top:2px;transition:all .2s;position:relative;}
+.b3-check-item input:checked~.b3-check-box{background:#0D7B75;border-color:#0D7B75;}
+.b3-check-item input:checked~.b3-check-box::after{content:'✓';color:white;font-size:.85rem;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.b3-check-ko{font-family:'Jua',sans-serif;font-size:.95rem;color:#333;}
+.b3-check-en{font-size:.82rem;color:#888;margin-top:3px;}
+.b3-check-result{margin-top:16px;}
+
+/* ── Book 3 Dialogue Practice ── */
+.b3-dlg-wrap{display:flex;flex-direction:column;gap:20px;}
+.b3-dlg-scenario{background:#fafafa;border-radius:16px;padding:18px 16px;border:1.5px solid #eee;}
+.b3-dlg-scene-label{font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dashed #c8ede9;}
+.b3-dlg-scene-en{font-size:.85rem;color:#aaa;font-family:sans-serif;}
+.b3-dlg-line{display:flex;align-items:flex-end;gap:8px;margin-bottom:12px;}
+.b3-dlg-other{flex-direction:row;}
+.b3-dlg-me{flex-direction:row-reverse;}
+.b3-dlg-name{font-family:'Jua',sans-serif;font-size:.75rem;color:#999;flex-shrink:0;max-width:52px;text-align:center;line-height:1.3;}
+.b3-dlg-bubble{max-width:75%;border-radius:18px;padding:12px 16px;position:relative;}
+.b3-dlg-other .b3-dlg-bubble{border-bottom-left-radius:4px;}
+.b3-dlg-me    .b3-dlg-bubble{border-bottom-right-radius:4px;}
+.b3-dlg-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;line-height:1.6;}
+.b3-dlg-en{font-size:.78rem;color:rgba(0,0,0,.45);margin-top:4px;}
+/* bubble colors */
+.b3-bubble-blue  {background:#E8EEFF;border:1.5px solid #B0BAFF;}
+.b3-bubble-teal  {background:#E0F5F2;border:1.5px solid #A8D5CC;}
+.b3-bubble-coral {background:#FFE8E4;border:1.5px solid #FFB8A8;}
+.b3-bubble-amber {background:#FFF4DC;border:1.5px solid #FFD580;}
+/* fill bubble */
+.b3-dlg-fill-bubble .b3-dlg-kr{margin-bottom:10px;}
+.b3-dlg-blank{display:inline-block;min-width:48px;border-bottom:2.5px solid #0D7B75;text-align:center;padding:0 6px;color:#0D7B75;font-weight:700;transition:all .2s;}
+.b3-dlg-correct{color:#0D7B75 !important;border-bottom-color:#0D7B75 !important;background:#c8ede9;border-radius:6px;padding:1px 8px;}
+.b3-dlg-blank-shake{animation:b3shake .4s;}
+@keyframes b3shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.b3-dlg-opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.b3-dlg-opt{background:white;border:2px solid #A8D5CC;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
+.b3-dlg-opt:hover{background:#0D7B75;color:white;border-color:#0D7B75;}
+.b3-dlg-opt-wrong{background:#ffe0e0 !important;border-color:#e44 !important;color:#e44 !important;}
+.b3-dlg-result{text-align:center;margin-top:8px;}
+.b3-dlg-complete{background:linear-gradient(135deg,#EBF7F6,#FFF9E6);border-radius:16px;padding:20px;font-family:'Jua',sans-serif;font-size:1.1rem;color:#0D7B75;border:2px solid #A8D5CC;}
+
+.b3-check-all{background:linear-gradient(135deg,#EBF7F6,#FFF9E6);border-radius:14px;padding:16px;text-align:center;font-family:'Jua',sans-serif;color:#0D7B75;font-size:1rem;border:2px solid #A8D5CC;}
+
 </style>
 
 </body>
 </html>
-       

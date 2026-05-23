@@ -534,8 +534,10 @@ const urlName   = _hc ? _hc.urlName : null;
 - **nhs.html 렌더러**: mp4 video 필드 지원 추가 필요 (현재 slides만 처리)
 
 ### 초등반 korean-app_v2.html
-- **콘텐츠 동결** — UI/기능 유지, 새 단원 추가 중단
-- Book 3 데이터 준비 중: `data/elem/book3/unit01.json` 템플릿 생성 완료
+- **Level 3 활성화 완료** — `selectBook(3)` + Book 3 렌더러 추가 (2026-05-23)
+- Book 3 데이터: `data/elem/book3/unit01.json` (곰 세 마리), `unit02.json` (아이스크림 두 개 주세요) 완성
+- Book 3 렌더러: goal badge + 4탭 (새단어/문법/연습/자기점검) + 빈칸/듣기/문장1/문장2 연습
+- 사이드바: 1~4과 표시 (unit03 마법 열쇠, unit04 토요일 결승전은 JSON 아직 미작성)
 
 ### 성인반 sejong-korean_v1.html
 - **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
