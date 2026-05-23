@@ -1026,6 +1026,7 @@ async function deleteStudent(name) {
 // ══════════════════════════════════════════
 // ── 지목/손들기 (core.js Stage 5) ──
 let practice = null;
+let _practiceReady = false;  // 초기 상태 로드 후 true → 그 전엔 confetti 안 씀
 let lastPlayer = null;
 let knownPlayer = null;   // current_player가 null로 들어와도 배너에 쓸 수 있도록 캐시
 
@@ -1080,6 +1081,8 @@ function showCorrectPopup(names) {
 }
 
 function applyPracticeState(session, showPopup = true) {
+  const _firstCall = !_practiceReady;
+  _practiceReady = true;
   const statusEl = document.getElementById('practice-status');
   if (!statusEl) return;
   const player = session.current_player;
@@ -1122,7 +1125,7 @@ function applyPracticeState(session, showPopup = true) {
     const card = document.getElementById(cardId);
     const comp = document.getElementById(completeId);
     if (card) card.style.display = 'none';
-    if (comp) { comp.classList.add('show'); launchConfetti(); }
+    if (comp) { comp.classList.add('show'); if(!_firstCall){ launchConfetti(); } }
   }
   if (unit === 1 && typeof u1Idx !== 'undefined' && qIdx !== u1Idx) {
     u1Idx = qIdx;
@@ -1180,10 +1183,10 @@ function applyPracticeState(session, showPopup = true) {
           const card = document.getElementById('u6-qcard');
           const comp = document.getElementById('u6-complete');
           if (card) card.style.display = 'none';
-          if (comp) { comp.classList.add('show'); if(typeof launchConfetti==='function') launchConfetti(); }
+          if (comp) { comp.classList.add('show'); if(!_firstCall){ if(typeof launchConfetti==='function') launchConfetti(); } }
         } else if (typeof renderU6 === 'function') {
           renderU6();
-          if (typeof launchConfetti==='function') launchConfetti();
+          if (typeof launchConfetti==='function') if(!_firstCall){ launchConfetti(); }
         }
       }
     } else if (qIdx >= 10) {
@@ -1193,7 +1196,7 @@ function applyPracticeState(session, showPopup = true) {
       if (s1Idx !== s6Idx) {
         s6Idx = s1Idx;
         if (typeof renderS6==='function') renderS6();
-        if (typeof launchConfetti==='function') launchConfetti();
+        if (typeof launchConfetti==='function') if(!_firstCall){ launchConfetti(); }
       }
     } else {
       // 듣기 퀴즈 — 질문 동기화 + 투표 현황 + 정답 공개
@@ -3366,7 +3369,7 @@ function selectBook(n) {
     if (tocScr)   tocScr.style.display   = 'none';
     if (sidebar3) sidebar3.style.display = '';
     if (main3)    main3.style.display    = '';
-    if (!b3CurrentUnit) switchBook3Unit(1);
+    switchBook3Unit(b3CurrentUnit || 1);
   }
 }
 
