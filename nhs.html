@@ -329,7 +329,8 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .hcard{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:10px 4px;text-align:center;cursor:pointer;transition:all .18s;user-select:none;}
 .hcard:hover,.hcard.playing{border-color:var(--teal-md);background:var(--teal-50);transform:translateY(-2px);box-shadow:var(--shadow-sm);}
 .hcard-kr{font-size:28px;font-weight:700;color:var(--gray-900);line-height:1.1;}
-.hcard-rom{font-size:10px;color:var(--teal);font-weight:700;margin-top:3px;}
+.hcard-name{font-size:9.5px;color:var(--warm-400);font-weight:600;margin-top:2px;}
+.hcard-rom{font-size:10px;color:var(--teal);font-weight:700;margin-top:2px;}
 .hcard-ex{font-size:9px;color:#a8a29e;margin-top:1px;}
 /* ── SYLLABLE BUILDER ───────────────────────────────── */
 .syl-builder{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-lg);padding:20px;margin-bottom:20px;}
@@ -393,6 +394,20 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .greet-rom{font-size:10.5px;color:var(--teal);font-weight:600;margin-top:2px;}
 .greet-en{font-size:12px;color:var(--warm-500);margin-top:2px;}
 .greet-ctx{font-size:10.5px;color:var(--amber-600);background:var(--amber-50);border-radius:6px;padding:2px 8px;margin-left:auto;flex-shrink:0;white-space:nowrap;}
+.greet-usage{font-size:10.5px;color:var(--amber-600);background:var(--amber-50);border-radius:6px;padding:2px 8px;margin-left:auto;flex-shrink:0;text-align:right;max-width:140px;line-height:1.4;}
+.greet-speak-icon{font-size:13px;opacity:.6;}
+.farewell-tip{background:var(--teal-50);border-left:3px solid var(--teal);border-radius:var(--radius-sm);padding:10px 14px;font-size:12.5px;color:var(--teal-dark);margin-bottom:14px;line-height:1.6;}
+/* ── CLASSROOM 2-COL ─────────────────────────────────── */
+.class-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:520px){.class-cols{grid-template-columns:1fr;}}
+.class-col-hdr{font-size:13px;font-weight:800;border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:8px;text-align:center;line-height:1.5;}
+.teacher-hdr{background:var(--teal-50);color:var(--teal-dark);border:1.5px solid var(--teal-lt);}
+.student-hdr{background:var(--amber-50);color:var(--amber-600);border:1.5px solid var(--amber-lt);}
+.class-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:9px 12px;margin-bottom:7px;cursor:pointer;transition:all .15s;}
+.class-card:hover{border-color:var(--teal-md);background:var(--teal-50);}
+.class-kr{font-size:15px;font-weight:700;color:var(--gray-900);}
+.class-rom{font-size:10px;color:var(--teal);font-weight:600;margin-top:2px;}
+.class-en{font-size:11.5px;color:var(--warm-500);margin-top:2px;}
 /* ── NUMBERS ────────────────────────────────────────── */
 .num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin-bottom:18px;}
 .num-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:10px 8px;text-align:center;cursor:pointer;transition:all .18s;}
@@ -402,6 +417,45 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .num-card-rom{font-size:10px;color:var(--warm-500);margin-top:1px;}
 .num-card-hint{font-size:10px;color:var(--teal);margin-top:2px;font-style:italic;}
 .num-usage-box{background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--teal-dark);margin-bottom:16px;line-height:1.8;}
+/* ── BIG NUMBERS ────────────────────────────────────── */
+.bignum-key-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px;}
+.bignum-key-card{border-radius:var(--radius-md);padding:12px 10px;text-align:center;border:2px solid;}
+.bignum-key-card.teal{background:var(--teal-50);border-color:var(--teal-lt);}
+.bignum-key-card.purple{background:#f3f0ff;border-color:#c4b5fd;}
+.bignum-key-card.coral{background:#fff5f2;border-color:#fca89a;}
+.bignum-key-num{font-size:9px;color:var(--warm-400);margin-bottom:3px;font-family:monospace;}
+.bignum-key-kr{font-size:26px;font-weight:900;cursor:pointer;}
+.bignum-key-card.teal .bignum-key-kr{color:var(--teal-dark);}
+.bignum-key-card.purple .bignum-key-kr{color:#7c3aed;}
+.bignum-key-card.coral .bignum-key-kr{color:var(--coral);}
+.bignum-key-en{font-size:10px;font-weight:700;margin-top:2px;color:var(--warm-500);}
+.bignum-key-sub{font-size:9.5px;color:var(--warm-400);margin-top:4px;line-height:1.5;}
+.bignum-table td,.bignum-table th{font-size:12px!important;padding:6px 8px!important;}
+.bignum-row-man td{background:var(--teal-50);font-weight:700;color:var(--teal-dark);}
+.bignum-row-eok td{background:#f3f0ff;font-weight:700;color:#7c3aed;}
+.bignum-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:16px;}
+.bignum-compare-col{border-radius:var(--radius-md);padding:14px 12px;text-align:center;}
+.en-col{background:#f0f4ff;border:1.5px solid #bfcbff;}
+.kr-col{background:var(--teal-50);border:1.5px solid var(--teal-lt);}
+.bignum-compare-hdr{font-size:11px;font-weight:700;margin-bottom:6px;color:var(--warm-500);}
+.bignum-compare-num{font-size:20px;font-weight:900;margin-bottom:4px;font-family:monospace;}
+.en-col .bignum-compare-num{color:#3b4cc0;}
+.kr-col .bignum-compare-num{color:var(--teal-dark);}
+.bignum-compare-break{font-size:13px;margin-bottom:4px;color:var(--warm-600);}
+.bignum-compare-read{font-size:12px;color:var(--warm-500);font-style:italic;}
+.bignum-compare-arrow{font-size:22px;color:var(--warm-400);text-align:center;}
+.bignum-unit-badge{display:inline-block;border-radius:4px;padding:1px 5px;font-size:11px;font-weight:700;margin:0 1px;}
+.en-badge{background:#dde4ff;color:#3b4cc0;}
+.kr-badge{background:var(--teal-50);color:var(--teal-dark);border:1px solid var(--teal-lt);}
+.bignum-converter{background:#fff;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 16px;}
+.bignum-input{width:100%;box-sizing:border-box;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:9px 12px;font-size:16px;outline:none;margin-bottom:10px;}
+.bignum-input:focus{border-color:var(--teal);}
+.bignum-result{min-height:48px;font-size:14px;line-height:1.8;}
+.bignum-result-row{display:flex;gap:8px;align-items:baseline;margin-bottom:4px;}
+.bignum-result-label{font-size:11px;color:var(--warm-400);width:90px;flex-shrink:0;}
+.bignum-result-val{font-weight:700;font-family:monospace;}
+.bignum-result-kr{color:var(--teal-dark);font-size:16px;}
+.bignum-result-read{font-size:13px;color:var(--warm-600);cursor:pointer;}
 /* ── WRITING ────────────────────────────────────────── */
 .writing-chars{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
 .wchar-btn{padding:7px 12px;border:2px solid var(--gray-200);border-radius:var(--radius-md);font-size:22px;font-weight:700;cursor:pointer;background:#fff;transition:all .18s;color:var(--gray-900);}
@@ -443,6 +497,31 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .verb-choice.wrong{background:var(--rose-100);border-color:var(--rose-500);color:var(--rose-500);}
 .verb-game-result{text-align:center;padding:10px;font-size:14px;font-weight:700;min-height:24px;}
 .verb-game-next{display:none;margin:10px auto 0;padding:8px 22px;background:var(--amber);border:none;border-radius:var(--radius-xl);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-kr);}
+/* ── VERB CONJUGATION EXPANDED ─────────────────────── */
+.vconj-section-title{font-size:15px;font-weight:800;color:var(--teal-dark);margin:18px 0 10px;display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--teal-lt);padding-bottom:6px;}
+.vconj-concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.vconj-concept-card{background:#fff;border:2px solid var(--teal-lt);border-radius:var(--radius-md);padding:14px 16px;}
+.vconj-concept-icon{font-size:22px;margin-bottom:6px;}
+.vconj-concept-label{font-size:13px;font-weight:800;color:var(--teal-dark);margin-bottom:4px;}
+.vconj-concept-label-en{font-size:11px;color:var(--teal);font-weight:500;display:block;margin-bottom:6px;}
+.vconj-concept-desc{font-size:12px;color:var(--warm-500);line-height:1.6;}
+.vconj-formula{background:var(--teal-lt);border-radius:var(--radius-sm);padding:8px 14px;font-size:13px;font-weight:700;color:var(--teal-dark);text-align:center;margin-top:8px;}
+.vconj-verb-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:16px 18px;margin-bottom:14px;}
+.vconj-verb-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.vconj-verb-emoji{font-size:32px;}
+.vconj-verb-title{font-size:18px;font-weight:900;color:var(--teal-dark);}
+.vconj-verb-title-en{font-size:12px;color:var(--warm-400);font-weight:500;}
+.vconj-verb-rule{background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:8px 12px;font-size:12px;color:var(--teal-dark);margin-bottom:12px;line-height:1.6;}
+.vconj-tense-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.vconj-tense-box{background:var(--warm-50);border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);padding:10px;text-align:center;}
+.vconj-tense-label{font-size:10px;font-weight:700;color:var(--warm-400);text-transform:uppercase;margin-bottom:4px;}
+.vconj-tense-formal{font-size:15px;font-weight:800;color:var(--teal-dark);}
+.vconj-tense-informal{font-size:13px;font-weight:600;color:var(--coral);margin-top:2px;}
+.vconj-tense-formula{font-size:10px;color:var(--warm-400);margin-top:3px;}
+.vconj-irreg-badge{display:inline-block;background:var(--coral);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+.vconj-regular-badge{display:inline-block;background:var(--teal);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+.vconj-caution{background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--amber-600);margin-top:14px;line-height:1.7;}
+.vconj-overview-img{display:block;max-width:70%;margin:0 auto 14px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);}
 /* ── SPEAKING BASICS ────────────────────────────────── */
 .speak-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:10px;}
 .speak-card-kr{font-size:22px;font-weight:700;color:var(--gray-900);}
@@ -5986,33 +6065,33 @@ let curLevel = 'Beginner';
 
 // ── HANGUL DATA ────────────────────────────────────────
 const CONSONANTS = [
-  {kr:'ㄱ',rom:'g/k',ex:'가방(bag)'},{kr:'ㄴ',rom:'n',ex:'나무(tree)'},
-  {kr:'ㄷ',rom:'d/t',ex:'도서관'},{kr:'ㄹ',rom:'r/l',ex:'라면(ramen)'},
-  {kr:'ㅁ',rom:'m',ex:'마트(mart)'},{kr:'ㅂ',rom:'b/p',ex:'바나나'},
-  {kr:'ㅅ',rom:'s',ex:'사과(apple)'},{kr:'ㅇ',rom:'ng/∅',ex:'아이스크림'},
-  {kr:'ㅈ',rom:'j',ex:'주스(juice)'},{kr:'ㅊ',rom:'ch',ex:'책(book)'},
-  {kr:'ㅋ',rom:'k',ex:'커피(coffee)'},{kr:'ㅌ',rom:'t',ex:'태권도'},
-  {kr:'ㅍ',rom:'p',ex:'피자(pizza)'},{kr:'ㅎ',rom:'h',ex:'한국(Korea)'},
-  {kr:'ㄲ',rom:'kk',ex:'꽃(flower)'},{kr:'ㄸ',rom:'tt',ex:'딸기'},
-  {kr:'ㅃ',rom:'pp',ex:'빵(bread)'},{kr:'ㅆ',rom:'ss',ex:'쌀(rice)'},
-  {kr:'ㅉ',rom:'jj',ex:'짜장면'},
+  {kr:'ㄱ',name:'기역',rom:'g/k',ex:'가방(bag)'},{kr:'ㄴ',name:'니은',rom:'n',ex:'나무(tree)'},
+  {kr:'ㄷ',name:'디귿',rom:'d/t',ex:'도서관'},{kr:'ㄹ',name:'리을',rom:'r/l',ex:'라면(ramen)'},
+  {kr:'ㅁ',name:'미음',rom:'m',ex:'마트(mart)'},{kr:'ㅂ',name:'비읍',rom:'b/p',ex:'바나나'},
+  {kr:'ㅅ',name:'시옷',rom:'s',ex:'사과(apple)'},{kr:'ㅇ',name:'이응',rom:'-/ng',ex:'아이스크림'},
+  {kr:'ㅈ',name:'지읒',rom:'j',ex:'주스(juice)'},{kr:'ㅊ',name:'치읓',rom:'ch',ex:'책(book)'},
+  {kr:'ㅋ',name:'키읔',rom:'k',ex:'커피(coffee)'},{kr:'ㅌ',name:'티읕',rom:'t',ex:'태권도'},
+  {kr:'ㅍ',name:'피읖',rom:'p',ex:'피자(pizza)'},{kr:'ㅎ',name:'히읗',rom:'h',ex:'한국(Korea)'},
+  {kr:'ㄲ',name:'쌍기역',rom:'kk',ex:'꽃(flower)'},{kr:'ㄸ',name:'쌍디귿',rom:'tt',ex:'딸기'},
+  {kr:'ㅃ',name:'쌍비읍',rom:'pp',ex:'빵(bread)'},{kr:'ㅆ',name:'쌍시옷',rom:'ss',ex:'쌀(rice)'},
+  {kr:'ㅉ',name:'쌍지읒',rom:'jj',ex:'짜장면'},
 ];
 const VOWELS = [
-  {kr:'ㅏ',rom:'a',ex:'아빠(dad)'},{kr:'ㅑ',rom:'ya',ex:'야구(baseball)'},
-  {kr:'ㅓ',rom:'eo',ex:'어머니'},{kr:'ㅕ',rom:'yeo',ex:'여우(fox)'},
-  {kr:'ㅗ',rom:'o',ex:'오리(duck)'},{kr:'ㅛ',rom:'yo',ex:'요리(cooking)'},
-  {kr:'ㅜ',rom:'u',ex:'우산(umbrella)'},{kr:'ㅠ',rom:'yu',ex:'유리(glass)'},
-  {kr:'ㅡ',rom:'eu',ex:'으뜸(best)'},{kr:'ㅣ',rom:'i',ex:'이름(name)'},
-  {kr:'ㅐ',rom:'ae',ex:'개(dog)'},{kr:'ㅔ',rom:'e',ex:'에어컨(A/C)'},
-  {kr:'ㅒ',rom:'yae',ex:'얘기(story)'},{kr:'ㅖ',rom:'ye',ex:'예쁘다'},
-  {kr:'ㅘ',rom:'wa',ex:'과자(snacks)'},{kr:'ㅙ',rom:'wae',ex:'왜(why)'},
-  {kr:'ㅚ',rom:'oe',ex:'외국'},{kr:'ㅝ',rom:'wo',ex:'원숭이'},
-  {kr:'ㅞ',rom:'we',ex:'웨이터'},{kr:'ㅟ',rom:'wi',ex:'위(above)'},
-  {kr:'ㅢ',rom:'ui',ex:'의사(doctor)'},
+  {kr:'ㅏ',name:'아',rom:'a',ex:'아빠(dad)'},{kr:'ㅑ',name:'야',rom:'ya',ex:'야구(baseball)'},
+  {kr:'ㅓ',name:'어',rom:'eo',ex:'어머니'},{kr:'ㅕ',name:'여',rom:'yeo',ex:'여우(fox)'},
+  {kr:'ㅗ',name:'오',rom:'o',ex:'오리(duck)'},{kr:'ㅛ',name:'요',rom:'yo',ex:'요리(cooking)'},
+  {kr:'ㅜ',name:'우',rom:'u',ex:'우산(umbrella)'},{kr:'ㅠ',name:'유',rom:'yu',ex:'유리(glass)'},
+  {kr:'ㅡ',name:'으',rom:'eu',ex:'으뜸(best)'},{kr:'ㅣ',name:'이',rom:'i',ex:'이름(name)'},
+  {kr:'ㅐ',name:'애',rom:'ae',ex:'개(dog)'},{kr:'ㅒ',name:'얘',rom:'yae',ex:'얘기(story)'},
+  {kr:'ㅔ',name:'에',rom:'e',ex:'에어컨(A/C)'},{kr:'ㅖ',name:'예',rom:'ye',ex:'예쁘다'},
+  {kr:'ㅘ',name:'와',rom:'wa',ex:'과자(snacks)'},{kr:'ㅙ',name:'왜',rom:'wae',ex:'왜(why)'},
+  {kr:'ㅚ',name:'외',rom:'oe',ex:'외국'},{kr:'ㅝ',name:'워',rom:'wo',ex:'원숭이'},
+  {kr:'ㅞ',name:'웨',rom:'we',ex:'웨이터'},{kr:'ㅟ',name:'위',rom:'wi',ex:'위(above)'},
+  {kr:'ㅢ',name:'의',rom:'ui',ex:'의사(doctor)'},
 ];
 const SYL_CONS = ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㄲ','ㄸ','ㅃ','ㅆ','ㅉ'];
-const SYL_VOWS = ['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅐ','ㅔ','ㅘ','ㅝ','ㅚ','ㅟ','ㅢ'];
-const SYL_BACH = ['','ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㄳ','ㄺ','ㄼ','ㄻ'];
+const SYL_VOWS = ['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅐ','ㅒ','ㅔ','ㅖ','ㅘ','ㅙ','ㅚ','ㅝ','ㅞ','ㅟ','ㅢ'];
+const SYL_BACH = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
 
 function combineSyl(onset,nucleus,coda){
   const onsets=['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
@@ -6148,31 +6227,41 @@ function clearCanvas(){if(!wCtx||!wCanvas)return;drawGridLines();}
 // ── GREETINGS DATA ─────────────────────────────────────
 const GREETINGS={
   basic:[
-    {emoji:'🙏',kr:'안녕하세요',rom:'annyeonghaseyo',en:'Hello (formal)',ctx:'Formal'},
-    {emoji:'✌️',kr:'안녕',rom:'annyeong',en:'Hi / Bye (casual)',ctx:'Casual'},
-    {emoji:'🌅',kr:'좋은 아침이에요',rom:'joeun achimieyo',en:'Good morning',ctx:'Formal'},
-    {emoji:'🌙',kr:'안녕히 주무세요',rom:'annyeonghi jumuseyo',en:'Good night (to elders)',ctx:'Formal'},
-    {emoji:'🙌',kr:'반가워요',rom:'bangawoyo',en:'Nice to meet you',ctx:'Formal'},
-    {emoji:'🎉',kr:'처음 뵙겠습니다',rom:'cheoeum boepgesseumnida',en:'How do you do',ctx:'Very Formal'},
-  ],
-  classroom:[
-    {emoji:'📚',kr:'선생님',rom:'seonsaengnim',en:'Teacher (form of address)',ctx:'Title'},
-    {emoji:'🙋',kr:'네',rom:'ne',en:'Yes / I understand',ctx:'Response'},
-    {emoji:'❓',kr:'모르겠어요',rom:'moreugesseoyo',en:"I don't know",ctx:'Response'},
-    {emoji:'🔁',kr:'다시 해 주세요',rom:'dasi hae juseyo',en:'Please do it again',ctx:'Request'},
-    {emoji:'🐢',kr:'천천히 말해 주세요',rom:'cheoncheonhi malhae juseyo',en:'Please speak slowly',ctx:'Request'},
-    {emoji:'✏️',kr:'숙제가 있어요?',rom:'sukjega isseoyo?',en:'Is there homework?',ctx:'Question'},
-    {emoji:'🚽',kr:'화장실에 가도 돼요?',rom:'hwajangsire gado dwaeyo?',en:'May I go to the bathroom?',ctx:'Permission'},
-    {emoji:'👏',kr:'잘했어요!',rom:'jalhaesseoyo',en:'Well done!',ctx:'Praise'},
+    {emoji:'👋',kr:'안녕하세요',rom:'an-nyeong-ha-se-yo',en:'Hello / Hi',usage:'Any time of day, to anyone'},
+    {emoji:'🤝',kr:'만나서 반가워요',rom:'man-na-seo ban-ga-wo-yo',en:'Nice to meet you',usage:'First-time meeting'},
+    {emoji:'🙏',kr:'감사합니다',rom:'gam-sa-ham-ni-da',en:'Thank you',usage:'Formal thank you'},
+    {emoji:'😊',kr:'천만에요',rom:'cheon-man-e-yo',en:"You're welcome / Not at all",usage:"Reply to 감사합니다"},
+    {emoji:'😔',kr:'죄송합니다',rom:'joe-song-ham-ni-da',en:"I'm sorry (formal)",usage:'Formal apology'},
+    {emoji:'👌',kr:'괜찮아요',rom:'gwaen-chan-a-yo',en:"It's okay / No problem",usage:"Reply to 죄송합니다 · casual apology"},
+    {emoji:'✅',kr:'네',rom:'ne',en:'Yes',usage:'Agree or confirm'},
+    {emoji:'❌',kr:'아니요',rom:'a-ni-yo',en:'No',usage:'Disagree or decline'},
   ],
   farewell:[
-    {emoji:'👋',kr:'안녕히 계세요',rom:'annyeonghi gyeseyo',en:'Goodbye (to one staying)',ctx:'Formal'},
-    {emoji:'👋',kr:'안녕히 가세요',rom:'annyeonghi gaseyo',en:'Goodbye (to one leaving)',ctx:'Formal'},
-    {emoji:'🤟',kr:'잘 가',rom:'jal ga',en:'Take care / Bye',ctx:'Casual'},
-    {emoji:'👁️',kr:'나중에 봐요',rom:'najunge bwayo',en:'See you later',ctx:'Friendly'},
-    {emoji:'🏫',kr:'내일 봐요',rom:'naeil bwayo',en:'See you tomorrow',ctx:'Friendly'},
+    {emoji:'🚶',kr:'안녕히 가세요',rom:'an-nyeong-hi ga-se-yo',en:'Goodbye (to the person leaving)',usage:'Said by the one who stays'},
+    {emoji:'🏠',kr:'안녕히 계세요',rom:'an-nyeong-hi gye-se-yo',en:'Goodbye (to the person staying)',usage:'Said by the one who leaves'},
+    {emoji:'✌️',kr:'안녕',rom:'an-nyeong',en:'Bye (casual)',usage:'Between close friends'},
+    {emoji:'👁️',kr:'나중에 봐요',rom:'na-jung-e bwa-yo',en:'See you later',usage:'Friendly'},
+    {emoji:'🏫',kr:'내일 봐요',rom:'nae-il bwa-yo',en:'See you tomorrow',usage:'Before parting'},
   ],
 };
+const CLASSROOM_TEACHER=[
+  {kr:'따라 하세요',rom:'tta-ra ha-se-yo',en:'Repeat after me'},
+  {kr:'읽어 보세요',rom:'il-geo bo-se-yo',en:'Please read'},
+  {kr:'들어 보세요',rom:'deu-reo bo-se-yo',en:'Please listen'},
+  {kr:'보세요',rom:'bo-se-yo',en:'Look at this'},
+  {kr:'써 보세요',rom:'sseo bo-se-yo',en:'Please write it'},
+  {kr:'다시 한 번',rom:'da-si han beon',en:'One more time'},
+  {kr:'같이 해요',rom:'ga-chi hae-yo',en:"Let's do it together"},
+];
+const CLASSROOM_STUDENT=[
+  {kr:'모르겠어요',rom:'mo-reu-ge-sseo-yo',en:"I don't know"},
+  {kr:'다시 말해 주세요',rom:'da-si mal-hae ju-se-yo',en:'Please say it again'},
+  {kr:'천천히 말해 주세요',rom:'cheon-cheon-hi mal-hae ju-se-yo',en:'Please speak slowly'},
+  {kr:'잠깐만요',rom:'jam-kkan-man-yo',en:'Just a moment'},
+  {kr:'질문 있어요',rom:'jil-mun i-sseo-yo',en:'I have a question'},
+  {kr:'이게 뭐예요?',rom:'i-ge mwo-ye-yo',en:'What is this?'},
+  {kr:'화장실에 가도 돼요?',rom:'hwa-jang-sil-e ga-do dwae-yo',en:'May I go to the bathroom?'},
+];
 
 // ── NUMBERS DATA ───────────────────────────────────────
 const SINO_NUMS=[
@@ -6270,33 +6359,39 @@ function switchBtab(pfx,tabId){
 // ── HANGUL RENDER ──────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildHangul(){
-  const tabs=[['cons','자음 Consonants'],['vowels','모음 Vowels'],['syllable','음절 Syllables'],['batchim','받침 Batchim']];
+  const tabs=[['cons','자음 Consonants'],['vowels','모음 Vowels'],['batchim','받침 Batchim'],['syllable','음절 Syllables']];
   return '<div class="basics-intro">한글(Hangul)은 1443년 세종대왕이 만든 소리 문자예요. 자음 19개 + 모음 21개로 이루어져 있어요.<br><em>Hangul is a phonetic alphabet invented by King Sejong in 1443.</em></div>'
     +'<div class="btab-bar">'+tabs.map(([id,lbl],i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-hangul" data-tab="'+id+'" onclick="switchBtab(\'bp-hangul\',\''+id+'\')">'+lbl+'</button>').join('')+'</div>'
     +'<div id="bp-hangul-cons" class="btab-panel active">'+buildConsPanel()+'</div>'
     +'<div id="bp-hangul-vowels" class="btab-panel">'+buildVowPanel()+'</div>'
-    +'<div id="bp-hangul-syllable" class="btab-panel">'+buildSylPanel()+'</div>'
-    +'<div id="bp-hangul-batchim" class="btab-panel">'+buildBatchimPanel()+'</div>';
+    +'<div id="bp-hangul-batchim" class="btab-panel">'+buildBatchimPanel()+'</div>'
+    +'<div id="bp-hangul-syllable" class="btab-panel">'+buildSylPanel()+'</div>';
 }
 function hcHtml(item){
   return '<div class="hcard" onclick="speakTTS(\''+item.kr+'\')">'
     +'<div class="hcard-kr">'+item.kr+'</div>'
+    +(item.name?'<div class="hcard-name">'+item.name+'</div>':'')
     +'<div class="hcard-rom">'+item.rom+'</div>'
     +'<div class="hcard-ex">'+item.ex+'</div></div>';
 }
 function buildConsPanel(){
-  return '<div class="hangul-section-title">기본 자음 · Basic (14)</div>'
+  return '<div class="hangul-section-title">기본 자음 · Basic Consonants (14)</div>'
     +'<div class="hangul-grid">'+CONSONANTS.slice(0,14).map(hcHtml).join('')+'</div>'
-    +'<div class="hangul-section-title">된소리 · Tense (5)</div>'
+    +'<div class="hangul-section-title">쌍자음 · Double Consonants (5)</div>'
     +'<div class="hangul-grid">'+CONSONANTS.slice(14).map(hcHtml).join('')+'</div>'
-    +'<p style="font-size:11.5px;color:var(--warm-500);margin-top:4px;">💡 카드를 클릭하면 발음을 들을 수 있어요</p>';
+    +'<div class="basics-intro" style="margin-top:12px;font-size:12px;">💡 <strong>Consonants need a vowel to be voiced!</strong> They cannot stand alone as a syllable.<br>'
+    +'자음은 홀로 발음될 수 없어요 — 반드시 모음과 함께 써야 해요.<br><br>'
+    +'⚠️ The same consonant can sound different as an <strong>initial (첫소리)</strong> vs. <strong>final consonant (받침소리)</strong>.<br>'
+    +'예: ㄱ → initial: <em>g</em> (가) / final: <em>k</em> (국) · Final consonants are always one of 7 representative sounds.</div>';
 }
 function buildVowPanel(){
-  return '<div class="hangul-section-title">기본 모음 · Basic (10)</div>'
+  return '<div class="hangul-section-title">기본 모음 · Simple Vowels (10)</div>'
     +'<div class="hangul-grid">'+VOWELS.slice(0,10).map(hcHtml).join('')+'</div>'
-    +'<div class="hangul-section-title">복합 모음 · Compound (11)</div>'
+    +'<div class="hangul-section-title">복합 모음 · Compound Vowels (11)</div>'
     +'<div class="hangul-grid">'+VOWELS.slice(10).map(hcHtml).join('')+'</div>'
-    +'<p style="font-size:11.5px;color:var(--warm-500);margin-top:4px;">💡 카드를 클릭하면 발음을 들을 수 있어요</p>';
+    +'<div class="basics-intro" style="margin-top:12px;font-size:12px;">💡 <strong>Vowel placement depends on shape:</strong><br>'
+    +'세로 모음 (ㅏ ㅑ ㅓ ㅕ ㅣ) — consonant is on the <strong>left</strong>, vowel on the <strong>right</strong>: 가 나 다<br>'
+    +'가로 모음 (ㅗ ㅛ ㅜ ㅠ ㅡ) — consonant is on <strong>top</strong>, vowel <strong>below</strong>: 고 노 도</div>';
 }
 function buildSylPanel(){
   return '<div class="basics-intro" style="margin-bottom:16px;">한글 음절 = <strong>초성 + 중성 (+ 받침)</strong>으로 이루어져요.<br><em>Each syllable block = Onset + Vowel (+ optional final consonant)</em></div>'
@@ -6369,25 +6464,49 @@ function buildStructure(){
     +'<div class="structure-note">🔑 한국어에서 동사는 <strong>항상 마지막</strong>에 와요! 문장 끝까지 들어야 이해할 수 있어요.<br><em>The verb is ALWAYS at the end. You must hear the whole sentence to understand the action!</em></div>'
     +'<table class="structure-ex-table"><tr><th>한국어</th><th>English</th></tr>'
     +exs.map(e=>'<tr><td style="cursor:pointer" onclick="speakTTS(\''+e.ko+'\')">'+e.ko+' 🔊</td><td>'+e.en+'</td></tr>').join('')+'</table>'
-    +'<div class="structure-note" style="background:var(--purple-lt,#eeebfb);border-color:var(--purple-lt,#eeebfb);color:var(--purple);">⭐ Korean also uses <strong>particles</strong> (은/는, 이/가, 을/를) to mark roles — so word order can be flexible! We will cover particles in Beginner level.</div>';
+    +'<div class="structure-note" style="background:var(--purple-lt,#eeebfb);border-color:var(--purple-lt,#eeebfb);color:var(--purple);">⭐ Korean also uses <strong>particles</strong> (은/는, 이/가, 을/를) to mark roles — so word order can be flexible! We will cover particles in Beginner level.</div>'
+    +'<div class="structure-note" style="background:var(--teal-50);border-color:var(--teal-lt);color:var(--teal-dark);margin-top:14px;">📌 아래 다이어그램으로 한눈에 비교해 보세요! <em>Use the diagram below for a quick visual comparison!</em></div>'
+    +'<div style="text-align:center;margin-top:12px;"><img src="data/basics/Korean_Sentence_Structure.png" alt="Korean vs English Sentence Structure" style="max-width:70%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);"></div>';
 }
 
 // ══════════════════════════════════════════════════════
 // ── GREETINGS RENDER ───────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildGreetings(){
+  // 기본 인사 / 작별 인사 카드 (emoji + usage 컨텍스트 포함)
   function gCards(list){
     return list.map(g=>'<div class="greet-card" onclick="speakTTS(\''+g.kr+'\')">'
       +'<div class="greet-emoji">'+g.emoji+'</div>'
-      +'<div class="greet-body"><div class="greet-kr">'+g.kr+'</div><div class="greet-rom">'+g.rom+'</div><div class="greet-en">'+g.en+'</div></div>'
-      +'<div class="greet-ctx">'+g.ctx+'</div></div>').join('');
+      +'<div class="greet-body"><div class="greet-kr">'+g.kr+' <span class="greet-speak-icon">🔊</span></div><div class="greet-rom">'+g.rom+'</div><div class="greet-en">'+g.en+'</div></div>'
+      +'<div class="greet-usage">'+g.usage+'</div></div>').join('');
+  }
+  // 교실 표현 카드 (텍스트 중심)
+  function cCards(list){
+    return list.map(c=>'<div class="class-card" onclick="speakTTS(\''+c.kr+'\')">'
+      +'<div class="class-kr">'+c.kr+' <span class="greet-speak-icon">🔊</span></div>'
+      +'<div class="class-rom">'+c.rom+'</div>'
+      +'<div class="class-en">'+c.en+'</div></div>').join('');
   }
   const tabs=[['basic','👋 기본 인사'],['classroom','🏫 교실 표현'],['farewell','👋 작별 인사']];
-  return '<div class="basics-intro">클릭하면 발음을 들을 수 있어요! 선생님 앞에서는 항상 존댓말을 써요.<br><em>Click any card to hear it! Always use formal speech with your teacher.</em></div>'
+  return '<div class="basics-intro">클릭하면 발음을 들을 수 있어요! 선생님 앞에서는 항상 존댓말을 써요.<br><em>Click any card to hear it. Always use formal speech with your teacher.</em></div>'
     +'<div class="btab-bar">'+tabs.map(([id,lbl],i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-greet" data-tab="'+id+'" onclick="switchBtab(\'bp-greet\',\''+id+'\')">'+lbl+'</button>').join('')+'</div>'
     +'<div id="bp-greet-basic" class="btab-panel active">'+gCards(GREETINGS.basic)+'</div>'
-    +'<div id="bp-greet-classroom" class="btab-panel">'+gCards(GREETINGS.classroom)+'</div>'
-    +'<div id="bp-greet-farewell" class="btab-panel">'+gCards(GREETINGS.farewell)+'</div>';
+    +'<div id="bp-greet-classroom" class="btab-panel">'
+      +'<div class="class-cols">'
+        +'<div class="class-col">'
+          +'<div class="class-col-hdr teacher-hdr">🎓 선생님이 말해요<br><em>Teacher says</em></div>'
+          +cCards(CLASSROOM_TEACHER)
+        +'</div>'
+        +'<div class="class-col">'
+          +'<div class="class-col-hdr student-hdr">🙋 학생이 말해요<br><em>Student says</em></div>'
+          +cCards(CLASSROOM_STUDENT)
+        +'</div>'
+      +'</div>'
+    +'</div>'
+    +'<div id="bp-greet-farewell" class="btab-panel">'
+      +'<div class="farewell-tip">💡 한국어에는 작별 인사가 두 가지예요 — 떠나는 사람과 남는 사람이 달라요!<br><em>Korean has two goodbyes — one for who leaves, one for who stays!</em></div>'
+      +gCards(GREETINGS.farewell)
+    +'</div>';
 }
 
 // ══════════════════════════════════════════════════════
@@ -6402,13 +6521,84 @@ function buildNumbers(){
       +(n.hint?'<div class="num-card-hint">'+n.hint+'</div>':'')
       +'</div>').join('')+'</div>';
   }
+
+  // ── 큰 숫자 탭 콘텐츠 ──
+  const bigNumTab =
+    '<div class="basics-intro">한국어는 <strong>4자리</strong>씩 끊어요! 영어(3자리)와 달리 <strong>만·억·조</strong>가 핵심 단위예요.<br><em>Korean groups by 4 digits — not 3. The key units are 만, 억, 조.</em></div>'
+
+    // Key units 박스
+    +'<div class="bignum-key-row">'
+      +'<div class="bignum-key-card teal">'
+        +'<div class="bignum-key-num">10,000</div>'
+        +'<div class="bignum-key-kr" onclick="speakTTS(\'만\')">만 🔊</div>'
+        +'<div class="bignum-key-en">KEY UNIT 1️⃣</div>'
+        +'<div class="bignum-key-sub">십만 · 백만 · 천만</div>'
+      +'</div>'
+      +'<div class="bignum-key-card purple">'
+        +'<div class="bignum-key-num">100,000,000</div>'
+        +'<div class="bignum-key-kr" onclick="speakTTS(\'억\')">억 🔊</div>'
+        +'<div class="bignum-key-en">KEY UNIT 2️⃣</div>'
+        +'<div class="bignum-key-sub">십억 · 백억 · 천억</div>'
+      +'</div>'
+      +'<div class="bignum-key-card coral">'
+        +'<div class="bignum-key-num">1,000,000,000,000</div>'
+        +'<div class="bignum-key-kr" onclick="speakTTS(\'조\')">조 🔊</div>'
+        +'<div class="bignum-key-en">참고용 Reference</div>'
+        +'<div class="bignum-key-sub">십조 · 백조 · 천조</div>'
+      +'</div>'
+    +'</div>'
+
+    // 4자리 grouping 시각화 표
+    +'<div class="vconj-section-title" style="margin-top:18px;">📊 읽기 단위 · How Koreans Read Large Numbers</div>'
+    +'<div class="structure-note" style="margin-bottom:10px;">✏️ <strong>쓸 때</strong>는 한국도 영어처럼 <strong>3자리 쉼표</strong>를 써요 (예: 10,000 · 1,000,000).<br>🗣️ <strong>읽을 때</strong>만 <strong style="color:var(--teal-dark)">4자리 단위</strong>(만 · 억 · 조)로 끊어 읽어요!<br><em>Writing: same 3-digit comma as English. Reading: split by 4-digit units (만 · 억 · 조).</em></div>'
+    +'<div style="overflow-x:auto"><table class="structure-ex-table bignum-table">'
+    +'<tr><th>숫자 (표기)</th><th>영어 읽기 단위</th><th>한국어 읽기 단위 분석</th><th>한국어 읽기</th></tr>'
+    +'<tr><td>1</td><td>1</td><td>1</td><td onclick="speakTTS(\'일\')" style="cursor:pointer">일 🔊</td></tr>'
+    +'<tr><td>10</td><td>10</td><td>10</td><td onclick="speakTTS(\'십\')" style="cursor:pointer">십 🔊</td></tr>'
+    +'<tr><td>100</td><td>100</td><td>100</td><td onclick="speakTTS(\'백\')" style="cursor:pointer">백 🔊</td></tr>'
+    +'<tr><td>1,000</td><td>1,000</td><td>1,000</td><td onclick="speakTTS(\'천\')" style="cursor:pointer">천 🔊</td></tr>'
+    +'<tr class="bignum-row-man"><td>10,000</td><td>10,000</td><td><strong>1,0000</strong></td><td onclick="speakTTS(\'만\')" style="cursor:pointer">⭐ <strong>만</strong> 🔊</td></tr>'
+    +'<tr><td>100,000</td><td>100,000</td><td>10,0000</td><td onclick="speakTTS(\'십만\')" style="cursor:pointer">십만 🔊</td></tr>'
+    +'<tr><td>1,000,000</td><td>1,000,000</td><td>100,0000</td><td onclick="speakTTS(\'백만\')" style="cursor:pointer">백만 🔊</td></tr>'
+    +'<tr><td>10,000,000</td><td>10,000,000</td><td>1000,0000</td><td onclick="speakTTS(\'천만\')" style="cursor:pointer">천만 🔊</td></tr>'
+    +'<tr class="bignum-row-eok"><td>100,000,000</td><td>100,000,000</td><td><strong>1,0000,0000</strong></td><td onclick="speakTTS(\'억\')" style="cursor:pointer">⭐ <strong>억</strong> 🔊</td></tr>'
+    +'<tr><td>1,000,000,000</td><td>1,000,000,000</td><td>10,0000,0000</td><td onclick="speakTTS(\'십억\')" style="cursor:pointer">십억 🔊</td></tr>'
+    +'</table></div>'
+
+    // 비교 예시 박스
+    +'<div class="vconj-section-title" style="margin-top:18px;">💡 영어 vs 한국어 비교 · Comparison</div>'
+    +'<div class="bignum-compare">'
+      +'<div class="bignum-compare-col en-col">'
+        +'<div class="bignum-compare-hdr">🇺🇸 English (3-digit)</div>'
+        +'<div class="bignum-compare-num">165,000</div>'
+        +'<div class="bignum-compare-break">165 <span class="bignum-unit-badge en-badge">thousand</span></div>'
+        +'<div class="bignum-compare-read">"one hundred sixty-five thousand"</div>'
+      +'</div>'
+      +'<div class="bignum-compare-arrow">⟷</div>'
+      +'<div class="bignum-compare-col kr-col">'
+        +'<div class="bignum-compare-hdr">🇰🇷 한국어 읽기</div>'
+        +'<div class="bignum-compare-num">16<span class="bignum-unit-badge kr-badge">만</span>5,000</div>'
+        +'<div class="bignum-compare-break">16 <span class="bignum-unit-badge kr-badge">만</span> + 5천</div>'
+        +'<div class="bignum-compare-read" onclick="speakTTS(\'십육만 오천\')" style="cursor:pointer">"십육만 오천" 🔊</div>'
+      +'</div>'
+    +'</div>'
+
+    // 인터랙티브 변환기
+    +'<div class="vconj-section-title" style="margin-top:18px;">🔄 숫자 변환기 · Number Converter</div>'
+    +'<div class="bignum-converter">'
+      +'<input type="number" id="bignum-input" class="bignum-input" placeholder="숫자를 입력하세요 (e.g. 165000)" min="0" max="999999999999" oninput="convertBigNum()">'
+      +'<div id="bignum-result" class="bignum-result"></div>'
+    +'</div>';
+
   return '<div class="btab-bar">'
     +'<button class="btab active" data-btab-group="bp-num" data-tab="sino" onclick="switchBtab(\'bp-num\',\'sino\')">한자어 Sino-Korean</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="native" onclick="switchBtab(\'bp-num\',\'native\')">고유어 Native Korean</button>'
+    +'<button class="btab" data-btab-group="bp-num" data-tab="big" onclick="switchBtab(\'bp-num\',\'big\')">📈 큰 숫자 Big Numbers</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="usage" onclick="switchBtab(\'bp-num\',\'usage\')">📌 사용법</button>'
     +'</div>'
     +'<div id="bp-num-sino" class="btab-panel active"><div class="basics-intro">전화번호, 날짜, 가격, 층, 연도에 사용해요.<br><em>Used for phone numbers, dates, prices, floors, years.</em></div>'+nCards(SINO_NUMS)+'</div>'
     +'<div id="bp-num-native" class="btab-panel"><div class="basics-intro">물건 세기, 나이, 시간(시), 회수에 사용해요.<br><em>Used for counting objects, age, hours, how many times.</em></div>'+nCards(NATIVE_NUMS)+'</div>'
+    +'<div id="bp-num-big" class="btab-panel">'+bigNumTab+'</div>'
     +'<div id="bp-num-usage" class="btab-panel"><div class="num-usage-box">'
     +'📞 <strong>전화번호</strong> — Sino: 공일공-이삼사오-육칠팔구<br>'
     +'📅 <strong>날짜</strong> — Sino: 오월 십오일 (May 15th)<br>'
@@ -6416,7 +6606,7 @@ function buildNumbers(){
     +'📅 <strong>연도</strong> — Sino: 이천이십육년 (2026)<br><br>'
     +'🍎 <strong>물건 세기</strong> — Native: 사과 세 개 (3 apples)<br>'
     +'👴 <strong>나이</strong> — Native: 열다섯 살 (15 years old)<br>'
-    +'🕐 <strong>시</strong> — Native: 두 시 (2 o&#39;clock)<br>'
+    +'🕐 <strong>시</strong> — Native: 두 시 (2 o\'clock)<br>'
     +'🔁 <strong>번</strong> — Native: 세 번 (3 times)'
     +'</div>'
     +'<table class="structure-ex-table"><tr><th>표현</th><th>숫자 타입</th><th>예시</th></tr>'
@@ -6428,6 +6618,7 @@ function buildNumbers(){
     +'<tr><td>개수(개)</td><td>Native 고유어</td><td>사과 두 개</td></tr>'
     +'</table></div>';
 }
+
 
 // ══════════════════════════════════════════════════════
 // ── WRITING RENDER ─────────────────────────────────────
@@ -6448,13 +6639,94 @@ function buildWriting(){
 // ── VERBS RENDER ───────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildVerbs(){
-  return '<div class="basics-intro">한국어 동사는 항상 <strong>-다</strong>로 끝나요(사전형). 대화할 때는 <strong>해요체</strong>를 써요!<br><em>Korean verbs end in -다. In conversation, use the polite -아요/어요/해요 form.</em></div>'
-    +'<div class="btab-bar">'
-    +'<button class="btab active" data-btab-group="bp-verb" data-tab="cards" onclick="switchBtab(\'bp-verb\',\'cards\')">📋 동사 목록</button>'
-    +'<button class="btab" data-btab-group="bp-verb" data-tab="game" onclick="switchBtab(\'bp-verb\',\'game\');renderVerbGame()">🎮 퀴즈 게임</button>'
-    +'<button class="btab" data-btab-group="bp-verb" data-tab="rule" onclick="switchBtab(\'bp-verb\',\'rule\')">📌 활용 규칙</button>'
+  // ── 개요 탭 ──
+  const tabOverview =
+    '<div class="basics-intro">한국어 동사는 항상 <strong>-다</strong>로 끝나요(사전형). 어간(Stem)에 어미(Ending)를 붙여서 시제·존댓말을 표현해요!<br><em>Korean verbs end in -다. Attach endings to the stem to express tense and speech level.</em></div>'
+    +'<img src="data/basics/Korean_verb_conjugation.png" alt="Korean Verb Conjugation Overview" class="vconj-overview-img">'
+    +'<div class="vconj-section-title">⚙️ 핵심 공식 · The Formula</div>'
+    +'<div class="vconj-concept-grid">'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🧱</div><div class="vconj-concept-label">어간 Stem<span class="vconj-concept-label-en">The unchanged base</span></div><div class="vconj-concept-desc">기본형에서 <strong>-다</strong>를 제거한 부분이에요.<br><em>Remove -다 from the dictionary form.</em><br><br>가다 → <strong style="color:var(--teal-dark)">가-</strong> &nbsp;|&nbsp; 먹다 → <strong style="color:var(--teal-dark)">먹-</strong></div></div>'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🔧</div><div class="vconj-concept-label">어미 Ending<span class="vconj-concept-label-en">The changing part</span></div><div class="vconj-concept-desc">시제·존댓말·반말을 나타내요.<br><em>Expresses tense, formality, and more.</em><br><br>현재: <strong style="color:var(--teal-dark)">-아/어요</strong> (formal) / <strong style="color:var(--coral)">-아/어</strong> (casual)</div></div>'
     +'</div>'
-    +'<div id="bp-verb-cards" class="btab-panel active"><div class="verb-cards-grid">'
+    +'<div class="vconj-formula">기본형 − 다 = 어간(Stem) &nbsp;+&nbsp; 어미(Ending) = 활용형 ✅</div>'
+    +'<div class="vconj-section-title">📋 해요체 만드는 4가지 규칙 · 4 Rules for Polite Form</div>'
+    +'<table class="structure-ex-table"><tr><th>규칙 Rule</th><th>조건 Condition</th><th>어미 Ending</th><th>예 Example</th></tr>'
+    +'<tr><td><strong>Rule 1</strong></td><td>어간 마지막 모음 = ㅏ/ㅗ<br><em>Last vowel = ㅏ/ㅗ</em></td><td style="color:var(--teal-dark);font-weight:700">-아요</td><td onclick="speakTTS(\'가요\')" style="cursor:pointer">가다 → <strong>가요</strong> 🔊</td></tr>'
+    +'<tr><td><strong>Rule 2</strong></td><td>그 외 모음<br><em>All other vowels</em></td><td style="color:var(--teal-dark);font-weight:700">-어요</td><td onclick="speakTTS(\'먹어요\')" style="cursor:pointer">먹다 → <strong>먹어요</strong> 🔊</td></tr>'
+    +'<tr><td><strong>Rule 3</strong></td><td>하다 동사<br><em>하다 verbs</em></td><td style="color:var(--teal-dark);font-weight:700">-해요</td><td onclick="speakTTS(\'공부해요\')" style="cursor:pointer">공부하다 → <strong>공부해요</strong> 🔊</td></tr>'
+    +'<tr><td><strong>Rule 4</strong></td><td>이다 (to be)<br><em>Noun + 이다</em></td><td style="color:var(--teal-dark);font-weight:700">-이에요/예요</td><td onclick="speakTTS(\'학생이에요\')" style="cursor:pointer">학생이다 → <strong>학생이에요</strong> 🔊</td></tr>'
+    +'</table>';
+
+  // ── 규칙 동사 탭 ──
+  const tabRegular =
+    '<div class="basics-intro">어간(stem)의 형태가 변하지 않고 어미(ending)만 붙는 동사예요.<br><em>Regular verbs — the stem stays the same; only the ending changes.</em></div>'
+    +'<div class="vconj-concept-grid">'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">📦</div><div class="vconj-concept-label">변하지 않는 부분: 어간 Stem<span class="vconj-concept-label-en">The unchanged base</span></div><div class="vconj-concept-desc">기본형에서 <strong>-다</strong>를 제거한 핵심 부분이에요.<br><em>Remove -다 from the dictionary form.</em><br><br><strong style="font-size:13px">기본형 − \'다\' = 어간(Stem)</strong></div></div>'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🧩</div><div class="vconj-concept-label">변화하는 부분: 어미 Ending<span class="vconj-concept-label-en">The changing part</span></div><div class="vconj-concept-desc">어간 뒤에 결합하여 시제·존댓말을 나타내는 변화 요소예요.<br><em>Attaches to the stem to express tense and speech level.</em><br><br><strong style="font-size:13px">어간 + 어미 = 활용형</strong></div></div>'
+    +'</div>'
+    +'<div class="vconj-section-title">🚶 모음 어간 활용: \'가다\' (To Go)<span class="vconj-regular-badge">규칙 Regular</span></div>'
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">💡 어간 끝 음절이 모음일 때: 어간 <strong>가-</strong> 뒤에 모음 어미가 오면 자연스럽게 축약되거나 융합해요.<br><em>When the stem ends in a vowel, it merges naturally with vowel endings.</em></div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'가요\')" style="cursor:pointer">가요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'가\')" style="cursor:pointer">가 🔊</div><div class="vconj-tense-formula">가 + 아요 → 가요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'갔어요\')" style="cursor:pointer">갔어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'갔어\')" style="cursor:pointer">갔어 🔊</div><div class="vconj-tense-formula">가 + 았어요 → 갔어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'갈 거예요\')" style="cursor:pointer">갈 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'갈 거야\')" style="cursor:pointer">갈 거야 🔊</div><div class="vconj-tense-formula">가 + ㄹ 거예요</div></div>'
+    +'</div></div>'
+    +'<div class="vconj-section-title">🍽️ 받침 어간 활용: \'먹다\' (To Eat)<span class="vconj-regular-badge">규칙 Regular</span></div>'
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">💡 어간 끝에 받침이 있을 때: 어간 <strong>먹-</strong> 뒤에 자음과 모음 어미가 형태 변화 없이 온전히 결합해요.<br><em>When the stem ends in a consonant, endings attach without any sound change.</em></div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'먹어요\')" style="cursor:pointer">먹어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'먹어\')" style="cursor:pointer">먹어 🔊</div><div class="vconj-tense-formula">먹 + 어요 → 먹어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'먹었어요\')" style="cursor:pointer">먹었어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'먹었어\')" style="cursor:pointer">먹었어 🔊</div><div class="vconj-tense-formula">먹 + 었어요 → 먹었어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'먹을 거예요\')" style="cursor:pointer">먹을 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'먹을 거야\')" style="cursor:pointer">먹을 거야 🔊</div><div class="vconj-tense-formula">먹 + 을 거예요</div></div>'
+    +'</div></div>'
+    +'<div class="vconj-section-title">📊 규칙 활용 핵심 요약표 · Summary Table</div>'
+    +'<table class="structure-ex-table"><tr><th>동사 Verb</th><th>어간 Stem</th><th>어간 특징</th><th>현재 Present</th><th>과거 Past</th><th>미래 Future</th></tr>'
+    +'<tr><td onclick="speakTTS(\'가다\')" style="cursor:pointer">가다 🔊<br><small>To Go</small></td><td>가-</td><td style="color:var(--teal-dark)">받침 없음<br>(모음 종결)</td><td onclick="speakTTS(\'가요\')" style="cursor:pointer">가요 / 가 🔊</td><td onclick="speakTTS(\'갔어요\')" style="cursor:pointer">갔어요 / 갔어 🔊</td><td onclick="speakTTS(\'갈 거예요\')" style="cursor:pointer">갈 거예요 🔊</td></tr>'
+    +'<tr><td onclick="speakTTS(\'먹다\')" style="cursor:pointer">먹다 🔊<br><small>To Eat</small></td><td>먹-</td><td style="color:var(--coral)">받침 있음<br>(자음 종결)</td><td onclick="speakTTS(\'먹어요\')" style="cursor:pointer">먹어요 / 먹어 🔊</td><td onclick="speakTTS(\'먹었어요\')" style="cursor:pointer">먹었어요 / 먹었어 🔊</td><td onclick="speakTTS(\'먹을 거예요\')" style="cursor:pointer">먹을 거예요 🔊</td></tr>'
+    +'<tr><td onclick="speakTTS(\'보다\')" style="cursor:pointer">보다 🔊<br><small>To See</small></td><td>보-</td><td style="color:var(--teal-dark)">받침 없음<br>(모음 종결)</td><td onclick="speakTTS(\'봐요\')" style="cursor:pointer">봐요 / 봐 🔊</td><td onclick="speakTTS(\'봤어요\')" style="cursor:pointer">봤어요 / 봤어 🔊</td><td onclick="speakTTS(\'볼 거예요\')" style="cursor:pointer">볼 거예요 🔊</td></tr>'
+    +'<tr><td onclick="speakTTS(\'입다\')" style="cursor:pointer">입다 🔊<br><small>To Wear</small></td><td>입-</td><td style="color:var(--coral)">받침 있음<br>(자음 종결)</td><td onclick="speakTTS(\'입어요\')" style="cursor:pointer">입어요 / 입어 🔊</td><td onclick="speakTTS(\'입었어요\')" style="cursor:pointer">입었어요 / 입었어 🔊</td><td onclick="speakTTS(\'입을 거예요\')" style="cursor:pointer">입을 거예요 🔊</td></tr>'
+    +'</table>';
+
+  // ── 불규칙 동사 탭 ──
+  const tabIrreg =
+    '<div class="basics-intro">어간의 받침이 모음 어미를 만나면 형태가 변하는 동사예요. 소리 내기 편하도록 바뀌는 거예요!<br><em>Irregular verbs — the stem changes when followed by vowel endings, for easier pronunciation.</em></div>'
+    +'<div class="vconj-concept-grid">'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">✂️</div><div class="vconj-concept-label">어간(Stem)과 어미(Ending)<span class="vconj-concept-label-en">Same structure, different behavior</span></div><div class="vconj-concept-desc">동사/형용사의 기본형 = 어간 + \'다\'<br>자음 어미 앞에서는 규칙적으로 유지돼요.<br><em>Before consonant endings: stays regular!</em><br><br><strong>기본형 = 어간 + \'다\'</strong> (예: 걷 + 다)</div></div>'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🔀</div><div class="vconj-concept-label">불규칙 변화가 생기는 이유<span class="vconj-concept-label-en">Why irregulars exist</span></div><div class="vconj-concept-desc">어간 끝 받침(ㄷ, ㅂ 등) 뒤에 <strong>모음으로 시작하는 어미</strong>가 올 때, 소리 내기 편하도록 어간의 받침이 다른 자음이나 모음으로 바뀌어요.<br><em>Before vowel endings — stem consonant changes.</em><br><br><strong style="color:var(--coral)">자음 어미 앞에서는 규칙적으로 유지!</strong></div></div>'
+    +'</div>'
+    +'<div class="vconj-section-title">🚶‍♀️ ㄷ-불규칙 동사: \'걷다\' (To Walk)<span class="vconj-irreg-badge">ㄷ→ㄹ 불규칙</span></div>'
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">🔀 <strong>ㄷ → ㄹ 변형 규칙:</strong> 어간 받침 <strong>\'ㄷ\'</strong>이 모음 어미를 만나면 <strong>\'ㄹ\'</strong>로 변해요. 자음 어미 앞에서는 그대로!<br><em>ㄷ → ㄹ: stem-final ㄷ becomes ㄹ before vowel endings. No change before consonant endings!</em></div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'걸어요\')" style="cursor:pointer">걸어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'걸어\')" style="cursor:pointer">걸어 🔊</div><div class="vconj-tense-formula">걷 + 어요 → <span style="color:var(--coral)">ㄷ→ㄹ</span> → 걸어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'걸었어요\')" style="cursor:pointer">걸었어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'걸었어\')" style="cursor:pointer">걸었어 🔊</div><div class="vconj-tense-formula">걷 + 었어요 → 걸었어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'걸을 거예요\')" style="cursor:pointer">걸을 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'걸을 거야\')" style="cursor:pointer">걸을 거야 🔊</div><div class="vconj-tense-formula">걷 + 을 거예요 → 걸을 거예요</div></div>'
+    +'</div>'
+    +'<div class="vconj-caution">⚠️ <strong>자음 어미 앞에서는 규칙 유지! Before consonant endings: no change!</strong><br>'
+    +'걷 + 고 = <strong onclick="speakTTS(\'걷고\')" style="cursor:pointer;color:var(--teal-dark)">걷고 🔊</strong> &nbsp;|&nbsp; '
+    +'걷 + 습니다 = <strong onclick="speakTTS(\'걷습니다\')" style="cursor:pointer;color:var(--teal-dark)">걷습니다 🔊</strong><br><br>'
+    +'⚠️ <strong>모든 \'ㄷ\' 받침 동사가 불규칙은 아니에요! Not all \'ㄷ\' verbs are irregular!</strong><br>'
+    +'닫다(to close), 받다(to receive), 믿다(to believe) → 규칙 동사 ✅</div>'
+    +'</div>'
+    +'<div class="vconj-section-title">🥶 ㅂ-불규칙 형용사: \'춥다\' (To Be Cold)<span class="vconj-irreg-badge">ㅂ→우 불규칙</span></div>'
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">🔀 <strong>ㅂ → 우 변형 규칙:</strong> 어간 받침 <strong>\'ㅂ\'</strong>이 모음 어미를 만나면 탈락하고 <strong>\'우\'</strong>로 바뀌어요.<br><em>ㅂ → 우: stem-final ㅂ drops and is replaced by 우 before vowel endings.</em></div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'추워요\')" style="cursor:pointer">추워요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추워\')" style="cursor:pointer">추워 🔊</div><div class="vconj-tense-formula">춥 + 어요 → 추+(우+어)요 → 추워요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'추웠어요\')" style="cursor:pointer">추웠어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추웠어\')" style="cursor:pointer">추웠어 🔊</div><div class="vconj-tense-formula">춥 + 었어요 → 추웠어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'추울 거예요\')" style="cursor:pointer">추울 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추울 거야\')" style="cursor:pointer">추울 거야 🔊</div><div class="vconj-tense-formula">춥 + 을 거예요 → 추울 거예요</div></div>'
+    +'</div></div>'
+    +'<div class="vconj-section-title">📊 활용 규칙 한눈에 보기 요약표 · Comparison Summary</div>'
+    +'<table class="structure-ex-table"><tr><th>기본형</th><th>어간</th><th>변화 규칙</th><th>현재 Present</th><th>과거 Past</th><th>미래 Future</th></tr>'
+    +'<tr><td onclick="speakTTS(\'걷다\')" style="cursor:pointer">걷다 🔊<br><small>ㄷ-불규칙</small></td><td>걷-</td><td style="color:var(--coral)">ㄷ → ㄹ<br>(모음 앞)</td><td onclick="speakTTS(\'걸어요\')" style="cursor:pointer">걸어요 / 걸어 🔊</td><td onclick="speakTTS(\'걸었어요\')" style="cursor:pointer">걸었어요 / 걸었어 🔊</td><td onclick="speakTTS(\'걸을 거예요\')" style="cursor:pointer">걸을 거예요 🔊</td></tr>'
+    +'<tr><td onclick="speakTTS(\'춥다\')" style="cursor:pointer">춥다 🔊<br><small>ㅂ-불규칙</small></td><td>춥-</td><td style="color:var(--coral)">ㅂ → 우<br>(모음 앞)</td><td onclick="speakTTS(\'추워요\')" style="cursor:pointer">추워요 / 추워 🔊</td><td onclick="speakTTS(\'추웠어요\')" style="cursor:pointer">추웠어요 / 추웠어 🔊</td><td onclick="speakTTS(\'추울 거예요\')" style="cursor:pointer">추울 거예요 🔊</td></tr>'
+    +'<tr><td onclick="speakTTS(\'먹다\')" style="cursor:pointer">먹다 🔊<br><small>규칙 동사 비교</small></td><td>먹-</td><td style="color:var(--teal-dark)">변화 없음<br>(규칙 활용)</td><td onclick="speakTTS(\'먹어요\')" style="cursor:pointer">먹어요 / 먹어 🔊</td><td onclick="speakTTS(\'먹었어요\')" style="cursor:pointer">먹었어요 / 먹었어 🔊</td><td onclick="speakTTS(\'먹을 거예요\')" style="cursor:pointer">먹을 거예요 🔊</td></tr>'
+    +'</table>';
+
+  // ── 동사 목록 탭 ──
+  const tabCards =
+    '<div class="verb-cards-grid">'
     +VERB_DATA.map(v=>'<div class="verb-card" onclick="speakTTS(\''+v.haeyo+'\')">'
       +'<div class="verb-dict">'+v.dict+'</div><div class="verb-dict-rom">'+v.rom+'</div>'
       +'<div class="verb-mean">'+v.mean+'</div>'
@@ -6462,27 +6734,23 @@ function buildVerbs(){
       +'<div class="verb-form-box"><div class="verb-form-label">해요체</div><div class="verb-form-kr">'+v.haeyo+'</div><div class="verb-form-rom">'+v.haeyoRom+'</div></div>'
       +'<div class="verb-form-box" style="background:var(--coral-lt);border-color:var(--coral-lt)"><div class="verb-form-label" style="color:var(--coral)">부정</div><div class="verb-form-kr" style="color:var(--coral)">'+v.neg+'</div><div class="verb-form-rom">'+v.negRom+'</div></div>'
       +'</div></div>').join('')
-    +'</div></div>'
-    +'<div id="bp-verb-game" class="btab-panel"><div class="verb-game-box" id="verb-game-box"></div></div>'
-    +'<div id="bp-verb-rule" class="btab-panel">'
-    +'<div class="verb-rule-box"><div class="verb-rule-title">📌 해요체 만드는 법</div>'
-    +'<div class="verb-rule-text"><strong>Rule 1.</strong> 어간(stem)에서 -다를 빼세요.<br>'
-    +'<strong>Rule 2.</strong> 어간 마지막 모음이 ㅏ/ㅗ → <strong>-아요</strong><br>'
-    +'<strong>Rule 3.</strong> 그 외 모음 → <strong>-어요</strong><br>'
-    +'<strong>Rule 4.</strong> 하다 동사 → <strong>-해요</strong></div>'
-    +'<div class="verb-rule-formula">어간 + 아요/어요/해요 = 해요체 ✅</div></div>'
-    +'<table class="structure-ex-table"><tr><th>사전형</th><th>어간</th><th>마지막 모음</th><th>해요체</th></tr>'
-    +'<tr><td>가다</td><td>가-</td><td>ㅏ</td><td><strong style="color:var(--teal-dark)">가요</strong></td></tr>'
-    +'<tr><td>오다</td><td>오-</td><td>ㅗ</td><td><strong style="color:var(--teal-dark)">와요</strong></td></tr>'
-    +'<tr><td>먹다</td><td>먹-</td><td>ㅓ</td><td><strong style="color:var(--teal-dark)">먹어요</strong></td></tr>'
-    +'<tr><td>읽다</td><td>읽-</td><td>ㅣ</td><td><strong style="color:var(--teal-dark)">읽어요</strong></td></tr>'
-    +'<tr><td>공부하다</td><td>공부하-</td><td>-하다</td><td><strong style="color:var(--teal-dark)">공부해요</strong></td></tr>'
-    +'</table>'
-    +'<div class="structure-note" style="background:var(--amber-50);border-color:var(--amber-lt);color:var(--amber-600);">⭐ 예외가 있어요! ㅡ탈락, ㄷ불규칙, ㅂ불규칙 등은 Beginner 레벨에서 배울 거예요.</div>'
     +'</div>';
+
+  return '<div class="basics-intro">한국어 동사는 항상 <strong>-다</strong>로 끝나요(사전형). 어간(Stem)에 어미(Ending)를 붙여서 시제와 존댓말을 만들어요!<br><em>Korean verbs end in -다. Attach endings to the stem for tense and speech level.</em></div>'
+    +'<div class="btab-bar" style="flex-wrap:wrap;gap:4px;">'
+    +'<button class="btab active" data-btab-group="bp-verb" data-tab="overview" onclick="switchBtab(\'bp-verb\',\'overview\')">📊 개요</button>'
+    +'<button class="btab" data-btab-group="bp-verb" data-tab="regular" onclick="switchBtab(\'bp-verb\',\'regular\')">📖 규칙 동사</button>'
+    +'<button class="btab" data-btab-group="bp-verb" data-tab="irreg" onclick="switchBtab(\'bp-verb\',\'irreg\')">🔄 불규칙 동사</button>'
+    +'<button class="btab" data-btab-group="bp-verb" data-tab="cards" onclick="switchBtab(\'bp-verb\',\'cards\')">📋 동사 목록</button>'
+    +'<button class="btab" data-btab-group="bp-verb" data-tab="game" onclick="switchBtab(\'bp-verb\',\'game\');renderVerbGame()">🎮 퀴즈 게임</button>'
+    +'</div>'
+    +'<div id="bp-verb-overview" class="btab-panel active">'+tabOverview+'</div>'
+    +'<div id="bp-verb-regular" class="btab-panel">'+tabRegular+'</div>'
+    +'<div id="bp-verb-irreg" class="btab-panel">'+tabIrreg+'</div>'
+    +'<div id="bp-verb-cards" class="btab-panel">'+tabCards+'</div>'
+    +'<div id="bp-verb-game" class="btab-panel"><div class="verb-game-box" id="verb-game-box"></div></div>';
 }
 
-// ══════════════════════════════════════════════════════
 // ── SPEAKING RENDER ────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildSpeaking(){
@@ -6495,8 +6763,14 @@ function buildSpeaking(){
       +'<div class="speak-card-en">'+c.en+'</div>'
       +'<div class="speak-card-btns">'
       +'<button class="speak-tts-btn" onclick="speakTTS(\''+c.kr+'\')">🔊 듣기</button>'
-      +'<button class="speak-ai-btn" onclick="startSpeak(\''+c.kr+'\',\''+c.en+'\')">🎤 말해보기</button>'
-      +'</div></div>').join('');
+      +'<button class="speak-ai-btn" id="speak-btn-'+i+'" onclick="startSpeak(\''+c.kr+'\',\''+c.en+'\',this)">🎤 말해보기</button>'
+      +'</div>'
+      +'<div class="speak-result" id="speak-result-'+i+'" style="display:none;margin-top:8px;padding:10px 12px;background:var(--teal-50);border-radius:var(--radius-sm);border:1.5px solid var(--teal-lt);">'
+      +'<div style="font-size:12px;color:var(--warm-400);margin-bottom:3px;">내가 말한 것 · You said:</div>'
+      +'<div class="speak-said-text" style="font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:6px;"></div>'
+      +'<div class="speak-feedback" style="font-size:13px;color:var(--teal-dark);line-height:1.6;"></div>'
+      +'</div>'
+      +'</div>').join('');
 }
 
 
@@ -6531,6 +6805,60 @@ function updateApiKeyBtn(){
   btn.style.borderColor=getApiKey()?'var(--teal)':'var(--gray-200)';
 }
 
+// ── 큰 숫자 변환기 ──────────────────────────────────────
+function convertBigNum(){
+  const el=document.getElementById('bignum-input');
+  const res=document.getElementById('bignum-result');
+  if(!el||!res)return;
+  const raw=el.value.replace(/,/g,'').trim();
+  const n=parseInt(raw,10);
+  if(!raw||isNaN(n)||n<0){res.innerHTML='<span style="color:var(--warm-400);font-size:13px">숫자를 입력하면 변환돼요 · Enter a number above</span>';return;}
+
+  const sino=['','일','이','삼','사','오','육','칠','팔','구'];
+  const units=['','십','백','천'];
+  function group4(num){
+    if(num===0)return '';
+    let s='';
+    const d=[Math.floor(num/1000)%10,Math.floor(num/100)%10,Math.floor(num/10)%10,num%10];
+    for(let i=0;i<4;i++){
+      if(!d[i])continue;
+      s+=(d[i]===1&&i<3)?units[3-i]:sino[d[i]]+units[3-i];
+    }
+    return s;
+  }
+  function toKorean(num){
+    if(num===0)return '영';
+    const jo=Math.floor(num/1000000000000);
+    const eok=Math.floor(num/100000000)%10000;
+    const man=Math.floor(num/10000)%10000;
+    const rest=num%10000;
+    let s='';
+    if(jo) s+=group4(jo)+'조 ';
+    if(eok)s+=group4(eok)+'억 ';
+    if(man)s+=group4(man)+'만 ';
+    if(rest)s+=group4(rest);
+    return s.trim()||'영';
+  }
+
+  // 영어 3자리 grouping
+  const enGrouped=n.toLocaleString('en-US');
+  // 한국어 4자리 grouping
+  const s=String(n);
+  let krGrouped='';
+  for(let i=0;i<s.length;i++){
+    const fromRight=s.length-1-i;
+    krGrouped+=s[i];
+    if(fromRight>0&&fromRight%4===0)krGrouped+=',';
+  }
+  const krRead=toKorean(n);
+  const safeRead=krRead.replace(/'/g,'&#39;');
+
+  res.innerHTML=
+    '<div class="bignum-result-row"><span class="bignum-result-label">🇺🇸 영어</span><span class="bignum-result-val" style="color:#3b4cc0">'+enGrouped+'</span></div>'
+   +'<div class="bignum-result-row"><span class="bignum-result-label">읽기 단위 분석</span><span class="bignum-result-val" style="color:var(--teal-dark)">'+krGrouped+'</span></div>'
+   +'<div class="bignum-result-row"><span class="bignum-result-label">🔊 읽는 법</span><span class="bignum-result-kr" style="cursor:pointer" onclick="speakTTS(\''+safeRead+'\')">'+krRead+' &nbsp;<span style="font-size:16px">🔊</span></span></div>';
+}
+
 let _recog=null;
 function _initRecog(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -6542,45 +6870,46 @@ function _initRecog(){
   return true;
 }
 
-async function startSpeak(targetKr, targetEn){
+async function startSpeak(targetKr, targetEn, btnEl){
   if(!getApiKey()){openApiKey();return;}
   if(!_recog&&!_initRecog()){
     alert('음성 인식은 Chrome 브라우저에서만 지원돼요!');return;
   }
-  const btn=document.getElementById('speak-btn');
-  const result=document.getElementById('speak-result');
-  const saidEl=document.getElementById('speak-said-text');
-  const fbEl=document.getElementById('speak-feedback');
-  btn.textContent='🔴 듣는 중...';
-  btn.classList.add('listening');
-  btn.disabled=true;
-  result.classList.remove('show');
+  // Find result panel next to this button
+  const card=btnEl.closest('.speak-card');
+  const result=card.querySelector('.speak-result');
+  const saidEl=card.querySelector('.speak-said-text');
+  const fbEl=card.querySelector('.speak-feedback');
+  btnEl.textContent='🔴 듣는 중...';
+  btnEl.classList.add('listening');
+  btnEl.disabled=true;
+  result.style.display='none';
 
   _recog.onresult=async(e)=>{
     const said=e.results[0][0].transcript;
     saidEl.textContent=said;
     fbEl.textContent='분석 중...';
-    result.classList.add('show');
-    btn.textContent='⏳ 분석 중...';
-    btn.classList.remove('listening');
+    result.style.display='block';
+    btnEl.textContent='⏳ 분석 중...';
+    btnEl.classList.remove('listening');
     const fb=await _callClaude(targetKr,targetEn,said);
     fbEl.textContent=fb;
-    btn.textContent='🎤 다시 말해보기';
-    btn.disabled=false;
+    btnEl.textContent='🎤 다시 말해보기';
+    btnEl.disabled=false;
   };
-  _recog.onerror=()=>{
-    btn.textContent='🎤 말해보기';
-    btn.classList.remove('listening');
-    btn.disabled=false;
+  _recog.onerror=(e)=>{
+    btnEl.textContent='🎤 말해보기';
+    btnEl.classList.remove('listening');
+    btnEl.disabled=false;
   };
   _recog.onend=()=>{
-    if(btn.disabled&&btn.textContent==='🔴 듣는 중...'){
-      btn.textContent='🎤 말해보기';
-      btn.classList.remove('listening');
-      btn.disabled=false;
+    if(btnEl.disabled&&btnEl.textContent==='🔴 듣는 중...'){
+      btnEl.textContent='🎤 말해보기';
+      btnEl.classList.remove('listening');
+      btnEl.disabled=false;
     }
   };
-  _recog.start();
+  try{ _recog.start(); }catch(e){ _recog=null; _initRecog(); _recog.start(); }
 }
 
 async function _callClaude(targetKr, targetEn, said){
