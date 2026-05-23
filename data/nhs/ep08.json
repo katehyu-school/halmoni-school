@@ -1,0 +1,806 @@
+{
+  "id": "ep08",
+  "title": "딸기 한 박스하고 사과 여섯 개 주세요",
+  "title_en": "A Box of Strawberries and Six Apples, Please",
+  "level": "초급",
+  "scene": "🏮 재래 시장 · Traditional Market",
+  "goal": {
+    "ko": "고유어 숫자로 물건을 셀 수 있어요.",
+    "en": "I can count things using Native Korean numbers."
+  },
+  "key_points": [
+    "고유어(하나, 둘...) vs 한자어(일, 이...) 숫자",
+    "단위 명사: 개, 박스, 근, 마리, 단",
+    "N하고 N 주세요 (ordering pattern)",
+    "N에 얼마예요? (price per unit)"
+  ],
+  "slides": [
+    "data/nhs/slides/ep8/재래시장1.png",
+    "data/nhs/slides/ep8/재래시장2.png",
+    "data/nhs/slides/ep8/재래시장3.png",
+    "data/nhs/slides/ep8/재래시장4.png",
+    "data/nhs/slides/ep8/재래시장5.png",
+    "data/nhs/slides/ep8/재래시장6.png",
+    "data/nhs/slides/ep8/재래시장7.png",
+    "data/nhs/slides/ep8/재래시장8.png",
+    "data/nhs/slides/ep8/재래시장9.png",
+    "data/nhs/slides/ep8/재래시장10.png"
+  ],
+  "video": null,
+  "characters": [
+    {
+      "id": "grandpa",
+      "name": "할아버지",
+      "emoji": "👴",
+      "color": "var(--blue)"
+    },
+    {
+      "id": "grandma",
+      "name": "할머니",
+      "emoji": "👵",
+      "color": "var(--coral)"
+    },
+    {
+      "id": "merchant",
+      "name": "상인",
+      "emoji": "🧑‍🍳",
+      "color": "var(--teal)"
+    }
+  ],
+  "script": [
+    {
+      "speaker": "할아버지",
+      "slide": 0,
+      "text": "안녕하세요?",
+      "en": "Hello!",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/1안녕하세요_slide1.mp3"
+    },
+    {
+      "speaker": "상인",
+      "slide": 1,
+      "text": "어서 오세요!",
+      "en": "Welcome!",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/2어서+오세요_slide2.mp3"
+    },
+    {
+      "speaker": "할머니",
+      "slide": 2,
+      "text": "오늘 과일 뭐가 좋아요?",
+      "en": "What fruit is good today?",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/3오늘+과일+뭐가+좋아요_slide3.mp3"
+    },
+    {
+      "speaker": "상인",
+      "slide": 3,
+      "text": "요새 딸기가 제철이에요. 아주 맛있어요.",
+      "en": "Strawberries are in season these days. They're very delicious.",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/4요새+딸기가+제철이에요_+아주+맛있어요_slide4.mp3"
+    },
+    {
+      "speaker": "할머니",
+      "slide": 4,
+      "text": "그래요? 그럼 딸기 한 박스하고 사과 여섯 개 주세요.",
+      "en": "Really? Then please give me one box of strawberries and six apples.",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/5그래요_+그럼+딸기+한+박스하고+사과+여섯+개+주세요_slide5.mp3"
+    },
+    {
+      "speaker": "상인",
+      "slide": 5,
+      "text": "네, 딸기 만오천 원하고 사과 만 원, 모두 이만오천 원이에요.",
+      "en": "Yes, strawberries are 15,000 won and apples are 10,000 won — 25,000 won in total.",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/6네+딸기+만오천+원하고+사과+만+원+모두+이만오천+원이에요_slide6.mp3"
+    },
+    {
+      "speaker": "할머니",
+      "slide": 6,
+      "text": "여기 있어요.",
+      "en": "Here you go.",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/7여기+있어요_slide7.mp3"
+    },
+    {
+      "speaker": "상인",
+      "slide": 7,
+      "text": "감사합니다. 거스름돈 오천 원 여기요.",
+      "en": "Thank you. Here's your change — 5,000 won.",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/8감사합니다_+거스름+돈+오천+원+여기요_slide8.mp3"
+    },
+    {
+      "speaker": "할아버지",
+      "slide": 8,
+      "text": "소고기는 한 근에 얼마예요?",
+      "en": "How much is beef per geun (600g)?",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/9소고기는+한근에+얼마예요_slide9.mp3"
+    },
+    {
+      "speaker": "상인",
+      "slide": 9,
+      "text": "그건, 잘 모르겠는데요.",
+      "en": "That, I'm not sure about.",
+      "speech_type": "jondaemal",
+      "audio": "data/nhs/TTS/ep8/10그건+잘+모르겠는데요_slide10.mp3"
+    }
+  ],
+  "vocab": [
+    {
+      "category": "🛒 시장 Market",
+      "items": [
+        {
+          "korean": "시장",
+          "romanization": "si-jang",
+          "english": "market",
+          "emoji": "🏮"
+        },
+        {
+          "korean": "상인",
+          "romanization": "sang-in",
+          "english": "vendor / merchant",
+          "emoji": "🧑‍🍳"
+        },
+        {
+          "korean": "거스름돈",
+          "romanization": "geo-seu-reum-don",
+          "english": "change (money)",
+          "emoji": "💰"
+        },
+        {
+          "korean": "제철",
+          "romanization": "je-cheol",
+          "english": "in season",
+          "emoji": "🌸"
+        },
+        {
+          "korean": "요새",
+          "romanization": "yo-sae",
+          "english": "these days / lately",
+          "emoji": "📅"
+        }
+      ]
+    },
+    {
+      "category": "🍓 과일·채소 Fruit & Veg",
+      "items": [
+        {
+          "korean": "딸기",
+          "romanization": "ttal-gi",
+          "english": "strawberry",
+          "emoji": "🍓"
+        },
+        {
+          "korean": "사과",
+          "romanization": "sa-gwa",
+          "english": "apple",
+          "emoji": "🍎"
+        },
+        {
+          "korean": "과일",
+          "romanization": "gwa-il",
+          "english": "fruit",
+          "emoji": "🍊"
+        },
+        {
+          "korean": "야채",
+          "romanization": "ya-chae",
+          "english": "vegetables",
+          "emoji": "🥦"
+        },
+        {
+          "korean": "파",
+          "romanization": "pa",
+          "english": "green onion",
+          "emoji": "🌿"
+        }
+      ]
+    },
+    {
+      "category": "🥩 고기 Meat",
+      "items": [
+        {
+          "korean": "고기",
+          "romanization": "go-gi",
+          "english": "meat",
+          "emoji": "🥩"
+        },
+        {
+          "korean": "소고기",
+          "romanization": "so-go-gi",
+          "english": "beef",
+          "emoji": "🐄"
+        },
+        {
+          "korean": "돼지고기",
+          "romanization": "dwae-ji-go-gi",
+          "english": "pork",
+          "emoji": "🐷"
+        },
+        {
+          "korean": "닭고기",
+          "romanization": "dak-go-gi",
+          "english": "chicken",
+          "emoji": "🐔"
+        },
+        {
+          "korean": "생선",
+          "romanization": "saeng-seon",
+          "english": "fish (as food)",
+          "emoji": "🐟"
+        }
+      ]
+    },
+    {
+      "category": "📦 단위 명사 Counters",
+      "items": [
+        {
+          "korean": "개",
+          "romanization": "gae",
+          "english": "piece / item (general)",
+          "emoji": "🔢",
+          "note": "사과 두 개 · 두 → 두, 세, 네... (고유어)"
+        },
+        {
+          "korean": "박스",
+          "romanization": "bak-seu",
+          "english": "box",
+          "emoji": "📦"
+        },
+        {
+          "korean": "근",
+          "romanization": "geun",
+          "english": "geun (≈600g, for meat)",
+          "emoji": "⚖️"
+        },
+        {
+          "korean": "마리",
+          "romanization": "ma-ri",
+          "english": "animal / fish (counter)",
+          "emoji": "🐠",
+          "note": "생선 세 마리 · 세 → 셋의 관형형"
+        },
+        {
+          "korean": "단",
+          "romanization": "dan",
+          "english": "bunch / bundle",
+          "emoji": "🌿",
+          "note": "파 한 단 · 한 = 하나의 관형형"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g08_native_numbers",
+      "title": "고유어 숫자 — 셀 때 쓰는 우리말 수",
+      "title_en": "Native Korean Numbers — For Counting Things",
+      "icon": "🔢",
+      "rule": "물건을 셀 때는 고유어 숫자(하나, 둘, 셋...)를 쓰고, 단위 명사 앞에서는 줄어든 형태(한, 두, 세...)를 써요.",
+      "explanation_en": "When counting objects in Korean, use Native Korean numbers. They have two forms: standalone (하나, 둘, 셋...) and modifier form used before counters (한 개, 두 개, 세 개...).",
+      "table": {
+        "columns": [
+          "숫자",
+          "단독형 (standalone)",
+          "관형형 (before counter)",
+          "예시"
+        ],
+        "rows": [
+          [
+            "1",
+            "하나",
+            "한",
+            "한 개 / 한 박스"
+          ],
+          [
+            "2",
+            "둘",
+            "두",
+            "두 개 / 두 마리"
+          ],
+          [
+            "3",
+            "셋",
+            "세",
+            "세 개 / 세 근"
+          ],
+          [
+            "4",
+            "넷",
+            "네",
+            "네 개 / 네 단"
+          ],
+          [
+            "5",
+            "다섯",
+            "다섯",
+            "다섯 개"
+          ],
+          [
+            "6",
+            "여섯",
+            "여섯",
+            "여섯 개"
+          ],
+          [
+            "7",
+            "일곱",
+            "일곱",
+            "일곱 개"
+          ],
+          [
+            "8",
+            "여덟",
+            "여덟",
+            "여덟 개"
+          ],
+          [
+            "9",
+            "아홉",
+            "아홉",
+            "아홉 개"
+          ],
+          [
+            "10",
+            "열",
+            "열",
+            "열 개"
+          ],
+          [
+            "20",
+            "스물",
+            "스무",
+            "스무 개"
+          ],
+          [
+            "100",
+            "백",
+            "백",
+            "백 개 (한자어와 동일)"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "딸기 한 박스 주세요.",
+          "en": "Please give me one box of strawberries."
+        },
+        {
+          "ko": "사과 여섯 개 주세요.",
+          "en": "Please give me six apples."
+        },
+        {
+          "ko": "생선 세 마리 주세요.",
+          "en": "Please give me three fish."
+        }
+      ],
+      "fill_blanks": [
+        {
+          "sentence": "사과 ___ 개 주세요. (three)",
+          "answer": "세",
+          "hint": "셋 → 단위 앞에서 '세'로 줄어요"
+        },
+        {
+          "sentence": "파 ___ 단 주세요. (one)",
+          "answer": "한",
+          "hint": "하나 → 단위 앞에서 '한'으로 줄어요"
+        },
+        {
+          "sentence": "소고기 ___ 근에 얼마예요? (one)",
+          "answer": "한",
+          "hint": "한 근 = 약 600g"
+        }
+      ]
+    },
+    {
+      "id": "g08_sino_vs_native",
+      "title": "고유어 vs 한자어 — 언제 뭘 써요?",
+      "title_en": "Native vs Sino-Korean — When to Use Which?",
+      "icon": "⚖️",
+      "rule": "물건 세기·나이·시간(시)에는 고유어, 날짜·분·초·가격·층수에는 한자어를 써요.",
+      "explanation_en": "Use Native Korean numbers for: counting objects, age, and hours. Use Sino-Korean numbers for: dates, minutes/seconds, prices, and floor numbers.",
+      "table": {
+        "columns": [
+          "상황 · Situation",
+          "숫자 종류 · Type",
+          "예시 · Example"
+        ],
+        "rows": [
+          [
+            "물건 세기 Counting objects",
+            "고유어 Native",
+            "사과 세 개, 생선 두 마리"
+          ],
+          [
+            "나이 Age",
+            "고유어 Native",
+            "스물다섯 살 (25 years old)"
+          ],
+          [
+            "시간(시) Hours",
+            "고유어 Native",
+            "두 시, 열한 시"
+          ],
+          [
+            "날짜 Date",
+            "한자어 Sino",
+            "오월 이십삼일"
+          ],
+          [
+            "분·초 Min/Sec",
+            "한자어 Sino",
+            "삼십 분, 십오 초"
+          ],
+          [
+            "가격 Price",
+            "한자어 Sino",
+            "만오천 원, 이만 원"
+          ],
+          [
+            "층수 Floor",
+            "한자어 Sino",
+            "삼 층, 일 층"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "딸기 만오천 원이에요. (price = 한자어)",
+          "en": "Strawberries are 15,000 won."
+        },
+        {
+          "ko": "사과 여섯 개 주세요. (counting = 고유어)",
+          "en": "Please give me six apples."
+        },
+        {
+          "ko": "두 시에 만나요. (hour = 고유어)",
+          "en": "Let's meet at 2 o'clock."
+        }
+      ],
+      "fill_blanks": [
+        {
+          "sentence": "오렌지 ___ 개 주세요. (four) — 물건 세기",
+          "answer": "네",
+          "hint": "물건 세기 → 고유어 (넷 → 네)"
+        },
+        {
+          "sentence": "___ 원이에요. (3,000) — 가격",
+          "answer": "삼천",
+          "hint": "가격 → 한자어 (삼천 원)"
+        }
+      ]
+    },
+    {
+      "id": "g08_hago",
+      "title": "N하고 N — and (listing items)",
+      "title_en": "N하고 N — Connecting nouns with 'and'",
+      "icon": "➕",
+      "rule": "두 가지 이상의 물건을 나열할 때 '하고'로 연결해요. 구어체(말할 때)에서 자주 써요.",
+      "explanation_en": "'하고' connects nouns meaning 'and' — mainly used in spoken Korean. More formal alternatives: 와/과.",
+      "table": {
+        "columns": [
+          "구어 (Spoken)",
+          "문어 (Written/Formal)",
+          "뜻"
+        ],
+        "rows": [
+          [
+            "딸기하고 사과",
+            "딸기와 사과",
+            "strawberries and apples"
+          ],
+          [
+            "커피하고 주스",
+            "커피와 주스",
+            "coffee and juice"
+          ],
+          [
+            "엄마하고 아빠",
+            "엄마와 아빠",
+            "mom and dad"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "딸기 한 박스하고 사과 여섯 개 주세요.",
+          "en": "One box of strawberries and six apples, please."
+        },
+        {
+          "ko": "라면하고 김밥 주세요.",
+          "en": "Ramen and gimbap, please."
+        }
+      ],
+      "fill_blanks": [
+        {
+          "sentence": "커피 한 잔___ 케이크 주세요.",
+          "answer": "하고",
+          "hint": "두 가지를 이어주는 말"
+        },
+        {
+          "sentence": "소고기 두 근___ 파 한 단 주세요.",
+          "answer": "하고",
+          "hint": "구어체에서 많이 써요"
+        }
+      ]
+    }
+  ],
+  "banmal_jondaemal": {
+    "intro_ko": "시장에서 할머니·할아버지와 상인은 서로 존댓말을 써요. 친하지 않은 어른들 사이의 기본 말투예요.",
+    "intro_en": "At the market, grandma, grandpa, and the merchant all use polite speech — the default between adults who aren't close.",
+    "rows": [
+      {
+        "situation_ko": "물건 요청",
+        "situation_en": "Requesting items",
+        "banmal": "딸기 한 박스하고 사과 여섯 개 줘.",
+        "jondaemal": "딸기 한 박스하고 사과 여섯 개 주세요.",
+        "note": "줘 → 주세요 (존댓말)"
+      },
+      {
+        "situation_ko": "가격 묻기",
+        "situation_en": "Asking price",
+        "banmal": "이거 얼마야?",
+        "jondaemal": "이거 얼마예요?",
+        "note": "야 → 예요"
+      },
+      {
+        "situation_ko": "돈 건네기",
+        "situation_en": "Handing over money",
+        "banmal": "여기 있어.",
+        "jondaemal": "여기 있어요.",
+        "note": "있어 → 있어요"
+      }
+    ],
+    "tip": "💡 시장에서 모르는 어른께는 항상 존댓말! 상인도 손님께 존댓말을 써요. · Always use polite speech with strangers at the market — vendors use it with customers too.",
+    "adult_dialogue": {
+      "title_ko": "어른들끼리 시장 쇼핑 (존댓말)",
+      "title_en": "Adults shopping at the market (polite speech)",
+      "setup_ko": "두 이웃 주민이 시장에서 우연히 만났어요. 친하지 않은 사이라 존댓말을 써요.",
+      "setup_en": "Two neighbors run into each other at the market. They're not close, so they use polite speech.",
+      "lines": [
+        {
+          "speaker": "이웃1",
+          "text": "어머, 안녕하세요? 여기도 오세요?",
+          "en": "Oh my, hello! You come here too?"
+        },
+        {
+          "speaker": "이웃2",
+          "text": "네, 요새 딸기가 맛있다고 해서요. 많이 사셨어요?",
+          "en": "Yes, I heard strawberries are good lately. Did you buy a lot?"
+        },
+        {
+          "speaker": "이웃1",
+          "text": "두 박스 샀어요. 한 박스에 만오천 원인데 맛있더라고요.",
+          "en": "I bought two boxes. They're 15,000 won each, but they're delicious."
+        },
+        {
+          "speaker": "이웃2",
+          "text": "그래요? 저도 한 박스 사야겠어요.",
+          "en": "Really? I should buy one box too."
+        },
+        {
+          "speaker": "이웃1",
+          "text": "소고기도 여기가 싸요. 한 근에 얼마인지 물어보세요.",
+          "en": "Beef is cheap here too. Ask how much it is per geun."
+        }
+      ],
+      "note_ko": "아이들 말과 비교해보세요: '줘' → '주세요', '얼마야?' → '얼마예요?', '샀어' → '샀어요' — 똑같은 상황인데 말투가 달라요!",
+      "note_en": "Compare with casual speech: 줘 → 주세요, 얼마야 → 얼마예요, 샀어 → 샀어요 — same situation, different speech level!"
+    }
+  },
+  "usage": [
+    {
+      "title": "N에 얼마예요? — Price per unit",
+      "title_en": "How much per N?",
+      "explanation_en": "To ask the price per unit of something, use [unit + 에 + 얼마예요?]. The particle '에' here means 'per'.",
+      "examples": [
+        {
+          "ko": "소고기 한 근에 얼마예요?",
+          "en": "How much is beef per geun?"
+        },
+        {
+          "ko": "사과 한 개에 얼마예요?",
+          "en": "How much is one apple?"
+        },
+        {
+          "ko": "딸기 한 박스에 얼마예요?",
+          "en": "How much is one box of strawberries?"
+        }
+      ]
+    },
+    {
+      "title": "그건 = 그거는 / 그것은",
+      "title_en": "그건 — Contracted topic marker",
+      "explanation_en": "'그건' is a natural contraction of '그거는' (that one + topic particle). Koreans contract this constantly in speech. Similarly: 이건 (이거는), 저건 (저거는).",
+      "examples": [
+        {
+          "ko": "그건, 잘 모르겠는데요.",
+          "en": "That, I'm not sure about."
+        },
+        {
+          "ko": "이건 얼마예요?",
+          "en": "How much is this?"
+        },
+        {
+          "ko": "저건 뭐예요?",
+          "en": "What is that (over there)?"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q08_01",
+      "audio_text": "딸기 한 박스하고 사과 여섯 개 주세요.",
+      "question_ko": "할머니가 무엇을 샀어요?",
+      "question_en": "What did grandma buy?",
+      "options": [
+        "딸기 두 박스 + 사과 다섯 개",
+        "딸기 한 박스 + 사과 여섯 개",
+        "딸기 한 박스 + 사과 일곱 개",
+        "딸기 두 박스 + 사과 여섯 개"
+      ],
+      "answer": 1,
+      "explanation": "딸기 한 박스하고 사과 여섯 개 — 1 box of strawberries and 6 apples."
+    },
+    {
+      "id": "q08_02",
+      "audio_text": "모두 이만오천 원이에요.",
+      "question_ko": "전체 가격이 얼마예요?",
+      "question_en": "What is the total price?",
+      "options": [
+        "₩15,000",
+        "₩20,000",
+        "₩25,000",
+        "₩30,000"
+      ],
+      "answer": 2,
+      "explanation": "이만오천 원 = 25,000원 (이만 = 20,000 + 오천 = 5,000)"
+    },
+    {
+      "id": "q08_03",
+      "question_ko": "다음 중 고유어 숫자는?",
+      "question_en": "Which of the following is a Native Korean number?",
+      "options": [
+        "일, 이, 삼",
+        "하나, 둘, 셋",
+        "영, 공, 제로",
+        "만, 억, 조"
+      ],
+      "answer": 1,
+      "explanation": "하나, 둘, 셋 = 고유어 (Native Korean). 일, 이, 삼 = 한자어 (Sino-Korean)."
+    },
+    {
+      "id": "q08_04",
+      "question_ko": "물건을 셀 때 맞는 표현은?",
+      "question_en": "Which is the correct way to count objects?",
+      "options": [
+        "사과 삼 개",
+        "사과 세 개",
+        "사과 셋 개",
+        "사과 서 개"
+      ],
+      "answer": 1,
+      "explanation": "물건 셀 때는 고유어 관형형! 셋 → 세 (단위 앞), so 사과 세 개 ✅"
+    },
+    {
+      "id": "q08_05",
+      "audio_text": "거스름돈 오천 원 여기요.",
+      "question_ko": "거스름돈이 얼마예요?",
+      "question_en": "How much is the change?",
+      "options": [
+        "₩3,000",
+        "₩4,000",
+        "₩5,000",
+        "₩6,000"
+      ],
+      "answer": 2,
+      "explanation": "오천 원 = 5,000원. 할머니가 이만오천 원을 내고 거스름돈 오천 원을 받았어요."
+    }
+  ],
+  "real_life": [
+    {
+      "title": "시장에서 쇼핑하기",
+      "title_en": "Shopping at the Market",
+      "setup_ko": "한국 재래시장에서 직접 쇼핑해봐요!",
+      "setup_en": "Practice shopping at a Korean traditional market!",
+      "lines": [
+        {
+          "speaker": "손님",
+          "text": "이 딸기 얼마예요?",
+          "en": "How much are these strawberries?"
+        },
+        {
+          "speaker": "상인",
+          "text": "한 박스에 만오천 원이에요.",
+          "en": "15,000 won per box."
+        },
+        {
+          "speaker": "손님",
+          "text": "두 박스 주세요.",
+          "en": "Two boxes, please."
+        },
+        {
+          "speaker": "상인",
+          "text": "삼만 원이에요.",
+          "en": "That's 30,000 won."
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "title": "💡 한국 재래시장 문화",
+      "content_ko": "한국 재래시장에서는 '에누리'(흥정)가 문화예요! '좀 깎아주세요 (Please give me a discount)' 라고 말하면 상인이 조금 깎아줄 수도 있어요. 또 단골(regular customer)이 되면 '서비스'(덤 — free extra)를 주기도 해요.",
+      "content_en": "Bargaining (에누리) is part of Korean market culture! Saying '좀 깎아주세요' (please give me a discount) might get you a lower price. Regular customers (단골) often receive 서비스 — a little something extra for free!"
+    },
+    {
+      "type": "tip",
+      "title": "💡 단위 명사 정리",
+      "content_ko": "한국어 단위 명사(counter words)는 영어의 'a cup of', 'a piece of'와 비슷해요. 물건마다 다른 단위를 써요: 개(일반 물건), 마리(동물/생선), 근(고기 무게), 단(묶음), 병(병에 든 것), 잔(컵에 든 것).",
+      "content_en": "Korean counters (단위 명사) are like English 'a cup of' or 'a piece of' — each object type has its own counter: 개 (general), 마리 (animals/fish), 근 (meat weight), 단 (bundles), 병 (bottles), 잔 (cups)."
+    }
+  ],
+  "pronunciation": [
+    {
+      "id": "pron_ep08_01",
+      "title": "격음화 — 한자어 수 받침 + 자음",
+      "rule": "한자어 숫자에서 받침 뒤 자음이 거센소리로 바뀌는 현상 · Aspirated consonant after a final stop in Sino-Korean numbers.",
+      "table": {
+        "columns": [
+          "표기 · Spelling",
+          "발음 · Sound",
+          "규칙 · Rule"
+        ],
+        "rows": [
+          [
+            "십오",
+            "[시보]",
+            "ㅂ + ㅇ → 연음 (시+보)"
+          ],
+          [
+            "만오천",
+            "[마노천]",
+            "ㄴ + ㅇ → 연음"
+          ],
+          [
+            "이만오천",
+            "[이마노천]",
+            "ㄴ + ㅇ → 연음"
+          ],
+          [
+            "십육",
+            "[심뉵]",
+            "ㅂ → ㅁ (비음화) + 육 → 뉵"
+          ]
+        ]
+      },
+      "tip": "💡 숫자를 읽을 때 받침이 다음 모음 앞에서 연음돼요. 만오천 → [마노천]처럼 자연스럽게 이어서 읽어보세요! · When reading numbers, final consonants link to the next vowel. Practice saying 만오천 as [마노천] smoothly."
+    }
+  ],
+  "self_check": [
+    {
+      "ko": "하나, 둘, 셋... 고유어 숫자로 1~10을 셀 수 있어요.",
+      "en": "I can count 1~10 using Native Korean numbers (하나, 둘, 셋...)."
+    },
+    {
+      "ko": "단위 명사 앞에서 '한, 두, 세, 네'로 줄이는 것을 알아요.",
+      "en": "I know that 하나/둘/셋/넷 shorten to 한/두/세/네 before counters."
+    },
+    {
+      "ko": "물건을 셀 때는 고유어, 가격·날짜는 한자어를 쓴다는 걸 알아요.",
+      "en": "I know to use Native Korean for counting objects, and Sino-Korean for prices and dates."
+    },
+    {
+      "ko": "'N하고 N 주세요'로 두 가지 물건을 주문할 수 있어요.",
+      "en": "I can order two items using 'N하고 N 주세요'."
+    },
+    {
+      "ko": "거스름돈, 제철, 요새의 뜻을 알아요.",
+      "en": "I know the meaning of 거스름돈, 제철, and 요새."
+    }
+  ]
+}

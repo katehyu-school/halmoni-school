@@ -487,6 +487,26 @@ const urlName   = _hc ? _hc.urlName : null;
 - 패턴: `"한국어 설명 · English equivalent"` (가운데 점 구분)
 - ep1~4는 위/아래 영어 설명 있으니 그대로 두기 (선생님 결정)
 
+### ✅ ep8 진행 상태 (2026-05-23 완료)
+- ✅ `data/nhs/ep08.json` 작성 (재래시장, 고유어 숫자)
+- ✅ goal {ko, en} object 형식
+- ✅ pronunciation: 한자어 숫자 연음 (만오천→[마노천])
+- ✅ self_check: 5개 항목
+- ✅ banmal_jondaemal: adult_dialogue 추가 (이웃 시장 대화)
+- ✅ nhs.html EPISODE_DATA 인라인 추가
+- ✅ 사이드바 ep08 활성화
+- ✅ 슬라이드 10장 (재래시장1~10.png) / TTS 10개 복사 완료
+
+### ✅ ep9 진행 상태 (2026-05-23 완료)
+- ✅ `data/nhs/ep09.json` 작성 (자전거 소풍, 날씨 표현)
+- ✅ narrator 스타일 (대화 없음)
+- ✅ 과거형 -았/었어요 + -고 있어요/-고 계세요 문법
+- ✅ pronunciation: 맑다→[막따] 겹받침
+- ✅ self_check, banmal_jondaemal, adult_dialogue 포함
+- ✅ nhs.html EPISODE_DATA 인라인 추가
+- ✅ 사이드바 ep09 활성화 + ep10 disabled
+- ✅ 슬라이드 5장 (자전거여행1~5.png) / TTS 5개 복사 완료
+
 ### 🆕 Ep5 자료 준비됨 (다음 세션 작업 대기)
 - **장면**: 🏫 학교 교실 (PDF: BTS '보고 싶다' 활용 한국어 소개 + 스터디 그룹 만들기)
 - **위치**: `C:\Users\kateh\Documents\halmoni-school_standby\nhs\`
