@@ -539,9 +539,11 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 <div class="top-bar">
   <div class="level-tabs">
     <button class="level-btn level-btn-basis" onclick="setLevel(this)">Basics</button>
-    <button class="level-btn active" onclick="setLevel(this)">Beginner</button>
-    <button class="level-btn" onclick="setLevel(this)">Intermediate</button>
-    <button class="level-btn" onclick="setLevel(this)">Advanced</button>
+    <button class="level-btn active" onclick="setLevel(this)">Level 1</button>
+    <button class="level-btn" onclick="setLevel(this)">Level 2</button>
+    <button class="level-btn" onclick="setLevel(this)">Level 3</button>
+    <button class="level-btn" onclick="setLevel(this)">Level 4</button>
+    <button class="level-btn" onclick="setLevel(this)">Level 5</button>
   </div>
   <div class="school-title"><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
@@ -8135,7 +8137,7 @@ function getEpLabel(epId){
   if(!ep)return epId;
   const lvl=ep.level||'';
   const num=(epId||'').replace('ep','');
-  const lvlMap={'초급':'Beginner','중급':'Intermediate','고급':'Advanced','기초':'Starter'};
+  const lvlMap={'초급':'Level 1','중급':'Level 2','고급':'Level 3','기초':'Basics'};
   return (lvlMap[lvl]||lvl)+' · ep'+num;
 }
 
@@ -8333,7 +8335,7 @@ const BASICS_TOPICS = [
 ];
 
 let curBasicsTopic = 'hangul';
-let curLevel = 'Beginner';
+let curLevel = 'Level 1';
 
 // ── HANGUL DATA ────────────────────────────────────────
 const CONSONANTS = [
@@ -8739,7 +8741,7 @@ function buildStructure(){
     +'<div class="structure-note">🔑 한국어에서 동사는 <strong>항상 마지막</strong>에 와요! 문장 끝까지 들어야 이해할 수 있어요.<br><em>The verb is ALWAYS at the end. You must hear the whole sentence to understand the action!</em></div>'
     +'<table class="structure-ex-table"><tr><th>한국어</th><th>English</th></tr>'
     +exs.map(e=>'<tr><td style="cursor:pointer" onclick="speakTTS(\''+e.ko+'\')">'+e.ko+' 🔊</td><td>'+e.en+'</td></tr>').join('')+'</table>'
-    +'<div class="structure-note" style="background:var(--purple-lt,#eeebfb);border-color:var(--purple-lt,#eeebfb);color:var(--purple);">⭐ Korean also uses <strong>particles</strong> (은/는, 이/가, 을/를) to mark roles — so word order can be flexible! We will cover particles in Beginner level.</div>'
+    +'<div class="structure-note" style="background:var(--purple-lt,#eeebfb);border-color:var(--purple-lt,#eeebfb);color:var(--purple);">⭐ Korean also uses <strong>particles</strong> (은/는, 이/가, 을/를) to mark roles — so word order can be flexible! We will cover particles in Level 1.</div>'
     +'<div class="structure-note" style="background:var(--teal-50);border-color:var(--teal-lt);color:var(--teal-dark);margin-top:14px;">📌 아래 다이어그램으로 한눈에 비교해 보세요! <em>Use the diagram below for a quick visual comparison!</em></div>'
     +'<div style="text-align:center;margin-top:12px;"><img src="data/basics/Korean_Sentence_Structure.png" alt="Korean vs English Sentence Structure" style="max-width:70%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);"></div>';
 }
