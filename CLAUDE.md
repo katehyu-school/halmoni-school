@@ -35,13 +35,16 @@
 |------|------|
 | `contents/sejong/` | 세종한국어 성인반 교재 PDF + txt |
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
-| `data/elem/book2/unit0N.json` | 초등반 unit별 데이터 (unit01~06.json) |
-| `data/elem/book3/unit01.json` | **Book 3 표준 템플릿** (unit06 구조 기반) |
+| `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) |
+| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~04.json) |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
 | `data/nhs/ep01.json` | Hangeul Quest ep01 데이터 (공원 · 첫 만남) |
 | `data/nhs/ep02.json` | Hangeul Quest ep02 데이터 (저녁 식사) |
 | `data/nhs/slides/` | Hangeul Quest 슬라이드 이미지 (PNG) |
 | `data/nhs/TTS/` | Hangeul Quest TTS 음성 파일 (MP3) |
+
+> ⚠️ **폴더 명칭 안내**: `level2/`, `level3/` 폴더는 초등반 앱의 레벨을 의미 (과거 `book2/`, `book3/`에서 2025-05-23 변경). 슬라이드/TTS 폴더는 `L2_*`, `L3_*` 접두사 유지.
+> 코드 내부 변수명(`b3*`, `book3-main` 등)은 기술 부채로 남아 있음 — 기능 변경 없이 리네이밍만 필요.
 
 ### 성인반 아키텍처 핵심
 - `core/adult-renderer.js` — 5개 패널 렌더러 (AdultRenderer)
