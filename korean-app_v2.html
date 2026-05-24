@@ -3589,7 +3589,7 @@ function renderB3Grammar(grammar) {
     if (g.images&&g.images.length) {
       out += '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;">';
       g.images.forEach(src => {
-        out += '<img src="'+src+'" alt="동사 활용" style="max-width:48%;min-width:200px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.12);object-fit:contain;">';
+        out += '<img src="'+src+'" alt="동사 활용" style="max-width:48%;min-width:200px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.12);height:auto;display:block;">';
       });
       out += '</div>';
     }
