@@ -1613,7 +1613,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u1-next-btn" onclick="sceneGo(1,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u1-script-box"></div>
-        <button class="u2-replay-btn" id="u1-replay-btn" onclick="sceneReplay(1)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u1-replay-btn" onclick="sceneReplay(1)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(1,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u1-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -1722,7 +1726,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
         <!-- Script lines -->
         <div class="u2-script-box" id="u2-script-box"></div>
-        <button class="u2-replay-btn" id="u2-replay-btn" onclick="u2ReplaySlide()">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u2-replay-btn" onclick="u2ReplaySlide()" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(2,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u2-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -1872,7 +1880,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u3-next-btn" onclick="sceneGo(3,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u3-script-box"></div>
-        <button class="u2-replay-btn" id="u3-replay-btn" onclick="sceneReplay(3)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u3-replay-btn" onclick="sceneReplay(3)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(3,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u3-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -1982,7 +1994,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u4-next-btn" onclick="sceneGo(4,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u4-script-box"></div>
-        <button class="u2-replay-btn" id="u4-replay-btn" onclick="sceneReplay(4)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u4-replay-btn" onclick="sceneReplay(4)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(4,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u4-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -2090,7 +2106,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u5-next-btn" onclick="sceneGo(5,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u5-script-box"></div>
-        <button class="u2-replay-btn" id="u5-replay-btn" onclick="sceneReplay(5)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u5-replay-btn" onclick="sceneReplay(5)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(5,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u5-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -2241,7 +2261,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u6-next-btn" onclick="sceneGo(6,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u6-script-box"></div>
-        <button class="u2-replay-btn" id="u6-replay-btn" onclick="sceneReplay(6)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u6-replay-btn" onclick="sceneReplay(6)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(6,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u6-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -2562,7 +2586,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u7-next-btn" onclick="sceneGo(7,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u7-script-box"></div>
-        <button class="u2-replay-btn" id="u7-replay-btn" onclick="sceneReplay(7)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u7-replay-btn" onclick="sceneReplay(7)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(7,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u7-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -2730,7 +2758,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u8-next-btn" onclick="sceneGo(8,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u8-script-box"></div>
-        <button class="u2-replay-btn" id="u8-replay-btn" onclick="sceneReplay(8)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u8-replay-btn" onclick="sceneReplay(8)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(8,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u8-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -2843,7 +2875,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           <button class="u2-nav-btn" id="u9-next-btn" onclick="sceneGo(9,1)">▶</button>
         </div>
         <div class="u2-script-box" id="u9-script-box"></div>
-        <button class="u2-replay-btn" id="u9-replay-btn" onclick="sceneReplay(9)">🔁 Replay</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <button class="u2-replay-btn" id="u9-replay-btn" onclick="sceneReplay(9)" style="margin:0;">🔁 Replay</button>
+          <button onclick="toggleFullScript(9,this)" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 대본 보기</button>
+        </div>
+        <div id="u9-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>
       </div>
     </div>
   </div>
@@ -8152,6 +8188,32 @@ function scenePlayAudio(n, slideIdx){
   if(btn)btn.classList.add('playing');
   st.audio.onended=()=>{if(btn)btn.classList.remove('playing');st.audio=null;};
   sceneState[n]=st;
+}
+
+function toggleFullScript(n, btn) {
+  const box = document.getElementById('u'+n+'-full-script');
+  if (!box) return;
+  const d = (n === 2) ? U2_SCENE : SCENE_DATA[n];
+  if (!d || !d.script) return;
+  if (box.style.display === 'none') {
+    box.style.display = 'block';
+    btn.textContent = '📜 대본 접기';
+    box.innerHTML = d.script.map((lines, si) =>
+      '<div style="margin-bottom:8px;padding:6px 8px;background:white;border-radius:8px;border-left:3px solid var(--teal);">' +
+      '<div style="font-size:0.7rem;color:#aaa;margin-bottom:2px;">Slide ' + (si+1) + '</div>' +
+      lines.map(ln =>
+        '<div style="margin:2px 0;">' +
+        '<button onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\'") + '\')" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:0.85rem;margin-right:4px;">🔊</button>' +
+        '<span style="color:#333;">' + ln.ko + '</span>' +
+        (ln.en ? '<span style="color:#888;font-size:0.8rem;margin-left:6px;">— ' + ln.en + '</span>' : '') +
+        '</div>'
+      ).join('') +
+      '</div>'
+    ).join('');
+  } else {
+    box.style.display = 'none';
+    btn.textContent = '📜 대본 보기';
+  }
 }
 
 function sceneReplay(n){
