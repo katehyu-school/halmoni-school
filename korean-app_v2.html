@@ -7788,7 +7788,7 @@ function renderB3Scene(unitNum) {
     '<div class="u2-scene-viewer">' +
       '<div class="u2-slide-wrap">' +
         '<img class="u2-slide-img" id="b3-scene-img" src="' + d.slides[0] + '" alt="slide" ' +
-          'onerror="var fb=this.parentElement.querySelector('.slide-load-err');if(fb)fb.style.display='block'" />' +
+          'onerror="var fb=this.parentElement.querySelector(\'.slide-load-err\');if(fb)fb.style.display=\'block\'" />' +
         '<div class="slide-load-err" style="display:none;padding:24px;text-align:center;color:#888;font-size:.9rem">⏳ 이미지 로딩 중...<br><small>(슬라이드 파일을 GitHub에 업로드해주세요)</small></div>' +
       '</div>' +
       '<div class="u2-slide-nav">' +
@@ -8404,7 +8404,7 @@ async function _kidsIdxLoad(){
   const bookColors={1:'#e67e22',2:'#27ae60',3:'#2980b9'};
   const bar=document.getElementById('kids-unit-bar');
   if(bar){
-    let bhtml='<button class="kids-unit-btn active" onclick="_kidsIdxSetUnit(this,'all')">전체</button>';
+    let bhtml='<button class="kids-unit-btn active" onclick="_kidsIdxSetUnit(this,\'all\')">전체</button>';
     for(const [bk,unitSet] of Object.entries(byBook).sort((a,b)=>Number(a[0])-Number(b[0]))){
       const units=[...unitSet].sort((a,b)=>a-b);
       bhtml+=`<span style="color:${bookColors[bk]||'#888'};font-size:0.72rem;font-weight:700;padding:0 4px 0 8px;opacity:.8">Book ${bk}</span>`;
@@ -8462,7 +8462,7 @@ function _kidsIdxRenderPage(){
   sl.forEach(v=>{
     const o=_getOnset(v.korean[0]);
     if(o!==cur){cur=o;h+=`<div class="kids-idx-section-hdr">${o}</div>`;}
-    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit},${v.book||2});closeKidsIndex()">Book ${v.book||2} · ${v.unit}과</button></div>`;
+    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit},${v.book||2});closeKidsIndex()">Level ${v.book||2} · ${v.unit}과</button></div>`;
   });
   const body=document.getElementById('kids-idx-body');
   if(body){body.innerHTML=h||'<div style="padding:30px;text-align:center;color:#aaa">검색 결과 없음</div>';body.scrollTop=0;}
