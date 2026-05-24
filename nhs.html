@@ -50,6 +50,41 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .ep-item.active .ep-num{background:var(--teal);}
 .ep-name{font-size:12.5px;color:var(--warm-500);line-height:1.35;}
 .ep-item.active .ep-name{color:var(--teal-900);font-weight:700;}
+.lt-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1.5px solid transparent;margin-top:10px;background:linear-gradient(135deg,#fffbec,#fff8e1);border-color:#f0d070;}
+.lt-item:hover{background:linear-gradient(135deg,#fff3cc,#ffebb0);border-color:#e8b830;}
+.lt-item.active{background:linear-gradient(135deg,#ffe066,#ffd700);border-color:#d4a000;}
+.lt-num{font-size:14px;width:22px;height:22px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lt-name{font-size:12.5px;color:#7a6000;font-weight:700;line-height:1.35;}
+.lt-item.active .lt-name{color:#5a4000;}
+.lt-page{padding:4px 0;}
+.lt-header{background:linear-gradient(135deg,#fffbe6,#fff3cc);border:2px solid #f0d070;border-radius:var(--radius-md);padding:18px 22px;margin-bottom:20px;}
+.lt-title{font-size:20px;font-weight:900;color:#7a5000;font-family:var(--font-serif);}
+.lt-subtitle{font-size:12px;color:#a07820;margin-top:4px;}
+.lt-prog-bar{background:var(--gray-200);border-radius:20px;height:8px;margin:14px 0 6px;}
+.lt-prog-fill{background:linear-gradient(90deg,#f5b800,#e08000);height:8px;border-radius:20px;transition:width .4s;}
+.lt-prog-label{font-size:11px;color:var(--warm-400);text-align:right;}
+.lt-ep-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--teal-lt);color:var(--teal-dark);border-radius:20px;padding:2px 9px;margin-bottom:10px;letter-spacing:.04em;}
+.lt-q-text{font-size:15px;font-weight:700;color:var(--warm-900);margin-bottom:6px;line-height:1.5;}
+.lt-q-en{font-size:12px;color:var(--warm-400);margin-bottom:14px;}
+.lt-listen-btn{background:var(--teal-lt);border:1.5px solid var(--teal-300);color:var(--teal-dark);border-radius:var(--radius-md);padding:10px 20px;font-size:14px;cursor:pointer;margin-bottom:14px;font-weight:700;}
+.lt-listen-btn:hover{background:var(--teal-300);}
+.lt-opts{display:flex;flex-direction:column;gap:8px;}
+.lt-opt{background:#fff;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);padding:11px 15px;font-size:13.5px;cursor:pointer;transition:all .15s;text-align:left;}
+.lt-opt:hover{border-color:var(--teal-300);background:var(--teal-50);}
+.lt-opt.correct{background:#e8faf0;border-color:#4caf80;color:#1a6640;font-weight:700;}
+.lt-opt.wrong{background:#fdecea;border-color:#e57373;color:#b71c1c;}
+.lt-exp{background:var(--amber-50);border:1px solid var(--amber-lt);border-radius:var(--radius-sm);padding:9px 13px;font-size:12.5px;color:var(--amber-600);margin-top:10px;line-height:1.6;}
+.lt-next-btn{margin-top:16px;background:var(--teal-md);color:#fff;border:none;border-radius:var(--radius-md);padding:11px 28px;font-size:14px;font-weight:700;cursor:pointer;width:100%;}
+.lt-next-btn:hover{background:var(--teal);}
+.lt-score-wrap{text-align:center;padding:28px 16px;}
+.lt-grade{font-size:64px;font-weight:900;line-height:1;}
+.lt-grade-lbl{font-size:18px;font-weight:700;margin:8px 0 4px;}
+.lt-score-sub{font-size:13px;color:var(--warm-500);}
+.lt-score-detail{display:flex;justify-content:center;gap:20px;margin:18px 0;flex-wrap:wrap;}
+.lt-score-box{background:var(--warm-100);border-radius:var(--radius-md);padding:12px 18px;text-align:center;}
+.lt-score-box-num{font-size:22px;font-weight:900;color:var(--teal-md);}
+.lt-score-box-lbl{font-size:11px;color:var(--warm-400);margin-top:2px;}
+.lt-retry-btn{background:linear-gradient(135deg,#f5b800,#e08000);color:#fff;border:none;border-radius:var(--radius-md);padding:12px 32px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;}
 .content-area{flex:1;min-width:0;padding:22px 26px 32px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
 .ep-header{background:var(--teal);border-radius:var(--radius-lg);padding:20px 24px;color:#fff;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-md);}
 .ep-num-badge{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.35);border-radius:var(--radius-xl);padding:4px 13px;font-size:11px;font-weight:700;white-space:nowrap;letter-spacing:0.06em;}
@@ -7315,7 +7350,133 @@ function buildSidebar(){
   document.getElementById('ep-list').innerHTML=EPISODES.map((ep,i)=>ep.disabled
     ?`<div class="ep-item" onclick="alert('준비 중이에요 😊')"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}</div></div>`
     :`<div class="ep-item${i===0?' active':''}" id="ep-item-${ep.id}" onclick="loadEp('${ep.id}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div></div>`
-  ).join('');
+  ).join('')
+  +'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>';
+}
+
+// ══════════════════════════════════════════════════════
+// ── LEVEL 1 TEST ───────────────────────────────────────
+// ══════════════════════════════════════════════════════
+const L1Q=[
+  {ep:'ep01',type:'mc',q:'처음 만났을 때 하는 인사는?',en:'Which phrase means "Nice to meet you"?',opts:['만나서 반가워요','잘 있어요','잘 먹겠습니다','안녕히 가세요'],ans:0,exp:'만나서 반가워요 = Nice to meet you! ep01 첫 만남 표현이에요.'},
+  {ep:'ep01',type:'mc',q:'"저는 정민이에요" — 저는 의 뜻은?',en:'"저는 정민이에요" — 저는 means?',opts:['I (formal) 저 = formal I','you 당신','he 그','she 그녀'],ans:0,exp:'저 = I (formal/polite). 친구에게는 나는, 어른에게는 저는을 써요.'},
+  {ep:'ep02',type:'listen',audio:'잘 먹겠습니다!',q:'잘 먹겠습니다 — 언제 써요?',en:'When do you say 잘 먹겠습니다?',opts:['밥 먹기 전 — before eating','밥 먹은 후 — after eating','잘 때 — when sleeping','학교 갈 때 — going to school'],ans:0,exp:'잘 먹겠습니다 = I will eat well! 식사 전에 하는 한국 인사예요.'},
+  {ep:'ep02',type:'mc',q:'"김치를 먹어요" — 를 의 역할은?',en:'What is the role of 를 in "김치를 먹어요"?',opts:['주어 표시 subject marker','목적어 표시 object marker','장소 표시 location marker','주제 표시 topic marker'],ans:1,exp:'을/를 = object marker. 동사의 대상(무엇을)을 표시해요.'},
+  {ep:'ep03',type:'listen',audio:'사과 두 개 주세요.',q:'사과를 몇 개 주문했어요?',en:'How many apples were ordered?',opts:['한 개 one','두 개 two','세 개 three','네 개 four'],ans:1,exp:'두 = two (고유어). 하나/둘/셋/넷은 단위명사 앞에서 한/두/세/네로 바뀌어요.'},
+  {ep:'ep03',type:'mc',q:'얼마예요? 의 뜻은?',en:'What does 얼마예요? mean?',opts:['어디예요? Where is it?','얼마예요? How much is it?','뭐예요? What is it?','누구예요? Who is it?'],ans:1,exp:'얼마예요? = How much is it? 가격을 물을 때 써요.'},
+  {ep:'ep04',type:'mc',q:'"김밥 2인분 주세요" — 인분 의 뜻은?',en:'"김밥 2인분 주세요" — what does 인분 mean?',opts:['a bottle 병','a cup 잔','a serving/portion 인분','a piece 개'],ans:2,exp:'인분 = serving / portion. 식당에서 음식 주문할 때 쓰는 단위예요.'},
+  {ep:'ep05',type:'mc',q:'한국어 어순은?',en:'What is Korean word order?',opts:['SVO (영어처럼)','SOV (주어-목적어-동사)','VSO (동사 먼저)','OVS (목적어 먼저)'],ans:1,exp:'한국어는 SOV — 동사가 항상 문장 끝에! 나는 밥을 먹어요. (I rice eat)'},
+  {ep:'ep06',type:'listen',audio:'몇 시에 만날까?',q:'이 문장의 뜻은?',en:'What does this sentence mean?',opts:['What time shall we meet?','Where shall we meet?','Who are we meeting?','When shall we eat?'],ans:0,exp:'몇 시에 = at what time. 만날까? = shall we meet? 약속 잡을 때 써요.'},
+  {ep:'ep06',type:'mc',q:'"도서관에서 공부해요" — 에서 의 역할은?',en:'What does 에서 mark in "도서관에서 공부해요"?',opts:['목적어 object','행동 장소 action location','방향 direction','도구 instrument'],ans:1,exp:'에서 = at/in (for actions). 무언가를 하는 장소 앞에 써요. 에 = location of existence.'},
+  {ep:'ep07',type:'listen',audio:'가방이 의자 위에 있어요.',q:'가방은 어디에 있어요?',en:'Where is the bag?',opts:['의자 위 on the chair','의자 아래 under the chair','의자 옆 next to the chair','의자 앞 in front of the chair'],ans:0,exp:'위에 = on top of / above. 아래에 = below. 위/아래/옆/앞/뒤 위치 표현!'},
+  {ep:'ep07',type:'mc',q:'"열쇠가 없어요" — 없어요 의 반대말은?',en:'What is the opposite of 없어요?',opts:['있어요 it exists / it\'s here','가요 going','먹어요 eating','해요 doing'],ans:0,exp:'있어요 ↔ 없어요. There is ↔ There isn\'t. 위치 표현의 핵심!'},
+  {ep:'ep08',type:'mc',q:'고유어 숫자 "여섯" 은?',en:'Native Korean number "여섯" = ?',opts:['5 다섯','6 여섯','7 일곱','8 여덟'],ans:1,exp:'고유어 숫자: 하나(1) 둘(2) 셋(3) 넷(4) 다섯(5) 여섯(6) 일곱(7) 여덟(8)'},
+  {ep:'ep08',type:'listen',audio:'딸기 한 박스 주세요.',q:'뭘 주문했어요?',en:'What was ordered?',opts:['딸기 한 박스 one box of strawberries','사과 한 박스 one box of apples','딸기 두 박스 two boxes of strawberries','포도 한 박스 one box of grapes'],ans:0,exp:'딸기 = strawberries. 한 박스 = one box. 한 = 하나 단위 앞에서!'},
+  {ep:'ep09',type:'mc',q:'"어제 뭐 했어요?" — 했어요 는 어떤 시제?',en:'"했어요" — which tense is this?',opts:['현재 present','과거 past','미래 future','진행 progressive'],ans:1,exp:'했어요 = 하다 + 았어요 → 했어요. 과거형! 어제(yesterday)와 함께 써요.'},
+  {ep:'ep09',type:'listen',audio:'자전거를 타고 있어요.',q:'지금 뭐 하고 있어요?',en:'What are they doing right now?',opts:['자전거 타기 riding a bike','밥 먹기 eating','자기 sleeping','공부하기 studying'],ans:0,exp:'타고 있어요 = is riding (진행형). ~고 있어요 = be + -ing!'},
+  {ep:'ep10',type:'listen',audio:'어서 오세요.',q:'어서 오세요 — 언제 써요?',en:'When do you use 어서 오세요?',opts:['손님이 왔을 때 when a guest arrives','밥 먹을 때 when eating','잘 때 when sleeping','공부할 때 when studying'],ans:0,exp:'어서 오세요 = Welcome! 손님이 왔을 때, 가게에 들어왔을 때 써요.'},
+  {ep:'ep10',type:'mc',q:'"어떻게 지내셨어요?" — 셨어요 의 역할은?',en:'What does -셨어요 do in "어떻게 지내셨어요?"?',opts:['과거 부정 past negative','높임 표현 honorific marker','미래 표현 future tense','의문문 question marker'],ans:1,exp:'-셨어요 = honorific past. 어른이나 존중하는 사람에게 써요. 지냈어요 → 지내셨어요!'},
+  {ep:'ep10',type:'mc',q:'"덕분에 잘 지내고 있어요" — 덕분에 의 뜻은?',en:'What does 덕분에 mean?',opts:['thanks to you 덕분에','in spite of you','without you','instead of you'],ans:0,exp:'덕분에 = thanks to you / owing to you. 따뜻하고 겸손한 표현이에요!'},
+  {ep:'ep10',type:'mc',q:'"얘들아, 인사해야지!" — 해야지 의 뜻은?',en:'What does ~해야지 mean?',opts:['하지 마! don\'t do it','해야 해 you should do it (gentle)','했어 I did it','할 거야 I will do it'],ans:1,exp:'~해야지 = you should (gentle nudge). 부모님이 아이에게 부드럽게 권유할 때 써요.'},
+];
+
+let ltIdx=0,ltScore=0,ltAnswered=false;
+
+function loadLevelTest(){
+  document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
+  const si=document.getElementById('lt-sidebar-item');
+  if(si)si.classList.add('active');
+  ltIdx=0;ltScore=0;ltAnswered=false;
+  document.getElementById('content-area').innerHTML=renderLTPage();
+}
+function renderLTPage(){
+  return`<div class="lt-page">`
+    +`<div class="lt-header">`
+      +`<div class="lt-title">🏆 Level 1 마감 테스트</div>`
+      +`<div class="lt-subtitle">ep01~ep10 · 전체 복습 · 20문제</div>`
+      +`<div class="lt-prog-bar"><div class="lt-prog-fill" id="lt-prog-fill" style="width:0%"></div></div>`
+      +`<div class="lt-prog-label" id="lt-prog-label">0 / 20</div>`
+    +`</div>`
+    +`<div id="lt-q-area"></div>`
+  +`</div>`;
+}
+function renderLT(){
+  const q=L1Q[ltIdx];
+  const progPct=Math.round(ltIdx/L1Q.length*100);
+  const pf=document.getElementById('lt-prog-fill');
+  const pl=document.getElementById('lt-prog-label');
+  if(pf)pf.style.width=progPct+'%';
+  if(pl)pl.textContent=ltIdx+' / '+L1Q.length;
+  ltAnswered=false;
+  const area=document.getElementById('lt-q-area');
+  if(!area)return;
+  const listenBtn=q.type==='listen'
+    ?`<button class="lt-listen-btn" onclick="speakTTS('${q.audio.replace(/'/g,"\'")}')">🔊 듣기</button><br>`
+    :'';
+  area.innerHTML=
+    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'한국어 소개':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':'손님 초대'}</div>`
+    +`<div class="lt-q-text">${ltIdx+1}. ${q.q}</div>`
+    +`<div class="lt-q-en">${q.en}</div>`
+    +listenBtn
+    +`<div class="lt-opts">`
+    +q.opts.map((o,i)=>`<button class="lt-opt" id="lt-opt-${i}" onclick="ltChoose(${i})">${o}</button>`).join('')
+    +`</div><div id="lt-exp-area"></div>`;
+}
+function ltChoose(idx){
+  if(ltAnswered)return;
+  ltAnswered=true;
+  const q=L1Q[ltIdx];
+  const correct=q.ans===idx;
+  if(correct)ltScore++;
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('lt-opt-'+i);
+    if(!el)return;
+    el.disabled=true;
+    if(i===q.ans)el.classList.add('correct');
+    else if(i===idx&&!correct)el.classList.add('wrong');
+  });
+  document.getElementById('lt-exp-area').innerHTML=
+    `<div class="lt-exp">${correct?'✅':'❌'} ${q.exp}</div>`
+    +`<button class="lt-next-btn" onclick="ltNext()">${ltIdx===L1Q.length-1?'📊 결과 보기':'다음 →'}</button>`;
+}
+function ltNext(){
+  ltIdx++;
+  if(ltIdx>=L1Q.length){renderLTScore();return;}
+  const pf=document.getElementById('lt-prog-fill');
+  const pl=document.getElementById('lt-prog-label');
+  if(pf)pf.style.width=Math.round(ltIdx/L1Q.length*100)+'%';
+  if(pl)pl.textContent=ltIdx+' / '+L1Q.length;
+  renderLT();
+}
+function renderLTScore(){
+  const total=L1Q.length;
+  const pct=Math.round(ltScore/total*100);
+  const pf=document.getElementById('lt-prog-fill');
+  const pl=document.getElementById('lt-prog-label');
+  if(pf)pf.style.width='100%';
+  if(pl)pl.textContent=total+' / '+total;
+  let grade,color,msg,next;
+  if(pct>=90){grade='A';color='#2e7d50';msg='🏆 완벽해요!';next='Level 2로 갈 준비 됐어요! 🚀';}
+  else if(pct>=80){grade='B';color='var(--teal-dark)';msg='🌟 잘했어요!';next='조금만 더 연습하면 Level 2 도전할 수 있어요!';}
+  else if(pct>=70){grade='C';color='var(--amber-600)';msg='👍 괜찮아요!';next='헷갈린 에피소드를 복습하고 다시 도전해봐요!';}
+  else{grade='D';color='#c0392b';msg='💪 더 연습해요!';next='Level 1 에피소드를 다시 복습하고 재도전해봐요!';}
+  document.getElementById('lt-q-area').innerHTML=
+    `<div class="lt-score-wrap">`
+    +`<div class="lt-grade" style="color:${color}">${grade}</div>`
+    +`<div class="lt-grade-lbl" style="color:${color}">${msg}</div>`
+    +`<div class="lt-score-detail">`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${ltScore}/${total}</div><div class="lt-score-box-lbl">정답</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${pct}%</div><div class="lt-score-box-lbl">정확도</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${total-ltScore}</div><div class="lt-score-box-lbl">오답</div></div>`
+    +`</div>`
+    +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +`<button class="lt-retry-btn" onclick="ltRetry()">↺ 다시 풀기</button>`
+    +`</div>`;
+}
+function ltRetry(){
+  ltIdx=0;ltScore=0;ltAnswered=false;
+  document.getElementById('content-area').innerHTML=renderLTPage();
+  renderLT();
 }
 
 async function loadEp(epId){
