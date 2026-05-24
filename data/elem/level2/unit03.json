@@ -1,0 +1,500 @@
+{
+  "unit": 3,
+  "title": "언제 가요?",
+  "book": 2,
+  "sections": {
+    "vocab": {
+      "items": [
+        {
+          "id": "v03_01",
+          "category": "시간",
+          "emoji": "🌅",
+          "korean": "아침",
+          "english": "morning",
+          "romanization": "a-chim",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_02",
+          "category": "시간",
+          "emoji": "🌆",
+          "korean": "저녁",
+          "english": "evening",
+          "romanization": "jeo-nyeok",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_03",
+          "category": "시간",
+          "emoji": "📅",
+          "korean": "오늘",
+          "english": "today",
+          "romanization": "o-neul",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_04",
+          "category": "시간",
+          "emoji": "📆",
+          "korean": "내일",
+          "english": "tomorrow",
+          "romanization": "nae-il",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_05",
+          "category": "시간",
+          "emoji": "❓",
+          "korean": "언제",
+          "english": "when",
+          "romanization": "eon-je",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_06",
+          "category": "동사구",
+          "emoji": "🏊",
+          "korean": "수영을 해요",
+          "english": "swim",
+          "romanization": "su-yeong-eul hae-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_07",
+          "category": "동사구",
+          "emoji": "🤸",
+          "korean": "운동을 해요",
+          "english": "exercise",
+          "romanization": "un-dong-eul hae-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_08",
+          "category": "동사구",
+          "emoji": "📝",
+          "korean": "숙제를 해요",
+          "english": "do homework",
+          "romanization": "suk-je-reul hae-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_09",
+          "category": "동사구",
+          "emoji": "🌊",
+          "korean": "바다에 가요",
+          "english": "go to the beach",
+          "romanization": "ba-da-e ga-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_10",
+          "category": "동사구",
+          "emoji": "⛰️",
+          "korean": "산에 가요",
+          "english": "go to the mountain",
+          "romanization": "sa-ne ga-yo",
+          "audio": null,
+          "exampleSentence": null
+        },
+        {
+          "id": "v03_11",
+          "category": "동사구",
+          "emoji": "📱",
+          "korean": "전화를 해요",
+          "english": "make a phone call",
+          "romanization": "jeon-hwa-reul hae-yo",
+          "audio": null,
+          "exampleSentence": null
+        }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g03_time_e",
+          "title": "Time + 에",
+          "subtitle": "Add 에 after time expressions",
+          "pattern": "아침에 / 저녁에 → but: 오늘 / 내일 (no 에!)",
+          "meaning": "time particle",
+          "description": "We add 에 after time-of-day words (morning, evening). Day words like 오늘/내일 don't use 에.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "⏰ Time of day → add 에",
+              "examples": [
+                "아침에 수영을 해요.",
+                "저녁에 운동을 해요."
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "📅 Day words → NO 에",
+              "examples": [
+                "오늘 바다에 가요.",
+                "내일 산에 가요."
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "아침에 수영을 해요.",
+              "english": "I swim in the morning.",
+              "highlight": "에"
+            },
+            {
+              "korean": "저녁에 운동을 해요.",
+              "english": "I exercise in the evening.",
+              "highlight": "에"
+            },
+            {
+              "korean": "내일 바다에 가요.",
+              "english": "I go to the beach tomorrow.",
+              "highlight": null
+            },
+            {
+              "korean": "오늘 숙제를 해요.",
+              "english": "I do homework today.",
+              "highlight": null
+            },
+            {
+              "korean": "아침에 전화를 해요.",
+              "english": "I make a phone call in the morning.",
+              "highlight": "에"
+            },
+            {
+              "korean": "내일 산에 가요.",
+              "english": "I go to the mountain tomorrow.",
+              "highlight": null
+            }
+          ],
+          "qna": [
+            {
+              "question": "언제 수영을 해요?",
+              "answer": "아침에 수영을 해요."
+            },
+            {
+              "question": "언제 운동을 해요?",
+              "answer": "저녁에 운동을 해요."
+            }
+          ]
+        },
+        {
+          "id": "g03_eul_reul",
+          "title": "을/를",
+          "subtitle": "Marks the object of the sentence",
+          "pattern": "Consonant ending → 을 / Vowel ending → 를",
+          "meaning": "object marker",
+          "description": "수영해요 → 수영을 해요. When a noun precedes 해요, add 을/를 to mark it as the object.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "Consonant ending → 을",
+              "examples": [
+                "수영 → 수영을 (ends in ㅇ)",
+                "운동 → 운동을 (ends in ㅇ)",
+                "사진 → 사진을 (ends in ㄴ)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "Vowel ending → 를",
+              "examples": [
+                "숙제 → 숙제를 (ends in ㅔ)",
+                "전화 → 전화를 (ends in ㅏ)",
+                "태권도 → 태권도를 (ends in ㅗ)"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "수영을 해요.",
+              "english": "I swim.",
+              "highlight": "을"
+            },
+            {
+              "korean": "운동을 해요.",
+              "english": "I exercise.",
+              "highlight": "을"
+            },
+            {
+              "korean": "숙제를 해요.",
+              "english": "I do homework.",
+              "highlight": "를"
+            },
+            {
+              "korean": "전화를 해요.",
+              "english": "I make a phone call.",
+              "highlight": "를"
+            }
+          ],
+          "qna": [
+            {
+              "question": "수영을 언제 해요?",
+              "answer": "아침에 수영을 해요."
+            },
+            {
+              "question": "숙제를 언제 해요?",
+              "answer": "내일 숙제를 해요."
+            }
+          ]
+        },
+        {
+          "id": "g03_hago",
+          "title": "하고 — and / with",
+          "subtitle": "Listing vs. Companion",
+          "pattern": "N하고 N (and) · N이/가 N하고 (with N)",
+          "meaning": "and / with",
+          "description": "하고 can mean 'and' (listing) or 'with' (companion).",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "📌 하고 = and (listing)",
+              "examples": [
+                "엄마하고 할머니 = Mom AND Grandma",
+                "사과하고 바나나 = apple and banana"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "📌 하고 = with (companion)",
+              "examples": [
+                "엄마가 할머니하고 전화를 해요.",
+                "나는 친구하고 놀아요."
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "엄마하고 할머니가 있어요.",
+              "english": "Mom and Grandma are here.",
+              "highlight": "하고"
+            },
+            {
+              "korean": "엄마가 할머니하고 전화를 해요.",
+              "english": "Mom is on the phone with Grandma.",
+              "highlight": "하고"
+            },
+            {
+              "korean": "나는 형하고 태권도를 해요.",
+              "english": "I do taekwondo with my brother.",
+              "highlight": "하고"
+            }
+          ]
+        },
+        {
+          "id": "g03_halka",
+          "title": "~할까? — Shall we...?",
+          "subtitle": "Suggesting together",
+          "pattern": "Verb stem + ㄹ까?",
+          "meaning": "Shall we...? / Should we...?",
+          "description": "Used to suggest doing something together or ask for someone's opinion.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "💡 ~ㄹ까? = Shall we?",
+              "examples": [
+                "숙제부터 할까? = Shall we do homework first?",
+                "가게 갈까? = Shall we go to the store?"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "그럼 숙제부터 할까?",
+              "english": "Then shall we do homework first?",
+              "highlight": "할까"
+            },
+            {
+              "korean": "우리 같이 갈까?",
+              "english": "Shall we go together?",
+              "highlight": "갈까"
+            },
+            {
+              "korean": "밥 먹을까?",
+              "english": "Shall we eat?",
+              "highlight": "먹을까"
+            }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "exercises": [],
+      "quiz_items": [
+        {
+          "scene": "🌙🏊",
+          "english": "When does Seulgi swim? → She swims in the evening.",
+          "hint": "슬기 ends in ㅣ → 는 (topic). 저녁에 = in the evening.",
+          "answer": [
+            "슬기",
+            "는",
+            "저녁에",
+            "수영",
+            "을",
+            "해요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "name",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "🌅🏊",
+          "english": "When does Minsu swim? → He swims in the morning.",
+          "hint": "민수 ends in ㅜ → 는 (topic). 아침에 = in the morning.",
+          "answer": [
+            "민수",
+            "는",
+            "아침에",
+            "수영",
+            "을",
+            "해요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "name",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "🌙🏃",
+          "english": "When does Seongjin exercise? → He exercises in the evening.",
+          "hint": "성진 ends in ㄴ → 이 (subject). 저녁에 = in the evening.",
+          "answer": [
+            "성진",
+            "이",
+            "저녁에",
+            "운동",
+            "을",
+            "해요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "name",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "🌊☀️",
+          "english": "When does Seulgi go to the beach? → She goes today.",
+          "hint": "오늘 = today (no 에!). 바다에 가요 = goes to the beach.",
+          "answer": [
+            "슬기",
+            "는",
+            "오늘",
+            "바다에",
+            "가요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "place",
+            "verb"
+          ]
+        },
+        {
+          "scene": "📅⛰️",
+          "english": "When does Boram go to the mountain? → She goes tomorrow.",
+          "hint": "내일 = tomorrow (no 에!). 산에 가요 = goes to the mountain.",
+          "answer": [
+            "보람",
+            "이",
+            "내일",
+            "산에",
+            "가요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "place",
+            "verb"
+          ]
+        },
+        {
+          "scene": "🌅📞",
+          "english": "When does Mira make a phone call? → She calls in the morning.",
+          "hint": "아침에 = in the morning. 전화를 해요 (를 after vowel).",
+          "answer": [
+            "미라",
+            "는",
+            "아침에",
+            "전화",
+            "를",
+            "해요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "name",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "📅📝",
+          "english": "When does Jaewoo do homework? → He does it tomorrow.",
+          "hint": "내일 = tomorrow (no 에!). 숙제를 해요 (를 after vowel).",
+          "answer": [
+            "재우",
+            "는",
+            "내일",
+            "숙제",
+            "를",
+            "해요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "name",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "🌅🏃",
+          "english": "When does Junyeong exercise? → He exercises in the morning.",
+          "hint": "준영 ends in ㅇ → 이 (subject). 아침에 = in the morning.",
+          "answer": [
+            "준영",
+            "이",
+            "아침에",
+            "운동",
+            "을",
+            "해요"
+          ],
+          "types": [
+            "name",
+            "particle",
+            "time",
+            "name",
+            "particle",
+            "verb"
+          ]
+        }
+      ]
+    }
+  }
+}

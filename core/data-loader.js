@@ -2,7 +2,7 @@
  * data-loader.js  v0.1.0
  * 한글학교 앱 — JSON 데이터 로더
  * 
- * 역할: /data/elem/book2/unit{NN}.json 을 fetch해서
+ * 역할: /data/elem/level2/unit{NN}.json 을 fetch해서
  *       window.HalmoniCore.data 에 캐시
  *
  * 사용:
@@ -13,7 +13,7 @@
  */
 
 (function () {
-  const BASE_PATH = 'data/elem/book2';
+  const BASE_PATH = 'data/elem/level2';
 
   /** 이미 로드된 unit 캐시 */
   const _cache = {};

@@ -3414,8 +3414,8 @@ async function loadBook3Unit(n) {
   }
   // 없으면 fetch (서버 환경, unit03+ 대비)
   const pad = String(n).padStart(2,'0');
-  const resp = await fetch('data/elem/book3/unit'+pad+'.json');
-  if (!resp.ok) throw new Error('Cannot load book3 unit '+n);
+  const resp = await fetch('data/elem/level3/unit'+pad+'.json');
+  if (!resp.ok) throw new Error('Cannot load level3 unit '+n);
   const data = await resp.json();
   b3DataCache[n] = data;
   return data;
@@ -3911,9 +3911,16 @@ function switchUnit(n){
   switchScene(n);
   window.scrollTo(0,0);
 }// 단어 인덱스에서 해당 과 새단어 탭으로 직접 이동
-function openUnitVocab(n){
+function openUnitVocab(n, book){
+  const bk = book || 2;
+  if(bk === 3){
+    // Book 3 → Level 3로 전환 후 해당 유닛 vocab 탭
+    selectBook(3);
+    setTimeout(()=>{ switchBook3Unit(n).then(()=>b3SwitchTab('vocab')); }, 50);
+    return;
+  }
+  // Book 2
   switchUnit(n);
-  // 유닛별 분기
   if(n===6) switchSection6('vocab');
   else if(n===7) switchSection7('vocab');
   else if(n===8) switchSection8('vocab');
@@ -8356,6 +8363,7 @@ function closeKidsIndex(){
 }
 async function _kidsIdxLoad(){
   const words=[];
+  // ── Book 2 (HalmoniCore units 1~9) ──
   for(let n=1;n<=9;n++){
     try{
       const d=typeof HalmoniCore!=='undefined'?await HalmoniCore.loadUnit(n):null;
@@ -8363,20 +8371,51 @@ async function _kidsIdxLoad(){
       const vocab=(d.sections&&d.sections.vocab)?d.sections.vocab:d.vocab;
       if(!vocab)continue;
       const items=vocab.items||(Array.isArray(vocab)?vocab:[]);
-      items.forEach(v=>{if(v.korean)words.push({korean:v.korean,english:v.english||'',romanization:v.romanization||'',emoji:v.emoji||'',unit:n,book:d.book||2});});
+      items.forEach(v=>{if(v.korean)words.push({korean:v.korean,english:v.english||'',romanization:v.romanization||'',emoji:v.emoji||'',unit:n,book:2});});
     }catch(e){console.warn('idx unit'+n,e);}
+  }
+  // ── Book 3 (B3_INLINE_DATA) ──
+  if(typeof B3_INLINE_DATA!=='undefined'){
+    for(const [nStr,d] of Object.entries(B3_INLINE_DATA)){
+      const n=parseInt(nStr);
+      try{
+        const vocab=(d.sections&&d.sections.vocab)?d.sections.vocab:null;
+        if(!vocab)continue;
+        // Book 3 vocab: {카테고리명: [{kr,en,rom,emoji},...], ...}
+        for(const items of Object.values(vocab)){
+          if(!Array.isArray(items))continue;
+          items.forEach(v=>{
+            const kr=v.kr||v.korean;
+            if(kr)words.push({korean:kr,english:v.en||v.english||'',romanization:v.rom||v.romanization||'',emoji:v.emoji||'',unit:n,book:3});
+          });
+        }
+      }catch(e){console.warn('idx b3 unit'+n,e);}
+    }
   }
   words.sort((a,b)=>_koCompare(a.korean,b.korean));
   _kidsIdxAll=words;
   _kidsIdxLoaded=true;
-  // 과 필터 버튼
-  const units=[...new Set(words.map(w=>w.unit))].sort((a,b)=>a-b);
+  // ── Book-aware 필터 버튼 ──
+  const byBook={};
+  words.forEach(w=>{
+    if(!byBook[w.book])byBook[w.book]=new Set();
+    byBook[w.book].add(w.unit);
+  });
+  const bookColors={1:'#e67e22',2:'#27ae60',3:'#2980b9'};
   const bar=document.getElementById('kids-unit-bar');
-  if(bar)bar.innerHTML='<button class="kids-unit-btn active" onclick="_kidsIdxSetUnit(this,\'all\')">전체</button>'+
-    units.map(n=>`<button class="kids-unit-btn" onclick="_kidsIdxSetUnit(this,${n})">${n}과</button>`).join('');
+  if(bar){
+    let bhtml='<button class="kids-unit-btn active" onclick="_kidsIdxSetUnit(this,'all')">전체</button>';
+    for(const [bk,unitSet] of Object.entries(byBook).sort((a,b)=>Number(a[0])-Number(b[0]))){
+      const units=[...unitSet].sort((a,b)=>a-b);
+      bhtml+=`<span style="color:${bookColors[bk]||'#888'};font-size:0.72rem;font-weight:700;padding:0 4px 0 8px;opacity:.8">Book ${bk}</span>`;
+      bhtml+=units.map(n=>`<button class="kids-unit-btn" onclick="_kidsIdxSetUnit(this,'${bk}-${n}')" style="border-color:${bookColors[bk]||'#ccc'}">${n}과</button>`).join('');
+    }
+    bar.innerHTML=bhtml;
+  }
 }
+
 function _kidsIdxSetUnit(btn,unit){
-  _kidsIdxUnit=unit;
+  _kidsIdxUnit=unit; // 'all' | '2-1' | '3-2' etc
   document.querySelectorAll('.kids-unit-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   _kidsIdxFilter();
@@ -8384,7 +8423,10 @@ function _kidsIdxSetUnit(btn,unit){
 function _kidsIdxFilter(){
   const q=(document.getElementById('kids-idx-search').value||'').toLowerCase();
   let w=_kidsIdxAll.slice();
-  if(_kidsIdxUnit!=='all')w=w.filter(x=>x.unit===_kidsIdxUnit);
+  if(_kidsIdxUnit!=='all'){
+    const [bk,un]=_kidsIdxUnit.toString().split('-').map(Number);
+    w=w.filter(x=>x.book===bk&&x.unit===un);
+  }
   if(q)w=w.filter(x=>x.korean.includes(q)||x.english.toLowerCase().includes(q));
   _kidsIdxFiltered=w;_kidsIdxPage=0;
   // 점프바
@@ -8420,7 +8462,7 @@ function _kidsIdxRenderPage(){
   sl.forEach(v=>{
     const o=_getOnset(v.korean[0]);
     if(o!==cur){cur=o;h+=`<div class="kids-idx-section-hdr">${o}</div>`;}
-    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit});closeKidsIndex()">Book ${v.book||2} · ${v.unit}과</button></div>`;
+    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit},${v.book||2});closeKidsIndex()">Book ${v.book||2} · ${v.unit}과</button></div>`;
   });
   const body=document.getElementById('kids-idx-body');
   if(body){body.innerHTML=h||'<div style="padding:30px;text-align:center;color:#aaa">검색 결과 없음</div>';body.scrollTop=0;}
