@@ -36,7 +36,7 @@
 | `contents/sejong/` | 세종한국어 성인반 교재 PDF + txt |
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
 | `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) |
-| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~04.json) |
+| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~05.json) |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
 | `data/nhs/ep01.json` | Hangeul Quest ep01 데이터 (공원 · 첫 만남) |
 | `data/nhs/ep02.json` | Hangeul Quest ep02 데이터 (저녁 식사) |
@@ -226,6 +226,35 @@ const urlName   = _hc ? _hc.urlName : null;
 > ⚠️ **현재 상태**: ep01, ep02 리뷰 중. 공개용 (학생 친구들에게도 오픈 예정).
 > Hangeul Quest 표준 템플릿 **`data/nhs/ep_TEMPLATE.json` 생성 완료** ✅
 
+### ✅ 2026-05-24 완료 작업 (nhs.html + data/nhs/)
+
+#### Basics > 문장 구조 — 의문문 탭 추가
+- `buildStructure()` 함수를 btab 시스템으로 리팩터링
+- **SOV 어순** 탭 + **❓ 의문문** 탭 (2탭 구조)
+- 의문문 내용: EN vs KR 어순 비교 / Yes-No 질문 (끝음절 올림 ↗) / wh-question 표 / 핵심 정리 박스
+- 예시: 애라가 유치원에 가요. → 애라가 유치원에 가요? ↗ (어순 그대로, 발음만 올림)
+
+#### ep10 (어서 오세요 / 리암네 집) 완성
+- ✅ `data/nhs/ep10.json` 작성 (리암네 집, 어른들 방문 예절)
+- ✅ 캐릭터: 리암엄마(coral), 미래엄마(teal), 리암(blue), 카요(purple)
+- ✅ 대본 11줄, 슬라이드 11장 1:1 매핑
+- ✅ Grammar 5개: g10_welcome(어서 오세요), g10_honorific(-셨어요 경어 표), g10_deokbune(덕분에), g10_goisseo(~고 있어요 vs ~고 계세요 비교), g10_hayaji(~해야지/해야겠다)
+- ✅ banmal_jondaemal: 에피소드 자체가 예시 — 어른↔어른 존댓말, 어른→아이 반말, 아이→어른 존댓말; adult_dialogue 포함
+- ✅ real_life: 한국 방문 예절, 호칭 문화, ㅂ니다체 팁
+- ✅ pronunciation: 비음화(감사합니다→[감사함니다]), 셨어요→[셔써요]
+- ✅ nhs.html EPISODE_DATA 인라인 추가
+- ✅ 사이드바 ep10 활성화
+- ✅ 슬라이드 11장 (리암이네 집1~11.png) / TTS 11개 복사 완료
+- ⚠️ TTS 파일 8번 typo: `8안녕_slidee8.mp3` (double 'e') — 실제 파일명 그대로 유지
+
+#### Level 1 마감 테스트 추가
+- ep10 아래 사이드바에 🏆 Level 1 마감 테스트 항목 추가
+- **20문제**: ep01~ep10 전 에피소드 커버, mc + listen 혼합
+- **A/B/C/D 등급**: 90%+ = A (🏆 최고!), 70%+ = B (🌟 훌륭해요!), 50%+ = C (👍 잘했어요!), 미만 = D (🌱 다시 해봐요)
+- 구현 함수: `loadLevelTest()`, `renderLTPage()`, `renderLT()`, `ltChoose()`, `ltNext()`, `renderLTScore()`, `ltRetry()`
+- CSS 클래스: `.lt-item`, `.lt-page`, `.lt-header`, `.lt-prog-bar`, `.lt-prog-fill`, `.lt-ep-badge`, `.lt-opts`, `.lt-opt.correct/.wrong`, `.lt-score-wrap`, `.lt-grade`
+- **버그 수정**: `loadLevelTest()` 가 `renderLT()` 호출 누락 → 헤더만 보이고 문제 안 나오는 문제 수정
+
 ## 📋 완료된 주요 작업 (korean-app_v2.html)
 
 - 06과 전체 구현 (6탭 구조)
@@ -245,6 +274,31 @@ const urlName   = _hc ? _hc.urlName : null;
   - `openUnitVocab(n)` — 배지 클릭 시 해당 과 **새단어 탭으로 직접 이동** (unit별 분기: 6/7/8과는 각 전용 함수)
   - 초성 점프 scroll: `requestAnimationFrame()` 래핑 → DOM 렌더 후 `h.offsetTop - body.offsetTop - 8`
   - 배지 표시: "몇과" → "Book N · 몇과" (`book` 필드 — `_kidsIdxLoad()`에서 `d.book||2` 저장)
+
+### ✅ 2026-05-24 완료 작업 (korean-app_v2.html)
+- **Level 3 5과 추가**: `data/elem/level3/unit05.json` 신규 작성
+  - 제목: 내일은 친구하고 레모네이드를 팔 거예요
+  - Goal: 과거와 미래 계획을 말할 수 있어요
+  - Vocab 4카테고리: 시간(어제/오늘/내일), 사람/관계, 동사(만들다/팔다/신나다), 부사/표현
+  - Grammar 4개: ~았/었어요(과거형), ~(으)ㄹ 거예요(미래형), ~ㄹ 수 있어요(능력), ~아/어서 좋아요(이유)
+  - Practice: 대화연습 3장면, fill_items 5, listen_quiz 3, step1_chunks 6, step2_words 3
+- **Level 3 사이드바 5과 버튼 추가**: `b3-lesson-5` → `switchBook3Unit(5)`
+- **B3_INLINE_DATA에 unit05 JSON 인라인 추가** (file:// 로컬 호환)
+- **switchBook3Unit 활성 루프 수정**: `[1,2,3,4]` → `[1,2,3,4,5]`
+- **Level 3 사이드바 이모지 제거** — 1과~5과 제목에서 이모지 삭제 (깔끔한 UI)
+
+### ✅ 2026-05-25 완료 작업 (korean-app_v2.html + level3 JSON)
+- **Level 3 실생활 탭 추가**: 메인 탭에 🌍 실생활 탭 신설 (자기점검 왼쪽)
+  - unit01~05.json에 `real_life` 섹션 추가 — 영상 파생 실생활 대화 2개씩
+  - `renderB3RealLife()` 함수 신규 작성 (Q/A 말풍선 + 요약 문장 + 🔊 듣기 버튼)
+- **Level 3 쓰기 서브탭 추가**: 연습 탭 하위에 ✏️ 쓰기 추가
+  - 서브탭 순서: 🎭 연습 / 🔊 듣기 / **✏️ 쓰기** / 🧩 문장 1 / 🧩 문장 2
+  - unit01~05.json에 `write_items` 추가 (3문제씩 — 질문 + 힌트 + 모범 답안)
+  - `renderB3Write()`, `b3WriteReveal()`, `b3WriteNext()` 함수 신규 작성
+- **동사활용 이미지 업데이트**:
+  - unit04 g04_future: `동사 활용_쉬다/가다/놀다/먹다(미래).png` 4개 추가 → `slides/L3_04/`
+  - unit05 g05_past: `동사 활용1/2.png` → `동사 활용_놀다/만들다.png` 교체
+- **b3-snav 탭 CSS 축소**: `font-size:0.78rem; padding:7px 11px` — 탭 6개 한 줄 표시
 
 ---
 
@@ -388,7 +442,7 @@ const urlName   = _hc ? _hc.urlName : null;
 | 7 | 🍳 미래네 부엌 | 엄마, 내 도시락 어디 있어요? | 위치를 말할 수 있어요 (등교 시간) | 📝 PDF에 스크립트 |
 | 8 | 🏮 재래 시장 | 딸기 한 박스하고 사과 다섯 개 주세요 | 고유어 숫자로 셀 수 있어요 | 📝 PDF에 스크립트 |
 | 9 | 🌸 한강공원 | 한강 공원에 소풍을 가요 | 날씨 표현 (리암 가족) | 📝 PDF에 스크립트 |
-| 10 | 🏠 리암네 집 | 어서 오세요 | 손님을 초대할 수 있어요 (어른들 대화 시범) | 📝 PDF에 스크립트 |
+| 10 | 🏠 리암네 집 | 어서 오세요 | 손님을 초대할 수 있어요 (어른들 대화 시범) | ✅ 완성 |
 
 **원본 PDF**: `C:\Users\kateh\Documents\halmoni-school_standby\HQ에피소드 스크립.pdf`
 
@@ -507,8 +561,19 @@ const urlName   = _hc ? _hc.urlName : null;
 - ✅ pronunciation: 맑다→[막따] 겹받침
 - ✅ self_check, banmal_jondaemal, adult_dialogue 포함
 - ✅ nhs.html EPISODE_DATA 인라인 추가
-- ✅ 사이드바 ep09 활성화 + ep10 disabled
+- ✅ 사이드바 ep09 활성화
 - ✅ 슬라이드 5장 (자전거여행1~5.png) / TTS 5개 복사 완료
+
+### ✅ ep10 진행 상태 (2026-05-24 완료)
+- ✅ `data/nhs/ep10.json` 작성 (어서 오세요, 리암네 집, 방문 예절)
+- ✅ goal {ko, en} object 형식
+- ✅ pronunciation: 비음화(감사합니다→[감사함니다]), 셨어요→[셔써요]
+- ✅ self_check: 5개 항목
+- ✅ banmal_jondaemal: adult_dialogue 추가 (어른들 방문 대화)
+- ✅ nhs.html EPISODE_DATA 인라인 추가
+- ✅ 사이드바 ep10 활성화
+- ✅ 슬라이드 11장 (리암이네 집1~11.png) / TTS 11개 복사 완료
+- ✅ **Level 1 마감 테스트** ep10 아래 추가 완료 (20문제, A/B/C/D 등급)
 
 ### 🆕 Ep5 자료 준비됨 (다음 세션 작업 대기)
 - **장면**: 🏫 학교 교실 (PDF: BTS '보고 싶다' 활용 한국어 소개 + 스터디 그룹 만들기)
@@ -531,16 +596,17 @@ const urlName   = _hc ? _hc.urlName : null;
   - ep03.json + nhs.html 인라인 양쪽 수정
 
 ### Hangeul Quest (nhs.html) — 메인 개발 타겟
-- ep01, ep02 **리뷰 진행 중** — 공개 전 심사숙고 단계
+- **ep01~ep10 완성** ✅ + **Level 1 마감 테스트 완성** ✅
 - 공개 대상: 학생 + 학생 친구들 (외부 공개용)
-- ep03 작업 중 (vocab 수정 완료, 영상 포맷/퀴즈 수정 대기)
+- ep03 vocab 수정 완료 (영상 포맷/퀴즈 수정은 여전히 대기)
+- **Level 2 에피소드**: ep11 이후 — 아직 미정 (스크립트/슬라이드 미준비)
 - **nhs.html 렌더러**: mp4 video 필드 지원 추가 필요 (현재 slides만 처리)
 
 ### 초등반 korean-app_v2.html
 - **Level 3 활성화 완료** — `selectBook(3)` + Book 3 렌더러 추가 (2026-05-23)
 - Book 3 데이터: `data/elem/book3/unit01.json` (곰 세 마리), `unit02.json` (아이스크림 두 개 주세요) 완성
 - Book 3 렌더러: goal badge + 4탭 (새단어/문법/연습/자기점검) + 빈칸/듣기/문장1/문장2 연습
-- 사이드바: 1~4과 표시 (unit03 마법 열쇠, unit04 토요일 결승전은 JSON 아직 미작성)
+- 사이드바: 1~5과 표시 (unit03 마법 열쇠, unit04 토요일 결승전, unit05 레모네이드 완성. unit06+ 미작성)
 
 ### 성인반 sejong-korean_v1.html
 - **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
@@ -625,60 +691,4 @@ halmoni-school/
   "grammar": [{
     "id", "title", "title_en", "icon",
     "rule",           ← 한 줄 규칙 요약
-    "pattern",        ← 렌더러 패턴박스용
-    "explanation_en", ← 영어 설명
-    "table": { "columns": [], "rows": [[]] },
-    "examples": [{ "ko", "en" }],
-    "fill_blanks": [{ "sentence"(___로 빈칸), "answer", "hint" }]
-  }],
-  "banmal_jondaemal": {
-    "intro_ko", "intro_en",
-    "rows": [{ "situation_ko", "situation_en", "banmal", "jondaemal", "note" }],
-    "tip",
-    "vocab_comparison": { "title_ko", "title_en", "intro_ko", "intro_en", "table": [{"banmal","jondaemal","en"}] },
-    "greeting_comparison": { "title_ko", "title_en", "intro_ko", "intro_en", "rows": [{"speech_level","example","en"}], "note_ko", "note_en" }
-  },
-  "usage": [{ "title", "title_en", "explanation_en", "examples": [{"ko","en"}] }],
-  "quiz": [{ "id", "audio_text"(listen 모드용 TTS 대사 — 있으면 🔊+객관식, 없으면 mc모드+영어병기), "question_ko", "question_en", "options": [], "answer"(0-based index), "explanation" }],
-  "real_life": [
-    { "title", "title_en", "setup_ko", "setup_en", "lines": [{"speaker","text","en"}] },
-    { "type": "tip", "title", "content_ko", "content_en" }
-  ],
-  "pronunciation": [{
-    "id", "title", "rule",
-    "table": { "columns": [], "rows": [[표기, 발음, 규칙]] },
-    "tip"
-  }]
-}
-```
-
-> `fill_blanks` 빈칸은 `___` (언더바 **정확히 3개**) 사용 — 렌더러가 split('___')으로 파싱
-
-### nhs.html 7탭 구조
-```
-🎬 영상·대본 | 📚 새어휘 | 📌 문법 | 🗣 반말/존댓말 | 💡 사용법 | ✏️ 퀴즈 | 🌍 실생활
-```
-탭 ID: `['script','vocab','grammar','banmal','usage','quiz','reallife']`
-
-### 렌더러 필드명 규칙 (중요!)
-| 데이터 | 필드명 |
-|--------|--------|
-| 어휘 영어 | `v.english` (not `v.en`) |
-| 문법 예문 | `ex.ko` / `ex.en` |
-| 문법 패턴 | `g.rule` (not `g.pattern`) |
-| 퀴즈 질문 | `q.question_ko` / `q.question_en` |
-| 실생활 대사 | `item.lines` |
-| 실생활 설정 | `item.setup_ko` / `item.setup_en` |
-
-### Clova Dubbing 출처 표기 (필수)
-- 영상/슬라이드 패널 로드 시 5초간 자막 표시
-- CSS: `#clova-credit` — 자동 fadeout (`setTimeout 5000`)
-- 문구: "음성: Clova Dubbing (NAVER Corp.)"
-
----
-
-## 💬 소통 스타일
-- 한국어로 대화 (기술 용어는 영어 혼용)
-- 선생님이 직접 파일 열어서 시각 확인 후 피드백
-- 스크린샷/사진으로 현재 상태 공유
-- 편하고 친근한 톤 유지 — 존댓말이지만 가볍게
+    "pattern",        ← 렌더러
