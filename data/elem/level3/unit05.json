@@ -162,8 +162,8 @@
             }
           ],
           "images": [
-            "data/elem/level3/slides/L3_05/동사 활용1.png",
-            "data/elem/level3/slides/L3_05/동사 활용2.png"
+            "data/elem/level3/slides/L3_05/동사 활용_놀다.png",
+            "data/elem/level3/slides/L3_05/동사 활용_만들다.png"
           ]
         },
         {
@@ -721,6 +721,112 @@
             "particle",
             "verb"
           ]
+        }
+      ],
+      "write_items": [
+        {
+          "prompt": "과거형으로 써봐요 ✏️",
+          "question": "어제 뭐 했어요? (레모네이드 / 팔다)",
+          "question_en": "What did you do yesterday? (sell lemonade)",
+          "hint": "팔다 → 팔았어요",
+          "answer": "어제 레모네이드를 팔았어요.",
+          "answer_en": "I sold lemonade yesterday."
+        },
+        {
+          "prompt": "미래형으로 써봐요 ✏️",
+          "question": "내일 뭐 할 거예요? (친구랑 같이 / 놀다)",
+          "question_en": "What will you do tomorrow? (play with friends)",
+          "hint": "놀다 → 놀 거예요",
+          "answer": "내일 친구랑 같이 놀 거예요.",
+          "answer_en": "I'm going to play with my friend tomorrow."
+        },
+        {
+          "prompt": "이유를 써봐요 ✏️",
+          "question": "왜 좋아요? (우리가 만들다 → 더 좋다)",
+          "question_en": "Why is it good? (because we made it)",
+          "hint": "만들다 → 만들어서 + 더 좋아요",
+          "answer": "우리가 만들어서 더 좋아요.",
+          "answer_en": "It's even better because we made it."
+        }
+      ]
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 대화 — Real Life Dialogues",
+      "subtitle": "과거와 미래를 자연스럽게 이야기해봐요!",
+      "dialogues": [
+        {
+          "title": "🏕️ 대화 1 — 방학 이야기",
+          "title_en": "Talking about the break",
+          "bg": "#FFF8E1",
+          "hdr": "#F57F17",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#FFD54F",
+              "kr": "방학 때 뭐 했어요?",
+              "en": "What did you do during the break?"
+            },
+            {
+              "role": "A",
+              "color": "#F57F17",
+              "kr": "가족이랑 제주도에 갔어요.",
+              "en": "I went to Jeju Island with my family."
+            },
+            {
+              "role": "Q",
+              "color": "#FFD54F",
+              "kr": "재밌었어요?",
+              "en": "Was it fun?"
+            },
+            {
+              "role": "A",
+              "color": "#F57F17",
+              "kr": "네, 너무 재밌었어요! 수영도 하고 맛있는 것도 많이 먹었어요.",
+              "en": "Yes, it was so fun! I swam and ate lots of delicious food."
+            }
+          ],
+          "summary": {
+            "kr": "방학 때 제주도에 가서 수영을 했어요.",
+            "en": "During the break I went to Jeju and went swimming.",
+            "highlight": "갔어요, 했어요"
+          }
+        },
+        {
+          "title": "🍋 대화 2 — 이번 주말 계획",
+          "title_en": "Plans for this weekend",
+          "bg": "#F3E5F5",
+          "hdr": "#6A1B9A",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#CE93D8",
+              "kr": "이번 주말에 뭐 할 거예요?",
+              "en": "What are you going to do this weekend?"
+            },
+            {
+              "role": "A",
+              "color": "#6A1B9A",
+              "kr": "쿠키를 만들 거예요. 엄마랑 같이요.",
+              "en": "I'm going to make cookies. With my mom."
+            },
+            {
+              "role": "Q",
+              "color": "#CE93D8",
+              "kr": "팔 거예요?",
+              "en": "Will you sell them?"
+            },
+            {
+              "role": "A",
+              "color": "#6A1B9A",
+              "kr": "아니요, 친구들한테 선물할 거예요!",
+              "en": "No, I'm going to give them as gifts to my friends!"
+            }
+          ],
+          "summary": {
+            "kr": "엄마랑 쿠키를 만들어서 친구들한테 선물할 거예요.",
+            "en": "I'm going to make cookies with mom and give them to friends.",
+            "highlight": "만들어서, 선물할 거예요"
+          }
         }
       ]
     }
