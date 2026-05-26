@@ -21,9 +21,9 @@
   --muted:    rgba(61,42,26,.5);
   --border:   rgba(201,144,42,.22);
   /* card colours from Canva */
-  --kinder-bg: #c9902a;
-  --elem-bg:   #c4a8d4;
-  --adult-bg:  #c8d8e8;
+  --kinder-bg: #E8604A;
+  --elem-bg:   #3DBDB5;
+  --adult-bg:  #0f7c6e;
 }
 
 body {
@@ -166,20 +166,20 @@ body::before {
 .app-icon  { font-size: 36px; margin-bottom: 14px; display: block; position: relative; z-index: 1; }
 .app-level { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 7px; position: relative; z-index: 1; font-weight: 700; }
 .app-card.kinder .app-level { color: rgba(255,255,255,.75); }
-.app-card.elem   .app-level { color: rgba(61,42,26,.55); }
-.app-card.adult  .app-level { color: rgba(61,42,26,.55); }
+.app-card.elem   .app-level { color: rgba(255,255,255,.75); }
+.app-card.adult  .app-level { color: rgba(255,255,255,.75); }
 .app-name  { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; position: relative; z-index: 1; }
 .app-card.kinder .app-name { color: #fff; }
-.app-card.elem   .app-name { color: var(--brown); }
-.app-card.adult  .app-name { color: var(--brown); }
+.app-card.elem   .app-name { color: #fff; }
+.app-card.adult  .app-name { color: #fff; }
 .app-desc  { font-size: 11.5px; line-height: 1.6; position: relative; z-index: 1; }
 .app-card.kinder .app-desc { color: rgba(255,255,255,.8); }
-.app-card.elem   .app-desc { color: rgba(61,42,26,.6); }
-.app-card.adult  .app-desc { color: rgba(61,42,26,.6); }
+.app-card.elem   .app-desc { color: rgba(255,255,255,.8); }
+.app-card.adult  .app-desc { color: rgba(255,255,255,.8); }
 .app-arrow { margin-top: 16px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; position: relative; z-index: 1; transition: letter-spacing .2s; }
 .app-card.kinder .app-arrow { color: rgba(255,255,255,.85); }
-.app-card.elem   .app-arrow { color: var(--brown-md); }
-.app-card.adult  .app-arrow { color: var(--brown-md); }
+.app-card.elem   .app-arrow { color: rgba(255,255,255,.85); }
+.app-card.adult  .app-arrow { color: rgba(255,255,255,.85); }
 .app-card:hover .app-arrow { letter-spacing: .22em; }
 
 /* edit pencil */
@@ -329,19 +329,19 @@ body::before {
 
       <a class="app-card elem" href="korean-app_v2.html" id="card1">
         <span class="edit-icon" onclick="openEdit(event,1)">✏️</span>
-        <span class="app-icon" id="icon1">📖</span>
+        <span class="app-icon" id="icon1">🎮</span>
         <div class="app-level" id="level1">Elementary · 초등반</div>
-        <div class="app-name"  id="name1">한글학교 한국어</div>
-        <div class="app-desc"  id="desc1">어휘 · 문법 · 말하기<br>Vocabulary & Grammar</div>
+        <div class="app-name"  id="name1">Hangeul Quest Kids</div>
+        <div class="app-desc"  id="desc1">게임 · 어휘 · 문법<br>Game-Based Korean Learning</div>
         <div class="app-arrow">입장하기 →</div>
       </a>
 
-      <a class="app-card adult" href="sejong-korean_v1.html" id="card2">
+      <a class="app-card adult" href="nhs.html" id="card2">
         <span class="edit-icon" onclick="openEdit(event,2)">✏️</span>
-        <span class="app-icon" id="icon2">🏛</span>
-        <div class="app-level" id="level2">Adult · 성인반</div>
-        <div class="app-name"  id="name2">세종 한국어</div>
-        <div class="app-desc"  id="desc2">새 어휘 · 문법 · 실생활<br>Sejong Korean</div>
+        <span class="app-icon" id="icon2">🎬</span>
+        <div class="app-level" id="level2">Teen &amp; Up · 청소년반</div>
+        <div class="app-name"  id="name2">Hangeul Quest</div>
+        <div class="app-desc"  id="desc2">에피소드 · 어휘 · 문법<br>Scene-First Korean</div>
         <div class="app-arrow">입장하기 →</div>
       </a>
 
