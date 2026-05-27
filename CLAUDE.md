@@ -377,13 +377,14 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
-## 🌐 도메인 (2026-05-18 구매, 미연결)
+## 🌐 도메인 (2026-05-26 연결 완료 ✅)
 
-- **hangeulquest.com** — Hangeul Quest 메인 (nhs.html 연결 예정)
-- **hangeulquestkids.com** — Hangeul Quest Kids (korean-app_v2.html 연결 예정)
+- **hangeulquest.com** → GitHub Pages 메인 도메인 연결 완료 + HTTPS 🔒
+- **hangeulquestkids.com** → URL Redirect → `hangeulquest.com/korean-app_v2.html` 연결 완료
 - Namecheap 구매, Free Domain Privacy 적용, 1년 유효
-- **GitHub Pages 연결 미완료** — 콘텐츠 정돈 후 다음 단계에서 진행
-- 권장 구조: 도메인 2개 → 리포 2개 분리 (현재 같은 리포에 있어서 분리 작업 필요)
+- **GitHub Pages**: `katehyu-school/halmoni-school` 리포, main 브랜치, CNAME 파일 자동 생성됨
+- DNS: A Record 4개 (185.199.108~111.153) + CNAME www → katehyu-school.github.io.
+- 리포 분리 없이 단일 리포 유지 — 두 도메인 모두 정상 동작 중
 
 ---
 
@@ -604,9 +605,15 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ### 초등반 korean-app_v2.html
 - **Level 3 활성화 완료** — `selectBook(3)` + Book 3 렌더러 추가 (2026-05-23)
-- Book 3 데이터: `data/elem/book3/unit01.json` (곰 세 마리), `unit02.json` (아이스크림 두 개 주세요) 완성
-- Book 3 렌더러: goal badge + 4탭 (새단어/문법/연습/자기점검) + 빈칸/듣기/문장1/문장2 연습
-- 사이드바: 1~5과 표시 (unit03 마법 열쇠, unit04 토요일 결승전, unit05 레모네이드 완성. unit06+ 미작성)
+- Book 3 데이터: unit01~05.json 완성 (곰 세 마리 ~ 레모네이드)
+- Book 3 렌더러: goal badge + 탭 구조 + 빈칸/듣기/문장1/문장2/쓰기/실생활 연습
+- 사이드바: 1~5과 표시 (unit06+ 미작성)
+- **문장1 확인버튼 버그 수정** (2026-05-26): 오답 시 `cb.disabled=true` 제거 → 재시도 가능
+- **문장2 조사 분리** (2026-05-26): unit01~05 모든 조사(에/가/이/를/하고/랑/의 등) 낱말칩 분리
+- **L3_04 슬라이드 4장 추가**: 동사 활용_쉬다/가다/놀다/먹다(미래).png
+- **L3_05 슬라이드 2장 추가**: 동사 활용_놀다.png / 만들다.png
+- **지목(nominateStudent) 버그 수정**: unit 7~9 activeUnit 감지 누락 수정
+- **index.html 리브랜딩**: Hangeul Quest Kids (teal) / Hangeul Quest (deep teal), sejong→nhs 링크 교체
 
 ### 성인반 sejong-korean_v1.html
 - **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
