@@ -1,6 +1,450 @@
 {
   "id": "ep02",
-  "title": "🚧 준비 중",
+  "title": "누구예요?",
+  "title_en": "Who Is It?",
   "level": "L1",
-  "_note": "신규 제작 예정"
+  "scene": "🏠 미래네 집 · Mirae's House (리암의 방문 · Liam's visit)",
+  "video": null,
+  "slides": [
+    "data/nhs/L1/slides/ep02/누구예요1.png",
+    "data/nhs/L1/slides/ep02/누구예요2.png",
+    "data/nhs/L1/slides/ep02/누구예요3.png",
+    "data/nhs/L1/slides/ep02/누구예요4.png",
+    "data/nhs/L1/slides/ep02/누구예요5.png",
+    "data/nhs/L1/slides/ep02/누구예요6.png"
+  ],
+  "goal": {
+    "ko": "가족과 반려동물을 소개할 수 있어요. 이/가 + 있어요/없어요.",
+    "en": "I can introduce family and pets. Subject particle 이/가 + 있어요/없어요."
+  },
+  "characters": [
+    {
+      "id": "liam",
+      "name": "리암",
+      "emoji": "👦",
+      "color": "#5B8FD4",
+      "description": "미래의 친구 (Mirae's friend)"
+    },
+    {
+      "id": "mirae",
+      "name": "미래",
+      "emoji": "👧",
+      "color": "#E85D9A",
+      "description": "집에서 가족을 소개함 (introduces her family at home)"
+    }
+  ],
+  "script": [
+    {
+      "speaker": "liam",
+      "text": "누구예요?",
+      "en": "Who is it?",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/01누구예요_slide1.mp3",
+      "slide": 0
+    },
+    {
+      "speaker": "mirae",
+      "text": "우리 엄마예요.",
+      "en": "That's my mom.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/02우리+엄마예요_slide1.mp3",
+      "slide": 0
+    },
+    {
+      "speaker": "liam",
+      "text": "엄마가 뭘 해요?",
+      "en": "What is your mom doing?",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/03엄마가+뭘해요_slide2.mp3",
+      "slide": 1
+    },
+    {
+      "speaker": "mirae",
+      "text": "엄마가 전화해요.",
+      "en": "Mom is on the phone.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/04엄마가+전화해요_sslide2.mp3",
+      "slide": 1
+    },
+    {
+      "speaker": "mirae",
+      "text": "언니가 노래해요.",
+      "en": "My sister is singing.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/05언니가+노래해요_slide3.mp3",
+      "slide": 2
+    },
+    {
+      "speaker": "liam",
+      "text": "아니요, 언니가 아니에요. 동생이에요.",
+      "en": "No, she's not older sister. She's younger sister.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/06아니요+언니가+아니에요_+동생이에요_slide3.mp3",
+      "slide": 2
+    },
+    {
+      "speaker": "liam",
+      "text": "동생 이름이 뭐예요?",
+      "en": "What's your sister's name?",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/07동생+이름이+뭐예요_slide4.mp3",
+      "slide": 3
+    },
+    {
+      "speaker": "mirae",
+      "text": "리아예요.",
+      "en": "It's Ria.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/08리아예요_slide4.mp3",
+      "slide": 3
+    },
+    {
+      "speaker": "mirae",
+      "text": "고양이가 있어요.",
+      "en": "There is a cat. / We have a cat.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/09고양이가+있어요_slide5.mp3",
+      "slide": 4
+    },
+    {
+      "speaker": "liam",
+      "text": "아니요, 고양이가 없어요.",
+      "en": "No, there is no cat.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/10아니요+고양이가+없어요_slide5.mp3",
+      "slide": 4
+    },
+    {
+      "speaker": "liam",
+      "text": "뭐예요?",
+      "en": "What is it?",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/11뭐예요_slide6.mp3",
+      "slide": 5
+    },
+    {
+      "speaker": "mirae",
+      "text": "강아지예요.",
+      "en": "It's a puppy!",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep02/12강아지예요_sllide6.mp3",
+      "slide": 5
+    }
+  ],
+  "vocab": [
+    {
+      "category": "👨‍👩‍👧‍👦 가족 · Family",
+      "items": [
+        {
+          "korean": "엄마",
+          "romanization": "eom-ma",
+          "english": "mom",
+          "emoji": "👩"
+        },
+        {
+          "korean": "언니",
+          "romanization": "eon-ni",
+          "english": "older sister (girl speaking)",
+          "emoji": "👧",
+          "note": "여자가 손위 여자 형제를 부를 때 · girl calling her older sister"
+        },
+        {
+          "korean": "동생",
+          "romanization": "dong-saeng",
+          "english": "younger sibling",
+          "emoji": "🧒",
+          "note": "남동생/여동생 모두 동생 · works for brother or sister"
+        },
+        {
+          "korean": "이름",
+          "romanization": "i-reum",
+          "english": "name",
+          "emoji": "🏷️"
+        }
+      ]
+    },
+    {
+      "category": "🐾 반려동물 · Pets",
+      "items": [
+        {
+          "korean": "고양이",
+          "romanization": "go-yang-i",
+          "english": "cat",
+          "emoji": "🐱"
+        },
+        {
+          "korean": "강아지",
+          "romanization": "gang-a-ji",
+          "english": "puppy / dog",
+          "emoji": "🐶"
+        }
+      ]
+    },
+    {
+      "category": "🙋 동사·표현 · Verbs & Expressions",
+      "items": [
+        {
+          "korean": "전화하다",
+          "romanization": "jeon-hwa-ha-da",
+          "english": "to make a phone call",
+          "emoji": "📱"
+        },
+        {
+          "korean": "노래하다",
+          "romanization": "no-rae-ha-da",
+          "english": "to sing",
+          "emoji": "🎶"
+        },
+        {
+          "korean": "있어요",
+          "romanization": "i-sseo-yo",
+          "english": "there is / I have",
+          "emoji": "✅"
+        },
+        {
+          "korean": "없어요",
+          "romanization": "eop-sseo-yo",
+          "english": "there is not / I don't have",
+          "emoji": "❌"
+        },
+        {
+          "korean": "누구",
+          "romanization": "nu-gu",
+          "english": "who",
+          "emoji": "❓"
+        },
+        {
+          "korean": "뭐",
+          "romanization": "mwo",
+          "english": "what (casual)",
+          "emoji": "❓",
+          "note": "무엇의 줄임말 · short for 무엇"
+        },
+        {
+          "korean": "아니요",
+          "romanization": "a-ni-yo",
+          "english": "no",
+          "emoji": "❌"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g02_subject",
+      "title": "이/가 — 주어 조사",
+      "title_en": "이/가 — Subject Particle",
+      "icon": "🎯",
+      "rule": "N이/가 → 동작이나 상태의 주체 · Who is doing the action / what has the state",
+      "pattern": "N이/가 + 동사/형용사",
+      "explanation": "이/가 marks the SUBJECT — who is doing or being something.\n은/는(topic)과 헷갈리기 쉬워요! Easy to confuse with 은/는!\n받침(final consonant) 있으면 이, 없으면 가 · consonant → 이 / vowel → 가",
+      "table": {
+        "headers": [
+          "받침?",
+          "조사",
+          "예시"
+        ],
+        "rows": [
+          [
+            "받침 X ❌ (모음)",
+            "가",
+            "엄마 → 엄마가"
+          ],
+          [
+            "받침 X ❌ (모음)",
+            "가",
+            "언니 → 언니가"
+          ],
+          [
+            "받침 O ✅ (자음)",
+            "이",
+            "동생(ㅇ) → 동생이"
+          ],
+          [
+            "받침 X ❌ (모음)",
+            "가",
+            "강아지 → 강아지가"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "엄마가 전화해요.",
+          "en": "Mom is making a phone call."
+        },
+        {
+          "ko": "언니가 노래해요.",
+          "en": "My sister is singing."
+        },
+        {
+          "ko": "고양이가 있어요.",
+          "en": "There is a cat."
+        }
+      ],
+      "tip": "이/가 vs 은/는: 이/가는 '주체', 은/는는 '주제'. 둘 다 맞지만 뉘앙스가 달라요!\n이/가 = subject (the doer), 은/는 = topic (what we're talking about)."
+    },
+    {
+      "id": "g02_isseoyo",
+      "title": "있어요 / 없어요",
+      "title_en": "있어요 / 없어요 — Existence",
+      "icon": "✅❌",
+      "rule": "N이/가 있어요 · 없어요 → N exists / doesn't exist",
+      "pattern": "[사람/사물]이/가 있어요 ↔ 없어요",
+      "explanation": "있어요 = exists / is there / I have\n없어요 = doesn't exist / not there / I don't have\n가족이나 물건에 모두 사용해요! Use for both people and things!",
+      "table": {
+        "headers": [
+          "문장",
+          "뜻"
+        ],
+        "rows": [
+          [
+            "고양이가 있어요.",
+            "There is a cat. / We have a cat."
+          ],
+          [
+            "고양이가 없어요.",
+            "There is no cat. / We don't have a cat."
+          ],
+          [
+            "동생이 있어요.",
+            "I have a younger sibling."
+          ],
+          [
+            "동생이 없어요.",
+            "I don't have a younger sibling."
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "고양이가 있어요.",
+          "en": "There is a cat."
+        },
+        {
+          "ko": "아니요, 고양이가 없어요.",
+          "en": "No, there is no cat."
+        },
+        {
+          "ko": "강아지예요!",
+          "en": "It's a puppy!"
+        }
+      ],
+      "tip": "있어요/없어요는 영어의 'there is/there isn't'와 'I have/don't have' 둘 다 돼요!\nLike 'there is/isn't' AND 'I have/don't have' — context tells you which!"
+    }
+  ],
+  "banmal_jondaemal": {
+    "title": "반말 vs 존댓말",
+    "intro": "이번 에피소드는 존댓말로 대화해요. · This episode uses polite speech throughout.",
+    "pairs": [
+      {
+        "situation": "물어볼 때 · Asking a question",
+        "banmal": "누구야? / 뭐야?",
+        "jondaemal": "누구예요? / 뭐예요?",
+        "note": "야→예요 · casual suffix → polite suffix"
+      },
+      {
+        "situation": "존재 표현 · Existence",
+        "banmal": "고양이가 있어. / 없어.",
+        "jondaemal": "고양이가 있어요. / 없어요.",
+        "note": "어→어요 · just add 요!"
+      }
+    ],
+    "rule_box": "친구에게: 누구야? 있어. 없어.\n어른에게: 누구예요? 있어요. 없어요.\n요(yo) 하나로 존댓말 완성! · Add 요 for polite speech!",
+    "adult_dialogue": {
+      "title": "어른들의 소개 · Adults Introducing Family",
+      "intro": "어른들이 서로 가족을 소개하는 표현 · Adults introducing family to each other",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "이쪽은 제 딸이에요. 이름은 미래예요.",
+          "en": "This is my daughter. Her name is Mirae."
+        },
+        {
+          "speaker": "B",
+          "text": "아, 그래요? 반갑습니다. 미래 씨.",
+          "en": "Oh really? Nice to meet you, Mirae."
+        }
+      ]
+    }
+  },
+  "quiz": [
+    {
+      "type": "mc",
+      "question": "이/가 는 무엇을 나타낼까요? · What does 이/가 mark?",
+      "question_en": "What does 이/가 mark in a sentence?",
+      "choices": [
+        "The subject (the doer / the one with the state)",
+        "The topic (what we're talking about)",
+        "The object (what you do something to)",
+        "The place"
+      ],
+      "answer": 0,
+      "explanation": "이/가 는 주어(subject)를 나타내요. 동작/상태의 주체! · 이/가 marks the SUBJECT — the doer or the one in the state."
+    },
+    {
+      "type": "mc",
+      "question": "'엄마' 뒤에는 이/가 중 무엇? · 엄마 ends with a vowel — 이 or 가?",
+      "question_en": "엄마 ends with 마 (vowel). Which subject particle?",
+      "choices": [
+        "가 (엄마가)",
+        "이 (엄마이)",
+        "는 (엄마는)",
+        "을 (엄마을)"
+      ],
+      "answer": 0,
+      "explanation": "엄마 ends with 마 (vowel) → 가. 엄마가 전화해요!"
+    },
+    {
+      "type": "listen",
+      "question": "🔊 들어보세요. · Listen and choose.",
+      "audio_text": "고양이가 있어요.",
+      "choices": [
+        "고양이가 있어요.",
+        "고양이가 없어요.",
+        "강아지가 있어요.",
+        "고양이예요."
+      ],
+      "answer": 0,
+      "explanation": "있어요 = there is / we have. · 있어요 means it exists or you have it."
+    },
+    {
+      "type": "mc",
+      "question": "언니가 없어요. 뜻은? · What does this mean?",
+      "question_en": "언니가 없어요. = ?",
+      "choices": [
+        "I don't have an older sister.",
+        "My older sister is here.",
+        "My older sister is singing.",
+        "Who is my older sister?"
+      ],
+      "answer": 0,
+      "explanation": "없어요 = doesn't exist / don't have. 언니가 없어요 = I don't have an older sister."
+    }
+  ],
+  "self_check": [
+    "이/가 를 붙여 주어를 만들 수 있어요. (엄마가, 언니가, 강아지가)",
+    "있어요/없어요 로 존재를 표현할 수 있어요.",
+    "은/는(topic)과 이/가(subject)의 차이를 이해했어요.",
+    "가족을 한국어로 소개할 수 있어요."
+  ],
+  "pronunciation": {
+    "title": "발음 팁 · Pronunciation Tips",
+    "items": [
+      {
+        "word": "없어요",
+        "actual": "[업써요]",
+        "note": "ㅂ받침 + 어 → [버] 연음 · ㅂ links to next vowel"
+      },
+      {
+        "word": "있어요",
+        "actual": "[이써요]",
+        "note": "ㅅ받침 + 어 → [써] 연음 · ㅅ links to next vowel"
+      },
+      {
+        "word": "동생이",
+        "actual": "[동생이]",
+        "note": "ㅇ받침 + 이 → [이] 연음 · ㅇ silent, vowel links directly"
+      }
+    ]
+  }
 }
