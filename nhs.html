@@ -624,7 +624,505 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 <script>
 // ── EMBEDDED EPISODE DATA ──────────────────────────────
 const EPISODE_DATA = {
-  ep01:{"id":"ep01","title":"안녕! 나는 정민이야.","title_en":"Hi! I'm Jeongmin.","level":"L1","scene":"🏞️ 공원 · Park (first meeting)","video":null,"slides":[],"goal":{"ko":"자기 소개를 할 수 있어요. 나는/저는 ___이에요/예요.","en":"I can introduce myself. I am ___."},"characters":[{"id":"jeongmin","name":"정민","emoji":"👦","color":"#5B8FD4","description":"미래의 친구 (Mirae's friend)"},{"id":"mirae","name":"미래","emoji":"👧","color":"#E85D9A","description":"공원에서 정민을 처음 만남 (meets Jeongmin for the first time)"},{"id":"mirae_mom","name":"미래 엄마","emoji":"👩","color":"#6ABFAD","description":"미래의 엄마"}],"script":[{"speaker":"jeongmin","text":"안녕! 나는 정민이야.","en":"Hi! I'm Jeongmin.","speech_type":"반말","audio":"data/nhs/L1/TTS/ep01/01_안녕_나는_정민이야.mp3","slide":null},{"speaker":"mirae","text":"안녕! 나는 미래야. 만나서 반가워.","en":"Hi! I'm Mirae. Nice to meet you.","speech_type":"반말","audio":"data/nhs/L1/TTS/ep01/02_안녕_나는_미래야_만나서_반가워.mp3","slide":null},{"speaker":"mirae","text":"인사해. 우리 엄마야.","en":"Say hi. This is my mom.","speech_type":"반말","audio":"data/nhs/L1/TTS/ep01/03_인사해_우리_엄마야.mp3","slide":null},{"speaker":"jeongmin","text":"안녕하세요. 저는 정민이에요.","en":"Hello. I'm Jeongmin.","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep01/04_안녕하세요_저는_정민이에요.mp3","slide":null},{"speaker":"mirae_mom","text":"안녕! 나는 미래 엄마야. 만나서 반가워.","en":"Hi! I'm Mirae's mom. Nice to meet you.","speech_type":"반말","audio":"data/nhs/L1/TTS/ep01/05_안녕_나는_미래_엄마야_만나서_반가워.mp3","slide":null},{"speaker":"jeongmin","text":"네, 만나서 반가워요.","en":"Yes, nice to meet you too.","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep01/06_네_만나서_반가워요.mp3","slide":null}],"vocab":[{"category":"👋 인사 · Greetings","items":[{"korean":"안녕","romanization":"an-nyeong","english":"hi / bye (casual)","emoji":"👋","note":"친한 사이에 쓰는 인사 · used with close friends"},{"korean":"안녕하세요","romanization":"an-nyeong-ha-se-yo","english":"hello (formal)","emoji":"🙏","note":"어른께 쓰는 인사 · used with adults / polite form"},{"korean":"만나서 반가워","romanization":"man-na-seo ban-ga-wo","english":"nice to meet you (casual)","emoji":"😊"},{"korean":"만나서 반가워요","romanization":"man-na-seo ban-ga-wo-yo","english":"nice to meet you (polite)","emoji":"😊"}]},{"category":"👤 나와 너 · Me & You","items":[{"korean":"나","romanization":"na","english":"I / me (casual)","emoji":"🙋"},{"korean":"저","romanization":"jeo","english":"I / me (humble/polite)","emoji":"🙋","note":"어른께 말할 때 · use when speaking to adults"},{"korean":"우리","romanization":"u-ri","english":"our / we","emoji":"👨‍👩‍👧","note":"우리 엄마 = my mom (Korean says 'our mom')"},{"korean":"이름","romanization":"i-reum","english":"name","emoji":"🏷️"}]},{"category":"🗣️ 표현 · Expressions","items":[{"korean":"인사하다","romanization":"in-sa-ha-da","english":"to greet / to say hello","emoji":"🤝"},{"korean":"네","romanization":"ne","english":"yes","emoji":"✅"}]}],"grammar":[{"id":"g01_topic","title":"은/는 — 주제 조사","title_en":"은/는 — Topic Particle","icon":"📌","rule":"N은/는 → 이 문장의 주인공은 누구? · Who is this sentence about?","pattern":"나는 ___야. / 저는 ___이에요.","explanation":"은/는 marks what the sentence is ABOUT — the topic.\n영어에는 없는 조사! No direct equivalent in English.\n받침(final consonant) 있으면 은, 없으면 는 · consonant → 은 / vowel → 는","table":{"headers":["받침?","조사","예시"],"rows":[["받침 O ✅","은","정민(ㄴ) + 은 → 정민은"],["받침 X ❌","는","미래(에) + 는 → 미래는"],["나 (받침 X)","는","나 + 는 → 나는"],["저 (받침 X)","는","저 + 는 → 저는"]]},"examples":[{"ko":"나는 정민이야.","en":"I'm Jeongmin. (casual)"},{"ko":"저는 정민이에요.","en":"I'm Jeongmin. (polite)"},{"ko":"미래는 학생이에요.","en":"Mirae is a student."}],"tip":"은/는 는 '주제'를 나타내요. 다음 에피소드에서 이/가(subject particle)도 배울 거예요!\n은/는 shows the TOPIC. You'll learn 이/가 (subject particle) next!"},{"id":"g01_iyeyo","title":"N이에요 / N예요 — ~이에요","title_en":"N이에요 / N예요 — to be (polite)","icon":"💬","rule":"이름/신분 뒤에 붙여요 · Attach after a name or identity","pattern":"[받침 O] + 이에요  /  [받침 X] + 예요","explanation":"이에요/예요 means 'is / am / are'.\n받침(final consonant) 있으면 이에요, 없으면 예요.\nCasual form: 이야 (consonant) / 야 (vowel).","table":{"headers":["마지막 소리","정중 (polite)","반말 (casual)","예시"],"rows":[["받침 O (자음)","이에요","이야","정민 → 정민이에요 / 정민이야"],["받침 X (모음)","예요","야","미래 → 미래예요 / 미래야"],["받침 X (모음)","예요","야","엄마 → 엄마예요 / 엄마야"]]},"examples":[{"ko":"저는 정민이에요.","en":"I'm Jeongmin. (formal)"},{"ko":"나는 미래야.","en":"I'm Mirae. (casual)"},{"ko":"우리 엄마야.","en":"This is my mom. (casual)"}],"tip":"대화 속에서 찾아봐요! 정민이야 vs 정민이에요 — 같은 뜻, 다른 격식!\nSpot them in the script! Same meaning, different politeness level."}],"banmal_jondaemal":{"title":"반말 vs 존댓말","intro":"이번 에피소드에 둘 다 나왔어요! Both appeared in this episode!","pairs":[{"situation":"친구끼리 · Between friends","banmal":"나는 정민이야.","jondaemal":"저는 정민이에요.","note":"나→저 / 이야→이에요"},{"situation":"인사 · Greeting","banmal":"안녕! 만나서 반가워.","jondaemal":"안녕하세요. 만나서 반가워요.","note":"어른께는 항상 존댓말 · always polite with adults"}],"rule_box":"친구 → 반말 (나는, 이야, 반가워)\n어른 → 존댓말 (저는, 이에요, 반가워요)\nFriend → casual  ·  Adult → polite","adult_dialogue":{"title":"어른들의 첫 만남 · Adults Meeting for the First Time","intro":"어른들은 처음 만나면 서로 존댓말을 써요. · Adults always use polite speech when meeting for the first time.","lines":[{"speaker":"A","text":"안녕하세요. 저는 김지수예요.","en":"Hello. I'm Kim Jisoo."},{"speaker":"B","text":"아, 안녕하세요. 저는 박민준이에요. 만나서 반가워요.","en":"Oh, hello. I'm Park Minjun. Nice to meet you."}]}},"quiz":[{"type":"mc","question":"은/는 은 무엇을 나타낼까요? · What does 은/는 mark?","question_en":"What does 은/는 mark in a sentence?","choices":["The topic (what the sentence is about)","The object (what you do something to)","The place where","The time when"],"answer":0,"explanation":"은/는 는 문장의 주제를 나타내요. · 은/는 marks the TOPIC of the sentence."},{"type":"mc","question":"'정민' 뒤에 무엇이 올까요? (polite) · 정민 ends with a consonant. Polite ending?","question_en":"정민 ends with ㄴ (consonant). Which polite ending?","choices":["이에요","예요","야","이야"],"answer":0,"explanation":"정민 ends with ㄴ (consonant) → 이에요. → 저는 정민이에요!"},{"type":"listen","question":"🔊 들어보세요. · Listen and choose.","audio_text":"안녕! 나는 미래야. 만나서 반가워.","choices":["안녕! 나는 미래야. 만나서 반가워.","안녕하세요. 저는 미래예요.","안녕! 나는 정민이야.","만나서 반가워요."],"answer":0,"explanation":"미래가 친구에게 반말로 인사해요. · Mirae greets a friend in casual speech."},{"type":"mc","question":"'미래' 뒤에는? (casual) · 미래 ends with a vowel. Casual ending?","question_en":"미래 ends with 에 (vowel). Which casual ending?","choices":["야","이야","이에요","예요"],"answer":0,"explanation":"미래 ends with a vowel → 야. → 나는 미래야!"}],"self_check":["나는/저는 ___이야/예요. 라고 말할 수 있어요.","받침이 있으면 이에요, 없으면 예요. 를 알아요.","친구에게는 반말, 어른에게는 존댓말. 을 이해했어요.","만나서 반가워 / 반가워요. 를 상황에 맞게 쓸 수 있어요."],"pronunciation":{"title":"발음 팁 · Pronunciation Tips","items":[{"word":"정민이야","actual":"[정미니야]","note":"받침 ㄴ + 이 → 연음 · final consonant links to next vowel"},{"word":"만나서","actual":"[만나서]","note":"ㄴ+ㄴ → 그대로 · stays the same"},{"word":"안녕하세요","actual":"[안녕하세요]","note":"5음절 — 천천히! 5 syllables — practice slowly: an-nyeong-ha-se-yo"}]}},
+  ep01: {
+  "id": "ep01",
+  "title": "안녕! 나는 정민이야.",
+  "title_en": "Hi! I'm Jeongmin.",
+  "level": "L1",
+  "scene": "🏞️ 공원 · Park (first meeting)",
+  "video": null,
+  "slides": [],
+  "goal": {
+    "ko": "자기 소개를 할 수 있어요. 나는/저는 ___이에요/예요.",
+    "en": "I can introduce myself. I am ___."
+  },
+  "characters": [
+    {
+      "id": "jeongmin",
+      "name": "정민",
+      "emoji": "👦",
+      "color": "#5B8FD4",
+      "description": "미래의 친구 (Mirae's friend)"
+    },
+    {
+      "id": "mirae",
+      "name": "미래",
+      "emoji": "👧",
+      "color": "#E85D9A",
+      "description": "공원에서 정민을 처음 만남 (meets Jeongmin for the first time)"
+    },
+    {
+      "id": "mirae_mom",
+      "name": "미래 엄마",
+      "emoji": "👩",
+      "color": "#6ABFAD",
+      "description": "미래의 엄마"
+    }
+  ],
+  "script": [
+    {
+      "speaker": "jeongmin",
+      "text": "안녕! 나는 정민이야.",
+      "en": "Hi! I'm Jeongmin.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/01_안녕_나는_정민이야.mp3",
+      "slide": null
+    },
+    {
+      "speaker": "mirae",
+      "text": "안녕! 나는 미래야. 만나서 반가워.",
+      "en": "Hi! I'm Mirae. Nice to meet you.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/02_안녕_나는_미래야_만나서_반가워.mp3",
+      "slide": null
+    },
+    {
+      "speaker": "mirae",
+      "text": "인사해. 우리 엄마야.",
+      "en": "Say hi. This is my mom.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/03_인사해_우리_엄마야.mp3",
+      "slide": null
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "안녕하세요. 저는 정민이에요.",
+      "en": "Hello. I'm Jeongmin.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep01/04_안녕하세요_저는_정민이에요.mp3",
+      "slide": null
+    },
+    {
+      "speaker": "mirae_mom",
+      "text": "안녕! 나는 미래 엄마야. 만나서 반가워.",
+      "en": "Hi! I'm Mirae's mom. Nice to meet you.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/05_안녕_나는_미래_엄마야_만나서_반가워.mp3",
+      "slide": null
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "네, 만나서 반가워요.",
+      "en": "Yes, nice to meet you too.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep01/06_네_만나서_반가워요.mp3",
+      "slide": null
+    }
+  ],
+  "vocab": [
+    {
+      "category": "👋 인사 · Greetings",
+      "items": [
+        {
+          "korean": "안녕",
+          "romanization": "an-nyeong",
+          "english": "hi / bye (casual)",
+          "emoji": "👋",
+          "note": "친한 사이에 쓰는 인사 · used with close friends"
+        },
+        {
+          "korean": "안녕하세요",
+          "romanization": "an-nyeong-ha-se-yo",
+          "english": "hello (formal)",
+          "emoji": "🙏",
+          "note": "어른께 쓰는 인사 · used with adults / polite form"
+        },
+        {
+          "korean": "만나서 반가워",
+          "romanization": "man-na-seo ban-ga-wo",
+          "english": "nice to meet you (casual)",
+          "emoji": "😊"
+        },
+        {
+          "korean": "만나서 반가워요",
+          "romanization": "man-na-seo ban-ga-wo-yo",
+          "english": "nice to meet you (polite)",
+          "emoji": "😊"
+        }
+      ]
+    },
+    {
+      "category": "👤 나와 너 · Me & You",
+      "items": [
+        {
+          "korean": "나",
+          "romanization": "na",
+          "english": "I / me (casual)",
+          "emoji": "🙋"
+        },
+        {
+          "korean": "저",
+          "romanization": "jeo",
+          "english": "I / me (humble/polite)",
+          "emoji": "🙋",
+          "note": "어른께 말할 때 · use when speaking to adults"
+        },
+        {
+          "korean": "우리",
+          "romanization": "u-ri",
+          "english": "our / we",
+          "emoji": "👨‍👩‍👧",
+          "note": "우리 엄마 = my mom (Korean says 'our mom')"
+        },
+        {
+          "korean": "이름",
+          "romanization": "i-reum",
+          "english": "name",
+          "emoji": "🏷️"
+        }
+      ]
+    },
+    {
+      "category": "🗣️ 표현 · Expressions",
+      "items": [
+        {
+          "korean": "인사하다",
+          "romanization": "in-sa-ha-da",
+          "english": "to greet / to say hello",
+          "emoji": "🤝"
+        },
+        {
+          "korean": "네",
+          "romanization": "ne",
+          "english": "yes",
+          "emoji": "✅"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g01_topic",
+      "title": "은/는 — 주제 조사",
+      "title_en": "은/는 — Topic Particle",
+      "icon": "📌",
+      "rule": "N은/는 → 이 문장의 주인공은 누구? · Who is this sentence about?",
+      "pattern": "나는 ___야. / 저는 ___이에요.",
+      "explanation": "은/는 marks what the sentence is ABOUT — the topic.\n영어에는 없는 조사! No direct equivalent in English.\n받침(final consonant) 있으면 은, 없으면 는 · consonant → 은 / vowel → 는",
+      "table": {
+        "headers": [
+          "받침?",
+          "조사",
+          "예시"
+        ],
+        "rows": [
+          [
+            "받침 O ✅",
+            "은",
+            "정민(ㄴ) + 은 → 정민은"
+          ],
+          [
+            "받침 X ❌",
+            "는",
+            "미래(에) + 는 → 미래는"
+          ],
+          [
+            "나 (받침 X)",
+            "는",
+            "나 + 는 → 나는"
+          ],
+          [
+            "저 (받침 X)",
+            "는",
+            "저 + 는 → 저는"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "나는 정민이야.",
+          "en": "I'm Jeongmin. (casual)"
+        },
+        {
+          "ko": "저는 정민이에요.",
+          "en": "I'm Jeongmin. (polite)"
+        },
+        {
+          "ko": "미래는 학생이에요.",
+          "en": "Mirae is a student."
+        }
+      ],
+      "tip": "은/는 는 '주제'를 나타내요. 다음 에피소드에서 이/가(subject particle)도 배울 거예요!\n은/는 shows the TOPIC. You'll learn 이/가 (subject particle) next!"
+    },
+    {
+      "id": "g01_iyeyo",
+      "title": "N이에요 / N예요 — ~이에요",
+      "title_en": "N이에요 / N예요 — to be (polite)",
+      "icon": "💬",
+      "rule": "이름/신분 뒤에 붙여요 · Attach after a name or identity",
+      "pattern": "[받침 O] + 이에요  /  [받침 X] + 예요",
+      "explanation": "이에요/예요 means 'is / am / are'.\n받침(final consonant) 있으면 이에요, 없으면 예요.\nCasual form: 이야 (consonant) / 야 (vowel).",
+      "table": {
+        "headers": [
+          "마지막 소리",
+          "정중 (polite)",
+          "반말 (casual)",
+          "예시"
+        ],
+        "rows": [
+          [
+            "받침 O (자음)",
+            "이에요",
+            "이야",
+            "정민 → 정민이에요 / 정민이야"
+          ],
+          [
+            "받침 X (모음)",
+            "예요",
+            "야",
+            "미래 → 미래예요 / 미래야"
+          ],
+          [
+            "받침 X (모음)",
+            "예요",
+            "야",
+            "엄마 → 엄마예요 / 엄마야"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "저는 정민이에요.",
+          "en": "I'm Jeongmin. (formal)"
+        },
+        {
+          "ko": "나는 미래야.",
+          "en": "I'm Mirae. (casual)"
+        },
+        {
+          "ko": "우리 엄마야.",
+          "en": "This is my mom. (casual)"
+        }
+      ],
+      "tip": "대화 속에서 찾아봐요! 정민이야 vs 정민이에요 — 같은 뜻, 다른 격식!\nSpot them in the script! Same meaning, different politeness level."
+    }
+  ],
+  "banmal_jondaemal": {
+    "title": "반말 vs 존댓말",
+    "intro": "이번 에피소드에 둘 다 나왔어요! Both appeared in this episode!",
+    "pairs": [
+      {
+        "situation": "친구끼리 · Between friends",
+        "banmal": "나는 정민이야.",
+        "jondaemal": "저는 정민이에요.",
+        "note": "나→저 / 이야→이에요"
+      },
+      {
+        "situation": "인사 · Greeting",
+        "banmal": "안녕! 만나서 반가워.",
+        "jondaemal": "안녕하세요. 만나서 반가워요.",
+        "note": "어른께는 항상 존댓말 · always polite with adults"
+      }
+    ],
+    "rule_box": "친구 → 반말 (나는, 이야, 반가워)\n어른 → 존댓말 (저는, 이에요, 반가워요)\nFriend → casual  ·  Adult → polite",
+    "adult_dialogue": {
+      "title": "어른들의 첫 만남 · Adults Meeting for the First Time",
+      "intro": "어른들은 처음 만나면 서로 존댓말을 써요. · Adults always use polite speech when meeting for the first time.",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "안녕하세요. 저는 김지수예요.",
+          "en": "Hello. I'm Kim Jisoo."
+        },
+        {
+          "speaker": "B",
+          "text": "아, 안녕하세요. 저는 박민준이에요. 만나서 반가워요.",
+          "en": "Oh, hello. I'm Park Minjun. Nice to meet you."
+        }
+      ]
+    }
+  },
+  "quiz": [
+    {
+      "type": "mc",
+      "question": "은/는 은 무엇을 나타낼까요? · What does 은/는 mark?",
+      "question_en": "What does 은/는 mark in a sentence?",
+      "choices": [
+        "The topic (what the sentence is about)",
+        "The object (what you do something to)",
+        "The place where",
+        "The time when"
+      ],
+      "answer": 0,
+      "explanation": "은/는 는 문장의 주제를 나타내요. · 은/는 marks the TOPIC of the sentence."
+    },
+    {
+      "type": "mc",
+      "question": "'정민' 뒤에 무엇이 올까요? (polite) · 정민 ends with a consonant. Polite ending?",
+      "question_en": "정민 ends with ㄴ (consonant). Which polite ending?",
+      "choices": [
+        "이에요",
+        "예요",
+        "야",
+        "이야"
+      ],
+      "answer": 0,
+      "explanation": "정민 ends with ㄴ (consonant) → 이에요. → 저는 정민이에요!"
+    },
+    {
+      "type": "listen",
+      "question": "🔊 들어보세요. · Listen and choose.",
+      "audio_text": "안녕! 나는 미래야. 만나서 반가워.",
+      "choices": [
+        "안녕! 나는 미래야. 만나서 반가워.",
+        "안녕하세요. 저는 미래예요.",
+        "안녕! 나는 정민이야.",
+        "만나서 반가워요."
+      ],
+      "answer": 0,
+      "explanation": "미래가 친구에게 반말로 인사해요. · Mirae greets a friend in casual speech."
+    },
+    {
+      "type": "mc",
+      "question": "'미래' 뒤에는? (casual) · 미래 ends with a vowel. Casual ending?",
+      "question_en": "미래 ends with 에 (vowel). Which casual ending?",
+      "choices": [
+        "야",
+        "이야",
+        "이에요",
+        "예요"
+      ],
+      "answer": 0,
+      "explanation": "미래 ends with a vowel → 야. → 나는 미래야!"
+    }
+  ],
+  "self_check": [
+    "나는/저는 ___이야/예요. 라고 말할 수 있어요.",
+    "받침이 있으면 이에요, 없으면 예요. 를 알아요.",
+    "친구에게는 반말, 어른에게는 존댓말. 을 이해했어요.",
+    "만나서 반가워 / 반가워요. 를 상황에 맞게 쓸 수 있어요."
+  ],
+  "pronunciation": {
+    "title": "발음 팁 · Pronunciation Tips",
+    "items": [
+      {
+        "word": "정민이야",
+        "actual": "[정미니야]",
+        "note": "받침 ㄴ + 이 → 연음 · final consonant links to next vowel"
+      },
+      {
+        "word": "만나서",
+        "actual": "[만나서]",
+        "note": "ㄴ+ㄴ → 그대로 · stays the same"
+      },
+      {
+        "word": "안녕하세요",
+        "actual": "[안녕하세요]",
+        "note": "5음절 — 천천히! 5 syllables — practice slowly: an-nyeong-ha-se-yo"
+      }
+    ]
+  },
+  "usage": [
+    {
+      "title": "👫 친구에게 · Introducing yourself to a friend",
+      "explanation_en": "Use 나는 + name + 이야/야. No need for a formal greeting first — just go for it!",
+      "examples": [
+        {
+          "ko": "나는 정민이야. 너는?",
+          "en": "I'm Jeongmin. And you?"
+        },
+        {
+          "ko": "나는 미래야. 만나서 반가워!",
+          "en": "I'm Mirae. Nice to meet you!"
+        },
+        {
+          "ko": "나는 올리비아야. 처음이야?",
+          "en": "I'm Olivia. Is this your first time?"
+        }
+      ]
+    },
+    {
+      "title": "🙏 어른께 · Introducing yourself to an adult",
+      "explanation_en": "Switch to 저는 + name + 이에요/예요. Always bow a little and speak politely!",
+      "examples": [
+        {
+          "ko": "안녕하세요. 저는 정민이에요.",
+          "en": "Hello. I'm Jeongmin."
+        },
+        {
+          "ko": "저는 리암이에요. 만나서 반가워요.",
+          "en": "I'm Liam. Nice to meet you."
+        },
+        {
+          "ko": "저는 미래예요. 잘 부탁드려요.",
+          "en": "I'm Mirae. Please take care of me."
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "section": "💡 잘 부탁드려요",
+      "content_ko": "처음 만나는 어른께 쓰는 공손한 표현이에요.\n직역하면 'Please treat me well' — 좋은 관계를 부탁하는 의미예요.",
+      "content_en": "A polite phrase when meeting someone new (especially adults). Literally 'please take good care of me' — used to start a relationship on a respectful note."
+    }
+  ],
+  "real_life": [
+    {
+      "type": "kakao",
+      "title": "📱 새 친구 단톡방 · New Friend Group Chat",
+      "title_en": "Starting a new KakaoTalk group",
+      "messages": [
+        {
+          "speaker": "정민",
+          "align": "left",
+          "text": "안녕! 나는 정민이야. 오늘 처음 만났지?"
+        },
+        {
+          "speaker": "미래",
+          "align": "right",
+          "text": "응! 나는 미래야. 만나서 반가워 😊"
+        },
+        {
+          "speaker": "올리비아",
+          "align": "left",
+          "text": "안녕~ 나는 올리비아야. 잘 부탁해!"
+        },
+        {
+          "speaker": "정민",
+          "align": "right",
+          "text": "우리 자주 놀자!"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "id": "rl01_listen",
+      "title": "🎧 학교 첫날 · First Day at School",
+      "title_en": "Two students meet on the first day of school",
+      "setup_ko": "두 학생이 처음 만났어요. 누가 먼저 인사할까요?",
+      "setup_en": "Two students meet for the first time. Who greets first?",
+      "audio_text": "안녕! 나는 조던이야. 너는? 나는 마야야. 만나서 반가워! 나도 만나서 반가워.",
+      "script": [
+        {
+          "speaker": "조던",
+          "text": "안녕! 나는 조던이야. 너는?"
+        },
+        {
+          "speaker": "마야",
+          "text": "나는 마야야. 만나서 반가워!"
+        },
+        {
+          "speaker": "조던",
+          "text": "나도 만나서 반가워."
+        }
+      ],
+      "questions": [
+        {
+          "question_ko": "남자아이 이름이 뭐예요?",
+          "question_en": "What is the boy's name?",
+          "options": [
+            "조던",
+            "마야",
+            "정민",
+            "미래"
+          ],
+          "answer": 0,
+          "explanation": "조던이 '나는 조던이야' 라고 했어요. · Jordan said 'I'm Jordan.'"
+        }
+      ]
+    }
+  ]
+},
   ep02: {
   "id": "ep02",
   "title": "누구예요?",
@@ -1206,7 +1704,125 @@ const EPISODE_DATA = {
         "note": "ㅇ받침 + 이 → [이] 연음 · ㅇ silent, vowel links directly"
       }
     ]
-  }
+  },
+  "usage": [
+    {
+      "title": "🎯 이/가는 언제 쓸까요? · When do you use 이/가?",
+      "explanation_en": "Use 이/가 when you're pointing something out for the first time, or asking 'who/what is doing this?'",
+      "examples": [
+        {
+          "ko": "엄마가 전화해요.",
+          "en": "Mom is calling. (pointing out who)"
+        },
+        {
+          "ko": "고양이가 있어요.",
+          "en": "There is a cat. (existence — new info)"
+        },
+        {
+          "ko": "누가 요리해요?",
+          "en": "Who is cooking?"
+        },
+        {
+          "ko": "강아지가 자요.",
+          "en": "The dog is sleeping."
+        }
+      ]
+    },
+    {
+      "title": "🔄 은/는 vs 이/가 한 눈에 비교",
+      "explanation_en": "은/는 = topic (what we're talking about). 이/가 = subject (who is doing/being). The difference is subtle — don't worry, it gets natural with practice!",
+      "examples": [
+        {
+          "ko": "나는 학생이야. (은/는)",
+          "en": "I am a student. (topic — introducing yourself)"
+        },
+        {
+          "ko": "내가 할게! (이/가)",
+          "en": "I'll do it! (subject — who will do it)"
+        },
+        {
+          "ko": "고양이는 귀여워. (은/는)",
+          "en": "Cats are cute. (topic — general statement)"
+        },
+        {
+          "ko": "고양이가 있어요. (이/가)",
+          "en": "There is a cat! (subject — new info, existence)"
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "section": "💡 처음 나올 때는 이/가, 다시 나올 때는 은/는",
+      "content_ko": "새로 등장하면 이/가, 이미 알고 있으면 은/는!\n예: 고양이가 있어요. 그 고양이는 귀여워요.",
+      "content_en": "New info → 이/가. Known info → 은/는!\nEx: 고양이가 있어요 (There's a cat! — new) → 그 고양이는 귀여워요 (That cat is cute — known)"
+    }
+  ],
+  "real_life": [
+    {
+      "type": "kakao",
+      "title": "📱 미래네 집 단톡 · Mirae's Family Chat",
+      "title_en": "Family KakaoTalk messages about pets",
+      "messages": [
+        {
+          "speaker": "미래",
+          "align": "left",
+          "text": "엄마, 고양이가 있어요?"
+        },
+        {
+          "speaker": "엄마",
+          "align": "right",
+          "text": "아니, 고양이가 없어. 강아지가 있어!"
+        },
+        {
+          "speaker": "미래",
+          "align": "left",
+          "text": "강아지 이름이 뭐예요?"
+        },
+        {
+          "speaker": "엄마",
+          "align": "right",
+          "text": "리아야 😊 귀엽지?"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "id": "rl02_listen",
+      "title": "🎧 새 친구 집에서 · At a New Friend's House",
+      "title_en": "Mirae visits Liam's house and meets his family",
+      "setup_ko": "미래가 리암네 집에 놀러 갔어요. 가족을 소개해요.",
+      "setup_en": "Mirae visits Liam's house. Liam introduces his family.",
+      "audio_text": "미래야, 인사해. 우리 언니야. 언니 이름이 뭐예요? 카요예요. 만나서 반가워요.",
+      "script": [
+        {
+          "speaker": "리암",
+          "text": "미래야, 인사해. 우리 언니야."
+        },
+        {
+          "speaker": "미래",
+          "text": "언니 이름이 뭐예요?"
+        },
+        {
+          "speaker": "리암",
+          "text": "카요예요. 만나서 반가워요."
+        }
+      ],
+      "questions": [
+        {
+          "question_ko": "리암 언니 이름이 뭐예요?",
+          "question_en": "What is Liam's sister's name?",
+          "options": [
+            "카요",
+            "미래",
+            "리아",
+            "올리비아"
+          ],
+          "answer": 0,
+          "explanation": "리암이 '카요예요' 라고 했어요. · Liam said 'It's Kayo.'"
+        }
+      ]
+    }
+  ]
 },
   ep03:{"id":"ep03","title":"잘 먹겠습니다","title_en":"Time for Dinner","level":"L1","goal":{"ko":"식사 예절을 따라 해봐요.","en":"I can follow Korean mealtime etiquette."},"scene":"🍚 저녁 식사 · Dinner Time","slides":["data/nhs/L1/slides/ep03/미래의 저녁식사1.png","data/nhs/L1/slides/ep03/미래의 저녁식사2.png","data/nhs/L1/slides/ep03/미래의 저녁식사3.png","data/nhs/L1/slides/ep03/미래의 저녁식사4.png","data/nhs/L1/slides/ep03/미래의 저녁식사5.png","data/nhs/L1/slides/ep03/미래의 저녁식사6.png","data/nhs/L1/slides/ep03/미래의 저녁식사7.png","data/nhs/L1/slides/ep03/미래의 저녁식사8.png"],"characters":[{"id":"narrator","name":"나레이터","emoji":"📢","color":"#C8C8C8"},{"id":"na","name":"나","emoji":"🙋","color":"#A8D8EA"},{"id":"dongsaeng","name":"동생","emoji":"👦","color":"#B8D4F0"},{"id":"mom","name":"엄마","emoji":"👩","color":"#B8D4B8"},{"id":"dad","name":"아빠","emoji":"👨","color":"#D4C5A0"}],"script":[{"speaker":"narrator","text":"여기는 우리 집이에요.","en":"This is our house.","speech_type":"나레이터","audio":"data/nhs/L1/TTS/ep03/01여기는+우리+집이에요_slide1.mp3","slide":0},{"speaker":"narrator","text":"저는 동생하고 배구를 해요.","en":"I'm playing volleyball with my sibling.","speech_type":"나레이터","audio":"data/nhs/L1/TTS/ep03/02저는+동생하고+배구를+해요_slide2.mp3","slide":1},{"speaker":"na","text":"내 공 받아!","en":"Catch my ball!","speech_type":"반말","audio":"data/nhs/L1/TTS/ep03/03내공+받아_slide3.mp3","slide":2},{"speaker":"dongsaeng","text":"알았어!","en":"Got it!","speech_type":"반말","audio":"data/nhs/L1/TTS/ep03/04알았어_slide3.mp3","slide":2},{"speaker":"mom","text":"얘들아~ 밥 먹어!","en":"Kids~ time to eat!","speech_type":"반말","audio":"data/nhs/L1/TTS/ep03/05얘들아~+밥+먹어slide4.mp3","slide":3},{"speaker":"narrator","text":"우리는 저녁 밥을 먹어요.","en":"We eat dinner.","speech_type":"나레이터","audio":"data/nhs/L1/TTS/ep03/06우리는+저녁+밥을+먹어요_slide5.mp3","slide":4},{"speaker":"mom","text":"모두들 맛있게 먹어요.","en":"Everyone, enjoy your meal!","speech_type":"casual 존댓말","audio":"data/nhs/L1/TTS/ep03/07모두들+맛있게+먹어요slide6.mp3","slide":5},{"speaker":"dongsaeng","text":"잘 먹겠습니다!","en":"Thank you for the food! (before eating)","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep03/08잘+먹겠습니다slide6.mp3","slide":5},{"speaker":"na","text":"잘 먹겠습니다!","en":"Thank you for the food! (before eating)","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep03/09잘+먹겠습니다slide6.mp3","slide":5},{"speaker":"na","text":"엄마, 이거 너무 맛있어요!","en":"Mom, this is so delicious!","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep03/10엄마이거너무맛있어요slide7.mp3","slide":6},{"speaker":"dongsaeng","text":"잘 먹었습니다, 엄마!","en":"Thank you for the meal, Mom!","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep03/11잘+먹었습니다+엄마slide8.mp3","slide":7},{"speaker":"na","text":"잘 먹었습니다, 엄마!","en":"Thank you for the meal, Mom!","speech_type":"존댓말","audio":"data/nhs/L1/TTS/ep03/12잘+먹었습니다+엄마slide8.mp3","slide":7},{"speaker":"dad","text":"나도 잘 먹었어요.","en":"I enjoyed the meal too.","speech_type":"casual 존댓말","audio":"data/nhs/L1/TTS/ep03/13나도+잘+먹었어요slide8.mp3","slide":7}],"vocab":[{"category":"👨‍👩‍👧‍👦 가족 · Family","items":[{"korean":"엄마","romanization":"eom-ma","english":"mom","emoji":"👩"},{"korean":"아빠","romanization":"a-ppa","english":"dad","emoji":"👨"},{"korean":"동생","romanization":"dong-saeng","english":"younger sibling","emoji":"👦"},{"korean":"언니","romanization":"eon-ni","english":"older sister (girl says)","emoji":"👧"},{"korean":"오빠","romanization":"op-pa","english":"older brother (girl says)","emoji":"🧑"},{"korean":"형","romanization":"hyeong","english":"older brother (boy says)","emoji":"🧑"},{"korean":"할머니","romanization":"hal-meo-ni","english":"grandmother","emoji":"👵"},{"korean":"할아버지","romanization":"hal-a-beo-ji","english":"grandfather","emoji":"👴"}]},{"category":"👥 사람 · People","items":[{"korean":"친구","romanization":"chin-gu","english":"friend","emoji":"🤝"},{"korean":"우리","romanization":"u-ri","english":"we / our","emoji":"🫂"},{"korean":"모두","romanization":"mo-du","english":"everyone / all","emoji":"🙌"}]},{"category":"🏠 명사 · Nouns","items":[{"korean":"집","romanization":"jip","english":"house / home","emoji":"🏠"},{"korean":"마당","romanization":"ma-dang","english":"yard / garden","emoji":"🌳"},{"korean":"밥","romanization":"bap","english":"rice / meal","emoji":"🍚"},{"korean":"식사","romanization":"sik-sa","english":"meal / dining","emoji":"🍽️"},{"korean":"배구","romanization":"bae-gu","english":"volleyball","emoji":"🏐"}]},{"category":"⏰ 시간 · Time","items":[{"korean":"아침","romanization":"a-chim","english":"morning / breakfast","emoji":"🌅"},{"korean":"점심","romanization":"jeom-sim","english":"noon / lunch","emoji":"☀️"},{"korean":"저녁","romanization":"jeo-nyeok","english":"evening / dinner","emoji":"🌙"},{"korean":"어제","romanization":"eo-je","english":"yesterday","emoji":"⬅️"},{"korean":"오늘","romanization":"o-neul","english":"today","emoji":"📅"}]},{"category":"🔤 동사 · Verbs","items":[{"korean":"먹어요","romanization":"meo-geo-yo","english":"eat (polite)","emoji":"🍽️"},{"korean":"불러요","romanization":"bul-leo-yo","english":"call · sing · be full","emoji":"📣","note":"노래를 불러요 (sing) · 배가 불러요 (be full) · 엄마가 불러요 (call)"},{"korean":"있어요","romanization":"i-sseo-yo","english":"there is / have","emoji":"✅"},{"korean":"없어요","romanization":"eop-sseo-yo","english":"there isn't / don't have","emoji":"❌"},{"korean":"알아요","romanization":"a-ra-yo","english":"know / understand","emoji":"💡"},{"korean":"몰라요","romanization":"mol-la-yo","english":"don't know","emoji":"🤷"}]},{"category":"😋 형용사 · Adjectives","items":[{"korean":"맛있어요","romanization":"ma-si-sseo-yo","english":"delicious / tasty","emoji":"😋"},{"korean":"맛없어요","romanization":"ma-deop-sseo-yo","english":"not tasty / bland","emoji":"😞"}]},{"category":"💬 표현 · Expressions","items":[{"korean":"얘들아","romanization":"yae-deul-a","english":"hey kids! (calling out)","emoji":"👋"},{"korean":"잘 먹겠습니다","romanization":"jal meok-get-seum-ni-da","english":"thank you for the food (before)","emoji":"🙏"},{"korean":"잘 먹었습니다","romanization":"jal meo-geot-seum-ni-da","english":"thank you for the meal (after)","emoji":"🙇"}]}],"grammar":[{"id":"g_ul","title":"-을 / -를 목적격 조사","title_en":"Object Particle -을 / -를","icon":"🎯","rule":"명사(받침 O) + 을  |  명사(받침 X) + 를","pattern":"명사(받침 O) + 을  |  명사(받침 X) + 를","explanation_en":"The object particle marks WHAT the action is done to. Use 을 after a consonant-ending noun, 를 after a vowel-ending noun. The object particle is often dropped in casual speech.","table":{"columns":["단어 Word","받침 Final?","조사 Particle","예문 Example"],"rows":[["밥","O (ㅂ)","을","밥을 먹어요"],["배구","X (ㅜ)","를","배구를 해요"],["공","O (ㅇ)","을","공을 받아!"],["우리","X (ㅣ)","를","우리를 불러요"]]},"examples":[{"ko":"저는 배구를 해요.","en":"I play volleyball."},{"ko":"밥을 먹어요.","en":"I eat rice."},{"ko":"내 공 받아!","en":"Catch my ball!"},{"ko":"엄마가 우리를 불러요.","en":"Mom calls us."}],"fill_blanks":[{"sentence":"저는 배구___ 해요.","answer":"를","hint":"배구 ends in vowel (ㅜ) → 를"},{"sentence":"밥___ 먹어요.","answer":"을","hint":"밥 ends in consonant (ㅂ) → 을"},{"sentence":"엄마가 우리___ 불러요.","answer":"를","hint":"우리 ends in vowel (ㅣ) → 를"}]},{"id":"g6","title":"이거 / 그거 / 저거","title_en":"This / That / That over there","icon":"👆","rule":"이거 (near me) · 그거 (near you) · 저거 (far from both)","pattern":"이거 (near me 🙋) | 그거 (near you 👂) | 저거 (far away 👉)","explanation_en":"이거 = this thing (near speaker), 그거 = that thing (near listener), 저거 = that thing over there (far from both). For places: 여기/거기/저기.","table":{"columns":["거리 Distance","사물 Thing","장소 Place","사람 Person"],"rows":[["가까이 — 나 (near me)","이거","여기","이 사람"],["가까이 — 너 (near you)","그거","거기","그 사람"],["멀리 (far)","저거","저기","저 사람"]]},"examples":[{"ko":"엄마, 이거 너무 맛있어요!","en":"Mom, this is so delicious!"},{"ko":"그거 뭐야?","en":"What's that?"},{"ko":"저거 봐!","en":"Look at that over there!"},{"ko":"이거 얼마예요?","en":"How much is this?"}],"fill_blanks":[{"sentence":"엄마, ___ 너무 맛있어요! (this — near me)","answer":"이거","hint":"near the speaker = 이거"},{"sentence":"___ 뭐야? (what's that — near you)","answer":"그거","hint":"near the listener = 그거"},{"sentence":"___ 봐! (look at that over there!)","answer":"저거","hint":"far from both = 저거"}]},{"id":"g3","title":"아침에 / 저녁에 vs 어제 / 오늘","title_en":"Time Words — When to Use 에","icon":"🕐","rule":"시간대 (아침/점심/저녁) + 에  |  날짜어 (어제/오늘/내일) — 에 없음","pattern":"아침/점심/저녁 + 에 ✅  |  어제/오늘/내일 + 에 ❌","explanation_en":"Time-of-day words (아침, 점심, 저녁) take particle 에. But relative date words (어제, 오늘, 내일) stand alone — no 에!","table":{"columns":["종류 Type","단어 Word","조사 Particle","예문 Example"],"rows":[["시간대 Time-of-day","아침 / 점심 / 저녁","+ 에 ✅","저녁에 밥을 먹어요"],["날짜어 Date words","어제 / 오늘 / 내일","에 없음 ❌","오늘 밥을 먹어요"]]},"examples":[{"ko":"저녁에 밥을 먹어요.","en":"I eat dinner in the evening. (에 ✅)"},{"ko":"아침에 학교에 가요.","en":"I go to school in the morning. (에 ✅)"},{"ko":"오늘 밥을 먹어요.","en":"I eat today. (에 ❌)"},{"ko":"어제 배구를 했어요.","en":"I played volleyball yesterday. (에 ❌)"}],"fill_blanks":[{"sentence":"저녁___ 밥을 먹어요.","answer":"에","hint":"저녁 = time-of-day → 에 필요 ✅"},{"sentence":"아침___ 학교에 가요.","answer":"에","hint":"아침 = time-of-day → 에 필요 ✅"},{"sentence":"오늘 배구___ 해요.","answer":"를","hint":"오늘 뒤에 에 없음 ❌, 배구 뒤에 를 ✅"}]},{"id":"g1","title":"잘 먹겠습니다 / 잘 먹었습니다","title_en":"Korean Meal Expressions","icon":"🍽️","rule":"식사 전: 잘 먹겠습니다  |  식사 후: 잘 먹었습니다","pattern":"잘 먹겠습니다 (🍽️ before) ↔ 잘 먹었습니다 (🍽️ after)","explanation_en":"Essential Korean mealtime expressions. Say 잘 먹겠습니다 before eating and 잘 먹었습니다 after. The formal -습니다 ending is more natural than -어요 for these greetings. Always say them to the person who prepared the food!","table":{"columns":["시간 Timing","표현 Expression","의미 Meaning"],"rows":[["식사 전 Before","잘 먹겠습니다","Thank you for the food (formal)"],["식사 후 After","잘 먹었습니다","Thank you for the meal (formal)"],["casual 반말","잘 먹을게! / 잘 먹었어!","To siblings or close friends"]]},"examples":[{"ko":"잘 먹겠습니다!","en":"Thank you for the food! (before eating)"},{"ko":"잘 먹었습니다, 엄마!","en":"Thank you for the meal, Mom!"},{"ko":"잘 먹었어요.","en":"I enjoyed the meal. (casual polite)"},{"ko":"잘 먹었어!","en":"That was good! (반말, to siblings)"}],"fill_blanks":[{"sentence":"식사 전에는 '잘 ___!'라고 해요.","answer":"먹겠습니다","hint":"before eating — 겠 = intention"},{"sentence":"식사 후에는 '잘 ___!'라고 해요.","answer":"먹었습니다","hint":"after eating — 었 = past"}]},{"id":"g2","title":"배구하다 vs 배구를 하다","title_en":"Sports Verbs: Compact vs. Separate","icon":"🏐","rule":"스포츠 + 하다  OR  스포츠 + 를/을 + 하다","pattern":"[활동] + 하다  OR  [활동] + 를/을 + 하다","explanation_en":"Sports and activities can be expressed two ways. Attach 하다 directly (배구하다) or use object particle 를/을 + 하다 (배구를 하다). Both are correct — the separate form is more natural in speech.","table":{"columns":["compact 형","separate 형","영어 English"],"rows":[["배구하다","배구를 하다","play volleyball"],["축구하다","축구를 하다","play soccer"],["숙제하다","숙제를 하다","do homework"],["요리하다","요리를 하다","cook"]]},"examples":[{"ko":"저는 배구를 해요.","en":"I play volleyball."},{"ko":"저는 배구해요.","en":"I play volleyball. (compact)"},{"ko":"축구를 해요.","en":"I play soccer."},{"ko":"숙제를 해요.","en":"I do homework."}],"fill_blanks":[{"sentence":"저는 축구___ 해요.","answer":"를","hint":"축구 ends in vowel → 를"},{"sentence":"오늘 요리___ 해요.","answer":"를","hint":"요리 ends in vowel (ㅣ) → 를"}]},{"id":"g4","title":"맛있어요 / 맛없어요","title_en":"맛 + 있다 / 없다","icon":"😋","rule":"맛 + 있어요 = delicious  |  맛 + 없어요 = not tasty","pattern":"맛(taste) + 있어요 = 😋  |  맛(taste) + 없어요 = 😞","explanation_en":"맛 means taste/flavor. 맛있어요 = taste exists = delicious! 맛없어요 = taste doesn't exist = bland. Watch the pronunciation — 맛있어요 sounds like [마시써요]!","table":{"columns":["표현 Expression","뜻 Meaning","발음 Pronunciation"],"rows":[["맛있어요","delicious / tasty","[마시써요]"],["맛없어요","not tasty / bland","[마덥써요]"]]},"examples":[{"ko":"이거 너무 맛있어요!","en":"This is SO delicious!"},{"ko":"맛없어요.","en":"It doesn't taste good."},{"ko":"한국 음식은 맛있어요.","en":"Korean food is delicious."},{"ko":"맛이 없어요.","en":"There is no taste. (separated form)"}],"fill_blanks":[{"sentence":"엄마 음식은 정말 ___!","answer":"맛있어요","hint":"맛 + 있어요 = delicious 😋"},{"sentence":"이거 별로예요. ___.","answer":"맛없어요","hint":"맛 + 없어요 = not tasty 😞"}]},{"id":"g5","title":"알아요 / 몰라요","title_en":"알다 / 모르다 — Know / Don't Know","icon":"💡","rule":"알다 → 알아요  |  모르다 → 몰라요 (ㄹ irregular)","pattern":"알다 → 알아요 (regular)  |  모르다 → 몰라요 (ㄹ irregular!)","explanation_en":"알아요 = I know. 몰라요 = I don't know. Note: 모르다 → 몰라요 (not 모르어요) — this is the ㄹ-irregular pattern. Same pattern: 부르다 → 불러요.","table":{"columns":["기본형 Dictionary","존댓말 Polite","반말 Casual"],"rows":[["알다","알아요","알아"],["모르다","몰라요","몰라"],["부르다","불러요","불러"]]},"examples":[{"ko":"알아요!","en":"I know! / Got it!"},{"ko":"몰라요.","en":"I don't know."},{"ko":"한국어 알아요?","en":"Do you know Korean?"},{"ko":"이름을 몰라요.","en":"I don't know the name."}],"fill_blanks":[{"sentence":"한국어 ___? (do you know?)","answer":"알아요","hint":"알다 → 알아요 (regular)"},{"sentence":"이름을 ___. (don't know)","answer":"몰라요","hint":"모르다 → 몰라요 (ㄹ irregular!)"}]}],"banmal_jondaemal":{"intro_ko":"가족 사이에서도 말투가 달라요! 부모님한테는 존댓말, 동생한테는 반말을 써요.","intro_en":"Even within a family, speech levels change! 존댓말 with parents, 반말 with younger siblings.","rows":[{"situation_ko":"공 던질 때 (동생에게)","situation_en":"Throwing the ball (to sibling)","banmal":"내 공 받아!","jondaemal":"공 받으세요!","note":"동생에게는 반말, 어른에게는 존댓말"},{"situation_ko":"밥 먹기 전 (부모님께)","situation_en":"Before eating (to parents)","banmal":"잘 먹을게!","jondaemal":"잘 먹겠습니다!","note":"인사할 때는 formal 존댓말이 보편적"},{"situation_ko":"밥 먹은 후 (부모님께)","situation_en":"After eating (to parents)","banmal":"잘 먹었어!","jondaemal":"잘 먹었습니다!","note":"casual 존댓말(잘 먹었어요)도 OK"},{"situation_ko":"음식 칭찬할 때","situation_en":"Complimenting the food","banmal":"이거 너무 맛있어!","jondaemal":"이거 너무 맛있어요!","note":"-요만 붙이면 존댓말이 돼요"}],"tip":"💡 인사말(잘 먹겠습니다 / 잘 먹었습니다)은 -어요보다 -습니다가 더 자연스러워요!","vocab_comparison":{"title_ko":"밥 vs 식사 — 일상어 vs 격식어","title_en":"Casual vs. Formal Food Vocabulary","intro_ko":"'밥'은 일상 대화에서, '식사'는 격식 있는 상황이나 어른께 쓰는 높임 표현이에요.","intro_en":"'밥' is everyday Korean. '식사' is the formal/honorific word for meal — used with elders or in polite situations.","table":[{"banmal":"아침밥","jondaemal":"아침 식사","en":"breakfast"},{"banmal":"점심밥","jondaemal":"점심 식사","en":"lunch"},{"banmal":"저녁밥","jondaemal":"저녁 식사","en":"dinner"}]},"greeting_comparison":{"title_ko":"🇰🇷 밥으로 인사하는 나라","title_en":"Korea's Unique Meal Greeting","intro_ko":"한국에서는 '안녕하세요' 대신 밥을 먹었는지 물어봐요. 진짜로 밥 생각이 있어서가 아니라, 상대방을 걱정하는 따뜻한 인사예요!","intro_en":"In Korea, asking whether someone ate is a warm, caring greeting — not a literal question about food. It's like saying 'How are you?' but with heart!","rows":[{"speech_level":"반말","example":"밥 먹었어?","en":"Did you eat? (casual)"},{"speech_level":"존댓말","example":"식사 하셨어요?","en":"Did you have a meal? (polite)"},{"speech_level":"격식체","example":"식사 하셨습니까?","en":"Have you had your meal? (formal)"}],"note_ko":"💡 밥(casual) → 식사(formal), 먹었어(casual) → 하셨어요 / 하셨습니까(formal+honorific)","note_en":"Notice: casual uses '밥 먹다', formal uses '식사 하다' with honorific verb endings."}},"usage":[{"title":"먹어 / 먹어요 / 드세요","title_en":"Three Ways to Say Eat","explanation_en":"먹어 is casual (반말) — use with younger siblings or friends your age. 먹어요 is polite — use with parents and teachers. 드세요 is honorific — extra respect for grandparents. Dictionary form: 먹다.","examples":[{"ko":"동생아, 빨리 먹어!","en":"Sibling, eat quickly! (반말)"},{"ko":"밥 먹어요~","en":"Let's eat~ (polite)"},{"ko":"할머니, 드세요.","en":"Grandma, please eat. (honorific)"},{"ko":"모두들 맛있게 먹어요.","en":"Everyone, eat well!"}]},{"title":"알아요 vs 알았어!","title_en":"알다 in Different Situations","explanation_en":"알아요 = I know (present). 알았어! (반말) or 알았어요! (polite) = Got it! — past tense of 알다, meaning I have understood. Very common in everyday Korean!","examples":[{"ko":"알았어! (동생에게)","en":"Got it! (반말)"},{"ko":"알았어요! (부모님께)","en":"Got it! (polite)"},{"ko":"한국어 알아요?","en":"Do you know Korean?"},{"ko":"네, 알아요!","en":"Yes, I know!"}]},{"title":"부르다 → 불러요 (ㄹ irregular)","title_en":"부르다 · To Call / To Sing","explanation_en":"부르다 means both to call a person and to sing. Polite form: 부르다 → 불러요. Same ㄹ-irregular pattern: 모르다 → 몰라요.","examples":[{"ko":"엄마가 우리를 불러요.","en":"Mom calls us."},{"ko":"선생님이 내 이름을 불러요.","en":"The teacher calls my name."},{"ko":"노래를 불러요.","en":"I sing a song."},{"ko":"몰라요. (모르다 → 몰라요)","en":"I don't know."}]},{"title":"있어요 / 없어요","title_en":"있다 · 없다 — Have / Don't Have","explanation_en":"있어요 and 없어요 mean both there is/isn't AND I have/don't have. The sentence subject tells you which meaning applies.","examples":[{"ko":"마당에 오렌지 나무가 있어요.","en":"There is an orange tree in the yard."},{"ko":"저는 동생이 있어요.","en":"I have a younger sibling."},{"ko":"숙제가 없어요.","en":"I don't have homework."},{"ko":"맛이 없어요.","en":"It has no taste."}]},{"title":"얘들아 — 호격조사 -아 / -야","title_en":"Calling Someone — -아 / -야","explanation_en":"Add -아 after a consonant, -야 after a vowel when calling out to someone. 얘들아 = 얘들 + -아. Apply to names: 민수야~ (vowel), 정민아~ (consonant). Always 반말.","examples":[{"ko":"얘들아~ 밥 먹어!","en":"Kids~ time to eat!"},{"ko":"민수야, 이리 와!","en":"Minsu, come here!"},{"ko":"정민아, 공 받아!","en":"Jeongmin, catch the ball!"},{"ko":"친구야~","en":"Hey friend~"}]}],"quiz":[{"id":"q1","audio_text":"잘 먹겠습니다!","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["잘 먹겠습니다!","잘 먹었습니다!","맛있게 먹어요!","감사합니다!"],"answer":0,"explanation":"잘 먹겠습니다 = 식사 전 인사 (before eating) · 잘 먹었습니다 = 식사 후 인사 (after eating)"},{"id":"q2","audio_text":"잘 먹었습니다, 엄마!","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["잘 먹겠습니다, 엄마!","잘 먹었습니다, 엄마!","잘 먹었어요, 엄마!","잘 먹었습니다, 아빠!"],"answer":1,"explanation":"잘 먹었습니다 = 식사 후 인사. 먹겠 (will eat) vs 먹었 (ate) 차이에 주목하세요!"},{"id":"q3","audio_text":"엄마, 이거 너무 맛있어요!","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["엄마, 이거 너무 맛없어요!","엄마, 이거 너무 맛있어요!","엄마, 이거 너무 맛있어!","엄마, 저거 너무 맛있어요!"],"answer":1,"explanation":"맛있어요 (polite) vs 맛있어 (casual). 이거 (near me) vs 저거 (far away) 차이도 기억하세요!"},{"id":"q4","audio_text":"얘들아~ 밥 먹어!","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["얘들아~ 밥 먹어요!","얘들아~ 밥 먹자!","얘들아~ 밥 먹어!","얘들아~ 밥 먹을게!"],"answer":2,"explanation":"먹어 = 반말 (casual). 엄마가 아이들한테 쓰는 말투예요. 얘들아 = 얘들 + -아 (호격조사)!"},{"id":"q5","audio_text":"저는 배구를 해요.","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["저는 배구가 해요.","저는 배구도 해요.","저는 배구를 해요.","저는 배구에서 해요."],"answer":2,"explanation":"배구를 해요 — 를 is the object particle (목적격 조사). 배구 ends in a vowel (ㅜ) → 를!"},{"id":"q6","audio_text":"나도 잘 먹었어요.","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["나도 잘 먹겠어요.","나도 잘 먹었어!","나도 잘 먹었습니다.","나도 잘 먹었어요."],"answer":3,"explanation":"먹었어요 = casual polite (먹었어 is 반말, 먹었습니다 is formal). 나도 = I also (도 = also/too)!"}],"real_life":[{"title":"🍽️ 친구 집에서 밥 먹기","title_en":"Eating at a Friend's House","setup_ko":"친구 집에 초대받았어요. 식탁에 앉았을 때!","setup_en":"You are invited to a friend's house for dinner.","lines":[{"speaker":"친구 엄마","text":"어서 와! 같이 먹자.","en":"Welcome! Let's eat together."},{"speaker":"나","text":"감사합니다. 잘 먹겠습니다!","en":"Thank you. I'll enjoy the meal!"},{"speaker":"친구 엄마","text":"많이 먹어~","en":"Eat a lot~"},{"speaker":"나","text":"엄마, 이거 너무 맛있어요!","en":"Ma'am, this is so delicious!"},{"speaker":"친구 엄마","text":"정말? 다행이다~","en":"Really? I'm glad~"},{"speaker":"나","text":"잘 먹었습니다!","en":"Thank you for the meal!"}]},{"type":"tip","title":"🇰🇷 한국의 밥상 예절","content_ko":"한국에서는 식사 전에 잘 먹겠습니다, 식사 후에 잘 먹었습니다라고 꼭 말해요. 어른이 있을 때는 어른이 먼저 숟가락을 드신 후에 먹기 시작해요. 인사말은 -어요보다 -습니다가 더 자연스러워요!","content_en":"Always say 잘 먹겠습니다 before eating and 잘 먹었습니다 after. When elders are present, wait for them to start. The formal -습니다 sounds more natural than -어요 for these greetings."}],"pronunciation":[{"id":"pron1","title":"받침의 연음 — Liaison of Final Consonants","rule":"받침(final consonant)으로 끝나는 음절 뒤에 모음(vowel)으로 시작하는 음절이 오면, 받침이 다음 음절의 초성으로 이동해서 발음돼요.","table":{"columns":["Spelling 표기","Pronunciation 발음","Rule 규칙"],"rows":[["먹어요","[머거요]","ㄱ + 어 → 거"],["알아요","[아라요]","ㄹ + 아 → 라"],["맛있어요","[마시써요]","ㅅ + 이 → 시 · ㅅ + 어 → 써"],["잘 먹었습니다","[잘 머겓씀니다]","ㄱ + 었 → 거"]]},"tip":"💡 연음은 '소리가 이어진다'는 뜻! 표기(쓰는 것)와 발음(읽는 것)이 달라요. 천천히 읽어도 연음은 자연스럽게 나와요."}]},
   ep04: {"id":"ep04","title":"우리 몇 시에 만날까?","title_en":"What Time Shall We Meet?","level":"초급","scene":"🛏️ 미래의 방 · Mirae's Room (phone call)","video":null,"slides":["data/nhs/L1/slides/ep04/미래의방1.png","data/nhs/L1/slides/ep04/미래의방2.png","data/nhs/L1/slides/ep04/미래의방3.png","data/nhs/L1/slides/ep04/미래의방4.png"],"goal":{"ko":"친구와 만날 약속을 할 수 있어요 (시간·장소 정하기).","en":"I can make plans to meet a friend (deciding time and place)."},"characters":[{"id":"olivia","name":"올리비아","emoji":"👧","color":"#D98BA8","description":"미래의 친구 (Mirae's friend)"},{"id":"mirae","name":"미래","emoji":"👩","color":"#E85D9A","description":"약속을 제안하는 친구 (the one suggesting plans)"}],"script":[{"speaker":"olivia","text":"미래 안녕? 무슨 일이야?","en":"Hi Mirae? What's up?","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/1미래+안녕_+무슨+일이야_slide1.mp3","slide":0},{"speaker":"mirae","text":"안녕, 올리비아. 이번 주말에 약속 없어?","en":"Hi Olivia. Are you free this weekend? (lit: no plans?)","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/2안녕_+올리비아+이번+주말에+약속+없어_slide1.mp3","slide":0},{"speaker":"olivia","text":"응, 약속 없어. 왜?","en":"Yeah, I'm free. Why?","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/3응+약속+없어_+왜_slide2.mp3","slide":1},{"speaker":"mirae","text":"우리 한강 공원에 자전거 타러 갈까?","en":"Shall we go to Han River Park to ride bikes?","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/4우리+한강+공원에+자전거+타러+갈까_slide2.mp3","slide":1},{"speaker":"olivia","text":"좋아! 몇 시에 어디에서 만나?","en":"Sounds good! What time and where shall we meet?","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/5좋아!+몇+시에+어디에서+만나_slide3.mp3","slide":2},{"speaker":"mirae","text":"오후 1시에 지하철 3번 입구에서 어때?","en":"How about 1 PM at subway entrance 3?","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/6오후+1시에+지하철+3번+입구에서+어때_slide3.mp3","slide":2},{"speaker":"olivia","text":"알았어. 거기서 만나!","en":"Got it. See you there!","speech_type":"반말","audio":"data/nhs/L1/TTS/ep04/7알았어_+거기서+만나_slide4.mp3","slide":3}],"vocab":[{"category":"⏰ 시간 · Time","items":[{"korean":"몇 시","romanization":"myeot si","english":"what time","emoji":"🕐","note":"시 = 고유어 숫자와 함께 · hour uses Native Korean numbers"},{"korean":"오전","romanization":"o-jeon","english":"a.m. / morning","emoji":"🌅"},{"korean":"오후","romanization":"o-hu","english":"p.m. / afternoon","emoji":"🌇"},{"korean":"아침","romanization":"a-chim","english":"morning / breakfast","emoji":"🍳"},{"korean":"점심","romanization":"jeom-sim","english":"noon / lunch","emoji":"🍱"},{"korean":"저녁","romanization":"jeo-nyeok","english":"evening / dinner","emoji":"🌙"},{"korean":"어제","romanization":"eo-je","english":"yesterday","emoji":"⬅️"},{"korean":"오늘","romanization":"o-neul","english":"today","emoji":"📍"},{"korean":"내일","romanization":"nae-il","english":"tomorrow","emoji":"➡️"},{"korean":"주말","romanization":"ju-mal","english":"weekend","emoji":"📅"}]},{"category":"🚇 장소·교통 · Places & Transport","items":[{"korean":"지하철","romanization":"ji-ha-cheol","english":"subway","emoji":"🚇"},{"korean":"입구","romanization":"ip-gu","english":"entrance","emoji":"🚪","note":"들어가는 곳 · where you enter"},{"korean":"출구","romanization":"chul-gu","english":"exit","emoji":"🚶","note":"나가는 곳 · where you exit"},{"korean":"한강","romanization":"han-gang","english":"Han River (Seoul's main river)","emoji":"🌊"},{"korean":"공원","romanization":"gong-won","english":"park","emoji":"🏞️"}]},{"category":"🤝 약속·표현 · Plans & Expressions","items":[{"korean":"약속","romanization":"yak-sok","english":"appointment / plans / promise","emoji":"🤝","note":"약속 없어? = Are you free? (lit: no plans?)"},{"korean":"별일","romanization":"byeol-il","english":"anything special / much going on","emoji":"🤔","note":"별일 없어 = nothing much / I'm free"},{"korean":"왜","romanization":"wae","english":"why","emoji":"❓"},{"korean":"어디","romanization":"eo-di","english":"where","emoji":"📍"},{"korean":"어때","romanization":"eo-ttae","english":"how about? / what do you think?","emoji":"💬","note":"제안할 때 · used to suggest something"},{"korean":"거기","romanization":"geo-gi","english":"there","emoji":"👉"}]},{"category":"🔤 동사 · Verbs","items":[{"korean":"만나다 / 만나요","romanization":"man-na-da / man-na-yo","english":"to meet","emoji":"🤝"},{"korean":"타다 / 타요","romanization":"ta-da / ta-yo","english":"to ride","emoji":"🚲","note":"자전거를 타다 = ride a bike"},{"korean":"가다 / 가요","romanization":"ga-da / ga-yo","english":"to go","emoji":"🚶"},{"korean":"알다 / 알아요","romanization":"al-da / a-ra-yo","english":"to know / got it","emoji":"👌","note":"알았어 = Got it / Understood (casual)"}]},{"category":"👋 한국의 손동작 · Korean Hand Gestures","items":[{"korean":"최고","romanization":"choe-go","english":"the best / awesome!","emoji":"👍","note":"기본형: 최고"},{"korean":"약속","romanization":"yak-sok","english":"pinky promise","emoji":"🤙","note":"기본형: 약속"},{"korean":"사랑해","romanization":"sa-rang-hae","english":"I love you (casual)","emoji":"🫰","note":"기본형: 사랑하다"},{"korean":"오케이","romanization":"o-ke-i","english":"okay / got it","emoji":"👌","note":"기본형: 오케이"}]},{"category":"📅 약속 표현 · Making & Declining Plans","items":[{"korean":"오늘 시간이 있어요?","romanization":"o-neul si-ga-ni i-sseo-yo","english":"Are you free today?","emoji":"📅","note":"기본형: 시간이 있다"},{"korean":"특별한 일이 없어요","romanization":"teuk-byeol-han i-ri eop-sseo-yo","english":"Nothing special — I'm free!","emoji":"😊","note":"기본형: 특별한 일"},{"korean":"다른 약속이 있어요","romanization":"da-reun yak-so-gi i-sseo-yo","english":"I have other plans","emoji":"😅","note":"기본형: 다른 약속"},{"korean":"오늘은 바빠요","romanization":"o-neu-reun ba-ppa-yo","english":"I'm busy today","emoji":"😣","note":"기본형: 바쁘다"}]}],"grammar":[{"id":"g_ep06_01","title":"N에 — at / to (time & place)","title_en":"The particle 에","icon":"📍","rule":"시간·도착 장소 뒤에 붙음 · attaches to a time or a destination","pattern":"시간/장소 + 에","explanation_en":"에 marks WHEN (a time) or WHERE TO (a destination). 1시에 = at 1 o'clock, 공원에 가다 = go to the park. Note: 어제/오늘/내일 do NOT take 에.","table":{"columns":["용법 · Use","예시 · Example","뜻 · Meaning"],"rows":[["시간 · time","1시에","at 1 o'clock"],["시간 · time","주말에","on the weekend"],["목적지 · destination","공원에 가다","go to the park"],["예외 · exception","오늘 (X 오늘에)","today — no 에!"]]},"examples":[{"ko":"오후 1시에 만나요.","en":"Let's meet at 1 PM."},{"ko":"한강 공원에 가요.","en":"I'm going to Han River Park."},{"ko":"주말에 약속 있어요?","en":"Do you have plans on the weekend?"}],"fill_blanks":[{"sentence":"오후 1시___ 만나요.","answer":"에","hint":"시간 조사 · time particle"},{"sentence":"공원___ 가요.","answer":"에","hint":"도착 장소 · destination particle"}]},{"id":"g_ep06_02","title":"N에서 — at / from (action place)","title_en":"The particle 에서","icon":"🏞️","rule":"행동이 일어나는 장소, 또는 출발점 · place where an action happens, or a starting point (from)","pattern":"장소 + 에서","explanation_en":"에서 marks WHERE an action takes place (or 'from'). Compare with 에 (destination): 공원에 가다 (go TO the park) vs 공원에서 놀다 (play AT the park). In ep6: 입구에서 만나 = meet AT the entrance.","table":{"columns":["조사","역할 · Role","예시 · Example"],"rows":[["에","도착지 · destination","공원에 가요 (go TO park)"],["에서","행동 장소 · action place","공원에서 만나요 (meet AT park)"],["에서","출발점 · from","집에서 와요 (come FROM home)"]]},"examples":[{"ko":"입구에서 만나.","en":"Let's meet at the entrance."},{"ko":"한강에서 자전거를 타요.","en":"I ride a bike at the Han River."},{"ko":"어디에서 만나?","en":"Where shall we meet?"}],"fill_blanks":[{"sentence":"지하철 3번 입구___ 만나.","answer":"에서","hint":"만나는 장소(행동) · place of action (meeting)"},{"sentence":"어디___ 만나?","answer":"에서","hint":"행동이 일어나는 곳 · where the action happens"}]},{"id":"g_ep06_03","title":"-(으)러 가다 — go in order to do","title_en":"Going to do something","icon":"🚲","rule":"동사 어간 + (으)러 + 가다/오다 = ~하러 가다 · verb stem + (으)러 + go/come = go/come in order to do","pattern":"동사 어간 + (으)러 가다","explanation_en":"Use -(으)러 가다 to say you go somewhere FOR THE PURPOSE of doing something. 타다 (ride) → 타러 가다 (go to ride). 받침 X → 러 / 받침 O → 으러.","table":{"columns":["동사","+ (으)러 가다","뜻 · Meaning"],"rows":[["타다","타러 가다","go to ride"],["먹다","먹으러 가다","go to eat"],["놀다","놀러 가다","go to hang out"]]},"examples":[{"ko":"자전거 타러 갈까?","en":"Shall we go to ride bikes?"},{"ko":"한강에 놀러 가요.","en":"Let's go to the Han River to hang out."},{"ko":"밥 먹으러 가자.","en":"Let's go to eat."}],"fill_blanks":[{"sentence":"자전거 타___ 갈까?","answer":"러","hint":"목적 (타다 받침 X) · purpose (타다 has no 받침 → 러)"}]},{"id":"g_ep06_04","title":"N와/과 (= 하고 = (이)랑) — and / with","title_en":"The 'and / with' particles","icon":"🔗","rule":"받침 X → 와 | 받침 O → 과 · No 받침 → 와 | Has 받침 → 과 (격식/문어). 일상어: 하고, (이)랑","pattern":"N + 와/과 / 하고 / (이)랑 + N","explanation_en":"Korean has three ways to say 'and / with': 와/과 (formal/written), 하고 (neutral/spoken), (이)랑 (casual). All connect nouns or mean 'with someone'. 친구와 만나다 = meet WITH a friend.","table":{"columns":["격식 · Register","받침 X","받침 O","예시"],"rows":[["격식/문어 · formal","와","과","친구와 / 선생님과"],["일반/구어 · neutral","하고","하고","친구하고"],["반말/구어 · casual","랑","이랑","친구랑 / 선생님이랑"]]},"examples":[{"ko":"친구와 한강에 가요.","en":"I go to the Han River with a friend. (formal)"},{"ko":"올리비아하고 자전거를 타요.","en":"I ride bikes with Olivia. (neutral)"},{"ko":"미래랑 약속이 있어요.","en":"I have plans with Mirae. (casual)"}],"fill_blanks":[{"sentence":"친구___ 한강에 가요. (격식)","answer":"와","hint":"친구 받침 X → 와 · no 받침 → 와"},{"sentence":"선생님___ 이야기해요. (격식)","answer":"과","hint":"선생님 받침 O → 과 · has 받침 → 과"}]},{"id":"g_ep06_05","title":"시간 읽기 — 몇 시 (고유어) / 몇 분 (한자어)","title_en":"Telling Time","icon":"🕐","rule":"시(hour) = 고유어 숫자 | 분(minute) = 한자어 숫자 · Hours use Native Korean, minutes use Sino-Korean","pattern":"고유어 + 시 + 한자어 + 분","explanation_en":"Korean mixes two number systems for time! HOURS use Native Korean (한, 두, 세...) because they only go up to 12. MINUTES use Sino-Korean (일, 이, 삼...) because they go up to 60. Example: 1시 30분 = 한 시 삼십 분.","table":{"columns":["시각 · Time","한국어 · Korean","구성 · Breakdown"],"rows":[["1:00","한 시","한(native 1) + 시"],["2:30","두 시 삼십 분","두(native 2) 시 + 삼십(sino 30) 분"],["오후 1:00","오후 한 시","p.m. + native 1 + 시"],["7:15","일곱 시 십오 분","일곱(native 7) 시 + 십오(sino 15) 분"]]},"examples":[{"ko":"오후 한 시에 만나요.","en":"Let's meet at 1 PM. (한 시 = native 1 + 시)"},{"ko":"지금 몇 시예요?","en":"What time is it now?"},{"ko":"두 시 삼십 분이에요.","en":"It's 2:30. (두 시 = native, 삼십 분 = sino)"}],"fill_blanks":[{"sentence":"오후 ___ 시에 만나. (1시)","answer":"한","hint":"시는 고유어! 1 → 한 · hours use Native Korean: 1 → 한"}]},{"id":"g_ep06_06","title":"한국식 대답 — 네/아니요 (영어와 반대!)","title_en":"Answering Yes/No the Korean Way","icon":"🔄","rule":"네/응 = 질문 내용에 동의 | 아니요/아니 = 질문 내용에 부정 · 네/응 agrees with the question; 아니요/아니 disagrees — opposite of English for negative questions!","pattern":"질문 → 네/응 (동의) 또는 아니요/아니 (부정)","explanation_en":"Korean yes/no answers respond to the QUESTION'S content, not the fact itself. For NEGATIVE questions this is the OPPOSITE of English! '밥 안 먹었어요?' (Haven't you eaten?) → '네, 안 먹었어요' (Right, I haven't) / '아니요, 먹었어요' (No, I have). English would flip 네 and 아니요 here. This trips up almost every learner!","table":{"columns":["질문 · Question","긍정(동의) 대답","부정 대답"],"rows":[["약속 없어? · Are you free?","응, 약속 없어 · Yeah, I'm free","아니, 약속 있어 · No, I'm busy"],["밥 먹었어요? · Did you eat?","네, 먹었어요 · Yes, I ate","아니요, 안 먹었어요 · No, I didn't"],["밥 안 먹었어요? · Haven't you eaten?","네, 안 먹었어요 · Right, I haven't","아니요, 먹었어요 · No, I have"]]},"examples":[{"ko":"A: 약속 없어?  B: 응, 약속 없어.","en":"A: Are you free? B: Yeah, I'm free. (응 agrees: yes, no plans)"},{"ko":"A: 밥 안 먹었어요?  B: 아니요, 먹었어요.","en":"A: Haven't you eaten? B: No, I have. (아니요 disagrees with the negative question — opposite of English!)"},{"ko":"A: 밥 안 먹었어요?  B: 네, 안 먹었어요.","en":"A: Haven't you eaten? B: Right, I haven't. (네 agrees with the negative)"}],"fill_blanks":[{"sentence":"A: 약속 없어? B: ___, 약속 없어. (free, agreeing)","answer":"응","hint":"질문에 동의 (반말 yes) · agree with question (casual yes)"}]}],"banmal_jondaemal":{"intro_ko":"미래와 올리비아는 친구라서 둘 다 반말을 써요. 약속 잡는 표현을 존댓말로도 익혀봐요.","intro_en":"Mirae and Olivia are friends, so they use casual speech. Let's also learn the polite versions for making plans.","rows":[{"situation_ko":"약속 묻기","situation_en":"Asking about plans","banmal":"주말에 약속 없어?","jondaemal":"주말에 약속 없으세요?","note":"친구=반말 · friends use casual"},{"situation_ko":"제안하기","situation_en":"Suggesting","banmal":"자전거 타러 갈까?","jondaemal":"자전거 타러 갈까요?","note":"요 붙이면 존댓말 · add 요 for polite"},{"situation_ko":"약속 확정","situation_en":"Confirming","banmal":"거기서 만나!","jondaemal":"거기서 만나요!","note":"만나 → 만나요"}],"tip":"💡 약속을 잡을 땐 '몇 시에(when) + 어디에서(where)'를 정하는 게 핵심! · When making plans, the key is deciding 몇 시에 (when) + 어디에서 (where).","adult_dialogue":{"title_ko":"어른들은 어떻게 약속할까? (존댓말)","title_en":"How adults make plans (polite speech)","setup_ko":"미래 엄마와 올리비아 엄마가 주말 약속을 정해요. 친하지 않은 어른들은 기본적으로 존댓말을 써요.","setup_en":"Mirae's mom and Olivia's mom arrange weekend plans. Adults who aren't close use polite speech by default.","lines":[{"speaker":"미래 엄마","text":"이번 주말에 시간 있으세요?","en":"Do you have time this weekend?"},{"speaker":"올리비아 엄마","text":"네, 괜찮아요. 무슨 일이세요?","en":"Yes, I'm free. What's the occasion?"},{"speaker":"미래 엄마","text":"아이들이랑 같이 한강에 갈까요?","en":"Shall we go to the Han River with the kids?"},{"speaker":"올리비아 엄마","text":"좋아요! 몇 시에 만날까요?","en":"Sounds great! What time shall we meet?"},{"speaker":"미래 엄마","text":"오후 한 시에 정문 앞에서 뵐까요?","en":"Shall we meet at 1 PM in front of the main gate?"},{"speaker":"올리비아 엄마","text":"네, 그때 뵙겠습니다.","en":"Yes, see you then."}],"note_ko":"같은 약속이지만 어른들은 존댓말(-요, -으세요, 뵙겠습니다)을 써요. 아이들(미래·올리비아)의 반말과 비교해 보세요! · 갈까? → 갈까요?, 만나? → 만날까요?, 봐 → 뵙겠습니다","note_en":"Same plan, but adults use polite forms (-요, -으세요, 뵙겠습니다). Compare with the kids' casual speech: 갈까? → 갈까요?, 봐 → 뵙겠습니다!"}},"pronunciation":[{"id":"pron_ep06_01","title":"몇 시 → [멷 씨] (된소리되기 · Tensification)","rule":"받침 ㅊ(→ㄷ) 뒤의 ㅅ이 된소리 ㅆ로 발음됨 · ㅅ after a stop becomes tense ㅆ","table":{"columns":["표기 · Spelling","발음 · Sound","규칙 · Rule"],"rows":[["몇 시","[멷 씨]","ㅊ→ㄷ + 시 → 씨 (tensified)"],["몇 분","[멷 뿐]","ㅊ→ㄷ + 분 → 뿐"],["몇 개","[멷 깨]","ㅊ→ㄷ + 개 → 깨"]]},"tip":"💡 '몇' 뒤의 첫소리는 된소리(ㅆ,ㄲ,ㅃ)로 강하게 발음돼요. · The sound after '몇' becomes tense."}],"usage":[{"title":"약속 잡기 3단계 — Making Plans in 3 Steps","title_en":"How Koreans make plans","explanation_en":"Korean plan-making usually follows: (1) check availability (약속 없어?), (2) suggest activity (~하러 갈까?), (3) decide time & place (몇 시에 어디에서?). Master this flow and you can set up any meetup!","examples":[{"ko":"주말에 약속 없어?","en":"1. Are you free this weekend?"},{"ko":"영화 보러 갈까?","en":"2. Shall we go see a movie?"},{"ko":"토요일 2시에 강남역에서 만나!","en":"3. Meet Saturday 2 PM at Gangnam Station!"}]},{"title":"입구 vs 출구 — Entrance vs Exit","title_en":"Subway meeting points","explanation_en":"In Korea, people often meet at subway 입구 (entrance) or 출구 (exit), numbered like 3번 출구 (exit 3). Knowing these helps you navigate and meet friends in the city.","examples":[{"ko":"지하철 3번 입구에서 만나.","en":"Meet at subway entrance 3."},{"ko":"강남역 11번 출구 알아?","en":"Do you know Gangnam Station exit 11?"}]}],"quiz":[{"id":"q1","audio_text":"이번 주말에 약속 없어?","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["이번 주말에 약속 있어?","이번 주말에 약속 없어?","이번 주말에 약속 없어요?","오늘 주말에 약속 없어?"],"answer":1,"explanation":"약속 없어? = Are you free? (lit: no plans?). 없어(casual) vs 없어요(polite). 있어(have) vs 없어(don't have)."},{"id":"q2","audio_text":"우리 한강 공원에 자전거 타러 갈까?","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["우리 한강 공원에서 자전거 타러 갈까?","우리 한강 공원에 자전거 타러 갈까?","우리 한강 공원에 자전거 타러 갈까요?","우리 한강 공원에 자동차 타러 갈까?"],"answer":1,"explanation":"공원에 가다 (destination → 에). 타러 가다 = go to ride. 자전거(bike) vs 자동차(car)."},{"id":"q3","audio_text":"몇 시에 어디에서 만나?","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["몇 시에 어디에서 만나?","몇 시에 어디에서 만나요?","몇 시에 어디에 만나?","언제 어디에서 만나?"],"answer":0,"explanation":"약속의 핵심: 몇 시에(when) + 어디에서(where). 만나는 장소는 에서(action place)!"},{"id":"q4","audio_text":"오후 1시에 지하철 3번 입구에서 어때?","question_ko":"🔊 음성을 듣고 맞는 것을 고르세요.","question_en":"Listen and choose what you heard.","options":["오후 1시에 지하철 3번 출구에서 어때?","오전 1시에 지하철 3번 입구에서 어때?","오후 1시에 지하철 3번 입구에서 어때?","오후 2시에 지하철 3번 입구에서 어때?"],"answer":2,"explanation":"오후(p.m.) 1시 + 입구(entrance) + 에서(meeting place). 입구(entrance) vs 출구(exit) 주의!"},{"id":"q5_mc","question_ko":"'오후 1시'를 한국어로 바르게 읽은 것은?","question_en":"How do you correctly read '1 PM' in Korean?","options":["오후 한 시","오후 일 시","오후 하나 시","오전 한 시"],"answer":0,"explanation":"시(hour)는 고유어 숫자! 1 → 한 (not 일/하나). 오후 한 시 = 1 PM. 분(minute)은 한자어(일,이,삼)."},{"id":"q6_mc","question_ko":"'친구___ 한강에 가요' — 빈칸에 알맞은 조사는? (격식)","question_en":"Which particle fits: '친구___ 한강에 가요' (with a friend, formal)?","options":["와","과","을","에"],"answer":0,"explanation":"친구 = 받침 없음 → 와 (with). 받침 있으면 과 (예: 선생님과). 일상어로는 하고/(이)랑도 가능."}],"real_life":[{"type":"tip","title":"🚴 한강 공원 — Seoul's Favorite Hangout","content_ko":"한강 공원은 서울 사람들이 가장 사랑하는 공간이에요. 자전거 타기, 돗자리 펴고 치킨·라면 먹기, 산책, 피크닉까지 다 할 수 있어요. 따릉이(서울 공공 자전거)를 빌려서 강변을 달리는 게 인기예요. 친구와 약속 잡기 딱 좋은 장소!","content_en":"Han River Park is Seoulites' most beloved spot. You can ride bikes, spread a mat and eat chicken & ramen, take walks, and picnic. Renting a 따릉이 (Seoul's public bike) to ride along the river is popular. The perfect place to meet up with friends!"},{"type":"kakao","title":"💬 약속 잡는 카톡","messages":[{"speaker":"올리비아","side":"left","text":"미래야, 토요일에 시간 있어?","en":"Mirae, are you free Saturday?"},{"speaker":"나","side":"right","text":"응! 뭐 할까?","en":"Yeah! What should we do?"},{"speaker":"올리비아","side":"left","text":"한강에서 자전거 타자!","en":"Let's ride bikes at the Han River!"},{"speaker":"나","side":"right","text":"좋아 👍 오후 1시 어때?","en":"Great 👍 How about 1 PM?"},{"speaker":"올리비아","side":"left","text":"콜! 3번 입구에서 만나~","en":"Deal! See you at entrance 3~"}]},{"type":"listening","id":"rl_listen_ep06","title":"🎧 약속 정하기 — Setting a Time","title_en":"Listening: deciding a meeting time","setup_ko":"두 친구가 만날 시간과 장소를 정해요. 잘 듣고 답해보세요.","setup_en":"Two friends decide when and where to meet. Listen and answer.","audio_text":"내일 오후 세 시에 도서관 앞에서 만나자.","script":[{"speaker":"친구 1","text":"내일 같이 공부할까?"},{"speaker":"친구 2","text":"좋아! 몇 시에 만날까?"},{"speaker":"친구 1","text":"내일 오후 세 시에 도서관 앞에서 만나자."}],"questions":[{"question_ko":"두 사람은 몇 시에 만나요?","question_en":"What time will they meet?","options":["오후 1시 · 1 PM","오후 3시 · 3 PM","오전 3시 · 3 AM","오후 2시 · 2 PM"],"answer":1,"explanation":"세 시 = 3 o'clock (고유어 세 + 시). 오후 = p.m. → 오후 3시."},{"question_ko":"어디에서 만나요?","question_en":"Where will they meet?","options":["도서관 앞 · in front of the library","공원 · park","지하철역 · subway station","학교 · school"],"answer":0,"explanation":"도서관 앞에서 만나자 = let's meet in front of the library. 앞 = front, 에서 = meeting place."}]}],"key_points":[{"icon":"📍","ko":"에 = 시간/도착지 (1시에, 공원에 가다) · 에 = time/destination","en":"에 = time or destination (at 1, to the park)"},{"icon":"🏞️","ko":"에서 = 행동 장소/출발점 (입구에서 만나) · 에서 = action place/from","en":"에서 = where an action happens / from"},{"icon":"🚲","ko":"-(으)러 가다 = ~하러 가다 (목적) · go in order to do","en":"-(으)러 가다 = go in order to do something"},{"icon":"🔗","ko":"와/과 = 하고 = (이)랑 = and/with · three ways to say 'and/with'","en":"와/과 = 하고 = (이)랑 = and / with"},{"icon":"🕐","ko":"시 = 고유어(한 시), 분 = 한자어(삼십 분) · hours Native, minutes Sino","en":"Hours use Native Korean, minutes use Sino-Korean"}],"self_check":[{"ko":"친구에게 주말 약속이 있는지 물어볼 수 있어요.","en":"I can ask a friend if they have weekend plans."},{"ko":"'~하러 갈까?'로 같이 하자고 제안할 수 있어요.","en":"I can suggest an activity with '~하러 갈까?'."},{"ko":"만날 시간과 장소를 정할 수 있어요 (몇 시에, 어디에서).","en":"I can decide a meeting time and place (when, where)."},{"ko":"에와 에서를 구분해서 쓸 수 있어요.","en":"I can tell apart 에 and 에서."},{"ko":"시간을 한국어로 읽을 수 있어요 (오후 한 시).","en":"I can tell time in Korean (e.g., 오후 한 시 = 1 PM)."}]},
@@ -1752,7 +2368,7 @@ function renderQuizQ(){
   // - audio_text 없음 → 일반 객관식 (질문 + 영어 + 선택지)
   const isListen = !!q.audio_text;
 
-  const opts=(q.options||[]).map((opt,oi)=>`
+  const opts=(q.options||q.choices||[]).map((opt,oi)=>`
     <button class="quiz-opt" id="qopt-${oi}" onclick="answerMC(${oi},${qi})">
       <span style="font-weight:700;color:var(--teal-md);margin-right:7px">${oi+1}.</span>${esc(opt)}
     </button>`).join('');
@@ -1784,7 +2400,7 @@ function renderQuizQ(){
     </div>
     <div class="quiz-card">
       <div class="quiz-q-num">문제 ${qi+1}</div>
-      <div class="quiz-q-text" style="${qTextStyle}">${esc(q.question_ko)}</div>
+      <div class="quiz-q-text" style="${qTextStyle}">${esc(q.question_ko||q.question||'')}</div>
       ${qEnHtml}
       ${inner}
     </div>`;
@@ -2165,14 +2781,14 @@ function buildSelfCheck(){
   if(!sc||!sc.length)return'<div class="loading">데이터 준비 중이에요.</div>';
   return`<div style="padding:4px 0">
     <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:14px">✅ 이번 에피소드에서 배운 것들이에요. 할 수 있나요?</div>
-    ${sc.map((item,i)=>`
+    ${sc.map((item,i)=>{const ko=typeof item==='string'?item:(item.ko||'');const en=typeof item==='string'?'':(item.en||'');return`
       <label style="display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:12px 16px;margin-bottom:8px;cursor:pointer;box-shadow:var(--shadow-sm);transition:border-color .2s" onclick="toggleSC(this)">
         <span style="font-size:20px;transition:transform .2s">⬜</span>
         <div>
-          <div style="font-size:13px;font-weight:600;color:var(--warm-900)">${esc(item.ko||'')}</div>
-          <div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(item.en||'')}</div>
+          <div style="font-size:13px;font-weight:600;color:var(--warm-900)">${esc(ko)}</div>
+          ${en?`<div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(en)}</div>`:''}
         </div>
-      </label>`).join('')}
+      </label>`}).join('')}
   </div>`;
 }
 function toggleSC(el){
@@ -3331,8 +3947,4 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
 </script>
 
 <footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
-  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
-</footer>
-</body>
-</html
+  © 2026 Kate HaeOk Shin Yu · All rights res
