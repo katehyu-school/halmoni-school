@@ -211,6 +211,127 @@
               "highlight": "아래에도 없어요"
             }
           ]
+        },
+        {
+          "id": "g03_demonstrative",
+          "title": "이/그/저 — This / That / That over there",
+          "subtitle": "Pointing to things in Korean",
+          "pattern": "이/그/저 + 물건",
+          "meaning": "this / that (near you) / that (over there)",
+          "description": "Korean has three demonstratives depending on how far the object is from the speaker.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 이 — This (near me)",
+              "examples": [
+                "이 자물통은 할머니 거예요. = This lock is grandma's.",
+                "이 열쇠가 맞아요. = This key is correct.",
+                "이 반닫이는 오래됐어요. = This chest is old."
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 그 — That (near you)",
+              "examples": [
+                "그 자물통은 뭐예요? = What is that lock?",
+                "그 열쇠 줘! = Give me that key!",
+                "그 항아리 안에 있어요. = It's in that jar."
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 저 — That over there",
+              "examples": [
+                "저 반닫이 아래에 있어요. = It's under that chest over there.",
+                "저 탁자 위에 있어요. = It's on that table over there."
+              ]
+            }
+          ],
+          "table": {
+            "headers": [
+              "",
+              "한국어",
+              "영어"
+            ],
+            "rows": [
+              [
+                "가까이 (near me)",
+                "이",
+                "this"
+              ],
+              [
+                "당신 근처 (near you)",
+                "그",
+                "that"
+              ],
+              [
+                "저기 (far away)",
+                "저",
+                "that over there"
+              ]
+            ]
+          },
+          "examples": [
+            {
+              "korean": "이 자물통은 어디서 왔어요?",
+              "english": "Where did this lock come from?",
+              "highlight": "이 자물통"
+            },
+            {
+              "korean": "그 열쇠가 맞아요!",
+              "english": "That key is the right one!",
+              "highlight": "그 열쇠"
+            },
+            {
+              "korean": "저 항아리 속에 있을까요?",
+              "english": "Could it be inside that jar over there?",
+              "highlight": "저 항아리"
+            }
+          ]
+        },
+        {
+          "id": "g03_possessive",
+          "title": "~의 — Possessive · 's",
+          "subtitle": "Showing who something belongs to",
+          "pattern": "사람/이름 + 의 + 물건",
+          "meaning": "[person]'s [thing]",
+          "description": "의 is the possessive particle in Korean, similar to 's in English. It shows belonging or ownership.",
+          "rule_boxes": [
+            {
+              "color": "green",
+              "label": "🟢 N + 의 + N = N's N",
+              "examples": [
+                "할머니의 자물통 = grandma's lock",
+                "나의 열쇠 = my key",
+                "우리의 마법 = our magic"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 TIP: 나의 → 내, 너의 → 네 (spoken shortcut)",
+              "examples": [
+                "나의 열쇠 → 내 열쇠 (my key)",
+                "너의 가방 → 네 가방 (your bag)"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "이 자물통은 할머니의 거예요.",
+              "english": "This lock is grandma's.",
+              "highlight": "할머니의"
+            },
+            {
+              "korean": "내 열쇠는 어디 있어요?",
+              "english": "Where is my key?",
+              "highlight": "내 열쇠"
+            },
+            {
+              "korean": "우리 집 반닫이 안에 있어요.",
+              "english": "It's inside our house's chest.",
+              "highlight": "우리 집"
+            }
+          ]
         }
       ]
     },
