@@ -1489,7 +1489,8 @@ const EPISODE_DATA = {
           "en": "There is a cat."
         }
       ],
-      "tip": "이/가 vs 은/는: 이/가는 '주체', 은/는는 '주제'. 둘 다 맞지만 뉘앙스가 달라요!\n이/가 = subject (the doer), 은/는 = topic (what we're talking about)."
+      "tip": "이/가 vs 은/는: 이/가는 '주체', 은/는는 '주제'. 둘 다 맞지만 뉘앙스가 달라요!\n이/가 = subject (the doer), 은/는 = topic (what we're talking about).",
+      "tier": "core"
     },
     {
       "id": "g02_isseoyo",
@@ -1537,7 +1538,8 @@ const EPISODE_DATA = {
           "en": "It's a puppy!"
         }
       ],
-      "tip": "있어요/없어요는 영어의 'there is/there isn't'와 'I have/don't have' 둘 다 돼요!\nLike 'there is/isn't' AND 'I have/don't have' — context tells you which!"
+      "tip": "있어요/없어요는 영어의 'there is/there isn't'와 'I have/don't have' 둘 다 돼요!\nLike 'there is/isn't' AND 'I have/don't have' — context tells you which!",
+      "tier": "core"
     },
     {
       "id": "g02_question",
@@ -1594,7 +1596,8 @@ const EPISODE_DATA = {
           "en": "Yes, I have a younger sibling."
         }
       ],
-      "tip": "영어 질문: 'Is there a cat?' (어순 바뀜) · 한국어 질문: '고양이가 있어요?' (어순 그대로!)\nThis is one of the easiest things about Korean — no word order change for questions!"
+      "tip": "영어 질문: 'Is there a cat?' (어순 바뀜) · 한국어 질문: '고양이가 있어요?' (어순 그대로!)\nThis is one of the easiest things about Korean — no word order change for questions!",
+      "tier": "preview"
     }
   ],
   "banmal_jondaemal": {
@@ -2313,7 +2316,10 @@ function buildGrammar(){
           </div>
         </div>
       </div>`).join('');
-    return`<div class="gram-card">
+    const tierBorder=g.tier==='core'?'2.5px solid #F0C040':g.tier==='preview'?'2.5px solid #5B9FD4':'';
+    const tierBadge=g.tier==='core'?`<span style="display:inline-block;background:#FFF3C4;color:#7A5500;border:1.5px solid #F0C040;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;margin-bottom:8px">🥇 핵심 문법</span>`:g.tier==='preview'?`<span style="display:inline-block;background:#EAF3FB;color:#1A5C9E;border:1.5px solid #5B9FD4;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;margin-bottom:8px">💙 다음에 또 나와요</span>`:'';
+    return`<div class="gram-card" style="${tierBorder?`border:${tierBorder};`:''}">
+      ${tierBadge}
       <div class="gram-title">${esc(g.title)}</div>
       ${g.title_en?`<div style="font-size:11px;color:var(--warm-500);margin-top:-4px;margin-bottom:8px">${esc(g.title_en)}</div>`:''}
       <div class="gram-exp">${esc(g.explanation_en)}</div>
@@ -3941,17 +3947,3 @@ async function _callClaude(targetKr, targetEn, said){
         max_tokens:180,
         messages:[{role:'user',content:`You are a warm Korean language tutor for English-speaking students.
 Target sentence: "${targetKr}" (${targetEn})
-Student said: "${said}"
-Give encouraging feedback in English, 2 sentences max. If correct or close, celebrate! If different, note 1 key thing to fix and give a quick tip. Be specific and kind.`}]
-      })
-    });
-    const d=await res.json();
-    return d.content?.[0]?.text||'피드백을 가져오지 못했어요.';
-  }catch(e){
-    return '❌ 오류가 발생했어요. API 키를 확인해주세요 (⚙️ AI 버튼)';
-  }
-}
-</script>
-
-<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
-  © 2026 Kate HaeOk Shin Yu · All rights res
