@@ -9554,14 +9554,16 @@ function msRenderHintWords() {
     Object.values(vocab).forEach(cat=>Array.isArray(cat)&&cat.forEach(item=>{if(item.kr)words.push(item.kr);}));
     if(words.length){_render(words.slice(0,18),'Level 3 · '+unit+'과');return;}
   }
-  // Level 2 — async from HalmoniCore
-  if(lv==='2' && unit && typeof HalmoniCore!=='undefined'){
-    HalmoniCore.loadUnit(unit).then(d=>{
-      const vocab=d?.sections?.vocab||{};
-      const words=(vocab.items||[]).filter(v=>v.korean).map(v=>v.korean);
-      if(words.length){_render(words.slice(0,18),'Level 2 · '+unit+'과');return;}
-      _render(DEFAULT,'기본 단어');
-    }).catch(()=>_render(DEFAULT,'기본 단어'));
+  // Level 2 — fetch JSON directly
+  if(lv==='2' && unit){
+    const pad=String(unit).padStart(2,'0');
+    fetch(`data/elem/level2/unit${pad}.json`)
+      .then(r=>r.json())
+      .then(d=>{
+        const words=(d?.sections?.vocab?.items||[]).filter(v=>v.korean).map(v=>v.korean);
+        if(words.length){_render(words.slice(0,18),'Level 2 · '+unit+'과');return;}
+        _render(DEFAULT,'기본 단어');
+      }).catch(()=>_render(DEFAULT,'기본 단어'));
     return;
   }
   _render(DEFAULT,'기본 단어');
@@ -9672,8 +9674,4 @@ function msRenderStickers() {
     : `${10-inTier} more → ${nextTier.badge} ${nextTier.name}`;
 }
 // ── END MY SPACE ─────────────────────────────────────────
-</script>
-
-</body>
-</html>
-            
+</scrip
