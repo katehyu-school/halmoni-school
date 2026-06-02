@@ -385,25 +385,42 @@ function nmsSaveNote(){
   setTimeout(()=>{msg.style.display='none';msg.textContent='✓ Saved!';msg.style.fontWeight='';},3000);
   nmsRenderNotesList();
 }
+let nmsNotesPage = 0;
+const NMS_NOTES_PER_PAGE = 5;
 function nmsRenderNotesList(){
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   const el=document.getElementById('nms-notes-list');
   if(!notes.length){
     el.innerHTML='<div class="nms-empty">No notes yet. Write one above! ✍️</div>';
+    nmsNotesPage=0;
     return;
   }
-  el.innerHTML=notes.map((n,i)=>`
-    <div class="nms-note-item">
+  const totalPages=Math.ceil(notes.length/NMS_NOTES_PER_PAGE);
+  nmsNotesPage=Math.max(0,Math.min(nmsNotesPage,totalPages-1));
+  const start=nmsNotesPage*NMS_NOTES_PER_PAGE;
+  const page=notes.slice(start,start+NMS_NOTES_PER_PAGE);
+  const nav=totalPages>1?`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--teal-100);">
+      <button onclick="nmsNotesPage--;nmsRenderNotesList()" ${nmsNotesPage===0?'disabled':''} style="background:none;border:1.5px solid var(--teal);color:var(--teal);border-radius:8px;padding:4px 12px;cursor:pointer;font-size:13px;opacity:${nmsNotesPage===0?.35:1}">← 이전</button>
+      <span style="font-size:12px;color:var(--warm-400);">${nmsNotesPage+1} / ${totalPages}</span>
+      <button onclick="nmsNotesPage++;nmsRenderNotesList()" ${nmsNotesPage===totalPages-1?'disabled':''} style="background:none;border:1.5px solid var(--teal);color:var(--teal);border-radius:8px;padding:4px 12px;cursor:pointer;font-size:13px;opacity:${nmsNotesPage===totalPages-1?.35:1}">다음 →</button>
+    </div>`:'';
+  el.innerHTML=page.map((n,pi)=>{
+    const i=start+pi;
+    return `<div class="nms-note-item">
       <span class="nms-note-tag">${nmsNoteTag(n)}</span>
       <span class="nms-note-date">${n.date}</span>
       <button class="nms-note-del" onclick="nmsDeleteNote(${i})">✕</button>
       <div class="nms-note-text">${n.text.replace(/</g,'&lt;')}</div>
-    </div>`).join('');
+    </div>`;
+  }).join('')+nav;
 }
 function nmsDeleteNote(i){
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   notes.splice(i,1);
   nmsSetJ('nms_'+nmsCurrent+'_notes',notes);
+  const totalPages=Math.ceil(notes.length/NMS_NOTES_PER_PAGE);
+  if(nmsNotesPage>=totalPages) nmsNotesPage=Math.max(0,totalPages-1);
   nmsRenderNotesList();
 }
 
@@ -559,25 +576,4 @@ function nmsSaveDeco(){
 }
 function nmsRenderBadges(){
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
-  const total=notes.length;
-  const tierIdx=Math.min(Math.floor(total/10),NMS_BADGE_TIERS.length-1);
-  const inTier=total%10;
-  const tier=NMS_BADGE_TIERS[tierIdx];
-  const nextTier=NMS_BADGE_TIERS[Math.min(tierIdx+1,NMS_BADGE_TIERS.length-1)];
-  const isLegend=tierIdx===NMS_BADGE_TIERS.length-1;
-  const dots=Array(10).fill(0).map((_,i)=>
-    `<span style="font-size:18px;opacity:${i<inTier?1:.15}">●</span>`
-  ).join('');
-  const hint=isLegend&&inTier===0&&total>0?'👑 Legend! You\'re amazing!'
-    :inTier===0&&total>0?`🎉 Level up! Welcome, ${tier.name}!`
-    :total===0?'Save your first note to earn a badge! ✍️'
-    :`${10-inTier} more notes → ${nextTier.badge} ${nextTier.name}`;
-  document.getElementById('nms-badge-display').innerHTML=
-    `<div style="text-align:center;padding:12px 0;">
-      <div style="font-size:56px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
-      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:10px;">${tier.name} · ${total} notes</div>
-      <div style="display:flex;gap:3px;justify-content:center;margin-bottom:8px;">${dots}</div>
-      <div style="font-size:11px;color:var(--warm-500);">${hint}</div>
-    </div>`;
-}
-// ═══════════════════════════════════════════════════════
+  const tota

@@ -388,25 +388,42 @@ function msSaveNote() {
   msRenderNotesList();
   msAddSticker();
 }
+let msNotesPage = 0;
+const MS_NOTES_PER_PAGE = 5;
 function msRenderNotesList() {
   const notes = msGetJ('ms_'+msCurrent+'_notes');
   const el = document.getElementById('ms-notes-list');
   if (!notes.length) {
     el.innerHTML = '<div class="ms-empty">No notes yet. Write one above! 😊</div>';
+    msNotesPage = 0;
     return;
   }
-  el.innerHTML = notes.map((n,i)=>`
-    <div class="ms-note-item">
+  const totalPages = Math.ceil(notes.length / MS_NOTES_PER_PAGE);
+  msNotesPage = Math.max(0, Math.min(msNotesPage, totalPages - 1));
+  const start = msNotesPage * MS_NOTES_PER_PAGE;
+  const page  = notes.slice(start, start + MS_NOTES_PER_PAGE);
+  const nav = totalPages > 1 ? `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid #e8f4ff;">
+      <button onclick="msNotesPage--;msRenderNotesList()" ${msNotesPage===0?'disabled':''} style="background:none;border:1.5px solid #5BB8F5;color:#5BB8F5;border-radius:8px;padding:4px 12px;cursor:pointer;font-size:13px;opacity:${msNotesPage===0?.35:1}">← Prev</button>
+      <span style="font-size:12px;color:#999;">${msNotesPage+1} / ${totalPages}</span>
+      <button onclick="msNotesPage++;msRenderNotesList()" ${msNotesPage===totalPages-1?'disabled':''} style="background:none;border:1.5px solid #5BB8F5;color:#5BB8F5;border-radius:8px;padding:4px 12px;cursor:pointer;font-size:13px;opacity:${msNotesPage===totalPages-1?.35:1}">Next →</button>
+    </div>` : '';
+  el.innerHTML = page.map((n,pi)=>{
+    const i = start + pi;
+    return `<div class="ms-note-item">
       <span class="ms-note-tag">Level ${n.lv} · ${n.unit}과</span>
       <span class="ms-note-date">${n.date}</span>
       <button class="ms-note-del" onclick="msDeleteNote(${i})" title="삭제">✕</button>
       <div class="ms-note-text">${n.text.replace(/</g,'&lt;')}</div>
-    </div>`).join('');
+    </div>`;
+  }).join('') + nav;
 }
 function msDeleteNote(i) {
   const notes = msGetJ('ms_'+msCurrent+'_notes');
   notes.splice(i,1);
   msSetJ('ms_'+msCurrent+'_notes', notes);
+  const totalPages = Math.ceil(notes.length / MS_NOTES_PER_PAGE);
+  if (msNotesPage >= totalPages) msNotesPage = Math.max(0, totalPages - 1);
   msRenderNotesList();
 }
 
@@ -588,25 +605,4 @@ function msSaveDeco() {
 function msAddSticker() { /* tier system — no-op */ }
 function msRenderStickers() {
   const notes = msGetJ('ms_'+msCurrent+'_notes');
-  const total = notes.length;
-  const tierIdx = Math.min(Math.floor(total/10), MS_BADGE_TIERS.length-1);
-  const inTier = total % 10;
-  const tier = MS_BADGE_TIERS[tierIdx];
-  const nextTier = MS_BADGE_TIERS[Math.min(tierIdx+1, MS_BADGE_TIERS.length-1)];
-  const isLegend = tierIdx===MS_BADGE_TIERS.length-1;
-  const el = document.getElementById('ms-sticker-display');
-  const hint = document.getElementById('ms-sticker-hint');
-  const dots = Array(10).fill(0).map((_,i)=>
-    `<span style="font-size:20px;opacity:${i<inTier?1:.15}">●</span>`
-  ).join('');
-  el.innerHTML = `<div style="text-align:center;padding:8px 0;">
-    <div style="font-size:52px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
-    <div style="font-size:13px;font-weight:700;color:#5BB8F5;margin-bottom:10px;">${tier.name} · ${total} notes</div>
-    <div style="display:flex;gap:3px;justify-content:center;margin-bottom:6px;">${dots}</div>
-  </div>`;
-  hint.textContent = isLegend&&inTier===0&&total>0 ? '👑 Legend! You are amazing!'
-    : inTier===0&&total>0 ? `🎉 Level up! Welcome, ${tier.name}!`
-    : total===0 ? 'Save your first note to start collecting! ✍️'
-    : `${10-inTier} more → ${nextTier.badge} ${nextTier.name}`;
-}
-// ── END MY SPACE ─────────────────────────────────────────
+  const total = note
