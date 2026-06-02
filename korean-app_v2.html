@@ -9341,7 +9341,6 @@ function msShowMain() {
   document.getElementById('ms-main').style.display = 'block';
   msUpdateProfileChip();
   msTab('notes');
-  msInitCanvas();
   msPopulateUnitSel();
   msRenderNotesList();
   msRenderDecoPanel();
@@ -9382,7 +9381,7 @@ function msTab(t) {
     document.getElementById('ms-panel-'+x).style.display = x===t?'block':'none';
     document.getElementById('ms-t-'+x).classList.toggle('active', x===t);
   });
-  if (t==='write') { setTimeout(msResizeCanvas, 50); }
+  if (t==='write') { msInitCanvas(); setTimeout(msResizeCanvas, 60); }
   if (t==='deco')  { msRenderDecoPanel(); }
 }
 
@@ -9435,32 +9434,32 @@ function msDeleteNote(i) {
 }
 
 // ── CANVAS (한글 연습) ────────────────────────────────────
+let msCanvasInited = false;
 function msInitCanvas() {
   msCanvas = document.getElementById('ms-canvas');
   msCtx = msCanvas.getContext('2d');
-  msResizeCanvas();
-  // Mouse events
-  msCanvas.addEventListener('mousedown', e=>{ msDrawing=true; const p=msPos(e); msLastX=p.x; msLastY=p.y; });
-  msCanvas.addEventListener('mousemove', e=>{ if(!msDrawing)return; msDraw(msPos(e)); });
-  msCanvas.addEventListener('mouseup', ()=>msDrawing=false);
-  msCanvas.addEventListener('mouseleave', ()=>msDrawing=false);
-  // Touch events
-  msCanvas.addEventListener('touchstart', e=>{ e.preventDefault(); msDrawing=true; const p=msPos(e.touches[0]); msLastX=p.x; msLastY=p.y; },{passive:false});
-  msCanvas.addEventListener('touchmove', e=>{ e.preventDefault(); if(!msDrawing)return; msDraw(msPos(e.touches[0])); },{passive:false});
-  msCanvas.addEventListener('touchend', ()=>msDrawing=false);
+  if (!msCanvasInited) {
+    msCanvasInited = true;
+    msCanvas.addEventListener('mousedown', e=>{ msDrawing=true; const p=msPos(e); msLastX=p.x; msLastY=p.y; });
+    msCanvas.addEventListener('mousemove', e=>{ if(!msDrawing)return; msDraw(msPos(e)); });
+    msCanvas.addEventListener('mouseup', ()=>msDrawing=false);
+    msCanvas.addEventListener('mouseleave', ()=>msDrawing=false);
+    msCanvas.addEventListener('touchstart', e=>{ e.preventDefault(); msDrawing=true; const p=msPos(e.touches[0]); msLastX=p.x; msLastY=p.y; },{passive:false});
+    msCanvas.addEventListener('touchmove', e=>{ e.preventDefault(); if(!msDrawing)return; msDraw(msPos(e.touches[0])); },{passive:false});
+    msCanvas.addEventListener('touchend', ()=>msDrawing=false);
+  }
 }
 function msResizeCanvas() {
   if (!msCanvas) return;
   const w = msCanvas.parentElement.clientWidth;
+  if (!w) return;  // panel still hidden, skip
   const h = 260;
-  const img = msCtx ? msCtx.getImageData(0,0,msCanvas.width,msCanvas.height) : null;
   msCanvas.width = w;
   msCanvas.height = h;
   msCanvas.style.width = w+'px';
   msCanvas.style.height = h+'px';
   msCtx.fillStyle = '#fff';
   msCtx.fillRect(0,0,w,h);
-  if (img) msCtx.putImageData(img,0,0);
 }
 function msPos(e) {
   const r = msCanvas.getBoundingClientRect();
