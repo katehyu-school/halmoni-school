@@ -1083,7 +1083,10 @@ function buildGrammar(){
     const tableHtml=g.table?`<div class="gram-table-wrap"><table class="gram-table"><thead><tr>${(g.table.columns||[]).map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${(g.table.rows||[]).map(r=>`<tr>${r.map(cell=>`<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
     // fill in the blanks
     const fillId=`fill-${g.id}-${Math.random().toString(36).slice(2,6)}`;
-    const imagesHtml=(g.images||[]).map(src=>`<img src="${src}" alt="" style="max-width:100%;border-radius:8px;margin:8px 0 4px;display:block;box-shadow:0 1px 6px rgba(0,0,0,.1);">`).join('');
+    const imagesHtml=(g.images&&g.images.length)
+      ?`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 6px;">${
+        (g.images||[]).map(src=>`<img src="${src}" alt="" style="width:100%;border-radius:8px;display:block;box-shadow:0 1px 6px rgba(0,0,0,.1);">`).join('')
+      }</div>`:'';
     const fillHtml=g.fill_blanks&&g.fill_blanks.length?`<div class="gram-fill" id="${fillId}"><div class="gram-fill-title">✏️ Fill in the blanks</div>${g.fill_blanks.map((fb,i)=>{const parts=(fb.sentence||'').split('___');return`<div class="gram-fill-item">${i+1}.&nbsp;${esc(parts[0]||'')}<input class="gram-blank" data-answer="${escA(fb.answer)}" placeholder="___">${esc(parts[1]||'')}</div>`;}).join('')}<div class="gram-fill-actions"><button class="gram-fill-check" onclick="checkFill('${fillId}')">✅ Check</button><span class="gram-fill-result" id="${fillId}-res"></span></div></div>`:'';
     // qna — Q&A practice pairs
     const qnaHtml=(g.qna||[]).map(pair=>`
