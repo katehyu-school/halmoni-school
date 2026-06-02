@@ -4129,7 +4129,8 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
           </div>
           <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
             <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Word hints — click to see it big ✨</div>
-            <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+            <div id="nms-hint-label" style="font-size:11px;color:var(--teal-600);font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
+      <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
           </div>
         </div>
       </div>
@@ -4281,7 +4282,7 @@ function nmsTab(t){
     document.getElementById('nms-panel-'+x).style.display=x===t?'block':'none';
     document.getElementById('nms-t-'+x).classList.toggle('active',x===t);
   });
-  if(t==='write') setTimeout(nmsResizeCanvas,50);
+  if(t==='write'){ setTimeout(nmsResizeCanvas,50); nmsRenderHintWords(); }
   if(t==='deco')  nmsRenderDecoPanel();
 }
 
@@ -4397,11 +4398,30 @@ function nmsClearCanvas(){
   nmsCtx.fillRect(0,0,nmsCanvas.width,nmsCanvas.height);
 }
 function nmsRenderHintWords(){
-  const words=['안녕하세요','감사합니다','주세요','있어요','없어요','어디예요','얼마예요','맛있어요','괜찮아요','몰라요','알아요','잘 먹겠습니다'];
+  const DEFAULT=['안녕하세요','감사합니다','주세요','있어요','없어요','어디예요','얼마예요','맛있어요','괜찮아요','몰라요','알아요','잘 먹겠습니다'];
+  let words=DEFAULT, label='기본 단어';
+  const lvEl=document.getElementById('nms-level-sel');
+  const epEl=document.getElementById('nms-ep-sel');
+  if(lvEl&&lvEl.value==='L1'&&epEl){
+    const ep=epEl.value;
+    const epData=(typeof EPISODE_DATA!=='undefined')&&EPISODE_DATA[ep];
+    if(epData&&epData.vocab&&epData.vocab.length>0){
+      const isGrouped=epData.vocab[0]&&epData.vocab[0].items;
+      let extracted=[];
+      if(isGrouped){
+        epData.vocab.forEach(g=>g.items&&g.items.forEach(item=>{if(item.korean)extracted.push(item.korean);}));
+      } else {
+        extracted=epData.vocab.filter(v=>v.korean).map(v=>v.korean);
+      }
+      if(extracted.length>0){words=extracted.slice(0,18);label=ep+' 단어';}
+    }
+  }
   const el=document.getElementById('nms-hint-words');
   if(!el)return;
+  const lbEl=document.getElementById('nms-hint-label');
+  if(lbEl)lbEl.textContent='📚 '+label;
   el.innerHTML=words.map(w=>
-    `<span onclick="nmsPickHint('${w}')" style="display:inline-block;padding:3px 10px;background:var(--teal-lt);color:var(--teal-dark);border-radius:20px;font-size:13px;cursor:pointer;margin-bottom:4px;border:1px solid var(--teal-300);">${w}</span>`
+    `<span onclick="nmsPickHint('${w.replace(/'/g,"\\'")}') " style="display:inline-block;padding:3px 10px;background:var(--teal-lt);color:var(--teal-dark);border-radius:20px;font-size:13px;cursor:pointer;margin-bottom:4px;border:1px solid var(--teal-300);">${w}</span>`
   ).join('');
 }
 function nmsPickHint(w){
