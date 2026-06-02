@@ -9256,7 +9256,7 @@ if(document.readyState !== 'loading'){
           <div class="ms-color-row" id="ms-deco-colors"></div>
         </div>
         <div class="ms-card">
-          <div class="ms-section-title">🏆 My Stickers</div>
+          <div class="ms-section-title">🏅 My Badges</div>
           <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Save notes to unlock stickers!</div>
           <div id="ms-sticker-display" style="font-size:28px;letter-spacing:6px;min-height:40px;"></div>
           <div style="margin-top:12px;font-size:12px;color:var(--muted);" id="ms-sticker-hint"></div>
@@ -9274,6 +9274,21 @@ if(document.readyState !== 'loading'){
 const MS_AVATARS = ['🐨','🦊','🐸','🐧','🦄','🐱','🐻','🐰','🐯','🦋'];
 const MS_COLORS  = ['#5BB8F5','#4ECDC4','#FF6B6B','#FFD93D','#A78BFA','#6BCB77','#FF9F7F'];
 const MS_STICKERS_ALL = ['⭐','🎉','🏆','🌟','💎','🎯','🔥','🌈','🎁','👑'];
+const MS_BADGE_TIERS = [
+  {badge:'🪴',name:'Sprout'},
+  {badge:'🌸',name:'Flower'},
+  {badge:'⭐',name:'Star'},
+  {badge:'🌟',name:'Shining Star'},
+  {badge:'🎯',name:'Sharp!'},
+  {badge:'🔥',name:'On Fire!'},
+  {badge:'💎',name:'Diamond'},
+  {badge:'🏅',name:'Medal'},
+  {badge:'🏆',name:'Trophy'},
+  {badge:'👑',name:'Legend'},
+];
+function msGetTier(count){
+  return MS_BADGE_TIERS[Math.min(Math.floor(count/10),MS_BADGE_TIERS.length-1)];
+}
 const MS_UNITS = {2:[1,2,3,4,5,6,7,8,9], 3:[1,2,3,4,5]};
 
 // localStorage helpers
