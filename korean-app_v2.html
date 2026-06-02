@@ -9154,24 +9154,24 @@ if(document.readyState !== 'loading'){
 
   <!-- SETUP SCREEN (first time) -->
   <div id="ms-setup" class="ms-setup-wrap" style="display:none">
-    <div class="ms-setup-title">👋 안녕! 누구야?</div>
-    <div class="ms-setup-sub">처음 왔구나! 내 이름을 알려줘.</div>
-    <span class="ms-label">내 이름 / 닉네임</span>
-    <input class="ms-input" id="ms-setup-name" placeholder="예: Maya, 조던..." maxlength="20" style="margin-bottom:16px;">
-    <span class="ms-label">아바타 고르기</span>
+    <div class="ms-setup-title">👋 안녕! Who are you?</div>
+    <div class="ms-setup-sub">First time here! Tell me your name. 😊</div>
+    <span class="ms-label">My name / nickname</span>
+    <input class="ms-input" id="ms-setup-name" placeholder="e.g. Maya, Jordan..." maxlength="20" style="margin-bottom:16px;">
+    <span class="ms-label">Pick your avatar 🐨</span>
     <div class="ms-avatar-row" id="ms-setup-avatars"></div>
-    <span class="ms-label" style="margin-top:16px;">테마 색상</span>
+    <span class="ms-label" style="margin-top:16px;">Theme color</span>
     <div class="ms-color-row" id="ms-setup-colors"></div>
-    <button class="ms-save-btn" style="margin-top:24px;width:100%;" onclick="msCreateProfile()">시작하기 🚀</button>
+    <button class="ms-save-btn" style="margin-top:24px;width:100%;" onclick="msCreateProfile()">Let's go! 🚀</button>
   </div>
 
   <!-- SWITCHER SCREEN -->
   <div id="ms-switcher" style="display:none">
     <div class="ms-body">
       <div class="ms-card">
-        <div class="ms-section-title">👥 누구야? 골라봐!</div>
+        <div class="ms-section-title">👥 Who's here? Pick one!</div>
         <div id="ms-profile-list"></div>
-        <button class="ms-add-profile-btn" onclick="msShowSetup(false)">+ 새 프로필 만들기</button>
+        <button class="ms-add-profile-btn" onclick="msShowSetup(false)">+ New profile</button>
       </div>
     </div>
   </div>
@@ -9182,15 +9182,15 @@ if(document.readyState !== 'loading'){
 
       <!-- TABS -->
       <div class="ms-tabs">
-        <button class="ms-tab-btn active" id="ms-t-notes" onclick="msTab('notes')">📝 내 노트</button>
-        <button class="ms-tab-btn" id="ms-t-write" onclick="msTab('write')">✏️ 한글 연습</button>
-        <button class="ms-tab-btn" id="ms-t-deco" onclick="msTab('deco')">🎨 꾸미기</button>
+        <button class="ms-tab-btn active" id="ms-t-notes" onclick="msTab('notes')">📝 My Notes</button>
+        <button class="ms-tab-btn" id="ms-t-write" onclick="msTab('write')">✏️ Korean Writing</button>
+        <button class="ms-tab-btn" id="ms-t-deco" onclick="msTab('deco')">🎨 My Style</button>
       </div>
 
       <!-- ── NOTES PANEL ── -->
       <div id="ms-panel-notes">
         <div class="ms-card">
-          <div class="ms-section-title">📝 새 메모</div>
+          <div class="ms-section-title">📝 New Note</div>
           <div style="display:flex;gap:10px;margin-bottom:10px;align-items:center;flex-wrap:wrap;">
             <div>
               <span class="ms-label" style="margin-bottom:3px;">Level</span>
@@ -9204,14 +9204,14 @@ if(document.readyState !== 'loading'){
               <select class="ms-select" id="ms-unit-sel"></select>
             </div>
           </div>
-          <textarea class="ms-textarea" id="ms-note-text" placeholder="오늘 배운 것, 어려웠던 점, 질문... 뭐든 써봐!"></textarea>
+          <textarea class="ms-textarea" id="ms-note-text" placeholder="Vocab, grammar tips, questions... write anything!"></textarea>
           <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
-            <button class="ms-save-btn" onclick="msSaveNote()">💾 저장</button>
-            <span id="ms-save-msg" style="font-size:12px;color:#4ECDC4;display:none;">✓ 저장됐어!</span>
+            <button class="ms-save-btn" onclick="msSaveNote()">💾 Save</button>
+            <span id="ms-save-msg" style="font-size:12px;color:#4ECDC4;display:none;">✓ Saved!</span>
           </div>
         </div>
         <div class="ms-card">
-          <div class="ms-section-title">📋 저장된 메모</div>
+          <div class="ms-section-title">📋 Saved Notes</div>
           <div id="ms-notes-list"></div>
         </div>
       </div>
@@ -9219,23 +9219,23 @@ if(document.readyState !== 'loading'){
       <!-- ── WRITING PANEL ── -->
       <div id="ms-panel-write" style="display:none">
         <div class="ms-card">
-          <div class="ms-section-title">✏️ 한글 연습장</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">자유롭게 쓰고, 지우고! 저장 안 해도 괜찮아.</div>
+          <div class="ms-section-title">✏️ Korean Writing</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Write freely and erase — no saving needed!</div>
           <div class="ms-canvas-wrap">
             <canvas id="ms-canvas"></canvas>
           </div>
           <div class="ms-canvas-toolbar">
-            <button class="ms-tool-btn active" id="ms-tool-pen" onclick="msSetTool('pen')">🖊 쓰기</button>
-            <button class="ms-tool-btn" id="ms-tool-erase" onclick="msSetTool('erase')">🧹 지우개</button>
+            <button class="ms-tool-btn active" id="ms-tool-pen" onclick="msSetTool('pen')">🖊 Write</button>
+            <button class="ms-tool-btn" id="ms-tool-erase" onclick="msSetTool('erase')">🧹 Eraser</button>
             <div style="display:flex;gap:6px;margin-left:4px;">
               <button class="ms-tool-btn" id="ms-sz-s" onclick="msSetSize(3)" style="padding:7px 12px;">S</button>
               <button class="ms-tool-btn active" id="ms-sz-m" onclick="msSetSize(6)" style="padding:7px 12px;">M</button>
               <button class="ms-tool-btn" id="ms-sz-l" onclick="msSetSize(12)" style="padding:7px 12px;">L</button>
             </div>
-            <button class="ms-tool-btn" onclick="msClearCanvas()" style="margin-left:auto;color:#FF6B6B;border-color:#FF6B6B;">🗑 전체 지우기</button>
+            <button class="ms-tool-btn" onclick="msClearCanvas()" style="margin-left:auto;color:#FF6B6B;border-color:#FF6B6B;">🗑 Clear</button>
           </div>
           <div style="margin-top:14px;padding:12px;background:#f8f9fa;border-radius:10px;">
-            <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">연습할 단어 힌트</div>
+            <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Word hints — click to see big ✨</div>
             <div id="ms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
           </div>
         </div>
@@ -9244,20 +9244,20 @@ if(document.readyState !== 'loading'){
       <!-- ── DECO PANEL ── -->
       <div id="ms-panel-deco" style="display:none">
         <div class="ms-card">
-          <div class="ms-section-title">🎨 내 꾸미기</div>
-          <span class="ms-label">닉네임 바꾸기</span>
+          <div class="ms-section-title">🎨 My Style</div>
+          <span class="ms-label">Change nickname</span>
           <div style="display:flex;gap:8px;margin-bottom:16px;">
             <input class="ms-input" id="ms-deco-name" maxlength="20" style="flex:1;">
             <button class="ms-save-btn" onclick="msSaveDeco()">저장</button>
           </div>
-          <span class="ms-label">아바타</span>
+          <span class="ms-label">Avatar</span>
           <div class="ms-avatar-row" id="ms-deco-avatars"></div>
-          <span class="ms-label" style="margin-top:16px;">테마 색상</span>
+          <span class="ms-label" style="margin-top:16px;">Theme color</span>
           <div class="ms-color-row" id="ms-deco-colors"></div>
         </div>
         <div class="ms-card">
-          <div class="ms-section-title">🏆 내 스티커</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">퀴즈 점수로 스티커를 모아봐!</div>
+          <div class="ms-section-title">🏆 My Stickers</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Save notes to unlock stickers!</div>
           <div id="ms-sticker-display" style="font-size:28px;letter-spacing:6px;min-height:40px;"></div>
           <div style="margin-top:12px;font-size:12px;color:var(--muted);" id="ms-sticker-hint"></div>
         </div>
@@ -9331,7 +9331,7 @@ function msShowSwitcher() {
     return `<div class="ms-profile-card${isActive?' active-profile':''}" onclick="msSwitchTo('${name}')">
       <span style="font-size:26px">${av}</span>
       <span style="font-weight:700;font-size:14px;flex:1">${name}</span>
-      ${isActive ? '<span style="font-size:11px;color:#4ECDC4;font-weight:700">지금 나!</span>' : ''}
+      ${isActive ? '<span style="font-size:11px;color:#4ECDC4;font-weight:700">That's me!</span>' : ''}
     </div>`;
   }).join('');
 }
@@ -9353,7 +9353,7 @@ function msUpdateProfileChip() {
   document.getElementById('ms-profile-chip').innerHTML =
     `<span style="font-size:20px">${av}</span>
      <span class="ms-profile-name">${msCurrent}</span>
-     <button class="ms-switch-btn" onclick="msShowSwitcher()">바꾸기 🔄</button>`;
+     <button class="ms-switch-btn" onclick="msShowSwitcher()">Switch 🔄</button>`;
 }
 
 // ── CREATE PROFILE ────────────────────────────────────────
@@ -9415,7 +9415,7 @@ function msRenderNotesList() {
   const notes = msGetJ('ms_'+msCurrent+'_notes');
   const el = document.getElementById('ms-notes-list');
   if (!notes.length) {
-    el.innerHTML = '<div class="ms-empty">아직 메모가 없어. 위에서 써봐! 😊</div>';
+    el.innerHTML = '<div class="ms-empty">No notes yet. Write one above! 😊</div>';
     return;
   }
   el.innerHTML = notes.map((n,i)=>`
@@ -9511,7 +9511,7 @@ function msPickHint(w) {
   // show the word bigger for reference
   const tip = document.createElement('div');
   tip.style.cssText="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:16px;padding:20px 32px;font-size:2.5rem;font-family:Jua,sans-serif;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:10001;text-align:center;";
-  tip.innerHTML = `<div>${w}</div><div style="font-size:12px;color:#aaa;margin-top:8px">따라 써봐! ✏️</div>`;
+  tip.innerHTML = `<div>${w}</div><div style="font-size:12px;color:#aaa;margin-top:8px">Try writing it! ✏️</div>`;
   document.body.appendChild(tip);
   setTimeout(()=>tip.remove(), 2000);
 }
@@ -9607,7 +9607,7 @@ function msRenderStickers() {
   const locked = MS_STICKERS_ALL.slice(unlocked).map(()=>'🔒').join(' ');
   el.innerHTML = (stickers ? stickers + ' ' : '') + `<span style="opacity:.3">${locked}</span>`;
   const next = MS_STICKERS_ALL.length - unlocked;
-  hint.textContent = next > 0 ? `메모 ${1}개 더 쓰면 다음 스티커 잠금 해제!` : '스티커 다 모았어! 최고야! 🎊';
+  hint.textContent = next > 0 ? `Write 1 more note to unlock the next sticker! 🔓` : 'You collected all stickers! Amazing! 🎊';
 }
 // ── END MY SPACE ─────────────────────────────────────────
 </script>
