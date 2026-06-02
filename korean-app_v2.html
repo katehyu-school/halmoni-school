@@ -8586,57 +8586,42 @@ function closeKidsIndex(){
   document.getElementById('kids-idx-panel').classList.remove('open');
 }
 async function _kidsIdxLoad(){
-  const words=[];
-  // ── Book 2 (HalmoniCore units 1~9) ──
+  const words=[], grams=[];
+
+  // ── Level 2 (units 1~9) — direct fetch ──
   for(let n=1;n<=9;n++){
     try{
-      const d=typeof HalmoniCore!=='undefined'?await HalmoniCore.loadUnit(n):null;
-      if(!d)continue;
-      const vocab=(d.sections&&d.sections.vocab)?d.sections.vocab:d.vocab;
-      if(!vocab)continue;
-      const items=vocab.items||(Array.isArray(vocab)?vocab:[]);
-      items.forEach(v=>{if(v.korean)words.push({korean:v.korean,english:v.english||'',romanization:v.romanization||'',emoji:v.emoji||'',unit:n,book:2});});
-    }catch(e){console.warn('idx unit'+n,e);}
+      const r=await fetch(`data/elem/level2/unit${String(n).padStart(2,'0')}.json`);
+      if(!r.ok)continue;
+      const d=await r.json();
+      const vocab=(d.sections&&d.sections.vocab)||d.vocab||{};
+      (vocab.items||[]).forEach(v=>{
+        if(v.korean)words.push({korean:v.korean,english:v.english||'',romanization:v.romanization||'',emoji:v.emoji||'',unit:n,book:2});
+      });
+      const secs=(d.sections&&d.sections.grammar&&d.sections.grammar.sections)||[];
+      secs.forEach(g=>{if(g.title)grams.push({title:g.title,pattern:g.pattern||'',meaning:g.meaning||g.subtitle||'',unit:n,book:2});});
+    }catch(e){console.warn('idx L2-'+n,e);}
   }
-  // ── Book 3 (B3_INLINE_DATA) ──
-  if(typeof B3_INLINE_DATA!=='undefined'){
-    for(const [nStr,d] of Object.entries(B3_INLINE_DATA)){
-      const n=parseInt(nStr);
-      try{
-        const vocab=(d.sections&&d.sections.vocab)?d.sections.vocab:null;
-        if(!vocab)continue;
-        // Book 3 vocab: {카테고리명: [{kr,en,rom,emoji},...], ...}
-        for(const items of Object.values(vocab)){
-          if(!Array.isArray(items))continue;
-          items.forEach(v=>{
-            const kr=v.kr||v.korean;
-            if(kr)words.push({korean:kr,english:v.en||v.english||'',romanization:v.rom||v.romanization||'',emoji:v.emoji||'',unit:n,book:3});
-          });
-        }
-      }catch(e){console.warn('idx b3 unit'+n,e);}
-    }
+
+  // ── Level 3 (units 1~N) — direct fetch, stops at first missing ──
+  for(let n=1;n<=9;n++){
+    try{
+      const r=await fetch(`data/elem/level3/unit${String(n).padStart(2,'0')}.json`);
+      if(!r.ok)break;
+      const d=await r.json();
+      const vocab=(d.sections&&d.sections.vocab)||{};
+      // Level 3 vocab structure: { "카테고리": [{kr,en,rom,emoji},...], ... }
+      for(const items of Object.values(vocab)){
+        if(!Array.isArray(items))continue;
+        items.forEach(v=>{const kr=v.kr||v.korean;if(kr)words.push({korean:kr,english:v.en||v.english||'',romanization:v.rom||v.romanization||'',emoji:v.emoji||'',unit:n,book:3});});
+      }
+      const secs=(d.sections&&d.sections.grammar&&d.sections.grammar.sections)||[];
+      secs.forEach(g=>{if(g.title)grams.push({title:g.title,pattern:g.pattern||'',meaning:g.meaning||g.subtitle||'',unit:n,book:3});});
+    }catch(e){break;}
   }
+
   words.sort((a,b)=>_koCompare(a.korean,b.korean));
   _kidsIdxAll=words;
-  // ── grammar ──
-  const grams=[];
-  for(let n=1;n<=9;n++){
-    try{
-      const d=typeof HalmoniCore!=='undefined'?await HalmoniCore.loadUnit(n):null;
-      if(!d)continue;
-      const secs=(d.sections&&d.sections.grammar&&d.sections.grammar.sections)||[];
-      secs.forEach(g=>{if(g.title)grams.push({id:g.id||'',title:g.title,pattern:g.pattern||'',meaning:g.meaning||g.subtitle||'',unit:n,book:2});});
-    }catch(e){}
-  }
-  if(typeof B3_INLINE_DATA!=='undefined'){
-    for(const [nStr,d] of Object.entries(B3_INLINE_DATA)){
-      const n=parseInt(nStr);
-      try{
-        const secs=(d.sections&&d.sections.grammar&&d.sections.grammar.sections)||[];
-        secs.forEach(g=>{if(g.title)grams.push({id:g.id||'',title:g.title,pattern:g.pattern||'',meaning:g.meaning||g.subtitle||'',unit:n,book:3});});
-      }catch(e){}
-    }
-  }
   _kidsGramAll=grams;
   _kidsIdxLoaded=true;
 }
