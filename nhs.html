@@ -4228,9 +4228,9 @@ function nmsShowMain(){
 // ── PROFILE CHIP ─────────────────────────────────────────
 function nmsUpdateChip(){
   const col=nmsGet('nms_'+nmsCurrent+'_color','#0f7c6e');
-  const initials=nmsCurrent.slice(0,2).toUpperCase();
+  const av=nmsGet('nms_'+nmsCurrent+'_av','🦊');
   document.getElementById('nms-profile-chip').innerHTML=
-    `<div class="nms-av-circle" style="background:${col}">${initials}</div>
+    `<div class="nms-av-circle" style="background:${col};font-size:18px;">${av}</div>
      <span class="nms-chip-name">${nmsCurrent}</span>
      <button class="nms-sw-btn" onclick="nmsShowSwitcher()">전환 🔄</button>`;
 }
