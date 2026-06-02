@@ -9557,8 +9557,8 @@ function msRenderHintWords() {
   // Level 2 — async from HalmoniCore
   if(lv==='2' && unit && typeof HalmoniCore!=='undefined'){
     HalmoniCore.loadUnit(unit).then(d=>{
-      const vocab=d?.sections?.vocab||[];
-      const words=Array.isArray(vocab)?vocab.filter(v=>v.korean).map(v=>v.korean):[];
+      const vocab=d?.sections?.vocab||{};
+      const words=(vocab.items||[]).filter(v=>v.korean).map(v=>v.korean);
       if(words.length){_render(words.slice(0,18),'Level 2 · '+unit+'과');return;}
       _render(DEFAULT,'기본 단어');
     }).catch(()=>_render(DEFAULT,'기본 단어'));
@@ -9676,3 +9676,4 @@ function msRenderStickers() {
 
 </body>
 </html>
+            
