@@ -568,6 +568,67 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .speak-ai-btn{padding:6px 14px;background:var(--amber-lt);border:1.5px solid #e8c070;border-radius:var(--radius-xl);font-size:12px;cursor:pointer;color:var(--amber-600);font-family:var(--font-kr);transition:all .2s;}
 .speak-ai-btn:hover{background:var(--amber-50);}
 
+
+/* ── NHS MY NOTES ────────────────────────────────────── */
+.nms-btn{padding:6px 14px;background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-300);border-radius:var(--radius-xl);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.nms-btn:hover{background:rgba(255,255,255,.32);}
+#nms-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fafaf9;z-index:9999;overflow-y:auto;flex-direction:column;}
+#nms-overlay.open{display:flex;}
+.nms-header{background:var(--teal);padding:13px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
+.nms-back{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:13px;}
+.nms-back:hover{background:rgba(255,255,255,.28);}
+.nms-hdr-title{color:#fff;font-weight:700;font-size:1.05rem;letter-spacing:.02em;}
+.nms-chip{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.nms-av-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;}
+.nms-chip-name{color:#fff;font-size:13px;font-weight:600;}
+.nms-sw-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:20px;padding:4px 10px;cursor:pointer;font-size:11px;}
+.nms-sw-btn:hover{background:rgba(255,255,255,.28);}
+.nms-body{padding:20px;max-width:700px;margin:0 auto;width:100%;flex:1;}
+.nms-card{background:#fff;border-radius:12px;border:1px solid var(--warm-300);padding:20px;margin-bottom:14px;}
+.nms-tabs{display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid var(--warm-300);padding-bottom:12px;}
+.nms-tab{padding:7px 18px;border-radius:20px;border:1px solid var(--warm-300);background:#fff;color:var(--warm-500);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
+.nms-tab.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.nms-label{font-size:11px;color:var(--warm-500);font-weight:600;letter-spacing:.04em;margin-bottom:5px;display:block;text-transform:uppercase;}
+.nms-input{width:100%;border:1px solid var(--warm-300);border-radius:8px;padding:9px 12px;font-size:14px;background:#fafaf9;outline:none;transition:border .15s;}
+.nms-input:focus{border-color:var(--teal);background:#fff;}
+.nms-textarea{width:100%;border:1px solid var(--warm-300);border-radius:8px;padding:9px 12px;font-size:14px;background:#fafaf9;outline:none;resize:vertical;min-height:110px;transition:border .15s;}
+.nms-textarea:focus{border-color:var(--teal);background:#fff;}
+.nms-save-btn{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.nms-save-btn:hover{opacity:.85;}
+.nms-note-item{background:var(--warm-50);border-radius:8px;padding:11px 13px;margin-bottom:8px;position:relative;border-left:3px solid var(--teal-300);}
+.nms-note-tag{display:inline-block;background:var(--teal-lt);color:var(--teal-dark);border-radius:20px;font-size:11px;font-weight:700;padding:2px 9px;margin-bottom:5px;}
+.nms-note-date{font-size:11px;color:var(--warm-500);margin-left:6px;}
+.nms-note-text{font-size:13px;color:var(--warm-700);line-height:1.7;white-space:pre-wrap;}
+.nms-note-del{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--warm-300);cursor:pointer;font-size:15px;padding:2px;}
+.nms-note-del:hover{color:var(--coral);}
+.nms-select{border:1px solid var(--warm-300);border-radius:8px;padding:7px 10px;font-size:13px;background:#fafaf9;outline:none;}
+.nms-av-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.nms-av-opt{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .15s;}
+.nms-av-opt.selected{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-lt);}
+.nms-color-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.nms-color-opt{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;}
+.nms-color-opt.selected{border-color:var(--gray-900);transform:scale(1.18);}
+.nms-profile-row{background:var(--warm-50);border-radius:10px;padding:11px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;cursor:pointer;border:1.5px solid transparent;transition:all .15s;}
+.nms-profile-row:hover{border-color:var(--teal-300);background:var(--teal-lt);}
+.nms-profile-row.current{border-color:var(--teal);background:var(--teal-lt);}
+.nms-add-btn{width:100%;padding:10px;border:1.5px dashed var(--warm-300);border-radius:10px;background:none;color:var(--warm-500);font-size:13px;font-weight:600;cursor:pointer;margin-top:4px;transition:all .15s;}
+.nms-add-btn:hover{border-color:var(--teal);color:var(--teal);}
+.nms-canvas-wrap{border:1px solid var(--warm-300);border-radius:10px;overflow:hidden;background:#fff;touch-action:none;}
+#nms-canvas{display:block;cursor:crosshair;}
+.nms-tool-bar{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap;}
+.nms-tool-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--warm-300);background:#fff;font-size:12px;cursor:pointer;font-weight:600;transition:all .15s;}
+.nms-tool-btn:hover{background:var(--warm-100);}
+.nms-tool-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.nms-badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.nms-badge{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;border:1.5px solid;}
+.nms-badge.earned{background:var(--amber-lt);color:var(--amber-600);border-color:var(--amber);}
+.nms-badge.locked{background:var(--warm-100);color:var(--warm-300);border-color:var(--warm-300);}
+.nms-setup-wrap{padding:40px 24px;max-width:440px;margin:0 auto;}
+.nms-setup-title{font-size:1.3rem;font-weight:700;color:var(--teal);margin-bottom:6px;}
+.nms-setup-sub{font-size:13px;color:var(--warm-500);margin-bottom:24px;line-height:1.6;}
+.nms-empty{text-align:center;padding:24px;color:var(--warm-500);font-size:13px;}
+.nms-sec-title{font-size:14px;font-weight:700;color:var(--warm-700);margin-bottom:12px;}
+
 </style>
 </head>
 <body>
@@ -582,6 +643,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
   </div>
   <div class="school-title"><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
+  <button class="nms-btn" onclick="openNMS()">📓 My Notes</button>
   <button class="settings-btn" onclick="openApiKey()" id="apikey-status-btn">⚙️ AI</button>
 </div>
 <!-- API Key 모달 -->
@@ -3963,5 +4025,404 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
   © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
   <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
 </footer>
+
+<!-- ═══════════════ NHS MY NOTES OVERLAY ═══════════════ -->
+<div id="nms-overlay">
+
+  <div class="nms-header">
+    <button class="nms-back" onclick="closeNMS()">← 돌아가기</button>
+    <span class="nms-hdr-title">📓 My Notes</span>
+    <div class="nms-chip" id="nms-profile-chip"></div>
+  </div>
+
+  <!-- SETUP -->
+  <div id="nms-setup" class="nms-setup-wrap" style="display:none">
+    <div class="nms-setup-title">👋 처음 오셨군요!</div>
+    <div class="nms-setup-sub">이름(또는 닉네임)을 입력하면 나만의 노트 공간이 만들어져요.<br>같은 컴퓨터를 쓰는 친구와 완전히 분리돼요.</div>
+    <span class="nms-label">이름 / 닉네임</span>
+    <input class="nms-input" id="nms-setup-name" placeholder="예: Jordan, 유진..." maxlength="20" style="margin-bottom:16px;">
+    <span class="nms-label">아바타 색상 고르기</span>
+    <div class="nms-color-row" id="nms-setup-colors"></div>
+    <button class="nms-save-btn" style="margin-top:24px;width:100%;padding:12px;" onclick="nmsCreateProfile()">시작하기 →</button>
+  </div>
+
+  <!-- SWITCHER -->
+  <div id="nms-switcher" style="display:none">
+    <div class="nms-body">
+      <div class="nms-card">
+        <div class="nms-sec-title">누구세요? 선택해주세요.</div>
+        <div id="nms-profile-list"></div>
+        <button class="nms-add-btn" onclick="nmsShowSetup(false)">+ 새 프로필 만들기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="nms-main" style="display:none">
+    <div class="nms-body">
+      <div class="nms-tabs">
+        <button class="nms-tab active" id="nms-t-notes" onclick="nmsTab('notes')">📝 내 노트</button>
+        <button class="nms-tab" id="nms-t-write" onclick="nmsTab('write')">✏️ 한글 연습</button>
+        <button class="nms-tab" id="nms-t-deco" onclick="nmsTab('deco')">🎨 꾸미기</button>
+      </div>
+
+      <!-- NOTES -->
+      <div id="nms-panel-notes">
+        <div class="nms-card">
+          <div class="nms-sec-title">📝 새 메모</div>
+          <div style="display:flex;gap:10px;margin-bottom:10px;align-items:flex-end;flex-wrap:wrap;">
+            <div>
+              <span class="nms-label">에피소드</span>
+              <select class="nms-select" id="nms-ep-sel">
+                <option value="ep01">ep01 — 공원 첫 만남</option>
+                <option value="ep02">ep02 — 누구예요?</option>
+                <option value="ep03">ep03 — 얼마예요?</option>
+                <option value="ep04">ep04 — 김밥 주세요</option>
+                <option value="ep05">ep05 — 스터디 그룹</option>
+                <option value="ep06">ep06 — 몇 시에 만날까?</option>
+                <option value="ep07">ep07 — 어디 있어요?</option>
+                <option value="ep08">ep08 — 재래시장</option>
+                <option value="ep09">ep09 — 한강 소풍</option>
+                <option value="ep10">ep10 — 어서 오세요</option>
+                <option value="basics">Basics — 기초 문법</option>
+                <option value="free">자유 메모</option>
+              </select>
+            </div>
+          </div>
+          <textarea class="nms-textarea" id="nms-note-text" placeholder="오늘 배운 문법, 기억할 표현, 질문, 뭐든 자유롭게..."></textarea>
+          <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
+            <button class="nms-save-btn" onclick="nmsSaveNote()">💾 저장</button>
+            <span id="nms-save-msg" style="font-size:12px;color:var(--teal);display:none;">✓ 저장됐어요!</span>
+          </div>
+        </div>
+        <div class="nms-card">
+          <div class="nms-sec-title">📋 저장된 메모</div>
+          <div id="nms-notes-list"></div>
+        </div>
+      </div>
+
+      <!-- WRITING -->
+      <div id="nms-panel-write" style="display:none">
+        <div class="nms-card">
+          <div class="nms-sec-title">✏️ 한글 연습장</div>
+          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">자유롭게 쓰고 지워요. 저장 없이 가볍게!</div>
+          <div class="nms-canvas-wrap">
+            <canvas id="nms-canvas"></canvas>
+          </div>
+          <div class="nms-tool-bar">
+            <button class="nms-tool-btn active" id="nms-tool-pen" onclick="nmsSetTool('pen')">🖊 쓰기</button>
+            <button class="nms-tool-btn" id="nms-tool-erase" onclick="nmsSetTool('erase')">🧹 지우개</button>
+            <div style="display:flex;gap:4px;">
+              <button class="nms-tool-btn" id="nms-sz-s" onclick="nmsSetSize(2)" style="padding:6px 11px;">S</button>
+              <button class="nms-tool-btn active" id="nms-sz-m" onclick="nmsSetSize(5)" style="padding:6px 11px;">M</button>
+              <button class="nms-tool-btn" id="nms-sz-l" onclick="nmsSetSize(10)" style="padding:6px 11px;">L</button>
+            </div>
+            <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 지우기</button>
+          </div>
+          <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
+            <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">단어 힌트 — 클릭하면 크게 보여요</div>
+            <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DECO -->
+      <div id="nms-panel-deco" style="display:none">
+        <div class="nms-card">
+          <div class="nms-sec-title">🎨 내 설정</div>
+          <span class="nms-label">닉네임</span>
+          <div style="display:flex;gap:8px;margin-bottom:16px;">
+            <input class="nms-input" id="nms-deco-name" maxlength="20" style="flex:1;">
+            <button class="nms-save-btn" onclick="nmsSaveDeco()">저장</button>
+          </div>
+          <span class="nms-label">아바타 색상</span>
+          <div class="nms-color-row" id="nms-deco-colors"></div>
+        </div>
+        <div class="nms-card">
+          <div class="nms-sec-title">🏅 에피소드 배지</div>
+          <div style="font-size:12px;color:var(--warm-500);margin-bottom:12px;">메모를 남긴 에피소드에 배지가 생겨요!</div>
+          <div id="nms-badge-display"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════ END NHS MY NOTES ═══════════════ -->
+
+
+<script>
+// ═══════════════ NHS MY NOTES ════════════════════════════
+const NMS_COLORS = ['#0f7c6e','#1a5fa8','#c47a1a','#5a3fa0','#c74d36','#2d7d46','#b04070'];
+const NMS_EP_LABELS = {
+  ep01:'ep01',ep02:'ep02',ep03:'ep03',ep04:'ep04',ep05:'ep05',
+  ep06:'ep06',ep07:'ep07',ep08:'ep08',ep09:'ep09',ep10:'ep10',
+  basics:'Basics',free:'자유'
+};
+
+const nmsGet  = (k,d='') => { try{return localStorage.getItem(k)||d;}catch(e){return d;} };
+const nmsSet  = (k,v)    => { try{localStorage.setItem(k,v);}catch(e){} };
+const nmsGetJ = (k,d=[]) => { try{return JSON.parse(localStorage.getItem(k)||'null')||d;}catch(e){return d;} };
+const nmsSetJ = (k,v)    => { try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} };
+
+let nmsCurrent='', nmsSetupColor='#0f7c6e', nmsDecoColor='';
+let nmsTool='pen', nmsBrushSize=5;
+let nmsCanvas, nmsCtx, nmsDrawing=false, nmsLX=0, nmsLY=0;
+
+// ── OPEN / CLOSE ─────────────────────────────────────────
+function openNMS(){
+  document.getElementById('nms-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  const profiles=nmsGetJ('nms_profiles');
+  nmsCurrent=nmsGet('nms_current');
+  if(!profiles.length||!nmsCurrent){ nmsShowSetup(true); }
+  else { nmsShowMain(); }
+}
+function closeNMS(){
+  document.getElementById('nms-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── SCREENS ──────────────────────────────────────────────
+function nmsShowSetup(isFirst){
+  document.getElementById('nms-setup').style.display='block';
+  document.getElementById('nms-switcher').style.display='none';
+  document.getElementById('nms-main').style.display='none';
+  document.getElementById('nms-profile-chip').innerHTML='';
+  nmsRenderColorPicker('nms-setup-colors', nmsSetupColor, v=>nmsSetupColor=v);
+  if(isFirst) document.getElementById('nms-setup-name').value='';
+}
+function nmsShowSwitcher(){
+  document.getElementById('nms-setup').style.display='none';
+  document.getElementById('nms-switcher').style.display='block';
+  document.getElementById('nms-main').style.display='none';
+  document.getElementById('nms-profile-chip').innerHTML='';
+  const profiles=nmsGetJ('nms_profiles');
+  document.getElementById('nms-profile-list').innerHTML=profiles.map(name=>{
+    const col=nmsGet('nms_'+name+'_color','#0f7c6e');
+    const initials=name.slice(0,2).toUpperCase();
+    const isCur=name===nmsCurrent;
+    return `<div class="nms-profile-row${isCur?' current':''}" onclick="nmsSwitchTo('${name}')">
+      <div class="nms-av-circle" style="background:${col}">${initials}</div>
+      <span style="font-weight:600;font-size:14px;flex:1">${name}</span>
+      ${isCur?'<span style="font-size:11px;color:var(--teal);font-weight:700">현재 프로필</span>':''}
+    </div>`;
+  }).join('');
+}
+function nmsShowMain(){
+  document.getElementById('nms-setup').style.display='none';
+  document.getElementById('nms-switcher').style.display='none';
+  document.getElementById('nms-main').style.display='block';
+  nmsUpdateChip();
+  nmsTab('notes');
+  nmsInitCanvas();
+  nmsRenderNotesList();
+  nmsRenderDecoPanel();
+  nmsRenderHintWords();
+}
+
+// ── PROFILE CHIP ─────────────────────────────────────────
+function nmsUpdateChip(){
+  const col=nmsGet('nms_'+nmsCurrent+'_color','#0f7c6e');
+  const initials=nmsCurrent.slice(0,2).toUpperCase();
+  document.getElementById('nms-profile-chip').innerHTML=
+    `<div class="nms-av-circle" style="background:${col}">${initials}</div>
+     <span class="nms-chip-name">${nmsCurrent}</span>
+     <button class="nms-sw-btn" onclick="nmsShowSwitcher()">전환 🔄</button>`;
+}
+
+// ── CREATE / SWITCH PROFILE ───────────────────────────────
+function nmsCreateProfile(){
+  const name=document.getElementById('nms-setup-name').value.trim();
+  if(!name){alert('이름을 입력해주세요!');return;}
+  const profiles=nmsGetJ('nms_profiles');
+  if(!profiles.includes(name)) profiles.push(name);
+  nmsSetJ('nms_profiles',profiles);
+  nmsSet('nms_'+name+'_color',nmsSetupColor);
+  nmsSet('nms_current',name);
+  nmsCurrent=name;
+  nmsShowMain();
+}
+function nmsSwitchTo(name){
+  nmsSet('nms_current',name);
+  nmsCurrent=name;
+  nmsShowMain();
+}
+
+// ── TABS ─────────────────────────────────────────────────
+function nmsTab(t){
+  ['notes','write','deco'].forEach(x=>{
+    document.getElementById('nms-panel-'+x).style.display=x===t?'block':'none';
+    document.getElementById('nms-t-'+x).classList.toggle('active',x===t);
+  });
+  if(t==='write') setTimeout(nmsResizeCanvas,50);
+  if(t==='deco')  nmsRenderDecoPanel();
+}
+
+// ── NOTES ────────────────────────────────────────────────
+function nmsSaveNote(){
+  const text=document.getElementById('nms-note-text').value.trim();
+  if(!text) return;
+  const ep=document.getElementById('nms-ep-sel').value;
+  const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
+  notes.unshift({id:Date.now(),ep,text,
+    date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric'})});
+  nmsSetJ('nms_'+nmsCurrent+'_notes',notes);
+  document.getElementById('nms-note-text').value='';
+  const msg=document.getElementById('nms-save-msg');
+  msg.style.display='inline';
+  setTimeout(()=>{msg.style.display='none';},2000);
+  nmsRenderNotesList();
+}
+function nmsRenderNotesList(){
+  const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
+  const el=document.getElementById('nms-notes-list');
+  if(!notes.length){
+    el.innerHTML='<div class="nms-empty">아직 메모가 없어요. 위에서 작성해보세요! ✍️</div>';
+    return;
+  }
+  el.innerHTML=notes.map((n,i)=>`
+    <div class="nms-note-item">
+      <span class="nms-note-tag">${NMS_EP_LABELS[n.ep]||n.ep}</span>
+      <span class="nms-note-date">${n.date}</span>
+      <button class="nms-note-del" onclick="nmsDeleteNote(${i})">✕</button>
+      <div class="nms-note-text">${n.text.replace(/</g,'&lt;')}</div>
+    </div>`).join('');
+}
+function nmsDeleteNote(i){
+  const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
+  notes.splice(i,1);
+  nmsSetJ('nms_'+nmsCurrent+'_notes',notes);
+  nmsRenderNotesList();
+}
+
+// ── CANVAS ────────────────────────────────────────────────
+function nmsInitCanvas(){
+  nmsCanvas=document.getElementById('nms-canvas');
+  nmsCtx=nmsCanvas.getContext('2d');
+  nmsResizeCanvas();
+  nmsCanvas.addEventListener('mousedown',e=>{nmsDrawing=true;const p=nmsPos(e);nmsLX=p.x;nmsLY=p.y;});
+  nmsCanvas.addEventListener('mousemove',e=>{if(!nmsDrawing)return;nmsDraw(nmsPos(e));});
+  nmsCanvas.addEventListener('mouseup',()=>nmsDrawing=false);
+  nmsCanvas.addEventListener('mouseleave',()=>nmsDrawing=false);
+  nmsCanvas.addEventListener('touchstart',e=>{e.preventDefault();nmsDrawing=true;const p=nmsPos(e.touches[0]);nmsLX=p.x;nmsLY=p.y;},{passive:false});
+  nmsCanvas.addEventListener('touchmove',e=>{e.preventDefault();if(!nmsDrawing)return;nmsDraw(nmsPos(e.touches[0]));},{passive:false});
+  nmsCanvas.addEventListener('touchend',()=>nmsDrawing=false);
+}
+function nmsResizeCanvas(){
+  if(!nmsCanvas)return;
+  const w=nmsCanvas.parentElement.clientWidth;
+  const h=240;
+  nmsCanvas.width=w; nmsCanvas.height=h;
+  nmsCanvas.style.width=w+'px'; nmsCanvas.style.height=h+'px';
+  nmsCtx.fillStyle='#fff';
+  nmsCtx.fillRect(0,0,w,h);
+}
+function nmsPos(e){
+  const r=nmsCanvas.getBoundingClientRect();
+  return{x:(e.clientX-r.left)*(nmsCanvas.width/r.width),
+         y:(e.clientY-r.top)*(nmsCanvas.height/r.height)};
+}
+function nmsDraw(pos){
+  const col=nmsGet('nms_'+nmsCurrent+'_color','#0f7c6e');
+  nmsCtx.lineWidth=nmsBrushSize; nmsCtx.lineCap='round'; nmsCtx.lineJoin='round';
+  if(nmsTool==='erase'){
+    nmsCtx.globalCompositeOperation='destination-out';
+    nmsCtx.lineWidth=nmsBrushSize*4;
+  } else {
+    nmsCtx.globalCompositeOperation='source-over';
+    nmsCtx.strokeStyle=col;
+  }
+  nmsCtx.beginPath(); nmsCtx.moveTo(nmsLX,nmsLY); nmsCtx.lineTo(pos.x,pos.y); nmsCtx.stroke();
+  nmsLX=pos.x; nmsLY=pos.y;
+}
+function nmsSetTool(t){
+  nmsTool=t;
+  document.getElementById('nms-tool-pen').classList.toggle('active',t==='pen');
+  document.getElementById('nms-tool-erase').classList.toggle('active',t==='erase');
+}
+function nmsSetSize(s){
+  nmsBrushSize=s;
+  ['s','m','l'].forEach(x=>document.getElementById('nms-sz-'+x).classList.remove('active'));
+  document.getElementById(s===2?'nms-sz-s':s===5?'nms-sz-m':'nms-sz-l').classList.add('active');
+}
+function nmsClearCanvas(){
+  if(!nmsCtx)return;
+  nmsCtx.globalCompositeOperation='source-over';
+  nmsCtx.fillStyle='#fff';
+  nmsCtx.fillRect(0,0,nmsCanvas.width,nmsCanvas.height);
+}
+function nmsRenderHintWords(){
+  const words=['안녕하세요','감사합니다','주세요','있어요','없어요','어디예요','얼마예요','맛있어요','괜찮아요','몰라요','알아요','잘 먹겠습니다'];
+  const el=document.getElementById('nms-hint-words');
+  if(!el)return;
+  el.innerHTML=words.map(w=>
+    `<span onclick="nmsPickHint('${w}')" style="display:inline-block;padding:3px 10px;background:var(--teal-lt);color:var(--teal-dark);border-radius:20px;font-size:13px;cursor:pointer;margin-bottom:4px;border:1px solid var(--teal-300);">${w}</span>`
+  ).join('');
+}
+function nmsPickHint(w){
+  const tip=document.createElement('div');
+  tip.style.cssText="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;padding:20px 32px;font-size:2.2rem;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:10001;text-align:center;border:2px solid var(--teal-300);";
+  tip.innerHTML=`<div>${w}</div><div style="font-size:12px;color:var(--warm-500);margin-top:8px;">따라 써보세요 ✏️</div>`;
+  document.body.appendChild(tip);
+  setTimeout(()=>tip.remove(),2200);
+}
+
+// ── DECO ─────────────────────────────────────────────────
+function nmsRenderColorPicker(cid, selected, onChange){
+  const el=document.getElementById(cid);
+  el.innerHTML=NMS_COLORS.map(c=>
+    `<div class="nms-color-opt${c===selected?' selected':''}" style="background:${c}" onclick="nmsPickColor('${cid}','${c}',this)"></div>`
+  ).join('');
+}
+function nmsPickColor(cid,val,el){
+  document.getElementById(cid).querySelectorAll('.nms-color-opt').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  if(cid==='nms-setup-colors') nmsSetupColor=val;
+  else if(cid==='nms-deco-colors'){
+    nmsDecoColor=val;
+    nmsSet('nms_'+nmsCurrent+'_color',val);
+    nmsUpdateChip();
+  }
+}
+function nmsRenderDecoPanel(){
+  const col=nmsGet('nms_'+nmsCurrent+'_color','#0f7c6e');
+  nmsDecoColor=col;
+  document.getElementById('nms-deco-name').value=nmsCurrent;
+  nmsRenderColorPicker('nms-deco-colors',col,()=>{});
+  nmsRenderBadges();
+}
+function nmsSaveDeco(){
+  const newName=document.getElementById('nms-deco-name').value.trim();
+  if(!newName)return;
+  if(newName!==nmsCurrent){
+    const profiles=nmsGetJ('nms_profiles');
+    const i=profiles.indexOf(nmsCurrent);
+    if(i>-1) profiles[i]=newName;
+    ['_notes','_color'].forEach(k=>{
+      const v=localStorage.getItem('nms_'+nmsCurrent+k);
+      if(v) nmsSet('nms_'+newName+k,v);
+    });
+    nmsSetJ('nms_profiles',profiles);
+    nmsSet('nms_current',newName);
+    nmsCurrent=newName;
+  }
+  nmsUpdateChip();
+  const btn=event.target;
+  btn.textContent='✓ 저장됨';
+  setTimeout(()=>btn.textContent='저장',1500);
+}
+function nmsRenderBadges(){
+  const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
+  const earned=new Set(notes.map(n=>n.ep));
+  const allEps=['ep01','ep02','ep03','ep04','ep05','ep06','ep07','ep08','ep09','ep10','basics'];
+  const el=document.getElementById('nms-badge-display');
+  el.innerHTML='<div class="nms-badge-row">'+allEps.map(ep=>{
+    const has=earned.has(ep);
+    return `<span class="nms-badge ${has?'earned':'locked'}">${has?'✓ ':''} ${NMS_EP_LABELS[ep]||ep}</span>`;
+  }).join('')+'</div>';
+}
+// ═══════════════════════════════════════════════════════
+</script>
+
 </body>
 </html>
