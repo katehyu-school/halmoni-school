@@ -4030,29 +4030,31 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
 <div id="nms-overlay">
 
   <div class="nms-header">
-    <button class="nms-back" onclick="closeNMS()">← 돌아가기</button>
+    <button class="nms-back" onclick="closeNMS()">← Back</button>
     <span class="nms-hdr-title">📓 My Notes</span>
     <div class="nms-chip" id="nms-profile-chip"></div>
   </div>
 
   <!-- SETUP -->
   <div id="nms-setup" class="nms-setup-wrap" style="display:none">
-    <div class="nms-setup-title">👋 처음 오셨군요!</div>
-    <div class="nms-setup-sub">이름(또는 닉네임)을 입력하면 나만의 노트 공간이 만들어져요.<br>같은 컴퓨터를 쓰는 친구와 완전히 분리돼요.</div>
-    <span class="nms-label">이름 / 닉네임</span>
-    <input class="nms-input" id="nms-setup-name" placeholder="예: Jordan, 유진..." maxlength="20" style="margin-bottom:16px;">
-    <span class="nms-label">아바타 색상 고르기</span>
+    <div class="nms-setup-title">👋 First time here!</div>
+    <div class="nms-setup-sub">Enter your name to create your own space.<br>Your notes are saved separately from other users on this device.</div>
+    <span class="nms-label">Name / Nickname</span>
+    <input class="nms-input" id="nms-setup-name" placeholder="e.g. Jordan, Yujin..." maxlength="20" style="margin-bottom:16px;">
+    <span class="nms-label">Pick your avatar 🦊</span>
+    <div class="nms-av-row" id="nms-setup-avs"></div>
+    <span class="nms-label" style="margin-top:12px;">Pick your color</span>
     <div class="nms-color-row" id="nms-setup-colors"></div>
-    <button class="nms-save-btn" style="margin-top:24px;width:100%;padding:12px;" onclick="nmsCreateProfile()">시작하기 →</button>
+    <button class="nms-save-btn" style="margin-top:24px;width:100%;padding:12px;" onclick="nmsCreateProfile()">Let's go! →</button>
   </div>
 
   <!-- SWITCHER -->
   <div id="nms-switcher" style="display:none">
     <div class="nms-body">
       <div class="nms-card">
-        <div class="nms-sec-title">누구세요? 선택해주세요.</div>
+        <div class="nms-sec-title">Who is using this? 👤</div>
         <div id="nms-profile-list"></div>
-        <button class="nms-add-btn" onclick="nmsShowSetup(false)">+ 새 프로필 만들기</button>
+        <button class="nms-add-btn" onclick="nmsShowSetup(false)">+ New profile</button>
       </div>
     </div>
   </div>
@@ -4061,18 +4063,18 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
   <div id="nms-main" style="display:none">
     <div class="nms-body">
       <div class="nms-tabs">
-        <button class="nms-tab active" id="nms-t-notes" onclick="nmsTab('notes')">📝 내 노트</button>
-        <button class="nms-tab" id="nms-t-write" onclick="nmsTab('write')">✏️ 한글 연습</button>
-        <button class="nms-tab" id="nms-t-deco" onclick="nmsTab('deco')">🎨 꾸미기</button>
+        <button class="nms-tab active" id="nms-t-notes" onclick="nmsTab('notes')">📝 My Notes</button>
+        <button class="nms-tab" id="nms-t-write" onclick="nmsTab('write')">✏️ Korean Writing</button>
+        <button class="nms-tab" id="nms-t-deco" onclick="nmsTab('deco')">🎨 My Style</button>
       </div>
 
       <!-- NOTES -->
       <div id="nms-panel-notes">
         <div class="nms-card">
-          <div class="nms-sec-title">📝 새 메모</div>
+          <div class="nms-sec-title">📝 New Note</div>
           <div style="display:flex;gap:10px;margin-bottom:10px;align-items:flex-end;flex-wrap:wrap;">
             <div>
-              <span class="nms-label">에피소드</span>
+              <span class="nms-label">Episode</span>
               <select class="nms-select" id="nms-ep-sel">
                 <option value="ep01">ep01 — 공원 첫 만남</option>
                 <option value="ep02">ep02 — 누구예요?</option>
@@ -4089,14 +4091,14 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
               </select>
             </div>
           </div>
-          <textarea class="nms-textarea" id="nms-note-text" placeholder="오늘 배운 문법, 기억할 표현, 질문, 뭐든 자유롭게..."></textarea>
+          <textarea class="nms-textarea" id="nms-note-text" placeholder="Grammar notes, useful phrases, questions... anything goes!"></textarea>
           <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
-            <button class="nms-save-btn" onclick="nmsSaveNote()">💾 저장</button>
-            <span id="nms-save-msg" style="font-size:12px;color:var(--teal);display:none;">✓ 저장됐어요!</span>
+            <button class="nms-save-btn" onclick="nmsSaveNote()">💾 Save</button>
+            <span id="nms-save-msg" style="font-size:12px;color:var(--teal);display:none;">✓ Saved!</span>
           </div>
         </div>
         <div class="nms-card">
-          <div class="nms-sec-title">📋 저장된 메모</div>
+          <div class="nms-sec-title">📋 Saved Notes</div>
           <div id="nms-notes-list"></div>
         </div>
       </div>
@@ -4104,23 +4106,23 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
       <!-- WRITING -->
       <div id="nms-panel-write" style="display:none">
         <div class="nms-card">
-          <div class="nms-sec-title">✏️ 한글 연습장</div>
-          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">자유롭게 쓰고 지워요. 저장 없이 가볍게!</div>
+          <div class="nms-sec-title">✏️ Korean Writing Practice</div>
+          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">Write freely and erase — no saving needed!</div>
           <div class="nms-canvas-wrap">
             <canvas id="nms-canvas"></canvas>
           </div>
           <div class="nms-tool-bar">
-            <button class="nms-tool-btn active" id="nms-tool-pen" onclick="nmsSetTool('pen')">🖊 쓰기</button>
-            <button class="nms-tool-btn" id="nms-tool-erase" onclick="nmsSetTool('erase')">🧹 지우개</button>
+            <button class="nms-tool-btn active" id="nms-tool-pen" onclick="nmsSetTool('pen')">🖊 Write</button>
+            <button class="nms-tool-btn" id="nms-tool-erase" onclick="nmsSetTool('erase')">🧹 Eraser</button>
             <div style="display:flex;gap:4px;">
               <button class="nms-tool-btn" id="nms-sz-s" onclick="nmsSetSize(2)" style="padding:6px 11px;">S</button>
               <button class="nms-tool-btn active" id="nms-sz-m" onclick="nmsSetSize(5)" style="padding:6px 11px;">M</button>
               <button class="nms-tool-btn" id="nms-sz-l" onclick="nmsSetSize(10)" style="padding:6px 11px;">L</button>
             </div>
-            <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 지우기</button>
+            <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 Clear</button>
           </div>
           <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
-            <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">단어 힌트 — 클릭하면 크게 보여요</div>
+            <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Word hints — click to see it big ✨</div>
             <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
           </div>
         </div>
@@ -4129,18 +4131,19 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
       <!-- DECO -->
       <div id="nms-panel-deco" style="display:none">
         <div class="nms-card">
-          <div class="nms-sec-title">🎨 내 설정</div>
-          <span class="nms-label">닉네임</span>
+          <div class="nms-sec-title">🎨 My Style</div>
+          <span class="nms-label">Nickname</span>
           <div style="display:flex;gap:8px;margin-bottom:16px;">
             <input class="nms-input" id="nms-deco-name" maxlength="20" style="flex:1;">
-            <button class="nms-save-btn" onclick="nmsSaveDeco()">저장</button>
+            <button class="nms-save-btn" onclick="nmsSaveDeco()">Save</button>
           </div>
-          <span class="nms-label">아바타 색상</span>
+          <span class="nms-label">Avatar & color</span>
+          <div class="nms-av-row" id="nms-deco-avs"></div>
           <div class="nms-color-row" id="nms-deco-colors"></div>
         </div>
         <div class="nms-card">
-          <div class="nms-sec-title">🏅 에피소드 배지</div>
-          <div style="font-size:12px;color:var(--warm-500);margin-bottom:12px;">메모를 남긴 에피소드에 배지가 생겨요!</div>
+          <div class="nms-sec-title">🏅 Episode Badges</div>
+          <div style="font-size:12px;color:var(--warm-500);margin-bottom:12px;">Earn a badge for each episode you take notes on!</div>
           <div id="nms-badge-display"></div>
         </div>
       </div>
@@ -4152,6 +4155,7 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
 
 <script>
 // ═══════════════ NHS MY NOTES ════════════════════════════
+const NMS_AVATARS = ['🦊','🐨','🐯','🦋','🐬','🦅','🌙','⚡','🎸','🏄','🎯','🌿'];
 const NMS_COLORS = ['#0f7c6e','#1a5fa8','#c47a1a','#5a3fa0','#c74d36','#2d7d46','#b04070'];
 const NMS_EP_LABELS = {
   ep01:'ep01',ep02:'ep02',ep03:'ep03',ep04:'ep04',ep05:'ep05',
@@ -4164,7 +4168,7 @@ const nmsSet  = (k,v)    => { try{localStorage.setItem(k,v);}catch(e){} };
 const nmsGetJ = (k,d=[]) => { try{return JSON.parse(localStorage.getItem(k)||'null')||d;}catch(e){return d;} };
 const nmsSetJ = (k,v)    => { try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} };
 
-let nmsCurrent='', nmsSetupColor='#0f7c6e', nmsDecoColor='';
+let nmsCurrent='', nmsSetupColor='#0f7c6e', nmsDecoColor='', nmsSetupAv='🦊', nmsDecoAv='';
 let nmsTool='pen', nmsBrushSize=5;
 let nmsCanvas, nmsCtx, nmsDrawing=false, nmsLX=0, nmsLY=0;
 
@@ -4189,6 +4193,7 @@ function nmsShowSetup(isFirst){
   document.getElementById('nms-main').style.display='none';
   document.getElementById('nms-profile-chip').innerHTML='';
   nmsRenderColorPicker('nms-setup-colors', nmsSetupColor, v=>nmsSetupColor=v);
+  nmsRenderAvatarPicker('nms-setup-avs', nmsSetupAv, v=>nmsSetupAv=v);
   if(isFirst) document.getElementById('nms-setup-name').value='';
 }
 function nmsShowSwitcher(){
@@ -4199,12 +4204,12 @@ function nmsShowSwitcher(){
   const profiles=nmsGetJ('nms_profiles');
   document.getElementById('nms-profile-list').innerHTML=profiles.map(name=>{
     const col=nmsGet('nms_'+name+'_color','#0f7c6e');
-    const initials=name.slice(0,2).toUpperCase();
+    const av=nmsGet('nms_'+name+'_av','🦊');
     const isCur=name===nmsCurrent;
     return `<div class="nms-profile-row${isCur?' current':''}" onclick="nmsSwitchTo('${name}')">
-      <div class="nms-av-circle" style="background:${col}">${initials}</div>
+      <div class="nms-av-circle" style="background:${col};font-size:18px;">${av}</div>
       <span style="font-weight:600;font-size:14px;flex:1">${name}</span>
-      ${isCur?'<span style="font-size:11px;color:var(--teal);font-weight:700">현재 프로필</span>':''}
+      ${isCur?'<span style="font-size:11px;color:var(--teal);font-weight:700">Active</span>':''}
     </div>`;
   }).join('');
 }
@@ -4238,6 +4243,7 @@ function nmsCreateProfile(){
   if(!profiles.includes(name)) profiles.push(name);
   nmsSetJ('nms_profiles',profiles);
   nmsSet('nms_'+name+'_color',nmsSetupColor);
+  nmsSet('nms_'+name+'_av',nmsSetupAv);
   nmsSet('nms_current',name);
   nmsCurrent=name;
   nmsShowMain();
@@ -4277,7 +4283,7 @@ function nmsRenderNotesList(){
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   const el=document.getElementById('nms-notes-list');
   if(!notes.length){
-    el.innerHTML='<div class="nms-empty">아직 메모가 없어요. 위에서 작성해보세요! ✍️</div>';
+    el.innerHTML='<div class="nms-empty">No notes yet. Write one above! ✍️</div>';
     return;
   }
   el.innerHTML=notes.map((n,i)=>`
@@ -4362,12 +4368,26 @@ function nmsRenderHintWords(){
 function nmsPickHint(w){
   const tip=document.createElement('div');
   tip.style.cssText="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;padding:20px 32px;font-size:2.2rem;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:10001;text-align:center;border:2px solid var(--teal-300);";
-  tip.innerHTML=`<div>${w}</div><div style="font-size:12px;color:var(--warm-500);margin-top:8px;">따라 써보세요 ✏️</div>`;
+  tip.innerHTML=`<div>${w}</div><div style="font-size:12px;color:var(--warm-500);margin-top:8px;">Try writing it! ✏️</div>`;
   document.body.appendChild(tip);
   setTimeout(()=>tip.remove(),2200);
 }
 
 // ── DECO ─────────────────────────────────────────────────
+function nmsRenderAvatarPicker(cid, selected, onChange){
+  const el=document.getElementById(cid);
+  if(!el) return;
+  el._onChange=onChange;
+  el.innerHTML=NMS_AVATARS.map(a=>
+    `<div class="nms-av-opt${a===selected?' selected':''}" style="font-size:20px;" onclick="nmsPickAvatar('${cid}','${a}',this)">${a}</div>`
+  ).join('');
+}
+function nmsPickAvatar(cid,val,el){
+  document.getElementById(cid).querySelectorAll('.nms-av-opt').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  const cb=document.getElementById(cid)._onChange;
+  if(cb) cb(val);
+}
 function nmsRenderColorPicker(cid, selected, onChange){
   const el=document.getElementById(cid);
   el.innerHTML=NMS_COLORS.map(c=>
@@ -4389,6 +4409,7 @@ function nmsRenderDecoPanel(){
   nmsDecoColor=col;
   document.getElementById('nms-deco-name').value=nmsCurrent;
   nmsRenderColorPicker('nms-deco-colors',col,()=>{});
+  nmsRenderAvatarPicker('nms-deco-avs',nmsGet('nms_'+nmsCurrent+'_av','🦊'),v=>{nmsDecoAv=v; nmsSet('nms_'+nmsCurrent+'_av',v); nmsUpdateChip();});
   nmsRenderBadges();
 }
 function nmsSaveDeco(){
@@ -4398,7 +4419,7 @@ function nmsSaveDeco(){
     const profiles=nmsGetJ('nms_profiles');
     const i=profiles.indexOf(nmsCurrent);
     if(i>-1) profiles[i]=newName;
-    ['_notes','_color'].forEach(k=>{
+    ['_notes','_color','_av'].forEach(k=>{
       const v=localStorage.getItem('nms_'+nmsCurrent+k);
       if(v) nmsSet('nms_'+newName+k,v);
     });
