@@ -4244,6 +4244,16 @@ function nmsShowMain(){
   nmsInitCanvas();
   nmsRenderNotesList();
   nmsRenderDecoPanel();
+  // Pre-select dropdown: last note's episode, or ep01 if no notes
+  const _notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
+  const _last=_notes.find(n=>n.level==='L1'&&n.ep);
+  if(_last){
+    const lvEl=document.getElementById('nms-level-sel');
+    const epEl=document.getElementById('nms-ep-sel');
+    if(lvEl) lvEl.value='L1';
+    if(epEl) epEl.value=_last.ep;
+    nmsToggleEpSel();
+  }
   nmsRenderHintWords();
 }
 
@@ -4509,13 +4519,4 @@ function nmsRenderBadges(){
   document.getElementById('nms-badge-display').innerHTML=
     `<div style="text-align:center;padding:12px 0;">
       <div style="font-size:56px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
-      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:10px;">${tier.name} · ${total} notes</div>
-      <div style="display:flex;gap:3px;justify-content:center;margin-bottom:8px;">${dots}</div>
-      <div style="font-size:11px;color:var(--warm-500);">${hint}</div>
-    </div>`;
-}
-// ═══════════════════════════════════════════════════════
-</script>
-
-</body>
-</html>
+      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:10px;">${tier.name} · ${total} note
