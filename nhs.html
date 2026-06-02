@@ -3947,3 +3947,21 @@ async function _callClaude(targetKr, targetEn, said){
         max_tokens:180,
         messages:[{role:'user',content:`You are a warm Korean language tutor for English-speaking students.
 Target sentence: "${targetKr}" (${targetEn})
+Student said: "${said}"
+Give encouraging feedback in English, 2 sentences max. If correct or close, celebrate! If different, note 1 key thing to fix and give a quick tip. Be specific and kind.`}]
+      })
+    });
+    const d=await res.json();
+    return d.content?.[0]?.text||'피드백을 가져오지 못했어요.';
+  }catch(e){
+    return '❌ 오류가 발생했어요. API 키를 확인해주세요 (⚙️ AI 버튼)';
+  }
+}
+</script>
+
+<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
+  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
+  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
+</footer>
+</body>
+</html>
