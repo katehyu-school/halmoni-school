@@ -605,4 +605,25 @@ function msSaveDeco() {
 function msAddSticker() { /* tier system — no-op */ }
 function msRenderStickers() {
   const notes = msGetJ('ms_'+msCurrent+'_notes');
-  const total = note
+  const total = notes.length;
+  const tierIdx = Math.min(Math.floor(total/10), MS_BADGE_TIERS.length-1);
+  const inTier = total % 10;
+  const tier = MS_BADGE_TIERS[tierIdx];
+  const nextTier = MS_BADGE_TIERS[Math.min(tierIdx+1, MS_BADGE_TIERS.length-1)];
+  const isLegend = tierIdx===MS_BADGE_TIERS.length-1;
+  const el = document.getElementById('ms-sticker-display');
+  const hint = document.getElementById('ms-sticker-hint');
+  const dots = Array(10).fill(0).map((_,i)=>
+    `<span style="font-size:20px;opacity:${i<inTier?1:.15}">●</span>`
+  ).join('');
+  el.innerHTML = `<div style="text-align:center;padding:8px 0;">
+    <div style="font-size:52px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
+    <div style="font-size:13px;font-weight:700;color:#5BB8F5;margin-bottom:10px;">${tier.name} · ${total} notes</div>
+    <div style="display:flex;gap:3px;justify-content:center;margin-bottom:6px;">${dots}</div>
+  </div>`;
+  hint.textContent = isLegend&&inTier===0&&total>0 ? '👑 Legend! You are amazing!'
+    : inTier===0&&total>0 ? `🎉 Level up! Welcome, ${tier.name}!`
+    : total===0 ? 'Save your first note to start collecting! ✍️'
+    : `${10-inTier} more → ${nextTier.badge} ${nextTier.name}`;
+}
+// ── END MY SPACE ─────────────────────────────────────────

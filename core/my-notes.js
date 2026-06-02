@@ -385,8 +385,8 @@ function nmsSaveNote(){
   setTimeout(()=>{msg.style.display='none';msg.textContent='✓ Saved!';msg.style.fontWeight='';},3000);
   nmsRenderNotesList();
 }
-let nmsNotesPage = 0;
-const NMS_NOTES_PER_PAGE = 5;
+let nmsNotesPage=0;
+const NMS_NOTES_PER_PAGE=5;
 function nmsRenderNotesList(){
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   const el=document.getElementById('nms-notes-list');
@@ -576,4 +576,25 @@ function nmsSaveDeco(){
 }
 function nmsRenderBadges(){
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
-  const tota
+  const total=notes.length;
+  const tierIdx=Math.min(Math.floor(total/10),NMS_BADGE_TIERS.length-1);
+  const inTier=total%10;
+  const tier=NMS_BADGE_TIERS[tierIdx];
+  const nextTier=NMS_BADGE_TIERS[Math.min(tierIdx+1,NMS_BADGE_TIERS.length-1)];
+  const isLegend=tierIdx===NMS_BADGE_TIERS.length-1;
+  const dots=Array(10).fill(0).map((_,i)=>
+    `<span style="font-size:18px;opacity:${i<inTier?1:.15}">●</span>`
+  ).join('');
+  const hint=isLegend&&inTier===0&&total>0?'👑 Legend! You\'re amazing!'
+    :inTier===0&&total>0?`🎉 Level up! Welcome, ${tier.name}!`
+    :total===0?'Save your first note to earn a badge! ✍️'
+    :`${10-inTier} more notes → ${nextTier.badge} ${nextTier.name}`;
+  document.getElementById('nms-badge-display').innerHTML=
+    `<div style="text-align:center;padding:12px 0;">
+      <div style="font-size:56px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:10px;">${tier.name} · ${total} notes</div>
+      <div style="display:flex;gap:3px;justify-content:center;margin-bottom:8px;">${dots}</div>
+      <div style="font-size:11px;color:var(--warm-500);">${hint}</div>
+    </div>`;
+}
+// ═══════════════════════════════════════════════════════

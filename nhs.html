@@ -642,7 +642,8 @@ const EPISODES=[
   {id:'ep08',label:'내 도시락 어디 있어요?'},
   {id:'ep09',label:'딸기 한 박스하고 사과 여섯 개 주세요'},
   {id:'ep10',label:'자전거 소풍을 가요'},
-  {id:'ep11',label:'어서 오세요'}
+  {id:'ep11',label:'어서 오세요'},
+  {id:'ep12',label:'경복궁에 갈 거예요!'}
 ];
 
 function buildSidebar(){
@@ -677,6 +678,8 @@ const L1Q=[
   {ep:'ep11',type:'mc',q:'"어떻게 지내셨어요?" — 셨어요 의 역할은?',en:'What does -셨어요 do in "어떻게 지내셨어요?"?',opts:['과거 부정 past negative','높임 표현 honorific marker','미래 표현 future tense','의문문 question marker'],ans:1,exp:'-셨어요 = honorific past. 어른이나 존중하는 사람에게 써요. 지냈어요 → 지내셨어요!'},
   {ep:'ep11',type:'mc',q:'"덕분에 잘 지내고 있어요" — 덕분에 의 뜻은?',en:'What does 덕분에 mean?',opts:['thanks to you 덕분에','in spite of you','without you','instead of you'],ans:0,exp:'덕분에 = thanks to you / owing to you. 따뜻하고 겸손한 표현이에요!'},
   {ep:'ep11',type:'mc',q:'"얘들아, 인사해야지!" — 해야지 의 뜻은?',en:'What does ~해야지 mean?',opts:['하지 마! don\'t do it','해야 해 you should do it (gentle)','했어 I did it','할 거야 I will do it'],ans:1,exp:'~해야지 = you should (gentle nudge). 부모님이 아이에게 부드럽게 권유할 때 써요.'},
+  {ep:'ep12',type:'listen',audio_text:'경복궁도 방문할 거예요.',q:'방문할 거예요 — 이 표현의 시제는?',en:'방문할 거예요 — what tense is this?',opts:['미래 future','과거 past','현재 present','불확실 uncertain'],ans:0,exp:'-(으)ㄹ 거예요 = future tense! 방문할 거예요 = going to visit. 미래 계획 표현이에요.'},
+  {ep:'ep12',type:'mc',q:'"갈 수 있어요" — 수 있어요 의 뜻은?',en:'What does -(으)ㄹ 수 있어요 mean?',opts:['can do 할 수 있다','must do 해야 한다','did already 이미 했다','will not do 안 할 거다'],ans:0,exp:'-(으)ㄹ 수 있어요 = can / able to. 능력과 가능성을 나타내요! 반대: 수 없어요 / 못 + verb'},
 ];
 
 let ltIdx=0,ltScore=0,ltAnswered=false;
@@ -693,7 +696,7 @@ function renderLTPage(){
   return`<div class="lt-page">`
     +`<div class="lt-header">`
       +`<div class="lt-title">🏆 Level 1 마감 테스트</div>`
-      +`<div class="lt-subtitle">ep01~ep11 · 전체 복습 · 20문제</div>`
+      +`<div class="lt-subtitle">ep01~ep12 · 전체 복습 · 22문제</div>`
       +`<div class="lt-prog-bar"><div class="lt-prog-fill" id="lt-prog-fill" style="width:0%"></div></div>`
       +`<div class="lt-prog-label" id="lt-prog-label">0 / 20</div>`
     +`</div>`
@@ -1080,6 +1083,7 @@ function buildGrammar(){
     const tableHtml=g.table?`<div class="gram-table-wrap"><table class="gram-table"><thead><tr>${(g.table.columns||[]).map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${(g.table.rows||[]).map(r=>`<tr>${r.map(cell=>`<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
     // fill in the blanks
     const fillId=`fill-${g.id}-${Math.random().toString(36).slice(2,6)}`;
+    const imagesHtml=(g.images||[]).map(src=>`<img src="${src}" alt="" style="max-width:100%;border-radius:8px;margin:8px 0 4px;display:block;box-shadow:0 1px 6px rgba(0,0,0,.1);">`).join('');
     const fillHtml=g.fill_blanks&&g.fill_blanks.length?`<div class="gram-fill" id="${fillId}"><div class="gram-fill-title">✏️ Fill in the blanks</div>${g.fill_blanks.map((fb,i)=>{const parts=(fb.sentence||'').split('___');return`<div class="gram-fill-item">${i+1}.&nbsp;${esc(parts[0]||'')}<input class="gram-blank" data-answer="${escA(fb.answer)}" placeholder="___">${esc(parts[1]||'')}</div>`;}).join('')}<div class="gram-fill-actions"><button class="gram-fill-check" onclick="checkFill('${fillId}')">✅ Check</button><span class="gram-fill-result" id="${fillId}-res"></span></div></div>`:'';
     // qna — Q&A practice pairs
     const qnaHtml=(g.qna||[]).map(pair=>`
@@ -1113,6 +1117,7 @@ function buildGrammar(){
       ${exHtml?`<ul class="gram-ex-list">${exHtml}</ul>`:''}
       ${qnaHtml?`<div style="margin-top:10px"><div style="font-size:11.5px;font-weight:700;color:var(--warm-500);margin-bottom:6px">💬 연습해 봐요</div>${qnaHtml}</div>`:''}
       ${fillHtml}
+      ${imagesHtml}
       ${g.tip?`<div class="gram-tip">💡 ${esc(g.tip)}</div>`:''}
       ${g.usage&&g.usage.length?`<div class="gram-usage">${g.usage.map(u=>`
         <div class="gram-usage-row">
@@ -2747,4 +2752,18 @@ Give encouraging feedback in English, 2 sentences max. If correct or close, cele
     const d=await res.json();
     return d.content?.[0]?.text||'피드백을 가져오지 못했어요.';
   }catch(e){
-    return '❌ 오류가 발생했어요. API 키를 확인해주세요 (⚙️ 
+    return '❌ 오류가 발생했어요. API 키를 확인해주세요 (⚙️ AI 버튼)';
+  }
+}
+</script>
+
+<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
+  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
+  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
+</footer>
+
+
+
+<script src="core/my-notes.js"></script>
+</body>
+</html>
