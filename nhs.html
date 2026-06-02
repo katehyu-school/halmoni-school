@@ -792,7 +792,7 @@ async function loadEp(epId){
     DATA=EPISODE_DATA[epId];
   } else {
     try{
-      const res=await fetch(`data/nhs/${epId}.json`);
+      const res=await fetch(`data/nhs/L1/${epId}.json`);
       if(res.ok){ DATA=await res.json(); EPISODE_DATA[epId]=DATA; }
       else DATA=null;
     }catch(e){ DATA=null; }
@@ -1628,7 +1628,7 @@ async function openIndex(){
   await Promise.all(EPISODES.map(async ep=>{
     if(!EPISODE_DATA[ep.id]){
       try{
-        const r=await fetch(`data/nhs/${ep.id}.json`);
+        const r=await fetch(`data/nhs/L1/${ep.id}.json`);
         if(r.ok) EPISODE_DATA[ep.id]=await r.json();
       }catch(e){}
     }
