@@ -9236,6 +9236,7 @@ if(document.readyState !== 'loading'){
           </div>
           <div style="margin-top:14px;padding:12px;background:#f8f9fa;border-radius:10px;">
             <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Word hints — click to see big ✨</div>
+            <div id="ms-hint-label" style="font-size:11px;color:#1a7bbf;font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
             <div id="ms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
           </div>
         </div>
@@ -9359,6 +9360,15 @@ function msShowMain() {
   msPopulateUnitSel();
   msRenderNotesList();
   msRenderDecoPanel();
+  // Pre-select dropdown: last note's level/unit, or Level 3 Unit 1 if no notes
+  const _mnotes=msGetJ('ms_'+msCurrent+'_notes');
+  const _mlast=_mnotes[0];
+  if(_mlast){
+    const lvEl=document.getElementById('ms-lv-sel');
+    if(lvEl&&_mlast.lv){lvEl.value=String(_mlast.lv);msPopulateUnitSel();}
+    const unitEl=document.getElementById('ms-unit-sel');
+    if(unitEl&&_mlast.unit){unitEl.value=String(_mlast.unit);}
+  }
   msRenderHintWords();
 }
 
@@ -9396,7 +9406,7 @@ function msTab(t) {
     document.getElementById('ms-panel-'+x).style.display = x===t?'block':'none';
     document.getElementById('ms-t-'+x).classList.toggle('active', x===t);
   });
-  if (t==='write') { msInitCanvas(); setTimeout(msResizeCanvas, 60); }
+  if (t==='write') { msInitCanvas(); setTimeout(msResizeCanvas, 60); msRenderHintWords(); }
   if (t==='deco')  { msRenderDecoPanel(); }
 }
 
@@ -9525,11 +9535,36 @@ function msClearCanvas() {
   msCtx.fillRect(0,0,msCanvas.width,msCanvas.height);
 }
 function msRenderHintWords() {
-  // Pull a few vocab words from current level/unit
-  const words = ['안녕','가요','해요','있어요','없어요','할머니','학교','친구','오늘','내일','사랑해','감사해요'];
+  const DEFAULT=['안녕','가요','해요','있어요','없어요','할머니','학교','친구','오늘','내일','사랑해','감사해요'];
   const el = document.getElementById('ms-hint-words');
   if (!el) return;
-  el.innerHTML = words.map(w=>`<span onclick="msPickHint('${w}')" style="display:inline-block;padding:4px 10px;background:#E8F6FF;color:#1a7bbf;border-radius:20px;font-size:13px;cursor:pointer;margin-bottom:4px;">${w}</span>`).join('');
+  const lbEl = document.getElementById('ms-hint-label');
+  const lv = document.getElementById('ms-lv-sel')?.value;
+  const unit = parseInt(document.getElementById('ms-unit-sel')?.value||'0');
+
+  function _render(words, label){
+    if(lbEl) lbEl.textContent='📚 '+label;
+    el.innerHTML = words.map(w=>`<span onclick="msPickHint('${w.replace(/'/g,"\\'")}') " style="display:inline-block;padding:4px 10px;background:#E8F6FF;color:#1a7bbf;border-radius:20px;font-size:13px;cursor:pointer;margin-bottom:4px;">${w}</span>`).join('');
+  }
+
+  // Level 3 — sync from B3_INLINE_DATA
+  if(lv==='3' && unit && typeof B3_INLINE_DATA!=='undefined' && B3_INLINE_DATA[unit]){
+    const vocab=B3_INLINE_DATA[unit].sections?.vocab||{};
+    const words=[];
+    Object.values(vocab).forEach(cat=>Array.isArray(cat)&&cat.forEach(item=>{if(item.kr)words.push(item.kr);}));
+    if(words.length){_render(words.slice(0,18),'Level 3 · '+unit+'과');return;}
+  }
+  // Level 2 — async from HalmoniCore
+  if(lv==='2' && unit && typeof HalmoniCore!=='undefined'){
+    HalmoniCore.loadUnit(unit).then(d=>{
+      const vocab=d?.sections?.vocab||[];
+      const words=Array.isArray(vocab)?vocab.filter(v=>v.korean).map(v=>v.korean):[];
+      if(words.length){_render(words.slice(0,18),'Level 2 · '+unit+'과');return;}
+      _render(DEFAULT,'기본 단어');
+    }).catch(()=>_render(DEFAULT,'기본 단어'));
+    return;
+  }
+  _render(DEFAULT,'기본 단어');
 }
 function msPickHint(w) {
   // show the word bigger for reference
