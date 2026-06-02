@@ -1,0 +1,784 @@
+{
+  "unit": 9,
+  "title": "공원에서 산책했어요",
+  "title_en": "I took a walk in the park",
+  "book": "세종한국어 1A",
+  "book_code": "1A",
+  "level": "adult",
+  "goal": {
+    "ko": "주말에 한 일을 묻고 답할 수 있어요.",
+    "en": "Ask and answer questions about weekend activities."
+  },
+  "sections": {
+    "vocab": {
+      "categories": [
+        {
+          "id": "places",
+          "label": "장소",
+          "label_en": "Places",
+          "items": [
+            {
+              "id": "v09_p01",
+              "korean": "영화관",
+              "english": "movie theater",
+              "romanization": "yeong-hwa-gwan",
+              "emoji": "🎬"
+            },
+            {
+              "id": "v09_p02",
+              "korean": "미용실",
+              "english": "hair salon",
+              "romanization": "mi-yong-sil",
+              "emoji": "💇"
+            },
+            {
+              "id": "v09_p03",
+              "korean": "백화점",
+              "english": "department store",
+              "romanization": "baek-hwa-jeom",
+              "emoji": "🏬",
+              "warning": "배콰점 발음!"
+            },
+            {
+              "id": "v09_p04",
+              "korean": "놀이 공원",
+              "english": "amusement park",
+              "romanization": "no-ri gong-won",
+              "emoji": "🎡"
+            },
+            {
+              "id": "v09_p05",
+              "korean": "도서관",
+              "english": "library",
+              "romanization": "do-seo-gwan",
+              "emoji": "📚"
+            },
+            {
+              "id": "v09_p06",
+              "korean": "노래방",
+              "english": "karaoke room",
+              "romanization": "no-rae-bang",
+              "emoji": "🎤"
+            },
+            {
+              "id": "v09_p07",
+              "korean": "박물관",
+              "english": "museum",
+              "romanization": "bang-mul-gwan",
+              "emoji": "🏛️",
+              "warning": "방물관 발음!"
+            },
+            {
+              "id": "v09_p08",
+              "korean": "수영장",
+              "english": "swimming pool",
+              "romanization": "su-yeong-jang",
+              "emoji": "🏊"
+            }
+          ]
+        },
+        {
+          "id": "activities",
+          "label": "주말 활동",
+          "label_en": "Weekend Activities",
+          "items": [
+            {
+              "id": "v09_a01",
+              "korean": "산책해요",
+              "base": "산책하다",
+              "english": "take a walk",
+              "romanization": "san-chaek-hae-yo",
+              "emoji": "🚶"
+            },
+            {
+              "id": "v09_a02",
+              "korean": "구경해요",
+              "base": "구경하다",
+              "english": "look around / sightsee",
+              "romanization": "gu-gyeong-hae-yo",
+              "emoji": "👀"
+            },
+            {
+              "id": "v09_a03",
+              "korean": "영화를 봐요",
+              "base": "영화를 보다",
+              "english": "watch a movie",
+              "romanization": "yeong-hwa-reul bwa-yo",
+              "emoji": "🎬"
+            },
+            {
+              "id": "v09_a04",
+              "korean": "수영을 해요",
+              "base": "수영하다",
+              "english": "swim",
+              "romanization": "su-yeong-eul hae-yo",
+              "emoji": "🏊"
+            },
+            {
+              "id": "v09_a05",
+              "korean": "쇼핑을 해요",
+              "base": "쇼핑하다",
+              "english": "go shopping",
+              "romanization": "syo-ping-eul hae-yo",
+              "emoji": "🛍️"
+            },
+            {
+              "id": "v09_a06",
+              "korean": "게임을 해요",
+              "base": "게임하다",
+              "english": "play games",
+              "romanization": "ge-i-meul hae-yo",
+              "emoji": "🎮"
+            },
+            {
+              "id": "v09_a07",
+              "korean": "자전거를 타요",
+              "base": "자전거를 타다",
+              "english": "ride a bicycle",
+              "romanization": "ja-jeon-geo-reul ta-yo",
+              "emoji": "🚲"
+            },
+            {
+              "id": "v09_a08",
+              "korean": "드라마를 봐요",
+              "base": "드라마를 보다",
+              "english": "watch K-dramas",
+              "romanization": "deu-ra-ma-reul bwa-yo",
+              "emoji": "📺"
+            }
+          ]
+        },
+        {
+          "id": "verbs",
+          "label": "동사 & 형용사",
+          "label_en": "Verbs & Adjectives",
+          "items": [
+            {
+              "id": "v09_v01",
+              "korean": "청소해요",
+              "base": "청소하다",
+              "english": "clean (the house)",
+              "romanization": "cheong-so-hae-yo",
+              "emoji": "🧹"
+            },
+            {
+              "id": "v09_v02",
+              "korean": "쉬어요",
+              "base": "쉬다",
+              "english": "rest / take a break",
+              "romanization": "swi-eo-yo",
+              "emoji": "😴"
+            },
+            {
+              "id": "v09_v03",
+              "korean": "만들어요",
+              "base": "만들다",
+              "english": "make / create",
+              "romanization": "man-deu-reo-yo",
+              "emoji": "🍳"
+            },
+            {
+              "id": "v09_v04",
+              "korean": "재미있어요",
+              "base": "재미있다",
+              "english": "fun / interesting",
+              "romanization": "jae-mi-i-sseo-yo",
+              "emoji": "⭐"
+            },
+            {
+              "id": "v09_v05",
+              "korean": "놀아요",
+              "base": "놀다",
+              "english": "play / hang out",
+              "romanization": "no-ra-yo",
+              "emoji": "🎉"
+            }
+          ]
+        },
+        {
+          "id": "time",
+          "label": "시간 & 표현",
+          "label_en": "Time & Expressions",
+          "items": [
+            {
+              "id": "v09_t01",
+              "korean": "어제",
+              "english": "yesterday",
+              "romanization": "eo-je",
+              "emoji": "📅"
+            },
+            {
+              "id": "v09_t02",
+              "korean": "오전",
+              "english": "morning / AM",
+              "romanization": "o-jeon",
+              "emoji": "🌅"
+            },
+            {
+              "id": "v09_t03",
+              "korean": "오후",
+              "english": "afternoon / PM",
+              "romanization": "o-hu",
+              "emoji": "🌇"
+            },
+            {
+              "id": "v09_t04",
+              "korean": "주말",
+              "english": "weekend",
+              "romanization": "ju-mal",
+              "emoji": "🎉"
+            },
+            {
+              "id": "v09_t05",
+              "korean": "보통",
+              "english": "usually / normally",
+              "romanization": "bo-tong",
+              "emoji": "🔄"
+            },
+            {
+              "id": "v09_t06",
+              "korean": "기분",
+              "english": "mood / feeling",
+              "romanization": "gi-bun",
+              "emoji": "😊"
+            },
+            {
+              "id": "v09_t07",
+              "korean": "활동",
+              "english": "activity",
+              "romanization": "hwal-dong",
+              "emoji": "🏃"
+            },
+            {
+              "id": "v09_t08",
+              "korean": "빨래",
+              "english": "laundry",
+              "romanization": "ppal-lae",
+              "emoji": "👕"
+            },
+            {
+              "id": "v09_t09",
+              "korean": "우리",
+              "english": "we / our",
+              "romanization": "u-ri",
+              "emoji": "👥"
+            },
+            {
+              "id": "v09_t10",
+              "korean": "사랑",
+              "english": "love",
+              "romanization": "sa-rang",
+              "emoji": "❤️"
+            }
+          ]
+        }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g09_eseo",
+          "title": "N에서",
+          "subtitle": "Location particle — where an action happens",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "N에서 = 'at / in / from' — used when an action takes place at a location"
+            },
+            {
+              "color": "green",
+              "label": "N에 있어요 = something EXISTS at a location\nN에서 해요 = an action HAPPENS at a location"
+            }
+          ],
+          "examples": [
+            {
+              "korean": "공원에 있어요.",
+              "english": "I am at the park. (existence → N에)",
+              "highlight": "에"
+            },
+            {
+              "korean": "공원에서 자전거를 타요.",
+              "english": "I ride a bicycle in the park."
+            },
+            {
+              "korean": "도서관에서 책을 읽어요.",
+              "english": "I read books at the library."
+            },
+            {
+              "korean": "집에서 쉬었어요.",
+              "english": "I rested at home."
+            },
+            {
+              "korean": "회사에서 일해요.",
+              "english": "I work at the company."
+            }
+          ]
+        },
+        {
+          "id": "g09_past",
+          "title": "-았/었어요",
+          "subtitle": "Past tense — describing completed actions or states",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "어간의 마지막 모음이 ㅏ 또는 ㅗ → 았어요\nLast vowel of stem is ㅏ or ㅗ → 았어요",
+              "examples": [
+                "살다 → 살 + 았어요 → 살았어요",
+                "가다 → 가 + 았어요 → 갔어요",
+                "보다 → 보 + 았어요 → 봤어요"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "그 외 (other vowels) → 었어요",
+              "examples": [
+                "없다 → 없 + 었어요 → 없었어요",
+                "웃다 → 웃 + 었어요 → 웃었어요",
+                "있다 → 있 + 었어요 → 있었어요"
+              ]
+            },
+            {
+              "color": "teal",
+              "label": "하다 → 하 + 였어요 → 했어요 (contracted)",
+              "examples": [
+                "하다 → 하 + 였어요 → 했어요"
+              ]
+            },
+            {
+              "color": "amber",
+              "label": "ㅂ 불규칙: 덥다 → 더 + 웠어요 → 더웠어요\nㅡ 탈락: 바쁘다 → 바ㅃ + 았어요 → 바빴어요",
+              "examples": [
+                "ㅂ 불규칙: 덥다 → 더 + (ㅂ→우) + 었어요 → 더웠어요",
+                "ㅡ 탈락: 바쁘다 → 바ㅃ (ㅡ 탈락) + 았어요 → 바빴어요"
+              ]
+            }
+          ],
+          "conjugation_table": {
+            "rows": [
+              {
+                "base": "가다",
+                "stem": "가",
+                "rule": "ㅏ → 았",
+                "result": "갔어요"
+              },
+              {
+                "base": "오다",
+                "stem": "오",
+                "rule": "ㅗ → 았",
+                "result": "왔어요"
+              },
+              {
+                "base": "보다",
+                "stem": "보",
+                "rule": "ㅗ → 았",
+                "result": "봤어요"
+              },
+              {
+                "base": "살다",
+                "stem": "살",
+                "rule": "ㅏ → 았",
+                "result": "살았어요"
+              },
+              {
+                "base": "먹다",
+                "stem": "먹",
+                "rule": "→ 었",
+                "result": "먹었어요"
+              },
+              {
+                "base": "읽다",
+                "stem": "읽",
+                "rule": "→ 었",
+                "result": "읽었어요"
+              },
+              {
+                "base": "있다",
+                "stem": "있",
+                "rule": "→ 었",
+                "result": "있었어요"
+              },
+              {
+                "base": "없다",
+                "stem": "없",
+                "rule": "→ 었",
+                "result": "없었어요"
+              },
+              {
+                "base": "하다",
+                "stem": "하",
+                "rule": "하 → 했",
+                "result": "했어요"
+              }
+            ]
+          },
+          "examples": [
+            {
+              "korean": "토요일에 뭐 했어요?",
+              "english": "What did you do on Saturday?"
+            },
+            {
+              "korean": "도서관에서 책을 읽었어요.",
+              "english": "I read books at the library."
+            },
+            {
+              "korean": "어제 날씨가 어땠어요?",
+              "english": "How was the weather yesterday?"
+            },
+            {
+              "korean": "아주 좋았어요.",
+              "english": "It was very nice."
+            }
+          ]
+        }
+      ]
+    },
+    "dialogue": {
+      "scenes": [
+        {
+          "id": "d09_s1",
+          "title": "Part 1 — 주말 계획",
+          "subtitle": "Weekend plans (present tense + N에서)",
+          "lines": [
+            {
+              "speaker": "가",
+              "korean": "주말에 어디에 가요?",
+              "english": "Where do you go on weekends?"
+            },
+            {
+              "speaker": "나",
+              "korean": "공원에 가요.",
+              "english": "I go to the park."
+            },
+            {
+              "speaker": "가",
+              "korean": "공원에서 뭐 해요?",
+              "english": "What do you do at the park?"
+            },
+            {
+              "speaker": "나",
+              "korean": "공원에서 자전거를 타요.",
+              "english": "I ride a bicycle in the park."
+            }
+          ]
+        },
+        {
+          "id": "d09_s2",
+          "title": "Part 2 — 지난 주말",
+          "subtitle": "Last weekend (past tense -았/었어요)",
+          "lines": [
+            {
+              "speaker": "가",
+              "korean": "토요일에 뭐 했어요?",
+              "english": "What did you do on Saturday?"
+            },
+            {
+              "speaker": "나",
+              "korean": "바다에서 수영을 했어요. 아주 재미있었어요.",
+              "english": "I swam in the sea. It was really fun."
+            },
+            {
+              "speaker": "가",
+              "korean": "저는 집에서 쉬었어요. 좋았어요.",
+              "english": "I rested at home. It was nice."
+            }
+          ]
+        }
+      ]
+    },
+    "pronunciation": {
+      "sections": [
+        {
+          "rule": "ㄱ + ㅎ → ㅋ : When ㄱ meets ㅎ, they merge into the aspirated ㅋ",
+          "examples": [
+            {
+              "note": "ㄱ + ㅎ → ㅋ",
+              "written": "백화점",
+              "pronounced": "배콰점",
+              "romanization": "baek-hwa-jeom → bae-kwa-jeom"
+            }
+          ],
+          "title": "자음 축약 (Consonant Aspiration)"
+        },
+        {
+          "rule": "ㄱ + ㅁ → ㅇ + ㅁ : When ㄱ comes before the nasal consonant ㅁ, it becomes ㅇ",
+          "examples": [
+            {
+              "note": "ㄱ + ㅁ → ㅇ",
+              "written": "박물관",
+              "pronounced": "방물관",
+              "romanization": "bak-mul-gwan → bang-mul-gwan"
+            }
+          ],
+          "title": "비음화 (Nasalization)"
+        }
+      ]
+    },
+    "key_points": [
+      {
+        "id": "kp09_1",
+        "title": "한국의 주말 문화",
+        "note": "한강공원 (Hangang Park) — 서울 시민들의 주말 명소. 자전거, 피크닉, 치킨 & 맥주! / 노래방 (Karaoke room) — 혼자 or 친구들과 함께. 한국 주말의 필수 코스 / 등산 (Hiking) — 한국인들이 가장 좋아하는 주말 활동 중 하나. 전국에 등산로 가득! / 주말 시장 (Weekend market) — 먹거리와 구경거리가 넘치는 활기찬 장소",
+        "examples": [
+          {
+            "formal": "한강공원",
+            "casual": "자전거 타요 🚲",
+            "english": "Cycling at Han River Park"
+          },
+          {
+            "formal": "노래방",
+            "casual": "친구랑 같이 가요 🎤",
+            "english": "Karaoke with friends"
+          },
+          {
+            "formal": "등산",
+            "casual": "주말에 자주 해요 🏔️",
+            "english": "Hiking on weekends"
+          },
+          {
+            "formal": "주말 시장",
+            "casual": "먹거리가 많아요 🍢",
+            "english": "Weekend market food stalls"
+          }
+        ]
+      }
+    ],
+    "practice": {
+      "quiz_items": [
+        {
+          "id": "q09_01",
+          "type": "multiple_choice",
+          "question": "빈칸에 알맞은 조사를 고르세요.",
+          "sentence": "공원___ 자전거를 타요.",
+          "choices": [
+            "에",
+            "에서",
+            "을",
+            "와"
+          ],
+          "answer": "에서",
+          "explanation": "장소에서 동작이 일어날 때는 '에서'를 사용해요. (action → 에서)"
+        },
+        {
+          "id": "q09_02",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "먹다",
+          "answer": "먹었어요",
+          "hint": "어간 '먹' — 모음이 ㅓ → 었어요"
+        },
+        {
+          "id": "q09_03",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "가다",
+          "answer": "갔어요",
+          "hint": "어간 '가' — ㅏ → 았어요, 가 + 았 = 갔"
+        },
+        {
+          "id": "q09_04",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "하다",
+          "answer": "했어요",
+          "hint": "하다 → 하 + 였어요 → 했어요 (축약)"
+        },
+        {
+          "id": "q09_05",
+          "type": "multiple_choice",
+          "question": "'I watched a movie at the movie theater.' 를 한국어로 고르세요.",
+          "choices": [
+            "영화관에서 영화를 봤어요.",
+            "영화관에 영화를 봤어요.",
+            "영화관에서 영화를 봐요.",
+            "영화관에 영화를 봐요."
+          ],
+          "answer": "영화관에서 영화를 봤어요.",
+          "explanation": "동작 장소 → 에서, 과거형 → 봤어요 (보다 → 봤어요)"
+        },
+        {
+          "id": "q09_06",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요",
+          "base": "어떻다",
+          "answer": "어땠어요",
+          "hint": "어떻다 → 어떻 + 았어요 → 어땠어요"
+        },
+        {
+          "id": "q09_07",
+          "type": "multiple_choice",
+          "question": "다음 중 '에서'를 써야 하는 문장은?",
+          "choices": [
+            "도서관에 책이 있어요.",
+            "도서관에서 책을 읽어요.",
+            "공원에 있어요.",
+            "집에 가요."
+          ],
+          "answer": "도서관에서 책을 읽어요.",
+          "explanation": "동작(읽다)이 일어나는 장소 → 에서. 존재(있어요)/방향(가요) → 에"
+        },
+        {
+          "id": "q09_08",
+          "type": "conjugation",
+          "question": "과거형으로 바꾸세요 (ㅡ 탈락)",
+          "base": "바쁘다",
+          "answer": "바빴어요",
+          "hint": "바쁘다 → ㅡ 탈락 → 바ㅃ + 았어요 → 바빴어요"
+        }
+      ]
+    },
+    "self_check": [
+      {
+        "ko": "장소와 주말 활동을 말할 수 있어요?",
+        "en": "Can you talk about places and weekend activities?"
+      },
+      {
+        "ko": "주말에 한 일을 묻고 답할 수 있어요?",
+        "en": "Can you ask and answer questions about weekend activities?"
+      }
+    ],
+    "real_life": {
+      "scenes": [
+        {
+          "id": "rl09_listen",
+          "type": "listening",
+          "title": "🎧 유진 씨의 토요일",
+          "audio_text": "저는 토요일에 바빴어요. 오전에는 방을 청소했어요. 그리고 빨래를 했어요. 오후에는 친구가 집에 왔어요. 집에서 친구하고 같이 떡볶이를 만들었어요. 아주 맛있었어요. 그리고 한국 드라마를 같이 봤어요.",
+          "script": "저는 토요일에 바빴어요. 오전에는 방을 청소했어요. 그리고 빨래를 했어요. 오후에는 친구가 집에 왔어요. 집에서 친구하고 같이 떡볶이를 만들었어요. 아주 맛있었어요. 그리고 한국 드라마를 같이 봤어요.",
+          "questions": [
+            {
+              "id": "q_rl09_listen_1",
+              "question": "유진 씨는 토요일 오전에 무엇을 했어요?",
+              "choices": [
+                "친구와 노래방에 갔어요.",
+                "청소하고 빨래를 했어요.",
+                "바다에서 수영을 했어요.",
+                "공원에서 자전거를 탔어요."
+              ],
+              "answer": "청소하고 빨래를 했어요.",
+              "explanation": "'오전에는 방을 청소했어요. 그리고 빨래를 했어요.'"
+            },
+            {
+              "id": "q_rl09_listen_2",
+              "question": "유진 씨는 오후에 친구와 무엇을 만들었어요?",
+              "choices": [
+                "김치찌개",
+                "비빔밥",
+                "떡볶이",
+                "라면"
+              ],
+              "answer": "떡볶이",
+              "explanation": "'집에서 친구하고 같이 떡볶이를 만들었어요.'"
+            },
+            {
+              "id": "q_rl09_listen_3",
+              "question": "유진 씨와 친구는 저녁에 무엇을 했어요?",
+              "choices": [
+                "영화관에 갔어요.",
+                "한국 드라마를 봤어요.",
+                "노래방에 갔어요.",
+                "수영장에 갔어요."
+              ],
+              "answer": "한국 드라마를 봤어요.",
+              "explanation": "'한국 드라마를 같이 봤어요.'"
+            }
+          ],
+          "context": "유진 씨가 주말에 무엇을 했는지 들어보세요"
+        },
+        {
+          "id": "rl09_read",
+          "type": "reading",
+          "title": "📖 마리와 준호의 주말",
+          "passage": "마리는 주말에 바빴어요. 토요일에 친구하고 백화점에서 쇼핑을 했어요. 새 옷을 샀어요. 그리고 영화관에서 영화를 봤어요. 아주 재미있었어요.\n\n준호는 주말에 집에서 쉬었어요. 오전에 청소하고 빨래도 했어요. 오후에는 친구가 왔어요. 같이 게임을 했어요. 준호는 정말 즐거웠어요.",
+          "questions": [
+            {
+              "id": "q_rl09_read_1",
+              "question": "마리는 토요일에 어디에 갔어요? (두 곳)",
+              "choices": [
+                "공원과 도서관",
+                "백화점과 영화관",
+                "수영장과 노래방",
+                "박물관과 미용실"
+              ],
+              "answer": "백화점과 영화관",
+              "explanation": "'백화점에서 쇼핑을 했어요 ... 영화관에서 영화를 봤어요.'"
+            },
+            {
+              "id": "q_rl09_read_2",
+              "question": "준호는 오전에 무엇을 했어요?",
+              "choices": [
+                "게임을 했어요.",
+                "친구를 만났어요.",
+                "청소하고 빨래를 했어요.",
+                "영화를 봤어요."
+              ],
+              "answer": "청소하고 빨래를 했어요.",
+              "explanation": "'오전에 청소하고 빨래도 했어요.'"
+            },
+            {
+              "id": "q_rl09_read_3",
+              "question": "준호와 친구는 오후에 무엇을 했어요?",
+              "choices": [
+                "드라마를 봤어요.",
+                "게임을 했어요.",
+                "자전거를 탔어요.",
+                "쇼핑을 했어요."
+              ],
+              "answer": "게임을 했어요.",
+              "explanation": "'오후에는 친구가 왔어요. 같이 게임을 했어요.'"
+            }
+          ],
+          "context": "두 사람의 주말 이야기를 읽어 보세요"
+        },
+        {
+          "id": "rl09_kakao",
+          "type": "kakao",
+          "title": "💬 주말에 뭐 했어요?",
+          "tip": "💡 '기대돼요' means 'I'm looking forward to it!' — a very common expression when making plans with friends.",
+          "context": "친구와 주말 이야기 나누기",
+          "lines": [
+            {
+              "speaker": "A",
+              "korean": "주말에 뭐 했어요? 😊",
+              "english": ""
+            },
+            {
+              "speaker": "B",
+              "korean": "토요일에 한강공원에서 자전거를 탔어요!",
+              "english": ""
+            },
+            {
+              "speaker": "A",
+              "korean": "좋았겠다~ 날씨가 어땠어요?",
+              "english": ""
+            },
+            {
+              "speaker": "B",
+              "korean": "아주 맑고 좋았어요 ☀️ 마리 씨는요?",
+              "english": ""
+            },
+            {
+              "speaker": "A",
+              "korean": "저는 집에서 쉬었어요. 빨래도 하고 청소도 했어요 ㅋㅋ",
+              "english": ""
+            },
+            {
+              "speaker": "B",
+              "korean": "집에서 쉬는 것도 좋죠~ 😄",
+              "english": ""
+            },
+            {
+              "speaker": "A",
+              "korean": "다음 주말에는 같이 노래방 갈까요? 🎤",
+              "english": ""
+            },
+            {
+              "speaker": "B",
+              "korean": "좋아요! 기대돼요 🎉",
+              "english": ""
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

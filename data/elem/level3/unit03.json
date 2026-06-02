@@ -1,0 +1,905 @@
+{
+  "unit": 3,
+  "title": "🗝️ 마법 열쇠를 찾아라",
+  "book": 3,
+  "goal": {
+    "ko": "위치를 묻고 답할 수 있어요! 📍",
+    "en": "I can ask and answer where things are!"
+  },
+  "key_points": [
+    "위치 명사 — 속/안/밖/위/아래/옆/앞/뒤",
+    "N에 있어요 / N에 없어요",
+    "안 보여요 — negative expression"
+  ],
+  "sections": {
+    "vocab": {
+      "🏠 물건 Objects": [
+        {
+          "emoji": "🪞",
+          "kr": "반닫이",
+          "en": "traditional Korean chest",
+          "rom": "ban-da-ji"
+        },
+        {
+          "emoji": "🔒",
+          "kr": "자물통",
+          "en": "lock",
+          "rom": "ja-mul-tong"
+        },
+        {
+          "emoji": "🗝️",
+          "kr": "열쇠",
+          "en": "key",
+          "rom": "yeol-soe"
+        },
+        {
+          "emoji": "🏺",
+          "kr": "항아리",
+          "en": "jar / pot",
+          "rom": "hang-a-ri"
+        },
+        {
+          "emoji": "🪑",
+          "kr": "탁자",
+          "en": "table",
+          "rom": "tak-ja"
+        },
+        {
+          "emoji": "✨",
+          "kr": "마법",
+          "en": "magic",
+          "rom": "ma-beop"
+        }
+      ],
+      "📍 위치 Location Words": [
+        {
+          "emoji": "⬆️",
+          "kr": "위에",
+          "en": "on top / above",
+          "rom": "wi-e"
+        },
+        {
+          "emoji": "⬇️",
+          "kr": "아래에",
+          "en": "below / under",
+          "rom": "a-rae-e"
+        },
+        {
+          "emoji": "🔲",
+          "kr": "속에",
+          "en": "inside",
+          "rom": "so-ge"
+        },
+        {
+          "emoji": "🔲",
+          "kr": "안에",
+          "en": "inside / in",
+          "rom": "a-ne"
+        },
+        {
+          "emoji": "↔️",
+          "kr": "옆에",
+          "en": "next to / beside",
+          "rom": "yeo-pe"
+        },
+        {
+          "emoji": "⬅️",
+          "kr": "앞에",
+          "en": "in front of",
+          "rom": "a-pe"
+        },
+        {
+          "emoji": "➡️",
+          "kr": "뒤에",
+          "en": "behind / back",
+          "rom": "dwi-e"
+        },
+        {
+          "emoji": "🔓",
+          "kr": "밖에",
+          "en": "outside",
+          "rom": "ba-ke"
+        }
+      ],
+      "🗣 표현 Expressions": [
+        {
+          "emoji": "✅",
+          "kr": "있어요",
+          "en": "there is / it's here",
+          "rom": "i-sseo-yo"
+        },
+        {
+          "emoji": "❌",
+          "kr": "없어요",
+          "en": "there isn't / not here",
+          "rom": "eop-sseo-yo"
+        },
+        {
+          "emoji": "👀",
+          "kr": "안 보여요",
+          "en": "I can't see it",
+          "rom": "an bo-yeo-yo"
+        },
+        {
+          "emoji": "❓",
+          "kr": "어디에 있어요?",
+          "en": "Where is it?",
+          "rom": "eo-di-e i-sseo-yo"
+        },
+        {
+          "emoji": "🔍",
+          "kr": "찾아요",
+          "en": "I'm looking for / find",
+          "rom": "cha-ja-yo"
+        }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g03_location",
+          "title": "위치 명사 + 에 있어요/없어요",
+          "subtitle": "Saying where something is or isn't",
+          "pattern": "물건 + 위치명사 + 에 + 있어요/없어요",
+          "meaning": "Something is/isn't [location]",
+          "description": "To say where something is, put the location word + 에 after the object. 있어요 = it's there, 없어요 = it's not there.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 기본 패턴: N + 위치 + 에 + 있어요",
+              "examples": [
+                "열쇠가 탁자 위에 있어요. = The key is on the table.",
+                "고양이가 상자 안에 있어요. = The cat is inside the box.",
+                "가방이 의자 옆에 있어요. = The bag is next to the chair."
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 없어요 패턴: N + 위치 + 에 + 없어요",
+              "examples": [
+                "열쇠가 항아리 속에 없어요. = The key is not inside the jar.",
+                "반닫이 아래에도 없어요. = It's not under the chest either.",
+                "탁자 위에도 없어요. = It's not on top of the table either."
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "열쇠가 탁자 위에 있어요.",
+              "english": "The key is on the table.",
+              "highlight": "위에 있어요"
+            },
+            {
+              "korean": "항아리 속에 없어요.",
+              "english": "It's not inside the jar.",
+              "highlight": "속에 없어요"
+            },
+            {
+              "korean": "마법 열쇠가 어디에 있을까요?",
+              "english": "Where could the magic key be?",
+              "highlight": "어디에 있을까요"
+            }
+          ]
+        },
+        {
+          "id": "g03_also",
+          "title": "~에도 없어요 — not there either",
+          "subtitle": "Adding 도 = also / either",
+          "pattern": "위치 + 에도 + 없어요",
+          "meaning": "It's not there either",
+          "description": "Add 도 after 에 to mean 'also' or 'either'. It connects a series of places you've already checked.",
+          "rule_boxes": [
+            {
+              "color": "green",
+              "label": "🟢 에도 = not ... either",
+              "examples": [
+                "항아리 속에 없어요. = Not in the jar.",
+                "반닫이 아래에도 없어요. = Not under the chest either.",
+                "탁자 위에도 없어요. = Not on the table either."
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "가방 안에도 없어요.",
+              "english": "It's not inside the bag either.",
+              "highlight": "안에도 없어요"
+            },
+            {
+              "korean": "침대 아래에도 없어요.",
+              "english": "It's not under the bed either.",
+              "highlight": "아래에도 없어요"
+            }
+          ]
+        },
+        {
+          "id": "g03_demonstrative",
+          "title": "이/그/저 — This / That / That over there",
+          "subtitle": "Pointing to things in Korean",
+          "pattern": "이/그/저 + 물건",
+          "meaning": "this / that (near you) / that (over there)",
+          "description": "Korean has three demonstratives depending on how far the object is from the speaker.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 이 — This (near me)",
+              "examples": [
+                "이 자물통은 할머니 거예요. = This lock is grandma's.",
+                "이 열쇠가 맞아요. = This key is correct.",
+                "이 반닫이는 오래됐어요. = This chest is old."
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 그 — That (near you)",
+              "examples": [
+                "그 자물통은 뭐예요? = What is that lock?",
+                "그 열쇠 줘! = Give me that key!",
+                "그 항아리 안에 있어요. = It's in that jar."
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 저 — That over there",
+              "examples": [
+                "저 반닫이 아래에 있어요. = It's under that chest over there.",
+                "저 탁자 위에 있어요. = It's on that table over there."
+              ]
+            }
+          ],
+          "table": {
+            "headers": [
+              "",
+              "한국어",
+              "영어"
+            ],
+            "rows": [
+              [
+                "가까이 (near me)",
+                "이",
+                "this"
+              ],
+              [
+                "당신 근처 (near you)",
+                "그",
+                "that"
+              ],
+              [
+                "저기 (far away)",
+                "저",
+                "that over there"
+              ]
+            ]
+          },
+          "examples": [
+            {
+              "korean": "이 자물통은 어디서 왔어요?",
+              "english": "Where did this lock come from?",
+              "highlight": "이 자물통"
+            },
+            {
+              "korean": "그 열쇠가 맞아요!",
+              "english": "That key is the right one!",
+              "highlight": "그 열쇠"
+            },
+            {
+              "korean": "저 항아리 속에 있을까요?",
+              "english": "Could it be inside that jar over there?",
+              "highlight": "저 항아리"
+            }
+          ]
+        },
+        {
+          "id": "g03_possessive",
+          "title": "~의 — Possessive · 's",
+          "subtitle": "Showing who something belongs to",
+          "pattern": "사람/이름 + 의 + 물건",
+          "meaning": "[person]'s [thing]",
+          "description": "의 is the possessive particle in Korean, similar to 's in English. It shows belonging or ownership.",
+          "rule_boxes": [
+            {
+              "color": "green",
+              "label": "🟢 N + 의 + N = N's N",
+              "examples": [
+                "할머니의 자물통 = grandma's lock",
+                "나의 열쇠 = my key",
+                "우리의 마법 = our magic"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 TIP: 나의 → 내, 너의 → 네 (spoken shortcut)",
+              "examples": [
+                "나의 열쇠 → 내 열쇠 (my key)",
+                "너의 가방 → 네 가방 (your bag)"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "이 자물통은 할머니의 거예요.",
+              "english": "This lock is grandma's.",
+              "highlight": "할머니의"
+            },
+            {
+              "korean": "내 열쇠는 어디 있어요?",
+              "english": "Where is my key?",
+              "highlight": "내 열쇠"
+            },
+            {
+              "korean": "우리 집 반닫이 안에 있어요.",
+              "english": "It's inside our house's chest.",
+              "highlight": "우리 집"
+            }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🏺 항아리 옆에서",
+          "scene_en": "Next to the jar",
+          "lines": [
+            {
+              "speaker": "나",
+              "color": "teal",
+              "text": "마법 열쇠가 항아리 ___ 에 있을까?",
+              "en": "Could the magic key be inside the jar?",
+              "type": "fill",
+              "ans": "속",
+              "opts": [
+                "속",
+                "위",
+                "뒤"
+              ]
+            },
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "아니야, 항아리 속에 없어.",
+              "en": "No, it's not inside the jar.",
+              "type": "given"
+            },
+            {
+              "speaker": "나",
+              "color": "teal",
+              "text": "그럼 어디에 있을까요?",
+              "en": "Then where could it be?",
+              "type": "given"
+            }
+          ]
+        },
+        {
+          "scene": "🪑 탁자 주변에서",
+          "scene_en": "Around the table",
+          "lines": [
+            {
+              "speaker": "나",
+              "color": "teal",
+              "text": "탁자 ___ 에도 없어요.",
+              "en": "It's not on top of the table either.",
+              "type": "fill",
+              "ans": "위",
+              "opts": [
+                "위",
+                "속",
+                "앞"
+              ]
+            },
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "반닫이 아래에도 없어!",
+              "en": "It's not under the chest either!",
+              "type": "given"
+            },
+            {
+              "speaker": "나",
+              "color": "teal",
+              "text": "마법 열쇠가 안 보여요!",
+              "en": "I can't see the magic key!",
+              "type": "given"
+            }
+          ]
+        },
+        {
+          "scene": "🗝️ 마침내!",
+          "scene_en": "Finally!",
+          "lines": [
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "열쇠가 쿠션 ___ 에 있어!",
+              "en": "The key is under the cushion!",
+              "type": "fill",
+              "ans": "아래",
+              "opts": [
+                "아래",
+                "위",
+                "속"
+              ]
+            },
+            {
+              "speaker": "나",
+              "color": "teal",
+              "text": "찾았어요! 여기 있어요!",
+              "en": "Found it! It's here!",
+              "type": "given"
+            },
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "잘했어! 이제 열 수 있어~",
+              "en": "Well done! Now we can open it!",
+              "type": "given"
+            }
+          ]
+        }
+      ],
+      "fill_items": [
+        {
+          "q": "열쇠가 탁자",
+          "suffix": "에 있어요.",
+          "ans": "위",
+          "opts": [
+            "위",
+            "속",
+            "뒤"
+          ],
+          "en": "The key is on the table."
+        },
+        {
+          "q": "고양이가 상자",
+          "suffix": "에 있어요.",
+          "ans": "안",
+          "opts": [
+            "안",
+            "위",
+            "앞"
+          ],
+          "en": "The cat is inside the box."
+        },
+        {
+          "q": "가방이 의자",
+          "suffix": "에 있어요.",
+          "ans": "옆",
+          "opts": [
+            "옆",
+            "아래",
+            "뒤"
+          ],
+          "en": "The bag is next to the chair."
+        },
+        {
+          "q": "항아리 속에",
+          "suffix": "어요.",
+          "ans": "없",
+          "opts": [
+            "없",
+            "있",
+            "안"
+          ],
+          "en": "It's not inside the jar."
+        },
+        {
+          "q": "마법 열쇠가 어디에",
+          "suffix": "?",
+          "ans": "있어요",
+          "opts": [
+            "있어요",
+            "없어요",
+            "와요"
+          ],
+          "en": "Where is the magic key?"
+        }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "열쇠가 탁자 위에 있어요.",
+          "correct": 0,
+          "choices": [
+            {
+              "emoji": "⬆️🪑",
+              "kr": "탁자 위",
+              "en": "on the table"
+            },
+            {
+              "emoji": "⬇️🪑",
+              "kr": "탁자 아래",
+              "en": "under the table"
+            },
+            {
+              "emoji": "↔️🪑",
+              "kr": "탁자 옆",
+              "en": "next to the table"
+            }
+          ]
+        },
+        {
+          "audio": "고양이가 상자 안에 없어요.",
+          "correct": 2,
+          "choices": [
+            {
+              "emoji": "✅📦",
+              "kr": "상자 안에 있어요",
+              "en": "inside the box"
+            },
+            {
+              "emoji": "⬆️📦",
+              "kr": "상자 위에 있어요",
+              "en": "on top of the box"
+            },
+            {
+              "emoji": "❌📦",
+              "kr": "상자 안에 없어요",
+              "en": "not inside the box"
+            }
+          ]
+        },
+        {
+          "audio": "가방이 의자 옆에 있어요.",
+          "correct": 1,
+          "choices": [
+            {
+              "emoji": "⬇️🪑",
+              "kr": "의자 아래",
+              "en": "under the chair"
+            },
+            {
+              "emoji": "↔️🪑",
+              "kr": "의자 옆",
+              "en": "next to the chair"
+            },
+            {
+              "emoji": "⬆️🪑",
+              "kr": "의자 위",
+              "en": "on the chair"
+            }
+          ]
+        }
+      ],
+      "step1_chunks": [
+        {
+          "scene": "🗝️",
+          "english": "The magic key is not inside the jar.",
+          "hint": "속 = inside",
+          "sentence": "마법 열쇠가 항아리 속에 없어요.",
+          "chunks": [
+            {
+              "text": "마법 열쇠가",
+              "type": "name",
+              "en": "the magic key"
+            },
+            {
+              "text": "항아리",
+              "type": "name",
+              "en": "jar"
+            },
+            {
+              "text": "속에",
+              "type": "particle",
+              "en": "inside"
+            },
+            {
+              "text": "없어요.",
+              "type": "verb",
+              "en": "is not"
+            }
+          ]
+        },
+        {
+          "scene": "🪑",
+          "english": "It's not on top of the table either.",
+          "hint": "에도 = either",
+          "sentence": "탁자 위에도 없어요.",
+          "chunks": [
+            {
+              "text": "탁자",
+              "type": "name",
+              "en": "table"
+            },
+            {
+              "text": "위에도",
+              "type": "particle",
+              "en": "on top, either"
+            },
+            {
+              "text": "없어요.",
+              "type": "verb",
+              "en": "is not"
+            }
+          ]
+        },
+        {
+          "scene": "❓",
+          "english": "Where could the magic key be?",
+          "hint": "어디 = where",
+          "sentence": "마법 열쇠는 어디에 있을까요?",
+          "chunks": [
+            {
+              "text": "마법 열쇠는",
+              "type": "name",
+              "en": "the magic key"
+            },
+            {
+              "text": "어디에",
+              "type": "particle",
+              "en": "where"
+            },
+            {
+              "text": "있을까요?",
+              "type": "verb",
+              "en": "could it be?"
+            }
+          ]
+        },
+        {
+          "scene": "🏺",
+          "english": "It's not under the chest either.",
+          "hint": "아래 = below/under",
+          "sentence": "반닫이 아래에도 없어요.",
+          "chunks": [
+            {
+              "text": "반닫이",
+              "type": "name",
+              "en": "chest"
+            },
+            {
+              "text": "아래에도",
+              "type": "particle",
+              "en": "under, either"
+            },
+            {
+              "text": "없어요.",
+              "type": "verb",
+              "en": "is not"
+            }
+          ]
+        },
+        {
+          "scene": "👀",
+          "english": "I can't see the magic key.",
+          "hint": "안 보여요 = can't see",
+          "sentence": "마법 열쇠가 안 보여요.",
+          "chunks": [
+            {
+              "text": "마법 열쇠가",
+              "type": "name",
+              "en": "the magic key"
+            },
+            {
+              "text": "안",
+              "type": "particle",
+              "en": "not"
+            },
+            {
+              "text": "보여요.",
+              "type": "verb",
+              "en": "visible / I see"
+            }
+          ]
+        },
+        {
+          "scene": "🔍",
+          "english": "I have to find it!",
+          "hint": "찾아야 해요 = have to find",
+          "sentence": "내가 찾아야 해요!",
+          "chunks": [
+            {
+              "text": "내가",
+              "type": "name",
+              "en": "I"
+            },
+            {
+              "text": "찾아야",
+              "type": "verb",
+              "en": "have to find"
+            },
+            {
+              "text": "해요!",
+              "type": "verb",
+              "en": "(obligation)"
+            }
+          ]
+        }
+      ],
+      "step2_words": [
+        {
+          "scene": "🏺",
+          "english": "It's not inside grandma's jar.",
+          "hint": "할머니의 = grandma's",
+          "sentence": "할머니의 항아리 속에 없어요.",
+          "answer": [
+            "할머니",
+            "의",
+            "항아리",
+            "속",
+            "에",
+            "없어요."
+          ],
+          "types": [
+            "name",
+            "particle",
+            "name",
+            "particle",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "❓",
+          "english": "Where is the magic key?",
+          "hint": "어디에 있어요? = Where is it?",
+          "sentence": "마법 열쇠가 어디에 있어요?",
+          "answer": [
+            "마법",
+            "열쇠",
+            "가",
+            "어디",
+            "에",
+            "있어요?"
+          ],
+          "types": [
+            "name",
+            "name",
+            "particle",
+            "particle",
+            "particle",
+            "verb"
+          ]
+        },
+        {
+          "scene": "🗝️",
+          "english": "The key is inside the box, next to the table.",
+          "hint": "🗝️ 마지막 문제!",
+          "sentence": "열쇠가 탁자 옆 상자 안에 있어요.",
+          "answer": [
+            "열쇠",
+            "가",
+            "탁자",
+            "옆",
+            "상자",
+            "안",
+            "에",
+            "있어요."
+          ],
+          "types": [
+            "name",
+            "particle",
+            "name",
+            "particle",
+            "name",
+            "particle",
+            "particle",
+            "verb"
+          ]
+        }
+      ],
+      "write_items": [
+        {
+          "prompt": "위치 문장을 써봐요 ✏️",
+          "question": "🗝️ 열쇠가 어디에 있어요? (책상 위)",
+          "question_en": "Where is the key? (on the desk)",
+          "hint": "책상 위 + 에 있어요",
+          "answer": "열쇠가 책상 위에 있어요.",
+          "answer_en": "The key is on the desk."
+        },
+        {
+          "prompt": "한국어로 써봐요 ✏️",
+          "question": "🎒 가방이 어디에 있어요? (의자 옆)",
+          "question_en": "Where is the bag? (next to the chair)",
+          "hint": "의자 옆 + 에 있어요",
+          "answer": "가방이 의자 옆에 있어요.",
+          "answer_en": "The bag is next to the chair."
+        },
+        {
+          "prompt": "한국어로 써봐요 ✏️",
+          "question": "📱 핸드폰이 어디에도 없어요? (소파 아래도, 침대 밑도)",
+          "question_en": "The phone is not anywhere?",
+          "hint": "에도 없어요 × 2",
+          "answer": "소파 아래에도 없어요. 침대 밑에도 없어요.",
+          "answer_en": "It's not under the sofa either. Not under the bed either."
+        }
+      ]
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 대화 — Real Life Dialogues",
+      "subtitle": "물건이 어디에 있는지 말해봐요!",
+      "dialogues": [
+        {
+          "title": "🏠 대화 1 — 집에서 물건 찾기",
+          "title_en": "Finding things at home",
+          "bg": "#F3E5F5",
+          "hdr": "#6A1B9A",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#CE93D8",
+              "kr": "엄마, 제 안경 못 봤어요?",
+              "en": "Mom, have you seen my glasses?"
+            },
+            {
+              "role": "A",
+              "color": "#6A1B9A",
+              "kr": "소파 위에 있어.",
+              "en": "They're on the sofa."
+            },
+            {
+              "role": "Q",
+              "color": "#CE93D8",
+              "kr": "어, 없는데요?",
+              "en": "Hmm, they're not there?"
+            },
+            {
+              "role": "A",
+              "color": "#6A1B9A",
+              "kr": "그럼 책상 서랍 안에 있을 거야.",
+              "en": "Then they'll probably be inside the desk drawer."
+            }
+          ],
+          "summary": {
+            "kr": "안경이 책상 서랍 안에 있어요.",
+            "en": "The glasses are inside the desk drawer.",
+            "highlight": "안에 있어요"
+          }
+        },
+        {
+          "title": "🏫 대화 2 — 학교에서 교실 찾기",
+          "title_en": "Finding classrooms at school",
+          "bg": "#E3F2FD",
+          "hdr": "#1565C0",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#90CAF9",
+              "kr": "도서관이 어디에 있어요?",
+              "en": "Where is the library?"
+            },
+            {
+              "role": "A",
+              "color": "#1565C0",
+              "kr": "3층에 있어요. 계단 옆에요.",
+              "en": "It's on the 3rd floor. Next to the stairs."
+            },
+            {
+              "role": "Q",
+              "color": "#90CAF9",
+              "kr": "계단이 어디예요?",
+              "en": "Where are the stairs?"
+            },
+            {
+              "role": "A",
+              "color": "#1565C0",
+              "kr": "저 복도 끝에 있어요.",
+              "en": "They're at the end of that hallway."
+            }
+          ],
+          "summary": {
+            "kr": "도서관은 3층 계단 옆에 있어요.",
+            "en": "The library is next to the stairs on the 3rd floor.",
+            "highlight": "옆에 있어요"
+          }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    {
+      "ko": "위치 단어(위/아래/속/안/옆/앞/뒤)를 알아요.",
+      "en": "I know location words: above/below/inside/next to/in front/behind."
+    },
+    {
+      "ko": "'N에 있어요/없어요'로 위치를 말할 수 있어요.",
+      "en": "I can say where something is/isn't using 'N에 있어요/없어요'."
+    },
+    {
+      "ko": "'에도 없어요'로 '~도 아니에요'를 표현할 수 있어요.",
+      "en": "I can use '에도 없어요' to say 'not there either'."
+    },
+    {
+      "ko": "'어디에 있어요?'로 위치를 물어볼 수 있어요.",
+      "en": "I can ask where something is using '어디에 있어요?'"
+    }
+  ]
+}
