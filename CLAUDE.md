@@ -615,6 +615,39 @@ const urlName   = _hc ? _hc.urlName : null;
 - **지목(nominateStudent) 버그 수정**: unit 7~9 activeUnit 감지 누락 수정
 - **index.html 리브랜딩**: Hangeul Quest Kids (teal) / Hangeul Quest (deep teal), sejong→nhs 링크 교체
 
+### ✅ 2026-06-01 완료 작업 (korean-app_v2.html — My Space)
+- **✏️ My Space 기능 전체 구현** — 버튼(📝 My Space) 추가 → 오버레이 슬라이드인
+  - **프로필 시스템**: 다중 프로필 (한 모니터 공유 대응), localStorage 네임스페이스 `ms_{name}_*`
+  - **📝 My Notes 탭**: Level + 과 태그 선택, 자유 메모, Save 버튼 → 저장 목록 표시
+  - **✏️ Korean Writing 탭**: 캔버스 자유 필기 + Clear — 저장 없음 (자유 연습)
+  - **🎨 My Style 탭**: 이모지 아바타 선택, 테마 컬러, 닉네임 — 프로필별 저장
+  - **스티커 시스템**: 노트 저장마다 스티커 1개 해제 (⭐🎉🏆🌟💎🎯🔥🌈🎁👑)
+  - **이모지 아바타**: `MS_AVATARS = ['🐨','🦊','🐸','🐧','🦄','🐱','🐻','🐰','🐯','🦋']`
+  - **영어 병기 완료**: 모든 UI 텍스트 한영 병기 (Level 1 학생 배려)
+- **캔버스 0-width 버그 수정**: `display:none` 상태에서 초기화 → 크기 0 문제 → lazy init (`msTab('write')` 시점에 초기화)
+- **Level 2 3과 슬라이드/TTS 교체**:
+  - 첫 슬라이드: `언제할머니댁에가요1.png` → standby에서 교체
+  - 첫 TTS: `엄마하고+할머니가+전화를+해요_slide1.mp3` 신규 추가
+
+### ✅ 2026-06-01 완료 작업 (nhs.html — My Notes)
+- **📓 My Notes 기능 전체 구현** — 버튼(📓 My Notes) 추가 → 오버레이
+  - **프로필 시스템**: 다중 프로필, localStorage `nms_{name}_*` 네임스페이스
+  - **📓 Notes 탭**: 에피소드 태그 선택(ep01~ep10/Basics/Free), 자유 메모, Save → 목록
+  - **✏️ Korean Writing 탭**: 캔버스 자유 필기 + 한글 힌트 단어 (클릭 시 확대)
+  - **🎨 My Style 탭**: 이모지 아바타, 테마 컬러, 닉네임 변경 + 에피소드 배지 시스템
+  - **에피소드 배지**: 각 에피소드에 첫 노트 저장 시 배지 해제 (ep01~ep10 + basics)
+  - **이모지 아바타**: `NMS_AVATARS = ['🦊','🐨','🐯','🦋','🐬','🦅','🌙','⚡','🎸','🏄','🎯','🌿']`
+  - **영어 병기 완료**: 모든 UI 텍스트 한영 병기 (13세 학생 배려)
+- **localStorage 구조** (nhs):
+  - `nms_profiles` — 프로필 이름 배열
+  - `nms_current` — 현재 활성 프로필
+  - `nms_{name}_color` — 테마 컬러
+  - `nms_{name}_av` — 이모지 아바타 (기본값 🦊)
+  - `nms_{name}_notes` — 노트 배열 `{id, ep, text, date}`
+
+### 🏆 가족 AI 컨테스트 우승! (2026-06-01)
+- Hangeul Quest 앱으로 가족 AI 컨테스트에서 우승
+
 ### 성인반 sejong-korean_v1.html
 - **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
 
@@ -646,56 +679,3 @@ const urlName   = _hc ? _hc.urlName : null;
 - **`nhs.html`** = 범용 렌더러만 — 콘텐츠 없음
 - **에피소드 추가 = 폴더 하나만 추가** — nhs.html/core 건드릴 필요 없음
 - **슬라이드·음성 경로는 data.json에 기록** — 렌더러가 경로만 참조
-- **레벨별 완전 독립** — 폴더 충돌 없음
-- **`data/nhs/index.json`** → 사이드바 자동 생성
-
-### 디렉토리 구조
-```
-halmoni-school/
-├── nhs.html                    ← 범용 렌더러 (데이터 없음)
-├── core/
-│   ├── nhs-renderer.js         ← (미래) 분리 예정
-│   ├── nhs-loader.js           ← (미래) 분리 예정
-│   └── core.js                 ← HalmoniCore 공통
-└── data/nhs/
-    ├── index.json              ← 에피소드 목록 (사이드바용)
-    ├── 기초반/
-    │   └── ep01/ ...
-    ├── 초급/
-    │   ├── ep01/
-    │   │   ├── data.json       ← vocab, grammar, script, quiz, slides[], voice 경로
-    │   │   ├── slides/         ← PNG 슬라이드
-    │   │   └── voice/          ← TTS MP3
-    │   └── ep02/ ...
-    ├── 중급/ ...
-    └── 고급/ ...
-```
-
-### 현재 상태 (로컬 테스트 단계)
-- ep01, ep02 데이터가 **nhs.html에 인라인 내장** — file:// 로컬 호환용
-- `data/nhs/ep01.json`, `data/nhs/ep02.json` 별도 파일도 유지
-- **GitHub Pages 배포 후**: fetch() 방식으로 전환 → json 하나만 관리
-- 두 파일(nhs.html 인라인 + epNN.json) 수정 시 **반드시 동기화** 필요
-- 동기화 방법: Python bash로 `EPISODE_DATA.epNN` 블록 교체
-
-### ep JSON 데이터 구조 (ep02 기준 — 표준)
-```json
-{
-  "id": "ep02",
-  "title": "저녁 식사",
-  "title_en": "Dinner Time",
-  "level": "초급",
-  "scene": "🍚 저녁 식사 · Dinner Time",
-  "slides": ["data/nhs/slides/ep2/....png"],  ← 슬라이드 방식 (PNG 배열)
-  "video": null,                               ← mp4 방식 (둘 중 하나만 — video 우선)
-  "characters": [{ "id", "name", "emoji", "color" }],
-  "script": [{ "speaker", "text", "en", "speech_type", "audio", "slide" }],
-  // ⚠️ slide 필드는 0-indexed (slides[] 배열 인덱스) — 파일명의 번호와 다름!
-  // 슬라이드 파일명: 다운로드 디폴트 번호 (1),(2),(3)... → slides[0], slides[1], slides[2]...
-  // TTS 파일명 규칙: {TTS순서}{내용}_slide{슬라이드번호}.mp3
-  //   예: "2엄마+늦었어요_slide2.mp3" = TTS 2번째, 슬라이드 파일 (2) → slide:1 (0-indexed)
-  "vocab": [{ "category": "카테고리명", "items": [{ "korean", "romanization", "english", "emoji", "note"(옵션) }] }],
-  "grammar": [{
-    "id", "title", "title_en", "icon",
-    "rule",           ← 한 줄 규칙 요약
-    "pattern",        ← 렌더러
