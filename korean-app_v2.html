@@ -9290,6 +9290,15 @@ const MS_BADGE_TIERS = [
 function msGetTier(count){
   return MS_BADGE_TIERS[Math.min(Math.floor(count/10),MS_BADGE_TIERS.length-1)];
 }
+const MS_L2_VOCAB = {
+  1: ["노래해요","그림을 그려요","책을 읽어요","밥을 먹어요","자요","달려요","남자아이","여자아이","선생님","친구","강아지"],
+  2: ["놀이터","공원","교실","수영장","운동장","집","사진을 찍어요","그네를 타요","자전거를 타요","책을 읽어요"],
+  3: ["아침","저녁","오늘","내일","언제","수영을 해요","운동을 해요","숙제를 해요","바다에 가요","산에 가요","전화를 해요"],
+  4: ["장난감 기차","장난감 비행기","장난감 자동차","곰 인형","토끼 인형","강아지 인형"],
+  5: ["치마","바지","운동화","구두","안경","양말","호랑이","표범","사자","캥거루","얼룩말","빨라요","느려요","무서워요","하마"],
+  6: ["동물원","빵가게","옷가게","꽃집","친구 집","만들어요","사요"],
+  7: ["일","이","삼","사","오","육","칠","팔","구","십","십일","십이","십삼","십사","십오","하나","둘","셋","넷"],
+};
 const MS_UNITS = {2:[1,2,3,4,5,6,7,8,9], 3:[1,2,3,4,5]};
 
 // localStorage helpers
@@ -9554,16 +9563,9 @@ function msRenderHintWords() {
     Object.values(vocab).forEach(cat=>Array.isArray(cat)&&cat.forEach(item=>{if(item.kr)words.push(item.kr);}));
     if(words.length){_render(words.slice(0,18),'Level 3 · '+unit+'과');return;}
   }
-  // Level 2 — fetch JSON directly
-  if(lv==='2' && unit){
-    const pad=String(unit).padStart(2,'0');
-    fetch(`data/elem/level2/unit${pad}.json`)
-      .then(r=>r.json())
-      .then(d=>{
-        const words=(d?.sections?.vocab?.items||[]).filter(v=>v.korean).map(v=>v.korean);
-        if(words.length){_render(words.slice(0,18),'Level 2 · '+unit+'과');return;}
-        _render(DEFAULT,'기본 단어');
-      }).catch(()=>_render(DEFAULT,'기본 단어'));
+  // Level 2 — inline vocab (always works, local & server)
+  if(lv==='2' && unit && MS_L2_VOCAB[unit]?.length){
+    _render(MS_L2_VOCAB[unit],'Level 2 · '+unit+'과');
     return;
   }
   _render(DEFAULT,'기본 단어');
@@ -9674,4 +9676,4 @@ function msRenderStickers() {
     : `${10-inTier} more → ${nextTier.badge} ${nextTier.name}`;
 }
 // ── END MY SPACE ─────────────────────────────────────────
-</scrip
+</scrip                                                                                                                                                                                                                                                                                                      
