@@ -2188,7 +2188,7 @@ function renderScene(){
   const panel=document.getElementById('scene-panel');
   if(!panel)return;
   const line=DATA.script[sceneIdx];
-  const slideIdx=(line.slide!==undefined)?line.slide:sceneIdx;
+  const slideIdx=(line.slide!=null)?line.slide:sceneIdx;
   const src=DATA.slides&&DATA.slides[slideIdx]?DATA.slides[slideIdx]:(DATA.slides&&DATA.slides[0])||'';
   panel.style.backgroundImage=src?`url('${encodeURI(src)}')`:'none';
   const charMap={};DATA.characters.forEach(c=>{charMap[c.id]=c;});
