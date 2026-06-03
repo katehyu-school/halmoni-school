@@ -1166,8 +1166,8 @@ function buildGrammar(){
       ${qnaHtml?`<div style="margin-top:10px"><div style="font-size:11.5px;font-weight:700;color:var(--warm-500);margin-bottom:6px">💬 연습해 봐요</div>${qnaHtml}</div>`:''}
       ${fillHtml}
       ${imagesHtml}
-      ${g.verb_drill?`<div class="vd-wrap" id="vd-${g.id}"><div class="vd-header"><div class="vd-header-title">${esc(g.verb_drill.title)}</div><div class="vd-header-sub">${esc(g.verb_drill.intro)}</div></div><div class="vd-body" id="vd-body-${g.id}"><p style="font-size:13px;color:var(--warm-500);text-align:center;margin-bottom:12px;">10개 동사 · 3가지 시제 · 랜덤 10문제<br><em>10 verbs · 3 tenses · 10 random questions</em></p><button class="vd-start-btn" onclick="vdInit('${g.id}')">▶ 드릴 시작 · Start Drill</button></div></div>`:''}
       ${g.tip?`<div class="gram-tip">💡 ${esc(g.tip)}</div>`:''}
+      ${g.verb_drill?`<div class="vd-wrap" id="vd-${g.id}"><div class="vd-header"><div class="vd-header-title">${esc(g.verb_drill.title)}</div><div class="vd-header-sub">${esc(g.verb_drill.intro)}</div></div><div class="vd-body" id="vd-body-${g.id}"><p style="font-size:13px;color:var(--warm-500);text-align:center;margin-bottom:12px;">10개 동사 · 3가지 시제 · 랜덤 10문제<br><em>10 verbs · 3 tenses · 10 random questions</em></p><button class="vd-start-btn" onclick="vdInit('${g.id}')">▶ 드릴 시작 · Start Drill</button></div></div>`:''}
       ${g.usage&&g.usage.length?`<div class="gram-usage">${g.usage.map(u=>`
         <div class="gram-usage-row">
           <div class="gram-usage-ctx">${esc(u.situation)}</div>
