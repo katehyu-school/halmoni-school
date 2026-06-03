@@ -65,6 +65,17 @@
 .nms-setup-title{font-size:1.3rem;font-weight:700;color:var(--teal);margin-bottom:6px;}
 .nms-setup-sub{font-size:13px;color:var(--warm-500);margin-bottom:24px;line-height:1.6;}
 .nms-empty{text-align:center;padding:24px;color:var(--warm-500);font-size:13px;}
+.nms-writing-save-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
+.nms-writing-save-btn{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.nms-writing-save-btn:hover{opacity:.85;}
+.nms-writing-gallery{margin-top:16px;}
+.nms-writing-gallery-title{font-size:12px;color:var(--warm-500);font-weight:700;margin-bottom:8px;}
+.nms-writing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.nms-writing-thumb{position:relative;border:1.5px solid var(--warm-300);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.nms-writing-thumb img{width:100%;display:block;}
+.nms-writing-thumb-date{font-size:10px;color:var(--warm-500);text-align:center;padding:4px 6px;background:var(--warm-50);}
+.nms-writing-thumb-del{position:absolute;top:5px;right:5px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--coral);line-height:1;}
+.nms-writing-thumb-del:hover{background:var(--coral);color:#fff;}
 .nms-sec-title{font-size:14px;font-weight:700;color:var(--warm-700);margin-bottom:12px;}
 
 `;
@@ -164,7 +175,7 @@
       <div id="nms-panel-write" style="display:none">
         <div class="nms-card">
           <div class="nms-sec-title">✏️ Korean Writing Practice</div>
-          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">Write freely and erase — no saving needed!</div>
+          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">Write Korean & save your progress! ✨</div>
           <div class="nms-canvas-wrap">
             <canvas id="nms-canvas"></canvas>
           </div>
@@ -178,10 +189,19 @@
             </div>
             <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 Clear</button>
           </div>
+          <div class="nms-writing-save-row">
+            <button class="nms-writing-save-btn" onclick="nmsSaveWriting()">💾 Save Writing</button>
+            <span id="nms-writing-save-msg" style="font-size:12px;color:var(--teal);display:none;">✓ Saved!</span>
+          </div>
           <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
             <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Word hints — click to see it big ✨</div>
             <div id="nms-hint-label" style="font-size:11px;color:var(--teal-600);font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
-      <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+            <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+          </div>
+          <div class="nms-writing-gallery">
+            <div class="nms-writing-gallery-title">📁 Saved Writings</div>
+            <div id="nms-writing-grid" class="nms-writing-grid"></div>
+            <div id="nms-writing-empty" style="font-size:12px;color:var(--warm-500);text-align:center;padding:12px 0;">No saved writings yet — draw something and hit Save! 🖊</div>
           </div>
         </div>
       </div>
@@ -348,7 +368,7 @@ function nmsTab(t){
     document.getElementById('nms-panel-'+x).style.display=x===t?'block':'none';
     document.getElementById('nms-t-'+x).classList.toggle('active',x===t);
   });
-  if(t==='write'){ setTimeout(nmsResizeCanvas,50); nmsRenderHintWords(); }
+  if(t==='write'){ setTimeout(nmsResizeCanvas,50); nmsRenderHintWords(); nmsRenderWritings(); }
   if(t==='deco')  nmsRenderDecoPanel();
 }
 
@@ -479,6 +499,38 @@ function nmsClearCanvas(){
   nmsCtx.globalCompositeOperation='source-over';
   nmsCtx.fillStyle='#fff';
   nmsCtx.fillRect(0,0,nmsCanvas.width,nmsCanvas.height);
+}
+function nmsSaveWriting(){
+  if(!nmsCanvas)return;
+  const dataUrl=nmsCanvas.toDataURL('image/png');
+  const writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
+  writings.unshift({id:Date.now(),dataUrl,
+    date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  if(writings.length>20)writings.splice(20);
+  nmsSetJ('nms_'+nmsCurrent+'_writings',writings);
+  const msg=document.getElementById('nms-writing-save-msg');
+  if(msg){msg.style.display='inline';setTimeout(()=>msg.style.display='none',2000);}
+  nmsRenderWritings();
+}
+function nmsRenderWritings(){
+  const writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
+  const grid=document.getElementById('nms-writing-grid');
+  const empty=document.getElementById('nms-writing-empty');
+  if(!grid)return;
+  if(!writings.length){grid.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  grid.innerHTML=writings.map((w,i)=>`
+    <div class="nms-writing-thumb">
+      <img src="${w.dataUrl}" alt="writing ${i+1}">
+      <div class="nms-writing-thumb-date">${w.date}</div>
+      <button class="nms-writing-thumb-del" onclick="nmsDeleteWriting(${w.id})" title="Delete">✕</button>
+    </div>`).join('');
+}
+function nmsDeleteWriting(id){
+  let writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
+  writings=writings.filter(w=>w.id!==id);
+  nmsSetJ('nms_'+nmsCurrent+'_writings',writings);
+  nmsRenderWritings();
 }
 function nmsRenderHintWords(){
   const DEFAULT=['안녕하세요','감사합니다','주세요','있어요','없어요','어디예요','얼마예요','맛있어요','괜찮아요','몰라요','알아요','잘 먹겠습니다'];

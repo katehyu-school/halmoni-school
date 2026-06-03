@@ -61,6 +61,17 @@
 .ms-empty{text-align:center;padding:24px;color:var(--muted);font-size:13px;}
 .ms-section-title{font-family:'Jua',sans-serif;font-size:1rem;color:var(--text);margin-bottom:12px;}
 .ms-select{width:auto;border:1.5px solid #e0e0e0;border-radius:10px;padding:7px 10px;font-size:13px;font-family:'Nanum Gothic',sans-serif;background:#fafafa;outline:none;}
+.ms-writing-save-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
+.ms-writing-save-btn{background:linear-gradient(135deg,#5BB8F5,#4ECDC4);color:#fff;border:none;border-radius:10px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;transition:opacity .15s;}
+.ms-writing-save-btn:hover{opacity:.85;}
+.ms-writing-gallery{margin-top:16px;}
+.ms-writing-gallery-title{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px;}
+.ms-writing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.ms-writing-thumb{position:relative;border:2px solid #e8f4ff;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.ms-writing-thumb img{width:100%;display:block;}
+.ms-writing-thumb-date{font-size:10px;color:var(--muted);text-align:center;padding:4px 6px;background:#f8f9fa;}
+.ms-writing-thumb-del{position:absolute;top:5px;right:5px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:#FF6B6B;line-height:1;}
+.ms-writing-thumb-del:hover{background:#FF6B6B;color:#fff;}
 `;
   document.head.appendChild(s);
 })();
@@ -149,7 +160,7 @@
       <div id="ms-panel-write" style="display:none">
         <div class="ms-card">
           <div class="ms-section-title">✏️ Korean Writing</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Write freely and erase — no saving needed!</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Write Korean & save your progress! ✨</div>
           <div class="ms-canvas-wrap">
             <canvas id="ms-canvas"></canvas>
           </div>
@@ -163,10 +174,19 @@
             </div>
             <button class="ms-tool-btn" onclick="msClearCanvas()" style="margin-left:auto;color:#FF6B6B;border-color:#FF6B6B;">🗑 Clear</button>
           </div>
+          <div class="ms-writing-save-row">
+            <button class="ms-writing-save-btn" onclick="msSaveWriting()">💾 Save Writing</button>
+            <span id="ms-writing-save-msg" style="font-size:12px;color:#4ECDC4;display:none;">✓ Saved!</span>
+          </div>
           <div style="margin-top:14px;padding:12px;background:#f8f9fa;border-radius:10px;">
             <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Word hints — click to see big ✨</div>
             <div id="ms-hint-label" style="font-size:11px;color:#1a7bbf;font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
             <div id="ms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+          </div>
+          <div class="ms-writing-gallery">
+            <div class="ms-writing-gallery-title">📁 Saved Writings</div>
+            <div id="ms-writing-grid" class="ms-writing-grid"></div>
+            <div id="ms-writing-empty" style="font-size:12px;color:var(--muted);text-align:center;padding:12px 0;">No saved writings yet — draw something and hit Save! 🖊</div>
           </div>
         </div>
       </div>
@@ -349,7 +369,7 @@ function msTab(t) {
     document.getElementById('ms-panel-'+x).style.display = x===t?'block':'none';
     document.getElementById('ms-t-'+x).classList.toggle('active', x===t);
   });
-  if (t==='write') { msInitCanvas(); setTimeout(msResizeCanvas, 60); msRenderHintWords(); }
+  if (t==='write') { msInitCanvas(); setTimeout(msResizeCanvas, 60); msRenderHintWords(); msRenderWritings(); }
   if (t==='deco')  { msRenderDecoPanel(); }
 }
 
@@ -493,6 +513,39 @@ function msClearCanvas() {
   msCtx.globalCompositeOperation = 'source-over';
   msCtx.fillStyle = '#fff';
   msCtx.fillRect(0,0,msCanvas.width,msCanvas.height);
+}
+function msSaveWriting() {
+  if (!msCanvas) return;
+  const dataUrl = msCanvas.toDataURL('image/png');
+  const writings = msGetJ('ms_'+msCurrent+'_writings');
+  writings.unshift({ id: Date.now(), dataUrl,
+    date: new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) });
+  // keep max 20 saved writings per profile
+  if (writings.length > 20) writings.splice(20);
+  msSetJ('ms_'+msCurrent+'_writings', writings);
+  const msg = document.getElementById('ms-writing-save-msg');
+  if (msg) { msg.style.display='inline'; setTimeout(()=>msg.style.display='none', 2000); }
+  msRenderWritings();
+}
+function msRenderWritings() {
+  const writings = msGetJ('ms_'+msCurrent+'_writings');
+  const grid = document.getElementById('ms-writing-grid');
+  const empty = document.getElementById('ms-writing-empty');
+  if (!grid) return;
+  if (!writings.length) { grid.innerHTML=''; if(empty)empty.style.display='block'; return; }
+  if (empty) empty.style.display='none';
+  grid.innerHTML = writings.map((w,i)=>`
+    <div class="ms-writing-thumb">
+      <img src="${w.dataUrl}" alt="writing ${i+1}">
+      <div class="ms-writing-thumb-date">${w.date}</div>
+      <button class="ms-writing-thumb-del" onclick="msDeleteWriting(${w.id})" title="Delete">✕</button>
+    </div>`).join('');
+}
+function msDeleteWriting(id) {
+  let writings = msGetJ('ms_'+msCurrent+'_writings');
+  writings = writings.filter(w => w.id !== id);
+  msSetJ('ms_'+msCurrent+'_writings', writings);
+  msRenderWritings();
 }
 function msRenderHintWords() {
   const DEFAULT=['안녕','가요','해요','있어요','없어요','할머니','학교','친구','오늘','내일','사랑해','감사해요'];
