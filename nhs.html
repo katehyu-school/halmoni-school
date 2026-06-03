@@ -2795,7 +2795,7 @@ async function _callClaude(targetKr, targetEn, said){
         messages:[{role:'user',content:`You are a warm Korean language tutor for English-speaking students.
 Target sentence: "${targetKr}" (${targetEn})
 Student said: "${said}"
-Give encouraging feedback in English, 2 sentences max. If correct or close, celebrate! If different, note 1 key thing to fix and give a quick tip. Be specific and kind.\`}]
+Give encouraging feedback in English, 2 sentences max. If correct or close, celebrate! If different, note 1 key thing to fix and give a quick tip. Be specific and kind.`}]
       })
     });
     const d=await res.json();
