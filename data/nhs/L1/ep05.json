@@ -320,17 +320,17 @@
       },
       "fill_blanks": [
         {
-          "prompt": "도서관에 책을 ___ 가요. (빌리다)",
+          "sentence": "도서관에 책을 ___ 가요. (빌리다)",
           "answer": "빌리러",
           "hint": "빌리- (vowel ending) → 빌리러"
         },
         {
-          "prompt": "카페에 커피를 ___ 가요. (마시다)",
+          "sentence": "카페에 커피를 ___ 가요. (마시다)",
           "answer": "마시러",
           "hint": "마시- (vowel ending) → 마시러"
         },
         {
-          "prompt": "공원에 운동을 ___ 가요. (하다)",
+          "sentence": "공원에 운동을 ___ 가요. (하다)",
           "answer": "하러",
           "hint": "하- (vowel ending) → 하러"
         }
@@ -416,12 +416,12 @@
       "rule_box": "⚠️ 중요 예외! · Important exception!\n알다(to know) → '안 알아요'라고 하지 않아요!\n'모르다'를 써요 → 몰라요\n'I don't know' = 몰라요 (NOT 안 알아요)",
       "fill_blanks": [
         {
-          "prompt": "저는 커피를 ___ 마셔요. (안)",
+          "sentence": "저는 커피를 ___ 마셔요. (안)",
           "answer": "안 마셔요",
           "hint": "안 + 마셔요"
         },
         {
-          "prompt": "오늘은 학교에 ___ 가요. (안)",
+          "sentence": "오늘은 학교에 ___ 가요. (안)",
           "answer": "안 가요",
           "hint": "안 + 가요"
         }
@@ -470,41 +470,24 @@
   ],
   "banmal_jondaemal": {
     "title": "반말 vs 존댓말 — 이 에피소드에서",
-    "description": "올리비아와 미래는 친구라서 반말, 버스기사 아저씨한테는 존댓말!",
-    "description_en": "Olivia and Mirae speak casually to each other, but switch to polite speech with the bus driver.",
-    "comparison": [
-      {
-        "situation": "친구한테 제안 · Suggesting to a friend",
-        "banmal": "광장시장에 먹으러 갈까?",
-        "jondaemal": "광장시장에 먹으러 갈까요?"
-      },
-      {
-        "situation": "어른에게 묻기 · Asking an adult",
-        "banmal": "광장시장에 가?",
-        "jondaemal": "광장시장에 가요? ✅ (에피소드)"
-      },
-      {
-        "situation": "부정 대답 · Negative answer",
-        "banmal": "안 가.",
-        "jondaemal": "안 가요. ✅ (에피소드)"
-      },
-      {
-        "situation": "감사 인사 · Thank you",
-        "banmal": "고마워!",
-        "jondaemal": "감사합니다! ✅ (에피소드)"
-      }
-    ],
-    "vocab_comparison": [
-      {
-        "label": "고마워 vs 감사합니다",
-        "banmal": "고마워 / 고마워요",
-        "jondaemal": "감사합니다",
-        "note": "둘 다 자연스러워요. 감사합니다가 더 격식체예요. · Both are natural. 감사합니다 is more formal."
-      }
-    ],
+    "vocab_comparison": {
+      "title_ko": "감사 인사 비교",
+      "title_en": "Comparing Thank You expressions",
+      "intro_ko": "고마워와 감사합니다는 둘 다 쓸 수 있어요.",
+      "intro_en": "Both work — 감사합니다 is more formal.",
+      "table": [
+        {
+          "en": "Thank you (casual)",
+          "banmal": "고마워 / 고마워요",
+          "jondaemal": "감사합니다"
+        }
+      ]
+    },
     "adult_dialogue": {
-      "title": "💼 어른들의 대화 — 길을 물을 때",
-      "description": "길을 모를 때 이렇게 물어봐요.",
+      "title_ko": "💼 어른들의 대화 — 길을 물을 때",
+      "title_en": "Adult conversation — asking for directions",
+      "setup_ko": "길을 모를 때 이렇게 물어봐요.",
+      "setup_en": "When adults don't know the way, this is how they ask.",
       "lines": [
         {
           "speaker": "행인 A",
@@ -532,7 +515,32 @@
           "en": "Ah, thank you!"
         }
       ]
-    }
+    },
+    "rows": [
+      {
+        "situation_ko": "친구한테 제안 · Suggesting to a friend",
+        "banmal": "광장시장에 먹으러 갈까?",
+        "jondaemal": "광장시장에 먹으러 갈까요?"
+      },
+      {
+        "situation_ko": "어른에게 묻기 · Asking an adult",
+        "banmal": "광장시장에 가?",
+        "jondaemal": "광장시장에 가요? ✅ (에피소드)"
+      },
+      {
+        "situation_ko": "부정 대답 · Negative answer",
+        "banmal": "안 가.",
+        "jondaemal": "안 가요. ✅ (에피소드)"
+      },
+      {
+        "situation_ko": "감사 인사 · Thank you",
+        "banmal": "고마워!",
+        "jondaemal": "감사합니다! ✅ (에피소드)"
+      }
+    ],
+    "intro_ko": "올리비아와 미래는 친구라서 반말, 버스기사 아저씨한테는 존댓말!",
+    "intro_en": "Olivia and Mirae speak casually to each other, but switch to polite speech with the bus driver.",
+    "tip": "💡 낯선 어른에게는 항상 존댓말로! Even if you're not sure, use 존댓말 with adults you don't know."
   },
   "pronunciation": [
     {
