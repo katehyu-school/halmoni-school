@@ -295,6 +295,58 @@
   ],
   "grammar": [
     {
+      "id": "g07_where",
+      "title": "어디 있어요?",
+      "title_en": "Asking Where Something Is",
+      "icon": "🔍",
+      "rule": "[물건] + 어디 있어요? · Where is [thing]?",
+      "explanation_en": "'어디' means 'where'. Attach 있어요 to ask where something is. Answer with a location word + 에.",
+      "pattern": "[물건] + 어디 있어요?",
+      "table": {
+        "columns": [
+          "질문",
+          "대답"
+        ],
+        "rows": [
+          [
+            "도시락 어디 있어요?",
+            "식탁 위에 있어요."
+          ],
+          [
+            "리모컨 어디 있어요?",
+            "소파 아래에 있어요."
+          ],
+          [
+            "엄마 어디 있어요?",
+            "부엌에 있어요."
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "가방 어디 있어요? — 방 안에 있어요.",
+          "en": "Where's the bag? — It's in the room."
+        },
+        {
+          "ko": "화장실 어디 있어요? — 저기 있어요.",
+          "en": "Where's the bathroom? — It's over there."
+        }
+      ],
+      "fill_blanks": [
+        {
+          "sentence": "열쇠 ___ 있어요? (어디)",
+          "answer": "어디",
+          "hint": "where"
+        },
+        {
+          "sentence": "책이 책상 ___ 있어요. (위에)",
+          "answer": "위에",
+          "hint": "on top"
+        }
+      ],
+      "tier": "core"
+    },
+    {
       "id": "g07_location",
       "title": "N 위치에 있어요",
       "title_en": "Location Marker -에",
@@ -383,58 +435,6 @@
           "sentence": "우산이 문 ___ 있어요.",
           "answer": "옆에",
           "hint": "next to"
-        }
-      ],
-      "tier": "core"
-    },
-    {
-      "id": "g07_where",
-      "title": "어디 있어요?",
-      "title_en": "Asking Where Something Is",
-      "icon": "🔍",
-      "rule": "[물건] + 어디 있어요? · Where is [thing]?",
-      "explanation_en": "'어디' means 'where'. Attach 있어요 to ask where something is. Answer with a location word + 에.",
-      "pattern": "[물건] + 어디 있어요?",
-      "table": {
-        "columns": [
-          "질문",
-          "대답"
-        ],
-        "rows": [
-          [
-            "도시락 어디 있어요?",
-            "식탁 위에 있어요."
-          ],
-          [
-            "리모컨 어디 있어요?",
-            "소파 아래에 있어요."
-          ],
-          [
-            "엄마 어디 있어요?",
-            "부엌에 있어요."
-          ]
-        ]
-      },
-      "examples": [
-        {
-          "ko": "가방 어디 있어요? — 방 안에 있어요.",
-          "en": "Where's the bag? — It's in the room."
-        },
-        {
-          "ko": "화장실 어디 있어요? — 저기 있어요.",
-          "en": "Where's the bathroom? — It's over there."
-        }
-      ],
-      "fill_blanks": [
-        {
-          "sentence": "열쇠 ___ 있어요? (어디)",
-          "answer": "어디",
-          "hint": "where"
-        },
-        {
-          "sentence": "책이 책상 ___ 있어요. (위에)",
-          "answer": "위에",
-          "hint": "on top"
         }
       ],
       "tier": "core"

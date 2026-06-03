@@ -1867,6 +1867,8 @@ const BASICS_TOPICS = [
   {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice'},
   {id:'verbs',     icon:'📝', label:'동사 활용',        en:'Verb Conjugation'},
   {id:'speaking',  icon:'🎤', label:'발음 & 스피킹',    en:'Pronunciation & Speaking'},
+  {id:'questions', icon:'❓', label:'의문사 총정리',      en:'Question Words'},
+  {id:'honorifics',icon:'🙇', label:'한국의 호칭 문화',   en:'Korean Titles & Address'},
 ];
 
 let curBasicsTopic = 'hangul';
@@ -2155,6 +2157,8 @@ function loadBasics(topicId){
   if(topicId==='writing')   body.innerHTML=buildWriting();
   if(topicId==='verbs')     body.innerHTML=buildVerbs();
   if(topicId==='speaking')  body.innerHTML=buildSpeaking();
+  if(topicId==='questions') body.innerHTML=buildQuestions();
+  if(topicId==='honorifics')body.innerHTML=buildHonorifics();
   if(topicId==='hangul')  requestAnimationFrame(()=>updateSylResult());
   if(topicId==='writing') requestAnimationFrame(()=>initWritingCanvas());
   if(topicId==='verbs')   requestAnimationFrame(()=>renderVerbGame());
@@ -2610,12 +2614,173 @@ function buildVerbs(){
     +'<button class="btab" data-btab-group="bp-verb" data-tab="irreg" onclick="switchBtab(\'bp-verb\',\'irreg\')">🔄 불규칙 동사</button>'
     +'<button class="btab" data-btab-group="bp-verb" data-tab="cards" onclick="switchBtab(\'bp-verb\',\'cards\')">📋 동사 목록</button>'
     +'<button class="btab" data-btab-group="bp-verb" data-tab="game" onclick="switchBtab(\'bp-verb\',\'game\');renderVerbGame()">🎮 퀴즈 게임</button>'
+    +'<button class="btab" data-btab-group="bp-verb" data-tab="ref" onclick="switchBtab(\'bp-verb\',\'ref\')">📎 참고표 Quick Ref</button>'
     +'</div>'
     +'<div id="bp-verb-overview" class="btab-panel active">'+tabOverview+'</div>'
     +'<div id="bp-verb-regular" class="btab-panel">'+tabRegular+'</div>'
     +'<div id="bp-verb-irreg" class="btab-panel">'+tabIrreg+'</div>'
     +'<div id="bp-verb-cards" class="btab-panel">'+tabCards+'</div>'
     +'<div id="bp-verb-game" class="btab-panel"><div class="verb-game-box" id="verb-game-box"></div></div>';
+    +'<div id="bp-verb-ref" class="btab-panel">'+buildVerbRef()+'</div>';
+}
+
+// ── VERB REF TABLE ───────────────────────────────────
+function buildVerbRef(){
+  const rows = [
+    {dict:'가다',stem:'가-',type:'규칙',present:'가요',past:'갔어요',future:'갈 거예요',neg:'안 가요',rom:'ga-da'},
+    {dict:'오다',stem:'오-',type:'규칙',present:'와요',past:'왔어요',future:'올 거예요',neg:'안 와요',rom:'o-da'},
+    {dict:'먹다',stem:'먹-',type:'규칙',present:'먹어요',past:'먹었어요',future:'먹을 거예요',neg:'안 먹어요',rom:'meok-da'},
+    {dict:'마시다',stem:'마시-',type:'규칙',present:'마셔요',past:'마셨어요',future:'마실 거예요',neg:'안 마셔요',rom:'ma-si-da'},
+    {dict:'하다',stem:'하-',type:'하다',present:'해요',past:'했어요',future:'할 거예요',neg:'안 해요',rom:'ha-da'},
+    {dict:'공부하다',stem:'공부하-',type:'하다',present:'공부해요',past:'공부했어요',future:'공부할 거예요',neg:'안 공부해요',rom:'gong-bu-ha-da'},
+    {dict:'좋다',stem:'좋-',type:'형용사',present:'좋아요',past:'좋았어요',future:'좋을 거예요',neg:'안 좋아요',rom:'jo-ta'},
+    {dict:'있다',stem:'있-',type:'특수',present:'있어요',past:'있었어요',future:'있을 거예요',neg:'없어요',rom:'it-da'},
+    {dict:'알다',stem:'알-',type:'ㄹ탈락',present:'알아요',past:'알았어요',future:'알 거예요',neg:'몰라요',rom:'al-da'},
+    {dict:'듣다',stem:'들-',type:'ㄷ불규칙',present:'들어요',past:'들었어요',future:'들을 거예요',neg:'안 들어요',rom:'deut-da'},
+    {dict:'걷다',stem:'걸-',type:'ㄷ불규칙',present:'걸어요',past:'걸었어요',future:'걸을 거예요',neg:'안 걸어요',rom:'geot-da'},
+    {dict:'덥다',stem:'더워-',type:'ㅂ불규칙',present:'더워요',past:'더웠어요',future:'더울 거예요',neg:'안 더워요',rom:'deop-da'},
+    {dict:'돕다',stem:'도와-',type:'ㅂ불규칙',present:'도와요',past:'도왔어요',future:'도울 거예요',neg:'안 도와요',rom:'dop-da'},
+  ];
+  const typeColors = {'규칙':'#E8F5E9','하다':'#E3F2FD','형용사':'#FFF3E0','특수':'#F3E5F5','ㄹ탈락':'#FFF8E1','ㄷ불규칙':'#FCE4EC','ㅂ불규칙':'#FCE4EC'};
+  const legend = ['규칙','하다','형용사','ㄹ탈락','ㄷ불규칙','ㅂ불규칙'].map(t=>'<span style="background:'+typeColors[t]+';border-radius:4px;padding:2px 7px;font-size:10.5px;margin-right:4px">'+t+'</span>').join('');
+
+  const tableRows = rows.map(r=>'<tr style="border-top:1px solid var(--warm-200)">'
+    +'<td style="padding:6px 8px;font-family:var(--font-serif);font-weight:800;font-size:15px;background:'+typeColors[r.type]+'">'+r.dict+'<div style="font-size:9px;color:var(--warm-400)">['+r.rom+']</div></td>'
+    +'<td style="padding:6px 8px;font-size:11px;color:var(--warm-400)">'+r.type+'</td>'
+    +'<td style="padding:6px 8px;font-family:var(--font-serif);font-weight:700;color:var(--teal-dark)" onclick="speakTTS(\''+r.present+'\')" title="🔊">'+r.present+' 🔊</td>'
+    +'<td style="padding:6px 8px;font-family:var(--font-serif);font-weight:700;color:var(--blue-700)" onclick="speakTTS(\''+r.past+'\')" title="🔊">'+r.past+' 🔊</td>'
+    +'<td style="padding:6px 8px;font-family:var(--font-serif);font-weight:700;color:var(--purple-700)" onclick="speakTTS(\''+r.future+'\')" title="🔊">'+r.future+' 🔊</td>'
+    +'<td style="padding:6px 8px;font-family:var(--font-serif);font-size:12px;color:var(--coral)" onclick="speakTTS(\''+r.neg+'\')" title="🔊">'+r.neg+' 🔊</td>'
+    +'</tr>').join('');
+
+  return '<div style="font-size:12px;margin-bottom:10px;line-height:1.8">'+legend+'</div>'
+    +'<div style="background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:10px 14px;font-size:12.5px;margin-bottom:12px">'
+    +'💡 셀을 클릭하면 발음을 들을 수 있어요! · Click any cell to hear the pronunciation!</div>'
+    +'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">'
+    +'<thead><tr style="background:var(--warm-100)">'
+    +'<th style="padding:8px;text-align:left;font-size:12px">사전형 Dictionary</th>'
+    +'<th style="padding:8px;text-align:left;font-size:12px">유형 Type</th>'
+    +'<th style="padding:8px;text-align:left;font-size:12px;color:var(--teal-dark)">현재 Present</th>'
+    +'<th style="padding:8px;text-align:left;font-size:12px;color:var(--blue-700)">과거 Past</th>'
+    +'<th style="padding:8px;text-align:left;font-size:12px;color:var(--purple-700)">미래 Future</th>'
+    +'<th style="padding:8px;text-align:left;font-size:12px;color:var(--coral)">부정 Negative</th>'
+    +'</tr></thead>'
+    +'<tbody>'+tableRows+'</tbody></table></div>'
+    +'<div style="background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;margin-top:12px;line-height:1.8">'
+    +'⚠️ <strong>불규칙 패턴 요약 · Irregular Patterns</strong><br>'
+    +'• <strong>ㄹ 탈락</strong>: 알다, 살다, 만들다 — ㄹ 받침이 ㄴ/ㄹ/ㅂ/오 앞에서 탈락 (알 + 아요 → 알아요, 알 + ㅂ니다 → 압니다)<br>'
+    +'• <strong>ㄷ 불규칙</strong>: 듣다, 걷다, 묻다 — 모음 어미 앞에서 ㄷ→ㄹ (듣 + 어요 → 들어요)<br>'
+    +'• <strong>ㅂ 불규칙</strong>: 덥다, 춥다, 돕다 — 모음 어미 앞에서 ㅂ→워/와 (덥 + 어요 → 더워요)<br>'
+    +'• <strong>하다 동사</strong>: 하 + 아요 → 해요 (축약) · 공부하다, 요리하다 등 수천 개!</div>';
+}
+
+// ── QUESTIONS RENDER ─────────────────────────────────
+// ══════════════════════════════════════════════════════
+function buildQuestions(){
+  const qwords = [
+    {q:'뭐 / 무엇',rom:'mwo / mu-eot',en:'What',icon:'🔍',
+     examples:[{ko:'이게 뭐예요?',en:'What is this?'},{ko:'뭐 먹을래요?',en:'What do you want to eat?'}]},
+    {q:'어디',rom:'eo-di',en:'Where',icon:'📍',
+     examples:[{ko:'어디 있어요?',en:'Where is it?'},{ko:'어디 가요?',en:'Where are you going?'}]},
+    {q:'언제',rom:'eon-je',en:'When',icon:'📅',
+     examples:[{ko:'언제 만나요?',en:'When do we meet?'},{ko:'생일이 언제예요?',en:'When is your birthday?'}]},
+    {q:'누구',rom:'nu-gu',en:'Who',icon:'👤',
+     examples:[{ko:'저 사람이 누구예요?',en:'Who is that person?'},{ko:'누구 거예요?',en:'Whose is this?'}]},
+    {q:'왜',rom:'wae',en:'Why',icon:'🤔',
+     examples:[{ko:'왜 안 왔어요?',en:"Why didn't you come?"},{ko:'왜 울어요?',en:'Why are you crying?'}]},
+    {q:'어떻게',rom:'eo-tteo-ke',en:'How',icon:'⚙️',
+     examples:[{ko:'어떻게 해요?',en:'How do you do it?'},{ko:'어떻게 생각해요?',en:'What do you think? (lit. How do you think?)'}]},
+    {q:'얼마',rom:'eol-ma',en:'How much / How many',icon:'💰',
+     examples:[{ko:'얼마예요?',en:'How much is it?'},{ko:'얼마나 걸려요?',en:'How long does it take?'}]},
+    {q:'몇',rom:'myeot',en:'How many / What number',icon:'🔢',
+     examples:[{ko:'몇 시예요?',en:'What time is it?'},{ko:'몇 살이에요?',en:'How old are you?'}]},
+  ];
+  const cards = qwords.map(w=>'<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow-sm)">'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'
+    +'<span style="font-size:22px">'+w.icon+'</span>'
+    +'<div><div style="font-family:var(--font-serif);font-size:20px;font-weight:800;color:var(--teal-dark)" onclick="speakTTS(\''+w.q.split(' ')[0]+'\')" title="Click to hear">'+w.q+' 🔊</div>'
+    +'<div style="font-size:11px;color:var(--warm-400)">['+w.rom+'] &nbsp;·&nbsp; <strong style="color:var(--amber-600)">'+w.en+'</strong></div></div></div>'
+    +'<div style="display:flex;flex-direction:column;gap:5px">'
+    +w.examples.map(ex=>'<div style="display:flex;gap:8px;align-items:baseline">'
+      +'<span style="font-family:var(--font-serif);font-size:13.5px;font-weight:700;color:var(--warm-900)">'+ex.ko+'</span>'
+      +'<span style="font-size:12px;color:var(--warm-400)">'+ex.en+'</span>'
+      +'</div>').join('')
+    +'</div></div>');
+
+  const tipBox = '<div style="background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:13px;line-height:1.7">'
+    +'💡 <strong>한국어 의문사의 핵심 규칙 · Key Rule</strong><br>'
+    +'한국어는 의문사가 문장 앞으로 오지 않아요! 어순이 그대로예요.<br>'
+    +'<em>Korean question words stay in the same position as the answer — no word-order change!</em><br><br>'
+    +'&nbsp;&nbsp;✅ 이거 <strong>뭐</strong>예요? (What is this? — 뭐 stays where the answer goes)<br>'
+    +'&nbsp;&nbsp;✅ <strong>어디</strong> 가요? (Where are you going? — subject 어디 stays in subject position)<br>'
+    +'&nbsp;&nbsp;✅ <strong>언제</strong> 만나요? (When do we meet? — time word stays in front of verb)<br>'
+    +'<br>영어처럼 "What is this?" → 의문사 먼저! 한국어는 그렇지 않아요.<br>'
+    +'<em>Unlike English, Korean does NOT move the question word to the front of the sentence.</em></div>';
+
+  return '<div class="basics-intro">뭐, 어디, 언제, 누구, 왜, 어떻게 — 8개 의문사를 마스터하면 모든 질문을 만들 수 있어요!<br><em>Master these 8 question words and you can ask anything in Korean.</em></div>'
+    + tipBox
+    + '<div style="max-width:700px">' + cards.join('') + '</div>';
+}
+
+// ── HONORIFICS RENDER ────────────────────────────────
+// ══════════════════════════════════════════════════════
+function buildHonorifics(){
+  const tipBox = '<div style="background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:13px;line-height:1.7">'
+    +'💡 <strong>한국 호칭 문화의 핵심 · Key Insight</strong><br>'
+    +'한국에서는 이름보다 <strong>관계·나이에 따른 호칭</strong>을 먼저 써요.<br>'
+    +'<em>In Korea, people are usually called by their relationship title, not their name.</em><br>'
+    +'오빠/언니/형/누나 같은 호칭은 가족이 아니어도 친한 사람에게 써요!<br>'
+    +'<em>Titles like 오빠/언니 can be used with close friends, not just family.</em></div>';
+
+  const sections = [
+    {title:'👨‍👩‍👧 가족 호칭 · Family Titles (여자 기준 · from female speaker)',color:'#E8F5E9',border:'#81C784',rows:[
+      ['엄마 / 어머니','eom-ma / eo-meo-ni','Mom / Mother (formal)','엄마, 밥 먹자!'],
+      ['아빠 / 아버지','a-ppa / a-beo-ji','Dad / Father (formal)','아버지, 안녕히 계세요.'],
+      ['언니','eon-ni','Older sister (girl → girl)','언니, 이거 예뻐요?'],
+      ['오빠','o-ppa','Older brother (girl → boy)','오빠, 어디 가?'],
+      ['동생','dong-saeng','Younger sibling','동생이 귀여워요.'],
+      ['할머니 / 할아버지','hal-meo-ni / ha-ra-beo-ji','Grandmother / Grandfather','할머니, 보고 싶어요!'],
+    ]},
+    {title:'👦 남자 기준 · From Male Speaker',color:'#E3F2FD',border:'#64B5F6',rows:[
+      ['형','hyeong','Older brother (boy → boy)','형, 같이 가자!'],
+      ['누나','nu-na','Older sister (boy → girl)','누나, 도와줘요.'],
+    ]},
+    {title:'👥 사회적 호칭 · Social Titles',color:'#FFF3E0',border:'#FFB74D',rows:[
+      ['선생님','seon-saeng-nim','Teacher (님 = honorific suffix)','선생님, 질문 있어요.'],
+      ['아저씨','a-jeo-ssi','Middle-aged man (uncle figure)','아저씨, 이거 얼마예요?'],
+      ['아줌마','a-jum-ma','Middle-aged woman (aunty figure)','아줌마, 감사해요!'],
+      ['사장님','sa-jang-nim','Business owner / boss','사장님, 여기 더 주세요!'],
+      ['언니 (비가족)','eon-ni','Friendly term for older girl','언니, 예뻐요~'],
+      ['오빠 (비가족)','o-ppa','Friendly term for older boy','오빠, 도와줘요!'],
+    ]},
+    {title:'💼 -님 접미사 · Honorific Suffix -님',color:'#F3E5F5',border:'#BA68C8',rows:[
+      ['선생님','Teacher-nim','teacher → teacher (honorific)','선생님, 감사합니다.'],
+      ['부모님','Parents-nim','parents (always with 님)','부모님께 전화했어요.'],
+      ['손님','Guest-nim','손 (hand) + 님 → honored guest','어서 오세요, 손님!'],
+    ]},
+  ];
+
+  const tableHtml = sections.map(sec=>'<div style="background:'+sec.color+';border:1.5px solid '+sec.border+';border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:10px">'+sec.title+'</div>'
+    +'<table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+    +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">호칭</th><th style="text-align:left;padding:3px 8px 6px">발음</th><th style="text-align:left;padding:3px 8px 6px">뜻</th><th style="text-align:left;padding:3px 8px 6px">예문</th></tr>'
+    +sec.rows.map(r=>'<tr style="border-top:1px solid rgba(0,0,0,.06)">'
+      +'<td style="padding:5px 8px;font-family:var(--font-serif);font-weight:700;font-size:14px" onclick="speakTTS(\''+r[0].split(' ')[0]+'\')" title="Click to hear">'+r[0]+' 🔊</td>'
+      +'<td style="padding:5px 8px;color:var(--warm-400);font-size:11px">['+r[1]+']</td>'
+      +'<td style="padding:5px 8px;color:var(--warm-600)">'+r[2]+'</td>'
+      +'<td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+r[3]+'</td>'
+      +'</tr>').join('')
+    +'</table></div>').join('');
+
+  const noteBox = '<div style="background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:12px 16px;margin-top:4px;font-size:12.5px;line-height:1.8">'
+    +'⚠️ <strong>헷갈리기 쉬운 것들 · Common Confusions</strong><br>'
+    +'• 오빠/언니는 <em>같은 성별이 아님</em> — 여자가 나이 많은 남자에게 = 오빠, 여자에게 = 언니<br>'
+    +'• 형/누나는 남자 화자 기준 — 남자가 나이 많은 남자에게 = 형, 여자에게 = 누나<br>'
+    +'• -님 suffix는 존경을 더해요 — 선생 (teacher) → 선생님 (respected teacher)<br>'
+    +'• 이름을 부를 땐 뒤에 아/야 or 씨를 붙여요 — 미래야! (반말) / 미래 씨 (격식)</div>';
+
+  return '<div class="basics-intro">한국어는 누구와 말하느냐에 따라 부르는 방법이 달라져요. 관계·나이·격식도에 따른 호칭을 알아봐요!<br><em>Korean address system depends on relationship, age, and formality. Learn who to call what!</em></div>'
+    + tipBox + tableHtml + noteBox;
 }
 
 // ── SPEAKING RENDER ────────────────────────────────────

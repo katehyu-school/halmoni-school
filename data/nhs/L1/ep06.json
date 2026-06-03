@@ -255,6 +255,151 @@
   ],
   "grammar": [
     {
+      "id": "g_ep04_02",
+      "title": "N하고 / N(이)랑 / 와·과 — and / with",
+      "title_en": "Three ways to say \"and\" or \"with\"",
+      "icon": "🤝",
+      "rule": "하고 (중립) · (이)랑 (반말/구어) · 와/과 (격식/문어)",
+      "pattern": "N + 하고/랑/(이)랑/와/과 + N",
+      "explanation_en": "Korean has three ways to say \"and\" or \"with\". 하고 is the most versatile — use it anywhere. (이)랑 is casual/spoken. 와/과 is formal or written.",
+      "table": {
+        "columns": [
+          "격식도",
+          "조사",
+          "예시",
+          "상황"
+        ],
+        "rows": [
+          [
+            "★ 중립",
+            "하고",
+            "떡볶이하고 김밥",
+            "일상 어디서나"
+          ],
+          [
+            "반말/구어",
+            "(이)랑",
+            "떡볶이랑 김밥",
+            "친구, 구어체"
+          ],
+          [
+            "격식/문어",
+            "와/과",
+            "떡볶이와 김밥",
+            "글, 공식 상황"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "떡볶이 1인분하고 김밥 2인분 주세요.",
+          "en": "One serving of tteokbokki and two servings of kimbap, please.",
+          "highlight": "하고"
+        },
+        {
+          "ko": "김밥이랑 같이 먹으니 환상이야!",
+          "en": "Eating it together with kimbap — it's amazing!",
+          "highlight": "이랑"
+        },
+        {
+          "ko": "친구하고 같이 왔어요.",
+          "en": "I came with my friend.",
+          "highlight": "하고"
+        }
+      ],
+      "fill_blanks": [
+        {
+          "sentence": "김밥___ 떡볶이 먹고 싶어.",
+          "answer": "이랑",
+          "hint": "김밥 끝에 받침 ㅂ → 이랑"
+        },
+        {
+          "sentence": "친구___ 학교에 갔어.",
+          "answer": "랑",
+          "hint": "친구 끝에 받침 없음 → 랑"
+        }
+      ],
+      "tier": "core",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "label": "MOST COMMON",
+          "content": "하고 — 격식/비격식 모두 OK · Works in all situations"
+        },
+        {
+          "type": "green",
+          "label": "CASUAL SPEECH",
+          "content": "(이)랑 — 친구들한테, 반말 상황에서 · Use with friends, in casual speech"
+        },
+        {
+          "type": "amber",
+          "label": "FORMAL/WRITTEN",
+          "content": "와/과 — 글쓰기, 격식 상황 · Essays, formal writing"
+        }
+      ]
+    },
+    {
+      "id": "g_ep04_03",
+      "title": "뭐 / 무엇 — what · 의문사 소개",
+      "title_en": "\"What\" + Quick Guide to Korean Question Words",
+      "icon": "❓",
+      "rule": "뭐 (반말/구어) | 무엇 (격식/문어)",
+      "pattern": "뭐 / 무엇 + 조사 / 어미",
+      "explanation_en": "뭐 is the contracted, casual form of 무엇 (what). In daily conversation, '뭐' is far more common. With particles: 뭘 (=뭐를), 뭐가, 뭐로.",
+      "table": {
+        "columns": [
+          "상황",
+          "뭐 (casual)",
+          "무엇 (formal)"
+        ],
+        "rows": [
+          [
+            "What?",
+            "뭐?",
+            "무엇입니까?"
+          ],
+          [
+            "What is it?",
+            "뭐야?",
+            "무엇입니까?"
+          ],
+          [
+            "Eat what?",
+            "뭐 먹을까?",
+            "무엇을 드시겠어요?"
+          ],
+          [
+            "What's that?",
+            "그게 뭐야?",
+            "그것은 무엇입니까?"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "우리 뭐 먹을까?",
+          "en": "What should we eat?"
+        },
+        {
+          "ko": "이거 뭐야?",
+          "en": "What's this?"
+        },
+        {
+          "ko": "뭘 좋아해?",
+          "en": "What do you like? (뭘 = 뭐 + 를)"
+        }
+      ],
+      "tier": "core",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "label": "의문사 QUESTION WORDS — 미리 보기",
+          "content": "뭐/무엇 what · 어디 where · 언제 when · 누구 who · 왜 why · 어떻게 how · 얼마 how much · 몇 how many",
+          "note": "각 에피소드에서 하나씩 만나게 될 거예요! You'll meet each one in the episodes ahead!"
+        }
+      ]
+    },
+    {
       "id": "g_ep04_01",
       "title": "N + 인분 — Food Portions",
       "title_en": "Counter for food servings",
@@ -331,119 +476,6 @@
           "hint": "사람 수만큼 — 본인 포함"
         }
       ]
-    },
-    {
-      "id": "g_ep04_02",
-      "title": "N(이)랑 — and / with (casual)",
-      "title_en": "Casual conjunction 'and'",
-      "icon": "🤝",
-      "rule": "받침 O → 이랑 | 받침 X → 랑 (반말/구어체)",
-      "pattern": "N(이)랑 + N",
-      "explanation_en": "(이)랑 means 'and' or 'with' — used in casual speech. More formal alternatives: 하고 (neutral), 와/과 (written).",
-      "table": {
-        "columns": [
-          "격식",
-          "조사",
-          "예시"
-        ],
-        "rows": [
-          [
-            "반말/구어",
-            "(이)랑",
-            "김밥이랑 떡볶이"
-          ],
-          [
-            "중립/일반",
-            "하고",
-            "김밥하고 떡볶이"
-          ],
-          [
-            "격식/문어",
-            "와/과",
-            "김밥과 떡볶이"
-          ]
-        ]
-      },
-      "examples": [
-        {
-          "ko": "김밥이랑 라면 먹자.",
-          "en": "Let's eat kimbap and ramen."
-        },
-        {
-          "ko": "친구랑 같이 갔어.",
-          "en": "I went with my friend."
-        },
-        {
-          "ko": "떡볶이랑 어묵 주세요.",
-          "en": "Tteokbokki and fish cake, please."
-        }
-      ],
-      "fill_blanks": [
-        {
-          "sentence": "김밥___ 떡볶이 먹고 싶어.",
-          "answer": "이랑",
-          "hint": "김밥 끝에 받침 ㅂ → 이랑"
-        },
-        {
-          "sentence": "친구___ 학교에 갔어.",
-          "answer": "랑",
-          "hint": "친구 끝에 받침 없음 → 랑"
-        }
-      ],
-      "tier": "core"
-    },
-    {
-      "id": "g_ep04_03",
-      "title": "뭐 vs 무엇 — what",
-      "title_en": "Casual vs Formal 'what'",
-      "icon": "❓",
-      "rule": "뭐 (반말/구어) | 무엇 (격식/문어)",
-      "pattern": "뭐 / 무엇 + 조사 / 어미",
-      "explanation_en": "뭐 is the contracted, casual form of 무엇 (what). In daily conversation, '뭐' is far more common. With particles: 뭘 (=뭐를), 뭐가, 뭐로.",
-      "table": {
-        "columns": [
-          "상황",
-          "뭐 (casual)",
-          "무엇 (formal)"
-        ],
-        "rows": [
-          [
-            "What?",
-            "뭐?",
-            "무엇입니까?"
-          ],
-          [
-            "What is it?",
-            "뭐야?",
-            "무엇입니까?"
-          ],
-          [
-            "Eat what?",
-            "뭐 먹을까?",
-            "무엇을 드시겠어요?"
-          ],
-          [
-            "What's that?",
-            "그게 뭐야?",
-            "그것은 무엇입니까?"
-          ]
-        ]
-      },
-      "examples": [
-        {
-          "ko": "우리 뭐 먹을까?",
-          "en": "What should we eat?"
-        },
-        {
-          "ko": "이거 뭐야?",
-          "en": "What's this?"
-        },
-        {
-          "ko": "뭘 좋아해?",
-          "en": "What do you like? (뭘 = 뭐 + 를)"
-        }
-      ],
-      "tier": "core"
     }
   ],
   "banmal_jondaemal": {

@@ -260,6 +260,66 @@
   ],
   "grammar": [
     {
+      "id": "g10_goisseo",
+      "title": "~고 있어요 vs ~고 계세요",
+      "title_en": "Progressive: casual vs honorific",
+      "icon": "🔄",
+      "rule": "~고 있어요 (보통) · ~고 계세요 (높임) — 지금 하고 있는 중",
+      "pattern": "동사 stem + 고 있어요 / 고 계세요",
+      "explanation_en": "Both mean 'is doing / is in the middle of doing.' Use ~고 있어요 for friends and family (casual), and ~고 계세요 when talking about or to an elder (honorific). The same way you'd use -셨어요 for past, use -고 계세요 for present continuous.",
+      "table": {
+        "columns": [
+          "상황",
+          "~고 있어요 (반말/보통)",
+          "~고 계세요 (높임)"
+        ],
+        "rows": [
+          [
+            "먹다 (eat)",
+            "밥 먹고 있어요.",
+            "식사하고 계세요."
+          ],
+          [
+            "자다 (sleep)",
+            "자고 있어요.",
+            "주무시고 계세요."
+          ],
+          [
+            "오다 (come)",
+            "오고 있어요.",
+            "오고 계세요."
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "덕분에 잘 지내고 있어요.",
+          "en": "I've been doing well. (~고 있어요, about myself)"
+        },
+        {
+          "ko": "선생님은 지금 뭐 하고 계세요?",
+          "en": "What is the teacher doing right now? (~고 계세요, honorific)"
+        },
+        {
+          "ko": "리암은 숙제하고 있어요.",
+          "en": "Liam is doing homework. (~고 있어요, about a peer)"
+        }
+      ],
+      "fill_blanks": [
+        {
+          "sentence": "선생님이 책을 읽고 ___. (honorific)",
+          "answer": "계세요",
+          "hint": "어른(선생님) → -고 계세요"
+        },
+        {
+          "sentence": "리암이 음악을 듣고 ___. (casual)",
+          "answer": "있어요",
+          "hint": "친구(peer) → -고 있어요"
+        }
+      ],
+      "tier": "core"
+    },
+    {
       "id": "g10_welcome",
       "title": "어서 오세요 / 들어 오세요",
       "title_en": "Welcoming Expressions",
@@ -386,65 +446,6 @@
           "sentence": "___ 잘 지내고 있어요. (thanks to you)",
           "answer": "덕분에",
           "hint": "'thanks to you / owing to you' = 덕분에"
-        }
-      ]
-    },
-    {
-      "id": "g10_goisseo",
-      "title": "~고 있어요 vs ~고 계세요",
-      "title_en": "Progressive: casual vs honorific",
-      "icon": "🔄",
-      "rule": "~고 있어요 (보통) · ~고 계세요 (높임) — 지금 하고 있는 중",
-      "pattern": "동사 stem + 고 있어요 / 고 계세요",
-      "explanation_en": "Both mean 'is doing / is in the middle of doing.' Use ~고 있어요 for friends and family (casual), and ~고 계세요 when talking about or to an elder (honorific). The same way you'd use -셨어요 for past, use -고 계세요 for present continuous.",
-      "table": {
-        "columns": [
-          "상황",
-          "~고 있어요 (반말/보통)",
-          "~고 계세요 (높임)"
-        ],
-        "rows": [
-          [
-            "먹다 (eat)",
-            "밥 먹고 있어요.",
-            "식사하고 계세요."
-          ],
-          [
-            "자다 (sleep)",
-            "자고 있어요.",
-            "주무시고 계세요."
-          ],
-          [
-            "오다 (come)",
-            "오고 있어요.",
-            "오고 계세요."
-          ]
-        ]
-      },
-      "examples": [
-        {
-          "ko": "덕분에 잘 지내고 있어요.",
-          "en": "I've been doing well. (~고 있어요, about myself)"
-        },
-        {
-          "ko": "선생님은 지금 뭐 하고 계세요?",
-          "en": "What is the teacher doing right now? (~고 계세요, honorific)"
-        },
-        {
-          "ko": "리암은 숙제하고 있어요.",
-          "en": "Liam is doing homework. (~고 있어요, about a peer)"
-        }
-      ],
-      "fill_blanks": [
-        {
-          "sentence": "선생님이 책을 읽고 ___. (honorific)",
-          "answer": "계세요",
-          "hint": "어른(선생님) → -고 계세요"
-        },
-        {
-          "sentence": "리암이 음악을 듣고 ___. (casual)",
-          "answer": "있어요",
-          "hint": "친구(peer) → -고 있어요"
         }
       ]
     },

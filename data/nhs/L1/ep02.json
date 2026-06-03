@@ -361,53 +361,55 @@
       "tier": "core"
     },
     {
-      "id": "g02_isseoyo",
-      "title": "있어요 / 없어요",
-      "title_en": "있어요 / 없어요 — Existence",
-      "icon": "✅❌",
-      "rule": "N이/가 있어요 · 없어요 → N exists / doesn't exist",
-      "pattern": "[사람/사물]이/가 있어요 ↔ 없어요",
-      "explanation": "있어요 = exists / is there / I have\n없어요 = doesn't exist / not there / I don't have\n가족이나 물건에 모두 사용해요! Use for both people and things!",
+      "id": "g02_anieyo",
+      "tier": "core",
+      "title": "N이/가 아니에요 — It's not ~",
+      "title_en": "이에요/예요의 부정 · Negation of 이에요/예요",
+      "explanation_en": "To say something is NOT something, use 아니에요. The noun before it takes 이/가. It's a completely separate word — not just 이에요 + 'not'!",
+      "rule": "N이에요/예요 (is ~) ↔ N이/가 아니에요 (is NOT ~)",
+      "pattern": "N + 이/가 아니에요",
       "table": {
-        "headers": [
-          "문장",
-          "뜻"
+        "columns": [
+          "받침?",
+          "예시 (이에요)",
+          "예시 (아니에요)"
         ],
         "rows": [
           [
-            "고양이가 있어요.",
-            "There is a cat. / We have a cat."
+            "받침 X (모음 끝)",
+            "언니예요",
+            "언니가 아니에요"
           ],
           [
-            "고양이가 없어요.",
-            "There is no cat. / We don't have a cat."
+            "받침 O (자음 끝)",
+            "동생이에요",
+            "동생이 아니에요"
           ],
           [
-            "동생이 있어요.",
-            "I have a younger sibling."
-          ],
-          [
-            "동생이 없어요.",
-            "I don't have a younger sibling."
+            "받침 X (모음 끝)",
+            "강아지예요",
+            "강아지가 아니에요"
           ]
         ]
       },
       "examples": [
         {
-          "ko": "고양이가 있어요.",
-          "en": "There is a cat."
+          "ko": "아니요, 언니가 아니에요. 동생이에요.",
+          "en": "No, she's not my older sister. She's my younger sister.",
+          "highlight": "아니에요"
         },
         {
-          "ko": "아니요, 고양이가 없어요.",
-          "en": "No, there is no cat."
+          "ko": "이거 고양이가 아니에요. 강아지예요.",
+          "en": "This isn't a cat. It's a dog.",
+          "highlight": "아니에요"
         },
         {
-          "ko": "강아지예요!",
-          "en": "It's a puppy!"
+          "ko": "제 이름이 미래가 아니에요. 리아예요.",
+          "en": "My name isn't Mirae. It's Ria.",
+          "highlight": "아니에요"
         }
       ],
-      "tip": "있어요/없어요는 영어의 'there is/there isn't'와 'I have/don't have' 둘 다 돼요!\nLike 'there is/isn't' AND 'I have/don't have' — context tells you which!",
-      "tier": "core"
+      "tip": "영어는 'is not'처럼 동사에 not을 붙이지만, 한국어는 아예 다른 단어(아니에요)를 써요! · In English you add 'not' to the verb, but Korean uses a completely different word!"
     },
     {
       "id": "g02_question",
