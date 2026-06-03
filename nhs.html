@@ -668,7 +668,7 @@ const EPISODES=[
   {id:'ep02',label:'누구예요?'},
   {id:'ep03',label:'잘 먹겠습니다'},
   {id:'ep04',label:'우리 몇 시에 만날까?'},
-  {id:'ep05',label:'모두 얼마예요?'},
+  {id:'ep05',label:'광장시장에 가요?'},
   {id:'ep06',label:'김밥 주세요'},
   {id:'ep07',label:'한국어 스터디 그룹을 만들어요'},
   {id:'ep08',label:'내 도시락 어디 있어요?'},
@@ -749,7 +749,7 @@ function renderLT(){
     ?`<button class="lt-listen-btn" onclick="speakTTS('${q.audio.replace(/'/g,"\'")}')">🔊 듣기</button><br>`
     :'';
   area.innerHTML=
-    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'한국어 소개':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':'손님 초대'}</div>`
+    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'버스타기':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':'손님 초대'}</div>`
     +`<div class="lt-q-text">${ltIdx+1}. ${q.q}</div>`
     +`<div class="lt-q-en">${q.en}</div>`
     +listenBtn
