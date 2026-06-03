@@ -97,12 +97,6 @@
           "emoji": "🏙️"
         },
         {
-          "korean": "지하철",
-          "romanization": "ji-ha-cheol",
-          "english": "subway",
-          "emoji": "🚇"
-        },
-        {
           "korean": "광화문",
           "romanization": "Gwang-hwa-mun",
           "english": "Gwanghwamun (landmark gate in Seoul)",
@@ -113,6 +107,35 @@
           "romanization": "Gyeong-bok-gung",
           "english": "Gyeongbokgung Palace",
           "emoji": "🏰"
+        }
+      ]
+    },
+    {
+      "category": "🚇 교통수단 Transportation",
+      "items": [
+        {
+          "korean": "지하철",
+          "english": "subway"
+        },
+        {
+          "korean": "버스",
+          "english": "bus"
+        },
+        {
+          "korean": "기차",
+          "english": "train"
+        },
+        {
+          "korean": "자동차",
+          "english": "car"
+        },
+        {
+          "korean": "비행기",
+          "english": "airplane"
+        },
+        {
+          "korean": "배",
+          "english": "boat / ship"
         }
       ]
     },
@@ -544,56 +567,56 @@
     {
       "type": "listen",
       "audio_text": "경복궁도 방문할 거예요.",
-      "q": "방문할 거예요 — 언제 할 일이에요?",
-      "en": "방문할 거예요 — when will this happen?",
       "options": [
         "미래 in the future",
         "과거 in the past",
         "현재 right now",
         "모르다 unknown"
       ],
-      "ans": 0,
-      "exp": "-(으)ㄹ 거예요 = future tense! 방문할 거예요 = going to visit. 미래 계획을 말할 때 써요."
+      "question_ko": "방문할 거예요 — 언제 할 일이에요?",
+      "question_en": "방문할 거예요 — when will this happen?",
+      "answer": 0,
+      "explanation": "-(으)ㄹ 거예요 = future tense! 방문할 거예요 = going to visit. 미래 계획을 말할 때 써요."
     },
     {
       "type": "mc",
-      "q": "\"지하철을 타면 갈 수 있어요\" — 수 있어요 의 뜻은?",
-      "en": "\"갈 수 있어요\" — what does 수 있어요 mean?",
       "options": [
         "can do it 할 수 있다",
         "must do it 해야 한다",
         "did it already 했다",
         "won't do it 안 할 거다"
       ],
-      "ans": 0,
-      "exp": "-(으)ㄹ 수 있어요 = can do something! 능력이나 가능성을 나타내요."
+      "question_ko": "\"지하철을 타면 갈 수 있어요\" — 수 있어요 의 뜻은?",
+      "question_en": "\"갈 수 있어요\" — what does 수 있어요 mean?",
+      "answer": 0,
+      "explanation": "-(으)ㄹ 수 있어요 = can do something! 능력이나 가능성을 나타내요."
     },
     {
       "type": "mc",
-      "q": "\"이순신 장군님___ 동상\" — 빈칸에 알맞은 조사는?",
-      "en": "\"Admiral Yi ___ statue\" — which particle fits?",
       "options": [
         "의 (possessive 's)",
         "을 (object marker)",
         "이 (subject marker)",
         "에서 (location)"
       ],
-      "ans": 0,
-      "exp": "의 = possessive particle, like 's in English. 이순신 장군님의 동상 = Admiral Yi's statue!"
+      "question_ko": "\"이순신 장군님___ 동상\" — 빈칸에 알맞은 조사는?",
+      "question_en": "\"Admiral Yi ___ statue\" — which particle fits?",
+      "answer": 0,
+      "explanation": "의 = possessive particle, like 's in English. 이순신 장군님의 동상 = Admiral Yi's statue!"
     },
     {
       "type": "listen",
       "audio_text": "내일 뭐 할 거예요?",
-      "q": "이 문장의 뜻은?",
-      "en": "What does this sentence mean?",
       "options": [
         "What will you do tomorrow?",
         "What did you do yesterday?",
         "What are you doing now?",
         "What do you want to do?"
       ],
-      "ans": 0,
-      "exp": "내일 = tomorrow. 할 거예요 = will do / going to do. 내일 뭐 할 거예요? = What will you do tomorrow?"
+      "question_ko": "이 문장의 뜻은?",
+      "question_en": "What does this sentence mean?",
+      "answer": 0,
+      "explanation": "내일 = tomorrow. 할 거예요 = will do / going to do. 내일 뭐 할 거예요? = What will you do tomorrow?"
     }
   ],
   "real_life": [
@@ -601,8 +624,12 @@
       "type": "listening",
       "title": "🎧 전화 통화 · Phone call with grandma",
       "audio_text": "할머니, 저 이번 여름에 한국에 갈 거예요! 경복궁도 방문할 거예요.",
-      "script": "할머니, 저 이번 여름에 한국에 갈 거예요! 경복궁도 방문할 거예요.",
-      "script_en": "Grandma, I'm going to Korea this summer! I'm going to visit Gyeongbokgung too.",
+      "script": [
+        {
+          "speaker": "미래",
+          "text": "할머니, 저 이번 여름에 한국에 갈 거예요! 경복궁도 방문할 거예요."
+        }
+      ],
       "questions": [
         {
           "options": [

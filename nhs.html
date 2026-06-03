@@ -1041,11 +1041,19 @@ function vocabCardHtml(v){
 function buildVocab(){
   const isGrouped=DATA.vocab.length>0&&DATA.vocab[0].items;
   if(isGrouped){
-    return DATA.vocab.map(g=>`
-      <div class="vocab-group">
+    return DATA.vocab.map(g=>{
+      const noteHtml=g.note?`<div style="background:var(--teal-50);border-left:4px solid var(--teal);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:11px 15px;margin-bottom:12px;font-size:12.5px;color:var(--warm-900);line-height:1.8">
+        ${g.note.ko?`<div style="font-weight:700;margin-bottom:3px">${esc(g.note.ko)}</div>`:''}
+        ${g.note.en?`<div style="color:var(--warm-600);font-size:12px">${esc(g.note.en)}</div>`:''}
+        ${g.note.examples?`<div style="margin-top:8px">${g.note.examples.map(ex=>`<div style="display:flex;gap:8px;margin-bottom:4px;font-size:12px"><span style="font-weight:700;color:var(--teal);min-width:90px">${esc(ex.ko)}</span><span style="color:var(--warm-500)">${esc(ex.en||'')}</span></div>`).join('')}</div>`:''}
+        ${g.note.ref?`<div style="margin-top:8px;font-size:11.5px;color:var(--teal-md);font-weight:700">👉 ${esc(g.note.ref)}</div>`:''}
+      </div>`:'';
+      return`<div class="vocab-group">
         <div class="vocab-group-title">${esc(g.category)}</div>
+        ${noteHtml}
         <div class="vocab-grid">${g.items.map(v=>vocabCardHtml(v)).join('')}</div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
   return `<div class="vocab-grid">${DATA.vocab.map(v=>vocabCardHtml(v)).join('')}</div>`;
 }
