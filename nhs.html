@@ -663,7 +663,7 @@ let quizMode='mc',quizIdx=0,quizScore=0;
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function escA(s){return s==null?'':String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/[\r\n]+/g,' ');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'},jungmin:{bg:'#A8D8EA',emoji:'👦'},mina:{bg:'#FFB7C5',emoji:'👧'},staff:{bg:'#D4E8D0',emoji:'🎫'}};
-const EPISODES=[
+const L1_EPISODES=[
   {id:'ep01',label:'안녕! 나는 정민이야.'},
   {id:'ep02',label:'누구예요?'},
   {id:'ep03',label:'잘 먹겠습니다'},
@@ -677,13 +677,21 @@ const EPISODES=[
   {id:'ep11',label:'어서 오세요'},
   {id:'ep12',label:'경복궁에 갈 거예요!'}
 ];
+const L2_EPISODES=[
+  {id:'ep01',label:'한국에 도착했어요'}
+];
+const EPISODES=L1_EPISODES; // 하위호환
 
 function buildSidebar(){
-  document.getElementById('ep-list').innerHTML=EPISODES.map((ep,i)=>ep.disabled
+  const mkItem=(ep,i,level)=>ep.disabled
     ?`<div class="ep-item" onclick="alert('준비 중이에요 😊')"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}</div></div>`
-    :`<div class="ep-item${ep.id==='ep03'?' active':''}" id="ep-item-${ep.id}" onclick="loadEp('${ep.id}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div></div>`
-  ).join('')
-  +'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>';
+    :`<div class="ep-item" id="ep-item-${level}-${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div></div>`;
+  document.getElementById('ep-list').innerHTML=
+    '<div class="sidebar-hdr" style="margin-top:0">📺 Level 1</div>'
+    +L1_EPISODES.map((ep,i)=>mkItem(ep,i,'L1')).join('')
+    +'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>'
+    +'<div class="sidebar-hdr" style="margin-top:16px">📺 Level 2</div>'
+    +L2_EPISODES.map((ep,i)=>mkItem(ep,i,'L2')).join('');
 }
 
 // ══════════════════════════════════════════════════════
@@ -816,18 +824,18 @@ function ltRetry(){
   renderLT();
 }
 
-async function loadEp(epId){
+async function loadEp(epId, level='L1'){
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
-  const item=document.getElementById('ep-item-'+epId);
+  const item=document.getElementById(`ep-item-${level}-${epId}`);
   if(item)item.classList.add('active');
   document.getElementById('content-area').innerHTML='<div class="loading">로딩 중…</div>';
-  // Use cache if already loaded; otherwise fetch JSON
-  if(EPISODE_DATA[epId]){
-    DATA=EPISODE_DATA[epId];
+  const cacheKey=`${level}_${epId}`;
+  if(EPISODE_DATA[cacheKey]){
+    DATA=EPISODE_DATA[cacheKey];
   } else {
     try{
-      const res=await fetch(`data/nhs/L1/${epId}.json`);
-      if(res.ok){ DATA=await res.json(); EPISODE_DATA[epId]=DATA; }
+      const res=await fetch(`data/nhs/${level}/${epId}.json`);
+      if(res.ok){ DATA=await res.json(); EPISODE_DATA[cacheKey]=DATA; }
       else DATA=null;
     }catch(e){ DATA=null; }
   }
@@ -1660,7 +1668,7 @@ async function loadEpAndTab(epId, tabName){
 }
 
 function getEpLabel(epId){
-  const ep=EPISODE_DATA[epId];
+  const ep=EPISODE_DATA['L1_'+epId]||EPISODE_DATA['L2_'+epId]||EPISODE_DATA[epId];
   const lvl=ep?ep.level||'':'초급';
   const num=(epId||'').replace('ep','');
   const lvlMap={'초급':'Level 1','중급':'Level 2','고급':'Level 3','기초':'Basics'};
@@ -1677,10 +1685,10 @@ async function openIndex(){
   const body=document.getElementById('idx-body');
   if(body) body.innerHTML='<div style="padding:20px;text-align:center">로딩 중…</div>';
   await Promise.all(EPISODES.map(async ep=>{
-    if(!EPISODE_DATA[ep.id]){
+    if(!EPISODE_DATA['L1_'+ep.id]){
       try{
         const r=await fetch(`data/nhs/L1/${ep.id}.json`);
-        if(r.ok) EPISODE_DATA[ep.id]=await r.json();
+        if(r.ok) EPISODE_DATA['L1_'+ep.id]=await r.json();
       }catch(e){}
     }
   }));
