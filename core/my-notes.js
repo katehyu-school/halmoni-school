@@ -11,8 +11,8 @@
 .nms-btn{padding:6px 14px;background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-300);border-radius:var(--radius-xl);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
 .nms-btn:hover{background:rgba(255,255,255,.32);}
 #nms-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;}
-#nms-overlay.open{display:flex;}
 .nms-modal{background:#fafaf9;border-radius:16px;width:90%;max-width:660px;max-height:88vh;overflow-y:auto;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);}
+#nms-overlay.open{display:flex;}
 .nms-header{background:var(--teal);padding:13px 20px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0;position:sticky;top:0;z-index:10;flex-shrink:0;}
 .nms-close{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin-left:auto;flex-shrink:0;}
 .nms-close:hover{background:rgba(255,255,255,.28);}
@@ -66,20 +66,8 @@
 .nms-setup-title{font-size:1.3rem;font-weight:700;color:var(--teal);margin-bottom:6px;}
 .nms-setup-sub{font-size:13px;color:var(--warm-500);margin-bottom:24px;line-height:1.6;}
 .nms-empty{text-align:center;padding:24px;color:var(--warm-500);font-size:13px;}
-.nms-writing-save-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
-.nms-writing-save-btn{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
-.nms-writing-save-btn:hover{opacity:.85;}
-.nms-writing-gallery{margin-top:16px;}
-.nms-writing-gallery-title{font-size:12px;color:var(--warm-500);font-weight:700;margin-bottom:8px;}
-.nms-writing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
-.nms-writing-thumb{position:relative;border:1.5px solid var(--warm-300);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);}
-.nms-writing-thumb img{width:100%;display:block;}
-.nms-writing-thumb-date{font-size:10px;color:var(--warm-500);text-align:center;padding:4px 6px;background:var(--warm-50);}
-.nms-writing-thumb-del{position:absolute;top:5px;right:5px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--coral);line-height:1;}
-.nms-writing-thumb-del:hover{background:var(--coral);color:#fff;}
 .nms-sec-title{font-size:14px;font-weight:700;color:var(--warm-700);margin-bottom:12px;}
 
-</div>
 `;
   document.head.appendChild(s);
 })();
@@ -93,10 +81,11 @@
 <!-- ═══════════════ NHS MY NOTES OVERLAY ═══════════════ -->
 <div id="nms-overlay" onclick="if(event.target===this)closeNMS()">
 <div class="nms-modal">
+
   <div class="nms-header">
+    <button class="nms-close" onclick="closeNMS()" title="Close">✕</button>
     <span class="nms-hdr-title">📓 My Notes</span>
     <div class="nms-chip" id="nms-profile-chip"></div>
-    <button class="nms-close" onclick="closeNMS()" title="Close">✕</button>
   </div>
 
   <!-- SETUP -->
@@ -128,8 +117,8 @@
     <div class="nms-body">
       <div class="nms-tabs">
         <button class="nms-tab active" id="nms-t-notes" onclick="nmsTab('notes')">📝 My Notes</button>
-        <button class="nms-tab" id="nms-t-write" onclick="nmsTab('write')">✏️ Korean Writing</button>
-        <button class="nms-tab" id="nms-t-deco" onclick="nmsTab('deco')">🎨 My Style</button>
+        <button class="nms-tab" id="nms-t-write" onclick="nmsTab('write')">✏️ 한글 쓰기</button>
+        <button class="nms-tab" id="nms-t-deco" onclick="nmsTab('deco')">🎨 꾸미기</button>
       </div>
 
       <!-- NOTES -->
@@ -177,7 +166,7 @@
       <div id="nms-panel-write" style="display:none">
         <div class="nms-card">
           <div class="nms-sec-title">✏️ Korean Writing Practice</div>
-          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">Write Korean & save your progress! ✨</div>
+          <div style="font-size:12px;color:var(--warm-500);margin-bottom:10px;">Write freely and erase — no saving needed!</div>
           <div class="nms-canvas-wrap">
             <canvas id="nms-canvas"></canvas>
           </div>
@@ -191,19 +180,10 @@
             </div>
             <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 Clear</button>
           </div>
-          <div class="nms-writing-save-row">
-            <button class="nms-writing-save-btn" onclick="nmsSaveWriting()">💾 Save Writing</button>
-            <span id="nms-writing-save-msg" style="font-size:12px;color:var(--teal);display:none;">✓ Saved!</span>
-          </div>
           <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
             <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Word hints — click to see it big ✨</div>
             <div id="nms-hint-label" style="font-size:11px;color:var(--teal-600);font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
-            <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
-          </div>
-          <div class="nms-writing-gallery">
-            <div class="nms-writing-gallery-title">📁 Saved Writings</div>
-            <div id="nms-writing-grid" class="nms-writing-grid"></div>
-            <div id="nms-writing-empty" style="font-size:12px;color:var(--warm-500);text-align:center;padding:12px 0;">No saved writings yet — draw something and hit Save! 🖊</div>
+      <div id="nms-hint-words" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
           </div>
         </div>
       </div>
@@ -277,6 +257,7 @@ function openNMS(){
   document.getElementById('nms-overlay').classList.add('open');
   document.addEventListener('keydown', _nmsEscHandler);
   document.body.style.overflow='hidden';
+  document.body.style.overflow='hidden';
   const profiles=nmsGetJ('nms_profiles');
   nmsCurrent=nmsGet('nms_current');
   if(!profiles.length||!nmsCurrent){ nmsShowSetup(true); }
@@ -286,6 +267,7 @@ function _nmsEscHandler(e){if(e.key==='Escape')closeNMS();}
 function closeNMS(){
   document.getElementById('nms-overlay').classList.remove('open');
   document.removeEventListener('keydown', _nmsEscHandler);
+  document.body.style.overflow='';
   document.body.style.overflow='';
 }
 
@@ -373,7 +355,7 @@ function nmsTab(t){
     document.getElementById('nms-panel-'+x).style.display=x===t?'block':'none';
     document.getElementById('nms-t-'+x).classList.toggle('active',x===t);
   });
-  if(t==='write'){ setTimeout(nmsResizeCanvas,50); nmsRenderHintWords(); nmsRenderWritings(); }
+  if(t==='write'){ setTimeout(nmsResizeCanvas,50); nmsRenderHintWords(); }
   if(t==='deco')  nmsRenderDecoPanel();
 }
 
@@ -505,38 +487,6 @@ function nmsClearCanvas(){
   nmsCtx.fillStyle='#fff';
   nmsCtx.fillRect(0,0,nmsCanvas.width,nmsCanvas.height);
 }
-function nmsSaveWriting(){
-  if(!nmsCanvas)return;
-  const dataUrl=nmsCanvas.toDataURL('image/png');
-  const writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
-  writings.unshift({id:Date.now(),dataUrl,
-    date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})});
-  if(writings.length>20)writings.splice(20);
-  nmsSetJ('nms_'+nmsCurrent+'_writings',writings);
-  const msg=document.getElementById('nms-writing-save-msg');
-  if(msg){msg.style.display='inline';setTimeout(()=>msg.style.display='none',2000);}
-  nmsRenderWritings();
-}
-function nmsRenderWritings(){
-  const writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
-  const grid=document.getElementById('nms-writing-grid');
-  const empty=document.getElementById('nms-writing-empty');
-  if(!grid)return;
-  if(!writings.length){grid.innerHTML='';if(empty)empty.style.display='block';return;}
-  if(empty)empty.style.display='none';
-  grid.innerHTML=writings.map((w,i)=>`
-    <div class="nms-writing-thumb">
-      <img src="${w.dataUrl}" alt="writing ${i+1}">
-      <div class="nms-writing-thumb-date">${w.date}</div>
-      <button class="nms-writing-thumb-del" onclick="nmsDeleteWriting(${w.id})" title="Delete">✕</button>
-    </div>`).join('');
-}
-function nmsDeleteWriting(id){
-  let writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
-  writings=writings.filter(w=>w.id!==id);
-  nmsSetJ('nms_'+nmsCurrent+'_writings',writings);
-  nmsRenderWritings();
-}
 function nmsRenderHintWords(){
   const DEFAULT=['안녕하세요','감사합니다','주세요','있어요','없어요','어디예요','얼마예요','맛있어요','괜찮아요','몰라요','알아요','잘 먹겠습니다'];
   let words=DEFAULT, label='기본 단어';
@@ -581,4 +531,77 @@ function nmsRenderAvatarPicker(cid, selected, onChange){
     `<div class="nms-av-opt${a===selected?' selected':''}" style="font-size:20px;" onclick="nmsPickAvatar('${cid}','${a}',this)">${a}</div>`
   ).join('');
 }
-function nmsPickAvatar(cid,val,
+function nmsPickAvatar(cid,val,el){
+  document.getElementById(cid).querySelectorAll('.nms-av-opt').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  const cb=document.getElementById(cid)._onChange;
+  if(cb) cb(val);
+}
+function nmsRenderColorPicker(cid, selected, onChange){
+  const el=document.getElementById(cid);
+  el.innerHTML=NMS_COLORS.map(c=>
+    `<div class="nms-color-opt${c===selected?' selected':''}" style="background:${c}" onclick="nmsPickColor('${cid}','${c}',this)"></div>`
+  ).join('');
+}
+function nmsPickColor(cid,val,el){
+  document.getElementById(cid).querySelectorAll('.nms-color-opt').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  if(cid==='nms-setup-colors') nmsSetupColor=val;
+  else if(cid==='nms-deco-colors'){
+    nmsDecoColor=val;
+    nmsSet('nms_'+nmsCurrent+'_color',val);
+    nmsUpdateChip();
+  }
+}
+function nmsRenderDecoPanel(){
+  const col=nmsGet('nms_'+nmsCurrent+'_color','#0f7c6e');
+  nmsDecoColor=col;
+  document.getElementById('nms-deco-name').value=nmsCurrent;
+  nmsRenderColorPicker('nms-deco-colors',col,()=>{});
+  nmsRenderAvatarPicker('nms-deco-avs',nmsGet('nms_'+nmsCurrent+'_av','🦊'),v=>{nmsDecoAv=v; nmsSet('nms_'+nmsCurrent+'_av',v); nmsUpdateChip();});
+  nmsRenderBadges();
+}
+function nmsSaveDeco(){
+  const newName=document.getElementById('nms-deco-name').value.trim();
+  if(!newName)return;
+  if(newName!==nmsCurrent){
+    const profiles=nmsGetJ('nms_profiles');
+    const i=profiles.indexOf(nmsCurrent);
+    if(i>-1) profiles[i]=newName;
+    ['_notes','_color','_av'].forEach(k=>{
+      const v=localStorage.getItem('nms_'+nmsCurrent+k);
+      if(v) nmsSet('nms_'+newName+k,v);
+    });
+    nmsSetJ('nms_profiles',profiles);
+    nmsSet('nms_current',newName);
+    nmsCurrent=newName;
+  }
+  nmsUpdateChip();
+  const btn=event.target;
+  btn.textContent='✓ 저장됨';
+  setTimeout(()=>btn.textContent='저장',1500);
+}
+function nmsRenderBadges(){
+  const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
+  const total=notes.length;
+  const tierIdx=Math.min(Math.floor(total/10),NMS_BADGE_TIERS.length-1);
+  const inTier=total%10;
+  const tier=NMS_BADGE_TIERS[tierIdx];
+  const nextTier=NMS_BADGE_TIERS[Math.min(tierIdx+1,NMS_BADGE_TIERS.length-1)];
+  const isLegend=tierIdx===NMS_BADGE_TIERS.length-1;
+  const dots=Array(10).fill(0).map((_,i)=>
+    `<span style="font-size:18px;opacity:${i<inTier?1:.15}">●</span>`
+  ).join('');
+  const hint=isLegend&&inTier===0&&total>0?'👑 Legend! You\'re amazing!'
+    :inTier===0&&total>0?`🎉 Level up! Welcome, ${tier.name}!`
+    :total===0?'Save your first note to earn a badge! ✍️'
+    :`${10-inTier} more notes → ${nextTier.badge} ${nextTier.name}`;
+  document.getElementById('nms-badge-display').innerHTML=
+    `<div style="text-align:center;padding:12px 0;">
+      <div style="font-size:56px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:10px;">${tier.name} · ${total} notes</div>
+      <div style="display:flex;gap:3px;justify-content:center;margin-bottom:8px;">${dots}</div>
+      <div style="font-size:11px;color:var(--warm-500);">${hint}</div>
+    </div>`;
+}
+// ═══════════════════════════════════════════════════════
