@@ -35,13 +35,17 @@
 |------|------|
 | `contents/sejong/` | 세종한국어 성인반 교재 PDF + txt |
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
-| `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) |
-| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~05.json) |
+| `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) — **문법 카드만** JSON, 나머지는 HTML 하드코딩 |
+| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~05.json) — **전체 콘텐츠** JSON |
+| `data/elem/slides/L2_*/` | 초등반 Level 2 슬라이드 이미지 (PNG) |
+| `data/elem/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 (PNG) |
+| `data/elem/TTS/L2_*/` | 초등반 Level 2 TTS 음성 (MP3) |
+| `data/elem/TTS/L3_*/` | 초등반 Level 3 TTS 음성 (MP3) |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
-| `data/nhs/ep01.json` | Hangeul Quest ep01 데이터 (공원 · 첫 만남) |
-| `data/nhs/ep02.json` | Hangeul Quest ep02 데이터 (저녁 식사) |
-| `data/nhs/slides/` | Hangeul Quest 슬라이드 이미지 (PNG) |
-| `data/nhs/TTS/` | Hangeul Quest TTS 음성 파일 (MP3) |
+| `data/nhs/L1/ep0N.json` | Hangeul Quest Level 1 에피소드 (ep01~ep12) |
+| `data/nhs/L1/slides/ep*/` | Hangeul Quest 슬라이드 이미지 (PNG) |
+| `data/nhs/L1/TTS/ep*/` | Hangeul Quest TTS 음성 파일 (MP3) |
+| `data/nhs/ep_TEMPLATE.json` | 새 에피소드 작성용 표준 템플릿 |
 
 > ⚠️ **폴더 명칭 안내**: `level2/`, `level3/` 폴더는 초등반 앱의 레벨을 의미 (과거 `book2/`, `book3/`에서 2025-05-23 변경). 슬라이드/TTS 폴더는 `L2_*`, `L3_*` 접두사 유지.
 > 코드 내부 변수명(`b3*`, `book3-main` 등)은 기술 부채로 남아 있음 — 기능 변경 없이 리네이밍만 필요.
@@ -148,10 +152,15 @@ const urlName   = _hc ? _hc.urlName : null;
 - 듣기 투표 동기화: raised_hands 파싱 → u6GameVotes 업데이트 → 버튼 UI 반영
 - Step 1/2 전진 시 launchConfetti() 호출
 
-### 데이터 분리 아키텍처
-- `data/elem/book2/unit01.json` ~ `unit06.json`
-- `init()`에서 `HalmoniCore.loadUnit(n)` 으로 병렬 로드
-- JSON 구조: `{ unit, title, book, sections: { vocab, grammar, practice } }`
+### 데이터 분리 아키텍처 (중요!)
+- **Level 2**: vocab/scene/practice 콘텐츠는 `korean-app_v2.html`에 **하드코딩** — JSON(`data/elem/level2/`)은 **문법 카드만** 사용
+  - u01~u06: GrammarRenderer가 JSON grammar sections 읽어서 렌더링
+  - u07: 문법 탭 없음 (고유어 숫자 게임 중심) — JSON grammar 비어 있음
+  - u08~u09: 전용 `renderU8Grammar()` / `renderU9Grammar()` 함수로 JSON 렌더링
+- **Level 3**: `data/elem/level3/unit0N.json`에 전체 콘텐츠 (vocab+grammar+practice+real_life)
+  - `B3_INLINE_DATA`에 인라인 백업 있음 (file:// 로컬 호환용)
+  - `_kidsIdxLoad()` — `HalmoniCore.loadUnit(n)` 으로 unit 1~9 병렬 로드 (단어 인덱스용)
+- JSON 구조: `{ unit, title, book, goal, key_points, sections: { vocab, grammar, practice, real_life }, self_check }`
 - unit06.json: `practice.listen_quiz`, `practice.step1_chunks`, `practice.step2_words`
 
 ---
@@ -498,51 +507,31 @@ const urlName   = _hc ? _hc.urlName : null;
 1. **도입부 = 생활 밀착형 에피소드** (Scene-First)
 2. **어휘 + 문법으로 에피소드 해석** — 왜 이 표현이 쓰였는지
 3. **Usage / Real Life에서 또 다른 상황 제시** — 응용 확장
-4. **Quiz는 흥미 유발 요소 추가 예정** (middle~성인 타겟, 현재 미완성)
+4. **문법 tier 시스템**: `core` 🥇(핵심), `preview` 💙(미리보기), `foundation` 🔑(개념 기초), `?`(심화)
 
 ### 최종 목적
 > **Sejong의 모든 장점과 컨텐츠를 nhs에 녹여내면서, 완전히 새로운 개념의 앱을 만든다.**
 
 ---
 
-## 🔜 다음 작업 예정
+## 🔜 다음 작업 예정 (2026-06-03 기준)
 
-### 🎯 [큰 작업] Sejong + nhs 종합 분석 & 최상 모델 설계
-- Sejong과 nhs를 완전히 분석
-- 최상의 모델 설계
-- 분석 중 발견된 오류 수정
-- **Sejong은 가능한 한 건드리지 않음**
-- → 다음 세션 메인 작업
+### Hangeul Quest (nhs.html)
+- **Level 1 완성** ✅ — ep01~ep12 + 마감 테스트 모두 완료
+- **Level 2**: ep13+ 스크립트/슬라이드/TTS 준비되면 시작 — 아직 미정
+- ⚠️ nhs.html 렌더러: mp4 video 필드 지원 추가 필요 (현재 slides만 처리)
+- ⚠️ ep01/ep02 퀴즈 포맷을 ep03+ 스타일로 통일 필요 (미완, 우선순위 낮음)
 
-### 🆕 Ep4 준비 완료 — 작업 대기 (2026-05-18)
-- **장면**: 🏪 포장마차 (Korean street food cart) — 떡볶이 + 김밥 주문/식사 장면
-- **위치**: `C:\Users\kateh\Documents\halmoni-school_standby\nhs\`
-  - slides/ep4/: 포장마차1~6.png (6장)
-  - TTS/ep4/: 11개 mp3 (slide 매핑됨 — slide3, 5에 여러 라인)
-- **스토리**: 들어감 → 주문(떡볶이 1인분 + 김밥 2인분) → 맛있게 먹음 → 계산(15,000원) → 인사하고 나옴
-- **핵심 학습 포인트**:
-  - 주문 표현 (`N인분 + 주세요`)
-  - 단위 (인분, 원)
-  - 음식 vocab (떡볶이, 김밥)
-  - 인사/배웅 (어서 오세요, 안녕히 계세요, 또 놀러 와요)
-  - 가격 (얼마예요, 만오천 원)
-  - 감탄 슬랭 (환상이야)
-- **작업 순서**:
-  1. `cp ep_TEMPLATE.json ep04.json` → 채우기
-  2. slides/TTS 폴더를 standby → working folder로 이동 (PowerShell Copy-Item)
-  3. nhs.html EPISODE_DATA에 ep04 인라인 추가
-  4. 사이드바 메뉴에 ep04 추가
-  5. commit + push
+### Hangeul Quest Kids (korean-app_v2.html)
+- **Level 3 unit 6~9 작성 대기** — 플랜 확정 (아래 참고)
+- **Level 3 unit03 minor 이슈** (낮은 우선순위):
+  - `listen_quiz` 첫 문제 "열쇠가 탁자 위에 있어요" — 스토리에서는 없다고 하므로 혼란 가능
+  - `step2_words` 마지막 "탁자 옆 상자 안에" — 상자가 스토리에 없음
 
-### ⏳ 미처리 수정 사항 (다음 세션 우선)
-1. **Ep1 영상 포맷을 ep2/ep3과 통일** (nhs.html 렌더링 / data)
-2. **Ep1, Ep2 듣기 퀴즈 수정**:
-   - 현재: '듣기' 문제 제시가 [음성] 텍스트에서 반복됨
-   - 변경: ep3과 동일하게 슬라이드 대사 중 한 구절을 쓸 것
-3. **ep03.json ↔ nhs.html 인라인 불일치 해결**:
-   - ep03.json 감탄사: 헐, 헉, 야호, 대박, 너무좋아 (5개)
-   - nhs.html 감탄사: 헐, 야호, 대박, 너무좋아 (4개, 헉 없음)
-   - 어느 게 정답인지 결정 후 동기화 필요
+### ⚠️ 작업 시 주의사항 (반복 발견 패턴)
+- **JSON ↔ 슬라이드/TTS 불일치** 자주 발생 — 새 세션에서 JSON 수정 전 반드시 TTS 파일명 확인
+- **Level 2 JSON title은 HTML과 달랐음** (2026-06-03 수정 완료) — 다음에 Level 2 JSON 열면 title 맞는지 재확인
+- **스크립트 기준**: TTS 파일명이 가장 최신 대본 (PDF보다 우선)
 
 ### ✅ 2026-05-19 완료 작업 (오늘 세션)
 - **브랜드 리네이밍**: K-Quest → **Hangeul Quest** (모든 파일, 로고 포함)
@@ -617,6 +606,33 @@ const urlName   = _hc ? _hc.urlName : null;
 - ✅ fetch-only 아키텍처 — EPISODE_DATA 인라인 불필요
 - ✅ null byte 제거, commit + push 완료
 - ⚠️ 오다/와요/온다 활용: vocab 카드 note로만 처리 (ep12 동사 드릴에서 본격 다룰 예정)
+
+### ✅ 2026-06-03 완료 작업 (HQ Level 1 정리 + HQ Kids 분석)
+
+#### Hangeul Quest (nhs.html + data/nhs/L1/)
+- **ep05 (버스타기/광장시장에 가요?)** 완성 — 슬라이드6, TTS9, 문법4개
+- **동사 어간/어미 `foundation` 개념 카드** ep05에 신설 — 첫 (으)규칙 에피소드에 배치
+- **nhs.html `foundation` tier** 렌더러 추가 (green 🔑 배지)
+- **Level 1 전체 문법 중복/누락 정리**:
+  - ep07 -(으)ㄹ까? 중복 제거 (ep05 core)
+  - ep09 하고 중복 제거 (ep06 core)
+  - ep11 고있어요 → 계세요(경어) 포커스로 재정의
+- **ep01 script slide refs 추가** (null → 0~5 인덱스)
+- **ep03 key_points + self_check 추가** (누락 필드)
+- **L1Q ep05 문제 교체** — 구버전 시장/쇼핑 → 버스/광장시장 내용으로
+- **CLAUDE.md 에피소드 테이블** — 실제 파일(data/nhs/L1/) 기준으로 전면 교체
+
+#### Hangeul Quest Kids (korean-app_v2.html + Level 2/3 JSON)
+- **Level 2 JSON 전면 업데이트** (2026-06-03):
+  - `data/elem/level2/unit01~09.json` title 필드 전부 HTML 실제 제목으로 교체
+  - `unit03.json` 하고 중복 제거 (u02에 이미 핵심)
+- **Level 3 unit03 수정**:
+  - `안+동사` 문법 카드 추가 (마법 열쇠가 안 보여요 — 스토리 핵심 문장)
+  - 쿠션 → 탁자로 dialogue_practice 수정 (슬라이드/TTS 확인 후 발견)
+  - 내가 찾아야 해요! 유지 (실제 수업 소품 기반 스토리 — 슬쩍 지나가는 표현)
+- **Level 3 unit04 수정**:
+  - `~고 싶어요` 문법 카드 추가 (practice에서 이미 쓰이던 패턴)
+- **Level 3 unit 6~9 문법 플랜 확정**
 
 ### ✅ 2026-05-18 완료 작업
 - 새 컴퓨터로 이사 (D:\halmoni-school 백업 → C:\Users\kateh\Desktop\halmoni-school 클론)
