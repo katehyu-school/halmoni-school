@@ -1,0 +1,187 @@
+{
+  "unit": 4,
+  "title": "👨‍👩‍👧 우리 엄마예요!",
+  "book": 1,
+  "goal": {
+    "ko": "가족을 소개할 수 있어요! 🏠",
+    "en": "I can introduce my family!"
+  },
+  "key_points": [
+    "누구예요? = Who is it?",
+    "우리 엄마예요 = It's my mom (우리 = my/our, family)",
+    "동생이에요 = It's my little sibling"
+  ],
+  "sections": {
+    "vocab": {
+      "👨‍👩‍👧 가족 Family": [
+        { "emoji": "👴", "kr": "할아버지", "en": "grandfather", "rom": "ha-ra-beo-ji" },
+        { "emoji": "👵", "kr": "할머니", "en": "grandmother", "rom": "hal-meo-ni" },
+        { "emoji": "👨", "kr": "아빠", "en": "dad/father", "rom": "a-ppa" },
+        { "emoji": "👩", "kr": "엄마", "en": "mom/mother", "rom": "eom-ma" },
+        { "emoji": "🧒", "kr": "나", "en": "me / I", "rom": "na" },
+        { "emoji": "👶", "kr": "동생", "en": "younger sibling", "rom": "dong-saeng" },
+        { "emoji": "👫", "kr": "친구", "en": "friend", "rom": "chin-gu" },
+        { "emoji": "🏠", "kr": "우리", "en": "my/our (family)", "rom": "u-ri" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g04_nugu",
+          "title": "누구예요? — Who is it?",
+          "subtitle": "Asking about people",
+          "pattern": "누구예요? → 우리 N이에요/예요.",
+          "meaning": "Who is that person?",
+          "description": "Use 누구예요? to ask who someone is. When answering about family, use 우리 (my/our) before the family word. It shows the person belongs to your family!",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "❓ 누구예요? = Who is it?",
+              "examples": [
+                "누구예요? → 우리 엄마예요! (It's my mom!)",
+                "누구예요? → 우리 아빠예요! (It's my dad!)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🏠 우리 = My (family/things)",
+              "examples": [
+                "우리 엄마 = my mom",
+                "우리 집 = my house",
+                "우리 학교 = my school",
+                "💡 Korean says '우리' (our) even for one person's family!"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "누구예요? — 우리 할머니예요.", "english": "Who is it? — It's my grandmother.", "highlight": "우리 할머니" },
+            { "korean": "누구예요? — 우리 아빠예요.", "english": "Who is it? — It's my dad.", "highlight": "우리 아빠" },
+            { "korean": "누구예요? — 동생이에요.", "english": "Who is it? — It's my little sibling.", "highlight": "동생이에요" },
+            { "korean": "누구예요? — 친구예요!", "english": "Who is it? — It's my friend!", "highlight": "친구예요" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "📸 가족 사진! — Family photo!",
+          "scene_en": "Looking at a family photo",
+          "lines": [
+            { "speaker": "해리", "color": "blue", "text": "애라야, 이 사람이 누구예요?", "en": "Aera, who is this person?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "우리 엄마예요! 😊", "en": "It's my mom!", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "이 사람은 누구예요?", "en": "Who is this person?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "우리 ___예요!", "en": "It's my grandfather!", "type": "fill", "ans": "할아버지", "opts": ["할아버지", "할머니", "아빠"] }
+          ]
+        },
+        {
+          "scene": "🎮 가족 퀴즈! — Family quiz!",
+          "scene_en": "Family quiz game",
+          "lines": [
+            { "speaker": "마야", "color": "purple", "text": "누구예요? — 👶", "en": "Who is it? — 👶", "type": "given" },
+            { "speaker": "레오", "color": "mint", "text": "___이에요!", "en": "It's the little sibling!", "type": "fill", "ans": "동생", "opts": ["동생", "친구", "나"] },
+            { "speaker": "마야", "color": "purple", "text": "맞아요! 잘했어요! ⭐", "en": "Correct! Well done!", "type": "given" },
+            { "speaker": "마야", "color": "purple", "text": "누구예요? — 👵", "en": "Who is it? — 👵", "type": "given" },
+            { "speaker": "레오", "color": "mint", "text": "우리 ___이에요!", "en": "It's grandma!", "type": "fill", "ans": "할머니", "opts": ["할머니", "엄마", "할아버지"] }
+          ]
+        },
+        {
+          "scene": "👫 친구 소개 — Introducing a friend",
+          "scene_en": "Introducing friends",
+          "lines": [
+            { "speaker": "애라", "color": "coral", "text": "해리야, 이 사람이 누구예요?", "en": "Harry, who is this person?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "우리 아빠예요! 안녕하세요~ 👨", "en": "It's my dad! Hello~", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "안녕하세요! 반가워요.", "en": "Hello! Nice to meet you.", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "애라는 내 ___예요!", "en": "Aera is my friend!", "type": "fill", "ans": "친구", "opts": ["친구", "동생", "할머니"] }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "q": "누구예요? → 우리", "suffix": "예요.", "ans": "엄마", "opts": ["엄마", "아빠", "할머니"], "en": "It's my mom." },
+        { "q": "누구예요? → 우리", "suffix": "이에요.", "ans": "할아버지", "opts": ["할아버지", "아빠", "동생"], "en": "It's my grandfather." },
+        { "q": "누구예요? →", "suffix": "이에요.", "ans": "동생", "opts": ["동생", "친구", "나"], "en": "It's my little sibling." },
+        { "q": "누구예요? →", "suffix": "예요!", "ans": "친구", "opts": ["친구", "동생", "엄마"], "en": "It's my friend!" },
+        { "q": "누구예요? → 우리", "suffix": "예요.", "ans": "할머니", "opts": ["할머니", "엄마", "친구"], "en": "It's my grandmother." }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "누구예요? — 우리 엄마예요.",
+          "correct": 1,
+          "choices": [
+            { "emoji": "👴", "kr": "할아버지", "en": "grandfather" },
+            { "emoji": "👩", "kr": "엄마", "en": "mom" },
+            { "emoji": "👶", "kr": "동생", "en": "little sibling" }
+          ]
+        },
+        {
+          "audio": "누구예요? — 우리 할아버지예요.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "👴", "kr": "할아버지", "en": "grandfather" },
+            { "emoji": "👵", "kr": "할머니", "en": "grandmother" },
+            { "emoji": "👨", "kr": "아빠", "en": "dad" }
+          ]
+        },
+        {
+          "audio": "누구예요? — 동생이에요.",
+          "correct": 2,
+          "choices": [
+            { "emoji": "👩", "kr": "엄마", "en": "mom" },
+            { "emoji": "👫", "kr": "친구", "en": "friend" },
+            { "emoji": "👶", "kr": "동생", "en": "little sibling" }
+          ]
+        }
+      ],
+      "mini_game": {
+        "type": "memory",
+        "title": "🎮 가족 메모리 게임!",
+        "instruction": "뒤집어서 같은 카드를 찾아요! Flip cards and find matching pairs! 🧩",
+        "pairs": [
+          { "kr": "할아버지", "emoji": "👴", "en": "grandfather" },
+          { "kr": "할머니", "emoji": "👵", "en": "grandmother" },
+          { "kr": "아빠", "emoji": "👨", "en": "dad" },
+          { "kr": "엄마", "emoji": "👩", "en": "mom" },
+          { "kr": "동생", "emoji": "👶", "en": "sibling" },
+          { "kr": "친구", "emoji": "👫", "en": "friend" }
+        ]
+      }
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 — Real Life",
+      "subtitle": "가족 사진을 보면서 이야기해요!",
+      "dialogues": [
+        {
+          "title": "📸 대화 1 — 가족 앨범",
+          "title_en": "Family album",
+          "bg": "#FFF3E0",
+          "hdr": "#E65100",
+          "lines": [
+            { "role": "A", "color": "#FFA726", "kr": "이게 누구예요?", "en": "Who is this?" },
+            { "role": "B", "color": "#E65100", "kr": "우리 할머니예요. 한국에 계세요.", "en": "It's my grandma. She's in Korea." },
+            { "role": "A", "color": "#FFA726", "kr": "할머니가 보고 싶어요?", "en": "Do you miss your grandma?" },
+            { "role": "B", "color": "#E65100", "kr": "네, 많이요! 빨리 보고 싶어요. 😊", "en": "Yes, a lot! I want to see her soon." }
+          ],
+          "summary": { "kr": "우리 할머니 — '우리'를 써서 내 가족을 소개해요!", "en": "우리 할머니 — use '우리' to introduce your family!", "highlight": "우리 할머니" }
+        },
+        {
+          "title": "🏠 대화 2 — 친구 집 방문",
+          "title_en": "Visiting a friend's house",
+          "bg": "#E8EAF6",
+          "hdr": "#3949AB",
+          "lines": [
+            { "role": "A", "color": "#7986CB", "kr": "안녕하세요! 저는 해리예요.", "en": "Hello! My name is Harry." },
+            { "role": "B", "color": "#3949AB", "kr": "어서 오세요! 우리 딸 친구예요?", "en": "Welcome! Are you my daughter's friend?" },
+            { "role": "A", "color": "#7986CB", "kr": "네, 애라 친구예요! 😊", "en": "Yes, I'm Aera's friend!" }
+          ],
+          "summary": { "kr": "친구 집에 가면 어른께 꼭 인사해요!", "en": "Always greet adults when visiting a friend's home!", "highlight": "안녕하세요" }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "'누구예요?'로 사람을 물어볼 수 있어요.", "en": "I can ask about people with 누구예요?" },
+    { "ko": "'우리 엄마예요' 처럼 가족을 소개할 수 있어요.", "en": "I can introduce family with 우리 ___예요." },
+    { "ko": "가족 이름을 6개 말할 수 있어요.", "en": "I can name 6 family members." },
+    { "ko": "한국어에서 '우리 엄마' = 'my mom'인 것을 알아요.", "en": "I know 우리 엄마 means 'my mom' in Korean." }
+  ]
+}

@@ -1373,7 +1373,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <nav class="top-nav">
   <div class="top-nav-brand" onclick="showTOC()">🎮 Hangeul Quest Kids</div>
   <div class="book-tabs" id="book-tabs-wrap">
-    <button class="book-tab locked">Level 1</button>
+    <button class="book-tab" onclick="selectBook(1)">Level 1</button>
     <button class="book-tab active" onclick="selectBook(2)">Level 2</button>
     <button class="book-tab" onclick="selectBook(3)">Level 3</button>
     <button class="book-tab locked">Level 4</button>
@@ -1481,7 +1481,61 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
 </nav>
 <!-- ══════ Book 3 사이드바 ══════ -->
-<nav class="sidebar" id="book3-sidebar" style="display:none;">
+<nav class="sidebar" 
+<!-- ══════ LEVEL 1 SIDEBAR ══════ -->
+<div id="book1-sidebar" style="display:none;">
+  <div class="sidebar-title">Level 1</div>
+  <div class="lesson-item active" id="b1-lesson-0" onclick="switchBook1Unit(0)">
+    <span class="lesson-num">예비</span>
+    <span class="lesson-title-text">가나다라 🔤</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-1" onclick="switchBook1Unit(1)">
+    <span class="lesson-num">1과</span>
+    <span class="lesson-title-text">안녕하세요?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-2" onclick="switchBook1Unit(2)">
+    <span class="lesson-num">2과</span>
+    <span class="lesson-title-text">이게 뭐예요?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-3" onclick="switchBook1Unit(3)">
+    <span class="lesson-num">3과</span>
+    <span class="lesson-title-text">네, 빵이에요!</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-4" onclick="switchBook1Unit(4)">
+    <span class="lesson-num">4과</span>
+    <span class="lesson-title-text">우리 엄마예요!</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-5" onclick="switchBook1Unit(5)">
+    <span class="lesson-num">5과</span>
+    <span class="lesson-title-text">집이 어디예요?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-6" onclick="switchBook1Unit(6)">
+    <span class="lesson-num">6과</span>
+    <span class="lesson-title-text">학교에 가요</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-7" onclick="switchBook1Unit(7)">
+    <span class="lesson-num">7과</span>
+    <span class="lesson-title-text">방에 침대가 있어요</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-8" onclick="switchBook1Unit(8)">
+    <span class="lesson-num">8과</span>
+    <span class="lesson-title-text">그림을 그려요</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-9" onclick="switchBook1Unit(9)">
+    <span class="lesson-num">9과</span>
+    <span class="lesson-title-text">사과를 좋아해요</span>
+  </div>
+</div>
+
+<!-- ══════ LEVEL 1 MAIN ══════ -->
+<div id="book1-main" style="display:none;max-width:960px;margin:0 auto;padding:28px 20px 60px;">
+  <div id="b1-unit-container">
+    <div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>
+  </div>
+</div>
+
+
+<div id="book3-sidebar" style="display:none;">
   <div class="sidebar-title">Level 3</div>
   <div class="lesson-item active" id="b3-lesson-1" onclick="switchBook3Unit(1)">
     <span class="lesson-num">1과</span>
@@ -3424,7 +3478,20 @@ function selectBook(n) {
   const tocScr   = document.getElementById('toc-screen');
   const sidebar3 = document.getElementById('book3-sidebar');
   const main3    = document.getElementById('book3-main');
-  if (n === 2) {
+  const sidebar1 = document.getElementById('book1-sidebar');
+  const main1    = document.getElementById('book1-main');
+  if (n === 1) {
+    if (sidebar1) sidebar1.style.display = '';
+    if (main1)    main1.style.display    = '';
+    if (sidebar2) sidebar2.style.display = 'none';
+    if (main2)    main2.style.display    = 'none';
+    if (tocScr)   tocScr.style.display   = 'none';
+    if (sidebar3) sidebar3.style.display = 'none';
+    if (main3)    main3.style.display    = 'none';
+    switchBook1Unit(b1CurrentUnit !== undefined ? b1CurrentUnit : 0);
+  } else if (n === 2) {
+    if (sidebar1) sidebar1.style.display = 'none';
+    if (main1)    main1.style.display    = 'none';
     if (sidebar2) sidebar2.style.display = '';
     if (main2)    main2.style.display    = '';
     if (tocScr)   tocScr.style.display   = '';
@@ -3432,6 +3499,8 @@ function selectBook(n) {
     if (main3)    main3.style.display    = 'none';
     switchUnit(1);
   } else if (n === 3) {
+    if (sidebar1) sidebar1.style.display = 'none';
+    if (main1)    main1.style.display    = 'none';
     if (sidebar2) sidebar2.style.display = 'none';
     if (main2)    main2.style.display    = 'none';
     if (tocScr)   tocScr.style.display   = 'none';
@@ -9073,6 +9142,807 @@ if(document.readyState !== 'loading'){
   <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
 </footer>
 
-<script src="core/my-space.js"></script>
+<script src="core/my-space.js">
+// ══════════════════════════════════════════════════════════════
+// BOOK 1 — Level 1 렌더러 (한글학교 한국어1 기반, 5~6세용)
+// ══════════════════════════════════════════════════════════════
+let b1CurrentUnit = 0;
+let b1DataCache   = {};
+let b1FillAnswered = {};
+let b1ListenAnswered = {};
+let b1DlgAnswered = {};
+let b1PrereqTab = 'vowels';
+
+async function loadBook1Unit(n) {
+  if (b1DataCache[n]) return b1DataCache[n];
+  const path = (typeof HalmoniCore !== 'undefined')
+    ? HalmoniCore.dataPath('elem/level1/unit0'+n+'.json')
+    : 'data/elem/level1/unit0'+n+'.json';
+  const res  = await fetch(path);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  b1DataCache[n] = data;
+  return data;
+}
+
+async function switchBook1Unit(n) {
+  const ids = [0,1,2,3,4,5,6,7,8,9];
+  ids.forEach(i => {
+    const el = document.getElementById('b1-lesson-'+i);
+    if (el) el.classList.toggle('active', i===n);
+  });
+  b1CurrentUnit = n;
+  b1FillAnswered = {};
+  b1ListenAnswered = {};
+  b1DlgAnswered = {};
+  const container = document.getElementById('b1-unit-container');
+  container.innerHTML = '<div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>';
+  try {
+    const data = await loadBook1Unit(n);
+    if (data.type === 'prereq') renderB1Prereq(data);
+    else renderBook1Unit(data);
+  } catch(e) {
+    container.innerHTML = '<div style="text-align:center;padding:60px;color:#f88;font-family:Jua,sans-serif;">⚠️ 데이터 로드 실패: '+e.message+'</div>';
+    console.error(e);
+  }
+}
+
+// ── Regular units (1-9) ────────────────────────────────────────────────
+function renderBook1Unit(data) {
+  const container = document.getElementById('b1-unit-container');
+  const goal      = data.goal || {};
+  const sections  = data.sections || {};
+  const selfCheck = data.self_check || [];
+  b1FillAnswered = {}; b1ListenAnswered = {}; b1DlgAnswered = {};
+
+  const scTab = selfCheck.length
+    ? '<button class="snav-btn" onclick="b1SwitchTab(\'selfcheck\')">✅ 자기점검</button>' : '';
+  const scDiv = selfCheck.length
+    ? '<div class="section" id="b1-tab-selfcheck">'+renderB1SelfCheck(selfCheck, goal)+'</div>' : '';
+
+  container.innerHTML =
+    '<div class="unit active">' +
+    '<div class="unit-heading"><span class="unit-num">'+data.unit+'과</span><span class="unit-title">'+(data.title||'')+'</span></div>' +
+    (goal.en ? '<div class="b3-goal-badge">🎯 '+goal.en+'</div>' : '') +
+    '<nav class="section-nav" id="b1-snav">' +
+      '<button class="snav-btn active" onclick="b1SwitchTab(\'vocab\')">📕 새단어 <span class="snav-en">Vocab</span></button>' +
+      '<button class="snav-btn" onclick="b1SwitchTab(\'grammar\')">📌 문법 <span class="snav-en">Grammar</span></button>' +
+      '<button class="snav-btn" onclick="b1SwitchTab(\'practice\')">🎮 연습 <span class="snav-en">Practice</span></button>' +
+      (sections.real_life ? '<button class="snav-btn" onclick="b1SwitchTab(\'reallife\')">🌍 실생활 <span class="snav-en">Real Life</span></button>' : '') +
+      scTab +
+    '</nav>' +
+    '<div class="section active" id="b1-tab-vocab">'   + renderB1Vocab(sections.vocab)     + '</div>' +
+    '<div class="section" id="b1-tab-grammar">'        + renderB1Grammar(sections.grammar)  + '</div>' +
+    '<div class="section" id="b1-tab-practice">'       + renderB1Practice(sections.practice)+ '</div>' +
+    (sections.real_life ? '<div class="section" id="b1-tab-reallife">'+renderB1RealLife(sections.real_life)+'</div>' : '') +
+    scDiv +
+    '</div>';
+}
+
+function b1SwitchTab(name) {
+  document.querySelectorAll('#b1-snav .snav-btn').forEach((btn,i) => {
+    const tabs = ['vocab','grammar','practice','reallife','selfcheck'];
+    btn.classList.toggle('active', tabs[i] === name);
+  });
+  ['vocab','grammar','practice','reallife','selfcheck'].forEach(t => {
+    const el = document.getElementById('b1-tab-'+t);
+    if (el) el.classList.toggle('active', t === name);
+  });
+}
+
+// ── Vocab ──────────────────────────────────────────────────────────────
+function renderB1Vocab(vocab) {
+  if (!vocab) return '<p style="color:#aaa;padding:20px">어휘 준비 중...</p>';
+  let html = '<div class="b3-vocab-wrap">';
+  for (const [cat, items] of Object.entries(vocab)) {
+    html += '<div class="b3-vocab-cat"><div class="b3-vocab-cat-label">'+cat+'</div><div class="b3-vocab-grid">';
+    items.forEach(item => {
+      html += '<div class="b3-vocab-card" onclick="speakKorean(\''+item.kr+'\')">' +
+        '<div class="b3-vocab-emoji">'+item.emoji+'</div>' +
+        '<div class="b3-vocab-kr">'+item.kr+'</div>' +
+        '<div class="b3-vocab-en">'+item.en+'</div>' +
+        (item.rom ? '<div class="b3-vocab-rom" style="font-size:0.7rem;color:#aaa;">'+item.rom+'</div>' : '') +
+        '<div class="b3-vocab-spk" style="font-size:1.1rem;opacity:0.5;cursor:pointer">🔊</div>' +
+        '</div>';
+    });
+    html += '</div></div>';
+  }
+  return html + '</div>';
+}
+
+// ── Grammar (reuses b3 patterns) ───────────────────────────────────────
+function renderB1Grammar(grammar) {
+  return renderB3Grammar(grammar);
+}
+
+// ── Practice ──────────────────────────────────────────────────────────
+function renderB1Practice(practice) {
+  if (!practice) return '<p style="color:#aaa;padding:20px">연습 준비 중...</p>';
+  const dlg    = practice.dialogue_practice || [];
+  const fill   = practice.fill_items || [];
+  const listen = practice.listen_quiz || [];
+  const game   = practice.mini_game || null;
+
+  let html = '<div>';
+  // sub-nav
+  const hasDlg    = dlg.length > 0;
+  const hasFill   = fill.length > 0;
+  const hasListen = listen.length > 0;
+  const hasGame   = !!game;
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">';
+  if (hasDlg)    html += '<button class="b3-sub-btn active"   id="b1p-btn-dlg"    onclick="b1PSub(\'dlg\')"   >🎭 대화</button>';
+  if (hasFill)   html += '<button class="b3-sub-btn'+(hasDlg?'':' active')+'" id="b1p-btn-fill"   onclick="b1PSub(\'fill\')"  >✏️ 빈칸</button>';
+  if (hasListen) html += '<button class="b3-sub-btn" id="b1p-btn-listen" onclick="b1PSub(\'listen\')">🔊 듣기</button>';
+  if (hasGame)   html += '<button class="b3-sub-btn" id="b1p-btn-game"   onclick="b1PSub(\'game\')"  >🎮 게임</button>';
+  html += '</div>';
+  if (hasDlg)    html += '<div id="b1p-dlg"    class="b1p-sub active" >' + renderB1Dialogue(dlg, fill)  + '</div>';
+  if (hasFill)   html += '<div id="b1p-fill"   class="b1p-sub'+(hasDlg?'':' active')+'">' + renderB1Fill(fill)    + '</div>';
+  if (hasListen) html += '<div id="b1p-listen" class="b1p-sub">' + renderB1Listen(listen) + '</div>';
+  if (hasGame)   html += '<div id="b1p-game"   class="b1p-sub">' + renderB1MiniGame(game) + '</div>';
+  html += '</div>';
+  return html;
+}
+
+function b1PSub(name) {
+  ['dlg','fill','listen','game'].forEach(k => {
+    const btn = document.getElementById('b1p-btn-'+k);
+    const div = document.getElementById('b1p-'+k);
+    if (btn) btn.classList.toggle('active', k===name);
+    if (div) div.classList.toggle('active', k===name);
+  });
+}
+
+// ── Dialogue (same logic as b3) ───────────────────────────────────────
+function renderB1Dialogue(dlg) {
+  let html = '';
+  dlg.forEach((scene, si) => {
+    html += '<div class="b3-scene-card" style="margin-bottom:22px;">' +
+      '<div class="b3-scene-label">'+scene.scene+'</div>' +
+      '<div class="b3-scene-en" style="font-size:0.78rem;color:#888;margin-bottom:10px;">'+scene.scene_en+'</div>';
+    scene.lines.forEach((line, li) => {
+      const key = si+'-'+li;
+      if (line.type === 'given') {
+        html += '<div class="b3-dlg-row"><span class="b3-dlg-spk" style="color:var(--'+line.color+',#555)">'+line.speaker+'</span>' +
+          '<span class="b3-dlg-text" onclick="speakKorean(\''+line.text.replace(/'/g,"\\'")+'\')" title="🔊 듣기">'+line.text+'</span>' +
+          '<span class="b3-dlg-en">'+line.en+'</span></div>';
+      } else {
+        const answered = b1DlgAnswered[key];
+        if (answered) {
+          html += '<div class="b3-dlg-row"><span class="b3-dlg-spk" style="color:var(--'+line.color+',#555)">'+line.speaker+'</span>' +
+            '<span class="b3-dlg-text" style="background:#e8f5e9;border:2px solid #66bb6a">✅ '+line.ans+'</span></div>';
+        } else {
+          html += '<div class="b3-dlg-row" id="b1dlg-'+key+'"><span class="b3-dlg-spk" style="color:var(--'+line.color+',#555)">'+line.speaker+'</span>' +
+            '<div style="display:flex;gap:6px;flex-wrap:wrap;">';
+          (line.opts||[]).forEach(opt => {
+            html += '<button class="b3-fill-opt" onclick="b1DlgPick(\''+key+'\',\''+opt+'\',\''+line.ans+'\',this)">'+opt+'</button>';
+          });
+          html += '<span class="b3-dlg-en" style="width:100%;margin-top:4px;">'+line.en+'</span></div></div>';
+        }
+      }
+    });
+    html += '</div>';
+  });
+  return html;
+}
+
+function b1DlgPick(key, opt, ans, btn) {
+  if (b1DlgAnswered[key]) return;
+  if (opt === ans) {
+    b1DlgAnswered[key] = true;
+    const row = document.getElementById('b1dlg-'+key);
+    if (row) {
+      const spk = row.querySelector('.b3-dlg-spk');
+      row.innerHTML = (spk ? spk.outerHTML : '') +
+        '<span class="b3-dlg-text" style="background:#e8f5e9;border:2px solid #66bb6a">✅ '+ans+'</span>';
+    }
+    speakKorean(ans);
+  } else {
+    btn.style.background='#ffebee'; btn.style.borderColor='#ef9a9a';
+    setTimeout(()=>{ btn.style.background=''; btn.style.borderColor=''; },700);
+  }
+}
+
+// ── Fill-in ────────────────────────────────────────────────────────────
+function renderB1Fill(items) {
+  let html = '<div class="b3-fill-wrap">';
+  items.forEach((item, i) => {
+    const answered = b1FillAnswered[i];
+    html += '<div class="b3-fill-item" id="b1fill-'+i+'">' +
+      '<div class="b3-fill-q"><span class="b3-fill-prefix">'+item.q+'</span>' +
+      (answered
+        ? '<span class="b3-fill-blank answered">'+item.ans+'</span>'
+        : '<span class="b3-fill-blank" id="b1fb-'+i+'">___</span>') +
+      '<span class="b3-fill-suffix">'+item.suffix+'</span></div>' +
+      '<div class="b3-fill-en" style="font-size:0.8rem;color:#888;margin-bottom:6px;">'+item.en+'</div>';
+    if (!answered) {
+      html += '<div class="b3-fill-opts">';
+      (item.opts||[]).forEach(opt => {
+        html += '<button class="b3-fill-opt" onclick="b1FillPick('+i+',\''+opt+'\',\''+item.ans+'\',this)">'+opt+'</button>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  return html + '</div>';
+}
+
+function b1FillPick(i, opt, ans, btn) {
+  if (b1FillAnswered[i]) return;
+  if (opt === ans) {
+    b1FillAnswered[i] = true;
+    const blank = document.getElementById('b1fb-'+i);
+    if (blank) { blank.textContent = ans; blank.classList.add('answered'); }
+    const wrap = document.getElementById('b1fill-'+i);
+    if (wrap) { const opts = wrap.querySelector('.b3-fill-opts'); if(opts) opts.remove(); }
+    speakKorean(ans);
+  } else {
+    btn.style.background='#ffebee'; btn.style.borderColor='#ef9a9a';
+    setTimeout(()=>{ btn.style.background=''; btn.style.borderColor=''; },700);
+  }
+}
+
+// ── Listen quiz ───────────────────────────────────────────────────────
+function renderB1Listen(items) {
+  if (!items.length) return '';
+  const i = 0;
+  return renderB1ListenQ(items, i);
+}
+
+function renderB1ListenQ(items, idx) {
+  const item = items[idx];
+  if (!item) return '<div style="text-align:center;padding:30px;font-size:1.1rem;color:#66bb6a;">🎉 다 했어요! All done!</div>';
+  let html = '<div id="b1listen-wrap">' +
+    '<div style="text-align:center;font-size:0.85rem;color:#888;margin-bottom:8px;">'+(idx+1)+' / '+items.length+'</div>' +
+    '<div style="text-align:center;margin-bottom:16px;">' +
+    '<button onclick="speakKorean(\''+item.audio.replace(/'/g,"\\'")+'\')" style="font-size:2rem;background:none;border:none;cursor:pointer;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15))">🔊</button>' +
+    '<div style="font-size:0.85rem;color:#999;margin-top:4px;">눌러서 들어봐요!</div></div>' +
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto;">';
+  item.choices.forEach((ch, ci) => {
+    html += '<button class="b1-listen-opt" onclick="b1ListenPick('+JSON.stringify(items)+','+idx+','+ci+','+item.correct+',this)" ' +
+      'style="padding:14px 8px;border:2px solid #ddd;border-radius:12px;background:#fff;cursor:pointer;font-family:Jua,sans-serif;transition:all 0.2s">' +
+      '<div style="font-size:1.6rem">'+ch.emoji+'</div>' +
+      '<div style="font-size:0.9rem;font-weight:700;color:#333">'+ch.kr+'</div>' +
+      '<div style="font-size:0.72rem;color:#888">'+ch.en+'</div></button>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function b1ListenPick(items, idx, chosen, correct, btn) {
+  const wrap = document.getElementById('b1listen-wrap');
+  if (!wrap) return;
+  const allBtns = wrap.querySelectorAll('.b1-listen-opt');
+  allBtns.forEach((b,bi) => {
+    b.disabled = true;
+    if (bi === correct) b.style.cssText += 'border-color:#66bb6a;background:#e8f5e9;';
+    if (bi === chosen && chosen !== correct) b.style.cssText += 'border-color:#ef9a9a;background:#ffebee;';
+  });
+  speakKorean(items[idx].audio);
+  setTimeout(() => {
+    const next = idx + 1;
+    if (wrap) wrap.outerHTML = renderB1ListenQ(items, next);
+    // re-render since we replaced outerHTML
+    const container = document.getElementById('b1p-listen');
+    if (container && next < items.length) container.innerHTML = renderB1ListenQ(items, next);
+    else if (container) container.innerHTML = '<div style="text-align:center;padding:30px;font-size:1.2rem;color:#66bb6a;">🎉 다 했어요! All done! ⭐</div>';
+  }, 1200);
+}
+
+// ── Mini Game ─────────────────────────────────────────────────────────
+function renderB1MiniGame(game) {
+  if (!game) return '';
+  let html = '<div style="text-align:center;padding:10px 0 18px;">' +
+    '<div style="font-size:1.2rem;font-weight:700;font-family:Jua,sans-serif;color:#5c6bc0;margin-bottom:6px;">'+game.title+'</div>' +
+    '<div style="font-size:0.85rem;color:#888;margin-bottom:18px;">'+game.instruction+'</div>';
+
+  if (game.type === 'match') {
+    game.pairs.forEach((pair, pi) => {
+      html += '<div style="background:#f8f9ff;border-radius:14px;padding:14px 18px;margin-bottom:12px;text-align:left;">' +
+        '<div style="font-size:0.95rem;font-weight:700;color:#333;margin-bottom:8px;">'+pair.situation+'</div>' +
+        '<div style="font-size:0.78rem;color:#aaa;margin-bottom:8px;">'+pair.situation_en+'</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+      const opts = [pair.answer, ...pair.distractors].sort(() => Math.random()-0.5);
+      opts.forEach(opt => {
+        html += '<button onclick="b1MatchPick(this,\''+opt+'\',\''+pair.answer+'\')" ' +
+          'style="padding:8px 14px;border:2px solid #c5cae9;border-radius:10px;background:#fff;cursor:pointer;font-family:Jua,sans-serif;font-size:0.9rem">'+opt+'</button>';
+      });
+      html += '</div></div>';
+    });
+  } else if (game.type === 'yesno') {
+    html += renderB1YesNoGame(game.rounds, 0);
+  } else if (game.type === 'memory') {
+    html += renderB1MemoryGame(game.pairs);
+  } else if (game.type === 'tap') {
+    html += renderB1TapGame(game.rounds, 0);
+  } else if (game.type === 'map') {
+    html += renderB1MapGame(game.locations);
+  }
+  html += '</div>';
+  return html;
+}
+
+function b1MatchPick(btn, opt, ans) {
+  const row = btn.closest('div[style*="background:#f8f9ff"]');
+  if (!row || row.dataset.done) return;
+  if (opt === ans) {
+    btn.style.cssText += 'border-color:#66bb6a;background:#e8f5e9;color:#2e7d32;font-weight:700;';
+    row.dataset.done = '1';
+    row.style.opacity = '0.7';
+    speakKorean(ans);
+  } else {
+    btn.style.cssText += 'border-color:#ef9a9a;background:#ffebee;';
+    setTimeout(()=>{ btn.style.borderColor='#c5cae9'; btn.style.background='#fff'; },700);
+  }
+}
+
+function renderB1YesNoGame(rounds, idx) {
+  if (idx >= rounds.length) return '<div style="text-align:center;padding:30px;font-size:1.3rem;color:#66bb6a;">🎉 완료! Finished!</div>';
+  const r = rounds[idx];
+  return '<div id="b1yesno-wrap">' +
+    '<div style="font-size:0.85rem;color:#888;margin-bottom:6px;">'+(idx+1)+' / '+rounds.length+'</div>' +
+    '<div style="font-size:4rem;margin:10px 0">'+r.image_emoji+'</div>' +
+    '<div style="font-size:1.1rem;font-weight:700;color:#333;margin-bottom:18px;">'+r.question+'</div>' +
+    '<div style="display:flex;gap:16px;justify-content:center;">' +
+    '<button onclick="b1YesNoPick('+JSON.stringify(rounds)+','+idx+',true,'+r.answer+',this)" ' +
+      'style="padding:14px 28px;font-size:1.2rem;border:3px solid #66bb6a;border-radius:14px;background:#e8f5e9;cursor:pointer;font-family:Jua,sans-serif;font-weight:700">✅ 네</button>' +
+    '<button onclick="b1YesNoPick('+JSON.stringify(rounds)+','+idx+',false,'+r.answer+',this)" ' +
+      'style="padding:14px 28px;font-size:1.2rem;border:3px solid #ef9a9a;border-radius:14px;background:#ffebee;cursor:pointer;font-family:Jua,sans-serif;font-weight:700">❌ 아니요</button>' +
+    '</div></div>';
+}
+
+function b1YesNoPick(rounds, idx, chose, ans, btn) {
+  const wrap = document.getElementById('b1yesno-wrap');
+  if (!wrap) return;
+  wrap.querySelectorAll('button').forEach(b => b.disabled = true);
+  const r = rounds[idx];
+  if (chose === r.answer) {
+    btn.style.cssText += 'transform:scale(1.15);box-shadow:0 4px 16px rgba(102,187,106,0.4)';
+    speakKorean(chose ? '네' : '아니요');
+  } else {
+    btn.style.opacity = '0.4';
+    if (r.real) { wrap.innerHTML += '<div style="margin-top:10px;font-size:0.95rem;color:#f57c00">→ '+r.real+'</div>'; }
+  }
+  setTimeout(() => {
+    const container = document.getElementById('b1p-game');
+    if (container) container.innerHTML = '<div style="text-align:center;padding:10px 0 18px;"><div style="font-size:1.2rem;font-weight:700;font-family:Jua,sans-serif;color:#5c6bc0;margin-bottom:18px;">'+rounds[0]&&'🎮 네? 아니요? 빨리빨리!'+'</div>'+renderB1YesNoGame(rounds, idx+1)+'</div>';
+  }, 1000);
+}
+
+function renderB1MemoryGame(pairs) {
+  const cards = [];
+  pairs.forEach(p => {
+    cards.push({id: p.kr, type:'emoji', val: p.emoji, label: p.kr, en: p.en});
+    cards.push({id: p.kr, type:'text',  val: p.kr,    label: p.emoji, en: p.en});
+  });
+  cards.sort(()=>Math.random()-0.5);
+  let html = '<div id="b1-memory-board" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:480px;margin:0 auto;" data-flipped="" data-matched="" data-lock="0">';
+  cards.forEach((card, ci) => {
+    html += '<div class="b1-mem-card" data-id="'+card.id+'" data-ci="'+ci+'" ' +
+      'onclick="b1MemFlip(this,\''+card.id+'\',\''+card.val+'\',\''+card.en+'\')" ' +
+      'style="aspect-ratio:1;border:2px solid #c5cae9;border-radius:14px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-family:Jua,sans-serif;color:#fff;background:#e8eaf6;transition:all 0.25s;user-select:none;">?</div>';
+  });
+  html += '</div><div id="b1-mem-msg" style="text-align:center;margin-top:12px;font-size:0.9rem;color:#888;"></div>';
+  return html;
+}
+
+function b1MemFlip(card, id, val, en) {
+  const board = document.getElementById('b1-memory-board');
+  if (!board || board.dataset.lock === '1') return;
+  if (card.dataset.matched === '1' || card.dataset.flipped === '1') return;
+  card.textContent = val;
+  card.style.background = '#e8f5e9';
+  card.style.borderColor = '#66bb6a';
+  card.dataset.flipped = '1';
+  const flipped = board.querySelectorAll('[data-flipped="1"]:not([data-matched="1"])');
+  if (flipped.length === 2) {
+    board.dataset.lock = '1';
+    const [a, b] = flipped;
+    if (a.dataset.id === b.dataset.id && a !== b) {
+      a.dataset.matched = '1'; b.dataset.matched = '1';
+      a.dataset.flipped = '0'; b.dataset.flipped = '0';
+      board.dataset.lock = '0';
+      speakKorean(id);
+      const msg = document.getElementById('b1-mem-msg');
+      if (msg) msg.textContent = '✅ '+id+' = '+en+'!';
+      const matched = board.querySelectorAll('[data-matched="1"]').length;
+      if (matched === board.children.length) {
+        setTimeout(()=>{ const msg2=document.getElementById('b1-mem-msg'); if(msg2) msg2.innerHTML='<span style="color:#66bb6a;font-size:1.1rem;font-weight:700">🎉 완료! All matched! ⭐</span>'; },300);
+      }
+    } else {
+      setTimeout(()=>{
+        a.textContent = '?'; a.style.background='#e8eaf6'; a.style.borderColor='#c5cae9'; a.dataset.flipped='0';
+        b.textContent = '?'; b.style.background='#e8eaf6'; b.style.borderColor='#c5cae9'; b.dataset.flipped='0';
+        board.dataset.lock = '0';
+      }, 900);
+    }
+  }
+}
+
+function renderB1TapGame(rounds, idx) {
+  if (idx >= rounds.length) return '<div style="text-align:center;padding:30px;font-size:1.3rem;color:#66bb6a;">🎉 완료! ⭐</div>';
+  const r = rounds[idx];
+  return '<div id="b1tap-wrap">' +
+    '<div style="font-size:0.85rem;color:#888;margin-bottom:8px;">'+(idx+1)+' / '+rounds.length+'</div>' +
+    '<div style="font-size:1.4rem;font-weight:700;color:#3949ab;margin-bottom:18px;">'+r.prompt+'</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:340px;margin:0 auto;">' +
+    r.items.map(item =>
+      '<button onclick="b1TapPick('+JSON.stringify(rounds)+','+idx+',\''+item+'\',\''+r.correct+'\',this)" ' +
+      'style="padding:18px;font-size:1rem;border:2px solid #c5cae9;border-radius:12px;background:#fff;cursor:pointer;font-family:Jua,sans-serif;font-weight:700">'+item+'</button>'
+    ).join('') +
+    '</div></div>';
+}
+
+function b1TapPick(rounds, idx, chosen, correct, btn) {
+  const wrap = document.getElementById('b1tap-wrap');
+  if (!wrap) return;
+  wrap.querySelectorAll('button').forEach(b => b.disabled = true);
+  if (chosen === correct) {
+    btn.style.cssText += 'border-color:#66bb6a;background:#e8f5e9;transform:scale(1.08)';
+    speakKorean(correct);
+  } else {
+    btn.style.cssText += 'border-color:#ef9a9a;background:#ffebee;';
+    wrap.querySelectorAll('button').forEach(b => { if(b.textContent===correct) b.style.cssText+='border-color:#66bb6a;background:#e8f5e9;'; });
+  }
+  setTimeout(()=>{
+    const container = document.getElementById('b1p-game');
+    if (container) {
+      const inner = container.querySelector('div');
+      const titleEl = inner ? inner.querySelector('div:first-child') : null;
+      const title = titleEl ? titleEl.textContent : '🎮 교실 물건 찾기!';
+      container.innerHTML = '<div style="text-align:center;padding:10px 0 18px;"><div style="font-size:1.2rem;font-weight:700;font-family:Jua,sans-serif;color:#5c6bc0;margin-bottom:18px;">'+title+'</div>'+renderB1TapGame(rounds, idx+1)+'</div>';
+    }
+  }, 1100);
+}
+
+function renderB1MapGame(locations) {
+  let html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:420px;margin:0 auto;">';
+  locations.forEach(loc => {
+    html += '<div onclick="b1MapTap(this,\''+loc.kr+'\')" style="padding:18px 10px;border:2px solid #c5cae9;border-radius:14px;background:#fff;cursor:pointer;text-align:center;transition:all 0.2s">' +
+      '<div style="font-size:2rem">'+loc.emoji+'</div>' +
+      '<div style="font-size:0.9rem;font-weight:700;font-family:Jua,sans-serif;color:#333;margin-top:4px">'+loc.kr+'</div>' +
+      '<div style="font-size:0.72rem;color:#888">'+loc.en+'</div></div>';
+  });
+  html += '</div><div id="b1-map-prompt" style="text-align:center;margin-top:16px;font-size:1rem;font-weight:700;color:#3949ab"></div>';
+  return html;
+}
+
+function b1MapTap(card, kr) {
+  card.style.cssText += 'border-color:#66bb6a;background:#e8f5e9;transform:scale(1.07)';
+  const prompt = document.getElementById('b1-map-prompt');
+  if (prompt) prompt.innerHTML = '🔊 <em style="color:#555">'+kr+'가 여기예요!</em>';
+  speakKorean(kr+'가 여기예요');
+  setTimeout(()=>{ card.style.borderColor='#c5cae9'; card.style.background='#fff'; card.style.transform=''; },800);
+}
+
+// ── Real Life ──────────────────────────────────────────────────────────
+function renderB1RealLife(rl) {
+  return renderB3RealLife(rl);
+}
+
+// ── Self Check ────────────────────────────────────────────────────────
+function renderB1SelfCheck(items, goal) {
+  return renderB3SelfCheck(items, goal);
+}
+
+// ══════════════════════════════════════════════════════════════
+// 예비과 — 인터랙티브 한글 자모 탐험기
+// ══════════════════════════════════════════════════════════════
+function renderB1Prereq(data) {
+  const container = document.getElementById('b1-unit-container');
+  b1PrereqTab = 'vowels';
+  container.innerHTML =
+    '<div class="unit active">' +
+    '<div class="unit-heading"><span class="unit-num" style="background:linear-gradient(135deg,#ff6f61,#ffb347)">예비</span><span class="unit-title">🔤 가나다라 — 한글 기초</span></div>' +
+    '<div class="b3-goal-badge" style="background:linear-gradient(90deg,#ff6f61,#ffb347)">🎯 한글 자음과 모음을 탐험해요! · Explore Korean letters!</div>' +
+    '<nav class="section-nav" id="b1pre-snav">' +
+      '<button class="snav-btn active" onclick="b1PreTab(\'vowels\')">🎨 모음 <span class="snav-en">Vowels</span></button>' +
+      '<button class="snav-btn" onclick="b1PreTab(\'consonants\')">🔤 자음 <span class="snav-en">Consonants</span></button>' +
+      '<button class="snav-btn" onclick="b1PreTab(\'builder\')">🧩 음절 만들기 <span class="snav-en">Build!</span></button>' +
+      '<button class="snav-btn" onclick="b1PreTab(\'words\')">📝 단어 <span class="snav-en">Words</span></button>' +
+      '<button class="snav-btn" onclick="b1PreTab(\'game\')">🎮 게임 <span class="snav-en">Game</span></button>' +
+    '</nav>' +
+    '<div class="section active" id="b1pre-vowels">'     + renderB1VowelExplorer(data)     + '</div>' +
+    '<div class="section" id="b1pre-consonants">'        + renderB1ConsonantExplorer(data)  + '</div>' +
+    '<div class="section" id="b1pre-builder">'           + renderB1SyllableBuilder(data)    + '</div>' +
+    '<div class="section" id="b1pre-words">'             + renderB1WordBuilder(data)        + '</div>' +
+    '<div class="section" id="b1pre-game">'              + renderB1RecognitionGame(data)    + '</div>' +
+    '</div>';
+}
+
+function b1PreTab(name) {
+  document.querySelectorAll('#b1pre-snav .snav-btn').forEach((btn,i)=>{
+    const tabs = ['vowels','consonants','builder','words','game'];
+    btn.classList.toggle('active', tabs[i]===name);
+  });
+  ['vowels','consonants','builder','words','game'].forEach(t=>{
+    const el = document.getElementById('b1pre-'+t);
+    if (el) el.classList.toggle('active', t===name);
+  });
+  b1PrereqTab = name;
+  if (name === 'builder') initSyllableBuilder();
+}
+
+// ── Vowel Explorer ────────────────────────────────────────────────────
+function renderB1VowelExplorer(data) {
+  let html = '<div style="padding:10px 0">' +
+    '<div style="text-align:center;font-size:0.9rem;color:#888;margin-bottom:18px;">✨ 클릭하면 들려요! · Click to hear!</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px;">';
+  data.vowels.forEach(v => {
+    html += '<div onclick="b1VowelClick(this,\''+v.char+'\',\''+v.name+'\',\''+v.sound+'\',\''+v.example_word+'\',\''+v.example_en+'\',\''+v.emoji+'\',\''+v.color+'\')" ' +
+      'style="background:'+v.color+'18;border:2px solid '+v.color+'44;border-radius:16px;padding:14px 6px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative" ' +
+      'class="b1-vowel-tile">' +
+      '<div style="font-size:2.2rem;font-weight:900;color:'+v.color+';line-height:1">'+v.char+'</div>' +
+      '<div style="font-size:0.8rem;color:'+v.color+';font-weight:700;margin-top:2px">'+v.name+'</div>' +
+      '<div style="font-size:0.7rem;color:#888;margin-top:2px">"'+v.sound+'"</div>' +
+      '</div>';
+  });
+  html += '</div>' +
+    '<div id="b1-vowel-detail" style="display:none;background:#f8f9ff;border-radius:18px;padding:20px 24px;margin-top:4px;border:2px solid #c5cae9;animation:fadeIn 0.3s">' +
+    '<div style="font-size:0.9rem;color:#888">클릭하면 예시가 여기 나와요!</div></div>' +
+
+    // Vowel-only words section
+    '<div style="margin-top:28px;">' +
+    '<div style="font-size:1rem;font-weight:700;font-family:Jua,sans-serif;color:#5c6bc0;margin-bottom:12px;">💡 모음만으로 만드는 단어! · Vowel-only words!</div>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap;">';
+  data.vowel_only_words.forEach(w => {
+    html += '<div onclick="speakKorean(\''+w.word+'\')" style="background:#ede7f6;border-radius:14px;padding:12px 16px;cursor:pointer;text-align:center;min-width:80px">' +
+      '<div style="font-size:1.4rem">'+w.emoji+'</div>' +
+      '<div style="font-size:1rem;font-weight:700;color:#5c4db1;font-family:Jua,sans-serif">'+w.word+'</div>' +
+      '<div style="font-size:0.75rem;color:#888">'+w.en+'</div>' +
+      '<div style="font-size:0.72rem;color:#b39ddb;margin-top:2px">';
+    w.syllables.forEach(s => html += '<span style="margin:0 2px;background:#d1c4e9;padding:2px 6px;border-radius:6px">'+s+'</span>');
+    html += '</div></div>';
+  });
+  html += '</div></div></div>';
+  return html;
+}
+
+function b1VowelClick(card, char, name, sound, word, wordEn, emoji, color) {
+  document.querySelectorAll('.b1-vowel-tile').forEach(t => {
+    t.style.transform=''; t.style.boxShadow='';
+  });
+  card.style.transform = 'scale(1.1)';
+  card.style.boxShadow = '0 6px 20px '+color+'55';
+  speakKorean(name);
+  const detail = document.getElementById('b1-vowel-detail');
+  if (detail) {
+    detail.style.display = 'block';
+    detail.style.borderColor = color;
+    detail.innerHTML =
+      '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
+      '<div style="font-size:4rem;font-weight:900;color:'+color+';line-height:1">'+char+'</div>' +
+      '<div>' +
+        '<div style="font-size:1.1rem;font-weight:700;color:#333">'+name+' <span style="font-size:0.85rem;color:#888;font-weight:400">— sounds like "'+sound+'"</span></div>' +
+        '<div style="font-size:0.9rem;color:#666;margin-top:4px">예시: <strong onclick="speakKorean(\''+word+'\')" style="cursor:pointer">'+word+'</strong> = '+emoji+' '+wordEn+'</div>' +
+      '</div>' +
+      '<button onclick="speakKorean(\''+name+'\')" style="margin-left:auto;padding:10px 20px;background:'+color+';color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:Jua,sans-serif;font-size:1rem">🔊 '+char+'</button>' +
+      '</div>';
+  }
+}
+
+// ── Consonant Explorer ────────────────────────────────────────────────
+function renderB1ConsonantExplorer(data) {
+  let html = '<div style="padding:10px 0">' +
+    '<div style="text-align:center;font-size:0.9rem;color:#888;margin-bottom:18px;">✨ 클릭하면 들려요! · Click to hear!</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:24px;">';
+  data.consonants.forEach(con => {
+    html += '<div onclick="b1ConClick(this,\''+con.char+'\',\''+con.name+'\',\''+con.sound+'\',\''+con.sound_en+'\',\''+con.example_word+'\',\''+con.example_en+'\',\''+con.emoji+'\',\''+con.color+'\')" ' +
+      'style="background:'+con.color+'15;border:2px solid '+con.color+'44;border-radius:14px;padding:10px 4px;text-align:center;cursor:pointer;transition:all 0.2s" ' +
+      'class="b1-con-tile">' +
+      '<div style="font-size:1.8rem;font-weight:900;color:'+con.color+';line-height:1">'+con.char+'</div>' +
+      '<div style="font-size:0.65rem;color:#888;margin-top:2px">'+con.name+'</div>' +
+      '</div>';
+  });
+  html += '</div>' +
+    '<div id="b1-con-detail" style="display:none;background:#f8f9ff;border-radius:18px;padding:20px 24px;margin-top:4px;border:2px solid #c5cae9;">' +
+    '<div style="font-size:0.9rem;color:#888">자음을 클릭하면 설명이 나와요!</div></div>' +
+
+    // ㅇ special note
+    '<div style="margin-top:20px;background:#fff8e1;border-radius:14px;padding:14px 18px;border:2px solid #ffe082;">' +
+    '<div style="font-size:0.95rem;font-weight:700;color:#f57c00;margin-bottom:6px;">💡 ㅇ 특별 규칙!</div>' +
+    '<div style="font-size:0.88rem;color:#555">음절 <strong>앞</strong>에서는 묵음 (소리 없음!) · At the <strong>start</strong> of a syllable: <em>silent!</em></div>' +
+    '<div style="font-size:0.88rem;color:#555;margin-top:4px">음절 <strong>끝</strong>에서는 "ng" 소리 · At the <strong>end</strong>: sounds like "ng"</div>' +
+    '<div style="font-size:0.88rem;color:#555;margin-top:6px">예: <strong onclick="speakKorean(\'아이\')" style="cursor:pointer">아이</strong> (아 = "ah", ㅇ 묵음) · <strong onclick="speakKorean(\'강아지\')" style="cursor:pointer">강아지</strong> (강 = "gang", ㅇ = "ng")</div>' +
+    '</div></div>';
+  return html;
+}
+
+function b1ConClick(card, char, name, sound, soundEn, word, wordEn, emoji, color) {
+  document.querySelectorAll('.b1-con-tile').forEach(t => { t.style.transform=''; t.style.boxShadow=''; });
+  card.style.transform = 'scale(1.12)';
+  card.style.boxShadow = '0 6px 20px '+color+'55';
+  speakKorean(name);
+  const detail = document.getElementById('b1-con-detail');
+  if (detail) {
+    detail.style.display = 'block';
+    detail.style.borderColor = color;
+    detail.innerHTML =
+      '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
+      '<div style="font-size:4rem;font-weight:900;color:'+color+';line-height:1">'+char+'</div>' +
+      '<div style="flex:1">' +
+        '<div style="font-size:1.1rem;font-weight:700;color:#333">'+name+' <span style="font-size:0.8rem;color:#888;font-weight:400">/ '+sound+' / — '+soundEn+'</span></div>' +
+        '<div style="font-size:0.9rem;color:#666;margin-top:6px">예시: <strong onclick="speakKorean(\''+word+'\')" style="cursor:pointer;color:'+color+'">'+word+'</strong> = '+emoji+' '+wordEn+'</div>' +
+      '</div>' +
+      '<button onclick="speakKorean(\''+name+'\')" style="padding:10px 18px;background:'+color+';color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:Jua,sans-serif;font-size:1rem">🔊</button>' +
+      '</div>';
+  }
+}
+
+// ── Syllable Builder ───────────────────────────────────────────────────
+function renderB1SyllableBuilder(data) {
+  return '<div id="b1-syl-wrap" style="padding:10px 0">' +
+    '<div style="text-align:center;font-size:0.9rem;color:#888;margin-bottom:8px;">자음 + 모음 = 음절! · Pick consonant + vowel → make a syllable!</div>' +
+    '<div style="display:flex;gap:12px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin-bottom:20px;">' +
+      '<div>' +
+        '<div style="font-size:0.8rem;font-weight:700;color:#3949ab;margin-bottom:8px;text-align:center">🔤 자음 Consonant</div>' +
+        '<div id="b1-syl-cons" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:280px;">' +
+          renderB1SylTiles(data.consonants,'con') +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size:0.8rem;font-weight:700;color:#7b1fa2;margin-bottom:8px;text-align:center">🎨 모음 Vowel</div>' +
+        '<div id="b1-syl-vows" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:220px;">' +
+          renderB1SylTiles(data.vowels,'vow') +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div style="text-align:center;margin:10px 0 6px;">' +
+      '<div style="font-size:0.75rem;color:#aaa;margin-bottom:4px">선택한 자음 + 모음</div>' +
+      '<div id="b1-syl-display" style="font-size:5rem;font-weight:900;font-family:\'Noto Sans KR\',sans-serif;color:#3949ab;line-height:1;min-height:80px;display:flex;align-items:center;justify-content:center;gap:16px;">' +
+        '<span id="b1-syl-con-sel" style="color:#ef5350;opacity:0.3">?</span>' +
+        '<span style="color:#aaa;font-size:2rem">+</span>' +
+        '<span id="b1-syl-vow-sel" style="color:#7b1fa2;opacity:0.3">?</span>' +
+        '<span style="color:#aaa;font-size:2rem">=</span>' +
+        '<span id="b1-syl-result" style="color:#3949ab;opacity:0.3">?</span>' +
+      '</div>' +
+      '<button id="b1-syl-speak-btn" onclick="b1SylSpeak()" style="display:none;margin-top:10px;padding:10px 24px;background:linear-gradient(135deg,#3949ab,#7c4dff);color:#fff;border:none;border-radius:14px;cursor:pointer;font-family:Jua,sans-serif;font-size:1.1rem">🔊 들어봐요!</button>' +
+    '</div>' +
+    '<div id="b1-syl-word-hint" style="text-align:center;min-height:28px;margin-top:6px;font-size:0.9rem;color:#888"></div>' +
+  '</div>';
+}
+
+function renderB1SylTiles(items, type) {
+  return items.map(item => {
+    const char = item.char;
+    const color = item.color || '#888';
+    return '<div class="b1-syl-tile b1-syl-'+type+'" data-char="'+char+'" ' +
+      'onclick="b1SylPick(\''+type+'\',\''+char+'\',\''+color+'\')" ' +
+      'style="width:36px;height:36px;border:2px solid '+color+'44;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:'+color+';cursor:pointer;transition:all 0.15s">'+char+'</div>';
+  }).join('');
+}
+
+let b1SylCon = null, b1SylVow = null;
+const B1_VOW_IDX = {"ㅏ":0,"ㅑ":2,"ㅓ":4,"ㅕ":6,"ㅗ":8,"ㅛ":12,"ㅜ":13,"ㅠ":17,"ㅡ":18,"ㅣ":20};
+const B1_CON_IDX = {"ㄱ":0,"ㄴ":2,"ㄷ":3,"ㄹ":5,"ㅁ":6,"ㅂ":7,"ㅅ":9,"ㅇ":11,"ㅈ":12,"ㅊ":14,"ㅋ":15,"ㅌ":16,"ㅍ":17,"ㅎ":18};
+const B1_SYL_WORDS = {"가":"가다 (go)","나":"나 (me)","다":"다 (all)","마":"마마 (mama)","바":"바나나 🍌","사":"사자 🦁","아":"아이 👶","자":"자다 (sleep)","나비":"나비 🦋","고양이":"고양이 🐱","강아지":"강아지 🐶","바나나":"바나나 🍌","하마":"하마 🦛"};
+
+function b1SylPick(type, char, color) {
+  if (type === 'con') {
+    document.querySelectorAll('.b1-syl-con').forEach(t => { t.style.background=''; t.style.transform=''; });
+    b1SylCon = char;
+    document.querySelectorAll('.b1-syl-con[data-char="'+char+'"]').forEach(t => { t.style.background=color+'33'; t.style.transform='scale(1.2)'; });
+    const sel = document.getElementById('b1-syl-con-sel');
+    if (sel) { sel.textContent=char; sel.style.opacity='1'; sel.style.color=color; }
+  } else {
+    document.querySelectorAll('.b1-syl-vow').forEach(t => { t.style.background=''; t.style.transform=''; });
+    b1SylVow = char;
+    document.querySelectorAll('.b1-syl-vow[data-char="'+char+'"]').forEach(t => { t.style.background=color+'33'; t.style.transform='scale(1.2)'; });
+    const sel = document.getElementById('b1-syl-vow-sel');
+    if (sel) { sel.textContent=char; sel.style.opacity='1'; sel.style.color=color; }
+  }
+  b1SylUpdate();
+}
+
+function b1SylUpdate() {
+  const resultEl = document.getElementById('b1-syl-result');
+  const speakBtn = document.getElementById('b1-syl-speak-btn');
+  const hintEl   = document.getElementById('b1-syl-word-hint');
+  if (!b1SylCon || !b1SylVow) { if(resultEl){resultEl.textContent='?';resultEl.style.opacity='0.3';} return; }
+  const choIdx = B1_CON_IDX[b1SylCon];
+  const vowIdx = B1_VOW_IDX[b1SylVow];
+  if (choIdx===undefined || vowIdx===undefined) { if(resultEl){resultEl.textContent='?';} return; }
+  const cp = (choIdx * 21 + vowIdx) * 28 + 0xAC00;
+  const syl = String.fromCodePoint(cp);
+  if (resultEl) { resultEl.textContent=syl; resultEl.style.opacity='1'; }
+  if (speakBtn) speakBtn.style.display='inline-block';
+  if (hintEl) {
+    const hint = B1_SYL_WORDS[syl];
+    hintEl.innerHTML = hint ? '💡 <strong>'+syl+'</strong> — '+hint : '✨ 잘했어요! You made <strong>'+syl+'</strong>!';
+  }
+}
+
+function b1SylSpeak() {
+  const r = document.getElementById('b1-syl-result');
+  if (r && r.textContent !== '?') speakKorean(r.textContent);
+}
+
+function initSyllableBuilder() { b1SylCon=null; b1SylVow=null; }
+
+// ── Word Builder ───────────────────────────────────────────────────────
+function renderB1WordBuilder(data) {
+  const words = data.simple_words || [];
+  const cats = {};
+  words.forEach(w => { if (!cats[w.category]) cats[w.category]=[] ; cats[w.category].push(w); });
+  const catLabels = {nature:'🌿 자연 Nature', food:'🍱 음식 Food', animal:'🐾 동물 Animals', special:'⭐ 특별 Special'};
+  let html = '<div style="padding:8px 0">' +
+    '<div style="text-align:center;font-size:0.9rem;color:#888;margin-bottom:16px;">카드를 클릭하면 들려요! · Tap a word card to hear it!</div>';
+  for (const [cat, items] of Object.entries(cats)) {
+    html += '<div style="margin-bottom:20px;">' +
+      '<div style="font-size:0.9rem;font-weight:700;color:#5c6bc0;margin-bottom:10px;padding-left:4px;">'+(catLabels[cat]||cat)+'</div>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+    items.forEach(w => {
+      html += '<div onclick="b1WordTap(this,\''+w.word+'\',\''+w.en+'\')" ' +
+        'style="background:#fff;border:2px solid #c5cae9;border-radius:16px;padding:12px 16px;cursor:pointer;text-align:center;min-width:90px;transition:all 0.2s">' +
+        '<div style="font-size:1.8rem">'+w.emoji+'</div>' +
+        '<div style="font-size:1.1rem;font-weight:700;font-family:\'Noto Sans KR\',sans-serif;color:#3949ab;margin:4px 0">'+w.word+'</div>' +
+        '<div style="display:flex;gap:4px;justify-content:center;margin:3px 0">';
+      w.syllables.forEach(s => {
+        html += '<span style="background:#e8eaf6;padding:2px 6px;border-radius:6px;font-size:0.78rem;color:#5c6bc0;">'+s+'</span>';
+      });
+      html += '</div><div style="font-size:0.72rem;color:#888;">'+w.en+'</div>';
+      if (w.note) html += '<div style="font-size:0.7rem;color:#ef5350;margin-top:4px;">'+w.note+'</div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function b1WordTap(card, word, en) {
+  card.style.background='#e8eaf6'; card.style.borderColor='#3949ab'; card.style.transform='scale(1.06)';
+  speakKorean(word);
+  setTimeout(()=>{ card.style.background='#fff'; card.style.borderColor='#c5cae9'; card.style.transform=''; },700);
+}
+
+// ── Recognition Game ───────────────────────────────────────────────────
+function renderB1RecognitionGame(data) {
+  const g = data.recognition_game;
+  return '<div id="b1-rec-wrap" style="padding:10px 0">' +
+    '<div style="text-align:center;font-size:1.1rem;font-weight:700;font-family:Jua,sans-serif;color:#5c6bc0;margin-bottom:6px;">'+g.title+'</div>' +
+    '<div style="text-align:center;font-size:0.85rem;color:#888;margin-bottom:20px;">'+g.instruction+'</div>' +
+    renderB1RecQ(g.rounds, 0) + '</div>';
+}
+
+function renderB1RecQ(rounds, idx) {
+  if (idx >= rounds.length) return '<div style="text-align:center;padding:30px;font-size:1.3rem;color:#66bb6a;">🎉 완료! ⭐⭐⭐</div>';
+  const r = rounds[idx];
+  return '<div id="b1-rec-q">' +
+    '<div style="text-align:center;font-size:0.85rem;color:#888;margin-bottom:8px;">'+(idx+1)+' / '+rounds.length+'</div>' +
+    '<div style="text-align:center;margin-bottom:18px;">' +
+      '<button onclick="speakKorean(\''+r.prompt+'\')" style="font-size:3.5rem;background:#f3e5f5;border:none;padding:18px 24px;border-radius:18px;cursor:pointer;font-weight:900;color:#7b1fa2;font-family:Noto Sans KR,sans-serif">'+r.prompt+'</button>' +
+      '<div style="font-size:0.8rem;color:#aaa;margin-top:6px">🔊 눌러서 들어봐요</div>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:360px;margin:0 auto;">' +
+    r.choices.map(ch =>
+      '<button onclick="b1RecPick('+JSON.stringify(rounds)+','+idx+',\''+ch+'\',\''+r.correct+'\',this)" ' +
+      'style="padding:16px 8px;font-size:2rem;font-weight:900;font-family:Noto Sans KR,sans-serif;border:3px solid #e0e0e0;border-radius:14px;background:#fff;cursor:pointer;color:#333;transition:all 0.2s">'+ch+'</button>'
+    ).join('') +
+    '</div></div>';
+}
+
+function b1RecPick(rounds, idx, chosen, correct, btn) {
+  const qEl = document.getElementById('b1-rec-q');
+  if (!qEl) return;
+  qEl.querySelectorAll('button').forEach(b => b.disabled=true);
+  if (chosen === correct) {
+    btn.style.cssText += 'border-color:#66bb6a;background:#e8f5e9;transform:scale(1.1)';
+    speakKorean(correct);
+  } else {
+    btn.style.cssText += 'border-color:#ef9a9a;background:#ffebee;';
+    qEl.querySelectorAll('button').forEach(b => { if(b.textContent===correct) b.style.cssText+='border-color:#66bb6a;background:#e8f5e9;'; });
+  }
+  setTimeout(()=>{
+    const wrap = document.getElementById('b1-rec-wrap');
+    if (wrap) {
+      const inner = wrap.querySelector('div:first-child');
+      const title = inner ? inner.textContent : '🎮 자모 빙고!';
+      wrap.innerHTML = '<div style="text-align:center;font-size:1.1rem;font-weight:700;font-family:Jua,sans-serif;color:#5c6bc0;margin-bottom:6px;">'+title+'</div>'+renderB1RecQ(rounds, idx+1);
+    }
+  }, 1100);
+}
+// END Level 1 JS
+
+</script>
 </body>
 </html>

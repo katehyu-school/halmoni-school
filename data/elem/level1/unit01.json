@@ -1,0 +1,207 @@
+{
+  "unit": 1,
+  "title": "👋 안녕하세요?",
+  "book": 1,
+  "goal": {
+    "ko": "인사하고 이름을 말할 수 있어요! 🌟",
+    "en": "I can say hello and tell my name!"
+  },
+  "key_points": [
+    "안녕하세요 = Hello (to adults)",
+    "안녕 = Hi (to friends)",
+    "저는 ___이에요/예요 = My name is ___"
+  ],
+  "sections": {
+    "vocab": {
+      "👋 인사 Greetings": [
+        { "emoji": "😊", "kr": "안녕하세요?", "en": "Hello! (to adults)", "rom": "an-nyeong-ha-se-yo" },
+        { "emoji": "🤗", "kr": "안녕?", "en": "Hi! (to friends)", "rom": "an-nyeong" },
+        { "emoji": "🚶", "kr": "안녕히 가세요.", "en": "Goodbye (you're leaving)", "rom": "an-nyeong-hi ga-se-yo" },
+        { "emoji": "🏠", "kr": "안녕히 계세요.", "en": "Goodbye (I'm leaving)", "rom": "an-nyeong-hi gye-se-yo" },
+        { "emoji": "🙏", "kr": "고맙습니다.", "en": "Thank you!", "rom": "go-map-seum-ni-da" }
+      ],
+      "🏷️ 이름 Names": [
+        { "emoji": "🙋‍♀️", "kr": "이름이 뭐예요?", "en": "What is your name?", "rom": "i-reum-i mwo-ye-yo" },
+        { "emoji": "😄", "kr": "저는 ___예요.", "en": "My name is ___.", "rom": "jeo-neun ___ye-yo" },
+        { "emoji": "😄", "kr": "저는 ___이에요.", "en": "My name is ___.", "rom": "jeo-neun ___i-e-yo" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g01_ieyo",
+          "title": "저는 ___이에요 / ___예요",
+          "subtitle": "My name is ___ · How to say who you are",
+          "pattern": "저는 + NAME + 이에요/예요",
+          "meaning": "My name is ___",
+          "description": "In Korean, 'I am ___' uses two different endings depending on the last sound of the word. If the name ends with a consonant (받침), add 이에요. If it ends with a vowel, add 예요.",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 받침 있으면 → 이에요",
+              "examples": [
+                "해리 → 해리예요? ❌  →  해리이에요? 🤔  →  해리예요 ✅  (ㅣ ends in vowel!)",
+                "리암 → 리암이에요 ✅  (ㅁ is a consonant!)"
+              ]
+            },
+            {
+              "color": "coral",
+              "label": "🔴 받침 없으면 → 예요",
+              "examples": [
+                "애라 → 애라예요 ✅  (ㅏ ends in vowel!)",
+                "마야 → 마야예요 ✅",
+                "올리비아 → 올리비아예요 ✅"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "저는 애라예요.", "english": "My name is Aera.", "highlight": "예요" },
+            { "korean": "저는 해리예요.", "english": "My name is Harry.", "highlight": "예요" },
+            { "korean": "저는 리암이에요.", "english": "My name is Liam.", "highlight": "이에요" },
+            { "korean": "저는 루카스예요.", "english": "My name is Lucas.", "highlight": "예요" }
+          ]
+        },
+        {
+          "id": "g01_greetings",
+          "title": "안녕하세요 vs 안녕",
+          "subtitle": "Formal Hello vs Casual Hi",
+          "pattern": "상대방에 따라 다른 인사",
+          "meaning": "Who are you talking to?",
+          "description": "Korean has two levels of greeting — one for adults and teachers, one for friends and younger kids. Always use 안녕하세요 with grown-ups!",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "👨‍🏫 어른 Adults & Teachers",
+              "examples": ["안녕하세요? ✅", "안녕? ❌"]
+            },
+            {
+              "color": "green",
+              "label": "👫 친구 Friends & classmates",
+              "examples": ["안녕? ✅", "안녕하세요? 🤷 (too formal but OK)"]
+            }
+          ],
+          "examples": [
+            { "korean": "선생님, 안녕하세요!", "english": "Hello, teacher!", "highlight": "안녕하세요" },
+            { "korean": "해리야, 안녕!", "english": "Hi, Harry!", "highlight": "안녕" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🏫 교실 첫날 — First day of class",
+          "scene_en": "First day of school",
+          "lines": [
+            { "speaker": "해리", "color": "blue", "text": "안녕? 이름이 뭐예요?", "en": "Hi! What's your name?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "저는 애라예요. 이름이 뭐예요?", "en": "My name is Aera. What's your name?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "저는 해리예요!", "en": "My name is Harry!", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "반가워요! 🤗", "en": "Nice to meet you!", "type": "given" }
+          ]
+        },
+        {
+          "scene": "👨‍🏫 선생님께 인사 — Greeting the teacher",
+          "scene_en": "Greeting the teacher",
+          "lines": [
+            { "speaker": "선생님", "color": "green", "text": "안녕하세요! 이름이 뭐예요?", "en": "Hello! What is your name?", "type": "given" },
+            { "speaker": "나", "color": "teal", "text": "저는 ___예요/이에요.", "en": "My name is ___.", "type": "fill", "ans": "애라예요", "opts": ["애라예요", "애라이에요", "애라가"] },
+            { "speaker": "선생님", "color": "green", "text": "반가워요, 애라! ⭐", "en": "Nice to meet you, Aera!", "type": "given" }
+          ]
+        },
+        {
+          "scene": "🚪 수업 끝! — End of class",
+          "scene_en": "Saying goodbye",
+          "lines": [
+            { "speaker": "해리", "color": "blue", "text": "선생님, 안녕히 계세요!", "en": "Goodbye, teacher! (I'm leaving)", "type": "given" },
+            { "speaker": "선생님", "color": "green", "text": "안녕히 가세요! 잘 가요~ 🌟", "en": "Goodbye! Take care~", "type": "given" },
+            { "speaker": "마야", "color": "purple", "text": "애라야, ___!", "en": "Aera, see you!", "type": "fill", "ans": "안녕", "opts": ["안녕", "안녕하세요", "고맙습니다"] }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "q": "저는 해리", "suffix": ".", "ans": "예요", "opts": ["예요", "이에요", "가요"], "en": "My name is Harry." },
+        { "q": "저는 리암", "suffix": ".", "ans": "이에요", "opts": ["이에요", "예요", "해요"], "en": "My name is Liam." },
+        { "q": "선생님, 안녕히", "suffix": "!", "ans": "계세요", "opts": ["계세요", "가세요", "주세요"], "en": "Goodbye, teacher! (I'm leaving)" },
+        { "q": "해리야, 안녕히", "suffix": "!", "ans": "가세요", "opts": ["가세요", "계세요", "주세요"], "en": "Goodbye Harry! (you're leaving)" },
+        { "q": "저는 마야", "suffix": ".", "ans": "예요", "opts": ["예요", "이에요", "에요"], "en": "My name is Maya." }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "저는 해리예요.",
+          "correct": 1,
+          "choices": [
+            { "emoji": "🙋‍♀️", "kr": "애라", "en": "Aera" },
+            { "emoji": "🙋‍♂️", "kr": "해리", "en": "Harry" },
+            { "emoji": "🙋‍♀️", "kr": "마야", "en": "Maya" }
+          ]
+        },
+        {
+          "audio": "선생님, 안녕하세요!",
+          "correct": 0,
+          "choices": [
+            { "emoji": "👨‍🏫", "kr": "선생님께 인사", "en": "greeting the teacher" },
+            { "emoji": "👫", "kr": "친구에게 인사", "en": "greeting a friend" },
+            { "emoji": "🚶", "kr": "헤어질 때", "en": "saying goodbye" }
+          ]
+        },
+        {
+          "audio": "안녕히 가세요.",
+          "correct": 2,
+          "choices": [
+            { "emoji": "☀️", "kr": "처음 만날 때", "en": "first meeting" },
+            { "emoji": "😊", "kr": "감사할 때", "en": "saying thank you" },
+            { "emoji": "🚶‍♂️", "kr": "상대방이 갈 때", "en": "when someone is leaving" }
+          ]
+        }
+      ],
+      "mini_game": {
+        "type": "match",
+        "title": "🎮 인사 매칭 게임!",
+        "instruction": "상황에 맞는 인사를 골라요! Match the greeting to the situation!",
+        "pairs": [
+          { "situation": "👨‍🏫 선생님을 만났어요", "situation_en": "You meet your teacher", "answer": "안녕하세요?", "distractors": ["안녕?", "고맙습니다."] },
+          { "situation": "👫 친구를 만났어요", "situation_en": "You meet your friend", "answer": "안녕?", "distractors": ["안녕하세요?", "안녕히 가세요."] },
+          { "situation": "🚶 내가 집에 가요", "situation_en": "You are leaving", "answer": "안녕히 계세요.", "distractors": ["안녕히 가세요.", "안녕?"] },
+          { "situation": "🎁 선물을 받았어요", "situation_en": "You received a gift", "answer": "고맙습니다.", "distractors": ["안녕?", "안녕하세요?"] }
+        ]
+      }
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 — Real Life",
+      "subtitle": "실제로 써봐요! Let's use it for real!",
+      "dialogues": [
+        {
+          "title": "🏠 대화 1 — 이웃 어른께",
+          "title_en": "Greeting a neighbor",
+          "bg": "#F0F8FF",
+          "hdr": "#1E6BB8",
+          "lines": [
+            { "role": "A", "color": "#5B9BD5", "kr": "안녕하세요!", "en": "Hello!" },
+            { "role": "B", "color": "#1E6BB8", "kr": "안녕하세요~ 이름이 뭐예요?", "en": "Hello~ What's your name?" },
+            { "role": "A", "color": "#5B9BD5", "kr": "저는 애라예요.", "en": "My name is Aera." },
+            { "role": "B", "color": "#1E6BB8", "kr": "반가워요, 애라! 😊", "en": "Nice to meet you, Aera!" }
+          ],
+          "summary": { "kr": "어른께는 꼭 '안녕하세요'로 인사해요!", "en": "Always use 안녕하세요 with adults!", "highlight": "안녕하세요" }
+        },
+        {
+          "title": "🏫 대화 2 — 수업 끝",
+          "title_en": "End of Korean class",
+          "bg": "#FFF0F5",
+          "hdr": "#C2185B",
+          "lines": [
+            { "role": "A", "color": "#E91E8C", "kr": "선생님, 고맙습니다!", "en": "Thank you, teacher!" },
+            { "role": "B", "color": "#C2185B", "kr": "잘 했어요! 안녕히 가세요~", "en": "Good job! Goodbye~" },
+            { "role": "A", "color": "#E91E8C", "kr": "안녕히 계세요! 🌟", "en": "Goodbye! (I'm leaving)" }
+          ],
+          "summary": { "kr": "가는 사람: 안녕히 계세요 · 남는 사람: 안녕히 가세요", "en": "Leaving: 안녕히 계세요 · Staying: 안녕히 가세요", "highlight": "안녕히 계세요 / 안녕히 가세요" }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "어른께 '안녕하세요'로 인사할 수 있어요.", "en": "I can greet adults with 안녕하세요." },
+    { "ko": "친구에게 '안녕'으로 인사할 수 있어요.", "en": "I can greet friends with 안녕." },
+    { "ko": "'저는 ___예요/이에요'로 이름을 말할 수 있어요.", "en": "I can say my name with 저는 ___예요/이에요." },
+    { "ko": "'안녕히 가세요'와 '안녕히 계세요' 차이를 알아요.", "en": "I know the difference between 안녕히 가세요 and 안녕히 계세요." }
+  ]
+}

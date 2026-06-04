@@ -1,0 +1,210 @@
+{
+  "unit": 2,
+  "title": "🖊️ 이게 뭐예요?",
+  "book": 1,
+  "goal": {
+    "ko": "교실 물건 이름을 말할 수 있어요! 🏫",
+    "en": "I can name things in the classroom!"
+  },
+  "key_points": [
+    "이게 = this (thing near me)",
+    "저게 = that (thing far away)",
+    "이게 뭐예요? = What is this?"
+  ],
+  "sections": {
+    "vocab": {
+      "🏫 교실 물건 Classroom Things": [
+        { "emoji": "👩‍🏫", "kr": "선생님", "en": "teacher", "rom": "seon-saeng-nim" },
+        { "emoji": "🪑", "kr": "책상", "en": "desk", "rom": "chaek-sang" },
+        { "emoji": "💺", "kr": "의자", "en": "chair", "rom": "ui-ja" },
+        { "emoji": "🖊️", "kr": "칠판", "en": "blackboard", "rom": "chil-pan" },
+        { "emoji": "🕐", "kr": "시계", "en": "clock", "rom": "si-gye" },
+        { "emoji": "🩹", "kr": "지우개", "en": "eraser", "rom": "ji-u-gae" },
+        { "emoji": "📚", "kr": "책", "en": "book", "rom": "chaek" },
+        { "emoji": "📓", "kr": "공책", "en": "notebook", "rom": "gong-chaek" },
+        { "emoji": "✏️", "kr": "연필", "en": "pencil", "rom": "yeon-pil" }
+      ],
+      "🎨 미술 도구 Art Supplies (보너스!)": [
+        { "emoji": "✂️", "kr": "가위", "en": "scissors", "rom": "ga-wi" },
+        { "emoji": "🗂️", "kr": "풀", "en": "glue", "rom": "pul" },
+        { "emoji": "🌈", "kr": "색종이", "en": "colored paper", "rom": "saek-jong-i" },
+        { "emoji": "🖍️", "kr": "크레파스", "en": "crayons", "rom": "keu-re-pa-seu" },
+        { "emoji": "🎨", "kr": "색연필", "en": "colored pencils", "rom": "saeng-yeon-pil" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g02_ige_jeoge",
+          "title": "이게 vs 저게",
+          "subtitle": "This vs That",
+          "pattern": "이게 (near me) · 저게 (far away)",
+          "meaning": "pointing at things",
+          "description": "In Korean, 이게 means 'this' (something close to you) and 저게 means 'that' (something far away). Use them before 뭐예요? to ask what something is!",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "👉 이게 — This (close to me)",
+              "examples": ["이게 뭐예요? = What is THIS? (pointing to something nearby)"]
+            },
+            {
+              "color": "purple",
+              "label": "👉👉 저게 — That (far from me)",
+              "examples": ["저게 뭐예요? = What is THAT? (pointing to something far)"]
+            }
+          ],
+          "examples": [
+            { "korean": "이게 뭐예요?", "english": "What is this?", "highlight": "이게" },
+            { "korean": "저게 뭐예요?", "english": "What is that?", "highlight": "저게" },
+            { "korean": "연필이에요.", "english": "It's a pencil.", "highlight": "연필이에요" },
+            { "korean": "시계예요.", "english": "It's a clock.", "highlight": "시계예요" }
+          ]
+        },
+        {
+          "id": "g02_ieyo_review",
+          "title": "N이에요 / N예요 — 복습!",
+          "subtitle": "Naming things (review from Unit 1)",
+          "pattern": "N (받침 O) + 이에요 · N (받침 X) + 예요",
+          "meaning": "It is ___",
+          "description": "Remember the rule from Unit 1! Same ending for names AND for things.",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 받침 있으면 → 이에요",
+              "examples": ["책 → 책이에요 ✅", "칠판 → 칠판이에요 ✅", "연필 → 연필이에요 ✅"]
+            },
+            {
+              "color": "coral",
+              "label": "🔴 받침 없으면 → 예요",
+              "examples": ["의자 → 의자예요 ✅", "시계 → 시계예요 ✅", "지우개 → 지우개예요 ✅"]
+            }
+          ],
+          "examples": [
+            { "korean": "이게 뭐예요? — 책이에요.", "english": "What is this? — It's a book.", "highlight": "책이에요" },
+            { "korean": "저게 뭐예요? — 의자예요.", "english": "What is that? — It's a chair.", "highlight": "의자예요" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🏫 교실에서 — In the classroom",
+          "scene_en": "In the classroom",
+          "lines": [
+            { "speaker": "애라", "color": "coral", "text": "선생님, 이게 뭐예요?", "en": "Teacher, what is this?", "type": "given" },
+            { "speaker": "선생님", "color": "green", "text": "연필이에요! ✏️", "en": "It's a pencil!", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "저게 뭐예요?", "en": "What is that?", "type": "given" },
+            { "speaker": "선생님", "color": "green", "text": "___예요.", "en": "It's a clock.", "type": "fill", "ans": "시계", "opts": ["시계", "의자", "칠판"] }
+          ]
+        },
+        {
+          "scene": "🎒 가방에서 — From the bag",
+          "scene_en": "Taking things from the bag",
+          "lines": [
+            { "speaker": "해리", "color": "blue", "text": "애라야, 이게 뭐야?", "en": "Aera, what is this?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "___예요! 같이 써요~ 🖍️", "en": "It's a crayon! Let's use it together~", "type": "fill", "ans": "크레파스", "opts": ["크레파스", "색종이", "가위"] },
+            { "speaker": "해리", "color": "blue", "text": "와, 색연필도 있어요?", "en": "Wow, are there colored pencils too?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "네, 이게 색연필이에요! 🎨", "en": "Yes, this is the colored pencils!", "type": "given" }
+          ]
+        },
+        {
+          "scene": "🔍 교실 탐험 — Classroom exploration",
+          "scene_en": "Exploring the classroom",
+          "lines": [
+            { "speaker": "루카스", "color": "amber", "text": "해리야, 저게 뭐야?", "en": "Harry, what is that?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "___이에요!", "en": "It's a blackboard!", "type": "fill", "ans": "칠판", "opts": ["칠판", "책상", "공책"] },
+            { "speaker": "루카스", "color": "amber", "text": "이게 뭐야?", "en": "What is this?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "___이에요. 앉아봐요! 😄", "en": "It's a chair. Let's sit!", "type": "fill", "ans": "의자", "opts": ["의자", "책상", "지우개"] }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "q": "이게 뭐예요? →", "suffix": "이에요.", "ans": "연필", "opts": ["연필", "시계", "의자"], "en": "It's a pencil." },
+        { "q": "이게 뭐예요? →", "suffix": "예요.", "ans": "시계", "opts": ["시계", "연필", "공책"], "en": "It's a clock." },
+        { "q": "이게 뭐예요? →", "suffix": "예요.", "ans": "의자", "opts": ["의자", "책상", "칠판"], "en": "It's a chair." },
+        { "q": "이게 뭐예요? →", "suffix": "이에요.", "ans": "칠판", "opts": ["칠판", "책", "연필"], "en": "It's a blackboard." },
+        { "q": "이게 뭐예요? →", "suffix": "예요.", "ans": "지우개", "opts": ["지우개", "공책", "가위"], "en": "It's an eraser." }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "이게 뭐예요? — 연필이에요.",
+          "correct": 2,
+          "choices": [
+            { "emoji": "📚", "kr": "책", "en": "book" },
+            { "emoji": "📓", "kr": "공책", "en": "notebook" },
+            { "emoji": "✏️", "kr": "연필", "en": "pencil" }
+          ]
+        },
+        {
+          "audio": "저게 뭐예요? — 시계예요.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🕐", "kr": "시계", "en": "clock" },
+            { "emoji": "🪑", "kr": "책상", "en": "desk" },
+            { "emoji": "💺", "kr": "의자", "en": "chair" }
+          ]
+        },
+        {
+          "audio": "이게 뭐예요? — 지우개예요.",
+          "correct": 1,
+          "choices": [
+            { "emoji": "✏️", "kr": "연필", "en": "pencil" },
+            { "emoji": "🩹", "kr": "지우개", "en": "eraser" },
+            { "emoji": "🖊️", "kr": "칠판", "en": "blackboard" }
+          ]
+        }
+      ],
+      "mini_game": {
+        "type": "tap",
+        "title": "🎮 교실 물건 찾기!",
+        "instruction": "선생님이 말하는 물건을 빨리 눌러요! Tap the object the teacher calls out!",
+        "rounds": [
+          { "prompt": "연필! ✏️", "items": ["연필", "공책", "시계", "의자"], "correct": "연필" },
+          { "prompt": "의자! 💺", "items": ["칠판", "의자", "책상", "책"], "correct": "의자" },
+          { "prompt": "지우개! 🩹", "items": ["지우개", "연필", "공책", "가위"], "correct": "지우개" },
+          { "prompt": "시계! 🕐", "items": ["책상", "시계", "의자", "칠판"], "correct": "시계" },
+          { "prompt": "크레파스! 🖍️", "items": ["풀", "가위", "크레파스", "색종이"], "correct": "크레파스" }
+        ]
+      }
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 — Real Life",
+      "subtitle": "교실 밖에서도 써봐요!",
+      "dialogues": [
+        {
+          "title": "🛒 대화 1 — 문구점에서",
+          "title_en": "At the stationery store",
+          "bg": "#FFF8E1",
+          "hdr": "#E65100",
+          "lines": [
+            { "role": "A", "color": "#FFB300", "kr": "저게 뭐예요?", "en": "What is that?" },
+            { "role": "B", "color": "#E65100", "kr": "색종이예요.", "en": "It's colored paper." },
+            { "role": "A", "color": "#FFB300", "kr": "이게 뭐예요?", "en": "What is this?" },
+            { "role": "B", "color": "#E65100", "kr": "풀이에요.", "en": "It's glue." },
+            { "role": "A", "color": "#FFB300", "kr": "색종이하고 풀 주세요! 😊", "en": "Colored paper and glue please!" }
+          ],
+          "summary": { "kr": "이게/저게 뭐예요? — 가게에서도 쓸 수 있어요!", "en": "이게/저게 뭐예요? works at stores too!", "highlight": "이게 / 저게" }
+        },
+        {
+          "title": "🏠 대화 2 — 집에서",
+          "title_en": "At home",
+          "bg": "#F3E5F5",
+          "hdr": "#7B1FA2",
+          "lines": [
+            { "role": "A", "color": "#AB47BC", "kr": "엄마, 이게 뭐예요?", "en": "Mom, what is this?" },
+            { "role": "B", "color": "#7B1FA2", "kr": "공책이에요. 오늘 학교에서 받았어요?", "en": "It's a notebook. Did you get it from school today?" },
+            { "role": "A", "color": "#AB47BC", "kr": "네! 선생님이 줬어요. 😊", "en": "Yes! The teacher gave it to me." }
+          ],
+          "summary": { "kr": "집에서도 새 물건을 보면 '이게 뭐예요?'로 물어봐요!", "en": "Ask 이게 뭐예요? at home too when you see something new!", "highlight": "이게 뭐예요?" }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "'이게 뭐예요?'로 가까운 물건을 물어볼 수 있어요.", "en": "I can ask about nearby things with 이게 뭐예요?" },
+    { "ko": "'저게 뭐예요?'로 먼 물건을 물어볼 수 있어요.", "en": "I can ask about far things with 저게 뭐예요?" },
+    { "ko": "교실 물건 이름을 5개 이상 말할 수 있어요.", "en": "I can name 5+ classroom items." },
+    { "ko": "받침 있으면 이에요, 없으면 예요 — 기억해요!", "en": "받침 → 이에요, no 받침 → 예요. Got it!" }
+  ]
+}
