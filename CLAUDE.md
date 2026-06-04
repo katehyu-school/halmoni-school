@@ -514,7 +514,44 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
-## 🔜 다음 작업 예정 (2026-06-03 기준)
+## 🔜 다음 작업 예정 (2026-06-04 기준)
+
+### ✅ 2026-06-04 완료 작업 (2차 세션 — Level 1 렌더러 버그 수정 + 이미지 작업)
+- **Level 1 렌더러 버그 수정**:
+  - `grammar.sections.forEach is not a function` → `renderB3Grammar(d.sections.grammar)` 로 수정
+  - `renderB3RealLife`, `renderB3SelfCheck` 파라미터 수정 (d → d.sections.real_life / d.self_check)
+  - TTS 자동재생 버그 수정 — 예비과 게임 탭 `b1Speak()` 가 로드 시 자동 실행되던 문제 → 탭 visible 여부 체크 후 재생
+- **Level 1 고정 캐릭터 확정**:
+  - 🐱 **야옹이** — 주황 줄무늬 고양이, Level 1 3과 첫 등장, Level 2 1과 재등장
+  - 🐶 **멍멍이** — 골든 리트리버 강아지, Level 2 1과 첫 등장
+  - 해리+애라 PNG → `data/elem/level1/harry.png`, `data/elem/level1/aera.png` (commit 6149f3b)
+- **Level 1 도입부 이미지 계획**:
+  - 각 과(3~9과)마다 장면 이미지 1장 + 대화 2줄 → 새어휘 보충
+  - 이미지 툴: **Canva AI** (픽사 스타일, 왜색 없는 것만 선별) 또는 **Nano Banana** (실사진 → 픽사 변환)
+  - 3과 Canva 이미지 저장 완료: [편집링크](https://www.canva.com/d/5VsL7SGpL0m60RL) (design ID: DAHLooDT5xI)
+  - 4과 Canva 이미지 저장 완료: [편집링크](https://www.canva.com/d/UtERoGjuQgwk_Np) (design ID: DAHLohJd4FM)
+  - 나머지 5~9과 이미지 작업 대기 중
+- **과 제목**: 이미지 완성 후 각 장면에서 자연스럽게 제목 도출 예정 (1~2과는 현재 제목 유지)
+- **Level 2 연결 설계**: 야옹이(3과) + 멍멍이(Level 2 1과) 같은 집 캐릭터로 레벨 간 자연 연결
+
+### ✅ 2026-06-04 완료 작업 (1차 세션 — Kids Level 1 신설)
+- **Level 1 전체 JSON 작성 완료** — 예비과(unit00) + unit01~09
+  - unit00: 가나다라 (자음/모음 인터랙티브, 예비과)
+  - unit01: 안녕하세요? (인사, N이에요/예요)
+  - unit02: 이게 뭐예요? (교실 물건, 이게/저게)
+  - unit03: 네, 빵이에요! (네/아니요, 음식/동물)
+  - unit04: 우리 엄마예요! (가족, 누구예요?)
+  - unit05: 집이 어디예요? (장소, 여기/저기/어디)
+  - unit06: 학교에 가요! (교통, N(으)로 가요)
+  - unit07: 방에 침대가 있어요! (가구, 있어요/없어요)
+  - unit08: 그림을 그려요! (활동 동사, 아요/어요)
+  - unit09: 사과를 좋아해요! (음식/취미, 좋아해요/싫어해요)
+- **korean-app_v2.html**: Level 1 탭 활성화, 사이드바, 렌더러(`renderBook1Unit`, `renderB1Prereq`), 인터랙티브 자모탐험기 추가
+- **Level 1 렌더러**: Level 3 렌더러(`renderB3Grammar` 등) 재사용, 음절 빌더 Unicode 합성 (choIdx*21+vowIdx)*28+0xAC00
+- **미니게임 시스템**: match/yesno/memory/tap/map 5종류
+- **docs/HQ_KIDS_LEVEL1_CONTENT_PLAN.md** 생성
+- **데이터 경로**: `data/elem/level1/unit0N.json` (Level 3 패턴 동일)
+- ⚠️ **git 사고 발생 및 복구**: index.lock 문제로 인한 잘못된 커밋 → `git reset --hard a7b450f` + `git push --force`로 복구 완료 (commit 348a35d)
 
 ### Hangeul Quest (nhs.html)
 - **Level 1 완성** ✅ — ep01~ep12 + 마감 테스트 모두 완료
@@ -523,6 +560,7 @@ const urlName   = _hc ? _hc.urlName : null;
 - ⚠️ ep01/ep02 퀴즈 포맷을 ep03+ 스타일로 통일 필요 (미완, 우선순위 낮음)
 
 ### Hangeul Quest Kids (korean-app_v2.html)
+- **Level 1** ✅ — 예비과+unit01~09 JSON + 렌더러 완성
 - **Level 3 unit 6~9 작성 대기** — 플랜 확정 (아래 참고)
 - **Level 3 unit03 minor 이슈** (낮은 우선순위):
   - `listen_quiz` 첫 문제 "열쇠가 탁자 위에 있어요" — 스토리에서는 없다고 하므로 혼란 가능
