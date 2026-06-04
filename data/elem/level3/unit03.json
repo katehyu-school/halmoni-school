@@ -9,7 +9,7 @@
   "key_points": [
     "위치 명사 — 속/안/밖/위/아래/옆/앞/뒤",
     "N에 있어요 / N에 없어요",
-    "안 보여요 — negative expression"
+    "안 + 동사 — negation (안 보여요)"
   ],
   "sections": {
     "vocab": {
@@ -332,6 +332,51 @@
               "highlight": "우리 집"
             }
           ]
+        },
+        {
+          "id": "g03_an_verb",
+          "title": "안 + 동사 — 안 해요!",
+          "subtitle": "Making verbs negative",
+          "pattern": "안 + 동사",
+          "meaning": "don't ~ / can't see ~ / not doing ~",
+          "description": "Put 안 before any verb to make it negative. It's the easiest way to say 'not' in Korean — just add 안 before the verb!",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 안 + 동사 = negative",
+              "examples": [
+                "보여요 → 안 보여요. (I can see it → I can't see it.)",
+                "가요 → 안 가요. (I go → I don't go.)",
+                "먹어요 → 안 먹어요. (I eat → I don't eat.)",
+                "해요 → 안 해요. (I do it → I don't do it.)"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 하다 동사는 명사 + 안 + 해요",
+              "examples": [
+                "공부해요 → 공부 안 해요. (I study → I don't study.)",
+                "운동해요 → 운동 안 해요. (I exercise → I don't exercise.)"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "마법 열쇠가 안 보여요!",
+              "english": "I can't see the magic key!",
+              "highlight": "안 보여요"
+            },
+            {
+              "korean": "오늘은 학교에 안 가요.",
+              "english": "I'm not going to school today.",
+              "highlight": "안 가요"
+            },
+            {
+              "korean": "숙제 안 했어요.",
+              "english": "I didn't do my homework.",
+              "highlight": "안 했어요"
+            }
+          ]
         }
       ]
     },
@@ -404,34 +449,34 @@
           ]
         },
         {
-          "scene": "🗝️ 마침내!",
-          "scene_en": "Finally!",
+          "scene": "❓ 마침내... 어디에 있을까요?",
+          "scene_en": "Finally... where could it be?",
           "lines": [
             {
-              "speaker": "할머니",
-              "color": "coral",
-              "text": "열쇠가 쿠션 ___ 에 있어!",
-              "en": "The key is under the cushion!",
+              "speaker": "나",
+              "color": "teal",
+              "text": "탁자 ___ 에도 없어요.",
+              "en": "It's not on top of the table either.",
               "type": "fill",
-              "ans": "아래",
+              "ans": "위",
               "opts": [
-                "아래",
                 "위",
-                "속"
+                "속",
+                "앞"
               ]
             },
             {
               "speaker": "나",
               "color": "teal",
-              "text": "찾았어요! 여기 있어요!",
-              "en": "Found it! It's here!",
+              "text": "마법 열쇠가 안 보여요!",
+              "en": "I can't see the magic key!",
               "type": "given"
             },
             {
               "speaker": "할머니",
               "color": "coral",
-              "text": "잘했어! 이제 열 수 있어~",
-              "en": "Well done! Now we can open it!",
+              "text": "마법 열쇠는 어디에 있을까요?",
+              "en": "Where could the magic key be?",
               "type": "given"
             }
           ]
@@ -681,25 +726,25 @@
           ]
         },
         {
-          "scene": "🔍",
-          "english": "I have to find it!",
-          "hint": "찾아야 해요 = have to find",
-          "sentence": "내가 찾아야 해요!",
+          "scene": "❓",
+          "english": "Where is the magic key?",
+          "hint": "어디에 있을까요? = where could it be?",
+          "sentence": "마법 열쇠는 어디에 있을까요?",
           "chunks": [
             {
-              "text": "내가",
+              "text": "마법 열쇠는",
               "type": "name",
-              "en": "I"
+              "en": "the magic key"
             },
             {
-              "text": "찾아야",
-              "type": "verb",
-              "en": "have to find"
+              "text": "어디에",
+              "type": "particle",
+              "en": "where"
             },
             {
-              "text": "해요!",
+              "text": "있을까요?",
               "type": "verb",
-              "en": "(obligation)"
+              "en": "could it be?"
             }
           ]
         }
