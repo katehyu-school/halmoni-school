@@ -10,11 +10,12 @@
 /* ── MY SPACE ─────────────────────────────────────────── */
 .ms-btn{padding:5px 12px;border:1.5px solid rgba(255,255,255,.5);border-radius:7px;background:rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;white-space:nowrap;transition:all .15s;}
 .ms-btn:hover{background:rgba(255,255,255,.35);}
-#ms-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:9999;overflow-y:auto;flex-direction:column;}
+#ms-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;}
 #ms-overlay.open{display:flex;}
-.ms-header{background:linear-gradient(135deg,#5BB8F5,#4ECDC4);padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10;}
-.ms-back-btn{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-family:'Jua',sans-serif;}
-.ms-back-btn:hover{background:rgba(255,255,255,.35);}
+.ms-modal{background:var(--bg,#fafaf9);border-radius:16px;width:90%;max-width:660px;max-height:88vh;overflow-y:auto;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);}
+.ms-header{background:var(--teal,#3BB0A0);padding:13px 20px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0;position:sticky;top:0;z-index:10;flex-shrink:0;}
+.ms-close-btn{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin-left:auto;flex-shrink:0;}
+.ms-close-btn:hover{background:rgba(255,255,255,.35);}
 .ms-title{color:#fff;font-weight:700;font-family:'Jua',sans-serif;font-size:1.15rem;}
 .ms-profile-chip{margin-left:auto;display:flex;align-items:center;gap:8px;}
 .ms-profile-name{color:#fff;font-size:13px;font-weight:700;}
@@ -72,6 +73,7 @@
 .ms-writing-thumb-date{font-size:10px;color:var(--muted);text-align:center;padding:4px 6px;background:#f8f9fa;}
 .ms-writing-thumb-del{position:absolute;top:5px;right:5px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:#FF6B6B;line-height:1;}
 .ms-writing-thumb-del:hover{background:#FF6B6B;color:#fff;}
+</div>
 `;
   document.head.appendChild(s);
 })();
@@ -83,13 +85,13 @@
     const wrap = document.createElement('div');
     wrap.innerHTML = `
 <!-- ═══════════════ MY SPACE OVERLAY ═══════════════ -->
-<div id="ms-overlay">
-
+<div id="ms-overlay" onclick="if(event.target===this)closeMySpace()">
+<div class="ms-modal">
   <!-- HEADER -->
   <div class="ms-header">
-    <button class="ms-back-btn" onclick="closeMySpace()">← 돌아가기</button>
     <span class="ms-title">✏️ My Space</span>
     <div class="ms-profile-chip" id="ms-profile-chip"></div>
+    <button class="ms-close-btn" onclick="closeMySpace()" title="Close">✕</button>
   </div>
 
   <!-- SETUP SCREEN (first time) -->
@@ -270,6 +272,7 @@ let msCanvas, msCtx, msDrawing = false, msLastX = 0, msLastY = 0;
 // ── OPEN / CLOSE ─────────────────────────────────────────
 function openMySpace() {
   document.getElementById('ms-overlay').classList.add('open');
+  document.addEventListener('keydown', _msEscHandler);
   document.body.style.overflow = 'hidden';
   const profiles = msGetJ('ms_profiles');
   msCurrent = msGet('ms_current');
@@ -279,8 +282,10 @@ function openMySpace() {
     msShowMain();
   }
 }
+function _msEscHandler(e){if(e.key==='Escape')closeMySpace();}
 function closeMySpace() {
   document.getElementById('ms-overlay').classList.remove('open');
+  document.removeEventListener('keydown', _msEscHandler);
   document.body.style.overflow = '';
 }
 
@@ -607,76 +612,4 @@ function msPick(cid, val, el) {
 }
 function msPickColor(cid, val, el) {
   document.getElementById(cid).querySelectorAll('.ms-color-chip').forEach(x=>x.classList.remove('selected'));
-  el.classList.add('selected');
-  if (cid==='ms-setup-colors') msSetupColor = val;
-  else if (cid==='ms-deco-colors') { msDecoColor = val; msAutoSaveDeco(); }
-}
-function msRenderDecoPanel() {
-  const av = msGet('ms_'+msCurrent+'_av','🐨');
-  const col = msGet('ms_'+msCurrent+'_color','#5BB8F5');
-  msDecoAv = av; msDecoColor = col;
-  document.getElementById('ms-deco-name').value = msCurrent;
-  msRenderAvatarPicker('ms-deco-avatars', av, ()=>{});
-  msRenderColorPicker('ms-deco-colors', col, ()=>{});
-  msRenderStickers();
-}
-function msAutoSaveDeco() {
-  if (msDecoAv) msSet('ms_'+msCurrent+'_av', msDecoAv);
-  if (msDecoColor) msSet('ms_'+msCurrent+'_color', msDecoColor);
-  msUpdateProfileChip();
-}
-function msSaveDeco() {
-  const newName = document.getElementById('ms-deco-name').value.trim();
-  if (!newName) return;
-  if (msDecoAv) msSet('ms_'+msCurrent+'_av', msDecoAv);
-  if (msDecoColor) msSet('ms_'+msCurrent+'_color', msDecoColor);
-  // rename if changed
-  if (newName !== msCurrent) {
-    const profiles = msGetJ('ms_profiles');
-    const i = profiles.indexOf(msCurrent);
-    if (i>-1) profiles[i] = newName;
-    // copy data
-    const notes = msGetJ('ms_'+msCurrent+'_notes');
-    const av = msGet('ms_'+msCurrent+'_av','🐨');
-    const col = msGet('ms_'+msCurrent+'_color','#5BB8F5');
-    const sk = msGet('ms_'+msCurrent+'_stickers','');
-    msSetJ('ms_'+newName+'_notes', notes);
-    msSet('ms_'+newName+'_av', av);
-    msSet('ms_'+newName+'_color', col);
-    msSet('ms_'+newName+'_stickers', sk);
-    msSetJ('ms_profiles', profiles);
-    msSet('ms_current', newName);
-    msCurrent = newName;
-  }
-  msUpdateProfileChip();
-  const btn = event.target;
-  btn.textContent = '✓ 저장됨!';
-  setTimeout(()=>btn.textContent='저장', 1500);
-}
-
-// ── TIER BADGES ──────────────────────────────────────────
-function msAddSticker() { /* tier system — no-op */ }
-function msRenderStickers() {
-  const notes = msGetJ('ms_'+msCurrent+'_notes');
-  const total = notes.length;
-  const tierIdx = Math.min(Math.floor(total/10), MS_BADGE_TIERS.length-1);
-  const inTier = total % 10;
-  const tier = MS_BADGE_TIERS[tierIdx];
-  const nextTier = MS_BADGE_TIERS[Math.min(tierIdx+1, MS_BADGE_TIERS.length-1)];
-  const isLegend = tierIdx===MS_BADGE_TIERS.length-1;
-  const el = document.getElementById('ms-sticker-display');
-  const hint = document.getElementById('ms-sticker-hint');
-  const dots = Array(10).fill(0).map((_,i)=>
-    `<span style="font-size:20px;opacity:${i<inTier?1:.15}">●</span>`
-  ).join('');
-  el.innerHTML = `<div style="text-align:center;padding:8px 0;">
-    <div style="font-size:52px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
-    <div style="font-size:13px;font-weight:700;color:#5BB8F5;margin-bottom:10px;">${tier.name} · ${total} notes</div>
-    <div style="display:flex;gap:3px;justify-content:center;margin-bottom:6px;">${dots}</div>
-  </div>`;
-  hint.textContent = isLegend&&inTier===0&&total>0 ? '👑 Legend! You are amazing!'
-    : inTier===0&&total>0 ? `🎉 Level up! Welcome, ${tier.name}!`
-    : total===0 ? 'Save your first note to start collecting! ✍️'
-    : `${10-inTier} more → ${nextTier.badge} ${nextTier.name}`;
-}
-// ── END MY SPACE ─────────────────────────────────────────
+  el.c

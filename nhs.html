@@ -690,7 +690,7 @@ function buildSidebar(){
     '<div class="sidebar-hdr" style="margin-top:0">📺 Level 1</div>'
     +L1_EPISODES.map((ep,i)=>mkItem(ep,i,'L1')).join('')
     +'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>'
-    +'<div class="sidebar-hdr" style="margin-top:16px">📺 Level 2</div>'
+    +'<div style="margin-top:28px;border-top:2px solid var(--teal-lt);padding-top:20px"><div class="sidebar-hdr" style="margin-top:0">📺 Level 2</div></div>'
     +L2_EPISODES.map((ep,i)=>mkItem(ep,i,'L2')).join('');
 }
 

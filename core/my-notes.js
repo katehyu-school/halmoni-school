@@ -10,11 +10,12 @@
 /* ── NHS MY NOTES ────────────────────────────────────── */
 .nms-btn{padding:6px 14px;background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-300);border-radius:var(--radius-xl);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
 .nms-btn:hover{background:rgba(255,255,255,.32);}
-#nms-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fafaf9;z-index:9999;overflow-y:auto;flex-direction:column;}
+#nms-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center;}
 #nms-overlay.open{display:flex;}
-.nms-header{background:var(--teal);padding:13px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
-.nms-back{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:13px;}
-.nms-back:hover{background:rgba(255,255,255,.28);}
+.nms-modal{background:#fafaf9;border-radius:16px;width:90%;max-width:660px;max-height:88vh;overflow-y:auto;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);}
+.nms-header{background:var(--teal);padding:13px 20px;display:flex;align-items:center;gap:12px;border-radius:16px 16px 0 0;position:sticky;top:0;z-index:10;flex-shrink:0;}
+.nms-close{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;margin-left:auto;flex-shrink:0;}
+.nms-close:hover{background:rgba(255,255,255,.28);}
 .nms-hdr-title{color:#fff;font-weight:700;font-size:1.05rem;letter-spacing:.02em;}
 .nms-chip{margin-left:auto;display:flex;align-items:center;gap:8px;}
 .nms-av-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;}
@@ -78,6 +79,7 @@
 .nms-writing-thumb-del:hover{background:var(--coral);color:#fff;}
 .nms-sec-title{font-size:14px;font-weight:700;color:var(--warm-700);margin-bottom:12px;}
 
+</div>
 `;
   document.head.appendChild(s);
 })();
@@ -89,12 +91,12 @@
     const wrap = document.createElement('div');
     wrap.innerHTML = `
 <!-- ═══════════════ NHS MY NOTES OVERLAY ═══════════════ -->
-<div id="nms-overlay">
-
+<div id="nms-overlay" onclick="if(event.target===this)closeNMS()">
+<div class="nms-modal">
   <div class="nms-header">
-    <button class="nms-back" onclick="closeNMS()">← Back</button>
     <span class="nms-hdr-title">📓 My Notes</span>
     <div class="nms-chip" id="nms-profile-chip"></div>
+    <button class="nms-close" onclick="closeNMS()" title="Close">✕</button>
   </div>
 
   <!-- SETUP -->
@@ -273,14 +275,17 @@ let nmsCanvas, nmsCtx, nmsDrawing=false, nmsLX=0, nmsLY=0;
 // ── OPEN / CLOSE ─────────────────────────────────────────
 function openNMS(){
   document.getElementById('nms-overlay').classList.add('open');
+  document.addEventListener('keydown', _nmsEscHandler);
   document.body.style.overflow='hidden';
   const profiles=nmsGetJ('nms_profiles');
   nmsCurrent=nmsGet('nms_current');
   if(!profiles.length||!nmsCurrent){ nmsShowSetup(true); }
   else { nmsShowMain(); }
 }
+function _nmsEscHandler(e){if(e.key==='Escape')closeNMS();}
 function closeNMS(){
   document.getElementById('nms-overlay').classList.remove('open');
+  document.removeEventListener('keydown', _nmsEscHandler);
   document.body.style.overflow='';
 }
 
@@ -576,77 +581,4 @@ function nmsRenderAvatarPicker(cid, selected, onChange){
     `<div class="nms-av-opt${a===selected?' selected':''}" style="font-size:20px;" onclick="nmsPickAvatar('${cid}','${a}',this)">${a}</div>`
   ).join('');
 }
-function nmsPickAvatar(cid,val,el){
-  document.getElementById(cid).querySelectorAll('.nms-av-opt').forEach(x=>x.classList.remove('selected'));
-  el.classList.add('selected');
-  const cb=document.getElementById(cid)._onChange;
-  if(cb) cb(val);
-}
-function nmsRenderColorPicker(cid, selected, onChange){
-  const el=document.getElementById(cid);
-  el.innerHTML=NMS_COLORS.map(c=>
-    `<div class="nms-color-opt${c===selected?' selected':''}" style="background:${c}" onclick="nmsPickColor('${cid}','${c}',this)"></div>`
-  ).join('');
-}
-function nmsPickColor(cid,val,el){
-  document.getElementById(cid).querySelectorAll('.nms-color-opt').forEach(x=>x.classList.remove('selected'));
-  el.classList.add('selected');
-  if(cid==='nms-setup-colors') nmsSetupColor=val;
-  else if(cid==='nms-deco-colors'){
-    nmsDecoColor=val;
-    nmsSet('nms_'+nmsCurrent+'_color',val);
-    nmsUpdateChip();
-  }
-}
-function nmsRenderDecoPanel(){
-  const col=nmsGet('nms_'+nmsCurrent+'_color','#0f7c6e');
-  nmsDecoColor=col;
-  document.getElementById('nms-deco-name').value=nmsCurrent;
-  nmsRenderColorPicker('nms-deco-colors',col,()=>{});
-  nmsRenderAvatarPicker('nms-deco-avs',nmsGet('nms_'+nmsCurrent+'_av','🦊'),v=>{nmsDecoAv=v; nmsSet('nms_'+nmsCurrent+'_av',v); nmsUpdateChip();});
-  nmsRenderBadges();
-}
-function nmsSaveDeco(){
-  const newName=document.getElementById('nms-deco-name').value.trim();
-  if(!newName)return;
-  if(newName!==nmsCurrent){
-    const profiles=nmsGetJ('nms_profiles');
-    const i=profiles.indexOf(nmsCurrent);
-    if(i>-1) profiles[i]=newName;
-    ['_notes','_color','_av'].forEach(k=>{
-      const v=localStorage.getItem('nms_'+nmsCurrent+k);
-      if(v) nmsSet('nms_'+newName+k,v);
-    });
-    nmsSetJ('nms_profiles',profiles);
-    nmsSet('nms_current',newName);
-    nmsCurrent=newName;
-  }
-  nmsUpdateChip();
-  const btn=event.target;
-  btn.textContent='✓ 저장됨';
-  setTimeout(()=>btn.textContent='저장',1500);
-}
-function nmsRenderBadges(){
-  const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
-  const total=notes.length;
-  const tierIdx=Math.min(Math.floor(total/10),NMS_BADGE_TIERS.length-1);
-  const inTier=total%10;
-  const tier=NMS_BADGE_TIERS[tierIdx];
-  const nextTier=NMS_BADGE_TIERS[Math.min(tierIdx+1,NMS_BADGE_TIERS.length-1)];
-  const isLegend=tierIdx===NMS_BADGE_TIERS.length-1;
-  const dots=Array(10).fill(0).map((_,i)=>
-    `<span style="font-size:18px;opacity:${i<inTier?1:.15}">●</span>`
-  ).join('');
-  const hint=isLegend&&inTier===0&&total>0?'👑 Legend! You\'re amazing!'
-    :inTier===0&&total>0?`🎉 Level up! Welcome, ${tier.name}!`
-    :total===0?'Save your first note to earn a badge! ✍️'
-    :`${10-inTier} more notes → ${nextTier.badge} ${nextTier.name}`;
-  document.getElementById('nms-badge-display').innerHTML=
-    `<div style="text-align:center;padding:12px 0;">
-      <div style="font-size:56px;line-height:1;margin-bottom:6px;">${tier.badge}</div>
-      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:10px;">${tier.name} · ${total} notes</div>
-      <div style="display:flex;gap:3px;justify-content:center;margin-bottom:8px;">${dots}</div>
-      <div style="font-size:11px;color:var(--warm-500);">${hint}</div>
-    </div>`;
-}
-// ═══════════════════════════════════════════════════════
+function nmsPickAvatar(cid,val,
