@@ -671,7 +671,7 @@ const EPISODES=[
   {id:'ep05',label:'광장시장에 가요?'},
   {id:'ep06',label:'김밥 주세요'},
   {id:'ep07',label:'한국어 스터디 그룹을 만들어요'},
-  {id:'ep08',label:'내 도시락 어디 있어요?'},
+  {id:'ep08',label:'내 도시락은 어디에 있어요?'},
   {id:'ep09',label:'딸기 한 박스하고 사과 여섯 개 주세요'},
   {id:'ep10',label:'자전거 소풍을 가요'},
   {id:'ep11',label:'어서 오세요'},
@@ -690,28 +690,30 @@ function buildSidebar(){
 // ── LEVEL 1 TEST ───────────────────────────────────────
 // ══════════════════════════════════════════════════════
 const L1Q=[
-  {ep:'ep01',type:'mc',q:'처음 만났을 때 하는 인사는?',en:'Which phrase means "Nice to meet you"?',opts:['만나서 반가워요','잘 있어요','잘 먹겠습니다','안녕히 가세요'],ans:0,exp:'만나서 반가워요 = Nice to meet you! ep01 첫 만남 표현이에요.'},
-  {ep:'ep01',type:'mc',q:'"저는 정민이에요" — 저는 의 뜻은?',en:'"저는 정민이에요" — 저는 means?',opts:['I (formal) 저 = formal I','you 당신','he 그','she 그녀'],ans:0,exp:'저 = I (formal/polite). 친구에게는 나는, 어른에게는 저는을 써요.'},
-  {ep:'ep03',type:'listen',audio:'잘 먹겠습니다!',q:'잘 먹겠습니다 — 언제 써요?',en:'When do you say 잘 먹겠습니다?',opts:['밥 먹기 전 — before eating','밥 먹은 후 — after eating','잘 때 — when sleeping','학교 갈 때 — going to school'],ans:0,exp:'잘 먹겠습니다 = I will eat well! 식사 전에 하는 한국 인사예요.'},
-  {ep:'ep03',type:'mc',q:'"김치를 먹어요" — 를 의 역할은?',en:'What is the role of 를 in "김치를 먹어요"?',opts:['주어 표시 subject marker','목적어 표시 object marker','장소 표시 location marker','주제 표시 topic marker'],ans:1,exp:'을/를 = object marker. 동사의 대상(무엇을)을 표시해요.'},
-  {ep:'ep05',type:'listen',audio:'광장시장에 떡볶이를 먹으러 갈까?',q:'미래는 어디에 가자고 했어요?',en:'Where did Mirae suggest going?',opts:['한강 공원 Han River Park','광장시장 Gwangjang Market','학교 school','집 home'],ans:1,exp:'먹으러 갈까? = Shall we go eat? -(으)러 가다 = to go in order to do something!'},
-  {ep:'ep05',type:'mc',q:'버스기사가 뭐라고 했어요? · What did the bus driver say?',en:'What did the bus driver say?',opts:['안 가요. 반대 방향으로 가서 타세요.','네, 가요. 빨리 타세요.','몇 번 버스를 원해요?','감사합니다!'],ans:0,exp:'안 가요 = doesn\'t go there. 반대 방향 = opposite direction. 가서 타세요 = go and take it! -아/어서 순서 연결!'},
-  {ep:'ep06',type:'mc',q:'"김밥 2인분 주세요" — 인분 의 뜻은?',en:'"김밥 2인분 주세요" — what does 인분 mean?',opts:['a bottle 병','a cup 잔','a serving/portion 인분','a piece 개'],ans:2,exp:'인분 = serving / portion. 식당에서 음식 주문할 때 쓰는 단위예요.'},
-  {ep:'ep07',type:'mc',q:'한국어 어순은?',en:'What is Korean word order?',opts:['SVO (영어처럼)','SOV (주어-목적어-동사)','VSO (동사 먼저)','OVS (목적어 먼저)'],ans:1,exp:'한국어는 SOV — 동사가 항상 문장 끝에! 나는 밥을 먹어요. (I rice eat)'},
-  {ep:'ep04',type:'listen',audio:'몇 시에 만날까?',q:'이 문장의 뜻은?',en:'What does this sentence mean?',opts:['What time shall we meet?','Where shall we meet?','Who are we meeting?','When shall we eat?'],ans:0,exp:'몇 시에 = at what time. 만날까? = shall we meet? 약속 잡을 때 써요.'},
-  {ep:'ep04',type:'mc',q:'"도서관에서 공부해요" — 에서 의 역할은?',en:'What does 에서 mark in "도서관에서 공부해요"?',opts:['목적어 object','행동 장소 action location','방향 direction','도구 instrument'],ans:1,exp:'에서 = at/in (for actions). 무언가를 하는 장소 앞에 써요. 에 = location of existence.'},
-  {ep:'ep08',type:'listen',audio:'가방이 의자 위에 있어요.',q:'가방은 어디에 있어요?',en:'Where is the bag?',opts:['의자 위 on the chair','의자 아래 under the chair','의자 옆 next to the chair','의자 앞 in front of the chair'],ans:0,exp:'위에 = on top of / above. 아래에 = below. 위/아래/옆/앞/뒤 위치 표현!'},
-  {ep:'ep08',type:'mc',q:'"열쇠가 없어요" — 없어요 의 반대말은?',en:'What is the opposite of 없어요?',opts:['있어요 it exists / it\'s here','가요 going','먹어요 eating','해요 doing'],ans:0,exp:'있어요 ↔ 없어요. There is ↔ There isn\'t. 위치 표현의 핵심!'},
-  {ep:'ep09',type:'mc',q:'고유어 숫자 "여섯" 은?',en:'Native Korean number "여섯" = ?',opts:['5 다섯','6 여섯','7 일곱','8 여덟'],ans:1,exp:'고유어 숫자: 하나(1) 둘(2) 셋(3) 넷(4) 다섯(5) 여섯(6) 일곱(7) 여덟(8)'},
-  {ep:'ep09',type:'listen',audio:'딸기 한 박스 주세요.',q:'뭘 주문했어요?',en:'What was ordered?',opts:['딸기 한 박스 one box of strawberries','사과 한 박스 one box of apples','딸기 두 박스 two boxes of strawberries','포도 한 박스 one box of grapes'],ans:0,exp:'딸기 = strawberries. 한 박스 = one box. 한 = 하나 단위 앞에서!'},
-  {ep:'ep10',type:'mc',q:'"어제 뭐 했어요?" — 했어요 는 어떤 시제?',en:'"했어요" — which tense is this?',opts:['현재 present','과거 past','미래 future','진행 progressive'],ans:1,exp:'했어요 = 하다 + 았어요 → 했어요. 과거형! 어제(yesterday)와 함께 써요.'},
-  {ep:'ep10',type:'listen',audio:'자전거를 타고 있어요.',q:'지금 뭐 하고 있어요?',en:'What are they doing right now?',opts:['자전거 타기 riding a bike','밥 먹기 eating','자기 sleeping','공부하기 studying'],ans:0,exp:'타고 있어요 = is riding (진행형). ~고 있어요 = be + -ing!'},
-  {ep:'ep11',type:'listen',audio:'어서 오세요.',q:'어서 오세요 — 언제 써요?',en:'When do you use 어서 오세요?',opts:['손님이 왔을 때 when a guest arrives','밥 먹을 때 when eating','잘 때 when sleeping','공부할 때 when studying'],ans:0,exp:'어서 오세요 = Welcome! 손님이 왔을 때, 가게에 들어왔을 때 써요.'},
-  {ep:'ep11',type:'mc',q:'"어떻게 지내셨어요?" — 셨어요 의 역할은?',en:'What does -셨어요 do in "어떻게 지내셨어요?"?',opts:['과거 부정 past negative','높임 표현 honorific marker','미래 표현 future tense','의문문 question marker'],ans:1,exp:'-셨어요 = honorific past. 어른이나 존중하는 사람에게 써요. 지냈어요 → 지내셨어요!'},
-  {ep:'ep11',type:'mc',q:'"덕분에 잘 지내고 있어요" — 덕분에 의 뜻은?',en:'What does 덕분에 mean?',opts:['thanks to you 덕분에','in spite of you','without you','instead of you'],ans:0,exp:'덕분에 = thanks to you / owing to you. 따뜻하고 겸손한 표현이에요!'},
-  {ep:'ep11',type:'mc',q:'"얘들아, 인사해야지!" — 해야지 의 뜻은?',en:'What does ~해야지 mean?',opts:['하지 마! don\'t do it','해야 해 you should do it (gentle)','했어 I did it','할 거야 I will do it'],ans:1,exp:'~해야지 = you should (gentle nudge). 부모님이 아이에게 부드럽게 권유할 때 써요.'},
-  {ep:'ep12',type:'listen',audio_text:'경복궁도 방문할 거예요.',q:'방문할 거예요 — 이 표현의 시제는?',en:'방문할 거예요 — what tense is this?',opts:['미래 future','과거 past','현재 present','불확실 uncertain'],ans:0,exp:'-(으)ㄹ 거예요 = future tense! 방문할 거예요 = going to visit. 미래 계획 표현이에요.'},
-  {ep:'ep12',type:'mc',q:'"갈 수 있어요" — 수 있어요 의 뜻은?',en:'What does -(으)ㄹ 수 있어요 mean?',opts:['can do 할 수 있다','must do 해야 한다','did already 이미 했다','will not do 안 할 거다'],ans:0,exp:'-(으)ㄹ 수 있어요 = can / able to. 능력과 가능성을 나타내요! 반대: 수 없어요 / 못 + verb'},
+  // ── TOPIK 1급 스타일 빈칸 채우기 (문법) ──
+  {ep:'topik',type:'mc',q:'빈칸에 알맞은 것을 고르세요.\n저는 학생_____.', en:'Choose the correct word: I am a student ___.', opts:['이에요','가요','먹어요','있어요'], ans:0, exp:'N이에요/예요 = "is/am/are". 학생 ends in consonant → 이에요.'},
+  {ep:'topik',type:'mc',q:'빈칸에 알맞은 것을 고르세요.\n오늘 학교_____ 공부해요.', en:'I study _____ school today.', opts:['에서','이','을','의'], ans:0, exp:'에서 = at/in (location of an action). 학교에서 = at school.'},
+  {ep:'topik',type:'mc',q:'빈칸에 알맞은 것을 고르세요.\n저는 사과_____ 좋아해요.', en:'I like apples. Choose the correct particle.', opts:['를','이','에서','도'], ans:0, exp:'를/을 = object marker. 사과 ends in vowel → 를.'},
+  {ep:'topik',type:'mc',q:'빈칸에 알맞은 것을 고르세요.\n어제 공원에서 친구를 _____.', en:'Yesterday I _____ my friend at the park.', opts:['만났어요','만나요','만날 거예요','만나세요'], ans:0, exp:'어제 = yesterday → past tense. 만나다 → 만났어요. -았/었어요 = past tense.'},
+  {ep:'topik',type:'mc',q:'빈칸에 알맞은 것을 고르세요.\n내일 친구하고 영화를 _____.', en:'Tomorrow I will watch a movie with my friend.', opts:['볼 거예요','봤어요','봐요','보세요'], ans:0, exp:'내일 = tomorrow → future. 보다 → 볼 거예요. -(으)ㄹ 거예요 = future tense.'},
+  // ── TOPIK 1급 스타일 어휘 ──
+  {ep:'topik',type:'mc',q:'다음 중 인사말이 아닌 것을 고르세요.', en:'Which one is NOT a greeting?', opts:['먹어요','안녕하세요','안녕히 가세요','반가워요'], ans:0, exp:'먹어요 = eat — not a greeting. 안녕하세요 / 안녕히 가세요 / 반가워요 are greetings.'},
+  {ep:'topik',type:'mc',q:'밑줄 친 말과 반대 의미의 것을 고르세요.\n저는 사과를 <u>좋아해요</u>.', en:'Choose the OPPOSITE of 좋아해요.', opts:['싫어해요','먹어요','사요','봐요'], ans:0, exp:'좋아해요 (like) ↔ 싫어해요 (dislike). 반의어 pair!'},
+  {ep:'topik',type:'mc',q:'다음 중 부탁할 때 쓰는 표현은?', en:'Which expression is used for a polite request?', opts:['주세요','감사합니다','죄송합니다','괜찮아요'], ans:0, exp:'주세요 = "please give me / please do." Used for polite requests.'},
+  {ep:'topik',type:'mc',q:'교실에 학생이 다섯 _____ 있어요.', en:'There are five students in the classroom. Choose the counter.', opts:['명','마리','개','권'], ans:0, exp:'명 = counter for people. 다섯 명 = 5 people. 마리 = animals, 개 = things, 권 = books.'},
+  // ── TOPIK 1급 스타일 읽기 ──
+  {ep:'topik',type:'mc',q:'다음을 읽고 맞는 것을 고르세요.\n"저는 선생님이에요. 학교에서 일해요."', en:'Read and choose the correct answer.', opts:['이 사람은 학교에서 일해요','이 사람은 병원에서 일해요','이 사람은 식당에서 일해요','이 사람은 회사에서 일해요'], ans:0, exp:'선생님 = teacher. 학교에서 일해요 = works at school.'},
+  {ep:'topik',type:'mc',q:'다음을 읽고 맞는 것을 고르세요.\n"오늘은 월요일이에요. 내일은 화요일이에요."\n내일은 무슨 요일이에요?', en:'Today is Monday. What day is tomorrow?', opts:['화요일','수요일','일요일','토요일'], ans:0, exp:'월요일 다음은 화요일. 요일 순서: 월화수목금토일.'},
+  {ep:'topik',type:'mc',q:'다음 대화의 빈칸에 알맞은 것을 고르세요.\nA: 오늘 학교에 가요?\nB: 아니요, _____.', en:'A: Are you going to school today? B: No, _____.', opts:['안 가요','가요','갔어요','갈 거예요'], ans:0, exp:'아니요 = No. 안 + 동사 = negative. 안 가요 = not going.'},
+  // ── TOPIK 1급 스타일 듣기 ──
+  {ep:'topik',type:'listen',audio_text:'저는 학생이에요. 한국어를 공부해요.', q:'이 사람은 무엇을 해요?', en:'What does this person do?', opts:['한국어를 공부해요','요리를 해요','음악을 들어요','운동을 해요'], ans:0, exp:'저는 학생이에요. 한국어를 공부해요. → This person studies Korean.'},
+  {ep:'topik',type:'listen',audio_text:'가방이 의자 위에 있어요.', q:'가방은 어디에 있어요?', en:'Where is the bag?', opts:['의자 위에 있어요','의자 아래에 있어요','의자 옆에 있어요','의자 뒤에 있어요'], ans:0, exp:'위에 있어요 = is on top of. 위/아래/옆/앞/뒤 + 에 있어요 for location.'},
+  {ep:'topik',type:'listen',audio_text:'저는 아침에 빵하고 우유를 먹어요.', q:'이 사람은 아침에 무엇을 먹어요?', en:'What does this person eat in the morning?', opts:['빵하고 우유','밥하고 국','라면하고 김치','과자하고 주스'], ans:0, exp:'하고 = and. 빵하고 우유 = bread and milk.'},
+  {ep:'topik',type:'listen',audio_text:'저는 버스로 학교에 가요.', q:'이 사람은 어떻게 학교에 가요?', en:'How does this person go to school?', opts:['버스로','지하철로','자전거로','걸어서'], ans:0, exp:'(으)로 = by (means of transport). 버스로 = by bus.'},
+  {ep:'topik',type:'listen',audio_text:'안녕하세요. 저는 미래예요. 저는 열다섯 살이에요.', q:'미래는 몇 살이에요?', en:'How old is 미래?', opts:['열다섯 살','열네 살','열여섯 살','열일곱 살'], ans:0, exp:'열다섯 = 15. 열 = 10, 다섯 = 5. 나이는 고유어 숫자!'},
+  {ep:'topik',type:'listen',audio_text:'오늘 날씨가 더워요. 수영을 하고 싶어요.', q:'이 사람은 무엇을 하고 싶어요?', en:'What does this person want to do?', opts:['수영을 하고 싶어요','요리를 하고 싶어요','공부를 하고 싶어요','자고 싶어요'], ans:0, exp:'더워요 = it's hot. -고 싶어요 = want to do.'},
+  {ep:'topik',type:'listen',audio_text:'지금 몇 시예요? 오후 두 시예요.', q:'지금 몇 시예요?', en:'What time is it now?', opts:['오후 두 시','오전 두 시','오후 세 시','오전 세 시'], ans:0, exp:'오후 = PM. 두 시 = 2 o'clock. 시간은 고유어 숫자: 한/두/세/네...'},
+  {ep:'topik',type:'listen',audio_text:'오늘은 비가 와요. 우산을 가지고 가세요.', q:'오늘 날씨가 어때요?', en:'What is the weather like today?', opts:['비가 와요','눈이 와요','맑아요','바람이 불어요'], ans:0, exp:'비가 와요 = it's raining. 우산 = umbrella. 날씨: 비/눈/맑다/흐리다.'},
 ];
 
 let ltIdx=0,ltScore=0,ltAnswered=false;
@@ -749,7 +751,7 @@ function renderLT(){
     ?`<button class="lt-listen-btn" onclick="speakTTS('${q.audio.replace(/'/g,"\'")}')">🔊 듣기</button><br>`
     :'';
   area.innerHTML=
-    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'버스타기':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':'손님 초대'}</div>`
+    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'버스타기':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':q.ep==='ep10'?'손님 초대':'TOPIK 1급'}</div>`
     +`<div class="lt-q-text">${ltIdx+1}. ${q.q}</div>`
     +`<div class="lt-q-en">${q.en}</div>`
     +listenBtn
@@ -1864,11 +1866,11 @@ const BASICS_TOPICS = [
   {id:'structure', icon:'🔡', label:'문장 구조',        en:'Sentence Structure'},
   {id:'greetings', icon:'👋', label:'인사 & 교실 표현', en:'Greetings & Classroom'},
   {id:'numbers',   icon:'🔢', label:'한국 숫자',        en:'Korean Numbers'},
-  {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice'},
   {id:'verbs',     icon:'📝', label:'동사 활용',        en:'Verb Conjugation'},
-  {id:'speaking',  icon:'🎤', label:'발음 & 스피킹',    en:'Pronunciation & Speaking'},
   {id:'questions', icon:'❓', label:'의문사 총정리',      en:'Question Words'},
   {id:'honorifics',icon:'🙇', label:'한국의 호칭 문화',   en:'Korean Titles & Address'},
+  {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice'},
+  {id:'speaking',  icon:'🎤', label:'발음 & 스피킹',    en:'Pronunciation & Speaking'},
 ];
 
 let curBasicsTopic = 'hangul';
@@ -2620,7 +2622,7 @@ function buildVerbs(){
     +'<div id="bp-verb-regular" class="btab-panel">'+tabRegular+'</div>'
     +'<div id="bp-verb-irreg" class="btab-panel">'+tabIrreg+'</div>'
     +'<div id="bp-verb-cards" class="btab-panel">'+tabCards+'</div>'
-    +'<div id="bp-verb-game" class="btab-panel"><div class="verb-game-box" id="verb-game-box"></div></div>';
+    +'<div id="bp-verb-game" class="btab-panel"><div class="verb-game-box" id="verb-game-box"></div></div>'
     +'<div id="bp-verb-ref" class="btab-panel">'+buildVerbRef()+'</div>';
 }
 
