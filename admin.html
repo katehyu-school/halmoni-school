@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 패널 · Yu Family Korean School</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0f1117;
+  --bg2:     #1a1d27;
+  --bg3:     #22273a;
+  --border:  rgba(255,255,255,.08);
+  --accent:  #7c6af5;
+  --accent2: #5b4fd4;
+  --green:   #34c78a;
+  --red:     #f0556a;
+  --amber:   #f5a623;
+  --text:    #e8eaf6;
+  --muted:   rgba(232,234,246,.45);
+  --radius:  14px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* ── 로그인 화면 ── */
+#loginScreen {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.login-logo {
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+}
+
+.login-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.login-sub {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.login-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.pw-row {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.pw-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 44px 12px 14px;
+  color: var(--text);
+  font-size: 0.97rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.pw-input:focus { border-color: var(--accent); }
+
+.eye-btn {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 1rem;
+  color: var(--muted);
+}
+
+.enter-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 0.97rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+}
+
+.enter-btn:hover:not(:disabled) { background: var(--accent2); }
+.enter-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.err-msg {
+  font-size: 0.8rem;
+  color: var(--red);
+  margin-top: 10px;
+  min-height: 1.2em;
+}
+
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-8px)}
+  40%,80%{transform:translateX(8px)}
+}
+
+/* ── 관리자 패널 ── */
+#adminPanel {
+  display: none;
+  width: 100%;
+  max-width: 660px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.panel-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.badge {
+  background: rgba(124,106,245,.18);
+  border: 1px solid rgba(124,106,245,.35);
+  color: var(--accent);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+
+.logout-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.logout-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* ── 섹션 카드 ── */
+.section-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 22px 20px;
+  margin-bottom: 16px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.section-icon {
+  font-size: 1.3rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.section-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── 비밀번호 변경 그리드 ── */
+.pw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pw-group {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.pw-role-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.role-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-student { background: var(--green); }
+.dot-teacher { background: var(--amber); }
+.dot-admin   { background: var(--accent); }
+
+.pw-field {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.pw-field:focus { border-color: var(--accent); }
+
+/* ── 버튼 ── */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+}
+
+.action-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+.btn-primary   { background: var(--accent); color: #fff; }
+.btn-primary:hover:not(:disabled)   { background: var(--accent2); }
+
+.btn-danger    { background: rgba(240,85,106,.15); color: var(--red); border: 1px solid rgba(240,85,106,.3); }
+.btn-danger:hover:not(:disabled)    { background: rgba(240,85,106,.25); }
+
+.btn-warning   { background: rgba(245,166,35,.15); color: var(--amber); border: 1px solid rgba(245,166,35,.3); }
+.btn-warning:hover:not(:disabled)   { background: rgba(245,166,35,.25); }
+
+/* ── 날짜 입력 ── */
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.date-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s;
+  color-scheme: dark;
+}
+
+.date-input:focus { border-color: var(--amber); }
+
+/* ── 토스트 ── */
+#toast {
+  position: fixed;
+  bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#toast.ok   { border-color: rgba(52,199,138,.4); color: var(--green); }
+#toast.fail { border-color: rgba(240,85,106,.4); color: var(--red);   }
+
+/* ── 구분선 ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0;
+}
+
+/* ── 힌트 텍스트 ── */
+.hint {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* ── 반응형 ── */
+@media (max-width: 480px) {
+  .panel-header { flex-direction: column; align-items: flex-start; }
+  .pw-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── 로그인 화면 ── -->
+<div id="loginScreen">
+  <div class="login-logo">🐯</div>
+  <div class="login-title">관리자 패널</div>
+  <div class="login-sub">Yu Family Korean School · Admin Only</div>
+
+  <div class="login-card">
+    <label class="field-label">관리자 비밀번호</label>
+    <div class="pw-row">
+      <input class="pw-input" type="password" id="loginPw" placeholder="관리자 비밀번호 입력"
+        onkeydown="if(event.key==='Enter') adminLogin()">
+      <button class="eye-btn" id="eyeBtn" onclick="toggleEye()">👁</button>
+    </div>
+    <button class="enter-btn" id="loginBtn" onclick="adminLogin()">입장하기</button>
+    <div class="err-msg" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ── 관리자 패널 ── -->
+<div id="adminPanel">
+
+  <div class="panel-header">
+    <div>
+      <div class="panel-title">⚙️ 관리자 패널 <span class="badge">ADMIN</span></div>
+    </div>
+    <button class="logout-btn" onclick="doLogout()">로그아웃</button>
+  </div>
+
+  <!-- 비밀번호 변경 -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">🔑</span>
+      <div>
+        <div class="section-title">비밀번호 변경</div>
+        <div class="section-desc">변경할 비밀번호만 입력하세요 (빈 칸은 그대로 유지)</div>
+      </div>
+    </div>
+
+    <div class="pw-grid">
+      <div class="pw-group">
+        <div class="pw-role-label">
+          <span class="role-dot dot-student"></span> 학생 비밀번호
+        </div>
+        <input class="pw-field" type="password" id="newStudent" placeholder="새 비밀번호">
+      </div>
+      <div class="pw-group">
+        <div class="pw-role-label">
+          <span class="role-dot dot-teacher"></span> 선생님 비밀번호
+        </div>
+        <input class="pw-field" type="password" id="newTeacher" placeholder="새 비밀번호">
+      </div>
+      <div class="pw-group">
+        <div class="pw-role-label">
+          <span class="role-dot dot-admin"></span> 관리자 비밀번호
+        </div>
+        <input class="pw-field" type="password" id="newAdmin" placeholder="새 비밀번호">
+      </div>
+    </div>
+
+    <button class="action-btn btn-primary" id="savePwBtn" onclick="savePasswords()">
+      💾 변경사항 저장
+    </button>
+    <div class="hint">⚠️ 관리자 비밀번호를 변경하면 다음 로그인 시 새 비밀번호를 사용하세요.</div>
+  </div>
+
+  <!-- 연습 세션 리셋 -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">🔄</span>
+      <div>
+        <div class="section-title">연습 세션 초기화</div>
+        <div class="section-desc">수업이 끝난 후 다음 수업을 위해 세션을 리셋합니다</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:14px;line-height:1.7;">
+      현재 진행 중인 연습 세션(문제 진행도, 지목 학생, 거수 상태)을
+      모두 초기 상태로 되돌립니다. 학생 목록은 유지됩니다.
+    </p>
+
+    <button class="action-btn btn-warning" id="resetSessionBtn" onclick="confirmResetSession()">
+      🔄 세션 리셋
+    </button>
+  </div>
+
+  <!-- 출석 데이터 초기화 -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">📋</span>
+      <div>
+        <div class="section-title">출석 데이터 삭제</div>
+        <div class="section-desc">특정 날짜 또는 전체 출석 기록을 삭제합니다</div>
+      </div>
+    </div>
+
+    <div class="date-row">
+      <input class="date-input" type="date" id="attendDate"
+        placeholder="날짜 선택 (비워두면 전체 삭제)">
+      <button class="action-btn btn-danger" id="clearAttendBtn" onclick="confirmClearAttend()">
+        🗑️ 출석 삭제
+      </button>
+    </div>
+    <div class="hint">
+      날짜를 선택하면 해당 날짜의 기록만 삭제됩니다.<br>
+      날짜를 비워두면 <strong style="color:var(--red);">전체 출석 기록이 삭제</strong>됩니다.
+    </div>
+  </div>
+
+</div>
+
+<!-- 토스트 -->
+<div id="toast"></div>
+
+<script>
+const SBURL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
+const SBKEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
+const sb    = supabase.createClient(SBURL, SBKEY);
+
+let _adminPw = ''; // 로그인한 관리자 비밀번호 (세션 메모리에만 보관)
+
+// ── 토스트 ──────────────────────────────────
+function toast(msg, type = 'ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = `show ${type}`;
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = ''; }, 3000);
+}
+
+// ── 눈 아이콘 ────────────────────────────────
+function toggleEye() {
+  const inp = document.getElementById('loginPw');
+  const btn = document.getElementById('eyeBtn');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+
+// ── 관리자 로그인 ────────────────────────────
+async function adminLogin() {
+  const pw  = document.getElementById('loginPw').value.trim();
+  const err = document.getElementById('loginErr');
+  const btn = document.getElementById('loginBtn');
+
+  if (!pw) { err.textContent = '비밀번호를 입력하세요'; return; }
+
+  btn.disabled    = true;
+  btn.textContent = '확인 중…';
+  err.textContent = '';
+
+  try {
+    const { data, error } = await sb.rpc('verify_app_password', { input_pw: pw });
+    if (error || data !== 'admin') {
+      err.textContent = data && data !== 'admin'
+        ? '관리자 비밀번호가 아니에요'
+        : '비밀번호가 맞지 않아요. Please try again.';
+      document.getElementById('loginPw').value = '';
+      const card = document.querySelector('.login-card');
+      card.style.animation = 'none';
+      void card.offsetHeight;
+      card.style.animation = 'shake .4s ease';
+    } else {
+      _adminPw = pw;
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').style.display  = 'block';
+    }
+  } catch (e) {
+    err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = '입장하기';
+  }
+}
+
+// ── 로그아웃 ─────────────────────────────────
+function doLogout() {
+  _adminPw = '';
+  document.getElementById('loginPw').value   = '';
+  document.getElementById('adminPanel').style.display  = 'none';
+  document.getElementById('loginScreen').style.display = 'block';
+}
+
+// ── 비밀번호 저장 ─────────────────────────────
+async function savePasswords() {
+  const fields = [
+    { id: 'newStudent', role: 'student' },
+    { id: 'newTeacher', role: 'teacher' },
+    { id: 'newAdmin',   role: 'admin'   },
+  ];
+
+  const toChange = fields.filter(f => document.getElementById(f.id).value.trim());
+  if (!toChange.length) { toast('변경할 비밀번호를 입력하세요', 'fail'); return; }
+
+  const btn = document.getElementById('savePwBtn');
+  btn.disabled    = true;
+  btn.textContent = '저장 중…';
+
+  let newAdminPw = null;
+
+  try {
+    for (const f of toChange) {
+      const newPw = document.getElementById(f.id).value.trim();
+      const { data, error } = await sb.rpc('update_app_password', {
+        admin_pw:    _adminPw,
+        target_role: f.role,
+        new_pw:      newPw
+      });
+      if (error || !data) throw new Error(`${f.role} 변경 실패`);
+      if (f.role === 'admin') newAdminPw = newPw;
+      document.getElementById(f.id).value = '';
+    }
+
+    // 관리자 비밀번호가 바뀌었으면 세션 갱신
+    if (newAdminPw) _adminPw = newAdminPw;
+
+    toast(`✅ ${toChange.length}개 비밀번호 변경 완료!`);
+  } catch (e) {
+    toast(`❌ ${e.message}`, 'fail');
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = '💾 변경사항 저장';
+  }
+}
+
+// ── 세션 리셋 ─────────────────────────────────
+async function confirmResetSession() {
+  if (!confirm('연습 세션을 초기화할까요?\n진행 중인 문제 진행도가 모두 리셋됩니다.')) return;
+
+  const btn = document.getElementById('resetSessionBtn');
+  btn.disabled    = true;
+  btn.textContent = '리셋 중…';
+
+  try {
+    const { data, error } = await sb.rpc('reset_session_data', { admin_pw: _adminPw });
+    if (error || !data) throw new Error('리셋 실패');
+    toast('✅ 세션이 초기화됐어요!');
+  } catch (e) {
+    toast('❌ 세션 리셋 실패', 'fail');
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = '🔄 세션 리셋';
+  }
+}
+
+// ── 출석 삭제 ─────────────────────────────────
+async function confirmClearAttend() {
+  const dateVal = document.getElementById('attendDate').value;
+  const msg = dateVal
+    ? `${dateVal} 출석 기록을 삭제할까요?`
+    : '⚠️ 전체 출석 기록을 삭제할까요?\n이 작업은 되돌릴 수 없습니다.';
+  if (!confirm(msg)) return;
+
+  const btn = document.getElementById('clearAttendBtn');
+  btn.disabled    = true;
+  btn.textContent = '삭제 중…';
+
+  try {
+    const params = { admin_pw: _adminPw };
+    if (dateVal) params.target_date = dateVal;
+
+    const { data, error } = await sb.rpc('clear_attendance_data', params);
+    if (error || data === -1) throw new Error('인증 실패 또는 삭제 오류');
+    toast(`✅ 출석 기록 ${data}건 삭제 완료`);
+    document.getElementById('attendDate').value = '';
+  } catch (e) {
+    toast(`❌ ${e.message}`, 'fail');
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = '🗑️ 출석 삭제';
+  }
+}
+
+// Enter 키 지원
+document.getElementById('loginPw').addEventListener('keydown', e => {
+  if (e.key === 'Enter') adminLogin();
+});
+</script>
+</body>
+</html>

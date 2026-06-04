@@ -1,0 +1,194 @@
+{
+  "unit": 8,
+  "title": "🎨 그림을 그려요!",
+  "book": 1,
+  "goal": {
+    "ko": "내가 하는 일을 말할 수 있어요! 🖍️",
+    "en": "I can say what I'm doing!"
+  },
+  "key_points": [
+    "그림을 그려요 = I draw a picture",
+    "뭐 해요? = What are you doing?",
+    "~아요/어요 = present tense verb ending"
+  ],
+  "sections": {
+    "vocab": {
+      "🎨 활동 Activities": [
+        { "emoji": "🎨", "kr": "그리다", "en": "to draw", "rom": "geu-ri-da" },
+        { "emoji": "📖", "kr": "읽다", "en": "to read", "rom": "ik-da" },
+        { "emoji": "✍️", "kr": "쓰다", "en": "to write", "rom": "sseu-da" },
+        { "emoji": "🎵", "kr": "노래하다", "en": "to sing", "rom": "no-rae-ha-da" },
+        { "emoji": "💃", "kr": "춤추다", "en": "to dance", "rom": "chum-chu-da" },
+        { "emoji": "🏃", "kr": "달리다", "en": "to run", "rom": "dal-li-da" },
+        { "emoji": "😴", "kr": "자다", "en": "to sleep", "rom": "ja-da" },
+        { "emoji": "🍽️", "kr": "먹다", "en": "to eat", "rom": "meok-da" }
+      ],
+      "🖼️ 미술 Art": [
+        { "emoji": "🖍️", "kr": "크레파스", "en": "crayons", "rom": "keu-re-pa-seu" },
+        { "emoji": "🖌️", "kr": "붓", "en": "paintbrush", "rom": "but" },
+        { "emoji": "🎨", "kr": "그림", "en": "picture / drawing", "rom": "geu-rim" },
+        { "emoji": "📄", "kr": "종이", "en": "paper", "rom": "jong-i" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g08_ayo_eoyo",
+          "title": "동사 + 아요/어요",
+          "subtitle": "Present tense action verbs",
+          "pattern": "verb stem + 아요 (ㅏ/ㅗ) · 어요 (other vowels)",
+          "meaning": "What someone is doing right now",
+          "description": "To say what you're doing NOW, add 아요 or 어요 to the verb stem. The vowel in the stem decides which one!",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 ㅏ or ㅗ stem → 아요",
+              "examples": [
+                "자다 → 자 + 아요 → 자요 (sleep)",
+                "오다 → 와요 (come) — special!"
+              ]
+            },
+            {
+              "color": "coral",
+              "label": "🔴 Other vowels → 어요",
+              "examples": [
+                "먹다 → 먹 + 어요 → 먹어요 (eat)",
+                "읽다 → 읽 + 어요 → 읽어요 (read)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 하다 verbs → 해요",
+              "examples": [
+                "노래하다 → 노래해요 (sing)",
+                "춤추다 → 춤춰요 (dance) — special!"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "그림을 그려요.", "english": "I'm drawing a picture.", "highlight": "그려요" },
+            { "korean": "책을 읽어요.", "english": "I'm reading a book.", "highlight": "읽어요" },
+            { "korean": "노래해요!", "english": "I'm singing!", "highlight": "노래해요" },
+            { "korean": "뭐 해요? — 먹어요!", "english": "What are you doing? — I'm eating!", "highlight": "먹어요" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🎨 미술 시간 — Art class",
+          "scene_en": "Art class",
+          "lines": [
+            { "speaker": "선생님", "color": "green", "text": "애라야, 뭐 해요?", "en": "Aera, what are you doing?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "그림을 ___! 🎨", "en": "I'm drawing a picture!", "type": "fill", "ans": "그려요", "opts": ["그려요", "먹어요", "자요"] },
+            { "speaker": "선생님", "color": "green", "text": "와, 예쁜 그림이에요! 뭐 그려요?", "en": "Wow, pretty picture! What are you drawing?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "고양이를 그려요! 🐱", "en": "I'm drawing a cat!", "type": "given" }
+          ]
+        },
+        {
+          "scene": "📚 도서관에서 — At the library",
+          "scene_en": "At the library",
+          "lines": [
+            { "speaker": "해리", "color": "blue", "text": "루카스야, 뭐 해요?", "en": "Lukas, what are you doing?", "type": "given" },
+            { "speaker": "루카스", "color": "amber", "text": "책을 ___. 📖", "en": "I'm reading a book.", "type": "fill", "ans": "읽어요", "opts": ["읽어요", "써요", "그려요"] },
+            { "speaker": "해리", "color": "blue", "text": "나는 편지를 ___. ✍️", "en": "I'm writing a letter.", "type": "fill", "ans": "써요", "opts": ["써요", "읽어요", "먹어요"] }
+          ]
+        },
+        {
+          "scene": "🎵 음악 시간 — Music class",
+          "scene_en": "Music class",
+          "lines": [
+            { "speaker": "마야", "color": "purple", "text": "올리비아야, 뭐 해요?", "en": "Olivia, what are you doing?", "type": "given" },
+            { "speaker": "올리비아", "color": "teal", "text": "노래___! 🎵 같이 해요!", "en": "I'm singing! Let's do it together!", "type": "fill", "ans": "해요", "opts": ["해요", "먹어요", "자요"] },
+            { "speaker": "마야", "color": "purple", "text": "나는 춤___! 💃", "en": "I'm dancing!", "type": "fill", "ans": "춰요", "opts": ["춰요", "읽어요", "그려요"] }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "q": "뭐 해요? → 그림을", "suffix": ".", "ans": "그려요", "opts": ["그려요", "먹어요", "자요"], "en": "I'm drawing a picture." },
+        { "q": "뭐 해요? → 밥을", "suffix": ".", "ans": "먹어요", "opts": ["먹어요", "읽어요", "써요"], "en": "I'm eating rice." },
+        { "q": "뭐 해요? → 책을", "suffix": ".", "ans": "읽어요", "opts": ["읽어요", "그려요", "달려요"], "en": "I'm reading a book." },
+        { "q": "뭐 해요? → 노래", "suffix": ".", "ans": "해요", "opts": ["해요", "와요", "자요"], "en": "I'm singing." },
+        { "q": "뭐 해요? →", "suffix": ".", "ans": "달려요", "opts": ["달려요", "먹어요", "읽어요"], "en": "I'm running." }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "뭐 해요? — 그림을 그려요.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🎨", "kr": "그림을 그려요", "en": "drawing a picture" },
+            { "emoji": "📖", "kr": "책을 읽어요", "en": "reading a book" },
+            { "emoji": "🍽️", "kr": "밥을 먹어요", "en": "eating rice" }
+          ]
+        },
+        {
+          "audio": "뭐 해요? — 노래해요!",
+          "correct": 2,
+          "choices": [
+            { "emoji": "💃", "kr": "춤춰요", "en": "dancing" },
+            { "emoji": "😴", "kr": "자요", "en": "sleeping" },
+            { "emoji": "🎵", "kr": "노래해요", "en": "singing" }
+          ]
+        },
+        {
+          "audio": "뭐 해요? — 달려요!",
+          "correct": 1,
+          "choices": [
+            { "emoji": "✍️", "kr": "써요", "en": "writing" },
+            { "emoji": "🏃", "kr": "달려요", "en": "running" },
+            { "emoji": "📖", "kr": "읽어요", "en": "reading" }
+          ]
+        }
+      ],
+      "mini_game": {
+        "type": "tap",
+        "title": "🎮 뭐 해요? 빨리 찾아요!",
+        "instruction": "선생님이 말하는 활동을 눌러요! Tap what the teacher calls out!",
+        "rounds": [
+          { "prompt": "그려요! 🎨", "items": ["그려요", "먹어요", "자요", "읽어요"], "correct": "그려요" },
+          { "prompt": "먹어요! 🍽️", "items": ["달려요", "먹어요", "써요", "노래해요"], "correct": "먹어요" },
+          { "prompt": "노래해요! 🎵", "items": ["자요", "읽어요", "노래해요", "그려요"], "correct": "노래해요" },
+          { "prompt": "달려요! 🏃", "items": ["달려요", "춤춰요", "먹어요", "자요"], "correct": "달려요" },
+          { "prompt": "읽어요! 📖", "items": ["써요", "그려요", "읽어요", "달려요"], "correct": "읽어요" }
+        ]
+      }
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 — Real Life",
+      "subtitle": "지금 뭐 해요?",
+      "dialogues": [
+        {
+          "title": "📱 대화 1 — 전화 통화",
+          "title_en": "Phone call",
+          "bg": "#E8F5E9",
+          "hdr": "#1B5E20",
+          "lines": [
+            { "role": "A", "color": "#43A047", "kr": "여보세요! 지금 뭐 해요?", "en": "Hello! What are you doing now?" },
+            { "role": "B", "color": "#1B5E20", "kr": "그림 그려요. 무지개 그려요! 🌈", "en": "I'm drawing. Drawing a rainbow!" },
+            { "role": "A", "color": "#43A047", "kr": "예쁘겠다! 나중에 보여줘요~", "en": "That sounds pretty! Show me later~" }
+          ],
+          "summary": { "kr": "뭐 해요? — 지금 하는 일을 말해요!", "en": "뭐 해요? — Tell someone what you're doing!", "highlight": "뭐 해요?" }
+        },
+        {
+          "title": "🏠 대화 2 — 집에서",
+          "title_en": "At home",
+          "bg": "#FFF3E0",
+          "hdr": "#E65100",
+          "lines": [
+            { "role": "A", "color": "#FFA726", "kr": "엄마, 저 숙제해요!", "en": "Mom, I'm doing my homework!" },
+            { "role": "B", "color": "#E65100", "kr": "잘했어요! 숙제하고 밥 먹어요.", "en": "Good job! After homework, eat dinner." },
+            { "role": "A", "color": "#FFA726", "kr": "네! 다 했어요. 이제 먹어요! 🍽️", "en": "Yes! I'm done. Let's eat now!" }
+          ],
+          "summary": { "kr": "숙제해요! 먹어요! — 동사 활용을 연습해요.", "en": "숙제해요! 먹어요! — Practice verb conjugation.", "highlight": "해요 / 먹어요" }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "'그림을 그려요'처럼 지금 하는 일을 말할 수 있어요.", "en": "I can say what I'm doing, like 그림을 그려요." },
+    { "ko": "'뭐 해요?'로 물어볼 수 있어요.", "en": "I can ask 뭐 해요? (What are you doing?)" },
+    { "ko": "활동 동사를 5개 이상 알아요.", "en": "I know 5+ action verbs." },
+    { "ko": "아요/어요 활용을 이해해요.", "en": "I understand the 아요/어요 conjugation." }
+  ]
+}

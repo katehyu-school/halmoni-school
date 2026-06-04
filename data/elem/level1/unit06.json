@@ -1,0 +1,212 @@
+{
+  "unit": 6,
+  "title": "🚌 학교에 가요!",
+  "book": 1,
+  "goal": {
+    "ko": "어떻게 가는지 말할 수 있어요! 🚌🚶",
+    "en": "I can say how I get places!"
+  },
+  "key_points": [
+    "어떻게 가요? = How do you get there?",
+    "버스로 가요 = I go by bus",
+    "걸어서 가요 = I walk (go on foot)"
+  ],
+  "sections": {
+    "vocab": {
+      "🚌 교통 Transportation": [
+        { "emoji": "🚌", "kr": "버스", "en": "bus", "rom": "beo-seu" },
+        { "emoji": "🚇", "kr": "지하철", "en": "subway", "rom": "ji-ha-cheol" },
+        { "emoji": "🚗", "kr": "자동차", "en": "car", "rom": "ja-dong-cha" },
+        { "emoji": "🚲", "kr": "자전거", "en": "bicycle", "rom": "ja-jeon-geo" },
+        { "emoji": "🚶", "kr": "걷다", "en": "to walk", "rom": "geot-da" },
+        { "emoji": "🏫", "kr": "학교", "en": "school", "rom": "hak-gyo" },
+        { "emoji": "🏠", "kr": "집", "en": "home", "rom": "jip" },
+        { "emoji": "🏪", "kr": "가게", "en": "store", "rom": "ga-ge" }
+      ],
+      "🗣️ 표현 Expressions": [
+        { "emoji": "❓", "kr": "어떻게", "en": "how", "rom": "eo-tteo-ke" },
+        { "emoji": "🦶", "kr": "걸어서", "en": "on foot / by walking", "rom": "geo-reo-seo" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g06_euro",
+          "title": "N(으)로 가요 — Getting somewhere",
+          "subtitle": "Transportation particle",
+          "pattern": "N(으)로 가요 — go by N",
+          "meaning": "How you get somewhere",
+          "description": "Use 로 (after vowels) or 으로 (after consonants) to say HOW you travel. Think of it as 'by ___'.",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 모음 끝 → 로",
+              "examples": [
+                "버스로 가요 = go by bus",
+                "자전거로 가요 = go by bicycle",
+                "지하철로 가요 = go by subway"
+              ]
+            },
+            {
+              "color": "coral",
+              "label": "🔴 자음 끝 → 으로",
+              "examples": [
+                "자동차로 가요 (자동차 ends in ㅏ → 로)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 Special: walking = 걸어서",
+              "examples": [
+                "걸어서 가요 = I go on foot",
+                "💡 걸어서 is special — no 로/으로 needed!"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "어떻게 가요? — 버스로 가요.", "english": "How do you get there? — I go by bus.", "highlight": "버스로" },
+            { "korean": "어떻게 가요? — 걸어서 가요.", "english": "How do you get there? — I walk.", "highlight": "걸어서" },
+            { "korean": "학교에 어떻게 가요? — 지하철로 가요.", "english": "How do you get to school? — I take the subway.", "highlight": "지하철로" }
+          ]
+        },
+        {
+          "id": "g06_e_location",
+          "title": "N에 가요 — Going to a place",
+          "subtitle": "Destination particle 에",
+          "pattern": "장소 + 에 가요 — go to [place]",
+          "meaning": "Where you're going",
+          "description": "Add 에 after a place name to say you're going TO that place.",
+          "rule_boxes": [
+            {
+              "color": "purple",
+              "label": "📍 장소 + 에 가요",
+              "examples": [
+                "학교에 가요 = I go to school",
+                "집에 가요 = I go home",
+                "가게에 가요 = I go to the store"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "학교에 가요.", "english": "I'm going to school.", "highlight": "학교에" },
+            { "korean": "집에 가요.", "english": "I'm going home.", "highlight": "집에" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🚌 버스 정류장 — At the bus stop",
+          "scene_en": "At the bus stop",
+          "lines": [
+            { "speaker": "마야", "color": "purple", "text": "해리야, 학교에 어떻게 가요?", "en": "Harry, how do you get to school?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "___로 가요! 🚌 마야는요?", "en": "I go by bus! How about you, Maya?", "type": "fill", "ans": "버스", "opts": ["버스", "자동차", "지하철"] },
+            { "speaker": "마야", "color": "purple", "text": "저는 걸어서 가요. 집이 가까워요! 🚶", "en": "I walk. My house is nearby!", "type": "given" }
+          ]
+        },
+        {
+          "scene": "🏫 학교 앞에서 — In front of school",
+          "scene_en": "In front of school",
+          "lines": [
+            { "speaker": "애라", "color": "coral", "text": "루카스야! 자전거로 왔어요?", "en": "Lukas! Did you come by bicycle?", "type": "given" },
+            { "speaker": "루카스", "color": "amber", "text": "네! ___로 왔어요. 빨라요! 🚲", "en": "Yes! I came by bicycle. It's fast!", "type": "fill", "ans": "자전거", "opts": ["자전거", "버스", "지하철"] },
+            { "speaker": "애라", "color": "coral", "text": "저는 엄마 ___로 왔어요. 🚗", "en": "I came in mom's car.", "type": "fill", "ans": "자동차", "opts": ["자동차", "버스", "자전거"] }
+          ]
+        },
+        {
+          "scene": "🗺️ 집 가는 길 — Going home",
+          "scene_en": "On the way home",
+          "lines": [
+            { "speaker": "레오", "color": "mint", "text": "올리비아야, 어디 가요?", "en": "Olivia, where are you going?", "type": "given" },
+            { "speaker": "올리비아", "color": "teal", "text": "___에 가요! 버스로 가요. 🚌", "en": "I'm going home! By bus.", "type": "fill", "ans": "집", "opts": ["집", "학교", "가게"] },
+            { "speaker": "레오", "color": "mint", "text": "나도 버스로 가요! 같이 가요~ 🎉", "en": "Me too, by bus! Let's go together~", "type": "given" }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "q": "학교에 어떻게 가요? →", "suffix": "로 가요.", "ans": "버스", "opts": ["버스", "자동차", "자전거"], "en": "I go by bus." },
+        { "q": "어떻게 가요? →", "suffix": "서 가요.", "ans": "걸어", "opts": ["걸어", "뛰어", "날아"], "en": "I walk." },
+        { "q": "집에 어떻게 가요? →", "suffix": "로 가요.", "ans": "지하철", "opts": ["지하철", "버스", "자전거"], "en": "I go by subway." },
+        { "q": "가게에", "suffix": "가요.", "ans": "어떻게", "opts": ["어떻게", "누구", "뭐"], "en": "How do you get to the store?" },
+        { "q": "자전거", "suffix": "가요.", "ans": "로", "opts": ["로", "에", "이"], "en": "I go by bicycle." }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "학교에 어떻게 가요? — 버스로 가요.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🚌", "kr": "버스로", "en": "by bus" },
+            { "emoji": "🚲", "kr": "자전거로", "en": "by bicycle" },
+            { "emoji": "🚶", "kr": "걸어서", "en": "on foot" }
+          ]
+        },
+        {
+          "audio": "집에 어떻게 가요? — 걸어서 가요.",
+          "correct": 2,
+          "choices": [
+            { "emoji": "🚗", "kr": "자동차로", "en": "by car" },
+            { "emoji": "🚇", "kr": "지하철로", "en": "by subway" },
+            { "emoji": "🚶", "kr": "걸어서", "en": "on foot" }
+          ]
+        },
+        {
+          "audio": "학교에 지하철로 가요.",
+          "correct": 1,
+          "choices": [
+            { "emoji": "🏠", "kr": "집에", "en": "to home" },
+            { "emoji": "🏫", "kr": "학교에", "en": "to school" },
+            { "emoji": "🏪", "kr": "가게에", "en": "to the store" }
+          ]
+        }
+      ],
+      "mini_game": {
+        "type": "match",
+        "title": "🎮 어떻게 가요? 연결하기!",
+        "instruction": "탈것과 목적지를 연결해요! Match the transport to the destination!",
+        "pairs": [
+          { "left": "🚌 버스로", "right": "학교에", "match": 0 },
+          { "left": "🚶 걸어서", "right": "가게에", "match": 1 },
+          { "left": "🚗 자동차로", "right": "병원에", "match": 2 },
+          { "left": "🚲 자전거로", "right": "공원에", "match": 3 }
+        ]
+      }
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 — Real Life",
+      "subtitle": "학교 가는 길을 얘기해요!",
+      "dialogues": [
+        {
+          "title": "🚌 대화 1 — 학교 버스",
+          "title_en": "The school bus",
+          "bg": "#E8F5E9",
+          "hdr": "#1B5E20",
+          "lines": [
+            { "role": "A", "color": "#43A047", "kr": "학교에 어떻게 가요?", "en": "How do you get to school?" },
+            { "role": "B", "color": "#1B5E20", "kr": "버스로 가요. 버스 정류장이 집 앞에 있어요.", "en": "By bus. The bus stop is in front of my house." },
+            { "role": "A", "color": "#43A047", "kr": "좋겠다! 저는 걸어서 가요.", "en": "Lucky! I walk." }
+          ],
+          "summary": { "kr": "버스로 / 걸어서 — 교통 수단을 말해요!", "en": "버스로/걸어서 — talk about how you travel!", "highlight": "버스로 가요" }
+        },
+        {
+          "title": "👨‍👩‍👧 대화 2 — 아침에",
+          "title_en": "In the morning",
+          "bg": "#E3F2FD",
+          "hdr": "#0D47A1",
+          "lines": [
+            { "role": "A", "color": "#42A5F5", "kr": "엄마, 학교에 자동차로 가요?", "en": "Mom, are we going to school by car?" },
+            { "role": "B", "color": "#0D47A1", "kr": "오늘은 자전거로 가요. 날씨가 좋아요! ☀️", "en": "Today we're going by bicycle. The weather is nice!" },
+            { "role": "A", "color": "#42A5F5", "kr": "신난다! 🚲", "en": "Exciting!" }
+          ],
+          "summary": { "kr": "자동차로? 자전거로? 오늘 어떻게 가요?", "en": "By car? By bicycle? How are you going today?", "highlight": "자전거로 가요" }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "'버스로 가요'처럼 교통 수단을 말할 수 있어요.", "en": "I can say how I travel, like 버스로 가요." },
+    { "ko": "'걸어서 가요'를 말할 수 있어요.", "en": "I can say 걸어서 가요 (I walk)." },
+    { "ko": "'어디에 가요?'로 목적지를 말할 수 있어요.", "en": "I can use 에 가요 to say where I'm going." },
+    { "ko": "교통 수단 이름을 4개 이상 알아요.", "en": "I know 4+ transportation words." }
+  ]
+}

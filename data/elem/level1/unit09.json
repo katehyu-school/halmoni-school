@@ -1,0 +1,204 @@
+{
+  "unit": 9,
+  "title": "🍎 사과를 좋아해요!",
+  "book": 1,
+  "goal": {
+    "ko": "좋아하는 것을 말할 수 있어요! 🍎🎨",
+    "en": "I can say what I like and don't like!"
+  },
+  "key_points": [
+    "좋아해요 = I like it",
+    "싫어해요 = I don't like it",
+    "뭐를 좋아해요? = What do you like?"
+  ],
+  "sections": {
+    "vocab": {
+      "🍎 음식 Food": [
+        { "emoji": "🍎", "kr": "사과", "en": "apple", "rom": "sa-gwa" },
+        { "emoji": "🍌", "kr": "바나나", "en": "banana", "rom": "ba-na-na" },
+        { "emoji": "🍓", "kr": "딸기", "en": "strawberry", "rom": "ttal-gi" },
+        { "emoji": "🍊", "kr": "귤", "en": "tangerine", "rom": "gyul" },
+        { "emoji": "🍕", "kr": "피자", "en": "pizza", "rom": "pi-ja" },
+        { "emoji": "🍜", "kr": "라면", "en": "ramen / instant noodles", "rom": "ra-myeon" },
+        { "emoji": "🍙", "kr": "주먹밥", "en": "rice ball", "rom": "ju-meok-bap" },
+        { "emoji": "🧁", "kr": "케이크", "en": "cake", "rom": "ke-i-keu" }
+      ],
+      "🎨 취미 Hobbies": [
+        { "emoji": "⚽", "kr": "축구", "en": "soccer / football", "rom": "chuk-gu" },
+        { "emoji": "🏊", "kr": "수영", "en": "swimming", "rom": "su-yeong" },
+        { "emoji": "🎵", "kr": "음악", "en": "music", "rom": "eu-mak" },
+        { "emoji": "📖", "kr": "독서", "en": "reading", "rom": "dok-seo" }
+      ],
+      "💬 표현 Expressions": [
+        { "emoji": "❤️", "kr": "좋아해요", "en": "I like it", "rom": "jo-a-hae-yo" },
+        { "emoji": "💔", "kr": "싫어해요", "en": "I don't like it", "rom": "si-reo-hae-yo" },
+        { "emoji": "😐", "kr": "그냥 그래요", "en": "It's okay / so-so", "rom": "geu-nyang geu-rae-yo" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g09_joahaeyo",
+          "title": "N을/를 좋아해요 · 싫어해요",
+          "subtitle": "Likes and dislikes",
+          "pattern": "N을/를 좋아해요 · 싫어해요",
+          "meaning": "Saying what you like or dislike",
+          "description": "Use 좋아해요 to say you like something and 싫어해요 for dislike. Add 을/를 after the thing you like/dislike!",
+          "rule_boxes": [
+            {
+              "color": "green",
+              "label": "❤️ 좋아해요 — I LIKE",
+              "examples": [
+                "사과를 좋아해요. = I like apples.",
+                "축구를 좋아해요. = I like soccer.",
+                "음악을 좋아해요. = I like music."
+              ]
+            },
+            {
+              "color": "red",
+              "label": "💔 싫어해요 — I DON'T LIKE",
+              "examples": [
+                "라면을 싫어해요. = I don't like ramen.",
+                "수영을 싫어해요. = I don't like swimming."
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 을/를 after N (object particle)",
+              "examples": [
+                "받침 있으면 → 을 (음악을, 축구를❌→축구를✅)",
+                "받침 없으면 → 를 (사과를, 음악→음악을✅)",
+                "💡 받침 있으면 을, 없으면 를 (same rule as 이에요/예요!)"
+              ]
+            }
+          ],
+          "examples": [
+            { "korean": "뭐를 좋아해요? — 딸기를 좋아해요!", "english": "What do you like? — I like strawberries!", "highlight": "좋아해요" },
+            { "korean": "피자를 좋아해요? — 네, 아주 좋아해요!", "english": "Do you like pizza? — Yes, I really like it!", "highlight": "좋아해요" },
+            { "korean": "뭐를 싫어해요? — 라면을 싫어해요.", "english": "What don't you like? — I don't like ramen.", "highlight": "싫어해요" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🍎 과일 가게 — Fruit stand",
+          "scene_en": "At the fruit stand",
+          "lines": [
+            { "speaker": "해리", "color": "blue", "text": "애라야, 뭐를 좋아해요?", "en": "Aera, what do you like?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "저는 딸기를 ___! 🍓 달콤해요~", "en": "I like strawberries! They're sweet~", "type": "fill", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "먹어요"] },
+            { "speaker": "해리", "color": "blue", "text": "나도! 사과도 ___?", "en": "Me too! Do you like apples too?", "type": "given" },
+            { "speaker": "애라", "color": "coral", "text": "사과는 그냥 그래요. 😐", "en": "Apples are just okay.", "type": "given" }
+          ]
+        },
+        {
+          "scene": "⚽ 운동장에서 — On the playground",
+          "scene_en": "On the playground",
+          "lines": [
+            { "speaker": "루카스", "color": "amber", "text": "해리야, 축구 좋아해요?", "en": "Harry, do you like soccer?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "네, 축구를 ___ 아주 좋아해요! ⚽", "en": "Yes, I really like soccer!", "type": "fill", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "그려요"] },
+            { "speaker": "루카스", "color": "amber", "text": "수영도 좋아해요?", "en": "Do you like swimming too?", "type": "given" },
+            { "speaker": "해리", "color": "blue", "text": "아니요, 수영을 ___. 물이 무서워요. 😱", "en": "No, I don't like swimming. I'm scared of water.", "type": "fill", "ans": "싫어해요", "opts": ["싫어해요", "좋아해요", "읽어요"] }
+          ]
+        },
+        {
+          "scene": "🍕 점심 시간 — Lunchtime",
+          "scene_en": "Lunchtime",
+          "lines": [
+            { "speaker": "마야", "color": "purple", "text": "올리비아야, 피자 좋아해요?", "en": "Olivia, do you like pizza?", "type": "given" },
+            { "speaker": "올리비아", "color": "teal", "text": "네! 피자를 ___ 🍕 최고예요!", "en": "Yes! I love pizza! It's the best!", "type": "fill", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "먹어요"] },
+            { "speaker": "마야", "color": "purple", "text": "나도! 케이크도 좋아해요? 🧁", "en": "Me too! Do you like cake too?", "type": "given" },
+            { "speaker": "올리비아", "color": "teal", "text": "물론이에요! 케이크를 아주 ___! 😋", "en": "Of course! I really like cake!", "type": "fill", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "자요"] }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "q": "사과를", "suffix": ".", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "있어요"], "en": "I like apples." },
+        { "q": "라면을", "suffix": ".", "ans": "싫어해요", "opts": ["싫어해요", "좋아해요", "없어요"], "en": "I don't like ramen." },
+        { "q": "뭐를", "suffix": "?", "ans": "좋아해요", "opts": ["좋아해요", "있어요", "예요"], "en": "What do you like?" },
+        { "q": "음악을 좋아해요? — 네,", "suffix": "!", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "먹어요"], "en": "Yes, I like it!" },
+        { "q": "딸기를 싫어해요? — 아니요,", "suffix": "!", "ans": "좋아해요", "opts": ["좋아해요", "싫어해요", "없어요"], "en": "No, I like it!" }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "뭐를 좋아해요? — 딸기를 좋아해요!",
+          "correct": 2,
+          "choices": [
+            { "emoji": "🍎", "kr": "사과", "en": "apple" },
+            { "emoji": "🍌", "kr": "바나나", "en": "banana" },
+            { "emoji": "🍓", "kr": "딸기", "en": "strawberry" }
+          ]
+        },
+        {
+          "audio": "축구를 싫어해요.",
+          "correct": 1,
+          "choices": [
+            { "emoji": "❤️", "kr": "좋아해요", "en": "likes" },
+            { "emoji": "💔", "kr": "싫어해요", "en": "doesn't like" },
+            { "emoji": "😐", "kr": "그냥 그래요", "en": "it's okay" }
+          ]
+        },
+        {
+          "audio": "피자를 아주 좋아해요!",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🍕", "kr": "피자", "en": "pizza" },
+            { "emoji": "🍜", "kr": "라면", "en": "ramen" },
+            { "emoji": "🧁", "kr": "케이크", "en": "cake" }
+          ]
+        }
+      ],
+      "mini_game": {
+        "type": "memory",
+        "title": "🎮 좋아해요 / 싫어해요 메모리!",
+        "instruction": "같은 카드를 찾아요! 좋아하는 것 vs 싫어하는 것! 🧩",
+        "pairs": [
+          { "kr": "사과", "emoji": "🍎", "en": "apple" },
+          { "kr": "딸기", "emoji": "🍓", "en": "strawberry" },
+          { "kr": "피자", "emoji": "🍕", "en": "pizza" },
+          { "kr": "축구", "emoji": "⚽", "en": "soccer" },
+          { "kr": "음악", "emoji": "🎵", "en": "music" },
+          { "kr": "케이크", "emoji": "🧁", "en": "cake" }
+        ]
+      }
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 — Real Life",
+      "subtitle": "좋아하는 것을 친구에게 얘기해요!",
+      "dialogues": [
+        {
+          "title": "🍎 대화 1 — 좋아하는 음식",
+          "title_en": "Favorite food",
+          "bg": "#FFF8E1",
+          "hdr": "#F57F17",
+          "lines": [
+            { "role": "A", "color": "#FFB300", "kr": "좋아하는 음식이 뭐예요?", "en": "What is your favorite food?" },
+            { "role": "B", "color": "#F57F17", "kr": "케이크를 좋아해요! 생일 때 먹어요. 🎂", "en": "I like cake! I eat it on birthdays." },
+            { "role": "A", "color": "#FFB300", "kr": "저는 라면을 아주 좋아해요. 🍜 맛있어요!", "en": "I really like ramen. It's delicious!" }
+          ],
+          "summary": { "kr": "좋아하는 음식을 친구에게 얘기해 봐요!", "en": "Tell your friend about your favorite food!", "highlight": "좋아해요" }
+        },
+        {
+          "title": "⚽ 대화 2 — 좋아하는 활동",
+          "title_en": "Favorite activity",
+          "bg": "#E8F5E9",
+          "hdr": "#1B5E20",
+          "lines": [
+            { "role": "A", "color": "#43A047", "kr": "방과 후에 뭐 해요?", "en": "What do you do after school?" },
+            { "role": "B", "color": "#1B5E20", "kr": "축구를 해요. 축구를 아주 좋아해요! ⚽", "en": "I play soccer. I really like soccer!" },
+            { "role": "A", "color": "#43A047", "kr": "수영은 어때요?", "en": "What about swimming?" },
+            { "role": "B", "color": "#1B5E20", "kr": "수영은 그냥 그래요. 잘 못해요. 😅", "en": "Swimming is just okay. I'm not good at it." }
+          ],
+          "summary": { "kr": "좋아해요 / 싫어해요 / 그냥 그래요 — 세 가지 표현을 써봐요!", "en": "좋아해요 / 싫어해요 / 그냥 그래요 — use all three!", "highlight": "좋아해요 / 그냥 그래요" }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "'사과를 좋아해요'처럼 좋아하는 것을 말할 수 있어요.", "en": "I can say I like something with 를 좋아해요." },
+    { "ko": "'라면을 싫어해요'처럼 싫어하는 것을 말할 수 있어요.", "en": "I can say I dislike something with 를 싫어해요." },
+    { "ko": "'뭐를 좋아해요?'로 물어볼 수 있어요.", "en": "I can ask 뭐를 좋아해요?" },
+    { "ko": "음식 이름을 6개 이상 알아요.", "en": "I know 6+ food words." }
+  ]
+}

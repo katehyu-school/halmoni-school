@@ -1,0 +1,508 @@
+{
+  "id": "ep01",
+  "title": "안녕! 나는 정민이야.",
+  "title_en": "Hi! I'm Jeongmin.",
+  "level": "L1",
+  "scene": "🏞️ 공원 · Park (first meeting)",
+  "video": null,
+  "slides": [
+    "data/nhs/L1/slides/ep01/안녕_만나서 반가워1.png",
+    "data/nhs/L1/slides/ep01/안녕_만나서 반가워2.png",
+    "data/nhs/L1/slides/ep01/안녕_만나서 반가워3.png",
+    "data/nhs/L1/slides/ep01/안녕_만나서 반가워4.png",
+    "data/nhs/L1/slides/ep01/안녕_만나서 반가워5.png",
+    "data/nhs/L1/slides/ep01/안녕_만나서 반가워6.png"
+  ],
+  "goal": {
+    "ko": "자기 소개를 할 수 있어요. 나는/저는 ___이에요/예요.",
+    "en": "I can introduce myself. I am ___."
+  },
+  "characters": [
+    {
+      "id": "jeongmin",
+      "name": "정민",
+      "emoji": "👦",
+      "color": "#5B8FD4",
+      "description": "미래의 친구 (Mirae's friend)"
+    },
+    {
+      "id": "mirae",
+      "name": "미래",
+      "emoji": "👧",
+      "color": "#E85D9A",
+      "description": "공원에서 정민을 처음 만남 (meets Jeongmin for the first time)"
+    },
+    {
+      "id": "mirae_mom",
+      "name": "미래 엄마",
+      "emoji": "👩",
+      "color": "#6ABFAD",
+      "description": "미래의 엄마"
+    }
+  ],
+  "script": [
+    {
+      "speaker": "jeongmin",
+      "text": "안녕! 나는 정민이야.",
+      "en": "Hi! I'm Jeongmin.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/01_안녕_나는_정민이야.mp3",
+      "slide": 0
+    },
+    {
+      "speaker": "mirae",
+      "text": "안녕! 나는 미래야. 만나서 반가워.",
+      "en": "Hi! I'm Mirae. Nice to meet you.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/02_안녕_나는_미래야_만나서_반가워.mp3",
+      "slide": 1
+    },
+    {
+      "speaker": "mirae",
+      "text": "인사해. 우리 엄마야.",
+      "en": "Say hi. This is my mom.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/03_인사해_우리_엄마야.mp3",
+      "slide": 2
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "안녕하세요. 저는 정민이에요.",
+      "en": "Hello. I'm Jeongmin.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep01/04_안녕하세요_저는_정민이에요.mp3",
+      "slide": 3
+    },
+    {
+      "speaker": "mirae_mom",
+      "text": "안녕! 나는 미래 엄마야. 만나서 반가워.",
+      "en": "Hi! I'm Mirae's mom. Nice to meet you.",
+      "speech_type": "반말",
+      "audio": "data/nhs/L1/TTS/ep01/05_안녕_나는_미래_엄마야_만나서_반가워.mp3",
+      "slide": 4
+    },
+    {
+      "speaker": "jeongmin",
+      "text": "네, 만나서 반가워요.",
+      "en": "Yes, nice to meet you too.",
+      "speech_type": "존댓말",
+      "audio": "data/nhs/L1/TTS/ep01/06_네_만나서_반가워요.mp3",
+      "slide": 5
+    }
+  ],
+  "vocab": [
+    {
+      "category": "👋 인사 · Greetings",
+      "items": [
+        {
+          "korean": "안녕",
+          "romanization": "an-nyeong",
+          "english": "hi / bye (casual)",
+          "emoji": "👋",
+          "note": "친한 사이에 쓰는 인사 · used with close friends"
+        },
+        {
+          "korean": "안녕하세요",
+          "romanization": "an-nyeong-ha-se-yo",
+          "english": "hello (formal)",
+          "emoji": "🙏",
+          "note": "어른께 쓰는 인사 · used with adults / polite form"
+        },
+        {
+          "korean": "만나서 반가워",
+          "romanization": "man-na-seo ban-ga-wo",
+          "english": "nice to meet you (casual)",
+          "emoji": "😊"
+        },
+        {
+          "korean": "만나서 반가워요",
+          "romanization": "man-na-seo ban-ga-wo-yo",
+          "english": "nice to meet you (polite)",
+          "emoji": "😊"
+        }
+      ]
+    },
+    {
+      "category": "👤 나와 너 · Me & You",
+      "items": [
+        {
+          "korean": "나",
+          "romanization": "na",
+          "english": "I / me (casual)",
+          "emoji": "🙋"
+        },
+        {
+          "korean": "저",
+          "romanization": "jeo",
+          "english": "I / me (humble/polite)",
+          "emoji": "🙋",
+          "note": "어른께 말할 때 · use when speaking to adults"
+        },
+        {
+          "korean": "우리",
+          "romanization": "u-ri",
+          "english": "our / we",
+          "emoji": "👨‍👩‍👧",
+          "note": "우리 엄마 = my mom (Korean says 'our mom')"
+        },
+        {
+          "korean": "이름",
+          "romanization": "i-reum",
+          "english": "name",
+          "emoji": "🏷️"
+        }
+      ]
+    },
+    {
+      "category": "🗣️ 표현 · Expressions",
+      "items": [
+        {
+          "korean": "인사하다",
+          "romanization": "in-sa-ha-da",
+          "english": "to greet / to say hello",
+          "emoji": "🤝"
+        },
+        {
+          "korean": "네",
+          "romanization": "ne",
+          "english": "yes",
+          "emoji": "✅"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g01_topic",
+      "title": "은/는 — 주제 조사",
+      "title_en": "은/는 — Topic Particle",
+      "icon": "📌",
+      "rule": "N은/는 → 이 문장의 주인공은 누구? · Who is this sentence about?",
+      "pattern": "나는 ___야. / 저는 ___이에요.",
+      "explanation": "은/는 marks what the sentence is ABOUT — the topic.\n영어에는 없는 조사! No direct equivalent in English.\n받침(final consonant) 있으면 은, 없으면 는 · consonant → 은 / vowel → 는",
+      "table": {
+        "headers": [
+          "받침?",
+          "조사",
+          "예시"
+        ],
+        "rows": [
+          [
+            "받침 O ✅",
+            "은",
+            "정민(ㄴ) + 은 → 정민은"
+          ],
+          [
+            "받침 X ❌",
+            "는",
+            "미래(에) + 는 → 미래는"
+          ],
+          [
+            "나 (받침 X)",
+            "는",
+            "나 + 는 → 나는"
+          ],
+          [
+            "저 (받침 X)",
+            "는",
+            "저 + 는 → 저는"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "나는 정민이야.",
+          "en": "I'm Jeongmin. (casual)"
+        },
+        {
+          "ko": "저는 정민이에요.",
+          "en": "I'm Jeongmin. (polite)"
+        },
+        {
+          "ko": "미래는 학생이에요.",
+          "en": "Mirae is a student."
+        }
+      ],
+      "tip": "은/는 는 '주제'를 나타내요. 다음 에피소드에서 이/가(subject particle)도 배울 거예요!\n은/는 shows the TOPIC. You'll learn 이/가 (subject particle) next!",
+      "tier": "core"
+    },
+    {
+      "id": "g01_iyeyo",
+      "title": "N이에요 / N예요 — ~이에요",
+      "title_en": "N이에요 / N예요 — to be (polite)",
+      "icon": "💬",
+      "rule": "이름/신분 뒤에 붙여요 · Attach after a name or identity",
+      "pattern": "[받침 O] + 이에요  /  [받침 X] + 예요",
+      "explanation": "이에요/예요 means 'is / am / are'.\n받침(final consonant) 있으면 이에요, 없으면 예요.\nCasual form: 이야 (consonant) / 야 (vowel).",
+      "table": {
+        "headers": [
+          "마지막 소리",
+          "정중 (polite)",
+          "반말 (casual)",
+          "예시"
+        ],
+        "rows": [
+          [
+            "받침 O (자음)",
+            "이에요",
+            "이야",
+            "정민 → 정민이에요 / 정민이야"
+          ],
+          [
+            "받침 X (모음)",
+            "예요",
+            "야",
+            "미래 → 미래예요 / 미래야"
+          ],
+          [
+            "받침 X (모음)",
+            "예요",
+            "야",
+            "엄마 → 엄마예요 / 엄마야"
+          ]
+        ]
+      },
+      "examples": [
+        {
+          "ko": "저는 정민이에요.",
+          "en": "I'm Jeongmin. (formal)"
+        },
+        {
+          "ko": "나는 미래야.",
+          "en": "I'm Mirae. (casual)"
+        },
+        {
+          "ko": "우리 엄마야.",
+          "en": "This is my mom. (casual)"
+        }
+      ],
+      "tip": "대화 속에서 찾아봐요! 정민이야 vs 정민이에요 — 같은 뜻, 다른 격식!\nSpot them in the script! Same meaning, different politeness level.",
+      "tier": "core"
+    }
+  ],
+  "banmal_jondaemal": {
+    "title": "반말 vs 존댓말",
+    "intro": "이번 에피소드에 둘 다 나왔어요! Both appeared in this episode!",
+    "pairs": [
+      {
+        "situation": "친구끼리 · Between friends",
+        "banmal": "나는 정민이야.",
+        "jondaemal": "저는 정민이에요.",
+        "note": "나→저 / 이야→이에요"
+      },
+      {
+        "situation": "인사 · Greeting",
+        "banmal": "안녕! 만나서 반가워.",
+        "jondaemal": "안녕하세요. 만나서 반가워요.",
+        "note": "어른께는 항상 존댓말 · always polite with adults"
+      }
+    ],
+    "rule_box": "친구 → 반말 (나는, 이야, 반가워)\n어른 → 존댓말 (저는, 이에요, 반가워요)\nFriend → casual  ·  Adult → polite",
+    "adult_dialogue": {
+      "title": "어른들의 첫 만남 · Adults Meeting for the First Time",
+      "intro": "어른들은 처음 만나면 서로 존댓말을 써요. · Adults always use polite speech when meeting for the first time.",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "안녕하세요. 저는 김지수예요.",
+          "en": "Hello. I'm Kim Jisoo."
+        },
+        {
+          "speaker": "B",
+          "text": "아, 안녕하세요. 저는 박민준이에요. 만나서 반가워요.",
+          "en": "Oh, hello. I'm Park Minjun. Nice to meet you."
+        }
+      ]
+    }
+  },
+  "quiz": [
+    {
+      "type": "mc",
+      "question": "은/는 은 무엇을 나타낼까요? · What does 은/는 mark?",
+      "question_en": "What does 은/는 mark in a sentence?",
+      "choices": [
+        "The topic (what the sentence is about)",
+        "The object (what you do something to)",
+        "The place where",
+        "The time when"
+      ],
+      "answer": 0,
+      "explanation": "은/는 는 문장의 주제를 나타내요. · 은/는 marks the TOPIC of the sentence."
+    },
+    {
+      "type": "mc",
+      "question": "'정민' 뒤에 무엇이 올까요? (polite) · 정민 ends with a consonant. Polite ending?",
+      "question_en": "정민 ends with ㄴ (consonant). Which polite ending?",
+      "choices": [
+        "이에요",
+        "예요",
+        "야",
+        "이야"
+      ],
+      "answer": 0,
+      "explanation": "정민 ends with ㄴ (consonant) → 이에요. → 저는 정민이에요!"
+    },
+    {
+      "type": "listen",
+      "question": "🔊 들어보세요. · Listen and choose.",
+      "audio_text": "안녕! 나는 미래야. 만나서 반가워.",
+      "choices": [
+        "안녕! 나는 미래야. 만나서 반가워.",
+        "안녕하세요. 저는 미래예요.",
+        "안녕! 나는 정민이야.",
+        "만나서 반가워요."
+      ],
+      "answer": 0,
+      "explanation": "미래가 친구에게 반말로 인사해요. · Mirae greets a friend in casual speech."
+    },
+    {
+      "type": "mc",
+      "question": "'미래' 뒤에는? (casual) · 미래 ends with a vowel. Casual ending?",
+      "question_en": "미래 ends with 에 (vowel). Which casual ending?",
+      "choices": [
+        "야",
+        "이야",
+        "이에요",
+        "예요"
+      ],
+      "answer": 0,
+      "explanation": "미래 ends with a vowel → 야. → 나는 미래야!"
+    }
+  ],
+  "self_check": [
+    "나는/저는 ___이야/예요. 라고 말할 수 있어요.",
+    "받침이 있으면 이에요, 없으면 예요. 를 알아요.",
+    "친구에게는 반말, 어른에게는 존댓말. 을 이해했어요.",
+    "만나서 반가워 / 반가워요. 를 상황에 맞게 쓸 수 있어요."
+  ],
+  "pronunciation": {
+    "title": "발음 팁 · Pronunciation Tips",
+    "items": [
+      {
+        "word": "정민이야",
+        "actual": "[정미니야]",
+        "note": "받침 ㄴ + 이 → 연음 · final consonant links to next vowel"
+      },
+      {
+        "word": "만나서",
+        "actual": "[만나서]",
+        "note": "ㄴ+ㄴ → 그대로 · stays the same"
+      },
+      {
+        "word": "안녕하세요",
+        "actual": "[안녕하세요]",
+        "note": "5음절 — 천천히! 5 syllables — practice slowly: an-nyeong-ha-se-yo"
+      }
+    ]
+  },
+  "usage": [
+    {
+      "title": "👫 친구에게 · Introducing yourself to a friend",
+      "explanation_en": "Use 나는 + name + 이야/야. No need for a formal greeting first — just go for it!",
+      "examples": [
+        {
+          "ko": "나는 정민이야. 너는?",
+          "en": "I'm Jeongmin. And you?"
+        },
+        {
+          "ko": "나는 미래야. 만나서 반가워!",
+          "en": "I'm Mirae. Nice to meet you!"
+        },
+        {
+          "ko": "나는 올리비아야. 처음이야?",
+          "en": "I'm Olivia. Is this your first time?"
+        }
+      ]
+    },
+    {
+      "title": "🙏 어른께 · Introducing yourself to an adult",
+      "explanation_en": "Switch to 저는 + name + 이에요/예요. Always bow a little and speak politely!",
+      "examples": [
+        {
+          "ko": "안녕하세요. 저는 정민이에요.",
+          "en": "Hello. I'm Jeongmin."
+        },
+        {
+          "ko": "저는 리암이에요. 만나서 반가워요.",
+          "en": "I'm Liam. Nice to meet you."
+        },
+        {
+          "ko": "저는 미래예요. 잘 부탁드려요.",
+          "en": "I'm Mirae. Please take care of me."
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "section": "💡 잘 부탁드려요",
+      "content_ko": "처음 만나는 어른께 쓰는 공손한 표현이에요.\n직역하면 'Please treat me well' — 좋은 관계를 부탁하는 의미예요.",
+      "content_en": "A polite phrase when meeting someone new (especially adults). Literally 'please take good care of me' — used to start a relationship on a respectful note."
+    }
+  ],
+  "real_life": [
+    {
+      "type": "kakao",
+      "title": "📱 새 친구 단톡방 · New Friend Group Chat",
+      "title_en": "Starting a new KakaoTalk group",
+      "messages": [
+        {
+          "speaker": "정민",
+          "align": "left",
+          "text": "안녕! 나는 정민이야. 오늘 처음 만났지?"
+        },
+        {
+          "speaker": "미래",
+          "align": "right",
+          "text": "응! 나는 미래야. 만나서 반가워 😊"
+        },
+        {
+          "speaker": "올리비아",
+          "align": "left",
+          "text": "안녕~ 나는 올리비아야. 잘 부탁해!"
+        },
+        {
+          "speaker": "정민",
+          "align": "right",
+          "text": "우리 자주 놀자!"
+        }
+      ]
+    },
+    {
+      "type": "listening",
+      "id": "rl01_listen",
+      "title": "🎧 학교 첫날 · First Day at School",
+      "title_en": "Two students meet on the first day of school",
+      "setup_ko": "두 학생이 처음 만났어요. 누가 먼저 인사할까요?",
+      "setup_en": "Two students meet for the first time. Who greets first?",
+      "audio_text": "안녕! 나는 조던이야. 너는? 나는 마야야. 만나서 반가워! 나도 만나서 반가워.",
+      "script": [
+        {
+          "speaker": "조던",
+          "text": "안녕! 나는 조던이야. 너는?"
+        },
+        {
+          "speaker": "마야",
+          "text": "나는 마야야. 만나서 반가워!"
+        },
+        {
+          "speaker": "조던",
+          "text": "나도 만나서 반가워."
+        }
+      ],
+      "questions": [
+        {
+          "question_ko": "남자아이 이름이 뭐예요?",
+          "question_en": "What is the boy's name?",
+          "options": [
+            "조던",
+            "마야",
+            "정민",
+            "미래"
+          ],
+          "answer": 0,
+          "explanation": "조던이 '나는 조던이야' 라고 했어요. · Jordan said 'I'm Jordan.'"
+        }
+      ]
+    }
+  ]
+}
