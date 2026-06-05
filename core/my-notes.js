@@ -58,6 +58,8 @@
 .nms-tool-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--warm-300);background:#fff;font-size:12px;cursor:pointer;font-weight:600;transition:all .15s;}
 .nms-tool-btn:hover{background:var(--warm-100);}
 .nms-tool-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.nms-pen-color{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0;}
+.nms-pen-color.active{border-color:#333;transform:scale(1.2);box-shadow:0 0 0 2px #fff,0 0 0 4px #333;}
 .nms-badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
 .nms-badge{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;border:1.5px solid;}
 .nms-badge.earned{background:var(--amber-lt);color:var(--amber-600);border-color:var(--amber);}
@@ -180,6 +182,7 @@
             </div>
             <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 Clear</button>
           </div>
+          <div style="display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap;"><span style="font-size:11px;color:var(--warm-500);font-weight:600;">펜 색상:</span><div id="nms-pen-colors" style="display:flex;gap:5px;flex-wrap:wrap;"></div></div>
           <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
             <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Word hints — click to see it big ✨</div>
             <div id="nms-hint-label" style="font-size:11px;color:var(--teal-600);font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
@@ -209,6 +212,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- ═══════════════ END NHS MY NOTES ═══════════════ -->
 `;
@@ -249,13 +253,13 @@ const nmsGetJ = (k,d=[]) => { try{return JSON.parse(localStorage.getItem(k)||'nu
 const nmsSetJ = (k,v)    => { try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} };
 
 let nmsCurrent='', nmsSetupColor='#0f7c6e', nmsDecoColor='', nmsSetupAv='🦊', nmsDecoAv='';
-let nmsTool='pen', nmsBrushSize=5;
+let nmsTool='pen', nmsBrushSize=5, nmsStrokeColor='#0f7c6e';
 let nmsCanvas, nmsCtx, nmsDrawing=false, nmsLX=0, nmsLY=0;
 
 // ── OPEN / CLOSE ─────────────────────────────────────────
 function openNMS(){
   document.getElementById('nms-overlay').classList.add('open');
-  document.addEventListener('keydown', _nmsEscHandler);
+  document.addEventListener('keydown',_nmsEscHandler);
   document.body.style.overflow='hidden';
   document.body.style.overflow='hidden';
   const profiles=nmsGetJ('nms_profiles');
@@ -266,7 +270,7 @@ function openNMS(){
 function _nmsEscHandler(e){if(e.key==='Escape')closeNMS();}
 function closeNMS(){
   document.getElementById('nms-overlay').classList.remove('open');
-  document.removeEventListener('keydown', _nmsEscHandler);
+  document.removeEventListener('keydown',_nmsEscHandler);
   document.body.style.overflow='';
   document.body.style.overflow='';
 }
@@ -443,6 +447,19 @@ function nmsInitCanvas(){
   nmsCanvas.addEventListener('touchstart',e=>{e.preventDefault();nmsDrawing=true;const p=nmsPos(e.touches[0]);nmsLX=p.x;nmsLY=p.y;},{passive:false});
   nmsCanvas.addEventListener('touchmove',e=>{e.preventDefault();if(!nmsDrawing)return;nmsDraw(nmsPos(e.touches[0]));},{passive:false});
   nmsCanvas.addEventListener('touchend',()=>nmsDrawing=false);
+  nmsInitPenColors();
+}
+function nmsInitPenColors(){
+  const colors=['#0f7c6e','#E53E3E','#DD6B20','#D69E2E','#38A169','#3182CE','#805AD5','#D53F8C','#1A202C','#ffffff'];
+  const el=document.getElementById('nms-pen-colors');
+  if(!el)return;
+  el.innerHTML=colors.map((c,i)=>`<div class="nms-pen-color${i===0?' active':''}" style="background:${c};${c==='#ffffff'?'border:2px solid #ccc;':''}" onclick="nmsSetPenColor('${c}',this)"></div>`).join('');
+}
+function nmsSetPenColor(col,el){
+  nmsStrokeColor=col;
+  document.querySelectorAll('.nms-pen-color').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  if(nmsTool==='erase')nmsSetTool('pen');
 }
 function nmsResizeCanvas(){
   if(!nmsCanvas)return;
@@ -466,7 +483,7 @@ function nmsDraw(pos){
     nmsCtx.lineWidth=nmsBrushSize*4;
   } else {
     nmsCtx.globalCompositeOperation='source-over';
-    nmsCtx.strokeStyle=col;
+    nmsCtx.strokeStyle=nmsStrokeColor;
   }
   nmsCtx.beginPath(); nmsCtx.moveTo(nmsLX,nmsLY); nmsCtx.lineTo(pos.x,pos.y); nmsCtx.stroke();
   nmsLX=pos.x; nmsLY=pos.y;
