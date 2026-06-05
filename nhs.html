@@ -689,12 +689,10 @@ function buildSidebar(lv){
     :`<div class="ep-item" id="ep-item-${level}-${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div></div>`;
   let html='';
   if(lv==='L1'){
-    html='<div class="sidebar-hdr" style="margin-top:0">📺 Level 1</div>'
-      +L1_EPISODES.map((ep,i)=>mkItem(ep,i,'L1')).join('')
+    html=L1_EPISODES.map((ep,i)=>mkItem(ep,i,'L1')).join('')
       +'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>';
   }else if(lv==='L2'){
-    html='<div class="sidebar-hdr" style="margin-top:0">📺 Level 2</div>'
-      +L2_EPISODES.map((ep,i)=>mkItem(ep,i,'L2')).join('');
+    html=L2_EPISODES.map((ep,i)=>mkItem(ep,i,'L2')).join('');
   }
   document.getElementById('ep-list').innerHTML=html;
 }
@@ -2139,6 +2137,7 @@ function setLevel(btn){
   }else{
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
     const lv=curLevel==='Level 2'?'L2':curLevel==='Level 3'?'L3':'L1';
+    if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 '+curLevel;}
     buildSidebar(lv);
     loadEp('ep01',lv);
   }
