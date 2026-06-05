@@ -468,6 +468,64 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 /* ── CLASSROOM 2-COL ─────────────────────────────────── */
 .class-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:520px){.class-cols{grid-template-columns:1fr;}}
+
+/* ── MOBILE RESPONSIVE ───────────────────────────────── */
+@media(max-width:700px){
+  /* 상단 바 */
+  .top-bar{padding:0 12px;height:50px;gap:8px;}
+  .school-title{font-size:14px;}
+  .kq-logo{font-size:17px;}
+  .level-btn{padding:4px 10px;font-size:11px;}
+  .index-btn{padding:5px 10px;font-size:11px;}
+
+  /* 사이드바 → 상단 가로 스크롤 스트립 */
+  .main-layout{flex-direction:column;}
+  .sidebar{
+    width:100%; height:auto;
+    flex-direction:row; flex-wrap:nowrap;
+    overflow-x:auto; overflow-y:hidden;
+    padding:8px 10px; gap:6px;
+    border-right:none; border-bottom:1px solid var(--warm-300);
+    box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .sidebar::-webkit-scrollbar{display:none;}
+  .sidebar-hdr{display:none;}
+  .ep-item{
+    flex-direction:row; flex-shrink:0;
+    padding:7px 12px; gap:7px;
+    border-radius:20px; white-space:nowrap;
+    min-width:unset;
+  }
+  .ep-name{font-size:12px; white-space:nowrap;}
+  .lt-item{
+    flex-shrink:0; margin-top:0;
+    padding:7px 12px; border-radius:20px;
+    white-space:nowrap;
+  }
+  .lt-name{white-space:nowrap; font-size:12px;}
+
+  /* 콘텐츠 영역 */
+  .content-area{padding:14px 12px 24px;}
+
+  /* 슬라이드 높이 축소 */
+  .scene-panel{height:220px;}
+
+  /* 탭 버튼 작게 */
+  .tab-btn{padding:9px 10px;font-size:11.5px;}
+
+  /* 어휘 그리드 */
+  .vocab-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
+
+  /* 에피소드 헤더 */
+  .ep-header{padding:14px 16px;gap:10px;}
+  .ep-title-kr{font-size:16px;}
+  .ep-scene-badge{font-size:11px;padding:5px 10px;}
+
+  /* 문법 테이블 가로 스크롤 */
+  .grammar-table-wrap, table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+}
 .class-col-hdr{font-size:13px;font-weight:800;border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:8px;text-align:center;line-height:1.5;}
 .teacher-hdr{background:var(--teal-50);color:var(--teal-dark);border:1.5px solid var(--teal-lt);}
 .student-hdr{background:var(--amber-50);color:var(--amber-600);border:1.5px solid var(--amber-lt);}
