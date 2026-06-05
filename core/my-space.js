@@ -56,6 +56,8 @@
 .ms-tool-btn{padding:7px 16px;border-radius:20px;border:1.5px solid #ddd;background:#fff;font-size:13px;cursor:pointer;font-weight:700;transition:all .15s;}
 .ms-tool-btn:hover{background:#f0f0f0;}
 .ms-tool-btn.active{background:#5BB8F5;color:#fff;border-color:#5BB8F5;}
+.ms-pen-color{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0;}
+.ms-pen-color.active{border-color:#333;transform:scale(1.2);box-shadow:0 0 0 2px #fff,0 0 0 4px #333;}
 .ms-setup-wrap{padding:32px 20px;max-width:400px;margin:0 auto;}
 .ms-setup-title{font-family:'Jua',sans-serif;font-size:1.4rem;color:#5BB8F5;margin-bottom:6px;}
 .ms-setup-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
@@ -165,6 +167,10 @@
             </div>
             <button class="ms-tool-btn" onclick="msClearCanvas()" style="margin-left:auto;color:#FF6B6B;border-color:#FF6B6B;">🗑 Clear</button>
           </div>
+          <div style="display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap;">
+            <span style="font-size:11px;color:#999;font-weight:600;">펜 색상:</span>
+            <div id="ms-pen-colors" style="display:flex;gap:5px;flex-wrap:wrap;"></div>
+          </div>
           <div style="margin-top:14px;padding:12px;background:#f8f9fa;border-radius:10px;">
             <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Word hints — click to see big ✨</div>
             <div id="ms-hint-label" style="font-size:11px;color:#1a7bbf;font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
@@ -247,7 +253,7 @@ const msSetJ = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catc
 let msCurrent = '';   // current profile name
 let msSetupAv = '🐨', msSetupColor = '#5BB8F5';
 let msDecoAv = '', msDecoColor = '';
-let msTool = 'pen', msBrushSize = 6;
+let msTool = 'pen', msBrushSize = 6, msStrokeColor = '#5BB8F5';
 let msCanvas, msCtx, msDrawing = false, msLastX = 0, msLastY = 0;
 
 // ── OPEN / CLOSE ─────────────────────────────────────────
@@ -449,6 +455,7 @@ function msInitCanvas() {
     msCanvas.addEventListener('touchstart', e=>{ e.preventDefault(); msDrawing=true; const p=msPos(e.touches[0]); msLastX=p.x; msLastY=p.y; },{passive:false});
     msCanvas.addEventListener('touchmove', e=>{ e.preventDefault(); if(!msDrawing)return; msDraw(msPos(e.touches[0])); },{passive:false});
     msCanvas.addEventListener('touchend', ()=>msDrawing=false);
+  msInitPenColors();
   }
 }
 function msResizeCanvas() {
@@ -478,7 +485,7 @@ function msDraw(pos) {
     msCtx.lineWidth = msBrushSize * 4;
   } else {
     msCtx.globalCompositeOperation = 'source-over';
-    msCtx.strokeStyle = col;
+    msCtx.strokeStyle = msStrokeColor;
   }
   msCtx.beginPath();
   msCtx.moveTo(msLastX, msLastY);
@@ -633,5 +640,17 @@ function msRenderStickers() {
     : inTier===0&&total>0 ? `🎉 Level up! Welcome, ${tier.name}!`
     : total===0 ? 'Save your first note to start collecting! ✍️'
     : `${10-inTier} more → ${nextTier.badge} ${nextTier.name}`;
+}
+function msInitPenColors(){
+  const colors=['#5BB8F5','#E53E3E','#DD6B20','#D69E2E','#38A169','#3182CE','#805AD5','#D53F8C','#1A202C','#ffffff'];
+  const el=document.getElementById('ms-pen-colors');
+  if(!el)return;
+  el.innerHTML=colors.map((c,i)=>`<div class="ms-pen-color${i===0?' active':''}" style="background:${c};${c==='#ffffff'?'border:2px solid #ccc;':''}" onclick="msSetPenColor('${c}',this)"></div>`).join('');
+}
+function msSetPenColor(col,el){
+  msStrokeColor=col;
+  document.querySelectorAll('.ms-pen-color').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  if(msTool==='erase')msSetTool('pen');
 }
 // ── END MY SPACE ─────────────────────────────────────────
