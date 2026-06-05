@@ -544,32 +544,44 @@
       {
         "banmal": "잘 있었어?",
         "jondaemal": "잘 지내셨어요?",
-        "english": "Have you been well?"
+        "english": "Have you been well?",
+        "situation_ko": "재회 인사",
+        "situation_en": "Greeting after time apart"
       },
       {
         "banmal": "오랜만이야!",
         "jondaemal": "오랜만이에요! / 오랜만입니다!",
-        "english": "Long time no see!"
+        "english": "Long time no see!",
+        "situation_ko": "반가운 재회",
+        "situation_en": "Happy reunion"
       },
       {
         "banmal": "연락할 수 있어?",
         "jondaemal": "연락할 수 있어요?",
-        "english": "Can you contact (her)?"
+        "english": "Can you contact (her)?",
+        "situation_ko": "연락 요청",
+        "situation_en": "Asking to stay in touch"
       },
       {
         "banmal": "전화부터 연결해야 돼.",
         "jondaemal": "전화부터 연결해야 돼요.",
-        "english": "We need to set up the phone first."
+        "english": "We need to set up the phone first.",
+        "situation_ko": "해야 할 일",
+        "situation_en": "Saying what needs to be done"
       },
       {
         "banmal": "저기 아닐까?",
         "jondaemal": "저기 아닐까요?",
-        "english": "Isn't it over there?"
+        "english": "Isn't it over there?",
+        "situation_ko": "방향 추측",
+        "situation_en": "Guessing direction"
       },
       {
         "banmal": "어디에서 하는 거야?",
         "jondaemal": "어디에서 하는 거예요?",
-        "english": "Where do you do it?"
+        "english": "Where do you do it?",
+        "situation_ko": "장소 묻기",
+        "situation_en": "Asking where to do something"
       }
     ],
     "adult_dialogue": {
@@ -692,81 +704,81 @@
       "type": "mc",
       "q": "\"캐나다에서 오는 사촌들\" — 오는 의 역할은?",
       "en": "What does 오는 do in this phrase?",
-      "opts": [
+      "exp": "-(으)는 + 명사 = adnominal form. 동사가 뒤의 명사를 수식해요. 오는 사촌들 = the cousins who are coming.",
+      "options": [
         "관형사형 — 뒤의 명사(사촌들)를 수식해요",
         "과거형 동사예요",
         "목적어 표시예요",
         "조건을 나타내요"
       ],
-      "ans": 0,
-      "exp": "-(으)는 + 명사 = adnominal form. 동사가 뒤의 명사를 수식해요. 오는 사촌들 = the cousins who are coming."
+      "answer": 0
     },
     {
       "type": "mc",
       "q": "\"전화가 안 되면\" — 면 은 무슨 뜻이에요?",
       "en": "What does -(으)면 mean?",
-      "opts": [
+      "exp": "-(으)면 = if / when. 조건을 나타내요! 비가 오면 = if it rains.",
+      "options": [
         "if / when ~하면",
         "because ~이기 때문에",
         "but ~지만",
         "so ~아/어서"
       ],
-      "ans": 0,
-      "exp": "-(으)면 = if / when. 조건을 나타내요! 비가 오면 = if it rains."
+      "answer": 0
     },
     {
       "type": "mc",
       "q": "못 만나 vs 안 만나 — 차이는?",
       "en": "What is the difference between 못 and 안?",
-      "opts": [
+      "exp": "못 = can't (외부 상황). 안 = don't / won't (의지). 전화가 없어서 못 만나 vs 만나기 싫어서 안 만나.",
+      "options": [
         "못 = 상황 때문에 불가능, 안 = 의지로 안 함",
         "못 = 과거, 안 = 현재",
         "못 = 반말, 안 = 존댓말",
         "차이 없어요"
       ],
-      "ans": 0,
-      "exp": "못 = can't (외부 상황). 안 = don't / won't (의지). 전화가 없어서 못 만나 vs 만나기 싫어서 안 만나."
+      "answer": 0
     },
     {
       "type": "listen",
       "audio_text": "저기 사촌들이 보여요!",
       "q": "보여요 를 쓴 이유는?",
       "en": "Why is 보여요 used here (not 봐요)?",
-      "opts": [
+      "exp": "보여요 = 보이다 (passive) — 사촌들이 눈에 들어왔어요. 봐요 = 보다 (active) — 내가 의도적으로 봐요.",
+      "options": [
         "눈에 들어왔기 때문에 (passive — 보이다)",
         "의도적으로 봤기 때문에 (active — 보다)",
         "과거형이기 때문에",
         "존댓말이기 때문에"
       ],
-      "ans": 0,
-      "exp": "보여요 = 보이다 (passive) — 사촌들이 눈에 들어왔어요. 봐요 = 보다 (active) — 내가 의도적으로 봐요."
+      "answer": 0
     },
     {
       "type": "listen",
       "audio_text": "심카드 두 개 주세요.",
       "q": "이 문장의 뜻은?",
       "en": "What does this sentence mean?",
-      "opts": [
+      "exp": "N + 주세요 = N please / give me N. 두 개 = two (고유어 숫자 + 개). 공항, 식당, 가게에서 모두 쓸 수 있어요!",
+      "options": [
         "Two SIM cards, please.",
         "Where are the SIM cards?",
         "I have two SIM cards.",
         "Do you sell SIM cards?"
       ],
-      "ans": 0,
-      "exp": "N + 주세요 = N please / give me N. 두 개 = two (고유어 숫자 + 개). 공항, 식당, 가게에서 모두 쓸 수 있어요!"
+      "answer": 0
     },
     {
       "type": "mc",
       "q": "\"번호표를 뽑는 거야\" — 이 표현의 뜻은?",
       "en": "What does this mean?",
-      "opts": [
+      "exp": "-는 거야 = explaining something as a fact/procedure. 여기서 번호표를 뽑는 거야 = This is how it works here — you take a number ticket.",
+      "options": [
         "This is where you take a number ticket.",
         "You should take a number ticket.",
         "Did you take a number ticket?",
         "I took a number ticket."
       ],
-      "ans": 0,
-      "exp": "-는 거야 = explaining something as a fact/procedure. 여기서 번호표를 뽑는 거야 = This is how it works here — you take a number ticket."
+      "answer": 0
     }
   ],
   "real_life": [
@@ -778,26 +790,26 @@
       "passage_en": "When you arrive at Incheon Airport, you first go through immigration. Then you pick up your luggage. Once you have your bags, go to a carrier booth to buy a SIM card. Transit cards (T-money) are available at convenience stores or subway stations. With a transit card, you can easily take buses, subways, and taxis.",
       "questions": [
         {
-          "q": "입국 심사 다음에 무엇을 해요?",
-          "en": "What do you do after immigration?",
-          "opts": [
+          "options": [
             "짐을 찾아요",
             "심카드를 사요",
             "버스를 타요",
             "편의점에 가요"
           ],
-          "ans": 0
+          "answer": 0,
+          "question_ko": "입국 심사 다음에 무엇을 해요?",
+          "question_en": "What do you do after immigration?"
         },
         {
-          "q": "교통카드는 어디에서 살 수 있어요?",
-          "en": "Where can you buy a transit card?",
-          "opts": [
+          "options": [
             "편의점 또는 지하철 역",
             "통신사 부스",
             "공항 입국장",
             "택시 안"
           ],
-          "ans": 0
+          "answer": 0,
+          "question_ko": "교통카드는 어디에서 살 수 있어요?",
+          "question_en": "Where can you buy a transit card?"
         }
       ]
     },
@@ -840,10 +852,25 @@
     }
   ],
   "self_check": [
-    "캐나다에서 오는 사촌들처럼 -(으)는 + 명사 형태를 말할 수 있어요.",
-    "전화가 안 되면처럼 -(으)면을 써서 조건문을 만들 수 있어요.",
-    "못 + 동사와 안 + 동사의 차이를 알아요.",
-    "보다(봐요)와 보이다(보여요)의 차이를 알아요.",
-    "공항에서 심카드/교통카드를 살 때 쓰는 표현을 알아요."
+    {
+      "ko": "캐나다에서 오는 사촌들처럼 -(으)는 + 명사 형태를 말할 수 있어요.",
+      "en": "I can use -(으)는 + noun to describe a noun (e.g. 오는 사촌들 = cousins who are coming)."
+    },
+    {
+      "ko": "전화가 안 되면처럼 -(으)면을 써서 조건문을 만들 수 있어요.",
+      "en": "I can use -(으)면 to make a conditional sentence (e.g. 전화가 안 되면 = if the phone doesn't work)."
+    },
+    {
+      "ko": "못 + 동사와 안 + 동사의 차이를 알아요.",
+      "en": "I know the difference between 못 + verb (can't) and 안 + verb (don't/won't)."
+    },
+    {
+      "ko": "보다(봐요)와 보이다(보여요)의 차이를 알아요.",
+      "en": "I know the difference between 보다/봐요 (to look) and 보이다/보여요 (to be visible)."
+    },
+    {
+      "ko": "공항에서 심카드/교통카드를 살 때 쓰는 표현을 알아요.",
+      "en": "I know expressions for buying a SIM card or transit card at the airport."
+    }
   ]
 }
