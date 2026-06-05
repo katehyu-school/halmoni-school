@@ -151,7 +151,7 @@
       <div id="ms-panel-write" style="display:none">
         <div class="ms-card">
           <div class="ms-section-title">✏️ Korean Writing</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Write freely and erase — no saving needed!</div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:20px;padding:5px 14px;margin-bottom:10px;"><span style="font-size:13px;">✍️</span><span style="font-size:12px;font-weight:700;color:#E65100;">Messy Handwriting Club</span><span style="font-size:12px;color:#BF360C;">· 할 수 있다! 💪</span></div>
           <div class="ms-canvas-wrap">
             <canvas id="ms-canvas"></canvas>
           </div>
