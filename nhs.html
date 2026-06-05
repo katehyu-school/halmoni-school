@@ -1395,7 +1395,7 @@ function resetQuiz(){
 // ── PRONUNCIATION ─────────────────────────────────────
 function buildPron(){
   let _pron=DATA.pronunciation;
-  if(_pron&&!Array.isArray(_pron)&&_pron.items){_pron=(_pron.items||[]).map(p=>({title:p.word||'',rule:p.actual||'',tip:p.note||''}));}
+  if(_pron&&!Array.isArray(_pron)&&_pron.items){_pron=(_pron.items||[]).map(p=>({title:p.word||p.rule||p.title||'',rule:p.actual||'',tip:p.note||p.tip||'',examples:(p.examples||[]).map(ex=>({before:ex.written||ex.before||ex.ko||'',after:ex.pronounced||ex.after||'',note:ex.note||ex.en||''}))}));}
   const items=Array.isArray(_pron)?_pron:[];
   if(!items.length){
     // 문법에서 발음·불규칙 관련 자동 추출
@@ -1548,8 +1548,10 @@ function buildBanmal(){
 
 // ── USAGE ──────────────────────────────────────────────
 function buildUsage(){
-  const usage=DATA.usage;
-  if(!usage||!usage.length)return'<div class="loading">데이터 준비 중이에요.</div>';
+  let usage=DATA.usage;
+  if(!usage)return'<div class="loading">데이터 준비 중이에요.</div>';
+  if(!Array.isArray(usage)&&usage.sections){usage=usage.sections;}
+  if(!Array.isArray(usage)||!usage.length)return'<div class="loading">데이터 준비 중이에요.</div>';
   return usage.map(sec=>{
     if(sec.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--warm-900);line-height:1.75;margin-bottom:14px"><strong>${esc(sec.section||sec.title||'')}</strong><br>${esc(sec.content_ko||sec.content||'')}<div style="font-size:11px;color:var(--warm-500);margin-top:6px">${esc(sec.content_en||'')}</div></div>`;
     if(sec.title&&sec.explanation_en){

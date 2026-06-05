@@ -30,10 +30,30 @@
   ],
   "video": null,
   "characters": [
-    { "id": "mirae",   "name": "미래",   "color": "#E85D9A", "emoji": "👧" },
-    { "id": "ria",     "name": "리아",   "color": "#9B72CF", "emoji": "👧" },
-    { "id": "kayo",    "name": "카요",   "color": "#E8744A", "emoji": "👧" },
-    { "id": "halmoni", "name": "할머니", "color": "#4A90D9", "emoji": "👵" }
+    {
+      "id": "mirae",
+      "name": "미래",
+      "color": "#E85D9A",
+      "emoji": "👧"
+    },
+    {
+      "id": "ria",
+      "name": "리아",
+      "color": "#9B72CF",
+      "emoji": "👧"
+    },
+    {
+      "id": "kayo",
+      "name": "카요",
+      "color": "#E8744A",
+      "emoji": "👧"
+    },
+    {
+      "id": "halmoni",
+      "name": "할머니",
+      "color": "#4A90D9",
+      "emoji": "👵"
+    }
   ],
   "script": [
     {
@@ -119,35 +139,106 @@
     {
       "category": "장소 · Places",
       "items": [
-        { "korean": "입구",   "romanization": "ip-gu",       "english": "entrance",      "emoji": "🚪" },
-        { "korean": "출구",   "romanization": "chul-gu",     "english": "exit",          "emoji": "🚶" },
-        { "korean": "근처",   "romanization": "geun-cheo",   "english": "nearby, near",  "emoji": "📍" },
-        { "korean": "매표소", "romanization": "mae-pyo-so",  "english": "ticket booth",  "emoji": "🎫" },
-        { "korean": "종점",   "romanization": "jong-jeom",   "english": "last stop, terminus", "emoji": "🏁" },
-        { "korean": "터미널", "romanization": "teo-mi-neol", "english": "terminal",      "emoji": "🏢" }
+        {
+          "korean": "입구",
+          "romanization": "ip-gu",
+          "english": "entrance",
+          "emoji": "🚪"
+        },
+        {
+          "korean": "출구",
+          "romanization": "chul-gu",
+          "english": "exit",
+          "emoji": "🚶"
+        },
+        {
+          "korean": "근처",
+          "romanization": "geun-cheo",
+          "english": "nearby, near",
+          "emoji": "📍"
+        },
+        {
+          "korean": "매표소",
+          "romanization": "mae-pyo-so",
+          "english": "ticket booth",
+          "emoji": "🎫"
+        },
+        {
+          "korean": "종점",
+          "romanization": "jong-jeom",
+          "english": "last stop, terminus",
+          "emoji": "🏁"
+        },
+        {
+          "korean": "터미널",
+          "romanization": "teo-mi-neol",
+          "english": "terminal",
+          "emoji": "🏢"
+        }
       ]
     },
     {
       "category": "교통 · Transportation",
       "items": [
-        { "korean": "공항버스",   "romanization": "gong-hang-beo-seu", "english": "airport bus",     "emoji": "🚌" },
-        { "korean": "터미널행",   "romanization": "teo-mi-neol-haeng", "english": "bound for terminal", "note": "N행 = bound for N", "emoji": "➡️" },
-        { "korean": "타다",       "romanization": "ta-da",              "english": "to ride, to board", "emoji": "🎫" }
+        {
+          "korean": "공항버스",
+          "romanization": "gong-hang-beo-seu",
+          "english": "airport bus",
+          "emoji": "🚌"
+        },
+        {
+          "korean": "터미널행",
+          "romanization": "teo-mi-neol-haeng",
+          "english": "bound for terminal",
+          "note": "N행 = bound for N",
+          "emoji": "➡️"
+        },
+        {
+          "korean": "타다",
+          "romanization": "ta-da",
+          "english": "to ride, to board",
+          "emoji": "🎫"
+        }
       ]
     },
     {
       "category": "동사 · Verbs",
       "items": [
-        { "korean": "도착하다", "romanization": "do-chak-ha-da", "english": "to arrive",  "emoji": "✅" },
-        { "korean": "찾다",     "romanization": "chat-da",       "english": "to look for, to find", "emoji": "🔍" },
-        { "korean": "기다리다", "romanization": "gi-da-ri-da",   "english": "to wait",    "emoji": "⏳" }
+        {
+          "korean": "도착하다",
+          "romanization": "do-chak-ha-da",
+          "english": "to arrive",
+          "emoji": "✅"
+        },
+        {
+          "korean": "찾다",
+          "romanization": "chat-da",
+          "english": "to look for, to find",
+          "emoji": "🔍"
+        },
+        {
+          "korean": "기다리다",
+          "romanization": "gi-da-ri-da",
+          "english": "to wait",
+          "emoji": "⏳"
+        }
       ]
     },
     {
       "category": "부사 · Adverbs & Expressions",
       "items": [
-        { "korean": "무사히", "romanization": "mu-sa-hi",  "english": "safely, without incident", "emoji": "🙏" },
-        { "korean": "까지",   "romanization": "kka-ji",    "english": "until, to (destination)",  "emoji": "🗺️" }
+        {
+          "korean": "무사히",
+          "romanization": "mu-sa-hi",
+          "english": "safely, without incident",
+          "emoji": "🙏"
+        },
+        {
+          "korean": "까지",
+          "romanization": "kka-ji",
+          "english": "until, to (destination)",
+          "emoji": "🗺️"
+        }
       ]
     }
   ],
@@ -164,15 +255,52 @@
         "en": "Try looking for it. / I'll give it a try."
       },
       "rules": [
-        { "condition": "ㅏ/ㅗ 어간", "ending": "-아 보다", "example": "찾아 보다, 봐요" },
-        { "condition": "그 외 어간",  "ending": "-어 보다", "example": "먹어 보다, 해 보다" }
+        {
+          "condition": "ㅏ/ㅗ 어간",
+          "ending": "-아 보다",
+          "example": "찾아 보다, 봐요"
+        },
+        {
+          "condition": "그 외 어간",
+          "ending": "-어 보다",
+          "example": "먹어 보다, 해 보다"
+        }
       ],
       "examples": [
-        { "ko": "이 음식 먹어 봐!", "en": "Try eating this food!", "note": "반말 명령" },
-        { "ko": "한번 해 볼게요.",  "en": "I'll try it once.",    "note": "의지 표현" },
-        { "ko": "찾아 보세요.",     "en": "Please try looking.",  "note": "존댓말 명령" }
+        {
+          "ko": "이 음식 먹어 봐!",
+          "en": "Try eating this food!",
+          "note": "반말 명령"
+        },
+        {
+          "ko": "한번 해 볼게요.",
+          "en": "I'll try it once.",
+          "note": "의지 표현"
+        },
+        {
+          "ko": "찾아 보세요.",
+          "en": "Please try looking.",
+          "note": "존댓말 명령"
+        }
       ],
-      "tip": "Try something new · 새로운 것을 시도할 때 써요. -아/어 보다 = give it a go!"
+      "tip": "Try something new · 새로운 것을 시도할 때 써요. -아/어 보다 = give it a go!",
+      "fill_blanks": [
+        {
+          "sentence": "매표소를 찾아 ___.",
+          "answer": "봐",
+          "hint": "-아/어 보다 반말"
+        },
+        {
+          "sentence": "공항버스를 타고 ___까지 오면 돼.",
+          "answer": "종점",
+          "hint": "ep02 대화 내용"
+        },
+        {
+          "sentence": "한국 음식을 먹어 ___!",
+          "answer": "봐",
+          "hint": "Try Korean food!"
+        }
+      ]
     },
     {
       "id": "g02_mot",
@@ -186,15 +314,52 @@
         "en": "I can't find it."
       },
       "rules": [
-        { "condition": "일반 동사", "ending": "못 + 동사", "example": "못 찾아요, 못 가요" },
-        { "condition": "하다 동사", "ending": "못 해요 (분리)", "example": "운동 못 해요" }
+        {
+          "condition": "일반 동사",
+          "ending": "못 + 동사",
+          "example": "못 찾아요, 못 가요"
+        },
+        {
+          "condition": "하다 동사",
+          "ending": "못 해요 (분리)",
+          "example": "운동 못 해요"
+        }
       ],
       "examples": [
-        { "ko": "안 보여요. 못 찾겠어요.", "en": "I can't see it. I can't find it.",    "note": "에피소드 대사" },
-        { "ko": "오늘 못 가요.",           "en": "I can't go today.",                  "note": "일반 상황" },
-        { "ko": "한국어 못 해요.",         "en": "I can't speak Korean (well).",       "note": "능력 부족" }
+        {
+          "ko": "안 보여요. 못 찾겠어요.",
+          "en": "I can't see it. I can't find it.",
+          "note": "에피소드 대사"
+        },
+        {
+          "ko": "오늘 못 가요.",
+          "en": "I can't go today.",
+          "note": "일반 상황"
+        },
+        {
+          "ko": "한국어 못 해요.",
+          "en": "I can't speak Korean (well).",
+          "note": "능력 부족"
+        }
       ],
-      "tip": "못 = inability · 안 = choice not to. 못 가요(can't go) vs 안 가요(not going)"
+      "tip": "못 = inability · 안 = choice not to. 못 가요(can't go) vs 안 가요(not going)",
+      "fill_blanks": [
+        {
+          "sentence": "___ 찾겠어요.",
+          "answer": "못",
+          "hint": "can't find"
+        },
+        {
+          "sentence": "저는 한국어를 ___ 해요.",
+          "answer": "못",
+          "hint": "I can't speak Korean"
+        },
+        {
+          "sentence": "비가 와서 나가지 ___.",
+          "answer": "못해",
+          "hint": "can't go out"
+        }
+      ]
     },
     {
       "id": "g02_go",
@@ -208,34 +373,113 @@
         "en": "Take the bus and come to the last stop."
       },
       "rules": [
-        { "condition": "순서 나열", "ending": "-고", "example": "타고 오다, 씻고 자다" }
+        {
+          "condition": "순서 나열",
+          "ending": "-고",
+          "example": "타고 오다, 씻고 자다"
+        }
       ],
       "examples": [
-        { "ko": "버스를 타고 종점까지 와요.", "en": "Ride the bus and come to the last stop.", "note": "에피소드 대사" },
-        { "ko": "밥을 먹고 나가요.",          "en": "Eat and then go out.",                  "note": "순서" },
-        { "ko": "씻고 자요.",                 "en": "Wash up and sleep.",                    "note": "일상" }
+        {
+          "ko": "버스를 타고 종점까지 와요.",
+          "en": "Ride the bus and come to the last stop.",
+          "note": "에피소드 대사"
+        },
+        {
+          "ko": "밥을 먹고 나가요.",
+          "en": "Eat and then go out.",
+          "note": "순서"
+        },
+        {
+          "ko": "씻고 자요.",
+          "en": "Wash up and sleep.",
+          "note": "일상"
+        }
       ],
-      "tip": "-고 links two actions in sequence. Think: 'do A, then do B' · A하고 나서 B"
+      "tip": "-고 links two actions in sequence. Think: 'do A, then do B' · A하고 나서 B",
+      "fill_blanks": [
+        {
+          "sentence": "버스를 타___ 종점까지 와.",
+          "answer": "고",
+          "hint": "take bus and come"
+        },
+        {
+          "sentence": "밥을 먹___ 학교에 갔어요.",
+          "answer": "고",
+          "hint": "ate and went to school"
+        },
+        {
+          "sentence": "샤워를 하___ 잘 거예요.",
+          "answer": "고",
+          "hint": "shower then sleep"
+        }
+      ]
     }
   ],
   "banmal_jondaemal": {
     "intro_ko": "이 에피소드에서 할머니는 아이들에게 반말, 아이들은 할머니께 존댓말을 써요.",
     "intro_en": "In this episode, 할머니 uses 반말 with the kids, and the kids use 존댓말 with 할머니.",
     "rows": [
-      { "banmal": "찾아 봐.",         "jondaemal": "찾아 보세요.",       "english": "Try looking for it." },
-      { "banmal": "타고 와.",          "jondaemal": "타고 오세요.",        "english": "Come by bus." },
-      { "banmal": "거기서 기다릴게.", "jondaemal": "거기서 기다릴게요.", "english": "I'll wait there." },
-      { "banmal": "어디 있어?",        "jondaemal": "어디 있어요?",        "english": "Where are you?" },
-      { "banmal": "도착했어?",         "jondaemal": "도착했어요?",         "english": "Did you arrive?" }
+      {
+        "banmal": "찾아 봐.",
+        "jondaemal": "찾아 보세요.",
+        "english": "Try looking for it.",
+        "situation_ko": "매표소를 못 찾을 때 (친구에게)",
+        "situation_en": "Can't find the ticket booth (to a friend)"
+      },
+      {
+        "banmal": "타고 와.",
+        "jondaemal": "타고 오세요.",
+        "english": "Come by bus.",
+        "situation_ko": "공항버스 타는 법 알려줄 때 (친구에게)",
+        "situation_en": "Telling someone how to take the bus (to a friend)"
+      },
+      {
+        "banmal": "거기서 기다릴게.",
+        "jondaemal": "거기서 기다릴게요.",
+        "english": "I'll wait there.",
+        "situation_ko": "공항 입구에서 기다릴 때 (친구에게)",
+        "situation_en": "Waiting at the entrance (to a friend)"
+      },
+      {
+        "banmal": "어디 있어?",
+        "jondaemal": "어디 있어요?",
+        "english": "Where are you?",
+        "situation_ko": "연락이 안 될 때 (친구에게)",
+        "situation_en": "When you can't reach someone (to a friend)"
+      },
+      {
+        "banmal": "도착했어?",
+        "jondaemal": "도착했어요?",
+        "english": "Did you arrive?",
+        "situation_ko": "가족이 도착했는지 물을 때 (친구에게)",
+        "situation_en": "Asking if family arrived (to a friend)"
+      }
     ],
     "tip": "명령/제안: 봐 → 보세요 / 와 → 오세요 · 불규칙 주의!",
     "adult_dialogue": {
       "title": "어른들 사이 — 오랜만에 연락하기",
       "lines": [
-        { "speaker": "A", "text": "오랜만이에요! 잘 지내셨어요?",    "english": "Long time no see! Have you been well?" },
-        { "speaker": "B", "text": "네, 덕분에요. 지금 어디 계세요?", "english": "Yes, thanks to you. Where are you now?" },
-        { "speaker": "A", "text": "공항에 막 도착했어요.",            "english": "I just arrived at the airport." },
-        { "speaker": "B", "text": "공항버스 타고 오시면 돼요.",       "english": "You can take the airport bus." }
+        {
+          "speaker": "A",
+          "text": "오랜만이에요! 잘 지내셨어요?",
+          "english": "Long time no see! Have you been well?"
+        },
+        {
+          "speaker": "B",
+          "text": "네, 덕분에요. 지금 어디 계세요?",
+          "english": "Yes, thanks to you. Where are you now?"
+        },
+        {
+          "speaker": "A",
+          "text": "공항에 막 도착했어요.",
+          "english": "I just arrived at the airport."
+        },
+        {
+          "speaker": "B",
+          "text": "공항버스 타고 오시면 돼요.",
+          "english": "You can take the airport bus."
+        }
       ]
     }
   },
@@ -245,14 +489,26 @@
       {
         "rule": "연음화 · Liaison",
         "examples": [
-          { "written": "찾아", "pronounced": "[차자]", "note": "찾 받침 ㅈ → 다음 음절로 연음" },
-          { "written": "도착했어", "pronounced": "[도차개써]", "note": "겹받침 ㄱ 탈락 후 연음" }
+          {
+            "written": "찾아",
+            "pronounced": "[차자]",
+            "note": "찾 받침 ㅈ → 다음 음절로 연음"
+          },
+          {
+            "written": "도착했어",
+            "pronounced": "[도차개써]",
+            "note": "겹받침 ㄱ 탈락 후 연음"
+          }
         ]
       },
       {
         "rule": "못 + 자음 · 못 before consonant",
         "examples": [
-          { "written": "못 찾겠어요", "pronounced": "[몯 차재써요]", "note": "못 → [몯], 찾겠 → [차재]" }
+          {
+            "written": "못 찾겠어요",
+            "pronounced": "[몯 차재써요]",
+            "note": "못 → [몯], 찾겠 → [차재]"
+          }
         ]
       }
     ]
@@ -264,15 +520,24 @@
         "heading": "N행 — Bound for N",
         "content": "터미널행 = bound for terminal · 서울행 기차 = Seoul-bound train · 부산행 버스 = Busan-bound bus",
         "examples": [
-          { "ko": "부산행 버스 한 장 주세요.", "en": "One ticket for the Busan bus, please." }
+          {
+            "ko": "부산행 버스 한 장 주세요.",
+            "en": "One ticket for the Busan bus, please."
+          }
         ]
       },
       {
         "heading": "-아/어 보다 확장 · Extended uses",
         "content": "경험(해 봤어요), 제안(먹어 봐요), 의지(해 볼게요) 세 가지 상황에 모두 쓰여요.",
         "examples": [
-          { "ko": "김치 먹어 봤어요?", "en": "Have you tried kimchi before? (experience)" },
-          { "ko": "이거 써 봐요!",     "en": "Try using this! (suggestion)" }
+          {
+            "ko": "김치 먹어 봤어요?",
+            "en": "Have you tried kimchi before? (experience)"
+          },
+          {
+            "ko": "이거 써 봐요!",
+            "en": "Try using this! (suggestion)"
+          }
         ]
       }
     ]
@@ -284,7 +549,12 @@
       "audio_index": 6,
       "question_ko": "할머니가 찾으라고 한 것은?",
       "question_en": "What did 할머니 tell them to find?",
-      "options": ["공항버스 매표소", "입구", "편의점", "화장실"],
+      "options": [
+        "공항버스 매표소",
+        "입구",
+        "편의점",
+        "화장실"
+      ],
       "answer": 0
     },
     {
@@ -293,21 +563,36 @@
       "audio_index": 7,
       "question_ko": "미래가 못 찾겠다고 한 것은?",
       "question_en": "What did 미래 say she can't find?",
-      "options": ["매표소", "출구", "할머니", "버스"],
+      "options": [
+        "매표소",
+        "출구",
+        "할머니",
+        "버스"
+      ],
       "answer": 0
     },
     {
       "type": "mc",
       "question_ko": "\"해 볼게요\" — 어떤 의미예요?",
       "question_en": "What does 해 볼게요 mean?",
-      "options": ["I'll give it a try", "I already did it", "I can't do it", "I don't want to"],
+      "options": [
+        "I'll give it a try",
+        "I already did it",
+        "I can't do it",
+        "I don't want to"
+      ],
       "answer": 0
     },
     {
       "type": "mc",
       "question_ko": "못 + 동사 = ?",
       "question_en": "못 + verb means:",
-      "options": ["can't do (inability)", "choose not to do", "want to do", "finished doing"],
+      "options": [
+        "can't do (inability)",
+        "choose not to do",
+        "want to do",
+        "finished doing"
+      ],
       "answer": 0
     },
     {
@@ -316,14 +601,24 @@
       "audio_index": 9,
       "question_ko": "어디까지 오면 돼요?",
       "question_en": "Where should they come to?",
-      "options": ["종점", "입구", "매표소", "편의점"],
+      "options": [
+        "종점",
+        "입구",
+        "매표소",
+        "편의점"
+      ],
       "answer": 0
     },
     {
       "type": "mc",
       "question_ko": "\"버스를 타고 와요\" — -고 의 역할은?",
       "question_en": "What does -고 do in 타고 와요?",
-      "options": ["두 행동을 순서대로 연결해요", "이유를 나타내요", "조건을 나타내요", "과거를 나타내요"],
+      "options": [
+        "두 행동을 순서대로 연결해요",
+        "이유를 나타내요",
+        "조건을 나타내요",
+        "과거를 나타내요"
+      ],
       "answer": 0
     }
   ],
@@ -336,7 +631,12 @@
         {
           "question_ko": "공항버스 매표소는 어디에 있어요?",
           "question_en": "Where is the airport bus ticket booth?",
-          "options": ["1층 또는 지하 1층", "3층", "주차장", "식당가"],
+          "options": [
+            "1층 또는 지하 1층",
+            "3층",
+            "주차장",
+            "식당가"
+          ],
           "answer": 0
         }
       ]
@@ -345,20 +645,59 @@
       "type": "kakao",
       "title": "💬 카카오톡 — 공항 도착",
       "messages": [
-        { "sender": "미래",   "text": "할머니! 도착했어요 ✈️",         "side": "right" },
-        { "sender": "할머니", "text": "다행이다~ 무사히 왔구나",        "side": "left"  },
-        { "sender": "미래",   "text": "버스 어디서 타요?",              "side": "right" },
-        { "sender": "할머니", "text": "출구 나와서 1층 매표소 찾아봐 😊", "side": "left" },
-        { "sender": "미래",   "text": "찾았어요! 곧 출발할게요 🚌",     "side": "right" },
-        { "sender": "할머니", "text": "여기서 기다릴게 💕",             "side": "left"  }
+        {
+          "sender": "미래",
+          "text": "할머니! 도착했어요 ✈️",
+          "side": "right"
+        },
+        {
+          "sender": "할머니",
+          "text": "다행이다~ 무사히 왔구나",
+          "side": "left"
+        },
+        {
+          "sender": "미래",
+          "text": "버스 어디서 타요?",
+          "side": "right"
+        },
+        {
+          "sender": "할머니",
+          "text": "출구 나와서 1층 매표소 찾아봐 😊",
+          "side": "left"
+        },
+        {
+          "sender": "미래",
+          "text": "찾았어요! 곧 출발할게요 🚌",
+          "side": "right"
+        },
+        {
+          "sender": "할머니",
+          "text": "여기서 기다릴게 💕",
+          "side": "left"
+        }
       ]
     }
   ],
   "self_check": [
-    { "ko": "공항에서 목적지까지 가는 방법을 물어볼 수 있어요.", "en": "I can ask how to get from the airport to my destination." },
-    { "ko": "-아/어 보다 로 시도 표현을 할 수 있어요.",           "en": "I can express 'trying something' with -아/어 보다." },
-    { "ko": "못 + 동사 로 불가능을 표현할 수 있어요.",            "en": "I can express inability with 못 + verb." },
-    { "ko": "-고 로 두 행동을 연결할 수 있어요.",                 "en": "I can connect two actions with -고." },
-    { "ko": "입구/출구/근처/종점 를 상황에 맞게 쓸 수 있어요.",   "en": "I can use 입구/출구/근처/종점 in context." }
+    {
+      "ko": "공항에서 목적지까지 가는 방법을 물어볼 수 있어요.",
+      "en": "I can ask how to get from the airport to my destination."
+    },
+    {
+      "ko": "-아/어 보다 로 시도 표현을 할 수 있어요.",
+      "en": "I can express 'trying something' with -아/어 보다."
+    },
+    {
+      "ko": "못 + 동사 로 불가능을 표현할 수 있어요.",
+      "en": "I can express inability with 못 + verb."
+    },
+    {
+      "ko": "-고 로 두 행동을 연결할 수 있어요.",
+      "en": "I can connect two actions with -고."
+    },
+    {
+      "ko": "입구/출구/근처/종점 를 상황에 맞게 쓸 수 있어요.",
+      "en": "I can use 입구/출구/근처/종점 in context."
+    }
   ]
 }
