@@ -488,26 +488,43 @@
     "items": [
       {
         "rule": "연음화 · Liaison",
+        "tip": "받침이 뒤 음절 모음 앞으로 넘어가요 · The coda moves to the next syllable",
         "examples": [
           {
             "written": "찾아",
-            "pronounced": "[차자]",
-            "note": "찾 받침 ㅈ → 다음 음절로 연음"
+            "pronounced_standard": "[차자]",
+            "pronounced_actual": "[차자]",
+            "note": "찾(ㅈ받침) + 아 → ㅈ 연음"
           },
           {
             "written": "도착했어",
-            "pronounced": "[도차캐써]",
-            "note": "착(ㄱ)+했(ㅎ) → 격음화 → [ㅋ]"
+            "pronounced_standard": "[도착캤서]",
+            "pronounced_actual": "[도차캐써]",
+            "note": "착(ㄱ)+했(ㅎ) → 격음화 ㅋ · 표준은 음절경계 유지, 실제는 연음 적용"
+          },
+          {
+            "written": "무사히 도착했어",
+            "pronounced_standard": "[무사히 도착캤서]",
+            "pronounced_actual": "[무사히 도차캐써]",
+            "note": "에피소드 대사 · 같은 규칙 적용"
           }
         ]
       },
       {
-        "rule": "못 + 자음 · 못 before consonant",
+        "rule": "경음화 · Tensification",
+        "tip": "받침 ㄱ/ㄷ/ㅂ 뒤의 자음이 된소리로 바뀌어요 · Consonant becomes tense after ㄱ/ㄷ/ㅂ coda",
         "examples": [
           {
             "written": "못 찾겠어요",
-            "pronounced": "[몯 차께써요]",
-            "note": "찾(ㅈ받침)+겠(ㄱ) → 경음화 → [ㄲ], 겠+어요 → 연음 [께써요]"
+            "pronounced_standard": "[몯 찯껫써요]",
+            "pronounced_actual": "[몯 차께써요]",
+            "note": "찾(ㅈ→ㄷ)+겠(ㄱ→ㄲ) 경음화 · 실제 발화에서 받침 약화"
+          },
+          {
+            "written": "찾겠어요",
+            "pronounced_standard": "[찯껫써요]",
+            "pronounced_actual": "[차께써요]",
+            "note": "TOPIK 듣기는 표준발음 기준으로 녹음됨"
           }
         ]
       }

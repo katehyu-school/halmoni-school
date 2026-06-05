@@ -317,21 +317,34 @@
   },
 
   "_PRONUNCIATION_NOTE": "선택사항 — 이 에피소드에서 다루는 발음 규칙 (예: 받침의 연음화, 7대표음 등).",
-  "pronunciation": [
-    {
-      "id": "pron_epN_01",
-      "title": "발음 규칙 제목 (예: 받침의 연음)",
-      "rule": "규칙 설명 — 한국어로.",
-      "table": {
-        "columns": ["Spelling 표기", "Pronunciation 발음", "Rule 규칙"],
-        "rows": [
-          ["표기", "[발음]", "규칙 설명"],
-          ["표기2", "[발음2]", "규칙 설명2"]
-        ]
-      },
-      "tip": "💡 학생에게 전하는 팁."
-    }
+  "_PRON_NOTE": [
+    "pronunciation은 배열 대신 {title, items[]} 객체 형식 권장 (L2부터 표준).",
+    "각 item: rule(규칙명) + tip(선택) + examples[]",
+    "examples 필드:",
+    "  - written: 표기 (원문)",
+    "  - pronounced_standard: 표준발음 🎓 (TOPIK/뉴스 기준) — 느리고 또렷하게",
+    "  - pronounced_actual:   실제발음 🗣️ (드라마/일상 기준) — 빠르고 자연스럽게",
+    "  - note: 규칙 설명",
+    "표준=실제인 경우 두 필드 동일하게 쓰면 렌더러가 한 줄로만 표시.",
+    "용어(격음화/경음화 등) 명칭보다 패턴 노출 위주로 작성할 것."
   ],
+  "pronunciation": {
+    "title": "발음 규칙 · Pronunciation Rules",
+    "items": [
+      {
+        "rule": "연음화 · Liaison",
+        "tip": "받침이 뒤 음절 모음 앞으로 넘어가요 · The coda moves to the next syllable",
+        "examples": [
+          {
+            "written": "표기",
+            "pronounced_standard": "[표준발음]",
+            "pronounced_actual": "[실제발음]",
+            "note": "규칙 설명"
+          }
+        ]
+      }
+    ]
+  },
 
   "============================================   ": "💪 SECTION 4: PRACTICE (usage + quiz)",
 

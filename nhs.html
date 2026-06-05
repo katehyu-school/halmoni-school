@@ -1430,12 +1430,43 @@ function buildPron(){
       ).join('')}</tr>`).join('')}</tbody>
     </table></div>`:'';
     // 기존 before→after 예문 (선택적)
-    const pronExHtml=(item.examples||[]).map(ex=>`<div class="pron-ex">
-      <div class="pron-before">${esc(ex.before||ex.ko||'')}</div>
-      <div class="pron-arrow">→</div>
-      <div class="pron-after">${esc(ex.after||'')} <button onclick="speakTTS('${escA(ex.after||'')}')" style="background:none;border:none;font-size:12px;cursor:pointer;opacity:.5">🔊</button></div>
-      <div class="pron-note">${esc(ex.note||ex.en||'')}</div>
-    </div>`).join('');
+    const pronExHtml=(item.examples||[]).map(ex=>{
+      const written=ex.written||ex.before||ex.ko||'';
+      const hasCompare=ex.pronounced_standard||ex.pronounced_actual;
+      if(hasCompare){
+        const std=ex.pronounced_standard||'';
+        const act=ex.pronounced_actual||'';
+        const same=std===act;
+        return`<div class="pron-ex">
+          <div class="pron-before">${esc(written)}</div>
+          <div class="pron-arrow">→</div>
+          <div style="flex:1">
+            ${same
+              ? `<div class="pron-after">${esc(std)} <button onclick="speakTTS('${escA(std.replace(/[\[\]]/g,''))}')" style="background:none;border:none;font-size:12px;cursor:pointer;opacity:.5">🔊</button></div>`
+              : `<div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <span style="font-size:10px;font-weight:700;color:var(--teal);min-width:44px">🎓 표준</span>
+                    <span class="pron-after" style="margin:0">${esc(std)}</span>
+                    <button onclick="speakTTS('${escA(std.replace(/[\[\]]/g,''))}')" style="background:none;border:none;font-size:12px;cursor:pointer;opacity:.5">🔊</button>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <span style="font-size:10px;font-weight:700;color:var(--coral);min-width:44px">🗣️ 실제</span>
+                    <span class="pron-after" style="margin:0;color:var(--coral)">${esc(act)}</span>
+                    <button onclick="speakTTS('${escA(act.replace(/[\[\]]/g,''))}')" style="background:none;border:none;font-size:12px;cursor:pointer;opacity:.5">🔊</button>
+                  </div>
+                </div>`
+            }
+            <div class="pron-note">${esc(ex.note||'')}</div>
+          </div>
+        </div>`;
+      }
+      return`<div class="pron-ex">
+        <div class="pron-before">${esc(written)}</div>
+        <div class="pron-arrow">→</div>
+        <div class="pron-after">${esc(ex.after||ex.pronounced||'')} <button onclick="speakTTS('${escA((ex.after||ex.pronounced||'').replace(/[\[\]]/g,''))}')" style="background:none;border:none;font-size:12px;cursor:pointer;opacity:.5">🔊</button></div>
+        <div class="pron-note">${esc(ex.note||ex.en||'')}</div>
+      </div>`;
+    }).join('');
     return`<div class="pron-card">
       <div class="pron-title">${esc(item.title||'')} ${item.icon||''}</div>
       <div class="pron-rule">${esc(item.rule||'')}</div>
