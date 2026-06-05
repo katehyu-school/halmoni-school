@@ -1554,6 +1554,18 @@ function buildUsage(){
   if(!Array.isArray(usage)||!usage.length)return'<div class="loading">데이터 준비 중이에요.</div>';
   return usage.map(sec=>{
     if(sec.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--warm-900);line-height:1.75;margin-bottom:14px"><strong>${esc(sec.section||sec.title||'')}</strong><br>${esc(sec.content_ko||sec.content||'')}<div style="font-size:11px;color:var(--warm-500);margin-top:6px">${esc(sec.content_en||'')}</div></div>`;
+    if(sec.heading){
+      const exHtml=(sec.examples||[]).map(ex=>`
+        <div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--warm-300);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
+          <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--warm-900)">${esc(ex.ko)}</div><div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(ex.en)}</div></div>
+          <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
+        </div>`).join('');
+      return`<div style="margin-bottom:22px">
+        <div style="font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--teal-lt)">${esc(sec.heading)}</div>
+        ${sec.content?`<div style="font-size:12px;color:var(--warm-700);line-height:1.7;margin-bottom:10px">${esc(sec.content)}</div>`:''}
+        ${exHtml}
+      </div>`;
+    }
     if(sec.title&&sec.explanation_en){
       const exHtml=(sec.examples||[]).map(ex=>`
         <div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--warm-300);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
