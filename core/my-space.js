@@ -58,6 +58,17 @@
 .ms-tool-btn.active{background:#5BB8F5;color:#fff;border-color:#5BB8F5;}
 .ms-pen-color{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0;}
 .ms-pen-color.active{border-color:#333;transform:scale(1.2);box-shadow:0 0 0 2px #fff,0 0 0 4px #333;}
+.ms-writing-save-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
+.ms-writing-save-btn{background:#5BB8F5;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;transition:opacity .15s;}
+.ms-writing-save-btn:hover{opacity:.85;}
+.ms-writing-gallery{margin-top:16px;}
+.ms-writing-gallery-title{font-size:12px;color:#999;font-weight:700;margin-bottom:8px;}
+.ms-writing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.ms-writing-thumb{position:relative;border:1.5px solid #e0e0e0;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.ms-writing-thumb img{width:100%;display:block;}
+.ms-writing-thumb-date{font-size:10px;color:#999;text-align:center;padding:4px 6px;background:#f8f9fa;}
+.ms-writing-thumb-del{position:absolute;top:5px;right:5px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:#FF6B6B;line-height:1;}
+.ms-writing-thumb-del:hover{background:#FF6B6B;color:#fff;}
 .ms-setup-wrap{padding:32px 20px;max-width:400px;margin:0 auto;}
 .ms-setup-title{font-family:'Jua',sans-serif;font-size:1.4rem;color:#5BB8F5;margin-bottom:6px;}
 .ms-setup-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
@@ -170,6 +181,15 @@
           <div style="display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap;">
             <span style="font-size:11px;color:#999;font-weight:600;">펜 색상:</span>
             <div id="ms-pen-colors" style="display:flex;gap:5px;flex-wrap:wrap;"></div>
+          </div>
+          <div class="ms-writing-save-row">
+            <button class="ms-writing-save-btn" onclick="msSaveWriting()">💾 저장 Save</button>
+            <span id="ms-writing-save-msg" style="font-size:12px;color:#5BB8F5;display:none;">✓ Saved!</span>
+          </div>
+          <div class="ms-writing-gallery">
+            <div class="ms-writing-gallery-title">📁 저장된 쓰기 Saved Writings</div>
+            <div id="ms-writing-grid" class="ms-writing-grid"></div>
+            <div id="ms-writing-empty" style="font-size:12px;color:#999;text-align:center;padding:12px 0;">아직 저장된 쓰기가 없어요 — 써보고 저장해 봐요! ✍️</div>
           </div>
           <div style="margin-top:14px;padding:12px;background:#f8f9fa;border-radius:10px;">
             <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Word hints — click to see big ✨</div>
@@ -652,5 +672,37 @@ function msSetPenColor(col,el){
   document.querySelectorAll('.ms-pen-color').forEach(x=>x.classList.remove('active'));
   el.classList.add('active');
   if(msTool==='erase')msSetTool('pen');
+}
+function msSaveWriting(){
+  if(!msCanvas)return;
+  const dataUrl=msCanvas.toDataURL('image/png');
+  const writings=msGetJ('ms_'+msCurrent+'_writings');
+  writings.unshift({id:Date.now(),dataUrl,
+    date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  if(writings.length>20)writings.splice(20);
+  msSetJ('ms_'+msCurrent+'_writings',writings);
+  const msg=document.getElementById('ms-writing-save-msg');
+  if(msg){msg.style.display='inline';setTimeout(()=>msg.style.display='none',2000);}
+  msRenderWritings();
+}
+function msRenderWritings(){
+  const writings=msGetJ('ms_'+msCurrent+'_writings');
+  const grid=document.getElementById('ms-writing-grid');
+  const empty=document.getElementById('ms-writing-empty');
+  if(!grid)return;
+  if(!writings.length){grid.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  grid.innerHTML=writings.map((w,i)=>`
+    <div class="ms-writing-thumb">
+      <img src="${w.dataUrl}" alt="writing ${i+1}">
+      <div class="ms-writing-thumb-date">${w.date}</div>
+      <button class="ms-writing-thumb-del" onclick="msDeleteWriting(${w.id})" title="Delete">✕</button>
+    </div>`).join('');
+}
+function msDeleteWriting(id){
+  let writings=msGetJ('ms_'+msCurrent+'_writings');
+  writings=writings.filter(w=>w.id!==id);
+  msSetJ('ms_'+msCurrent+'_writings',writings);
+  msRenderWritings();
 }
 // ── END MY SPACE ─────────────────────────────────────────
