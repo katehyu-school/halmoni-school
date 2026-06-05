@@ -58,6 +58,17 @@
 .nms-tool-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--warm-300);background:#fff;font-size:12px;cursor:pointer;font-weight:600;transition:all .15s;}
 .nms-tool-btn:hover{background:var(--warm-100);}
 .nms-tool-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.nms-writing-save-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
+.nms-writing-save-btn{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:9px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.nms-writing-save-btn:hover{opacity:.85;}
+.nms-writing-gallery{margin-top:16px;}
+.nms-writing-gallery-title{font-size:12px;color:var(--warm-500);font-weight:700;margin-bottom:8px;}
+.nms-writing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.nms-writing-thumb{position:relative;border:1.5px solid var(--warm-300);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.nms-writing-thumb img{width:100%;display:block;}
+.nms-writing-thumb-date{font-size:10px;color:var(--warm-500);text-align:center;padding:4px 6px;background:var(--warm-50);}
+.nms-writing-thumb-del{position:absolute;top:5px;right:5px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--coral);line-height:1;}
+.nms-writing-thumb-del:hover{background:var(--coral);color:#fff;}
 .nms-pen-color{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0;}
 .nms-pen-color.active{border-color:#333;transform:scale(1.2);box-shadow:0 0 0 2px #fff,0 0 0 4px #333;}
 .nms-badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
@@ -183,6 +194,15 @@
             <button class="nms-tool-btn" onclick="nmsClearCanvas()" style="margin-left:auto;color:var(--coral);border-color:var(--coral);">🗑 Clear</button>
           </div>
           <div style="display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap;"><span style="font-size:11px;color:var(--warm-500);font-weight:600;">펜 색상:</span><div id="nms-pen-colors" style="display:flex;gap:5px;flex-wrap:wrap;"></div></div>
+          <div class="nms-writing-save-row">
+            <button class="nms-writing-save-btn" onclick="nmsSaveWriting()">💾 저장 Save</button>
+            <span id="nms-writing-save-msg" style="font-size:12px;color:var(--teal);display:none;">✓ Saved!</span>
+          </div>
+          <div class="nms-writing-gallery">
+            <div class="nms-writing-gallery-title">📁 저장된 쓰기 Saved Writings</div>
+            <div id="nms-writing-grid" class="nms-writing-grid"></div>
+            <div id="nms-writing-empty" style="font-size:12px;color:var(--warm-500);text-align:center;padding:12px 0;">아직 저장된 쓰기가 없어요 — 써보고 저장해 봐요! 🖊</div>
+          </div>
           <div style="margin-top:14px;padding:12px;background:var(--warm-50);border-radius:8px;border:1px solid var(--warm-300);">
             <div style="font-size:11px;color:var(--warm-500);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Word hints — click to see it big ✨</div>
             <div id="nms-hint-label" style="font-size:11px;color:var(--teal-600);font-weight:600;margin-bottom:4px;">📚 기본 단어</div>
@@ -311,6 +331,7 @@ function nmsShowMain(){
   nmsInitCanvas();
   nmsRenderNotesList();
   nmsRenderDecoPanel();
+  nmsRenderWritings();
   // Pre-select dropdown: last note's episode, or ep01 if no notes
   const _notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   const _last=_notes.find(n=>n.level==='L1'&&n.ep);
@@ -621,4 +642,37 @@ function nmsRenderBadges(){
       <div style="font-size:11px;color:var(--warm-500);">${hint}</div>
     </div>`;
 }
+function nmsSaveWriting(){
+  if(!nmsCanvas)return;
+  const dataUrl=nmsCanvas.toDataURL('image/png');
+  const writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
+  writings.unshift({id:Date.now(),dataUrl,
+    date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  if(writings.length>20)writings.splice(20);
+  nmsSetJ('nms_'+nmsCurrent+'_writings',writings);
+  const msg=document.getElementById('nms-writing-save-msg');
+  if(msg){msg.style.display='inline';setTimeout(()=>msg.style.display='none',2000);}
+  nmsRenderWritings();
+}
+function nmsRenderWritings(){
+  const writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
+  const grid=document.getElementById('nms-writing-grid');
+  const empty=document.getElementById('nms-writing-empty');
+  if(!grid)return;
+  if(!writings.length){grid.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  grid.innerHTML=writings.map((w,i)=>`
+    <div class="nms-writing-thumb">
+      <img src="${w.dataUrl}" alt="writing ${i+1}">
+      <div class="nms-writing-thumb-date">${w.date}</div>
+      <button class="nms-writing-thumb-del" onclick="nmsDeleteWriting(${w.id})" title="Delete">✕</button>
+    </div>`).join('');
+}
+function nmsDeleteWriting(id){
+  let writings=nmsGetJ('nms_'+nmsCurrent+'_writings');
+  writings=writings.filter(w=>w.id!==id);
+  nmsSetJ('nms_'+nmsCurrent+'_writings',writings);
+  nmsRenderWritings();
+}
+
 // ═══════════════════════════════════════════════════════
