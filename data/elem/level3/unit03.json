@@ -137,51 +137,6 @@
     "grammar": {
       "sections": [
         {
-          "id": "g03_location",
-          "title": "위치 명사 + 에 있어요/없어요",
-          "subtitle": "Saying where something is or isn't",
-          "pattern": "물건 + 위치명사 + 에 + 있어요/없어요",
-          "meaning": "Something is/isn't [location]",
-          "description": "To say where something is, put the location word + 에 after the object. 있어요 = it's there, 없어요 = it's not there.",
-          "rule_boxes": [
-            {
-              "color": "red",
-              "label": "🔴 기본 패턴: N + 위치 + 에 + 있어요",
-              "examples": [
-                "열쇠가 탁자 위에 있어요. = The key is on the table.",
-                "고양이가 상자 안에 있어요. = The cat is inside the box.",
-                "가방이 의자 옆에 있어요. = The bag is next to the chair."
-              ]
-            },
-            {
-              "color": "blue",
-              "label": "🔵 없어요 패턴: N + 위치 + 에 + 없어요",
-              "examples": [
-                "열쇠가 항아리 속에 없어요. = The key is not inside the jar.",
-                "반닫이 아래에도 없어요. = It's not under the chest either.",
-                "탁자 위에도 없어요. = It's not on top of the table either."
-              ]
-            }
-          ],
-          "examples": [
-            {
-              "korean": "열쇠가 탁자 위에 있어요.",
-              "english": "The key is on the table.",
-              "highlight": "위에 있어요"
-            },
-            {
-              "korean": "항아리 속에 없어요.",
-              "english": "It's not inside the jar.",
-              "highlight": "속에 없어요"
-            },
-            {
-              "korean": "마법 열쇠가 어디에 있을까요?",
-              "english": "Where could the magic key be?",
-              "highlight": "어디에 있을까요"
-            }
-          ]
-        },
-        {
           "id": "g03_an_boyeoyo",
           "title": "안 보여요 — I can't see it!",
           "subtitle": "Negation + 보이다 (to be visible)",
@@ -228,6 +183,51 @@
           "tip": "🔑 이 에피소드의 핵심 표현! 안 보여요 = 찾아도 없어요 · The key phrase of this episode — something is missing and can't be found!"
         },
         {
+          "id": "g03_location",
+          "title": "위치 명사 + 에 있어요/없어요",
+          "subtitle": "Saying where something is or isn't",
+          "pattern": "물건 + 위치명사 + 에 + 있어요/없어요",
+          "meaning": "Something is/isn't [location]",
+          "description": "To say where something is, put the location word + 에 after the object. 있어요 = it's there, 없어요 = it's not there.",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 기본 패턴: N + 위치 + 에 + 있어요",
+              "examples": [
+                "열쇠가 탁자 위에 있어요. = The key is on the table.",
+                "고양이가 상자 안에 있어요. = The cat is inside the box.",
+                "가방이 의자 옆에 있어요. = The bag is next to the chair."
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "🔵 없어요 패턴: N + 위치 + 에 + 없어요",
+              "examples": [
+                "열쇠가 항아리 속에 없어요. = The key is not inside the jar.",
+                "반닫이 아래에도 없어요. = It's not under the chest either.",
+                "탁자 위에도 없어요. = It's not on top of the table either."
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "열쇠가 탁자 위에 있어요.",
+              "english": "The key is on the table.",
+              "highlight": "위에 있어요"
+            },
+            {
+              "korean": "항아리 속에 없어요.",
+              "english": "It's not inside the jar.",
+              "highlight": "속에 없어요"
+            },
+            {
+              "korean": "마법 열쇠가 어디에 있을까요?",
+              "english": "Where could the magic key be?",
+              "highlight": "어디에 있을까요"
+            }
+          ]
+        },
+        {
           "id": "g03_also",
           "title": "~에도 없어요 — not there either",
           "subtitle": "Adding 도 = also / either",
@@ -257,8 +257,8 @@
               "highlight": "아래에도 없어요"
             }
           ],
-          "set_with": "g03_an_boyeoyo",
-          "set_label": "🔗 안 보여요 세트"
+          "set_with": "g03_location",
+          "set_label": "🔗 에 있어요/없어요 세트"
         }
       ]
     },
