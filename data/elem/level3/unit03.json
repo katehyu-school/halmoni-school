@@ -182,6 +182,52 @@
           ]
         },
         {
+          "id": "g03_an_boyeoyo",
+          "title": "안 보여요 — I can't see it!",
+          "subtitle": "Negation + 보이다 (to be visible)",
+          "pattern": "안 + 동사",
+          "meaning": "don't / can't (negation)",
+          "description": "Put 안 before a verb to make it negative. 보이다 means 'to be visible' — so 안 보여요 means 'it's not visible / I can't see it!'",
+          "rule_boxes": [
+            {
+              "color": "red",
+              "label": "🔴 안 + 동사 = 부정",
+              "examples": [
+                "안 보여요 = can't see it / not visible",
+                "안 들려요 = can't hear it",
+                "안 열려요 = won't open"
+              ]
+            },
+            {
+              "color": "blue",
+              "label": "💡 보이다 vs 보다",
+              "examples": [
+                "보다 = to look / watch (내가 봐요)",
+                "보이다 = to be visible (저절로 보여요)",
+                "안 보여요 = it's not visible (= I can't find it!)"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "마법 열쇠가 안 보여요!",
+              "english": "The magic key is nowhere to be seen!",
+              "highlight": "안 보여요"
+            },
+            {
+              "korean": "탁자 밑에도 안 보여요.",
+              "english": "It's not visible under the table either.",
+              "highlight": "안 보여요"
+            },
+            {
+              "korean": "안 들려요, 크게 말해 주세요.",
+              "english": "I can't hear, please speak louder.",
+              "highlight": "안 들려요"
+            }
+          ],
+          "tip": "🔑 이 에피소드의 핵심 표현! 안 보여요 = 찾아도 없어요 · The key phrase of this episode — something is missing and can't be found!"
+        },
+        {
           "id": "g03_also",
           "title": "~에도 없어요 — not there either",
           "subtitle": "Adding 도 = also / either",
@@ -210,52 +256,9 @@
               "english": "It's not under the bed either.",
               "highlight": "아래에도 없어요"
             }
-          ]
-        },
-        {
-          "id": "g03_an_verb",
-          "title": "안 + 동사 — 안 해요!",
-          "subtitle": "Making verbs negative",
-          "pattern": "안 + 동사",
-          "meaning": "don't ~ / can't see ~ / not doing ~",
-          "description": "Put 안 before any verb to make it negative. It's the easiest way to say 'not' in Korean — just add 안 before the verb!",
-          "rule_boxes": [
-            {
-              "color": "red",
-              "label": "🔴 안 + 동사 = negative",
-              "examples": [
-                "보여요 → 안 보여요. (I can see it → I can't see it.)",
-                "가요 → 안 가요. (I go → I don't go.)",
-                "먹어요 → 안 먹어요. (I eat → I don't eat.)",
-                "해요 → 안 해요. (I do it → I don't do it.)"
-              ]
-            },
-            {
-              "color": "blue",
-              "label": "🔵 하다 동사는 명사 + 안 + 해요",
-              "examples": [
-                "공부해요 → 공부 안 해요. (I study → I don't study.)",
-                "운동해요 → 운동 안 해요. (I exercise → I don't exercise.)"
-              ]
-            }
           ],
-          "examples": [
-            {
-              "korean": "마법 열쇠가 안 보여요!",
-              "english": "I can't see the magic key!",
-              "highlight": "안 보여요"
-            },
-            {
-              "korean": "오늘은 학교에 안 가요.",
-              "english": "I'm not going to school today.",
-              "highlight": "안 가요"
-            },
-            {
-              "korean": "숙제 안 했어요.",
-              "english": "I didn't do my homework.",
-              "highlight": "안 했어요"
-            }
-          ]
+          "set_with": "g03_an_boyeoyo",
+          "set_label": "🔗 안 보여요 세트"
         }
       ]
     },
