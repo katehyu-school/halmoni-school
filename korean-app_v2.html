@@ -1550,6 +1550,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">05</span>
     <span class="lesson-title-text">내일은 친구하고 레모네이드를 팔 거예요</span>
   </div>
+  <div class="lesson-item" id="b3-lesson-6" onclick="switchBook3Unit(6)">
+    <span class="lesson-num">06</span>
+    <span class="lesson-title-text">계란은 못 먹어요</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -3961,7 +3965,7 @@ async function loadBook3Unit(n) {
 }
 
 async function switchBook3Unit(n) {
-  [1,2,3,4,5].forEach(i => {
+  [1,2,3,4,5,6].forEach(i => {
     const el = document.getElementById('b3-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
@@ -8344,6 +8348,30 @@ const B3_SCENE_DATA = {
         {ko:'뭘 드릴까요?', en:'What can I get you?', audio:'data/elem/TTS/L3_05/7뭘+드릴까요_slide7.mp3'},
         {ko:'레모네이드 하나 주세요.', en:'One lemonade, please.', audio:'data/elem/TTS/L3_05/8레모네이드+하나+주세요_slide7.mp3'}
       ],
+    ]
+  },
+  6: {
+    slides: [
+      'data/elem/slides/L3_06/계란은안돼1.png',
+      'data/elem/slides/L3_06/계란은안돼2.png',
+      'data/elem/slides/L3_06/계란은안돼3.png',
+      'data/elem/slides/L3_06/계란은안돼4.png',
+      'data/elem/slides/L3_06/계란은안돼5.png',
+      'data/elem/slides/L3_06/계란은안돼6.png',
+      'data/elem/slides/L3_06/계란은안돼7.png',
+      'data/elem/slides/L3_06/계란은안돼8.png',
+      'data/elem/slides/L3_06/계란은안돼9.png',
+    ],
+    script: [
+      [{ko:'할머니가 부엌에서 김밥을 싸고 있어요.', en:'Grandma is wrapping gimbap in the kitchen.', audio:'data/elem/TTS/L3_06/01할머니가+부엌에서+김밥을+싸고+있어요_slide1.mp3'}],
+      [{ko:'할머니 김밥 맛 있어요!', en:'Grandma, the gimbap is delicious!', audio:'data/elem/TTS/L3_06/02할머니+김밥+맛+있어요!_slide2.mp3'}],
+      [{ko:'할머니 전은 없어요?', en:'Grandma, is there no jeon?', audio:'data/elem/TTS/L3_06/03할머니+전은+없어요_slide3.mp3'}],
+      [{ko:'오늘은 김밥이야.', en:"Today it's gimbap.", audio:'data/elem/TTS/L3_06/04오늘은+김밥이야_slide4.mp3'}],
+      [{ko:'할머니 제 김밥에는 계란 넣지 마세요. 저는 계란 못 먹어요.', en:"Grandma, please don't put eggs in my gimbap. I can't eat eggs.", audio:'data/elem/TTS/L3_06/05할머니+제+김밥에는+계란+넣지+마세요_+저는+계란+못+먹어요_slide5.mp3'}],
+      [{ko:'알고 있어요. 카요 김밥은 이거야.', en:"I know. This gimbap is Kayo's.", audio:'data/elem/TTS/L3_06/06알고+있어요_+카요+김밥은+이거야_slide6.mp3'}],
+      [{ko:'그런데 음식은 골고루 먹어야 돼.', en:'But you should eat a variety of foods.', audio:'data/elem/TTS/L3_06/07그런데+음식은+골고루+먹어야+돼_slide7.mp3'}],
+      [{ko:'계란을 먹으면 배가 아파요.', en:'If I eat eggs, my stomach hurts.', audio:'data/elem/TTS/L3_06/08계란을+먹으면+배가+아파요_slide8.mp3'}],
+      [{ko:'그래서 안 먹을 거예요.', en:"So I'm not going to eat it.", audio:'data/elem/TTS/L3_06/09그래서+안+먹을+거예요_slide9.mp3'}],
     ]
   }
 };
