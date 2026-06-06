@@ -896,6 +896,7 @@ async function loadEp(epId, level='L1'){
   const item=document.getElementById(`ep-item-${level}-${epId}`);
   if(item)item.classList.add('active');
   document.getElementById('content-area').innerHTML='<div class="loading">로딩 중…</div>';
+  Object.keys(rlAnswered).forEach(k=>delete rlAnswered[k]);
   const cacheKey=`${level}_${epId}`;
   if(EPISODE_DATA[cacheKey]){
     DATA=EPISODE_DATA[cacheKey];
@@ -1623,6 +1624,7 @@ function buildUsage(){
           ${ctx?`<div style="font-size:10.5px;color:var(--teal-md);font-weight:700;margin-bottom:3px">${esc(ctx)}</div>`:''}
           <div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--warm-900)">${esc(kr)}</div>
           <div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(en)}</div>
+          ${it.note?`<div style="font-size:10.5px;color:var(--teal-md);margin-top:3px;font-style:italic">${esc(it.note)}</div>`:''}
         </div>
         <button onclick="speakTTS('${escA(kr)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
       </div>`;
@@ -1737,14 +1739,28 @@ function buildRLQuiz(questions,prefix){
 function answerRL(key,qi,chosen,correct,hint,prefix){
   if(rlAnswered[`${key}`])return;
   rlAnswered[`${key}`]=true;
+  const isCorrect=(chosen===correct);
   for(let i=0;i<10;i++){
     const el=document.getElementById(`rlopt-${key}-${i}`);
     if(!el)break;
-    if(i===correct)el.style.background='#EDF7F2';
-    else if(i===chosen)el.style.background='#FFF0F0';
+    el.style.pointerEvents='none';
+    if(i===correct){
+      el.style.background='#D4F5E2';el.style.border='2px solid #2ECC71';
+      el.style.fontWeight='700';
+      const mk=document.createElement('span');mk.textContent=' ✓';mk.style.color='#27AE60';mk.style.fontWeight='900';el.appendChild(mk);
+    } else if(i===chosen){
+      el.style.background='#FDDEDE';el.style.border='2px solid #E74C3C';
+      const xk=document.createElement('span');xk.textContent=' ✗';xk.style.color='#C0392B';xk.style.fontWeight='900';el.appendChild(xk);
+    }
   }
   const exp=document.getElementById(`rlexp-${key}`);
-  if(exp&&hint){exp.textContent='💡 '+hint;exp.style.display='block';}
+  if(exp){
+    exp.innerHTML=(isCorrect?'<span style="color:#27AE60;font-weight:700">🎉 정답!</span> ':'<span style="color:#C0392B;font-weight:700">❌ 틀렸어요.</span> ')+(hint?'💡 '+hint:'');
+    exp.style.display='block';
+    exp.style.background=isCorrect?'#EBF9F1':'#FEECEC';
+    exp.style.border=isCorrect?'1px solid #2ECC71':'1px solid #E74C3C';
+    exp.style.padding='10px 14px';exp.style.fontSize='13px';exp.style.fontWeight='500';
+  }
 }
 
 // ── SELF CHECK (optional tab) ──────────────────────────
