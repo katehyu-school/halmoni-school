@@ -1140,7 +1140,7 @@ function vocabCardHtml(v){
       <div class="vc-front">
         <div class="vc-emoji">${v.emoji||'📝'}</div>
         <div class="vc-kr">${esc(v.korean)}</div>
-        <div class="vc-rom">[${esc(v.romanization)}]</div>
+        ${v.romanization?`<div class="vc-rom">[${esc(v.romanization)}]</div>`:''}
         <button class="vc-speak" onclick="event.stopPropagation();speakTTS('${escA(v.korean)}')">🔊</button>
         <div class="vc-hint">탭하면 뜻 보기</div>
       </div>
@@ -1148,7 +1148,7 @@ function vocabCardHtml(v){
         <div class="vc-emoji">${v.emoji||'📝'}</div>
         <div class="vc-en">${esc(v.english)}</div>
         <div class="vc-kr" style="font-size:13px;margin-top:6px">${esc(v.korean)}</div>
-        <div class="vc-rom">[${esc(v.romanization)}]</div>
+        ${v.romanization?`<div class="vc-rom">[${esc(v.romanization)}]</div>`:''}
         ${v.note?`<div style="font-size:10.5px;color:var(--teal-600);margin-top:7px;line-height:1.55;padding:4px 6px;background:var(--teal-50);border-radius:6px">${esc(v.note)}</div>`:''}
       </div>
     </div>`;
