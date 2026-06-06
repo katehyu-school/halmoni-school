@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HQ · Hangeul Quest</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22%230a2540%22%20stroke%3D%22%234ECDC4%22%20stroke-width%3D%221.5%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%234ECDC4%22%20stroke-width%3D%220.6%22%20opacity%3D%220.5%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20text-anchor%3D%22middle%22%20font-family%3D%22Impact%2CArial%20Black%2Csans-serif%22%20font-size%3D%2213%22%20fill%3D%22white%22%20letter-spacing%3D%221%22%3EHQ%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet"></noscript>
 <style>
 :root {
   --teal:#0f7c6e;--teal-lt:#e0f5f2;--teal-md:#5bbfb0;
@@ -3098,4 +3101,110 @@ function vdInit(gramId) {
   if(!g||!g.verb_drill) return;
   const drillCfg = g.verb_drill;
   const verbs = drillCfg.verbs||[];
-  c
+  const tenses = ['present','past','future'];
+  const tenseLabels = {present:'현재형 Present',past:'과거형 Past',future:'미래형 Future'};
+  let allQ = [];
+  verbs.forEach(function(v){
+    tenses.forEach(function(t){
+      allQ.push({verb:v, tense:t, tenseLabel:tenseLabels[t],
+        correct:v[t], exp:v['exp_'+t]||''});
+    });
+  });
+  allQ = allQ.sort(function(){return Math.random()-.5;}).slice(0, drillCfg.rounds||10);
+  vdState[gramId] = {questions:allQ, idx:0, score:0, verbs:verbs};
+  vdRender(gramId);
+}
+
+function vdBuildOpts(gramId, qIdx) {
+  const st = vdState[gramId];
+  const q = st.questions[qIdx];
+  const correct = q.correct;
+  const pool = st.verbs.map(function(v){return v[q.tense];}).filter(function(v){return v!==correct;});
+  const shuffled = pool.sort(function(){return Math.random()-.5;});
+  const opts = [correct, shuffled[0], shuffled[1]].sort(function(){return Math.random()-.5;});
+  return opts;
+}
+
+function vdRender(gramId) {
+  const st = vdState[gramId];
+  const body = document.getElementById('vd-body-'+gramId);
+  if(!body) return;
+  if(st.idx >= st.questions.length) { vdRenderScore(gramId); return; }
+  const q = st.questions[st.idx];
+  const opts = vdBuildOpts(gramId, st.idx);
+  const pct = Math.round(st.idx/st.questions.length*100);
+  const isLast = st.idx === st.questions.length-1;
+  const optHtml = opts.map(function(o,i){
+    const oSafe = o.replace(/'/g,"\\'");
+    const cSafe = q.correct.replace(/'/g,"\\'");
+    return '<button class="vd-opt" onclick="vdAnswer(\''+gramId+'\','+i+',this,\''+oSafe+'\',\''+cSafe+'\')"><span class="vd-opt-lbl">○</span><span>'+o+'</span><button onclick="speakTTS(\''+oSafe+'\');event.stopPropagation();" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;margin-left:auto" tabindex="-1">🔊</button></button>';
+  }).join('');
+  body.innerHTML =
+    '<div class="vd-prog-bar"><div class="vd-prog-fill" style="width:'+pct+'%"></div></div>'+
+    '<div class="vd-prog-label">'+st.idx+' / '+st.questions.length+'</div>'+
+    '<div class="vd-q-box">'+
+      '<div style="font-size:1.8rem">'+q.verb.emoji+'</div>'+
+      '<div class="vd-verb">'+q.verb.dict+'</div>'+
+      '<div class="vd-tense-badge">→ '+q.tenseLabel+'?</div>'+
+      '<div class="vd-tag">'+q.verb.tag+'</div>'+
+    '</div>'+
+    '<div class="vd-opts" id="vd-opts-'+gramId+'">'+optHtml+'</div>'+
+    '<div class="vd-exp" id="vd-exp-'+gramId+'">💡 '+q.exp+'</div>'+
+    '<button class="vd-next-btn" id="vd-next-'+gramId+'" onclick="vdNext(\''+gramId+'\')">'+
+      (isLast?'📊 결과 보기':'다음 →')+'</button>';
+}
+
+function vdAnswer(gramId, i, btn, chosen, correct) {
+  const container = document.getElementById('vd-opts-'+gramId);
+  if(!container) return;
+  container.querySelectorAll('.vd-opt').forEach(function(b){
+    b.disabled = true;
+    const lbl = b.querySelector('.vd-opt-lbl');
+    const txt = b.querySelector('span:nth-child(2)');
+    const val = txt ? txt.textContent.trim() : '';
+    if(val === correct){ b.classList.add('correct'); if(lbl)lbl.textContent='✓'; }
+    else if(b===btn && chosen!==correct){ b.classList.add('wrong'); if(lbl)lbl.textContent='✗'; }
+  });
+  if(chosen===correct) vdState[gramId].score++;
+  const exp = document.getElementById('vd-exp-'+gramId);
+  if(exp) exp.classList.add('show');
+  const nxt = document.getElementById('vd-next-'+gramId);
+  if(nxt) nxt.classList.add('show');
+  vdState[gramId].idx++;
+}
+
+function vdNext(gramId){ vdRender(gramId); }
+
+function vdRenderScore(gramId) {
+  const st = vdState[gramId];
+  const body = document.getElementById('vd-body-'+gramId);
+  if(!body) return;
+  const total = st.questions.length;
+  const pct = Math.round(st.score/total*100);
+  var grade, gradeLabel, gradeColor;
+  if(pct>=90){grade='🏆';gradeLabel='완벽해요! Perfect!';gradeColor='var(--teal)';}
+  else if(pct>=70){grade='🌟';gradeLabel='잘했어요! Great job!';gradeColor='var(--blue)';}
+  else if(pct>=50){grade='👍';gradeLabel='좋아요! Keep going!';gradeColor='#B45309';}
+  else{grade='🌱';gradeLabel='다시 해봐요! Try again!';gradeColor='var(--coral)';}
+  body.innerHTML =
+    '<div class="vd-score-wrap">'+
+      '<div class="vd-grade">'+grade+'</div>'+
+      '<div class="vd-score-num" style="color:'+gradeColor+'">'+st.score+' <span style="font-size:1.2rem;color:var(--warm-500)">/ '+total+'</span></div>'+
+      '<div class="vd-grade-label" style="color:'+gradeColor+'">'+gradeLabel+'</div>'+
+      '<div class="vd-score-label">'+pct+'% 정답 · accuracy</div>'+
+    '</div>'+
+    '<button class="vd-restart-btn" onclick="vdInit(\''+gramId+'\')">↺ 다시 도전 / Play Again</button>';
+}
+// ═══════════════════════════════════════════════════════
+</script>
+
+<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
+  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
+  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
+</footer>
+
+
+
+<script src="core/my-notes.js"></script>
+</body>
+</html>
