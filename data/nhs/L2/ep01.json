@@ -586,6 +586,63 @@
           "hint": "can't use phone here"
         }
       ]
+    },
+    {
+      "id": "g01_ayahada",
+      "tier": "preview",
+      "title": "-아야 돼",
+      "title_en": "Have to / Must",
+      "emoji": "⚡",
+      "pattern": "동사 어간 + -아야/어야 돼",
+      "scene_example": {
+        "korean": "우선, 전화부터 연결해야 돼.",
+        "english": "First, I have to connect the phone.",
+        "highlight": "연결해야 돼"
+      },
+      "rules": [
+        {
+          "form": "-아야 돼",
+          "condition": "ㅏ/ㅗ 어간",
+          "example": "가야 돼, 봐야 돼"
+        },
+        {
+          "form": "-어야 돼",
+          "condition": "그 외 어간",
+          "example": "먹어야 돼, 연결해야 돼"
+        },
+        {
+          "form": "-해야 돼",
+          "condition": "하다 동사",
+          "example": "연락해야 돼, 공부해야 돼"
+        }
+      ],
+      "examples": [
+        {
+          "ko": "전화를 연결해야 돼.",
+          "en": "I have to connect the phone."
+        },
+        {
+          "ko": "심카드를 사야 돼.",
+          "en": "I have to buy a SIM card."
+        },
+        {
+          "ko": "빨리 가야 돼!",
+          "en": "I have to go quickly!"
+        }
+      ],
+      "tip": "L1의 -아야 해요(존댓말)와 같은 뜻, 반말 버전이에요! · -아야 해요 = formal, -아야 돼 = casual. Full lesson comes later!",
+      "fill_blanks": [
+        {
+          "sentence": "전화를 연결___야 돼.",
+          "answer": "해",
+          "hint": "연결하다 → 해야"
+        },
+        {
+          "sentence": "심카드를 ___야 돼.",
+          "answer": "사",
+          "hint": "사다 → 사야"
+        }
+      ]
     }
   ],
   "banmal_jondaemal": {

@@ -316,72 +316,68 @@
   ],
   "grammar": [
     {
-      "id": "g03_aseo_reason",
+      "id": "g03_geot_gata",
       "tier": "core",
-      "title": "-아/어서 (이유)",
-      "title_en": "Because / So (reason)",
-      "emoji": "🥇",
-      "pattern": "동사/형용사 어간 + -아/어서",
+      "title": "-(으)ㄹ 것 같아요",
+      "title_en": "I think ~ / It seems like ~",
+      "emoji": "🤔",
+      "pattern": "동사/형용사 어간 + -(으)ㄹ 것 같아요",
       "scene_example": {
-        "ko": "놀아서 감기 걸린 것 같아.",
-        "en": "It seems like you caught a cold because you were playing."
+        "korean": "열은 없는 것 같은데 병원에 가 볼까?",
+        "english": "It seems like there's no fever, but shall we go to the hospital?",
+        "highlight": "없는 것 같은데"
       },
-      "note": "⚠️ L1에서 -아/어서는 '순서'(and then)로 배웠어요. L2에서는 '이유'(because)로 새롭게 등장해요! · In L1, -아/어서 meant sequence. In L2, the same form means reason/cause.",
       "rules": [
         {
-          "condition": "ㅏ/ㅗ 어간",
-          "ending": "-아서",
-          "example": "놀다 → 놀아서, 좋다 → 좋아서"
+          "form": "동사 현재: -는 것 같아요",
+          "condition": "지금 일어나는 일",
+          "example": "비가 오는 것 같아요 (It seems it's raining)"
         },
         {
-          "condition": "그 외 어간",
-          "ending": "-어서",
-          "example": "먹다 → 먹어서, 늦다 → 늦어서"
+          "form": "동사 과거: -(으)ㄴ 것 같아요",
+          "condition": "이미 일어난 일",
+          "example": "감기에 걸린 것 같아요 (Seems I caught a cold)"
         },
         {
-          "condition": "하다",
-          "ending": "-해서",
-          "example": "공부하다 → 공부해서"
+          "form": "형용사: -(으)ㄹ 것 같아요 / -(으)ㄴ 것 같아요",
+          "condition": "추측·판단",
+          "example": "열이 나는 것 같아요, 없는 것 같아요"
         }
       ],
       "examples": [
         {
-          "ko": "기분이 좋아서 놀았어요.",
-          "en": "Because I was in a good mood, we played.",
-          "note": "에피소드 내레이션"
+          "ko": "감기에 걸린 것 같아요.",
+          "en": "It seems like I caught a cold."
         },
         {
-          "ko": "아까 개울에서 놀아서 감기 걸린 것 같아.",
-          "en": "It seems you caught a cold because you played in the stream earlier.",
-          "note": "할머니 대사"
+          "ko": "열이 나는 것 같아요.",
+          "en": "It seems like I have a fever."
         },
         {
-          "ko": "배가 아파서 못 먹었어요.",
-          "en": "I couldn't eat because my stomach hurt.",
-          "note": "일상 표현"
+          "ko": "비가 올 것 같아요.",
+          "en": "It seems like it's going to rain."
         },
         {
-          "ko": "늦어서 미안해요.",
-          "en": "I'm sorry for being late.",
-          "note": "사과 표현"
+          "ko": "배가 고픈 것 같아.",
+          "en": "It seems like I'm hungry."
         }
       ],
-      "tip": "이유 -아/어서 뒤에는 명령문·청유문이 올 수 없어요 · Can't use commands after reason -아/어서. ❌ 바빠서 가세요 (X) → ✅ 바쁘니까 가세요 (O)",
+      "tip": "추측·판단을 부드럽게 표현할 때 써요 · Softens statements — instead of asserting facts, you're expressing what you think or notice.",
       "fill_blanks": [
         {
-          "sentence": "기분이 ___아서 모두 개울에서 놀았어요.",
-          "answer": "좋",
-          "hint": "기분이 좋다"
+          "sentence": "열이 나___ 것 같아요.",
+          "answer": "는",
+          "hint": "현재 동사 → -는 것 같아요"
         },
         {
-          "sentence": "감기에 걸___서 학교에 못 갔어요.",
-          "answer": "려",
-          "hint": "걸리다 → 걸려서"
+          "sentence": "감기에 걸린 것 ___아요.",
+          "answer": "같",
+          "hint": "것 같아요 완성"
         },
         {
-          "sentence": "열이 나___ 병원에 갔어요.",
-          "answer": "서",
-          "hint": "나다 → 나서"
+          "sentence": "오늘 비가 올 것 ___아요.",
+          "answer": "같",
+          "hint": "것 같아요 완성"
         }
       ]
     },
@@ -470,57 +466,119 @@
       ]
     },
     {
-      "id": "g03_go_list",
+      "id": "g03_aseo_reason",
       "tier": "core",
-      "title": "-고 (나열)",
-      "title_en": "And — listing conditions/states",
+      "title": "-아/어서 (이유)",
+      "title_en": "Because / So (reason)",
       "emoji": "🥇",
-      "pattern": "형용사/동사 어간 + -고",
+      "pattern": "동사/형용사 어간 + -아/어서",
       "scene_example": {
-        "ko": "몸이 오슬오슬 떨리고, 머리가 지끈지끈 아파요.",
-        "en": "My body is shivering and my head is throbbing."
+        "ko": "놀아서 감기 걸린 것 같아.",
+        "en": "It seems like you caught a cold because you were playing."
       },
-      "note": "L2 ep02에서 -고는 '순서'(and then)였어요. 여기서는 두 가지 상태를 나열해요 · In ep02 -고 linked actions in sequence. Here it lists simultaneous states.",
+      "note": "⚠️ L1에서 -아/어서는 '순서'(and then)로 배웠어요. L2에서는 '이유'(because)로 새롭게 등장해요! · In L1, -아/어서 meant sequence. In L2, the same form means reason/cause.",
       "rules": [
         {
-          "condition": "상태 나열",
-          "ending": "-고",
-          "example": "춥고, 아프고 → cold and sick"
+          "condition": "ㅏ/ㅗ 어간",
+          "ending": "-아서",
+          "example": "놀다 → 놀아서, 좋다 → 좋아서"
+        },
+        {
+          "condition": "그 외 어간",
+          "ending": "-어서",
+          "example": "먹다 → 먹어서, 늦다 → 늦어서"
+        },
+        {
+          "condition": "하다",
+          "ending": "-해서",
+          "example": "공부하다 → 공부해서"
         }
       ],
       "examples": [
         {
-          "ko": "몸이 오슬오슬 떨리고, 머리가 지끈지끈 아파요.",
-          "en": "My body is shivering and my head is throbbing.",
-          "note": "에피소드 대사"
+          "ko": "기분이 좋아서 놀았어요.",
+          "en": "Because I was in a good mood, we played.",
+          "note": "에피소드 내레이션"
         },
         {
-          "ko": "배도 아프고 목도 아파요.",
-          "en": "My stomach hurts and my throat hurts too.",
-          "note": "증상 나열"
+          "ko": "아까 개울에서 놀아서 감기 걸린 것 같아.",
+          "en": "It seems you caught a cold because you played in the stream earlier.",
+          "note": "할머니 대사"
         },
         {
-          "ko": "오늘 날씨가 덥고 습해요.",
-          "en": "Today's weather is hot and humid.",
-          "note": "날씨 묘사"
+          "ko": "배가 아파서 못 먹었어요.",
+          "en": "I couldn't eat because my stomach hurt.",
+          "note": "일상 표현"
+        },
+        {
+          "ko": "늦어서 미안해요.",
+          "en": "I'm sorry for being late.",
+          "note": "사과 표현"
         }
       ],
-      "tip": "-고 나열은 두 상태가 동시에 일어날 때 써요 · Use -고 to list two states that are both true at the same time.",
+      "tip": "이유 -아/어서 뒤에는 명령문·청유문이 올 수 없어요 · Can't use commands after reason -아/어서. ❌ 바빠서 가세요 (X) → ✅ 바쁘니까 가세요 (O)",
       "fill_blanks": [
         {
-          "sentence": "머리가 아프___ 열도 나요.",
-          "answer": "고",
-          "hint": "두 증상 나열"
+          "sentence": "기분이 ___아서 모두 개울에서 놀았어요.",
+          "answer": "좋",
+          "hint": "기분이 좋다"
         },
         {
-          "sentence": "배도 고프___ 피곤해요.",
-          "answer": "고",
-          "hint": "두 상태 나열"
+          "sentence": "감기에 걸___서 학교에 못 갔어요.",
+          "answer": "려",
+          "hint": "걸리다 → 걸려서"
         },
         {
-          "sentence": "날씨가 춥___ 바람도 불어요.",
-          "answer": "고",
-          "hint": "두 상태 동시"
+          "sentence": "열이 나___ 병원에 갔어요.",
+          "answer": "서",
+          "hint": "나다 → 나서"
+        }
+      ]
+    },
+    {
+      "id": "g03_gi",
+      "tier": "preview",
+      "title": "-기 (명사화)",
+      "title_en": "Turning verbs into nouns with -기",
+      "emoji": "📦",
+      "pattern": "동사 어간 + -기",
+      "scene_example": {
+        "korean": "저녁이 되니까 밥 먹기가 싫어요.",
+        "english": "Now that evening has come, I don't want to eat.",
+        "highlight": "먹기가"
+      },
+      "rules": [
+        {
+          "form": "동사 + -기",
+          "condition": "동사를 명사처럼 사용",
+          "example": "먹기, 가기, 말하기, 듣기"
+        }
+      ],
+      "examples": [
+        {
+          "ko": "밥 먹기가 싫어요.",
+          "en": "I don't want to eat."
+        },
+        {
+          "ko": "한국어 말하기가 어려워요.",
+          "en": "Speaking Korean is difficult."
+        },
+        {
+          "ko": "운동하기를 좋아해요.",
+          "en": "I like exercising."
+        }
+      ],
+      "tip": "동사를 명사처럼 쓸 수 있어요! · -기 turns a verb into a noun — like English '-ing' as a subject or object. Full lesson in L2!",
+      "fill_blanks": [
+        {
+          "sentence": "밥 먹___가 싫어요.",
+          "answer": "기",
+          "hint": "먹다 + -기"
+        },
+        {
+          "sentence": "한국어 말하___가 어려워요.",
+          "answer": "기",
+          "hint": "말하다 + -기"
         }
       ]
     }

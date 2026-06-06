@@ -36,11 +36,13 @@
 | `contents/sejong/` | 세종한국어 성인반 교재 PDF + txt |
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
 | `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) — **문법 카드만** JSON, 나머지는 HTML 하드코딩 |
-| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~05.json) — **전체 콘텐츠** JSON |
+| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~06.json) — **전체 콘텐츠** JSON |
 | `data/elem/slides/L2_*/` | 초등반 Level 2 슬라이드 이미지 (PNG) |
 | `data/elem/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 (PNG) |
 | `data/elem/TTS/L2_*/` | 초등반 Level 2 TTS 음성 (MP3) |
 | `data/elem/TTS/L3_*/` | 초등반 Level 3 TTS 음성 (MP3) |
+| `data/elem/level3/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 — unit06부터 경로 변경 |
+| `data/elem/level3/TTS/L3_*/` | 초등반 Level 3 TTS 음성 — unit06부터 경로 변경 |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
 | `data/nhs/L1/ep0N.json` | Hangeul Quest Level 1 에피소드 (ep01~ep12) |
 | `data/nhs/L1/slides/ep*/` | Hangeul Quest 슬라이드 이미지 (PNG) |
@@ -537,6 +539,40 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
+## 🔜 다음 작업 예정 (2026-06-06 기준)
+
+### ✅ 2026-06-06 완료 작업 (HQ Kids L3 ep6 + HQ L2 문법 정렬 + 커리큘럼 맵)
+
+#### Hangeul Quest Kids — Level 3 unit06
+- **`data/elem/level3/unit06.json`** 신규 작성 (계란은 못 먹어요)
+  - Vocab: 음식 알레르기/음식/장소&명사/동사 4카테고리
+  - Grammar: 못+동사, -지 마세요, -(으)면 안 돼요, -(으)면
+  - Practice: dialogue/fill/listen_quiz/step1_chunks/step2_words/write_items 전체
+  - Real Life: 레스토랑 주문 대화 2개
+- **`korean-app_v2.html`** 수정:
+  - B3_SCENE_DATA[6] 추가 (슬라이드 9장, TTS 9개)
+  - 사이드바 6과 버튼 추가
+  - active array [1,2,3,4,5] → [1,2,3,4,5,6]
+  - ⚠️ 슬라이드/TTS 경로: `data/elem/level3/slides/L3_06/` (기존 `data/elem/slides/`와 다름)
+
+#### Hangeul Quest (nhs.html) — Level 2 문법 탭 정렬
+- **`data/nhs/L2/ep01.json`**: 관형절 → -(으)면 → 못+동사 → -아야 돼(preview) 순으로 재정렬
+- **`data/nhs/L2/ep02.json`**: -고 제거(L1 수준), -(으)ㄹ게요/-(으)면 돼 신규 추가, 못+동사 preview로 강등
+- **`data/nhs/L2/ep03.json`**: -고 나열 제거, -(으)ㄹ 것 같아요 신규 추가, -니까/-아어서 인접 배치, -기 preview 추가
+- **`docs/GRAMMAR_CURRICULUM_MAP.md`** 신규 작성 — L1~L5 레벨별 문법 커리큘럼 맵
+
+#### 미완 + 다음 작업
+- **git commit/push 필요**: 아래 파일 스테이징 후 push (index.lock 있으면 먼저 `del .git\index.lock`)
+  ```
+  git add data/elem/level3/unit06.json data/elem/level3/slides/L3_06/ data/elem/level3/TTS/L3_06/ korean-app_v2.html data/nhs/L2/ep01.json data/nhs/L2/ep02.json data/nhs/L2/ep03.json docs/GRAMMAR_CURRICULUM_MAP.md CLAUDE.md
+  git commit -m "feat: HQ Kids L3 ep6 + HQ L2 grammar alignment + curriculum map"
+  git push
+  ```
+- **HQ L1 문법 탭 미검토** — ep01~12 <문법> 탭 정렬은 아직 미확인
+- **HQ L2 ep04~12** — 콘텐츠 미작성 (스크립트/슬라이드/TTS 준비되면 시작)
+
+---
+
 ## 🔜 다음 작업 예정 (2026-06-04 기준)
 
 ### ✅ 2026-06-04 완료 작업 (2차 세션 — Level 1 렌더러 버그 수정 + 이미지 작업)
@@ -694,6 +730,9 @@ const urlName   = _hc ? _hc.urlName : null;
 - **Level 3 unit04 수정**:
   - `~고 싶어요` 문법 카드 추가 (practice에서 이미 쓰이던 패턴)
 - **Level 3 unit 6~9 문법 플랜 확정**
+- **Level 3 unit06 완성** (2026-06-06): `data/elem/level3/unit06.json` + 사이드바 + B3_SCENE_DATA[6] 추가
+  - 제목: 계란은 못 먹어요 (편식을 하면 안 돼요)
+  - 문법: 못+동사, -지 마세요, -(으)면 안 돼요, -(으)면
 
 ### ✅ 2026-05-18 완료 작업
 - 새 컴퓨터로 이사 (D:\halmoni-school 백업 → C:\Users\kateh\Desktop\halmoni-school 클론)
@@ -728,17 +767,18 @@ const urlName   = _hc ? _hc.urlName : null;
 > u07은 의도적으로 문법 탭 없음 — 고유어 숫자 게임 집중.
 
 #### Level 3 유닛 현황
-- Book 3 데이터: unit01~05.json 완성 (곰 세 마리 ~ 레모네이드)
+- Book 3 데이터: unit01~06.json 완성 (곰 세 마리 ~ 계란은 못 먹어요)
 - Book 3 렌더러: goal badge + 탭 구조 + 빈칸/듣기/문장1/문장2/쓰기/실생활 연습
-- 사이드바: 1~5과 표시 (unit06+ 미작성)
+- 사이드바: 1~6과 표시 (unit07+ 미작성)
+- unit06: 슬라이드 `data/elem/level3/slides/L3_06/`, TTS `data/elem/level3/TTS/L3_06/` (경로 주의)
 
 #### Level 3 나머지 unit 6-9 문법 플랜
-| 과 | 제안 제목 | 핵심 문법 1 | 핵심 문법 2 |
-|----|----------|------------|------------|
-| 06 | 🚫 하면 안 돼요! | 못+동사 (can't) | -지 마세요 (금지) |
-| 07 | 🌟 뭐 하고 싶어요? | -고 싶어요 복습·확장 | -고 싶지 않아요 |
-| 08 | 🏆 뭐가 더 좋아요? | 더 + 형용사 (비교) | 제일 + 형용사 (최상급) |
-| 09 | 📬 친구한테 편지를 써요 | N한테/한테서 (방향격) | -아/어야 해요 (have to) |
+| 과 | 제안 제목 | 핵심 문법 1 | 핵심 문법 2 | 상태 |
+|----|----------|------------|------------|------|
+| 06 | 계란은 못 먹어요 | 못+동사 / -(으)면 안 돼요 | -지 마세요 / -(으)면 | ✅ 완성 |
+| 07 | 🌟 뭐 하고 싶어요? | -고 싶어요 복습·확장 | -고 싶지 않아요 | 미작성 |
+| 08 | 🏆 뭐가 더 좋아요? | 더 + 형용사 (비교) | 제일 + 형용사 (최상급) | 미작성 |
+| 09 | 📬 친구한테 편지를 써요 | N한테/한테서 (방향격) | -아/어야 해요 (have to) | 미작성 |
 - **문장1 확인버튼 버그 수정** (2026-05-26): 오답 시 `cb.disabled=true` 제거 → 재시도 가능
 - **문장2 조사 분리** (2026-05-26): unit01~05 모든 조사(에/가/이/를/하고/랑/의 등) 낱말칩 분리
 - **L3_04 슬라이드 4장 추가**: 동사 활용_쉬다/가다/놀다/먹다(미래).png

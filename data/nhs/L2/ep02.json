@@ -244,6 +244,67 @@
   ],
   "grammar": [
     {
+      "id": "g02_lgeyo",
+      "tier": "core",
+      "title": "-(으)ㄹ게요",
+      "title_en": "I will ~ / I'll ~",
+      "emoji": "🤝",
+      "pattern": "동사 어간 + -(으)ㄹ게요 (존댓말) / -(으)ㄹ게 (반말)",
+      "scene_example": {
+        "korean": "해 볼게요. 거기서 기다릴게.",
+        "english": "I'll give it a try. I'll wait there.",
+        "highlight": "볼게요, 기다릴게"
+      },
+      "rules": [
+        {
+          "form": "-ㄹ게요",
+          "condition": "모음/ㄹ 어간",
+          "example": "해 볼게요, 기다릴게요, 갈게요"
+        },
+        {
+          "form": "-을게요",
+          "condition": "자음 어간 (ㄹ 제외)",
+          "example": "먹을게요, 읽을게요"
+        }
+      ],
+      "examples": [
+        {
+          "ko": "제가 먼저 찾아볼게요.",
+          "en": "I'll look for it first."
+        },
+        {
+          "ko": "거기서 기다릴게.",
+          "en": "I'll wait there."
+        },
+        {
+          "ko": "내일 전화할게요.",
+          "en": "I'll call you tomorrow."
+        },
+        {
+          "ko": "제가 도와드릴게요.",
+          "en": "I'll help you."
+        }
+      ],
+      "tip": "말하는 사람의 의지·약속을 나타내요 · Signals YOUR intention or promise — I will do this for sure!",
+      "fill_blanks": [
+        {
+          "sentence": "제가 공항버스 찾아___게요.",
+          "answer": "볼",
+          "hint": "찾아보다 → 찾아볼게요"
+        },
+        {
+          "sentence": "거기서 기다___.",
+          "answer": "릴게",
+          "hint": "기다리다 → 기다릴게 (반말)"
+        },
+        {
+          "sentence": "내일 연락___.",
+          "answer": "할게",
+          "hint": "연락하다 → 연락할게"
+        }
+      ]
+    },
+    {
       "id": "g02_aboda",
       "tier": "core",
       "title": "-아/어 보다",
@@ -303,8 +364,69 @@
       ]
     },
     {
-      "id": "g02_mot",
+      "id": "g02_myeondwae",
       "tier": "core",
+      "title": "-(으)면 돼",
+      "title_en": "All you need to do is ~ / It's okay if ~",
+      "emoji": "✅",
+      "pattern": "동사 어간 + -(으)면 돼",
+      "scene_example": {
+        "korean": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
+        "english": "Just take the airport bus to the city terminal and come to the last stop.",
+        "highlight": "오면 돼"
+      },
+      "rules": [
+        {
+          "form": "-면 돼",
+          "condition": "모음/ㄹ 어간",
+          "example": "가면 돼, 오면 돼, 알면 돼"
+        },
+        {
+          "form": "-으면 돼",
+          "condition": "자음 어간 (ㄹ 제외)",
+          "example": "먹으면 돼, 찾으면 돼"
+        }
+      ],
+      "examples": [
+        {
+          "ko": "이쪽으로 오면 돼요.",
+          "en": "Just come this way."
+        },
+        {
+          "ko": "버스 타면 돼.",
+          "en": "Just take the bus."
+        },
+        {
+          "ko": "여기서 기다리면 돼요.",
+          "en": "Just wait here."
+        },
+        {
+          "ko": "저한테 물어보면 돼요.",
+          "en": "Just ask me."
+        }
+      ],
+      "tip": "-(으)면 (조건) + 돼요 (okay) = 그것만 하면 충분해요! · It's all you need to do — simple instruction!",
+      "fill_blanks": [
+        {
+          "sentence": "종점까지 오___ 돼.",
+          "answer": "면",
+          "hint": "오다 → 오면"
+        },
+        {
+          "sentence": "여기서 기다리___ 돼요.",
+          "answer": "면",
+          "hint": "기다리다 → 기다리면"
+        },
+        {
+          "sentence": "버스를 타___ 돼.",
+          "answer": "면",
+          "hint": "타다 → 타면"
+        }
+      ]
+    },
+    {
+      "id": "g02_mot",
+      "tier": "preview",
       "title": "못 + 동사",
       "title_en": "Can't do (inability)",
       "emoji": "🥇",
@@ -358,60 +480,6 @@
           "sentence": "비가 와서 나가지 ___.",
           "answer": "못해",
           "hint": "can't go out"
-        }
-      ]
-    },
-    {
-      "id": "g02_go",
-      "tier": "core",
-      "title": "-고",
-      "title_en": "And then / Sequential actions",
-      "emoji": "🥇",
-      "pattern": "동사1 + -고 + 동사2",
-      "scene_example": {
-        "ko": "버스를 타고 종점까지 오면 돼.",
-        "en": "Take the bus and come to the last stop."
-      },
-      "rules": [
-        {
-          "condition": "순서 나열",
-          "ending": "-고",
-          "example": "타고 오다, 씻고 자다"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "버스를 타고 종점까지 와요.",
-          "en": "Ride the bus and come to the last stop.",
-          "note": "에피소드 대사"
-        },
-        {
-          "ko": "밥을 먹고 나가요.",
-          "en": "Eat and then go out.",
-          "note": "순서"
-        },
-        {
-          "ko": "씻고 자요.",
-          "en": "Wash up and sleep.",
-          "note": "일상"
-        }
-      ],
-      "tip": "-고 links two actions in sequence. Think: 'do A, then do B' · A하고 나서 B",
-      "fill_blanks": [
-        {
-          "sentence": "버스를 타___ 종점까지 와.",
-          "answer": "고",
-          "hint": "take bus and come"
-        },
-        {
-          "sentence": "밥을 먹___ 학교에 갔어요.",
-          "answer": "고",
-          "hint": "ate and went to school"
-        },
-        {
-          "sentence": "샤워를 하___ 잘 거예요.",
-          "answer": "고",
-          "hint": "shower then sleep"
         }
       ]
     }
