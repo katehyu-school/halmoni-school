@@ -1448,7 +1448,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <div class="lesson-item" id="lesson-3" onclick="switchUnit(3)">
     <span class="lesson-num">3과</span>
-    <span class="lesson-title-text">언제 할머니네 가요?</span>
+    <span class="lesson-title-text">언제 할머니 집에 가요?</span>
   </div>
 
   <div class="lesson-item" id="lesson-4" onclick="switchUnit(4)">
@@ -1917,7 +1917,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 <div class="unit" id="unit3">
  <div class="unit-heading">
   <span class="unit-num">3</span>
-  <span class="unit-title">언제 할머니네 가요?</span>
+  <span class="unit-title">언제 할머니 집에 가요?</span>
 </div>
   <nav class="section-nav" id="u3-snav">
     <button class="snav-btn" onclick="switchScene(3)">🎬 영상 <span class="snav-en">Scene</span></button>
@@ -1931,7 +1931,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="section active" id="u3-scene">
     <div class="card">
       <div class="section-title">🎬 3과 영상 · Scene Viewer</div>
-      <div class="section-sub" id="u3-slide-subtitle">언제 할머니네 가요?</div>
+      <div class="section-sub" id="u3-slide-subtitle">언제 할머니 집에 가요?</div>
       <div class="u2-scene-viewer">
         <div class="u2-slide-wrap">
           <img class="u2-slide-img" id="u3-slide-img" alt="slide" onerror="var fb=this.parentElement.querySelector('.slide-load-err');if(fb)fb.style.display='block';" />
@@ -3069,7 +3069,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div class="lt-cando" style="background:#f0faf6;border-color:#9FE1CB;">
       <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>강아지가 <strong>노래해요</strong>.</span></div>
       <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>놀이터에 <strong>가요</strong>.</span></div>
-      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span><strong>언제</strong> 할머니네 가요?</span></div>
+      <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span><strong>언제</strong> 할머니 집에 가요?</span></div>
       <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>장난감 기차가 <strong>있어요</strong>.</span></div>
       <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>구두가 <strong>아니에요</strong>.</span></div>
       <div class="lt-cando-item"><span style="color:#1D9E75">✓</span><span>저는 여덟 <strong>살이에요</strong>.</span></div>
@@ -5063,14 +5063,14 @@ const _u3QFallback = [
   // 🎬 도입부 장면 연습 (할머니 댁 = 복합 장소 표현)
   {
     scene:'🏠🌙', english:"When does Mira go to grandma's house? → She goes tomorrow.",
-    hint:"내일 = tomorrow — NO 에! 할머니네 = to grandma's place.",
-    answer:['미라','는','내일','할머니네','가요'],
+    hint:"내일 = tomorrow — NO 에! 할머니 집에 = to grandma's house.",
+    answer:['미라','는','내일','할머니 집에','가요'],
     types:['name','particle','time','place','verb']
   },
   {
     scene:'🏠☀️', english:"When does Jaewoo go to grandma's house? → He goes today.",
-    hint:"오늘 = today — NO 에! 할머니네 = to grandma's place. 재우 ends in ㅜ → vowel → 는.",
-    answer:['재우','는','오늘','할머니네','가요'],
+    hint:"오늘 = today — NO 에! 할머니 집에 = to grandma's house. 재우 ends in ㅜ → vowel → 는.",
+    answer:['재우','는','오늘','할머니 집에','가요'],
     types:['name','particle','time','place','verb']
   },
 ]; // end _u3QFallback
@@ -8506,7 +8506,7 @@ const SCENE_DATA = {
   },
 
   3: {
-    title: '언제 할머니네 가요?',
+    title: '언제 할머니 집에 가요?',
     slides: [
       'data/elem/slides/L2_03/언제할머니댁에가요1.png',
       'data/elem/slides/L2_03/언제할머니댁에가요2.png',
@@ -8516,8 +8516,8 @@ const SCENE_DATA = {
     script: [
       [{ko:'엄마하고 할머니가 전화를 해요.',        en:'Mom and grandma are on the phone.',      audio:'data/elem/TTS/L2_03/엄마하고+할머니가+전화를+해요_slide1.mp3'}],
       [
-        {ko:'엄마, 언제 할머니네 가요?',         en:'Mom, when are we going to grandma\'s?',  audio:'data/elem/TTS/L2_03/엄마+언제+할머니+댁에+가요_slide2.mp3'},
-        {ko:'내일 할머니네 가.',                en:'We\'re going to grandma\'s tomorrow.',    audio:'data/elem/TTS/L2_03/내일+할머니+댁에+가_slide2.mp3'},
+        {ko:'엄마, 언제 할머니 집에 가요?',         en:'Mom, when are we going to grandma\'s?',  audio:'data/elem/TTS/L2_03/엄마+언제+할머니+댁에+가요_slide2.mp3'},
+        {ko:'내일 할머니 집에 가.',                en:'We\'re going to grandma\'s tomorrow.',    audio:'data/elem/TTS/L2_03/내일+할머니+댁에+가_slide2.mp3'},
       ],
       [
         {ko:'우아! 신난다!',                       en:'Wow! I\'m so excited!',                  audio:'data/elem/TTS/L2_03/우아+신난다!slide3.mp3'},
