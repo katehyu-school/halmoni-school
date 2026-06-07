@@ -3722,7 +3722,6 @@ function renderB1SoundTapGame(game) {
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
-    setTimeout(()=>b1Speak(r.sound_text), 300);
     window._b1TapAns = function(chosen, correct) {
       if (chosen === correct) { score++; b1Speak(correct); }
       idx++; setTimeout(show, chosen===correct ? 600 : 400);
@@ -3758,7 +3757,6 @@ function renderB1ClassifyGame(game) {
       </div>
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
-    setTimeout(()=>b1Speak(r.char), 200);
     window._b1ClassAns = function(chosen, correct) {
       if (chosen === correct) { score++; b1Speak(r.char); }
       idx++; setTimeout(show, 500);
@@ -3878,7 +3876,6 @@ function renderB1FirstSoundGame(game, pc) {
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
-    setTimeout(()=>b1Speak(r.word), 300);
     window._b1FSAns = function(chosen, correct) {
       if (chosen === correct) { score++; b1Speak(correct); }
       idx++; setTimeout(show, 500);
@@ -3953,7 +3950,6 @@ function renderB1CompareGame(game, pc) {
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
-    setTimeout(()=>b1Speak(r.word), 300);
     window._b1CmpAns = function(chosen, correct) {
       if (chosen === correct) { score++; b1Speak(correct); }
       idx++; setTimeout(show, 500);
@@ -4056,7 +4052,6 @@ function renderB1BlockGame(game, consonants, vowels, pc) {
       <div style="text-align:center;margin-top:8px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
 
-    setTimeout(()=>b1Speak(r.target), 400);
 
     window._b1BGSelCon = function(ch) {
       selCon = ch;
@@ -4204,7 +4199,6 @@ function renderB1BatchimGame(game, batchimChars, pc) {
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
 
-    setTimeout(()=>b1Speak(r.result), 400);
 
     window._b1BtAns = function(chosen, correct) {
       const jongEl = document.getElementById('b1-bt-jong');
@@ -4479,8 +4473,6 @@ function renderB1PreGame(d){
         <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
         <div style="color:#888;font-size:.8rem;margin-top:10px;">${idx+1}/${rounds.length} | ⭐${score}</div>
       </div>`;
-    const _gameEl=document.getElementById('b1pre-game');
-    if(_gameEl&&_gameEl.style.display!=='none') b1Speak(r.prompt);
     window._b1GameAns=function(chosen,correct){if(chosen===correct){score++;b1Speak(correct);}idx++;setTimeout(show,500);};
     window._b1GameRestart=function(){idx=0;score=0;show();};
   }
