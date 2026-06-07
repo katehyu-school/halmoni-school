@@ -11,9 +11,9 @@
   "key_points": [
     "찾아 봐 / 해 볼게요 — -아/어 보다: trying something",
     "못 찾겠어요 — 못 + 동사: inability",
-    "타고 종점까지 오면 돼 — -고: sequential action",
     "터미널행 공항버스 — N행: bound for N",
-    "출구 근처에 있는 매표소 — 위치 + 관형사형"
+    "출구 근처에 있는 매표소 — 위치 + 관형사형",
+    "안 보여요 / 못 찾겠어요 — 안 vs 못 부정 대비"
   ],
   "slides": [
     "data/nhs/L2/slides/ep02/ep2인천공항1.png",
@@ -364,63 +364,93 @@
       ]
     },
     {
-      "id": "g02_myeondwae",
+      "id": "g02_an",
       "tier": "core",
-      "title": "-(으)면 돼",
-      "title_en": "All you need to do is ~ / It's okay if ~",
-      "emoji": "✅",
-      "pattern": "동사 어간 + -(으)면 돼",
+      "title": "안 + 동사",
+      "title_en": "Negation — Won't / Not (by state or choice)",
+      "emoji": "🚫",
+      "pattern": "안 + 동사  ←→  못 + 동사",
       "scene_example": {
-        "korean": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
-        "english": "Just take the airport bus to the city terminal and come to the last stop.",
-        "highlight": "오면 돼"
+        "korean": "미래: 안 보여요. 못 찾겠어요.",
+        "english": "Mirae: I can't see it. I can't find it.",
+        "highlight": "안 보여요 / 못 찾겠어요"
       },
       "rules": [
         {
-          "form": "-면 돼",
-          "condition": "모음/ㄹ 어간",
-          "example": "가면 돼, 오면 돼, 알면 돼"
+          "form": "안 + 동사",
+          "condition": "상태/의지 부정 — 그렇지 않거나, 하지 않음",
+          "example": "안 보여요 · 안 가요 · 안 먹어요"
         },
         {
-          "form": "-으면 돼",
-          "condition": "자음 어간 (ㄹ 제외)",
-          "example": "먹으면 돼, 찾으면 돼"
+          "form": "못 + 동사",
+          "condition": "능력/상황 부정 — 상황 때문에 할 수 없음",
+          "example": "못 찾겠어요 · 못 가요 · 못 먹어요"
         }
       ],
+      "comparison": {
+        "title": "안 vs 못 — 같은 단어, 다른 이유",
+        "rows": [
+          {
+            "label": "의미",
+            "an": "의지·상태 부정 (won't / not)",
+            "mot": "능력·상황 부정 (can't)"
+          },
+          {
+            "label": "느낌",
+            "an": "그냥 안 돼 / 안 보여 (state)",
+            "mot": "아무리 해도 안 돼 (situation)"
+          },
+          {
+            "label": "에피소드",
+            "an": "안 보여요 → 매표소가 눈에 안 들어옴",
+            "mot": "못 찾겠어요 → 찾으려 해도 못 찾겠음"
+          }
+        ]
+      },
+      "note": "💡 안 보여요 ≠ 보기 싫어요! 여기서 안 보여요는 '보이지 않는 상태'예요. · 안 보여요 = It's not visible (state), not 'I refuse to look'.",
       "examples": [
         {
-          "ko": "이쪽으로 오면 돼요.",
-          "en": "Just come this way."
+          "ko": "안 보여요.",
+          "en": "I can't see it. (It's not visible.)",
+          "note": "에피소드 미래 대사"
         },
         {
-          "ko": "버스 타면 돼.",
-          "en": "Just take the bus."
+          "ko": "못 찾겠어요.",
+          "en": "I can't find it (no matter what I do.)",
+          "note": "에피소드 미래 대사"
         },
         {
-          "ko": "여기서 기다리면 돼요.",
-          "en": "Just wait here."
+          "ko": "오늘 학교에 안 가요.",
+          "en": "I'm not going to school today.",
+          "note": "의지 선택 — by choice"
         },
         {
-          "ko": "저한테 물어보면 돼요.",
-          "en": "Just ask me."
+          "ko": "아파서 학교에 못 가요.",
+          "en": "I can't go to school because I'm sick.",
+          "note": "상황 제약 — situation"
         }
       ],
-      "tip": "-(으)면 (조건) + 돼요 (okay) = 그것만 하면 충분해요! · It's all you need to do — simple instruction!",
+      "tip": "같은 동사 앞에 안/못을 바꿔 보면 뉘앙스 차이가 확 느껴져요 · Try swapping 안 ↔ 못 with the same verb — the nuance shift is very clear!",
       "fill_blanks": [
         {
-          "sentence": "종점까지 오___ 돼.",
-          "answer": "면",
-          "hint": "오다 → 오면"
+          "sentence": "___ 보여요. (It's not visible — I just can't see it.)",
+          "answer": "안",
+          "hint": "상태 부정 → 안"
         },
         {
-          "sentence": "여기서 기다리___ 돼요.",
-          "answer": "면",
-          "hint": "기다리다 → 기다리면"
+          "sentence": "___ 찾겠어요. (I can't manage to find it.)",
+          "answer": "못",
+          "hint": "능력 부정 → 못"
         },
         {
-          "sentence": "버스를 타___ 돼.",
-          "answer": "면",
-          "hint": "타다 → 타면"
+          "sentence": "감기에 걸려서 학교에 ___ 가요.",
+          "answer": "못",
+          "hint": "아픈 상황 → 못"
+        },
+        {
+          "sentence": "오늘은 고기를 ___ 먹어요. (I'm choosing not to eat meat today.)",
+          "answer": "안",
+          "hint": "의지 선택 → 안"
         }
       ]
     }
