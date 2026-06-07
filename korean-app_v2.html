@@ -4076,7 +4076,9 @@ function renderB3Grammar(grammar) {
   if (!grammar||!grammar.sections) return '<div class="card"><p style="color:#aaa;text-align:center;padding:40px;">문법 준비 중...</p></div>';
   let out = '';
   grammar.sections.forEach(g => {
-    out += '<div class="card"><div class="section-title">'+(g.title||'')+'</div>';
+    out += '<div class="card">';
+    if (g.connective_label) out += '<div class="b3-connective-badge">🔗 연결 어미 &nbsp;·&nbsp; <strong>'+g.connective_label.function_ko+'</strong>&nbsp;·&nbsp;'+g.connective_label.function_en+'</div>';
+    out += '<div class="section-title">'+(g.title||'')+'</div>';
     if (g.subtitle) out += '<div class="section-sub">'+g.subtitle+'</div>';
     if (g.pattern)  out += '<div class="b3-pattern-box">'+g.pattern+'</div>';
     if (g.description) out += '<p style="font-size:.95rem;color:#555;line-height:1.7;margin:12px 0;">'+g.description+'</p>';
@@ -9490,6 +9492,7 @@ if(document.readyState !== 'loading'){
    ════════════════════════ */
 .b3-goal-badge{display:inline-block;background:linear-gradient(135deg,#0D7B75,#1AAB9A);color:white;border-radius:20px;padding:6px 18px;font-family:'Jua',sans-serif;font-size:.9rem;margin:4px 0 16px 0;}
 .b3-pattern-box{background:#EBF7F6;border:2px solid #0D7B75;border-radius:12px;padding:12px 18px;font-family:'Jua',sans-serif;font-size:1.05rem;color:#0D7B75;text-align:center;margin:12px 0;}
+.b3-connective-badge{display:inline-flex;align-items:center;gap:6px;background:#EBF3FF;border:1.5px solid #5B8FC7;border-radius:20px;padding:4px 14px;font-size:.82rem;color:#2C6FAC;font-weight:700;margin-bottom:10px;letter-spacing:.01em;}
 .b3-rule-box{border-radius:12px;padding:14px 18px;margin:10px 0;}
 .b3-rule-red{background:#FFF0F0;border-left:4px solid #e44;}
 .b3-rule-blue{background:#F0F4FF;border-left:4px solid #5B6AF0;}
@@ -9576,43 +9579,4 @@ if(document.readyState !== 'loading'){
 .b3-dlg-scenario{background:#fafafa;border-radius:16px;padding:18px 16px;border:1.5px solid #eee;}
 .b3-dlg-scene-label{font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dashed #c8ede9;}
 .b3-dlg-scene-en{font-size:.85rem;color:#aaa;font-family:sans-serif;}
-.b3-dlg-line{display:flex;align-items:flex-end;gap:8px;margin-bottom:12px;}
-.b3-dlg-other{flex-direction:row;}
-.b3-dlg-me{flex-direction:row-reverse;}
-.b3-dlg-name{font-family:'Jua',sans-serif;font-size:.75rem;color:#999;flex-shrink:0;max-width:52px;text-align:center;line-height:1.3;}
-.b3-dlg-bubble{max-width:75%;border-radius:18px;padding:12px 16px;position:relative;}
-.b3-dlg-other .b3-dlg-bubble{border-bottom-left-radius:4px;}
-.b3-dlg-me    .b3-dlg-bubble{border-bottom-right-radius:4px;}
-.b3-dlg-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;line-height:1.6;}
-.b3-dlg-en{font-size:.78rem;color:rgba(0,0,0,.45);margin-top:4px;}
-/* bubble colors */
-.b3-bubble-blue  {background:#E8EEFF;border:1.5px solid #B0BAFF;}
-.b3-bubble-teal  {background:#E0F5F2;border:1.5px solid #A8D5CC;}
-.b3-bubble-coral {background:#FFE8E4;border:1.5px solid #FFB8A8;}
-.b3-bubble-amber {background:#FFF4DC;border:1.5px solid #FFD580;}
-/* fill bubble */
-.b3-dlg-fill-bubble .b3-dlg-kr{margin-bottom:10px;}
-.b3-dlg-blank{display:inline-block;min-width:48px;border-bottom:2.5px solid #0D7B75;text-align:center;padding:0 6px;color:#0D7B75;font-weight:700;transition:all .2s;}
-.b3-dlg-correct{color:#0D7B75 !important;border-bottom-color:#0D7B75 !important;background:#c8ede9;border-radius:6px;padding:1px 8px;}
-.b3-dlg-blank-shake{animation:b3shake .4s;}
-@keyframes b3shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.b3-dlg-opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
-.b3-dlg-opt{background:white;border:2px solid #A8D5CC;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
-.b3-dlg-opt:hover{background:#0D7B75;color:white;border-color:#0D7B75;}
-.b3-dlg-opt-wrong{background:#ffe0e0 !important;border-color:#e44 !important;color:#e44 !important;}
-.b3-dlg-result{text-align:center;margin-top:8px;}
-.b3-dlg-complete{background:linear-gradient(135deg,#EBF7F6,#FFF9E6);border-radius:16px;padding:20px;font-family:'Jua',sans-serif;font-size:1.1rem;color:#0D7B75;border:2px solid #A8D5CC;}
-
-.b3-check-all{background:linear-gradient(135deg,#EBF7F6,#FFF9E6);border-radius:14px;padding:16px;text-align:center;font-family:'Jua',sans-serif;color:#0D7B75;font-size:1rem;border:2px solid #A8D5CC;}
-
-</style>
-
-
-<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
-  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
-</footer>
-
-<script src="core/my-space.js"></script>
-</body>
-</html>
+.
