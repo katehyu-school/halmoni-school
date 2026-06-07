@@ -310,6 +310,14 @@
           "example": "몸이 떨려요.",
           "emoji": "😬",
           "romanization": "tteol-li-da / tteol-lyeo-yo"
+        },
+        {
+          "korean": "어서",
+          "english": "quickly / hurry up / right away",
+          "example": "어서 병원에 가자.",
+          "note": "동사 앞에 붙어 재촉하는 느낌 · Placed before a verb to urge speed or prompt action (cf. 빨리와 비슷하지만 더 다급함)",
+          "emoji": "🏃",
+          "romanization": "eo-seo"
         }
       ]
     }
@@ -318,66 +326,67 @@
     {
       "id": "g03_geot_gata",
       "tier": "core",
-      "title": "-(으)ㄹ 것 같아요",
-      "title_en": "I think ~ / It seems like ~",
+      "title": "-(으)ㄴ 것 같아요",
+      "title_en": "It seems like ~ / I think ~ (observation/inference)",
       "emoji": "🤔",
-      "pattern": "동사/형용사 어간 + -(으)ㄹ 것 같아요",
+      "pattern": "동사 과거 어간 + -(으)ㄴ 것 같아요 · 형용사 어간 + -(으)ㄴ 것 같아요",
       "scene_example": {
-        "korean": "열은 없는 것 같은데 병원에 가 볼까?",
-        "english": "It seems like there's no fever, but shall we go to the hospital?",
-        "highlight": "없는 것 같은데"
+        "korean": "아까 개울에서 놀아서 감기 걸린 것 같아.",
+        "english": "It seems you caught a cold from playing in the stream earlier.",
+        "highlight": "걸린 것 같아"
       },
       "rules": [
         {
-          "form": "동사 현재: -는 것 같아요",
-          "condition": "지금 일어나는 일",
-          "example": "비가 오는 것 같아요 (It seems it's raining)"
-        },
-        {
           "form": "동사 과거: -(으)ㄴ 것 같아요",
-          "condition": "이미 일어난 일",
-          "example": "감기에 걸린 것 같아요 (Seems I caught a cold)"
+          "condition": "이미 일어난 일 추측",
+          "example": "감기에 걸린 것 같아요 (Seems like I caught a cold)"
         },
         {
-          "form": "형용사: -(으)ㄹ 것 같아요 / -(으)ㄴ 것 같아요",
-          "condition": "추측·판단",
-          "example": "열이 나는 것 같아요, 없는 것 같아요"
+          "form": "동사 현재: -는 것 같아요",
+          "condition": "지금 일어나는 일 추측",
+          "example": "열이 나는 것 같아요 (Seems like I have a fever)"
+        },
+        {
+          "form": "형용사: -(으)ㄴ 것 같아요",
+          "condition": "현재 상태 추측·판단",
+          "example": "열이 없는 것 같아요 (Seems like there's no fever)"
         }
       ],
+      "note": "⚠️ -(으)ㄹ 것 같아요 (미래 예측: 비가 올 것 같아요)는 다음 레벨에서! · -(으)ㄹ 것 같아요 for future prediction comes in Level 3!",
       "examples": [
         {
           "ko": "감기에 걸린 것 같아요.",
           "en": "It seems like I caught a cold."
         },
         {
-          "ko": "열이 나는 것 같아요.",
-          "en": "It seems like I have a fever."
+          "ko": "열이 없는 것 같은데, 병원에 가 볼까?",
+          "en": "It seems there's no fever, but shall we go to the hospital?"
         },
         {
-          "ko": "비가 올 것 같아요.",
-          "en": "It seems like it's going to rain."
+          "ko": "열이 펄펄 나는 것 같아요.",
+          "en": "It seems like I have a high fever."
         },
         {
-          "ko": "배가 고픈 것 같아.",
-          "en": "It seems like I'm hungry."
+          "ko": "피곤한 것 같아.",
+          "en": "It seems like (you're) tired."
         }
       ],
-      "tip": "추측·판단을 부드럽게 표현할 때 써요 · Softens statements — instead of asserting facts, you're expressing what you think or notice.",
+      "tip": "보이는 것·느끼는 것을 부드럽게 표현할 때 써요 · Use when making gentle observations or inferences based on what you see/feel — instead of stating facts directly.",
       "fill_blanks": [
+        {
+          "sentence": "감기에 걸___ 것 같아요.",
+          "answer": "린",
+          "hint": "걸리다 과거 → 걸린"
+        },
         {
           "sentence": "열이 나___ 것 같아요.",
           "answer": "는",
-          "hint": "현재 동사 → -는 것 같아요"
+          "hint": "나다 현재 → 나는"
         },
         {
-          "sentence": "감기에 걸린 것 ___아요.",
-          "answer": "같",
-          "hint": "것 같아요 완성"
-        },
-        {
-          "sentence": "오늘 비가 올 것 ___아요.",
-          "answer": "같",
-          "hint": "것 같아요 완성"
+          "sentence": "열이 없___ 것 같아요.",
+          "answer": "는",
+          "hint": "없다 형용사 → 없는"
         }
       ]
     },
