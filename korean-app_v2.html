@@ -1546,9 +1546,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-title-text">있어요? 없어요?</span>
   </div>
 </nav>
-<div id="book1-main" style="display:none;max-width:960px;margin:0 auto;padding:28px 20px 60px;">
-  <div id="b1-unit-container"></div>
-</div>
 <!-- ══════ Book 3 사이드바 ══════ -->
 <nav class="sidebar" id="book3-sidebar" style="display:none;">
   <div class="sidebar-title">Level 3</div>
@@ -1584,6 +1581,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 <!-- 컨텐츠 영역 -->
 <div class="app-content">
+
+<!-- ══════ Book 1 CONTENT ══════ -->
+<div id="book1-main" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px;">
+  <div id="b1-unit-container"></div>
+</div>
 
 <!-- ══════ Book 3 CONTENT ══════ -->
 <div id="book3-main" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px;">
@@ -3560,10 +3562,30 @@ const B1_CHO_IDX = {ㄱ:0,ㄲ:1,ㄴ:2,ㄷ:3,ㄸ:4,ㄹ:5,ㅁ:6,ㅂ:7,ㅃ:8,ㅅ:9,
 const B1_VOW_IDX = {ㅏ:0,ㅐ:1,ㅑ:2,ㅒ:3,ㅓ:4,ㅔ:5,ㅕ:6,ㅖ:7,ㅗ:8,ㅘ:9,ㅙ:10,ㅚ:11,ㅛ:12,ㅜ:13,ㅝ:14,ㅞ:15,ㅟ:16,ㅠ:17,ㅡ:18,ㅢ:19,ㅣ:20};
 const B1_JONG_IDX = {'':-1,ㄱ:1,ㄲ:2,ㄳ:3,ㄴ:4,ㄵ:5,ㄶ:6,ㄷ:7,ㄹ:8,ㄺ:9,ㄻ:10,ㄼ:11,ㄽ:12,ㄾ:13,ㄿ:14,ㅀ:15,ㅁ:16,ㅂ:17,ㅄ:18,ㅅ:19,ㅆ:20,ㅇ:21,ㅈ:22,ㅊ:23,ㅋ:24,ㅌ:25,ㅍ:26,ㅎ:27};
 
+// 한국어 음성 캐시 (로드 후 최적 음성 선택)
+let _b1KoVoice = null;
+function _b1GetVoice() {
+  if (_b1KoVoice) return _b1KoVoice;
+  const voices = speechSynthesis.getVoices();
+  // 우선순위: Google 한국어 > Microsoft Heami > ko-KR 아무거나
+  const priority = ['Google 한국어', 'Google Korean', 'Microsoft Heami', 'Yuna'];
+  for (const name of priority) {
+    const v = voices.find(v => v.name.includes(name));
+    if (v) { _b1KoVoice = v; return v; }
+  }
+  // fallback: lang이 ko인 첫 번째
+  _b1KoVoice = voices.find(v => v.lang.startsWith('ko')) || null;
+  return _b1KoVoice;
+}
+speechSynthesis.onvoiceschanged = () => { _b1KoVoice = null; }; // 리셋해서 재선택
+
 function b1Speak(text) {
   if (!text) return;
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'ko-KR'; utt.rate = 0.85;
+  utt.lang = 'ko-KR';
+  utt.rate = 0.8;
+  const voice = _b1GetVoice();
+  if (voice) utt.voice = voice;
   speechSynthesis.cancel();
   speechSynthesis.speak(utt);
 }
