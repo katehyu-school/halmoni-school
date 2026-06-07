@@ -3788,51 +3788,50 @@ function _b1CGShow() {
   const rounds = game.rounds || [];
 
   if (s.idx >= rounds.length) {
-    wrap.innerHTML = '<div style="text-align:center;background:linear-gradient(135deg,' + accentColor + ',' + accentColor + 'bb);border-radius:16px;padding:30px;color:#fff;">'
-      + '<div style="font-size:3rem;">🎉</div>'
-      + '<div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ' + s.score + '/' + rounds.length + ' ⭐</div>'
-      + '<button onclick="renderB1ClassifyGame(window._b1CG.game,window._b1CG.wrId)" style="background:#fff;color:' + accentColor + ';border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>'
-      + '</div>';
+    wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${accentColor},${accentColor}bb);border-radius:16px;padding:30px;color:#fff;">
+      <div style="font-size:3rem;">🎉</div>
+      <div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${s.score}/${rounds.length} ⭐</div>
+      <button onclick="renderB1ClassifyGame(window._b1CG.game,window._b1CG.wrId)" style="background:#fff;color:${accentColor};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+    </div>`;
     return;
   }
 
   const r = rounds[s.idx];
-  const blockStyle = 'border-radius:10px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;';
-  const conBlock = '<div style="' + blockStyle + 'background:#FFEBEE;border:2.5px solid #E53935;color:#E53935;">ㄱ</div>';
+  const bk = 'border-radius:10px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;';
+  const conBlk = `<div style="${bk}background:#FFEBEE;border:2.5px solid #E53935;color:#E53935;">ㄱ</div>`;
 
   function makeBtn(cat) {
-    const vowBlock = '<div style="' + blockStyle + 'background:#E8F5E9;border:2.5px solid ' + cat.color + ';color:' + cat.color + ';">' + r.char + '</div>';
+    const vowBlk = `<div style="${bk}background:#E8F5E9;border:2.5px solid ${cat.color};color:${cat.color};">${r.char}</div>`;
     const isSide = cat.key === '세로';
     const layout = isSide
-      ? '<div style="display:flex;align-items:center;gap:5px;justify-content:center;margin:8px 0;">' + conBlock + vowBlock + '</div>'
-        + '<div style="font-size:.78rem;color:#555;font-weight:700;">자음 오른쪽 →</div>'
-        + '<div style="font-size:.72rem;color:#999;">SIDE</div>'
-      : '<div style="display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;margin:8px 0;">' + conBlock + vowBlock + '</div>'
-        + '<div style="font-size:.78rem;color:#555;font-weight:700;">자음 아래 ↓</div>'
-        + '<div style="font-size:.72rem;color:#999;">BELOW</div>';
-    return '<button id="b1cl-' + cat.key + '" onclick="_b1CGAns('' + cat.key + '','' + r.correct + '')" '
-      + 'style="background:#fff;border:3px solid ' + cat.color + '35;border-radius:18px;padding:14px 18px;cursor:pointer;min-width:130px;text-align:center;">'
-      + layout + '</button>';
+      ? `<div style="display:flex;align-items:center;gap:5px;justify-content:center;margin:8px 0;">${conBlk}${vowBlk}</div>
+         <div style="font-size:.78rem;color:#555;font-weight:700;">자음 오른쪽 →</div>
+         <div style="font-size:.72rem;color:#999;">SIDE</div>`
+      : `<div style="display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;margin:8px 0;">${conBlk}${vowBlk}</div>
+         <div style="font-size:.78rem;color:#555;font-weight:700;">자음 아래 ↓</div>
+         <div style="font-size:.72rem;color:#999;">BELOW</div>`;
+    return `<button id="b1cl-${cat.key}" onclick="_b1CGAns('${cat.key}','${r.correct}')"
+      style="background:#fff;border:3px solid ${cat.color}35;border-radius:18px;padding:14px 18px;cursor:pointer;min-width:130px;text-align:center;">
+      ${layout}</button>`;
   }
 
   const btns = cats.map(makeBtn).join('');
-  wrap.innerHTML = '<div style="background:#f8fffe;border-radius:16px;padding:20px;border:2px solid ' + accentColor + '25;">'
-    + '<div style="font-size:.85rem;font-weight:700;color:' + accentColor + ';margin-bottom:6px;">🎮 ' + game.title + '</div>'
-    + '<div style="font-size:.78rem;color:#666;margin-bottom:14px;">이 모음은 자음 <b style="color:#E53935;">오른쪽</b>에 붙나요, <b style="color:#1E88E5;">아래</b>에 붙나요?<br><span style="color:#aaa;">Does this vowel go to the SIDE or BELOW the consonant?</span></div>'
-    + '<div style="text-align:center;margin-bottom:18px;">'
-    + '<div onclick="b1Speak('' + r.char + '')" style="font-size:6.5rem;font-weight:900;cursor:pointer;color:#222;line-height:1.05;">' + r.char + '</div>'
-    + '<div style="font-size:.72rem;color:#bbb;margin-top:2px;">🔊 탭해서 들어보기</div></div>'
-    + '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">' + btns + '</div>'
-    + '<div id="b1cl-fb" style="text-align:center;min-height:28px;margin-top:10px;"></div>'
-    + '<div style="text-align:center;margin-top:6px;font-size:.78rem;color:#ccc;">' + (s.idx+1) + '/' + rounds.length + ' ⭐' + s.score + '</div>'
-    + '</div>';
+  wrap.innerHTML = `<div style="background:#f8fffe;border-radius:16px;padding:20px;border:2px solid ${accentColor}25;">
+    <div style="font-size:.85rem;font-weight:700;color:${accentColor};margin-bottom:6px;">🎮 ${game.title}</div>
+    <div style="font-size:.78rem;color:#666;margin-bottom:14px;">이 모음은 자음 <b style="color:#E53935;">오른쪽</b>에 붙나요, <b style="color:#1E88E5;">아래</b>에 붙나요?<br><span style="color:#aaa;">Does this vowel go to the SIDE or BELOW the consonant?</span></div>
+    <div style="text-align:center;margin-bottom:18px;">
+      <div onclick="b1Speak('${r.char}')" style="font-size:6.5rem;font-weight:900;cursor:pointer;color:#222;line-height:1.05;">${r.char}</div>
+      <div style="font-size:.72rem;color:#bbb;margin-top:2px;">🔊 탭해서 들어보기</div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">${btns}</div>
+    <div id="b1cl-fb" style="text-align:center;min-height:28px;margin-top:10px;"></div>
+    <div style="text-align:center;margin-top:6px;font-size:.78rem;color:#ccc;">${s.idx+1}/${rounds.length} ⭐${s.score}</div>
+  </div>`;
 }
 
 function _b1CGAns(chosen, correct) {
   const s = window._b1CG; if (!s) return;
-  const cats = s.game.categories || [
-    {key:'세로',color:'#43A047'},{key:'가로',color:'#1E88E5'}
-  ];
+  const cats = s.game.categories || [{key:'세로',color:'#43A047'},{key:'가로',color:'#1E88E5'}];
   cats.forEach(function(cat) {
     const btn = document.getElementById('b1cl-' + cat.key);
     if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'default'; }
@@ -3843,13 +3842,10 @@ function _b1CGAns(chosen, correct) {
   if (isRight) { s.score++; b1Speak(r.char); }
   const fb = document.getElementById('b1cl-fb');
   if (!fb) return;
-  const nextBtn = '<br><button onclick="_b1CGNext()" style="margin-top:8px;background:' + (isRight ? '#43A047' : '#aaa') + ';color:#fff;border:none;border-radius:10px;padding:9px 24px;font-size:.95rem;font-weight:700;cursor:pointer;">다음 →</button>';
-  if (isRight) {
-    fb.innerHTML = '<span style="color:#43A047;font-weight:700;font-size:1.1rem;">🎉 맞아요! Correct!</span>' + nextBtn;
-  } else {
-    const label = correct === '세로' ? '오른쪽 (SIDE) →' : '아래 (BELOW) ↓';
-    fb.innerHTML = '<span style="color:#E53935;font-size:.88rem;">정답: 자음 ' + label + '</span>' + nextBtn;
-  }
+  const nextBtn = `<br><button onclick="_b1CGNext()" style="margin-top:8px;background:${isRight?'#43A047':'#aaa'};color:#fff;border:none;border-radius:10px;padding:9px 24px;font-size:.95rem;font-weight:700;cursor:pointer;">다음 →</button>`;
+  fb.innerHTML = isRight
+    ? `<span style="color:#43A047;font-weight:700;font-size:1.1rem;">🎉 맞아요! Correct!</span>${nextBtn}`
+    : `<span style="color:#E53935;font-size:.88rem;">정답: 자음 ${correct==='세로'?'오른쪽 (SIDE) →':'아래 (BELOW) ↓'}</span>${nextBtn}`;
 }
 
 function _b1CGNext() {
