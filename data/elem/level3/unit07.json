@@ -127,8 +127,8 @@
           ],
           "examples": [
             {
-              "korean": "라면은 한 사람이 하나를 다 먹어야 해요.",
-              "english": "Each person has to eat one whole ramen.",
+              "korean": "라면은 한 사람이 하나씩 먹어야 해요.",
+              "english": "Each person has to eat one each.",
               "highlight": "먹어야 해요"
             },
             {
@@ -368,13 +368,13 @@
         },
         {
           "scene": "😢",
-          "english": "I have to eat the whole ramen by myself.",
-          "hint": "먹다 → 먹어야 해요",
-          "sentence": "라면은 하나를 다 먹어야 해요.",
+          "english": "Each person has to eat one each.",
+          "hint": "먹다 → 먹어야 해요 / 하나씩 = one each",
+          "sentence": "라면은 한 사람이 하나씩 먹어야 해요.",
           "chunks": [
             { "text": "라면은", "type": "name", "en": "ramen" },
-            { "text": "하나를", "type": "name", "en": "one (whole)" },
-            { "text": "다", "type": "particle", "en": "all of it" },
+            { "text": "한 사람이", "type": "name", "en": "each person" },
+            { "text": "하나씩", "type": "particle", "en": "one each" },
             { "text": "먹어야 해요.", "type": "verb", "en": "have to eat" }
           ]
         },
@@ -434,10 +434,10 @@
         },
         {
           "scene": "😢",
-          "english": "Each person has to eat one whole ramen.",
-          "hint": "먹어야 해요 (have to eat)",
-          "sentence": "라면은 하나를 다 먹어야 해요.",
-          "answer": ["라면은", "하나를", "다", "먹어야", "해요."],
+          "english": "Each person has to eat one each.",
+          "hint": "하나씩 (one each) + 먹어야 해요",
+          "sentence": "라면은 한 사람이 하나씩 먹어야 해요.",
+          "answer": ["라면은", "한 사람이", "하나씩", "먹어야", "해요."],
           "types": ["name", "name", "particle", "verb", "verb"]
         },
         {

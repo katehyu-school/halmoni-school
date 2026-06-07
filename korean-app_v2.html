@@ -11,6 +11,7 @@
 <script src="core/data-loader.js"></script>
 <script src="core/vocab-renderer.js"></script>
 <script src="core/grammar-renderer.js"></script>
+<script src="core/my-space.js"></script>
   <style>
 :root {
   --sky: #5BB8F5;
@@ -8368,7 +8369,7 @@ const B3_SCENE_DATA = {
       [{ko:'할머니 집 근처에 선셋 공원이 있어요.', en:'Near grandma\'s house, there is Sunset Park.', audio:'data/elem/level3/TTS/L3_07/01할머니+집+근처에+선셋+공원이+있어요_slide1.mp3'}],
       [{ko:'저녁에 가면 저녁 노을을 볼 수 있어요.', en:'If you go in the evening, you can see the sunset.', audio:'data/elem/level3/TTS/L3_07/02저녁에+가면+저녁+노을을+볼+수+있어요_slide2.mp3'}],
       [{ko:'나는 저녁 노을을 보면서 라면을 먹고 싶었어요. 그런데 할머니가 라면을 두 개만 준비했어요.', en:'I wanted to eat ramen while watching the sunset. But grandma only prepared two ramens.', audio:'data/elem/level3/TTS/L3_07/03나는+저녁+노을을+보면서+라면을+먹고+싶었어요_+그런데+할머니가+라면을+두+개만+준비했어요_slide3.mp3'}],
-      [{ko:'속상했어요. 라면은 한 사람이 하나를 다 먹어야 해요. 나눠 먹고 싶지 않아요.', en:'I was upset. Each person has to eat one whole ramen. I don\'t want to share.', audio:'data/elem/level3/TTS/L3_07/04속상했어요_+라면은+한+사람이+하나를+다+먹어야+해요_+나눠+먹고+싶지+않아요_slide4.mp3'}],
+      [{ko:'속상했어요. 라면은 한 사람이 하나씩 먹어야 해요. 나눠 먹고 싶지 않아요.', en:'I was upset. Each person has to eat one each. I don\'t want to share.', audio:'data/elem/level3/TTS/L3_07/04속상했어요_+라면은+한+사람이+하나씩+먹어야+해요_+나눠+먹고+싶지+않아요_slide4.mp3'}],
       [{ko:'라면을 먹고 우리는 흔들다리에 갔어요.', en:'After eating ramen, we went to the suspension bridge.', audio:'data/elem/level3/TTS/L3_07/05라면을+먹고+우리는+흔들다리에+갔어요_slide5.mp3'}],
       [
         {ko:'저녁 노을은 근사했어요. 그런데 우리는 물고기 세기가 더 재미있었어요.', en:'The evening glow was wonderful. But counting fish was more fun.', audio:'data/elem/level3/TTS/L3_07/06저녁+노을은+근사했어요_+그런데+우리는+물고기+세기가+더+재미있었어요_slide6.mp3'},
@@ -9400,7 +9401,7 @@ if(document.readyState !== 'loading'){
     <button class="kids-mode-btn" id="kids-mode-grammar" onclick="_kidsSetMode('grammar',this)">📌 문법</button>
   </div>
   <div class="kids-idx-search">
-    <input id="kids-idx-search" placeholder="🔍 한국어 또는 영어로 검색..." oninput="_kidsIdxFilter()" autocomplete="off">
+    <input id="kids-idx-search" placeholder="🔍 한국어 또는 영어로 검색..." oninput="_kidsIdxFilter()" autocomplete="new-password">
   </div>
 
   <div class="kids-idx-jump-bar" id="kids-jump-bar"></div>
@@ -9575,4 +9576,43 @@ if(document.readyState !== 'loading'){
 .b3-dlg-scenario{background:#fafafa;border-radius:16px;padding:18px 16px;border:1.5px solid #eee;}
 .b3-dlg-scene-label{font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dashed #c8ede9;}
 .b3-dlg-scene-en{font-size:.85rem;color:#aaa;font-family:sans-serif;}
-.b3-dlg-line{display:flex;align-item
+.b3-dlg-line{display:flex;align-items:flex-end;gap:8px;margin-bottom:12px;}
+.b3-dlg-other{flex-direction:row;}
+.b3-dlg-me{flex-direction:row-reverse;}
+.b3-dlg-name{font-family:'Jua',sans-serif;font-size:.75rem;color:#999;flex-shrink:0;max-width:52px;text-align:center;line-height:1.3;}
+.b3-dlg-bubble{max-width:75%;border-radius:18px;padding:12px 16px;position:relative;}
+.b3-dlg-other .b3-dlg-bubble{border-bottom-left-radius:4px;}
+.b3-dlg-me    .b3-dlg-bubble{border-bottom-right-radius:4px;}
+.b3-dlg-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;line-height:1.6;}
+.b3-dlg-en{font-size:.78rem;color:rgba(0,0,0,.45);margin-top:4px;}
+/* bubble colors */
+.b3-bubble-blue  {background:#E8EEFF;border:1.5px solid #B0BAFF;}
+.b3-bubble-teal  {background:#E0F5F2;border:1.5px solid #A8D5CC;}
+.b3-bubble-coral {background:#FFE8E4;border:1.5px solid #FFB8A8;}
+.b3-bubble-amber {background:#FFF4DC;border:1.5px solid #FFD580;}
+/* fill bubble */
+.b3-dlg-fill-bubble .b3-dlg-kr{margin-bottom:10px;}
+.b3-dlg-blank{display:inline-block;min-width:48px;border-bottom:2.5px solid #0D7B75;text-align:center;padding:0 6px;color:#0D7B75;font-weight:700;transition:all .2s;}
+.b3-dlg-correct{color:#0D7B75 !important;border-bottom-color:#0D7B75 !important;background:#c8ede9;border-radius:6px;padding:1px 8px;}
+.b3-dlg-blank-shake{animation:b3shake .4s;}
+@keyframes b3shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.b3-dlg-opts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.b3-dlg-opt{background:white;border:2px solid #A8D5CC;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
+.b3-dlg-opt:hover{background:#0D7B75;color:white;border-color:#0D7B75;}
+.b3-dlg-opt-wrong{background:#ffe0e0 !important;border-color:#e44 !important;color:#e44 !important;}
+.b3-dlg-result{text-align:center;margin-top:8px;}
+.b3-dlg-complete{background:linear-gradient(135deg,#EBF7F6,#FFF9E6);border-radius:16px;padding:20px;font-family:'Jua',sans-serif;font-size:1.1rem;color:#0D7B75;border:2px solid #A8D5CC;}
+
+.b3-check-all{background:linear-gradient(135deg,#EBF7F6,#FFF9E6);border-radius:14px;padding:16px;text-align:center;font-family:'Jua',sans-serif;color:#0D7B75;font-size:1rem;border:2px solid #A8D5CC;}
+
+</style>
+
+
+<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
+  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
+  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
+</footer>
+
+<script src="core/my-space.js"></script>
+</body>
+</html>
