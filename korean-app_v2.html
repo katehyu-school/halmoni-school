@@ -1521,10 +1521,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">01</span>
     <span class="lesson-title-text">안녕하세요? <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Hello!</small></span>
   </div>
-  <div class="lesson-item" id="b1-lesson-8" onclick="switchBook1Unit(8)">
-    <span class="lesson-num">✏️</span>
-    <span class="lesson-title-text">써 보기 그림판 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Writing Practice</small></span>
-  </div>
+
   <div class="lesson-item" id="b1-lesson-9" onclick="switchBook1Unit(9)">
     <span class="lesson-num">02</span>
     <span class="lesson-title-text">이게 뭐예요? <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">What is this?</small></span>
@@ -3658,7 +3655,8 @@ function renderBook1Unit(d) {
   else if (d.type === 'combination' || d.type === 'vowel_compound') renderB1Combination(d, pc);
   else if (d.type === 'batchim')   renderB1Batchim(d, pc);
   else if (d.type === 'sentence')  renderB1Sentence(d, pc);
-  else if (d.type === 'canvas')    renderB1Canvas(d, pc);
+  // 모든 unit 끝에 써 보기 캔버스 추가
+  renderB1CanvasSection(d, pc);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -4433,6 +4431,105 @@ function renderB1BatchimTabs(d, pc, c) {
 // ─────────────────────────────────────────────────────────────
 // ✏️ CANVAS unit (써 보기 그림판)
 // ─────────────────────────────────────────────────────────────
+// ✏️ 써 보기 캔버스 섹션 — 모든 unit 하단 공통
+function renderB1CanvasSection(d, pc) {
+  const c = document.getElementById('b1-unit-container');
+  if (!c) return;
+
+  // 유닛 타입별 연습 단어 추출
+  let prompts = [];
+  if (d.chars) {
+    prompts = d.chars.slice(0,8).map(ch => ({text:ch.char, hint:ch.sound||''}));
+  } else if (d.groups) {
+    prompts = (d.groups||[]).flatMap(g=>g.chars||[]).slice(0,6).map(ch=>({text:ch.char,hint:ch.sound||''}));
+  } else if (d.tabs) {
+    const t0 = d.tabs[0]||{};
+    if (t0.words) prompts = t0.words.slice(0,6).map(w=>({text:w.word,hint:w.en||''}));
+    else if (t0.batchim_chars) prompts = t0.batchim_chars.slice(0,6).map(ch=>({text:ch.char,hint:ch.sound||''}));
+  } else if (d.formal_informal) {
+    prompts = (d.formal_informal.pairs||[]).slice(0,5).flatMap(p=>[{text:p.formal,hint:'formal'},{text:p.informal,hint:'informal'}]).slice(0,6);
+  } else if (d.pattern && d.pattern.items) {
+    prompts = (d.pattern.items||[]).slice(0,4).map(i=>({text:i.q_formal||i.formal||i.kr||'',hint:''}));
+  } else if (d.prompts) {
+    prompts = d.prompts.slice(0,6).map(p=>({text:p.text,hint:p.hint||''}));
+  }
+  if (prompts.length === 0) prompts = [{text:'가나다',hint:'practice'},{text:'아이우',hint:'vowels'}];
+  prompts = prompts.filter(p=>p.text);
+
+  const uid = 'b1cs_'+(d.unit||0);
+  const btnHtml = prompts.map((p,i)=>
+    `<button onclick="b1csSetPrompt('${uid}',${i},this,'${pc}')" style="background:${i===0?pc:'#f0f0f0'};color:${i===0?'#fff':'#555'};border:2px solid ${pc}44;border-radius:8px;padding:5px 11px;font-size:1rem;font-weight:700;cursor:pointer;">${p.text}</button>`
+  ).join('');
+
+  c.innerHTML += `<div style="margin-top:24px;border-top:2px dashed ${pc}30;padding-top:14px;">
+    <button onclick="b1csToggle('${uid}')" style="background:${pc}12;border:2px solid ${pc}33;border-radius:12px;padding:10px 18px;font-size:.9rem;font-weight:800;color:${pc};cursor:pointer;width:100%;text-align:left;">
+      &#x270F;&#xFE0F; 써 보기 Writing Practice <span id="${uid}-arrow" style="float:right;font-size:.8rem;">▼ 펼치기</span>
+    </button>
+    <div id="${uid}-body" style="display:none;margin-top:12px;">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">${btnHtml}</div>
+      <div id="${uid}-prompt" style="background:${pc}10;border-radius:10px;padding:12px 8px;text-align:center;margin-bottom:10px;">
+        <div style="font-size:3rem;font-weight:900;color:${pc};letter-spacing:.08em;">${prompts[0]?.text||''}</div>
+        <div style="font-size:.75rem;color:#aaa;margin-top:4px;">${prompts[0]?.hint||''}</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;border:2px solid ${pc}30;overflow:hidden;margin-bottom:8px;">
+        <canvas id="${uid}-canvas" style="display:block;touch-action:none;cursor:crosshair;width:100%;"></canvas>
+      </div>
+      <button onclick="b1csClear('${uid}')" style="width:100%;background:#f5f5f5;color:#777;border:none;border-radius:10px;padding:9px;font-size:.85rem;font-weight:700;cursor:pointer;">&#x1F5D1;&#xFE0F; 지우기 Clear</button>
+    </div>
+  </div>`;
+
+  window._b1csPrompts = window._b1csPrompts||{};
+  window._b1csPrompts[uid] = prompts;
+  window._b1csCtx = window._b1csCtx||{};
+}
+
+window.b1csToggle = function(uid) {
+  const body = document.getElementById(uid+'-body');
+  const arrow = document.getElementById(uid+'-arrow');
+  if (!body) return;
+  const opening = body.style.display==='none';
+  body.style.display = opening?'block':'none';
+  if (arrow) arrow.textContent = opening?'▲ 접기':'▼ 펼치기';
+  if (opening) setTimeout(()=>b1csInitCanvas(uid), 30);
+};
+
+function b1csInitCanvas(uid) {
+  const canvas = document.getElementById(uid+'-canvas');
+  if (!canvas || canvas._b1csInit) return;
+  canvas._b1csInit = true;
+  canvas.width = canvas.parentElement.clientWidth||320;
+  canvas.height = 180;
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle='#222'; ctx.lineWidth=5; ctx.lineCap='round'; ctx.lineJoin='round';
+  window._b1csCtx[uid] = ctx;
+  let drawing=false;
+  function pos(e){const r=canvas.getBoundingClientRect();const s=e.touches?e.touches[0]:e;return[(s.clientX-r.left)*(canvas.width/r.width),(s.clientY-r.top)*(canvas.height/r.height)];}
+  canvas.addEventListener('mousedown',e=>{drawing=true;ctx.beginPath();const[x,y]=pos(e);ctx.moveTo(x,y);});
+  canvas.addEventListener('mousemove',e=>{if(!drawing)return;const[x,y]=pos(e);ctx.lineTo(x,y);ctx.stroke();});
+  canvas.addEventListener('mouseup',()=>drawing=false);
+  canvas.addEventListener('mouseleave',()=>drawing=false);
+  canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;ctx.beginPath();const[x,y]=pos(e);ctx.moveTo(x,y);},{passive:false});
+  canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const[x,y]=pos(e);ctx.lineTo(x,y);ctx.stroke();},{passive:false});
+  canvas.addEventListener('touchend',()=>drawing=false);
+}
+
+window.b1csClear = function(uid) {
+  const canvas=document.getElementById(uid+'-canvas');
+  const ctx=window._b1csCtx&&window._b1csCtx[uid];
+  if(canvas&&ctx) ctx.clearRect(0,0,canvas.width,canvas.height);
+};
+
+window.b1csSetPrompt = function(uid, i, btn, pc) {
+  const prompts=window._b1csPrompts&&window._b1csPrompts[uid];
+  if(!prompts) return;
+  const p=prompts[i];
+  const pdiv=document.getElementById(uid+'-prompt');
+  if(pdiv&&p) pdiv.innerHTML=`<div style="font-size:3rem;font-weight:900;color:${pc};letter-spacing:.08em;">${p.text}</div><div style="font-size:.75rem;color:#aaa;margin-top:4px;">${p.hint}</div>`;
+  const par=btn.parentElement;
+  if(par) par.querySelectorAll('button').forEach((b,j)=>{b.style.background=j===i?pc:'#f0f0f0';b.style.color=j===i?'#fff':'#555';});
+  b1csClear(uid);
+};
+
 function renderB1Canvas(d, pc) {
   const c = document.getElementById('b1-unit-container');
   const prompts = d.prompts || [];
@@ -4684,6 +4781,8 @@ function renderB1Prereq(d) {
   <div id="b1pre-words"      style="display:none;"></div>
   <div id="b1pre-game"       style="display:none;"></div>`;
   renderB1PreVowels(d); renderB1PreConsonants(d); renderB1PreSyllable(d); renderB1PreWords(d); renderB1PreGame(d);
+
+  renderB1CanvasSection(d, '#26A69A');
 }
 
 function b1PreTab(name){
