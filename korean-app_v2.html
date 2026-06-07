@@ -4704,7 +4704,7 @@ function renderB1SentenceGame(game, pc) {
     }
     const r = rounds[idx];
     const btns = r.choices.map(ch =>
-      `<button onclick="window._b1SAns('${ch.replace(/'/g,"\\'")}','${r.answer.replace(/'/g,"\\'")}','${r.emoji||''}')" style="background:#fff;border:3px solid ${pc}30;border-radius:12px;padding:14px 16px;font-size:.95rem;font-weight:700;cursor:pointer;text-align:left;color:#222;transition:.15s;width:100%;" onmouseover="this.style.borderColor='${pc}'" onmouseout="this.style.borderColor='${pc}30'">${ch}</button>`
+      `<button onclick="window._b1SAns('${ch.replace(/'/g,"\\'")}','${(r.answer||r.correct||'').replace(/'/g,"\\'")}','${r.emoji||''}')" style="background:#fff;border:3px solid ${pc}30;border-radius:12px;padding:14px 16px;font-size:.95rem;font-weight:700;cursor:pointer;text-align:left;color:#222;transition:.15s;width:100%;" onmouseover="this.style.borderColor='${pc}'" onmouseout="this.style.borderColor='${pc}30'">${ch}</button>`
     ).join('');
     wrap.innerHTML = `<div style="background:#faf8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
       <div style="font-size:.85rem;font-weight:700;color:${pc};margin-bottom:12px;">🎮 ${game.title}</div>
