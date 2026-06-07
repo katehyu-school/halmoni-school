@@ -226,7 +226,11 @@
               "english": "You must not sleep late.",
               "highlight": "자면 안 돼요"
             }
-          ]
+          ],
+          "connective_label": {
+            "function_ko": "조건",
+            "function_en": "Condition · If"
+          }
         },
         {
           "id": "g06_myeon",
@@ -262,7 +266,11 @@
               "english": "If you do homework, you can play.",
               "highlight": "하면"
             }
-          ]
+          ],
+          "connective_label": {
+            "function_ko": "조건",
+            "function_en": "Condition · If"
+          }
         }
       ]
     },
@@ -279,7 +287,11 @@
               "en": "Grandma, please don't put eggs in my gimbap.",
               "type": "fill",
               "ans": "넣지",
-              "opts": ["넣지", "먹지", "가지"]
+              "opts": [
+                "넣지",
+                "먹지",
+                "가지"
+              ]
             },
             {
               "speaker": "할머니",
@@ -315,7 +327,11 @@
               "en": "If I eat eggs, my stomach hurts.",
               "type": "fill",
               "ans": "먹으면",
-              "opts": ["먹으면", "먹어서", "먹으니까"]
+              "opts": [
+                "먹으면",
+                "먹어서",
+                "먹으니까"
+              ]
             },
             {
               "speaker": "카요",
@@ -344,7 +360,11 @@
               "en": "No, you must not run here.",
               "type": "fill",
               "ans": "뛰면",
-              "opts": ["뛰면", "뛰고", "뛰지"]
+              "opts": [
+                "뛰면",
+                "뛰고",
+                "뛰지"
+              ]
             },
             {
               "speaker": "리암",
@@ -361,35 +381,55 @@
           "q": "저는 계란",
           "suffix": "먹어요.",
           "ans": "못",
-          "opts": ["못", "안", "잘"],
+          "opts": [
+            "못",
+            "안",
+            "잘"
+          ],
           "en": "I can't eat eggs."
         },
         {
           "q": "계란 넣",
           "suffix": "마세요.",
           "ans": "지",
-          "opts": ["지", "고", "으면"],
+          "opts": [
+            "지",
+            "고",
+            "으면"
+          ],
           "en": "Please don't put in eggs."
         },
         {
           "q": "편식을 하",
           "suffix": "안 돼요.",
           "ans": "면",
-          "opts": ["면", "지", "고"],
+          "opts": [
+            "면",
+            "지",
+            "고"
+          ],
           "en": "You must not be a picky eater."
         },
         {
           "q": "계란을 먹",
           "suffix": "배가 아파요.",
           "ans": "으면",
-          "opts": ["으면", "어서", "지만"],
+          "opts": [
+            "으면",
+            "어서",
+            "지만"
+          ],
           "en": "If I eat eggs, my stomach hurts."
         },
         {
           "q": "음식을 골고루 먹어야",
           "suffix": ".",
           "ans": "돼요",
-          "opts": ["돼요", "해요", "가요"],
+          "opts": [
+            "돼요",
+            "해요",
+            "가요"
+          ],
           "en": "You should eat a variety of food."
         }
       ],
@@ -609,24 +649,64 @@
           "english": "Please don't put eggs in my gimbap.",
           "hint": "넣지 마세요 (please don't put in)",
           "sentence": "제 김밥에는 계란 넣지 마세요.",
-          "answer": ["제", "김밥에는", "계란", "넣지", "마세요."],
-          "types": ["name", "particle", "name", "verb", "verb"]
+          "answer": [
+            "제",
+            "김밥에는",
+            "계란",
+            "넣지",
+            "마세요."
+          ],
+          "types": [
+            "name",
+            "particle",
+            "name",
+            "verb",
+            "verb"
+          ]
         },
         {
           "scene": "🤕",
           "english": "If I eat eggs, my stomach hurts.",
           "hint": "먹으면 (if I eat) + 배가 아파요",
           "sentence": "계란을 먹으면 배가 아파요.",
-          "answer": ["계란", "을", "먹으면", "배가", "아파요."],
-          "types": ["name", "particle", "verb", "name", "verb"]
+          "answer": [
+            "계란",
+            "을",
+            "먹으면",
+            "배가",
+            "아파요."
+          ],
+          "types": [
+            "name",
+            "particle",
+            "verb",
+            "name",
+            "verb"
+          ]
         },
         {
           "scene": "🐰",
           "english": "You must not be a picky eater. Eat a variety of food!",
           "hint": "🐰 마지막 문제! 하면 안 돼요 + 골고루!",
           "sentence": "편식을 하면 안 돼요. 음식을 골고루 먹어요!",
-          "answer": ["편식을", "하면", "안", "돼요.", "음식을", "골고루", "먹어요!"],
-          "types": ["name", "verb", "verb", "verb", "name", "particle", "verb"]
+          "answer": [
+            "편식을",
+            "하면",
+            "안",
+            "돼요.",
+            "음식을",
+            "골고루",
+            "먹어요!"
+          ],
+          "types": [
+            "name",
+            "verb",
+            "verb",
+            "verb",
+            "name",
+            "particle",
+            "verb"
+          ]
         }
       ],
       "write_items": [
