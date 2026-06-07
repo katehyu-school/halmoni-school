@@ -539,6 +539,27 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
+## ✅ 2026-06-07 완료 작업 (HQ Kids Level 1 버그 수정 + 모음분류 게임 개선)
+
+### korean-app_v2.html 버그 수정
+- **블럭 조합 undefined 버그**: JSON 필드명 불일치 (`r.target` → `r.result`) 수정
+- **sentence units 01-04 로드 실패**: `r.answer.replace(...)` → `(r.answer||r.correct||'').replace(...)` (picture_game은 `correct` 필드 사용)
+- **Level 1 사이드바 정리**: 카테고리 헤더 제거 → 가로선 구분 + 영어 병기
+- **써 보기 그림판**: 사이드바 독립 항목 → 각 unit 내 접이식 섹션으로 이동
+
+### 모음 분류 게임 전면 개선
+- **비주얼 블럭 버튼**: 텍스트 "세로/가로" → ㄱ+모음 블럭 다이어그램으로 시각화
+  - 왼쪽: [ㄱ][모음] 나란히 = 자음 오른쪽 (SIDE)
+  - 오른쪽: [ㄱ] 위 / [모음] 아래 = 자음 아래 (BELOW)
+- **다음 → 버튼**: 정답/오답 후 수동 버튼으로 진행
+- **전역 상태 방식**: 클로저 버그 → `window._b1CG` + `_b1CGShow/Ans/Next()` 독립 전역 함수
+
+### ⚠️ 작업 교훈 (이번 세션)
+- Python heredoc에서 JS 따옴표 이스케이프 실패 → 전체 스크립트 로드 불가
+- **항상 백틱(template literal) 사용**, 결과 JS 문법 반드시 검증
+
+---
+
 ## 🔜 다음 작업 예정 (2026-06-07 기준)
 
 ### 🚧 HQ Kids — Level 1 전면 개편 (2026-06-07 확정)
