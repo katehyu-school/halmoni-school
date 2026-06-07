@@ -4497,7 +4497,8 @@ function b3S1Check() {
     const wrap=document.getElementById('b3-s1-wrap');
     if(wrap&&!wrap.querySelector('.b3-ans-hint')){
       const h=document.createElement('div');h.className='b3-ans-hint';h.textContent='✨ 정답: '+q.sentence;
-      const cb=wrap.querySelector('.b3-check-btn');if(cb){cb.parentNode.insertBefore(h,cb.nextSibling);}
+      const cb=wrap.querySelector('.b3-check-btn');
+      if(cb){cb.parentNode.insertBefore(h,cb.nextSibling);cb.textContent='다음 →';cb.onclick=()=>{b3S1Idx++;b3RenderS1();};}
     }
   }
 }
@@ -4556,7 +4557,8 @@ function b3S2Check() {
     const wrap=document.getElementById('b3-s2-wrap');
     if(wrap&&!wrap.querySelector('.b3-ans-hint')){
       const h=document.createElement('div');h.className='b3-ans-hint';h.textContent='✨ 정답: '+q.sentence;
-      const cb=wrap.querySelector('.b3-check-btn');if(cb){cb.parentNode.insertBefore(h,cb.nextSibling);}
+      const cb=wrap.querySelector('.b3-check-btn');
+      if(cb){cb.parentNode.insertBefore(h,cb.nextSibling);cb.textContent='다음 →';cb.onclick=()=>{b3S2Idx++;b3RenderS2();};}
     }
   }
 }
