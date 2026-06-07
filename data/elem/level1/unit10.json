@@ -1,0 +1,141 @@
+{
+  "unit": 10,
+  "book": 1,
+  "type": "batchim",
+  "title": "받침 2 — ㄱ ㅂ ㅅ계열",
+  "phase": "batchim",
+  "goal": {
+    "ko": "더 많은 받침을 읽을 수 있어요!",
+    "en": "I can read more final consonants!"
+  },
+  "batchim_chars": [
+    {
+      "char": "ㄱ",
+      "sound": "k (stopped)",
+      "color": "#1565C0",
+      "emoji": "🎸",
+      "examples": [
+        "국",
+        "학",
+        "박"
+      ]
+    },
+    {
+      "char": "ㅂ",
+      "sound": "p (stopped)",
+      "color": "#1565C0",
+      "emoji": "👏",
+      "examples": [
+        "입",
+        "밥",
+        "답"
+      ]
+    },
+    {
+      "char": "ㄷ",
+      "sound": "t (stopped)",
+      "color": "#1565C0",
+      "emoji": "🌿",
+      "note": "ㄷ ㅅ ㅆ ㅈ ㅊ ㅌ ㅎ all → t sound at end",
+      "examples": [
+        "꽃",
+        "낮",
+        "맛"
+      ]
+    }
+  ],
+  "note": {
+    "ko": "⚠️ 받침은 크게 7가지 소리로 줄어요! 7 ending sounds only!",
+    "en": "Many different consonants share the same ending sound!"
+  },
+  "block_game": {
+    "title": "🧱 받침 완성!",
+    "instruction": "올바른 받침을 탭하세요!",
+    "rounds": [
+      {
+        "base_con": "ㄱ",
+        "base_vow": "ㅜ",
+        "base_syl": "구",
+        "batchim": "ㄱ",
+        "result": "국",
+        "hint": "국 = soup",
+        "choices": [
+          "ㄱ",
+          "ㄴ",
+          "ㅂ",
+          "ㅁ"
+        ]
+      },
+      {
+        "base_con": "ㅇ",
+        "base_vow": "ㅣ",
+        "base_syl": "이",
+        "batchim": "ㅂ",
+        "result": "입",
+        "hint": "입 = mouth",
+        "choices": [
+          "ㅂ",
+          "ㄱ",
+          "ㄴ",
+          "ㄹ"
+        ]
+      },
+      {
+        "base_con": "ㄴ",
+        "base_vow": "ㅏ",
+        "base_syl": "나",
+        "batchim": "ㄱ",
+        "result": "낙",
+        "hint": "낙엽(falling leaf)",
+        "choices": [
+          "ㄱ",
+          "ㄴ",
+          "ㅂ",
+          "ㅇ"
+        ]
+      },
+      {
+        "base_con": "ㅂ",
+        "base_vow": "ㅏ",
+        "base_syl": "바",
+        "batchim": "ㅂ",
+        "result": "밥",
+        "hint": "밥 = rice",
+        "choices": [
+          "ㅂ",
+          "ㄱ",
+          "ㄴ",
+          "ㄹ"
+        ]
+      },
+      {
+        "base_con": "ㅅ",
+        "base_vow": "ㅓ",
+        "base_syl": "서",
+        "batchim": "ㄱ",
+        "result": "석",
+        "hint": "석양(sunset)",
+        "choices": [
+          "ㄱ",
+          "ㅂ",
+          "ㄴ",
+          "ㅁ"
+        ]
+      },
+      {
+        "base_con": "ㅈ",
+        "base_vow": "ㅏ",
+        "base_syl": "자",
+        "batchim": "ㅂ",
+        "result": "잡",
+        "hint": "잡다(to catch)",
+        "choices": [
+          "ㅂ",
+          "ㄱ",
+          "ㅇ",
+          "ㄹ"
+        ]
+      }
+    ]
+  }
+}

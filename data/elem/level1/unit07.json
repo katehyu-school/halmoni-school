@@ -1,199 +1,164 @@
 {
   "unit": 7,
-  "title": "🛏️ 방에 침대가 있어요!",
   "book": 1,
+  "type": "combination",
+  "title": "블럭 조합 2",
+  "phase": "combination",
   "goal": {
-    "ko": "방에 뭐가 있는지 말할 수 있어요! 🛋️",
-    "en": "I can say what's in my room!"
+    "ko": "더 많은 자음으로 단어를 만들어요!",
+    "en": "Make words with more consonants!"
   },
-  "key_points": [
-    "있어요 = there is / I have",
-    "없어요 = there isn't / I don't have",
-    "방에 침대가 있어요 = There is a bed in the room"
+  "consonants": [
+    "ㅂ",
+    "ㅅ",
+    "ㅇ",
+    "ㅈ",
+    "ㅊ",
+    "ㅎ"
   ],
-  "sections": {
-    "vocab": {
-      "🛋️ 방 가구 Bedroom Furniture": [
-        { "emoji": "🛏️", "kr": "침대", "en": "bed", "rom": "chim-dae" },
-        { "emoji": "📚", "kr": "책상", "en": "desk", "rom": "chaek-sang" },
-        { "emoji": "🪑", "kr": "의자", "en": "chair", "rom": "ui-ja" },
-        { "emoji": "🪟", "kr": "창문", "en": "window", "rom": "chang-mun" },
-        { "emoji": "🚪", "kr": "문", "en": "door", "rom": "mun" },
-        { "emoji": "🪴", "kr": "화분", "en": "plant / flower pot", "rom": "hwa-bun" },
-        { "emoji": "💡", "kr": "램프", "en": "lamp", "rom": "raem-peu" },
-        { "emoji": "📺", "kr": "텔레비전", "en": "television / TV", "rom": "tel-le-bi-jeon" }
-      ],
-      "🏠 집 안 Around the House": [
-        { "emoji": "🛁", "kr": "욕실", "en": "bathroom", "rom": "yok-sil" },
-        { "emoji": "🍳", "kr": "부엌", "en": "kitchen", "rom": "bu-eok" },
-        { "emoji": "🛋️", "kr": "거실", "en": "living room", "rom": "geo-sil" }
-      ]
-    },
-    "grammar": {
-      "sections": [
-        {
-          "id": "g07_isseo_eopseo",
-          "title": "있어요 / 없어요",
-          "subtitle": "There is / There isn't",
-          "pattern": "장소에 N이/가 있어요 · 없어요",
-          "meaning": "Something exists (or doesn't) in a place",
-          "description": "있어요 means 'there is' or 'I have'. 없어요 is the opposite — 'there isn't' or 'I don't have'. Add 에 after the place!",
-          "rule_boxes": [
-            {
-              "color": "green",
-              "label": "✅ 있어요 — There IS / I HAVE",
-              "examples": [
-                "방에 침대가 있어요. = There is a bed in the room.",
-                "책상이 있어요. = There is a desk.",
-                "고양이가 있어요. = There is a cat."
-              ]
-            },
-            {
-              "color": "red",
-              "label": "❌ 없어요 — There ISN'T / I DON'T HAVE",
-              "examples": [
-                "방에 텔레비전이 없어요. = There's no TV in the room.",
-                "화분이 없어요. = There is no plant.",
-                "강아지가 없어요. = There is no dog."
-              ]
-            },
-            {
-              "color": "blue",
-              "label": "📍 장소 + 에 → 에 marks LOCATION",
-              "examples": [
-                "방에 = in the room",
-                "거실에 = in the living room",
-                "부엌에 = in the kitchen"
-              ]
-            }
-          ],
-          "examples": [
-            { "korean": "방에 침대가 있어요.", "english": "There is a bed in the room.", "highlight": "있어요" },
-            { "korean": "방에 텔레비전이 없어요.", "english": "There is no TV in the room.", "highlight": "없어요" },
-            { "korean": "거실에 소파가 있어요.", "english": "There is a sofa in the living room.", "highlight": "있어요" }
-          ]
-        }
-      ]
-    },
-    "practice": {
-      "dialogue_practice": [
-        {
-          "scene": "🏠 방 구경 — Room tour",
-          "scene_en": "Showing someone your room",
-          "lines": [
-            { "speaker": "마야", "color": "purple", "text": "와, 예쁜 방이에요! 침대가 있어요?", "en": "Wow, pretty room! Is there a bed?", "type": "given" },
-            { "speaker": "애라", "color": "coral", "text": "네, 침대가 ___! 저기 봐요~ 🛏️", "en": "Yes, there is a bed! Look there~", "type": "fill", "ans": "있어요", "opts": ["있어요", "없어요", "예요"] },
-            { "speaker": "마야", "color": "purple", "text": "텔레비전도 있어요?", "en": "Is there a TV too?", "type": "given" },
-            { "speaker": "애라", "color": "coral", "text": "아니요, 텔레비전이 ___. 책상만 있어요. 📚", "en": "No, there's no TV. Just a desk.", "type": "fill", "ans": "없어요", "opts": ["없어요", "있어요", "이에요"] }
-          ]
-        },
-        {
-          "scene": "🎮 우리 집 자랑 — Showing off my house",
-          "scene_en": "Bragging about the house",
-          "lines": [
-            { "speaker": "해리", "color": "blue", "text": "우리 집 거실에 큰 텔레비전이 있어요! 📺", "en": "There's a big TV in our living room!", "type": "given" },
-            { "speaker": "루카스", "color": "amber", "text": "와! 우리 집에 텔레비전이 ___. 😢", "en": "Wow! There's no TV in our house.", "type": "fill", "ans": "없어요", "opts": ["없어요", "있어요", "예요"] },
-            { "speaker": "해리", "color": "blue", "text": "그럼 컴퓨터가 ___?", "en": "Then is there a computer?", "type": "given" },
-            { "speaker": "루카스", "color": "amber", "text": "네, 컴퓨터가 있어요! 💻", "en": "Yes, there's a computer!", "type": "given" }
-          ]
-        },
-        {
-          "scene": "🔍 방 퀴즈 — Room quiz",
-          "scene_en": "Guessing what's in the room",
-          "lines": [
-            { "speaker": "레오", "color": "mint", "text": "올리비아 방에 화분이 있어요?", "en": "Is there a plant in Olivia's room?", "type": "given" },
-            { "speaker": "올리비아", "color": "teal", "text": "네! 화분이 세 개 ___! 🪴🪴🪴", "en": "Yes! There are three plants!", "type": "fill", "ans": "있어요", "opts": ["있어요", "없어요", "예요"] },
-            { "speaker": "레오", "color": "mint", "text": "램프도 있어요?", "en": "Is there a lamp too?", "type": "given" },
-            { "speaker": "올리비아", "color": "teal", "text": "아니요, 램프가 ___. 창문이 있어요! 🪟", "en": "No, there's no lamp. There's a window!", "type": "given" }
-          ]
-        }
-      ],
-      "fill_items": [
-        { "q": "방에 침대가", "suffix": ".", "ans": "있어요", "opts": ["있어요", "없어요", "이에요"], "en": "There is a bed in the room." },
-        { "q": "부엌에 텔레비전이", "suffix": ".", "ans": "없어요", "opts": ["없어요", "있어요", "예요"], "en": "There's no TV in the kitchen." },
-        { "q": "거실에 소파가", "suffix": "?", "ans": "있어요", "opts": ["있어요", "없어요", "이에요"], "en": "Is there a sofa in the living room?" },
-        { "q": "방에 창문이 몇 개", "suffix": "?", "ans": "있어요", "opts": ["있어요", "없어요", "예요"], "en": "How many windows are in the room?" },
-        { "q": "우리 집에 화분이", "suffix": ".", "ans": "없어요", "opts": ["없어요", "있어요", "예요"], "en": "There's no plant in our house." }
-      ],
-      "listen_quiz": [
-        {
-          "audio": "방에 침대가 있어요.",
-          "correct": 0,
-          "choices": [
-            { "emoji": "🛏️", "kr": "침대", "en": "bed" },
-            { "emoji": "📺", "kr": "텔레비전", "en": "TV" },
-            { "emoji": "🪴", "kr": "화분", "en": "plant" }
-          ]
-        },
-        {
-          "audio": "거실에 텔레비전이 없어요.",
-          "correct": 2,
-          "choices": [
-            { "emoji": "✅", "kr": "있어요", "en": "there is" },
-            { "emoji": "🤔", "kr": "뭐예요?", "en": "what is it?" },
-            { "emoji": "❌", "kr": "없어요", "en": "there isn't" }
-          ]
-        },
-        {
-          "audio": "방에 책상이 있어요? — 네, 있어요.",
-          "correct": 1,
-          "choices": [
-            { "emoji": "❌", "kr": "아니요, 없어요", "en": "No, there isn't" },
-            { "emoji": "✅", "kr": "네, 있어요", "en": "Yes, there is" },
-            { "emoji": "🤔", "kr": "모르겠어요", "en": "I don't know" }
-          ]
-        }
-      ],
-      "mini_game": {
-        "type": "yesno",
-        "title": "🎮 방 탐정! Room Detective!",
-        "instruction": "그림을 보고 있어요? 없어요? 빨리 눌러요! Look and decide: 있어요 or 없어요?",
-        "rounds": [
-          { "image_emoji": "🛏️", "question": "방에 침대가 있어요?", "answer": true },
-          { "image_emoji": "📺", "question": "방에 텔레비전이 있어요?", "answer": false, "real": "없어요" },
-          { "image_emoji": "📚", "question": "방에 책상이 있어요?", "answer": true },
-          { "image_emoji": "🪴", "question": "부엌에 화분이 있어요?", "answer": false, "real": "없어요" },
-          { "image_emoji": "🚪", "question": "방에 문이 있어요?", "answer": true },
-          { "image_emoji": "🛁", "question": "방에 욕실이 있어요?", "answer": false, "real": "없어요" }
-        ]
+  "vowels": [
+    "ㅏ",
+    "ㅓ",
+    "ㅗ",
+    "ㅜ",
+    "ㅡ",
+    "ㅣ"
+  ],
+  "block_game": {
+    "title": "🧱 단어 블럭 조립!",
+    "instruction": "자음 + 모음을 탭해서 음절을 만들고, 단어를 완성해요!",
+    "rounds": [
+      {
+        "target": "바",
+        "con": "ㅂ",
+        "vow": "ㅏ",
+        "hint": "바나나(banana)"
+      },
+      {
+        "target": "사",
+        "con": "ㅅ",
+        "vow": "ㅏ",
+        "hint": "사과(apple)"
+      },
+      {
+        "target": "아",
+        "con": "ㅇ",
+        "vow": "ㅏ",
+        "hint": "아이(child)"
+      },
+      {
+        "target": "자",
+        "con": "ㅈ",
+        "vow": "ㅏ",
+        "hint": "자전거(bicycle)"
+      },
+      {
+        "target": "차",
+        "con": "ㅊ",
+        "vow": "ㅏ",
+        "hint": "차(car)"
+      },
+      {
+        "target": "하",
+        "con": "ㅎ",
+        "vow": "ㅏ",
+        "hint": "하늘(sky)"
+      },
+      {
+        "target": "보",
+        "con": "ㅂ",
+        "vow": "ㅗ",
+        "hint": "보라(purple)"
+      },
+      {
+        "target": "소",
+        "con": "ㅅ",
+        "vow": "ㅗ",
+        "hint": "소(cow)"
+      },
+      {
+        "target": "오",
+        "con": "ㅇ",
+        "vow": "ㅗ",
+        "hint": "오리(duck)"
+      },
+      {
+        "target": "호",
+        "con": "ㅎ",
+        "vow": "ㅗ",
+        "hint": "호랑이(tiger)"
+      },
+      {
+        "target": "지",
+        "con": "ㅈ",
+        "vow": "ㅣ",
+        "hint": "지도(map)"
+      },
+      {
+        "target": "히",
+        "con": "ㅎ",
+        "vow": "ㅣ",
+        "hint": "히히(hehe)"
       }
+    ]
+  },
+  "words": [
+    {
+      "word": "바나나",
+      "en": "banana",
+      "emoji": "🍌",
+      "syllables": [
+        "바",
+        "나",
+        "나"
+      ]
     },
-    "real_life": {
-      "title": "🗣️ 실생활 — Real Life",
-      "subtitle": "내 방을 소개해요!",
-      "dialogues": [
-        {
-          "title": "🏠 대화 1 — 방 소개",
-          "title_en": "Describing your room",
-          "bg": "#FFF3E0",
-          "hdr": "#E65100",
-          "lines": [
-            { "role": "A", "color": "#FFA726", "kr": "네 방에 뭐가 있어요?", "en": "What's in your room?" },
-            { "role": "B", "color": "#E65100", "kr": "침대하고 책상이 있어요. 그리고 창문이 두 개 있어요.", "en": "There's a bed and a desk. And there are two windows." },
-            { "role": "A", "color": "#FFA726", "kr": "텔레비전도 있어요?", "en": "Is there a TV too?" },
-            { "role": "B", "color": "#E65100", "kr": "아니요, 텔레비전이 없어요. 거실에 있어요!", "en": "No, there's no TV. It's in the living room!" }
-          ],
-          "summary": { "kr": "방에 뭐가 있어요? — 내 방을 소개해 봐요!", "en": "What's in your room? Tell someone about it!", "highlight": "있어요 / 없어요" }
-        },
-        {
-          "title": "🔍 대화 2 — 물건 찾기",
-          "title_en": "Looking for something",
-          "bg": "#E8EAF6",
-          "hdr": "#3949AB",
-          "lines": [
-            { "role": "A", "color": "#7986CB", "kr": "엄마, 내 책 어디 있어요?", "en": "Mom, where is my book?" },
-            { "role": "B", "color": "#3949AB", "kr": "방에 있어요. 책상 위에!", "en": "It's in your room. On the desk!" },
-            { "role": "A", "color": "#7986CB", "kr": "아, 맞아요! 고마워요! 😊", "en": "Oh right! Thank you!" }
-          ],
-          "summary": { "kr": "'어디 있어요?' — 물건 위치를 물어볼 수 있어요!", "en": "'어디 있어요?' — Ask where things are!", "highlight": "어디 있어요?" }
-        }
+    {
+      "word": "사자",
+      "en": "lion",
+      "emoji": "🦁",
+      "syllables": [
+        "사",
+        "자"
+      ]
+    },
+    {
+      "word": "아이",
+      "en": "child",
+      "emoji": "👧",
+      "syllables": [
+        "아",
+        "이"
+      ]
+    },
+    {
+      "word": "자동차",
+      "en": "car",
+      "emoji": "🚗",
+      "syllables": [
+        "자",
+        "동",
+        "차"
+      ]
+    },
+    {
+      "word": "호랑이",
+      "en": "tiger",
+      "emoji": "🐯",
+      "syllables": [
+        "호",
+        "랑",
+        "이"
+      ]
+    },
+    {
+      "word": "하마",
+      "en": "hippo",
+      "emoji": "🦛",
+      "syllables": [
+        "하",
+        "마"
       ]
     }
-  },
-  "self_check": [
-    { "ko": "'방에 침대가 있어요'처럼 말할 수 있어요.", "en": "I can say 방에 침대가 있어요." },
-    { "ko": "'텔레비전이 없어요'처럼 없는 것을 말할 수 있어요.", "en": "I can say something doesn't exist with 없어요." },
-    { "ko": "가구 이름을 5개 이상 알아요.", "en": "I know 5+ furniture/room words." },
-    { "ko": "집 안 장소를 3개 이상 말할 수 있어요.", "en": "I can name 3+ rooms in a house." }
   ]
 }

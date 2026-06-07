@@ -1,0 +1,136 @@
+{
+  "unit": 13,
+  "book": 1,
+  "type": "sentence",
+  "title": "있어요? 없어요?",
+  "phase": "sentence",
+  "goal": {
+    "ko": "N이/가 있어요/없어요로 있는지 없는지 말할 수 있어요!",
+    "en": "I can say if something exists or not!"
+  },
+  "pattern": {
+    "rule": "N이/가 있어요 / 없어요",
+    "items": [
+      {
+        "kr": "있어요",
+        "en": "there is / I have",
+        "emoji": "✅"
+      },
+      {
+        "kr": "없어요",
+        "en": "there isn't / I don't have",
+        "emoji": "❌"
+      }
+    ],
+    "note_ko": "받침 있으면 이 / 받침 없으면 가",
+    "note_en": "Consonant ending → 이 / Vowel ending → 가",
+    "examples": [
+      {
+        "kr": "고양이가 있어요.",
+        "en": "There is a cat."
+      },
+      {
+        "kr": "강아지가 없어요.",
+        "en": "There is no dog."
+      },
+      {
+        "kr": "사과가 있어요.",
+        "en": "There is an apple."
+      },
+      {
+        "kr": "책이 없어요.",
+        "en": "There is no book."
+      }
+    ]
+  },
+  "vocab": [
+    {
+      "word": "고양이",
+      "en": "cat",
+      "emoji": "🐱"
+    },
+    {
+      "word": "강아지",
+      "en": "dog",
+      "emoji": "🐕"
+    },
+    {
+      "word": "사과",
+      "en": "apple",
+      "emoji": "🍎"
+    },
+    {
+      "word": "책",
+      "en": "book",
+      "emoji": "📚"
+    },
+    {
+      "word": "연필",
+      "en": "pencil",
+      "emoji": "✏️"
+    },
+    {
+      "word": "우유",
+      "en": "milk",
+      "emoji": "🥛"
+    },
+    {
+      "word": "의자",
+      "en": "chair",
+      "emoji": "🪑"
+    },
+    {
+      "word": "가방",
+      "en": "bag",
+      "emoji": "👜"
+    }
+  ],
+  "find_game": {
+    "title": "🎮 있어요? 없어요?",
+    "instruction": "그림을 보고 있어요 또는 없어요를 고르세요!",
+    "rounds": [
+      {
+        "scene": "냉장고에",
+        "emoji": "🥛",
+        "has": true,
+        "answer": "우유가 있어요.",
+        "alt": "우유가 없어요."
+      },
+      {
+        "scene": "가방에",
+        "emoji": "📚",
+        "has": false,
+        "answer": "책이 없어요.",
+        "alt": "책이 있어요."
+      },
+      {
+        "scene": "책상에",
+        "emoji": "✏️",
+        "has": true,
+        "answer": "연필이 있어요.",
+        "alt": "연필이 없어요."
+      },
+      {
+        "scene": "방에",
+        "emoji": "🐱",
+        "has": true,
+        "answer": "고양이가 있어요.",
+        "alt": "고양이가 없어요."
+      },
+      {
+        "scene": "부엌에",
+        "emoji": "🍎",
+        "has": false,
+        "answer": "사과가 없어요.",
+        "alt": "사과가 있어요."
+      },
+      {
+        "scene": "교실에",
+        "emoji": "🪑",
+        "has": true,
+        "answer": "의자가 있어요.",
+        "alt": "의자가 없어요."
+      }
+    ]
+  }
+}

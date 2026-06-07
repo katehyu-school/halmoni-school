@@ -1,190 +1,248 @@
 {
   "unit": 3,
-  "title": "🍞 네, 빵이에요!",
   "book": 1,
+  "type": "consonant",
+  "title": "기본 자음 1",
+  "phase": "consonant",
   "goal": {
-    "ko": "네/아니요로 대답할 수 있어요! ✅❌",
-    "en": "I can answer yes and no in Korean!"
+    "ko": "기본 자음 5개를 읽고 소리 낼 수 있어요!",
+    "en": "I can read and say 5 basic consonants!"
   },
-  "key_points": [
-    "네 = Yes",
-    "아니요 = No",
-    "이게 ___이에요? = Is this ___?"
+  "note": {
+    "ko": "자음은 혼자 소리 못 내요. 모음(ㅏ)과 합쳐야 해요!",
+    "en": "Consonants can't sound alone — pair with a vowel!"
+  },
+  "chars": [
+    {
+      "char": "ㄱ",
+      "sound": "g/k",
+      "with_a": "가",
+      "color": "#E53935",
+      "emoji": "🦒",
+      "example": "기린",
+      "example_en": "giraffe",
+      "tip": "sounds like 'g' at start, 'k' at end"
+    },
+    {
+      "char": "ㄴ",
+      "sound": "n",
+      "with_a": "나",
+      "color": "#E53935",
+      "emoji": "🦋",
+      "example": "나비",
+      "example_en": "butterfly",
+      "tip": "same as English 'n'"
+    },
+    {
+      "char": "ㄷ",
+      "sound": "d/t",
+      "with_a": "다",
+      "color": "#E53935",
+      "emoji": "🍭",
+      "example": "다리",
+      "example_en": "leg/bridge",
+      "tip": "sounds like 'd' at start, 't' at end"
+    },
+    {
+      "char": "ㄹ",
+      "sound": "r/l",
+      "with_a": "라",
+      "color": "#E53935",
+      "emoji": "🦁",
+      "example": "라면",
+      "example_en": "ramen",
+      "tip": "between 'r' and 'l' — tongue flap!"
+    },
+    {
+      "char": "ㅁ",
+      "sound": "m",
+      "with_a": "마",
+      "color": "#E53935",
+      "emoji": "🐎",
+      "example": "마차",
+      "example_en": "carriage",
+      "tip": "same as English 'm'"
+    }
   ],
-  "sections": {
-    "vocab": {
-      "🍱 음식 간식 Snacks & Drinks": [
-        { "emoji": "🥛", "kr": "우유", "en": "milk", "rom": "u-yu" },
-        { "emoji": "🧃", "kr": "주스", "en": "juice", "rom": "ju-seu" },
-        { "emoji": "🍘", "kr": "과자", "en": "snack/crackers", "rom": "gwa-ja" },
-        { "emoji": "🍞", "kr": "빵", "en": "bread", "rom": "ppang" },
-        { "emoji": "🍬", "kr": "사탕", "en": "candy", "rom": "sa-tang" },
-        { "emoji": "🍦", "kr": "아이스크림", "en": "ice cream", "rom": "a-i-seu-keu-rim" }
-      ],
-      "🐾 동물 Animals": [
-        { "emoji": "🐱", "kr": "고양이", "en": "cat", "rom": "go-yang-i" },
-        { "emoji": "🐶", "kr": "강아지", "en": "puppy/dog", "rom": "gang-a-ji" },
-        { "emoji": "🐰", "kr": "토끼", "en": "rabbit", "rom": "to-kki" },
-        { "emoji": "🐻", "kr": "곰", "en": "bear", "rom": "gom" }
-      ],
-      "✅ 대답 Answers": [
-        { "emoji": "✅", "kr": "네", "en": "Yes", "rom": "ne" },
-        { "emoji": "❌", "kr": "아니요", "en": "No", "rom": "a-ni-yo" }
-      ]
-    },
-    "grammar": {
-      "sections": [
+  "combo_preview": [
+    {
+      "con": "ㄱ",
+      "words": [
         {
-          "id": "g03_yes_no",
-          "title": "네 / 아니요",
-          "subtitle": "Yes / No — The most important words!",
-          "pattern": "이게 N이에요/예요? → 네 / 아니요, N이에요/예요.",
-          "meaning": "Answering yes/no questions",
-          "description": "In Korean, 네 means yes and 아니요 means no. When you say no, you also say what it actually IS! '아니요, ___이에요/예요.'",
-          "rule_boxes": [
-            {
-              "color": "green",
-              "label": "✅ 네 — Yes!",
-              "examples": [
-                "이게 빵이에요? → 네, 빵이에요! (Yes, it's bread!)"
-              ]
-            },
-            {
-              "color": "red",
-              "label": "❌ 아니요 — No! (+ what it really is)",
-              "examples": [
-                "이게 빵이에요? → 아니요, 우유예요. (No, it's milk.)",
-                "이게 고양이예요? → 아니요, 강아지예요. (No, it's a puppy.)"
-              ]
-            }
-          ],
-          "examples": [
-            { "korean": "이게 사탕이에요? — 네, 사탕이에요!", "english": "Is this candy? — Yes, it's candy!", "highlight": "네" },
-            { "korean": "이게 주스예요? — 아니요, 우유예요.", "english": "Is this juice? — No, it's milk.", "highlight": "아니요" },
-            { "korean": "이게 토끼예요? — 아니요, 곰이에요!", "english": "Is this a rabbit? — No, it's a bear!", "highlight": "아니요" }
-          ]
+          "syl": "가",
+          "hint": "go"
+        },
+        {
+          "syl": "고",
+          "hint": "고양이(cat)"
+        },
+        {
+          "syl": "구",
+          "hint": "구름(cloud)"
         }
       ]
     },
-    "practice": {
-      "dialogue_practice": [
+    {
+      "con": "ㄴ",
+      "words": [
         {
-          "scene": "🍱 간식 시간! — Snack time!",
-          "scene_en": "It's snack time!",
-          "lines": [
-            { "speaker": "해리", "color": "blue", "text": "이게 빵이에요?", "en": "Is this bread?", "type": "given" },
-            { "speaker": "애라", "color": "coral", "text": "네, 빵이에요! 🍞 먹어요~", "en": "Yes, it's bread! Let's eat~", "type": "given" },
-            { "speaker": "해리", "color": "blue", "text": "이게 주스예요?", "en": "Is this juice?", "type": "given" },
-            { "speaker": "애라", "color": "coral", "text": "___, 우유예요. 🥛", "en": "No, it's milk.", "type": "fill", "ans": "아니요", "opts": ["아니요", "네", "맞아요"] }
-          ]
+          "syl": "나",
+          "hint": "I/me"
         },
         {
-          "scene": "🐾 동물 퀴즈! — Animal quiz!",
-          "scene_en": "Animal quiz game",
-          "lines": [
-            { "speaker": "마야", "color": "purple", "text": "이게 고양이예요?", "en": "Is this a cat?", "type": "given" },
-            { "speaker": "레오", "color": "mint", "text": "___, 강아지예요! 🐶", "en": "No, it's a puppy!", "type": "fill", "ans": "아니요", "opts": ["아니요", "네", "맞아요"] },
-            { "speaker": "마야", "color": "purple", "text": "이게 토끼예요?", "en": "Is this a rabbit?", "type": "given" },
-            { "speaker": "레오", "color": "mint", "text": "___, 토끼예요! 🐰", "en": "Yes, it's a rabbit!", "type": "fill", "ans": "네", "opts": ["네", "아니요", "맞아요"] }
-          ]
+          "syl": "노",
+          "hint": "노란(yellow)"
         },
         {
-          "scene": "🎁 선물 상자! — Mystery box!",
-          "scene_en": "What's in the mystery box?",
-          "lines": [
-            { "speaker": "올리비아", "color": "teal", "text": "이게 아이스크림이에요?", "en": "Is this ice cream?", "type": "given" },
-            { "speaker": "해리", "color": "blue", "text": "네, 아이스크림이에요! 🍦 냠냠!", "en": "Yes, it's ice cream! Yum yum!", "type": "given" },
-            { "speaker": "올리비아", "color": "teal", "text": "이게 사탕이에요?", "en": "Is this candy?", "type": "given" },
-            { "speaker": "해리", "color": "blue", "text": "___, ___이에요. 🍞", "en": "No, it's bread.", "type": "fill", "ans": "아니요, 빵", "opts": ["아니요, 빵", "네, 사탕", "아니요, 과자"] }
-          ]
+          "syl": "누",
+          "hint": "who"
         }
-      ],
-      "fill_items": [
-        { "q": "이게 빵이에요? →", "suffix": ", 빵이에요!", "ans": "네", "opts": ["네", "아니요", "맞아요"], "en": "Yes, it's bread!" },
-        { "q": "이게 우유예요? → 아니요,", "suffix": "예요.", "ans": "주스", "opts": ["주스", "우유", "빵"], "en": "No, it's juice." },
-        { "q": "이게 강아지예요? →", "suffix": ", 강아지예요!", "ans": "네", "opts": ["네", "아니요", "응"], "en": "Yes, it's a puppy!" },
-        { "q": "이게 고양이예요? → 아니요,", "suffix": "예요.", "ans": "토끼", "opts": ["토끼", "고양이", "곰"], "en": "No, it's a rabbit." },
-        { "q": "이게 과자예요? → 아니요,", "suffix": "이에요.", "ans": "사탕", "opts": ["사탕", "과자", "빵"], "en": "No, it's candy." }
-      ],
-      "listen_quiz": [
-        {
-          "audio": "이게 사탕이에요? — 네, 사탕이에요.",
-          "correct": 0,
-          "choices": [
-            { "emoji": "🍬", "kr": "네, 사탕이에요", "en": "Yes, it's candy" },
-            { "emoji": "🍞", "kr": "아니요, 빵이에요", "en": "No, it's bread" },
-            { "emoji": "🍦", "kr": "아니요, 아이스크림이에요", "en": "No, it's ice cream" }
-          ]
-        },
-        {
-          "audio": "이게 고양이예요? — 아니요, 강아지예요.",
-          "correct": 2,
-          "choices": [
-            { "emoji": "🐱", "kr": "네, 고양이예요", "en": "Yes, it's a cat" },
-            { "emoji": "🐻", "kr": "아니요, 곰이에요", "en": "No, it's a bear" },
-            { "emoji": "🐶", "kr": "아니요, 강아지예요", "en": "No, it's a puppy" }
-          ]
-        },
-        {
-          "audio": "이게 주스예요? — 아니요, 우유예요.",
-          "correct": 1,
-          "choices": [
-            { "emoji": "🧃", "kr": "네, 주스예요", "en": "Yes, it's juice" },
-            { "emoji": "🥛", "kr": "아니요, 우유예요", "en": "No, it's milk" },
-            { "emoji": "🍬", "kr": "아니요, 사탕이에요", "en": "No, it's candy" }
-          ]
-        }
-      ],
-      "mini_game": {
-        "type": "yesno",
-        "title": "🎮 네? 아니요? 빨리빨리!",
-        "instruction": "보여주는 그림이 맞으면 네! 틀리면 아니요! 빠를수록 점수가 높아요! 🌟",
-        "rounds": [
-          { "image_emoji": "🍞", "question": "이게 빵이에요?", "answer": true },
-          { "image_emoji": "🥛", "question": "이게 주스예요?", "answer": false, "real": "우유예요" },
-          { "image_emoji": "🐶", "question": "이게 강아지예요?", "answer": true },
-          { "image_emoji": "🐰", "question": "이게 고양이예요?", "answer": false, "real": "토끼예요" },
-          { "image_emoji": "🍦", "question": "이게 아이스크림이에요?", "answer": true },
-          { "image_emoji": "🍬", "question": "이게 과자예요?", "answer": false, "real": "사탕이에요" }
-        ]
-      }
+      ]
     },
-    "real_life": {
-      "title": "🗣️ 실생활 — Real Life",
-      "subtitle": "실제로 써봐요!",
-      "dialogues": [
+    {
+      "con": "ㄷ",
+      "words": [
         {
-          "title": "🛒 대화 1 — 마트에서",
-          "title_en": "At the supermarket",
-          "bg": "#E8F5E9",
-          "hdr": "#2E7D32",
-          "lines": [
-            { "role": "A", "color": "#66BB6A", "kr": "엄마, 이게 아이스크림이에요?", "en": "Mom, is this ice cream?" },
-            { "role": "B", "color": "#2E7D32", "kr": "아니요, 사탕이에요.", "en": "No, it's candy." },
-            { "role": "A", "color": "#66BB6A", "kr": "이게 아이스크림이에요?", "en": "Is this ice cream?" },
-            { "role": "B", "color": "#2E7D32", "kr": "네, 맞아요! 🍦 잘했어요!", "en": "Yes, that's right! Well done!" }
-          ],
-          "summary": { "kr": "마트에서도 '이게 ___이에요?' 로 확인해 봐요!", "en": "Use '이게 ___이에요?' to check what things are!", "highlight": "이게 ___이에요?" }
+          "syl": "다",
+          "hint": "all"
         },
         {
-          "title": "🐾 대화 2 — 동물 사진 보기",
-          "title_en": "Looking at animal pictures",
-          "bg": "#FFF3E0",
-          "hdr": "#E65100",
-          "lines": [
-            { "role": "A", "color": "#FFA726", "kr": "이게 토끼예요?", "en": "Is this a rabbit?" },
-            { "role": "B", "color": "#E65100", "kr": "아니요, 곰이에요!", "en": "No, it's a bear!" },
-            { "role": "A", "color": "#FFA726", "kr": "아, 곰이에요! 귀여워요~ 🐻", "en": "Oh, it's a bear! So cute~" }
-          ],
-          "summary": { "kr": "'아니요' 다음에는 꼭 '___이에요/예요'를 말해요!", "en": "After 아니요, always say what it really is!", "highlight": "아니요, ___이에요" }
+          "syl": "도",
+          "hint": "도마뱀(lizard)"
+        },
+        {
+          "syl": "두",
+          "hint": "two"
+        }
+      ]
+    },
+    {
+      "con": "ㄹ",
+      "words": [
+        {
+          "syl": "라",
+          "hint": "라면(ramen)"
+        },
+        {
+          "syl": "로",
+          "hint": "로봇(robot)"
+        },
+        {
+          "syl": "리",
+          "hint": "리본(ribbon)"
+        }
+      ]
+    },
+    {
+      "con": "ㅁ",
+      "words": [
+        {
+          "syl": "마",
+          "hint": "horse"
+        },
+        {
+          "syl": "모",
+          "hint": "모자(hat)"
+        },
+        {
+          "syl": "무",
+          "hint": "radish"
         }
       ]
     }
-  },
-  "self_check": [
-    { "ko": "'네'와 '아니요'로 대답할 수 있어요.", "en": "I can answer with 네 and 아니요." },
-    { "ko": "'아니요' 뒤에 '___이에요/예요'를 말할 수 있어요.", "en": "I can say 아니요, ___이에요/예요." },
-    { "ko": "음식과 동물 이름을 8개 이상 알아요.", "en": "I know 8+ food and animal names." },
-    { "ko": "'이게 ___이에요?' 로 질문할 수 있어요.", "en": "I can ask questions with 이게 ___이에요?" }
-  ]
+  ],
+  "first_sound_game": {
+    "title": "🎮 첫소리 찾기!",
+    "instruction": "그림을 보고 첫소리(자음)를 탭하세요! Tap the first consonant!",
+    "rounds": [
+      {
+        "emoji": "🦒",
+        "word": "기린",
+        "correct": "ㄱ",
+        "choices": [
+          "ㄱ",
+          "ㄴ",
+          "ㄷ",
+          "ㄹ"
+        ]
+      },
+      {
+        "emoji": "🦋",
+        "word": "나비",
+        "correct": "ㄴ",
+        "choices": [
+          "ㄱ",
+          "ㄴ",
+          "ㄷ",
+          "ㅁ"
+        ]
+      },
+      {
+        "emoji": "🐎",
+        "word": "말",
+        "correct": "ㅁ",
+        "choices": [
+          "ㄷ",
+          "ㄹ",
+          "ㅁ",
+          "ㄴ"
+        ]
+      },
+      {
+        "emoji": "🍭",
+        "word": "달",
+        "correct": "ㄷ",
+        "choices": [
+          "ㄱ",
+          "ㄷ",
+          "ㄹ",
+          "ㅁ"
+        ]
+      },
+      {
+        "emoji": "🦁",
+        "word": "라면",
+        "correct": "ㄹ",
+        "choices": [
+          "ㄴ",
+          "ㄹ",
+          "ㅁ",
+          "ㄱ"
+        ]
+      },
+      {
+        "emoji": "🌸",
+        "word": "나무",
+        "correct": "ㄴ",
+        "choices": [
+          "ㄱ",
+          "ㄴ",
+          "ㄷ",
+          "ㄹ"
+        ]
+      },
+      {
+        "emoji": "🐄",
+        "word": "고기",
+        "correct": "ㄱ",
+        "choices": [
+          "ㄱ",
+          "ㄴ",
+          "ㄷ",
+          "ㅁ"
+        ]
+      },
+      {
+        "emoji": "🎪",
+        "word": "마을",
+        "correct": "ㅁ",
+        "choices": [
+          "ㄹ",
+          "ㅁ",
+          "ㄷ",
+          "ㄴ"
+        ]
+      }
+    ]
+  }
 }

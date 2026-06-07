@@ -1484,45 +1484,66 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ Book 1 사이드바 ══════ -->
 <nav class="sidebar" id="book1-sidebar" style="display:none;">
   <div class="sidebar-title">Level 1</div>
+  <div style="font-size:.68rem;font-weight:700;color:#43A047;padding:6px 16px 2px;letter-spacing:.03em;">🔵 모음 VOWELS</div>
   <div class="lesson-item active" id="b1-lesson-0" onclick="switchBook1Unit(0)">
     <span class="lesson-num">예비</span>
-    <span class="lesson-title-text">가나다라 🔤</span>
+    <span class="lesson-title-text">한글 블럭 세계</span>
   </div>
   <div class="lesson-item" id="b1-lesson-1" onclick="switchBook1Unit(1)">
     <span class="lesson-num">01</span>
-    <span class="lesson-title-text">안녕하세요?</span>
+    <span class="lesson-title-text">기본 모음 1</span>
   </div>
   <div class="lesson-item" id="b1-lesson-2" onclick="switchBook1Unit(2)">
     <span class="lesson-num">02</span>
-    <span class="lesson-title-text">이게 뭐예요?</span>
+    <span class="lesson-title-text">기본 모음 2</span>
   </div>
+  <div style="font-size:.68rem;font-weight:700;color:#E53935;padding:6px 16px 2px;letter-spacing:.03em;">🔴 자음 CONSONANTS</div>
   <div class="lesson-item" id="b1-lesson-3" onclick="switchBook1Unit(3)">
     <span class="lesson-num">03</span>
-    <span class="lesson-title-text">네, 빵이에요!</span>
+    <span class="lesson-title-text">기본 자음 1</span>
   </div>
   <div class="lesson-item" id="b1-lesson-4" onclick="switchBook1Unit(4)">
     <span class="lesson-num">04</span>
-    <span class="lesson-title-text">우리 엄마예요!</span>
+    <span class="lesson-title-text">기본 자음 2</span>
   </div>
   <div class="lesson-item" id="b1-lesson-5" onclick="switchBook1Unit(5)">
     <span class="lesson-num">05</span>
-    <span class="lesson-title-text">집이 어디예요?</span>
+    <span class="lesson-title-text">거센소리 & 쌍자음</span>
   </div>
+  <div style="font-size:.68rem;font-weight:700;color:#1E88E5;padding:6px 16px 2px;letter-spacing:.03em;">🟢 조합 COMBINING</div>
   <div class="lesson-item" id="b1-lesson-6" onclick="switchBook1Unit(6)">
     <span class="lesson-num">06</span>
-    <span class="lesson-title-text">학교에 가요!</span>
+    <span class="lesson-title-text">블럭 조합 1</span>
   </div>
   <div class="lesson-item" id="b1-lesson-7" onclick="switchBook1Unit(7)">
     <span class="lesson-num">07</span>
-    <span class="lesson-title-text">방에 침대가 있어요!</span>
+    <span class="lesson-title-text">블럭 조합 2</span>
   </div>
   <div class="lesson-item" id="b1-lesson-8" onclick="switchBook1Unit(8)">
     <span class="lesson-num">08</span>
-    <span class="lesson-title-text">그림을 그려요!</span>
+    <span class="lesson-title-text">복합 모음</span>
   </div>
+  <div style="font-size:.68rem;font-weight:700;color:#F57C00;padding:6px 16px 2px;letter-spacing:.03em;">🟡 받침 FINAL CONSONANT</div>
   <div class="lesson-item" id="b1-lesson-9" onclick="switchBook1Unit(9)">
     <span class="lesson-num">09</span>
-    <span class="lesson-title-text">사과를 좋아해요!</span>
+    <span class="lesson-title-text">받침 1</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-10" onclick="switchBook1Unit(10)">
+    <span class="lesson-num">10</span>
+    <span class="lesson-title-text">받침 2</span>
+  </div>
+  <div style="font-size:.68rem;font-weight:700;color:#8E24AA;padding:6px 16px 2px;letter-spacing:.03em;">🟣 문장 SENTENCES</div>
+  <div class="lesson-item" id="b1-lesson-11" onclick="switchBook1Unit(11)">
+    <span class="lesson-num">11</span>
+    <span class="lesson-title-text">이름이 뭐야?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-12" onclick="switchBook1Unit(12)">
+    <span class="lesson-num">12</span>
+    <span class="lesson-title-text">이게 뭐야?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-13" onclick="switchBook1Unit(13)">
+    <span class="lesson-num">13</span>
+    <span class="lesson-title-text">있어요? 없어요?</span>
   </div>
 </nav>
 <div id="book1-main" style="display:none;max-width:960px;margin:0 auto;padding:28px 20px 60px;">
@@ -3535,29 +3556,52 @@ const B3_INLINE_DATA = {
 // BOOK 1 — Level 1 렌더러
 // ══════════════════════════════════════════
 
-let b1CurrentUnit = 0;
-const B1_CHO_IDX = {ㄱ:0,ㄴ:2,ㄷ:3,ㄹ:5,ㅁ:6,ㅂ:7,ㅅ:9,ㅇ:11,ㅈ:12,ㅊ:14,ㅋ:15,ㅌ:16,ㅍ:17,ㅎ:18};
-const B1_VOW_IDX = {ㅏ:0,ㅑ:2,ㅓ:4,ㅕ:6,ㅗ:8,ㅛ:12,ㅜ:13,ㅠ:17,ㅡ:18,ㅣ:20};
+const B1_CHO_IDX = {ㄱ:0,ㄲ:1,ㄴ:2,ㄷ:3,ㄸ:4,ㄹ:5,ㅁ:6,ㅂ:7,ㅃ:8,ㅅ:9,ㅆ:10,ㅇ:11,ㅈ:12,ㅉ:13,ㅊ:14,ㅋ:15,ㅌ:16,ㅍ:17,ㅎ:18};
+const B1_VOW_IDX = {ㅏ:0,ㅐ:1,ㅑ:2,ㅒ:3,ㅓ:4,ㅔ:5,ㅕ:6,ㅖ:7,ㅗ:8,ㅘ:9,ㅙ:10,ㅚ:11,ㅛ:12,ㅜ:13,ㅝ:14,ㅞ:15,ㅟ:16,ㅠ:17,ㅡ:18,ㅢ:19,ㅣ:20};
+const B1_JONG_IDX = {'':-1,ㄱ:1,ㄲ:2,ㄳ:3,ㄴ:4,ㄵ:5,ㄶ:6,ㄷ:7,ㄹ:8,ㄺ:9,ㄻ:10,ㄼ:11,ㄽ:12,ㄾ:13,ㄿ:14,ㅀ:15,ㅁ:16,ㅂ:17,ㅄ:18,ㅅ:19,ㅆ:20,ㅇ:21,ㅈ:22,ㅊ:23,ㅋ:24,ㅌ:25,ㅍ:26,ㅎ:27};
 
 function b1Speak(text) {
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ko-KR'; u.rate = 0.85;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(u);
+  if (!text) return;
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'ko-KR'; utt.rate = 0.85;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utt);
 }
 
+function b1MakeSyllable(cho, vow, jong) {
+  const ci = B1_CHO_IDX[cho];
+  const vi = B1_VOW_IDX[vow];
+  if (ci === undefined || vi === undefined) return '?';
+  const ji = jong ? (B1_JONG_IDX[jong] || 0) : 0;
+  return String.fromCodePoint((ci * 21 + vi) * 28 + ji + 0xAC00);
+}
+
+// ── Header banner ──────────────────────────────────────────────
+function b1Header(d, phaseColor) {
+  const ph = {vowel:'🔵 모음',consonant:'🔴 자음',combination:'🟢 조합',batchim:'🟡 받침',sentence:'🟣 문장',prereq:'🟤 예비'};
+  const badge = ph[d.phase||d.type]||'';
+  return `<div style="background:linear-gradient(135deg,${phaseColor}dd,${phaseColor}99);border-radius:16px;padding:20px 24px;margin-bottom:20px;color:#fff;">
+    <div style="font-size:.75rem;font-weight:700;opacity:.85;margin-bottom:4px;">${badge}</div>
+    <div style="font-size:1.4rem;font-weight:800;">${d.title||''}</div>
+    ${d.goal?`<div style="margin-top:6px;font-size:.9rem;opacity:.9;">${d.goal.ko||''}</div>
+    <div style="font-size:.8rem;opacity:.75;">${d.goal.en||''}</div>`:''}
+  </div>`;
+}
+
+// ── switchBook1Unit ────────────────────────────────────────────
+let b1CurrentUnit = 0;
 async function switchBook1Unit(n) {
   b1CurrentUnit = n;
-  [0,1,2,3,4,5,6,7,8,9].forEach(i => {
+  for (let i = 0; i <= 13; i++) {
     const el = document.getElementById('b1-lesson-' + i);
     if (el) el.classList.toggle('active', i === n);
-  });
+  }
   const container = document.getElementById('b1-unit-container');
   if (!container) return;
   container.innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;font-size:1.1rem;">로딩 중... ⏳</div>';
   try {
-    const path = 'data/elem/level1/unit0' + n + '.json';
-    const res  = await fetch(path);
+    const pad = String(n).padStart(2, '0');
+    const res = await fetch('data/elem/level1/unit' + pad + '.json');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     if (data.type === 'prereq') renderB1Prereq(data);
@@ -3567,251 +3611,744 @@ async function switchBook1Unit(n) {
   }
 }
 
+// ── Main dispatcher ────────────────────────────────────────────
 function renderBook1Unit(d) {
+  const phaseColors = {vowel:'#43A047',consonant:'#E53935',combination:'#1E88E5',batchim:'#F57C00',sentence:'#8E24AA',vowel_compound:'#1E88E5'};
+  const pc = phaseColors[d.type] || '#555';
   const c = document.getElementById('b1-unit-container');
-  const kp = (d.key_points||[]).map(p=>`<li>${p}</li>`).join('');
-  c.innerHTML = `
-  <div style="background:linear-gradient(135deg,#5C6BC0,#7E57C2);border-radius:16px;padding:22px 26px;margin-bottom:22px;color:#fff;">
-    <div style="font-size:1.5rem;font-weight:700;">${d.title||''}</div>
-    <div style="margin-top:6px;opacity:.9;">${(d.goal&&d.goal.ko)||''}</div>
-    <div style="margin-top:2px;font-size:.9rem;opacity:.75;">${(d.goal&&d.goal.en)||''}</div>
-    ${kp?`<ul style="margin:10px 0 0;padding-left:18px;font-size:.9rem;opacity:.9;">${kp}</ul>`:''}
-  </div>
-  <div class="b3-snav" id="b1-snav">
-    <button class="snav-btn active" onclick="b1Tab('vocab')">📚 새단어</button>
-    <button class="snav-btn" onclick="b1Tab('grammar')">📌 문법</button>
-    <button class="snav-btn" onclick="b1Tab('practice')">✏️ 연습</button>
-    <button class="snav-btn" onclick="b1Tab('reallife')">🌍 실생활</button>
-    <button class="snav-btn" onclick="b1Tab('selfcheck')">✅ 자기점검</button>
-  </div>
-  <div id="b1-sec-vocab"></div>
-  <div id="b1-sec-grammar" style="display:none;"></div>
-  <div id="b1-sec-practice" style="display:none;"></div>
-  <div id="b1-sec-reallife" style="display:none;"></div>
-  <div id="b1-sec-selfcheck" style="display:none;"></div>`;
-  renderB1Vocab(d);
-  document.getElementById('b1-sec-grammar').innerHTML = renderB3Grammar(d.sections.grammar);
-  renderB1Practice(d);
-  document.getElementById('b1-sec-reallife').innerHTML = renderB3RealLife(d.sections.real_life);
-  document.getElementById('b1-sec-selfcheck').innerHTML = renderB3SelfCheck(d.self_check, d.goal);
+  c.innerHTML = b1Header(d, pc);
+  if (d.type === 'vowel')          renderB1Vowel(d, pc);
+  else if (d.type === 'consonant') renderB1Consonant(d, pc);
+  else if (d.type === 'combination' || d.type === 'vowel_compound') renderB1Combination(d, pc);
+  else if (d.type === 'batchim')   renderB1Batchim(d, pc);
+  else if (d.type === 'sentence')  renderB1Sentence(d, pc);
 }
 
-function b1Tab(name) {
-  const tabs = ['vocab','grammar','practice','reallife','selfcheck'];
-  document.querySelectorAll('#b1-snav .snav-btn').forEach((btn,i)=>btn.classList.toggle('active',tabs[i]===name));
-  tabs.forEach(t=>{ const el=document.getElementById('b1-sec-'+t); if(el) el.style.display=(t===name)?'':'none'; });
-}
+// ─────────────────────────────────────────────────────────────
+// 🔵 VOWEL UNITS (01, 02)
+// ─────────────────────────────────────────────────────────────
+function renderB1Vowel(d, pc) {
+  const c = document.getElementById('b1-unit-container');
 
-function renderB1Vocab(d) {
-  const sec = document.getElementById('b1-sec-vocab');
-  if (!sec||!d.sections||!d.sections.vocab) return;
-  let html='';
-  for (const [cat,items] of Object.entries(d.sections.vocab)) {
-    html+=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:18px 0 10px;">${cat}</h3><div style="display:flex;flex-wrap:wrap;gap:10px;">`;
-    for (const item of items) {
-      html+=`<div onclick="b1Speak('${item.kr}')" style="background:#fff;border:2px solid #E8EAF6;border-radius:12px;padding:12px 16px;min-width:100px;text-align:center;cursor:pointer;">
-        <div style="font-size:1.8rem;">${item.emoji||'📝'}</div>
-        <div style="font-size:1.2rem;font-weight:700;color:#311B92;">${item.kr}</div>
-        <div style="font-size:.75rem;color:#888;">${item.rom||''}</div>
-        <div style="font-size:.85rem;color:#5C6BC0;">${item.en}</div>
+  // Unit 02 special: pairs layout
+  if (d.pairs) {
+    let html = `<div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:18px;border:2px solid #e8f5e9;">
+      <div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:10px;">💡 ${d.intro.ko}</div>
+      <div style="font-size:.82rem;color:#666;">${d.intro.en}</div>
+    </div>
+    <div style="margin-bottom:20px;">`;
+    d.pairs.forEach(p => {
+      html += `<div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;border:2px solid ${p.color}33;">
+        <div onclick="b1Speak('${p.base_sound}')" style="background:#43A04720;border-radius:12px;padding:16px 22px;text-align:center;cursor:pointer;flex:1;">
+          <div style="font-size:3rem;font-weight:900;color:#43A047;">${p.base}</div>
+          <div style="font-size:.8rem;color:#555;">${p.base_sound}</div>
+        </div>
+        <div style="font-size:1.5rem;color:#aaa;">+Y →</div>
+        <div onclick="b1Speak('${p.y_sound}')" style="background:${p.color}20;border-radius:12px;padding:16px 22px;text-align:center;cursor:pointer;flex:1;">
+          <div style="font-size:3rem;font-weight:900;color:${p.color};">${p.y}</div>
+          <div style="font-size:.8rem;color:#555;">${p.y_sound}</div>
+        </div>
+        <div style="flex:1;text-align:center;">
+          <div style="font-size:1.5rem;">${p.emoji}</div>
+          <div style="font-size:.85rem;font-weight:700;color:#333;">${p.example}</div>
+          <div style="font-size:.75rem;color:#888;">${p.example_en}</div>
+        </div>
       </div>`;
+    });
+    html += '</div>';
+    c.innerHTML += html;
+    if (d.words) c.innerHTML += b1WordRow(d.words, pc);
+    if (d.classify_game) c.innerHTML += `<div id="b1-game-area"></div>`;
+    if (d.classify_game) renderB1ClassifyGame(d.classify_game);
+    return;
+  }
+
+  // Unit 01: basic vowel cards
+  const cards = (d.chars||[]).map(v =>
+    `<div onclick="b1Speak('${v.sound}')" style="background:${v.color};border-radius:16px;padding:20px 14px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 3px 10px ${v.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+      <div style="font-size:3.2rem;font-weight:900;line-height:1;">${v.char}</div>
+      <div style="font-size:1rem;font-weight:700;margin-top:6px;">${v.sound}</div>
+      <div style="font-size:1.6rem;margin-top:6px;">${v.emoji}</div>
+      <div style="font-size:.75rem;margin-top:4px;opacity:.9;">${v.example}</div>
+      <div style="font-size:.7rem;opacity:.8;">${v.example_en}</div>
+    </div>`
+  ).join('');
+  c.innerHTML += `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 12px;">🔊 클릭해서 들어봐요! Tap to hear!</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">${cards}</div>`;
+
+  if (d.vowel_only_words) c.innerHTML += b1WordRow(d.vowel_only_words, pc);
+  if (d.sound_tap_game) {
+    c.innerHTML += `<div id="b1-game-area"></div>`;
+    renderB1SoundTapGame(d.sound_tap_game);
+  }
+}
+
+function b1WordRow(words, pc) {
+  const items = words.map(w => `
+    <div onclick="b1Speak('${w.word}')" style="background:#fff;border:2px solid ${pc}33;border-radius:12px;padding:14px;text-align:center;cursor:pointer;min-width:90px;transition:.15s;" onmouseover="this.style.borderColor='${pc}'" onmouseout="this.style.borderColor='${pc}33'">
+      <div style="font-size:1.4rem;">${w.emoji||'📝'}</div>
+      <div style="font-size:1.3rem;font-weight:800;color:#222;">${w.word}</div>
+      <div style="font-size:.75rem;color:#888;">${w.en}</div>
+      ${w.syllables?`<div style="margin-top:4px;">${w.syllables.map(s=>`<span style="background:#f0f0f0;border-radius:6px;padding:1px 6px;font-size:.8rem;margin:1px;">${s}</span>`).join('+')}</div>`:''}
+    </div>`).join('');
+  return `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">📝 단어 Words</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;">${items}</div>`;
+}
+
+// Sound Tap Game (Unit 01)
+function renderB1SoundTapGame(game) {
+  const wrap = document.getElementById('b1-game-area'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,#43A047,#66BB6A);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div>
+        <div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1SoundTapGame(window._b1CurrentGame)" style="background:#fff;color:#43A047;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:8px;">다시하기 🔄</button>
+      </div>`; return;
     }
-    html+='</div>';
-  }
-  sec.innerHTML=html;
-}
-
-function renderB1Practice(d) {
-  const sec=document.getElementById('b1-sec-practice');
-  if(!sec||!d.sections||!d.sections.practice) return;
-  const pr=d.sections.practice;
-  let html='';
-  if (pr.dialogue_practice&&pr.dialogue_practice.length) {
-    html+='<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎭 대화 연습</h3>';
-    pr.dialogue_practice.forEach(dlg=>{
-      html+=`<div style="background:#F8F9FF;border-radius:12px;padding:16px;margin-bottom:16px;"><div style="font-weight:700;color:#5C6BC0;margin-bottom:10px;">${dlg.scene}</div>`;
-      dlg.lines.forEach(ln=>{
-        const spColor = {blue:'#1565C0',coral:'#B71C1C',purple:'#6A1B9A',amber:'#E65100',green:'#2E7D32',mint:'#00695C',teal:'#00695C'}[ln.color]||'#333';
-        if (ln.type==='fill') {
-          const optsHtml=(ln.opts||[]).map(o=>`<button onclick="b1FillCheck(this,'${o.replace(/'/g,"\'")}','${(ln.ans||'').replace(/'/g,"\'")}');return false;" style="background:#fff;border:2px solid #7E57C2;border-radius:8px;padding:6px 14px;margin:3px;cursor:pointer;">${o}</button>`).join('');
-          html+=`<div style="margin:8px 0;"><span style="font-weight:700;color:${spColor};">${ln.speaker}:</span> <span style="color:#888;font-size:.85rem;">${ln.en}</span><div style="margin-top:5px;">${optsHtml}</div></div>`;
-        } else {
-          html+=`<div style="margin:6px 0;"><span style="font-weight:700;color:${spColor};">${ln.speaker}:</span> ${ln.text} <span style="color:#888;font-size:.85rem;">— ${ln.en}</span></div>`;
-        }
-      });
-      html+='</div>';
-    });
-  }
-  if (pr.fill_items&&pr.fill_items.length) {
-    html+='<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:18px 0 12px;">✏️ 빈칸 채우기</h3>';
-    pr.fill_items.forEach(fi=>{
-      const optsHtml=(fi.opts||[]).map(o=>`<button onclick="b1FillCheck(this,'${o.replace(/'/g,"\'")}','${(fi.ans||'').replace(/'/g,"\'")}');return false;" style="background:#fff;border:2px solid #7E57C2;border-radius:8px;padding:6px 14px;margin:3px;cursor:pointer;">${o}</button>`).join('');
-      html+=`<div style="background:#F8F9FF;border-radius:10px;padding:14px;margin-bottom:10px;">
-        <div style="color:#888;font-size:.85rem;margin-bottom:6px;">${fi.en}</div>
-        <div>${fi.q} <span style="background:#E8EAF6;padding:2px 10px;border-radius:4px;color:#999;">___</span> ${fi.suffix}</div>
-        <div style="margin-top:8px;">${optsHtml}</div></div>`;
-    });
-  }
-  if (pr.mini_game) html+=`<div id="b1-minigame-wrap" style="margin-top:24px;"></div>`;
-  sec.innerHTML=html;
-  if (pr.mini_game) renderB1MiniGame(pr.mini_game);
-}
-
-function b1FillCheck(btn,chosen,correct) {
-  btn.parentElement.querySelectorAll('button').forEach(b=>b.disabled=true);
-  if (chosen===correct) { btn.style.background='#C8E6C9'; btn.style.borderColor='#4CAF50'; b1Speak(correct); }
-  else {
-    btn.style.background='#FFCDD2'; btn.style.borderColor='#F44336';
-    btn.parentElement.querySelectorAll('button').forEach(b=>{ if(b.textContent.trim()===correct){b.style.background='#C8E6C9';b.style.borderColor='#4CAF50';} });
-  }
-}
-
-function renderB1MiniGame(game) {
-  const wrap=document.getElementById('b1-minigame-wrap'); if(!wrap) return;
-  const t=game.type;
-  if(t==='memory') renderB1MemoryGame(game.pairs);
-  else if(t==='yesno') renderB1YesNoGame(game.rounds,0);
-  else if(t==='tap')   renderB1TapGame(game.rounds,0);
-  else if(t==='match') renderB1MatchGame(game.pairs);
-  else if(t==='map')   renderB1MapGame(game.locations);
-}
-
-function renderB1MemoryGame(pairs) {
-  const wrap=document.getElementById('b1-minigame-wrap');
-  const cards=[]; pairs.forEach(p=>{cards.push({label:p.kr,match:p.kr});cards.push({label:p.emoji,match:p.kr});});
-  cards.sort(()=>Math.random()-.5);
-  let first=null,matched=[],moves=0;
-  wrap.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 메모리 게임</h3>
-    <div id="b1mem-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;"></div>
-    <div id="b1mem-msg" style="margin-top:10px;font-size:.9rem;color:#5C6BC0;"></div>`;
-  const grid=document.getElementById('b1mem-grid');
-  cards.forEach((card,idx)=>{
-    const el=document.createElement('div');
-    el.style.cssText='height:70px;background:#7E57C2;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;color:#fff;font-weight:700;';
-    el.dataset.idx=idx; el.dataset.match=card.match; el.dataset.label=card.label; el.textContent='?';
-    el.onclick=function(){
-      if(matched.includes(idx)||(first!==null&&first!==idx&&grid.querySelector('[data-flipped="2"]'))) return;
-      if(first===idx) return;
-      this.style.background='#5C6BC0'; this.textContent=card.label;
-      if(first===null){first=idx;}
-      else{
-        moves++;
-        const f=grid.querySelector('[data-idx="'+first+'"]');
-        if(f.dataset.match===this.dataset.match){
-          matched.push(first,idx); f.style.background='#4CAF50'; this.style.background='#4CAF50';
-          if(matched.length===cards.length) document.getElementById('b1mem-msg').textContent='🎉 완료! '+moves+'번 만에 성공!';
-          first=null;
-        } else {
-          const fi=first; const ti=idx; first=null;
-          setTimeout(()=>{
-            const fe=grid.querySelector('[data-idx="'+fi+'"]');
-            const te=grid.querySelector('[data-idx="'+ti+'"]');
-            if(fe&&!matched.includes(fi)){fe.style.background='#7E57C2';fe.textContent='?';}
-            if(te&&!matched.includes(ti)){te.style.background='#7E57C2';te.textContent='?';}
-          },800);
-        }
-      }
-    };
-    grid.appendChild(el);
-  });
-}
-
-function renderB1YesNoGame(rounds,idx) {
-  const wrap=document.getElementById('b1-minigame-wrap'); if(!rounds||idx>=rounds.length){wrap.innerHTML+='<div style="text-align:center;font-size:1.2rem;color:#4CAF50;padding:16px;">🎉 완료!</div>';return;}
-  const r=rounds[idx];
-  wrap.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 네? 아니요?</h3>
-    <div style="text-align:center;padding:20px;background:#F8F9FF;border-radius:14px;">
-      <div style="font-size:3rem;">${r.image_emoji}</div>
-      <div style="font-size:1.1rem;font-weight:600;margin:10px 0;">${r.question}</div>
-      <div style="display:flex;justify-content:center;gap:16px;margin-top:14px;">
-        <button onclick="b1YesNoAns(${r.answer},true,${idx})" style="background:#4CAF50;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:1.1rem;cursor:pointer;">✅ 네</button>
-        <button onclick="b1YesNoAns(${r.answer},false,${idx})" style="background:#F44336;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:1.1rem;cursor:pointer;">❌ 아니요</button>
+    const r = rounds[idx];
+    const btns = r.choices.map(ch =>
+      `<button onclick="window._b1TapAns('${ch}','${r.correct}')" style="background:#fff;border:3px solid #43A04750;border-radius:14px;padding:16px 12px;font-size:2.5rem;font-weight:900;cursor:pointer;min-width:70px;color:#222;transition:.15s;" onmouseover="this.style.borderColor='#43A047'" onmouseout="this.style.borderColor='#43A04750'">${ch}</button>`
+    ).join('');
+    wrap.innerHTML = `<div style="background:#f8fff8;border-radius:16px;padding:20px;border:2px solid #43A04730;">
+      <div style="font-size:.85rem;font-weight:700;color:#43A047;margin-bottom:12px;">🎮 ${game.title}</div>
+      <div style="font-size:.8rem;color:#666;margin-bottom:14px;">${game.instruction}</div>
+      <div style="text-align:center;margin-bottom:16px;">
+        <button onclick="b1Speak('${r.sound_text}')" style="background:#43A047;color:#fff;border:none;border-radius:50%;width:80px;height:80px;font-size:2rem;cursor:pointer;">🔊</button>
+        <div style="font-size:.75rem;color:#888;margin-top:6px;">탭해서 들어봐요</div>
       </div>
-      <div style="color:#888;font-size:.8rem;margin-top:8px;">${idx+1}/${rounds.length}</div>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
-  window._b1YNRounds=rounds;
-}
-function b1YesNoAns(correct,chosen,idx){
-  const rounds=window._b1YNRounds; const ok=(correct===chosen); const r=rounds[idx];
-  document.getElementById('b1-minigame-wrap').innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 네? 아니요?</h3>
-    <div style="text-align:center;padding:20px;background:${ok?'#E8F5E9':'#FFEBEE'};border-radius:14px;">
-      <div style="font-size:2rem;">${ok?'⭐':'💪'}</div>
-      <div style="font-size:1.1rem;font-weight:700;color:${ok?'#2E7D32':'#C62828'};margin:8px 0;">${ok?'잘했어요!':'다시 해봐요!'}</div>
-      ${!ok&&r.real?`<div style="color:#555;font-size:.9rem;">정답: ${r.real}</div>`:''}
-      <button onclick="renderB1YesNoGame(window._b1YNRounds,${idx+1})" style="margin-top:14px;background:#5C6BC0;color:#fff;border:none;border-radius:10px;padding:10px 24px;cursor:pointer;">다음 →</button>
-    </div>`;
-}
-
-function renderB1TapGame(rounds,idx) {
-  const wrap=document.getElementById('b1-minigame-wrap'); if(!rounds||idx>=rounds.length){wrap.innerHTML+='<div style="text-align:center;font-size:1.2rem;color:#4CAF50;padding:16px;">🎉 완료!</div>';return;}
-  const r=rounds[idx];
-  const btns=(r.items||[]).map(item=>`<button onclick="b1TapAns('${item}','${r.correct}',${idx})" style="background:#fff;border:2px solid #7E57C2;border-radius:10px;padding:12px 16px;font-size:1rem;cursor:pointer;">${item}</button>`).join('');
-  wrap.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 빨리 찾아요!</h3>
-    <div style="background:#F8F9FF;border-radius:14px;padding:20px;text-align:center;">
-      <div style="font-size:1.3rem;font-weight:700;color:#311B92;margin-bottom:16px;">${r.prompt}</div>
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">${btns}</div>
-      <div style="color:#888;font-size:.8rem;margin-top:10px;">${idx+1}/${rounds.length}</div>
-    </div>`;
-  window._b1TapRounds=rounds;
-}
-function b1TapAns(chosen,correct,idx){
-  const rounds=window._b1TapRounds;
-  document.querySelectorAll('#b1-minigame-wrap button').forEach(b=>{b.disabled=true;if(b.textContent.trim()===correct)b.style.background='#C8E6C9';else if(b.textContent.trim()===chosen&&chosen!==correct)b.style.background='#FFCDD2';});
-  if(chosen===correct) b1Speak(correct);
-  setTimeout(()=>renderB1TapGame(rounds,idx+1),900);
-}
-
-function renderB1MatchGame(pairs) {
-  const wrap=document.getElementById('b1-minigame-wrap');
-  const lefts=pairs.map((p,i)=>({label:p.left,match:i}));
-  const rights=[...pairs.map((p,i)=>({label:p.right,match:i}))].sort(()=>Math.random()-.5);
-  let selLeft=null,done=[];
-  function render(){
-    const lHtml=lefts.map((l,i)=>`<button data-li="${i}" onclick="window._b1ML(${i})" style="display:block;width:100%;margin:4px 0;padding:10px;border-radius:8px;border:2px solid ${done.includes(i)?'#4CAF50':selLeft===i?'#7E57C2':'#C5CAE9'};background:${done.includes(i)?'#E8F5E9':selLeft===i?'#EDE7F6':'#fff'};cursor:pointer;text-align:left;">${l.label}</button>`).join('');
-    const rHtml=rights.map((r,i)=>`<button data-ri="${i}" onclick="window._b1MR(${i})" style="display:block;width:100%;margin:4px 0;padding:10px;border-radius:8px;border:2px solid ${done.includes(r.match)?'#4CAF50':'#C5CAE9'};background:${done.includes(r.match)?'#E8F5E9':'#fff'};cursor:pointer;text-align:left;">${r.label}</button>`).join('');
-    wrap.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 연결하기!</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div>${lHtml}</div><div>${rHtml}</div></div>
-      ${done.length===lefts.length?'<div style="text-align:center;color:#4CAF50;font-weight:700;margin-top:12px;">🎉 완료!</div>':''}`;
+    setTimeout(()=>b1Speak(r.sound_text), 300);
+    window._b1TapAns = function(chosen, correct) {
+      if (chosen === correct) { score++; b1Speak(correct); }
+      idx++; setTimeout(show, chosen===correct ? 600 : 400);
+    };
   }
-  window._b1ML=function(i){if(done.includes(i))return;selLeft=i;render();};
-  window._b1MR=function(ri){if(selLeft===null)return;if(rights[ri].match===selLeft){done.push(selLeft);selLeft=null;}else{selLeft=null;}render();};
-  render();
-}
-
-function renderB1MapGame(locations) {
-  const wrap=document.getElementById('b1-minigame-wrap');
-  let score=0,idx=0;
-  const shuffled=[...locations].sort(()=>Math.random()-.5);
-  function show(){
-    if(idx>=shuffled.length){wrap.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 지도 탐험!</h3><div style="text-align:center;padding:20px;background:#E8F5E9;border-radius:14px;"><div style="font-size:2rem;">🎉</div><div style="font-size:1.2rem;font-weight:700;color:#2E7D32;margin:8px 0;">완료! ${score}/${shuffled.length}점</div></div>`;return;}
-    const target=shuffled[idx];
-    const fakes=locations.filter(l=>l.kr!==target.kr).sort(()=>Math.random()-.5).slice(0,4);
-    const choices=[target,...fakes].sort(()=>Math.random()-.5);
-    const btns=choices.map(loc=>`<button onclick="window._b1MapAns('${loc.kr}','${target.kr}')" style="background:#fff;border:2px solid #7E57C2;border-radius:10px;padding:12px;font-size:1rem;cursor:pointer;">${loc.emoji} ${loc.kr}</button>`).join('');
-    wrap.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 12px;">🎮 지도 탐험!</h3>
-      <div style="background:#F8F9FF;border-radius:14px;padding:20px;text-align:center;">
-        <div style="font-size:1.1rem;font-weight:700;color:#311B92;margin-bottom:14px;">${target.prompt}</div>
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;">${btns}</div>
-        <div style="color:#888;font-size:.8rem;margin-top:10px;">${idx+1}/${shuffled.length} | ⭐${score}</div>
-      </div>`;
-  }
-  window._b1MapAns=function(chosen,correct){if(chosen===correct){score++;b1Speak(correct);}idx++;show();};
+  window._b1CurrentGame = game;
   show();
 }
 
-// ── 예비과 렌더러 ─────────────────────────────────────────────
+// Classify Game (Unit 02)
+function renderB1ClassifyGame(game) {
+  const wrap = document.getElementById('b1-game-area'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,#00897B,#26A69A);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div>
+        <div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1ClassifyGame(window._b1CurrentGame)" style="background:#fff;color:#00897B;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    const r = rounds[idx];
+    wrap.innerHTML = `<div style="background:#f0fffe;border-radius:16px;padding:20px;border:2px solid #00897B30;">
+      <div style="font-size:.85rem;font-weight:700;color:#00897B;margin-bottom:12px;">🎮 ${game.title}</div>
+      <div style="font-size:.8rem;color:#666;margin-bottom:16px;">${game.instruction}</div>
+      <div style="text-align:center;margin-bottom:20px;">
+        <div onclick="b1Speak('${r.char}')" style="font-size:5rem;font-weight:900;cursor:pointer;color:#222;">${r.char}</div>
+      </div>
+      <div style="display:flex;gap:16px;justify-content:center;">
+        <button onclick="window._b1ClassAns('basic','${r.correct}')" style="background:#43A047;color:#fff;border:none;border-radius:14px;padding:16px 28px;font-size:1rem;font-weight:700;cursor:pointer;">기본 모음<br>Basic</button>
+        <button onclick="window._b1ClassAns('y','${r.correct}')" style="background:#8E24AA;color:#fff;border:none;border-radius:14px;padding:16px 28px;font-size:1rem;font-weight:700;cursor:pointer;">Y-모음<br>Y-Vowel</button>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+    setTimeout(()=>b1Speak(r.char), 200);
+    window._b1ClassAns = function(chosen, correct) {
+      if (chosen === correct) { score++; b1Speak(r.char); }
+      idx++; setTimeout(show, 500);
+    };
+  }
+  window._b1CurrentGame = game;
+  show();
+}
+
+// ─────────────────────────────────────────────────────────────
+// 🔴 CONSONANT UNITS (03, 04, 05)
+// ─────────────────────────────────────────────────────────────
+function renderB1Consonant(d, pc) {
+  const c = document.getElementById('b1-unit-container');
+
+  // Unit 05: aspirated + tense layout
+  if (d.aspirated && d.tense) {
+    let html = '';
+    if (d.note) html += `<div style="background:#FFF3E0;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#E65100;font-weight:600;">⚠️ ${d.note.ko}<br><span style="color:#888;font-weight:400;">${d.note.en}</span></div>`;
+    // Aspirated section
+    html += `<div style="font-weight:800;color:#E53935;font-size:1rem;margin-bottom:10px;">${d.aspirated.title}</div>`;
+    html += `<div style="background:#FFF3E0;border-radius:10px;padding:10px;margin-bottom:6px;font-size:.8rem;color:#BF360C;">💨 ${d.aspirated.note}</div>`;
+    html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">`;
+    d.aspirated.chars.forEach(ch => {
+      html += `<div style="background:#fff;border-radius:14px;padding:16px;text-align:center;border:2px solid #E5393540;">
+        <div style="display:flex;justify-content:center;gap:6px;align-items:center;margin-bottom:8px;">
+          <div onclick="b1Speak('${ch.base}아')" style="background:#E5393520;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#E53935;cursor:pointer;">${ch.base}</div>
+          <div style="color:#aaa;font-size:1rem;">→</div>
+          <div onclick="b1Speak('${ch.with_a}')" style="background:#E5393540;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#C62828;cursor:pointer;">${ch.asp}</div>
+        </div>
+        <div style="font-size:.75rem;color:#555;">${ch.sound} · ${ch.emoji} ${ch.example}</div>
+        <div style="font-size:.72rem;color:#888;">${ch.example_en}</div>
+      </div>`;
+    });
+    html += '</div>';
+    // Tense section
+    html += `<div style="font-weight:800;color:#1565C0;font-size:1rem;margin-bottom:10px;">${d.tense.title}</div>`;
+    html += `<div style="background:#E3F2FD;border-radius:10px;padding:10px;margin-bottom:6px;font-size:.8rem;color:#0D47A1;">💪 ${d.tense.note}</div>`;
+    html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">`;
+    d.tense.chars.forEach(ch => {
+      html += `<div style="background:#fff;border-radius:14px;padding:16px;text-align:center;border:2px solid #1565C040;">
+        <div style="display:flex;justify-content:center;gap:6px;align-items:center;margin-bottom:8px;">
+          <div onclick="b1Speak('${ch.base}아')" style="background:#1565C020;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#1565C0;cursor:pointer;">${ch.base}</div>
+          <div style="color:#aaa;">→</div>
+          <div onclick="b1Speak('${ch.with_a}')" style="background:#1565C040;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#0D47A1;cursor:pointer;">${ch.tense}</div>
+        </div>
+        <div style="font-size:.75rem;color:#555;">${ch.sound} · ${ch.emoji} ${ch.example}</div>
+        <div style="font-size:.72rem;color:#888;">${ch.example_en}</div>
+      </div>`;
+    });
+    html += '</div>';
+    c.innerHTML += html + `<div id="b1-game-area"></div>`;
+    if (d.compare_game) renderB1CompareGame(d.compare_game, pc);
+    return;
+  }
+
+  // Units 03, 04: standard consonant cards
+  const note = d.note ? `<div style="background:#FFEBEE;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#B71C1C;font-weight:600;">💡 ${d.note.ko}<br><span style="color:#888;font-weight:400;">${d.note.en}</span></div>` : '';
+  const cards = (d.chars||[]).map(ch => `
+    <div onclick="b1Speak('${ch.with_a}')" style="background:#fff;border-radius:14px;padding:18px 12px;text-align:center;border:2px solid ${ch.color}40;cursor:pointer;transition:.15s;box-shadow:0 2px 8px #0001;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform=''">
+      <div style="font-size:3rem;font-weight:900;color:${ch.color};">${ch.char}</div>
+      <div style="font-size:.85rem;font-weight:700;color:#555;margin-top:4px;">${ch.sound}</div>
+      <div style="font-size:1.5rem;margin-top:6px;">${ch.emoji}</div>
+      <div style="font-size:.75rem;color:#333;margin-top:4px;">${ch.example}</div>
+      <div style="font-size:.7rem;color:#888;">${ch.example_en}</div>
+      ${ch.tip?`<div style="font-size:.68rem;color:#FF8C00;margin-top:4px;font-style:italic;">${ch.tip}</div>`:''}
+    </div>`).join('');
+
+  c.innerHTML += note + `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 12px;">🔊 클릭해서 들어봐요! (+ ㅏ 소리)</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">${cards}</div>`;
+
+  // Combo preview (Unit 03)
+  if (d.combo_preview) {
+    let html = `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">🧱 자음 + 모음 미리보기!</h3><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">`;
+    d.combo_preview.forEach(row => {
+      const syls = row.words.map(w => `<div onclick="b1Speak('${w.syl}')" style="background:#fff;border:2px solid ${pc}30;border-radius:10px;padding:10px 14px;text-align:center;cursor:pointer;min-width:52px;">
+        <div style="font-size:1.8rem;font-weight:900;color:#222;">${w.syl}</div>
+        <div style="font-size:.65rem;color:#aaa;">${w.hint}</div>
+      </div>`).join('');
+      html += `<div style="display:flex;align-items:center;gap:8px;background:#f8f8ff;border-radius:12px;padding:10px 14px;">
+        <div style="font-size:1.8rem;font-weight:900;color:${pc};min-width:32px;">${row.con}</div>
+        <div style="color:#aaa;">+</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">${syls}</div>
+      </div>`;
+    });
+    c.innerHTML += html + '</div>';
+  }
+
+  c.innerHTML += `<div id="b1-game-area"></div>`;
+  if (d.first_sound_game) renderB1FirstSoundGame(d.first_sound_game, pc);
+  if (d.memory_game) renderB1MemoryGame2(d.memory_game, pc);
+}
+
+// First Sound Game (Unit 03)
+function renderB1FirstSoundGame(game, pc) {
+  const wrap = document.getElementById('b1-game-area'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1FirstSoundGame(window._b1CurrentGame,window._b1CurrentPc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    const r = rounds[idx];
+    const btns = r.choices.map(ch =>
+      `<button onclick="window._b1FSAns('${ch}','${r.correct}')" style="background:#fff;border:3px solid ${pc}40;border-radius:14px;padding:18px 16px;font-size:2.5rem;font-weight:900;cursor:pointer;min-width:72px;color:#222;transition:.15s;" onmouseover="this.style.borderColor='${pc}'" onmouseout="this.style.borderColor='${pc}40'">${ch}</button>`
+    ).join('');
+    wrap.innerHTML = `<div style="background:#fff8f8;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.85rem;font-weight:700;color:${pc};margin-bottom:12px;">🎮 ${game.title}</div>
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-size:4rem;" onclick="b1Speak('${r.word}')">${r.emoji}</div>
+        <div onclick="b1Speak('${r.word}')" style="font-size:1.6rem;font-weight:800;color:#222;cursor:pointer;margin-top:6px;">${r.word} 🔊</div>
+      </div>
+      <div style="font-size:.8rem;color:#888;text-align:center;margin-bottom:12px;">${game.instruction}</div>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+    setTimeout(()=>b1Speak(r.word), 300);
+    window._b1FSAns = function(chosen, correct) {
+      if (chosen === correct) { score++; b1Speak(correct); }
+      idx++; setTimeout(show, 500);
+    };
+  }
+  window._b1CurrentGame = game; window._b1CurrentPc = pc;
+  show();
+}
+
+// Memory Game 2 (Unit 04)
+function renderB1MemoryGame2(game, pc) {
+  const wrap = document.getElementById('b1-game-area'); if (!wrap) return;
+  const pairs = game.pairs || [];
+  const cards = [];
+  pairs.forEach((p,i) => { cards.push({id:i*2, val:p.a, pair:i}); cards.push({id:i*2+1, val:p.b, pair:i}); });
+  cards.sort(()=>Math.random()-.5);
+  let flipped = [], matched = [], score = 0;
+  function render() {
+    const grid = cards.map(card => {
+      const isMatched = matched.includes(card.pair);
+      const isFlipped = flipped.find(f=>f.id===card.id);
+      return `<div onclick="window._b1MemFlip(${card.id})" data-memid="${card.id}" style="background:${isMatched?pc:isFlipped?'#fff':'#e8e8e8'};border:3px solid ${isMatched?pc:isFlipped?pc+'80':'#ccc'};border-radius:14px;padding:20px 12px;text-align:center;cursor:${isMatched?'default':'pointer'};font-size:2rem;font-weight:900;min-height:70px;display:flex;align-items:center;justify-content:center;color:${isMatched?'#fff':isFlipped?'#222':'#e8e8e8'};transition:.2s;">
+        ${isMatched||isFlipped?card.val:'?'}
+      </div>`;
+    }).join('');
+    wrap.innerHTML = `<div style="background:#f8f8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.85rem;font-weight:700;color:${pc};margin-bottom:12px;">🎮 ${game.title} — ${game.instruction}</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">${grid}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">✅ ${matched.length}/${pairs.length} 쌍</div>
+    </div>`;
+    if (matched.length === pairs.length) {
+      setTimeout(()=>{ wrap.innerHTML += `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:20px;color:#fff;margin-top:12px;"><div style="font-size:2rem;">🎉</div><div style="font-weight:800;">모두 찾았어요! All matched!</div></div>`; }, 300);
+    }
+  }
+  window._b1MemFlip = function(id) {
+    const card = cards.find(c=>c.id===id);
+    if (!card || matched.includes(card.pair) || flipped.length >= 2 || flipped.find(f=>f.id===id)) return;
+    b1Speak(card.val);
+    flipped.push(card);
+    if (flipped.length === 2) {
+      if (flipped[0].pair === flipped[1].pair) { matched.push(flipped[0].pair); flipped = []; setTimeout(render,400); }
+      else { setTimeout(()=>{ flipped=[]; render(); }, 800); }
+    }
+    render();
+  };
+  render();
+}
+
+// Compare Game (Unit 05)
+function renderB1CompareGame(game, pc) {
+  const wrap = document.getElementById('b1-game-area'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1CompareGame(window._b1CurrentGame,window._b1CurrentPc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    const r = rounds[idx];
+    const btns = r.choices.map(ch =>
+      `<button onclick="window._b1CmpAns('${ch}','${r.correct}')" style="background:#fff;border:3px solid #ddd;border-radius:14px;padding:16px 20px;font-size:2.2rem;font-weight:900;cursor:pointer;min-width:70px;">${ch}</button>`
+    ).join('');
+    wrap.innerHTML = `<div style="background:#f8f8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.85rem;font-weight:700;color:${pc};margin-bottom:12px;">🎮 ${game.title}</div>
+      <div style="text-align:center;margin-bottom:16px;">
+        <div onclick="b1Speak('${r.word}')" style="font-size:4.5rem;font-weight:900;cursor:pointer;color:#222;">${r.word}</div>
+        <div style="font-size:.8rem;color:#888;margin-top:4px;">기본: <strong>${r.base}</strong></div>
+      </div>
+      <div style="font-size:.8rem;color:#555;text-align:center;margin-bottom:12px;">${game.instruction}</div>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+    setTimeout(()=>b1Speak(r.word), 300);
+    window._b1CmpAns = function(chosen, correct) {
+      if (chosen === correct) { score++; b1Speak(correct); }
+      idx++; setTimeout(show, 500);
+    };
+  }
+  window._b1CurrentGame = game; window._b1CurrentPc = pc;
+  show();
+}
+
+// ─────────────────────────────────────────────────────────────
+// 🟢 COMBINATION UNITS (06, 07, 08) — Block tap game
+// ─────────────────────────────────────────────────────────────
+function renderB1Combination(d, pc) {
+  const c = document.getElementById('b1-unit-container');
+
+  // Note/intro
+  if (d.note) {
+    c.innerHTML += `<div style="background:#E3F2FD;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#0D47A1;font-weight:600;">💡 ${d.note.ko}<br><span style="color:#888;font-weight:400;">${d.note.en}</span></div>`;
+  }
+
+  // Unit 08 compound vowel intro
+  if (d.chars) {
+    const cards = d.chars.map(ch => `
+      <div onclick="b1Speak('${ch.char}')" style="background:${ch.color};border-radius:14px;padding:18px;text-align:center;color:#fff;cursor:pointer;">
+        <div style="font-size:3rem;font-weight:900;">${ch.char}</div>
+        <div style="font-size:.9rem;font-weight:700;">${ch.sound}</div>
+        <div style="font-size:1.4rem;">${ch.emoji}</div>
+        <div style="font-size:.8rem;opacity:.9;">${ch.example} = ${ch.example_en}</div>
+      </div>`).join('');
+    c.innerHTML += `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px;">${cards}</div>`;
+  }
+  if (d.compound_intro) {
+    const items = d.compound_intro.items.map(i => `<div style="background:#fff;border-radius:10px;padding:12px;font-size:1rem;font-weight:700;color:#222;">${i.combo} <span style="font-size:.8rem;color:#888;font-weight:400;">— ${i.note}</span></div>`).join('');
+    c.innerHTML += `<div style="margin-bottom:16px;"><div style="font-weight:700;color:${pc};margin-bottom:8px;">${d.compound_intro.title}</div>${items}</div>`;
+  }
+
+  // Words preview
+  if (d.words) c.innerHTML += b1WordRow(d.words, pc);
+
+  // Block game
+  if (d.block_game) {
+    c.innerHTML += `<div id="b1-block-game"></div>`;
+    renderB1BlockGame(d.block_game, d.consonants||[], d.vowels||[], pc);
+  }
+}
+
+function renderB1BlockGame(game, consonants, vowels, pc) {
+  const wrap = document.getElementById('b1-block-game'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  let selCon = null, selVow = null;
+
+  const allCons = consonants.length ? consonants : ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅎ'];
+  const allVows = vowels.length ? vowels : ['ㅏ','ㅓ','ㅗ','ㅜ','ㅡ','ㅣ','ㅐ','ㅔ'];
+
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1BlockGame(window._b1BG,window._b1BGcons,window._b1BGvows,window._b1BGpc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    selCon = null; selVow = null;
+    const r = rounds[idx];
+    const conBtns = allCons.map(ch =>
+      `<button id="b1bc-${ch}" onclick="window._b1BGSelCon('${ch}')" style="background:#FFEBEE;border:3px solid #E5393540;border-radius:10px;padding:10px 8px;font-size:1.6rem;font-weight:900;cursor:pointer;color:#E53935;transition:.2s;min-width:44px;">${ch}</button>`
+    ).join('');
+    const vowBtns = allVows.map(ch =>
+      `<button id="b1bv-${ch}" onclick="window._b1BGSelVow('${ch}')" style="background:#E8F5E9;border:3px solid #43A04740;border-radius:10px;padding:10px 8px;font-size:1.6rem;font-weight:900;cursor:pointer;color:#43A047;transition:.2s;min-width:44px;">${ch}</button>`
+    ).join('');
+
+    wrap.innerHTML = `<div style="background:#f8f8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:6px;">🧱 ${game.title}</div>
+      <div style="font-size:.8rem;color:#666;margin-bottom:14px;">${game.instruction}</div>
+      <!-- Target -->
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-size:.8rem;color:#888;margin-bottom:4px;">만들어야 할 음절:</div>
+        <div onclick="b1Speak('${r.target}')" style="font-size:5rem;font-weight:900;color:#222;cursor:pointer;line-height:1;">${r.target}</div>
+        <div style="font-size:.8rem;color:#aaa;margin-top:4px;">${r.hint||''}</div>
+      </div>
+      <!-- Block assembly display -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;">
+        <div id="b1-blk-con" style="background:#FFEBEE;border:3px dashed #E5393560;border-radius:12px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:900;color:#E53935;">?</div>
+        <div style="font-size:1.5rem;color:#aaa;">+</div>
+        <div id="b1-blk-vow" style="background:#E8F5E9;border:3px dashed #43A04760;border-radius:12px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:900;color:#43A047;">?</div>
+        <div style="font-size:1.5rem;color:#aaa;">=</div>
+        <div id="b1-blk-result" style="background:#F3E5F5;border:3px dashed #8E24AA60;border-radius:12px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:900;color:#8E24AA;">?</div>
+      </div>
+      <!-- Consonant picker -->
+      <div style="margin-bottom:12px;">
+        <div style="font-size:.78rem;font-weight:700;color:#E53935;margin-bottom:6px;">🔴 자음 Consonant</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">${conBtns}</div>
+      </div>
+      <!-- Vowel picker -->
+      <div style="margin-bottom:14px;">
+        <div style="font-size:.78rem;font-weight:700;color:#43A047;margin-bottom:6px;">🟢 모음 Vowel</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">${vowBtns}</div>
+      </div>
+      <div id="b1-blk-feedback" style="text-align:center;min-height:30px;"></div>
+      <div style="text-align:center;margin-top:8px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+
+    setTimeout(()=>b1Speak(r.target), 400);
+
+    window._b1BGSelCon = function(ch) {
+      selCon = ch;
+      document.querySelectorAll('[id^="b1bc-"]').forEach(b => {
+        b.style.background = b.id === 'b1bc-'+ch ? '#E53935' : '#FFEBEE';
+        b.style.color = b.id === 'b1bc-'+ch ? '#fff' : '#E53935';
+        b.style.borderColor = b.id === 'b1bc-'+ch ? '#E53935' : '#E5393540';
+      });
+      const blk = document.getElementById('b1-blk-con');
+      if (blk) { blk.textContent = ch; blk.style.borderStyle='solid'; blk.style.borderColor='#E53935'; }
+      b1Speak(ch + 'ㅏ'.normalize ? ch : ch);
+      b1BGCheck(r);
+    };
+    window._b1BGSelVow = function(ch) {
+      selVow = ch;
+      document.querySelectorAll('[id^="b1bv-"]').forEach(b => {
+        b.style.background = b.id === 'b1bv-'+ch ? '#43A047' : '#E8F5E9';
+        b.style.color = b.id === 'b1bv-'+ch ? '#fff' : '#43A047';
+        b.style.borderColor = b.id === 'b1bv-'+ch ? '#43A047' : '#43A04740';
+      });
+      const blk = document.getElementById('b1-blk-vow');
+      if (blk) { blk.textContent = ch; blk.style.borderStyle='solid'; blk.style.borderColor='#43A047'; }
+      b1BGCheck(r);
+    };
+  }
+
+  function b1BGCheck(r) {
+    if (!selCon || !selVow) return;
+    const ci = B1_CHO_IDX[selCon], vi = B1_VOW_IDX[selVow];
+    if (ci === undefined || vi === undefined) return;
+    const result = String.fromCodePoint((ci * 21 + vi) * 28 + 0xAC00);
+    const blk = document.getElementById('b1-blk-result');
+    const fb = document.getElementById('b1-blk-feedback');
+    if (blk) { blk.textContent = result; blk.style.borderStyle='solid'; }
+    if (result === r.target) {
+      if (blk) { blk.style.background='#43A04730'; blk.style.borderColor='#43A047'; }
+      if (fb) fb.innerHTML = `<div style="color:#43A047;font-weight:700;font-size:1.1rem;">🎉 정답! Correct!</div>`;
+      score++;
+      b1Speak(result);
+      setTimeout(()=>{ idx++; show(); }, 900);
+    } else {
+      if (blk) { blk.style.background='#FFEBEE'; blk.style.borderColor='#E53935'; }
+      if (fb) fb.innerHTML = `<div style="color:#E53935;font-size:.9rem;">다시 해봐요! Try again 💪</div>`;
+      setTimeout(()=>{
+        if(blk){blk.style.background='#F3E5F5';blk.style.borderColor='#8E24AA60';}
+        if(fb)fb.innerHTML='';
+      }, 700);
+      selCon = null; selVow = null;
+      document.querySelectorAll('[id^="b1bc-"],[id^="b1bv-"]').forEach(b=>{
+        if(b.id.startsWith('b1bc-')){b.style.background='#FFEBEE';b.style.color='#E53935';b.style.borderColor='#E5393540';}
+        else{b.style.background='#E8F5E9';b.style.color='#43A047';b.style.borderColor='#43A04740';}
+      });
+      const bc=document.getElementById('b1-blk-con'),bv=document.getElementById('b1-blk-vow');
+      if(bc){bc.textContent='?';bc.style.borderStyle='dashed';}
+      if(bv){bv.textContent='?';bv.style.borderStyle='dashed';}
+    }
+  }
+
+  window._b1BG = game; window._b1BGcons = consonants; window._b1BGvows = vowels; window._b1BGpc = pc;
+  show();
+}
+
+// ─────────────────────────────────────────────────────────────
+// 🟡 BATCHIM UNITS (09, 10) — 3-layer block game
+// ─────────────────────────────────────────────────────────────
+function renderB1Batchim(d, pc) {
+  const c = document.getElementById('b1-unit-container');
+
+  // Intro box
+  if (d.intro) {
+    c.innerHTML += `<div style="background:#FFF8E1;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#E65100;font-weight:600;">🏗️ ${d.intro.ko}<br><span style="color:#888;font-weight:400;">${d.intro.en}</span></div>`;
+  }
+  if (d.note) {
+    c.innerHTML += `<div style="background:#FFF3E0;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#BF360C;">⚠️ ${d.note.ko}<br><span style="color:#888;font-weight:400;">${d.note.en}</span></div>`;
+  }
+
+  // Batchim character cards
+  const chars = (d.batchim_chars||[]).map(ch => `
+    <div onclick="b1Speak('${ch.char}')" style="background:#E3F2FD;border-radius:14px;padding:14px 10px;text-align:center;border:2px solid #1565C040;cursor:pointer;">
+      <div style="font-size:2.8rem;font-weight:900;color:#1565C0;">${ch.char}</div>
+      <div style="font-size:.8rem;font-weight:700;color:#555;">[${ch.sound}]</div>
+      <div style="font-size:1.2rem;">${ch.emoji}</div>
+      <div style="margin-top:6px;">${(ch.examples||[]).map(e=>`<span onclick="b1Speak('${e}');event.stopPropagation();" style="background:#fff;border-radius:6px;padding:2px 7px;font-size:.85rem;margin:2px;display:inline-block;cursor:pointer;">${e}</span>`).join('')}</div>
+    </div>`).join('');
+  c.innerHTML += `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">📌 받침 글자 Final Consonants</h3>
+    <div style="display:grid;grid-template-columns:repeat(${Math.min(d.batchim_chars.length,4)},1fr);gap:12px;margin-bottom:20px;">${chars}</div>`;
+
+  // 3-layer block diagram explanation
+  c.innerHTML += `<div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:20px;border:2px solid ${pc}20;">
+    <div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:10px;">🏗️ 3층 블럭 구조 3-Layer Structure</div>
+    <div style="display:flex;gap:16px;align-items:center;justify-content:center;">
+      <div style="text-align:center;">
+        <div style="background:#FFEBEE;border:2px solid #E53935;border-radius:8px 8px 0 0;padding:10px 18px;font-size:1.6rem;font-weight:900;color:#E53935;">자</div>
+        <div style="background:#E8F5E9;border:2px solid #43A047;border-top:none;padding:10px 18px;font-size:1.6rem;font-weight:900;color:#43A047;">모</div>
+        <div style="background:#E3F2FD;border:2px solid #1565C0;border-top:none;border-radius:0 0 8px 8px;padding:10px 18px;font-size:1.6rem;font-weight:900;color:#1565C0;">받</div>
+      </div>
+      <div style="color:#aaa;">→</div>
+      <div onclick="b1Speak('밥')" style="font-size:5rem;font-weight:900;color:#222;cursor:pointer;">밥</div>
+      <div style="font-size:.8rem;color:#555;max-width:100px;">ㅂ(자음)<br>+ ㅏ(모음)<br>+ ㅂ(받침)<br>= 밥</div>
+    </div>
+  </div>`;
+
+  c.innerHTML += `<div id="b1-batchim-game"></div>`;
+  renderB1BatchimGame(d.block_game, d.batchim_chars||[], pc);
+}
+
+function renderB1BatchimGame(game, batchimChars, pc) {
+  const wrap = document.getElementById('b1-batchim-game'); if (!wrap||!game) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  const bChars = batchimChars.map(b=>b.char);
+
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1BatchimGame(window._b1BtGame,window._b1BtChars,window._b1BtPc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    const r = rounds[idx];
+    const choices = (r.choices||bChars).map(ch =>
+      `<button onclick="window._b1BtAns('${ch}','${r.batchim}')" style="background:#E3F2FD;border:3px solid #1565C040;border-radius:12px;padding:14px 18px;font-size:2rem;font-weight:900;cursor:pointer;color:#1565C0;transition:.2s;min-width:60px;">${ch}</button>`
+    ).join('');
+
+    wrap.innerHTML = `<div style="background:#f0f8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:10px;">🧱 ${game.title}</div>
+      <div style="font-size:.8rem;color:#666;margin-bottom:14px;">${game.instruction}</div>
+      <!-- Target word -->
+      <div style="text-align:center;margin-bottom:14px;">
+        <div onclick="b1Speak('${r.result}')" style="font-size:4.5rem;font-weight:900;color:#222;cursor:pointer;">${r.result}</div>
+        <div style="font-size:.85rem;color:#888;margin-top:4px;">${r.hint||''}</div>
+      </div>
+      <!-- 3-layer block -->
+      <div style="display:flex;justify-content:center;gap:8px;margin-bottom:18px;align-items:flex-start;">
+        <div style="text-align:center;">
+          <div style="background:#FFEBEE;border:3px solid #E53935;border-radius:8px 8px 0 0;padding:12px 16px;font-size:2rem;font-weight:900;color:#E53935;">${r.base_con}</div>
+          <div style="background:#E8F5E9;border:3px solid #43A047;border-top:none;padding:12px 16px;font-size:2rem;font-weight:900;color:#43A047;">${r.base_vow}</div>
+          <div id="b1-bt-jong" style="background:#E3F2FD;border:3px dashed #1565C0;border-top:none;border-radius:0 0 8px 8px;padding:12px 16px;font-size:2rem;font-weight:900;color:#1565C0;min-width:52px;">?</div>
+        </div>
+        <div style="padding-top:14px;font-size:1.2rem;color:#aaa;">=</div>
+        <div id="b1-bt-result" style="padding-top:8px;font-size:3.5rem;font-weight:900;color:#aaa;">${r.base_syl}?</div>
+      </div>
+      <!-- Batchim choices -->
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">${choices}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+
+    setTimeout(()=>b1Speak(r.result), 400);
+
+    window._b1BtAns = function(chosen, correct) {
+      const jongEl = document.getElementById('b1-bt-jong');
+      const resultEl = document.getElementById('b1-bt-result');
+      if (jongEl) jongEl.textContent = chosen;
+      const ci = B1_CHO_IDX[r.base_con], vi = B1_VOW_IDX[r.base_vow];
+      const ji = B1_JONG_IDX[chosen] || 0;
+      const syl = (ci!==undefined && vi!==undefined) ? String.fromCodePoint((ci*21+vi)*28+ji+0xAC00) : '?';
+      if (resultEl) resultEl.textContent = syl;
+      if (chosen === correct) {
+        if (jongEl) { jongEl.style.background='#43A04730'; jongEl.style.borderColor='#43A047'; jongEl.style.borderStyle='solid'; }
+        if (resultEl) resultEl.style.color='#43A047';
+        score++; b1Speak(r.result);
+        setTimeout(()=>{ idx++; show(); }, 900);
+      } else {
+        if (jongEl) { jongEl.style.background='#FFEBEE'; jongEl.style.borderColor='#E53935'; }
+        if (resultEl) resultEl.style.color='#E53935';
+        setTimeout(()=>{ if(jongEl){jongEl.textContent='?';jongEl.style.background='#E3F2FD';jongEl.style.borderColor='#1565C0';jongEl.style.borderStyle='dashed';}if(resultEl){resultEl.textContent=r.base_syl+'?';resultEl.style.color='#aaa';} }, 700);
+      }
+    };
+  }
+  window._b1BtGame = game; window._b1BtChars = batchimChars; window._b1BtPc = pc;
+  show();
+}
+
+// ─────────────────────────────────────────────────────────────
+// 🟣 SENTENCE UNITS (11, 12, 13)
+// ─────────────────────────────────────────────────────────────
+function renderB1Sentence(d, pc) {
+  const c = document.getElementById('b1-unit-container');
+
+  // Pattern box
+  if (d.pattern) {
+    const p = d.pattern;
+    let html = `<div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;border:2px solid ${pc}30;">
+      <div style="font-size:1.1rem;font-weight:800;color:${pc};margin-bottom:10px;">📌 ${p.rule||p.pattern||''}</div>`;
+    if (p.note_ko) html += `<div style="font-size:.85rem;color:#333;margin-bottom:2px;">🇰🇷 ${p.note_ko}</div><div style="font-size:.82rem;color:#888;margin-bottom:10px;">🇺🇸 ${p.note_en}</div>`;
+    if (p.items) {
+      html += p.items.map(i=>`<div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+        <div onclick="b1Speak('${i.kr}')" style="background:${pc}15;border-radius:8px;padding:6px 12px;font-size:1rem;font-weight:700;color:#222;cursor:pointer;">${i.kr}</div>
+        <div style="font-size:.85rem;color:#555;">${i.en} <span style="color:#aaa;font-size:.78rem;">— ${i.note}</span></div>
+      </div>`).join('');
+    }
+    if (p.examples) {
+      html += '<div style="margin-top:10px;background:#f8f8ff;border-radius:10px;padding:12px;">';
+      html += p.examples.map(e=>`<div style="margin-bottom:6px;"><span onclick="b1Speak('${e.kr}')" style="font-weight:700;color:#222;cursor:pointer;">${e.kr}</span> <span style="color:#888;font-size:.85rem;">${e.en}</span>${e.note?`<span style="color:#43A047;font-size:.75rem;margin-left:6px;">(${e.note})</span>`:''}</div>`).join('');
+      html += '</div>';
+    }
+    html += '</div>';
+    c.innerHTML += html;
+  }
+
+  // Vocab
+  if (d.vocab) c.innerHTML += b1WordRow(d.vocab, pc);
+
+  // Game area
+  c.innerHTML += `<div id="b1-sent-game"></div>`;
+  const wrap = document.getElementById('b1-sent-game');
+  if (d.word_card_game) renderB1SentenceGame(d.word_card_game, pc);
+  else if (d.picture_game) renderB1SentenceGame(d.picture_game, pc);
+  else if (d.find_game) renderB1FindGame(d.find_game, pc);
+}
+
+function renderB1SentenceGame(game, pc) {
+  const wrap = document.getElementById('b1-sent-game'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1SentenceGame(window._b1SentGame,window._b1SentPc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    const r = rounds[idx];
+    const btns = r.choices.map(ch =>
+      `<button onclick="window._b1SAns('${ch.replace(/'/g,"\\'")}','${r.answer.replace(/'/g,"\\'")}','${r.emoji||''}')" style="background:#fff;border:3px solid ${pc}30;border-radius:12px;padding:14px 16px;font-size:.95rem;font-weight:700;cursor:pointer;text-align:left;color:#222;transition:.15s;width:100%;" onmouseover="this.style.borderColor='${pc}'" onmouseout="this.style.borderColor='${pc}30'">${ch}</button>`
+    ).join('');
+    wrap.innerHTML = `<div style="background:#faf8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.85rem;font-weight:700;color:${pc};margin-bottom:12px;">🎮 ${game.title}</div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div style="font-size:4rem;">${r.emoji||''}</div>
+        ${r.question?`<div style="font-size:1rem;color:#555;margin-top:4px;">${r.question}</div>`:''}
+      </div>
+      <div style="font-size:.8rem;color:#888;margin-bottom:10px;">${game.instruction}</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">${btns}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+    window._b1SAns = function(chosen, correct, emoji) {
+      if (chosen === correct) { score++; b1Speak(correct); }
+      idx++; setTimeout(show, chosen===correct ? 700 : 400);
+    };
+  }
+  window._b1SentGame = game; window._b1SentPc = pc;
+  show();
+}
+
+function renderB1FindGame(game, pc) {
+  const wrap = document.getElementById('b1-sent-game'); if (!wrap) return;
+  let idx = 0, score = 0;
+  const rounds = game.rounds || [];
+  function show() {
+    if (idx >= rounds.length) {
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
+        <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
+        <button onclick="renderB1FindGame(window._b1FindGame,window._b1FindPc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+      </div>`; return;
+    }
+    const r = rounds[idx];
+    const correct = r.answer; const wrong = r.alt;
+    const opts = Math.random()>.5 ? [correct,wrong] : [wrong,correct];
+    const btns = opts.map(ch =>
+      `<button onclick="window._b1FAns('${ch.replace(/'/g,"\\'")}','${correct.replace(/'/g,"\\'")}','${r.has}')" style="background:#fff;border:3px solid ${pc}30;border-radius:12px;padding:14px;font-size:.95rem;font-weight:700;cursor:pointer;text-align:center;color:#222;width:100%;transition:.15s;" onmouseover="this.style.borderColor='${pc}'" onmouseout="this.style.borderColor='${pc}30'">${ch}</button>`
+    ).join('');
+    wrap.innerHTML = `<div style="background:#faf8ff;border-radius:16px;padding:20px;border:2px solid ${pc}20;">
+      <div style="font-size:.85rem;font-weight:700;color:${pc};margin-bottom:12px;">🎮 ${game.title}</div>
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-size:.9rem;color:#555;margin-bottom:8px;">${r.scene||''}</div>
+        <div style="font-size:5rem;">${r.emoji}</div>
+        <div style="font-size:1.4rem;margin-top:6px;">${r.has?'✅':'❌'}</div>
+      </div>
+      <div style="font-size:.8rem;color:#888;margin-bottom:10px;">${game.instruction}</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">${btns}</div>
+      <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
+    </div>`;
+    window._b1FAns = function(chosen, correct) {
+      if (chosen === correct) { score++; b1Speak(correct); }
+      idx++; setTimeout(show, chosen===correct ? 700 : 400);
+    };
+  }
+  window._b1FindGame = game; window._b1FindPc = pc;
+  show();
+}
+
+// ─────────────────────────────────────────────────────────────
+// 🟤 PREREQ UNIT (00) — 자모 탐험기 (enhanced)
+// ─────────────────────────────────────────────────────────────
 function renderB1Prereq(d) {
-  const c=document.getElementById('b1-unit-container');
-  c.innerHTML=`
-  <div style="background:linear-gradient(135deg,#FF8A65,#FFB300);border-radius:16px;padding:22px 26px;margin-bottom:22px;color:#fff;">
-    <div style="font-size:1.5rem;font-weight:700;">${d.title}</div>
-    <div style="margin-top:6px;opacity:.9;">${(d.goal&&d.goal.ko)||''}</div>
-    <div style="font-size:.9rem;opacity:.75;">${(d.goal&&d.goal.en)||''}</div>
-  </div>
+  const c = document.getElementById('b1-unit-container');
+  c.innerHTML = b1Header(d, '#795548') + `
   <div class="b3-snav" id="b1pre-snav">
     <button class="snav-btn active" onclick="b1PreTab('vowels')">🌈 모음</button>
     <button class="snav-btn" onclick="b1PreTab('consonants')">🔤 자음</button>
-    <button class="snav-btn" onclick="b1PreTab('syllable')">🧩 음절 만들기</button>
+    <button class="snav-btn" onclick="b1PreTab('syllable')">🧩 음절</button>
     <button class="snav-btn" onclick="b1PreTab('words')">📝 단어</button>
     <button class="snav-btn" onclick="b1PreTab('game')">🎮 게임</button>
   </div>
@@ -3832,18 +4369,18 @@ function b1PreTab(name){
 function renderB1PreVowels(d){
   const sec=document.getElementById('b1pre-vowels'); if(!sec) return;
   const cards=(d.vowels||[]).map(v=>`
-    <div onclick="b1Speak('${v.name}')" style="background:${v.color};border-radius:14px;padding:14px;text-align:center;color:#fff;cursor:pointer;transition:.15s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform=''">
-      <div style="font-size:2.2rem;font-weight:900;">${v.char}</div>
-      <div style="font-size:.95rem;font-weight:700;">${v.name} (${v.sound})</div>
+    <div onclick="b1Speak('${v.name}')" style="background:${v.color};border-radius:16px;padding:18px 12px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 3px 10px ${v.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+      <div style="font-size:2.8rem;font-weight:900;line-height:1;">${v.char}</div>
+      <div style="font-size:.9rem;font-weight:700;margin-top:6px;">${v.name} (${v.sound})</div>
       <div style="font-size:1.3rem;margin-top:4px;">${v.emoji}</div>
-      <div style="font-size:.8rem;margin-top:2px;opacity:.9;">${v.example_word} = ${v.example_en}</div>
+      <div style="font-size:.75rem;margin-top:2px;opacity:.9;">${v.example_word} = ${v.example_en}</div>
     </div>`).join('');
   const vwords=(d.vowel_only_words||[]).map(w=>`
     <div onclick="b1Speak('${w.word}')" style="background:#fff;border:2px solid #FFB300;border-radius:12px;padding:12px;text-align:center;cursor:pointer;">
-      <div style="font-size:1.5rem;">${w.emoji}</div>
-      <div style="font-size:1.2rem;font-weight:700;color:#E65100;">${w.word}</div>
-      <div style="font-size:.8rem;color:#888;">${w.en}</div>
-      <div style="font-size:.8rem;color:#FF8A65;">${(w.syllables||[]).join(' + ')}</div>
+      <div style="font-size:1.4rem;">${w.emoji}</div>
+      <div style="font-size:1.3rem;font-weight:800;color:#E65100;">${w.word}</div>
+      <div style="font-size:.78rem;color:#888;">${w.en}</div>
+      <div style="font-size:.78rem;color:#FF8A65;">${(w.syllables||[]).join(' + ')}</div>
     </div>`).join('');
   sec.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#FF8A65;margin:0 0 10px;">🌈 기본 모음 10개 — 클릭해서 들어봐요!</h3>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;">${cards}</div>
@@ -3854,31 +4391,31 @@ function renderB1PreVowels(d){
 function renderB1PreConsonants(d){
   const sec=document.getElementById('b1pre-consonants'); if(!sec) return;
   const cards=(d.consonants||[]).map(c=>`
-    <div onclick="b1Speak('${c.name}')" style="background:${c.color};border-radius:12px;padding:12px;text-align:center;color:#fff;cursor:pointer;transition:.15s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform=''">
-      <div style="font-size:2rem;font-weight:900;">${c.char}</div>
-      <div style="font-size:.8rem;font-weight:700;">${c.name}</div>
-      <div style="font-size:.75rem;opacity:.85;">${c.sound}</div>
-      <div style="font-size:1.1rem;">${c.emoji}</div>
-      <div style="font-size:.72rem;opacity:.9;">${c.example_word}</div>
+    <div onclick="b1Speak('${c.name}')" style="background:${c.color};border-radius:12px;padding:14px 10px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 2px 8px ${c.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+      <div style="font-size:2.5rem;font-weight:900;line-height:1;">${c.char}</div>
+      <div style="font-size:.78rem;font-weight:700;margin-top:4px;">${c.name}</div>
+      <div style="font-size:.72rem;opacity:.85;">${c.sound}</div>
+      <div style="font-size:1.1rem;margin-top:2px;">${c.emoji}</div>
+      <div style="font-size:.7rem;opacity:.9;">${c.example_word}</div>
     </div>`).join('');
   sec.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#5C6BC0;margin:0 0 10px;">🔤 기본 자음 14개 — 클릭해서 들어봐요!</h3>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">${cards}</div>`;
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">${cards}</div>`;
 }
 
 function renderB1PreSyllable(d){
   const sec=document.getElementById('b1pre-syllable'); if(!sec) return;
   const cons=d.consonants||[]; const vows=d.vowels||[];
   const hiWords=(d.syllable_grid&&d.syllable_grid.highlight_words)||{};
-  const choHtml=cons.map(c=>`<button onclick="b1ChoSel('${c.char}',${c.cho_idx})" data-cho="${c.char}" style="background:#EDE7F6;border:2px solid #D1C4E9;border-radius:8px;padding:7px 12px;font-size:1.1rem;cursor:pointer;">${c.char}</button>`).join('');
-  const vowHtml=vows.map(v=>`<button onclick="b1VowSel('${v.char}',${B1_VOW_IDX[v.char]||0})" data-vow="${v.char}" style="background:#FFF3E0;border:2px solid #FFCC80;border-radius:8px;padding:7px 12px;font-size:1.1rem;cursor:pointer;">${v.char}</button>`).join('');
+  const choHtml=cons.map(c=>`<button onclick="b1ChoSel('${c.char}',${c.cho_idx})" data-cho="${c.char}" style="background:#EDE7F6;border:2px solid #D1C4E9;border-radius:8px;padding:8px 14px;font-size:1.2rem;font-weight:700;cursor:pointer;">${c.char}</button>`).join('');
+  const vowHtml=vows.map(v=>`<button onclick="b1VowSel('${v.char}',${B1_VOW_IDX[v.char]||0})" data-vow="${v.char}" style="background:#FFF3E0;border:2px solid #FFCC80;border-radius:8px;padding:8px 14px;font-size:1.2rem;font-weight:700;cursor:pointer;">${v.char}</button>`).join('');
   sec.innerHTML=`
     <h3 style="font-size:1rem;font-weight:700;color:#7E57C2;margin:0 0 6px;">🧩 음절 만들기 — 자음 + 모음!</h3>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;align-items:center;"><span style="font-weight:700;color:#5C6BC0;">자음:</span>${choHtml}</div>
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;align-items:center;"><span style="font-weight:700;color:#FF8A65;">모음:</span>${vowHtml}</div>
-    <div style="text-align:center;padding:20px;background:linear-gradient(135deg,#EDE7F6,#FFF3E0);border-radius:16px;">
-      <div id="b1syl-display" style="font-size:5rem;font-weight:900;color:#311B92;min-height:80px;line-height:1;">?</div>
-      <div id="b1syl-hint" style="font-size:.9rem;color:#7E57C2;margin-top:6px;"></div>
-      <button id="b1syl-speak-btn" style="display:none;margin-top:10px;background:#7E57C2;color:#fff;border:none;border-radius:10px;padding:8px 20px;cursor:pointer;" onclick="if(window._b1CurSyl)b1Speak(window._b1CurSyl)">🔊 듣기</button>
+    <div style="text-align:center;padding:24px;background:linear-gradient(135deg,#EDE7F6,#FFF3E0);border-radius:16px;">
+      <div id="b1syl-display" style="font-size:6rem;font-weight:900;color:#311B92;min-height:90px;line-height:1;">?</div>
+      <div id="b1syl-hint" style="font-size:.9rem;color:#7E57C2;margin-top:8px;"></div>
+      <button id="b1syl-speak-btn" style="display:none;margin-top:10px;background:#7E57C2;color:#fff;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;cursor:pointer;" onclick="if(window._b1CurSyl)b1Speak(window._b1CurSyl)">🔊 듣기</button>
     </div>`;
   window._b1HiWords=hiWords; window._b1SelChoIdx=null; window._b1SelVowIdx=null; window._b1SelCho=null; window._b1SelVow=null;
 }
@@ -3905,7 +4442,6 @@ function b1SylUpdate(){
   if(speakBtn)speakBtn.style.display='';
   window._b1CurSyl=syl;
 }
-
 function renderB1PreWords(d){
   const sec=document.getElementById('b1pre-words'); if(!sec) return;
   const cats={};
@@ -3918,7 +4454,7 @@ function renderB1PreWords(d){
       const sylHtml=(w.syllables||[]).map(s=>`<span style="background:#EDE7F6;border-radius:6px;padding:2px 7px;font-size:.85rem;">${s}</span>`).join('+');
       html+=`<div onclick="b1Speak('${w.word}')" style="background:#fff;border:2px solid #D1C4E9;border-radius:12px;padding:12px;text-align:center;cursor:pointer;min-width:90px;">
         <div style="font-size:1.6rem;">${w.emoji}</div>
-        <div style="font-size:1.1rem;font-weight:700;color:#311B92;">${w.word}</div>
+        <div style="font-size:1.2rem;font-weight:800;color:#311B92;">${w.word}</div>
         <div style="font-size:.78rem;color:#888;">${w.en}</div>
         <div style="margin-top:4px;">${sylHtml}</div>
         ${w.note?`<div style="font-size:.72rem;color:#FF8A65;">${w.note}</div>`:''}
@@ -3928,7 +4464,6 @@ function renderB1PreWords(d){
   }
   sec.innerHTML=html;
 }
-
 function renderB1PreGame(d){
   const sec=document.getElementById('b1pre-game'); if(!sec) return;
   const game=d.recognition_game; if(!game) return;
@@ -3936,19 +4471,19 @@ function renderB1PreGame(d){
   function show(){
     if(idx>=rounds.length){sec.innerHTML=`<div style="text-align:center;padding:30px;"><div style="font-size:2.5rem;">🎉</div><div style="font-size:1.3rem;font-weight:700;color:#4CAF50;margin:8px 0;">완료! ${score}/${rounds.length}점</div><button onclick="window._b1GameRestart()" style="background:#7E57C2;color:#fff;border:none;border-radius:10px;padding:10px 24px;cursor:pointer;">다시하기</button></div>`;return;}
     const r=rounds[idx];
-    const btns=r.choices.map(ch=>`<button onclick="window._b1GameAns('${ch}','${r.correct}')" style="background:#fff;border:2px solid #7E57C2;border-radius:12px;padding:14px 22px;font-size:1.8rem;cursor:pointer;">${ch}</button>`).join('');
+    const btns=r.choices.map(ch=>`<button onclick="window._b1GameAns('${ch}','${r.correct}')" style="background:#fff;border:2px solid #7E57C2;border-radius:12px;padding:16px 24px;font-size:2rem;cursor:pointer;">${ch}</button>`).join('');
     sec.innerHTML=`<h3 style="font-size:1rem;font-weight:700;color:#7E57C2;margin:0 0 12px;">${game.title}</h3>
       <div style="background:#F8F9FF;border-radius:14px;padding:20px;text-align:center;">
         <div style="font-size:.9rem;color:#888;margin-bottom:8px;">${game.instruction}</div>
-        <div style="font-size:4rem;font-weight:900;color:#311B92;margin:16px 0;">${r.prompt}</div>
+        <div onclick="b1Speak('${r.prompt}')" style="font-size:4.5rem;font-weight:900;color:#311B92;margin:16px 0;cursor:pointer;">${r.prompt}</div>
         <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
         <div style="color:#888;font-size:.8rem;margin-top:10px;">${idx+1}/${rounds.length} | ⭐${score}</div>
       </div>`;
     const _gameEl=document.getElementById('b1pre-game');
     if(_gameEl&&_gameEl.style.display!=='none') b1Speak(r.prompt);
+    window._b1GameAns=function(chosen,correct){if(chosen===correct){score++;b1Speak(correct);}idx++;setTimeout(show,500);};
+    window._b1GameRestart=function(){idx=0;score=0;show();};
   }
-  window._b1GameAns=function(chosen,correct){if(chosen===correct){score++;b1Speak(correct);}idx++;setTimeout(show,500);};
-  window._b1GameRestart=function(){idx=0;score=0;show();};
   show();
 }
 
@@ -9564,21 +10099,4 @@ if(document.readyState !== 'loading'){
 .b3-complete{text-align:center;font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;padding:40px;background:#EBF7F6;border-radius:20px;}
 .b3-ans-hint{color:#0D7B75;font-weight:700;margin:10px 0 6px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.95rem;}
 /* Self check */
-.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bottom:16px;font-size:.95rem;}
-.b3-checklist{display:flex;flex-direction:column;gap:10px;margin:16px 0;}
-.b3-check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 16px;border-radius:12px;background:#f9f9f9;transition:background .2s;user-select:none;}
-.b3-check-item:hover{background:#EBF7F6;}
-.b3-check-item input[type="checkbox"]{display:none;}
-.b3-check-box{width:24px;height:24px;border:2.5px solid #A8D5CC;border-radius:6px;flex-shrink:0;margin-top:2px;transition:all .2s;position:relative;}
-.b3-check-item input:checked~.b3-check-box{background:#0D7B75;border-color:#0D7B75;}
-.b3-check-item input:checked~.b3-check-box::after{content:'✓';color:white;font-size:.85rem;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
-.b3-check-ko{font-family:'Jua',sans-serif;font-size:.95rem;color:#333;}
-.b3-check-en{font-size:.82rem;color:#888;margin-top:3px;}
-.b3-check-result{margin-top:16px;}
-
-/* ── Book 3 Dialogue Practice ── */
-.b3-dlg-wrap{display:flex;flex-direction:column;gap:20px;}
-.b3-dlg-scenario{background:#fafafa;border-radius:16px;padding:18px 16px;border:1.5px solid #eee;}
-.b3-dlg-scene-label{font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dashed #c8ede9;}
-.b3-dlg-scene-en{font-size:.85rem;color:#aaa;font-family:sans-serif;}
-.
+.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bot

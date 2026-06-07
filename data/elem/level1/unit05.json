@@ -1,211 +1,187 @@
 {
   "unit": 5,
-  "title": "🏠 집이 어디예요?",
   "book": 1,
+  "type": "consonant",
+  "title": "거센소리 & 쌍자음",
+  "phase": "consonant",
   "goal": {
-    "ko": "장소 이름을 알고 어디인지 말할 수 있어요! 🗺️",
-    "en": "I can name places and say where things are!"
+    "ko": "거센소리와 쌍자음을 알 수 있어요!",
+    "en": "I can recognize aspirated and tense consonants!"
   },
-  "key_points": [
-    "어디예요? = Where is it?",
-    "여기예요 = It's here (near me)",
-    "저기예요 = It's there (far away)"
-  ],
-  "sections": {
-    "vocab": {
-      "🏘️ 장소 Places": [
-        { "emoji": "🏫", "kr": "학교", "en": "school", "rom": "hak-gyo" },
-        { "emoji": "🏛️", "kr": "교실", "en": "classroom", "rom": "gyo-sil" },
-        { "emoji": "🏠", "kr": "집", "en": "house / home", "rom": "jip" },
-        { "emoji": "🛏️", "kr": "방", "en": "room", "rom": "bang" },
-        { "emoji": "🍳", "kr": "부엌", "en": "kitchen", "rom": "bu-eok" },
-        { "emoji": "🌳", "kr": "공원", "en": "park", "rom": "gong-won" },
-        { "emoji": "🏊", "kr": "수영장", "en": "swimming pool", "rom": "su-yeong-jang" },
-        { "emoji": "🏪", "kr": "가게", "en": "store / shop", "rom": "ga-ge" }
-      ],
-      "📍 위치 Location Words": [
-        { "emoji": "👇", "kr": "여기", "en": "here (near me)", "rom": "yeo-gi" },
-        { "emoji": "👉", "kr": "저기", "en": "there (far away)", "rom": "jeo-gi" }
-      ]
-    },
-    "grammar": {
-      "sections": [
-        {
-          "id": "g05_eodie",
-          "title": "어디예요? — Where is it?",
-          "subtitle": "Asking about location",
-          "pattern": "N이/가 어디예요? → 여기예요 / 저기예요",
-          "meaning": "Where is ___?",
-          "description": "Use 어디예요? to ask where something or someone is. Answer with 여기예요 (it's here, near me) or 저기예요 (it's there, far away).",
-          "rule_boxes": [
-            {
-              "color": "blue",
-              "label": "❓ N이/가 어디예요? = Where is N?",
-              "examples": [
-                "집이 어디예요? = Where is your house?",
-                "학교가 어디예요? = Where is the school?"
-              ]
-            },
-            {
-              "color": "green",
-              "label": "👇 여기예요 = It's HERE (close to me)",
-              "examples": ["집이 어디예요? → 여기예요! (pointing to nearby)"]
-            },
-            {
-              "color": "coral",
-              "label": "👉 저기예요 = It's THERE (far from me)",
-              "examples": ["학교가 어디예요? → 저기예요! (pointing far away)"]
-            }
-          ],
-          "examples": [
-            { "korean": "집이 어디예요? — 여기예요.", "english": "Where is your house? — It's here.", "highlight": "여기예요" },
-            { "korean": "학교가 어디예요? — 저기예요.", "english": "Where is the school? — It's there.", "highlight": "저기예요" },
-            { "korean": "공원이 어디예요? — 저기예요!", "english": "Where is the park? — It's over there!", "highlight": "저기예요" }
-          ]
-        },
-        {
-          "id": "g05_yeogi_jeogi",
-          "title": "여기가 N이에요/예요",
-          "subtitle": "Naming a place you're pointing at",
-          "pattern": "여기가 N이에요/예요 · 저기가 N이에요/예요",
-          "meaning": "This place is N · That place is N",
-          "description": "You can also flip it! Instead of 'Where is X?', say 'This is X!' Use 여기가 (here is) or 저기가 (there is) + place name.",
-          "rule_boxes": [
-            {
-              "color": "purple",
-              "label": "📍 여기가/저기가 + 장소",
-              "examples": [
-                "여기가 우리 집이에요. = This is my house.",
-                "저기가 수영장이에요. = That is the swimming pool.",
-                "여기가 부엌이에요. = This is the kitchen."
-              ]
-            }
-          ],
-          "examples": [
-            { "korean": "여기가 우리 집이에요.", "english": "This is my house.", "highlight": "여기가" },
-            { "korean": "저기가 학교예요.", "english": "That is the school.", "highlight": "저기가" }
-          ]
-        }
-      ]
-    },
-    "practice": {
-      "dialogue_practice": [
-        {
-          "scene": "🗺️ 길 찾기 — Finding the way",
-          "scene_en": "Finding the way",
-          "lines": [
-            { "speaker": "루카스", "color": "amber", "text": "해리야, 학교가 어디예요?", "en": "Harry, where is the school?", "type": "given" },
-            { "speaker": "해리", "color": "blue", "text": "___예요! 저기 봐요~ 🏫", "en": "It's over there! Look~", "type": "fill", "ans": "저기", "opts": ["저기", "여기", "어디"] },
-            { "speaker": "루카스", "color": "amber", "text": "아, 저기가 학교예요?", "en": "Oh, that's the school?", "type": "given" },
-            { "speaker": "해리", "color": "blue", "text": "네, 저기가 우리 학교예요! 가요~ 🏃", "en": "Yes, that's our school! Let's go~", "type": "given" }
-          ]
-        },
-        {
-          "scene": "🏠 집 구경 — House tour",
-          "scene_en": "House tour",
-          "lines": [
-            { "speaker": "마야", "color": "purple", "text": "여기가 뭐예요?", "en": "What is this place?", "type": "given" },
-            { "speaker": "애라", "color": "coral", "text": "여기가 내 ___이에요!", "en": "This is my room!", "type": "fill", "ans": "방", "opts": ["방", "부엌", "화장실"] },
-            { "speaker": "마야", "color": "purple", "text": "와, 예뻐요! 🌟 저기가 뭐예요?", "en": "Wow, it's pretty! What's that?", "type": "given" },
-            { "speaker": "애라", "color": "coral", "text": "저기가 ___이에요!", "en": "That's the kitchen!", "type": "fill", "ans": "부엌", "opts": ["부엌", "방", "공원"] }
-          ]
-        },
-        {
-          "scene": "🌳 공원 찾기 — Finding the park",
-          "scene_en": "Looking for the park",
-          "lines": [
-            { "speaker": "레오", "color": "mint", "text": "공원이 어디예요?", "en": "Where is the park?", "type": "given" },
-            { "speaker": "올리비아", "color": "teal", "text": "___예요! 저기 초록색 나무 보여요? 🌳", "en": "It's over there! Do you see those green trees?", "type": "fill", "ans": "저기", "opts": ["저기", "여기", "뭐"] },
-            { "speaker": "레오", "color": "mint", "text": "아, 저기가 공원이에요?", "en": "Oh, that's the park?", "type": "given" },
-            { "speaker": "올리비아", "color": "teal", "text": "네! 같이 가요! 😄", "en": "Yes! Let's go together!", "type": "given" }
-          ]
-        }
-      ],
-      "fill_items": [
-        { "q": "학교가 어디예요? →", "suffix": "예요.", "ans": "저기", "opts": ["저기", "여기", "어디"], "en": "It's over there." },
-        { "q": "집이 어디예요? →", "suffix": "예요.", "ans": "여기", "opts": ["여기", "저기", "어기"], "en": "It's here." },
-        { "q": "여기가", "suffix": "이에요.", "ans": "부엌", "opts": ["부엌", "방", "학교"], "en": "This is the kitchen." },
-        { "q": "저기가", "suffix": "예요.", "ans": "공원", "opts": ["공원", "가게", "집"], "en": "That is the park." },
-        { "q": "수영장이", "suffix": "예요?", "ans": "어디", "opts": ["어디", "여기", "저기"], "en": "Where is the swimming pool?" }
-      ],
-      "listen_quiz": [
-        {
-          "audio": "집이 어디예요? — 여기예요.",
-          "correct": 0,
-          "choices": [
-            { "emoji": "👇", "kr": "여기예요", "en": "It's here (nearby)" },
-            { "emoji": "👉", "kr": "저기예요", "en": "It's there (far)" },
-            { "emoji": "❓", "kr": "모르겠어요", "en": "I don't know" }
-          ]
-        },
-        {
-          "audio": "저기가 학교예요.",
-          "correct": 1,
-          "choices": [
-            { "emoji": "🏠", "kr": "집", "en": "house" },
-            { "emoji": "🏫", "kr": "학교", "en": "school" },
-            { "emoji": "🌳", "kr": "공원", "en": "park" }
-          ]
-        },
-        {
-          "audio": "수영장이 어디예요? — 저기예요!",
-          "correct": 2,
-          "choices": [
-            { "emoji": "🏠", "kr": "여기예요 — 집", "en": "It's here — house" },
-            { "emoji": "🏫", "kr": "여기예요 — 학교", "en": "It's here — school" },
-            { "emoji": "🏊", "kr": "저기예요 — 수영장", "en": "It's there — pool" }
-          ]
-        }
-      ],
-      "mini_game": {
-        "type": "map",
-        "title": "🎮 지도 탐험! Map Explorer!",
-        "instruction": "그림 지도에서 장소를 찾아 눌러요! Find and tap the places on the map!",
-        "locations": [
-          { "kr": "학교", "en": "school", "emoji": "🏫", "prompt": "학교가 어디예요?" },
-          { "kr": "공원", "en": "park", "emoji": "🌳", "prompt": "공원이 어디예요?" },
-          { "kr": "수영장", "en": "pool", "emoji": "🏊", "prompt": "수영장이 어디예요?" },
-          { "kr": "가게", "en": "store", "emoji": "🏪", "prompt": "가게가 어디예요?" },
-          { "kr": "집", "en": "home", "emoji": "🏠", "prompt": "집이 어디예요?" }
-        ]
+  "aspirated": {
+    "title": "거센소리 Aspirated (with a puff of air!)",
+    "note": "기본 자음 + 공기 = 거센소리! Basic consonant + puff of air!",
+    "chars": [
+      {
+        "base": "ㄱ",
+        "asp": "ㅋ",
+        "sound": "k",
+        "with_a": "카",
+        "emoji": "☕",
+        "example": "커피",
+        "example_en": "coffee"
+      },
+      {
+        "base": "ㄷ",
+        "asp": "ㅌ",
+        "sound": "t",
+        "with_a": "타",
+        "emoji": "🎯",
+        "example": "타조",
+        "example_en": "ostrich"
+      },
+      {
+        "base": "ㅂ",
+        "asp": "ㅍ",
+        "sound": "p",
+        "with_a": "파",
+        "emoji": "🌿",
+        "example": "파",
+        "example_en": "green onion"
       }
-    },
-    "real_life": {
-      "title": "🗣️ 실생활 — Real Life",
-      "subtitle": "길을 물어봐요! Ask for directions!",
-      "dialogues": [
-        {
-          "title": "🗺️ 대화 1 — 길에서",
-          "title_en": "On the street",
-          "bg": "#E8F5E9",
-          "hdr": "#1B5E20",
-          "lines": [
-            { "role": "A", "color": "#43A047", "kr": "저기가 수영장이에요?", "en": "Is that the swimming pool?" },
-            { "role": "B", "color": "#1B5E20", "kr": "아니요, 저기가 병원이에요.", "en": "No, that's the hospital." },
-            { "role": "A", "color": "#43A047", "kr": "그럼 수영장이 어디예요?", "en": "Then where is the swimming pool?" },
-            { "role": "B", "color": "#1B5E20", "kr": "저~기예요! 좀 멀어요. 😊", "en": "Way over there! It's a bit far." }
-          ],
-          "summary": { "kr": "여기/저기로 방향을 알려줄 수 있어요!", "en": "Use 여기/저기 to show directions!", "highlight": "저기예요" }
-        },
-        {
-          "title": "🏠 대화 2 — 친구 집에서",
-          "title_en": "At a friend's house",
-          "bg": "#E3F2FD",
-          "hdr": "#0D47A1",
-          "lines": [
-            { "role": "A", "color": "#42A5F5", "kr": "화장실이 어디예요?", "en": "Where is the bathroom?" },
-            { "role": "B", "color": "#0D47A1", "kr": "저기예요. 저 문 옆에요.", "en": "It's over there. Next to that door." },
-            { "role": "A", "color": "#42A5F5", "kr": "고맙습니다! 🙏", "en": "Thank you!" }
-          ],
-          "summary": { "kr": "친구 집에서도 '어디예요?'로 물어볼 수 있어요!", "en": "You can use 어디예요? at a friend's house too!", "highlight": "어디예요?" }
-        }
-      ]
-    }
+    ]
   },
-  "self_check": [
-    { "ko": "'어디예요?'로 장소를 물어볼 수 있어요.", "en": "I can ask where places are with 어디예요?" },
-    { "ko": "'여기예요'와 '저기예요'로 위치를 알려줄 수 있어요.", "en": "I can give locations with 여기예요 and 저기예요." },
-    { "ko": "장소 이름을 6개 말할 수 있어요.", "en": "I can name 6 places." },
-    { "ko": "'여기가 학교예요' 처럼 장소를 설명할 수 있어요.", "en": "I can describe places with 여기가 ___예요." }
-  ]
+  "tense": {
+    "title": "쌍자음 Tense (tense/doubled sound!)",
+    "note": "같은 자음 두 개 = 더 강한 소리! Double consonant = stronger tighter sound!",
+    "chars": [
+      {
+        "base": "ㄱ",
+        "tense": "ㄲ",
+        "sound": "kk",
+        "with_a": "까",
+        "emoji": "🐸",
+        "example": "까치",
+        "example_en": "magpie"
+      },
+      {
+        "base": "ㄷ",
+        "tense": "ㄸ",
+        "sound": "tt",
+        "with_a": "따",
+        "emoji": "🍓",
+        "example": "딸기",
+        "example_en": "strawberry"
+      },
+      {
+        "base": "ㅂ",
+        "tense": "ㅃ",
+        "sound": "pp",
+        "with_a": "빠",
+        "emoji": "💨",
+        "example": "빨리",
+        "example_en": "quickly"
+      },
+      {
+        "base": "ㅅ",
+        "tense": "ㅆ",
+        "sound": "ss",
+        "with_a": "싸",
+        "emoji": "💰",
+        "example": "싸다",
+        "example_en": "cheap"
+      },
+      {
+        "base": "ㅈ",
+        "tense": "ㅉ",
+        "sound": "jj",
+        "with_a": "짜",
+        "emoji": "😬",
+        "example": "짜다",
+        "example_en": "salty"
+      }
+    ]
+  },
+  "compare_game": {
+    "title": "🎮 소리 비교 게임!",
+    "instruction": "같은 소리예요, 더 강한 소리예요? Basic or stronger version?",
+    "rounds": [
+      {
+        "word": "카",
+        "type": "aspirated",
+        "base": "가",
+        "choices": [
+          "가",
+          "카",
+          "까"
+        ],
+        "correct": "카"
+      },
+      {
+        "word": "까",
+        "type": "tense",
+        "base": "가",
+        "choices": [
+          "가",
+          "카",
+          "까"
+        ],
+        "correct": "까"
+      },
+      {
+        "word": "타",
+        "type": "aspirated",
+        "base": "다",
+        "choices": [
+          "다",
+          "타",
+          "따"
+        ],
+        "correct": "타"
+      },
+      {
+        "word": "따",
+        "type": "tense",
+        "base": "다",
+        "choices": [
+          "다",
+          "타",
+          "따"
+        ],
+        "correct": "따"
+      },
+      {
+        "word": "파",
+        "type": "aspirated",
+        "base": "바",
+        "choices": [
+          "바",
+          "파",
+          "빠"
+        ],
+        "correct": "파"
+      },
+      {
+        "word": "빠",
+        "type": "tense",
+        "base": "바",
+        "choices": [
+          "바",
+          "파",
+          "빠"
+        ],
+        "correct": "빠"
+      },
+      {
+        "word": "싸",
+        "type": "tense",
+        "base": "사",
+        "choices": [
+          "사",
+          "싸"
+        ],
+        "correct": "싸"
+      },
+      {
+        "word": "짜",
+        "type": "tense",
+        "base": "자",
+        "choices": [
+          "자",
+          "짜"
+        ],
+        "correct": "짜"
+      }
+    ]
+  }
 }

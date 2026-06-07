@@ -1,0 +1,140 @@
+{
+  "unit": 11,
+  "book": 1,
+  "type": "sentence",
+  "title": "이름이 뭐야? What's your name?",
+  "phase": "sentence",
+  "goal": {
+    "ko": "N이에요/예요로 이름을 말할 수 있어요!",
+    "en": "I can introduce names using N이에요/예요!"
+  },
+  "pattern": {
+    "rule": "N + 이에요 / 예요",
+    "note_ko": "받침 있으면 이에요, 받침 없으면 예요",
+    "note_en": "End in a consonant → 이에요 / End in a vowel → 예요",
+    "examples": [
+      {
+        "kr": "강아지예요.",
+        "en": "It's a dog.",
+        "note": "강아지 ends in 이(vowel) → 예요"
+      },
+      {
+        "kr": "고양이예요.",
+        "en": "It's a cat.",
+        "note": "고양이 ends in 이(vowel) → 예요"
+      },
+      {
+        "kr": "곰이에요.",
+        "en": "It's a bear.",
+        "note": "곰 ends in ㅁ(consonant) → 이에요"
+      },
+      {
+        "kr": "달이에요.",
+        "en": "It's the moon.",
+        "note": "달 ends in ㄹ(consonant) → 이에요"
+      }
+    ]
+  },
+  "vocab": [
+    {
+      "word": "강아지",
+      "en": "puppy",
+      "emoji": "🐕"
+    },
+    {
+      "word": "고양이",
+      "en": "cat",
+      "emoji": "🐱"
+    },
+    {
+      "word": "곰",
+      "en": "bear",
+      "emoji": "🐻"
+    },
+    {
+      "word": "토끼",
+      "en": "rabbit",
+      "emoji": "🐰"
+    },
+    {
+      "word": "달",
+      "en": "moon",
+      "emoji": "🌙"
+    },
+    {
+      "word": "별",
+      "en": "star",
+      "emoji": "⭐"
+    },
+    {
+      "word": "꽃",
+      "en": "flower",
+      "emoji": "🌸"
+    },
+    {
+      "word": "나무",
+      "en": "tree",
+      "emoji": "🌳"
+    }
+  ],
+  "word_card_game": {
+    "title": "🎮 이름 말하기!",
+    "instruction": "그림에 맞는 문장을 고르세요! Pick the right sentence!",
+    "rounds": [
+      {
+        "emoji": "🐕",
+        "answer": "강아지예요.",
+        "choices": [
+          "강아지예요.",
+          "강아지이에요.",
+          "고양이예요."
+        ]
+      },
+      {
+        "emoji": "🐻",
+        "answer": "곰이에요.",
+        "choices": [
+          "곰예요.",
+          "곰이에요.",
+          "달이에요."
+        ]
+      },
+      {
+        "emoji": "🌙",
+        "answer": "달이에요.",
+        "choices": [
+          "달예요.",
+          "별이에요.",
+          "달이에요."
+        ]
+      },
+      {
+        "emoji": "🐱",
+        "answer": "고양이예요.",
+        "choices": [
+          "고양이이에요.",
+          "곰이에요.",
+          "고양이예요."
+        ]
+      },
+      {
+        "emoji": "⭐",
+        "answer": "별이에요.",
+        "choices": [
+          "별예요.",
+          "별이에요.",
+          "달이에요."
+        ]
+      },
+      {
+        "emoji": "🌸",
+        "answer": "꽃이에요.",
+        "choices": [
+          "꽃예요.",
+          "나무예요.",
+          "꽃이에요."
+        ]
+      }
+    ]
+  }
+}

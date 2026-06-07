@@ -1,0 +1,147 @@
+{
+  "unit": 12,
+  "book": 1,
+  "type": "sentence",
+  "title": "이게 뭐야? What is this?",
+  "phase": "sentence",
+  "goal": {
+    "ko": "이게/저게 + N이에요/예요로 물건을 말할 수 있어요!",
+    "en": "I can point at things and say what they are!"
+  },
+  "pattern": {
+    "rule": "이게/저게 + N이에요/예요",
+    "items": [
+      {
+        "kr": "이게",
+        "en": "This is...",
+        "note": "가까운 것 (near you)"
+      },
+      {
+        "kr": "저게",
+        "en": "That is...",
+        "note": "먼 것 (far away)"
+      },
+      {
+        "kr": "그게",
+        "en": "That is...",
+        "note": "상대방 근처 (near the other person)"
+      }
+    ],
+    "examples": [
+      {
+        "kr": "이게 뭐야?",
+        "en": "What is this?"
+      },
+      {
+        "kr": "이게 사과야.",
+        "en": "This is an apple."
+      },
+      {
+        "kr": "저게 뭐야?",
+        "en": "What is that?"
+      },
+      {
+        "kr": "저게 기차야.",
+        "en": "That is a train."
+      }
+    ]
+  },
+  "vocab": [
+    {
+      "word": "사과",
+      "en": "apple",
+      "emoji": "🍎"
+    },
+    {
+      "word": "바나나",
+      "en": "banana",
+      "emoji": "🍌"
+    },
+    {
+      "word": "기차",
+      "en": "train",
+      "emoji": "🚂"
+    },
+    {
+      "word": "비행기",
+      "en": "airplane",
+      "emoji": "✈️"
+    },
+    {
+      "word": "책",
+      "en": "book",
+      "emoji": "📚"
+    },
+    {
+      "word": "공",
+      "en": "ball",
+      "emoji": "⚽"
+    },
+    {
+      "word": "우산",
+      "en": "umbrella",
+      "emoji": "☂️"
+    },
+    {
+      "word": "모자",
+      "en": "hat",
+      "emoji": "🎩"
+    }
+  ],
+  "picture_game": {
+    "title": "🎮 그림 보고 말하기!",
+    "instruction": "이게 뭐야? 알맞은 답을 고르세요!",
+    "rounds": [
+      {
+        "emoji": "🍎",
+        "question": "이게 뭐야?",
+        "answer": "이게 사과야.",
+        "choices": [
+          "이게 사과야.",
+          "이게 바나나야.",
+          "저게 사과야."
+        ]
+      },
+      {
+        "emoji": "🚂",
+        "question": "저게 뭐야?",
+        "answer": "저게 기차야.",
+        "choices": [
+          "이게 기차야.",
+          "저게 비행기야.",
+          "저게 기차야."
+        ]
+      },
+      {
+        "emoji": "📚",
+        "question": "이게 뭐야?",
+        "answer": "이게 책이야.",
+        "choices": [
+          "이게 공이야.",
+          "이게 책이야.",
+          "저게 책이야."
+        ]
+      },
+      {
+        "emoji": "⚽",
+        "question": "이게 뭐야?",
+        "answer": "이게 공이야.",
+        "choices": [
+          "이게 공이야.",
+          "이게 우산이야.",
+          "저게 공이야."
+        ]
+      },
+      {
+        "emoji": "🎩",
+        "question": "저게 뭐야?",
+        "answer": "저게 모자야.",
+        "choices": [
+          "이게 모자야.",
+          "저게 책이야.",
+          "저게 모자야."
+        ]
+      }
+    ]
+  }
+}
