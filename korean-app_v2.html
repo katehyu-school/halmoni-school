@@ -3829,19 +3829,19 @@ function renderB1ClassifyGame(game, containerId) {
         const btn = document.getElementById('b1cl-' + cat.key);
         if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'default'; }
       });
+      idx++;
       if (isRight) {
         score++;
         b1Speak(r.char);
         if (fb) fb.innerHTML = '<span style="color:#43A047;font-weight:700;font-size:1.1rem;">🎉 맞아요! Correct!</span><br><button onclick="window._b1ClassNext()" style="margin-top:8px;background:#43A047;color:#fff;border:none;border-radius:10px;padding:9px 24px;font-size:.95rem;font-weight:700;cursor:pointer;">다음 →</button>';
       } else {
         const rightLabel = correct === '세로' ? '오른쪽 (SIDE) →' : '아래 (BELOW) ↓';
-        if (fb) fb.innerHTML = `<span style="color:#E53935;font-size:.88rem;">정답: 자음 ${rightLabel}</span><br><button onclick="window._b1ClassNext()" style="margin-top:8px;background:#aaa;color:#fff;border:none;border-radius:10px;padding:9px 24px;font-size:.95rem;font-weight:700;cursor:pointer;">다음 →</button>`;
+        if (fb) fb.innerHTML = '<span style="color:#E53935;font-size:.88rem;">정답: 자음 ' + rightLabel + '</span><br><button onclick="window._b1ClassNext()" style="margin-top:8px;background:#aaa;color:#fff;border:none;border-radius:10px;padding:9px 24px;font-size:.95rem;font-weight:700;cursor:pointer;">다음 →</button>';
       }
-      idx++;
-      window._b1ClassNext = function() { show(); };
     };
   }
   window._b1ClassGame = game; window._b1ClassWrap = containerId || 'b1-game-area';
+  window._b1ClassNext = function() { show(); };
   show();
 }
 
