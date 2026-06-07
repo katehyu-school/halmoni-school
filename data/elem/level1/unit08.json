@@ -1,151 +1,18 @@
 {
   "unit": 8,
   "book": 1,
-  "type": "vowel_compound",
-  "title": "복합 모음 ㅐ, ㅔ",
-  "phase": "combination",
+  "type": "canvas",
+  "title": "써 보기 그림판",
+  "phase": "sentence",
   "goal": {
-    "ko": "ㅐ와 ㅔ 소리를 구별하고 읽을 수 있어요!",
-    "en": "I can read and tell apart ㅐ and ㅔ!"
+    "ko": "배운 글자를 직접 써 볼 수 있어요!",
+    "en": "I can practice writing the letters I learned!"
   },
-  "note": {
-    "ko": "요즘 한국어에서 ㅐ와 ㅔ는 거의 같은 소리예요!",
-    "en": "In modern Korean, ㅐ and ㅔ sound almost the same!"
-  },
-  "chars": [
-    {
-      "char": "ㅐ",
-      "sound": "ae",
-      "color": "#FF8C00",
-      "emoji": "🐶",
-      "example": "개",
-      "example_en": "dog",
-      "words": [
-        "개",
-        "애기",
-        "태양"
-      ]
-    },
-    {
-      "char": "ㅔ",
-      "sound": "e",
-      "color": "#FF6347",
-      "emoji": "🖼️",
-      "example": "세계",
-      "example_en": "world",
-      "words": [
-        "세",
-        "체",
-        "예"
-      ]
-    }
-  ],
-  "compound_intro": {
-    "title": "어떻게 만들어요? How are they formed?",
-    "items": [
-      {
-        "combo": "ㅏ+ㅣ→ㅐ",
-        "note": "ㅏ + ㅣ combined = ㅐ"
-      },
-      {
-        "combo": "ㅓ+ㅣ→ㅔ",
-        "note": "ㅓ + ㅣ combined = ㅔ"
-      }
-    ]
-  },
-  "words": [
-    {
-      "word": "개",
-      "en": "dog",
-      "emoji": "🐕",
-      "syl_con": "ㄱ",
-      "syl_vow": "ㅐ"
-    },
-    {
-      "word": "세계",
-      "en": "world",
-      "emoji": "🌍",
-      "syllables": [
-        "세",
-        "계"
-      ]
-    },
-    {
-      "word": "애기",
-      "en": "baby",
-      "emoji": "👶",
-      "syllables": [
-        "애",
-        "기"
-      ]
-    },
-    {
-      "word": "새",
-      "en": "bird",
-      "emoji": "🐦",
-      "syl_con": "ㅅ",
-      "syl_vow": "ㅐ"
-    },
-    {
-      "word": "체육",
-      "en": "PE / sports",
-      "emoji": "⚽",
-      "syllables": [
-        "체",
-        "육"
-      ]
-    },
-    {
-      "word": "예쁘다",
-      "en": "pretty",
-      "emoji": "🌸",
-      "syllables": [
-        "예",
-        "쁘",
-        "다"
-      ]
-    }
-  ],
-  "block_game": {
-    "title": "🧱 ㅐ ㅔ 블럭 조합!",
-    "instruction": "자음 + ㅐ 또는 ㅔ 를 탭해서 음절을 만들어요!",
-    "rounds": [
-      {
-        "target": "개",
-        "con": "ㄱ",
-        "vow": "ㅐ",
-        "hint": "dog 🐕"
-      },
-      {
-        "target": "새",
-        "con": "ㅅ",
-        "vow": "ㅐ",
-        "hint": "bird 🐦"
-      },
-      {
-        "target": "배",
-        "con": "ㅂ",
-        "vow": "ㅐ",
-        "hint": "belly / ship"
-      },
-      {
-        "target": "세",
-        "con": "ㅅ",
-        "vow": "ㅔ",
-        "hint": "three / 세계"
-      },
-      {
-        "target": "체",
-        "con": "ㅊ",
-        "vow": "ㅔ",
-        "hint": "체육(PE)"
-      },
-      {
-        "target": "해",
-        "con": "ㅎ",
-        "vow": "ㅐ",
-        "hint": "sun / year"
-      }
-    ]
-  }
+  "prompts": [
+    {"text":"안녕하세요","hint":"hello (formal)","emoji":"👋"},
+    {"text":"안녕","hint":"hi! (informal)","emoji":"✌️"},
+    {"text":"가나다라마바사","hint":"Practice writing!","emoji":"✏️"},
+    {"text":"아이우에오","hint":"Vowel sounds","emoji":"🎵"},
+    {"text":"나는","hint":"I am...","emoji":"🙋"}
+  ]
 }

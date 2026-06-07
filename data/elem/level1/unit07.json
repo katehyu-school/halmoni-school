@@ -1,164 +1,91 @@
 {
   "unit": 7,
   "book": 1,
-  "type": "combination",
-  "title": "블럭 조합 2",
-  "phase": "combination",
+  "type": "sentence",
+  "title": "01 안녕하세요?",
+  "phase": "sentence",
   "goal": {
-    "ko": "더 많은 자음으로 단어를 만들어요!",
-    "en": "Make words with more consonants!"
+    "ko": "한국어로 인사할 수 있어요!",
+    "en": "I can greet someone in Korean!"
   },
-  "consonants": [
-    "ㅂ",
-    "ㅅ",
-    "ㅇ",
-    "ㅈ",
-    "ㅊ",
-    "ㅎ"
-  ],
-  "vowels": [
-    "ㅏ",
-    "ㅓ",
-    "ㅗ",
-    "ㅜ",
-    "ㅡ",
-    "ㅣ"
-  ],
-  "block_game": {
-    "title": "🧱 단어 블럭 조립!",
-    "instruction": "자음 + 모음을 탭해서 음절을 만들고, 단어를 완성해요!",
-    "rounds": [
+  "formal_informal": {
+    "title": "존댓말 vs 반말 · Formal vs Informal",
+    "note_ko": "어른께는 존댓말, 친구에게는 반말을 써요!",
+    "note_en": "Use formal with adults, informal with friends!",
+    "pairs": [
       {
-        "target": "바",
-        "con": "ㅂ",
-        "vow": "ㅏ",
-        "hint": "바나나(banana)"
+        "situation": "만날 때 · Meeting",
+        "formal": "안녕하세요?",
+        "informal": "안녕!",
+        "note": "formal = 하세요 ending"
       },
       {
-        "target": "사",
-        "con": "ㅅ",
-        "vow": "ㅏ",
-        "hint": "사과(apple)"
+        "situation": "이름 물어볼 때 · Asking name",
+        "formal": "이름이 뭐예요?",
+        "informal": "이름이 뭐야?",
+        "note": "예요 (formal) vs 야 (informal)"
       },
       {
-        "target": "아",
-        "con": "ㅇ",
-        "vow": "ㅏ",
-        "hint": "아이(child)"
+        "situation": "자기 소개 · Introducing yourself",
+        "formal": "저는 애라예요.",
+        "informal": "나는 애라야.",
+        "note": "저는 (formal I) vs 나는 (informal I)"
       },
       {
-        "target": "자",
-        "con": "ㅈ",
-        "vow": "ㅏ",
-        "hint": "자전거(bicycle)"
+        "situation": "헤어질 때 — 가는 사람 · Saying bye (leaving)",
+        "formal": "안녕히 계세요.",
+        "informal": "잘 있어!",
+        "note": "계세요 = please stay well"
       },
       {
-        "target": "차",
-        "con": "ㅊ",
-        "vow": "ㅏ",
-        "hint": "차(car)"
-      },
-      {
-        "target": "하",
-        "con": "ㅎ",
-        "vow": "ㅏ",
-        "hint": "하늘(sky)"
-      },
-      {
-        "target": "보",
-        "con": "ㅂ",
-        "vow": "ㅗ",
-        "hint": "보라(purple)"
-      },
-      {
-        "target": "소",
-        "con": "ㅅ",
-        "vow": "ㅗ",
-        "hint": "소(cow)"
-      },
-      {
-        "target": "오",
-        "con": "ㅇ",
-        "vow": "ㅗ",
-        "hint": "오리(duck)"
-      },
-      {
-        "target": "호",
-        "con": "ㅎ",
-        "vow": "ㅗ",
-        "hint": "호랑이(tiger)"
-      },
-      {
-        "target": "지",
-        "con": "ㅈ",
-        "vow": "ㅣ",
-        "hint": "지도(map)"
-      },
-      {
-        "target": "히",
-        "con": "ㅎ",
-        "vow": "ㅣ",
-        "hint": "히히(hehe)"
+        "situation": "헤어질 때 — 남는 사람 · Saying bye (staying)",
+        "formal": "안녕히 가세요.",
+        "informal": "잘 가!",
+        "note": "가세요 = please go well"
       }
     ]
   },
-  "words": [
-    {
-      "word": "바나나",
-      "en": "banana",
-      "emoji": "🍌",
-      "syllables": [
-        "바",
-        "나",
-        "나"
-      ]
-    },
-    {
-      "word": "사자",
-      "en": "lion",
-      "emoji": "🦁",
-      "syllables": [
-        "사",
-        "자"
-      ]
-    },
-    {
-      "word": "아이",
-      "en": "child",
-      "emoji": "👧",
-      "syllables": [
-        "아",
-        "이"
-      ]
-    },
-    {
-      "word": "자동차",
-      "en": "car",
-      "emoji": "🚗",
-      "syllables": [
-        "자",
-        "동",
-        "차"
-      ]
-    },
-    {
-      "word": "호랑이",
-      "en": "tiger",
-      "emoji": "🐯",
-      "syllables": [
-        "호",
-        "랑",
-        "이"
-      ]
-    },
-    {
-      "word": "하마",
-      "en": "hippo",
-      "emoji": "🦛",
-      "syllables": [
-        "하",
-        "마"
-      ]
-    }
-  ]
+  "vocab": [
+    {"word":"안녕하세요","en":"hello (formal)","emoji":"👋"},
+    {"word":"안녕","en":"hi/bye (informal)","emoji":"✌️"},
+    {"word":"이름","en":"name","emoji":"🏷️"},
+    {"word":"저는","en":"I am (formal)","emoji":"🙋"},
+    {"word":"나는","en":"I am (informal)","emoji":"🙋"}
+  ],
+  "word_card_game": {
+    "title": "🎮 인사 게임!",
+    "instruction": "상황에 맞는 인사말을 고르세요! Choose the right greeting!",
+    "rounds": [
+      {
+        "prompt": "어른을 만났어요! (You met an adult!)",
+        "emoji": "👴",
+        "choices": ["안녕하세요?","안녕!","잘 가!","뭐야?"],
+        "correct": "안녕하세요?"
+      },
+      {
+        "prompt": "친구를 만났어요! (You met a friend!)",
+        "emoji": "👧",
+        "choices": ["안녕!","안녕하세요?","저는","계세요"],
+        "correct": "안녕!"
+      },
+      {
+        "prompt": "어른이 집에 가요. 나는 남아요. (Adult is leaving, you're staying.)",
+        "emoji": "🏠",
+        "choices": ["안녕히 가세요.","안녕히 계세요.","잘 가!","안녕!"],
+        "correct": "안녕히 가세요."
+      },
+      {
+        "prompt": "나는 집에 가요. 어른은 남아요. (I'm leaving, adult is staying.)",
+        "emoji": "🚶",
+        "choices": ["안녕히 계세요.","안녕히 가세요.","잘 있어!","가세요!"],
+        "correct": "안녕히 계세요."
+      },
+      {
+        "prompt": "선생님께 내 이름을 알려줄 때 (Telling teacher your name)",
+        "emoji": "👩‍🏫",
+        "choices": ["나는 애라야.","저는 애라예요.","이름이 뭐야?","안녕!"],
+        "correct": "저는 애라예요."
+      }
+    ]
+  }
 }

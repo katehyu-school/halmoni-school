@@ -1,159 +1,56 @@
 {
   "unit": 2,
   "book": 1,
-  "type": "vowel",
-  "title": "기본 모음 2",
+  "type": "vowel_compound",
+  "title": "복합 모음",
   "phase": "vowel",
   "goal": {
-    "ko": "y-모음 4개를 읽고 소리 낼 수 있어요!",
-    "en": "I can read and say the 4 Y-vowels!"
+    "ko": "복합 모음을 알고 단어를 읽을 수 있어요!",
+    "en": "I can recognize compound vowels and read words!"
   },
   "intro": {
-    "ko": "앞에 'ㅣ(이)' 소리를 붙이면 Y-모음이 돼요!",
-    "en": "Add a 'Y' sound in front → Y-vowels!"
+    "ko": "두 모음이 합쳐서 새로운 소리가 나요!",
+    "en": "Two vowels combine to make a new sound!"
   },
-  "pairs": [
+  "groups": [
     {
-      "base": "ㅏ",
-      "y": "ㅑ",
-      "base_sound": "ah",
-      "y_sound": "yah",
-      "color": "#43A047",
-      "emoji": "🐑",
-      "example": "야구",
-      "example_en": "baseball"
-    },
-    {
-      "base": "ㅓ",
-      "y": "ㅕ",
-      "base_sound": "uh",
-      "y_sound": "yuh",
-      "color": "#00897B",
-      "emoji": "🕯️",
-      "example": "여우",
-      "example_en": "fox"
-    },
-    {
-      "base": "ㅗ",
-      "y": "ㅛ",
-      "base_sound": "oh",
-      "y_sound": "yoh",
-      "color": "#1E88E5",
-      "emoji": "🧸",
-      "example": "요리",
-      "example_en": "cooking"
-    },
-    {
-      "base": "ㅜ",
-      "y": "ㅠ",
-      "base_sound": "oo",
-      "y_sound": "yoo",
-      "color": "#8E24AA",
-      "emoji": "🦄",
-      "example": "유리",
-      "example_en": "glass"
-    }
-  ],
-  "words": [
-    {
-      "word": "야구",
-      "en": "baseball",
-      "emoji": "⚾",
-      "syllables": [
-        "야",
-        "구"
+      "id": "group1",
+      "title": "복합모음 1 — 비슷한 소리",
+      "note": "이 모음들은 비슷하게 들려요. 잘 들어봐요! These sound similar — listen carefully!",
+      "chars": [
+        {"char":"ㅐ","sound":"ae","color":"#E53935","emoji":"🐕","example":"개","example_en":"dog"},
+        {"char":"ㅒ","sound":"yae","color":"#C62828","emoji":"💬","example":"얘기","example_en":"story/talk"},
+        {"char":"ㅔ","sound":"e","color":"#1E88E5","emoji":"🦀","example":"게","example_en":"crab"},
+        {"char":"ㅖ","sound":"ye","color":"#0D47A1","emoji":"🕐","example":"시계","example_en":"clock"}
+      ],
+      "words": [
+        {"word":"개","en":"dog","emoji":"🐕","syllables":["개"]},
+        {"word":"새","en":"bird","emoji":"🐦","syllables":["새"]},
+        {"word":"배","en":"boat","emoji":"🚢","syllables":["배"]},
+        {"word":"세모","en":"triangle","emoji":"🔺","syllables":["세","모"]},
+        {"word":"시계","en":"clock","emoji":"🕐","syllables":["시","계"]}
       ]
     },
     {
-      "word": "여우",
-      "en": "fox",
-      "emoji": "🦊",
-      "syllables": [
-        "여",
-        "우"
-      ]
-    },
-    {
-      "word": "요리",
-      "en": "cooking",
-      "emoji": "🍳",
-      "syllables": [
-        "요",
-        "리"
-      ]
-    },
-    {
-      "word": "유리",
-      "en": "glass",
-      "emoji": "🪟",
-      "syllables": [
-        "유",
-        "리"
-      ]
-    },
-    {
-      "word": "야채",
-      "en": "vegetable",
-      "emoji": "🥦",
-      "syllables": [
-        "야",
-        "채"
-      ]
-    },
-    {
-      "word": "우유",
-      "en": "milk",
-      "emoji": "🥛",
-      "syllables": [
-        "우",
-        "유"
+      "id": "group2",
+      "title": "복합모음 2 — W소리로 시작해요",
+      "note": "이 모음들은 'W' 소리로 시작해요! These vowels start with a 'W' sound!",
+      "chars": [
+        {"char":"ㅘ","sound":"wa","color":"#F57C00","emoji":"🍎","example":"사과","example_en":"apple"},
+        {"char":"ㅙ","sound":"wae","color":"#E65100","emoji":"❓","example":"왜","example_en":"why"},
+        {"char":"ㅚ","sound":"we","color":"#F9A825","emoji":"👵","example":"외할머니","example_en":"grandma"},
+        {"char":"ㅝ","sound":"wo","color":"#388E3C","emoji":"❓","example":"뭐","example_en":"what"},
+        {"char":"ㅞ","sound":"we","color":"#2E7D32","emoji":"🍦","example":"웨이터","example_en":"waiter"},
+        {"char":"ㅟ","sound":"wi","color":"#7B1FA2","emoji":"⬆️","example":"위","example_en":"up/above"},
+        {"char":"ㅢ","sound":"ui","color":"#4A148C","emoji":"🪑","example":"의자","example_en":"chair"}
+      ],
+      "words": [
+        {"word":"사과","en":"apple","emoji":"🍎","syllables":["사","과"]},
+        {"word":"왜","en":"why","emoji":"❓","syllables":["왜"]},
+        {"word":"뭐","en":"what","emoji":"🤔","syllables":["뭐"]},
+        {"word":"위","en":"up","emoji":"⬆️","syllables":["위"]},
+        {"word":"의자","en":"chair","emoji":"🪑","syllables":["의","자"]}
       ]
     }
-  ],
-  "classify_game": {
-    "title": "🎮 소리 분류 게임!",
-    "instruction": "기본 모음이에요, Y-모음이에요? Is it a basic vowel or Y-vowel?",
-    "rounds": [
-      {
-        "char": "ㅏ",
-        "correct": "basic"
-      },
-      {
-        "char": "ㅑ",
-        "correct": "y"
-      },
-      {
-        "char": "ㅓ",
-        "correct": "basic"
-      },
-      {
-        "char": "ㅕ",
-        "correct": "y"
-      },
-      {
-        "char": "ㅗ",
-        "correct": "basic"
-      },
-      {
-        "char": "ㅛ",
-        "correct": "y"
-      },
-      {
-        "char": "ㅜ",
-        "correct": "basic"
-      },
-      {
-        "char": "ㅠ",
-        "correct": "y"
-      },
-      {
-        "char": "ㅡ",
-        "correct": "basic"
-      },
-      {
-        "char": "ㅣ",
-        "correct": "basic"
-      }
-    ]
-  }
+  ]
 }

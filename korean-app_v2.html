@@ -1484,66 +1484,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- ══════ Book 1 사이드바 ══════ -->
 <nav class="sidebar" id="book1-sidebar" style="display:none;">
   <div class="sidebar-title">Level 1</div>
-  <div style="font-size:.68rem;font-weight:700;color:#43A047;padding:6px 16px 2px;letter-spacing:.03em;">🔵 모음 VOWELS</div>
   <div class="lesson-item active" id="b1-lesson-0" onclick="switchBook1Unit(0)">
     <span class="lesson-num">예비</span>
     <span class="lesson-title-text">한글 블럭 세계</span>
   </div>
+  <div style="font-size:.68rem;font-weight:700;color:#43A047;padding:6px 16px 2px;letter-spacing:.03em;">🔵 모음 VOWELS</div>
   <div class="lesson-item" id="b1-lesson-1" onclick="switchBook1Unit(1)">
-    <span class="lesson-num">01</span>
-    <span class="lesson-title-text">기본 모음 1</span>
+    <span class="lesson-num">◆</span>
+    <span class="lesson-title-text">기본 모음</span>
   </div>
   <div class="lesson-item" id="b1-lesson-2" onclick="switchBook1Unit(2)">
-    <span class="lesson-num">02</span>
-    <span class="lesson-title-text">기본 모음 2</span>
+    <span class="lesson-num">◆</span>
+    <span class="lesson-title-text">복합 모음</span>
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#E53935;padding:6px 16px 2px;letter-spacing:.03em;">🔴 자음 CONSONANTS</div>
   <div class="lesson-item" id="b1-lesson-3" onclick="switchBook1Unit(3)">
-    <span class="lesson-num">03</span>
-    <span class="lesson-title-text">기본 자음 1</span>
+    <span class="lesson-num">◆</span>
+    <span class="lesson-title-text">기본 자음</span>
   </div>
   <div class="lesson-item" id="b1-lesson-4" onclick="switchBook1Unit(4)">
-    <span class="lesson-num">04</span>
-    <span class="lesson-title-text">기본 자음 2</span>
-  </div>
-  <div class="lesson-item" id="b1-lesson-5" onclick="switchBook1Unit(5)">
-    <span class="lesson-num">05</span>
-    <span class="lesson-title-text">거센소리 & 쌍자음</span>
+    <span class="lesson-num">◆</span>
+    <span class="lesson-title-text">쌍자음과 센소리</span>
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#1E88E5;padding:6px 16px 2px;letter-spacing:.03em;">🟢 조합 COMBINING</div>
-  <div class="lesson-item" id="b1-lesson-6" onclick="switchBook1Unit(6)">
-    <span class="lesson-num">06</span>
-    <span class="lesson-title-text">블럭 조합 1</span>
-  </div>
-  <div class="lesson-item" id="b1-lesson-7" onclick="switchBook1Unit(7)">
-    <span class="lesson-num">07</span>
-    <span class="lesson-title-text">블럭 조합 2</span>
-  </div>
-  <div class="lesson-item" id="b1-lesson-8" onclick="switchBook1Unit(8)">
-    <span class="lesson-num">08</span>
-    <span class="lesson-title-text">복합 모음</span>
+  <div class="lesson-item" id="b1-lesson-5" onclick="switchBook1Unit(5)">
+    <span class="lesson-num">◆</span>
+    <span class="lesson-title-text">블럭 조합</span>
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#F57C00;padding:6px 16px 2px;letter-spacing:.03em;">🟡 받침 FINAL CONSONANT</div>
-  <div class="lesson-item" id="b1-lesson-9" onclick="switchBook1Unit(9)">
-    <span class="lesson-num">09</span>
-    <span class="lesson-title-text">받침 1</span>
-  </div>
-  <div class="lesson-item" id="b1-lesson-10" onclick="switchBook1Unit(10)">
-    <span class="lesson-num">10</span>
-    <span class="lesson-title-text">받침 2</span>
+  <div class="lesson-item" id="b1-lesson-6" onclick="switchBook1Unit(6)">
+    <span class="lesson-num">◆</span>
+    <span class="lesson-title-text">받침</span>
   </div>
   <div style="font-size:.68rem;font-weight:700;color:#8E24AA;padding:6px 16px 2px;letter-spacing:.03em;">🟣 문장 SENTENCES</div>
+  <div class="lesson-item" id="b1-lesson-7" onclick="switchBook1Unit(7)">
+    <span class="lesson-num">01</span>
+    <span class="lesson-title-text">안녕하세요?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-8" onclick="switchBook1Unit(8)">
+    <span class="lesson-num">✏️</span>
+    <span class="lesson-title-text">써 보기 그림판</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-9" onclick="switchBook1Unit(9)">
+    <span class="lesson-num">02</span>
+    <span class="lesson-title-text">이게 뭐예요?</span>
+  </div>
+  <div class="lesson-item" id="b1-lesson-10" onclick="switchBook1Unit(10)">
+    <span class="lesson-num">03</span>
+    <span class="lesson-title-text">있어요 / 없어요</span>
+  </div>
   <div class="lesson-item" id="b1-lesson-11" onclick="switchBook1Unit(11)">
-    <span class="lesson-num">11</span>
-    <span class="lesson-title-text">이름이 뭐야?</span>
-  </div>
-  <div class="lesson-item" id="b1-lesson-12" onclick="switchBook1Unit(12)">
-    <span class="lesson-num">12</span>
-    <span class="lesson-title-text">이게 뭐야?</span>
-  </div>
-  <div class="lesson-item" id="b1-lesson-13" onclick="switchBook1Unit(13)">
-    <span class="lesson-num">13</span>
-    <span class="lesson-title-text">있어요? 없어요?</span>
+    <span class="lesson-num">04</span>
+    <span class="lesson-title-text">어디예요?</span>
   </div>
 </nav>
 <!-- ══════ Book 3 사이드바 ══════ -->
@@ -3614,7 +3606,7 @@ function b1Header(d, phaseColor) {
 let b1CurrentUnit = 0;
 async function switchBook1Unit(n) {
   b1CurrentUnit = n;
-  for (let i = 0; i <= 13; i++) {
+  for (let i = 0; i <= 11; i++) {
     const el = document.getElementById('b1-lesson-' + i);
     if (el) el.classList.toggle('active', i === n);
   }
@@ -3644,6 +3636,7 @@ function renderBook1Unit(d) {
   else if (d.type === 'combination' || d.type === 'vowel_compound') renderB1Combination(d, pc);
   else if (d.type === 'batchim')   renderB1Batchim(d, pc);
   else if (d.type === 'sentence')  renderB1Sentence(d, pc);
+  else if (d.type === 'canvas')    renderB1Canvas(d, pc);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -3703,6 +3696,10 @@ function renderB1Vowel(d, pc) {
     c.innerHTML += `<div id="b1-game-area"></div>`;
     renderB1SoundTapGame(d.sound_tap_game);
   }
+  if (d.classify_game) {
+    c.innerHTML += `<div id="b1-classify-area" style="margin-top:20px;"></div>`;
+    renderB1ClassifyGame(d.classify_game, 'b1-classify-area');
+  }
 }
 
 function b1WordRow(words, pc) {
@@ -3754,29 +3751,35 @@ function renderB1SoundTapGame(game) {
 }
 
 // Classify Game (Unit 02)
-function renderB1ClassifyGame(game) {
-  const wrap = document.getElementById('b1-game-area'); if (!wrap) return;
+function renderB1ClassifyGame(game, containerId) {
+  const wrap = document.getElementById(containerId || 'b1-game-area'); if (!wrap) return;
+  // Support custom categories or fall back to legacy basic/y
+  const cats = game.categories || [
+    {key:'basic',label:'기본 모음',sublabel:'Basic',color:'#43A047'},
+    {key:'y',label:'Y-모음',sublabel:'Y-Vowel',color:'#8E24AA'}
+  ];
+  const accentColor = cats[0].color;
   let idx = 0, score = 0;
   const rounds = game.rounds || [];
   function show() {
     if (idx >= rounds.length) {
-      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,#00897B,#26A69A);border-radius:16px;padding:30px;color:#fff;">
+      wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${accentColor},${accentColor}bb);border-radius:16px;padding:30px;color:#fff;">
         <div style="font-size:3rem;">🎉</div>
         <div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
-        <button onclick="renderB1ClassifyGame(window._b1CurrentGame)" style="background:#fff;color:#00897B;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+        <button onclick="renderB1ClassifyGame(window._b1ClassGame,window._b1ClassWrap)" style="background:#fff;color:${accentColor};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
       </div>`; return;
     }
     const r = rounds[idx];
-    wrap.innerHTML = `<div style="background:#f0fffe;border-radius:16px;padding:20px;border:2px solid #00897B30;">
-      <div style="font-size:.85rem;font-weight:700;color:#00897B;margin-bottom:12px;">🎮 ${game.title}</div>
+    const btns = cats.map(cat =>
+      `<button onclick="window._b1ClassAns('${cat.key}','${r.correct}')" style="background:${cat.color};color:#fff;border:none;border-radius:14px;padding:16px 28px;font-size:.95rem;font-weight:700;cursor:pointer;min-width:110px;">${cat.label}<br><span style="font-size:.8rem;opacity:.85;">${cat.sublabel}</span></button>`
+    ).join('');
+    wrap.innerHTML = `<div style="background:#f0fffe;border-radius:16px;padding:20px;border:2px solid ${accentColor}30;">
+      <div style="font-size:.85rem;font-weight:700;color:${accentColor};margin-bottom:12px;">🎮 ${game.title}</div>
       <div style="font-size:.8rem;color:#666;margin-bottom:16px;">${game.instruction}</div>
       <div style="text-align:center;margin-bottom:20px;">
         <div onclick="b1Speak('${r.char}')" style="font-size:5rem;font-weight:900;cursor:pointer;color:#222;">${r.char}</div>
       </div>
-      <div style="display:flex;gap:16px;justify-content:center;">
-        <button onclick="window._b1ClassAns('basic','${r.correct}')" style="background:#43A047;color:#fff;border:none;border-radius:14px;padding:16px 28px;font-size:1rem;font-weight:700;cursor:pointer;">기본 모음<br>Basic</button>
-        <button onclick="window._b1ClassAns('y','${r.correct}')" style="background:#8E24AA;color:#fff;border:none;border-radius:14px;padding:16px 28px;font-size:1rem;font-weight:700;cursor:pointer;">Y-모음<br>Y-Vowel</button>
-      </div>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">${btns}</div>
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
     window._b1ClassAns = function(chosen, correct) {
@@ -3784,7 +3787,7 @@ function renderB1ClassifyGame(game) {
       idx++; setTimeout(show, 500);
     };
   }
-  window._b1CurrentGame = game;
+  window._b1ClassGame = game; window._b1ClassWrap = containerId || 'b1-game-area';
   show();
 }
 
@@ -3989,6 +3992,18 @@ function renderB1CompareGame(game, pc) {
 function renderB1Combination(d, pc) {
   const c = document.getElementById('b1-unit-container');
 
+  // NEW: tabs layout (unit05 블럭 조합)
+  if (d.tabs) {
+    renderB1CombinationTabs(d, pc, c);
+    return;
+  }
+
+  // NEW: groups layout (unit02 복합 모음)
+  if (d.groups) {
+    renderB1VowelGroups(d, pc, c);
+    return;
+  }
+
   // Note/intro
   if (d.note) {
     c.innerHTML += `<div style="background:#E3F2FD;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#0D47A1;font-weight:600;">💡 ${d.note.ko}<br><span style="color:#888;font-weight:400;">${d.note.en}</span></div>`;
@@ -4144,6 +4159,12 @@ function renderB1BlockGame(game, consonants, vowels, pc) {
 function renderB1Batchim(d, pc) {
   const c = document.getElementById('b1-unit-container');
 
+  // NEW: tabs layout (unit06 받침 — 자기소리/대표소리)
+  if (d.tabs) {
+    renderB1BatchimTabs(d, pc, c);
+    return;
+  }
+
   // Intro box
   if (d.intro) {
     c.innerHTML += `<div style="background:#FFF8E1;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#E65100;font-weight:600;">🏗️ ${d.intro.ko}<br><span style="color:#888;font-weight:400;">${d.intro.en}</span></div>`;
@@ -4248,11 +4269,251 @@ function renderB1BatchimGame(game, batchimChars, pc) {
   show();
 }
 
+
+// ─────────────────────────────────────────────────────────────
+// 복합 모음 GROUPS renderer (unit02)
+// ─────────────────────────────────────────────────────────────
+function renderB1VowelGroups(d, pc, c) {
+  if (d.intro) {
+    c.innerHTML += `<div style="background:#E3F2FD;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#0D47A1;font-weight:600;">💡 ${d.intro.ko}<br><span style="color:#888;font-weight:400;">${d.intro.en}</span></div>`;
+  }
+  (d.groups||[]).forEach(g => {
+    c.innerHTML += `<div style="font-weight:800;color:${pc};font-size:1rem;margin:16px 0 8px;">${g.title}</div>`;
+    c.innerHTML += `<div style="background:#f0f8ff;border-radius:10px;padding:10px;margin-bottom:10px;font-size:.8rem;color:#555;">ℹ️ ${g.note}</div>`;
+    const cards = (g.chars||[]).map(ch =>
+      `<div onclick="b1Speak('${ch.char}')" style="background:${ch.color};border-radius:14px;padding:16px 10px;text-align:center;color:#fff;cursor:pointer;transition:.15s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+        <div style="font-size:2.8rem;font-weight:900;">${ch.char}</div>
+        <div style="font-size:.85rem;font-weight:700;margin-top:4px;">${ch.sound}</div>
+        <div style="font-size:1.3rem;margin-top:4px;">${ch.emoji}</div>
+        <div style="font-size:.8rem;opacity:.9;margin-top:4px;">${ch.example}</div>
+        <div style="font-size:.72rem;opacity:.8;">${ch.example_en}</div>
+      </div>`).join('');
+    c.innerHTML += `<div style="display:grid;grid-template-columns:repeat(${Math.min(g.chars.length,4)},1fr);gap:10px;margin-bottom:14px;">${cards}</div>`;
+    if (g.words) c.innerHTML += b1WordRow(g.words, pc);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────
+// 블럭 조합 TABS renderer (unit05)
+// ─────────────────────────────────────────────────────────────
+function renderB1CombinationTabs(d, pc, c) {
+  const tabs = d.tabs || [];
+  let activeTab = window._b1ComboTab || tabs[0].id;
+  // Check if saved tab exists
+  if (!tabs.find(t => t.id === activeTab)) activeTab = tabs[0].id;
+
+  const tabBar = tabs.map(t =>
+    `<button id="b1ct-${t.id}" onclick="switchB1ComboTab('${t.id}')" style="background:${activeTab===t.id?pc:'#fff'};color:${activeTab===t.id?'#fff':'#555'};border:2px solid ${pc};border-radius:10px;padding:8px 12px;font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;">${t.label}</button>`
+  ).join('');
+  c.innerHTML += `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">${tabBar}</div><div id="b1-combo-tab-content"></div>`;
+
+  function renderTab(tabId) {
+    window._b1ComboTab = tabId;
+    const tab = tabs.find(t => t.id === tabId);
+    if (!tab) return;
+    const tc = document.getElementById('b1-combo-tab-content');
+    if (!tc) return;
+    // Update tab button styles
+    tabs.forEach(t => {
+      const btn = document.getElementById('b1ct-' + t.id);
+      if (btn) { btn.style.background = t.id===tabId ? pc : '#fff'; btn.style.color = t.id===tabId ? '#fff' : '#555'; }
+    });
+    let html = '';
+    if (tab.note) html += `<div style="background:#E3F2FD;border-radius:12px;padding:14px;margin-bottom:14px;font-size:.85rem;color:#0D47A1;font-weight:600;">💡 ${tab.note.ko}<br><span style="color:#888;font-weight:400;">${tab.note.en}</span></div>`;
+    if (tab.words) html += b1WordRow(tab.words, pc);
+    html += `<div id="b1-block-game"></div>`;
+    tc.innerHTML = html;
+    if (tab.block_game) renderB1BlockGame(tab.block_game, tab.consonants||[], tab.vowels||[], pc);
+  }
+
+  window.switchB1ComboTab = function(tabId) { renderTab(tabId); };
+  renderTab(activeTab);
+}
+
+// ─────────────────────────────────────────────────────────────
+// 받침 TABS renderer (unit06 — 자기소리 / 대표소리)
+// ─────────────────────────────────────────────────────────────
+function renderB1BatchimTabs(d, pc, c) {
+  const tabs = d.tabs || [];
+  let activeTab = window._b1BtTab || tabs[0].id;
+  if (!tabs.find(t => t.id === activeTab)) activeTab = tabs[0].id;
+
+  const tabBar = tabs.map(t =>
+    `<button id="b1btt-${t.id}" onclick="switchB1BatchimTab('${t.id}')" style="background:${activeTab===t.id?pc:'#fff'};color:${activeTab===t.id?'#fff':'#555'};border:2px solid ${pc};border-radius:10px;padding:8px 14px;font-size:.85rem;font-weight:700;cursor:pointer;transition:.2s;">${t.label}<br><span style="font-size:.72rem;opacity:.8;">${t.sublabel||''}</span></button>`
+  ).join('');
+  c.innerHTML += `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">${tabBar}</div><div id="b1-batchim-tab-content"></div>`;
+
+  function renderBtTab(tabId) {
+    window._b1BtTab = tabId;
+    const tab = tabs.find(t => t.id === tabId);
+    if (!tab) return;
+    const tc = document.getElementById('b1-batchim-tab-content');
+    if (!tc) return;
+    tabs.forEach(t => {
+      const btn = document.getElementById('b1btt-' + t.id);
+      if (btn) { btn.style.background = t.id===tabId ? pc : '#fff'; btn.style.color = t.id===tabId ? '#fff' : '#555'; }
+    });
+    tc.innerHTML = '';
+    if (tab.intro) tc.innerHTML += `<div style="background:#FFF8E1;border-radius:12px;padding:14px;margin-bottom:14px;font-size:.85rem;color:#E65100;font-weight:600;">🏗️ ${tab.intro.ko}<br><span style="color:#888;font-weight:400;">${tab.intro.en}</span></div>`;
+
+    if (tab.batchim_chars) {
+      // 자기소리 tab — same as original renderB1Batchim content
+      const chars = (tab.batchim_chars||[]).map(ch =>
+        `<div onclick="b1Speak('${ch.char}')" style="background:#E3F2FD;border-radius:14px;padding:14px 10px;text-align:center;border:2px solid #1565C040;cursor:pointer;">
+          <div style="font-size:2.8rem;font-weight:900;color:#1565C0;">${ch.char}</div>
+          <div style="font-size:.8rem;font-weight:700;color:#555;">[${ch.sound}]</div>
+          <div style="font-size:1.2rem;">${ch.emoji}</div>
+          <div style="margin-top:6px;">${(ch.examples||[]).map(e=>`<span onclick="b1Speak('${e}');event.stopPropagation();" style="background:#fff;border-radius:6px;padding:2px 7px;font-size:.85rem;margin:2px;display:inline-block;cursor:pointer;">${e}</span>`).join('')}</div>
+        </div>`).join('');
+      tc.innerHTML += `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">📌 받침 글자 Final Consonants</h3>
+        <div style="display:grid;grid-template-columns:repeat(${Math.min(tab.batchim_chars.length,4)},1fr);gap:12px;margin-bottom:16px;">${chars}</div>`;
+      // 3-layer block diagram
+      tc.innerHTML += `<div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:16px;border:2px solid ${pc}20;">
+        <div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:10px;">🏗️ 3층 블럭 구조 3-Layer Structure</div>
+        <div style="display:flex;gap:16px;align-items:center;justify-content:center;">
+          <div style="text-align:center;">
+            <div style="background:#FFEBEE;border:2px solid #E53935;border-radius:8px 8px 0 0;padding:10px 18px;font-size:1.6rem;font-weight:900;color:#E53935;">자</div>
+            <div style="background:#E8F5E9;border:2px solid #43A047;border-top:none;padding:10px 18px;font-size:1.6rem;font-weight:900;color:#43A047;">모</div>
+            <div style="background:#E3F2FD;border:2px solid #1565C0;border-top:none;border-radius:0 0 8px 8px;padding:10px 18px;font-size:1.6rem;font-weight:900;color:#1565C0;">받</div>
+          </div>
+          <div style="color:#aaa;">→</div>
+          <div onclick="b1Speak('밥')" style="font-size:5rem;font-weight:900;color:#222;cursor:pointer;">밥</div>
+          <div style="font-size:.8rem;color:#555;max-width:100px;">ㅂ(자음)<br>+ ㅏ(모음)<br>+ ㅂ(받침)<br>= 밥</div>
+        </div>
+      </div>`;
+      tc.innerHTML += `<div id="b1-batchim-game"></div>`;
+      renderB1BatchimGame(tab.block_game, tab.batchim_chars||[], pc);
+    } else if (tab.rep_groups) {
+      // 대표소리 tab
+      tc.innerHTML += `<div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:12px;">🔄 대표 소리 Representative Sounds</div>`;
+      (tab.rep_groups||[]).forEach(g => {
+        const memberChips = g.members.map(m =>
+          `<span onclick="b1Speak('${m}아')" style="background:${g.color}20;border:2px solid ${g.color};border-radius:10px;padding:8px 14px;font-size:1.6rem;font-weight:900;color:${g.color};cursor:pointer;display:inline-block;">${m}</span>`
+        ).join(' ');
+        tc.innerHTML += `<div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;border:2px solid ${g.color}30;">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px;">
+            ${memberChips}
+            <div style="font-size:1.5rem;color:#aaa;">→</div>
+            <div onclick="b1Speak('${g.rep_sound}아')" style="background:${g.color};border-radius:12px;padding:10px 18px;font-size:2rem;font-weight:900;color:#fff;cursor:pointer;">[${g.rep_sound}]</div>
+            <div onclick="b1Speak('${g.example_word}')" style="font-size:1.8rem;font-weight:800;color:#333;cursor:pointer;">${g.example_word}<span style="font-size:.85rem;color:#888;font-weight:400;margin-left:6px;">${g.example_en}</span></div>
+          </div>
+          <div style="font-size:.8rem;color:#666;background:#f8f8f8;border-radius:8px;padding:8px;">💡 ${g.note}</div>
+        </div>`;
+      });
+    }
+  }
+
+  window.switchB1BatchimTab = function(tabId) { renderBtTab(tabId); };
+  renderBtTab(activeTab);
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// ✏️ CANVAS unit (써 보기 그림판)
+// ─────────────────────────────────────────────────────────────
+function renderB1Canvas(d, pc) {
+  const c = document.getElementById('b1-unit-container');
+  const prompts = d.prompts || [];
+  let promptIdx = 0;
+
+  const promptBtns = prompts.map((p,i) =>
+    `<button onclick="b1CanvasSetPrompt(${i})" id="b1cv-p${i}" style="background:${i===0?pc:'#fff'};color:${i===0?'#fff':'#555'};border:2px solid ${pc};border-radius:8px;padding:6px 12px;font-size:.85rem;font-weight:700;cursor:pointer;">${p.emoji} ${p.text}</button>`
+  ).join('');
+
+  c.innerHTML += `
+    <div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:10px;">✏️ 따라 써 보기! Practice writing!</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">${promptBtns}</div>
+    <div id="b1cv-prompt" style="background:${pc}15;border-radius:12px;padding:14px;margin-bottom:12px;text-align:center;">
+      <div style="font-size:2.5rem;font-weight:900;color:${pc};">${prompts[0]?.text||''}</div>
+      <div style="font-size:.8rem;color:#888;">${prompts[0]?.hint||''}</div>
+    </div>
+    <div style="position:relative;background:#fff;border-radius:14px;border:2px solid ${pc}40;overflow:hidden;margin-bottom:10px;">
+      <canvas id="b1cv-canvas" style="display:block;touch-action:none;cursor:crosshair;"></canvas>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="b1CanvasClear()" style="flex:1;background:#f5f5f5;color:#555;border:2px solid #ddd;border-radius:10px;padding:10px;font-size:.9rem;font-weight:700;cursor:pointer;">🗑️ 지우기 Clear</button>
+    </div>`;
+
+  // Init canvas
+  setTimeout(() => {
+    const canvas = document.getElementById('b1cv-canvas');
+    if (!canvas) return;
+    const wrap = canvas.parentElement;
+    canvas.width = wrap.clientWidth || 320;
+    canvas.height = 220;
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    ctx.strokeStyle = '#222'; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    function getPos(e) {
+      const r = canvas.getBoundingClientRect();
+      const src = e.touches ? e.touches[0] : e;
+      return [src.clientX - r.left, src.clientY - r.top];
+    }
+    canvas.addEventListener('mousedown', e => { drawing=true; ctx.beginPath(); const [x,y]=getPos(e); ctx.moveTo(x,y); });
+    canvas.addEventListener('mousemove', e => { if(!drawing)return; const [x,y]=getPos(e); ctx.lineTo(x,y); ctx.stroke(); });
+    canvas.addEventListener('mouseup', ()=>drawing=false);
+    canvas.addEventListener('mouseleave', ()=>drawing=false);
+    canvas.addEventListener('touchstart', e=>{e.preventDefault();drawing=true;ctx.beginPath();const[x,y]=getPos(e);ctx.moveTo(x,y);},{passive:false});
+    canvas.addEventListener('touchmove', e=>{e.preventDefault();if(!drawing)return;const[x,y]=getPos(e);ctx.lineTo(x,y);ctx.stroke();},{passive:false});
+    canvas.addEventListener('touchend', ()=>drawing=false);
+    window._b1CanvasCtx = ctx;
+  }, 50);
+
+  window.b1CanvasClear = function() {
+    const canvas = document.getElementById('b1cv-canvas');
+    if (canvas && window._b1CanvasCtx) window._b1CanvasCtx.clearRect(0,0,canvas.width,canvas.height);
+  };
+  window.b1CanvasSetPrompt = function(i) {
+    promptIdx = i;
+    const p = prompts[i];
+    const pdiv = document.getElementById('b1cv-prompt');
+    if (pdiv && p) pdiv.innerHTML = `<div style="font-size:2.5rem;font-weight:900;color:${pc};">${p.text}</div><div style="font-size:.8rem;color:#888;">${p.hint}</div>`;
+    prompts.forEach((_,j) => {
+      const btn = document.getElementById('b1cv-p'+j);
+      if (btn) { btn.style.background = j===i?pc:'#fff'; btn.style.color = j===i?'#fff':'#555'; }
+    });
+    b1CanvasClear();
+  };
+}
+
 // ─────────────────────────────────────────────────────────────
 // 🟣 SENTENCE UNITS (11, 12, 13)
 // ─────────────────────────────────────────────────────────────
 function renderB1Sentence(d, pc) {
   const c = document.getElementById('b1-unit-container');
+
+  // formal_informal pairs (unit07 안녕하세요)
+  if (d.formal_informal) {
+    const fi = d.formal_informal;
+    let html = `<div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;border:2px solid ${pc}30;">
+      <div style="font-size:1rem;font-weight:800;color:${pc};margin-bottom:6px;">📌 ${fi.title}</div>
+      <div style="font-size:.85rem;color:#333;margin-bottom:2px;">🇰🇷 ${fi.note_ko}</div>
+      <div style="font-size:.82rem;color:#888;margin-bottom:14px;">🇺🇸 ${fi.note_en}</div>`;
+    (fi.pairs||[]).forEach(p => {
+      html += `<div style="display:flex;gap:10px;margin-bottom:10px;align-items:stretch;">
+        <div style="flex:1;background:#EDE7F6;border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:.68rem;font-weight:700;color:#7B1FA2;margin-bottom:4px;">존댓말 FORMAL</div>
+          <div onclick="b1Speak('${p.formal}')" style="font-size:1.15rem;font-weight:800;color:#4A148C;cursor:pointer;">${p.formal}</div>
+        </div>
+        <div style="flex:1;background:#E3F2FD;border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:.68rem;font-weight:700;color:#1565C0;margin-bottom:4px;">반말 INFORMAL</div>
+          <div onclick="b1Speak('${p.informal}')" style="font-size:1.15rem;font-weight:800;color:#0D47A1;cursor:pointer;">${p.informal}</div>
+        </div>
+      </div>
+      <div style="font-size:.75rem;color:#888;margin-bottom:8px;padding:0 4px;">${p.situation} · ${p.note}</div>`;
+    });
+    html += '</div>';
+    c.innerHTML += html;
+    if (d.vocab) {
+      const items = (d.vocab||[]).map(v => `<div onclick="b1Speak('${v.word}')" style="background:#fff;border:2px solid ${pc}33;border-radius:10px;padding:12px;text-align:center;cursor:pointer;min-width:80px;"><div style="font-size:1.5rem;">${v.emoji}</div><div style="font-size:1rem;font-weight:800;">${v.word}</div><div style="font-size:.72rem;color:#888;">${v.en}</div></div>`).join('');
+      c.innerHTML += `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">📝 단어 Words</h3><div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;">${items}</div>`;
+    }
+    if (d.word_card_game) {
+      c.innerHTML += `<div id="b1-sent-game"></div>`;
+      renderB1SentenceGame(d.word_card_game, pc);
+    }
+    return;
+  }
 
   // Pattern box
   if (d.pattern) {
@@ -4261,10 +4522,35 @@ function renderB1Sentence(d, pc) {
       <div style="font-size:1.1rem;font-weight:800;color:${pc};margin-bottom:10px;">📌 ${p.rule||p.pattern||''}</div>`;
     if (p.note_ko) html += `<div style="font-size:.85rem;color:#333;margin-bottom:2px;">🇰🇷 ${p.note_ko}</div><div style="font-size:.82rem;color:#888;margin-bottom:10px;">🇺🇸 ${p.note_en}</div>`;
     if (p.items) {
-      html += p.items.map(i=>`<div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
-        <div onclick="b1Speak('${i.kr}')" style="background:${pc}15;border-radius:8px;padding:6px 12px;font-size:1rem;font-weight:700;color:#222;cursor:pointer;">${i.kr}</div>
-        <div style="font-size:.85rem;color:#555;">${i.en} <span style="color:#aaa;font-size:.78rem;">— ${i.note}</span></div>
-      </div>`).join('');
+      html += p.items.map(i=>{
+        if (i.q_formal) {
+          // formal/informal dialogue pair
+          return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+            <div style="background:#EDE7F6;border-radius:8px;padding:8px;">
+              <div style="font-size:.65rem;font-weight:700;color:#7B1FA2;margin-bottom:2px;">존댓말</div>
+              <div onclick="b1Speak('${i.q_formal}')" style="font-size:.9rem;font-weight:700;cursor:pointer;">${i.q_formal}</div>
+              <div onclick="b1Speak('${i.a_formal}')" style="font-size:.9rem;color:#555;cursor:pointer;">${i.a_formal} ${i.emoji||''}</div>
+            </div>
+            <div style="background:#E3F2FD;border-radius:8px;padding:8px;">
+              <div style="font-size:.65rem;font-weight:700;color:#1565C0;margin-bottom:2px;">반말</div>
+              <div onclick="b1Speak('${i.q_informal}')" style="font-size:.9rem;font-weight:700;cursor:pointer;">${i.q_informal}</div>
+              <div onclick="b1Speak('${i.a_informal}')" style="font-size:.9rem;color:#555;cursor:pointer;">${i.a_informal}</div>
+            </div>
+          </div>`;
+        } else if (i.formal) {
+          // 있어요/없어요 type
+          return `<div style="display:flex;gap:8px;margin-bottom:6px;align-items:center;">
+            <div style="font-size:1.5rem;">${i.emoji||''}</div>
+            <div onclick="b1Speak('${i.formal}')" style="background:${pc}15;border-radius:8px;padding:6px 12px;font-size:.95rem;font-weight:700;cursor:pointer;">${i.formal}</div>
+            <div style="font-size:.8rem;color:#888;">${i.en||''}</div>
+          </div>`;
+        } else {
+          return `<div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+            <div onclick="b1Speak('${i.kr||''}')" style="background:${pc}15;border-radius:8px;padding:6px 12px;font-size:1rem;font-weight:700;color:#222;cursor:pointer;">${i.kr||''}</div>
+            <div style="font-size:.85rem;color:#555;">${i.en||''} <span style="color:#aaa;font-size:.78rem;">${i.note?'— '+i.note:''}</span></div>
+          </div>`;
+        }
+      }).join('');
     }
     if (p.examples) {
       html += '<div style="margin-top:10px;background:#f8f8ff;border-radius:10px;padding:12px;">';

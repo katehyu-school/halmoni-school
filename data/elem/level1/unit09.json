@@ -1,179 +1,46 @@
 {
   "unit": 9,
   "book": 1,
-  "type": "batchim",
-  "title": "받침 1 — ㄴ ㅁ ㅇ ㄹ",
-  "phase": "batchim",
+  "type": "sentence",
+  "title": "02 이게 뭐예요?",
+  "phase": "sentence",
   "goal": {
-    "ko": "받침이 있는 글자를 읽을 수 있어요!",
-    "en": "I can read syllables with final consonants!"
+    "ko": "물건 이름을 묻고 대답할 수 있어요!",
+    "en": "I can ask and answer what something is!"
   },
-  "intro": {
-    "ko": "한글 음절은 3층이에요! 자음(1층) + 모음(2층) + 받침(3층)!",
-    "en": "Korean syllables have 3 layers! Consonant + Vowel + Final consonant!"
+  "pattern": {
+    "rule": "이게 뭐예요? / 이게 뭐야?",
+    "note_ko": "이게 = 이것이 (this) · 뭐예요 = what is it (formal) · 뭐야 = what is it (informal)",
+    "note_en": "이게 = this · 뭐예요? = what is it? (formal) · 뭐야? = what is it? (informal)",
+    "items": [
+      {"q_formal":"이게 뭐예요?","q_informal":"이게 뭐야?","a_formal":"사과예요.","a_informal":"사과야.","emoji":"🍎","word":"사과","en":"apple"},
+      {"q_formal":"이게 뭐예요?","q_informal":"이게 뭐야?","a_formal":"고양이예요.","a_informal":"고양이야.","emoji":"🐱","word":"고양이","en":"cat"},
+      {"q_formal":"이게 뭐예요?","q_informal":"이게 뭐야?","a_formal":"책이에요.","a_informal":"책이야.","emoji":"📚","word":"책","en":"book"},
+      {"q_formal":"이게 뭐예요?","q_informal":"이게 뭐야?","a_formal":"물이에요.","a_informal":"물이야.","emoji":"💧","word":"물","en":"water"}
+    ]
   },
-  "batchim_chars": [
-    {
-      "char": "ㄴ",
-      "sound": "n",
-      "color": "#1565C0",
-      "emoji": "🌙",
-      "examples": [
-        "안녕",
-        "인사",
-        "문"
-      ]
-    },
-    {
-      "char": "ㅁ",
-      "sound": "m",
-      "color": "#1565C0",
-      "emoji": "👄",
-      "examples": [
-        "밥",
-        "잠",
-        "곰"
-      ]
-    },
-    {
-      "char": "ㅇ",
-      "sound": "ng",
-      "color": "#1565C0",
-      "emoji": "🔔",
-      "examples": [
-        "방",
-        "강",
-        "정"
-      ]
-    },
-    {
-      "char": "ㄹ",
-      "sound": "l",
-      "color": "#1565C0",
-      "emoji": "🎵",
-      "examples": [
-        "달",
-        "별",
-        "말"
-      ]
-    }
+  "vocab": [
+    {"word":"사과","en":"apple","emoji":"🍎"},
+    {"word":"바나나","en":"banana","emoji":"🍌"},
+    {"word":"포도","en":"grape","emoji":"🍇"},
+    {"word":"고양이","en":"cat","emoji":"🐱"},
+    {"word":"강아지","en":"puppy","emoji":"🐶"},
+    {"word":"책","en":"book","emoji":"📚"},
+    {"word":"연필","en":"pencil","emoji":"✏️"},
+    {"word":"가방","en":"bag","emoji":"🎒"},
+    {"word":"물","en":"water","emoji":"💧"},
+    {"word":"공","en":"ball","emoji":"⚽"}
   ],
-  "block_game": {
-    "title": "🧱 3층 블럭 쌓기!",
-    "instruction": "받침을 탭해서 3층 블럭을 완성해요! Tap the right batchim to complete the block!",
+  "picture_game": {
+    "title": "🎮 이게 뭐예요? 게임!",
+    "instruction": "그림을 보고 이름을 고르세요! Look at the picture and choose the name!",
     "rounds": [
-      {
-        "base_con": "ㅇ",
-        "base_vow": "ㅏ",
-        "base_syl": "아",
-        "batchim": "ㄴ",
-        "result": "안",
-        "hint": "안녕! (hello)",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㅇ",
-        "base_vow": "ㅣ",
-        "base_syl": "이",
-        "batchim": "ㄹ",
-        "result": "일",
-        "hint": "일(1) / work",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㅂ",
-        "base_vow": "ㅏ",
-        "base_syl": "바",
-        "batchim": "ㅁ",
-        "result": "밥",
-        "hint": "밥 = rice/meal",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㅂ",
-        "base_vow": "ㅏ",
-        "base_syl": "바",
-        "batchim": "ㅇ",
-        "result": "방",
-        "hint": "방 = room",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㄷ",
-        "base_vow": "ㅏ",
-        "base_syl": "다",
-        "batchim": "ㄹ",
-        "result": "달",
-        "hint": "달 = moon",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㄱ",
-        "base_vow": "ㅏ",
-        "base_syl": "가",
-        "batchim": "ㅇ",
-        "result": "강",
-        "hint": "강 = river",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㅁ",
-        "base_vow": "ㅜ",
-        "base_syl": "무",
-        "batchim": "ㄴ",
-        "result": "문",
-        "hint": "문 = door",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      },
-      {
-        "base_con": "ㅂ",
-        "base_vow": "ㅕ",
-        "base_syl": "벼",
-        "batchim": "ㄹ",
-        "result": "별",
-        "hint": "별 = star",
-        "choices": [
-          "ㄴ",
-          "ㅁ",
-          "ㅇ",
-          "ㄹ"
-        ]
-      }
+      {"emoji":"🍎","word":"사과","correct":"사과예요.","choices":["사과예요.","바나나예요.","포도예요.","물이에요."]},
+      {"emoji":"🐱","word":"고양이","correct":"고양이예요.","choices":["강아지예요.","고양이예요.","책이에요.","공이에요."]},
+      {"emoji":"📚","word":"책","correct":"책이에요.","choices":["연필이에요.","가방이에요.","책이에요.","물이에요."]},
+      {"emoji":"✏️","word":"연필","correct":"연필이에요.","choices":["연필이에요.","책이에요.","가방이에요.","공이에요."]},
+      {"emoji":"🍌","word":"바나나","correct":"바나나예요.","choices":["사과예요.","포도예요.","바나나예요.","물이에요."]},
+      {"emoji":"⚽","word":"공","correct":"공이에요.","choices":["책이에요.","공이에요.","가방이에요.","연필이에요."]}
     ]
   }
 }

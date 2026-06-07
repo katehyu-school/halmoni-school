@@ -2,101 +2,185 @@
   "unit": 4,
   "book": 1,
   "type": "consonant",
-  "title": "기본 자음 2",
+  "title": "쌍자음과 센소리",
   "phase": "consonant",
   "goal": {
-    "ko": "기본 자음 6개를 더 배워요!",
-    "en": "Let's learn 6 more consonants!"
+    "ko": "거센소리와 쌍자음을 알 수 있어요!",
+    "en": "I can recognize aspirated and tense consonants!"
   },
-  "chars": [
-    {
-      "char": "ㅂ",
-      "sound": "b/p",
-      "with_a": "바",
-      "color": "#E53935",
-      "emoji": "🍌",
-      "example": "바나나",
-      "example_en": "banana",
-      "tip": "'b' at start, 'p' at end"
-    },
-    {
-      "char": "ㅅ",
-      "sound": "s/sh",
-      "with_a": "사",
-      "color": "#E53935",
-      "emoji": "🍎",
-      "example": "사과",
-      "example_en": "apple",
-      "tip": "'s' before vowel, 'sh' elsewhere"
-    },
-    {
-      "char": "ㅇ",
-      "sound": "silent/ng",
-      "with_a": "아",
-      "color": "#E53935",
-      "emoji": "🔔",
-      "example": "아이",
-      "example_en": "child",
-      "hint": "silent at start of syllable, 'ng' at end"
-    },
-    {
-      "char": "ㅈ",
-      "sound": "j",
-      "with_a": "자",
-      "color": "#E53935",
-      "emoji": "🐢",
-      "example": "자전거",
-      "example_en": "bicycle",
-      "tip": "like 'j' in 'jump'"
-    },
-    {
-      "char": "ㅊ",
-      "sound": "ch",
-      "with_a": "차",
-      "color": "#E53935",
-      "emoji": "🚗",
-      "example": "차",
-      "example_en": "car",
-      "tip": "like 'ch' in 'cheese'"
-    },
-    {
-      "char": "ㅎ",
-      "sound": "h",
-      "with_a": "하",
-      "color": "#E53935",
-      "emoji": "☀️",
-      "example": "하늘",
-      "example_en": "sky",
-      "tip": "like 'h' in 'hello'"
-    }
-  ],
-  "memory_game": {
-    "title": "🎮 메모리 카드!",
-    "instruction": "같은 쌍을 찾아요! Find matching pairs!",
-    "pairs": [
+  "aspirated": {
+    "title": "거센소리 Aspirated (with a puff of air!)",
+    "note": "기본 자음 + 공기 = 거센소리! Basic consonant + puff of air!",
+    "chars": [
       {
-        "a": "ㅂ",
-        "b": "바"
+        "base": "ㄱ",
+        "asp": "ㅋ",
+        "sound": "k",
+        "with_a": "카",
+        "emoji": "☕",
+        "example": "커피",
+        "example_en": "coffee"
       },
       {
-        "a": "ㅅ",
-        "b": "사"
+        "base": "ㄷ",
+        "asp": "ㅌ",
+        "sound": "t",
+        "with_a": "타",
+        "emoji": "🎯",
+        "example": "타조",
+        "example_en": "ostrich"
       },
       {
-        "a": "ㅇ",
-        "b": "아"
+        "base": "ㅂ",
+        "asp": "ㅍ",
+        "sound": "p",
+        "with_a": "파",
+        "emoji": "🌿",
+        "example": "파",
+        "example_en": "green onion"
+      }
+    ]
+  },
+  "tense": {
+    "title": "쌍자음 Tense (tense/doubled sound!)",
+    "note": "같은 자음 두 개 = 더 강한 소리! Double consonant = stronger tighter sound!",
+    "chars": [
+      {
+        "base": "ㄱ",
+        "tense": "ㄲ",
+        "sound": "kk",
+        "with_a": "까",
+        "emoji": "🐸",
+        "example": "까치",
+        "example_en": "magpie"
       },
       {
-        "a": "ㅈ",
-        "b": "자"
+        "base": "ㄷ",
+        "tense": "ㄸ",
+        "sound": "tt",
+        "with_a": "따",
+        "emoji": "🍓",
+        "example": "딸기",
+        "example_en": "strawberry"
       },
       {
-        "a": "ㅊ",
-        "b": "차"
+        "base": "ㅂ",
+        "tense": "ㅃ",
+        "sound": "pp",
+        "with_a": "빠",
+        "emoji": "💨",
+        "example": "빨리",
+        "example_en": "quickly"
       },
       {
-        "a": "ㅎ",
-        "b": "하"
+        "base": "ㅅ",
+        "tense": "ㅆ",
+        "sound": "ss",
+        "with_a": "싸",
+        "emoji": "💰",
+        "example": "싸다",
+        "example_en": "cheap"
+      },
+      {
+        "base": "ㅈ",
+        "tense": "ㅉ",
+        "sound": "jj",
+        "with_a": "짜",
+        "emoji": "😬",
+        "example": "짜다",
+        "example_en": "salty"
+      }
+    ]
+  },
+  "compare_game": {
+    "title": "🎮 소리 비교 게임!",
+    "instruction": "같은 소리예요, 더 강한 소리예요? Basic or stronger version?",
+    "rounds": [
+      {
+        "word": "카",
+        "type": "aspirated",
+        "base": "가",
+        "choices": [
+          "가",
+          "카",
+          "까"
+        ],
+        "correct": "카"
+      },
+      {
+        "word": "까",
+        "type": "tense",
+        "base": "가",
+        "choices": [
+          "가",
+          "카",
+          "까"
+        ],
+        "correct": "까"
+      },
+      {
+        "word": "타",
+        "type": "aspirated",
+        "base": "다",
+        "choices": [
+          "다",
+          "타",
+          "따"
+        ],
+        "correct": "타"
+      },
+      {
+        "word": "따",
+        "type": "tense",
+        "base": "다",
+        "choices": [
+          "다",
+          "타",
+          "따"
+        ],
+        "correct": "따"
+      },
+      {
+        "word": "파",
+        "type": "aspirated",
+        "base": "바",
+        "choices": [
+          "바",
+          "파",
+          "빠"
+        ],
+        "correct": "파"
+      },
+      {
+        "word": "빠",
+        "type": "tense",
+        "base": "바",
+        "choices": [
+          "바",
+          "파",
+          "빠"
+        ],
+        "correct": "빠"
+      },
+      {
+        "word": "싸",
+        "type": "tense",
+        "base": "사",
+        "choices": [
+          "사",
+          "싸"
+        ],
+        "correct": "싸"
+      },
+      {
+        "word": "짜",
+        "type": "tense",
+        "base": "자",
+        "choices": [
+          "자",
+          "짜"
+        ],
+        "correct": "짜"
       }
     ]
   }

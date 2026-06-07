@@ -2,247 +2,50 @@
   "unit": 3,
   "book": 1,
   "type": "consonant",
-  "title": "기본 자음 1",
+  "title": "기본 자음",
   "phase": "consonant",
   "goal": {
-    "ko": "기본 자음 5개를 읽고 소리 낼 수 있어요!",
-    "en": "I can read and say 5 basic consonants!"
+    "ko": "기본 자음 14개를 읽고 소리 낼 수 있어요!",
+    "en": "I can read and say all 14 basic consonants!"
   },
   "note": {
     "ko": "자음은 혼자 소리 못 내요. 모음(ㅏ)과 합쳐야 해요!",
     "en": "Consonants can't sound alone — pair with a vowel!"
   },
   "chars": [
-    {
-      "char": "ㄱ",
-      "sound": "g/k",
-      "with_a": "가",
-      "color": "#E53935",
-      "emoji": "🦒",
-      "example": "기린",
-      "example_en": "giraffe",
-      "tip": "sounds like 'g' at start, 'k' at end"
-    },
-    {
-      "char": "ㄴ",
-      "sound": "n",
-      "with_a": "나",
-      "color": "#E53935",
-      "emoji": "🦋",
-      "example": "나비",
-      "example_en": "butterfly",
-      "tip": "same as English 'n'"
-    },
-    {
-      "char": "ㄷ",
-      "sound": "d/t",
-      "with_a": "다",
-      "color": "#E53935",
-      "emoji": "🍭",
-      "example": "다리",
-      "example_en": "leg/bridge",
-      "tip": "sounds like 'd' at start, 't' at end"
-    },
-    {
-      "char": "ㄹ",
-      "sound": "r/l",
-      "with_a": "라",
-      "color": "#E53935",
-      "emoji": "🦁",
-      "example": "라면",
-      "example_en": "ramen",
-      "tip": "between 'r' and 'l' — tongue flap!"
-    },
-    {
-      "char": "ㅁ",
-      "sound": "m",
-      "with_a": "마",
-      "color": "#E53935",
-      "emoji": "🐎",
-      "example": "마차",
-      "example_en": "carriage",
-      "tip": "same as English 'm'"
-    }
-  ],
-  "combo_preview": [
-    {
-      "con": "ㄱ",
-      "words": [
-        {
-          "syl": "가",
-          "hint": "go"
-        },
-        {
-          "syl": "고",
-          "hint": "고양이(cat)"
-        },
-        {
-          "syl": "구",
-          "hint": "구름(cloud)"
-        }
-      ]
-    },
-    {
-      "con": "ㄴ",
-      "words": [
-        {
-          "syl": "나",
-          "hint": "I/me"
-        },
-        {
-          "syl": "노",
-          "hint": "노란(yellow)"
-        },
-        {
-          "syl": "누",
-          "hint": "who"
-        }
-      ]
-    },
-    {
-      "con": "ㄷ",
-      "words": [
-        {
-          "syl": "다",
-          "hint": "all"
-        },
-        {
-          "syl": "도",
-          "hint": "도마뱀(lizard)"
-        },
-        {
-          "syl": "두",
-          "hint": "two"
-        }
-      ]
-    },
-    {
-      "con": "ㄹ",
-      "words": [
-        {
-          "syl": "라",
-          "hint": "라면(ramen)"
-        },
-        {
-          "syl": "로",
-          "hint": "로봇(robot)"
-        },
-        {
-          "syl": "리",
-          "hint": "리본(ribbon)"
-        }
-      ]
-    },
-    {
-      "con": "ㅁ",
-      "words": [
-        {
-          "syl": "마",
-          "hint": "horse"
-        },
-        {
-          "syl": "모",
-          "hint": "모자(hat)"
-        },
-        {
-          "syl": "무",
-          "hint": "radish"
-        }
-      ]
-    }
+    {"char":"ㄱ","sound":"g/k","with_a":"가","color":"#E53935","emoji":"🦒","example":"기린","example_en":"giraffe","tip":"'g' at start, 'k' at end"},
+    {"char":"ㄴ","sound":"n","with_a":"나","color":"#E53935","emoji":"🦋","example":"나비","example_en":"butterfly","tip":"same as English 'n'"},
+    {"char":"ㄷ","sound":"d/t","with_a":"다","color":"#E53935","emoji":"🍭","example":"다리","example_en":"bridge","tip":"'d' at start, 't' at end"},
+    {"char":"ㄹ","sound":"r/l","with_a":"라","color":"#E53935","emoji":"🦁","example":"라면","example_en":"ramen","tip":"between 'r' and 'l'"},
+    {"char":"ㅁ","sound":"m","with_a":"마","color":"#E53935","emoji":"🐎","example":"마차","example_en":"carriage","tip":"same as English 'm'"},
+    {"char":"ㅂ","sound":"b/p","with_a":"바","color":"#C62828","emoji":"🌊","example":"바다","example_en":"ocean","tip":"'b' at start, 'p' at end"},
+    {"char":"ㅅ","sound":"s/t","with_a":"사","color":"#C62828","emoji":"🦁","example":"사자","example_en":"lion","tip":"'s' before vowel, 't' at end"},
+    {"char":"ㅇ","sound":"ng/silent","with_a":"아","color":"#C62828","emoji":"🍉","example":"아이","example_en":"child","tip":"silent at start, 'ng' at end"},
+    {"char":"ㅈ","sound":"j/t","with_a":"자","color":"#C62828","emoji":"🚗","example":"자동차","example_en":"car","tip":"like 'j' before vowel"},
+    {"char":"ㅊ","sound":"ch","with_a":"차","color":"#C62828","emoji":"🎵","example":"차","example_en":"tea/car","tip":"like 'ch' in 'chair'"},
+    {"char":"ㅋ","sound":"k","with_a":"카","color":"#B71C1C","emoji":"☕","example":"커피","example_en":"coffee","tip":"'k' with puff of air!"},
+    {"char":"ㅌ","sound":"t","with_a":"타","color":"#B71C1C","emoji":"🚕","example":"택시","example_en":"taxi","tip":"'t' with puff of air!"},
+    {"char":"ㅍ","sound":"p","with_a":"파","color":"#B71C1C","emoji":"🌿","example":"파","example_en":"green onion","tip":"'p' with puff of air!"},
+    {"char":"ㅎ","sound":"h","with_a":"하","color":"#B71C1C","emoji":"😊","example":"하늘","example_en":"sky","tip":"like English 'h'"}
   ],
   "first_sound_game": {
     "title": "🎮 첫소리 찾기!",
     "instruction": "그림을 보고 첫소리(자음)를 탭하세요! Tap the first consonant!",
     "rounds": [
-      {
-        "emoji": "🦒",
-        "word": "기린",
-        "correct": "ㄱ",
-        "choices": [
-          "ㄱ",
-          "ㄴ",
-          "ㄷ",
-          "ㄹ"
-        ]
-      },
-      {
-        "emoji": "🦋",
-        "word": "나비",
-        "correct": "ㄴ",
-        "choices": [
-          "ㄱ",
-          "ㄴ",
-          "ㄷ",
-          "ㅁ"
-        ]
-      },
-      {
-        "emoji": "🐎",
-        "word": "말",
-        "correct": "ㅁ",
-        "choices": [
-          "ㄷ",
-          "ㄹ",
-          "ㅁ",
-          "ㄴ"
-        ]
-      },
-      {
-        "emoji": "🍭",
-        "word": "달",
-        "correct": "ㄷ",
-        "choices": [
-          "ㄱ",
-          "ㄷ",
-          "ㄹ",
-          "ㅁ"
-        ]
-      },
-      {
-        "emoji": "🦁",
-        "word": "라면",
-        "correct": "ㄹ",
-        "choices": [
-          "ㄴ",
-          "ㄹ",
-          "ㅁ",
-          "ㄱ"
-        ]
-      },
-      {
-        "emoji": "🌸",
-        "word": "나무",
-        "correct": "ㄴ",
-        "choices": [
-          "ㄱ",
-          "ㄴ",
-          "ㄷ",
-          "ㄹ"
-        ]
-      },
-      {
-        "emoji": "🐄",
-        "word": "고기",
-        "correct": "ㄱ",
-        "choices": [
-          "ㄱ",
-          "ㄴ",
-          "ㄷ",
-          "ㅁ"
-        ]
-      },
-      {
-        "emoji": "🎪",
-        "word": "마을",
-        "correct": "ㅁ",
-        "choices": [
-          "ㄹ",
-          "ㅁ",
-          "ㄷ",
-          "ㄴ"
-        ]
-      }
+      {"emoji":"🦒","word":"기린","correct":"ㄱ","choices":["ㄱ","ㄴ","ㄷ","ㄹ"]},
+      {"emoji":"🦋","word":"나비","correct":"ㄴ","choices":["ㄱ","ㄴ","ㄷ","ㅁ"]},
+      {"emoji":"🐎","word":"말","correct":"ㅁ","choices":["ㄷ","ㄹ","ㅁ","ㄴ"]},
+      {"emoji":"🌊","word":"바다","correct":"ㅂ","choices":["ㅂ","ㅅ","ㅇ","ㅈ"]},
+      {"emoji":"🦁","word":"사자","correct":"ㅅ","choices":["ㅂ","ㅅ","ㅈ","ㅊ"]},
+      {"emoji":"🍉","word":"오이","correct":"ㅇ","choices":["ㅇ","ㅈ","ㅊ","ㅋ"]},
+      {"emoji":"🚗","word":"자동차","correct":"ㅈ","choices":["ㅅ","ㅈ","ㅊ","ㄷ"]},
+      {"emoji":"☕","word":"커피","correct":"ㅋ","choices":["ㄱ","ㅋ","ㅌ","ㅍ"]},
+      {"emoji":"🚕","word":"택시","correct":"ㅌ","choices":["ㄷ","ㅌ","ㅍ","ㅎ"]},
+      {"emoji":"😊","word":"하늘","correct":"ㅎ","choices":["ㅍ","ㅎ","ㅊ","ㄹ"]},
+      {"emoji":"🍭","word":"다리","correct":"ㄷ","choices":["ㄱ","ㄷ","ㄹ","ㅁ"]},
+      {"emoji":"🦁","word":"라면","correct":"ㄹ","choices":["ㄴ","ㄹ","ㅁ","ㄱ"]},
+      {"emoji":"🎵","word":"차","correct":"ㅊ","choices":["ㅈ","ㅊ","ㅋ","ㅅ"]},
+      {"emoji":"🌿","word":"파","correct":"ㅍ","choices":["ㅂ","ㅍ","ㅎ","ㅌ"]}
     ]
   }
 }

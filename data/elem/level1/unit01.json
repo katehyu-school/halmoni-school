@@ -2,198 +2,70 @@
   "unit": 1,
   "book": 1,
   "type": "vowel",
-  "title": "기본 모음 1",
+  "title": "기본 모음",
   "phase": "vowel",
   "goal": {
-    "ko": "기본 모음 6개를 읽고 소리 낼 수 있어요!",
-    "en": "I can read and say the 6 basic vowels!"
+    "ko": "기본 모음 10개를 읽고 소리 낼 수 있어요!",
+    "en": "I can read and say all 10 basic vowels!"
   },
   "chars": [
-    {
-      "char": "ㅏ",
-      "sound": "ah",
-      "color": "#43A047",
-      "emoji": "🦷",
-      "example": "아이",
-      "example_en": "child",
-      "hint": "mouth wide open → 아!"
-    },
-    {
-      "char": "ㅓ",
-      "sound": "uh",
-      "color": "#00897B",
-      "emoji": "🪸",
-      "example": "어머니",
-      "example_en": "mother",
-      "hint": "lips forward, but relaxed → 어"
-    },
-    {
-      "char": "ㅗ",
-      "sound": "oh",
-      "color": "#1E88E5",
-      "emoji": "🎵",
-      "example": "오리",
-      "example_en": "duck",
-      "hint": "lips round, push out → 오!"
-    },
-    {
-      "char": "ㅜ",
-      "sound": "oo",
-      "color": "#8E24AA",
-      "emoji": "🐄",
-      "example": "우유",
-      "example_en": "milk",
-      "hint": "lips tight round → 우"
-    },
-    {
-      "char": "ㅡ",
-      "sound": "eu",
-      "color": "#E53935",
-      "emoji": "🙂",
-      "example": "으쓱",
-      "example_en": "shrug",
-      "hint": "lips flat, teeth apart → 으"
-    },
-    {
-      "char": "ㅣ",
-      "sound": "ee",
-      "color": "#FB8C00",
-      "emoji": "🐝",
-      "example": "이마",
-      "example_en": "forehead",
-      "hint": "big smile → 이!"
-    }
+    {"char":"ㅏ","sound":"ah","color":"#43A047","emoji":"🦷","example":"아이","example_en":"child","hint":"mouth wide open → 아!"},
+    {"char":"ㅑ","sound":"yah","color":"#00897B","emoji":"⚾","example":"야구","example_en":"baseball","hint":"add Y in front → 야!"},
+    {"char":"ㅓ","sound":"uh","color":"#1E88E5","emoji":"🪸","example":"어머니","example_en":"mother","hint":"lips forward, relaxed → 어"},
+    {"char":"ㅕ","sound":"yuh","color":"#7B1FA2","emoji":"🦊","example":"여우","example_en":"fox","hint":"add Y in front → 여!"},
+    {"char":"ㅗ","sound":"oh","color":"#E53935","emoji":"🐦","example":"오리","example_en":"duck","hint":"lips round, push out → 오!"},
+    {"char":"ㅛ","sound":"yoh","color":"#F4511E","emoji":"🧸","example":"요리","example_en":"cooking","hint":"add Y in front → 요!"},
+    {"char":"ㅜ","sound":"oo","color":"#1565C0","emoji":"🐄","example":"우유","example_en":"milk","hint":"lips tight round → 우"},
+    {"char":"ㅠ","sound":"yoo","color":"#6A1B9A","emoji":"🦄","example":"유리","example_en":"glass","hint":"add Y in front → 유!"},
+    {"char":"ㅡ","sound":"eu","color":"#37474F","emoji":"🙂","example":"으쓱","example_en":"shrug","hint":"lips flat, teeth apart → 으"},
+    {"char":"ㅣ","sound":"ee","color":"#FB8C00","emoji":"🐝","example":"이마","example_en":"forehead","hint":"big smile → 이!"}
   ],
   "vowel_only_words": [
-    {
-      "word": "아이",
-      "en": "child",
-      "emoji": "👧",
-      "syllables": [
-        "아",
-        "이"
-      ]
-    },
-    {
-      "word": "우유",
-      "en": "milk",
-      "emoji": "🥛",
-      "syllables": [
-        "우",
-        "유"
-      ]
-    },
-    {
-      "word": "오이",
-      "en": "cucumber",
-      "emoji": "🥒",
-      "syllables": [
-        "오",
-        "이"
-      ]
-    },
-    {
-      "word": "이유",
-      "en": "reason",
-      "emoji": "💭",
-      "syllables": [
-        "이",
-        "유"
-      ]
-    }
+    {"word":"아이","en":"child","emoji":"👧","syllables":["아","이"]},
+    {"word":"우유","en":"milk","emoji":"🥛","syllables":["우","유"]},
+    {"word":"오이","en":"cucumber","emoji":"🥒","syllables":["오","이"]},
+    {"word":"야구","en":"baseball","emoji":"⚾","syllables":["야","구"]},
+    {"word":"여우","en":"fox","emoji":"🦊","syllables":["여","우"]},
+    {"word":"유리","en":"glass","emoji":"🪟","syllables":["유","리"]}
   ],
   "sound_tap_game": {
-    "title": "🎮 소리 탭 게임!",
+    "title": "🎮 소리 찾기 게임!",
     "instruction": "소리를 듣고 맞는 모음을 탭하세요! Tap the vowel you hear!",
     "rounds": [
-      {
-        "prompt": "ㅏ",
-        "sound_text": "아",
-        "choices": [
-          "ㅏ",
-          "ㅓ",
-          "ㅗ",
-          "ㅜ"
-        ],
-        "correct": "ㅏ"
-      },
-      {
-        "prompt": "ㅓ",
-        "sound_text": "어",
-        "choices": [
-          "ㅗ",
-          "ㅓ",
-          "ㅡ",
-          "ㅣ"
-        ],
-        "correct": "ㅓ"
-      },
-      {
-        "prompt": "ㅗ",
-        "sound_text": "오",
-        "choices": [
-          "ㅏ",
-          "ㅜ",
-          "ㅗ",
-          "ㅡ"
-        ],
-        "correct": "ㅗ"
-      },
-      {
-        "prompt": "ㅜ",
-        "sound_text": "우",
-        "choices": [
-          "ㅜ",
-          "ㅗ",
-          "ㅓ",
-          "ㅣ"
-        ],
-        "correct": "ㅜ"
-      },
-      {
-        "prompt": "ㅡ",
-        "sound_text": "으",
-        "choices": [
-          "ㅡ",
-          "ㅣ",
-          "ㅏ",
-          "ㅓ"
-        ],
-        "correct": "ㅡ"
-      },
-      {
-        "prompt": "ㅣ",
-        "sound_text": "이",
-        "choices": [
-          "ㅣ",
-          "ㅡ",
-          "ㅜ",
-          "ㅗ"
-        ],
-        "correct": "ㅣ"
-      },
-      {
-        "prompt": "ㅏ",
-        "sound_text": "아",
-        "choices": [
-          "ㅓ",
-          "ㅗ",
-          "ㅏ",
-          "ㅣ"
-        ],
-        "correct": "ㅏ"
-      },
-      {
-        "prompt": "ㅜ",
-        "sound_text": "우",
-        "choices": [
-          "ㅡ",
-          "ㅜ",
-          "ㅗ",
-          "ㅓ"
-        ],
-        "correct": "ㅜ"
-      }
+      {"prompt":"ㅏ","sound_text":"아","choices":["ㅏ","ㅓ","ㅗ","ㅜ"],"correct":"ㅏ"},
+      {"prompt":"ㅓ","sound_text":"어","choices":["ㅗ","ㅓ","ㅡ","ㅣ"],"correct":"ㅓ"},
+      {"prompt":"ㅗ","sound_text":"오","choices":["ㅏ","ㅜ","ㅗ","ㅡ"],"correct":"ㅗ"},
+      {"prompt":"ㅜ","sound_text":"우","choices":["ㅜ","ㅗ","ㅓ","ㅣ"],"correct":"ㅜ"},
+      {"prompt":"ㅡ","sound_text":"으","choices":["ㅡ","ㅣ","ㅏ","ㅓ"],"correct":"ㅡ"},
+      {"prompt":"ㅣ","sound_text":"이","choices":["ㅣ","ㅡ","ㅜ","ㅗ"],"correct":"ㅣ"},
+      {"prompt":"ㅑ","sound_text":"야","choices":["ㅏ","ㅑ","ㅓ","ㅕ"],"correct":"ㅑ"},
+      {"prompt":"ㅕ","sound_text":"여","choices":["ㅓ","ㅕ","ㅛ","ㅠ"],"correct":"ㅕ"},
+      {"prompt":"ㅛ","sound_text":"요","choices":["ㅗ","ㅛ","ㅜ","ㅠ"],"correct":"ㅛ"},
+      {"prompt":"ㅠ","sound_text":"유","choices":["ㅜ","ㅠ","ㅡ","ㅛ"],"correct":"ㅠ"},
+      {"prompt":"ㅏ","sound_text":"아","choices":["ㅑ","ㅕ","ㅏ","ㅣ"],"correct":"ㅏ"},
+      {"prompt":"ㅗ","sound_text":"오","choices":["ㅛ","ㅗ","ㅜ","ㅡ"],"correct":"ㅗ"}
+    ]
+  },
+  "classify_game": {
+    "title": "🎮 세로/가로 모음 모으기 게임!",
+    "instruction": "세로 모음인가요, 가로 모음인가요? Vertical stroke or horizontal stroke?",
+    "categories": [
+      {"key":"세로","label":"세로 모음","sublabel":"Vertical ↕","color":"#43A047"},
+      {"key":"가로","label":"가로 모음","sublabel":"Horizontal ↔","color":"#1E88E5"}
+    ],
+    "rounds": [
+      {"char":"ㅏ","correct":"세로"},
+      {"char":"ㅗ","correct":"가로"},
+      {"char":"ㅣ","correct":"세로"},
+      {"char":"ㅡ","correct":"가로"},
+      {"char":"ㅑ","correct":"세로"},
+      {"char":"ㅛ","correct":"가로"},
+      {"char":"ㅓ","correct":"세로"},
+      {"char":"ㅜ","correct":"가로"},
+      {"char":"ㅕ","correct":"세로"},
+      {"char":"ㅠ","correct":"가로"},
+      {"char":"ㅏ","correct":"세로"},
+      {"char":"ㅡ","correct":"가로"}
     ]
   }
 }

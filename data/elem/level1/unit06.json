@@ -1,104 +1,79 @@
 {
   "unit": 6,
   "book": 1,
-  "type": "combination",
-  "title": "블럭 조합 1",
-  "phase": "combination",
+  "type": "batchim",
+  "title": "받침",
+  "phase": "batchim",
   "goal": {
-    "ko": "자음 + 모음 블럭을 합쳐서 음절을 만들어요!",
-    "en": "Combine consonant + vowel blocks to make syllables!"
+    "ko": "받침이 있는 글자를 읽을 수 있어요!",
+    "en": "I can read syllables with a final consonant!"
   },
-  "consonants": [
-    "ㄱ",
-    "ㄴ",
-    "ㄷ",
-    "ㄹ",
-    "ㅁ"
-  ],
-  "vowels": [
-    "ㅏ",
-    "ㅓ",
-    "ㅗ",
-    "ㅜ",
-    "ㅡ",
-    "ㅣ"
-  ],
-  "block_game": {
-    "title": "🧱 블럭 조합 게임!",
-    "instruction": "자음(빨강) + 모음(초록)을 탭해서 음절을 만들어요! Tap consonant(red) + vowel(green) to build a syllable!",
-    "rounds": [
-      {
-        "target": "가",
-        "con": "ㄱ",
-        "vow": "ㅏ",
-        "hint": "go! / 가방(bag)"
+  "tabs": [
+    {
+      "id": "self",
+      "label": "자기 소리 나는 받침",
+      "sublabel": "Sounds like itself",
+      "intro": {
+        "ko": "이 받침들은 자기 소리 그대로 나요!",
+        "en": "These final consonants sound exactly like themselves!"
       },
-      {
-        "target": "나",
-        "con": "ㄴ",
-        "vow": "ㅏ",
-        "hint": "I / me"
-      },
-      {
-        "target": "다",
-        "con": "ㄷ",
-        "vow": "ㅏ",
-        "hint": "all / everything"
-      },
-      {
-        "target": "마",
-        "con": "ㅁ",
-        "vow": "ㅏ",
-        "hint": "horse / 마시다(drink)"
-      },
-      {
-        "target": "고",
-        "con": "ㄱ",
-        "vow": "ㅗ",
-        "hint": "고양이(cat) / and"
-      },
-      {
-        "target": "노",
-        "con": "ㄴ",
-        "vow": "ㅗ",
-        "hint": "노란(yellow)"
-      },
-      {
-        "target": "도",
-        "con": "ㄷ",
-        "vow": "ㅗ",
-        "hint": "도마뱀(lizard) / also"
-      },
-      {
-        "target": "모",
-        "con": "ㅁ",
-        "vow": "ㅗ",
-        "hint": "모자(hat)"
-      },
-      {
-        "target": "구",
-        "con": "ㄱ",
-        "vow": "ㅜ",
-        "hint": "구름(cloud)"
-      },
-      {
-        "target": "누",
-        "con": "ㄴ",
-        "vow": "ㅜ",
-        "hint": "who (누구)"
-      },
-      {
-        "target": "리",
-        "con": "ㄹ",
-        "vow": "ㅣ",
-        "hint": "리본(ribbon)"
-      },
-      {
-        "target": "미",
-        "con": "ㅁ",
-        "vow": "ㅣ",
-        "hint": "미소(smile)"
+      "batchim_chars": [
+        {"char":"ㄱ","sound":"k","emoji":"🦒","examples":["국","박","먹"]},
+        {"char":"ㄴ","sound":"n","emoji":"🦋","examples":["산","문","선"]},
+        {"char":"ㄷ","sound":"t","emoji":"🍭","examples":["밭","곧"]},
+        {"char":"ㄹ","sound":"l","emoji":"🦁","examples":["말","별","달"]},
+        {"char":"ㅁ","sound":"m","emoji":"🐎","examples":["밤","봄","곰"]},
+        {"char":"ㅂ","sound":"p","emoji":"🌊","examples":["밥","입","집"]},
+        {"char":"ㅇ","sound":"ng","emoji":"🍉","examples":["방","강","공"]}
+      ],
+      "block_game": {
+        "title": "🧱 받침 쌓기!",
+        "instruction": "어떤 받침이 들어갈까요? Which batchim fits?",
+        "rounds": [
+          {"result":"밥","hint":"rice/meal","base_con":"ㅂ","base_vow":"ㅏ","base_syl":"바","batchim":"ㅂ","choices":["ㄴ","ㄹ","ㅂ","ㅁ"]},
+          {"result":"산","hint":"mountain","base_con":"ㅅ","base_vow":"ㅏ","base_syl":"사","batchim":"ㄴ","choices":["ㄱ","ㄴ","ㄷ","ㅁ"]},
+          {"result":"말","hint":"horse/word","base_con":"ㅁ","base_vow":"ㅏ","base_syl":"마","batchim":"ㄹ","choices":["ㄹ","ㄴ","ㄱ","ㅂ"]},
+          {"result":"공","hint":"ball","base_con":"ㄱ","base_vow":"ㅗ","base_syl":"고","batchim":"ㅇ","choices":["ㄴ","ㅁ","ㅂ","ㅇ"]},
+          {"result":"별","hint":"star","base_con":"ㅂ","base_vow":"ㅕ","base_syl":"벼","batchim":"ㄹ","choices":["ㄱ","ㄹ","ㅁ","ㄴ"]},
+          {"result":"곰","hint":"bear","base_con":"ㄱ","base_vow":"ㅗ","base_syl":"고","batchim":"ㅁ","choices":["ㄱ","ㄴ","ㄹ","ㅁ"]},
+          {"result":"국","hint":"soup","base_con":"ㄱ","base_vow":"ㅜ","base_syl":"구","batchim":"ㄱ","choices":["ㄱ","ㄴ","ㅂ","ㅇ"]}
+        ]
       }
-    ]
-  }
+    },
+    {
+      "id": "rep",
+      "label": "대표 소리 나는 받침",
+      "sublabel": "Representative sound",
+      "intro": {
+        "ko": "일부 받침은 대표 소리로 바뀌어요!",
+        "en": "Some final consonants change to a representative sound!"
+      },
+      "rep_groups": [
+        {
+          "rep_sound": "ㄱ",
+          "color": "#E53935",
+          "members": ["ㅋ","ㄲ"],
+          "example_word": "부엌",
+          "example_en": "kitchen",
+          "note": "ㅋ, ㄲ → 받침에서 [ㄱ]처럼 소리나요!"
+        },
+        {
+          "rep_sound": "ㄷ",
+          "color": "#1E88E5",
+          "members": ["ㅅ","ㅆ","ㅈ","ㅊ","ㅌ","ㅎ"],
+          "example_word": "꽃",
+          "example_en": "flower",
+          "note": "ㅅ ㅆ ㅈ ㅊ ㅌ ㅎ → 받침에서 [ㄷ]처럼 소리나요!"
+        },
+        {
+          "rep_sound": "ㅂ",
+          "color": "#7B1FA2",
+          "members": ["ㅍ"],
+          "example_word": "잎",
+          "example_en": "leaf",
+          "note": "ㅍ → 받침에서 [ㅂ]처럼 소리나요!"
+        }
+      ]
+    }
+  ]
 }
