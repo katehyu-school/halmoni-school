@@ -3847,27 +3847,29 @@ function renderB1Consonant(d, pc) {
       ${ch.tip?`<div style="font-size:.68rem;color:#FF8C00;margin-top:4px;font-style:italic;">${ch.tip}</div>`:''}
     </div>`).join('');
 
-  c.innerHTML += note + `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 12px;">🔊 클릭해서 들어봐요! (+ ㅏ 소리)</h3>
+  // innerHTML을 한 번에 추가 (+=를 여러 번 쓰면 DOM 재파싱으로 예기치 않은 이벤트 발생)
+  let bodyHtml = note + `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 12px;">🔊 클릭해서 들어봐요! (+ ㅏ 소리)</h3>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">${cards}</div>`;
 
   // Combo preview (Unit 03)
   if (d.combo_preview) {
-    let html = `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">🧱 자음 + 모음 미리보기!</h3><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">`;
+    bodyHtml += `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">🧱 자음 + 모음 미리보기!</h3><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">`;
     d.combo_preview.forEach(row => {
       const syls = row.words.map(w => `<div onclick="b1Speak('${w.syl}')" style="background:#fff;border:2px solid ${pc}30;border-radius:10px;padding:10px 14px;text-align:center;cursor:pointer;min-width:52px;">
         <div style="font-size:1.8rem;font-weight:900;color:#222;">${w.syl}</div>
         <div style="font-size:.65rem;color:#aaa;">${w.hint}</div>
       </div>`).join('');
-      html += `<div style="display:flex;align-items:center;gap:8px;background:#f8f8ff;border-radius:12px;padding:10px 14px;">
+      bodyHtml += `<div style="display:flex;align-items:center;gap:8px;background:#f8f8ff;border-radius:12px;padding:10px 14px;">
         <div style="font-size:1.8rem;font-weight:900;color:${pc};min-width:32px;">${row.con}</div>
         <div style="color:#aaa;">+</div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">${syls}</div>
       </div>`;
     });
-    c.innerHTML += html + '</div>';
+    bodyHtml += '</div>';
   }
 
-  c.innerHTML += `<div id="b1-game-area"></div>`;
+  bodyHtml += `<div id="b1-game-area"></div>`;
+  c.innerHTML += bodyHtml;
   if (d.first_sound_game) renderB1FirstSoundGame(d.first_sound_game, pc);
   if (d.memory_game) renderB1MemoryGame2(d.memory_game, pc);
 }
@@ -5122,11 +5124,16 @@ function b3CheckScore() {
 }
 
 function showTOC(){
-  // 목차는 사이드바로 대체 — 브랜드 클릭 시 1과로 이동
+  // Level 2가 활성 상태일 때만 동작 (Level 1/3에서는 무시)
+  const mc = document.getElementById('main-content');
+  if (!mc || mc.style.display === 'none') return;
   switchUnit(1);
 }
 
 function switchUnit(n){
+  // Level 2가 활성 상태일 때만 동작
+  const mc = document.getElementById('main-content');
+  if (!mc || mc.style.display === 'none') return;
   document.getElementById('toc-screen').classList.remove('active');
   document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
   // 레벨 테스트 숨기기
