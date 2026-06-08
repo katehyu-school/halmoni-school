@@ -262,7 +262,7 @@
       "title": "-(으)ㄹ게요",
       "title_en": "I will ~ / I'll ~",
       "emoji": "🤝",
-      "pattern": "동사 어간 + -(으)ㄹ게요 (존댓말) / -(으)ㄹ게 (반말)",
+      "pattern": "Verb stem + -ㄹ게요 (vowel/ㄹ) / -을게요 (consonant)",
       "scene_example": {
         "korean": "해 볼게요. 거기서 기다릴게.",
         "english": "I'll give it a try. I'll wait there.",
@@ -315,6 +315,56 @@
           "answer": "할게",
           "hint": "연락하다 → 연락할게"
         }
+      ],
+      "explanation_en": "-(으)ㄹ게요 expresses a PROMISE or DECISION made in response to the situation. It's like saying 'I'll go ahead and...' or 'Let me...' — you're committing to an action for the listener's sake.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Vowel or ㄹ stem → -ㄹ게요",
+          "content": "가다 → 갈게요  · 보다 → 볼게요  · 알다 → 알게요"
+        },
+        {
+          "type": "green",
+          "title": "Consonant stem → -을게요",
+          "content": "찾다 → 찾을게요  · 먹다 → 먹을게요  · 읽다 → 읽을게요"
+        },
+        {
+          "type": "amber",
+          "title": "Casual (반말) → -ㄹ게 / -을게",
+          "content": "갈게!  I'll go!  (casual)\n찾을게.  I'll find it.  (casual)"
+        }
+      ],
+      "example_groups": [
+        {
+          "label": "vowel / ㄹ → -ㄹ게요",
+          "items": [
+            {
+              "ko": "제가 먼저 갈게요.",
+              "en": "I'll go first."
+            },
+            {
+              "ko": "제가 찾아볼게요.",
+              "en": "I'll go ahead and look for it."
+            },
+            {
+              "ko": "나중에 다시 볼게.",
+              "en": "I'll watch it again later. (casual)"
+            }
+          ]
+        },
+        {
+          "label": "consonant → -을게요",
+          "items": [
+            {
+              "ko": "제가 짐을 들을게요.",
+              "en": "I'll carry the luggage."
+            },
+            {
+              "ko": "내가 먹을게!",
+              "en": "I'll eat it! (casual)"
+            }
+          ]
+        }
       ]
     },
     {
@@ -323,7 +373,7 @@
       "title": "-아/어 보다",
       "title_en": "Try doing something",
       "emoji": "🥇",
-      "pattern": "동사 어간 + -아/어 보다",
+      "pattern": "Verb stem + 아/어 보다 (same vowel rule as 아요/어요)",
       "scene_example": {
         "ko": "찾아 봐. / 해 볼게요.",
         "en": "Try looking for it. / I'll give it a try."
@@ -374,6 +424,19 @@
           "answer": "봐",
           "hint": "Try Korean food!"
         }
+      ],
+      "explanation_en": "-아/어 보다 means 'to try doing' something or doing it to see how it goes. It adds a sense of experience or attempt — 'give it a go'.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Try doing → -아/어 봐(요) / 보세요",
+          "content": "먹어 봐!  Try eating it!\n해 보세요.  Please give it a try.\n가 봐.  Go and see."
+        },
+        {
+          "type": "green",
+          "title": "Past: already tried → -아/어 봤어(요)",
+          "content": "먹어 봤어요.  I tried eating it.\n해 봤어.  I tried doing it."
+        }
       ]
     },
     {
@@ -382,7 +445,7 @@
       "title": "안 + 동사",
       "title_en": "Negation — Won't / Not (by state or choice)",
       "emoji": "🚫",
-      "pattern": "안 + 동사  ←→  못 + 동사",
+      "pattern": "안 + verb/adjective",
       "scene_example": {
         "korean": "미래: 안 보여요. 못 찾겠어요.",
         "english": "Mirae: I can't see it. I can't find it.",
@@ -464,6 +527,24 @@
           "sentence": "오늘은 고기를 ___ 먹어요. (I'm choosing not to eat meat today.)",
           "answer": "안",
           "hint": "의지 선택 → 안"
+        }
+      ],
+      "explanation_en": "안 goes BEFORE a verb or adjective to make it negative — 'not' or 'don't'. Use it when you're choosing not to do something.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "안 + verb = 'not' / 'don't'",
+          "content": "안 가요.  I'm not going.\n안 먹어요.  I'm not eating it.\n안 보여요.  It's not visible."
+        },
+        {
+          "type": "green",
+          "title": "하다 verbs: noun + 안 + 해요",
+          "content": "공부 안 해요.  I'm not studying. ✅\n~~안 공부해요~~ ❌  (word order matters!)"
+        },
+        {
+          "type": "amber",
+          "title": "💡 Preview — 안 vs 못",
+          "content": "안 = WON'T (by choice)\n못 = CAN'T (unable to)\n→ covered in full in ep03!"
         }
       ]
     }

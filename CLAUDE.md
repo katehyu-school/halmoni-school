@@ -560,6 +560,46 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
+## 📐 문법 카드 설계 표준 (2026-06-08 확정)
+
+> 모든 에피소드 신규/수정 시 이 패턴 따를 것
+
+### 문법 카드 필수 필드
+```json
+{
+  "id": "gNN_shortname",
+  "tier": "core | preview | foundation",
+  "title": "한국어 문법 이름",
+  "title_en": "English name",
+  "emoji": "🔮",
+  "explanation_en": "Plain English: what this grammar does, how to think about it. 1~2문장.",
+  "pattern": "English-friendly form — e.g. 'Verb stem + -ㄹ게요 (vowel) / -을게요 (consonant)'",
+  "scene_example": { "korean": "...", "english": "...", "highlight": "..." },
+  "rule_boxes": [ ... ],
+  "example_groups": [ ... ],
+  "examples": [ ... ]
+}
+```
+
+### rule_boxes 설계 원칙
+- **blue** = 핵심 규칙 1 (가장 자주 쓰는 형태)
+- **green** = 핵심 규칙 2 또는 결과 패턴
+- **amber** = 주의사항 / 비교 / 꿀팁
+- **red** = 오류 경고 (틀리기 쉬운 것)
+- 타이틀: **영어 먼저**, 한국어 병기 (e.g. "Consonant ending → 이에요 · 받침 있으면 이에요")
+- content: 간결하게 예시 위주, 줄바꿈으로 3~4개 이하
+
+### example_groups 사용 기준
+- 형태 변화가 2가지 이상 갈릴 때 (e.g. 아요/어요, -(으)ㄴ past vs adj)
+- 그룹 label: 규칙 조건 명시 (e.g. "ㅏ/ㅗ → 아요", "consonant → -을게요")
+- 그룹당 예문 2~3개 (ko + en 필수)
+
+### 적용 완료
+- L1 ep01~03: 은/는, 이에요/예요, 이/가, 아니에요, 의문문, 을/를, 아요/어요, 이거/그거/저거, 시간+에
+- L2 ep01~04: 관형절, -(으)ㄹ게요, -아/어 보다, 안+동사, -(으)ㄴ 것 같아요, -(으)니까, -아/어서, 안vs못, -(으)ㄹ 것 같아, -아/어도, -지만
+
+---
+
 ## 🔜 다음 작업 예정 (2026-06-07 기준)
 
 ### 🚧 HQ Kids — Level 1 전면 개편 (2026-06-07 확정)

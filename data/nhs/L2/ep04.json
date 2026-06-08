@@ -251,7 +251,7 @@
       "title": "-(으)ㄹ 것 같아",
       "title_en": "Seems like / I think it will ~",
       "emoji": "🔮",
-      "pattern": "동사/형용사 어간 + -(으)ㄹ 것 같아(요)",
+      "pattern": "Verb/adj stem + -ㄹ 것 같아요 (vowel/ㄹ) / -을 것 같아요 (consonant)",
       "scene_example": {
         "korean": "비가 올 것 같아.",
         "english": "Looks like it's going to rain.",
@@ -304,6 +304,56 @@
           "answer": "먹을",
           "hint": "먹다 → 먹을"
         }
+      ],
+      "explanation_en": "-(으)ㄹ 것 같아요 expresses a PREDICTION or GUESS about what will happen — based on how things look right now. You're not certain, but it seems likely.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Vowel or ㄹ stem → -ㄹ 것 같아요",
+          "content": "오다 → 올 것 같아요  · 알다 → 알 것 같아요  · 나다 → 날 것 같아요"
+        },
+        {
+          "type": "green",
+          "title": "Consonant stem → -을 것 같아요",
+          "content": "먹다 → 먹을 것 같아요  · 좋다 → 좋을 것 같아요"
+        },
+        {
+          "type": "amber",
+          "title": "💡 Compare with ep03 — -(으)ㄴ 것 같아요",
+          "content": "비가 올 것 같아요.  Looks like it will rain. (future)\n비가 온 것 같아요.  Looks like it rained. (past)"
+        }
+      ],
+      "example_groups": [
+        {
+          "label": "vowel / ㄹ stem → -ㄹ 것 같아요",
+          "items": [
+            {
+              "ko": "비가 올 것 같아.",
+              "en": "Looks like it's going to rain."
+            },
+            {
+              "ko": "나는 눈물이 날 것 같아.",
+              "en": "I feel like I'm going to cry."
+            },
+            {
+              "ko": "이거 맛있을 것 같아요!",
+              "en": "This looks like it'll be delicious!"
+            }
+          ]
+        },
+        {
+          "label": "consonant stem → -을 것 같아요",
+          "items": [
+            {
+              "ko": "오늘 늦을 것 같아요.",
+              "en": "I think I'll be late today."
+            },
+            {
+              "ko": "많이 좋을 것 같아요.",
+              "en": "I think it'll be really good."
+            }
+          ]
+        }
       ]
     },
     {
@@ -312,7 +362,7 @@
       "title": "-아/어도",
       "title_en": "Even if / Even though",
       "emoji": "🌈",
-      "pattern": "동사/형용사 어간 + -아/어도",
+      "pattern": "Verb/adj stem + 아도/어도 (same vowel rule) → result regardless",
       "scene_example": {
         "korean": "비가 와도 그냥 가자!",
         "english": "Even if it rains, let's just go!",
@@ -370,6 +420,24 @@
           "answer": "어",
           "hint": "늦다 → 늦어도"
         }
+      ],
+      "explanation_en": "-아/어도 means 'even if' or 'even though' — the result happens REGARDLESS of the condition. No matter what happens first, the second part is still true.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Even if / even though → 아/어도",
+          "content": "비가 와도 가자!  Even if it rains, let's go!\n먹어도 배가 고파요.  Even after eating, I'm still hungry."
+        },
+        {
+          "type": "green",
+          "title": "Same vowel rule as -아요/어요",
+          "content": "가다 → 가도  · 먹다 → 먹어도  · 하다 → 해도  · 좋다 → 좋아도"
+        },
+        {
+          "type": "amber",
+          "title": "Feel the difference — -아/어도 vs -(으)면",
+          "content": "비가 오면 안 가요.  If it rains, I won't go. (condition)\n비가 와도 가요.  Even if it rains, I'll still go. (regardless!)"
+        }
       ]
     },
     {
@@ -378,7 +446,7 @@
       "title": "-지만",
       "title_en": "But / However",
       "emoji": "↔️",
-      "pattern": "동사/형용사 어간 + -지만",
+      "pattern": "Verb/adj stem + -지만 + (contrasting clause)",
       "scene_example": {
         "korean": "옷은 젖었지만 더 재미있어!",
         "english": "My clothes got wet, but it's even more fun!",
@@ -425,6 +493,24 @@
           "sentence": "작___만 귀여워요.",
           "answer": "지",
           "hint": "작다 → 작지만"
+        }
+      ],
+      "explanation_en": "-지만 connects two contrasting ideas — like 'but' or 'however'. The easiest contrast connector in Korean: just attach -지만 to any verb or adjective stem, no vowel rule needed!",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "-지만 = but / however (no vowel rule! ✨)",
+          "content": "오다 → 오지만  · 먹다 → 먹지만\n좋다 → 좋지만  · 피곤하다 → 피곤하지만\nSame for ALL verbs and adjectives!"
+        },
+        {
+          "type": "green",
+          "title": "Pattern: [fact] + -지만, [contrast]",
+          "content": "옷은 젖었지만 더 재미있어!  Clothes got wet, but it's even more fun!\n비싸지만 맛있어요.  It's expensive, but it's delicious."
+        },
+        {
+          "type": "amber",
+          "title": "💡 -지만 vs -아/어도 — what's the difference?",
+          "content": "비가 오지만 가요.  It's raining, but I'll go. (simple contrast)\n비가 와도 가요.  Even if it rains, I'll still go. (emphasis on 'regardless')"
         }
       ]
     }

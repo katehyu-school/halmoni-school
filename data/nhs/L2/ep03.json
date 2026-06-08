@@ -340,7 +340,7 @@
       "title": "-(으)ㄴ 것 같아요",
       "title_en": "It seems like ~ / I think ~ (observation/inference)",
       "emoji": "🤔",
-      "pattern": "동사 과거 어간 + -(으)ㄴ 것 같아요 · 형용사 어간 + -(으)ㄴ 것 같아요",
+      "pattern": "Past verb / Adjective + -(으)ㄴ 것 같아요",
       "scene_example": {
         "korean": "아까 개울에서 놀아서 감기 걸린 것 같아.",
         "english": "It seems you caught a cold from playing in the stream earlier.",
@@ -399,6 +399,52 @@
           "answer": "는",
           "hint": "없다 형용사 → 없는"
         }
+      ],
+      "explanation_en": "-(으)ㄴ 것 같아요 means 'it seems like' or 'it looks like' — a judgment based on what you can observe RIGHT NOW. Use it with past-tense verbs (걸린, 먹은) or adjectives (아픈, 피곤한).",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Past action → verb + -(으)ㄴ 것 같아요",
+          "content": "걸리다 → 걸린 것 같아요  (seems like caught a cold)\n먹다 → 먹은 것 같아요  (seems like ate already)"
+        },
+        {
+          "type": "green",
+          "title": "Current state (adjective) → adj + -(으)ㄴ 것 같아요",
+          "content": "아프다 → 아픈 것 같아요  (seems sick)\n피곤하다 → 피곤한 것 같아요  (seems tired)"
+        },
+        {
+          "type": "amber",
+          "title": "💡 Compare with ep04 — -(으)ㄹ 것 같아요",
+          "content": "-(으)ㄴ 것 같아요  = seems like [now/past]\n-(으)ㄹ 것 같아요  = looks like [will happen]"
+        }
+      ],
+      "example_groups": [
+        {
+          "label": "past verb + -(으)ㄴ 것 같아요",
+          "items": [
+            {
+              "ko": "감기에 걸린 것 같아요.",
+              "en": "Seems like I caught a cold."
+            },
+            {
+              "ko": "밥을 먹은 것 같아요.",
+              "en": "Looks like he already ate."
+            }
+          ]
+        },
+        {
+          "label": "adjective + -(으)ㄴ 것 같아요",
+          "items": [
+            {
+              "ko": "많이 아픈 것 같아요.",
+              "en": "She seems really sick."
+            },
+            {
+              "ko": "날씨가 추운 것 같아요.",
+              "en": "The weather seems cold."
+            }
+          ]
+        }
       ]
     },
     {
@@ -407,7 +453,7 @@
       "title": "-(으)니까",
       "title_en": "Because / Since (subjective reason)",
       "emoji": "🥇",
-      "pattern": "동사/형용사 어간 + -(으)니까",
+      "pattern": "Verb/adj stem + -(으)니까 → result or request",
       "scene_example": {
         "ko": "바람이 부니까 물에서 얼른 나오라고 했지?",
         "en": "I told you to come out quickly because the wind was blowing, didn't I?"
@@ -483,6 +529,24 @@
           "answer": "니",
           "hint": "걸렸으니까"
         }
+      ],
+      "explanation_en": "-(으)니까 means 'because' or 'since' — connecting a REASON to a conclusion or request. Great with commands and suggestions (unlike -아/어서).",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Vowel or ㄹ stem → -니까",
+          "content": "가다 → 가니까  · 피곤하다 → 피곤하니까  · 알다 → 아니까"
+        },
+        {
+          "type": "green",
+          "title": "Consonant stem → -으니까",
+          "content": "먹다 → 먹으니까  · 좋다 → 좋으니까  · 춥다 → 추우니까"
+        },
+        {
+          "type": "amber",
+          "title": "✅ Can use with commands! (unlike -아/어서)",
+          "content": "배고프니까 빨리 먹자.  We're hungry, so let's eat fast.\n늦었으니까 서두르세요!  It's late, so please hurry!"
+        }
       ]
     },
     {
@@ -491,7 +555,7 @@
       "title": "-아/어서 (이유)",
       "title_en": "Because / So (reason)",
       "emoji": "🥇",
-      "pattern": "동사/형용사 어간 + -아/어서",
+      "pattern": "Verb/adj stem + 아서/어서 → result (same vowel rule as 아요/어요)",
       "scene_example": {
         "ko": "놀아서 감기 걸린 것 같아.",
         "en": "It seems like you caught a cold because you were playing."
@@ -553,6 +617,24 @@
           "answer": "서",
           "hint": "나다 → 나서"
         }
+      ],
+      "explanation_en": "-아/어서 means 'because' or 'so' — a natural reason-and-result connection. The result flows directly from the reason. Important: DON'T use with commands or suggestions.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "ㅏ/ㅗ stem → 아서 · Other vowels → 어서",
+          "content": "좋다 → 좋아서  · 가다 → 가서  · 먹다 → 먹어서"
+        },
+        {
+          "type": "green",
+          "title": "Pattern: [reason] + 아/어서, [result]",
+          "content": "기분이 좋아서 노래해요.  I'm happy, so I'm singing.\n배가 고파서 먹었어요.  I was hungry, so I ate."
+        },
+        {
+          "type": "amber",
+          "title": "⚠️ Can NOT use with commands or suggestions!",
+          "content": "피곤해서 쉬어요. ✅  Tired, so I rest.\n~~피곤해서 쉬세요!~~ ❌  (use -(으)니까 instead)"
+        }
       ]
     },
     {
@@ -561,7 +643,7 @@
       "emoji": "🚦",
       "title": "안 vs 못",
       "title_en": "Won't vs Can't",
-      "pattern": "안 + 동사  vs  못 + 동사",
+      "pattern": "안 + verb (won't) vs 못 + verb (can't)",
       "scene_example": {
         "ko": "밥을 안 먹어요? vs 밥을 못 먹어요?",
         "en": "Won't eat? vs Can't eat?"
@@ -597,7 +679,25 @@
       "tip": {
         "ko": "💡 왜 못 왔어요? (상황) vs 왜 안 왔어요? (의지) — 뉘앙스가 달라요!",
         "en": "💡 못 = situation forced it · 안 = they chose not to"
-      }
+      },
+      "explanation_en": "안 and 못 both make verbs negative, but they mean very different things. 안 = you're choosing NOT to. 못 = you're UNABLE to. One word can completely change the meaning!",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "안 = WON'T (by choice) 🙅",
+          "content": "오늘 학교에 안 가요.  I won't go to school today.\n고기 안 먹어요.  I don't eat meat. (by choice)"
+        },
+        {
+          "type": "green",
+          "title": "못 = CAN'T (unable to) 😥",
+          "content": "오늘 학교에 못 가요.  I can't go to school today.\n고기 못 먹어요.  I can't eat meat. (allergy, etc.)"
+        },
+        {
+          "type": "amber",
+          "title": "하다 verbs: noun + 안/못 + 해요",
+          "content": "공부 안 해요.  Won't study. ✅\n공부 못 해요.  Can't study. ✅\n~~안 공부해요~~ ❌"
+        }
+      ]
     }
   ],
   "banmal_jondaemal": {
