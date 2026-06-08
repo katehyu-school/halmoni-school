@@ -546,36 +546,52 @@
         "situation_en": "When surprised"
       }
     ],
-    "adult_dialogue": [
-      {
-        "speaker_a": "친구 A",
-        "speaker_b": "친구 B",
-        "exchanges": [
-          {
-            "speaker": "a",
-            "text": "이번 주말에 용문사에 갈 건데 같이 갈래요?",
-            "en": "I'm going to Yongmunsa this weekend — want to come along?"
-          },
-          {
-            "speaker": "b",
-            "text": "용문사요? 거기 은행나무 유명한 데 아니에요?",
-            "en": "Yongmunsa? Isn't that the place with the famous ginkgo tree?"
-          },
-          {
-            "speaker": "a",
-            "text": "맞아요. 1,100살이 넘는 나무가 있대요. 한번 봐야 할 것 같아서요.",
-            "en": "That's right. There's a tree over 1,100 years old. I feel like I should see it at least once."
-          },
-          {
-            "speaker": "b",
-            "text": "저도 꼭 가 보고 싶었는데 잘됐네요!",
-            "en": "I've always wanted to go — perfect timing!"
-          }
-        ],
-        "note_ko": "친구 사이이지만 존댓말 — 처음 만난 성인 사이의 기본 예절이에요.",
-        "note_en": "Friends, but using polite speech — the default between adults who aren't close."
-      }
-    ]
+    "adult_dialogue": {
+      "title_ko": "친구끼리 여행 약속 잡기",
+      "title_en": "Making Temple Trip Plans with a Friend",
+      "setup_ko": "친한 친구 사이지만 아직 격식체 — 한국 성인들은 처음엔 존댓말로 시작해요.",
+      "setup_en": "Close friends, but still using polite speech — Korean adults default to formal until they agree to drop it.",
+      "lines": [
+        {
+          "speaker": "친구 A",
+          "text": "이번 주말에 용문사에 가는데 같이 갈래요?",
+          "en": "I'm heading to Yongmunsa this weekend — want to come along?"
+        },
+        {
+          "speaker": "친구 B",
+          "text": "용문사요? 거기 은행나무가 유명하잖아요!",
+          "en": "Yongmunsa? That's where the famous ginkgo tree is, right!"
+        },
+        {
+          "speaker": "친구 A",
+          "text": "맞아요. 1,100살이 넘는 나무래요. 한 번쯤은 봐야 할 것 같아서요.",
+          "en": "Exactly. They say it's over 1,100 years old. Felt like I should see it at least once."
+        },
+        {
+          "speaker": "친구 B",
+          "text": "저도 꼭 가 보고 싶었는데 잘됐네요! 몇 시에 출발할 거예요?",
+          "en": "I've always wanted to go — perfect timing! What time are we leaving?"
+        },
+        {
+          "speaker": "친구 A",
+          "text": "오전 9시 어때요? 점심은 양평 해장국 먹을 데 찾아뒀어요.",
+          "en": "How about 9 AM? I already found a hangover soup place in Yangpyeong for lunch."
+        },
+        {
+          "speaker": "친구 B",
+          "text": "완전 좋아요~ 같이 갈 사람 또 있어요?",
+          "en": "Sounds perfect! Is anyone else coming along?"
+        },
+        {
+          "speaker": "친구 A",
+          "text": "아직 없는데 더 불러도 될 것 같아요!",
+          "en": "Not yet — feel free to invite more people!"
+        }
+      ],
+      "note_ko": "친구 사이지만 존댓말 — 처음 사귄 성인들이 자연스럽게 존댓말을 쓰는 상황이에요.",
+      "note_en": "Friends, but using polite speech — the normal default between adults until they explicitly agree to use casual speech."
+    },
+    "tip": "💡 어른 → 아이: 반말 / 아이 → 어른: 존댓말 — 이번 에피소드 전체에 흐르는 패턴!"
   },
   "pronunciation": [
     {
@@ -625,7 +641,78 @@
       ]
     }
   ],
-  "usage": [],
+  "usage": [
+    {
+      "section": "🏯 한국 사찰 방문 팁 · Visiting a Korean Buddhist Temple",
+      "items": [
+        {
+          "ko": "입장 전에 일주문(一柱門) 을 지나요. 속세와 성역의 경계를 나타내는 문이에요.",
+          "en": "You pass through the 일주문 (single-pillar gate) — it marks the boundary between the ordinary world and the sacred space.",
+          "context_ko": "사찰 입구"
+        },
+        {
+          "ko": "법당(불상이 있는 건물) 앞에서는 합장하고 허리를 숙여 인사해요.",
+          "en": "In front of the main hall (where the Buddha is), press your palms together and bow.",
+          "context_ko": "법당 예절"
+        },
+        {
+          "ko": "조용히 걷고, 큰 소리는 삼가야 해요. 명상하는 스님들이 계실 수 있어요.",
+          "en": "Walk quietly and avoid loud noise — monks may be meditating nearby.",
+          "context_ko": "소음 예절"
+        },
+        {
+          "ko": "용문사는 경기도 양평에 있어요. 서울에서 기차로 약 1시간 거리예요.",
+          "en": "Yongmunsa is in Yangpyeong, Gyeonggi-do — about 1 hour from Seoul by train.",
+          "context_ko": "찾아가는 길"
+        }
+      ]
+    },
+    {
+      "section": "🎬 -는데 실생활 활용 · -는데 in Everyday Life",
+      "items": [
+        {
+          "ko": "배고픈데 뭐 먹을까요?",
+          "en": "I'm hungry — what should we eat? (background → suggestion)",
+          "context_ko": "배경 + 제안"
+        },
+        {
+          "ko": "지금 공부하는데 나중에 전화할게요.",
+          "en": "I'm studying right now — I'll call you later. (background → explanation)",
+          "context_ko": "배경 + 설명"
+        },
+        {
+          "ko": "이거 맛있는데 한번 먹어 봐요.",
+          "en": "This is delicious — give it a try! (positive background → recommendation)",
+          "context_ko": "배경 + 권유"
+        },
+        {
+          "ko": "날씨가 좋은데 산책 갈까요?",
+          "en": "The weather is nice — shall we go for a walk? (background → invitation)",
+          "context_ko": "배경 + 초대"
+        }
+      ]
+    },
+    {
+      "section": "🌳 천연기념물 이야기 · Stories of Natural Monuments",
+      "items": [
+        {
+          "ko": "한국에는 오래된 나무, 동굴, 동물 등을 보호하는 '천연기념물' 제도가 있어요.",
+          "en": "Korea has a 'Natural Monument' designation system that protects old trees, caves, animals, and more.",
+          "context_ko": "천연기념물이란?"
+        },
+        {
+          "ko": "용문사 은행나무는 제30호. 높이 42m, 둘레 14m — 한국에서 가장 큰 은행나무예요.",
+          "en": "Yongmunsa's ginkgo tree is Natural Monument No. 30. At 42m tall and 14m around — the largest ginkgo in Korea.",
+          "context_ko": "용문사 은행나무"
+        },
+        {
+          "ko": "한국에는 비슷한 전설을 가진 오래된 나무들이 많아요. 나무는 마을의 수호신으로 여겨지기도 했어요.",
+          "en": "Korea has many ancient trees with similar legends — trees were often considered guardian spirits of a village.",
+          "context_ko": "나무 수호신 문화"
+        }
+      ]
+    }
+  ],
   "quiz": [
     {
       "type": "listen",
