@@ -1201,6 +1201,8 @@ function buildGrammar(){
           <div class="gram-en">${esc(ex.en)}</div>
         </li>`;
     }).join('');
+    // example_groups — grouped examples (e.g. past vs present)
+    const exGroupHtml=(g.example_groups||[]).map(grp=>`<div style="margin-bottom:10px"><div style="font-size:11px;font-weight:700;color:var(--teal);background:rgba(0,150,136,.08);border-radius:6px;padding:4px 10px;margin-bottom:4px;display:inline-block">${esc(grp.label)}</div><ul class="gram-ex-list" style="margin:0">${(grp.items||[]).map(ex=>`<li class="gram-ex"><div class="gram-ko">${esc(ex.ko)} <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></div><div class="gram-en">${esc(ex.en)}</div></li>`).join('')}</ul></div>`).join('');
     // pattern formula box
     const patternHtml=g.pattern?`<div class="gram-pattern">${esc(g.pattern)}</div>`:'';
     // table
@@ -1241,7 +1243,8 @@ function buildGrammar(){
       ${patternHtml}
       ${ruleBoxHtml}
       ${tableHtml}
-      ${exHtml?`<ul class="gram-ex-list">${exHtml}</ul>`:''}
+      ${exGroupHtml||''}
+      ${!exGroupHtml&&exHtml?`<ul class="gram-ex-list">${exHtml}</ul>`:''}
       ${qnaHtml?`<div style="margin-top:10px"><div style="font-size:11.5px;font-weight:700;color:var(--warm-500);margin-bottom:6px">💬 연습해 봐요</div>${qnaHtml}</div>`:''}
       ${fillHtml}
       ${imagesHtml}
