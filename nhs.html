@@ -699,7 +699,6 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
     <div class="idx-tabs">
       <div class="idx-tab active" id="idx-tab-vocab" onclick="switchIdxTab('vocab')">📚 단어 · Vocab</div>
       <div class="idx-tab" id="idx-tab-grammar" onclick="switchIdxTab('grammar')">📌 문법 · Grammar</div>
-      <div class="idx-tab" id="idx-tab-pron" onclick="switchIdxTab('pron')">🔤 발음 · Pronunciation</div>
     </div>
     <div class="idx-search"><input id="idx-search-input" placeholder="검색..." oninput="renderIdxBody()"></div>
     <div id="idx-jump-bar" class="idx-jump-bar"></div>
@@ -1793,18 +1792,27 @@ function toggleSC(el){
 
 
 
-async function loadEpAndTab(epId, tabName){
+async function loadEpAndTab(epKey, tabName){
   closeIndex();
-  await loadEp(epId);
+  // epKey may be 'L1_ep01' or 'L2_ep01' or plain 'ep01'
+  const parts=epKey.split('_');
+  const level=(parts.length>=2)?parts[0]:'L1';
+  const epId=(parts.length>=2)?parts.slice(1).join('_'):epKey;
+  await loadEp(epId, level);
   showTab(tabName);
 }
 
-function getEpLabel(epId){
-  const ep=EPISODE_DATA['L1_'+epId]||EPISODE_DATA['L2_'+epId]||EPISODE_DATA[epId];
-  const lvl=ep?ep.level||'':'초급';
+function getEpLabel(epKey){
+  // epKey = 'L1_ep01' or 'L2_ep01'; fall back to plain 'ep01'
+  const ep=EPISODE_DATA[epKey]||EPISODE_DATA['L1_'+epKey]||EPISODE_DATA['L2_'+epKey];
+  const parts=(epKey||'').split('_');
+  const level=(parts.length>=2)?parts[0]:(ep?ep.level||'L1':'L1');
+  const epId=(parts.length>=2)?parts.slice(1).join('_'):epKey;
   const num=(epId||'').replace('ep','');
-  const lvlMap={'초급':'Level 1','중급':'Level 2','고급':'Level 3','기초':'Basics'};
-  return (lvlMap[lvl]||lvl)+' · ep'+num;
+  // Normalize legacy level values
+  const lvlMap={'초급':'L1','중급':'L2','고급':'L3','기초':'Basics'};
+  const lbl=lvlMap[level]||level;
+  return lbl+' · ep'+num;
 }
 
 // ── 색인 모달 ───────────────────────────────────────────
@@ -1816,14 +1824,18 @@ async function openIndex(){
   // Pre-fetch any episodes not yet in cache
   const body=document.getElementById('idx-body');
   if(body) body.innerHTML='<div style="padding:20px;text-align:center">로딩 중…</div>';
-  await Promise.all(EPISODES.map(async ep=>{
-    if(!EPISODE_DATA['L1_'+ep.id]){
-      try{
-        const r=await fetch(`data/nhs/L1/${ep.id}.json`);
-        if(r.ok) EPISODE_DATA['L1_'+ep.id]=await r.json();
-      }catch(e){}
-    }
-  }));
+  await Promise.all([
+    ...EPISODES.map(async ep=>{
+      if(!EPISODE_DATA['L1_'+ep.id]){
+        try{const r=await fetch(`data/nhs/L1/${ep.id}.json`);if(r.ok)EPISODE_DATA['L1_'+ep.id]=await r.json();}catch(e){}
+      }
+    }),
+    ...L2_EPISODES.map(async ep=>{
+      if(!EPISODE_DATA['L2_'+ep.id]){
+        try{const r=await fetch(`data/nhs/L2/${ep.id}.json`);if(r.ok)EPISODE_DATA['L2_'+ep.id]=await r.json();}catch(e){}
+      }
+    })
+  ]);
   renderIdxBody();
 }
 function closeIndex(){
@@ -1906,9 +1918,9 @@ function renderIdxBody(){
       const vocab=ep.vocab||[];
       const isGrouped=vocab.length>0&&vocab[0].items;
       if(isGrouped){
-        vocab.forEach(g=>g.items.forEach(v=>allWords.push({...v,ep:ep.id,epTitle:ep.title})));
+        vocab.forEach(g=>g.items.forEach(v=>allWords.push({...v,ep:(ep.level||'L1')+'_'+ep.id,epTitle:ep.title})));
       } else {
-        vocab.forEach(v=>allWords.push({...v,ep:ep.id,epTitle:ep.title}));
+        vocab.forEach(v=>allWords.push({...v,ep:(ep.level||'L1')+'_'+ep.id,epTitle:ep.title}));
       }
     });
     // 검색 필터 + 정렬
@@ -1930,7 +1942,7 @@ function renderIdxBody(){
   } else if(idxTab==='grammar'){
     let allGram=[];
     allEps.forEach(ep=>{
-      (ep.grammar||[]).forEach(g=>allGram.push({...g,ep:ep.id,epTitle:ep.title}));
+      (ep.grammar||[]).forEach(g=>allGram.push({...g,ep:(ep.level||'L1')+'_'+ep.id,epTitle:ep.title}));
     });
     if(q) allGram=allGram.filter(g=>(g.title||'').toLowerCase().includes(q)||(g.explanation_en||'').toLowerCase().includes(q));
     let html='';
@@ -1942,9 +1954,13 @@ function renderIdxBody(){
         if(!byEp[g.ep])byEp[g.ep]=[];
         byEp[g.ep].push(g);
       });
-      Object.keys(byEp).sort().forEach(epId=>{
-        const ep=allEps.find(e=>e.id===epId);
-        html+=`<div class="idx-section-hdr">EP.${esc(epId.replace('ep',''))} · ${esc(ep?ep.title:'')}</div>`;
+      Object.keys(byEp).sort().forEach(epKey=>{
+        const ep=EPISODE_DATA[epKey]||allEps.find(e=>e.id===epKey);
+        const epNum=(epKey||'').replace(/^(L1|L2|L3)_ep/,'');
+        const lvlPart=(epKey||'').split('_')[0]||'L1';
+        const lvlMap2={'초급':'L1','중급':'L2','고급':'L3'};
+        const lvlLabel=lvlMap2[lvlPart]||lvlPart;
+        html+=`<div class="idx-section-hdr">${esc(lvlLabel)} · EP.${esc(epNum)} ${esc(ep?ep.title:'')}</div>`;
         html+=byEp[epId].map(g=>`
           <div class="idx-gram-row">
             <div style="display:flex;align-items:center;gap:8px">
@@ -3213,18 +3229,4 @@ function vdRenderScore(gramId) {
       '<div class="vd-grade-label" style="color:'+gradeColor+'">'+gradeLabel+'</div>'+
       '<div class="vd-score-label">'+pct+'% 정답 · accuracy</div>'+
     '</div>'+
-    '<button class="vd-restart-btn" onclick="vdInit(\''+gramId+'\')">↺ 다시 도전 / Play Again</button>';
-}
-// ═══════════════════════════════════════════════════════
-</script>
-
-<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
-  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
-</footer>
-
-
-
-<script src="core/my-notes.js"></script>
-</body>
-</html>
+    '<button cl
