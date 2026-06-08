@@ -1960,7 +1960,7 @@ function renderIdxBody(){
         const lvlMap2={'초급':'L1','중급':'L2','고급':'L3'};
         const lvlLabel=lvlMap2[lvlPart]||lvlPart;
         html+=`<div class="idx-section-hdr">${esc(lvlLabel)} · EP.${esc(epNum)} ${esc(ep?ep.title:'')}</div>`;
-        html+=byEp[epId].map(g=>`
+        html+=byEp[epKey].map(g=>`
           <div class="idx-gram-row">
             <div style="display:flex;align-items:center;gap:8px">
               <span style="font-size:16px">${esc(g.icon||'📌')}</span>
