@@ -1803,13 +1803,12 @@ async function loadEpAndTab(epKey, tabName){
 }
 
 function getEpLabel(epKey){
-  // epKey = 'L1_ep01' or 'L2_ep01'; fall back to plain 'ep01'
+  // epKey = 'L1_ep01' or 'L2_ep01'
   const ep=EPISODE_DATA[epKey]||EPISODE_DATA['L1_'+epKey]||EPISODE_DATA['L2_'+epKey];
   const parts=(epKey||'').split('_');
   const level=(parts.length>=2)?parts[0]:(ep?ep.level||'L1':'L1');
   const epId=(parts.length>=2)?parts.slice(1).join('_'):epKey;
   const num=(epId||'').replace('ep','');
-  // Normalize legacy level values
   const lvlMap={'초급':'L1','중급':'L2','고급':'L3','기초':'Basics'};
   const lbl=lvlMap[level]||level;
   return lbl+' · ep'+num;
@@ -3229,4 +3228,18 @@ function vdRenderScore(gramId) {
       '<div class="vd-grade-label" style="color:'+gradeColor+'">'+gradeLabel+'</div>'+
       '<div class="vd-score-label">'+pct+'% 정답 · accuracy</div>'+
     '</div>'+
-    '<button cl
+    '<button class="vd-restart-btn" onclick="vdInit(\''+gramId+'\')">↺ 다시 도전 / Play Again</button>';
+}
+// ═══════════════════════════════════════════════════════
+</script>
+
+<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
+  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
+  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
+</footer>
+
+
+
+<script src="core/my-notes.js"></script>
+</body>
+</html>
