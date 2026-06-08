@@ -312,7 +312,7 @@
       "title_en": "이/가 — Subject Particle",
       "icon": "🎯",
       "rule": "N이/가 → 동작이나 상태의 주체 · Who is doing the action / what has the state",
-      "pattern": "N이/가 + 동사/형용사",
+      "pattern": "Noun + 이 (after consonant) / 가 (after vowel)",
       "explanation": "이/가 marks the SUBJECT — who is doing or being something.\n은/는(topic)과 헷갈리기 쉬워요! Easy to confuse with 은/는!\n받침(final consonant) 있으면 이, 없으면 가 · consonant → 이 / vowel → 가",
       "table": {
         "headers": [
@@ -358,7 +358,25 @@
         }
       ],
       "tip": "이/가 vs 은/는: 이/가는 '주체', 은/는는 '주제'. 둘 다 맞지만 뉘앙스가 달라요!\n이/가 = subject (the doer), 은/는 = topic (what we're talking about).",
-      "tier": "core"
+      "tier": "core",
+      "explanation_en": "이/가 marks the SUBJECT — who or what is doing the action. Same rule as 은/는: 이 after consonant, 가 after vowel.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "받침 없으면 → 가 · Vowel ending → 가",
+          "content": "나가, 엄마가, 미래가, 학교가"
+        },
+        {
+          "type": "green",
+          "title": "받침 있으면 → 이 · Consonant ending → 이",
+          "content": "집이, 학생이, 선생님이"
+        },
+        {
+          "type": "amber",
+          "title": "💡 은/는 vs 이/가 — what's the difference?",
+          "content": "나는 학생이에요. (topic — I'm talking about myself)\n내가 먹었어요! (subject — I'm the one who ate it!)"
+        }
+      ]
     },
     {
       "id": "g02_anieyo",
@@ -409,7 +427,19 @@
           "highlight": "아니에요"
         }
       ],
-      "tip": "영어는 'is not'처럼 동사에 not을 붙이지만, 한국어는 아예 다른 단어(아니에요)를 써요! · In English you add 'not' to the verb, but Korean uses a completely different word!"
+      "tip": "영어는 'is not'처럼 동사에 not을 붙이지만, 한국어는 아예 다른 단어(아니에요)를 써요! · In English you add 'not' to the verb, but Korean uses a completely different word!",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "N + 이/가 아니에요 · It is NOT [noun]",
+          "content": "언니가 아니에요. She's not my older sister.\n고양이가 아니에요. It's not a cat."
+        },
+        {
+          "type": "green",
+          "title": "이에요/예요 ↔ 이/가 아니에요",
+          "content": "고양이예요 ✅ → 고양이가 아니에요 ✅\nIt IS a cat         It's NOT a cat"
+        }
+      ]
     },
     {
       "id": "g02_question",
@@ -467,7 +497,15 @@
         }
       ],
       "tip": "영어 질문: 'Is there a cat?' (어순 바뀜) · 한국어 질문: '고양이가 있어요?' (어순 그대로!)\nThis is one of the easiest things about Korean — no word order change for questions!",
-      "tier": "preview"
+      "tier": "preview",
+      "explanation_en": "Korean yes/no questions use the SAME word order as statements — just raise your voice at the end ↗. No flipping words around like in English!",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Statement → Question: just raise your voice ↗",
+          "content": "고양이가 있어요.  →  고양이가 있어요? ↗\nThere is a cat.       Is there a cat?"
+        }
+      ]
     }
   ],
   "banmal_jondaemal": {

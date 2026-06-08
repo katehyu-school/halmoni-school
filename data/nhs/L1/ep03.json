@@ -470,7 +470,19 @@
         }
       ],
       "tier": "core",
-      "tip": "💡 하다 동사: '배구를 하다' → '배구하다'처럼 활동+를+하다는 붙여 쓸 수 있어요! · Activity + 를 + 하다 can merge into one word."
+      "tip": "💡 하다 동사: '배구를 하다' → '배구하다'처럼 활동+를+하다는 붙여 쓸 수 있어요! · Activity + 를 + 하다 can merge into one word.",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "받침 없으면 → 를 · Vowel ending → 를",
+          "content": "배구를, 한국어를, 뭘 (= 무엇을)"
+        },
+        {
+          "type": "green",
+          "title": "받침 있으면 → 을 · Consonant ending → 을",
+          "content": "밥을, 김밥을, 책을"
+        }
+      ]
     },
     {
       "id": "g03_ayo",
@@ -545,13 +557,18 @@
       "rule_boxes": [
         {
           "type": "blue",
-          "label": "PATTERN",
-          "content": "ㅏ/ㅗ 모음 → 아요 · Other vowels → 어요 · 하다 → 해요"
+          "title": "Stem vowel is ㅏ or ㅗ → 아요",
+          "content": "가다 → 가요  · 좋다 → 좋아요  · 알다 → 알아요"
         },
         {
           "type": "green",
-          "label": "TIP",
-          "content": "지금 배운 맛있어요, 먹어요, 해요 — 모두 이 규칙으로 만들어졌어요! · Every verb you know follows this rule!"
+          "title": "Other vowels → 어요",
+          "content": "먹다 → 먹어요  · 마시다 → 마셔요  · 있다 → 있어요"
+        },
+        {
+          "type": "amber",
+          "title": "하다 → 해요 ⭐ (always!)",
+          "content": "공부하다 → 공부해요  · 운동하다 → 운동해요\nAll -하다 verbs follow this rule!"
         }
       ],
       "fill_blanks": [
@@ -569,6 +586,59 @@
           "sentence": "공부를 ___요.",
           "answer": "해",
           "hint": "공부하다 → 하다 특수 → 해요"
+        }
+      ],
+      "example_groups": [
+        {
+          "label": "ㅏ / ㅗ → 아요",
+          "items": [
+            {
+              "ko": "가다 → 가요",
+              "en": "to go → goes / going"
+            },
+            {
+              "ko": "좋다 → 좋아요",
+              "en": "to be good → it's good"
+            },
+            {
+              "ko": "알다 → 알아요",
+              "en": "to know → knows"
+            }
+          ]
+        },
+        {
+          "label": "other vowels → 어요",
+          "items": [
+            {
+              "ko": "먹다 → 먹어요",
+              "en": "to eat → eats / eating"
+            },
+            {
+              "ko": "마시다 → 마셔요",
+              "en": "to drink → drinks"
+            },
+            {
+              "ko": "맛있다 → 맛있어요",
+              "en": "to be delicious → it's delicious"
+            }
+          ]
+        },
+        {
+          "label": "하다 → 해요 ⭐",
+          "items": [
+            {
+              "ko": "공부하다 → 공부해요",
+              "en": "to study → studies"
+            },
+            {
+              "ko": "운동하다 → 운동해요",
+              "en": "to exercise → exercises"
+            },
+            {
+              "ko": "배구하다 → 배구해요",
+              "en": "to play volleyball → plays volleyball"
+            }
+          ]
         }
       ]
     },
@@ -643,7 +713,24 @@
           "hint": "far from both = 저거"
         }
       ],
-      "tier": "core"
+      "tier": "core",
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "이거 · This (near ME 🙋)",
+          "content": "이거 뭐예요?  What is this?\n이거 먹어요!  I'll eat this!"
+        },
+        {
+          "type": "green",
+          "title": "그거 · That (near YOU 👂)",
+          "content": "그거 맛있어요?  Is that (near you) delicious?"
+        },
+        {
+          "type": "amber",
+          "title": "저거 · That over there (far 👉)",
+          "content": "저거 봐!  Look at that (over there)!\n저거 뭐야?  What's that over there?"
+        }
+      ]
     },
     {
       "id": "g3",
@@ -708,6 +795,18 @@
           "sentence": "오늘 배구___ 해요.",
           "answer": "를",
           "hint": "오늘 뒤에 에 없음 ❌, 배구 뒤에 를 ✅"
+        }
+      ],
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "Time-of-day words → need 에 ✅",
+          "content": "아침에 (in the morning)\n점심에 (at lunch)\n저녁에 (in the evening)\n밤에 (at night)"
+        },
+        {
+          "type": "green",
+          "title": "Relative day words → NO 에 ❌",
+          "content": "어제 (yesterday)  · 오늘 (today)  · 내일 (tomorrow)\n어제 먹었어요. ✅   ~~어제에~~ ❌"
         }
       ]
     }
