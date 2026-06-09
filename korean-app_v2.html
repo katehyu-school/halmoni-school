@@ -1566,6 +1566,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">07</span>
     <span class="lesson-title-text">저녁 노을을 보면서 라면을 먹고 싶어요</span>
   </div>
+  <div class="lesson-item" id="b3-lesson-8" onclick="switchBook3Unit(8)">
+    <span class="lesson-num">08</span>
+    <span class="lesson-title-text">할 수 있다!</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -5008,7 +5012,7 @@ async function loadBook3Unit(n) {
 }
 
 async function switchBook3Unit(n) {
-  [1,2,3,4,5,6,7].forEach(i => {
+  [1,2,3,4,5,6,7,8].forEach(i => {
     const el = document.getElementById('b3-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
@@ -9447,6 +9451,28 @@ const B3_SCENE_DATA = {
       [{ko:'그런데 음식은 골고루 먹어야 돼.', en:'But you should eat a variety of foods.', audio:'data/elem/level3/TTS/L3_06/07그런데+음식은+골고루+먹어야+돼_slide7.mp3'}],
       [{ko:'계란을 먹으면 배가 아파요.', en:'If I eat eggs, my stomach hurts.', audio:'data/elem/level3/TTS/L3_06/08계란을+먹으면+배가+아파요_slide8.mp3'}],
       [{ko:'그래서 안 먹을 거예요.', en:"So I'm not going to eat it.", audio:'data/elem/level3/TTS/L3_06/09그래서+안+먹을+거예요_slide9.mp3'}],
+    ]
+  },
+  8: {
+    slides: [
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club1.png',
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club2.png',
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club3.png',
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club4.png',
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club5.png',
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club6.png',
+      'data/elem/level3/slides/L3_08/Messy Handwriting Club7.png',
+    ],
+    script: [
+      [{ko:'이번에는 잘 쓸 수 있어. 내가 연습을 많이 했어.', en:'I can write well this time. I practiced a lot!', audio:'data/elem/level3/TTS/L3_08/01이번에는+잘+쓸+수+있어_slide1.mp3'},
+       {ko:'내가 연습을 많이 했어.', en:'I practiced a lot!', audio:'data/elem/level3/TTS/L3_08/02내가+연습을+많이+했어_slide2.mp3'}],
+      [{ko:'내가 연습을 많이 했어.', en:'I practiced a lot!', audio:'data/elem/level3/TTS/L3_08/02내가+연습을+많이+했어_slide2.mp3'}],
+      [{ko:'할머니! 이것 보세요.', en:'Grandma! Look at this.', audio:'data/elem/level3/TTS/L3_08/03할머니!+이것+보세요_slide3.mp3'}],
+      [{ko:'제 글씨가 더 예뻐요!', en:'My handwriting is prettier!', audio:'data/elem/level3/TTS/L3_08/04제+글씨가+더+예뻐요!_slide4.mp3'}],
+      [{ko:'와! 정말 잘 썼다.', en:'Wow! You wrote really well.', audio:'data/elem/level3/TTS/L3_08/05와!+정말+잘+썼다_slide5.mp3'}],
+      [{ko:'셋 중에 제일 멋있어! 최고야!', en:'The coolest among the three! The best!', audio:'data/elem/level3/TTS/L3_08/06셋+중에+제일+멋있어!+최고야!_slide6.mp3'}],
+      [{ko:'근데 글씨가 좀 수상해.', en:'But the handwriting looks a bit suspicious...', audio:'data/elem/level3/TTS/L3_08/07근데+글씨가+좀+수상해_slide7.mp3'},
+       {ko:'큭 큭!', en:'Hehe!', audio:'data/elem/level3/TTS/L3_08/08큭큭!_slide7.mp3'}],
     ]
   }
 };
