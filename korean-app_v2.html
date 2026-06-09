@@ -4122,11 +4122,27 @@ function renderB1Combination(d, pc) {
 function renderB1BlockGame(game, consonants, vowels, pc) {
   const wrap = document.getElementById('b1-block-game'); if (!wrap) return;
   let idx = 0, score = 0;
-  const rounds = game.rounds || [];
   let selCon = null, selVow = null;
 
   const allCons = consonants.length ? consonants : ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅎ'];
   const allVows = vowels.length ? vowels : ['ㅏ','ㅓ','ㅗ','ㅜ','ㅡ','ㅣ','ㅐ','ㅔ'];
+
+  let rounds;
+  if (game.random) {
+    const pool = [];
+    allCons.forEach(c => allVows.forEach(v => {
+      const ci = B1_CHO_IDX[c], vi = B1_VOW_IDX[v];
+      if (ci !== undefined && vi !== undefined)
+        pool.push({target_con: c, target_vow: v, result: String.fromCodePoint((ci*21+vi)*28+0xAC00), hint: ''});
+    }));
+    for (let i = pool.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [pool[i],pool[j]] = [pool[j],pool[i]];
+    }
+    rounds = pool.slice(0, game.round_count || 10);
+  } else {
+    rounds = game.rounds || [];
+  }
 
   function show() {
     if (idx >= rounds.length) {
