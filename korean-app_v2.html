@@ -5091,11 +5091,12 @@ function renderB3Vocab(vocab) {
   if (!vocab) return '<div class="card"><p style="color:#aaa;text-align:center;padding:40px;">어휘 준비 중...</p></div>';
   let out = '';
   for (const [cat, items] of Object.entries(vocab)) {
+    const isTall = cat.includes('형용사');
     out += '<div class="card"><div class="section-title">'+cat+'</div><div class="flashcard-grid">';
     items.forEach(item => {
       const kr = (item.kr||'').replace(/'/g,"&#39;");
       out +=
-        '<div class="flashcard" onclick="this.classList.toggle(\'flipped\')">' +
+        '<div class="flashcard" style="'+(isTall?'height:210px;':'')+'" onclick="this.classList.toggle(\'flipped\')">' +
         '<div class="flashcard-inner">' +
         '<div class="flashcard-front">' +
         '<div class="fc-emoji">'+(item.emoji||'📖')+'</div>' +
