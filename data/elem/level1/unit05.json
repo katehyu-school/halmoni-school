@@ -17,28 +17,143 @@
         "en": "Vertical vowels sit to the RIGHT of the consonant!"
       },
       "words": [
-        {"word":"가","en":"go","emoji":"➡️","syllables":["ㄱ","ㅏ"]},
-        {"word":"나","en":"I/me","emoji":"🙋","syllables":["ㄴ","ㅏ"]},
-        {"word":"다","en":"all","emoji":"✅","syllables":["ㄷ","ㅏ"]},
-        {"word":"라면","en":"ramen","emoji":"🍜","syllables":["ㄹ","ㅏ","면"]},
-        {"word":"비","en":"rain","emoji":"🌧️","syllables":["ㅂ","ㅣ"]},
-        {"word":"시","en":"time","emoji":"⏰","syllables":["ㅅ","ㅣ"]}
+        {
+          "word": "가",
+          "en": "go",
+          "emoji": "➡️",
+          "syllables": [
+            "ㄱ",
+            "ㅏ"
+          ]
+        },
+        {
+          "word": "나",
+          "en": "I/me",
+          "emoji": "🙋",
+          "syllables": [
+            "ㄴ",
+            "ㅏ"
+          ]
+        },
+        {
+          "word": "다",
+          "en": "all",
+          "emoji": "✅",
+          "syllables": [
+            "ㄷ",
+            "ㅏ"
+          ]
+        },
+        {
+          "word": "라면",
+          "en": "ramen",
+          "emoji": "🍜",
+          "syllables": [
+            "ㄹ",
+            "ㅏ",
+            "면"
+          ]
+        },
+        {
+          "word": "비",
+          "en": "rain",
+          "emoji": "🌧️",
+          "syllables": [
+            "ㅂ",
+            "ㅣ"
+          ]
+        },
+        {
+          "word": "시",
+          "en": "time",
+          "emoji": "⏰",
+          "syllables": [
+            "ㅅ",
+            "ㅣ"
+          ]
+        }
       ],
-      "consonants": ["ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"],
-      "vowels": ["ㅏ","ㅑ","ㅓ","ㅕ","ㅣ"],
+      "consonants": [
+        "ㄱ",
+        "ㄴ",
+        "ㄷ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅅ",
+        "ㅇ",
+        "ㅈ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅎ"
+      ],
+      "vowels": [
+        "ㅏ",
+        "ㅑ",
+        "ㅓ",
+        "ㅕ",
+        "ㅣ"
+      ],
       "block_game": {
         "title": "🧱 세로 모음 조합!",
         "instruction": "자음과 세로 모음을 탭해서 글자를 만들어요! Tap consonant + vertical vowel!",
         "rounds": [
-          {"target_con":"ㄱ","target_vow":"ㅏ","result":"가","hint":"go"},
-          {"target_con":"ㄴ","target_vow":"ㅏ","result":"나","hint":"I/me"},
-          {"target_con":"ㅂ","target_vow":"ㅣ","result":"비","hint":"rain"},
-          {"target_con":"ㅅ","target_vow":"ㅏ","result":"사","hint":"four"},
-          {"target_con":"ㅇ","target_vow":"ㅏ","result":"아","hint":"ah!"},
-          {"target_con":"ㅈ","target_vow":"ㅏ","result":"자","hint":"sleep"},
-          {"target_con":"ㅎ","target_vow":"ㅏ","result":"하","hint":"do"},
-          {"target_con":"ㄷ","target_vow":"ㅓ","result":"더","hint":"more"},
-          {"target_con":"ㄱ","target_vow":"ㅣ","result":"기","hint":"energy/spirit"}
+          {
+            "target_con": "ㄱ",
+            "target_vow": "ㅏ",
+            "result": "가",
+            "hint": "go"
+          },
+          {
+            "target_con": "ㄴ",
+            "target_vow": "ㅏ",
+            "result": "나",
+            "hint": "I/me"
+          },
+          {
+            "target_con": "ㅂ",
+            "target_vow": "ㅣ",
+            "result": "비",
+            "hint": "rain"
+          },
+          {
+            "target_con": "ㅅ",
+            "target_vow": "ㅏ",
+            "result": "사",
+            "hint": "four"
+          },
+          {
+            "target_con": "ㅇ",
+            "target_vow": "ㅏ",
+            "result": "아",
+            "hint": "ah!"
+          },
+          {
+            "target_con": "ㅈ",
+            "target_vow": "ㅏ",
+            "result": "자",
+            "hint": "sleep"
+          },
+          {
+            "target_con": "ㅎ",
+            "target_vow": "ㅏ",
+            "result": "하",
+            "hint": "do"
+          },
+          {
+            "target_con": "ㄷ",
+            "target_vow": "ㅓ",
+            "result": "더",
+            "hint": "more"
+          },
+          {
+            "target_con": "ㄱ",
+            "target_vow": "ㅣ",
+            "result": "기",
+            "hint": "energy/spirit"
+          }
         ]
       }
     },
@@ -50,28 +165,142 @@
         "en": "Horizontal vowels sit BELOW the consonant!"
       },
       "words": [
-        {"word":"고","en":"and...","emoji":"➕","syllables":["ㄱ","ㅗ"]},
-        {"word":"노","en":"old","emoji":"👴","syllables":["ㄴ","ㅗ"]},
-        {"word":"도","en":"also","emoji":"➕","syllables":["ㄷ","ㅗ"]},
-        {"word":"로","en":"to/by","emoji":"🚌","syllables":["ㄹ","ㅗ"]},
-        {"word":"모","en":"hat","emoji":"👒","syllables":["ㅁ","ㅗ"]},
-        {"word":"부","en":"part","emoji":"🧩","syllables":["ㅂ","ㅜ"]}
+        {
+          "word": "고",
+          "en": "and...",
+          "emoji": "➕",
+          "syllables": [
+            "ㄱ",
+            "ㅗ"
+          ]
+        },
+        {
+          "word": "노",
+          "en": "old",
+          "emoji": "👴",
+          "syllables": [
+            "ㄴ",
+            "ㅗ"
+          ]
+        },
+        {
+          "word": "도",
+          "en": "also",
+          "emoji": "➕",
+          "syllables": [
+            "ㄷ",
+            "ㅗ"
+          ]
+        },
+        {
+          "word": "로",
+          "en": "to/by",
+          "emoji": "🚌",
+          "syllables": [
+            "ㄹ",
+            "ㅗ"
+          ]
+        },
+        {
+          "word": "모",
+          "en": "hat",
+          "emoji": "👒",
+          "syllables": [
+            "ㅁ",
+            "ㅗ"
+          ]
+        },
+        {
+          "word": "부",
+          "en": "part",
+          "emoji": "🧩",
+          "syllables": [
+            "ㅂ",
+            "ㅜ"
+          ]
+        }
       ],
-      "consonants": ["ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"],
-      "vowels": ["ㅗ","ㅛ","ㅜ","ㅠ","ㅡ"],
+      "consonants": [
+        "ㄱ",
+        "ㄴ",
+        "ㄷ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅅ",
+        "ㅇ",
+        "ㅈ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅎ"
+      ],
+      "vowels": [
+        "ㅗ",
+        "ㅛ",
+        "ㅜ",
+        "ㅠ",
+        "ㅡ"
+      ],
       "block_game": {
         "title": "🧱 가로 모음 조합!",
         "instruction": "자음과 가로 모음을 탭해서 글자를 만들어요! Tap consonant + horizontal vowel!",
         "rounds": [
-          {"target_con":"ㄱ","target_vow":"ㅗ","result":"고","hint":"and"},
-          {"target_con":"ㄴ","target_vow":"ㅗ","result":"노","hint":"effort"},
-          {"target_con":"ㅁ","target_vow":"ㅗ","result":"모","hint":"hat"},
-          {"target_con":"ㅂ","target_vow":"ㅜ","result":"부","hint":"part"},
-          {"target_con":"ㅅ","target_vow":"ㅗ","result":"소","hint":"cow"},
-          {"target_con":"ㅇ","target_vow":"ㅗ","result":"오","hint":"five/oh!"},
-          {"target_con":"ㅎ","target_vow":"ㅗ","result":"호","hint":"tiger (호랑이)"},
-          {"target_con":"ㄷ","target_vow":"ㅗ","result":"도","hint":"also"},
-          {"target_con":"ㄹ","target_vow":"ㅡ","result":"르","hint":"르 sound"}
+          {
+            "target_con": "ㄱ",
+            "target_vow": "ㅗ",
+            "result": "고",
+            "hint": "and"
+          },
+          {
+            "target_con": "ㄴ",
+            "target_vow": "ㅗ",
+            "result": "노",
+            "hint": "effort"
+          },
+          {
+            "target_con": "ㅁ",
+            "target_vow": "ㅗ",
+            "result": "모",
+            "hint": "hat"
+          },
+          {
+            "target_con": "ㅂ",
+            "target_vow": "ㅜ",
+            "result": "부",
+            "hint": "part"
+          },
+          {
+            "target_con": "ㅅ",
+            "target_vow": "ㅗ",
+            "result": "소",
+            "hint": "cow"
+          },
+          {
+            "target_con": "ㅇ",
+            "target_vow": "ㅗ",
+            "result": "오",
+            "hint": "five/oh!"
+          },
+          {
+            "target_con": "ㅎ",
+            "target_vow": "ㅗ",
+            "result": "호",
+            "hint": "tiger (호랑이)"
+          },
+          {
+            "target_con": "ㄷ",
+            "target_vow": "ㅗ",
+            "result": "도",
+            "hint": "also"
+          },
+          {
+            "target_con": "ㄹ",
+            "target_vow": "ㅡ",
+            "result": "르",
+            "hint": "르 sound"
+          }
         ]
       }
     },
@@ -83,29 +312,95 @@
         "en": "Compound vowels also combine with consonants!"
       },
       "words": [
-        {"word":"개","en":"dog","emoji":"🐕","syllables":["ㄱ","ㅐ"]},
-        {"word":"새","en":"bird","emoji":"🐦","syllables":["ㅅ","ㅐ"]},
-        {"word":"배","en":"boat","emoji":"🚢","syllables":["ㅂ","ㅐ"]},
-        {"word":"게","en":"crab","emoji":"🦀","syllables":["ㄱ","ㅔ"]},
-        {"word":"세","en":"three","emoji":"3️⃣","syllables":["ㅅ","ㅔ"]},
-        {"word":"네","en":"yes/your","emoji":"✅","syllables":["ㄴ","ㅔ"]}
+        {
+          "word": "개",
+          "en": "dog",
+          "emoji": "🐕",
+          "syllables": [
+            "ㄱ",
+            "ㅐ"
+          ]
+        },
+        {
+          "word": "새",
+          "en": "bird",
+          "emoji": "🐦",
+          "syllables": [
+            "ㅅ",
+            "ㅐ"
+          ]
+        },
+        {
+          "word": "배",
+          "en": "boat",
+          "emoji": "🚢",
+          "syllables": [
+            "ㅂ",
+            "ㅐ"
+          ]
+        },
+        {
+          "word": "게",
+          "en": "crab",
+          "emoji": "🦀",
+          "syllables": [
+            "ㄱ",
+            "ㅔ"
+          ]
+        },
+        {
+          "word": "세",
+          "en": "three",
+          "emoji": "3️⃣",
+          "syllables": [
+            "ㅅ",
+            "ㅔ"
+          ]
+        },
+        {
+          "word": "네",
+          "en": "yes/your",
+          "emoji": "✅",
+          "syllables": [
+            "ㄴ",
+            "ㅔ"
+          ]
+        }
       ],
-      "consonants": ["ㄱ","ㄴ","ㄷ","ㄹ","ㅁ","ㅂ","ㅅ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"],
-      "vowels": ["ㅐ","ㅔ","ㅒ","ㅖ","ㅘ","ㅝ"],
+      "consonants": [
+        "ㄱ",
+        "ㄴ",
+        "ㄷ",
+        "ㄹ",
+        "ㅁ",
+        "ㅂ",
+        "ㅅ",
+        "ㅇ",
+        "ㅈ",
+        "ㅊ",
+        "ㅋ",
+        "ㅌ",
+        "ㅍ",
+        "ㅎ"
+      ],
+      "vowels": [
+        "ㅐ",
+        "ㅒ",
+        "ㅔ",
+        "ㅖ",
+        "ㅘ",
+        "ㅙ",
+        "ㅚ",
+        "ㅝ",
+        "ㅞ",
+        "ㅟ",
+        "ㅢ"
+      ],
       "block_game": {
         "title": "🧱 복합 모음 조합!",
         "instruction": "자음과 복합 모음을 탭해서 글자를 만들어요!",
-        "rounds": [
-          {"target_con":"ㄱ","target_vow":"ㅐ","result":"개","hint":"dog"},
-          {"target_con":"ㅅ","target_vow":"ㅐ","result":"새","hint":"bird"},
-          {"target_con":"ㅂ","target_vow":"ㅐ","result":"배","hint":"boat/belly"},
-          {"target_con":"ㄱ","target_vow":"ㅔ","result":"게","hint":"crab"},
-          {"target_con":"ㄴ","target_vow":"ㅔ","result":"네","hint":"yes/your"},
-          {"target_con":"ㅅ","target_vow":"ㅔ","result":"세","hint":"three"},
-          {"target_con":"ㅎ","target_vow":"ㅐ","result":"해","hint":"sun/do"},
-          {"target_con":"ㅁ","target_vow":"ㅐ","result":"매","hint":"매"},
-          {"target_con":"ㅈ","target_vow":"ㅔ","result":"제","hint":"my/제"}
-        ]
+        "random": true,
+        "round_count": 10
       }
     }
   ]
