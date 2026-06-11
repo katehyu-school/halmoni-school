@@ -37,12 +37,10 @@
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
 | `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) — **문법 카드만** JSON, 나머지는 HTML 하드코딩 |
 | `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~06.json) — **전체 콘텐츠** JSON |
-| `data/elem/slides/L2_*/` | 초등반 Level 2 슬라이드 이미지 (PNG) |
-| `data/elem/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 (PNG) |
-| `data/elem/TTS/L2_*/` | 초등반 Level 2 TTS 음성 (MP3) |
-| `data/elem/TTS/L3_*/` | 초등반 Level 3 TTS 음성 (MP3) |
-| `data/elem/level3/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 — unit06부터 경로 변경 |
-| `data/elem/level3/TTS/L3_*/` | 초등반 Level 3 TTS 음성 — unit06부터 경로 변경 |
+| `data/elem/level2/slides/L2_*/` | 초등반 Level 2 슬라이드 이미지 (PNG) — 2026-06-11 경로 통일 |
+| `data/elem/level2/TTS/L2_*/` | 초등반 Level 2 TTS 음성 (MP3) — 2026-06-11 경로 통일 |
+| `data/elem/level3/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 (PNG) — 전 유닛 단일 경로 |
+| `data/elem/level3/TTS/L3_*/` | 초등반 Level 3 TTS 음성 (MP3) — 전 유닛 단일 경로 |
 | `data/adult/sejong/unit0N.json` | 성인반 unit별 데이터 (unit04~09.json) |
 | `data/nhs/L1/ep0N.json` | Hangeul Quest Level 1 에피소드 (ep01~ep12) |
 | `data/nhs/L1/slides/ep*/` | Hangeul Quest 슬라이드 이미지 (PNG) |
@@ -50,6 +48,7 @@
 | `data/nhs/ep_TEMPLATE.json` | 새 에피소드 작성용 표준 템플릿 |
 
 > ⚠️ **폴더 명칭 안내**: `level2/`, `level3/` 폴더는 초등반 앱의 레벨을 의미 (과거 `book2/`, `book3/`에서 2025-05-23 변경). 슬라이드/TTS 폴더는 `L2_*`, `L3_*` 접두사 유지.
+> ✅ **2026-06-11 미디어 대청소 완료**: ① 구버전 고아 파일 41개 삭제 (옛 ep05 동물원/놀이공원 21, 옛 `nhs/L2/TTS/ep1/` 폴더 15, 중복/구버전 5) ② 슬라이드/TTS 경로 통일 — `data/elem/slides|TTS/L2_*` → `data/elem/level2/slides|TTS/L2_*`, L3도 동일하게 `level3/` 아래로 머지. 이제 **레벨별 단일 경로**. ③ 의도적 보관 고아 4개: `data/basics/Korean_*.png` 2장(Basics 확장용), `data/elem/level1/harry.png`+`aera.png`(캐릭터). 참조 무결성 검증 완료 (깨진 참조 0).
 > 코드 내부 변수명(`b3*`, `book3-main` 등)은 기술 부채로 남아 있음 — 기능 변경 없이 리네이밍만 필요.
 
 ### 성인반 아키텍처 핵심
