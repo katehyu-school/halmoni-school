@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a2540">
+<title>HQ Mobile · Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy1:#061525; --navy2:#0a2540; --navy3:#0d3350;
+  --teal:#4ECDC4; --coral:#FF6B6B; --gold:#FFD93D;
+  --kids-bg:#FFF8EC; --kids-card:#FFFFFF;
+  --block-con:#FF6B6B; --block-vow:#43B97F; --block-bat:#4A90D9;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Noto Sans KR',sans-serif;background:#1a1d24;display:flex;justify-content:center}
+#phone{width:100%;max-width:430px;height:100dvh;max-height:100dvh;background:var(--navy2);
+  position:relative;overflow:hidden;display:flex;flex-direction:column}
+@media(min-width:500px){
+  body{align-items:center;padding:16px 0}
+  #phone{height:92vh;border-radius:36px;box-shadow:0 20px 60px rgba(0,0,0,.5);border:6px solid #2a2d35}
+}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+.screen.on{display:flex}
+.fade-in{animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+button{font-family:inherit;border:none;cursor:pointer;background:none}
+#scr-profile{background:linear-gradient(160deg,var(--navy1),var(--navy2),var(--navy3));
+  justify-content:center;align-items:center;gap:26px;padding:30px;text-align:center}
+#scr-profile .logo-txt{font-family:Impact,'Arial Black',sans-serif;font-size:1.6rem;color:var(--teal);letter-spacing:2px}
+#scr-profile .sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-top:-16px}
+.prof-card{width:100%;max-width:300px;border-radius:22px;padding:22px;display:flex;align-items:center;gap:16px;
+  text-align:left;transition:transform .15s;border:2px solid transparent}
+.prof-card:active{transform:scale(.97)}
+.prof-kids{background:linear-gradient(135deg,#fff,#fff8e2);border-color:var(--gold)}
+.prof-hq{background:rgba(255,255,255,.06);border-color:var(--teal)}
+.prof-card h2{font-size:1.15rem}
+.prof-kids h2{color:#0a2540}
+.prof-hq h2{color:#fff}
+.prof-card p{font-size:.78rem;margin-top:3px}
+.prof-kids p{color:#8a7340}
+.prof-hq p{color:rgba(255,255,255,.6)}
+.proto-badge{position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:.62rem;padding:4px 12px;border-radius:99px;letter-spacing:1px}
+.topbar{display:flex;align-items:center;gap:10px;padding:14px 18px 10px;position:sticky;top:0;z-index:5}
+.topbar .back{font-size:1.3rem;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.topbar h1{font-size:1.05rem;flex:1}
+.bottomnav{display:flex;justify-content:space-around;padding:8px 0 14px;border-top:1px solid rgba(128,128,128,.18);margin-top:auto;position:sticky;bottom:0}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.62rem;opacity:.55;padding:4px 14px;border-radius:12px}
+.bn-item.on{opacity:1}
+.bn-item span:first-child{font-size:1.25rem}
+.kids{background:var(--kids-bg);color:#0a2540}
+.kids .topbar{background:var(--kids-bg)}
+.kids .topbar .back{background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.kids .bottomnav{background:var(--kids-bg)}
+.kids .bn-item.on{color:#0a8f86}
+.kids-hero{margin:4px 18px 14px;background:linear-gradient(135deg,#3DBDB5,#2da89f);border-radius:20px;padding:16px 18px;color:#fff;display:flex;align-items:center;gap:12px}
+.kids-hero .av{font-size:2.2rem;background:rgba(255,255,255,.2);border-radius:50%;width:54px;height:54px;display:flex;align-items:center;justify-content:center}
+.kids-hero b{font-size:1rem}
+.kids-hero small{display:block;font-size:.72rem;opacity:.85;margin-top:2px}
+.kids-hero .stars{margin-left:auto;background:rgba(0,0,0,.15);padding:6px 12px;border-radius:99px;font-weight:700;font-size:.85rem;color:var(--gold)}
+.qmap{display:flex;flex-direction:column;align-items:center;padding:6px 0 30px;position:relative}
+.qnode{width:78px;height:78px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:1.7rem;position:relative;z-index:2;box-shadow:0 5px 0 rgba(0,0,0,.12);transition:transform .15s;margin:10px 0}
+.qnode:active{transform:scale(.94)}
+.qnode small{font-size:.56rem;font-weight:700;margin-top:1px}
+.qnode.done{background:linear-gradient(135deg,#43B97F,#2da568);color:#fff}
+.qnode.now{background:linear-gradient(135deg,var(--gold),#f5c50e);color:#7a5c00;animation:pulse 1.6s infinite}
+.qnode.lock{background:#e7e0d2;color:#b3aa97}
+@keyframes pulse{0%,100%{box-shadow:0 5px 0 rgba(0,0,0,.12),0 0 0 0 rgba(245,197,14,.45)}50%{box-shadow:0 5px 0 rgba(0,0,0,.12),0 0 0 14px rgba(245,197,14,0)}}
+.qnode:nth-child(odd){align-self:flex-start;margin-left:24%}
+.qnode:nth-child(even){align-self:flex-end;margin-right:24%}
+.game-wrap{padding:8px 20px 26px;display:flex;flex-direction:column;align-items:center;gap:16px;flex:1}
+.game-q{background:#fff;border-radius:22px;padding:20px 26px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.07);width:100%}
+.game-q .gq-emoji{font-size:3rem}
+.game-q .gq-label{font-size:.85rem;color:#7d7464;margin-top:6px}
+.listen-big{margin-top:10px;background:var(--teal);color:#fff;font-size:1.05rem;font-weight:700;padding:10px 26px;border-radius:99px;box-shadow:0 4px 0 #2da89f}
+.listen-big:active{transform:translateY(3px);box-shadow:0 1px 0 #2da89f}
+.slot-row{display:flex;gap:14px;justify-content:center}
+.slot{width:88px;height:88px;border-radius:18px;border:4px dashed #cfc6b2;display:flex;align-items:center;justify-content:center;
+  font-size:2.6rem;font-weight:900;color:#fff;background:#f4eede;transition:all .2s}
+.slot.fill-con{background:var(--block-con);border-color:var(--block-con);border-style:solid}
+.slot.fill-vow{background:var(--block-vow);border-color:var(--block-vow);border-style:solid}
+.slot-tag{text-align:center;font-size:.66rem;font-weight:700;margin-top:5px}
+.blocks{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:330px}
+.blk{width:74px;height:74px;border-radius:16px;font-size:2.2rem;font-weight:900;color:#fff;
+  display:flex;align-items:center;justify-content:center;transition:transform .12s}
+.blk:active{transform:scale(.92)}
+.blk.con{background:var(--block-con);box-shadow:0 5px 0 #d94f4f}
+.blk.vow{background:var(--block-vow);box-shadow:0 5px 0 #339963}
+.blk.used{opacity:.25;pointer-events:none}
+.blk.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+.game-msg{min-height:30px;font-weight:700;font-size:1.05rem;text-align:center}
+.game-next{background:var(--coral);color:#fff;font-weight:700;font-size:1rem;padding:13px 40px;border-radius:99px;box-shadow:0 5px 0 #d94f4f;display:none}
+.game-next:active{transform:translateY(3px);box-shadow:0 1px 0 #d94f4f}
+.game-prog{display:flex;gap:8px}
+.gp-dot{width:12px;height:12px;border-radius:50%;background:#e2d9c4}
+.gp-dot.ok{background:var(--block-vow)}
+.cf{position:fixed;top:-12px;font-size:1.3rem;z-index:99;animation:cfall linear forwards;pointer-events:none}
+@keyframes cfall{to{transform:translateY(110vh) rotate(720deg)}}
+.hq{background:linear-gradient(160deg,var(--navy1),var(--navy2) 45%,var(--navy3));color:#eaf4f3}
+.hq .topbar{background:rgba(6,21,37,.85);backdrop-filter:blur(8px)}
+.hq .topbar .back{background:rgba(255,255,255,.08);color:#fff}
+.hq .bottomnav{background:rgba(6,21,37,.92);backdrop-filter:blur(8px)}
+.hq .bn-item{color:#9fb6c9}.hq .bn-item.on{color:var(--teal)}
+.hq-brand{font-family:Impact,'Arial Black',sans-serif;letter-spacing:1.5px;color:var(--teal)}
+.hq-pad{padding:0 18px 24px;display:flex;flex-direction:column;gap:14px}
+.stat-row{display:flex;gap:10px}
+.stat{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(78,205,196,.25);border-radius:16px;padding:12px;text-align:center}
+.stat .v{font-size:1.3rem;font-weight:900;color:var(--teal)}
+.stat .k{font-size:.66rem;color:#9fb6c9;margin-top:2px}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:16px}
+.card h3{font-size:.92rem;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.cont-card{background:linear-gradient(135deg,rgba(78,205,196,.18),rgba(78,205,196,.05));border-color:rgba(78,205,196,.4)}
+.cont-card .ep-tag{font-size:.64rem;background:var(--teal);color:#06303a;font-weight:700;padding:3px 9px;border-radius:99px}
+.cont-card h2{font-size:1.15rem;margin:8px 0 4px}
+.cont-card p{font-size:.78rem;color:#a8c4c1}
+.go-btn{margin-top:12px;width:100%;background:var(--teal);color:#06303a;font-weight:900;font-size:.95rem;padding:13px;border-radius:14px}
+.go-btn:active{opacity:.85}
+.dq-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82rem}
+.dq-item:last-child{border:none}
+.dq-check{width:22px;height:22px;border-radius:50%;border:2px solid #51707f;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
+.dq-item.done .dq-check{background:var(--teal);border-color:var(--teal);color:#06303a}
+.dq-item.done span{color:#7e98a5;text-decoration:line-through}
+.dq-xp{margin-left:auto;font-size:.68rem;color:var(--gold);font-weight:700}
+.stepper{display:flex;justify-content:space-between;padding:14px 26px 4px;position:relative}
+.stepper::before{content:'';position:absolute;left:48px;right:48px;top:29px;height:3px;background:rgba(255,255,255,.12)}
+.step{display:flex;flex-direction:column;align-items:center;gap:5px;z-index:2;font-size:.6rem;color:#7e98a5}
+.step .sc{width:32px;height:32px;border-radius:50%;background:#173a52;border:2px solid #2c5871;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .25s}
+.step.on{color:var(--teal)}.step.on .sc{background:var(--teal);border-color:var(--teal);color:#06303a;font-weight:900}
+.step.past .sc{background:#1f5a54;border-color:#2da89f;color:#bdeae6}
+.flow-body{flex:1;padding:10px 18px 24px;display:flex;flex-direction:column;gap:12px}
+.scene-line{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.scene-line .who{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:rgba(255,255,255,.1)}
+.bubble{background:rgba(255,255,255,.08);border-radius:4px 16px 16px 16px;padding:10px 13px;flex:1}
+.bubble .ko{font-size:.95rem;font-weight:500}
+.bubble .en{font-size:.7rem;color:#8fb0ad;margin-top:3px}
+.bubble .spk{font-size:.62rem;color:var(--teal);font-weight:700;margin-bottom:2px}
+.tts-sm{font-size:.95rem;opacity:.8;padding:2px 4px}
+.gcard-pattern{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.35);border-radius:12px;padding:11px;text-align:center;font-weight:700;color:var(--teal);font-size:.95rem;margin-bottom:10px}
+.gcard-expl{font-size:.78rem;color:#bcd6d3;line-height:1.55;margin-bottom:12px}
+.gx{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.05);border-radius:10px;padding:9px 12px;margin-bottom:7px;font-size:.82rem}
+.gx b{color:var(--gold)}
+.gx .en{font-size:.68rem;color:#8fb0ad}
+.q-prompt{font-size:.98rem;font-weight:700;line-height:1.5;margin-bottom:4px}
+.q-sub{font-size:.72rem;color:#8fb0ad;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);
+  color:#eaf4f3;border-radius:13px;padding:13px 15px;font-size:.88rem;margin-bottom:9px;transition:all .15s}
+.opt:active{transform:scale(.985)}
+.opt.right{background:rgba(67,185,127,.22);border-color:#43B97F}
+.opt.wrong{background:rgba(255,107,107,.18);border-color:var(--coral)}
+.fcard{perspective:900px;height:190px}
+.fcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fcard.flip .fcard-inner{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.ffront{background:linear-gradient(135deg,#11405c,#0d3350);border:1px solid rgba(78,205,196,.3)}
+.ffront .w{font-size:1.9rem;font-weight:900}
+.ffront .hint{font-size:.68rem;color:#7e98a5}
+.fback{background:linear-gradient(135deg,#1f5a54,#17443f);border:1px solid #2da89f;transform:rotateY(180deg)}
+.fback .m{font-size:1.15rem;font-weight:700}
+.fback .ex{font-size:.74rem;color:#bdeae6;text-align:center;padding:0 18px;line-height:1.5}
+.srs-btns{display:flex;gap:10px}
+.srs-btns button{flex:1;padding:13px;border-radius:13px;font-weight:700;font-size:.88rem}
+.srs-no{background:rgba(255,107,107,.18);border:1.5px solid var(--coral);color:#ffb1b1}
+.srs-ok{background:rgba(67,185,127,.18);border:1.5px solid #43B97F;color:#a9e8c8}
+.flow-nav{display:flex;gap:10px;margin-top:auto;padding-top:8px}
+.flow-nav button{flex:1;padding:14px;border-radius:14px;font-weight:900;font-size:.92rem}
+.fn-next{background:var(--teal);color:#06303a}
+.fn-ghost{background:rgba(255,255,255,.08);color:#cfe3e1}
+.done-banner{text-align:center;padding:34px 20px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.done-banner .big{font-size:3rem}
+.done-banner h2{color:var(--teal)}
+.done-banner p{font-size:.8rem;color:#9fb6c9;line-height:1.6}
+.web-sync{font-size:.68rem;color:#7e98a5;text-align:center;padding:4px 24px;line-height:1.5}
+.web-sync b{color:var(--teal)}
+</style>
+</head>
+<body>
+<div id="phone">
+
+<!-- PROFILE SELECT -->
+<section class="screen on" id="scr-profile">
+  <div class="proto-badge">PROTOTYPE v0.1</div>
+  <div>
+    <svg width="96" height="105" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg"><path d="M18 52 Q22 47 29 51 L55 22 L81 51 Q88 47 92 52" fill="none" stroke="#4ECDC4" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 52 L55 22 L92 52" fill="#4ECDC4" opacity="0.07"/><line x1="20" y1="54" x2="90" y2="54" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/><line x1="36" y1="54" x2="36" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><line x1="55" y1="54" x2="55" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><line x1="74" y1="54" x2="74" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><rect x="24" y="66" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/><circle cx="35" cy="79" r="7.5" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><rect x="24" y="94" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/><line x1="55" y1="64" x2="55" y2="100" stroke="#4ECDC4" stroke-width="0.5" opacity="0.2"/><rect x="62" y="66" width="24" height="2.4" rx="1.2" fill="#FF6B6B"/><rect x="83" y="66" width="2.4" height="30" rx="1.2" fill="#FF6B6B"/><text x="55" y="112" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="7" fill="#4ECDC4" letter-spacing="1.5">HANGEUL QUEST</text></svg>
+    <div class="logo-txt" style="margin-top:8px">HANGEUL QUEST</div>
+    <div class="sub" style="margin-top:6px">누가 학습할까요? · Who's learning today?</div>
+  </div>
+  <button class="prof-card prof-kids" onclick="enterKids()">
+    <svg width="46" height="52" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="#3DBDB5" stroke="#2da89f" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.1)"/><polygon points="8,12 10,18 16,18 11,22 13,28 8,24 3,28 5,22 0,18 6,18" fill="#FFD93D"/><polygon points="50,12 52,18 58,18 53,22 55,28 50,24 45,28 47,22 42,18 48,18" fill="#FFD93D"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">HQ</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>
+    <span><h2>HQ Kids</h2><p>게임으로 배워요! · Play &amp; Learn</p></span>
+  </button>
+  <button class="prof-card prof-hq" onclick="enterHQ()">
+    <svg width="46" height="46" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">HQ</text></svg>
+    <span><h2>Hangeul Quest</h2><p>복습 · 프리뷰 · Daily Quest</p></span>
+  </button>
+  <div class="sub" style="font-size:.68rem;opacity:.7">하나의 앱, 두 개의 모습 — 프로필에 따라 전체 UI가 바뀝니다</div>
+</section>
+
+<!-- KIDS: QUEST MAP -->
+<section class="screen kids" id="scr-kids-map">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-profile')">←</button>
+    <h1 style="display:flex;align-items:center;gap:7px"><svg width="22" height="25" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="#3DBDB5" stroke="#2da89f" stroke-width="1.8" stroke-linejoin="round"/><polygon points="8,12 10,18 16,18 11,22 13,28 8,24 3,28 5,22 0,18 6,18" fill="#FFD93D"/><polygon points="50,12 52,18 58,18 53,22 55,28 50,24 45,28 47,22 42,18 48,18" fill="#FFD93D"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">HQ</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>HQ Kids</h1>
+  </div>
+  <div class="kids-hero">
+    <span class="av">🐱</span>
+    <span><b>야옹이와 모험!</b><small>오늘의 퀘스트를 깨 보자!</small></span>
+    <span class="stars">⭐ <span id="kStars">12</span></span>
+  </div>
+  <div class="qmap" id="qmap">
+    <button class="qnode done" onclick="toast('이미 깬 퀘스트야! ⭐')">🔤<small>모음 1</small></button>
+    <button class="qnode done" onclick="toast('이미 깬 퀘스트야! ⭐')">🔠<small>자음 1</small></button>
+    <button class="qnode now" onclick="startGame()">🧱<small>블록 조합</small></button>
+    <button class="qnode lock" onclick="toast('블록 조합을 먼저 깨자! 🔒')">🧩<small>단어 만들기</small></button>
+    <button class="qnode lock" onclick="toast('아직 잠겨 있어! 🔒')">🏗️<small>받침 쌓기</small></button>
+  </div>
+  <div class="bottomnav">
+    <button class="bn-item on"><span>🗺️</span><span>모험 맵</span></button>
+    <button class="bn-item" onclick="toast('프로토타입에서는 모험 맵만 열려요!')"><span>🎮</span><span>게임</span></button>
+    <button class="bn-item" onclick="toast('프로토타입에서는 모험 맵만 열려요!')"><span>⭐</span><span>내 별</span></button>
+  </div>
+</section>
+
+<!-- KIDS: BLOCK GAME -->
+<section class="screen kids" id="scr-kids-game">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-kids-map')">←</button>
+    <h1>🧱 블록 조합 퀘스트</h1>
+  </div>
+  <div class="game-wrap">
+    <div class="game-prog" id="gProg"></div>
+    <div class="game-q">
+      <div class="gq-emoji" id="gEmoji">🍎</div>
+      <div class="gq-label" id="gLabel">소리를 듣고 글자를 만들어요!</div>
+      <button class="listen-big" onclick="gListen()">🔊 듣기</button>
+    </div>
+    <div>
+      <div class="slot-row">
+        <div><div class="slot" id="slotC"></div><div class="slot-tag" style="color:var(--block-con)">자음</div></div>
+        <div><div class="slot" id="slotV"></div><div class="slot-tag" style="color:var(--block-vow)">모음</div></div>
+      </div>
+    </div>
+    <div class="blocks" id="gBlocks"></div>
+    <div class="game-msg" id="gMsg"></div>
+    <button class="game-next" id="gNext" onclick="gNextRound()">다음 →</button>
+  </div>
+</section>
+
+<!-- HQ: DASHBOARD -->
+<section class="screen hq" id="scr-hq-home">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-profile')">←</button>
+    <h1 style="display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">HQ</text></svg>미래의 학습</h1>
+    <span style="font-size:1.4rem">🦊</span>
+  </div>
+  <div class="hq-pad">
+    <div class="stat-row">
+      <div class="stat"><div class="v">🔥 7</div><div class="k">연속 학습일</div></div>
+      <div class="stat"><div class="v">⭐ 340</div><div class="k">총 XP</div></div>
+      <div class="stat"><div class="v">85%</div><div class="k">이번 주 목표</div></div>
+    </div>
+    <div class="card cont-card">
+      <span class="ep-tag">이어서 학습 · L1 ep05</span>
+      <h2>광장시장에 가요?</h2>
+      <p>웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요</p>
+      <button class="go-btn" onclick="startFlow()">▶ 5분 복습 시작</button>
+    </div>
+    <div class="card">
+      <h3>📋 Daily Quest</h3>
+      <div class="dq-item done"><span class="dq-check">✓</span><span>장면 다시 보기 (Watch)</span><span class="dq-xp">+10 XP</span></div>
+      <div class="dq-item" id="dq2"><span class="dq-check"></span><span>문법 카드 1장 (Learn)</span><span class="dq-xp">+15 XP</span></div>
+      <div class="dq-item" id="dq3"><span class="dq-check"></span><span>맥락 퀴즈 2문제 (Practice)</span><span class="dq-xp">+20 XP</span></div>
+      <div class="dq-item" id="dq4"><span class="dq-check"></span><span>단어 복습 3장 (Review)</span><span class="dq-xp">+15 XP</span></div>
+    </div>
+    <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (프로토타입에서는 ep05 고정)</div>
+  </div>
+  <div class="bottomnav">
+    <button class="bn-item on"><span>🏠</span><span>홈</span></button>
+    <button class="bn-item" onclick="startFlow()"><span>📖</span><span>학습</span></button>
+    <button class="bn-item" onclick="toast('프로토타입에서는 홈/학습만 열려요')"><span>🗂️</span><span>단어장</span></button>
+    <button class="bn-item" onclick="toast('프로토타입에서는 홈/학습만 열려요')"><span>👤</span><span>프로필</span></button>
+  </div>
+</section>
+
+<!-- HQ: 4-STEP FLOW -->
+<section class="screen hq" id="scr-hq-flow">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>ep05 · 광장시장에 가요?</h1>
+  </div>
+  <div class="stepper">
+    <div class="step" id="st0"><div class="sc">👀</div>Watch</div>
+    <div class="step" id="st1"><div class="sc">💡</div>Learn</div>
+    <div class="step" id="st2"><div class="sc">✏️</div>Practice</div>
+    <div class="step" id="st3"><div class="sc">🔁</div>Review</div>
+  </div>
+  <div class="flow-body" id="flowBody"></div>
+</section>
+
+</div>
+<script>
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  const el=document.getElementById(id);
+  el.classList.add('on');el.classList.remove('fade-in');void el.offsetWidth;el.classList.add('fade-in');
+  el.scrollTop=0;
+}
+function speak(t,rate){
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang='ko-KR';u.rate=rate||0.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+let toastEl=null;
+function toast(msg){
+  if(toastEl)toastEl.remove();
+  toastEl=document.createElement('div');
+  toastEl.textContent=msg;
+  toastEl.style.cssText='position:absolute;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.78);color:#fff;padding:10px 18px;border-radius:99px;font-size:.78rem;z-index:50;white-space:nowrap';
+  document.getElementById('phone').appendChild(toastEl);
+  setTimeout(()=>{if(toastEl){toastEl.remove();toastEl=null}},1800);
+}
+function confetti(n){
+  const EMO=['🎉','⭐','✨','🎊','💛'];
+  for(let i=0;i<(n||24);i++){
+    const c=document.createElement('div');c.className='cf';
+    c.textContent=EMO[Math.floor(Math.random()*EMO.length)];
+    c.style.left=Math.random()*100+'%';
+    c.style.animationDuration=(1.4+Math.random()*1.4)+'s';
+    c.style.animationDelay=(Math.random()*.4)+'s';
+    document.getElementById('phone').appendChild(c);
+    setTimeout(()=>c.remove(),3200);
+  }
+}
+function enterKids(){show('scr-kids-map')}
+function enterHQ(){show('scr-hq-home')}
+const GAME=[
+  {syll:'가', con:'ㄱ', vow:'ㅏ', emoji:'🚗', word:'가요!', cons:['ㄱ','ㄴ','ㅁ'], vows:['ㅏ','ㅗ','ㅜ']},
+  {syll:'노', con:'ㄴ', vow:'ㅗ', emoji:'🎶', word:'노래',  cons:['ㄹ','ㄴ','ㅂ'], vows:['ㅜ','ㅏ','ㅗ']},
+  {syll:'무', con:'ㅁ', vow:'ㅜ', emoji:'💃', word:'무용',  cons:['ㅁ','ㄷ','ㅅ'], vows:['ㅗ','ㅜ','ㅣ']}
+];
+let gIdx=0,gPickC=null,gPickV=null,gDone=false;
+function startGame(){gIdx=0;show('scr-kids-game');gRender()}
+function gRender(){
+  const g=GAME[gIdx];gPickC=null;gPickV=null;gDone=false;
+  document.getElementById('gEmoji').textContent=g.emoji;
+  document.getElementById('gLabel').textContent='소리를 듣고 글자를 만들어요!';
+  document.getElementById('gMsg').textContent='';
+  document.getElementById('gNext').style.display='none';
+  const sc=document.getElementById('slotC'),sv=document.getElementById('slotV');
+  sc.textContent='';sv.textContent='';
+  sc.className='slot';sv.className='slot';
+  document.getElementById('gProg').innerHTML=GAME.map((_,i)=>`<div class="gp-dot${i<gIdx?' ok':''}"></div>`).join('');
+  const wrap=document.getElementById('gBlocks');wrap.innerHTML='';
+  g.cons.forEach(c=>{
+    const b=document.createElement('button');b.className='blk con';b.textContent=c;
+    b.onclick=()=>gTap(b,'con',c);wrap.appendChild(b);
+  });
+  g.vows.forEach(v=>{
+    const b=document.createElement('button');b.className='blk vow';b.textContent=v;
+    b.onclick=()=>gTap(b,'vow',v);wrap.appendChild(b);
+  });
+  setTimeout(()=>speak(g.syll,0.75),500);
+}
+function gListen(){speak(GAME[gIdx].syll,0.75)}
+function gTap(btn,type,ch){
+  if(gDone)return;
+  const g=GAME[gIdx];
+  const ok=(type==='con'&&ch===g.con)||(type==='vow'&&ch===g.vow);
+  if(!ok){
+    btn.classList.add('shake');
+    setTimeout(()=>btn.classList.remove('shake'),420);
+    document.getElementById('gMsg').textContent='앗! 다시 들어 볼까? 🤔';
+    document.getElementById('gMsg').style.color='var(--coral)';
+    speak(g.syll,0.7);
+    return;
+  }
+  btn.classList.add('used');
+  if(type==='con'){gPickC=ch;
+    const s=document.getElementById('slotC');s.textContent=ch;s.classList.add('fill-con');
+  }else{gPickV=ch;
+    const s=document.getElementById('slotV');s.textContent=ch;s.classList.add('fill-vow');
+  }
+  if(gPickC&&gPickV){
+    gDone=true;
+    const m=document.getElementById('gMsg');
+    m.innerHTML=`🎉 <b style="font-size:1.4rem">${g.syll}</b> 완성! — ${g.word} ${g.emoji}`;
+    m.style.color='var(--block-vow)';
+    confetti();
+    speak(g.syll+'! '+g.word,0.8);
+    document.getElementById('kStars').textContent=parseInt(document.getElementById('kStars').textContent)+1;
+    document.getElementById('gNext').style.display='block';
+    document.getElementById('gNext').textContent=(gIdx<GAME.length-1)?'다음 →':'퀘스트 완료! 🏆';
+  }
+}
+function gNextRound(){
+  if(gIdx<GAME.length-1){gIdx++;gRender();}
+  else{
+    confetti(40);
+    toast('🏆 블록 조합 퀘스트 완료! ⭐3 획득!');
+    setTimeout(()=>show('scr-kids-map'),1400);
+  }
+}
+const SCRIPT=[
+  {who:'🧑‍🦰',spk:'올리비아',ko:'배가 고프다.',en:"I'm hungry."},
+  {who:'👧',spk:'미래',ko:'맞아. 광장시장에 떡볶이를 먹으러 갈까?',en:'Right. Shall we go to Gwangjang Market to eat tteokbokki?'},
+  {who:'🧑‍🦰',spk:'올리비아',ko:'콜! 몇 번 버스를 타?',en:'Deal! Which bus number do we take?'},
+  {who:'👨‍✈️',spk:'버스기사',ko:'안 가요. 반대 방향으로 가서 타세요.',en:"It doesn't go there. Go to the opposite direction and take it there."}
+];
+const GRAMMAR={
+  title:'V-(으)러 가다 — in order to go',
+  pattern:'동사 어간 + (으)러 가다/오다',
+  expl:"어딘가에 '~하러' 간다고 말할 때 써요. 어간이 자음으로 끝나면 으러, 모음으로 끝나면 러. Use to say WHY you're going somewhere.",
+  rows:[
+    {v:'먹다',f:'먹으러',ex:'떡볶이를 먹으러 가요.',en:'go to eat tteokbokki'},
+    {v:'사다',f:'사러',ex:'옷을 사러 가요.',en:'go to buy clothes'},
+    {v:'보다',f:'보러',ex:'영화를 보러 가요.',en:'go to watch a movie'},
+    {v:'놀다',f:'놀러',ex:'친구 집에 놀러 가요.',en:"go to hang out at a friend's"}
+  ]
+};
+const QUIZ=[
+  {q:"'먹으러 갈까?' — 무슨 뜻일까요?",sub:'ep05 핵심 표현',opts:['Shall we eat while walking?','Shall we go to eat?','Did we go eat?','We ate, right?'],ans:1},
+  {q:'도서관에 책을 ___ 가요. (빌리다)',sub:'빈칸에 알맞은 형태는?',opts:['빌리으러','빌려러','빌리러','빌러'],ans:2}
+];
+const VOCAB=[
+  {w:'배가 고프다',m:'to be hungry',ex:'배가 고프다. 밥 먹으러 갈까?'},
+  {w:'반대 방향',m:'opposite direction',ex:'반대 방향으로 가서 타세요.'},
+  {w:'몰라요',m:"I don't know",ex:'나도 몰라. (반말) → 저도 몰라요. (존댓말)'}
+];
+let fStep=0,fQuiz=0,fCard=0;
+function startFlow(){fStep=0;fQuiz=0;fCard=0;show('scr-hq-flow');fRender()}
+function fSetStep(){
+  for(let i=0;i<4;i++){
+    const el=document.getElementById('st'+i);
+    el.className='step'+(i===fStep?' on':(i<fStep?' past':''));
+  }
+}
+function fRender(){
+  fSetStep();
+  const b=document.getElementById('flowBody');
+  if(fStep===0){
+    b.innerHTML=`<div class="card"><h3>👀 장면 다시 보기 <span style="font-size:.62rem;color:#7e98a5;font-weight:400">— 실제 앱에서는 1분 숏비디오</span></h3>
+      ${SCRIPT.map((s,i)=>`<div class="scene-line"><div class="who">${s.who}</div>
+        <div class="bubble"><div class="spk">${s.spk}</div><div class="ko">${s.ko} <button class="tts-sm" onclick="speak('${s.ko.replace(/'/g,"\\'")}')">🔊</button></div><div class="en">${s.en}</div></div></div>`).join('')}
+      </div>
+      <div class="flow-nav"><button class="fn-next" onclick="fNext()">다음 단계: Learn 💡</button></div>`;
+  }
+  else if(fStep===1){
+    b.innerHTML=`<div class="card"><h3>💡 ${GRAMMAR.title}</h3>
+      <div class="gcard-pattern">${GRAMMAR.pattern}</div>
+      <div class="gcard-expl">${GRAMMAR.expl}</div>
+      ${GRAMMAR.rows.map(r=>`<div class="gx"><span>${r.v} → <b>${r.f}</b></span><span style="text-align:right">${r.ex}<div class="en">${r.en}</div></span></div>`).join('')}
+      </div>
+      <div class="flow-nav"><button class="fn-ghost" onclick="fPrev()">← Watch</button><button class="fn-next" onclick="fNext();dqDone('dq2')">다음: Practice ✏️</button></div>`;
+  }
+  else if(fStep===2){
+    const q=QUIZ[fQuiz];
+    b.innerHTML=`<div class="card"><h3>✏️ 맥락 퀴즈 ${fQuiz+1} / ${QUIZ.length}</h3>
+      <div class="q-prompt">${q.q}</div><div class="q-sub">${q.sub}</div>
+      ${q.opts.map((o,i)=>`<button class="opt" onclick="fAnswer(this,${i})">${o}</button>`).join('')}
+      <div class="game-msg" id="fqMsg" style="color:var(--teal)"></div></div>
+      <div class="flow-nav" id="fqNav" style="display:none"><button class="fn-next" onclick="fQuizNext()">계속 →</button></div>`;
+  }
+  else{
+    if(fCard>=VOCAB.length){
+      b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 5분 복습 완료!</h2>
+        <p>Daily Quest 4개 모두 달성 · +60 XP<br>🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
+        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="dqDone('dq4');show('scr-hq-home')">홈으로</button></div>`;
+      confetti(30);dqDone('dq3');dqDone('dq4');
+      return;
+    }
+    const c=VOCAB[fCard];
+    b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:#7e98a5">🔁 단어 복습 ${fCard+1} / ${VOCAB.length} — 카드를 탭해서 뒤집어 보세요</div>
+      <div class="fcard" id="fcard" onclick="this.classList.toggle('flip')">
+        <div class="fcard-inner">
+          <div class="fface ffront"><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w}')">🔊</button></div></div>
+          <div class="fface fback"><div class="m">${c.m}</div><div class="ex">${c.ex}</div></div>
+        </div>
+      </div>
+      <div class="srs-btns">
+        <button class="srs-no" onclick="fSrs(false)">🤔 몰라요</button>
+        <button class="srs-ok" onclick="fSrs(true)">😊 알아요</button>
+      </div>`;
+    setTimeout(()=>speak(c.w),400);
+  }
+}
+function fNext(){if(fStep<3){fStep++;fRender()}}
+function fPrev(){if(fStep>0){fStep--;fRender()}}
+function fAnswer(btn,i){
+  const q=QUIZ[fQuiz];
+  if(btn.parentElement.dataset.lock)return;
+  btn.parentElement.dataset.lock='1';
+  const opts=btn.parentElement.querySelectorAll('.opt');
+  if(i===q.ans){btn.classList.add('right');document.getElementById('fqMsg').textContent='정답! 🎉 +10 XP';}
+  else{btn.classList.add('wrong');opts[q.ans].classList.add('right');
+    document.getElementById('fqMsg').textContent='아쉬워요 — 이 문제는 Review 단어장에 들어가요 🔁';}
+  document.getElementById('fqNav').style.display='flex';
+}
+function fQuizNext(){
+  if(fQuiz<QUIZ.length-1){fQuiz++;fRender()}
+  else{dqDone('dq3');fNext()}
+}
+function fSrs(known){
+  toast(known?'😊 알아요 — 3일 뒤 다시 나와요':'🤔 몰라요 — 내일 다시 나와요');
+  fCard++;
+  setTimeout(fRender,350);
+}
+function dqDone(id){const el=document.getElementById(id);if(el){el.classList.add('done');el.querySelector('.dq-check').textContent='✓'}}
+</script>
+<!-- HQ Mobile Prototype v0.1 · 2026-06-12 -->
+</body>
+</html>
