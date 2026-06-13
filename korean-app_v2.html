@@ -3587,6 +3587,103 @@ function b1Speak(text) {
   speechSynthesis.speak(utt);
 }
 
+// ══════════════════════════════════════════
+// Level 1 자모/음절 Typecast 녹음 음원 (2026-06-12 추가)
+// 깨끗한 발음 — 브라우저 TTS보다 우선 사용, 없으면 b1Speak로 폴백
+// ══════════════════════════════════════════
+const B1_TTS_BASE = 'data/elem/level1/TTS/';
+const B1_VOWEL_ORDER = ['ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ','ㅐ','ㅒ','ㅔ','ㅖ','ㅘ','ㅙ','ㅚ','ㅝ','ㅞ','ㅟ','ㅢ'];
+const B1_VOWEL_AUDIO = {};
+B1_VOWEL_ORDER.forEach((ch,i)=>{ B1_VOWEL_AUDIO[ch] = B1_TTS_BASE+'vowels/'+String(i+1).padStart(2,'0')+'_'+ch+'.mp3'; });
+
+const B1_CONSONANT_NAME_ORDER = ['기역','니은','디귿','리을','미음','비읍','시옷','이응','지읒','치읓','키읔','티읕','피읖','히읗'];
+const B1_CONSONANT_NAME_AUDIO = {};
+B1_CONSONANT_NAME_ORDER.forEach((n,i)=>{ B1_CONSONANT_NAME_AUDIO[n] = B1_TTS_BASE+'consonants/'+String(i+1).padStart(2,'0')+'_'+n+'.mp3'; });
+
+const B1_SYLLABLE_ORDER = ['가','나','다','라','마','바','사','아','자','차','카','타','파','하','까','따','빠','싸','짜'];
+const B1_SYLLABLE_AUDIO = {};
+B1_SYLLABLE_ORDER.forEach((s,i)=>{ B1_SYLLABLE_AUDIO[s] = B1_TTS_BASE+'syllables/'+String(i+1).padStart(2,'0')+'_'+s+'.mp3'; });
+
+// 모음 이름(아/야/어...) → 글자(ㅏ/ㅑ/ㅓ...) — sound_tap_game, 한글 블럭 세계 예비과에서 사용
+const B1_VOWEL_NAME_TO_CHAR = {'아':'ㅏ','야':'ㅑ','어':'ㅓ','여':'ㅕ','오':'ㅗ','요':'ㅛ','우':'ㅜ','유':'ㅠ','으':'ㅡ','이':'ㅣ'};
+
+// 자음 → '가' 행 글자 — 거센소리/쌍자음 base 카드에서 사용 (ㄱ→가, ㄷ→다, ㅂ→바 등)
+const B1_CHO_TO_GA = {'ㄱ':'가','ㄴ':'나','ㄷ':'다','ㄹ':'라','ㅁ':'마','ㅂ':'바','ㅅ':'사','ㅇ':'아','ㅈ':'자','ㅊ':'차','ㅋ':'카','ㅌ':'타','ㅍ':'파','ㅎ':'하','ㄲ':'까','ㄸ':'따','ㅃ':'빠','ㅆ':'싸','ㅉ':'짜'};
+
+// 받침 음원 (2026-06-13 추가) — 자기소리받침(그/윽/느/은...) + 대표소리받침 예시어(부엌/꽃/잎)
+const B1_BATCHIM_ORDER = ['그','윽','느','은','드','읃','르','을','므','음','브','읍','으','응','부엌','꽃','잎'];
+const B1_BATCHIM_AUDIO = {};
+B1_BATCHIM_ORDER.forEach((s,i)=>{ B1_BATCHIM_AUDIO[s] = B1_TTS_BASE+'batchim/'+String(i+1).padStart(2,'0')+'_'+s+'.mp3'; });
+
+// 받침 자기소리: 자음 → {첫소리, 받침소리} — unit06 자기소리 탭 카드 비교용
+const B1_BATCHIM_SOUND_PAIR = {
+  'ㄱ':{initial:'그',final:'윽'}, 'ㄴ':{initial:'느',final:'은'}, 'ㄷ':{initial:'드',final:'읃'},
+  'ㄹ':{initial:'르',final:'을'}, 'ㅁ':{initial:'므',final:'음'}, 'ㅂ':{initial:'브',final:'읍'}, 'ㅇ':{initial:'으',final:'응'}
+};
+
+let _b1Audio = null;
+function b1PlayFile(src, fallbackText) {
+  try {
+    if (!_b1Audio) _b1Audio = new Audio();
+    _b1Audio.onerror = () => { if (fallbackText) b1Speak(fallbackText); };
+    _b1Audio.src = src;
+    _b1Audio.currentTime = 0;
+    const p = _b1Audio.play();
+    if (p && p.catch) p.catch(() => { if (fallbackText) b1Speak(fallbackText); });
+  } catch(e) {
+    if (fallbackText) b1Speak(fallbackText);
+  }
+}
+
+// 자모/음절 발음 재생 — Typecast 음원 있으면 재생, 없으면 브라우저 TTS 폴백
+function b1SpeakSound(text) {
+  if (!text) return;
+  if (B1_VOWEL_AUDIO[text]) return b1PlayFile(B1_VOWEL_AUDIO[text], text);
+  if (B1_CONSONANT_NAME_AUDIO[text]) return b1PlayFile(B1_CONSONANT_NAME_AUDIO[text], text);
+  if (B1_SYLLABLE_AUDIO[text]) return b1PlayFile(B1_SYLLABLE_AUDIO[text], text);
+  if (B1_BATCHIM_AUDIO[text]) return b1PlayFile(B1_BATCHIM_AUDIO[text], text);
+  if (B1_VOWEL_NAME_TO_CHAR[text]) return b1PlayFile(B1_VOWEL_AUDIO[B1_VOWEL_NAME_TO_CHAR[text]], text);
+  if (B1_CHO_TO_GA[text]) return b1PlayFile(B1_SYLLABLE_AUDIO[B1_CHO_TO_GA[text]], text);
+  b1Speak(text); // 폴백: 브라우저 TTS
+}
+
+// 대표소리 멤버 자음 이름 음원 (기존 consonants/consonant_combo 폴더 재활용)
+const B1_CONSONANT_FULLNAME_AUDIO = {
+  'ㅋ': B1_CONSONANT_NAME_AUDIO['키읔'],
+  'ㅍ': B1_CONSONANT_NAME_AUDIO['피읖'],
+  'ㅅ': B1_TTS_BASE+'consonant_combo/audio_12_시옷.mp3',
+  'ㅆ': B1_TTS_BASE+'consonant_combo/audio_32_쌍시옷.mp3',
+  'ㅈ': B1_TTS_BASE+'consonant_combo/audio_16_지읒.mp3',
+  'ㅊ': B1_TTS_BASE+'consonant_combo/audio_18_치읓.mp3',
+  'ㅌ': B1_TTS_BASE+'consonant_combo/audio_20_티읕.mp3',
+  'ㅎ': B1_TTS_BASE+'consonant_combo/audio_24_히읗.mp3',
+  'ㄲ': B1_TTS_BASE+'consonant_combo/audio_26_쌍기역.mp3'
+};
+
+// 순차 재생 — 대표소리 그룹: "ㅋ" (자음 이름) → "윽" (대표 받침소리)
+function b1PlaySequence(srcs) {
+  if (!srcs || !srcs.length) return;
+  if (!_b1Audio) _b1Audio = new Audio();
+  let i = 0;
+  const playNext = () => {
+    if (i >= srcs.length) return;
+    _b1Audio.onended = () => { i++; playNext(); };
+    _b1Audio.onerror = () => { i++; playNext(); };
+    _b1Audio.src = srcs[i];
+    _b1Audio.currentTime = 0;
+    const p = _b1Audio.play();
+    if (p && p.catch) p.catch(() => { i++; playNext(); });
+  };
+  playNext();
+}
+// 대표소리 멤버 클릭: "ㅋ" 이름 음원 + "윽" 대표 받침소리 순서로 재생
+function b1PlayRepMember(member, repSound) {
+  const a = B1_CONSONANT_FULLNAME_AUDIO[member];
+  const b = B1_BATCHIM_AUDIO[repSound];
+  if (a && b) b1PlaySequence([a, b]);
+  else b1SpeakSound(repSound);
+}
+
 function b1MakeSyllable(cho, vow, jong) {
   const ci = B1_CHO_IDX[cho];
   const vi = B1_VOW_IDX[vow];
@@ -3708,7 +3805,7 @@ function renderB1Vowel(d, pc) {
 
   // Unit 01: basic vowel cards
   const cards = (d.chars||[]).map(v =>
-    `<div onclick="b1Speak('${v.sound}')" style="background:${v.color};border-radius:16px;padding:20px 14px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 3px 10px ${v.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+    `<div onclick="b1SpeakSound('${v.char}')" style="background:${v.color};border-radius:16px;padding:20px 14px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 3px 10px ${v.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
       <div style="font-size:3.2rem;font-weight:900;line-height:1;">${v.char}</div>
       <div style="font-size:1rem;font-weight:700;margin-top:6px;">${v.sound}</div>
       <div style="font-size:1.6rem;margin-top:6px;">${v.emoji}</div>
@@ -3767,10 +3864,14 @@ function renderB1SoundTapGame(game) {
   }
   function show() {
     if (idx >= rounds.length) {
+      const hasNext = !!document.getElementById('b1-classify-area');
       wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,#43A047,#66BB6A);border-radius:16px;padding:30px;color:#fff;">
         <div style="font-size:3rem;">🎉</div>
         <div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
-        <button onclick="renderB1SoundTapGame(window._b1CurrentGame)" style="background:#fff;color:#43A047;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:8px;">다시하기 🔄</button>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <button onclick="renderB1SoundTapGame(window._b1CurrentGame)" style="background:#fff;color:#43A047;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+          ${hasNext ? `<button onclick="document.getElementById('b1-classify-area').scrollIntoView({behavior:'smooth',block:'start'})" style="background:#FFD54F;color:#5D4037;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다음 게임 → Next Game</button>` : ''}
+        </div>
       </div>`; return;
     }
     const r = rounds[idx];
@@ -3781,14 +3882,14 @@ function renderB1SoundTapGame(game) {
       <div style="font-size:.85rem;font-weight:700;color:#43A047;margin-bottom:12px;">🎮 ${game.title}</div>
       <div style="font-size:.8rem;color:#666;margin-bottom:14px;">${game.instruction}</div>
       <div style="text-align:center;margin-bottom:16px;">
-        <button onclick="b1Speak('${r.sound_text}')" style="background:#43A047;color:#fff;border:none;border-radius:50%;width:80px;height:80px;font-size:2rem;cursor:pointer;">🔊</button>
+        <button onclick="b1SpeakSound('${r.sound_text}')" style="background:#43A047;color:#fff;border:none;border-radius:50%;width:80px;height:80px;font-size:2rem;cursor:pointer;">🔊</button>
         <div style="font-size:.75rem;color:#888;margin-top:6px;">탭해서 들어봐요</div>
       </div>
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">${btns}</div>
       <div style="text-align:center;margin-top:12px;font-size:.8rem;color:#aaa;">${idx+1}/${rounds.length} ⭐${score}</div>
     </div>`;
     window._b1TapAns = function(chosen, correct) {
-      if (chosen === correct) { score++; b1Speak(correct); }
+      if (chosen === correct) { score++; b1SpeakSound(correct); }
       idx++; setTimeout(show, chosen===correct ? 600 : 400);
     };
   }
@@ -3896,9 +3997,9 @@ function renderB1Consonant(d, pc) {
     d.aspirated.chars.forEach(ch => {
       html += `<div style="background:#fff;border-radius:14px;padding:16px;text-align:center;border:2px solid #E5393540;">
         <div style="display:flex;justify-content:center;gap:6px;align-items:center;margin-bottom:8px;">
-          <div onclick="b1Speak('${ch.base}아')" style="background:#E5393520;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#E53935;cursor:pointer;">${ch.base}</div>
+          <div onclick="b1SpeakSound('${ch.base}')" style="background:#E5393520;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#E53935;cursor:pointer;">${ch.base}</div>
           <div style="color:#aaa;font-size:1rem;">→</div>
-          <div onclick="b1Speak('${ch.with_a}')" style="background:#E5393540;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#C62828;cursor:pointer;">${ch.asp}</div>
+          <div onclick="b1SpeakSound('${ch.with_a}')" style="background:#E5393540;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#C62828;cursor:pointer;">${ch.asp}</div>
         </div>
         <div style="font-size:.75rem;color:#555;">${ch.sound} · ${ch.emoji} ${ch.example}</div>
         <div style="font-size:.72rem;color:#888;">${ch.example_en}</div>
@@ -3912,9 +4013,9 @@ function renderB1Consonant(d, pc) {
     d.tense.chars.forEach(ch => {
       html += `<div style="background:#fff;border-radius:14px;padding:16px;text-align:center;border:2px solid #1565C040;">
         <div style="display:flex;justify-content:center;gap:6px;align-items:center;margin-bottom:8px;">
-          <div onclick="b1Speak('${ch.base}아')" style="background:#1565C020;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#1565C0;cursor:pointer;">${ch.base}</div>
+          <div onclick="b1SpeakSound('${ch.base}')" style="background:#1565C020;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#1565C0;cursor:pointer;">${ch.base}</div>
           <div style="color:#aaa;">→</div>
-          <div onclick="b1Speak('${ch.with_a}')" style="background:#1565C040;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#0D47A1;cursor:pointer;">${ch.tense}</div>
+          <div onclick="b1SpeakSound('${ch.with_a}')" style="background:#1565C040;border-radius:8px;padding:8px 12px;font-size:1.8rem;font-weight:900;color:#0D47A1;cursor:pointer;">${ch.tense}</div>
         </div>
         <div style="font-size:.75rem;color:#555;">${ch.sound} · ${ch.emoji} ${ch.example}</div>
         <div style="font-size:.72rem;color:#888;">${ch.example_en}</div>
@@ -3929,7 +4030,7 @@ function renderB1Consonant(d, pc) {
   // Units 03, 04: standard consonant cards
   const note = d.note ? `<div style="background:#FFEBEE;border-radius:12px;padding:14px;margin-bottom:16px;font-size:.85rem;color:#B71C1C;font-weight:600;">💡 ${d.note.ko}<br><span style="color:#888;font-weight:400;">${d.note.en}</span></div>` : '';
   const cards = (d.chars||[]).map(ch => `
-    <div onclick="b1Speak('${ch.with_a}')" style="background:#fff;border-radius:14px;padding:18px 12px;text-align:center;border:2px solid ${ch.color}40;cursor:pointer;transition:.15s;box-shadow:0 2px 8px #0001;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform=''">
+    <div onclick="b1SpeakSound('${ch.with_a}')" style="background:#fff;border-radius:14px;padding:18px 12px;text-align:center;border:2px solid ${ch.color}40;cursor:pointer;transition:.15s;box-shadow:0 2px 8px #0001;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform=''">
       <div style="font-size:3rem;font-weight:900;color:${ch.color};">${ch.char}</div>
       <div style="font-size:.85rem;font-weight:700;color:#555;margin-top:4px;">${ch.sound}</div>
       <div style="font-size:1.5rem;margin-top:6px;">${ch.emoji}</div>
@@ -4123,7 +4224,7 @@ function renderB1Combination(d, pc) {
   }
 }
 
-function renderB1BlockGame(game, consonants, vowels, pc) {
+function renderB1BlockGame(game, consonants, vowels, pc, onNext) {
   const wrap = document.getElementById('b1-block-game'); if (!wrap) return;
   let idx = 0, score = 0;
   let selCon = null, selVow = null;
@@ -4152,7 +4253,10 @@ function renderB1BlockGame(game, consonants, vowels, pc) {
     if (idx >= rounds.length) {
       wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
         <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
-        <button onclick="renderB1BlockGame(window._b1BG,window._b1BGcons,window._b1BGvows,window._b1BGpc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <button onclick="renderB1BlockGame(window._b1BG,window._b1BGcons,window._b1BGvows,window._b1BGpc,window._b1BGonNext)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+          ${window._b1BGonNext ? `<button onclick="window._b1BGonNext()" style="background:#FFD54F;color:#5D4037;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다음 → Next</button>` : ''}
+        </div>
       </div>`; return;
     }
     selCon = null; selVow = null;
@@ -4253,7 +4357,7 @@ function renderB1BlockGame(game, consonants, vowels, pc) {
     }
   }
 
-  window._b1BG = game; window._b1BGcons = consonants; window._b1BGvows = vowels; window._b1BGpc = pc;
+  window._b1BG = game; window._b1BGcons = consonants; window._b1BGvows = vowels; window._b1BGpc = pc; window._b1BGonNext = onNext;
   show();
 }
 
@@ -4307,7 +4411,7 @@ function renderB1Batchim(d, pc) {
   renderB1BatchimGame(d.block_game, d.batchim_chars||[], pc);
 }
 
-function renderB1BatchimGame(game, batchimChars, pc) {
+function renderB1BatchimGame(game, batchimChars, pc, onNext) {
   const wrap = document.getElementById('b1-batchim-game'); if (!wrap||!game) return;
   let idx = 0, score = 0;
   const rounds = game.rounds || [];
@@ -4317,7 +4421,10 @@ function renderB1BatchimGame(game, batchimChars, pc) {
     if (idx >= rounds.length) {
       wrap.innerHTML = `<div style="text-align:center;background:linear-gradient(135deg,${pc},${pc}bb);border-radius:16px;padding:30px;color:#fff;">
         <div style="font-size:3rem;">🎉</div><div style="font-size:1.4rem;font-weight:800;margin:8px 0;">완료! ${score}/${rounds.length}</div>
-        <button onclick="renderB1BatchimGame(window._b1BtGame,window._b1BtChars,window._b1BtPc)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
+          <button onclick="renderB1BatchimGame(window._b1BtGame,window._b1BtChars,window._b1BtPc,window._b1BtOnNext)" style="background:#fff;color:${pc};border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다시하기 🔄</button>
+          ${window._b1BtOnNext ? `<button onclick="window._b1BtOnNext()" style="background:#FFD54F;color:#5D4037;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">다음 → Next</button>` : ''}
+        </div>
       </div>`; return;
     }
     const r = rounds[idx];
@@ -4369,7 +4476,7 @@ function renderB1BatchimGame(game, batchimChars, pc) {
       }
     };
   }
-  window._b1BtGame = game; window._b1BtChars = batchimChars; window._b1BtPc = pc;
+  window._b1BtGame = game; window._b1BtChars = batchimChars; window._b1BtPc = pc; window._b1BtOnNext = onNext;
   show();
 }
 
@@ -4385,7 +4492,7 @@ function renderB1VowelGroups(d, pc, c) {
     c.innerHTML += `<div style="font-weight:800;color:${pc};font-size:1rem;margin:16px 0 8px;">${g.title}</div>`;
     c.innerHTML += `<div style="background:#f0f8ff;border-radius:10px;padding:10px;margin-bottom:10px;font-size:.8rem;color:#555;">ℹ️ ${g.note}</div>`;
     const cards = (g.chars||[]).map(ch =>
-      `<div onclick="b1Speak('${ch.char}')" style="background:${ch.color};border-radius:14px;padding:16px 10px;text-align:center;color:#fff;cursor:pointer;transition:.15s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+      `<div onclick="b1SpeakSound('${ch.char}')" style="background:${ch.color};border-radius:14px;padding:16px 10px;text-align:center;color:#fff;cursor:pointer;transition:.15s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
         <div style="font-size:2.8rem;font-weight:900;">${ch.char}</div>
         <div style="font-size:.85rem;font-weight:700;margin-top:4px;">${ch.sound}</div>
         <div style="font-size:1.3rem;margin-top:4px;">${ch.emoji}</div>
@@ -4407,7 +4514,7 @@ function renderB1CombinationTabs(d, pc, c) {
   if (!tabs.find(t => t.id === activeTab)) activeTab = tabs[0].id;
 
   const tabBar = tabs.map(t =>
-    `<button id="b1ct-${t.id}" onclick="switchB1ComboTab('${t.id}')" style="background:${activeTab===t.id?pc:'#fff'};color:${activeTab===t.id?'#fff':'#555'};border:2px solid ${pc};border-radius:10px;padding:8px 12px;font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;">${t.label}</button>`
+    `<button id="b1ct-${t.id}" onclick="switchB1ComboTab('${t.id}')" style="background:${activeTab===t.id?pc:'#fff'};color:${activeTab===t.id?'#fff':'#555'};border:2px solid ${pc};border-radius:10px;padding:8px 12px;font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;">${t.label}${t.sublabel?`<br><span style="font-size:.68rem;opacity:.8;">${t.sublabel}</span>`:''}</button>`
   ).join('');
   c.innerHTML += `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">${tabBar}</div><div id="b1-combo-tab-content"></div>`;
 
@@ -4427,7 +4534,14 @@ function renderB1CombinationTabs(d, pc, c) {
     if (tab.words) html += b1WordRow(tab.words, pc);
     html += `<div id="b1-block-game"></div>`;
     tc.innerHTML = html;
-    if (tab.block_game) renderB1BlockGame(tab.block_game, tab.consonants||[], tab.vowels||[], pc);
+    if (tab.block_game) {
+      const tabIdx = tabs.findIndex(t => t.id === tabId);
+      const isLastTab = tabIdx === tabs.length - 1;
+      const onNext = isLastTab
+        ? () => switchBook1Unit((d.unit||5)+1)
+        : () => switchB1ComboTab(tabs[tabIdx+1].id);
+      renderB1BlockGame(tab.block_game, tab.consonants||[], tab.vowels||[], pc, onNext);
+    }
   }
 
   window.switchB1ComboTab = function(tabId) { renderTab(tabId); };
@@ -4462,13 +4576,19 @@ function renderB1BatchimTabs(d, pc, c) {
 
     if (tab.batchim_chars) {
       // 자기소리 tab — same as original renderB1Batchim content
-      const chars = (tab.batchim_chars||[]).map(ch =>
-        `<div onclick="b1Speak('${ch.char}')" style="background:#E3F2FD;border-radius:14px;padding:14px 10px;text-align:center;border:2px solid #1565C040;cursor:pointer;">
-          <div style="font-size:2.8rem;font-weight:900;color:#1565C0;">${ch.char}</div>
+      const chars = (tab.batchim_chars||[]).map(ch => {
+        const pair = B1_BATCHIM_SOUND_PAIR[ch.char] || {};
+        return `<div style="background:#E3F2FD;border-radius:14px;padding:14px 10px;text-align:center;border:2px solid #1565C040;">
+          <div onclick="b1SpeakSound('${ch.char}')" style="font-size:2.8rem;font-weight:900;color:#1565C0;cursor:pointer;">${ch.char}</div>
           <div style="font-size:.8rem;font-weight:700;color:#555;">[${ch.sound}]</div>
           <div style="font-size:1.2rem;">${ch.emoji}</div>
+          ${pair.initial && pair.final ? `<div style="display:flex;gap:6px;justify-content:center;margin-top:8px;">
+            <button onclick="b1SpeakSound('${pair.initial}');event.stopPropagation();" style="background:#fff;border:2px solid #43A047;color:#43A047;border-radius:8px;padding:4px 8px;font-size:.78rem;font-weight:700;cursor:pointer;">🔊 첫소리<br>${pair.initial}</button>
+            <button onclick="b1SpeakSound('${pair.final}');event.stopPropagation();" style="background:#fff;border:2px solid #E53935;color:#E53935;border-radius:8px;padding:4px 8px;font-size:.78rem;font-weight:700;cursor:pointer;">🔊 받침소리<br>${pair.final}</button>
+          </div>` : ''}
           <div style="margin-top:6px;">${(ch.examples||[]).map(e=>`<span onclick="b1Speak('${e}');event.stopPropagation();" style="background:#fff;border-radius:6px;padding:2px 7px;font-size:.85rem;margin:2px;display:inline-block;cursor:pointer;">${e}</span>`).join('')}</div>
-        </div>`).join('');
+        </div>`;
+      }).join('');
       tc.innerHTML += `<h3 style="font-size:1rem;font-weight:700;color:${pc};margin:0 0 10px;">📌 받침 글자 Final Consonants</h3>
         <div style="display:grid;grid-template-columns:repeat(${Math.min(tab.batchim_chars.length,4)},1fr);gap:12px;margin-bottom:16px;">${chars}</div>`;
       // 3-layer block diagram
@@ -4486,24 +4606,43 @@ function renderB1BatchimTabs(d, pc, c) {
         </div>
       </div>`;
       tc.innerHTML += `<div id="b1-batchim-game"></div>`;
-      renderB1BatchimGame(tab.block_game, tab.batchim_chars||[], pc);
+      {
+        const tabIdx = tabs.findIndex(t => t.id === tabId);
+        const isLastTab = tabIdx === tabs.length - 1;
+        const onNextTab = isLastTab
+          ? () => switchBook1Unit((d.unit||6)+1)
+          : () => switchB1BatchimTab(tabs[tabIdx+1].id);
+        renderB1BatchimGame(tab.block_game, tab.batchim_chars||[], pc, onNextTab);
+      }
     } else if (tab.rep_groups) {
       // 대표소리 tab
       tc.innerHTML += `<div style="font-size:.9rem;font-weight:700;color:${pc};margin-bottom:12px;">🔄 대표 소리 Representative Sounds</div>`;
       (tab.rep_groups||[]).forEach(g => {
+        const repFinal = (B1_BATCHIM_SOUND_PAIR[g.rep_sound]||{}).final || g.rep_sound;
         const memberChips = g.members.map(m =>
-          `<span onclick="b1Speak('${m}아')" style="background:${g.color}20;border:2px solid ${g.color};border-radius:10px;padding:8px 14px;font-size:1.6rem;font-weight:900;color:${g.color};cursor:pointer;display:inline-block;">${m}</span>`
+          `<span onclick="b1PlayRepMember('${m}','${repFinal}')" style="background:${g.color}20;border:2px solid ${g.color};border-radius:10px;padding:8px 14px;font-size:1.6rem;font-weight:900;color:${g.color};cursor:pointer;display:inline-block;">${m}</span>`
         ).join(' ');
         tc.innerHTML += `<div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;border:2px solid ${g.color}30;">
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px;">
             ${memberChips}
             <div style="font-size:1.5rem;color:#aaa;">→</div>
-            <div onclick="b1Speak('${g.rep_sound}아')" style="background:${g.color};border-radius:12px;padding:10px 18px;font-size:2rem;font-weight:900;color:#fff;cursor:pointer;">[${g.rep_sound}]</div>
-            <div onclick="b1Speak('${g.example_word}')" style="font-size:1.8rem;font-weight:800;color:#333;cursor:pointer;">${g.example_word}<span style="font-size:.85rem;color:#888;font-weight:400;margin-left:6px;">${g.example_en}</span></div>
+            <div onclick="b1SpeakSound('${repFinal}')" style="background:${g.color};border-radius:12px;padding:10px 18px;font-size:2rem;font-weight:900;color:#fff;cursor:pointer;">[${g.rep_sound}]</div>
+            <div onclick="b1SpeakSound('${g.example_word}')" style="font-size:1.8rem;font-weight:800;color:#333;cursor:pointer;">${g.example_word}<span style="font-size:.85rem;color:#888;font-weight:400;margin-left:6px;">${g.example_en}</span></div>
           </div>
           <div style="font-size:.8rem;color:#666;background:#f8f8f8;border-radius:8px;padding:8px;">💡 ${g.note}</div>
         </div>`;
       });
+      {
+        const tabIdx = tabs.findIndex(t => t.id === tabId);
+        const isLastTab = tabIdx === tabs.length - 1;
+        const nextLabel = isLastTab ? '다음 과 → Next Lesson' : '다음 → Next';
+        const onNextTab = isLastTab
+          ? `switchBook1Unit((${JSON.stringify(d.unit||6)})+1)`
+          : `switchB1BatchimTab('${tabs[tabIdx+1] ? tabs[tabIdx+1].id : ''}')`;
+        tc.innerHTML += `<div style="text-align:center;margin-top:8px;">
+          <button onclick="${onNextTab}" style="background:${pc};color:#fff;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;font-weight:700;cursor:pointer;">${nextLabel}</button>
+        </div>`;
+      }
     }
   }
 
@@ -4878,7 +5017,7 @@ function b1PreTab(name){
 function renderB1PreVowels(d){
   const sec=document.getElementById('b1pre-vowels'); if(!sec) return;
   const cards=(d.vowels||[]).map(v=>`
-    <div onclick="b1Speak('${v.name}')" style="background:${v.color};border-radius:16px;padding:18px 12px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 3px 10px ${v.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+    <div onclick="b1SpeakSound('${v.name}')" style="background:${v.color};border-radius:16px;padding:18px 12px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 3px 10px ${v.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
       <div style="font-size:2.8rem;font-weight:900;line-height:1;">${v.char}</div>
       <div style="font-size:.9rem;font-weight:700;margin-top:6px;">${v.name} (${v.sound})</div>
       <div style="font-size:1.3rem;margin-top:4px;">${v.emoji}</div>
@@ -4900,7 +5039,7 @@ function renderB1PreVowels(d){
 function renderB1PreConsonants(d){
   const sec=document.getElementById('b1pre-consonants'); if(!sec) return;
   const cards=(d.consonants||[]).map(c=>`
-    <div onclick="b1Speak('${c.name}')" style="background:${c.color};border-radius:12px;padding:14px 10px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 2px 8px ${c.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+    <div onclick="b1SpeakSound('${c.name}')" style="background:${c.color};border-radius:12px;padding:14px 10px;text-align:center;color:#fff;cursor:pointer;transition:.15s;box-shadow:0 2px 8px ${c.color}55;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
       <div style="font-size:2.5rem;font-weight:900;line-height:1;">${c.char}</div>
       <div style="font-size:.78rem;font-weight:700;margin-top:4px;">${c.name}</div>
       <div style="font-size:.72rem;opacity:.85;">${c.sound}</div>
@@ -4924,7 +5063,7 @@ function renderB1PreSyllable(d){
     <div style="text-align:center;padding:24px;background:linear-gradient(135deg,#EDE7F6,#FFF3E0);border-radius:16px;">
       <div id="b1syl-display" style="font-size:6rem;font-weight:900;color:#311B92;min-height:90px;line-height:1;">?</div>
       <div id="b1syl-hint" style="font-size:.9rem;color:#7E57C2;margin-top:8px;"></div>
-      <button id="b1syl-speak-btn" style="display:none;margin-top:10px;background:#7E57C2;color:#fff;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;cursor:pointer;" onclick="if(window._b1CurSyl)b1Speak(window._b1CurSyl)">🔊 듣기</button>
+      <button id="b1syl-speak-btn" style="display:none;margin-top:10px;background:#7E57C2;color:#fff;border:none;border-radius:10px;padding:10px 24px;font-size:1rem;cursor:pointer;" onclick="if(window._b1CurSyl)b1SpeakSound(window._b1CurSyl)">🔊 듣기</button>
     </div>`;
   window._b1HiWords=hiWords; window._b1SelChoIdx=null; window._b1SelVowIdx=null; window._b1SelCho=null; window._b1SelVow=null;
 }
@@ -10619,4 +10758,18 @@ if(document.readyState !== 'loading'){
 .b3-chunk-btn{background:#EBF7F6;border:2px solid #A8D5CC;border-radius:20px;padding:8px 16px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
 .b3-chunk-btn:hover:not(.used){background:#0D7B75;color:white;}
 .b3-chunk-btn.used{opacity:.35;cursor:default;pointer-events:none;}
-.b3-chunk-btn.b3-type-place{background:#F0F4FF;border-color
+.b3-chunk-btn.b3-type-place{background:#F0F4FF;border-color:#B0BAFF;}
+.b3-chunk-btn.b3-type-verb{background:#FFF0F8;border-color:#FFB8E0;}
+.b3-chunk-btn.b3-type-name{background:#FFF9E6;border-color:#FFD580;}
+.b3-placed-chunk{background:#0D7B75;color:white;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
+.b3-placed-chunk:hover{background:#0a6862;text-decoration:line-through;}
+.b3-placed-chunk.b3-type-place{background:#5B6AF0;}
+.b3-placed-chunk.b3-type-verb{background:#C46EA8;}
+.b3-placed-chunk.b3-type-name{background:#E8A020;}
+.b3-check-btn{display:block;margin:0 auto;background:#0D7B75;color:white;border:none;border-radius:20px;padding:10px 30px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;transition:all .2s;}
+.b3-check-btn:hover:not(:disabled){background:#0a6862;}
+.b3-check-btn:disabled{opacity:.5;}
+.b3-complete{text-align:center;font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;padding:40px;background:#EBF7F6;border-radius:20px;}
+.b3-ans-hint{color:#0D7B75;font-weight:700;margin:10px 0 6px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.95rem;}
+/* Self check */
+.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bot
