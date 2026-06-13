@@ -198,11 +198,8 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .rl-tip{background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-md);padding:15px 18px;font-size:13px;line-height:1.8;color:var(--amber-600);margin-bottom:14px;}
 .rl-tip-body{font-size:13px;color:var(--amber-600);line-height:1.8;margin-top:6px;}
 .loading{padding:50px;text-align:center;color:var(--warm-500);font-size:13px;}
-.clova-credit{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.5);color:rgba(255,255,255,0.85);font-size:10px;padding:4px 10px;border-radius:20px;backdrop-filter:blur(4px);transition:opacity 1s;pointer-events:none;}
-.clova-credit.hidden{opacity:0;}
 .video-wrap{display:flex;flex-direction:column;gap:20px;padding:16px;}
 .video-wrap video{width:100%;border-radius:14px;max-height:420px;background:#000;box-shadow:0 4px 20px rgba(0,0,0,0.15);}
-.video-credit{font-size:10px;color:var(--warm-400);text-align:right;margin-top:-14px;}
 .video-script-panel{background:var(--warm-50);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;}
 .video-script-header{font-size:13px;font-weight:700;color:var(--warm-500);margin-bottom:4px;border-bottom:1px solid var(--warm-200);padding-bottom:8px;}
 .video-script-line{display:flex;align-items:flex-start;gap:12px;padding:10px 8px;border-radius:10px;transition:background .15s;}
@@ -967,7 +964,7 @@ function showTab(name){
 function buildScript(){
   if(DATA.video) return buildVideoScript();
   return `<div class="scene-wrap"><div class="scene-col">
-    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div><div class="clova-credit" id="clova-credit">클로바더빙의 AI 보이스가 사용되었습니다.</div><button class="speak-btn" id="speak-btn">🎤 말해보기</button></div>
+    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div><button class="speak-btn" id="speak-btn">🎤 말해보기</button></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
       <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
@@ -1006,7 +1003,6 @@ function buildVideoScript(){
       <source src="${esc(DATA.video)}" type="video/mp4">
       브라우저가 동영상을 지원하지 않아요.
     </video>
-    <div class="video-credit">음성: Clova Dubbing (NAVER Corp.)</div>
     <div class="video-script-panel">
       <div class="video-script-header">📝 대본 · Script</div>
       ${lines}
@@ -1017,8 +1013,6 @@ function buildVideoScript(){
 function initSceneViewer(){
   if(DATA.video) return;  // video mode: no slide viewer
   renderScene();
-  const credit=document.getElementById('clova-credit');
-  if(credit){credit.classList.remove('hidden');setTimeout(()=>credit.classList.add('hidden'),5000);}
 }
 
 function renderScene(){
