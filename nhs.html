@@ -32,6 +32,9 @@
 html{font-size:15px;}
 body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex;flex-direction:column;color:var(--warm-900);}
 .top-bar{background:var(--white);border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;height:56px;gap:12px;flex-shrink:0;box-shadow:var(--shadow-sm);}
+.sidebar-toggle-btn{display:none;align-items:center;justify-content:center;width:34px;height:34px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);background:transparent;color:var(--gray-500);font-size:1.15rem;cursor:pointer;flex-shrink:0;transition:all .2s;}
+.sidebar-toggle-btn:hover{border-color:var(--teal);color:var(--teal);}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:499;}
 .level-tabs{display:flex;gap:3px;}
 .level-btn{padding:5px 14px;border:1.5px solid var(--gray-200);border-radius:var(--radius-xl);font-size:12px;font-weight:700;font-family:var(--font-kr);cursor:pointer;color:var(--gray-500);background:transparent;transition:all .2s;}
 .level-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;}
@@ -478,33 +481,21 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
   .level-btn{padding:4px 10px;font-size:11px;}
   .index-btn{padding:5px 10px;font-size:11px;}
 
-  /* 사이드바 → 상단 가로 스크롤 스트립 */
+  /* 사이드바 → 슬라이드 드로어 */
+  .sidebar-toggle-btn{display:flex;}
   .main-layout{flex-direction:column;}
-  .sidebar{
-    width:100%; height:auto;
-    flex-direction:row; flex-wrap:nowrap;
-    overflow-x:auto; overflow-y:hidden;
-    padding:8px 10px; gap:6px;
-    border-right:none; border-bottom:1px solid var(--warm-300);
-    box-shadow:0 2px 6px rgba(0,0,0,0.06);
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+  .sidebar{display:none;}
+  body.mobile-sidebar-open .sidebar{
+    display:flex;
+    position:fixed;
+    top:0; left:0; bottom:0;
+    width:78%; max-width:280px;
+    height:100vh;
+    z-index:500;
+    box-shadow:4px 0 18px rgba(0,0,0,0.2);
+    overflow-y:auto;
   }
-  .sidebar::-webkit-scrollbar{display:none;}
-  .sidebar-hdr{display:none;}
-  .ep-item{
-    flex-direction:row; flex-shrink:0;
-    padding:7px 12px; gap:7px;
-    border-radius:20px; white-space:nowrap;
-    min-width:unset;
-  }
-  .ep-name{font-size:12px; white-space:nowrap;}
-  .lt-item{
-    flex-shrink:0; margin-top:0;
-    padding:7px 12px; border-radius:20px;
-    white-space:nowrap;
-  }
-  .lt-name{white-space:nowrap; font-size:12px;}
+  body.mobile-sidebar-open .sidebar-backdrop{display:block;}
 
   /* 콘텐츠 영역 */
   .content-area{padding:14px 12px 24px;}
@@ -664,6 +655,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 </head>
 <body>
 <div class="top-bar">
+  <button class="sidebar-toggle-btn" onclick="toggleMobileSidebar()" aria-label="메뉴">☰</button>
   <div class="level-tabs">
     <button class="level-btn level-btn-basis" onclick="setLevel(this)">Basics</button>
     <button class="level-btn active" onclick="setLevel(this)">Level 1</button>
@@ -704,6 +696,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
   </div>
 </div>
 
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileSidebar()"></div>
 <div class="main-layout">
   <div class="sidebar">
     <div class="sidebar-hdr">📺 Episodes</div>
@@ -715,6 +708,13 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 </div>
 <script>
 const EPISODE_DATA = {};
+
+function toggleMobileSidebar(){ document.body.classList.toggle('mobile-sidebar-open'); }
+function closeMobileSidebar(){ document.body.classList.remove('mobile-sidebar-open'); }
+document.addEventListener('click', function(e){
+  if(!document.body.classList.contains('mobile-sidebar-open')) return;
+  if(e.target.closest('.ep-item') || e.target.closest('.lt-item')) closeMobileSidebar();
+});
 
 let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
 let quizMode='mc',quizIdx=0,quizScore=0;

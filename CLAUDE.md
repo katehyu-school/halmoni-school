@@ -463,7 +463,7 @@ const urlName   = _hc ? _hc.urlName : null;
 - **웹 = 깊은 학습 허브 / 앱 = 5~10분 마이크로러닝** (복습·프리뷰·SRS)
 - 여기도 투 트랙: **Kids = 게임 베이스** (모험 맵 + 블록 게임) / **HQ (미들+성인) = 웹 연계 복습** (Watch→Learn→Practice→Review 4단계)
 - **단일 앱 멀티뷰**: 프로필 선택에 따라 전체 UI 테마가 스위칭 (Kids 크림/teal ↔ HQ 딥네이비)
-- 전략 문서: `halmoni-school_standby/한국어 교육 모바일 앱 UI_UX 전략 설계.pdf` (13p, 이미지 PDF — pdftoppm 렌더 후 읽기)
+- 전략 문서: `C:\Users\kateh\Desktop\halmoni-school_standby\한국어 교육 모바일 앱 UI_UX 전략 설계.pdf` (13p, 이미지 PDF — pdftoppm 렌더 후 읽기, 2026-06-14 halmoni-school 밖으로 이동)
 
 ### 기술 결정 (2026-06-12 확정)
 - **1단계 PWA** (비용 0, 심사 없음, 기존 코드/데이터 재사용) → 학생 늘면 **Capacitor**로 스토어 출시
