@@ -5201,6 +5201,7 @@ function renderBook3Unit(data) {
       '<button class="snav-btn active" onclick="b3SwitchTab(\'scene\')">🎬 영상 <span class="snav-en">Story</span></button>' +
       '<button class="snav-btn" onclick="b3SwitchTab(\'vocab\')">📕 새단어 <span class="snav-en">Vocab</span></button>' +
       '<button class="snav-btn" onclick="b3SwitchTab(\'grammar\')">📌 문법 <span class="snav-en">Grammar</span></button>' +
+      (sections.banmal_note ? '<button class="snav-btn" onclick="b3SwitchTab(\'banmal\')">💬 반말・존댓말 <span class="snav-en">Casual/Polite</span></button>' : '') +
       '<button class="snav-btn" onclick="b3SwitchTab(\'practice\')">✏️ 연습 <span class="snav-en">Practice</span></button>' +
       (sections.real_life ? '<button class="snav-btn" onclick="b3SwitchTab(\'reallife\')">🌍 실생활 <span class="snav-en">Real Life</span></button>' : '') +
       scTab +
@@ -5208,6 +5209,7 @@ function renderBook3Unit(data) {
     '<div class="section active" id="b3-tab-scene">'+renderB3Scene(data.unit)+'</div>' +
     '<div class="section" id="b3-tab-vocab">'+renderB3Vocab(sections.vocab)+'</div>' +
     '<div class="section" id="b3-tab-grammar">'+renderB3Grammar(sections.grammar)+'</div>' +
+    (sections.banmal_note ? '<div class="section" id="b3-tab-banmal">'+renderB3BanmalNote(sections.banmal_note)+'</div>' : '') +
     '<div class="section" id="b3-tab-practice">'+renderB3Practice()+'</div>' +
     (sections.real_life ? '<div class="section" id="b3-tab-reallife">'+renderB3RealLife(sections.real_life)+'</div>' : '') +
     scDiv +
@@ -5220,7 +5222,7 @@ function renderBook3Unit(data) {
 }
 
 function b3SwitchTab(tab) {
-  ['scene','vocab','grammar','practice','reallife','selfcheck'].forEach(t => {
+  ['scene','vocab','grammar','banmal','practice','reallife','selfcheck'].forEach(t => {
     const el = document.getElementById('b3-tab-'+t);
     if (el) el.classList.toggle('active', t===tab);
   });
@@ -5587,6 +5589,68 @@ function renderB3RealLife(rl) {
     }
     out += '</div></div>';
   });
+  out += '</div>';
+  return out;
+}
+
+function renderB3BanmalNote(bn) {
+  if (!bn) return '<div class="card"><p style="color:#aaa;text-align:center;padding:40px;">준비 중...</p></div>';
+  let out = '<div class="card">';
+  out += '<div class="section-title">' + (bn.title_ko||'💬 반말 & 존댓말') + '</div>';
+  if (bn.title_en) out += '<div class="section-sub">' + bn.title_en + '</div>';
+
+  (bn.examples||[]).forEach(ex => {
+    const sp1 = (ex.text||'').replace(/^[^:：]*[:：]\s*/,'').replace(/'/g,"&#39;");
+    const sp2 = (ex.text2||'').replace(/^[^:：]*[:：]\s*/,'').replace(/'/g,"&#39;");
+    out += '<div style="background:#FFF8E9;border:1.5px solid #F0C980;border-radius:14px;padding:14px 18px;margin:14px 0;">';
+    out += '<div style="display:flex;align-items:center;gap:8px;font-family:\'Jua\',sans-serif;font-size:0.98rem;color:#5d4a1f;">' +
+      '<span>' + (ex.text||'') + '</span>' +
+      '<button onclick="speakKorean(\'' + sp1 + '\')" style="background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:.6;">🔊</button></div>';
+    if (ex.text2) {
+      out += '<div style="display:flex;align-items:center;gap:8px;font-family:\'Jua\',sans-serif;font-size:0.98rem;color:#5d4a1f;margin-top:6px;">' +
+        '<span>' + ex.text2 + '</span>' +
+        '<button onclick="speakKorean(\'' + sp2 + '\')" style="background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:.6;">🔊</button></div>';
+    }
+    if (ex.note) out += '<div style="font-size:0.85rem;color:#8a6d2f;margin-top:8px;line-height:1.5;">' + ex.note + '</div>';
+    if (ex.note_en) out += '<div style="font-size:0.78rem;color:#b3995a;margin-top:2px;">' + ex.note_en + '</div>';
+    out += '</div>';
+  });
+
+  if (bn.compare_table) {
+    const ct = bn.compare_table;
+    out += '<div style="margin-top:10px;">';
+    out += '<div style="font-family:\'Jua\',sans-serif;font-size:1rem;color:#333;margin-bottom:2px;">' + (ct.title_ko||'') + '</div>';
+    if (ct.title_en) out += '<div style="font-size:0.8rem;color:#888;margin-bottom:10px;">' + ct.title_en + '</div>';
+    (ct.groups||[]).forEach(grp => {
+      out += '<div style="margin:10px 0 16px;">';
+      out += '<div style="font-size:0.85rem;color:#0D7B75;font-weight:700;margin-bottom:6px;">' + (grp.label_ko||'') + '</div>';
+      if (grp.label_en) out += '<div style="font-size:0.75rem;color:#999;margin-bottom:6px;">' + grp.label_en + '</div>';
+      out += '<table style="width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);font-size:0.9rem;">';
+      out += '<thead><tr>' +
+        '<th style="padding:8px 12px;text-align:left;background:#F5F5F5;color:#999;font-size:0.75rem;">뜻</th>' +
+        '<th style="padding:8px 12px;text-align:left;background:#FFF4F3;color:#e07856;font-size:0.75rem;">반말</th>' +
+        '<th style="padding:8px 12px;text-align:left;background:#E6F5F3;color:#0D7B75;font-size:0.75rem;">존댓말</th>' +
+        '</tr></thead><tbody>';
+      (grp.rows||[]).forEach(r => {
+        const b = (r.banmal||'').replace(/'/g,"&#39;");
+        const j = (r.jondaemal||'').replace(/'/g,"&#39;");
+        out += '<tr>' +
+          '<td style="padding:8px 12px;color:#999;font-size:0.8rem;">' + (r.base||'') + '<br><span style="font-size:0.72rem;">' + (r.en||'') + '</span></td>' +
+          '<td style="padding:8px 12px;font-family:\'Jua\',sans-serif;color:#e07856;">' + (r.banmal||'') + ' <button onclick="speakKorean(\''+b+'\')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;opacity:.5;">🔊</button></td>' +
+          '<td style="padding:8px 12px;font-family:\'Jua\',sans-serif;color:#0D7B75;">' + (r.jondaemal||'') + ' <button onclick="speakKorean(\''+j+'\')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;opacity:.5;">🔊</button></td>' +
+          '</tr>';
+      });
+      out += '</tbody></table></div>';
+    });
+    out += '</div>';
+  }
+
+  if (bn.tip_ko) {
+    out += '<div style="background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:12px;padding:12px 16px;font-size:0.88rem;color:#3d7a5c;line-height:1.6;margin-top:6px;">' +
+      bn.tip_ko + (bn.tip_en ? '<div style="font-size:0.78rem;color:#7aa593;margin-top:4px;">' + bn.tip_en + '</div>' : '') +
+      '</div>';
+  }
+
   out += '</div>';
   return out;
 }

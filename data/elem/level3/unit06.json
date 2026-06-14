@@ -815,6 +815,48 @@
           }
         }
       ]
+    },
+    "banmal_note": {
+      "title_ko": "💬 반말 & 존댓말 — 할머니한테 vs 친구한테",
+      "title_en": "Polite with grandma vs. casual with friends",
+      "examples": [
+        {
+          "text": "카요: 할머니, 제 김밥에는 계란 넣지 마세요.",
+          "text2": "할머니: 알고 있어요. 카요 김밥은 이거야.",
+          "note": "카요는 할머니께 존댓말(마세요), 할머니는 손주한테 반말(이거야)로 답해요.",
+          "note_en": "Kayo speaks politely to grandma (마세요), while grandma replies casually (이거야)."
+        },
+        {
+          "text": "친구: 여기서 뛰어도 돼?",
+          "text2": "친구2: 아니, 복도에서 뛰면 안 돼.",
+          "note": "친구끼리는 둘 다 반말!",
+          "note_en": "Between friends, both sides use casual speech."
+        }
+      ],
+      "compare_table": {
+        "title_ko": "같은 말, 두 가지 모습",
+        "title_en": "Same word, two forms",
+        "groups": [
+          {
+            "label_ko": "되다/이다 — '요'만 빼면 반말!",
+            "label_en": "되다/이다 — just drop '요'",
+            "rows": [
+              { "base": "되다", "banmal": "돼", "jondaemal": "돼요", "en": "okay / allowed" },
+              { "base": "이다", "banmal": "이거야", "jondaemal": "이거예요", "en": "this is" }
+            ]
+          },
+          {
+            "label_ko": "마세요 → 마! (반말 명령)",
+            "label_en": "마세요 → 마! (casual command)",
+            "rows": [
+              { "base": "넣다", "banmal": "넣지 마", "jondaemal": "넣지 마세요", "en": "don't put in" },
+              { "base": "뛰다", "banmal": "뛰지 마", "jondaemal": "뛰지 마세요", "en": "don't run" }
+            ]
+          }
+        ]
+      },
+      "tip_ko": "할머니나 선생님께는 존댓말(마세요), 친구나 동생한테는 반말(마!)을 써요.",
+      "tip_en": "Use polite speech (마세요) with grandma or teachers, but casual speech (마!) with friends or siblings."
     }
   },
   "self_check": [
