@@ -434,6 +434,29 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
+## ✅ 2026-06-12 완료 작업 (Typecast TTS 전체 교체 + Clova 제거)
+
+- **Typecast TTS 251줄 전체 교체** — 고음질(44.1kHz) Basic 플랜으로 재다운로드, 기존 mp3 전부 교체 (244개 파일)
+- **기존 `audio:null`(기본 브라우저 TTS) 콘텐츠도 Typecast 신규 녹음 연결**:
+  - Kids L3 unit01 (곰 세 마리) — 12줄, `data/elem/level3/TTS/L3_01/` 신규
+  - Kids L2 unit07 (숫자 놀이를 해요) — 7줄(일부 concat), `data/elem/level2/TTS/L2_07/` 신규
+- **Kids L2 unit09 (할아버지 생신이에요)** — 콤바인 오디오 라인 1·3 교체 완료 (라인 2는 이전 세션에 완료) → 3줄 모두 신규 음성
+- **Kids L2 unit06 캐릭터명 오류 수정**: "누리야" → "카요야" (새 Typecast 녹음 기준 + 캐릭터 명부 정합) — 파일명도 리네임
+- **nhs.html: Clova Dubbing 출처 표기 전부 제거** (Typecast 유료 플랜 → 출처 표기 불필요)
+  - `.clova-credit`/`.video-credit` CSS, scene-panel 크레딧 div, video-credit div, `initSceneViewer()` 내 크레딧 표시 로직 삭제
+- commit `4efac78` 완료 — push는 선생님 VS Code 터미널에서
+- ✅ **HQ_L1_ep03 TTS 13줄 전체 교체 완료** (2026-06-13, commit `89e9cf7`) — 03~13번 11줄 신규 교체 (01·02는 이전 세션에 완료)
+  - ⚠️ 새 zip에 `audio_4_엄마가_우리를_불러요_.mp3` (Mom calls us) 추가 음성이 있었으나, 현재 ep03.json script에는 없는 대사 — 선생님 확인 결과 **대본에 추가 안 함** (해당 파일은 미사용)
+- ✅ **L2_06 "카요야" 수정 확인 완료** — 처음 웹 제작 시 이름 미승인으로 임시 표기였던 것 교정 (선생님 확인 완료)
+- ⚠️ **확인 요청 — L2_06 "카요야" 수정**: 캐릭터 명부상 누리는 존재하지 않아 카요로 교정했으나, 의도한 캐릭터가 맞는지 선생님 확인 필요
+- ✅ **HQ Kids Level 1 자모 TTS 교체** (commit `742b06b`) — 새 Typecast 음원(모음.zip 21개/자음.zip 14개/가나다.zip 14개)을 `data/elem/level1/TTS/{vowels,consonants,syllables}/`로 정리
+  - `korean-app_v2.html`에 `b1SpeakSound(text)` 함수 + 매핑 테이블(B1_VOWEL_AUDIO, B1_CONSONANT_NAME_AUDIO, B1_SYLLABLE_AUDIO, B1_VOWEL_NAME_TO_CHAR, B1_CHO_TO_GA) 추가 — 음원 있으면 재생, 없으면 b1Speak(브라우저 TTS) 폴백
+  - unit00(한글 블럭 세계 예비과 — 모음/자음 이름 카드 + 음절 만들기), unit01(기본 모음 — 영어 로마자 오발음 버그 수정: `v.sound`→`v.char`), unit02(복합 모음 ㅐㅒㅔㅖㅘㅙㅚㅝㅞㅟㅢ), unit03(기본 자음 14개 — 가나다라마바사아자차카타파하 전부 신규 음성), unit04(거센소리 카타파 + base 자음) 적용
+  - ⚠️ unit04 쌍자음(까따빠싸짜)은 제공된 zip에 없어 여전히 브라우저 TTS 폴백 — `consonant_combo`(36개, 자음+첫소리.zip)는 받침(09/10과) 등 향후 활용 위해 보관, 아직 미연동
+  - null byte 검증 완료(0), JS 문법 검증 완료
+
+---
+
 ## 📱 모바일 앱 프로젝트 (2026-06-12 시작 — 신규 메인 트랙)
 
 ### 컨셉
@@ -954,4 +977,46 @@ const urlName   = _hc ? _hc.urlName : null;
   - **✏️ Korean Writing 탭**: 캔버스 자유 필기 + 한글 힌트 단어 (클릭 시 확대)
   - **🎨 My Style 탭**: 이모지 아바타, 테마 컬러, 닉네임 변경 + 에피소드 배지 시스템
   - **에피소드 배지**: 각 에피소드에 첫 노트 저장 시 배지 해제 (ep01~ep10 + basics)
-  - **이모지 아바타**: `NMS_AVATARS = ['🦊','🐨','🐯','🦋','🐬','🦅','🌙','⚡','🎸','
+  - **이모지 아바타**: `NMS_AVATARS = ['🦊','🐨','🐯','🦋','🐬','🦅','🌙','⚡','🎸','🏄','🎯','🌿']`
+  - **영어 병기 완료**: 모든 UI 텍스트 한영 병기 (13세 학생 배려)
+- **localStorage 구조** (nhs):
+  - `nms_profiles` — 프로필 이름 배열
+  - `nms_current` — 현재 활성 프로필
+  - `nms_{name}_color` — 테마 컬러
+  - `nms_{name}_av` — 이모지 아바타 (기본값 🦊)
+  - `nms_{name}_notes` — 노트 배열 `{id, ep, text, date}`
+
+### 🏆 가족 AI 컨테스트 우승! (2026-06-01)
+- Hangeul Quest 앱으로 가족 AI 컨테스트에서 우승
+
+### 성인반 sejong-korean_v1.html
+- **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
+
+---
+
+## 🆕 Hangeul Quest (구 NHS — New Halmoni School) — 개발 중
+
+### 배경
+- 세종한국어2022 / 한글학교 한국어 → CC 4유형 (출처표시 + 상업적이용금지 + 변경금지)
+- 저작권 제약 없이 선생님 오리지널 커리큘럼으로 완전 독립
+- 앱 하나로 수업 전체가 이루어지는 구조 (부교재 → 메인)
+
+### 핵심 컨셉: 장면 기반 학습 (Scene-First)
+- 생활 속 한 장면이 유닛 전체를 이끔
+- 장면 예시: 한국 공원, 재래시장, 치킨집 주문, 놀이동산, 한국 요리, 여행...
+- 장면 → 단어 → 문법 → 대화 → 듣기 순으로 자연스럽게 파생
+- "왜 이걸 배우는지" 맥락 먼저 — 기존 구조(단어/문법 먼저)와 차별화
+
+### 이미지 전략
+- AI 이미지 생성 (Midjourney / DALL-E 등) 으로 장면 시각화
+- 저작권 걱정 없이 원하는 한국적 장면 직접 생성
+- 영상 TTS: **Clova Dubbing** 사용 → 영상 내 5초 출처 자막 필수
+
+---
+
+## 🏗 NHS 파일 아키텍처
+
+### 설계 원칙
+- **`nhs.html`** = 범용 렌더러만 — 콘텐츠 없음
+- **에피소드 추가 = 폴더 하나만 추가** — nhs.html/core 건드릴 필요 없음
+- **슬라이드·음성 경로는 data.json에 기록** — 렌더러가 경로만 참조
