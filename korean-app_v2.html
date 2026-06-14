@@ -1570,6 +1570,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">08</span>
     <span class="lesson-title-text">할 수 있다!</span>
   </div>
+  <div class="lesson-item" id="b3-lesson-9" onclick="switchBook3Unit(9)">
+    <span class="lesson-num">09</span>
+    <span class="lesson-title-text">할아버지, 아직 멀었어요?</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -5151,7 +5155,7 @@ async function loadBook3Unit(n) {
 }
 
 async function switchBook3Unit(n) {
-  [1,2,3,4,5,6,7,8].forEach(i => {
+  [1,2,3,4,5,6,7,8,9].forEach(i => {
     const el = document.getElementById('b3-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
@@ -9612,6 +9616,33 @@ const B3_SCENE_DATA = {
       [{ko:'셋 중에 제일 멋있어! 최고야!', en:'The coolest among the three! The best!', audio:'data/elem/level3/TTS/L3_08/06셋+중에+제일+멋있어!+최고야!_slide6.mp3'}],
       [{ko:'근데 글씨가 좀 수상해.', en:'But the handwriting looks a bit suspicious...', audio:'data/elem/level3/TTS/L3_08/07근데+글씨가+좀+수상해_slide7.mp3'},
        {ko:'큭 큭!', en:'Hehe!', audio:'data/elem/level3/TTS/L3_08/08큭큭!_slide7.mp3'}],
+    ]
+  },
+  9: {
+    title: '할아버지, 아직 멀었어요?',
+    slides: [
+      'data/elem/level3/slides/L3_09/아직멀었어요_1.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_2.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_3.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_4.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_5.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_6.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_7.png',
+      'data/elem/level3/slides/L3_09/아직멀었어요_8.png',
+    ],
+    script: [
+      [{ko:'오늘 형하고 나는 외갓집에서 자요.', en:'Today, my brother and I are sleeping at grandma\'s house.', audio:'data/elem/level3/TTS/L3_09/audio_0_오늘_형하고_나는_외갓집에서_자요_.mp3'}],
+      [{ko:'형, 엄마 아빠는 지금 어디에 있어?', en:'Hyung, where are mom and dad right now?', audio:'data/elem/level3/TTS/L3_09/audio_1_형__엄마_아빠는_지금_어디에_있어_.mp3'},
+       {ko:'나이아가라에 있어.', en:"They're in Niagara.", audio:'data/elem/level3/TTS/L3_09/audio_2_나이아가라에_있어_.mp3'}],
+      [{ko:'내일 우리가 외갓집에서 거기에 갈거야?', en:'Are we going there tomorrow from grandma\'s house?', audio:'data/elem/level3/TTS/L3_09/audio_3_내일_우리가_외갓집에서_거기에_갈거야_.mp3'},
+       {ko:'응.', en:'Yeah.', audio:'data/elem/level3/TTS/L3_09/audio_4_응.mp3'}],
+      [{ko:'할아버지, 여기부터 나이아가라까지 얼마나 걸려요?', en:'Grandpa, how long does it take from here to Niagara?', audio:'data/elem/level3/TTS/L3_09/audio_5_할아버지__여기부터_나이아가라까지_얼마나_걸려요_.mp3'},
+       {ko:'아마 두 시간은 걸릴거야.', en:"It'll probably take about two hours.", audio:'data/elem/level3/TTS/L3_09/audio_6_아마__두_시간은_걸릴거야_.mp3'}],
+      [{ko:'가위, 바위, 보!', en:'Rock, paper, scissors!', audio:'data/elem/level3/TTS/L3_09/audio_7_가위__바위__보_.mp3'},
+       {ko:'하나 빼기!', en:'One, take away!', audio:'data/elem/level3/TTS/L3_09/audio_8_하나__빼기_.mp3'}],
+      [{ko:'아직 멀었어요?', en:'Are we still far away?', audio:'data/elem/level3/TTS/L3_09/audio_9_아직_멀었어요_.mp3'}],
+      [{ko:'할머니, 이제 몇 분 남았어요?', en:'Grandma, how many minutes are left now?', audio:'data/elem/level3/TTS/L3_09/audio_10_할머니_이제_몇_분_남았어요_.mp3'}],
+      [],
     ]
   }
 };

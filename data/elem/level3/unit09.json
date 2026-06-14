@@ -1,0 +1,683 @@
+{
+  "unit": 9,
+  "title": "🚗 할아버지, 아직 멀었어요?",
+  "book": 3,
+  "goal": {
+    "ko": "방향을 말할 수 있어요! 🚗",
+    "en": "I can talk about direction and distance!"
+  },
+  "key_points": [
+    "에 / 에서 — 방향 (어디로 / 어디에서)",
+    "여기부터 ~까지 — 거리·구간 표현",
+    "걸리다 / 남다 / 멀다 / 가깝다 — 시간과 거리"
+  ],
+  "sections": {
+    "vocab": {
+      "📍 장소 Places": [
+        { "emoji": "🏡", "kr": "외갓집", "en": "grandma's house (mom's side)", "rom": "oe-gat-jip" },
+        { "emoji": "👉", "kr": "여기", "en": "here", "rom": "yeo-gi" },
+        { "emoji": "👈", "kr": "저기", "en": "over there", "rom": "jeo-gi" },
+        { "emoji": "👇", "kr": "거기", "en": "there", "rom": "geo-gi" }
+      ],
+      "⏰ 시간 표현 Time Words": [
+        { "emoji": "⏰", "kr": "지금", "en": "now", "rom": "ji-geum" },
+        { "emoji": "⏳", "kr": "이제", "en": "now / from now on", "rom": "i-je" },
+        { "emoji": "🙄", "kr": "아직", "en": "still / not yet", "rom": "a-jik" },
+        { "emoji": "🤷", "kr": "아마", "en": "probably / maybe", "rom": "a-ma" },
+        { "emoji": "⌚", "kr": "시간", "en": "time / hour", "rom": "si-gan" },
+        { "emoji": "🕐", "kr": "분", "en": "minute", "rom": "bun" }
+      ],
+      "🚗 거리 & 이동 Distance & Travel": [
+        { "emoji": "⏱️", "kr": "걸리다 / 걸려요", "en": "to take (time) / it takes", "rom": "geol-li-da / geol-lyeo-yo" },
+        { "emoji": "⏳", "kr": "남다 / 남았어요", "en": "to remain / is left", "rom": "nam-da / na-ma-sseo-yo" },
+        { "emoji": "🛣️", "kr": "멀다 / 멀어요", "en": "to be far / is far", "rom": "meol-da / meo-reo-yo", "note": "멀었어요? = are we still far? (자주 쓰는 표현!)" },
+        { "emoji": "🏠", "kr": "가깝다 / 가까워요", "en": "to be close / is close", "rom": "ga-kkap-da / ga-kka-wo-yo", "note": "멀다 ↔ 가깝다 — 반대말!" }
+      ],
+      "🎮 숫자 & 놀이 Numbers & Games": [
+        { "emoji": "➕", "kr": "더하기", "en": "addition / plus", "rom": "deo-ha-gi" },
+        { "emoji": "➖", "kr": "빼기", "en": "subtraction / minus", "rom": "ppae-gi" },
+        { "emoji": "❓", "kr": "얼마나", "en": "how much / how long", "rom": "eol-ma-na" },
+        { "emoji": "✌️", "kr": "가위바위보", "en": "rock-paper-scissors", "rom": "ga-wi-ba-wi-bo" },
+        { "emoji": "🤚", "kr": "하나 빼기", "en": "\"one, take away!\" (game)", "rom": "ha-na ppae-gi", "note": "가위바위보의 변형 게임 — 양손으로 다른 모양을 냈다가 하나를 숨겨요!" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g09_e_eseo",
+          "title": "에 / 에서 — 어디로? 어디에서?",
+          "subtitle": "Direction: to (에) vs from / at (에서)",
+          "pattern": "장소 + 에 (가다/오다/있다) · 장소 + 에서 (출발하다/자다/놀다)",
+          "meaning": "to (a place) / from (a place), at (a place)",
+          "description": "에 shows the place you're going TO or where something IS (arrow pointing IN). 에서 shows the place you're coming FROM (arrow pointing OUT), or the place WHERE an action happens. Same place word, different meaning!",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 장소 + 에 = to / at (destination, existence)",
+              "examples": [
+                "나이아가라에 가요. (Going to Niagara.)",
+                "나이아가라에 있어요. (It's in Niagara.)",
+                "외갓집에 가요. (Going to grandma's house.)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 장소 + 에서 = from (origin) · at (doing something)",
+              "examples": [
+                "외갓집에서 출발해요. (Starting from grandma's house.)",
+                "외갓집에서 자요. (Sleeping AT grandma's house.)",
+                "여기에서 놀아요. (Playing here.)"
+              ]
+            },
+            {
+              "color": "amber",
+              "label": "💡 같은 장소, 다른 방향/뜻",
+              "examples": [
+                "외갓집에 가요 (TO grandma's) ↔ 외갓집에서 와요 (FROM grandma's)",
+                "에 = arrow points TO the place",
+                "에서 = arrow points FROM the place, or 'doing something there'"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "내일 우리가 외갓집에서 거기에 갈 거야?",
+              "english": "Are we going there tomorrow from grandma's house?",
+              "highlight": "외갓집에서 ... 거기에"
+            }
+          ]
+        },
+        {
+          "id": "g09_buteo_kkaji",
+          "title": "여기부터 ~까지 — 거리를 말해요",
+          "subtitle": "from ~ to ~ (place range / distance)",
+          "pattern": "장소 + 부터 + 장소 + 까지",
+          "meaning": "from (place) to (place)",
+          "description": "부터 marks the starting point and 까지 marks the ending point. Use them together to talk about the distance between two places — like 'from here to Niagara'.",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 N부터 N까지 = from N to N",
+              "examples": [
+                "여기부터 나이아가라까지 (from here to Niagara)",
+                "집부터 학교까지 (from home to school)",
+                "서울부터 부산까지 (from Seoul to Busan)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 얼마나 걸려요? = how long does it take?",
+              "examples": [
+                "여기부터 나이아가라까지 얼마나 걸려요? (How long from here to Niagara?)",
+                "두 시간 걸려요. (It takes two hours.)"
+              ]
+            },
+            {
+              "color": "amber",
+              "label": "💡 에/에서 vs 부터/까지",
+              "examples": [
+                "에/에서 = simple to/from (one place)",
+                "부터/까지 = the whole range, both ends together",
+                "여기에서 가요 (from here) vs 여기부터 ~까지 (from here ALL THE WAY to ~)"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "할아버지, 여기부터 나이아가라까지 얼마나 걸려요?",
+              "english": "Grandpa, how long does it take from here to Niagara?",
+              "highlight": "여기부터 나이아가라까지"
+            }
+          ]
+        },
+        {
+          "id": "g09_geollida_namda",
+          "title": "걸리다 · 남다 · 멀다 · 가깝다",
+          "subtitle": "time taken, time left, far, close",
+          "pattern": "시간 + 걸려요 / 시간 + 남았어요 / 멀어요 / 가까워요",
+          "meaning": "it takes (time) / (time) is left / is far / is close",
+          "description": "걸리다 = how much time something takes. 남다 = how much time is left. 멀다 = far away, 가깝다 = close/near. These are exactly the words kids use to ask 'are we there yet?' on a road trip!",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 시간 + 걸려요 = it takes (time)",
+              "examples": [
+                "두 시간 걸려요. (It takes two hours.)",
+                "얼마나 걸려요? (How long does it take?)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 몇 분 남았어요? = how many minutes are left?",
+              "examples": [
+                "이제 몇 분 남았어요? (How many minutes are left now?)",
+                "십 분 남았어요. (Ten minutes left.)"
+              ]
+            },
+            {
+              "color": "amber",
+              "label": "💡 멀어요 ↔ 가까워요",
+              "examples": [
+                "아직 멀었어요? (Are we still far?)",
+                "거의 다 왔어요! 가까워요! (Almost there! It's close!)",
+                "멀다 ↔ 가깝다 — opposites!"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "아직 멀었어요? 할머니, 이제 몇 분 남았어요?",
+              "english": "Are we still far? Grandma, how many minutes are left now?",
+              "highlight": "멀었어요? / 남았어요?"
+            }
+          ]
+        },
+        {
+          "id": "g09_geoya_geoyeyo",
+          "title": "갈 거야 / 걸릴 거예요 — 미래 (반말·존댓말)",
+          "subtitle": "future tense: casual (거야) vs polite (거예요)",
+          "pattern": "동사 어간 + -(으)ㄹ 거야 (반말) / -(으)ㄹ 거예요 (존댓말)",
+          "meaning": "will (do) / is going to",
+          "description": "Both 거야 and 거예요 mean 'will' or 'going to' — same grammar, different politeness. Use 거야 with siblings/friends (반말), 거예요 with adults like grandparents (존댓말).",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 동사 + -(으)ㄹ 거야 (반말 — 형제/친구에게)",
+              "examples": [
+                "갈 거야? (Are we going?)",
+                "두 시간은 걸릴 거야. (It'll take about two hours.)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "🟢 동사 + -(으)ㄹ 거예요 (존댓말 — 어른에게)",
+              "examples": [
+                "갈 거예요. (I will go. — polite)",
+                "두 시간 걸릴 거예요. (It will take two hours. — polite)"
+              ]
+            },
+            {
+              "color": "amber",
+              "label": "💡 같은 뜻, 다른 높임",
+              "examples": [
+                "리암 → 카요 (형제 사이): 갈 거야? (반말)",
+                "카요 → 할아버지: 걸릴 거예요? (존댓말)",
+                "Same meaning — just choose based on who you're talking to!"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "korean": "내일 우리가 거기에 갈 거야? / 아마 두 시간은 걸릴 거야.",
+              "english": "Are we going there tomorrow? / It'll probably take about two hours.",
+              "highlight": "갈 거야 / 걸릴 거야"
+            }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🛏️ 외갓집에서",
+          "scene_en": "At grandma's house",
+          "lines": [
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "오늘 형하고 나는 외갓집___ 자요.",
+              "en": "Today, my brother and I are sleeping at grandma's house.",
+              "type": "fill",
+              "ans": "에서",
+              "opts": ["에서", "에", "부터"]
+            },
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "형, 엄마 아빠는 지금 어디___ 있어?",
+              "en": "Hyung, where are mom and dad right now?",
+              "type": "fill",
+              "ans": "에",
+              "opts": ["에", "에서", "까지"]
+            },
+            {
+              "speaker": "리암",
+              "color": "blue",
+              "text": "나이아가라에 있어.",
+              "en": "They're in Niagara.",
+              "type": "given"
+            }
+          ]
+        },
+        {
+          "scene": "🚗 차를 타요",
+          "scene_en": "Getting in the car",
+          "lines": [
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "내일 우리가 외갓집에서 거기___ 갈 거야?",
+              "en": "Are we going there tomorrow from grandma's house?",
+              "type": "fill",
+              "ans": "에",
+              "opts": ["에", "에서", "부터"]
+            },
+            {
+              "speaker": "리암",
+              "color": "blue",
+              "text": "응.",
+              "en": "Yeah.",
+              "type": "given"
+            },
+            {
+              "speaker": "리암",
+              "color": "blue",
+              "text": "할아버지, 여기부터 나이아가라___ 얼마나 걸려요?",
+              "en": "Grandpa, how long does it take from here to Niagara?",
+              "type": "fill",
+              "ans": "까지",
+              "opts": ["까지", "부터", "에서"]
+            },
+            {
+              "speaker": "할아버지",
+              "color": "coral",
+              "text": "아마 두 시간은 걸릴 거야.",
+              "en": "It'll probably take about two hours.",
+              "type": "given"
+            }
+          ]
+        },
+        {
+          "scene": "🎮 가위바위보 놀이",
+          "scene_en": "Rock-paper-scissors game",
+          "lines": [
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "가위, 바위, 보!",
+              "en": "Rock, paper, scissors!",
+              "type": "given"
+            },
+            {
+              "speaker": "리암",
+              "color": "blue",
+              "text": "하나 빼기!",
+              "en": "One, take away!",
+              "type": "given"
+            },
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "아직 ___?",
+              "en": "Are we still far away?",
+              "type": "fill",
+              "ans": "멀었어요",
+              "opts": ["멀었어요", "가까워요", "걸려요"]
+            },
+            {
+              "speaker": "리암",
+              "color": "blue",
+              "text": "할머니, 이제 몇 분 ___?",
+              "en": "Grandma, how many minutes are left now?",
+              "type": "fill",
+              "ans": "남았어요",
+              "opts": ["남았어요", "걸려요", "멀어요"]
+            }
+          ]
+        }
+      ],
+      "fill_items": [
+        {
+          "q": "오늘 형하고 나는 외갓집",
+          "suffix": "자요.",
+          "ans": "에서",
+          "opts": ["에서", "에", "부터"],
+          "en": "Today my brother and I are sleeping AT grandma's house."
+        },
+        {
+          "q": "내일 우리는 나이아가라",
+          "suffix": "가요.",
+          "ans": "에",
+          "opts": ["에", "에서", "까지"],
+          "en": "Tomorrow we're going TO Niagara."
+        },
+        {
+          "q": "여기부터 나이아가라",
+          "suffix": "얼마나 걸려요?",
+          "ans": "까지",
+          "opts": ["까지", "부터", "에서"],
+          "en": "How long does it take from here TO Niagara?"
+        },
+        {
+          "q": "아마 두 시간은",
+          "suffix": "거예요.",
+          "ans": "걸릴",
+          "opts": ["걸릴", "남을", "먼"],
+          "en": "It will probably take about two hours."
+        },
+        {
+          "q": "할머니, 이제 몇 분",
+          "suffix": "?",
+          "ans": "남았어요",
+          "opts": ["남았어요", "걸려요", "가까워요"],
+          "en": "Grandma, how many minutes are left now?"
+        }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "나이아가라에 있어.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "📍", "kr": "나이아가라에 있어요", "en": "is in Niagara" },
+            { "emoji": "📍", "kr": "나이아가라에서 와요", "en": "comes from Niagara" },
+            { "emoji": "📍", "kr": "나이아가라까지 가요", "en": "goes to Niagara" }
+          ]
+        },
+        {
+          "audio": "할아버지, 여기부터 나이아가라까지 얼마나 걸려요?",
+          "correct": 0,
+          "choices": [
+            { "emoji": "⏱️", "kr": "얼마나 걸려요?", "en": "how long does it take?" },
+            { "emoji": "⏳", "kr": "몇 분 남았어요?", "en": "how many minutes are left?" },
+            { "emoji": "📍", "kr": "어디에 있어요?", "en": "where is it?" }
+          ]
+        },
+        {
+          "audio": "아마 두 시간은 걸릴 거야.",
+          "correct": 0,
+          "choices": [
+            { "emoji": "⏱️", "kr": "두 시간 걸려요", "en": "takes about 2 hours" },
+            { "emoji": "⏳", "kr": "두 시간 남았어요", "en": "2 hours are left" },
+            { "emoji": "🛣️", "kr": "두 시간 가까워요", "en": "2 hours close" }
+          ]
+        },
+        {
+          "audio": "아직 멀었어요?",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🚗", "kr": "아직 멀었어요?", "en": "are we still far?" },
+            { "emoji": "🚗", "kr": "거의 다 왔어요?", "en": "are we almost there?" },
+            { "emoji": "⏳", "kr": "몇 분 남았어요?", "en": "how many minutes left?" }
+          ]
+        },
+        {
+          "audio": "할머니, 이제 몇 분 남았어요?",
+          "correct": 0,
+          "choices": [
+            { "emoji": "⏳", "kr": "몇 분 남았어요?", "en": "how many minutes are left?" },
+            { "emoji": "⏱️", "kr": "몇 시간 걸려요?", "en": "how many hours does it take?" },
+            { "emoji": "🛣️", "kr": "얼마나 멀어요?", "en": "how far is it?" }
+          ]
+        },
+        {
+          "audio": "가위, 바위, 보! 하나 빼기!",
+          "correct": 0,
+          "choices": [
+            { "emoji": "✌️", "kr": "가위바위보 놀이", "en": "rock-paper-scissors game" },
+            { "emoji": "📖", "kr": "책 읽기", "en": "reading a book" },
+            { "emoji": "🎵", "kr": "노래 부르기", "en": "singing a song" }
+          ]
+        }
+      ],
+      "step1_chunks": [
+        {
+          "scene": "🛏️",
+          "english": "Today, my brother and I are sleeping at grandma's house.",
+          "hint": "외갓집 + 에서 + 자요",
+          "sentence": "오늘 형하고 나는 외갓집에서 자요.",
+          "chunks": [
+            { "text": "오늘 형하고 나는", "type": "name", "en": "today, my brother and I" },
+            { "text": "외갓집에서", "type": "place", "en": "at grandma's house" },
+            { "text": "자요.", "type": "verb", "en": "sleep" }
+          ]
+        },
+        {
+          "scene": "📍",
+          "english": "They're in Niagara.",
+          "hint": "나이아가라 + 에 + 있어요",
+          "sentence": "나이아가라에 있어요.",
+          "chunks": [
+            { "text": "나이아가라에", "type": "place", "en": "in Niagara" },
+            { "text": "있어요.", "type": "verb", "en": "is / are" }
+          ]
+        },
+        {
+          "scene": "🚗",
+          "english": "Are we going there tomorrow from grandma's house?",
+          "hint": "외갓집에서 + 거기에 + 갈 거예요",
+          "sentence": "내일 우리가 외갓집에서 거기에 갈 거예요?",
+          "chunks": [
+            { "text": "내일 우리가", "type": "name", "en": "we, tomorrow" },
+            { "text": "외갓집에서", "type": "place", "en": "from grandma's house" },
+            { "text": "거기에", "type": "place", "en": "there" },
+            { "text": "갈 거예요?", "type": "verb", "en": "will go?" }
+          ]
+        },
+        {
+          "scene": "⏱️",
+          "english": "Grandpa, how long does it take from here to Niagara?",
+          "hint": "여기부터 ~까지 + 얼마나 걸려요",
+          "sentence": "할아버지, 여기부터 나이아가라까지 얼마나 걸려요?",
+          "chunks": [
+            { "text": "할아버지,", "type": "name", "en": "grandpa," },
+            { "text": "여기부터 나이아가라까지", "type": "place", "en": "from here to Niagara" },
+            { "text": "얼마나 걸려요?", "type": "verb", "en": "how long does it take?" }
+          ]
+        },
+        {
+          "scene": "🚗",
+          "english": "It'll probably take about two hours.",
+          "hint": "아마 + 두 시간은 + 걸릴 거예요",
+          "sentence": "아마 두 시간은 걸릴 거예요.",
+          "chunks": [
+            { "text": "아마", "type": "particle", "en": "probably" },
+            { "text": "두 시간은", "type": "name", "en": "about two hours" },
+            { "text": "걸릴 거예요.", "type": "verb", "en": "will take" }
+          ]
+        },
+        {
+          "scene": "🚗",
+          "english": "Grandma, how many minutes are left now?",
+          "hint": "이제 + 몇 분 + 남았어요",
+          "sentence": "할머니, 이제 몇 분 남았어요?",
+          "chunks": [
+            { "text": "할머니,", "type": "name", "en": "grandma," },
+            { "text": "이제 몇 분", "type": "particle", "en": "how many minutes now" },
+            { "text": "남았어요?", "type": "verb", "en": "are left?" }
+          ]
+        }
+      ],
+      "step2_words": [
+        {
+          "scene": "📍",
+          "english": "They're in Niagara.",
+          "hint": "나이아가라 + 에 + 있어요",
+          "sentence": "나이아가라에 있어요.",
+          "answer": ["나이아가라에", "있어요."],
+          "types": ["place", "verb"]
+        },
+        {
+          "scene": "⏱️",
+          "english": "Grandpa, how long does it take from here to Niagara?",
+          "hint": "여기부터 ~까지 + 얼마나 걸려요",
+          "sentence": "할아버지, 여기부터 나이아가라까지 얼마나 걸려요?",
+          "answer": ["할아버지,", "여기부터", "나이아가라까지", "얼마나", "걸려요?"],
+          "types": ["name", "place", "place", "particle", "verb"]
+        },
+        {
+          "scene": "🐰",
+          "english": "Today my brother and I are sleeping at grandma's house, and tomorrow we'll go to Niagara!",
+          "hint": "🐰 마지막 문제! 에서 / 에 모두 사용",
+          "sentence": "오늘 형하고 나는 외갓집에서 자고, 내일 나이아가라에 갈 거예요!",
+          "answer": ["오늘", "형하고", "나는", "외갓집에서", "자고,", "내일", "나이아가라", "에", "갈", "거예요!"],
+          "types": ["particle", "name", "name", "place", "verb", "particle", "place", "particle", "verb", "verb"]
+        }
+      ],
+      "write_items": [
+        {
+          "prompt": "에/에서로 방향을 말해봐요 ✏️",
+          "question": "우리 가족은 어디___ 가요? (학교)",
+          "question_en": "Where is our family going? (school)",
+          "hint": "장소 + 에",
+          "answer": "학교에 가요.",
+          "answer_en": "We're going to school."
+        },
+        {
+          "prompt": "부터~까지로 거리를 말해봐요 ✏️",
+          "question": "집___ 학교___ 얼마나 걸려요?",
+          "question_en": "How long does it take from home to school?",
+          "hint": "집부터 학교까지 + 얼마나 걸려요?",
+          "answer": "집부터 학교까지 십 분 걸려요.",
+          "answer_en": "It takes 10 minutes from home to school."
+        },
+        {
+          "prompt": "자유롭게 써봐요 ✏️",
+          "question": "여행 갈 때 '아직 멀었어요?'라고 말해봐요!",
+          "question_en": "Say 'Are we there yet?' on a trip!",
+          "hint": "아직 멀었어요? / 이제 몇 분 남았어요?",
+          "answer": "할머니, 아직 멀었어요? 이제 몇 분 남았어요?",
+          "answer_en": "Grandma, are we still far? How many minutes are left now?"
+        }
+      ]
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 대화 — Real Life Dialogues",
+      "subtitle": "방향과 거리, 그리고 한국 아이들의 놀이!",
+      "dialogues": [
+        {
+          "title": "🚕 대화 1 — 여기서 얼마나 걸려요?",
+          "title_en": "How long does it take from here?",
+          "bg": "#E3F2FD",
+          "hdr": "#1565C0",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#64B5F6",
+              "kr": "여기에서 공원까지 얼마나 걸려요?",
+              "en": "How long does it take from here to the park?"
+            },
+            {
+              "role": "A",
+              "color": "#1565C0",
+              "kr": "한 십 분쯔 걸려요.",
+              "en": "It takes about ten minutes."
+            },
+            {
+              "role": "Q",
+              "color": "#64B5F6",
+              "kr": "그럼 거의 다 왔네요! 가까워요?",
+              "en": "Then we're almost there! Is it close?"
+            },
+            {
+              "role": "A",
+              "color": "#1565C0",
+              "kr": "네, 가까워요. 조금만 더 가면 도착해요.",
+              "en": "Yes, it's close. Just a little further and we'll arrive."
+            }
+          ],
+          "summary": {
+            "kr": "여기에서 ~까지 + 얼마나 걸려요? — 거리와 시간을 물을 때 사용해요.",
+            "en": "Use 'from here to ~, how long does it take?' to ask about distance and time.",
+            "highlight": "얼마나 걸려요? / 가까워요"
+          }
+        },
+        {
+          "title": "🤚 대화 2 — '하나 빼기'가 뭐예요?",
+          "title_en": "What is '하나 빼기'?",
+          "bg": "#FFF8E1",
+          "hdr": "#F9A825",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#FFD54F",
+              "kr": "할머니, '하나 빼기'가 뭐예요?",
+              "en": "Grandma, what is '하나 빼기'?"
+            },
+            {
+              "role": "A",
+              "color": "#F9A825",
+              "kr": "가위바위보처럼 손을 내는데, 한 손이 아니라 양손으로 다른 모양을 내요!",
+              "en": "It's like rock-paper-scissors, but instead of one hand, you show two different shapes — one with each hand!"
+            },
+            {
+              "role": "Q",
+              "color": "#FFD54F",
+              "kr": "그다음에는요?",
+              "en": "What happens next?"
+            },
+            {
+              "role": "A",
+              "color": "#F9A825",
+              "kr": "'하나 빼기!' 하면 두 손 중에 하나를 숨겨야 해요. 어떤 손이 남을지 몰라서 더 재미있어요!",
+              "en": "When someone says '하나 빼기!' (one, take away!), you have to hide one of your two hands. It's more exciting because nobody knows which hand will be left!"
+            }
+          ],
+          "summary": {
+            "kr": "'하나 빼기'는 가위바위보의 변형 놀이예요 — 두 손으로 다른 모양을 냈다가, '하나 빼기!'에서 한 손을 숨겨요.",
+            "en": "'하나 빼기' is a rock-paper-scissors variation — show two different hand shapes, then hide one hand on '하나 빼기!' (one, take away).",
+            "highlight": "하나 빼기!"
+          }
+        },
+        {
+          "title": "🏠 대화 3 — 멀어요? 가까워요?",
+          "title_en": "Is it far or close?",
+          "bg": "#F3E5F5",
+          "hdr": "#6A1B9A",
+          "lines": [
+            {
+              "role": "Q",
+              "color": "#BA68C8",
+              "kr": "할아버지 댁이 여기서 멀어요?",
+              "en": "Is grandpa's house far from here?"
+            },
+            {
+              "role": "A",
+              "color": "#6A1B9A",
+              "kr": "아니요, 가까워요. 차로 십 분이면 가요.",
+              "en": "No, it's close. It's just a ten-minute drive."
+            },
+            {
+              "role": "Q",
+              "color": "#BA68C8",
+              "kr": "다행이에요! 아직 멀면 지겨워요.",
+              "en": "Good! It's boring if it's still far."
+            },
+            {
+              "role": "A",
+              "color": "#6A1B9A",
+              "kr": "맞아요. 가까워서 금방 도착할 거예요.",
+              "en": "Right. It's close, so we'll arrive soon."
+            }
+          ],
+          "summary": {
+            "kr": "멀다 ↔ 가깝다 — 거리를 말할 때 쓰는 반대말 형용사예요.",
+            "en": "멀다 (far) and 가깝다 (close) are opposite adjectives used to describe distance.",
+            "highlight": "멀어요 / 가까워요"
+          }
+        }
+      ]
+    }
+  },
+  "self_check": [
+    {
+      "ko": "에/에서로 방향을 말할 수 있어요.",
+      "en": "I can express direction using 에 (to) and 에서 (from/at)."
+    },
+    {
+      "ko": "여기부터 ~까지로 거리를 말할 수 있어요.",
+      "en": "I can describe distance using ~부터 ~까지 (from~to)."
+    },
+    {
+      "ko": "걸리다, 남다, 멀다, 가깝다를 알아요.",
+      "en": "I know 걸리다 (takes time), 남다 (is left), 멀다 (far), 가깝다 (close)."
+    },
+    {
+      "ko": "갈 거야 / 갈 거예요로 미래를 말할 수 있어요.",
+      "en": "I can talk about the future using 갈 거야 (casual) / 갈 거예요 (polite)."
+    },
+    {
+      "ko": "'하나 빼기' 놀이를 알아요!",
+      "en": "I know the Korean kids' game '하나 빼기' (one, take away)!"
+    }
+  ]
+}
