@@ -126,6 +126,17 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .dq-item.done .dq-check{background:var(--teal);border-color:var(--teal);color:#06303a}
 .dq-item.done span{color:#7e98a5;text-decoration:line-through}
 .dq-xp{margin-left:auto;font-size:.68rem;color:var(--gold);font-weight:700}
+/* episode list */
+.ep-item{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:13px 15px;margin-bottom:10px;color:#eaf4f3;transition:transform .12s}
+.ep-item:active{transform:scale(.98)}
+.ep-item .ep-no{width:44px;height:44px;border-radius:13px;background:rgba(78,205,196,.14);border:1px solid rgba(78,205,196,.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.ep-item .ep-no b{font-size:.78rem;color:var(--teal)}
+.ep-item .ep-no span{font-size:1rem}
+.ep-item .ep-ti{font-size:.9rem;font-weight:700}
+.ep-item .ep-sub{font-size:.68rem;color:#8fb0ad;margin-top:2px}
+.ep-item .arr{margin-left:auto;color:var(--teal);font-weight:900}
 .stepper{display:flex;justify-content:space-between;padding:14px 26px 4px;position:relative}
 .stepper::before{content:'';position:absolute;left:48px;right:48px;top:29px;height:3px;background:rgba(255,255,255,.12)}
 .step{display:flex;flex-direction:column;align-items:center;gap:5px;z-index:2;font-size:.6rem;color:#7e98a5}
@@ -133,18 +144,38 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .step.on{color:var(--teal)}.step.on .sc{background:var(--teal);border-color:var(--teal);color:#06303a;font-weight:900}
 .step.past .sc{background:#1f5a54;border-color:#2da89f;color:#bdeae6}
 .flow-body{flex:1;padding:10px 18px 24px;display:flex;flex-direction:column;gap:12px}
+.w-slide{width:100%;border-radius:14px;display:block;margin-bottom:12px;border:1px solid rgba(255,255,255,.12)}
 .scene-line{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
 .scene-line .who{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:rgba(255,255,255,.1)}
-.bubble{background:rgba(255,255,255,.08);border-radius:4px 16px 16px 16px;padding:10px 13px;flex:1}
+.bubble{background:rgba(255,255,255,.08);border-radius:4px 16px 16px 16px;padding:10px 13px;flex:1;transition:background .2s}
+.bubble.playing{background:rgba(78,205,196,.18)}
 .bubble .ko{font-size:.95rem;font-weight:500}
 .bubble .en{font-size:.7rem;color:#8fb0ad;margin-top:3px}
 .bubble .spk{font-size:.62rem;color:var(--teal);font-weight:700;margin-bottom:2px}
 .tts-sm{font-size:.95rem;opacity:.8;padding:2px 4px}
-.gcard-pattern{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.35);border-radius:12px;padding:11px;text-align:center;font-weight:700;color:var(--teal);font-size:.95rem;margin-bottom:10px}
+.watch-toggle{display:flex;gap:8px;margin-bottom:10px}
+.wt-btn{flex:1;text-align:center;padding:9px;border-radius:12px;font-size:.78rem;font-weight:700;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#9fb6c9}
+.wt-btn.on{background:var(--teal);color:#06303a;border-color:var(--teal)}
+.sh-prog{text-align:center;font-size:.7rem;color:#7e98a5;margin-bottom:2px}
+.sh-bubble{background:rgba(255,255,255,.08);border-radius:16px;padding:14px;text-align:center}
+.sh-bubble .spk{font-size:.68rem;color:var(--teal);font-weight:700;margin-bottom:4px}
+.sh-bubble .ko{font-size:1.15rem;font-weight:700;line-height:1.45}
+.sh-bubble .en{font-size:.78rem;color:#8fb0ad;margin-top:6px}
+.sh-listen{background:var(--teal);color:#06303a;font-weight:900;font-size:1rem;padding:13px;border-radius:14px;text-align:center;width:100%}
+.sh-listen:active{opacity:.85}
+.sh-hint{text-align:center;font-size:.7rem;color:#7e98a5;margin:2px 0}
+.sh-rec-row{display:flex;gap:10px}
+.sh-rec{flex:1;padding:13px;border-radius:14px;font-weight:900;font-size:.88rem;text-align:center;background:var(--coral);color:#fff}
+.sh-rec.recording{background:#d94f4f;animation:pulse 1.2s infinite}
+.sh-play{flex:1;padding:13px;border-radius:14px;font-weight:900;font-size:.88rem;text-align:center;background:rgba(255,255,255,.1);color:#eaf4f3;border:1px solid rgba(255,255,255,.18)}
+.sh-nav{display:flex;justify-content:space-between;gap:10px;margin-top:4px}
+.sh-nav button{flex:1;padding:11px;border-radius:14px;font-weight:700;font-size:.85rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#eaf4f3}
+.sh-nav button:disabled{opacity:.3}
+.gcard-pattern{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.35);border-radius:12px;padding:11px;text-align:center;font-weight:700;color:var(--teal);font-size:.92rem;margin-bottom:10px}
 .gcard-expl{font-size:.78rem;color:#bcd6d3;line-height:1.55;margin-bottom:12px}
-.gx{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.05);border-radius:10px;padding:9px 12px;margin-bottom:7px;font-size:.82rem}
+.gx{display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:10px;padding:9px 12px;margin-bottom:7px;font-size:.8rem}
 .gx b{color:var(--gold)}
-.gx .en{font-size:.68rem;color:#8fb0ad}
+.gx .en{font-size:.66rem;color:#8fb0ad}
 .q-prompt{font-size:.98rem;font-weight:700;line-height:1.5;margin-bottom:4px}
 .q-sub{font-size:.72rem;color:#8fb0ad;margin-bottom:12px}
 .opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);
@@ -157,10 +188,10 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .fcard.flip .fcard-inner{transform:rotateY(180deg)}
 .fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
 .ffront{background:linear-gradient(135deg,#11405c,#0d3350);border:1px solid rgba(78,205,196,.3)}
-.ffront .w{font-size:1.9rem;font-weight:900}
+.ffront .w{font-size:1.7rem;font-weight:900;text-align:center;padding:0 14px}
 .ffront .hint{font-size:.68rem;color:#7e98a5}
 .fback{background:linear-gradient(135deg,#1f5a54,#17443f);border:1px solid #2da89f;transform:rotateY(180deg)}
-.fback .m{font-size:1.15rem;font-weight:700}
+.fback .m{font-size:1.1rem;font-weight:700;text-align:center;padding:0 16px}
 .fback .ex{font-size:.74rem;color:#bdeae6;text-align:center;padding:0 18px;line-height:1.5}
 .srs-btns{display:flex;gap:10px}
 .srs-btns button{flex:1;padding:13px;border-radius:13px;font-weight:700;font-size:.88rem}
@@ -176,6 +207,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .done-banner p{font-size:.8rem;color:#9fb6c9;line-height:1.6}
 .web-sync{font-size:.68rem;color:#7e98a5;text-align:center;padding:4px 24px;line-height:1.5}
 .web-sync b{color:var(--teal)}
+.loading-ep{text-align:center;padding:50px 20px;color:#9fb6c9;font-size:.85rem}
 </style>
 </head>
 <body>
@@ -183,7 +215,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 
 <!-- PROFILE SELECT -->
 <section class="screen on" id="scr-profile">
-  <div class="proto-badge">PROTOTYPE v0.1</div>
+  <div class="proto-badge">PROTOTYPE v0.2</div>
   <div>
     <svg width="96" height="105" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg"><path d="M18 52 Q22 47 29 51 L55 22 L81 51 Q88 47 92 52" fill="none" stroke="#4ECDC4" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 52 L55 22 L92 52" fill="#4ECDC4" opacity="0.07"/><line x1="20" y1="54" x2="90" y2="54" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/><line x1="36" y1="54" x2="36" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><line x1="55" y1="54" x2="55" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><line x1="74" y1="54" x2="74" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><rect x="24" y="66" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/><circle cx="35" cy="79" r="7.5" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><rect x="24" y="94" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/><line x1="55" y1="64" x2="55" y2="100" stroke="#4ECDC4" stroke-width="0.5" opacity="0.2"/><rect x="62" y="66" width="24" height="2.4" rx="1.2" fill="#FF6B6B"/><rect x="83" y="66" width="2.4" height="30" rx="1.2" fill="#FF6B6B"/><text x="55" y="112" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="7" fill="#4ECDC4" letter-spacing="1.5">HANGEUL QUEST</text></svg>
     <div class="logo-txt" style="margin-top:8px">HANGEUL QUEST</div>
@@ -267,30 +299,44 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <span class="ep-tag">이어서 학습 · L1 ep05</span>
       <h2>광장시장에 가요?</h2>
       <p>웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요</p>
-      <button class="go-btn" onclick="startFlow()">▶ 5분 복습 시작</button>
+      <button class="go-btn" onclick="openEp(5)">▶ 5분 복습 시작</button>
     </div>
     <div class="card">
       <h3>📋 Daily Quest</h3>
       <div class="dq-item done"><span class="dq-check">✓</span><span>장면 다시 보기 (Watch)</span><span class="dq-xp">+10 XP</span></div>
-      <div class="dq-item" id="dq2"><span class="dq-check"></span><span>문법 카드 1장 (Learn)</span><span class="dq-xp">+15 XP</span></div>
-      <div class="dq-item" id="dq3"><span class="dq-check"></span><span>맥락 퀴즈 2문제 (Practice)</span><span class="dq-xp">+20 XP</span></div>
-      <div class="dq-item" id="dq4"><span class="dq-check"></span><span>단어 복습 3장 (Review)</span><span class="dq-xp">+15 XP</span></div>
+      <div class="dq-item" id="dq2"><span class="dq-check"></span><span>문법 카드 복습 (Learn)</span><span class="dq-xp">+15 XP</span></div>
+      <div class="dq-item" id="dq3"><span class="dq-check"></span><span>맥락 퀴즈 풀기 (Practice)</span><span class="dq-xp">+20 XP</span></div>
+      <div class="dq-item" id="dq4"><span class="dq-check"></span><span>단어 복습 5장 (Review)</span><span class="dq-xp">+15 XP</span></div>
     </div>
-    <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (프로토타입에서는 ep05 고정)</div>
+    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="showEpList()">
+      <span style="font-size:1.6rem">📚</span>
+      <span><b style="font-size:.92rem">전체 에피소드</b><br><span style="font-size:.72rem;color:#8fb0ad">Level 1 · ep01~12 복습/프리뷰</span></span>
+      <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
+    </button>
+    <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (다음 단계: Supabase 연동)</div>
   </div>
   <div class="bottomnav">
     <button class="bn-item on"><span>🏠</span><span>홈</span></button>
-    <button class="bn-item" onclick="startFlow()"><span>📖</span><span>학습</span></button>
+    <button class="bn-item" onclick="showEpList()"><span>📖</span><span>학습</span></button>
     <button class="bn-item" onclick="toast('프로토타입에서는 홈/학습만 열려요')"><span>🗂️</span><span>단어장</span></button>
     <button class="bn-item" onclick="toast('프로토타입에서는 홈/학습만 열려요')"><span>👤</span><span>프로필</span></button>
   </div>
 </section>
 
+<!-- HQ: EPISODE LIST -->
+<section class="screen hq" id="scr-hq-eps">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>📚 Level 1 에피소드</h1>
+  </div>
+  <div class="hq-pad" id="epList"></div>
+</section>
+
 <!-- HQ: 4-STEP FLOW -->
 <section class="screen hq" id="scr-hq-flow">
   <div class="topbar">
-    <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>ep05 · 광장시장에 가요?</h1>
+    <button class="back" onclick="show('scr-hq-eps')">←</button>
+    <h1 id="flowTitle">에피소드</h1>
   </div>
   <div class="stepper">
     <div class="step" id="st0"><div class="sc">👀</div>Watch</div>
@@ -303,28 +349,40 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 
 </div>
 <script>
+/* ───────── shared ───────── */
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
   const el=document.getElementById(id);
   el.classList.add('on');el.classList.remove('fade-in');void el.offsetWidth;el.classList.add('fade-in');
   el.scrollTop=0;
 }
+let curAudio=null;
 function speak(t,rate){
   try{
+    if(curAudio){curAudio.pause();curAudio=null}
     speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(t);
     u.lang='ko-KR';u.rate=rate||0.85;
     speechSynthesis.speak(u);
   }catch(e){}
 }
+function playAudio(src,fallback){
+  try{
+    speechSynthesis.cancel();
+    if(curAudio){curAudio.pause()}
+    if(!src){speak(fallback);return}
+    curAudio=new Audio(encodeURI(src));
+    curAudio.play().catch(()=>speak(fallback));
+  }catch(e){speak(fallback)}
+}
 let toastEl=null;
 function toast(msg){
   if(toastEl)toastEl.remove();
   toastEl=document.createElement('div');
   toastEl.textContent=msg;
-  toastEl.style.cssText='position:absolute;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.78);color:#fff;padding:10px 18px;border-radius:99px;font-size:.78rem;z-index:50;white-space:nowrap';
+  toastEl.style.cssText='position:absolute;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.78);color:#fff;padding:10px 18px;border-radius:99px;font-size:.78rem;z-index:50;max-width:90%;text-align:center';
   document.getElementById('phone').appendChild(toastEl);
-  setTimeout(()=>{if(toastEl){toastEl.remove();toastEl=null}},1800);
+  setTimeout(()=>{if(toastEl){toastEl.remove();toastEl=null}},2200);
 }
 function confetti(n){
   const EMO=['🎉','⭐','✨','🎊','💛'];
@@ -340,6 +398,8 @@ function confetti(n){
 }
 function enterKids(){show('scr-kids-map')}
 function enterHQ(){show('scr-hq-home')}
+
+/* ───────── KIDS block game ───────── */
 const GAME=[
   {syll:'가', con:'ㄱ', vow:'ㅏ', emoji:'🚗', word:'가요!', cons:['ㄱ','ㄴ','ㅁ'], vows:['ㅏ','ㅗ','ㅜ']},
   {syll:'노', con:'ㄴ', vow:'ㅗ', emoji:'🎶', word:'노래',  cons:['ㄹ','ㄴ','ㅂ'], vows:['ㅜ','ㅏ','ㅗ']},
@@ -407,80 +467,157 @@ function gNextRound(){
     setTimeout(()=>show('scr-kids-map'),1400);
   }
 }
-const SCRIPT=[
-  {who:'🧑‍🦰',spk:'올리비아',ko:'배가 고프다.',en:"I'm hungry."},
-  {who:'👧',spk:'미래',ko:'맞아. 광장시장에 떡볶이를 먹으러 갈까?',en:'Right. Shall we go to Gwangjang Market to eat tteokbokki?'},
-  {who:'🧑‍🦰',spk:'올리비아',ko:'콜! 몇 번 버스를 타?',en:'Deal! Which bus number do we take?'},
-  {who:'👨‍✈️',spk:'버스기사',ko:'안 가요. 반대 방향으로 가서 타세요.',en:"It doesn't go there. Go to the opposite direction and take it there."}
-];
-const GRAMMAR={
-  title:'V-(으)러 가다 — in order to go',
-  pattern:'동사 어간 + (으)러 가다/오다',
-  expl:"어딘가에 '~하러' 간다고 말할 때 써요. 어간이 자음으로 끝나면 으러, 모음으로 끝나면 러. Use to say WHY you're going somewhere.",
-  rows:[
-    {v:'먹다',f:'먹으러',ex:'떡볶이를 먹으러 가요.',en:'go to eat tteokbokki'},
-    {v:'사다',f:'사러',ex:'옷을 사러 가요.',en:'go to buy clothes'},
-    {v:'보다',f:'보러',ex:'영화를 보러 가요.',en:'go to watch a movie'},
-    {v:'놀다',f:'놀러',ex:'친구 집에 놀러 가요.',en:"go to hang out at a friend's"}
-  ]
-};
-const QUIZ=[
-  {q:"'먹으러 갈까?' — 무슨 뜻일까요?",sub:'ep05 핵심 표현',opts:['Shall we eat while walking?','Shall we go to eat?','Did we go eat?','We ate, right?'],ans:1},
-  {q:'도서관에 책을 ___ 가요. (빌리다)',sub:'빈칸에 알맞은 형태는?',opts:['빌리으러','빌려러','빌리러','빌러'],ans:2}
-];
-const VOCAB=[
-  {w:'배가 고프다',m:'to be hungry',ex:'배가 고프다. 밥 먹으러 갈까?'},
-  {w:'반대 방향',m:'opposite direction',ex:'반대 방향으로 가서 타세요.'},
-  {w:'몰라요',m:"I don't know",ex:'나도 몰라. (반말) → 저도 몰라요. (존댓말)'}
-];
+
+/* ───────── HQ: episode data (fetch from data/nhs/L1) ───────── */
+const EP_TITLES=[null,'안녕! 나는 정민이야.','누구예요?','잘 먹겠습니다','우리 몇 시에 만날까?','광장시장에 가요?','김밥 주세요','한국어 스터디 그룹을 만들어요','내 도시락은 어디에 있어요?','딸기 한 박스하고 사과 여섯 개 주세요','자전거 소풍을 가요','어서 오세요','경복궁에 갈 거예요!'];
+const EP_EMOJI=[null,'🏞️','🏠','🍚','🛏️','🚌','🏪','🏫','🍳','🏮','🌸','🏠','🌞'];
+const EP_CACHE={};
+let EP=null; // current normalized episode
+
+function showEpList(){
+  const box=document.getElementById('epList');
+  box.innerHTML=EP_TITLES.map((t,n)=>{
+    if(!t)return'';
+    return `<button class="ep-item" onclick="openEp(${n})">
+      <span class="ep-no"><span>${EP_EMOJI[n]}</span><b>ep${String(n).padStart(2,'0')}</b></span>
+      <span><div class="ep-ti">${t}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
+      <span class="arr">→</span></button>`;
+  }).join('');
+  show('scr-hq-eps');
+}
+async function loadEp(n){
+  if(EP_CACHE[n])return EP_CACHE[n];
+  const pad=String(n).padStart(2,'0');
+  const res=await fetch(`data/nhs/L1/ep${pad}.json`);
+  if(!res.ok)throw new Error('fetch fail');
+  const d=await res.json();
+  EP_CACHE[n]=normalizeEp(n,d);
+  return EP_CACHE[n];
+}
+function normalizeEp(n,d){
+  const chars={};
+  (d.characters||[]).forEach(c=>{chars[c.id]={name:c.name||c.id,emoji:c.emoji||'🙂'}});
+  const script=(d.script||[]).map(s=>({
+    who:(chars[s.speaker]||{}).emoji||'🙂',
+    spk:(chars[s.speaker]||{}).name||s.speaker||'',
+    ko:s.text||'', en:s.en||'', audio:s.audio||null,
+    slide:(typeof s.slide==='number')?s.slide:null
+  }));
+  let gram=(d.grammar||[]).slice();
+  gram.sort((a,b)=>((a.tier==='core')?0:1)-((b.tier==='core')?0:1));
+  gram=gram.slice(0,4).map(g=>({
+    title:g.title||g.title_en||'', icon:g.icon||'💡', tier:g.tier||'',
+    pattern:g.pattern||'', expl:g.explanation_en||g.rule||'',
+    rows:(g.table&&g.table.rows)?g.table.rows.slice(0,4):null,
+    exs:(g.examples||[]).slice(0,3).map(e=>({ko:e.ko||e.korean||'',en:e.en||e.english||''}))
+  }));
+  const quiz=(d.quiz||[]).map(q=>({
+    type:q.type||(q.audio_text?'listen':'mc'),
+    q:q.question||q.question_ko||q.question_en||'',
+    qen:q.question_en||'', audio:q.audio_text||null,
+    opts:q.options||q.choices||[], ans:q.answer,
+    expl:q.explanation||''
+  })).filter(q=>q.opts.length>0);
+  let vitems=[];
+  (d.vocab||[]).forEach(cat=>{(cat.items||[]).forEach(it=>{
+    if(it.korean&&it.english)vitems.push({w:it.korean,m:it.english,ro:it.romanization||'',emoji:it.emoji||''});
+  })});
+  // shuffle, pick 5
+  for(let i=vitems.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vitems[i],vitems[j]]=[vitems[j],vitems[i]]}
+  return {n, title:d.title||EP_TITLES[n], slides:d.slides||[], script, gram, quiz, vocab:vitems.slice(0,5)};
+}
+async function openEp(n){
+  show('scr-hq-flow');
+  document.getElementById('flowTitle').textContent=`ep${String(n).padStart(2,'0')} 로딩 중...`;
+  document.getElementById('flowBody').innerHTML='<div class="loading-ep">📡 에피소드를 불러오는 중...</div>';
+  try{
+    EP=await loadEp(n);
+  }catch(e){
+    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile-prototype.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('flowTitle').textContent='오프라인';
+    return;
+  }
+  document.getElementById('flowTitle').textContent=`ep${String(n).padStart(2,'0')} · ${EP.title}`;
+  fStep=0;fQuiz=0;fCard=0;watchMode='list';shIdx=0;shCleanup();fRender();
+}
+
+/* ───────── HQ: 4-step flow ───────── */
 let fStep=0,fQuiz=0,fCard=0;
-function startFlow(){fStep=0;fQuiz=0;fCard=0;show('scr-hq-flow');fRender()}
 function fSetStep(){
   for(let i=0;i<4;i++){
     const el=document.getElementById('st'+i);
     el.className='step'+(i===fStep?' on':(i<fStep?' past':''));
   }
 }
+function wPlay(i){
+  const s=EP.script[i];
+  playAudio(s.audio,s.ko);
+  document.querySelectorAll('.bubble').forEach(b=>b.classList.remove('playing'));
+  const el=document.getElementById('wb'+i);
+  if(el)el.classList.add('playing');
+  if(s.slide!==null&&EP.slides[s.slide]){
+    const img=document.getElementById('wSlide');
+    if(img)img.src=encodeURI(EP.slides[s.slide]);
+  }
+}
 function fRender(){
   fSetStep();
   const b=document.getElementById('flowBody');
-  if(fStep===0){
-    b.innerHTML=`<div class="card"><h3>👀 장면 다시 보기 <span style="font-size:.62rem;color:#7e98a5;font-weight:400">— 실제 앱에서는 1분 숏비디오</span></h3>
-      ${SCRIPT.map((s,i)=>`<div class="scene-line"><div class="who">${s.who}</div>
-        <div class="bubble"><div class="spk">${s.spk}</div><div class="ko">${s.ko} <button class="tts-sm" onclick="speak('${s.ko.replace(/'/g,"\\'")}')">🔊</button></div><div class="en">${s.en}</div></div></div>`).join('')}
+  if(fStep===0){ /* WATCH */
+    const toggle=`<div class="watch-toggle">
+      <button class="wt-btn${watchMode==='list'?' on':''}" onclick="watchSetMode('list')">📖 전체 보기</button>
+      <button class="wt-btn${watchMode==='shadow'?' on':''}" onclick="watchSetMode('shadow')">🎙️ 쉐도잉 연습</button>
+    </div>`;
+    if(watchMode==='shadow'){
+      b.innerHTML=toggle+shRenderCard()+
+        `<div class="flow-nav"><button class="fn-next" onclick="fNext()">다음 단계: Learn 💡</button></div>`;
+      return;
+    }
+    const slideImg=EP.slides.length?`<img class="w-slide" id="wSlide" src="${encodeURI(EP.slides[0])}" alt="scene">`:'';
+    b.innerHTML=toggle+`<div class="card"><h3>👀 장면 다시 보기 <span style="font-size:.62rem;color:#7e98a5;font-weight:400">— 대사를 누르면 소리가 나와요</span></h3>
+      ${slideImg}
+      ${EP.script.map((s,i)=>`<div class="scene-line" onclick="wPlay(${i})"><div class="who">${s.who}</div>
+        <div class="bubble" id="wb${i}"><div class="spk">${s.spk}</div><div class="ko">${s.ko} <span class="tts-sm">🔊</span></div><div class="en">${s.en}</div></div></div>`).join('')}
       </div>
       <div class="flow-nav"><button class="fn-next" onclick="fNext()">다음 단계: Learn 💡</button></div>`;
   }
-  else if(fStep===1){
-    b.innerHTML=`<div class="card"><h3>💡 ${GRAMMAR.title}</h3>
-      <div class="gcard-pattern">${GRAMMAR.pattern}</div>
-      <div class="gcard-expl">${GRAMMAR.expl}</div>
-      ${GRAMMAR.rows.map(r=>`<div class="gx"><span>${r.v} → <b>${r.f}</b></span><span style="text-align:right">${r.ex}<div class="en">${r.en}</div></span></div>`).join('')}
-      </div>
-      <div class="flow-nav"><button class="fn-ghost" onclick="fPrev()">← Watch</button><button class="fn-next" onclick="fNext();dqDone('dq2')">다음: Practice ✏️</button></div>`;
+  else if(fStep===1){ /* LEARN */
+    b.innerHTML=EP.gram.map(g=>`<div class="card"><h3>${g.icon} ${g.title}${g.tier==='core'?' <span style="font-size:.58rem;background:var(--gold);color:#5a4500;padding:2px 7px;border-radius:99px">CORE</span>':''}</h3>
+      ${g.pattern?`<div class="gcard-pattern">${g.pattern}</div>`:''}
+      ${g.expl?`<div class="gcard-expl">${g.expl}</div>`:''}
+      ${g.rows?g.rows.map(r=>`<div class="gx"><span>${r[0]}</span><span style="text-align:right">${r[r.length-1]}</span></div>`).join(''):''}
+      ${(!g.rows&&g.exs.length)?g.exs.map(e=>`<div class="gx"><span><b>${e.ko}</b><div class="en">${e.en}</div></span><button class="tts-sm" onclick="speak('${e.ko.replace(/'/g,"\\'")}')">🔊</button></div>`).join(''):''}
+      </div>`).join('')+
+      `<div class="flow-nav"><button class="fn-ghost" onclick="fPrev()">← Watch</button><button class="fn-next" onclick="fNext();dqDone('dq2')">다음: Practice ✏️</button></div>`;
   }
-  else if(fStep===2){
-    const q=QUIZ[fQuiz];
-    b.innerHTML=`<div class="card"><h3>✏️ 맥락 퀴즈 ${fQuiz+1} / ${QUIZ.length}</h3>
-      <div class="q-prompt">${q.q}</div><div class="q-sub">${q.sub}</div>
+  else if(fStep===2){ /* PRACTICE */
+    if(!EP.quiz.length){fNext();return}
+    const q=EP.quiz[fQuiz];
+    const listenBtn=(q.type==='listen'&&q.audio)?`<button class="listen-big" style="margin:0 0 12px" onclick="speak('${q.audio.replace(/'/g,"\\'")}',0.8)">🔊 듣기</button>`:'';
+    b.innerHTML=`<div class="card"><h3>✏️ 맥락 퀴즈 ${fQuiz+1} / ${EP.quiz.length}</h3>
+      <div class="q-prompt">${q.q}</div>
+      ${q.qen&&q.qen!==q.q?`<div class="q-sub">${q.qen}</div>`:'<div style="height:8px"></div>'}
+      ${listenBtn}
       ${q.opts.map((o,i)=>`<button class="opt" onclick="fAnswer(this,${i})">${o}</button>`).join('')}
-      <div class="game-msg" id="fqMsg" style="color:var(--teal)"></div></div>
+      <div class="game-msg" id="fqMsg" style="color:var(--teal);font-size:.85rem"></div></div>
       <div class="flow-nav" id="fqNav" style="display:none"><button class="fn-next" onclick="fQuizNext()">계속 →</button></div>`;
+    if(q.type==='listen'&&q.audio)setTimeout(()=>speak(q.audio,0.8),400);
   }
-  else{
-    if(fCard>=VOCAB.length){
+  else{ /* REVIEW */
+    if(fCard>=EP.vocab.length){
       b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 5분 복습 완료!</h2>
-        <p>Daily Quest 4개 모두 달성 · +60 XP<br>🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
-        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="dqDone('dq4');show('scr-hq-home')">홈으로</button></div>`;
+        <p>ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
+        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="dqDone('dq4');show('scr-hq-home')">홈으로</button>
+        <button class="fn-ghost" style="padding:12px 30px;border-radius:14px;font-weight:700" onclick="showEpList()">다른 에피소드 →</button></div>`;
       confetti(30);dqDone('dq3');dqDone('dq4');
       return;
     }
-    const c=VOCAB[fCard];
-    b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:#7e98a5">🔁 단어 복습 ${fCard+1} / ${VOCAB.length} — 카드를 탭해서 뒤집어 보세요</div>
+    const c=EP.vocab[fCard];
+    b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:#7e98a5">🔁 단어 복습 ${fCard+1} / ${EP.vocab.length} — 카드를 탭해서 뒤집어 보세요</div>
       <div class="fcard" id="fcard" onclick="this.classList.toggle('flip')">
         <div class="fcard-inner">
-          <div class="fface ffront"><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w}')">🔊</button></div></div>
-          <div class="fface fback"><div class="m">${c.m}</div><div class="ex">${c.ex}</div></div>
+          <div class="fface ffront"><div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
+          <div class="fface fback"><div class="m">${c.m}</div><div class="ex">${c.ro}</div></div>
         </div>
       </div>
       <div class="srs-btns">
@@ -493,17 +630,17 @@ function fRender(){
 function fNext(){if(fStep<3){fStep++;fRender()}}
 function fPrev(){if(fStep>0){fStep--;fRender()}}
 function fAnswer(btn,i){
-  const q=QUIZ[fQuiz];
+  const q=EP.quiz[fQuiz];
   if(btn.parentElement.dataset.lock)return;
   btn.parentElement.dataset.lock='1';
   const opts=btn.parentElement.querySelectorAll('.opt');
   if(i===q.ans){btn.classList.add('right');document.getElementById('fqMsg').textContent='정답! 🎉 +10 XP';}
   else{btn.classList.add('wrong');opts[q.ans].classList.add('right');
-    document.getElementById('fqMsg').textContent='아쉬워요 — 이 문제는 Review 단어장에 들어가요 🔁';}
+    document.getElementById('fqMsg').textContent=q.expl?('💡 '+q.expl):'아쉬워요 — 이 문제는 Review 단어장에 들어가요 🔁';}
   document.getElementById('fqNav').style.display='flex';
 }
 function fQuizNext(){
-  if(fQuiz<QUIZ.length-1){fQuiz++;fRender()}
+  if(fQuiz<EP.quiz.length-1){fQuiz++;fRender()}
   else{dqDone('dq3');fNext()}
 }
 function fSrs(known){
@@ -512,7 +649,82 @@ function fSrs(known){
   setTimeout(fRender,350);
 }
 function dqDone(id){const el=document.getElementById(id);if(el){el.classList.add('done');el.querySelector('.dq-check').textContent='✓'}}
+
+/* ───────── HQ: 쉐도잉 (Shadowing) 모드 ───────── */
+let watchMode='list'; // 'list' | 'shadow'
+let shIdx=0;
+let shStream=null, shRecorder=null, shChunks=[], shBlobURL=null, shRecording=false;
+function watchSetMode(m){watchMode=m;shIdx=0;shCleanup();fRender();}
+function shCleanup(){
+  if(shRecording&&shRecorder){try{shRecorder.stop()}catch(e){}}
+  if(shStream){shStream.getTracks().forEach(t=>t.stop());shStream=null}
+  if(shBlobURL){URL.revokeObjectURL(shBlobURL);shBlobURL=null}
+  shRecorder=null;shChunks=[];shRecording=false;
+}
+function shRenderCard(){
+  const s=EP.script[shIdx];
+  const total=EP.script.length;
+  const slideImg=(s.slide!==null&&EP.slides[s.slide])?`<img class="w-slide" src="${encodeURI(EP.slides[s.slide])}" alt="scene">`:'';
+  const recBtn=shRecording
+    ?`<button class="sh-rec recording" onclick="shToggleRecord()">⏹ 녹음 종료</button>`
+    :`<button class="sh-rec" onclick="shToggleRecord()">🎙️ 따라 녹음하기</button>`;
+  const playBtn=(shBlobURL&&!shRecording)?`<button class="sh-play" onclick="shPlayMine()">▶️ 내 발음 듣기</button>`:'';
+  return `<div class="card">
+    <div class="sh-prog">🎙️ 쉐도잉 ${shIdx+1} / ${total} — 한 줄씩 듣고 따라 말해 보세요</div>
+    ${slideImg}
+    <div class="sh-bubble"><div class="spk">${s.who} ${s.spk}</div><div class="ko">${s.ko}</div><div class="en">${s.en}</div></div>
+    <button class="sh-listen" onclick="shListen()">🔊 원어민 발음 듣기</button>
+    <div class="sh-hint">듣고 1~2초 후 소리내어 따라 말해 보세요</div>
+    <div class="sh-rec-row">${recBtn}${playBtn}</div>
+    <div class="sh-nav">
+      <button onclick="shNav(-1)" ${shIdx===0?'disabled':''}>← 이전 줄</button>
+      <button onclick="shNav(1)" ${shIdx===total-1?'disabled':''}>다음 줄 →</button>
+    </div>
+  </div>`;
+}
+function shListen(){
+  const s=EP.script[shIdx];
+  playAudio(s.audio,s.ko);
+}
+function shNav(dir){
+  shCleanup();
+  shIdx=Math.max(0,Math.min(EP.script.length-1,shIdx+dir));
+  fRender();
+}
+async function shToggleRecord(){
+  if(shRecording){
+    try{shRecorder.stop()}catch(e){}
+    if(shStream){shStream.getTracks().forEach(t=>t.stop());shStream=null}
+    return;
+  }
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    toast('🎙️ 이 환경에서는 녹음을 지원하지 않아요');return;
+  }
+  try{
+    shStream=await navigator.mediaDevices.getUserMedia({audio:true});
+    if(shBlobURL){URL.revokeObjectURL(shBlobURL);shBlobURL=null}
+    shChunks=[];
+    shRecorder=new MediaRecorder(shStream);
+    shRecorder.ondataavailable=e=>{if(e.data&&e.data.size)shChunks.push(e.data)};
+    shRecorder.onstop=()=>{
+      const blob=new Blob(shChunks,{type:'audio/webm'});
+      shBlobURL=URL.createObjectURL(blob);
+      shRecording=false;
+      fRender();
+    };
+    shRecorder.start();
+    shRecording=true;
+    fRender();
+  }catch(e){
+    toast('🎙️ 마이크 권한이 필요해요');
+  }
+}
+function shPlayMine(){
+  if(!shBlobURL)return;
+  const a=new Audio(shBlobURL);
+  a.play();
+}
 </script>
-<!-- HQ Mobile Prototype v0.1 · 2026-06-12 -->
+<!-- HQ Mobile Prototype v0.2 - episode fetch - 2026-06-12 -->
 </body>
 </html>
