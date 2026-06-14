@@ -63,6 +63,30 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
   user-select: none;
 }
 .top-nav-brand:hover { opacity: 0.88; }
+.sidebar-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 8px 8px 8px 0;
+  border: 1.5px solid rgba(255,255,255,.5);
+  border-radius: 8px;
+  background: rgba(255,255,255,.2);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.sidebar-toggle-btn:hover { background: rgba(255,255,255,.35); }
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 499;
+}
 .book-tabs {
   display: flex;
   align-items: stretch;
@@ -778,6 +802,20 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 
 @media(max-width: 700px) {
   .sidebar { display: none; }
+  .sidebar-toggle-btn { display: flex; }
+  body.mobile-sidebar-open .sidebar:not([style*="none"]) {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 78%;
+    max-width: 280px;
+    height: 100vh;
+    z-index: 500;
+    box-shadow: 4px 0 18px rgba(0,0,0,0.2);
+  }
+  body.mobile-sidebar-open .sidebar-backdrop { display: block; }
 }
 
 /* 내 차례 강조 / 남 차례 흐리기 */
@@ -1372,6 +1410,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 <nav class="top-nav">
+  <button class="sidebar-toggle-btn" onclick="toggleMobileSidebar()" aria-label="메뉴">☰</button>
   <div class="top-nav-brand" onclick="showTOC()"><svg width="28" height="32" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.08)"/><polygon points="8,12 10,18 16,18 11,22 13,28 8,24 3,28 5,22 0,18 6,18" fill="#FFD93D"/><polygon points="50,12 52,18 58,18 53,22 55,28 50,24 45,28 47,22 42,18 48,18" fill="#FFD93D"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">HQ</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg> Hangeul Quest Kids</div>
   <div class="book-tabs" id="book-tabs-wrap">
     <button class="book-tab" onclick="selectBook(1)">Level 1</button>
@@ -1398,6 +1437,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 <script>
   document.getElementById('att-date').textContent =
     new Date().toLocaleDateString('ko-KR', {month:'long', day:'numeric', weekday:'short'});
+</script>
+<script>
+  function toggleMobileSidebar() {
+    document.body.classList.toggle('mobile-sidebar-open');
+  }
+  function closeMobileSidebar() {
+    document.body.classList.remove('mobile-sidebar-open');
+  }
+  // 모바일에서 사이드바 항목 선택 시 자동으로 닫기
+  document.addEventListener('click', function(e) {
+    if (!document.body.classList.contains('mobile-sidebar-open')) return;
+    const item = e.target.closest('.lesson-item');
+    if (item) closeMobileSidebar();
+  });
 </script>
 
 <!-- 연습 실시간 바 -->
@@ -1433,6 +1486,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </div>
 
 <!-- ══════ APP BODY (사이드바 + 컨텐츠) ══════ -->
+<div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileSidebar()"></div>
 <div class="app-body">
 
 <!-- 사이드바 — 1~10과 목록 -->
