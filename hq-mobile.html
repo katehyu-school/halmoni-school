@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a2540">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>HQ Mobile · Prototype</title>
+<title>HQ Mobile</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -67,7 +67,9 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .qnode{width:78px;height:78px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
   font-size:1.7rem;position:relative;z-index:2;box-shadow:0 5px 0 rgba(0,0,0,.12);transition:transform .15s;margin:10px 0}
 .qnode:active{transform:scale(.94)}
-.qnode small{font-size:.56rem;font-weight:700;margin-top:1px}
+.qnode small{font-size:.56rem;font-weight:700;margin-top:1px;text-align:center;line-height:1.25}
+.qnode small .en{display:block;font-size:.46rem;font-weight:500;opacity:.75}
+.bn-item span:last-child .en{display:block;font-size:.56rem;font-weight:400;opacity:.75}
 .qnode.done{background:linear-gradient(135deg,#43B97F,#2da568);color:#fff}
 .qnode.now{background:linear-gradient(135deg,var(--gold),#f5c50e);color:#7a5c00;animation:pulse 1.6s infinite}
 .qnode.lock{background:#e7e0d2;color:#b3aa97}
@@ -110,6 +112,10 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .wslots{display:flex;flex-wrap:wrap;gap:8px;min-height:46px;padding:10px;background:rgba(255,255,255,.06);border-radius:12px;border:2px dashed rgba(255,255,255,.18)}
 .wchip{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 12px;border-radius:10px;
   background:var(--block-vow);color:#fff;font-size:.92rem;font-weight:800}
+.wslot-ph{width:46px;height:46px;border-radius:12px;border:3px dashed #cfc6b2;display:inline-block}
+.kids .wslots{background:#f4eede;border-color:#cfc6b2}
+.kids .wblk,.kids .wchip{font-size:1.5rem;min-width:54px;height:54px;border-radius:14px}
+.kids .wslot-ph{width:54px;height:54px}
 .blk.opt2{background:var(--teal);box-shadow:0 5px 0 #2da89f;font-size:1.6rem}
 .blk.correct{background:var(--block-vow)!important;box-shadow:0 5px 0 #339963!important}
 .blk.bat{background:var(--block-bat);box-shadow:0 5px 0 #3a73ad}
@@ -232,6 +238,27 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .flow-nav button{flex:1;padding:14px;border-radius:14px;font-weight:900;font-size:.92rem}
 .fn-next{background:var(--teal);color:#06303a}
 .fn-ghost{background:rgba(255,255,255,.08);color:#cfe3e1}
+.l2-row{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:14px;margin-bottom:9px;font-size:.85rem}
+.l2-row.done{background:rgba(67,185,127,.12);border:1px solid rgba(67,185,127,.3);cursor:pointer}
+.l2-row.now{background:linear-gradient(135deg,var(--gold),#f5c50e);color:#5a4500;animation:pulse 1.6s infinite;cursor:pointer}
+.l2-row.lock{background:rgba(255,255,255,.04);color:#5e7a86}
+.l2-row.play{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.35);cursor:pointer}
+.l2-row.soon{background:rgba(255,255,255,.04);color:#5e7a86}
+.l2-row .l2-ico{font-size:1.5rem;width:34px;text-align:center;flex-shrink:0}
+.l2-row .l2-tt{flex:1}
+.l2-row .l2-tt b{display:block;font-size:.85rem}
+.l2-row .l2-tt small{font-size:.66rem;opacity:.75}
+.l2-row .l2-go{font-size:.7rem;font-weight:700}
+.kids .l2-row.soon,.kids .l2-row.lock{background:rgba(0,0,0,.04);color:#9c9486}
+.kids .q-sub{color:#a89b86}
+.game-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.game-tile{border-radius:20px;padding:20px 12px;text-align:center;color:#fff;cursor:pointer;transition:transform .12s}
+.game-tile:active{transform:translateY(3px)}
+.game-tile .gt-emoji{font-size:2.4rem}
+.game-tile .gt-title{font-weight:900;font-size:1.05rem;margin-top:6px}
+.game-tile .gt-sub{font-size:.7rem;opacity:.85;margin-top:2px}
+.game-tile.vow{background:var(--block-vow);box-shadow:0 5px 0 #339963}
+.game-tile.bat{background:var(--block-bat);box-shadow:0 5px 0 #3a73ad}
 .done-banner{text-align:center;padding:34px 20px;display:flex;flex-direction:column;gap:10px;align-items:center}
 .done-banner .big{font-size:3rem}
 .done-banner h2{color:var(--teal)}
@@ -328,23 +355,23 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <span class="stars">⭐ <span id="kStars">12</span></span>
   </div>
   <div class="qmap" id="qmap2" style="margin-bottom:14px">
-    <button class="qnode now" id="l2TodayNode" onclick="openL2Today()">📘<small>오늘의 복습</small></button>
+    <button class="qnode now" id="l2TodayNode" onclick="openL2List()">📘<small>오늘의 복습<span class="en">Today's Review</span></small></button>
   </div>
   <div class="qmap" id="qmap">
-    <button class="qnode done" onclick="toast('이미 깬 퀘스트야! ⭐')">🔤<small>모음 1</small></button>
-    <button class="qnode done" onclick="toast('이미 깬 퀘스트야! ⭐')">🔠<small>자음 1</small></button>
-    <button class="qnode now" onclick="startGame()">🧱<small>블록 조합</small></button>
-    <button class="qnode lock" onclick="toast('블록 조합을 먼저 깨자! 🔒')">🧩<small>단어 만들기</small></button>
-    <button class="qnode now" onclick="startBat()">🏗️<small>받침 쌓기</small></button>
+    <button class="qnode done" onclick="toast('이미 깬 퀘스트야! ⭐')">🔤<small>모음 1<span class="en">Vowels 1</span></small></button>
+    <button class="qnode done" onclick="toast('이미 깬 퀘스트야! ⭐')">🔠<small>자음 1<span class="en">Consonants 1</span></small></button>
+    <button class="qnode now" onclick="startGame()">🧱<small>블록 조합<span class="en">Block Combo</span></small></button>
+    <button class="qnode lock" onclick="toast('블록 조합을 먼저 깨자! 🔒')">🧩<small>단어 만들기<span class="en">Word Builder</span></small></button>
+    <button class="qnode now" onclick="startBat()">🏗️<small>받침 쌓기<span class="en">Batchim Build</span></small></button>
   </div>
   <div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:8px">
     <button class="go-btn" style="background:#fff;color:#0a2540;border:2px solid var(--teal)" onclick="openFoundMap()">🐱 기초 다지기 · Level 1 복습하기</button>
     <button class="go-btn" style="background:#fff;color:#0a2540;border:2px solid var(--coral)" onclick="openL3(1)">📖 스토리 모드 미리보기 · Level 3</button>
   </div>
   <div class="bottomnav">
-    <button class="bn-item on"><span>🗺️</span><span>모험 맵</span></button>
-    <button class="bn-item" onclick="toast('프로토타입에서는 모험 맵만 열려요!')"><span>🎮</span><span>게임</span></button>
-    <button class="bn-item" onclick="show('scr-kids-stars')"><span>⭐</span><span>내 별</span></button>
+    <button class="bn-item on"><span>🗺️</span><span>모험 맵<span class="en">Map</span></span></button>
+    <button class="bn-item" onclick="show('scr-kids-games')"><span>🎮</span><span>게임<span class="en">Games</span></span></button>
+    <button class="bn-item" onclick="show('scr-kids-stars')"><span>⭐</span><span>내 별<span class="en">My Stars</span></span></button>
   </div>
 </section>
 
@@ -395,6 +422,26 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <div class="blocks" id="bBlocks"></div>
     <div class="game-msg" id="bMsg"></div>
     <button class="game-next" id="bNext" onclick="bNextRound()">다음 →</button>
+  </div>
+</section>
+
+<!-- KIDS: 단어 만들기 (Word Builder) -->
+<section class="screen kids" id="scr-kids-word">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-kids-games')">←</button>
+    <h1>🧩 단어 만들기 Word Builder</h1>
+  </div>
+  <div class="game-wrap">
+    <div class="game-prog" id="wProg"></div>
+    <div class="game-q">
+      <div class="gq-emoji" id="wEmoji">🍎</div>
+      <div class="gq-label" id="wLabel">글자를 순서대로 눌러서 단어를 만들어요!</div>
+      <button class="listen-big" onclick="wListen()">🔊 듣기</button>
+    </div>
+    <div class="wslots" id="wSlots"></div>
+    <div class="wblocks" id="wBlocks"></div>
+    <div class="game-msg" id="wMsg"></div>
+    <button class="game-next" id="wNext" onclick="wNextRound()">다음 →</button>
   </div>
 </section>
 
@@ -568,6 +615,15 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   <div class="flow-body" id="l2Body"></div>
 </section>
 
+<!-- KIDS: LEVEL 2 단원 목록 (secret door) -->
+<section class="screen hq" id="scr-l2-list">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-kids-map')">←</button>
+    <h1>📘 Level 2 · 오늘의 복습</h1>
+  </div>
+  <div style="padding:14px 18px 30px" id="l2ListBody"></div>
+</section>
+
 <!-- KIDS: LEVEL 3 스토리 모드 (4-step shadowing prototype) -->
 <section class="screen hq" id="scr-l3-flow">
   <div class="topbar">
@@ -575,10 +631,10 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <h1 id="l3Title">스토리 모드</h1>
   </div>
   <div class="stepper">
-    <div class="step" id="l3st0"><div class="sc">🎭</div>쉐도잉</div>
-    <div class="step" id="l3st1"><div class="sc">🔊</div>듣기</div>
-    <div class="step" id="l3st2"><div class="sc">🗣️</div>실생활</div>
-    <div class="step" id="l3st3"><div class="sc">✅</div>점검</div>
+    <div class="step" id="l3st0"><div class="sc">🎭</div>쉐도잉<small style="display:block;font-size:.55rem;opacity:.7">Watch</small></div>
+    <div class="step" id="l3st1"><div class="sc">🔊</div>듣기<small style="display:block;font-size:.55rem;opacity:.7">Learn</small></div>
+    <div class="step" id="l3st2"><div class="sc">🗣️</div>실생활<small style="display:block;font-size:.55rem;opacity:.7">Practice</small></div>
+    <div class="step" id="l3st3"><div class="sc">✅</div>점검<small style="display:block;font-size:.55rem;opacity:.7">Review</small></div>
   </div>
   <div class="flow-body" id="l3Body"></div>
 </section>
@@ -592,8 +648,22 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   <div class="flow-body" id="kidsStarsBody"></div>
   <div class="bottomnav">
     <button class="bn-item" onclick="show('scr-kids-map')"><span>🗺️</span><span>모험 맵</span></button>
-    <button class="bn-item" onclick="toast('프로토타입에서는 모험 맵만 열려요!')"><span>🎮</span><span>게임</span></button>
+    <button class="bn-item" onclick="show('scr-kids-games')"><span>🎮</span><span>게임</span></button>
     <button class="bn-item on"><span>⭐</span><span>내 별</span></button>
+  </div>
+</section>
+
+<!-- KIDS: 게임 (자유 연습 아케이드) -->
+<section class="screen kids" id="scr-kids-games">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-kids-map')">←</button>
+    <h1>🎮 게임 Games</h1>
+  </div>
+  <div class="flow-body" id="kidsGamesBody"></div>
+  <div class="bottomnav">
+    <button class="bn-item" onclick="show('scr-kids-map')"><span>🗺️</span><span>모험 맵<span class="en">Map</span></span></button>
+    <button class="bn-item on"><span>🎮</span><span>게임<span class="en">Games</span></span></button>
+    <button class="bn-item" onclick="show('scr-kids-stars')"><span>⭐</span><span>내 별<span class="en">My Stars</span></span></button>
   </div>
 </section>
 
@@ -607,6 +677,7 @@ function show(id){
   el.scrollTop=0;
   if(id==='scr-kids-map')renderKidsMap();
   if(id==='scr-kids-stars')renderKidsStars();
+  if(id==='scr-kids-games')renderKidsGames();
 }
 let curAudio=null;
 function speak(t,rate){
@@ -680,7 +751,8 @@ function renderKidsMap(){
     else{nodes[2].className='qnode now';nodes[2].onclick=startGame;}
   }
   if(nodes[3]){
-    if(p.block){nodes[3].className='qnode now';nodes[3].onclick=()=>toast('🚧 단어 만들기 — 곧 추가돼요! Coming soon');}
+    if(p.word){nodes[3].className='qnode done';nodes[3].onclick=()=>toast('이미 깬 퀘스트야! ⭐');}
+    else if(p.block){nodes[3].className='qnode now';nodes[3].onclick=startWord;}
     else{nodes[3].className='qnode lock';nodes[3].onclick=()=>toast('블록 조합을 먼저 깨자! 🔒');}
   }
   if(nodes[4]){
@@ -707,7 +779,7 @@ function renderKidsStars(){
       ${row('🔠','자음 1',true)}
       ${row('🧱','블록 조합',p.block)}
       ${row('🏗️','받침 쌓기',p.bat)}
-      ${row('🧩','단어 만들기',false)}
+      ${row('🧩','단어 만들기',p.word)}
     </div>
     <div class="card">
       <h3>🐱 기초 다지기 (Level 1)</h3>
@@ -721,6 +793,38 @@ function renderKidsStars(){
     <div class="card">
       <h3>📖 스토리 모드 (Level 3)</h3>
       <div class="q-sub">미리보기로 1과를 만나볼 수 있어요 · Preview Unit 1 available</div>
+    </div>`;
+}
+function renderKidsGames(){
+  const b=document.getElementById('kidsGamesBody');
+  if(!b)return;
+  const item=(emoji,ko,en,sub_ko,sub_en,cls,fn)=>`<div class="l2-row ${cls}" ${fn?`onclick="${fn}"`:''}>
+    <div class="l2-ico">${emoji}</div>
+    <div class="l2-tt"><b>${ko}<span style="font-weight:500;opacity:.75"> · ${en}</span></b><small>${sub_ko} · ${sub_en}</small></div>
+    <div class="l2-go">${cls==='soon'?'준비중':'▶ 플레이'}</div>
+  </div>`;
+  b.innerHTML=`
+    <div style="text-align:center;padding:10px 0 14px">
+      <div style="font-size:2rem">🎮</div>
+      <h2 style="margin:4px 0 2px">자유 연습 아케이드</h2>
+      <div class="q-sub">Free-Play Arcade — 언제든 마음대로 연습해요!<br>Practice anytime, no stars needed</div>
+    </div>
+    <div class="game-tiles">
+      <div class="game-tile vow" onclick="startGame()">
+        <div class="gt-emoji">🧱</div>
+        <div class="gt-title">블록 조합</div>
+        <div class="gt-sub">Block Combo</div>
+      </div>
+      <div class="game-tile bat" onclick="startBat()">
+        <div class="gt-emoji">🏗️</div>
+        <div class="gt-title">받침 쌓기</div>
+        <div class="gt-sub">Batchim Build</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>📚 더 연습해 보아요 · More Practice</h3>
+      ${item('🧩','단어 만들기','Word Builder','글자를 모아 단어 완성','Build words from syllables','play',"startWord()")}
+      ${item('🐱','기초 다지기 게임들','Level 1 Games','자모/소리 복습 게임 모음','Jamo &amp; sound review games','play',"openFoundMap()")}
     </div>`;
 }
 function enterKids(){show('scr-kids-map')}
@@ -884,6 +988,93 @@ function bNextRound(){
   }
 }
 
+/* ───────── KIDS: 단어 만들기 (Word Builder, unit07/09 vocab) ───────── */
+const WORD_POOL=[
+  {word:'안녕하세요',en:'hello (formal)',emoji:'👋',unit:7},
+  {word:'안녕',en:'hi / bye',emoji:'✌️',unit:7},
+  {word:'이름',en:'name',emoji:'🏷️',unit:7},
+  {word:'저는',en:'I am (formal)',emoji:'🙋',unit:7},
+  {word:'나는',en:'I am (informal)',emoji:'🙋',unit:7},
+  {word:'사과',en:'apple',emoji:'🍎',unit:9},
+  {word:'바나나',en:'banana',emoji:'🍌',unit:9},
+  {word:'포도',en:'grape',emoji:'🍇',unit:9},
+  {word:'고양이',en:'cat',emoji:'🐱',unit:9},
+  {word:'강아지',en:'puppy',emoji:'🐶',unit:9},
+  {word:'연필',en:'pencil',emoji:'✏️',unit:9},
+  {word:'가방',en:'bag',emoji:'🎒',unit:9}
+];
+let wRound=[],wIdx=0,wPos=0,wDone=false;
+function wordPool(){
+  // 아이 레벨(l1WordUnit)까지 풀린 유닛의 단어만 사용 — 새 유닛 추가 시 WORD_POOL에 unit번호만 붙이면 됨
+  const cur=parseInt(localStorage.getItem('l1WordUnit')||'9');
+  return WORD_POOL.filter(w=>w.unit<=cur);
+}
+function startWord(){
+  const pool=shuffleArr(wordPool().slice());
+  wRound=pool.slice(0,Math.min(6,pool.length));
+  wIdx=0;show('scr-kids-word');wRender();
+}
+function wRender(){
+  const w=wRound[wIdx];wPos=0;wDone=false;
+  document.getElementById('wEmoji').textContent=w.emoji;
+  document.getElementById('wLabel').innerHTML=`<b>${w.en}</b> — 글자를 순서대로 눌러요! Tap the syllables in order!`;
+  document.getElementById('wMsg').textContent='';
+  document.getElementById('wNext').style.display='none';
+  document.getElementById('wProg').innerHTML=wRound.map((_,i)=>`<div class="gp-dot${i<wIdx?' ok':''}"></div>`).join('');
+  const syll=[...w.word];
+  document.getElementById('wSlots').innerHTML=syll.map(()=>'<span class="wslot-ph"></span>').join('');
+  const pool=wordPool();
+  let distract=[...new Set(pool.flatMap(x=>[...x.word]).filter(c=>!syll.includes(c)))];
+  distract=shuffleArr(distract).slice(0,Math.max(0,5-syll.length));
+  const blocks=shuffleArr([...syll,...distract]);
+  const wrap=document.getElementById('wBlocks');wrap.innerHTML='';
+  blocks.forEach(c=>{
+    const btn=document.createElement('button');btn.className='wblk';btn.textContent=c;
+    btn.onclick=()=>wTap(btn,c);wrap.appendChild(btn);
+  });
+  setTimeout(()=>speak(w.word,0.75),500);
+}
+function wListen(){speak(wRound[wIdx].word,0.75)}
+function wTap(btn,ch){
+  if(wDone||btn.classList.contains('used'))return;
+  const w=wRound[wIdx];const syll=[...w.word];
+  if(ch!==syll[wPos]){
+    btn.classList.add('shake');
+    setTimeout(()=>btn.classList.remove('shake'),420);
+    document.getElementById('wMsg').textContent='앗! 다시 들어 볼까? 🤔';
+    document.getElementById('wMsg').style.color='var(--coral)';
+    speak(syll[wPos],0.7);
+    return;
+  }
+  btn.classList.add('used');
+  const slots=document.getElementById('wSlots');
+  const ph=slots.querySelector('.wslot-ph');
+  const chip=document.createElement('span');chip.className='wchip';chip.textContent=ch;
+  if(ph)slots.replaceChild(chip,ph);else slots.appendChild(chip);
+  wPos++;
+  if(wPos===syll.length){
+    wDone=true;
+    const m=document.getElementById('wMsg');
+    m.innerHTML=`🎉 <b style="font-size:1.4rem">${w.word}</b> 완성! — ${w.en} ${w.emoji}`;
+    m.style.color='var(--block-vow)';
+    confetti();
+    speak(w.word,0.8);
+    document.getElementById('kStars').textContent=parseInt(document.getElementById('kStars').textContent)+1;
+    syncStars();
+    document.getElementById('wNext').style.display='block';
+    document.getElementById('wNext').textContent=(wIdx<wRound.length-1)?'다음 →':'퀘스트 완료! 🏆';
+  }
+}
+function wNextRound(){
+  if(wIdx<wRound.length-1){wIdx++;wRender();}
+  else{
+    confetti(40);
+    toast('🏆 단어 만들기 퀘스트 완료! ⭐3 획득!');
+    kidsQuestDone('word');
+    setTimeout(()=>show('scr-kids-map'),1400);
+  }
+}
+
 /* ───────── KIDS: 기초 다지기 (Level 1 unit00~04 복습) ───────── */
 const FOUND_UNITS=[
   {n:0,emoji:'🔤',label:'가나다라'},
@@ -936,7 +1127,7 @@ async function openFound(n){
   document.getElementById('fgBody').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ FNode=await loadFound(n) }
   catch(e){
-    document.getElementById('fgBody').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile-prototype.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('fgBody').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('fgTitle').textContent='오프라인';
     return;
   }
@@ -1085,7 +1276,7 @@ async function openEp(n){
   try{
     EP=await loadEp(n);
   }catch(e){
-    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile-prototype.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('flowTitle').textContent='오프라인';
     return;
   }
@@ -1218,6 +1409,49 @@ function fSrs(known){
 function dqDone(id){const el=document.getElementById(id);if(el){el.classList.add('done');el.querySelector('.dq-check').textContent='✓'}}
 
 /* ───────── KIDS: Level 2 오늘의 복습 (카드덱) ───────── */
+const L2_TITLES=[null,
+  {ko:'강아지가 뭘 해요?',en:'What is the puppy doing?'},
+  {ko:'형하고 나는 태권도를 해요',en:'My brother and I do taekwondo'},
+  {ko:'언제 할머니 댁에 가요?',en:"When do we go to grandma's house?"},
+  {ko:'사과가 어디에 있어요?',en:'Where is the apple?'},
+  {ko:'동물원에 가요',en:"We're going to the zoo"},
+  {ko:'형은 방에서 숙제를 해요',en:'My brother does homework in his room'},
+  {ko:'숫자 놀이를 해요',en:'Playing the number game'},
+  {ko:'세어 보아요',en:"Let's count"},
+  {ko:'갈비가 맛있어요',en:'Galbi is delicious'}
+];
+function openL2List(){
+  show('scr-l2-list');
+  renderL2List();
+}
+function renderL2List(){
+  let cur=parseInt(localStorage.getItem('l2CurUnit')||'1');
+  if(cur>9)cur=1;
+  const b=document.getElementById('l2ListBody');
+  let rows='';
+  for(let n=1;n<=9;n++){
+    const t=L2_TITLES[n];
+    if(n<cur){
+      rows+=`<div class="l2-row done" onclick="openL2(${n})">
+        <div class="l2-ico">✅</div>
+        <div class="l2-tt"><b>${n}과 · ${t.ko}</b><small>${t.en}</small></div>
+        <div class="l2-go">복습 Review</div>
+      </div>`;
+    }else if(n===cur){
+      rows+=`<div class="l2-row now" onclick="openL2(${n})">
+        <div class="l2-ico">🚪</div>
+        <div class="l2-tt"><b>비밀의 문 Secret Door</b><small>오늘의 새 이야기 · Today's new story</small></div>
+        <div class="l2-go">시작 Start</div>
+      </div>`;
+    }else{
+      rows+=`<div class="l2-row lock">
+        <div class="l2-ico">🔒</div>
+        <div class="l2-tt"><b>${n}과</b><small>아직 잠겨 있어요 · Locked</small></div>
+      </div>`;
+    }
+  }
+  b.innerHTML=rows;
+}
 const L2_CACHE={};
 let L2=null,l2Step=0,l2Card=0,l2Quiz=0,l2Sent=0,l2Picks=[];
 function openL2Today(){
@@ -1275,7 +1509,7 @@ async function openL2(n){
   document.getElementById('l2Body').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ L2=await loadL2(n) }
   catch(e){
-    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile-prototype.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('l2Title').textContent='오프라인';
     return;
   }
@@ -1401,7 +1635,8 @@ function l2Done(){
   localStorage.setItem('l2CurUnit',String(next));
   b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 복습 완료!</h2>
     <p>${L2.n}과 · ${L2.title}<br>⭐ 3개 획득! 다음엔 ${next}과를 만나요</p>
-    <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="show('scr-kids-map')">모험맵으로 →</button></div>`;
+    <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="openL2List()">단원 목록 Unit List →</button>
+    <button class="fn-next" style="padding:10px 36px;border-radius:14px;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,.25);color:#cfe6e3" onclick="show('scr-kids-map')">모험맵으로</button></div>`;
   confetti(40);
 }
 
@@ -1436,7 +1671,7 @@ async function openL3(n){
   document.getElementById('l3Body').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ L3=await loadL3(n) }
   catch(e){
-    document.getElementById('l3Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile-prototype.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('l3Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('l3Title').textContent='오프라인';
     return;
   }
