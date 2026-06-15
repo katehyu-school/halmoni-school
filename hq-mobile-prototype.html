@@ -135,7 +135,9 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .ep-item .ep-no b{font-size:.78rem;color:var(--teal)}
 .ep-item .ep-no span{font-size:1rem}
 .ep-item .ep-ti{font-size:.9rem;font-weight:700}
+.ep-item .ep-ti-en{font-size:.72rem;color:#8fb0ad;margin-top:1px}
 .ep-item .ep-sub{font-size:.68rem;color:#8fb0ad;margin-top:2px}
+.cont-card .ti-en{font-size:.78rem;color:#8fb0ad;margin:-2px 0 6px;font-weight:400}
 .ep-item .arr{margin-left:auto;color:var(--teal);font-weight:900}
 .stepper{display:flex;justify-content:space-between;padding:14px 26px 4px;position:relative}
 .stepper::before{content:'';position:absolute;left:48px;right:48px;top:29px;height:3px;background:rgba(255,255,255,.12)}
@@ -171,6 +173,18 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .sh-nav{display:flex;justify-content:space-between;gap:10px;margin-top:4px}
 .sh-nav button{flex:1;padding:11px;border-radius:14px;font-weight:700;font-size:.85rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#eaf4f3}
 .sh-nav button:disabled{opacity:.3}
+.tone-intro{font-size:.78rem;color:#bcd6d3;background:rgba(255,255,255,.05);border-radius:10px;padding:10px;margin-bottom:10px;line-height:1.5}
+.tone-intro .en{font-size:.68rem;color:#8fb0ad;margin-top:4px}
+.tone-sit{font-size:.8rem;font-weight:700;color:var(--gold);margin-bottom:10px}
+.tone-sit-en{font-size:.68rem;color:#8fb0ad;margin:-6px 0 10px}
+.tone-box{border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.tone-box .tone-label{font-size:.66rem;font-weight:700;margin-bottom:4px}
+.tone-box .tone-text{font-size:1rem;font-weight:700}
+.tone-box .en{font-size:.7rem;color:#8fb0ad;margin-top:4px}
+.tone-banmal{background:rgba(255,217,61,.1);border:1px solid rgba(255,217,61,.35)}
+.tone-banmal .tone-label{color:var(--gold)}
+.tone-jondaemal{background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.35)}
+.tone-jondaemal .tone-label{color:var(--teal)}
 .gcard-pattern{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.35);border-radius:12px;padding:11px;text-align:center;font-weight:700;color:var(--teal);font-size:.92rem;margin-bottom:10px}
 .gcard-expl{font-size:.78rem;color:#bcd6d3;line-height:1.55;margin-bottom:12px}
 .gx{display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:10px;padding:9px 12px;margin-bottom:7px;font-size:.8rem}
@@ -208,6 +222,59 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .web-sync{font-size:.68rem;color:#7e98a5;text-align:center;padding:4px 24px;line-height:1.5}
 .web-sync b{color:var(--teal)}
 .loading-ep{text-align:center;padding:50px 20px;color:#9fb6c9;font-size:.85rem}
+.ob-step{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ob-step:last-child{border:none}
+.ob-ico{font-size:1.4rem;width:34px;text-align:center;flex-shrink:0}
+.ob-step b{font-size:.88rem}
+.ob-d{font-size:.74rem;color:#8fb0ad;margin-top:2px;line-height:1.5}
+.ob-link{text-align:center;color:var(--teal);font-size:.78rem;font-weight:700;padding:12px}
+.rp-row{display:flex;gap:8px;margin-bottom:10px;align-items:flex-end}
+.rp-row.user{flex-direction:row-reverse}
+.rp-av{font-size:1.6rem;flex-shrink:0}
+.rp-bubble{max-width:75%;border-radius:4px 16px 16px 16px;padding:10px 13px;background:rgba(255,255,255,.08)}
+.rp-row.user .rp-bubble{border-radius:16px 4px 16px 16px;background:rgba(78,205,196,.18)}
+.rp-bubble .ko{font-size:.9rem;font-weight:600}
+.rp-bubble .en{font-size:.68rem;color:#8fb0ad;margin-top:3px}
+.rp-choices{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.rp-choice{background:rgba(255,255,255,.08);border-radius:12px;padding:11px 14px;text-align:left;font-size:.86rem;font-weight:700;color:#eaf4f3}
+.rp-choice .en{display:block;font-size:.68rem;color:#8fb0ad;font-weight:400;margin-top:2px}
+.rp-choice.banmal{border:1px solid rgba(255,217,61,.3)}
+.rp-choice.jondaemal{border:1px solid rgba(78,205,196,.3)}
+.rp-fb{font-size:.74rem;border-radius:10px;padding:8px 11px;margin:2px 0 8px;line-height:1.5}
+.rp-fb.ok{background:rgba(78,205,196,.12);color:#bcd6d3}
+.rp-fb.warn{background:rgba(255,217,61,.12);color:#ffe9a8}
+.rp-fb .en{font-size:.64rem;opacity:.8;margin-top:2px}
+.kk-card{background:#9bb6cf;border-radius:16px;padding:12px;margin-bottom:10px}
+.kk-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-end}
+.kk-row.me{flex-direction:row-reverse}
+.kk-av{font-size:1.3rem;flex-shrink:0;width:26px;text-align:center}
+.kk-name{font-size:.66rem;color:#3c4f5e;margin-bottom:2px}
+.kk-row.me .kk-name{text-align:right}
+.kk-bubble{max-width:74%;border-radius:14px;padding:9px 12px}
+.kk-row:not(.me) .kk-bubble{background:#fff;border-radius:4px 14px 14px 14px}
+.kk-row.me .kk-bubble{background:#FEE500;border-radius:14px 4px 14px 14px}
+.kk-bubble .ko{font-size:.88rem;font-weight:600;color:#2b2b2b}
+.kk-bubble .en{font-size:.66rem;color:#6b6b6b;margin-top:3px}
+.kk-choices{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.kk-choice{background:rgba(255,255,255,.08);border-radius:12px;padding:11px 14px;text-align:left;font-size:.86rem;font-weight:700;color:#eaf4f3}
+.kk-choice .en{display:block;font-size:.68rem;color:#8fb0ad;font-weight:400;margin-top:2px}
+.kk-choice.banmal{border:1px solid rgba(255,217,61,.3)}
+.kk-choice.jondaemal{border:1px solid rgba(78,205,196,.3)}
+.kk-fb{font-size:.74rem;border-radius:10px;padding:8px 11px;margin:2px 0 8px;line-height:1.5}
+.kk-fb.ok{background:rgba(78,205,196,.12);color:#bcd6d3}
+.kk-fb.warn{background:rgba(255,217,61,.12);color:#ffe9a8}
+.kk-fb .en{font-size:.64rem;opacity:.8;margin-top:2px}
+.share-card{background:linear-gradient(160deg,#0d3350,#061525);border-radius:20px;padding:28px 20px;text-align:center;border:1px solid rgba(78,205,196,.2);margin-bottom:14px}
+.share-card .sc-emoji{font-size:3.2rem}
+.share-card .sc-brand{color:var(--teal);font-weight:900;font-size:.7rem;letter-spacing:.15em;margin-top:6px}
+.share-card .sc-title{margin:10px 0 2px;font-size:1.1rem}
+.share-card .sc-title-en{font-size:.74rem;color:#8fb0ad}
+.share-card .sc-sub{margin-top:14px;font-size:.86rem;color:#bcd6d3;line-height:1.5}
+.share-card .sc-sub-en{font-size:.7rem;color:#8fb0ad;margin-top:2px}
+.share-card .sc-stats{display:flex;justify-content:center;gap:24px;margin-top:18px}
+.share-card .sc-stat .v{font-size:1.2rem;font-weight:900}
+.share-card .sc-stat .k{font-size:.66rem;color:#8fb0ad;margin-top:2px}
+.share-actions{margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -282,6 +349,32 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   </div>
 </section>
 
+<!-- HQ: ONBOARDING -->
+<section class="screen hq" id="scr-hq-onboard">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-profile')">←</button>
+    <h1>👋 시작하기 전에</h1>
+  </div>
+  <div class="hq-pad">
+    <div class="card cont-card" style="text-align:center">
+      <h2 style="margin-top:4px">Hangeul Quest</h2>
+      <p>Level 1 · ep01~12 — 웹에서 배운 에피소드를 모바일로 짧게 복습해요<br><span style="font-size:.7rem;color:#8fb0ad">Review episodes you've studied on the web, in short mobile sessions</span></p>
+    </div>
+    <div class="card">
+      <h3>🗺️ 4단계 학습 흐름 · 4-Step Flow</h3>
+      <div class="ob-step"><span class="ob-ico">👀</span><div><b>Watch</b><div class="ob-d">장면 다시 보기 + 🎙️ 쉐도잉 연습(따라 말하기)<br>Re-watch the scene + shadow the dialogue</div></div></div>
+      <div class="ob-step"><span class="ob-ico">💡</span><div><b>Learn</b><div class="ob-d">문법 카드 + 🗣️ 존댓말·반말 비교<br>Grammar cards + formal/informal tone comparison</div></div></div>
+      <div class="ob-step"><span class="ob-ico">✏️</span><div><b>Practice</b><div class="ob-d">맥락 퀴즈로 확인 · Quick context quizzes</div></div></div>
+      <div class="ob-step"><span class="ob-ico">🔁</span><div><b>Review</b><div class="ob-d">단어 카드 — 간격 복습(SRS) · Vocabulary flashcards</div></div></div>
+    </div>
+    <div class="card">
+      <h3>🔥 Daily Quest &amp; XP</h3>
+      <p style="font-size:.8rem;color:#bcd6d3;line-height:1.6">매일 4단계를 완료하면 XP를 모으고 연속 학습일(스트릭)이 쌓여요. 홈 화면에서 오늘의 추천 에피소드를 바로 시작할 수 있어요.<br><span style="font-size:.7rem;color:#8fb0ad">Complete all 4 steps daily to earn XP and build a streak. Your home screen always shows today's recommended episode.</span></p>
+    </div>
+    <button class="go-btn" onclick="finishOnboard()">시작할게요! → Let's go!</button>
+  </div>
+</section>
+
 <!-- HQ: DASHBOARD -->
 <section class="screen hq" id="scr-hq-home">
   <div class="topbar">
@@ -296,10 +389,11 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <div class="stat"><div class="v">85%</div><div class="k">이번 주 목표</div></div>
     </div>
     <div class="card cont-card">
-      <span class="ep-tag">이어서 학습 · L1 ep05</span>
-      <h2>광장시장에 가요?</h2>
-      <p>웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요</p>
-      <button class="go-btn" onclick="openEp(5)">▶ 5분 복습 시작</button>
+      <span class="ep-tag" id="contTag">이어서 학습 · L1 ep05</span>
+      <h2 id="contTitle">광장시장에 가요?</h2>
+      <div class="ti-en" id="contTitleEn">Shall We Go to Gwangjang Market?</div>
+      <p id="contDesc">웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요</p>
+      <button class="go-btn" id="contBtn" onclick="openEp(5)">▶ 5분 복습 시작</button>
     </div>
     <div class="card">
       <h3>📋 Daily Quest</h3>
@@ -307,13 +401,26 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <div class="dq-item" id="dq2"><span class="dq-check"></span><span>문법 카드 복습 (Learn)</span><span class="dq-xp">+15 XP</span></div>
       <div class="dq-item" id="dq3"><span class="dq-check"></span><span>맥락 퀴즈 풀기 (Practice)</span><span class="dq-xp">+20 XP</span></div>
       <div class="dq-item" id="dq4"><span class="dq-check"></span><span>단어 복습 5장 (Review)</span><span class="dq-xp">+15 XP</span></div>
+      <div class="dq-item" id="dq5"><span class="dq-check"></span><span>캐릭터 롤플레이 (Roleplay)</span><span class="dq-xp">+20 XP</span></div>
+      <div class="dq-item" id="dq6"><span class="dq-check"></span><span>카카오톡 시뮬레이션 (Kakao)</span><span class="dq-xp">+15 XP</span></div>
     </div>
+    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
+      <span style="font-size:1.6rem">🎭</span>
+      <span><b style="font-size:.92rem">캐릭터 롤플레이 <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
+      <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
+    </button>
+    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="kkOpen()">
+      <span style="font-size:1.6rem">💬</span>
+      <span><b style="font-size:.92rem">카카오톡 시뮬레이션 <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad">L1 ep05 · 친구와 약속 잡기 — 반말 연습</span></span>
+      <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
+    </button>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="showEpList()">
       <span style="font-size:1.6rem">📚</span>
       <span><b style="font-size:.92rem">전체 에피소드</b><br><span style="font-size:.72rem;color:#8fb0ad">Level 1 · ep01~12 복습/프리뷰</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
     <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (다음 단계: Supabase 연동)</div>
+    <button class="card ob-link" onclick="show('scr-hq-onboard')">❓ 이용 방법 다시 보기</button>
   </div>
   <div class="bottomnav">
     <button class="bn-item on"><span>🏠</span><span>홈</span></button>
@@ -345,6 +452,33 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <div class="step" id="st3"><div class="sc">🔁</div>Review</div>
   </div>
   <div class="flow-body" id="flowBody"></div>
+</section>
+
+<!-- HQ: CHARACTER ROLEPLAY (mock AI) -->
+<section class="screen hq" id="scr-hq-roleplay">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>🎭 캐릭터 롤플레이</h1>
+  </div>
+  <div class="hq-pad" id="rpBody"></div>
+</section>
+
+<!-- HQ: KAKAOTALK SIMULATION (mock AI) -->
+<section class="screen hq" id="scr-hq-kakao">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>💬 카카오톡 시뮬레이션</h1>
+  </div>
+  <div class="hq-pad" id="kkBody"></div>
+</section>
+
+<!-- HQ: SHARE CARD -->
+<section class="screen hq" id="scr-hq-share">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>📤 공유하기</h1>
+  </div>
+  <div class="hq-pad" id="shareBody"></div>
 </section>
 
 </div>
@@ -397,7 +531,23 @@ function confetti(n){
   }
 }
 function enterKids(){show('scr-kids-map')}
-function enterHQ(){show('scr-hq-home')}
+function enterHQ(){
+  if(!localStorage.getItem('hqOnboardSeen')){show('scr-hq-onboard');return}
+  renderHome();show('scr-hq-home')
+}
+function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();show('scr-hq-home')}
+function renderHome(){
+  const last=parseInt(localStorage.getItem('hqLastEp')||'5');
+  const done=localStorage.getItem('hqLastEpDone')==='1';
+  document.getElementById('contTag').textContent=`이어서 학습 · L1 ep${String(last).padStart(2,'0')}`;
+  document.getElementById('contTitle').textContent=EP_TITLES[last]||'';
+  document.getElementById('contTitleEn').textContent=EP_TITLES_EN[last]||'';
+  document.getElementById('contDesc').textContent=done
+    ?'오늘 복습 완료! 🎉 다른 에피소드도 둘러볼까요?'
+    :'웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요';
+  document.getElementById('contBtn').textContent=done?'🔁 다시 복습하기':'▶ 5분 복습 시작';
+  document.getElementById('contBtn').onclick=()=>openEp(last);
+}
 
 /* ───────── KIDS block game ───────── */
 const GAME=[
@@ -470,6 +620,7 @@ function gNextRound(){
 
 /* ───────── HQ: episode data (fetch from data/nhs/L1) ───────── */
 const EP_TITLES=[null,'안녕! 나는 정민이야.','누구예요?','잘 먹겠습니다','우리 몇 시에 만날까?','광장시장에 가요?','김밥 주세요','한국어 스터디 그룹을 만들어요','내 도시락은 어디에 있어요?','딸기 한 박스하고 사과 여섯 개 주세요','자전거 소풍을 가요','어서 오세요','경복궁에 갈 거예요!'];
+const EP_TITLES_EN=[null,"Hi! I'm Jeongmin.",'Who Is It?','Time for Dinner','What Time Shall We Meet?','Shall We Go to Gwangjang Market?','Kimbap, Please!',"Let's Make a Korean Study Group","Where's My Lunchbox?",'A Box of Strawberries and Six Apples, Please',"We're Going on a Bicycle Picnic",'Welcome!',"We're Going to Gyeongbokgung!"];
 const EP_EMOJI=[null,'🏞️','🏠','🍚','🛏️','🚌','🏪','🏫','🍳','🏮','🌸','🏠','🌞'];
 const EP_CACHE={};
 let EP=null; // current normalized episode
@@ -480,7 +631,7 @@ function showEpList(){
     if(!t)return'';
     return `<button class="ep-item" onclick="openEp(${n})">
       <span class="ep-no"><span>${EP_EMOJI[n]}</span><b>ep${String(n).padStart(2,'0')}</b></span>
-      <span><div class="ep-ti">${t}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
+      <span><div class="ep-ti">${t}</div><div class="ep-ti-en">${EP_TITLES_EN[n]}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
       <span class="arr">→</span></button>`;
   }).join('');
   show('scr-hq-eps');
@@ -524,7 +675,16 @@ function normalizeEp(n,d){
   })});
   // shuffle, pick 5
   for(let i=vitems.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vitems[i],vitems[j]]=[vitems[j],vitems[i]]}
-  return {n, title:d.title||EP_TITLES[n], slides:d.slides||[], script, gram, quiz, vocab:vitems.slice(0,5)};
+  const bj=d.banmal_jondaemal||{};
+  const tone={
+    intro:bj.intro_ko||'', introEn:bj.intro_en||'',
+    rows:(bj.rows||[]).map(r=>({sit:r.situation_ko||'', banmal:r.banmal||'', jondaemal:(r.jondaemal||'').replace(/\s*✅.*$/,'').trim()})),
+    adult:bj.adult_dialogue?{
+      title:bj.adult_dialogue.title_ko||'', titleEn:bj.adult_dialogue.title_en||'',
+      lines:(bj.adult_dialogue.lines||[]).map(l=>({spk:l.speaker||'', ko:l.text||'', en:l.en||''}))
+    }:null
+  };
+  return {n, title:d.title||EP_TITLES[n], slides:d.slides||[], script, gram, quiz, vocab:vitems.slice(0,5), tone};
 }
 async function openEp(n){
   show('scr-hq-flow');
@@ -538,7 +698,8 @@ async function openEp(n){
     return;
   }
   document.getElementById('flowTitle').textContent=`ep${String(n).padStart(2,'0')} · ${EP.title}`;
-  fStep=0;fQuiz=0;fCard=0;watchMode='list';shIdx=0;shCleanup();fRender();
+  localStorage.setItem('hqLastEp',n);localStorage.setItem('hqLastEpDone','0');
+  fStep=0;fQuiz=0;fCard=0;watchMode='list';shIdx=0;shCleanup();learnMode='gram';toneIdx=0;fRender();
 }
 
 /* ───────── HQ: 4-step flow ───────── */
@@ -582,7 +743,16 @@ function fRender(){
       <div class="flow-nav"><button class="fn-next" onclick="fNext()">다음 단계: Learn 💡</button></div>`;
   }
   else if(fStep===1){ /* LEARN */
-    b.innerHTML=EP.gram.map(g=>`<div class="card"><h3>${g.icon} ${g.title}${g.tier==='core'?' <span style="font-size:.58rem;background:var(--gold);color:#5a4500;padding:2px 7px;border-radius:99px">CORE</span>':''}</h3>
+    const toggle=`<div class="watch-toggle">
+      <button class="wt-btn${learnMode==='gram'?' on':''}" onclick="learnSetMode('gram')">💡 문법 카드</button>
+      <button class="wt-btn${learnMode==='tone'?' on':''}" onclick="learnSetMode('tone')">🗣️ 존댓말·반말</button>
+    </div>`;
+    if(learnMode==='tone'){
+      b.innerHTML=toggle+toneRenderCard()+
+        `<div class="flow-nav"><button class="fn-ghost" onclick="fPrev()">← Watch</button><button class="fn-next" onclick="fNext();dqDone('dq2')">다음: Practice ✏️</button></div>`;
+      return;
+    }
+    b.innerHTML=toggle+EP.gram.map(g=>`<div class="card"><h3>${g.icon} ${g.title}${g.tier==='core'?' <span style="font-size:.58rem;background:var(--gold);color:#5a4500;padding:2px 7px;border-radius:99px">CORE</span>':''}</h3>
       ${g.pattern?`<div class="gcard-pattern">${g.pattern}</div>`:''}
       ${g.expl?`<div class="gcard-expl">${g.expl}</div>`:''}
       ${g.rows?g.rows.map(r=>`<div class="gx"><span>${r[0]}</span><span style="text-align:right">${r[r.length-1]}</span></div>`).join(''):''}
@@ -607,7 +777,7 @@ function fRender(){
     if(fCard>=EP.vocab.length){
       b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 5분 복습 완료!</h2>
         <p>ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
-        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="dqDone('dq4');show('scr-hq-home')">홈으로</button>
+        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="shareOpen({emoji:'🏆',title_ko:'오늘의 5분 복습 완료!',title_en:'5-min review complete!',sub_ko:'ep'+String(EP.n).padStart(2,'0')+' · '+EP.title,sub_en:EP_TITLES_EN[EP.n],xp:60,dqIds:[],confetti:false})">결과 공유하기 →</button>
         <button class="fn-ghost" style="padding:12px 30px;border-radius:14px;font-weight:700" onclick="showEpList()">다른 에피소드 →</button></div>`;
       confetti(30);dqDone('dq3');dqDone('dq4');
       return;
@@ -649,6 +819,273 @@ function fSrs(known){
   setTimeout(fRender,350);
 }
 function dqDone(id){const el=document.getElementById(id);if(el){el.classList.add('done');el.querySelector('.dq-check').textContent='✓'}}
+
+/* ───────── HQ: 캐릭터 롤플레이 (mock AI) ───────── */
+const RP_EP05={
+  scene_ko:'광장시장 입구를 못 찾겠어요. 지나가는 어른에게 길을 물어봐요.',
+  scene_en:"You can't find the entrance to Gwangjang Market. Ask a stranger for directions.",
+  you:{name:'미래',av:'👧'},
+  npc:{name:'행인',av:'🧑'},
+  nodes:[
+    {choices:[
+      {ko:'저기요, 광장시장이 어디예요?',en:'Excuse me, where is Gwangjang Market?',tone:'jon',
+       reply:{ko:'저쪽으로 쭉 가시면 나와요.',en:'If you go straight that way, you will reach it.'},
+       fb:{type:'ok',ko:'좋아요! 모르는 어른에게는 존댓말이 자연스러워요.',en:'Nice — polite speech (jondaemal) is natural with a stranger.'}},
+      {ko:'저기, 광장시장 어디야?',en:'Hey, where is Gwangjang Market?',tone:'ban',
+       reply:{ko:'(살짝 당황) 음... 저쪽으로 쭉 가시면 나와요.',en:'(a little surprised) Um... if you go straight that way, you will reach it.'},
+       fb:{type:'warn',ko:'모르는 어른에게는 반말 대신 존댓말 "어디예요?"를 써요.',en:'With a stranger, use jondaemal "어디예요?" instead of banmal.'}}
+    ]},
+    {choices:[
+      {ko:'버스로는 어떻게 가요?',en:'How do I get there by bus?',tone:'jon',
+       reply:{ko:'버스는 반대 방향에서 타셔야 해요.',en:'For the bus, you need to take it from the opposite direction.'},
+       fb:{type:'ok',ko:'좋아요! 추가 질문도 존댓말로 자연스럽게 이어졌어요.',en:'Great — the follow-up question stayed polite too.'}},
+      {ko:'고마워!',en:'Thanks!',tone:'ban',
+       reply:{ko:'(웃으며) 네~ 안녕히 가세요!',en:'(smiling) Sure~ take care!'},
+       fb:{type:'warn',ko:'대화를 마칠 때도 "감사합니다!"가 더 자연스러워요.',en:'"감사합니다!" is more natural when wrapping up too.'},
+       end:true}
+    ]},
+    {choices:[
+      {ko:'아, 감사합니다!',en:'Ah, thank you!',tone:'jon',
+       reply:{ko:'네, 안녕히 가세요!',en:'You are welcome, take care!'},
+       fb:{type:'ok',ko:'완벽해요! 처음부터 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'고마워요!',en:'Thanks!',tone:'jon',
+       reply:{ko:'네, 안녕히 가세요!',en:'You are welcome, take care!'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 마무리였어요.',en:'Nice, a natural way to wrap up.'},
+       end:true}
+    ]}
+  ]
+};
+let rpIdx=0, rpScore=0, rpLog=[];
+function rpOpen(){rpIdx=0;rpScore=0;rpLog=[];rpRender();show('scr-hq-roleplay')}
+function rpRender(){
+  const box=document.getElementById('rpBody');
+  const sceneHtml=`<div class="card" style="text-align:center"><div style="font-size:.78rem;color:#bcd6d3;line-height:1.5">${RP_EP05.scene_ko}<div style="font-size:.68rem;color:#8fb0ad;margin-top:4px">${RP_EP05.scene_en}</div></div></div>`;
+  const logHtml=rpLog.map(m=>{
+    if(m.side==='fb')return `<div class="rp-fb ${m.type}">${m.ko}<div class="en">${m.en}</div></div>`;
+    const who=m.side==='npc'?RP_EP05.npc:RP_EP05.you;
+    return `<div class="rp-row ${m.side==='user'?'user':''}"><span class="rp-av">${who.av}</span><div class="rp-bubble"><div class="ko">${m.ko} <span class="tts-sm" onclick="speak('${m.ko.replace(/'/g,"\\'")}')">🔊</span></div><div class="en">${m.en}</div></div></div>`;
+  }).join('');
+  const node=RP_EP05.nodes[rpIdx];
+  let tailHtml;
+  if(node){
+    tailHtml=`<div class="rp-choices">`+node.choices.map((c,i)=>
+      `<button class="rp-choice ${c.tone==='jon'?'jondaemal':'banmal'}" onclick="rpChoose(${i})">${c.ko}<span class="en">${c.en}</span></button>`
+    ).join('')+`</div>`;
+  }else{
+    const turns=rpLog.filter(m=>m.side==='fb').length;
+    tailHtml=`<div class="card cont-card" style="text-align:center">
+      <h2 style="margin-top:4px">🎉 롤플레이 완료!</h2>
+      <p>존댓말 선택 ${rpScore} / ${turns}<br><span style="font-size:.7rem;color:#8fb0ad">Polite-speech choices: ${rpScore} / ${turns}</span></p>
+      <button class="go-btn" onclick="rpOpen()">🔁 다시 하기 · Try again</button>
+    </div>
+    <div class="flow-nav"><button class="fn-next" onclick="shareOpen({emoji:'🎭',title_ko:'캐릭터 롤플레이 완료!',title_en:'Roleplay complete!',sub_ko:'존댓말 선택 '+rpScore+' / '+turns,sub_en:'Polite-speech choices: '+rpScore+'/'+turns,xp:20,dqIds:['dq5']})">결과 공유하기 →</button></div>`;
+  }
+  box.innerHTML=sceneHtml+logHtml+tailHtml;
+}
+function rpChoose(i){
+  const c=RP_EP05.nodes[rpIdx].choices[i];
+  rpLog.push({side:'user',ko:c.ko,en:c.en});
+  rpLog.push({side:'fb',type:c.fb.type,ko:c.fb.ko,en:c.fb.en});
+  if(c.fb.type==='ok')rpScore++;
+  rpLog.push({side:'npc',ko:c.reply.ko,en:c.reply.en});
+  rpIdx=c.end?RP_EP05.nodes.length:rpIdx+1;
+  rpRender();
+}
+
+/* ───────── HQ: 카카오톡 시뮬레이션 (mock AI) ───────── */
+const KK_EP05={
+  scene_ko:'올리비아와 카카오톡으로 광장시장 약속을 잡아요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with Olivia on KakaoTalk to plan a trip to Gwangjang Market. Banmal (casual speech) is natural between friends.',
+  me:{name:'미래',av:'👧'},
+  friend:{name:'올리비아',av:'🙋‍♀️'},
+  script:[
+    {t:'msg',side:'me',ko:'올리비아야, 오늘 광장시장 갈래?',en:'Olivia, want to go to Gwangjang Market today?'},
+    {t:'msg',side:'friend',ko:'콜! 몇 시에?',en:'Deal! What time?'},
+    {t:'choice',choices:[
+      {ko:'오후 2시 어때?',en:'How about 2pm?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구 사이엔 반말 "어때?"가 자연스러워요.',en:'Nice — "어때?" (casual) is natural between friends.'}},
+      {ko:'오후 2시가 어떠세요?',en:'How would 2pm be for you? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친한 친구에게 존댓말을 쓰면 어색해요. "어때?"가 자연스러워요.',en:'Polite speech sounds odd with a close friend — "어때?" is more natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'좋아! 버스로 가자~',en:"Sounds good! Let's take the bus~"},
+    {t:'msg',side:'me',ko:'몇 번 버스 타야 해?',en:'Which bus number should we take?'},
+    {t:'msg',side:'friend',ko:'나도 몰라 ㅋㅋ 찾아볼게!',en:"I don't know either lol, I'll look it up!"},
+    {t:'choice',choices:[
+      {ko:'ㅋㅋ 알겠어! 이따 봐~',en:'Haha okay! See you later~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 나중에 뵙겠습니다.',en:'Yes, understood. I will see you later. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "알겠어! 이따 봐~"처럼 편하게 말해요.',en:'Way too stiff for a friend! Try something relaxed like "알겠어! 이따 봐~".'}}
+    ]}
+  ]
+};
+let kkIdx=0, kkScore=0, kkLog=[];
+function kkOpen(){kkIdx=0;kkScore=0;kkLog=[];kkRender();show('scr-hq-kakao')}
+function kkRender(){
+  const box=document.getElementById('kkBody');
+  const sceneHtml=`<div class="card" style="text-align:center"><div style="font-size:.78rem;color:#bcd6d3;line-height:1.5">${KK_EP05.scene_ko}<div style="font-size:.68rem;color:#8fb0ad;margin-top:4px">${KK_EP05.scene_en}</div></div></div>`;
+  const logHtml=kkLog.length?`<div class="kk-card">`+kkLog.map(m=>{
+    if(m.side==='fb')return `<div class="kk-fb ${m.type}">${m.ko}<div class="en">${m.en}</div></div>`;
+    const who=m.side==='me'?KK_EP05.me:KK_EP05.friend;
+    return `<div class="kk-row ${m.side==='me'?'me':''}"><span class="kk-av">${who.av}</span><div><div class="kk-name">${who.name}</div><div class="kk-bubble"><div class="ko">${m.ko} <span class="tts-sm" onclick="speak('${m.ko.replace(/'/g,"\\'")}')">🔊</span></div><div class="en">${m.en}</div></div></div></div>`;
+  }).join('')+`</div>`:'';
+  const item=KK_EP05.script[kkIdx];
+  let tailHtml;
+  if(item && item.t==='msg'){
+    const who=item.side==='me'?KK_EP05.me:KK_EP05.friend;
+    const previewHtml=`<div class="kk-card"><div class="kk-row ${item.side==='me'?'me':''}"><span class="kk-av">${who.av}</span><div><div class="kk-name">${who.name}</div><div class="kk-bubble"><div class="ko">${item.ko} <span class="tts-sm" onclick="speak('${item.ko.replace(/'/g,"\\'")}')">🔊</span></div><div class="en">${item.en}</div></div></div></div></div>`;
+    tailHtml=previewHtml+`<div class="flow-nav"><button class="fn-next" onclick="kkNext()">다음 → Next</button></div>`;
+  }else if(item && item.t==='choice'){
+    tailHtml=`<div class="kk-choices">`+item.choices.map((c,i)=>
+      `<button class="kk-choice ${c.tone==='jon'?'jondaemal':'banmal'}" onclick="kkChoose(${i})">${c.ko}<span class="en">${c.en}</span></button>`
+    ).join('')+`</div>`;
+  }else{
+    const turns=kkLog.filter(m=>m.side==='fb').length;
+    tailHtml=`<div class="card cont-card" style="text-align:center">
+      <h2 style="margin-top:4px">🎉 카톡 완료!</h2>
+      <p>반말 선택 ${kkScore} / ${turns}<br><span style="font-size:.7rem;color:#8fb0ad">Banmal choices: ${kkScore} / ${turns}</span></p>
+      <button class="go-btn" onclick="kkOpen()">🔁 다시 하기 · Try again</button>
+    </div>
+    <div class="flow-nav"><button class="fn-next" onclick="shareOpen({emoji:'💬',title_ko:'카카오톡 시뮬레이션 완료!',title_en:'KakaoTalk simulation complete!',sub_ko:'반말 선택 '+kkScore+' / '+turns,sub_en:'Banmal choices: '+kkScore+'/'+turns,xp:15,dqIds:['dq6']})">결과 공유하기 →</button></div>`;
+  }
+  box.innerHTML=sceneHtml+logHtml+tailHtml;
+}
+function kkNext(){
+  const item=KK_EP05.script[kkIdx];
+  kkLog.push({side:item.side,ko:item.ko,en:item.en});
+  kkIdx++;
+  kkRender();
+}
+function kkChoose(i){
+  const item=KK_EP05.script[kkIdx];
+  const c=item.choices[i];
+  kkLog.push({side:'me',ko:c.ko,en:c.en});
+  kkLog.push({side:'fb',type:c.fb.type,ko:c.fb.ko,en:c.fb.en});
+  if(c.fb.type==='ok')kkScore++;
+  kkIdx++;
+  kkRender();
+}
+
+/* ───────── HQ: 공유 카드 (share card) ───────── */
+let SHARE_DATA=null;
+function shareOpen(opts){
+  SHARE_DATA=opts;
+  if(opts.dqIds)opts.dqIds.forEach(id=>dqDone(id));
+  if(opts.confetti!==false)confetti(30);
+  shareRender();
+  show('scr-hq-share');
+}
+function shareRender(){
+  const d=SHARE_DATA;
+  document.getElementById('shareBody').innerHTML=`
+    <div class="share-card" id="shareCardVisual">
+      <div class="sc-emoji">${d.emoji}</div>
+      <div class="sc-brand">HANGEUL QUEST</div>
+      <h2 class="sc-title">${d.title_ko}</h2>
+      <div class="sc-title-en">${d.title_en}</div>
+      <div class="sc-sub">${d.sub_ko}</div>
+      ${d.sub_en?`<div class="sc-sub-en">${d.sub_en}</div>`:''}
+      <div class="sc-stats">
+        <div class="sc-stat"><div class="v">⭐ +${d.xp}</div><div class="k">XP · 오늘 획득</div></div>
+        <div class="sc-stat"><div class="v">🔥 8</div><div class="k">연속 학습일</div></div>
+      </div>
+    </div>
+    <div class="share-actions">
+      <button class="go-btn" onclick="shareNative()">📤 공유하기 · Share</button>
+      <button class="fn-ghost" style="width:100%;padding:13px;border-radius:14px;font-weight:700;margin-top:8px" onclick="shareDownload()">💾 이미지로 저장 · Save image</button>
+    </div>
+    <div class="flow-nav"><button class="fn-next" onclick="shareGoHome()">홈으로 → Home</button></div>`;
+}
+function shareGoHome(){
+  localStorage.setItem('hqLastEpDone','1');
+  renderHome();show('scr-hq-home');
+}
+function shareNative(){
+  const d=SHARE_DATA;
+  const text=`${d.emoji} ${d.title_ko} (${d.title_en})\n${d.sub_ko}\n⭐ +${d.xp} XP · 🔥 연속 학습 8일째!\n#HangeulQuest #한국어공부`;
+  if(navigator.share){
+    navigator.share({title:'Hangeul Quest',text}).catch(()=>{});
+  }else if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>toast('클립보드에 복사됐어요! · Copied to clipboard'));
+  }else{
+    toast('공유 기능을 지원하지 않는 환경이에요');
+  }
+}
+function shareWrapText(ctx,text,x,y,maxWidth,lineHeight){
+  const words=text.split(' ');
+  let line='',ly=y;
+  for(let n=0;n<words.length;n++){
+    const test=line+words[n]+' ';
+    if(ctx.measureText(test).width>maxWidth&&n>0){
+      ctx.fillText(line,x,ly);line=words[n]+' ';ly+=lineHeight;
+    }else line=test;
+  }
+  ctx.fillText(line,x,ly);
+}
+function shareDownload(){
+  const d=SHARE_DATA;
+  const cv=document.createElement('canvas');
+  cv.width=720;cv.height=1280;
+  const ctx=cv.getContext('2d');
+  const g=ctx.createLinearGradient(0,0,0,cv.height);
+  g.addColorStop(0,'#0d3350');g.addColorStop(1,'#061525');
+  ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.fillStyle='rgba(78,205,196,.12)';
+  ctx.beginPath();ctx.arc(cv.width/2,260,260,0,Math.PI*2);ctx.fill();
+  ctx.textAlign='center';
+  ctx.font='160px sans-serif';
+  ctx.fillText(d.emoji,cv.width/2,330);
+  ctx.fillStyle='#4ECDC4';ctx.font='900 36px sans-serif';
+  ctx.fillText('HANGEUL QUEST',cv.width/2,430);
+  ctx.fillStyle='#eaf4f3';ctx.font='900 52px "Noto Sans KR",sans-serif';
+  shareWrapText(ctx,d.title_ko,cv.width/2,540,640,64);
+  ctx.fillStyle='#8fb0ad';ctx.font='400 30px sans-serif';
+  ctx.fillText(d.title_en,cv.width/2,650);
+  ctx.fillStyle='#bcd6d3';ctx.font='600 34px "Noto Sans KR",sans-serif';
+  shareWrapText(ctx,d.sub_ko,cv.width/2,770,640,46);
+  ctx.fillStyle='#FFD93D';ctx.font='900 56px sans-serif';
+  ctx.fillText(`⭐ +${d.xp} XP`,cv.width/2,960);
+  ctx.fillStyle='#FF6B6B';ctx.font='900 44px sans-serif';
+  ctx.fillText('🔥 연속 학습 8일째!',cv.width/2,1040);
+  ctx.fillStyle='#5a7a78';ctx.font='400 26px sans-serif';
+  ctx.fillText('hangeulquest.com',cv.width/2,1210);
+  cv.toBlob(blob=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='hangeul-quest-share.png';
+    a.click();
+    toast('이미지가 저장됐어요! · Image saved');
+  });
+}
+
+/* ───────── HQ: 존댓말 vs 반말 스위치 카드 ───────── */
+let learnMode='gram'; // 'gram' | 'tone'
+let toneIdx=0;
+function learnSetMode(m){learnMode=m;toneIdx=0;fRender();}
+function toneNav(dir){
+  const t=EP.tone, total=t.rows.length+(t.adult?1:0);
+  toneIdx=Math.max(0,Math.min(total-1,toneIdx+dir));
+  fRender();
+}
+function toneRenderCard(){
+  const t=EP.tone;
+  const total=t.rows.length+(t.adult?1:0);
+  if(total===0)return `<div class="card"><h3>🗣️ 존댓말 vs 반말</h3><p style="font-size:.8rem;color:#9fb6c9">이 에피소드에는 톤 비교 카드가 없어요.</p></div>`;
+  const introHtml=(toneIdx===0&&t.intro)?`<div class="tone-intro">${t.intro}${t.introEn?`<div class="en">${t.introEn}</div>`:''}</div>`:'';
+  let body;
+  if(toneIdx<t.rows.length){
+    const r=t.rows[toneIdx];
+    body=`<div class="tone-sit">${r.sit}</div>
+      <div class="tone-box tone-banmal"><div class="tone-label">😎 친구한테 · Banmal</div><div class="tone-text">${r.banmal} <button class="tts-sm" onclick="speak('${r.banmal.replace(/'/g,"\\'")}')">🔊</button></div></div>
+      <div class="tone-box tone-jondaemal"><div class="tone-label">🙏 어른한테 · Jondaemal</div><div class="tone-text">${r.jondaemal} <button class="tts-sm" onclick="speak('${r.jondaemal.replace(/'/g,"\\'")}')">🔊</button></div></div>`;
+  }else{
+    const a=t.adult;
+    body=`<div class="tone-sit">💼 ${a.title}</div>${a.titleEn?`<div class="tone-sit-en">${a.titleEn}</div>`:''}
+      ${a.lines.map(l=>`<div class="tone-box tone-jondaemal"><div class="tone-label">${l.spk}</div><div class="tone-text">${l.ko} <button class="tts-sm" onclick="speak('${l.ko.replace(/'/g,"\\'")}')">🔊</button></div>${l.en?`<div class="en">${l.en}</div>`:''}</div>`).join('')}`;
+  }
+  return `<div class="card"><h3>🗣️ 존댓말 vs 반말 ${toneIdx+1} / ${total}</h3>${introHtml}${body}</div>
+    <div class="sh-nav"><button onclick="toneNav(-1)" ${toneIdx===0?'disabled':''}>← 이전</button><button onclick="toneNav(1)" ${toneIdx===total-1?'disabled':''}>다음 →</button></div>`;
+}
 
 /* ───────── HQ: 쉐도잉 (Shadowing) 모드 ───────── */
 let watchMode='list'; // 'list' | 'shadow'
