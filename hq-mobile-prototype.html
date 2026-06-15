@@ -1243,15 +1243,24 @@ function normalizeL2(n,d){
   const gramSections=(sec.grammar&&sec.grammar.sections)||[];
   const gram=gramSections.slice(0,2).map(g=>({
     title:g.title||'', sub:g.subtitle||'', pattern:g.pattern||'', meaning:g.meaning||'',
-    rule_boxes:(g.rule_boxes||[]).slice(0,2),
+    rule_boxes:(g.rule_boxes||[]).slice(0,2).map(rb=>({
+      title: rb.label||rb.title||'',
+      content: rb.content || (rb.examples||[]).join('<br>')
+    })),
     exs:(g.examples||[]).slice(0,3).map(e=>({ko:e.korean||e.ko||'',en:e.english||e.en||''}))
   }));
   const quiz=((sec.practice&&sec.practice.exercises)||[]).map(ex=>{
-    const opts=ex.choices||[];
-    let ans=ex.answer;
-    if(typeof ans!=='number')ans=opts.indexOf(ans);
+    let opts,ans;
+    if(ex.type==='particle_choice'){
+      opts=(ex.choices||[]).map(c=>(typeof c==='string')?c:(c.text||''));
+      ans=(ex.choices||[]).findIndex(c=>c&&c.correct);
+    }else{
+      opts=(ex.choices||[]).map(c=>(typeof c==='string')?c:(c.text||''));
+      ans=ex.answer;
+      if(typeof ans!=='number')ans=opts.indexOf(ans);
+    }
     return {q:ex.blank_sentence||ex.question||'', opts, ans, expl:ex.explanation||''};
-  }).filter(q=>q.opts.length>0);
+  }).filter(q=>q.opts.length>0&&q.ans>=0);
   const sent=((sec.practice&&sec.practice.quiz_items)||[]).map(qi=>{
     let ans=qi.answer;
     if(Array.isArray(ans))ans=ans.join(' ');
