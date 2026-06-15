@@ -607,10 +607,10 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <h1 id="l2Title">오늘의 복습</h1>
   </div>
   <div class="stepper">
-    <div class="step" id="l2st0"><div class="sc">🃏</div>단어</div>
-    <div class="step" id="l2st1"><div class="sc">📌</div>문법</div>
-    <div class="step" id="l2st2"><div class="sc">✏️</div>퀴즈</div>
-    <div class="step" id="l2st3"><div class="sc">🧩</div>문장</div>
+    <div class="step" id="l2st0"><div class="sc">🃏</div>단어<small style="display:block;font-size:.55rem;opacity:.7">Words</small></div>
+    <div class="step" id="l2st1"><div class="sc">📌</div>문법<small style="display:block;font-size:.55rem;opacity:.7">Grammar</small></div>
+    <div class="step" id="l2st2"><div class="sc">✏️</div>퀴즈<small style="display:block;font-size:.55rem;opacity:.7">Quiz</small></div>
+    <div class="step" id="l2st3"><div class="sc">🧩</div>문장<small style="display:block;font-size:.55rem;opacity:.7">Sentence</small></div>
   </div>
   <div class="flow-body" id="l2Body"></div>
 </section>
@@ -1505,12 +1505,12 @@ function normalizeL2(n,d){
 }
 async function openL2(n){
   show('scr-l2-flow');
-  document.getElementById('l2Title').textContent=`Level 2 · ${n}과 로딩 중...`;
-  document.getElementById('l2Body').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
+  document.getElementById('l2Title').textContent=`Level 2 · ${n}과 로딩 중... Loading...`;
+  document.getElementById('l2Body').innerHTML='<div class="loading-ep">📡 불러오는 중... Loading...</div>';
   try{ L2=await loadL2(n) }
   catch(e){
-    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
-    document.getElementById('l2Title').textContent='오프라인';
+    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요. Can\'t load.<br><br>이 기능은 서버에서 열어야 동작해요 · This needs to be opened from a server:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server · or VS Code Live Server)</div>';
+    document.getElementById('l2Title').textContent='오프라인 · Offline';
     return;
   }
   document.getElementById('l2Title').textContent=`${n}과 · ${L2.title}`;
@@ -1529,21 +1529,21 @@ function l2Render(){
   if(l2Step===0){ /* 단어 카드 */
     if(!L2.vocab.length){l2Next();return}
     if(l2Card>=L2.vocab.length){
-      b.innerHTML=`<div style="text-align:center;padding:20px"><div style="font-size:2.4rem">🃏</div><h2 style="color:var(--teal)">단어 카드 완료!</h2></div>
-        <div class="flow-nav"><button class="fn-next" onclick="l2Next()">다음: 문법 카드 📌</button></div>`;
+      b.innerHTML=`<div style="text-align:center;padding:20px"><div style="font-size:2.4rem">🃏</div><h2 style="color:var(--teal)">단어 카드 완료!</h2><div class="q-sub">Vocabulary cards done!</div></div>
+        <div class="flow-nav"><button class="fn-next" onclick="l2Next()">다음: 문법 카드 📌<br><small style="font-weight:500;opacity:.8">Next: Grammar Cards</small></button></div>`;
       return;
     }
     const c=L2.vocab[l2Card];
-    b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:#7e98a5">🃏 오늘의 단어 ${l2Card+1} / ${L2.vocab.length} — 탭해서 뒤집기</div>
+    b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:#7e98a5">🃏 오늘의 단어 ${l2Card+1} / ${L2.vocab.length} — 탭해서 뒤집기 · Tap to flip</div>
       <div class="fcard" id="l2fcard" onclick="this.classList.toggle('flip')">
         <div class="fcard-inner">
-          <div class="fface ffront"><div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
+          <div class="fface ffront"><div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · See meaning <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
           <div class="fface fback"><div class="m">${c.m}</div><div class="ex">${c.ro}</div></div>
         </div>
       </div>
       <div class="srs-btns">
-        <button class="srs-no" onclick="l2Srs(false)">🤔 몰라요</button>
-        <button class="srs-ok" onclick="l2Srs(true)">😊 알아요</button>
+        <button class="srs-no" onclick="l2Srs(false)">🤔 몰라요<br><small style="font-weight:500;opacity:.8">Don't know</small></button>
+        <button class="srs-ok" onclick="l2Srs(true)">😊 알아요<br><small style="font-weight:500;opacity:.8">I know it</small></button>
       </div>`;
     setTimeout(()=>speak(c.w),400);
   }
@@ -1555,37 +1555,37 @@ function l2Render(){
       ${(g.rule_boxes||[]).map(rb=>`<div class="gx"><span><b>${rb.title||''}</b><div class="en">${rb.content||''}</div></span></div>`).join('')}
       ${g.exs.map(e=>`<div class="gx"><span><b>${e.ko}</b><div class="en">${e.en}</div></span><button class="tts-sm" onclick="speak('${e.ko.replace(/'/g,"\\'")}')">🔊</button></div>`).join('')}
       </div>`).join('')+
-      `<div class="flow-nav"><button class="fn-ghost" onclick="l2Prev()">← 단어</button><button class="fn-next" onclick="l2Next()">다음: 퀴즈 ✏️</button></div>`;
+      `<div class="flow-nav"><button class="fn-ghost" onclick="l2Prev()">← 단어<br><small style="font-weight:500;opacity:.8">Words</small></button><button class="fn-next" onclick="l2Next()">다음: 퀴즈 ✏️<br><small style="font-weight:500;opacity:.8">Next: Quiz</small></button></div>`;
   }
   else if(l2Step===2){ /* 빈칸 퀴즈 */
     if(!L2.quiz.length){l2Next();return}
     const q=L2.quiz[l2Quiz];
-    b.innerHTML=`<div class="card"><h3>✏️ 빈칸 퀴즈 ${l2Quiz+1} / ${L2.quiz.length}</h3>
+    b.innerHTML=`<div class="card"><h3>✏️ 빈칸 퀴즈 ${l2Quiz+1} / ${L2.quiz.length}<br><small style="font-weight:500;opacity:.7">Fill-in-the-blank Quiz</small></h3>
       <div class="q-prompt">${q.q}</div>
       ${q.opts.map((o,i)=>`<button class="opt" onclick="l2Answer(this,${i})">${o}</button>`).join('')}
       <div class="game-msg" id="l2qMsg" style="color:var(--teal);font-size:.85rem"></div></div>
-      <div class="flow-nav" id="l2qNav" style="display:none"><button class="fn-next" onclick="l2QuizNext()">계속 →</button></div>`;
+      <div class="flow-nav" id="l2qNav" style="display:none"><button class="fn-next" onclick="l2QuizNext()">계속 → <small style="font-weight:500;opacity:.8">Continue</small></button></div>`;
   }
   else{ /* 문장 만들기 */
     if(!L2.sent.length||l2Sent>=L2.sent.length){l2Done();return}
     const s=L2.sent[l2Sent];
     const shuffled=s.tokens.map((t,i)=>({t,i})).sort(()=>Math.random()-0.5);
     l2Picks=[];
-    b.innerHTML=`<div class="card"><h3>🧩 문장 만들기 ${l2Sent+1} / ${L2.sent.length}</h3>
+    b.innerHTML=`<div class="card"><h3>🧩 문장 만들기 ${l2Sent+1} / ${L2.sent.length}<br><small style="font-weight:500;opacity:.7">Build the Sentence</small></h3>
       <div class="q-prompt">${s.scene}</div>
-      ${s.english?`<div class="q-sub">${s.english}${s.hint?' · 힌트: '+s.hint:''}</div>`:''}
+      ${s.english?`<div class="q-sub">${s.english}${s.hint?' · 힌트 Hint: '+s.hint:''}</div>`:''}
       <div class="wslots" id="l2SentSlots"></div>
       <div class="wblocks" id="l2SentBlocks" style="margin-top:10px">
         ${shuffled.map(x=>`<button class="wblk" data-i="${x.i}" onclick="l2Pick(this,'${x.t.replace(/'/g,"\\'")}',${x.i})">${x.t}</button>`).join('')}
       </div>
       <div class="game-msg" id="l2SentMsg" style="margin-top:8px;font-size:.85rem"></div></div>
-      <div class="flow-nav" id="l2SentNav" style="display:none"><button class="fn-next" onclick="l2SentNext()">계속 →</button></div>`;
+      <div class="flow-nav" id="l2SentNav" style="display:none"><button class="fn-next" onclick="l2SentNext()">계속 → <small style="font-weight:500;opacity:.8">Continue</small></button></div>`;
   }
 }
 function l2Next(){if(l2Step<3){l2Step++;l2Render()}}
 function l2Prev(){if(l2Step>0){l2Step--;l2Render()}}
 function l2Srs(known){
-  toast(known?'😊 알아요!':'🤔 몰라요 — 다음에 또 나와요');
+  toast(known?'😊 알아요! I know it!':'🤔 몰라요 — 다음에 또 나와요 See you again');
   l2Card++;setTimeout(l2Render,300);
 }
 function l2Answer(btn,i){
@@ -1593,9 +1593,9 @@ function l2Answer(btn,i){
   if(btn.parentElement.dataset.lock)return;
   btn.parentElement.dataset.lock='1';
   const opts=btn.parentElement.querySelectorAll('.opt');
-  if(i===q.ans){btn.classList.add('right');document.getElementById('l2qMsg').textContent='정답! 🎉';confetti(12);}
+  if(i===q.ans){btn.classList.add('right');document.getElementById('l2qMsg').textContent='정답! 🎉 Correct!';confetti(12);}
   else{btn.classList.add('wrong');if(q.ans>=0&&opts[q.ans])opts[q.ans].classList.add('right');
-    document.getElementById('l2qMsg').textContent=q.expl?('💡 '+q.expl):'다시 확인해 볼까요?';}
+    document.getElementById('l2qMsg').textContent=q.expl?('💡 '+q.expl):'다시 확인해 볼까요? Let\'s check again';}
   document.getElementById('l2qNav').style.display='flex';
 }
 function l2QuizNext(){
@@ -1616,9 +1616,9 @@ function l2Pick(btn,tok,i){
     const built=l2Picks.join(' ');
     const msg=document.getElementById('l2SentMsg');
     if(built===s.answer){
-      msg.innerHTML='🎉 정답! — '+s.answer;msg.style.color='var(--block-vow)';confetti(20);
+      msg.innerHTML='🎉 정답! Correct! — '+s.answer;msg.style.color='var(--block-vow)';confetti(20);
     }else{
-      msg.innerHTML='👀 정답: '+s.answer;msg.style.color='var(--coral)';
+      msg.innerHTML='👀 정답 Answer: '+s.answer;msg.style.color='var(--coral)';
     }
     speak(s.answer,0.8);
     document.getElementById('l2SentNav').style.display='flex';
@@ -1633,10 +1633,10 @@ function l2Done(){
   syncStars();
   let next=L2.n+1;if(next>9)next=1;
   localStorage.setItem('l2CurUnit',String(next));
-  b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 복습 완료!</h2>
-    <p>${L2.n}과 · ${L2.title}<br>⭐ 3개 획득! 다음엔 ${next}과를 만나요</p>
+  b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 복습 완료!</h2><div class="q-sub">Today's Review Complete!</div>
+    <p>${L2.n}과 · ${L2.title}<br>⭐ 3개 획득! +3 Stars!<br>다음엔 ${next}과를 만나요 · See you at Unit ${next}</p>
     <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="openL2List()">단원 목록 Unit List →</button>
-    <button class="fn-next" style="padding:10px 36px;border-radius:14px;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,.25);color:#cfe6e3" onclick="show('scr-kids-map')">모험맵으로</button></div>`;
+    <button class="fn-next" style="padding:10px 36px;border-radius:14px;font-weight:700;background:transparent;border:1px solid rgba(255,255,255,.25);color:#cfe6e3" onclick="show('scr-kids-map')">모험맵으로 · Map</button></div>`;
   confetti(40);
 }
 
