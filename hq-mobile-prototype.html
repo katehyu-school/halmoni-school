@@ -328,7 +328,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen kids" id="scr-kids-game">
   <div class="topbar">
     <button class="back" onclick="show('scr-kids-map')">←</button>
-    <h1>🧱 블록 조합 퀘스트</h1>
+    <h1>🧱 블록 조합 퀘스트 Block Quest</h1>
   </div>
   <div class="game-wrap">
     <div class="game-prog" id="gProg"></div>
@@ -353,7 +353,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-onboard">
   <div class="topbar">
     <button class="back" onclick="show('scr-profile')">←</button>
-    <h1>👋 시작하기 전에</h1>
+    <h1>👋 시작하기 전에 Before You Start</h1>
   </div>
   <div class="hq-pad">
     <div class="card cont-card" style="text-align:center">
@@ -393,7 +393,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <h2 id="contTitle">광장시장에 가요?</h2>
       <div class="ti-en" id="contTitleEn">Shall We Go to Gwangjang Market?</div>
       <p id="contDesc">웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요</p>
-      <button class="go-btn" id="contBtn" onclick="openEp(5)">▶ 5분 복습 시작</button>
+      <button class="go-btn" id="contBtn" onclick="openEp(1)">▶ 5분 복습 시작 Start Review</button>
     </div>
     <div class="card">
       <h3>📋 Daily Quest</h3>
@@ -402,21 +402,21 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <div class="dq-item" id="dq3"><span class="dq-check"></span><span>맥락 퀴즈 풀기 (Practice)</span><span class="dq-xp">+20 XP</span></div>
       <div class="dq-item" id="dq4"><span class="dq-check"></span><span>단어 복습 5장 (Review)</span><span class="dq-xp">+15 XP</span></div>
       <div class="dq-item" id="dq5"><span class="dq-check"></span><span>캐릭터 롤플레이 (Roleplay)</span><span class="dq-xp">+20 XP</span></div>
-      <div class="dq-item" id="dq6"><span class="dq-check"></span><span>카카오톡 시뮬레이션 (Kakao)</span><span class="dq-xp">+15 XP</span></div>
+      <div class="dq-item" id="dq6"><span class="dq-check"></span><span>Kakao Talk Simulation</span><span class="dq-xp">+15 XP</span></div>
     </div>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
       <span style="font-size:1.6rem">🎭</span>
-      <span><b style="font-size:.92rem">캐릭터 롤플레이 <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
+      <span><b style="font-size:.92rem">캐릭터 롤플레이 Roleplay <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="rpCardSub">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="kkOpen()">
       <span style="font-size:1.6rem">💬</span>
-      <span><b style="font-size:.92rem">카카오톡 시뮬레이션 <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad">L1 ep05 · 친구와 약속 잡기 — 반말 연습</span></span>
+      <span><b style="font-size:.92rem">Kakao Talk Simulation <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="kkCardSub">L1 ep05 · 친구와 약속 잡기 — 반말 연습</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="showEpList()">
       <span style="font-size:1.6rem">📚</span>
-      <span><b style="font-size:.92rem">전체 에피소드</b><br><span style="font-size:.72rem;color:#8fb0ad">Level 1 · ep01~12 복습/프리뷰</span></span>
+      <span><b style="font-size:.92rem">전체 에피소드 All Episodes</b><br><span style="font-size:.72rem;color:#8fb0ad">Level 1 · ep01~12 복습/프리뷰</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
     <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (다음 단계: Supabase 연동)</div>
@@ -434,7 +434,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-eps">
   <div class="topbar">
     <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>📚 Level 1 에피소드</h1>
+    <h1>📚 Level 1 에피소드 Episodes</h1>
   </div>
   <div class="hq-pad" id="epList"></div>
 </section>
@@ -458,7 +458,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-roleplay">
   <div class="topbar">
     <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>🎭 캐릭터 롤플레이</h1>
+    <h1>🎭 캐릭터 롤플레이 Roleplay</h1>
   </div>
   <div class="hq-pad" id="rpBody"></div>
 </section>
@@ -467,7 +467,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-kakao">
   <div class="topbar">
     <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>💬 카카오톡 시뮬레이션</h1>
+    <h1>💬 Kakao Talk Simulation</h1>
   </div>
   <div class="hq-pad" id="kkBody"></div>
 </section>
@@ -476,7 +476,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-share">
   <div class="topbar">
     <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>📤 공유하기</h1>
+    <h1>📤 공유하기 Share</h1>
   </div>
   <div class="hq-pad" id="shareBody"></div>
 </section>
@@ -537,17 +537,23 @@ function enterHQ(){
 }
 function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();show('scr-hq-home')}
 function renderHome(){
-  const last=parseInt(localStorage.getItem('hqLastEp')||'5');
+  const last=parseInt(localStorage.getItem('hqLastEp')||'1');
   const done=localStorage.getItem('hqLastEpDone')==='1';
-  document.getElementById('contTag').textContent=`이어서 학습 · L1 ep${String(last).padStart(2,'0')}`;
+  document.getElementById('contTag').textContent=`이어서 학습 Continue · L1 ep${String(last).padStart(2,'0')}`;
   document.getElementById('contTitle').textContent=EP_TITLES[last]||'';
   document.getElementById('contTitleEn').textContent=EP_TITLES_EN[last]||'';
   document.getElementById('contDesc').textContent=done
-    ?'오늘 복습 완료! 🎉 다른 에피소드도 둘러볼까요?'
-    :'웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요';
-  document.getElementById('contBtn').textContent=done?'🔁 다시 복습하기':'▶ 5분 복습 시작';
+    ?'오늘 복습 완료! 🎉 다른 에피소드도 둘러볼까요? Today\'s review is done! Want to explore another episode?'
+    :'웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요 Video watched on web — your 5-min review is ready';
+  document.getElementById('contBtn').textContent=done?'🔁 다시 복습하기 Review Again':'▶ 5분 복습 시작 Start Review';
   document.getElementById('contBtn').onclick=()=>openEp(last);
+  curEp=last;
+  const pad=n=>String(n).padStart(2,'0');
+  const rd=RP_DATA[curEp]||RP_DATA[5], kd=KK_DATA[curEp]||KK_DATA[5];
+  document.getElementById('rpCardSub').textContent=`L1 ep${pad(curEp)} · ${rd.label_ko}`;
+  document.getElementById('kkCardSub').textContent=`L1 ep${pad(curEp)} · ${kd.label_ko}`;
 }
+let curEp=1;
 
 /* ───────── KIDS block game ───────── */
 const GAME=[
@@ -698,6 +704,7 @@ async function openEp(n){
     return;
   }
   document.getElementById('flowTitle').textContent=`ep${String(n).padStart(2,'0')} · ${EP.title}`;
+  curEp=n;
   localStorage.setItem('hqLastEp',n);localStorage.setItem('hqLastEpDone','0');
   fStep=0;fQuiz=0;fCard=0;watchMode='list';shIdx=0;shCleanup();learnMode='gram';toneIdx=0;fRender();
 }
@@ -735,7 +742,7 @@ function fRender(){
       return;
     }
     const slideImg=EP.slides.length?`<img class="w-slide" id="wSlide" src="${encodeURI(EP.slides[0])}" alt="scene">`:'';
-    b.innerHTML=toggle+`<div class="card"><h3>👀 장면 다시 보기 <span style="font-size:.62rem;color:#7e98a5;font-weight:400">— 대사를 누르면 소리가 나와요</span></h3>
+    b.innerHTML=toggle+`<div class="card"><h3>👀 장면 다시 보기 Watch Again <span style="font-size:.62rem;color:#7e98a5;font-weight:400">— 대사를 누르면 소리가 나와요</span></h3>
       ${slideImg}
       ${EP.script.map((s,i)=>`<div class="scene-line" onclick="wPlay(${i})"><div class="who">${s.who}</div>
         <div class="bubble" id="wb${i}"><div class="spk">${s.spk}</div><div class="ko">${s.ko} <span class="tts-sm">🔊</span></div><div class="en">${s.en}</div></div></div>`).join('')}
@@ -764,7 +771,7 @@ function fRender(){
     if(!EP.quiz.length){fNext();return}
     const q=EP.quiz[fQuiz];
     const listenBtn=(q.type==='listen'&&q.audio)?`<button class="listen-big" style="margin:0 0 12px" onclick="speak('${q.audio.replace(/'/g,"\\'")}',0.8)">🔊 듣기</button>`:'';
-    b.innerHTML=`<div class="card"><h3>✏️ 맥락 퀴즈 ${fQuiz+1} / ${EP.quiz.length}</h3>
+    b.innerHTML=`<div class="card"><h3>✏️ 맥락 퀴즈 Quiz ${fQuiz+1} / ${EP.quiz.length}</h3>
       <div class="q-prompt">${q.q}</div>
       ${q.qen&&q.qen!==q.q?`<div class="q-sub">${q.qen}</div>`:'<div style="height:8px"></div>'}
       ${listenBtn}
@@ -778,7 +785,11 @@ function fRender(){
       b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 5분 복습 완료!</h2>
         <p>ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
         <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="shareOpen({emoji:'🏆',title_ko:'오늘의 5분 복습 완료!',title_en:'5-min review complete!',sub_ko:'ep'+String(EP.n).padStart(2,'0')+' · '+EP.title,sub_en:EP_TITLES_EN[EP.n],xp:60,dqIds:[],confetti:false})">결과 공유하기 →</button>
-        <button class="fn-ghost" style="padding:12px 30px;border-radius:14px;font-weight:700" onclick="showEpList()">다른 에피소드 →</button></div>`;
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="fn-ghost" style="flex:1;padding:12px 14px;border-radius:14px;font-weight:700;font-size:.8rem" onclick="rpOpen(EP.n)">🎭 롤플레이 →</button>
+          <button class="fn-ghost" style="flex:1;padding:12px 14px;border-radius:14px;font-weight:700;font-size:.8rem" onclick="kkOpen(EP.n)">💬 카톡 →</button>
+        </div>
+        <button class="fn-ghost" style="padding:12px 30px;border-radius:14px;font-weight:700;margin-top:8px" onclick="showEpList()">다른 에피소드 →</button></div>`;
       confetti(30);dqDone('dq3');dqDone('dq4');
       return;
     }
@@ -821,7 +832,149 @@ function fSrs(known){
 function dqDone(id){const el=document.getElementById(id);if(el){el.classList.add('done');el.querySelector('.dq-check').textContent='✓'}}
 
 /* ───────── HQ: 캐릭터 롤플레이 (mock AI) ───────── */
-const RP_EP05={
+const RP_DATA={};
+RP_DATA[1]={
+  label_ko:'어른께 인사하기 — 존댓말 연습', label_en:'Greeting an adult — polite speech practice',
+  scene_ko:'공원에서 미래 엄마를 처음 만나요. 어른에게는 존댓말을 써요.',
+  scene_en:"You meet Mirae's mom for the first time at the park. Use polite speech (jondaemal) with adults.",
+  you:{name:'정민',av:'🧒'},
+  npc:{name:'미래 엄마',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 저는 정민이에요.',en:"Hello! I'm Jeongmin.",tone:'jon',
+       reply:{ko:'안녕? 만나서 반가워요, 정민이.',en:'Hello! Nice to meet you, Jeongmin.'},
+       fb:{type:'ok',ko:'좋아요! 어른께 인사할 때는 "안녕하세요!"가 자연스러워요.',en:'Nice — "안녕하세요!" is natural when greeting an adult.'}},
+      {ko:'안녕! 나는 정민이야.',en:"Hi! I'm Jeongmin.",tone:'ban',
+       reply:{ko:'(웃으며) 어... 안녕, 정민이.',en:'(smiling) Oh... hi, Jeongmin.'},
+       fb:{type:'warn',ko:'어른에게는 "안녕!" 대신 "안녕하세요!"를 써요.',en:'With an adult, use "안녕하세요!" instead of "안녕!".'}}
+    ]},
+    {choices:[
+      {ko:'네, 만나서 반가워요!',en:"Yes, nice to meet you too!",tone:'jon',
+       reply:{ko:'그래요, 우리 집에 자주 놀러 와요.',en:'Great, come visit our house often.'},
+       fb:{type:'ok',ko:'좋아요! 대답도 존댓말로 자연스럽게 이어졌어요.',en:'Great — your reply stayed polite too.'}},
+      {ko:'응, 나도!',en:'Yeah, me too!',tone:'ban',
+       reply:{ko:'(살짝 놀라며) 그래... 우리 집에 놀러 와요.',en:'(a little surprised) Sure... come visit our house.'},
+       fb:{type:'warn',ko:'어른과 얘기할 땐 "응" 대신 "네"가 자연스러워요.',en:'With an adult, use "네" instead of "응".'}}
+    ]},
+    {choices:[
+      {ko:'네, 감사합니다!',en:'Yes, thank you!',tone:'jon',
+       reply:{ko:'네, 잘 가요~',en:'Okay, take care~'},
+       fb:{type:'ok',ko:'완벽해요! 처음부터 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'감사합니다! 안녕히 계세요.',en:'Thank you! Goodbye.',tone:'jon',
+       reply:{ko:'안녕히 가요~',en:'Take care~'},
+       fb:{type:'ok',ko:'좋아요! 인사도 자연스러웠어요.',en:'Nice, a natural way to say goodbye.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[2]={
+  label_ko:'친구 집 방문 — 존댓말 연습', label_en:"Visiting a friend's house — polite speech practice",
+  scene_ko:'리암이 미래네 집에 놀러 왔어요. 미래 엄마가 문을 열어줘요. 어른에게는 존댓말을 써요.',
+  scene_en:"Liam comes to visit Mirae's house. Mirae's mom opens the door. Use polite speech with adults.",
+  you:{name:'리암',av:'🧒'},
+  npc:{name:'미래 엄마',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 저는 리암이에요. 미래 있어요?',en:"Hello! I'm Liam. Is Mirae here?",tone:'jon',
+       reply:{ko:'안녕? 어서 들어와요, 리암.',en:'Hello! Come on in, Liam.'},
+       fb:{type:'ok',ko:'좋아요! 처음 인사와 자기소개를 존댓말로 잘했어요.',en:'Great — your greeting and introduction were both polite.'}},
+      {ko:'안녕! 나 리암인데, 미래 있어?',en:"Hi! I'm Liam, is Mirae here?",tone:'ban',
+       reply:{ko:'(약간 당황) 어... 그래, 들어와요.',en:'(a bit surprised) Oh... sure, come in.'},
+       fb:{type:'warn',ko:'어른에게는 "있어?" 대신 "있어요?"가 자연스러워요.',en:'With an adult, "있어요?" is natural instead of "있어?".'}}
+    ]},
+    {choices:[
+      {ko:'네, 감사합니다!',en:'Yes, thank you!',tone:'jon',
+       reply:{ko:'신발은 여기 벗으면 돼요~',en:'You can leave your shoes here~'},
+       fb:{type:'ok',ko:'좋아요! 자연스럽게 존댓말로 이어졌어요.',en:'Great — you kept it polite naturally.'}},
+      {ko:'오케이!',en:'Okay!',tone:'ban',
+       reply:{ko:'(웃으며) 신발은 여기 벗으면 돼요~',en:'(smiling) You can leave your shoes here~'},
+       fb:{type:'warn',ko:'어른께는 "오케이!" 대신 "네!"가 더 자연스러워요.',en:'With an adult, "네!" is more natural than "오케이!".'}}
+    ]},
+    {choices:[
+      {ko:'네, 알겠습니다!',en:'Okay, got it!',tone:'jon',
+       reply:{ko:'미래야, 리암 왔어!',en:'Mirae, Liam is here!'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'네, 고맙습니다!',en:'Okay, thanks!',tone:'jon',
+       reply:{ko:'미래야, 리암 왔어!',en:'Mirae, Liam is here!'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 대답이었어요.',en:'Nice, a natural reply.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[3]={
+  label_ko:'친구 집에서 밥 먹기 — 존댓말 연습', label_en:"Eating at a friend's house — polite speech practice",
+  scene_ko:'친구 집에 놀러 가서 저녁을 같이 먹어요. 친구 엄마에게는 존댓말을 써요.',
+  scene_en:"You're having dinner at a friend's house. Use polite speech with your friend's mom.",
+  you:{name:'나',av:'🧒'},
+  npc:{name:'친구 엄마',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 초대해 주셔서 감사합니다.',en:"Hello! Thank you for inviting me.",tone:'jon',
+       reply:{ko:'어서 와요! 같이 저녁 먹자.',en:"Welcome! Let's have dinner together."},
+       fb:{type:'ok',ko:'좋아요! 인사와 감사 표현을 존댓말로 잘했어요.',en:'Great — your greeting and thanks were both polite.'}},
+      {ko:'안녕! 나 왔어!',en:"Hi! I'm here!",tone:'ban',
+       reply:{ko:'(웃으며) 어... 어서 와요.',en:'(smiling) Oh... welcome.'},
+       fb:{type:'warn',ko:'친구 엄마에게는 "안녕!" 대신 "안녕하세요!"가 자연스러워요.',en:'With a friend\'s mom, "안녕하세요!" is natural instead of "안녕!".'}}
+    ]},
+    {choices:[
+      {ko:'잘 먹겠습니다!',en:"I'll eat well, thank you!",tone:'jon',
+       reply:{ko:'많이 먹어요~',en:'Eat plenty~'},
+       fb:{type:'ok',ko:'좋아요! 식사 전 인사 "잘 먹겠습니다"를 잘 썼어요.',en:'Great use of "잘 먹겠습니다" before the meal.'}},
+      {ko:'오, 고기다! 잘 먹을게!',en:'Oh, meat! I\'ll dig in!',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 많이 먹어요~',en:'(smiling) Sure, eat plenty~'},
+       fb:{type:'warn',ko:'어른 앞에서는 "잘 먹을게!" 대신 "잘 먹겠습니다!"가 자연스러워요.',en:'In front of an adult, "잘 먹겠습니다!" is natural instead of "잘 먹을게!".'}}
+    ]},
+    {choices:[
+      {ko:'잘 먹었습니다! 감사합니다.',en:'That was delicious, thank you!',tone:'jon',
+       reply:{ko:'또 놀러 와요~',en:'Come visit again~'},
+       fb:{type:'ok',ko:'완벽해요! 식사 인사부터 끝까지 존댓말이었어요. 🎉',en:'Perfect — polite speech from start to finish! 🎉'},
+       end:true},
+      {ko:'정말 맛있었어요! 감사합니다.',en:'It was really delicious! Thank you.',tone:'jon',
+       reply:{ko:'또 놀러 와요~',en:'Come visit again~'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 칭찬과 인사였어요.',en:'Nice, a natural compliment and goodbye.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[4]={
+  label_ko:'전화로 인사하기 — 존댓말 연습', label_en:'Greeting on the phone — polite speech practice',
+  scene_ko:'올리비아 엄마에게 전화해서 약속을 확인해요. 어른에게는 존댓말을 써요.',
+  scene_en:"You call Olivia's mom to confirm plans. Use polite speech with adults.",
+  you:{name:'미래',av:'👧'},
+  npc:{name:'올리비아 엄마',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 저 미래예요. 올리비아 있어요?',en:"Hello! It's Mirae. Is Olivia there?",tone:'jon',
+       reply:{ko:'안녕? 잠깐만 기다려요~',en:'Hello! Just a moment~'},
+       fb:{type:'ok',ko:'좋아요! 전화로도 존댓말 인사가 자연스러워요.',en:'Great — polite greetings are natural on the phone too.'}},
+      {ko:'여보세요? 올리비아 있어?',en:'Hello? Is Olivia there?',tone:'ban',
+       reply:{ko:'(살짝 당황) 누구... 아, 잠깐만요.',en:'(a bit surprised) Who...? Oh, one moment.'},
+       fb:{type:'warn',ko:'어른과 통화할 땐 "있어?" 대신 "있어요?"가 자연스러워요.',en:'On the phone with an adult, "있어요?" is natural instead of "있어?".'}}
+    ]},
+    {choices:[
+      {ko:'네, 감사합니다!',en:'Yes, thank you!',tone:'jon',
+       reply:{ko:'올리비아 바꿔줄게요~',en:"I'll get Olivia for you~"},
+       fb:{type:'ok',ko:'좋아요! 자연스럽게 존댓말로 이어졌어요.',en:'Great — you kept it polite naturally.'}},
+      {ko:'오케이, 고마워!',en:'Okay, thanks!',tone:'ban',
+       reply:{ko:'(웃으며) 그래요, 바꿔줄게요~',en:"(smiling) Sure, I'll get her~"},
+       fb:{type:'warn',ko:'어른께는 "오케이" 대신 "네"가 자연스러워요.',en:'With an adult, "네" is natural instead of "오케이".'}}
+    ]},
+    {choices:[
+      {ko:'네, 감사합니다. 안녕히 계세요!',en:'Yes, thank you. Goodbye!',tone:'jon',
+       reply:{ko:'그래요, 안녕!',en:'Okay, bye!'},
+       fb:{type:'ok',ko:'완벽해요! 전화 인사부터 끝까지 존댓말이었어요. 🎉',en:'Perfect — polite speech from start to finish! 🎉'},
+       end:true},
+      {ko:'감사합니다!',en:'Thank you!',tone:'jon',
+       reply:{ko:'그래요, 안녕!',en:'Okay, bye!'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 마무리였어요.',en:'Nice, a natural way to wrap up.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[5]={
+  label_ko:'길 묻기 — 존댓말 연습', label_en:'Asking directions — polite speech practice',
   scene_ko:'광장시장 입구를 못 찾겠어요. 지나가는 어른에게 길을 물어봐요.',
   scene_en:"You can't find the entrance to Gwangjang Market. Ask a stranger for directions.",
   you:{name:'미래',av:'👧'},
@@ -856,17 +1009,263 @@ const RP_EP05={
     ]}
   ]
 };
-let rpIdx=0, rpScore=0, rpLog=[];
-function rpOpen(){rpIdx=0;rpScore=0;rpLog=[];rpRender();show('scr-hq-roleplay')}
+RP_DATA[6]={
+  label_ko:'분식집에서 주문하기 — 존댓말 연습', label_en:'Ordering at a snack shop — polite speech practice',
+  scene_ko:'분식집에서 떡볶이와 김밥을 주문해요. 가게 아주머니에게는 존댓말을 써요.',
+  scene_en:"You're ordering tteokbokki and gimbap at a snack shop. Use polite speech with the shop owner.",
+  you:{name:'정민',av:'🧒'},
+  npc:{name:'아주머니',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 떡볶이 하나 주세요.',en:'Hello! One tteokbokki, please.',tone:'jon',
+       reply:{ko:'네, 알겠어요~ 더 필요한 거 있어요?',en:'Sure~ Anything else?'},
+       fb:{type:'ok',ko:'좋아요! 주문할 때 "주세요"가 자연스러워요.',en:'Nice — "주세요" is natural when ordering.'}},
+      {ko:'저기, 떡볶이 줘.',en:'Hey, give me tteokbokki.',tone:'ban',
+       reply:{ko:'(웃으며) 어... 네, 잠시만요.',en:'(smiling) Oh... okay, one moment.'},
+       fb:{type:'warn',ko:'가게에서는 "줘" 대신 "주세요"를 써요.',en:'At a shop, use "주세요" instead of "줘".'}}
+    ]},
+    {choices:[
+      {ko:'김밥도 한 줄 주세요.',en:'One gimbap roll too, please.',tone:'jon',
+       reply:{ko:'네! 금방 드릴게요.',en:"Sure! I'll bring it right away."},
+       fb:{type:'ok',ko:'좋아요! 추가 주문도 존댓말로 자연스러웠어요.',en:'Great — your follow-up order stayed polite too.'}},
+      {ko:'김밥도!',en:'Gimbap too!',tone:'ban',
+       reply:{ko:'(살짝 당황) 네... 금방 드릴게요.',en:'(a bit surprised) Okay... I\'ll bring it right away.'},
+       fb:{type:'warn',ko:'추가 주문할 때도 "주세요"를 붙여요.',en:'Add "주세요" for follow-up orders too.'}}
+    ]},
+    {choices:[
+      {ko:'감사합니다! 잘 먹겠습니다!',en:"Thank you! I'll eat well!",tone:'jon',
+       reply:{ko:'맛있게 먹어요~',en:'Enjoy your meal~'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'고맙습니다!',en:'Thanks!',tone:'jon',
+       reply:{ko:'맛있게 먹어요~',en:'Enjoy your meal~'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 인사였어요.',en:'Nice, a natural way to say thanks.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[7]={
+  label_ko:'선생님께 부탁하기 — 존댓말 연습', label_en:'Asking a teacher — polite speech practice',
+  scene_ko:'선생님께 한국어 스터디 그룹을 만들고 싶다고 말해요. 선생님께는 존댓말을 써요.',
+  scene_en:'You tell your teacher you want to start a Korean study group. Use polite speech with teachers.',
+  you:{name:'나',av:'🧒'},
+  npc:{name:'선생님',av:'🧑‍🏫'},
+  nodes:[
+    {choices:[
+      {ko:'선생님, 한국어 스터디 그룹 만들고 싶어요.',en:'Teacher, I want to start a Korean study group.',tone:'jon',
+       reply:{ko:'좋은 생각이에요! 친구들과 같이 해 봐요.',en:"That's a great idea! Try it with your friends."},
+       fb:{type:'ok',ko:'좋아요! 선생님께 "~하고 싶어요"가 자연스러워요.',en:'Nice — "~하고 싶어요" is natural with a teacher.'}},
+      {ko:'저기, 스터디 그룹 만들 거야.',en:"Hey, I'm gonna make a study group.",tone:'ban',
+       reply:{ko:'(놀라며) 음... 그래요, 좋은 생각이에요.',en:'(a bit surprised) Um... sure, great idea.'},
+       fb:{type:'warn',ko:'선생님께는 "~할 거야" 대신 "~하고 싶어요"가 자연스러워요.',en:'With a teacher, "~하고 싶어요" is natural instead of "~할 거야".'}}
+    ]},
+    {choices:[
+      {ko:'어떻게 시작하면 좋을까요?',en:'How should I get started?',tone:'jon',
+       reply:{ko:'친구들에게 같이 하자고 물어봐요.',en:'Ask your friends if they want to join.'},
+       fb:{type:'ok',ko:'좋아요! 질문도 존댓말로 자연스럽게 이어졌어요.',en:'Great — your question stayed polite too.'}},
+      {ko:'어떻게 시작해?',en:'How do I start?',tone:'ban',
+       reply:{ko:'(웃으며) 음... 친구들에게 물어봐요.',en:'(smiling) Hmm... ask your friends.'},
+       fb:{type:'warn',ko:'선생님께는 "시작해?" 대신 "시작하면 좋을까요?"가 자연스러워요.',en:'With a teacher, "시작하면 좋을까요?" is natural instead of "시작해?".'}}
+    ]},
+    {choices:[
+      {ko:'네, 감사합니다!',en:'Okay, thank you!',tone:'jon',
+       reply:{ko:'잘 해봐요!',en:'Good luck!'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'알겠습니다, 감사합니다!',en:'Got it, thank you!',tone:'jon',
+       reply:{ko:'잘 해봐요!',en:'Good luck!'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 마무리였어요.',en:'Nice, a natural way to wrap up.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[8]={
+  label_ko:'엄마께 물어보기 — 존댓말 연습', label_en:'Asking mom — polite speech practice',
+  scene_ko:'아침에 도시락을 못 찾아서 엄마께 물어봐요. 부모님께도 존댓말 질문이 자연스러워요.',
+  scene_en:"You can't find your lunchbox and ask your mom. Polite questions are natural with parents too.",
+  you:{name:'리아',av:'👧'},
+  npc:{name:'엄마',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'엄마, 제 도시락 어디 있어요?',en:'Mom, where is my lunchbox?',tone:'jon',
+       reply:{ko:'식탁 위에 있어요.',en:"It's on the table."},
+       fb:{type:'ok',ko:'좋아요! "어디 있어요?"처럼 존댓말 질문이 자연스러워요.',en:'Nice — a polite question like "어디 있어요?" is natural.'}},
+      {ko:'엄마, 내 도시락 어디 있어?',en:'Mom, where is my lunchbox?',tone:'ban',
+       reply:{ko:'(웃으며) 식탁 위에 있어요.',en:"(smiling) It's on the table."},
+       fb:{type:'warn',ko:'엄마께 여쭤볼 때도 "있어요?"가 더 좋아요.',en:'"있어요?" is better when asking mom too.'}}
+    ]},
+    {choices:[
+      {ko:'아, 감사합니다!',en:'Oh, thank you!',tone:'jon',
+       reply:{ko:'그래요, 잘 다녀와요~',en:'Okay, have a good day~'},
+       fb:{type:'ok',ko:'좋아요! 감사 표현도 존댓말로 자연스러웠어요.',en:'Great — your thanks stayed polite too.'}},
+      {ko:'아, 고마워요!',en:'Oh, thanks!',tone:'jon',
+       reply:{ko:'그래요, 잘 다녀와요~',en:'Okay, have a good day~'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 감사 인사였어요.',en:'Nice, a natural way to say thanks.'}}
+    ]},
+    {choices:[
+      {ko:'네! 다녀오겠습니다!',en:"Okay! I'm off!",tone:'jon',
+       reply:{ko:'응, 잘 가!',en:'Bye, take care!'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'감사합니다, 다녀오겠습니다!',en:'Thank you, I\'m off!',tone:'jon',
+       reply:{ko:'응, 잘 가!',en:'Bye, take care!'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 인사였어요.',en:'Nice, a natural goodbye.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[9]={
+  label_ko:'시장에서 물건 사기 — 존댓말 연습', label_en:'Shopping at the market — polite speech practice',
+  scene_ko:'재래시장에서 사과를 사요. 상인 아저씨에게는 존댓말을 써요.',
+  scene_en:"You're buying apples at the traditional market. Use polite speech with the vendor.",
+  you:{name:'미래',av:'👧'},
+  npc:{name:'상인 아저씨',av:'🧑'},
+  nodes:[
+    {choices:[
+      {ko:'아저씨, 사과 얼마예요?',en:'Excuse me, how much are the apples?',tone:'jon',
+       reply:{ko:'한 개에 천 원이에요.',en:'1,000 won each.'},
+       fb:{type:'ok',ko:'좋아요! 가격을 물을 때 "얼마예요?"가 자연스러워요.',en:'Nice — "얼마예요?" is natural when asking a price.'}},
+      {ko:'아저씨, 사과 얼마야?',en:'Hey, how much are the apples?',tone:'ban',
+       reply:{ko:'(웃으며) 한 개에 천 원이에요.',en:'(smiling) 1,000 won each.'},
+       fb:{type:'warn',ko:'모르는 어른에게는 "얼마야?" 대신 "얼마예요?"를 써요.',en:'With a stranger, use "얼마예요?" instead of "얼마야?".'}}
+    ]},
+    {choices:[
+      {ko:'여섯 개 주세요.',en:'Six, please.',tone:'jon',
+       reply:{ko:'네, 여기요!',en:'Here you go!'},
+       fb:{type:'ok',ko:'좋아요! 주문할 때 "주세요"가 자연스러워요.',en:'Nice — "주세요" is natural when ordering.'}},
+      {ko:'여섯 개!',en:'Six!',tone:'ban',
+       reply:{ko:'(살짝 당황) 네, 여기요.',en:'(a bit surprised) Okay, here you go.'},
+       fb:{type:'warn',ko:'주문할 때 "주세요"를 붙여야 자연스러워요.',en:'Add "주세요" to sound natural when ordering.'}}
+    ]},
+    {choices:[
+      {ko:'감사합니다!',en:'Thank you!',tone:'jon',
+       reply:{ko:'또 와요~',en:'Come again~'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'고맙습니다!',en:'Thanks!',tone:'jon',
+       reply:{ko:'또 와요~',en:'Come again~'},
+       fb:{type:'ok',ko:'좋아요! 자연스러운 인사였어요.',en:'Nice, a natural way to say thanks.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[10]={
+  label_ko:'한강공원에서 어른 만나기 — 존댓말 연습', label_en:'Meeting an adult at the park — polite speech practice',
+  scene_ko:'한강공원에서 할머니 친구분을 만나요. 잘 모르는 어른에게는 존댓말을 써요.',
+  scene_en:"You meet a friend of grandma's at the park. Use polite speech with adults you don't know well.",
+  you:{name:'리아',av:'👧'},
+  npc:{name:'할머니 친구',av:'👵'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 오랜만이에요.',en:'Hello! Long time no see.',tone:'jon',
+       reply:{ko:'어머, 리아구나! 많이 컸네.',en:'Oh my, Lia! You got so big.'},
+       fb:{type:'ok',ko:'좋아요! 잘 모르는 어른에게는 "안녕하세요"가 자연스러워요.',en:'Nice — "안녕하세요" is natural with an adult you don\'t know well.'}},
+      {ko:'안녕! 오랜만이야.',en:'Hi! Long time no see.',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 리아구나! 많이 컸네.',en:'(smiling) Yes, it\'s Lia! You got so big.'},
+       fb:{type:'warn',ko:'할머니의 친구분께는 "안녕하세요"가 더 좋아요.',en:'"안녕하세요" is better for grandma\'s friend.'}}
+    ]},
+    {choices:[
+      {ko:'자전거 타고 있었어요!',en:"I've been riding my bike!",tone:'jon',
+       reply:{ko:'재밌겠다! 조심해서 타.',en:'Sounds fun! Ride safely.'},
+       fb:{type:'ok',ko:'좋아요! "-고 있었어요"로 하던 일을 자연스럽게 말했어요.',en:'Nice — "-고 있었어요" naturally describes what you were doing.'}},
+      {ko:'자전거 타고 있었어.',en:"I've been riding my bike.",tone:'ban',
+       reply:{ko:'(살짝 놀라며) 그래, 재밌겠다.',en:'(a bit surprised) Oh, sounds fun.'},
+       fb:{type:'warn',ko:'어른께는 "있었어" 대신 "있었어요"가 자연스러워요.',en:'"있었어요" is more natural than "있었어" with an adult.'}}
+    ]},
+    {choices:[
+      {ko:'네, 안녕히 가세요!',en:'Okay, goodbye!',tone:'jon',
+       reply:{ko:'그래, 잘 가렴~',en:'Okay, take care~'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'응, 잘 가!',en:'Okay, bye!',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 잘 가렴~',en:'(smiling) Okay, take care~'},
+       fb:{type:'warn',ko:'어른께 인사할 때는 "안녕히 가세요"가 자연스러워요.',en:'"안녕히 가세요" is natural when saying bye to an adult.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[11]={
+  label_ko:'리암네 집 방문 — 존댓말 연습', label_en:"Visiting Liam's house — polite speech practice",
+  scene_ko:'리암네 집에 놀러 가요. 리암 어머니께는 존댓말을 써요.',
+  scene_en:"You're visiting Liam's house. Use polite speech with Liam's mom.",
+  you:{name:'카요',av:'🧑'},
+  npc:{name:'리암 엄마',av:'👩'},
+  nodes:[
+    {choices:[
+      {ko:'안녕하세요! 잘 지내셨어요?',en:'Hello! Have you been well?',tone:'jon',
+       reply:{ko:'그래, 어서 오렴! 잘 지냈어.',en:'Yes, come on in! I\'ve been well.'},
+       fb:{type:'ok',ko:'좋아요! "-셨어요"로 어른께 안부를 여쭤봤어요.',en:'Nice — "-셨어요" politely asks an adult how they\'ve been.'}},
+      {ko:'안녕! 잘 지냈어?',en:'Hi! Have you been good?',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 잘 지냈지. 어서 와.',en:'(smiling) Yes, I\'ve been good. Come on in.'},
+       fb:{type:'warn',ko:'리암 어머니께는 "잘 지내셨어요?"가 자연스러워요.',en:'"잘 지내셨어요?" is natural for Liam\'s mom.'}}
+    ]},
+    {choices:[
+      {ko:'감사합니다, 잘 먹겠습니다!',en:"Thank you, I'll enjoy this!",tone:'jon',
+       reply:{ko:'그래, 많이 먹어~',en:'Sure, eat plenty~'},
+       fb:{type:'ok',ko:'좋아요! 음식을 받을 때 "잘 먹겠습니다"가 자연스러워요.',en:'Nice — "잘 먹겠습니다" is natural when receiving food.'}},
+      {ko:'고마워, 잘 먹을게!',en:"Thanks, I'll eat well!",tone:'ban',
+       reply:{ko:'(웃으며) 그래, 많이 먹어~',en:'(smiling) Sure, eat plenty~'},
+       fb:{type:'warn',ko:'어른께는 "잘 먹겠습니다"가 더 자연스러워요.',en:'"잘 먹겠습니다" is more natural with an adult.'}}
+    ]},
+    {choices:[
+      {ko:'네, 감사합니다!',en:'Okay, thank you!',tone:'jon',
+       reply:{ko:'그래, 천천히 먹으렴~',en:'Okay, take your time~'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'응, 고마워!',en:'Okay, thanks!',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 천천히 먹으렴~',en:'(smiling) Okay, take your time~'},
+       fb:{type:'warn',ko:'어른께는 "감사합니다"가 자연스러워요.',en:'"감사합니다" is natural with an adult.'},
+       end:true}
+    ]}
+  ]
+};
+RP_DATA[12]={
+  label_ko:'여름방학 계획 말하기 — 존댓말 연습', label_en:'Talking about summer plans — polite speech practice',
+  scene_ko:'선생님께 여름방학 계획을 말해요. 선생님께는 존댓말을 써요.',
+  scene_en:'You tell your teacher about your summer plans. Use polite speech with your teacher.',
+  you:{name:'나',av:'🧑'},
+  npc:{name:'선생님',av:'🧑‍🏫'},
+  nodes:[
+    {choices:[
+      {ko:'경복궁에 갈 거예요!',en:"I'm going to go to Gyeongbokgung!",tone:'jon',
+       reply:{ko:'와, 좋겠다! 한복도 입어 봐.',en:'Wow, that sounds great! Try wearing hanbok too.'},
+       fb:{type:'ok',ko:'좋아요! "-(으)ㄹ 거예요"로 계획을 존댓말로 말했어요.',en:'Nice — "-(으)ㄹ 거예요" politely shares your plan.'}},
+      {ko:'경복궁에 갈 거야!',en:"I'm going to go to Gyeongbokgung!",tone:'ban',
+       reply:{ko:'(웃으며) 와, 좋겠다! 한복도 입어 봐.',en:'(smiling) Wow, that sounds great! Try wearing hanbok too.'},
+       fb:{type:'warn',ko:'선생님께는 "갈 거예요"가 자연스러워요.',en:'"갈 거예요" is natural with your teacher.'}}
+    ]},
+    {choices:[
+      {ko:'네! 한복을 입을 수 있어요?',en:'Really! Can I wear hanbok?',tone:'jon',
+       reply:{ko:'그래, 경복궁 근처에서 빌릴 수 있어.',en:'Yes, you can rent one near Gyeongbokgung.'},
+       fb:{type:'ok',ko:'좋아요! "-(으)ㄹ 수 있어요?"로 가능 여부를 존댓말로 물었어요.',en:'Nice — "-(으)ㄹ 수 있어요?" politely asks if something is possible.'}},
+      {ko:'오 진짜? 입을 수 있어?',en:'Oh really? Can I wear it?',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 빌릴 수 있어.',en:'(smiling) Yes, you can rent one.'},
+       fb:{type:'warn',ko:'선생님께는 "있어요?"가 자연스러워요.',en:'"있어요?" is natural with your teacher.'}}
+    ]},
+    {choices:[
+      {ko:'감사합니다, 선생님!',en:'Thank you, teacher!',tone:'jon',
+       reply:{ko:'그래, 재미있게 다녀와!',en:'Okay, have fun!'},
+       fb:{type:'ok',ko:'완벽해요! 끝까지 존댓말로 대화했어요. 🎉',en:'Perfect — polite speech all the way through! 🎉'},
+       end:true},
+      {ko:'응, 고마워요!',en:'Okay, thanks!',tone:'ban',
+       reply:{ko:'(웃으며) 그래, 재미있게 다녀와!',en:'(smiling) Okay, have fun!'},
+       fb:{type:'warn',ko:'선생님께는 "감사합니다"가 더 자연스러워요.',en:'"감사합니다" is more natural with your teacher.'},
+       end:true}
+    ]}
+  ]
+};
+let rpEp=5, rpIdx=0, rpScore=0, rpLog=[];
+function rpOpen(n){rpEp=n||curEp||5;if(!RP_DATA[rpEp])rpEp=5;rpIdx=0;rpScore=0;rpLog=[];rpRender();show('scr-hq-roleplay')}
 function rpRender(){
+  const D=RP_DATA[rpEp];
   const box=document.getElementById('rpBody');
-  const sceneHtml=`<div class="card" style="text-align:center"><div style="font-size:.78rem;color:#bcd6d3;line-height:1.5">${RP_EP05.scene_ko}<div style="font-size:.68rem;color:#8fb0ad;margin-top:4px">${RP_EP05.scene_en}</div></div></div>`;
+  const sceneHtml=`<div class="card" style="text-align:center"><div style="font-size:.78rem;color:#bcd6d3;line-height:1.5">${D.scene_ko}<div style="font-size:.68rem;color:#8fb0ad;margin-top:4px">${D.scene_en}</div></div></div>`;
   const logHtml=rpLog.map(m=>{
     if(m.side==='fb')return `<div class="rp-fb ${m.type}">${m.ko}<div class="en">${m.en}</div></div>`;
-    const who=m.side==='npc'?RP_EP05.npc:RP_EP05.you;
+    const who=m.side==='npc'?D.npc:D.you;
     return `<div class="rp-row ${m.side==='user'?'user':''}"><span class="rp-av">${who.av}</span><div class="rp-bubble"><div class="ko">${m.ko} <span class="tts-sm" onclick="speak('${m.ko.replace(/'/g,"\\'")}')">🔊</span></div><div class="en">${m.en}</div></div></div>`;
   }).join('');
-  const node=RP_EP05.nodes[rpIdx];
+  const node=D.nodes[rpIdx];
   let tailHtml;
   if(node){
     tailHtml=`<div class="rp-choices">`+node.choices.map((c,i)=>
@@ -877,24 +1276,127 @@ function rpRender(){
     tailHtml=`<div class="card cont-card" style="text-align:center">
       <h2 style="margin-top:4px">🎉 롤플레이 완료!</h2>
       <p>존댓말 선택 ${rpScore} / ${turns}<br><span style="font-size:.7rem;color:#8fb0ad">Polite-speech choices: ${rpScore} / ${turns}</span></p>
-      <button class="go-btn" onclick="rpOpen()">🔁 다시 하기 · Try again</button>
+      <button class="go-btn" onclick="rpOpen(${rpEp})">🔁 다시 하기 · Try again</button>
     </div>
-    <div class="flow-nav"><button class="fn-next" onclick="shareOpen({emoji:'🎭',title_ko:'캐릭터 롤플레이 완료!',title_en:'Roleplay complete!',sub_ko:'존댓말 선택 '+rpScore+' / '+turns,sub_en:'Polite-speech choices: '+rpScore+'/'+turns,xp:20,dqIds:['dq5']})">결과 공유하기 →</button></div>`;
+    <div class="flow-nav"><button class="fn-next" onclick="shareOpen({emoji:'🎭',title_ko:'캐릭터 롤플레이 완료!',title_en:'Roleplay complete!',sub_ko:'ep'+String(rpEp).padStart(2,'0')+' · 존댓말 선택 '+rpScore+' / '+turns,sub_en:'Polite-speech choices: '+rpScore+'/'+turns,xp:20,dqIds:['dq5']})">결과 공유하기 →</button></div>`;
   }
   box.innerHTML=sceneHtml+logHtml+tailHtml;
 }
 function rpChoose(i){
-  const c=RP_EP05.nodes[rpIdx].choices[i];
+  const D=RP_DATA[rpEp];
+  const c=D.nodes[rpIdx].choices[i];
   rpLog.push({side:'user',ko:c.ko,en:c.en});
   rpLog.push({side:'fb',type:c.fb.type,ko:c.fb.ko,en:c.fb.en});
   if(c.fb.type==='ok')rpScore++;
   rpLog.push({side:'npc',ko:c.reply.ko,en:c.reply.en});
-  rpIdx=c.end?RP_EP05.nodes.length:rpIdx+1;
+  rpIdx=c.end?D.nodes.length:rpIdx+1;
   rpRender();
 }
 
-/* ───────── HQ: 카카오톡 시뮬레이션 (mock AI) ───────── */
-const KK_EP05={
+/* ───────── HQ: Kakao Talk Simulation (mock AI) ───────── */
+const KK_DATA={};
+KK_DATA[1]={
+  label_ko:'단톡방에서 인사하기 — 반말 연습', label_en:'Group chat greetings — casual speech practice',
+  scene_ko:'미래, 올리비아와 단톡방에서 인사해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Say hi to Mirae and Olivia in a group chat. Banmal (casual speech) is natural between friends.',
+  me:{name:'정민',av:'🧑'},
+  friend:{name:'미래',av:'👧'},
+  script:[
+    {t:'msg',side:'friend',ko:'정민아, 안녕! 나 미래야 ㅎㅎ',en:"Hi Jeongmin! I'm Mirae haha"},
+    {t:'choice',choices:[
+      {ko:'안녕 미래야! 반가워~',en:'Hi Mirae! Nice to meet you~',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구 사이엔 반말 "반가워~"가 자연스러워요.',en:'Nice — "반가워~" (casual) is natural between friends.'}},
+      {ko:'안녕하세요, 미래님. 반갑습니다.',en:'Hello, Mirae. Pleased to meet you. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "반가워~"처럼 편하게 말해요.',en:'Too stiff for a friend! Try something relaxed like "반가워~".'}}
+    ]},
+    {t:'msg',side:'friend',ko:'내일 공원에서 같이 놀자!',en:"Let's hang out at the park tomorrow!"},
+    {t:'msg',side:'me',ko:'좋아! 몇 시에 만날까?',en:'Sounds good! What time should we meet?'},
+    {t:'msg',side:'friend',ko:'오후 2시 어때?',en:'How about 2pm?'},
+    {t:'choice',choices:[
+      {ko:'콜! 이따 봐~',en:"Deal! See you later~",tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다.',en:'Yes, understood. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "콜! 이따 봐~"처럼 캐주얼하게 답해요.',en:'Too formal for a friend! Try something casual like "콜! 이따 봐~".'}}
+    ]}
+  ]
+};
+KK_DATA[2]={
+  label_ko:'약속 잡기 — 반말 연습', label_en:'Making plans — casual speech practice',
+  scene_ko:'리암과 카카오톡으로 약속을 잡아요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with Liam on KakaoTalk to make plans. Banmal is natural between friends.',
+  me:{name:'미래',av:'👧'},
+  friend:{name:'리암',av:'🧑'},
+  script:[
+    {t:'msg',side:'friend',ko:'미래야, 나 지금 너네 집 가도 돼?',en:'Mirae, can I come to your house now?'},
+    {t:'choice',choices:[
+      {ko:'그래! 와도 돼~',en:'Sure! You can come~',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게 허락할 때 "돼~"처럼 편하게 말해요.',en:'Nice — "돼~" (casual) is natural when giving a friend the okay.'}},
+      {ko:'네, 오셔도 됩니다.',en:'Yes, you may come. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "와도 돼~"가 자연스러워요.',en:'Too formal for a friend! "와도 돼~" is natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'콜! 5분 안에 갈게~',en:"Cool, I'll be there in 5 minutes~"},
+    {t:'msg',side:'me',ko:'오케이! 문 열어둘게.',en:"Okay, I'll leave the door open."},
+    {t:'msg',side:'friend',ko:'고마워 ㅎㅎ',en:'Thanks haha'},
+    {t:'choice',choices:[
+      {ko:'ㅎㅎ 이따 봐~',en:'Haha see you soon~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 그럼 이따 뵙겠습니다.',en:'Yes, I will see you then. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "ㅎㅎ 이따 봐~"처럼 편하게 답해요.',en:'Too stiff for a friend! Try "ㅎㅎ 이따 봐~".'}}
+    ]}
+  ]
+};
+KK_DATA[3]={
+  label_ko:'저녁 메뉴 정하기 — 반말 연습', label_en:'Deciding on dinner — casual speech practice',
+  scene_ko:'친구와 카카오톡으로 저녁 메뉴 이야기를 해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with a friend on KakaoTalk about dinner. Banmal is natural between friends.',
+  me:{name:'나',av:'🧑'},
+  friend:{name:'리아',av:'👧'},
+  script:[
+    {t:'msg',side:'friend',ko:'저녁 먹었어?',en:'Did you eat dinner?'},
+    {t:'choice',choices:[
+      {ko:'아니 아직! 너는?',en:'Not yet! Have you?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "먹었어?"에 반말로 "아직!"이 자연스러워요.',en:'Nice — "아직!" (casual) is a natural reply to "먹었어?" from a friend.'}},
+      {ko:'아니요, 아직 안 먹었어요.',en:"No, I haven't eaten yet. (formal)",tone:'jon',
+       fb:{type:'warn',ko:'친구 사이엔 "아니요" 대신 "아니"가 더 편해요.',en:'With a friend, "아니" is more natural than "아니요".'}}
+    ]},
+    {t:'msg',side:'friend',ko:'나도! 같이 라면 먹을래?',en:'Me neither! Want to eat ramen together?'},
+    {t:'msg',side:'me',ko:'콜! 너네 집으로 갈까?',en:'Sure! Should I come over to your place?'},
+    {t:'msg',side:'friend',ko:'그래~ 빨리 와!',en:'Yeah~ come quick!'},
+    {t:'choice',choices:[
+      {ko:'ㅇㅋ 5분 안에 갈게!',en:"Okay, I'll be there in 5 minutes!",tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 곧 가겠습니다.',en:'Yes, understood. I will come soon. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "ㅇㅋ 갈게!"처럼 편하게 답해요.',en:'Too formal for a friend! Try "ㅇㅋ 갈게!".'}}
+    ]}
+  ]
+};
+KK_DATA[4]={
+  label_ko:'주말 약속 잡기 — 반말 연습', label_en:'Weekend plans — casual speech practice',
+  scene_ko:'올리비아와 카카오톡으로 주말 약속을 잡아요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with Olivia on KakaoTalk about weekend plans. Banmal is natural between friends.',
+  me:{name:'미래',av:'👧'},
+  friend:{name:'올리비아',av:'🙋‍♀️'},
+  script:[
+    {t:'msg',side:'friend',ko:'미래야, 우리 주말에 자전거 탈래?',en:'Mirae, want to go biking this weekend?'},
+    {t:'choice',choices:[
+      {ko:'좋아! 몇 시에 만날까?',en:'Sounds good! What time should we meet?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "몇 시에 만날까?"처럼 반말이 자연스러워요.',en:'Nice — "몇 시에 만날까?" (casual) is natural with a friend.'}},
+      {ko:'좋아요. 몇 시에 만날까요?',en:'Sounds good. What time shall we meet? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이엔 "좋아요" 대신 "좋아"가 더 편해요.',en:'With a friend, "좋아" is more natural than "좋아요".'}}
+    ]},
+    {t:'msg',side:'friend',ko:'오후 1시 어때?',en:'How about 1pm?'},
+    {t:'msg',side:'me',ko:'콜! 어디서 만나?',en:'Sure! Where should we meet?'},
+    {t:'msg',side:'friend',ko:'공원 3번 입구에서 보자~',en:"Let's meet at park entrance 3~"},
+    {t:'choice',choices:[
+      {ko:'오케이! 이따 봐~',en:'Okay! See you later~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 그때 뵙겠습니다.',en:'Yes, understood. I will see you then. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "오케이! 이따 봐~"처럼 편하게 답해요.',en:'Too formal for a friend! Try "오케이! 이따 봐~".'}}
+    ]}
+  ]
+};
+KK_DATA[5]={
+  label_ko:'친구와 약속 잡기 — 반말 연습', label_en:'Making plans with a friend — casual speech practice',
   scene_ko:'올리비아와 카카오톡으로 광장시장 약속을 잡아요. 친구 사이에는 반말이 자연스러워요.',
   scene_en:'Chat with Olivia on KakaoTalk to plan a trip to Gwangjang Market. Banmal (casual speech) is natural between friends.',
   me:{name:'미래',av:'👧'},
@@ -919,20 +1421,196 @@ const KK_EP05={
     ]}
   ]
 };
-let kkIdx=0, kkScore=0, kkLog=[];
-function kkOpen(){kkIdx=0;kkScore=0;kkLog=[];kkRender();show('scr-hq-kakao')}
+KK_DATA[6]={
+  label_ko:'포장마차 가자고 하기 — 반말 연습', label_en:'Suggesting a food stall — casual speech practice',
+  scene_ko:'정민이와 미나가 포장마차에 가자고 카톡해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Jeongmin and Mina text about going to a food stall. Banmal is natural between friends.',
+  me:{name:'정민',av:'🧑'},
+  friend:{name:'미나',av:'👧'},
+  script:[
+    {t:'msg',side:'friend',ko:'정민아, 우리 포장마차 갈래?',en:'Jeongmin, want to go to the food stall?'},
+    {t:'choice',choices:[
+      {ko:'콜! 몇 시에 갈까?',en:'Sure! What time should we go?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "갈까?"처럼 반말이 자연스러워요.',en:'Nice — "갈까?" (casual) is natural with a friend.'}},
+      {ko:'네, 좋아요. 몇 시에 갈까요?',en:'Yes, sounds good. What time shall we go? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이엔 "좋아요" 대신 "좋아"가 더 편해요.',en:'With a friend, "좋아" is more natural than "좋아요".'}}
+    ]},
+    {t:'msg',side:'friend',ko:'이따 6시에 어때?',en:'How about 6pm later?'},
+    {t:'msg',side:'me',ko:'좋아! 거기서 보자~',en:"Sounds good! See you there~"},
+    {t:'msg',side:'friend',ko:'오케이~ 떡볶이 먹자!',en:"Okay~ let's eat tteokbokki!"},
+    {t:'choice',choices:[
+      {ko:'완전 좋아! 나도 떡볶이 먹고 싶었어 ㅋㅋ',en:"Totally! I wanted tteokbokki too haha",tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 떡볶이 좋아합니다.',en:'Yes, understood. I like tteokbokki. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "완전 좋아! ㅋㅋ"처럼 편하게 답해요.',en:'Too formal for a friend! Try something casual like "완전 좋아! ㅋㅋ".'}}
+    ]}
+  ]
+};
+KK_DATA[7]={
+  label_ko:'스터디 그룹 만들기 — 반말 연습', label_en:'Starting a study group — casual speech practice',
+  scene_ko:'마야와 한국어 스터디 그룹을 만들기로 카톡해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with Maya about starting a Korean study group. Banmal is natural between friends.',
+  me:{name:'나',av:'🧑'},
+  friend:{name:'마야',av:'👧'},
+  script:[
+    {t:'msg',side:'friend',ko:'한국어 스터디 그룹 만들자고 했지?',en:'You said we should start a Korean study group, right?'},
+    {t:'choice',choices:[
+      {ko:'응! 같이 할래?',en:'Yeah! Want to join?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "할래?"처럼 반말이 자연스러워요.',en:'Nice — "할래?" (casual) is natural with a friend.'}},
+      {ko:'네, 같이 하시겠어요?',en:'Yes, would you like to join? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "할래?"가 자연스러워요.',en:'Too formal for a friend! "할래?" is natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'좋아! 언제 모일까?',en:'Sounds good! When should we meet?'},
+    {t:'msg',side:'me',ko:'월요일 어때?',en:'How about Monday?'},
+    {t:'msg',side:'friend',ko:'콜! 도서관에서 만나자~',en:"Deal! Let's meet at the library~"},
+    {t:'choice',choices:[
+      {ko:'좋아! 그때 봐~',en:'Sounds good! See you then~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 그때 뵙겠습니다.',en:'Yes, understood. I will see you then. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "좋아! 그때 봐~"처럼 편하게 말해요.',en:'Too stiff for a friend! Try "좋아! 그때 봐~".'}}
+    ]}
+  ]
+};
+KK_DATA[8]={
+  label_ko:'위치 물어보기 — 반말 연습', label_en:'Asking where someone is — casual speech practice',
+  scene_ko:'리암이 미래에게 지금 어디인지 카톡으로 물어봐요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Liam texts Mirae to ask where she is. Banmal is natural between friends.',
+  me:{name:'미래',av:'👧'},
+  friend:{name:'리암',av:'🧑'},
+  script:[
+    {t:'msg',side:'friend',ko:'미래야, 지금 어디야?',en:'Mirae, where are you right now?'},
+    {t:'choice',choices:[
+      {ko:'나 부엌에 있어!',en:"I'm in the kitchen!",tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "있어!"처럼 반말이 자연스러워요.',en:'Nice — "있어!" (casual) is natural with a friend.'}},
+      {ko:'저는 부엌에 있습니다.',en:'I am in the kitchen. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "있어!"가 자연스러워요.',en:'Too formal for a friend! "있어!" is natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'오 거기 뭐 있어?',en:"Oh, what's there?"},
+    {t:'msg',side:'me',ko:'간식 찾고 있어 ㅋㅋ',en:"I'm looking for snacks haha"},
+    {t:'msg',side:'friend',ko:'오 나도 갈게!',en:"Ooh I'll come too!"},
+    {t:'choice',choices:[
+      {ko:'좋아! 빨리 와~',en:'Okay! Hurry over~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 오세요.',en:'Yes, understood. Please come. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "좋아! 빨리 와~"처럼 편하게 말해요.',en:'Too stiff for a friend! Try "좋아! 빨리 와~".'}}
+    ]}
+  ]
+};
+KK_DATA[9]={
+  label_ko:'시장 같이 가기 — 반말 연습', label_en:'Going to the market together — casual speech practice',
+  scene_ko:'미래가 리아에게 같이 시장 가자고 카톡해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Mirae texts Lia to go to the market together. Banmal is natural between friends.',
+  me:{name:'미래',av:'👧'},
+  friend:{name:'리아',av:'👧'},
+  script:[
+    {t:'msg',side:'me',ko:'리아야, 나 이따 시장 갈 건데 같이 갈래?',en:"Lia, I'm going to the market later, want to come?"},
+    {t:'choice',choices:[
+      {ko:'오 좋아! 몇 시에 갈 거야?',en:'Ooh sure! What time are you going?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "갈 거야?"처럼 반말이 자연스러워요.',en:'Nice — "갈 거야?" (casual) is natural with a friend.'}},
+      {ko:'네, 좋아요. 몇 시에 가실 거예요?',en:'Yes, sounds good. What time will you go? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이엔 "좋아요" 대신 "좋아"가 더 편해요.',en:'With a friend, "좋아" is more natural than "좋아요".'}}
+    ]},
+    {t:'msg',side:'me',ko:'3시쯔음 어때?',en:'How about around 3?'},
+    {t:'msg',side:'friend',ko:'콜! 나 사과 사고 싶어 ㅎㅎ',en:'Deal! I want to buy apples haha'},
+    {t:'msg',side:'me',ko:'오 나도! 같이 사자~',en:"Oh me too! Let's buy some together~"},
+    {t:'choice',choices:[
+      {ko:'좋아! 이따 봐~',en:'Okay! See you later~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 그때 뵙겠습니다.',en:'Yes, understood. I will see you then. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "좋아! 이따 봐~"처럼 편하게 말해요.',en:'Too stiff for a friend! Try "좋아! 이따 봐~".'}}
+    ]}
+  ]
+};
+KK_DATA[10]={
+  label_ko:'한강공원 자전거 소풍 후기 — 반말 연습', label_en:'Bike picnic recap — casual speech practice',
+  scene_ko:'올리비아와 한강공원 자전거 소풍 이야기를 카톡해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with Olivia about your bike picnic at Han River Park. Banmal is natural between friends.',
+  me:{name:'리아',av:'👧'},
+  friend:{name:'올리비아',av:'👧'},
+  script:[
+    {t:'msg',side:'friend',ko:'리아야, 주말에 뭐 했어?',en:'Lia, what did you do this weekend?'},
+    {t:'choice',choices:[
+      {ko:'한강공원에서 자전거 탔어!',en:'I rode a bike at Han River Park!',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "탔어!"처럼 반말이 자연스러워요.',en:'Nice — "탔어!" (casual past tense) is natural with a friend.'}},
+      {ko:'한강공원에서 자전거를 탔습니다.',en:'I rode a bike at Han River Park. (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "탔어!"가 자연스러워요.',en:'Too formal for a friend! "탔어!" is natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'오 좋았겠다! 날씨 어땠어?',en:'Oh that sounds nice! How was the weather?'},
+    {t:'msg',side:'me',ko:'완전 좋았어! 날씨가 맑았어.',en:'It was great! The weather was clear.'},
+    {t:'msg',side:'friend',ko:'우와 나도 가고 싶다!',en:'Wow, I want to go too!'},
+    {t:'choice',choices:[
+      {ko:'다음에 같이 가자!',en:"Let's go together next time!",tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'다음에 같이 가시겠어요?',en:'Would you like to go together next time? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "같이 가자!"처럼 편하게 말해요.',en:'Too stiff for a friend! Try "같이 가자!".'}}
+    ]}
+  ]
+};
+KK_DATA[11]={
+  label_ko:'리암네 집 놀러가기 약속 — 반말 연습', label_en:"Planning to visit Liam's house — casual speech practice",
+  scene_ko:'리암과 집에 놀러가는 약속을 카톡으로 잡아요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:"Make plans with Liam to visit his house. Banmal is natural between friends.",
+  me:{name:'카요',av:'🧑'},
+  friend:{name:'리암',av:'🧑'},
+  script:[
+    {t:'msg',side:'friend',ko:'카요야, 우리 집에 놀러 올래?',en:'Kayo, do you want to come over to my house?'},
+    {t:'choice',choices:[
+      {ko:'콜! 언제 갈까?',en:'Sure! When should I come?',tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "갈까?"처럼 반말이 자연스러워요.',en:'Nice — "갈까?" (casual) is natural with a friend.'}},
+      {ko:'네, 언제 갈까요?',en:'Yes, when shall I come? (formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "갈까?"가 자연스러워요.',en:'Too formal for a friend! "갈까?" is natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'토요일 어때?',en:'How about Saturday?'},
+    {t:'msg',side:'me',ko:'좋아! 몇 시에 갈까?',en:'Sounds good! What time should I come?'},
+    {t:'msg',side:'friend',ko:'2시에 와~',en:'Come at 2~'},
+    {t:'choice',choices:[
+      {ko:'좋아! 이따 봐~',en:'Okay! See you then~',tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'네, 알겠습니다. 그때 뵙겠습니다.',en:'Yes, understood. I will see you then. (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "좋아! 이따 봐~"처럼 편하게 말해요.',en:'Too stiff for a friend! Try "좋아! 이따 봐~".'}}
+    ]}
+  ]
+};
+KK_DATA[12]={
+  label_ko:'경복궁 여행 계획 — 반말 연습', label_en:'Planning a trip to Gyeongbokgung — casual speech practice',
+  scene_ko:'마야와 여름방학 경복궁 여행 계획을 카톡해요. 친구 사이에는 반말이 자연스러워요.',
+  scene_en:'Chat with Maya about your summer trip to Gyeongbokgung. Banmal is natural between friends.',
+  me:{name:'나',av:'🧑'},
+  friend:{name:'마야',av:'👧'},
+  script:[
+    {t:'msg',side:'friend',ko:'여름방학에 뭐 할 거야?',en:'What are you going to do for summer break?'},
+    {t:'choice',choices:[
+      {ko:'경복궁에 갈 거야!',en:"I'm going to go to Gyeongbokgung!",tone:'ban',
+       fb:{type:'ok',ko:'좋아요! 친구에게는 "갈 거야!"처럼 반말이 자연스러워요.',en:'Nice — "갈 거야!" (casual) is natural with a friend.'}},
+      {ko:'경복궁에 갈 것입니다.',en:"I will go to Gyeongbokgung. (very formal)",tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 격식 있어요! "갈 거야!"가 자연스러워요.',en:'Too formal for a friend! "갈 거야!" is natural.'}}
+    ]},
+    {t:'msg',side:'friend',ko:'오 좋겠다! 한복도 입을 거야?',en:'Oh nice! Are you going to wear hanbok too?'},
+    {t:'msg',side:'me',ko:'응! 입을 수 있대!',en:'Yeah! I heard you can wear one!'},
+    {t:'msg',side:'friend',ko:'우와 나도 가고 싶어!',en:'Wow, I want to go too!'},
+    {t:'choice',choices:[
+      {ko:'같이 가자! 재밌을 거야~',en:"Let's go together! It'll be fun~",tone:'ban',
+       fb:{type:'ok',ko:'완벽해요! 친구와의 대화는 끝까지 반말이 자연스러워요. 🎉',en:'Perfect — banmal stays natural all the way through with friends. 🎉'}},
+      {ko:'같이 가시겠습니까?',en:'Would you care to go together? (very formal)',tone:'jon',
+       fb:{type:'warn',ko:'친구 사이에 너무 딱딱해요! "같이 가자!"처럼 편하게 말해요.',en:'Too stiff for a friend! Try "같이 가자!".'}}
+    ]}
+  ]
+};
+let kkEp=5, kkIdx=0, kkScore=0, kkLog=[];
+function kkOpen(n){kkEp=n||curEp||5;if(!KK_DATA[kkEp])kkEp=5;kkIdx=0;kkScore=0;kkLog=[];kkRender();show('scr-hq-kakao')}
 function kkRender(){
+  const D=KK_DATA[kkEp];
   const box=document.getElementById('kkBody');
-  const sceneHtml=`<div class="card" style="text-align:center"><div style="font-size:.78rem;color:#bcd6d3;line-height:1.5">${KK_EP05.scene_ko}<div style="font-size:.68rem;color:#8fb0ad;margin-top:4px">${KK_EP05.scene_en}</div></div></div>`;
+  const sceneHtml=`<div class="card" style="text-align:center"><div style="font-size:.78rem;color:#bcd6d3;line-height:1.5">${D.scene_ko}<div style="font-size:.68rem;color:#8fb0ad;margin-top:4px">${D.scene_en}</div></div></div>`;
   const logHtml=kkLog.length?`<div class="kk-card">`+kkLog.map(m=>{
     if(m.side==='fb')return `<div class="kk-fb ${m.type}">${m.ko}<div class="en">${m.en}</div></div>`;
-    const who=m.side==='me'?KK_EP05.me:KK_EP05.friend;
+    const who=m.side==='me'?D.me:D.friend;
     return `<div class="kk-row ${m.side==='me'?'me':''}"><span class="kk-av">${who.av}</span><div><div class="kk-name">${who.name}</div><div class="kk-bubble"><div class="ko">${m.ko} <span class="tts-sm" onclick="speak('${m.ko.replace(/'/g,"\\'")}')">🔊</span></div><div class="en">${m.en}</div></div></div></div>`;
   }).join('')+`</div>`:'';
-  const item=KK_EP05.script[kkIdx];
+  const item=D.script[kkIdx];
   let tailHtml;
   if(item && item.t==='msg'){
-    const who=item.side==='me'?KK_EP05.me:KK_EP05.friend;
+    const who=item.side==='me'?D.me:D.friend;
     const previewHtml=`<div class="kk-card"><div class="kk-row ${item.side==='me'?'me':''}"><span class="kk-av">${who.av}</span><div><div class="kk-name">${who.name}</div><div class="kk-bubble"><div class="ko">${item.ko} <span class="tts-sm" onclick="speak('${item.ko.replace(/'/g,"\\'")}')">🔊</span></div><div class="en">${item.en}</div></div></div></div></div>`;
     tailHtml=previewHtml+`<div class="flow-nav"><button class="fn-next" onclick="kkNext()">다음 → Next</button></div>`;
   }else if(item && item.t==='choice'){
@@ -944,20 +1622,22 @@ function kkRender(){
     tailHtml=`<div class="card cont-card" style="text-align:center">
       <h2 style="margin-top:4px">🎉 카톡 완료!</h2>
       <p>반말 선택 ${kkScore} / ${turns}<br><span style="font-size:.7rem;color:#8fb0ad">Banmal choices: ${kkScore} / ${turns}</span></p>
-      <button class="go-btn" onclick="kkOpen()">🔁 다시 하기 · Try again</button>
+      <button class="go-btn" onclick="kkOpen(${kkEp})">🔁 다시 하기 · Try again</button>
     </div>
-    <div class="flow-nav"><button class="fn-next" onclick="shareOpen({emoji:'💬',title_ko:'카카오톡 시뮬레이션 완료!',title_en:'KakaoTalk simulation complete!',sub_ko:'반말 선택 '+kkScore+' / '+turns,sub_en:'Banmal choices: '+kkScore+'/'+turns,xp:15,dqIds:['dq6']})">결과 공유하기 →</button></div>`;
+    <div class="flow-nav"><button class="fn-next" onclick="shareOpen({emoji:'💬',title_ko:'Kakao Talk Simulation 완료!',title_en:'Kakao Talk Simulation complete!',sub_ko:'ep'+String(kkEp).padStart(2,'0')+' · 반말 선택 '+kkScore+' / '+turns,sub_en:'Banmal choices: '+kkScore+'/'+turns,xp:15,dqIds:['dq6']})">결과 공유하기 →</button></div>`;
   }
   box.innerHTML=sceneHtml+logHtml+tailHtml;
 }
 function kkNext(){
-  const item=KK_EP05.script[kkIdx];
+  const D=KK_DATA[kkEp];
+  const item=D.script[kkIdx];
   kkLog.push({side:item.side,ko:item.ko,en:item.en});
   kkIdx++;
   kkRender();
 }
 function kkChoose(i){
-  const item=KK_EP05.script[kkIdx];
+  const D=KK_DATA[kkEp];
+  const item=D.script[kkIdx];
   const c=item.choices[i];
   kkLog.push({side:'me',ko:c.ko,en:c.en});
   kkLog.push({side:'fb',type:c.fb.type,ko:c.fb.ko,en:c.fb.en});
@@ -1070,7 +1750,7 @@ function toneNav(dir){
 function toneRenderCard(){
   const t=EP.tone;
   const total=t.rows.length+(t.adult?1:0);
-  if(total===0)return `<div class="card"><h3>🗣️ 존댓말 vs 반말</h3><p style="font-size:.8rem;color:#9fb6c9">이 에피소드에는 톤 비교 카드가 없어요.</p></div>`;
+  if(total===0)return `<div class="card"><h3>🗣️ 존댓말 vs 반말 Polite/Casual</h3><p style="font-size:.8rem;color:#9fb6c9">이 에피소드에는 톤 비교 카드가 없어요.</p></div>`;
   const introHtml=(toneIdx===0&&t.intro)?`<div class="tone-intro">${t.intro}${t.introEn?`<div class="en">${t.introEn}</div>`:''}</div>`:'';
   let body;
   if(toneIdx<t.rows.length){
@@ -1083,7 +1763,7 @@ function toneRenderCard(){
     body=`<div class="tone-sit">💼 ${a.title}</div>${a.titleEn?`<div class="tone-sit-en">${a.titleEn}</div>`:''}
       ${a.lines.map(l=>`<div class="tone-box tone-jondaemal"><div class="tone-label">${l.spk}</div><div class="tone-text">${l.ko} <button class="tts-sm" onclick="speak('${l.ko.replace(/'/g,"\\'")}')">🔊</button></div>${l.en?`<div class="en">${l.en}</div>`:''}</div>`).join('')}`;
   }
-  return `<div class="card"><h3>🗣️ 존댓말 vs 반말 ${toneIdx+1} / ${total}</h3>${introHtml}${body}</div>
+  return `<div class="card"><h3>🗣️ 존댓말 vs 반말 Polite/Casual ${toneIdx+1} / ${total}</h3>${introHtml}${body}</div>
     <div class="sh-nav"><button onclick="toneNav(-1)" ${toneIdx===0?'disabled':''}>← 이전</button><button onclick="toneNav(1)" ${toneIdx===total-1?'disabled':''}>다음 →</button></div>`;
 }
 
