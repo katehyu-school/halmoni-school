@@ -116,9 +116,9 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
   border-bottom-color: white;
   font-weight: 700;
 }
-.lt-sidebar-btn { border-top: 1px solid var(--border); margin-top: 6px; }
-.lt-sidebar-btn .lesson-title-text { color: #B47E11 !important; font-weight: 500; }
-.lt-sidebar-btn.active { background: #FAEEDA !important; }
+.lt-sidebar-btn{background:linear-gradient(135deg,#0D7B75,#1AAB9A) !important;margin-top:0;}
+.lt-sidebar-btn .lesson-num,.lt-sidebar-btn .lesson-title-text{color:white !important;}
+.lt-sidebar-btn:hover,.lt-sidebar-btn.active{opacity:.88;}
 
 /* Level Test */
 #level-test-section { display:none; }
@@ -1530,9 +1530,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">09</span>
     <span class="lesson-title-text">갈비가 맛있어요</span>
   </div>
+  <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
   <div class="lesson-item lt-sidebar-btn" id="lt-sidebar-btn" onclick="showLevelTest()">
-    <span class="lesson-num" style="color:#B47E11">🏆</span>
-    <span class="lesson-title-text">레벨 테스트</span>
+    <span class="lesson-num">🏆</span>
+    <span class="lesson-title-text">Level 2 Test</span>
   </div>
 </nav>
 <!-- ══════ Book 1 사이드바 ══════ -->
