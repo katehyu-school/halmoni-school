@@ -1628,6 +1628,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">09</span>
     <span class="lesson-title-text">할아버지, 아직 멀었어요?</span>
   </div>
+  <div class="lesson-item" id="b3-lesson-10" onclick="switchBook3Unit(10)">
+    <span class="lesson-num">10</span>
+    <span class="lesson-title-text">엄마한테 물어 봐</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -5209,7 +5213,7 @@ async function loadBook3Unit(n) {
 }
 
 async function switchBook3Unit(n) {
-  [1,2,3,4,5,6,7,8,9].forEach(i => {
+  [1,2,3,4,5,6,7,8,9,10].forEach(i => {
     const el = document.getElementById('b3-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
@@ -9761,6 +9765,33 @@ const B3_SCENE_DATA = {
       [{ko:'아직 멀었어요?', en:'Are we still far away?', audio:'data/elem/level3/TTS/L3_09/audio_9_아직_멀었어요_.mp3'}],
       [{ko:'할머니, 이제 몇 분 남았어요?', en:'Grandma, how many minutes are left now?', audio:'data/elem/level3/TTS/L3_09/audio_10_할머니_이제_몇_분_남았어요_.mp3'}],
     ]
+  },
+  10: {
+    title: '엄마한테 물어 봐',
+    slides: [
+      'data/elem/level3/slides/L3_10/엄마한테물어봐1.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐2.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐3.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐4.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐5.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐6.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐7.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐8.png',
+      'data/elem/level3/slides/L3_10/엄마한테물어봐9.png',
+    ],
+    script: [
+      [{ko:'할머니, 오늘 외갓집에서 자도 돼요?', en:'Grandma, may I sleep at your house today?', audio:'data/elem/level3/TTS/L3_10/audio_0_할머니__오늘_외갓집에서_자도_돼요_.mp3'}],
+      [{ko:'엄마한테 물어 봐.', en:'Ask your mom.', audio:'data/elem/level3/TTS/L3_10/audio_1_엄마한테_물어_봐_.mp3'}],
+      [{ko:'엄마, 외갓집에 가도 돼요?', en:'Mom, may I go to grandma\'s house?', audio:'data/elem/level3/TTS/L3_10/audio_2_엄마__외갓집에_가도_돼요_.mp3'}],
+      [{ko:'할머니한테서 허락 받았어?', en:'Did you get permission from grandma?', audio:'data/elem/level3/TTS/L3_10/audio_3_할머니한테서_허락_받았어_.mp3'},
+       {ko:'네!', en:'Yes!', audio:'data/elem/level3/TTS/L3_10/audio_4_네_.mp3'}],
+      [{ko:'왜 할머니 집에 가고 싶어?', en:'Why do you want to go to grandma\'s house?', audio:'data/elem/level3/TTS/L3_10/audio_5_왜_할머니_집에_가고_싶어_.mp3'}],
+      [{ko:'할머니하고 같이 갓을 만들고 싶어요.', en:"I want to make a gat with grandma.", audio:'data/elem/level3/TTS/L3_10/audio_6_할머니하고_같이_갓을_만들고_싶어요_.mp3'}],
+      [{ko:'갓이 뭐야?', en:"What is a gat?", audio:'data/elem/level3/TTS/L3_10/audio_7_갓이_뭐야_.mp3'}],
+      [{ko:'사자 보이즈의 한국 모자예요.', en:"It's the Korean hat from Lion Boys.", audio:'data/elem/level3/TTS/L3_10/audio_8_사자_보이즈의_한국_모자예요_.mp3'}],
+      [{ko:'어떻게 만들 거야?', en:"How are you going to make it?", audio:'data/elem/level3/TTS/L3_10/audio_9_어떻게_만들_거야_.mp3'},
+       {ko:'종이 접시로 만들 거예요.', en:"I'm going to make it with a paper plate.", audio:'data/elem/level3/TTS/L3_10/audio_10_종이_접시로_만들_거예요_.mp3'}],
+    ]
   }
 };
 
@@ -10504,7 +10535,7 @@ async function _kidsIdxLoad(){
   }
 
   // ── Level 3 (units 1~N) — direct fetch, stops at first missing ──
-  for(let n=1;n<=9;n++){
+  for(let n=1;n<=10;n++){
     try{
       const r=await fetch(`data/elem/level3/unit${String(n).padStart(2,'0')}.json`);
       if(!r.ok)break;
