@@ -5415,40 +5415,51 @@ let b3DlgAnswered = {};
 
 function renderB3Dialogue(scenarios) {
   b3DlgAnswered = {};
+  const AV = { teal:'#0D7B75', coral:'#E05C55', purple:'#9B5FD0', blue:'#4B8FE6', amber:'#D4880A', green:'#27AE60', mint:'#1AAB9A' };
+  const BG = { teal:'#EBF7F6', coral:'#FEF0EF', purple:'#F6EEFF', blue:'#EEF4FF', amber:'#FFF8EE', green:'#EDFBF3', mint:'#E6FBF8' };
   let html = '<div class="b3-dlg-wrap">';
   scenarios.forEach((sc, si) => {
-    html += '<div class="b3-dlg-scenario">' +
-      '<div class="b3-dlg-scene-label">' + sc.scene + ' <span class="b3-dlg-scene-en">\xb7 ' + sc.scene_en + '</span></div>';
+    const parts = (sc.scene||'').split(' ');
+    const scIcon = parts[0];
+    const scText = parts.slice(1).join(' ');
+    html += '<div class="b3-dlg-scenario">';
+    html += '<div class="b3-dlg-scene-header"><span class="b3-dlg-scene-icon">'+scIcon+'</span><span class="b3-dlg-scene-text">'+scText+'</span><span class="b3-dlg-scene-en">&nbsp;·&nbsp;'+sc.scene_en+'</span></div>';
     sc.lines.forEach((line, li) => {
-      const isMe = (line.color === 'teal');
-      const sideClass = isMe ? 'b3-dlg-me' : 'b3-dlg-other';
-      const bubbleColor = 'b3-bubble-' + (line.color||'blue');
+      const col = line.color || 'teal';
+      const avC = AV[col] || '#888';
+      const bgC = BG[col] || '#f5f5f5';
+      const init = (line.speaker||'?')[0];
+      const spk = (line.text||'').replace(/'/g,"&#39;");
       if (line.type === 'given') {
-        html += '<div class="b3-dlg-line ' + sideClass + '">' +
-          (isMe ? '' : '<span class="b3-dlg-name">' + line.speaker + '</span>') +
-          '<div class="b3-dlg-bubble ' + bubbleColor + '">' +
-          '<div class="b3-dlg-kr">' + line.text + '</div>' +
-          '<div class="b3-dlg-en">' + (line.en||'') + '</div>' +
+        html += '<div class="b3-dlg-row">' +
+          '<div class="b3-dlg-avatar" style="background:'+avC+'">'+init+'</div>' +
+          '<div class="b3-dlg-body">' +
+            '<div class="b3-dlg-name-tag">'+line.speaker+'</div>' +
+            '<div class="b3-dlg-bubble" style="background:'+bgC+';border-left:3px solid '+avC+'">' +
+              '<div class="b3-dlg-kr">'+line.text+'<button class="b3-dlg-tts" onclick="speakKorean(''+spk+'')">🔊</button></div>' +
+              '<div class="b3-dlg-en">'+(line.en||'')+'</div>' +
+            '</div>' +
           '</div>' +
-          (isMe ? '<span class="b3-dlg-name">' + line.speaker + '</span>' : '') +
-          '</div>';
+        '</div>';
       } else if (line.type === 'fill') {
-        const parts = (line.text||'').split('___');
-        const before = parts[0]||'';
-        const after  = parts[1]||'';
+        const pts = (line.text||'').split('___');
+        const bef = pts[0]||'';
+        const aft = pts[1]||'';
         let opts = '';
         (line.opts||[]).forEach((opt,oi) => {
-          opts += '<button class="b3-dlg-opt" onclick="b3DlgCheck('+si+','+li+','+oi+')">' + opt + '</button>';
+          opts += '<button class="b3-dlg-opt" onclick="b3DlgCheck('+si+','+li+','+oi+')">'+opt+'</button>';
         });
-        html += '<div class="b3-dlg-line ' + sideClass + '" id="b3dlg-line-'+si+'-'+li+'">' +
-          (isMe ? '' : '<span class="b3-dlg-name">' + line.speaker + '</span>') +
-          '<div class="b3-dlg-bubble ' + bubbleColor + ' b3-dlg-fill-bubble">' +
-          '<div class="b3-dlg-kr">' + before + '<span class="b3-dlg-blank" id="b3dlg-blank-'+si+'-'+li+'">___</span>' + after + '</div>' +
-          '<div class="b3-dlg-en">' + (line.en||'') + '</div>' +
-          '<div class="b3-dlg-opts" id="b3dlg-opts-'+si+'-'+li+'">' + opts + '</div>' +
+        html += '<div class="b3-dlg-row" id="b3dlg-line-'+si+'-'+li+'">' +
+          '<div class="b3-dlg-avatar" style="background:'+avC+'">'+init+'</div>' +
+          '<div class="b3-dlg-body">' +
+            '<div class="b3-dlg-name-tag">'+line.speaker+'</div>' +
+            '<div class="b3-dlg-bubble b3-dlg-fill-bubble" style="background:'+bgC+';border-left:3px solid '+avC+'">' +
+              '<div class="b3-dlg-kr">'+bef+'<span class="b3-dlg-blank" id="b3dlg-blank-'+si+'-'+li+'">___</span>'+aft+'</div>' +
+              '<div class="b3-dlg-en">'+(line.en||'')+'</div>' +
+              '<div class="b3-dlg-opts" id="b3dlg-opts-'+si+'-'+li+'">'+opts+'</div>' +
+            '</div>' +
           '</div>' +
-          (isMe ? '<span class="b3-dlg-name">' + line.speaker + '</span>' : '') +
-          '</div>';
+        '</div>';
       }
     });
     html += '</div>';
@@ -10951,4 +10962,48 @@ if(document.readyState !== 'loading'){
 .b3-complete{text-align:center;font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;padding:40px;background:#EBF7F6;border-radius:20px;}
 .b3-ans-hint{color:#0D7B75;font-weight:700;margin:10px 0 6px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.95rem;}
 /* Self check */
-.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bot
+.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bottom:10px;}
+/* b3 Self-check */
+.b3-checklist{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+.b3-check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:10px 14px;border-radius:12px;border:1.5px solid #eee;transition:all .2s;}
+.b3-check-item:hover{background:#f9f9f9;}
+.b3-check-item input{display:none;}
+.b3-check-box{width:22px;height:22px;border:2px solid #ccc;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.b3-check-item input:checked ~ .b3-check-box{background:#0D7B75;border-color:#0D7B75;color:white;}
+.b3-check-item input:checked ~ .b3-check-box::after{content:'✓';font-size:.85rem;}
+.b3-check-text{}
+.b3-check-ko{font-family:'Jua',sans-serif;font-size:.95rem;color:#333;}
+.b3-check-en{font-size:.82rem;color:#aaa;margin-top:2px;}
+.b3-check-result{text-align:center;margin-top:14px;font-family:'Jua',sans-serif;font-size:1rem;}
+/* ════════════════════════
+   b3 Dialogue Bubbles
+   ════════════════════════ */
+.b3-dlg-wrap{display:flex;flex-direction:column;gap:0;}
+.b3-dlg-scenario{margin-bottom:22px;}
+.b3-dlg-scene-header{display:inline-flex;align-items:center;gap:6px;background:#F3F4F6;border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.b3-dlg-scene-icon{font-size:1.1rem;}
+.b3-dlg-scene-text{font-family:'Jua',sans-serif;font-size:.88rem;color:#444;font-weight:700;}
+.b3-dlg-scene-en{font-size:.78rem;color:#aaa;}
+.b3-dlg-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;}
+.b3-dlg-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Jua',sans-serif;font-size:.88rem;color:white;flex-shrink:0;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.15);}
+.b3-dlg-body{flex:1;min-width:0;}
+.b3-dlg-name-tag{font-size:.73rem;font-family:'Jua',sans-serif;color:#aaa;margin-bottom:3px;padding-left:3px;}
+.b3-dlg-bubble{border-radius:4px 14px 14px 14px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.07);}
+.b3-dlg-fill-bubble{border-radius:4px 14px 14px 14px;}
+.b3-dlg-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;display:flex;align-items:center;flex-wrap:wrap;gap:5px;line-height:1.6;}
+.b3-dlg-tts{background:none;border:1.5px solid rgba(0,0,0,.12);border-radius:50%;width:26px;height:26px;font-size:.72rem;cursor:pointer;flex-shrink:0;padding:0;transition:all .2s;color:#888;}
+.b3-dlg-tts:hover{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.25);}
+.b3-dlg-en{font-size:.8rem;color:#aaa;margin-top:5px;font-style:italic;}
+.b3-dlg-blank{display:inline-block;min-width:44px;border-bottom:2.5px solid #0D7B75;text-align:center;color:#0D7B75;padding:1px 6px;font-weight:700;border-radius:0;transition:all .3s;}
+.b3-dlg-correct{color:#1a8a30 !important;border-bottom-color:transparent !important;background:rgba(13,123,117,.1);border-radius:6px;padding:1px 8px;}
+.b3-dlg-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.b3-dlg-opt{background:white;border:2px solid #ddd;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.9rem;cursor:pointer;transition:all .18s;color:#444;}
+.b3-dlg-opt:hover{border-color:#0D7B75;background:#EBF7F6;color:#0D7B75;}
+.b3-dlg-opt-wrong{background:#ffe0e0 !important;border-color:#e44 !important;color:#e44 !important;}
+.b3-dlg-blank-shake{animation:dlgShake .4s;}
+@keyframes dlgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.b3-dlg-result{text-align:center;margin-top:8px;}
+.b3-dlg-complete{font-family:'Jua',sans-serif;font-size:1.15rem;color:#0D7B75;background:#EBF7F6;border-radius:16px;padding:18px;display:inline-block;}
+</style>
+</body>
+</html>
