@@ -1632,6 +1632,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">10</span>
     <span class="lesson-title-text">엄마한테 물어 봐</span>
   </div>
+  <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
+  <div class="lesson-item b3lt-sidebar-btn" id="b3-leveltest-btn" onclick="loadB3LevelTest()">
+    <span class="lesson-num">🏆</span>
+    <span class="lesson-title-text">Level 3 Test</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -1647,6 +1652,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div id="b3-unit-container">
     <div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>
   </div>
+</div>
+
+<!-- ══ Book3 Level Test ══ -->
+<div id="b3-leveltest-main" style="display:none;max-width:680px;margin:0 auto;padding:28px 20px 60px;">
+  <div id="b3lt-wrap"></div>
 </div>
 
 
@@ -5229,6 +5239,194 @@ async function switchBook3Unit(n) {
     container.innerHTML = '<div style="text-align:center;padding:60px;color:#f88;font-family:Jua,sans-serif;">⚠️ 데이터 로드 실패: '+e.message+'</div>';
     console.error(e);
   }
+}
+
+// ══ Book3 Level Test ════════════════════════════════════════
+const B3_LEVEL_TEST = [
+  // 1 mc u01
+  {type:'mc',ep:'1과',emoji:'🐻',
+   ko_q:'강아지가 ___ 마리 있어요?',en_q:'How many dogs? (There are three.)',
+   opts:['세','삼','셋 개','세개'],ans:0},
+  // 2 listen u02
+  {type:'listen',ep:'2과',emoji:'🍦',
+   audio:'아이스크림 두 개 주세요.',en_q:'What did they order?',
+   choices:[{emoji:'🍦',kr:'아이스크림 두 개',en:'2 ice creams'},{emoji:'🧃',kr:'주스 두 잔',en:'2 juices'},{emoji:'🍦',kr:'아이스크림 세 개',en:'3 ice creams'}],ans:0},
+  // 3 fill u03
+  {type:'fill',ep:'3과',emoji:'🗝️',
+   ko_q:'열쇠가 탁자 위에___ 없어요.',en_q:"The key isn't there either.",
+   opts:['도','가','를','에'],ans:0},
+  // 4 mc u04
+  {type:'mc',ep:'4과',emoji:'⚽',
+   ko_q:'토요일에 배구를 ___ 싶어요.',en_q:'I want to play volleyball on Saturday.',
+   opts:['하고','해고','하가','하를'],ans:0},
+  // 5 listen u05
+  {type:'listen',ep:'5과',emoji:'🍋',
+   audio:'어제 우리 가족이 함께 앱을 만들었어요.',en_q:'When did they make the app?',
+   choices:[{emoji:'📅',kr:'어제',en:'Yesterday'},{emoji:'📅',kr:'오늘',en:'Today'},{emoji:'📅',kr:'내일',en:'Tomorrow'}],ans:0},
+  // 6 fill u06
+  {type:'fill',ep:'6과',emoji:'🥚',
+   ko_q:'저는 계란을 ___ 먹어요.',en_q:"I can't eat eggs.",
+   opts:['못','안','잘','더'],ans:0},
+  // 7 mc u06
+  {type:'mc',ep:'6과',emoji:'🥚',
+   ko_q:'도서관에서 떠들___ 안 돼요.',en_q:"You can't be loud in the library.",
+   opts:['면','으면서','지만','어'],ans:0},
+  // 8 listen u07
+  {type:'listen',ep:'7과',emoji:'🌅',
+   audio:'나눠 먹고 싶지 않아요.',en_q:"What doesn't the speaker want to do?",
+   choices:[{emoji:'🍜',kr:'나눠 먹기',en:'Share food'},{emoji:'💤',kr:'자기',en:'Sleep'},{emoji:'🎵',kr:'노래하기',en:'Sing'}],ans:0},
+  // 9 fill u07
+  {type:'fill',ep:'7과',emoji:'🌅',
+   ko_q:'음악을 들___ 공부해요.',en_q:'I study while listening to music.',
+   opts:['으면서','고','때','기'],ans:0},
+  // 10 mc u08
+  {type:'mc',ep:'8과',emoji:'✍️',
+   ko_q:'우리 팀이 ___ 빠른 팀이에요!',en_q:'Our team is the fastest!',
+   opts:['제일','더','조금','많이'],ans:0},
+  // 11 listen u09
+  {type:'listen',ep:'9과',emoji:'🚗',
+   audio:'나이아가라에 있어.',en_q:'Where is the person right now?',
+   choices:[{emoji:'💧',kr:'나이아가라',en:'Niagara Falls'},{emoji:'🏠',kr:'집',en:'Home'},{emoji:'🏫',kr:'학교',en:'School'}],ans:0},
+  // 12 fill u09
+  {type:'fill',ep:'9과',emoji:'🚗',
+   ko_q:'서울역___ 광화문까지 걸어요.',en_q:'Walk from Seoul Station to Gwanghwamun.',
+   opts:['부터','에서','한테','로'],ans:0},
+  // 13 mc u10
+  {type:'mc',ep:'10과',emoji:'🎩',
+   ko_q:'친구한테 선물을 줬어. 여기서 한테는 무슨 뜻이야?',en_q:"What does '한테' mean here?",
+   opts:['~에게 (to a person)','~에서 (from a place)','~로 (direction)','~도 (also)'],ans:0},
+  // 14 listen u10
+  {type:'listen',ep:'10과',emoji:'🎩',
+   audio:'엄마한테 물어 봐.',en_q:'Who should you ask?',
+   choices:[{emoji:'👩‍👧',kr:'엄마',en:'Mom'},{emoji:'👵',kr:'할머니',en:'Grandma'},{emoji:'👦',kr:'리암',en:'Liam'}],ans:0},
+  // 15 fill u10
+  {type:'fill',ep:'10과',emoji:'🎩',
+   ko_q:'종이 접시___ 갓을 만들 거예요.',en_q:"I'm going to make a gat with a paper plate.",
+   opts:['로','에서','한테','가'],ans:0},
+];
+
+let b3LTIdx = 0, b3LTScore = 0, b3LTAnswered = false;
+
+function loadB3LevelTest() {
+  document.querySelectorAll('#book3-sidebar .lesson-item').forEach(el => el.classList.remove('active'));
+  const btn = document.getElementById('b3-leveltest-btn');
+  if (btn) btn.classList.add('active');
+  b3LTIdx = 0; b3LTScore = 0; b3LTAnswered = false;
+  const wrap = document.getElementById('b3-unit-container');
+  if (wrap) wrap.innerHTML = '<div id="b3lt-inner"></div>';
+  b3LTRender();
+}
+
+function b3LTRender() {
+  const inner = document.getElementById('b3lt-inner');
+  if (!inner) return;
+  const q = B3_LEVEL_TEST[b3LTIdx];
+  const total = B3_LEVEL_TEST.length;
+  b3LTAnswered = false;
+  const pct = Math.round((b3LTIdx / total) * 100);
+  const typeLabel = q.type==='mc' ? '🔤 고르기' : q.type==='listen' ? '🔊 듣기' : '✏️ 빈칸 채우기';
+
+  let qHTML = '';
+  if (q.type === 'mc') {
+    let optsHTML = '';
+    q.opts.forEach((opt,i) => {
+      optsHTML += '<button class="b3lt-opt" id="b3lt-opt-'+i+'" onclick="b3LTChoose('+i+')">'+opt+'</button>';
+    });
+    qHTML = '<div class="b3lt-q-ko">'+q.ko_q+'</div><div class="b3lt-q-en">'+q.en_q+'</div><div class="b3lt-opts">'+optsHTML+'</div>';
+  } else if (q.type === 'listen') {
+    let choicesHTML = '';
+    q.choices.forEach((ch,i) => {
+      choicesHTML += '<button class="b3lt-choice" id="b3lt-opt-'+i+'" onclick="b3LTChoose('+i+')"><div class="b3lt-choice-emoji">'+ch.emoji+'</div><div class="b3lt-choice-kr">'+ch.kr+'</div><div class="b3lt-choice-en">'+ch.en+'</div></button>';
+    });
+    const aud = q.audio.replace(/'/g,"&#39;");
+    qHTML = '<div class="b3lt-listen-center"><button class="b3lt-listen-btn" onclick="speakKorean(\''+aud+'\')">🔊 들어보세요</button><div class="b3lt-q-en" style="margin-top:10px;">'+q.en_q+'</div></div><div class="b3lt-choices">'+choicesHTML+'</div>';
+  } else {
+    const pts = q.ko_q.split('___');
+    let optsHTML = '';
+    q.opts.forEach((opt,i) => {
+      optsHTML += '<button class="b3lt-opt" id="b3lt-opt-'+i+'" onclick="b3LTChoose('+i+')">'+opt+'</button>';
+    });
+    qHTML = '<div class="b3lt-q-ko">'+(pts[0]||'')+'<span class="b3lt-blank" id="b3lt-blank">___</span>'+(pts[1]||'')+'</div><div class="b3lt-q-en">'+q.en_q+'</div><div class="b3lt-opts">'+optsHTML+'</div>';
+  }
+
+  const isLast = (b3LTIdx === total - 1);
+  inner.innerHTML =
+    '<div class="card b3lt-card">'+
+      '<div class="b3lt-header">'+
+        '<span class="b3lt-ep-badge">'+q.emoji+' '+q.ep+'</span>'+
+        '<span class="b3lt-counter">'+( b3LTIdx+1)+' / '+total+'</span>'+
+      '</div>'+
+      '<div class="b3lt-prog-wrap"><div class="b3lt-prog-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="b3lt-type-tag">'+typeLabel+'</div>'+
+      qHTML+
+      '<div class="b3lt-feedback" id="b3lt-feedback" style="display:none;"></div>'+
+      '<button class="b3lt-next-btn" id="b3lt-next" style="display:none;" onclick="b3LTNext()">'+(isLast?'결과 보기 🏆':'다음 →')+'</button>'+
+    '</div>';
+}
+
+function b3LTChoose(i) {
+  if (b3LTAnswered) return;
+  b3LTAnswered = true;
+  const q = B3_LEVEL_TEST[b3LTIdx];
+  const correct = (i === q.ans);
+  if (correct) b3LTScore++;
+
+  document.querySelectorAll('.b3lt-opt,.b3lt-choice').forEach((btn,idx) => {
+    btn.disabled = true;
+    if (idx === q.ans) btn.classList.add('b3lt-correct');
+    else if (idx === i && !correct) btn.classList.add('b3lt-wrong');
+  });
+
+  const blank = document.getElementById('b3lt-blank');
+  if (blank) {
+    blank.textContent = q.opts[i];
+    blank.className = 'b3lt-blank '+(correct?'b3lt-blank-ok':'b3lt-blank-err');
+  }
+
+  const fb = document.getElementById('b3lt-feedback');
+  if (fb) {
+    fb.style.display='';
+    const ansStr = q.type==='listen' ? q.choices[q.ans].kr : q.opts[q.ans];
+    fb.innerHTML = correct
+      ? '<span class="b3lt-fb-ok">⭐ 정답! Correct!</span>'
+      : '<span class="b3lt-fb-err">❌ 정답: <strong>'+ansStr+'</strong></span>';
+  }
+
+  if (correct && q.type==='listen') speakKorean(q.audio);
+
+  const nb = document.getElementById('b3lt-next');
+  if (nb) {
+    nb.style.display='';
+    nb.textContent = (b3LTIdx===B3_LEVEL_TEST.length-1) ? '결과 보기 🏆' : '다음 →';
+  }
+}
+
+function b3LTNext() {
+  b3LTIdx++;
+  if (b3LTIdx >= B3_LEVEL_TEST.length) { b3LTShowScore(); } else { b3LTRender(); }
+}
+
+function b3LTShowScore() {
+  const total = B3_LEVEL_TEST.length;
+  const pct = Math.round((b3LTScore/total)*100);
+  let grade,msg,col;
+  if (pct>=90){grade='A';msg='🏆 완벽해요! Perfect!';col='#0D7B75';}
+  else if(pct>=70){grade='B';msg='🌟 훌륭해요! Great job!';col='#4B8FE6';}
+  else if(pct>=50){grade='C';msg='👍 잘했어요! Good try!';col='#E8A020';}
+  else{grade='D';msg='🌱 다시 해봐요! Try again!';col='#E05C55';}
+  const inner = document.getElementById('b3lt-inner');
+  if (!inner) return;
+  inner.innerHTML =
+    '<div class="card b3lt-score-card">'+
+      '<div class="b3lt-score-title">🏆 Level 3 테스트 완료!</div>'+
+      '<div class="b3lt-score-grade" style="color:'+col+'">'+grade+'</div>'+
+      '<div class="b3lt-score-msg">'+msg+'</div>'+
+      '<div class="b3lt-score-num">'+b3LTScore+' / '+total+' <span style="font-size:.88rem;color:#aaa;">정답</span></div>'+
+      '<div class="b3lt-score-bar-wrap"><div class="b3lt-score-bar" style="width:'+pct+'%;background:'+col+'"></div></div>'+
+      '<div class="b3lt-score-pct">'+pct+'%</div>'+
+      '<button class="b3lt-retry-btn" onclick="loadB3LevelTest()">다시 도전 🔄</button>'+
+    '</div>';
+  launchConfetti();
 }
 
 function renderBook3Unit(data) {
@@ -11004,6 +11202,53 @@ if(document.readyState !== 'loading'){
 @keyframes dlgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .b3-dlg-result{text-align:center;margin-top:8px;}
 .b3-dlg-complete{font-family:'Jua',sans-serif;font-size:1.15rem;color:#0D7B75;background:#EBF7F6;border-radius:16px;padding:18px;display:inline-block;}
+/* ── Book3 Level Test ── */
+.b3lt-sidebar-btn{background:linear-gradient(135deg,#0D7B75,#1AAB9A) !important;}
+.b3lt-sidebar-btn .lesson-num,.b3lt-sidebar-btn .lesson-title-text{color:white !important;}
+.b3lt-sidebar-btn:hover,.b3lt-sidebar-btn.active{opacity:.88;}
+.b3lt-card{max-width:560px;margin:0 auto;}
+.b3lt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.b3lt-ep-badge{background:#EBF7F6;color:#0D7B75;border-radius:14px;padding:4px 12px;font-family:'Jua',sans-serif;font-size:.82rem;font-weight:700;}
+.b3lt-counter{font-size:.82rem;color:#aaa;font-family:'Jua',sans-serif;}
+.b3lt-prog-wrap{height:6px;background:#eee;border-radius:6px;overflow:hidden;margin-bottom:16px;}
+.b3lt-prog-fill{height:100%;background:linear-gradient(90deg,#0D7B75,#1AAB9A);border-radius:6px;transition:width .4s;}
+.b3lt-type-tag{font-size:.78rem;color:#aaa;font-family:'Jua',sans-serif;margin-bottom:14px;letter-spacing:.02em;}
+.b3lt-q-ko{font-family:'Jua',sans-serif;font-size:1.25rem;color:#222;margin-bottom:8px;line-height:1.7;}
+.b3lt-q-en{font-size:.88rem;color:#aaa;margin-bottom:18px;font-style:italic;}
+.b3lt-blank{display:inline-block;min-width:48px;border-bottom:2.5px solid #0D7B75;text-align:center;color:#0D7B75;padding:2px 8px;font-weight:700;transition:all .3s;}
+.b3lt-blank-ok{border-bottom-color:transparent !important;background:rgba(13,123,117,.12);border-radius:6px;color:#0a7a6c !important;}
+.b3lt-blank-err{border-bottom-color:#e44 !important;color:#e44 !important;}
+.b3lt-opts{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.b3lt-opt{background:#f8f8f8;border:2px solid #ddd;border-radius:18px;padding:10px 20px;font-family:'Jua',sans-serif;font-size:.98rem;cursor:pointer;transition:all .18s;}
+.b3lt-opt:hover:not(:disabled){border-color:#0D7B75;background:#EBF7F6;}
+.b3lt-opt.b3lt-correct{background:#EBF7F6;border-color:#0D7B75;color:#0D7B75;font-weight:700;}
+.b3lt-opt.b3lt-wrong{background:#ffe0e0;border-color:#e44;color:#e44;}
+.b3lt-listen-center{text-align:center;margin-bottom:18px;}
+.b3lt-listen-btn{background:#EBF7F6;border:2px solid #0D7B75;border-radius:22px;padding:14px 28px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;color:#0D7B75;transition:all .2s;}
+.b3lt-listen-btn:hover{background:#0D7B75;color:white;}
+.b3lt-choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
+.b3lt-choice{background:#f8f8f8;border:2px solid #ddd;border-radius:16px;padding:14px 18px;cursor:pointer;transition:all .2s;text-align:center;min-width:100px;font-family:'Jua',sans-serif;}
+.b3lt-choice:hover:not(:disabled){border-color:#0D7B75;background:#EBF7F6;}
+.b3lt-choice.b3lt-correct{background:#EBF7F6;border-color:#0D7B75;}
+.b3lt-choice.b3lt-wrong{background:#ffe0e0;border-color:#e44;}
+.b3lt-choice-emoji{font-size:1.8rem;margin-bottom:4px;}
+.b3lt-choice-kr{font-size:.92rem;color:#333;}
+.b3lt-choice-en{font-size:.76rem;color:#aaa;}
+.b3lt-feedback{margin:12px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.98rem;padding:10px 14px;border-radius:12px;background:#f9f9f9;}
+.b3lt-fb-ok{color:#0D7B75;}
+.b3lt-fb-err{color:#e44;}
+.b3lt-next-btn{display:block;width:100%;margin-top:12px;padding:13px;background:#0D7B75;color:white;border:none;border-radius:16px;font-family:'Jua',sans-serif;font-size:1.05rem;cursor:pointer;transition:all .2s;}
+.b3lt-next-btn:hover{background:#0a6862;}
+.b3lt-score-card{max-width:400px;margin:0 auto;text-align:center;padding:32px 24px !important;}
+.b3lt-score-title{font-family:'Jua',sans-serif;font-size:1rem;color:#aaa;margin-bottom:16px;}
+.b3lt-score-grade{font-family:'Jua',sans-serif;font-size:5.5rem;font-weight:900;line-height:1;margin-bottom:8px;}
+.b3lt-score-msg{font-family:'Jua',sans-serif;font-size:1.2rem;color:#444;margin-bottom:16px;}
+.b3lt-score-num{font-family:'Jua',sans-serif;font-size:1.5rem;color:#222;margin-bottom:12px;}
+.b3lt-score-bar-wrap{height:8px;background:#eee;border-radius:8px;overflow:hidden;margin:0 20px 6px;}
+.b3lt-score-bar{height:100%;border-radius:8px;transition:width .6s;}
+.b3lt-score-pct{font-size:.88rem;color:#aaa;margin-bottom:24px;font-family:'Jua',sans-serif;}
+.b3lt-retry-btn{background:#EBF7F6;border:2px solid #0D7B75;border-radius:20px;padding:12px 32px;font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;cursor:pointer;transition:all .2s;}
+.b3lt-retry-btn:hover{background:#0D7B75;color:white;}
 </style>
 </body>
 </html>
