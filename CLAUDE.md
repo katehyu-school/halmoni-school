@@ -3,6 +3,30 @@
 
 ---
 
+## 🔴 현재 작업 상태 (매 세션 업데이트)
+> 이 섹션이 가장 최신 — 아래 "다음 작업 예정" 섹션들은 과거 기록
+
+| 앱 | 현재 상태 | 다음 작업 |
+|----|---------|---------|
+| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~05 완성 ✅ | **L2 ep06 제작 중** |
+| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** | L3 추가 콘텐츠 or L4 설계 |
+| **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** (hq-mobile.html로 연결됨) | 기능 확장 |
+
+---
+
+## 📋 에피소드 제작 표준 프로시져 (5단계)
+> 새 에피소드/유닛 작업 시 **반드시 이 순서**로 진행
+
+1. **스크립트 preview & 분석** — 선생님이 초안 주면 Claude가 난이도·어휘·문법 흐름 분석
+2. **슬라이드 & TTS 제작** — 선생님이 직접 작업 (이 과정에서 스크립트 계속 수정 가능)
+3. **파일 저장 후 Claude에게 알림** — 확정된 슬라이드/TTS를 폴더에 저장
+4. **Claude 일괄 구현** — JSON 작성, nhs.html/korean-app_v2.html 연결, 사이드바 활성화
+5. **QA 점검** — 구현 직후 Claude가 체크: ① 퀴즈 정답 오류 ② 대사-슬라이드-TTS 매칭 ③ "정답은 아니지만 맞는 표현" 혼재 여부 → 짧은 확인 리스트만 선생님께 제시
+
+> **분업 원칙**: 콘텐츠/교육 판단 = 선생님 / 구현 = Claude. 슬라이드/TTS 준비 전에는 구현 대기.
+
+---
+
 ## 👩‍🏫 프로젝트 오너
 - **이름**: Haeok (kate.h.yu@gmail.com)
 - 한국어 선생님 — 온라인 한국어 학교 운영 중
@@ -36,7 +60,10 @@
 | `contents/sejong/` | 세종한국어 성인반 교재 PDF + txt |
 | `contents/korean-app/` | 초등반 교재 PDF + txt |
 | `data/elem/level2/unit0N.json` | 초등반 Level 2 unit별 데이터 (unit01~09.json) — **문법 카드만** JSON, 나머지는 HTML 하드코딩 |
-| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~06.json) — **전체 콘텐츠** JSON |
+| `data/elem/level3/unit0N.json` | 초등반 Level 3 unit별 데이터 (unit01~10.json) — **전체 콘텐츠** JSON ✅ 완성 |
+| `data/nhs/L2/ep0N.json` | Hangeul Quest Level 2 에피소드 (ep01~ep05) — **ep06 제작 중** |
+| `data/nhs/L2/slides/ep*/` | Hangeul Quest L2 슬라이드 이미지 (PNG) |
+| `data/nhs/L2/TTS/ep*/` | Hangeul Quest L2 TTS 음성 파일 (MP3) |
 | `data/elem/level2/slides/L2_*/` | 초등반 Level 2 슬라이드 이미지 (PNG) — 2026-06-11 경로 통일 |
 | `data/elem/level2/TTS/L2_*/` | 초등반 Level 2 TTS 음성 (MP3) — 2026-06-11 경로 통일 |
 | `data/elem/level3/slides/L3_*/` | 초등반 Level 3 슬라이드 이미지 (PNG) — 전 유닛 단일 경로 |
@@ -468,7 +495,10 @@ const urlName   = _hc ? _hc.urlName : null;
 ### 기술 결정 (2026-06-12 확정)
 - **1단계 PWA** (비용 0, 심사 없음, 기존 코드/데이터 재사용) → 학생 늘면 **Capacitor**로 스토어 출시
 
-### 프로토타입 v0.1 — `hq-mobile-prototype.html`
+### 현재 파일 — `hq-mobile.html` (실전 투입 중, 2804줄)
+> ⚠️ 구 파일명 `hq-mobile-prototype.html`은 더 이상 사용 안 함 — 실전 파일은 `hq-mobile.html`
+
+### 초기 프로토타입 기록 (v0.1 — `hq-mobile-prototype.html` 당시)
 - 단일 파일, file:// 동작, 데스크톱에서는 폰 프레임 미리보기
 - 프로필 선택(크레스트 + Kids 방패 + HQ 원형 배지 SVG 인라인) → 두 트랙 분기
 - Kids: 야옹이 모험 맵 + 블록 조합 게임 3라운드 (가/노/무, 탭 방식, Web Speech TTS)
@@ -761,7 +791,7 @@ const urlName   = _hc ? _hc.urlName : null;
   git push
   ```
 - **HQ L1 문법 탭 미검토** — ep01~12 <문법> 탭 정렬은 아직 미확인
-- **HQ L2 ep04~12** — 콘텐츠 미작성 (스크립트/슬라이드/TTS 준비되면 시작)
+- **HQ L2 ep01~05 완성** ✅ / **ep06 제작 중** (슬라이드/TTS 준비되면 구현)
 
 ---
 
