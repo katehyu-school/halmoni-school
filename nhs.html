@@ -98,7 +98,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .ep-title-wrap{flex:1;}
 .ep-title-kr{font-family:var(--font-serif);font-size:20px;font-weight:700;letter-spacing:0.02em;line-height:1.3;}
 .ep-title-en{font-size:11.5px;opacity:0.7;margin-top:3px;}
-.ep-goal-badge{display:inline-block;background:var(--teal);color:#fff;padding:2px 11px;border-radius:11px;font-size:10.5px;font-weight:600;margin-left:6px;opacity:1;letter-spacing:0.01em;vertical-align:middle;line-height:1.6;}
+.ep-goal-badge{display:inline-block;background:var(--teal-lt);color:var(--teal-dark);border:1.5px solid var(--teal-300);padding:2px 11px;border-radius:11px;font-size:10.5px;font-weight:600;margin-left:6px;opacity:1;letter-spacing:0.01em;vertical-align:middle;line-height:1.6;}
 .ep-scene-badge{background:rgba(251,191,36,0.25);border:1px solid rgba(251,191,36,0.4);border-radius:var(--radius-xl);padding:6px 15px;font-size:12px;white-space:nowrap;color:#FDE68A;}
 .tab-bar{display:flex;border-bottom:2px solid var(--warm-300);flex-wrap:wrap;background:#fff;border-radius:var(--radius-md) var(--radius-md) 0 0;padding:0 6px;}
 .tab-btn{padding:11px 15px;border:none;background:none;font-size:12.5px;font-weight:500;color:var(--warm-500);cursor:pointer;font-family:var(--font-kr);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .18s;white-space:nowrap;}
@@ -348,30 +348,16 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .vd-grade-label{font-size:1rem;font-weight:700;}
 
 /* ── SPEAKING PRACTICE ─────────────────────────────────── */
-.speak-btn{position:absolute;bottom:12px;right:12px;display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--amber);color:#fff;border:none;border-radius:var(--radius-xl);font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:10;}
+.speak-btn{display:flex;align-items:center;gap:6px;padding:8px 18px;background:var(--amber);color:#fff;border:none;border-radius:var(--radius-xl);font-size:12.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,0.15);margin:8px 0 4px;}
 .speak-btn:hover{background:var(--amber-600);}
 .speak-btn:disabled{background:var(--warm-300);cursor:default;}
 .speak-btn.listening{background:var(--coral)!important;animation:pulse .8s ease-in-out infinite;}
+.nav-speak-btn.rec-on{background:var(--coral)!important;color:#fff;border-color:var(--coral);animation:pulse .8s ease-in-out infinite;}
+.nav-speak-btn.rec-done{background:#2ecc71!important;color:#fff;border-color:#27ae60;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
-.speak-result{margin-top:10px;padding:12px 14px;background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-md);display:none;}
-.speak-result.show{display:block;}
-.speak-said{font-size:12px;color:var(--warm-500);margin-bottom:6px;}
-.speak-said span{font-family:var(--font-serif);font-weight:700;color:var(--warm-900);}
-.speak-feedback{font-size:12.5px;color:var(--warm-700);line-height:1.7;}
-/* ── API KEY MODAL ─────────────────────────────────────── */
-.apikey-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;display:none;align-items:center;justify-content:center;}
-.apikey-overlay.open{display:flex;}
-.apikey-modal{background:#fff;border-radius:var(--radius-lg);width:90%;max-width:440px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.2);}
-.apikey-modal h3{font-size:16px;font-weight:700;color:var(--warm-900);margin-bottom:6px;}
-.apikey-modal p{font-size:12.5px;color:var(--warm-500);margin-bottom:16px;line-height:1.65;}
-.apikey-input{width:100%;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:var(--radius-sm);font-size:13px;font-family:monospace;outline:none;box-sizing:border-box;margin-bottom:12px;}
-.apikey-input:focus{border-color:var(--teal);}
-.apikey-save{width:100%;padding:11px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius-md);font-size:13.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;}
-.apikey-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;margin-left:8px;}
-.apikey-status.set{background:var(--teal-lt);color:var(--teal);}
-.apikey-status.unset{background:var(--coral-lt);color:var(--coral);}
-.settings-btn{padding:6px 12px;background:transparent;color:var(--gray-500);border:1px solid var(--gray-200);border-radius:var(--radius-xl);font-size:11.5px;font-family:var(--font-kr);cursor:pointer;transition:all .2s;}
-.settings-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+
+
 
 /* ── BASICS SIDEBAR ─────────────────────────────────── */
 .basics-topic-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1.5px solid transparent;}
@@ -640,15 +626,10 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .vconj-caution{background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--amber-600);margin-top:14px;line-height:1.7;}
 .vconj-overview-img{display:block;max-width:70%;margin:0 auto 14px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);}
 /* ── SPEAKING BASICS ────────────────────────────────── */
-.speak-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:10px;}
-.speak-card-kr{font-size:22px;font-weight:700;color:var(--gray-900);}
-.speak-card-rom{font-size:11px;color:var(--teal);font-weight:600;margin-top:3px;}
-.speak-card-en{font-size:12.5px;color:var(--warm-500);margin-top:2px;margin-bottom:10px;}
-.speak-card-btns{display:flex;gap:8px;}
+
 .speak-tts-btn{padding:6px 14px;background:var(--teal-lt);border:1.5px solid var(--teal-300);border-radius:var(--radius-xl);font-size:12px;cursor:pointer;color:var(--teal);font-family:var(--font-kr);transition:all .2s;}
 .speak-tts-btn:hover{background:var(--teal-50);border-color:var(--teal);}
-.speak-ai-btn{padding:6px 14px;background:var(--amber-lt);border:1.5px solid #e8c070;border-radius:var(--radius-xl);font-size:12px;cursor:pointer;color:var(--amber-600);font-family:var(--font-kr);transition:all .2s;}
-.speak-ai-btn:hover{background:var(--amber-50);}
+
 
 
 </style>
@@ -667,17 +648,9 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
   <div class="school-title"><svg width="26" height="26" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="#0a2540" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="white" letter-spacing="2">HQ</text></svg><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
   <button class="nms-btn" onclick="openNMS()">📓 My Notes</button>
-  <button class="settings-btn" onclick="openApiKey()" id="apikey-status-btn">⚙️ AI</button>
+
 </div>
-<!-- API Key 모달 -->
-<div class="apikey-overlay" id="apikey-overlay" onclick="if(event.target===this)closeApiKey()">
-  <div class="apikey-modal">
-    <h3>🔑 Claude API 키 설정</h3>
-    <p>스피킹 피드백 기능을 사용하려면 API 키가 필요해요.<br>키는 이 기기에만 저장되며 외부로 전송되지 않아요.</p>
-    <input class="apikey-input" id="apikey-input" type="password" placeholder="sk-ant-api03-..." />
-    <button class="apikey-save" onclick="saveApiKey()">저장하기</button>
-  </div>
-</div>
+
 <!-- 색인 모달 -->
 <div class="idx-overlay" id="idx-overlay" onclick="if(event.target===this)closeIndex()">
   <div class="idx-modal">
@@ -718,6 +691,7 @@ document.addEventListener('click', function(e){
 
 let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
 let quizMode='mc',quizIdx=0,quizScore=0;
+let _nhsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false};
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function escA(s){return s==null?'':String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/[\r\n]+/g,' ');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'},jungmin:{bg:'#A8D8EA',emoji:'👦'},mina:{bg:'#FFB7C5',emoji:'👧'},staff:{bg:'#D4E8D0',emoji:'🎫'}};
@@ -910,8 +884,14 @@ async function loadEp(epId, level='L1'){
     document.getElementById('content-area').innerHTML='<div class="loading">⚠️ 에피소드 데이터가 없어요.</div>';
     return;
   }
-  // Preload slide images so first slide appears without delay
-  if(DATA.slides) DATA.slides.forEach(s=>{const img=new Image();img.src=encodeURI(s);});
+  // Preload: wait for first slide, then render; load rest async
+  if(DATA.slides&&DATA.slides.length){
+    await Promise.race([
+      new Promise(res=>{const img=new Image();img.onload=img.onerror=res;img.src=encodeURI(DATA.slides[0]);if(img.complete)res();}),
+      new Promise(res=>setTimeout(res,600))
+    ]);
+    DATA.slides.slice(1).forEach(s=>{const img=new Image();img.src=encodeURI(s);});
+  }
   qAnswered={};curTab='script';sceneIdx=0;render();
 }
 
@@ -965,13 +945,14 @@ function showTab(name){
 function buildScript(){
   if(DATA.video) return buildVideoScript();
   return `<div class="scene-wrap"><div class="scene-col">
-    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div><button class="speak-btn" id="speak-btn">🎤 말해보기</button></div>
+    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
       <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
       <div class="nav-progress"><div class="nav-steps" id="nav-steps"></div><div class="nav-count" id="nav-count"></div></div>
       <button class="nav-speak-btn" title="랜덤" onclick="randomScene()">🎲</button>
-      <button class="nav-speak-btn" onclick="speakCurrent()">🔊</button>
+      <button class="nav-speak-btn" onclick="speakCurrent()" title="TTS 듣기">🔊</button>
+      <button class="nav-speak-btn rec-done" id="speak-btn" onclick="nhsRecToggle()" title="따라녹음하기">🎙️</button>
       <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
     </div>
     <button class="script-toggle-btn" onclick="toggleStrip()"><span id="strip-arrow">▶</span> 전체 스크립트 보기</button>
@@ -1040,10 +1021,7 @@ function renderScene(){
       <div class="caption-kr">${esc(line.text)}</div>
       <div class="caption-en">${esc(line.en)}</div>
       ${tagHtml}
-      <div class="speak-result" id="speak-result">
-        <div class="speak-said">들린 내용: <span id="speak-said-text"></span></div>
-        <div class="speak-feedback" id="speak-feedback">분석 중...</div>
-      </div>
+
     </div>
 `;
   const total=DATA.script.length;
@@ -1052,7 +1030,7 @@ function renderScene(){
   document.getElementById('nav-prev').disabled=sceneIdx===0;
   document.getElementById('nav-next').disabled=sceneIdx===total-1;
   const sb=document.getElementById('speak-btn');
-  if(sb){sb.onclick=()=>startSpeak(line.text,line.en);sb.textContent='🎤 말해보기';sb.classList.remove('listening');sb.disabled=false;}
+  if(sb){nhsRecCleanup();sb.textContent='🎙️';sb.title='따라녹음하기';sb.classList.remove('listening','rec-on');sb.classList.add('rec-done');sb.disabled=false;}
   updateStripHighlight();
 }
 
@@ -2941,189 +2919,76 @@ function buildHonorifics(){
 // ── SPEAKING RENDER ────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildSpeaking(){
-  return '<div class="basics-intro">🔊로 원어민 발음을 먼저 듣고, 🎤로 직접 말해보세요!<br><em>Click 🔊 to hear native pronunciation, then 🎤 to practice with AI feedback.</em></div>'
-    +'<div style="background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:10px 14px;font-size:12.5px;color:var(--amber-600);margin-bottom:16px;">'
-    +'⚙️ AI 피드백을 사용하려면 우측 상단 <strong>⚙️ AI</strong> 버튼에서 API 키를 입력하세요.</div>'
-    +SPEAK_CARDS.map((c,i)=>'<div class="speak-card">'
-      +'<div class="speak-card-kr">'+c.kr+'</div>'
-      +'<div class="speak-card-rom">'+c.rom+'</div>'
-      +'<div class="speak-card-en">'+c.en+'</div>'
-      +'<div class="speak-card-btns">'
-      +'<button class="speak-tts-btn" onclick="speakTTS(\''+c.kr+'\')">🔊 듣기</button>'
-      +'<button class="speak-ai-btn" id="speak-btn-'+i+'" onclick="startSpeak(\''+c.kr+'\',\''+c.en+'\',this)">🎤 말해보기</button>'
-      +'</div>'
-      +'<div class="speak-result" id="speak-result-'+i+'" style="display:none;margin-top:8px;padding:10px 12px;background:var(--teal-50);border-radius:var(--radius-sm);border:1.5px solid var(--teal-lt);">'
-      +'<div style="font-size:12px;color:var(--warm-400);margin-bottom:3px;">내가 말한 것 · You said:</div>'
-      +'<div class="speak-said-text" style="font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:6px;"></div>'
-      +'<div class="speak-feedback" style="font-size:13px;color:var(--teal-dark);line-height:1.6;"></div>'
-      +'</div>'
+  return '<div class="basics-intro">🔊로 원어민 발음을 먼저 듣고, 따라 말해보세요!<br><em>Click 🔊 to hear native pronunciation, then repeat aloud.</em></div>'
+    +SPEAK_CARDS.map(c=>'<div style="background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:10px;">'
+      +'<div style="font-size:22px;font-weight:700;color:var(--gray-900);">'+c.kr+'</div>'
+      +'<div style="font-size:11px;color:var(--teal);font-weight:600;margin-top:3px;">'+c.rom+'</div>'
+      +'<div style="font-size:12.5px;color:var(--warm-500);margin-top:2px;margin-bottom:10px;">'+c.en+'</div>'
+      +'<button class="speak-tts-btn" onclick="speakTTS(''+c.kr+'')">🔊 듣기</button>'
       +'</div>').join('');
 }
 
-
 // ── INIT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', ()=>{
-  updateApiKeyBtn();
   buildSidebar();
   loadEp('ep01');
 });
 
 
 // ── SPEAKING PRACTICE ────────────────────────────────────
-function getApiKey(){return localStorage.getItem('nhs_api_key')||'';}
-function openApiKey(){
-  document.getElementById('apikey-input').value=getApiKey();
-  document.getElementById('apikey-overlay').classList.add('open');
-}
-function closeApiKey(){document.getElementById('apikey-overlay').classList.remove('open');}
-function saveApiKey(){
-  const v=document.getElementById('apikey-input').value.trim();
-  if(!v)return;
-  localStorage.setItem('nhs_api_key',v);
-  closeApiKey();
-  updateApiKeyBtn();
-  alert('✅ API 키 저장됐어요! 이제 스피킹 기능을 사용할 수 있어요.');
-}
-function updateApiKeyBtn(){
-  const btn=document.getElementById('apikey-status-btn');
-  if(!btn)return;
-  btn.textContent=getApiKey()?'⚙️ AI ✓':'⚙️ AI';
-  btn.style.color=getApiKey()?'var(--teal)':'var(--gray-500)';
-  btn.style.borderColor=getApiKey()?'var(--teal)':'var(--gray-200)';
-}
 
-// ── 큰 숫자 변환기 ──────────────────────────────────────
-function convertBigNum(){
-  const el=document.getElementById('bignum-input');
-  const res=document.getElementById('bignum-result');
-  if(!el||!res)return;
-  const raw=el.value.replace(/,/g,'').trim();
-  const n=parseInt(raw,10);
-  if(!raw||isNaN(n)||n<0){res.innerHTML='<span style="color:var(--warm-400);font-size:13px">숫자를 입력하면 변환돼요 · Enter a number above</span>';return;}
 
-  const sino=['','일','이','삼','사','오','육','칠','팔','구'];
-  const units=['','십','백','천'];
-  function group4(num){
-    if(num===0)return '';
-    let s='';
-    const d=[Math.floor(num/1000)%10,Math.floor(num/100)%10,Math.floor(num/10)%10,num%10];
-    for(let i=0;i<4;i++){
-      if(!d[i])continue;
-      s+=(d[i]===1&&i<3)?units[3-i]:sino[d[i]]+units[3-i];
-    }
-    return s;
+function nhsRecCleanup(){
+  const r=_nhsRec;
+  if(r.recording){try{r.recorder.stop();}catch(e){}}
+  if(r.stream){r.stream.getTracks().forEach(t=>t.stop());r.stream=null;}
+  if(r.blobURL){URL.revokeObjectURL(r.blobURL);r.blobURL=null;}
+  r.recording=false;r.chunks=[];r.recorder=null;
+  const sb=document.getElementById('speak-btn');
+  if(sb){sb.textContent='🎙️';sb.title='따라녹음하기';sb.classList.remove('rec-on');sb.classList.add('rec-done');sb.disabled=false;}
+}
+async function nhsRecToggle(){
+  const sb=document.getElementById('speak-btn');
+  if(!sb)return;
+  const r=_nhsRec;
+  // Has recording → play back
+  if(!r.recording&&r.blobURL){
+    const a=new Audio(r.blobURL);
+    sb.textContent='▶';sb.disabled=true;
+    a.onended=()=>{sb.textContent='👂';sb.title='내발음듣기 (다시)';sb.classList.add('rec-done');sb.disabled=false;};
+    a.play();
+    return;
   }
-  function toKorean(num){
-    if(num===0)return '영';
-    const jo=Math.floor(num/1000000000000);
-    const eok=Math.floor(num/100000000)%10000;
-    const man=Math.floor(num/10000)%10000;
-    const rest=num%10000;
-    let s='';
-    if(jo) s+=group4(jo)+'조 ';
-    if(eok)s+=group4(eok)+'억 ';
-    if(man)s+=group4(man)+'만 ';
-    if(rest)s+=group4(rest);
-    return s.trim()||'영';
+  // Recording → stop
+  if(r.recording){
+    try{r.recorder.stop();}catch(e){}
+    return;
   }
-
-  // 영어 3자리 grouping
-  const enGrouped=n.toLocaleString('en-US');
-  // 한국어 4자리 grouping
-  const s=String(n);
-  let krGrouped='';
-  for(let i=0;i<s.length;i++){
-    const fromRight=s.length-1-i;
-    krGrouped+=s[i];
-    if(fromRight>0&&fromRight%4===0)krGrouped+=',';
+  // Idle → start recording
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    alert('이 환경에서는 녹음을 지원하지 않아요.');return;
   }
-  const krRead=toKorean(n);
-  const safeRead=krRead.replace(/'/g,'&#39;');
-
-  res.innerHTML=
-    '<div class="bignum-result-row"><span class="bignum-result-label">🇺🇸 영어</span><span class="bignum-result-val" style="color:#3b4cc0">'+enGrouped+'</span></div>'
-   +'<div class="bignum-result-row"><span class="bignum-result-label">읽기 단위 분석</span><span class="bignum-result-val" style="color:var(--teal-dark)">'+krGrouped+'</span></div>'
-   +'<div class="bignum-result-row"><span class="bignum-result-label">🔊 읽는 법</span><span class="bignum-result-kr" style="cursor:pointer" onclick="speakTTS(\''+safeRead+'\')">'+krRead+' &nbsp;<span style="font-size:16px">🔊</span></span></div>';
-}
-
-let _recog=null;
-function _initRecog(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR)return false;
-  _recog=new SR();
-  _recog.lang='ko-KR';
-  _recog.continuous=false;
-  _recog.interimResults=false;
-  return true;
-}
-
-async function startSpeak(targetKr, targetEn, btnEl){
-  if(!getApiKey()){openApiKey();return;}
-  if(!_recog&&!_initRecog()){
-    alert('음성 인식은 Chrome 브라우저에서만 지원돼요!');return;
-  }
-  // Find result panel next to this button
-  const card=btnEl.closest('.speak-card');
-  const result=card.querySelector('.speak-result');
-  const saidEl=card.querySelector('.speak-said-text');
-  const fbEl=card.querySelector('.speak-feedback');
-  btnEl.textContent='🔴 듣는 중...';
-  btnEl.classList.add('listening');
-  btnEl.disabled=true;
-  result.style.display='none';
-
-  _recog.onresult=async(e)=>{
-    const said=e.results[0][0].transcript;
-    saidEl.textContent=said;
-    fbEl.textContent='분석 중...';
-    result.style.display='block';
-    btnEl.textContent='⏳ 분석 중...';
-    btnEl.classList.remove('listening');
-    const fb=await _callClaude(targetKr,targetEn,said);
-    fbEl.textContent=fb;
-    btnEl.textContent='🎤 다시 말해보기';
-    btnEl.disabled=false;
-  };
-  _recog.onerror=(e)=>{
-    btnEl.textContent='🎤 말해보기';
-    btnEl.classList.remove('listening');
-    btnEl.disabled=false;
-  };
-  _recog.onend=()=>{
-    if(btnEl.disabled&&btnEl.textContent==='🔴 듣는 중...'){
-      btnEl.textContent='🎤 말해보기';
-      btnEl.classList.remove('listening');
-      btnEl.disabled=false;
-    }
-  };
-  try{ _recog.start(); }catch(e){ _recog=null; _initRecog(); _recog.start(); }
-}
-
-async function _callClaude(targetKr, targetEn, said){
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{
-        'x-api-key':getApiKey(),
-        'anthropic-version':'2023-06-01',
-        'content-type':'application/json',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
-      body:JSON.stringify({
-        model:'claude-haiku-4-5-20251001',
-        max_tokens:180,
-        messages:[{role:'user',content:`You are a warm Korean language tutor for English-speaking students.
-Target sentence: "${targetKr}" (${targetEn})
-Student said: "${said}"
-Give encouraging feedback in English, 2 sentences max. If correct or close, celebrate! If different, note 1 key thing to fix and give a quick tip. Be specific and kind.`}]
-      })
-    });
-    const d=await res.json();
-    return d.content?.[0]?.text||'피드백을 가져오지 못했어요.';
+    r.stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    if(r.blobURL){URL.revokeObjectURL(r.blobURL);r.blobURL=null;}
+    r.chunks=[];
+    r.recorder=new MediaRecorder(r.stream);
+    r.recorder.ondataavailable=e=>{if(e.data&&e.data.size)r.chunks.push(e.data);};
+    r.recorder.onstop=()=>{
+      r.blobURL=URL.createObjectURL(new Blob(r.chunks,{type:'audio/webm'}));
+      r.recording=false;
+      if(r.stream){r.stream.getTracks().forEach(t=>t.stop());r.stream=null;}
+      const sb2=document.getElementById('speak-btn');
+      if(sb2&&sb2.isConnected){sb2.textContent='👂';sb2.title='내발음듣기';sb2.classList.remove('rec-on');sb2.classList.add('rec-done');sb2.disabled=false;}
+    };
+    r.recorder.start();
+    r.recording=true;
+    sb.textContent='⏹';sb.title='정지';sb.classList.add('rec-on');sb.classList.remove('rec-done');
   }catch(e){
-    return '❌ 오류가 발생했어요. API 키를 확인해주세요 (⚙️ AI 버튼)';
+    alert('마이크 권한이 필요해요.');
   }
 }
+
 // ═══════════════════════════ VERB DRILL GAME ═══════════════════════════
 let vdState = {};
 

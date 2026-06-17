@@ -26,6 +26,8 @@
   --lavender-light: #F3EEFF;
   --green: #6BCB77;
   --green-light: #EDFAEF;
+  --teal: #0d9488;
+  --teal-dark: #0f766e;
   --bg: #FFF9F2;
   --card: #FFFFFF;
   --text: #2D3436;
@@ -914,12 +916,18 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .u2-script-ko { font-family:'Noto Sans KR',sans-serif;font-size:1.05rem;font-weight:600;color:#1a2a3a; }
 .u2-script-en { font-size:0.82rem;color:#6b7b8c;margin-left:4px; }
 .u2-script-empty { color:#aaa;font-size:0.9rem;text-align:center;padding:10px 0; }
+.b3-goal-badge{display:inline-block;background:var(--teal);color:#fff;padding:5px 15px;border-radius:14px;font-size:13px;font-weight:700;margin-bottom:10px;letter-spacing:0.02em;border:2px solid var(--teal-dark);}
 .u2-replay-btn { display:flex;align-items:center;gap:7px;margin:10px auto 0;
   padding:9px 22px;border-radius:30px;border:none;font-family:'Jua',sans-serif;font-size:0.95rem;
   background:var(--mint);color:#0D7B75;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.12);
   transition:transform .15s,background .15s; }
 .u2-replay-btn:hover { transform:scale(1.07); background:var(--teal); color:white; }
 .u2-replay-btn.playing { background:var(--coral); color:white; }
+
+.u2-rec-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid #ddd;background:#fff;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;vertical-align:middle;}
+.u2-rec-btn:hover{background:#f5f5f5;border-color:#999;}
+.u2-rec-btn.rec-on{background:var(--coral)!important;color:#fff;border-color:var(--coral);animation:pulse .8s ease-in-out infinite;}
+.u2-rec-btn.rec-done{background:#fff;color:#555;border-color:#ddd;}
 
 /* ── 단어 인덱스 패널 ── */
 .kids-idx-btn{padding:5px 12px;border:1.5px solid rgba(255,255,255,.5);border-radius:7px;background:rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;white-space:nowrap;transition:all .15s;}
@@ -1422,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
   <button class="kids-idx-btn" onclick="openKidsIndex()">📖 단어</button>
   <button class="ms-btn" onclick="openMySpace()">✏️ My Space</button>
-  <button class="kids-speak-settings-btn" id="kids-ai-btn" onclick="kidsOpenApiKey()" title="AI 말해보기 설정">⚙️ AI</button>
+
 </nav>
 
 <!-- 출석 바 -->
@@ -5223,7 +5231,7 @@ async function loadBook3Unit(n) {
   return data;
 }
 
-async function switchBook3Unit(n) {
+async function switchBook3Unit(n) {if(typeof kidsRecCleanup==="function")kidsRecCleanup();
   [1,2,3,4,5,6,7,8,9,10].forEach(i => {
     const el = document.getElementById('b3-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
@@ -6097,7 +6105,7 @@ function showTOC(){
   switchUnit(1);
 }
 
-function switchUnit(n){
+function switchUnit(n){if(typeof kidsRecCleanup==="function")kidsRecCleanup();
   // Level 2가 활성 상태일 때만 동작
   const mc = document.getElementById('main-content');
   if (!mc || mc.style.display === 'none') return;
@@ -10032,16 +10040,18 @@ function b3SceneTo(idx) {
   const box = document.getElementById('b3-script-box');
   if (!box) return;
   const lines = d.script[idx] || [];
-  box.innerHTML = lines.map((ln, li) =>
-    '<div class="u2-script-line">' +
+  box.innerHTML = lines.map((ln, li) => {
+    const recId = 'b3-rec-'+idx+'-'+li;
+    const recBtn = '<button class="u2-rec-btn" id="'+recId+'" onclick="kidsRecToggle(\''+recId+'\')">🎙️</button>';
+    return '<div class="u2-script-line">' +
     (ln.audio
       ? '<button class="u2-script-play" onclick="b3ScenePlay(' + idx + ',' + li + ')" aria-label="재생">▶</button>'
       : '<button class="u2-script-play" onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\\'") + '\')" aria-label="TTS">🔊</button>') +
-    '<button class="b3-mic-btn" onclick="b3MicSpeak(this,\'' + ln.ko.replace(/'/g,"\\'") + '\')" title="말해보기">🎤</button>' +
+    recBtn +
     '<span class="u2-script-ko">' + ln.ko + '</span>' +
     '<span class="u2-script-en">' + ln.en + '</span>' +
-    '</div>'
-  ).join('');
+    '</div>';
+  }).join('');
 }
 
 function b3ToggleFullScript(btn, unitNum) {
@@ -10069,33 +10079,6 @@ function b3ToggleFullScript(btn, unitNum) {
 }
 
 let _b3MicRecog = null;
-function b3MicSpeak(btn, targetText) {
-  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-    alert('이 브라우저는 음성 인식을 지원하지 않아요. Chrome을 사용해 주세요!');
-    return;
-  }
-  if (_b3MicRecog) { _b3MicRecog.stop(); _b3MicRecog = null; btn.textContent = '🎤'; return; }
-  const R = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recog = new R();
-  recog.lang = 'ko-KR'; recog.interimResults = false; recog.maxAlternatives = 1;
-  _b3MicRecog = recog;
-  btn.textContent = '🔴';
-  recog.onresult = (e) => {
-    const said = e.results[0][0].transcript.trim();
-    const match = said.replace(/[.!?]/g,'') === targetText.replace(/[.!?]/g,'');
-    btn.textContent = match ? '✅' : '🔄';
-    setTimeout(() => { btn.textContent = '🎤'; }, 2000);
-    _b3MicRecog = null;
-    // 결과 팝업
-    const line = btn.closest('.u2-script-line');
-    let fb = line && line.querySelector('.b3-mic-fb');
-    if (!fb && line) { fb = document.createElement('span'); fb.className = 'b3-mic-fb'; fb.style.cssText='font-size:0.75rem;margin-left:8px;'; line.appendChild(fb); }
-    if (fb) { fb.textContent = match ? '👍 잘했어요!' : '"' + said + '"'; fb.style.color = match ? '#0D7B75' : '#e44'; setTimeout(()=>{fb.textContent='';},3000); }
-  };
-  recog.onerror = () => { btn.textContent = '🎤'; _b3MicRecog = null; };
-  recog.onend   = () => { if(btn.textContent==='🔴') btn.textContent='🎤'; _b3MicRecog=null; };
-  recog.start();
-}
 
 function b3SceneGo(dir) {
   b3SceneTo(b3SceneIdx + dir);
@@ -10137,7 +10120,7 @@ function renderB3Scene(unitNum) {
       '<div class="u2-script-box" id="b3-script-box"></div>' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">' +
         '<button class="u2-replay-btn" onclick="b3SceneTo(0)" style="margin:0;">🔁 Replay</button>' +
-        '<button class="b3-script-toggle" onclick="b3ToggleFullScript(this,' + unitNum + ')" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 전체 대본 보기</button>' +
+                '<button class="b3-script-toggle" onclick="b3ToggleFullScript(this,' + unitNum + ')" style="background:none;border:none;color:var(--teal);font-size:0.85rem;cursor:pointer;font-family:Jua,sans-serif;padding:6px 4px;">📜 전체 대본 보기</button>' +
       '</div>' +
       '<div class="b3-full-script" id="b3-full-script" style="display:none;padding:10px 0 4px;border-top:1px solid #e0f0ee;margin-top:6px;font-size:0.85rem;"></div>' +
     '</div>' +
@@ -10401,9 +10384,12 @@ function sceneTo(n, idx) {
     if(lines[0].combined){
       const sentences = lines[0].ko.split(/\. +|(?<=요)\. |(?<=요)\.|(?<=아)\. /).filter(s=>s.trim());
       const enSentences = lines[0].en.split(/\. +/).filter(s=>s.trim());
+      const combRecId = 'u'+n+'-rec-'+idx+'-0';
+      const combRecBtn = '<button class="u2-rec-btn" id="'+combRecId+'" onclick="kidsRecToggle(\''+combRecId+'\')">🎙️</button>';
       const textHtml = sentences.map((s,si)=>`
         <div class="u2-script-line" style="border-bottom:${si<sentences.length-1?'1px dashed #eee':'none'}">
           ${si===0?'<button class="u2-script-play" id="u'+n+'-play-'+idx+'-0" onclick="scenePlayAudio('+n+','+idx+')">🔊</button>':'<span style="width:34px;flex-shrink:0"></span>'}
+          ${si===0?combRecBtn:'<span style="width:34px;flex-shrink:0"></span>'}
           <span class="u2-script-ko">${s.trim().replace(/[.。]$/,'')}。</span>
           <span class="u2-script-en">${(enSentences[si]||'').trim()}</span>
         </div>`).join('');
@@ -10412,7 +10398,8 @@ function sceneTo(n, idx) {
       box.innerHTML = lines.map((l,li)=>{
         const koEsc = l.ko.replace(/'/g,"\\'");
         const enEsc = (l.en||'').replace(/'/g,"\\'");
-        const speakBtn = '<button class="u2-script-speak" onclick="kidsSpeak(\''+koEsc+'\',\''+enEsc+'\')" title="말해보기">🎤</button>';
+        const recId = 'u'+n+'-rec-'+idx+'-'+li;
+        const speakBtn = '<button class="u2-rec-btn" id="'+recId+'" onclick="kidsRecToggle(\''+recId+'\')" title="따라녹음하기">🎙️</button>';
         if(l.audio){
           return '<div class="u2-script-line">'
             +'<button class="u2-script-play" id="u'+n+'-play-'+idx+'-'+li+'" onclick="scenePlayLine('+n+','+idx+','+li+')">🔊</button>'
@@ -10635,12 +10622,14 @@ function u2SlideTo(idx){
   if (lines.length === 0) {
     box.innerHTML = '<div class="u2-script-empty">— 대사 없음 —</div>';
   } else {
-    box.innerHTML = lines.map((l, li) => `
-      <div class="u2-script-line">
+    box.innerHTML = lines.map((l, li) => {
+      const rId = `u2-rec-${idx}-${li}`;
+      return `<div class="u2-script-line">
         <button class="u2-script-play" id="u2-play-${idx}-${li}" onclick="u2PlayLine(${idx},${li})">🔊</button>
+        <button class="u2-rec-btn" id="${rId}" onclick="kidsRecToggle('${rId}')">🎙️</button>
         <span class="u2-script-ko">${l.ko}</span>
         <span class="u2-script-en">${l.en}</span>
-      </div>`).join('');
+      </div>`;}).join('');
   }
   // stop any playing audio
   if (u2SceneAudio) { u2SceneAudio.pause(); u2SceneAudio = null; }
@@ -10860,126 +10849,61 @@ function _kidsIdxRenderPage(){
 // ═══════════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════════
-// 🎤 말해보기 (Speaking Practice with Claude API)
+// 🎙️ 따라녹음하기 (MediaRecorder — no API key needed)
 // ═══════════════════════════════════════════════════════════════
+let _kidsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false,activeBtn:null};
 
-function kidsGetApiKey(){ return localStorage.getItem('kids_api_key') || ''; }
-function kidsSetApiKey(v){ localStorage.setItem('kids_api_key', v); }
-
-function kidsOpenApiKey(){
-  const ov = document.getElementById('kids-apikey-overlay');
-  const inp = document.getElementById('kids-apikey-input');
-  if(inp) inp.value = kidsGetApiKey();
-  if(ov) ov.classList.add('open');
-}
-function kidsCloseApiKey(){
-  const ov = document.getElementById('kids-apikey-overlay');
-  if(ov) ov.classList.remove('open');
-}
-function kidsSaveApiKey(){
-  const inp = document.getElementById('kids-apikey-input');
-  const v = (inp.value||'').trim();
-  if(!v) return;
-  kidsSetApiKey(v);
-  kidsCloseApiKey();
-  kidsUpdateApiBtn();
-  alert('✅ API 키 저장됐어요! 이제 말해보기 기능 사용 가능해요. 🎤');
-}
-function kidsUpdateApiBtn(){
-  const btn = document.getElementById('kids-ai-btn');
-  if(!btn) return;
-  btn.textContent = kidsGetApiKey() ? '⚙️ AI ✓' : '⚙️ AI';
-  btn.style.color = kidsGetApiKey() ? '#0D7B75' : '#888';
+function kidsRecCleanup(){
+  const prev=_kidsRec.activeBtn?document.getElementById(_kidsRec.activeBtn):null;
+  if(_kidsRec.recorder&&_kidsRec.recorder.state!=='inactive')_kidsRec.recorder.stop();
+  if(_kidsRec.stream)_kidsRec.stream.getTracks().forEach(t=>t.stop());
+  if(_kidsRec.blobURL){URL.revokeObjectURL(_kidsRec.blobURL);_kidsRec.blobURL=null;}
+  _kidsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false,activeBtn:null};
+  if(prev){prev.textContent='🎙️';prev.title='따라녹음하기';prev.classList.remove('rec-on');prev.classList.add('rec-done');prev.disabled=false;}
 }
 
-let _kidsRecog = null;
-function _kidsInitRecog(){
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SR) return false;
-  _kidsRecog = new SR();
-  _kidsRecog.lang = 'ko-KR';
-  _kidsRecog.continuous = false;
-  _kidsRecog.interimResults = false;
-  return true;
-}
-
-async function kidsSpeak(targetKr, targetEn){
-  if(!kidsGetApiKey()){ kidsOpenApiKey(); return; }
-  if(!_kidsRecog && !_kidsInitRecog()){
-    alert('음성 인식은 Chrome 브라우저에서만 지원돼요! 🌐');
+async function kidsRecToggle(btnId){
+  const sb=document.getElementById(btnId);
+  if(!sb)return;
+  // 다른 버튼/슬라이드 상태면 먼저 정리하고 계속 진행 (return 안 함)
+  if(_kidsRec.activeBtn&&_kidsRec.activeBtn!==btnId){kidsRecCleanup();}
+  // has blob → playback
+  if(_kidsRec.blobURL){
+    const a=new Audio(_kidsRec.blobURL);
+    sb.textContent='▶';sb.disabled=true;
+    a.play();
+    a.onended=()=>{sb.textContent='👂';sb.title='내발음듣기 (다시)';sb.classList.add('rec-done');sb.disabled=false;};
     return;
   }
-  // 결과 팝업 표시
-  const popup = document.getElementById('kids-speak-popup');
-  const target = document.getElementById('kids-speak-target');
-  const said = document.getElementById('kids-speak-said');
-  const fb = document.getElementById('kids-speak-feedback');
-  const status = document.getElementById('kids-speak-status');
-  if(target) target.textContent = targetKr;
-  if(said) said.textContent = '...';
-  if(fb) fb.textContent = '';
-  if(status) status.textContent = '🔴 듣는 중... 한국어로 말해 보세요!';
-  if(popup) popup.classList.add('open');
-
-  _kidsRecog.onresult = async (e) => {
-    const heard = e.results[0][0].transcript;
-    if(said) said.textContent = heard;
-    if(status) status.textContent = '⏳ 분석 중...';
-    const result = await _kidsCallClaude(targetKr, targetEn, heard);
-    if(fb) fb.textContent = result;
-    if(status) status.textContent = '✨ 결과';
-  };
-  _kidsRecog.onerror = () => {
-    if(status) status.textContent = '❌ 음성 인식 실패. 다시 해보세요!';
-  };
-  _kidsRecog.onend = () => {
-    if(status && status.textContent === '🔴 듣는 중... 한국어로 말해 보세요!'){
-      status.textContent = '❌ 못 들었어요. 다시!';
-    }
-  };
-  _kidsRecog.start();
-}
-
-function kidsRetrySpeak(){
-  const target = document.getElementById('kids-speak-target');
-  if(!target) return;
-  const kr = target.textContent || '';
-  if(kr) kidsSpeak(kr, '');
-}
-
-function kidsCloseSpeak(){
-  const popup = document.getElementById('kids-speak-popup');
-  if(popup) popup.classList.remove('open');
-}
-
-async function _kidsCallClaude(targetKr, targetEn, said){
+  // recording → stop
+  if(_kidsRec.recording){
+    if(_kidsRec.recorder&&_kidsRec.recorder.state!=='inactive')_kidsRec.recorder.stop();
+    return;
+  }
+  // start recording
   try{
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': kidsGetApiKey(),
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 150,
-        messages: [{
-          role: 'user',
-          content: `You are a super warm, encouraging Korean tutor for kids (Grade 2-5).
-The kid is trying to say: "${targetKr}" ${targetEn ? '(' + targetEn + ')' : ''}
-The kid actually said: "${said}"
-Give 1-2 sentences of feedback in friendly English. Use emojis 🌟😊👏 to celebrate. If correct or close, cheer loudly! If different, gently note ONE thing to fix with a fun tip. Be KIND and ENCOURAGING — kids should feel proud!`
-        }]
-      })
-    });
-    const d = await res.json();
-    return d.content?.[0]?.text || '⚠️ 피드백을 가져오지 못했어요.';
-  } catch(e){
-    return '❌ 오류가 났어요. API 키를 확인해주세요 (⚙️ AI 버튼).';
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    _kidsRec.stream=stream;_kidsRec.chunks=[];_kidsRec.activeBtn=btnId;
+    const recorder=new MediaRecorder(stream);
+    _kidsRec.recorder=recorder;_kidsRec.recording=true;
+    recorder.ondataavailable=e=>{if(e.data.size>0)_kidsRec.chunks.push(e.data);};
+    recorder.onstop=()=>{
+      _kidsRec.stream.getTracks().forEach(t=>t.stop());
+      _kidsRec.recording=false;
+      const blob=new Blob(_kidsRec.chunks,{type:'audio/webm'});
+      _kidsRec.blobURL=URL.createObjectURL(blob);
+      const sb2=document.getElementById(btnId);
+      if(sb2&&sb2.isConnected){sb2.textContent='👂';sb2.title='내발음듣기';sb2.classList.remove('rec-on');sb2.classList.add('rec-done');sb2.disabled=false;}
+    };
+    recorder.start();
+    sb.textContent='⏹';sb.title='정지';sb.classList.add('rec-on');sb.classList.remove('rec-done');
+  }catch(e){
+    console.warn('마이크 접근 실패',e);
+    sb.textContent='🚫';sb.title='마이크 권한 필요';setTimeout(()=>{sb.textContent='🎙️';sb.classList.add('rec-done');},2000);
   }
 }
+
+
 
 // 페이지 로드 시 API 버튼 상태 업데이트
 if(document.readyState !== 'loading'){
@@ -11014,242 +10938,6 @@ if(document.readyState !== 'loading'){
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- 🎤 말해보기 — API 키 모달 + 결과 팝업 -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="kids-apikey-overlay" id="kids-apikey-overlay">
-  <div class="kids-apikey-modal">
-    <div class="kids-apikey-title">🤖 Claude AI 키 입력</div>
-    <div class="kids-apikey-desc">
-      말해보기 기능을 사용하려면 Anthropic API 키가 필요해요.<br>
-      <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:#0D7B75;">키 발급받기 →</a>
-    </div>
-    <input type="password" class="kids-apikey-input" id="kids-apikey-input" placeholder="sk-ant-..." autocomplete="off">
-    <div class="kids-apikey-btns">
-      <button class="kids-apikey-btn kids-apikey-cancel" onclick="kidsCloseApiKey()">취소</button>
-      <button class="kids-apikey-btn kids-apikey-save" onclick="kidsSaveApiKey()">저장</button>
-    </div>
-    <div class="kids-apikey-tip">💡 API 키는 이 브라우저에만 저장돼요 (외부 전송 X)</div>
-  </div>
-</div>
 
-<div class="kids-speak-popup" id="kids-speak-popup">
-  <div class="kids-speak-card">
-    <button class="kids-speak-close" onclick="kidsCloseSpeak()">✕</button>
-    <div class="kids-speak-target-label">📝 따라 말하기:</div>
-    <div class="kids-speak-target" id="kids-speak-target">—</div>
-    <div class="kids-speak-status" id="kids-speak-status">준비 중...</div>
-    <div class="kids-speak-said-label">🎤 들린 내용:</div>
-    <div class="kids-speak-said" id="kids-speak-said">—</div>
-    <div class="kids-speak-feedback" id="kids-speak-feedback"></div>
-    <button class="kids-speak-retry-btn" onclick="kidsRetrySpeak()">🎤 다시 말해보기</button>
-  </div>
-</div>
-
-<style>
-/* ── 말해보기 settings 버튼 ── */
-.kids-speak-settings-btn{background:white;border:1.5px solid #ddd;border-radius:20px;padding:6px 12px;font-size:0.85rem;cursor:pointer;font-family:'Jua',sans-serif;color:#888;transition:all .2s;margin-left:6px;}
-.kids-speak-settings-btn:hover{background:#e0f5f2;border-color:#0D7B75;}
-
-/* ── script line 안의 🎤 버튼 ── */
-.u2-script-speak{background:none;border:1.5px solid #FFB347;border-radius:50%;width:32px;height:32px;font-size:0.95rem;cursor:pointer;margin:0 4px;transition:all .2s;flex-shrink:0;}
-.u2-script-speak:hover{background:#FFE5C2;transform:scale(1.1);}
-.u2-script-speak:active{transform:scale(0.95);}
-
-/* ── API 키 모달 ── */
-.kids-apikey-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
-.kids-apikey-overlay.open{display:flex;}
-.kids-apikey-modal{background:white;border-radius:20px;padding:28px;max-width:440px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.3);}
-.kids-apikey-title{font-family:'Jua',sans-serif;font-size:1.3rem;color:#0D7B75;margin-bottom:12px;}
-.kids-apikey-desc{font-size:0.9rem;color:#666;line-height:1.6;margin-bottom:18px;}
-.kids-apikey-input{width:100%;padding:12px 16px;border:2px solid #ddd;border-radius:12px;font-size:0.95rem;font-family:monospace;margin-bottom:16px;box-sizing:border-box;}
-.kids-apikey-input:focus{outline:none;border-color:#0D7B75;}
-.kids-apikey-btns{display:flex;gap:10px;justify-content:flex-end;}
-.kids-apikey-btn{padding:10px 22px;border:none;border-radius:14px;font-size:0.95rem;cursor:pointer;font-family:'Jua',sans-serif;transition:all .15s;}
-.kids-apikey-cancel{background:#f0f0f0;color:#666;}
-.kids-apikey-cancel:hover{background:#e0e0e0;}
-.kids-apikey-save{background:#0D7B75;color:white;}
-.kids-apikey-save:hover{background:#0a6862;}
-.kids-apikey-tip{font-size:0.78rem;color:#aaa;margin-top:12px;text-align:center;}
-
-/* ── 말해보기 결과 팝업 ── */
-.kids-speak-popup{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
-.kids-speak-popup.open{display:flex;}
-.kids-speak-card{background:white;border-radius:24px;padding:28px;max-width:480px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.3);position:relative;}
-.kids-speak-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#999;width:36px;height:36px;border-radius:50%;}
-.kids-speak-close:hover{background:#f0f0f0;color:#333;}
-.kids-speak-target-label{font-size:0.85rem;color:#888;font-family:'Jua',sans-serif;}
-.kids-speak-target{font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;background:#e0f5f2;padding:14px 18px;border-radius:14px;margin:6px 0 16px 0;text-align:center;}
-.kids-speak-status{font-size:0.9rem;color:#FF8C00;text-align:center;font-family:'Jua',sans-serif;margin-bottom:14px;padding:8px;background:#FFF7E6;border-radius:10px;}
-.kids-speak-said-label{font-size:0.85rem;color:#888;font-family:'Jua',sans-serif;}
-.kids-speak-said{font-family:'Jua',sans-serif;font-size:1.05rem;color:#333;background:#f8f8f8;padding:10px 14px;border-radius:10px;margin:6px 0 14px 0;min-height:28px;}
-.kids-speak-feedback{font-size:0.92rem;color:#333;line-height:1.6;background:#FFF9E6;padding:14px 16px;border-radius:12px;border-left:4px solid #FFB347;min-height:50px;margin-bottom:14px;}
-.kids-speak-retry-btn{display:block;width:100%;padding:12px;background:#FFB347;color:white;border:none;border-radius:14px;font-size:1rem;cursor:pointer;font-family:'Jua',sans-serif;transition:all .15s;}
-.kids-speak-retry-btn:hover{background:#FFA033;}
-/* ════════════════════════
-   Book 3 — Level 3 스타일
-   ════════════════════════ */
-.b3-goal-badge{display:inline-block;background:linear-gradient(135deg,#0D7B75,#1AAB9A);color:white;border-radius:20px;padding:6px 18px;font-family:'Jua',sans-serif;font-size:.9rem;margin:4px 0 16px 0;}
-.b3-pattern-box{background:#EBF7F6;border:2px solid #0D7B75;border-radius:12px;padding:12px 18px;font-family:'Jua',sans-serif;font-size:1.05rem;color:#0D7B75;text-align:center;margin:12px 0;}
-.b3-connective-badge{display:inline-flex;align-items:center;gap:6px;background:#EBF3FF;border:1.5px solid #5B8FC7;border-radius:20px;padding:4px 14px;font-size:.82rem;color:#2C6FAC;font-weight:700;margin-bottom:10px;letter-spacing:.01em;}
-.b3-rule-box{border-radius:12px;padding:14px 18px;margin:10px 0;}
-.b3-rule-red{background:#FFF0F0;border-left:4px solid #e44;}
-.b3-rule-blue{background:#F0F4FF;border-left:4px solid #5B6AF0;}
-.b3-rule-green{background:#F0FBF7;border-left:4px solid #0D7B75;}
-.b3-rule-label{font-weight:700;margin-bottom:8px;font-family:'Jua',sans-serif;font-size:.95rem;}
-.b3-rule-list{margin:0;padding-left:20px;}
-.b3-rule-list li{margin:4px 0;font-size:.93rem;color:#444;}
-.b3-examples{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
-.b3-ex-row{display:flex;align-items:flex-start;gap:10px;background:#f9f9f9;border-radius:10px;padding:12px;}
-.b3-speak-btn{background:none;border:1.5px solid #FFB347;border-radius:50%;width:32px;height:32px;font-size:.9rem;cursor:pointer;flex-shrink:0;transition:all .2s;}
-.b3-speak-btn:hover{background:#FFE5C2;}
-.b3-ex-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;}
-.b3-ex-en{font-size:.85rem;color:#888;margin-top:3px;}
-.b3-highlight{background:#FFE5C2;border-radius:4px;padding:1px 4px;color:#CC6600;font-weight:700;}
-/* Practice tabs */
-.b3-prac-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
-.b3-ptab{background:#f0f0f0;border:none;border-radius:20px;padding:8px 14px;font-family:'Jua',sans-serif;font-size:.85rem;cursor:pointer;transition:all .2s;}
-.b3-ptab.active{background:#0D7B75;color:white;}
-.b3-ptab:hover:not(.active){background:#e0f5f2;}
-.b3-psec{display:none;}
-.b3-psec.active{display:block;}
-/* Fill */
-.b3-fill-item{background:#fafafa;border-radius:14px;padding:16px 20px;margin-bottom:12px;border:1.5px solid #eee;}
-.b3-fill-en{font-size:.85rem;color:#aaa;margin-bottom:8px;}
-.b3-fill-sentence{font-family:'Jua',sans-serif;font-size:1.1rem;margin-bottom:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;line-height:1.8;}
-.b3-fill-blank{display:inline-block;min-width:64px;border-bottom:3px solid #0D7B75;text-align:center;color:#0D7B75;padding:2px 8px;font-weight:700;}
-.b3-fill-opts{display:flex;gap:8px;flex-wrap:wrap;}
-.b3-opt-btn{background:#EBF7F6;border:2px solid #A8D5CC;border-radius:20px;padding:8px 18px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
-.b3-opt-btn:hover:not(:disabled){background:#0D7B75;color:white;}
-.b3-opt-btn.correct{background:#0D7B75;color:white;border-color:#0D7B75;}
-.b3-opt-btn.wrong{background:#ffe0e0;border-color:#e44;color:#e44;}
-/* Listen */
-.b3-listen-item{background:#fafafa;border-radius:14px;padding:20px;margin-bottom:14px;border:1.5px solid #eee;}
-.b3-listen-prompt{text-align:center;margin-bottom:16px;}
-.b3-listen-btn{background:#EBF7F6;border:2px solid #0D7B75;border-radius:20px;padding:12px 24px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;color:#0D7B75;transition:all .2s;}
-.b3-listen-btn:hover{background:#0D7B75;color:white;}
-.b3-listen-choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.b3-choice-btn{background:#f8f8f8;border:2px solid #ddd;border-radius:16px;padding:14px 20px;cursor:pointer;transition:all .2s;text-align:center;min-width:100px;font-family:'Jua',sans-serif;}
-.b3-choice-btn:hover:not(:disabled){border-color:#0D7B75;background:#EBF7F6;}
-.b3-choice-btn.correct{background:#EBF7F6;border-color:#0D7B75;}
-.b3-choice-btn.wrong{background:#ffe0e0;border-color:#e44;}
-.b3-choice-emoji{font-size:1.8rem;margin-bottom:4px;}
-.b3-choice-kr{font-size:.9rem;color:#333;}
-.b3-choice-en{font-size:.75rem;color:#999;}
-/* Steps */
-.b3-s1-progress{font-family:'Jua',sans-serif;font-size:.85rem;color:#aaa;text-align:right;margin-bottom:8px;}
-.b3-s1-scene{font-size:2.2rem;text-align:center;margin:8px 0 4px 0;}
-.b3-s1-english{font-size:.95rem;color:#555;text-align:center;margin-bottom:6px;}
-.b3-s1-hint{font-size:.85rem;color:#888;text-align:center;background:#FFF9E6;border-radius:8px;padding:6px 12px;margin-bottom:12px;border-left:3px solid #FFD580;}
-.b3-s1-zone{min-height:52px;border:2px dashed #0D7B75;border-radius:14px;padding:10px 14px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;transition:border-color .3s;align-items:center;}
-.b3-zone-placeholder{color:#ccc;font-family:'Jua',sans-serif;font-size:.9rem;}
-.b3-s1-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
-.b3-chunk-btn{background:#EBF7F6;border:2px solid #A8D5CC;border-radius:20px;padding:8px 16px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
-.b3-chunk-btn:hover:not(.used){background:#0D7B75;color:white;}
-.b3-chunk-btn.used{opacity:.35;cursor:default;pointer-events:none;}
-.b3-chunk-btn.b3-type-place{background:#F0F4FF;border-color:#B0BAFF;}
-.b3-chunk-btn.b3-type-verb{background:#FFF0F8;border-color:#FFB8E0;}
-.b3-chunk-btn.b3-type-name{background:#FFF9E6;border-color:#FFD580;}
-.b3-placed-chunk{background:#0D7B75;color:white;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;}
-.b3-placed-chunk:hover{background:#0a6862;text-decoration:line-through;}
-.b3-placed-chunk.b3-type-place{background:#5B6AF0;}
-.b3-placed-chunk.b3-type-verb{background:#C46EA8;}
-.b3-placed-chunk.b3-type-name{background:#E8A020;}
-.b3-check-btn{display:block;margin:0 auto;background:#0D7B75;color:white;border:none;border-radius:20px;padding:10px 30px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;transition:all .2s;}
-.b3-check-btn:hover:not(:disabled){background:#0a6862;}
-.b3-check-btn:disabled{opacity:.5;}
-.b3-complete{text-align:center;font-family:'Jua',sans-serif;font-size:1.4rem;color:#0D7B75;padding:40px;background:#EBF7F6;border-radius:20px;}
-.b3-ans-hint{color:#0D7B75;font-weight:700;margin:10px 0 6px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.95rem;}
-/* Self check */
-.b3-goal-recap{background:#EBF7F6;border-radius:10px;padding:10px 16px;font-family:'Jua',sans-serif;color:#0D7B75;margin-bottom:10px;}
-/* b3 Self-check */
-.b3-checklist{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
-.b3-check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:10px 14px;border-radius:12px;border:1.5px solid #eee;transition:all .2s;}
-.b3-check-item:hover{background:#f9f9f9;}
-.b3-check-item input{display:none;}
-.b3-check-box{width:22px;height:22px;border:2px solid #ccc;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.b3-check-item input:checked ~ .b3-check-box{background:#0D7B75;border-color:#0D7B75;color:white;}
-.b3-check-item input:checked ~ .b3-check-box::after{content:'✓';font-size:.85rem;}
-.b3-check-text{}
-.b3-check-ko{font-family:'Jua',sans-serif;font-size:.95rem;color:#333;}
-.b3-check-en{font-size:.82rem;color:#aaa;margin-top:2px;}
-.b3-check-result{text-align:center;margin-top:14px;font-family:'Jua',sans-serif;font-size:1rem;}
-/* ════════════════════════
-   b3 Dialogue Bubbles
-   ════════════════════════ */
-.b3-dlg-wrap{display:flex;flex-direction:column;gap:0;}
-.b3-dlg-scenario{margin-bottom:22px;}
-.b3-dlg-scene-header{display:inline-flex;align-items:center;gap:6px;background:#F3F4F6;border-radius:20px;padding:5px 14px;margin-bottom:14px;}
-.b3-dlg-scene-icon{font-size:1.1rem;}
-.b3-dlg-scene-text{font-family:'Jua',sans-serif;font-size:.88rem;color:#444;font-weight:700;}
-.b3-dlg-scene-en{font-size:.78rem;color:#aaa;}
-.b3-dlg-row{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;}
-.b3-dlg-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Jua',sans-serif;font-size:.88rem;color:white;flex-shrink:0;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,.15);}
-.b3-dlg-body{flex:1;min-width:0;}
-.b3-dlg-name-tag{font-size:.73rem;font-family:'Jua',sans-serif;color:#aaa;margin-bottom:3px;padding-left:3px;}
-.b3-dlg-bubble{border-radius:4px 14px 14px 14px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.07);}
-.b3-dlg-fill-bubble{border-radius:4px 14px 14px 14px;}
-.b3-dlg-kr{font-family:'Jua',sans-serif;font-size:1.05rem;color:#222;display:flex;align-items:center;flex-wrap:wrap;gap:5px;line-height:1.6;}
-.b3-dlg-tts{background:none;border:1.5px solid rgba(0,0,0,.12);border-radius:50%;width:26px;height:26px;font-size:.72rem;cursor:pointer;flex-shrink:0;padding:0;transition:all .2s;color:#888;}
-.b3-dlg-tts:hover{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.25);}
-.b3-dlg-en{font-size:.8rem;color:#aaa;margin-top:5px;font-style:italic;}
-.b3-dlg-blank{display:inline-block;min-width:44px;border-bottom:2.5px solid #0D7B75;text-align:center;color:#0D7B75;padding:1px 6px;font-weight:700;border-radius:0;transition:all .3s;}
-.b3-dlg-correct{color:#1a8a30 !important;border-bottom-color:transparent !important;background:rgba(13,123,117,.1);border-radius:6px;padding:1px 8px;}
-.b3-dlg-opts{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
-.b3-dlg-opt{background:white;border:2px solid #ddd;border-radius:16px;padding:6px 14px;font-family:'Jua',sans-serif;font-size:.9rem;cursor:pointer;transition:all .18s;color:#444;}
-.b3-dlg-opt:hover{border-color:#0D7B75;background:#EBF7F6;color:#0D7B75;}
-.b3-dlg-opt-wrong{background:#ffe0e0 !important;border-color:#e44 !important;color:#e44 !important;}
-.b3-dlg-blank-shake{animation:dlgShake .4s;}
-@keyframes dlgShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.b3-dlg-result{text-align:center;margin-top:8px;}
-.b3-dlg-complete{font-family:'Jua',sans-serif;font-size:1.15rem;color:#0D7B75;background:#EBF7F6;border-radius:16px;padding:18px;display:inline-block;}
-/* ── Book3 Level Test ── */
-.b3lt-sidebar-btn{background:linear-gradient(135deg,#0D7B75,#1AAB9A) !important;}
-.b3lt-sidebar-btn .lesson-num,.b3lt-sidebar-btn .lesson-title-text{color:white !important;}
-.b3lt-sidebar-btn:hover,.b3lt-sidebar-btn.active{opacity:.88;}
-.b3lt-card{max-width:560px;margin:0 auto;}
-.b3lt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.b3lt-ep-badge{background:#EBF7F6;color:#0D7B75;border-radius:14px;padding:4px 12px;font-family:'Jua',sans-serif;font-size:.82rem;font-weight:700;}
-.b3lt-counter{font-size:.82rem;color:#aaa;font-family:'Jua',sans-serif;}
-.b3lt-prog-wrap{height:6px;background:#eee;border-radius:6px;overflow:hidden;margin-bottom:16px;}
-.b3lt-prog-fill{height:100%;background:linear-gradient(90deg,#0D7B75,#1AAB9A);border-radius:6px;transition:width .4s;}
-.b3lt-type-tag{font-size:.78rem;color:#aaa;font-family:'Jua',sans-serif;margin-bottom:14px;letter-spacing:.02em;}
-.b3lt-q-ko{font-family:'Jua',sans-serif;font-size:1.25rem;color:#222;margin-bottom:8px;line-height:1.7;}
-.b3lt-q-en{font-size:.88rem;color:#aaa;margin-bottom:18px;font-style:italic;}
-.b3lt-blank{display:inline-block;min-width:48px;border-bottom:2.5px solid #0D7B75;text-align:center;color:#0D7B75;padding:2px 8px;font-weight:700;transition:all .3s;}
-.b3lt-blank-ok{border-bottom-color:transparent !important;background:rgba(13,123,117,.12);border-radius:6px;color:#0a7a6c !important;}
-.b3lt-blank-err{border-bottom-color:#e44 !important;color:#e44 !important;}
-.b3lt-opts{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
-.b3lt-opt{background:#f8f8f8;border:2px solid #ddd;border-radius:18px;padding:10px 20px;font-family:'Jua',sans-serif;font-size:.98rem;cursor:pointer;transition:all .18s;}
-.b3lt-opt:hover:not(:disabled){border-color:#0D7B75;background:#EBF7F6;}
-.b3lt-opt.b3lt-correct{background:#EBF7F6;border-color:#0D7B75;color:#0D7B75;font-weight:700;}
-.b3lt-opt.b3lt-wrong{background:#ffe0e0;border-color:#e44;color:#e44;}
-.b3lt-listen-center{text-align:center;margin-bottom:18px;}
-.b3lt-listen-btn{background:#EBF7F6;border:2px solid #0D7B75;border-radius:22px;padding:14px 28px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;color:#0D7B75;transition:all .2s;}
-.b3lt-listen-btn:hover{background:#0D7B75;color:white;}
-.b3lt-choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;}
-.b3lt-choice{background:#f8f8f8;border:2px solid #ddd;border-radius:16px;padding:14px 18px;cursor:pointer;transition:all .2s;text-align:center;min-width:100px;font-family:'Jua',sans-serif;}
-.b3lt-choice:hover:not(:disabled){border-color:#0D7B75;background:#EBF7F6;}
-.b3lt-choice.b3lt-correct{background:#EBF7F6;border-color:#0D7B75;}
-.b3lt-choice.b3lt-wrong{background:#ffe0e0;border-color:#e44;}
-.b3lt-choice-emoji{font-size:1.8rem;margin-bottom:4px;}
-.b3lt-choice-kr{font-size:.92rem;color:#333;}
-.b3lt-choice-en{font-size:.76rem;color:#aaa;}
-.b3lt-feedback{margin:12px 0;text-align:center;font-family:'Jua',sans-serif;font-size:.98rem;padding:10px 14px;border-radius:12px;background:#f9f9f9;}
-.b3lt-fb-ok{color:#0D7B75;}
-.b3lt-fb-err{color:#e44;}
-.b3lt-next-btn{display:block;width:100%;margin-top:12px;padding:13px;background:#0D7B75;color:white;border:none;border-radius:16px;font-family:'Jua',sans-serif;font-size:1.05rem;cursor:pointer;transition:all .2s;}
-.b3lt-next-btn:hover{background:#0a6862;}
-.b3lt-score-card{max-width:400px;margin:0 auto;text-align:center;padding:32px 24px !important;}
-.b3lt-score-title{font-family:'Jua',sans-serif;font-size:1rem;color:#aaa;margin-bottom:16px;}
-.b3lt-score-grade{font-family:'Jua',sans-serif;font-size:5.5rem;font-weight:900;line-height:1;margin-bottom:8px;}
-.b3lt-score-msg{font-family:'Jua',sans-serif;font-size:1.2rem;color:#444;margin-bottom:16px;}
-.b3lt-score-num{font-family:'Jua',sans-serif;font-size:1.5rem;color:#222;margin-bottom:12px;}
-.b3lt-score-bar-wrap{height:8px;background:#eee;border-radius:8px;overflow:hidden;margin:0 20px 6px;}
-.b3lt-score-bar{height:100%;border-radius:8px;transition:width .6s;}
-.b3lt-score-pct{font-size:.88rem;color:#aaa;margin-bottom:24px;font-family:'Jua',sans-serif;}
-.b3lt-retry-btn{background:#EBF7F6;border:2px solid #0D7B75;border-radius:20px;padding:12px 32px;font-family:'Jua',sans-serif;font-size:1rem;color:#0D7B75;cursor:pointer;transition:all .2s;}
-.b3lt-retry-btn:hover{background:#0D7B75;color:white;}
-</style>
 </body>
 </html>
