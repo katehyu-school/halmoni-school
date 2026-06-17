@@ -55,7 +55,12 @@
       "text": "제가 사 드릴게요.",
       "slide": 1,
       "audio": "data/nhs/L2/TTS/ep07/audio_1_제가_사_드릴게요_.mp3",
-      "en": "I'll buy it for you."
+      "en": "I'll buy it for you.",
+      "annotation": {
+        "highlight": "사 드릴게요",
+        "grammar": "-아/어 드리다",
+        "note": "동사 + 드리다 = 어른을 위해 해드리다 · ep06에서 배운 드리다 기억해요?"
+      }
     },
     {
       "speaker": "grandma",
@@ -76,14 +81,24 @@
       "text": "나는 찬 음식은 먹지 못해.",
       "slide": 4,
       "audio": "data/nhs/L2/TTS/ep07/audio_4_나는_찬_음식은_먹지_못해_.mp3",
-      "en": "I can't eat cold food."
+      "en": "I can't eat cold food.",
+      "annotation": {
+        "highlight": "먹지 못해",
+        "grammar": "-지 못하다",
+        "note": "못 먹어요와 같은 뜻 — 신체적/상황적 이유로 할 수 없을 때 씀"
+      }
     },
     {
       "speaker": "grandma",
       "text": "엄마한테서 못 들었어?",
       "slide": 5,
       "audio": "data/nhs/L2/TTS/ep07/audio_5_엄마한테서_못_들었어_.mp3",
-      "en": "Didn't you hear that from your mom?"
+      "en": "Didn't you hear that from your mom?",
+      "annotation": {
+        "highlight": "엄마한테서",
+        "grammar": "-한테서",
+        "note": "한테서 = from (사람). 엄마한테서 들었어 = I heard it from mom"
+      }
     },
     {
       "speaker": "liam",
@@ -277,15 +292,27 @@
         {
           "label": "Vowel stem",
           "items": [
-            { "ko": "뭐 사려고 해요?", "en": "What are you planning to buy?" },
-            { "ko": "친구를 만나려고 해요.", "en": "I'm planning to meet a friend." }
+            {
+              "ko": "뭐 사려고 해요?",
+              "en": "What are you planning to buy?"
+            },
+            {
+              "ko": "친구를 만나려고 해요.",
+              "en": "I'm planning to meet a friend."
+            }
           ]
         },
         {
           "label": "Consonant stem",
           "items": [
-            { "ko": "점심 먹으려고 해요.", "en": "I'm about to have lunch." },
-            { "ko": "한국어를 배우려고 해요.", "en": "I'm planning to learn Korean." }
+            {
+              "ko": "점심 먹으려고 해요.",
+              "en": "I'm about to have lunch."
+            },
+            {
+              "ko": "한국어를 배우려고 해요.",
+              "en": "I'm planning to learn Korean."
+            }
           ]
         }
       ],
@@ -338,10 +365,22 @@
         }
       ],
       "examples": [
-        { "ko": "커피 마실래요?", "en": "Would you like some coffee?" },
-        { "ko": "같이 점심 먹을래요?", "en": "Would you like to have lunch together?" },
-        { "ko": "영화 보러 갈래요?", "en": "Would you like to go see a movie?" },
-        { "ko": "할머니, 산책하실래요?", "en": "Grandma, would you like to take a walk?" }
+        {
+          "ko": "커피 마실래요?",
+          "en": "Would you like some coffee?"
+        },
+        {
+          "ko": "같이 점심 먹을래요?",
+          "en": "Would you like to have lunch together?"
+        },
+        {
+          "ko": "영화 보러 갈래요?",
+          "en": "Would you like to go see a movie?"
+        },
+        {
+          "ko": "할머니, 산책하실래요?",
+          "en": "Grandma, would you like to take a walk?"
+        }
       ],
       "fill_blanks": [
         {
@@ -354,151 +393,6 @@
           "answer": "앉으",
           "hint": "앉다 + -(으)시- = 앉으실래요?"
         }
-      ]
-    },
-    {
-      "id": "g07_deurida",
-      "tier": "core",
-      "title": "-아/어 드리다",
-      "title_en": "Do (something) for a superior",
-      "emoji": "🤲",
-      "explanation_en": "When you do something FOR someone older or higher in status, replace -아/어 주다 with -아/어 드리다. 드리다 is the honorific form of 주다. It shows humility — you're doing a favor for someone more respected than you.",
-      "pattern": "-아/어 드리다  ·  Same vowel rules as -아요/어요  ·  Use instead of -아/어 주다 for elders",
-      "scene_example": {
-        "korean": "제가 사 드릴게요.",
-        "english": "I'll buy it for you.",
-        "highlight": "사 드릴게요"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "label": "-아/어 주다 → -아/어 드리다 (elders)",
-          "content": "사 주다 → 사 드리다 (buy for)\n도와주다 → 도와드리다 (help)\n가르쳐 주다 → 가르쳐 드리다 (teach)\n열어 주다 → 열어 드리다 (open for)"
-        },
-        {
-          "type": "green",
-          "label": "주다 vs 드리다",
-          "content": "친구한테: 사 줄게. / 내가 도와줄게.\n어른한테: 사 드릴게요. / 제가 도와드릴게요.\n→ Same structure, different respect level!"
-        },
-        {
-          "type": "amber",
-          "label": "-아/어 보다 vs -아/어 주다/드리다",
-          "content": "-아/어 보다 = try doing something (for yourself)\n  예: 입어 봐요. = Try it on.\n-아/어 주다/드리다 = do something FOR someone else\n  예: 입어 드릴까요? = Shall I help you try it on?\n헷갈리기 쉬우니까 주의하세요! Easy to confuse — focus on who benefits."
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "친구에게 (주다)",
-          "items": [
-            { "ko": "내가 사 줄게.", "en": "I'll buy it for you." },
-            { "ko": "내가 도와줄게.", "en": "I'll help you." }
-          ]
-        },
-        {
-          "label": "어른에게 (드리다)",
-          "items": [
-            { "ko": "제가 사 드릴게요.", "en": "I'll buy it for you." },
-            { "ko": "제가 도와드릴게요.", "en": "I'll help you." },
-            { "ko": "제가 가르쳐 드릴까요?", "en": "Shall I teach you?" }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        {
-          "sentence": "할머니, 제가 들어 ___릴게요. (드리다)",
-          "answer": "드",
-          "hint": "들어 드릴게요 = I'll carry it for you."
-        },
-        {
-          "sentence": "친구한테: 내가 설명해 ___게. / 선생님한테: 제가 설명해 ___릴게요.",
-          "answer": "줄 / 드",
-          "hint": "친구 → 줄게 / 어른 → 드릴게요"
-        }
-      ]
-    },
-    {
-      "id": "g07_jimotada",
-      "tier": "core",
-      "title": "-지 못하다",
-      "title_en": "Cannot (inability / physical limitation)",
-      "emoji": "🚫",
-      "explanation_en": "Both 못+Verb and -지 못하다 mean 'cannot,' but -지 못하다 emphasizes the inability more explicitly — often a physical, health, or situational reason beyond your control. Think of it as 'I'm not able to ~' vs just 'I can't ~'.",
-      "pattern": "Verb stem + -지 못하다  ·  (same conjugation as -지 않다)",
-      "scene_example": {
-        "korean": "나는 찬 음식은 먹지 못해.",
-        "english": "I'm not able to eat cold food.",
-        "highlight": "먹지 못해"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "label": "-지 못하다 · structure",
-          "content": "먹다 → 먹지 못해요 (I can't eat)\n가다 → 가지 못해요 (I can't go)\n마시다 → 마시지 못해요 (I can't drink)"
-        },
-        {
-          "type": "green",
-          "label": "못+V vs V-지 못하다 · 뉘앙스 차이",
-          "content": "못 먹어요 = can't eat (quick, neutral)\n먹지 못해요 = not able to eat (explains inability more explicitly)\n찬 음식은 먹지 못해 = As for cold food, I'm just not able to eat it.\n→ -지 못하다 often sounds more like a personal/physical limitation."
-        },
-        {
-          "type": "amber",
-          "label": "-지 않다 vs -지 못하다",
-          "content": "-지 않다 = choosing not to (won't)\n-지 못하다 = unable to (can't)\n찬 음식은 먹지 않아요 = I don't eat cold food (choice)\n찬 음식은 먹지 못해요 = I can't eat cold food (limitation)"
-        }
-      ],
-      "examples": [
-        { "ko": "찬 음식은 먹지 못해요.", "en": "I can't eat cold food." },
-        { "ko": "오늘 가지 못해요.", "en": "I'm not able to go today." },
-        { "ko": "매운 음식을 먹지 못해요.", "en": "I can't eat spicy food." },
-        { "ko": "엄마한테서 못 들었어요.", "en": "I wasn't able to hear that from mom." }
-      ],
-      "fill_blanks": [
-        {
-          "sentence": "할머니는 찬 음식을 먹___ 못해요.",
-          "answer": "지",
-          "hint": "먹다 → 먹지 못해요"
-        },
-        {
-          "sentence": "오늘은 가___ 못할 것 같아요.",
-          "answer": "지",
-          "hint": "가다 → 가지 못하다"
-        }
-      ]
-    },
-    {
-      "id": "g07_hanteso",
-      "tier": "foundation",
-      "title": "-한테서",
-      "title_en": "From a person",
-      "emoji": "🔑",
-      "explanation_en": "한테서 means 'from (a person).' It marks the source of information, objects, or actions — when you receive or hear something FROM someone. It's the 'from' counterpart of 한테 ('to/from a person').",
-      "pattern": "Person + 한테서  ·  More formal written form: 에게서",
-      "scene_example": {
-        "korean": "엄마한테서 못 들었어?",
-        "english": "Didn't you hear that from your mom?",
-        "highlight": "엄마한테서"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "label": "-한테서 = from (person)",
-          "content": "엄마한테서 들었어요 = I heard it from mom.\n친구한테서 받았어요 = I received it from a friend.\n선생님한테서 배웠어요 = I learned it from the teacher."
-        },
-        {
-          "type": "green",
-          "label": "-한테 vs -한테서",
-          "content": "-한테 = to/from a person (direction)\n  엄마한테 전화했어요 = I called mom.\n  엄마한테 물어봐요 = Ask mom.\n-한테서 = from a person (source of receipt)\n  엄마한테서 들었어요 = I heard it from mom."
-        },
-        {
-          "type": "amber",
-          "label": "에서 vs 한테서",
-          "content": "장소에서 = from a place\n  서울에서 왔어요 = came from Seoul\n사람한테서 = from a person\n  엄마한테서 들었어요 = heard from mom\n→ Use 에서 for places, 한테서 for people!"
-        }
-      ],
-      "examples": [
-        { "ko": "친구한테서 선물을 받았어요.", "en": "I received a gift from a friend." },
-        { "ko": "할머니한테서 요리를 배웠어요.", "en": "I learned cooking from grandma." },
-        { "ko": "선생님한테서 들었어요.", "en": "I heard it from the teacher." }
       ]
     }
   ],
@@ -590,9 +484,21 @@
       "rule": "ㅌ + ㅣ → [ㅊ] 구개음화가 일어나요.",
       "rule_en": "When ㅌ (or ㄷ) comes before ㅣ, it changes to ㅊ (or ㅈ) — this is called palatalization (구개음화).",
       "examples": [
-        { "original": "같이", "pronounced": "[가치]", "note": "ㅌ+ㅣ → ㅊ" },
-        { "original": "해돋이", "pronounced": "[해도지]", "note": "ㄷ+ㅣ → ㅈ" },
-        { "original": "굳이", "pronounced": "[구지]", "note": "ㄷ+ㅣ → ㅈ" }
+        {
+          "original": "같이",
+          "pronounced": "[가치]",
+          "note": "ㅌ+ㅣ → ㅊ"
+        },
+        {
+          "original": "해돋이",
+          "pronounced": "[해도지]",
+          "note": "ㄷ+ㅣ → ㅈ"
+        },
+        {
+          "original": "굳이",
+          "pronounced": "[구지]",
+          "note": "ㄷ+ㅣ → ㅈ"
+        }
       ]
     },
     {
@@ -600,8 +506,16 @@
       "rule": "받침 + 모음 → 연음화. ㄱ 받침이 뒤 음절로 이어져요.",
       "rule_en": "Final consonant ㄱ links to the following vowel — standard linking (연음화).",
       "examples": [
-        { "original": "먹으려고", "pronounced": "[머그려고]", "note": "먹+으 → 머그" },
-        { "original": "찾으려고", "pronounced": "[차즈려고]", "note": "찾+으 → 차즈" }
+        {
+          "original": "먹으려고",
+          "pronounced": "[머그려고]",
+          "note": "먹+으 → 머그"
+        },
+        {
+          "original": "찾으려고",
+          "pronounced": "[차즈려고]",
+          "note": "찾+으 → 차즈"
+        }
       ]
     },
     {
@@ -609,8 +523,16 @@
       "rule": "합성어에서 뒤 단어가 된소리로 바뀌어요 (사이시옷 경음화).",
       "rule_en": "In compound words, the second word's initial consonant can become a tensed (reinforced) consonant.",
       "examples": [
-        { "original": "단골집", "pronounced": "[단골찝]", "note": "집 → 찝 (경음화)" },
-        { "original": "국밥", "pronounced": "[국빱]", "note": "밥 → 빱 (경음화)" }
+        {
+          "original": "단골집",
+          "pronounced": "[단골찝]",
+          "note": "집 → 찝 (경음화)"
+        },
+        {
+          "original": "국밥",
+          "pronounced": "[국빱]",
+          "note": "밥 → 빱 (경음화)"
+        }
       ]
     },
     {
@@ -618,7 +540,11 @@
       "rule": "드시다 + -고 싶으시다 — 어른의 행동에 -(으)시-가 두 번 등장해요.",
       "rule_en": "In 뭐 드시고 싶으세요?, both the main verb (드시다) and the helping verb (싶으시다) are honorific — double honorific in one sentence!",
       "examples": [
-        { "original": "뭐 드시고 싶으세요?", "pronounced": "뭐 [드시고 시프세요]", "note": "드시다(eat-hon.) + 싶으세요(want-hon.)" }
+        {
+          "original": "뭐 드시고 싶으세요?",
+          "pronounced": "뭐 [드시고 시프세요]",
+          "note": "드시다(eat-hon.) + 싶으세요(want-hon.)"
+        }
       ]
     }
   ],
@@ -794,7 +720,12 @@
         {
           "question_ko": "몇 명이 예약하려고 해요?",
           "question_en": "How many people are making the reservation?",
-          "options": ["1명", "2명", "3명", "4명"],
+          "options": [
+            "1명",
+            "2명",
+            "3명",
+            "4명"
+          ],
           "answer": 1
         },
         {

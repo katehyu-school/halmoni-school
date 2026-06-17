@@ -213,6 +213,11 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .video-script-en{font-size:12px;color:var(--warm-500);line-height:1.3;}
 .video-script-tts{background:none;border:1px solid var(--warm-300);border-radius:20px;padding:3px 10px;font-size:11px;cursor:pointer;color:var(--warm-600);margin-top:4px;width:fit-content;}
 .video-script-tts:hover{background:var(--warm-100);}
+.anno-mark{background:rgba(255,180,0,0.15);border-bottom:2px solid var(--amber,#F59E0B);border-radius:3px;cursor:pointer;padding:0 2px;font-weight:700;}
+.anno-mark:hover{background:rgba(255,180,0,0.28);}
+.anno-tooltip{position:fixed;background:#1e293b;color:#f8fafc;border-radius:12px;padding:11px 15px;font-size:13px;max-width:270px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.25);line-height:1.55;pointer-events:none;}
+.anno-tooltip-tag{font-weight:700;color:#fbbf24;font-size:12px;margin-bottom:4px;}
+.anno-tooltip-note{color:#e2e8f0;}
 
 /* ── 색인 모달 ─────────────────────────────────────────── */
 .idx-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;}
@@ -960,6 +965,28 @@ function buildScript(){
   </div></div>`;
 }
 
+function buildAnnoText(text, anno){
+  if(!anno||!anno.highlight) return esc(text);
+  const idx=text.indexOf(anno.highlight);
+  if(idx<0) return esc(text);
+  const g=JSON.stringify(anno.grammar||'');
+  const n=JSON.stringify(anno.note||'');
+  return esc(text.slice(0,idx))
+    +'<span class="anno-mark" onclick="showAnnoTooltip(event,'+g+','+n+')" title="'+esc(anno.grammar||'')+'">'+esc(anno.highlight)+' 📎</span>'
+    +esc(text.slice(idx+anno.highlight.length));
+}
+function showAnnoTooltip(e,grammar,note){
+  document.querySelectorAll('.anno-tooltip').forEach(t=>t.remove());
+  const tip=document.createElement('div');
+  tip.className='anno-tooltip';
+  tip.innerHTML='<div class="anno-tooltip-tag">'+esc(grammar)+'</div><div class="anno-tooltip-note">'+esc(note)+'</div>';
+  document.body.appendChild(tip);
+  const x=Math.min(e.clientX+8, window.innerWidth-290);
+  const y=e.clientY+14;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+  setTimeout(()=>document.addEventListener('click',()=>tip.remove(),{once:true}),10);
+  e.stopPropagation();
+}
 function buildVideoScript(){
   const charMap={};
   DATA.characters.forEach(c=>{charMap[c.id]=c;});
@@ -973,7 +1000,7 @@ function buildVideoScript(){
       <div class="caption-avatar" style="background:${esc(ch.color||'#E0E0E0')}">${esc(ch.emoji||'💬')}</div>
       <div class="video-script-body">
         <div class="video-script-name">${esc(ch.name)}</div>
-        <div class="video-script-kr">${esc(line.text)}</div>
+        <div class="video-script-kr">${buildAnnoText(line.text, line.annotation)}</div>
         <div class="video-script-en">${esc(line.en)}</div>
         ${tag}
         ${ttsBtn}
@@ -3101,6 +3128,4 @@ function vdRenderScore(gramId) {
 
 
 
-<script src="core/my-notes.js"></script>
-</body>
-</html>
+<script src="
