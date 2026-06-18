@@ -1241,7 +1241,7 @@ function buildGrammar(){
     const tierBorder=g.tier==='core'?'2.5px solid #F0C040':g.tier==='preview'?'2.5px solid #5B9FD4':g.tier==='foundation'?'2.5px solid #3BAA7A':'';
     const tierBadge=g.tier==='core'?`<span style="display:inline-block;background:#FFF3C4;color:#7A5500;border:1.5px solid #F0C040;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;margin-bottom:8px">🥇 핵심 문법</span>`:g.tier==='preview'?`<span style="display:inline-block;background:#EAF3FB;color:#1A5C9E;border:1.5px solid #5B9FD4;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;margin-bottom:8px">💙 다음에 또 나와요</span>`:g.tier==='foundation'?`<span style="display:inline-block;background:#E6F7EF;color:#1E6B4A;border:1.5px solid #3BAA7A;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;margin-bottom:8px">🔑 핵심 개념</span>`:'';
     return`<div class="gram-card" style="${tierBorder?`border:${tierBorder};`:''}">
-      ${tierBadge}
+      ${tierBadge}${g.builds_on?`<div style="display:inline-block;background:#F0FDF4;color:#166534;border:1.5px solid #86EFAC;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 10px;margin:0 0 8px 6px">🔄 ${esc(g.builds_on)}</div>`:''}
       <div class="gram-title">${esc(g.title)}</div>
       ${g.title_en?`<div style="font-size:11px;color:var(--warm-500);margin-top:-4px;margin-bottom:8px">${esc(g.title_en)}</div>`:''}
       <div class="gram-exp">${esc(g.explanation_en)}</div>
