@@ -215,6 +215,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .video-script-tts:hover{background:var(--warm-100);}
 .anno-mark{background:rgba(255,180,0,0.15);border-bottom:2px solid var(--amber,#F59E0B);border-radius:3px;cursor:pointer;padding:0 2px;font-weight:700;}
 .anno-mark:hover{background:rgba(255,180,0,0.28);}
+.anno-hl{color:var(--coral);font-weight:700;}
 .anno-tooltip{position:fixed;background:#1e293b;color:#f8fafc;border-radius:12px;padding:11px 15px;font-size:13px;max-width:270px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.25);line-height:1.55;pointer-events:none;}
 .anno-tooltip-tag{font-weight:700;color:#fbbf24;font-size:12px;margin-bottom:4px;}
 .anno-tooltip-note{color:#e2e8f0;}
@@ -721,7 +722,8 @@ const L2_EPISODES=[
   {id:'ep04',label:'비가 올 것 같아요'},
   {id:'ep05',label:'용문사에 가면'},
   {id:'ep06',label:'회원권이 있으세요?'},
-  {id:'ep07',label:'같이 가실래요?'}
+  {id:'ep07',label:'같이 가실래요?'},
+  {id:'ep08',label:'할머니의 된장국'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -969,6 +971,9 @@ function buildAnnoText(text, anno){
   if(!anno||!anno.highlight) return esc(text);
   const idx=text.indexOf(anno.highlight);
   if(idx<0) return esc(text);
+  if(!anno.note&&!anno.grammar){
+    return esc(text.slice(0,idx))+'<span class="anno-hl">'+esc(anno.highlight)+'</span>'+esc(text.slice(idx+anno.highlight.length));
+  }
   const g=JSON.stringify(anno.grammar||'');
   const n=JSON.stringify(anno.note||'');
   return esc(text.slice(0,idx))
