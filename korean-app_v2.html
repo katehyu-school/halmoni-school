@@ -10872,7 +10872,7 @@ async function kidsRecToggle(btnId){
     const a=new Audio(_kidsRec.blobURL);
     sb.textContent='▶';sb.disabled=true;
     a.play();
-    a.onended=()=>{sb.textContent='👂';sb.title='내발음듣기 (다시)';sb.classList.add('rec-done');sb.disabled=false;};
+    a.onended=()=>{URL.revokeObjectURL(_kidsRec.blobURL);_kidsRec.blobURL=null;sb.textContent='🎙️';sb.title='다시 녹음하기';sb.classList.remove('rec-done');sb.disabled=false;};
     return;
   }
   // recording → stop
