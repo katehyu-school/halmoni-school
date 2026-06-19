@@ -143,24 +143,14 @@
               <span class="nms-label">Level</span>
               <select class="nms-select" id="nms-level-sel" onchange="nmsToggleEpSel()">
                 <option value="L1">Level 1</option>
+                <option value="L2">Level 2</option>
                 <option value="basics">Basics</option>
                 <option value="free">자유 메모 / Free</option>
               </select>
             </div>
             <div id="nms-ep-wrap">
               <span class="nms-label">Episode</span>
-              <select class="nms-select" id="nms-ep-sel">
-                <option value="ep01">ep01 — 공원 첫 만남</option>
-                <option value="ep02">ep02 — 누구예요?</option>
-                <option value="ep03">ep03 — 얼마예요?</option>
-                <option value="ep04">ep04 — 김밥 주세요</option>
-                <option value="ep05">ep05 — 스터디 그룹</option>
-                <option value="ep06">ep06 — 몇 시에 만날까?</option>
-                <option value="ep07">ep07 — 어디 있어요?</option>
-                <option value="ep08">ep08 — 재래시장</option>
-                <option value="ep09">ep09 — 한강 소풍</option>
-                <option value="ep10">ep10 — 어서 오세요</option>
-              </select>
+              <select class="nms-select" id="nms-ep-sel"></select>
             </div>
           </div>
           <textarea class="nms-textarea" id="nms-note-text" placeholder="Grammar notes, useful phrases, questions... anything goes!"></textarea>
@@ -385,19 +375,55 @@ function nmsTab(t){
 }
 
 // ── NOTES ────────────────────────────────────────────────
+const NMS_EP_LISTS={
+  L1:[
+    {v:'ep01',t:'ep01 — 안녕! 나는 정민이야'},
+    {v:'ep02',t:'ep02 — 누구예요?'},
+    {v:'ep03',t:'ep03 — 잘 먹겠습니다'},
+    {v:'ep04',t:'ep04 — 우리 몇 시에 만날까?'},
+    {v:'ep05',t:'ep05 — 광장시장에 가요?'},
+    {v:'ep06',t:'ep06 — 김밥 주세요'},
+    {v:'ep07',t:'ep07 — 한국어 스터디 그룹을 만들어요'},
+    {v:'ep08',t:'ep08 — 내 도시락은 어디에 있어요?'},
+    {v:'ep09',t:'ep09 — 딸기 한 박스하고 사과 여섯 개 주세요'},
+    {v:'ep10',t:'ep10 — 자전거 소풍을 가요'},
+    {v:'ep11',t:'ep11 — 어서 오세요'},
+    {v:'ep12',t:'ep12 — 경복궁에 갈 거예요!'}
+  ],
+  L2:[
+    {v:'ep01',t:'ep01 — 한국에 도착했어요'},
+    {v:'ep02',t:'ep02 — 공항에서 잠실까지'},
+    {v:'ep03',t:'ep03 — 열이 펄펄 나요'},
+    {v:'ep04',t:'ep04 — 비가 올 것 같아요'},
+    {v:'ep05',t:'ep05 — 용문사에 가면'},
+    {v:'ep06',t:'ep06 — 회원권이 있으세요?'},
+    {v:'ep07',t:'ep07 — 같이 가실래요?'},
+    {v:'ep08',t:'ep08 — 할머니의 된장국'}
+  ]
+};
 function nmsToggleEpSel(){
   const lv=document.getElementById('nms-level-sel').value;
-  document.getElementById('nms-ep-wrap').style.display=lv==='L1'?'block':'none';
+  const wrap=document.getElementById('nms-ep-wrap');
+  const sel=document.getElementById('nms-ep-sel');
+  const hasEp=(lv==='L1'||lv==='L2');
+  wrap.style.display=hasEp?'block':'none';
+  if(hasEp){
+    const list=NMS_EP_LISTS[lv]||[];
+    sel.innerHTML=list.map(e=>`<option value="${e.v}">${e.t}</option>`).join('');
+  }
 }
 function nmsNoteTag(n){
-  if(n.level) return n.level==='L1'?`L1 · ${n.ep}`:(n.level==='basics'?'Basics':'자유');
-  return n.ep; // legacy
+  if(n.level==='L1') return `L1 · ${n.ep}`;
+  if(n.level==='L2') return `L2 · ${n.ep}`;
+  if(n.level==='basics') return 'Basics';
+  if(n.level==='free') return '자유';
+  return n.ep||''; // legacy
 }
 function nmsSaveNote(){
   const text=document.getElementById('nms-note-text').value.trim();
   if(!text) return;
   const lv=document.getElementById('nms-level-sel').value;
-  const ep=lv==='L1'?document.getElementById('nms-ep-sel').value:'';
+  const ep=(lv==='L1'||lv==='L2')?document.getElementById('nms-ep-sel').value:'';
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   notes.unshift({id:Date.now(),level:lv,ep,text,
     date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric'})});
