@@ -1040,7 +1040,8 @@ function renderScene(){
   const encodedSrc=src?encodeURI(src):'';
   panel.style.backgroundImage=encodedSrc?`url('${encodedSrc}')`:'none';
   // Ensure panel refreshes once image is fully loaded (handles first-visit cache miss)
-  if(encodedSrc){const _img=new Image();const _si=sceneIdx;_img.onload=()=>{if(sceneIdx===_si&&panel.isConnected)panel.style.backgroundImage=`url('${encodedSrc}')`;};_img.src=encodedSrc;}
+  // Fix: same-URL set doesn't trigger repaint → clear first then rAF; also handle img.complete case
+  if(encodedSrc){const _img=new Image();const _si=sceneIdx;const _refresh=()=>{if(sceneIdx===_si&&panel.isConnected){panel.style.backgroundImage='none';requestAnimationFrame(()=>{if(sceneIdx===_si&&panel.isConnected)panel.style.backgroundImage=`url('${encodedSrc}')`;});}};_img.onload=_refresh;_img.src=encodedSrc;if(_img.complete)_refresh();}
   const charMap={};DATA.characters.forEach(c=>{charMap[c.id]=c;});
   const ch=charMap[line.speaker]||{name:line.speaker};
   const cfg_def=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
