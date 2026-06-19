@@ -2988,7 +2988,7 @@ async function nhsRecToggle(){
   if(!r.recording&&r.blobURL){
     const a=new Audio(r.blobURL);
     sb.textContent='▶';sb.disabled=true;
-    a.onended=()=>{sb.textContent='👂';sb.title='내발음듣기 (다시)';sb.classList.add('rec-done');sb.disabled=false;};
+    a.onended=()=>{URL.revokeObjectURL(r.blobURL);r.blobURL=null;sb.textContent='🎙️';sb.title='다시 녹음하기';sb.classList.remove('rec-done');sb.disabled=false;};
     a.play();
     return;
   }
