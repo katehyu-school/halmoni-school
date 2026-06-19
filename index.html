@@ -20,7 +20,6 @@
   --brown-md: #b8dce8;
   --muted:    rgba(180,215,235,.6);
   --border:   rgba(78,205,196,.25);
-  /* card colours from Canva */
   --kinder-bg: #E8604A;
   --elem-bg:   #3DBDB5;
   --adult-bg:  #0f7c6e;
@@ -56,8 +55,8 @@ body::before {
   position: relative; z-index: 2;
   min-height: 100vh;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 48px 24px;
+  align-items: center;
+  padding: 48px 24px 64px;
 }
 
 /* ── HEADER ── */
@@ -88,23 +87,136 @@ body::before {
 .divider-line.r { background: linear-gradient(90deg, var(--bronze), transparent); }
 .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--bronze); }
 
-/* ── LOGIN ── */
-#loginBox { width: 100%; max-width: 360px; animation: fadeUp .9s .15s ease both; }
-
-.login-card {
-  background: rgba(10,30,55,.85);
-  border: 1px solid rgba(78,205,196,.25);
-  border-radius: 20px;
-  padding: 36px 30px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.4), 0 0 40px rgba(78,205,196,.06);
-  text-align: center;
-  backdrop-filter: blur(12px);
+/* ── LANDING PAGE ── */
+#landingBox {
+  width: 100%; max-width: 860px;
+  animation: fadeUp .9s .1s ease both;
 }
+
+.hero-text {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 36px);
+  font-style: italic;
+  color: #fff;
+  margin-bottom: 14px;
+  line-height: 1.35;
+}
+.hero-tagline span { color: #4ecdc4; }
+.hero-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+
+/* track cards */
+.track-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 44px;
+}
+.track-card {
+  border-radius: 18px;
+  padding: 28px 22px;
+  text-align: center;
+  border: 1px solid rgba(78,205,196,.18);
+  background: rgba(10,30,55,.6);
+  backdrop-filter: blur(10px);
+}
+.track-card.kids { border-color: rgba(61,189,181,.35); }
+.track-card.hq   { border-color: rgba(78,205,196,.35); }
+.track-icon { font-size: 36px; margin-bottom: 12px; min-height: 48px; display:flex; align-items:center; justify-content:center; }
+.track-age {
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: #4ecdc4; margin-bottom: 6px; font-weight: 700;
+}
+.track-name {
+  font-family: Impact, 'Arial Narrow', sans-serif;
+  font-size: 18px; letter-spacing: .06em; text-transform: uppercase;
+  color: #fff; margin-bottom: 8px;
+}
+.track-desc {
+  font-size: 12px; line-height: 1.7; color: var(--muted);
+}
+
+/* feature pills */
+.features {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+  margin-bottom: 44px;
+}
+.feat {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(78,205,196,.08);
+  border: 1px solid rgba(78,205,196,.2);
+  border-radius: 30px;
+  padding: 7px 16px;
+  font-size: 12px; color: var(--brown-md);
+}
+.feat-icon { font-size: 15px; }
+
+/* login button */
+.login-cta-wrap { text-align: center; }
+.login-cta {
+  display: inline-block;
+  padding: 14px 44px;
+  background: linear-gradient(135deg, #4ecdc4, #2ab3aa);
+  color: #fff;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase;
+  border: none; border-radius: 50px;
+  cursor: pointer;
+  transition: opacity .18s, transform .12s;
+  box-shadow: 0 4px 20px rgba(78,205,196,.3);
+}
+.login-cta:hover { opacity: .88; transform: translateY(-1px); }
+.login-cta:active { transform: scale(.98); }
+.login-hint {
+  margin-top: 12px;
+  font-size: 11px; color: rgba(180,215,235,.4);
+  letter-spacing: .04em;
+}
+
+/* ── LOGIN MODAL ── */
+.modal-bg {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(4,12,26,.75); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+}
+.modal-bg.open { display: flex; }
+
+.login-modal {
+  background: rgba(10,30,55,.95);
+  border: 1px solid rgba(78,205,196,.3);
+  border-radius: 20px;
+  padding: 38px 32px;
+  width: 90%; max-width: 360px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.5), 0 0 40px rgba(78,205,196,.08);
+  text-align: center;
+  animation: fadeUp .3s ease;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute; top: 14px; right: 16px;
+  background: none; border: none;
+  color: var(--muted); font-size: 18px;
+  cursor: pointer; line-height: 1;
+  transition: color .15s;
+}
+.modal-close:hover { color: #fff; }
 
 .login-label {
   font-size: 10px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--bronze);
-  margin-bottom: 16px; display: block;
+  margin-bottom: 18px; display: block;
   font-weight: 700;
 }
 
@@ -139,7 +251,7 @@ body::before {
 .enter-btn:hover { opacity: .88; }
 .enter-btn:active { transform: scale(.98); }
 
-.error-msg { margin-top: 11px; font-size: 12px; color: #c0392b; min-height: 16px; }
+.error-msg { margin-top: 11px; font-size: 12px; color: #e74c3c; min-height: 16px; }
 
 /* ── APP CARDS ── */
 #appBox { display: none; width: 100%; max-width: 840px; animation: fadeUp .7s ease both; }
@@ -158,33 +270,20 @@ body::before {
   text-align: center; cursor: pointer;
   transition: all .25s; text-decoration: none;
   display: block; position: relative; overflow: hidden;
-  box-shadow: 0 4px 16px rgba(61,42,26,.10);
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
 }
 .app-card.kinder { background: var(--kinder-bg); }
 .app-card.elem   { background: var(--elem-bg); }
 .app-card.adult  { background: var(--adult-bg); }
-.app-card:hover  { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(61,42,26,.18); }
+.app-card:hover  { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,.25); }
 
 .app-icon  { font-size: 36px; margin-bottom: 14px; display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; min-height: 58px; }
-.app-level { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 7px; position: relative; z-index: 1; font-weight: 700; }
-.app-card.kinder .app-level { color: rgba(255,255,255,.75); }
-.app-card.elem   .app-level { color: rgba(255,255,255,.75); }
-.app-card.adult  .app-level { color: rgba(255,255,255,.75); }
-.app-name  { font-family: Impact, 'Arial Narrow', sans-serif; font-size: 19px; font-weight: 900; margin-bottom: 6px; line-height: 1.3; position: relative; z-index: 1; letter-spacing: .05em; text-transform: uppercase; }
-.app-card.kinder .app-name { color: #fff; }
-.app-card.elem   .app-name { color: #fff; }
-.app-card.adult  .app-name { color: #fff; }
-.app-desc  { font-size: 11.5px; line-height: 1.6; position: relative; z-index: 1; }
-.app-card.kinder .app-desc { color: rgba(255,255,255,.8); }
-.app-card.elem   .app-desc { color: rgba(255,255,255,.8); }
-.app-card.adult  .app-desc { color: rgba(255,255,255,.8); }
-.app-arrow { margin-top: 16px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; position: relative; z-index: 1; transition: letter-spacing .2s; }
-.app-card.kinder .app-arrow { color: rgba(255,255,255,.85); }
-.app-card.elem   .app-arrow { color: rgba(255,255,255,.85); }
-.app-card.adult  .app-arrow { color: rgba(255,255,255,.85); }
+.app-level { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 7px; position: relative; z-index: 1; font-weight: 700; color: rgba(255,255,255,.75); }
+.app-name  { font-family: Impact, 'Arial Narrow', sans-serif; font-size: 19px; font-weight: 900; margin-bottom: 6px; line-height: 1.3; position: relative; z-index: 1; letter-spacing: .05em; text-transform: uppercase; color: #fff; }
+.app-desc  { font-size: 11.5px; line-height: 1.6; position: relative; z-index: 1; color: rgba(255,255,255,.8); }
+.app-arrow { margin-top: 16px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; position: relative; z-index: 1; transition: letter-spacing .2s; color: rgba(255,255,255,.85); }
 .app-card:hover .app-arrow { letter-spacing: .22em; }
 
-/* edit pencil */
 .edit-icon {
   position: absolute; top: 10px; right: 10px; z-index: 10;
   background: rgba(255,255,255,.3); border: 1px solid rgba(255,255,255,.4);
@@ -195,36 +294,36 @@ body::before {
 .edit-mode .edit-icon { display: block; }
 
 /* ── EDIT MODAL ── */
-.modal-bg {
-  display: none; position: fixed; inset: 0; z-index: 200;
+.edit-modal-bg {
+  display: none; position: fixed; inset: 0; z-index: 300;
   background: rgba(61,42,26,.5); backdrop-filter: blur(5px);
   align-items: center; justify-content: center;
 }
-.modal-bg.open { display: flex; }
+.edit-modal-bg.open { display: flex; }
 
-.modal {
+.edit-modal {
   background: #fff; border: 1px solid var(--border);
   border-radius: 20px; padding: 28px 28px 22px;
   width: 90%; max-width: 400px; animation: fadeUp .3s ease;
-  box-shadow: 0 8px 32px rgba(61,42,26,.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
 }
-.modal h3 { font-family: Impact, sans-serif; font-size: 20px; color: var(--bronze); margin-bottom: 18px; letter-spacing: .08em; }
-.modal label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 5px; }
-.modal input, .modal textarea {
+.edit-modal h3 { font-family: Impact, sans-serif; font-size: 20px; color: var(--bronze); margin-bottom: 18px; letter-spacing: .08em; }
+.edit-modal label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #888; display: block; margin-bottom: 5px; }
+.edit-modal input, .edit-modal textarea {
   width: 100%; padding: 10px 12px; margin-bottom: 13px;
-  border-radius: 8px; border: 1.5px solid rgba(201,144,42,.25);
-  background: var(--cream); color: var(--brown);
+  border-radius: 8px; border: 1.5px solid rgba(78,205,196,.25);
+  background: #f8fbfd; color: #0a2540;
   font-family: 'Noto Sans KR', sans-serif; font-size: 13px;
   outline: none; resize: vertical; transition: border-color .2s;
 }
-.modal input:focus, .modal textarea:focus { border-color: var(--bronze); background: #fff; }
+.edit-modal input:focus, .edit-modal textarea:focus { border-color: var(--bronze); background: #fff; }
 .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
 .modal-cancel {
   padding: 9px 18px; border-radius: 8px;
-  background: transparent; border: 1.5px solid rgba(61,42,26,.2);
-  color: var(--muted); font-size: 12px; cursor: pointer;
+  background: transparent; border: 1.5px solid #ddd;
+  color: #888; font-size: 12px; cursor: pointer;
 }
-.modal-cancel:hover { border-color: var(--bronze); color: var(--brown); }
+.modal-cancel:hover { border-color: var(--bronze); color: #444; }
 .modal-save {
   padding: 9px 20px; border-radius: 8px;
   background: var(--bronze);
@@ -236,9 +335,9 @@ body::before {
 /* ── ADMIN BAR ── */
 .admin-bar {
   display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,250,238,.95); border-top: 1.5px solid rgba(201,144,42,.25);
+  background: rgba(10,30,55,.95); border-top: 1.5px solid rgba(78,205,196,.25);
   padding: 10px 20px; text-align: center;
-  font-size: 11px; color: var(--bronze-dk); letter-spacing: .08em;
+  font-size: 11px; color: var(--bronze); letter-spacing: .08em;
   backdrop-filter: blur(8px);
 }
 .admin-bar.show { display: block; }
@@ -248,12 +347,12 @@ body::before {
   background: transparent; color: var(--bronze);
   font-size: 11px; cursor: pointer; transition: background .15s;
 }
-.admin-bar button:hover { background: rgba(201,144,42,.12); }
+.admin-bar button:hover { background: rgba(78,205,196,.12); }
 
 /* ── FOOTER ── */
 .site-footer {
-  margin-top: 44px; text-align: center;
-  font-size: 11px; color: rgba(61,42,26,.35);
+  margin-top: 48px; text-align: center;
+  font-size: 11px; color: rgba(180,215,235,.25);
   letter-spacing: .06em; line-height: 1.9;
   animation: fadeUp 1s .4s ease both;
 }
@@ -267,14 +366,16 @@ body::before {
 }
 
 @media (max-width: 600px) {
-  .login-card { padding: 26px 18px; }
+  .track-grid { grid-template-columns: 1fr; gap: 12px; }
   .app-grid { grid-template-columns: 1fr; }
   .corner { width: 48px; height: 48px; }
-  .wrap { padding: 32px 16px; }
+  .wrap { padding: 32px 16px 56px; }
   .crest svg { width: 80px; height: 88px; }
   .site-title { font-size: clamp(28px, 9vw, 44px); letter-spacing: .08em; }
   .site-subtitle { font-size: 10px; letter-spacing: .14em; }
-  .pw-input { font-size: 16px; } /* iOS zoom 방지 */
+  .pw-input { font-size: 16px; }
+  .features { gap: 8px; }
+  .feat { font-size: 11px; padding: 6px 13px; }
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -302,22 +403,49 @@ body::before {
     </div>
   </header>
 
-  <!-- LOGIN -->
-  <div id="loginBox">
-    <div class="login-card">
-      <span class="login-label">Enter Access Code · 비밀번호</span>
-      <div class="pw-wrap">
-        <input class="pw-input" type="password" id="pwInput"
-          placeholder="비밀번호를 입력하세요"
-          onkeydown="if(event.key==='Enter')checkPw()">
-        <button class="eye-btn" onclick="toggleEye()" id="eyeBtn">👁</button>
-      </div>
-      <button class="enter-btn" onclick="checkPw()">Enter</button>
-      <div class="error-msg" id="errMsg"></div>
+  <!-- LANDING PAGE -->
+  <div id="landingBox">
+
+    <div class="hero-text">
+      <p class="hero-tagline">Learn Korean the way it's <span>actually lived</span> —<br>one story at a time.</p>
+      <p class="hero-desc">Hangeul Quest is a story-first Korean language program for kids and teens. Real conversations, real situations, real Korean — not just grammar rules.</p>
     </div>
+
+    <div class="track-grid">
+      <div class="track-card kids">
+        <div class="track-icon">
+          <svg width="52" height="60" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="rgba(255,255,255,0.18)" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.08)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(4,0)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(46,0)"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">HQ</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>
+        </div>
+        <div class="track-age">Ages 6–11 · 초등</div>
+        <div class="track-name">Hangeul Quest Kids</div>
+        <div class="track-desc">Game-based learning through adventures with Yaong and friends. Vocabulary, games, and building blocks of Korean — step by step.</div>
+      </div>
+      <div class="track-card hq">
+        <div class="track-icon">
+          <svg width="52" height="52" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">HQ</text></svg>
+        </div>
+        <div class="track-age">Ages 12 & up · 청소년·성인</div>
+        <div class="track-name">Hangeul Quest</div>
+        <div class="track-desc">Episode-based Korean for teens and adults. Follow Mirae, Lia, Liam and their crew through everyday life — and learn real Korean along the way.</div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feat"><span class="feat-icon">🎬</span> Scene-First Learning</div>
+      <div class="feat"><span class="feat-icon">🎮</span> Game-Based Practice</div>
+      <div class="feat"><span class="feat-icon">🔊</span> Native-Quality Audio</div>
+      <div class="feat"><span class="feat-icon">📖</span> Real-Life Korean</div>
+      <div class="feat"><span class="feat-icon">🗣️</span> Speak & Record</div>
+    </div>
+
+    <div class="login-cta-wrap">
+      <button class="login-cta" onclick="openLoginModal()">Member Login · 입장하기</button>
+      <p class="login-hint">For enrolled students · 재학생 전용</p>
+    </div>
+
   </div>
 
-  <!-- APP CARDS -->
+  <!-- APP CARDS (shown after login) -->
   <div id="appBox">
     <div class="welcome-text">
       <h2>어서 오세요! 환영합니다</h2>
@@ -362,16 +490,25 @@ body::before {
 
 </div>
 
-<!-- ADMIN BAR -->
-<div class="admin-bar" id="adminBar">
-  ✏️ 편집 모드 — 카드의 ✏️ 를 클릭해서 수정하세요
-  <button onclick="window.open('admin.html','_blank')">⚙️ 관리자 패널</button>
-  <button onclick="exitAdmin()">편집 종료</button>
+<!-- LOGIN MODAL -->
+<div class="modal-bg" id="loginModal" onclick="if(event.target===this)closeLoginModal()">
+  <div class="login-modal">
+    <button class="modal-close" onclick="closeLoginModal()">✕</button>
+    <span class="login-label">Enter Access Code · 비밀번호</span>
+    <div class="pw-wrap">
+      <input class="pw-input" type="password" id="pwInput"
+        placeholder="비밀번호를 입력하세요"
+        onkeydown="if(event.key==='Enter')checkPw()">
+      <button class="eye-btn" onclick="toggleEye()" id="eyeBtn">👁</button>
+    </div>
+    <button class="enter-btn" onclick="checkPw()">Enter</button>
+    <div class="error-msg" id="errMsg"></div>
+  </div>
 </div>
 
 <!-- EDIT MODAL -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
+<div class="edit-modal-bg" id="editModalBg">
+  <div class="edit-modal">
     <h3>카드 편집</h3>
     <label>아이콘 (이모지)</label>
     <input type="text" id="editIcon" maxlength="4">
@@ -382,27 +519,40 @@ body::before {
     <label>설명 (줄바꿈은 엔터)</label>
     <textarea id="editDesc" rows="3"></textarea>
     <div class="modal-btns">
-      <button class="modal-cancel" onclick="closeModal()">취소</button>
+      <button class="modal-cancel" onclick="closeEditModal()">취소</button>
       <button class="modal-save"   onclick="saveEdit()">저장</button>
     </div>
   </div>
 </div>
 
-<!-- 비밀번호 관리는 admin.html 에서 처리 -->
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  ✏️ 편집 모드 — 카드의 ✏️ 를 클릭해서 수정하세요
+  <button onclick="window.open('admin.html','_blank')">⚙️ 관리자 패널</button>
+  <button onclick="exitAdmin()">편집 종료</button>
+</div>
 
 <script>
-// ── Supabase 클라이언트 (비밀번호 서버 검증용) ──
 const _SBURL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
 const _SBKEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
 const _sb    = supabase.createClient(_SBURL, _SBKEY);
 
 let editingIdx = -1;
 
+function openLoginModal() {
+  document.getElementById('loginModal').classList.add('open');
+  setTimeout(()=>document.getElementById('pwInput').focus(), 100);
+}
+function closeLoginModal() {
+  document.getElementById('loginModal').classList.remove('open');
+  document.getElementById('errMsg').textContent = '';
+}
+
 async function checkPw() {
-  const val  = document.getElementById('pwInput').value.trim();
-  const err  = document.getElementById('errMsg');
-  const btn  = document.querySelector('.enter-btn');
-  const inp  = document.getElementById('pwInput');
+  const val = document.getElementById('pwInput').value.trim();
+  const err = document.getElementById('errMsg');
+  const btn = document.querySelector('.enter-btn');
+  const inp = document.getElementById('pwInput');
 
   if (!val) { err.textContent = '비밀번호를 입력하세요'; return; }
 
@@ -416,12 +566,13 @@ async function checkPw() {
       err.textContent = '비밀번호가 맞지 않아요. Please try again.';
       inp.value = '';
       inp.focus();
-      const card = document.querySelector('.login-card');
-      card.style.animation = 'none';
-      void card.offsetHeight;
-      card.style.animation = 'shake .4s ease';
+      const modal = document.querySelector('.login-modal');
+      modal.style.animation = 'none';
+      void modal.offsetHeight;
+      modal.style.animation = 'shake .4s ease';
     } else {
-      enterAs(data); // 'student' | 'teacher' | 'admin'
+      closeLoginModal();
+      enterAs(data);
     }
   } catch (e) {
     err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
@@ -432,17 +583,15 @@ async function checkPw() {
 }
 
 function enterAs(role) {
-  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('landingBox').style.display = 'none';
   document.getElementById('appBox').style.display = 'block';
 
   if (role === 'teacher' || role === 'admin') {
-    // add ?teacher to all app card links
     ['card0','card1','card2'].forEach(id => {
       const card = document.getElementById(id);
       const href = card.getAttribute('href').split('?')[0];
       card.setAttribute('href', href + '?teacher');
     });
-    // show role badge on welcome
     const isAdmin = (role === 'admin');
     document.querySelector('.welcome-text p').innerHTML = isAdmin
       ? '관리자 모드로 입장했어요 · Admin mode &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;letter-spacing:.06em;">ADMIN</span>'
@@ -469,7 +618,6 @@ function exitAdmin() {
   document.getElementById('adminBar').classList.remove('show');
 }
 
-// ── CARD EDIT ──
 function openEdit(e, idx) {
   e.preventDefault(); e.stopPropagation();
   editingIdx = idx;
@@ -477,11 +625,11 @@ function openEdit(e, idx) {
   document.getElementById('editLevel').value = document.getElementById('level'+idx).textContent.trim();
   document.getElementById('editName').value  = document.getElementById('name'+idx).textContent.trim();
   document.getElementById('editDesc').value  = document.getElementById('desc'+idx).innerText.trim();
-  document.getElementById('modalBg').classList.add('open');
+  document.getElementById('editModalBg').classList.add('open');
 }
 
-function closeModal() {
-  document.getElementById('modalBg').classList.remove('open');
+function closeEditModal() {
+  document.getElementById('editModalBg').classList.remove('open');
   editingIdx = -1;
 }
 
@@ -492,14 +640,12 @@ function saveEdit() {
   document.getElementById('level'+i).textContent = document.getElementById('editLevel').value;
   document.getElementById('name'+i).textContent  = document.getElementById('editName').value;
   document.getElementById('desc'+i).innerHTML    = document.getElementById('editDesc').value.replace(/\n/g,'<br>');
-  closeModal();
+  closeEditModal();
 }
 
-document.getElementById('modalBg').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+document.getElementById('editModalBg').addEventListener('click', function(e) {
+  if (e.target === this) closeEditModal();
 });
-
-// 비밀번호 관리 → admin.html 에서 처리
 </script>
 </body>
 </html>
