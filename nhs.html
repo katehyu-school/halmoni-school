@@ -225,6 +225,9 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .idx-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;}
 .idx-overlay.open{display:flex;}
 .idx-modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:760px;max-height:82vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;}
+.wu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:950;display:none;align-items:center;justify-content:center;padding:24px 16px;}
+.wu-overlay.open{display:flex;}
+.wu-modal{background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3);padding:36px 32px;}
 .idx-header{background:var(--teal-md);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .idx-header h2{font-size:15px;font-weight:700;margin:0;}
 .idx-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
@@ -689,6 +692,9 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 </div>
 
 <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileSidebar()"></div>
+<div class="wu-overlay" id="wu-overlay">
+  <div class="wu-modal" id="wu-modal"></div>
+</div>
 <div class="main-layout">
   <div class="sidebar">
     <div class="sidebar-hdr">📺 Episodes</div>
@@ -2793,19 +2799,16 @@ async function loadEp(epId, level='L1'){
 function _showWarmup(epId, level, pool){
   _wuEpId=epId; _wuLevel=level; _wuIdx=0; _wuScore=0; _wuChosen=null;
   _wuQs=shuffleArr([...pool]).slice(0,3);
-  document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
-  const item=document.getElementById('ep-item-'+level+'-'+epId);
-  if(item)item.classList.add('active');
-  document.getElementById('content-area').innerHTML=
-    '<div id="wu-wrap" style="max-width:600px;margin:0 auto;padding:40px 24px;">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">'
-    +'<div><div style="font-size:24px;font-weight:800;color:var(--gray-900);">🔥 빠른 복습</div>'
-    +'<div style="font-size:12.5px;color:var(--warm-500);margin-top:3px;">Quick Review — before the episode</div></div>'
+  const modal=document.getElementById('wu-modal');
+  modal.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">'
+    +'<div><div style="font-size:22px;font-weight:800;color:var(--gray-900);">🔥 빠른 복습</div>'
+    +'<div style="font-size:12px;color:var(--warm-500);margin-top:3px;">Quick Review — before the episode</div></div>'
     +'<button onclick="_wuSkip()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(0,128,128,0.25);">📽 바로 보기</button>'
     +'</div>'
     +'<div id="wu-dots" style="display:flex;gap:8px;margin-bottom:28px;"></div>'
-    +'<div id="wu-body"></div>'
-    +'</div>';
+    +'<div id="wu-body"></div>';
+  document.getElementById('wu-overlay').classList.add('open');
   _renderWarmupQ();
 }
 
@@ -2855,8 +2858,9 @@ function _renderWarmupScore(){
     +'</div>';
 }
 
-async function _wuGo(){ _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
-async function _wuSkip(){ _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
+function _wuCloseModal(){ document.getElementById('wu-overlay').classList.remove('open'); }
+async function _wuGo(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
+async function _wuSkip(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
 
 
 const VERB_DATA=[
