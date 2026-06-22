@@ -241,6 +241,16 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .fc-sidebar-btn:hover{opacity:0.88;}
 .fc-chip{padding:5px 11px;border:1.5px solid var(--gray-200);border-radius:20px;font-size:12px;cursor:pointer;background:#fff;color:var(--warm-600);font-weight:700;transition:all 0.15s;}
 .fc-chip.on{background:var(--teal);color:#fff;border-color:var(--teal);}
+.ep-item .ep-done{font-size:10px;margin-left:auto;color:var(--teal);flex-shrink:0;}
+.fc-srs-row{display:flex;gap:10px;margin-bottom:12px;}
+.fc-srs-btn{flex:1;padding:11px 8px;border:2px solid;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.fc-srs-yes{background:#f0fdf4;border-color:#22c55e;color:#15803d;}
+.fc-srs-yes:hover{background:#dcfce7;}
+.fc-srs-no{background:#fff7ed;border-color:#f97316;color:#c2410c;}
+.fc-srs-no:hover{background:#fed7aa;}
+.fc-card-badge{position:absolute;top:10px;right:12px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;}
+.fc-badge-review{background:#fed7aa;color:#c2410c;}
+.fc-badge-known{background:#dcfce7;color:#15803d;}
 .idx-header{background:var(--teal-md);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .idx-header h2{font-size:15px;font-weight:700;margin:0;}
 .idx-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
@@ -771,9 +781,10 @@ const EPISODES=L1_EPISODES; // 하위호환
 
 function buildSidebar(lv){
   lv=lv||'L1';
+  const _done=_epDoneSet();
   const mkItem=(ep,i,level)=>ep.disabled
-    ?`<div class="ep-item" onclick="alert('준비 중이에요 😊')"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}</div></div>`
-    :`<div class="ep-item" id="ep-item-${level}-${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div></div>`;
+    ?`<div class="ep-item"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}</div></div>`
+    :`<div class="ep-item" id="ep-item-${level}-${ep.id}" data-epkey="${level}_${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div><span class="ep-done" style="opacity:${_done.has(level+'_'+ep.id)?1:0}">✅</span></div>`;
   let html='';
   if(lv==='L1'){
     html=L1_EPISODES.map((ep,i)=>mkItem(ep,i,'L1')).join('')
@@ -1668,12 +1679,17 @@ function renderQuizScore(){
   // If no reading but spacing: spacing renders immediately
   const rdSection=rdPool?'<div id="rd-wrap" style="margin-top:24px;"></div>':'';
   const spSection=(!rdPool&&spPool)?'<div id="spq-wrap" style="margin-top:28px;"></div>':'';
+  // ── Progress tracking ──
+  _markEpDone(`${DATA.level}_${DATA.id}`);
+  const _hasProfile=!!_nmsProfile();
+  const _profileNudge=_hasProfile?'':'<div style="font-size:12px;color:var(--warm-400);margin-top:12px;">💡 My Notes 프로필을 만들면 진도가 저장돼요!</div>';
   document.getElementById('quiz-content').innerHTML=`
     <div class="quiz-score-wrap">
       <div class="quiz-score-num">${quizScore}<span style="font-size:24px;color:var(--warm-500)">/${total}</span></div>
       <div class="quiz-score-lbl">${msg}</div>
       <div style="font-size:13px;color:var(--warm-500);margin-top:8px">${pct}% 정답</div>
       <button class="quiz-retry-btn" onclick="resetQuiz()">↺ 다시 풀기</button>
+    ${_profileNudge}
     </div>${rdSection}${spSection}`;
   if(rdPool){ _rdPool=rdPool; _rdQIdx=0; _rdAnswered=0; _rdRender(); }
   else if(spPool){ _spqPool=spPool; _spqIdx=0; _spqClicked=[]; _spqRender(); }
@@ -2883,6 +2899,44 @@ async function _wuSkip(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); aw
 
 
 // ══ Flashcard System ══════════════════════════════════════
+// ══ SRS + Progress helpers ════════════════════════════════
+function _nmsProfile(){ return localStorage.getItem('nms_current')||''; }
+function _fcCardId(c){ return c.epId+'_'+c.korean; }
+function _fcReviewSet(){
+  const p=_nmsProfile(); if(!p) return new Set();
+  return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_fc_review')||'[]'));
+}
+function _fcKnownSet(){
+  const p=_nmsProfile(); if(!p) return new Set();
+  return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_fc_known')||'[]'));
+}
+function _fcMark(card, isReview){
+  const p=_nmsProfile(); if(!p) return;
+  const rev=_fcReviewSet(), kn=_fcKnownSet(), id=_fcCardId(card);
+  if(isReview){ rev.add(id); kn.delete(id); }
+  else{ kn.add(id); rev.delete(id); }
+  localStorage.setItem('nms_'+p+'_fc_review', JSON.stringify([...rev]));
+  localStorage.setItem('nms_'+p+'_fc_known',  JSON.stringify([...kn]));
+}
+function _epDoneSet(){
+  const p=_nmsProfile(); if(!p) return new Set();
+  return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_ep_done')||'[]'));
+}
+function _markEpDone(epKey){
+  const p=_nmsProfile(); if(!p) return;
+  const done=_epDoneSet(); done.add(epKey);
+  localStorage.setItem('nms_'+p+'_ep_done', JSON.stringify([...done]));
+  // Refresh sidebar checkmarks
+  _refreshSidebarDone();
+}
+function _refreshSidebarDone(){
+  const done=_epDoneSet();
+  document.querySelectorAll('.ep-item[data-epkey]').forEach(el=>{
+    const badge=el.querySelector('.ep-done');
+    if(badge) badge.style.opacity=done.has(el.dataset.epkey)?'1':'0';
+  });
+}
+
 let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcIdx=0,_fcFlipped=false;
 let _fcFilter=new Set(); // empty = all episodes
 
@@ -2913,7 +2967,10 @@ async function openFlashcards(){
 
 function _fcApplyFilter(){
   const pool=_fcFilter.size===0?_fcAllCards:_fcAllCards.filter(c=>_fcFilter.has(c.epId));
-  _fcCards=shuffleArr([...pool]).slice(0,25);
+  const rev=_fcReviewSet();
+  const revCards=shuffleArr(pool.filter(c=>rev.has(_fcCardId(c))));
+  const otherCards=shuffleArr(pool.filter(c=>!rev.has(_fcCardId(c))));
+  _fcCards=[...revCards,...otherCards].slice(0,25);
   _fcIdx=0; _fcFlipped=false; _renderFC();
 }
 
@@ -2928,11 +2985,22 @@ function _fcShuffle(){_fcApplyFilter();}
 function _fcFlip(){_fcFlipped=!_fcFlipped;const c=document.getElementById('fc-card-inner');if(c)c.classList.toggle('flipped',_fcFlipped);}
 function _fcPrev(){if(_fcIdx>0){_fcIdx--;_fcFlipped=false;_renderFC();}}
 function _fcNext(){if(_fcIdx<_fcCards.length-1){_fcIdx++;_fcFlipped=false;_renderFC();}}
+function _fcMarkAndNext(isReview){
+  _fcMark(_fcCards[_fcIdx], isReview);
+  if(_fcIdx<_fcCards.length-1){_fcIdx++;_fcFlipped=false;_renderFC();}
+  else{
+    // End of deck — reshuffle with SRS priority
+    _fcApplyFilter();
+  }
+}
 
 function _renderFC(){
   const m=document.getElementById('fc-modal');if(!m)return;
   if(!_fcCards.length){m.innerHTML='<div style="text-align:center;padding:40px;color:var(--warm-600);">단어가 없어요 😊</div>';return;}
   const c=_fcCards[_fcIdx],total=_fcCards.length;
+  const _rev=_fcReviewSet(),_kn=_fcKnownSet(),_cid=_fcCardId(c);
+  const _isReview=_rev.has(_cid),_isKnown=_kn.has(_cid);
+  const _cardBadge=_isReview?'<span class="fc-card-badge fc-badge-review">🔄 복습</span>':_isKnown?'<span class="fc-card-badge fc-badge-known">✅ 알아요</span>':'';
   const pct=total>1?Math.round((_fcIdx/(total-1))*100):100;
   const catClean=c.cat.replace(/^[\u{1F300}-\u{1FAD6} ]+/u,'').trim();
   const prevDis=_fcIdx===0,nextDis=_fcIdx===total-1;
@@ -2956,6 +3024,7 @@ function _renderFC(){
     +'<div class="fc-scene" onclick="_fcFlip()">'
     +'<div class="fc-card" id="fc-card-inner">'
     +'<div class="fc-face fc-front">'
+    +_cardBadge
     +'<div style="font-size:46px;margin-bottom:10px;">'+esc(c.emoji)+'</div>'
     +'<div style="font-size:30px;font-weight:800;color:var(--gray-900);letter-spacing:-0.5px;">'+esc(c.korean)+'</div>'
     +'<div style="font-size:12px;color:var(--teal);margin-top:14px;opacity:0.7;">👆 탭해서 뒤집기</div>'
@@ -2968,7 +3037,11 @@ function _renderFC(){
     +'</div>'
     +'</div>'
     +'</div>'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">'
+    +'<div class="fc-srs-row">'
+    +'<button class="fc-srs-btn fc-srs-no" onclick="_fcMarkAndNext(true)">❓ 다시 볼게요</button>'
+    +'<button class="fc-srs-btn fc-srs-yes" onclick="_fcMarkAndNext(false)">✅ 알아요!</button>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">'
     +'<button onclick="_fcPrev()" '+(prevDis?'disabled':'')+' style="'+btnStyle(prevDis,false)+'">← 이전</button>'
     +'<div style="font-size:12px;color:var(--warm-400);">'+(total>1?'카드 '+(_fcIdx+1):'')+'</div>'
     +'<button onclick="_fcNext()" '+(nextDis?'disabled':'')+' style="'+btnStyle(nextDis,true)+'">다음 →</button>'
