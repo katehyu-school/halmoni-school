@@ -937,6 +937,9 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .b3-ptab{background:#f0f0f0;border:none;border-radius:20px;padding:8px 14px;font-family:'Jua',sans-serif;font-size:.85rem;cursor:pointer;transition:all .2s;}
 .b3-ptab.active{background:#0D7B75;color:white;}
 .b3-ptab:hover:not(.active){background:#e0f5f2;}
+.ksp-char{display:inline-block;padding:2px 1px;color:#1B5E20;}
+.ksp-gap{display:inline-block;min-width:18px;height:36px;vertical-align:middle;cursor:pointer;}
+.ksp-gap:hover{background:rgba(165,214,167,0.4);border-radius:4px;}
 .b3-psec{display:none;}
 .b3-psec.active{display:block;}
 .b3-fill-item{background:#fafafa;border-radius:14px;padding:16px 20px;margin-bottom:12px;border:1.5px solid #eee;}
@@ -5703,13 +5706,13 @@ function renderB3Practice() {
     '<div class="b3-prac-tabs">' +
     '<button class="b3-ptab active" onclick="b3PTab(this,\'prac\')">🎭 연습</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'listen\')">🔊 듣기</button>' +
-    (p.write_items&&p.write_items.length ? '<button class="b3-ptab" onclick="b3PTab(this,\'write\')">✏️ 쓰기</button>' : '') +
+    '<button class="b3-ptab" onclick="b3PTab(this,\'write\')">✏️ 쓰기</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'step1\')">🧩 문장 1</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'step2\')">🧩 문장 2</button>' +
     '</div>' +
     '<div class="b3-psec active" id="b3-p-prac">'+pracHTML+'</div>' +
     '<div class="b3-psec" id="b3-p-listen">'+listenHTML+'</div>' +
-    (p.write_items&&p.write_items.length ? '<div class="b3-psec" id="b3-p-write"><div id="b3-write-wrap"></div></div>' : '') +
+    '<div class="b3-psec" id="b3-p-write"><div id="b3-write-wrap"></div><div id="b3-sp-wrap" style="margin-top:20px;"></div></div>' +
     '<div class="b3-psec" id="b3-p-step1"><div id="b3-s1-wrap"></div></div>' +
     '<div class="b3-psec" id="b3-p-step2"><div id="b3-s2-wrap"></div></div>' +
     '</div>';
@@ -5845,7 +5848,7 @@ function b3PTab(btn,sec) {
   card.querySelectorAll('.b3-psec').forEach(s=>s.classList.remove('active'));
   const el = card.querySelector('#b3-p-'+sec);
   if(el) el.classList.add('active');
-  if(sec==='write') b3WriteInit();
+  if(sec==='write'){ b3WriteInit(); renderKidsSp(b3CurrentUnit); }
 }
 
 
@@ -5854,6 +5857,8 @@ let b3WriteIdx = 0, b3WriteScore = 0;
 
 function b3WriteInit() {
   b3WriteIdx = 0; b3WriteScore = 0;
+  const _items = (b3PracticeCache && b3PracticeCache.write_items) || [];
+  if (!_items.length) return;
   _b3WriteCard();
 }
 
@@ -5928,6 +5933,148 @@ function b3WriteNext(correct) {
         '</div>';
     }
   }, 900);
+}
+
+// ══ Level 3 띄어쓰기 게임 ══════════════════════════════
+const KIDS_SP_DATA = {
+  1:[
+    {chars:'아기곰은아주작아요', spaces:[4,6], en:'The baby bear is very small.', hint:'아기곰은 · 아주 · 작아요'},
+    {chars:'엄마곰이집에있어요', spaces:[4,6], en:'Mom bear is at home.', hint:'엄마곰이 · 집에 · 있어요'},
+    {chars:'아빠곰은크고엄마곰은작아요', spaces:[4,6,10], en:'Dad bear is big and mom bear is small.', hint:'아빠곰은 · 크고 · 엄마곰은 · 작아요'},
+  ],
+  2:[
+    {chars:'오늘저녁에뭘먹을까요', spaces:[2,5,6], en:'What shall we eat for dinner tonight?', hint:'오늘 · 저녁에 · 뭘 · 먹을까요'},
+    {chars:'나는피자하고주스를먹어요', spaces:[2,6,9], en:'I eat pizza and juice.', hint:'나는 · 피자하고 · 주스를 · 먹어요'},
+    {chars:'식당에서떡볶이를먹어요', spaces:[4,8], en:'We eat tteokbokki at the restaurant.', hint:'식당에서 · 떡볶이를 · 먹어요'},
+  ],
+  3:[
+    {chars:'열쇠가탁자위에있어요', spaces:[3,5,7], en:'The key is on the table.', hint:'열쇠가 · 탁자 · 위에 · 있어요'},
+    {chars:'항아리속에없어요', spaces:[3,5], en:"It's not inside the jar.", hint:'항아리 · 속에 · 없어요'},
+    {chars:'가방이의자옆에있어요', spaces:[3,5,7], en:'The bag is next to the chair.', hint:'가방이 · 의자 · 옆에 · 있어요'},
+  ],
+  4:[
+    {chars:'내일도서관에서공부할거예요', spaces:[2,7,10], en:"Tomorrow I'll study at the library.", hint:'내일 · 도서관에서 · 공부할 · 거예요'},
+    {chars:'주말에공원에갈거예요', spaces:[3,6,7], en:"On the weekend I'll go to the park.", hint:'주말에 · 공원에 · 갈 · 거예요'},
+    {chars:'저는한국어를배우고싶어요', spaces:[2,6,9], en:'I want to learn Korean.', hint:'저는 · 한국어를 · 배우고 · 싶어요'},
+  ],
+  5:[
+    {chars:'어제친구하고공원에갔어요', spaces:[2,6,9], en:'Yesterday I went to the park with a friend.', hint:'어제 · 친구하고 · 공원에 · 갔어요'},
+    {chars:'내일레모네이드를팔거예요', spaces:[2,8,9], en:"Tomorrow we'll sell lemonade.", hint:'내일 · 레모네이드를 · 팔 · 거예요'},
+    {chars:'오늘날씨가아주좋아요', spaces:[2,5,7], en:"Today's weather is very nice.", hint:'오늘 · 날씨가 · 아주 · 좋아요'},
+  ],
+  6:[
+    {chars:'저는계란을못먹어요', spaces:[2,5,6], en:"I can't eat eggs.", hint:'저는 · 계란을 · 못 · 먹어요'},
+    {chars:'우유를마시면안돼요', spaces:[3,6,7], en:"You shouldn't drink milk.", hint:'우유를 · 마시면 · 안 · 돼요'},
+    {chars:'알레르기가있어서못먹어요', spaces:[5,8,9], en:"I can't eat it because I have an allergy.", hint:'알레르기가 · 있어서 · 못 · 먹어요'},
+  ],
+};
+
+let kspUnit=0, kspIdx=0, kspClicked=[];
+
+function renderKidsSp(unit){
+  const wrap = document.getElementById('b3-sp-wrap');
+  if(!wrap) return;
+  kspUnit = unit||1;
+  kspIdx = 0;
+  kspClicked = [];
+  _kspRender();
+}
+
+function _kspRender(){
+  const wrap = document.getElementById('b3-sp-wrap');
+  if(!wrap) return;
+  const pool = KIDS_SP_DATA[kspUnit] || KIDS_SP_DATA[1];
+  const total = pool.length;
+  if(kspIdx >= total){ _kspDone(); return; }
+  const d = pool[kspIdx];
+  kspClicked = new Array(d.chars.length+1).fill(false);
+
+  const chars = [...d.chars];
+  let charHtml = '<span class="ksp-gap" data-i="0"></span>';
+  for(let i=0;i<chars.length;i++){
+    charHtml += '<span class="ksp-char">' + chars[i] + '</span>';
+    if(i < chars.length-1){
+      charHtml += '<span class="ksp-gap" data-i="'+(i+1)+'" onclick="_kspToggle('+(i+1)+')"></span>';
+    }
+  }
+
+  const pct = Math.round((kspIdx/total)*100);
+  wrap.innerHTML =
+    '<div class="card" style="max-width:500px;margin:0 auto;background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #A5D6A7;">' +
+    '<div style="font-family:\'Jua\',sans-serif;font-size:1rem;color:#2E7D32;margin-bottom:4px;text-align:center;">📏 띄어쓰기 게임 · Word Spacing</div>' +
+    '<div style="font-size:0.8rem;color:#888;margin-bottom:8px;text-align:center;">' + (kspIdx+1) + ' / ' + total + '</div>' +
+    '<div style="height:6px;background:#C8E6C9;border-radius:6px;overflow:hidden;margin-bottom:14px;">' +
+      '<div style="height:100%;width:'+pct+'%;background:var(--mint);border-radius:6px;transition:width .4s;"></div>' +
+    '</div>' +
+    '<div style="background:#fff8;border-radius:10px;padding:8px 12px;margin-bottom:12px;font-size:0.82rem;color:#555;text-align:center;">' +
+      '🇺🇸 ' + d.en +
+    '</div>' +
+    '<div id="ksp-chars" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;font-family:\'Noto Serif KR\',serif;font-size:1.6rem;font-weight:700;margin:14px 0;min-height:52px;">' +
+      charHtml +
+    '</div>' +
+    '<div id="ksp-feedback" style="min-height:28px;text-align:center;font-family:\'Jua\',sans-serif;font-size:0.92rem;margin-bottom:10px;"></div>' +
+    '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">' +
+      '<button onclick="_kspHint()" style="padding:8px 20px;background:white;border:2px solid var(--teal);color:var(--teal);border-radius:20px;font-family:\'Jua\',sans-serif;font-size:0.88rem;cursor:pointer;">💡 힌트 Hint</button>' +
+      '<button onclick="_kspCheck()" style="padding:8px 20px;background:var(--teal);color:white;border:none;border-radius:20px;font-family:\'Jua\',sans-serif;font-size:0.88rem;cursor:pointer;">✅ 확인 Check</button>' +
+    '</div>' +
+    '</div>';
+}
+
+function _kspToggle(i){
+  kspClicked[i] = !kspClicked[i];
+  const gaps = document.querySelectorAll('#ksp-chars .ksp-gap');
+  gaps.forEach(g=>{
+    const gi = parseInt(g.dataset.i);
+    if(gi===0) return;
+    g.innerHTML = kspClicked[gi]
+      ? '<span style="display:inline-block;width:10px;height:28px;background:#A5D6A7;border-radius:4px;vertical-align:middle;"></span>'
+      : '';
+  });
+  document.getElementById('ksp-feedback').innerHTML = '';
+}
+
+function _kspHint(){
+  const pool = KIDS_SP_DATA[kspUnit] || KIDS_SP_DATA[1];
+  const d = pool[kspIdx];
+  const fb = document.getElementById('ksp-feedback');
+  if(fb) fb.innerHTML = '<span style="color:#2E7D32;font-size:0.88rem;">💡 ' + d.hint + '</span>';
+}
+
+function _kspCheck(){
+  const pool = KIDS_SP_DATA[kspUnit] || KIDS_SP_DATA[1];
+  const d = pool[kspIdx];
+  const chars = [...d.chars];
+  const correct = d.spaces;
+  let ok = true;
+  for(let i=1;i<=chars.length-1;i++){
+    const shouldHave = correct.includes(i);
+    const hasIt = !!kspClicked[i];
+    if(shouldHave !== hasIt){ ok = false; break; }
+  }
+  const fb = document.getElementById('ksp-feedback');
+  if(ok){
+    if(fb) fb.innerHTML = '<span style="color:#2E7D32;">🎉 정답이에요! Correct!</span>';
+    let word = '';
+    chars.forEach((c,i)=>{ if(correct.includes(i)) word+=' '; word+=c; });
+    const charDiv = document.getElementById('ksp-chars');
+    if(charDiv) charDiv.innerHTML = '<span style="font-family:\'Noto Serif KR\',serif;font-size:1.5rem;font-weight:700;color:#1B5E20;letter-spacing:2px;">' + word.trim() + '</span>';
+    setTimeout(()=>{ kspIdx++; kspClicked=[]; _kspRender(); }, 1400);
+  } else {
+    if(fb) fb.innerHTML = '<span style="color:var(--coral);">🔄 다시 해봐요! Try again!</span>';
+    setTimeout(()=>{ if(document.getElementById('ksp-feedback')) document.getElementById('ksp-feedback').innerHTML=''; }, 1200);
+  }
+}
+
+function _kspDone(){
+  const wrap = document.getElementById('b3-sp-wrap');
+  if(!wrap) return;
+  wrap.innerHTML =
+    '<div class="card" style="text-align:center;padding:28px 16px;background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #A5D6A7;">' +
+    '<div style="font-size:2.5rem;margin-bottom:6px;">🏆</div>' +
+    '<div style="font-family:\'Jua\',sans-serif;font-size:1.2rem;color:#2E7D32;">띄어쓰기 완료!</div>' +
+    '<div style="font-size:0.88rem;color:#555;margin:6px 0 18px;">Word Spacing All done! Great job!</div>' +
+    '<button onclick="renderKidsSp(kspUnit)" style="padding:10px 26px;background:var(--mint);color:white;border:none;border-radius:20px;font-family:\'Jua\',sans-serif;font-size:0.9rem;cursor:pointer;">🔄 다시!</button>' +
+    '</div>';
 }
 
 // ══ Level 3 실생활 탭 ═════════════════════════════════

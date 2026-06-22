@@ -265,6 +265,9 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .quiz-prog-dot{width:9px;height:9px;border-radius:50%;background:var(--warm-300);transition:all .3s;}
 .quiz-prog-dot.done{background:var(--teal-md);}
 .quiz-prog-dot.current{background:var(--teal-md);transform:scale(1.2);}
+.spq-char{display:inline-block;padding:1px 0;}
+.spq-gap{display:inline-block;min-width:16px;height:34px;vertical-align:middle;cursor:pointer;}
+.spq-gap:hover{background:rgba(129,199,132,0.35);border-radius:3px;}
 .quiz-card{background:#fff;border:2px solid var(--warm-300);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm);}
 .quiz-q-num{font-size:11px;font-weight:700;color:var(--teal-md);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
 .quiz-q-text{font-size:15px;font-weight:700;color:var(--warm-900);line-height:1.6;margin-bottom:4px;font-family:var(--font-serif);}
@@ -1617,13 +1620,17 @@ function renderQuizScore(){
   const total=DATA.quiz.length;
   const pct=Math.round(quizScore/total*100);
   const msg=pct===100?'🏆 완벽해요!':pct>=80?'🌟 잘했어요!':pct>=60?'👍 좋아요!':'💪 다시 도전!';
+  const epKey=`${DATA.level}_${DATA.id}`;
+  const spPool=SP_QUIZ_POOL[epKey]||null;
+  const spSection=spPool?'<div id="spq-wrap" style="margin-top:28px;"></div>':'';
   document.getElementById('quiz-content').innerHTML=`
     <div class="quiz-score-wrap">
       <div class="quiz-score-num">${quizScore}<span style="font-size:24px;color:var(--warm-500)">/${total}</span></div>
       <div class="quiz-score-lbl">${msg}</div>
       <div style="font-size:13px;color:var(--warm-500);margin-top:8px">${pct}% 정답</div>
       <button class="quiz-retry-btn" onclick="resetQuiz()">↺ 다시 풀기</button>
-    </div>`;
+    </div>${spSection}`;
+  if(spPool){ _spqPool=spPool; _spqIdx=0; _spqClicked=[]; _spqRender(); }
 }
 function setQuizMode(mode){
   quizMode=mode;
@@ -1635,6 +1642,147 @@ function resetQuiz(){
   quizIdx=0;quizScore=0;
   document.getElementById('panel-quiz').innerHTML=buildQuiz();
   renderQuizQ();
+}
+
+// ── QUIZ SPACING GAME ────────────────────────────────
+const SP_QUIZ_POOL = {
+  'L1_ep05':[
+    {chars:'광장시장에같이가요', spaces:[5,7], en:"Let's go to Gwangjang Market together.", hint:'광장시장에 · 같이 · 가요'},
+    {chars:'버스를타고시장에가요', spaces:[3,5,8], en:'I go to the market by bus.', hint:'버스를 · 타고 · 시장에 · 가요'},
+  ],
+  'L1_ep06':[
+    {chars:'김밥하고떡볶이를먹어요', spaces:[4,8], en:'I eat gimbap and tteokbokki.', hint:'김밥하고 · 떡볶이를 · 먹어요'},
+    {chars:'김밥두인분주세요', spaces:[2,3,5], en:'Two servings of gimbap, please.', hint:'김밥 · 두 · 인분 · 주세요'},
+  ],
+  'L1_ep07':[
+    {chars:'한국어스터디그룹을만들어요', spaces:[3,6,9], en:"We're making a Korean study group.", hint:'한국어 · 스터디 · 그룹을 · 만들어요'},
+    {chars:'같이공부하고싶어요', spaces:[2,6], en:'I want to study together.', hint:'같이 · 공부하고 · 싶어요'},
+  ],
+  'L1_ep08':[
+    {chars:'내도시락어디에있어요', spaces:[1,4,7], en:'Where is my lunchbox?', hint:'내 · 도시락 · 어디에 · 있어요'},
+    {chars:'냉장고위에도없어요', spaces:[3,6], en:"It's not on top of the fridge either.", hint:'냉장고 · 위에도 · 없어요'},
+  ],
+  'L1_ep09':[
+    {chars:'딸기두박스주세요', spaces:[2,3,5], en:'Two boxes of strawberries, please.', hint:'딸기 · 두 · 박스 · 주세요'},
+    {chars:'사과열개에얼마예요', spaces:[2,3,5], en:'How much for ten apples?', hint:'사과 · 열 · 개에 · 얼마예요'},
+  ],
+  'L1_ep10':[
+    {chars:'자전거를타고공원에가요', spaces:[4,6,9], en:'I go to the park by bicycle.', hint:'자전거를 · 타고 · 공원에 · 가요'},
+    {chars:'어제한강에서자전거를탔어요', spaces:[2,6,10], en:'Yesterday I rode a bike at the Han River.', hint:'어제 · 한강에서 · 자전거를 · 탔어요'},
+  ],
+  'L1_ep11':[
+    {chars:'어서오세요집에들어오세요', spaces:[2,5,7], en:'Welcome, please come in.', hint:'어서 · 오세요 · 집에 · 들어오세요'},
+    {chars:'신발은여기에벗어놓으세요', spaces:[3,6], en:'Please take off your shoes here.', hint:'신발은 · 여기에 · 벗어놓으세요'},
+  ],
+  'L1_ep12':[
+    {chars:'내일경복궁에갈거예요', spaces:[2,6,7], en:"Tomorrow I'll go to Gyeongbokgung.", hint:'내일 · 경복궁에 · 갈 · 거예요'},
+    {chars:'한국에갈수있어요', spaces:[3,4,5], en:'I can go to Korea.', hint:'한국에 · 갈 · 수 · 있어요'},
+  ],
+  'L2_ep01':[
+    {chars:'오늘공부한문법이재미있어요', spaces:[2,5,8], en:'The grammar I studied today is interesting.', hint:'오늘 · 공부한 · 문법이 · 재미있어요'},
+    {chars:'미래가좋아하는음식이뭐예요', spaces:[3,7,10], en:'What food does Mirae like?', hint:'미래가 · 좋아하는 · 음식이 · 뭐예요'},
+  ],
+  'L2_ep02':[
+    {chars:'미래는요리를잘하는편이에요', spaces:[3,6,9], en:'Mirae tends to be good at cooking.', hint:'미래는 · 요리를 · 잘하는 · 편이에요'},
+    {chars:'비빔밥이맛있는음식이에요', spaces:[4,7], en:'Bibimbap is a delicious food.', hint:'비빔밥이 · 맛있는 · 음식이에요'},
+  ],
+  'L2_ep03':[
+    {chars:'도서관에서조용히공부해요', spaces:[5,8], en:'I study quietly at the library.', hint:'도서관에서 · 조용히 · 공부해요'},
+    {chars:'같이공부하니까이해가돼요', spaces:[2,7,10], en:'Studying together helps me understand.', hint:'같이 · 공부하니까 · 이해가 · 돼요'},
+  ],
+  'L2_ep04':[
+    {chars:'시험이끝나면쉬고싶어요', spaces:[3,6,8], en:'When the exam is over I want to rest.', hint:'시험이 · 끝나면 · 쉬고 · 싶어요'},
+    {chars:'어렵지만열심히공부하면돼요', spaces:[4,7,11], en:"It's hard but you just need to study hard.", hint:'어렵지만 · 열심히 · 공부하면 · 돼요'},
+  ],
+  'L2_ep05':[
+    {chars:'어렵지만계속하면늘어요', spaces:[4,8], en:"It's hard but keep going and you'll improve.", hint:'어렵지만 · 계속하면 · 늘어요'},
+    {chars:'오늘도열심히한국어를배웠어요', spaces:[3,6,10], en:'I studied Korean hard again today.', hint:'오늘도 · 열심히 · 한국어를 · 배웠어요'},
+  ],
+};
+
+let _spqPool=null, _spqIdx=0, _spqClicked=[];
+
+function _spqRender(){
+  const wrap=document.getElementById('spq-wrap');
+  if(!wrap||!_spqPool) return;
+  if(_spqIdx>=_spqPool.length){ _spqDone(); return; }
+  const d=_spqPool[_spqIdx];
+  const chars=[...d.chars];
+  _spqClicked=new Array(chars.length+1).fill(false);
+  let charHtml='<span class="spq-gap" data-i="0"></span>';
+  for(let i=0;i<chars.length;i++){
+    charHtml+=`<span class="spq-char">${chars[i]}</span>`;
+    if(i<chars.length-1)
+      charHtml+=`<span class="spq-gap" data-i="${i+1}" onclick="_spqToggle(${i+1})"></span>`;
+  }
+  const pct=Math.round((_spqIdx/_spqPool.length)*100);
+  wrap.innerHTML=
+    '<div style="background:linear-gradient(135deg,#E8F5E9,#F0FFF4);border:2px solid #81C784;border-radius:18px;padding:20px 16px;">'+
+    '<div style="font-size:0.9rem;font-weight:700;color:#2E7D32;margin-bottom:4px;text-align:center;">📏 띄어쓰기 연습 · Word Spacing Bonus</div>'+
+    '<div style="font-size:0.75rem;color:#888;text-align:center;margin-bottom:8px;">'+(_spqIdx+1)+' / '+_spqPool.length+'</div>'+
+    '<div style="height:5px;background:#C8E6C9;border-radius:5px;margin-bottom:14px;overflow:hidden;">'+
+      '<div style="height:100%;width:'+pct+'%;background:#43A047;border-radius:5px;transition:width .4s;"></div>'+
+    '</div>'+
+    '<div style="background:#fff9;border-radius:10px;padding:7px 14px;margin-bottom:12px;font-size:0.82rem;color:#555;text-align:center;">'+
+      '🇺🇸 '+d.en+
+    '</div>'+
+    '<div id="spq-chars" style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;font-family:\'Noto Serif KR\',serif;font-size:1.45rem;font-weight:700;color:#1B5E20;margin:12px 0;min-height:46px;">'+
+      charHtml+
+    '</div>'+
+    '<div id="spq-fb" style="min-height:22px;text-align:center;font-size:0.85rem;margin-bottom:10px;"></div>'+
+    '<div style="display:flex;gap:8px;justify-content:center;">'+
+      '<button onclick="_spqHint()" style="padding:7px 18px;background:white;border:2px solid #81C784;color:#2E7D32;border-radius:20px;font-size:0.82rem;cursor:pointer;">💡 힌트</button>'+
+      '<button onclick="_spqCheck()" style="padding:7px 18px;background:#43A047;color:white;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;">✅ 확인</button>'+
+    '</div>'+
+    '</div>';
+}
+function _spqToggle(i){
+  _spqClicked[i]=!_spqClicked[i];
+  document.querySelectorAll('#spq-chars .spq-gap').forEach(g=>{
+    const gi=parseInt(g.dataset.i);
+    if(gi===0) return;
+    g.innerHTML=_spqClicked[gi]
+      ? '<span style="display:inline-block;width:9px;height:26px;background:#A5D6A7;border-radius:3px;vertical-align:middle;"></span>'
+      : '';
+  });
+  const fb=document.getElementById('spq-fb');
+  if(fb) fb.innerHTML='';
+}
+function _spqHint(){
+  const d=_spqPool[_spqIdx];
+  const fb=document.getElementById('spq-fb');
+  if(fb) fb.innerHTML='<span style="color:#2E7D32;">💡 '+d.hint+'</span>';
+}
+function _spqCheck(){
+  const d=_spqPool[_spqIdx];
+  const chars=[...d.chars];
+  const correct=d.spaces;
+  let ok=true;
+  for(let i=1;i<chars.length;i++){
+    if(correct.includes(i)!==!!_spqClicked[i]){ok=false;break;}
+  }
+  const fb=document.getElementById('spq-fb');
+  if(ok){
+    if(fb) fb.innerHTML='<span style="color:#2E7D32;">🎉 정답! Correct!</span>';
+    let word='';
+    chars.forEach((c,i)=>{if(correct.includes(i)) word+=' '; word+=c;});
+    const cd=document.getElementById('spq-chars');
+    if(cd) cd.innerHTML='<span style="letter-spacing:3px;color:#1B5E20;">'+word.trim()+'</span>';
+    setTimeout(()=>{ _spqIdx++; _spqClicked=[]; _spqRender(); },1300);
+  } else {
+    if(fb) fb.innerHTML='<span style="color:var(--coral);">🔄 다시! Try again!</span>';
+    setTimeout(()=>{ const f=document.getElementById('spq-fb'); if(f) f.innerHTML=''; },1100);
+  }
+}
+function _spqDone(){
+  const wrap=document.getElementById('spq-wrap');
+  if(!wrap) return;
+  wrap.innerHTML=
+    '<div style="background:linear-gradient(135deg,#E8F5E9,#F0FFF4);border:2px solid #81C784;border-radius:18px;padding:20px;text-align:center;">'+
+    '<div style="font-size:2rem;margin-bottom:4px;">🌿</div>'+
+    '<div style="font-weight:700;color:#2E7D32;">띄어쓰기 완료! All done!</div>'+
+    '<button onclick="_spqIdx=0;_spqRender();" style="margin-top:12px;padding:7px 22px;background:#43A047;color:white;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;">🔄 다시</button>'+
+    '</div>';
 }
 
 // ── PRONUNCIATION ─────────────────────────────────────
