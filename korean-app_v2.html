@@ -940,6 +940,10 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .ksp-char{display:inline-block;padding:2px 1px;color:#1B5E20;}
 .ksp-gap{display:inline-block;min-width:18px;height:36px;vertical-align:middle;cursor:pointer;}
 .ksp-gap:hover{background:rgba(165,214,167,0.4);border-radius:4px;}
+.kids-shad-btn{font-size:13px;background:none;border:1.5px solid #A5D6A7;border-radius:8px;padding:2px 7px;cursor:pointer;color:#388E3C;margin-left:4px;transition:all .15s;}
+.kids-shad-btn.rec-on{background:var(--coral,#FF6B6B);color:#fff;border-color:var(--coral,#FF6B6B);}
+.kids-shad-res{display:none;font-size:0.8rem;color:#1B5E20;background:#E8F5E9;border-radius:6px;padding:3px 9px;margin-top:3px;font-family:'Jua',sans-serif;}
+
 .b3-psec{display:none;}
 .b3-psec.active{display:block;}
 .b3-fill-item{background:#fafafa;border-radius:14px;padding:16px 20px;margin-bottom:12px;border:1.5px solid #eee;}
@@ -5706,12 +5710,14 @@ function renderB3Practice() {
     '<div class="b3-prac-tabs">' +
     '<button class="b3-ptab active" onclick="b3PTab(this,\'prac\')">🎭 연습</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'listen\')">🔊 듣기</button>' +
+    '<button class="b3-ptab" onclick="b3PTab(this,\'reading\')">📖 읽기</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'write\')">✏️ 쓰기</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'step1\')">🧩 문장 1</button>' +
     '<button class="b3-ptab" onclick="b3PTab(this,\'step2\')">🧩 문장 2</button>' +
     '</div>' +
     '<div class="b3-psec active" id="b3-p-prac">'+pracHTML+'</div>' +
     '<div class="b3-psec" id="b3-p-listen">'+listenHTML+'</div>' +
+    '<div class="b3-psec" id="b3-p-reading"><div id="b3-reading-wrap"></div></div>' +
     '<div class="b3-psec" id="b3-p-write"><div id="b3-write-wrap"></div><div id="b3-sp-wrap" style="margin-top:20px;"></div></div>' +
     '<div class="b3-psec" id="b3-p-step1"><div id="b3-s1-wrap"></div></div>' +
     '<div class="b3-psec" id="b3-p-step2"><div id="b3-s2-wrap"></div></div>' +
@@ -5848,6 +5854,7 @@ function b3PTab(btn,sec) {
   card.querySelectorAll('.b3-psec').forEach(s=>s.classList.remove('active'));
   const el = card.querySelector('#b3-p-'+sec);
   if(el) el.classList.add('active');
+  if(sec==='reading'){ renderKidsReading(b3CurrentUnit); }
   if(sec==='write'){ b3WriteInit(); renderKidsSp(b3CurrentUnit); }
 }
 
@@ -6079,6 +6086,217 @@ function _kspDone(){
     '<div style="font-size:0.88rem;color:#555;margin:6px 0 18px;">Word Spacing All done! Great job!</div>' +
     '<button onclick="renderKidsSp(kspUnit)" style="padding:10px 26px;background:var(--mint);color:white;border:none;border-radius:20px;font-family:\'Jua\',sans-serif;font-size:0.9rem;cursor:pointer;">🔄 다시!</button>' +
     '</div>';
+}
+
+// ══ Kids Audio Recorder (🎙️) ════════════════════════════
+let _kRec = {stream:null, recorder:null, chunks:[], blobURL:null, recording:false, activeId:null};
+
+function kidsRecCleanup() {
+  const r = _kRec;
+  if (r.recording) { try { r.recorder.stop(); } catch(e) {} }
+  if (r.stream) { r.stream.getTracks().forEach(t => t.stop()); r.stream = null; }
+  if (r.blobURL) { URL.revokeObjectURL(r.blobURL); r.blobURL = null; }
+  r.recording = false; r.chunks = []; r.recorder = null;
+  if (r.activeId) {
+    const sb = document.getElementById(r.activeId);
+    if (sb) { sb.textContent = '🎙️'; sb.classList.remove('rec-on'); }
+    r.activeId = null;
+  }
+}
+
+async function kidsRecToggle(btnId) {
+  const sb = document.getElementById(btnId);
+  if (!sb) return;
+  const r = _kRec;
+  // Has recording → play back
+  if (!r.recording && r.blobURL) {
+    const a = new Audio(r.blobURL);
+    sb.textContent = '▶'; sb.disabled = true;
+    a.onended = () => {
+      URL.revokeObjectURL(r.blobURL); r.blobURL = null;
+      sb.textContent = '🎙️'; sb.disabled = false; r.activeId = null;
+    };
+    a.play(); return;
+  }
+  // Recording → stop
+  if (r.recording && r.activeId === btnId) {
+    try { r.recorder.stop(); } catch(e) {} return;
+  }
+  // Another button was recording → clean up first
+  if (r.recording) kidsRecCleanup();
+  // Idle → start
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert('마이크를 사용할 수 없어요.\n(HTTPS 또는 localhost 필요)'); return;
+  }
+  try {
+    r.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    r.chunks = []; r.activeId = btnId;
+    r.recorder = new MediaRecorder(r.stream);
+    r.recorder.ondataavailable = e => { if (e.data && e.data.size) r.chunks.push(e.data); };
+    r.recorder.onstop = () => {
+      r.blobURL = URL.createObjectURL(new Blob(r.chunks, { type: 'audio/webm' }));
+      r.recording = false;
+      if (r.stream) { r.stream.getTracks().forEach(t => t.stop()); r.stream = null; }
+      const sb2 = document.getElementById(btnId);
+      if (sb2) { sb2.textContent = '👂'; sb2.classList.remove('rec-on'); }
+    };
+    r.recorder.start(); r.recording = true;
+    sb.textContent = '⏹'; sb.classList.add('rec-on');
+  } catch(e) {
+    alert('마이크 권한이 필요해요. 브라우저 주소창 옆 🔒 아이콘을 확인해보세요.');
+  }
+}
+
+// ══ HQ Kids Shadowing ═══════════════════════════════════
+let _kShad = null;
+function kidsShad(btn, targetText, resultDivId) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { alert('Chrome 브라우저에서만 사용할 수 있어요.\nChrome browser required.'); return; }
+  if (_kShad) {
+    try { _kShad.stop(); } catch(e) {}
+    _kShad = null;
+    btn.textContent = '🎤'; btn.classList.remove('rec-on');
+    return;
+  }
+  const rec = new SR();
+  _kShad = rec;
+  rec.lang = 'ko-KR';
+  rec.interimResults = true;
+  rec.maxAlternatives = 1;
+  btn.textContent = '⏹'; btn.classList.add('rec-on');
+  let final = '';
+  rec.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) final += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
+    }
+    const el = document.getElementById(resultDivId);
+    if (el) { el.style.display = 'block'; el.innerHTML = '🎤 <strong>' + (final||interim||'...') + '</strong>'; }
+  };
+  rec.onend = () => {
+    _kShad = null; btn.textContent = '🎤'; btn.classList.remove('rec-on');
+    const el = document.getElementById(resultDivId);
+    if (el && !final) { el.style.display = 'block'; el.innerHTML = '🎤 <span style="color:#aaa">(다시 해보세요)</span>'; }
+    else if (el && final) { el.innerHTML = '🎤 <strong>' + final + '</strong> <span style="color:#aaa;font-size:0.75rem">| 원문: ' + targetText + '</span>'; }
+  };
+  rec.onerror = () => { _kShad = null; btn.textContent = '🎤'; btn.classList.remove('rec-on'); };
+  try { rec.start(); } catch(e) { _kShad = null; btn.textContent = '🎤'; btn.classList.remove('rec-on'); }
+}
+
+// ══ HQ Kids L3 읽기 지문 ═══════════════════════════════════
+const KIDS_READING_L3 = {
+  1: {
+    passage: '아빠 곰은 커요. 엄마 곰은 중간이에요. 아기 곰은 아주 작아요. 세 마리 곰이 숲에 살아요. 아기 곰이 정말 귀여워요.',
+    passage_en: 'Papa Bear is big. Mama Bear is medium. Baby Bear is very small. Three bears live in the forest. Baby Bear is really cute.',
+    questions: [
+      { q: '아기 곰은 어때요?', q_en: 'How is Baby Bear?', options: ['커요', '중간이에요', '아주 작아요'], answer: 2 },
+      { q: '곰들은 어디에 살아요?', q_en: 'Where do the bears live?', options: ['산', '숲', '바다'], answer: 1 },
+    ]
+  },
+  2: {
+    passage: '오늘 저녁에 카요가 엄마한테 물었어요. "오늘 저녁에 뭘 먹어요?" 엄마가 말했어요. "피자 먹을까?" 카요는 피자를 좋아해요. 카요가 행복했어요.',
+    passage_en: 'In the evening Kayo asked mom, "What do we eat tonight?" Mom said, "Shall we have pizza?" Kayo loves pizza. Kayo was happy.',
+    questions: [
+      { q: '카요는 무엇을 좋아해요?', q_en: 'What does Kayo like?', options: ['김밥', '피자', '라면'], answer: 1 },
+      { q: '카요는 누구한테 물었어요?', q_en: 'Who did Kayo ask?', options: ['아빠', '친구', '엄마'], answer: 2 },
+    ]
+  },
+  3: {
+    passage: '리아가 마법 열쇠를 찾아요. 탁자 위에 없어요. 의자 옆에도 없어요. 리아가 가방 안을 봤어요. 열쇠가 가방 안에 있었어요! 리아가 기뻤어요.',
+    passage_en: 'Ria is looking for the magic key. It\'s not on the table. It\'s not next to the chair either. Ria looked inside the bag. The key was in the bag! Ria was happy.',
+    questions: [
+      { q: '열쇠가 어디에 있었어요?', q_en: 'Where was the key?', options: ['탁자 위', '의자 옆', '가방 안'], answer: 2 },
+      { q: '리아의 기분이 어땠어요?', q_en: 'How did Ria feel?', options: ['슬펐어요', '기뻤어요', '화났어요'], answer: 1 },
+    ]
+  },
+  4: {
+    passage: '내일은 토요일이에요. 미래는 친구하고 공원에 갈 거예요. 공원에서 아이스크림을 먹을 거예요. 날씨가 좋으면 좋겠어요. 미래는 기대가 돼요.',
+    passage_en: 'Tomorrow is Saturday. Mirae will go to the park with a friend. They will eat ice cream at the park. She hopes the weather will be nice. Mirae is excited.',
+    questions: [
+      { q: '미래는 내일 어디에 갈 거예요?', q_en: 'Where will Mirae go tomorrow?', options: ['학교', '공원', '도서관'], answer: 1 },
+      { q: '미래는 공원에서 뭘 먹을 거예요?', q_en: 'What will Mirae eat at the park?', options: ['피자', '김밥', '아이스크림'], answer: 2 },
+    ]
+  },
+  5: {
+    passage: '어제 카요하고 친구가 레모네이드를 팔았어요. 레모네이드가 맛있었어요. 사람들이 많이 샀어요. 카요가 행복했어요. 내일도 또 팔 거예요.',
+    passage_en: 'Yesterday Kayo and a friend sold lemonade. The lemonade was delicious. Many people bought it. Kayo was happy. They will sell again tomorrow.',
+    questions: [
+      { q: '어제 카요가 뭘 팔았어요?', q_en: 'What did Kayo sell yesterday?', options: ['주스', '레모네이드', '쿠키'], answer: 1 },
+      { q: '내일은 어떻게 할 거예요?', q_en: 'What will they do tomorrow?', options: ['쉴 거예요', '또 팔 거예요', '학교에 갈 거예요'], answer: 1 },
+    ]
+  },
+  6: {
+    passage: '미래는 계란을 못 먹어요. 알레르기가 있어요. 우유도 마시면 안 돼요. 친구들이 알아요. 친구들이 도와줘요. 미래는 다른 음식을 먹어요.',
+    passage_en: 'Mirae cannot eat eggs. She has an allergy. She cannot drink milk either. Her friends know. Her friends help her. Mirae eats other food.',
+    questions: [
+      { q: '미래는 왜 계란을 못 먹어요?', q_en: 'Why can Mirae not eat eggs?', options: ['싫어해서', '알레르기가 있어서', '비싸서'], answer: 1 },
+      { q: '미래는 어떻게 해요?', q_en: 'What does Mirae do?', options: ['조금만 먹어요', '다른 음식을 먹어요', '안 먹어요'], answer: 1 },
+    ]
+  },
+};
+
+let _kRdQIdx = 0;
+function renderKidsReading(unit) {
+  const wrap = document.getElementById('b3-reading-wrap');
+  if (!wrap) return;
+  const d = KIDS_READING_L3[unit];
+  if (!d) {
+    wrap.innerHTML = '<div style="color:#aaa;text-align:center;padding:24px;">📖 이 과의 읽기 지문은 준비 중이에요.</div>';
+    return;
+  }
+  _kRdQIdx = 0;
+  _kRdShowQ(d, wrap);
+}
+
+function _kRdShowQ(d, wrap) {
+  const q = d.questions[_kRdQIdx];
+  const total = d.questions.length;
+  const passageHtml = _kRdQIdx === 0
+    ? '<div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #A5D6A7;border-radius:14px;padding:16px;margin-bottom:14px;">'
+      + '<div style="font-size:11px;font-weight:700;color:#388E3C;letter-spacing:1px;margin-bottom:8px;">📖 읽기 · Reading</div>'
+      + '<div style="background:#fff;border-radius:10px;padding:12px 14px;font-family:\'Jua\',sans-serif;font-size:1rem;line-height:1.8;color:#2E3B2E;border:1px solid #C8E6C9;margin-bottom:8px;">' + d.passage + '</div>'
+      + '<div style="font-size:11px;color:#81C784;font-style:italic;">' + d.passage_en + '</div>'
+      + '</div>'
+    : '';
+  wrap.innerHTML = passageHtml
+    + '<div style="background:#fff;border:1.5px solid #C8E6C9;border-radius:12px;padding:16px;">'
+    + '<div style="font-size:11px;color:#66BB6A;margin-bottom:6px;">Q' + (_kRdQIdx+1) + ' / ' + total + '</div>'
+    + '<div style="font-family:\'Jua\',sans-serif;font-size:1rem;color:#1B5E20;margin-bottom:6px;">' + q.q + '</div>'
+    + '<div style="font-size:11px;color:#aaa;margin-bottom:12px;">' + q.q_en + '</div>'
+    + '<div style="display:flex;flex-direction:column;gap:8px;" id="krd-opts">'
+    + q.options.map((opt, i) =>
+        '<button onclick="_kRdChoose(' + i + ')" data-i="' + i + '" style="background:#F1F8E9;border:2px solid #C8E6C9;border-radius:10px;padding:10px 14px;font-family:\'Jua\',sans-serif;font-size:0.95rem;cursor:pointer;text-align:left;">' + opt + '</button>'
+      ).join('')
+    + '</div><div id="krd-fb" style="min-height:24px;margin-top:8px;"></div>'
+    + '</div>';
+  window._kRdD = d;
+}
+
+function _kRdChoose(idx) {
+  const d = window._kRdD;
+  const q = d.questions[_kRdQIdx];
+  const opts = document.querySelectorAll('#krd-opts button');
+  opts.forEach(b => b.style.pointerEvents = 'none');
+  const correct = idx === q.answer;
+  opts[idx].style.background = correct ? '#C8E6C9' : '#FFCDD2';
+  opts[idx].style.borderColor = correct ? '#4CAF50' : '#EF9A9A';
+  opts[q.answer].style.background = '#C8E6C9';
+  opts[q.answer].style.borderColor = '#4CAF50';
+  const fb = document.getElementById('krd-fb');
+  if (fb) fb.innerHTML = correct
+    ? '<span style="color:#2E7D32;font-weight:700;font-family:\'Jua\',sans-serif;">✅ 맞아요!</span>'
+    : '<span style="color:#C62828;font-weight:700;font-family:\'Jua\',sans-serif;">❌ 다시 봐요!</span>';
+  const wrap = document.getElementById('b3-reading-wrap');
+  setTimeout(() => {
+    if (_kRdQIdx + 1 < d.questions.length) {
+      _kRdQIdx++;
+      _kRdShowQ(d, wrap);
+    } else {
+      wrap.innerHTML += '<div style="text-align:center;margin-top:16px;font-family:\'Jua\',sans-serif;font-size:1.1rem;color:#2E7D32;">🎉 읽기 완료! Great job!</div>'
+        + '<div style="text-align:center;margin-top:8px;"><button onclick="renderKidsReading(b3CurrentUnit)" style="padding:8px 24px;background:var(--teal);color:#fff;border:none;border-radius:20px;font-family:\'Jua\',sans-serif;cursor:pointer;">🔄 다시</button></div>';
+    }
+  }, 1000);
 }
 
 // ══ Level 3 실생활 탭 ═════════════════════════════════
@@ -10252,14 +10470,19 @@ function b3SceneTo(idx) {
   box.innerHTML = lines.map((ln, li) => {
     const recId = 'b3-rec-'+idx+'-'+li;
     const recBtn = '<button class="u2-rec-btn" id="'+recId+'" onclick="kidsRecToggle(\''+recId+'\')">🎙️</button>';
+    const shadId = 'b3-shad-'+idx+'-'+li;
+    const shadResId = 'b3-shad-res-'+idx+'-'+li;
+    const escapedKo = ln.ko.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    const shadBtn = '<button class="kids-shad-btn" id="'+shadId+'" data-target="'+escapedKo+'" data-res="'+shadResId+'" onclick="kidsShad(this,this.dataset.target,this.dataset.res)" title="따라 말하기 · Shadowing">🎤</button>';
     return '<div class="u2-script-line">' +
     (ln.audio
       ? '<button class="u2-script-play" onclick="b3ScenePlay(' + idx + ',' + li + ')" aria-label="재생">▶</button>'
       : '<button class="u2-script-play" onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\\'") + '\')" aria-label="TTS">🔊</button>') +
-    recBtn +
+    recBtn + shadBtn +
     '<span class="u2-script-ko">' + ln.ko + '</span>' +
     '<span class="u2-script-en">' + ln.en + '</span>' +
-    '</div>';
+    '</div>' +
+    '<div class="kids-shad-res" id="'+shadResId+'"></div>';
   }).join('');
 }
 
@@ -11254,9 +11477,4 @@ function selectUnit3(n){ _kidsShowWarmup(3, n, ()=>switchBook3Unit(n)); }
   <div class="kids-idx-body" id="kids-idx-body">
     <div style="text-align:center;padding:40px;color:#aaa;font-family:Jua,sans-serif;">로딩 중…</div>
   </div>
-  <div class="kids-idx-page-ctrl" id="kids-idx-page-ctrl" style="display:none;"></div>
-</div>
-
-
-</body>
-</html>
+  <div class="kids-idx-
