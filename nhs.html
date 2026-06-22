@@ -228,6 +228,17 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .wu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:950;display:none;align-items:center;justify-content:center;padding:24px 16px;}
 .wu-overlay.open{display:flex;}
 .wu-modal{background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3);padding:36px 32px;}
+.fc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:960;display:none;align-items:center;justify-content:center;padding:24px 16px;}
+.fc-overlay.open{display:flex;}
+.fc-modal{background:#fff;border-radius:20px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3);padding:32px 28px;}
+.fc-scene{perspective:700px;width:100%;height:210px;cursor:pointer;user-select:none;-webkit-user-select:none;}
+.fc-card{width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.45s;position:relative;}
+.fc-card.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;}
+.fc-front{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border:2px solid var(--teal);}
+.fc-back{background:linear-gradient(135deg,#fefce8,#fef9c3);border:2px solid var(--amber);transform:rotateY(180deg);}
+.fc-sidebar-btn{width:100%;padding:11px 14px;background:linear-gradient(135deg,var(--teal),#0d9488);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;transition:opacity 0.2s;margin-top:8px;}
+.fc-sidebar-btn:hover{opacity:0.88;}
 .idx-header{background:var(--teal-md);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .idx-header h2{font-size:15px;font-weight:700;margin:0;}
 .idx-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
@@ -695,10 +706,16 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 <div class="wu-overlay" id="wu-overlay">
   <div class="wu-modal" id="wu-modal"></div>
 </div>
+<div class="fc-overlay" id="fc-overlay">
+  <div class="fc-modal" id="fc-modal"></div>
+</div>
 <div class="main-layout">
   <div class="sidebar">
     <div class="sidebar-hdr">📺 Episodes</div>
     <div id="ep-list"></div>
+    <div style="padding:4px 2px 2px;">
+      <button class="fc-sidebar-btn" onclick="openFlashcards()">🃏 복습 플래시카드</button>
+    </div>
   </div>
   <div class="content-area" id="content-area">
     <div class="loading">⏳ 로딩 중…</div>
@@ -2862,6 +2879,80 @@ function _wuCloseModal(){ document.getElementById('wu-overlay').classList.remove
 async function _wuGo(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
 async function _wuSkip(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
 
+
+// ══ Flashcard System ══════════════════════════════════════
+let _fcCards=[],_fcIdx=0,_fcFlipped=false;
+
+async function openFlashcards(){
+  document.getElementById('fc-overlay').classList.add('open');
+  document.getElementById('fc-modal').innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div><div style="font-size:15px;color:var(--warm-600);">단어 불러오는 중...<br><small>Loading vocabulary...</small></div></div>';
+  const lv=(typeof curLevel!=='undefined'&&curLevel)||'L1';
+  const eps=lv==='L1'?L1_EPISODES:L2_EPISODES;
+  const cards=[];
+  await Promise.all(eps.filter(ep=>!ep.disabled).map(async(ep)=>{
+    const epKey=lv+'_'+ep.id;
+    let data=EPISODE_DATA[epKey];
+    if(!data){
+      try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json');if(r.ok){data=await r.json();EPISODE_DATA[epKey]=data;}}catch(e){return;}
+    }
+    if(!data||!data.vocab)return;
+    data.vocab.forEach(cat=>{
+      (cat.items||[]).forEach(item=>{
+        if(!item.korean||!item.english)return;
+        cards.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',note:item.note||'',ep:ep.label,cat:(cat.category||'').replace(/^[\u{1F300}-\u{1FAD6}\s]+/u,'').trim()});
+      });
+    });
+  }));
+  _fcCards=shuffleArr(cards);_fcIdx=0;_fcFlipped=false;
+  _renderFC();
+}
+
+function _fcClose(){document.getElementById('fc-overlay').classList.remove('open');}
+function _fcShuffle(){_fcCards=shuffleArr([..._fcCards]);_fcIdx=0;_fcFlipped=false;_renderFC();}
+function _fcFlip(){_fcFlipped=!_fcFlipped;const c=document.getElementById('fc-card-inner');if(c)c.classList.toggle('flipped',_fcFlipped);}
+function _fcPrev(){if(_fcIdx>0){_fcIdx--;_fcFlipped=false;_renderFC();}}
+function _fcNext(){if(_fcIdx<_fcCards.length-1){_fcIdx++;_fcFlipped=false;_renderFC();}}
+
+function _renderFC(){
+  const m=document.getElementById('fc-modal');if(!m)return;
+  if(!_fcCards.length){m.innerHTML='<div style="text-align:center;padding:40px;color:var(--warm-600);">단어가 없어요 😊</div>';return;}
+  const c=_fcCards[_fcIdx],total=_fcCards.length;
+  const pct=total>1?Math.round((_fcIdx/(total-1))*100):100;
+  const catClean=c.cat.replace(/^[\u{1F300}-\u{1FAD6} ]+/u,'').trim();
+  const prevDis=_fcIdx===0,nextDis=_fcIdx===total-1;
+  const btnStyle=(dis,active)=>
+    `padding:12px 22px;border:2px solid ${dis?'var(--gray-100)':active?'var(--teal)':'var(--gray-200)'};border-radius:12px;background:${active&&!dis?'var(--teal)':'#fff'};font-size:15px;cursor:${dis?'default':'pointer'};color:${dis?'var(--gray-300)':active?'#fff':'var(--gray-700)'};font-weight:700;transition:all 0.15s;`;
+  m.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">'
+    +'<div style="font-size:19px;font-weight:800;color:var(--gray-900);">🃏 복습 플래시카드</div>'
+    +'<button onclick="_fcClose()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--warm-400);line-height:1;">✕</button>'
+    +'</div>'
+    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">'
+    +'<div style="font-size:12px;color:var(--warm-500);white-space:nowrap;">'+(_fcIdx+1)+' / '+total+'</div>'
+    +'<div style="flex:1;height:5px;background:var(--gray-100);border-radius:3px;"><div style="height:100%;width:'+pct+'%;background:var(--teal);border-radius:3px;transition:width 0.3s;"></div></div>'
+    +'<button onclick="_fcShuffle()" style="background:none;border:1.5px solid var(--gray-200);border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--warm-500);">🔀 섞기</button>'
+    +'</div>'
+    +'<div class="fc-scene" onclick="_fcFlip()">'
+    +'<div class="fc-card" id="fc-card-inner">'
+    +'<div class="fc-face fc-front">'
+    +'<div style="font-size:46px;margin-bottom:10px;">'+esc(c.emoji)+'</div>'
+    +'<div style="font-size:30px;font-weight:800;color:var(--gray-900);letter-spacing:-0.5px;">'+esc(c.korean)+'</div>'
+    +'<div style="font-size:12px;color:var(--teal);margin-top:14px;opacity:0.7;">👆 탭해서 뒤집기</div>'
+    +'</div>'
+    +'<div class="fc-face fc-back">'
+    +'<div style="font-size:22px;font-weight:800;color:var(--gray-900);margin-bottom:6px;">'+esc(c.english)+'</div>'
+    +(c.rom?'<div style="font-size:14px;color:var(--teal);margin-bottom:6px;">'+esc(c.rom)+'</div>':'')
+    +(c.note?'<div style="font-size:12px;color:var(--warm-500);max-width:270px;">'+esc(c.note)+'</div>':'')
+    +'<div style="margin-top:10px;font-size:11px;color:var(--warm-400);">📺 '+esc(c.ep)+(catClean?' · '+esc(catClean):'')+'</div>'
+    +'</div>'
+    +'</div>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">'
+    +'<button onclick="_fcPrev()" '+(prevDis?'disabled':'')+' style="'+btnStyle(prevDis,false)+'">← 이전</button>'
+    +'<div style="font-size:12px;color:var(--warm-400);">'+(total>1?'카드 '+(_fcIdx+1):'')+'</div>'
+    +'<button onclick="_fcNext()" '+(nextDis?'disabled':'')+' style="'+btnStyle(nextDis,true)+'">다음 →</button>'
+    +'</div>';
+}
 
 const VERB_DATA=[
   {dict:'하다',rom:'hada',mean:'to do',haeyo:'해요',haeyoRom:'haeyo',neg:'안 해요',negRom:'an haeyo'},
