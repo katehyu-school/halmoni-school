@@ -2263,6 +2263,7 @@ const BASICS_TOPICS = [
   {id:'honorifics',icon:'🙇', label:'한국의 호칭 문화',   en:'Korean Titles & Address'},
   {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice'},
   {id:'speaking',  icon:'🎤', label:'발음 & 스피킹',    en:'Pronunciation & Speaking'},
+  {id:'spacing',   icon:'📏', label:'띄어쓰기',          en:'Word Spacing'},
 ];
 
 let curBasicsTopic = 'hangul';
@@ -2622,9 +2623,11 @@ function loadBasics(topicId){
   if(topicId==='speaking')  body.innerHTML=buildSpeaking();
   if(topicId==='questions') body.innerHTML=buildQuestions();
   if(topicId==='honorifics')body.innerHTML=buildHonorifics();
+  if(topicId==='spacing')  body.innerHTML=buildSpacing();
   if(topicId==='hangul')  requestAnimationFrame(()=>updateSylResult());
   if(topicId==='writing') requestAnimationFrame(()=>initWritingCanvas());
   if(topicId==='verbs')   requestAnimationFrame(()=>renderVerbGame());
+  if(topicId==='spacing') requestAnimationFrame(()=>renderSpGame());
 }
 
 function switchBtab(pfx,tabId){
@@ -3372,6 +3375,157 @@ function buildSpeaking(){
       +'<div style="font-size:12.5px;color:var(--warm-500);margin-top:2px;margin-bottom:10px;">'+c.en+'</div>'
       +'<button class="speak-tts-btn" onclick="speakTTS(\''+c.kr+'\')">🔊 듣기</button>'
       +'</div>').join('');
+}
+
+
+// ══════════════════════════════════════════════════════
+// ── 띄어쓰기 (WORD SPACING) GAME ───────────────────────
+// ══════════════════════════════════════════════════════
+const SP_DATA = [
+  {chars:'나는한국어를배워요',  spaces:[2,6], en:'I am learning Korean.', hint:'나는 · 한국어를 · 배워요'},
+  {chars:'저는밥을먹어요',      spaces:[2,4], en:'I eat rice.',           hint:'저는 · 밥을 · 먹어요'},
+  {chars:'오늘날씨가좋아요',    spaces:[2,5], en:"Today\'s weather is nice.", hint:'오늘 · 날씨가 · 좋아요'},
+  {chars:'저는한국사람이에요',  spaces:[2,4], en:'I am Korean.',          hint:'저는 · 한국 · 사람이에요'},
+  {chars:'공원에서자전거를타요', spaces:[4,8], en:'I ride a bicycle in the park.', hint:'공원에서 · 자전거를 · 타요'},
+  {chars:'어제친구하고공원에갔어요', spaces:[2,6,9], en:'Yesterday I went to the park with a friend.', hint:'어제 · 친구하고 · 공원에 · 갔어요'},
+  {chars:'내일도서관에서공부할거예요', spaces:[2,7,10], en:'Tomorrow I will study at the library.', hint:'내일 · 도서관에서 · 공부할 · 거예요'},
+  {chars:'이음식이정말맛있어요', spaces:[1,4,6], en:'This food is really delicious.', hint:'이 · 음식이 · 정말 · 맛있어요'},
+  {chars:'할머니께서요리를하세요', spaces:[5,8], en:'Grandmother is cooking (honorific).', hint:'할머니께서 · 요리를 · 하세요'},
+  {chars:'한국어공부가재미있어요', spaces:[3,6], en:'Korean study is fun.', hint:'한국어 · 공부가 · 재미있어요'},
+];
+let spIdx=0, spUserSpaces=[], spChecked=false;
+
+function renderSpGame(){
+  const box=document.getElementById('sp-game-box');
+  if(!box)return;
+  const d=SP_DATA[spIdx];
+  const chars=[...d.chars];
+  spUserSpaces=[];
+  spChecked=false;
+  let row='<div class="sp-char-row">';
+  row+='<span class="sp-char">'+chars[0]+'</span>';
+  for(let i=1;i<chars.length;i++){
+    row+='<button class="sp-gap" id="spg-'+i+'" onclick="toggleSpGap('+i+')"></button>';
+    row+='<span class="sp-char">'+chars[i]+'</span>';
+  }
+  row+='</div>';
+  box.innerHTML=
+    '<div class="sp-progress">'+SP_DATA.map((_,i)=>'<span class="sp-dot'+(i===spIdx?' sp-dot-cur':'')+'">&bull;</span>').join('')+'</div>'
+    +'<div class="sp-en-label">'+d.en+'</div>'
+    +'<div class="sp-hint-label">어디에 띄어야 할까요? Click between characters to add a space.</div>'
+    +row
+    +'<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">'
+    +'<button class="sp-check-btn" id="sp-check-btn" onclick="checkSpGame()">확인 Check ✓</button>'
+    +'</div>'
+    +'<div id="sp-feedback" style="margin-top:14px;"></div>';
+}
+
+function toggleSpGap(idx){
+  if(spChecked)return;
+  const btn=document.getElementById('spg-'+idx);
+  if(!btn)return;
+  const pos=spUserSpaces.indexOf(idx);
+  if(pos===-1){
+    spUserSpaces.push(idx);
+    btn.classList.add('sp-gap-on');
+    btn.textContent='|';
+  } else {
+    spUserSpaces.splice(pos,1);
+    btn.classList.remove('sp-gap-on');
+    btn.textContent='';
+  }
+}
+
+function checkSpGame(){
+  if(spChecked)return;
+  spChecked=true;
+  const d=SP_DATA[spIdx];
+  const correct=d.spaces;
+  const chars=[...d.chars];
+  let allRight=true;
+  // Color each gap
+  for(let i=1;i<chars.length;i++){
+    const btn=document.getElementById('spg-'+i);
+    if(!btn)continue;
+    const userHas=spUserSpaces.includes(i);
+    const shouldHave=correct.includes(i);
+    if(shouldHave&&userHas){
+      btn.classList.add('sp-gap-correct');btn.textContent='|';
+    } else if(shouldHave&&!userHas){
+      btn.classList.add('sp-gap-miss');btn.textContent='|'; allRight=false;
+    } else if(!shouldHave&&userHas){
+      btn.classList.add('sp-gap-wrong');allRight=false;
+    }
+  }
+  const fb=document.getElementById('sp-feedback');
+  if(allRight){
+    fb.innerHTML='<div class="sp-result-ok">🎉 정답! · Correct!</div>'
+      +'<div class="sp-hint-reveal">'+d.hint+'</div>';
+    setTimeout(()=>nextSpGame(), 1800);
+  } else {
+    fb.innerHTML='<div class="sp-result-no">다시 확인해 보세요. · Check again!</div>'
+      +'<div class="sp-hint-reveal">정답: '+d.hint+'</div>'
+      +'<button class="sp-next-btn" onclick="nextSpGame()">다음 →</button>';
+  }
+  const cb=document.getElementById('sp-check-btn');
+  if(cb)cb.disabled=true;
+}
+
+function nextSpGame(){
+  spIdx=(spIdx+1)%SP_DATA.length;
+  renderSpGame();
+}
+
+function buildSpacing(){
+  return '<style>'
+    +'.sp-rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:24px;}'
+    +'.sp-rule{background:#fff;border:2px solid var(--gray-200);border-radius:12px;padding:14px 16px;}'
+    +'.sp-rule-num{display:inline-block;background:var(--teal);color:#fff;border-radius:50%;width:22px;height:22px;font-size:12px;font-weight:700;text-align:center;line-height:22px;margin-right:8px;}'
+    +'.sp-rule-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:6px;}'
+    +'.sp-rule-ex{font-size:13px;color:var(--warm-700);background:var(--gray-100);border-radius:6px;padding:6px 10px;margin-top:6px;}'
+    +'.sp-rule-ex span{color:var(--teal);font-weight:700;}'
+    +'.sp-game-wrap{background:#fff;border:2px solid var(--teal);border-radius:14px;padding:20px 22px;}'
+    +'.sp-progress{display:flex;gap:6px;margin-bottom:14px;}'
+    +'.sp-dot{font-size:20px;color:var(--gray-300);}'
+    +'.sp-dot-cur{color:var(--teal);}'
+    +'.sp-en-label{font-size:15px;font-weight:600;color:var(--gray-900);margin-bottom:4px;}'
+    +'.sp-hint-label{font-size:12px;color:var(--warm-500);margin-bottom:14px;}'
+    +'.sp-char-row{display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin-bottom:4px;}'
+    +'.sp-char{display:inline-flex;align-items:center;justify-content:center;width:42px;height:48px;background:var(--gray-100);border-radius:8px;font-size:22px;font-weight:700;color:var(--gray-900);}'
+    +'.sp-gap{display:inline-flex;align-items:center;justify-content:center;width:20px;height:48px;background:none;border:2px dashed transparent;border-radius:6px;cursor:pointer;font-size:18px;font-weight:700;color:var(--teal);transition:background 0.15s,border-color 0.15s;}'
+    +'.sp-gap:hover{border-color:var(--teal);background:rgba(0,128,128,0.07);}'
+    +'.sp-gap-on{border-color:var(--teal)!important;background:rgba(0,128,128,0.12)!important;color:var(--teal);}'
+    +'.sp-gap-correct{border-color:#22c55e!important;background:rgba(34,197,94,0.15)!important;color:#16a34a!important;}'
+    +'.sp-gap-miss{border-color:#f59e0b!important;background:rgba(245,158,11,0.15)!important;color:#b45309!important;}'
+    +'.sp-gap-wrong{border-color:#ef4444!important;background:rgba(239,68,68,0.15)!important;color:#dc2626!important;text-decoration:line-through;}'
+    +'.sp-check-btn{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:14px;font-weight:700;cursor:pointer;}'
+    +'.sp-check-btn:disabled{opacity:0.5;cursor:default;}'
+    +'.sp-next-btn{background:var(--amber);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;}'
+    +'.sp-result-ok{font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px;}'
+    +'.sp-result-no{font-size:14px;font-weight:700;color:#ef4444;margin-bottom:6px;}'
+    +'.sp-hint-reveal{font-size:15px;color:var(--teal);font-weight:700;margin-bottom:8px;letter-spacing:0.5px;}'
+    +'</style>'
+    +'<div class="basics-intro">한국어는 <strong>어절 단위</strong>로 띄어 씁니다.<br>'
+    +'<em>Korean uses <strong>word-block (어절)</strong> spacing — each grammatical unit gets its own space.</em></div>'
+    // Rule cards
+    +'<div class="sp-rule-grid">'
+    +'<div class="sp-rule"><div class="sp-rule-title"><span class="sp-rule-num">1</span>조사는 앞말에 붙여 씀 · Particles attach to nouns</div>'
+    +'<div class="sp-rule-ex">저는 / 한국에서 / 밥을 / 먹어요<br><span>은/는·이/가·을/를·에서·에·도…</span> → no space before them</div></div>'
+    +'<div class="sp-rule"><div class="sp-rule-title"><span class="sp-rule-num">2</span>어미는 동사에 붙여 씀 · Verb endings attach to stems</div>'
+    +'<div class="sp-rule-ex">먹<span>어요</span> / 가<span>고 싶어요</span> / 해<span>야 해요</span><br>endings are part of the verb — no space inside</div></div>'
+    +'<div class="sp-rule"><div class="sp-rule-title"><span class="sp-rule-num">3</span>하다 동사는 붙여 씀 · 하다-verbs stay together</div>'
+    +'<div class="sp-rule-ex">공부<span>하다</span> → 공부해요 ✓<br>운동<span>하다</span> → 운동해요 ✓<br>(no space between noun + 하다)</div></div>'
+    +'<div class="sp-rule"><div class="sp-rule-title"><span class="sp-rule-num">4</span>단위명사는 앞말과 띄어 씀 · Counters get a space</div>'
+    +'<div class="sp-rule-ex">사과 <span>한 개</span> / 책 <span>두 권</span> / 물 <span>세 병</span><br>number + counter = their own unit</div></div>'
+    +'<div class="sp-rule"><div class="sp-rule-title"><span class="sp-rule-num">5</span>보조동사는 띄어 씀 · Auxiliary verbs get a space</div>'
+    +'<div class="sp-rule-ex">먹어 <span>보다</span> · 읽고 <span>싶다</span> · 해 <span>주다</span><br>space before 보다/싶다/주다/있다 (auxiliary)</div></div>'
+    +'<div class="sp-rule"><div class="sp-rule-title"><span class="sp-rule-num">6</span>관형사·부사는 띄어 씀 · Modifiers get a space</div>'
+    +'<div class="sp-rule-ex">이 <span>사람</span> / 아주 <span>맛있어요</span> / 정말 <span>커요</span><br>이·그·저·아주·정말 → separate word</div></div>'
+    +'</div>'
+    // Game section
+    +'<h3 style="font-size:16px;font-weight:700;color:var(--gray-900);margin:4px 0 12px;">🎮 띄어쓰기 게임 · Spacing Game</h3>'
+    +'<p style="font-size:13px;color:var(--warm-600);margin-bottom:14px;">글자 사이의 빈 칸을 클릭해서 띄어쓰기를 넣어보세요! · Click between characters to insert a space.</p>'
+    +'<div class="sp-game-wrap"><div id="sp-game-box">로딩 중...</div></div>';
 }
 
 // ── INIT ───────────────────────────────────────────────
