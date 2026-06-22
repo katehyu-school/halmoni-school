@@ -1771,7 +1771,11 @@ function _spqCheck(){
     setTimeout(()=>{ _spqIdx++; _spqClicked=[]; _spqRender(); },1300);
   } else {
     if(fb) fb.innerHTML='<span style="color:var(--coral);">🔄 다시! Try again!</span>';
-    setTimeout(()=>{ const f=document.getElementById('spq-fb'); if(f) f.innerHTML=''; },1100);
+    setTimeout(()=>{
+      _spqClicked=new Array(chars.length+1).fill(false);
+      document.querySelectorAll('#spq-chars .spq-gap').forEach(g=>{ if(parseInt(g.dataset.i)>0) g.innerHTML=''; });
+      const f=document.getElementById('spq-fb'); if(f) f.innerHTML='';
+    },900);
   }
 }
 function _spqDone(){

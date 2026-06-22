@@ -6061,7 +6061,11 @@ function _kspCheck(){
     setTimeout(()=>{ kspIdx++; kspClicked=[]; _kspRender(); }, 1400);
   } else {
     if(fb) fb.innerHTML = '<span style="color:var(--coral);">🔄 다시 해봐요! Try again!</span>';
-    setTimeout(()=>{ if(document.getElementById('ksp-feedback')) document.getElementById('ksp-feedback').innerHTML=''; }, 1200);
+    setTimeout(()=>{
+      kspClicked = new Array(d.chars.length+1).fill(false);
+      document.querySelectorAll('#ksp-chars .ksp-gap').forEach(g=>{ if(parseInt(g.dataset.i)>0) g.innerHTML=''; });
+      const f=document.getElementById('ksp-feedback'); if(f) f.innerHTML='';
+    }, 900);
   }
 }
 
