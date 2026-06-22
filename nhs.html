@@ -2982,7 +2982,22 @@ function _fcChip(epId){
 
 function _fcClose(){document.getElementById('fc-overlay').classList.remove('open');}
 function _fcShuffle(){_fcApplyFilter();}
-function _fcFlip(){_fcFlipped=!_fcFlipped;const c=document.getElementById('fc-card-inner');if(c)c.classList.toggle('flipped',_fcFlipped);}
+function _fcFlip(){
+  _fcFlipped=!_fcFlipped;
+  const c=document.getElementById('fc-card-inner');
+  if(c) c.classList.toggle('flipped',_fcFlipped);
+  const tw=document.getElementById('fc-type-wrap');
+  if(tw) tw.style.display=_fcFlipped?'block':'none';
+  if(!_fcFlipped){
+    const inp=document.getElementById('fc-type-input');
+    if(inp){inp.value='';inp.style.borderColor='';inp.style.background='';}
+    const disp=document.getElementById('fc-type-disp');
+    if(disp) disp.innerHTML='';
+  } else {
+    // focus input when flipped to back
+    setTimeout(()=>{const inp=document.getElementById('fc-type-input');if(inp)inp.focus();},50);
+  }
+}
 function _fcPrev(){if(_fcIdx>0){_fcIdx--;_fcFlipped=false;_renderFC();}}
 function _fcNext(){if(_fcIdx<_fcCards.length-1){_fcIdx++;_fcFlipped=false;_renderFC();}}
 function _fcUpdateTyping(input, target){
