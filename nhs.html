@@ -2547,8 +2547,11 @@ const WARMUP_POOL = [
 ];
 
 let _wuEpId=null, _wuLevel='L1', _wuQs=[], _wuIdx=0, _wuScore=0, _wuChosen=null;
+const _wuSeen=new Set(); // session memory: epKeys already shown warm-up
 
 async function loadEp(epId, level='L1'){
+  const epKey=level+'_'+epId;
+  if(_wuSeen.has(epKey)){ await _doLoadEp(epId,level); return; }
   const epNum=parseInt(epId.replace(/\D/g,''));
   const pool=(level==='L1')
     ? WARMUP_POOL.filter(q=>parseInt(q.ep.replace(/\D/g,''))<epNum)
@@ -2625,8 +2628,8 @@ function _renderWarmupScore(){
     +'</div>';
 }
 
-async function _wuGo(){ await _doLoadEp(_wuEpId,_wuLevel); }
-async function _wuSkip(){ await _doLoadEp(_wuEpId,_wuLevel); }
+async function _wuGo(){ _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
+async function _wuSkip(){ _wuSeen.add(_wuLevel+'_'+_wuEpId); await _doLoadEp(_wuEpId,_wuLevel); }
 
 
 const VERB_DATA=[
