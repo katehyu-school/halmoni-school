@@ -3077,7 +3077,7 @@ function _renderFC(){
     +'<div id="fc-type-wrap" style="display:'+(_fcFlipped?'block':'none')+';margin:14px 0 4px;">'
     +'<div style="font-size:11px;color:var(--warm-400);margin-bottom:7px;">⌨️ 타이핑으로 확인하기 · Type in Korean</div>'
     +'<input id="fc-type-input" type="text" lang="ko" autocomplete="off" spellcheck="false" '
-    +'data-target="'+c.korean.replace(/"/g,'&quot;')+'" '
+    +'data-target="'+c.korean.split(/[/(]/)[0].trim().replace(/"/g,'&quot;')+'" '
     +'oninput="_fcUpdateTyping(this,this.dataset.target)" '
     +'placeholder="한글로 입력..." '
     +'style="width:100%;box-sizing:border-box;padding:9px 13px;border:2px solid var(--gray-200);border-radius:10px;font-size:19px;font-family:inherit;outline:none;">'
