@@ -1102,7 +1102,7 @@ function l2tRetry(){
   renderL2T();
 }
 
-async function loadEp(epId, level='L1'){
+async function _doLoadEp(epId, level='L1'){
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById(`ep-item-${level}-${epId}`);
   if(item)item.classList.add('active');
@@ -2035,7 +2035,7 @@ async function loadEpAndTab(epKey, tabName){
   const parts=epKey.split('_');
   const level=(parts.length>=2)?parts[0]:'L1';
   const epId=(parts.length>=2)?parts.slice(1).join('_'):epKey;
-  await loadEp(epId, level);
+  await _doLoadEp(epId, level);
   showTab(tabName);
 }
 
@@ -2340,6 +2340,143 @@ function pickSylCoda(v){sylCoda=(sylCoda===v)?'':v;updateSylResult();}
 function clearSyl(){sylOnset='';sylNucleus='';sylCoda='';updateSylResult();}
 
 // ── VERB GAME DATA ─────────────────────────────────────
+// ══════════════════════════════════════════════════════
+// ── WARM-UP QUIZ ───────────────────────────────────────
+// ══════════════════════════════════════════════════════
+const WARMUP_POOL = [
+  // ep01 — 공원, 첫 만남
+  {ep:'ep01', q:'Which particle marks the TOPIC of a sentence?', choices:['은/는','이/가','을/를','에서'], ans:0},
+  {ep:'ep01', q:'"나는 정민이야." means…', choices:['I am Jungmin.','You are Jungmin.','She is Jungmin.','Jungmin likes me.'], ans:0},
+  {ep:'ep01', q:'"만나서 반가워요." means…', choices:['Nice to meet you.','See you later.','I\'m sorry.','Thank you.'], ans:0},
+  // ep02 — 누구예요?
+  {ep:'ep02', q:'Which particle marks the SUBJECT (doer) of a sentence?', choices:['이/가','은/는','을/를','의'], ans:0},
+  {ep:'ep02', q:'"저는 학생이 아니에요." means…', choices:['I am not a student.','I am a student.','Are you a student?','She is a student.'], ans:0},
+  {ep:'ep02', q:'How do you ask "Who is it?" in Korean?', choices:['누구예요?','뭐예요?','어디예요?','어때요?'], ans:0},
+  // ep03 — 저녁식사
+  {ep:'ep03', q:'Which particle marks the OBJECT of a verb?', choices:['을/를','은/는','이/가','에서'], ans:0},
+  {ep:'ep03', q:'"잘 먹겠습니다." is said…', choices:['Before eating a meal','After finishing a meal','When ordering food','When cooking'], ans:0},
+  {ep:'ep03', q:'What is the present tense (해요체) of 먹다?', choices:['먹어요','먹었어요','먹을 거예요','먹고 싶어요'], ans:0},
+  // ep04 — 방, 몇 시에 만날까?
+  {ep:'ep04', q:'에 after a TIME word means…', choices:['at (that time)','at (that place)','from','to'], ans:0},
+  {ep:'ep04', q:'"두 시 반" means…', choices:['2:30','2:00','12:30','3:30'], ans:0},
+  {ep:'ep04', q:'"도서관에서 공부해요" — 에서 here means…', choices:['at (activity location)','direction toward','from','possession'], ans:0},
+  // ep05 — 버스 정류장, 광장시장
+  {ep:'ep05', q:'"도서관에 책을 읽으러 가요." — -러 means…', choices:['in order to','because','but','and then'], ans:0},
+  {ep:'ep05', q:'"안 먹어요." means…', choices:['I don\'t eat.','I can\'t eat.','I didn\'t eat.','I want to eat.'], ans:0},
+  {ep:'ep05', q:'"버스를 탈까?" means…', choices:['Shall we take the bus?','Let\'s take the bus.','Did we take the bus?','We take the bus.'], ans:0},
+  // ep06 — 포장마차
+  {ep:'ep06', q:'"김밥하고 떡볶이" — 하고 means…', choices:['and / with','but','or','because'], ans:0},
+  {ep:'ep06', q:'To politely ORDER something, you say…', choices:['___ 주세요','___ 괜찮아요','___ 맞아요','___ 잠깐만요'], ans:0},
+  {ep:'ep06', q:'"이인분" means…', choices:['2 servings','1 serving','2 pieces','2 bowls'], ans:0},
+  // ep07 — 교실, 스터디 그룹
+  {ep:'ep07', q:'"한국어를 배우고 싶어요." means…', choices:['I want to learn Korean.','I learn Korean.','I am learning Korean.','I can\'t learn Korean.'], ans:0},
+  {ep:'ep07', q:'"못 해요" means…', choices:['I can\'t do it.','I don\'t do it.','I won\'t do it.','I didn\'t do it.'], ans:0},
+  {ep:'ep07', q:'In Korean word order, where does the verb go?', choices:['At the END','At the beginning','After the subject','Before the object'], ans:0},
+  // ep08 — 미래네 부엌
+  {ep:'ep08', q:'"가방이 어디 있어요?" means…', choices:['Where is the bag?','What is in the bag?','Whose bag is it?','Is there a bag?'], ans:0},
+  {ep:'ep08', q:'"책상 위에" means…', choices:['on (top of) the desk','under the desk','next to the desk','in front of the desk'], ans:0},
+  {ep:'ep08', q:'"집에 가야 해요." means…', choices:['I have to go home.','I want to go home.','I went home.','I will go home.'], ans:0},
+  // ep09 — 재래시장
+  {ep:'ep09', q:'How do you say "3" using NATIVE Korean numbers?', choices:['셋','세','삼','서'], ans:0},
+  {ep:'ep09', q:'Native Korean numbers are used for…', choices:['Counting objects (개·명·병)','Money amounts (원)','Dates (일)','Months (월)'], ans:0},
+  {ep:'ep09', q:'"사과 다섯 개" — 다섯 means…', choices:['5 (native Korean)','4 (native Korean)','5 (Sino-Korean)','50 (native Korean)'], ans:0},
+  // ep10 — 한강공원
+  {ep:'ep10', q:'"먹었어요" is the PAST tense of…', choices:['먹다','먹어요','먹고 싶다','먹을 거예요'], ans:0},
+  {ep:'ep10', q:'"공부하고 있어요." means…', choices:['I am (currently) studying.','I studied.','I will study.','I want to study.'], ans:0},
+  {ep:'ep10', q:'계세요 is the HONORIFIC form of…', choices:['있어요 (to be present)','가요 (to go)','해요 (to do)','먹어요 (to eat)'], ans:0},
+  // ep11 — 리암네 집
+  {ep:'ep11', q:'"오셨어요?" — the -(으)셨 ending expresses…', choices:['Honorific past tense','Regular past tense','Honorific future','Formal present'], ans:0},
+  {ep:'ep11', q:'"어서 오세요." is said when…', choices:['Welcoming a guest','Saying goodbye','Asking for directions','Ordering food'], ans:0},
+  {ep:'ep11', q:'"해야지!" (said to oneself) means…', choices:['I should do it!','I already did it!','I can\'t do it!','I want to do it!'], ans:0},
+  // ep12 — 경복궁, 방학
+  {ep:'ep12', q:'"경복궁에 갈 거예요." means…', choices:['I will go to Gyeongbokgung.','I went to Gyeongbokgung.','I want to go.','Shall we go?'], ans:0},
+  {ep:'ep12', q:'"한국어를 할 수 있어요?" means…', choices:['Can you speak Korean?','Do you speak Korean?','Will you learn Korean?','Are you learning Korean?'], ans:0},
+  {ep:'ep12', q:'"이 책은 리아의 거예요." — 의 marks…', choices:['Possession (\'s)','Topic','Subject','Object'], ans:0},
+];
+
+let _wuEpId=null, _wuLevel='L1', _wuQs=[], _wuIdx=0, _wuScore=0, _wuChosen=null;
+
+async function loadEp(epId, level='L1'){
+  const epNum=parseInt(epId.replace(/\D/g,''));
+  const pool=(level==='L1')
+    ? WARMUP_POOL.filter(q=>parseInt(q.ep.replace(/\D/g,''))<epNum)
+    : WARMUP_POOL;
+  if(pool.length>=3){
+    _showWarmup(epId, level, pool);
+  } else {
+    await _doLoadEp(epId, level);
+  }
+}
+
+function _showWarmup(epId, level, pool){
+  _wuEpId=epId; _wuLevel=level; _wuIdx=0; _wuScore=0; _wuChosen=null;
+  _wuQs=shuffleArr([...pool]).slice(0,3);
+  document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
+  const item=document.getElementById('ep-item-'+level+'-'+epId);
+  if(item)item.classList.add('active');
+  document.getElementById('content-area').innerHTML=
+    '<div id="wu-wrap" style="max-width:600px;margin:0 auto;padding:40px 24px;">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">'
+    +'<div><div style="font-size:24px;font-weight:800;color:var(--gray-900);">🔥 빠른 복습</div>'
+    +'<div style="font-size:12.5px;color:var(--warm-500);margin-top:3px;">Quick Review — before the episode</div></div>'
+    +'<button onclick="_wuSkip()" style="background:none;border:1.5px solid var(--gray-300);border-radius:20px;padding:6px 16px;font-size:12px;color:var(--warm-500);cursor:pointer;white-space:nowrap;">건너뛰기 Skip ›</button>'
+    +'</div>'
+    +'<div id="wu-dots" style="display:flex;gap:8px;margin-bottom:28px;"></div>'
+    +'<div id="wu-body"></div>'
+    +'</div>';
+  _renderWarmupQ();
+}
+
+function _renderWarmupQ(){
+  const dots=document.getElementById('wu-dots');
+  if(dots)dots.innerHTML=[0,1,2].map(i=>'<div style="flex:1;height:6px;border-radius:3px;background:'+(i<_wuIdx?'var(--teal)':i===_wuIdx?'var(--amber)':'var(--gray-200)')+'"></div>').join('');
+  const body=document.getElementById('wu-body');
+  if(!body)return;
+  const q=_wuQs[_wuIdx];
+  _wuChosen=null;
+  body.innerHTML=
+    '<div style="font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">질문 '+(_wuIdx+1)+' / 3</div>'
+    +'<div style="font-size:18px;font-weight:700;color:var(--gray-900);margin-bottom:22px;line-height:1.5;">'+q.q+'</div>'
+    +'<div style="display:flex;flex-direction:column;gap:10px;">'
+    +q.choices.map((c,i)=>'<button id="wu-opt-'+i+'" onclick="_wuPick('+i+')" style="text-align:left;padding:13px 17px;border:2px solid var(--gray-200);border-radius:11px;background:#fff;font-size:15px;cursor:pointer;transition:background 0.15s,border-color 0.15s;font-weight:500;color:var(--gray-900);">'+String.fromCharCode(65+i)+'. '+c+'</button>').join('')
+    +'</div>';
+}
+
+function _wuPick(idx){
+  if(_wuChosen!==null)return;
+  _wuChosen=idx;
+  const q=_wuQs[_wuIdx];
+  const correct=q.ans;
+  for(let i=0;i<q.choices.length;i++){
+    const btn=document.getElementById('wu-opt-'+i);
+    if(!btn)continue;
+    btn.disabled=true;
+    if(i===correct){btn.style.background='#dcfce7';btn.style.borderColor='#22c55e';btn.style.color='#15803d';}
+    else if(i===idx&&idx!==correct){btn.style.background='#fee2e2';btn.style.borderColor='#ef4444';btn.style.color='#dc2626';}
+  }
+  if(idx===correct)_wuScore++;
+  setTimeout(()=>{_wuIdx++;_wuIdx>=3?_renderWarmupScore():_renderWarmupQ();},1300);
+}
+
+function _renderWarmupScore(){
+  const dots=document.getElementById('wu-dots');
+  if(dots)dots.innerHTML=[0,1,2].map(()=>'<div style="flex:1;height:6px;border-radius:3px;background:var(--teal);"></div>').join('');
+  const body=document.getElementById('wu-body');
+  if(!body)return;
+  const em=_wuScore===3?'🏆':_wuScore===2?'🌟':'📚';
+  const msg=_wuScore===3?'완벽해요! Perfect!':_wuScore===2?'잘했어요! Well done!':'복습이 도움 됐죠? Keep it up!';
+  body.innerHTML='<div style="text-align:center;padding:16px 0 24px;">'
+    +'<div style="font-size:60px;margin-bottom:14px;">'+em+'</div>'
+    +'<div style="font-size:32px;font-weight:800;color:var(--gray-900);margin-bottom:8px;">'+_wuScore+' / 3</div>'
+    +'<div style="font-size:14px;color:var(--warm-600);margin-bottom:28px;">'+msg+'</div>'
+    +'<button onclick="_wuGo()" style="background:var(--teal);color:#fff;border:none;border-radius:11px;padding:15px 38px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,128,128,0.3);">에피소드 시작 →</button>'
+    +'</div>';
+}
+
+async function _wuGo(){ await _doLoadEp(_wuEpId,_wuLevel); }
+async function _wuSkip(){ await _doLoadEp(_wuEpId,_wuLevel); }
+
+
 const VERB_DATA=[
   {dict:'하다',rom:'hada',mean:'to do',haeyo:'해요',haeyoRom:'haeyo',neg:'안 해요',negRom:'an haeyo'},
   {dict:'가다',rom:'gada',mean:'to go',haeyo:'가요',haeyoRom:'gayo',neg:'안 가요',negRom:'an gayo'},
