@@ -98,39 +98,46 @@
       ]
     },
     "grammar": {
-      "title": "형용사",
-      "title_en": "Describing Words",
-      "explanation": "한국어에서 형용사는 문장의 마지막에 와요!",
-      "explanation_en": "In Korean, describing words come at the END of the sentence!",
-      "rule_boxes": [
+      "sections": [
         {
-          "color": "blue",
-          "label": "순서: 주어 + 형용사!",
-          "label_en": "Order: Subject + Adjective (at the end!)",
+          "id": "g09_adjective",
+          "title": "형용사",
+          "subtitle": "Describing Words (Adjectives)",
+          "pattern": "주어 + 형용사 (문장 끝에!)",
+          "description": "In Korean, adjectives come at the END of the sentence — the opposite of English!",
           "examples": [
-            "코끼리가 커요.  (The elephant is big.)",
-            "피자가 맛있어요.  (Pizza is delicious.)",
-            "게임이 재미있어요.  (Games are fun.)"
-          ]
-        },
-        {
-          "color": "red",
-          "label": "있어요 ↔ 없어요",
-          "label_en": "있어요 = have/exist  →  없어요 = don't have/not",
-          "examples": [
-            "재미있어요  ↔  재미없어요",
-            "맛있어요  ↔  맛없어요"
-          ]
-        },
-        {
-          "color": "green",
-          "label": "반대말! Opposite pairs",
-          "label_en": "Korean adjectives come in opposite pairs",
-          "examples": [
-            "커요 ↔ 작아요   (big ↔ small)",
-            "빨라요 ↔ 느려요   (fast ↔ slow)",
-            "길어요 ↔ 짧아요   (long ↔ short)",
-            "많아요 ↔ 적어요   (many ↔ few)"
+            {"korean": "코끼리가 커요.", "english": "The elephant is big.", "highlight": "커요"},
+            {"korean": "피자가 맛있어요.", "english": "Pizza is delicious.", "highlight": "맛있어요"},
+            {"korean": "거북이가 느려요.", "english": "The turtle is slow.", "highlight": "느려요"}
+          ],
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "📘 순서: 주어 + 형용사! (Subject + Adjective — adjective at the end!)",
+              "examples": [
+                "코끼리가 커요.  (The elephant is big.)",
+                "게임이 재미있어요.  (Games are fun.)",
+                "뱀이 길어요.  (The snake is long.)"
+              ]
+            },
+            {
+              "color": "red",
+              "label": "🔴 있어요 ↔ 없어요  (have/exist ↔ don't have/not)",
+              "examples": [
+                "재미있어요 ↔ 재미없어요  (fun ↔ boring)",
+                "맛있어요 ↔ 맛없어요  (delicious ↔ not tasty)"
+              ]
+            },
+            {
+              "color": "green",
+              "label": "✅ 반대말! Opposite pairs",
+              "examples": [
+                "커요 ↔ 작아요  (big ↔ small)",
+                "빨라요 ↔ 느려요  (fast ↔ slow)",
+                "길어요 ↔ 짧아요  (long ↔ short)",
+                "많아요 ↔ 적어요  (many ↔ few)"
+              ]
+            }
           ]
         }
       ]
@@ -140,221 +147,89 @@
         {
           "audio": "코끼리가 커요",
           "answer": "커요",
-          "choices": [
-            "커요",
-            "작아요",
-            "빨라요",
-            "길어요",
-            "많아요"
-          ]
+          "choices": ["커요", "작아요", "빨라요", "길어요", "많아요"]
         },
         {
           "audio": "개미가 작아요",
           "answer": "작아요",
-          "choices": [
-            "작아요",
-            "커요",
-            "적어요",
-            "짧아요",
-            "느려요"
-          ]
+          "choices": ["작아요", "커요", "적어요", "짧아요", "느려요"]
         },
         {
           "audio": "게임이 재미있어요",
           "answer": "재미있어요",
-          "choices": [
-            "재미있어요",
-            "재미없어요",
-            "맛있어요",
-            "빨라요",
-            "커요"
-          ]
+          "choices": ["재미있어요", "재미없어요", "맛있어요", "빨라요", "커요"]
         },
         {
           "audio": "숙제가 재미없어요",
           "answer": "재미없어요",
-          "choices": [
-            "재미없어요",
-            "재미있어요",
-            "맛없어요",
-            "느려요",
-            "적어요"
-          ]
+          "choices": ["재미없어요", "재미있어요", "맛없어요", "느려요", "적어요"]
         },
         {
           "audio": "피자가 맛있어요",
           "answer": "맛있어요",
-          "choices": [
-            "맛있어요",
-            "맛없어요",
-            "재미있어요",
-            "커요",
-            "많아요"
-          ]
+          "choices": ["맛있어요", "맛없어요", "재미있어요", "커요", "많아요"]
         },
         {
           "audio": "토끼가 빨라요",
           "answer": "빨라요",
-          "choices": [
-            "빨라요",
-            "느려요",
-            "커요",
-            "길어요",
-            "많아요"
-          ]
+          "choices": ["빨라요", "느려요", "커요", "길어요", "많아요"]
         },
         {
           "audio": "뱀이 길어요",
           "answer": "길어요",
-          "choices": [
-            "길어요",
-            "짧아요",
-            "커요",
-            "빨라요",
-            "많아요"
-          ]
+          "choices": ["길어요", "짧아요", "커요", "빨라요", "많아요"]
         }
       ],
       "ox_game": [
-        {
-          "emoji": "🐘",
-          "sentence": "코끼리가 커요.",
-          "answer": true
-        },
-        {
-          "emoji": "🐜",
-          "sentence": "개미가 커요.",
-          "answer": false
-        },
-        {
-          "emoji": "🍕",
-          "sentence": "피자가 맛있어요.",
-          "answer": true
-        },
-        {
-          "emoji": "🥦",
-          "sentence": "브로콜리가 맛있어요.",
-          "answer": false
-        },
-        {
-          "emoji": "🎮",
-          "sentence": "게임이 재미있어요.",
-          "answer": true
-        },
-        {
-          "emoji": "😴",
-          "sentence": "숙제가 재미없어요.",
-          "answer": true
-        },
-        {
-          "emoji": "🐇",
-          "sentence": "토끼가 빨라요.",
-          "answer": true
-        },
-        {
-          "emoji": "🐢",
-          "sentence": "거북이가 빨라요.",
-          "answer": false
-        },
-        {
-          "emoji": "🐍",
-          "sentence": "뱀이 길어요.",
-          "answer": true
-        },
-        {
-          "emoji": "🐛",
-          "sentence": "애벌레가 길어요.",
-          "answer": false
-        },
-        {
-          "emoji": "🌌",
-          "sentence": "별이 많아요.",
-          "answer": true
-        },
-        {
-          "emoji": "⭐",
-          "sentence": "별이 많아요.",
-          "answer": false
-        }
+        {"emoji": "🐘", "sentence": "코끼리가 커요.", "answer": true},
+        {"emoji": "🐜", "sentence": "개미가 커요.", "answer": false},
+        {"emoji": "🍕", "sentence": "피자가 맛있어요.", "answer": true},
+        {"emoji": "🥦", "sentence": "브로콜리가 맛있어요.", "answer": false},
+        {"emoji": "🎮", "sentence": "게임이 재미있어요.", "answer": true},
+        {"emoji": "😴", "sentence": "숙제가 재미없어요.", "answer": true},
+        {"emoji": "🐇", "sentence": "토끼가 빨라요.", "answer": true},
+        {"emoji": "🐢", "sentence": "거북이가 빨라요.", "answer": false},
+        {"emoji": "🐍", "sentence": "뱀이 길어요.", "answer": true},
+        {"emoji": "🐛", "sentence": "애벌레가 길어요.", "answer": false},
+        {"emoji": "🌌", "sentence": "별이 많아요.", "answer": true},
+        {"emoji": "⭐", "sentence": "별이 많아요.", "answer": false}
       ],
       "sort_game": [
         {
           "id": 0,
           "emoji": "🐘",
-          "answer": [
-            "코끼리가",
-            "커요"
-          ],
-          "distractors": [
-            "작아요",
-            "빨라요",
-            "개미가"
-          ]
+          "answer": ["코끼리가", "커요"],
+          "distractors": ["작아요", "빨라요", "개미가"]
         },
         {
           "id": 1,
           "emoji": "🍕",
-          "answer": [
-            "피자가",
-            "맛있어요"
-          ],
-          "distractors": [
-            "맛없어요",
-            "재미있어요",
-            "게임이"
-          ]
+          "answer": ["피자가", "맛있어요"],
+          "distractors": ["맛없어요", "재미있어요", "게임이"]
         },
         {
           "id": 2,
           "emoji": "🎮",
-          "answer": [
-            "게임이",
-            "재미있어요"
-          ],
-          "distractors": [
-            "재미없어요",
-            "맛있어요",
-            "숙제가"
-          ]
+          "answer": ["게임이", "재미있어요"],
+          "distractors": ["재미없어요", "맛있어요", "숙제가"]
         },
         {
           "id": 3,
           "emoji": "🐇",
-          "answer": [
-            "토끼가",
-            "빨라요"
-          ],
-          "distractors": [
-            "느려요",
-            "커요",
-            "거북이가"
-          ]
+          "answer": ["토끼가", "빨라요"],
+          "distractors": ["느려요", "커요", "거북이가"]
         },
         {
           "id": 4,
           "emoji": "🐍",
-          "answer": [
-            "뱀이",
-            "길어요"
-          ],
-          "distractors": [
-            "짧아요",
-            "커요",
-            "개미가"
-          ]
+          "answer": ["뱀이", "길어요"],
+          "distractors": ["짧아요", "커요", "개미가"]
         },
         {
           "id": 5,
           "emoji": "🐢",
-          "answer": [
-            "거북이가",
-            "느려요"
-          ],
-          "distractors": [
-            "빨라요",
-            "작아요",
-            "뱀이"
-          ]
+          "answer": ["거북이가", "느려요"],
+          "distractors": ["빨라요", "작아요", "뱀이"]
         }
       ]
     }

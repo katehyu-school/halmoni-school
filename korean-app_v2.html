@@ -9043,26 +9043,7 @@ function renderU8Vocab(data) {
   }
 }
 
-function renderU8Grammar(g) {
-  const panel = document.getElementById('u8-grammar-content');
-  if (!panel || !g) return;
-  const colorMap = {red:'#FF5252',blue:'#2196F3',green:'#4CAF50',amber:'#FFA726'};
-  const bgMap    = {red:'#FFF8F8',blue:'#F0F7FF',green:'#F1FFF5',amber:'#FFF8EF'};
-  let html = `<div class="section-title">${g.title} <span style="font-size:0.85rem;font-family:'Nanum Gothic',sans-serif;color:var(--muted);">${g.title_en}</span></div>`;
-  html += `<div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;margin-bottom:16px;">${g.explanation}<br><span style="color:var(--muted);font-size:0.88rem;">${g.explanation_en}</span></div>`;
-  for (const rb of g.rule_boxes) {
-    const c = colorMap[rb.color]||'#555';
-    const bg = bgMap[rb.color]||'#F9F9F9';
-    html += `<div style="border-left:4px solid ${c};background:${bg};border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;">
-      <div style="font-weight:700;color:${c};margin-bottom:6px;font-family:'Nanum Gothic',sans-serif;">${rb.label}</div>
-      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;font-family:'Nanum Gothic',sans-serif;">${rb.label_en}</div>
-      <ul style="margin:0;padding-left:18px;">
-        ${rb.examples.map(ex=>`<li style="font-size:0.9rem;margin-bottom:4px;font-family:'Nanum Gothic',sans-serif;">${ex}</li>`).join('')}
-      </ul>
-    </div>`;
-  }
-  panel.innerHTML = html;
-}
+// renderU8Grammar: removed — unit08 grammar now uses GrammarRenderer via grammar.sections format
 
 // ── 듣기 게임 ──────────────────────────────────────────
 let u8ListenQ   = [];
@@ -9469,26 +9450,7 @@ function renderU9Vocab(data) {
 }
 
 // ── GRAMMAR ──────────────────────────────────────────────
-function renderU9Grammar(g) {
-  const panel = document.getElementById('u9-grammar-content');
-  if (!panel || !g) return;
-  const colorMap = {red:'#FF5252',blue:'#2196F3',green:'#4CAF50',amber:'#FFA726'};
-  const bgMap    = {red:'#FFF8F8',blue:'#F0F7FF',green:'#F1FFF5',amber:'#FFF8EF'};
-  let html = `<div class="section-title">${g.title} <span style="font-size:0.85rem;font-family:'Nanum Gothic',sans-serif;color:var(--muted);">${g.title_en}</span></div>`;
-  html += `<div class="section-sub" style="font-family:'Nanum Gothic',sans-serif;margin-bottom:16px;">${g.explanation}<br><span style="color:var(--muted);font-size:0.88rem;">${g.explanation_en}</span></div>`;
-  for (const rb of g.rule_boxes) {
-    const c  = colorMap[rb.color]||'#555';
-    const bg = bgMap[rb.color]||'#F9F9F9';
-    html += `<div style="border-left:4px solid ${c};background:${bg};border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:14px;">
-      <div style="font-weight:700;color:${c};margin-bottom:6px;font-family:'Nanum Gothic',sans-serif;">${rb.label}</div>
-      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:8px;font-family:'Nanum Gothic',sans-serif;">${rb.label_en}</div>
-      <ul style="margin:0;padding-left:18px;">
-        ${rb.examples.map(ex=>`<li style="font-size:0.9rem;margin-bottom:4px;font-family:'Nanum Gothic',sans-serif;">${ex}</li>`).join('')}
-      </ul>
-    </div>`;
-  }
-  panel.innerHTML = html;
-}
+// renderU9Grammar: removed — unit09 grammar now uses GrammarRenderer via grammar.sections format
 
 // ── 듣기 게임 ──────────────────────────────────────────
 let u9ListenQ   = [];
@@ -9782,7 +9744,7 @@ async function init(){
     u4Questions = (d4 && d4.practice && d4.practice.quiz_items) || _u4QFallback;
     u5Questions = (d5 && d5.practice && d5.practice.quiz_items) || _u5QFallback;
     // 1~5과 문법 렌더링
-    [1,2,3,4,5].forEach(n => GrammarRenderer.render(n));
+    [1,2,3,4,5,8,9].forEach(n => GrammarRenderer.render(n));
     if (d6 && d6.sections && d6.sections.practice) {
       const p6 = d6.sections.practice;
       if (p6.fill_items)   u6FillQ     = p6.fill_items;
@@ -9803,7 +9765,6 @@ async function init(){
     if (d8 && d8.sections) {
       u8Data = d8.sections;
       if (d8.sections.vocab)    renderU8Vocab(d8.sections.vocab);
-      if (d8.sections.grammar)  renderU8Grammar(d8.sections.grammar);
       if (d8.sections.practice) {
         const p8 = d8.sections.practice;
         if (p8.listen_quiz)  u8ListenQ  = p8.listen_quiz;
@@ -9813,7 +9774,6 @@ async function init(){
     }
     if (d9 && d9.sections) {
       if (d9.sections.vocab)    renderU9Vocab(d9.sections.vocab);
-      if (d9.sections.grammar)  renderU9Grammar(d9.sections.grammar);
       if (d9.sections.practice) {
         const p9 = d9.sections.practice;
         if (p9.listen_quiz) u9ListenQ = p9.listen_quiz;
@@ -10856,186 +10816,4 @@ async function _kidsIdxLoad(){
 
 function _kidsSetMode(mode, btn){
   _kidsIdxMode=mode;
-  document.querySelectorAll('.kids-mode-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  const ph=mode==='grammar'?'🔍 문법 이름이나 패턴 검색...':'🔍 한국어 또는 영어로 검색...';
-  const inp=document.getElementById('kids-idx-search');
-  if(inp){inp.value='';inp.placeholder=ph;}
-  const jb=document.getElementById('kids-jump-bar');
-  if(jb)jb.innerHTML='';
-  _kidsIdxFilter();
-}
-function _kidsIdxSetUnit(btn,unit){
-  _kidsIdxUnit=unit; // 'all' | '2-1' | '3-2' etc
-  document.querySelectorAll('.kids-unit-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  _kidsIdxFilter();
-}
-function _kidsIdxFilter(){
-  const q=(document.getElementById('kids-idx-search').value||'').toLowerCase();
-  if(_kidsIdxMode==='grammar'){
-    let g=_kidsGramAll.slice();
-    if(_kidsIdxUnit!=='all'){const [bk,un]=_kidsIdxUnit.toString().split('-').map(Number);g=g.filter(x=>x.book===bk&&x.unit===un);}
-    if(q)g=g.filter(x=>x.title.toLowerCase().includes(q)||x.pattern.toLowerCase().includes(q)||x.meaning.toLowerCase().includes(q));
-    _kidsIdxRenderGram(g);
-    const jb=document.getElementById('kids-jump-bar');if(jb)jb.innerHTML='';
-    const pc=document.getElementById('kids-idx-page-ctrl');if(pc)pc.style.display='none';
-    return;
-  }
-  let w=_kidsIdxAll.slice();
-  if(_kidsIdxUnit!=='all'){
-    const [bk,un]=_kidsIdxUnit.toString().split('-').map(Number);
-    w=w.filter(x=>x.book===bk&&x.unit===un);
-  }
-  if(q)w=w.filter(x=>x.korean.includes(q)||x.english.toLowerCase().includes(q));
-  _kidsIdxFiltered=w;_kidsIdxPage=0;
-  // 점프바
-  const op={};
-  w.forEach((x,i)=>{const o=_getOnset(x.korean[0]);if(!(o in op))op[o]=Math.floor(i/_KIDS_PG);});
-  const jb=document.getElementById('kids-jump-bar');
-  if(jb)jb.innerHTML=Object.entries(op).map(([o,pg])=>`<button class="kids-jump-btn" onclick="_kidsIdxGoPage(${pg},'${o}')">${o}</button>`).join('');
-  _kidsIdxRenderPage();
-}
-function _kidsIdxRenderGram(grams){
-  const body=document.getElementById('kids-idx-body');
-  if(!body)return;
-  if(!grams.length){body.innerHTML='<div style="padding:30px;text-align:center;color:#aaa">검색 결과 없음</div>';return;}
-  let h='',curKey=null;
-  grams.forEach(g=>{
-    const key=`Level ${g.book} · ${g.unit}과`;
-    if(key!==curKey){curKey=key;h+=`<div class="kids-gram-hdr">📌 ${key}</div>`;}
-    h+=`<div class="kids-gram-row"><div class="kids-gram-title">${g.title}</div>${g.pattern?`<div class="kids-gram-pattern">${g.pattern}</div>`:''}${g.meaning?`<div class="kids-gram-meaning">${g.meaning}</div>`:''}</div>`;
-  });
-  body.innerHTML=h;body.scrollTop=0;
-}
-function _kidsIdxGoPage(pg, onset){
-  _kidsIdxPage=pg;
-  _kidsIdxRenderPage();
-  if(onset){
-    requestAnimationFrame(()=>{
-      const body=document.getElementById('kids-idx-body');
-      if(!body)return;
-      const hdrs=body.querySelectorAll('.kids-idx-section-hdr');
-      for(const h of hdrs){
-        if(h.textContent.trim()===onset){
-          body.scrollTop=h.offsetTop-body.offsetTop-8;
-          break;
-        }
-      }
-    });
-  }
-}
-function _kidsIdxRenderPage(){
-  const w=_kidsIdxFiltered;
-  const tot=Math.max(1,Math.ceil(w.length/_KIDS_PG));
-  _kidsIdxPage=Math.max(0,Math.min(_kidsIdxPage,tot-1));
-  const sl=w.slice(_kidsIdxPage*_KIDS_PG,(_kidsIdxPage+1)*_KIDS_PG);
-  let h='',cur=null;
-  sl.forEach(v=>{
-    const o=_getOnset(v.korean[0]);
-    if(o!==cur){cur=o;h+=`<div class="kids-idx-section-hdr">${o}</div>`;}
-    h+=`<div class="kids-idx-row"><div class="kids-idx-kr">${v.korean} ${v.emoji}</div><div class="kids-idx-rom">${v.romanization}</div><div class="kids-idx-en">${v.english}</div><button class="kids-idx-badge" onclick="openUnitVocab(${v.unit},${v.book||2});closeKidsIndex()">Level ${v.book||2} · ${v.unit}과</button></div>`;
-  });
-  const body=document.getElementById('kids-idx-body');
-  if(body){body.innerHTML=h||'<div style="padding:30px;text-align:center;color:#aaa">검색 결과 없음</div>';body.scrollTop=0;}
-  const pc=document.getElementById('kids-idx-page-ctrl');
-  const prev=document.getElementById('kids-pg-prev');
-  const next=document.getElementById('kids-pg-next');
-  const info=document.getElementById('kids-pg-info');
-  if(pc){pc.style.display=tot>1?'flex':'none';if(prev)prev.disabled=_kidsIdxPage===0;if(next)next.disabled=_kidsIdxPage===tot-1;if(info)info.textContent=`${_kidsIdxPage+1} / ${tot}`;}
-}
-// ═══════════════════════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════════════════════
-// 🎙️ 따라녹음하기 (MediaRecorder — no API key needed)
-// ═══════════════════════════════════════════════════════════════
-let _kidsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false,activeBtn:null};
-
-function kidsRecCleanup(){
-  const prev=_kidsRec.activeBtn?document.getElementById(_kidsRec.activeBtn):null;
-  if(_kidsRec.recorder&&_kidsRec.recorder.state!=='inactive')_kidsRec.recorder.stop();
-  if(_kidsRec.stream)_kidsRec.stream.getTracks().forEach(t=>t.stop());
-  if(_kidsRec.blobURL){URL.revokeObjectURL(_kidsRec.blobURL);_kidsRec.blobURL=null;}
-  _kidsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false,activeBtn:null};
-  if(prev){prev.textContent='🎙️';prev.title='따라녹음하기';prev.classList.remove('rec-on');prev.classList.add('rec-done');prev.disabled=false;}
-}
-
-async function kidsRecToggle(btnId){
-  const sb=document.getElementById(btnId);
-  if(!sb)return;
-  // 다른 버튼/슬라이드 상태면 먼저 정리하고 계속 진행 (return 안 함)
-  if(_kidsRec.activeBtn&&_kidsRec.activeBtn!==btnId){kidsRecCleanup();}
-  // has blob → playback
-  if(_kidsRec.blobURL){
-    const a=new Audio(_kidsRec.blobURL);
-    sb.textContent='▶';sb.disabled=true;
-    a.play();
-    a.onended=()=>{URL.revokeObjectURL(_kidsRec.blobURL);_kidsRec.blobURL=null;sb.textContent='🎙️';sb.title='다시 녹음하기';sb.classList.remove('rec-done');sb.disabled=false;};
-    return;
-  }
-  // recording → stop
-  if(_kidsRec.recording){
-    if(_kidsRec.recorder&&_kidsRec.recorder.state!=='inactive')_kidsRec.recorder.stop();
-    return;
-  }
-  // start recording
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    _kidsRec.stream=stream;_kidsRec.chunks=[];_kidsRec.activeBtn=btnId;
-    const recorder=new MediaRecorder(stream);
-    _kidsRec.recorder=recorder;_kidsRec.recording=true;
-    recorder.ondataavailable=e=>{if(e.data.size>0)_kidsRec.chunks.push(e.data);};
-    recorder.onstop=()=>{
-      _kidsRec.stream.getTracks().forEach(t=>t.stop());
-      _kidsRec.recording=false;
-      const blob=new Blob(_kidsRec.chunks,{type:'audio/webm'});
-      _kidsRec.blobURL=URL.createObjectURL(blob);
-      const sb2=document.getElementById(btnId);
-      if(sb2&&sb2.isConnected){sb2.textContent='👂';sb2.title='내발음듣기';sb2.classList.remove('rec-on');sb2.classList.add('rec-done');sb2.disabled=false;}
-    };
-    recorder.start();
-    sb.textContent='⏹';sb.title='정지';sb.classList.add('rec-on');sb.classList.remove('rec-done');
-  }catch(e){
-    console.warn('마이크 접근 실패',e);
-    sb.textContent='🚫';sb.title='마이크 권한 필요';setTimeout(()=>{sb.textContent='🎙️';sb.classList.add('rec-done');},2000);
-  }
-}
-
-
-
-// 페이지 로드 시 API 버튼 상태 업데이트
-if(document.readyState !== 'loading'){
-  setTimeout(kidsUpdateApiBtn, 100);
-} else {
-  document.addEventListener('DOMContentLoaded', kidsUpdateApiBtn);
-}
-
-</script>
-
-<!-- ── 단어 인덱스 패널 ── -->
-<div class="kids-idx-overlay" id="kids-idx-overlay" onclick="closeKidsIndex()"></div>
-<div class="kids-idx-panel" id="kids-idx-panel">
-  <div class="kids-idx-hdr">
-    <h3 id="kids-idx-title">📖 색인</h3>
-    <button class="kids-idx-close" onclick="closeKidsIndex()">✕</button>
-  </div>
-  <div class="kids-idx-mode-bar">
-    <button class="kids-mode-btn active" id="kids-mode-vocab" onclick="_kidsSetMode('vocab',this)">📖 단어</button>
-    <button class="kids-mode-btn" id="kids-mode-grammar" onclick="_kidsSetMode('grammar',this)">📌 문법</button>
-  </div>
-  <div class="kids-idx-search">
-    <input id="kids-idx-search" placeholder="🔍 한국어 또는 영어로 검색..." oninput="_kidsIdxFilter()" autocomplete="new-password">
-  </div>
-
-  <div class="kids-idx-jump-bar" id="kids-jump-bar"></div>
-  <div class="kids-idx-body" id="kids-idx-body"><div style="text-align:center;padding:30px;color:#aaa">⏳ 불러오는 중...</div></div>
-  <div class="kids-idx-page-ctrl" id="kids-idx-page-ctrl" style="display:none">
-    <button class="kids-idx-page-btn" id="kids-pg-prev" onclick="_kidsIdxGoPage(_kidsIdxPage-1)">◀</button>
-    <span class="kids-idx-page-info" id="kids-pg-info"></span>
-    <button class="kids-idx-page-btn" id="kids-pg-next" onclick="_kidsIdxGoPage(_kidsIdxPage+1)">▶</button>
-  </div>
-</div>
-
-
-</body>
-</html>
+  document.querySe
