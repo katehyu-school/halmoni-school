@@ -2886,8 +2886,9 @@ let _fcCards=[],_fcIdx=0,_fcFlipped=false;
 async function openFlashcards(){
   document.getElementById('fc-overlay').classList.add('open');
   document.getElementById('fc-modal').innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div><div style="font-size:15px;color:var(--warm-600);">단어 불러오는 중...<br><small>Loading vocabulary...</small></div></div>';
-  const lv=(typeof curLevel!=='undefined'&&curLevel)||'L1';
-  const eps=lv==='L1'?L1_EPISODES:L2_EPISODES;
+  const _lvRaw=(DATA&&DATA.level)||(typeof curLevel!=='undefined'?curLevel:'Level 1');
+  const lv=(_lvRaw==='L2'||_lvRaw==='Level 2')?'L2':'L1';
+  const eps=lv==='L2'?L2_EPISODES:L1_EPISODES;
   const cards=[];
   await Promise.all(eps.filter(ep=>!ep.disabled).map(async(ep)=>{
     const epKey=lv+'_'+ep.id;
