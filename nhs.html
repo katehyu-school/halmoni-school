@@ -239,6 +239,8 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .fc-back{background:linear-gradient(135deg,#fefce8,#fef9c3);border:2px solid var(--amber);transform:rotateY(180deg);}
 .fc-sidebar-btn{width:100%;padding:11px 14px;background:linear-gradient(135deg,var(--teal),#0d9488);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;transition:opacity 0.2s;margin-top:8px;}
 .fc-sidebar-btn:hover{opacity:0.88;}
+.fc-chip{padding:5px 11px;border:1.5px solid var(--gray-200);border-radius:20px;font-size:12px;cursor:pointer;background:#fff;color:var(--warm-600);font-weight:700;transition:all 0.15s;}
+.fc-chip.on{background:var(--teal);color:#fff;border-color:var(--teal);}
 .idx-header{background:var(--teal-md);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .idx-header h2{font-size:15px;font-weight:700;margin:0;}
 .idx-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
@@ -2881,16 +2883,17 @@ async function _wuSkip(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); aw
 
 
 // ══ Flashcard System ══════════════════════════════════════
-let _fcCards=[],_fcIdx=0,_fcFlipped=false;
+let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcIdx=0,_fcFlipped=false;
+let _fcFilter=new Set(); // empty = all episodes
 
 async function openFlashcards(){
   document.getElementById('fc-overlay').classList.add('open');
   document.getElementById('fc-modal').innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div><div style="font-size:15px;color:var(--warm-600);">단어 불러오는 중...<br><small>Loading vocabulary...</small></div></div>';
   const _lvRaw=(DATA&&DATA.level)||(typeof curLevel!=='undefined'?curLevel:'Level 1');
   const lv=(_lvRaw==='L2'||_lvRaw==='Level 2')?'L2':'L1';
-  const eps=lv==='L2'?L2_EPISODES:L1_EPISODES;
+  _fcEps=(lv==='L2'?L2_EPISODES:L1_EPISODES).filter(ep=>!ep.disabled);
   const cards=[];
-  await Promise.all(eps.filter(ep=>!ep.disabled).map(async(ep)=>{
+  await Promise.all(_fcEps.map(async(ep)=>{
     const epKey=lv+'_'+ep.id;
     let data=EPISODE_DATA[epKey];
     if(!data){
@@ -2900,16 +2903,28 @@ async function openFlashcards(){
     data.vocab.forEach(cat=>{
       (cat.items||[]).forEach(item=>{
         if(!item.korean||!item.english)return;
-        cards.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',note:item.note||'',ep:ep.label,cat:(cat.category||'').replace(/^[\u{1F300}-\u{1FAD6}\s]+/u,'').trim()});
+        cards.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',note:item.note||'',epId:ep.id,ep:ep.label,cat:(cat.category||'').replace(/^[\u{1F300}-\u{1FAD6}\s]+/u,'').trim()});
       });
     });
   }));
-  _fcCards=shuffleArr(cards);_fcIdx=0;_fcFlipped=false;
-  _renderFC();
+  _fcAllCards=cards; _fcFilter=new Set();
+  _fcApplyFilter();
+}
+
+function _fcApplyFilter(){
+  const pool=_fcFilter.size===0?_fcAllCards:_fcAllCards.filter(c=>_fcFilter.has(c.epId));
+  _fcCards=shuffleArr([...pool]).slice(0,25);
+  _fcIdx=0; _fcFlipped=false; _renderFC();
+}
+
+function _fcChip(epId){
+  if(epId===null){_fcFilter.clear();}
+  else{if(_fcFilter.has(epId))_fcFilter.delete(epId);else _fcFilter.add(epId);}
+  _fcApplyFilter();
 }
 
 function _fcClose(){document.getElementById('fc-overlay').classList.remove('open');}
-function _fcShuffle(){_fcCards=shuffleArr([..._fcCards]);_fcIdx=0;_fcFlipped=false;_renderFC();}
+function _fcShuffle(){_fcApplyFilter();}
 function _fcFlip(){_fcFlipped=!_fcFlipped;const c=document.getElementById('fc-card-inner');if(c)c.classList.toggle('flipped',_fcFlipped);}
 function _fcPrev(){if(_fcIdx>0){_fcIdx--;_fcFlipped=false;_renderFC();}}
 function _fcNext(){if(_fcIdx<_fcCards.length-1){_fcIdx++;_fcFlipped=false;_renderFC();}}
@@ -2923,15 +2938,20 @@ function _renderFC(){
   const prevDis=_fcIdx===0,nextDis=_fcIdx===total-1;
   const btnStyle=(dis,active)=>
     `padding:12px 22px;border:2px solid ${dis?'var(--gray-100)':active?'var(--teal)':'var(--gray-200)'};border-radius:12px;background:${active&&!dis?'var(--teal)':'#fff'};font-size:15px;cursor:${dis?'default':'pointer'};color:${dis?'var(--gray-300)':active?'#fff':'var(--gray-700)'};font-weight:700;transition:all 0.15s;`;
-  m.innerHTML=
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">'
-    +'<div style="font-size:19px;font-weight:800;color:var(--gray-900);">🃏 복습 플래시카드</div>'
-    +'<button onclick="_fcClose()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--warm-400);line-height:1;">✕</button>'
-    +'</div>'
-    +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">'
-    +'<div style="font-size:12px;color:var(--warm-500);white-space:nowrap;">'+(_fcIdx+1)+' / '+total+'</div>'
-    +'<div style="flex:1;height:5px;background:var(--gray-100);border-radius:3px;"><div style="height:100%;width:'+pct+'%;background:var(--teal);border-radius:3px;transition:width 0.3s;"></div></div>'
+  const allOn=_fcFilter.size===0;
+  const chipsHtml='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">'
+    +'<button class="fc-chip'+(allOn?' on':'')+'" onclick="_fcChip(null)">전체</button>'
+    +_fcEps.map(ep=>{const n=ep.id.replace('ep','');const on=_fcFilter.has(ep.id);return '<button class="fc-chip'+(on?' on':'')
+      +'" onclick="_fcChip(\''+(ep.id)+'\')">'+(parseInt(n))+'</button>';}).join('')
+    +'</div>';
+  m.innerHTML=chipsHtml
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">'
+    +'<div style="font-size:12px;color:var(--warm-500);">'+(_fcIdx+1)+' / '+total+' 카드</div>'
+    +'<div style="display:flex;align-items:center;gap:8px;">'
+    +'<div style="width:120px;height:5px;background:var(--gray-100);border-radius:3px;"><div style="height:100%;width:'+pct+'%;background:var(--teal);border-radius:3px;transition:width 0.3s;"></div></div>'
     +'<button onclick="_fcShuffle()" style="background:none;border:1.5px solid var(--gray-200);border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--warm-500);">🔀 섞기</button>'
+    +'</div>'
+    +'<button onclick="_fcClose()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--warm-400);line-height:1;">✕</button>'
     +'</div>'
     +'<div class="fc-scene" onclick="_fcFlip()">'
     +'<div class="fc-card" id="fc-card-inner">'
