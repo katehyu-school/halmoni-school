@@ -364,6 +364,14 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .speak-btn.listening{background:var(--coral)!important;animation:pulse .8s ease-in-out infinite;}
 .nav-speak-btn.rec-on{background:var(--coral)!important;color:#fff;border-color:var(--coral);animation:pulse .8s ease-in-out infinite;}
 .nav-speak-btn.rec-done{background:#2ecc71!important;color:#fff;border-color:#27ae60;}
+.shad-result{display:none;background:linear-gradient(135deg,#E8F5E9,#F9FBE7);border:1.5px solid #A5D6A7;border-radius:10px;padding:10px 14px;margin:8px 12px 0;font-family:var(--font-kr);}
+.shad-said{font-size:16px;font-weight:700;color:#1B5E20;margin:2px 0 4px;}
+.shad-label{font-size:10px;color:#81C784;font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+.shad-orig{font-size:11px;color:#aaa;margin-top:4px;padding-top:4px;border-top:1px solid #E8F5E9;}
+.shad-strip-btn{font-size:12px;background:none;border:1px solid #A5D6A7;border-radius:6px;padding:2px 7px;cursor:pointer;color:#388E3C;margin-left:6px;flex-shrink:0;}
+.shad-strip-btn.rec-on{background:var(--coral);color:#fff;border-color:var(--coral);}
+.shad-strip-result{font-size:13px;color:#1B5E20;font-weight:600;background:#F1F8E9;border-radius:6px;padding:4px 8px;margin-top:4px;display:none;}
+
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
 
 
@@ -1192,9 +1200,10 @@ function buildScript(){
       <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
       <div class="nav-progress"><div class="nav-steps" id="nav-steps"></div><div class="nav-count" id="nav-count"></div></div>
       <button class="nav-speak-btn" onclick="speakCurrent()" title="TTS 듣기">🔊</button>
-      <button class="nav-speak-btn rec-done" id="speak-btn" onclick="nhsRecToggle()" title="따라녹음하기">🎙️</button>
+      <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
       <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
     </div>
+    <div class="shad-result" id="shad-result"></div>
     <button class="script-toggle-btn" onclick="toggleStrip()"><span id="strip-arrow">▶</span> 전체 스크립트 보기</button>
     <div class="script-strip" id="script-strip"></div>
   </div></div>`;
@@ -1234,6 +1243,7 @@ function buildVideoScript(){
     const ttsBtn=line.audio
       ?`<button class="video-script-tts" onclick="speak(${JSON.stringify(line.text)},${JSON.stringify(line.audio)})">🔊 듣기</button>`
       :`<button class="video-script-tts" onclick="speak(${JSON.stringify(line.text)})">🔊 듣기</button>`;
+    const shadBtn=`<button class="video-script-tts shad-strip-btn" id="shad-v${i}" onclick="nhsShadLine(event,${JSON.stringify(line.text)},'v${i}')" style="margin-left:6px;" title="따라 말하기">🎤</button>`;
     return `<div class="video-script-line">
       <div class="caption-avatar" style="background:${esc(ch.color||'#E0E0E0')}">${esc(ch.emoji||'💬')}</div>
       <div class="video-script-body">
@@ -1241,7 +1251,8 @@ function buildVideoScript(){
         <div class="video-script-kr">${buildAnnoText(line.text, line.annotation)}</div>
         <div class="video-script-en">${esc(line.en)}</div>
         ${tag}
-        ${ttsBtn}
+        <div style="display:flex;align-items:center;gap:0;">${ttsBtn}${shadBtn}</div>
+        <div class="shad-strip-result" id="shad-srv${i}"></div>
       </div>
     </div>`;
   }).join('');
@@ -1297,6 +1308,8 @@ function renderScene(){
   document.getElementById('nav-next').disabled=sceneIdx===total-1;
   const sb=document.getElementById('speak-btn');
   if(sb){nhsRecCleanup();sb.textContent='🎙️';sb.title='따라녹음하기';sb.classList.remove('listening','rec-on');sb.classList.add('rec-done');sb.disabled=false;}
+  nhsShadStop();
+  const _sr=document.getElementById('shad-result');if(_sr){_sr.style.display='none';_sr.innerHTML='';}
   updateStripHighlight();
 }
 
@@ -1335,10 +1348,12 @@ function buildStrip(){
   if(!strip)return;
   strip.innerHTML=DATA.script.map((line,i)=>{
     const cfg=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
-    return `<div class="strip-row${i===sceneIdx?' current':''}" onclick="jumpScene(${i});updateStripHighlight()">
-      <div class="strip-avatar">${cfg.emoji}</div>
-      <div><div class="strip-kr">${esc(line.text)}</div><div class="strip-en">${esc(line.en)}</div></div>
-    </div>`;
+    const safeText=JSON.stringify(line.text);
+    return `<div class="strip-row${i===sceneIdx?' current':''}">
+      <div class="strip-avatar" onclick="jumpScene(${i});updateStripHighlight()">${cfg.emoji}</div>
+      <div style="flex:1;min-width:0;" onclick="jumpScene(${i});updateStripHighlight()"><div class="strip-kr">${esc(line.text)}</div><div class="strip-en">${esc(line.en)}</div></div>
+      <button class="shad-strip-btn" id="shad-s${i}" onclick="nhsShadLine(event,${safeText},${i})" title="따라 말하기">🎤</button>
+    </div><div class="shad-strip-result" id="shad-sr${i}"></div>`;
   }).join('');
 }
 
@@ -4089,6 +4104,88 @@ async function nhsRecToggle(){
     sb.textContent='⏹';sb.title='정지';sb.classList.add('rec-on');sb.classList.remove('rec-done');
   }catch(e){
     alert('마이크 권한이 필요해요.');
+  }
+}
+
+
+// ── SHADOWING (Web Speech API) ────────────────────────────
+let _shadRec=null, _shadBtnEl=null, _shadResultId=null;
+
+function nhsShadStop(){
+  if(_shadRec){try{_shadRec.stop();}catch(e){}_shadRec=null;}
+  if(_shadBtnEl){_shadBtnEl.textContent='🎤';_shadBtnEl.classList.remove('rec-on');}
+  _shadBtnEl=null; _shadResultId=null;
+}
+
+function nhsShadToggle(){
+  // Slide mode: shadow current scene line
+  if(!DATA||!DATA.script)return;
+  const line=DATA.script[sceneIdx];
+  if(!line)return;
+  const btn=document.getElementById('shad-btn');
+  if(!btn)return;
+  if(_shadRec){nhsShadStop();return;}
+  _nhsShadStart(btn, line.text, 'shad-result', true);
+}
+
+function nhsShadLine(evt, targetText, resultId){
+  evt.stopPropagation();
+  const btn=evt.currentTarget;
+  const fullResultId='shad-sr'+resultId;
+  if(_shadRec){nhsShadStop(); return;}
+  _nhsShadStart(btn, targetText, fullResultId, false);
+}
+
+function _nhsShadStart(btn, targetText, resultDivId, isGlobal){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert('Chrome 브라우저에서만 사용할 수 있어요. (설정 > 마이크 허용)');return;}
+  const rec=new SR();
+  _shadRec=rec; _shadBtnEl=btn; _shadResultId=resultDivId;
+  rec.lang='ko-KR';
+  rec.interimResults=true;
+  rec.maxAlternatives=1;
+  btn.textContent='⏹';btn.classList.add('rec-on');
+  let final='';
+  rec.onresult=(e)=>{
+    let interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal) final+=e.results[i][0].transcript;
+      else interim+=e.results[i][0].transcript;
+    }
+    _shadShow(resultDivId, targetText, final||interim, false, isGlobal);
+  };
+  rec.onend=()=>{
+    _shadRec=null;
+    btn.textContent='🎤';btn.classList.remove('rec-on');
+    _shadBtnEl=null;
+    _shadShow(resultDivId, targetText, final||(isGlobal?'(소리를 인식하지 못했어요)':'❓'), true, isGlobal);
+  };
+  rec.onerror=(e)=>{
+    _shadRec=null;
+    btn.textContent='🎤';btn.classList.remove('rec-on');
+    _shadBtnEl=null;
+    const msg=e.error==='no-speech'?'(소리를 인식하지 못했어요)':e.error==='not-allowed'?'(마이크 권한 필요)':'(인식 실패)';
+    _shadShow(resultDivId, targetText, msg, true, isGlobal);
+  };
+  try{rec.start();}catch(e){_shadRec=null;btn.textContent='🎤';btn.classList.remove('rec-on');}
+}
+
+function _shadShow(divId, target, said, isFinal, isGlobal){
+  if(isGlobal){
+    // Global shad-result panel below caption
+    const panel=document.getElementById('shad-result');
+    if(!panel)return;
+    panel.style.display='block';
+    panel.innerHTML=
+      '<div class="shad-label">🎤 내가 말한 것 · I said:</div>'
+      +'<div class="shad-said">'+(said||'...')+'</div>'
+      +(isFinal?'<div class="shad-orig">원문 · Original: '+esc(target)+'</div>':'');
+  } else {
+    // Inline result below the strip/video line
+    const el=document.getElementById(divId);
+    if(!el)return;
+    el.style.display='block';
+    el.innerHTML='🎤 <strong>'+(said||'...')+'</strong>'+(isFinal?' <span style="color:#aaa;font-size:10px;">| 원문: '+esc(target)+'</span>':'');
   }
 }
 
