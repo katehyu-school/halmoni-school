@@ -1621,16 +1621,21 @@ function renderQuizScore(){
   const pct=Math.round(quizScore/total*100);
   const msg=pct===100?'🏆 완벽해요!':pct>=80?'🌟 잘했어요!':pct>=60?'👍 좋아요!':'💪 다시 도전!';
   const epKey=`${DATA.level}_${DATA.id}`;
+  const rdPool=READING_POOL[epKey]||null;
   const spPool=SP_QUIZ_POOL[epKey]||null;
-  const spSection=spPool?'<div id="spq-wrap" style="margin-top:28px;"></div>':'';
+  // If reading available: reading renders first, then reading→complete triggers spacing
+  // If no reading but spacing: spacing renders immediately
+  const rdSection=rdPool?'<div id="rd-wrap" style="margin-top:24px;"></div>':'';
+  const spSection=(!rdPool&&spPool)?'<div id="spq-wrap" style="margin-top:28px;"></div>':'';
   document.getElementById('quiz-content').innerHTML=`
     <div class="quiz-score-wrap">
       <div class="quiz-score-num">${quizScore}<span style="font-size:24px;color:var(--warm-500)">/${total}</span></div>
       <div class="quiz-score-lbl">${msg}</div>
       <div style="font-size:13px;color:var(--warm-500);margin-top:8px">${pct}% 정답</div>
       <button class="quiz-retry-btn" onclick="resetQuiz()">↺ 다시 풀기</button>
-    </div>${spSection}`;
-  if(spPool){ _spqPool=spPool; _spqIdx=0; _spqClicked=[]; _spqRender(); }
+    </div>${rdSection}${spSection}`;
+  if(rdPool){ _rdPool=rdPool; _rdQIdx=0; _rdAnswered=0; _rdRender(); }
+  else if(spPool){ _spqPool=spPool; _spqIdx=0; _spqClicked=[]; _spqRender(); }
 }
 function setQuizMode(mode){
   quizMode=mode;
@@ -1642,6 +1647,212 @@ function resetQuiz(){
   quizIdx=0;quizScore=0;
   document.getElementById('panel-quiz').innerHTML=buildQuiz();
   renderQuizQ();
+}
+
+// ── READING PASSAGE GAME ────────────────────────────────
+const READING_POOL = {
+  'L1_ep01':{
+    passage:'저는 정민이에요. 저는 학생이에요. 오늘 공원에서 리아를 만났어요. 리아도 학생이에요. 우리는 같이 공원에서 놀았어요. 공원에는 나무가 많아요. 날씨가 좋아요. 저는 공원이 좋아요.',
+    passage_en:'I am Jeongmin. I am a student. Today I met Ria at the park. Ria is also a student. We played together at the park. There are many trees in the park. The weather is nice.',
+    questions:[
+      {q:'정민이는 오늘 어디에서 리아를 만났어요?', q_en:'Where did Jeongmin meet Ria today?', options:['학교', '공원', '집'], answer:1},
+      {q:'정민이는 뭐예요?', q_en:'What is Jeongmin?', options:['선생님', '의사', '학생'], answer:2},
+    ]
+  },
+  'L1_ep02':{
+    passage:'미래네 집에 손님이 왔어요. 미래가 문을 열었어요. 정민이에요. 정민은 미래의 친구예요. 정민은 선생님이 아니에요. 학생이에요. 두 사람은 같이 숙제를 했어요. 숙제가 어렵지 않았어요.',
+    passage_en:'A guest came to Mirae\'s house. Mirae opened the door. It was Jeongmin. Jeongmin is Mirae\'s friend. Jeongmin is not a teacher. He is a student. The two did homework together.',
+    questions:[
+      {q:'정민은 미래의 누구예요?', q_en:'Who is Jeongmin to Mirae?', options:['가족', '친구', '선생님'], answer:1},
+      {q:'정민은 뭐예요?', q_en:'What is Jeongmin?', options:['선생님이에요', '학생이에요', '의사예요'], answer:1},
+    ]
+  },
+  'L1_ep03':{
+    passage:'저녁에 가족이 모두 식탁에 앉아요. 엄마가 밥을 만들어요. 오늘 메뉴는 비빔밥이에요. 비빔밥에는 채소하고 고기가 있어요. 우리는 "잘 먹겠습니다" 하고 같이 먹어요. 비빔밥이 맛있어요. 다 먹고 나서 "잘 먹었습니다" 해요.',
+    passage_en:'The family all sit at the dinner table. Mom makes the rice. Today\'s menu is bibimbap. Bibimbap has vegetables and meat. We say "thank you for the food" and eat together.',
+    questions:[
+      {q:'오늘 저녁 메뉴가 뭐예요?', q_en:"What is today's dinner menu?", options:['김밥', '비빔밥', '불고기'], answer:1},
+      {q:'밥을 다 먹고 나서 뭐라고 해요?', q_en:'What do you say after finishing the meal?', options:['잘 먹겠습니다', '잘 먹었습니다', '안녕히 계세요'], answer:1},
+    ]
+  },
+  'L1_ep04':{
+    passage:'리아가 미래에게 문자를 보냈어요. "우리 오늘 몇 시에 만날까?" 미래가 답장을 보냈어요. "오후 세 시에 공원에서 만나요." 리아는 오후 두 시에 집에서 나왔어요. 공원은 집에서 멀지 않아요. 리아가 공원에 먼저 도착했어요.',
+    passage_en:'Ria sent a text to Mirae. "What time shall we meet today?" Mirae replied, "Let\'s meet at the park at 3 PM." Ria left home at 2 PM. The park is not far from home.',
+    questions:[
+      {q:'두 사람은 몇 시에 만나요?', q_en:'What time do they meet?', options:['오후 두 시', '오후 세 시', '오전 세 시'], answer:1},
+      {q:'두 사람은 어디에서 만나요?', q_en:'Where do they meet?', options:['학교에서', '집에서', '공원에서'], answer:2},
+    ]
+  },
+  'L1_ep05':{
+    passage:'미래하고 올리비아는 광장시장에 가요. 광장시장은 서울에 있는 큰 시장이에요. 두 사람은 버스를 타고 가요. 버스 정류장에서 버스를 기다려요. 광장시장에는 맛있는 음식이 많아요. 두 사람은 떡볶이를 먹으러 가요.',
+    passage_en:'Mirae and Olivia are going to Gwangjang Market. Gwangjang Market is a big market in Seoul. They take the bus to get there. They wait for the bus at the bus stop.',
+    questions:[
+      {q:'미래하고 올리비아는 어디에 가요?', q_en:'Where are Mirae and Olivia going?', options:['학교', '공원', '광장시장'], answer:2},
+      {q:'두 사람은 어떻게 가요?', q_en:'How do they get there?', options:['걸어서', '지하철을 타고', '버스를 타고'], answer:2},
+    ]
+  },
+  'L1_ep06':{
+    passage:'미래하고 친구들이 포장마차에 갔어요. 포장마차는 길에 있는 작은 식당이에요. 메뉴판에 김밥하고 떡볶이가 있어요. 미래는 김밥 두 인분을 주문했어요. 김밥이 맛있어요. 한국에는 포장마차가 많아요.',
+    passage_en:'Mirae and friends went to a pojangmacha. A pojangmacha is a small street food stall. The menu has gimbap and tteokbokki. Mirae ordered two servings of gimbap.',
+    questions:[
+      {q:'포장마차가 어디에 있어요?', q_en:'Where is the pojangmacha?', options:['건물 안', '길 위', '시장 안'], answer:1},
+      {q:'미래는 뭘 주문했어요?', q_en:'What did Mirae order?', options:['떡볶이', '순대', '김밥'], answer:2},
+    ]
+  },
+  'L1_ep07':{
+    passage:'미래는 학교에서 한국어 스터디 그룹을 만들었어요. 스터디 그룹에는 학생이 네 명 있어요. 우리는 매주 화요일에 만나요. 도서관에서 같이 공부해요. 한국어를 배우고 싶은 친구들이 많아요. 스터디 그룹이 재미있어요.',
+    passage_en:'Mirae made a Korean study group at school. There are four students in the study group. They meet every Tuesday. They study together at the library. Many friends want to learn Korean.',
+    questions:[
+      {q:'스터디 그룹은 언제 만나요?', q_en:'When does the study group meet?', options:['매주 월요일', '매주 화요일', '매주 수요일'], answer:1},
+      {q:'스터디 그룹에서 어디에서 공부해요?', q_en:'Where do they study in the group?', options:['교실', '카페', '도서관'], answer:2},
+    ]
+  },
+  'L1_ep08':{
+    passage:'오늘 리아가 도시락을 잃어버렸어요. 도시락은 어디에 있을까요? 가방 안에 없어요. 책상 위에도 없어요. 리아가 엄마한테 전화했어요. 엄마가 말했어요. "냉장고 안에 있어." 도시락이 냉장고 안에 있었어요.',
+    passage_en:"Today Ria lost her lunchbox. Where could it be? It's not in her bag. It's not on the desk either. Ria called her mom. Mom said, 'It's in the refrigerator.'",
+    questions:[
+      {q:'리아가 잃어버린 것은 뭐예요?', q_en:'What did Ria lose?', options:['핸드폰', '도시락', '가방'], answer:1},
+      {q:'도시락이 어디에 있었어요?', q_en:'Where was the lunchbox?', options:['가방 안', '책상 위', '냉장고 안'], answer:2},
+    ]
+  },
+  'L1_ep09':{
+    passage:'할머니하고 미래가 재래시장에 갔어요. 재래시장에는 과일, 채소, 생선이 많아요. 할머니가 딸기 두 박스를 샀어요. 미래는 사과 여섯 개를 샀어요. 재래시장이 마트보다 싸요. 두 사람은 즐거운 시간을 보냈어요.',
+    passage_en:'Grandma and Mirae went to a traditional market. The market has lots of fruits, vegetables and fish. Grandma bought two boxes of strawberries. Mirae bought six apples. Traditional markets are cheaper than supermarkets.',
+    questions:[
+      {q:'할머니가 뭘 샀어요?', q_en:'What did Grandma buy?', options:['사과', '딸기', '생선'], answer:1},
+      {q:'재래시장은 마트보다 어때요?', q_en:'How is the traditional market compared to the supermarket?', options:['비싸요', '멀어요', '싸요'], answer:2},
+    ]
+  },
+  'L1_ep10':{
+    passage:'어제 가족이 한강공원에 갔어요. 날씨가 맑고 좋았어요. 아빠하고 리암은 자전거를 탔어요. 엄마는 강가에서 쉬었어요. 미래는 사진을 찍었어요. 우리는 한강에서 라면도 먹었어요. 정말 즐거운 하루였어요.',
+    passage_en:'Yesterday the family went to Hangang Park. The weather was clear and nice. Dad and Liam rode bikes. Mom rested by the river. Mirae took photos. We also ate ramen at the Han River.',
+    questions:[
+      {q:'아빠하고 리암은 무엇을 했어요?', q_en:'What did Dad and Liam do?', options:['사진을 찍었어요', '자전거를 탔어요', '라면을 먹었어요'], answer:1},
+      {q:'가족은 한강에서 뭘 먹었어요?', q_en:'What did the family eat at the Han River?', options:['김밥', '치킨', '라면'], answer:2},
+    ]
+  },
+  'L1_ep11':{
+    passage:'미래 엄마하고 아빠가 리암네 집에 갔어요. 리암 엄마가 "어서 오세요!" 했어요. 손님들은 신발을 벗고 집에 들어갔어요. 리암 엄마가 차를 준비했어요. 두 가족이 거실에 앉아서 이야기를 했어요. 한국에서는 집에 들어갈 때 신발을 벗어요.',
+    passage_en:"Mirae's mom and dad went to Liam's house. Liam's mom said 'Welcome!' The guests took off their shoes and entered the house. Liam's mom prepared tea. The two families sat in the living room and talked.",
+    questions:[
+      {q:'집에 들어갈 때 뭘 해야 해요?', q_en:'What do you have to do when entering the house?', options:['모자를 벗어요', '가방을 내려요', '신발을 벗어요'], answer:2},
+      {q:'두 가족은 어디에 앉았어요?', q_en:'Where did the two families sit?', options:['부엌', '거실', '방'], answer:1},
+    ]
+  },
+  'L1_ep12':{
+    passage:'여름방학이에요. 미래하고 리아는 경복궁에 갈 거예요. 경복궁은 서울에 있는 오래된 궁궐이에요. 두 사람은 한복을 입을 수 있어요. 경복궁 안에는 박물관도 있어요. 미래는 사진을 많이 찍을 거예요.',
+    passage_en:"It's summer vacation. Mirae and Ria are going to Gyeongbokgung Palace. Gyeongbokgung is an old palace in Seoul. The two can wear hanbok there. There is also a museum inside the palace.",
+    questions:[
+      {q:'미래하고 리아는 어디에 갈 거예요?', q_en:'Where are Mirae and Ria going?', options:['한강', '광장시장', '경복궁'], answer:2},
+      {q:'경복궁 안에 뭐가 있어요?', q_en:'What is inside Gyeongbokgung?', options:['수영장', '박물관', '카페'], answer:1},
+    ]
+  },
+  'L2_ep01':{
+    passage:'미래는 한국어 공부를 열심히 해요. 미래가 좋아하는 방법은 한국 드라마를 보는 거예요. 드라마를 보면서 자주 쓰는 표현을 배워요. 미래가 배운 표현을 노트에 써요. 열심히 공부하면 한국어 실력이 늘어요. 미래의 꿈은 한국에 가는 거예요.',
+    passage_en:"Mirae studies Korean hard. Her favorite method is watching Korean dramas. While watching dramas she learns commonly used expressions. She writes down the expressions she learned in a notebook. Mirae's dream is to go to Korea.",
+    questions:[
+      {q:'미래가 좋아하는 공부 방법이 뭐예요?', q_en:"What is Mirae's favorite study method?", options:['책 읽기', '드라마 보기', '음악 듣기'], answer:1},
+      {q:'미래의 꿈이 뭐예요?', q_en:"What is Mirae's dream?", options:['선생님이 되는 것', '한국에 가는 것', '가수가 되는 것'], answer:1},
+    ]
+  },
+  'L2_ep02':{
+    passage:'리아하고 미래는 오늘 같이 비빔밥을 만들었어요. 냉장고에서 재료를 꺼냈어요. 채소를 잘게 썰고 고기를 볶았어요. 다 만들고 나서 같이 먹었어요. 리아가 말했어요. "내가 만든 음식이니까 더 맛있어!" 미래도 웃으면서 동의했어요.',
+    passage_en:'Ria and Mirae made bibimbap together today. They took the ingredients out of the refrigerator. They chopped vegetables and stir-fried the meat. After finishing they ate together. Ria said, "It tastes better because I made it!"',
+    questions:[
+      {q:'두 사람이 오늘 뭘 만들었어요?', q_en:'What did the two make today?', options:['김치찌개', '불고기', '비빔밥'], answer:2},
+      {q:'리아는 음식이 왜 더 맛있다고 했어요?', q_en:'Why did Ria say the food tasted better?', options:['재료가 신선해서', '자기가 만들었으니까', '배가 고파서'], answer:1},
+    ]
+  },
+  'L2_ep03':{
+    passage:'미래는 도서관에 자주 가요. 도서관은 조용하고 공부하기 좋아요. 미래는 어제 도서관에서 두 시간 동안 공부했어요. 어렵지만 포기하지 않았어요. 공부를 다 하고 나서 기분이 좋았어요. 열심히 하니까 뿌듯했어요.',
+    passage_en:"Mirae goes to the library often. The library is quiet and good for studying. Yesterday Mirae studied at the library for two hours. It was hard but she didn't give up. After finishing studying she felt good.",
+    questions:[
+      {q:'미래는 어제 도서관에서 얼마나 공부했어요?', q_en:'How long did Mirae study at the library yesterday?', options:['한 시간', '두 시간', '세 시간'], answer:1},
+      {q:'공부를 다 하고 나서 미래 기분이 어땠어요?', q_en:"How did Mirae feel after finishing studying?", options:['피곤했어요', '슬펐어요', '뿌듯했어요'], answer:2},
+    ]
+  },
+  'L2_ep04':{
+    passage:'다음 주에 시험이 있어요. 리암은 요즘 매일 공부해요. 시험이 끝나면 친구들하고 영화를 볼 거예요. 리아가 물었어요. "시험 끝나면 뭐 할 거야?" 리암이 대답했어요. "맛있는 거 먹고 싶어. 같이 갈래?" 리아도 기대가 돼요.',
+    passage_en:"There is an exam next week. Liam studies every day these days. When the exam is over he will watch a movie with friends. Ria asked, 'What will you do when the exam is over?' Liam answered, 'I want to eat something delicious. Want to come?'",
+    questions:[
+      {q:'리암은 시험이 끝나면 뭘 하고 싶어요?', q_en:'What does Liam want to do when the exam is over?', options:['자고 싶어요', '맛있는 것을 먹고 싶어요', '집에 있고 싶어요'], answer:1},
+      {q:'리아의 기분이 어때요?', q_en:"How does Ria feel?", options:['걱정돼요', '슬퍼요', '기대가 돼요'], answer:2},
+    ]
+  },
+  'L2_ep05':{
+    passage:'미래는 한국어가 처음에는 어려웠어요. 하지만 포기하지 않고 계속 공부했어요. 매일 조금씩 공부하니까 실력이 늘었어요. 이제 간단한 대화를 할 수 있어요. 선생님이 말했어요. "계속 하면 분명히 잘 할 수 있어요." 미래는 더 열심히 하기로 했어요.',
+    passage_en:"Korean was hard for Mirae at first. But she didn't give up and kept studying. Studying a little each day her skills improved. Now she can have simple conversations. The teacher said, 'If you keep going you can definitely do well.'",
+    questions:[
+      {q:'미래는 처음에 한국어가 어떠했어요?', q_en:'How was Korean for Mirae at first?', options:['쉬웠어요', '재미없었어요', '어려웠어요'], answer:2},
+      {q:'선생님은 미래에게 뭐라고 했어요?', q_en:'What did the teacher say to Mirae?', options:['포기하라고 했어요', '다른 공부를 하라고 했어요', '계속 하면 잘 할 수 있다고 했어요'], answer:2},
+    ]
+  },
+};
+
+let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
+
+function _rdRender(){
+  const wrap=document.getElementById('rd-wrap');
+  if(!wrap||!_rdPool) return;
+  const d=_rdPool;
+  const q=d.questions[_rdQIdx];
+  const total=d.questions.length;
+  const isFirst=_rdQIdx===0;
+  wrap.innerHTML=
+    '<div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid #A5D6A7;border-radius:14px;padding:20px;margin-top:0;">'
+    +(isFirst?
+      '<div style="font-size:11px;font-weight:700;color:#388E3C;letter-spacing:1px;margin-bottom:10px;">📖 읽기 READING</div>'
+      +'<div style="background:#fff;border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.85;color:#2E3B2E;margin-bottom:14px;border:1px solid #C8E6C9;font-family:\'Noto Serif KR\',serif;">'+d.passage+'</div>'
+      +'<div style="font-size:11px;color:#81C784;margin-bottom:14px;font-style:italic;">'+d.passage_en+'</div>'
+    :'')
+    +'<div style="font-size:12px;color:#66BB6A;margin-bottom:6px;">Q'+(isFirst?'1':'2')+' / '+total+'</div>'
+    +'<div style="font-weight:700;font-size:15px;color:#1B5E20;margin-bottom:12px;">'+q.q+'</div>'
+    +'<div style="font-size:12px;color:#81C784;margin-bottom:12px;">'+q.q_en+'</div>'
+    +'<div id="rd-opts" style="display:flex;flex-direction:column;gap:8px;">'
+    +q.options.map((opt,i)=>'<button class="rd-opt" onclick="_rdChoose('+i+')" data-i="'+i+'" style="background:#fff;border:2px solid #C8E6C9;border-radius:10px;padding:11px 14px;font-size:14px;cursor:pointer;text-align:left;transition:all 0.15s;color:#2E3B2E;">'+opt+'</button>').join('')
+    +'</div>'
+    +'<div id="rd-fb" style="min-height:28px;margin-top:10px;"></div>'
+    +'</div>';
+}
+
+function _rdChoose(idx){
+  const q=_rdPool.questions[_rdQIdx];
+  const opts=document.querySelectorAll('.rd-opt');
+  opts.forEach(b=>b.style.pointerEvents='none');
+  const correct=idx===q.answer;
+  opts[idx].style.background=correct?'#C8E6C9':'#FFCDD2';
+  opts[idx].style.borderColor=correct?'#4CAF50':'#EF9A9A';
+  opts[q.answer].style.background='#C8E6C9';
+  opts[q.answer].style.borderColor='#4CAF50';
+  const fb=document.getElementById('rd-fb');
+  if(fb) fb.innerHTML=correct
+    ?'<span style="color:#2E7D32;font-weight:700;">✅ 정답이에요!</span>'
+    :'<span style="color:#C62828;font-weight:700;">❌ 다시 봐요!</span>';
+  _rdAnswered++;
+  setTimeout(()=>{
+    if(_rdQIdx+1<_rdPool.questions.length){ _rdQIdx++; _rdRender(); }
+    else { _rdComplete(); }
+  }, 1100);
+}
+
+function _rdComplete(){
+  const wrap=document.getElementById('rd-wrap');
+  if(wrap){
+    wrap.innerHTML+='<div style="text-align:center;margin-top:14px;font-size:15px;font-weight:700;color:#2E7D32;">🎉 읽기 완료! Great job!</div>';
+  }
+  const epKey=`${DATA.level}_${DATA.id}`;
+  const spPool=SP_QUIZ_POOL[epKey]||null;
+  if(spPool){
+    const qcontent=document.getElementById('quiz-content');
+    let spDiv=document.getElementById('spq-wrap');
+    if(!spDiv){
+      spDiv=document.createElement('div');
+      spDiv.id='spq-wrap';
+      spDiv.style.marginTop='24px';
+      qcontent.appendChild(spDiv);
+    }
+    _spqPool=spPool; _spqIdx=0; _spqClicked=[]; _spqRender();
+  }
 }
 
 // ── QUIZ SPACING GAME ────────────────────────────────

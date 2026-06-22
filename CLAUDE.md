@@ -8,8 +8,8 @@
 
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
-| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L2 마감 테스트 완성 ✅** | L3 설계 or 다음 콘텐츠 |
-| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** | L3 추가 콘텐츠 or L4 설계 |
+| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L2 마감 테스트 완성 ✅** / **읽기 지문 카드 완성 ✅** / **띄어쓰기 게임 완성 ✅** | Round 3: Shadowing 기능 |
+| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** | **L4 설계 확정 (12과)** — L4 콘텐츠 제작 전 L2 u08·u09 grammar 포맷 통일 작업 필요 |
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** (hq-mobile.html로 연결됨) | 기능 확장 |
 
 ---
@@ -77,6 +77,7 @@
 > ⚠️ **폴더 명칭 안내**: `level2/`, `level3/` 폴더는 초등반 앱의 레벨을 의미 (과거 `book2/`, `book3/`에서 2025-05-23 변경). 슬라이드/TTS 폴더는 `L2_*`, `L3_*` 접두사 유지.
 > ✅ **2026-06-11 미디어 대청소 완료**: ① 구버전 고아 파일 41개 삭제 (옛 ep05 동물원/놀이공원 21, 옛 `nhs/L2/TTS/ep1/` 폴더 15, 중복/구버전 5) ② 슬라이드/TTS 경로 통일 — `data/elem/slides|TTS/L2_*` → `data/elem/level2/slides|TTS/L2_*`, L3도 동일하게 `level3/` 아래로 머지. 이제 **레벨별 단일 경로**. ③ 의도적 보관 고아 4개: `data/basics/Korean_*.png` 2장(Basics 확장용), `data/elem/level1/harry.png`+`aera.png`(캐릭터). 참조 무결성 검증 완료 (깨진 참조 0).
 > 코드 내부 변수명(`b3*`, `book3-main` 등)은 기술 부채로 남아 있음 — 기능 변경 없이 리네이밍만 필요.
+> 🔧 **기술부채 — L2 u08·u09 grammar 포맷 통일** (2026-06-22 기록): `unit08.json`·`unit09.json`의 grammar 섹션이 구형 rule_boxes 직결 포맷. L3 표준(sections 배열 + id/tier/pattern)으로 재작성 + `renderU8Grammar()`·`renderU9Grammar()` 전용 함수 → 공통 GrammarRenderer로 교체 필요. **L4 콘텐츠 제작 시작 전에 처리 권장.**
 
 ### 성인반 아키텍처 핵심
 - `core/adult-renderer.js` — 5개 패널 렌더러 (AdultRenderer)
