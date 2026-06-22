@@ -2383,6 +2383,73 @@ function answerVerb(chosen){
 }
 function nextVerbGame(){verbGameIdx=(verbGameIdx+1)%VERB_DATA.length;renderVerbGame();}
 
+// ── 불규칙 동사 연습 게임 ──────────────────────────────────
+const IRREG_GAME_DATA = [
+  {dict:'걷다', type:'ㄷ불규칙', prompt:'공원에서 ___. (현재)', correct:'걸어요', choices:['걸어요','걷어요','거러요','걸아요']},
+  {dict:'듣다', type:'ㄷ불규칙', prompt:'음악을 ___. (현재)', correct:'들어요', choices:['들어요','듣어요','들아요','드러요']},
+  {dict:'춥다', type:'ㅂ불규칙', prompt:'오늘 날씨가 ___. (현재)', correct:'추워요', choices:['추워요','춥어요','추봐요','추배요']},
+  {dict:'어렵다', type:'ㅂ불규칙', prompt:'한국어가 ___. (현재)', correct:'어려워요', choices:['어려워요','어렵어요','어려봐요','어렵아요']},
+  {dict:'모르다', type:'르불규칙', prompt:'그 사람을 ___. (현재)', correct:'몰라요', choices:['몰라요','모러요','모르아요','모라요']},
+  {dict:'빠르다', type:'르불규칙', prompt:'토끼가 ___. (현재)', correct:'빨라요', choices:['빨라요','빠르아요','빠러요','빠르어요']},
+  {dict:'그렇다', type:'ㅎ불규칙', prompt:'네, ___. (현재)', correct:'그래요', choices:['그래요','그렇어요','그러요','그렇아요']},
+  {dict:'어떻다', type:'ㅎ불규칙', prompt:'한국어 공부가 ___? (현재)', correct:'어때요', choices:['어때요','어떻어요','어더요','어떠요']},
+  {dict:'알다', type:'ㄹ탈락', prompt:'선생님이 ___. (존댓말)', correct:'아세요', choices:['아세요','알세요','알으세요','아르세요']},
+  {dict:'만들다', type:'ㄹ탈락', prompt:'케이크를 ___. (과거)', correct:'만들었어요', choices:['만들었어요','만드었어요','만들랐어요','만들았어요']},
+];
+let irregGameIdx = 0, irregGameScore = 0, irregGameDone = false;
+
+function renderIrregGame(){
+  irregGameIdx = 0; irregGameScore = 0; irregGameDone = false;
+  showIrregQ();
+}
+function showIrregQ(){
+  const box = document.getElementById('irreg-game-box');
+  if(!box) return;
+  if(irregGameIdx >= IRREG_GAME_DATA.length){
+    const pct = Math.round(irregGameScore/IRREG_GAME_DATA.length*100);
+    const grade = pct>=90?'🏆 완벽!':pct>=70?'🌟 훌륭해요!':pct>=50?'👍 잘했어요!':'🌱 다시 해봐요';
+    box.innerHTML = '<div style="text-align:center;padding:30px 10px">'
+      +'<div style="font-size:2.5rem;margin-bottom:8px">'+grade+'</div>'
+      +'<div style="font-family:var(--font-serif);font-size:1.5rem;color:var(--teal-dark)">'+irregGameScore+' / '+IRREG_GAME_DATA.length+'</div>'
+      +'<div style="color:var(--muted);font-size:0.9rem;margin:8px 0">'+pct+'% 정답</div>'
+      +'<button onclick="renderIrregGame()" style="margin-top:16px;background:var(--teal);color:#fff;border:none;border-radius:8px;padding:10px 28px;font-size:1rem;cursor:pointer;font-family:var(--font-serif)">🔄 다시 하기</button>'
+      +'</div>';
+    return;
+  }
+  const q = IRREG_GAME_DATA[irregGameIdx];
+  const shuffled = [...q.choices].sort(()=>Math.random()-0.5);
+  box.innerHTML = '<div style="padding:16px 4px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+    +'<span style="background:var(--coral-lt);color:var(--coral);padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700">'+q.type+'</span>'
+    +'<span style="color:var(--muted);font-size:12px">'+(irregGameIdx+1)+' / '+IRREG_GAME_DATA.length+'</span>'
+    +'</div>'
+    +'<div style="text-align:center;margin-bottom:8px">'
+    +'<div style="font-family:var(--font-serif);font-size:1.4rem;color:var(--sky);font-weight:700">'+q.dict+'</div>'
+    +'</div>'
+    +'<div style="font-family:var(--font-serif);font-size:1.05rem;text-align:center;margin-bottom:18px;color:var(--warm-800)">'+q.prompt+'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+    +shuffled.map(c=>'<button onclick="pickIrregAns(this,\''+c+'\',\''+q.correct+'\')" style="padding:12px;font-family:var(--font-serif);font-size:1rem;border:2px solid var(--warm-200);background:var(--surface);border-radius:10px;cursor:pointer;transition:all 0.15s">'+c+'</button>').join('')
+    +'</div>'
+    +'<div id="irreg-feedback" style="margin-top:14px;min-height:40px;text-align:center"></div>'
+    +'</div>';
+}
+function pickIrregAns(btn, chosen, correct){
+  const btns = document.querySelectorAll('#irreg-game-box button');
+  btns.forEach(b=>b.style.pointerEvents='none');
+  const fb = document.getElementById('irreg-feedback');
+  if(chosen===correct){
+    btn.style.background='var(--teal-lt)'; btn.style.borderColor='var(--teal)'; btn.style.color='var(--teal-dark)';
+    irregGameScore++;
+    speakTTS(correct);
+    fb.innerHTML='<span style="color:var(--teal-dark);font-weight:700;font-size:1.1rem">✅ 정답!</span>';
+  } else {
+    btn.style.background='var(--coral-lt)'; btn.style.borderColor='var(--coral)'; btn.style.color='var(--coral)';
+    btns.forEach(b=>{if(b.textContent===correct){b.style.background='var(--teal-lt)';b.style.borderColor='var(--teal)';}});
+    fb.innerHTML='<span style="color:var(--coral);font-weight:700">❌ 오답!</span> <span style="color:var(--teal-dark);font-weight:700">정답: '+correct+'</span>';
+  }
+  setTimeout(()=>{ irregGameIdx++; showIrregQ(); }, 1500);
+}
+
 // ── WRITING CANVAS ─────────────────────────────────────
 let wCanvas=null,wCtx=null,wDrawing=false,wLX=0,wLY=0;
 const WRITE_CHARS=[
@@ -2955,41 +3022,150 @@ function buildVerbs(){
     +'<tr><td onclick="speakTTS(\'입다\')" style="cursor:pointer">입다 🔊<br><small>To Wear</small></td><td>입-</td><td style="color:var(--coral)">받침 있음<br>(자음 종결)</td><td onclick="speakTTS(\'입어요\')" style="cursor:pointer">입어요 / 입어 🔊</td><td onclick="speakTTS(\'입었어요\')" style="cursor:pointer">입었어요 / 입었어 🔊</td><td onclick="speakTTS(\'입을 거예요\')" style="cursor:pointer">입을 거예요 🔊</td></tr>'
     +'</table>';
 
-  // ── 불규칙 동사 탭 ──
+  // ── 불규칙 동사 탭 (2026-06-22 전면 개편: 르/ㅎ/ㄹ탈락 추가) ──
   const tabIrreg =
-    '<div class="basics-intro">어간의 받침이 모음 어미를 만나면 형태가 변하는 동사예요. 소리 내기 편하도록 바뀌는 거예요!<br><em>Irregular verbs — the stem changes when followed by vowel endings, for easier pronunciation.</em></div>'
+    '<div class="basics-intro">어간의 받침이나 끝소리가 모음 어미를 만나면 형태가 변하는 동사예요. 소리 내기 편하도록 바뀌는 거예요!<br><em>Irregular verbs — the stem changes when followed by vowel endings, for easier pronunciation.</em></div>'
     +'<div class="vconj-concept-grid">'
-    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">✂️</div><div class="vconj-concept-label">어간(Stem)과 어미(Ending)<span class="vconj-concept-label-en">Same structure, different behavior</span></div><div class="vconj-concept-desc">동사/형용사의 기본형 = 어간 + \'다\'<br>자음 어미 앞에서는 규칙적으로 유지돼요.<br><em>Before consonant endings: stays regular!</em><br><br><strong>기본형 = 어간 + \'다\'</strong> (예: 걷 + 다)</div></div>'
-    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🔀</div><div class="vconj-concept-label">불규칙 변화가 생기는 이유<span class="vconj-concept-label-en">Why irregulars exist</span></div><div class="vconj-concept-desc">어간 끝 받침(ㄷ, ㅂ 등) 뒤에 <strong>모음으로 시작하는 어미</strong>가 올 때, 소리 내기 편하도록 어간의 받침이 다른 자음이나 모음으로 바뀌어요.<br><em>Before vowel endings — stem consonant changes.</em><br><br><strong style="color:var(--coral)">자음 어미 앞에서는 규칙적으로 유지!</strong></div></div>'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">✂️</div><div class="vconj-concept-label">어간(Stem)과 어미(Ending)<span class="vconj-concept-label-en">Same structure, different behavior</span></div><div class="vconj-concept-desc">동사/형용사의 기본형 = 어간 + \'다\'<br>자음 어미 앞에서는 규칙적으로 유지돼요.<br><em>Before consonant endings: stays regular!</em></div></div>'
+    +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🔀</div><div class="vconj-concept-label">불규칙 변화가 생기는 이유<span class="vconj-concept-label-en">Why irregulars exist</span></div><div class="vconj-concept-desc">어간 끝 받침 뒤에 <strong>모음으로 시작하는 어미</strong>가 올 때, 소리 내기 편하도록 형태가 바뀌어요.<br><em>Before vowel endings — stem consonant changes.</em><br><strong style="color:var(--coral)">자음 어미 앞에서는 규칙적으로 유지!</strong></div></div>'
     +'</div>'
-    +'<div class="vconj-section-title">🚶‍♀️ ㄷ-불규칙 동사: \'걷다\' (To Walk)<span class="vconj-irreg-badge">ㄷ→ㄹ 불규칙</span></div>'
+    +'<div class="btab-bar" style="flex-wrap:wrap;gap:4px;margin-top:14px">'
+    +'<button class="btab active" data-btab-group="bp-irreg" data-tab="dt" onclick="switchBtab(\'bp-irreg\',\'dt\')">ㄷ 불규칙</button>'
+    +'<button class="btab" data-btab-group="bp-irreg" data-tab="bt" onclick="switchBtab(\'bp-irreg\',\'bt\')">ㅂ 불규칙</button>'
+    +'<button class="btab" data-btab-group="bp-irreg" data-tab="rt" onclick="switchBtab(\'bp-irreg\',\'rt\')">르 불규칙</button>'
+    +'<button class="btab" data-btab-group="bp-irreg" data-tab="ht" onclick="switchBtab(\'bp-irreg\',\'ht\')">ㅎ 불규칙</button>'
+    +'<button class="btab" data-btab-group="bp-irreg" data-tab="lt" onclick="switchBtab(\'bp-irreg\',\'lt\')">ㄹ 탈락</button>'
+    +'<button class="btab" data-btab-group="bp-irreg" data-tab="igame" onclick="switchBtab(\'bp-irreg\',\'igame\');renderIrregGame()">🎮 연습</button>'
+    +'</div>'
+    +'<div id="bp-irreg-dt" class="btab-panel active">'
+    +'<div class="vconj-section-title">🚶 ㄷ-불규칙: 어간 \'ㄷ\'이 모음 앞에서 \'ㄹ\'로 바뀌어요<span class="vconj-irreg-badge">ㄷ→ㄹ</span></div>'
     +'<div class="vconj-verb-card">'
-    +'<div class="vconj-verb-rule">🔀 <strong>ㄷ → ㄹ 변형 규칙:</strong> 어간 받침 <strong>\'ㄷ\'</strong>이 모음 어미를 만나면 <strong>\'ㄹ\'</strong>로 변해요. 자음 어미 앞에서는 그대로!<br><em>ㄷ → ㄹ: stem-final ㄷ becomes ㄹ before vowel endings. No change before consonant endings!</em></div>'
+    +'<div class="vconj-verb-rule">🔀 <strong>규칙:</strong> 어간 받침 <strong>ㄷ</strong>이 <strong>모음 어미</strong>를 만나면 <strong>ㄹ</strong>로 바뀌어요. 자음 어미 앞에서는 그대로!<br><em>Stem-final ㄷ becomes ㄹ before vowel endings. No change before consonant endings.</em></div>'
     +'<div class="vconj-tense-grid">'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'걸어요\')" style="cursor:pointer">걸어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'걸어\')" style="cursor:pointer">걸어 🔊</div><div class="vconj-tense-formula">걷 + 어요 → <span style="color:var(--coral)">ㄷ→ㄹ</span> → 걸어요</div></div>'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'걸었어요\')" style="cursor:pointer">걸었어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'걸었어\')" style="cursor:pointer">걸었어 🔊</div><div class="vconj-tense-formula">걷 + 었어요 → 걸었어요</div></div>'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'걸을 거예요\')" style="cursor:pointer">걸을 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'걸을 거야\')" style="cursor:pointer">걸을 거야 🔊</div><div class="vconj-tense-formula">걷 + 을 거예요 → 걸을 거예요</div></div>'
     +'</div>'
-    +'<div class="vconj-caution">⚠️ <strong>자음 어미 앞에서는 규칙 유지! Before consonant endings: no change!</strong><br>'
-    +'걷 + 고 = <strong onclick="speakTTS(\'걷고\')" style="cursor:pointer;color:var(--teal-dark)">걷고 🔊</strong> &nbsp;|&nbsp; '
-    +'걷 + 습니다 = <strong onclick="speakTTS(\'걷습니다\')" style="cursor:pointer;color:var(--teal-dark)">걷습니다 🔊</strong><br><br>'
-    +'⚠️ <strong>모든 \'ㄷ\' 받침 동사가 불규칙은 아니에요! Not all \'ㄷ\' verbs are irregular!</strong><br>'
-    +'닫다(to close), 받다(to receive), 믿다(to believe) → 규칙 동사 ✅</div>'
+    +'<div class="vconj-caution">⚠️ <strong>자음 어미 앞: 규칙 유지!</strong> 걷+고 = 걷고 / 걷+지만 = 걷지만 / 걷+습니다 = 걷습니다<br>'
+    +'⚠️ <strong>규칙 동사 주의! ㄷ 받침이어도 불규칙이 아닌 경우:</strong> 닫다(close)→닫아요 / 받다(receive)→받아요 / 믿다(believe)→믿어요</div>'
     +'</div>'
-    +'<div class="vconj-section-title">🥶 ㅂ-불규칙 형용사: \'춥다\' (To Be Cold)<span class="vconj-irreg-badge">ㅂ→우 불규칙</span></div>'
+    +'<div class="vconj-section-title" style="margin-top:10px">📋 ㄷ-불규칙 동사 더 보기</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:6px">'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">듣다 to listen</div><div class="rule-examples"><span>듣 + 어요 → <strong>들어요</strong></span><span onclick="speakTTS(\'음악을 들어요\')" style="cursor:pointer;color:var(--muted)">음악을 들어요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">묻다 to ask</div><div class="rule-examples"><span>묻 + 어요 → <strong>물어요</strong></span><span onclick="speakTTS(\'질문을 물어요\')" style="cursor:pointer;color:var(--muted)">질문을 물어요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">깨닫다 to realize</div><div class="rule-examples"><span>깨닫 + 아요 → <strong>깨달아요</strong></span><span onclick="speakTTS(\'깨달아요\')" style="cursor:pointer;color:var(--muted)">깨달아요 🔊</span></div></div>'
+    +'</div>'
+    +'</div>'
+    +'<div id="bp-irreg-bt" class="btab-panel">'
+    +'<div class="vconj-section-title">🥶 ㅂ-불규칙: 어간 \'ㅂ\'이 모음 앞에서 \'우\'로 바뀌어요<span class="vconj-irreg-badge">ㅂ→우</span></div>'
     +'<div class="vconj-verb-card">'
-    +'<div class="vconj-verb-rule">🔀 <strong>ㅂ → 우 변형 규칙:</strong> 어간 받침 <strong>\'ㅂ\'</strong>이 모음 어미를 만나면 탈락하고 <strong>\'우\'</strong>로 바뀌어요.<br><em>ㅂ → 우: stem-final ㅂ drops and is replaced by 우 before vowel endings.</em></div>'
+    +'<div class="vconj-verb-rule">🔀 <strong>규칙:</strong> 어간 받침 <strong>ㅂ</strong>이 <strong>모음 어미</strong>를 만나면 탈락하고 <strong>우</strong>로 바뀌어요. (단, 돕다/곱다는 <strong>와</strong>로 변함)<br><em>Stem-final ㅂ drops → 우 before vowel endings. Exception: 돕다/곱다 → 와.</em></div>'
     +'<div class="vconj-tense-grid">'
-    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'추워요\')" style="cursor:pointer">추워요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추워\')" style="cursor:pointer">추워 🔊</div><div class="vconj-tense-formula">춥 + 어요 → 추+(우+어)요 → 추워요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'추워요\')" style="cursor:pointer">추워요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추워\')" style="cursor:pointer">추워 🔊</div><div class="vconj-tense-formula">춥 + 어요 → 추+우+어요 → 추워요</div></div>'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'추웠어요\')" style="cursor:pointer">추웠어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추웠어\')" style="cursor:pointer">추웠어 🔊</div><div class="vconj-tense-formula">춥 + 었어요 → 추웠어요</div></div>'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'추울 거예요\')" style="cursor:pointer">추울 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'추울 거야\')" style="cursor:pointer">추울 거야 🔊</div><div class="vconj-tense-formula">춥 + 을 거예요 → 추울 거예요</div></div>'
+    +'</div>'
+    +'<div class="vconj-caution">⚠️ <strong>자음 어미 앞: 규칙 유지!</strong> 춥+고 = 춥고 / 춥+지만 = 춥지만<br>'
+    +'⚠️ <strong>예외 — 돕다(help) / 곱다(pretty):</strong> ㅏ/ㅗ 어간 → <strong>와</strong>로 변해요 → 돕+아요 = <strong onclick="speakTTS(\'도와요\')" style="cursor:pointer;color:var(--teal-dark)">도와요 🔊</strong><br>'
+    +'⚠️ <strong>규칙 동사 주의!</strong> 잡다(catch)→잡아요 / 입다(wear)→입어요 / 좁다(narrow)→좁아요</div>'
+    +'</div>'
+    +'<div class="vconj-section-title" style="margin-top:10px">📋 ㅂ-불규칙 동사/형용사 더 보기</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:6px">'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">덥다 to be hot</div><div class="rule-examples"><span>덥 + 어요 → <strong>더워요</strong></span><span onclick="speakTTS(\'날씨가 더워요\')" style="cursor:pointer;color:var(--muted)">날씨가 더워요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">어렵다 to be hard</div><div class="rule-examples"><span>어렵 + 어요 → <strong>어려워요</strong></span><span onclick="speakTTS(\'한국어가 어려워요\')" style="cursor:pointer;color:var(--muted)">한국어가 어려워요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">가볍다 to be light</div><div class="rule-examples"><span>가볍 + 어요 → <strong>가벼워요</strong></span><span onclick="speakTTS(\'가벼워요\')" style="cursor:pointer;color:var(--muted)">가벼워요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">돕다 to help (예외)</div><div class="rule-examples"><span>돕 + 아요 → <strong>도와요</strong></span><span onclick="speakTTS(\'친구를 도와요\')" style="cursor:pointer;color:var(--muted)">친구를 도와요 🔊</span></div></div>'
+    +'</div>'
+    +'</div>'
+    +'<div id="bp-irreg-rt" class="btab-panel">'
+    +'<div class="vconj-section-title">🌀 르-불규칙: 어간 \'르\'가 모음 앞에서 \'ㄹ+라/러\'로 바뀌어요<span class="vconj-irreg-badge">르→ㄹ라/ㄹ러</span></div>'
+    +'<div class="rule-box amber" style="margin-bottom:14px"><div class="rule-label" style="color:var(--amber)">💡 르 불규칙 규칙 · The 르 Pattern</div>'
+    +'<div class="rule-examples">'
+    +'<span>1️⃣ 어간 마지막 \'르\'의 \'ㅡ\'가 탈락해요  (the ㅡ of 르 drops)</span>'
+    +'<span>2️⃣ 앞 음절 받침에 \'ㄹ\'이 추가돼요  (ㄹ is added to the previous syllable)</span>'
+    +'<span>3️⃣ 앞 모음이 ㅏ/ㅗ면 → 라,  나머지는 → 러  (ㅏ/ㅗ→ 라 / else→ 러)</span>'
+    +'<span style="color:var(--coral)">모르다: 모+르+아요 → 몰+라요 → 몰라요 ✓</span>'
+    +'<span style="color:var(--teal-dark)">부르다: 부+르+어요 → 불+러요 → 불러요 ✓</span>'
     +'</div></div>'
-    +'<div class="vconj-section-title">📊 활용 규칙 한눈에 보기 요약표 · Comparison Summary</div>'
-    +'<table class="structure-ex-table"><tr><th>기본형</th><th>어간</th><th>변화 규칙</th><th>현재 Present</th><th>과거 Past</th><th>미래 Future</th></tr>'
-    +'<tr><td onclick="speakTTS(\'걷다\')" style="cursor:pointer">걷다 🔊<br><small>ㄷ-불규칙</small></td><td>걷-</td><td style="color:var(--coral)">ㄷ → ㄹ<br>(모음 앞)</td><td onclick="speakTTS(\'걸어요\')" style="cursor:pointer">걸어요 / 걸어 🔊</td><td onclick="speakTTS(\'걸었어요\')" style="cursor:pointer">걸었어요 / 걸었어 🔊</td><td onclick="speakTTS(\'걸을 거예요\')" style="cursor:pointer">걸을 거예요 🔊</td></tr>'
-    +'<tr><td onclick="speakTTS(\'춥다\')" style="cursor:pointer">춥다 🔊<br><small>ㅂ-불규칙</small></td><td>춥-</td><td style="color:var(--coral)">ㅂ → 우<br>(모음 앞)</td><td onclick="speakTTS(\'추워요\')" style="cursor:pointer">추워요 / 추워 🔊</td><td onclick="speakTTS(\'추웠어요\')" style="cursor:pointer">추웠어요 / 추웠어 🔊</td><td onclick="speakTTS(\'추울 거예요\')" style="cursor:pointer">추울 거예요 🔊</td></tr>'
-    +'<tr><td onclick="speakTTS(\'먹다\')" style="cursor:pointer">먹다 🔊<br><small>규칙 동사 비교</small></td><td>먹-</td><td style="color:var(--teal-dark)">변화 없음<br>(규칙 활용)</td><td onclick="speakTTS(\'먹어요\')" style="cursor:pointer">먹어요 / 먹어 🔊</td><td onclick="speakTTS(\'먹었어요\')" style="cursor:pointer">먹었어요 / 먹었어 🔊</td><td onclick="speakTTS(\'먹을 거예요\')" style="cursor:pointer">먹을 거예요 🔊</td></tr>'
-    +'</table>';
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">🔀 <strong>모르다</strong> (to not know) — 대표 예시</div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'몰라요\')" style="cursor:pointer">몰라요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'몰라\')" style="cursor:pointer">몰라 🔊</div><div class="vconj-tense-formula">모르 + 아요 → 몰 + 라요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'몰랐어요\')" style="cursor:pointer">몰랐어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'몰랐어\')" style="cursor:pointer">몰랐어 🔊</div><div class="vconj-tense-formula">모르 + 았어요 → 몰랐어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'모를 거예요\')" style="cursor:pointer">모를 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'모를 거야\')" style="cursor:pointer">모를 거야 🔊</div><div class="vconj-tense-formula">모르 + ㄹ 거예요 → 모를 거예요</div></div>'
+    +'</div></div>'
+    +'<div class="vconj-section-title" style="margin-top:10px">📋 르-불규칙 동사/형용사 더 보기</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;margin-top:6px">'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">부르다 to call/sing</div><div class="rule-examples"><span>부르 + 어요 → <strong>불러요</strong></span><span onclick="speakTTS(\'노래를 불러요\')" style="cursor:pointer;color:var(--muted)">노래를 불러요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">빠르다 to be fast</div><div class="rule-examples"><span>빠르 + 아요 → <strong>빨라요</strong></span><span onclick="speakTTS(\'토끼가 빨라요\')" style="cursor:pointer;color:var(--muted)">토끼가 빨라요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">다르다 to be different</div><div class="rule-examples"><span>다르 + 아요 → <strong>달라요</strong></span><span onclick="speakTTS(\'달라요\')" style="cursor:pointer;color:var(--muted)">달라요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">자르다 to cut</div><div class="rule-examples"><span>자르 + 아요 → <strong>잘라요</strong></span><span onclick="speakTTS(\'잘라요\')" style="cursor:pointer;color:var(--muted)">잘라요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">고르다 to choose</div><div class="rule-examples"><span>고르 + 아요 → <strong>골라요</strong></span><span onclick="speakTTS(\'골라요\')" style="cursor:pointer;color:var(--muted)">골라요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">흐르다 to flow</div><div class="rule-examples"><span>흐르 + 어요 → <strong>흘러요</strong></span><span onclick="speakTTS(\'흘러요\')" style="cursor:pointer;color:var(--muted)">강물이 흘러요 🔊</span></div></div>'
+    +'</div>'
+    +'</div>'
+    +'<div id="bp-irreg-ht" class="btab-panel">'
+    +'<div class="vconj-section-title">🎨 ㅎ-불규칙: \'ㅎ\'이 모음 앞에서 탈락하고 모음이 합쳐져요<span class="vconj-irreg-badge">ㅎ 탈락</span></div>'
+    +'<div class="rule-box amber" style="margin-bottom:14px"><div class="rule-label" style="color:var(--amber)">💡 ㅎ 불규칙 규칙 · The ㅎ Pattern (형용사만! Adjectives only!)</div>'
+    +'<div class="rule-examples">'
+    +'<span>1️⃣ 어간의 \'ㅎ\'이 탈락해요  (ㅎ drops)</span>'
+    +'<span>2️⃣ 남은 어간 + 아/어 → <strong>애</strong>로 합쳐져요  (merges into ㅐ)</span>'
+    +'<span style="color:var(--coral)">그렇다: 그러+아요 → ㅎ탈락 → 그래요 ✓</span>'
+    +'<span style="color:var(--teal-dark)">자음 어미 앞에서는 ㅎ이 그대로!  그렇+고 = 그렇고 ✓</span>'
+    +'<span style="background:var(--amber-50);padding:2px 6px;border-radius:4px">⚠️ 좋다 → 좋아요 (규칙! ㅎ탈락 아님)</span>'
+    +'</div></div>'
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">🔀 <strong>그렇다</strong> (to be so / that\'s right) — 대표 예시</div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'그래요\')" style="cursor:pointer">그래요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'그래\')" style="cursor:pointer">그래 🔊</div><div class="vconj-tense-formula">그렇 + 아요 → ㅎ탈락 → 그래요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'그랬어요\')" style="cursor:pointer">그랬어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'그랬어\')" style="cursor:pointer">그랬어 🔊</div><div class="vconj-tense-formula">그렇 + 았어요 → 그랬어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'그럴 거예요\')" style="cursor:pointer">그럴 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'그럴 거야\')" style="cursor:pointer">그럴 거야 🔊</div><div class="vconj-tense-formula">그렇 + 을 거예요 → ㅎ탈락 → 그럴 거예요</div></div>'
+    +'</div></div>'
+    +'<div class="vconj-section-title" style="margin-top:10px">🌈 색깔 형용사 — ㅎ-불규칙이 많아요! Color Adjectives</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:6px">'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">어떻다 how (is it)?</div><div class="rule-examples"><span>어떻 + 아요 → <strong>어때요</strong></span><span onclick="speakTTS(\'어때요\')" style="cursor:pointer;color:var(--muted)">어때요? 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">파랗다 to be blue</div><div class="rule-examples"><span>파랗 + 아요 → <strong>파래요</strong></span><span onclick="speakTTS(\'하늘이 파래요\')" style="cursor:pointer;color:var(--muted)">하늘이 파래요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">빨갛다 to be red</div><div class="rule-examples"><span>빨갛 + 아요 → <strong>빨개요</strong></span><span onclick="speakTTS(\'사과가 빨개요\')" style="cursor:pointer;color:var(--muted)">사과가 빨개요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">노랗다 to be yellow</div><div class="rule-examples"><span>노랗 + 아요 → <strong>노래요</strong></span><span onclick="speakTTS(\'노래요\')" style="cursor:pointer;color:var(--muted)">바나나가 노래요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">하얗다 to be white</div><div class="rule-examples"><span>하얗 + 아요 → <strong>하얘요</strong></span><span onclick="speakTTS(\'눈이 하얘요\')" style="cursor:pointer;color:var(--muted)">눈이 하얘요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">까맣다 to be black</div><div class="rule-examples"><span>까맣 + 아요 → <strong>까매요</strong></span><span onclick="speakTTS(\'까매요\')" style="cursor:pointer;color:var(--muted)">밤하늘이 까매요 🔊</span></div></div>'
+    +'</div>'
+    +'</div>'
+    +'<div id="bp-irreg-lt" class="btab-panel">'
+    +'<div class="vconj-section-title">🔇 ㄹ-탈락: 어간 \'ㄹ\'이 특정 자음 앞에서 탈락해요<span class="vconj-irreg-badge">ㄹ 탈락</span></div>'
+    +'<div class="rule-box amber" style="margin-bottom:14px"><div class="rule-label" style="color:var(--amber)">💡 ㄹ 탈락 규칙 · When ㄹ Drops</div>'
+    +'<div class="rule-examples">'
+    +'<span>ㄹ 받침 뒤에 <strong>ㄴ, ㅂ, 시</strong>로 시작하는 어미가 오면 ㄹ이 탈락해요!</span>'
+    +'<span style="color:var(--coral)">알+세요 → <strong>아세요</strong> (ㄹ탈락, ㄹ before 시)</span>'
+    +'<span style="color:var(--coral)">알+ㅂ니다 → <strong>압니다</strong> (ㄹ탈락, ㄹ before ㅂ)</span>'
+    +'<span style="color:var(--coral)">아+는 → <strong>아는</strong> (ㄹ탈락, ㄹ before ㄴ)</span>'
+    +'<span style="color:var(--teal-dark)">모음 어미 앞: ㄹ 그대로! 알+아요 = <strong>알아요</strong> ✓</span>'
+    +'</div></div>'
+    +'<div class="vconj-verb-card">'
+    +'<div class="vconj-verb-rule">🔀 <strong>알다</strong> (to know) — 대표 예시</div>'
+    +'<div class="vconj-tense-grid">'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'알아요\')" style="cursor:pointer">알아요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알아\')" style="cursor:pointer">알아 🔊</div><div class="vconj-tense-formula">알 + 아요 → 알아요 (ㄹ 그대로)</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'알았어요\')" style="cursor:pointer">알았어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알았어\')" style="cursor:pointer">알았어 🔊</div><div class="vconj-tense-formula">알 + 았어요 → 알았어요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'알 거예요\')" style="cursor:pointer">알 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알 거야\')" style="cursor:pointer">알 거야 🔊</div><div class="vconj-tense-formula">알 + ㄹ 거예요 → 알 거예요</div></div>'
+    +'</div>'
+    +'<div class="vconj-caution">💡 <strong>특별 형태 · Special Forms</strong><br>'
+    +'알+<strong>시</strong>어요 → <strong onclick="speakTTS(\'아세요\')" style="cursor:pointer;color:var(--teal-dark)">아세요 🔊</strong> (존댓말 현재, ㄹ탈락) &nbsp;|&nbsp; '
+    +'알+<strong>ㅂ</strong>니다 → <strong onclick="speakTTS(\'압니다\')" style="cursor:pointer;color:var(--teal-dark)">압니다 🔊</strong> (격식체, ㄹ탈락) &nbsp;|&nbsp; '
+    +'알+<strong>ㄴ</strong> → <strong onclick="speakTTS(\'아는\')" style="cursor:pointer;color:var(--teal-dark)">아는 🔊</strong> (현재 관형, ㄹ탈락)</div>'
+    +'</div>'
+    +'<div class="vconj-section-title" style="margin-top:10px">📋 ㄹ-탈락 동사/형용사 더 보기</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-top:6px">'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">살다 to live</div><div class="rule-examples"><span>살아요 / <strong>사세요</strong> (ㄹ탈락)</span><span onclick="speakTTS(\'서울에 살아요\')" style="cursor:pointer;color:var(--muted)">서울에 살아요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">만들다 to make</div><div class="rule-examples"><span>만들어요 / <strong>만드세요</strong></span><span onclick="speakTTS(\'케이크를 만들어요\')" style="cursor:pointer;color:var(--muted)">케이크를 만들어요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">놀다 to play</div><div class="rule-examples"><span>놀아요 / <strong>노세요</strong> (ㄹ탈락)</span><span onclick="speakTTS(\'같이 놀아요\')" style="cursor:pointer;color:var(--muted)">같이 놀아요 🔊</span></div></div>'
+    +'<div class="rule-box blue" style="margin:0"><div class="rule-label" style="color:var(--sky)">열다 to open</div><div class="rule-examples"><span>열어요 / <strong>여세요</strong> (ㄹ탈락)</span><span onclick="speakTTS(\'문을 열어요\')" style="cursor:pointer;color:var(--muted)">문을 열어요 🔊</span></div></div>'
+    +'</div>'
+    +'</div>'
+    +'<div id="bp-irreg-igame" class="btab-panel">'
+    +'<div class="vconj-section-title">🎮 불규칙 동사 연습 게임 · Irregular Verb Practice</div>'
+    +'<div id="irreg-game-box" style="min-height:200px"></div>'
+    +'</div>';
+
 
   // ── 동사 목록 탭 ──
   const tabCards =
@@ -3036,9 +3212,13 @@ function buildVerbRef(){
     {dict:'걷다',stem:'걸-',type:'ㄷ불규칙',present:'걸어요',past:'걸었어요',future:'걸을 거예요',neg:'안 걸어요',rom:'geot-da'},
     {dict:'덥다',stem:'더워-',type:'ㅂ불규칙',present:'더워요',past:'더웠어요',future:'더울 거예요',neg:'안 더워요',rom:'deop-da'},
     {dict:'돕다',stem:'도와-',type:'ㅂ불규칙',present:'도와요',past:'도왔어요',future:'도울 거예요',neg:'안 도와요',rom:'dop-da'},
+    {dict:'모르다',stem:'몰라-',type:'르불규칙',present:'몰라요',past:'몰랐어요',future:'모를 거예요',neg:'안 몰라요',rom:'mo-reu-da'},
+    {dict:'빠르다',stem:'빨라-',type:'르불규칙',present:'빨라요',past:'빨랐어요',future:'빠를 거예요',neg:'안 빨라요',rom:'ppa-reu-da'},
+    {dict:'그렇다',stem:'그래-',type:'ㅎ불규칙',present:'그래요',past:'그랬어요',future:'그럴 거예요',neg:'안 그래요',rom:'geu-reoh-da'},
+    {dict:'어떻다',stem:'어때-',type:'ㅎ불규칙',present:'어때요',past:'어땠어요',future:'어떨 거예요',neg:'안 어때요',rom:'eo-ddeo-ta'},
   ];
-  const typeColors = {'규칙':'#E8F5E9','하다':'#E3F2FD','형용사':'#FFF3E0','특수':'#F3E5F5','ㄹ탈락':'#FFF8E1','ㄷ불규칙':'#FCE4EC','ㅂ불규칙':'#FCE4EC'};
-  const legend = ['규칙','하다','형용사','ㄹ탈락','ㄷ불규칙','ㅂ불규칙'].map(t=>'<span style="background:'+typeColors[t]+';border-radius:4px;padding:2px 7px;font-size:10.5px;margin-right:4px">'+t+'</span>').join('');
+  const typeColors = {'규칙':'#E8F5E9','하다':'#E3F2FD','형용사':'#FFF3E0','특수':'#F3E5F5','ㄹ탈락':'#FFF8E1','ㄷ불규칙':'#FCE4EC','ㅂ불규칙':'#FCE4EC','르불규칙':'#EDE7F6','ㅎ불규칙':'#E0F7FA'};
+  const legend = ['규칙','하다','형용사','ㄹ탈락','ㄷ불규칙','ㅂ불규칙','르불규칙','ㅎ불규칙'].map(t=>'<span style="background:'+typeColors[t]+';border-radius:4px;padding:2px 7px;font-size:10.5px;margin-right:4px">'+t+'</span>').join('');
 
   const tableRows = rows.map(r=>'<tr style="border-top:1px solid var(--warm-200)">'
     +'<td style="padding:6px 8px;font-family:var(--font-serif);font-weight:800;font-size:15px;background:'+typeColors[r.type]+'">'+r.dict+'<div style="font-size:9px;color:var(--warm-400)">['+r.rom+']</div></td>'
@@ -3067,7 +3247,10 @@ function buildVerbRef(){
     +'• <strong>ㄹ 탈락</strong>: 알다, 살다, 만들다 — ㄹ 받침이 ㄴ/ㄹ/ㅂ/오 앞에서 탈락 (알 + 아요 → 알아요, 알 + ㅂ니다 → 압니다)<br>'
     +'• <strong>ㄷ 불규칙</strong>: 듣다, 걷다, 묻다 — 모음 어미 앞에서 ㄷ→ㄹ (듣 + 어요 → 들어요)<br>'
     +'• <strong>ㅂ 불규칙</strong>: 덥다, 춥다, 돕다 — 모음 어미 앞에서 ㅂ→워/와 (덥 + 어요 → 더워요)<br>'
-    +'• <strong>하다 동사</strong>: 하 + 아요 → 해요 (축약) · 공부하다, 요리하다 등 수천 개!</div>';
+    +'• <strong>하다 동사</strong>: 하 + 아요 → 해요 (축약) · 공부하다, 요리하다 등 수천 개!<br>'
+    +'• <strong>르 불규칙</strong>: 모르다, 부르다, 빠르다 — 모음 어미 앞에서 르→ㄹ라/ㄹ러 (모르 + 아요 → 몰라요)<br>'
+    +'• <strong>ㅎ 불규칙</strong>: 그렇다, 어떻다, 파랗다 — 모음 어미 앞에서 ㅎ탈락 + 애 (그렇 + 아요 → 그래요)<br>'
+    +'• <strong>ㄹ 탈락</strong>: 알다, 살다, 만들다 — ㄹ 받침이 ㄴ/ㅂ/시 앞에서 탈락 (알 + 세요 → 아세요)</div>';
 }
 
 // ── QUESTIONS RENDER ─────────────────────────────────
