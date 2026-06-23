@@ -221,30 +221,30 @@
       },
       "rule_boxes": [
         {
-          "color": "blue",
           "title": "형용사 → -다고 그대로 · Adjective: no change",
-          "content": "출출하다 → 출출하다고 해요\n바쁘다 → 바쁘다고 해요\n좋다 → 좋다고 해요"
+          "content": "출출하다 → 출출하다고 해요\n바쁘다 → 바쁘다고 해요\n좋다 → 좋다고 해요",
+          "type": "blue"
         },
         {
-          "color": "green",
           "title": "동사 현재 → -ㄴ다/는다고 · Verb: add -ㄴ다/는다",
-          "content": "부치다 → 부친다고 해요 (vowel stem → -ㄴ다)\n먹다 → 먹는다고 해요 (consonant stem → -는다)\n가다 → 간다고 해요"
+          "content": "부치다 → 부친다고 해요 (vowel stem → -ㄴ다)\n먹다 → 먹는다고 해요 (consonant stem → -는다)\n가다 → 간다고 해요",
+          "type": "green"
         },
         {
-          "color": "amber",
           "title": "과거 → -았/었다고 · Past tense",
-          "content": "먹었다 → 먹었다고 해요\n갔다 → 갔다고 해요\n(과거형은 형용사/동사 모두 동일)"
+          "content": "먹었다 → 먹었다고 해요\n갔다 → 갔다고 해요\n(과거형은 형용사/동사 모두 동일)",
+          "type": "amber"
         },
         {
-          "color": "red",
           "title": "⚠️ 동사인데 형용사처럼 쓰면 오류",
-          "content": "❌ 먹다고 해요 (wrong)\n✅ 먹는다고 해요 (correct)\n\n동사 현재는 반드시 -ㄴ다/는다 형태!"
+          "content": "❌ 먹다고 해요 (wrong)\n✅ 먹는다고 해요 (correct)\n\n동사 현재는 반드시 -ㄴ다/는다 형태!",
+          "type": "red"
         }
       ],
       "example_groups": [
         {
           "label": "형용사 (Adjective)",
-          "examples": [
+          "items": [
             {
               "ko": "선생님이 바쁘다고 하셨어요.",
               "en": "The teacher said she's busy."
@@ -257,7 +257,7 @@
         },
         {
           "label": "동사 현재 (Verb — present)",
-          "examples": [
+          "items": [
             {
               "ko": "할머니가 파전을 부친다고 해.",
               "en": "Grandma says she's frying pajeon."
@@ -285,19 +285,19 @@
       },
       "rule_boxes": [
         {
-          "color": "blue",
           "title": "받침 없는 명사 + 라고 · No final consonant",
-          "content": "선생님이라고 해요 = They say it's the teacher\n커피라고 해요 = They say it's coffee\n미래라고 해요 = They say her name is Mirae"
+          "content": "선생님이라고 해요 = They say it's the teacher\n커피라고 해요 = They say it's coffee\n미래라고 해요 = They say her name is Mirae",
+          "type": "blue"
         },
         {
-          "color": "green",
           "title": "받침 있는 명사 + 이라고 · With final consonant",
-          "content": "학생이라고 해요 = They say (he is) a student\n밥이라고 해요 = They say it's rice"
+          "content": "학생이라고 해요 = They say (he is) a student\n밥이라고 해요 = They say it's rice",
+          "type": "green"
         },
         {
-          "color": "amber",
           "title": "뭐라고 했어요? — 가장 자주 쓰는 패턴",
-          "content": "뭐라고 했어요? = What did they say?\n뭐라고 하셨어요? = What did (s/he) say? (높임)\n뭐라고 해요? = What do they say? / What does it say?"
+          "content": "뭐라고 했어요? = What did they say?\n뭐라고 하셨어요? = What did (s/he) say? (높임)\n뭐라고 해요? = What do they say? / What does it say?",
+          "type": "amber"
         }
       ],
       "examples": [
@@ -330,19 +330,19 @@
       },
       "rule_boxes": [
         {
-          "color": "blue",
           "title": "동사/형용사 + -냐고 해요 · Yes/No question reported",
-          "content": "먹냐고 해요 = (they ask) are you eating?\n가냐고 해요 = (they ask) are you going?\n바쁘냐고 해요 = (they ask) are you busy?"
+          "content": "먹냐고 해요 = (they ask) are you eating?\n가냐고 해요 = (they ask) are you going?\n바쁘냐고 해요 = (they ask) are you busy?",
+          "type": "blue"
         },
         {
-          "color": "green",
           "title": "이다(N) + (이)냐고 해요",
-          "content": "학생이냐고 해요 = (they ask) are you a student?\n한국 사람이냐고 해요 = (they ask) are you Korean?"
+          "content": "학생이냐고 해요 = (they ask) are you a student?\n한국 사람이냐고 해요 = (they ask) are you Korean?",
+          "type": "green"
         },
         {
-          "color": "amber",
           "title": "비교: -다고 vs -냐고",
-          "content": "-다고 = reporting a statement (says that ~)\n-냐고 = reporting a question (asking if ~)\n\n출출하다고 해요 = says he's hungry\n출출하냐고 해요 = asks if he's hungry"
+          "content": "-다고 = reporting a statement (says that ~)\n-냐고 = reporting a question (asking if ~)\n\n출출하다고 해요 = says he's hungry\n출출하냐고 해요 = asks if he's hungry",
+          "type": "amber"
         }
       ],
       "examples": [
@@ -385,33 +385,36 @@
       }
     ],
     "tip": "간접화법에서 높임: 말을 전달하는 대상이 윗사람이면 하다 → 하세요/하셨어요로 높여야 해요.",
-    "adult_dialogue": [
-      {
-        "situation": "직장 동료에게 상사 말 전달",
-        "lines": [
-          {
-            "speaker": "동료",
-            "text": "부장님이 뭐라고 하셨어요?",
-            "en": "What did the manager say?"
-          },
-          {
-            "speaker": "나",
-            "text": "회의가 3시로 바뀐다고 하셨어요.",
-            "en": "He said the meeting is changed to 3 o'clock."
-          },
-          {
-            "speaker": "동료",
-            "text": "자료 준비하냐고 물어보셨어요?",
-            "en": "Did he ask if we're preparing the materials?"
-          },
-          {
-            "speaker": "나",
-            "text": "네, 오늘까지 보내라고 하셨어요.",
-            "en": "Yes, he said to send it by today."
-          }
-        ]
-      }
-    ]
+    "adult_dialogue": {
+      "title_ko": "직장 동료에게 상사 말 전달",
+      "title_en": "How adults relay messages politely",
+      "setup_ko": "직장 동료에게 상사의 말을 전달하는 상황",
+      "setup_en": "Relaying a manager's message to a coworker",
+      "lines": [
+        {
+          "speaker": "동료",
+          "text": "부장님이 뭐라고 하셨어요?",
+          "en": "What did the manager say?"
+        },
+        {
+          "speaker": "나",
+          "text": "회의가 3시로 바뀐다고 하셨어요.",
+          "en": "He said the meeting is changed to 3 o'clock."
+        },
+        {
+          "speaker": "동료",
+          "text": "자료 준비하냐고 물어보셨어요?",
+          "en": "Did he ask if we're preparing the materials?"
+        },
+        {
+          "speaker": "나",
+          "text": "네, 오늘까지 보내라고 하셨어요.",
+          "en": "Yes, he said to send it by today."
+        }
+      ],
+      "note_ko": "말을 전달할 때 전달하는 사람이 윗사람이면 -다고 하세요 / -다고 하셨어요로 높여요.",
+      "note_en": "When relaying an elder's words, upgrade 하다 → 하세요 / 하셨어요."
+    }
   },
   "pronunciation": [
     {
