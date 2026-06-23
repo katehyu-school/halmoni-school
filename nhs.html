@@ -686,8 +686,8 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
     <button class="level-btn level-btn-basis" onclick="setLevel(this)">Basics</button>
     <button class="level-btn active" onclick="setLevel(this)">Level 1</button>
     <button class="level-btn" onclick="setLevel(this)">Level 2</button>
-    <!-- Level 3~5: 콘텐츠 준비 전 disabled. L3 ep01.json 추가 시 disabled 제거 -->
-    <button class="level-btn" disabled>Level 3</button>
+    <!-- Level 4~5: 콘텐츠 준비 전 disabled -->
+    <button class="level-btn" onclick="setLevel(this)">Level 3</button>
     <button class="level-btn" disabled>Level 4</button>
     <button class="level-btn" disabled>Level 5</button>
   </div>
@@ -778,6 +778,9 @@ const L2_EPISODES=[
   {id:'ep11',label:'여기가 옛날엔 바다였거든'},
   {id:'ep12',label:'호랑이가 지었다고요?'}
 ];
+const L3_EPISODES=[
+  {id:'ep01',label:'파전이나 부쳐 먹을까?'}
+];
 const EPISODES=L1_EPISODES; // 하위호환
 
 function buildSidebar(lv){
@@ -793,6 +796,8 @@ function buildSidebar(lv){
   }else if(lv==='L2'){
     html=L2_EPISODES.map((ep,i)=>mkItem(ep,i,'L2')).join('')
       +'<div class="lt-item" id="l2t-sidebar-item" onclick="loadL2Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 2 마감 테스트</div></div>';
+  }else if(lv==='L3'){
+    html=L3_EPISODES.map((ep,i)=>mkItem(ep,i,'L3')).join('');
   }
   document.getElementById('ep-list').innerHTML=html;
 }
@@ -2490,6 +2495,11 @@ async function openIndex(){
     ...L2_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L2_'+ep.id]){
         try{const r=await fetch(`data/nhs/L2/${ep.id}.json`);if(r.ok)EPISODE_DATA['L2_'+ep.id]=await r.json();}catch(e){}
+      }
+    }),
+    ...L3_EPISODES.map(async ep=>{
+      if(!EPISODE_DATA['L3_'+ep.id]){
+        try{const r=await fetch(`data/nhs/L3/${ep.id}.json`);if(r.ok)EPISODE_DATA['L3_'+ep.id]=await r.json();}catch(e){}
       }
     })
   ]);
@@ -4564,13 +4574,4 @@ function vdRenderScore(gramId) {
 // ════════════════════════════════════════════════════════
 </script>
 
-<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
-  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
-</footer>
-
-
-
-<script src="core/my-notes.js"></script>
-</body>
-</html>
+<footer style="text-align:center;padding:
