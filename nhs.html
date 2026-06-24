@@ -1263,10 +1263,8 @@ function buildAnnoText(text, anno){
   if(!anno.note&&!anno.grammar){
     return esc(text.slice(0,idx))+'<span class="anno-hl">'+esc(anno.highlight)+'</span>'+esc(text.slice(idx+anno.highlight.length));
   }
-  const g=JSON.stringify(anno.grammar||'');
-  const n=JSON.stringify(anno.note||'');
   return esc(text.slice(0,idx))
-    +'<span class="anno-mark" onclick="showAnnoTooltip(event,'+g+','+n+')" onmouseleave="hideAnnoTooltip()" title="'+esc(anno.grammar||'')+'">'+esc(anno.highlight)+' 📎</span>'
+    +'<span class="anno-mark" data-grammar="'+esc(anno.grammar||'')+'" data-note="'+esc(anno.note||'')+'" onclick="showAnnoTooltipEl(event,this)" onmouseleave="hideAnnoTooltip()" title="'+esc(anno.grammar||'')+'">'+esc(anno.highlight)+' 📎</span>'
     +esc(text.slice(idx+anno.highlight.length));
 }
 function showAnnoTooltip(e,grammar,note){
@@ -1286,6 +1284,11 @@ function showAnnoTooltip(e,grammar,note){
 
 function hideAnnoTooltip(){
   document.querySelectorAll('.anno-tooltip').forEach(t=>t.remove());
+}
+function showAnnoTooltipEl(e,el){
+  const grammar=el.dataset.grammar||'';
+  const note=el.dataset.note||'';
+  showAnnoTooltip(e,grammar,note);
 }
 function buildVideoScript(){
   const charMap={};
