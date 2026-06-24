@@ -1296,7 +1296,7 @@ function buildVideoScript(){
       <div class="video-script-body">
         <div class="video-script-name">${esc(ch.name)}</div>
         <div class="video-script-kr">${buildAnnoText(line.text, line.annotation)}</div>
-        <div class="video-script-en">${esc(line.en)}</div>
+        <div class="video-script-en">${esc(line.en||line.translation||'')}</div>
         ${tag}
         <div style="display:flex;align-items:center;gap:0;">${ttsBtn}${shadBtn}</div>
         <div class="shad-strip-result" id="shad-srv${i}"></div>
@@ -1343,7 +1343,7 @@ function renderScene(){
     </div>
     <div class="caption-body" style="flex:1">
       <div class="caption-kr">${esc(line.text)}</div>
-      <div class="caption-en">${esc(line.en)}</div>
+      <div class="caption-en">${esc(line.en||line.translation||'')}</div>
       ${tagHtml}
 
     </div>
