@@ -1343,7 +1343,7 @@ function renderScene(){
       <div class="caption-name">${esc(ch.name)}</div>
     </div>
     <div class="caption-body" style="flex:1">
-      <div class="caption-kr">${esc(line.text)}</div>
+      <div class="caption-kr">${buildAnnoText(line.text, line.annotation)}</div>
       <div class="caption-en">${esc(line.en||line.translation||'')}</div>
       ${tagHtml}
 
