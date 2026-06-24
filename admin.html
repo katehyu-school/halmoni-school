@@ -473,10 +473,11 @@ body {
 
 <script>
 const SBURL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
-const SBKEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
+const SBKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnbmRndG5zcmNpZnN3bGV3bnBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NDE1NzIsImV4cCI6MjA5MjAxNzU3Mn0.U0PjtfoB61BJwl7D8eoHCBAUJ76Wus0ELl9X2XqxdBU';
 const sb    = supabase.createClient(SBURL, SBKEY);
 
-let _adminPw = ''; // 로그인한 관리자 비밀번호 (세션 메모리에만 보관)
+let _adminPw   = ''; // 로그인한 관리자 비밀번호 (세션 메모리에만 보관)
+let _adminName = ''; // 관리자 members.name (예: 'admin')
 
 // ── 토스트 ──────────────────────────────────
 function toast(msg, type = 'ok') {
@@ -508,11 +509,11 @@ async function adminLogin() {
   err.textContent = '';
 
   try {
-    const { data, error } = await sb.rpc('verify_app_password', { input_pw: pw });
-    if (error || data !== 'admin') {
-      err.textContent = data && data !== 'admin'
-        ? '관리자 비밀번호가 아니에요'
-        : '비밀번호가 맞지 않아요. Please try again.';
+    // members 테이블에서 admin role + PIN 확인
+    const { data, error } = await sb.from('members')
+      .select('name, pin').eq('role', 'admin').eq('pin', pw).single();
+    if (error || !data) {
+      err.textContent = '비밀번호가 맞지 않아요. Please try again.';
       document.getElementById('loginPw').value = '';
       const card = document.querySelector('.login-card');
       card.style.animation = 'none';
@@ -520,11 +521,12 @@ async function adminLogin() {
       card.style.animation = 'shake .4s ease';
     } else {
       _adminPw = pw;
+      _adminName = data.name;
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display  = 'block';
     }
   } catch (e) {
-    err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
+    err.textContent = '서버 연결 오류: ' + e.message;
   } finally {
     btn.disabled    = false;
     btn.textContent = '입장하기';
@@ -539,7 +541,7 @@ function doLogout() {
   document.getElementById('loginScreen').style.display = 'block';
 }
 
-// ── 비밀번호 저장 ─────────────────────────────
+// ── 비밀번호 저장 (members 테이블 직접 업데이트) ──
 async function savePasswords() {
   const fields = [
     { id: 'newStudent', role: 'student' },
@@ -555,24 +557,23 @@ async function savePasswords() {
   btn.textContent = '저장 중…';
 
   let newAdminPw = null;
+  let count = 0;
 
   try {
     for (const f of toChange) {
       const newPw = document.getElementById(f.id).value.trim();
-      const { data, error } = await sb.rpc('update_app_password', {
-        admin_pw:    _adminPw,
-        target_role: f.role,
-        new_pw:      newPw
-      });
-      if (error || !data) throw new Error(`${f.role} 변경 실패`);
+      // members 테이블에서 해당 role의 모든 멤버 PIN 업데이트
+      const { error } = await sb.from('members').update({ pin: newPw }).eq('role', f.role);
+      if (error) throw new Error(`${f.role} 변경 실패: ${error.message}`);
       if (f.role === 'admin') newAdminPw = newPw;
       document.getElementById(f.id).value = '';
+      count++;
     }
 
     // 관리자 비밀번호가 바뀌었으면 세션 갱신
     if (newAdminPw) _adminPw = newAdminPw;
 
-    toast(`✅ ${toChange.length}개 비밀번호 변경 완료!`);
+    toast(`✅ ${count}개 역할 PIN 변경 완료!`);
   } catch (e) {
     toast(`❌ ${e.message}`, 'fail');
   } finally {
