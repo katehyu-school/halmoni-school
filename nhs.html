@@ -1398,7 +1398,7 @@ function buildStrip(){
     const _sShadEsc=line.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     return `<div class="strip-row${i===sceneIdx?' current':''}">
       <div class="strip-avatar" onclick="jumpScene(${i});updateStripHighlight()">${cfg.emoji}</div>
-      <div style="flex:1;min-width:0;" onclick="jumpScene(${i});updateStripHighlight()"><div class="strip-kr">${esc(line.text)}</div><div class="strip-en">${esc(line.en)}</div></div>
+      <div style="flex:1;min-width:0;" onclick="jumpScene(${i});updateStripHighlight()"><div class="strip-kr">${esc(line.text)}</div><div class="strip-en">${esc(line.en||line.translation||'')}</div></div>
       <button class="shad-strip-btn" id="shad-s${i}" data-target="${_sShadEsc}" data-idx="${i}" onclick="nhsShadLine(event,this.dataset.target,parseInt(this.dataset.idx))" title="따라 말하기">🎤</button>
     </div><div class="shad-strip-result" id="shad-sr${i}"></div>`;
   }).join('');
