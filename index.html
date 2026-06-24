@@ -703,7 +703,8 @@ async function checkPw() {
       enterAs(data);
     }
   } catch(e) {
-    err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
+    console.error('[HQ Login Error]', e);
+    err.textContent = '오류: ' + (e.message || JSON.stringify(e));
   } finally {
     btn.disabled = false; btn.textContent = '입장하기';
   }
