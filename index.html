@@ -731,7 +731,7 @@ function enterAs(user) {
 
   if (role === 'teacher' || role === 'admin') {
     const isAdmin = role === 'admin';
-    document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + ' 선생님! 👩‍🏫';
+    document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + (name.endsWith('선생님') ? name : name + ' 선생님') + '! 👩‍🏫';
     document.querySelector('.welcome-text p').innerHTML = isAdmin
       ? '관리자 모드 &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;">ADMIN</span>'
       : '선생님 모드 &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;">TEACHER</span>';
