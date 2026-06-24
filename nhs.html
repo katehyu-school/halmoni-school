@@ -219,7 +219,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .anno-hl{color:var(--coral);font-weight:700;}
 .anno-tooltip{position:fixed;background:#1e293b;color:#f8fafc;border-radius:12px;padding:11px 15px;font-size:13px;max-width:270px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.25);line-height:1.55;pointer-events:none;}
 .anno-tooltip-tag{font-weight:700;color:#fbbf24;font-size:12px;margin-bottom:4px;}
-.anno-tooltip-note{color:#e2e8f0;}
+.anno-tooltip-note{color:#e2e8f0;white-space:pre-line;line-height:1.6;}
 
 /* ── 색인 모달 ─────────────────────────────────────────── */
 .idx-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;}
@@ -1266,7 +1266,7 @@ function buildAnnoText(text, anno){
   const g=JSON.stringify(anno.grammar||'');
   const n=JSON.stringify(anno.note||'');
   return esc(text.slice(0,idx))
-    +'<span class="anno-mark" onclick="showAnnoTooltip(event,'+g+','+n+')" title="'+esc(anno.grammar||'')+'">'+esc(anno.highlight)+' 📎</span>'
+    +'<span class="anno-mark" onclick="showAnnoTooltip(event,'+g+','+n+')" onmouseleave="hideAnnoTooltip()" title="'+esc(anno.grammar||'')+'">'+esc(anno.highlight)+' 📎</span>'
     +esc(text.slice(idx+anno.highlight.length));
 }
 function showAnnoTooltip(e,grammar,note){
@@ -1276,10 +1276,16 @@ function showAnnoTooltip(e,grammar,note){
   tip.innerHTML='<div class="anno-tooltip-tag">'+esc(grammar)+'</div><div class="anno-tooltip-note">'+esc(note)+'</div>';
   document.body.appendChild(tip);
   const x=Math.min(e.clientX+8, window.innerWidth-290);
-  const y=e.clientY+14;
+  const y=Math.min(e.clientY+14, window.innerHeight-120);
   tip.style.left=x+'px'; tip.style.top=y+'px';
-  setTimeout(()=>document.addEventListener('click',()=>tip.remove(),{once:true}),10);
   e.stopPropagation();
+  // 클릭 외부 or 같은 요소 재클릭 시 제거
+  const remove=()=>{tip.remove();document.removeEventListener('click',remove);};
+  setTimeout(()=>document.addEventListener('click',remove),50);
+}
+
+function hideAnnoTooltip(){
+  document.querySelectorAll('.anno-tooltip').forEach(t=>t.remove());
 }
 function buildVideoScript(){
   const charMap={};
