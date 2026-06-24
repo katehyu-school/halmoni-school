@@ -2319,11 +2319,16 @@ function buildBanmal(){
   const bj=DATA.banmal_jondaemal;
   if(!bj)return'<div class="loading">데이터 준비 중이에요.</div>';
   const _rawRows=bj.rows||bj.pairs||[];
-  const rows=_rawRows.map(r=>{const sk=r.situation_ko||r.situation||'';const se=r.situation_en||r.note||'';
+  const hasBnida=_rawRows.some(r=>r.jondaemal_bnida);
+  const rows=_rawRows.map(r=>{const sk=r.situation_ko||r.situation||r.meaning||'';const se=r.situation_en||r.note||'';
+    const jonVal=r.jondaemal||r.jondaemal_ayo||'';
+    const bnidaVal=r.jondaemal_bnida||'';
+    const bnidaCell=hasBnida?`<td style="padding:11px 16px"><span style="font-family:var(--font-serif);font-weight:700;color:var(--purple)">${esc(bnidaVal)}</span> ${bnidaVal?`<button onclick="speakTTS('${escA(bnidaVal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button>`:''}</td>`:'';
     return`<tr>
     <td style="padding:11px 20px">${esc(sk)}${se?`<br><span style="font-size:10px;color:var(--warm-500)">${esc(se)}</span>`:''}</td>
     <td style="padding:11px 16px"><span style="font-family:var(--font-serif);font-weight:700;color:var(--coral)">${esc(r.banmal)}</span> <button onclick="speakTTS('${escA(r.banmal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></td>
-    <td style="padding:11px 16px"><span style="font-family:var(--font-serif);font-weight:700;color:var(--teal)">${esc(r.jondaemal)}</span> <button onclick="speakTTS('${escA(r.jondaemal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></td>
+    <td style="padding:11px 16px"><span style="font-family:var(--font-serif);font-weight:700;color:var(--teal)">${esc(jonVal)}</span> ${jonVal?`<button onclick="speakTTS('${escA(jonVal)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button>`:''}</td>
+    ${bnidaCell}
   </tr>`}).join('');
 
   // vocab_comparison block (optional)
@@ -2404,7 +2409,8 @@ function buildBanmal(){
     <thead><tr>
       <th style="padding:11px 20px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--warm-300);background:var(--warm-50);color:var(--warm-500)">상황</th>
       <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--warm-300);background:#FFF4F3;color:var(--coral)">반말 👧👦</th>
-      <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--warm-300);background:var(--teal-50);color:var(--teal)">존댓말 🙇</th>
+      <th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--warm-300);background:var(--teal-50);color:var(--teal)">${hasBnida?'-아/어요 🗣️':'존댓말 🙇'}</th>
+      ${hasBnida?'<th style="padding:11px 16px;font-size:11.5px;font-weight:700;text-align:left;border-bottom:2px solid var(--warm-300);background:#F3F0FF;color:var(--purple)">ㅂ니다체 📝</th>':''}
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>
@@ -2510,6 +2516,24 @@ function buildRealLife(){
           <button onclick="stopTTS()" style="background:var(--warm-100);color:var(--warm-700);border:1px solid var(--warm-300);border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer">■ Stop</button>
         </div>`:''}
         <div style="margin-top:12px">${qHtml}</div>
+      </div>`;
+    }
+    // essay_writing type: 나의 소개 에세이 템플릿
+    if(item.type==='essay_writing'){
+      const topicBadges=(item.example_topics||[]).map(t=>`<span style="display:inline-block;background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--teal);margin:3px 3px 3px 0;font-weight:600">${esc(t)}</span>`).join('');
+      const tmplLines=(item.template||[]).map((line,i)=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--teal);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${i+1}</span>
+        <div style="font-family:var(--font-serif);font-size:14px;color:var(--warm-900);font-weight:600;flex:1">${esc(line)}</div>
+      </div>`).join('');
+      return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:18px 22px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
+        <div style="font-size:14px;font-weight:700;color:var(--warm-900);margin-bottom:3px">${esc(item.title||'')}</div>
+        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-sm);padding:11px 14px;font-size:12.5px;color:var(--warm-900);line-height:1.75;margin-bottom:14px">
+          ${esc(item.instruction_ko||'')}
+          <div style="font-size:11px;color:var(--warm-500);margin-top:4px">${esc(item.instruction_en||'')}</div>
+        </div>
+        <div style="margin-bottom:12px">${tmplLines}</div>
+        ${topicBadges?`<div style="margin-top:10px"><div style="font-size:11.5px;color:var(--warm-500);margin-bottom:5px">💡 주제 예시 Topics:</div>${topicBadges}</div>`:''}
       </div>`;
     }
     // kakao type: chat bubbles
