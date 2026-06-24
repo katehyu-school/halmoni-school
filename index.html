@@ -396,6 +396,10 @@ body::before {
     </div>
     <h1 class="site-title"><span class="hq-teal">HANGEUL</span> <span class="hq-white">QUEST</span></h1>
     <p class="site-subtitle">한국어 온라인 스쿨 · Korean Language School</p>
+  <!-- BETA BADGE: remove style="display:none" when ready to announce -->
+  <div style="display:none;margin-top:10px">
+    <span style="font-size:10px;background:rgba(78,205,196,.15);border:1.5px solid rgba(78,205,196,.4);border-radius:20px;padding:4px 14px;color:#4ecdc4;letter-spacing:.14em;font-weight:700;text-transform:uppercase">✦ Open Beta</span>
+  </div>
     <div class="divider">
       <div class="divider-line"></div>
       <div class="divider-dot"></div>
@@ -408,7 +412,7 @@ body::before {
 
     <div class="hero-text">
       <p class="hero-tagline">Learn Korean the way it's <span>actually lived</span> —<br>one story at a time.</p>
-      <p class="hero-desc">Hangeul Quest is a story-first Korean language program for kids and teens. Real conversations, real situations, real Korean — not just grammar rules.</p>
+      <p class="hero-desc">Real episodes. Real conversations. Real Korean.<br>From a pojangmacha in Seoul to a campsite in Ontario — Hangeul Quest teaches Korean through the stories of a real family. Every episode, every word, every grammar point rooted in life as it's actually lived.</p>
     </div>
 
     <div class="track-grid">
@@ -418,7 +422,11 @@ body::before {
         </div>
         <div class="track-age">Ages 6–11 · 초등</div>
         <div class="track-name">Hangeul Quest Kids</div>
-        <div class="track-desc">Game-based learning through adventures with Yaong and friends. Vocabulary, games, and building blocks of Korean — step by step.</div>
+        <div class="track-desc">Game-based learning built around play. From your first Korean sounds to full sentences — block games, matching, and listening activities guide every step.</div>
+        <div style="margin-top:14px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">Level 1–3</span>
+          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">🎮 Game-Based</span>
+        </div>
       </div>
       <div class="track-card hq">
         <div class="track-icon">
@@ -426,7 +434,11 @@ body::before {
         </div>
         <div class="track-age">Ages 12 & up · 청소년·성인</div>
         <div class="track-name">Hangeul Quest</div>
-        <div class="track-desc">Episode-based Korean for teens and adults. Follow Mirae, Lia, Liam, Kayo and their crew through everyday life — and learn real Korean along the way.</div>
+        <div class="track-desc">Follow Mirae, Lia, Liam and Kayo through markets, temples, campsites and kitchens. Each episode unlocks vocabulary, grammar, and the Korean behind the conversation.</div>
+        <div style="margin-top:14px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">Level 1–3</span>
+          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">🎬 36 Episodes</span>
+        </div>
       </div>
     </div>
 
@@ -435,7 +447,8 @@ body::before {
       <div class="feat"><span class="feat-icon">🎮</span> Game-Based Practice</div>
       <div class="feat"><span class="feat-icon">🔊</span> Native-Quality Audio</div>
       <div class="feat"><span class="feat-icon">📖</span> Real-Life Korean</div>
-      <div class="feat"><span class="feat-icon">🗣️</span> Speak & Record</div>
+      <div class="feat"><span class="feat-icon">🗣️</span> Shadowing Practice</div>
+      <div class="feat"><span class="feat-icon">📎</span> Grammar Tooltips</div>
     </div>
 
     <div class="login-cta-wrap">
@@ -485,7 +498,12 @@ body::before {
 
   <footer class="site-footer">
     © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-    Hangeul Quest
+    Hangeul Quest &nbsp;·&nbsp;
+    <a href="https://youtube.com/@hangeulquest" target="_blank" rel="noopener"
+       style="color:rgba(180,215,235,.4);text-decoration:none;transition:color .2s"
+       onmouseover="this.style.color='#4ecdc4'" onmouseout="this.style.color='rgba(180,215,235,.4)'">
+      ▶ YouTube @hangeulquest
+    </a>
   </footer>
 
 </div>
@@ -494,14 +512,22 @@ body::before {
 <div class="modal-bg" id="loginModal" onclick="if(event.target===this)closeLoginModal()">
   <div class="login-modal">
     <button class="modal-close" onclick="closeLoginModal()">✕</button>
-    <span class="login-label">Enter Access Code · 비밀번호</span>
+    <span class="login-label">로그인 · Sign In</span>
+
+    <div style="margin-bottom:12px">
+      <select id="nameSelect" style="width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid rgba(78,205,196,.3);background:rgba(6,18,35,.7);color:#e8f4f8;font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .2s;cursor:pointer;appearance:none;text-align:center">
+        <option value="">이름을 선택하세요 ▾</option>
+      </select>
+    </div>
+
     <div class="pw-wrap">
       <input class="pw-input" type="password" id="pwInput"
-        placeholder="비밀번호를 입력하세요"
+        placeholder="PIN 번호 입력"
+        maxlength="6"
         onkeydown="if(event.key==='Enter')checkPw()">
       <button class="eye-btn" onclick="toggleEye()" id="eyeBtn">👁</button>
     </div>
-    <button class="enter-btn" onclick="checkPw()">Enter</button>
+    <button class="enter-btn" onclick="checkPw()">입장하기</button>
     <div class="error-msg" id="errMsg"></div>
   </div>
 </div>
@@ -538,67 +564,102 @@ const _SBKEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
 const _sb    = supabase.createClient(_SBURL, _SBKEY);
 
 let editingIdx = -1;
+let _members = [];  // 멤버 목록 캐시
+
+// 페이지 로드 시 멤버 목록 fetch
+async function loadMembers() {
+  try {
+    const { data } = await _sb.from('members').select('name, display_name, role').order('display_name');
+    if (data) {
+      _members = data;
+      const sel = document.getElementById('nameSelect');
+      sel.innerHTML = '<option value="">이름을 선택하세요 ▾</option>';
+      data.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.name;
+        opt.textContent = m.display_name;
+        sel.appendChild(opt);
+      });
+    }
+  } catch(e) { console.warn('멤버 로드 실패', e); }
+}
 
 function openLoginModal() {
   document.getElementById('loginModal').classList.add('open');
-  setTimeout(()=>document.getElementById('pwInput').focus(), 100);
+  loadMembers();
+  setTimeout(()=>document.getElementById('nameSelect').focus(), 100);
 }
 function closeLoginModal() {
   document.getElementById('loginModal').classList.remove('open');
   document.getElementById('errMsg').textContent = '';
+  document.getElementById('pwInput').value = '';
 }
 
 async function checkPw() {
-  const val = document.getElementById('pwInput').value.trim();
-  const err = document.getElementById('errMsg');
-  const btn = document.querySelector('.enter-btn');
-  const inp = document.getElementById('pwInput');
+  const name = document.getElementById('nameSelect').value;
+  const pin  = document.getElementById('pwInput').value.trim();
+  const err  = document.getElementById('errMsg');
+  const btn  = document.querySelector('.enter-btn');
 
-  if (!val) { err.textContent = '비밀번호를 입력하세요'; return; }
+  if (!name) { err.textContent = '이름을 선택해 주세요'; return; }
+  if (!pin)  { err.textContent = 'PIN을 입력해 주세요'; return; }
 
-  btn.disabled    = true;
-  btn.textContent = '확인 중…';
-  err.textContent = '';
+  btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
 
   try {
-    const { data, error } = await _sb.rpc('verify_app_password', { input_pw: val });
+    const { data, error } = await _sb.rpc('verify_member_login', {
+      input_name: name, input_pin: pin
+    });
     if (error || !data) {
-      err.textContent = '비밀번호가 맞지 않아요. Please try again.';
-      inp.value = '';
-      inp.focus();
+      err.textContent = 'PIN이 맞지 않아요. Please try again.';
+      document.getElementById('pwInput').value = '';
       const modal = document.querySelector('.login-modal');
-      modal.style.animation = 'none';
-      void modal.offsetHeight;
+      modal.style.animation = 'none'; void modal.offsetHeight;
       modal.style.animation = 'shake .4s ease';
     } else {
+      // 세션 저장
+      sessionStorage.setItem('hq_user', JSON.stringify(data));
+      // My Space / My Notes 자동 프로필 연결
+      localStorage.setItem('ms_current',  data.display_name);
+      localStorage.setItem('nms_current', data.display_name);
+      // 출석 자동 기록
+      _sb.rpc('log_attendance', { input_name: data.name }).catch(()=>{});
       closeLoginModal();
       enterAs(data);
     }
-  } catch (e) {
+  } catch(e) {
     err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
   } finally {
-    btn.disabled    = false;
-    btn.textContent = 'Enter';
+    btn.disabled = false; btn.textContent = '입장하기';
   }
 }
 
-function enterAs(role) {
+function enterAs(user) {
   document.getElementById('landingBox').style.display = 'none';
   document.getElementById('appBox').style.display = 'block';
 
-  if (role === 'teacher' || role === 'admin') {
-    ['card0','card1','card2'].forEach(id => {
-      const card = document.getElementById(id);
-      const href = card.getAttribute('href').split('?')[0];
-      card.setAttribute('href', href + '?teacher');
-    });
-    const isAdmin = (role === 'admin');
-    document.querySelector('.welcome-text p').innerHTML = isAdmin
-      ? '관리자 모드로 입장했어요 · Admin mode &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;letter-spacing:.06em;">ADMIN</span>'
-      : '선생님 모드로 입장했어요 · Teacher mode &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;letter-spacing:.06em;">TEACHER</span>';
-  }
+  const role = user.role;
+  const name = user.display_name;
 
-  if (role === 'admin') activateAdmin();
+  // 앱 카드 URL에 ?name=xxx 파라미터 추가 (수업 연동용)
+  ['card0','card1','card2'].forEach(id => {
+    const card = document.getElementById(id);
+    const base = card.getAttribute('href').split('?')[0];
+    card.setAttribute('href', base + '?name=' + encodeURIComponent(user.name)
+      + (role === 'teacher' || role === 'admin' ? '&teacher' : ''));
+  });
+
+  if (role === 'teacher' || role === 'admin') {
+    const isAdmin = role === 'admin';
+    document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + ' 선생님! 👩‍🏫';
+    document.querySelector('.welcome-text p').innerHTML = isAdmin
+      ? '관리자 모드 &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;">ADMIN</span>'
+      : '선생님 모드 &nbsp;<span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#e8d5a3;">TEACHER</span>';
+    if (isAdmin) activateAdmin();
+  } else {
+    document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
+    document.querySelector('.welcome-text p').textContent = '수업을 선택해 주세요 · Please select your class';
+  }
 }
 
 function toggleEye() {
@@ -612,12 +673,10 @@ function activateAdmin() {
   document.getElementById('appGrid').classList.add('edit-mode');
   document.getElementById('adminBar').classList.add('show');
 }
-
 function exitAdmin() {
   document.getElementById('appGrid').classList.remove('edit-mode');
   document.getElementById('adminBar').classList.remove('show');
 }
-
 function openEdit(e, idx) {
   e.preventDefault(); e.stopPropagation();
   editingIdx = idx;
@@ -627,12 +686,10 @@ function openEdit(e, idx) {
   document.getElementById('editDesc').value  = document.getElementById('desc'+idx).innerText.trim();
   document.getElementById('editModalBg').classList.add('open');
 }
-
 function closeEditModal() {
   document.getElementById('editModalBg').classList.remove('open');
   editingIdx = -1;
 }
-
 function saveEdit() {
   if (editingIdx < 0) return;
   const i = editingIdx;
@@ -642,7 +699,6 @@ function saveEdit() {
   document.getElementById('desc'+i).innerHTML    = document.getElementById('editDesc').value.replace(/\n/g,'<br>');
   closeEditModal();
 }
-
 document.getElementById('editModalBg').addEventListener('click', function(e) {
   if (e.target === this) closeEditModal();
 });
