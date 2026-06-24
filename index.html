@@ -680,9 +680,11 @@ async function checkPw() {
   btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
 
   try {
-    const { data, error } = await _sb.rpc('verify_member_login', {
-      input_name: name, input_pin: pin
-    });
+    const { data, error } = await _sb.from('members')
+      .select('role, display_name, name')
+      .eq('name', name.toLowerCase().trim())
+      .eq('pin', pin)
+      .single();
     if (error || !data) {
       err.textContent = 'PIN이 맞지 않아요. Please try again.';
       document.getElementById('pwInput').value = '';
@@ -775,6 +777,62 @@ function saveEdit() {
 document.getElementById('editModalBg').addEventListener('click', function(e) {
   if (e.target === this) closeEditModal();
 });
+
+// ── 출석부 ──
+async function openAtt() {
+  document.getElementById('attOverlay').classList.add('open');
+  const d = new Date();
+  document.getElementById('attDate').textContent =
+    d.getFullYear() + '년 ' + (d.getMonth()+1) + '월 ' + d.getDate() + '일 (' +
+    ['일','월','화','수','목','금','토'][d.getDay()] + ')';
+  await loadAtt();
+}
+function closeAtt() {
+  document.getElementById('attOverlay').classList.remove('open');
+}
+async function loadAtt() {
+  const list = document.getElementById('attList');
+  list.innerHTML = '<div class="att-empty">불러오는 중…</div>';
+  try {
+    const today = new Date().toISOString().slice(0,10);
+    const [{ data: members }, { data: logs }] = await Promise.all([
+      _sb.from('members').select('name,display_name').eq('role','student').order('display_name'),
+      _sb.from('attendance').select('member_name,status,logged_in_at').eq('class_date', today)
+    ]);
+    if (!members || !members.length) {
+      list.innerHTML = '<div class="att-empty">등록된 학생이 없어요</div>'; return;
+    }
+    const logMap = {};
+    (logs||[]).forEach(l => logMap[l.member_name] = l);
+    list.innerHTML = members.map(m => {
+      const log = logMap[m.name];
+      const status = log ? log.status : 'absent';
+      const time = log ? new Date(log.logged_in_at).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}) : '-';
+      return `<div class="att-row">
+        <span class="att-name">${m.display_name}</span>
+        <span class="att-time">${time}</span>
+        <button class="att-btn ${status}" onclick="toggleAtt('${m.name}','${status}',this)">
+          ${status==='present'?'✅ 출석':status==='late'?'🕐 지각':'❌ 결석'}
+        </button>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    list.innerHTML = '<div class="att-empty">불러오기 실패: ' + e.message + '</div>';
+  }
+}
+async function toggleAtt(name, current, btn) {
+  const next = current==='present' ? 'absent' : current==='absent' ? 'late' : 'present';
+  const label = next==='present'?'✅ 출석':next==='late'?'🕐 지각':'❌ 결석';
+  btn.className = 'att-btn ' + next;
+  btn.textContent = label;
+  btn.onclick = () => toggleAtt(name, next, btn);
+  const today = new Date().toISOString().slice(0,10);
+  await _sb.from('attendance').upsert(
+    { member_name: name, class_date: today, status: next },
+    { onConflict: 'member_name,class_date' }
+  );
+}
+
 </script>
 
 <!-- 출석부 패널 -->
