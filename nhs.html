@@ -1241,13 +1241,14 @@ function buildScript(){
     <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
-      <button class="nav-btn" id="nav-prev" onclick="moveScene(-1)">&#8249;</button>
+      <button class="nav-btn" id="nav-prev" onclick="autoPlayStop();moveScene(-1)">&#8249;</button>
       <div class="nav-progress"><div class="nav-steps" id="nav-steps"></div><div class="nav-count" id="nav-count"></div></div>
       <button class="nav-speak-btn" onclick="speakCurrent()" title="TTS 듣기">🔊</button>
-      <button class="nav-btn" id="nav-next" onclick="moveScene(1)">&#8250;</button>
+      <button class="nav-btn" id="nav-next" onclick="autoPlayStop();moveScene(1)">&#8250;</button>
     </div>
     <div class="shad-result" id="shad-result"></div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <button id="ap-btn" onclick="autoPlayToggle()" title="슬라이드 자동 재생" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">▶▶ 자동 재생</button>
       <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
       <button class="script-toggle-btn" onclick="toggleStrip()" style="flex:1"><span id="strip-arrow">▶</span> 전체 스크립트 보기</button>
     </div>
@@ -1418,6 +1419,54 @@ function speak(text,audioSrc){
     speakTTS(text);
   }
 }
+// ── AUTO-PLAY ───────────────────────────────────────────
+let _autoPlay=false,_apTimer=null;
+
+function autoPlayToggle(){
+  if(_autoPlay){autoPlayStop();return;}
+  _autoPlay=true;
+  const btn=document.getElementById('ap-btn');
+  if(btn){btn.textContent='⏹ 정지';btn.style.background='var(--coral)';}
+  autoPlayStep();
+}
+
+function autoPlayStop(){
+  _autoPlay=false;
+  if(_apTimer){clearTimeout(_apTimer);_apTimer=null;}
+  if(_audio){_audio.pause();_audio=null;}
+  if(window.speechSynthesis)speechSynthesis.cancel();
+  const btn=document.getElementById('ap-btn');
+  if(btn){btn.textContent='▶▶ 자동 재생';btn.style.background='var(--teal)';}
+}
+
+function autoPlayStep(){
+  if(!_autoPlay||!DATA)return;
+  const line=DATA.script[sceneIdx];
+  const total=DATA.script.length;
+  const onEnd=()=>{
+    if(!_autoPlay)return;
+    if(sceneIdx>=total-1){autoPlayStop();return;}
+    _apTimer=setTimeout(()=>{if(!_autoPlay)return;moveScene(1);autoPlayStep();},700);
+  };
+  if(line.audio){
+    if(_audio){_audio.pause();_audio=null;}
+    _audio=new Audio(line.audio);
+    _audio.onended=onEnd;
+    _audio.play().catch(()=>_apTTS(line.text,onEnd));
+  }else{
+    _apTTS(line.text,onEnd);
+  }
+}
+
+function _apTTS(text,onEnd){
+  if(!window.speechSynthesis){onEnd();return;}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ko-KR';u.rate=0.88;u.onend=onEnd;
+  const go=()=>{const v=speechSynthesis.getVoices().find(v=>v.lang==='ko-KR');if(v)u.voice=v;speechSynthesis.speak(u);};
+  speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
+}
+
 function speakTTS(text){
   if(!window.speechSynthesis)return;
   speechSynthesis.cancel();
