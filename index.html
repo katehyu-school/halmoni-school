@@ -743,10 +743,11 @@ async function checkPw() {
       localStorage.setItem('ms_current',  data.display_name);
       localStorage.setItem('nms_current', data.display_name);
       // 출석 자동 기록 (직접 upsert)
+      // 출석 자동 기록 — student_name은 display_name(한글)으로 저장 (Kids 앱 students 테이블과 통일)
       const _today = new Date().toISOString().slice(0,10);
       _sb.from('attendance').upsert(
-        { member_name: data.name, class_date: _today, status: 'present', logged_in_at: new Date().toISOString() },
-        { onConflict: 'member_name,class_date' }
+        { student_name: data.display_name, class_date: _today, status: 'present', logged_in_at: new Date().toISOString() },
+        { onConflict: 'student_name,class_date' }
       ).then(()=>{}).catch(()=>{});
       closeLoginModal();
       enterAs(data);
@@ -847,22 +848,24 @@ async function loadAtt() {
     const today = new Date().toISOString().slice(0,10);
     const [{ data: members }, { data: logs }] = await Promise.all([
       _sb.from('members').select('name,display_name').eq('role','student').order('display_name'),
-      _sb.from('attendance').select('member_name,status,logged_in_at').eq('class_date', today)
+      _sb.from('attendance').select('student_name,status,logged_in_at').eq('class_date', today)
     ]);
     if (!members || !members.length) {
       list.innerHTML = '<div class="att-empty">등록된 학생이 없어요</div>'; return;
     }
     const logMap = {};
-    (logs||[]).forEach(l => logMap[l.member_name] = l);
+    (logs||[]).forEach(l => logMap[l.student_name] = l);
     list.innerHTML = members.map(m => {
-      const log = logMap[m.name];
+      const log = logMap[m.display_name];  // display_name(한글)으로 매칭
       const status = log ? log.status : 'absent';
       const time = log ? new Date(log.logged_in_at).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}) : '-';
-      return `<div class="att-row" id="attrow-${m.name}">
-        <span class="att-name" id="attname-${m.name}">${m.display_name}</span>
-        <button class="att-edit-btn" onclick="startEditName('${m.name}')" title="이름 수정">✏️</button>
+      const dn = m.display_name;
+      const loginId = m.name;
+      return `<div class="att-row" id="attrow-${loginId}">
+        <span class="att-name" id="attname-${loginId}">${dn}</span>
+        <button class="att-edit-btn" onclick="startEditName('${loginId}')" title="이름 수정">✏️</button>
         <span class="att-time">${time}</span>
-        <button class="att-btn ${status}" onclick="toggleAtt('${m.name}','${status}',this)">
+        <button class="att-btn ${status}" onclick="toggleAtt('${dn}','${status}',this)">
           ${status==='present'?'✅ 출석':status==='late'?'🕐 지각':'❌ 결석'}
         </button>
       </div>`;
@@ -914,8 +917,8 @@ async function toggleAtt(name, current, btn) {
   btn.onclick = () => toggleAtt(name, next, btn);
   const today = new Date().toISOString().slice(0,10);
   await _sb.from('attendance').upsert(
-    { member_name: name, class_date: today, status: next },
-    { onConflict: 'member_name,class_date' }
+    { student_name: name, class_date: today, status: next },
+    { onConflict: 'student_name,class_date' }
   );
 }
 
