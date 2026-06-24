@@ -780,7 +780,8 @@ const L2_EPISODES=[
 ];
 const L3_EPISODES=[
   {id:'ep01',label:'파전이나 부쳐 먹을까?'},
-  {id:'ep02',label:'물티슈로 닦으라고!'}
+  {id:'ep02',label:'물티슈로 닦으라고!'},
+  {id:'ep03',label:'윷놀이를 소개합니다'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -1949,6 +1950,14 @@ const READING_POOL = {
       {q:'오래된 나무를 누가 심었다고 해요?', q_en:'Who is said to have planted the old tree?', options:['할머니','스님','호랑이'], answer:2},
     ]
   },
+
+  'L3_ep03':{
+    passage:'명절날, 한국에서 가족들이 함께 즐기는 대표적인 놀이가 있습니다. 이 놀이는 윷놀이라고 불립니다. 보통 두 편으로 나뉘어 겨룹니다. 윷가락 네 개를 던져서 뒤집힌 수에 따라 도, 개, 걸, 윷, 모가 정해집니다. 상대 편의 말이 있는 곳에 우리 말이 가면 잡힙니다. 잡힌 말은 처음부터 다시 출발해야 합니다. 우리 편 말이 판에 놓인 우리 말을 만나면 둘이 합쳐집니다.',
+    questions:[
+      {q:'윷놀이는 보통 몇 편으로 나뉘어요?', q_en:'How many teams does Yut Nori usually divide into?', options:['한 편','두 편','세 편'], answer:1},
+      {q:'잡힌 말은 어떻게 해야 해요?', q_en:'What must a captured piece do?', options:['그 자리에 멈춰요','처음부터 다시 출발해요','윷판 밖으로 나가요'], answer:1},
+    ]
+  },
 };
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
@@ -2123,6 +2132,11 @@ const SP_QUIZ_POOL = {
   'L2_ep12':[
     {chars:'이절은원래소래사였어요', spaces:[1,3,5], en:'This temple was originally called Soraesa.', hint:'이 · 절은 · 원래 · 소래사였어요'},
     {chars:'호랑이가지었다고해요', spaces:[4,8], en:'They say a tiger built it.', hint:'호랑이가 · 지었다고 · 해요'},
+  ],
+
+  'L3_ep03':[
+    {chars:'이놀이는윷놀이라고불립니다', spaces:[1,4,9], en:'This game is called Yut Nori.', hint:'이 · 놀이는 · 윷놀이라고 · 불립니다'},
+    {chars:'잡힌말은처음부터다시출발해야합니다', spaces:[2,4,8,10,14], en:'A captured piece must start over from the beginning.', hint:'잡힌 · 말은 · 처음부터 · 다시 · 출발해야 · 합니다'},
   ],
 };
 
