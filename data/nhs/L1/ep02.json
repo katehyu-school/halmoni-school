@@ -56,7 +56,12 @@
       "en": "What is your mom doing?",
       "speech_type": "존댓말",
       "audio": "data/nhs/L1/TTS/ep02/03엄마가+뭘해요_slide2.mp3",
-      "slide": 1
+      "slide": 1,
+      "annotation": {
+        "highlight": "엄마가",
+        "grammar": "이/가 주어 조사",
+        "note": "받침 O → 이  |  받침 X → 가\n엄마 + 가 → 엄마가 ✅\n언니 + 가 → 언니가 ✅\n'엄마가 뭘 해요?' = What is Mom doing?"
+      }
     },
     {
       "speaker": "mirae",
@@ -80,7 +85,12 @@
       "en": "No, she's not older sister. She's younger sister.",
       "speech_type": "존댓말",
       "audio": "data/nhs/L1/TTS/ep02/06아니요+언니가+아니에요_+동생이에요_slide3.mp3",
-      "slide": 2
+      "slide": 2,
+      "annotation": {
+        "highlight": "아니에요",
+        "grammar": "N이/가 아니에요",
+        "note": "이/가 아니에요 = It's not ~\n언니가 아니에요 = She's not my older sister\n↔ 동생이에요 = She's my younger sister"
+      }
     },
     {
       "speaker": "liam",
@@ -104,7 +114,12 @@
       "en": "Is there a cat?",
       "speech_type": "존댓말",
       "audio": "data/nhs/L1/TTS/ep02/09고양이가+있어요_slide5.mp3",
-      "slide": 4
+      "slide": 4,
+      "annotation": {
+        "highlight": "고양이가",
+        "grammar": "이/가 주어 조사",
+        "note": "고양이 + 가 → 고양이가 (모음 뒤 → 가)\n'고양이가 있어요?' = Do you have a cat?\n있어요 ↔ 없어요"
+      }
     },
     {
       "speaker": "liam",
@@ -128,7 +143,12 @@
       "en": "It's a puppy!",
       "speech_type": "존댓말",
       "audio": "data/nhs/L1/TTS/ep02/12강아지예요_sllide6.mp3",
-      "slide": 5
+      "slide": 5,
+      "annotation": {
+        "highlight": "강아지예요",
+        "grammar": "N이에요 / N예요",
+        "note": "강아지 + 예요 → 강아지예요 (모음 뒤 → 예요)\n'뭐예요?' '강아지예요' = What is it? It's a dog."
+      }
     }
   ],
   "vocab": [

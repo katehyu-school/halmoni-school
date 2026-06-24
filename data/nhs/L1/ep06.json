@@ -71,7 +71,12 @@
       "en": "Hello. One tteokbokki and two kimbap please.",
       "speech_type": "존댓말",
       "audio": "data/nhs/L1/TTS/ep06/4안녕하세요_+떡볶기+1인분하고+김밥+2인분+주세요_slide3.mp3",
-      "slide": 2
+      "slide": 2,
+      "annotation": {
+        "highlight": "1인분하고",
+        "grammar": "N인분 + 하고 — 주문 표현",
+        "note": "인분 = serving(s)\n1인분 (일 인분) / 2인분 (이 인분)\n하고 = and\n'떡볶이 1인분하고 김밥 2인분 주세요'\n= One serving of tteokbokki and two of kimbap, please"
+      }
     },
     {
       "speaker": "mina",
@@ -87,7 +92,12 @@
       "en": "Eating with kimbap is fantastic!",
       "speech_type": "반말",
       "audio": "data/nhs/L1/TTS/ep06/6김밥이랑+같이+먹으니+환상이야_slide4.mp3",
-      "slide": 3
+      "slide": 3,
+      "annotation": {
+        "highlight": "같이 먹으니",
+        "grammar": "V-(으)니 — 이유 연결",
+        "note": "먹다 → 먹으니 = since we eat ~\n'김밥이랑 같이 먹으니 환상이야!'\n= Since we're eating it with kimbap, it's fantastic!"
+      }
     },
     {
       "speaker": "mina",
