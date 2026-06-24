@@ -697,14 +697,18 @@ async function checkPw() {
       // My Space / My Notes 자동 프로필 연결
       localStorage.setItem('ms_current',  data.display_name);
       localStorage.setItem('nms_current', data.display_name);
-      // 출석 자동 기록
-      _sb.rpc('log_attendance', { input_name: data.name }).catch(()=>{});
+      // 출석 자동 기록 (직접 upsert)
+      const _today = new Date().toISOString().slice(0,10);
+      _sb.from('attendance').upsert(
+        { member_name: data.name, class_date: _today, status: 'present', logged_in_at: new Date().toISOString() },
+        { onConflict: 'member_name,class_date' }
+      ).then(()=>{}).catch(()=>{});
       closeLoginModal();
       enterAs(data);
     }
   } catch(e) {
     console.error('[HQ Login Error]', e);
-    err.textContent = '오류: ' + (e.message || JSON.stringify(e));
+    err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
   } finally {
     btn.disabled = false; btn.textContent = '입장하기';
   }
