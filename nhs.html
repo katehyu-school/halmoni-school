@@ -779,7 +779,8 @@ const L2_EPISODES=[
   {id:'ep12',label:'호랑이가 지었다고요?'}
 ];
 const L3_EPISODES=[
-  {id:'ep01',label:'파전이나 부쳐 먹을까?'}
+  {id:'ep01',label:'파전이나 부쳐 먹을까?'},
+  {id:'ep02',label:'물티슈로 닦으라고!'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -1229,7 +1230,7 @@ function showTab(name){
   const p=document.getElementById('panel-'+name);
   if(p)p.classList.add('active');
   if(name==='script')requestAnimationFrame(initSceneViewer);
-  if(name==='quiz'){quizIdx=0;quizScore=0;const qp=document.getElementById('panel-quiz');if(qp)qp.innerHTML=buildQuiz();renderQuizQ();}
+  if(name==='quiz'){quizMode='quiz';quizIdx=0;quizScore=0;const qp=document.getElementById('panel-quiz');if(qp)qp.innerHTML=buildQuiz();renderQuizQ();}
 }
 
 // ── SCRIPT / SCENE VIEWER ──────────────────────────────
@@ -1483,7 +1484,7 @@ function buildGrammar(){
       const t=rb.type||'blue';
       return`<div style="background:${colors[t]||colors.blue};border-left:4px solid ${borders[t]||borders.blue};border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:8px">
         ${rb.label?`<div style="font-size:11px;font-weight:700;text-transform:uppercase;color:${textColors[t]||textColors.blue};letter-spacing:.05em;margin-bottom:4px">${esc(rb.label)}</div>`:''}
-        <div style="font-size:13px;font-weight:700;color:${textColors[t]||textColors.blue};font-family:var(--font-serif)">${esc(rb.content||rb.rule||'')}</div>
+        <div style="font-size:13px;font-weight:700;color:${textColors[t]||textColors.blue};font-family:var(--font-serif);white-space:pre-line;line-height:1.75">${esc(rb.content||rb.rule||'')}</div>
         ${rb.note?`<div style="font-size:11px;color:var(--warm-500);margin-top:4px">${esc(rb.note)}</div>`:''}
       </div>`;
     }).join('');
@@ -1579,11 +1580,21 @@ function checkFill(id){
 }
 
 // ── QUIZ ───────────────────────────────────────────────
+function _buildQuizTabBar(){
+  const epKey=`${DATA.level}_${DATA.id}`;
+  const hasRd=!!(READING_POOL[epKey]);
+  const hasSp=!!(SP_QUIZ_POOL[epKey]);
+  if(!hasRd&&!hasSp)return'';
+  const tabs=[
+    {id:'quiz',label:'✏️ 객관식'},
+    ...(hasRd?[{id:'reading',label:'📖 읽기'}]:[]),
+    ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기'}]:[]),
+  ];
+  return`<div class="quiz-mode-bar" style="margin-bottom:16px">${tabs.map(t=>`<button class="quiz-mode-btn${quizMode===t.id?' active':''}" onclick="setQuizMode('${t.id}')">${t.label}</button>`).join('')}</div>`;
+}
 function buildQuiz(){
   if(!DATA.quiz||!DATA.quiz.length)return'<div class="loading">데이터 준비 중이에요.</div>';
-  return`<div style="max-width:580px">
-    <div id="quiz-content"></div>
-  </div>`;
+  return`<div style="max-width:580px">${_buildQuizTabBar()}<div id="quiz-content"></div></div>`;
 }
 function renderQuizQ(){
   const total=DATA.quiz.length;
@@ -1703,8 +1714,23 @@ function renderQuizScore(){
 function setQuizMode(mode){
   quizMode=mode;
   quizIdx=0;quizScore=0;
-  document.getElementById('panel-quiz').innerHTML=buildQuiz();
-  renderQuizQ();
+  const epKey=`${DATA.level}_${DATA.id}`;
+  const panel=document.getElementById('panel-quiz');
+  if(mode==='reading'){
+    const rdPool=READING_POOL[epKey]||null;
+    if(!rdPool){panel.innerHTML='<div class="loading">읽기 데이터가 없어요.</div>';return;}
+    panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div id="rd-wrap" style="margin-top:4px;"></div></div>`;
+    _rdPool=rdPool;_rdQIdx=0;_rdAnswered=0;_rdRender();
+  } else if(mode==='spacing'){
+    const spPool=SP_QUIZ_POOL[epKey]||null;
+    if(!spPool){panel.innerHTML='<div class="loading">띄어쓰기 데이터가 없어요.</div>';return;}
+    panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div id="spq-wrap" style="margin-top:4px;"></div></div>`;
+    _spqPool=spPool;_spqIdx=0;_spqClicked=[];_spqRender();
+  } else {
+    quizMode='quiz';
+    panel.innerHTML=buildQuiz();
+    renderQuizQ();
+  }
 }
 function resetQuiz(){
   quizIdx=0;quizScore=0;
@@ -1850,6 +1876,79 @@ const READING_POOL = {
       {q:'선생님은 미래에게 뭐라고 했어요?', q_en:'What did the teacher say to Mirae?', options:['포기하라고 했어요', '다른 공부를 하라고 했어요', '계속 하면 잘 할 수 있다고 했어요'], answer:2},
     ]
   },
+  'L3_ep01':{
+    passage:'리암이 할머니에게 물었어요. "할아버지가 뭐라고 하셨어요?" 할머니가 대답했어요. "조금 출출하다고 하셨어." 카요도 배가 고팠어요. 할머니는 파전을 부치기로 했어요. 카요는 새우를 못 먹어요. 그래서 할머니는 카요 파전에 파만 넣었어요.',
+    passage_en:'Liam asked grandma what grandpa said. Grandma said grandpa said he was a little hungry. Kayo was also hungry. Grandma decided to fry pajeon. Kayo cannot eat shrimp so grandma put only green onions in Kayo\'s pajeon.',
+    questions:[
+      {q:'할아버지는 지금 어떠세요?', q_en:'How is grandpa feeling right now?', options:['배불러요','출출하세요','피곤하세요'], answer:1},
+      {q:'할머니는 카요 파전에 뭘 넣었어요?', q_en:"What did grandma put in Kayo's pajeon?", options:['새우만','파하고 새우','파만'], answer:2},
+    ]
+  },
+  'L3_ep02':{
+    passage:'리암하고 카요가 PC방에 갔어요. 먼저 자판기에서 티켓을 샀어요. 할머니가 PC를 만지기 전에 물티슈로 닦으라고 하셨어요. 카요는 라면을 주문했어요. 리암은 삼겹살 덮밥을 주문했어요. 두 사람은 여기로 갖다 달라고 했어요. PC방에는 음식물을 가지고 들어오면 안 돼요.',
+    passage_en:'Liam and Kayo went to a PC café. They first bought tickets at the vending machine. Grandma had told them to wipe the PC with a wet wipe before using it. Kayo ordered ramyeon and Liam ordered pork belly rice bowl. They asked for it to be brought to their seats.',
+    questions:[
+      {q:'할머니가 PC방에서 뭘 하라고 하셨어요?', q_en:'What did grandma say to do at the PC café?', options:['손을 씻으라고 하셨어요','물티슈로 PC를 닦으라고 하셨어요','음식을 먹지 말라고 하셨어요'], answer:1},
+      {q:'카요는 뭘 주문했어요?', q_en:'What did Kayo order?', options:['삼겹살 덮밥','라면','김밥'], answer:1},
+    ]
+  },
+
+  'L2_ep06':{
+    passage:'마트에서 계산을 할 때 직원이 물었어요. "회원권이 있으세요?" 리아는 회원권이 없었어요. 직원이 만들어 드릴까요 하고 물었어요. 리아는 회원권을 만들었어요. 이제 포인트를 모을 수 있어요. 마트 회원이 되면 할인도 받을 수 있어요.',
+    passage_en:'At checkout a staff member asked if Ria had a membership card. Ria did not have one. The staff offered to make one. Ria got a membership card. Now she can collect points and get discounts as a member.',
+    questions:[
+      {q:'리아는 마트 회원권이 있었어요?', q_en:'Did Ria have a membership card?', options:['네, 있었어요','아니요, 없었어요','잘 모르겠어요'], answer:1},
+      {q:'회원이 되면 뭘 모을 수 있어요?', q_en:'What can you collect as a member?', options:['쿠폰','포인트','스탬프'], answer:1},
+    ]
+  },
+  'L2_ep07':{
+    passage:'리암이 할머니에게 점심을 같이 먹자고 했어요. 리암이 사 드리겠다고 했어요. 둘은 국수 집에 갔어요. 할머니는 잔치국수를 드셨어요. 리암은 비빔국수를 먹었어요. 밥을 다 먹고 할머니가 커피 한 잔 마시자고 하셨어요.',
+    passage_en:'Liam asked grandma to have lunch together and said he would treat her. They went to a noodle restaurant. Grandma had jangchi guksu and Liam had bibim guksu. After eating grandma suggested having coffee.',
+    questions:[
+      {q:'두 사람은 어디에 갔어요?', q_en:'Where did the two go?', options:['중국 식당','카페','국수 집'], answer:2},
+      {q:'밥을 다 먹고 할머니는 뭐 하자고 하셨어요?', q_en:'What did grandma suggest after eating?', options:['산책하자고','커피 마시자고','집에 가자고'], answer:1},
+    ]
+  },
+  'L2_ep08':{
+    passage:'할머니가 된장국을 끓이려고 해요. 리아에게 장독대에서 된장을 퍼 오라고 했어요. 된장국을 만들기 전에 멸치 다시물을 만들어요. 된장국에는 두부하고 채소가 들어가요. 된장국은 한국 사람들이 매일 먹는 음식이에요.',
+    passage_en:'Grandma wants to make doenjang-guk. She asked Ria to get doenjang from the jangdokdae. Before making soup she prepares anchovy broth. The soup has tofu and vegetables. Doenjang-guk is a food Koreans eat every day.',
+    questions:[
+      {q:'할머니는 리아한테 뭘 해 달라고 했어요?', q_en:'What did grandma ask Ria to do?', options:['두부를 잘라 달라고','된장을 퍼 와 달라고','채소를 씻어 달라고'], answer:1},
+      {q:'된장국에 뭐가 들어가요?', q_en:'What goes into doenjang-guk?', options:['고기하고 채소','두부하고 채소','계란하고 채소'], answer:1},
+    ]
+  },
+  'L2_ep09':{
+    passage:'할머니가 킬라니 주립공원 캠핑 이야기를 했어요. 거기에 아주 특별한 캠핑 사이트가 있어요. 그 사이트는 호수 위의 작은 섬에 있어요. 배를 타야만 갈 수 있어요. 할머니는 그 곳에서 별을 봤다고 했어요. 정말 아름다운 장소예요.',
+    passage_en:'Grandma told a story about camping at Killarney Park. There is a very special campsite on a small island on the lake. You can only get there by boat. Grandma said she saw the stars there. It is a beautiful place.',
+    questions:[
+      {q:'특별한 캠핑 사이트는 어디에 있어요?', q_en:'Where is the special campsite?', options:['산 위에','숲 속에','호수 위의 섬에'], answer:2},
+      {q:'거기에 어떻게 갈 수 있어요?', q_en:'How can you get there?', options:['걸어서','배를 타고','차를 타고'], answer:1},
+    ]
+  },
+  'L2_ep10':{
+    passage:'가족이 드라이브를 하고 있어요. 미래가 멀미를 해요. 창문을 열어도 괜찮지 않아요. 할머니가 생강차를 마시면 좋다고 하셨어요. 멀미할 때는 앞을 보는 게 도움이 돼요. 쉬고 싶으면 말하면 돼요.',
+    passage_en:'The family is on a road trip. Mirae has motion sickness. Opening the window does not help. Grandma said drinking ginger tea is good. Looking forward helps with motion sickness. Just say so if you want to rest.',
+    questions:[
+      {q:'미래는 왜 힘들어요?', q_en:'Why is Mirae having a hard time?', options:['피곤해요','멀미해요','배가 고파요'], answer:1},
+      {q:'멀미할 때 뭘 마시면 좋아요?', q_en:'What is good to drink for motion sickness?', options:['커피','물','생강차'], answer:2},
+    ]
+  },
+  'L2_ep11':{
+    passage:'가족이 새만금 방조제를 달리고 있어요. 방조제는 바다 위에 만든 긴 길이에요. 창밖을 보면 바다가 보여요. 새만금 방조제는 세계에서 제일 길어요. 리아가 바다 위를 달리는 것 같다고 했어요. 할머니가 예전엔 이 곳이 바다였다고 하셨어요.',
+    passage_en:'The family is driving along the Saemangeum Seawall. It is a long road built over the sea. You can see the ocean from the window. It is the longest seawall in the world. Lia said it felt like driving on the sea. Grandma said this used to be the ocean.',
+    questions:[
+      {q:'새만금 방조제는 어디에 만든 길이에요?', q_en:'Where was the Saemangeum Seawall built?', options:['산 위에','바다 위에','강 위에'], answer:1},
+      {q:'예전에 이 곳은 뭐였어요?', q_en:'What was this place in the past?', options:['숲이었어요','바다였어요','땅이었어요'], answer:1},
+    ]
+  },
+  'L2_ep12':{
+    passage:'가족이 내소사에 갔어요. 내소사는 오래된 절이에요. 할머니가 원래 이름은 소래사였다고 했어요. 조선 후기부터 내소사라고 불러 왔대요. 절 안에 아주 오래된 나무가 있어요. 사람들은 그 나무를 호랑이가 심었다고 전해요.',
+    passage_en:'The family went to Naesosa Temple. It is an old temple. Grandma said its original name was Soraesa. They have called it Naesosa since the late Joseon period. There is a very old tree inside. People say a tiger planted that tree.',
+    questions:[
+      {q:'내소사의 원래 이름은 뭐였어요?', q_en:'What was the original name of Naesosa?', options:['소래사','내소사','조선사'], answer:0},
+      {q:'오래된 나무를 누가 심었다고 해요?', q_en:'Who is said to have planted the old tree?', options:['할머니','스님','호랑이'], answer:2},
+    ]
+  },
 };
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
@@ -1920,6 +2019,22 @@ function _rdComplete(){
 
 // ── QUIZ SPACING GAME ────────────────────────────────
 const SP_QUIZ_POOL = {
+  'L1_ep01':[
+    {chars:'저는정민이에요', spaces:[2], en:"I'm Jeongmin.", hint:'저는 · 정민이에요'},
+    {chars:'만나서반가워요', spaces:[3], en:'Nice to meet you.', hint:'만나서 · 반가워요'},
+  ],
+  'L1_ep02':[
+    {chars:'누구예요', spaces:[2], en:'Who is it?', hint:'누구 · 예요'},
+    {chars:'제친구예요', spaces:[1], en:"It's my friend.", hint:'제 · 친구 · 예요'},
+  ],
+  'L1_ep03':[
+    {chars:'잘먹겠습니다', spaces:[1], en:"I'll eat well (thank you for the food).", hint:'잘 · 먹겠습니다'},
+    {chars:'밥이맛있어요', spaces:[2], en:'The rice is delicious.', hint:'밥이 · 맛있어요'},
+  ],
+  'L1_ep04':[
+    {chars:'몇시에만날까요', spaces:[1,3], en:'What time shall we meet?', hint:'몇 · 시에 · 만날까요'},
+    {chars:'세시에공원에서요', spaces:[1,3], en:"At three o'clock at the park.", hint:'세 · 시에 · 공원에서요'},
+  ],
   'L1_ep05':[
     {chars:'광장시장에같이가요', spaces:[5,7], en:"Let's go to Gwangjang Market together.", hint:'광장시장에 · 같이 · 가요'},
     {chars:'버스를타고시장에가요', spaces:[3,5,8], en:'I go to the market by bus.', hint:'버스를 · 타고 · 시장에 · 가요'},
@@ -1971,6 +2086,43 @@ const SP_QUIZ_POOL = {
   'L2_ep05':[
     {chars:'어렵지만계속하면늘어요', spaces:[4,8], en:"It's hard but keep going and you'll improve.", hint:'어렵지만 · 계속하면 · 늘어요'},
     {chars:'오늘도열심히한국어를배웠어요', spaces:[3,6,10], en:'I studied Korean hard again today.', hint:'오늘도 · 열심히 · 한국어를 · 배웠어요'},
+  ],
+  'L3_ep01':[
+    {chars:'파전이나부쳐먹을까', spaces:[4,6], en:'How about we fry some pajeon to eat?', hint:'파전이나 · 부쳐 · 먹을까'},
+    {chars:'출출하다고하세요', spaces:[5], en:'He says he is a little hungry.', hint:'출출하다고 · 하세요'},
+  ],
+  'L3_ep02':[
+    {chars:'물티슈로닦으라고하셨어', spaces:[4,8], en:'She said to wipe it with a wet wipe.', hint:'물티슈로 · 닦으라고 · 하셨어'},
+    {chars:'음식물은가지고들어오지말라고했어', spaces:[4,7,11,14], en:'They said not to bring food and drinks in.', hint:'음식물은 · 가지고 · 들어오지 · 말라고 · 했어'},
+  ],
+
+  'L2_ep06':[
+    {chars:'회원권이있으세요', spaces:[4], en:'Do you have a membership card?', hint:'회원권이 · 있으세요'},
+    {chars:'포인트를모을수있어요', spaces:[4,6,7], en:'You can collect points.', hint:'포인트를 · 모을 · 수 · 있어요'},
+  ],
+  'L2_ep07':[
+    {chars:'제가사드릴게요', spaces:[2,3], en:"I'll treat you.", hint:'제가 · 사 · 드릴게요'},
+    {chars:'같이가실래요', spaces:[2], en:'Would you like to go together?', hint:'같이 · 가실래요'},
+  ],
+  'L2_ep08':[
+    {chars:'된장국을끓이려고해요', spaces:[4,8], en:'I am going to make doenjang-guk.', hint:'된장국을 · 끓이려고 · 해요'},
+    {chars:'멸치다시물을만들어요', spaces:[2,6], en:'I make anchovy broth.', hint:'멸치 · 다시물을 · 만들어요'},
+  ],
+  'L2_ep09':[
+    {chars:'배를타야만갈수있어요', spaces:[2,5,6,7], en:'You can only get there by boat.', hint:'배를 · 타야만 · 갈 · 수 · 있어요'},
+    {chars:'별이정말예뻤어요', spaces:[2,4], en:'The stars were really beautiful.', hint:'별이 · 정말 · 예뻤어요'},
+  ],
+  'L2_ep10':[
+    {chars:'멀미가나서힘들어요', spaces:[3,5], en:'I feel sick from motion sickness.', hint:'멀미가 · 나서 · 힘들어요'},
+    {chars:'창문을열어도돼요', spaces:[3,6], en:'Is it okay to open the window?', hint:'창문을 · 열어도 · 돼요'},
+  ],
+  'L2_ep11':[
+    {chars:'바다위를달리는것같아요', spaces:[2,4,7,8], en:'It feels like driving on the sea.', hint:'바다 · 위를 · 달리는 · 것 · 같아요'},
+    {chars:'여기가옛날엔바다였어요', spaces:[3,6], en:'This place used to be the sea.', hint:'여기가 · 옛날엔 · 바다였어요'},
+  ],
+  'L2_ep12':[
+    {chars:'이절은원래소래사였어요', spaces:[1,3,5], en:'This temple was originally called Soraesa.', hint:'이 · 절은 · 원래 · 소래사였어요'},
+    {chars:'호랑이가지었다고해요', spaces:[4,8], en:'They say a tiger built it.', hint:'호랑이가 · 지었다고 · 해요'},
   ],
 };
 
