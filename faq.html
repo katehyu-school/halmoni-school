@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ · Hangeul Quest</title>
+<meta name="description" content="Frequently asked questions about Hangeul Quest Korean language school — classes, enrollment, schedule, and more.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: #f8fbfd;
+  color: #1a2e3b;
+  line-height: 1.75;
+  padding: 40px 24px 80px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+
+/* header */
+.site-brand {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #4ecdc4;
+}
+.brand-name {
+  font-family: Impact, 'Arial Narrow', sans-serif;
+  font-size: 22px; letter-spacing: .1em; color: #0a2540;
+}
+.brand-name span { color: #4ecdc4; }
+.back-link {
+  margin-left: auto; font-size: 13px; color: #4ecdc4;
+  text-decoration: none;
+}
+.back-link:hover { opacity: .7; }
+
+/* hero */
+.hero { margin-bottom: 44px; }
+.hero h1 { font-size: 30px; font-weight: 700; color: #0a2540; margin-bottom: 8px; }
+.hero p { font-size: 15px; color: #4a6275; }
+
+/* category tabs */
+.cat-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.cat-tab {
+  padding: 6px 16px; border-radius: 20px; font-size: 13px;
+  border: 1.5px solid #d1e8e6; background: #fff;
+  color: #2c7a75; cursor: pointer; transition: all .15s;
+  font-family: inherit;
+}
+.cat-tab.active, .cat-tab:hover {
+  background: #4ecdc4; color: #fff; border-color: #4ecdc4;
+}
+
+/* FAQ accordion */
+.faq-group { margin-bottom: 36px; }
+.faq-group-title {
+  font-size: 12px; font-weight: 700; letter-spacing: .12em;
+  color: #4ecdc4; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.faq-item {
+  background: #fff; border-radius: 12px;
+  border: 1px solid #e0eef0;
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: box-shadow .15s;
+}
+.faq-item:hover { box-shadow: 0 2px 12px rgba(78,205,196,.12); }
+.faq-q {
+  width: 100%; text-align: left;
+  padding: 16px 20px;
+  font-size: 14px; font-weight: 600; color: #0a2540;
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; font-family: inherit; line-height: 1.5;
+}
+.faq-q .arrow {
+  flex-shrink: 0; width: 20px; height: 20px;
+  border-radius: 50%; background: #e8f9f8;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #4ecdc4;
+  transition: transform .2s;
+}
+.faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease;
+}
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner {
+  padding: 0 20px 18px;
+  font-size: 13.5px; color: #2c4257; line-height: 1.8;
+  border-top: 1px solid #f0f7f7;
+  padding-top: 14px;
+}
+.faq-a-inner strong { color: #0a2540; }
+.faq-a-inner a { color: #4ecdc4; text-decoration: none; }
+.faq-a-inner a:hover { text-decoration: underline; }
+.ko { font-size: 12.5px; color: #6b8394; margin-top: 6px; }
+
+/* CTA */
+.cta-box {
+  margin-top: 48px; padding: 28px 32px;
+  background: linear-gradient(135deg, #0a2540 0%, #0d3d5c 100%);
+  border-radius: 18px; color: #e8f4f8; text-align: center;
+}
+.cta-box h2 { font-size: 20px; margin-bottom: 8px; color: #fff; }
+.cta-box p { font-size: 13.5px; color: #a8ccd8; margin-bottom: 20px; }
+.cta-btn {
+  display: inline-block;
+  padding: 12px 28px; border-radius: 30px;
+  background: #4ecdc4; color: #0a2540;
+  font-weight: 700; font-size: 14px;
+  text-decoration: none; transition: opacity .15s;
+}
+.cta-btn:hover { opacity: .85; }
+
+footer {
+  margin-top: 48px; font-size: 12px; color: #a0b5c2;
+  text-align: center; border-top: 1px solid #dce8f0; padding-top: 20px;
+}
+footer a { color: #4ecdc4; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- header -->
+  <div class="site-brand">
+    <svg width="36" height="40" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 52 Q22 47 29 51 L55 22 L81 51 Q88 47 92 52" fill="none" stroke="#4ECDC4" stroke-width="1.8"/>
+      <path d="M18 52 L55 22 L92 52" fill="#4ECDC4" opacity="0.1"/>
+      <rect x="24" y="66" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/>
+      <circle cx="35" cy="79" r="7.5" fill="none" stroke="#4ECDC4" stroke-width="2.2"/>
+      <rect x="24" y="94" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/>
+      <rect x="62" y="66" width="24" height="2.4" rx="1.2" fill="#FF6B6B"/>
+      <rect x="83" y="66" width="2.4" height="30" rx="1.2" fill="#FF6B6B"/>
+    </svg>
+    <div class="brand-name"><span>HANGEUL</span> QUEST</div>
+    <a href="/" class="back-link">← Back to Home</a>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know before joining Hangeul Quest. · 수강 전 궁금한 모든 것</p>
+  </div>
+
+  <!-- FAQ groups -->
+  <div id="faq-container">
+
+    <div class="faq-group" data-cat="about">
+      <div class="faq-group-title">About the School · 학교 소개</div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          What is Hangeul Quest?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Hangeul Quest is an online Korean language school built around real-life stories and scenes. Instead of starting with grammar rules, each lesson begins with a real situation — ordering food, visiting a friend, exploring a market — and builds vocabulary and grammar naturally from there.
+          <div class="ko">한국어를 문법부터 시작하지 않고, 실제 생활 장면에서 출발해 어휘와 문법을 자연스럽게 익히는 온라인 한국어 학교입니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Who teaches the classes?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Classes are taught by Haeok (Kate), a native Korean speaker with years of experience teaching Korean to children and adults of all backgrounds. The curriculum is 100% original — designed and refined through real classroom experience.
+          <div class="ko">원어민 한국어 선생님 Haeok(Kate)이 직접 수업합니다. 커리큘럼은 실제 수업 경험을 바탕으로 자체 개발한 오리지널입니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Do I need to know any Korean to start?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Not at all. We start from zero — including how the Korean alphabet (Hangeul) works. Complete beginners are very welcome.
+          <div class="ko">전혀 몰라도 괜찮습니다. 한글 자모부터 차근차근 시작합니다.</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="faq-group" data-cat="classes">
+      <div class="faq-group-title">Classes & Format · 수업 방식</div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How are classes conducted?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          All classes are held online via video call. Students access lesson materials directly through the Hangeul Quest web app — no downloads or installs needed. Everything runs in the browser.
+          <div class="ko">모든 수업은 온라인 화상으로 진행됩니다. 수업 자료는 웹 앱에서 바로 접근할 수 있어 별도 설치가 필요 없습니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How many students are in a class?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          We keep classes very small — typically <strong>2 to 5 students</strong>. This means more speaking time, more personalized attention, and a pace that fits your child.
+          <div class="ko">한 반에 2~5명의 소규모로 운영합니다. 개인별 집중 지도가 가능한 환경입니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How long is each class?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Typical class sessions are <strong>45 to 60 minutes</strong>. For younger learners (ages 6–9), sessions may be adjusted to 30–40 minutes to match attention spans.
+          <div class="ko">보통 45~60분 수업입니다. 6~9세 어린 학생의 경우 집중력에 맞춰 30~40분으로 조정할 수 있습니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Which track is right for us — Hangeul Quest or Hangeul Quest Kids?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Hangeul Quest Kids</strong> is designed for ages 6–10, with game-based activities, colorful visuals, and shorter lessons.<br><br>
+          <strong>Hangeul Quest</strong> is for ages 11 and up through adults. It uses episode-style storytelling and covers vocabulary, grammar, reading, and listening in depth.<br><br>
+          Not sure which fits? Just reach out — we're happy to recommend based on age and experience.
+          <div class="ko">Kids(6~10세)는 게임 중심 / Hangeul Quest(11세 이상·성인)는 에피소드 스토리텔링 방식입니다. 고민되시면 편하게 문의해 주세요.</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="faq-group" data-cat="schedule">
+      <div class="faq-group-title">Schedule & Enrollment · 일정 및 등록</div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          What days and times are classes available?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          We offer flexible scheduling to fit different time zones and family routines. Available slots are discussed at enrollment. Please reach out to check current openings.
+          <div class="ko">시간대와 가족 일정에 맞춰 유연하게 협의합니다. 현재 가능한 시간대는 문의 시 안내드립니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Is there a free trial lesson?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Yes! We offer a <strong>free 30-minute trial lesson</strong> so your child can experience the class before committing. Just send us an email to schedule one.
+          <div class="ko">네, 무료 체험 수업(30분)을 제공합니다. 이메일로 문의 주시면 일정을 잡아드립니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          How do I enroll?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Simply send an email to <a href="mailto:hangeulquest@gmail.com">hangeulquest@gmail.com</a> with your child's age, current Korean level (none/beginner/some), and preferred schedule. We'll get back to you within 2 business days.
+          <div class="ko"><a href="mailto:hangeulquest@gmail.com">hangeulquest@gmail.com</a>으로 자녀 나이, 현재 한국어 수준, 희망 시간대를 알려주세요. 2영업일 내로 답장드립니다.</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="faq-group" data-cat="curriculum">
+      <div class="faq-group-title">Curriculum · 커리큘럼</div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          What curriculum do you use?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Our curriculum is entirely original — developed by our teacher and refined through real classroom experience. It draws on Korean cultural scenes and everyday situations, not textbook dialogues. The web app (lesson materials, quizzes, audio) is also custom-built.
+          <div class="ko">외부 교재 없이 자체 개발한 커리큘럼을 사용합니다. 실생활 장면과 한국 문화를 기반으로 설계되었습니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Will my child be able to read and write Korean?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Yes. Reading and writing Hangeul (the Korean alphabet) is introduced from the very first level. By the end of Level 1, students can read basic Korean text and write simple sentences.
+          <div class="ko">네. 한글 읽기와 쓰기는 Level 1부터 시작합니다. Level 1을 마치면 기본 문장을 읽고 쓸 수 있습니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Do you prepare students for TOPIK?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Our advanced levels are designed with TOPIK (Test of Proficiency in Korean) in mind — covering listening, vocabulary, grammar, and reading skills that align with TOPIK Level 1 and beyond.
+          <div class="ko">상위 레벨은 TOPIK 1급 이상을 목표로 듣기·어휘·문법·읽기를 체계적으로 다룹니다.</div>
+        </div></div>
+      </div>
+    </div>
+
+  </div><!-- /faq-container -->
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2>Still have questions? · 더 궁금한 게 있으신가요?</h2>
+    <p>We'd love to hear from you. Send us a message and we'll get back to you within 2 business days.</p>
+    <a href="mailto:hangeulquest@gmail.com?subject=Hangeul%20Quest%20Inquiry" class="cta-btn">
+      ✉️ Contact us · 문의하기
+    </a>
+  </div>
+
+  <footer>
+    © 2026 Hangeul Quest &nbsp;·&nbsp;
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/privacy.html">Privacy Policy</a>
+  </footer>
+
+</div>
+
+<script>
+function toggle(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
