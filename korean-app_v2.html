@@ -11191,7 +11191,7 @@ async function _kidsIdxLoad(){
 
 function _kidsSetMode(mode, btn){
   _kidsIdxMode=mode;
-lectorAll('.kids-idx-mode-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.kids-idx-mode-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
   _kidsIdxFilter();
 }
@@ -11234,7 +11234,7 @@ function _kidsIdxRender(){
     slice.forEach(v=>{
       const o=_getOnset((v.korean||'')[0]||'');
       if(o!==cur){cur=o;html+='<div class="kids-idx-section-hdr">'+o+'</div>';}
-      const bookLabel='Book '+(v.book||2)+' · '+(v.unit||'')+'과';
+      const bookLabel='L'+(v.book||2)+' · '+(v.unit||'')+'과';
       html+='<div class="kids-idx-row">'
         +'<span class="kids-idx-kr">'+(v.emoji?v.emoji+' ':'')+v.korean+'</span>'
         +'<span class="kids-idx-rom">'+(v.romanization||v.rom||'')+'</span>'
@@ -11259,7 +11259,7 @@ function _kidsIdxRender(){
     if(!grams.length){body.innerHTML='<div style="text-align:center;padding:30px;color:#aaa;font-family:Jua,sans-serif;">검색 결과 없음</div>';return;}
     // Group by unit
     const byUnit={};
-    grams.forEach(g=>{const k='Book '+(g.book||2)+' · '+(g.unit||'')+'과';if(!byUnit[k])byUnit[k]=[];byUnit[k].push(g);});
+    grams.forEach(g=>{const k='L'+(g.book||2)+' · '+(g.unit||'')+'과';if(!byUnit[k])byUnit[k]=[];byUnit[k].push(g);});
     let html='';
     Object.keys(byUnit).sort().forEach(k=>{
       html+='<div class="kids-idx-section-hdr">'+k+'</div>';
