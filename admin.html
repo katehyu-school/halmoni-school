@@ -463,6 +463,13 @@ body {
         </div>
         <input class="pw-field" type="password" id="newAdmin" placeholder="새 비밀번호">
       </div>
+      <div class="pw-group">
+        <div class="pw-role-label">
+          <span class="role-dot" style="background:#888;"></span> 👀 게스트 비밀번호
+        </div>
+        <input class="pw-field" type="password" id="newGuest" placeholder="새 비밀번호">
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">초대받은 방문자 공용 비밀번호</div>
+      </div>
     </div>
 
     <button class="action-btn btn-primary" id="savePwBtn" onclick="savePasswords()">
@@ -661,7 +668,8 @@ async function savePasswords() {
   ];
 
   const toChange = fields.filter(f => document.getElementById(f.id).value.trim());
-  if (!toChange.length) { toast('변경할 비밀번호를 입력하세요', 'fail'); return; }
+  const newGuestPw = document.getElementById('newGuest').value.trim();
+  if (!toChange.length && !newGuestPw) { toast('변경할 비밀번호를 입력하세요', 'fail'); return; }
 
   const btn = document.getElementById('savePwBtn');
   btn.disabled    = true;
@@ -681,10 +689,18 @@ async function savePasswords() {
       count++;
     }
 
+    // 게스트 비밀번호 별도 처리 (name='guest'로 단일 업데이트)
+    if (newGuestPw) {
+      const { error } = await sb.from('members').update({ pin: newGuestPw }).eq('name', 'guest');
+      if (error) throw new Error(`게스트 변경 실패: ${error.message}`);
+      document.getElementById('newGuest').value = '';
+      count++;
+    }
+
     // 관리자 비밀번호가 바뀌었으면 세션 갱신
     if (newAdminPw) _adminPw = newAdminPw;
 
-    toast(`✅ ${count}개 역할 PIN 변경 완료!`);
+    toast(`✅ ${count}개 항목 비밀번호 변경 완료!`);
   } catch (e) {
     toast(`❌ ${e.message}`, 'fail');
   } finally {

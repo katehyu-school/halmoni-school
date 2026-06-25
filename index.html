@@ -743,11 +743,14 @@ function handleNameSelect() {
   const v = document.getElementById('nameSelect').value;
   const pinWrap = document.querySelector('.pw-wrap');
   const btn = document.querySelector('.enter-btn');
+  const pwInput = document.getElementById('pwInput');
   if (v === '__guest__') {
-    pinWrap.style.display = 'none';
+    pinWrap.style.display = '';
+    pwInput.placeholder = '방문자 비밀번호 · Guest password';
     btn.textContent = '👀 둘러보기 · Browse';
   } else {
     pinWrap.style.display = '';
+    pwInput.placeholder = 'PIN';
     btn.textContent = '입장하기 · Enter';
   }
 }
@@ -757,16 +760,39 @@ async function checkPw() {
   const err  = document.getElementById('errMsg');
   const btn  = document.querySelector('.enter-btn');
 
-  // 게스트 로그인
-  if (name === '__guest__') {
-    const guestData = { name: 'guest', display_name: '게스트', role: 'guest' };
-    sessionStorage.setItem('hq_user', JSON.stringify(guestData));
-    closeLoginModal();
-    enterAs(guestData);
+  if (!name) { err.textContent = '이름을 선택해 주세요'; return; }
+  if (!pin)  {
+    err.textContent = name === '__guest__'
+      ? '방문자 비밀번호를 입력해 주세요 · Enter guest password'
+      : 'PIN을 입력해 주세요';
     return;
   }
-  if (!name) { err.textContent = '이름을 선택해 주세요'; return; }
-  if (!pin)  { err.textContent = 'PIN을 입력해 주세요'; return; }
+
+  // 게스트 로그인 — verify_login으로 비밀번호 검증
+  if (name === '__guest__') {
+    btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
+    try {
+      const { data, error } = await _sb.rpc('verify_login', { p_name: 'guest', p_pin: pin });
+      if (error) throw new Error(error.message);
+      if (!data) {
+        err.textContent = '비밀번호가 맞지 않아요 · Incorrect password';
+        document.getElementById('pwInput').value = '';
+        const modal = document.querySelector('.login-modal');
+        modal.style.animation = 'none'; void modal.offsetHeight;
+        modal.style.animation = 'shake .4s ease';
+      } else {
+        const guestData = { name: 'guest', display_name: '게스트', role: 'guest' };
+        sessionStorage.setItem('hq_user', JSON.stringify(guestData));
+        closeLoginModal();
+        enterAs(guestData);
+      }
+    } catch(e) {
+      err.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
+    } finally {
+      btn.disabled = false; btn.textContent = '👀 둘러보기 · Browse';
+    }
+    return;
+  }
 
   btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
 
