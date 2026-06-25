@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hangeul Quest · Korean Language School</title>
-<meta name="description" content="Learn Korean through real stories. Hangeul Quest is an online Korean school for ages 6 and up — game-based learning for kids, scene-first episodes for teens &amp; adults.">
+<meta name="description" content="Learn Korean through real stories. Hangeul Quest is an online Korean school — game-based learning for kids, scene-first episodes for teens &amp; adults.">
 <meta property="og:title" content="Hangeul Quest · Korean Language School">
 <meta property="og:description" content="Learn Korean through real stories. Game-based learning for kids, scene-first episodes for teens &amp; adults. Small classes, real Korean, real life.">
 <meta property="og:image" content="https://hangeulquest.com/slide1_preview.jpg">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Hangeul Quest">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hangeul Quest · Korean Language School">
-<meta name="twitter:description" content="Learn Korean through real stories. Online Korean school for ages 6 and up.">
+<meta name="twitter:description" content="Learn Korean through real stories. Online Korean school for all ages.">
 <meta name="twitter:image" content="https://hangeulquest.com/slide1_preview.jpg">
 <link rel="canonical" href="https://hangeulquest.com">
 <link rel="icon" type="image/png" href="/halmoni-school/favicon.png">
@@ -641,20 +641,7 @@ body::before {
 
 
     <!-- CONTACT / ENROLLMENT -->
-    <div class="contact-section">
-      <p class="contact-heading">New to Hangeul Quest?</p>
-      <p class="contact-desc">Small classes · personalized instruction · curriculum built from real life.<br>We welcome students ages 6 and up. Reach out to learn more or schedule a free trial lesson.</p>
-      <div class="contact-pills">
-        <span class="contact-pill">🗓 Flexible scheduling</span>
-        <span class="contact-pill">👥 Small class sizes</span>
-        <span class="contact-pill">🌏 Online · anywhere</span>
-        <span class="contact-pill">✅ Free trial lesson</span>
-      </div>
-      <a href="mailto:hangeulquest@gmail.com?subject=Hangeul%20Quest%20Enrollment%20Inquiry" class="contact-btn">
-        ✉️ Inquire about enrollment · 수강 문의
-      </a>
-      <p class="contact-hint">hangeulquest@gmail.com</p>
-    </div>
+
 
   </div>
 
@@ -920,25 +907,4 @@ function saveEdit() {
   document.getElementById('icon'+i).textContent  = document.getElementById('editIcon').value;
   document.getElementById('level'+i).textContent = document.getElementById('editLevel').value;
   document.getElementById('name'+i).textContent  = document.getElementById('editName').value;
-  document.getElementById('desc'+i).innerHTML    = document.getElementById('editDesc').value.replace(/\n/g,'<br>');
-  closeEditModal();
-}
-document.getElementById('editModalBg').addEventListener('click', function(e) {
-  if (e.target === this) closeEditModal();
-});
-
-// ── 출석부 ──
-async function openAtt() {
-  document.getElementById('attOverlay').classList.add('open');
-  const d = new Date();
-  document.getElementById('attDate').textContent =
-    d.getFullYear() + '년 ' + (d.getMonth()+1) + '월 ' + d.getDate() + '일 (' +
-    ['일','월','화','수','목','금','토'][d.getDay()] + ')';
-  await loadAtt();
-}
-function closeAtt() {
-  document.getElementById('attOverlay').classList.remove('open');
-}
-async function loadAtt() {
-  const list = document.getElementById('attList');
-  list.inn
+  document.getElementById('desc'+i).innerHTML    =
