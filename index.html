@@ -655,7 +655,7 @@ body::before {
     <span class="login-label">로그인 · Sign In</span>
 
     <div style="margin-bottom:12px">
-      <select id="nameSelect" style="width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid rgba(78,205,196,.3);background:rgba(6,18,35,.7);color:#e8f4f8;font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .2s;cursor:pointer;appearance:none;text-align:center">
+      <select id="nameSelect" onchange="handleNameSelect()" style="width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid rgba(78,205,196,.3);background:rgba(6,18,35,.7);color:#e8f4f8;font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .2s;cursor:pointer;appearance:none;text-align:center">
         <option value="">이름을 선택하세요 ▾</option>
       </select>
     </div>
@@ -714,7 +714,8 @@ async function loadMembers() {
     if (data) {
       _members = data;
       const sel = document.getElementById('nameSelect');
-      sel.innerHTML = '<option value="">이름을 선택하세요 ▾</option>';
+      sel.innerHTML = '<option value="">이름을 선택하세요 ▾</option>' +
+        '<option value="__guest__">👀 게스트 · Guest</option>';
       data.forEach(m => {
         const opt = document.createElement('option');
         opt.value = m.name;
@@ -736,12 +737,33 @@ function closeLoginModal() {
   document.getElementById('pwInput').value = '';
 }
 
+
+function handleNameSelect() {
+  const v = document.getElementById('nameSelect').value;
+  const pinWrap = document.querySelector('.pw-wrap');
+  const btn = document.querySelector('.enter-btn');
+  if (v === '__guest__') {
+    pinWrap.style.display = 'none';
+    btn.textContent = '👀 둘러보기 · Browse';
+  } else {
+    pinWrap.style.display = '';
+    btn.textContent = '입장하기 · Enter';
+  }
+}
 async function checkPw() {
   const name = document.getElementById('nameSelect').value;
   const pin  = document.getElementById('pwInput').value.trim();
   const err  = document.getElementById('errMsg');
   const btn  = document.querySelector('.enter-btn');
 
+  // 게스트 로그인
+  if (name === '__guest__') {
+    const guestData = { name: 'guest', display_name: '게스트', role: 'guest' };
+    sessionStorage.setItem('hq_user', JSON.stringify(guestData));
+    closeLoginModal();
+    enterAs(guestData);
+    return;
+  }
   if (!name) { err.textContent = '이름을 선택해 주세요'; return; }
   if (!pin)  { err.textContent = 'PIN을 입력해 주세요'; return; }
 

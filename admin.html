@@ -349,6 +349,42 @@ body {
   margin-top: 10px;
 }
 
+
+/* ── 멤버 PIN 테이블 ── */
+.member-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+.member-table th {
+  font-size: 0.72rem; color: var(--muted); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em;
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.member-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle; }
+.member-row:hover td { background: rgba(255,255,255,.02); }
+.role-badge {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  border-radius: 6px; padding: 2px 8px; letter-spacing: .04em;
+}
+.role-student { background: rgba(52,199,138,.15); color: var(--green); }
+.role-teacher { background: rgba(245,166,35,.15); color: var(--amber); }
+.role-admin   { background: rgba(124,106,245,.15); color: var(--accent); }
+.role-guest   { background: rgba(255,255,255,.08); color: var(--muted); }
+.pin-inline {
+  display: flex; gap: 6px; align-items: center;
+}
+.pin-inline input {
+  flex: 1; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 6px; padding: 7px 10px; color: var(--text);
+  font-size: 0.88rem; font-family: inherit; outline: none;
+  transition: border-color .2s; min-width: 0;
+}
+.pin-inline input:focus { border-color: var(--accent); }
+.save-pin-btn {
+  background: var(--accent); color: #fff; border: none; border-radius: 6px;
+  padding: 7px 14px; font-size: 0.8rem; font-family: inherit; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: background .2s, opacity .2s;
+}
+.save-pin-btn:hover:not(:disabled) { background: var(--accent2); }
+.save-pin-btn:disabled { opacity: .4; cursor: not-allowed; }
 /* ── 반응형 ── */
 @media (max-width: 480px) {
   .panel-header { flex-direction: column; align-items: flex-start; }
@@ -386,7 +422,19 @@ body {
     <button class="logout-btn" onclick="doLogout()">로그아웃</button>
   </div>
 
-  <!-- 비밀번호 변경 -->
+  <!-- 멤버별 PIN 관리 -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">👤</span>
+      <div>
+        <div class="section-title">멤버별 PIN 관리</div>
+        <div class="section-desc">개인별 PIN을 변경합니다 · Manage individual member PINs</div>
+      </div>
+    </div>
+    <div id="memberPinList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
+  </div>
+
+    <!-- 비밀번호 변경 (역할 일괄 변경) -->
   <div class="section-card">
     <div class="section-head">
       <span class="section-icon">🔑</span>
@@ -524,12 +572,75 @@ async function adminLogin() {
       _adminName = data.name || 'admin';
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display  = 'block';
+      loadMemberPins();
     }
   } catch (e) {
     err.textContent = '서버 연결 오류: ' + e.message;
   } finally {
     btn.disabled    = false;
     btn.textContent = '입장하기';
+  }
+}
+
+
+// ── 멤버별 PIN 로드 ────────────────────────────
+async function loadMemberPins() {
+  const wrap = document.getElementById('memberPinList');
+  try {
+    const { data, error } = await sb.from('members')
+      .select('name, display_name, role')
+      .order('role').order('display_name');
+    if (error) throw error;
+    if (!data || !data.length) { wrap.innerHTML = '<div style="color:var(--muted)">멤버 없음</div>'; return; }
+
+    wrap.innerHTML = `
+      <table class="member-table">
+        <thead><tr>
+          <th>이름 (로그인 ID)</th>
+          <th>표시명</th>
+          <th>역할</th>
+          <th>새 PIN</th>
+          <th></th>
+        </tr></thead>
+        <tbody>
+          ${data.map(m => `
+          <tr class="member-row" id="mrow-${m.name}">
+            <td style="font-family:monospace;font-size:0.85rem;color:var(--muted)">${m.name}</td>
+            <td style="font-weight:600">${m.display_name}</td>
+            <td><span class="role-badge role-${m.role}">${m.role}</span></td>
+            <td><div class="pin-inline">
+              <input type="password" id="pin-${m.name}" placeholder="새 PIN 입력" maxlength="30"
+                onkeydown="if(event.key==='Enter') saveMemberPin('${m.name}')">
+            </div></td>
+            <td>
+              <button class="save-pin-btn" id="pinbtn-${m.name}" onclick="saveMemberPin('${m.name}')">저장</button>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  } catch(e) {
+    wrap.innerHTML = `<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ${e.message}</div>`;
+  }
+}
+
+async function saveMemberPin(memberName) {
+  const input = document.getElementById('pin-' + memberName);
+  const btn   = document.getElementById('pinbtn-' + memberName);
+  const newPin = input.value.trim();
+  if (!newPin) { toast('새 PIN을 입력하세요', 'fail'); return; }
+
+  btn.disabled = true; btn.textContent = '저장 중…';
+  try {
+    const { error } = await sb.from('members').update({ pin: newPin }).eq('name', memberName);
+    if (error) throw error;
+    input.value = '';
+    toast(`✅ ${memberName} PIN 변경 완료!`);
+    // 관리자 자신의 PIN이 바뀌었으면 세션 갱신
+    if (memberName === _adminName) _adminPw = newPin;
+  } catch(e) {
+    toast(`❌ ${e.message}`, 'fail');
+  } finally {
+    btn.disabled = false; btn.textContent = '저장';
   }
 }
 
@@ -623,17 +734,4 @@ async function confirmClearAttend() {
     toast(`✅ 출석 기록 ${data}건 삭제 완료`);
     document.getElementById('attendDate').value = '';
   } catch (e) {
-    toast(`❌ ${e.message}`, 'fail');
-  } finally {
-    btn.disabled    = false;
-    btn.textContent = '🗑️ 출석 삭제';
-  }
-}
-
-// Enter 키 지원
-document.getElementById('loginPw').addEventListener('keydown', e => {
-  if (e.key === 'Enter') adminLogin();
-});
-</script>
-</body>
-</html>
+    toast(`❌ ${e.mes
