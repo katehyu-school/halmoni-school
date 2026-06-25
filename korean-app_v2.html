@@ -1428,6 +1428,8 @@ function applyPracticeState(session, showPopup = true) {
   const myName = urlName;
   document.querySelectorAll('.card').forEach(c => {
     if (c.querySelector('.u2-slide-wrap, .u2-scene-viewer, .b3-scene-img')) return;
+    // 새단어·문법 탭 카드 제외 — dim 걸리면 vocab/grammar 카드가 뿌옇게 보임
+    if (c.closest('[id*="-vocab"],[id*="-grammar"],[id*="tab-vocab"],[id*="tab-grammar"]')) return;
     c.classList.remove('my-turn-highlight', 'other-turn-dim');
     if (player) {
       if (!myName || myName === player) {
