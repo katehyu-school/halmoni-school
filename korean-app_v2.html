@@ -3055,7 +3055,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- ── GRAMMAR ── -->
   <div class="section" id="u8-grammar">
-    <div class="card" id="u8-grammar-content"></div>
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
   </div>
 
   <!-- ── 듣기 ── -->
@@ -3174,7 +3174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   <!-- ── GRAMMAR ── -->
   <div class="section" id="u9-grammar">
-    <div class="card" id="u9-grammar-content"></div>
+    <!-- GrammarRenderer가 JSON에서 자동 채움 -->
   </div>
 
   <!-- ── 듣기 ── -->
@@ -10104,6 +10104,21 @@ function restartU9S() {
   renderU9S();
 }
 
+
+// ── GrammarRenderer (L2 문법 탭 공통 렌더러) ──────────────────────────────
+const GrammarRenderer = {
+  _d: {},
+  store(n, d) { this._d[n] = d; },
+  render(n) {
+    const d = this._d[n];
+    if (!d) return;
+    const grammar = (d.sections && d.sections.grammar) ? d.sections.grammar : d.grammar;
+    const el = document.getElementById('u'+n+'-grammar');
+    if (!el) return;
+    el.innerHTML = renderB3Grammar(grammar);
+  }
+};
+
 async function init(){
   try {
     const [d1, d2, d3, d4, d5, d6, d7, d8, d9] = await Promise.all([1,2,3,4,5,6,7,8,9].map(n => HalmoniCore.loadUnit(n)));
@@ -10112,7 +10127,8 @@ async function init(){
     u3Questions = (d3 && d3.practice && d3.practice.quiz_items) || _u3QFallback;
     u4Questions = (d4 && d4.practice && d4.practice.quiz_items) || _u4QFallback;
     u5Questions = (d5 && d5.practice && d5.practice.quiz_items) || _u5QFallback;
-    // 1~5과 문법 렌더링
+    // 1~5과, 8~9과 문법 렌더링
+    [[1,d1],[2,d2],[3,d3],[4,d4],[5,d5],[8,d8],[9,d9]].forEach(([n,d]) => GrammarRenderer.store(n,d));
     [1,2,3,4,5,8,9].forEach(n => GrammarRenderer.render(n));
     if (d6 && d6.sections && d6.sections.practice) {
       const p6 = d6.sections.practice;
