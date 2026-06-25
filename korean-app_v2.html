@@ -10179,6 +10179,7 @@ async function init(){
         if (p8.batchim_game) u8BGame    = p8.batchim_game;
         if (p8.sort_game)    u8SortData = p8.sort_game;
       }
+      GrammarRenderer.render(8);
     }
     if (d9 && d9.sections) {
       if (d9.sections.vocab)    renderU9Vocab(d9.sections.vocab);
@@ -10188,6 +10189,7 @@ async function init(){
         if (p9.ox_game)     u9OXData  = p9.ox_game;
         if (p9.sort_game)   u9SortData= p9.sort_game;
       }
+      GrammarRenderer.render(9);
     }
     if (d6 && d6.sections && d6.sections.vocab) {
       const v6 = d6.sections.vocab;
