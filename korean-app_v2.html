@@ -1424,8 +1424,10 @@ function applyPracticeState(session, showPopup = true) {
   }
 
   // 카드 강조 — 내 차례면 highlight, 남 차례면 dim
+  // 씬 뷰어 카드(슬라이드 이미지 포함)는 제외 — dim 걸리면 이미지가 뿌옇게 보임
   const myName = urlName;
   document.querySelectorAll('.card').forEach(c => {
+    if (c.querySelector('.u2-slide-wrap, .u2-scene-viewer, .b3-scene-img')) return;
     c.classList.remove('my-turn-highlight', 'other-turn-dim');
     if (player) {
       if (!myName || myName === player) {
