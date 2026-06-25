@@ -725,12 +725,9 @@ async function checkPw() {
   btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
 
   try {
-    const { data, error } = await _sb.from('members')
-      .select('role, display_name, name')
-      .eq('name', name.toLowerCase().trim())
-      .eq('pin', pin)
-      .single();
-    if (error || !data) {
+    const { data, error } = await _sb.rpc('verify_login', { p_name: name, p_pin: pin });
+    if (error) throw new Error(error.message);
+    if (!data) {
       err.textContent = 'PIN이 맞지 않아요. Please try again.';
       document.getElementById('pwInput').value = '';
       const modal = document.querySelector('.login-modal');
