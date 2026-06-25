@@ -15,9 +15,24 @@
     "-아/어야 돼 / -(으)면 돼 — have to / all you need to do is"
   ],
   "characters": [
-    { "id": "grandma", "name": "할머니", "color": "#E07B6A", "emoji": "👵" },
-    { "id": "kayo",    "name": "카요",   "color": "#9B59B6", "emoji": "🧒" },
-    { "id": "grandpa", "name": "할아버지", "color": "#4A90C4", "emoji": "👴" }
+    {
+      "id": "grandma",
+      "name": "할머니",
+      "color": "#E07B6A",
+      "emoji": "👵"
+    },
+    {
+      "id": "kayo",
+      "name": "카요",
+      "color": "#9B59B6",
+      "emoji": "🧒"
+    },
+    {
+      "id": "grandpa",
+      "name": "할아버지",
+      "color": "#4A90C4",
+      "emoji": "👴"
+    }
   ],
   "slides": [
     "data/nhs/L2/slides/ep09/행운의 캠핑 사이트1.png",
@@ -93,7 +108,8 @@
       "audio": "data/nhs/L2/TTS/ep09/audio_6_아침_9시가_되면_광속으로_예약_버튼을_눌러야_돼_.mp3",
       "annotation": {
         "highlight": "눌러야 돼",
-        "note": "-아야 돼 — have to / must"
+        "grammar": "V-아/어야 돼 — have to",
+        "note": "동사 + 아/어야 돼 = have to / must\n광속으로 눌러야 돼 = have to click at lightning speed\n= 아야 해요 와 같은 의미\n꾸물거리면 안 돼 = can't dawdle"
       }
     },
     {
@@ -121,8 +137,9 @@
       "slide": 9,
       "audio": "data/nhs/L2/TTS/ep09/audio_9_비가_올_때는__차_안에서_커피를_마시면서_경치를_즐길_수도_있어_.mp3",
       "annotation": {
-        "highlight": "비가 올 때는 … 마시면서",
-        "note": "-(으)ㄹ 때 + -(으)면서 — both in one sentence!"
+        "highlight": "올 때는",
+        "grammar": "V-(으)ㄹ 때 — when",
+        "note": "동사 + (으)ㄹ 때 = when ~ (future/general)\n비가 올 때는 = when it rains\n먹을 때 = when eating\n↔ V-았/었을 때 = when [it happened]"
       }
     },
     {
@@ -144,44 +161,136 @@
     {
       "category": "🏕️ 캠핑 & 자연",
       "items": [
-        { "emoji": "🍀", "korean": "행운", "english": "luck / good fortune" },
-        { "emoji": "🌲", "korean": "주립공원", "english": "provincial park" },
-        { "emoji": "⛺", "korean": "캠핑", "english": "camping" },
-        { "emoji": "📅", "korean": "예약", "english": "reservation / booking" },
-        { "emoji": "🌊", "korean": "호수", "english": "lake" },
-        { "emoji": "🏔️", "korean": "경치", "english": "scenery / view" },
-        { "emoji": "👁️", "korean": "시야", "english": "field of view / visibility" },
-        { "emoji": "🐻", "korean": "곰", "english": "bear" },
-        { "emoji": "☀️", "korean": "여름방학", "english": "summer vacation" }
+        {
+          "emoji": "🍀",
+          "korean": "행운",
+          "english": "luck / good fortune"
+        },
+        {
+          "emoji": "🌲",
+          "korean": "주립공원",
+          "english": "provincial park"
+        },
+        {
+          "emoji": "⛺",
+          "korean": "캠핑",
+          "english": "camping"
+        },
+        {
+          "emoji": "📅",
+          "korean": "예약",
+          "english": "reservation / booking"
+        },
+        {
+          "emoji": "🌊",
+          "korean": "호수",
+          "english": "lake"
+        },
+        {
+          "emoji": "🏔️",
+          "korean": "경치",
+          "english": "scenery / view"
+        },
+        {
+          "emoji": "👁️",
+          "korean": "시야",
+          "english": "field of view / visibility"
+        },
+        {
+          "emoji": "🐻",
+          "korean": "곰",
+          "english": "bear"
+        },
+        {
+          "emoji": "☀️",
+          "korean": "여름방학",
+          "english": "summer vacation"
+        }
       ]
     },
     {
       "category": "📍 위치 표현",
       "items": [
-        { "emoji": "⬆️", "korean": "위", "english": "above / on top  ·  호수 위에서 (on the lake)" },
-        { "emoji": "⬇️", "korean": "아래", "english": "below / underneath  ·  다리 아래 (under the bridge)" }
+        {
+          "emoji": "⬆️",
+          "korean": "위",
+          "english": "above / on top  ·  호수 위에서 (on the lake)"
+        },
+        {
+          "emoji": "⬇️",
+          "korean": "아래",
+          "english": "below / underneath  ·  다리 아래 (under the bridge)"
+        }
       ]
     },
     {
       "category": "🎯 동사 & 표현",
       "items": [
-        { "emoji": "🔁", "korean": "늘", "english": "always / all the time  ·  늘 자랑하시는 (always boasts about)" },
-        { "emoji": "🏆", "korean": "자랑하다", "english": "to brag about / show off proudly" },
-        { "emoji": "🥇", "korean": "최고", "english": "the best / number one" },
-        { "emoji": "💺", "korean": "자리", "english": "spot / seat / place" },
-        { "emoji": "⚡", "korean": "광속", "english": "speed of light  ·  광속으로 = at lightning speed" },
-        { "emoji": "🎨", "korean": "감상하다", "english": "to appreciate / take in (scenery, art)" },
-        { "emoji": "🐢", "korean": "꾸물거리다", "english": "to dawdle / drag one's feet" },
-        { "emoji": "🤫", "korean": "비밀", "english": "secret" }
+        {
+          "emoji": "🔁",
+          "korean": "늘",
+          "english": "always / all the time  ·  늘 자랑하시는 (always boasts about)"
+        },
+        {
+          "emoji": "🏆",
+          "korean": "자랑하다",
+          "english": "to brag about / show off proudly"
+        },
+        {
+          "emoji": "🥇",
+          "korean": "최고",
+          "english": "the best / number one"
+        },
+        {
+          "emoji": "💺",
+          "korean": "자리",
+          "english": "spot / seat / place"
+        },
+        {
+          "emoji": "⚡",
+          "korean": "광속",
+          "english": "speed of light  ·  광속으로 = at lightning speed"
+        },
+        {
+          "emoji": "🎨",
+          "korean": "감상하다",
+          "english": "to appreciate / take in (scenery, art)"
+        },
+        {
+          "emoji": "🐢",
+          "korean": "꾸물거리다",
+          "english": "to dawdle / drag one's feet"
+        },
+        {
+          "emoji": "🤫",
+          "korean": "비밀",
+          "english": "secret"
+        }
       ]
     },
     {
       "category": "✨ 특별한 표현",
       "items": [
-        { "emoji": "💎", "korean": "숨은 보석", "english": "hidden gem  ·  숨다 = to hide" },
-        { "emoji": "🔮", "korean": "같은", "english": "like / similar to  ·  보석 같은 = like a jewel" },
-        { "emoji": "🌅", "korean": "탁 트이다", "english": "to be wide open / unobstructed (of a view)" },
-        { "emoji": "✅", "korean": "딱 좋다", "english": "just right / perfect for  ·  감상하기 딱 좋아" }
+        {
+          "emoji": "💎",
+          "korean": "숨은 보석",
+          "english": "hidden gem  ·  숨다 = to hide"
+        },
+        {
+          "emoji": "🔮",
+          "korean": "같은",
+          "english": "like / similar to  ·  보석 같은 = like a jewel"
+        },
+        {
+          "emoji": "🌅",
+          "korean": "탁 트이다",
+          "english": "to be wide open / unobstructed (of a view)"
+        },
+        {
+          "emoji": "✅",
+          "korean": "딱 좋다",
+          "english": "just right / perfect for  ·  감상하기 딱 좋아"
+        }
       ]
     }
   ],
@@ -217,9 +326,18 @@
         }
       ],
       "examples": [
-        { "ko": "음악을 들으면서 청소해요.", "en": "I clean while listening to music." },
-        { "ko": "걸으면서 전화했어요.", "en": "I made a call while walking." },
-        { "ko": "밥을 먹으면서 TV를 보면 안 돼요.", "en": "You shouldn't watch TV while eating." }
+        {
+          "ko": "음악을 들으면서 청소해요.",
+          "en": "I clean while listening to music."
+        },
+        {
+          "ko": "걸으면서 전화했어요.",
+          "en": "I made a call while walking."
+        },
+        {
+          "ko": "밥을 먹으면서 TV를 보면 안 돼요.",
+          "en": "You shouldn't watch TV while eating."
+        }
       ]
     },
     {
@@ -253,9 +371,18 @@
         }
       ],
       "examples": [
-        { "ko": "심심할 때 한국어 공부해요.", "en": "I study Korean when I'm bored." },
-        { "ko": "배고플 때 뭐 먹어요?", "en": "What do you eat when you're hungry?" },
-        { "ko": "방학 때 캐나다에 갔어요.", "en": "I went to Canada during vacation." }
+        {
+          "ko": "심심할 때 한국어 공부해요.",
+          "en": "I study Korean when I'm bored."
+        },
+        {
+          "ko": "배고플 때 뭐 먹어요?",
+          "en": "What do you eat when you're hungry?"
+        },
+        {
+          "ko": "방학 때 캐나다에 갔어요.",
+          "en": "I went to Canada during vacation."
+        }
       ]
     },
     {
@@ -289,9 +416,18 @@
         }
       ],
       "examples": [
-        { "ko": "이 캠핑 사이트가 최고인 것 같아.", "en": "This campsite seems to be the best." },
-        { "ko": "할아버지가 피곤하신 것 같아.", "en": "Grandpa seems tired." },
-        { "ko": "내일 비가 올 것 같아.", "en": "It looks like it'll rain tomorrow." }
+        {
+          "ko": "이 캠핑 사이트가 최고인 것 같아.",
+          "en": "This campsite seems to be the best."
+        },
+        {
+          "ko": "할아버지가 피곤하신 것 같아.",
+          "en": "Grandpa seems tired."
+        },
+        {
+          "ko": "내일 비가 올 것 같아.",
+          "en": "It looks like it'll rain tomorrow."
+        }
       ]
     },
     {
@@ -330,9 +466,18 @@
         }
       ],
       "examples": [
-        { "ko": "숙제를 해야 돼.", "en": "I have to do my homework." },
-        { "ko": "여기에 이름을 쓰면 돼.", "en": "All you need to do is write your name here." },
-        { "ko": "수업 중에 핸드폰을 쓰면 안 돼.", "en": "You can't use your phone during class." }
+        {
+          "ko": "숙제를 해야 돼.",
+          "en": "I have to do my homework."
+        },
+        {
+          "ko": "여기에 이름을 쓰면 돼.",
+          "en": "All you need to do is write your name here."
+        },
+        {
+          "ko": "수업 중에 핸드폰을 쓰면 안 돼.",
+          "en": "You can't use your phone during class."
+        }
       ]
     }
   ],
@@ -395,8 +540,16 @@
         "rule": "르 불규칙: 르 앞 모음이 ㄹ로 바뀌어요",
         "tip": "누르다 → 눌러, 부르다 → 불러, 모르다 → 몰라",
         "examples": [
-          { "written": "누르다", "pronounced": "눌러야 돼", "note": "르 → ㄹ + 러" },
-          { "written": "부르다", "pronounced": "불러요", "note": "same rule" }
+          {
+            "written": "누르다",
+            "pronounced": "눌러야 돼",
+            "note": "르 → ㄹ + 러"
+          },
+          {
+            "written": "부르다",
+            "pronounced": "불러요",
+            "note": "same rule"
+          }
         ]
       },
       {
@@ -404,8 +557,16 @@
         "rule": "받침 + 모음 연음",
         "tip": "있어서 → [이써서], 트여 → [트여]",
         "examples": [
-          { "written": "있어서", "pronounced": "[이써서]", "note": "ㅅ + 어 → [써]" },
-          { "written": "비밀이야", "pronounced": "[비미리야]", "note": "ㄹ + 이 → [리]" }
+          {
+            "written": "있어서",
+            "pronounced": "[이써서]",
+            "note": "ㅅ + 어 → [써]"
+          },
+          {
+            "written": "비밀이야",
+            "pronounced": "[비미리야]",
+            "note": "ㄹ + 이 → [리]"
+          }
         ]
       }
     ]
@@ -414,17 +575,35 @@
     {
       "title": "동시 표현 정리 · Summary: Simultaneous expressions",
       "items": [
-        { "ko": "-(으)면서", "en": "while doing — same subject only  ·  커피를 마시면서 경치를 즐겨요" },
-        { "ko": "-는 동안 (ep08)", "en": "while / during — same OR different subject OK  ·  비가 오는 동안 기다렸어요" },
-        { "ko": "-(으)ㄹ 때", "en": "when / during — habitual or future  ·  비가 올 때 차 안에 있어요" }
+        {
+          "ko": "-(으)면서",
+          "en": "while doing — same subject only  ·  커피를 마시면서 경치를 즐겨요"
+        },
+        {
+          "ko": "-는 동안 (ep08)",
+          "en": "while / during — same OR different subject OK  ·  비가 오는 동안 기다렸어요"
+        },
+        {
+          "ko": "-(으)ㄹ 때",
+          "en": "when / during — habitual or future  ·  비가 올 때 차 안에 있어요"
+        }
       ]
     },
     {
       "title": "🚦 돼 세트 정리",
       "examples": [
-        { "ko": "9시에 누르면 돼. ✅", "en": "All you need to do is press at 9." },
-        { "ko": "꾸물거리면 안 돼. ❌", "en": "You must not dawdle." },
-        { "ko": "광속으로 눌러야 돼. 🔵", "en": "You have to press it at lightning speed." }
+        {
+          "ko": "9시에 누르면 돼. ✅",
+          "en": "All you need to do is press at 9."
+        },
+        {
+          "ko": "꾸물거리면 안 돼. ❌",
+          "en": "You must not dawdle."
+        },
+        {
+          "ko": "광속으로 눌러야 돼. 🔵",
+          "en": "You have to press it at lightning speed."
+        }
       ]
     }
   ],
@@ -434,7 +613,12 @@
       "audio_text": "비가 올 때는 차 안에서 커피를 마시면서 경치를 즐길 수도 있어.",
       "question_ko": "비가 올 때 할머니는 어디서 뭘 해요?",
       "question_en": "What does grandma do when it rains?",
-      "options": ["호수에서 수영해요", "차 안에서 커피를 마셔요", "집에서 잠을 자요", "캠핑장에서 요리해요"],
+      "options": [
+        "호수에서 수영해요",
+        "차 안에서 커피를 마셔요",
+        "집에서 잠을 자요",
+        "캠핑장에서 요리해요"
+      ],
       "answer": 1
     },
     {
@@ -453,19 +637,34 @@
       "audio_text": "이 자리는 킬라니에서 최고의 자리인 것 같아.",
       "question_ko": "할머니는 이 자리가 어때요?",
       "question_en": "What does grandma think about this spot?",
-      "options": ["별로예요", "킬라니에서 최고인 것 같아요", "너무 작아요", "예약이 너무 어려워요"],
+      "options": [
+        "별로예요",
+        "킬라니에서 최고인 것 같아요",
+        "너무 작아요",
+        "예약이 너무 어려워요"
+      ],
       "answer": 1
     },
     {
       "type": "mc",
       "question": "Which is correct for 'when it rains'?",
-      "options": ["비가 오면서", "비가 올 때", "비가 오는 것 같을 때", "비가 오는 동안"],
+      "options": [
+        "비가 오면서",
+        "비가 올 때",
+        "비가 오는 것 같을 때",
+        "비가 오는 동안"
+      ],
       "answer": 1
     },
     {
       "type": "mc",
       "question": "'You have to press the button' in Korean is:",
-      "options": ["버튼을 누르면 돼.", "버튼을 누르면 안 돼.", "버튼을 눌러야 돼.", "버튼을 누를 것 같아."],
+      "options": [
+        "버튼을 누르면 돼.",
+        "버튼을 누르면 안 돼.",
+        "버튼을 눌러야 돼.",
+        "버튼을 누를 것 같아."
+      ],
       "answer": 2
     },
     {
@@ -473,7 +672,12 @@
       "audio_text": "근데, 거기서 곰을 만났다는 사실은 비밀이야.",
       "question_ko": "할머니가 비밀이라고 하는 게 뭐예요?",
       "question_en": "What is grandma keeping secret?",
-      "options": ["캠핑 사이트 번호", "거기서 곰을 만난 것", "예약하는 방법", "피시 엔 칩스를 먹은 것"],
+      "options": [
+        "캠핑 사이트 번호",
+        "거기서 곰을 만난 것",
+        "예약하는 방법",
+        "피시 엔 칩스를 먹은 것"
+      ],
       "answer": 1
     }
   ],
@@ -482,12 +686,36 @@
       "type": "kakao",
       "title": "📱 친구한테 킬라니 캠핑 팁 알려주기",
       "messages": [
-        { "side": "right", "text": "킬라니 캠핑 어떻게 예약해요?", "en": "How do I book Killarney camping?" },
-        { "side": "left", "text": "5달 전에 온타리오 파크스 사이트에 들어가면 돼!", "en": "All you need to do is go on the Ontario Parks site 5 months ahead!" },
-        { "side": "right", "text": "아침 9시에 열려요?", "en": "Does it open at 9 AM?" },
-        { "side": "left", "text": "응, 9시가 되면 광속으로 눌러야 해. 꾸물거리면 안 돼!", "en": "Yes, when it hits 9 you have to press at lightning speed. No dawdling!" },
-        { "side": "right", "text": "88번 사이트 있어요? 할머니가 최고라고 하셨는데.", "en": "Is site 88 available? Grandma said it's the best." },
-        { "side": "left", "text": "지금은 92번이야. 거기가 시야가 탁 트여 있어서 딱 좋아!", "en": "It's 92 now. The view is completely open — just perfect!" }
+        {
+          "side": "right",
+          "text": "킬라니 캠핑 어떻게 예약해요?",
+          "en": "How do I book Killarney camping?"
+        },
+        {
+          "side": "left",
+          "text": "5달 전에 온타리오 파크스 사이트에 들어가면 돼!",
+          "en": "All you need to do is go on the Ontario Parks site 5 months ahead!"
+        },
+        {
+          "side": "right",
+          "text": "아침 9시에 열려요?",
+          "en": "Does it open at 9 AM?"
+        },
+        {
+          "side": "left",
+          "text": "응, 9시가 되면 광속으로 눌러야 해. 꾸물거리면 안 돼!",
+          "en": "Yes, when it hits 9 you have to press at lightning speed. No dawdling!"
+        },
+        {
+          "side": "right",
+          "text": "88번 사이트 있어요? 할머니가 최고라고 하셨는데.",
+          "en": "Is site 88 available? Grandma said it's the best."
+        },
+        {
+          "side": "left",
+          "text": "지금은 92번이야. 거기가 시야가 탁 트여 있어서 딱 좋아!",
+          "en": "It's 92 now. The view is completely open — just perfect!"
+        }
       ]
     },
     {
@@ -497,12 +725,22 @@
       "questions": [
         {
           "question": "킬라니에서 뭐가 유명해요?",
-          "options": ["빨간 산", "하얀 규암 산", "큰 폭포", "아름다운 해변"],
+          "options": [
+            "빨간 산",
+            "하얀 규암 산",
+            "큰 폭포",
+            "아름다운 해변"
+          ],
           "answer": 1
         },
         {
           "question": "인기 사이트를 예약하려면 어떻게 해야 해요?",
-          "options": ["1달 전에 전화해요", "직접 가서 예약해요", "9시에 광속으로 눌러요", "이메일로 신청해요"],
+          "options": [
+            "1달 전에 전화해요",
+            "직접 가서 예약해요",
+            "9시에 광속으로 눌러요",
+            "이메일로 신청해요"
+          ],
           "answer": 2
         }
       ]

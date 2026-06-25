@@ -133,8 +133,10 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .nav-speak-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--warm-300);background:#fff;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
 .nav-speak-btn:hover{background:var(--teal-50);border-color:var(--teal-300);}
 #speak-btn{position:absolute;right:12px;top:-48px;background:rgba(255,255,255,.95);box-shadow:0 1px 5px rgba(0,0,0,.15);}
-.script-toggle-btn{width:100%;background:var(--warm-100);border:none;border-top:1px solid var(--warm-300);padding:7px 14px;font-size:11px;font-weight:700;color:var(--warm-500);cursor:pointer;text-align:left;display:flex;align-items:center;gap:6px;transition:background .15s;font-family:var(--font-kr);}
-.script-toggle-btn:hover{background:var(--teal-50);color:var(--teal-600);}
+.script-toggle-btn{width:100%;background:var(--warm-50);border:none;border-top:2px dashed var(--warm-200);padding:9px 14px;font-size:12px;font-weight:700;color:var(--warm-400);cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;font-family:var(--font-kr);border-radius:0 0 12px 12px;letter-spacing:.02em;}
+.script-toggle-btn:hover{background:var(--teal-50);color:var(--teal-500);border-top-color:var(--teal-200);}
+.script-toggle-btn .strip-chevron{display:inline-block;transition:transform .2s;font-style:normal;}
+.script-toggle-btn.open .strip-chevron{transform:rotate(180deg);}
 .script-strip{display:none;max-height:160px;overflow-y:auto;background:var(--warm-50);border-top:1px solid var(--warm-300);}
 .script-strip.open{display:block;}
 .strip-row{display:flex;gap:8px;align-items:flex-start;padding:6px 14px;border-bottom:1px solid var(--warm-100);cursor:pointer;transition:background .1s;}
@@ -1250,8 +1252,8 @@ function buildScript(){
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
       <button id="ap-btn" onclick="autoPlayToggle()" title="슬라이드 자동 재생" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">▶▶ 자동 재생</button>
       <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
-      <button class="script-toggle-btn" onclick="toggleStrip()" style="flex:1"><span id="strip-arrow">▶</span> 전체 스크립트 보기</button>
     </div>
+    <button class="script-toggle-btn" id="strip-toggle-btn" onclick="toggleStrip()"><i class="strip-chevron">▼</i> 전체 스크립트 보기</button>
     <div class="script-strip" id="script-strip"></div>
   </div></div>`;
 }
@@ -1394,9 +1396,9 @@ function randomScene(){
 
 function toggleStrip(){
   const strip=document.getElementById('script-strip');
-  const arrow=document.getElementById('strip-arrow');
+  const btn=document.getElementById('strip-toggle-btn');
   const isOpen=strip.classList.toggle('open');
-  arrow.textContent=isOpen?'▼':'▶';
+  if(btn){isOpen?btn.classList.add('open'):btn.classList.remove('open');}
   if(isOpen&&!strip.innerHTML)buildStrip();
 }
 
