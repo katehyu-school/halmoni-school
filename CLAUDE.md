@@ -8,9 +8,10 @@
 
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
-| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L2 마감 테스트 완성 ✅** / **읽기 지문 카드 완성 ✅** / **띄어쓰기 게임 완성 ✅** / **Shadowing 완성 ✅** | Round 4: 복습 플래시카드 |
-| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** / **읽기 지문 카드 완성 ✅** / **Shadowing 완성 ✅** | **L4 설계 확정 (12과)** — L4 콘텐츠 제작 전 L2 u08·u09 grammar 포맷 통일 작업 필요 |
-| **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** (hq-mobile.html로 연결됨) | 기능 확장 |
+| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~03 완성 ✅** | L3 ep04+ 슬라이드/TTS 준비 후 구현 |
+| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** | **L4 설계 확정 (12과)** — L4 콘텐츠 제작 전 L2 u08·u09 grammar 포맷 통일 작업 필요 |
+| **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** | 기능 확장 |
+| **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** | PIN 개인별 관리 UI 개선 |
 
 ---
 
@@ -448,6 +449,39 @@ const urlName   = _hc ? _hc.urlName : null;
 - ✅ nhs.html EPISODE_DATA 인라인 동기화
 - ✅ 사이드바 ep07 활성화 + ep08 disabled
 - ✅ 슬라이드 7장 (리아네 부엌1~7.png) / TTS 8개 복사 완료
+
+---
+
+## 👤 멤버 & 출석 시스템 (2026-06-24 완성)
+
+### Supabase 테이블 구조
+| 테이블 | 용도 | 주요 컬럼 |
+|--------|------|----------|
+| `members` | 로그인 계정 | `name`(로그인ID), `display_name`(표시명), `pin`, `role`(admin/teacher/student) |
+| `students` | Kids 앱 출석 학생 목록 | `name`(표시명 — 영문: Liam/Lia/Kayo 등) |
+| `attendance` | 출석 기록 | `student_name`(표시명), `class_date`, `status`(present/absent/late), `logged_in_at` |
+
+### 현재 멤버 (2026-06-24 기준)
+| 로그인ID | 표시명 | 역할 | 반 |
+|---------|--------|------|-----|
+| kate | 선생님 | teacher | HQ |
+| admin | 관리자 | admin | - |
+| riam | Liam | student | Kids |
+| kayo | Kayo | student | Kids |
+| student3 | Lia | student | Kids |
+| student4 | Mirae | student | HQ |
+
+### 핵심 규칙
+- **attendance.student_name = display_name (영문 이름)** — members.display_name, students.name 모두 같은 값 사용
+- Kids 앱(`core.js`)은 `students` 테이블에서 학생 목록 로드 → `attendance.student_name`과 매칭
+- index.html 로그인 시 `data.display_name`으로 attendance 기록 (login ID ❌)
+- admin.html은 `members` 테이블로 로그인(admin role + pin) / PIN 변경(role별 일괄 업데이트)
+- **Supabase JWT anon key 사용** — `sb_publishable_` 형식은 supabase-js@2 CDN 호환 안 됨
+
+### 출석부 RLS 정책
+- `members`: SELECT/INSERT/UPDATE/DELETE 모두 public 허용
+- `attendance`: SELECT/INSERT/UPDATE 모두 public 허용
+- `students`: (core.js가 자체 관리)
 
 ---
 
