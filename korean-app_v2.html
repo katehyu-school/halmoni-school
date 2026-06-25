@@ -1069,6 +1069,8 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .kids-mode-btn:first-child{border-radius:7px 0 0 7px;}
 .kids-mode-btn:last-child{border-radius:0 7px 7px 0;}
 .kids-mode-btn.active{background:#2a9d8f;color:#fff;}
+.kids-idx-mode-btn{flex:1;padding:8px;border:none;border-bottom:3px solid transparent;background:#fff;font-size:13px;font-weight:700;color:#aaa;cursor:pointer;font-family:'Jua',sans-serif;transition:border-color .15s,color .15s;}
+.kids-idx-mode-btn.active{border-bottom:3px solid #2a9d8f;color:#2a9d8f;background:#fff;}
 .kids-gram-hdr{font-size:12px;font-weight:700;color:#fff;background:#2a9d8f;padding:5px 10px;border-radius:5px;margin:14px 0 6px;font-family:'Jua',sans-serif;}
 .kids-gram-hdr:first-child{margin-top:4px;}
 .kids-gram-row{padding:9px 4px;border-bottom:1px solid #f0e8e0;}
@@ -11471,8 +11473,8 @@ function selectUnit3(n){ _kidsShowWarmup(3, n, ()=>switchBook3Unit(n)); }
     <input type="text" id="kids-idx-search" placeholder="단어 검색 Search words…" oninput="_kidsIdxFilter()">
   </div>
   <div class="kids-idx-mode-bar">
-    <button class="kids-idx-mode-btn active" id="kwu-mode-vocab" onclick="_kidsSetMode('vocab',this)" style="flex:1;padding:8px;border:none;border-bottom:3px solid #2a9d8f;background:#fff;font-size:13px;font-weight:700;color:#2a9d8f;cursor:pointer;font-family:Jua,sans-serif;">📚 새단어</button>
-    <button class="kids-idx-mode-btn" id="kwu-mode-gram" onclick="_kidsSetMode('grammar',this)" style="flex:1;padding:8px;border:none;border-bottom:3px solid transparent;background:#fff;font-size:13px;font-weight:700;color:#aaa;cursor:pointer;font-family:Jua,sans-serif;">📌 문법</button>
+    <button class="kids-idx-mode-btn active" id="kwu-mode-vocab" onclick="_kidsSetMode('vocab',this)">📚 새단어</button>
+    <button class="kids-idx-mode-btn" id="kwu-mode-gram" onclick="_kidsSetMode('grammar',this)">📌 문법</button>
   </div>
   <div class="kids-idx-jump-bar" id="kids-idx-jump-bar"></div>
   <div class="kids-idx-body" id="kids-idx-body">
