@@ -189,6 +189,7 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
 main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .unit { display:none; }
 .unit.active { display:block; }
+.b4-unit-wrap { display:block; }
 
 /* SECTION NAV */
 .section-nav { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
@@ -11719,7 +11720,7 @@ function renderBook4Unit(data, unitNum) {
     : '';
 
   container.innerHTML =
-    '<div class="unit active">' +
+    '<div class="b4-unit-wrap">' +
     '<div class="unit-heading"><span class="unit-num">'+data.unit+'</span><span class="unit-title">'+(data.title||'')+'</span></div>' +
     (goal.en ? '<div class="b3-goal-badge">🎯 '+goal.en+'</div>' : '') +
     '<nav class="section-nav" id="b4-snav">' +
