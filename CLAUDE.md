@@ -11,7 +11,7 @@
 | **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~03 완성 ✅** | L3 ep04+ 슬라이드/TTS 준비 후 구현 |
 | **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** | **L4 설계 확정 (12과)** — L4 콘텐츠 제작 전 L2 u08·u09 grammar 포맷 통일 작업 필요 |
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** | 기능 확장 |
-| **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** | PIN 개인별 관리 UI 개선 |
+| **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |
 
 ---
 
@@ -479,9 +479,17 @@ const urlName   = _hc ? _hc.urlName : null;
 - **Supabase JWT anon key 사용** — `sb_publishable_` 형식은 supabase-js@2 CDN 호환 안 됨
 
 ### 출석부 RLS 정책
-- `members`: SELECT/INSERT/UPDATE/DELETE 모두 public 허용
+- `members`: INSERT/UPDATE/DELETE public 허용 / SELECT는 **pin 제외** 컬럼만 anon 허용 (name, display_name, role, created_at)
 - `attendance`: SELECT/INSERT/UPDATE 모두 public 허용
 - `students`: (core.js가 자체 관리)
+
+### 🔐 로그인 보안 아키텍처 (2026-06-24 강화)
+- **로그인 = `verify_login(p_name, p_pin)` RPC 함수 전용** — index.html + admin.html 모두 적용
+  - `SECURITY DEFINER`로 실행 (postgres 권한, RLS 우회) → pin 컬럼에 직접 접근
+  - 반환값: `{ name, display_name, role }` — pin은 절대 클라이언트에 노출 안 됨
+- **pin 컬럼 anon 차단**: `REVOKE SELECT ON members FROM anon` 후 특정 컬럼만 `GRANT SELECT (name, display_name, role, created_at)`
+- **PIN 입력 maxlength=20** — 기존 6으로 긴 비밀번호(KShin2025!, Halmoni0109!) 묵묵히 잘리던 버그 수정
+- **보안 경고 계기**: Supabase에서 허술한 RLS 경고 이메일 → 비밀번호 복잡화 + 서버사이드 검증으로 대응
 
 ---
 
