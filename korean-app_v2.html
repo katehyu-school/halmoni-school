@@ -11679,6 +11679,7 @@ async function loadBook4Unit(n) {
 }
 
 async function switchBook4Unit(n) {
+  console.log('[L4] switchBook4Unit called, n=', n);
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
   [1].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
@@ -11686,14 +11687,18 @@ async function switchBook4Unit(n) {
   });
   b4CurrentUnit = n;
   const container = document.getElementById('b4-unit-container');
-  if (!container) return;
-  container.innerHTML = '<div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>';
+  console.log('[L4] container=', container);
+  if (!container) { console.error('[L4] container not found!'); return; }
+  container.innerHTML = '<div style="text-align:center;padding:60px;color:#555;font-size:18px;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>';
   try {
+    console.log('[L4] loading data...');
     const data = await loadBook4Unit(n);
+    console.log('[L4] data loaded:', data && data.title);
     renderBook4Unit(data, n);
+    console.log('[L4] renderBook4Unit done');
   } catch(e) {
-    container.innerHTML = '<div style="text-align:center;padding:60px;color:#f88;font-family:Jua,sans-serif;">⚠️ 데이터 로드 실패: '+e.message+'</div>';
-    console.error(e);
+    console.error('[L4] ERROR:', e);
+    container.innerHTML = '<div style="text-align:center;padding:60px;color:#f44;font-size:16px;font-family:Jua,sans-serif;">⚠️ 오류: '+e.message+'</div>';
   }
 }
 
