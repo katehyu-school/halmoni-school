@@ -1785,6 +1785,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   </div>
 </nav>
 
+<!-- ══════ Book 4 사이드바 ══════ -->
+<nav class="sidebar" id="book4-sidebar" style="display:none;">
+  <div class="sidebar-title">Level 4</div>
+  <div class="lesson-item active" id="b4-lesson-1" onclick="selectUnit4(1)">
+    <span class="lesson-num">01</span>
+    <span class="lesson-title-text">지금 뭐 하고 있어요?</span>
+  </div>
+</nav>
+
 <!-- 컨텐츠 영역 -->
 <div class="app-content">
 
@@ -1799,15 +1808,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <div style="text-align:center;padding:60px;color:#aaa;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>
   </div>
 </div>
-
-<!-- ══════ Book 4 사이드바 ══════ -->
-<nav class="sidebar" id="book4-sidebar" style="display:none;">
-  <div class="sidebar-title">Level 4</div>
-  <div class="lesson-item active" id="b4-lesson-1" onclick="selectUnit4(1)">
-    <span class="lesson-num">01</span>
-    <span class="lesson-title-text">지금 뭐 하고 있어요?</span>
-  </div>
-</nav>
 
 <!-- ══════ Book 4 CONTENT ══════ -->
 <div id="book4-main" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px;">
@@ -11679,7 +11679,6 @@ async function loadBook4Unit(n) {
 }
 
 async function switchBook4Unit(n) {
-  console.log('[L4] switchBook4Unit called, n=', n);
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
   [1].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
@@ -11687,22 +11686,12 @@ async function switchBook4Unit(n) {
   });
   b4CurrentUnit = n;
   const container = document.getElementById('b4-unit-container');
-  console.log('[L4] container=', container);
-  if (!container) { console.error('[L4] container not found!'); return; }
+  if (!container) return;
   container.innerHTML = '<div style="text-align:center;padding:60px;color:#555;font-size:18px;font-family:Jua,sans-serif;">⏳ 로딩 중...</div>';
   try {
-    console.log('[L4] loading data...');
     const data = await loadBook4Unit(n);
-    console.log('[L4] data loaded:', data && data.title);
     renderBook4Unit(data, n);
-    console.log('[L4] renderBook4Unit done');
-    setTimeout(()=>{
-      const c=document.getElementById('b4-unit-container');
-      const m=document.getElementById('book4-main');
-      console.log('[L4] 2s later — main display:', m&&m.style.display, 'container children:', c&&c.children.length, 'container innerHTML length:', c&&c.innerHTML.length);
-    }, 2000);
   } catch(e) {
-    console.error('[L4] ERROR:', e);
     container.innerHTML = '<div style="text-align:center;padding:60px;color:#f44;font-size:16px;font-family:Jua,sans-serif;">⚠️ 오류: '+e.message+'</div>';
   }
 }
