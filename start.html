@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Here · Hangeul Quest</title>
+<meta name="description" content="Your Korean learning roadmap — from zero to conversational, step by step.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --teal: #4ecdc4;
+  --teal-dk: #2a9d95;
+  --navy: #0a2540;
+  --navy2: #0d3d5c;
+  --coral: #ff6b6b;
+  --amber: #f4a261;
+  --purple: #7c5cbf;
+  --green: #2ec4b6;
+  --gray: #6b8394;
+  --bg: #f5f9fc;
+}
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--navy);
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--navy);
+  padding: 16px 32px;
+  display: flex; align-items: center; gap: 16px;
+}
+.brand-name {
+  font-family: Impact, 'Arial Narrow', sans-serif;
+  font-size: 20px; letter-spacing: .1em; color: #fff;
+}
+.brand-name span { color: var(--teal); }
+.back-link {
+  margin-left: auto; font-size: 13px; color: var(--teal);
+  text-decoration: none; opacity: .8;
+}
+.back-link:hover { opacity: 1; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  padding: 60px 32px 80px;
+  text-align: center; color: #fff;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(78,205,196,.15);
+  border: 1px solid rgba(78,205,196,.4);
+  color: var(--teal); font-size: 12px; font-weight: 700;
+  letter-spacing: .1em; padding: 5px 14px; border-radius: 20px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: 36px; font-weight: 700; margin-bottom: 12px;
+}
+.hero h1 span { color: var(--teal); }
+.hero p {
+  font-size: 16px; color: rgba(255,255,255,.7);
+  max-width: 520px; margin: 0 auto 32px;
+}
+.hero-cta {
+  display: inline-block;
+  background: var(--teal); color: var(--navy);
+  font-weight: 700; font-size: 14px;
+  padding: 12px 28px; border-radius: 30px;
+  text-decoration: none; transition: opacity .15s;
+}
+.hero-cta:hover { opacity: .85; }
+
+/* ── WRAP ── */
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ── SECTION TITLE ── */
+.sec-title {
+  font-size: 13px; font-weight: 700; letter-spacing: .12em;
+  color: var(--teal); text-transform: uppercase;
+  text-align: center; margin: 56px 0 32px;
+}
+
+/* ── ROADMAP ── */
+.roadmap { position: relative; }
+
+/* vertical line */
+.roadmap::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--teal), rgba(78,205,196,.1));
+  transform: translateX(-50%);
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0 0;
+  margin-bottom: 40px;
+  align-items: start;
+}
+
+/* center dot */
+.stage-dot {
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 18px;
+  position: relative; z-index: 1;
+}
+.stage-dot-inner {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900;
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+/* cards */
+.stage-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  border: 1px solid #e0eef0;
+  box-shadow: 0 2px 12px rgba(10,37,64,.06);
+  transition: box-shadow .2s;
+}
+.stage-card:hover { box-shadow: 0 4px 20px rgba(10,37,64,.1); }
+.stage-card.right { margin-left: 8px; }
+.stage-card.left  { margin-right: 8px; }
+.stage-card.empty { background: none; border: none; box-shadow: none; }
+
+.stage-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.stage-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.stage-card .sub { font-size: 12px; color: var(--gray); margin-bottom: 12px; }
+.stage-card p { font-size: 13px; color: #2c4257; line-height: 1.7; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 12px;
+  font-weight: 600; white-space: nowrap;
+}
+
+.goal-box {
+  margin-top: 14px; padding: 10px 14px;
+  border-radius: 10px; font-size: 12px; font-weight: 600;
+}
+
+.stage-link {
+  display: inline-block; margin-top: 14px;
+  font-size: 12px; font-weight: 700;
+  padding: 7px 16px; border-radius: 20px;
+  text-decoration: none; transition: opacity .15s;
+}
+.stage-link:hover { opacity: .8; }
+
+/* colors per stage */
+.s0 { --c: #4ecdc4; }
+.s1 { --c: #f4a261; }
+.s2 { --c: #7c5cbf; }
+.s3 { --c: #2ec4b6; }
+.s4 { --c: #ff6b6b; }
+
+/* ── BASICS SIDEBAR INFO ── */
+.basics-strip {
+  background: var(--navy);
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin: 48px 0;
+  display: flex; gap: 24px; align-items: flex-start;
+  flex-wrap: wrap;
+}
+.basics-strip-icon { font-size: 36px; flex-shrink: 0; }
+.basics-strip-body { flex: 1; min-width: 200px; }
+.basics-strip-body h3 { color: #fff; font-size: 17px; margin-bottom: 6px; }
+.basics-strip-body p { color: rgba(255,255,255,.65); font-size: 13px; line-height: 1.7; }
+.basics-topics {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+.basics-topic-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 12px;
+  background: rgba(78,205,196,.15); color: var(--teal);
+  font-weight: 600;
+}
+.basics-link {
+  display: inline-block; margin-top: 14px;
+  background: var(--teal); color: var(--navy);
+  font-size: 12px; font-weight: 700;
+  padding: 8px 18px; border-radius: 20px;
+  text-decoration: none;
+}
+
+/* ── CTA ── */
+.cta-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-top: 56px;
+}
+.cta-card {
+  padding: 24px 28px; border-radius: 18px;
+  text-decoration: none; transition: opacity .15s;
+  display: block;
+}
+.cta-card:hover { opacity: .88; }
+.cta-card .emoji { font-size: 28px; margin-bottom: 10px; }
+.cta-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.cta-card p { font-size: 13px; opacity: .8; }
+
+footer {
+  margin-top: 48px; font-size: 12px; color: #a0b5c2;
+  text-align: center; border-top: 1px solid #dce8f0; padding-top: 20px;
+  padding-bottom: 40px;
+}
+footer a { color: var(--teal); text-decoration: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .roadmap::before { left: 22px; }
+  .stage { grid-template-columns: 44px 1fr; }
+  .stage-dot { padding-top: 18px; }
+  .stage > .stage-card.empty { display: none; }
+  .stage > .stage-card.left { order: 2; margin-right: 0; margin-left: 8px; }
+  .stage > .stage-card.right { order: 2; margin-left: 8px; }
+  .stage > .stage-dot { order: 1; }
+  .cta-row { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <svg width="30" height="34" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 52 Q22 47 29 51 L55 22 L81 51 Q88 47 92 52" fill="none" stroke="#4ECDC4" stroke-width="1.8"/>
+    <path d="M18 52 L55 22 L92 52" fill="#4ECDC4" opacity="0.12"/>
+    <rect x="24" y="66" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/>
+    <circle cx="35" cy="79" r="7.5" fill="none" stroke="#4ECDC4" stroke-width="2.2"/>
+    <rect x="24" y="94" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/>
+    <rect x="62" y="66" width="24" height="2.4" rx="1.2" fill="#FF6B6B"/>
+    <rect x="83" y="66" width="2.4" height="30" rx="1.2" fill="#FF6B6B"/>
+  </svg>
+  <div class="brand-name"><span>HANGEUL</span> QUEST</div>
+  <a href="/" class="back-link">← Home</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">LEARNING ROADMAP · 학습 경로</div>
+  <h1>Where do I <span>start?</span></h1>
+  <p>From zero Korean to real conversations — here's your path, step by step.</p>
+  <a href="#stage0" class="hero-cta">Show me the path ↓</a>
+</section>
+
+<div class="wrap">
+
+  <div class="sec-title">Your Learning Path · 학습 단계</div>
+
+  <!-- ── ROADMAP ── -->
+  <div class="roadmap">
+
+    <!-- STAGE 0 -->
+    <div class="stage s0" id="stage0">
+      <div class="stage-card left">
+        <div class="stage-label" style="color:#4ecdc4">Stage 0</div>
+        <h3>🔤 한글 읽기 · Read the Alphabet</h3>
+        <div class="sub">완전 초보 · Absolute beginner</div>
+        <p>한글(Hangul)은 배우기 쉬운 소리 문자예요. 자음 14개 + 모음 10개 + 받침, 총 3단계면 읽을 수 있어요.<br><em style="font-size:12px;color:#6b8394">Hangul is a phonetic alphabet — most learners can read it in a few hours of practice.</em></p>
+        <div class="tag-list">
+          <span class="tag" style="background:#e8faf8;color:#2a9d95">기본 모음 10</span>
+          <span class="tag" style="background:#e8faf8;color:#2a9d95">복합 모음 11</span>
+          <span class="tag" style="background:#e8faf8;color:#2a9d95">기본 자음 14</span>
+          <span class="tag" style="background:#e8faf8;color:#2a9d95">쌍자음 5</span>
+          <span class="tag" style="background:#e8faf8;color:#2a9d95">받침</span>
+          <span class="tag" style="background:#e8faf8;color:#2a9d95">블럭 조합</span>
+        </div>
+        <div class="goal-box" style="background:#e8faf8;color:#0a4a46">
+          🎯 Goal: 한글 자모를 읽고 소리 낼 수 있다
+        </div>
+        <a href="korean-app_v2.html" class="stage-link" style="background:#4ecdc4;color:#0a2540">
+          → HQ Kids Level 1 으로 시작
+        </a>
+      </div>
+      <div class="stage-dot">
+        <div class="stage-dot-inner" style="background:#4ecdc4;color:#fff">0</div>
+      </div>
+      <div class="stage-card empty"></div>
+    </div>
+
+    <!-- STAGE 1 -->
+    <div class="stage s1">
+      <div class="stage-card empty"></div>
+      <div class="stage-dot">
+        <div class="stage-dot-inner" style="background:#f4a261;color:#fff">1</div>
+      </div>
+      <div class="stage-card right">
+        <div class="stage-label" style="color:#f4a261">Stage 1</div>
+        <h3>👋 첫 문장 · First Sentences</h3>
+        <div class="sub">한글은 읽는데 말은 못할 때</div>
+        <p>인사, 물건 이름, 있어요/없어요, 어디예요? — 일상에서 가장 먼저 쓰이는 표현들이에요.<br><em style="font-size:12px;color:#6b8394">Basic greetings, identifying objects, and simple questions.</em></p>
+        <div class="tag-list">
+          <span class="tag" style="background:#fff4ec;color:#c4681a">안녕하세요</span>
+          <span class="tag" style="background:#fff4ec;color:#c4681a">이게 뭐예요?</span>
+          <span class="tag" style="background:#fff4ec;color:#c4681a">있어요/없어요</span>
+          <span class="tag" style="background:#fff4ec;color:#c4681a">어디예요?</span>
+          <span class="tag" style="background:#fff4ec;color:#c4681a">N이에요/예요</span>
+        </div>
+        <div class="goal-box" style="background:#fff4ec;color:#7a3e0d">
+          🎯 Goal: 간단한 질문을 하고 대답할 수 있다
+        </div>
+        <a href="korean-app_v2.html" class="stage-link" style="background:#f4a261;color:#fff">
+          → HQ Kids Level 1 (unit 07+)
+        </a>
+      </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div class="stage s2">
+      <div class="stage-card left">
+        <div class="stage-label" style="color:#7c5cbf">Stage 2</div>
+        <h3>🎬 HQ Level 1 · 실생활 에피소드</h3>
+        <div class="sub">12개 장면, 실제 한국어 대화</div>
+        <p>공원, 식사, 시장, 학교, 집 방문 — 실제 있을 법한 장면에서 자연스럽게 어휘와 문법을 익혀요.<br><em style="font-size:12px;color:#6b8394">12 real-life episodes covering everyday Korean situations.</em></p>
+        <div class="tag-list">
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">은/는 · 이/가</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">을/를</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">아요/어요</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">에/에서</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">숫자</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">과거형</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">미래형</span>
+          <span class="tag" style="background:#f0edfb;color:#5b3fa8">높임말</span>
+        </div>
+        <div class="goal-box" style="background:#f0edfb;color:#3d2080">
+          🎯 Goal: TOPIK 1급 기초 수준
+        </div>
+        <a href="nhs.html" class="stage-link" style="background:#7c5cbf;color:#fff">
+          → Hangeul Quest 시작
+        </a>
+      </div>
+      <div class="stage-dot">
+        <div class="stage-dot-inner" style="background:#7c5cbf;color:#fff">2</div>
+      </div>
+      <div class="stage-card empty"></div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div class="stage s3">
+      <div class="stage-card empty"></div>
+      <div class="stage-dot">
+        <div class="stage-dot-inner" style="background:#2ec4b6;color:#fff">3</div>
+      </div>
+      <div class="stage-card right">
+        <div class="stage-label" style="color:#2ec4b6">Stage 3</div>
+        <h3>📈 HQ Level 2 · 중급으로</h3>
+        <div class="sub">12개 에피소드 · 문법 깊이 확장</div>
+        <p>관형절, 조건문, 이유 표현, 추측 — Level 1에서 익힌 기초 위에 더 복잡한 표현을 쌓아요.<br><em style="font-size:12px;color:#6b8394">More nuanced grammar: clauses, conditionals, and natural flow.</em></p>
+        <div class="tag-list">
+          <span class="tag" style="background:#e6faf8;color:#1a8c85">관형절 -(으)ㄴ</span>
+          <span class="tag" style="background:#e6faf8;color:#1a8c85">-(으)면</span>
+          <span class="tag" style="background:#e6faf8;color:#1a8c85">-(으)니까</span>
+          <span class="tag" style="background:#e6faf8;color:#1a8c85">못+동사</span>
+          <span class="tag" style="background:#e6faf8;color:#1a8c85">-아/어 보다</span>
+          <span class="tag" style="background:#e6faf8;color:#1a8c85">-(으)ㄹ게요</span>
+        </div>
+        <div class="goal-box" style="background:#e6faf8;color:#0a4a46">
+          🎯 Goal: TOPIK 1급 완성 수준
+        </div>
+        <a href="nhs.html" class="stage-link" style="background:#2ec4b6;color:#fff">
+          → Hangeul Quest Level 2
+        </a>
+      </div>
+    </div>
+
+    <!-- STAGE 4 -->
+    <div class="stage s4">
+      <div class="stage-card left">
+        <div class="stage-label" style="color:#ff6b6b">Stage 4</div>
+        <h3>🌟 HQ Level 3+ · 고급</h3>
+        <div class="sub">계속 추가 중 · More coming</div>
+        <p>더 다양한 장면, 더 자연스러운 한국어 — Level 3부터는 성인 일상·문화 중심으로 심화돼요.<br><em style="font-size:12px;color:#6b8394">Advanced episodes focusing on adult contexts and deeper cultural nuance.</em></p>
+        <div class="tag-list">
+          <span class="tag" style="background:#fff0f0;color:#cc3333">TOPIK 2급+</span>
+          <span class="tag" style="background:#fff0f0;color:#cc3333">성인 일상</span>
+          <span class="tag" style="background:#fff0f0;color:#cc3333">문화 심화</span>
+          <span class="tag" style="background:#fff0f0;color:#cc3333">제작 중 🚧</span>
+        </div>
+        <div class="goal-box" style="background:#fff0f0;color:#8b1a1a">
+          🎯 Goal: 자연스러운 실생활 한국어
+        </div>
+      </div>
+      <div class="stage-dot">
+        <div class="stage-dot-inner" style="background:#ff6b6b;color:#fff">4</div>
+      </div>
+      <div class="stage-card empty"></div>
+    </div>
+
+  </div><!-- /roadmap -->
+
+  <!-- BASICS STRIP -->
+  <div class="basics-strip">
+    <div class="basics-strip-icon">📚</div>
+    <div class="basics-strip-body">
+      <h3>Basics — 언제든 꺼내 보는 참고서</h3>
+      <p>학습 경로 어느 단계에서든 모르는 게 생기면 Basics를 찾아보세요. 자모부터 동사 활용, 숫자, 띄어쓰기까지 총망라되어 있어요.<br><em>Your always-available reference — look up grammar, pronunciation, or vocabulary anytime.</em></p>
+      <div class="basics-topics">
+        <span class="basics-topic-tag">🔤 한글</span>
+        <span class="basics-topic-tag">🔡 문장구조</span>
+        <span class="basics-topic-tag">👋 인사·교실</span>
+        <span class="basics-topic-tag">🔢 숫자</span>
+        <span class="basics-topic-tag">📝 동사활용</span>
+        <span class="basics-topic-tag">❓ 의문사</span>
+        <span class="basics-topic-tag">🙇 호칭문화</span>
+        <span class="basics-topic-tag">✍️ 글쓰기</span>
+        <span class="basics-topic-tag">🎤 발음</span>
+        <span class="basics-topic-tag">📏 띄어쓰기</span>
+      </div>
+      <a href="nhs.html" class="basics-link">→ Basics 열기</a>
+    </div>
+  </div>
+
+  <!-- CTA ROW -->
+  <div class="cta-row">
+    <a href="nhs.html" class="cta-card" style="background:var(--navy);color:#fff">
+      <div class="emoji">🎬</div>
+      <h3>Hangeul Quest</h3>
+      <p>에피소드로 배우는 실생활 한국어 · Ages 11+</p>
+    </a>
+    <a href="mailto:hangeulquest@gmail.com?subject=Free%20Trial%20Lesson" class="cta-card" style="background:var(--teal);color:var(--navy)">
+      <div class="emoji">✉️</div>
+      <h3>Free Trial Lesson</h3>
+      <p>30분 무료 체험 수업 신청 · 이메일로 문의하세요</p>
+    </a>
+  </div>
+
+  <footer>
+    © 2026 Hangeul Quest &nbsp;·&nbsp;
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/faq.html">FAQ</a> &nbsp;·&nbsp;
+    <a href="/privacy.html">Privacy Policy</a>
+  </footer>
+
+</div><!-- /wrap -->
+</body>
+</html>

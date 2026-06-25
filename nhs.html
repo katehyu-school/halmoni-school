@@ -3616,7 +3616,9 @@ function setLevel(btn){
 
 function buildBasicsSidebar(){
   const list=document.getElementById('ep-list');
-  list.innerHTML=BASICS_TOPICS.map(t=>
+  list.innerHTML=
+    '<a href="start.html" target="_blank" style="display:block;margin:0 0 10px;padding:9px 14px;background:linear-gradient(135deg,#0a2540,#0d3d5c);border-radius:10px;text-decoration:none;color:#4ecdc4;font-size:12px;font-weight:700;">🗺 학습 경로 보기 · Learning Roadmap</a>'
+    +BASICS_TOPICS.map(t=>
     '<div class="basics-topic-item'+(t.id===curBasicsTopic?' active':'')+'" id="bt-'+t.id+'" onclick="loadBasics(\''+t.id+'\')">'
     +'<div class="basics-topic-icon">'+t.icon+'</div>'
     +'<div class="basics-topic-name">'+t.label+'<span class="basics-topic-name-en">'+t.en+'</span></div>'
