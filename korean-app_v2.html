@@ -11750,15 +11750,15 @@ const B4_SCENE_DATA = {
       'data/elem/level4/slides/L4_01/무지개9.png'
     ],
     script: [
-      [{ speaker:'할머니', color:'coral', text:'리아야, 엄마는 지금 뭐 하고 있어?', audio:'data/elem/level4/TTS/L4_01/audio_0_리아야__엄마는_지금_뭐_하고_있어_.mp3' }],
-      [{ speaker:'리아', color:'blue', text:'일 하시고 계세요.', audio:'data/elem/level4/TTS/L4_01/audio_1_일_하시고_계세요_.mp3' }],
-      [{ speaker:'할머니', color:'coral', text:'애라는?', audio:'data/elem/level4/TTS/L4_01/audio_2_애라는_.mp3' }],
-      [{ speaker:'리아', color:'blue', text:'애라는 언니 방에서 그림을 그리고 있어요.', audio:'data/elem/level4/TTS/L4_01/audio_3_애라는_언니_방에서_그림을_그리고_있어요_.mp3' }],
-      [{ speaker:'할머니', color:'coral', text:'뭘 그리고 있어?', audio:'data/elem/level4/TTS/L4_01/audio_4_뭘_그리고_있어_.mp3' }],
-      [{ speaker:'리아', color:'blue', text:'무지개를 그린대요.', audio:'data/elem/level4/TTS/L4_01/audio_5_무지개를_그린대요_.mp3' }],
-      [{ speaker:'애라', color:'purple', text:'할머니 이거 봐요! 무지개예요!', audio:'data/elem/level4/TTS/L4_01/audio_6_할머니_이거_봐요__무지개예요_.mp3' }],
-      [{ speaker:'할머니', color:'coral', text:'와~ 정말 멋진 무지개다.', audio:'data/elem/level4/TTS/L4_01/audio_7_와__정말_멋진_무지개다_.mp3' }],
-      [{ speaker:'할머니', color:'coral', text:'애라가 언니를 닮아서 무지개를 좋아하네.', audio:'data/elem/level4/TTS/L4_01/audio_8_애라가_언니를_닮아서_무지개를_좋아하네_.mp3' }]
+      [{ ko:'리아야, 엄마는 지금 뭐 하고 있어?', en:'Lia, what is Mom doing right now?', audio:'data/elem/level4/TTS/L4_01/audio_0_리아야__엄마는_지금_뭐_하고_있어_.mp3' }],
+      [{ ko:'일 하시고 계세요.', en:'She is working.', audio:'data/elem/level4/TTS/L4_01/audio_1_일_하시고_계세요_.mp3' }],
+      [{ ko:'애라는?', en:'What about Aera?', audio:'data/elem/level4/TTS/L4_01/audio_2_애라는_.mp3' }],
+      [{ ko:'애라는 언니 방에서 그림을 그리고 있어요.', en:'Aera is drawing in sister\'s room.', audio:'data/elem/level4/TTS/L4_01/audio_3_애라는_언니_방에서_그림을_그리고_있어요_.mp3' }],
+      [{ ko:'뭘 그리고 있어?', en:'What is she drawing?', audio:'data/elem/level4/TTS/L4_01/audio_4_뭘_그리고_있어_.mp3' }],
+      [{ ko:'무지개를 그린대요.', en:'She says she is drawing a rainbow.', audio:'data/elem/level4/TTS/L4_01/audio_5_무지개를_그린대요_.mp3' }],
+      [{ ko:'할머니 이거 봐요! 무지개예요!', en:'Grandma, look at this! It\'s a rainbow!', audio:'data/elem/level4/TTS/L4_01/audio_6_할머니_이거_봐요__무지개예요_.mp3' }],
+      [{ ko:'와~ 정말 멋진 무지개다.', en:'Wow, what a beautiful rainbow!', audio:'data/elem/level4/TTS/L4_01/audio_7_와__정말_멋진_무지개다_.mp3' }],
+      [{ ko:'애라가 언니를 닮아서 무지개를 좋아하네.', en:'Aera takes after her sister — she loves rainbows too.', audio:'data/elem/level4/TTS/L4_01/audio_8_애라가_언니를_닮아서_무지개를_좋아하네_.mp3' }]
     ]
   }
 };
@@ -11928,24 +11928,40 @@ function b4SceneTo(idx) {
   if (!d) return;
   idx = Math.max(0, Math.min(idx, d.slides.length - 1));
   b4SceneIdx = idx;
+
   const img = document.getElementById('b4-scene-img');
   if (img) { img.src = d.slides[idx]; img.style.display = ''; }
+
+  // 도트
   document.querySelectorAll('#b4-scene-dots .u2-slide-dot')
     .forEach((dot, i) => dot.classList.toggle('active', i === idx));
+
+  // 버튼
   const prev = document.getElementById('b4-scene-prev');
   const next = document.getElementById('b4-scene-next');
   if (prev) prev.disabled = (idx === 0);
   if (next) next.disabled = (idx === d.slides.length - 1);
+
+  // 스크립트 — L3와 동일한 포맷 (화자 없음, rec+shad 버튼)
   const box = document.getElementById('b4-script-box');
   if (!box) return;
   const lines = d.script[idx] || [];
   box.innerHTML = lines.map((ln, li) => {
-    const col = ln.color || 'teal';
-    return '<div class="u2-script-line" style="--sp-color:var(--'+col+');">'
-         + '<span class="u2-script-speaker">'+ln.speaker+'</span>'
-         + '<span class="u2-script-text">'+ln.text+'</span>'
-         + (ln.audio ? '<button class="u2-script-play" onclick="b4ScenePlay('+idx+','+li+')">&#9654;</button>' : '')
-         + '</div>';
+    const recId = 'b4-rec-'+idx+'-'+li;
+    const recBtn = '<button class="u2-rec-btn" id="'+recId+'" onclick="kidsRecToggle(\''+recId+'\')">🎙️</button>';
+    const shadId = 'b4-shad-'+idx+'-'+li;
+    const shadResId = 'b4-shad-res-'+idx+'-'+li;
+    const escapedKo = ln.ko.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    const shadBtn = '<button class="kids-shad-btn" id="'+shadId+'" data-target="'+escapedKo+'" data-res="'+shadResId+'" onclick="kidsShad(this,this.dataset.target,this.dataset.res)" title="따라 말하기 · Shadowing">🎤</button>';
+    return '<div class="u2-script-line">' +
+    (ln.audio
+      ? '<button class="u2-script-play" onclick="b4ScenePlay(' + idx + ',' + li + ')" aria-label="재생">▶</button>'
+      : '<button class="u2-script-play" onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\\'") + '\')" aria-label="TTS">🔊</button>') +
+    recBtn + shadBtn +
+    '<span class="u2-script-ko">' + ln.ko + '</span>' +
+    '<span class="u2-script-en">' + ln.en + '</span>' +
+    '</div>' +
+    '<div class="kids-shad-res" id="'+shadResId+'"></div>';
   }).join('');
 }
 
@@ -11964,20 +11980,20 @@ function b4ScenePlay(slideIdx, lineIdx) {
 function b4ToggleFullScript(btn, unitNum) {
   const box = document.getElementById('b4-full-script');
   if (!box) return;
-  const data = B4_SCENE_DATA[unitNum];
-  if (!data) return;
+  const d = B4_SCENE_DATA[unitNum];
+  if (!d) return;
   if (box.style.display === 'none') {
     box.style.display = 'block';
     btn.textContent = '📜 전체 대본 접기';
-    box.innerHTML = data.script.map((lines,si) =>
-      lines.map((line,li) => {
-        const col = line.color||'teal';
-        return '<div class="u2-script-line" style="--sp-color:var(--'+col+');">'
-             + '<span class="u2-script-speaker">'+line.speaker+'</span>'
-             + '<span class="u2-script-text">'+line.text+'</span>'
-             + (line.audio ? '<button class="u2-script-play" onclick="b4ScenePlay('+si+','+li+')">&#9654;</button>' : '')
-             + '</div>';
-      }).join('')
+    box.innerHTML = d.script.map((lines, si) =>
+      '<div style="margin-bottom:8px;padding:6px 8px;background:white;border-radius:8px;border-left:3px solid var(--teal);">' +
+      '<div style="font-size:0.7rem;color:#aaa;margin-bottom:2px;">Slide ' + (si+1) + '</div>' +
+      lines.map(ln =>
+        '<div style="margin:2px 0;">' +
+        '<button onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\'") + '\')" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:0.85rem;margin-right:4px;">🔊</button>' +
+        '<strong>' + ln.ko + '</strong> <span style="color:#888;">' + ln.en + '</span></div>'
+      ).join('') +
+      '</div>'
     ).join('');
   } else {
     box.style.display = 'none';
