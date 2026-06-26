@@ -95,44 +95,52 @@
           "id": "g02_reo_gada",
           "tier": "core",
           "title": "-(으)러 가다",
-          "title_en": "Going to ~ (purpose)",
-          "emoji": "🎯",
-          "explanation_en": "Use -(으)러 가다 to say WHY you're going somewhere. Attach it to the verb stem before 가다.",
-          "pattern": "Verb stem + -러 가다 (vowel ending) / -으러 가다 (consonant ending)",
-          "scene_example": {
-            "korean": "호수로 산책하러 갈 사람?",
-            "english": "Who wants to go for a walk at the lake?",
-            "highlight": "산책하러"
-          },
+          "subtitle": "Going to ~ (purpose)",
+          "pattern": "Verb stem + -러 가다 (vowel) / -으러 가다 (consonant)",
+          "description": "Use -(으)러 가다 to say WHY you're going somewhere — attach it to the verb stem before 가다.",
           "rule_boxes": [
             {
               "color": "blue",
-              "title": "Vowel stem → -러 가다",
-              "content": "산책하다 → 산책하러 가요\n수영하다 → 수영하러 가요\n먹다 → 먹으러 가요"
+              "label": "🔵 Vowel stem → -러 가다 · 모음으로 끝나면",
+              "examples": [
+                "산책하다 → 산책하러 가요  (go for a walk)",
+                "수영하다 → 수영하러 가요  (go swimming)",
+                "보다    → 보러 가요      (go to see/watch)"
+              ]
             },
             {
               "color": "green",
-              "title": "Consonant stem → -으러 가다",
-              "content": "읽다 → 읽으러 가요\n찾다 → 찾으러 가요"
+              "label": "🟢 Consonant stem → -으러 가다 · 자음으로 끝나면",
+              "examples": [
+                "먹다 → 먹으러 가요  (go to eat)",
+                "읽다 → 읽으러 가요  (go to read)",
+                "찾다 → 찾으러 가요  (go to find)"
+              ]
             },
             {
               "color": "amber",
-              "title": "Ask WHY: 왜 가요? · Answer with -(으)러",
-              "content": "왜 도서관에 가요?\n→ 책을 빌리러 가요!\n\n왜 공원에 가요?\n→ 운동하러 가요!"
+              "label": "💡 Ask WHY: 왜 가요? → answer with -(으)러",
+              "examples": [
+                "왜 도서관에 가요? → 책을 빌리러 가요!",
+                "왜 공원에 가요? → 운동하러 가요!"
+              ]
             }
           ],
           "examples": [
             {
-              "ko": "나도 운동하러 갈게.",
-              "en": "I'll go exercise too."
+              "korean": "나도 운동하러 갈게.",
+              "english": "I'll go exercise too.",
+              "highlight": "운동하러"
             },
             {
-              "ko": "뭐 먹으러 가요?",
-              "en": "What are you going to eat?"
+              "korean": "뭐 먹으러 가요?",
+              "english": "What are you going to eat?",
+              "highlight": "먹으러"
             },
             {
-              "ko": "친구 만나러 가요.",
-              "en": "I'm going to meet a friend."
+              "korean": "친구 만나러 가요.",
+              "english": "I'm going to meet a friend.",
+              "highlight": "만나러"
             }
           ]
         },
@@ -140,63 +148,54 @@
           "id": "g02_ro_direction_means",
           "tier": "core",
           "title": "(으)로 — 방향 & 수단",
-          "title_en": "-(으)로: Direction & Means",
-          "emoji": "🗺️",
-          "explanation_en": "로/으로 has two jobs: showing DIRECTION (toward where) and MEANS (by what / how). Use 으로 after consonants, 로 after vowels or ㄹ.",
-          "pattern": "Place + 로/으로 (direction) · Transport/Method + 로/으로 (means)",
-          "scene_example": {
-            "korean": "난 차로 갈게.",
-            "english": "I'll go by car.",
-            "highlight": "차로"
-          },
+          "subtitle": "Direction & Means of Transport",
+          "pattern": "Place + 로/으로 (→ direction) · Transport + 로/으로 (→ by what)",
+          "description": "로/으로 has two jobs: DIRECTION (toward where) and MEANS (by what). Use 으로 after consonants, 로 after vowels or ㄹ.",
           "rule_boxes": [
             {
               "color": "blue",
-              "title": "Direction 방향 — toward where?",
-              "content": "호수로 가요 · going toward the lake\n학교로 가요 · going toward school\n집으로 가요 · going toward home"
+              "label": "🗺️ Direction 방향 — toward where?",
+              "examples": [
+                "호수로 가요     · going toward the lake",
+                "학교로 가요     · going toward school",
+                "집으로 가요     · going toward home (집 ends in ㅂ → 으로)"
+              ]
             },
             {
               "color": "green",
-              "title": "Means 수단 — by what / how?",
-              "content": "차로 가요 · go by car\n버스로 가요 · go by bus\n자전거로 가요 · go by bike\n걸어서 가요 · go on foot (걸어서 not 로)"
+              "label": "🚗 Means 수단 — by what / how?",
+              "examples": [
+                "차로 가요       · go by car",
+                "버스로 가요     · go by bus",
+                "자전거로 가요   · go by bike",
+                "걸어서 가요     · go on foot (걸어서, not 로!)"
+              ]
             },
             {
               "color": "amber",
-              "title": "Ask HOW: 어떻게 가요?",
-              "content": "어떻게 가요?\n→ 자전거로 가요!\n→ 지하철로 가요!"
-            },
-            {
-              "color": "amber",
-              "title": "Vowel/ㄹ → 로 · Consonant → 으로",
-              "content": "차 → 차로 ✅\n버스 → 버스로 ✅\n지하철 → 지하철로 ✅ (ㄹ)\n집 → 집으로 ✅"
+              "label": "💡 Vowel/ㄹ → 로 · Consonant → 으로",
+              "examples": [
+                "차 → 차로 ✅   버스 → 버스로 ✅",
+                "지하철 → 지하철로 ✅  (ㄹ ending)",
+                "집 → 집으로 ✅  (ㅂ consonant)"
+              ]
             }
           ],
-          "example_groups": [
+          "examples": [
             {
-              "label": "방향 Direction",
-              "examples": [
-                {
-                  "ko": "호수로 산책하러 가요.",
-                  "en": "I'm going for a walk toward the lake."
-                },
-                {
-                  "ko": "어디로 가요?",
-                  "en": "Which way are you going?"
-                }
-              ]
+              "korean": "난 차로 갈게.",
+              "english": "I'll go by car.",
+              "highlight": "차로"
             },
             {
-              "label": "수단 Means",
-              "examples": [
-                {
-                  "ko": "차로 겨우 3분이에요.",
-                  "en": "It's barely 3 minutes by car."
-                },
-                {
-                  "ko": "스쿠터 타고 가요.",
-                  "en": "I'm going by scooter."
-                }
-              ]
+              "korean": "호수로 산책하러 가요.",
+              "english": "I'm going for a walk at the lake.",
+              "highlight": "호수로"
+            },
+            {
+              "korean": "어떻게 가요? — 지하철로 가요!",
+              "english": "How do you get there? — By subway!",
+              "highlight": "지하철로"
             }
           ]
         },
@@ -204,75 +203,82 @@
           "id": "g02_lge",
           "tier": "core",
           "title": "-ㄹ게요 / -ㄹ게",
-          "title_en": "I'll ~ (promise / intention)",
-          "emoji": "🤝",
-          "explanation_en": "Use -ㄹ게 (informal) or -ㄹ게요 (polite) to make a promise or state your intention to do something.",
+          "subtitle": "I'll ~ · Promise or Intention",
           "pattern": "Verb stem + -ㄹ게요 (vowel/ㄹ) / -을게요 (consonant)",
-          "scene_example": {
-            "korean": "난 차로 갈게.",
-            "english": "I'll go by car.",
-            "highlight": "갈게"
-          },
+          "description": "Use -ㄹ게 (casual) or -ㄹ게요 (polite) to announce what YOU will do — a personal decision or promise.",
           "rule_boxes": [
             {
               "color": "blue",
-              "title": "Vowel / ㄹ stem → -ㄹ게요",
-              "content": "가다 → 갈게요 (I'll go)\n오다 → 올게요 (I'll come)\n하다 → 할게요 (I'll do it)"
+              "label": "🔵 Vowel / ㄹ stem → -ㄹ게요",
+              "examples": [
+                "가다  → 갈게요   (I'll go)",
+                "오다  → 올게요   (I'll come)",
+                "하다  → 할게요   (I'll do it)"
+              ]
             },
             {
               "color": "green",
-              "title": "Consonant stem → -을게요",
-              "content": "먹다 → 먹을게요 (I'll eat)\n읽다 → 읽을게요 (I'll read)"
+              "label": "🟢 Consonant stem → -을게요",
+              "examples": [
+                "먹다  → 먹을게요  (I'll eat)",
+                "읽다  → 읽을게요  (I'll read)"
+              ]
             },
             {
               "color": "amber",
-              "title": "-ㄹ게 vs -ㄹ게요",
-              "content": "갈게 · casual (friends/family)\n갈게요 · polite (teacher/adults)"
+              "label": "💡 Casual vs Polite · 반말 vs 존댓말",
+              "examples": [
+                "갈게  · casual — friends & family",
+                "갈게요 · polite — teacher & adults"
+              ]
             }
           ],
           "examples": [
             {
-              "ko": "나도 운동하러 갈게.",
-              "en": "I'll go exercise too."
+              "korean": "나도 운동하러 갈게.",
+              "english": "I'll go exercise too.",
+              "highlight": "갈게"
             },
             {
-              "ko": "제가 할게요!",
-              "en": "I'll do it!"
+              "korean": "제가 할게요!",
+              "english": "I'll do it!",
+              "highlight": "할게요"
             },
             {
-              "ko": "먼저 갈게요.",
-              "en": "I'll go first."
+              "korean": "먼저 갈게요.",
+              "english": "I'll go first.",
+              "highlight": "갈게요"
             }
           ]
         },
         {
           "id": "g02_si_preview",
           "tier": "preview",
-          "title": "-(으)시- 존댓말",
-          "title_en": "Honorific -(으)시- (preview)",
-          "emoji": "🙏",
-          "explanation_en": "-(으)시- is added to verbs when talking about or to someone older/respected. You'll study this properly later — just notice it in the scene!",
+          "title": "-(으)시- 존댓말 (preview)",
+          "subtitle": "Honorific -(으)시- · coming soon",
           "pattern": "Verb stem + -(으)시- + ending",
-          "scene_example": {
-            "korean": "운동을 하셔야 다리가 더 튼튼해져요.",
-            "english": "Your legs get stronger when you exercise.",
-            "highlight": "하셔야"
-          },
+          "description": "-(으)시- is added to show respect to older/senior people. You'll study this fully in a later episode — just notice it in the scene!",
           "rule_boxes": [
             {
               "color": "blue",
-              "title": "Spot it in the scene!",
-              "content": "하다 → 하셔야 (honorific: you should do)\n있다 → 계세요 (honorific: to be/stay)\n먹다 → 드세요 (honorific: please eat)"
+              "label": "👀 Spot it in the scene!",
+              "examples": [
+                "하다 → 하셔야  (you should do — honorific)",
+                "있다 → 계세요  (to be/stay — honorific)",
+                "먹다 → 드세요  (please eat — honorific)"
+              ]
             }
           ],
           "examples": [
             {
-              "ko": "선생님이 오셨어요.",
-              "en": "The teacher has arrived."
+              "korean": "운동을 하셔야 다리가 더 튼튼해져요.",
+              "english": "Your legs get stronger when you exercise.",
+              "highlight": "하셔야"
             },
             {
-              "ko": "할머니가 주무세요.",
-              "en": "Grandma is sleeping."
+              "korean": "선생님이 오셨어요.",
+              "english": "The teacher has arrived.",
+              "highlight": "오셨어요"
             }
           ]
         }
@@ -476,82 +482,196 @@
       ],
       "step1_chunks": [
         {
+          "scene": "🏞️",
           "sentence": "호수로 산책하러 가요.",
+          "english": "I'm going for a walk at the lake.",
+          "hint": "호수로 = toward the lake",
           "chunks": [
-            "호수로",
-            "산책하러",
-            "가요"
+            {
+              "text": "호수로",
+              "type": "place",
+              "en": "to the lake"
+            },
+            {
+              "text": "산책하러",
+              "type": "verb",
+              "en": "to take a walk"
+            },
+            {
+              "text": "가요.",
+              "type": "verb",
+              "en": "going"
+            }
           ]
         },
         {
+          "scene": "🚗",
           "sentence": "자전거로 갈게요.",
+          "english": "I'll go by bike.",
+          "hint": "자전거로 = by bike",
           "chunks": [
-            "자전거로",
-            "갈게요"
+            {
+              "text": "자전거로",
+              "type": "means",
+              "en": "by bike"
+            },
+            {
+              "text": "갈게요.",
+              "type": "verb",
+              "en": "I'll go"
+            }
           ]
         },
         {
+          "scene": "📚",
           "sentence": "책 빌리러 도서관에 가요.",
+          "english": "I'm going to the library to borrow books.",
+          "hint": "빌리다 → 빌리러",
           "chunks": [
-            "책 빌리러",
-            "도서관에",
-            "가요"
+            {
+              "text": "책",
+              "type": "name",
+              "en": "book"
+            },
+            {
+              "text": "빌리러",
+              "type": "verb",
+              "en": "to borrow"
+            },
+            {
+              "text": "도서관에",
+              "type": "place",
+              "en": "to the library"
+            },
+            {
+              "text": "가요.",
+              "type": "verb",
+              "en": "going"
+            }
           ]
         },
         {
+          "scene": "🚇",
           "sentence": "지하철로 학교에 가요.",
+          "english": "I go to school by subway.",
+          "hint": "지하철로 = by subway",
           "chunks": [
-            "지하철로",
-            "학교에",
-            "가요"
+            {
+              "text": "지하철로",
+              "type": "means",
+              "en": "by subway"
+            },
+            {
+              "text": "학교에",
+              "type": "place",
+              "en": "to school"
+            },
+            {
+              "text": "가요.",
+              "type": "verb",
+              "en": "going"
+            }
           ]
         },
         {
+          "scene": "🏃",
           "sentence": "운동하러 공원에 갈게.",
+          "english": "I'll go to the park to exercise.",
+          "hint": "운동하다 → 운동하러",
           "chunks": [
-            "운동하러",
-            "공원에",
-            "갈게"
+            {
+              "text": "운동하러",
+              "type": "verb",
+              "en": "to exercise"
+            },
+            {
+              "text": "공원에",
+              "type": "place",
+              "en": "to the park"
+            },
+            {
+              "text": "갈게.",
+              "type": "verb",
+              "en": "I'll go"
+            }
           ]
         },
         {
+          "scene": "🚌",
           "sentence": "버스로 집으로 갈게요.",
+          "english": "I'll go home by bus.",
+          "hint": "🌟 마지막! 버스로 = by bus, 집으로 = toward home",
           "chunks": [
-            "버스로",
-            "집으로",
-            "갈게요"
+            {
+              "text": "버스로",
+              "type": "means",
+              "en": "by bus"
+            },
+            {
+              "text": "집으로",
+              "type": "place",
+              "en": "toward home"
+            },
+            {
+              "text": "갈게요.",
+              "type": "verb",
+              "en": "I'll go"
+            }
           ]
         }
       ],
       "step2_words": [
         {
+          "scene": "🚶",
           "sentence": "나는 수영하러 가요.",
-          "words": [
+          "answer": [
             "나는",
             "수영하러",
-            "가요",
-            "."
-          ]
+            "가요."
+          ],
+          "types": [
+            "name",
+            "verb",
+            "verb"
+          ],
+          "english": "I'm going to swim.",
+          "hint": "수영하다 → 수영하러 가다"
         },
         {
+          "scene": "🚗",
           "sentence": "할머니는 차로 가세요.",
-          "words": [
+          "answer": [
             "할머니는",
             "차로",
-            "가세요",
-            "."
-          ]
+            "가세요."
+          ],
+          "types": [
+            "name",
+            "means",
+            "verb"
+          ],
+          "english": "Grandma is going by car.",
+          "hint": "차로 = by car"
         },
         {
+          "scene": "🏞️",
           "sentence": "우리 같이 호수로 산책하러 갈게요.",
-          "words": [
+          "answer": [
             "우리",
             "같이",
             "호수로",
             "산책하러",
-            "갈게요",
-            "."
-          ]
+            "갈게요."
+          ],
+          "types": [
+            "name",
+            "particle",
+            "place",
+            "verb",
+            "verb"
+          ],
+          "english": "Let's go for a walk to the lake together!",
+          "hint": "🌟 마지막 문제! 호수로 = toward the lake"
         }
       ],
       "write_items": [
@@ -573,63 +693,92 @@
       ],
       "reading_passage": null
     },
-    "real_life": [
-      {
-        "title": "약속 잡기 · Making Plans",
-        "dialogue": [
-          {
-            "speaker": "A",
-            "text": "이번 주말에 뭐 할 거야?",
-            "en": "What are you doing this weekend?"
-          },
-          {
-            "speaker": "B",
-            "text": "공원에 자전거 타러 갈 거야.",
-            "en": "I'm going to the park to ride bikes."
-          },
-          {
-            "speaker": "A",
-            "text": "어떻게 갈 거야?",
-            "en": "How are you getting there?"
-          },
-          {
-            "speaker": "B",
-            "text": "버스로 갈게. 같이 갈래?",
-            "en": "I'll take the bus. Want to come?"
-          },
-          {
-            "speaker": "A",
-            "text": "응! 나도 갈게!",
-            "en": "Yes! I'll come too!"
+    "real_life": {
+      "title": "🗣️ 실생활 대화 — Real Life Dialogues",
+      "subtitle": "어떻게 가요? 왜 가요? 실생활에서 써봐요!",
+      "dialogues": [
+        {
+          "title": "🤝 대화 1 — 약속 잡기",
+          "title_en": "Making plans",
+          "bg": "#F0FFF4",
+          "hdr": "#2E7D32",
+          "lines": [
+            {
+              "role": "Q",
+              "kr": "이번 주말에 뭐 할 거야?",
+              "en": "What are you doing this weekend?",
+              "color": "#A5D6A7"
+            },
+            {
+              "role": "A",
+              "kr": "공원에 자전거 타러 갈 거야.",
+              "en": "I'm going to the park to ride bikes.",
+              "color": "#2E7D32"
+            },
+            {
+              "role": "Q",
+              "kr": "어떻게 갈 거야?",
+              "en": "How are you getting there?",
+              "color": "#A5D6A7"
+            },
+            {
+              "role": "A",
+              "kr": "버스로 갈게. 같이 갈래?",
+              "en": "I'll take the bus. Want to come?",
+              "color": "#2E7D32"
+            },
+            {
+              "role": "Q",
+              "kr": "응! 나도 갈게!",
+              "en": "Yes! I'll come too!",
+              "color": "#A5D6A7"
+            }
+          ],
+          "summary": {
+            "kr": "버스로 갈게. 자전거 타러 가! — 이동 표현 세트!",
+            "en": "Transport + purpose = full movement expression!",
+            "highlight": "버스로 갈게"
           }
-        ]
-      },
-      {
-        "title": "길 묻기 · Asking for Directions",
-        "dialogue": [
-          {
-            "speaker": "A",
-            "text": "실례지만, 호수로 어떻게 가요?",
-            "en": "Excuse me, how do I get to the lake?"
-          },
-          {
-            "speaker": "B",
-            "text": "저쪽으로 쭉 가세요.",
-            "en": "Just go straight that way."
-          },
-          {
-            "speaker": "A",
-            "text": "걸어서 얼마나 걸려요?",
-            "en": "How long does it take on foot?"
-          },
-          {
-            "speaker": "B",
-            "text": "약 10분이요.",
-            "en": "About 10 minutes."
+        },
+        {
+          "title": "🗺️ 대화 2 — 길 묻기",
+          "title_en": "Asking for directions",
+          "bg": "#FFF8E1",
+          "hdr": "#F57F17",
+          "lines": [
+            {
+              "role": "Q",
+              "kr": "실례지만, 호수로 어떻게 가요?",
+              "en": "Excuse me, how do I get to the lake?",
+              "color": "#FFE082"
+            },
+            {
+              "role": "A",
+              "kr": "저쪽으로 쭉 가세요.",
+              "en": "Just go straight that way.",
+              "color": "#F57F17"
+            },
+            {
+              "role": "Q",
+              "kr": "걸어서 얼마나 걸려요?",
+              "en": "How long does it take on foot?",
+              "color": "#FFE082"
+            },
+            {
+              "role": "A",
+              "kr": "약 10분이요.",
+              "en": "About 10 minutes.",
+              "color": "#F57F17"
+            }
+          ],
+          "summary": {
+            "kr": "어떻게 가요? → 저쪽으로 가세요! — 방향 표현",
+            "en": "Ask how to get somewhere — 어떻게 + 가요?",
+            "highlight": "어떻게 가요"
           }
-        ]
-      }
-    ]
+        }
+      ]
+    }
   },
   "self_check": [
     {
