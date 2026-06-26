@@ -785,7 +785,8 @@ const L3_EPISODES=[
   {id:'ep01',label:'파전이나 부쳐 먹을까?'},
   {id:'ep02',label:'물티슈로 닦으라고!'},
   {id:'ep03',label:'윷놀이를 소개합니다'},
-  {id:'ep04',label:'베이비 시터'}
+  {id:'ep04',label:'베이비 시터'},
+  {id:'ep05',label:'늦잠을 자는 바람에'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2030,6 +2031,14 @@ const READING_POOL = {
       {q:'리아가 인형들을 어떻게 해 줬어요?', q_en:'What did Lia do for the dolls?', options:['먹여 줬어요.','재워 줬어요.','입혀 줬어요.'], answer:1},
     ]
   },
+  'L3_ep05':{
+    passage:'한국의 직장에서는 이름 대신 직책으로 부르는 문화가 있어요. 예를 들어, 유정연 씨 대신 유과장님이라고 해요. 직급이 같아도 직책을 사용해요. 이런 문화는 상하 관계를 중요하게 여기는 한국 사회를 반영해요. 요즘은 스타트업이나 외국계 회사에서 영어 이름이나 님을 쓰기도 해요.',
+    passage_en:'In Korean workplaces, people call each other by job title instead of name. For example, instead of Yoo Jeongyeon-ssi, people say Manager Yu. Even among people of the same rank, titles are used. Lately, startups and foreign companies sometimes use English names or just -nim for everyone.',
+    questions:[
+      {q:'한국 직장에서는 보통 어떻게 불러요?', q_en:'How do Koreans usually address each other at work?', options:['이름으로 불러요.','직책으로 불러요.','영어 이름으로 불러요.'], answer:1},
+      {q:'요즘 어떤 회사들이 다른 호칭을 써요?', q_en:'Which companies use different forms of address?', options:['대기업과 공무원','스타트업이나 외국계 회사','병원과 학교'], answer:1},
+    ]
+  },
 };
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
@@ -2215,7 +2224,11 @@ const SP_QUIZ_POOL = {
     {chars:'언니가입혀줄게', spaces:[2,5], en:'I\'ll dress you.', hint:'언니가 · 입혀 · 줄게'},
     {chars:'혼자입게해줄게', spaces:[2,4,7], en:'I\'ll let you put it on by yourself.', hint:'혼자 · 입게 · 해 · 줄게'},
   ],
-};
+
+  'L3_ep05':[
+    {chars:'늦잠을자는바람에지각했어요', spaces:[2,4,7,9], en:'Because I overslept, I was late.', hint:'늦잠을 · 자는 · 바람에 · 지각했어요'},
+    {chars:'머리를못감은채로출근했어요', spaces:[3,6,8,10], en:'I came to work without washing my hair.', hint:'머리를 · 못 감은 · 채로 · 출근했어요'},
+  ],};
 
 let _spqPool=null, _spqIdx=0, _spqClicked=[];
 
