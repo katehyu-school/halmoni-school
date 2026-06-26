@@ -1847,6 +1847,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">01</span>
     <span class="lesson-title-text">지금 뭐 하고 있어요?</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-2" onclick="selectUnit4(2)">
+    <span class="lesson-num">02</span>
+    <span class="lesson-title-text">산책하러 갈까?</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -11761,6 +11765,36 @@ const B4_SCENE_DATA = {
       [{ ko:'애라가 언니를 닮아서 무지개를 좋아하네.', en:'Aera takes after her sister — she loves rainbows too.', audio:'data/elem/level4/TTS/L4_01/audio_8_애라가_언니를_닮아서_무지개를_좋아하네_.mp3' }]
     ]
   }
+,
+  2: {
+    title: '산책하러 갈까?',
+    slides: [
+      'data/elem/level4/slides/L4_02/호수로 산책가자1.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자2.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자3.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자4.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자5.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자6.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자7.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자8.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자9.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자10.png',
+      'data/elem/level4/slides/L4_02/호수로 산책가자11.png'
+    ],
+    script: [
+      [{ ko:'호수로 산책하러 갈 사람?', en:'Who wants to go for a walk at the lake?', audio:'data/elem/level4/TTS/L4_02/audio_0_호수로_산책하러_갈_사람_.mp3' }],
+      [{ ko:'저요!', en:'Me!', audio:'data/elem/level4/TTS/L4_02/audio_1_저요_.mp3' }],
+      [{ ko:'저도 같이 가요!', en:"I'll come along too!", audio:'data/elem/level4/TTS/L4_02/audio_2_저도_같이_가요_.mp3' }],
+      [{ ko:'호수까지 어떻게 갈 거예요?', en:'How are we getting to the lake?', audio:'data/elem/level4/TTS/L4_02/audio_3_호수까지_어떻게_갈_거예요_.mp3' }],
+      [{ ko:'조깅해서 갈까?', en:'Should we jog there?', audio:'data/elem/level4/TTS/L4_02/audio_4_조깅해서_갈까_.mp3' }],
+      [{ ko:'스쿠터 타고 가요!', en:"I'll take my scooter!", audio:'data/elem/level4/TTS/L4_02/audio_5_스쿠터_타고_가요_.mp3' }],
+      [{ ko:'난 차로 갈게.', en:"I'll go by car.", audio:'data/elem/level4/TTS/L4_02/audio_6_난_차로_갈게_.mp3' }],
+      [{ ko:'할머니, 호수까지 차로 겨우 3분이에요.', en:"Grandma, it's barely 3 minutes by car to the lake.", audio:'data/elem/level4/TTS/L4_02/audio_7_할머니__호수까지_차로_겨우_3분이에요_.mp3' }],
+      [{ ko:'그래도. 할머니 다리는 소중하니까.', en:'Even so. Grandma\'s legs are precious.', audio:'data/elem/level4/TTS/L4_02/audio_8_그래도__할머니_다리는_소중하니까_.mp3' }],
+      [{ ko:'운동을 하셔야 다리가 더 튼튼해져요.', en:'Your legs get stronger when you exercise.', audio:'data/elem/level4/TTS/L4_02/audio_9_운동을_하셔야_다리가_더_튼튼해져요_.mp3' }],
+      [{ ko:'아이고, 알았어. 나도 운동하러 갈게.', en:'Aigo, okay. I\'ll go exercise too.', audio:'data/elem/level4/TTS/L4_02/audio_10_아이고__알았어__나도_운동하러_갈게_.mp3' }]
+    ]
+  }
 };
 
 const B4_INLINE_DATA = {
@@ -11787,7 +11821,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1].forEach(i => {
+  [1,2].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
