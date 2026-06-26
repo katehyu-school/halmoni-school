@@ -1106,6 +1106,61 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 
 
 
+
+/* ══ Level 3 Test (.b3lt-*) ══════════════════════════════════ */
+.b3lt-card { padding: 22px 20px 18px; }
+.b3lt-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.b3lt-ep-badge { background:var(--teal); color:#fff; font-size:0.78rem; font-weight:700;
+  padding:3px 10px; border-radius:20px; }
+.b3lt-counter { font-size:0.82rem; color:#888; font-weight:600; }
+.b3lt-prog-wrap { background:#e8f5e9; border-radius:8px; height:8px; margin-bottom:14px; overflow:hidden; }
+.b3lt-prog-fill { background:var(--teal); height:100%; border-radius:8px; transition:width .3s; }
+.b3lt-type-tag { font-size:0.78rem; color:var(--teal); font-weight:700; margin-bottom:12px;
+  text-transform:uppercase; letter-spacing:.04em; }
+.b3lt-q-ko { font-size:1.12rem; font-weight:700; color:#222; line-height:1.5; margin-bottom:5px; }
+.b3lt-q-en { font-size:0.85rem; color:#666; margin-bottom:16px; }
+.b3lt-opts { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+.b3lt-opt { background:#f5f5f5; border:2px solid #ddd; border-radius:12px;
+  padding:10px 18px; font-size:1rem; font-weight:600; cursor:pointer;
+  transition:all .15s; color:#333; }
+.b3lt-opt:hover { border-color:var(--teal); background:#e8f5f0; }
+.b3lt-opt.b3lt-correct { background:#e8f5e9; border-color:#4caf50; color:#2e7d32; }
+.b3lt-opt.b3lt-wrong   { background:#fdecea; border-color:#f44336; color:#c62828; }
+.b3lt-blank { display:inline-block; min-width:60px; border-bottom:2px solid var(--teal);
+  color:var(--teal); font-weight:700; text-align:center; margin:0 4px; }
+.b3lt-blank.b3lt-blank-ok  { border-color:#4caf50; color:#2e7d32; }
+.b3lt-blank.b3lt-blank-err { border-color:#f44336; color:#c62828; }
+.b3lt-listen-center { text-align:center; margin-bottom:16px; }
+.b3lt-listen-btn { background:var(--teal); color:#fff; border:none; border-radius:24px;
+  padding:12px 28px; font-size:1.05rem; font-weight:700; cursor:pointer; }
+.b3lt-choices { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:14px; }
+.b3lt-choice { background:#f5f5f5; border:2px solid #ddd; border-radius:14px;
+  padding:12px 18px; text-align:center; cursor:pointer; transition:all .15s; min-width:110px; }
+.b3lt-choice:hover { border-color:var(--teal); background:#e8f5f0; }
+.b3lt-choice.b3lt-correct { background:#e8f5e9; border-color:#4caf50; }
+.b3lt-choice.b3lt-wrong   { background:#fdecea; border-color:#f44336; }
+.b3lt-choice-emoji { font-size:1.6rem; }
+.b3lt-choice-kr { font-size:0.9rem; font-weight:700; color:#222; margin-top:4px; }
+.b3lt-choice-en { font-size:0.75rem; color:#666; }
+.b3lt-feedback { padding:12px 16px; border-radius:12px; font-size:0.95rem;
+  font-weight:600; margin-bottom:12px; background:#f5f5f5; }
+.b3lt-fb-ok  { color:#2e7d32; }
+.b3lt-fb-err { color:#c62828; }
+.b3lt-next-btn { background:var(--teal); color:#fff; border:none; border-radius:24px;
+  padding:12px 28px; font-size:1rem; font-weight:700; cursor:pointer; width:100%;
+  margin-top:6px; }
+.b3lt-score-card { text-align:center; padding:28px 20px; }
+.b3lt-score-title { font-size:1.1rem; font-weight:700; color:#444; margin-bottom:12px; }
+.b3lt-score-grade { font-size:3rem; font-weight:900; margin:8px 0; }
+.b3lt-score-msg { font-size:1rem; color:#555; margin-bottom:10px; }
+.b3lt-score-num { font-size:1.15rem; font-weight:700; color:#333; margin-bottom:12px; }
+.b3lt-score-bar-wrap { background:#e0e0e0; border-radius:8px; height:10px; margin:0 10px 8px;
+  overflow:hidden; }
+.b3lt-score-bar { height:100%; border-radius:8px; transition:width .5s; }
+.b3lt-score-pct { font-size:1rem; color:#666; margin-bottom:18px; }
+.b3lt-retry-btn { background:var(--teal); color:#fff; border:none; border-radius:24px;
+  padding:11px 26px; font-size:0.95rem; font-weight:700; cursor:pointer; }
+
 </style>
 </head>
 <body>
@@ -6310,13 +6365,60 @@ const KIDS_READING_L3 = {
       { q: '미래는 어떻게 해요?', q_en: 'What does Mirae do?', options: ['조금만 먹어요', '다른 음식을 먹어요', '안 먹어요'], answer: 1 },
     ]
   },
+,
+  7: {
+    passage: '리아는 저녁 노을을 보면서 라면을 먹고 싶어요. 할머니가 말했어요. "오늘 저녁에 선셋 공원에 가요!" 리아가 정말 기뻤어요. 하지만 공원에 가기 전에 숙제를 먼저 해야 해요. 리아가 빨리 숙제를 했어요.',
+    passage_en: 'Lia wants to eat ramen while watching the sunset. Grandma said, "Let\'s go to Sunset Park tonight!" Lia was so happy. But she has to do her homework before going to the park. Lia did her homework quickly.',
+    questions: [
+      { q: '리아가 먹고 싶은 것은 뭐예요?', q_en: 'What does Lia want to eat?', options: ['김밥', '라면', '피자'], answer: 1 },
+      { q: '공원에 가기 전에 뭘 해야 해요?', q_en: 'What must Lia do before going to the park?', options: ['청소', '요리', '숙제'], answer: 2 },
+    ]
+  },
+  8: {
+    passage: '카요가 글씨 연습을 많이 했어요. 처음에는 글씨를 잘 못 썼어요. 이제는 훨씬 잘 써요. 카요의 글씨가 할머니 글씨보다 더 예뻐요. 우리 반에서 제일 글씨를 잘 쓰는 사람은 카요예요!',
+    passage_en: 'Kayo practiced writing a lot. At first, Kayo couldn\'t write well. Now Kayo writes much better. Kayo\'s handwriting is prettier than Grandma\'s. Kayo has the best handwriting in class!',
+    questions: [
+      { q: '카요는 처음에 글씨를 어떻게 썼어요?', q_en: 'How did Kayo write at first?', options: ['잘 썼어요', '잘 못 썼어요', '안 썼어요'], answer: 1 },
+      { q: '카요의 글씨가 어때요?', q_en: 'How is Kayo\'s handwriting now?', options: ['작아요', '못 써요', '제일 예뻐요'], answer: 2 },
+    ]
+  },
+  9: {
+    passage: '카요와 리암이 외갓집에 가요. 집에서 외갓집까지 두 시간 걸려요. 차 안에서 카요가 물었어요. "형, 아직 멀었어?" 리암이 말했어요. "조금만 더 가면 돼!" 드디어 외갓집에 도착했어요.',
+    passage_en: 'Kayo and Liam are going to Grandma\'s house. It takes two hours from home to Grandma\'s house. In the car, Kayo asked, "Are we there yet?" Liam said, "Just a little more!" They finally arrived at Grandma\'s house.',
+    questions: [
+      { q: '집에서 외갓집까지 얼마나 걸려요?', q_en: 'How long does it take to get to Grandma\'s?', options: ['한 시간', '두 시간', '세 시간'], answer: 1 },
+      { q: '누가 외갓집에 갔어요?', q_en: 'Who went to Grandma\'s house?', options: ['리아와 미래', '카요와 리암', '할머니와 할아버지'], answer: 1 },
+    ]
+  },
+  10: {
+    passage: '카요가 오늘 외갓집에서 자고 싶어요. 할머니한테 물어봤어요. 할머니가 말했어요. "엄마한테 물어 봐." 카요가 엄마한테 전화했어요. "엄마, 외갓집에서 자도 돼요?" 엄마가 대답했어요. "그래, 가도 돼!"',
+    passage_en: 'Kayo wants to sleep at Grandma\'s house tonight. Kayo asked Grandma. Grandma said, "Ask your mom." Kayo called mom. "Mom, can I sleep at Grandma\'s?" Mom answered, "Sure, you can go!"',
+    questions: [
+      { q: '카요는 어디에서 자고 싶어요?', q_en: 'Where does Kayo want to sleep?', options: ['집', '외갓집', '친구 집'], answer: 1 },
+      { q: '엄마가 뭐라고 했어요?', q_en: 'What did Mom say?', options: ['안 돼', '가도 돼', '아직 몰라'], answer: 1 },
+    ]
+  }
+};
+
+const KIDS_READING_L4 = {
+  1: {
+    passage: '리아는 지금 방에서 숙제를 하고 있어요. 할머니는 부엌에서 요리를 하고 계세요. 카요는 거실에서 게임을 하고 있어요. 리암은 밖에서 자전거를 타고 있어요. 모두 지금 열심히 무언가를 하고 있어요!',
+    passage_en: 'Lia is doing homework in her room right now. Grandma is cooking in the kitchen. Kayo is playing games in the living room. Liam is riding his bike outside. Everyone is busily doing something right now!',
+    questions: [
+      { q: '리아는 지금 뭘 하고 있어요?', q_en: 'What is Lia doing right now?', options: ['요리', '숙제', '게임'], answer: 1 },
+      { q: '할머니는 어디에 계세요?', q_en: 'Where is Grandma?', options: ['방', '거실', '부엌'], answer: 2 },
+    ]
+  }
 };
 
 let _kRdQIdx = 0;
 function renderKidsReading(unit) {
   const wrap = document.getElementById('b3-reading-wrap');
   if (!wrap) return;
-  const d = KIDS_READING_L3[unit];
+  // L4 활성 여부 확인
+  const b4main = document.getElementById('book4-main');
+  const isL4 = b4main && b4main.style.display !== 'none';
+  const d = isL4 ? (KIDS_READING_L4||{})[b4CurrentUnit] : KIDS_READING_L3[unit];
   if (!d) {
     wrap.innerHTML = '<div style="color:#aaa;text-align:center;padding:24px;">📖 이 과의 읽기 지문은 준비 중이에요.</div>';
     return;
@@ -11745,6 +11847,8 @@ function renderBook4Unit(data, unitNum) {
     '<div class="section" id="b4-tab-reallife">' + renderB3RealLife(sections.real_life) + '</div>' +
     scDiv +
     '</div>';
+  b3RenderS1();
+  b3RenderS2();
   setTimeout(() => b4SceneTo(0), 0);
 }
 
