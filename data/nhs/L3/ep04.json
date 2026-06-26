@@ -1,0 +1,626 @@
+{
+  "id": "ep04",
+  "level": "L3",
+  "title": "베이비 시터",
+  "title_en": "Babysitter",
+  "scene": "🧸 리아 방 · Lia's Room",
+  "goal": {
+    "ko": "누군가를 돕거나 시킬 때 사동 표현을 쓸 수 있어요!",
+    "en": "I can use causative expressions to help or direct someone!"
+  },
+  "key_points": [
+    "사동 -이/히/우 (입히다, 먹이다, 재우다, 끼우다)",
+    "-게 하다 — let/make someone do",
+    "-도록 하다 — make sure to / instruct to",
+    "끼다(자동) vs 끼우다(사동) 대비"
+  ],
+  "characters": [
+    {
+      "id": "lia",
+      "name": "리아",
+      "name_en": "Lia",
+      "color": "#4ABFBF",
+      "role": "big sister"
+    },
+    {
+      "id": "aera",
+      "name": "애라",
+      "name_en": "Aera",
+      "color": "#E07060",
+      "role": "little sister"
+    }
+  ],
+  "slides": [
+    "data/nhs/L3/slides/ep04/베이비 시터1.png",
+    "data/nhs/L3/slides/ep04/베이비 시터2.png",
+    "data/nhs/L3/slides/ep04/베이비 시터3.png",
+    "data/nhs/L3/slides/ep04/베이비 시터4.png",
+    "data/nhs/L3/slides/ep04/베이비 시터5.png",
+    "data/nhs/L3/slides/ep04/베이비 시터6.png",
+    "data/nhs/L3/slides/ep04/베이비 시터7.png",
+    "data/nhs/L3/slides/ep04/베이비 시터8.png",
+    "data/nhs/L3/slides/ep04/베이비 시터9.png",
+    "data/nhs/L3/slides/ep04/베이비 시터10.png",
+    "data/nhs/L3/slides/ep04/베이비 시터11.png",
+    "data/nhs/L3/slides/ep04/베이비 시터12.png",
+    "data/nhs/L3/slides/ep04/베이비 시터13.png",
+    "data/nhs/L3/slides/ep04/베이비 시터14.png"
+  ],
+  "script": [
+    {
+      "speaker": "aera",
+      "text": "언니 도와 줘!",
+      "translation": "Sis, help me!",
+      "slide": 0,
+      "audio": "data/nhs/L3/TTS/ep04/audio_0_언니_도와_줘_.mp3"
+    },
+    {
+      "speaker": "lia",
+      "text": "무슨 일이야?",
+      "translation": "What's wrong?",
+      "slide": 1,
+      "audio": "data/nhs/L3/TTS/ep04/audio_1_무슨_일이야_.mp3"
+    },
+    {
+      "speaker": "aera",
+      "text": "머리가 끼었어.",
+      "translation": "My head is stuck.",
+      "slide": 2,
+      "audio": "data/nhs/L3/TTS/ep04/audio_2_머리가_끼었어_.mp3",
+      "highlight": "끼었어",
+      "annotation": {
+        "highlight": "끼었어",
+        "grammar": "끼다 (자동 — to get stuck)",
+        "note": "끼다 = to get stuck / to be wedged in (happens to the subject)\n머리가 끼었어 = My head got stuck\n↔ 끼우다 = to insert / thread through (you do it to something)"
+      }
+    },
+    {
+      "speaker": "lia",
+      "text": "이런, 언니가 입혀 줄게.",
+      "translation": "Oh no, I'll dress you.",
+      "slide": 3,
+      "audio": "data/nhs/L3/TTS/ep04/audio_3_이런__언니가_입혀_줄게_.mp3",
+      "highlight": "입혀",
+      "annotation": {
+        "highlight": "입혀",
+        "grammar": "-히 사동",
+        "note": "입다(wear) → 입히다(dress someone) → 입혀 줄게\n사동: 내가 너한테 '입히다' = I put clothes on you"
+      }
+    },
+    {
+      "speaker": "lia",
+      "text": "자 이렇게, 셔츠 단추를 열고 입어야지?",
+      "translation": "Here, like this — you have to open the shirt buttons first, right?",
+      "slide": 4,
+      "audio": "data/nhs/L3/TTS/ep04/audio_4_자_이렇게__셔츠_단추를_열고_입어야지_.mp3"
+    },
+    {
+      "speaker": "lia",
+      "text": "바지도 입혀 줄까?",
+      "translation": "Should I put your pants on too?",
+      "slide": 5,
+      "audio": "data/nhs/L3/TTS/ep04/audio_5_바지도_입혀_줄까_.mp3",
+      "highlight": "입혀"
+    },
+    {
+      "speaker": "aera",
+      "text": "아니, 혼자 할 거야.",
+      "translation": "No, I'll do it by myself.",
+      "slide": 6,
+      "audio": "data/nhs/L3/TTS/ep04/audio_6_아니__혼자_할_거야_.mp3"
+    },
+    {
+      "speaker": "lia",
+      "text": "알았어. 혼자 입게 해 줄게.",
+      "translation": "Okay. I'll let you put them on by yourself.",
+      "slide": 7,
+      "audio": "data/nhs/L3/TTS/ep04/audio_7_알았어__혼자_입게_해_줄게_.mp3",
+      "highlight": "입게 해",
+      "annotation": {
+        "highlight": "입게 해 줄게",
+        "grammar": "-게 하다",
+        "note": "입다 + -게 하다 → 입게 해 줄게\n혼자 입게 해 줄게 = I'll let you put it on by yourself\n-게 하다 = let/make someone do something"
+      }
+    },
+    {
+      "speaker": "aera",
+      "text": "이러케 바지를 바닥에 놓고.",
+      "translation": "Like this, put the pants on the floor.",
+      "slide": 8,
+      "audio": "data/nhs/L3/TTS/ep04/audio_8_이러케_바지를_바닥에_놓고_.mp3",
+      "annotation": {
+        "highlight": "이러케",
+        "grammar": "어린이 발음",
+        "note": "이러케 = 이렇게 (애라의 발음)\n어린 아이들이 'ㅎ'을 'ㅋ'처럼 발음하기도 해요."
+      }
+    },
+    {
+      "speaker": "aera",
+      "text": "다리를 먼저 끼우고.",
+      "translation": "Thread my legs through first.",
+      "slide": 9,
+      "audio": "data/nhs/L3/TTS/ep04/audio_9_다리를_먼저_끼우고_.mp3",
+      "highlight": "끼우고",
+      "annotation": {
+        "highlight": "끼우고",
+        "grammar": "-우 사동",
+        "note": "끼우다 = to insert / thread through (사동)\n다리를 끼우다 = to put legs through (pants)\n↔ 끼다 = to get stuck (자동, line 3)"
+      }
+    },
+    {
+      "speaker": "lia",
+      "text": "아이, 잘 하네~",
+      "translation": "My, you're doing well~",
+      "slide": 10,
+      "audio": "data/nhs/L3/TTS/ep04/audio_10_아이__잘_하네_.mp3",
+      "annotation": {
+        "highlight": "아이",
+        "grammar": "감탄사",
+        "note": "아이 = 감탄사 (Oh my / My goodness)\n아이 ≠ 아이(child). 어른이 기특함을 표현할 때 써요."
+      }
+    },
+    {
+      "speaker": "lia",
+      "text": "피나랑 로지를 잘 재우고 나오도록 해!",
+      "translation": "Make sure you put Pina and Rozi to sleep properly before coming out!",
+      "slide": 11,
+      "audio": "data/nhs/L3/TTS/ep04/audio_11_피나랑_로지를_잘_재우고_나오도록_해_.mp3",
+      "highlight": "재우고 / 나오도록 해",
+      "annotation": {
+        "highlight": "재우고 / 나오도록 해",
+        "grammar": "-우 사동 / -도록 하다",
+        "note": "자다(sleep) → 재우다(put to sleep) — -우 사동\n나오도록 해 = make sure to come out (instruction)\n-도록 하다 = make sure to / see to it that"
+      }
+    },
+    {
+      "speaker": "aera",
+      "text": "로지는 같이 놀고 싶대.",
+      "translation": "Rozi says she wants to play together.",
+      "slide": 12,
+      "audio": "data/nhs/L3/TTS/ep04/audio_12_로지는_같이_놀고_싶대_.mp3",
+      "highlight": "싶대",
+      "annotation": {
+        "highlight": "싶대",
+        "grammar": "-대 (전달)",
+        "note": "-대 = (someone) says that ~ (전달)\n놀고 싶대 = (she) says she wants to play\n= 놀고 싶다고 해 (full form)"
+      }
+    },
+    {
+      "speaker": "lia",
+      "text": "그럼 로지는 데리고 나와서 맘마 먹여.",
+      "translation": "Then bring Rozi out and feed her.",
+      "slide": 13,
+      "audio": "data/nhs/L3/TTS/ep04/audio_13_그럼_로지는_데리고_나와서_맘마_먹여_.mp3",
+      "highlight": "먹여",
+      "annotation": {
+        "highlight": "먹여",
+        "grammar": "-이 사동",
+        "note": "먹다(eat) → 먹이다(feed someone) → 먹여\n맘마 먹여 = feed (her) — 맘마 is baby-talk for food/meal"
+      }
+    }
+  ],
+  "vocab": [
+    {
+      "section": "🔄 사동 동사 쌍 Causative Verb Pairs",
+      "items": [
+        {
+          "korean": "입다 / 입히다",
+          "english": "to wear / to dress someone",
+          "emoji": "👕",
+          "note": "-히 사동. 입혀 줄게 = I'll put it on for you"
+        },
+        {
+          "korean": "끼다 / 끼우다",
+          "english": "to get stuck / to insert · thread through",
+          "emoji": "🩲",
+          "note": "끼다 = to get wedged in (자동) · 끼우다 = to thread through (사동)"
+        },
+        {
+          "korean": "먹다 / 먹이다",
+          "english": "to eat / to feed someone",
+          "emoji": "🍼",
+          "note": "-이 사동. 맘마 먹여 = feed (her)"
+        },
+        {
+          "korean": "자다 / 재우다",
+          "english": "to sleep / to put to sleep",
+          "emoji": "😴",
+          "note": "-우 사동. 재우다 = to put someone to sleep"
+        },
+        {
+          "korean": "잡다 / 잡히다",
+          "english": "to grab / to be grabbed",
+          "emoji": "✊",
+          "note": "잡히다 = 피동(passive), not 사동. 비교용!"
+        }
+      ]
+    },
+    {
+      "section": "🧸 장면 어휘 Scene Vocabulary",
+      "items": [
+        {
+          "korean": "단추",
+          "english": "button (clothing)",
+          "emoji": "🔘"
+        },
+        {
+          "korean": "바닥",
+          "english": "floor / bottom",
+          "emoji": "⬇️"
+        },
+        {
+          "korean": "맘마",
+          "english": "food / meal (baby talk)",
+          "emoji": "🍚",
+          "note": "어린 아이들이 쓰는 말 (baby/toddler speech)"
+        },
+        {
+          "korean": "데리고 오다",
+          "english": "to bring (a person/pet)",
+          "emoji": "🤝",
+          "note": "데리고 나오다 = bring (out)"
+        },
+        {
+          "korean": "나오다 / 들어가다",
+          "english": "to come out / to go in",
+          "emoji": "↔️"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "gL3e04_causative_suffix",
+      "tier": "core",
+      "title": "사동 -이/히/우 (접미 사동)",
+      "title_en": "Causative Suffixes — -이/히/우",
+      "emoji": "🪄",
+      "explanation_en": "Korean causatives are formed by adding -이, -히, -리, -기, or -우 to a verb stem. The result means 'to make/let/help someone do something' — the subject causes someone else to do the action.",
+      "pattern": "Verb stem + -이 / -히 / -우 (+ 주다 for 'do it for them')",
+      "scene_example": {
+        "korean": "언니가 입혀 줄게.",
+        "english": "I'll dress you (put it on for you).",
+        "highlight": "입혀 (입다 → 입히다)"
+      },
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "-히 사동 (most common with ㅂ-stem verbs)",
+          "content": "입다 → 입히다 (to dress someone)\n먹다 → 먹히다 ⚠️ 피동! (to be eaten)\n닫다 → 닫히다 ⚠️ 피동! (to be closed)"
+        },
+        {
+          "type": "green",
+          "title": "-이 사동",
+          "content": "먹다 → 먹이다 (to feed)\n보다 → 보이다 ⚠️ 피동! (to be seen)\n높다 → 높이다 (to raise/elevate)"
+        },
+        {
+          "type": "amber",
+          "title": "-우 사동",
+          "content": "자다 → 재우다 (to put to sleep)\n깨다 → 깨우다 (to wake someone up)\n끼다 → 끼우다 (to insert / thread through)"
+        },
+        {
+          "type": "red",
+          "title": "⚠️ 사동 vs 피동 — 헷갈리지 말자!",
+          "content": "입히다 = 사동 (to dress someone) ✅\n입혀 줄게 → I'll put it on for you\n\n잡히다 = 피동 (to be grabbed) ✅\n말이 잡혔어 → The piece was captured\n\n동일한 suffix라도 의미가 다를 수 있어요!"
+        }
+      ],
+      "example_groups": [
+        {
+          "label": "능동 → 사동 (Active → Causative)",
+          "items": [
+            {
+              "ko": "애라가 옷을 입어요.",
+              "en": "Aera puts on her clothes. (active)"
+            },
+            {
+              "ko": "리아가 애라한테 옷을 입혀요.",
+              "en": "Lia dresses Aera. (causative)"
+            },
+            {
+              "ko": "아기가 자요.",
+              "en": "The baby sleeps. (active)"
+            },
+            {
+              "ko": "엄마가 아기를 재워요.",
+              "en": "Mom puts the baby to sleep. (causative)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gL3e04_ge_hada",
+      "tier": "core",
+      "title": "-게 하다",
+      "title_en": "Let / Make Someone Do — -게 하다",
+      "emoji": "🤲",
+      "explanation_en": "-게 하다 is a longer causative form that attaches to any verb stem. It means 'to let someone do' or 'to make someone do' something, depending on context.",
+      "pattern": "Verb stem + -게 하다/해 주다",
+      "scene_example": {
+        "korean": "혼자 입게 해 줄게.",
+        "english": "I'll let you put it on by yourself.",
+        "highlight": "입게 해 줄게"
+      },
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "let someone do — 허용",
+          "content": "혼자 하게 해 줄게. → I'll let you do it yourself.\n쉬게 해 줘요. → Please let me rest.\n먼저 가게 해 줘. → Let me go first."
+        },
+        {
+          "type": "green",
+          "title": "make someone do — 지시",
+          "content": "공부하게 해요. → (They) make (us) study.\n일찍 자게 해요. → (They) make (us) sleep early.\n청소하게 했어요. → (I) made (them) clean."
+        },
+        {
+          "type": "amber",
+          "title": "접미 사동 vs -게 하다 · 언제 쓸까?",
+          "content": "짧은 단어 → 보통 접미 사동\n예: 먹이다, 재우다, 입히다\n\n모든 동사 → -게 하다 사용 가능\n예: 공부하게 하다, 사게 하다, 읽게 하다"
+        }
+      ],
+      "examples": [
+        {
+          "ko": "선생님이 책을 읽게 했어요.",
+          "en": "The teacher made (us) read the book."
+        },
+        {
+          "ko": "엄마가 일찍 자게 해요.",
+          "en": "Mom makes (me) go to bed early."
+        },
+        {
+          "ko": "혼자 해 보게 해 주세요.",
+          "en": "Please let me try it by myself."
+        }
+      ]
+    },
+    {
+      "id": "gL3e04_dorok_hada",
+      "tier": "core",
+      "title": "-도록 하다",
+      "title_en": "Make Sure to / See to It That — -도록 하다",
+      "emoji": "📋",
+      "explanation_en": "-도록 하다 is stronger than -게 하다. It means 'see to it that' or 'make sure that' something happens — it expresses instruction or obligation.",
+      "pattern": "Verb stem + -도록 하다/해",
+      "scene_example": {
+        "korean": "잘 재우고 나오도록 해!",
+        "english": "Make sure you put them to sleep before coming out!",
+        "highlight": "나오도록 해"
+      },
+      "rule_boxes": [
+        {
+          "type": "blue",
+          "title": "instruction / obligation 지시·의무",
+          "content": "제 시간에 오도록 해요. → Make sure to come on time.\n숙제를 다 하도록 해. → See to it that you finish your homework.\n조용히 하도록 해요. → Make sure to be quiet."
+        },
+        {
+          "type": "green",
+          "title": "-게 하다 vs -도록 하다 · 뉘앙스 차이",
+          "content": "-게 해 줄게 → softer, more willing\n예: 혼자 하게 해 줄게 (I'll let you do it alone)\n\n-도록 해 → stronger, more directive\n예: 나오도록 해! (Make sure you come out!)"
+        }
+      ],
+      "examples": [
+        {
+          "ko": "건강에 좋은 음식을 먹도록 해요.",
+          "en": "Make sure to eat healthy food."
+        },
+        {
+          "ko": "일찍 일어나도록 하세요.",
+          "en": "Please make sure to wake up early."
+        },
+        {
+          "ko": "안전하게 돌아오도록 해.",
+          "en": "Make sure you get back safely."
+        }
+      ]
+    }
+  ],
+  "pronunciation": [
+    {
+      "title": "입혀 → [이펴]",
+      "rule": "ㅂ받침 + ㅎ → 격음화 [ㅍ]",
+      "examples": [
+        { "written": "입혀", "after": "[이펴]" },
+        { "written": "잡히다", "after": "[자피다]" }
+      ]
+    },
+    {
+      "title": "먹여 → [머겨]",
+      "rule": "ㄱ받침 + 이 → 연음화",
+      "examples": [
+        { "written": "먹여", "after": "[머겨]" },
+        { "written": "먹이다", "after": "[머기다]" }
+      ]
+    },
+    {
+      "title": "재워 → [재워]",
+      "rule": "자다 → 재우다 모음 교체 (ㅏ → ㅐ) — 불규칙처럼 보이지만 사동 형성 규칙",
+      "examples": [
+        { "written": "자다", "after": "재우다 (-우 사동)" },
+        { "written": "깨다", "after": "깨우다 (-우 사동)" }
+      ]
+    }
+  ],
+  "banmal_jondaemal": {
+    "intro_ko": "사동 표현은 반말/존댓말에 따라 어떻게 달라질까요?",
+    "intro_en": "How do causative expressions change between casual and polite speech?",
+    "rows": [
+      {
+        "banmal": "입혀 줄게.",
+        "jondaemal_ayo": "입혀 드릴게요.",
+        "meaning": "I'll dress you / them."
+      },
+      {
+        "banmal": "혼자 하게 해 줄게.",
+        "jondaemal_ayo": "혼자 하게 해 드릴게요.",
+        "meaning": "I'll let you / them do it alone."
+      },
+      {
+        "banmal": "잘 재우고 나오도록 해.",
+        "jondaemal_ayo": "잘 재우고 나오도록 하세요.",
+        "meaning": "Make sure to put (them) to sleep before coming out."
+      },
+      {
+        "banmal": "맘마 먹여.",
+        "jondaemal_ayo": "식사를 먹여 주세요.",
+        "meaning": "Feed (them)."
+      }
+    ],
+    "tip": "아이를 도울 때 써요 → 어른한테는 '드리다'로 높임 표현.",
+    "tip_en": "When helping a child, use -줘/줄게. When the recipient is an adult (elder/teacher), use -드리다 to show respect.",
+    "adult_dialogue": {
+      "title": "💼 어른들의 대화 · Adult Conversation",
+      "context_en": "A parent talking to a babysitter / daycare teacher",
+      "lines": [
+        {
+          "speaker": "엄마",
+          "text": "저 없는 동안 아이 식사 좀 먹여 주세요.",
+          "translation": "Please feed the child while I'm away."
+        },
+        {
+          "speaker": "선생님",
+          "text": "네, 걱정 마세요. 잘 먹이고 낮잠도 재울게요.",
+          "translation": "Don't worry. I'll feed him well and put him down for a nap too."
+        },
+        {
+          "speaker": "엄마",
+          "text": "옷도 혼자 잘 못 입으니까 입혀 주셔야 해요.",
+          "translation": "He can't put his clothes on alone, so please dress him."
+        },
+        {
+          "speaker": "선생님",
+          "text": "알겠습니다. 혼자 입게 해 보고 안 되면 도와 드릴게요.",
+          "translation": "Understood. I'll let him try by himself first, and help if he can't manage."
+        }
+      ]
+    }
+  },
+  "real_life": [
+    {
+      "type": "kakao",
+      "title": "💬 엄마한테 카톡",
+      "messages": [
+        {
+          "sender": "리아",
+          "text": "엄마, 애라가 셔츠 못 입어서 제가 입혀 줬어요.",
+          "side": "right"
+        },
+        {
+          "sender": "엄마",
+          "text": "고마워~ 잘했어! 밥은 먹였어?",
+          "side": "left"
+        },
+        {
+          "sender": "리아",
+          "text": "아직요. 지금 먹이려고요.",
+          "side": "right"
+        },
+        {
+          "sender": "엄마",
+          "text": "인형들도 잘 재워 줘. 우리 리아가 진짜 베이비시터네! 😄",
+          "side": "left"
+        },
+        {
+          "sender": "리아",
+          "text": "ㅎㅎ 제가 다 할게요~",
+          "side": "right"
+        }
+      ]
+    },
+    {
+      "type": "reading",
+      "title": "📖 베이비시터 일기",
+      "passage": "오늘 엄마가 외출했어요. 나는 애라의 베이비시터가 됐어요.\n애라가 셔츠를 혼자 못 입어서 내가 입혀 줬어요.\n바지는 혼자 입게 했어요. 애라가 잘 했어요!\n인형 피나랑 로지도 재워 줬어요.\n나는 오늘 최고의 베이비시터예요.",
+      "passage_en": "Today Mom went out. I became Aera's babysitter.\nAera couldn't put on her shirt by herself, so I dressed her.\nI let her put on her pants herself. Aera did great!\nI also put the dolls Pina and Rozi to sleep.\nI am the best babysitter today.",
+      "questions": [
+        {
+          "type": "mc",
+          "question": "누가 바지를 입었어요?",
+          "question_en": "Who put on the pants?",
+          "options": ["리아가 입혀 줬어요.", "애라가 혼자 입었어요.", "엄마가 입혀 줬어요."],
+          "answer": 1,
+          "exp": "'바지는 혼자 입게 했어요' → 리아가 입게 해 줬고, 애라가 혼자 입었어요."
+        },
+        {
+          "type": "mc",
+          "question": "리아가 인형들을 어떻게 해 줬어요?",
+          "question_en": "What did Lia do for the dolls?",
+          "options": ["먹여 줬어요.", "재워 줬어요.", "입혀 줬어요."],
+          "answer": 1,
+          "exp": "'인형 피나랑 로지도 재워 줬어요' — 재우다 = to put to sleep."
+        }
+      ]
+    }
+  ],
+  "self_check": [
+    "입히다, 먹이다, 재우다가 무슨 뜻인지 알아요.",
+    "끼다(get stuck)와 끼우다(insert)의 차이를 알아요.",
+    "'-게 하다'를 사용해서 문장을 만들 수 있어요.",
+    "'-도록 해'로 지시할 수 있어요.",
+    "이 에피소드의 대화를 보고 누가 무엇을 했는지 설명할 수 있어요."
+  ],
+  "quiz": [
+    {
+      "type": "listen",
+      "audio_text": "이런, 언니가 입혀 줄게.",
+      "question": "리아가 뭘 해 줄 거예요?",
+      "question_en": "What is Lia going to do?",
+      "options": [
+        "밥을 먹여 줄 거예요.",
+        "옷을 입혀 줄 거예요.",
+        "재워 줄 거예요."
+      ],
+      "answer": 1,
+      "exp": "입혀 줄게 → 입히다 = to dress someone (-히 사동)"
+    },
+    {
+      "type": "mc",
+      "question": "'자다'의 사동형은 뭐예요?",
+      "question_en": "What is the causative form of 자다 (to sleep)?",
+      "options": [
+        "자게 되다",
+        "재우다",
+        "자이다"
+      ],
+      "answer": 1,
+      "exp": "자다 → 재우다 (-우 사동). 아기를 재우다 = to put the baby to sleep."
+    },
+    {
+      "type": "listen",
+      "audio_text": "혼자 입게 해 줄게.",
+      "question": "리아가 애라한테 어떻게 해 줄 거예요?",
+      "question_en": "What will Lia let Aera do?",
+      "options": [
+        "혼자 옷을 입게 해 줄 거예요.",
+        "리아가 옷을 입혀 줄 거예요.",
+        "엄마가 와서 입혀 줄 거예요."
+      ],
+      "answer": 0,
+      "exp": "혼자 입게 해 줄게 = I'll let you put it on by yourself. (-게 하다 = let someone do)"
+    },
+    {
+      "type": "listen",
+      "audio_text": "피나랑 로지를 잘 재우고 나오도록 해!",
+      "question": "리아가 애라한테 뭘 시키고 있어요?",
+      "question_en": "What is Lia instructing Aera to do?",
+      "options": [
+        "인형들하고 계속 놀라고 해요.",
+        "인형들을 잘 재우고 나오라고 해요.",
+        "인형들을 데리고 나오라고 해요."
+      ],
+      "answer": 1,
+      "exp": "'재우고 나오도록 해' = Put them to sleep and come out. -도록 하다 is a directive instruction."
+    },
+    {
+      "type": "mc",
+      "question": "'머리가 끼었어'에서 '끼다'는 무슨 뜻이에요?",
+      "question_en": "What does 끼다 mean in '머리가 끼었어'?",
+      "options": [
+        "to insert something",
+        "to get stuck / wedged",
+        "to feed"
+      ],
+      "answer": 1,
+      "exp": "끼다 = to get stuck (자동사). 끼우다 = to insert/thread through (사동사). 머리가 끼었어 = My head got stuck."
+    }
+  ]
+}

@@ -784,7 +784,8 @@ const L2_EPISODES=[
 const L3_EPISODES=[
   {id:'ep01',label:'파전이나 부쳐 먹을까?'},
   {id:'ep02',label:'물티슈로 닦으라고!'},
-  {id:'ep03',label:'윷놀이를 소개합니다'}
+  {id:'ep03',label:'윷놀이를 소개합니다'},
+  {id:'ep04',label:'베이비 시터'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2021,6 +2022,14 @@ const READING_POOL = {
       {q:'잡힌 말은 어떻게 해야 해요?', q_en:'What must a captured piece do?', options:['그 자리에 멈춰요','처음부터 다시 출발해요','윷판 밖으로 나가요'], answer:1},
     ]
   },
+  'L3_ep04':{
+    passage:'오늘 엄마가 외출했어요. 나는 애라의 베이비시터가 됐어요. 애라가 셔츠를 혼자 못 입어서 내가 입혀 줬어요. 바지는 혼자 입게 했어요. 애라가 잘 했어요! 인형 피나랑 로지도 재워 줬어요. 나는 오늘 최고의 베이비시터예요.',
+    passage_en:'Today Mom went out. I became Aera\'s babysitter. Aera couldn\'t put on her shirt alone, so I dressed her. I let her put her pants on herself. Aera did great! I put the dolls Pina and Rozi to sleep too. I am the best babysitter today.',
+    questions:[
+      {q:'누가 바지를 입었어요?', q_en:'Who put on the pants?', options:['리아가 입혀 줬어요.','애라가 혼자 입었어요.','엄마가 입혀 줬어요.'], answer:1},
+      {q:'리아가 인형들을 어떻게 해 줬어요?', q_en:'What did Lia do for the dolls?', options:['먹여 줬어요.','재워 줬어요.','입혀 줬어요.'], answer:1},
+    ]
+  },
 };
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
@@ -2200,6 +2209,11 @@ const SP_QUIZ_POOL = {
   'L3_ep03':[
     {chars:'이놀이는윷놀이라고불립니다', spaces:[1,4,9], en:'This game is called Yut Nori.', hint:'이 · 놀이는 · 윷놀이라고 · 불립니다'},
     {chars:'잡힌말은처음부터다시출발해야합니다', spaces:[2,4,8,10,14], en:'A captured piece must start over from the beginning.', hint:'잡힌 · 말은 · 처음부터 · 다시 · 출발해야 · 합니다'},
+  ],
+
+  'L3_ep04':[
+    {chars:'언니가입혀줄게', spaces:[2,5], en:'I\'ll dress you.', hint:'언니가 · 입혀 · 줄게'},
+    {chars:'혼자입게해줄게', spaces:[2,4,7], en:'I\'ll let you put it on by yourself.', hint:'혼자 · 입게 · 해 · 줄게'},
   ],
 };
 
@@ -4829,4 +4843,3 @@ function vdRenderScore(gramId) {
 // ════════════════════════════════════════════════════════
 </script>
 
-<footer style="text-align:center;padding:
