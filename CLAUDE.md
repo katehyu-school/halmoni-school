@@ -9,7 +9,7 @@
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
 | **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~03 완성 ✅** | L3 ep04+ 슬라이드/TTS 준비 후 구현 |
-| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / **L3 unit01~10 완성 ✅** | **L4 설계 확정 (12과)** — L4 콘텐츠 제작 전 L2 u08·u09 grammar 포맷 통일 작업 필요 |
+| **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / L3 unit01~10 완성 ✅ / **L4 unit01 완성 ✅** | L4 unit02+ 슬라이드/TTS 준비 후 구현 |
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** | 기능 확장 |
 | **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |
 
@@ -78,7 +78,8 @@
 > ⚠️ **폴더 명칭 안내**: `level2/`, `level3/` 폴더는 초등반 앱의 레벨을 의미 (과거 `book2/`, `book3/`에서 2025-05-23 변경). 슬라이드/TTS 폴더는 `L2_*`, `L3_*` 접두사 유지.
 > ✅ **2026-06-11 미디어 대청소 완료**: ① 구버전 고아 파일 41개 삭제 (옛 ep05 동물원/놀이공원 21, 옛 `nhs/L2/TTS/ep1/` 폴더 15, 중복/구버전 5) ② 슬라이드/TTS 경로 통일 — `data/elem/slides|TTS/L2_*` → `data/elem/level2/slides|TTS/L2_*`, L3도 동일하게 `level3/` 아래로 머지. 이제 **레벨별 단일 경로**. ③ 의도적 보관 고아 4개: `data/basics/Korean_*.png` 2장(Basics 확장용), `data/elem/level1/harry.png`+`aera.png`(캐릭터). 참조 무결성 검증 완료 (깨진 참조 0).
 > 코드 내부 변수명(`b3*`, `book3-main` 등)은 기술 부채로 남아 있음 — 기능 변경 없이 리네이밍만 필요.
-> 🔧 **기술부채 — L2 u08·u09 grammar 포맷 통일** (2026-06-22 기록): `unit08.json`·`unit09.json`의 grammar 섹션이 구형 rule_boxes 직결 포맷. L3 표준(sections 배열 + id/tier/pattern)으로 재작성 + `renderU8Grammar()`·`renderU9Grammar()` 전용 함수 → 공통 GrammarRenderer로 교체 필요. **L4 콘텐츠 제작 시작 전에 처리 권장.**
+> 🔧 **기술부채 — L2 u08·u09 grammar 포맷 통일** (2026-06-22 기록): `unit08.json`·`unit09.json`의 grammar 섹션이 구형 rule_boxes 직결 포맷. L3 표준(sections 배열 + id/tier/pattern)으로 재작성 + `renderU8Grammar()`·`renderU9Grammar()` 전용 함수 → 공통 GrammarRenderer로 교체 필요. L4 unit01 완성 후에도 미처리 상태.
+> ✅ **2026-06-25 완료**: L4 unit01 구현 완성 — 씬뷰어 L3 포맷 통일(화자명 제거, rec+shad 버튼), L3 test CSS(.b3lt-*) 전체 추가, L3 u07-10 읽기 지문 추가, L4 읽기/문장1/2 렌더링 수정.
 
 ### 성인반 아키텍처 핵심
 - `core/adult-renderer.js` — 5개 패널 렌더러 (AdultRenderer)
@@ -1067,51 +1068,4 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ### ✅ 2026-06-01 완료 작업 (nhs.html — My Notes)
 - **📓 My Notes 기능 전체 구현** — 버튼(📓 My Notes) 추가 → 오버레이
-  - **프로필 시스템**: 다중 프로필, localStorage `nms_{name}_*` 네임스페이스
-  - **📓 Notes 탭**: 에피소드 태그 선택(ep01~ep10/Basics/Free), 자유 메모, Save → 목록
-  - **✏️ Korean Writing 탭**: 캔버스 자유 필기 + 한글 힌트 단어 (클릭 시 확대)
-  - **🎨 My Style 탭**: 이모지 아바타, 테마 컬러, 닉네임 변경 + 에피소드 배지 시스템
-  - **에피소드 배지**: 각 에피소드에 첫 노트 저장 시 배지 해제 (ep01~ep10 + basics)
-  - **이모지 아바타**: `NMS_AVATARS = ['🦊','🐨','🐯','🦋','🐬','🦅','🌙','⚡','🎸','🏄','🎯','🌿']`
-  - **영어 병기 완료**: 모든 UI 텍스트 한영 병기 (13세 학생 배려)
-- **localStorage 구조** (nhs):
-  - `nms_profiles` — 프로필 이름 배열
-  - `nms_current` — 현재 활성 프로필
-  - `nms_{name}_color` — 테마 컬러
-  - `nms_{name}_av` — 이모지 아바타 (기본값 🦊)
-  - `nms_{name}_notes` — 노트 배열 `{id, ep, text, date}`
-
-### 🏆 가족 AI 컨테스트 우승! (2026-06-01)
-- Hangeul Quest 앱으로 가족 AI 컨테스트에서 우승
-
-### 성인반 sejong-korean_v1.html
-- **수정 중단** — 참고용으로만 유지 (더 이상 변경 없음)
-
----
-
-## 🆕 Hangeul Quest (구 NHS — New Halmoni School) — 개발 중
-
-### 배경
-- 세종한국어2022 / 한글학교 한국어 → CC 4유형 (출처표시 + 상업적이용금지 + 변경금지)
-- 저작권 제약 없이 선생님 오리지널 커리큘럼으로 완전 독립
-- 앱 하나로 수업 전체가 이루어지는 구조 (부교재 → 메인)
-
-### 핵심 컨셉: 장면 기반 학습 (Scene-First)
-- 생활 속 한 장면이 유닛 전체를 이끔
-- 장면 예시: 한국 공원, 재래시장, 치킨집 주문, 놀이동산, 한국 요리, 여행...
-- 장면 → 단어 → 문법 → 대화 → 듣기 순으로 자연스럽게 파생
-- "왜 이걸 배우는지" 맥락 먼저 — 기존 구조(단어/문법 먼저)와 차별화
-
-### 이미지 전략
-- AI 이미지 생성 (Midjourney / DALL-E 등) 으로 장면 시각화
-- 저작권 걱정 없이 원하는 한국적 장면 직접 생성
-- 영상 TTS: **Clova Dubbing** 사용 → 영상 내 5초 출처 자막 필수
-
----
-
-## 🏗 NHS 파일 아키텍처
-
-### 설계 원칙
-- **`nhs.html`** = 범용 렌더러만 — 콘텐츠 없음
-- **에피소드 추가 = 폴더 하나만 추가** — nhs.html/core 건드릴 필요 없음
-- **슬라이드·음성 경로는 data.json에 기록** — 렌더러가 경로만 참조
+  - **프로필 시스템**: 
