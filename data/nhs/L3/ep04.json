@@ -272,11 +272,11 @@
     {
       "id": "gL3e04_causative_suffix",
       "tier": "core",
-      "title": "사동 -이/히/우 (접미 사동)",
-      "title_en": "Causative Suffixes — -이/히/우",
+      "title": "사동 접미사 — -이/히/리/기/우/구/추",
+      "title_en": "Causative Suffixes — -이/히/리/기/우/구/추",
       "emoji": "🪄",
-      "explanation_en": "Korean causatives are formed by adding -이, -히, -리, -기, or -우 to a verb stem. The result means 'to make/let/help someone do something' — the subject causes someone else to do the action.",
-      "pattern": "Verb stem + -이 / -히 / -우 (+ 주다 for 'do it for them')",
+      "explanation_en": "Korean has 7 causative suffixes. The suffix you use depends on the verb — there's no strict rule, so learn them as vocabulary pairs. The causative form means \"to make/let/help someone do something.\"",
+      "pattern": "Verb stem + -이 / -히 / -리 / -기 / -우 / -구 / -추",
       "scene_example": {
         "korean": "언니가 입혀 줄게.",
         "english": "I'll dress you (put it on for you).",
@@ -285,23 +285,38 @@
       "rule_boxes": [
         {
           "type": "blue",
-          "title": "-히 사동 (most common with ㅂ-stem verbs)",
-          "content": "입다 → 입히다 (to dress someone)\n먹다 → 먹히다 ⚠️ 피동! (to be eaten)\n닫다 → 닫히다 ⚠️ 피동! (to be closed)"
+          "title": "-이 사동",
+          "content": "먹다 → 먹이다 (to feed)\n보다 → 보이다* (보이다 = 피동도 됨)\n높다 → 높이다 (to raise)\n속다 → 속이다 (to deceive)"
         },
         {
           "type": "green",
-          "title": "-이 사동",
-          "content": "먹다 → 먹이다 (to feed)\n보다 → 보이다 ⚠️ 피동! (to be seen)\n높다 → 높이다 (to raise/elevate)"
+          "title": "-히 사동",
+          "content": "입다 → 입히다 (to dress someone)\n읽다 → 읽히다 (to make read)\n앉다 → 앉히다 (to seat someone)\n눕다 → 눕히다 (to lay someone down)"
         },
         {
           "type": "amber",
+          "title": "-리 사동",
+          "content": "알다 → 알리다 (to inform)\n살다 → 살리다 (to save/let live)\n울다 → 울리다 (to make cry)"
+        },
+        {
+          "type": "blue",
+          "title": "-기 사동",
+          "content": "웃다 → 웃기다 (to make laugh)\n벗다 → 벗기다 (to undress someone)\n숨다 → 숨기다 (to hide something)"
+        },
+        {
+          "type": "green",
           "title": "-우 사동",
-          "content": "자다 → 재우다 (to put to sleep)\n깨다 → 깨우다 (to wake someone up)\n끼다 → 끼우다 (to insert / thread through)"
+          "content": "자다 → 재우다 (to put to sleep)\n깨다 → 깨우다 (to wake up)\n끼다 → 끼우다 (to insert/thread through)\n서다 → 세우다 (to make stand/stop)"
+        },
+        {
+          "type": "amber",
+          "title": "-구 사동",
+          "content": "돋다 → 돋구다 (to heighten/enhance)\n(매우 드문 형태 — rare)"
         },
         {
           "type": "red",
-          "title": "⚠️ 사동 vs 피동 — 헷갈리지 말자!",
-          "content": "입히다 = 사동 (to dress someone) ✅\n입혀 줄게 → I'll put it on for you\n\n잡히다 = 피동 (to be grabbed) ✅\n말이 잡혔어 → The piece was captured\n\n동일한 suffix라도 의미가 다를 수 있어요!"
+          "title": "-추 사동",
+          "content": "낮다 → 낮추다 (to lower)\n늦다 → 늦추다 (to delay)\n맞다 → 맞추다 (to match/fit)"
         }
       ],
       "example_groups": [
@@ -419,24 +434,42 @@
       "title": "입혀 → [이펴]",
       "rule": "ㅂ받침 + ㅎ → 격음화 [ㅍ]",
       "examples": [
-        { "written": "입혀", "after": "[이펴]" },
-        { "written": "잡히다", "after": "[자피다]" }
+        {
+          "written": "입혀",
+          "after": "[이펴]"
+        },
+        {
+          "written": "잡히다",
+          "after": "[자피다]"
+        }
       ]
     },
     {
       "title": "먹여 → [머겨]",
       "rule": "ㄱ받침 + 이 → 연음화",
       "examples": [
-        { "written": "먹여", "after": "[머겨]" },
-        { "written": "먹이다", "after": "[머기다]" }
+        {
+          "written": "먹여",
+          "after": "[머겨]"
+        },
+        {
+          "written": "먹이다",
+          "after": "[머기다]"
+        }
       ]
     },
     {
       "title": "재워 → [재워]",
       "rule": "자다 → 재우다 모음 교체 (ㅏ → ㅐ) — 불규칙처럼 보이지만 사동 형성 규칙",
       "examples": [
-        { "written": "자다", "after": "재우다 (-우 사동)" },
-        { "written": "깨다", "after": "깨우다 (-우 사동)" }
+        {
+          "written": "자다",
+          "after": "재우다 (-우 사동)"
+        },
+        {
+          "written": "깨다",
+          "after": "깨우다 (-우 사동)"
+        }
       ]
     }
   ],
@@ -536,7 +569,11 @@
           "type": "mc",
           "question": "누가 바지를 입었어요?",
           "question_en": "Who put on the pants?",
-          "options": ["리아가 입혀 줬어요.", "애라가 혼자 입었어요.", "엄마가 입혀 줬어요."],
+          "options": [
+            "리아가 입혀 줬어요.",
+            "애라가 혼자 입었어요.",
+            "엄마가 입혀 줬어요."
+          ],
           "answer": 1,
           "exp": "'바지는 혼자 입게 했어요' → 리아가 입게 해 줬고, 애라가 혼자 입었어요."
         },
@@ -544,7 +581,11 @@
           "type": "mc",
           "question": "리아가 인형들을 어떻게 해 줬어요?",
           "question_en": "What did Lia do for the dolls?",
-          "options": ["먹여 줬어요.", "재워 줬어요.", "입혀 줬어요."],
+          "options": [
+            "먹여 줬어요.",
+            "재워 줬어요.",
+            "입혀 줬어요."
+          ],
           "answer": 1,
           "exp": "'인형 피나랑 로지도 재워 줬어요' — 재우다 = to put to sleep."
         }
@@ -621,6 +662,78 @@
       ],
       "answer": 1,
       "exp": "끼다 = to get stuck (자동사). 끼우다 = to insert/thread through (사동사). 머리가 끼었어 = My head got stuck."
+    }
+  ],
+  "usage": [
+    {
+      "heading": "🔄 사동 동사 완전 정리 Full Causative Table",
+      "content": "능동(active) 동사와 사동(causative) 동사를 함께 외워 두세요!",
+      "examples": [
+        {
+          "ko": "자다 → 재우다",
+          "en": "sleep → put to sleep (-우)"
+        },
+        {
+          "ko": "입다 → 입히다",
+          "en": "wear → dress someone (-히)"
+        },
+        {
+          "ko": "먹다 → 먹이다",
+          "en": "eat → feed someone (-이)"
+        },
+        {
+          "ko": "끼다 → 끼우다",
+          "en": "get stuck → insert/thread through (-우)"
+        },
+        {
+          "ko": "알다 → 알리다",
+          "en": "know → inform/notify (-리)"
+        },
+        {
+          "ko": "웃다 → 웃기다",
+          "en": "laugh → make laugh (-기)"
+        },
+        {
+          "ko": "낮다 → 낮추다",
+          "en": "be low → lower something (-추)"
+        },
+        {
+          "ko": "세우다 (서다)",
+          "en": "stand → make stand / stop (a car) (-우)"
+        },
+        {
+          "ko": "앉히다 (앉다)",
+          "en": "sit → seat someone (-히)"
+        }
+      ]
+    },
+    {
+      "heading": "🔀 -게 하다 vs 접미 사동 · 어떻게 다를까?",
+      "content": "접미 사동은 짧고 자연스럽고, -게 하다는 모든 동사에 쓸 수 있어요.",
+      "examples": [
+        {
+          "ko": "아기를 재워요. (재우다)",
+          "en": "I put the baby to sleep. (suffix causative — natural)"
+        },
+        {
+          "ko": "아기를 자게 해요. (-게 하다)",
+          "en": "I make the baby sleep. (also correct, slightly longer)"
+        },
+        {
+          "ko": "공부하게 해요.",
+          "en": "I make (them) study. (no suffix causative for 공부하다 → use -게 하다)"
+        },
+        {
+          "ko": "혼자 입게 해 줄게.",
+          "en": "I'll let you put it on yourself. (-게 하다 = letting/allowing)"
+        }
+      ]
+    },
+    {
+      "type": "tip",
+      "section": "💡 사동 vs 피동 헷갈리지 마세요!",
+      "content_ko": "같은 접미사라도 사동(causative)인지 피동(passive)인지 문맥으로 구분해요.\n입히다 → 사동: 언니가 애라를 입혀요. (I dress Aera)\n잡히다 → 피동: 말이 잡혔어요. (The piece was captured)\n먹이다 → 사동: 아기를 먹여요. (I feed the baby)\n먹히다 → 피동: 음식이 먹혔어요. (The food was eaten)",
+      "content_en": "Use the same suffix pairs, but context tells you: if the subject causes someone else to act → causative; if the subject receives the action → passive."
     }
   ]
 }
