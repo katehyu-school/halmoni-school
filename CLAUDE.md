@@ -8,7 +8,7 @@
 
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
-| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~03 완성 ✅** | L3 ep04+ 슬라이드/TTS 준비 후 구현 |
+| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~07 완성 ✅** | L3 ep08+ 슬라이드/TTS 준비 후 구현 |
 | **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / L3 unit01~10 완성 ✅ / **L4 unit01~02 완성 ✅** | L4 unit03+ 슬라이드/TTS 준비 후 구현 |
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** | 기능 확장 |
 | **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |

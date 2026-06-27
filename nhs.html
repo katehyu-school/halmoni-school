@@ -787,7 +787,8 @@ const L3_EPISODES=[
   {id:'ep03',label:'윷놀이를 소개합니다'},
   {id:'ep04',label:'베이비 시터'},
   {id:'ep05',label:'늦잠을 자는 바람에'},
-  {id:'ep06',label:'아무리 그래도 그렇지'}
+  {id:'ep06',label:'아무리 그래도 그렇지'},
+  {id:'ep07',label:'갈비를 맛있게 먹으려면'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2032,6 +2033,14 @@ const READING_POOL = {
       {q:'리아가 인형들을 어떻게 해 줬어요?', q_en:'What did Lia do for the dolls?', options:['먹여 줬어요.','재워 줬어요.','입혀 줬어요.'], answer:1},
     ]
   },
+  'L3_ep07':{
+    passage:'한국에서 갈비를 먹을 때는 쌈을 같이 먹는 문화가 있어요. 쌈채소로는 상추와 깻잎이 가장 많이 쓰여요. 쌈을 맛있게 먹으려면 채소 위에 고기, 야채무침, 쌈장을 올리고 한 입에 먹으면 돼요. 양념을 만들기 위해서는 간장, 고춧가루, 마늘, 식초, 매실청이 필요해요. 마지막에 참기름을 한 바퀴 휘리릭, 깨소금을 톡 톡 넣으면 만능 양념 완성! 쌈을 한 입에 넣으려면 너무 크게 싸면 안 돼요. 입이 작을수록 쌈도 작게 싸야 돼요.',
+    passage_en:'In Korea, there is a culture of eating ssam (wrap) together with galbi. Lettuce and perilla leaves are most commonly used. To enjoy ssam deliciously, place meat, seasoned vegetables, and ssam paste on the leaf and eat it in one bite. To make the sauce, you need soy sauce, red pepper powder, garlic, vinegar, and plum syrup. Finally, drizzle sesame oil in a circle — whoosh — and tap in some sesame salt, and the all-purpose sauce is done! To put the ssam in one bite, it can\'t be too big. The smaller your mouth, the smaller the ssam should be.',
+    questions:[
+      {q:'쌈을 맛있게 먹으려면 뭘 올려요?', q_en:'What do you put on the ssam leaf to eat it deliciously?', options:['고기만','고기, 야채무침, 쌈장','밥과 고기'], answer:1},
+      {q:'참기름을 넣는 순서는?', q_en:'When do you add sesame oil?', options:['맨 처음','중간에','마지막에'], answer:2},
+    ]
+  },
   'L3_ep06':{
     passage:'한국인들은 스포츠에 매우 열정적이에요. 특히 축구 국가대표 경기가 있는 날에는 온 국민이 함께 응원해요. 좋은 선수들이 있어도 감독이 적재적소에 활용하지 못하면 경기에서 질 수 있어요. 한국에서는 스포츠를 이야기할 때 속담을 자주 써요. "구슬이 서 말이라도 꿰어야 보배"는 좋은 것도 제대로 써야 가치가 있다는 뜻이에요.',
     passage_en:'Koreans are very passionate about sports. On days when the national soccer team plays, the whole country cheers together. Even with great players, a team can lose if the coach doesn\'t use them in the right positions. Koreans often use proverbs when talking about sports. "Even three mal of beads are only treasure when strung together" means that good things only have value when properly used.',
@@ -2234,6 +2243,10 @@ const SP_QUIZ_POOL = {
     {chars:'혼자입게해줄게', spaces:[2,4,7], en:'I\'ll let you put it on by yourself.', hint:'혼자 · 입게 · 해 · 줄게'},
   ],
 
+  'L3_ep07':[
+    {chars:'고기를맛있게먹으려면쌈채소위에올려', spaces:[3,6,9,12], en:'If you want to eat meat deliciously, place it on the ssam leaf.', hint:'고기를 · 맛있게 · 먹으려면 · 쌈채소 · 위에 · 올려'},
+    {chars:'입이작을수록쌈도작게싸야돼', spaces:[2,6,9,12], en:'The smaller your mouth, the smaller the ssam should be.', hint:'입이 · 작을수록 · 쌈도 · 작게 · 싸야 돼'},
+  ],
   'L3_ep06':[
     {chars:'최강자선수가있는데도졌다구요', spaces:[3,5,7,9], en:'Even with the best player, they still lost?', hint:'최강자 · 선수가 · 있는데도 · 졌다구요'},
     {chars:'아무리그래도그렇지', spaces:[3,6], en:'Even so, that is still too much.', hint:'아무리 · 그래도 · 그렇지'},
