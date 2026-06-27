@@ -2493,11 +2493,11 @@ function buildBanmal(){
         <span style="font-weight:700;color:var(--teal);min-width:70px;flex-shrink:0;font-size:12px">${esc(l.speaker)}</span>
         <div style="flex:1">
           <div style="font-family:var(--font-serif);font-weight:600;color:var(--warm-900);font-size:14px;line-height:1.5">${esc(l.text)} <button onclick="speakTTS('${escA(l.text)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5">🔊</button></div>
-          <div style="font-size:11px;color:var(--warm-500);margin-top:1px">${esc(l.en||'')}</div>
+          <div style="font-size:11px;color:var(--warm-500);margin-top:1px">${esc(l.en||l.translation||'')}</div>
         </div>
       </div>`).join('');
     adultDlg=`<div style="margin-bottom:16px">
-      <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">🧑‍🤝‍🧑 ${esc(ad.title_ko)}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">🧑‍🤝‍🧑 ${esc(ad.title_ko||ad.title||'')}</div>
       <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:10px">${esc(ad.title_en)}</div>
       ${ad.setup_ko?`<div style="font-size:12px;color:var(--warm-700);background:var(--teal-50);border-radius:var(--radius-sm);padding:9px 13px;margin-bottom:10px">${esc(ad.setup_ko)}<br><span style="font-size:11px;color:var(--warm-500)">${esc(ad.setup_en||'')}</span></div>`:''}
       <div style="background:#fff;border:1.5px solid var(--teal-lt);border-radius:var(--radius-md);padding:15px 17px;box-shadow:var(--shadow-sm)">${adLines}</div>
@@ -2665,7 +2665,7 @@ function buildRealLife(){
         <span style="font-weight:700;color:var(--teal);min-width:60px;flex-shrink:0">${esc(l.speaker)}</span>
         <div>
           <div style="font-family:var(--font-serif);font-weight:600;color:var(--warm-900)">${esc(l.text)} <button onclick="speakTTS('${escA(l.text)}')" style="background:none;border:none;cursor:pointer;font-size:11px;opacity:.5">🔊</button></div>
-          <div style="font-size:11px;color:var(--warm-500)">${esc(l.en||'')}</div>
+          <div style="font-size:11px;color:var(--warm-500)">${esc(l.en||l.translation||'')}</div>
         </div>
       </div>`).join('');
     return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm)">
