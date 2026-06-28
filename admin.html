@@ -648,14 +648,7 @@ async function saveMemberPin(memberName) {
     toast(`❌ ${e.message}`, 'fail');
   } finally {
     btn.disabled    = false;
-    btn.textContent = '🗑️ 출석 삭제';
-  }
-}
-</script>
-</body>
-</html>sage}`, 'fail');
-  } finally {
-    btn.disabled = false; btn.textContent = '저장';
+    btn.textContent = '저장';
   }
 }
 
@@ -758,7 +751,7 @@ async function confirmClearAttend() {
     toast(`✅ 출석 기록 ${data}건 삭제 완료`);
     document.getElementById('attendDate').value = '';
   } catch (e) {
-    sage}`, 'fail');
+    toast(`❌ ${e.message}`, 'fail');
   } finally {
     btn.disabled    = false;
     btn.textContent = '🗑️ 출석 삭제';
