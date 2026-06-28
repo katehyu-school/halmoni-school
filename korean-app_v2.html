@@ -1851,6 +1851,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">02</span>
     <span class="lesson-title-text">산책하러 갈까?</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-3" onclick="selectUnit4(3)">
+    <span class="lesson-num">03</span>
+    <span class="lesson-title-text">같이 해 봐요</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -11775,6 +11779,29 @@ const B4_SCENE_DATA = {
     ]
   }
 ,
+  3: {
+    title: '같이 해 봐요',
+    slides: [
+      'data/elem/level4/slides/ep3/같이 해 봐요1.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요2.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요3.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요4.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요5.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요6.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요7.png',
+      'data/elem/level4/slides/ep3/같이 해 봐요8.png'
+    ],
+    script: [
+      [{ ko:'카요야, 이거 먹어 봐.', en:"Kayo, try eating this.", audio:'data/elem/level4/TTS/ep3/audio_0_카요야__이거_먹어_봐_.mp3' }],
+      [{ ko:'싫어요!', en:"I don't want to!", audio:'data/elem/level4/TTS/ep3/audio_1_싫어요_.mp3' }],
+      [{ ko:'맛만 봐. 맛있어. 너도 좋아할 거야.', en:"Just taste it. It's delicious. You'll like it too.", audio:'data/elem/level4/TTS/ep3/audio_2_맛만_봐__맛있어__너도_좋아할_거야_.mp3' }],
+      [{ ko:'그럼 딱 한 번만이에요!', en:"Then just exactly one time!", audio:'data/elem/level4/TTS/ep3/audio_3_그럼_딱_한_번만이에요_.mp3' }],
+      [{ ko:'알았어. 할머니도 카요의 부탁을 들어 줄게.', en:"Okay. I'll grant Kayo's request too.", audio:'data/elem/level4/TTS/ep3/audio_4_알았어__할머니도_카요의_부탁을_들어_줄게_.mp3' }],
+      [{ ko:'그럼 같이 변신 로봇을 만들어 봐요.', en:"Then let's try making a transforming robot together.", audio:'data/elem/level4/TTS/ep3/audio_5_그럼_같이_변신_로봇을_만들어_봐요_.mp3' }],
+      [{ ko:'좋아! 같이 해 보자!', en:"Great! Let's try doing it together!", audio:'data/elem/level4/TTS/ep3/audio_6_좋아__같이_해_보자_.mp3' }],
+      [{ ko:'할머니! 맛없어요!', en:"Grandma! It doesn't taste good!", audio:'data/elem/level4/TTS/ep3/audio_7_할머니__맛없어요_.mp3' }]
+    ]
+  },
   2: {
     title: '산책하러 갈까?',
     slides: [
@@ -11830,7 +11857,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1,2].forEach(i => {
+  [1,2,3].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
