@@ -11,22 +11,70 @@
   "sections": {
     "vocab": {
       "맛 표현 Taste": [
-        { "kr": "맛", "en": "taste, flavor", "emoji": "😋" },
-        { "kr": "맛만 보다", "en": "just taste it / try a bite", "emoji": "👅" },
-        { "kr": "맛있다", "en": "delicious, tastes good", "emoji": "😍" },
-        { "kr": "맛없다", "en": "not tasty, tastes bad", "emoji": "😣" }
+        {
+          "kr": "맛",
+          "en": "taste, flavor",
+          "emoji": "😋"
+        },
+        {
+          "kr": "맛만 보다",
+          "en": "just taste it / try a bite",
+          "emoji": "👅"
+        },
+        {
+          "kr": "맛있다",
+          "en": "delicious, tastes good",
+          "emoji": "😍"
+        },
+        {
+          "kr": "맛없다",
+          "en": "not tasty, tastes bad",
+          "emoji": "😣"
+        }
       ],
       "행동 Actions": [
-        { "kr": "들어주다", "en": "to grant a request, to fulfill a wish", "emoji": "🤝" },
-        { "kr": "만들다", "en": "to make, to build", "emoji": "🔧" },
-        { "kr": "같이", "en": "together", "emoji": "👫" }
+        {
+          "kr": "들어주다",
+          "en": "to grant a request, to fulfill a wish",
+          "emoji": "🤝"
+        },
+        {
+          "kr": "만들다",
+          "en": "to make, to build",
+          "emoji": "🔧"
+        },
+        {
+          "kr": "같이",
+          "en": "together",
+          "emoji": "👫"
+        }
       ],
       "부사·표현 Expressions": [
-        { "kr": "딱", "en": "exactly, just (for emphasis)", "emoji": "👌" },
-        { "kr": "부탁", "en": "request, favor", "emoji": "🙏" },
-        { "kr": "변신 로봇", "en": "transforming robot", "emoji": "🤖" },
-        { "kr": "싫어요", "en": "I don't want to! / I hate it!", "emoji": "🙅" },
-        { "kr": "알았어", "en": "okay, got it (casual)", "emoji": "👍" }
+        {
+          "kr": "딱",
+          "en": "exactly, just (for emphasis)",
+          "emoji": "👌"
+        },
+        {
+          "kr": "부탁",
+          "en": "request, favor",
+          "emoji": "🙏"
+        },
+        {
+          "kr": "변신 로봇",
+          "en": "transforming robot",
+          "emoji": "🤖"
+        },
+        {
+          "kr": "싫어요",
+          "en": "I don't want to! / I hate it!",
+          "emoji": "🙅"
+        },
+        {
+          "kr": "알았어",
+          "en": "okay, got it (casual)",
+          "emoji": "👍"
+        }
       ]
     },
     "grammar": {
@@ -68,9 +116,21 @@
             }
           ],
           "examples": [
-            { "kr": "이거 먹어 봐.", "en": "Try eating this.", "note": "할머니 → 카요 (반말)" },
-            { "kr": "같이 변신 로봇을 만들어 봐요.", "en": "Let's try making a transforming robot together.", "note": "카요 → 할머니 (존댓말)" },
-            { "kr": "같이 해 보자!", "en": "Let's try doing it together!", "note": "함께 하자 (informal proposal)" }
+            {
+              "note": "할머니 → 카요 (반말)",
+              "korean": "이거 먹어 봐.",
+              "english": "Try eating this."
+            },
+            {
+              "note": "카요 → 할머니 (존댓말)",
+              "korean": "같이 변신 로봇을 만들어 봐요.",
+              "english": "Let's try making a transforming robot together."
+            },
+            {
+              "note": "함께 하자 (informal proposal)",
+              "korean": "같이 해 보자!",
+              "english": "Let's try doing it together!"
+            }
           ]
         },
         {
@@ -92,8 +152,14 @@
             }
           ],
           "examples": [
-            { "kr": "맛만 봐.", "en": "Just taste it." },
-            { "kr": "딱 한 번만이에요!", "en": "Just exactly one time!" }
+            {
+              "korean": "맛만 봐.",
+              "english": "Just taste it."
+            },
+            {
+              "korean": "딱 한 번만이에요!",
+              "english": "Just exactly one time!"
+            }
           ]
         },
         {
@@ -115,7 +181,10 @@
             }
           ],
           "examples": [
-            { "kr": "카요의 부탁을 들어 줄게.", "en": "I'll fulfill Kayo's request." }
+            {
+              "korean": "카요의 부탁을 들어 줄게.",
+              "english": "I'll fulfill Kayo's request."
+            }
           ]
         }
       ]
@@ -126,45 +195,155 @@
           "scene": "🍽️ 할머니가 음식을 권유해요!",
           "scene_en": "Grandma is offering food!",
           "lines": [
-            { "speaker": "할머니", "color": "coral", "text": "카요야, 이거 먹어 봐.", "en": "Kayo, try eating this.", "type": "given" },
-            { "speaker": "카요", "color": "purple", "text": "싫어요!", "en": "I don't want to!", "type": "practice" },
-            { "speaker": "할머니", "color": "coral", "text": "맛만 봐. 맛있어.", "en": "Just taste it. It's delicious.", "type": "given" },
-            { "speaker": "카요", "color": "purple", "text": "그럼 딱 한 번만이에요!", "en": "Then just exactly one time!", "type": "practice" }
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "카요야, 이거 먹어 봐.",
+              "en": "Kayo, try eating this.",
+              "type": "given"
+            },
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "싫어요!",
+              "en": "I don't want to!",
+              "type": "practice"
+            },
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "맛만 봐. 맛있어.",
+              "en": "Just taste it. It's delicious.",
+              "type": "given"
+            },
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "그럼 딱 한 번만이에요!",
+              "en": "Then just exactly one time!",
+              "type": "practice"
+            }
           ]
         },
         {
           "scene": "🤖 카요가 부탁을 해요!",
           "scene_en": "Kayo makes a request!",
           "lines": [
-            { "speaker": "할머니", "color": "coral", "text": "알았어. 할머니도 카요의 부탁을 들어 줄게.", "en": "Okay. I'll grant Kayo's request too.", "type": "given" },
-            { "speaker": "카요", "color": "purple", "text": "그럼 같이 변신 로봇을 만들어 봐요.", "en": "Then let's try making a transforming robot together.", "type": "practice" },
-            { "speaker": "할머니", "color": "coral", "text": "좋아! 같이 해 보자!", "en": "Great! Let's try doing it together!", "type": "given" },
-            { "speaker": "카요", "color": "purple", "text": "할머니! 맛없어요!", "en": "Grandma! It doesn't taste good!", "type": "practice" }
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "알았어. 할머니도 카요의 부탁을 들어 줄게.",
+              "en": "Okay. I'll grant Kayo's request too.",
+              "type": "given"
+            },
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "그럼 같이 변신 로봇을 만들어 봐요.",
+              "en": "Then let's try making a transforming robot together.",
+              "type": "practice"
+            },
+            {
+              "speaker": "할머니",
+              "color": "coral",
+              "text": "좋아! 같이 해 보자!",
+              "en": "Great! Let's try doing it together!",
+              "type": "given"
+            },
+            {
+              "speaker": "카요",
+              "color": "purple",
+              "text": "할머니! 맛없어요!",
+              "en": "Grandma! It doesn't taste good!",
+              "type": "practice"
+            }
           ]
         }
       ],
       "fill_items": [
-        { "en": "Try eating this kimchi!", "q": "이 김치", "suffix": " 봐!", "opts": ["먹어", "먹고", "먹으러"], "answer": 0 },
-        { "en": "Let's try making it together.", "q": "같이 만들어", "suffix": ".", "opts": ["봐요", "보고", "보러"], "answer": 0 },
-        { "en": "Just taste it — just one bite!", "q": "맛", "suffix": " 봐!", "opts": ["만", "도", "가"], "answer": 0 },
-        { "en": "Let's try doing it!", "q": "같이 해", "suffix": "!", "opts": ["보자", "봐서", "봐도"], "answer": 0 },
-        { "en": "I'll grant your request!", "q": "네 부탁을 들어", "suffix": "!", "opts": ["줄게", "줘서", "줘도"], "answer": 0 }
+        {
+          "en": "Try eating this kimchi!",
+          "q": "이 김치",
+          "suffix": " 봐!",
+          "opts": [
+            "먹어",
+            "먹고",
+            "먹으러"
+          ],
+          "answer": 0
+        },
+        {
+          "en": "Let's try making it together.",
+          "q": "같이 만들어",
+          "suffix": ".",
+          "opts": [
+            "봐요",
+            "보고",
+            "보러"
+          ],
+          "answer": 0
+        },
+        {
+          "en": "Just taste it — just one bite!",
+          "q": "맛",
+          "suffix": " 봐!",
+          "opts": [
+            "만",
+            "도",
+            "가"
+          ],
+          "answer": 0
+        },
+        {
+          "en": "Let's try doing it!",
+          "q": "같이 해",
+          "suffix": "!",
+          "opts": [
+            "보자",
+            "봐서",
+            "봐도"
+          ],
+          "answer": 0
+        },
+        {
+          "en": "I'll grant your request!",
+          "q": "네 부탁을 들어",
+          "suffix": "!",
+          "opts": [
+            "줄게",
+            "줘서",
+            "줘도"
+          ],
+          "answer": 0
+        }
       ],
       "listen_quiz": [
         {
           "audio": "data/elem/level4/TTS/ep3/audio_0_카요야__이거_먹어_봐_.mp3",
           "correct": "카요야, 이거 먹어 봐.",
-          "choices": ["카요야, 이거 먹어 봐.", "카요야, 이거 마셔 봐.", "카요야, 이거 만들어 봐."]
+          "choices": [
+            "카요야, 이거 먹어 봐.",
+            "카요야, 이거 마셔 봐.",
+            "카요야, 이거 만들어 봐."
+          ]
         },
         {
           "audio": "data/elem/level4/TTS/ep3/audio_3_그럼_딱_한_번만이에요_.mp3",
           "correct": "그럼 딱 한 번만이에요!",
-          "choices": ["그럼 딱 두 번이에요!", "그럼 딱 한 번만이에요!", "그럼 딱 한 번만이야!"]
+          "choices": [
+            "그럼 딱 두 번이에요!",
+            "그럼 딱 한 번만이에요!",
+            "그럼 딱 한 번만이야!"
+          ]
         },
         {
           "audio": "data/elem/level4/TTS/ep3/audio_5_그럼_같이_변신_로봇을_만들어_봐요_.mp3",
           "correct": "그럼 같이 변신 로봇을 만들어 봐요.",
-          "choices": ["그럼 같이 변신 로봇을 만들어 봐요.", "그럼 같이 변신 로봇을 봐요.", "그럼 혼자 변신 로봇을 만들어 봐요."]
+          "choices": [
+            "그럼 같이 변신 로봇을 만들어 봐요.",
+            "그럼 같이 변신 로봇을 봐요.",
+            "그럼 혼자 변신 로봇을 만들어 봐요."
+          ]
         }
       ],
       "step1_chunks": [
@@ -174,9 +353,21 @@
           "english": "Just taste this.",
           "hint": "맛만 = just taste",
           "chunks": [
-            { "text": "이거", "type": "object", "en": "this" },
-            { "text": "맛만", "type": "adv", "en": "just taste" },
-            { "text": "봐요.", "type": "verb", "en": "try" }
+            {
+              "text": "이거",
+              "type": "object",
+              "en": "this"
+            },
+            {
+              "text": "맛만",
+              "type": "adv",
+              "en": "just taste"
+            },
+            {
+              "text": "봐요.",
+              "type": "verb",
+              "en": "try"
+            }
           ]
         },
         {
@@ -185,10 +376,26 @@
           "english": "I'll grant Kayo's request.",
           "hint": "카요의 = Kayo's",
           "chunks": [
-            { "text": "카요의", "type": "name", "en": "Kayo's" },
-            { "text": "부탁을", "type": "object", "en": "request" },
-            { "text": "들어", "type": "verb", "en": "grant" },
-            { "text": "줄게.", "type": "verb", "en": "I'll give" }
+            {
+              "text": "카요의",
+              "type": "name",
+              "en": "Kayo's"
+            },
+            {
+              "text": "부탁을",
+              "type": "object",
+              "en": "request"
+            },
+            {
+              "text": "들어",
+              "type": "verb",
+              "en": "grant"
+            },
+            {
+              "text": "줄게.",
+              "type": "verb",
+              "en": "I'll give"
+            }
           ]
         },
         {
@@ -197,10 +404,26 @@
           "english": "Let's try making a transforming robot together.",
           "hint": "만들어 봐요 = try making",
           "chunks": [
-            { "text": "같이", "type": "adv", "en": "together" },
-            { "text": "변신 로봇을", "type": "object", "en": "transforming robot" },
-            { "text": "만들어", "type": "verb", "en": "make" },
-            { "text": "봐요.", "type": "verb", "en": "try" }
+            {
+              "text": "같이",
+              "type": "adv",
+              "en": "together"
+            },
+            {
+              "text": "변신 로봇을",
+              "type": "object",
+              "en": "transforming robot"
+            },
+            {
+              "text": "만들어",
+              "type": "verb",
+              "en": "make"
+            },
+            {
+              "text": "봐요.",
+              "type": "verb",
+              "en": "try"
+            }
           ]
         }
       ],
@@ -208,24 +431,46 @@
         {
           "scene": "🍽️",
           "sentence": "이거 먹어 봐.",
-          "answer": ["이거", "먹어", "봐."],
-          "types": ["object", "verb", "verb"],
+          "answer": [
+            "이거",
+            "먹어",
+            "봐."
+          ],
+          "types": [
+            "object",
+            "verb",
+            "verb"
+          ],
           "english": "Try eating this.",
           "hint": "먹어 보다 = try eating"
         },
         {
           "scene": "🤝",
           "sentence": "같이 해 보자!",
-          "answer": ["같이", "해", "보자!"],
-          "types": ["adv", "verb", "verb"],
+          "answer": [
+            "같이",
+            "해",
+            "보자!"
+          ],
+          "types": [
+            "adv",
+            "verb",
+            "verb"
+          ],
           "english": "Let's try doing it together!",
           "hint": "해 보자 = let's try doing"
         },
         {
           "scene": "😣",
           "sentence": "할머니! 맛없어요!",
-          "answer": ["할머니!", "맛없어요!"],
-          "types": ["name", "adj"],
+          "answer": [
+            "할머니!",
+            "맛없어요!"
+          ],
+          "types": [
+            "name",
+            "adj"
+          ],
           "english": "Grandma! It doesn't taste good!",
           "hint": "맛없다 → 맛없어요"
         }
@@ -253,10 +498,30 @@
           "bg": "#FFF8E1",
           "hdr": "#F57F17",
           "lines": [
-            { "role": "Q", "kr": "이거 먹어 봐! 진짜 맛있어!", "en": "Try eating this! It's really delicious!", "color": "#FFE082" },
-            { "role": "A", "kr": "싫어~ 나 그거 싫어해.", "en": "No~ I don't like that.", "color": "#F57F17" },
-            { "role": "Q", "kr": "맛만 봐, 딱 한 번만!", "en": "Just taste it, exactly one time!", "color": "#FFE082" },
-            { "role": "A", "kr": "...알았어. 한 번만!", "en": "...Okay. Just one time!", "color": "#F57F17" }
+            {
+              "role": "Q",
+              "kr": "이거 먹어 봐! 진짜 맛있어!",
+              "en": "Try eating this! It's really delicious!",
+              "color": "#FFE082"
+            },
+            {
+              "role": "A",
+              "kr": "싫어~ 나 그거 싫어해.",
+              "en": "No~ I don't like that.",
+              "color": "#F57F17"
+            },
+            {
+              "role": "Q",
+              "kr": "맛만 봐, 딱 한 번만!",
+              "en": "Just taste it, exactly one time!",
+              "color": "#FFE082"
+            },
+            {
+              "role": "A",
+              "kr": "...알았어. 한 번만!",
+              "en": "...Okay. Just one time!",
+              "color": "#F57F17"
+            }
           ]
         },
         {
@@ -265,10 +530,30 @@
           "bg": "#E8F5E9",
           "hdr": "#2E7D32",
           "lines": [
-            { "role": "Q", "kr": "같이 로봇 만들어 봐요!", "en": "Let's try making a robot together!", "color": "#A5D6A7" },
-            { "role": "A", "kr": "좋아! 재미있겠다!", "en": "Great! That sounds fun!", "color": "#2E7D32" },
-            { "role": "Q", "kr": "부탁이 있어요. 같이 해 줄 수 있어요?", "en": "I have a request. Can you do it with me?", "color": "#A5D6A7" },
-            { "role": "A", "kr": "물론이죠! 같이 해 보자!", "en": "Of course! Let's try doing it together!", "color": "#2E7D32" }
+            {
+              "role": "Q",
+              "kr": "같이 로봇 만들어 봐요!",
+              "en": "Let's try making a robot together!",
+              "color": "#A5D6A7"
+            },
+            {
+              "role": "A",
+              "kr": "좋아! 재미있겠다!",
+              "en": "Great! That sounds fun!",
+              "color": "#2E7D32"
+            },
+            {
+              "role": "Q",
+              "kr": "부탁이 있어요. 같이 해 줄 수 있어요?",
+              "en": "I have a request. Can you do it with me?",
+              "color": "#A5D6A7"
+            },
+            {
+              "role": "A",
+              "kr": "물론이죠! 같이 해 보자!",
+              "en": "Of course! Let's try doing it together!",
+              "color": "#2E7D32"
+            }
           ]
         }
       ]
