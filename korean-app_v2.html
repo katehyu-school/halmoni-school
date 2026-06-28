@@ -1855,6 +1855,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">03</span>
     <span class="lesson-title-text">같이 해 봐요</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-4" onclick="selectUnit4(4)">
+    <span class="lesson-num">04</span>
+    <span class="lesson-title-text">그래서 어떻게 됐어요?</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -6414,6 +6418,14 @@ const KIDS_READING_L4 = {
     questions: [
       { q: '리아는 지금 뭘 하고 있어요?', q_en: 'What is Lia doing right now?', options: ['요리', '숙제', '게임'], answer: 1 },
       { q: '할머니는 어디에 계세요?', q_en: 'Where is Grandma?', options: ['방', '거실', '부엌'], answer: 2 },
+    ]
+  },
+  4: {
+    passage: '리암은 동생과 스쿠터를 타고 있었어요. 동네 형이 스쿠터로 점프를 하고 있었어요. 리암도 따라 해 보고 싶었어요. 그런데 스쿠터가 기울어졌어요! 그래서 리암은 넘어졌어요. 무릎이 아팠어요. 다음 날, 무릎에 피딱지가 생겼어요. 그리고 진물도 흘렀어요. 그래도 리암은 스쿠터를 멋지게 타고 싶어요!',
+    passage_en: 'Liam was riding scooters with his sibling. The older boy in the neighborhood was jumping with his scooter. Liam wanted to try copying him. But the scooter tilted! So Liam fell down. His knee hurt. The next day, a scab formed on his knee. And discharge oozed too. Even so, Liam still wants to ride the scooter coolly!',
+    questions: [
+      { q: '왜 리암이 넘어졌어요?', q_en: 'Why did Liam fall?', options: ['비가 왔어요', '스쿠터가 기울어졌어요', '졸았어요'], answer: 1 },
+      { q: '다음 날 무릎이 어떻게 됐어요?', q_en: 'What happened to the knee the next day?', options: ['나았어요', '피딱지가 생겼어요', '더 빨개졌어요'], answer: 1 },
     ]
   },
   3: {
@@ -11787,6 +11799,37 @@ const B4_SCENE_DATA = {
     ]
   }
 ,
+  4: {
+    title: '그래서 어떻게 됐어요?',
+    slides: [
+      'data/elem/level4/slides/ep4/그래서요_1.png',
+      'data/elem/level4/slides/ep4/그래서요_2.png',
+      'data/elem/level4/slides/ep4/그래서요_3.png',
+      'data/elem/level4/slides/ep4/그래서요_4.png',
+      'data/elem/level4/slides/ep4/그래서요_5.png',
+      'data/elem/level4/slides/ep4/그래서요_6.png',
+      'data/elem/level4/slides/ep4/그래서요_7.png',
+      'data/elem/level4/slides/ep4/그래서요_8.png',
+      'data/elem/level4/slides/ep4/그래서요_9.png',
+      'data/elem/level4/slides/ep4/그래서요_10.png',
+      'data/elem/level4/slides/ep4/그래서요_11.png',
+      'data/elem/level4/slides/ep4/그래서요_12.png'
+    ],
+    script: [
+      [{ ko:'동생과 나는 스쿠터를 타고 있었어요.', en:'My sibling and I were riding scooters.', audio:'data/elem/level4/TTS/ep4/audio_0_동생과_나는_스쿠터를_타고_있었어요_.mp3' }],
+      [{ ko:'동네 형이 스쿠터로 점프를 하고 있었어요.', en:'The older boy in the neighborhood was jumping with his scooter.', audio:'data/elem/level4/TTS/ep4/audio_1_동네_형이_스쿠터로_점프를_하고_있었어요_.mp3' }],
+      [{ ko:'나도 따라 해 보고 싶었어요.', en:'I wanted to try copying him too.', audio:'data/elem/level4/TTS/ep4/audio_2_나도_따라_해_보고_싶었어요_.mp3' }],
+      [{ ko:'그런데, 스쿠터가 기울어졌어요.', en:'But the scooter tilted.', audio:'data/elem/level4/TTS/ep4/audio_3_그런데___스쿠터가_기울어졌어요_.mp3' }],
+      [{ ko:'나는 뛰어 내리려고 했지만 같이 넘어졌어요.', en:'I tried to jump off but fell with it.', audio:'data/elem/level4/TTS/ep4/audio_4_나는_뛰어_내리려고_했지만_같이_넘어졌어요_.mp3' }],
+      [{ ko:'무릎이 너무 아팠어요.', en:'My knee really hurt.', audio:'data/elem/level4/TTS/ep4/audio_5_무릎이_너무_아팠어요_.mp3' }],
+      [{ ko:'그래서 무릎을 봤어요.', en:'So I looked at my knee.', audio:'data/elem/level4/TTS/ep4/audio_6_그래서_무릎을_봤어요__.mp3' }],
+      [{ ko:'조금 까져 있었어요.', en:'It was a bit scraped.', audio:'data/elem/level4/TTS/ep4/audio_7_조금_까져_있었어요_.mp3' }],
+      [{ ko:'그런데, 다음 날은 무릎에 피딱지가 보였어요.', en:'But the next day a scab appeared on my knee.', audio:'data/elem/level4/TTS/ep4/audio_8_그런데__다음_날은_무릎에_피딱지가_보였어요_.mp3' }],
+      [{ ko:'그리고 진물도 흘렀어요.', en:'And discharge was oozing too.', audio:'data/elem/level4/TTS/ep4/audio_9_그리고_진물도_흘렀어요_.mp3' }],
+      [{ ko:'너무 징그러워 보였어요.', en:'It looked really gross.', audio:'data/elem/level4/TTS/ep4/audio_10_너무_징그러워_보였어요_.mp3' }],
+      [{ ko:'그래도 스쿠터를 멋지게 타고 싶어요.', en:'Even so, I still want to ride the scooter coolly.', audio:'data/elem/level4/TTS/ep4/audio_11_그래도_스쿠터를_멋지게_타고_싶어요_.mp3' }]
+    ]
+  },
   3: {
     title: '같이 해 봐요',
     slides: [
@@ -11865,7 +11908,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1,2,3].forEach(i => {
+  [1,2,3,4].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
