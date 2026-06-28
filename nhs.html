@@ -789,7 +789,8 @@ const L3_EPISODES=[
   {id:'ep05',label:'늦잠을 자는 바람에'},
   {id:'ep06',label:'아무리 그래도 그렇지'},
   {id:'ep07',label:'갈비를 맛있게 먹으려면'},
-  {id:'ep08',label:'날씨가 좋군요'}
+  {id:'ep08',label:'날씨가 좋군요'},
+  {id:'ep09',label:'조회수 백만 가자!'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2034,6 +2035,14 @@ const READING_POOL = {
       {q:'리아가 인형들을 어떻게 해 줬어요?', q_en:'What did Lia do for the dolls?', options:['먹여 줬어요.','재워 줬어요.','입혀 줬어요.'], answer:1},
     ]
   },
+  'L3_ep09':{
+    passage:'요즘 숏폼 영상이 정말 인기예요. 짧은 데다가 재미있어서 많은 사람들이 봐요. 만드는 것도 어렵지 않아요. 핸드폰조차 있으면 누구든지 만들 수 있거든요. 춤, 요리, 언어 공부 등 주제도 다양해요. 조회수가 높은 영상을 보면 내용이 볼 만한 것들이 많아요.',
+    passage_en:'Short-form videos are really popular these days. Not only are they short, but they\'re also fun, so many people watch them. Making them isn\'t difficult either. As long as you even have a phone, anyone can make one. Themes vary — dance, cooking, language learning. If you look at videos with high view counts, most of them are worth watching.',
+    questions:[
+      {q:'숏폼 영상이 왜 인기가 많아요?',options:['길어서','짧은 데다가 재미있어서','비싸서'],answer:1},
+      {q:'숏폼 영상을 만들려면 최소한 뭐가 필요해요?',options:['카메라','핸드폰','컴퓨터'],answer:1}
+    ]
+  },
   'L3_ep08':{
     passage:'올해 여름은 작년에 비해서 선선한 편입니다. 기상청에 따르면 북쪽에서 찬공기가 내려오고 있어서 장마가 늦어지고 있다고 합니다. 하지만 전문가들은 장마가 시작되면 작년보다 더 더울 수 있다고 경고하고 있습니다.',
     passage_en:'This summer is on the cooler side compared to last year. According to the meteorological agency, cold air is coming down from the north, causing the monsoon to be delayed. However, experts warn that once the monsoon begins, it could be hotter than last year.',
@@ -2252,6 +2261,10 @@ const SP_QUIZ_POOL = {
     {chars:'혼자입게해줄게', spaces:[2,4,7], en:'I\'ll let you put it on by yourself.', hint:'혼자 · 입게 · 해 · 줄게'},
   ],
 
+  'L3_ep09':[
+    {chars:'나시험공부하느라연습조차못했어',spaces:[1,5,8,11],highlight:[8,9,10],answer:'나 시험공부하느라 연습조차 못 했어.'},
+    {chars:'비트도빠른데다가동작도너무커',spaces:[3,6,9,11],highlight:[4,5,6,7,8],answer:'비트도 빠른 데다가 동작도 너무 커.'}
+  ],
   'L3_ep08':[
     {chars:'올해는작년에비해서덥지않네요', spaces:[2,4,7,10], en:'This year is not as hot compared to last year.', hint:'올해는 · 작년에 · 비해서 · 덥지 · 않네요'},
     {chars:'장마와함께뜨거운공기가밀려올거래요', spaces:[2,5,8,11,14], en:'They say hot air will surge in along with the monsoon.', hint:'장마와 · 함께 · 뜨거운 · 공기가 · 밀려올 · 거래요'},
