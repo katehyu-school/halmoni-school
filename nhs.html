@@ -2557,7 +2557,7 @@ function buildBanmal(){
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>
-  <div style="background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:var(--radius-md);padding:12px 16px;font-size:13px;color:var(--sage);font-weight:600;margin-bottom:${vocabCmp||greetCmp||adultDlg?'20px':'0'}">${esc(bj.tip||bj.rule_box||'')}</div>
+  ${bj.tip||bj.rule_box?`<div style="background:#EDF7F2;border:1.5px solid #A8D8B5;border-radius:var(--radius-md);padding:12px 16px;font-size:13px;color:var(--sage);font-weight:600;margin-bottom:${vocabCmp||greetCmp||adultDlg?'20px':'0'}">${esc(bj.tip||bj.rule_box||'')}</div>`:''}
   ${adultDlg?`<hr style="border:none;border-top:2px dashed var(--warm-300);margin:20px 0">${adultDlg}`:''}
   ${vocabCmp?`<hr style="border:none;border-top:2px dashed var(--warm-300);margin:20px 0">${vocabCmp}`:''}
   ${greetCmp?`<hr style="border:none;border-top:2px dashed var(--warm-300);margin:20px 0">${greetCmp}`:''}`;
