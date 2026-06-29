@@ -4766,12 +4766,14 @@ function buildHonorifics(){
 // ══════════════════════════════════════════════════════
 function buildSpeaking(){
   return '<div class="basics-intro">🔊로 원어민 발음을 먼저 듣고, 따라 말해보세요!<br><em>Click 🔊 to hear native pronunciation, then repeat aloud.</em></div>'
-    +SPEAK_CARDS.map(c=>'<div style="background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:10px;">'
+    +'<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">'
+    +SPEAK_CARDS.map(c=>'<div style="background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 18px;">'
       +'<div style="font-size:22px;font-weight:700;color:var(--gray-900);">'+c.kr+'</div>'
       +'<div style="font-size:11px;color:var(--teal);font-weight:600;margin-top:3px;">'+c.rom+'</div>'
       +'<div style="font-size:12.5px;color:var(--warm-500);margin-top:2px;margin-bottom:10px;">'+c.en+'</div>'
       +'<button class="speak-tts-btn" onclick="speakTTS(\''+c.kr+'\')">🔊 듣기</button>'
-      +'</div>').join('');
+      +'</div>').join('')
+    +'</div>';
 }
 
 
