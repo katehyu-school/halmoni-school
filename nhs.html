@@ -790,7 +790,8 @@ const L3_EPISODES=[
   {id:'ep06',label:'아무리 그래도 그렇지'},
   {id:'ep07',label:'갈비를 맛있게 먹으려면'},
   {id:'ep08',label:'날씨가 좋군요'},
-  {id:'ep09',label:'조회수 백만 가자!'}
+  {id:'ep09',label:'조회수 백만 가자!'},
+  {id:'ep10',label:'입을 옷이 하나도 없어'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2035,6 +2036,14 @@ const READING_POOL = {
       {q:'리아가 인형들을 어떻게 해 줬어요?', q_en:'What did Lia do for the dolls?', options:['먹여 줬어요.','재워 줬어요.','입혀 줬어요.'], answer:1},
     ]
   },
+  'L3_ep10':{
+    passage:'한국은 색조 화장품으로 유명해요. 특히 립 틴트는 한국에서 처음 만들어진 제품으로, 지금은 전 세계에서 인기가 많아요. 한국 사람들은 피부 톤을 웜톤과 쿨톤으로 나누는 편이에요. 웜톤인 사람은 오렌지나 코랄 계열이 잘 어울리는 반면에, 쿨톤인 사람은 핑크나 버건디 계열이 잘 어울려요. 화장품을 살 때 미리 사 두면 편리하지만, 자신의 톤을 먼저 아는 것이 중요해요.',
+    passage_en:'Korea is famous for color cosmetics. Lip tint in particular is a product first created in Korea and is now popular worldwide. Koreans tend to classify skin tone into warm tone and cool tone. People with warm tones suit orange or coral shades, whereas people with cool tones suit pink or burgundy shades. It\'s convenient to buy cosmetics in advance, but knowing your own tone first is important.',
+    questions:[
+      {q:'웜톤인 사람에게 잘 어울리는 색은?',options:['핑크','버건디','오렌지'],answer:2},
+      {q:'화장품을 사기 전에 뭘 먼저 알면 좋아요?',options:['자신의 톤','가격','브랜드'],answer:0}
+    ]
+  },
   'L3_ep09':{
     passage:'요즘 숏폼 영상이 정말 인기예요. 짧은 데다가 재미있어서 많은 사람들이 봐요. 만드는 것도 어렵지 않아요. 핸드폰조차 있으면 누구든지 만들 수 있거든요. 춤, 요리, 언어 공부 등 주제도 다양해요. 조회수가 높은 영상을 보면 내용이 볼 만한 것들이 많아요.',
     passage_en:'Short-form videos are really popular these days. Not only are they short, but they\'re also fun, so many people watch them. Making them isn\'t difficult either. As long as you even have a phone, anyone can make one. Themes vary — dance, cooking, language learning. If you look at videos with high view counts, most of them are worth watching.',
@@ -2261,6 +2270,10 @@ const SP_QUIZ_POOL = {
     {chars:'혼자입게해줄게', spaces:[2,4,7], en:'I\'ll let you put it on by yourself.', hint:'혼자 · 입게 · 해 · 줄게'},
   ],
 
+  'L3_ep10':[
+    {chars:'빌려입는대신에립틴트나줘',spaces:[3,6,9,11],en:'Instead of borrowing it, give me the lip tint.',hint:'빌려 · 입는 · 대신에 · 립 틴트 · 나 · 줘'},
+    {chars:'오렌지색이잘어울리는반면에나는안어울려',spaces:[4,7,10,13,15],en:'Orange suits you well, whereas it doesn\'t suit me.',hint:'오렌지 색이 · 잘 · 어울리는 · 반면에 · 나는 · 안 어울려'},
+  ],
   'L3_ep09':[
     {chars:'나시험공부하느라연습조차못했어',spaces:[1,5,8,11],highlight:[8,9,10],answer:'나 시험공부하느라 연습조차 못 했어.'},
     {chars:'비트도빠른데다가동작도너무커',spaces:[3,6,9,11],highlight:[4,5,6,7,8],answer:'비트도 빠른 데다가 동작도 너무 커.'}
