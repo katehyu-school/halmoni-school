@@ -791,7 +791,8 @@ const L3_EPISODES=[
   {id:'ep07',label:'갈비를 맛있게 먹으려면'},
   {id:'ep08',label:'날씨가 좋군요'},
   {id:'ep09',label:'조회수 백만 가자!'},
-  {id:'ep10',label:'입을 옷이 하나도 없어'}
+  {id:'ep10',label:'입을 옷이 하나도 없어'},
+  {id:'ep11',label:'깜빡 속을 뻔했어'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2036,6 +2037,14 @@ const READING_POOL = {
       {q:'리아가 인형들을 어떻게 해 줬어요?', q_en:'What did Lia do for the dolls?', options:['먹여 줬어요.','재워 줬어요.','입혀 줬어요.'], answer:1},
     ]
   },
+  'L3_ep11':{
+    passage:'한국에서 \'아재개그\'는 아저씨들이 좋아하는 말장난을 뜻해요. \'아재\'는 아저씨를 친근하게 부르는 말이에요. 아재개그는 보통 너무 쉽고 예상 가능해서 웃기지 않은 척하고 싶지만, 깜빡 웃을 뻔한 경우가 많아요. 요즘은 아재개그가 유행해서 젊은 사람들도 즐겨요. 웃기기는 하지만 \'아재야!\'라고 놀리는 것도 문화의 일부가 됐어요.',
+    passage_en:'In Korea, "아재개그" refers to wordplay that middle-aged men enjoy. "아재" is a casual way of saying 아저씨. Dad jokes tend to be so easy and predictable that you want to pretend they\'re not funny, but you often almost laugh without realizing. These days dad jokes are trending and even young people enjoy them. Even though they\'re somewhat funny, teasing someone with "You\'re such an 아재!" has become part of the culture.',
+    questions:[
+      {q:'\'아재개그\'는 어떤 스타일의 개그예요?',options:['어렵고 복잡한 개그','쉽고 예상 가능한 말장난','슬픈 이야기'],answer:1},
+      {q:'요즘 아재개그를 즐기는 사람들은?',options:['아저씨들만','젊은 사람들도','어린이들만'],answer:1}
+    ]
+  },
   'L3_ep10':{
     passage:'한국은 색조 화장품으로 유명해요. 특히 립 틴트는 한국에서 처음 만들어진 제품으로, 지금은 전 세계에서 인기가 많아요. 한국 사람들은 피부 톤을 웜톤과 쿨톤으로 나누는 편이에요. 웜톤인 사람은 오렌지나 코랄 계열이 잘 어울리는 반면에, 쿨톤인 사람은 핑크나 버건디 계열이 잘 어울려요. 화장품을 살 때 미리 사 두면 편리하지만, 자신의 톤을 먼저 아는 것이 중요해요.',
     passage_en:'Korea is famous for color cosmetics. Lip tint in particular is a product first created in Korea and is now popular worldwide. Koreans tend to classify skin tone into warm tone and cool tone. People with warm tones suit orange or coral shades, whereas people with cool tones suit pink or burgundy shades. It\'s convenient to buy cosmetics in advance, but knowing your own tone first is important.',
@@ -2270,6 +2279,10 @@ const SP_QUIZ_POOL = {
     {chars:'혼자입게해줄게', spaces:[2,4,7], en:'I\'ll let you put it on by yourself.', hint:'혼자 · 입게 · 해 · 줄게'},
   ],
 
+  'L3_ep11':[
+    {chars:'안웃긴척하지마',spaces:[2,5],en:'Stop pretending it\'s not funny.',hint:'안 웃긴 · 척하지 · 마'},
+    {chars:'깜빡속을뻔했어',spaces:[2,5],en:'I almost got fooled without realizing.',hint:'깜빡 · 속을 · 뻔했어'},
+  ],
   'L3_ep10':[
     {chars:'빌려입는대신에립틴트나줘',spaces:[3,6,9,11],en:'Instead of borrowing it, give me the lip tint.',hint:'빌려 · 입는 · 대신에 · 립 틴트 · 나 · 줘'},
     {chars:'오렌지색이잘어울리는반면에나는안어울려',spaces:[4,7,10,13,15],en:'Orange suits you well, whereas it doesn\'t suit me.',hint:'오렌지 색이 · 잘 · 어울리는 · 반면에 · 나는 · 안 어울려'},
