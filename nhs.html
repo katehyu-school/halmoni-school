@@ -2040,10 +2040,10 @@ const READING_POOL = {
   },
   'L3_ep12':{
     passage:'서낭당은 한국의 전통 민속신앙에서 마을을 지켜주는 신을 모신 사당이에요. 마을 입구에 있는 서낭당 앞에 사람들은 돌을 쌓고 기도를 해요. 오방색 깃발로 장식된 당산나무도 마을 수호신의 상징이에요. 마을에 나쁜 일이 생기면 무당이 굿을 주도해서 수호신의 도움을 구했어요. 이런 민속 행사들이 오늘날에는 강릉 단오제 같은 민속 축제로 이어져 오고 있어요.',
-    passage_en:'A 서낭당 is a shrine from Korean traditional folk religion that enshrines the deity protecting the village. In front of the 서낭당 at the village entrance, people pile stones and pray. The 당산나무 decorated with five-colored flags is also a symbol of the village guardian deity. When something bad happened, a shaman would lead a 굿 ritual to seek the guardian deity\'s help. These folk events continue today as folk festivals such as the Gangneung Danoje.',
+    passage_en:'A 서낭당 is a shrine from Korean traditional folk religion that enshrines the deity protecting the village. People pile stones and pray in front of it. The 당산나무 decorated with five-colored flags is also a symbol of the village guardian deity. When something bad happened, a shaman would lead a 굿 ritual to seek the guardian deity help. These folk events continue today as folk festivals such as the Gangneung Danoje.',
     questions:[
       {q:'서낭당은 무엇을 모신 곳이에요?',options:['조상신','마을을 지켜주는 신','농사의 신'],answer:1},
-      {q:'서낭당의 민속 행사들이 오늘날 어떻게 이어져요?',options:['사라졌어요','민속 축제로 이어져 와요','학교 교육으로 이어져요'],answer:1}
+      {q:'서낭당 관련 민속 행사들이 오늘날 어떻게 이어져요?',options:['사라졌어요','민속 축제로 이어져 와요','학교 교육으로 이어져요'],answer:1}
     ]
   },
   'L3_ep11':{
@@ -2290,7 +2290,7 @@ const SP_QUIZ_POOL = {
 
   'L3_ep12':[
     {chars:'돌을쌓고나서기도를한다',spaces:[2,4,7,10],en:'After piling the stones, they pray.',hint:'돌을 · 쌓고 · 나서 · 기도를 · 한다'},
-    {chars:'이는수호신의도움을구하는것이다',spaces:[2,5,8,11],en:'This is the act of seeking the guardian deity\'s help.',hint:'이는 · 수호신의 · 도움을 · 구하는 · 것이다'},
+    {chars:'이는수호신의도움을구하는것이다',spaces:[2,5,8,11],en:'This is the act of seeking the guardian deity help.',hint:'이는 · 수호신의 · 도움을 · 구하는 · 것이다'},
   ],
   'L3_ep11':[
     {chars:'안웃긴척하지마',spaces:[2,5],en:'Stop pretending it\'s not funny.',hint:'안 웃긴 · 척하지 · 마'},
@@ -4886,4 +4886,65 @@ function vdRender(gramId) {
   const optHtml = opts.map(function(o,i){
     const oSafe = o.replace(/'/g,"\\'");
     const cSafe = q.correct.replace(/'/g,"\\'");
-    return '<button class="vd-opt" onclick="vdAnswer(\''+gramId+'\','+i+',this,\''+o
+    return '<button class="vd-opt" onclick="vdAnswer(\''+gramId+'\','+i+',this,\''+oSafe+'\',\''+cSafe+'\')"><span class="vd-opt-lbl">○</span><span>'+o+'</span><button onclick="speakTTS(\''+oSafe+'\');event.stopPropagation();" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;margin-left:auto" tabindex="-1">🔊</button></button>';
+  }).join('');
+  body.innerHTML =
+    '<div class="vd-prog-bar"><div class="vd-prog-fill" style="width:'+pct+'%"></div></div>'+
+    '<div class="vd-prog-label">'+st.idx+' / '+st.questions.length+'</div>'+
+    '<div class="vd-q-box">'+
+      '<div style="font-size:1.8rem">'+q.verb.emoji+'</div>'+
+      '<div class="vd-verb">'+q.verb.dict+'</div>'+
+      '<div class="vd-tense-badge">→ '+q.tenseLabel+'?</div>'+
+      '<div class="vd-tag">'+q.verb.tag+'</div>'+
+    '</div>'+
+    '<div class="vd-opts" id="vd-opts-'+gramId+'">'+optHtml+'</div>'+
+    '<div class="vd-exp" id="vd-exp-'+gramId+'">💡 '+q.exp+'</div>'+
+    '<button class="vd-next-btn" id="vd-next-'+gramId+'" onclick="vdNext(\''+gramId+'\')">'+
+      (isLast?'📊 결과 보기':'다음 →')+'</button>';
+}
+
+function vdAnswer(gramId, i, btn, chosen, correct) {
+  const container = document.getElementById('vd-opts-'+gramId);
+  if(!container) return;
+  container.querySelectorAll('.vd-opt').forEach(function(b){
+    b.disabled = true;
+    const lbl = b.querySelector('.vd-opt-lbl');
+    const txt = b.querySelector('span:nth-child(2)');
+    const val = txt ? txt.textContent.trim() : '';
+    if(val === correct){ b.classList.add('correct'); if(lbl)lbl.textContent='✓'; }
+    else if(b===btn && chosen!==correct){ b.classList.add('wrong'); if(lbl)lbl.textContent='✗'; }
+  });
+  if(chosen===correct) vdState[gramId].score++;
+  const exp = document.getElementById('vd-exp-'+gramId);
+  if(exp) exp.classList.add('show');
+  const nxt = document.getElementById('vd-next-'+gramId);
+  if(nxt) nxt.classList.add('show');
+  vdState[gramId].idx++;
+}
+
+function vdNext(gramId){ vdRender(gramId); }
+
+function vdRenderScore(gramId) {
+  const st = vdState[gramId];
+  const body = document.getElementById('vd-body-'+gramId);
+  if(!body) return;
+  const total = st.questions.length;
+  const pct = Math.round(st.score/total*100);
+  var grade, gradeLabel, gradeColor;
+  if(pct>=90){grade='🏆';gradeLabel='완벽해요! Perfect!';gradeColor='var(--teal)';}
+  else if(pct>=70){grade='🌟';gradeLabel='잘했어요! Great job!';gradeColor='var(--blue)';}
+  else if(pct>=50){grade='👍';gradeLabel='좋아요! Keep going!';gradeColor='#B45309';}
+  else{grade='🌱';gradeLabel='다시 해봐요! Try again!';gradeColor='var(--coral)';}
+  body.innerHTML =
+    '<div class="vd-score-wrap">'+
+      '<div class="vd-grade">'+grade+'</div>'+
+      '<div class="vd-score-num" style="color:'+gradeColor+'">'+st.score+' <span style="font-size:1.2rem;color:var(--warm-500)">/ '+total+'</span></div>'+
+      '<div class="vd-grade-label" style="color:'+gradeColor+'">'+gradeLabel+'</div>'+
+      '<div class="vd-score-label">'+pct+'% 정답 · accuracy</div>'+
+    '</div>'+
+    '<button class="vd-restart-btn" onclick="vdInit(\''+gramId+'\')">↺ 다시 도전 / Play Again</button>';
+}
+// 
+// ════════════════════════════════════════════════════════
+</script>
+
