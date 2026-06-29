@@ -406,12 +406,12 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 
 
 /* ── BASICS SIDEBAR ─────────────────────────────────── */
-.basics-topic-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1.5px solid transparent;}
+.basics-topic-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1.5px solid transparent;min-height:50px;}
 .basics-topic-item:hover{background:var(--amber-50);border-color:var(--amber-lt);}
 .basics-topic-item.active{background:var(--amber-lt);border-color:#e8b86a;}
 .basics-topic-icon{font-size:17px;width:28px;text-align:center;flex-shrink:0;}
 .basics-topic-name{font-size:12px;color:var(--warm-500);line-height:1.35;}
-.basics-topic-name-en{font-size:10px;color:var(--warm-300);display:block;}
+.basics-topic-name-en{font-size:10px;color:var(--warm-300);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .basics-topic-item.active .basics-topic-name{color:var(--amber-600);font-weight:700;}
 .sidebar-hdr-amber{font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--amber-lt);}
 /* ── BASICS CONTENT ──────────────────────────────────── */
@@ -4298,6 +4298,7 @@ function buildNumbers(){
   return '<div class="btab-bar">'
     +'<button class="btab active" data-btab-group="bp-num" data-tab="sino" onclick="switchBtab(\'bp-num\',\'sino\')">한자어 Sino-Korean</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="native" onclick="switchBtab(\'bp-num\',\'native\')">고유어 Native Korean</button>'
+    +'<button class="btab" data-btab-group="bp-num" data-tab="date" onclick="switchBtab(\'bp-num\',\'date\')">📅 날짜·요일</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="big" onclick="switchBtab(\'bp-num\',\'big\')">📈 큰 숫자 Big Numbers</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="usage" onclick="switchBtab(\'bp-num\',\'usage\')">📌 사용법</button>'
     +'</div>'
