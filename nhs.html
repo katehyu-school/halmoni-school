@@ -3973,7 +3973,7 @@ function loadBasics(topicId){
   const topic=BASICS_TOPICS.find(t=>t.id===topicId);
   if(!topic)return;
   document.getElementById('content-area').innerHTML=
-    '<div style="max-width:860px;margin:0 auto;padding:24px;">'
+    '<div style="width:100%;max-width:860px;margin:0 auto;padding:24px;box-sizing:border-box;">'
     +'<div class="basics-header"><div class="basics-icon-big">'+topic.icon+'</div>'
     +'<div><div class="basics-title-kr">'+topic.label+'</div><div class="basics-title-en">'+topic.en+'</div></div></div>'
     +'<div id="basics-body"></div></div>';
