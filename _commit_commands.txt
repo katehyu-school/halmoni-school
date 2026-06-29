@@ -1,0 +1,5 @@
+cd C:\Users\kateh\Desktop\halmoni-school
+if (Test-Path .git\index.lock) { Remove-Item .git\index.lock }
+git add korean-app_v2.html
+git commit -m "fix: HQ Kids 모바일 사이드바 메뉴 토글(햄버거 버튼) 추가"
+git push
