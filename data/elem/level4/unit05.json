@@ -42,30 +42,30 @@
           "description": "Use -(으)ㄹ게요 when YOU decide to do something — a promise or willingness. It's about YOUR action, directed at the listener.",
           "rule_boxes": [
             {
-              "type": "blue",
-              "title": "받침 없으면 → -ㄹ게요 · No final consonant",
-              "content": "가다 → 갈게요 (I'll go)\n오다 → 올게요 (I'll come)\n따다 → 딸게요 (I'll pick)"
+              "color": "blue",
+              "label": "받침 없으면 → -ㄹ게요 · No final consonant",
+              "examples": ["가다 → 갈게요 (I'll go)", "오다 → 올게요 (I'll come)", "따다 → 딸게요 (I'll pick)"]
             },
             {
-              "type": "green",
-              "title": "받침 있으면 → -을게요 · Final consonant",
-              "content": "읽다 → 읽을게요 (I'll read)\n먹다 → 먹을게요 (I'll eat)\n닫다 → 닫을게요 (I'll close)"
+              "color": "green",
+              "label": "받침 있으면 → -을게요 · Final consonant",
+              "examples": ["읽다 → 읽을게요 (I'll read)", "먹다 → 먹을게요 (I'll eat)", "닫다 → 닫을게요 (I'll close)"]
             },
             {
-              "type": "amber",
-              "title": "따 올게요 vs 따 갈게요 · Direction matters!",
-              "content": "따 올게요 = I'll pick and come BACK (to you)\n따 갈게요 = I'll pick and take (go) a lot\n→ 올게요 = toward you / 갈게요 = away from you"
+              "color": "amber",
+              "label": "따 올게요 vs 따 갈게요 · Direction matters!",
+              "examples": ["따 올게요 = I'll pick and come BACK (to you)", "따 갈게요 = I'll pick and take a lot (away)", "→ 올게요 = toward you / 갈게요 = away from you"]
             },
             {
-              "type": "red",
-              "title": "⚠️ 내가 하는 것만! · Only for YOUR own action",
-              "content": "✅ 제가 할게요. (I'll do it.)\n❌ 리아가 할게요. (can't use for others)\n→ 리아가 할 거예요. (Lia will do it. = prediction)"
+              "color": "red",
+              "label": "⚠️ 내가 하는 것만! · Only for YOUR own action",
+              "examples": ["✅ 제가 할게요. (I'll do it.)", "❌ 리아가 할게요. (can't use for others)", "→ 리아가 할 거예요. (Lia will do it. = prediction)"]
             }
           ],
           "examples": [
-            { "ko": "제가 따 올게요!", "en": "I'll go pick them and come back!", "highlight": "따 올게요" },
-            { "ko": "할머니 많이 따 갈게요!", "en": "Grandma, I'll pick a lot and take them!", "highlight": "따 갈게요" },
-            { "ko": "제가 도울게요.", "en": "I'll help.", "highlight": "도울게요" }
+            { "korean": "제가 따 올게요!", "english": "I'll go pick them and come back!", "highlight": "따 올게요" },
+            { "korean": "할머니 많이 따 갈게요!", "english": "Grandma, I'll pick a lot and take them!", "highlight": "따 갈게요" },
+            { "korean": "제가 도울게요.", "english": "I'll help.", "highlight": "도울게요" }
           ]
         }
       ]
@@ -77,7 +77,7 @@
           "scene_en": "Picking gooseberries",
           "lines": [
             { "speaker": "할머니", "color": "green", "text": "리암아, 구스베리 좀 따 올래?", "en": "Liam, can you go pick some gooseberries?", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "네! 제가 따 올게요!", "en": "Yes! I'll go pick them!", "type": "practice" },
+            { "speaker": "리암", "color": "blue", "text": "네! 제가 따 올게요!", "en": "Yes! I'll go pick them!", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "딸 때, 가시 조심해.", "en": "Watch out for the thorns when picking.", "type": "given" },
             { "speaker": "리암", "color": "blue", "text": "알아요.", "en": "I know.", "type": "given" }
           ]
@@ -92,46 +92,16 @@
             { "speaker": "리암", "color": "blue", "text": "청이 뭐예요?", "en": "What is cheong?", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "신 과일에 설탕을 넣어서 만든거야.", "en": "It's made by adding sugar to sour fruit.", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "핑크색 쥬스 생각나지?", "en": "You remember the pink juice, right?", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "아항. 할머니 많이 따 갈게요!", "en": "Ahh! Grandma, I'll pick a lot!", "type": "practice" }
+            { "speaker": "리암", "color": "blue", "text": "아항. 할머니 많이 따 갈게요!", "en": "Ahh! Grandma, I'll pick a lot!", "type": "given" }
           ]
         }
       ],
       "fill_items": [
-        {
-          "en": "Yes! I'll go pick them and come back!",
-          "q": "네! 제가 따",
-          "suffix": "!",
-          "opts": ["올게요", "갈게요", "왔어요"],
-          "answer": 0
-        },
-        {
-          "en": "Grandma, I'll pick a lot and take them!",
-          "q": "할머니 많이 따",
-          "suffix": "!",
-          "opts": ["갈게요", "올게요", "왔어요"],
-          "answer": 0
-        },
-        {
-          "en": "They're not ripe yet!",
-          "q": "아직",
-          "suffix": "!",
-          "opts": ["안 익었어요", "덜 익었어요", "많이 익었어요"],
-          "answer": 0
-        },
-        {
-          "en": "Less ripe fruit is better.",
-          "q": "",
-          "suffix": " 과일이 더 좋아.",
-          "opts": ["덜 익은", "안 익은", "많이 익은"],
-          "answer": 0
-        },
-        {
-          "en": "I'll help.",
-          "q": "제가",
-          "suffix": ".",
-          "opts": ["도울게요", "도왔어요", "도와요"],
-          "answer": 0
-        }
+        { "en": "Yes! I'll go pick them and come back!", "q": "네! 제가 따", "suffix": "!", "opts": ["올게요", "갈게요", "왔어요"], "ans": "올게요" },
+        { "en": "Grandma, I'll pick a lot and take them!", "q": "할머니 많이 따", "suffix": "!", "opts": ["갈게요", "올게요", "왔어요"], "ans": "갈게요" },
+        { "en": "They're not ripe yet!", "q": "아직", "suffix": "!", "opts": ["안 익었어요", "덜 익었어요", "많이 익었어요"], "ans": "안 익었어요" },
+        { "en": "Less ripe fruit is better.", "q": "", "suffix": " 과일이 더 좋아.", "opts": ["덜 익은", "안 익은", "많이 익은"], "ans": "덜 익은" },
+        { "en": "I'll help.", "q": "제가", "suffix": ".", "opts": ["도울게요", "도왔어요", "도와요"], "ans": "도울게요" }
       ],
       "listen_quiz": [
         {
