@@ -6839,6 +6839,12 @@ function openUnitVocab(n, book){
     setTimeout(()=>{ switchBook3Unit(n).then(()=>b3SwitchTab('vocab')); }, 50);
     return;
   }
+  if(bk === 4){
+    // Book 4 → Level 4로 전환 후 해당 유닛 vocab 탭
+    selectBook(4);
+    setTimeout(()=>{ switchBook4Unit(n).then(()=>b4SwitchTab('vocab')); }, 50);
+    return;
+  }
   // Book 2
   switchUnit(n);
   if(n===6) switchSection6('vocab');
@@ -11512,6 +11518,23 @@ async function _kidsIdxLoad(){
       }
       const secs=(d.sections&&d.sections.grammar&&d.sections.grammar.sections)||[];
       secs.forEach(g=>{if(g.title)grams.push({title:g.title,pattern:g.pattern||'',meaning:g.meaning||g.subtitle||'',unit:n,book:3});});
+    }catch(e){break;}
+  }
+
+  // ── Level 4 (units 1~N) — direct fetch, stops at first missing ──
+  for(let n=1;n<=12;n++){
+    try{
+      const r=await fetch(`data/elem/level4/unit${String(n).padStart(2,'0')}.json`);
+      if(!r.ok)break;
+      const d=await r.json();
+      const vocab=(d.sections&&d.sections.vocab)||{};
+      // Level 4 vocab structure: { "카테고리": [{kr,en,rom,emoji},...], ... } (Level 3와 동일)
+      for(const items of Object.values(vocab)){
+        if(!Array.isArray(items))continue;
+        items.forEach(v=>{const kr=v.kr||v.korean;if(kr)words.push({korean:kr,english:v.en||v.english||'',romanization:v.rom||v.romanization||'',emoji:v.emoji||'',unit:n,book:4});});
+      }
+      const secs=(d.sections&&d.sections.grammar&&d.sections.grammar.sections)||[];
+      secs.forEach(g=>{if(g.title)grams.push({title:g.title,pattern:g.pattern||'',meaning:g.meaning||g.subtitle||'',unit:n,book:4});});
     }catch(e){break;}
   }
 
