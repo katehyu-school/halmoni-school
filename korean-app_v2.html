@@ -6454,7 +6454,7 @@ const KIDS_READING_L4 = {
   },
   6: {
     passage: '리아가 할머니 할아버지 댁에 놀러 갔어요. 리아는 어른께 "그동안 별 일 없으셨어요?" 하고 공손하게 인사했어요. 할아버지는 리아가 내셔널 배구 리그에 참가했다는 말을 듣고 "정말 대단하구나!" 하고 칭찬해 주셨어요. 리아는 엄마가 만든 과자를 할머니께 드렸어요. 갈 때 리아가 실수로 "안녕히 가세요"라고 했어요. 그러자 할아버지가 웃으면서 "내가 가는 게 아니니까 안녕히 계세요 라고 해야지" 하고 가르쳐 주셨어요.',
-    passage_en: "Lia went to visit her grandparents. Lia politely greeted them: "Has everything been okay all this time?" When Grandpa heard that Lia had participated in the national volleyball league, he praised her: "That's really amazing!" Lia gave Grandma the cookies Mom made. When leaving, Lia accidentally said "안녕히 가세요." Then Grandpa smiled and taught her: "I'm not the one leaving, so you should say 안녕히 계세요."",
+    passage_en: 'Lia went to visit her grandparents. She politely greeted them: \'Has everything been okay all this time?\' When Grandpa heard that Lia participated in the national volleyball league, he praised her: \'That is really amazing!\' Lia gave Grandma the cookies Mom made. When leaving, Lia accidentally said annyeonghi gaseyo. Then Grandpa taught her: the right phrase is annyeonghi gyeseyo when you are the one leaving.',
     questions: [
       { q: '리아는 할아버지께 어떤 인사를 했어요?', q_en: 'What greeting did Lia say to Grandpa?', options: ['안녕하세요', '그동안 별 일 없으셨어요?', '잘 있었어요?'], answer: 1 },
       { q: '리아는 왜 칭찬을 받았어요?', q_en: 'Why did Lia receive praise?', options: ['과자를 만들어서', '내셔널 리그에 참가해서', '공부를 잘 해서'], answer: 1 },
@@ -12153,4 +12153,98 @@ function b4SceneTo(idx) {
   if (next) next.disabled = (idx === d.slides.length - 1);
 
   // 스크립트 — L3와 동일한 포맷 (화자 없음, rec+shad 버튼)
-  const box = document.getElementById('b4-script-
+  const box = document.getElementById('b4-script-box');
+  if (!box) return;
+  const lines = d.script[idx] || [];
+  box.innerHTML = lines.map((ln, li) => {
+    const recId = 'b4-rec-'+idx+'-'+li;
+    const recBtn = '<button class="u2-rec-btn" id="'+recId+'" onclick="kidsRecToggle(\''+recId+'\')">🎙️</button>';
+    const shadId = 'b4-shad-'+idx+'-'+li;
+    const shadResId = 'b4-shad-res-'+idx+'-'+li;
+    const escapedKo = ln.ko.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    const shadBtn = '<button class="kids-shad-btn" id="'+shadId+'" data-target="'+escapedKo+'" data-res="'+shadResId+'" onclick="kidsShad(this,this.dataset.target,this.dataset.res)" title="따라 말하기 · Shadowing">🎤</button>';
+    return '<div class="u2-script-line">' +
+    (ln.audio
+      ? '<button class="u2-script-play" onclick="b4ScenePlay(' + idx + ',' + li + ')" aria-label="재생">▶</button>'
+      : '<button class="u2-script-play" onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\\'") + '\')" aria-label="TTS">🔊</button>') +
+    recBtn + shadBtn +
+    '<span class="u2-script-ko">' + ln.ko + '</span>' +
+    '<span class="u2-script-en">' + ln.en + '</span>' +
+    '</div>' +
+    '<div class="kids-shad-res" id="'+shadResId+'"></div>';
+  }).join('');
+}
+
+function b4SceneGo(dir) { kidsAPStop(); b4SceneTo(b4SceneIdx + dir); }
+
+function b4ScenePlay(slideIdx, lineIdx) {
+  const d2 = B4_SCENE_DATA[b4SceneUnit];
+  if (!d2) return;
+  const line = (d2.script[slideIdx]||[])[lineIdx];
+  if (!line || !line.audio) return;
+  if (b4SceneAudio) { b4SceneAudio.pause(); b4SceneAudio = null; }
+  b4SceneAudio = new Audio(line.audio);
+  b4SceneAudio.play();
+}
+
+function b4ToggleFullScript(btn, unitNum) {
+  const box = document.getElementById('b4-full-script');
+  if (!box) return;
+  const d = B4_SCENE_DATA[unitNum];
+  if (!d) return;
+  if (box.style.display === 'none') {
+    box.style.display = 'block';
+    btn.textContent = '📜 전체 대본 접기';
+    box.innerHTML = d.script.map((lines, si) =>
+      '<div style="margin-bottom:8px;padding:6px 8px;background:white;border-radius:8px;border-left:3px solid var(--teal);">' +
+      '<div style="font-size:0.7rem;color:#aaa;margin-bottom:2px;">Slide ' + (si+1) + '</div>' +
+      lines.map(ln =>
+        '<div style="margin:2px 0;">' +
+        '<button onclick="speakKorean(\'' + ln.ko.replace(/'/g,"\'") + '\')" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:0.85rem;margin-right:4px;">🔊</button>' +
+        '<strong>' + ln.ko + '</strong> <span style="color:#888;">' + ln.en + '</span></div>'
+      ).join('') +
+      '</div>'
+    ).join('');
+  } else {
+    box.style.display = 'none';
+    btn.textContent = '📜 전체 대본 보기';
+  }
+}
+
+function b4SwitchTab(tab) {
+  const tabs = ['scene','vocab','grammar','practice','reallife','selfcheck'];
+  document.querySelectorAll('#b4-snav .snav-btn').forEach((btn,i) => {
+    btn.classList.toggle('active', tabs[i] === tab);
+  });
+  tabs.forEach(t => {
+    const el = document.getElementById('b4-tab-'+t);
+    if (el) el.classList.toggle('active', t === tab);
+  });
+}
+
+</script>
+
+<!-- ══ 단어 인덱스 패널 ══════════════════════════════════════ -->
+<div class="kids-idx-overlay" id="kids-idx-overlay" onclick="closeKidsIndex()"></div>
+<div class="kids-idx-panel" id="kids-idx-panel">
+  <div class="kids-idx-hdr">
+    <h3>📖 단어 인덱스 · Word Index</h3>
+    <button class="kids-idx-close" onclick="closeKidsIndex()">✕</button>
+  </div>
+  <div class="kids-idx-search">
+    <input type="text" id="kids-idx-search" placeholder="단어 검색 Search words…" oninput="_kidsIdxFilter()">
+  </div>
+  <div class="kids-idx-mode-bar">
+    <button class="kids-idx-mode-btn active" id="kwu-mode-vocab" onclick="_kidsSetMode('vocab',this)">📚 새단어</button>
+    <button class="kids-idx-mode-btn" id="kwu-mode-gram" onclick="_kidsSetMode('grammar',this)">📌 문법</button>
+  </div>
+  <div class="kids-idx-jump-bar" id="kids-idx-jump-bar"></div>
+  <div class="kids-idx-body" id="kids-idx-body">
+    <div style="text-align:center;padding:40px;color:#aaa;font-family:Jua,sans-serif;">로딩 중…</div>
+  </div>
+    <div class="kids-idx-page-ctrl" id="kids-idx-page-ctrl" style="display:none;"></div>
+</div>
+
+
+</body>
+</html>
