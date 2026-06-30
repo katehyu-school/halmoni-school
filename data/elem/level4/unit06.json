@@ -1,0 +1,290 @@
+{
+  "unit": 6,
+  "title": "할아버지 안녕하세요?",
+  "book": 4,
+  "goal": {
+    "ko": "-(으)시- 높임법으로 어른께 공손하게 말할 수 있어요!",
+    "en": "I can greet and talk to elders politely using the -(으)시- honorific system!"
+  },
+  "key_points": [
+    "-(으)시- — 어른 동작에 붙이는 높임 표현",
+    "드시다 / 계시다 / 가시다 — 핵심 높임 동사 3개",
+    "안녕히 계세요 vs 안녕히 가세요 — 누가 떠나느냐에 따라 달라요"
+  ],
+  "sections": {
+    "vocab": {
+      "높임 동사 Honorific Verbs": [
+        { "kr": "드시다", "en": "to eat/drink (honorific)", "emoji": "🍽️" },
+        { "kr": "계시다", "en": "to be / to stay (honorific)", "emoji": "🏠" },
+        { "kr": "가시다", "en": "to go (honorific)", "emoji": "🚶" },
+        { "kr": "오시다", "en": "to come (honorific)", "emoji": "🙌" },
+        { "kr": "주시다", "en": "to give (honorific)", "emoji": "🎁" }
+      ],
+      "표현 Expressions": [
+        { "kr": "별 일", "en": "anything special / anything wrong", "emoji": "⭐" },
+        { "kr": "그동안", "en": "in the meantime / all this time", "emoji": "⏳" },
+        { "kr": "대단하다", "en": "amazing, impressive", "emoji": "🏆" },
+        { "kr": "참가하다", "en": "to participate", "emoji": "🏐" }
+      ],
+      "인사 Greetings": [
+        { "kr": "안녕히 계세요", "en": "Goodbye (said to one who stays)", "emoji": "🏠" },
+        { "kr": "안녕히 가세요", "en": "Goodbye (said to one who leaves)", "emoji": "🚶" },
+        { "kr": "잘 가", "en": "Take care / Bye (informal, said to one who leaves)", "emoji": "👋" },
+        { "kr": "잘 있어", "en": "Stay well / Bye (informal, said to one who stays)", "emoji": "😊" }
+      ]
+    },
+    "grammar": {
+      "sections": [
+        {
+          "id": "g06_honorific",
+          "tier": "core",
+          "title": "-(으)시- 높임법",
+          "subtitle": "Honorific system — showing respect to elders",
+          "pattern": "Verb stem + -(으)시- + ending",
+          "description": "When talking about an elder's actions, add -(으)시- between the verb stem and the ending. This shows respect and is essential in Korean culture.",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "받침 없으면 → -시- · No final consonant",
+              "examples": ["가다 → 가시다 (go → go honorific)", "오다 → 오시다 (come)", "하다 → 하시다 (do)"]
+            },
+            {
+              "color": "green",
+              "label": "받침 있으면 → -으시- · Final consonant",
+              "examples": ["읽다 → 읽으시다 (read)", "앉다 → 앉으시다 (sit)", "있다 → 계시다 ⚠️ 특별 형태!"]
+            },
+            {
+              "color": "amber",
+              "label": "특별 높임 동사 3개 · Special honorific verbs",
+              "examples": ["먹다/마시다 → 드시다 (eat/drink)", "있다 → 계시다 (be/stay)", "자다 → 주무시다 (sleep)"]
+            },
+            {
+              "color": "red",
+              "label": "⚠️ 어른 동작에만! · Only for the elder's OWN actions",
+              "examples": ["할아버지 드세요 ✅ (Grandpa, please eat)", "제가 드세요 ❌ (you can't use it for yourself)", "→ 내 동작엔 겸손어: 드리다 (give to elder)"]
+            }
+          ],
+          "examples": [
+            { "korean": "할머니 이거 드세요!", "english": "Grandma, please eat this!", "highlight": "드세요" },
+            { "korean": "그동안 별 일 없으셨어요?", "english": "Has everything been okay all this time?", "highlight": "없으셨어요" },
+            { "korean": "할아버지도 드셔 보세요.", "english": "Grandpa, please try eating it too.", "highlight": "드셔 보세요" }
+          ]
+        },
+        {
+          "id": "g06_farewell",
+          "tier": "core",
+          "title": "안녕히 계세요 vs 안녕히 가세요",
+          "subtitle": "Who is leaving? Who is staying?",
+          "pattern": "Focus on who moves",
+          "description": "These two phrases are easy to mix up! The key is: who is physically leaving the place?",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "내가 떠날 때 · When YOU leave",
+              "examples": ["→ 남는 사람에게: 안녕히 계세요 (please stay well)", "리아: 안녕히 계세요. (Lia is leaving, grandparents stay)"]
+            },
+            {
+              "color": "green",
+              "label": "상대방이 떠날 때 · When THEY leave",
+              "examples": ["→ 떠나는 사람에게: 안녕히 가세요 (please go safely)", "할머니: 안녕히 가세요. (said when visitor leaves)"]
+            },
+            {
+              "color": "amber",
+              "label": "반말 버전 · Informal versions",
+              "examples": ["잘 가 = casual 안녕히 가세요 (go well)", "잘 있어 = casual 안녕히 계세요 (stay well)"]
+            }
+          ],
+          "examples": [
+            { "korean": "안녕히 계세요! (내가 가요)", "english": "Goodbye! (I'm the one leaving)", "highlight": "계세요" },
+            { "korean": "안녕히 가세요! (상대가 가요)", "english": "Goodbye! (They're the one leaving)", "highlight": "가세요" },
+            { "korean": "잘 가! / 잘 있어!", "english": "Bye! / Stay well! (casual)", "highlight": "잘 가 / 잘 있어" }
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "dialogue_practice": [
+        {
+          "scene": "🏠 할머니 댁 도착",
+          "scene_en": "Arriving at grandparents' home",
+          "lines": [
+            { "speaker": "리아", "color": "purple", "text": "할머니 할아버지 안녕하세요?", "en": "Hello, Grandma and Grandpa!", "type": "given" },
+            { "speaker": "할아버지", "color": "green", "text": "오. 리아 왔구나. 어서 와.", "en": "Oh, Lia's here. Come on in.", "type": "given" },
+            { "speaker": "리아", "color": "purple", "text": "그동안 별 일 없으셨어요?", "en": "Has everything been okay all this time?", "type": "given" },
+            { "speaker": "할머니", "color": "teal", "text": "그럼 별 일 없었지. 리아도 배구 열심히 하고 있어?", "en": "Of course, nothing special. Are you still working hard at volleyball, Lia?", "type": "given" },
+            { "speaker": "리아", "color": "purple", "text": "네. 지난 번에 내셔널 리그에도 참가했어요!", "en": "Yes! I even participated in the national league last time!", "type": "given" },
+            { "speaker": "할아버지", "color": "green", "text": "우리 리아 정말 대단하구나!", "en": "Our Lia is really amazing!", "type": "given" }
+          ]
+        },
+        {
+          "scene": "🍪 과자 드리기",
+          "scene_en": "Offering cookies",
+          "lines": [
+            { "speaker": "리아", "color": "purple", "text": "할머니 이거 드세요. 엄마가 만든 과자예요.", "en": "Grandma, please have some. These are cookies Mom made.", "type": "given" },
+            { "speaker": "할머니", "color": "teal", "text": "정말 맛있다!", "en": "These are really delicious!", "type": "given" },
+            { "speaker": "리아", "color": "purple", "text": "할아버지도 드셔 보세요. 제가 도왔어요.", "en": "Grandpa, please try some too. I helped make them.", "type": "given" }
+          ]
+        },
+        {
+          "scene": "👋 작별 인사",
+          "scene_en": "Saying goodbye",
+          "lines": [
+            { "speaker": "리아", "color": "purple", "text": "저 배구 연습이 있어서 가 봐야 해요.", "en": "I have volleyball practice so I need to get going.", "type": "given" },
+            { "speaker": "리아", "color": "purple", "text": "안녕히 가세요.", "en": "Goodbye. (wrong — she should say 안녕히 계세요)", "type": "given" },
+            { "speaker": "할아버지", "color": "green", "text": "리아야, 안녕히 계세요 라고 하는거야.", "en": "Lia, you should say 안녕히 계세요.", "type": "given" },
+            { "speaker": "리아", "color": "purple", "text": "아 맞다. 안녕히 계세요.", "en": "Oh right. Goodbye (I'm leaving)!", "type": "given" },
+            { "speaker": "할머니", "color": "teal", "text": "응 그래 잘 가.", "en": "Okay, take care.", "type": "given" }
+          ]
+        }
+      ],
+      "fill_items": [
+        { "en": "Has everything been okay all this time?", "q": "그동안 별 일", "suffix": "?", "opts": ["없으셨어요", "없었어요", "없으세요"], "ans": "없으셨어요" },
+        { "en": "Grandma, please eat this!", "q": "할머니 이거", "suffix": "!", "opts": ["드세요", "먹으세요", "먹어요"], "ans": "드세요" },
+        { "en": "Grandpa, please try eating it too.", "q": "할아버지도 드셔", "suffix": ".", "opts": ["보세요", "봐요", "보자"], "ans": "보세요" },
+        { "en": "Goodbye (I'm the one leaving).", "q": "안녕히", "suffix": ".", "opts": ["계세요", "가세요", "있어요"], "ans": "계세요" },
+        { "en": "Grandpa is amazing!", "q": "할아버지 정말", "suffix": "!", "opts": ["대단하세요", "대단해요", "대단하시다"], "ans": "대단하세요" }
+      ],
+      "listen_quiz": [
+        {
+          "audio": "그동안 별 일 없으셨어요?",
+          "correct": 1,
+          "choices": [
+            { "emoji": "🎉", "kr": "Did anything fun happen?", "en": "신나는 일 있었어요?" },
+            { "emoji": "⭐", "kr": "Has everything been okay?", "en": "별 일 없으셨어요?" },
+            { "emoji": "😔", "kr": "Was something wrong?", "en": "무슨 일 있으셨어요?" }
+          ]
+        },
+        {
+          "audio": "할머니 이거 드세요!",
+          "correct": 0,
+          "choices": [
+            { "emoji": "🍪", "kr": "Please eat this, Grandma", "en": "드세요" },
+            { "emoji": "🤲", "kr": "Please give this to me", "en": "주세요" },
+            { "emoji": "👀", "kr": "Please look at this", "en": "보세요" }
+          ]
+        },
+        {
+          "audio": "안녕히 계세요.",
+          "correct": 2,
+          "choices": [
+            { "emoji": "🚶", "kr": "Said when you are staying", "en": "내가 남을 때" },
+            { "emoji": "🏠", "kr": "Said when the other person leaves", "en": "상대방이 떠날 때" },
+            { "emoji": "👋", "kr": "Said when YOU are leaving", "en": "내가 떠날 때" }
+          ]
+        }
+      ],
+      "step1_chunks": [
+        {
+          "scene": "🙏",
+          "sentence": "그동안 별 일 없으셨어요?",
+          "english": "Has everything been okay all this time?",
+          "hint": "없으셨어요 = 없다 + -(으)시- + -었어요 (honorific past)",
+          "chunks": [
+            { "text": "그동안", "type": "adv", "en": "all this time" },
+            { "text": "별 일", "type": "object", "en": "anything special" },
+            { "text": "없으셨어요?", "type": "verb", "en": "was there not? (honorific)" }
+          ]
+        },
+        {
+          "scene": "🍪",
+          "sentence": "할머니 이거 드세요.",
+          "english": "Grandma, please eat this.",
+          "hint": "드세요 = 드시다 + -어요 (honorific for 먹다)",
+          "chunks": [
+            { "text": "할머니", "type": "name", "en": "Grandma" },
+            { "text": "이거", "type": "object", "en": "this" },
+            { "text": "드세요.", "type": "verb", "en": "please eat (honorific)" }
+          ]
+        },
+        {
+          "scene": "👋",
+          "sentence": "안녕히 계세요.",
+          "english": "Goodbye (I'm leaving).",
+          "hint": "계세요 = 계시다 + -어요 (honorific for 있다 — to stay)",
+          "chunks": [
+            { "text": "안녕히", "type": "adv", "en": "safely / in peace" },
+            { "text": "계세요.", "type": "verb", "en": "please stay (honorific)" }
+          ]
+        }
+      ],
+      "step2_words": [
+        {
+          "scene": "🙏",
+          "sentence": "그동안 별 일 없으셨어요?",
+          "answer": ["그동안", "별 일", "없으셨어요?"],
+          "types": ["adv", "object", "verb"],
+          "english": "Has everything been okay all this time?",
+          "hint": "없으셨어요 = honorific past of 없다"
+        },
+        {
+          "scene": "🏐",
+          "sentence": "내셔널 리그에도 참가했어요!",
+          "answer": ["내셔널 리그에도", "참가했어요!"],
+          "types": ["place", "verb"],
+          "english": "I even participated in the national league!",
+          "hint": "에도 = even at / 참가하다 = to participate"
+        },
+        {
+          "scene": "🍪",
+          "sentence": "할머니 이거 드세요.",
+          "answer": ["할머니", "이거", "드세요."],
+          "types": ["name", "object", "verb"],
+          "english": "Grandma, please eat this.",
+          "hint": "드세요 = 드시다 (honorific 먹다/마시다)"
+        }
+      ],
+      "write_items": [
+        {
+          "prompt": "높임말로 써봐요!",
+          "question": "🍵 할머니께 차를 드리면서 뭐라고 해요?",
+          "question_en": "You're serving Grandma some tea. What do you say?",
+          "hint": "할머니 이거 ___세요.",
+          "answer": "할머니 이거 드세요.",
+          "answer_en": "Grandma, please have some."
+        },
+        {
+          "prompt": "작별 인사를 써봐요!",
+          "question": "👋 할머니 댁에서 나가면서 뭐라고 해요?",
+          "question_en": "You're leaving Grandma's house. What do you say?",
+          "hint": "안녕히 ___세요.",
+          "answer": "안녕히 계세요.",
+          "answer_en": "Goodbye! (I'm the one leaving)"
+        }
+      ]
+    },
+    "real_life": {
+      "title": "🗣️ 실생활 대화 — Real Life",
+      "subtitle": "어른께 공손하게 말해봐요!",
+      "dialogues": [
+        {
+          "title": "🏠 친구 부모님께 인사",
+          "title_en": "Greeting a friend's parents",
+          "bg": "#E8F5E9",
+          "hdr": "#2E7D32",
+          "lines": [
+            { "role": "Q", "kr": "어서 오세요! 배고프시죠?", "en": "Welcome! You must be hungry, right?", "color": "#A5D6A7" },
+            { "role": "A", "kr": "감사합니다. 별 일 없으셨어요?", "en": "Thank you. Has everything been well?", "color": "#2E7D32" },
+            { "role": "Q", "kr": "그럼요. 들어오세요!", "en": "Of course! Please come in!", "color": "#A5D6A7" }
+          ]
+        },
+        {
+          "title": "🎁 선물 드리기",
+          "title_en": "Giving a gift to an elder",
+          "bg": "#FFF3E0",
+          "hdr": "#E65100",
+          "lines": [
+            { "role": "A", "kr": "이거 드세요. 작은 거지만요.", "en": "Please have this. It's a small thing, but...", "color": "#E65100" },
+            { "role": "Q", "kr": "어머, 고마워요. 뭐예요?", "en": "Oh my, thank you. What is it?", "color": "#FFCC80" },
+            { "role": "A", "kr": "과일 청이에요. 물에 타서 드세요!", "en": "It's fruit cheong. Please mix it with water and drink it!", "color": "#E65100" }
+          ]
+        }
+      ]
+    }
+  },
+  "self_check": [
+    { "ko": "어른 동작에 -(으)시-를 붙일 수 있어요.", "en": "I can add -(으)시- to an elder's actions." },
+    { "ko": "드시다 / 계시다 / 가시다를 알아요.", "en": "I know 드시다 / 계시다 / 가시다." },
+    { "ko": "안녕히 계세요와 안녕히 가세요의 차이를 알아요.", "en": "I know the difference between 안녕히 계세요 and 안녕히 가세요." },
+    { "ko": "어른께 높임말로 인사할 수 있어요.", "en": "I can greet elders using honorific speech." }
+  ]
+}
