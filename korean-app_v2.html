@@ -1871,6 +1871,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">07</span>
     <span class="lesson-title-text">엄마 생신 축하합니다!</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-8" onclick="selectUnit4(8)">
+    <span class="lesson-num">08</span>
+    <span class="lesson-title-text">무서울 것 같아요</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -6481,6 +6485,14 @@ const KIDS_READING_L4 = {
       { q: '왜 미래와 리아는 선물을 살 수 없었어요?', q_en: "Why couldn't Mirae and Lia buy a present?", options: ['돈이 없어서', '가게가 문을 닫아서', '시간이 없어서'], answer: 0 },
       { q: '엄마 생신은 언제예요?', q_en: "When is Mom's birthday?", options: ['6월 6일', '6월 16일', '10월 16일'], answer: 1 },
       { q: '애라는 무슨 쿠폰을 만들겠다고 했어요?', q_en: 'What coupon did Aera say she would make?', options: ['청소 쿠폰', '요리 쿠폰', '뽀뽀 쿠폰'], answer: 2 }
+    ]
+  },
+  8: {
+    passage: '가족이 놀이공원에 놀러 갔어요. 엄마는 무서운 놀이기구를 보고 무서울 것 같다고 했어요. 리암은 엄마 옆에서 지켜 드리겠다고 했어요. 카요는 벌써 무서운 얼굴이었어요. 하지만 카요는 아니라고 하면서 이번엔 잘 할 수 있을 것 같다고 했어요. 다 타고 나서 카요는 생각보다 괜찮다고 했어요. 모두 정말 재미있었어요!',
+    passage_en: 'The family went to an amusement park. Mom saw a scary ride and said it looked scary. Liam said he would stay by Mom\'s side and protect her. Kayo already looked scared. But Kayo said no, and that he thought he could do well this time. After riding it, Kayo said it was better than he thought. Everyone had so much fun!',
+    questions: [
+      { q: '리암이 엄마한테 뭐라고 했어요?', q_en: 'What did Liam say to Mom?', options: ['혼자 타세요', '제가 지켜 드릴게요', '저도 무서워요'], answer: 1 },
+      { q: '카요는 타고 나서 기분이 어땠어요?', q_en: 'How did Kayo feel after riding?', options: ['더 무서웠어요', '생각보다 괜찮았어요', '너무 힘들었어요'], answer: 1 }
     ]
   }
 };
@@ -12039,6 +12051,27 @@ const B4_SCENE_DATA = {
       [{ ko:'안아주기 쿠폰은 안아 드려.', en:'For the hug coupon, we hug her.', audio:'data/elem/level4/TTS/ep7/audio_11_안아주기_쿠폰은__안아_드려_.mp3' }],
       [{ ko:'언니, 나는 뽀뽀 쿠폰!', en:'Sis, I\'ll do a kiss coupon!', audio:'data/elem/level4/TTS/ep7/audio_12_언니__나는_뽀뽀_쿠폰_.mp3' }]
     ]
+  },
+  8: {
+    title: '무서울 것 같아요',
+    slides: [
+      'data/elem/level4/slides/ep8/무서울것같아요1.png',
+      'data/elem/level4/slides/ep8/무서울것같아요2.png',
+      'data/elem/level4/slides/ep8/무서울것같아요3.png',
+      'data/elem/level4/slides/ep8/무서울것같아요4.png',
+      'data/elem/level4/slides/ep8/무서울것같아요5.png',
+      'data/elem/level4/slides/ep8/무서울것같아요6.png',
+      'data/elem/level4/slides/ep8/무서울것같아요7.png'
+    ],
+    script: [
+      [{ ko:'우워~ 저기 좀 봐. 너무 무서울 것 같아.', en:'Whoa~ Look over there. It looks so scary.', audio:'data/elem/level4/TTS/ep8/audio_0_우워__저기_좀_봐__너무_무서울_것_같아_.mp3' }],
+      [{ ko:'괜찮을 거예요. 제가 옆에서 지켜 드릴게요.', en:'It\'ll be okay. I\'ll be right beside you and protect you.', audio:'data/elem/level4/TTS/ep8/audio_1_괜찮을_거예요__제가_옆에서_지켜_드릴게요_.mp3' }],
+      [{ ko:'카요는 벌써 무서운 것 같은데?', en:'Kayo already seems scared, doesn\'t he?', audio:'data/elem/level4/TTS/ep8/audio_2_카요는_벌써_무서운_것_같은데_.mp3' }],
+      [{ ko:'아니에요! 저도 이번엔 잘 할 수 있을 것 같아요.', en:'No! I think I can do well this time too.', audio:'data/elem/level4/TTS/ep8/audio_3_아니에요__저도_이번엔_잘_할_수_있을_것_같아요_.mp3' }],
+      [{ ko:'카요, 진짜 할 수 있을 것 같아?', en:'Kayo, do you really think you can do it?', audio:'data/elem/level4/TTS/ep8/audio_4_카요__진짜_할_수_있을_것_같아_.mp3' }],
+      [{ ko:'형~ 생각보다 괜찮은 것 같아!', en:'Bro~ It seems better than I thought!', audio:'data/elem/level4/TTS/ep8/audio_5_형_____생각보다_괜찮은_것_같아_.mp3' }],
+      [{ ko:'너무 재미있다!', en:'This is so much fun!', audio:'data/elem/level4/TTS/ep8/audio_6_너무_재미있다_.mp3' }]
+    ]
   }
 };
 
@@ -12066,7 +12099,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1,2,3,4,5,6,7].forEach(i => {
+  [1,2,3,4,5,6,7,8].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
