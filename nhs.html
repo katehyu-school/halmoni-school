@@ -3860,25 +3860,46 @@ function drawGridLines(){
 function clearCanvas(){if(!wCtx||!wCanvas)return;drawGridLines();}
 
 // ── GREETINGS DATA ─────────────────────────────────────
-const GREETINGS={
-  basic:[
-    {emoji:'👋',kr:'안녕하세요',rom:'an-nyeong-ha-se-yo',en:'Hello / Hi',usage:'Any time of day, to anyone'},
-    {emoji:'🤝',kr:'만나서 반가워요',rom:'man-na-seo ban-ga-wo-yo',en:'Nice to meet you',usage:'First-time meeting'},
-    {emoji:'🙏',kr:'감사합니다',rom:'gam-sa-ham-ni-da',en:'Thank you',usage:'Formal thank you'},
-    {emoji:'😊',kr:'천만에요',rom:'cheon-man-e-yo',en:"You're welcome / Not at all",usage:"Reply to 감사합니다"},
-    {emoji:'😔',kr:'죄송합니다',rom:'joe-song-ham-ni-da',en:"I'm sorry (formal)",usage:'Formal apology'},
-    {emoji:'👌',kr:'괜찮아요',rom:'gwaen-chan-a-yo',en:"It's okay / No problem",usage:"Reply to 죄송합니다 · casual apology"},
-    {emoji:'✅',kr:'네',rom:'ne',en:'Yes',usage:'Agree or confirm'},
-    {emoji:'❌',kr:'아니요',rom:'a-ni-yo',en:'No',usage:'Disagree or decline'},
-  ],
-  farewell:[
-    {emoji:'🚶',kr:'안녕히 가세요',rom:'an-nyeong-hi ga-se-yo',en:'Goodbye (to the person leaving)',usage:'Said by the one who stays'},
-    {emoji:'🏠',kr:'안녕히 계세요',rom:'an-nyeong-hi gye-se-yo',en:'Goodbye (to the person staying)',usage:'Said by the one who leaves'},
-    {emoji:'✌️',kr:'안녕',rom:'an-nyeong',en:'Bye (casual)',usage:'Between close friends'},
-    {emoji:'👁️',kr:'나중에 봐요',rom:'na-jung-e bwa-yo',en:'See you later',usage:'Friendly'},
-    {emoji:'🏫',kr:'내일 봐요',rom:'nae-il bwa-yo',en:'See you tomorrow',usage:'Before parting'},
-  ],
-};
+// ── GREETINGS TABLE DATA (반말 | Casual 존댓말 | Formal 존댓말) ──
+const GREETINGS_TABLE=[
+  { cat:'처음 만남', cat_en:'First Meeting', rows:[
+      {ban:'안녕',cas:'안녕하세요',for_:'안녕하십니까'},
+      {ban:'나는 ___야',cas:'저는 ___예요/이에요',for_:'저는 ___입니다'},
+      {ban:'만나서 반가워',cas:'만나서 반가워요',for_:'만나서 반갑습니다'},
+  ]},
+  { cat:'작별 인사', cat_en:'Farewell', tip:'💡 한국어에는 작별 인사가 두 가지예요 — 떠나는 사람과 남는 사람이 달라요!<br><em>Korean has two goodbyes — one for who leaves, one for who stays!</em>', rows:[
+      {ban:'다녀 올게',cas:'다녀 올게요',for_:'다녀 오겠습니다'},
+      {ban:'잘 다녀 와',cas:'잘 다녀 오세요',for_:'안녕히 다녀 오십시오'},
+      {ban:'잘 가',cas:'안녕히 가세요',for_:'안녕히 가십시오'},
+      {ban:'잘 있어',cas:'안녕히 계세요',for_:'안녕히 계십시오'},
+      {ban:'다음에 또 만나',cas:'다음에 또 만나요',for_:'다음에 또 뵙겠습니다'},
+  ]},
+  { cat:'잠자리에 들 때', cat_en:'Bedtime', rows:[
+      {ban:'잘 자',cas:'안녕히 주무세요',for_:'안녕히 주무십시오'},
+  ]},
+  { cat:'식사 예절', cat_en:'Meal Etiquette', rows:[
+      {ban:'잘 먹을게',cas:'잘 먹을게요',for_:'잘 먹겠습니다'},
+      {ban:'잘 먹었어',cas:'잘 먹었어요',for_:'잘 먹었습니다'},
+  ]},
+  { cat:'긍정과 부정', cat_en:'Agree / Disagree', rows:[
+      {ban:'응',cas:'네',for_:'네'},
+      {ban:'아니',cas:'아니요',for_:'아닙니다'},
+      {ban:'그래',cas:'그래요',for_:'그렇습니다'},
+  ]},
+  { cat:'양보와 배려', cat_en:'Consideration', rows:[
+      {ban:'미안',cas:'미안해요',for_:'미안합니다'},
+      {ban:'',cas:'죄송해요',for_:'죄송합니다'},
+      {ban:'실례',cas:'실례해요',for_:'실례합니다'},
+      {ban:'천만에',cas:'천만에요',for_:''},
+      {ban:'괜찮아',cas:'괜찮아요',for_:'괜찮습니다'},
+      {ban:'부탁해',cas:'부탁해요',for_:'부탁드립니다'},
+  ]},
+  { cat:'칭찬과 축하', cat_en:'Praise & Congrats', rows:[
+      {ban:'축하해',cas:'축하해요',for_:'축하합니다'},
+      {ban:'수고했어',cas:'수고했어요',for_:'수고하셨습니다'},
+      {ban:'잘 했어',cas:'잘 했어요',for_:'잘 하셨습니다'},
+  ]},
+];
 const CLASSROOM_TEACHER=[
   {kr:'따라 하세요',rom:'tta-ra ha-se-yo',en:'Repeat after me'},
   {kr:'읽어 보세요',rom:'il-geo bo-se-yo',en:'Please read'},
@@ -4174,12 +4195,21 @@ function buildStructure(){
 // ── GREETINGS RENDER ───────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildGreetings(){
-  // 기본 인사 / 작별 인사 카드 (emoji + usage 컨텍스트 포함)
-  function gCards(list){
-    return list.map(g=>'<div class="greet-card" onclick="speakTTS(\''+g.kr+'\')">'
-      +'<div class="greet-emoji">'+g.emoji+'</div>'
-      +'<div class="greet-body"><div class="greet-kr">'+g.kr+' <span class="greet-speak-icon">🔊</span></div><div class="greet-rom">'+g.rom+'</div><div class="greet-en">'+g.en+'</div></div>'
-      +'<div class="greet-usage">'+g.usage+'</div></div>').join('');
+  // 기본 인사 — 반말 | Casual 존댓말 | Formal 존댓말 3열 비교표
+  function speakCell(txt){
+    if(!txt) return '<td style="color:var(--gray-200);text-align:center;">—</td>';
+    return '<td style="cursor:pointer" onclick="speakTTS(\''+txt.replace(/'/g,"\\'")+'\')">'+txt+' <span class="greet-speak-icon">🔊</span></td>';
+  }
+  function gTable(data){
+    let rows='<tr><th>반말</th><th>Casual 존댓말</th><th>Formal 존댓말</th></tr>';
+    data.forEach(group=>{
+      rows+='<tr><td colspan="3" style="background:var(--teal-50);font-weight:800;color:var(--teal-dark);font-size:13px;padding:8px 12px;">'+group.cat+' <span style="font-weight:400;color:var(--warm-400);font-size:11px;">· '+group.cat_en+'</span></td></tr>';
+      if(group.tip) rows+='<tr><td colspan="3" style="padding:0;border-top:none;"><div class="farewell-tip" style="margin:8px 12px;">'+group.tip+'</div></td></tr>';
+      group.rows.forEach(r=>{
+        rows+='<tr>'+speakCell(r.ban)+speakCell(r.cas)+speakCell(r.for_)+'</tr>';
+      });
+    });
+    return '<table class="structure-ex-table">'+rows+'</table>';
   }
   // 교실 표현 카드 (텍스트 중심)
   function cCards(list){
@@ -4188,10 +4218,28 @@ function buildGreetings(){
       +'<div class="class-rom">'+c.rom+'</div>'
       +'<div class="class-en">'+c.en+'</div></div>').join('');
   }
-  const tabs=[['basic','👋 기본 인사'],['classroom','🏫 교실 표현'],['farewell','👋 작별 인사']];
-  return '<div class="basics-intro">클릭하면 발음을 들을 수 있어요! 선생님 앞에서는 항상 존댓말을 써요.<br><em>Click any card to hear it. Always use formal speech with your teacher.</em></div>'
+  // Usage 탭 — 반말/Casual 존댓말/Formal 존댓말 언제 쓰는지 가이드
+  const usageCards=[
+    {emoji:'😎',title:'반말 Banmal',color:'coral',who:'친구, 나보다 어리거나 아주 가까운 사이',who_en:'Friends, younger people, very close relationships',ex:'안녕! 뭐 해?',ex_en:'Hey! What are you doing?'},
+    {emoji:'🙂',title:'Casual 존댓말 (해요체)',color:'teal',who:'처음 만난 사람, 어른, 선생님과 일상 대화 — 가장 흔히 쓰는 존댓말',who_en:'Strangers, elders, everyday talk with teachers — the most common polite form',ex:'안녕하세요! 뭐 하세요?',ex_en:'Hello! What are you doing?'},
+    {emoji:'🎙️',title:'Formal 존댓말 (합쇼체)',color:'purple',who:'발표, 뉴스, 방송, 면접, 아주 격식 있는 자리',who_en:'Presentations, news, broadcasts, interviews, very formal settings',ex:'안녕하십니까! 발표를 시작하겠습니다.',ex_en:"Hello! I'll begin the presentation."},
+  ];
+  const usageTab='<div class="basics-intro">같은 말도 상대와 상황에 따라 3가지로 달라져요!<br><em>The same phrase changes depending on who you\'re talking to.</em></div>'
+    +usageCards.map(u=>'<div class="vconj-verb-card" style="margin-bottom:12px;">'
+      +'<div class="vconj-section-title" style="margin:0 0 8px;">'+u.emoji+' '+u.title+'</div>'
+      +'<div style="font-size:12.5px;color:var(--gray-900);margin-bottom:4px;"><strong>누구에게?</strong> '+u.who+'</div>'
+      +'<div style="font-size:11px;color:var(--warm-400);margin-bottom:8px;"><em>'+u.who_en+'</em></div>'
+      +'<div class="qna-bubble a-bubble" style="cursor:pointer" onclick="speakTTS(\''+u.ex+'\')">'+u.ex+' 🔊<br><span style="font-size:11px;color:var(--warm-500)">'+u.ex_en+'</span></div>'
+    +'</div>').join('')
+    +'<div class="structure-note" style="background:var(--amber-lt);border-color:#e8b86a;color:var(--amber-600);margin-top:8px;">'
+    +'⭐ <strong>빠른 판단법 · Quick Guide</strong><br>'
+    +'친구·동생 → 반말 &nbsp;|&nbsp; 처음 보는 사람·어른 → Casual 존댓말 &nbsp;|&nbsp; 발표·방송 → Formal 존댓말<br>'
+    +'<em>Friends/younger → Banmal | Strangers/elders → Casual polite | Presentations/broadcast → Formal polite</em>'
+    +'</div>';
+  const tabs=[['basic','👋 기본 인사'],['classroom','🏫 교실 표현'],['usage','📌 Usage']];
+  return '<div class="basics-intro">클릭하면 발음을 들을 수 있어요! 선생님 앞에서는 항상 존댓말을 써요.<br><em>Click any cell to hear it. Always use formal speech with your teacher.</em></div>'
     +'<div class="btab-bar">'+tabs.map(([id,lbl],i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-greet" data-tab="'+id+'" onclick="switchBtab(\'bp-greet\',\''+id+'\')">'+lbl+'</button>').join('')+'</div>'
-    +'<div id="bp-greet-basic" class="btab-panel active">'+gCards(GREETINGS.basic)+'</div>'
+    +'<div id="bp-greet-basic" class="btab-panel active">'+gTable(GREETINGS_TABLE)+'</div>'
     +'<div id="bp-greet-classroom" class="btab-panel">'
       +'<div class="class-cols">'
         +'<div class="class-col">'
@@ -4204,10 +4252,7 @@ function buildGreetings(){
         +'</div>'
       +'</div>'
     +'</div>'
-    +'<div id="bp-greet-farewell" class="btab-panel">'
-      +'<div class="farewell-tip">💡 한국어에는 작별 인사가 두 가지예요 — 떠나는 사람과 남는 사람이 달라요!<br><em>Korean has two goodbyes — one for who leaves, one for who stays!</em></div>'
-      +gCards(GREETINGS.farewell)
-    +'</div>';
+    +'<div id="bp-greet-usage" class="btab-panel">'+usageTab+'</div>';
 }
 
 // ══════════════════════════════════════════════════════
