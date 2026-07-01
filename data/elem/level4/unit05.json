@@ -67,6 +67,35 @@
             { "korean": "할머니 많이 따 갈게요!", "english": "Grandma, I'll pick a lot and take them!", "highlight": "따 갈게요" },
             { "korean": "제가 도울게요.", "english": "I'll help.", "highlight": "도울게요" }
           ]
+        },
+        {
+          "id": "g05_adj_modifier_preview",
+          "tier": "preview",
+          "title": "덜 익은 과일, 신 과일",
+          "subtitle": "형용사 관형절 (preview) — describing words + noun",
+          "pattern": "형용사/상태 어간 + -(으)ㄴ + 명사",
+          "description": "Notice how '덜 익은 과일' and '신 과일' describe the fruit directly, right before the noun. We'll learn the full rule later — for now, just remember these two phrases!",
+          "rule_boxes": [
+            {
+              "color": "blue",
+              "label": "🔵 받침 없으면 → -ㄴ · No final consonant",
+              "examples": ["시다(sour) → 신 과일 (sour fruit)", "크다(big) → 큰 과일 (big fruit)"]
+            },
+            {
+              "color": "green",
+              "label": "✅ 받침 있으면 → -은 · Final consonant",
+              "examples": ["익다(ripe) → 익은 과일 (ripe fruit)", "덜 익다(not fully ripe) → 덜 익은 과일 (less-ripe fruit)"]
+            },
+            {
+              "color": "amber",
+              "label": "💡 나중에 더 배워요! · More coming later",
+              "examples": ["지금은 '덜 익은 과일', '신 과일' 이 두 표현만 기억해요!", "For now, just remember these two set phrases."]
+            }
+          ],
+          "examples": [
+            { "korean": "덜 익은 과일이 더 좋아.", "english": "Less-ripe fruit is better.", "highlight": "덜 익은" },
+            { "korean": "신 과일에 설탕을 넣어서 만든거야.", "english": "It's made by adding sugar to sour fruit.", "highlight": "신" }
+          ]
         }
       ]
     },
@@ -91,7 +120,7 @@
             { "speaker": "할머니", "color": "green", "text": "괜찮아. 구스베리 청을 만들거야. 덜 익은 과일이 더 좋아.", "en": "It's okay. We're making gooseberry cheong. Less ripe fruit is better.", "type": "given" },
             { "speaker": "리암", "color": "blue", "text": "청이 뭐예요?", "en": "What is cheong?", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "신 과일에 설탕을 넣어서 만든거야.", "en": "It's made by adding sugar to sour fruit.", "type": "given" },
-            { "speaker": "할머니", "color": "green", "text": "핑크색 쥬스 생각나지?", "en": "You remember the pink juice, right?", "type": "given" },
+            { "speaker": "할머니", "color": "green", "text": "핑크색 주스 생각나지?", "en": "You remember the pink juice, right?", "type": "given" },
             { "speaker": "리암", "color": "blue", "text": "아항. 할머니 많이 따 갈게요!", "en": "Ahh! Grandma, I'll pick a lot!", "type": "given" }
           ]
         }
