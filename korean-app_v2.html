@@ -1867,6 +1867,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">06</span>
     <span class="lesson-title-text">할아버지 안녕하세요?</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-7" onclick="selectUnit4(7)">
+    <span class="lesson-num">07</span>
+    <span class="lesson-title-text">엄마 생신 축하합니다!</span>
+  </div>
 </nav>
 
 <!-- 컨텐츠 영역 -->
@@ -11993,6 +11997,39 @@ const B4_SCENE_DATA = {
       [{ ko:'운동을 하셔야 다리가 더 튼튼해져요.', en:'Your legs get stronger when you exercise.', audio:'data/elem/level4/TTS/L4_02/audio_9_운동을_하셔야_다리가_더_튼튼해져요_.mp3' }],
       [{ ko:'아이고, 알았어. 나도 운동하러 갈게.', en:'Aigo, okay. I\'ll go exercise too.', audio:'data/elem/level4/TTS/L4_02/audio_10_아이고__알았어__나도_운동하러_갈게_.mp3' }]
     ]
+  },
+  7: {
+    title: '엄마 생신 축하합니다!',
+    slides: [
+      'data/elem/level4/slides/ep7/생신축하합니다1.png',
+      'data/elem/level4/slides/ep7/생신축하합니다2.png',
+      'data/elem/level4/slides/ep7/생신축하합니다3.png',
+      'data/elem/level4/slides/ep7/생신축하합니다4.png',
+      'data/elem/level4/slides/ep7/생신축하합니다5.png',
+      'data/elem/level4/slides/ep7/생신축하합니다6.png',
+      'data/elem/level4/slides/ep7/생신축하합니다7.png',
+      'data/elem/level4/slides/ep7/생신축하합니다8.png',
+      'data/elem/level4/slides/ep7/생신축하합니다9.png',
+      'data/elem/level4/slides/ep7/생신축하합니다10.png',
+      'data/elem/level4/slides/ep7/생신축하합니다11.png',
+      'data/elem/level4/slides/ep7/생신축하합니다12.png',
+      'data/elem/level4/slides/ep7/생신축하합니다13.png'
+    ],
+    script: [
+      [{ ko:'리아, 엄마 생신 선물 준비했어?', en:'Lia, did you prepare Mom\'s birthday present?', audio:'data/elem/level4/TTS/ep7/audio_0_리아__엄마_생신_선물_준비했어_.mp3' }],
+      [{ ko:'엄마 생신이 언제야?', en:'When is Mom\'s birthday?', audio:'data/elem/level4/TTS/ep7/audio_1_엄마_생신이_언제야_.mp3' }],
+      [{ ko:'몇월 며칠이냐고? 6월 16일이잖아.', en:'You\'re asking what date? It\'s June 16th!', audio:'data/elem/level4/TTS/ep7/audio_2_몇월_며칠이냐고___6월_16일이잖아_.mp3' }],
+      [{ ko:'맞어! 근데 나 선물을 살 돈이 없어.', en:'That\'s right! But I don\'t have money to buy a present.', audio:'data/elem/level4/TTS/ep7/audio_3_맞어__근데_나_선물을_살_돈이_없어_.mp3' }],
+      [{ ko:'나도 이번 달 용돈 다 썼어.', en:'Me too. I spent all my allowance this month.', audio:'data/elem/level4/TTS/ep7/audio_4_나도_이번_달_용돈_다_썼어_.mp3' }],
+      [{ ko:'선물을 만들어 드릴까?', en:'Should we make her a present?', audio:'data/elem/level4/TTS/ep7/audio_5_선물을_만들어_드릴까_.mp3' }],
+      [{ ko:'좋은 아이디어 있어?', en:'Do you have a good idea?', audio:'data/elem/level4/TTS/ep7/audio_6_좋은_아이디어_있어_.mp3' }],
+      [{ ko:'만능 쿠폰 어때?', en:'How about an all-purpose coupon?', audio:'data/elem/level4/TTS/ep7/audio_7_만능_쿠폰_어때_.mp3' }],
+      [{ ko:'마사지 쿠폰을 내면 어깨를 주물러 드리자.', en:'If she uses the massage coupon, let\'s rub her shoulders.', audio:'data/elem/level4/TTS/ep7/audio_8_마사지_쿠폰을_내면_어깨를_주물러_드리자_.mp3' }],
+      [{ ko:'청소 쿠폰은 청소를 도와 드리고,', en:'For the cleaning coupon, we\'ll help her clean, and', audio:'data/elem/level4/TTS/ep7/audio_9_청소_쿠폰은_청소를_도와_드리고_.mp3' }],
+      [{ ko:'요리 쿠폰은 요리를 해 드려야지.', en:'For the cooking coupon, we should cook for her.', audio:'data/elem/level4/TTS/ep7/audio_10_요리_쿠폰은_요리를_해_드려야지_.mp3' }],
+      [{ ko:'안아주기 쿠폰은 안아 드려.', en:'For the hug coupon, we hug her.', audio:'data/elem/level4/TTS/ep7/audio_11_안아주기_쿠폰은__안아_드려_.mp3' }],
+      [{ ko:'언니, 나는 뽀뽀 쿠폰!', en:'Sis, I\'ll do a kiss coupon!', audio:'data/elem/level4/TTS/ep7/audio_12_언니__나는_뽀뽀_쿠폰_.mp3' }]
+    ]
   }
 };
 
@@ -12020,7 +12057,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1,2,3,4,5,6].forEach(i => {
+  [1,2,3,4,5,6,7].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
