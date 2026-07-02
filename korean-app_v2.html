@@ -1918,6 +1918,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">08</span>
     <span class="lesson-title-text">무서울 것 같아요</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-9" onclick="selectUnit4(9)">
+    <span class="lesson-num">09</span>
+    <span class="lesson-title-text">이 꽃의 꽃말은?</span>
+  </div>
   <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
   <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-4" onclick="openKidsFC()">
     <span class="lesson-num">🃏</span>
@@ -6541,6 +6545,15 @@ const KIDS_READING_L4 = {
     questions: [
       { q: '리암이 엄마한테 뭐라고 했어요?', q_en: 'What did Liam say to Mom?', options: ['혼자 타세요', '제가 지켜 드릴게요', '저도 무서워요'], answer: 1 },
       { q: '카요는 타고 나서 기분이 어땠어요?', q_en: 'How did Kayo feel after riding?', options: ['더 무서웠어요', '생각보다 괜찮았어요', '너무 힘들었어요'], answer: 1 }
+    ]
+  },
+  9: {
+    passage: '리아는 마당에 예쁜 리시안셔스가 만발한 것을 봤어요. 미래는 엄마한테 드릴 멋진 꽃다발을 만들자고 했어요. 리아와 미래는 엄마가 좋아하는 꽃으로 꽃다발을 만들었어요. 리아는 미래한테 이 꽃의 꽃말을 물어봤어요. 리시안셔스의 꽃말은 영원한 사랑이었어요. 리아는 너무 낭만적이라고 생각했어요. 미래가 씩씩한 꽃도 가리키면서 물어봤어요. 리아는 웃으면서 튼튼한 사랑이냐고 농담했어요.',
+    passage_en: 'Lia saw a pretty lisianthus in full bloom in the yard. Mirae suggested making a nice bouquet to give Mom. Lia and Mirae made a bouquet with the flowers Mom likes. Lia asked Mirae what this flower\'s meaning was. The meaning of lisianthus was eternal love. Lia thought that was so romantic. Mirae pointed at a sturdy-looking flower too and asked about it. Lia laughed and joked, asking if it meant "strong love."',
+    questions: [
+      { q: '리아와 미래는 무엇을 만들었어요?', q_en: 'What did Lia and Mirae make?', options: ['꽃병', '꽃다발', '꽃그림'], answer: 1 },
+      { q: '리시안셔스의 꽃말은 뭐예요?', q_en: "What is the meaning of lisianthus?", options: ['변덕', '영원한 사랑', '우정'], answer: 1 },
+      { q: '어떤 꽃으로 꽃다발을 만들었어요?', q_en: 'What kind of flowers did they use for the bouquet?', options: ['아무 꽃', '엄마가 좋아하는 꽃', '제일 비싼 꽃'], answer: 1 }
     ]
   }
 };
@@ -12244,6 +12257,29 @@ const B4_SCENE_DATA = {
       [{ ko:'형~ 생각보다 괜찮은 것 같아!', en:'Bro~ It seems better than I thought!', audio:'data/elem/level4/TTS/ep8/audio_5_형_____생각보다_괜찮은_것_같아_.mp3' }],
       [{ ko:'너무 재미있다!', en:'This is so much fun!', audio:'data/elem/level4/TTS/ep8/audio_6_너무_재미있다_.mp3' }]
     ]
+  },
+  9: {
+    title: '이 꽃의 꽃말은?',
+    slides: [
+      'data/elem/level4/slides/ep9/영원한사랑1.png',
+      'data/elem/level4/slides/ep9/영원한사랑2.png',
+      'data/elem/level4/slides/ep9/영원한사랑3.png',
+      'data/elem/level4/slides/ep9/영원한사랑4.png',
+      'data/elem/level4/slides/ep9/영원한사랑5.png',
+      'data/elem/level4/slides/ep9/영원한사랑6.png',
+      'data/elem/level4/slides/ep9/영원한사랑7.png',
+      'data/elem/level4/slides/ep9/영원한사랑8.png'
+    ],
+    script: [
+      [{ ko:'언니, 마당에 예쁜 리시안셔스가 만발했어.', en:'Sis, a pretty lisianthus is in full bloom in the yard.', audio:'data/elem/level4/TTS/ep9/audio_0_언니__마당에_예쁜_리시안셔스가_만발했어_.mp3' }],
+      [{ ko:'엄마한테 드릴 멋진 꽃다발을 만들까?', en:'Shall we make a nice bouquet to give Mom?', audio:'data/elem/level4/TTS/ep9/audio_1_엄마한테_드릴_멋진_꽃다발을_만들까_.mp3' }],
+      [{ ko:'좋아! 엄마가 좋아하는 꽃으로 만들자.', en:'Sounds good! Let\'s make it with the flowers Mom likes.', audio:'data/elem/level4/TTS/ep9/audio_2_좋아__엄마가_좋아하는_꽃으로_만들자_.mp3' }],
+      [{ ko:'언니, 이 꽃의 꽃말이 뭔지 알아?', en:'Sis, do you know what this flower\'s meaning is?', audio:'data/elem/level4/TTS/ep9/audio_3_언니__이_꽃의_꽃말이_뭔지_알아_.mp3' }],
+      [{ ko:'뭐야?', en:'What is it?', audio:'data/elem/level4/TTS/ep9/audio_4_뭐야_.mp3' }],
+      [{ ko:'영원한 사랑이래. 너무 낭만적이지?', en:'They say it\'s eternal love. Isn\'t that so romantic?', audio:'data/elem/level4/TTS/ep9/audio_5_영원한_사랑이래__너무_낭만적이지_.mp3' }],
+      [{ ko:'그럼 이 씩씩한 꽃은?', en:'Then what about this sturdy-looking flower?', audio:'data/elem/level4/TTS/ep9/audio_6_그럼_이_씩씩한_꽃은_.mp3' }],
+      [{ ko:'그건… 튼튼한 사랑?', en:'That one... strong love?', audio:'data/elem/level4/TTS/ep9/audio_7_그건____튼튼한_사랑_.mp3' }]
+    ]
   }
 };
 
@@ -12271,7 +12307,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1,2,3,4,5,6,7,8].forEach(i => {
+  [1,2,3,4,5,6,7,8,9].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
