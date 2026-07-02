@@ -91,7 +91,7 @@
             }
           ],
           "examples": [
-            { "korean": "카요, 영화 보면서 마실 주스 가지고 왔어.", "english": "Kayo, I brought juice for you to drink while watching the movie.", "highlight": "마실" },
+            { "korean": "카요, 영화를 보면서 마실 주스를 가지고 왔어.", "english": "Kayo, I brought juice for you to drink while watching the movie.", "highlight": "마실" },
             { "korean": "내일 형이랑 같이 볼 영화가 있어요.", "english": "There's a movie I'm going to watch with my brother tomorrow.", "highlight": "볼" }
           ]
         },
@@ -132,7 +132,7 @@
           "scene": "🍿 영화 보면서",
           "scene_en": "While watching a movie",
           "lines": [
-            { "speaker": "할머니", "color": "teal", "text": "카요, 영화 보면서 마실 주스 가지고 왔어.", "en": "Kayo, I brought juice for you to drink while watching the movie.", "type": "given" },
+            { "speaker": "할머니", "color": "teal", "text": "카요, 영화를 보면서 마실 주스를 가지고 왔어.", "en": "Kayo, I brought juice for you to drink while watching the movie.", "type": "given" },
             { "speaker": "할머니", "color": "teal", "text": "어제 본 영화를 또 보는 거야?", "en": "Are you watching the movie you watched yesterday, again?", "type": "given" },
             { "speaker": "카요", "color": "purple", "text": "너무 재미있는 영화라서 또 보는 거예요.", "en": "It's such a fun movie so I'm watching it again.", "type": "given" }
           ]
@@ -158,7 +158,7 @@
       ],
       "fill_items": [
         { "en": "Are you watching the movie you watched yesterday, again?", "q": "어제", "suffix": " 영화를 또 보는 거야?", "opts": ["본", "볼", "보는"], "ans": "본" },
-        { "en": "I brought juice for you to drink while watching the movie.", "q": "영화 보면서", "suffix": " 주스 가지고 왔어.", "opts": ["마실", "마신", "마시는"], "ans": "마실" },
+        { "en": "I brought juice for you to drink while watching the movie.", "q": "영화를 보면서", "suffix": " 주스를 가지고 왔어.", "opts": ["마실", "마신", "마시는"], "ans": "마실" },
         { "en": "There's a movie I'm going to watch with my brother tomorrow.", "q": "내일 형이랑 같이", "suffix": " 영화가 있어요.", "opts": ["볼", "본", "보는"], "ans": "볼" },
         { "en": "It's such a fun movie so I'm watching it again.", "q": "너무", "suffix": " 영화라서 또 보는 거예요.", "opts": ["재미있는", "재미있은", "재미있을"], "ans": "재미있는" },
         { "en": "A movie with robots in it?", "q": "로봇", "suffix": " 영화?", "opts": ["나오는", "나온", "나올"], "ans": "나오는" }
@@ -195,12 +195,12 @@
       "step1_chunks": [
         {
           "scene": "🥤",
-          "sentence": "영화 보면서 마실 주스 가지고 왔어.",
+          "sentence": "영화를 보면서 마실 주스를 가지고 왔어.",
           "english": "I brought juice for you to drink while watching the movie.",
           "hint": "마시다 → 마실 + 명사 (동사 미래 관형)",
           "chunks": [
-            { "text": "영화 보면서", "type": "particle", "en": "while watching the movie" },
-            { "text": "마실 주스", "type": "name", "en": "juice to drink" },
+            { "text": "영화를 보면서", "type": "particle", "en": "while watching the movie" },
+            { "text": "마실 주스를", "type": "name", "en": "juice to drink" },
             { "text": "가지고 왔어.", "type": "verb", "en": "I brought" }
           ]
         },
