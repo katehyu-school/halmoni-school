@@ -766,7 +766,13 @@ function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'
 function escA(s){return s==null?'':String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/[\r\n]+/g,' ');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'},jungmin:{bg:'#A8D8EA',emoji:'👦'},mina:{bg:'#FFB7C5',emoji:'👧'},staff:{bg:'#D4E8D0',emoji:'🎫'}};
 // ── TRIAL ACCOUNTS ── ?trial URL param (set by index.html for role='trial' members) → 지정된 에피소드만 열람 가능
-const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial');
+// localStorage에 플래그를 저장해서, start.html 등 쿼리스트링 없는 내부 링크를 거쳐도 잠금이 풀리지 않게 함
+(function(){
+  const _p = new URLSearchParams(location.search);
+  if (_p.has('trial')) { try{ localStorage.setItem('nhs_trial','1'); }catch(e){} }
+  else if (_p.has('name')) { try{ localStorage.removeItem('nhs_trial'); }catch(e){} } // 일반 로그인은 체험 플래그 해제
+})();
+const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial') || (function(){ try{ return localStorage.getItem('nhs_trial')==='1'; }catch(e){ return false; } })();
 const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];
 const L1_EPISODES=[
   {id:'ep01',label:'안녕! 나는 정민이야.'},
@@ -4001,7 +4007,7 @@ function setLevel(btn){
 function buildBasicsSidebar(){
   const list=document.getElementById('ep-list');
   list.innerHTML=
-    '<a href="start.html" target="_blank" style="display:block;margin:0 0 10px;padding:9px 14px;background:linear-gradient(135deg,#0a2540,#0d3d5c);border-radius:10px;text-decoration:none;color:#4ecdc4;font-size:12px;font-weight:700;">🗺 학습 경로 보기 · Learning Roadmap</a>'
+    (NHS_IS_TRIAL?'':'<a href="start.html" target="_blank" style="display:block;margin:0 0 10px;padding:9px 14px;background:linear-gradient(135deg,#0a2540,#0d3d5c);border-radius:10px;text-decoration:none;color:#4ecdc4;font-size:12px;font-weight:700;">🗺 학습 경로 보기 · Learning Roadmap</a>')
     +BASICS_TOPICS.map(t=>
     '<div class="basics-topic-item'+(t.id===curBasicsTopic?' active':'')+'" id="bt-'+t.id+'" onclick="loadBasics(\''+t.id+'\')">'
     +'<div class="basics-topic-icon">'+t.icon+'</div>'

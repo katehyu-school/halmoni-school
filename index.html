@@ -856,6 +856,9 @@ function enterAs(user) {
   } else if (role === 'trial') {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
     document.querySelector('.welcome-text p').innerHTML = '🔓 체험 계정 · Hangeul Quest ep01·05·07 체험 가능 <span style="background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#4ecdc4;">TRIAL</span>';
+    // 체험 계정은 HQ(13+)만 노출 — Kindergarten/Kids는 비공개 가정반이라 숨김
+    document.getElementById('card0').style.display = 'none';
+    document.getElementById('card1').style.display = 'none';
   } else {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
     document.querySelector('.welcome-text p').textContent = '수업을 선택해 주세요 · Please select your class';
