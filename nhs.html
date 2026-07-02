@@ -765,9 +765,9 @@ let _nhsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false};
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function escA(s){return s==null?'':String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/[\r\n]+/g,' ');}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'},jungmin:{bg:'#A8D8EA',emoji:'👦'},mina:{bg:'#FFB7C5',emoji:'👧'},staff:{bg:'#D4E8D0',emoji:'🎫'}};
-// ── TRIAL ACCOUNTS ── ?trial URL param (set by index.html for role='trial' members) → ep01~03만 열람 가능
+// ── TRIAL ACCOUNTS ── ?trial URL param (set by index.html for role='trial' members) → 지정된 에피소드만 열람 가능
 const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial');
-const NHS_TRIAL_EP_LIMIT = 3;
+const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];
 const L1_EPISODES=[
   {id:'ep01',label:'안녕! 나는 정민이야.'},
   {id:'ep02',label:'누구예요?'},
@@ -818,7 +818,7 @@ function buildSidebar(lv){
   const mkItem=(ep,i,level)=>ep.disabled
     ?`<div class="ep-item" style="cursor:default"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}${ep.locked?' 🔒':''}</div></div>`
     :`<div class="ep-item" id="ep-item-${level}-${ep.id}" data-epkey="${level}_${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}</div><span class="ep-done" style="opacity:${_done.has(level+'_'+ep.id)?1:0}">✅</span></div>`;
-  const trialLock=(list)=>NHS_IS_TRIAL?list.map((ep,i)=>i<NHS_TRIAL_EP_LIMIT?ep:{...ep,disabled:true,locked:true}):list;
+  const trialLock=(list)=>NHS_IS_TRIAL?list.map(ep=>NHS_TRIAL_EPS.includes(ep.id)?ep:{...ep,disabled:true,locked:true}):list;
   let html='';
   if(lv==='L1'){
     html=trialLock(L1_EPISODES).map((ep,i)=>mkItem(ep,i,'L1')).join('');
@@ -3978,7 +3978,7 @@ const SPEAK_CARDS=[
 function setLevel(btn){
   const _lv=btn.textContent.trim();
   if(NHS_IS_TRIAL&&(_lv==='Level 2'||_lv==='Level 3')){
-    alert('체험판에서는 Level 1 (ep01~0'+NHS_TRIAL_EP_LIMIT+')만 이용할 수 있어요.\n전체 이용은 hangeulquest@gmail.com으로 문의해 주세요!\n\nThis trial covers Level 1 (ep01~0'+NHS_TRIAL_EP_LIMIT+') only. Email hangeulquest@gmail.com for full access.');
+    alert('체험판에서는 Level 1의 일부 에피소드만 이용할 수 있어요.\n전체 이용은 hangeulquest@gmail.com으로 문의해 주세요!\n\nThis trial covers a few Level 1 episodes only. Email hangeulquest@gmail.com for full access.');
     return;
   }
   document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
@@ -5006,7 +5006,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
     const bar=document.createElement('div');
     bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
-    bar.innerHTML='🔓 체험판 · Trial — Level 1 ep01~0'+NHS_TRIAL_EP_LIMIT+' 열람 가능 · 전체 이용 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>';
+    bar.innerHTML='🔓 체험판 · Trial — Level 1 '+NHS_TRIAL_EPS.join(', ')+' 열람 가능 · 전체 이용 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>';
     document.body.insertBefore(bar, document.body.firstChild);
   }
 });

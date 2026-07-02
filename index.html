@@ -855,7 +855,7 @@ function enterAs(user) {
     if (isAdmin) activateAdmin();
   } else if (role === 'trial') {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
-    document.querySelector('.welcome-text p').innerHTML = '🔓 체험 계정 · Hangeul Quest ep01~03 체험 가능 <span style="background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#4ecdc4;">TRIAL</span>';
+    document.querySelector('.welcome-text p').innerHTML = '🔓 체험 계정 · Hangeul Quest ep01·05·07 체험 가능 <span style="background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#4ecdc4;">TRIAL</span>';
   } else {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
     document.querySelector('.welcome-text p').textContent = '수업을 선택해 주세요 · Please select your class';
@@ -1018,7 +1018,7 @@ async function toggleAtt(name, current, btn) {
       <input type="text" id="newPin"      placeholder="PIN 번호 · PIN  예: 1234" maxlength="8">
       <label style="display:flex;align-items:center;gap:7px;margin:2px 2px 8px;font-size:12px;color:rgba(180,215,235,.6);cursor:pointer">
         <input type="checkbox" id="newIsTrial" style="width:14px;height:14px;accent-color:#4ecdc4">
-        🔓 체험 계정 (HQ ep01~03만 열람) · Trial account
+        🔓 체험 계정 (HQ ep01·05·07만 열람) · Trial account
       </label>
       <div class="att-add-form-btns">
         <button class="att-form-save"   onclick="saveNewMember()">저장</button>
