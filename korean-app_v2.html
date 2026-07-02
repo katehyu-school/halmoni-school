@@ -1922,6 +1922,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">09</span>
     <span class="lesson-title-text">이 꽃의 꽃말은?</span>
   </div>
+  <div class="lesson-item" id="b4-lesson-10" onclick="selectUnit4(10)">
+    <span class="lesson-num">10</span>
+    <span class="lesson-title-text">형이랑 같이 볼 영화</span>
+  </div>
   <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
   <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-4" onclick="openKidsFC()">
     <span class="lesson-num">🃏</span>
@@ -6554,6 +6558,15 @@ const KIDS_READING_L4 = {
       { q: '리아와 미래는 무엇을 만들었어요?', q_en: 'What did Lia and Mirae make?', options: ['꽃병', '꽃다발', '꽃그림'], answer: 1 },
       { q: '리시안셔스의 꽃말은 뭐예요?', q_en: "What is the meaning of lisianthus?", options: ['변덕', '영원한 사랑', '우정'], answer: 1 },
       { q: '어떤 꽃으로 꽃다발을 만들었어요?', q_en: 'What kind of flowers did they use for the bouquet?', options: ['아무 꽃', '엄마가 좋아하는 꽃', '제일 비싼 꽃'], answer: 1 }
+    ]
+  },
+  10: {
+    passage: '카요는 어제 본 영화를 오늘 또 봤어요. 너무 재미있는 영화라서 또 보고 싶었어요. 할머니가 새로 볼 만한 영화가 없냐고 물어봤어요. 카요는 내일 형이랑 같이 볼 영화가 있다고 했어요. 그 영화는 우주 도깨비가 나오는 무서운 영화예요. 할머니는 그런 영화를 안 좋아하실 것 같아요.',
+    passage_en: 'Kayo watched the movie he watched yesterday again today. It was such a fun movie that he wanted to watch it again. Grandma asked if there was a new movie worth watching. Kayo said there was a movie he was going to watch with his brother tomorrow. That movie is a scary movie with a space goblin in it. Grandma probably wouldn\'t like that kind of movie.',
+    questions: [
+      { q: '카요는 오늘 무슨 영화를 봤어요?', q_en: 'What movie did Kayo watch today?', options: ['새 영화', '어제 본 영화', '형 영화'], answer: 1 },
+      { q: '내일 형이랑 같이 볼 영화는 어떤 내용이에요?', q_en: "What is the movie Kayo will watch with his brother about?", options: ['로봇이 나와요', '우주 도깨비가 나와요', '공주가 나와요'], answer: 1 },
+      { q: '할머니는 그 영화를 어떻게 생각할 것 같아요?', q_en: 'How does Grandma probably feel about that movie?', options: ['좋아하실 것 같아요', '안 좋아하실 것 같아요', '무서워하실 것 같아요'], answer: 1 }
     ]
   }
 };
@@ -12280,6 +12293,31 @@ const B4_SCENE_DATA = {
       [{ ko:'그럼 이 씩씩한 꽃은?', en:'Then what about this sturdy-looking flower?', audio:'data/elem/level4/TTS/ep9/audio_6_그럼_이_씩씩한_꽃은_.mp3' }],
       [{ ko:'그건… 튼튼한 사랑?', en:'That one... strong love?', audio:'data/elem/level4/TTS/ep9/audio_7_그건____튼튼한_사랑_.mp3' }]
     ]
+  },
+  10: {
+    title: '형이랑 같이 볼 영화',
+    slides: [
+      'data/elem/level4/slides/ep10/우주도깨비1.png',
+      'data/elem/level4/slides/ep10/우주도깨비2.png',
+      'data/elem/level4/slides/ep10/우주도깨비3.png',
+      'data/elem/level4/slides/ep10/우주도깨비4.png',
+      'data/elem/level4/slides/ep10/우주도깨비5.png',
+      'data/elem/level4/slides/ep10/우주도깨비6.png',
+      'data/elem/level4/slides/ep10/우주도깨비7.png',
+      'data/elem/level4/slides/ep10/우주도깨비8.png',
+      'data/elem/level4/slides/ep10/우주도깨비9.png'
+    ],
+    script: [
+      [{ ko:'카요, 영화 보면서 마실 주스 가지고 왔어.', en:'Kayo, I brought juice for you to drink while watching the movie.', audio:'data/elem/level4/TTS/ep10/audio_0_카요__영화_보면서_마실_주스_가지고_왔어_.mp3' }],
+      [{ ko:'어제 본 영화를 또 보는 거야?', en:'Are you watching the movie you watched yesterday, again?', audio:'data/elem/level4/TTS/ep10/audio_1_어제_본_영화를_또_보는_거야_.mp3' }],
+      [{ ko:'너무 재미있는 영화라서 또 보는 거예요.', en:"It's such a fun movie so I'm watching it again.", audio:'data/elem/level4/TTS/ep10/audio_2_너무_재미있는_영화라서_또_보는_거예요_.mp3' }],
+      [{ ko:'새로 볼 만한 영화는 없어?', en:"Isn't there a new movie worth watching?", audio:'data/elem/level4/TTS/ep10/audio_3_새로_볼_만한_영화는_없어_.mp3' }],
+      [{ ko:'내일 형이랑 같이 볼 영화가 있어요.', en:"There's a movie I'm going to watch with my brother tomorrow.", audio:'data/elem/level4/TTS/ep10/audio_4_내일_형이랑_같이_볼_영화가_있어요_.mp3' }],
+      [{ ko:'그건 어떤 내용이야?', en:"What's it about?", audio:'data/elem/level4/TTS/ep10/audio_5_그건_어떤_내용이야_.mp3' }],
+      [{ ko:'할머니는 안 좋아하실 내용이에요. 무서운 영화거든요.', en:"It's the kind of story you wouldn't like, Grandma. It's a scary movie.", audio:'data/elem/level4/TTS/ep10/audio_6_할머니는_안_좋아하실_내용이에요__무서운_영화거든요_.mp3' }],
+      [{ ko:'로봇 나오는 영화?', en:'A movie with robots in it?', audio:'data/elem/level4/TTS/ep10/audio_7_로봇_나오는_영화_.mp3' }],
+      [{ ko:'아뇨. 우주 도깨비가 나오는 영화예요.', en:"No. It's a movie with a space goblin in it.", audio:'data/elem/level4/TTS/ep10/audio_8_아뇨__우주_도깨비가_나오는_영화예요_.mp3' }]
+    ]
   }
 };
 
@@ -12307,7 +12345,7 @@ async function loadBook4Unit(n) {
 
 async function switchBook4Unit(n) {
   if (typeof kidsRecCleanup === 'function') kidsRecCleanup();
-  [1,2,3,4,5,6,7,8,9].forEach(i => {
+  [1,2,3,4,5,6,7,8,9,10].forEach(i => {
     const el = document.getElementById('b4-lesson-'+i);
     if (el) el.classList.toggle('active', i===n);
   });
