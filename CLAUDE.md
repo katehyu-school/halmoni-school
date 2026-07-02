@@ -1079,4 +1079,23 @@ const urlName   = _hc ? _hc.urlName : null;
 - **문장2 조사 분리** (2026-05-26): unit01~05 모든 조사(에/가/이/를/하고/랑/의 등) 낱말칩 분리
 - **L3_04 슬라이드 4장 추가**: 동사 활용_쉬다/가다/놀다/먹다(미래).png
 - **L3_05 슬라이드 2장 추가**: 동사 활용_놀다.png / 만들다.png
-- **지목(nominateStudent) 버그 수정**: unit 7~9 
+- **지목(nominateStudent) 버그 수정**: unit 7~9 activeUnit 감지 누락 수정
+- **index.html 리브랜딩**: Hangeul Quest Kids (teal) / Hangeul Quest (deep teal), sejong→nhs 링크 교체
+
+### ✅ 2026-06-01 완료 작업 (korean-app_v2.html — My Space)
+- **✏️ My Space 기능 전체 구현** — 버튼(📝 My Space) 추가 → 오버레이 슬라이드인
+  - **프로필 시스템**: 다중 프로필 (한 모니터 공유 대응), localStorage 네임스페이스 `ms_{name}_*`
+  - **📝 My Notes 탭**: Level + 과 태그 선택, 자유 메모, Save 버튼 → 저장 목록 표시
+  - **✏️ Korean Writing 탭**: 캔버스 자유 필기 + Clear — 저장 없음 (자유 연습)
+  - **🎨 My Style 탭**: 이모지 아바타 선택, 테마 컬러, 닉네임 — 프로필별 저장
+  - **스티커 시스템**: 노트 저장마다 스티커 1개 해제 (⭐🎉🏆🌟💎🎯🔥🌈🎁👑)
+  - **이모지 아바타**: `MS_AVATARS = ['🐨','🦊','🐸','🐧','🦄','🐱','🐻','🐰','🐯','🦋']`
+  - **영어 병기 완료**: 모든 UI 텍스트 한영 병기 (Level 1 학생 배려)
+- **캔버스 0-width 버그 수정**: `display:none` 상태에서 초기화 → 크기 0 문제 → lazy init (`msTab('write')` 시점에 초기화)
+- **Level 2 3과 슬라이드/TTS 교체**:
+  - 첫 슬라이드: `언제할머니댁에가요1.png` → standby에서 교체
+  - 첫 TTS: `엄마하고+할머니가+전화를+해요_slide1.mp3` 신규 추가
+
+### ✅ 2026-06-01 완료 작업 (nhs.html — My Notes)
+- **📓 My Notes 기능 전체 구현** — 버튼(📓 My Notes) 추가 → 오버레이
+  - **프로필 시스템**: 
