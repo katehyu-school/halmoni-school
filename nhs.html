@@ -690,6 +690,8 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 
 </style>
 <script src="core/my-notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="core/board.js"></script>
 </head>
 <body>
 <div class="top-bar">
@@ -706,6 +708,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
   <div class="school-title"><svg width="26" height="26" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="#0a2540" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="white" letter-spacing="2">HQ</text></svg><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
   <button class="nms-btn" onclick="openNMS()">📓 My Notes</button>
+  <button class="nms-btn" onclick="openBoard()">📋 게시판</button>
 
 </div>
 
