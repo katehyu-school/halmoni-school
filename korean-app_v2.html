@@ -1191,6 +1191,24 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .b3lt-retry-btn { background:var(--teal); color:#fff; border:none; border-radius:24px;
   padding:11px 26px; font-size:0.95rem; font-weight:700; cursor:pointer; }
 
+/* ── Level 4 졸업 수료증 ── */
+.kids-diploma { margin:18px auto; max-width:420px; padding:28px 22px; border-radius:18px;
+  background:linear-gradient(135deg,#FFFDF8,#FFF8E8); border:3px double #D4AF37;
+  box-shadow:0 6px 24px rgba(212,175,55,.25); text-align:center; }
+.kids-diploma-crest { font-size:2.6rem; margin-bottom:6px; }
+.kids-diploma-title { font-size:.95rem; font-weight:900; letter-spacing:.5px; color:#8a6d1f;
+  font-family:'Jua',sans-serif; }
+.kids-diploma-sub { font-size:.78rem; color:#b8952f; margin:2px 0 14px; font-weight:700; }
+.kids-diploma-name { font-size:1.5rem; font-weight:900; color:#3a2f10; font-family:'Jua',sans-serif;
+  padding:8px 0; margin-bottom:10px; border-bottom:2px solid #D4AF37; }
+.kids-diploma-body { font-size:.85rem; color:#5c4a1e; line-height:1.7; margin-bottom:14px; }
+.kids-diploma-date { font-size:.8rem; color:#8a6d1f; margin-bottom:4px; }
+.kids-diploma-footer { font-size:.72rem; color:#c2a24a; letter-spacing:.5px; margin-top:8px; }
+@media print {
+  body * { visibility:hidden; }
+  .kids-diploma, .kids-diploma * { visibility:visible; }
+  .kids-diploma { position:fixed; top:8%; left:50%; transform:translateX(-50%); max-width:600px; width:80%; }
+}
 </style>
 </head>
 <body>
@@ -1927,6 +1945,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-title-text">형이랑 같이 볼 영화</span>
   </div>
   <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
+  <div class="lesson-item lt-sidebar-btn" id="b4-leveltest-btn" onclick="loadB4LevelTest()">
+    <span class="lesson-num">🎓</span>
+    <span class="lesson-title-text">Level 4 Test</span>
+  </div>
   <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-4" onclick="openKidsFC()">
     <span class="lesson-num">🃏</span>
     <span class="lesson-title-text">복습 카드 · Review</span>
@@ -12361,6 +12383,250 @@ async function switchBook4Unit(n) {
   } catch(e) {
     container.innerHTML = '<div style="text-align:center;padding:60px;color:#f44;font-size:16px;font-family:Jua,sans-serif;">⚠️ 오류: '+e.message+'</div>';
   }
+}
+
+// ══════════════════════════════════════════
+// BOOK 4 — Level 4 종합 테스트 (졸업 시험)
+// ══════════════════════════════════════════
+const B4_LEVEL_TEST = [
+  // 1 mc u01 — 진행형
+  {type:'mc',ep:'1과',emoji:'🌈',
+   ko_q:'지금 뭐 ___ 있어요?',en_q:'What are you doing right now?',
+   opts:['하고','해서','하면','하지만'],ans:0},
+  // 2 listen u01 — 존대 진행형
+  {type:'listen',ep:'1과',emoji:'🌈',
+   audio:'엄마는 일 하시고 계세요.',en_q:'What is Mom doing?',
+   choices:[{emoji:'💼',kr:'일하고 계세요 (존대)',en:'Working (polite)'},{emoji:'😴',kr:'주무세요',en:'Sleeping'},{emoji:'🍳',kr:'요리하고 계세요',en:'Cooking'}],ans:0},
+  // 3 fill u02 — 으러 가다
+  {type:'fill',ep:'2과',emoji:'🚶',
+   ko_q:'호수로 산책___ 갈 사람?',en_q:'Who wants to go for a walk to the lake?',
+   opts:['하러','하면','해서','하고'],ans:0},
+  // 4 fill u02 — ㄹ까?
+  {type:'fill',ep:'2과',emoji:'🚶',
+   ko_q:'버스로 갈___?',en_q:'Shall we go by bus?',
+   opts:['까','요','고','다'],ans:0},
+  // 5 mc u03 — 아/어 보다
+  {type:'mc',ep:'3과',emoji:'🤖',
+   ko_q:'이거 ___ 봐.',en_q:'Try eating this.',
+   opts:['먹어','먹고','먹지만','먹으면'],ans:0},
+  // 6 mc u04 — 그래서/그런데/그리고
+  {type:'mc',ep:'4과',emoji:'🛴',
+   ko_q:'무릎이 아팠어요. ___ 병원에 갔어요.',en_q:'My knee hurt. So I went to the hospital.',
+   opts:['그래서','그런데','그리고','그렇지만'],ans:0},
+  // 7 fill u04 — 지만
+  {type:'fill',ep:'4과',emoji:'🛴',
+   ko_q:'아팠___ 참았어요.',en_q:'It hurt but I held on.',
+   opts:['지만','어서','으면','고'],ans:0},
+  // 8 listen u05 — ㄹ게요
+  {type:'listen',ep:'5과',emoji:'🫐',
+   audio:'제가 구스베리 따 올게요!',en_q:'What will the speaker do?',
+   choices:[{emoji:'🫐',kr:'구스베리를 따 올 거예요',en:'Will go pick gooseberries'},{emoji:'🍽️',kr:'밥을 먹을 거예요',en:'Will eat'},{emoji:'😴',kr:'잘 거예요',en:'Will sleep'}],ans:0},
+  // 9 mc u06 — 안녕히 가세요 vs 계세요
+  {type:'mc',ep:'6과',emoji:'👵',
+   ko_q:'집에 남아있는 사람이 떠나는 사람에게 하는 인사는?',en_q:"What do you say to someone who is leaving (you're staying)?",
+   opts:['안녕히 가세요','안녕히 계세요','다녀오세요','어서오세요'],ans:0},
+  // 10 fill u06 — (으)시- 높임
+  {type:'fill',ep:'6과',emoji:'👵',
+   ko_q:'할아버지가 신문을 읽___ 계세요.',en_q:'Grandpa is reading a newspaper (polite).',
+   opts:['으시고','고','어서','지만'],ans:0},
+  // 11 mc u07 — 아/어 드리다
+  {type:'mc',ep:'7과',emoji:'🎁',
+   ko_q:'선물을 만들어서 엄마한테 ___.',en_q:"We'll give it to Mom (humble).",
+   opts:['드릴 거예요','줄 거예요','드셔요','드려서'],ans:0},
+  // 12 listen u07 — 날짜읽기 (유월)
+  {type:'listen',ep:'7과',emoji:'🎁',
+   audio:'엄마 생신은 유월 십육일이에요.',en_q:"When is Mom's birthday?",
+   choices:[{emoji:'📅',kr:'6월 16일',en:'June 16'},{emoji:'📅',kr:'10월 16일',en:'October 16'},{emoji:'📅',kr:'6월 6일',en:'June 6'}],ans:0},
+  // 13 mc u08 — ㄹ 것 같아요 (ㅂ불규칙)
+  {type:'mc',ep:'8과',emoji:'🎢',
+   ko_q:'(아직 안 타 봤는데) 저기 좀 봐, 너무 무서___ 것 같아.',en_q:"(Haven't ridden it yet) Look at that, it looks so scary.",
+   opts:['울','운','어','으면'],ans:0},
+  // 14 fill u08 — ㄴ 것 같아요
+  {type:'fill',ep:'8과',emoji:'🎢',
+   ko_q:'생각보다 괜찮___ 것 같아요.',en_q:'It seems better than I thought.',
+   opts:['은','을','는','어'],ans:0},
+  // 15 mc u09 — 형용사 관형
+  {type:'mc',ep:'9과',emoji:'🌸',
+   ko_q:'___ 꽃이 마당에 피었어요.',en_q:'A pretty flower bloomed in the yard.',
+   opts:['예쁜','예쁘게','예쁘다','예뻐서'],ans:0},
+  // 16 fill u09 — 동사 현재 관형
+  {type:'fill',ep:'9과',emoji:'🌸',
+   ko_q:'엄마가 ___ 꽃으로 만들자.',en_q:'Let\'s make it with the flowers Mom likes.',
+   opts:['좋아하는','좋아해서','좋아하다','좋아할'],ans:0},
+  // 17 listen u09 — 꽃말
+  {type:'listen',ep:'9과',emoji:'🌸',
+   audio:'이 꽃의 꽃말은 영원한 사랑이래요.',en_q:"What's the flower's meaning?",
+   choices:[{emoji:'💕',kr:'영원한 사랑',en:'Eternal love'},{emoji:'😱',kr:'변덕',en:'Fickleness'},{emoji:'🎉',kr:'축하',en:'Congratulations'}],ans:0},
+  // 18 mc u10 — 동사 과거 관형
+  {type:'mc',ep:'10과',emoji:'🎬',
+   ko_q:'어제 ___ 영화를 또 봐요.',en_q:'I\'m watching the movie I watched yesterday, again.',
+   opts:['본','볼','보는','봐서'],ans:0},
+  // 19 fill u10 — 동사 미래 관형
+  {type:'fill',ep:'10과',emoji:'🎬',
+   ko_q:'내일 형이랑 같이 ___ 영화가 있어요.',en_q:"There's a movie I'll watch with my brother tomorrow.",
+   opts:['볼','본','보는','봐서'],ans:0},
+  // 20 listen u10 — 종합
+  {type:'listen',ep:'10과',emoji:'🎬',
+   audio:'우주 도깨비가 나오는 영화예요.',en_q:"What's in the movie?",
+   choices:[{emoji:'👹',kr:'우주 도깨비',en:'Space goblin'},{emoji:'🤖',kr:'로봇',en:'Robot'},{emoji:'🐶',kr:'강아지',en:'Dog'}],ans:0},
+];
+
+let b4LTIdx = 0, b4LTScore = 0, b4LTAnswered = false;
+
+function loadB4LevelTest() {
+  document.querySelectorAll('#book4-sidebar .lesson-item').forEach(el => el.classList.remove('active'));
+  const btn = document.getElementById('b4-leveltest-btn');
+  if (btn) btn.classList.add('active');
+  b4LTIdx = 0; b4LTScore = 0; b4LTAnswered = false;
+  const wrap = document.getElementById('b4-unit-container');
+  if (wrap) wrap.innerHTML = '<div id="b4lt-inner"></div>';
+  b4LTRender();
+}
+
+function b4LTRender() {
+  const inner = document.getElementById('b4lt-inner');
+  if (!inner) return;
+  const q = B4_LEVEL_TEST[b4LTIdx];
+  const total = B4_LEVEL_TEST.length;
+  b4LTAnswered = false;
+  const pct = Math.round((b4LTIdx / total) * 100);
+  const typeLabel = q.type==='mc' ? '🔤 고르기' : q.type==='listen' ? '🔊 듣기' : '✏️ 빈칸 채우기';
+
+  let qHTML = '';
+  if (q.type === 'mc') {
+    let optsHTML = '';
+    q.opts.forEach((opt,i) => {
+      optsHTML += '<button class="b3lt-opt" id="b3lt-opt-'+i+'" onclick="b4LTChoose('+i+')">'+opt+'</button>';
+    });
+    qHTML = '<div class="b3lt-q-ko">'+q.ko_q+'</div><div class="b3lt-q-en">'+q.en_q+'</div><div class="b3lt-opts">'+optsHTML+'</div>';
+  } else if (q.type === 'listen') {
+    let choicesHTML = '';
+    q.choices.forEach((ch,i) => {
+      choicesHTML += '<button class="b3lt-choice" id="b3lt-opt-'+i+'" onclick="b4LTChoose('+i+')"><div class="b3lt-choice-emoji">'+ch.emoji+'</div><div class="b3lt-choice-kr">'+ch.kr+'</div><div class="b3lt-choice-en">'+ch.en+'</div></button>';
+    });
+    const aud = q.audio.replace(/'/g,"&#39;");
+    qHTML = '<div class="b3lt-listen-center"><button class="b3lt-listen-btn" onclick="speakKorean(\''+aud+'\')">🔊 들어보세요</button><div class="b3lt-q-en" style="margin-top:10px;">'+q.en_q+'</div></div><div class="b3lt-choices">'+choicesHTML+'</div>';
+  } else {
+    const pts = q.ko_q.split('___');
+    let optsHTML = '';
+    q.opts.forEach((opt,i) => {
+      optsHTML += '<button class="b3lt-opt" id="b3lt-opt-'+i+'" onclick="b4LTChoose('+i+')">'+opt+'</button>';
+    });
+    qHTML = '<div class="b3lt-q-ko">'+(pts[0]||'')+'<span class="b3lt-blank" id="b3lt-blank">___</span>'+(pts[1]||'')+'</div><div class="b3lt-q-en">'+q.en_q+'</div><div class="b3lt-opts">'+optsHTML+'</div>';
+  }
+
+  const isLast = (b4LTIdx === total - 1);
+  inner.innerHTML =
+    '<div class="card b3lt-card">'+
+      '<div class="b3lt-header">'+
+        '<span class="b3lt-ep-badge">'+q.emoji+' '+q.ep+'</span>'+
+        '<span class="b3lt-counter">'+( b4LTIdx+1)+' / '+total+'</span>'+
+      '</div>'+
+      '<div class="b3lt-prog-wrap"><div class="b3lt-prog-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="b3lt-type-tag">'+typeLabel+'</div>'+
+      qHTML+
+      '<div class="b3lt-feedback" id="b3lt-feedback" style="display:none;"></div>'+
+      '<button class="b3lt-next-btn" id="b3lt-next" style="display:none;" onclick="b4LTNext()">'+(isLast?'결과 보기 🎓':'다음 →')+'</button>'+
+    '</div>';
+}
+
+function b4LTChoose(i) {
+  if (b4LTAnswered) return;
+  b4LTAnswered = true;
+  const q = B4_LEVEL_TEST[b4LTIdx];
+  const correct = (i === q.ans);
+  if (correct) b4LTScore++;
+
+  document.querySelectorAll('.b3lt-opt,.b3lt-choice').forEach((btn,idx) => {
+    btn.disabled = true;
+    if (idx === q.ans) btn.classList.add('b3lt-correct');
+    else if (idx === i && !correct) btn.classList.add('b3lt-wrong');
+  });
+
+  const blank = document.getElementById('b3lt-blank');
+  if (blank) {
+    blank.textContent = q.opts[i];
+    blank.className = 'b3lt-blank '+(correct?'b3lt-blank-ok':'b3lt-blank-err');
+  }
+
+  const fb = document.getElementById('b3lt-feedback');
+  if (fb) {
+    fb.style.display='';
+    const ansStr = q.type==='listen' ? q.choices[q.ans].kr : q.opts[q.ans];
+    fb.innerHTML = correct
+      ? '<span class="b3lt-fb-ok">⭐ 정답! Correct!</span>'
+      : '<span class="b3lt-fb-err">❌ 정답: <strong>'+ansStr+'</strong></span>';
+  }
+
+  if (correct && q.type==='listen') speakKorean(q.audio);
+
+  const nb = document.getElementById('b3lt-next');
+  if (nb) {
+    nb.style.display='';
+    nb.textContent = (b4LTIdx===B4_LEVEL_TEST.length-1) ? '결과 보기 🎓' : '다음 →';
+  }
+}
+
+function b4LTNext() {
+  b4LTIdx++;
+  if (b4LTIdx >= B4_LEVEL_TEST.length) { b4LTShowScore(); } else { b4LTRender(); }
+}
+
+function b4LTShowScore() {
+  const total = B4_LEVEL_TEST.length;
+  const pct = Math.round((b4LTScore/total)*100);
+  const passed = pct >= 70;
+  const inner = document.getElementById('b4lt-inner');
+  if (!inner) return;
+
+  if (passed) {
+    b4LTShowGraduation(pct);
+    return;
+  }
+
+  inner.innerHTML =
+    '<div class="card b3lt-score-card">'+
+      '<div class="b3lt-score-title">🎬 Level 4 테스트 결과</div>'+
+      '<div class="b3lt-score-grade" style="color:#E05C55;">🌱</div>'+
+      '<div class="b3lt-score-msg">조금 더 연습해요! A little more practice!</div>'+
+      '<div class="b3lt-score-num">'+b4LTScore+' / '+total+' <span style="font-size:.88rem;color:#aaa;">정답</span></div>'+
+      '<div class="b3lt-score-bar-wrap"><div class="b3lt-score-bar" style="width:'+pct+'%;background:#E05C55"></div></div>'+
+      '<div class="b3lt-score-pct">'+pct+'%</div>'+
+      '<div style="font-size:.85rem;color:#888;margin:10px 0 4px;">틀린 문제를 한 번 더 복습하고 다시 도전해봐요! 🌱</div>'+
+      '<button class="b3lt-retry-btn" onclick="loadB4LevelTest()">다시 도전 🔄</button>'+
+    '</div>';
+}
+
+function b4LTShowGraduation(pct) {
+  const inner = document.getElementById('b4lt-inner');
+  if (!inner) return;
+  const profile = (typeof msCurrent !== 'undefined' && msCurrent) ? msCurrent : '';
+  const today = new Date();
+  const dateStr = today.getFullYear()+'년 '+(today.getMonth()+1)+'월 '+today.getDate()+'일';
+
+  inner.innerHTML =
+    '<div class="card b3lt-score-card">'+
+      '<div class="b3lt-score-title">🎉 Level 4 테스트 합격!</div>'+
+      '<div class="b3lt-score-grade" style="color:#0D7B75;">🎓</div>'+
+      '<div class="b3lt-score-msg">축하해요! Hangeul Quest Kids 전 과정을 모두 마쳤어요!</div>'+
+      '<div class="b3lt-score-num">'+b4LTScore+' / '+B4_LEVEL_TEST.length+' <span style="font-size:.88rem;color:#aaa;">정답</span> ('+pct+'%)</div>'+
+      '<div class="kids-diploma" id="kids-diploma">'+
+        '<div class="kids-diploma-crest">🎓</div>'+
+        '<div class="kids-diploma-title">수료증 · CERTIFICATE OF COMPLETION</div>'+
+        '<div class="kids-diploma-sub">Hangeul Quest Kids</div>'+
+        '<div class="kids-diploma-name" id="kids-diploma-name">'+(profile||'이름을 입력해 주세요')+'</div>'+
+        '<div class="kids-diploma-body">위 학생은 Hangeul Quest Kids Level 1~4 전 과정을<br>성실히 이수하였기에 이 증서를 수여합니다.</div>'+
+        '<div class="kids-diploma-date">'+dateStr+'</div>'+
+        '<div class="kids-diploma-footer">Hangeul Quest Kids · 한글퀘스트 키즈</div>'+
+      '</div>'+
+      (profile ? '' : '<input type="text" id="kids-diploma-input" placeholder="이름을 입력하세요 · Enter your name" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #ddd;font-family:Jua,sans-serif;text-align:center;margin:10px 0;font-size:15px;" oninput="document.getElementById(\'kids-diploma-name\').textContent=this.value||\'이름을 입력해 주세요\'">')+
+      '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">'+
+        '<button class="b3lt-retry-btn" style="flex:1;min-width:140px;" onclick="window.print()">🖨️ 수료증 인쇄/저장</button>'+
+        '<button class="b3lt-retry-btn" style="flex:1;min-width:140px;background:linear-gradient(135deg,#0D7B75,#1AAB9A);" onclick="window.location.href=\'nhs.html\'">🚀 이제 Hangeul Quest로!</button>'+
+      '</div>'+
+      '<button class="b3lt-retry-btn" style="background:none;color:#aaa;box-shadow:none;margin-top:6px;" onclick="loadB4LevelTest()">다시 풀어보기</button>'+
+    '</div>';
+  launchConfetti();
 }
 
 function renderBook4Unit(data, unitNum) {
