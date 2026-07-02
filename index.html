@@ -592,6 +592,9 @@ body::before {
       <h2>어서 오세요! 환영합니다</h2>
       <p>수업을 선택해 주세요 · Please select your class</p>
     </div>
+    <div id="pinChangeLinkWrap" style="text-align:center;margin:-10px 0 18px;display:none">
+      <a onclick="openPinChangeModal()" style="cursor:pointer;font-size:11px;color:rgba(180,215,235,.5);text-decoration:underline;letter-spacing:.03em">🔑 내 PIN 바꾸기 · Change my PIN</a>
+    </div>
     <div id="teacherBar" style="display:none;text-align:center;margin-bottom:18px">
       <button onclick="openAtt()" style="background:rgba(78,205,196,.12);border:1.5px solid rgba(78,205,196,.35);border-radius:20px;padding:8px 22px;color:#4ecdc4;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.08em;transition:background .15s" onmouseover="this.style.background='rgba(78,205,196,.22)'" onmouseout="this.style.background='rgba(78,205,196,.12)'">📋 출석부 열기</button>
     </div>
@@ -674,6 +677,27 @@ body::before {
   </div>
 </div>
 
+<!-- PIN CHANGE MODAL -->
+<div class="modal-bg" id="pinChangeModal" onclick="if(event.target===this)closePinChangeModal()">
+  <div class="login-modal">
+    <button class="modal-close" onclick="closePinChangeModal()">✕</button>
+    <span class="login-label">🔑 내 PIN 바꾸기 · Change PIN</span>
+
+    <div class="pw-wrap">
+      <input class="pw-input" type="password" id="pcCurrentPin" placeholder="현재 PIN · Current PIN" maxlength="20">
+    </div>
+    <div class="pw-wrap">
+      <input class="pw-input" type="password" id="pcNewPin" placeholder="새 PIN · New PIN" maxlength="20">
+    </div>
+    <div class="pw-wrap">
+      <input class="pw-input" type="password" id="pcConfirmPin" placeholder="새 PIN 확인 · Confirm New PIN" maxlength="20"
+        onkeydown="if(event.key==='Enter')submitPinChange()">
+    </div>
+    <button class="enter-btn" id="pcSubmitBtn" onclick="submitPinChange()">변경하기 · Update PIN</button>
+    <div class="error-msg" id="pcMsg"></div>
+  </div>
+</div>
+
 <!-- EDIT MODAL -->
 <div class="edit-modal-bg" id="editModalBg">
   <div class="edit-modal">
@@ -737,6 +761,56 @@ function closeLoginModal() {
   document.getElementById('loginModal').classList.remove('open');
   document.getElementById('errMsg').textContent = '';
   document.getElementById('pwInput').value = '';
+}
+
+// ── 내 PIN 바꾸기 ──────────────────────────────
+function openPinChangeModal() {
+  document.getElementById('pinChangeModal').classList.add('open');
+  document.getElementById('pcMsg').textContent = '';
+  document.getElementById('pcCurrentPin').value = '';
+  document.getElementById('pcNewPin').value = '';
+  document.getElementById('pcConfirmPin').value = '';
+  setTimeout(() => document.getElementById('pcCurrentPin').focus(), 100);
+}
+function closePinChangeModal() {
+  document.getElementById('pinChangeModal').classList.remove('open');
+}
+async function submitPinChange() {
+  const cur = document.getElementById('pcCurrentPin').value.trim();
+  const nw  = document.getElementById('pcNewPin').value.trim();
+  const cf  = document.getElementById('pcConfirmPin').value.trim();
+  const msg = document.getElementById('pcMsg');
+  const btn = document.getElementById('pcSubmitBtn');
+
+  if (!_pcCurrentUserName) { msg.textContent = '로그인 정보가 없어요. 다시 로그인해 주세요.'; return; }
+  if (!cur || !nw || !cf) { msg.textContent = '모든 항목을 입력해 주세요 · Please fill in all fields'; return; }
+  if (nw !== cf) { msg.textContent = '새 PIN이 서로 달라요 · New PINs don\'t match'; return; }
+  if (nw === cur) { msg.textContent = '현재 PIN과 같아요. 다른 PIN을 입력해 주세요'; return; }
+
+  btn.disabled = true; btn.textContent = '확인 중…'; msg.textContent = ''; msg.style.color = '#e74c3c';
+
+  try {
+    // 1) 현재 PIN 검증 (verify_login RPC — pin 컬럼 직접 노출 없음)
+    const { data: ok, error: vErr } = await _sb.rpc('verify_login', { p_name: _pcCurrentUserName, p_pin: cur });
+    if (vErr) throw new Error(vErr.message);
+    if (!ok) {
+      msg.textContent = '현재 PIN이 맞지 않아요 · Current PIN is incorrect';
+      document.getElementById('pcCurrentPin').value = '';
+      return;
+    }
+    // 2) 새 PIN 저장
+    const { error: uErr } = await _sb.from('members').update({ pin: nw }).eq('name', _pcCurrentUserName);
+    if (uErr) throw new Error(uErr.message);
+
+    msg.style.color = '#4ecdc4';
+    msg.textContent = '✅ PIN이 변경되었어요! · PIN updated!';
+    setTimeout(closePinChangeModal, 1400);
+  } catch (e) {
+    console.error('[PIN Change Error]', e);
+    msg.textContent = '서버 연결 오류. 잠시 후 다시 시도해 주세요.';
+  } finally {
+    btn.disabled = false; btn.textContent = '변경하기 · Update PIN';
+  }
 }
 
 
@@ -830,12 +904,18 @@ async function checkPw() {
   }
 }
 
+let _pcCurrentUserName = null; // 로그인 ID (PIN 변경용)
+
 function enterAs(user) {
   document.getElementById('landingBox').style.display = 'none';
   document.getElementById('appBox').style.display = 'block';
 
   const role = user.role;
   const name = user.display_name;
+
+  // 내 PIN 바꾸기 링크 — guest(공용 비밀번호)는 제외, 나머지는 전부 노출
+  _pcCurrentUserName = user.name;
+  document.getElementById('pinChangeLinkWrap').style.display = (role === 'guest') ? 'none' : 'block';
 
   // 앱 카드 URL에 ?name=xxx 파라미터 추가 (수업 연동용)
   ['card0','card1','card2'].forEach(id => {
