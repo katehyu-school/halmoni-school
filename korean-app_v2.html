@@ -1209,6 +1209,18 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
   .kids-diploma, .kids-diploma * { visibility:visible; }
   .kids-diploma { position:fixed; top:8%; left:50%; transform:translateX(-50%); max-width:600px; width:80%; }
 }
+
+/* ── SITE FOOTER ────────────────────────────────────── */
+.hq-footer{margin-top:40px;padding:24px 20px 0;border-top:1px solid #eee;background:#fff;}
+.hq-footer-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:14px;}
+.hq-footer-brand{display:flex;align-items:center;gap:9px;}
+.hq-footer-logo{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--teal);color:#fff;font-family:Impact,'Arial Black',sans-serif;font-size:10px;letter-spacing:.01em;flex-shrink:0;}
+.hq-footer-name{font-family:'Jua',sans-serif;font-size:13px;font-weight:700;color:var(--text);}
+.hq-footer-links{display:flex;flex-wrap:wrap;gap:5px 18px;}
+.hq-footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .15s;white-space:nowrap;font-family:'Nanum Gothic',sans-serif;}
+.hq-footer-links a:hover{color:var(--teal);}
+.hq-footer-copy{max-width:900px;margin:0 auto;padding:12px 0 20px;border-top:1px solid #f5f5f3;text-align:center;font-size:10.5px;color:#c2c8d0;letter-spacing:.03em;line-height:1.8;}
+@media (max-width:600px){.hq-footer-inner{flex-direction:column;align-items:flex-start;}}
 </style>
 </head>
 <body>
@@ -1665,8 +1677,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     <button class="book-tab active" onclick="selectBook(2)">Level 2</button>
     <button class="book-tab" onclick="selectBook(3)">Level 3</button>
     <button class="book-tab" onclick="selectBook(4)">Level 4</button>
-    <button class="book-tab locked">Level 5</button>
-    <button class="book-tab locked">Level 6</button>
   </div>
   <button class="kids-idx-btn" onclick="openKidsIndex()">📖 단어</button>
   <button class="ms-btn" onclick="openMySpace()">✏️ My Space</button>
@@ -3520,9 +3530,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 </main>
 </div>
-<footer style="text-align:center;padding:24px 16px 32px;font-size:0.78rem;color:#aaa;border-top:1px solid #eee;margin-top:40px;font-family:sans-serif;line-height:1.8;">
-  © 2026 Kate HaeOk Shin Yu · All rights reserved<br>
-  <span style="letter-spacing:0.03em;">Hangeul Quest &nbsp;·&nbsp; Hangeul Quest Kids</span>
+<footer class="hq-footer">
+  <div class="hq-footer-inner">
+    <div class="hq-footer-brand">
+      <span class="hq-footer-logo">HQ</span>
+      <span class="hq-footer-name">Hangeul Quest Kids</span>
+    </div>
+    <nav class="hq-footer-links">
+      <a href="index.html">홈 · Home</a>
+      <a href="nhs.html">Hangeul Quest</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="https://youtube.com/@hangeulquest" target="_blank" rel="noopener">▶ YouTube</a>
+    </nav>
+  </div>
+  <div class="hq-footer-copy">© 2026 Kate HaeOk Shin Yu · All rights reserved</div>
 </footer>
 <div class="confetti-wrap" id="confetti"></div>
 
