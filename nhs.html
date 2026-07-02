@@ -677,7 +677,17 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .speak-tts-btn{padding:6px 14px;background:var(--teal-lt);border:1.5px solid var(--teal-300);border-radius:var(--radius-xl);font-size:12px;cursor:pointer;color:var(--teal);font-family:var(--font-kr);transition:all .2s;}
 .speak-tts-btn:hover{background:var(--teal-50);border-color:var(--teal);}
 
-
+/* ── SITE FOOTER ────────────────────────────────────── */
+.hq-footer{margin-top:48px;padding:26px 24px 0;border-top:1px solid var(--gray-200);background:#fff;flex-shrink:0;}
+.hq-footer-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-bottom:16px;}
+.hq-footer-brand{display:flex;align-items:center;gap:9px;}
+.hq-footer-logo{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--teal);color:#fff;font-family:Impact,'Arial Black',sans-serif;font-size:11px;letter-spacing:.02em;flex-shrink:0;}
+.hq-footer-name{font-size:12.5px;font-weight:700;color:var(--warm-900);letter-spacing:.01em;}
+.hq-footer-links{display:flex;flex-wrap:wrap;gap:5px 20px;}
+.hq-footer-links a{font-size:12px;color:var(--warm-500);text-decoration:none;transition:color .15s;white-space:nowrap;}
+.hq-footer-links a:hover{color:var(--teal);}
+.hq-footer-copy{max-width:980px;margin:0 auto;padding:14px 0 22px;border-top:1px solid var(--gray-100);text-align:center;font-size:10.5px;color:var(--warm-300);letter-spacing:.03em;line-height:1.8;}
+@media (max-width:640px){.hq-footer-inner{flex-direction:column;align-items:flex-start;}}
 
 </style>
 <script src="core/my-notes.js"></script>
@@ -5217,7 +5227,26 @@ function vdRenderScore(gramId) {
     '</div>'+
     '<button class="vd-restart-btn" onclick="vdInit(\''+gramId+'\')">↺ 다시 도전 / Play Again</button>';
 }
-// 
+//
 // ════════════════════════════════════════════════════════
 </script>
 
+<footer class="hq-footer">
+  <div class="hq-footer-inner">
+    <div class="hq-footer-brand">
+      <span class="hq-footer-logo">HQ</span>
+      <span class="hq-footer-name">Hangeul Quest</span>
+    </div>
+    <nav class="hq-footer-links">
+      <a href="index.html">홈 · Home</a>
+      <a href="korean-app_v2.html">Hangeul Quest Kids</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="https://youtube.com/@hangeulquest" target="_blank" rel="noopener">▶ YouTube</a>
+    </nav>
+  </div>
+  <div class="hq-footer-copy">© 2026 Kate HaeOk Shin Yu · All rights reserved</div>
+</footer>
+
+</body>
+</html>
