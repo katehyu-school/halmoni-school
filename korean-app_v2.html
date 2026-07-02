@@ -121,6 +121,9 @@ body { font-family: 'Nanum Gothic', sans-serif; background: var(--bg); min-heigh
 .lt-sidebar-btn{background:linear-gradient(135deg,#0D7B75,#1AAB9A) !important;margin-top:0;}
 .lt-sidebar-btn .lesson-num,.lt-sidebar-btn .lesson-title-text{color:white !important;}
 .lt-sidebar-btn:hover,.lt-sidebar-btn.active{opacity:.88;}
+.fc-sidebar-btn{background:linear-gradient(135deg,#9B5FD0,#C084F5) !important;margin-top:0;}
+.fc-sidebar-btn .lesson-num,.fc-sidebar-btn .lesson-title-text{color:white !important;}
+.fc-sidebar-btn:hover{opacity:.88;}
 
 /* Level Test */
 #level-test-section { display:none; }
@@ -1040,6 +1043,33 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .kids-idx-btn:hover{background:rgba(255,255,255,.35);}
 .kids-idx-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:3000;}
 .kids-idx-overlay.open{display:block;}
+
+/* ── 복습 플래시카드 ── */
+.kids-fc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:3100;align-items:center;justify-content:center;padding:20px;}
+.kids-fc-overlay.open{display:flex;}
+.kids-fc-modal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:20px;width:calc(100% - 40px);max-width:420px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:22px 20px;font-family:'Nanum Gothic',sans-serif;z-index:3101;}
+.kids-fc-modal.open{display:block;}
+.kids-fc-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.kids-fc-hdr h3{font-family:'Jua',sans-serif;font-size:17px;margin:0;color:#333;}
+.kids-fc-close{background:none;border:none;font-size:18px;cursor:pointer;color:#999;}
+.kids-fc-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
+.kids-fc-chip{padding:5px 12px;border:1.5px solid #ddd;border-radius:20px;font-size:12px;background:#fff;cursor:pointer;font-weight:700;color:#666;font-family:'Nanum Gothic',sans-serif;}
+.kids-fc-chip.on{background:#2a9d8f;border-color:#2a9d8f;color:#fff;}
+.kids-fc-scene{perspective:700px;width:100%;height:190px;cursor:pointer;margin-bottom:14px;user-select:none;}
+.kids-fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .45s;}
+.kids-fc-card.flipped{transform:rotateY(180deg);}
+.kids-fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;}
+.kids-fc-front{background:linear-gradient(135deg,#eef9ff,#d9f0ff);border:2.5px solid #2a9d8f;}
+.kids-fc-back{background:linear-gradient(135deg,#fff8ec,#fff0d6);border:2.5px solid #FFB84D;transform:rotateY(180deg);}
+.kids-fc-badge{position:absolute;top:8px;right:10px;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;}
+.kids-fc-badge-review{background:#FFE0B2;color:#E65100;}
+.kids-fc-badge-known{background:#C8E6C9;color:#2E7D32;}
+.kids-fc-srs-row{display:flex;gap:8px;margin-bottom:10px;}
+.kids-fc-srs-btn{flex:1;padding:10px 6px;border-radius:12px;border:2px solid;font-size:13px;font-weight:800;cursor:pointer;font-family:'Jua',sans-serif;}
+.kids-fc-srs-no{background:#fff3e0;border-color:#FFB84D;color:#E65100;}
+.kids-fc-srs-yes{background:#e8f5e9;border-color:#66BB6A;color:#2E7D32;}
+.kids-fc-nav-btn{border:none;background:#f4f4f4;border-radius:10px;padding:8px 14px;font-size:13px;cursor:pointer;color:#555;font-weight:700;}
+.kids-fc-nav-btn:disabled{opacity:.35;cursor:default;}
 /* ── 단어 인덱스 패널 ── */
 .kids-idx-panel{position:fixed;top:0;right:-460px;width:min(460px,100vw);height:100%;background:#f9f6f1;z-index:3001;display:flex;flex-direction:column;box-shadow:-6px 0 32px rgba(0,0,0,.16);transition:right .28s cubic-bezier(.4,0,.2,1);}
 .kids-idx-panel.open{right:0;}
@@ -1735,6 +1765,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">🏆</span>
     <span class="lesson-title-text">Level 2 Test</span>
   </div>
+  <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-2" onclick="openKidsFC()">
+    <span class="lesson-num">🃏</span>
+    <span class="lesson-title-text">복습 카드 · Review</span>
+  </div>
 </nav>
 <!-- ══════ Book 1 사이드바 ══════ -->
 <nav class="sidebar" id="book1-sidebar" style="display:none;">
@@ -1789,6 +1823,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">04</span>
     <span class="lesson-title-text">어디예요? <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Where is it?</small></span>
   </div>
+  <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
+  <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-1" onclick="openKidsFC()">
+    <span class="lesson-num">🃏</span>
+    <span class="lesson-title-text">복습 카드 · Review</span>
+  </div>
 </nav>
 <!-- ══════ Book 3 사이드바 ══════ -->
 <nav class="sidebar" id="book3-sidebar" style="display:none;">
@@ -1838,6 +1877,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     <span class="lesson-num">🏆</span>
     <span class="lesson-title-text">Level 3 Test</span>
   </div>
+  <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-3" onclick="openKidsFC()">
+    <span class="lesson-num">🃏</span>
+    <span class="lesson-title-text">복습 카드 · Review</span>
+  </div>
 </nav>
 
 <!-- ══════ Book 4 사이드바 ══════ -->
@@ -1874,6 +1917,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="lesson-item" id="b4-lesson-8" onclick="selectUnit4(8)">
     <span class="lesson-num">08</span>
     <span class="lesson-title-text">무서울 것 같아요</span>
+  </div>
+  <div style="margin:12px 8px 4px;border-top:1px solid #eee;"></div>
+  <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-4" onclick="openKidsFC()">
+    <span class="lesson-num">🃏</span>
+    <span class="lesson-title-text">복습 카드 · Review</span>
   </div>
 </nav>
 
@@ -11669,6 +11717,130 @@ function _kidsIdxGoPage(pg, onset){
   }
 }
 
+// ══════════════════════════════════════════════════════
+// ── 복습 플래시카드 (SRS) ─────────────────────────────
+// ══════════════════════════════════════════════════════
+let _kidsFCAll=[], _kidsFCCards=[], _kidsFCIdx=0, _kidsFCFlipped=false;
+let _kidsFCFilter=new Set(); // book numbers, empty = all
+
+function _kidsFCProfile(){
+  try{ return (typeof msGet==='function') ? msGet('ms_current') : ''; }catch(e){ return ''; }
+}
+function _kidsFCCardId(c){ return 'L'+(c.book||2)+'_u'+(c.unit||0)+'_'+c.korean; }
+function _kidsFCReviewSet(){
+  const p=_kidsFCProfile(); if(!p) return new Set();
+  return new Set((typeof msGetJ==='function') ? msGetJ('ms_'+p+'_fc_review') : []);
+}
+function _kidsFCKnownSet(){
+  const p=_kidsFCProfile(); if(!p) return new Set();
+  return new Set((typeof msGetJ==='function') ? msGetJ('ms_'+p+'_fc_known') : []);
+}
+function _kidsFCMark(card, isReview){
+  const p=_kidsFCProfile(); if(!p) return;
+  const rev=_kidsFCReviewSet(), kn=_kidsFCKnownSet(), id=_kidsFCCardId(card);
+  if(isReview){ rev.add(id); kn.delete(id); } else { kn.add(id); rev.delete(id); }
+  msSetJ('ms_'+p+'_fc_review', [...rev]);
+  msSetJ('ms_'+p+'_fc_known', [...kn]);
+}
+function _kidsFCShuffle(arr){
+  return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);
+}
+
+async function openKidsFC(){
+  document.getElementById('kids-fc-overlay').classList.add('open');
+  document.getElementById('kids-fc-modal').classList.add('open');
+  if(!_kidsIdxLoaded) await _kidsIdxLoad(); // 기존 단어 인덱스 로더 재사용 (L2/L3/L4 통합 어휘)
+  _kidsFCAll = _kidsIdxAll.slice();
+  _kidsFCFilter = new Set();
+  _kidsFCApplyFilter();
+}
+function closeKidsFC(){
+  document.getElementById('kids-fc-overlay').classList.remove('open');
+  document.getElementById('kids-fc-modal').classList.remove('open');
+}
+function _kidsFCApplyFilter(){
+  const pool = _kidsFCFilter.size===0 ? _kidsFCAll : _kidsFCAll.filter(c=>_kidsFCFilter.has(c.book));
+  const rev = _kidsFCReviewSet();
+  const revCards = _kidsFCShuffle(pool.filter(c=>rev.has(_kidsFCCardId(c))));
+  const otherCards = _kidsFCShuffle(pool.filter(c=>!rev.has(_kidsFCCardId(c))));
+  _kidsFCCards = [...revCards, ...otherCards].slice(0,25);
+  _kidsFCIdx=0; _kidsFCFlipped=false;
+  _kidsFCRender();
+}
+function _kidsFCChip(book){
+  if(book===null) _kidsFCFilter.clear();
+  else { if(_kidsFCFilter.has(book)) _kidsFCFilter.delete(book); else _kidsFCFilter.add(book); }
+  _kidsFCApplyFilter();
+}
+function _kidsFCFlip(){
+  _kidsFCFlipped = !_kidsFCFlipped;
+  const el = document.getElementById('kids-fc-card-inner');
+  if(el) el.classList.toggle('flipped', _kidsFCFlipped);
+}
+function _kidsFCPrev(){ if(_kidsFCIdx>0){ _kidsFCIdx--; _kidsFCFlipped=false; _kidsFCRender(); } }
+function _kidsFCNext(){ if(_kidsFCIdx<_kidsFCCards.length-1){ _kidsFCIdx++; _kidsFCFlipped=false; _kidsFCRender(); } }
+function _kidsFCMarkAndNext(isReview){
+  _kidsFCMark(_kidsFCCards[_kidsFCIdx], isReview);
+  if(_kidsFCIdx<_kidsFCCards.length-1){ _kidsFCIdx++; _kidsFCFlipped=false; _kidsFCRender(); }
+  else { _kidsFCApplyFilter(); } // 덱 끝 — SRS 우선순위로 재섞기
+}
+function _kidsFCSpeak(txt){
+  if(typeof b1SpeakSound==='function'){ try{ b1SpeakSound(txt); }catch(e){} }
+  if(window.speechSynthesis){ speechSynthesis.speak(Object.assign(new SpeechSynthesisUtterance(txt),{lang:'ko-KR'})); }
+}
+
+function _kidsFCRender(){
+  const m=document.getElementById('kids-fc-modal');
+  if(!m) return;
+  if(!_kidsFCCards.length){
+    m.innerHTML = '<div class="kids-fc-hdr"><h3>🃏 복습 카드 · Review</h3><button class="kids-fc-close" onclick="closeKidsFC()">✕</button></div>'
+      + '<div style="text-align:center;padding:40px;color:#aaa;font-family:Jua,sans-serif;">복습할 단어가 없어요 😊</div>';
+    return;
+  }
+  const c=_kidsFCCards[_kidsFCIdx], total=_kidsFCCards.length;
+  const rev=_kidsFCReviewSet(), kn=_kidsFCKnownSet(), cid=_kidsFCCardId(c);
+  const isReview = rev.has(cid), isKnown = kn.has(cid);
+  const badge = isReview ? '<span class="kids-fc-badge kids-fc-badge-review">🔄 복습</span>' : isKnown ? '<span class="kids-fc-badge kids-fc-badge-known">✅ 알아요</span>' : '';
+  const pct = total>1 ? Math.round((_kidsFCIdx/(total-1))*100) : 100;
+  const allOn = _kidsFCFilter.size===0;
+  const books=[2,3,4];
+  const chips = '<div class="kids-fc-chips">'
+    + '<button class="kids-fc-chip'+(allOn?' on':'')+'" onclick="_kidsFCChip(null)">전체</button>'
+    + books.map(b=>'<button class="kids-fc-chip'+(_kidsFCFilter.has(b)?' on':'')+'" onclick="_kidsFCChip('+b+')">L'+b+'</button>').join('')
+    + '</div>';
+  const krEsc = (c.korean||'').replace(/'/g,"\\'");
+  m.innerHTML = '<div class="kids-fc-hdr"><h3>🃏 복습 카드 · Review</h3><button class="kids-fc-close" onclick="closeKidsFC()">✕</button></div>'
+    + chips
+    + '<div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0;">'
+    + '<div style="font-size:12px;color:#999;">'+(_kidsFCIdx+1)+' / '+total+' 카드</div>'
+    + '<div style="width:110px;height:6px;background:#eee;border-radius:3px;"><div style="height:100%;width:'+pct+'%;background:#2a9d8f;border-radius:3px;"></div></div>'
+    + '<button onclick="_kidsFCApplyFilter()" style="border:none;background:none;font-size:12px;color:#999;cursor:pointer;">🔀 섞기</button>'
+    + '</div>'
+    + '<div class="kids-fc-scene" onclick="_kidsFCFlip()">'
+    +   '<div class="kids-fc-card" id="kids-fc-card-inner">'
+    +     '<div class="kids-fc-face kids-fc-front">'+badge
+    +       '<div style="font-size:44px;">'+(c.emoji||'📖')+'</div>'
+    +       '<div style="font-size:26px;font-weight:800;color:#333;">'+(c.korean||'')+'</div>'
+    +       '<div style="font-size:11px;color:#2a9d8f;margin-top:10px;">👆 탭해서 뒤집기</div>'
+    +     '</div>'
+    +     '<div class="kids-fc-face kids-fc-back">'
+    +       '<div style="font-size:20px;font-weight:800;color:#333;">'+(c.english||'')+'</div>'
+    +       (c.romanization?'<div style="font-size:13px;color:#999;margin-top:4px;">'+c.romanization+'</div>':'')
+    +       '<div style="font-size:11px;color:#aaa;margin-top:10px;">L'+(c.book||2)+' · '+(c.unit||'')+'과</div>'
+    +     '</div>'
+    +   '</div>'
+    + '</div>'
+    + '<div class="kids-fc-srs-row">'
+    +   '<button class="kids-fc-srs-btn kids-fc-srs-no" onclick="_kidsFCMarkAndNext(true)">❓ 다시 볼게요</button>'
+    +   '<button class="kids-fc-srs-btn kids-fc-srs-yes" onclick="_kidsFCMarkAndNext(false)">✅ 알아요!</button>'
+    + '</div>'
+    + '<div style="display:flex;justify-content:space-between;margin-top:8px;">'
+    +   '<button onclick="_kidsFCPrev()" '+(_kidsFCIdx===0?'disabled':'')+' class="kids-fc-nav-btn">← 이전</button>'
+    +   '<button onclick="_kidsFCSpeak(\''+krEsc+'\')" class="kids-fc-nav-btn">🔊</button>'
+    +   '<button onclick="_kidsFCNext()" '+(_kidsFCIdx===total-1?'disabled':'')+' class="kids-fc-nav-btn">다음 →</button>'
+    + '</div>';
+}
+
 
 // ══════════════════════════════════════════════════════
 // ── KIDS WARM-UP QUIZ ─────────────────────────────────
@@ -12347,6 +12519,8 @@ function b4SwitchTab(tab) {
     <div class="kids-idx-page-ctrl" id="kids-idx-page-ctrl" style="display:none;"></div>
 </div>
 
+<div class="kids-fc-overlay" id="kids-fc-overlay" onclick="if(event.target===this)closeKidsFC()"></div>
+<div class="kids-fc-modal" id="kids-fc-modal"></div>
 
 </body>
 </html>
