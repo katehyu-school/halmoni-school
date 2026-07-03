@@ -2351,6 +2351,15 @@ const READING_POOL = {
       {q:'요즘 어떤 회사들이 다른 호칭을 써요?', q_en:'Which companies use different forms of address?', options:['대기업과 공무원','스타트업이나 외국계 회사','병원과 학교'], answer:1},
     ]
   },
+
+  'L4_ep01':{
+    passage:'우체부가 할머니 댁에 왔어요. "계십니까?" 하고 불렀어요. 할머니가 나와서 누구냐고 물었어요. 우체부는 등기 우편이 왔다고 했어요. 확인 후에 사인이 필요하다고 했어요. 편지는 HQ은행에서 보낸 신용카드였어요. 할머니는 사인을 하고 우편을 받았어요.',
+    passage_en:'A postal worker came to grandma\'s house. He called out, "Is anybody home?" Grandma came out and asked who it was. The postal worker said a registered letter had arrived. He said a signature was needed after confirmation. The letter was a credit card sent from HQ Bank. Grandma signed and received the mail.',
+    questions:[
+      {q:'우체부는 왜 할머니의 사인을 받았어요?', q_en:'Why did the postal worker need a signature from grandma?', options:['등기 우편은 수령 확인이 필요해서','선물을 주려고','편지를 잃어버려서'], answer:0},
+      {q:'편지는 어디에서 보낸 거예요?', q_en:'Where was the letter sent from?', options:['우체국','HQ은행','학교'], answer:1},
+    ]
+  },
 };
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
@@ -2569,6 +2578,11 @@ const SP_QUIZ_POOL = {
   'L3_ep05':[
     {chars:'늦잠을자는바람에지각했어요', spaces:[2,4,7,9], en:'Because I overslept, I was late.', hint:'늦잠을 · 자는 · 바람에 · 지각했어요'},
     {chars:'머리를못감은채로출근했어요', spaces:[3,6,8,10], en:'I came to work without washing my hair.', hint:'머리를 · 못 감은 · 채로 · 출근했어요'},
+  ],
+
+  'L4_ep01':[
+    {chars:'등기우편이왔습니다', spaces:[2,5], en:'A registered letter has arrived.', hint:'등기 · 우편이 · 왔습니다'},
+    {chars:'수령확인이필요합니다', spaces:[2,5], en:'Confirmation of receipt is needed.', hint:'수령 · 확인이 · 필요합니다'},
   ],};
 
 let _spqPool=null, _spqIdx=0, _spqClicked=[];
