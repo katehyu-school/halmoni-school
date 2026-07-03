@@ -700,9 +700,9 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
     <button class="level-btn level-btn-basis" onclick="setLevel(this)">Basics</button>
     <button class="level-btn active" onclick="setLevel(this)">Level 1</button>
     <button class="level-btn" onclick="setLevel(this)">Level 2</button>
-    <!-- Level 4~5: 콘텐츠 준비 전 disabled -->
     <button class="level-btn" onclick="setLevel(this)">Level 3</button>
-    <button class="level-btn" disabled>Level 4</button>
+    <button class="level-btn" onclick="setLevel(this)">Level 4</button>
+    <!-- Level 5: 콘텐츠 준비 전 disabled -->
     <button class="level-btn" disabled>Level 5</button>
   </div>
   <div class="school-title"><svg width="26" height="26" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="#0a2540" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="white" letter-spacing="2">HQ</text></svg><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
@@ -816,6 +816,9 @@ const L3_EPISODES=[
   {id:'ep11',label:'깜빡 속을 뻔했어'},
   {id:'ep12',label:'서낭당은 마을 신을 모신 사당이다'}
 ];
+const L4_EPISODES=[
+  {id:'ep01',label:'계십니까?'}
+];
 const EPISODES=L1_EPISODES; // 하위호환
 
 function buildSidebar(lv){
@@ -837,6 +840,8 @@ function buildSidebar(lv){
   }else if(lv==='L3'){
     html=L3_EPISODES.map((ep,i)=>mkItem(ep,i,'L3')).join('')
       +'<div class="lt-item" id="l3t-sidebar-item" onclick="loadL3Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 3 마감 테스트</div></div>';
+  }else if(lv==='L4'){
+    html=L4_EPISODES.map((ep,i)=>mkItem(ep,i,'L4')).join('');
   }
   document.getElementById('ep-list').innerHTML=html;
 }
@@ -3117,6 +3122,11 @@ async function openIndex(){
       if(!EPISODE_DATA['L3_'+ep.id]){
         try{const r=await fetch(`data/nhs/L3/${ep.id}.json`);if(r.ok)EPISODE_DATA['L3_'+ep.id]=await r.json();}catch(e){}
       }
+    }),
+    ...L4_EPISODES.map(async ep=>{
+      if(!EPISODE_DATA['L4_'+ep.id]){
+        try{const r=await fetch(`data/nhs/L4/${ep.id}.json`);if(r.ok)EPISODE_DATA['L4_'+ep.id]=await r.json();}catch(e){}
+      }
     })
   ]);
   renderIdxBody();
@@ -3983,7 +3993,7 @@ const SPEAK_CARDS=[
 // ══════════════════════════════════════════════════════
 function setLevel(btn){
   const _lv=btn.textContent.trim();
-  if(NHS_IS_TRIAL&&(_lv==='Level 2'||_lv==='Level 3')){
+  if(NHS_IS_TRIAL&&_lv!=='Level 1'&&_lv!=='Basics'){
     alert('체험판에서는 Level 1의 일부 에피소드만 이용할 수 있어요.\n전체 이용은 hangeulquest@gmail.com으로 문의해 주세요!\n\nThis trial covers a few Level 1 episodes only. Email hangeulquest@gmail.com for full access.');
     return;
   }
@@ -3997,7 +4007,7 @@ function setLevel(btn){
     loadBasics(curBasicsTopic);
   }else{
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
-    const lv=curLevel==='Level 2'?'L2':curLevel==='Level 3'?'L3':'L1';
+    const lv=curLevel==='Level 4'?'L4':curLevel==='Level 3'?'L3':curLevel==='Level 2'?'L2':'L1';
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 '+curLevel;}
     buildSidebar(lv);
     loadEp('ep01',lv);
