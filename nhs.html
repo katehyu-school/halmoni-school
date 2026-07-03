@@ -817,7 +817,8 @@ const L3_EPISODES=[
   {id:'ep12',label:'서낭당은 마을 신을 모신 사당이다'}
 ];
 const L4_EPISODES=[
-  {id:'ep01',label:'계십니까?'}
+  {id:'ep01',label:'계십니까?'},
+  {id:'ep02',label:'이게 왜 여기 있지?'}
 ];
 const EPISODES=L1_EPISODES; // 하위호환
 
@@ -2360,6 +2361,15 @@ const READING_POOL = {
       {q:'편지는 어디에서 보낸 거예요?', q_en:'Where was the letter sent from?', options:['우체국','HQ은행','학교'], answer:1},
     ]
   },
+
+  'L4_ep02':{
+    passage:'미래 엄마가 전화기를 찾다가 냉장고에서 발견했어요. 사실은 주스를 마시려고 냉장고를 열었을 때 전화기가 거기 있었어요. 미래 엄마는 귀신에 홀린 것 같다고 했어요. 미래는 엄마가 원래도 물건을 잘 잃어버린다고 놀렸어요. 결국 미래 엄마는 자기가 실수로 전화기를 넣어놨다는 걸 깨달았어요.',
+    passage_en:'Mirae\'s mom was looking for her phone and found it in the fridge. She had opened the fridge for juice, and there the phone was. She said she felt like she\'d been bewitched by a ghost. Mirae teased her, saying she always loses things. In the end, Mirae\'s mom realized she must have accidentally put the phone there herself.',
+    questions:[
+      {q:'전화기가 어디에서 발견됐어요?', q_en:'Where was the phone found?', options:['탁자 위에','냉장고 안에','침대 위에'], answer:1},
+      {q:'미래 엄마는 결국 뭘 깨달았어요?', q_en:"What did Mirae's mom eventually realize?", options:['귀신이 진짜 있다는 것','자기가 실수로 넣어놨다는 것','전화기가 고장났다는 것'], answer:1},
+    ]
+  },
 };
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
@@ -2583,6 +2593,11 @@ const SP_QUIZ_POOL = {
   'L4_ep01':[
     {chars:'등기우편이왔습니다', spaces:[2,5], en:'A registered letter has arrived.', hint:'등기 · 우편이 · 왔습니다'},
     {chars:'수령확인이필요합니다', spaces:[2,5], en:'Confirmation of receipt is needed.', hint:'수령 · 확인이 · 필요합니다'},
+  ],
+
+  'L4_ep02':[
+    {chars:'여기에있을리가없는데', spaces:[3,5,7], en:"There's no way this should be here.", hint:'여기에 · 있을 · 리가 · 없는데'},
+    {chars:'귀신이엄마를홀릴리가있겠어요', spaces:[3,6,8,10], en:'Could a ghost really bewitch you?', hint:'귀신이 · 엄마를 · 홀릴 · 리가 · 있겠어요'},
   ],};
 
 let _spqPool=null, _spqIdx=0, _spqClicked=[];
@@ -5032,14 +5047,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(NHS_IS_TRIAL){
     document.querySelectorAll('.level-btn').forEach(b=>{
       const t=b.textContent.trim();
-      if(t==='Level 2'||t==='Level 3'){ b.style.opacity='.4'; b.title='체험판에서는 이용할 수 없어요 · Not available in trial'; }
+      if(t==='Level 2'||t==='Level 3'||t==='Level 4'||t==='Level 5'){ b.style.opacity='.4'; b.title='체험판에서는 이용할 수 없어요 · Not available in trial'; }
     });
     const bar=document.createElement('div');
     bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
-    bar.innerHTML='🔓 체험판 · Trial — Level 1 '+NHS_TRIAL_EPS.join(', ')+' 열람 가능 · 전체 이용 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>';
+    bar.innerHTML='🔓 체험판 · Trial — Level 1 '+NHS_TRIAL_EPS.join(', ')+' 열람 가능 · 전체 이용 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>'
+      +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">체험판 종료 · Exit trial view</a>';
     document.body.insertBefore(bar, document.body.firstChild);
   }
 });
+function nhsExitTrial(){
+  try{ localStorage.removeItem('nhs_trial'); }catch(e){}
+  location.href = location.pathname; // 쿼리스트링 없이 새로고침 → 체험 플래그 완전 해제
+}
 
 
 // ── SPEAKING PRACTICE ────────────────────────────────────
