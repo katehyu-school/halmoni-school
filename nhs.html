@@ -95,56 +95,15 @@ const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'
 })();
 const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial') || (function(){ try{ return localStorage.getItem('nhs_trial')==='1'; }catch(e){ return false; } })();
 const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];
-const L1_EPISODES=[
-  {id:'ep01',label:'안녕! 나는 정민이야.'},
-  {id:'ep02',label:'누구예요?'},
-  {id:'ep03',label:'잘 먹겠습니다'},
-  {id:'ep04',label:'우리 몇 시에 만날까?'},
-  {id:'ep05',label:'광장시장에 가요?'},
-  {id:'ep06',label:'김밥 주세요'},
-  {id:'ep07',label:'한국어 스터디 그룹을 만들어요'},
-  {id:'ep08',label:'내 도시락은 어디에 있어요?'},
-  {id:'ep09',label:'딸기 한 박스하고 사과 여섯 개 주세요'},
-  {id:'ep10',label:'자전거 소풍을 가요'},
-  {id:'ep11',label:'어서 오세요'},
-  {id:'ep12',label:'경복궁에 갈 거예요!'}
-];
-const L2_EPISODES=[
-  {id:'ep01',label:'한국에 도착했어요'},
-  {id:'ep02',label:'공항에서 잠실까지'},
-  {id:'ep03',label:'열이 펄펄 나요'},
-  {id:'ep04',label:'비가 올 것 같아요'},
-  {id:'ep05',label:'용문사에 가면'},
-  {id:'ep06',label:'회원권이 있으세요?'},
-  {id:'ep07',label:'같이 가실래요?'},
-  {id:'ep08',label:'할머니의 된장국'},
-  {id:'ep09',label:'킬라니 행운의 캠핑 사이트'},
-  {id:'ep10',label:'멀미해요'},
-  {id:'ep11',label:'여기가 옛날엔 바다였거든'},
-  {id:'ep12',label:'호랑이가 지었다고요?'}
-];
-const L3_EPISODES=[
-  {id:'ep01',label:'파전이나 부쳐 먹을까?'},
-  {id:'ep02',label:'물티슈로 닦으라고!'},
-  {id:'ep03',label:'윷놀이를 소개합니다'},
-  {id:'ep04',label:'베이비 시터'},
-  {id:'ep05',label:'늦잠을 자는 바람에'},
-  {id:'ep06',label:'아무리 그래도 그렇지'},
-  {id:'ep07',label:'갈비를 맛있게 먹으려면'},
-  {id:'ep08',label:'날씨가 좋군요'},
-  {id:'ep09',label:'조회수 백만 가자!'},
-  {id:'ep10',label:'입을 옷이 하나도 없어'},
-  {id:'ep11',label:'깜빡 속을 뻔했어'},
-  {id:'ep12',label:'서낭당은 마을 신을 모신 사당이다'}
-];
-const L4_EPISODES=[
-  {id:'ep01',label:'계십니까?'},
-  {id:'ep02',label:'이게 왜 여기 있지?'},
-  {id:'ep03',label:'우주 대스타의 삶이란'},
-  {id:'ep04',label:'여기가 왜 이렇게 좁아졌어요?'},
-  {id:'ep05',label:'속담 알아 맞추기'}
-];
-const EPISODES=L1_EPISODES; // 하위호환
+let L1_EPISODES=[], L2_EPISODES=[], L3_EPISODES=[], L4_EPISODES=[];
+const EPISODES=L1_EPISODES; // 하위호환 — 같은 배열 참조를 유지해야 하므로 재할당(=) 대신 아래에서 push()로 채움
+// 에피소드 사이드바 목록은 data/nhs/episodes_index.json에서 fetch — 새 에피소드 추가 시 nhs.html을 건드리지 않아도 됨 (2026-07-04)
+const _epIdxReady = fetch('data/nhs/episodes_index.json').then(r=>r.json()).then(d=>{
+  L1_EPISODES.push(...(d.L1||[]));
+  L2_EPISODES.push(...(d.L2||[]));
+  L3_EPISODES.push(...(d.L3||[]));
+  L4_EPISODES.push(...(d.L4||[]));
+}).catch(e=>{});
 
 function buildSidebar(lv){
   lv=lv||'L1';
@@ -2636,7 +2595,8 @@ const SPEAK_CARDS=[
 // ══════════════════════════════════════════════════════
 // ── LEVEL & SIDEBAR ────────────────────────────────────
 // ══════════════════════════════════════════════════════
-function setLevel(btn){
+async function setLevel(btn){
+  await _epIdxReady;
   const _lv=btn.textContent.trim();
   if(NHS_IS_TRIAL&&_lv!=='Level 1'&&_lv!=='Basics'){
     alert('체험판에서는 Level 1의 일부 에피소드만 이용할 수 있어요.\n전체 이용은 hangeulquest@gmail.com으로 문의해 주세요!\n\nThis trial covers a few Level 1 episodes only. Email hangeulquest@gmail.com for full access.');
@@ -3657,7 +3617,8 @@ function buildSpacing(){
 }
 
 // ── INIT ───────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', async ()=>{
+  await _epIdxReady;
   buildSidebar();
   loadEp('ep01');
   if(NHS_IS_TRIAL){
