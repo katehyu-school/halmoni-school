@@ -258,6 +258,7 @@ const urlName   = _hc ? _hc.urlName : null;
 - 에피소드 추가 = `data/nhs/L{n}/epNN.json` 파일 추가 + `data/nhs/episodes_index.json`에 1줄 추가 (**nhs.html은 건드릴 필요 없음**, 2026-07-04부터)
 - **2026-07-03**: READING_POOL/SP_QUIZ_POOL/L1Q/L2Q/L3Q(마감테스트) → `data/nhs/*.json`으로 분리, CSS → `core/nhs.css`. 레벨별 파일 분리는 하지 않음 — 렌더링 엔진(사이드바/문법·퀴즈 렌더러/TTS/씬뷰어)을 L1~L4가 전부 공유하므로, 분리 시 코드 중복+유지보수 2배+레벨 전환마다 페이지 새로고침 필요해짐. 대신 "진짜 큰 데이터"만 골라서 외부화하는 전략 채택.
 - **2026-07-04**: `L1_EPISODES`/`L2_EPISODES`/`L3_EPISODES`/`L4_EPISODES` 사이드바 배열도 `data/nhs/episodes_index.json`으로 분리 + fetch 로드(`_epIdxReady`) 전환. 계기: 296KB로 줄인 뒤에도 Edit 툴이 이 배열에 1줄 추가하는 작업 중 nhs.html 꼬리를 자르는 사고가 재발 — 크기를 줄이는 것만으론 근본 해결이 안 됨을 확인. 새 에피소드마다 nhs.html을 "아예 안 건드리게" 만드는 쪽으로 근본 대응. `EPISODES`(L1 하위호환 별칭)는 재할당 대신 `.push()`로 채워서 참조 유지 — reassign 시 별칭이 빈 배열을 계속 가리키는 버그 주의.
+- **2026-07-05**: 여러 에피소드가 재사용하는 "표현 세트"(예: 맛 표현, 식당 실전 어휘)를 매 에피소드 JSON에 중복 기입하지 않도록 `data/nhs/shared_expression_sets.json` 신설 + `_resolveRefs()` 리졸버 도입. 에피소드 JSON의 `vocab`/`usage` 배열에 `{"ref":"set_name"}` 항목을 넣으면 로드 시점에 실제 데이터로 자동 치환됨(READING_POOL과 동일한 fetch-once 패턴, `_sharedSetsReady` promise). `EPISODE_DATA`를 채우는 3곳(`_doLoadEp`/`openIndex`/플래시카드 빌더) 모두에 리졸버 연결 완료. 첫 세트 2개: `taste_expressions`(맛 표현), `restaurant_general`(식당 공통 응대 표현) — L3 ep07(숯불갈비집)에 적용, 그릴 전용 어휘(가위/불판)만 에피소드에 인라인 유지.
 
 **korean-app_v2.html (Hangeul Quest Kids)**
 - **HTML 레벨별 분리 안 함** — `selectBook(2|3)` UX 깨지고 공통 코드 중복 발생

@@ -461,7 +461,7 @@ function l3tRetry(){
 }
 
 async function _doLoadEp(epId, level='L1'){
-  await Promise.all([_rdPoolReady, _spPoolReady]);
+  await Promise.all([_rdPoolReady, _spPoolReady, _sharedSetsReady]);
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById(`ep-item-${level}-${epId}`);
   if(item)item.classList.add('active');
@@ -473,7 +473,7 @@ async function _doLoadEp(epId, level='L1'){
   } else {
     try{
       const res=await fetch(`data/nhs/${level}/${epId}.json`);
-      if(res.ok){ DATA=await res.json(); EPISODE_DATA[cacheKey]=DATA; }
+      if(res.ok){ DATA=await res.json(); _resolveRefs(DATA); EPISODE_DATA[cacheKey]=DATA; }
       else DATA=null;
     }catch(e){ DATA=null; }
   }
@@ -1105,6 +1105,23 @@ function resetQuiz(){
 
 // ── READING PASSAGE GAME ────────────────────────────────
 let READING_POOL = {}; const _rdPoolReady = fetch('data/nhs/reading_pool.json').then(r=>r.json()).then(d=>{READING_POOL=d;}).catch(e=>{});
+let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{});
+// 여러 에피소드가 재사용하는 표현 세트({"ref":"set_name"}) 해석 — vocab/usage 배열 안에서 ref 항목을 실제 데이터로 치환
+function _resolveRefs(data){
+  if(!data) return data;
+  ['vocab','usage'].forEach(key=>{
+    if(Array.isArray(data[key])){
+      data[key]=data[key].flatMap(entry=>{
+        if(entry&&entry.ref){
+          const shared=SHARED_SETS[entry.ref];
+          return (shared&&shared[key])?[shared[key]]:[];
+        }
+        return [entry];
+      });
+    }
+  });
+  return data;
+}
 
 let _rdPool=null, _rdQIdx=0, _rdAnswered=0;
 
@@ -1711,25 +1728,26 @@ async function openIndex(){
   // Pre-fetch any episodes not yet in cache
   const body=document.getElementById('idx-body');
   if(body) body.innerHTML='<div style="padding:20px;text-align:center">로딩 중…</div>';
+  await _sharedSetsReady;
   await Promise.all([
     ...EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L1_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L1/${ep.id}.json`);if(r.ok)EPISODE_DATA['L1_'+ep.id]=await r.json();}catch(e){}
+        try{const r=await fetch(`data/nhs/L1/${ep.id}.json`);if(r.ok)EPISODE_DATA['L1_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
       }
     }),
     ...L2_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L2_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L2/${ep.id}.json`);if(r.ok)EPISODE_DATA['L2_'+ep.id]=await r.json();}catch(e){}
+        try{const r=await fetch(`data/nhs/L2/${ep.id}.json`);if(r.ok)EPISODE_DATA['L2_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
       }
     }),
     ...L3_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L3_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L3/${ep.id}.json`);if(r.ok)EPISODE_DATA['L3_'+ep.id]=await r.json();}catch(e){}
+        try{const r=await fetch(`data/nhs/L3/${ep.id}.json`);if(r.ok)EPISODE_DATA['L3_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
       }
     }),
     ...L4_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L4_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L4/${ep.id}.json`);if(r.ok)EPISODE_DATA['L4_'+ep.id]=await r.json();}catch(e){}
+        try{const r=await fetch(`data/nhs/L4/${ep.id}.json`);if(r.ok)EPISODE_DATA['L4_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
       }
     })
   ]);
@@ -2184,6 +2202,7 @@ let _fcFilter=new Set(); // empty = all episodes
 async function openFlashcards(){
   document.getElementById('fc-overlay').classList.add('open');
   document.getElementById('fc-modal').innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div><div style="font-size:15px;color:var(--warm-600);">단어 불러오는 중...<br><small>Loading vocabulary...</small></div></div>';
+  await _sharedSetsReady;
   const _lvRaw=(DATA&&DATA.level)||(typeof curLevel!=='undefined'?curLevel:'Level 1');
   const lv=(_lvRaw==='L2'||_lvRaw==='Level 2')?'L2':'L1';
   _fcEps=(lv==='L2'?L2_EPISODES:L1_EPISODES).filter(ep=>!ep.disabled);
@@ -2192,7 +2211,7 @@ async function openFlashcards(){
     const epKey=lv+'_'+ep.id;
     let data=EPISODE_DATA[epKey];
     if(!data){
-      try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json');if(r.ok){data=await r.json();EPISODE_DATA[epKey]=data;}}catch(e){return;}
+      try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
     }
     if(!data||!data.vocab)return;
     data.vocab.forEach(cat=>{
