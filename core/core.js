@@ -190,6 +190,19 @@
   //
   // 반환: { sessionId, nominate, raiseHand, updateQIndex }
 
+  // practice_session은 앱 전체에서 딱 한 줄만 쓰는 공유 상태라, 수업이
+  // 지목된 채로 끝나면(선생님이 리셋 안 하고 종료) 그 상태가 무기한 남아있게 됨.
+  // 2026-07-06: 6/25 수업의 "리암 차례" 상태가 11일간 안 지워져서, 그 사이
+  // 접속한 모든 사람 화면에 지목-아닌-차례 dim(불투명 막)이 걸리는 버그 발생.
+  // → updated_at이 일정 시간 이상 지난 상태는 "지난 수업의 잔여물"로 간주해 무시.
+  const PRACTICE_SESSION_MAX_AGE_MS = 2 * 60 * 60 * 1000; // 2시간
+
+  function isPracticeSessionFresh(data) {
+    if (!data || !data.updated_at) return false;
+    const age = Date.now() - new Date(data.updated_at).getTime();
+    return age < PRACTICE_SESSION_MAX_AGE_MS;
+  }
+
   function createPracticeSession(options = {}) {
     const supa = getSupabase();
     if (!supa) return null;
@@ -201,8 +214,18 @@
         .from('practice_session').select('*').order('id').limit(1).single();
       if (data) {
         state.sessionId = data.id;
-        state.last = data;
-        options.onStateChange?.(data, false);
+        if (isPracticeSessionFresh(data)) {
+          state.last = data;
+        } else {
+          // 오래된 잔여 상태 — 화면엔 깨끗한 상태로 보여주고, DB도 같이 정리
+          // (다음 접속자가 또 이 검사를 반복할 필요 없도록 self-healing)
+          state.last = { ...data, current_player: null, status: 'waiting', raised_hands: [] };
+          supa.from('practice_session').update({
+            current_player: null, status: 'waiting', raised_hands: [],
+            updated_at: new Date().toISOString(),
+          }).eq('id', data.id).then(() => {});
+        }
+        options.onStateChange?.(state.last, false);
       }
     }
 
