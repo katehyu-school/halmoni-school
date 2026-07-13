@@ -1284,7 +1284,7 @@ function _spqDone(){
 // ── PRONUNCIATION ─────────────────────────────────────
 function buildPron(){
   let _pron=DATA.pronunciation;
-  if(_pron&&!Array.isArray(_pron)&&_pron.items){_pron=(_pron.items||[]).map(p=>({title:p.word||p.rule||p.title||'',rule:p.actual||'',tip:p.note||p.tip||'',examples:(p.examples||[]).map(ex=>({before:ex.written||ex.before||ex.ko||'',after:ex.pronounced||ex.after||'',note:ex.note||ex.en||''}))}));}
+  if(_pron&&!Array.isArray(_pron)&&_pron.items){_pron=(_pron.items||[]).map(p=>({title:p.word||p.rule||p.title||'',rule:p.actual||'',tip:p.note||p.tip||'',examples:(p.examples||[]).map(ex=>({before:ex.written||ex.before||ex.ko||'',after:ex.pronounced||ex.pronounced_standard||ex.pronounced_actual||ex.after||'',pronounced_standard:ex.pronounced_standard||ex.pronounced||ex.after||'',pronounced_actual:ex.pronounced_actual||ex.pronounced||ex.after||'',note:ex.note||ex.en||''}))}));}
   const items=Array.isArray(_pron)?_pron:[];
   if(!items.length){
     // 문법에서 발음·불규칙 관련 자동 추출

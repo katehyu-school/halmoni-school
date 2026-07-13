@@ -250,6 +250,11 @@ const urlName   = _hc ? _hc.urlName : null;
   3. bash에서 파일 끝(`tail -c 300`)이 잘려 보여도 착시일 수 있음(마운트 동기화 지연) — **Read 툴 또는 Grep으로 host-side 재확인** 후 최종 판단
 - git HEAD가 최신이 아닐 수 있으므로, 복구 시 HEAD로 무조건 되돌리기 전에 최근 세션에서 의도한 변경이 있었는지 먼저 확인할 것
 
+> 🔴 **2026-07-12 신규 확인 — Python bash 치환도 안전하지 않을 수 있음**: nhs.html의 `buildPron()` 발음 렌더러 버그(`pronounced_standard`/`pronounced_actual` 필드를 못 읽어서 발음 표시가 통째로 빈칸으로 나오는 문제, L2 ep02·L4 ep08·L4 ep09 영향)를 고치려고 위 권장 절차대로 "Python bash로 문자열 치환 후 전체 write"를 했는데, 이번엔 **bash 샌드박스 마운트가 read() 시점에 이미 낡은/짧은 스냅샷을 반환**해서 그 짧은 내용 위에 치환 결과를 write → 파일 끝 27줄(`</footer></body></html>` 포함)이 통째로 날아감. null bytes 0·파일 크기 증가라서 1차 점검은 통과했지만, 이후 Read/Grep(host-side)로 `</html>` 태그를 찾았을 때 실제로 없어서 발견함.
+>  - **핵심 교훈**: null byte 체크와 파일 크기 증가만으론 안전 확인이 안 됨 — **반드시 Grep으로 `</html>`(또는 파일 끝 고유 문자열)이 실제로 존재하는지 host-side에서 확인**할 것.
+>  - **안전한 복구법**: `git show HEAD:파일명 > /tmp/파일명`으로 git 객체(불변, 마운트 캐시 영향 없음)에서 깨끗한 사본을 뜨고, **그 임시 사본 위에서** Python 치환을 수행한 뒤 원래 경로로 복사 — 살아있는 마운트 파일을 직접 read()하지 않는 방식이라 이번엔 정상 작동함.
+>  - 다음 세션에서 nhs.html·korean-app_v2.html 같은 대용량 파일을 다시 고칠 때도 이 "HEAD 임시 사본에서 치환 → 복사 → Grep으로 끝 태그 확인" 절차를 기본으로 쓸 것.
+
 ### ⚙️ 아키텍처 결정 사항 (확정)
 
 **nhs.html (Hangeul Quest)**
