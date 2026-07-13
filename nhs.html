@@ -23,8 +23,7 @@
     <button class="level-btn" onclick="setLevel(this)">Level 2</button>
     <button class="level-btn" onclick="setLevel(this)">Level 3</button>
     <button class="level-btn" onclick="setLevel(this)">Level 4</button>
-    <!-- Level 5: 콘텐츠 준비 전 disabled -->
-    <button class="level-btn" disabled>Level 5</button>
+    <button class="level-btn" onclick="setLevel(this)">Level 5</button>
   </div>
   <div class="school-title"><svg width="26" height="26" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="#0a2540" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="white" letter-spacing="2">HQ</text></svg><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
@@ -95,7 +94,7 @@ const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'
 })();
 const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial') || (function(){ try{ return localStorage.getItem('nhs_trial')==='1'; }catch(e){ return false; } })();
 const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];
-let L1_EPISODES=[], L2_EPISODES=[], L3_EPISODES=[], L4_EPISODES=[];
+let L1_EPISODES=[], L2_EPISODES=[], L3_EPISODES=[], L4_EPISODES=[], L5_EPISODES=[];
 const EPISODES=L1_EPISODES; // 하위호환 — 같은 배열 참조를 유지해야 하므로 재할당(=) 대신 아래에서 push()로 채움
 // 에피소드 사이드바 목록은 data/nhs/episodes_index.json에서 fetch — 새 에피소드 추가 시 nhs.html을 건드리지 않아도 됨 (2026-07-04)
 const _epIdxReady = fetch('data/nhs/episodes_index.json').then(r=>r.json()).then(d=>{
@@ -103,6 +102,7 @@ const _epIdxReady = fetch('data/nhs/episodes_index.json').then(r=>r.json()).then
   L2_EPISODES.push(...(d.L2||[]));
   L3_EPISODES.push(...(d.L3||[]));
   L4_EPISODES.push(...(d.L4||[]));
+  L5_EPISODES.push(...(d.L5||[]));
 }).catch(e=>{});
 
 function buildSidebar(lv){
@@ -127,6 +127,8 @@ function buildSidebar(lv){
   }else if(lv==='L4'){
     html=L4_EPISODES.map((ep,i)=>mkItem(ep,i,'L4')).join('')
       +'<div class="lt-item" id="l4t-sidebar-item" onclick="loadL4Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 4 마감 테스트</div></div>';
+  }else if(lv==='L5'){
+    html=L5_EPISODES.map((ep,i)=>mkItem(ep,i,'L5')).join('');
   }
   document.getElementById('ep-list').innerHTML=html;
 }
@@ -1862,6 +1864,11 @@ async function openIndex(){
       if(!EPISODE_DATA['L4_'+ep.id]){
         try{const r=await fetch(`data/nhs/L4/${ep.id}.json`);if(r.ok)EPISODE_DATA['L4_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
       }
+    }),
+    ...L5_EPISODES.map(async ep=>{
+      if(!EPISODE_DATA['L5_'+ep.id]){
+        try{const r=await fetch(`data/nhs/L5/${ep.id}.json`);if(r.ok)EPISODE_DATA['L5_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+      }
     })
   ]);
   renderIdxBody();
@@ -2748,7 +2755,7 @@ async function setLevel(btn){
     loadBasics(curBasicsTopic);
   }else{
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
-    const lv=curLevel==='Level 4'?'L4':curLevel==='Level 3'?'L3':curLevel==='Level 2'?'L2':'L1';
+    const lv=curLevel==='Level 5'?'L5':curLevel==='Level 4'?'L4':curLevel==='Level 3'?'L3':curLevel==='Level 2'?'L2':'L1';
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 '+curLevel;}
     buildSidebar(lv);
     loadEp('ep01',lv);
