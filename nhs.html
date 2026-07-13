@@ -125,7 +125,8 @@ function buildSidebar(lv){
     html=L3_EPISODES.map((ep,i)=>mkItem(ep,i,'L3')).join('')
       +'<div class="lt-item" id="l3t-sidebar-item" onclick="loadL3Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 3 마감 테스트</div></div>';
   }else if(lv==='L4'){
-    html=L4_EPISODES.map((ep,i)=>mkItem(ep,i,'L4')).join('');
+    html=L4_EPISODES.map((ep,i)=>mkItem(ep,i,'L4')).join('')
+      +'<div class="lt-item" id="l4t-sidebar-item" onclick="loadL4Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 4 마감 테스트</div></div>';
   }
   document.getElementById('ep-list').innerHTML=html;
 }
@@ -458,6 +459,118 @@ function l3tRetry(){
   l3tIdx=0;l3tScore=0;l3tAnswered=false;
   document.getElementById('content-area').innerHTML=renderL3TPage();
   renderL3T();
+}
+
+// ══════════════════════════════════════════════════════
+// ── LEVEL 4 마감 테스트  (TOPIK 3-4급 / CEFR B1~B2)
+// ══════════════════════════════════════════════════════
+let L4Q=[]; const _l4qReady = fetch('data/nhs/L4/closing_test.json').then(r=>r.json()).then(d=>{L4Q=d;}).catch(e=>{});
+
+let l4tIdx=0,l4tScore=0,l4tAnswered=false;
+
+async function loadL4Test(){
+  await _l4qReady;
+  document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
+  const si=document.getElementById('l4t-sidebar-item');
+  if(si)si.classList.add('active');
+  l4tIdx=0;l4tScore=0;l4tAnswered=false;
+  document.getElementById('content-area').innerHTML=renderL4TPage();
+  renderL4T();
+}
+function renderL4TPage(){
+  return`<div class="lt-page">`
+    +`<div class="lt-header">`
+      +`<div class="lt-title">🏆 Level 4 마감 테스트</div>`
+      +`<div class="lt-subtitle">ep01~ep12 · 문법·읽기·듣기 · ${L4Q.length}문제 · TOPIK 3-4급 / CEFR B1~B2</div>`
+      +`<div class="lt-prog-bar"><div class="lt-prog-fill" id="l4t-prog-fill" style="width:0%"></div></div>`
+      +`<div class="lt-prog-label" id="l4t-prog-label">0 / ${L4Q.length}</div>`
+    +`</div>`
+    +`<div id="l4t-q-area"></div>`
+  +`</div>`;
+}
+function renderL4T(){
+  const q=L4Q[l4tIdx];
+  const pct=Math.round(l4tIdx/L4Q.length*100);
+  const pf=document.getElementById('l4t-prog-fill');
+  const pl=document.getElementById('l4t-prog-label');
+  if(pf)pf.style.width=pct+'%';
+  if(pl)pl.textContent=l4tIdx+' / '+L4Q.length;
+  l4tAnswered=false;
+  const area=document.getElementById('l4t-q-area');
+  if(!area)return;
+  const epLabels={ep01:'-습니다체/-십니까?',ep02:'-ㄹ 리가 없다',ep03:'-기 마련이다',ep04:'-더라고요',ep05:'-는 셈이다',ep06:'-는 탓에',ep07:'-을 정도로',ep08:'-자마자',ep09:'-고서야',ep10:'-는 한',ep11:'-다시피 하다',ep12:'격식체 총정리',read1:'읽기 1',read2:'읽기 2'};
+  const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
+  const listenBtn=q.type==='listen'
+    ?`<button class="lt-listen-btn" onclick="speakTTS('${(q.audio_text||'').replace(/'/g,"\'")}')">🔊 듣기</button><br>`
+    :'';
+  const passageHtml=q.passage
+    ?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`
+    :'';
+  area.innerHTML=
+    badge
+    +passageHtml
+    +`<div class="lt-q-text">${l4tIdx+1}. ${(q.q||'').replace(/\n/g,'<br>')}</div>`
+    +`<div class="lt-q-en">${q.en||''}</div>`
+    +listenBtn
+    +`<div class="lt-opts">`
+    +q.opts.map((o,i)=>`<button class="lt-opt" id="l4t-opt-${i}" onclick="l4tChoose(${i})">${o}</button>`).join('')
+    +`</div><div id="l4t-exp-area"></div>`;
+}
+function l4tChoose(idx){
+  if(l4tAnswered)return;
+  l4tAnswered=true;
+  const q=L4Q[l4tIdx];
+  const correct=q.ans===idx;
+  if(correct)l4tScore++;
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('l4t-opt-'+i);
+    if(!el)return;
+    el.disabled=true;
+    if(i===q.ans)el.classList.add('correct');
+    else if(i===idx&&!correct)el.classList.add('wrong');
+  });
+  document.getElementById('l4t-exp-area').innerHTML=
+    `<div class="lt-exp">${correct?'✅':'❌'} ${q.exp||''}</div>`
+    +`<button class="lt-next-btn" onclick="l4tNext()">${l4tIdx===L4Q.length-1?'📊 결과 보기':'다음 →'}</button>`;
+}
+function l4tNext(){
+  l4tIdx++;
+  if(l4tIdx>=L4Q.length){renderL4TScore();return;}
+  const pf=document.getElementById('l4t-prog-fill');
+  const pl=document.getElementById('l4t-prog-label');
+  if(pf)pf.style.width=Math.round(l4tIdx/L4Q.length*100)+'%';
+  if(pl)pl.textContent=l4tIdx+' / '+L4Q.length;
+  renderL4T();
+}
+function renderL4TScore(){
+  const total=L4Q.length;
+  const pct=Math.round(l4tScore/total*100);
+  const pf=document.getElementById('l4t-prog-fill');
+  const pl=document.getElementById('l4t-prog-label');
+  if(pf)pf.style.width='100%';
+  if(pl)pl.textContent=total+' / '+total;
+  let grade,color,msg,next;
+  if(pct>=90){grade='A';color='#2e7d50';msg='🏆 완벽해요!';next='TOPIK 4급 실전에도 문제없어요! 🎯 Level 5에 도전하세요!';}
+  else if(pct>=80){grade='B';color='var(--teal-dark)';msg='🌟 훌륭해요!';next='TOPIK 4급에 충분히 도전할 수 있어요!';}
+  else if(pct>=70){grade='C';color='var(--amber-600)';msg='👍 잘했어요!';next='틀린 에피소드를 복습하고 다시 도전해봐요!';}
+  else{grade='D';color='#c0392b';msg='💪 더 연습해요!';next='Level 4 에피소드를 다시 복습하고 재도전해요!';}
+  document.getElementById('l4t-q-area').innerHTML=
+    `<div class="lt-score-wrap">`
+    +`<div class="lt-grade" style="color:${color}">${grade}</div>`
+    +`<div class="lt-grade-lbl" style="color:${color}">${msg}</div>`
+    +`<div class="lt-score-detail">`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${l4tScore}/${total}</div><div class="lt-score-box-lbl">정답</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${pct}%</div><div class="lt-score-box-lbl">정확도</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l4tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
+    +`</div>`
+    +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +`<button class="lt-retry-btn" onclick="l4tRetry()">↺ 다시 풀기</button>`
+    +`</div>`;
+}
+function l4tRetry(){
+  l4tIdx=0;l4tScore=0;l4tAnswered=false;
+  document.getElementById('content-area').innerHTML=renderL4TPage();
+  renderL4T();
 }
 
 async function _doLoadEp(epId, level='L1'){
