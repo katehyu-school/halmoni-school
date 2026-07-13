@@ -9,7 +9,7 @@
 
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
-| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~12 완성 ✅** / **L3 마감 테스트 완성 ✅** / **L4 ep01~10 완성 ✅** | L4 ep11+ 스크립트 준비되면 진행 |
+| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~12 완성 ✅** / **L3 마감 테스트 완성 ✅** / **L4 ep01~11 완성 ✅** | L4 ep12+ 스크립트 준비되면 진행 |
 | **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / L3 unit01~10 완성 ✅ / **L4 unit01~06 완성 ✅** | L4 unit07+ 슬라이드/TTS 준비 후 구현 |
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** | 기능 확장 |
 | **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |
@@ -450,6 +450,9 @@ const urlName   = _hc ? _hc.urlName : null;
 | 08 | 🧧 설날 아침 | 새해 복 많이 받으세요 | -(으)ㄹ 때까지★NEW, -는 동안에★심화, -자마자★NEW, -ㄴ다/이다★복습(L3 ep12) | ✅ 완성 |
 | 09 | 🗑️ 라온네 집 | 분리수거는 너무 복잡해요 | -다가는★NEW, -고서야★NEW, -아/어서야★NEW | ✅ 완성 |
 | 10 | 🏠 한옥 온돌방 | 휴대전화 개통하기 | -는 한★NEW, 구어 축약형 -는 거야(-다는/라는 거야), -잖아(요)★복습 | ✅ 완성 |
+| 11 | 👗 리나의 방 | 오기만 해 봐 | -기만 해(봐)★NEW, -고 말겠다★NEW, -다시피 하다★NEW(원래 L5 예정, 앞당김) | ✅ 완성 |
+
+> ✅ **2026-07-13 ep11 구현 완료**: `data/nhs/L4/ep11.json` 작성(10줄, 리나·미라 옷 다툼 K-드라마풍 에피소드) + 슬라이드 10장/TTS 10개 연결 + episodes_index.json/reading_pool.json/spacing_pool.json에 ep11 추가(nhs.html 무편집 유지). 등장인물: 리나(`id:lia`, "#1ABC9C", L2 ep11/12·L4 ep06과 동일)+미라 엄마(`id:mirae_mom`, var(--teal), L4 ep02와 동일). 선생님이 "어휘가 많이 부족하니 보충 부탁해 (드라마 표현이라 자극적으로)"라고 명시적으로 요청 → 원래 5개 단어에 대본 속 3개(가만 두다/참다/너무하다) + 대본 외 K-드라마 자매 신경전 표현 8개(삐지다/토라지다/얄밉다/약 올리다/배신감/억울하다/눈치 보다/화해하다)를 "(대본 외)" 태그로 추가해 총 16개로 확장 — [[hq-vocab-retrofit-shared-sets]]의 "(대본 외)" 태깅 관례 적용. 문법 -다시피 하다는 원래 L5 예정이었으나 이 에피소드에 맞아 앞당겨 도입, 같은 대본에 나오는 "아시다시피"(as you know)와 형태가 비슷해 혼동하기 쉬워 문법카드에 명시적으로 구별 설명 추가. **ep10 QA 교훈 적용**: 이번엔 JSON 작성 전에 슬라이드 10장을 전부 먼저 열어서 원본 스크립트와 대조 완료 — 이번엔 불일치 없음(전부 일치), ep10에서 겪은 "슬라이드가 스크립트보다 최신"인 문제 재발 없었음.
 
 > ✅ **2026-07-13 ep10 구현 완료**: `data/nhs/L4/ep10.json` 작성(21줄 대화, 휴대전화 개통·은행 계좌 개설의 순환 딜레마) + 슬라이드 21장/TTS 21개 연결(halmoni-school_standby → 프로젝트 폴더) + episodes_index.json/reading_pool.json/spacing_pool.json에 ep10 추가(nhs.html 내용 무편집 — buildPron 버그 수정 1줄만 예외). 등장인물: 할머니(`id:grandma`, coral, 기존과 동일)+라온 엄마(`id:liam_mom`, burgundy, ep03·ep07·ep09와 동일 — 딸이 어머니께 존댓말 쓰는 캐릭터 설정 유지). QA 중 vocab 리스트 대조([[feedback-vocab-completeness-review]] 적용) → 대본에 반복 등장하지만 리스트에 없던 "명의"(본인 명의, 이 에피소드 딜레마의 핵심 개념)와 "통신사"(대리점과 짝을 이루는 말)를 발견해 추가.
 > 🔴 **2026-07-12~13 nhs.html 버그 수정**: `buildPron()` 컨버터가 `pronounced_standard`/`pronounced_actual` 필드를 못 읽어서 발음 탭이 빈 칸으로 나오던 버그 발견+수정 (L2 ep02·L4 ep08·L4 ep09 영향, 상세 경위는 아래 "Python bash 치환도 안전하지 않을 수 있음" 항목 참고). 수정 후 ep10 pronunciation도 안전하게 표준 포맷(`{title,items:[{...,examples:[{written,pronounced_standard,pronounced_actual,note}]}]}`) 사용.
@@ -526,7 +529,7 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ## 🔜 다음 작업 우선순위
 
-1. **HQ L4 ep11+** — 스크립트 프리뷰 대기 중
+1. **HQ L4 ep12+** — 스크립트 프리뷰 대기 중
 2. **HQ Kids L4 unit07+** — 슬라이드/TTS 준비 후 구현
 3. **HQ Kids Level 3 unit07~09** — 문법 플랜은 확정, 콘텐츠 미작성
 4. **멤버/출석 시스템** — PIN 개인별 관리 UI 개선
