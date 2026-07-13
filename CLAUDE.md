@@ -9,7 +9,7 @@
 
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
-| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~12 완성 ✅** / **L3 마감 테스트 완성 ✅** / **L4 ep01~09 완성 ✅** | L4 ep10+ 스크립트 준비되면 진행 |
+| **HQ (nhs.html)** | L1 ep01~12 완성 ✅ / L2 ep01~12 완성 ✅ / **L1·L2 문법 annotation 툴팁 완성 ✅** / **L3 ep01~12 완성 ✅** / **L3 마감 테스트 완성 ✅** / **L4 ep01~10 완성 ✅** | L4 ep11+ 스크립트 준비되면 진행 |
 | **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / L3 unit01~10 완성 ✅ / **L4 unit01~06 완성 ✅** | L4 unit07+ 슬라이드/TTS 준비 후 구현 |
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** | 기능 확장 |
 | **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |
@@ -449,7 +449,10 @@ const urlName   = _hc ? _hc.urlName : null;
 | 07 | 🛋️ 할머니 댁 거실 | 냉면 한 그릇 하러 가실래요? | -(으)ㄹ 지경이다★NEW, -을 정도로, -기 짝이 없다 | ✅ 완성 |
 | 08 | 🧧 설날 아침 | 새해 복 많이 받으세요 | -(으)ㄹ 때까지★NEW, -는 동안에★심화, -자마자★NEW, -ㄴ다/이다★복습(L3 ep12) | ✅ 완성 |
 | 09 | 🗑️ 라온네 집 | 분리수거는 너무 복잡해요 | -다가는★NEW, -고서야★NEW, -아/어서야★NEW | ✅ 완성 |
+| 10 | 🏠 한옥 온돌방 | 휴대전화 개통하기 | -는 한★NEW, 구어 축약형 -는 거야(-다는/라는 거야), -잖아(요)★복습 | ✅ 완성 |
 
+> ✅ **2026-07-13 ep10 구현 완료**: `data/nhs/L4/ep10.json` 작성(21줄 대화, 휴대전화 개통·은행 계좌 개설의 순환 딜레마) + 슬라이드 21장/TTS 21개 연결(halmoni-school_standby → 프로젝트 폴더) + episodes_index.json/reading_pool.json/spacing_pool.json에 ep10 추가(nhs.html 내용 무편집 — buildPron 버그 수정 1줄만 예외). 등장인물: 할머니(`id:grandma`, coral, 기존과 동일)+라온 엄마(`id:liam_mom`, burgundy, ep03·ep07·ep09와 동일 — 딸이 어머니께 존댓말 쓰는 캐릭터 설정 유지). QA 중 vocab 리스트 대조([[feedback-vocab-completeness-review]] 적용) → 대본에 반복 등장하지만 리스트에 없던 "명의"(본인 명의, 이 에피소드 딜레마의 핵심 개념)와 "통신사"(대리점과 짝을 이루는 말)를 발견해 추가.
+> 🔴 **2026-07-12~13 nhs.html 버그 수정**: `buildPron()` 컨버터가 `pronounced_standard`/`pronounced_actual` 필드를 못 읽어서 발음 탭이 빈 칸으로 나오던 버그 발견+수정 (L2 ep02·L4 ep08·L4 ep09 영향, 상세 경위는 아래 "Python bash 치환도 안전하지 않을 수 있음" 항목 참고). 수정 후 ep10 pronunciation도 안전하게 표준 포맷(`{title,items:[{...,examples:[{written,pronounced_standard,pronounced_actual,note}]}]}`) 사용.
 > ✅ **2026-07-12 ep09 구현 완료**: `data/nhs/L4/ep09.json` 작성(10줄 대화, 분리수거/쓰레기 종량제) + 슬라이드 10장/TTS 10개 연결(halmoni-school_standby → 프로젝트 폴더, 슬라이드 파일명이 전각숫자(１,２...１０)라 원본 그대로 유지) + episodes_index.json/reading_pool.json/spacing_pool.json에 ep09 추가(nhs.html 무편집 유지). 등장인물: 라온 엄마(`id:liam_mom`, burgundy, L1 ep11·L3 ep08·L4 ep03과 동일)+라온(`id:liam`, blue)+태오(`id:kayo`, purple) — 기존 세계관 재사용. 이 가족은 아이들이 엄마에게 존댓말을 쓰는 스타일이라 banmal_jondaemal에서 "가족마다 다르다"는 걸 다시 강조. 선생님이 리뷰 중 "떡국"(ep08) 어휘 누락을 지적하며 "리뷰할 때 중요한 단어는 추가해달라"는 피드백을 주심 → ep09는 처음부터 스크립트에 나온 22개 단어 리스트를 빠짐없이 vocab에 반영(누락 없음 재확인).
 > ✅ **2026-07-12 ep08 구현 완료**: `data/nhs/L4/ep08.json` 작성(12줄, 세배·떡국·윷놀이 다큐 나레이션 문어체) + 슬라이드 12장/TTS 12개 연결(halmoni-school_standby에서 프로젝트 폴더로 이동) + `episodes_index.json`에 ep08 한 줄 추가(nhs.html 무편집 유지) + reading_pool.json·spacing_pool.json에 L4_ep08 추가. 기존 대화체 에피소드들과 달리 **최초로 대화 없는 순수 나레이터 단독 서술** 형식(narrator만 등장, L3 ep12와 동일한 문어체 패턴) — 선생님이 준 원본 스크립트 중 "우리는만두를"(공백 누락 오타)은 자막 텍스트만 "우리는 만두를"로 교정, TTS 오디오는 발음상 영향 없어 그대로 유지. 어휘는 선생님이 지정한 리스트(새해/설날/세배/세뱃돈/세배를 드리다/덕담/어른/세수/배꼽/공손히/무릎/이마/손등/꿇다/앉다/닿다/끓이다/빚다) 그대로만 사용, 떡국·윷놀이 등 스크립트에만 나온 단어는 임의로 vocab 카드화하지 않음. real_life에 "떡국 나이 vs 2023년 만 나이 법제화" tip 카드 추가(사실 확인됨).
 > 🔧 **세션 중 발견**: 이 세션의 bash 샌드박스 마운트가 간헐적으로 낡은 파일 스냅샷을 반환함(git status 인덱스 에러, JSON 파싱 실패 등) — 매번 Read/Grep 툴(host-side)로 재확인하니 실제 파일은 전부 정상이었음. 다음 세션에서도 bash 검증 결과가 의심스러우면 Read/Grep으로 교차 확인할 것.
@@ -523,7 +526,7 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ## 🔜 다음 작업 우선순위
 
-1. **HQ L4 ep10+** — 스크립트 프리뷰 대기 중
+1. **HQ L4 ep11+** — 스크립트 프리뷰 대기 중
 2. **HQ Kids L4 unit07+** — 슬라이드/TTS 준비 후 구현
 3. **HQ Kids Level 3 unit07~09** — 문법 플랜은 확정, 콘텐츠 미작성
 4. **멤버/출석 시스템** — PIN 개인별 관리 UI 개선
