@@ -65,15 +65,15 @@
   },
   {
    "speaker": "arthur",
-   "text": "여기서 한 컷 찍기 좋겠다.",
-   "en": "This would be a great spot to get a shot.",
+   "text": "여기서 한 컷 찍기 좋을 듯.",
+   "en": "This seems like a good spot to get a shot.",
    "slide": 1,
    "audio": "data/nhs/L5/TTS/ep04/audio_1_여기서_한_컷_찍기_좋겠다_.mp3",
-   "highlight": "찍기 좋겠다",
+   "highlight": "좋을 듯",
    "annotation": {
-    "highlight": "찍기 좋겠다",
-    "grammar": "-기 좋다 (심화)",
-    "note": "찍다 + 기 좋다 = 사진/영상 찍기에 좋은 장소라는 뜻이에요."
+    "highlight": "좋을 듯",
+    "grammar": "-(으)ㄹ 듯(하다)",
+    "note": "'좋을 듯'은 '좋을 듯하다'에서 '하다'를 생략한 회화체 추측이에요. (앞의 '찍기 좋다'는 -기 좋다)"
    }
   },
   {
@@ -356,6 +356,72 @@
      "sentence": "우산을 쓴 걸 보니 비가 ___ . (오다)",
      "answer": "오나 보다",
      "hint": "it must be raining"
+    }
+   ]
+  },
+  {
+   "id": "g04_l5_deut_hada",
+   "tier": "core",
+   "title": "-(으)ㄴ/는 듯하다",
+   "title_en": "Seems / Appears (refined conjecture)",
+   "emoji": "🔎",
+   "pattern": "동사 + 는/(으)ㄴ/(으)ㄹ 듯하다 · 형용사 + (으)ㄴ 듯하다 · 명사 + 인 듯하다 — 근거·인상을 바탕으로 한 정중한 추측",
+   "scene_example": {
+    "korean": "여기서 한 컷 찍기 좋을 듯.",
+    "english": "This seems like a good spot to get a shot.",
+    "highlight": "좋을 듯"
+   },
+   "explanation_en": "-(으)ㄴ/는 듯하다 expresses a conjecture based on an impression or evidence — close to 것 같다 but more refined, and common in writing and polished speech. The form before 듯하다 follows the same tense rules as -(으)ㄴ/는 noun-modifiers.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형태 정리 · Forms",
+     "content": "동사 현재: 가는 듯하다\n동사 과거: 간 듯하다\n동사 추측: 갈 듯하다\n형용사: 좋은 듯하다\n명사: 학생인 듯하다\n형용사 추측(-(으)ㄹ): 좋을 듯(하다)",
+     "note": "구어에선 '하다'를 빼고 '-는 듯'만 쓰기도 해요 (예: 비가 오는 듯)"
+    },
+    {
+     "type": "amber",
+     "label": "추측 4형제 비교 · Conjecture family",
+     "content": "-(으)ㄹ 것 같다 = 일상·주관적\n-나 보다 / -(으)ㄴ가 보다 = 관찰 근거 (이 편)\n-는 모양이다 = 정황 근거 (L3 ep09)\n-는 듯하다 = 정중·문어적 (이 카드)",
+     "note": "글·격식에서 가장 세련된 추측 표현이에요"
+    },
+    {
+     "type": "green",
+     "label": "이 에피소드에 등장",
+     "content": "아르투: \"여기서 한 컷 찍기 좋을 듯.\"",
+     "note": "'좋을 듯' = '좋을 듯하다'에서 하다 생략한 회화체"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "시제별 · By tense",
+     "items": [
+      {
+       "ko": "지금 촬영이 잘 되는 듯해요.",
+       "en": "The filming seems to be going well right now."
+      },
+      {
+       "ko": "관광객이 많이 다녀간 듯하다.",
+       "en": "It seems many tourists have already passed through."
+      },
+      {
+       "ko": "곧 비가 올 듯하다.",
+       "en": "It looks like it will rain soon."
+      }
+     ]
+    },
+    {
+     "label": "형용사·명사 · Adjective & Noun",
+     "items": [
+      {
+       "ko": "이 가게가 제일 유명한 듯해요.",
+       "en": "This shop seems to be the most famous."
+      },
+      {
+       "ko": "저분이 사장님인 듯해요.",
+       "en": "That person seems to be the owner."
+      }
+     ]
     }
    ]
   },
