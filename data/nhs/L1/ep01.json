@@ -23,21 +23,21 @@
       "name": "정민",
       "emoji": "👦",
       "color": "#5B8FD4",
-      "description": "미라의 친구 (Mira's friend)"
+      "description": "보미의 친구 (Bomi's friend)"
     },
     {
       "id": "mirae",
-      "name": "미라",
+      "name": "보미",
       "emoji": "👧",
       "color": "#E85D9A",
       "description": "공원에서 정민을 처음 만남 (meets Jeongmin for the first time)"
     },
     {
       "id": "mirae_mom",
-      "name": "미라 엄마",
+      "name": "보미 엄마",
       "emoji": "👩",
       "color": "#6ABFAD",
-      "description": "미라의 엄마"
+      "description": "보미의 엄마"
     }
   ],
   "script": [
@@ -56,15 +56,15 @@
     },
     {
       "speaker": "mirae",
-      "text": "안녕! 나는 미라야. 만나서 반가워.",
-      "en": "Hi! I'm Mira. Nice to meet you.",
+      "text": "안녕! 나는 보미야. 만나서 반가워.",
+      "en": "Hi! I'm Bomi. Nice to meet you.",
       "speech_type": "반말",
       "audio": "data/nhs/L1/TTS/ep01/02_안녕_나는_미래야_만나서_반가워.mp3",
       "slide": 1,
       "annotation": {
-        "highlight": "미라야",
+        "highlight": "보미야",
         "grammar": "N이야 / N야 (반말)",
-        "note": "받침 O → 이야  |  받침 X → 야\n미라 + 야 → 미라야 ✅\n정민 + 이야 → 정민이야 ✅"
+        "note": "받침 O → 이야  |  받침 X → 야\n보미 + 야 → 보미야 ✅\n정민 + 이야 → 정민이야 ✅"
       }
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "speaker": "mirae_mom",
-      "text": "안녕! 나는 미라 엄마야. 만나서 반가워.",
-      "en": "Hi! I'm Mira's mom. Nice to meet you.",
+      "text": "안녕! 나는 보미 엄마야. 만나서 반가워.",
+      "en": "Hi! I'm Bomi's mom. Nice to meet you.",
       "speech_type": "반말",
       "audio": "data/nhs/L1/TTS/ep01/05_안녕_나는_미래_엄마야_만나서_반가워.mp3",
       "slide": 4
@@ -210,7 +210,7 @@
           [
             "받침 X ❌",
             "는",
-            "미라(에) + 는 → 미라는"
+            "보미(에) + 는 → 보미는"
           ],
           [
             "나 (받침 X)",
@@ -234,8 +234,8 @@
           "en": "I'm Jeongmin. (polite)"
         },
         {
-          "ko": "미라는 학생이에요.",
-          "en": "Mira is a student."
+          "ko": "보미는 학생이에요.",
+          "en": "Bomi is a student."
         }
       ],
       "tip": "은/는 는 '주제'를 나타내요. 다음 에피소드에서 이/가(subject particle)도 배울 거예요!\n은/는 shows the TOPIC. You'll learn 이/가 (subject particle) next!",
@@ -245,7 +245,7 @@
         {
           "type": "blue",
           "title": "받침 없으면 → 는 · Vowel ending → 는",
-          "content": "나는, 저는, 미라는, 학교는"
+          "content": "나는, 저는, 보미는, 학교는"
         },
         {
           "type": "green",
@@ -280,7 +280,7 @@
             "받침 X (모음)",
             "예요",
             "야",
-            "미라 → 미라예요 / 미라야"
+            "보미 → 보미예요 / 보미야"
           ],
           [
             "받침 X (모음)",
@@ -296,8 +296,8 @@
           "en": "I'm Jeongmin. (formal)"
         },
         {
-          "ko": "나는 미라야.",
-          "en": "I'm Mira. (casual)"
+          "ko": "나는 보미야.",
+          "en": "I'm Bomi. (casual)"
         },
         {
           "ko": "우리 엄마야.",
@@ -311,7 +311,7 @@
         {
           "type": "blue",
           "title": "받침 없으면 → 예요 · Vowel ending → 예요",
-          "content": "나예요, 미라예요, 학교예요"
+          "content": "나예요, 보미예요, 학교예요"
         },
         {
           "type": "green",
@@ -386,20 +386,20 @@
     {
       "type": "listen",
       "question": "🔊 들어보세요. · Listen and choose.",
-      "audio_text": "안녕! 나는 미라야. 만나서 반가워.",
+      "audio_text": "안녕! 나는 보미야. 만나서 반가워.",
       "choices": [
-        "안녕! 나는 미라야. 만나서 반가워.",
-        "안녕하세요. 저는 미라예요.",
+        "안녕! 나는 보미야. 만나서 반가워.",
+        "안녕하세요. 저는 보미예요.",
         "안녕! 나는 정민이야.",
         "만나서 반가워요."
       ],
       "answer": 0,
-      "explanation": "미라가 친구에게 반말로 인사해요. · Mira greets a friend in casual speech."
+      "explanation": "보미가 친구에게 반말로 인사해요. · Bomi greets a friend in casual speech."
     },
     {
       "type": "mc",
-      "question": "'미라' 뒤에는? (casual) · 미라 ends with a vowel. Casual ending?",
-      "question_en": "미라 ends with 에 (vowel). Which casual ending?",
+      "question": "'보미' 뒤에는? (casual) · 보미 ends with a vowel. Casual ending?",
+      "question_en": "보미 ends with 에 (vowel). Which casual ending?",
       "choices": [
         "야",
         "이야",
@@ -407,7 +407,7 @@
         "예요"
       ],
       "answer": 0,
-      "explanation": "미라 ends with a vowel → 야. → 나는 미라야!"
+      "explanation": "보미 ends with a vowel → 야. → 나는 보미야!"
     }
   ],
   "self_check": [
@@ -458,8 +458,8 @@
           "en": "I'm Jeongmin. And you?"
         },
         {
-          "ko": "나는 미라야. 만나서 반가워!",
-          "en": "I'm Mira. Nice to meet you!"
+          "ko": "나는 보미야. 만나서 반가워!",
+          "en": "I'm Bomi. Nice to meet you!"
         },
         {
           "ko": "나는 올리비아야. 처음이야?",
@@ -480,8 +480,8 @@
           "en": "I'm Raon. Nice to meet you."
         },
         {
-          "ko": "저는 미라예요. 잘 부탁드려요.",
-          "en": "I'm Mira. Please take care of me."
+          "ko": "저는 보미예요. 잘 부탁드려요.",
+          "en": "I'm Bomi. Please take care of me."
         }
       ]
     },
@@ -504,9 +504,9 @@
           "text": "안녕! 나는 정민이야. 오늘 처음 만났지?"
         },
         {
-          "speaker": "미라",
+          "speaker": "보미",
           "align": "right",
-          "text": "응! 나는 미라야. 만나서 반가워 😊"
+          "text": "응! 나는 보미야. 만나서 반가워 😊"
         },
         {
           "speaker": "올리비아",
@@ -550,7 +550,7 @@
             "조던",
             "마야",
             "정민",
-            "미라"
+            "보미"
           ],
           "answer": 0,
           "explanation": "조던이 '나는 조던이야' 라고 했어요. · Jordan said 'I'm Jordan.'"

@@ -2171,7 +2171,7 @@ const WARMUP_POOL = [
   {ep:'ep07', q:'"한국어를 배우고 싶어요." means…', choices:['I want to learn Korean.','I learn Korean.','I am learning Korean.','I can\'t learn Korean.'], ans:0},
   {ep:'ep07', q:'"못 해요" means…', choices:['I can\'t do it.','I don\'t do it.','I won\'t do it.','I didn\'t do it.'], ans:0},
   {ep:'ep07', q:'In Korean word order, where does the verb go?', choices:['At the END','At the beginning','After the subject','Before the object'], ans:0},
-  // ep08 — 미라네 부엌
+  // ep08 — 보미네 부엌
   {ep:'ep08', q:'"가방이 어디 있어요?" means…', choices:['Where is the bag?','What is in the bag?','Whose bag is it?','Is there a bag?'], ans:0},
   {ep:'ep08', q:'"책상 위에" means…', choices:['on (top of) the desk','under the desk','next to the desk','in front of the desk'], ans:0},
   {ep:'ep08', q:'"집에 가야 해요." means…', choices:['I have to go home.','I want to go home.','I went home.','I will go home.'], ans:0},
@@ -3378,7 +3378,7 @@ function buildVerbs(){
     +'<div class="vconj-tense-grid">'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">현재 Present</div><div class="vconj-tense-formal" onclick="speakTTS(\'알아요\')" style="cursor:pointer">알아요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알아\')" style="cursor:pointer">알아 🔊</div><div class="vconj-tense-formula">알 + 아요 → 알아요 (ㄹ 그대로)</div></div>'
     +'<div class="vconj-tense-box"><div class="vconj-tense-label">과거 Past</div><div class="vconj-tense-formal" onclick="speakTTS(\'알았어요\')" style="cursor:pointer">알았어요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알았어\')" style="cursor:pointer">알았어 🔊</div><div class="vconj-tense-formula">알 + 았어요 → 알았어요</div></div>'
-    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미라 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'알 거예요\')" style="cursor:pointer">알 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알 거야\')" style="cursor:pointer">알 거야 🔊</div><div class="vconj-tense-formula">알 + ㄹ 거예요 → 알 거예요</div></div>'
+    +'<div class="vconj-tense-box"><div class="vconj-tense-label">미래 Future</div><div class="vconj-tense-formal" onclick="speakTTS(\'알 거예요\')" style="cursor:pointer">알 거예요 🔊</div><div class="vconj-tense-informal" onclick="speakTTS(\'알 거야\')" style="cursor:pointer">알 거야 🔊</div><div class="vconj-tense-formula">알 + ㄹ 거예요 → 알 거예요</div></div>'
     +'</div>'
     +'<div class="vconj-caution">💡 <strong>특별 형태 · Special Forms</strong><br>'
     +'알+<strong>시</strong>어요 → <strong onclick="speakTTS(\'아세요\')" style="cursor:pointer;color:var(--teal-dark)">아세요 🔊</strong> (존댓말 현재, ㄹ탈락) &nbsp;|&nbsp; '
@@ -3588,7 +3588,7 @@ function buildHonorifics(){
     +'• 오빠/언니는 <em>같은 성별이 아님</em> — 여자가 나이 많은 남자에게 = 오빠, 여자에게 = 언니<br>'
     +'• 형/누나는 남자 화자 기준 — 남자가 나이 많은 남자에게 = 형, 여자에게 = 누나<br>'
     +'• -님 suffix는 존경을 더해요 — 선생 (teacher) → 선생님 (respected teacher)<br>'
-    +'• 이름을 부를 땐 뒤에 아/야 or 씨를 붙여요 — 미라야! (반말) / 미라 씨 (격식)</div>';
+    +'• 이름을 부를 땐 뒤에 아/야 or 씨를 붙여요 — 보미야! (반말) / 보미 씨 (격식)</div>';
 
   return '<div class="basics-intro">한국어는 누구와 말하느냐에 따라 부르는 방법이 달라져요. 관계·나이·격식도에 따른 호칭을 알아봐요!<br><em>Korean address system depends on relationship, age, and formality. Learn who to call what!</em></div>'
     + tipBox + tableHtml + noteBox;
