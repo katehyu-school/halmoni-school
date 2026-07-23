@@ -657,7 +657,7 @@ function showTab(name){
 function buildScript(){
   if(DATA.video) return buildVideoScript();
   return `<div class="scene-wrap"><div class="scene-col">
-    <div class="scene-panel" id="scene-panel"><div class="scene-loc">${esc(DATA.scene)}</div></div>
+    <div class="scene-panel" id="scene-panel"></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
       <button class="nav-btn" id="nav-prev" onclick="autoPlayStop();moveScene(-1)">&#8249;</button>

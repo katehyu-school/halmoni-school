@@ -1,1039 +1,1039 @@
 {
-  "id": "ep04",
-  "title": "우리 몇 시에 만날까?",
-  "title_en": "What Time Shall We Meet?",
-  "level": "L1",
-  "scene": "🛏️ 보미의 방 · Bomi's Room",
-  "video": null,
-  "slides": [
-    "data/nhs/L1/slides/ep04/미래의방1.png",
-    "data/nhs/L1/slides/ep04/미래의방2.png",
-    "data/nhs/L1/slides/ep04/미래의방3.png",
-    "data/nhs/L1/slides/ep04/미래의방4.png",
-    "data/nhs/L1/slides/ep04/미래의방5.png"
-  ],
-  "goal": {
-    "ko": "친구와 만날 약속을 할 수 있어요 (날짜·시간·장소 정하기).",
-    "en": "I can make plans to meet a friend (date, time and place)."
+ "id": "ep04",
+ "title": "우리 몇 시에 만날까?",
+ "title_en": "What Time Shall We Meet?",
+ "level": "L1",
+ "scene": "🕐 시간·약속 · Time & Plans",
+ "video": null,
+ "slides": [
+  "data/nhs/L1/slides/ep04/미래의방1.png",
+  "data/nhs/L1/slides/ep04/미래의방2.png",
+  "data/nhs/L1/slides/ep04/미래의방3.png",
+  "data/nhs/L1/slides/ep04/미래의방4.png",
+  "data/nhs/L1/slides/ep04/미래의방5.png"
+ ],
+ "goal": {
+  "ko": "친구와 만날 약속을 할 수 있어요 (날짜·시간·장소 정하기).",
+  "en": "I can make plans to meet a friend (date, time and place)."
+ },
+ "characters": [
+  {
+   "id": "olivia",
+   "name": "올리비아",
+   "emoji": "👧",
+   "color": "#D98BA8",
+   "description": "보미의 친구 (Bomi's friend)"
   },
-  "characters": [
+  {
+   "id": "mirae",
+   "name": "보미",
+   "emoji": "👩",
+   "color": "#E85D9A",
+   "description": "약속을 제안하는 친구 (the one suggesting plans)"
+  }
+ ],
+ "script": [
+  {
+   "speaker": "olivia",
+   "text": "보미 안녕? 무슨 일이야?",
+   "en": "Hi Bomi! What's up?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_0_미래_안녕__무슨_일이야_.mp3",
+   "slide": 0
+  },
+  {
+   "speaker": "mirae",
+   "text": "안녕? 올리비아, 이번 주말에 약속 없어?",
+   "en": "Hey Olivia, are you free this weekend?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_1_안녕__올리비아__이번_주말에_약속_없어_.mp3",
+   "slide": 0
+  },
+  {
+   "speaker": "olivia",
+   "text": "그게 며칠이야?",
+   "en": "What date is that?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_2_그게_며칠이야_.mp3",
+   "slide": 1,
+   "annotation": {
+    "highlight": "며칠이야",
+    "grammar": "날짜 묻기 — 며칠이야?",
+    "note": "며칠 = which day / what date (날짜를 물을 때)\n몇 월이야? = What month is it?\n며칠이야? = What day (date) is it?"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "오월 구일이야.",
+   "en": "It's May 9th.",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_3_오월_구일이야_.mp3",
+   "slide": 1,
+   "annotation": {
+    "highlight": "오월 구일",
+    "grammar": "날짜 읽기 — 한자어 숫자",
+    "note": "날짜는 모두 한자어(Sino-Korean) 숫자!\n오월 = 5월 (5th month)\n구일 = 9일 (9th day)\n오월 구일 = May 9th"
+   }
+  },
+  {
+   "speaker": "olivia",
+   "text": "응 약속 없어. 왜?",
+   "en": "Yeah, I'm free. Why?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_4_응__약속_없어__왜_.mp3",
+   "slide": 2
+  },
+  {
+   "speaker": "mirae",
+   "text": "우리 한강 공원에 자전거 갈까?",
+   "en": "Shall we go cycling at Han River Park?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_5_우리_한강_공원에_갈까_.mp3",
+   "slide": 2,
+   "annotation": {
+    "highlight": "한강 공원에",
+    "grammar": "N에 — 시간/장소 (방향·목적지)",
+    "note": "장소 + 에 = to / at (destination)\n한강 공원에 갈까? = Shall we go to Han River Park?\n↔ 에서 = at (where action happens)"
+   }
+  },
+  {
+   "speaker": "olivia",
+   "text": "좋아! 몇 시에 어디에서 만나?",
+   "en": "Sounds good! What time and where shall we meet?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_6_좋아__몇_시에_어디에서_만나_.mp3",
+   "slide": 3,
+   "annotation": {
+    "highlight": "어디에서",
+    "grammar": "N에서 — 장소 (행동)",
+    "note": "장소 + 에서 = at (where action happens)\n어디에서 만나? = Where shall we meet?\n지하철 입구에서 만나 = Meet at the subway entrance"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "오후 1시에 지하철 3번 입구에서 어때?",
+   "en": "How about 1 PM at subway entrance 3?",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_7_오후_1시에_지하철_삼번_입구에서_어때_.mp3",
+   "slide": 3,
+   "annotation": {
+    "highlight": "오후 1시에",
+    "grammar": "시간 읽기 — 몇 시",
+    "note": "시(hour) = 고유어 숫자\n1시 → 한 시, 2시 → 두 시\n오후 1시 = 오후 한 시 (1 PM)"
+   }
+  },
+  {
+   "speaker": "olivia",
+   "text": "알았어. 거기서 만나!",
+   "en": "Got it. See you there!",
+   "speech_type": "반말",
+   "audio": "data/nhs/L1/TTS/ep04/audio_8_알았어__거기서_만나_.mp3",
+   "slide": 4
+  }
+ ],
+ "vocab": [
+  {
+   "category": "📅 날짜·요일 · Date & Days",
+   "items": [
     {
-      "id": "olivia",
-      "name": "올리비아",
-      "emoji": "👧",
-      "color": "#D98BA8",
-      "description": "보미의 친구 (Bomi's friend)"
+     "korean": "며칠",
+     "romanization": "myeo-chil",
+     "english": "what date / which day",
+     "emoji": "📅",
+     "note": "날짜를 물을 때 · used to ask the date"
     },
     {
-      "id": "mirae",
-      "name": "보미",
-      "emoji": "👩",
-      "color": "#E85D9A",
-      "description": "약속을 제안하는 친구 (the one suggesting plans)"
+     "korean": "이번 주말",
+     "romanization": "i-beon ju-mal",
+     "english": "this weekend",
+     "emoji": "🗓️"
+    },
+    {
+     "korean": "주말",
+     "romanization": "ju-mal",
+     "english": "weekend",
+     "emoji": "🎉"
+    },
+    {
+     "korean": "주중",
+     "romanization": "ju-jung",
+     "english": "weekday",
+     "emoji": "📋"
+    },
+    {
+     "korean": "어제",
+     "romanization": "eo-je",
+     "english": "yesterday",
+     "emoji": "⬅️"
+    },
+    {
+     "korean": "오늘",
+     "romanization": "o-neul",
+     "english": "today",
+     "emoji": "📍"
+    },
+    {
+     "korean": "내일",
+     "romanization": "nae-il",
+     "english": "tomorrow",
+     "emoji": "➡️"
     }
-  ],
-  "script": [
+   ]
+  },
+  {
+   "category": "⏰ 시간 · Time",
+   "items": [
     {
-      "speaker": "olivia",
-      "text": "보미 안녕? 무슨 일이야?",
-      "en": "Hi Bomi! What's up?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_0_미래_안녕__무슨_일이야_.mp3",
-      "slide": 0
+     "korean": "몇 시",
+     "romanization": "myeot si",
+     "english": "what time",
+     "emoji": "🕐",
+     "note": "시 = 고유어 숫자 · hours use Native Korean"
     },
     {
-      "speaker": "mirae",
-      "text": "안녕? 올리비아, 이번 주말에 약속 없어?",
-      "en": "Hey Olivia, are you free this weekend?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_1_안녕__올리비아__이번_주말에_약속_없어_.mp3",
-      "slide": 0
+     "korean": "오전",
+     "romanization": "o-jeon",
+     "english": "a.m. / morning",
+     "emoji": "🌅"
     },
     {
-      "speaker": "olivia",
-      "text": "그게 며칠이야?",
-      "en": "What date is that?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_2_그게_며칠이야_.mp3",
-      "slide": 1,
-      "annotation": {
-        "highlight": "며칠이야",
-        "grammar": "날짜 묻기 — 며칠이야?",
-        "note": "며칠 = which day / what date (날짜를 물을 때)\n몇 월이야? = What month is it?\n며칠이야? = What day (date) is it?"
-      }
+     "korean": "오후",
+     "romanization": "o-hu",
+     "english": "p.m. / afternoon",
+     "emoji": "🌇"
     },
     {
-      "speaker": "mirae",
-      "text": "오월 구일이야.",
-      "en": "It's May 9th.",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_3_오월_구일이야_.mp3",
-      "slide": 1,
-      "annotation": {
-        "highlight": "오월 구일",
-        "grammar": "날짜 읽기 — 한자어 숫자",
-        "note": "날짜는 모두 한자어(Sino-Korean) 숫자!\n오월 = 5월 (5th month)\n구일 = 9일 (9th day)\n오월 구일 = May 9th"
-      }
+     "korean": "아침",
+     "romanization": "a-chim",
+     "english": "morning",
+     "emoji": "🍳"
     },
     {
-      "speaker": "olivia",
-      "text": "응 약속 없어. 왜?",
-      "en": "Yeah, I'm free. Why?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_4_응__약속_없어__왜_.mp3",
-      "slide": 2
+     "korean": "점심",
+     "romanization": "jeom-sim",
+     "english": "noon / lunch",
+     "emoji": "🍱"
     },
     {
-      "speaker": "mirae",
-      "text": "우리 한강 공원에 자전거 갈까?",
-      "en": "Shall we go cycling at Han River Park?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_5_우리_한강_공원에_갈까_.mp3",
-      "slide": 2,
-      "annotation": {
-        "highlight": "한강 공원에",
-        "grammar": "N에 — 시간/장소 (방향·목적지)",
-        "note": "장소 + 에 = to / at (destination)\n한강 공원에 갈까? = Shall we go to Han River Park?\n↔ 에서 = at (where action happens)"
-      }
+     "korean": "저녁",
+     "romanization": "jeo-nyeok",
+     "english": "evening",
+     "emoji": "🌙"
     },
     {
-      "speaker": "olivia",
-      "text": "좋아! 몇 시에 어디에서 만나?",
-      "en": "Sounds good! What time and where shall we meet?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_6_좋아__몇_시에_어디에서_만나_.mp3",
-      "slide": 3,
-      "annotation": {
-        "highlight": "어디에서",
-        "grammar": "N에서 — 장소 (행동)",
-        "note": "장소 + 에서 = at (where action happens)\n어디에서 만나? = Where shall we meet?\n지하철 입구에서 만나 = Meet at the subway entrance"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "오후 1시에 지하철 3번 입구에서 어때?",
-      "en": "How about 1 PM at subway entrance 3?",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_7_오후_1시에_지하철_삼번_입구에서_어때_.mp3",
-      "slide": 3,
-      "annotation": {
-        "highlight": "오후 1시에",
-        "grammar": "시간 읽기 — 몇 시",
-        "note": "시(hour) = 고유어 숫자\n1시 → 한 시, 2시 → 두 시\n오후 1시 = 오후 한 시 (1 PM)"
-      }
-    },
-    {
-      "speaker": "olivia",
-      "text": "알았어. 거기서 만나!",
-      "en": "Got it. See you there!",
-      "speech_type": "반말",
-      "audio": "data/nhs/L1/TTS/ep04/audio_8_알았어__거기서_만나_.mp3",
-      "slide": 4
+     "korean": "반",
+     "romanization": "ban",
+     "english": "half (= 30 minutes)",
+     "emoji": "⏱️",
+     "note": "두 시 반 = 2:30 · half past"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "🚇 장소·교통 · Places & Transport",
+   "items": [
     {
-      "category": "📅 날짜·요일 · Date & Days",
-      "items": [
-        {
-          "korean": "며칠",
-          "romanization": "myeo-chil",
-          "english": "what date / which day",
-          "emoji": "📅",
-          "note": "날짜를 물을 때 · used to ask the date"
-        },
-        {
-          "korean": "이번 주말",
-          "romanization": "i-beon ju-mal",
-          "english": "this weekend",
-          "emoji": "🗓️"
-        },
-        {
-          "korean": "주말",
-          "romanization": "ju-mal",
-          "english": "weekend",
-          "emoji": "🎉"
-        },
-        {
-          "korean": "주중",
-          "romanization": "ju-jung",
-          "english": "weekday",
-          "emoji": "📋"
-        },
-        {
-          "korean": "어제",
-          "romanization": "eo-je",
-          "english": "yesterday",
-          "emoji": "⬅️"
-        },
-        {
-          "korean": "오늘",
-          "romanization": "o-neul",
-          "english": "today",
-          "emoji": "📍"
-        },
-        {
-          "korean": "내일",
-          "romanization": "nae-il",
-          "english": "tomorrow",
-          "emoji": "➡️"
-        }
-      ]
+     "korean": "지하철",
+     "romanization": "ji-ha-cheol",
+     "english": "subway",
+     "emoji": "🚇"
     },
     {
-      "category": "⏰ 시간 · Time",
-      "items": [
-        {
-          "korean": "몇 시",
-          "romanization": "myeot si",
-          "english": "what time",
-          "emoji": "🕐",
-          "note": "시 = 고유어 숫자 · hours use Native Korean"
-        },
-        {
-          "korean": "오전",
-          "romanization": "o-jeon",
-          "english": "a.m. / morning",
-          "emoji": "🌅"
-        },
-        {
-          "korean": "오후",
-          "romanization": "o-hu",
-          "english": "p.m. / afternoon",
-          "emoji": "🌇"
-        },
-        {
-          "korean": "아침",
-          "romanization": "a-chim",
-          "english": "morning",
-          "emoji": "🍳"
-        },
-        {
-          "korean": "점심",
-          "romanization": "jeom-sim",
-          "english": "noon / lunch",
-          "emoji": "🍱"
-        },
-        {
-          "korean": "저녁",
-          "romanization": "jeo-nyeok",
-          "english": "evening",
-          "emoji": "🌙"
-        },
-        {
-          "korean": "반",
-          "romanization": "ban",
-          "english": "half (= 30 minutes)",
-          "emoji": "⏱️",
-          "note": "두 시 반 = 2:30 · half past"
-        }
-      ]
+     "korean": "입구",
+     "romanization": "ip-gu",
+     "english": "entrance",
+     "emoji": "🚪",
+     "note": "들어가는 곳 · where you enter"
     },
     {
-      "category": "🚇 장소·교통 · Places & Transport",
-      "items": [
-        {
-          "korean": "지하철",
-          "romanization": "ji-ha-cheol",
-          "english": "subway",
-          "emoji": "🚇"
-        },
-        {
-          "korean": "입구",
-          "romanization": "ip-gu",
-          "english": "entrance",
-          "emoji": "🚪",
-          "note": "들어가는 곳 · where you enter"
-        },
-        {
-          "korean": "출구",
-          "romanization": "chul-gu",
-          "english": "exit",
-          "emoji": "🚶",
-          "note": "나가는 곳 · where you exit"
-        },
-        {
-          "korean": "한강",
-          "romanization": "han-gang",
-          "english": "Han River",
-          "emoji": "🌊"
-        },
-        {
-          "korean": "공원",
-          "romanization": "gong-won",
-          "english": "park",
-          "emoji": "🌳"
-        },
-        {
-          "korean": "자전거",
-          "romanization": "ja-jeon-geo",
-          "english": "bicycle",
-          "emoji": "🚲"
-        }
-      ]
+     "korean": "출구",
+     "romanization": "chul-gu",
+     "english": "exit",
+     "emoji": "🚶",
+     "note": "나가는 곳 · where you exit"
     },
     {
-      "category": "💬 표현 · Expressions",
-      "items": [
-        {
-          "korean": "약속",
-          "romanization": "yak-sok",
-          "english": "plan / appointment / promise",
-          "emoji": "🤝"
-        },
-        {
-          "korean": "어때?",
-          "romanization": "eo-ttae",
-          "english": "How about? / What do you think?",
-          "emoji": "🤔"
-        },
-        {
-          "korean": "알았어",
-          "romanization": "a-ra-sseo",
-          "english": "Got it / Understood (casual)",
-          "emoji": "✅"
-        },
-        {
-          "korean": "거기서",
-          "romanization": "geo-gi-seo",
-          "english": "there / at that place",
-          "emoji": "📍"
-        }
-      ]
+     "korean": "한강",
+     "romanization": "han-gang",
+     "english": "Han River",
+     "emoji": "🌊"
+    },
+    {
+     "korean": "공원",
+     "romanization": "gong-won",
+     "english": "park",
+     "emoji": "🌳"
+    },
+    {
+     "korean": "자전거",
+     "romanization": "ja-jeon-geo",
+     "english": "bicycle",
+     "emoji": "🚲"
     }
-  ],
-  "grammar": [
+   ]
+  },
+  {
+   "category": "💬 표현 · Expressions",
+   "items": [
     {
-      "id": "g_ep04_date",
-      "tier": "core",
-      "title": "날짜 읽기 — 며칠이야?",
-      "title_en": "Reading Dates",
-      "emoji": "📅",
-      "explanation_en": "Korean uses Sino-Korean (한자어) numbers for ALL dates — months and days. To ask the date informally, use 며칠이야? (casual) or 며칠이에요? (polite).",
-      "pattern": "[한자어]월 [한자어]일 · Sino-Korean month + day",
-      "scene_example": {
-        "korean": "오월 구일이야.",
-        "english": "It's May 9th.",
-        "highlight": "오월 구일"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "날짜 = 한자어 숫자 · All dates use Sino-Korean",
-          "content": "1월 → 일월　2월 → 이월　3월 → 삼월\n5월 → 오월　9월 → 구월　12월 → 십이월\n1일 → 일일　9일 → 구일　15일 → 십오일"
-        },
-        {
-          "type": "red",
-          "title": "⚠️ 불규칙 2개 — Only 2 irregular months!",
-          "content": "6월 → 유월 (육월 ❌)\n10월 → 시월 (십월 ❌)"
-        },
-        {
-          "type": "green",
-          "title": "날짜 묻기 · Asking the date",
-          "content": "며칠이야? = What date is it? (반말)\n며칠이에요? = What date is it? (존댓말)\n몇 월이야? = What month is it?"
-        },
-        {
-          "type": "amber",
-          "title": "이번 vs 다음 · This vs Next",
-          "content": "이번 주말 = this weekend\n다음 주 = next week\n이번 달 = this month"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "그게 며칠이야?",
-          "en": "What date is that?"
-        },
-        {
-          "ko": "오월 구일이야.",
-          "en": "It's May 9th."
-        },
-        {
-          "ko": "내 생일은 팔월 십오일이야.",
-          "en": "My birthday is August 15th."
-        },
-        {
-          "ko": "오늘이 몇 월 며칠이에요?",
-          "en": "What is today's date?"
-        }
-      ]
+     "korean": "약속",
+     "romanization": "yak-sok",
+     "english": "plan / appointment / promise",
+     "emoji": "🤝"
     },
     {
-      "id": "g_ep04_time",
-      "tier": "core",
-      "title": "시간 읽기 — 몇 시? 몇 분?",
-      "title_en": "Telling Time",
-      "emoji": "🕐",
-      "explanation_en": "Korean uses TWO number systems for time: Native Korean (고유어) for hours (시), and Sino-Korean (한자어) for minutes (분). Hours only go up to 12, so native numbers work perfectly!",
-      "pattern": "[고유어] 시 [한자어] 분 · Native hour + Sino minute",
-      "scene_example": {
-        "korean": "오후 1시에 지하철 3번 입구에서 어때?",
-        "english": "How about 1 PM at subway entrance 3?",
-        "highlight": "오후 1시에"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "시 (hour) → 고유어 · Native Korean numbers",
-          "grid_items": [
-            {
-              "n": "1시",
-              "k": "한 시"
-            },
-            {
-              "n": "2시",
-              "k": "두 시"
-            },
-            {
-              "n": "3시",
-              "k": "세 시"
-            },
-            {
-              "n": "4시",
-              "k": "네 시"
-            },
-            {
-              "n": "5시",
-              "k": "다섯 시"
-            },
-            {
-              "n": "6시",
-              "k": "여섯 시"
-            },
-            {
-              "n": "7시",
-              "k": "일곱 시"
-            },
-            {
-              "n": "8시",
-              "k": "여덟 시"
-            },
-            {
-              "n": "9시",
-              "k": "아홉 시"
-            },
-            {
-              "n": "10시",
-              "k": "열 시"
-            },
-            {
-              "n": "11시",
-              "k": "열한 시"
-            },
-            {
-              "n": "12시",
-              "k": "열두 시"
-            }
-          ]
-        },
-        {
-          "type": "green",
-          "title": "분 (minute) → 한자어 · Sino-Korean numbers",
-          "grid_items": [
-            {
-              "n": "10분",
-              "k": "십 분"
-            },
-            {
-              "n": "15분",
-              "k": "십오 분"
-            },
-            {
-              "n": "20분",
-              "k": "이십 분"
-            },
-            {
-              "n": "30분",
-              "k": "삼십 분",
-              "badge": "= 반!"
-            },
-            {
-              "n": "45분",
-              "k": "사십오 분"
-            },
-            {
-              "n": "50분",
-              "k": "오십 분"
-            }
-          ]
-        },
-        {
-          "type": "amber",
-          "title": "반 = 30분 · 'half past' shortcut",
-          "content": "두 시 반 = 2:30 (two thirty)\n세 시 반 = 3:30 (half past three)\n열두 시 반 = 12:30"
-        },
-        {
-          "type": "blue",
-          "title": "오전 / 오후 · AM / PM",
-          "content": "오전 아홉 시 = 9:00 AM\n오후 한 시 = 1:00 PM\n오후 일곱 시 반 = 7:30 PM"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "오후 한 시에 만나요.",
-          "en": "Let's meet at 1 PM."
-        },
-        {
-          "ko": "지금 몇 시예요?",
-          "en": "What time is it now?"
-        },
-        {
-          "ko": "두 시 반이에요.",
-          "en": "It's 2:30."
-        },
-        {
-          "ko": "열두 시에 점심 먹을까?",
-          "en": "Shall we have lunch at noon?"
-        }
-      ],
-      "fill_blanks": [
-        {
-          "sentence": "오후 ___ 시에 만나. (1시)",
-          "answer": "한",
-          "hint": "시는 고유어! 1 → 한 · hours use Native Korean"
-        },
-        {
-          "sentence": "두 시 ___이에요. (30분)",
-          "answer": "반",
-          "hint": "삼십 분 = 반 · 30 minutes = half"
-        },
-        {
-          "sentence": "오전 ___ 시에 학교에 가요. (9시)",
-          "answer": "아홉",
-          "hint": "9 → 아홉 (Native Korean)"
-        }
-      ]
+     "korean": "어때?",
+     "romanization": "eo-ttae",
+     "english": "How about? / What do you think?",
+     "emoji": "🤔"
     },
     {
-      "id": "g_ep06_01",
-      "tier": "core",
-      "title": "N에 — at / to (time & place)",
-      "title_en": "The particle 에 for time and destination",
-      "emoji": "📍",
-      "explanation_en": "에 marks time (when) and destination (where you're going TO). Think of it as pointing to a target — a moment in time or a place you're heading toward.",
-      "pattern": "시간/장소 + 에 · time or destination + 에",
-      "scene_example": {
-        "korean": "오후 1시에 한강 공원에 갈까?",
-        "english": "Shall we go to Han River Park at 1 PM?",
-        "highlight": "1시에, 공원에"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "시간 + 에 = at (a time) · N에 for time",
-          "content": "오후 1시에 만나 = meet at 1 PM\n주말에 약속이 있어 = I have plans on the weekend\n오월 구일에 만나자 = let's meet on May 9th"
-        },
-        {
-          "type": "green",
-          "title": "장소 + 에 (가다/오다) = to a place · destination",
-          "content": "한강 공원에 갈까? = Shall we go to Han River Park?\n학교에 가요 = I go to school"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "오월 구일에 만나요.",
-          "en": "Let's meet on May 9th."
-        },
-        {
-          "ko": "오후 1시에 지하철역에 가요.",
-          "en": "I'm going to the subway station at 1 PM."
-        }
-      ]
+     "korean": "알았어",
+     "romanization": "a-ra-sseo",
+     "english": "Got it / Understood (casual)",
+     "emoji": "✅"
     },
     {
-      "id": "g_ep06_02",
-      "tier": "core",
-      "title": "N에서 — at (action place)",
-      "title_en": "The particle 에서 for where actions happen",
-      "emoji": "🏞️",
-      "explanation_en": "에서 marks WHERE an action happens. Use it with action verbs (meet, eat, study, play). Key contrast: 에 = going TO a place; 에서 = doing something AT a place.",
-      "pattern": "장소 + 에서 · place + 에서",
-      "scene_example": {
-        "korean": "지하철 3번 입구에서 어때?",
-        "english": "How about at subway entrance 3?",
-        "highlight": "입구에서"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "에서 = where the action happens",
-          "content": "입구에서 만나 = meet at the entrance\n공원에서 자전거 타요 = ride bikes at the park\n어디에서 만나? = Where shall we meet?"
-        },
-        {
-          "type": "amber",
-          "title": "에 vs 에서 — key difference · 구별 포인트",
-          "content": "공원에 가요 → going TO the park (destination)\n공원에서 놀아요 → playing AT the park (action)"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "어디에서 만나?",
-          "en": "Where shall we meet?"
-        },
-        {
-          "ko": "3번 입구에서 만나!",
-          "en": "Let's meet at entrance 3!"
-        }
-      ]
-    },
-    {
-      "id": "g_ep06_06",
-      "tier": "core",
-      "title": "한국식 대답 — 응/아니 (영어와 반대!)",
-      "title_en": "Korean Yes/No — the opposite of English!",
-      "emoji": "🔄",
-      "explanation_en": "In English, you answer based on FACT (yes = there is, no = there isn't). In Korean, you answer based on AGREEMENT with what was said. '약속 없어?' → '응, 없어' (Yeah, no plans) — you're agreeing with 없어!",
-      "pattern": "질문에 동의 → 응/네 · 질문에 반대 → 아니",
-      "scene_example": {
-        "korean": "약속 없어? — 응, 약속 없어.",
-        "english": "No plans? — Yeah, no plans.",
-        "highlight": "응"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "부정 질문 → 동의하면 응/네",
-          "content": "약속 없어? → 응, 없어. (Yeah, no plans.)\n배 안 고파? → 응, 안 고파. (Yeah, not hungry.)"
-        },
-        {
-          "type": "amber",
-          "title": "영어와 반대! · Opposite of English",
-          "content": "English: 'No plans?' → 'Yes (I have plans)' / 'No (I don't)'\nKorean: '약속 없어?' → '응 (= agreeing: yeah, none)'"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "응 약속 없어. 왜?",
-          "en": "Yeah, I'm free (no plans). Why?"
-        }
-      ]
+     "korean": "거기서",
+     "romanization": "geo-gi-seo",
+     "english": "there / at that place",
+     "emoji": "📍"
     }
-  ],
-  "banmal_jondaemal": {
-    "title": "약속 잡기 — 반말 vs 존댓말",
-    "intro_ko": "보미와 올리비아는 친구라서 반말을 써요. 어른들은 같은 상황에서 존댓말을 쓴답니다!",
-    "intro_en": "Bomi and Olivia are friends so they use casual speech (반말). Adults use formal speech (존댓말) in the same situation.",
-    "rows": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g_ep04_date",
+   "tier": "core",
+   "title": "날짜 읽기 — 며칠이야?",
+   "title_en": "Reading Dates",
+   "emoji": "📅",
+   "explanation_en": "Korean uses Sino-Korean (한자어) numbers for ALL dates — months and days. To ask the date informally, use 며칠이야? (casual) or 며칠이에요? (polite).",
+   "pattern": "[한자어]월 [한자어]일 · Sino-Korean month + day",
+   "scene_example": {
+    "korean": "오월 구일이야.",
+    "english": "It's May 9th.",
+    "highlight": "오월 구일"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "날짜 = 한자어 숫자 · All dates use Sino-Korean",
+     "content": "1월 → 일월　2월 → 이월　3월 → 삼월\n5월 → 오월　9월 → 구월　12월 → 십이월\n1일 → 일일　9일 → 구일　15일 → 십오일"
+    },
+    {
+     "type": "red",
+     "title": "⚠️ 불규칙 2개 — Only 2 irregular months!",
+     "content": "6월 → 유월 (육월 ❌)\n10월 → 시월 (십월 ❌)"
+    },
+    {
+     "type": "green",
+     "title": "날짜 묻기 · Asking the date",
+     "content": "며칠이야? = What date is it? (반말)\n며칠이에요? = What date is it? (존댓말)\n몇 월이야? = What month is it?"
+    },
+    {
+     "type": "amber",
+     "title": "이번 vs 다음 · This vs Next",
+     "content": "이번 주말 = this weekend\n다음 주 = next week\n이번 달 = this month"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "그게 며칠이야?",
+     "en": "What date is that?"
+    },
+    {
+     "ko": "오월 구일이야.",
+     "en": "It's May 9th."
+    },
+    {
+     "ko": "내 생일은 팔월 십오일이야.",
+     "en": "My birthday is August 15th."
+    },
+    {
+     "ko": "오늘이 몇 월 며칠이에요?",
+     "en": "What is today's date?"
+    }
+   ]
+  },
+  {
+   "id": "g_ep04_time",
+   "tier": "core",
+   "title": "시간 읽기 — 몇 시? 몇 분?",
+   "title_en": "Telling Time",
+   "emoji": "🕐",
+   "explanation_en": "Korean uses TWO number systems for time: Native Korean (고유어) for hours (시), and Sino-Korean (한자어) for minutes (분). Hours only go up to 12, so native numbers work perfectly!",
+   "pattern": "[고유어] 시 [한자어] 분 · Native hour + Sino minute",
+   "scene_example": {
+    "korean": "오후 1시에 지하철 3번 입구에서 어때?",
+    "english": "How about 1 PM at subway entrance 3?",
+    "highlight": "오후 1시에"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "시 (hour) → 고유어 · Native Korean numbers",
+     "grid_items": [
       {
-        "banmal": "약속 없어?",
-        "jondaemal": "약속 없으세요?",
-        "english": "Are you free? (no plans?)",
-        "situation_ko": "약속 여부 확인",
-        "situation_en": "Checking availability"
+       "n": "1시",
+       "k": "한 시"
       },
       {
-        "banmal": "며칠이야?",
-        "jondaemal": "며칠이에요?",
-        "english": "What date is it?",
-        "situation_ko": "날짜 묻기",
-        "situation_en": "Asking the date"
+       "n": "2시",
+       "k": "두 시"
       },
       {
-        "banmal": "오월 구일이야.",
-        "jondaemal": "오월 구일이에요.",
-        "english": "It's May 9th.",
-        "situation_ko": "날짜 대답",
-        "situation_en": "Answering the date"
+       "n": "3시",
+       "k": "세 시"
       },
       {
-        "banmal": "몇 시에 만나?",
-        "jondaemal": "몇 시에 만날까요?",
-        "english": "What time shall we meet?",
-        "situation_ko": "시간 묻기",
-        "situation_en": "Asking the time / where to meet"
+       "n": "4시",
+       "k": "네 시"
       },
       {
-        "banmal": "어디에서 만나?",
-        "jondaemal": "어디에서 만날까요?",
-        "english": "Where shall we meet?",
-        "situation_ko": "장소 묻기",
-        "situation_en": "Asking where to meet"
+       "n": "5시",
+       "k": "다섯 시"
       },
       {
-        "banmal": "알았어.",
-        "jondaemal": "알겠어요.",
-        "english": "Got it / Understood.",
-        "situation_ko": "확인",
-        "situation_en": "Confirming"
+       "n": "6시",
+       "k": "여섯 시"
+      },
+      {
+       "n": "7시",
+       "k": "일곱 시"
+      },
+      {
+       "n": "8시",
+       "k": "여덟 시"
+      },
+      {
+       "n": "9시",
+       "k": "아홉 시"
+      },
+      {
+       "n": "10시",
+       "k": "열 시"
+      },
+      {
+       "n": "11시",
+       "k": "열한 시"
+      },
+      {
+       "n": "12시",
+       "k": "열두 시"
       }
+     ]
+    },
+    {
+     "type": "green",
+     "title": "분 (minute) → 한자어 · Sino-Korean numbers",
+     "grid_items": [
+      {
+       "n": "10분",
+       "k": "십 분"
+      },
+      {
+       "n": "15분",
+       "k": "십오 분"
+      },
+      {
+       "n": "20분",
+       "k": "이십 분"
+      },
+      {
+       "n": "30분",
+       "k": "삼십 분",
+       "badge": "= 반!"
+      },
+      {
+       "n": "45분",
+       "k": "사십오 분"
+      },
+      {
+       "n": "50분",
+       "k": "오십 분"
+      }
+     ]
+    },
+    {
+     "type": "amber",
+     "title": "반 = 30분 · 'half past' shortcut",
+     "content": "두 시 반 = 2:30 (two thirty)\n세 시 반 = 3:30 (half past three)\n열두 시 반 = 12:30"
+    },
+    {
+     "type": "blue",
+     "title": "오전 / 오후 · AM / PM",
+     "content": "오전 아홉 시 = 9:00 AM\n오후 한 시 = 1:00 PM\n오후 일곱 시 반 = 7:30 PM"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "오후 한 시에 만나요.",
+     "en": "Let's meet at 1 PM."
+    },
+    {
+     "ko": "지금 몇 시예요?",
+     "en": "What time is it now?"
+    },
+    {
+     "ko": "두 시 반이에요.",
+     "en": "It's 2:30."
+    },
+    {
+     "ko": "열두 시에 점심 먹을까?",
+     "en": "Shall we have lunch at noon?"
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "오후 ___ 시에 만나. (1시)",
+     "answer": "한",
+     "hint": "시는 고유어! 1 → 한 · hours use Native Korean"
+    },
+    {
+     "sentence": "두 시 ___이에요. (30분)",
+     "answer": "반",
+     "hint": "삼십 분 = 반 · 30 minutes = half"
+    },
+    {
+     "sentence": "오전 ___ 시에 학교에 가요. (9시)",
+     "answer": "아홉",
+     "hint": "9 → 아홉 (Native Korean)"
+    }
+   ]
+  },
+  {
+   "id": "g_ep06_01",
+   "tier": "core",
+   "title": "N에 — at / to (time & place)",
+   "title_en": "The particle 에 for time and destination",
+   "emoji": "📍",
+   "explanation_en": "에 marks time (when) and destination (where you're going TO). Think of it as pointing to a target — a moment in time or a place you're heading toward.",
+   "pattern": "시간/장소 + 에 · time or destination + 에",
+   "scene_example": {
+    "korean": "오후 1시에 한강 공원에 갈까?",
+    "english": "Shall we go to Han River Park at 1 PM?",
+    "highlight": "1시에, 공원에"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "시간 + 에 = at (a time) · N에 for time",
+     "content": "오후 1시에 만나 = meet at 1 PM\n주말에 약속이 있어 = I have plans on the weekend\n오월 구일에 만나자 = let's meet on May 9th"
+    },
+    {
+     "type": "green",
+     "title": "장소 + 에 (가다/오다) = to a place · destination",
+     "content": "한강 공원에 갈까? = Shall we go to Han River Park?\n학교에 가요 = I go to school"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "오월 구일에 만나요.",
+     "en": "Let's meet on May 9th."
+    },
+    {
+     "ko": "오후 1시에 지하철역에 가요.",
+     "en": "I'm going to the subway station at 1 PM."
+    }
+   ]
+  },
+  {
+   "id": "g_ep06_02",
+   "tier": "core",
+   "title": "N에서 — at (action place)",
+   "title_en": "The particle 에서 for where actions happen",
+   "emoji": "🏞️",
+   "explanation_en": "에서 marks WHERE an action happens. Use it with action verbs (meet, eat, study, play). Key contrast: 에 = going TO a place; 에서 = doing something AT a place.",
+   "pattern": "장소 + 에서 · place + 에서",
+   "scene_example": {
+    "korean": "지하철 3번 입구에서 어때?",
+    "english": "How about at subway entrance 3?",
+    "highlight": "입구에서"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "에서 = where the action happens",
+     "content": "입구에서 만나 = meet at the entrance\n공원에서 자전거 타요 = ride bikes at the park\n어디에서 만나? = Where shall we meet?"
+    },
+    {
+     "type": "amber",
+     "title": "에 vs 에서 — key difference · 구별 포인트",
+     "content": "공원에 가요 → going TO the park (destination)\n공원에서 놀아요 → playing AT the park (action)"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "어디에서 만나?",
+     "en": "Where shall we meet?"
+    },
+    {
+     "ko": "3번 입구에서 만나!",
+     "en": "Let's meet at entrance 3!"
+    }
+   ]
+  },
+  {
+   "id": "g_ep06_06",
+   "tier": "core",
+   "title": "한국식 대답 — 응/아니 (영어와 반대!)",
+   "title_en": "Korean Yes/No — the opposite of English!",
+   "emoji": "🔄",
+   "explanation_en": "In English, you answer based on FACT (yes = there is, no = there isn't). In Korean, you answer based on AGREEMENT with what was said. '약속 없어?' → '응, 없어' (Yeah, no plans) — you're agreeing with 없어!",
+   "pattern": "질문에 동의 → 응/네 · 질문에 반대 → 아니",
+   "scene_example": {
+    "korean": "약속 없어? — 응, 약속 없어.",
+    "english": "No plans? — Yeah, no plans.",
+    "highlight": "응"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "부정 질문 → 동의하면 응/네",
+     "content": "약속 없어? → 응, 없어. (Yeah, no plans.)\n배 안 고파? → 응, 안 고파. (Yeah, not hungry.)"
+    },
+    {
+     "type": "amber",
+     "title": "영어와 반대! · Opposite of English",
+     "content": "English: 'No plans?' → 'Yes (I have plans)' / 'No (I don't)'\nKorean: '약속 없어?' → '응 (= agreeing: yeah, none)'"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "응 약속 없어. 왜?",
+     "en": "Yeah, I'm free (no plans). Why?"
+    }
+   ]
+  }
+ ],
+ "banmal_jondaemal": {
+  "title": "약속 잡기 — 반말 vs 존댓말",
+  "intro_ko": "보미와 올리비아는 친구라서 반말을 써요. 어른들은 같은 상황에서 존댓말을 쓴답니다!",
+  "intro_en": "Bomi and Olivia are friends so they use casual speech (반말). Adults use formal speech (존댓말) in the same situation.",
+  "rows": [
+   {
+    "banmal": "약속 없어?",
+    "jondaemal": "약속 없으세요?",
+    "english": "Are you free? (no plans?)",
+    "situation_ko": "약속 여부 확인",
+    "situation_en": "Checking availability"
+   },
+   {
+    "banmal": "며칠이야?",
+    "jondaemal": "며칠이에요?",
+    "english": "What date is it?",
+    "situation_ko": "날짜 묻기",
+    "situation_en": "Asking the date"
+   },
+   {
+    "banmal": "오월 구일이야.",
+    "jondaemal": "오월 구일이에요.",
+    "english": "It's May 9th.",
+    "situation_ko": "날짜 대답",
+    "situation_en": "Answering the date"
+   },
+   {
+    "banmal": "몇 시에 만나?",
+    "jondaemal": "몇 시에 만날까요?",
+    "english": "What time shall we meet?",
+    "situation_ko": "시간 묻기",
+    "situation_en": "Asking the time / where to meet"
+   },
+   {
+    "banmal": "어디에서 만나?",
+    "jondaemal": "어디에서 만날까요?",
+    "english": "Where shall we meet?",
+    "situation_ko": "장소 묻기",
+    "situation_en": "Asking where to meet"
+   },
+   {
+    "banmal": "알았어.",
+    "jondaemal": "알겠어요.",
+    "english": "Got it / Understood.",
+    "situation_ko": "확인",
+    "situation_en": "Confirming"
+   }
+  ],
+  "adult_dialogue": {
+   "title": "어른들의 약속 잡기",
+   "speakers": [
+    "선생님",
+    "학부모"
+   ],
+   "lines": [
+    {
+     "speaker": "선생님",
+     "text": "이번 주말에 시간 되세요?",
+     "en": "Are you available this weekend?"
+    },
+    {
+     "speaker": "학부모",
+     "text": "오월 구일이죠? 네, 괜찮아요.",
+     "en": "That's May 9th, right? Yes, that works."
+    },
+    {
+     "speaker": "선생님",
+     "text": "오후 두 시에 학교에서 뵐까요?",
+     "en": "Shall we meet at school at 2 PM?"
+    },
+    {
+     "speaker": "학부모",
+     "text": "네, 알겠습니다. 그때 뵙겠습니다.",
+     "en": "Yes, understood. I'll see you then."
+    }
+   ],
+   "note_ko": "어른들은 존댓말(-세요, -죠, -겠습니다)을 써요. 며칠이야? → 며칠이에요?, 알았어 → 알겠습니다.",
+   "note_en": "Adults use polite forms. Compare: 며칠이야? (casual) → 며칠이에요? (polite), 알았어 → 알겠습니다."
+  }
+ },
+ "pronunciation": [
+  {
+   "id": "pron_ep04_01",
+   "title": "몇 시 → [멷 씨] (된소리되기 · Tensification)",
+   "rule": "받침 ㅊ(→ㄷ) 뒤의 ㅅ이 된소리 ㅆ로 발음됨",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
     ],
-    "adult_dialogue": {
-      "title": "어른들의 약속 잡기",
-      "speakers": [
-        "선생님",
-        "학부모"
-      ],
-      "lines": [
-        {
-          "speaker": "선생님",
-          "text": "이번 주말에 시간 되세요?",
-          "en": "Are you available this weekend?"
-        },
-        {
-          "speaker": "학부모",
-          "text": "오월 구일이죠? 네, 괜찮아요.",
-          "en": "That's May 9th, right? Yes, that works."
-        },
-        {
-          "speaker": "선생님",
-          "text": "오후 두 시에 학교에서 뵐까요?",
-          "en": "Shall we meet at school at 2 PM?"
-        },
-        {
-          "speaker": "학부모",
-          "text": "네, 알겠습니다. 그때 뵙겠습니다.",
-          "en": "Yes, understood. I'll see you then."
-        }
-      ],
-      "note_ko": "어른들은 존댓말(-세요, -죠, -겠습니다)을 써요. 며칠이야? → 며칠이에요?, 알았어 → 알겠습니다.",
-      "note_en": "Adults use polite forms. Compare: 며칠이야? (casual) → 며칠이에요? (polite), 알았어 → 알겠습니다."
-    }
+    "rows": [
+     [
+      "몇 시",
+      "[멷 씨]",
+      "ㅊ→ㄷ + 시 → 씨"
+     ],
+     [
+      "몇 분",
+      "[멷 뿐]",
+      "ㅊ→ㄷ + 분 → 뿐"
+     ],
+     [
+      "몇 개",
+      "[멷 깨]",
+      "ㅊ→ㄷ + 개 → 깨"
+     ]
+    ]
+   },
+   "tip": "💡 '몇' 뒤의 첫소리는 된소리(ㅆ,ㄲ,ㅃ)로 강하게 발음돼요."
   },
-  "pronunciation": [
+  {
+   "id": "pron_ep04_02",
+   "title": "오월 → [오월] / 구일 → [구일] (연음화)",
+   "rule": "받침 + 모음 시작 다음 음절 → 연음",
+   "table": {
+    "columns": [
+     "표기",
+     "발음",
+     "설명"
+    ],
+    "rows": [
+     [
+      "구일",
+      "[구일]",
+      "ㄱ+일 → 연음"
+     ],
+     [
+      "입구",
+      "[입구]",
+      "ㅂ+구 → 연음"
+     ],
+     [
+      "약속",
+      "[약쏙]",
+      "ㄱ+ㅅ → 된소리"
+     ]
+    ]
+   },
+   "tip": "💡 날짜를 말할 때 받침 연음에 주의하세요!"
+  }
+ ],
+ "usage": [
+  {
+   "title": "약속 잡기 4단계 — Making Plans in 4 Steps",
+   "title_en": "How Koreans make plans",
+   "explanation_en": "Korean plan-making follows a natural 4-step flow: (1) check availability, (2) confirm the date, (3) suggest activity, (4) decide time & place.",
+   "examples": [
     {
-      "id": "pron_ep04_01",
-      "title": "몇 시 → [멷 씨] (된소리되기 · Tensification)",
-      "rule": "받침 ㅊ(→ㄷ) 뒤의 ㅅ이 된소리 ㅆ로 발음됨",
-      "table": {
-        "columns": [
-          "표기 · Spelling",
-          "발음 · Sound",
-          "규칙 · Rule"
-        ],
-        "rows": [
-          [
-            "몇 시",
-            "[멷 씨]",
-            "ㅊ→ㄷ + 시 → 씨"
-          ],
-          [
-            "몇 분",
-            "[멷 뿐]",
-            "ㅊ→ㄷ + 분 → 뿐"
-          ],
-          [
-            "몇 개",
-            "[멷 깨]",
-            "ㅊ→ㄷ + 개 → 깨"
-          ]
-        ]
-      },
-      "tip": "💡 '몇' 뒤의 첫소리는 된소리(ㅆ,ㄲ,ㅃ)로 강하게 발음돼요."
+     "ko": "이번 주말에 약속 없어?",
+     "en": "1. Are you free this weekend?"
     },
     {
-      "id": "pron_ep04_02",
-      "title": "오월 → [오월] / 구일 → [구일] (연음화)",
-      "rule": "받침 + 모음 시작 다음 음절 → 연음",
-      "table": {
-        "columns": [
-          "표기",
-          "발음",
-          "설명"
-        ],
-        "rows": [
-          [
-            "구일",
-            "[구일]",
-            "ㄱ+일 → 연음"
-          ],
-          [
-            "입구",
-            "[입구]",
-            "ㅂ+구 → 연음"
-          ],
-          [
-            "약속",
-            "[약쏙]",
-            "ㄱ+ㅅ → 된소리"
-          ]
-        ]
-      },
-      "tip": "💡 날짜를 말할 때 받침 연음에 주의하세요!"
+     "ko": "그게 며칠이야? — 오월 구일이야.",
+     "en": "2. What date? — May 9th."
+    },
+    {
+     "ko": "한강 공원에 자전거 갈까?",
+     "en": "3. Shall we go cycling at Han River Park?"
+    },
+    {
+     "ko": "오후 1시에 3번 입구에서 만나!",
+     "en": "4. Meet at entrance 3 at 1 PM!"
     }
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "title": "입구 vs 출구 — Entrance vs Exit",
+   "title_en": "Subway meeting points",
+   "explanation_en": "In Korea, subway exits are numbered (1번 출구, 3번 입구). Koreans often say the specific number when arranging meetups.",
+   "examples": [
     {
-      "title": "약속 잡기 4단계 — Making Plans in 4 Steps",
-      "title_en": "How Koreans make plans",
-      "explanation_en": "Korean plan-making follows a natural 4-step flow: (1) check availability, (2) confirm the date, (3) suggest activity, (4) decide time & place.",
-      "examples": [
-        {
-          "ko": "이번 주말에 약속 없어?",
-          "en": "1. Are you free this weekend?"
-        },
-        {
-          "ko": "그게 며칠이야? — 오월 구일이야.",
-          "en": "2. What date? — May 9th."
-        },
-        {
-          "ko": "한강 공원에 자전거 갈까?",
-          "en": "3. Shall we go cycling at Han River Park?"
-        },
-        {
-          "ko": "오후 1시에 3번 입구에서 만나!",
-          "en": "4. Meet at entrance 3 at 1 PM!"
-        }
-      ]
+     "ko": "지하철 3번 입구에서 만나.",
+     "en": "Meet at subway entrance 3."
     },
     {
-      "title": "입구 vs 출구 — Entrance vs Exit",
-      "title_en": "Subway meeting points",
-      "explanation_en": "In Korea, subway exits are numbered (1번 출구, 3번 입구). Koreans often say the specific number when arranging meetups.",
-      "examples": [
-        {
-          "ko": "지하철 3번 입구에서 만나.",
-          "en": "Meet at subway entrance 3."
-        },
-        {
-          "ko": "강남역 11번 출구 알아?",
-          "en": "Do you know Gangnam Station exit 11?"
-        }
-      ]
+     "ko": "강남역 11번 출구 알아?",
+     "en": "Do you know Gangnam Station exit 11?"
     }
-  ],
-  "quiz": [
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q1",
+   "audio_text": "이번 주말에 약속 없어?",
+   "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "이번 주말에 약속 있어?",
+    "이번 주말에 약속 없어?",
+    "이번 주말에 약속 없어요?",
+    "오늘 약속 없어?"
+   ],
+   "answer": 1,
+   "explanation": "약속 없어? = Are you free? 없어(casual) vs 없어요(polite). 있어(have) vs 없어(don't have)."
+  },
+  {
+   "id": "q2",
+   "audio_text": "그게 며칠이야?",
+   "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "그게 몇 시야?",
+    "그게 무슨 요일이야?",
+    "그게 며칠이야?",
+    "그게 몇 월이야?"
+   ],
+   "answer": 2,
+   "explanation": "며칠이야? = What date is it? (반말). 몇 시(time) vs 며칠(date) vs 무슨 요일(day of week)."
+  },
+  {
+   "id": "q3",
+   "audio_text": "오월 구일이야.",
+   "question_ko": "🔊 들은 날짜는?",
+   "question_en": "What date did you hear?",
+   "options": [
+    "April 9th",
+    "May 6th",
+    "May 9th",
+    "September 5th"
+   ],
+   "answer": 2,
+   "explanation": "오월 = 5월 (May), 구일 = 9일 (9th). 날짜는 한자어: 오(5)+월, 구(9)+일."
+  },
+  {
+   "id": "q4",
+   "audio_text": "오후 1시에 지하철 3번 입구에서 어때?",
+   "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "오후 1시에 지하철 3번 출구에서 어때?",
+    "오전 1시에 지하철 3번 입구에서 어때?",
+    "오후 1시에 지하철 3번 입구에서 어때?",
+    "오후 2시에 지하철 3번 입구에서 어때?"
+   ],
+   "answer": 2,
+   "explanation": "오후(PM) 1시 + 입구(entrance). 입구(entrance) vs 출구(exit), 오전(AM) vs 오후(PM) 주의!"
+  },
+  {
+   "id": "q5_mc",
+   "question_ko": "'오후 1시'를 한국어로 바르게 읽은 것은?",
+   "question_en": "How do you correctly say '1 PM' in Korean?",
+   "options": [
+    "오후 한 시",
+    "오후 일 시",
+    "오후 하나 시",
+    "오전 한 시"
+   ],
+   "answer": 0,
+   "explanation": "시(hour)는 고유어 숫자! 1 → 한 (not 일/하나). 오후 한 시 = 1 PM."
+  },
+  {
+   "id": "q6_mc",
+   "question_ko": "'두 시 삼십 분'을 짧게 말하면?",
+   "question_en": "What's the short way to say '두 시 삼십 분'?",
+   "options": [
+    "두 시 반",
+    "두 시 중간",
+    "두 시 삼",
+    "이 시 반"
+   ],
+   "answer": 0,
+   "explanation": "삼십 분 = 반(半)! 두 시 반 = 2:30. 반 is the handy shortcut for 'half past' in Korean."
+  }
+ ],
+ "real_life": [
+  {
+   "type": "tip",
+   "title": "🚴 한강 공원 — Seoul's Favorite Hangout",
+   "content_ko": "한강 공원은 서울 사람들이 가장 사랑하는 공간이에요. 자전거 타기, 돗자리 펴고 치킨·라면 먹기, 산책, 피크닉까지 다 할 수 있어요. 따릉이(서울 공공 자전거)를 빌려서 강변을 달리는 게 인기예요!",
+   "content_en": "Han River Park is Seoulites' most beloved spot. Rent a 따릉이 (Seoul's public bike) and ride along the river — a classic date or friend outing!"
+  },
+  {
+   "type": "kakao",
+   "title": "💬 약속 잡는 카톡",
+   "messages": [
     {
-      "id": "q1",
-      "audio_text": "이번 주말에 약속 없어?",
-      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": [
-        "이번 주말에 약속 있어?",
-        "이번 주말에 약속 없어?",
-        "이번 주말에 약속 없어요?",
-        "오늘 약속 없어?"
-      ],
-      "answer": 1,
-      "explanation": "약속 없어? = Are you free? 없어(casual) vs 없어요(polite). 있어(have) vs 없어(don't have)."
+     "speaker": "올리비아",
+     "side": "left",
+     "text": "보미야, 이번 주말에 시간 있어?",
+     "en": "Bomi, are you free this weekend?"
     },
     {
-      "id": "q2",
-      "audio_text": "그게 며칠이야?",
-      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": [
-        "그게 몇 시야?",
-        "그게 무슨 요일이야?",
-        "그게 며칠이야?",
-        "그게 몇 월이야?"
-      ],
-      "answer": 2,
-      "explanation": "며칠이야? = What date is it? (반말). 몇 시(time) vs 며칠(date) vs 무슨 요일(day of week)."
+     "speaker": "나",
+     "side": "right",
+     "text": "그게 며칠이야?",
+     "en": "What date is that?"
     },
     {
-      "id": "q3",
-      "audio_text": "오월 구일이야.",
-      "question_ko": "🔊 들은 날짜는?",
-      "question_en": "What date did you hear?",
-      "options": [
-        "April 9th",
-        "May 6th",
-        "May 9th",
-        "September 5th"
-      ],
-      "answer": 2,
-      "explanation": "오월 = 5월 (May), 구일 = 9일 (9th). 날짜는 한자어: 오(5)+월, 구(9)+일."
+     "speaker": "올리비아",
+     "side": "left",
+     "text": "오월 구일이야!",
+     "en": "May 9th!"
     },
     {
-      "id": "q4",
-      "audio_text": "오후 1시에 지하철 3번 입구에서 어때?",
-      "question_ko": "🔊 음성을 듣고 맞는 것을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": [
-        "오후 1시에 지하철 3번 출구에서 어때?",
-        "오전 1시에 지하철 3번 입구에서 어때?",
-        "오후 1시에 지하철 3번 입구에서 어때?",
-        "오후 2시에 지하철 3번 입구에서 어때?"
-      ],
-      "answer": 2,
-      "explanation": "오후(PM) 1시 + 입구(entrance). 입구(entrance) vs 출구(exit), 오전(AM) vs 오후(PM) 주의!"
+     "speaker": "나",
+     "side": "right",
+     "text": "응! 약속 없어. 뭐 할까?",
+     "en": "Yeah! I'm free. What should we do?"
     },
     {
-      "id": "q5_mc",
-      "question_ko": "'오후 1시'를 한국어로 바르게 읽은 것은?",
-      "question_en": "How do you correctly say '1 PM' in Korean?",
-      "options": [
-        "오후 한 시",
-        "오후 일 시",
-        "오후 하나 시",
-        "오전 한 시"
-      ],
-      "answer": 0,
-      "explanation": "시(hour)는 고유어 숫자! 1 → 한 (not 일/하나). 오후 한 시 = 1 PM."
+     "speaker": "올리비아",
+     "side": "left",
+     "text": "한강에서 자전거 타자 🚲",
+     "en": "Let's ride bikes at Han River! 🚲"
     },
     {
-      "id": "q6_mc",
-      "question_ko": "'두 시 삼십 분'을 짧게 말하면?",
-      "question_en": "What's the short way to say '두 시 삼십 분'?",
-      "options": [
-        "두 시 반",
-        "두 시 중간",
-        "두 시 삼",
-        "이 시 반"
-      ],
-      "answer": 0,
-      "explanation": "삼십 분 = 반(半)! 두 시 반 = 2:30. 반 is the handy shortcut for 'half past' in Korean."
+     "speaker": "나",
+     "side": "right",
+     "text": "좋아! 오후 1시에 3번 입구에서 어때?",
+     "en": "Sounds good! How about 1 PM at entrance 3?"
+    },
+    {
+     "speaker": "올리비아",
+     "side": "left",
+     "text": "콜~ 거기서 만나!",
+     "en": "Deal~ See you there!"
     }
-  ],
-  "real_life": [
+   ]
+  },
+  {
+   "type": "listening",
+   "id": "rl_listen_ep04",
+   "title": "🎧 약속 정하기 — Setting a Date & Time",
+   "title_en": "Listening: deciding a date, time and meeting place",
+   "setup_ko": "두 친구가 만날 날짜와 시간을 정해요. 잘 듣고 답해보세요.",
+   "setup_en": "Two friends decide when and where to meet. Listen and answer.",
+   "audio_text": "유월 십사일 오후 두 시에 도서관 앞에서 만나자.",
+   "script": [
     {
-      "type": "tip",
-      "title": "🚴 한강 공원 — Seoul's Favorite Hangout",
-      "content_ko": "한강 공원은 서울 사람들이 가장 사랑하는 공간이에요. 자전거 타기, 돗자리 펴고 치킨·라면 먹기, 산책, 피크닉까지 다 할 수 있어요. 따릉이(서울 공공 자전거)를 빌려서 강변을 달리는 게 인기예요!",
-      "content_en": "Han River Park is Seoulites' most beloved spot. Rent a 따릉이 (Seoul's public bike) and ride along the river — a classic date or friend outing!"
+     "speaker": "친구 1",
+     "text": "다음 주에 같이 공부할까?"
     },
     {
-      "type": "kakao",
-      "title": "💬 약속 잡는 카톡",
-      "messages": [
-        {
-          "speaker": "올리비아",
-          "side": "left",
-          "text": "보미야, 이번 주말에 시간 있어?",
-          "en": "Bomi, are you free this weekend?"
-        },
-        {
-          "speaker": "나",
-          "side": "right",
-          "text": "그게 며칠이야?",
-          "en": "What date is that?"
-        },
-        {
-          "speaker": "올리비아",
-          "side": "left",
-          "text": "오월 구일이야!",
-          "en": "May 9th!"
-        },
-        {
-          "speaker": "나",
-          "side": "right",
-          "text": "응! 약속 없어. 뭐 할까?",
-          "en": "Yeah! I'm free. What should we do?"
-        },
-        {
-          "speaker": "올리비아",
-          "side": "left",
-          "text": "한강에서 자전거 타자 🚲",
-          "en": "Let's ride bikes at Han River! 🚲"
-        },
-        {
-          "speaker": "나",
-          "side": "right",
-          "text": "좋아! 오후 1시에 3번 입구에서 어때?",
-          "en": "Sounds good! How about 1 PM at entrance 3?"
-        },
-        {
-          "speaker": "올리비아",
-          "side": "left",
-          "text": "콜~ 거기서 만나!",
-          "en": "Deal~ See you there!"
-        }
-      ]
+     "speaker": "친구 2",
+     "text": "좋아! 며칠에?"
     },
     {
-      "type": "listening",
-      "id": "rl_listen_ep04",
-      "title": "🎧 약속 정하기 — Setting a Date & Time",
-      "title_en": "Listening: deciding a date, time and meeting place",
-      "setup_ko": "두 친구가 만날 날짜와 시간을 정해요. 잘 듣고 답해보세요.",
-      "setup_en": "Two friends decide when and where to meet. Listen and answer.",
-      "audio_text": "유월 십사일 오후 두 시에 도서관 앞에서 만나자.",
-      "script": [
-        {
-          "speaker": "친구 1",
-          "text": "다음 주에 같이 공부할까?"
-        },
-        {
-          "speaker": "친구 2",
-          "text": "좋아! 며칠에?"
-        },
-        {
-          "speaker": "친구 1",
-          "text": "유월 십사일 어때?"
-        },
-        {
-          "speaker": "친구 2",
-          "text": "좋아. 몇 시에 어디에서 만나?"
-        },
-        {
-          "speaker": "친구 1",
-          "text": "오후 두 시에 도서관 앞에서 만나자."
-        }
-      ],
-      "questions": [
-        {
-          "question_ko": "두 사람은 며칠에 만나요?",
-          "question_en": "What date will they meet?",
-          "options": [
-            "유월 사일",
-            "유월 십사일",
-            "칠월 십사일",
-            "유월 사십일"
-          ],
-          "answer": 1,
-          "explanation": "유월 = 6월 (June, 불규칙!), 십사일 = 14일. 유월 십사일 = June 14th."
-        },
-        {
-          "question_ko": "몇 시에 어디에서 만나요?",
-          "question_en": "What time and where will they meet?",
-          "options": [
-            "오전 두 시, 학교 앞",
-            "오후 두 시, 공원 앞",
-            "오후 두 시, 도서관 앞",
-            "오후 세 시, 도서관 앞"
-          ],
-          "answer": 2,
-          "explanation": "오후 두 시(2 PM) + 도서관 앞에서(in front of the library). 두 시 = 2 o'clock (고유어)."
-        }
-      ]
+     "speaker": "친구 1",
+     "text": "유월 십사일 어때?"
+    },
+    {
+     "speaker": "친구 2",
+     "text": "좋아. 몇 시에 어디에서 만나?"
+    },
+    {
+     "speaker": "친구 1",
+     "text": "오후 두 시에 도서관 앞에서 만나자."
     }
-  ],
-  "key_points": [
+   ],
+   "questions": [
     {
-      "icon": "📅",
-      "ko": "날짜 = 한자어 숫자 + 월/일 (오월 구일) · dates use Sino-Korean",
-      "en": "Dates use Sino-Korean numbers: 오월 구일 = May 9th"
+     "question_ko": "두 사람은 며칠에 만나요?",
+     "question_en": "What date will they meet?",
+     "options": [
+      "유월 사일",
+      "유월 십사일",
+      "칠월 십사일",
+      "유월 사십일"
+     ],
+     "answer": 1,
+     "explanation": "유월 = 6월 (June, 불규칙!), 십사일 = 14일. 유월 십사일 = June 14th."
     },
     {
-      "icon": "🕐",
-      "ko": "시 = 고유어(한 시), 분 = 한자어(삼십 분), 반 = 30분 · time reading",
-      "en": "Hours = Native Korean, minutes = Sino-Korean, 반 = 30 min"
-    },
-    {
-      "icon": "📍",
-      "ko": "에 = 시간/목적지 (1시에, 공원에 가다) · 에 = time/destination",
-      "en": "에 = time or destination (at 1 PM, go to the park)"
-    },
-    {
-      "icon": "🏞️",
-      "ko": "에서 = 행동 장소 (입구에서 만나) · 에서 = action place",
-      "en": "에서 = where an action happens (meet at the entrance)"
-    },
-    {
-      "icon": "🔄",
-      "ko": "약속 없어? → 응, 없어! (한국어 네/아니요는 영어와 반대)",
-      "en": "Korean yes/no answers based on agreement, not fact"
+     "question_ko": "몇 시에 어디에서 만나요?",
+     "question_en": "What time and where will they meet?",
+     "options": [
+      "오전 두 시, 학교 앞",
+      "오후 두 시, 공원 앞",
+      "오후 두 시, 도서관 앞",
+      "오후 세 시, 도서관 앞"
+     ],
+     "answer": 2,
+     "explanation": "오후 두 시(2 PM) + 도서관 앞에서(in front of the library). 두 시 = 2 o'clock (고유어)."
     }
-  ],
-  "self_check": [
-    {
-      "ko": "날짜를 한국어로 읽을 수 있어요 (오월 구일).",
-      "en": "I can read dates in Korean (e.g., 오월 구일 = May 9th)."
-    },
-    {
-      "ko": "친구에게 주말 약속이 있는지 물어볼 수 있어요.",
-      "en": "I can ask a friend if they have weekend plans."
-    },
-    {
-      "ko": "만날 시간과 장소를 정할 수 있어요 (몇 시에, 어디에서).",
-      "en": "I can decide a meeting time and place."
-    },
-    {
-      "ko": "에와 에서를 구분해서 쓸 수 있어요.",
-      "en": "I can tell apart 에 and 에서."
-    },
-    {
-      "ko": "시간을 한국어로 읽을 수 있어요 (오후 한 시, 두 시 반).",
-      "en": "I can tell time in Korean (e.g., 오후 한 시 = 1 PM, 두 시 반 = 2:30)."
-    }
-  ]
+   ]
+  }
+ ],
+ "key_points": [
+  {
+   "icon": "📅",
+   "ko": "날짜 = 한자어 숫자 + 월/일 (오월 구일) · dates use Sino-Korean",
+   "en": "Dates use Sino-Korean numbers: 오월 구일 = May 9th"
+  },
+  {
+   "icon": "🕐",
+   "ko": "시 = 고유어(한 시), 분 = 한자어(삼십 분), 반 = 30분 · time reading",
+   "en": "Hours = Native Korean, minutes = Sino-Korean, 반 = 30 min"
+  },
+  {
+   "icon": "📍",
+   "ko": "에 = 시간/목적지 (1시에, 공원에 가다) · 에 = time/destination",
+   "en": "에 = time or destination (at 1 PM, go to the park)"
+  },
+  {
+   "icon": "🏞️",
+   "ko": "에서 = 행동 장소 (입구에서 만나) · 에서 = action place",
+   "en": "에서 = where an action happens (meet at the entrance)"
+  },
+  {
+   "icon": "🔄",
+   "ko": "약속 없어? → 응, 없어! (한국어 네/아니요는 영어와 반대)",
+   "en": "Korean yes/no answers based on agreement, not fact"
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "날짜를 한국어로 읽을 수 있어요 (오월 구일).",
+   "en": "I can read dates in Korean (e.g., 오월 구일 = May 9th)."
+  },
+  {
+   "ko": "친구에게 주말 약속이 있는지 물어볼 수 있어요.",
+   "en": "I can ask a friend if they have weekend plans."
+  },
+  {
+   "ko": "만날 시간과 장소를 정할 수 있어요 (몇 시에, 어디에서).",
+   "en": "I can decide a meeting time and place."
+  },
+  {
+   "ko": "에와 에서를 구분해서 쓸 수 있어요.",
+   "en": "I can tell apart 에 and 에서."
+  },
+  {
+   "ko": "시간을 한국어로 읽을 수 있어요 (오후 한 시, 두 시 반).",
+   "en": "I can tell time in Korean (e.g., 오후 한 시 = 1 PM, 두 시 반 = 2:30)."
+  }
+ ]
 }

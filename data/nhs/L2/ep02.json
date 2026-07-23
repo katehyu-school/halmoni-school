@@ -1,882 +1,902 @@
 {
-  "id": "ep02",
-  "level": "L2",
-  "title": "공항에서 잠실까지",
-  "title_en": "From the Airport to Jamsil",
-  "scene": "🚌 공항버스 · Airport Bus",
-  "goal": {
-    "ko": "공항에서 목적지까지 찾아 갈 수 있어요.",
-    "en": "I can find my way from the airport to my destination."
+ "id": "ep02",
+ "level": "L2",
+ "title": "공항에서 잠실까지",
+ "title_en": "From the Airport to Jamsil",
+ "scene": "🚌 교통·길찾기 · Getting Around",
+ "goal": {
+  "ko": "공항에서 목적지까지 찾아 갈 수 있어요.",
+  "en": "I can find my way from the airport to my destination."
+ },
+ "key_points": [
+  "찾아 봐 / 해 볼게요 — -아/어 보다: trying something",
+  "못 찾겠어요 — 못 + 동사: inability",
+  "터미널행 공항버스 — N행: bound for N",
+  "출구 근처에 있는 매표소 — 위치 + 관형사형",
+  "안 보여요 / 못 찾겠어요 — 안 vs 못 부정 대비"
+ ],
+ "slides": [
+  "data/nhs/L2/slides/ep02/ep2인천공항1.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항2.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항3.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항4.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항5.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항6.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항7.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항8.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항9.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항10.png",
+  "data/nhs/L2/slides/ep02/ep2인천공항11.png"
+ ],
+ "video": null,
+ "characters": [
+  {
+   "id": "mirae",
+   "name": "보미",
+   "color": "#E85D9A",
+   "emoji": "👧"
   },
-  "key_points": [
-    "찾아 봐 / 해 볼게요 — -아/어 보다: trying something",
-    "못 찾겠어요 — 못 + 동사: inability",
-    "터미널행 공항버스 — N행: bound for N",
-    "출구 근처에 있는 매표소 — 위치 + 관형사형",
-    "안 보여요 / 못 찾겠어요 — 안 vs 못 부정 대비"
-  ],
-  "slides": [
-    "data/nhs/L2/slides/ep02/ep2인천공항1.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항2.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항3.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항4.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항5.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항6.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항7.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항8.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항9.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항10.png",
-    "data/nhs/L2/slides/ep02/ep2인천공항11.png"
-  ],
-  "video": null,
-  "characters": [
+  {
+   "id": "ria",
+   "name": "리나",
+   "color": "#9B72CF",
+   "emoji": "👧"
+  },
+  {
+   "id": "kayo",
+   "name": "태오",
+   "color": "#E8744A",
+   "emoji": "👧"
+  },
+  {
+   "id": "halmoni",
+   "name": "할머니",
+   "color": "#4A90D9",
+   "emoji": "👵"
+  }
+ ],
+ "script": [
+  {
+   "speaker": "mirae",
+   "text": "할머니! 보미예요!",
+   "slide": 0,
+   "audio": "data/nhs/L2/TTS/ep02/01할머니!+미래예요!_slide1.mp3",
+   "en": "Grandma! It's me, Bomi!"
+  },
+  {
+   "speaker": "halmoni",
+   "text": "보미야, 지금 어디 있어?",
+   "slide": 1,
+   "audio": "data/nhs/L2/TTS/ep02/02미래야+지금+어디+있어_slide2.mp3",
+   "en": "Bomi, where are you right now?"
+  },
+  {
+   "speaker": "mirae",
+   "text": "인천공항이에요.",
+   "slide": 1,
+   "audio": "data/nhs/L2/TTS/ep02/03인천공항이에요_slide2.mp3",
+   "en": "We're at Incheon Airport."
+  },
+  {
+   "speaker": "halmoni",
+   "text": "모두 무사히 도착했어?",
+   "slide": 2,
+   "audio": "data/nhs/L2/TTS/ep02/04모두+무사히+도착했어_slide3.mp3",
+   "en": "Did everyone arrive safely?"
+  },
+  {
+   "speaker": "mirae",
+   "text": "네!",
+   "slide": 3,
+   "audio": "data/nhs/L2/TTS/ep02/05네!_slide4.mp3",
+   "en": "Yes!"
+  },
+  {
+   "speaker": "ria",
+   "text": "할머니 우리 왔어요!",
+   "slide": 3,
+   "audio": "data/nhs/L2/TTS/ep02/06할머니+우리+왔어요!_slide4.mp3",
+   "en": "Grandma, we're here!"
+  },
+  {
+   "speaker": "halmoni",
+   "text": "출구 근처에 있는 공항버스 매표소를 찾아 봐.",
+   "slide": 4,
+   "audio": "data/nhs/L2/TTS/ep02/07출구+근처에+있는+공항버스+매표소를+찾아+봐_slide5.mp3",
+   "en": "Try to find the airport bus ticket booth near the exit.",
+   "annotation": {
+    "highlight": "찾아 봐",
+    "grammar": "V-아/어 보다 — try doing",
+    "note": "동사 + 아/어 봐(요) = try to V\n찾아 봐 = try looking for it\n먹어 봐 = try eating it\n해 봐요 = give it a try!"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "안 보여요. 못 찾겠어요.",
+   "slide": 5,
+   "audio": "data/nhs/L2/TTS/ep02/08안+보여요_+못+찾겠어요_slide6.mp3",
+   "en": "I can't see it. I can't find it.",
+   "annotation": {
+    "highlight": "안 보여요",
+    "grammar": "안 + 동사 — negation",
+    "note": "안 + 동사 = don't/can't see\n안 보여요 = can't see it (not visible)\n↔ 못 찾겠어요 = can't find it (inability)\n안(의지·상태) vs 못(능력·불가)"
+   }
+  },
+  {
+   "speaker": "kayo",
+   "text": "아. 보여요! 찾았어요!",
+   "slide": 6,
+   "audio": "data/nhs/L2/TTS/ep02/09아_+보여요!+찾았어요!_slide7.mp3",
+   "en": "Oh! I can see it! Found it!"
+  },
+  {
+   "speaker": "halmoni",
+   "text": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
+   "slide": 7,
+   "audio": "data/nhs/L2/TTS/ep02/10시티+터미널행+공항버스를+타고+종점까지+오면+돼_slide8.mp3",
+   "en": "Take the airport bus to City Terminal and ride it to the last stop."
+  },
+  {
+   "speaker": "halmoni",
+   "text": "타고 올 수 있어?",
+   "slide": 8,
+   "audio": "data/nhs/L2/TTS/ep02/11타고+올+수+있어_slide9.mp3",
+   "en": "Can you make it here?"
+  },
+  {
+   "speaker": "mirae",
+   "text": "해 볼게요.",
+   "slide": 9,
+   "audio": "data/nhs/L2/TTS/ep02/12해+볼게요_slide10.mp3",
+   "en": "I'll try!",
+   "annotation": {
+    "highlight": "해 볼게요",
+    "grammar": "V-아/어 볼게요 — I'll give it a try",
+    "note": "해 보다 + ㄹ게요 = I'll try doing it\n해 볼게요 = I'll give it a try!\n먹어 볼게요 = I'll try eating it\n찾아 볼게요 = I'll try to find it"
+   }
+  },
+  {
+   "speaker": "halmoni",
+   "text": "거기서 기다릴게.",
+   "slide": 10,
+   "audio": "data/nhs/L2/TTS/ep02/13거기서+기다릴게_slide11.mp3",
+   "en": "I'll be waiting there.",
+   "annotation": {
+    "highlight": "기다릴게",
+    "grammar": "V-(으)ㄹ게요 — I will (promise)",
+    "note": "동사 + ㄹ게요 = I will ~ (speaker's intention)\n기다릴게 = I'll wait (for you)\n= 상대방을 위해 하겠다는 약속\n할게요 / 갈게요 / 먹을게요"
+   }
+  }
+ ],
+ "vocab": [
+  {
+   "category": "장소 · Places",
+   "items": [
     {
-      "id": "mirae",
-      "name": "보미",
-      "color": "#E85D9A",
-      "emoji": "👧"
+     "korean": "입구",
+     "romanization": "ip-gu",
+     "english": "entrance",
+     "emoji": "🚪"
     },
     {
-      "id": "ria",
-      "name": "리나",
-      "color": "#9B72CF",
-      "emoji": "👧"
+     "korean": "출구",
+     "romanization": "chul-gu",
+     "english": "exit",
+     "emoji": "🚶"
     },
     {
-      "id": "kayo",
-      "name": "태오",
-      "color": "#E8744A",
-      "emoji": "👧"
+     "korean": "근처",
+     "romanization": "geun-cheo",
+     "english": "nearby, near",
+     "emoji": "📍"
     },
     {
-      "id": "halmoni",
-      "name": "할머니",
-      "color": "#4A90D9",
-      "emoji": "👵"
+     "korean": "매표소",
+     "romanization": "mae-pyo-so",
+     "english": "ticket booth",
+     "emoji": "🎫"
+    },
+    {
+     "korean": "종점",
+     "romanization": "jong-jeom",
+     "english": "last stop, terminus",
+     "emoji": "🏁"
+    },
+    {
+     "korean": "터미널",
+     "romanization": "teo-mi-neol",
+     "english": "terminal",
+     "emoji": "🏢"
     }
-  ],
-  "script": [
+   ]
+  },
+  {
+   "category": "교통 · Transportation",
+   "items": [
     {
-      "speaker": "mirae",
-      "text": "할머니! 보미예요!",
-      "slide": 0,
-      "audio": "data/nhs/L2/TTS/ep02/01할머니!+미래예요!_slide1.mp3",
-      "en": "Grandma! It's me, Bomi!"
+     "korean": "공항버스",
+     "romanization": "gong-hang-beo-seu",
+     "english": "airport bus",
+     "emoji": "🚌"
     },
     {
-      "speaker": "halmoni",
-      "text": "보미야, 지금 어디 있어?",
-      "slide": 1,
-      "audio": "data/nhs/L2/TTS/ep02/02미래야+지금+어디+있어_slide2.mp3",
-      "en": "Bomi, where are you right now?"
+     "korean": "터미널행",
+     "romanization": "teo-mi-neol-haeng",
+     "english": "bound for terminal",
+     "note": "N행 = bound for N",
+     "emoji": "➡️"
     },
     {
-      "speaker": "mirae",
-      "text": "인천공항이에요.",
-      "slide": 1,
-      "audio": "data/nhs/L2/TTS/ep02/03인천공항이에요_slide2.mp3",
-      "en": "We're at Incheon Airport."
-    },
-    {
-      "speaker": "halmoni",
-      "text": "모두 무사히 도착했어?",
-      "slide": 2,
-      "audio": "data/nhs/L2/TTS/ep02/04모두+무사히+도착했어_slide3.mp3",
-      "en": "Did everyone arrive safely?"
-    },
-    {
-      "speaker": "mirae",
-      "text": "네!",
-      "slide": 3,
-      "audio": "data/nhs/L2/TTS/ep02/05네!_slide4.mp3",
-      "en": "Yes!"
-    },
-    {
-      "speaker": "ria",
-      "text": "할머니 우리 왔어요!",
-      "slide": 3,
-      "audio": "data/nhs/L2/TTS/ep02/06할머니+우리+왔어요!_slide4.mp3",
-      "en": "Grandma, we're here!"
-    },
-    {
-      "speaker": "halmoni",
-      "text": "출구 근처에 있는 공항버스 매표소를 찾아 봐.",
-      "slide": 4,
-      "audio": "data/nhs/L2/TTS/ep02/07출구+근처에+있는+공항버스+매표소를+찾아+봐_slide5.mp3",
-      "en": "Try to find the airport bus ticket booth near the exit.",
-      "annotation": {
-        "highlight": "찾아 봐",
-        "grammar": "V-아/어 보다 — try doing",
-        "note": "동사 + 아/어 봐(요) = try to V\n찾아 봐 = try looking for it\n먹어 봐 = try eating it\n해 봐요 = give it a try!"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "안 보여요. 못 찾겠어요.",
-      "slide": 5,
-      "audio": "data/nhs/L2/TTS/ep02/08안+보여요_+못+찾겠어요_slide6.mp3",
-      "en": "I can't see it. I can't find it.",
-      "annotation": {
-        "highlight": "안 보여요",
-        "grammar": "안 + 동사 — negation",
-        "note": "안 + 동사 = don't/can't see\n안 보여요 = can't see it (not visible)\n↔ 못 찾겠어요 = can't find it (inability)\n안(의지·상태) vs 못(능력·불가)"
-      }
-    },
-    {
-      "speaker": "kayo",
-      "text": "아. 보여요! 찾았어요!",
-      "slide": 6,
-      "audio": "data/nhs/L2/TTS/ep02/09아_+보여요!+찾았어요!_slide7.mp3",
-      "en": "Oh! I can see it! Found it!"
-    },
-    {
-      "speaker": "halmoni",
-      "text": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
-      "slide": 7,
-      "audio": "data/nhs/L2/TTS/ep02/10시티+터미널행+공항버스를+타고+종점까지+오면+돼_slide8.mp3",
-      "en": "Take the airport bus to City Terminal and ride it to the last stop."
-    },
-    {
-      "speaker": "halmoni",
-      "text": "타고 올 수 있어?",
-      "slide": 8,
-      "audio": "data/nhs/L2/TTS/ep02/11타고+올+수+있어_slide9.mp3",
-      "en": "Can you make it here?"
-    },
-    {
-      "speaker": "mirae",
-      "text": "해 볼게요.",
-      "slide": 9,
-      "audio": "data/nhs/L2/TTS/ep02/12해+볼게요_slide10.mp3",
-      "en": "I'll try!",
-      "annotation": {
-        "highlight": "해 볼게요",
-        "grammar": "V-아/어 볼게요 — I'll give it a try",
-        "note": "해 보다 + ㄹ게요 = I'll try doing it\n해 볼게요 = I'll give it a try!\n먹어 볼게요 = I'll try eating it\n찾아 볼게요 = I'll try to find it"
-      }
-    },
-    {
-      "speaker": "halmoni",
-      "text": "거기서 기다릴게.",
-      "slide": 10,
-      "audio": "data/nhs/L2/TTS/ep02/13거기서+기다릴게_slide11.mp3",
-      "en": "I'll be waiting there.",
-      "annotation": {
-        "highlight": "기다릴게",
-        "grammar": "V-(으)ㄹ게요 — I will (promise)",
-        "note": "동사 + ㄹ게요 = I will ~ (speaker's intention)\n기다릴게 = I'll wait (for you)\n= 상대방을 위해 하겠다는 약속\n할게요 / 갈게요 / 먹을게요"
-      }
+     "korean": "타다",
+     "romanization": "ta-da",
+     "english": "to ride, to board",
+     "emoji": "🎫"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "동사 · Verbs",
+   "items": [
     {
-      "category": "장소 · Places",
-      "items": [
-        {
-          "korean": "입구",
-          "romanization": "ip-gu",
-          "english": "entrance",
-          "emoji": "🚪"
-        },
-        {
-          "korean": "출구",
-          "romanization": "chul-gu",
-          "english": "exit",
-          "emoji": "🚶"
-        },
-        {
-          "korean": "근처",
-          "romanization": "geun-cheo",
-          "english": "nearby, near",
-          "emoji": "📍"
-        },
-        {
-          "korean": "매표소",
-          "romanization": "mae-pyo-so",
-          "english": "ticket booth",
-          "emoji": "🎫"
-        },
-        {
-          "korean": "종점",
-          "romanization": "jong-jeom",
-          "english": "last stop, terminus",
-          "emoji": "🏁"
-        },
-        {
-          "korean": "터미널",
-          "romanization": "teo-mi-neol",
-          "english": "terminal",
-          "emoji": "🏢"
-        }
-      ]
+     "korean": "도착하다",
+     "romanization": "do-chak-ha-da",
+     "english": "to arrive",
+     "emoji": "✅"
     },
     {
-      "category": "교통 · Transportation",
-      "items": [
-        {
-          "korean": "공항버스",
-          "romanization": "gong-hang-beo-seu",
-          "english": "airport bus",
-          "emoji": "🚌"
-        },
-        {
-          "korean": "터미널행",
-          "romanization": "teo-mi-neol-haeng",
-          "english": "bound for terminal",
-          "note": "N행 = bound for N",
-          "emoji": "➡️"
-        },
-        {
-          "korean": "타다",
-          "romanization": "ta-da",
-          "english": "to ride, to board",
-          "emoji": "🎫"
-        }
-      ]
+     "korean": "찾다",
+     "romanization": "chat-da",
+     "english": "to look for, to find",
+     "emoji": "🔍"
     },
     {
-      "category": "동사 · Verbs",
-      "items": [
-        {
-          "korean": "도착하다",
-          "romanization": "do-chak-ha-da",
-          "english": "to arrive",
-          "emoji": "✅"
-        },
-        {
-          "korean": "찾다",
-          "romanization": "chat-da",
-          "english": "to look for, to find",
-          "emoji": "🔍"
-        },
-        {
-          "korean": "기다리다",
-          "romanization": "gi-da-ri-da",
-          "english": "to wait",
-          "emoji": "⏳"
-        }
-      ]
-    },
-    {
-      "category": "부사 · Adverbs & Expressions",
-      "items": [
-        {
-          "korean": "무사히",
-          "romanization": "mu-sa-hi",
-          "english": "safely, without incident",
-          "emoji": "🙏"
-        },
-        {
-          "korean": "까지",
-          "romanization": "kka-ji",
-          "english": "until, to (destination)",
-          "emoji": "🗺️"
-        }
-      ]
-    },
-    {
-      "category": "🧭 길찾기 (대본 외)",
-      "items": [
-        { "korean": "표지판", "romanization": "pyo-ji-pan", "english": "sign, signage", "emoji": "🪧" },
-        { "korean": "길을 잃다", "romanization": "gil-eul il-ta", "english": "to get lost", "emoji": "😵" },
-        { "korean": "짐", "romanization": "jim", "english": "luggage, baggage", "emoji": "🧳" },
-        { "korean": "갈아타다", "romanization": "gal-a-ta-da", "english": "to transfer (bus/train)", "emoji": "🔄" }
-      ]
+     "korean": "기다리다",
+     "romanization": "gi-da-ri-da",
+     "english": "to wait",
+     "emoji": "⏳"
     }
-  ],
-  "grammar": [
+   ]
+  },
+  {
+   "category": "부사 · Adverbs & Expressions",
+   "items": [
     {
-      "id": "g02_lgeyo",
-      "tier": "core",
-      "title": "-(으)ㄹ게요",
-      "title_en": "I will ~ / I'll ~",
-      "emoji": "🤝",
-      "pattern": "Verb stem + -ㄹ게요 (vowel/ㄹ) / -을게요 (consonant)",
-      "scene_example": {
-        "korean": "해 볼게요. 거기서 기다릴게.",
-        "english": "I'll give it a try. I'll wait there.",
-        "highlight": "볼게요, 기다릴게"
-      },
-      "rules": [
-        {
-          "form": "-ㄹ게요",
-          "condition": "모음/ㄹ 어간",
-          "example": "해 볼게요, 기다릴게요, 갈게요"
-        },
-        {
-          "form": "-을게요",
-          "condition": "자음 어간 (ㄹ 제외)",
-          "example": "먹을게요, 읽을게요"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "제가 먼저 찾아볼게요.",
-          "en": "I'll look for it first."
-        },
-        {
-          "ko": "거기서 기다릴게.",
-          "en": "I'll wait there."
-        },
-        {
-          "ko": "내일 전화할게요.",
-          "en": "I'll call you tomorrow."
-        },
-        {
-          "ko": "제가 도와드릴게요.",
-          "en": "I'll help you."
-        }
-      ],
-      "tip": "말하는 사람의 의지·약속을 나타내요 · Signals YOUR intention or promise — I will do this for sure!",
-      "fill_blanks": [
-        {
-          "sentence": "제가 공항버스 찾아___게요.",
-          "answer": "볼",
-          "hint": "찾아보다 → 찾아볼게요"
-        },
-        {
-          "sentence": "거기서 기다___.",
-          "answer": "릴게",
-          "hint": "기다리다 → 기다릴게 (반말)"
-        },
-        {
-          "sentence": "내일 연락___.",
-          "answer": "할게",
-          "hint": "연락하다 → 연락할게"
-        }
-      ],
-      "explanation_en": "-(으)ㄹ게요 expresses a PROMISE or DECISION made in response to the situation. It's like saying 'I'll go ahead and...' or 'Let me...' — you're committing to an action for the listener's sake.",
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "Vowel or ㄹ stem → -ㄹ게요",
-          "content": "가다 → 갈게요  · 보다 → 볼게요  · 알다 → 알게요"
-        },
-        {
-          "type": "green",
-          "title": "Consonant stem → -을게요",
-          "content": "찾다 → 찾을게요  · 먹다 → 먹을게요  · 읽다 → 읽을게요"
-        },
-        {
-          "type": "amber",
-          "title": "Casual (반말) → -ㄹ게 / -을게",
-          "content": "갈게!  I'll go!  (casual)\n찾을게.  I'll find it.  (casual)"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "vowel / ㄹ → -ㄹ게요",
-          "items": [
-            {
-              "ko": "제가 먼저 갈게요.",
-              "en": "I'll go first."
-            },
-            {
-              "ko": "제가 찾아볼게요.",
-              "en": "I'll go ahead and look for it."
-            },
-            {
-              "ko": "나중에 다시 볼게.",
-              "en": "I'll watch it again later. (casual)"
-            }
-          ]
-        },
-        {
-          "label": "consonant → -을게요",
-          "items": [
-            {
-              "ko": "제가 짐을 들을게요.",
-              "en": "I'll carry the luggage."
-            },
-            {
-              "ko": "내가 먹을게!",
-              "en": "I'll eat it! (casual)"
-            }
-          ]
-        }
-      ]
+     "korean": "무사히",
+     "romanization": "mu-sa-hi",
+     "english": "safely, without incident",
+     "emoji": "🙏"
     },
     {
-      "id": "g02_aboda",
-      "tier": "core",
-      "title": "-아/어 보다",
-      "title_en": "Try doing something",
-      "emoji": "🥇",
-      "pattern": "Verb stem + 아/어 보다 (same vowel rule as 아요/어요)",
-      "scene_example": {
-        "ko": "찾아 봐. / 해 볼게요.",
-        "en": "Try looking for it. / I'll give it a try."
-      },
-      "rules": [
-        {
-          "condition": "ㅏ/ㅗ 어간",
-          "ending": "-아 보다",
-          "example": "찾아 보다, 봐요"
-        },
-        {
-          "condition": "그 외 어간",
-          "ending": "-어 보다",
-          "example": "먹어 보다, 해 보다"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "이 음식 먹어 봐!",
-          "en": "Try eating this food!",
-          "note": "반말 명령"
-        },
-        {
-          "ko": "한번 해 볼게요.",
-          "en": "I'll try it once.",
-          "note": "의지 표현"
-        },
-        {
-          "ko": "찾아 보세요.",
-          "en": "Please try looking.",
-          "note": "존댓말 명령"
-        }
-      ],
-      "tip": "Try something new · 새로운 것을 시도할 때 써요. -아/어 보다 = give it a go!",
-      "fill_blanks": [
-        {
-          "sentence": "매표소를 찾아 ___.",
-          "answer": "봐",
-          "hint": "-아/어 보다 반말"
-        },
-        {
-          "sentence": "공항버스를 타고 ___까지 오면 돼.",
-          "answer": "종점",
-          "hint": "ep02 대화 내용"
-        },
-        {
-          "sentence": "한국 음식을 먹어 ___!",
-          "answer": "봐",
-          "hint": "Try Korean food!"
-        }
-      ],
-      "explanation_en": "-아/어 보다 means 'to try doing' something or doing it to see how it goes. It adds a sense of experience or attempt — 'give it a go'.",
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "Try doing → -아/어 봐(요) / 보세요",
-          "content": "먹어 봐!  Try eating it!\n해 보세요.  Please give it a try.\n가 봐.  Go and see."
-        },
-        {
-          "type": "green",
-          "title": "Past: already tried → -아/어 봤어(요)",
-          "content": "먹어 봤어요.  I tried eating it.\n해 봤어.  I tried doing it."
-        }
-      ]
-    },
-    {
-      "id": "g02_an",
-      "tier": "core",
-      "title": "안 + 동사",
-      "title_en": "Negation — Won't / Not (by state or choice)",
-      "emoji": "🚫",
-      "pattern": "안 + verb/adjective",
-      "scene_example": {
-        "korean": "보미: 안 보여요. 못 찾겠어요.",
-        "english": "Bomi: I can't see it. I can't find it.",
-        "highlight": "안 보여요 / 못 찾겠어요"
-      },
-      "rules": [
-        {
-          "form": "안 + 동사",
-          "condition": "상태/의지 부정 — 그렇지 않거나, 하지 않음",
-          "example": "안 보여요 · 안 가요 · 안 먹어요"
-        },
-        {
-          "form": "못 + 동사",
-          "condition": "능력/상황 부정 — 상황 때문에 할 수 없음",
-          "example": "못 찾겠어요 · 못 가요 · 못 먹어요"
-        }
-      ],
-      "comparison": {
-        "title": "안 vs 못 — 같은 단어, 다른 이유",
-        "rows": [
-          {
-            "label": "의미",
-            "an": "의지·상태 부정 (won't / not)",
-            "mot": "능력·상황 부정 (can't)"
-          },
-          {
-            "label": "느낌",
-            "an": "그냥 안 돼 / 안 보여 (state)",
-            "mot": "아무리 해도 안 돼 (situation)"
-          },
-          {
-            "label": "에피소드",
-            "an": "안 보여요 → 매표소가 눈에 안 들어옴",
-            "mot": "못 찾겠어요 → 찾으려 해도 못 찾겠음"
-          }
-        ]
-      },
-      "note": "💡 안 보여요 ≠ 보기 싫어요! 여기서 안 보여요는 '보이지 않는 상태'예요. · 안 보여요 = It's not visible (state), not 'I refuse to look'.",
-      "examples": [
-        {
-          "ko": "안 보여요.",
-          "en": "I can't see it. (It's not visible.)",
-          "note": "에피소드 보미 대사"
-        },
-        {
-          "ko": "못 찾겠어요.",
-          "en": "I can't find it (no matter what I do.)",
-          "note": "에피소드 보미 대사"
-        },
-        {
-          "ko": "오늘 학교에 안 가요.",
-          "en": "I'm not going to school today.",
-          "note": "의지 선택 — by choice"
-        },
-        {
-          "ko": "아파서 학교에 못 가요.",
-          "en": "I can't go to school because I'm sick.",
-          "note": "상황 제약 — situation"
-        }
-      ],
-      "tip": "같은 동사 앞에 안/못을 바꿔 보면 뉘앙스 차이가 확 느껴져요 · Try swapping 안 ↔ 못 with the same verb — the nuance shift is very clear!",
-      "fill_blanks": [
-        {
-          "sentence": "___ 보여요. (It's not visible — I just can't see it.)",
-          "answer": "안",
-          "hint": "상태 부정 → 안"
-        },
-        {
-          "sentence": "___ 찾겠어요. (I can't manage to find it.)",
-          "answer": "못",
-          "hint": "능력 부정 → 못"
-        },
-        {
-          "sentence": "감기에 걸려서 학교에 ___ 가요.",
-          "answer": "못",
-          "hint": "아픈 상황 → 못"
-        },
-        {
-          "sentence": "오늘은 고기를 ___ 먹어요. (I'm choosing not to eat meat today.)",
-          "answer": "안",
-          "hint": "의지 선택 → 안"
-        }
-      ],
-      "explanation_en": "안 goes BEFORE a verb or adjective to make it negative — 'not' or 'don't'. Use it when you're choosing not to do something.",
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "title": "안 + verb = 'not' / 'don't'",
-          "content": "안 가요.  I'm not going.\n안 먹어요.  I'm not eating it.\n안 보여요.  It's not visible."
-        },
-        {
-          "type": "green",
-          "title": "하다 verbs: noun + 안 + 해요",
-          "content": "공부 안 해요.  I'm not studying. ✅\n~~안 공부해요~~ ❌  (word order matters!)"
-        },
-        {
-          "type": "amber",
-          "title": "💡 Preview — 안 vs 못",
-          "content": "안 = WON'T (by choice)\n못 = CAN'T (unable to)\n→ covered in full in ep03!"
-        }
-      ]
+     "korean": "까지",
+     "romanization": "kka-ji",
+     "english": "until, to (destination)",
+     "emoji": "🗺️"
     }
-  ],
-  "banmal_jondaemal": {
-    "intro_ko": "이 에피소드에서 할머니는 아이들에게 반말, 아이들은 할머니께 존댓말을 써요.",
-    "intro_en": "In this episode, 할머니 uses 반말 with the kids, and the kids use 존댓말 with 할머니.",
+   ]
+  },
+  {
+   "category": "🧭 길찾기 (대본 외)",
+   "items": [
+    {
+     "korean": "표지판",
+     "romanization": "pyo-ji-pan",
+     "english": "sign, signage",
+     "emoji": "🪧"
+    },
+    {
+     "korean": "길을 잃다",
+     "romanization": "gil-eul il-ta",
+     "english": "to get lost",
+     "emoji": "😵"
+    },
+    {
+     "korean": "짐",
+     "romanization": "jim",
+     "english": "luggage, baggage",
+     "emoji": "🧳"
+    },
+    {
+     "korean": "갈아타다",
+     "romanization": "gal-a-ta-da",
+     "english": "to transfer (bus/train)",
+     "emoji": "🔄"
+    }
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g02_lgeyo",
+   "tier": "core",
+   "title": "-(으)ㄹ게요",
+   "title_en": "I will ~ / I'll ~",
+   "emoji": "🤝",
+   "pattern": "Verb stem + -ㄹ게요 (vowel/ㄹ) / -을게요 (consonant)",
+   "scene_example": {
+    "korean": "해 볼게요. 거기서 기다릴게.",
+    "english": "I'll give it a try. I'll wait there.",
+    "highlight": "볼게요, 기다릴게"
+   },
+   "rules": [
+    {
+     "form": "-ㄹ게요",
+     "condition": "모음/ㄹ 어간",
+     "example": "해 볼게요, 기다릴게요, 갈게요"
+    },
+    {
+     "form": "-을게요",
+     "condition": "자음 어간 (ㄹ 제외)",
+     "example": "먹을게요, 읽을게요"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "제가 먼저 찾아볼게요.",
+     "en": "I'll look for it first."
+    },
+    {
+     "ko": "거기서 기다릴게.",
+     "en": "I'll wait there."
+    },
+    {
+     "ko": "내일 전화할게요.",
+     "en": "I'll call you tomorrow."
+    },
+    {
+     "ko": "제가 도와드릴게요.",
+     "en": "I'll help you."
+    }
+   ],
+   "tip": "말하는 사람의 의지·약속을 나타내요 · Signals YOUR intention or promise — I will do this for sure!",
+   "fill_blanks": [
+    {
+     "sentence": "제가 공항버스 찾아___게요.",
+     "answer": "볼",
+     "hint": "찾아보다 → 찾아볼게요"
+    },
+    {
+     "sentence": "거기서 기다___.",
+     "answer": "릴게",
+     "hint": "기다리다 → 기다릴게 (반말)"
+    },
+    {
+     "sentence": "내일 연락___.",
+     "answer": "할게",
+     "hint": "연락하다 → 연락할게"
+    }
+   ],
+   "explanation_en": "-(으)ㄹ게요 expresses a PROMISE or DECISION made in response to the situation. It's like saying 'I'll go ahead and...' or 'Let me...' — you're committing to an action for the listener's sake.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "Vowel or ㄹ stem → -ㄹ게요",
+     "content": "가다 → 갈게요  · 보다 → 볼게요  · 알다 → 알게요"
+    },
+    {
+     "type": "green",
+     "title": "Consonant stem → -을게요",
+     "content": "찾다 → 찾을게요  · 먹다 → 먹을게요  · 읽다 → 읽을게요"
+    },
+    {
+     "type": "amber",
+     "title": "Casual (반말) → -ㄹ게 / -을게",
+     "content": "갈게!  I'll go!  (casual)\n찾을게.  I'll find it.  (casual)"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "vowel / ㄹ → -ㄹ게요",
+     "items": [
+      {
+       "ko": "제가 먼저 갈게요.",
+       "en": "I'll go first."
+      },
+      {
+       "ko": "제가 찾아볼게요.",
+       "en": "I'll go ahead and look for it."
+      },
+      {
+       "ko": "나중에 다시 볼게.",
+       "en": "I'll watch it again later. (casual)"
+      }
+     ]
+    },
+    {
+     "label": "consonant → -을게요",
+     "items": [
+      {
+       "ko": "제가 짐을 들을게요.",
+       "en": "I'll carry the luggage."
+      },
+      {
+       "ko": "내가 먹을게!",
+       "en": "I'll eat it! (casual)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g02_aboda",
+   "tier": "core",
+   "title": "-아/어 보다",
+   "title_en": "Try doing something",
+   "emoji": "🥇",
+   "pattern": "Verb stem + 아/어 보다 (same vowel rule as 아요/어요)",
+   "scene_example": {
+    "ko": "찾아 봐. / 해 볼게요.",
+    "en": "Try looking for it. / I'll give it a try."
+   },
+   "rules": [
+    {
+     "condition": "ㅏ/ㅗ 어간",
+     "ending": "-아 보다",
+     "example": "찾아 보다, 봐요"
+    },
+    {
+     "condition": "그 외 어간",
+     "ending": "-어 보다",
+     "example": "먹어 보다, 해 보다"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "이 음식 먹어 봐!",
+     "en": "Try eating this food!",
+     "note": "반말 명령"
+    },
+    {
+     "ko": "한번 해 볼게요.",
+     "en": "I'll try it once.",
+     "note": "의지 표현"
+    },
+    {
+     "ko": "찾아 보세요.",
+     "en": "Please try looking.",
+     "note": "존댓말 명령"
+    }
+   ],
+   "tip": "Try something new · 새로운 것을 시도할 때 써요. -아/어 보다 = give it a go!",
+   "fill_blanks": [
+    {
+     "sentence": "매표소를 찾아 ___.",
+     "answer": "봐",
+     "hint": "-아/어 보다 반말"
+    },
+    {
+     "sentence": "공항버스를 타고 ___까지 오면 돼.",
+     "answer": "종점",
+     "hint": "ep02 대화 내용"
+    },
+    {
+     "sentence": "한국 음식을 먹어 ___!",
+     "answer": "봐",
+     "hint": "Try Korean food!"
+    }
+   ],
+   "explanation_en": "-아/어 보다 means 'to try doing' something or doing it to see how it goes. It adds a sense of experience or attempt — 'give it a go'.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "Try doing → -아/어 봐(요) / 보세요",
+     "content": "먹어 봐!  Try eating it!\n해 보세요.  Please give it a try.\n가 봐.  Go and see."
+    },
+    {
+     "type": "green",
+     "title": "Past: already tried → -아/어 봤어(요)",
+     "content": "먹어 봤어요.  I tried eating it.\n해 봤어.  I tried doing it."
+    }
+   ]
+  },
+  {
+   "id": "g02_an",
+   "tier": "core",
+   "title": "안 + 동사",
+   "title_en": "Negation — Won't / Not (by state or choice)",
+   "emoji": "🚫",
+   "pattern": "안 + verb/adjective",
+   "scene_example": {
+    "korean": "보미: 안 보여요. 못 찾겠어요.",
+    "english": "Bomi: I can't see it. I can't find it.",
+    "highlight": "안 보여요 / 못 찾겠어요"
+   },
+   "rules": [
+    {
+     "form": "안 + 동사",
+     "condition": "상태/의지 부정 — 그렇지 않거나, 하지 않음",
+     "example": "안 보여요 · 안 가요 · 안 먹어요"
+    },
+    {
+     "form": "못 + 동사",
+     "condition": "능력/상황 부정 — 상황 때문에 할 수 없음",
+     "example": "못 찾겠어요 · 못 가요 · 못 먹어요"
+    }
+   ],
+   "comparison": {
+    "title": "안 vs 못 — 같은 단어, 다른 이유",
     "rows": [
-      {
-        "banmal": "찾아 봐.",
-        "jondaemal": "찾아 보세요.",
-        "english": "Try looking for it.",
-        "situation_ko": "매표소를 못 찾을 때 (친구에게)",
-        "situation_en": "Can't find the ticket booth (to a friend)"
-      },
-      {
-        "banmal": "타고 와.",
-        "jondaemal": "타고 오세요.",
-        "english": "Come by bus.",
-        "situation_ko": "공항버스 타는 법 알려줄 때 (친구에게)",
-        "situation_en": "Telling someone how to take the bus (to a friend)"
-      },
-      {
-        "banmal": "거기서 기다릴게.",
-        "jondaemal": "거기서 기다릴게요.",
-        "english": "I'll wait there.",
-        "situation_ko": "공항 입구에서 기다릴 때 (친구에게)",
-        "situation_en": "Waiting at the entrance (to a friend)"
-      },
-      {
-        "banmal": "어디 있어?",
-        "jondaemal": "어디 있어요?",
-        "english": "Where are you?",
-        "situation_ko": "연락이 안 될 때 (친구에게)",
-        "situation_en": "When you can't reach someone (to a friend)"
-      },
-      {
-        "banmal": "도착했어?",
-        "jondaemal": "도착했어요?",
-        "english": "Did you arrive?",
-        "situation_ko": "가족이 도착했는지 물을 때 (친구에게)",
-        "situation_en": "Asking if family arrived (to a friend)"
-      }
-    ],
-    "tip": "명령/제안: 봐 → 보세요 / 와 → 오세요 · 불규칙 주의!",
-    "adult_dialogue": {
-      "title": "어른들 사이 — 오랜만에 연락하기",
-      "lines": [
-        {
-          "speaker": "A",
-          "text": "오랜만이에요! 잘 지내셨어요?",
-          "english": "Long time no see! Have you been well?"
-        },
-        {
-          "speaker": "B",
-          "text": "네, 덕분에요. 지금 어디 계세요?",
-          "english": "Yes, thanks to you. Where are you now?"
-        },
-        {
-          "speaker": "A",
-          "text": "공항에 막 도착했어요.",
-          "english": "I just arrived at the airport."
-        },
-        {
-          "speaker": "B",
-          "text": "공항버스 타고 오시면 돼요.",
-          "english": "You can take the airport bus."
-        }
-      ]
-    }
-  },
-  "pronunciation": {
-    "title": "발음 규칙 · Pronunciation Rules",
-    "items": [
-      {
-        "rule": "연음화 · Liaison",
-        "tip": "받침이 뒤 음절 모음 앞으로 넘어가요 · The coda moves to the next syllable",
-        "examples": [
-          {
-            "written": "찾아",
-            "pronounced_standard": "[차자]",
-            "pronounced_actual": "[차자]",
-            "note": "찾(ㅈ받침) + 아 → ㅈ 연음"
-          },
-          {
-            "written": "도착했어",
-            "pronounced_standard": "[도착캤서]",
-            "pronounced_actual": "[도차캐써]",
-            "note": "착(ㄱ)+했(ㅎ) → 격음화 ㅋ · 표준은 음절경계 유지, 실제는 연음 적용"
-          },
-          {
-            "written": "무사히 도착했어",
-            "pronounced_standard": "[무사히 도착캤서]",
-            "pronounced_actual": "[무사히 도차캐써]",
-            "note": "에피소드 대사 · 같은 규칙 적용"
-          }
-        ]
-      },
-      {
-        "rule": "경음화 · Tensification",
-        "tip": "받침 ㄱ/ㄷ/ㅂ 뒤의 자음이 된소리로 바뀌어요 · Consonant becomes tense after ㄱ/ㄷ/ㅂ coda",
-        "examples": [
-          {
-            "written": "못 찾겠어요",
-            "pronounced_standard": "[몯 찯껫써요]",
-            "pronounced_actual": "[몯 차께써요]",
-            "note": "찾(ㅈ→ㄷ)+겠(ㄱ→ㄲ) 경음화 · 실제 발화에서 받침 약화"
-          },
-          {
-            "written": "찾겠어요",
-            "pronounced_standard": "[찯껫써요]",
-            "pronounced_actual": "[차께써요]",
-            "note": "TOPIK 듣기는 표준발음 기준으로 녹음됨"
-          }
-        ]
-      }
+     {
+      "label": "의미",
+      "an": "의지·상태 부정 (won't / not)",
+      "mot": "능력·상황 부정 (can't)"
+     },
+     {
+      "label": "느낌",
+      "an": "그냥 안 돼 / 안 보여 (state)",
+      "mot": "아무리 해도 안 돼 (situation)"
+     },
+     {
+      "label": "에피소드",
+      "an": "안 보여요 → 매표소가 눈에 안 들어옴",
+      "mot": "못 찾겠어요 → 찾으려 해도 못 찾겠음"
+     }
     ]
-  },
-  "usage": {
-    "title": "Usage — N행 / -아/어 보다 확장",
-    "sections": [
-      {
-        "heading": "N행 — Bound for N",
-        "content": "터미널행 = bound for terminal · 서울행 기차 = Seoul-bound train · 부산행 버스 = Busan-bound bus",
-        "examples": [
-          {
-            "ko": "부산행 버스 한 장 주세요.",
-            "en": "One ticket for the Busan bus, please."
-          }
-        ]
-      },
-      {
-        "heading": "-아/어 보다 확장 · Extended uses",
-        "content": "경험(해 봤어요), 제안(먹어 봐요), 의지(해 볼게요) 세 가지 상황에 모두 쓰여요.",
-        "examples": [
-          {
-            "ko": "김치 먹어 봤어요?",
-            "en": "Have you tried kimchi before? (experience)"
-          },
-          {
-            "ko": "이거 써 봐요!",
-            "en": "Try using this! (suggestion)"
-          }
-        ]
-      }
+   },
+   "note": "💡 안 보여요 ≠ 보기 싫어요! 여기서 안 보여요는 '보이지 않는 상태'예요. · 안 보여요 = It's not visible (state), not 'I refuse to look'.",
+   "examples": [
+    {
+     "ko": "안 보여요.",
+     "en": "I can't see it. (It's not visible.)",
+     "note": "에피소드 보미 대사"
+    },
+    {
+     "ko": "못 찾겠어요.",
+     "en": "I can't find it (no matter what I do.)",
+     "note": "에피소드 보미 대사"
+    },
+    {
+     "ko": "오늘 학교에 안 가요.",
+     "en": "I'm not going to school today.",
+     "note": "의지 선택 — by choice"
+    },
+    {
+     "ko": "아파서 학교에 못 가요.",
+     "en": "I can't go to school because I'm sick.",
+     "note": "상황 제약 — situation"
+    }
+   ],
+   "tip": "같은 동사 앞에 안/못을 바꿔 보면 뉘앙스 차이가 확 느껴져요 · Try swapping 안 ↔ 못 with the same verb — the nuance shift is very clear!",
+   "fill_blanks": [
+    {
+     "sentence": "___ 보여요. (It's not visible — I just can't see it.)",
+     "answer": "안",
+     "hint": "상태 부정 → 안"
+    },
+    {
+     "sentence": "___ 찾겠어요. (I can't manage to find it.)",
+     "answer": "못",
+     "hint": "능력 부정 → 못"
+    },
+    {
+     "sentence": "감기에 걸려서 학교에 ___ 가요.",
+     "answer": "못",
+     "hint": "아픈 상황 → 못"
+    },
+    {
+     "sentence": "오늘은 고기를 ___ 먹어요. (I'm choosing not to eat meat today.)",
+     "answer": "안",
+     "hint": "의지 선택 → 안"
+    }
+   ],
+   "explanation_en": "안 goes BEFORE a verb or adjective to make it negative — 'not' or 'don't'. Use it when you're choosing not to do something.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "안 + verb = 'not' / 'don't'",
+     "content": "안 가요.  I'm not going.\n안 먹어요.  I'm not eating it.\n안 보여요.  It's not visible."
+    },
+    {
+     "type": "green",
+     "title": "하다 verbs: noun + 안 + 해요",
+     "content": "공부 안 해요.  I'm not studying. ✅\n~~안 공부해요~~ ❌  (word order matters!)"
+    },
+    {
+     "type": "amber",
+     "title": "💡 Preview — 안 vs 못",
+     "content": "안 = WON'T (by choice)\n못 = CAN'T (unable to)\n→ covered in full in ep03!"
+    }
+   ]
+  }
+ ],
+ "banmal_jondaemal": {
+  "intro_ko": "이 에피소드에서 할머니는 아이들에게 반말, 아이들은 할머니께 존댓말을 써요.",
+  "intro_en": "In this episode, 할머니 uses 반말 with the kids, and the kids use 존댓말 with 할머니.",
+  "rows": [
+   {
+    "banmal": "찾아 봐.",
+    "jondaemal": "찾아 보세요.",
+    "english": "Try looking for it.",
+    "situation_ko": "매표소를 못 찾을 때 (친구에게)",
+    "situation_en": "Can't find the ticket booth (to a friend)"
+   },
+   {
+    "banmal": "타고 와.",
+    "jondaemal": "타고 오세요.",
+    "english": "Come by bus.",
+    "situation_ko": "공항버스 타는 법 알려줄 때 (친구에게)",
+    "situation_en": "Telling someone how to take the bus (to a friend)"
+   },
+   {
+    "banmal": "거기서 기다릴게.",
+    "jondaemal": "거기서 기다릴게요.",
+    "english": "I'll wait there.",
+    "situation_ko": "공항 입구에서 기다릴 때 (친구에게)",
+    "situation_en": "Waiting at the entrance (to a friend)"
+   },
+   {
+    "banmal": "어디 있어?",
+    "jondaemal": "어디 있어요?",
+    "english": "Where are you?",
+    "situation_ko": "연락이 안 될 때 (친구에게)",
+    "situation_en": "When you can't reach someone (to a friend)"
+   },
+   {
+    "banmal": "도착했어?",
+    "jondaemal": "도착했어요?",
+    "english": "Did you arrive?",
+    "situation_ko": "가족이 도착했는지 물을 때 (친구에게)",
+    "situation_en": "Asking if family arrived (to a friend)"
+   }
+  ],
+  "tip": "명령/제안: 봐 → 보세요 / 와 → 오세요 · 불규칙 주의!",
+  "adult_dialogue": {
+   "title": "어른들 사이 — 오랜만에 연락하기",
+   "lines": [
+    {
+     "speaker": "A",
+     "text": "오랜만이에요! 잘 지내셨어요?",
+     "english": "Long time no see! Have you been well?"
+    },
+    {
+     "speaker": "B",
+     "text": "네, 덕분에요. 지금 어디 계세요?",
+     "english": "Yes, thanks to you. Where are you now?"
+    },
+    {
+     "speaker": "A",
+     "text": "공항에 막 도착했어요.",
+     "english": "I just arrived at the airport."
+    },
+    {
+     "speaker": "B",
+     "text": "공항버스 타고 오시면 돼요.",
+     "english": "You can take the airport bus."
+    }
+   ]
+  }
+ },
+ "pronunciation": {
+  "title": "발음 규칙 · Pronunciation Rules",
+  "items": [
+   {
+    "rule": "연음화 · Liaison",
+    "tip": "받침이 뒤 음절 모음 앞으로 넘어가요 · The coda moves to the next syllable",
+    "examples": [
+     {
+      "written": "찾아",
+      "pronounced_standard": "[차자]",
+      "pronounced_actual": "[차자]",
+      "note": "찾(ㅈ받침) + 아 → ㅈ 연음"
+     },
+     {
+      "written": "도착했어",
+      "pronounced_standard": "[도착캤서]",
+      "pronounced_actual": "[도차캐써]",
+      "note": "착(ㄱ)+했(ㅎ) → 격음화 ㅋ · 표준은 음절경계 유지, 실제는 연음 적용"
+     },
+     {
+      "written": "무사히 도착했어",
+      "pronounced_standard": "[무사히 도착캤서]",
+      "pronounced_actual": "[무사히 도차캐써]",
+      "note": "에피소드 대사 · 같은 규칙 적용"
+     }
     ]
-  },
-  "quiz": [
-    {
-      "type": "listen",
-      "audio_text": "출구 근처에 있는 공항버스 매표소를 찾아 봐.",
-      "audio_index": 6,
-      "question_ko": "할머니가 찾으라고 한 것은?",
-      "question_en": "What did 할머니 tell them to find?",
-      "options": [
-        "공항버스 매표소",
-        "입구",
-        "편의점",
-        "화장실"
-      ],
-      "answer": 0
-    },
-    {
-      "type": "listen",
-      "audio_text": "안 보여요. 못 찾겠어요.",
-      "audio_index": 7,
-      "question_ko": "보미가 못 찾겠다고 한 것은?",
-      "question_en": "What did 보미 say she can't find?",
-      "options": [
-        "매표소",
-        "출구",
-        "할머니",
-        "버스"
-      ],
-      "answer": 0
-    },
-    {
-      "type": "mc",
-      "question_ko": "\"해 볼게요\" — 어떤 의미예요?",
-      "question_en": "What does 해 볼게요 mean?",
-      "options": [
-        "I'll give it a try",
-        "I already did it",
-        "I can't do it",
-        "I don't want to"
-      ],
-      "answer": 0
-    },
-    {
-      "type": "mc",
-      "question_ko": "못 + 동사 = ?",
-      "question_en": "못 + verb means:",
-      "options": [
-        "can't do (inability)",
-        "choose not to do",
-        "want to do",
-        "finished doing"
-      ],
-      "answer": 0
-    },
-    {
-      "type": "listen",
-      "audio_text": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
-      "audio_index": 9,
-      "question_ko": "어디까지 오면 돼요?",
-      "question_en": "Where should they come to?",
-      "options": [
-        "종점",
-        "입구",
-        "매표소",
-        "편의점"
-      ],
-      "answer": 0
-    },
-    {
-      "type": "mc",
-      "question_ko": "\"버스를 타고 와요\" — -고 의 역할은?",
-      "question_en": "What does -고 do in 타고 와요?",
-      "options": [
-        "두 행동을 순서대로 연결해요",
-        "이유를 나타내요",
-        "조건을 나타내요",
-        "과거를 나타내요"
-      ],
-      "answer": 0
-    }
-  ],
-  "real_life": [
-    {
-      "type": "reading",
-      "title": "🚌 공항버스 이용 팁",
-      "passage": "인천공항에서 서울 시내로 가는 공항버스는 출국장 1층 또는 지하 1층 버스 매표소에서 살 수 있어요. 목적지에 따라 노선이 다르니 행선지를 확인하세요. 터미널행은 도심 공항 터미널까지 가는 버스예요.",
-      "questions": [
-        {
-          "question_ko": "공항버스 매표소는 어디에 있어요?",
-          "question_en": "Where is the airport bus ticket booth?",
-          "options": [
-            "1층 또는 지하 1층",
-            "3층",
-            "주차장",
-            "식당가"
-          ],
-          "answer": 0
-        }
-      ]
-    },
-    {
-      "type": "kakao",
-      "title": "💬 카카오톡 — 공항 도착",
-      "messages": [
-        {
-          "sender": "보미",
-          "text": "할머니! 도착했어요 ✈️",
-          "side": "right"
-        },
-        {
-          "sender": "할머니",
-          "text": "다행이다~ 무사히 왔구나",
-          "side": "left"
-        },
-        {
-          "sender": "보미",
-          "text": "버스 어디서 타요?",
-          "side": "right"
-        },
-        {
-          "sender": "할머니",
-          "text": "출구 나와서 1층 매표소 찾아봐 😊",
-          "side": "left"
-        },
-        {
-          "sender": "보미",
-          "text": "찾았어요! 곧 출발할게요 🚌",
-          "side": "right"
-        },
-        {
-          "sender": "할머니",
-          "text": "여기서 기다릴게 💕",
-          "side": "left"
-        }
-      ]
-    }
-  ],
-  "self_check": [
-    {
-      "ko": "공항에서 목적지까지 가는 방법을 물어볼 수 있어요.",
-      "en": "I can ask how to get from the airport to my destination."
-    },
-    {
-      "ko": "-아/어 보다 로 시도 표현을 할 수 있어요.",
-      "en": "I can express 'trying something' with -아/어 보다."
-    },
-    {
-      "ko": "못 + 동사 로 불가능을 표현할 수 있어요.",
-      "en": "I can express inability with 못 + verb."
-    },
-    {
-      "ko": "-고 로 두 행동을 연결할 수 있어요.",
-      "en": "I can connect two actions with -고."
-    },
-    {
-      "ko": "입구/출구/근처/종점 를 상황에 맞게 쓸 수 있어요.",
-      "en": "I can use 입구/출구/근처/종점 in context."
-    }
+   },
+   {
+    "rule": "경음화 · Tensification",
+    "tip": "받침 ㄱ/ㄷ/ㅂ 뒤의 자음이 된소리로 바뀌어요 · Consonant becomes tense after ㄱ/ㄷ/ㅂ coda",
+    "examples": [
+     {
+      "written": "못 찾겠어요",
+      "pronounced_standard": "[몯 찯껫써요]",
+      "pronounced_actual": "[몯 차께써요]",
+      "note": "찾(ㅈ→ㄷ)+겠(ㄱ→ㄲ) 경음화 · 실제 발화에서 받침 약화"
+     },
+     {
+      "written": "찾겠어요",
+      "pronounced_standard": "[찯껫써요]",
+      "pronounced_actual": "[차께써요]",
+      "note": "TOPIK 듣기는 표준발음 기준으로 녹음됨"
+     }
+    ]
+   }
   ]
+ },
+ "usage": {
+  "title": "Usage — N행 / -아/어 보다 확장",
+  "sections": [
+   {
+    "heading": "N행 — Bound for N",
+    "content": "터미널행 = bound for terminal · 서울행 기차 = Seoul-bound train · 부산행 버스 = Busan-bound bus",
+    "examples": [
+     {
+      "ko": "부산행 버스 한 장 주세요.",
+      "en": "One ticket for the Busan bus, please."
+     }
+    ]
+   },
+   {
+    "heading": "-아/어 보다 확장 · Extended uses",
+    "content": "경험(해 봤어요), 제안(먹어 봐요), 의지(해 볼게요) 세 가지 상황에 모두 쓰여요.",
+    "examples": [
+     {
+      "ko": "김치 먹어 봤어요?",
+      "en": "Have you tried kimchi before? (experience)"
+     },
+     {
+      "ko": "이거 써 봐요!",
+      "en": "Try using this! (suggestion)"
+     }
+    ]
+   }
+  ]
+ },
+ "quiz": [
+  {
+   "type": "listen",
+   "audio_text": "출구 근처에 있는 공항버스 매표소를 찾아 봐.",
+   "audio_index": 6,
+   "question_ko": "할머니가 찾으라고 한 것은?",
+   "question_en": "What did 할머니 tell them to find?",
+   "options": [
+    "공항버스 매표소",
+    "입구",
+    "편의점",
+    "화장실"
+   ],
+   "answer": 0
+  },
+  {
+   "type": "listen",
+   "audio_text": "안 보여요. 못 찾겠어요.",
+   "audio_index": 7,
+   "question_ko": "보미가 못 찾겠다고 한 것은?",
+   "question_en": "What did 보미 say she can't find?",
+   "options": [
+    "매표소",
+    "출구",
+    "할머니",
+    "버스"
+   ],
+   "answer": 0
+  },
+  {
+   "type": "mc",
+   "question_ko": "\"해 볼게요\" — 어떤 의미예요?",
+   "question_en": "What does 해 볼게요 mean?",
+   "options": [
+    "I'll give it a try",
+    "I already did it",
+    "I can't do it",
+    "I don't want to"
+   ],
+   "answer": 0
+  },
+  {
+   "type": "mc",
+   "question_ko": "못 + 동사 = ?",
+   "question_en": "못 + verb means:",
+   "options": [
+    "can't do (inability)",
+    "choose not to do",
+    "want to do",
+    "finished doing"
+   ],
+   "answer": 0
+  },
+  {
+   "type": "listen",
+   "audio_text": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
+   "audio_index": 9,
+   "question_ko": "어디까지 오면 돼요?",
+   "question_en": "Where should they come to?",
+   "options": [
+    "종점",
+    "입구",
+    "매표소",
+    "편의점"
+   ],
+   "answer": 0
+  },
+  {
+   "type": "mc",
+   "question_ko": "\"버스를 타고 와요\" — -고 의 역할은?",
+   "question_en": "What does -고 do in 타고 와요?",
+   "options": [
+    "두 행동을 순서대로 연결해요",
+    "이유를 나타내요",
+    "조건을 나타내요",
+    "과거를 나타내요"
+   ],
+   "answer": 0
+  }
+ ],
+ "real_life": [
+  {
+   "type": "reading",
+   "title": "🚌 공항버스 이용 팁",
+   "passage": "인천공항에서 서울 시내로 가는 공항버스는 출국장 1층 또는 지하 1층 버스 매표소에서 살 수 있어요. 목적지에 따라 노선이 다르니 행선지를 확인하세요. 터미널행은 도심 공항 터미널까지 가는 버스예요.",
+   "questions": [
+    {
+     "question_ko": "공항버스 매표소는 어디에 있어요?",
+     "question_en": "Where is the airport bus ticket booth?",
+     "options": [
+      "1층 또는 지하 1층",
+      "3층",
+      "주차장",
+      "식당가"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "type": "kakao",
+   "title": "💬 카카오톡 — 공항 도착",
+   "messages": [
+    {
+     "sender": "보미",
+     "text": "할머니! 도착했어요 ✈️",
+     "side": "right"
+    },
+    {
+     "sender": "할머니",
+     "text": "다행이다~ 무사히 왔구나",
+     "side": "left"
+    },
+    {
+     "sender": "보미",
+     "text": "버스 어디서 타요?",
+     "side": "right"
+    },
+    {
+     "sender": "할머니",
+     "text": "출구 나와서 1층 매표소 찾아봐 😊",
+     "side": "left"
+    },
+    {
+     "sender": "보미",
+     "text": "찾았어요! 곧 출발할게요 🚌",
+     "side": "right"
+    },
+    {
+     "sender": "할머니",
+     "text": "여기서 기다릴게 💕",
+     "side": "left"
+    }
+   ]
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "공항에서 목적지까지 가는 방법을 물어볼 수 있어요.",
+   "en": "I can ask how to get from the airport to my destination."
+  },
+  {
+   "ko": "-아/어 보다 로 시도 표현을 할 수 있어요.",
+   "en": "I can express 'trying something' with -아/어 보다."
+  },
+  {
+   "ko": "못 + 동사 로 불가능을 표현할 수 있어요.",
+   "en": "I can express inability with 못 + verb."
+  },
+  {
+   "ko": "-고 로 두 행동을 연결할 수 있어요.",
+   "en": "I can connect two actions with -고."
+  },
+  {
+   "ko": "입구/출구/근처/종점 를 상황에 맞게 쓸 수 있어요.",
+   "en": "I can use 입구/출구/근처/종점 in context."
+  }
+ ]
 }

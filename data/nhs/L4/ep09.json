@@ -1,450 +1,782 @@
 {
-  "id": "ep09",
-  "level": "L4",
-  "title": "분리수거는 너무 복잡해요",
-  "title_en": "Recycling Is So Complicated",
-  "scene": "🗑️ 라온네 집 — 분리수거 하는 날 · Raon's House — Recycling Day",
-  "goal": {
-    "ko": "쓰레기 분리수거에 대해 이야기하면서 -다가는/-고서야/-아어서야를 쓸 수 있어요",
-    "en": "I can talk about sorting and disposing of trash, and use -다가는, -고서야, and -아/어서야"
+ "id": "ep09",
+ "level": "L4",
+ "title": "분리수거는 너무 복잡해요",
+ "title_en": "Recycling Is So Complicated",
+ "scene": "🌱 환경·분리수거 · Environment & Recycling",
+ "goal": {
+  "ko": "쓰레기 분리수거에 대해 이야기하면서 -다가는/-고서야/-아어서야를 쓸 수 있어요",
+  "en": "I can talk about sorting and disposing of trash, and use -다가는, -고서야, and -아/어서야"
+ },
+ "key_points": [
+  "-다가는★NEW — 지금 하는 행동을 계속하면 안 좋은 결과가 생긴다는 경고",
+  "-고서야★NEW — 어떤 행동을 완전히 끝내야만 비로소 다음 일이 가능해질 때 (수고로움 강조)",
+  "-아/어서야★NEW — 상태가 너무 심해서 뒷일이 불가능하다는 반문 (불평 톤)"
+ ],
+ "characters": [
+  {
+   "id": "liam_mom",
+   "name": "라온 엄마",
+   "name_en": "Raon's Mom",
+   "emoji": "👩",
+   "color": "burgundy"
   },
-  "key_points": [
-    "-다가는★NEW — 지금 하는 행동을 계속하면 안 좋은 결과가 생긴다는 경고",
-    "-고서야★NEW — 어떤 행동을 완전히 끝내야만 비로소 다음 일이 가능해질 때 (수고로움 강조)",
-    "-아/어서야★NEW — 상태가 너무 심해서 뒷일이 불가능하다는 반문 (불평 톤)"
-  ],
-  "characters": [
-    { "id": "liam_mom", "name": "라온 엄마", "name_en": "Raon's Mom", "emoji": "👩", "color": "burgundy" },
-    { "id": "liam", "name": "라온", "name_en": "Raon", "emoji": "👦", "color": "var(--blue)" },
-    { "id": "kayo", "name": "태오", "name_en": "Taeo", "emoji": "👦", "color": "var(--purple)" }
-  ],
-  "slides": [
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해１.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해２.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해３.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해４.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해５.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해６.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해７.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해８.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해９.png",
-    "data/nhs/L4/slides/ep09/분리수거는너무복잡해１０.png"
-  ],
-  "video": null,
-  "script": [
+  {
+   "id": "liam",
+   "name": "라온",
+   "name_en": "Raon",
+   "emoji": "👦",
+   "color": "var(--blue)"
+  },
+  {
+   "id": "kayo",
+   "name": "태오",
+   "name_en": "Taeo",
+   "emoji": "👦",
+   "color": "var(--purple)"
+  }
+ ],
+ "slides": [
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해１.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해２.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해３.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해４.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해５.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해６.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해７.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해８.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해９.png",
+  "data/nhs/L4/slides/ep09/분리수거는너무복잡해１０.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "liam_mom",
+   "text": "얘들아 쓰레기 정리 좀 도와줄래?",
+   "en": "Kids, can you help me clean up the trash?",
+   "slide": 0,
+   "audio": "data/nhs/L4/TTS/ep09/audio_0_얘들아_쓰레기_정리_좀_도와줄래_.mp3"
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
+   "en": "If we keep putting it off for a few more days, the house is going to overflow with trash.",
+   "slide": 1,
+   "audio": "data/nhs/L4/TTS/ep09/audio_1_며칠_더_버티다가는_집이_쓰레기로_넘쳐나겠어_.mp3",
+   "highlight": "버티다가는",
+   "annotation": {
+    "highlight": "버티다가는",
+    "grammar": "-다가는",
+    "note": "버티다 → 버티다가는 = if we keep holding out\n지금처럼 계속 미루면 안 좋은 결과(쓰레기 넘침)가 온다는 경고예요"
+   }
+  },
+  {
+   "speaker": "liam",
+   "text": "포장지 쓰레기가 왜 이렇게 많아요?",
+   "en": "Why is there so much packaging trash?",
+   "slide": 2,
+   "audio": "data/nhs/L4/TTS/ep09/audio_2_포장지_쓰레기가_왜_이렇게_많아요_.mp3"
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "그러게나 말이다. 거의 다 포장 쓰레기야.",
+   "en": "Tell me about it. It's almost all packaging waste.",
+   "slide": 3,
+   "audio": "data/nhs/L4/TTS/ep09/audio_3_그러게나_말이다__거의_다_포장_쓰레기야_.mp3"
+  },
+  {
+   "speaker": "kayo",
+   "text": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
+   "en": "It's wrapped and wrapped again — you can only eat the snack after peeling off several layers.",
+   "slide": 4,
+   "audio": "data/nhs/L4/TTS/ep09/audio_4_싸고_또_싸서_몇겹을_벗기고서야_과자를_먹을_수_있잖아요_.mp3",
+   "highlight": "벗기고서야",
+   "annotation": {
+    "highlight": "벗기고서야",
+    "grammar": "-고서야",
+    "note": "벗기다 → 벗기고서야 = only after peeling off\n몇 겹을 다 벗겨야만 비로소 과자를 먹을 수 있었다는 뜻이에요 (그 전엔 불가능)"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "그러니 버리고 돌아서면 또 쓰레기가 쌓여.",
+   "en": "That's why the moment you throw it away and turn around, trash piles up again.",
+   "slide": 5,
+   "audio": "data/nhs/L4/TTS/ep09/audio_5_그러니_버리고_돌아서면_또_쓰레기가_쌓여_.mp3"
+  },
+  {
+   "speaker": "liam",
+   "text": "페트병에 있는 띠도 다 제거해야 되죠?",
+   "en": "We have to remove the label band on the plastic bottles too, right?",
+   "slide": 6,
+   "audio": "data/nhs/L4/TTS/ep09/audio_6_페트병에_있는_띠도_다_제거해야_되죠_.mp3"
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "관리사무소에서 나온 안내문을 잘 읽어 봐.",
+   "en": "Read the notice from the management office carefully.",
+   "slide": 7,
+   "audio": "data/nhs/L4/TTS/ep09/audio_7_관리사무소에서_나온_안내문을_잘_읽어_봐_.mp3"
+  },
+  {
+   "speaker": "kayo",
+   "text": "할머니는 쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고, 아예 아무것도 안 사고 싶으시대요.",
+   "en": "Grandma says that with recycling being this complicated, there's no way to do it properly, so she'd rather not buy anything at all.",
+   "slide": 8,
+   "audio": "data/nhs/L4/TTS/ep09/audio_8_할머니는_쓰레기_분류가_이렇게_복잡해서야_제대로_하겠냐고__~.mp3",
+   "highlight": "복잡해서야",
+   "annotation": {
+    "highlight": "복잡해서야",
+    "grammar": "-아/어서야",
+    "note": "복잡하다 → 복잡해서야 = given that it's this complicated\n'이렇게 복잡해서야 (제대로) 하겠냐' = 이렇게 복잡한데 어떻게 제대로 하겠냐는 반문(불평)이에요"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "사는 걸 줄이는 것도 쓰레기를 줄이는 좋은 방법이야.",
+   "en": "Buying less is also a good way to reduce trash.",
+   "slide": 9,
+   "audio": "data/nhs/L4/TTS/ep09/audio_9_사는_걸_줄이는_것도_쓰레기를_줄이는_좋은_방법이야_.mp3"
+  }
+ ],
+ "vocab": [
+  {
+   "category": "♻️ 쓰레기 & 분리수거 · Trash & Recycling",
+   "items": [
     {
-      "speaker": "liam_mom",
-      "text": "얘들아 쓰레기 정리 좀 도와줄래?",
-      "en": "Kids, can you help me clean up the trash?",
-      "slide": 0,
-      "audio": "data/nhs/L4/TTS/ep09/audio_0_얘들아_쓰레기_정리_좀_도와줄래_.mp3"
+     "korean": "쓰레기",
+     "romanization": "sseu-re-gi",
+     "english": "trash, garbage",
+     "emoji": "🗑️"
     },
     {
-      "speaker": "liam_mom",
-      "text": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
-      "en": "If we keep putting it off for a few more days, the house is going to overflow with trash.",
-      "slide": 1,
-      "audio": "data/nhs/L4/TTS/ep09/audio_1_며칠_더_버티다가는_집이_쓰레기로_넘쳐나겠어_.mp3",
-      "highlight": "버티다가는",
-      "annotation": {
-        "highlight": "버티다가는",
-        "grammar": "-다가는",
-        "note": "버티다 → 버티다가는 = if we keep holding out\n지금처럼 계속 미루면 안 좋은 결과(쓰레기 넘침)가 온다는 경고예요"
-      }
+     "korean": "쓰레기 종량제",
+     "romanization": "sseu-re-gi jong-nyang-je",
+     "english": "volume-based waste fee system (pay-per-bag)",
+     "emoji": "💰"
     },
     {
-      "speaker": "liam",
-      "text": "포장지 쓰레기가 왜 이렇게 많아요?",
-      "en": "Why is there so much packaging trash?",
-      "slide": 2,
-      "audio": "data/nhs/L4/TTS/ep09/audio_2_포장지_쓰레기가_왜_이렇게_많아요_.mp3"
+     "korean": "쓰레기 분리수거",
+     "romanization": "sseu-re-gi bul-li-su-geo",
+     "english": "recycling / waste sorting collection",
+     "emoji": "♻️"
     },
     {
-      "speaker": "liam_mom",
-      "text": "그러게나 말이다. 거의 다 포장 쓰레기야.",
-      "en": "Tell me about it. It's almost all packaging waste.",
-      "slide": 3,
-      "audio": "data/nhs/L4/TTS/ep09/audio_3_그러게나_말이다__거의_다_포장_쓰레기야_.mp3"
+     "korean": "분류하다",
+     "romanization": "bul-lyu-ha-da",
+     "english": "to sort, classify",
+     "emoji": "🗂️"
     },
     {
-      "speaker": "kayo",
-      "text": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
-      "en": "It's wrapped and wrapped again — you can only eat the snack after peeling off several layers.",
-      "slide": 4,
-      "audio": "data/nhs/L4/TTS/ep09/audio_4_싸고_또_싸서_몇겹을_벗기고서야_과자를_먹을_수_있잖아요_.mp3",
-      "highlight": "벗기고서야",
-      "annotation": {
-        "highlight": "벗기고서야",
-        "grammar": "-고서야",
-        "note": "벗기다 → 벗기고서야 = only after peeling off\n몇 겹을 다 벗겨야만 비로소 과자를 먹을 수 있었다는 뜻이에요 (그 전엔 불가능)"
-      }
+     "korean": "처리",
+     "romanization": "cheo-ri",
+     "english": "processing, disposal",
+     "emoji": "⚙️"
     },
     {
-      "speaker": "liam_mom",
-      "text": "그러니 버리고 돌아서면 또 쓰레기가 쌓여.",
-      "en": "That's why the moment you throw it away and turn around, trash piles up again.",
-      "slide": 5,
-      "audio": "data/nhs/L4/TTS/ep09/audio_5_그러니_버리고_돌아서면_또_쓰레기가_쌓여_.mp3"
+     "korean": "해당",
+     "romanization": "hae-dang",
+     "english": "applicable, corresponding",
+     "emoji": "☑️"
     },
     {
-      "speaker": "liam",
-      "text": "페트병에 있는 띠도 다 제거해야 되죠?",
-      "en": "We have to remove the label band on the plastic bottles too, right?",
-      "slide": 6,
-      "audio": "data/nhs/L4/TTS/ep09/audio_6_페트병에_있는_띠도_다_제거해야_되죠_.mp3"
+     "korean": "설명서",
+     "romanization": "seol-myeong-seo",
+     "english": "instructions, manual",
+     "emoji": "📄"
     },
     {
-      "speaker": "liam_mom",
-      "text": "관리사무소에서 나온 안내문을 잘 읽어 봐.",
-      "en": "Read the notice from the management office carefully.",
-      "slide": 7,
-      "audio": "data/nhs/L4/TTS/ep09/audio_7_관리사무소에서_나온_안내문을_잘_읽어_봐_.mp3"
-    },
-    {
-      "speaker": "kayo",
-      "text": "할머니는 쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고, 아예 아무것도 안 사고 싶으시대요.",
-      "en": "Grandma says that with recycling being this complicated, there's no way to do it properly, so she'd rather not buy anything at all.",
-      "slide": 8,
-      "audio": "data/nhs/L4/TTS/ep09/audio_8_할머니는_쓰레기_분류가_이렇게_복잡해서야_제대로_하겠냐고__~.mp3",
-      "highlight": "복잡해서야",
-      "annotation": {
-        "highlight": "복잡해서야",
-        "grammar": "-아/어서야",
-        "note": "복잡하다 → 복잡해서야 = given that it's this complicated\n'이렇게 복잡해서야 (제대로) 하겠냐' = 이렇게 복잡한데 어떻게 제대로 하겠냐는 반문(불평)이에요"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "사는 걸 줄이는 것도 쓰레기를 줄이는 좋은 방법이야.",
-      "en": "Buying less is also a good way to reduce trash.",
-      "slide": 9,
-      "audio": "data/nhs/L4/TTS/ep09/audio_9_사는_걸_줄이는_것도_쓰레기를_줄이는_좋은_방법이야_.mp3"
+     "korean": "안내문",
+     "romanization": "an-nae-mun",
+     "english": "notice, announcement (e.g. posted flyer)",
+     "emoji": "📋"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "📦 포장 & 재질 · Packaging & Materials",
+   "items": [
     {
-      "category": "♻️ 쓰레기 & 분리수거 · Trash & Recycling",
-      "items": [
-        { "korean": "쓰레기", "romanization": "sseu-re-gi", "english": "trash, garbage", "emoji": "🗑️" },
-        { "korean": "쓰레기 종량제", "romanization": "sseu-re-gi jong-nyang-je", "english": "volume-based waste fee system (pay-per-bag)", "emoji": "💰" },
-        { "korean": "쓰레기 분리수거", "romanization": "sseu-re-gi bul-li-su-geo", "english": "recycling / waste sorting collection", "emoji": "♻️" },
-        { "korean": "분류하다", "romanization": "bul-lyu-ha-da", "english": "to sort, classify", "emoji": "🗂️" },
-        { "korean": "처리", "romanization": "cheo-ri", "english": "processing, disposal", "emoji": "⚙️" },
-        { "korean": "해당", "romanization": "hae-dang", "english": "applicable, corresponding", "emoji": "☑️" },
-        { "korean": "설명서", "romanization": "seol-myeong-seo", "english": "instructions, manual", "emoji": "📄" },
-        { "korean": "안내문", "romanization": "an-nae-mun", "english": "notice, announcement (e.g. posted flyer)", "emoji": "📋" }
-      ]
+     "korean": "페트병",
+     "romanization": "pe-teu-byeong",
+     "english": "PET (plastic) bottle",
+     "emoji": "🧴"
     },
     {
-      "category": "📦 포장 & 재질 · Packaging & Materials",
-      "items": [
-        { "korean": "페트병", "romanization": "pe-teu-byeong", "english": "PET (plastic) bottle", "emoji": "🧴" },
-        { "korean": "포장지", "romanization": "po-jang-ji", "english": "wrapping paper, packaging", "emoji": "🎁" },
-        { "korean": "띠", "romanization": "tti", "english": "band, strip (e.g. bottle label band)", "emoji": "➰" },
-        { "korean": "스티로폼", "romanization": "seu-ti-ro-pom", "english": "styrofoam", "emoji": "🧊" },
-        { "korean": "봉지", "romanization": "bong-ji", "english": "bag (plastic/paper)", "emoji": "🛍️" }
-      ]
+     "korean": "포장지",
+     "romanization": "po-jang-ji",
+     "english": "wrapping paper, packaging",
+     "emoji": "🎁"
     },
     {
-      "category": "🧹 동작 · Actions",
-      "items": [
-        { "korean": "버리다", "romanization": "beo-ri-da", "english": "to throw away", "emoji": "🚮" },
-        { "korean": "내다 버리다", "romanization": "nae-da beo-ri-da", "english": "to take out and throw away", "emoji": "🚶" },
-        { "korean": "벗기다", "romanization": "beot-gi-da", "english": "to peel off, strip off", "emoji": "🫳" },
-        { "korean": "버티다", "romanization": "beo-ti-da", "english": "to hold out, endure", "emoji": "💪" },
-        { "korean": "넘쳐나다", "romanization": "neom-chyeo-na-da", "english": "to overflow", "emoji": "🌊" },
-        { "korean": "돌아서다", "romanization": "do-ra-seo-da", "english": "to turn around", "emoji": "🔄" },
-        { "korean": "쌓이다", "romanization": "ssa-i-da", "english": "to pile up, accumulate", "emoji": "📚" },
-        { "korean": "줄이다", "romanization": "ju-ri-da", "english": "to reduce", "emoji": "📉" }
-      ]
+     "korean": "띠",
+     "romanization": "tti",
+     "english": "band, strip (e.g. bottle label band)",
+     "emoji": "➰"
     },
     {
-      "category": "😩 감정 표현 & 장소 · Feelings & Places",
-      "items": [
-        { "korean": "골치 아프다", "romanization": "gol-chi a-peu-da", "english": "to be a headache, troublesome (idiom)", "emoji": "🤕" },
-        { "korean": "다용도실", "romanization": "da-yong-do-sil", "english": "utility room", "emoji": "🚪" },
-        { "korean": "관리사무소", "romanization": "gwan-li-sa-mu-so", "english": "(apartment) management office", "emoji": "🏢" }
-      ]
+     "korean": "스티로폼",
+     "romanization": "seu-ti-ro-pom",
+     "english": "styrofoam",
+     "emoji": "🧊"
+    },
+    {
+     "korean": "봉지",
+     "romanization": "bong-ji",
+     "english": "bag (plastic/paper)",
+     "emoji": "🛍️"
     }
-  ],
-  "grammar": [
+   ]
+  },
+  {
+   "category": "🧹 동작 · Actions",
+   "items": [
     {
-      "id": "g09_l4_dagareun",
-      "tier": "core",
-      "title": "-다가는",
-      "title_en": "If You Keep... (Warning of a Bad Outcome)",
-      "emoji": "⚠️",
-      "pattern": "동사 어간 + -다가는 — 지금 하는 행동을 계속하면 안 좋은 결과가 생길 거라고 경고",
-      "scene_example": {
-        "korean": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
-        "english": "If we keep putting it off for a few more days, the house is going to overflow with trash.",
-        "highlight": "버티다가는"
-      },
-      "explanation_en": "-다가는 warns that continuing the current action will lead to a bad result. It's built from -다가 ('while doing / in the middle of doing') plus 는 for emphasis, and is almost always followed by a negative or undesirable consequence.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사 어간 + 다가는", "content": "버티다→버티다가는, 먹다→먹다가는, 놀다→놀다가는", "note": "받침 상관없이 항상 다가는" },
-        { "type": "green", "label": "부정적인 결과가 뒤따름", "content": "다가는 뒤에는 거의 항상 안 좋은 결과(경고, 걱정)가 와요", "note": "며칠 더 버티다가는 → 쓰레기로 넘쳐나겠어 (안 좋은 결과)" },
-        { "type": "amber", "label": "-다 보면과 비교", "content": "-다 보면: 계속하면 (좋은/나쁜 결과 둘 다 가능)\n-다가는: 계속하면 (거의 항상 나쁜 결과, 경고 톤)", "note": "다가는은 걱정하거나 잔소리할 때 딱이에요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.", "en": "If we keep putting it off for a few more days, the house is going to overflow with trash." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "그렇게 늦게 자다가는 내일 늦잠 자겠어.", "en": "If you keep going to bed this late, you'll oversleep tomorrow." },
-            { "ko": "계속 그렇게 먹다가는 배탈 나겠어.", "en": "If you keep eating like that, you'll get a stomachache." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "매일 그렇게 게임만 ___ 눈 나빠지겠어. (하다)", "answer": "하다가는", "hint": "계속하면 안 좋은 결과가 온다는 경고" }
-      ]
+     "korean": "버리다",
+     "romanization": "beo-ri-da",
+     "english": "to throw away",
+     "emoji": "🚮"
     },
     {
-      "id": "g09_l4_goseoya",
-      "tier": "core",
-      "title": "-고서야",
-      "title_en": "Only After...",
-      "emoji": "🔓",
-      "pattern": "동사 어간 + -고서야 — 어떤 행동을 하고 난 후에야 비로소 다음 일이 가능해짐 (그 전엔 불가능)",
-      "scene_example": {
-        "korean": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
-        "english": "It's wrapped and wrapped again — you can only eat the snack after peeling off several layers.",
-        "highlight": "벗기고서야"
-      },
-      "explanation_en": "-고서야 means 'only after doing...' — it emphasizes that the following result becomes possible ONLY once the first action is fully completed, often implying that it took more effort or steps than expected.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사 어간 + 고서야", "content": "벗기다→벗기고서야, 듣다→듣고서야, 보다→보고서야", "note": "받침 상관없이 항상 고서야" },
-        { "type": "green", "label": "그 전엔 불가능 — 순서 강조", "content": "몇겹을 벗기고서야 과자를 먹을 수 있다\n→ 벗기기 전에는 절대 먹을 수 없었다는 뜻", "note": "단순한 순서(-고 나서)보다 '그제서야 비로소'라는 느낌이 강해요" },
-        { "type": "amber", "label": "-고 나서 vs -고서야", "content": "-고 나서: 단순히 그다음에 (감정 중립)\n-고서야: 그것을 하고 나서야 비로소 (수고로움·의외성 강조)", "note": "이 에피소드는 포장이 너무 많아서 힘들었다는 뉘앙스라 고서야가 딱이에요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.", "en": "It's wrapped and wrapped again — you can only eat the snack after peeling off several layers." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "몇 번을 설명하고서야 이해했어요.", "en": "Only after explaining it several times did they understand." },
-            { "ko": "두 시간을 기다리고서야 병원에 들어갈 수 있었어요.", "en": "Only after waiting two hours could I get into the doctor's office." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "열쇠를 다 ___ 문이 열렸어요. (찾다)", "answer": "찾고서야", "hint": "그 행동을 하고 나서야 비로소" }
-      ]
+     "korean": "내다 버리다",
+     "romanization": "nae-da beo-ri-da",
+     "english": "to take out and throw away",
+     "emoji": "🚶"
     },
     {
-      "id": "g09_l4_aeoseoya",
-      "tier": "core",
-      "title": "-아/어서야",
-      "title_en": "Given How... (Rhetorical 'How Could You Possibly')",
-      "emoji": "😤",
-      "pattern": "형용사/동사 어간 + -아/어서야 (+ 되겠어요?/하겠어요?, 흔히 생략) — 상태가 너무 극단적이라 뒷일이 불가능하다는 걸 반문으로 강조",
-      "scene_example": {
-        "korean": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.",
-        "english": "With recycling being this complicated, there's no way to do it properly.",
-        "highlight": "복잡해서야"
-      },
-      "explanation_en": "-아/어서야, unlike -고서야, comes from -아/어서 (reason/cause) plus 야. It's used with a following rhetorical question (되겠어요?/하겠어요?, often omitted like here) to say 'given how extreme this is, how could [the expected result] possibly happen?' It has a complaining or exasperated tone — pointing out a situation is so bad that success is basically impossible.",
-      "rule_boxes": [
-        { "type": "blue", "label": "형용사/동사 어간 + 아/어서야", "content": "복잡하다→복잡해서야, 어렵다→어려워서야, 힘들다→힘들어서야", "note": "아/어 규칙은 -아요/어요와 동일" },
-        { "type": "green", "label": "뒤에 반문이 따라옴 (생략 가능)", "content": "복잡해서야 (제대로) 하겠냐고 = 이렇게 복잡한데 어떻게 제대로 하겠냐는 뜻\n뒤의 반문은 대화에서 자주 생략돼요", "note": "'-겠어?/-겠냐고' 같은 반문과 세트로 쓰여요" },
-        { "type": "amber", "label": "-고서야 vs -아/어서야 헷갈리지 않기", "content": "-고서야: 동작을 완료한 후에야 (순서)\n-아/어서야: 상태가 이 정도로 심해서야 (원인+반문, 불평 톤)", "note": "형태는 비슷해도 완전히 다른 문법이에요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.", "en": "With recycling being this complicated, there's no way to do it properly." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "이렇게 시끄러워서야 잠을 잘 수가 있나요?", "en": "How could anyone possibly sleep with it this noisy?" },
-            { "ko": "이 가격에 이렇게 작아서야 누가 사겠어요?", "en": "Who would buy it when it's this small for the price?" }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "글씨가 이렇게 ___ 읽을 수가 있나요? (작다)", "answer": "작아서야", "hint": "상태가 심해서 뒷일이 불가능하다는 반문" }
-      ]
+     "korean": "벗기다",
+     "romanization": "beot-gi-da",
+     "english": "to peel off, strip off",
+     "emoji": "🫳"
+    },
+    {
+     "korean": "버티다",
+     "romanization": "beo-ti-da",
+     "english": "to hold out, endure",
+     "emoji": "💪"
+    },
+    {
+     "korean": "넘쳐나다",
+     "romanization": "neom-chyeo-na-da",
+     "english": "to overflow",
+     "emoji": "🌊"
+    },
+    {
+     "korean": "돌아서다",
+     "romanization": "do-ra-seo-da",
+     "english": "to turn around",
+     "emoji": "🔄"
+    },
+    {
+     "korean": "쌓이다",
+     "romanization": "ssa-i-da",
+     "english": "to pile up, accumulate",
+     "emoji": "📚"
+    },
+    {
+     "korean": "줄이다",
+     "romanization": "ju-ri-da",
+     "english": "to reduce",
+     "emoji": "📉"
     }
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "category": "😩 감정 표현 & 장소 · Feelings & Places",
+   "items": [
     {
-      "title": "한국의 분리수거 — 왜 이렇게 복잡할까?",
-      "title_en": "Korean Recycling — Why So Complicated?",
-      "explanation_en": "Korea has one of the most detailed recycling systems in the world. General (non-recyclable) trash must go in official pay-per-bag 종량제 bags, sold at local stores. Recyclables are sorted by material — PET bottles need their label band (띠) removed and cap taken off, styrofoam (스티로폼) is collected separately, and cardboard must be flattened. Every apartment building's 관리사무소 (management office) posts a 설명서 (guide) explaining exactly what's 해당 (applicable) for each category, since the rules vary slightly by city.",
-      "examples": [
-        { "ko": "페트병에 있는 띠도 다 제거해야 되죠?", "en": "We have to remove the label band on the plastic bottles too, right?" },
-        { "ko": "관리사무소에서 나온 안내문을 잘 읽어 봐.", "en": "Read the notice from the management office carefully." }
-      ]
+     "korean": "골치 아프다",
+     "romanization": "gol-chi a-peu-da",
+     "english": "to be a headache, troublesome (idiom)",
+     "emoji": "🤕"
     },
     {
-      "title": "잔소리 톤 표현 — 부모님이 자주 쓰는 문법",
-      "title_en": "Nagging-Tone Grammar — What Parents Say a Lot",
-      "explanation_en": "-다가는 and -아/어서야 both show up a lot in parents' complaints and warnings — one warns about a bad future if you keep doing something, the other complains that a situation is too extreme for things to work out. Recognizing this tone helps you catch when someone (like a parent, or a grandma in this episode) is venting frustration rather than stating a neutral fact.",
-      "examples": [
-        { "ko": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.", "en": "If we keep putting it off, the house is going to overflow with trash. (-다가는, warning)" },
-        { "ko": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.", "en": "With it being this complicated, there's no way to do it properly. (-아/어서야, complaint)" }
-      ]
+     "korean": "다용도실",
+     "romanization": "da-yong-do-sil",
+     "english": "utility room",
+     "emoji": "🚪"
+    },
+    {
+     "korean": "관리사무소",
+     "romanization": "gwan-li-sa-mu-so",
+     "english": "(apartment) management office",
+     "emoji": "🏢"
     }
-  ],
-  "pronunciation": {
-    "title": "발음 규칙 · Pronunciation Rules",
-    "items": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g09_l4_dagareun",
+   "tier": "core",
+   "title": "-다가는",
+   "title_en": "If You Keep... (Warning of a Bad Outcome)",
+   "emoji": "⚠️",
+   "pattern": "동사 어간 + -다가는 — 지금 하는 행동을 계속하면 안 좋은 결과가 생길 거라고 경고",
+   "scene_example": {
+    "korean": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
+    "english": "If we keep putting it off for a few more days, the house is going to overflow with trash.",
+    "highlight": "버티다가는"
+   },
+   "explanation_en": "-다가는 warns that continuing the current action will lead to a bad result. It's built from -다가 ('while doing / in the middle of doing') plus 는 for emphasis, and is almost always followed by a negative or undesirable consequence.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "동사 어간 + 다가는",
+     "content": "버티다→버티다가는, 먹다→먹다가는, 놀다→놀다가는",
+     "note": "받침 상관없이 항상 다가는"
+    },
+    {
+     "type": "green",
+     "label": "부정적인 결과가 뒤따름",
+     "content": "다가는 뒤에는 거의 항상 안 좋은 결과(경고, 걱정)가 와요",
+     "note": "며칠 더 버티다가는 → 쓰레기로 넘쳐나겠어 (안 좋은 결과)"
+    },
+    {
+     "type": "amber",
+     "label": "-다 보면과 비교",
+     "content": "-다 보면: 계속하면 (좋은/나쁜 결과 둘 다 가능)\n-다가는: 계속하면 (거의 항상 나쁜 결과, 경고 톤)",
+     "note": "다가는은 걱정하거나 잔소리할 때 딱이에요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
       {
-        "rule": "겹받침 ㄶ + 모음 → ㅎ 탈락 + 연음화 (많아요)",
-        "tip": "겹받침 ㄶ 뒤에 모음이 오면 ㅎ이 사라지고 ㄴ이 다음 음절로 넘어가요 · The ㅎ in the double batchim ㄶ disappears before a vowel, and the ㄴ links over.",
-        "examples": [
-          { "written": "많아요", "pronounced_standard": "[마나요]", "pronounced_actual": "[마나요]", "note": "ㅎ 탈락 + 연음화" }
-        ]
-      },
-      {
-        "rule": "겹받침 ㄺ + 모음 → 연음화 (읽어)",
-        "tip": "겹받침 ㄺ(ㄹ+ㄱ) 뒤에 모음이 오면 ㄱ이 다음 음절로 넘어가요 · The ㄱ in the double batchim ㄺ links to the next syllable before a vowel.",
-        "examples": [
-          { "written": "읽어", "pronounced_standard": "[일거]", "pronounced_actual": "[일거]", "note": "ㄺ 연음화" }
-        ]
-      },
-      {
-        "rule": "받침 ㅎ + 모음 → ㅎ 탈락 (쌓여)",
-        "tip": "받침 ㅎ 뒤에 모음이 오면 ㅎ이 소리 나지 않아요 · A batchim ㅎ disappears before a following vowel.",
-        "examples": [
-          { "written": "쌓여", "pronounced_standard": "[싸여]", "pronounced_actual": "[싸여]", "note": "ㅎ 탈락" }
-        ]
+       "ko": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
+       "en": "If we keep putting it off for a few more days, the house is going to overflow with trash."
       }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "그렇게 늦게 자다가는 내일 늦잠 자겠어.",
+       "en": "If you keep going to bed this late, you'll oversleep tomorrow."
+      },
+      {
+       "ko": "계속 그렇게 먹다가는 배탈 나겠어.",
+       "en": "If you keep eating like that, you'll get a stomachache."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "매일 그렇게 게임만 ___ 눈 나빠지겠어. (하다)",
+     "answer": "하다가는",
+     "hint": "계속하면 안 좋은 결과가 온다는 경고"
+    }
+   ]
+  },
+  {
+   "id": "g09_l4_goseoya",
+   "tier": "core",
+   "title": "-고서야",
+   "title_en": "Only After...",
+   "emoji": "🔓",
+   "pattern": "동사 어간 + -고서야 — 어떤 행동을 하고 난 후에야 비로소 다음 일이 가능해짐 (그 전엔 불가능)",
+   "scene_example": {
+    "korean": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
+    "english": "It's wrapped and wrapped again — you can only eat the snack after peeling off several layers.",
+    "highlight": "벗기고서야"
+   },
+   "explanation_en": "-고서야 means 'only after doing...' — it emphasizes that the following result becomes possible ONLY once the first action is fully completed, often implying that it took more effort or steps than expected.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "동사 어간 + 고서야",
+     "content": "벗기다→벗기고서야, 듣다→듣고서야, 보다→보고서야",
+     "note": "받침 상관없이 항상 고서야"
+    },
+    {
+     "type": "green",
+     "label": "그 전엔 불가능 — 순서 강조",
+     "content": "몇겹을 벗기고서야 과자를 먹을 수 있다\n→ 벗기기 전에는 절대 먹을 수 없었다는 뜻",
+     "note": "단순한 순서(-고 나서)보다 '그제서야 비로소'라는 느낌이 강해요"
+    },
+    {
+     "type": "amber",
+     "label": "-고 나서 vs -고서야",
+     "content": "-고 나서: 단순히 그다음에 (감정 중립)\n-고서야: 그것을 하고 나서야 비로소 (수고로움·의외성 강조)",
+     "note": "이 에피소드는 포장이 너무 많아서 힘들었다는 뉘앙스라 고서야가 딱이에요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
+       "en": "It's wrapped and wrapped again — you can only eat the snack after peeling off several layers."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "몇 번을 설명하고서야 이해했어요.",
+       "en": "Only after explaining it several times did they understand."
+      },
+      {
+       "ko": "두 시간을 기다리고서야 병원에 들어갈 수 있었어요.",
+       "en": "Only after waiting two hours could I get into the doctor's office."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "열쇠를 다 ___ 문이 열렸어요. (찾다)",
+     "answer": "찾고서야",
+     "hint": "그 행동을 하고 나서야 비로소"
+    }
+   ]
+  },
+  {
+   "id": "g09_l4_aeoseoya",
+   "tier": "core",
+   "title": "-아/어서야",
+   "title_en": "Given How... (Rhetorical 'How Could You Possibly')",
+   "emoji": "😤",
+   "pattern": "형용사/동사 어간 + -아/어서야 (+ 되겠어요?/하겠어요?, 흔히 생략) — 상태가 너무 극단적이라 뒷일이 불가능하다는 걸 반문으로 강조",
+   "scene_example": {
+    "korean": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.",
+    "english": "With recycling being this complicated, there's no way to do it properly.",
+    "highlight": "복잡해서야"
+   },
+   "explanation_en": "-아/어서야, unlike -고서야, comes from -아/어서 (reason/cause) plus 야. It's used with a following rhetorical question (되겠어요?/하겠어요?, often omitted like here) to say 'given how extreme this is, how could [the expected result] possibly happen?' It has a complaining or exasperated tone — pointing out a situation is so bad that success is basically impossible.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형용사/동사 어간 + 아/어서야",
+     "content": "복잡하다→복잡해서야, 어렵다→어려워서야, 힘들다→힘들어서야",
+     "note": "아/어 규칙은 -아요/어요와 동일"
+    },
+    {
+     "type": "green",
+     "label": "뒤에 반문이 따라옴 (생략 가능)",
+     "content": "복잡해서야 (제대로) 하겠냐고 = 이렇게 복잡한데 어떻게 제대로 하겠냐는 뜻\n뒤의 반문은 대화에서 자주 생략돼요",
+     "note": "'-겠어?/-겠냐고' 같은 반문과 세트로 쓰여요"
+    },
+    {
+     "type": "amber",
+     "label": "-고서야 vs -아/어서야 헷갈리지 않기",
+     "content": "-고서야: 동작을 완료한 후에야 (순서)\n-아/어서야: 상태가 이 정도로 심해서야 (원인+반문, 불평 톤)",
+     "note": "형태는 비슷해도 완전히 다른 문법이에요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.",
+       "en": "With recycling being this complicated, there's no way to do it properly."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "이렇게 시끄러워서야 잠을 잘 수가 있나요?",
+       "en": "How could anyone possibly sleep with it this noisy?"
+      },
+      {
+       "ko": "이 가격에 이렇게 작아서야 누가 사겠어요?",
+       "en": "Who would buy it when it's this small for the price?"
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "글씨가 이렇게 ___ 읽을 수가 있나요? (작다)",
+     "answer": "작아서야",
+     "hint": "상태가 심해서 뒷일이 불가능하다는 반문"
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "한국의 분리수거 — 왜 이렇게 복잡할까?",
+   "title_en": "Korean Recycling — Why So Complicated?",
+   "explanation_en": "Korea has one of the most detailed recycling systems in the world. General (non-recyclable) trash must go in official pay-per-bag 종량제 bags, sold at local stores. Recyclables are sorted by material — PET bottles need their label band (띠) removed and cap taken off, styrofoam (스티로폼) is collected separately, and cardboard must be flattened. Every apartment building's 관리사무소 (management office) posts a 설명서 (guide) explaining exactly what's 해당 (applicable) for each category, since the rules vary slightly by city.",
+   "examples": [
+    {
+     "ko": "페트병에 있는 띠도 다 제거해야 되죠?",
+     "en": "We have to remove the label band on the plastic bottles too, right?"
+    },
+    {
+     "ko": "관리사무소에서 나온 안내문을 잘 읽어 봐.",
+     "en": "Read the notice from the management office carefully."
+    }
+   ]
+  },
+  {
+   "title": "잔소리 톤 표현 — 부모님이 자주 쓰는 문법",
+   "title_en": "Nagging-Tone Grammar — What Parents Say a Lot",
+   "explanation_en": "-다가는 and -아/어서야 both show up a lot in parents' complaints and warnings — one warns about a bad future if you keep doing something, the other complains that a situation is too extreme for things to work out. Recognizing this tone helps you catch when someone (like a parent, or a grandma in this episode) is venting frustration rather than stating a neutral fact.",
+   "examples": [
+    {
+     "ko": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
+     "en": "If we keep putting it off, the house is going to overflow with trash. (-다가는, warning)"
+    },
+    {
+     "ko": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.",
+     "en": "With it being this complicated, there's no way to do it properly. (-아/어서야, complaint)"
+    }
+   ]
+  }
+ ],
+ "pronunciation": {
+  "title": "발음 규칙 · Pronunciation Rules",
+  "items": [
+   {
+    "rule": "겹받침 ㄶ + 모음 → ㅎ 탈락 + 연음화 (많아요)",
+    "tip": "겹받침 ㄶ 뒤에 모음이 오면 ㅎ이 사라지고 ㄴ이 다음 음절로 넘어가요 · The ㅎ in the double batchim ㄶ disappears before a vowel, and the ㄴ links over.",
+    "examples": [
+     {
+      "written": "많아요",
+      "pronounced_standard": "[마나요]",
+      "pronounced_actual": "[마나요]",
+      "note": "ㅎ 탈락 + 연음화"
+     }
     ]
-  },
-  "banmal_jondaemal": {
-    "intro_ko": "이 에피소드에서 라온 엄마는 아이들에게 반말을 쓰고, 라온과 태오는 엄마에게 존댓말을 써요. 부모-자녀 사이의 반말/존댓말도 집집마다 달라요 — 이 가족은 아이들이 엄마에게 존댓말을 쓰는 스타일이에요.",
-    "intro_en": "In this episode, Raon's mom speaks casually (반말) to the kids, while Raon and Taeo speak politely (존댓말) to her. Speech level between parents and kids also varies by family — in this family, the kids happen to use polite speech with their mom.",
-    "rows": [
-      {
-        "situation_ko": "엄마 → 아이들 (반말)",
-        "situation_en": "Mom → kids (casual)",
-        "banmal": "얘들아 쓰레기 정리 좀 도와줄래?",
-        "jondaemal": "(아이들에게는 보통 반말로 부탁해요)",
-        "note": "부모가 자녀에게 부탁할 때도 반말이 자연스러워요"
-      },
-      {
-        "situation_ko": "라온 → 엄마 (존댓말)",
-        "situation_en": "Raon → mom (polite)",
-        "banmal": "(이 가족 아이들은 엄마에게 반말을 쓰지 않아요)",
-        "jondaemal": "포장지 쓰레기가 왜 이렇게 많아요?",
-        "note": "이 가족은 아이들이 부모에게 존댓말을 쓰는 스타일이에요"
-      },
-      {
-        "situation_ko": "태오 → 엄마 (존댓말, 할머니 말 전달)",
-        "situation_en": "Taeo → mom (polite, relaying grandma's words)",
-        "banmal": "(할머니 본인의 말은 반말/존댓말 알 수 없음 — 전달된 내용)",
-        "jondaemal": "할머니는 ... 싶으시대요.",
-        "note": "-으시대요 = -으시다고 해요의 축약, 다른 사람 말을 존댓말로 전할 때 자주 써요"
-      }
-    ],
-    "tip": "부모-자녀 사이의 반말/존댓말은 가족마다 스타일이 달라요. 이 가족처럼 아이들이 부모에게 존댓말을 쓰는 집도 있고, 서로 반말을 쓰는 집도 있어요 — 정해진 정답은 없어요."
-  },
-  "real_life": [
-    {
-      "type": "tip",
-      "title": "🇰🇷 쓰레기 종량제 — 봉투부터 사야 버릴 수 있어요",
-      "content_ko": "한국은 1995년부터 '쓰레기 종량제'를 실시하고 있어요. 일반 쓰레기는 아무 봉지에나 넣어서 버릴 수 없고, 각 지역에서 정한 종량제 봉투를 돈을 주고 사서 그 안에 넣어야만 버릴 수 있어요. 반면 재활용품(페트병, 종이, 캔 등)은 분리만 잘 하면 무료로 배출할 수 있어요 — 그래서 분리수거를 잘 하면 종량제 봉투도 덜 사게 돼요.",
-      "content_en": "Korea has used a volume-based waste fee system (쓰레기 종량제) since 1995. You can't just throw general trash out in any bag — you have to buy officially designated 종량제 bags for your area and use those. Recyclables (PET bottles, paper, cans, etc.), on the other hand, can be put out for free if sorted correctly — so sorting well also means buying fewer 종량제 bags."
-    },
-    {
-      "type": "kakao",
-      "title": "💬 라온이 친구한테 분리수거 힘들다고 카톡해요",
-      "messages": [
-        { "speaker": "라온", "side": "right", "text": "오늘 분리수거 도와드렸는데 진짜 복잡하더라", "en": "I helped with recycling today and it was seriously complicated" },
-        { "speaker": "친구", "side": "left", "text": "뭐가 그렇게 복잡해?", "en": "What's so complicated about it?" },
-        { "speaker": "라온", "side": "right", "text": "페트병 띠도 떼고, 스티로폼도 따로, 종이도 따로... 골치 아파", "en": "Gotta take off the bottle label, styrofoam separate, paper separate... it's such a headache" },
-        { "speaker": "친구", "side": "left", "text": "그래도 지구를 위해서 좋은 일이잖아 ㅎㅎ", "en": "Still, it's a good thing for the planet haha" }
-      ]
-    },
-    {
-      "type": "reading",
-      "id": "rl_read_ep09",
-      "title": "📖 페트병 하나를 버리는 순서",
-      "title_en": "The Steps to Throw Away One Plastic Bottle",
-      "setup_ko": "페트병을 올바르게 분리배출하는 순서에 대한 짧은 글이에요.",
-      "setup_en": "A short passage about the correct steps for recycling a PET bottle.",
-      "passage": "페트병을 버릴 때는 몇 가지 순서를 지켜야 한다. 먼저 안에 남은 내용물을 비우고 물로 헹군다. 그다음, 겉에 붙어 있는 라벨 띠를 완전히 제거한다. 뚜껑은 페트병과 재질이 다르기 때문에 따로 분리해서 버려야 한다. 마지막으로 페트병을 손으로 눌러 압착한 후 배출하면 부피도 줄고 처리도 더 쉬워진다.",
-      "passage_en": "There's a set order to follow when recycling a PET bottle. First, empty out any remaining contents and rinse with water. Next, completely remove the label band from the outside. The cap must be separated and disposed of separately, since it's made of a different material than the bottle. Finally, pressing the bottle flat before putting it out reduces its volume and makes processing easier.",
-      "questions": [
-        { "question_ko": "페트병 뚜껑을 따로 분리해야 하는 이유는?", "question_en": "Why does the bottle cap need to be separated?", "options": ["재질이 페트병과 달라서", "뚜껑이 너무 작아서", "뚜껑에 라벨이 있어서"], "answer": 0 },
-        { "question_ko": "페트병을 압착해서 버리면 좋은 점은?", "question_en": "What's the benefit of flattening the bottle before disposal?", "options": ["부피가 줄고 처리가 쉬워진다", "재활용이 안 된다", "냄새가 안 난다"], "answer": 0 }
-      ]
-    }
-  ],
-  "quiz": [
-    {
-      "id": "q09l4_1",
-      "audio_text": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.", "쓰레기를 이미 다 버렸어.", "집에 쓰레기가 하나도 없어.", "며칠 후에 쓰레기를 버릴 거야."],
-      "answer": 0,
-      "explanation": "지금처럼 계속 미루면 안 좋은 결과(쓰레기 넘침)가 온다고 경고하고 있어요."
-    },
-    {
-      "id": "q09l4_2",
-      "question_ko": "'-다가는'의 뜻으로 가장 알맞은 것은?",
-      "question_en": "What does -다가는 mean?",
-      "options": ["지금 행동을 계속하면 안 좋은 결과가 생긴다는 경고", "과거의 일을 회상함", "단순한 사실 나열", "명령"],
-      "answer": 0,
-      "explanation": "-다가는은 지금 하는 행동을 계속하면 안 좋은 결과가 생길 거라는 경고예요."
-    },
-    {
-      "id": "q09l4_3",
-      "audio_text": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["포장이 하나도 없어서 바로 먹을 수 있다.", "몇 겹을 다 벗기고 나서야 과자를 먹을 수 있다.", "과자를 먹기 전에 포장을 하나도 안 벗겼다.", "포장지가 재활용이 안 된다."],
-      "answer": 1,
-      "explanation": "몇 겹을 다 벗겨야만 비로소 과자를 먹을 수 있었다는 뜻이에요."
-    },
-    {
-      "id": "q09l4_4",
-      "question_ko": "'-고서야'와 '-아/어서야'의 차이로 가장 알맞은 것은?",
-      "question_en": "What's the difference between -고서야 and -아/어서야?",
-      "options": ["둘 다 완전히 똑같은 뜻이다", "-고서야는 동작 완료 후 비로소, -아/어서야는 상태가 심해서 반문", "-고서야는 반문, -아/어서야는 순서를 나타낸다", "-아/어서야는 동사에만 붙는다"],
-      "answer": 1,
-      "explanation": "-고서야는 동작을 끝낸 후에야 비로소를, -아/어서야는 상태가 너무 심해서 뒷일이 불가능하다는 반문을 나타내요."
-    },
-    {
-      "id": "q09l4_5",
-      "audio_text": "관리사무소에서 나온 안내문을 잘 읽어 봐.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["안내문을 버려도 된다.", "관리사무소에 직접 가서 물어봐야 한다.", "관리사무소에서 나온 안내문을 잘 읽어 봐야 한다.", "안내문은 필요 없다."],
-      "answer": 2,
-      "explanation": "분리수거 방법은 관리사무소 안내문을 읽어 보라고 말하고 있어요."
-    },
-    {
-      "id": "q09l4_6",
-      "audio_text": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.",
-      "question_ko": "'복잡해서야'가 표현하는 말투로 가장 알맞은 것은?",
-      "question_en": "What tone does 복잡해서야 express here?",
-      "options": ["기쁘고 만족스러운 톤", "너무 복잡해서 불가능하다는 불평 섞인 반문", "차분하고 중립적인 설명", "칭찬하는 톤"],
-      "answer": 1,
-      "explanation": "-아/어서야는 상태가 너무 심해서 뒷일이 불가능하다는 걸 반문하며 불평하는 톤이에요."
-    }
-  ],
-  "self_check": [
-    { "ko": "-다가는으로 지금 행동을 계속하면 안 좋은 결과가 온다고 경고할 수 있어요.", "en": "I can use -다가는 to warn that continuing an action will lead to a bad result." },
-    { "ko": "-고서야로 어떤 행동을 끝내야만 비로소 다음 일이 가능해짐을 말할 수 있어요.", "en": "I can use -고서야 to say something becomes possible only after finishing an action." },
-    { "ko": "-아/어서야로 상태가 심해서 뒷일이 불가능하다는 반문을 표현할 수 있어요.", "en": "I can use -아/어서야 to rhetorically express that a state is too extreme for something to work out." },
-    { "ko": "한국의 쓰레기 종량제와 분리수거 기본 원칙을 설명할 수 있어요.", "en": "I can explain the basics of Korea's pay-per-bag waste system and recycling rules." },
-    { "ko": "페트병을 올바르게 분리배출하는 순서를 말할 수 있어요.", "en": "I can describe the correct steps for recycling a PET bottle." }
+   },
+   {
+    "rule": "겹받침 ㄺ + 모음 → 연음화 (읽어)",
+    "tip": "겹받침 ㄺ(ㄹ+ㄱ) 뒤에 모음이 오면 ㄱ이 다음 음절로 넘어가요 · The ㄱ in the double batchim ㄺ links to the next syllable before a vowel.",
+    "examples": [
+     {
+      "written": "읽어",
+      "pronounced_standard": "[일거]",
+      "pronounced_actual": "[일거]",
+      "note": "ㄺ 연음화"
+     }
+    ]
+   },
+   {
+    "rule": "받침 ㅎ + 모음 → ㅎ 탈락 (쌓여)",
+    "tip": "받침 ㅎ 뒤에 모음이 오면 ㅎ이 소리 나지 않아요 · A batchim ㅎ disappears before a following vowel.",
+    "examples": [
+     {
+      "written": "쌓여",
+      "pronounced_standard": "[싸여]",
+      "pronounced_actual": "[싸여]",
+      "note": "ㅎ 탈락"
+     }
+    ]
+   }
   ]
+ },
+ "banmal_jondaemal": {
+  "intro_ko": "이 에피소드에서 라온 엄마는 아이들에게 반말을 쓰고, 라온과 태오는 엄마에게 존댓말을 써요. 부모-자녀 사이의 반말/존댓말도 집집마다 달라요 — 이 가족은 아이들이 엄마에게 존댓말을 쓰는 스타일이에요.",
+  "intro_en": "In this episode, Raon's mom speaks casually (반말) to the kids, while Raon and Taeo speak politely (존댓말) to her. Speech level between parents and kids also varies by family — in this family, the kids happen to use polite speech with their mom.",
+  "rows": [
+   {
+    "situation_ko": "엄마 → 아이들 (반말)",
+    "situation_en": "Mom → kids (casual)",
+    "banmal": "얘들아 쓰레기 정리 좀 도와줄래?",
+    "jondaemal": "(아이들에게는 보통 반말로 부탁해요)",
+    "note": "부모가 자녀에게 부탁할 때도 반말이 자연스러워요"
+   },
+   {
+    "situation_ko": "라온 → 엄마 (존댓말)",
+    "situation_en": "Raon → mom (polite)",
+    "banmal": "(이 가족 아이들은 엄마에게 반말을 쓰지 않아요)",
+    "jondaemal": "포장지 쓰레기가 왜 이렇게 많아요?",
+    "note": "이 가족은 아이들이 부모에게 존댓말을 쓰는 스타일이에요"
+   },
+   {
+    "situation_ko": "태오 → 엄마 (존댓말, 할머니 말 전달)",
+    "situation_en": "Taeo → mom (polite, relaying grandma's words)",
+    "banmal": "(할머니 본인의 말은 반말/존댓말 알 수 없음 — 전달된 내용)",
+    "jondaemal": "할머니는 ... 싶으시대요.",
+    "note": "-으시대요 = -으시다고 해요의 축약, 다른 사람 말을 존댓말로 전할 때 자주 써요"
+   }
+  ],
+  "tip": "부모-자녀 사이의 반말/존댓말은 가족마다 스타일이 달라요. 이 가족처럼 아이들이 부모에게 존댓말을 쓰는 집도 있고, 서로 반말을 쓰는 집도 있어요 — 정해진 정답은 없어요."
+ },
+ "real_life": [
+  {
+   "type": "tip",
+   "title": "🇰🇷 쓰레기 종량제 — 봉투부터 사야 버릴 수 있어요",
+   "content_ko": "한국은 1995년부터 '쓰레기 종량제'를 실시하고 있어요. 일반 쓰레기는 아무 봉지에나 넣어서 버릴 수 없고, 각 지역에서 정한 종량제 봉투를 돈을 주고 사서 그 안에 넣어야만 버릴 수 있어요. 반면 재활용품(페트병, 종이, 캔 등)은 분리만 잘 하면 무료로 배출할 수 있어요 — 그래서 분리수거를 잘 하면 종량제 봉투도 덜 사게 돼요.",
+   "content_en": "Korea has used a volume-based waste fee system (쓰레기 종량제) since 1995. You can't just throw general trash out in any bag — you have to buy officially designated 종량제 bags for your area and use those. Recyclables (PET bottles, paper, cans, etc.), on the other hand, can be put out for free if sorted correctly — so sorting well also means buying fewer 종량제 bags."
+  },
+  {
+   "type": "kakao",
+   "title": "💬 라온이 친구한테 분리수거 힘들다고 카톡해요",
+   "messages": [
+    {
+     "speaker": "라온",
+     "side": "right",
+     "text": "오늘 분리수거 도와드렸는데 진짜 복잡하더라",
+     "en": "I helped with recycling today and it was seriously complicated"
+    },
+    {
+     "speaker": "친구",
+     "side": "left",
+     "text": "뭐가 그렇게 복잡해?",
+     "en": "What's so complicated about it?"
+    },
+    {
+     "speaker": "라온",
+     "side": "right",
+     "text": "페트병 띠도 떼고, 스티로폼도 따로, 종이도 따로... 골치 아파",
+     "en": "Gotta take off the bottle label, styrofoam separate, paper separate... it's such a headache"
+    },
+    {
+     "speaker": "친구",
+     "side": "left",
+     "text": "그래도 지구를 위해서 좋은 일이잖아 ㅎㅎ",
+     "en": "Still, it's a good thing for the planet haha"
+    }
+   ]
+  },
+  {
+   "type": "reading",
+   "id": "rl_read_ep09",
+   "title": "📖 페트병 하나를 버리는 순서",
+   "title_en": "The Steps to Throw Away One Plastic Bottle",
+   "setup_ko": "페트병을 올바르게 분리배출하는 순서에 대한 짧은 글이에요.",
+   "setup_en": "A short passage about the correct steps for recycling a PET bottle.",
+   "passage": "페트병을 버릴 때는 몇 가지 순서를 지켜야 한다. 먼저 안에 남은 내용물을 비우고 물로 헹군다. 그다음, 겉에 붙어 있는 라벨 띠를 완전히 제거한다. 뚜껑은 페트병과 재질이 다르기 때문에 따로 분리해서 버려야 한다. 마지막으로 페트병을 손으로 눌러 압착한 후 배출하면 부피도 줄고 처리도 더 쉬워진다.",
+   "passage_en": "There's a set order to follow when recycling a PET bottle. First, empty out any remaining contents and rinse with water. Next, completely remove the label band from the outside. The cap must be separated and disposed of separately, since it's made of a different material than the bottle. Finally, pressing the bottle flat before putting it out reduces its volume and makes processing easier.",
+   "questions": [
+    {
+     "question_ko": "페트병 뚜껑을 따로 분리해야 하는 이유는?",
+     "question_en": "Why does the bottle cap need to be separated?",
+     "options": [
+      "재질이 페트병과 달라서",
+      "뚜껑이 너무 작아서",
+      "뚜껑에 라벨이 있어서"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "페트병을 압착해서 버리면 좋은 점은?",
+     "question_en": "What's the benefit of flattening the bottle before disposal?",
+     "options": [
+      "부피가 줄고 처리가 쉬워진다",
+      "재활용이 안 된다",
+      "냄새가 안 난다"
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q09l4_1",
+   "audio_text": "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "며칠 더 버티다가는 집이 쓰레기로 넘쳐나겠어.",
+    "쓰레기를 이미 다 버렸어.",
+    "집에 쓰레기가 하나도 없어.",
+    "며칠 후에 쓰레기를 버릴 거야."
+   ],
+   "answer": 0,
+   "explanation": "지금처럼 계속 미루면 안 좋은 결과(쓰레기 넘침)가 온다고 경고하고 있어요."
+  },
+  {
+   "id": "q09l4_2",
+   "question_ko": "'-다가는'의 뜻으로 가장 알맞은 것은?",
+   "question_en": "What does -다가는 mean?",
+   "options": [
+    "지금 행동을 계속하면 안 좋은 결과가 생긴다는 경고",
+    "과거의 일을 회상함",
+    "단순한 사실 나열",
+    "명령"
+   ],
+   "answer": 0,
+   "explanation": "-다가는은 지금 하는 행동을 계속하면 안 좋은 결과가 생길 거라는 경고예요."
+  },
+  {
+   "id": "q09l4_3",
+   "audio_text": "싸고 또 싸서 몇겹을 벗기고서야 과자를 먹을 수 있잖아요.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "포장이 하나도 없어서 바로 먹을 수 있다.",
+    "몇 겹을 다 벗기고 나서야 과자를 먹을 수 있다.",
+    "과자를 먹기 전에 포장을 하나도 안 벗겼다.",
+    "포장지가 재활용이 안 된다."
+   ],
+   "answer": 1,
+   "explanation": "몇 겹을 다 벗겨야만 비로소 과자를 먹을 수 있었다는 뜻이에요."
+  },
+  {
+   "id": "q09l4_4",
+   "question_ko": "'-고서야'와 '-아/어서야'의 차이로 가장 알맞은 것은?",
+   "question_en": "What's the difference between -고서야 and -아/어서야?",
+   "options": [
+    "둘 다 완전히 똑같은 뜻이다",
+    "-고서야는 동작 완료 후 비로소, -아/어서야는 상태가 심해서 반문",
+    "-고서야는 반문, -아/어서야는 순서를 나타낸다",
+    "-아/어서야는 동사에만 붙는다"
+   ],
+   "answer": 1,
+   "explanation": "-고서야는 동작을 끝낸 후에야 비로소를, -아/어서야는 상태가 너무 심해서 뒷일이 불가능하다는 반문을 나타내요."
+  },
+  {
+   "id": "q09l4_5",
+   "audio_text": "관리사무소에서 나온 안내문을 잘 읽어 봐.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "안내문을 버려도 된다.",
+    "관리사무소에 직접 가서 물어봐야 한다.",
+    "관리사무소에서 나온 안내문을 잘 읽어 봐야 한다.",
+    "안내문은 필요 없다."
+   ],
+   "answer": 2,
+   "explanation": "분리수거 방법은 관리사무소 안내문을 읽어 보라고 말하고 있어요."
+  },
+  {
+   "id": "q09l4_6",
+   "audio_text": "쓰레기 분류가 이렇게 복잡해서야 제대로 하겠냐고.",
+   "question_ko": "'복잡해서야'가 표현하는 말투로 가장 알맞은 것은?",
+   "question_en": "What tone does 복잡해서야 express here?",
+   "options": [
+    "기쁘고 만족스러운 톤",
+    "너무 복잡해서 불가능하다는 불평 섞인 반문",
+    "차분하고 중립적인 설명",
+    "칭찬하는 톤"
+   ],
+   "answer": 1,
+   "explanation": "-아/어서야는 상태가 너무 심해서 뒷일이 불가능하다는 걸 반문하며 불평하는 톤이에요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "-다가는으로 지금 행동을 계속하면 안 좋은 결과가 온다고 경고할 수 있어요.",
+   "en": "I can use -다가는 to warn that continuing an action will lead to a bad result."
+  },
+  {
+   "ko": "-고서야로 어떤 행동을 끝내야만 비로소 다음 일이 가능해짐을 말할 수 있어요.",
+   "en": "I can use -고서야 to say something becomes possible only after finishing an action."
+  },
+  {
+   "ko": "-아/어서야로 상태가 심해서 뒷일이 불가능하다는 반문을 표현할 수 있어요.",
+   "en": "I can use -아/어서야 to rhetorically express that a state is too extreme for something to work out."
+  },
+  {
+   "ko": "한국의 쓰레기 종량제와 분리수거 기본 원칙을 설명할 수 있어요.",
+   "en": "I can explain the basics of Korea's pay-per-bag waste system and recycling rules."
+  },
+  {
+   "ko": "페트병을 올바르게 분리배출하는 순서를 말할 수 있어요.",
+   "en": "I can describe the correct steps for recycling a PET bottle."
+  }
+ ]
 }

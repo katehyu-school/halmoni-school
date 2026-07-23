@@ -1,839 +1,861 @@
 {
-  "id": "ep07",
-  "level": "L3",
-  "title": "갈비를 맛있게 먹으려면",
-  "title_en": "If You Want to Eat Galbi Deliciously",
-  "scene": "🥩 숯불갈비집 · Korean BBQ Restaurant",
-  "goal": {
-    "ko": "목적(-기 위해서)과 조건(-(으)려면, -(으)ㄹ수록)으로 방법을 설명할 수 있어요!",
-    "en": "I can explain how to do something using -기 위해서, -(으)려면, and -(으)ㄹ수록!"
+ "id": "ep07",
+ "level": "L3",
+ "title": "갈비를 맛있게 먹으려면",
+ "title_en": "If You Want to Eat Galbi Deliciously",
+ "scene": "🍽️ 음식·요리 · Food & Cooking",
+ "goal": {
+  "ko": "목적(-기 위해서)과 조건(-(으)려면, -(으)ㄹ수록)으로 방법을 설명할 수 있어요!",
+  "en": "I can explain how to do something using -기 위해서, -(으)려면, and -(으)ㄹ수록!"
+ },
+ "key_points": [
+  "-기 위해서 — in order to (purpose)",
+  "-(으)려면 — if you want to / in order to (condition)",
+  "-(으)ㄹ수록 — the more ~, the more ~ (proportional relationship)",
+  "쌈 문화 — Korean BBQ wrap culture",
+  "만능 양념 — the all-purpose Korean sauce"
+ ],
+ "characters": [
+  {
+   "id": "mirae",
+   "name": "보미",
+   "name_en": "Bomi",
+   "color": "#E07060",
+   "role": "Korean BBQ expert 😄"
   },
-  "key_points": [
-    "-기 위해서 — in order to (purpose)",
-    "-(으)려면 — if you want to / in order to (condition)",
-    "-(으)ㄹ수록 — the more ~, the more ~ (proportional relationship)",
-    "쌈 문화 — Korean BBQ wrap culture",
-    "만능 양념 — the all-purpose Korean sauce"
-  ],
-  "characters": [
-    {
-      "id": "mirae",
-      "name": "보미",
-      "name_en": "Bomi",
-      "color": "#E07060",
-      "role": "Korean BBQ expert 😄"
-    },
-    {
-      "id": "olivia",
-      "name": "올리비아",
-      "name_en": "Olivia",
-      "color": "#4A90D9",
-      "role": "curious friend"
-    }
-  ],
-  "slides": [
-    "data/nhs/L3/slides/ep07/숯불갈비1.png",
-    "data/nhs/L3/slides/ep07/숯불갈비2.png",
-    "data/nhs/L3/slides/ep07/숯불갈비3.png",
-    "data/nhs/L3/slides/ep07/숯불갈비4.png",
-    "data/nhs/L3/slides/ep07/숯불갈비5.png",
-    "data/nhs/L3/slides/ep07/숯불갈비6.png",
-    "data/nhs/L3/slides/ep07/숯불갈비7.png",
-    "data/nhs/L3/slides/ep07/숯불갈비8.png",
-    "data/nhs/L3/slides/ep07/숯불갈비9.png",
-    "data/nhs/L3/slides/ep07/숯불갈비10.png",
-    "data/nhs/L3/slides/ep07/숯불갈비11.png",
-    "data/nhs/L3/slides/ep07/숯불갈비12.png",
-    "data/nhs/L3/slides/ep07/숯불갈비13.png",
-    "data/nhs/L3/slides/ep07/숯불갈비14.png",
-    "data/nhs/L3/slides/ep07/숯불갈비15.png",
-    "data/nhs/L3/slides/ep07/숯불갈비16.png",
-    "data/nhs/L3/slides/ep07/숯불갈비17.png",
-    "data/nhs/L3/slides/ep07/숯불갈비18.png",
-    "data/nhs/L3/slides/ep07/숯불갈비19.png",
-    "data/nhs/L3/slides/ep07/숯불갈비20.png"
-  ],
-  "script": [
-    {
-      "speaker": "mirae",
-      "text": "갈비를 맛있게 먹기 위해서 필요한 게 뭔지 알아?",
-      "translation": "Do you know what you need in order to eat galbi deliciously?",
-      "slide": 0,
-      "audio": "data/nhs/L3/TTS/ep07/audio_0_갈비를_맛있게_먹기_위해서_필요한_게_뭔지_알아_.mp3",
-      "annotation": {
-        "highlight": "먹기 위해서",
-        "grammar": "-기 위해서",
-        "note": "먹기 위해서 = in order to eat\n동사 기본형 + -기 위해서\n= for the purpose of / in order to\n목적을 나타내요!"
-      }
-    },
-    {
-      "speaker": "olivia",
-      "text": "몰라. 뭔데?",
-      "translation": "I don't know. What is it?",
-      "slide": 1,
-      "audio": "data/nhs/L3/TTS/ep07/audio_1_몰라__뭔데_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "신선한 야채야.",
-      "translation": "Fresh vegetables!",
-      "slide": 2,
-      "audio": "data/nhs/L3/TTS/ep07/audio_2_신선한_야채야_.mp3"
-    },
-    {
-      "speaker": "olivia",
-      "text": "아 이거. 샐러드야?",
-      "translation": "Oh, this. Is it a salad?",
-      "slide": 3,
-      "audio": "data/nhs/L3/TTS/ep07/audio_3_아_이거__샐러드야_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "한국식 샐러드라고 할까?",
-      "translation": "You could call it a Korean-style salad?",
-      "slide": 4,
-      "audio": "data/nhs/L3/TTS/ep07/audio_4_한국식_샐러드라고_할까_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "한국은 고기 따로 야채 따로 먹지 않고, 모두 한꺼번에 싸서 입에 넣어.",
-      "translation": "In Korea, we don't eat meat and vegetables separately — we wrap everything together and put it in our mouth at once.",
-      "slide": 5,
-      "audio": "data/nhs/L3/TTS/ep07/audio_5_한국은_고기_따로_야채_따로_먹지_않고__모두_한꺼번에_싸서_입에_넣어_.mp3",
-      "annotation": {
-        "highlight": "한꺼번에 싸서",
-        "grammar": "싸다 (to wrap) + -아서",
-        "note": "쌈 = the Korean wrap!\n한꺼번에 = all at once (in one go)\n싸서 = wrapping and then → putting in mouth"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "아주 효율적이지?",
-      "translation": "Very efficient, right?",
-      "slide": 6,
-      "audio": "data/nhs/L3/TTS/ep07/audio_6_아주_효율적이지_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "쌈채소로는 여기 있는 상추, 깻잎은 물론이고,",
-      "translation": "As for ssam vegetables, lettuce and perilla leaves are a given,",
-      "slide": 7,
-      "audio": "data/nhs/L3/TTS/ep07/audio_7_쌈채소로는_여기_있는_상추__깻잎은_물론이고_.mp3",
-      "annotation": {
-        "highlight": "물론이고",
-        "grammar": "물론 (of course) + -이고",
-        "note": "물론이고 = of course / naturally / goes without saying\n상추, 깻잎은 물론이고 = lettuce and perilla are a given, and also...\n= not only A, but also..."
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "거의 모든 푸른 색 야채는 다 쌈으로 먹을 수 있대.",
-      "translation": "They say almost any green vegetable can be eaten as a wrap.",
-      "slide": 8,
-      "audio": "data/nhs/L3/TTS/ep07/audio_8_거의_모든_푸른_색_야채는_다_쌈으로_먹을_수_있대_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "우리 할머니는 마당의 잡초는 다 약초라고 생각하셔.",
-      "translation": "My grandma thinks all the weeds in the yard are medicinal herbs.",
-      "slide": 9,
-      "audio": "data/nhs/L3/TTS/ep07/audio_9_우리_할머니는_마당의_잡초는_다_약초라고_생각하셔_.mp3",
-      "annotation": {
-        "highlight": "마당의",
-        "grammar": "의 발음",
-        "note": "의 possessive → often pronounced [에] in speech!\n마당의 잡초 → [마당에 잡초]\n글자: 의 / 소리: [에] ← 조사로 쓰일 때"
-      }
-    },
-    {
-      "speaker": "olivia",
-      "text": "하하. 드레싱을 만들려면 어떻게 해?",
-      "translation": "Ha ha. If I want to make the dressing, how do I do it?",
-      "slide": 10,
-      "audio": "data/nhs/L3/TTS/ep07/audio_10_하하__드레싱을_만들려면_어떻게_해_.mp3",
-      "annotation": {
-        "highlight": "만들려면",
-        "grammar": "-(으)려면",
-        "note": "만들다 + -(으)려면 → 만들려면\n= if you want to make / in order to make\n조건: '~하고 싶으면' 또는 '~하기 위해서는'"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "양념은 마늘 다진 것, 간장, 고춧가루, 식초, 매실청.",
-      "translation": "The sauce is: minced garlic, soy sauce, red pepper powder, vinegar, plum syrup.",
-      "slide": 11,
-      "audio": "data/nhs/L3/TTS/ep07/audio_11_양념은_마늘_다진_것__간장__고춧가루__식초__매실청_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "매실청이 없으면 설탕을 넣어.",
-      "translation": "If you don't have plum syrup, just add sugar.",
-      "slide": 12,
-      "audio": "data/nhs/L3/TTS/ep07/audio_12_매실청이_없으면_설탕을_넣어_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "마지막에 참기름을 한바퀴 휘리릭, 깨소금을 톡 톡 넣으면 끝!",
-      "translation": "Finally, drizzle sesame oil around once — whoosh — and sprinkle sesame salt, tap tap, and you're done!",
-      "slide": 13,
-      "audio": "data/nhs/L3/TTS/ep07/audio_13_마지막에_참기름을_한바퀴_휘리릭__깨소금을_톡_톡_넣으면_끝_.mp3",
-      "annotation": {
-        "highlight": "휘리릭 / 톡 톡",
-        "grammar": "의성어/의태어",
-        "note": "휘리릭 = whoosh! (sound of drizzling oil in a circle)\n톡 톡 = tap tap (sprinkle lightly)\n한국어에 이런 생동감 있는 표현이 정말 많아요!"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "이 만능 양념을 넣으면 모든 야채가 맛있는 생무침이 되는거야.",
-      "translation": "When you add this all-purpose sauce, any vegetable becomes a delicious fresh salad.",
-      "slide": 14,
-      "audio": "data/nhs/L3/TTS/ep07/audio_14_이_만능_양념을_넣으면_모든_야채가_맛있는_생무침이_되는거야_.mp3",
-      "annotation": {
-        "highlight": "만능 양념",
-        "grammar": "만능 (all-purpose)",
-        "note": "만능(萬能) = all-purpose, works for everything\n생무침 = fresh seasoned vegetables (raw, not cooked)\n무치다 = to season/toss with sauce"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "고기를 맛있게 먹으려면 쌈채소 위에 고기 한 점을 올리고,",
-      "translation": "If you want to eat the meat deliciously, place one piece of meat on the ssam leaf,",
-      "slide": 15,
-      "audio": "data/nhs/L3/TTS/ep07/audio_15_고기를_맛있게_먹으려면_쌈채소_위에_고기_한_점을_올리고_.mp3",
-      "annotation": {
-        "highlight": "먹으려면",
-        "grammar": "-(으)려면",
-        "note": "먹다 + -(으)려면 → 먹으려면\n= if you want to eat / in order to eat\n이 에피소드에서 3번 나와요!\n만들려면 / 먹으려면 / 넣으려면"
-      }
-    },
-    {
-      "speaker": "mirae",
-      "text": "좋아하는 야채무침과 쌈장을 넣고 쌈을 싸는거야.",
-      "translation": "add your favorite seasoned vegetables and ssam paste, and wrap it up.",
-      "slide": 16,
-      "audio": "data/nhs/L3/TTS/ep07/audio_16_좋아하는_야채무침과_쌈장을_넣고_쌈을_싸는거야_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "쌈을 한 입에 넣으려면 쌈이 너무 크면 안돼.",
-      "translation": "If you want to put the ssam in one bite, the ssam can't be too big.",
-      "slide": 17,
-      "audio": "data/nhs/L3/TTS/ep07/audio_17_쌈을_한_입에_넣으려면_쌈이_너무_크면_안돼_.mp3"
-    },
-    {
-      "speaker": "mirae",
-      "text": "입이 작을수록 쌈도 작게 싸야 되는거야. 알았지?",
-      "translation": "The smaller your mouth, the smaller the ssam should be. Got it?",
-      "slide": 18,
-      "audio": "data/nhs/L3/TTS/ep07/audio_18_입이_작을수록__쌈__도_작게_싸야_되는거야__알았지_.mp3",
-      "annotation": {
-        "highlight": "작을수록",
-        "grammar": "-(으)ㄹ수록",
-        "note": "작다 + -(으)ㄹ수록 → 작을수록\n= the smaller ~\n입이 작을수록 쌈도 작게 = the smaller the mouth, the smaller the ssam\n비례 관계를 나타내요!"
-      }
-    },
-    {
-      "speaker": "olivia",
-      "text": "나, 입 작지 않아!",
-      "translation": "I don't have a small mouth!",
-      "slide": 19,
-      "audio": "data/nhs/L3/TTS/ep07/audio_19_나__입_작지_않아_.mp3"
-    }
-  ],
-  "vocab": [
-    {
-      "category": "🥩 갈비 & 쌈",
-      "items": [
-        {
-          "emoji": "🥩",
-          "korean": "갈비",
-          "english": "short ribs, galbi (Korean BBQ)"
-        },
-        {
-          "emoji": "🌿",
-          "korean": "쌈",
-          "english": "Korean wrap (meat + veg in a leaf)"
-        },
-        {
-          "emoji": "🥬",
-          "korean": "쌈채소",
-          "english": "ssam vegetables (wrapping leaves)"
-        },
-        {
-          "emoji": "🥗",
-          "korean": "상추",
-          "english": "lettuce"
-        },
-        {
-          "emoji": "🌿",
-          "korean": "깻잎",
-          "english": "perilla leaves (sesame leaf)"
-        },
-        {
-          "emoji": "🫙",
-          "korean": "쌈장",
-          "english": "ssam paste (fermented soybean paste for wraps)"
-        },
-        {
-          "emoji": "🥒",
-          "korean": "생무침",
-          "english": "fresh seasoned vegetables (raw)"
-        },
-        {
-          "emoji": "🥗",
-          "korean": "야채무침",
-          "english": "seasoned/marinated vegetables"
-        }
-      ]
-    },
-    {
-      "category": "🧄 양념 재료",
-      "items": [
-        {
-          "emoji": "🍶",
-          "korean": "양념",
-          "english": "sauce, seasoning"
-        },
-        {
-          "emoji": "🍶",
-          "korean": "간장",
-          "english": "soy sauce"
-        },
-        {
-          "emoji": "🌶️",
-          "korean": "고춧가루",
-          "english": "red pepper powder"
-        },
-        {
-          "emoji": "🫙",
-          "korean": "식초",
-          "english": "vinegar"
-        },
-        {
-          "emoji": "🍑",
-          "korean": "매실청",
-          "english": "plum syrup (maesil-cheong)"
-        },
-        {
-          "emoji": "🍬",
-          "korean": "설탕",
-          "english": "sugar"
-        },
-        {
-          "emoji": "🫙",
-          "korean": "참기름",
-          "english": "sesame oil"
-        },
-        {
-          "emoji": "⚪",
-          "korean": "깨소금",
-          "english": "sesame salt (crushed sesame + salt)"
-        },
-        {
-          "emoji": "✨",
-          "korean": "만능 양념",
-          "english": "all-purpose sauce (works for everything)"
-        }
-      ]
-    },
-    {
-      "category": "🌱 자연 & 표현",
-      "items": [
-        {
-          "emoji": "🌾",
-          "korean": "잡초",
-          "english": "weeds"
-        },
-        {
-          "emoji": "🌿",
-          "korean": "약초",
-          "english": "medicinal herb"
-        },
-        {
-          "emoji": "✨",
-          "korean": "신선하다",
-          "english": "to be fresh"
-        },
-        {
-          "emoji": "⚡",
-          "korean": "효율적",
-          "english": "efficient"
-        },
-        {
-          "emoji": "🤜",
-          "korean": "한꺼번에",
-          "english": "all at once, in one go"
-        },
-        {
-          "emoji": "✅",
-          "korean": "물론",
-          "english": "of course, naturally"
-        },
-        {
-          "emoji": "🔄",
-          "korean": "거의 모든",
-          "english": "almost all"
-        },
-        {
-          "emoji": "➕➖",
-          "korean": "넣다 / 빼다",
-          "english": "to put in / to take out"
-        },
-        {
-          "emoji": "🫧",
-          "korean": "발효시키다",
-          "english": "to ferment"
-        },
-        {
-          "korean": "의",
-          "english": "possessive particle (of, 's) — pronounced [에] when spoken",
-          "emoji": "🔗",
-          "note": "마당의 잡초 → [마당에 잡초] · 나라의 꽃 → [나라에 꽃]"
-        }
-      ]
-    },
-    {
-      "category": "🔥 숯불구이 실전 어휘 (대본 외)",
-      "items": [
-        { "emoji": "✂️", "korean": "가위", "english": "scissors (for cutting meat)" },
-        { "emoji": "🔥", "korean": "불판", "english": "grill plate" }
-      ]
-    },
-    { "ref": "restaurant_general" },
-    { "ref": "taste_expressions" }
-  ],
-  "grammar": [
-    {
-      "id": "g07_giwihaeseo",
-      "tier": "core",
-      "title": "-기 위해서",
-      "title_en": "In order to (purpose)",
-      "emoji": "🎯",
-      "explanation_en": "Express the purpose of an action — 'in order to do something.' More formal than -(으)려고. Can also be used with nouns: N을/를 위해서.",
-      "pattern": "Verb stem + -기 위해서",
-      "scene_example": {
-        "korean": "갈비를 맛있게 먹기 위해서 필요한 게 뭔지 알아?",
-        "english": "Do you know what you need in order to eat galbi deliciously?",
-        "highlight": "먹기 위해서"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "content": "먹다 → 먹기 위해서 (in order to eat)\n배우다 → 배우기 위해서 (in order to learn)\n만들다 → 만들기 위해서 (in order to make)",
-          "label": "Pattern: Verb + -기 위해서"
-        },
-        {
-          "type": "green",
-          "content": "건강을 위해서 운동해요. (For health, I exercise.)\n가족을 위해서 요리해요. (I cook for my family.)",
-          "label": "With nouns: N을/를 위해서"
-        },
-        {
-          "type": "amber",
-          "content": "-기 위해서 = more formal, written\n-(으)려고 = casual speech\n\n한국어를 배우기 위해서 한국에 왔어요.\n한국어를 배우려고 한국에 왔어요.\n→ Same meaning, different formality",
-          "label": "-기 위해서 vs -(으)려고"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "건강을 위해서 채소를 많이 먹어요.",
-          "en": "In order to be healthy, I eat a lot of vegetables."
-        },
-        {
-          "ko": "시험에 합격하기 위해서 열심히 공부해요.",
-          "en": "I study hard in order to pass the exam."
-        },
-        {
-          "ko": "쌈을 맛있게 먹기 위해서 쌈장이 필요해요.",
-          "en": "You need ssam paste in order to eat ssam deliciously."
-        }
-      ]
-    },
-    {
-      "id": "g07_ryeomyeon",
-      "tier": "core",
-      "title": "-(으)려면",
-      "title_en": "If you want to / In order to (condition)",
-      "emoji": "📋",
-      "explanation_en": "Set up a condition: 'if you want to do X, you need Y.' Very common for giving instructions or advice. Appears 3 times in this episode!",
-      "pattern": "Vowel stem + -려면 · Consonant stem + -으려면",
-      "scene_example": {
-        "korean": "드레싱을 만들려면 어떻게 해?",
-        "english": "If I want to make the dressing, how do I do it?",
-        "highlight": "만들려면"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "content": "만들다 → 만들려면 (if you want to make)\n가다 → 가려면 (if you want to go)\n배우다 → 배우려면 (if you want to learn)",
-          "label": "Vowel ending → -려면"
-        },
-        {
-          "type": "green",
-          "content": "먹다 → 먹으려면 (if you want to eat)\n넣다 → 넣으려면 (if you want to put in)\n읽다 → 읽으려면 (if you want to read)",
-          "label": "Consonant ending → -으려면"
-        },
-        {
-          "type": "amber",
-          "content": "만들려면 → if you want to make (dressing)\n먹으려면 → if you want to eat (deliciously)\n넣으려면 → if you want to put in (one bite)\n\n패턴: -(으)려면 + advice/instruction",
-          "label": "3x in this episode!"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "드레싱을 만들려면 마늘이 필요해요.",
-          "en": "If you want to make the dressing, you need garlic."
-        },
-        {
-          "ko": "고기를 맛있게 먹으려면 쌈장을 넣어야 해요.",
-          "en": "If you want to eat the meat deliciously, you need to add ssam paste."
-        },
-        {
-          "ko": "한국어를 잘 하려면 매일 연습해야 해요.",
-          "en": "If you want to speak Korean well, you have to practice every day."
-        }
-      ]
-    },
-    {
-      "id": "g07_lsurok",
-      "tier": "core",
-      "title": "-(으)ㄹ수록",
-      "title_en": "The more ~, the more ~ (proportional)",
-      "emoji": "📈",
-      "explanation_en": "Express a proportional relationship: 'the more A, the more B.' Usually the two clauses describe opposite or related outcomes. Often paired with 아무리.",
-      "pattern": "Vowel/ㄹ stem + -ㄹ수록 · Consonant stem + -을수록",
-      "scene_example": {
-        "korean": "입이 작을수록 쌈도 작게 싸야 되는거야.",
-        "english": "The smaller your mouth, the smaller the ssam should be.",
-        "highlight": "작을수록"
-      },
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "content": "작다 → 작을수록 (the smaller)\n크다 → 클수록 (the bigger)\n많다 → 많을수록 (the more there are)",
-          "label": "Adj + -(으)ㄹ수록"
-        },
-        {
-          "type": "green",
-          "content": "연습하다 → 연습할수록 (the more you practice)\n먹다 → 먹을수록 (the more you eat)\n공부하다 → 공부할수록 (the more you study)",
-          "label": "Verb + -(으)ㄹ수록"
-        },
-        {
-          "type": "amber",
-          "content": "입이 작을수록 쌈도 작게 → the smaller the mouth, the smaller the ssam\n\n많을수록 좋다 = the more, the better (common phrase!)\n빠를수록 좋다 = the faster, the better",
-          "label": "Full pattern: A-(으)ㄹ수록 B"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "연습할수록 실력이 늘어요.",
-          "en": "The more you practice, the better you get."
-        },
-        {
-          "ko": "많이 먹을수록 배가 불러요.",
-          "en": "The more you eat, the fuller you get."
-        },
-        {
-          "ko": "쌈이 클수록 입에 넣기가 힘들어요.",
-          "en": "The bigger the ssam, the harder it is to put in your mouth."
-        }
-      ]
-    }
-  ],
-  "pronunciation": [
-    {
-      "title": "의 (possessive) → [에]",
-      "rule": "조사 '의'는 구어에서 [에]로 발음되는 경우가 많아요",
-      "examples": [
-        {
-          "written": "마당의 잡초",
-          "after": "[마당에 잡초]"
-        },
-        {
-          "written": "나라의 꽃",
-          "after": "[나라에 꽃]"
-        },
-        {
-          "written": "친구의 집",
-          "after": "[친구에 집]"
-        }
-      ]
-    },
-    {
-      "title": "깻잎 → [깬닙]",
-      "rule": "ㅅ 받침 + ㅣ → 비음화 [ㄴ], 뒤 ㅇ → [ㄴ]",
-      "examples": [
-        {
-          "written": "깻잎",
-          "after": "[깬닙]"
-        },
-        {
-          "written": "꽃잎",
-          "after": "[꼰닙]"
-        }
-      ]
-    },
-    {
-      "title": "고춧가루 → [고추까루]",
-      "rule": "ㅅ 받침 + ㄱ → 된소리 [ㄲ]",
-      "examples": [
-        {
-          "written": "고춧가루",
-          "after": "[고추까루]"
-        },
-        {
-          "written": "잡초",
-          "after": "[잡초] ✅ (no change)"
-        }
-      ]
-    }
-  ],
-  "banmal_jondaemal": {
-    "intro_ko": "보미는 친구 올리비아에게 반말로 쌈 먹는 법을 알려줘요. 어른께 설명할 때는 존댓말로!",
-    "intro_en": "Bomi explains ssam eating in 반말 to her friend Olivia. Use 존댓말 when explaining to adults!",
-    "rows": [
-      {
-        "situation_ko": "먹는 방법 설명",
-        "situation_en": "-기 위해서 / -(으)려면",
-        "banmal": "먹기 위해서 이게 필요해.",
-        "jondaemal": "먹기 위해서 이게 필요해요."
-      },
-      {
-        "situation_ko": "쌈 싸는 법",
-        "situation_en": "giving instructions",
-        "banmal": "쌈채소 위에 고기를 올려.",
-        "jondaemal": "쌈채소 위에 고기를 올리세요."
-      },
-      {
-        "situation_ko": "조건 설명",
-        "situation_en": "-(으)ㄹ수록",
-        "banmal": "입이 작을수록 쌈을 작게 싸.",
-        "jondaemal": "입이 작을수록 쌈을 작게 싸세요."
-      }
-    ],
-    "tip": "요리 레시피나 방법을 설명할 때 -(으)려면과 -기 위해서가 자주 짝을 이뤄요! In recipes and instructions, -(으)려면 and -기 위해서 are a natural pair.",
-    "adult_dialogue": {
-      "title": "🍽️ 식당에서 어른들이 설명할 때",
-      "context_en": "Adults explaining Korean BBQ dining to a guest — 존댓말 throughout",
-      "lines": [
-        {
-          "speaker": "손님",
-          "text": "이걸 어떻게 먹으면 돼요?",
-          "translation": "How do I eat this?"
-        },
-        {
-          "speaker": "주인",
-          "text": "고기를 맛있게 드시려면 이렇게 쌈을 싸서 드세요.",
-          "translation": "If you want to enjoy the meat, wrap it like this and eat it."
-        },
-        {
-          "speaker": "손님",
-          "text": "아, 이 소스도 넣어요?",
-          "translation": "Oh, do I add this sauce too?"
-        },
-        {
-          "speaker": "주인",
-          "text": "네, 쌈장을 넣을수록 더 맛있어요!",
-          "translation": "Yes, the more ssam paste you add, the more delicious it is!"
-        }
-      ]
-    }
+  {
+   "id": "olivia",
+   "name": "올리비아",
+   "name_en": "Olivia",
+   "color": "#4A90D9",
+   "role": "curious friend"
+  }
+ ],
+ "slides": [
+  "data/nhs/L3/slides/ep07/숯불갈비1.png",
+  "data/nhs/L3/slides/ep07/숯불갈비2.png",
+  "data/nhs/L3/slides/ep07/숯불갈비3.png",
+  "data/nhs/L3/slides/ep07/숯불갈비4.png",
+  "data/nhs/L3/slides/ep07/숯불갈비5.png",
+  "data/nhs/L3/slides/ep07/숯불갈비6.png",
+  "data/nhs/L3/slides/ep07/숯불갈비7.png",
+  "data/nhs/L3/slides/ep07/숯불갈비8.png",
+  "data/nhs/L3/slides/ep07/숯불갈비9.png",
+  "data/nhs/L3/slides/ep07/숯불갈비10.png",
+  "data/nhs/L3/slides/ep07/숯불갈비11.png",
+  "data/nhs/L3/slides/ep07/숯불갈비12.png",
+  "data/nhs/L3/slides/ep07/숯불갈비13.png",
+  "data/nhs/L3/slides/ep07/숯불갈비14.png",
+  "data/nhs/L3/slides/ep07/숯불갈비15.png",
+  "data/nhs/L3/slides/ep07/숯불갈비16.png",
+  "data/nhs/L3/slides/ep07/숯불갈비17.png",
+  "data/nhs/L3/slides/ep07/숯불갈비18.png",
+  "data/nhs/L3/slides/ep07/숯불갈비19.png",
+  "data/nhs/L3/slides/ep07/숯불갈비20.png"
+ ],
+ "script": [
+  {
+   "speaker": "mirae",
+   "text": "갈비를 맛있게 먹기 위해서 필요한 게 뭔지 알아?",
+   "translation": "Do you know what you need in order to eat galbi deliciously?",
+   "slide": 0,
+   "audio": "data/nhs/L3/TTS/ep07/audio_0_갈비를_맛있게_먹기_위해서_필요한_게_뭔지_알아_.mp3",
+   "annotation": {
+    "highlight": "먹기 위해서",
+    "grammar": "-기 위해서",
+    "note": "먹기 위해서 = in order to eat\n동사 기본형 + -기 위해서\n= for the purpose of / in order to\n목적을 나타내요!"
+   }
   },
-  "usage": [
+  {
+   "speaker": "olivia",
+   "text": "몰라. 뭔데?",
+   "translation": "I don't know. What is it?",
+   "slide": 1,
+   "audio": "data/nhs/L3/TTS/ep07/audio_1_몰라__뭔데_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "신선한 야채야.",
+   "translation": "Fresh vegetables!",
+   "slide": 2,
+   "audio": "data/nhs/L3/TTS/ep07/audio_2_신선한_야채야_.mp3"
+  },
+  {
+   "speaker": "olivia",
+   "text": "아 이거. 샐러드야?",
+   "translation": "Oh, this. Is it a salad?",
+   "slide": 3,
+   "audio": "data/nhs/L3/TTS/ep07/audio_3_아_이거__샐러드야_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "한국식 샐러드라고 할까?",
+   "translation": "You could call it a Korean-style salad?",
+   "slide": 4,
+   "audio": "data/nhs/L3/TTS/ep07/audio_4_한국식_샐러드라고_할까_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "한국은 고기 따로 야채 따로 먹지 않고, 모두 한꺼번에 싸서 입에 넣어.",
+   "translation": "In Korea, we don't eat meat and vegetables separately — we wrap everything together and put it in our mouth at once.",
+   "slide": 5,
+   "audio": "data/nhs/L3/TTS/ep07/audio_5_한국은_고기_따로_야채_따로_먹지_않고__모두_한꺼번에_싸서_입에_넣어_.mp3",
+   "annotation": {
+    "highlight": "한꺼번에 싸서",
+    "grammar": "싸다 (to wrap) + -아서",
+    "note": "쌈 = the Korean wrap!\n한꺼번에 = all at once (in one go)\n싸서 = wrapping and then → putting in mouth"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "아주 효율적이지?",
+   "translation": "Very efficient, right?",
+   "slide": 6,
+   "audio": "data/nhs/L3/TTS/ep07/audio_6_아주_효율적이지_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "쌈채소로는 여기 있는 상추, 깻잎은 물론이고,",
+   "translation": "As for ssam vegetables, lettuce and perilla leaves are a given,",
+   "slide": 7,
+   "audio": "data/nhs/L3/TTS/ep07/audio_7_쌈채소로는_여기_있는_상추__깻잎은_물론이고_.mp3",
+   "annotation": {
+    "highlight": "물론이고",
+    "grammar": "물론 (of course) + -이고",
+    "note": "물론이고 = of course / naturally / goes without saying\n상추, 깻잎은 물론이고 = lettuce and perilla are a given, and also...\n= not only A, but also..."
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "거의 모든 푸른 색 야채는 다 쌈으로 먹을 수 있대.",
+   "translation": "They say almost any green vegetable can be eaten as a wrap.",
+   "slide": 8,
+   "audio": "data/nhs/L3/TTS/ep07/audio_8_거의_모든_푸른_색_야채는_다_쌈으로_먹을_수_있대_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "우리 할머니는 마당의 잡초는 다 약초라고 생각하셔.",
+   "translation": "My grandma thinks all the weeds in the yard are medicinal herbs.",
+   "slide": 9,
+   "audio": "data/nhs/L3/TTS/ep07/audio_9_우리_할머니는_마당의_잡초는_다_약초라고_생각하셔_.mp3",
+   "annotation": {
+    "highlight": "마당의",
+    "grammar": "의 발음",
+    "note": "의 possessive → often pronounced [에] in speech!\n마당의 잡초 → [마당에 잡초]\n글자: 의 / 소리: [에] ← 조사로 쓰일 때"
+   }
+  },
+  {
+   "speaker": "olivia",
+   "text": "하하. 드레싱을 만들려면 어떻게 해?",
+   "translation": "Ha ha. If I want to make the dressing, how do I do it?",
+   "slide": 10,
+   "audio": "data/nhs/L3/TTS/ep07/audio_10_하하__드레싱을_만들려면_어떻게_해_.mp3",
+   "annotation": {
+    "highlight": "만들려면",
+    "grammar": "-(으)려면",
+    "note": "만들다 + -(으)려면 → 만들려면\n= if you want to make / in order to make\n조건: '~하고 싶으면' 또는 '~하기 위해서는'"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "양념은 마늘 다진 것, 간장, 고춧가루, 식초, 매실청.",
+   "translation": "The sauce is: minced garlic, soy sauce, red pepper powder, vinegar, plum syrup.",
+   "slide": 11,
+   "audio": "data/nhs/L3/TTS/ep07/audio_11_양념은_마늘_다진_것__간장__고춧가루__식초__매실청_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "매실청이 없으면 설탕을 넣어.",
+   "translation": "If you don't have plum syrup, just add sugar.",
+   "slide": 12,
+   "audio": "data/nhs/L3/TTS/ep07/audio_12_매실청이_없으면_설탕을_넣어_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "마지막에 참기름을 한바퀴 휘리릭, 깨소금을 톡 톡 넣으면 끝!",
+   "translation": "Finally, drizzle sesame oil around once — whoosh — and sprinkle sesame salt, tap tap, and you're done!",
+   "slide": 13,
+   "audio": "data/nhs/L3/TTS/ep07/audio_13_마지막에_참기름을_한바퀴_휘리릭__깨소금을_톡_톡_넣으면_끝_.mp3",
+   "annotation": {
+    "highlight": "휘리릭 / 톡 톡",
+    "grammar": "의성어/의태어",
+    "note": "휘리릭 = whoosh! (sound of drizzling oil in a circle)\n톡 톡 = tap tap (sprinkle lightly)\n한국어에 이런 생동감 있는 표현이 정말 많아요!"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "이 만능 양념을 넣으면 모든 야채가 맛있는 생무침이 되는거야.",
+   "translation": "When you add this all-purpose sauce, any vegetable becomes a delicious fresh salad.",
+   "slide": 14,
+   "audio": "data/nhs/L3/TTS/ep07/audio_14_이_만능_양념을_넣으면_모든_야채가_맛있는_생무침이_되는거야_.mp3",
+   "annotation": {
+    "highlight": "만능 양념",
+    "grammar": "만능 (all-purpose)",
+    "note": "만능(萬能) = all-purpose, works for everything\n생무침 = fresh seasoned vegetables (raw, not cooked)\n무치다 = to season/toss with sauce"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "고기를 맛있게 먹으려면 쌈채소 위에 고기 한 점을 올리고,",
+   "translation": "If you want to eat the meat deliciously, place one piece of meat on the ssam leaf,",
+   "slide": 15,
+   "audio": "data/nhs/L3/TTS/ep07/audio_15_고기를_맛있게_먹으려면_쌈채소_위에_고기_한_점을_올리고_.mp3",
+   "annotation": {
+    "highlight": "먹으려면",
+    "grammar": "-(으)려면",
+    "note": "먹다 + -(으)려면 → 먹으려면\n= if you want to eat / in order to eat\n이 에피소드에서 3번 나와요!\n만들려면 / 먹으려면 / 넣으려면"
+   }
+  },
+  {
+   "speaker": "mirae",
+   "text": "좋아하는 야채무침과 쌈장을 넣고 쌈을 싸는거야.",
+   "translation": "add your favorite seasoned vegetables and ssam paste, and wrap it up.",
+   "slide": 16,
+   "audio": "data/nhs/L3/TTS/ep07/audio_16_좋아하는_야채무침과_쌈장을_넣고_쌈을_싸는거야_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "쌈을 한 입에 넣으려면 쌈이 너무 크면 안돼.",
+   "translation": "If you want to put the ssam in one bite, the ssam can't be too big.",
+   "slide": 17,
+   "audio": "data/nhs/L3/TTS/ep07/audio_17_쌈을_한_입에_넣으려면_쌈이_너무_크면_안돼_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "입이 작을수록 쌈도 작게 싸야 되는거야. 알았지?",
+   "translation": "The smaller your mouth, the smaller the ssam should be. Got it?",
+   "slide": 18,
+   "audio": "data/nhs/L3/TTS/ep07/audio_18_입이_작을수록__쌈__도_작게_싸야_되는거야__알았지_.mp3",
+   "annotation": {
+    "highlight": "작을수록",
+    "grammar": "-(으)ㄹ수록",
+    "note": "작다 + -(으)ㄹ수록 → 작을수록\n= the smaller ~\n입이 작을수록 쌈도 작게 = the smaller the mouth, the smaller the ssam\n비례 관계를 나타내요!"
+   }
+  },
+  {
+   "speaker": "olivia",
+   "text": "나, 입 작지 않아!",
+   "translation": "I don't have a small mouth!",
+   "slide": 19,
+   "audio": "data/nhs/L3/TTS/ep07/audio_19_나__입_작지_않아_.mp3"
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🥩 갈비 & 쌈",
+   "items": [
     {
-      "heading": "🌿 쌈 (Ssam) 문화 — 한국 BBQ의 핵심",
-      "content": "쌈 means 'wrap' in Korean. At a Korean BBQ, you take a fresh leaf (상추, 깻잎, or any green), place grilled meat on it, add your toppings, wrap it up, and eat it in one bite! The all-in-one efficiency is very Korean.",
-      "examples": [
-        {
-          "ko": "쌈을 너무 크게 싸면 한 입에 안 들어가요!",
-          "en": "If you make the ssam too big, it won't fit in one bite!"
-        },
-        {
-          "ko": "깻잎은 독특한 향이 있어서 처음엔 낯설 수 있어요.",
-          "en": "Perilla leaves have a unique scent that can feel unfamiliar at first."
-        }
-      ]
+     "emoji": "🥩",
+     "korean": "갈비",
+     "english": "short ribs, galbi (Korean BBQ)"
     },
     {
-      "heading": "✨ 만능 양념 만들기 (The All-Purpose Sauce)",
-      "content": "The sauce Bomi describes works for almost any vegetable. Here's the recipe:\n• 마늘 다진 것 (minced garlic)\n• 간장 (soy sauce)\n• 고춧가루 (red pepper powder)\n• 식초 (vinegar)\n• 매실청 or 설탕 (plum syrup or sugar)\n• 참기름 한바퀴 (sesame oil, one circle)\n• 깨소금 톡 톡 (sesame salt, tap tap)",
-      "examples": [
-        {
-          "ko": "참기름을 한바퀴 휘리릭! 이게 핵심이에요.",
-          "en": "Drizzle sesame oil in one circle — whoosh! This is the key."
-        },
-        {
-          "ko": "매실청이 없으면 설탕을 넣어도 돼요.",
-          "en": "If you don't have plum syrup, it's fine to add sugar."
-        }
-      ]
+     "emoji": "🌿",
+     "korean": "쌈",
+     "english": "Korean wrap (meat + veg in a leaf)"
     },
     {
-      "heading": "🌱 할머니의 약초 지혜",
-      "content": "Bomi's grandma says all the weeds in the yard are medicinal herbs. This reflects a traditional Korean wisdom: many common plants (like 깻잎 itself!) have medicinal properties. This isn't just a joke — Korean grandmas are famously resourceful with plants!",
-      "examples": [
-        {
-          "ko": "우리 할머니는 마당의 잡초는 다 약초라고 생각하셔.",
-          "en": "My grandma thinks all the weeds in the yard are medicinal herbs."
-        },
-        {
-          "ko": "깻잎도 사실 약초예요 — 항균 효과가 있대요!",
-          "en": "Perilla leaves are actually medicinal too — they're said to have antibacterial properties!"
-        }
-      ]
+     "emoji": "🥬",
+     "korean": "쌈채소",
+     "english": "ssam vegetables (wrapping leaves)"
     },
     {
-      "heading": "🔥 숯불구이에서 자주 쓰는 문장 (대본 외)",
-      "content": "This episode's dialogue is all about ssam technique, but a real BBQ table also means asking for refills and tools.",
-      "examples": [
-        { "ko": "상추 좀 더 주세요.", "en": "More lettuce, please." },
-        { "ko": "가위 좀 주시겠어요?", "en": "Could I get scissors?" }
-      ]
-    },
-    { "ref": "restaurant_general" },
-    { "ref": "taste_expressions" }
-  ],
-  "real_life": [
-    {
-      "type": "kakao",
-      "title": "🥩 갈비집 가기 전 단톡",
-      "messages": [
-        {
-          "sender": "right",
-          "text": "오늘 갈비 먹으러 가는 거지?",
-          "translation": "We're going to eat galbi today, right?"
-        },
-        {
-          "sender": "left",
-          "text": "응! 근데 쌈 싸는 법 알아?",
-          "translation": "Yeah! But do you know how to wrap ssam?"
-        },
-        {
-          "sender": "right",
-          "text": "몰라ㅋㅋ 가르쳐줘",
-          "translation": "Nope lol teach me"
-        },
-        {
-          "sender": "left",
-          "text": "가서 알려줄게. 입이 작을수록 쌈도 작게 싸야 돼ㅋㅋ",
-          "translation": "I'll show you there. The smaller your mouth, the smaller the ssam lol"
-        },
-        {
-          "sender": "right",
-          "text": "나 입 작지 않거든!!",
-          "translation": "I don't have a small mouth!!"
-        }
-      ]
+     "emoji": "🥗",
+     "korean": "상추",
+     "english": "lettuce"
     },
     {
-      "type": "reading",
-      "title": "📖 한국의 쌈 문화",
-      "passage": "한국 사람들은 갈비나 삼겹살을 먹을 때 쌈을 자주 먹어요. 쌈채소로는 상추와 깻잎이 가장 많이 쓰여요. 고기를 맛있게 먹으려면 쌈채소 위에 고기, 무침, 쌈장을 올리고 한 입에 먹으면 돼요. 쌈은 고기와 야채를 동시에 먹을 수 있어서 아주 효율적이에요. 쌈을 처음 먹는 외국인들도 금방 좋아하게 되는 한국의 대표 음식 문화예요.',",
-      "questions": [
-        {
-          "q": "쌈에 가장 많이 쓰이는 채소는?",
-          "q_en": "What vegetables are most commonly used for ssam?",
-          "options": [
-            "상추와 깻잎",
-            "배추와 시금치",
-            "오이와 당근"
-          ],
-          "answer": 0
-        },
-        {
-          "q": "쌈이 효율적인 이유는?",
-          "q_en": "Why is ssam efficient?",
-          "options": [
-            "빠르게 만들 수 있어요",
-            "고기와 야채를 동시에 먹을 수 있어요",
-            "재료가 싸요"
-          ],
-          "answer": 1
-        }
-      ]
+     "emoji": "🌿",
+     "korean": "깻잎",
+     "english": "perilla leaves (sesame leaf)"
+    },
+    {
+     "emoji": "🫙",
+     "korean": "쌈장",
+     "english": "ssam paste (fermented soybean paste for wraps)"
+    },
+    {
+     "emoji": "🥒",
+     "korean": "생무침",
+     "english": "fresh seasoned vegetables (raw)"
+    },
+    {
+     "emoji": "🥗",
+     "korean": "야채무침",
+     "english": "seasoned/marinated vegetables"
     }
-  ],
-  "self_check": [
-    "나는 '-기 위해서'를 써서 목적을 말할 수 있어요. (I can express purpose using -기 위해서)",
-    "나는 '-(으)려면'으로 조건을 설명할 수 있어요. (I can explain conditions using -(으)려면)",
-    "나는 '-(으)ㄹ수록'으로 비례 관계를 표현할 수 있어요. (I can express proportional relationships)",
-    "나는 쌈 싸는 법을 한국어로 설명할 수 있어요. (I can explain how to make ssam in Korean)",
-    "나는 만능 양념 재료를 다섯 가지 이상 말할 수 있어요. (I can name 5+ ingredients in the all-purpose sauce)"
-  ],
-  "quiz": [
+   ]
+  },
+  {
+   "category": "🧄 양념 재료",
+   "items": [
     {
-      "type": "listen",
-      "audio_text": "갈비를 맛있게 먹기 위해서 필요한 게 뭔지 알아?",
-      "question": "보미가 처음에 뭐가 필요하다고 했어요?",
-      "question_en": "What did Bomi say was needed first?",
-      "options": [
-        "맛있는 고기",
-        "신선한 야채",
-        "좋은 식당"
-      ],
-      "answer": 1,
-      "exp": "갈비를 맛있게 먹기 위해서 = in order to eat galbi deliciously. The answer is 신선한 야채 (fresh vegetables)!"
+     "emoji": "🍶",
+     "korean": "양념",
+     "english": "sauce, seasoning"
     },
     {
-      "type": "mc",
-      "question": "'드레싱을 만들려면'의 뜻은?",
-      "question_en": "What does '드레싱을 만들려면' mean?",
-      "options": [
-        "드레싱을 만들었어요",
-        "드레싱을 만들고 싶지 않으면",
-        "드레싱을 만들고 싶으면 / 만들기 위해서는"
-      ],
-      "answer": 2,
-      "exp": "-(으)려면 = if you want to / in order to. 만들려면 = if you want to make. It sets up a condition!"
+     "emoji": "🍶",
+     "korean": "간장",
+     "english": "soy sauce"
     },
     {
-      "type": "listen",
-      "audio_text": "마지막에 참기름을 한바퀴 휘리릭, 깨소금을 톡 톡 넣으면 끝!",
-      "question": "양념 만들기의 마지막 단계는?",
-      "question_en": "What is the last step of making the sauce?",
-      "options": [
-        "마늘 다지기",
-        "식초 넣기",
-        "참기름 + 깨소금 넣기"
-      ],
-      "answer": 2,
-      "exp": "참기름 한바퀴 휘리릭, 깨소금 톡 톡 — the finishing touch! 휘리릭 and 톡 톡 are Korean sound words (의성어)."
+     "emoji": "🌶️",
+     "korean": "고춧가루",
+     "english": "red pepper powder"
     },
     {
-      "type": "mc",
-      "question": "매실청이 없으면 뭐를 넣어요?",
-      "question_en": "If there's no plum syrup, what do you add?",
-      "options": [
-        "꿀",
-        "설탕",
-        "식초"
-      ],
-      "answer": 1,
-      "exp": "매실청이 없으면 설탕을 넣어 — if there's no maesil-cheong, add sugar. Simple and accessible substitute!"
+     "emoji": "🫙",
+     "korean": "식초",
+     "english": "vinegar"
     },
     {
-      "type": "mc",
-      "question": "'입이 작을수록 쌈도 작게 싸야 해요' — '-(으)ㄹ수록'의 의미는?",
-      "question_en": "What does -(으)ㄹ수록 express in this sentence?",
-      "options": [
-        "작은 입을 원해요",
-        "비례 관계 — 하나가 변하면 다른 것도 같이 변해요",
-        "입이 작아서 슬퍼요"
-      ],
-      "answer": 1,
-      "exp": "-(으)ㄹ수록 expresses a proportional relationship: 작을수록 = the smaller ~. The smaller the mouth, the smaller the ssam should be!"
+     "emoji": "🍑",
+     "korean": "매실청",
+     "english": "plum syrup (maesil-cheong)"
     },
     {
-      "type": "listen",
-      "audio_text": "나, 입 작지 않아!",
-      "question": "올리비아는 왜 이렇게 말했어요?",
-      "question_en": "Why did Olivia say this?",
-      "options": [
-        "입이 정말 작아요",
-        "보미가 입이 작을수록 쌈을 작게 싸야 한다고 했어요",
-        "쌈이 너무 커요"
-      ],
-      "answer": 1,
-      "exp": "보미가 '입이 작을수록 쌈도 작게 싸야 돼'라고 해서 올리비아가 '나는 입이 작지 않아!'라고 반박했어요. Classic! 😄"
+     "emoji": "🍬",
+     "korean": "설탕",
+     "english": "sugar"
+    },
+    {
+     "emoji": "🫙",
+     "korean": "참기름",
+     "english": "sesame oil"
+    },
+    {
+     "emoji": "⚪",
+     "korean": "깨소금",
+     "english": "sesame salt (crushed sesame + salt)"
+    },
+    {
+     "emoji": "✨",
+     "korean": "만능 양념",
+     "english": "all-purpose sauce (works for everything)"
     }
-  ]
+   ]
+  },
+  {
+   "category": "🌱 자연 & 표현",
+   "items": [
+    {
+     "emoji": "🌾",
+     "korean": "잡초",
+     "english": "weeds"
+    },
+    {
+     "emoji": "🌿",
+     "korean": "약초",
+     "english": "medicinal herb"
+    },
+    {
+     "emoji": "✨",
+     "korean": "신선하다",
+     "english": "to be fresh"
+    },
+    {
+     "emoji": "⚡",
+     "korean": "효율적",
+     "english": "efficient"
+    },
+    {
+     "emoji": "🤜",
+     "korean": "한꺼번에",
+     "english": "all at once, in one go"
+    },
+    {
+     "emoji": "✅",
+     "korean": "물론",
+     "english": "of course, naturally"
+    },
+    {
+     "emoji": "🔄",
+     "korean": "거의 모든",
+     "english": "almost all"
+    },
+    {
+     "emoji": "➕➖",
+     "korean": "넣다 / 빼다",
+     "english": "to put in / to take out"
+    },
+    {
+     "emoji": "🫧",
+     "korean": "발효시키다",
+     "english": "to ferment"
+    },
+    {
+     "korean": "의",
+     "english": "possessive particle (of, 's) — pronounced [에] when spoken",
+     "emoji": "🔗",
+     "note": "마당의 잡초 → [마당에 잡초] · 나라의 꽃 → [나라에 꽃]"
+    }
+   ]
+  },
+  {
+   "category": "🔥 숯불구이 실전 어휘 (대본 외)",
+   "items": [
+    {
+     "emoji": "✂️",
+     "korean": "가위",
+     "english": "scissors (for cutting meat)"
+    },
+    {
+     "emoji": "🔥",
+     "korean": "불판",
+     "english": "grill plate"
+    }
+   ]
+  },
+  {
+   "ref": "restaurant_general"
+  },
+  {
+   "ref": "taste_expressions"
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g07_giwihaeseo",
+   "tier": "core",
+   "title": "-기 위해서",
+   "title_en": "In order to (purpose)",
+   "emoji": "🎯",
+   "explanation_en": "Express the purpose of an action — 'in order to do something.' More formal than -(으)려고. Can also be used with nouns: N을/를 위해서.",
+   "pattern": "Verb stem + -기 위해서",
+   "scene_example": {
+    "korean": "갈비를 맛있게 먹기 위해서 필요한 게 뭔지 알아?",
+    "english": "Do you know what you need in order to eat galbi deliciously?",
+    "highlight": "먹기 위해서"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "content": "먹다 → 먹기 위해서 (in order to eat)\n배우다 → 배우기 위해서 (in order to learn)\n만들다 → 만들기 위해서 (in order to make)",
+     "label": "Pattern: Verb + -기 위해서"
+    },
+    {
+     "type": "green",
+     "content": "건강을 위해서 운동해요. (For health, I exercise.)\n가족을 위해서 요리해요. (I cook for my family.)",
+     "label": "With nouns: N을/를 위해서"
+    },
+    {
+     "type": "amber",
+     "content": "-기 위해서 = more formal, written\n-(으)려고 = casual speech\n\n한국어를 배우기 위해서 한국에 왔어요.\n한국어를 배우려고 한국에 왔어요.\n→ Same meaning, different formality",
+     "label": "-기 위해서 vs -(으)려고"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "건강을 위해서 채소를 많이 먹어요.",
+     "en": "In order to be healthy, I eat a lot of vegetables."
+    },
+    {
+     "ko": "시험에 합격하기 위해서 열심히 공부해요.",
+     "en": "I study hard in order to pass the exam."
+    },
+    {
+     "ko": "쌈을 맛있게 먹기 위해서 쌈장이 필요해요.",
+     "en": "You need ssam paste in order to eat ssam deliciously."
+    }
+   ]
+  },
+  {
+   "id": "g07_ryeomyeon",
+   "tier": "core",
+   "title": "-(으)려면",
+   "title_en": "If you want to / In order to (condition)",
+   "emoji": "📋",
+   "explanation_en": "Set up a condition: 'if you want to do X, you need Y.' Very common for giving instructions or advice. Appears 3 times in this episode!",
+   "pattern": "Vowel stem + -려면 · Consonant stem + -으려면",
+   "scene_example": {
+    "korean": "드레싱을 만들려면 어떻게 해?",
+    "english": "If I want to make the dressing, how do I do it?",
+    "highlight": "만들려면"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "content": "만들다 → 만들려면 (if you want to make)\n가다 → 가려면 (if you want to go)\n배우다 → 배우려면 (if you want to learn)",
+     "label": "Vowel ending → -려면"
+    },
+    {
+     "type": "green",
+     "content": "먹다 → 먹으려면 (if you want to eat)\n넣다 → 넣으려면 (if you want to put in)\n읽다 → 읽으려면 (if you want to read)",
+     "label": "Consonant ending → -으려면"
+    },
+    {
+     "type": "amber",
+     "content": "만들려면 → if you want to make (dressing)\n먹으려면 → if you want to eat (deliciously)\n넣으려면 → if you want to put in (one bite)\n\n패턴: -(으)려면 + advice/instruction",
+     "label": "3x in this episode!"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "드레싱을 만들려면 마늘이 필요해요.",
+     "en": "If you want to make the dressing, you need garlic."
+    },
+    {
+     "ko": "고기를 맛있게 먹으려면 쌈장을 넣어야 해요.",
+     "en": "If you want to eat the meat deliciously, you need to add ssam paste."
+    },
+    {
+     "ko": "한국어를 잘 하려면 매일 연습해야 해요.",
+     "en": "If you want to speak Korean well, you have to practice every day."
+    }
+   ]
+  },
+  {
+   "id": "g07_lsurok",
+   "tier": "core",
+   "title": "-(으)ㄹ수록",
+   "title_en": "The more ~, the more ~ (proportional)",
+   "emoji": "📈",
+   "explanation_en": "Express a proportional relationship: 'the more A, the more B.' Usually the two clauses describe opposite or related outcomes. Often paired with 아무리.",
+   "pattern": "Vowel/ㄹ stem + -ㄹ수록 · Consonant stem + -을수록",
+   "scene_example": {
+    "korean": "입이 작을수록 쌈도 작게 싸야 되는거야.",
+    "english": "The smaller your mouth, the smaller the ssam should be.",
+    "highlight": "작을수록"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "content": "작다 → 작을수록 (the smaller)\n크다 → 클수록 (the bigger)\n많다 → 많을수록 (the more there are)",
+     "label": "Adj + -(으)ㄹ수록"
+    },
+    {
+     "type": "green",
+     "content": "연습하다 → 연습할수록 (the more you practice)\n먹다 → 먹을수록 (the more you eat)\n공부하다 → 공부할수록 (the more you study)",
+     "label": "Verb + -(으)ㄹ수록"
+    },
+    {
+     "type": "amber",
+     "content": "입이 작을수록 쌈도 작게 → the smaller the mouth, the smaller the ssam\n\n많을수록 좋다 = the more, the better (common phrase!)\n빠를수록 좋다 = the faster, the better",
+     "label": "Full pattern: A-(으)ㄹ수록 B"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "연습할수록 실력이 늘어요.",
+     "en": "The more you practice, the better you get."
+    },
+    {
+     "ko": "많이 먹을수록 배가 불러요.",
+     "en": "The more you eat, the fuller you get."
+    },
+    {
+     "ko": "쌈이 클수록 입에 넣기가 힘들어요.",
+     "en": "The bigger the ssam, the harder it is to put in your mouth."
+    }
+   ]
+  }
+ ],
+ "pronunciation": [
+  {
+   "title": "의 (possessive) → [에]",
+   "rule": "조사 '의'는 구어에서 [에]로 발음되는 경우가 많아요",
+   "examples": [
+    {
+     "written": "마당의 잡초",
+     "after": "[마당에 잡초]"
+    },
+    {
+     "written": "나라의 꽃",
+     "after": "[나라에 꽃]"
+    },
+    {
+     "written": "친구의 집",
+     "after": "[친구에 집]"
+    }
+   ]
+  },
+  {
+   "title": "깻잎 → [깬닙]",
+   "rule": "ㅅ 받침 + ㅣ → 비음화 [ㄴ], 뒤 ㅇ → [ㄴ]",
+   "examples": [
+    {
+     "written": "깻잎",
+     "after": "[깬닙]"
+    },
+    {
+     "written": "꽃잎",
+     "after": "[꼰닙]"
+    }
+   ]
+  },
+  {
+   "title": "고춧가루 → [고추까루]",
+   "rule": "ㅅ 받침 + ㄱ → 된소리 [ㄲ]",
+   "examples": [
+    {
+     "written": "고춧가루",
+     "after": "[고추까루]"
+    },
+    {
+     "written": "잡초",
+     "after": "[잡초] ✅ (no change)"
+    }
+   ]
+  }
+ ],
+ "banmal_jondaemal": {
+  "intro_ko": "보미는 친구 올리비아에게 반말로 쌈 먹는 법을 알려줘요. 어른께 설명할 때는 존댓말로!",
+  "intro_en": "Bomi explains ssam eating in 반말 to her friend Olivia. Use 존댓말 when explaining to adults!",
+  "rows": [
+   {
+    "situation_ko": "먹는 방법 설명",
+    "situation_en": "-기 위해서 / -(으)려면",
+    "banmal": "먹기 위해서 이게 필요해.",
+    "jondaemal": "먹기 위해서 이게 필요해요."
+   },
+   {
+    "situation_ko": "쌈 싸는 법",
+    "situation_en": "giving instructions",
+    "banmal": "쌈채소 위에 고기를 올려.",
+    "jondaemal": "쌈채소 위에 고기를 올리세요."
+   },
+   {
+    "situation_ko": "조건 설명",
+    "situation_en": "-(으)ㄹ수록",
+    "banmal": "입이 작을수록 쌈을 작게 싸.",
+    "jondaemal": "입이 작을수록 쌈을 작게 싸세요."
+   }
+  ],
+  "tip": "요리 레시피나 방법을 설명할 때 -(으)려면과 -기 위해서가 자주 짝을 이뤄요! In recipes and instructions, -(으)려면 and -기 위해서 are a natural pair.",
+  "adult_dialogue": {
+   "title": "🍽️ 식당에서 어른들이 설명할 때",
+   "context_en": "Adults explaining Korean BBQ dining to a guest — 존댓말 throughout",
+   "lines": [
+    {
+     "speaker": "손님",
+     "text": "이걸 어떻게 먹으면 돼요?",
+     "translation": "How do I eat this?"
+    },
+    {
+     "speaker": "주인",
+     "text": "고기를 맛있게 드시려면 이렇게 쌈을 싸서 드세요.",
+     "translation": "If you want to enjoy the meat, wrap it like this and eat it."
+    },
+    {
+     "speaker": "손님",
+     "text": "아, 이 소스도 넣어요?",
+     "translation": "Oh, do I add this sauce too?"
+    },
+    {
+     "speaker": "주인",
+     "text": "네, 쌈장을 넣을수록 더 맛있어요!",
+     "translation": "Yes, the more ssam paste you add, the more delicious it is!"
+    }
+   ]
+  }
+ },
+ "usage": [
+  {
+   "heading": "🌿 쌈 (Ssam) 문화 — 한국 BBQ의 핵심",
+   "content": "쌈 means 'wrap' in Korean. At a Korean BBQ, you take a fresh leaf (상추, 깻잎, or any green), place grilled meat on it, add your toppings, wrap it up, and eat it in one bite! The all-in-one efficiency is very Korean.",
+   "examples": [
+    {
+     "ko": "쌈을 너무 크게 싸면 한 입에 안 들어가요!",
+     "en": "If you make the ssam too big, it won't fit in one bite!"
+    },
+    {
+     "ko": "깻잎은 독특한 향이 있어서 처음엔 낯설 수 있어요.",
+     "en": "Perilla leaves have a unique scent that can feel unfamiliar at first."
+    }
+   ]
+  },
+  {
+   "heading": "✨ 만능 양념 만들기 (The All-Purpose Sauce)",
+   "content": "The sauce Bomi describes works for almost any vegetable. Here's the recipe:\n• 마늘 다진 것 (minced garlic)\n• 간장 (soy sauce)\n• 고춧가루 (red pepper powder)\n• 식초 (vinegar)\n• 매실청 or 설탕 (plum syrup or sugar)\n• 참기름 한바퀴 (sesame oil, one circle)\n• 깨소금 톡 톡 (sesame salt, tap tap)",
+   "examples": [
+    {
+     "ko": "참기름을 한바퀴 휘리릭! 이게 핵심이에요.",
+     "en": "Drizzle sesame oil in one circle — whoosh! This is the key."
+    },
+    {
+     "ko": "매실청이 없으면 설탕을 넣어도 돼요.",
+     "en": "If you don't have plum syrup, it's fine to add sugar."
+    }
+   ]
+  },
+  {
+   "heading": "🌱 할머니의 약초 지혜",
+   "content": "Bomi's grandma says all the weeds in the yard are medicinal herbs. This reflects a traditional Korean wisdom: many common plants (like 깻잎 itself!) have medicinal properties. This isn't just a joke — Korean grandmas are famously resourceful with plants!",
+   "examples": [
+    {
+     "ko": "우리 할머니는 마당의 잡초는 다 약초라고 생각하셔.",
+     "en": "My grandma thinks all the weeds in the yard are medicinal herbs."
+    },
+    {
+     "ko": "깻잎도 사실 약초예요 — 항균 효과가 있대요!",
+     "en": "Perilla leaves are actually medicinal too — they're said to have antibacterial properties!"
+    }
+   ]
+  },
+  {
+   "heading": "🔥 숯불구이에서 자주 쓰는 문장 (대본 외)",
+   "content": "This episode's dialogue is all about ssam technique, but a real BBQ table also means asking for refills and tools.",
+   "examples": [
+    {
+     "ko": "상추 좀 더 주세요.",
+     "en": "More lettuce, please."
+    },
+    {
+     "ko": "가위 좀 주시겠어요?",
+     "en": "Could I get scissors?"
+    }
+   ]
+  },
+  {
+   "ref": "restaurant_general"
+  },
+  {
+   "ref": "taste_expressions"
+  }
+ ],
+ "real_life": [
+  {
+   "type": "kakao",
+   "title": "🥩 갈비집 가기 전 단톡",
+   "messages": [
+    {
+     "sender": "right",
+     "text": "오늘 갈비 먹으러 가는 거지?",
+     "translation": "We're going to eat galbi today, right?"
+    },
+    {
+     "sender": "left",
+     "text": "응! 근데 쌈 싸는 법 알아?",
+     "translation": "Yeah! But do you know how to wrap ssam?"
+    },
+    {
+     "sender": "right",
+     "text": "몰라ㅋㅋ 가르쳐줘",
+     "translation": "Nope lol teach me"
+    },
+    {
+     "sender": "left",
+     "text": "가서 알려줄게. 입이 작을수록 쌈도 작게 싸야 돼ㅋㅋ",
+     "translation": "I'll show you there. The smaller your mouth, the smaller the ssam lol"
+    },
+    {
+     "sender": "right",
+     "text": "나 입 작지 않거든!!",
+     "translation": "I don't have a small mouth!!"
+    }
+   ]
+  },
+  {
+   "type": "reading",
+   "title": "📖 한국의 쌈 문화",
+   "passage": "한국 사람들은 갈비나 삼겹살을 먹을 때 쌈을 자주 먹어요. 쌈채소로는 상추와 깻잎이 가장 많이 쓰여요. 고기를 맛있게 먹으려면 쌈채소 위에 고기, 무침, 쌈장을 올리고 한 입에 먹으면 돼요. 쌈은 고기와 야채를 동시에 먹을 수 있어서 아주 효율적이에요. 쌈을 처음 먹는 외국인들도 금방 좋아하게 되는 한국의 대표 음식 문화예요.',",
+   "questions": [
+    {
+     "q": "쌈에 가장 많이 쓰이는 채소는?",
+     "q_en": "What vegetables are most commonly used for ssam?",
+     "options": [
+      "상추와 깻잎",
+      "배추와 시금치",
+      "오이와 당근"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "쌈이 효율적인 이유는?",
+     "q_en": "Why is ssam efficient?",
+     "options": [
+      "빠르게 만들 수 있어요",
+      "고기와 야채를 동시에 먹을 수 있어요",
+      "재료가 싸요"
+     ],
+     "answer": 1
+    }
+   ]
+  }
+ ],
+ "self_check": [
+  "나는 '-기 위해서'를 써서 목적을 말할 수 있어요. (I can express purpose using -기 위해서)",
+  "나는 '-(으)려면'으로 조건을 설명할 수 있어요. (I can explain conditions using -(으)려면)",
+  "나는 '-(으)ㄹ수록'으로 비례 관계를 표현할 수 있어요. (I can express proportional relationships)",
+  "나는 쌈 싸는 법을 한국어로 설명할 수 있어요. (I can explain how to make ssam in Korean)",
+  "나는 만능 양념 재료를 다섯 가지 이상 말할 수 있어요. (I can name 5+ ingredients in the all-purpose sauce)"
+ ],
+ "quiz": [
+  {
+   "type": "listen",
+   "audio_text": "갈비를 맛있게 먹기 위해서 필요한 게 뭔지 알아?",
+   "question": "보미가 처음에 뭐가 필요하다고 했어요?",
+   "question_en": "What did Bomi say was needed first?",
+   "options": [
+    "맛있는 고기",
+    "신선한 야채",
+    "좋은 식당"
+   ],
+   "answer": 1,
+   "exp": "갈비를 맛있게 먹기 위해서 = in order to eat galbi deliciously. The answer is 신선한 야채 (fresh vegetables)!"
+  },
+  {
+   "type": "mc",
+   "question": "'드레싱을 만들려면'의 뜻은?",
+   "question_en": "What does '드레싱을 만들려면' mean?",
+   "options": [
+    "드레싱을 만들었어요",
+    "드레싱을 만들고 싶지 않으면",
+    "드레싱을 만들고 싶으면 / 만들기 위해서는"
+   ],
+   "answer": 2,
+   "exp": "-(으)려면 = if you want to / in order to. 만들려면 = if you want to make. It sets up a condition!"
+  },
+  {
+   "type": "listen",
+   "audio_text": "마지막에 참기름을 한바퀴 휘리릭, 깨소금을 톡 톡 넣으면 끝!",
+   "question": "양념 만들기의 마지막 단계는?",
+   "question_en": "What is the last step of making the sauce?",
+   "options": [
+    "마늘 다지기",
+    "식초 넣기",
+    "참기름 + 깨소금 넣기"
+   ],
+   "answer": 2,
+   "exp": "참기름 한바퀴 휘리릭, 깨소금 톡 톡 — the finishing touch! 휘리릭 and 톡 톡 are Korean sound words (의성어)."
+  },
+  {
+   "type": "mc",
+   "question": "매실청이 없으면 뭐를 넣어요?",
+   "question_en": "If there's no plum syrup, what do you add?",
+   "options": [
+    "꿀",
+    "설탕",
+    "식초"
+   ],
+   "answer": 1,
+   "exp": "매실청이 없으면 설탕을 넣어 — if there's no maesil-cheong, add sugar. Simple and accessible substitute!"
+  },
+  {
+   "type": "mc",
+   "question": "'입이 작을수록 쌈도 작게 싸야 해요' — '-(으)ㄹ수록'의 의미는?",
+   "question_en": "What does -(으)ㄹ수록 express in this sentence?",
+   "options": [
+    "작은 입을 원해요",
+    "비례 관계 — 하나가 변하면 다른 것도 같이 변해요",
+    "입이 작아서 슬퍼요"
+   ],
+   "answer": 1,
+   "exp": "-(으)ㄹ수록 expresses a proportional relationship: 작을수록 = the smaller ~. The smaller the mouth, the smaller the ssam should be!"
+  },
+  {
+   "type": "listen",
+   "audio_text": "나, 입 작지 않아!",
+   "question": "올리비아는 왜 이렇게 말했어요?",
+   "question_en": "Why did Olivia say this?",
+   "options": [
+    "입이 정말 작아요",
+    "보미가 입이 작을수록 쌈을 작게 싸야 한다고 했어요",
+    "쌈이 너무 커요"
+   ],
+   "answer": 1,
+   "exp": "보미가 '입이 작을수록 쌈도 작게 싸야 돼'라고 해서 올리비아가 '나는 입이 작지 않아!'라고 반박했어요. Classic! 😄"
+  }
+ ]
 }

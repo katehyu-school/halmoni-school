@@ -1,790 +1,790 @@
 {
-  "id": "ep08",
-  "level": "L3",
-  "title": "날씨가 좋군요",
-  "title_en": "Nice Weather",
-  "scene": "길에서의 스몰토크 — 두 엄마가 우연히 만나 날씨 이야기",
-  "goal": {
-    "ko": "날씨를 비교하고, 들은 정보를 전달할 수 있어요.",
-    "en": "Compare weather and report hearsay."
+ "id": "ep08",
+ "level": "L3",
+ "title": "날씨가 좋군요",
+ "title_en": "Nice Weather",
+ "scene": "🤝 인간관계·스몰토크 · Small Talk",
+ "goal": {
+  "ko": "날씨를 비교하고, 들은 정보를 전달할 수 있어요.",
+  "en": "Compare weather and report hearsay."
+ },
+ "key_points": [
+  "-에 비해서 / -보다 로 비교하기",
+  "-다면서요? 로 들은 정보 확인하기",
+  "-대요 / -거래요 / -다고 해요 로 정보 전달하기",
+  "-처럼 / -같이 로 유사 비교하기"
+ ],
+ "characters": [
+  {
+   "id": "mirae_mom",
+   "name": "보미 엄마",
+   "color": "green"
   },
-  "key_points": [
-    "-에 비해서 / -보다 로 비교하기",
-    "-다면서요? 로 들은 정보 확인하기",
-    "-대요 / -거래요 / -다고 해요 로 정보 전달하기",
-    "-처럼 / -같이 로 유사 비교하기"
-  ],
-  "characters": [
-    {
-      "id": "mirae_mom",
-      "name": "보미 엄마",
-      "color": "green"
-    },
-    {
-      "id": "liam_mom",
-      "name": "라온 엄마",
-      "color": "burgundy"
-    }
-  ],
-  "slides": [
-    "data/nhs/L3/slides/ep08/날씨가 좋군요1.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요2.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요3.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요4.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요5.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요6.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요7.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요8.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요9.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요10.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요11.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요12.png",
-    "data/nhs/L3/slides/ep08/날씨가 좋군요13.png"
-  ],
-  "script": [
-    {
-      "speaker": "mirae_mom",
-      "text": "안녕하세요?",
-      "translation": "Hello!",
-      "slide": 0,
-      "audio": "data/nhs/L3/TTS/ep08/audio_0_안녕하세요_.mp3"
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "안녕하세요? 오랜만에 뵙네요.",
-      "translation": "Hello! It's been a while!",
-      "slide": 1,
-      "audio": "data/nhs/L3/TTS/ep08/audio_1_안녕하세요__오랜만에_뵙네요_.mp3",
-      "annotation": {
-        "highlight": "오랜만에 뵙네요",
-        "grammar": "보다 → 뵙다",
-        "note": "보다 (to see) → 뵙다 (to see, honorific)\n오랜만에 = after a long time\n어른들끼리 쓰는 정중한 표현이에요!"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "요즘 어떻게 지내셨어요?",
-      "translation": "How have you been lately?",
-      "slide": 2,
-      "audio": "data/nhs/L3/TTS/ep08/audio_2_요즘_어떻게_지내셨어요_.mp3"
-    },
-    {
-      "speaker": "mirae_mom",
-      "text": "덕분에 잘 지내고 있어요.",
-      "translation": "Thanks to you, I've been doing well.",
-      "slide": 3,
-      "audio": "data/nhs/L3/TTS/ep08/audio_3_덕분에_잘_지내고_있어요__.mp3",
-      "annotation": {
-        "highlight": "덕분에",
-        "grammar": "덕분에",
-        "note": "덕분에 = thanks to (you / someone)\nL1 ep11에서 배운 표현!\n'덕분에 잘 지내요' — 정중한 인사의 정석이에요."
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "올해는 작년에 비해서 덥지 않네요.",
-      "translation": "This year isn't as hot compared to last year.",
-      "slide": 4,
-      "audio": "data/nhs/L3/TTS/ep08/audio_4_올해는_작년에_비해서_덥지_않네요_.mp3",
-      "annotation": {
-        "highlight": "작년에 비해서",
-        "grammar": "-에 비해서",
-        "note": "작년에 비해서 = compared to last year\nN에 비해서 = compared to N\n기준점을 제시할 때 써요!"
-      }
-    },
-    {
-      "speaker": "mirae_mom",
-      "text": "그러게요. 작년보다 훨씬 선선하죠?",
-      "translation": "I know, right. It's much cooler than last year, isn't it?",
-      "slide": 5,
-      "audio": "data/nhs/L3/TTS/ep08/audio_5_그러게요__작년보다_훨씬_선선하죠_.mp3",
-      "annotation": {
-        "highlight": "작년보다 훨씬",
-        "grammar": "-보다 (훨씬)",
-        "note": "작년보다 훨씬 선선해요 = much cooler than last year\nN보다 = more than N\n훨씬 = much more (강조)\n-에 비해서보다 더 직접적인 비교예요!"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "뉴스에서 봤는데 북쪽에서 찬바람이 내려오고 있대요.",
-      "translation": "I saw on the news that cold wind is coming down from the north.",
-      "slide": 6,
-      "audio": "data/nhs/L3/TTS/ep08/audio_6_뉴스에서_봤는데_북쪽에서_찬바람이_내려오고_있대요_.mp3",
-      "annotation": {
-        "highlight": "내려오고 있대요",
-        "grammar": "-대요",
-        "note": "내려오고 있대요 = (they say) it's coming down\n-대요 = -다고 해요 (줄임)\n뉴스·누군가에게 들은 정보를 전달할 때 써요!"
-      }
-    },
-    {
-      "speaker": "mirae_mom",
-      "text": "찬공기가 장마전선을 막고 있다면서요?",
-      "translation": "I heard cold air is blocking the monsoon front — is that right?",
-      "slide": 7,
-      "audio": "data/nhs/L3/TTS/ep08/audio_7_찬공기가_장마전선을_막고_있다면서요_.mp3",
-      "annotation": {
-        "highlight": "막고 있다면서요?",
-        "grammar": "-다면서요?",
-        "note": "막고 있다면서요? = I heard it's blocking — is that right?\n-다면서요? = 들은 내용을 확인할 때\n= '그렇다고 하던데, 맞아요?' 뉘앙스예요!"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "아무튼 내년에도 올해처럼 시원하면 좋겠어요.",
-      "translation": "Anyway, I hope next year is as cool as this year.",
-      "slide": 8,
-      "audio": "data/nhs/L3/TTS/ep08/audio_8_아무튼_내년에도_올해처럼_시원하면_좋겠어요_.mp3",
-      "annotation": {
-        "highlight": "올해처럼",
-        "grammar": "-처럼",
-        "note": "올해처럼 시원해요 = as cool as this year\nN처럼 = like N / as N\n유사함을 표현할 때 써요!"
-      }
-    },
-    {
-      "speaker": "mirae_mom",
-      "text": "이제 곧 장마와 함께 뜨거운 공기가 밀려올 거래요.",
-      "translation": "They say hot air will soon surge in along with the monsoon.",
-      "slide": 9,
-      "audio": "data/nhs/L3/TTS/ep08/audio_9_이제_곧_장마와_함께_뜨거운_공기가_밀려올_거래요_.mp3",
-      "annotation": {
-        "highlight": "밀려올 거래요",
-        "grammar": "-거래요",
-        "note": "밀려올 거래요 = (they say) it will surge in\n-거래요 = -(으)ㄹ 거라고 해요 (줄임)\n미래에 대한 전달 표현이에요!"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "작년같이 더울까요? 작년에는 한 달 내내 폭염이었잖아요.",
-      "translation": "Will it be as hot as last year? Last year was a heat wave all month long, you know.",
-      "slide": 10,
-      "audio": "data/nhs/L3/TTS/ep08/audio_10_작년같이_더울까요__작년에는_한_달_내내_폭염이었잖아요_.mp3",
-      "annotation": {
-        "highlight": "작년같이 / 폭염이었잖아요",
-        "grammar": "-같이 / -(었)잖아요",
-        "note": "작년같이 = like last year (-처럼과 같은 뜻!)\n폭염이었잖아요 = it was a heat wave, you know\n-잖아요 = '우리 둘 다 알고 있잖아요' 뉘앙스!"
-      }
-    },
-    {
-      "speaker": "mirae_mom",
-      "text": "작년보다 더 더울 거라고 해요.",
-      "translation": "They say it'll be even hotter than last year.",
-      "slide": 11,
-      "audio": "data/nhs/L3/TTS/ep08/audio_11_작년보다_더_더울_거라고_해요_.mp3",
-      "annotation": {
-        "highlight": "더울 거라고 해요",
-        "grammar": "-다고 해요",
-        "note": "더울 거라고 해요 = they say it will be hot\n-다고 해요 = 간접화법 (indirect speech)\n-대요 / -거래요 의 풀어쓴 형태예요!"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "그나저나 지구 온난화 때문에 큰일이에요.",
-      "translation": "Anyway, global warming is a real problem.",
-      "slide": 12,
-      "audio": "data/nhs/L3/TTS/ep08/audio_12_그나저나_지구_온난화때문에_큰일이에요_.mp3",
-      "annotation": {
-        "highlight": "때문에",
-        "grammar": "N 때문에",
-        "note": "지구 온난화 때문에 = because of global warming\nN 때문에 = because of N\n원인을 나타내요!"
-      }
-    }
-  ],
-  "vocab": [
-    {
-      "category": "⏰ 시간 표현",
-      "items": [
-        {
-          "korean": "요즘",
-          "english": "these days, lately",
-          "emoji": "📅"
-        },
-        {
-          "korean": "오랜만에",
-          "english": "after a long time",
-          "emoji": "🙌"
-        },
-        {
-          "korean": "작년",
-          "english": "last year",
-          "emoji": "◀️"
-        },
-        {
-          "korean": "올해",
-          "english": "this year",
-          "emoji": "📌"
-        },
-        {
-          "korean": "내년",
-          "english": "next year",
-          "emoji": "▶️"
-        },
-        {
-          "korean": "한 달 내내",
-          "english": "all month long",
-          "emoji": "🗓️"
-        }
-      ]
-    },
-    {
-      "category": "🧭 방향",
-      "items": [
-        {
-          "korean": "동쪽",
-          "english": "east",
-          "emoji": "➡️"
-        },
-        {
-          "korean": "서쪽",
-          "english": "west",
-          "emoji": "⬅️"
-        },
-        {
-          "korean": "남쪽",
-          "english": "south",
-          "emoji": "⬇️"
-        },
-        {
-          "korean": "북쪽",
-          "english": "north",
-          "emoji": "⬆️"
-        }
-      ]
-    },
-    {
-      "category": "🌦️ 날씨 & 기후",
-      "items": [
-        {
-          "korean": "선선하다",
-          "english": "cool, refreshing (weather)",
-          "emoji": "🍃"
-        },
-        {
-          "korean": "덥다",
-          "english": "hot",
-          "emoji": "🥵"
-        },
-        {
-          "korean": "춥다",
-          "english": "cold",
-          "emoji": "🥶"
-        },
-        {
-          "korean": "찬바람",
-          "english": "cold wind",
-          "emoji": "💨"
-        },
-        {
-          "korean": "공기",
-          "english": "air",
-          "emoji": "🌬️"
-        },
-        {
-          "korean": "장마",
-          "english": "rainy season, monsoon",
-          "emoji": "🌧️"
-        },
-        {
-          "korean": "장마전선",
-          "english": "monsoon front",
-          "emoji": "🗺️"
-        },
-        {
-          "korean": "폭염",
-          "english": "heat wave",
-          "emoji": "🔥"
-        },
-        {
-          "korean": "지구 온난화",
-          "english": "global warming",
-          "emoji": "🌍"
-        }
-      ]
-    },
-    {
-      "category": "🏃 동사 & 표현",
-      "items": [
-        {
-          "korean": "내려오다",
-          "english": "to come down",
-          "emoji": "⬇️"
-        },
-        {
-          "korean": "올라가다",
-          "english": "to go up",
-          "emoji": "⬆️"
-        },
-        {
-          "korean": "밀려오다",
-          "english": "to surge/flood in",
-          "emoji": "🌊"
-        },
-        {
-          "korean": "막다",
-          "english": "to block, to stop",
-          "emoji": "🚧"
-        },
-        {
-          "korean": "보다 → 뵙다",
-          "english": "to see → to see (honorific)",
-          "emoji": "👀"
-        },
-        {
-          "korean": "훨씬",
-          "english": "much more, far more",
-          "emoji": "📈"
-        },
-        {
-          "korean": "아무튼",
-          "english": "anyway, in any case",
-          "emoji": "💬"
-        },
-        {
-          "korean": "그나저나",
-          "english": "by the way, anyway (topic change)",
-          "emoji": "↩️"
-        },
-        {
-          "korean": "큰일",
-          "english": "big problem, serious matter",
-          "emoji": "⚠️"
-        },
-        {
-          "korean": "때문에",
-          "english": "because of, due to",
-          "emoji": "🔗"
-        }
-      ]
-    }
-  ],
-  "grammar": [
-    {
-      "id": "g08_ebihae",
-      "tier": "core",
-      "title": "-에 비해서 / -보다",
-      "title_en": "Comparison: compared to / more than",
-      "emoji": "⚖️",
-      "explanation_en": "Two main ways to compare in Korean. -에 비해서 sets a reference point ('compared to X'); -보다 directly states more/less ('more than X').",
-      "pattern": "N에 비해서 + [adj/verb] · N보다 (훨씬) + [adj/verb]",
-      "scene_example": {
-        "korean": "올해는 작년에 비해서 덥지 않네요.",
-        "english": "This year isn't as hot compared to last year.",
-        "highlight": "작년에 비해서"
-      },
-      "rule_boxes": [
-        {
-          "content": "작년에 비해서 선선해요 = cool compared to last year\n올해에 비해서 더워요 = hot compared to this year\n기준점을 제시할 때 — more formal",
-          "label": "-에 비해서 (compared to)",
-          "type": "blue"
-        },
-        {
-          "content": "작년보다 훨씬 선선해요 = much cooler than last year\n작년보다 더 더울 거예요 = will be hotter than last year\n더 직접적인 비교 — very common in speech",
-          "label": "-보다 (more than)",
-          "type": "green"
-        },
-        {
-          "content": "훨씬 = much more (강한 강조)\n더 = more (일반 강조)\n작년보다 훨씬 더워요 vs 작년보다 조금 더워요",
-          "label": "강조 부사",
-          "type": "amber"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "-에 비해서",
-          "items": [
-            {
-              "ko": "작년에 비해서 덥지 않네요.",
-              "en": "It's not as hot compared to last year."
-            },
-            {
-              "ko": "예전에 비해서 한국어가 많이 늘었어요.",
-              "en": "My Korean has improved a lot compared to before."
-            }
-          ]
-        },
-        {
-          "label": "-보다 (훨씬)",
-          "items": [
-            {
-              "ko": "작년보다 훨씬 선선하죠?",
-              "en": "It's much cooler than last year, right?"
-            },
-            {
-              "ko": "작년보다 더 더울 거라고 해요.",
-              "en": "They say it'll be even hotter than last year."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "g08_damyeonseo",
-      "tier": "core",
-      "title": "-다면서요?",
-      "title_en": "Confirming hearsay: 'I heard that... is it true?'",
-      "emoji": "🤔",
-      "explanation_en": "Use -다면서요? when you've heard something and want to confirm it with the listener. It carries the nuance of 'I heard X — is that right?'",
-      "pattern": "Verb/Adj stem + -다면서요? · N(이)라면서요?",
-      "scene_example": {
-        "korean": "찬공기가 장마전선을 막고 있다면서요?",
-        "english": "I heard cold air is blocking the monsoon front — is that right?",
-        "highlight": "막고 있다면서요?"
-      },
-      "rule_boxes": [
-        {
-          "content": "동사 현재: -ㄴ/는다면서요? (가다→간다면서요?)\n동사 과거: -았/었다면서요? (갔다면서요?)\n형용사: -다면서요? (덥다면서요?)\nN이다: N(이)라면서요? (학생이라면서요?)",
-          "label": "형태 만들기",
-          "type": "blue"
-        },
-        {
-          "content": "'들었는데 맞아요?' = I heard it — is it true?\n확인·재확인할 때 사용\n= -다고 하던데, 맞아요? 와 같은 뜻",
-          "label": "뉘앙스",
-          "type": "green"
-        },
-        {
-          "content": "반말: -다면서? (장마전선을 막고 있다면서?)\n존댓말: -다면서요? (막고 있다면서요?)\n이 에피소드는 어른들끼리라서 -요 필수!",
-          "label": "반말 vs 존댓말",
-          "type": "amber"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "내일 비가 온다면서요?",
-          "en": "I heard it's going to rain tomorrow — is that right?"
-        },
-        {
-          "ko": "보미 씨가 서울에서 산다면서요?",
-          "en": "I heard Bomi lives in Seoul — is that right?"
-        },
-        {
-          "ko": "찬공기가 장마전선을 막고 있다면서요?",
-          "en": "I heard cold air is blocking the monsoon front?"
-        }
-      ]
-    },
-    {
-      "id": "g08_hearsay",
-      "tier": "core",
-      "title": "-대요 / -거래요 / -다고 해요",
-      "title_en": "Reporting hearsay: 'They say that...'",
-      "emoji": "📢",
-      "explanation_en": "All three mean 'they say / I heard that.' -대요 and -거래요 are shortened spoken forms of -다고 해요. Use them to pass on information you heard from someone else.",
-      "pattern": "Verb/Adj + -대요 · -(으)ㄹ 거 + -래요 (미래) · -(이)라고 해요 (N)",
-      "scene_example": {
-        "korean": "북쪽에서 찬바람이 내려오고 있대요.",
-        "english": "They say cold wind is coming down from the north.",
-        "highlight": "내려오고 있대요"
-      },
-      "rule_boxes": [
-        {
-          "content": "내려오고 있대요 = they say it's coming down\n덥대요 = they say it's hot\n갔대요 = they say she went\n= -다고 해요 줄임",
-          "label": "-대요 (현재/과거 전달)",
-          "type": "blue"
-        },
-        {
-          "content": "밀려올 거래요 = they say it will surge in\n비가 올 거래요 = they say it will rain\n= -(으)ㄹ 거라고 해요 줄임",
-          "label": "-거래요 (미래 전달)",
-          "type": "green"
-        },
-        {
-          "content": "더울 거라고 해요 = they say it will be hot\n뉴스에서 그렇다고 해요 = the news says so\n말할 때는 -대요/-거래요가 더 자연스러워요!",
-          "label": "-다고 해요 (풀어쓴 형태)",
-          "type": "amber"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "-대요",
-          "items": [
-            {
-              "ko": "뉴스에서 봤는데 찬바람이 내려오고 있대요.",
-              "en": "I saw on the news that cold wind is coming down."
-            },
-            {
-              "ko": "내일 비가 많이 온대요.",
-              "en": "They say it'll rain a lot tomorrow."
-            }
-          ]
-        },
-        {
-          "label": "-거래요",
-          "items": [
-            {
-              "ko": "장마와 함께 뜨거운 공기가 밀려올 거래요.",
-              "en": "They say hot air will surge in with the monsoon."
-            },
-            {
-              "ko": "올 여름은 특히 더울 거래요.",
-              "en": "They say this summer will be especially hot."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "g08_cheoruem",
-      "tier": "core",
-      "title": "-처럼 / -같이",
-      "title_en": "Similarity: like, as",
-      "emoji": "🪞",
-      "explanation_en": "Both -처럼 and -같이 mean 'like' or 'as.' They are interchangeable in most contexts and express similarity or comparison.",
-      "pattern": "N + -처럼 · N + -같이",
-      "scene_example": {
-        "korean": "내년에도 올해처럼 시원하면 좋겠어요.",
-        "english": "I hope next year is as cool as this year.",
-        "highlight": "올해처럼"
-      },
-      "rule_boxes": [
-        {
-          "content": "올해처럼 시원해요 = as cool as this year\n작년같이 더울까요? = will it be as hot as last year?\n둘 다 'like / as' 의미로 교환 가능!",
-          "label": "-처럼 / -같이 (interchangeable)",
-          "type": "blue"
-        },
-        {
-          "content": "-보다 = more than (정도 비교)\n-에 비해서 = compared to (기준 비교)\n-처럼/-같이 = like, as (유사 비교)",
-          "label": "비교 표현 총정리",
-          "type": "green"
-        }
-      ],
-      "examples": [
-        {
-          "ko": "올해처럼 시원하면 좋겠어요.",
-          "en": "I hope it's as cool as this year."
-        },
-        {
-          "ko": "작년같이 더울까요?",
-          "en": "Will it be as hot as last year?"
-        },
-        {
-          "ko": "엄마처럼 요리를 잘하고 싶어요.",
-          "en": "I want to cook as well as my mom."
-        }
-      ]
-    }
-  ],
-  "pronunciation": {
-    "title": "발음 주의",
-    "items": [
-      {
-        "word": "훨씬",
-        "note": "ㅝ 모음 — 영어 'wuh' 비슷. '훠얼씬'처럼 늘어지지 않도록!",
-        "actual": "[훨씬]"
-      },
-      {
-        "word": "온난화",
-        "note": "비음화: 온+난 → [온난]. 천천히: 온-난-화",
-        "actual": "[온난화]"
-      },
-      {
-        "word": "장마전선",
-        "note": "긴 복합명사. 장마 / 전선 두 단어로 끊어 읽기",
-        "actual": "[장마전선]"
-      }
-    ]
+  {
+   "id": "liam_mom",
+   "name": "라온 엄마",
+   "color": "burgundy"
+  }
+ ],
+ "slides": [
+  "data/nhs/L3/slides/ep08/날씨가 좋군요1.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요2.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요3.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요4.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요5.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요6.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요7.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요8.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요9.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요10.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요11.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요12.png",
+  "data/nhs/L3/slides/ep08/날씨가 좋군요13.png"
+ ],
+ "script": [
+  {
+   "speaker": "mirae_mom",
+   "text": "안녕하세요?",
+   "translation": "Hello!",
+   "slide": 0,
+   "audio": "data/nhs/L3/TTS/ep08/audio_0_안녕하세요_.mp3"
   },
-  "banmal_jondaemal": {
-    "intro_ko": "이 에피소드는 처음부터 끝까지 어른들끼리 존댓말을 사용해요. 반말 버전으로 비교해 볼게요.",
-    "intro_en": "This episode uses formal speech throughout. Compare with casual speech below.",
-    "rows": [
-      {
-        "situation_ko": "인사",
-        "situation_en": "Greeting",
-        "banmal": "오랜만이야!",
-        "jondaemal": "오랜만에 뵙네요."
-      },
-      {
-        "situation_ko": "안부",
-        "situation_en": "How are you?",
-        "banmal": "요즘 어떻게 지냈어?",
-        "jondaemal": "요즘 어떻게 지내셨어요?"
-      },
-      {
-        "situation_ko": "들은 정보 전달",
-        "situation_en": "Reporting hearsay",
-        "banmal": "찬바람이 내려오고 있대.",
-        "jondaemal": "찬바람이 내려오고 있대요."
-      },
-      {
-        "situation_ko": "들은 정보 확인",
-        "situation_en": "Confirming hearsay",
-        "banmal": "장마전선을 막고 있다면서?",
-        "jondaemal": "장마전선을 막고 있다면서요?"
-      }
-    ],
-    "tip": "-다면서? (반말) / -다면서요? (존댓말) — 요만 붙이면 돼요!"
+  {
+   "speaker": "liam_mom",
+   "text": "안녕하세요? 오랜만에 뵙네요.",
+   "translation": "Hello! It's been a while!",
+   "slide": 1,
+   "audio": "data/nhs/L3/TTS/ep08/audio_1_안녕하세요__오랜만에_뵙네요_.mp3",
+   "annotation": {
+    "highlight": "오랜만에 뵙네요",
+    "grammar": "보다 → 뵙다",
+    "note": "보다 (to see) → 뵙다 (to see, honorific)\n오랜만에 = after a long time\n어른들끼리 쓰는 정중한 표현이에요!"
+   }
   },
-  "real_life": [
+  {
+   "speaker": "liam_mom",
+   "text": "요즘 어떻게 지내셨어요?",
+   "translation": "How have you been lately?",
+   "slide": 2,
+   "audio": "data/nhs/L3/TTS/ep08/audio_2_요즘_어떻게_지내셨어요_.mp3"
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "덕분에 잘 지내고 있어요.",
+   "translation": "Thanks to you, I've been doing well.",
+   "slide": 3,
+   "audio": "data/nhs/L3/TTS/ep08/audio_3_덕분에_잘_지내고_있어요__.mp3",
+   "annotation": {
+    "highlight": "덕분에",
+    "grammar": "덕분에",
+    "note": "덕분에 = thanks to (you / someone)\nL1 ep11에서 배운 표현!\n'덕분에 잘 지내요' — 정중한 인사의 정석이에요."
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "올해는 작년에 비해서 덥지 않네요.",
+   "translation": "This year isn't as hot compared to last year.",
+   "slide": 4,
+   "audio": "data/nhs/L3/TTS/ep08/audio_4_올해는_작년에_비해서_덥지_않네요_.mp3",
+   "annotation": {
+    "highlight": "작년에 비해서",
+    "grammar": "-에 비해서",
+    "note": "작년에 비해서 = compared to last year\nN에 비해서 = compared to N\n기준점을 제시할 때 써요!"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "그러게요. 작년보다 훨씬 선선하죠?",
+   "translation": "I know, right. It's much cooler than last year, isn't it?",
+   "slide": 5,
+   "audio": "data/nhs/L3/TTS/ep08/audio_5_그러게요__작년보다_훨씬_선선하죠_.mp3",
+   "annotation": {
+    "highlight": "작년보다 훨씬",
+    "grammar": "-보다 (훨씬)",
+    "note": "작년보다 훨씬 선선해요 = much cooler than last year\nN보다 = more than N\n훨씬 = much more (강조)\n-에 비해서보다 더 직접적인 비교예요!"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "뉴스에서 봤는데 북쪽에서 찬바람이 내려오고 있대요.",
+   "translation": "I saw on the news that cold wind is coming down from the north.",
+   "slide": 6,
+   "audio": "data/nhs/L3/TTS/ep08/audio_6_뉴스에서_봤는데_북쪽에서_찬바람이_내려오고_있대요_.mp3",
+   "annotation": {
+    "highlight": "내려오고 있대요",
+    "grammar": "-대요",
+    "note": "내려오고 있대요 = (they say) it's coming down\n-대요 = -다고 해요 (줄임)\n뉴스·누군가에게 들은 정보를 전달할 때 써요!"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "찬공기가 장마전선을 막고 있다면서요?",
+   "translation": "I heard cold air is blocking the monsoon front — is that right?",
+   "slide": 7,
+   "audio": "data/nhs/L3/TTS/ep08/audio_7_찬공기가_장마전선을_막고_있다면서요_.mp3",
+   "annotation": {
+    "highlight": "막고 있다면서요?",
+    "grammar": "-다면서요?",
+    "note": "막고 있다면서요? = I heard it's blocking — is that right?\n-다면서요? = 들은 내용을 확인할 때\n= '그렇다고 하던데, 맞아요?' 뉘앙스예요!"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "아무튼 내년에도 올해처럼 시원하면 좋겠어요.",
+   "translation": "Anyway, I hope next year is as cool as this year.",
+   "slide": 8,
+   "audio": "data/nhs/L3/TTS/ep08/audio_8_아무튼_내년에도_올해처럼_시원하면_좋겠어요_.mp3",
+   "annotation": {
+    "highlight": "올해처럼",
+    "grammar": "-처럼",
+    "note": "올해처럼 시원해요 = as cool as this year\nN처럼 = like N / as N\n유사함을 표현할 때 써요!"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "이제 곧 장마와 함께 뜨거운 공기가 밀려올 거래요.",
+   "translation": "They say hot air will soon surge in along with the monsoon.",
+   "slide": 9,
+   "audio": "data/nhs/L3/TTS/ep08/audio_9_이제_곧_장마와_함께_뜨거운_공기가_밀려올_거래요_.mp3",
+   "annotation": {
+    "highlight": "밀려올 거래요",
+    "grammar": "-거래요",
+    "note": "밀려올 거래요 = (they say) it will surge in\n-거래요 = -(으)ㄹ 거라고 해요 (줄임)\n미래에 대한 전달 표현이에요!"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "작년같이 더울까요? 작년에는 한 달 내내 폭염이었잖아요.",
+   "translation": "Will it be as hot as last year? Last year was a heat wave all month long, you know.",
+   "slide": 10,
+   "audio": "data/nhs/L3/TTS/ep08/audio_10_작년같이_더울까요__작년에는_한_달_내내_폭염이었잖아요_.mp3",
+   "annotation": {
+    "highlight": "작년같이 / 폭염이었잖아요",
+    "grammar": "-같이 / -(었)잖아요",
+    "note": "작년같이 = like last year (-처럼과 같은 뜻!)\n폭염이었잖아요 = it was a heat wave, you know\n-잖아요 = '우리 둘 다 알고 있잖아요' 뉘앙스!"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "작년보다 더 더울 거라고 해요.",
+   "translation": "They say it'll be even hotter than last year.",
+   "slide": 11,
+   "audio": "data/nhs/L3/TTS/ep08/audio_11_작년보다_더_더울_거라고_해요_.mp3",
+   "annotation": {
+    "highlight": "더울 거라고 해요",
+    "grammar": "-다고 해요",
+    "note": "더울 거라고 해요 = they say it will be hot\n-다고 해요 = 간접화법 (indirect speech)\n-대요 / -거래요 의 풀어쓴 형태예요!"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "그나저나 지구 온난화 때문에 큰일이에요.",
+   "translation": "Anyway, global warming is a real problem.",
+   "slide": 12,
+   "audio": "data/nhs/L3/TTS/ep08/audio_12_그나저나_지구_온난화때문에_큰일이에요_.mp3",
+   "annotation": {
+    "highlight": "때문에",
+    "grammar": "N 때문에",
+    "note": "지구 온난화 때문에 = because of global warming\nN 때문에 = because of N\n원인을 나타내요!"
+   }
+  }
+ ],
+ "vocab": [
+  {
+   "category": "⏰ 시간 표현",
+   "items": [
     {
-      "type": "kakao",
-      "title": "날씨 얘기하는 카카오톡",
-      "messages": [
-        {
-          "sender": "friend",
-          "text": "오늘 날씨 진짜 선선하지 않아?",
-          "translation": "Isn't the weather really cool today?"
-        },
-        {
-          "sender": "me",
-          "text": "그러게~ 작년에 비해서 훨씬 낫다!",
-          "translation": "I know~ It's much better compared to last year!"
-        },
-        {
-          "sender": "friend",
-          "text": "뉴스에서 봤는데 이번 주 내내 이럴 거래.",
-          "translation": "I saw on the news that it'll be like this all week."
-        },
-        {
-          "sender": "me",
-          "text": "진짜? 완전 좋다 ㅋㅋ",
-          "translation": "Really? That's awesome lol"
-        }
-      ]
+     "korean": "요즘",
+     "english": "these days, lately",
+     "emoji": "📅"
     },
     {
-      "type": "reading",
-      "title": "날씨 뉴스 읽기",
-      "passage": "올해 여름은 작년에 비해서 선선한 편입니다. 기상청에 따르면 북쪽에서 찬공기가 내려오고 있어서 장마가 늦어지고 있다고 합니다. 하지만 전문가들은 장마가 시작되면 작년보다 더 더울 수 있다고 경고하고 있습니다.",
-      "passage_en": "This summer is on the cooler side compared to last year. According to the meteorological agency, cold air is coming down from the north, causing the monsoon to be delayed. However, experts warn that once the monsoon begins, it could be hotter than last year.",
-      "questions": [
-        {
-          "question": "올해 여름은 작년에 비해서 어때요?",
-          "options": [
-            "더 더워요",
-            "비슷해요",
-            "더 선선해요",
-            "정보 없음"
-          ],
-          "answer": 2
-        },
-        {
-          "question": "왜 장마가 늦어지고 있어요?",
-          "options": [
-            "남쪽에서 찬바람이 와서",
-            "북쪽에서 찬공기가 내려와서",
-            "서쪽에서 비가 와서",
-            "동쪽이 막혀서"
-          ],
-          "answer": 1
-        }
-      ]
+     "korean": "오랜만에",
+     "english": "after a long time",
+     "emoji": "🙌"
+    },
+    {
+     "korean": "작년",
+     "english": "last year",
+     "emoji": "◀️"
+    },
+    {
+     "korean": "올해",
+     "english": "this year",
+     "emoji": "📌"
+    },
+    {
+     "korean": "내년",
+     "english": "next year",
+     "emoji": "▶️"
+    },
+    {
+     "korean": "한 달 내내",
+     "english": "all month long",
+     "emoji": "🗓️"
     }
-  ],
-  "self_check": [
-    "-에 비해서/-보다 를 써서 날씨를 비교할 수 있어요.",
-    "-다면서요? 로 들은 정보를 확인할 수 있어요.",
-    "-대요/-거래요 로 정보를 전달할 수 있어요.",
-    "-처럼/-같이 로 유사 비교를 할 수 있어요.",
-    "동쪽/서쪽/남쪽/북쪽 방향을 말할 수 있어요."
-  ],
-  "quiz": [
+   ]
+  },
+  {
+   "category": "🧭 방향",
+   "items": [
     {
-      "type": "mc",
-      "question": "Which expression means 'compared to last year'?",
-      "question_ko": "작년을 기준으로 비교할 때 맞는 표현은?",
-      "options": [
-        "작년처럼",
-        "작년에 비해서",
-        "작년같이",
-        "작년보다서"
-      ],
-      "answer": 1
+     "korean": "동쪽",
+     "english": "east",
+     "emoji": "➡️"
     },
     {
-      "type": "listen",
-      "question": "What does 라온 엄마 say about this year's weather?",
-      "audio_text": "올해는 작년에 비해서 덥지 않네요.",
-      "options": [
-        "It's hotter than last year",
-        "It's not as hot compared to last year",
-        "It's the same as last year",
-        "It's much hotter this year"
-      ],
-      "answer": 1
+     "korean": "서쪽",
+     "english": "west",
+     "emoji": "⬅️"
     },
     {
-      "type": "mc",
-      "question": "보미 엄마 heard cold air is blocking the monsoon front. Which expression does she use to CONFIRM this?",
-      "question_ko": "들은 정보를 확인할 때 어떤 표현을 써요?",
-      "options": [
-        "-대요",
-        "-거래요",
-        "-다면서요?",
-        "-처럼"
-      ],
-      "answer": 2
+     "korean": "남쪽",
+     "english": "south",
+     "emoji": "⬇️"
     },
     {
-      "type": "listen",
-      "question": "What does 라온 엄마 hear on the news?",
-      "audio_text": "뉴스에서 봤는데 북쪽에서 찬바람이 내려오고 있대요.",
-      "options": [
-        "Hot wind is coming from the south",
-        "Cold wind is coming down from the north",
-        "The monsoon front is blocked",
-        "Next year will be hotter"
-      ],
-      "answer": 1
-    },
-    {
-      "type": "mc",
-      "question": "'작년같이 더울까요?' — What does -같이 mean here?",
-      "question_ko": "-같이의 의미는?",
-      "options": [
-        "more than last year",
-        "because of last year",
-        "as hot as last year",
-        "unlike last year"
-      ],
-      "answer": 2
-    },
-    {
-      "type": "listen",
-      "question": "What do they say about next year's heat?",
-      "audio_text": "작년보다 더 더울 거라고 해요.",
-      "options": [
-        "It'll be cooler than last year",
-        "It'll be the same as last year",
-        "It'll be even hotter than last year",
-        "Nobody knows"
-      ],
-      "answer": 2
+     "korean": "북쪽",
+     "english": "north",
+     "emoji": "⬆️"
     }
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "category": "🌦️ 날씨 & 기후",
+   "items": [
     {
-      "heading": "날씨 표현 총정리",
-      "content": "Korean weather vocab is rich — pair these with the grammar patterns in this episode.",
-      "examples": [
-        {
-          "ko": "맑아요 / 흐려요 / 비가 와요",
-          "en": "Clear / Cloudy / Rainy"
-        },
-        {
-          "ko": "선선해요 / 포근해요 / 쾌적해요",
-          "en": "Cool / Cozy warm / Pleasant"
-        },
-        {
-          "ko": "습해요 / 건조해요",
-          "en": "Humid / Dry"
-        }
-      ]
+     "korean": "선선하다",
+     "english": "cool, refreshing (weather)",
+     "emoji": "🍃"
     },
     {
-      "heading": "뉴스·일기예보 듣기 표현",
-      "content": "When watching Korean weather forecasts, you'll often hear these patterns.",
-      "examples": [
-        {
-          "ko": "전국적으로 비가 온대요.",
-          "en": "They say it'll rain nationwide."
-        },
-        {
-          "ko": "기온이 작년에 비해서 낮대요.",
-          "en": "They say temperatures are lower compared to last year."
-        },
-        {
-          "ko": "오늘처럼 맑은 날이 계속될 거래요.",
-          "en": "They say clear days like today will continue."
-        }
-      ]
+     "korean": "덥다",
+     "english": "hot",
+     "emoji": "🥵"
+    },
+    {
+     "korean": "춥다",
+     "english": "cold",
+     "emoji": "🥶"
+    },
+    {
+     "korean": "찬바람",
+     "english": "cold wind",
+     "emoji": "💨"
+    },
+    {
+     "korean": "공기",
+     "english": "air",
+     "emoji": "🌬️"
+    },
+    {
+     "korean": "장마",
+     "english": "rainy season, monsoon",
+     "emoji": "🌧️"
+    },
+    {
+     "korean": "장마전선",
+     "english": "monsoon front",
+     "emoji": "🗺️"
+    },
+    {
+     "korean": "폭염",
+     "english": "heat wave",
+     "emoji": "🔥"
+    },
+    {
+     "korean": "지구 온난화",
+     "english": "global warming",
+     "emoji": "🌍"
     }
+   ]
+  },
+  {
+   "category": "🏃 동사 & 표현",
+   "items": [
+    {
+     "korean": "내려오다",
+     "english": "to come down",
+     "emoji": "⬇️"
+    },
+    {
+     "korean": "올라가다",
+     "english": "to go up",
+     "emoji": "⬆️"
+    },
+    {
+     "korean": "밀려오다",
+     "english": "to surge/flood in",
+     "emoji": "🌊"
+    },
+    {
+     "korean": "막다",
+     "english": "to block, to stop",
+     "emoji": "🚧"
+    },
+    {
+     "korean": "보다 → 뵙다",
+     "english": "to see → to see (honorific)",
+     "emoji": "👀"
+    },
+    {
+     "korean": "훨씬",
+     "english": "much more, far more",
+     "emoji": "📈"
+    },
+    {
+     "korean": "아무튼",
+     "english": "anyway, in any case",
+     "emoji": "💬"
+    },
+    {
+     "korean": "그나저나",
+     "english": "by the way, anyway (topic change)",
+     "emoji": "↩️"
+    },
+    {
+     "korean": "큰일",
+     "english": "big problem, serious matter",
+     "emoji": "⚠️"
+    },
+    {
+     "korean": "때문에",
+     "english": "because of, due to",
+     "emoji": "🔗"
+    }
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g08_ebihae",
+   "tier": "core",
+   "title": "-에 비해서 / -보다",
+   "title_en": "Comparison: compared to / more than",
+   "emoji": "⚖️",
+   "explanation_en": "Two main ways to compare in Korean. -에 비해서 sets a reference point ('compared to X'); -보다 directly states more/less ('more than X').",
+   "pattern": "N에 비해서 + [adj/verb] · N보다 (훨씬) + [adj/verb]",
+   "scene_example": {
+    "korean": "올해는 작년에 비해서 덥지 않네요.",
+    "english": "This year isn't as hot compared to last year.",
+    "highlight": "작년에 비해서"
+   },
+   "rule_boxes": [
+    {
+     "content": "작년에 비해서 선선해요 = cool compared to last year\n올해에 비해서 더워요 = hot compared to this year\n기준점을 제시할 때 — more formal",
+     "label": "-에 비해서 (compared to)",
+     "type": "blue"
+    },
+    {
+     "content": "작년보다 훨씬 선선해요 = much cooler than last year\n작년보다 더 더울 거예요 = will be hotter than last year\n더 직접적인 비교 — very common in speech",
+     "label": "-보다 (more than)",
+     "type": "green"
+    },
+    {
+     "content": "훨씬 = much more (강한 강조)\n더 = more (일반 강조)\n작년보다 훨씬 더워요 vs 작년보다 조금 더워요",
+     "label": "강조 부사",
+     "type": "amber"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "-에 비해서",
+     "items": [
+      {
+       "ko": "작년에 비해서 덥지 않네요.",
+       "en": "It's not as hot compared to last year."
+      },
+      {
+       "ko": "예전에 비해서 한국어가 많이 늘었어요.",
+       "en": "My Korean has improved a lot compared to before."
+      }
+     ]
+    },
+    {
+     "label": "-보다 (훨씬)",
+     "items": [
+      {
+       "ko": "작년보다 훨씬 선선하죠?",
+       "en": "It's much cooler than last year, right?"
+      },
+      {
+       "ko": "작년보다 더 더울 거라고 해요.",
+       "en": "They say it'll be even hotter than last year."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g08_damyeonseo",
+   "tier": "core",
+   "title": "-다면서요?",
+   "title_en": "Confirming hearsay: 'I heard that... is it true?'",
+   "emoji": "🤔",
+   "explanation_en": "Use -다면서요? when you've heard something and want to confirm it with the listener. It carries the nuance of 'I heard X — is that right?'",
+   "pattern": "Verb/Adj stem + -다면서요? · N(이)라면서요?",
+   "scene_example": {
+    "korean": "찬공기가 장마전선을 막고 있다면서요?",
+    "english": "I heard cold air is blocking the monsoon front — is that right?",
+    "highlight": "막고 있다면서요?"
+   },
+   "rule_boxes": [
+    {
+     "content": "동사 현재: -ㄴ/는다면서요? (가다→간다면서요?)\n동사 과거: -았/었다면서요? (갔다면서요?)\n형용사: -다면서요? (덥다면서요?)\nN이다: N(이)라면서요? (학생이라면서요?)",
+     "label": "형태 만들기",
+     "type": "blue"
+    },
+    {
+     "content": "'들었는데 맞아요?' = I heard it — is it true?\n확인·재확인할 때 사용\n= -다고 하던데, 맞아요? 와 같은 뜻",
+     "label": "뉘앙스",
+     "type": "green"
+    },
+    {
+     "content": "반말: -다면서? (장마전선을 막고 있다면서?)\n존댓말: -다면서요? (막고 있다면서요?)\n이 에피소드는 어른들끼리라서 -요 필수!",
+     "label": "반말 vs 존댓말",
+     "type": "amber"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "내일 비가 온다면서요?",
+     "en": "I heard it's going to rain tomorrow — is that right?"
+    },
+    {
+     "ko": "보미 씨가 서울에서 산다면서요?",
+     "en": "I heard Bomi lives in Seoul — is that right?"
+    },
+    {
+     "ko": "찬공기가 장마전선을 막고 있다면서요?",
+     "en": "I heard cold air is blocking the monsoon front?"
+    }
+   ]
+  },
+  {
+   "id": "g08_hearsay",
+   "tier": "core",
+   "title": "-대요 / -거래요 / -다고 해요",
+   "title_en": "Reporting hearsay: 'They say that...'",
+   "emoji": "📢",
+   "explanation_en": "All three mean 'they say / I heard that.' -대요 and -거래요 are shortened spoken forms of -다고 해요. Use them to pass on information you heard from someone else.",
+   "pattern": "Verb/Adj + -대요 · -(으)ㄹ 거 + -래요 (미래) · -(이)라고 해요 (N)",
+   "scene_example": {
+    "korean": "북쪽에서 찬바람이 내려오고 있대요.",
+    "english": "They say cold wind is coming down from the north.",
+    "highlight": "내려오고 있대요"
+   },
+   "rule_boxes": [
+    {
+     "content": "내려오고 있대요 = they say it's coming down\n덥대요 = they say it's hot\n갔대요 = they say she went\n= -다고 해요 줄임",
+     "label": "-대요 (현재/과거 전달)",
+     "type": "blue"
+    },
+    {
+     "content": "밀려올 거래요 = they say it will surge in\n비가 올 거래요 = they say it will rain\n= -(으)ㄹ 거라고 해요 줄임",
+     "label": "-거래요 (미래 전달)",
+     "type": "green"
+    },
+    {
+     "content": "더울 거라고 해요 = they say it will be hot\n뉴스에서 그렇다고 해요 = the news says so\n말할 때는 -대요/-거래요가 더 자연스러워요!",
+     "label": "-다고 해요 (풀어쓴 형태)",
+     "type": "amber"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "-대요",
+     "items": [
+      {
+       "ko": "뉴스에서 봤는데 찬바람이 내려오고 있대요.",
+       "en": "I saw on the news that cold wind is coming down."
+      },
+      {
+       "ko": "내일 비가 많이 온대요.",
+       "en": "They say it'll rain a lot tomorrow."
+      }
+     ]
+    },
+    {
+     "label": "-거래요",
+     "items": [
+      {
+       "ko": "장마와 함께 뜨거운 공기가 밀려올 거래요.",
+       "en": "They say hot air will surge in with the monsoon."
+      },
+      {
+       "ko": "올 여름은 특히 더울 거래요.",
+       "en": "They say this summer will be especially hot."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g08_cheoruem",
+   "tier": "core",
+   "title": "-처럼 / -같이",
+   "title_en": "Similarity: like, as",
+   "emoji": "🪞",
+   "explanation_en": "Both -처럼 and -같이 mean 'like' or 'as.' They are interchangeable in most contexts and express similarity or comparison.",
+   "pattern": "N + -처럼 · N + -같이",
+   "scene_example": {
+    "korean": "내년에도 올해처럼 시원하면 좋겠어요.",
+    "english": "I hope next year is as cool as this year.",
+    "highlight": "올해처럼"
+   },
+   "rule_boxes": [
+    {
+     "content": "올해처럼 시원해요 = as cool as this year\n작년같이 더울까요? = will it be as hot as last year?\n둘 다 'like / as' 의미로 교환 가능!",
+     "label": "-처럼 / -같이 (interchangeable)",
+     "type": "blue"
+    },
+    {
+     "content": "-보다 = more than (정도 비교)\n-에 비해서 = compared to (기준 비교)\n-처럼/-같이 = like, as (유사 비교)",
+     "label": "비교 표현 총정리",
+     "type": "green"
+    }
+   ],
+   "examples": [
+    {
+     "ko": "올해처럼 시원하면 좋겠어요.",
+     "en": "I hope it's as cool as this year."
+    },
+    {
+     "ko": "작년같이 더울까요?",
+     "en": "Will it be as hot as last year?"
+    },
+    {
+     "ko": "엄마처럼 요리를 잘하고 싶어요.",
+     "en": "I want to cook as well as my mom."
+    }
+   ]
+  }
+ ],
+ "pronunciation": {
+  "title": "발음 주의",
+  "items": [
+   {
+    "word": "훨씬",
+    "note": "ㅝ 모음 — 영어 'wuh' 비슷. '훠얼씬'처럼 늘어지지 않도록!",
+    "actual": "[훨씬]"
+   },
+   {
+    "word": "온난화",
+    "note": "비음화: 온+난 → [온난]. 천천히: 온-난-화",
+    "actual": "[온난화]"
+   },
+   {
+    "word": "장마전선",
+    "note": "긴 복합명사. 장마 / 전선 두 단어로 끊어 읽기",
+    "actual": "[장마전선]"
+   }
   ]
+ },
+ "banmal_jondaemal": {
+  "intro_ko": "이 에피소드는 처음부터 끝까지 어른들끼리 존댓말을 사용해요. 반말 버전으로 비교해 볼게요.",
+  "intro_en": "This episode uses formal speech throughout. Compare with casual speech below.",
+  "rows": [
+   {
+    "situation_ko": "인사",
+    "situation_en": "Greeting",
+    "banmal": "오랜만이야!",
+    "jondaemal": "오랜만에 뵙네요."
+   },
+   {
+    "situation_ko": "안부",
+    "situation_en": "How are you?",
+    "banmal": "요즘 어떻게 지냈어?",
+    "jondaemal": "요즘 어떻게 지내셨어요?"
+   },
+   {
+    "situation_ko": "들은 정보 전달",
+    "situation_en": "Reporting hearsay",
+    "banmal": "찬바람이 내려오고 있대.",
+    "jondaemal": "찬바람이 내려오고 있대요."
+   },
+   {
+    "situation_ko": "들은 정보 확인",
+    "situation_en": "Confirming hearsay",
+    "banmal": "장마전선을 막고 있다면서?",
+    "jondaemal": "장마전선을 막고 있다면서요?"
+   }
+  ],
+  "tip": "-다면서? (반말) / -다면서요? (존댓말) — 요만 붙이면 돼요!"
+ },
+ "real_life": [
+  {
+   "type": "kakao",
+   "title": "날씨 얘기하는 카카오톡",
+   "messages": [
+    {
+     "sender": "friend",
+     "text": "오늘 날씨 진짜 선선하지 않아?",
+     "translation": "Isn't the weather really cool today?"
+    },
+    {
+     "sender": "me",
+     "text": "그러게~ 작년에 비해서 훨씬 낫다!",
+     "translation": "I know~ It's much better compared to last year!"
+    },
+    {
+     "sender": "friend",
+     "text": "뉴스에서 봤는데 이번 주 내내 이럴 거래.",
+     "translation": "I saw on the news that it'll be like this all week."
+    },
+    {
+     "sender": "me",
+     "text": "진짜? 완전 좋다 ㅋㅋ",
+     "translation": "Really? That's awesome lol"
+    }
+   ]
+  },
+  {
+   "type": "reading",
+   "title": "날씨 뉴스 읽기",
+   "passage": "올해 여름은 작년에 비해서 선선한 편입니다. 기상청에 따르면 북쪽에서 찬공기가 내려오고 있어서 장마가 늦어지고 있다고 합니다. 하지만 전문가들은 장마가 시작되면 작년보다 더 더울 수 있다고 경고하고 있습니다.",
+   "passage_en": "This summer is on the cooler side compared to last year. According to the meteorological agency, cold air is coming down from the north, causing the monsoon to be delayed. However, experts warn that once the monsoon begins, it could be hotter than last year.",
+   "questions": [
+    {
+     "question": "올해 여름은 작년에 비해서 어때요?",
+     "options": [
+      "더 더워요",
+      "비슷해요",
+      "더 선선해요",
+      "정보 없음"
+     ],
+     "answer": 2
+    },
+    {
+     "question": "왜 장마가 늦어지고 있어요?",
+     "options": [
+      "남쪽에서 찬바람이 와서",
+      "북쪽에서 찬공기가 내려와서",
+      "서쪽에서 비가 와서",
+      "동쪽이 막혀서"
+     ],
+     "answer": 1
+    }
+   ]
+  }
+ ],
+ "self_check": [
+  "-에 비해서/-보다 를 써서 날씨를 비교할 수 있어요.",
+  "-다면서요? 로 들은 정보를 확인할 수 있어요.",
+  "-대요/-거래요 로 정보를 전달할 수 있어요.",
+  "-처럼/-같이 로 유사 비교를 할 수 있어요.",
+  "동쪽/서쪽/남쪽/북쪽 방향을 말할 수 있어요."
+ ],
+ "quiz": [
+  {
+   "type": "mc",
+   "question": "Which expression means 'compared to last year'?",
+   "question_ko": "작년을 기준으로 비교할 때 맞는 표현은?",
+   "options": [
+    "작년처럼",
+    "작년에 비해서",
+    "작년같이",
+    "작년보다서"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "listen",
+   "question": "What does 라온 엄마 say about this year's weather?",
+   "audio_text": "올해는 작년에 비해서 덥지 않네요.",
+   "options": [
+    "It's hotter than last year",
+    "It's not as hot compared to last year",
+    "It's the same as last year",
+    "It's much hotter this year"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "mc",
+   "question": "보미 엄마 heard cold air is blocking the monsoon front. Which expression does she use to CONFIRM this?",
+   "question_ko": "들은 정보를 확인할 때 어떤 표현을 써요?",
+   "options": [
+    "-대요",
+    "-거래요",
+    "-다면서요?",
+    "-처럼"
+   ],
+   "answer": 2
+  },
+  {
+   "type": "listen",
+   "question": "What does 라온 엄마 hear on the news?",
+   "audio_text": "뉴스에서 봤는데 북쪽에서 찬바람이 내려오고 있대요.",
+   "options": [
+    "Hot wind is coming from the south",
+    "Cold wind is coming down from the north",
+    "The monsoon front is blocked",
+    "Next year will be hotter"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "mc",
+   "question": "'작년같이 더울까요?' — What does -같이 mean here?",
+   "question_ko": "-같이의 의미는?",
+   "options": [
+    "more than last year",
+    "because of last year",
+    "as hot as last year",
+    "unlike last year"
+   ],
+   "answer": 2
+  },
+  {
+   "type": "listen",
+   "question": "What do they say about next year's heat?",
+   "audio_text": "작년보다 더 더울 거라고 해요.",
+   "options": [
+    "It'll be cooler than last year",
+    "It'll be the same as last year",
+    "It'll be even hotter than last year",
+    "Nobody knows"
+   ],
+   "answer": 2
+  }
+ ],
+ "usage": [
+  {
+   "heading": "날씨 표현 총정리",
+   "content": "Korean weather vocab is rich — pair these with the grammar patterns in this episode.",
+   "examples": [
+    {
+     "ko": "맑아요 / 흐려요 / 비가 와요",
+     "en": "Clear / Cloudy / Rainy"
+    },
+    {
+     "ko": "선선해요 / 포근해요 / 쾌적해요",
+     "en": "Cool / Cozy warm / Pleasant"
+    },
+    {
+     "ko": "습해요 / 건조해요",
+     "en": "Humid / Dry"
+    }
+   ]
+  },
+  {
+   "heading": "뉴스·일기예보 듣기 표현",
+   "content": "When watching Korean weather forecasts, you'll often hear these patterns.",
+   "examples": [
+    {
+     "ko": "전국적으로 비가 온대요.",
+     "en": "They say it'll rain nationwide."
+    },
+    {
+     "ko": "기온이 작년에 비해서 낮대요.",
+     "en": "They say temperatures are lower compared to last year."
+    },
+    {
+     "ko": "오늘처럼 맑은 날이 계속될 거래요.",
+     "en": "They say clear days like today will continue."
+    }
+   ]
+  }
+ ]
 }

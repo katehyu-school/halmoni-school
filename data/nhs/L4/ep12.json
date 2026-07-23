@@ -1,372 +1,595 @@
 {
-  "id": "ep12",
-  "level": "L4",
-  "title": "동네 주민센터",
-  "title_en": "The Neighborhood Community Center",
-  "scene": "🏢 동네 주민센터 · Community Center",
-  "goal": {
-    "ko": "관공서에서 서류를 발급받는 상황을 통해 그동안 배운 격식체와 필수 표현을 총정리해요",
-    "en": "I can review the formal register and essential set phrases I've learned so far, through a scene of getting a document issued at a government office"
+ "id": "ep12",
+ "level": "L4",
+ "title": "동네 주민센터",
+ "title_en": "The Neighborhood Community Center",
+ "scene": "🏢 공공·행정 · Public Services",
+ "goal": {
+  "ko": "관공서에서 서류를 발급받는 상황을 통해 그동안 배운 격식체와 필수 표현을 총정리해요",
+  "en": "I can review the formal register and essential set phrases I've learned so far, through a scene of getting a document issued at a government office"
+ },
+ "key_points": [
+  "격식체 총정리★복습(L4 ep01) — -(으)ㅂ니다/습니다체·-(으)세요?·뭘 도와드릴까요? 등을 관공서 실전 상황에 적용",
+  "관공서 필수 표현★복습 — 부탁합니다 / -아/어 주셔서 감사합니다 등 서비스 상황의 정형화된 존댓말 표현"
+ ],
+ "characters": [
+  {
+   "id": "liam_mom",
+   "name": "라온 엄마",
+   "name_en": "Raon's Mom",
+   "emoji": "👩",
+   "color": "burgundy"
   },
-  "key_points": [
-    "격식체 총정리★복습(L4 ep01) — -(으)ㅂ니다/습니다체·-(으)세요?·뭘 도와드릴까요? 등을 관공서 실전 상황에 적용",
-    "관공서 필수 표현★복습 — 부탁합니다 / -아/어 주셔서 감사합니다 등 서비스 상황의 정형화된 존댓말 표현"
-  ],
-  "characters": [
-    { "id": "liam_mom", "name": "라온 엄마", "name_en": "Raon's Mom", "emoji": "👩", "color": "burgundy" },
-    { "id": "staff", "name": "직원", "name_en": "Community Center Staff", "emoji": "🧑‍💼", "color": "#7B8FA1" }
-  ],
-  "slides": [
-    "data/nhs/L4/slides/ep12/동네주민센터1.png",
-    "data/nhs/L4/slides/ep12/동네주민센터2.png",
-    "data/nhs/L4/slides/ep12/동네주민센터3.png",
-    "data/nhs/L4/slides/ep12/동네주민센터4.png",
-    "data/nhs/L4/slides/ep12/동네주민센터5.png",
-    "data/nhs/L4/slides/ep12/동네주민센터6.png",
-    "data/nhs/L4/slides/ep12/동네주민센터7.png",
-    "data/nhs/L4/slides/ep12/동네주민센터8.png",
-    "data/nhs/L4/slides/ep12/동네주민센터9.png"
-  ],
-  "video": null,
-  "script": [
+  {
+   "id": "staff",
+   "name": "직원",
+   "name_en": "Community Center Staff",
+   "emoji": "🧑‍💼",
+   "color": "#7B8FA1"
+  }
+ ],
+ "slides": [
+  "data/nhs/L4/slides/ep12/동네주민센터1.png",
+  "data/nhs/L4/slides/ep12/동네주민센터2.png",
+  "data/nhs/L4/slides/ep12/동네주민센터3.png",
+  "data/nhs/L4/slides/ep12/동네주민센터4.png",
+  "data/nhs/L4/slides/ep12/동네주민센터5.png",
+  "data/nhs/L4/slides/ep12/동네주민센터6.png",
+  "data/nhs/L4/slides/ep12/동네주민센터7.png",
+  "data/nhs/L4/slides/ep12/동네주민센터8.png",
+  "data/nhs/L4/slides/ep12/동네주민센터9.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "liam_mom",
+   "text": "여기서 대기표를 뽑는 거구나.",
+   "en": "Ah, this is where you get a waiting ticket.",
+   "slide": 0,
+   "audio": "data/nhs/L4/TTS/ep12/audio_0_여기서_대기표를_뽑는_거구나_.mp3"
+  },
+  {
+   "speaker": "staff",
+   "text": "안녕하세요? 뭘 도와드릴까요?",
+   "en": "Hello, how may I help you?",
+   "slide": 1,
+   "audio": "data/nhs/L4/TTS/ep12/audio_1_안녕하세요__뭘_도와드릴까요_.mp3",
+   "highlight": "도와드릴까요?",
+   "annotation": {
+    "highlight": "도와드릴까요?",
+    "grammar": "격식체 총정리",
+    "note": "돕다 → 도와드릴까요? = may I help you?\n-드리-(겸양)+ -(으)ㄹ까요?(제안·질문)가 합쳐진 관공서·서비스업 대표 인사말이에요"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "출입국 사실 증명서 한장 부탁합니다.",
+   "en": "Could I please get one copy of the entry/exit record certificate?",
+   "slide": 2,
+   "audio": "data/nhs/L4/TTS/ep12/audio_2_출입국_사실_증명서_한장_부탁합니다_.mp3",
+   "highlight": "부탁합니다",
+   "annotation": {
+    "highlight": "부탁합니다",
+    "grammar": "관공서 필수 표현",
+    "note": "N + 부탁합니다 = please (give me) N\n서류나 물건을 요청할 때 아주 흔하게 쓰는 정형화된 존댓말 표현이에요"
+   }
+  },
+  {
+   "speaker": "staff",
+   "text": "신분증 가지고 오셨어요?",
+   "en": "Did you bring your ID?",
+   "slide": 3,
+   "audio": "data/nhs/L4/TTS/ep12/audio_3_신분증_가지고_오셨어요_.mp3"
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "여기 있어요.",
+   "en": "Here it is.",
+   "slide": 4,
+   "audio": "data/nhs/L4/TTS/ep12/audio_4_여기_있어요_.mp3"
+  },
+  {
+   "speaker": "staff",
+   "text": "출입국 사실 증명서 나왔습니다.",
+   "en": "Here's your entry/exit record certificate.",
+   "slide": 5,
+   "audio": "data/nhs/L4/TTS/ep12/audio_5_출입국_사실_증명서_나왔습니다_.mp3"
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "감사합니다. 얼마예요?",
+   "en": "Thank you. How much is it?",
+   "slide": 6,
+   "audio": "data/nhs/L4/TTS/ep12/audio_6_감사합니다__얼마예요_.mp3"
+  },
+  {
+   "speaker": "staff",
+   "text": "이천원입니다. 온라인으로 발급 받으시면 무료예요.",
+   "en": "It's 2,000 won. If you get it issued online, it's free.",
+   "slide": 7,
+   "audio": "data/nhs/L4/TTS/ep12/audio_7_이천원입니다__온라인으로_발급_받으시면_무료예요_.mp3",
+   "highlight": "발급 받으시면 무료예요",
+   "annotation": {
+    "highlight": "발급 받으시면 무료예요",
+    "grammar": "격식체 총정리",
+    "note": "발급 받다 → 발급 받으시면 = if you get it issued\n-(으)시면(높임+조건)이 합쳐진 형태 — 손님에게 유용한 정보를 안내할 때 쓰는 표현이에요"
+   }
+  },
+  {
+   "speaker": "liam_mom",
+   "text": "아 그래요? 알려주셔서 감사합니다.",
+   "en": "Oh really? Thank you for letting me know.",
+   "slide": 8,
+   "audio": "data/nhs/L4/TTS/ep12/audio_8_아_그래요__알려주셔서_감사합니다_.mp3",
+   "highlight": "알려주셔서 감사합니다",
+   "annotation": {
+    "highlight": "알려주셔서 감사합니다",
+    "grammar": "관공서 필수 표현",
+    "note": "알려주다 → 알려주셔서 감사합니다 = thank you for letting me know\n-아/어 주셔서 감사합니다는 누군가 나를 위해 해준 행동에 감사할 때 쓰는 정형화된 표현이에요"
+   }
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🏢 관공서 기본 어휘 · Government Office Basics",
+   "items": [
     {
-      "speaker": "liam_mom",
-      "text": "여기서 대기표를 뽑는 거구나.",
-      "en": "Ah, this is where you get a waiting ticket.",
-      "slide": 0,
-      "audio": "data/nhs/L4/TTS/ep12/audio_0_여기서_대기표를_뽑는_거구나_.mp3"
+     "korean": "해당",
+     "romanization": "hae-dang",
+     "english": "the relevant, applicable (department/case)",
+     "emoji": "📌"
     },
     {
-      "speaker": "staff",
-      "text": "안녕하세요? 뭘 도와드릴까요?",
-      "en": "Hello, how may I help you?",
-      "slide": 1,
-      "audio": "data/nhs/L4/TTS/ep12/audio_1_안녕하세요__뭘_도와드릴까요_.mp3",
-      "highlight": "도와드릴까요?",
-      "annotation": {
-        "highlight": "도와드릴까요?",
-        "grammar": "격식체 총정리",
-        "note": "돕다 → 도와드릴까요? = may I help you?\n-드리-(겸양)+ -(으)ㄹ까요?(제안·질문)가 합쳐진 관공서·서비스업 대표 인사말이에요"
-      }
+     "korean": "업무",
+     "romanization": "eom-mu",
+     "english": "task, business, duties",
+     "emoji": "🗂️"
     },
     {
-      "speaker": "liam_mom",
-      "text": "출입국 사실 증명서 한장 부탁합니다.",
-      "en": "Could I please get one copy of the entry/exit record certificate?",
-      "slide": 2,
-      "audio": "data/nhs/L4/TTS/ep12/audio_2_출입국_사실_증명서_한장_부탁합니다_.mp3",
-      "highlight": "부탁합니다",
-      "annotation": {
-        "highlight": "부탁합니다",
-        "grammar": "관공서 필수 표현",
-        "note": "N + 부탁합니다 = please (give me) N\n서류나 물건을 요청할 때 아주 흔하게 쓰는 정형화된 존댓말 표현이에요"
-      }
+     "korean": "창구",
+     "romanization": "chang-gu",
+     "english": "(service) window, counter",
+     "emoji": "🪟"
     },
     {
-      "speaker": "staff",
-      "text": "신분증 가지고 오셨어요?",
-      "en": "Did you bring your ID?",
-      "slide": 3,
-      "audio": "data/nhs/L4/TTS/ep12/audio_3_신분증_가지고_오셨어요_.mp3"
+     "korean": "확인",
+     "romanization": "hwa-gin",
+     "english": "confirmation, verification",
+     "emoji": "✅"
     },
     {
-      "speaker": "liam_mom",
-      "text": "여기 있어요.",
-      "en": "Here it is.",
-      "slide": 4,
-      "audio": "data/nhs/L4/TTS/ep12/audio_4_여기_있어요_.mp3"
+     "korean": "번호표",
+     "romanization": "beon-ho-pyo",
+     "english": "number ticket",
+     "emoji": "🎫"
     },
     {
-      "speaker": "staff",
-      "text": "출입국 사실 증명서 나왔습니다.",
-      "en": "Here's your entry/exit record certificate.",
-      "slide": 5,
-      "audio": "data/nhs/L4/TTS/ep12/audio_5_출입국_사실_증명서_나왔습니다_.mp3"
+     "korean": "대기표",
+     "romanization": "dae-gi-pyo",
+     "english": "waiting ticket (추가 — 대본에 실제로 나온 단어)",
+     "emoji": "🎟️"
     },
     {
-      "speaker": "liam_mom",
-      "text": "감사합니다. 얼마예요?",
-      "en": "Thank you. How much is it?",
-      "slide": 6,
-      "audio": "data/nhs/L4/TTS/ep12/audio_6_감사합니다__얼마예요_.mp3"
-    },
-    {
-      "speaker": "staff",
-      "text": "이천원입니다. 온라인으로 발급 받으시면 무료예요.",
-      "en": "It's 2,000 won. If you get it issued online, it's free.",
-      "slide": 7,
-      "audio": "data/nhs/L4/TTS/ep12/audio_7_이천원입니다__온라인으로_발급_받으시면_무료예요_.mp3",
-      "highlight": "발급 받으시면 무료예요",
-      "annotation": {
-        "highlight": "발급 받으시면 무료예요",
-        "grammar": "격식체 총정리",
-        "note": "발급 받다 → 발급 받으시면 = if you get it issued\n-(으)시면(높임+조건)이 합쳐진 형태 — 손님에게 유용한 정보를 안내할 때 쓰는 표현이에요"
-      }
-    },
-    {
-      "speaker": "liam_mom",
-      "text": "아 그래요? 알려주셔서 감사합니다.",
-      "en": "Oh really? Thank you for letting me know.",
-      "slide": 8,
-      "audio": "data/nhs/L4/TTS/ep12/audio_8_아_그래요__알려주셔서_감사합니다_.mp3",
-      "highlight": "알려주셔서 감사합니다",
-      "annotation": {
-        "highlight": "알려주셔서 감사합니다",
-        "grammar": "관공서 필수 표현",
-        "note": "알려주다 → 알려주셔서 감사합니다 = thank you for letting me know\n-아/어 주셔서 감사합니다는 누군가 나를 위해 해준 행동에 감사할 때 쓰는 정형화된 표현이에요"
-      }
+     "korean": "신분증",
+     "romanization": "sin-bun-jeung",
+     "english": "ID card",
+     "emoji": "🪪"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "📄 서류 발급 · Documents & Issuance",
+   "items": [
     {
-      "category": "🏢 관공서 기본 어휘 · Government Office Basics",
-      "items": [
-        { "korean": "해당", "romanization": "hae-dang", "english": "the relevant, applicable (department/case)", "emoji": "📌" },
-        { "korean": "업무", "romanization": "eom-mu", "english": "task, business, duties", "emoji": "🗂️" },
-        { "korean": "창구", "romanization": "chang-gu", "english": "(service) window, counter", "emoji": "🪟" },
-        { "korean": "확인", "romanization": "hwa-gin", "english": "confirmation, verification", "emoji": "✅" },
-        { "korean": "번호표", "romanization": "beon-ho-pyo", "english": "number ticket", "emoji": "🎫" },
-        { "korean": "대기표", "romanization": "dae-gi-pyo", "english": "waiting ticket (추가 — 대본에 실제로 나온 단어)", "emoji": "🎟️" },
-        { "korean": "신분증", "romanization": "sin-bun-jeung", "english": "ID card", "emoji": "🪪" }
-      ]
+     "korean": "출입국 사실 증명서",
+     "romanization": "chul-ip-guk sa-sil jeung-myeong-seo",
+     "english": "certificate of entry/exit record",
+     "emoji": "📃"
     },
     {
-      "category": "📄 서류 발급 · Documents & Issuance",
-      "items": [
-        { "korean": "출입국 사실 증명서", "romanization": "chul-ip-guk sa-sil jeung-myeong-seo", "english": "certificate of entry/exit record", "emoji": "📃" },
-        { "korean": "발급", "romanization": "bal-geup", "english": "issuance (of a document)", "emoji": "🖨️" },
-        { "korean": "무료", "romanization": "mu-ryo", "english": "free (of charge)", "emoji": "🆓" }
-      ]
-    }
-  ],
-  "grammar": [
-    {
-      "id": "g12_l4_gyeokshikche_review",
-      "tier": "foundation",
-      "title": "격식체 총정리",
-      "title_en": "Formal Register — Full Review",
-      "emoji": "🎓",
-      "pattern": "동사/형용사 어간 + -ㅂ니다/습니다(평서) · -(으)세요?/-(으)십니까?(의문) · -(으)세요/-(으)십시오(권유·안내) — 낯선 사람과의 공식적인 상황에서 총정리",
-      "scene_example": {
-        "korean": "안녕하세요? 뭘 도와드릴까요?",
-        "english": "Hello, how may I help you?",
-        "highlight": "뭘 도와드릴까요?"
-      },
-      "explanation_en": "This episode is a comprehensive review of the formal register (격식체) introduced back in L4 ep01. Every single line in this conversation between a customer and a community-center clerk uses -ㅂ니다/습니다체, -(으)세요, or -(으)ㄹ까요? — there's no casual speech anywhere. Government offices, banks, and other formal service settings in Korea call for this register from both sides, no matter who's older.",
-      "rule_boxes": [
-        { "type": "blue", "label": "평서문: -ㅂ니다/습니다", "content": "나왔습니다 / 이천원입니다 / 감사합니다 / 부탁합니다", "note": "안내·요청·완료를 말할 때 기본형" },
-        { "type": "green", "label": "의문문: -(으)세요?/-(으)ㄹ까요?", "content": "도와드릴까요? / 가지고 오셨어요? / 얼마예요?", "note": "관공서에서도 딱딱한 -(으)십니까?뿐 아니라 부드러운 -(으)세요?/-(으)ㄹ까요?를 자주 섞어 써요" },
-        { "type": "amber", "label": "이 에피소드가 특별한 이유", "content": "가족 간 반말이 전혀 없는, L4 최초의 100% 격식체 대화예요", "note": "지금까지 배운 격식체 표현들을 실전 상황에서 총정리해 봐요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "안녕하세요? 뭘 도와드릴까요?", "en": "Hello, how may I help you?" },
-            { "ko": "출입국 사실 증명서 나왔습니다.", "en": "Here's your entry/exit record certificate." },
-            { "ko": "발급 받으시면 무료예요.", "en": "If you get it issued [online], it's free." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "잠시만 기다려 주세요.", "en": "Please wait just a moment." },
-            { "ko": "여기에 서명해 주시겠습니까?", "en": "Could you please sign here?" }
-          ]
-        }
-      ]
+     "korean": "발급",
+     "romanization": "bal-geup",
+     "english": "issuance (of a document)",
+     "emoji": "🖨️"
     },
     {
-      "id": "g12_l4_gwanyongpyohyeon",
-      "tier": "foundation",
-      "title": "관공서 필수 표현",
-      "title_en": "Essential Government-Office Set Phrases",
-      "emoji": "🗂️",
-      "pattern": "관공서·서비스 상황에서 거의 정해진 형태로 쓰이는 존댓말 표현들",
-      "scene_example": {
-        "korean": "출입국 사실 증명서 한장 부탁합니다.",
-        "english": "Could I please get one copy of the entry/exit record certificate?",
-        "highlight": "부탁합니다"
-      },
-      "explanation_en": "Korean has a handful of fixed, formulaic polite phrases used almost verbatim in any service or government-office interaction: N + 부탁합니다 (please give me N), -아/어 주셔서 감사합니다 (thank you for doing X), and the 얼마예요? / -원입니다 question-answer pair for prices. Recognizing these sentence-level set phrases lets you handle real bureaucratic errands confidently, even when other vocabulary in the exchange is unfamiliar.",
-      "rule_boxes": [
-        { "type": "blue", "label": "N + 부탁합니다", "content": "증명서 한 장 부탁합니다 = please [give me] one copy of the certificate", "note": "서류·물건을 요청할 때 아주 흔하게 쓰는 표현" },
-        { "type": "green", "label": "-아/어 주셔서 감사합니다", "content": "알려주셔서 감사합니다 = thank you for letting me know", "note": "상대방이 나를 위해 해 준 행동에 감사할 때" },
-        { "type": "amber", "label": "얼마예요? ↔ -원입니다", "content": "얼마예요? (how much?) → 이천원입니다 (it's 2,000 won)", "note": "가격을 묻고 답하는 짝을 이루는 정형화된 표현" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "출입국 사실 증명서 한장 부탁합니다.", "en": "Could I please get one copy of the entry/exit record certificate?" },
-            { "ko": "알려주셔서 감사합니다.", "en": "Thank you for letting me know." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "가족관계 증명서 두 통 부탁합니다.", "en": "Could I please get two copies of the family relation certificate?" },
-            { "ko": "도와주셔서 정말 감사합니다.", "en": "Thank you so much for helping me." }
-          ]
-        }
-      ]
+     "korean": "무료",
+     "romanization": "mu-ryo",
+     "english": "free (of charge)",
+     "emoji": "🆓"
     }
-  ],
-  "usage": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g12_l4_gyeokshikche_review",
+   "tier": "foundation",
+   "title": "격식체 총정리",
+   "title_en": "Formal Register — Full Review",
+   "emoji": "🎓",
+   "pattern": "동사/형용사 어간 + -ㅂ니다/습니다(평서) · -(으)세요?/-(으)십니까?(의문) · -(으)세요/-(으)십시오(권유·안내) — 낯선 사람과의 공식적인 상황에서 총정리",
+   "scene_example": {
+    "korean": "안녕하세요? 뭘 도와드릴까요?",
+    "english": "Hello, how may I help you?",
+    "highlight": "뭘 도와드릴까요?"
+   },
+   "explanation_en": "This episode is a comprehensive review of the formal register (격식체) introduced back in L4 ep01. Every single line in this conversation between a customer and a community-center clerk uses -ㅂ니다/습니다체, -(으)세요, or -(으)ㄹ까요? — there's no casual speech anywhere. Government offices, banks, and other formal service settings in Korea call for this register from both sides, no matter who's older.",
+   "rule_boxes": [
     {
-      "title": "관공서 창구에서 순서 안내받기",
-      "title_en": "Getting Guided Through the Process at a Government Office Window",
-      "explanation_en": "A typical government-office visit follows a predictable script: pull a 대기표 (waiting ticket) from a kiosk, wait for your 번호 (number) to be called on the display board, state your request at the 창구 (window) using 부탁합니다, hand over your 신분증 for 확인 (verification), and receive your document. Once you recognize this pattern, you can handle almost any 관공서 errand — even ones involving unfamiliar paperwork — just by following the same formulaic exchange.",
-      "examples": [
-        { "ko": "여기서 대기표를 뽑는 거구나.", "en": "Ah, this is where you get a waiting ticket." },
-        { "ko": "신분증 가지고 오셨어요?", "en": "Did you bring your ID?" }
-      ]
+     "type": "blue",
+     "label": "평서문: -ㅂ니다/습니다",
+     "content": "나왔습니다 / 이천원입니다 / 감사합니다 / 부탁합니다",
+     "note": "안내·요청·완료를 말할 때 기본형"
+    },
+    {
+     "type": "green",
+     "label": "의문문: -(으)세요?/-(으)ㄹ까요?",
+     "content": "도와드릴까요? / 가지고 오셨어요? / 얼마예요?",
+     "note": "관공서에서도 딱딱한 -(으)십니까?뿐 아니라 부드러운 -(으)세요?/-(으)ㄹ까요?를 자주 섞어 써요"
+    },
+    {
+     "type": "amber",
+     "label": "이 에피소드가 특별한 이유",
+     "content": "가족 간 반말이 전혀 없는, L4 최초의 100% 격식체 대화예요",
+     "note": "지금까지 배운 격식체 표현들을 실전 상황에서 총정리해 봐요"
     }
-  ],
-  "pronunciation": {
-    "title": "발음 규칙 · Pronunciation Rules",
-    "items": [
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
       {
-        "rule": "받침 ㄴ + ㅈ → 된소리되기 (신분증)",
-        "tip": "신분증처럼 '증'으로 끝나는 일부 한자어에서는 앞 받침 뒤의 ㅈ이 된소리 [ㅉ]으로 발음돼요 · In certain Sino-Korean words ending in 증, the ㅈ tenses to [ㅉ] after the preceding batchim.",
-        "examples": [
-          { "written": "신분증", "pronounced_standard": "[신분쯩]", "pronounced_actual": "[신분쯩]", "note": "신분증 → [신분쯩] (된소리되기)" }
-        ]
+       "ko": "안녕하세요? 뭘 도와드릴까요?",
+       "en": "Hello, how may I help you?"
       },
       {
-        "rule": "한자어 ㄹ받침 + 예사소리 → 된소리되기 (발급)",
-        "tip": "ㄹ받침 뒤에 오는 예사소리 ㄱ이 한자어 합성에서 된소리 [ㄲ]으로 바뀌어요 · A following plain consonant ㄱ tenses to [ㄲ] after batchim ㄹ in this Sino-Korean word.",
-        "examples": [
-          { "written": "발급", "pronounced_standard": "[발끕]", "pronounced_actual": "[발끕]", "note": "발급 → [발끕] (된소리되기)" }
-        ]
+       "ko": "출입국 사실 증명서 나왔습니다.",
+       "en": "Here's your entry/exit record certificate."
       },
       {
-        "rule": "받침 ㄷ + 모음 → 연음화 (받으시면)",
-        "tip": "받침 ㄷ 뒤에 모음이 오면 다음 음절로 자연스럽게 이어져요 · A batchim ㄷ links smoothly into the next syllable before a vowel.",
-        "examples": [
-          { "written": "받으시면", "pronounced_standard": "[바드시면]", "pronounced_actual": "[바드시면]", "note": "받(ㄷ) + 으 → 연음화" }
-        ]
+       "ko": "발급 받으시면 무료예요.",
+       "en": "If you get it issued [online], it's free."
       }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "잠시만 기다려 주세요.",
+       "en": "Please wait just a moment."
+      },
+      {
+       "ko": "여기에 서명해 주시겠습니까?",
+       "en": "Could you please sign here?"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "g12_l4_gwanyongpyohyeon",
+   "tier": "foundation",
+   "title": "관공서 필수 표현",
+   "title_en": "Essential Government-Office Set Phrases",
+   "emoji": "🗂️",
+   "pattern": "관공서·서비스 상황에서 거의 정해진 형태로 쓰이는 존댓말 표현들",
+   "scene_example": {
+    "korean": "출입국 사실 증명서 한장 부탁합니다.",
+    "english": "Could I please get one copy of the entry/exit record certificate?",
+    "highlight": "부탁합니다"
+   },
+   "explanation_en": "Korean has a handful of fixed, formulaic polite phrases used almost verbatim in any service or government-office interaction: N + 부탁합니다 (please give me N), -아/어 주셔서 감사합니다 (thank you for doing X), and the 얼마예요? / -원입니다 question-answer pair for prices. Recognizing these sentence-level set phrases lets you handle real bureaucratic errands confidently, even when other vocabulary in the exchange is unfamiliar.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "N + 부탁합니다",
+     "content": "증명서 한 장 부탁합니다 = please [give me] one copy of the certificate",
+     "note": "서류·물건을 요청할 때 아주 흔하게 쓰는 표현"
+    },
+    {
+     "type": "green",
+     "label": "-아/어 주셔서 감사합니다",
+     "content": "알려주셔서 감사합니다 = thank you for letting me know",
+     "note": "상대방이 나를 위해 해 준 행동에 감사할 때"
+    },
+    {
+     "type": "amber",
+     "label": "얼마예요? ↔ -원입니다",
+     "content": "얼마예요? (how much?) → 이천원입니다 (it's 2,000 won)",
+     "note": "가격을 묻고 답하는 짝을 이루는 정형화된 표현"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "출입국 사실 증명서 한장 부탁합니다.",
+       "en": "Could I please get one copy of the entry/exit record certificate?"
+      },
+      {
+       "ko": "알려주셔서 감사합니다.",
+       "en": "Thank you for letting me know."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "가족관계 증명서 두 통 부탁합니다.",
+       "en": "Could I please get two copies of the family relation certificate?"
+      },
+      {
+       "ko": "도와주셔서 정말 감사합니다.",
+       "en": "Thank you so much for helping me."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "관공서 창구에서 순서 안내받기",
+   "title_en": "Getting Guided Through the Process at a Government Office Window",
+   "explanation_en": "A typical government-office visit follows a predictable script: pull a 대기표 (waiting ticket) from a kiosk, wait for your 번호 (number) to be called on the display board, state your request at the 창구 (window) using 부탁합니다, hand over your 신분증 for 확인 (verification), and receive your document. Once you recognize this pattern, you can handle almost any 관공서 errand — even ones involving unfamiliar paperwork — just by following the same formulaic exchange.",
+   "examples": [
+    {
+     "ko": "여기서 대기표를 뽑는 거구나.",
+     "en": "Ah, this is where you get a waiting ticket."
+    },
+    {
+     "ko": "신분증 가지고 오셨어요?",
+     "en": "Did you bring your ID?"
+    }
+   ]
+  }
+ ],
+ "pronunciation": {
+  "title": "발음 규칙 · Pronunciation Rules",
+  "items": [
+   {
+    "rule": "받침 ㄴ + ㅈ → 된소리되기 (신분증)",
+    "tip": "신분증처럼 '증'으로 끝나는 일부 한자어에서는 앞 받침 뒤의 ㅈ이 된소리 [ㅉ]으로 발음돼요 · In certain Sino-Korean words ending in 증, the ㅈ tenses to [ㅉ] after the preceding batchim.",
+    "examples": [
+     {
+      "written": "신분증",
+      "pronounced_standard": "[신분쯩]",
+      "pronounced_actual": "[신분쯩]",
+      "note": "신분증 → [신분쯩] (된소리되기)"
+     }
     ]
-  },
-  "banmal_jondaemal": {
-    "intro_ko": "이 에피소드는 처음부터 끝까지 100% 격식체예요 — 라온 엄마와 직원은 서로 모르는 사이이고, 관공서라는 공식적인 장소에 있기 때문에 반말이 전혀 등장하지 않아요. 나이와 상관없이, 낯선 사람과 공식적인 자리에서는 항상 격식체를 쓴다는 걸 잘 보여주는 에피소드예요.",
-    "intro_en": "This episode is 100% formal register from start to finish — Raon's mom and the clerk are strangers meeting in an official government setting, so casual speech never appears. It's a clear example of how, regardless of age, Korean formal register is the default between strangers in official settings.",
-    "rows": [
-      {
-        "situation_ko": "라온 엄마 → 직원 (요청, 존댓말)",
-        "situation_en": "Raon's mom → clerk (making a request, polite)",
-        "banmal": "(이 장면엔 반말이 전혀 없어요)",
-        "jondaemal": "출입국 사실 증명서 한장 부탁합니다.",
-        "note": "낯선 사람에게 서류·서비스를 요청할 땐 항상 격식체를 써요"
-      },
-      {
-        "situation_ko": "직원 → 손님 (서비스, 존댓말)",
-        "situation_en": "Clerk → customer (providing service, polite)",
-        "banmal": "(이 장면엔 반말이 전혀 없어요)",
-        "jondaemal": "신분증 가지고 오셨어요?",
-        "note": "손님이 자신보다 어려도 직원은 항상 존댓말을 써요 — 서비스업의 기본"
-      },
-      {
-        "situation_ko": "비교: 만약 친한 사이였다면?",
-        "situation_en": "Comparison: if they were close friends?",
-        "banmal": "이거 한 장 줘.",
-        "jondaemal": "이거 한 장 부탁합니다.",
-        "note": "관공서·모르는 사람 사이에서는 이 반말 버전을 절대 쓰지 않아요"
-      }
-    ],
-    "tip": "관공서·은행·병원처럼 낯선 사람과 공식적으로 만나는 곳에서는 나이와 상관없이 무조건 격식체를 써요. 손님이 직원보다 어려도, 직원이 손님보다 나이가 많아도 마찬가지예요."
-  },
-  "real_life": [
-    {
-      "type": "tip",
-      "title": "🇰🇷 대기표 문화 — 번호가 불릴 때까지 기다리기",
-      "content_ko": "한국의 관공서·은행·병원 등에서는 입구의 키오스크에서 원하는 업무에 해당하는 대기표(번호표)를 먼저 뽑아요. 그러면 전광판에 '현재 번호'와 '대기 인원'이 표시되고, 자신의 번호가 뜨면 지정된 창구로 가서 업무를 봐요. 줄을 서서 기다릴 필요 없이 앉아서 기다릴 수 있다는 장점이 있어요.",
-      "content_en": "At Korean government offices, banks, hospitals, and similar places, you first pull a waiting ticket (대기표/번호표) from a kiosk near the entrance for the specific service you need. A display board then shows the 'current number' and how many people are waiting; when your number comes up, you go to the assigned window. This lets you sit and wait instead of standing in a line."
-    },
-    {
-      "type": "reading",
-      "id": "rl_read_ep12",
-      "title": "📖 외국인등록, 언제 해야 할까?",
-      "title_en": "When Do You Need to Register as a Foreigner?",
-      "setup_ko": "한국에 장기 체류하는 외국인이 꼭 알아야 할 행정 절차에 대한 안내문이에요.",
-      "setup_en": "An informational passage about an administrative procedure that foreigners staying long-term in Korea need to know.",
-      "passage": "90일을 초과해 체류하는 외국인은 입국일로부터 90일 이내에 관할 출입국·외국인관서에 방문해 외국인등록을 해야 합니다. 하이코리아에서 필수 방문 예약을 마친 후, 통합신청서, 여권, 사진 1매, 체류지 입증서류 및 수수료(3만 5천 원)를 지참해 방문하시기 바랍니다.",
-      "passage_en": "Foreigners staying longer than 90 days must visit their jurisdiction's immigration and foreign affairs office to register as a foreign resident within 90 days of their date of entry. After completing the required visit reservation on Hi Korea, please bring the integrated application form, passport, one photo, proof-of-residence documents, and the fee (35,000 won) when you visit.",
-      "questions": [
-        { "question_ko": "외국인등록은 언제까지 해야 하나요?", "question_en": "By when must a foreigner complete this registration, according to the passage?", "options": ["입국일로부터 90일 이내", "입국 당일", "1년 이내"], "answer": 0 },
-        { "question_ko": "방문 전에 먼저 해야 할 일은 무엇인가요?", "question_en": "What must be done before visiting, according to the passage?", "options": ["하이코리아에서 방문 예약하기", "수수료를 환불받기", "사진만 미리 찍어두면 된다"], "answer": 0 }
-      ]
-    },
-    {
-      "type": "kakao",
-      "title": "💬 라온 엄마가 남편에게 카톡을 보내요",
-      "messages": [
-        { "speaker": "라온 엄마", "side": "right", "text": "출입국 사실 증명서 방금 뗐어요", "en": "I just got the entry/exit record certificate" },
-        { "speaker": "남편", "side": "left", "text": "고생했어요! 얼마였어요?", "en": "Thanks for taking care of that! How much was it?" },
-        { "speaker": "라온 엄마", "side": "right", "text": "이천원인데 온라인으로 받으면 무료래요", "en": "It was 2,000 won, but apparently it's free if you get it online" },
-        { "speaker": "남편", "side": "left", "text": "다음엔 온라인으로 해봐요", "en": "Let's try doing it online next time" }
-      ]
-    }
-  ],
-  "quiz": [
-    {
-      "id": "q12l4_1",
-      "audio_text": "여기서 대기표를 뽑는 거구나.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["여기서 대기표를 뽑는 거구나.", "여기서 돈을 내는 거구나.", "여기가 은행이구나.", "여기서 밥을 먹는 거구나."],
-      "answer": 0,
-      "explanation": "대기표를 뽑는 곳이라는 걸 알아차리는 혼잣말이에요."
-    },
-    {
-      "id": "q12l4_2",
-      "question_ko": "직원이 손님에게 처음 건네는 인사말로 알맞은 것은?",
-      "question_en": "What's the clerk's opening greeting to the customer?",
-      "options": ["안녕하세요? 뭘 도와드릴까요?", "안녕히 가세요.", "잠깐만 기다리세요.", "죄송합니다."],
-      "answer": 0,
-      "explanation": "관공서·서비스업에서 손님을 맞이하는 대표적인 격식체 인사말이에요."
-    },
-    {
-      "id": "q12l4_3",
-      "audio_text": "출입국 사실 증명서 한장 부탁합니다.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["출입국 사실 증명서 한장 부탁합니다.", "가족관계 증명서 두 통 주세요.", "신분증을 잃어버렸어요.", "여권을 만들고 싶어요."],
-      "answer": 0,
-      "explanation": "N + 부탁합니다 형태로 서류를 요청하는 표현이에요."
-    },
-    {
-      "id": "q12l4_4",
-      "question_ko": "창구에서 출입국 사실 증명서를 발급받을 때 비용은 얼마인가요?",
-      "question_en": "How much does it cost to get the entry/exit record certificate at the window?",
-      "options": ["천원", "이천원", "삼천원", "무료"],
-      "answer": 1,
-      "explanation": "창구에서 받으면 이천원이고, 온라인으로 발급받으면 무료예요."
-    },
-    {
-      "id": "q12l4_5",
-      "question_ko": "온라인으로 출입국 사실 증명서를 발급받으면 어떻게 되나요?",
-      "question_en": "What happens if you get the certificate issued online?",
-      "options": ["더 비싸진다", "무료다", "시간이 더 걸린다", "발급이 안 된다"],
-      "answer": 1,
-      "explanation": "직원이 온라인으로 발급받으면 무료라고 알려줘요."
-    },
-    {
-      "id": "q12l4_6",
-      "audio_text": "아 그래요? 알려주셔서 감사합니다.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["아 그래요? 알려주셔서 감사합니다.", "아니요, 몰랐어요.", "다시 한번 말씀해 주세요.", "저는 필요 없어요."],
-      "answer": 0,
-      "explanation": "새로운 정보를 알려준 것에 대해 감사를 표현하는 정형화된 인사말이에요."
-    }
-  ],
-  "self_check": [
-    { "ko": "관공서 같은 공식적인 자리에서 격식체를 자연스럽게 쓸 수 있어요.", "en": "I can naturally use the formal register in official settings like a government office." },
-    { "ko": "부탁합니다 / -아어 주셔서 감사합니다 같은 관공서 필수 표현을 쓸 수 있어요.", "en": "I can use essential government-office phrases like 부탁합니다 and -아/어 주셔서 감사합니다." },
-    { "ko": "대기표 · 신분증 · 발급 같은 관공서 관련 어휘를 이해해요.", "en": "I understand government-office vocabulary like 대기표, 신분증, and 발급." },
-    { "ko": "한국 관공서의 대기표 시스템이 어떻게 작동하는지 알아요.", "en": "I understand how the waiting-ticket system works at Korean public offices." },
-    { "ko": "외국인등록처럼 외국인에게 필요한 행정 절차 정보를 읽고 이해할 수 있어요.", "en": "I can read and understand information about administrative procedures foreigners need, like foreign resident registration." }
+   },
+   {
+    "rule": "한자어 ㄹ받침 + 예사소리 → 된소리되기 (발급)",
+    "tip": "ㄹ받침 뒤에 오는 예사소리 ㄱ이 한자어 합성에서 된소리 [ㄲ]으로 바뀌어요 · A following plain consonant ㄱ tenses to [ㄲ] after batchim ㄹ in this Sino-Korean word.",
+    "examples": [
+     {
+      "written": "발급",
+      "pronounced_standard": "[발끕]",
+      "pronounced_actual": "[발끕]",
+      "note": "발급 → [발끕] (된소리되기)"
+     }
+    ]
+   },
+   {
+    "rule": "받침 ㄷ + 모음 → 연음화 (받으시면)",
+    "tip": "받침 ㄷ 뒤에 모음이 오면 다음 음절로 자연스럽게 이어져요 · A batchim ㄷ links smoothly into the next syllable before a vowel.",
+    "examples": [
+     {
+      "written": "받으시면",
+      "pronounced_standard": "[바드시면]",
+      "pronounced_actual": "[바드시면]",
+      "note": "받(ㄷ) + 으 → 연음화"
+     }
+    ]
+   }
   ]
+ },
+ "banmal_jondaemal": {
+  "intro_ko": "이 에피소드는 처음부터 끝까지 100% 격식체예요 — 라온 엄마와 직원은 서로 모르는 사이이고, 관공서라는 공식적인 장소에 있기 때문에 반말이 전혀 등장하지 않아요. 나이와 상관없이, 낯선 사람과 공식적인 자리에서는 항상 격식체를 쓴다는 걸 잘 보여주는 에피소드예요.",
+  "intro_en": "This episode is 100% formal register from start to finish — Raon's mom and the clerk are strangers meeting in an official government setting, so casual speech never appears. It's a clear example of how, regardless of age, Korean formal register is the default between strangers in official settings.",
+  "rows": [
+   {
+    "situation_ko": "라온 엄마 → 직원 (요청, 존댓말)",
+    "situation_en": "Raon's mom → clerk (making a request, polite)",
+    "banmal": "(이 장면엔 반말이 전혀 없어요)",
+    "jondaemal": "출입국 사실 증명서 한장 부탁합니다.",
+    "note": "낯선 사람에게 서류·서비스를 요청할 땐 항상 격식체를 써요"
+   },
+   {
+    "situation_ko": "직원 → 손님 (서비스, 존댓말)",
+    "situation_en": "Clerk → customer (providing service, polite)",
+    "banmal": "(이 장면엔 반말이 전혀 없어요)",
+    "jondaemal": "신분증 가지고 오셨어요?",
+    "note": "손님이 자신보다 어려도 직원은 항상 존댓말을 써요 — 서비스업의 기본"
+   },
+   {
+    "situation_ko": "비교: 만약 친한 사이였다면?",
+    "situation_en": "Comparison: if they were close friends?",
+    "banmal": "이거 한 장 줘.",
+    "jondaemal": "이거 한 장 부탁합니다.",
+    "note": "관공서·모르는 사람 사이에서는 이 반말 버전을 절대 쓰지 않아요"
+   }
+  ],
+  "tip": "관공서·은행·병원처럼 낯선 사람과 공식적으로 만나는 곳에서는 나이와 상관없이 무조건 격식체를 써요. 손님이 직원보다 어려도, 직원이 손님보다 나이가 많아도 마찬가지예요."
+ },
+ "real_life": [
+  {
+   "type": "tip",
+   "title": "🇰🇷 대기표 문화 — 번호가 불릴 때까지 기다리기",
+   "content_ko": "한국의 관공서·은행·병원 등에서는 입구의 키오스크에서 원하는 업무에 해당하는 대기표(번호표)를 먼저 뽑아요. 그러면 전광판에 '현재 번호'와 '대기 인원'이 표시되고, 자신의 번호가 뜨면 지정된 창구로 가서 업무를 봐요. 줄을 서서 기다릴 필요 없이 앉아서 기다릴 수 있다는 장점이 있어요.",
+   "content_en": "At Korean government offices, banks, hospitals, and similar places, you first pull a waiting ticket (대기표/번호표) from a kiosk near the entrance for the specific service you need. A display board then shows the 'current number' and how many people are waiting; when your number comes up, you go to the assigned window. This lets you sit and wait instead of standing in a line."
+  },
+  {
+   "type": "reading",
+   "id": "rl_read_ep12",
+   "title": "📖 외국인등록, 언제 해야 할까?",
+   "title_en": "When Do You Need to Register as a Foreigner?",
+   "setup_ko": "한국에 장기 체류하는 외국인이 꼭 알아야 할 행정 절차에 대한 안내문이에요.",
+   "setup_en": "An informational passage about an administrative procedure that foreigners staying long-term in Korea need to know.",
+   "passage": "90일을 초과해 체류하는 외국인은 입국일로부터 90일 이내에 관할 출입국·외국인관서에 방문해 외국인등록을 해야 합니다. 하이코리아에서 필수 방문 예약을 마친 후, 통합신청서, 여권, 사진 1매, 체류지 입증서류 및 수수료(3만 5천 원)를 지참해 방문하시기 바랍니다.",
+   "passage_en": "Foreigners staying longer than 90 days must visit their jurisdiction's immigration and foreign affairs office to register as a foreign resident within 90 days of their date of entry. After completing the required visit reservation on Hi Korea, please bring the integrated application form, passport, one photo, proof-of-residence documents, and the fee (35,000 won) when you visit.",
+   "questions": [
+    {
+     "question_ko": "외국인등록은 언제까지 해야 하나요?",
+     "question_en": "By when must a foreigner complete this registration, according to the passage?",
+     "options": [
+      "입국일로부터 90일 이내",
+      "입국 당일",
+      "1년 이내"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "방문 전에 먼저 해야 할 일은 무엇인가요?",
+     "question_en": "What must be done before visiting, according to the passage?",
+     "options": [
+      "하이코리아에서 방문 예약하기",
+      "수수료를 환불받기",
+      "사진만 미리 찍어두면 된다"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "type": "kakao",
+   "title": "💬 라온 엄마가 남편에게 카톡을 보내요",
+   "messages": [
+    {
+     "speaker": "라온 엄마",
+     "side": "right",
+     "text": "출입국 사실 증명서 방금 뗐어요",
+     "en": "I just got the entry/exit record certificate"
+    },
+    {
+     "speaker": "남편",
+     "side": "left",
+     "text": "고생했어요! 얼마였어요?",
+     "en": "Thanks for taking care of that! How much was it?"
+    },
+    {
+     "speaker": "라온 엄마",
+     "side": "right",
+     "text": "이천원인데 온라인으로 받으면 무료래요",
+     "en": "It was 2,000 won, but apparently it's free if you get it online"
+    },
+    {
+     "speaker": "남편",
+     "side": "left",
+     "text": "다음엔 온라인으로 해봐요",
+     "en": "Let's try doing it online next time"
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q12l4_1",
+   "audio_text": "여기서 대기표를 뽑는 거구나.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "여기서 대기표를 뽑는 거구나.",
+    "여기서 돈을 내는 거구나.",
+    "여기가 은행이구나.",
+    "여기서 밥을 먹는 거구나."
+   ],
+   "answer": 0,
+   "explanation": "대기표를 뽑는 곳이라는 걸 알아차리는 혼잣말이에요."
+  },
+  {
+   "id": "q12l4_2",
+   "question_ko": "직원이 손님에게 처음 건네는 인사말로 알맞은 것은?",
+   "question_en": "What's the clerk's opening greeting to the customer?",
+   "options": [
+    "안녕하세요? 뭘 도와드릴까요?",
+    "안녕히 가세요.",
+    "잠깐만 기다리세요.",
+    "죄송합니다."
+   ],
+   "answer": 0,
+   "explanation": "관공서·서비스업에서 손님을 맞이하는 대표적인 격식체 인사말이에요."
+  },
+  {
+   "id": "q12l4_3",
+   "audio_text": "출입국 사실 증명서 한장 부탁합니다.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "출입국 사실 증명서 한장 부탁합니다.",
+    "가족관계 증명서 두 통 주세요.",
+    "신분증을 잃어버렸어요.",
+    "여권을 만들고 싶어요."
+   ],
+   "answer": 0,
+   "explanation": "N + 부탁합니다 형태로 서류를 요청하는 표현이에요."
+  },
+  {
+   "id": "q12l4_4",
+   "question_ko": "창구에서 출입국 사실 증명서를 발급받을 때 비용은 얼마인가요?",
+   "question_en": "How much does it cost to get the entry/exit record certificate at the window?",
+   "options": [
+    "천원",
+    "이천원",
+    "삼천원",
+    "무료"
+   ],
+   "answer": 1,
+   "explanation": "창구에서 받으면 이천원이고, 온라인으로 발급받으면 무료예요."
+  },
+  {
+   "id": "q12l4_5",
+   "question_ko": "온라인으로 출입국 사실 증명서를 발급받으면 어떻게 되나요?",
+   "question_en": "What happens if you get the certificate issued online?",
+   "options": [
+    "더 비싸진다",
+    "무료다",
+    "시간이 더 걸린다",
+    "발급이 안 된다"
+   ],
+   "answer": 1,
+   "explanation": "직원이 온라인으로 발급받으면 무료라고 알려줘요."
+  },
+  {
+   "id": "q12l4_6",
+   "audio_text": "아 그래요? 알려주셔서 감사합니다.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "아 그래요? 알려주셔서 감사합니다.",
+    "아니요, 몰랐어요.",
+    "다시 한번 말씀해 주세요.",
+    "저는 필요 없어요."
+   ],
+   "answer": 0,
+   "explanation": "새로운 정보를 알려준 것에 대해 감사를 표현하는 정형화된 인사말이에요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "관공서 같은 공식적인 자리에서 격식체를 자연스럽게 쓸 수 있어요.",
+   "en": "I can naturally use the formal register in official settings like a government office."
+  },
+  {
+   "ko": "부탁합니다 / -아어 주셔서 감사합니다 같은 관공서 필수 표현을 쓸 수 있어요.",
+   "en": "I can use essential government-office phrases like 부탁합니다 and -아/어 주셔서 감사합니다."
+  },
+  {
+   "ko": "대기표 · 신분증 · 발급 같은 관공서 관련 어휘를 이해해요.",
+   "en": "I understand government-office vocabulary like 대기표, 신분증, and 발급."
+  },
+  {
+   "ko": "한국 관공서의 대기표 시스템이 어떻게 작동하는지 알아요.",
+   "en": "I understand how the waiting-ticket system works at Korean public offices."
+  },
+  {
+   "ko": "외국인등록처럼 외국인에게 필요한 행정 절차 정보를 읽고 이해할 수 있어요.",
+   "en": "I can read and understand information about administrative procedures foreigners need, like foreign resident registration."
+  }
+ ]
 }

@@ -1,430 +1,721 @@
 {
-  "id": "ep11",
-  "level": "L4",
-  "title": "오기만 해 봐",
-  "title_en": "Just You Wait, Sister!",
-  "scene": "👗 리나의 방 · Lina's Room",
-  "goal": {
-    "ko": "자매간 다툼과 화해 상황에서 -기만 해(봐)/-고 말겠다/-다시피 하다를 쓸 수 있어요",
-    "en": "I can talk about sibling squabbles, and use -기만 해(봐), -고 말겠다, and -다시피 하다"
+ "id": "ep11",
+ "level": "L4",
+ "title": "오기만 해 봐",
+ "title_en": "Just You Wait, Sister!",
+ "scene": "⚖️ 갈등·감정 · Conflict & Emotion",
+ "goal": {
+  "ko": "자매간 다툼과 화해 상황에서 -기만 해(봐)/-고 말겠다/-다시피 하다를 쓸 수 있어요",
+  "en": "I can talk about sibling squabbles, and use -기만 해(봐), -고 말겠다, and -다시피 하다"
+ },
+ "key_points": [
+  "-기만 해(봐)★NEW — '그 행동을 하기만 하면' 경고·협박의 뉘앙스",
+  "-고 말겠다★NEW — 반드시, 기어코 해내겠다는 강한 의지",
+  "-다시피 하다★NEW(원래 L5 예정, 앞당겨 도입) — 실제로는 아니지만 거의 그런 것처럼 행동함 · 아시다시피(as you know)와 구별하기"
+ ],
+ "characters": [
+  {
+   "id": "lia",
+   "name": "리나",
+   "name_en": "Lina",
+   "emoji": "👧",
+   "color": "#1ABC9C"
   },
-  "key_points": [
-    "-기만 해(봐)★NEW — '그 행동을 하기만 하면' 경고·협박의 뉘앙스",
-    "-고 말겠다★NEW — 반드시, 기어코 해내겠다는 강한 의지",
-    "-다시피 하다★NEW(원래 L5 예정, 앞당겨 도입) — 실제로는 아니지만 거의 그런 것처럼 행동함 · 아시다시피(as you know)와 구별하기"
-  ],
-  "characters": [
-    { "id": "lia", "name": "리나", "name_en": "Lina", "emoji": "👧", "color": "#1ABC9C" },
-    { "id": "mirae_mom", "name": "보미 엄마", "name_en": "Bomi's Mom", "emoji": "👩", "color": "var(--teal)" }
-  ],
-  "slides": [
-    "data/nhs/L4/slides/ep11/오기만해봐1.png",
-    "data/nhs/L4/slides/ep11/오기만해봐2.png",
-    "data/nhs/L4/slides/ep11/오기만해봐3.png",
-    "data/nhs/L4/slides/ep11/오기만해봐4.png",
-    "data/nhs/L4/slides/ep11/오기만해봐5.png",
-    "data/nhs/L4/slides/ep11/오기만해봐6.png",
-    "data/nhs/L4/slides/ep11/오기만해봐7.png",
-    "data/nhs/L4/slides/ep11/오기만해봐8.png",
-    "data/nhs/L4/slides/ep11/오기만해봐9.png",
-    "data/nhs/L4/slides/ep11/오기만해봐10.png"
-  ],
-  "video": null,
-  "script": [
+  {
+   "id": "mirae_mom",
+   "name": "보미 엄마",
+   "name_en": "Bomi's Mom",
+   "emoji": "👩",
+   "color": "var(--teal)"
+  }
+ ],
+ "slides": [
+  "data/nhs/L4/slides/ep11/오기만해봐1.png",
+  "data/nhs/L4/slides/ep11/오기만해봐2.png",
+  "data/nhs/L4/slides/ep11/오기만해봐3.png",
+  "data/nhs/L4/slides/ep11/오기만해봐4.png",
+  "data/nhs/L4/slides/ep11/오기만해봐5.png",
+  "data/nhs/L4/slides/ep11/오기만해봐6.png",
+  "data/nhs/L4/slides/ep11/오기만해봐7.png",
+  "data/nhs/L4/slides/ep11/오기만해봐8.png",
+  "data/nhs/L4/slides/ep11/오기만해봐9.png",
+  "data/nhs/L4/slides/ep11/오기만해봐10.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "lia",
+   "text": "언니 오기만 해. 내가 가만 두나..",
+   "en": "Just let big sister come home. There's no way I'll let this slide.",
+   "slide": 0,
+   "audio": "data/nhs/L4/TTS/ep11/audio_0_언니_오기만_해__내가_가만_두나_.mp3",
+   "highlight": "오기만 해",
+   "annotation": {
+    "highlight": "오기만 해",
+    "grammar": "-기만 해(봐)",
+    "note": "오다 → 오기만 해 = just try coming home\n실제 경고라기보다 '두고 보자'는 다짐에 가까운, 드라마틱한 반말 표현이에요"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "왜 그래? 무슨 일 있어?",
+   "en": "What's wrong? Did something happen?",
+   "slide": 1,
+   "audio": "data/nhs/L4/TTS/ep11/audio_1_왜_그래__무슨_일_있어_.mp3"
+  },
+  {
+   "speaker": "lia",
+   "text": "언니가 내가 새로 산 옷을 입고 나가 버렸어요.",
+   "en": "Sister wore my brand-new clothes and just left in them.",
+   "slide": 2,
+   "audio": "data/nhs/L4/TTS/ep11/audio_2_언니가_내가_새로_산_옷을_입고_나가_버렸어요_.mp3"
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "그럼 너도 언니의 새 옷을 입으면 되지.",
+   "en": "Then you can just wear her new clothes too.",
+   "slide": 3,
+   "audio": "data/nhs/L4/TTS/ep11/audio_3_그럼_너도_언니의_새_옷을_입으면_되지_.mp3"
+  },
+  {
+   "speaker": "lia",
+   "text": "맞아. 나도 복수하고 말겠어.",
+   "en": "Right. I'll definitely get my revenge.",
+   "slide": 4,
+   "audio": "data/nhs/L4/TTS/ep11/audio_4_맞아__나도_복수하고_말겠어_.mp3",
+   "highlight": "복수하고 말겠어",
+   "annotation": {
+    "highlight": "복수하고 말겠어",
+    "grammar": "-고 말겠다",
+    "note": "복수하다 → 복수하고 말겠어 = I will definitely get revenge\n반드시 해내겠다는 강한 의지 — 드라마 대사처럼 과장된 톤이에요"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "그게 무슨 복수야? 서로 사이좋게 나눠 입는거지.",
+   "en": "What kind of revenge is that? You're just sharing clothes nicely with each other.",
+   "slide": 5,
+   "audio": "data/nhs/L4/TTS/ep11/audio_5_그게_무슨_복수야__서로_사이좋게_나눠_입는거지_.mp3"
+  },
+  {
+   "speaker": "lia",
+   "text": "엄마도 아시다시피 그 옷은 언니가 정말로 아끼는 옷이잖아요.",
+   "en": "As you know, Mom, that's a piece of clothing sister really treasures, you know.",
+   "slide": 6,
+   "audio": "data/nhs/L4/TTS/ep11/audio_6_엄마도_아시다시피_그_옷은_언니가_정말로_아끼는_옷이잖아요_.mp3"
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "참 그렇지. 언니가 신주 모시다시피 하던데.",
+   "en": "Oh right. She's been treating it like it's practically sacred.",
+   "slide": 7,
+   "audio": "data/nhs/L4/TTS/ep11/audio_7_참_그렇지__언니가_신주_모시다시피_하던데_.mp3",
+   "highlight": "신주 모시다시피 하던데",
+   "annotation": {
+    "highlight": "신주 모시다시피 하던데",
+    "grammar": "-다시피 하다",
+    "note": "모시다 → 모시다시피 하다 = practically treats it like enshrining it\n신주 모시다(조상의 위패를 모시듯 정성껏 다루다)라는 관용구에 -다시피 하다를 더해서 '거의 그렇게 행동한다'는 뜻을 더 생생하게 강조해요"
+   }
+  },
+  {
+   "speaker": "mirae_mom",
+   "text": "리나가 언니를 울리고 말겠네.",
+   "en": "Looks like Lina's going to make her sister cry, for sure.",
+   "slide": 8,
+   "audio": "data/nhs/L4/TTS/ep11/audio_8_리나가_언니를_울리고_말겠네_.mp3"
+  },
+  {
+   "speaker": "lia",
+   "text": "그럼 저는 참기만 해요? 엄마 너무해요…",
+   "en": "So I'm just supposed to put up with it? Mom, that's so unfair...",
+   "slide": 9,
+   "audio": "data/nhs/L4/TTS/ep11/audio_9_그럼_저는_참기만_해요___엄마_너무해요___.mp3"
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🥊 복수와 감정 · Revenge & Emotions",
+   "items": [
     {
-      "speaker": "lia",
-      "text": "언니 오기만 해. 내가 가만 두나..",
-      "en": "Just let big sister come home. There's no way I'll let this slide.",
-      "slide": 0,
-      "audio": "data/nhs/L4/TTS/ep11/audio_0_언니_오기만_해__내가_가만_두나_.mp3",
-      "highlight": "오기만 해",
-      "annotation": {
-        "highlight": "오기만 해",
-        "grammar": "-기만 해(봐)",
-        "note": "오다 → 오기만 해 = just try coming home\n실제 경고라기보다 '두고 보자'는 다짐에 가까운, 드라마틱한 반말 표현이에요"
-      }
+     "korean": "복수",
+     "romanization": "bok-su",
+     "english": "revenge",
+     "emoji": "⚔️"
     },
     {
-      "speaker": "mirae_mom",
-      "text": "왜 그래? 무슨 일 있어?",
-      "en": "What's wrong? Did something happen?",
-      "slide": 1,
-      "audio": "data/nhs/L4/TTS/ep11/audio_1_왜_그래__무슨_일_있어_.mp3"
+     "korean": "아끼다",
+     "romanization": "a-kki-da",
+     "english": "to cherish, treasure, be careful with",
+     "emoji": "💝"
     },
     {
-      "speaker": "lia",
-      "text": "언니가 내가 새로 산 옷을 입고 나가 버렸어요.",
-      "en": "Sister wore my brand-new clothes and just left in them.",
-      "slide": 2,
-      "audio": "data/nhs/L4/TTS/ep11/audio_2_언니가_내가_새로_산_옷을_입고_나가_버렸어요_.mp3"
+     "korean": "신주 모시다",
+     "romanization": "sin-ju mo-si-da",
+     "english": "to treat something as sacred (idiom, lit. 'enshrine an ancestral tablet')",
+     "emoji": "🙏"
     },
     {
-      "speaker": "mirae_mom",
-      "text": "그럼 너도 언니의 새 옷을 입으면 되지.",
-      "en": "Then you can just wear her new clothes too.",
-      "slide": 3,
-      "audio": "data/nhs/L4/TTS/ep11/audio_3_그럼_너도_언니의_새_옷을_입으면_되지_.mp3"
+     "korean": "울리다",
+     "romanization": "ul-li-da",
+     "english": "to make (someone) cry",
+     "emoji": "😢"
     },
     {
-      "speaker": "lia",
-      "text": "맞아. 나도 복수하고 말겠어.",
-      "en": "Right. I'll definitely get my revenge.",
-      "slide": 4,
-      "audio": "data/nhs/L4/TTS/ep11/audio_4_맞아__나도_복수하고_말겠어_.mp3",
-      "highlight": "복수하고 말겠어",
-      "annotation": {
-        "highlight": "복수하고 말겠어",
-        "grammar": "-고 말겠다",
-        "note": "복수하다 → 복수하고 말겠어 = I will definitely get revenge\n반드시 해내겠다는 강한 의지 — 드라마 대사처럼 과장된 톤이에요"
-      }
+     "korean": "사이좋게",
+     "romanization": "sa-i-jo-ke",
+     "english": "amicably, on good terms",
+     "emoji": "🤝"
     },
     {
-      "speaker": "mirae_mom",
-      "text": "그게 무슨 복수야? 서로 사이좋게 나눠 입는거지.",
-      "en": "What kind of revenge is that? You're just sharing clothes nicely with each other.",
-      "slide": 5,
-      "audio": "data/nhs/L4/TTS/ep11/audio_5_그게_무슨_복수야__서로_사이좋게_나눠_입는거지_.mp3"
+     "korean": "가만 두다",
+     "romanization": "ga-man du-da",
+     "english": "to let something slide, leave alone",
+     "emoji": "🙅"
     },
     {
-      "speaker": "lia",
-      "text": "엄마도 아시다시피 그 옷은 언니가 정말로 아끼는 옷이잖아요.",
-      "en": "As you know, Mom, that's a piece of clothing sister really treasures, you know.",
-      "slide": 6,
-      "audio": "data/nhs/L4/TTS/ep11/audio_6_엄마도_아시다시피_그_옷은_언니가_정말로_아끼는_옷이잖아요_.mp3"
+     "korean": "참다",
+     "romanization": "cham-da",
+     "english": "to endure, hold back",
+     "emoji": "😣"
     },
     {
-      "speaker": "mirae_mom",
-      "text": "참 그렇지. 언니가 신주 모시다시피 하던데.",
-      "en": "Oh right. She's been treating it like it's practically sacred.",
-      "slide": 7,
-      "audio": "data/nhs/L4/TTS/ep11/audio_7_참_그렇지__언니가_신주_모시다시피_하던데_.mp3",
-      "highlight": "신주 모시다시피 하던데",
-      "annotation": {
-        "highlight": "신주 모시다시피 하던데",
-        "grammar": "-다시피 하다",
-        "note": "모시다 → 모시다시피 하다 = practically treats it like enshrining it\n신주 모시다(조상의 위패를 모시듯 정성껏 다루다)라는 관용구에 -다시피 하다를 더해서 '거의 그렇게 행동한다'는 뜻을 더 생생하게 강조해요"
-      }
-    },
-    {
-      "speaker": "mirae_mom",
-      "text": "리나가 언니를 울리고 말겠네.",
-      "en": "Looks like Lina's going to make her sister cry, for sure.",
-      "slide": 8,
-      "audio": "data/nhs/L4/TTS/ep11/audio_8_리나가_언니를_울리고_말겠네_.mp3"
-    },
-    {
-      "speaker": "lia",
-      "text": "그럼 저는 참기만 해요? 엄마 너무해요…",
-      "en": "So I'm just supposed to put up with it? Mom, that's so unfair...",
-      "slide": 9,
-      "audio": "data/nhs/L4/TTS/ep11/audio_9_그럼_저는_참기만_해요___엄마_너무해요___.mp3"
+     "korean": "너무하다",
+     "romanization": "neo-mu-ha-da",
+     "english": "to be too much, unfair",
+     "emoji": "😤"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "💥 K-드라마 자매 신경전 표현 (대본 외) · K-Drama Sibling Rivalry Expressions",
+   "items": [
     {
-      "category": "🥊 복수와 감정 · Revenge & Emotions",
-      "items": [
-        { "korean": "복수", "romanization": "bok-su", "english": "revenge", "emoji": "⚔️" },
-        { "korean": "아끼다", "romanization": "a-kki-da", "english": "to cherish, treasure, be careful with", "emoji": "💝" },
-        { "korean": "신주 모시다", "romanization": "sin-ju mo-si-da", "english": "to treat something as sacred (idiom, lit. 'enshrine an ancestral tablet')", "emoji": "🙏" },
-        { "korean": "울리다", "romanization": "ul-li-da", "english": "to make (someone) cry", "emoji": "😢" },
-        { "korean": "사이좋게", "romanization": "sa-i-jo-ke", "english": "amicably, on good terms", "emoji": "🤝" },
-        { "korean": "가만 두다", "romanization": "ga-man du-da", "english": "to let something slide, leave alone", "emoji": "🙅" },
-        { "korean": "참다", "romanization": "cham-da", "english": "to endure, hold back", "emoji": "😣" },
-        { "korean": "너무하다", "romanization": "neo-mu-ha-da", "english": "to be too much, unfair", "emoji": "😤" }
-      ]
+     "korean": "삐지다",
+     "romanization": "ppi-ji-da",
+     "english": "to sulk, get miffed",
+     "emoji": "😒"
     },
     {
-      "category": "💥 K-드라마 자매 신경전 표현 (대본 외) · K-Drama Sibling Rivalry Expressions",
-      "items": [
-        { "korean": "삐지다", "romanization": "ppi-ji-da", "english": "to sulk, get miffed", "emoji": "😒" },
-        { "korean": "토라지다", "romanization": "to-ra-ji-da", "english": "to turn away in a huff, pout", "emoji": "🙄" },
-        { "korean": "얄밉다", "romanization": "yal-mip-da", "english": "to be aggravating, annoyingly smug", "emoji": "😏" },
-        { "korean": "약 올리다", "romanization": "yak ol-li-da", "english": "to tease, rile someone up", "emoji": "😝" },
-        { "korean": "배신감", "romanization": "bae-sin-gam", "english": "feeling of betrayal", "emoji": "💔" },
-        { "korean": "억울하다", "romanization": "eok-ul-ha-da", "english": "to feel wronged, unjustly treated", "emoji": "😭" },
-        { "korean": "눈치 보다", "romanization": "nun-chi bo-da", "english": "to read the room, watch someone's mood warily", "emoji": "👀" },
-        { "korean": "화해하다", "romanization": "hwa-hae-ha-da", "english": "to make up, reconcile", "emoji": "🤗" }
-      ]
+     "korean": "토라지다",
+     "romanization": "to-ra-ji-da",
+     "english": "to turn away in a huff, pout",
+     "emoji": "🙄"
+    },
+    {
+     "korean": "얄밉다",
+     "romanization": "yal-mip-da",
+     "english": "to be aggravating, annoyingly smug",
+     "emoji": "😏"
+    },
+    {
+     "korean": "약 올리다",
+     "romanization": "yak ol-li-da",
+     "english": "to tease, rile someone up",
+     "emoji": "😝"
+    },
+    {
+     "korean": "배신감",
+     "romanization": "bae-sin-gam",
+     "english": "feeling of betrayal",
+     "emoji": "💔"
+    },
+    {
+     "korean": "억울하다",
+     "romanization": "eok-ul-ha-da",
+     "english": "to feel wronged, unjustly treated",
+     "emoji": "😭"
+    },
+    {
+     "korean": "눈치 보다",
+     "romanization": "nun-chi bo-da",
+     "english": "to read the room, watch someone's mood warily",
+     "emoji": "👀"
+    },
+    {
+     "korean": "화해하다",
+     "romanization": "hwa-hae-ha-da",
+     "english": "to make up, reconcile",
+     "emoji": "🤗"
     }
-  ],
-  "grammar": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g11_l4_giman_hae",
+   "tier": "core",
+   "title": "-기만 해(봐)",
+   "title_en": "Just Try It... (Warning/Threat)",
+   "emoji": "😤",
+   "pattern": "동사 어간 + -기만 해(봐) — '그 행동을 하기만 하면' 이라는 뜻으로, 경고·협박·다짐의 뉘앙스",
+   "scene_example": {
+    "korean": "언니 오기만 해. 내가 가만 두나..",
+    "english": "Just let big sister come home. There's no way I'll let this slide.",
+    "highlight": "오기만 해"
+   },
+   "explanation_en": "-기만 해(봐) literally means 'just try doing X' — it's used as a warning or threat, implying 'if you dare do that, you'll see what happens.' It's dramatic and confrontational, very common in sibling arguments and K-dramas.",
+   "rule_boxes": [
     {
-      "id": "g11_l4_giman_hae",
-      "tier": "core",
-      "title": "-기만 해(봐)",
-      "title_en": "Just Try It... (Warning/Threat)",
-      "emoji": "😤",
-      "pattern": "동사 어간 + -기만 해(봐) — '그 행동을 하기만 하면' 이라는 뜻으로, 경고·협박·다짐의 뉘앙스",
-      "scene_example": {
-        "korean": "언니 오기만 해. 내가 가만 두나..",
-        "english": "Just let big sister come home. There's no way I'll let this slide.",
-        "highlight": "오기만 해"
-      },
-      "explanation_en": "-기만 해(봐) literally means 'just try doing X' — it's used as a warning or threat, implying 'if you dare do that, you'll see what happens.' It's dramatic and confrontational, very common in sibling arguments and K-dramas.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사 어간 + 기만 해(봐)", "content": "오다→오기만 해, 건드리다→건드리기만 해, 울리다→울리기만 해", "note": "반말체에서 특히 자주 쓰여요" },
-        { "type": "green", "label": "경고·협박의 뉘앙스", "content": "오기만 해 = (감히) 오기만 해봐, 무슨 일이 일어나는지 보게 될 거야", "note": "뒤에 결과를 말 안 해도 위협적으로 전달돼요" },
-        { "type": "amber", "label": "참기만 해요? (다른 용법과 구별)", "content": "10번째 줄 '참기만 해요?'는 협박이 아니라 '그저 참기만 하다'(only endure)라는 뜻", "note": "같은 형태(-기만)라도 문맥에 따라 협박 vs '오직 ~만'으로 뜻이 달라져요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "언니 오기만 해. 내가 가만 두나..", "en": "Just let big sister come home. There's no way I'll let this slide." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "내 방에 다시 들어오기만 해 봐!", "en": "Just try coming into my room again!" },
-            { "ko": "한 번만 더 늦기만 해 봐.", "en": "Just be late one more time, I dare you." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "내 물건 또 ___ 봐! (건드리다)", "answer": "건드리기만 해", "hint": "경고·협박의 뉘앙스" }
-      ]
+     "type": "blue",
+     "label": "동사 어간 + 기만 해(봐)",
+     "content": "오다→오기만 해, 건드리다→건드리기만 해, 울리다→울리기만 해",
+     "note": "반말체에서 특히 자주 쓰여요"
     },
     {
-      "id": "g11_l4_go_malgetda",
-      "tier": "core",
-      "title": "-고 말겠다",
-      "title_en": "I Will Definitely... (Strong Resolve)",
-      "emoji": "💪",
-      "pattern": "동사 어간 + -고 말겠다 — 어떤 일을 반드시, 기어코 해내겠다는 강한 의지",
-      "scene_example": {
-        "korean": "맞아. 나도 복수하고 말겠어.",
-        "english": "Right. I'll definitely get my revenge.",
-        "highlight": "복수하고 말겠어"
-      },
-      "explanation_en": "-고 말겠다 (from -고 말다, 'to end up doing') expresses strong determination — 'I will do this no matter what.' It often appears in dramatic vows of revenge, achievement, or resolve, giving speech an intense, movie-trailer kind of energy.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사 어간 + 고 말겠다", "content": "복수하다→복수하고 말겠다, 울리다→울리고 말겠다, 성공하다→성공하고 말겠다", "note": "말겠다(미래 의지형)" },
-        { "type": "green", "label": "-고 말다의 두 가지 쓰임", "content": "미래(-고 말겠다): 반드시 하겠다는 다짐\n과거(-고 말았다): 원치 않게 결국 그렇게 됐다는 아쉬움", "note": "리나가 '울리고 말겠네'라고 예측할 때는 -겠-으로 미래 추측" },
-        { "type": "amber", "label": "드라마틱한 톤", "content": "복수하고 말겠어! = I WILL have my revenge! (연극적으로 강조)", "note": "일상 대화에서도 쓰지만 좀 과장되고 극적인 느낌을 줘요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "맞아. 나도 복수하고 말겠어.", "en": "Right. I'll definitely get my revenge." },
-            { "ko": "리나가 언니를 울리고 말겠네.", "en": "Looks like Lina's going to make her sister cry, for sure." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "이번 시험은 꼭 잘 보고 말겠어.", "en": "I will definitely do well on this exam." },
-            { "ko": "그 회사에 꼭 취직하고 말겠어요.", "en": "I will definitely get a job at that company, no matter what." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "이번엔 반드시 ___. (성공하다)", "answer": "성공하고 말겠어", "hint": "반드시 해내겠다는 강한 의지" }
-      ]
+     "type": "green",
+     "label": "경고·협박의 뉘앙스",
+     "content": "오기만 해 = (감히) 오기만 해봐, 무슨 일이 일어나는지 보게 될 거야",
+     "note": "뒤에 결과를 말 안 해도 위협적으로 전달돼요"
     },
     {
-      "id": "g11_l4_dasipi_hada",
-      "tier": "core",
-      "title": "-다시피 하다",
-      "title_en": "Practically/Almost Like... Doing",
-      "emoji": "🙏",
-      "pattern": "동사 어간 + -다시피 하다 — 실제로는 완전히 그렇지 않지만 거의 그런 것처럼 행동한다는 뜻",
-      "scene_example": {
-        "korean": "언니가 신주 모시다시피 하던데.",
-        "english": "She's been treating it like it's practically sacred.",
-        "highlight": "신주 모시다시피 하던데"
-      },
-      "explanation_en": "-다시피 하다 means 'to practically/almost do X' — describing behavior that isn't literally X, but is so close to it that it might as well be. 신주 모시다 (to enshrine an ancestral tablet) is a vivid idiom for treating something with extreme reverence, and 모시다시피 하다 stretches that idiom further: 'treats it almost like enshrining it.' Note: this is a DIFFERENT -다시피 from 아시다시피 in line 7, which instead means 'as you know' — a separate, very common pattern worth learning to tell apart.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사 어간 + 다시피 하다", "content": "모시다→모시다시피 하다, 울다→울다시피 하다, 뛰다→뛰다시피 하다", "note": "실제 그 동작 그대로는 아니지만 거의 그렇다는 비유" },
-        { "type": "green", "label": "아시다시피 vs -다시피 하다", "content": "아시다시피 = as you know (앎을 나타내는 동사 + 다시피, 그 자체로 문장 끝에도 옴)\n-다시피 하다 = 거의 ~하듯이 행동하다 (동사 + 다시피 하다, 반드시 '하다'가 붙음)", "note": "이 에피소드에 두 가지가 다 나와서 비교하기 좋아요" },
-        { "type": "amber", "label": "원래 L5 예정 문법 — 앞당겨 도입", "content": "-다시피 하다는 원래 L5에서 다룰 예정이었지만 이 에피소드 표현에 잘 맞아서 L4에서 먼저 소개해요", "note": "심화 문법이니 천천히 익혀도 괜찮아요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "언니가 신주 모시다시피 하던데.", "en": "She's been treating it like it's practically sacred." },
-            { "ko": "엄마도 아시다시피 그 옷은 언니가 정말로 아끼는 옷이잖아요.", "en": "As you know, Mom, that's a piece of clothing sister really treasures, you know. (아시다시피 — different pattern)" }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "그 팀은 매일 밤을 새다시피 하면서 준비했어요.", "en": "That team prepared while practically pulling all-nighters every day." },
-            { "ko": "요즘 라면만 먹다시피 해요.", "en": "These days I'm practically living on ramen alone." }
-          ]
-        }
-      ]
+     "type": "amber",
+     "label": "참기만 해요? (다른 용법과 구별)",
+     "content": "10번째 줄 '참기만 해요?'는 협박이 아니라 '그저 참기만 하다'(only endure)라는 뜻",
+     "note": "같은 형태(-기만)라도 문맥에 따라 협박 vs '오직 ~만'으로 뜻이 달라져요"
     }
-  ],
-  "usage": [
+   ],
+   "example_groups": [
     {
-      "title": "신주 모시다 — 조상을 모시듯 애지중지하기",
-      "title_en": "신주 모시다 — Treating Something Like an Ancestral Tablet",
-      "explanation_en": "신주 (a wooden ancestral tablet used in traditional Korean memorial rites) was treated with the utmost care and reverence in a household. 신주 모시듯 하다 / 신주 모시다시피 하다 borrows that image to describe someone being extremely, almost comically careful with an object — like how Bomi treats her prized piece of clothing. It's a vivid, slightly humorous way to exaggerate how precious something is to someone.",
-      "examples": [
-        { "ko": "언니가 신주 모시다시피 하던데.", "en": "She's been treating it like it's practically sacred." },
-        { "ko": "그 사람은 자기 차를 신주 모시듯 해요.", "en": "That person treats his car like it's a sacred relic." }
-      ]
-    },
-    {
-      "title": "형제자매 다툼에 자주 쓰는 감정 표현",
-      "title_en": "Common Emotion Words for Sibling Fights",
-      "explanation_en": "Sibling conflicts in Korean dramas (and real life!) come with a whole vocabulary of dramatic emotion words: 삐지다/토라지다 (sulking), 얄밉다 (finding someone aggravating), 배신감 (feeling betrayed), 억울하다 (feeling wronged), and — hopefully — 화해하다 (making up) at the end. Recognizing these words helps you follow along with the emotional rollercoaster of any sibling-rivalry drama scene.",
-      "examples": [
-        { "ko": "언니가 얄밉게 웃으면서 나갔어.", "en": "Sister walked out with an aggravatingly smug smile." },
-        { "ko": "억울해서 눈물이 났어요.", "en": "I felt so wronged that I teared up." },
-        { "ko": "결국 둘이 화해했어요.", "en": "In the end, the two of them made up." }
-      ]
-    }
-  ],
-  "pronunciation": {
-    "title": "발음 규칙 · Pronunciation Rules",
-    "items": [
+     "label": "이 에피소드 속 예문",
+     "items": [
       {
-        "rule": "받침 ㅅ + 모음 → 연음화 (옷이잖아요)",
-        "tip": "받침 ㅅ 뒤에 모음이 오면 ㅅ이 다음 음절로 넘어가요 · A batchim ㅅ links to the next syllable before a vowel.",
-        "examples": [
-          { "written": "옷이잖아요", "pronounced_standard": "[오시잖아요]", "pronounced_actual": "[오시잖아요]", "note": "옷(ㅅ) + 이 → 연음화" }
-        ]
+       "ko": "언니 오기만 해. 내가 가만 두나..",
+       "en": "Just let big sister come home. There's no way I'll let this slide."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "내 방에 다시 들어오기만 해 봐!",
+       "en": "Just try coming into my room again!"
       },
       {
-        "rule": "받침 ㅎ + ㅈ → 격음화 (그렇지)",
-        "tip": "받침 ㅎ 뒤에 ㅈ이 오면 두 소리가 합쳐져 거센소리 [ㅊ]이 돼요 · A batchim ㅎ combines with a following ㅈ to form the aspirated sound [ㅊ].",
-        "examples": [
-          { "written": "그렇지", "pronounced_standard": "[그러치]", "pronounced_actual": "[그러치]", "note": "ㅎ + ㅈ → ㅊ (격음화)" }
-        ]
+       "ko": "한 번만 더 늦기만 해 봐.",
+       "en": "Just be late one more time, I dare you."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "내 물건 또 ___ 봐! (건드리다)",
+     "answer": "건드리기만 해",
+     "hint": "경고·협박의 뉘앙스"
+    }
+   ]
+  },
+  {
+   "id": "g11_l4_go_malgetda",
+   "tier": "core",
+   "title": "-고 말겠다",
+   "title_en": "I Will Definitely... (Strong Resolve)",
+   "emoji": "💪",
+   "pattern": "동사 어간 + -고 말겠다 — 어떤 일을 반드시, 기어코 해내겠다는 강한 의지",
+   "scene_example": {
+    "korean": "맞아. 나도 복수하고 말겠어.",
+    "english": "Right. I'll definitely get my revenge.",
+    "highlight": "복수하고 말겠어"
+   },
+   "explanation_en": "-고 말겠다 (from -고 말다, 'to end up doing') expresses strong determination — 'I will do this no matter what.' It often appears in dramatic vows of revenge, achievement, or resolve, giving speech an intense, movie-trailer kind of energy.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "동사 어간 + 고 말겠다",
+     "content": "복수하다→복수하고 말겠다, 울리다→울리고 말겠다, 성공하다→성공하고 말겠다",
+     "note": "말겠다(미래 의지형)"
+    },
+    {
+     "type": "green",
+     "label": "-고 말다의 두 가지 쓰임",
+     "content": "미래(-고 말겠다): 반드시 하겠다는 다짐\n과거(-고 말았다): 원치 않게 결국 그렇게 됐다는 아쉬움",
+     "note": "리나가 '울리고 말겠네'라고 예측할 때는 -겠-으로 미래 추측"
+    },
+    {
+     "type": "amber",
+     "label": "드라마틱한 톤",
+     "content": "복수하고 말겠어! = I WILL have my revenge! (연극적으로 강조)",
+     "note": "일상 대화에서도 쓰지만 좀 과장되고 극적인 느낌을 줘요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "맞아. 나도 복수하고 말겠어.",
+       "en": "Right. I'll definitely get my revenge."
       },
       {
-        "rule": "ㄴ 첨가 (무슨 일)",
-        "tip": "받침으로 끝나는 말 뒤에 '이/야/여' 등으로 시작하는 말이 오면 그 사이에 ㄴ소리가 끼어들어요 · An extra ㄴ sound is inserted between a consonant-ending word and a following word starting with 이/야/여, etc.",
-        "examples": [
-          { "written": "무슨 일", "pronounced_standard": "[무슨닐]", "pronounced_actual": "[무슨닐]", "note": "무슨 + 일 → ㄴ 첨가" }
-        ]
+       "ko": "리나가 언니를 울리고 말겠네.",
+       "en": "Looks like Lina's going to make her sister cry, for sure."
       }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "이번 시험은 꼭 잘 보고 말겠어.",
+       "en": "I will definitely do well on this exam."
+      },
+      {
+       "ko": "그 회사에 꼭 취직하고 말겠어요.",
+       "en": "I will definitely get a job at that company, no matter what."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "이번엔 반드시 ___. (성공하다)",
+     "answer": "성공하고 말겠어",
+     "hint": "반드시 해내겠다는 강한 의지"
+    }
+   ]
+  },
+  {
+   "id": "g11_l4_dasipi_hada",
+   "tier": "core",
+   "title": "-다시피 하다",
+   "title_en": "Practically/Almost Like... Doing",
+   "emoji": "🙏",
+   "pattern": "동사 어간 + -다시피 하다 — 실제로는 완전히 그렇지 않지만 거의 그런 것처럼 행동한다는 뜻",
+   "scene_example": {
+    "korean": "언니가 신주 모시다시피 하던데.",
+    "english": "She's been treating it like it's practically sacred.",
+    "highlight": "신주 모시다시피 하던데"
+   },
+   "explanation_en": "-다시피 하다 means 'to practically/almost do X' — describing behavior that isn't literally X, but is so close to it that it might as well be. 신주 모시다 (to enshrine an ancestral tablet) is a vivid idiom for treating something with extreme reverence, and 모시다시피 하다 stretches that idiom further: 'treats it almost like enshrining it.' Note: this is a DIFFERENT -다시피 from 아시다시피 in line 7, which instead means 'as you know' — a separate, very common pattern worth learning to tell apart.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "동사 어간 + 다시피 하다",
+     "content": "모시다→모시다시피 하다, 울다→울다시피 하다, 뛰다→뛰다시피 하다",
+     "note": "실제 그 동작 그대로는 아니지만 거의 그렇다는 비유"
+    },
+    {
+     "type": "green",
+     "label": "아시다시피 vs -다시피 하다",
+     "content": "아시다시피 = as you know (앎을 나타내는 동사 + 다시피, 그 자체로 문장 끝에도 옴)\n-다시피 하다 = 거의 ~하듯이 행동하다 (동사 + 다시피 하다, 반드시 '하다'가 붙음)",
+     "note": "이 에피소드에 두 가지가 다 나와서 비교하기 좋아요"
+    },
+    {
+     "type": "amber",
+     "label": "원래 L5 예정 문법 — 앞당겨 도입",
+     "content": "-다시피 하다는 원래 L5에서 다룰 예정이었지만 이 에피소드 표현에 잘 맞아서 L4에서 먼저 소개해요",
+     "note": "심화 문법이니 천천히 익혀도 괜찮아요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "언니가 신주 모시다시피 하던데.",
+       "en": "She's been treating it like it's practically sacred."
+      },
+      {
+       "ko": "엄마도 아시다시피 그 옷은 언니가 정말로 아끼는 옷이잖아요.",
+       "en": "As you know, Mom, that's a piece of clothing sister really treasures, you know. (아시다시피 — different pattern)"
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "그 팀은 매일 밤을 새다시피 하면서 준비했어요.",
+       "en": "That team prepared while practically pulling all-nighters every day."
+      },
+      {
+       "ko": "요즘 라면만 먹다시피 해요.",
+       "en": "These days I'm practically living on ramen alone."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "신주 모시다 — 조상을 모시듯 애지중지하기",
+   "title_en": "신주 모시다 — Treating Something Like an Ancestral Tablet",
+   "explanation_en": "신주 (a wooden ancestral tablet used in traditional Korean memorial rites) was treated with the utmost care and reverence in a household. 신주 모시듯 하다 / 신주 모시다시피 하다 borrows that image to describe someone being extremely, almost comically careful with an object — like how Bomi treats her prized piece of clothing. It's a vivid, slightly humorous way to exaggerate how precious something is to someone.",
+   "examples": [
+    {
+     "ko": "언니가 신주 모시다시피 하던데.",
+     "en": "She's been treating it like it's practically sacred."
+    },
+    {
+     "ko": "그 사람은 자기 차를 신주 모시듯 해요.",
+     "en": "That person treats his car like it's a sacred relic."
+    }
+   ]
+  },
+  {
+   "title": "형제자매 다툼에 자주 쓰는 감정 표현",
+   "title_en": "Common Emotion Words for Sibling Fights",
+   "explanation_en": "Sibling conflicts in Korean dramas (and real life!) come with a whole vocabulary of dramatic emotion words: 삐지다/토라지다 (sulking), 얄밉다 (finding someone aggravating), 배신감 (feeling betrayed), 억울하다 (feeling wronged), and — hopefully — 화해하다 (making up) at the end. Recognizing these words helps you follow along with the emotional rollercoaster of any sibling-rivalry drama scene.",
+   "examples": [
+    {
+     "ko": "언니가 얄밉게 웃으면서 나갔어.",
+     "en": "Sister walked out with an aggravatingly smug smile."
+    },
+    {
+     "ko": "억울해서 눈물이 났어요.",
+     "en": "I felt so wronged that I teared up."
+    },
+    {
+     "ko": "결국 둘이 화해했어요.",
+     "en": "In the end, the two of them made up."
+    }
+   ]
+  }
+ ],
+ "pronunciation": {
+  "title": "발음 규칙 · Pronunciation Rules",
+  "items": [
+   {
+    "rule": "받침 ㅅ + 모음 → 연음화 (옷이잖아요)",
+    "tip": "받침 ㅅ 뒤에 모음이 오면 ㅅ이 다음 음절로 넘어가요 · A batchim ㅅ links to the next syllable before a vowel.",
+    "examples": [
+     {
+      "written": "옷이잖아요",
+      "pronounced_standard": "[오시잖아요]",
+      "pronounced_actual": "[오시잖아요]",
+      "note": "옷(ㅅ) + 이 → 연음화"
+     }
     ]
-  },
-  "banmal_jondaemal": {
-    "intro_ko": "보미 엄마는 리나에게 항상 반말을 써요. 리나는 대체로 엄마에게 존댓말을 쓰지만, 감정이 격해지는 순간(1번·5번 줄)에는 반말이 튀어나와요 — 존댓말을 쓰는 사람도 화나거나 흥분하면 반말이 섞일 수 있다는 걸 다시 보여줘요.",
-    "intro_en": "Bomi's mom always speaks casually to Lina. Lina generally uses polite speech with her mom, but in emotionally charged moments (lines 1 and 5), casual speech slips out — another example of how even a habitually polite speaker can lapse into banmal when upset.",
-    "rows": [
-      {
-        "situation_ko": "리나 → 엄마 (존댓말, 차분한 설명)",
-        "situation_en": "Lina → mom (polite, calm explanation)",
-        "banmal": "(이 장면에서 리나는 차분할 땐 반말을 안 써요)",
-        "jondaemal": "언니가 내가 새로 산 옷을 입고 나가 버렸어요.",
-        "note": "설명하거나 사실을 전달할 땐 존댓말을 유지해요"
-      },
-      {
-        "situation_ko": "리나 → (혼잣말/감정 폭발, 반말)",
-        "situation_en": "Lina → (venting/emotional outburst, casual)",
-        "banmal": "언니 오기만 해. 내가 가만 두나..",
-        "jondaemal": "(같은 대화 안에서도 감정이 격해지면 반말이 나와요)",
-        "note": "분노·다짐을 표현할 때는 반말이 더 자연스럽고 강하게 들려요"
-      },
-      {
-        "situation_ko": "엄마 → 리나 (항상 반말)",
-        "situation_en": "Mom → Lina (always casual)",
-        "banmal": "그럼 너도 언니의 새 옷을 입으면 되지.",
-        "jondaemal": "(엄마는 리나에게 존댓말을 쓰지 않아요)",
-        "note": "부모가 자녀에게는 항상 반말이 기본이에요"
-      }
-    ],
-    "tip": "존댓말을 기본으로 쓰는 사람이라도 화가 나거나 감정이 격해지면 짧게 반말이 튀어나올 수 있어요 — 무례한 게 아니라 감정이 얼마나 격한지를 보여주는 자연스러운 신호예요."
-  },
-  "real_life": [
-    {
-      "type": "tip",
-      "title": "🇰🇷 신주 모시다 — 어디서 온 표현일까?",
-      "content_ko": "'신주'는 전통적으로 조상의 이름과 지위를 적어 모셔두던 나무패예요. 제사를 지내는 집에서는 신주를 아주 정성스럽고 조심스럽게 다뤘기 때문에, '신주 모시듯 하다'라는 말은 무언가를 극도로 소중히, 조심스럽게 다루는 모습을 비유할 때 쓰여요. 요즘은 제사와 상관없는 일상 대화에서도 '자기 물건을 신주 모시듯 한다'처럼 유머러스하게 자주 써요.",
-      "content_en": "신주 is a traditional wooden tablet inscribed with an ancestor's name and status, kept and cared for in households that performed ancestral rites. Because families handled 신주 with such extreme care, the phrase '신주 모시듯 하다' (to treat something like a 신주) became a common — often humorous — way to describe someone being overly careful or protective of an object, even in contexts that have nothing to do with ancestor rites."
-    },
-    {
-      "type": "kakao",
-      "title": "💬 리나가 친구한테 하소연해요",
-      "messages": [
-        { "speaker": "리나", "side": "right", "text": "언니가 내 새 옷 입고 나가버렸어 진짜 열받아", "en": "My sister wore my new clothes and left, I'm so mad" },
-        { "speaker": "친구", "side": "left", "text": "헐 진짜? 완전 얄밉다", "en": "What, really? That's so annoying of her" },
-        { "speaker": "리나", "side": "right", "text": "나도 언니 옷 입고 복수하고 말겠어", "en": "I'm going to wear her clothes too and get my revenge" },
-        { "speaker": "친구", "side": "left", "text": "ㅋㅋㅋ 근데 그거 복수 맞아?", "en": "Lol but is that really revenge though?" }
-      ]
-    },
-    {
-      "type": "reading",
-      "id": "rl_read_ep11",
-      "title": "📖 옷장 전쟁 — 형제자매의 흔한 다툼",
-      "title_en": "The Closet Wars — A Common Sibling Fight",
-      "setup_ko": "형제자매가 서로 옷을 빌려 입다가 다투는 상황에 대한 짧은 글이에요.",
-      "setup_en": "A short passage about siblings fighting over borrowing each other's clothes.",
-      "passage": "옷장을 같이 쓰는 자매나 형제 사이에서는 옷 때문에 다투는 일이 흔하다. 허락 없이 옷을 입고 나가면 상대방은 배신감을 느끼고 화가 난다. 하지만 대부분의 다툼은 오래가지 않는다. 서로 사과하고 나면 금방 화해하고, 오히려 서로의 옷을 더 사이좋게 나눠 입기도 한다. 부모님들은 이런 다툼을 보면서 자녀들이 스스로 화해하는 법을 배우도록 지켜보는 경우가 많다.",
-      "passage_en": "Among siblings who share a closet, fights over clothes are common. If one wears the other's clothes without permission, the other feels betrayed and gets upset. But most fights don't last long. Once they apologize to each other, they usually make up quickly, and sometimes end up sharing clothes even more amicably than before. Parents often watch these squabbles play out, letting their kids learn to reconcile on their own.",
-      "questions": [
-        { "question_ko": "형제자매가 옷 때문에 다투는 흔한 이유는?", "question_en": "What's a common reason siblings fight over clothes, according to the passage?", "options": ["허락 없이 옷을 입고 나가서", "옷이 하나도 없어서", "옷장이 너무 커서"], "answer": 0 },
-        { "question_ko": "부모님들이 이런 다툼을 대하는 태도로 알맞은 것은?", "question_en": "How do parents often handle these fights, according to the passage?", "options": ["자녀들이 스스로 화해하도록 지켜본다", "무조건 옷을 다 버린다", "즉시 두 사람을 떼어놓는다"], "answer": 0 }
-      ]
-    }
-  ],
-  "quiz": [
-    {
-      "id": "q11l4_1",
-      "audio_text": "언니 오기만 해. 내가 가만 두나..",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["언니 오기만 해. 내가 가만 두나.", "언니가 벌써 왔어.", "언니는 안 올 거야.", "언니를 도와줄 거야."],
-      "answer": 0,
-      "explanation": "언니가 오면 가만히 있지 않겠다는 경고·다짐의 표현이에요."
-    },
-    {
-      "id": "q11l4_2",
-      "question_ko": "'-기만 해(봐)'의 뉘앙스로 가장 알맞은 것은?",
-      "question_en": "What nuance does -기만 해(봐) carry?",
-      "options": ["차분한 설명", "경고·협박의 뉘앙스", "질문", "감사 인사"],
-      "answer": 1,
-      "explanation": "-기만 해(봐)는 '그 행동을 하기만 하면 어떻게 되는지 보자'는 경고·협박의 뉘앙스예요."
-    },
-    {
-      "id": "q11l4_3",
-      "audio_text": "맞아. 나도 복수하고 말겠어.",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["복수를 포기했다.", "나도 복수하고 말겠다는 강한 의지를 나타낸다.", "이미 복수를 끝냈다.", "복수가 뭔지 모른다."],
-      "answer": 1,
-      "explanation": "-고 말겠다는 반드시 해내겠다는 강한 의지를 나타내는 표현이에요."
-    },
-    {
-      "id": "q11l4_4",
-      "question_ko": "'언니가 신주 모시다시피 하던데'에서 '-다시피 하다'의 뜻으로 가장 알맞은 것은?",
-      "question_en": "What does -다시피 하다 mean in 신주 모시다시피 하던데?",
-      "options": ["실제로 신주를 모신다는 뜻", "실제로는 아니지만 거의 그렇게 행동한다는 뜻", "과거에 그랬다는 뜻", "명령을 나타냄"],
-      "answer": 1,
-      "explanation": "-다시피 하다는 실제로 그 행동은 아니지만 거의 그런 것처럼 행동한다는 뜻이에요."
-    },
-    {
-      "id": "q11l4_5",
-      "question_ko": "'아시다시피'와 '-다시피 하다'의 차이로 가장 알맞은 것은?",
-      "question_en": "What's the difference between 아시다시피 and -다시피 하다?",
-      "options": ["아시다시피는 'as you know', -다시피 하다는 '거의 ~하듯이 행동하다'", "둘 다 완전히 같은 뜻이다", "아시다시피는 미래, -다시피 하다는 과거", "아시다시피는 명사에만 붙는다"],
-      "answer": 0,
-      "explanation": "아시다시피는 '아시다'(알다의 높임)에 다시피가 붙어 '아시는 것처럼'을 뜻하고, -다시피 하다는 다른 동사에 붙어 '거의 그렇게 행동한다'는 뜻이에요."
-    },
-    {
-      "id": "q11l4_6",
-      "audio_text": "그럼 저는 참기만 해요? 엄마 너무해요…",
-      "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
-      "question_en": "Listen and choose what you heard.",
-      "options": ["리나는 화가 안 났다.", "리나는 언니를 도와주고 싶어한다.", "리나는 그냥 참기만 해야 하냐고 억울해한다.", "리나는 이미 다 이해했다."],
-      "answer": 2,
-      "explanation": "리나는 자기만 참아야 하는 상황이 억울하고 부당하다고 느끼고 있어요."
-    }
-  ],
-  "self_check": [
-    { "ko": "-기만 해(봐)로 경고·협박의 뉘앙스를 표현할 수 있어요.", "en": "I can use -기만 해(봐) to express a warning or threat." },
-    { "ko": "-고 말겠다로 반드시 해내겠다는 강한 의지를 표현할 수 있어요.", "en": "I can use -고 말겠다 to express strong determination to do something." },
-    { "ko": "-다시피 하다로 실제로는 아니지만 거의 그렇게 행동한다는 걸 표현할 수 있어요.", "en": "I can use -다시피 하다 to describe behavior that's almost, but not quite, doing something." },
-    { "ko": "아시다시피와 -다시피 하다를 구별할 수 있어요.", "en": "I can tell apart 아시다시피 ('as you know') from -다시피 하다." },
-    { "ko": "형제자매 다툼에 자주 쓰는 감정 표현(삐지다, 억울하다, 화해하다 등)을 이해해요.", "en": "I understand common emotion words used in sibling fights (삐지다, 억울하다, 화해하다, etc.)." }
+   },
+   {
+    "rule": "받침 ㅎ + ㅈ → 격음화 (그렇지)",
+    "tip": "받침 ㅎ 뒤에 ㅈ이 오면 두 소리가 합쳐져 거센소리 [ㅊ]이 돼요 · A batchim ㅎ combines with a following ㅈ to form the aspirated sound [ㅊ].",
+    "examples": [
+     {
+      "written": "그렇지",
+      "pronounced_standard": "[그러치]",
+      "pronounced_actual": "[그러치]",
+      "note": "ㅎ + ㅈ → ㅊ (격음화)"
+     }
+    ]
+   },
+   {
+    "rule": "ㄴ 첨가 (무슨 일)",
+    "tip": "받침으로 끝나는 말 뒤에 '이/야/여' 등으로 시작하는 말이 오면 그 사이에 ㄴ소리가 끼어들어요 · An extra ㄴ sound is inserted between a consonant-ending word and a following word starting with 이/야/여, etc.",
+    "examples": [
+     {
+      "written": "무슨 일",
+      "pronounced_standard": "[무슨닐]",
+      "pronounced_actual": "[무슨닐]",
+      "note": "무슨 + 일 → ㄴ 첨가"
+     }
+    ]
+   }
   ]
+ },
+ "banmal_jondaemal": {
+  "intro_ko": "보미 엄마는 리나에게 항상 반말을 써요. 리나는 대체로 엄마에게 존댓말을 쓰지만, 감정이 격해지는 순간(1번·5번 줄)에는 반말이 튀어나와요 — 존댓말을 쓰는 사람도 화나거나 흥분하면 반말이 섞일 수 있다는 걸 다시 보여줘요.",
+  "intro_en": "Bomi's mom always speaks casually to Lina. Lina generally uses polite speech with her mom, but in emotionally charged moments (lines 1 and 5), casual speech slips out — another example of how even a habitually polite speaker can lapse into banmal when upset.",
+  "rows": [
+   {
+    "situation_ko": "리나 → 엄마 (존댓말, 차분한 설명)",
+    "situation_en": "Lina → mom (polite, calm explanation)",
+    "banmal": "(이 장면에서 리나는 차분할 땐 반말을 안 써요)",
+    "jondaemal": "언니가 내가 새로 산 옷을 입고 나가 버렸어요.",
+    "note": "설명하거나 사실을 전달할 땐 존댓말을 유지해요"
+   },
+   {
+    "situation_ko": "리나 → (혼잣말/감정 폭발, 반말)",
+    "situation_en": "Lina → (venting/emotional outburst, casual)",
+    "banmal": "언니 오기만 해. 내가 가만 두나..",
+    "jondaemal": "(같은 대화 안에서도 감정이 격해지면 반말이 나와요)",
+    "note": "분노·다짐을 표현할 때는 반말이 더 자연스럽고 강하게 들려요"
+   },
+   {
+    "situation_ko": "엄마 → 리나 (항상 반말)",
+    "situation_en": "Mom → Lina (always casual)",
+    "banmal": "그럼 너도 언니의 새 옷을 입으면 되지.",
+    "jondaemal": "(엄마는 리나에게 존댓말을 쓰지 않아요)",
+    "note": "부모가 자녀에게는 항상 반말이 기본이에요"
+   }
+  ],
+  "tip": "존댓말을 기본으로 쓰는 사람이라도 화가 나거나 감정이 격해지면 짧게 반말이 튀어나올 수 있어요 — 무례한 게 아니라 감정이 얼마나 격한지를 보여주는 자연스러운 신호예요."
+ },
+ "real_life": [
+  {
+   "type": "tip",
+   "title": "🇰🇷 신주 모시다 — 어디서 온 표현일까?",
+   "content_ko": "'신주'는 전통적으로 조상의 이름과 지위를 적어 모셔두던 나무패예요. 제사를 지내는 집에서는 신주를 아주 정성스럽고 조심스럽게 다뤘기 때문에, '신주 모시듯 하다'라는 말은 무언가를 극도로 소중히, 조심스럽게 다루는 모습을 비유할 때 쓰여요. 요즘은 제사와 상관없는 일상 대화에서도 '자기 물건을 신주 모시듯 한다'처럼 유머러스하게 자주 써요.",
+   "content_en": "신주 is a traditional wooden tablet inscribed with an ancestor's name and status, kept and cared for in households that performed ancestral rites. Because families handled 신주 with such extreme care, the phrase '신주 모시듯 하다' (to treat something like a 신주) became a common — often humorous — way to describe someone being overly careful or protective of an object, even in contexts that have nothing to do with ancestor rites."
+  },
+  {
+   "type": "kakao",
+   "title": "💬 리나가 친구한테 하소연해요",
+   "messages": [
+    {
+     "speaker": "리나",
+     "side": "right",
+     "text": "언니가 내 새 옷 입고 나가버렸어 진짜 열받아",
+     "en": "My sister wore my new clothes and left, I'm so mad"
+    },
+    {
+     "speaker": "친구",
+     "side": "left",
+     "text": "헐 진짜? 완전 얄밉다",
+     "en": "What, really? That's so annoying of her"
+    },
+    {
+     "speaker": "리나",
+     "side": "right",
+     "text": "나도 언니 옷 입고 복수하고 말겠어",
+     "en": "I'm going to wear her clothes too and get my revenge"
+    },
+    {
+     "speaker": "친구",
+     "side": "left",
+     "text": "ㅋㅋㅋ 근데 그거 복수 맞아?",
+     "en": "Lol but is that really revenge though?"
+    }
+   ]
+  },
+  {
+   "type": "reading",
+   "id": "rl_read_ep11",
+   "title": "📖 옷장 전쟁 — 형제자매의 흔한 다툼",
+   "title_en": "The Closet Wars — A Common Sibling Fight",
+   "setup_ko": "형제자매가 서로 옷을 빌려 입다가 다투는 상황에 대한 짧은 글이에요.",
+   "setup_en": "A short passage about siblings fighting over borrowing each other's clothes.",
+   "passage": "옷장을 같이 쓰는 자매나 형제 사이에서는 옷 때문에 다투는 일이 흔하다. 허락 없이 옷을 입고 나가면 상대방은 배신감을 느끼고 화가 난다. 하지만 대부분의 다툼은 오래가지 않는다. 서로 사과하고 나면 금방 화해하고, 오히려 서로의 옷을 더 사이좋게 나눠 입기도 한다. 부모님들은 이런 다툼을 보면서 자녀들이 스스로 화해하는 법을 배우도록 지켜보는 경우가 많다.",
+   "passage_en": "Among siblings who share a closet, fights over clothes are common. If one wears the other's clothes without permission, the other feels betrayed and gets upset. But most fights don't last long. Once they apologize to each other, they usually make up quickly, and sometimes end up sharing clothes even more amicably than before. Parents often watch these squabbles play out, letting their kids learn to reconcile on their own.",
+   "questions": [
+    {
+     "question_ko": "형제자매가 옷 때문에 다투는 흔한 이유는?",
+     "question_en": "What's a common reason siblings fight over clothes, according to the passage?",
+     "options": [
+      "허락 없이 옷을 입고 나가서",
+      "옷이 하나도 없어서",
+      "옷장이 너무 커서"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "부모님들이 이런 다툼을 대하는 태도로 알맞은 것은?",
+     "question_en": "How do parents often handle these fights, according to the passage?",
+     "options": [
+      "자녀들이 스스로 화해하도록 지켜본다",
+      "무조건 옷을 다 버린다",
+      "즉시 두 사람을 떼어놓는다"
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q11l4_1",
+   "audio_text": "언니 오기만 해. 내가 가만 두나..",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "언니 오기만 해. 내가 가만 두나.",
+    "언니가 벌써 왔어.",
+    "언니는 안 올 거야.",
+    "언니를 도와줄 거야."
+   ],
+   "answer": 0,
+   "explanation": "언니가 오면 가만히 있지 않겠다는 경고·다짐의 표현이에요."
+  },
+  {
+   "id": "q11l4_2",
+   "question_ko": "'-기만 해(봐)'의 뉘앙스로 가장 알맞은 것은?",
+   "question_en": "What nuance does -기만 해(봐) carry?",
+   "options": [
+    "차분한 설명",
+    "경고·협박의 뉘앙스",
+    "질문",
+    "감사 인사"
+   ],
+   "answer": 1,
+   "explanation": "-기만 해(봐)는 '그 행동을 하기만 하면 어떻게 되는지 보자'는 경고·협박의 뉘앙스예요."
+  },
+  {
+   "id": "q11l4_3",
+   "audio_text": "맞아. 나도 복수하고 말겠어.",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "복수를 포기했다.",
+    "나도 복수하고 말겠다는 강한 의지를 나타낸다.",
+    "이미 복수를 끝냈다.",
+    "복수가 뭔지 모른다."
+   ],
+   "answer": 1,
+   "explanation": "-고 말겠다는 반드시 해내겠다는 강한 의지를 나타내는 표현이에요."
+  },
+  {
+   "id": "q11l4_4",
+   "question_ko": "'언니가 신주 모시다시피 하던데'에서 '-다시피 하다'의 뜻으로 가장 알맞은 것은?",
+   "question_en": "What does -다시피 하다 mean in 신주 모시다시피 하던데?",
+   "options": [
+    "실제로 신주를 모신다는 뜻",
+    "실제로는 아니지만 거의 그렇게 행동한다는 뜻",
+    "과거에 그랬다는 뜻",
+    "명령을 나타냄"
+   ],
+   "answer": 1,
+   "explanation": "-다시피 하다는 실제로 그 행동은 아니지만 거의 그런 것처럼 행동한다는 뜻이에요."
+  },
+  {
+   "id": "q11l4_5",
+   "question_ko": "'아시다시피'와 '-다시피 하다'의 차이로 가장 알맞은 것은?",
+   "question_en": "What's the difference between 아시다시피 and -다시피 하다?",
+   "options": [
+    "아시다시피는 'as you know', -다시피 하다는 '거의 ~하듯이 행동하다'",
+    "둘 다 완전히 같은 뜻이다",
+    "아시다시피는 미래, -다시피 하다는 과거",
+    "아시다시피는 명사에만 붙는다"
+   ],
+   "answer": 0,
+   "explanation": "아시다시피는 '아시다'(알다의 높임)에 다시피가 붙어 '아시는 것처럼'을 뜻하고, -다시피 하다는 다른 동사에 붙어 '거의 그렇게 행동한다'는 뜻이에요."
+  },
+  {
+   "id": "q11l4_6",
+   "audio_text": "그럼 저는 참기만 해요? 엄마 너무해요…",
+   "question_ko": "🔊 음성을 듣고 맞는 내용을 고르세요.",
+   "question_en": "Listen and choose what you heard.",
+   "options": [
+    "리나는 화가 안 났다.",
+    "리나는 언니를 도와주고 싶어한다.",
+    "리나는 그냥 참기만 해야 하냐고 억울해한다.",
+    "리나는 이미 다 이해했다."
+   ],
+   "answer": 2,
+   "explanation": "리나는 자기만 참아야 하는 상황이 억울하고 부당하다고 느끼고 있어요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "-기만 해(봐)로 경고·협박의 뉘앙스를 표현할 수 있어요.",
+   "en": "I can use -기만 해(봐) to express a warning or threat."
+  },
+  {
+   "ko": "-고 말겠다로 반드시 해내겠다는 강한 의지를 표현할 수 있어요.",
+   "en": "I can use -고 말겠다 to express strong determination to do something."
+  },
+  {
+   "ko": "-다시피 하다로 실제로는 아니지만 거의 그렇게 행동한다는 걸 표현할 수 있어요.",
+   "en": "I can use -다시피 하다 to describe behavior that's almost, but not quite, doing something."
+  },
+  {
+   "ko": "아시다시피와 -다시피 하다를 구별할 수 있어요.",
+   "en": "I can tell apart 아시다시피 ('as you know') from -다시피 하다."
+  },
+  {
+   "ko": "형제자매 다툼에 자주 쓰는 감정 표현(삐지다, 억울하다, 화해하다 등)을 이해해요.",
+   "en": "I understand common emotion words used in sibling fights (삐지다, 억울하다, 화해하다, etc.)."
+  }
+ ]
 }

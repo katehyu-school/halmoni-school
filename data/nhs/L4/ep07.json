@@ -1,450 +1,741 @@
 {
-  "id": "ep07",
-  "level": "L4",
-  "title": "냉면 한 그릇 하러 가실래요?",
-  "title_en": "Shall We Go Get a Bowl of Naengmyeon?",
-  "scene": "🛋️ 할머니 댁 거실 · Grandma's House — Living Room",
-  "goal": {
-    "ko": "극단적인 정도를 표현하는 -(으)ㄹ 지경이다, -을 정도로, -기 짝이 없다를 쓸 수 있어요",
-    "en": "I can express extreme degree using -(으)ㄹ 지경이다, -을 정도로, and -기 짝이 없다"
+ "id": "ep07",
+ "level": "L4",
+ "title": "냉면 한 그릇 하러 가실래요?",
+ "title_en": "Shall We Go Get a Bowl of Naengmyeon?",
+ "scene": "💳 금융·물가 · Money & Prices",
+ "goal": {
+  "ko": "극단적인 정도를 표현하는 -(으)ㄹ 지경이다, -을 정도로, -기 짝이 없다를 쓸 수 있어요",
+  "en": "I can express extreme degree using -(으)ㄹ 지경이다, -을 정도로, and -기 짝이 없다"
+ },
+ "key_points": [
+  "-(으)ㄹ 지경이다★NEW — 극단적인 상황을 과장해서 말할 때 (죽을 지경이다 = 정말 힘들다는 뜻)",
+  "-을 정도로 — 어떤 정도까지 이르렀는지 구체적으로 설명할 때",
+  "-기 짝이 없다 — 더할 나위 없이, 극도로 그렇다는 뜻"
+ ],
+ "characters": [
+  {
+   "id": "grandma",
+   "name": "할머니",
+   "name_en": "Grandma",
+   "emoji": "👵",
+   "color": "var(--coral)"
   },
-  "key_points": [
-    "-(으)ㄹ 지경이다★NEW — 극단적인 상황을 과장해서 말할 때 (죽을 지경이다 = 정말 힘들다는 뜻)",
-    "-을 정도로 — 어떤 정도까지 이르렀는지 구체적으로 설명할 때",
-    "-기 짝이 없다 — 더할 나위 없이, 극도로 그렇다는 뜻"
-  ],
-  "characters": [
-    { "id": "grandma", "name": "할머니", "name_en": "Grandma", "emoji": "👵", "color": "var(--coral)" },
-    { "id": "grandpa", "name": "할아버지", "name_en": "Grandpa", "emoji": "👴", "color": "var(--teal)" },
-    { "id": "liam", "name": "라온", "name_en": "Raon", "emoji": "👦", "color": "var(--blue)" }
-  ],
-  "slides": [
-    "data/nhs/L4/slides/ep07/냉면한그릇1.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇2.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇3.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇4.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇5.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇6.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇7.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇8.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇9.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇10.png",
-    "data/nhs/L4/slides/ep07/냉면한그릇11.png"
-  ],
-  "video": null,
-  "script": [
+  {
+   "id": "grandpa",
+   "name": "할아버지",
+   "name_en": "Grandpa",
+   "emoji": "👴",
+   "color": "var(--teal)"
+  },
+  {
+   "id": "liam",
+   "name": "라온",
+   "name_en": "Raon",
+   "emoji": "👦",
+   "color": "var(--blue)"
+  }
+ ],
+ "slides": [
+  "data/nhs/L4/slides/ep07/냉면한그릇1.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇2.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇3.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇4.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇5.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇6.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇7.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇8.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇9.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇10.png",
+  "data/nhs/L4/slides/ep07/냉면한그릇11.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "grandpa",
+   "text": "요새 물가가 너무 올라서 죽을 지경이야.",
+   "en": "Prices have gone up so much lately, it's enough to make me want to die.",
+   "slide": 0,
+   "audio": "data/nhs/L4/TTS/ep07/audio_0_요새_물가가_너무_올라서_죽을_지경이야_.mp3",
+   "highlight": "죽을 지경이야",
+   "annotation": {
+    "highlight": "죽을 지경이야",
+    "grammar": "-(으)ㄹ 지경이다",
+    "note": "죽다 → 죽을 지경이다 = to the point of dying (과장된 표현)\n실제로 죽는다는 뜻이 아니라 '정말 힘들다'는 걸 극단적으로 과장해서 말하는 거예요"
+   }
+  },
+  {
+   "speaker": "grandpa",
+   "text": "냉면 한 그릇이 만오천원이라니 기가 막히네.",
+   "en": "A bowl of naengmyeon is 15,000 won? That's unbelievable.",
+   "slide": 1,
+   "audio": "data/nhs/L4/TTS/ep07/audio_1_냉면_한_그릇이_만오천원이라니_기가_막히네_.mp3"
+  },
+  {
+   "speaker": "grandma",
+   "text": "그래도 팁이 없으니 냉면 값만 내면 되잖아요.",
+   "en": "Still, there's no tip, so you just pay for the noodles.",
+   "slide": 2,
+   "audio": "data/nhs/L4/TTS/ep07/audio_2_그래도_팁이_없으니_냉면_값만_내면_되잖아요_.mp3"
+  },
+  {
+   "speaker": "grandpa",
+   "text": "어허.. 조삼모사라는 말도 모르시나?",
+   "en": "Come on... don't you know the saying \"조삼모사\"?",
+   "slide": 3,
+   "audio": "data/nhs/L4/TTS/ep07/audio_3_허___조삼모사라는_말도_모르시나_.mp3"
+  },
+  {
+   "speaker": "grandpa",
+   "text": "결국은 그게 모두 포함된 값이지요.",
+   "en": "In the end, that's all included in the price anyway.",
+   "slide": 4,
+   "audio": "data/nhs/L4/TTS/ep07/audio_4_결국은_그게_모두_포함된_값이지요_.mp3"
+  },
+  {
+   "speaker": "grandma",
+   "text": "그래도 한국은 눈에 보이는 가격만 내는거니까 간단하잖아요.",
+   "en": "Still, in Korea you only pay the price you see, so it's simple.",
+   "slide": 5,
+   "audio": "data/nhs/L4/TTS/ep07/audio_5_그래도_한국은_눈에_보이는_가격만_내는거니까_간단하잖아요_.mp3"
+  },
+  {
+   "speaker": "grandpa",
+   "text": "당신은 참 단순하기 짝이 없어요.",
+   "en": "You're just so incredibly simple-minded.",
+   "slide": 6,
+   "audio": "data/nhs/L4/TTS/ep07/audio_6_당신은_참_단순하기_짝이_없어요_.mp3",
+   "highlight": "단순하기 짝이 없어요",
+   "annotation": {
+    "highlight": "단순하기 짝이 없어요",
+    "grammar": "-기 짝이 없다",
+    "note": "단순하다 → 단순하기 짝이 없다 = there's nothing more simple than this\n더할 나위 없이 극도로 그렇다는 뜻 — 살짝 놀리는 톤으로 자주 써요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "머리 속으로 계산을 안해도 되니 얼마나 좋아?",
+   "en": "Isn't it great that you don't have to calculate in your head?",
+   "slide": 7,
+   "audio": "data/nhs/L4/TTS/ep07/audio_7_머리_속으로_계산을_안해도_되니_얼마나_좋아_.mp3"
+  },
+  {
+   "speaker": "liam",
+   "text": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
+   "en": "It's tasty enough that we're willing to pay the expensive price.",
+   "slide": 8,
+   "audio": "data/nhs/L4/TTS/ep07/audio_8_비싼_값을_감수하고_사_먹을_정도로_맛있잖아요_.mp3",
+   "highlight": "사 먹을 정도로",
+   "annotation": {
+    "highlight": "사 먹을 정도로",
+    "grammar": "-(으)ㄹ 정도로",
+    "note": "먹다 → 사 먹을 정도로 = to the extent of paying and eating it\n어떤 상태(맛있음)가 어느 정도인지 구체적인 행동으로 보여줘요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "생각난 김에, 한 그릇 하러 가실래요?",
+   "en": "Since it came to mind, shall we go get a bowl?",
+   "slide": 9,
+   "audio": "data/nhs/L4/TTS/ep07/audio_9_생각난_김에__한_그릇_하러_가실래요_.mp3"
+  },
+  {
+   "speaker": "liam",
+   "text": "할머니 저도 한 그릇 할래요!",
+   "en": "Grandma, I want a bowl too!",
+   "slide": 10,
+   "audio": "data/nhs/L4/TTS/ep07/audio_10_할머니_저도_한_그릇_할래요_.mp3"
+  }
+ ],
+ "vocab": [
+  {
+   "category": "💰 물가 & 가격 Prices & Cost",
+   "items": [
     {
-      "speaker": "grandpa",
-      "text": "요새 물가가 너무 올라서 죽을 지경이야.",
-      "en": "Prices have gone up so much lately, it's enough to make me want to die.",
-      "slide": 0,
-      "audio": "data/nhs/L4/TTS/ep07/audio_0_요새_물가가_너무_올라서_죽을_지경이야_.mp3",
-      "highlight": "죽을 지경이야",
-      "annotation": {
-        "highlight": "죽을 지경이야",
-        "grammar": "-(으)ㄹ 지경이다",
-        "note": "죽다 → 죽을 지경이다 = to the point of dying (과장된 표현)\n실제로 죽는다는 뜻이 아니라 '정말 힘들다'는 걸 극단적으로 과장해서 말하는 거예요"
-      }
+     "korean": "물가",
+     "romanization": "mul-ga",
+     "english": "prices (cost of living)",
+     "emoji": "📈"
     },
     {
-      "speaker": "grandpa",
-      "text": "냉면 한 그릇이 만오천원이라니 기가 막히네.",
-      "en": "A bowl of naengmyeon is 15,000 won? That's unbelievable.",
-      "slide": 1,
-      "audio": "data/nhs/L4/TTS/ep07/audio_1_냉면_한_그릇이_만오천원이라니_기가_막히네_.mp3"
+     "korean": "값",
+     "romanization": "gap",
+     "english": "price, cost",
+     "emoji": "💵"
     },
     {
-      "speaker": "grandma",
-      "text": "그래도 팁이 없으니 냉면 값만 내면 되잖아요.",
-      "en": "Still, there's no tip, so you just pay for the noodles.",
-      "slide": 2,
-      "audio": "data/nhs/L4/TTS/ep07/audio_2_그래도_팁이_없으니_냉면_값만_내면_되잖아요_.mp3"
+     "korean": "포함",
+     "romanization": "po-ham",
+     "english": "inclusion",
+     "emoji": "📦"
     },
     {
-      "speaker": "grandpa",
-      "text": "어허.. 조삼모사라는 말도 모르시나?",
-      "en": "Come on... don't you know the saying \"조삼모사\"?",
-      "slide": 3,
-      "audio": "data/nhs/L4/TTS/ep07/audio_3_허___조삼모사라는_말도_모르시나_.mp3"
+     "korean": "비싸다",
+     "romanization": "bi-ssa-da",
+     "english": "to be expensive",
+     "emoji": "💸"
     },
     {
-      "speaker": "grandpa",
-      "text": "결국은 그게 모두 포함된 값이지요.",
-      "en": "In the end, that's all included in the price anyway.",
-      "slide": 4,
-      "audio": "data/nhs/L4/TTS/ep07/audio_4_결국은_그게_모두_포함된_값이지요_.mp3"
+     "korean": "오르다",
+     "romanization": "o-reu-da",
+     "english": "to go up, rise",
+     "emoji": "⬆️"
     },
     {
-      "speaker": "grandma",
-      "text": "그래도 한국은 눈에 보이는 가격만 내는거니까 간단하잖아요.",
-      "en": "Still, in Korea you only pay the price you see, so it's simple.",
-      "slide": 5,
-      "audio": "data/nhs/L4/TTS/ep07/audio_5_그래도_한국은_눈에_보이는_가격만_내는거니까_간단하잖아요_.mp3"
-    },
-    {
-      "speaker": "grandpa",
-      "text": "당신은 참 단순하기 짝이 없어요.",
-      "en": "You're just so incredibly simple-minded.",
-      "slide": 6,
-      "audio": "data/nhs/L4/TTS/ep07/audio_6_당신은_참_단순하기_짝이_없어요_.mp3",
-      "highlight": "단순하기 짝이 없어요",
-      "annotation": {
-        "highlight": "단순하기 짝이 없어요",
-        "grammar": "-기 짝이 없다",
-        "note": "단순하다 → 단순하기 짝이 없다 = there's nothing more simple than this\n더할 나위 없이 극도로 그렇다는 뜻 — 살짝 놀리는 톤으로 자주 써요"
-      }
-    },
-    {
-      "speaker": "grandma",
-      "text": "머리 속으로 계산을 안해도 되니 얼마나 좋아?",
-      "en": "Isn't it great that you don't have to calculate in your head?",
-      "slide": 7,
-      "audio": "data/nhs/L4/TTS/ep07/audio_7_머리_속으로_계산을_안해도_되니_얼마나_좋아_.mp3"
-    },
-    {
-      "speaker": "liam",
-      "text": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
-      "en": "It's tasty enough that we're willing to pay the expensive price.",
-      "slide": 8,
-      "audio": "data/nhs/L4/TTS/ep07/audio_8_비싼_값을_감수하고_사_먹을_정도로_맛있잖아요_.mp3",
-      "highlight": "사 먹을 정도로",
-      "annotation": {
-        "highlight": "사 먹을 정도로",
-        "grammar": "-(으)ㄹ 정도로",
-        "note": "먹다 → 사 먹을 정도로 = to the extent of paying and eating it\n어떤 상태(맛있음)가 어느 정도인지 구체적인 행동으로 보여줘요"
-      }
-    },
-    {
-      "speaker": "grandma",
-      "text": "생각난 김에, 한 그릇 하러 가실래요?",
-      "en": "Since it came to mind, shall we go get a bowl?",
-      "slide": 9,
-      "audio": "data/nhs/L4/TTS/ep07/audio_9_생각난_김에__한_그릇_하러_가실래요_.mp3"
-    },
-    {
-      "speaker": "liam",
-      "text": "할머니 저도 한 그릇 할래요!",
-      "en": "Grandma, I want a bowl too!",
-      "slide": 10,
-      "audio": "data/nhs/L4/TTS/ep07/audio_10_할머니_저도_한_그릇_할래요_.mp3"
+     "korean": "내리다",
+     "romanization": "nae-ri-da",
+     "english": "to go down, fall",
+     "emoji": "⬇️"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "🧠 표현 & 사고 Expressions & Thinking",
+   "items": [
     {
-      "category": "💰 물가 & 가격 Prices & Cost",
-      "items": [
-        { "korean": "물가", "romanization": "mul-ga", "english": "prices (cost of living)", "emoji": "📈" },
-        { "korean": "값", "romanization": "gap", "english": "price, cost", "emoji": "💵" },
-        { "korean": "포함", "romanization": "po-ham", "english": "inclusion", "emoji": "📦" },
-        { "korean": "비싸다", "romanization": "bi-ssa-da", "english": "to be expensive", "emoji": "💸" },
-        { "korean": "오르다", "romanization": "o-reu-da", "english": "to go up, rise", "emoji": "⬆️" },
-        { "korean": "내리다", "romanization": "nae-ri-da", "english": "to go down, fall", "emoji": "⬇️" }
-      ]
+     "korean": "단순하다",
+     "romanization": "dan-sun-ha-da",
+     "english": "to be simple",
+     "emoji": "🧩"
     },
     {
-      "category": "🧠 표현 & 사고 Expressions & Thinking",
-      "items": [
-        { "korean": "단순하다", "romanization": "dan-sun-ha-da", "english": "to be simple", "emoji": "🧩" },
-        { "korean": "계산", "romanization": "gye-san", "english": "calculation", "emoji": "🧮" },
-        { "korean": "기가 막히다", "romanization": "gi-ga mak-hi-da", "english": "to be stunned/dumbfounded (idiom)", "emoji": "😲" },
-        { "korean": "감수하다", "romanization": "gam-su-ha-da", "english": "to accept, put up with", "emoji": "🤝" }
-      ]
+     "korean": "계산",
+     "romanization": "gye-san",
+     "english": "calculation",
+     "emoji": "🧮"
     },
     {
-      "category": "📜 사자성어·속담 모음 · Idioms & Proverbs Collection",
-      "items": [
-        { "korean": "조삼모사", "romanization": "jo-sam-mo-sa", "english": "a superficial change with no real difference — same total amount presented differently (Sino-Korean 사자성어)", "emoji": "🐒" }
-      ]
+     "korean": "기가 막히다",
+     "romanization": "gi-ga mak-hi-da",
+     "english": "to be stunned/dumbfounded (idiom)",
+     "emoji": "😲"
     },
     {
-      "category": "🍜 기타 Other",
-      "items": [
-        { "korean": "그릇", "romanization": "geu-reut", "english": "bowl", "emoji": "🥣" },
-        { "korean": "생각하다", "romanization": "saeng-gak-ha-da", "english": "to think about (deliberately)", "emoji": "💭" },
-        { "korean": "생각나다", "romanization": "saeng-gak-na-da", "english": "to come to mind (spontaneously)", "emoji": "💡" }
-      ]
+     "korean": "감수하다",
+     "romanization": "gam-su-ha-da",
+     "english": "to accept, put up with",
+     "emoji": "🤝"
     }
-  ],
-  "grammar": [
+   ]
+  },
+  {
+   "category": "📜 사자성어·속담 모음 · Idioms & Proverbs Collection",
+   "items": [
     {
-      "id": "g07_eul_jigyeongida",
-      "tier": "core",
-      "title": "-(으)ㄹ 지경이다",
-      "title_en": "To The Point Of... (Exaggerated Extreme)",
-      "emoji": "😵",
-      "pattern": "동사/형용사 어간 + -(으)ㄹ 지경이다 — 상황이 너무 심해서 극단적인 상태(죽음, 미침 등)에 이를 정도라고 과장",
-      "scene_example": {
-        "korean": "요새 물가가 너무 올라서 죽을 지경이야.",
-        "english": "Prices have gone up so much lately, it's enough to make me want to die.",
-        "highlight": "죽을 지경이야"
-      },
-      "explanation_en": "-(으)ㄹ 지경이다 means 'to the point of...' — it's used to exaggerate how extreme a situation feels, often pairing with dramatic words like 죽다(die) or 미치다(go crazy) to emphasize just how unbearable something is. Nobody actually means it literally — it's a flair-filled way to vent frustration.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사 어간 + (으)ㄹ 지경이다", "content": "죽다→죽을 지경이다, 미치다→미칠 지경이다, 쓰러지다→쓰러질 지경이다", "note": "받침 있으면 을, 없으면 ㄹ" },
-        { "type": "green", "label": "극단적 과장이 핵심", "content": "실제로 그 일이 일어난다는 뜻이 아니라 '정말 힘들다'는 과장", "note": "감정을 실어서 강하게 표현할 때 써요" },
-        { "type": "amber", "label": "불평·한탄 톤에 자연스러움", "content": "물가, 피곤함, 스트레스 등을 한탄할 때 자주 씀", "note": "이 에피소드의 할아버지 대사가 딱 이 톤이에요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "요새 물가가 너무 올라서 죽을 지경이야.", "en": "Prices have gone up so much lately, it's enough to make me want to die." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "너무 피곤해서 쓰러질 지경이에요.", "en": "I'm so tired I'm about to collapse." },
-            { "ko": "배고파서 죽을 지경이에요.", "en": "I'm so hungry I could die." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "요즘 일이 너무 많아서 ___. (미치다)", "answer": "미칠 지경이에요", "hint": "극단적으로 과장해서 말하기" }
-      ]
-    },
-    {
-      "id": "g07_eul_jeongdoro",
-      "tier": "core",
-      "title": "-을 정도로",
-      "title_en": "To The Extent That... (Degree by Example)",
-      "emoji": "📏",
-      "pattern": "동사/형용사 어간 + -(으)ㄹ 정도로 — 어떤 상태나 결과가 어디까지 이르렀는지 구체적인 행동/상태로 설명",
-      "scene_example": {
-        "korean": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
-        "english": "It's tasty enough that we're willing to pay the expensive price.",
-        "highlight": "사 먹을 정도로"
-      },
-      "explanation_en": "-(으)ㄹ 정도로 means 'to the extent that...' — it describes how far something goes by pointing to a concrete benchmark action or state. Here, Raon justifies the high price by saying the noodles are tasty enough that people are willing to pay for them despite the cost.",
-      "rule_boxes": [
-        { "type": "blue", "label": "동사/형용사 어간 + (으)ㄹ 정도로", "content": "먹다→먹을 정도로, 아프다→아플 정도로, 울다→울 정도로", "note": "받침 있으면 을, 없으면 ㄹ" },
-        { "type": "green", "label": "구체적인 기준으로 정도를 보여줌", "content": "'그 정도'가 어느 만큼인지 실제 행동/상태로 비유", "note": "추상적인 '많이'보다 훨씬 생생하게 전달돼요" },
-        { "type": "amber", "label": "강조의 효과", "content": "비싼 값을 감수할 정도 = 그만큼 가치 있다는 뜻", "note": "정도가 클수록 감정도 강조돼요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.", "en": "It's tasty enough that we're willing to pay the expensive price." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "눈물이 날 정도로 감동적이었어요.", "en": "It was moving enough to bring tears." },
-            { "ko": "손이 떨릴 정도로 긴장했어요.", "en": "I was nervous enough that my hands were shaking." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "친구가 못 알아볼 ___ 살이 빠졌어요. (정도로)", "answer": "정도로", "hint": "어느 정도인지 구체적인 예로 설명" }
-      ]
-    },
-    {
-      "id": "g07_gi_jjagieopda",
-      "tier": "core",
-      "title": "-기 짝이 없다",
-      "title_en": "There's Nothing More... (Extreme Emphasis)",
-      "emoji": "🎭",
-      "pattern": "형용사 어간 + -기 짝이 없다 — 더할 나위 없이, 극도로 그런 상태를 강조",
-      "scene_example": {
-        "korean": "당신은 참 단순하기 짝이 없어요.",
-        "english": "You're just so incredibly simple-minded.",
-        "highlight": "단순하기 짝이 없어요"
-      },
-      "explanation_en": "-기 짝이 없다 literally means 'there's no match/pair for how X this is' — used to say something is extremely X, with nothing else quite like it. It's a slightly literary, emphatic way to describe an extreme quality, often carrying a hint of teasing or astonishment.",
-      "rule_boxes": [
-        { "type": "blue", "label": "형용사 어간 + 기 짝이 없다", "content": "단순하다→단순하기 짝이 없다, 어이없다→어이없기 짝이 없다", "note": "형용사(상태)에만 붙어요" },
-        { "type": "green", "label": "동사에는 안 붙음", "content": "동작을 나타내는 동사와는 결합하지 않아요", "note": "형용사 전용 표현" },
-        { "type": "amber", "label": "놀리거나 어이없어하는 톤", "content": "칭찬보다는 살짝 놀리거나 어이없어하는 느낌으로 자주 씀", "note": "할아버지가 할머니를 놀리듯 쓴 게 이 예문이에요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "당신은 참 단순하기 짝이 없어요.", "en": "You're just so incredibly simple-minded." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "그 사람 행동이 이상하기 짝이 없어요.", "en": "That person's behavior is beyond strange." },
-            { "ko": "이 방은 지저분하기 짝이 없어요.", "en": "This room is unbelievably messy." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "이 시험 문제는 정말 어렵___. (짝이 없다)", "answer": "기 짝이 없어요", "hint": "극도로 그렇다는 걸 강조" }
-      ]
+     "korean": "조삼모사",
+     "romanization": "jo-sam-mo-sa",
+     "english": "a superficial change with no real difference — same total amount presented differently (Sino-Korean 사자성어)",
+     "emoji": "🐒"
     }
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "category": "🍜 기타 Other",
+   "items": [
     {
-      "title": "조삼모사 — 사자성어 하나 알아가기",
-      "title_en": "조삼모사 — A Four-Character Idiom",
-      "explanation_en": "조삼모사 (literally \"three in the morning, four in the evening\") comes from an old story: a man fed his monkeys 3 nuts in the morning and 4 in the evening, and when they complained, he switched it to 4 in the morning and 3 in the evening — the monkeys were thrilled, even though the total was exactly the same. It's used to describe being fooled by a superficial rearrangement that doesn't actually change the outcome — like debating whether tip is 'included' in the price when the total you pay is identical either way.",
-      "examples": [
-        { "ko": "어허.. 조삼모사라는 말도 모르시나? 결국은 그게 모두 포함된 값이지요.", "en": "Come on... don't you know the saying 조삼모사? In the end, that's all included in the price anyway." }
-      ]
+     "korean": "그릇",
+     "romanization": "geu-reut",
+     "english": "bowl",
+     "emoji": "🥣"
     },
     {
-      "title": "한국어 과장법 — '진짜 많이/심하게'를 표현하는 여러 방법",
-      "title_en": "Korean Hyperbole — Many Ways to Say 'Extremely'",
-      "explanation_en": "Korean has a rich toolkit for exaggerating just how extreme something is. This episode alone uses three different flavors: -(으)ㄹ 지경이다 (to the point of a dramatic outcome, like dying), -기 짝이 없다 (there's nothing that matches this level), and the idiom 기가 막히다 (so stunning your breath gets 'blocked'). They all mean roughly 'extremely,' but each carries its own image and register.",
-      "examples": [
-        { "ko": "요새 물가가 너무 올라서 죽을 지경이야.", "en": "Prices have gone up so much lately, it's enough to make me want to die. (-(으)ㄹ 지경이다)" },
-        { "ko": "당신은 참 단순하기 짝이 없어요.", "en": "You're just so incredibly simple-minded. (-기 짝이 없다)" },
-        { "ko": "냉면 한 그릇이 만오천원이라니 기가 막히네.", "en": "A bowl of naengmyeon is 15,000 won? That's unbelievable. (기가 막히다, idiom)" }
-      ]
+     "korean": "생각하다",
+     "romanization": "saeng-gak-ha-da",
+     "english": "to think about (deliberately)",
+     "emoji": "💭"
+    },
+    {
+     "korean": "생각나다",
+     "romanization": "saeng-gak-na-da",
+     "english": "to come to mind (spontaneously)",
+     "emoji": "💡"
     }
-  ],
-  "pronunciation": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g07_eul_jigyeongida",
+   "tier": "core",
+   "title": "-(으)ㄹ 지경이다",
+   "title_en": "To The Point Of... (Exaggerated Extreme)",
+   "emoji": "😵",
+   "pattern": "동사/형용사 어간 + -(으)ㄹ 지경이다 — 상황이 너무 심해서 극단적인 상태(죽음, 미침 등)에 이를 정도라고 과장",
+   "scene_example": {
+    "korean": "요새 물가가 너무 올라서 죽을 지경이야.",
+    "english": "Prices have gone up so much lately, it's enough to make me want to die.",
+    "highlight": "죽을 지경이야"
+   },
+   "explanation_en": "-(으)ㄹ 지경이다 means 'to the point of...' — it's used to exaggerate how extreme a situation feels, often pairing with dramatic words like 죽다(die) or 미치다(go crazy) to emphasize just how unbearable something is. Nobody actually means it literally — it's a flair-filled way to vent frustration.",
+   "rule_boxes": [
     {
-      "id": "pron_ep07_l4_01",
-      "title": "겹받침 ㅄ + ㅁ → 비음화 (값만)",
-      "rule": "겹받침 ㅄ은 대표음 [ㅂ]으로 발음된 뒤, 뒤에 오는 ㅁ의 영향으로 [ㅁ]으로 바뀌어요 · The double batchim ㅄ becomes [ㅂ], then nasalizes to [ㅁ] before a following ㅁ.",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["값만", "[감만]", "ㅄ→ㅂ→ㅁ (비음화)"]
-        ]
-      }
+     "type": "blue",
+     "label": "동사 어간 + (으)ㄹ 지경이다",
+     "content": "죽다→죽을 지경이다, 미치다→미칠 지경이다, 쓰러지다→쓰러질 지경이다",
+     "note": "받침 있으면 을, 없으면 ㄹ"
     },
     {
-      "id": "pron_ep07_l4_02",
-      "title": "겹받침 ㅄ + 모음 → 연음화 (짝이 없어요)",
-      "rule": "겹받침 ㅄ 뒤에 모음이 오면 ㅅ이 다음 음절로 넘어가요 · With the double batchim ㅄ, the ㅅ links over to the next syllable when followed by a vowel.",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["짝이 없어요", "[짜기 업써요]", "ㄱ 연음 + ㅄ 연음(ㅅ)"]
-        ]
-      }
+     "type": "green",
+     "label": "극단적 과장이 핵심",
+     "content": "실제로 그 일이 일어난다는 뜻이 아니라 '정말 힘들다'는 과장",
+     "note": "감정을 실어서 강하게 표현할 때 써요"
     },
     {
-      "id": "pron_ep07_l4_03",
-      "title": "받침 ㄱ + ㅎ → 격음화 (막히네)",
-      "rule": "받침 ㄱ 뒤에 ㅎ이 오면 두 소리가 합쳐져 거센소리 [ㅋ]이 돼요 · A batchim ㄱ combines with a following ㅎ to form the aspirated sound [ㅋ].",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["막히네", "[마키네]", "ㄱ + ㅎ → ㅋ (격음화)"]
-        ]
-      }
+     "type": "amber",
+     "label": "불평·한탄 톤에 자연스러움",
+     "content": "물가, 피곤함, 스트레스 등을 한탄할 때 자주 씀",
+     "note": "이 에피소드의 할아버지 대사가 딱 이 톤이에요"
     }
-  ],
-  "banmal_jondaemal": {
-    "intro_ko": "부부 사이의 반말/존댓말은 집집마다 다르고 정해진 공식이 없어요. 이 할머니·할아버지는 반말과 존댓말을 자연스럽게 섞어 써요 — 한 사람이 같은 대화 안에서도 반말과 존댓말을 넘나들 수 있어요. 서로 존댓말을 쓰는 부부는 오히려 교양 있고 예의 바른 느낌을 주기도 해요.",
-    "intro_en": "Speech level between spouses varies from couple to couple — there's no fixed rule. This grandma and grandpa naturally mix casual and polite speech, sometimes even within the same conversation. Couples who consistently use polite speech with each other can come across as especially refined and courteous.",
-    "rows": [
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
       {
-        "situation_ko": "할아버지 → 할머니 (반말)",
-        "situation_en": "Grandpa → Grandma (casual)",
-        "banmal": "요새 물가가 너무 올라서 죽을 지경이야.",
-        "jondaemal": "(같은 대화 안에서 존댓말로도 넘어감)",
-        "note": "편하게 한탄할 땐 반말이 자연스럽게 나와요"
+       "ko": "요새 물가가 너무 올라서 죽을 지경이야.",
+       "en": "Prices have gone up so much lately, it's enough to make me want to die."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "너무 피곤해서 쓰러질 지경이에요.",
+       "en": "I'm so tired I'm about to collapse."
       },
       {
-        "situation_ko": "할아버지 → 할머니 (존댓말)",
-        "situation_en": "Grandpa → Grandma (polite)",
-        "banmal": "(같은 대화 안에서 반말도 섞여 나옴)",
-        "jondaemal": "결국은 그게 모두 포함된 값이지요.",
-        "note": "같은 사람이 같은 대화에서 존댓말로 전환하기도 해요 — 정해진 규칙이 아니에요"
+       "ko": "배고파서 죽을 지경이에요.",
+       "en": "I'm so hungry I could die."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "요즘 일이 너무 많아서 ___. (미치다)",
+     "answer": "미칠 지경이에요",
+     "hint": "극단적으로 과장해서 말하기"
+    }
+   ]
+  },
+  {
+   "id": "g07_eul_jeongdoro",
+   "tier": "core",
+   "title": "-을 정도로",
+   "title_en": "To The Extent That... (Degree by Example)",
+   "emoji": "📏",
+   "pattern": "동사/형용사 어간 + -(으)ㄹ 정도로 — 어떤 상태나 결과가 어디까지 이르렀는지 구체적인 행동/상태로 설명",
+   "scene_example": {
+    "korean": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
+    "english": "It's tasty enough that we're willing to pay the expensive price.",
+    "highlight": "사 먹을 정도로"
+   },
+   "explanation_en": "-(으)ㄹ 정도로 means 'to the extent that...' — it describes how far something goes by pointing to a concrete benchmark action or state. Here, Raon justifies the high price by saying the noodles are tasty enough that people are willing to pay for them despite the cost.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "동사/형용사 어간 + (으)ㄹ 정도로",
+     "content": "먹다→먹을 정도로, 아프다→아플 정도로, 울다→울 정도로",
+     "note": "받침 있으면 을, 없으면 ㄹ"
+    },
+    {
+     "type": "green",
+     "label": "구체적인 기준으로 정도를 보여줌",
+     "content": "'그 정도'가 어느 만큼인지 실제 행동/상태로 비유",
+     "note": "추상적인 '많이'보다 훨씬 생생하게 전달돼요"
+    },
+    {
+     "type": "amber",
+     "label": "강조의 효과",
+     "content": "비싼 값을 감수할 정도 = 그만큼 가치 있다는 뜻",
+     "note": "정도가 클수록 감정도 강조돼요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
+       "en": "It's tasty enough that we're willing to pay the expensive price."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "눈물이 날 정도로 감동적이었어요.",
+       "en": "It was moving enough to bring tears."
       },
       {
-        "situation_ko": "할머니 → 할아버지 (존댓말 유지)",
-        "situation_en": "Grandma → Grandpa (mostly polite)",
-        "banmal": "머리 속으로 계산을 안해도 되니 얼마나 좋아?",
-        "jondaemal": "그래도 팁이 없으니 냉면 값만 내면 되잖아요.",
-        "note": "할머니는 대체로 존댓말을 유지하면서 가끔 반말을 섞어요"
+       "ko": "손이 떨릴 정도로 긴장했어요.",
+       "en": "I was nervous enough that my hands were shaking."
       }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "친구가 못 알아볼 ___ 살이 빠졌어요. (정도로)",
+     "answer": "정도로",
+     "hint": "어느 정도인지 구체적인 예로 설명"
+    }
+   ]
+  },
+  {
+   "id": "g07_gi_jjagieopda",
+   "tier": "core",
+   "title": "-기 짝이 없다",
+   "title_en": "There's Nothing More... (Extreme Emphasis)",
+   "emoji": "🎭",
+   "pattern": "형용사 어간 + -기 짝이 없다 — 더할 나위 없이, 극도로 그런 상태를 강조",
+   "scene_example": {
+    "korean": "당신은 참 단순하기 짝이 없어요.",
+    "english": "You're just so incredibly simple-minded.",
+    "highlight": "단순하기 짝이 없어요"
+   },
+   "explanation_en": "-기 짝이 없다 literally means 'there's no match/pair for how X this is' — used to say something is extremely X, with nothing else quite like it. It's a slightly literary, emphatic way to describe an extreme quality, often carrying a hint of teasing or astonishment.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형용사 어간 + 기 짝이 없다",
+     "content": "단순하다→단순하기 짝이 없다, 어이없다→어이없기 짝이 없다",
+     "note": "형용사(상태)에만 붙어요"
+    },
+    {
+     "type": "green",
+     "label": "동사에는 안 붙음",
+     "content": "동작을 나타내는 동사와는 결합하지 않아요",
+     "note": "형용사 전용 표현"
+    },
+    {
+     "type": "amber",
+     "label": "놀리거나 어이없어하는 톤",
+     "content": "칭찬보다는 살짝 놀리거나 어이없어하는 느낌으로 자주 씀",
+     "note": "할아버지가 할머니를 놀리듯 쓴 게 이 예문이에요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "당신은 참 단순하기 짝이 없어요.",
+       "en": "You're just so incredibly simple-minded."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "그 사람 행동이 이상하기 짝이 없어요.",
+       "en": "That person's behavior is beyond strange."
+      },
+      {
+       "ko": "이 방은 지저분하기 짝이 없어요.",
+       "en": "This room is unbelievably messy."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "이 시험 문제는 정말 어렵___. (짝이 없다)",
+     "answer": "기 짝이 없어요",
+     "hint": "극도로 그렇다는 걸 강조"
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "조삼모사 — 사자성어 하나 알아가기",
+   "title_en": "조삼모사 — A Four-Character Idiom",
+   "explanation_en": "조삼모사 (literally \"three in the morning, four in the evening\") comes from an old story: a man fed his monkeys 3 nuts in the morning and 4 in the evening, and when they complained, he switched it to 4 in the morning and 3 in the evening — the monkeys were thrilled, even though the total was exactly the same. It's used to describe being fooled by a superficial rearrangement that doesn't actually change the outcome — like debating whether tip is 'included' in the price when the total you pay is identical either way.",
+   "examples": [
+    {
+     "ko": "어허.. 조삼모사라는 말도 모르시나? 결국은 그게 모두 포함된 값이지요.",
+     "en": "Come on... don't you know the saying 조삼모사? In the end, that's all included in the price anyway."
+    }
+   ]
+  },
+  {
+   "title": "한국어 과장법 — '진짜 많이/심하게'를 표현하는 여러 방법",
+   "title_en": "Korean Hyperbole — Many Ways to Say 'Extremely'",
+   "explanation_en": "Korean has a rich toolkit for exaggerating just how extreme something is. This episode alone uses three different flavors: -(으)ㄹ 지경이다 (to the point of a dramatic outcome, like dying), -기 짝이 없다 (there's nothing that matches this level), and the idiom 기가 막히다 (so stunning your breath gets 'blocked'). They all mean roughly 'extremely,' but each carries its own image and register.",
+   "examples": [
+    {
+     "ko": "요새 물가가 너무 올라서 죽을 지경이야.",
+     "en": "Prices have gone up so much lately, it's enough to make me want to die. (-(으)ㄹ 지경이다)"
+    },
+    {
+     "ko": "당신은 참 단순하기 짝이 없어요.",
+     "en": "You're just so incredibly simple-minded. (-기 짝이 없다)"
+    },
+    {
+     "ko": "냉면 한 그릇이 만오천원이라니 기가 막히네.",
+     "en": "A bowl of naengmyeon is 15,000 won? That's unbelievable. (기가 막히다, idiom)"
+    }
+   ]
+  }
+ ],
+ "pronunciation": [
+  {
+   "id": "pron_ep07_l4_01",
+   "title": "겹받침 ㅄ + ㅁ → 비음화 (값만)",
+   "rule": "겹받침 ㅄ은 대표음 [ㅂ]으로 발음된 뒤, 뒤에 오는 ㅁ의 영향으로 [ㅁ]으로 바뀌어요 · The double batchim ㅄ becomes [ㅂ], then nasalizes to [ㅁ] before a following ㅁ.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
     ],
-    "tip": "이 부부처럼 반말과 존댓말을 섞어 쓰는 건 흠이 아니라 자연스러운 한국어 부부 대화의 한 모습이에요. 오히려 서로 예의를 지키는 존댓말은 교양 있어 보이는 인상을 주기도 해요 — 정답은 없고, 그 부부만의 스타일이 있는 거예요."
+    "rows": [
+     [
+      "값만",
+      "[감만]",
+      "ㅄ→ㅂ→ㅁ (비음화)"
+     ]
+    ]
+   }
   },
-  "real_life": [
-    {
-      "type": "kakao",
-      "title": "라온이 친구한테 냉면 먹으러 간다고 자랑해요",
-      "subtitle": "Raon texts a friend about going out for naengmyeon",
-      "messages": [
-        { "sender": "라온", "text": "오늘 할머니 할아버지랑 냉면 먹으러 가기로 했어!", "side": "right" },
-        { "sender": "친구", "text": "오 좋겠다, 맛있겠다", "side": "left" },
-        { "sender": "라온", "text": "근데 냉면 한 그릇에 만오천원이래 ㅋㅋ", "side": "right" },
-        { "sender": "친구", "text": "헐 비싸다", "side": "left" },
-        { "sender": "라온", "text": "그래도 맛있으니까 괜찮아!", "side": "right" }
-      ]
-    },
-    {
-      "type": "reading",
-      "title": "한국은 왜 팁이 없을까?",
-      "subtitle": "Why doesn't Korea have tipping culture?",
-      "passage": "한국에서는 식당에서 팁을 따로 주지 않아도 된다. 메뉴판에 적힌 가격이 실제로 내야 하는 금액이기 때문에 계산이 간단하다. 반면 미국이나 캐나다 같은 나라에서는 보통 음식 값의 15~20% 정도를 팁으로 더 내야 한다. 그래서 외국 여행을 할 때 이런 문화 차이 때문에 당황하는 사람들이 많다. 한국의 '보이는 가격이 내는 가격' 문화는 여행객들에게 특히 편리하게 느껴진다.",
-      "passage_en": "In Korea, you don't need to give a separate tip at restaurants. Since the price on the menu is the actual amount you pay, calculating the bill is simple. In countries like the US or Canada, on the other hand, people usually need to pay an additional 15-20% of the food price as a tip. Because of this, many people get confused by the cultural difference when traveling abroad. Korea's \"what you see is what you pay\" culture feels especially convenient to travelers.",
-      "questions": [
-        { "question_ko": "한국 식당 문화의 특징으로 알맞은 것은?", "question_en": "What's a feature of Korean restaurant culture, according to the passage?", "options": ["메뉴판 가격이 실제 내는 금액이다", "팁을 꼭 내야 한다", "가격을 흥정할 수 있다"], "answer": 0 },
-        { "question_ko": "미국이나 캐나다에서는 보통 얼마 정도를 팁으로 내요?", "question_en": "How much do people usually tip in the US or Canada?", "options": ["음식 값의 15~20% 정도", "음식 값의 50% 정도", "팁이 없다"], "answer": 0 }
-      ]
-    }
+  {
+   "id": "pron_ep07_l4_02",
+   "title": "겹받침 ㅄ + 모음 → 연음화 (짝이 없어요)",
+   "rule": "겹받침 ㅄ 뒤에 모음이 오면 ㅅ이 다음 음절로 넘어가요 · With the double batchim ㅄ, the ㅅ links over to the next syllable when followed by a vowel.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "짝이 없어요",
+      "[짜기 업써요]",
+      "ㄱ 연음 + ㅄ 연음(ㅅ)"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep07_l4_03",
+   "title": "받침 ㄱ + ㅎ → 격음화 (막히네)",
+   "rule": "받침 ㄱ 뒤에 ㅎ이 오면 두 소리가 합쳐져 거센소리 [ㅋ]이 돼요 · A batchim ㄱ combines with a following ㅎ to form the aspirated sound [ㅋ].",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "막히네",
+      "[마키네]",
+      "ㄱ + ㅎ → ㅋ (격음화)"
+     ]
+    ]
+   }
+  }
+ ],
+ "banmal_jondaemal": {
+  "intro_ko": "부부 사이의 반말/존댓말은 집집마다 다르고 정해진 공식이 없어요. 이 할머니·할아버지는 반말과 존댓말을 자연스럽게 섞어 써요 — 한 사람이 같은 대화 안에서도 반말과 존댓말을 넘나들 수 있어요. 서로 존댓말을 쓰는 부부는 오히려 교양 있고 예의 바른 느낌을 주기도 해요.",
+  "intro_en": "Speech level between spouses varies from couple to couple — there's no fixed rule. This grandma and grandpa naturally mix casual and polite speech, sometimes even within the same conversation. Couples who consistently use polite speech with each other can come across as especially refined and courteous.",
+  "rows": [
+   {
+    "situation_ko": "할아버지 → 할머니 (반말)",
+    "situation_en": "Grandpa → Grandma (casual)",
+    "banmal": "요새 물가가 너무 올라서 죽을 지경이야.",
+    "jondaemal": "(같은 대화 안에서 존댓말로도 넘어감)",
+    "note": "편하게 한탄할 땐 반말이 자연스럽게 나와요"
+   },
+   {
+    "situation_ko": "할아버지 → 할머니 (존댓말)",
+    "situation_en": "Grandpa → Grandma (polite)",
+    "banmal": "(같은 대화 안에서 반말도 섞여 나옴)",
+    "jondaemal": "결국은 그게 모두 포함된 값이지요.",
+    "note": "같은 사람이 같은 대화에서 존댓말로 전환하기도 해요 — 정해진 규칙이 아니에요"
+   },
+   {
+    "situation_ko": "할머니 → 할아버지 (존댓말 유지)",
+    "situation_en": "Grandma → Grandpa (mostly polite)",
+    "banmal": "머리 속으로 계산을 안해도 되니 얼마나 좋아?",
+    "jondaemal": "그래도 팁이 없으니 냉면 값만 내면 되잖아요.",
+    "note": "할머니는 대체로 존댓말을 유지하면서 가끔 반말을 섞어요"
+   }
   ],
-  "quiz": [
+  "tip": "이 부부처럼 반말과 존댓말을 섞어 쓰는 건 흠이 아니라 자연스러운 한국어 부부 대화의 한 모습이에요. 오히려 서로 예의를 지키는 존댓말은 교양 있어 보이는 인상을 주기도 해요 — 정답은 없고, 그 부부만의 스타일이 있는 거예요."
+ },
+ "real_life": [
+  {
+   "type": "kakao",
+   "title": "라온이 친구한테 냉면 먹으러 간다고 자랑해요",
+   "subtitle": "Raon texts a friend about going out for naengmyeon",
+   "messages": [
     {
-      "id": "q07l4_1",
-      "audio_text": "요새 물가가 너무 올라서 죽을 지경이야.",
-      "question_ko": "'-(으)ㄹ 지경이다'의 뜻으로 가장 알맞은 것은?",
-      "question_en": "What does -(으)ㄹ 지경이다 mean?",
-      "options": ["극단적인 상황을 과장해서 말할 때", "실제로 그 일이 일어난다는 뜻", "단순한 사실 전달", "명령"],
-      "answer": 0,
-      "explanation": "-(으)ㄹ 지경이다는 상황이 너무 심해서 극단적인 상태에 이를 정도라고 과장해서 말하는 표현이에요."
+     "sender": "라온",
+     "text": "오늘 할머니 할아버지랑 냉면 먹으러 가기로 했어!",
+     "side": "right"
     },
     {
-      "id": "q07l4_2",
-      "audio_text": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
-      "question_ko": "'-을 정도로'의 역할로 가장 알맞은 것은?",
-      "question_en": "What role does -을 정도로 play in this sentence?",
-      "options": ["어떤 상태에 이른 정도를 구체적으로 설명", "과거 회상", "추측", "명령"],
-      "answer": 0,
-      "explanation": "-(으)ㄹ 정도로는 어떤 상태나 결과가 어디까지 이르렀는지 구체적인 예로 설명하는 표현이에요."
+     "sender": "친구",
+     "text": "오 좋겠다, 맛있겠다",
+     "side": "left"
     },
     {
-      "id": "q07l4_3",
-      "audio_text": "당신은 참 단순하기 짝이 없어요.",
-      "question_ko": "'단순하기 짝이 없어요'의 뜻으로 가장 알맞은 것은?",
-      "question_en": "What does 단순하기 짝이 없어요 mean?",
-      "options": ["더할 나위 없이 단순하다는 뜻", "조금 단순하다는 뜻", "전혀 단순하지 않다는 뜻", "단순해지고 있다는 뜻"],
-      "answer": 0,
-      "explanation": "-기 짝이 없다는 더할 나위 없이, 극도로 그렇다는 뜻을 강조하는 표현이에요."
+     "sender": "라온",
+     "text": "근데 냉면 한 그릇에 만오천원이래 ㅋㅋ",
+     "side": "right"
     },
     {
-      "id": "q07l4_4",
-      "question_ko": "할아버지가 '조삼모사'를 언급한 이유로 가장 알맞은 것은?",
-      "question_en": "Why did grandpa bring up the idiom 조삼모사?",
-      "options": ["팁 포함 여부와 상관없이 총 가격은 같다는 걸 강조하려고", "원숭이를 좋아해서", "할머니를 웃기려고", "단순히 옛날 이야기를 하려고"],
-      "answer": 0,
-      "explanation": "조삼모사는 겉모습만 다르고 결국 총량은 같다는 걸 비유하는 사자성어예요."
+     "sender": "친구",
+     "text": "헐 비싸다",
+     "side": "left"
     },
     {
-      "id": "q07l4_5",
-      "question_ko": "할머니와 할아버지의 반말/존댓말 사용에 대한 설명으로 가장 알맞은 것은?",
-      "question_en": "Which best describes the speech level between grandma and grandpa?",
-      "options": ["부부 사이의 반말/존댓말은 정해진 규칙 없이 집집마다, 한 대화 안에서도 섞여 쓰일 수 있다", "부부는 항상 반말만 써야 한다", "부부는 항상 존댓말만 써야 한다", "나이가 많은 사람만 반말을 쓸 수 있다"],
-      "answer": 0,
-      "explanation": "부부 사이의 반말/존댓말은 공식이 없고, 같은 사람이 같은 대화 안에서도 섞어 쓸 수 있어요."
-    },
-    {
-      "id": "q07l4_6",
-      "audio_text": "냉면 한 그릇이 만오천원이라니 기가 막히네.",
-      "question_ko": "'기가 막히네'의 뜻으로 가장 알맞은 것은?",
-      "question_en": "What does 기가 막히네 mean?",
-      "options": ["너무 놀랍거나 어이없어서 말이 안 나올 정도라는 뜻", "기분이 아주 좋다는 뜻", "숨을 쉴 수 없다는 뜻", "화가 나서 소리친다는 뜻"],
-      "answer": 0,
-      "explanation": "기가 막히다는 너무 놀랍거나 어이없어서 말이 안 나올 정도라는 뜻의 관용 표현이에요."
+     "sender": "라온",
+     "text": "그래도 맛있으니까 괜찮아!",
+     "side": "right"
     }
-  ],
-  "self_check": [
-    { "ko": "-(으)ㄹ 지경이다로 극단적인 상황을 과장해서 말할 수 있어요.", "en": "I can use -(으)ㄹ 지경이다 to exaggerate an extreme situation." },
-    { "ko": "-을 정도로로 어떤 상태에 이른 정도를 구체적으로 설명할 수 있어요.", "en": "I can use -을 정도로 to describe how far a state or result goes, with a concrete example." },
-    { "ko": "-기 짝이 없다로 극도로 그런 상태를 강조해서 말할 수 있어요.", "en": "I can use -기 짝이 없다 to emphasize an extreme quality." },
-    { "ko": "조삼모사 사자성어의 뜻과 유래를 이해해요.", "en": "I understand the meaning and origin of the idiom 조삼모사." },
-    { "ko": "부부 사이의 반말/존댓말은 정해진 공식이 없고 집집마다 다르다는 걸 이해해요.", "en": "I understand that speech level between spouses has no fixed formula and varies by couple." }
-  ]
+   ]
+  },
+  {
+   "type": "reading",
+   "title": "한국은 왜 팁이 없을까?",
+   "subtitle": "Why doesn't Korea have tipping culture?",
+   "passage": "한국에서는 식당에서 팁을 따로 주지 않아도 된다. 메뉴판에 적힌 가격이 실제로 내야 하는 금액이기 때문에 계산이 간단하다. 반면 미국이나 캐나다 같은 나라에서는 보통 음식 값의 15~20% 정도를 팁으로 더 내야 한다. 그래서 외국 여행을 할 때 이런 문화 차이 때문에 당황하는 사람들이 많다. 한국의 '보이는 가격이 내는 가격' 문화는 여행객들에게 특히 편리하게 느껴진다.",
+   "passage_en": "In Korea, you don't need to give a separate tip at restaurants. Since the price on the menu is the actual amount you pay, calculating the bill is simple. In countries like the US or Canada, on the other hand, people usually need to pay an additional 15-20% of the food price as a tip. Because of this, many people get confused by the cultural difference when traveling abroad. Korea's \"what you see is what you pay\" culture feels especially convenient to travelers.",
+   "questions": [
+    {
+     "question_ko": "한국 식당 문화의 특징으로 알맞은 것은?",
+     "question_en": "What's a feature of Korean restaurant culture, according to the passage?",
+     "options": [
+      "메뉴판 가격이 실제 내는 금액이다",
+      "팁을 꼭 내야 한다",
+      "가격을 흥정할 수 있다"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "미국이나 캐나다에서는 보통 얼마 정도를 팁으로 내요?",
+     "question_en": "How much do people usually tip in the US or Canada?",
+     "options": [
+      "음식 값의 15~20% 정도",
+      "음식 값의 50% 정도",
+      "팁이 없다"
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q07l4_1",
+   "audio_text": "요새 물가가 너무 올라서 죽을 지경이야.",
+   "question_ko": "'-(으)ㄹ 지경이다'의 뜻으로 가장 알맞은 것은?",
+   "question_en": "What does -(으)ㄹ 지경이다 mean?",
+   "options": [
+    "극단적인 상황을 과장해서 말할 때",
+    "실제로 그 일이 일어난다는 뜻",
+    "단순한 사실 전달",
+    "명령"
+   ],
+   "answer": 0,
+   "explanation": "-(으)ㄹ 지경이다는 상황이 너무 심해서 극단적인 상태에 이를 정도라고 과장해서 말하는 표현이에요."
+  },
+  {
+   "id": "q07l4_2",
+   "audio_text": "비싼 값을 감수하고 사 먹을 정도로 맛있잖아요.",
+   "question_ko": "'-을 정도로'의 역할로 가장 알맞은 것은?",
+   "question_en": "What role does -을 정도로 play in this sentence?",
+   "options": [
+    "어떤 상태에 이른 정도를 구체적으로 설명",
+    "과거 회상",
+    "추측",
+    "명령"
+   ],
+   "answer": 0,
+   "explanation": "-(으)ㄹ 정도로는 어떤 상태나 결과가 어디까지 이르렀는지 구체적인 예로 설명하는 표현이에요."
+  },
+  {
+   "id": "q07l4_3",
+   "audio_text": "당신은 참 단순하기 짝이 없어요.",
+   "question_ko": "'단순하기 짝이 없어요'의 뜻으로 가장 알맞은 것은?",
+   "question_en": "What does 단순하기 짝이 없어요 mean?",
+   "options": [
+    "더할 나위 없이 단순하다는 뜻",
+    "조금 단순하다는 뜻",
+    "전혀 단순하지 않다는 뜻",
+    "단순해지고 있다는 뜻"
+   ],
+   "answer": 0,
+   "explanation": "-기 짝이 없다는 더할 나위 없이, 극도로 그렇다는 뜻을 강조하는 표현이에요."
+  },
+  {
+   "id": "q07l4_4",
+   "question_ko": "할아버지가 '조삼모사'를 언급한 이유로 가장 알맞은 것은?",
+   "question_en": "Why did grandpa bring up the idiom 조삼모사?",
+   "options": [
+    "팁 포함 여부와 상관없이 총 가격은 같다는 걸 강조하려고",
+    "원숭이를 좋아해서",
+    "할머니를 웃기려고",
+    "단순히 옛날 이야기를 하려고"
+   ],
+   "answer": 0,
+   "explanation": "조삼모사는 겉모습만 다르고 결국 총량은 같다는 걸 비유하는 사자성어예요."
+  },
+  {
+   "id": "q07l4_5",
+   "question_ko": "할머니와 할아버지의 반말/존댓말 사용에 대한 설명으로 가장 알맞은 것은?",
+   "question_en": "Which best describes the speech level between grandma and grandpa?",
+   "options": [
+    "부부 사이의 반말/존댓말은 정해진 규칙 없이 집집마다, 한 대화 안에서도 섞여 쓰일 수 있다",
+    "부부는 항상 반말만 써야 한다",
+    "부부는 항상 존댓말만 써야 한다",
+    "나이가 많은 사람만 반말을 쓸 수 있다"
+   ],
+   "answer": 0,
+   "explanation": "부부 사이의 반말/존댓말은 공식이 없고, 같은 사람이 같은 대화 안에서도 섞어 쓸 수 있어요."
+  },
+  {
+   "id": "q07l4_6",
+   "audio_text": "냉면 한 그릇이 만오천원이라니 기가 막히네.",
+   "question_ko": "'기가 막히네'의 뜻으로 가장 알맞은 것은?",
+   "question_en": "What does 기가 막히네 mean?",
+   "options": [
+    "너무 놀랍거나 어이없어서 말이 안 나올 정도라는 뜻",
+    "기분이 아주 좋다는 뜻",
+    "숨을 쉴 수 없다는 뜻",
+    "화가 나서 소리친다는 뜻"
+   ],
+   "answer": 0,
+   "explanation": "기가 막히다는 너무 놀랍거나 어이없어서 말이 안 나올 정도라는 뜻의 관용 표현이에요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "-(으)ㄹ 지경이다로 극단적인 상황을 과장해서 말할 수 있어요.",
+   "en": "I can use -(으)ㄹ 지경이다 to exaggerate an extreme situation."
+  },
+  {
+   "ko": "-을 정도로로 어떤 상태에 이른 정도를 구체적으로 설명할 수 있어요.",
+   "en": "I can use -을 정도로 to describe how far a state or result goes, with a concrete example."
+  },
+  {
+   "ko": "-기 짝이 없다로 극도로 그런 상태를 강조해서 말할 수 있어요.",
+   "en": "I can use -기 짝이 없다 to emphasize an extreme quality."
+  },
+  {
+   "ko": "조삼모사 사자성어의 뜻과 유래를 이해해요.",
+   "en": "I understand the meaning and origin of the idiom 조삼모사."
+  },
+  {
+   "ko": "부부 사이의 반말/존댓말은 정해진 공식이 없고 집집마다 다르다는 걸 이해해요.",
+   "en": "I understand that speech level between spouses has no fixed formula and varies by couple."
+  }
+ ]
 }

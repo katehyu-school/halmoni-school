@@ -1,451 +1,756 @@
 {
-  "id": "ep04",
-  "level": "L4",
-  "title": "여기가 왜 이렇게 좁아졌어요?",
-  "title_en": "Why Did This Get So Narrow?",
-  "scene": "🏞️ 개천 · The Stream",
-  "goal": {
-    "ko": "-더라고요를 써서 직접 경험한 회상을 자연스럽게 말할 수 있어요",
-    "en": "I can use -더라고요 to naturally express things I personally recall from past experience"
+ "id": "ep04",
+ "level": "L4",
+ "title": "여기가 왜 이렇게 좁아졌어요?",
+ "title_en": "Why Did This Get So Narrow?",
+ "scene": "💭 감정·추억 · Emotion & Memory",
+ "goal": {
+  "ko": "-더라고요를 써서 직접 경험한 회상을 자연스럽게 말할 수 있어요",
+  "en": "I can use -더라고요 to naturally express things I personally recall from past experience"
+ },
+ "key_points": [
+  "-더- — 과거에 직접 보고 들은 것을 회상하는 표현의 기본 뼈대",
+  "-더라고요 — 직접 겪어서 알게 된 것을 지금 전달할 때 (해요체 -더라고요 / 반말 -더라고)",
+  "-던 N — 예전엔 그랬던(지금은 다를 수도 있는) 명사를 회상하며 수식할 때"
+ ],
+ "characters": [
+  {
+   "id": "grandma",
+   "name": "할머니",
+   "name_en": "Grandma",
+   "emoji": "👵",
+   "color": "var(--coral)"
   },
-  "key_points": [
-    "-더- — 과거에 직접 보고 들은 것을 회상하는 표현의 기본 뼈대",
-    "-더라고요 — 직접 겪어서 알게 된 것을 지금 전달할 때 (해요체 -더라고요 / 반말 -더라고)",
-    "-던 N — 예전엔 그랬던(지금은 다를 수도 있는) 명사를 회상하며 수식할 때"
-  ],
-  "characters": [
-    { "id": "grandma", "name": "할머니", "name_en": "Grandma", "emoji": "👵", "color": "var(--coral)" },
-    { "id": "liam", "name": "라온", "name_en": "Raon", "emoji": "👦", "color": "var(--blue)" },
-    { "id": "kayo", "name": "태오", "name_en": "Taeo", "emoji": "👦", "color": "var(--purple)" }
-  ],
-  "slides": [
-    "data/nhs/L4/slides/ep04/좁아졌어요1.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요2.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요3.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요4.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요5.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요6.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요7.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요8.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요9.png",
-    "data/nhs/L4/slides/ep04/좁아졌어요10.png"
-  ],
-  "video": null,
-  "script": [
+  {
+   "id": "liam",
+   "name": "라온",
+   "name_en": "Raon",
+   "emoji": "👦",
+   "color": "var(--blue)"
+  },
+  {
+   "id": "kayo",
+   "name": "태오",
+   "name_en": "Taeo",
+   "emoji": "👦",
+   "color": "var(--purple)"
+  }
+ ],
+ "slides": [
+  "data/nhs/L4/slides/ep04/좁아졌어요1.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요2.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요3.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요4.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요5.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요6.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요7.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요8.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요9.png",
+  "data/nhs/L4/slides/ep04/좁아졌어요10.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "liam",
+   "text": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
+   "en": "Grandma, is this the stream we came to together before?",
+   "slide": 0,
+   "audio": "data/nhs/L4/TTS/ep04/audio_0_할머니_여기가_전에_같이_왔던_그_개천이에요_.mp3",
+   "highlight": "왔던 그 개천",
+   "annotation": {
+    "highlight": "왔던 그 개천",
+    "grammar": "-던 N",
+    "note": "오다 → 왔던 그 개천 = the stream (that) we came to before\n예전 기억을 떠올리며 명사를 꾸밀 때 써요 — 지금은 달라졌을 수도 있다는 느낌이 들어있어요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "그렇지. 바로 그 개천이야.",
+   "en": "That's right. That's exactly the stream.",
+   "slide": 1,
+   "audio": "data/nhs/L4/TTS/ep04/audio_1_그렇지__바로_그_개천이야_.mp3"
+  },
+  {
+   "speaker": "liam",
+   "text": "여기가 원래 이렇게 좁았어요?",
+   "en": "Was this originally this narrow?",
+   "slide": 2,
+   "audio": "data/nhs/L4/TTS/ep04/audio_2_여기가_원래_이렇게_좁았어요_.mp3"
+  },
+  {
+   "speaker": "liam",
+   "text": "그 때는 물도 훨씬 많았었는데..",
+   "en": "Back then there used to be so much more water...",
+   "slide": 3,
+   "audio": "data/nhs/L4/TTS/ep04/audio_3_그_때는_물도_훨씬_많았었는데__.mp3"
+  },
+  {
+   "speaker": "kayo",
+   "text": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+   "en": "Hyung, the walking trail we used to take got a lot shorter too, I noticed.",
+   "slide": 4,
+   "audio": "data/nhs/L4/TTS/ep04/audio_4_형__우리가_다니던_산책길도_훨씬_짧아졌더라고_.mp3",
+   "highlight": "다니던 산책길도 훨씬 짧아졌더라고",
+   "annotation": {
+    "highlight": "다니던 산책길도 훨씬 짧아졌더라고",
+    "grammar": "-던 N + -더라고",
+    "note": "다니다 → 다니던 산책길 = the trail we used to walk\n짧아지다 → 짧아졌더라고 = I noticed it got shorter (직접 경험한 걸 지금 전달)\n형한테 하는 반말이라 '-더라고요'가 아니라 '-더라고'로 끝나요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "얘들아 엄마랑 왔던게 몇년 전이지?",
+   "en": "Kids, how many years ago was it that you came here with your mom?",
+   "slide": 5,
+   "audio": "data/nhs/L4/TTS/ep04/audio_5_얘들아_엄마랑_왔던게_몇년_전이지_.mp3",
+   "highlight": "왔던게",
+   "annotation": {
+    "highlight": "왔던게",
+    "grammar": "-던 N (다시 등장!)",
+    "note": "왔던 것이 → 왔던게 (구어 축약) = the time (that) we came\n-던 N은 명사 자리에 '것'이 와도 똑같이 붙어요"
+   }
+  },
+  {
+   "speaker": "liam",
+   "text": "오년 전이요.",
+   "en": "It was five years ago.",
+   "slide": 6,
+   "audio": "data/nhs/L4/TTS/ep04/audio_6_오년_전이요_.mp3"
+  },
+  {
+   "speaker": "grandma",
+   "text": "그때 너흰 몇 살이었어?",
+   "en": "How old were you back then?",
+   "slide": 7,
+   "audio": "data/nhs/L4/TTS/ep04/audio_7_그때_너흰_몇_살이었어_.mp3"
+  },
+  {
+   "speaker": "grandma",
+   "text": "니네 덩치가 커진 것도 생각해야지.",
+   "en": "You also have to remember that you've grown bigger.",
+   "slide": 8,
+   "audio": "data/nhs/L4/TTS/ep04/audio_8_니네_덩치가_커진_것도_생각해야지_.mp3"
+  },
+  {
+   "speaker": "grandma",
+   "text": "귀여웠던 꼬맹이들이 이제 어른이 되어 버렸어.",
+   "en": "The kids who used to be so cute have now become adults.",
+   "slide": 9,
+   "audio": "data/nhs/L4/TTS/ep04/audio_9_귀여웠던_꼬맹이들이_이제_어른이_되어_버렸어_.mp3",
+   "highlight": "귀여웠던 꼬맹이들",
+   "annotation": {
+    "highlight": "귀여웠던 꼬맹이들",
+    "grammar": "-던 N (세 번째!)",
+    "note": "귀엽다(형용사) → 귀여웠던 꼬맹이들 = the kids who used to be cute\n형용사도 과거형+던으로 '예전엔 그랬던' 느낌을 표현해요"
+   }
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🏞️ 장소 & 상태 Place & State",
+   "items": [
     {
-      "speaker": "liam",
-      "text": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
-      "en": "Grandma, is this the stream we came to together before?",
-      "slide": 0,
-      "audio": "data/nhs/L4/TTS/ep04/audio_0_할머니_여기가_전에_같이_왔던_그_개천이에요_.mp3",
-      "highlight": "왔던 그 개천",
-      "annotation": {
-        "highlight": "왔던 그 개천",
-        "grammar": "-던 N",
-        "note": "오다 → 왔던 그 개천 = the stream (that) we came to before\n예전 기억을 떠올리며 명사를 꾸밀 때 써요 — 지금은 달라졌을 수도 있다는 느낌이 들어있어요"
-      }
+     "korean": "개천",
+     "romanization": "gae-cheon",
+     "english": "stream",
+     "emoji": "🏞️"
     },
     {
-      "speaker": "grandma",
-      "text": "그렇지. 바로 그 개천이야.",
-      "en": "That's right. That's exactly the stream.",
-      "slide": 1,
-      "audio": "data/nhs/L4/TTS/ep04/audio_1_그렇지__바로_그_개천이야_.mp3"
+     "korean": "좁다",
+     "romanization": "jop-da",
+     "english": "to be narrow",
+     "emoji": "↔️"
     },
     {
-      "speaker": "liam",
-      "text": "여기가 원래 이렇게 좁았어요?",
-      "en": "Was this originally this narrow?",
-      "slide": 2,
-      "audio": "data/nhs/L4/TTS/ep04/audio_2_여기가_원래_이렇게_좁았어요_.mp3"
-    },
-    {
-      "speaker": "liam",
-      "text": "그 때는 물도 훨씬 많았었는데..",
-      "en": "Back then there used to be so much more water...",
-      "slide": 3,
-      "audio": "data/nhs/L4/TTS/ep04/audio_3_그_때는_물도_훨씬_많았었는데__.mp3"
-    },
-    {
-      "speaker": "kayo",
-      "text": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
-      "en": "Hyung, the walking trail we used to take got a lot shorter too, I noticed.",
-      "slide": 4,
-      "audio": "data/nhs/L4/TTS/ep04/audio_4_형__우리가_다니던_산책길도_훨씬_짧아졌더라고_.mp3",
-      "highlight": "다니던 산책길도 훨씬 짧아졌더라고",
-      "annotation": {
-        "highlight": "다니던 산책길도 훨씬 짧아졌더라고",
-        "grammar": "-던 N + -더라고",
-        "note": "다니다 → 다니던 산책길 = the trail we used to walk\n짧아지다 → 짧아졌더라고 = I noticed it got shorter (직접 경험한 걸 지금 전달)\n형한테 하는 반말이라 '-더라고요'가 아니라 '-더라고'로 끝나요"
-      }
-    },
-    {
-      "speaker": "grandma",
-      "text": "얘들아 엄마랑 왔던게 몇년 전이지?",
-      "en": "Kids, how many years ago was it that you came here with your mom?",
-      "slide": 5,
-      "audio": "data/nhs/L4/TTS/ep04/audio_5_얘들아_엄마랑_왔던게_몇년_전이지_.mp3",
-      "highlight": "왔던게",
-      "annotation": {
-        "highlight": "왔던게",
-        "grammar": "-던 N (다시 등장!)",
-        "note": "왔던 것이 → 왔던게 (구어 축약) = the time (that) we came\n-던 N은 명사 자리에 '것'이 와도 똑같이 붙어요"
-      }
-    },
-    {
-      "speaker": "liam",
-      "text": "오년 전이요.",
-      "en": "It was five years ago.",
-      "slide": 6,
-      "audio": "data/nhs/L4/TTS/ep04/audio_6_오년_전이요_.mp3"
-    },
-    {
-      "speaker": "grandma",
-      "text": "그때 너흰 몇 살이었어?",
-      "en": "How old were you back then?",
-      "slide": 7,
-      "audio": "data/nhs/L4/TTS/ep04/audio_7_그때_너흰_몇_살이었어_.mp3"
-    },
-    {
-      "speaker": "grandma",
-      "text": "니네 덩치가 커진 것도 생각해야지.",
-      "en": "You also have to remember that you've grown bigger.",
-      "slide": 8,
-      "audio": "data/nhs/L4/TTS/ep04/audio_8_니네_덩치가_커진_것도_생각해야지_.mp3"
-    },
-    {
-      "speaker": "grandma",
-      "text": "귀여웠던 꼬맹이들이 이제 어른이 되어 버렸어.",
-      "en": "The kids who used to be so cute have now become adults.",
-      "slide": 9,
-      "audio": "data/nhs/L4/TTS/ep04/audio_9_귀여웠던_꼬맹이들이_이제_어른이_되어_버렸어_.mp3",
-      "highlight": "귀여웠던 꼬맹이들",
-      "annotation": {
-        "highlight": "귀여웠던 꼬맹이들",
-        "grammar": "-던 N (세 번째!)",
-        "note": "귀엽다(형용사) → 귀여웠던 꼬맹이들 = the kids who used to be cute\n형용사도 과거형+던으로 '예전엔 그랬던' 느낌을 표현해요"
-      }
+     "korean": "넓다",
+     "romanization": "neol-da",
+     "english": "to be wide/spacious",
+     "emoji": "📐"
     }
-  ],
-  "vocab": [
+   ]
+  },
+  {
+   "category": "👶 사람 & 감정 People & Feelings",
+   "items": [
     {
-      "category": "🏞️ 장소 & 상태 Place & State",
-      "items": [
-        { "korean": "개천", "romanization": "gae-cheon", "english": "stream", "emoji": "🏞️" },
-        { "korean": "좁다", "romanization": "jop-da", "english": "to be narrow", "emoji": "↔️" },
-        { "korean": "넓다", "romanization": "neol-da", "english": "to be wide/spacious", "emoji": "📐" }
-      ]
+     "korean": "덩치",
+     "romanization": "deong-chi",
+     "english": "body size/build",
+     "emoji": "💪"
     },
     {
-      "category": "👶 사람 & 감정 People & Feelings",
-      "items": [
-        { "korean": "덩치", "romanization": "deong-chi", "english": "body size/build", "emoji": "💪" },
-        { "korean": "이제", "romanization": "i-je", "english": "now", "emoji": "⏰" },
-        { "korean": "귀여운", "romanization": "gwi-yeo-un", "english": "cute", "emoji": "🥰" },
-        { "korean": "꼬맹이", "romanization": "kko-maeng-i", "english": "little kid, tot", "emoji": "🧒" }
-      ]
+     "korean": "이제",
+     "romanization": "i-je",
+     "english": "now",
+     "emoji": "⏰"
     },
     {
-      "category": "🗣️ 표현 Expressions",
-      "items": [
-        { "korean": "원래", "romanization": "won-rae", "english": "originally", "emoji": "🔙" },
-        { "korean": "훨씬", "romanization": "hwol-ssin", "english": "by far, much more", "emoji": "📈" },
-        { "korean": "생각하다", "romanization": "saeng-gak-ha-da", "english": "to think, consider", "emoji": "💭" }
-      ]
+     "korean": "귀여운",
+     "romanization": "gwi-yeo-un",
+     "english": "cute",
+     "emoji": "🥰"
     },
     {
-      "category": "🚶 나들이 & 추억 표현 (대본 외)",
-      "items": [
-        { "korean": "산책하다", "romanization": "san-chaek-ha-da", "english": "to take a walk", "emoji": "🚶" },
-        { "korean": "추억", "romanization": "chu-eok", "english": "memory, reminiscence", "emoji": "🌅" },
-        { "korean": "그립다", "romanization": "geu-rip-da", "english": "to miss, to long for", "emoji": "🥹" },
-        { "korean": "변하다", "romanization": "byeon-ha-da", "english": "to change", "emoji": "🔄" },
-        { "korean": "다시 가 보다", "romanization": "da-si ga bo-da", "english": "to go back and see (again)", "emoji": "🔁" }
-      ]
+     "korean": "꼬맹이",
+     "romanization": "kko-maeng-i",
+     "english": "little kid, tot",
+     "emoji": "🧒"
     }
-  ],
-  "grammar": [
+   ]
+  },
+  {
+   "category": "🗣️ 표현 Expressions",
+   "items": [
     {
-      "id": "g04_deo",
-      "tier": "core",
-      "title": "-더-",
-      "title_en": "-더-: I Recall / Witnessed (Retrospective Marker)",
-      "emoji": "🕰️",
-      "pattern": "동사/형용사 어간(또는 과거형) + -더- + 다양한 어미 (-더라, -더라고(요), -던 등으로 확장)",
-      "scene_example": {
-        "korean": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
-        "english": "Hyung, the trail we used to take got a lot shorter too, I noticed.",
-        "highlight": "짧아졌더라고"
-      },
-      "explanation_en": "-더- is the core retrospective/evidential marker in Korean — it signals 'I personally saw, heard, or experienced this in the past, and I'm recalling it now.' It never stands alone; it always combines with other endings like -더라, -더라고(요), or -던 to form a complete expression.",
-      "rule_boxes": [
-        { "type": "blue", "label": "혼자 못 쓰고 항상 다른 어미와 결합", "content": "-더라 / -더라고(요) / -던", "note": "이 세 확장형이 이번 과의 핵심이에요" },
-        { "type": "green", "label": "직접 경험·목격이 핵심", "content": "내가 직접 보거나 듣거나 느낀 과거 사실에만 써요", "note": "남에게 전해 들은 얘기엔 못 써요 (그건 -대요/-다고 해요)" },
-        { "type": "amber", "label": "과거형 + -더- 순서", "content": "짧아지다 → 짧아졌더라고 (았/었 먼저, 그 다음 더라고)", "note": "이미 일어난 일을 회상할 때는 과거형부터 붙여요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "우리가 다니던 산책길도 훨씬 짧아졌더라고.", "en": "The trail we used to take got a lot shorter, I noticed." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "어제 보니까 편의점이 새로 생겼더라.", "en": "I saw yesterday that a new convenience store had opened." },
-            { "ko": "그 영화 진짜 슬프더라고요.", "en": "That movie was really sad, I found." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "어제 카페에 가 보니까 사람이 정말 ___. (많다)", "answer": "많더라고요", "hint": "직접 본 걸 회상하며 전달" }
-      ]
+     "korean": "원래",
+     "romanization": "won-rae",
+     "english": "originally",
+     "emoji": "🔙"
     },
     {
-      "id": "g04_deorago",
-      "tier": "core",
-      "title": "-더라고요",
-      "title_en": "I Found That... / I Noticed That...",
-      "emoji": "💬",
-      "pattern": "동사/형용사 어간(또는 과거형) + -더라고요 (해요체) · -더라고 (반말)",
-      "scene_example": {
-        "korean": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
-        "english": "Hyung, the trail we used to take got a lot shorter, I noticed.",
-        "highlight": "짧아졌더라고"
-      },
-      "explanation_en": "Use -더라고요 to share something you personally discovered or realized in the past — like giving a little firsthand report. It's more vivid and personal than just stating a fact: it says 'I was there, I noticed it myself.'",
-      "rule_boxes": [
-        { "type": "blue", "label": "해요체 vs 반말", "content": "-더라고요 (존댓말) · -더라고 (반말)", "note": "태오는 형(라온)에게 반말로 -더라고" },
-        { "type": "green", "label": "과거형과 자주 결합", "content": "짧아졌더라고(요), 많았더라고(요), 예뻤더라고(요)", "note": "이미 일어난 일을 회상하는 문법이라 과거형과 잘 어울려요" },
-        { "type": "amber", "label": "질문이 아니라 정보 공유", "content": "'그거 알아?' 하듯 자기가 겪은 걸 상대에게 알려주는 말투", "note": "궁금해서 묻는 게 아니라 전달하는 거예요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.", "en": "Hyung, I noticed the trail we used to take got a lot shorter." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "거기 줄이 진짜 길더라고요.", "en": "I found the line there was really long." },
-            { "ko": "어제 보니까 눈이 많이 왔더라고요.", "en": "I saw yesterday that it had snowed a lot." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "오랜만에 만났는데 하나도 안 ___. (변하다, 반말)", "answer": "변했더라고", "hint": "과거 + 더라고 (반말)" }
-      ]
+     "korean": "훨씬",
+     "romanization": "hwol-ssin",
+     "english": "by far, much more",
+     "emoji": "📈"
     },
     {
-      "id": "g04_deon_n",
-      "tier": "core",
-      "title": "-던 N",
-      "title_en": "N That Used To Be / N I Recall Being",
-      "emoji": "🖼️",
-      "pattern": "동사/형용사 어간(또는 과거형) + -던 + 명사 (받침 유무 상관없이 형태 동일)",
-      "scene_example": {
-        "korean": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
-        "english": "Grandma, is this the stream we came to together before?",
-        "highlight": "왔던 그 개천"
-      },
-      "explanation_en": "-던 N modifies a noun with the sense of 'the N that I recall/used to be' — describing something from personal past memory, often implying it may have changed since then. This differs from the plain past adnominal -(으)ㄴ, which just states a completed fact without that nostalgic 'looking back' feeling.",
-      "rule_boxes": [
-        { "type": "blue", "label": "형태 변화 없음", "content": "오다→왔던, 다니다→다니던, 귀엽다→귀여웠던", "note": "받침 유무 상관없이 어간(또는 과거형) + 던" },
-        { "type": "green", "label": "-(으)ㄴ N과 차이", "content": "-(으)ㄴ N = 그냥 과거 사실\n-던 N = 예전 기억을 떠올리며, 지금은 다를 수도 있음", "note": "회상의 느낌은 -던 N에만 있어요" },
-        { "type": "amber", "label": "이 에피소드에 4번 등장", "content": "왔던(1번), 다니던(4번), 왔던게(5번), 귀여웠던(9번)", "note": "그만큼 자주 쓰이는 핵심 패턴이에요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "할머니 여기가 전에 같이 왔던 그 개천이에요?", "en": "Grandma, is this the stream we came to together before?" },
-            { "ko": "귀여웠던 꼬맹이들이 이제 어른이 되어 버렸어.", "en": "The kids who used to be so cute have now become adults." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "내가 다니던 학교가 없어졌어요.", "en": "The school I used to attend is gone now." },
-            { "ko": "어렸을 때 좋아했던 노래예요.", "en": "It's a song I used to like when I was young." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "예전에 자주 ___ 식당이 문을 닫았어요. (가다)", "answer": "가던", "hint": "어간 + 던 (받침 상관없이)" }
-      ]
+     "korean": "생각하다",
+     "romanization": "saeng-gak-ha-da",
+     "english": "to think, consider",
+     "emoji": "💭"
     }
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "category": "🚶 나들이 & 추억 표현 (대본 외)",
+   "items": [
     {
-      "title": "-던 N vs -(으)ㄴ N — 두 가지 '과거 수식'",
-      "title_en": "Two Ways to Modify a Noun with the Past",
-      "explanation_en": "-(으)ㄴ N states a simple completed past fact about the noun. -던 N adds a layer of personal recollection — 'I remember this being that way,' often with a hint that things may be different now. Comparing 갔던 곳 (the place I recall going/used to go) vs 간 곳 (the place I went) shows the difference in nuance.",
-      "examples": [
-        { "ko": "지난주에 간 식당이에요.", "en": "It's the restaurant I went to last week. (simple fact)" },
-        { "ko": "어릴 때 자주 갔던 식당이에요.", "en": "It's the restaurant I used to go to often as a kid. (nostalgic recollection)" }
-      ]
+     "korean": "산책하다",
+     "romanization": "san-chaek-ha-da",
+     "english": "to take a walk",
+     "emoji": "🚶"
     },
     {
-      "title": "🚶 오랜만에 가 본 곳에서 쓰는 표현 (대본 외)",
-      "title_en": "Phrases for Revisiting a Place After a Long Time (Beyond the Script)",
-      "explanation_en": "A few more natural phrases for the exact feeling this episode is about — going back somewhere after years away.",
-      "examples": [
-        { "ko": "여기 진짜 오랜만이다.", "en": "It's been so long since I've been here." },
-        { "ko": "하나도 안 변했네!", "en": "It hasn't changed at all!" },
-        { "ko": "추억이 새록새록 떠올라요.", "en": "Memories keep coming back to me." },
-        { "ko": "여기 오니까 옛날 생각 난다.", "en": "Being here makes me think of the old days." }
-      ]
+     "korean": "추억",
+     "romanization": "chu-eok",
+     "english": "memory, reminiscence",
+     "emoji": "🌅"
+    },
+    {
+     "korean": "그립다",
+     "romanization": "geu-rip-da",
+     "english": "to miss, to long for",
+     "emoji": "🥹"
+    },
+    {
+     "korean": "변하다",
+     "romanization": "byeon-ha-da",
+     "english": "to change",
+     "emoji": "🔄"
+    },
+    {
+     "korean": "다시 가 보다",
+     "romanization": "da-si ga bo-da",
+     "english": "to go back and see (again)",
+     "emoji": "🔁"
     }
-  ],
-  "pronunciation": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g04_deo",
+   "tier": "core",
+   "title": "-더-",
+   "title_en": "-더-: I Recall / Witnessed (Retrospective Marker)",
+   "emoji": "🕰️",
+   "pattern": "동사/형용사 어간(또는 과거형) + -더- + 다양한 어미 (-더라, -더라고(요), -던 등으로 확장)",
+   "scene_example": {
+    "korean": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+    "english": "Hyung, the trail we used to take got a lot shorter too, I noticed.",
+    "highlight": "짧아졌더라고"
+   },
+   "explanation_en": "-더- is the core retrospective/evidential marker in Korean — it signals 'I personally saw, heard, or experienced this in the past, and I'm recalling it now.' It never stands alone; it always combines with other endings like -더라, -더라고(요), or -던 to form a complete expression.",
+   "rule_boxes": [
     {
-      "id": "pron_ep04_l4_01",
-      "title": "받침 ㅂ + 모음 → 연음화",
-      "rule": "받침 ㅂ 뒤에 모음으로 시작하는 말이 오면 받침 소리가 다음 음절로 넘어가요 · A batchim ㅂ links over to the next syllable when followed by a vowel.",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["좁아졌어요", "[조바져써요]", "받침 ㅂ + 아 → 연음"]
-        ]
-      }
+     "type": "blue",
+     "label": "혼자 못 쓰고 항상 다른 어미와 결합",
+     "content": "-더라 / -더라고(요) / -던",
+     "note": "이 세 확장형이 이번 과의 핵심이에요"
     },
     {
-      "id": "pron_ep04_l4_02",
-      "title": "겹받침 ㄼ + 모음 → ㄹ+ㅂ 분리 연음",
-      "rule": "겹받침 ㄼ(짧다) 뒤에 모음이 오면 ㄹ은 남고 ㅂ이 다음 음절로 넘어가요 · With the double batchim ㄼ, the ㄹ stays while the ㅂ links to the next syllable.",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["짧아졌더라고", "[짤바졌더라고]", "ㄼ + 아 → ㄹ + 바 (분리 연음)"]
-        ]
-      }
+     "type": "green",
+     "label": "직접 경험·목격이 핵심",
+     "content": "내가 직접 보거나 듣거나 느낀 과거 사실에만 써요",
+     "note": "남에게 전해 들은 얘기엔 못 써요 (그건 -대요/-다고 해요)"
     },
     {
-      "id": "pron_ep04_l4_03",
-      "title": "겹받침 ㄶ + 모음 → ㅎ 탈락",
-      "rule": "겹받침 ㄶ(많다) 뒤에 모음이 오면 ㅎ이 사라지고 ㄴ만 연음돼요 · With the double batchim ㄶ, the ㅎ disappears and only the ㄴ links over.",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["많았었는데", "[마나썯는데]", "ㄶ + 았 → ㄴ + 아 (ㅎ 탈락)"]
-        ]
-      }
+     "type": "amber",
+     "label": "과거형 + -더- 순서",
+     "content": "짧아지다 → 짧아졌더라고 (았/었 먼저, 그 다음 더라고)",
+     "note": "이미 일어난 일을 회상할 때는 과거형부터 붙여요"
     }
-  ],
-  "banmal_jondaemal": {
-    "intro_ko": "손주들은 할머니께 항상 존댓말을 쓰고, 할머니는 손주들에게 편하게 반말을 써요. 동생 태오는 형 라온에게도 반말을 쓰는데, 이건 한국에서 형제자매 사이에 흔한 자연스러운 반말이에요 — 부모님/조부모님께 쓰는 존댓말과는 별개의 규칙이에요.",
-    "intro_en": "The grandkids always speak politely to grandma, while grandma speaks casually to them. Taeo (the younger brother) also speaks casually to Raon (형, his older brother) — completely normal among Korean siblings, and a separate rule from the polite speech kids use with parents and grandparents.",
-    "rows": [
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
       {
-        "situation_ko": "라온 → 할머니 (항상 존댓말)",
-        "situation_en": "Raon → Grandma (always polite)",
-        "banmal": "(반말 안 씀)",
-        "jondaemal": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
-        "note": "손주는 할머니께 항상 존댓말을 써요"
+       "ko": "우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+       "en": "The trail we used to take got a lot shorter, I noticed."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "어제 보니까 편의점이 새로 생겼더라.",
+       "en": "I saw yesterday that a new convenience store had opened."
       },
       {
-        "situation_ko": "할머니 → 라온/태오 (반말)",
-        "situation_en": "Grandma → Raon/Taeo (casual)",
-        "banmal": "얘들아 엄마랑 왔던게 몇년 전이지?",
-        "jondaemal": "(존댓말 안 씀)",
-        "note": "어른이 아이에게는 반말이 기본이에요"
+       "ko": "그 영화 진짜 슬프더라고요.",
+       "en": "That movie was really sad, I found."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "어제 카페에 가 보니까 사람이 정말 ___. (많다)",
+     "answer": "많더라고요",
+     "hint": "직접 본 걸 회상하며 전달"
+    }
+   ]
+  },
+  {
+   "id": "g04_deorago",
+   "tier": "core",
+   "title": "-더라고요",
+   "title_en": "I Found That... / I Noticed That...",
+   "emoji": "💬",
+   "pattern": "동사/형용사 어간(또는 과거형) + -더라고요 (해요체) · -더라고 (반말)",
+   "scene_example": {
+    "korean": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+    "english": "Hyung, the trail we used to take got a lot shorter, I noticed.",
+    "highlight": "짧아졌더라고"
+   },
+   "explanation_en": "Use -더라고요 to share something you personally discovered or realized in the past — like giving a little firsthand report. It's more vivid and personal than just stating a fact: it says 'I was there, I noticed it myself.'",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "해요체 vs 반말",
+     "content": "-더라고요 (존댓말) · -더라고 (반말)",
+     "note": "태오는 형(라온)에게 반말로 -더라고"
+    },
+    {
+     "type": "green",
+     "label": "과거형과 자주 결합",
+     "content": "짧아졌더라고(요), 많았더라고(요), 예뻤더라고(요)",
+     "note": "이미 일어난 일을 회상하는 문법이라 과거형과 잘 어울려요"
+    },
+    {
+     "type": "amber",
+     "label": "질문이 아니라 정보 공유",
+     "content": "'그거 알아?' 하듯 자기가 겪은 걸 상대에게 알려주는 말투",
+     "note": "궁금해서 묻는 게 아니라 전달하는 거예요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+       "en": "Hyung, I noticed the trail we used to take got a lot shorter."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "거기 줄이 진짜 길더라고요.",
+       "en": "I found the line there was really long."
       },
       {
-        "situation_ko": "태오 → 라온 (형, 반말)",
-        "situation_en": "Taeo → Raon (older brother, casual)",
-        "banmal": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
-        "jondaemal": "(반말 그대로 — 형제 사이엔 존댓말 안 씀)",
-        "note": "형제자매끼리는 나이 차이가 있어도 반말이 자연스러워요"
+       "ko": "어제 보니까 눈이 많이 왔더라고요.",
+       "en": "I saw yesterday that it had snowed a lot."
       }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "오랜만에 만났는데 하나도 안 ___. (변하다, 반말)",
+     "answer": "변했더라고",
+     "hint": "과거 + 더라고 (반말)"
+    }
+   ]
+  },
+  {
+   "id": "g04_deon_n",
+   "tier": "core",
+   "title": "-던 N",
+   "title_en": "N That Used To Be / N I Recall Being",
+   "emoji": "🖼️",
+   "pattern": "동사/형용사 어간(또는 과거형) + -던 + 명사 (받침 유무 상관없이 형태 동일)",
+   "scene_example": {
+    "korean": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
+    "english": "Grandma, is this the stream we came to together before?",
+    "highlight": "왔던 그 개천"
+   },
+   "explanation_en": "-던 N modifies a noun with the sense of 'the N that I recall/used to be' — describing something from personal past memory, often implying it may have changed since then. This differs from the plain past adnominal -(으)ㄴ, which just states a completed fact without that nostalgic 'looking back' feeling.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형태 변화 없음",
+     "content": "오다→왔던, 다니다→다니던, 귀엽다→귀여웠던",
+     "note": "받침 유무 상관없이 어간(또는 과거형) + 던"
+    },
+    {
+     "type": "green",
+     "label": "-(으)ㄴ N과 차이",
+     "content": "-(으)ㄴ N = 그냥 과거 사실\n-던 N = 예전 기억을 떠올리며, 지금은 다를 수도 있음",
+     "note": "회상의 느낌은 -던 N에만 있어요"
+    },
+    {
+     "type": "amber",
+     "label": "이 에피소드에 4번 등장",
+     "content": "왔던(1번), 다니던(4번), 왔던게(5번), 귀여웠던(9번)",
+     "note": "그만큼 자주 쓰이는 핵심 패턴이에요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
+       "en": "Grandma, is this the stream we came to together before?"
+      },
+      {
+       "ko": "귀여웠던 꼬맹이들이 이제 어른이 되어 버렸어.",
+       "en": "The kids who used to be so cute have now become adults."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "내가 다니던 학교가 없어졌어요.",
+       "en": "The school I used to attend is gone now."
+      },
+      {
+       "ko": "어렸을 때 좋아했던 노래예요.",
+       "en": "It's a song I used to like when I was young."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "예전에 자주 ___ 식당이 문을 닫았어요. (가다)",
+     "answer": "가던",
+     "hint": "어간 + 던 (받침 상관없이)"
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "-던 N vs -(으)ㄴ N — 두 가지 '과거 수식'",
+   "title_en": "Two Ways to Modify a Noun with the Past",
+   "explanation_en": "-(으)ㄴ N states a simple completed past fact about the noun. -던 N adds a layer of personal recollection — 'I remember this being that way,' often with a hint that things may be different now. Comparing 갔던 곳 (the place I recall going/used to go) vs 간 곳 (the place I went) shows the difference in nuance.",
+   "examples": [
+    {
+     "ko": "지난주에 간 식당이에요.",
+     "en": "It's the restaurant I went to last week. (simple fact)"
+    },
+    {
+     "ko": "어릴 때 자주 갔던 식당이에요.",
+     "en": "It's the restaurant I used to go to often as a kid. (nostalgic recollection)"
+    }
+   ]
+  },
+  {
+   "title": "🚶 오랜만에 가 본 곳에서 쓰는 표현 (대본 외)",
+   "title_en": "Phrases for Revisiting a Place After a Long Time (Beyond the Script)",
+   "explanation_en": "A few more natural phrases for the exact feeling this episode is about — going back somewhere after years away.",
+   "examples": [
+    {
+     "ko": "여기 진짜 오랜만이다.",
+     "en": "It's been so long since I've been here."
+    },
+    {
+     "ko": "하나도 안 변했네!",
+     "en": "It hasn't changed at all!"
+    },
+    {
+     "ko": "추억이 새록새록 떠올라요.",
+     "en": "Memories keep coming back to me."
+    },
+    {
+     "ko": "여기 오니까 옛날 생각 난다.",
+     "en": "Being here makes me think of the old days."
+    }
+   ]
+  }
+ ],
+ "pronunciation": [
+  {
+   "id": "pron_ep04_l4_01",
+   "title": "받침 ㅂ + 모음 → 연음화",
+   "rule": "받침 ㅂ 뒤에 모음으로 시작하는 말이 오면 받침 소리가 다음 음절로 넘어가요 · A batchim ㅂ links over to the next syllable when followed by a vowel.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
     ],
-    "tip": "형제자매는 나이 차이가 있어도 서로 반말을 쓰는 게 자연스러워요 — 부모님이나 조부모님께 쓰는 존댓말과는 다른 규칙이에요 · Korean siblings speak casually to each other regardless of age gap — a different rule from the polite speech used with parents and grandparents."
+    "rows": [
+     [
+      "좁아졌어요",
+      "[조바져써요]",
+      "받침 ㅂ + 아 → 연음"
+     ]
+    ]
+   }
   },
-  "real_life": [
-    {
-      "type": "kakao",
-      "title": "라온이 친구한테 카톡을 보내요",
-      "subtitle": "Raon texts a friend about revisiting the stream",
-      "messages": [
-        { "sender": "라온", "text": "오늘 할머니랑 어릴 때 놀던 개천 다시 가봤어", "side": "right" },
-        { "sender": "친구", "text": "오 어땠어?", "side": "left" },
-        { "sender": "라온", "text": "완전 좁아 보이더라고 ㅋㅋ 우리가 커서 그런가봐", "side": "right" },
-        { "sender": "친구", "text": "추억 돋았겠다", "side": "left" },
-        { "sender": "라온", "text": "할머니가 우리 다 컸다고 좋아하시더라", "side": "right" }
-      ]
-    },
-    {
-      "type": "reading",
-      "title": "어릴 때 놀던 곳이 작아 보이는 이유",
-      "subtitle": "Why childhood places look smaller now",
-      "passage": "어른이 되어서 어릴 때 놀던 곳에 다시 가 보면 신기하게도 다 작아 보인다. 사실 그 장소가 변한 게 아니라 우리 몸이 커진 것이다. 어릴 때는 개천이나 산책길이 아주 넓게 느껴졌지만, 몸이 자라면서 같은 공간이 좁게 느껴지는 것이다. 이런 경험은 우리가 얼마나 많이 컸는지 깨닫게 해 준다.",
-      "passage_en": "When adults go back to places they used to play as children, it's surprising how small everything looks. Actually, the place hasn't changed — our bodies have grown. As kids, a stream or a walking trail felt very wide, but as our bodies grow, the same space starts to feel narrow. This experience helps us realize just how much we've grown.",
-      "questions": [
-        { "question_ko": "어릴 때 놀던 곳이 좁아 보이는 진짜 이유는?", "question_en": "What is the real reason childhood places look narrower now?", "options": ["장소가 좁아져서", "우리 몸이 커져서", "기억이 잘못돼서"], "answer": 1 },
-        { "question_ko": "이 글에 따르면 이런 경험은 우리에게 무엇을 깨닫게 해줘요?", "question_en": "According to the passage, what does this experience help us realize?", "options": ["장소가 변한 것", "우리가 얼마나 컸는지", "친구가 그리운 것"], "answer": 1 }
-      ]
-    }
+  {
+   "id": "pron_ep04_l4_02",
+   "title": "겹받침 ㄼ + 모음 → ㄹ+ㅂ 분리 연음",
+   "rule": "겹받침 ㄼ(짧다) 뒤에 모음이 오면 ㄹ은 남고 ㅂ이 다음 음절로 넘어가요 · With the double batchim ㄼ, the ㄹ stays while the ㅂ links to the next syllable.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "짧아졌더라고",
+      "[짤바졌더라고]",
+      "ㄼ + 아 → ㄹ + 바 (분리 연음)"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep04_l4_03",
+   "title": "겹받침 ㄶ + 모음 → ㅎ 탈락",
+   "rule": "겹받침 ㄶ(많다) 뒤에 모음이 오면 ㅎ이 사라지고 ㄴ만 연음돼요 · With the double batchim ㄶ, the ㅎ disappears and only the ㄴ links over.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "많았었는데",
+      "[마나썯는데]",
+      "ㄶ + 았 → ㄴ + 아 (ㅎ 탈락)"
+     ]
+    ]
+   }
+  }
+ ],
+ "banmal_jondaemal": {
+  "intro_ko": "손주들은 할머니께 항상 존댓말을 쓰고, 할머니는 손주들에게 편하게 반말을 써요. 동생 태오는 형 라온에게도 반말을 쓰는데, 이건 한국에서 형제자매 사이에 흔한 자연스러운 반말이에요 — 부모님/조부모님께 쓰는 존댓말과는 별개의 규칙이에요.",
+  "intro_en": "The grandkids always speak politely to grandma, while grandma speaks casually to them. Taeo (the younger brother) also speaks casually to Raon (형, his older brother) — completely normal among Korean siblings, and a separate rule from the polite speech kids use with parents and grandparents.",
+  "rows": [
+   {
+    "situation_ko": "라온 → 할머니 (항상 존댓말)",
+    "situation_en": "Raon → Grandma (always polite)",
+    "banmal": "(반말 안 씀)",
+    "jondaemal": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
+    "note": "손주는 할머니께 항상 존댓말을 써요"
+   },
+   {
+    "situation_ko": "할머니 → 라온/태오 (반말)",
+    "situation_en": "Grandma → Raon/Taeo (casual)",
+    "banmal": "얘들아 엄마랑 왔던게 몇년 전이지?",
+    "jondaemal": "(존댓말 안 씀)",
+    "note": "어른이 아이에게는 반말이 기본이에요"
+   },
+   {
+    "situation_ko": "태오 → 라온 (형, 반말)",
+    "situation_en": "Taeo → Raon (older brother, casual)",
+    "banmal": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+    "jondaemal": "(반말 그대로 — 형제 사이엔 존댓말 안 씀)",
+    "note": "형제자매끼리는 나이 차이가 있어도 반말이 자연스러워요"
+   }
   ],
-  "quiz": [
+  "tip": "형제자매는 나이 차이가 있어도 서로 반말을 쓰는 게 자연스러워요 — 부모님이나 조부모님께 쓰는 존댓말과는 다른 규칙이에요 · Korean siblings speak casually to each other regardless of age gap — a different rule from the polite speech used with parents and grandparents."
+ },
+ "real_life": [
+  {
+   "type": "kakao",
+   "title": "라온이 친구한테 카톡을 보내요",
+   "subtitle": "Raon texts a friend about revisiting the stream",
+   "messages": [
     {
-      "id": "q04l4_1",
-      "audio_text": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
-      "question_ko": "왔던 그 개천은 무슨 뜻이에요?",
-      "question_en": "What does 왔던 그 개천 mean?",
-      "options": ["예전에 같이 왔던 기억이 있는 그 개천", "지금 처음 오는 개천", "앞으로 갈 개천", "이름을 모르는 개천"],
-      "answer": 0,
-      "explanation": "-던 N은 예전 기억을 떠올리며 명사를 꾸며요 — '그때 왔던 바로 그곳'이라는 뜻이에요."
+     "sender": "라온",
+     "text": "오늘 할머니랑 어릴 때 놀던 개천 다시 가봤어",
+     "side": "right"
     },
     {
-      "id": "q04l4_2",
-      "audio_text": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
-      "question_ko": "짧아졌더라고에 담긴 뉘앙스로 가장 알맞은 것은?",
-      "question_en": "What nuance does 짧아졌더라고 carry?",
-      "options": ["직접 겪어보고 알게 된 사실을 전달", "남에게 들은 이야기를 전달", "미래에 대한 추측", "단순한 명령"],
-      "answer": 0,
-      "explanation": "-더라고(요)는 화자가 직접 경험/목격하고 알게 된 사실을 전달할 때 써요."
+     "sender": "친구",
+     "text": "오 어땠어?",
+     "side": "left"
     },
     {
-      "id": "q04l4_3",
-      "question_ko": "태오가 형에게 '-더라고요' 대신 '-더라고'라고 말한 이유는?",
-      "question_en": "Why does Taeo say '-더라고' instead of '-더라고요' to his older brother?",
-      "options": ["형제 사이엔 반말이 자연스러워서", "실수로 존댓말을 빼먹어서", "화가 나서", "문법이 틀려서"],
-      "answer": 0,
-      "explanation": "한국에서 형제자매는 나이 차이가 있어도 서로 반말을 쓰는 게 자연스러워요."
+     "sender": "라온",
+     "text": "완전 좁아 보이더라고 ㅋㅋ 우리가 커서 그런가봐",
+     "side": "right"
     },
     {
-      "id": "q04l4_4",
-      "audio_text": "귀여웠던 꼬맹이들이 이제 어른이 되어 버렸어.",
-      "question_ko": "귀여웠던 꼬맹이들이 뜻하는 것은?",
-      "question_en": "What does 귀여웠던 꼬맹이들 refer to?",
-      "options": ["예전에 귀여웠던(지금은 다 큰) 아이들", "지금도 귀여운 아이들", "귀엽지 않은 아이들", "처음 보는 아이들"],
-      "answer": 0,
-      "explanation": "형용사+던도 '예전엔 그랬던(지금은 다를 수도 있는)' 회상을 나타내요."
+     "sender": "친구",
+     "text": "추억 돋았겠다",
+     "side": "left"
     },
     {
-      "id": "q04l4_5",
-      "question_ko": "다음 중 -던 N과 -(으)ㄴ N의 차이를 가장 잘 설명한 것은?",
-      "question_en": "Which best explains the difference between -던 N and -(으)ㄴ N?",
-      "options": ["-던 N은 회상의 느낌이 있고, -(으)ㄴ N은 단순한 과거 사실만 말함", "둘은 완전히 똑같다", "-던 N은 미래를 말할 때만 쓴다", "-(으)ㄴ N이 더 옛날 표현이다"],
-      "answer": 0,
-      "explanation": "-던 N은 예전 기억을 떠올리는 느낌이 있고, -(으)ㄴ N은 그냥 과거에 있었던 사실을 말해요."
-    },
-    {
-      "id": "q04l4_6",
-      "question_ko": "덩치가 커진 것도 생각해야지에서 덩치는 무슨 뜻이에요?",
-      "question_en": "What does 덩치 mean in 덩치가 커진 것도 생각해야지?",
-      "options": ["몸의 크기/체격", "성격", "나이", "키만 (身長만)"],
-      "answer": 0,
-      "explanation": "덩치는 몸 전체의 크기나 체격을 가리키는 말이에요."
+     "sender": "라온",
+     "text": "할머니가 우리 다 컸다고 좋아하시더라",
+     "side": "right"
     }
-  ],
-  "self_check": [
-    { "ko": "-더-가 직접 경험/목격한 과거를 회상하는 표현의 기본이라는 걸 알아요.", "en": "I know -더- is the base marker for recalling something I personally witnessed in the past." },
-    { "ko": "-더라고요(반말 -더라고)로 직접 알게 된 것을 자연스럽게 전달할 수 있어요.", "en": "I can naturally share something I personally discovered using -더라고요 (or -더라고 in casual speech)." },
-    { "ko": "-던 N으로 예전 기억을 떠올리며 명사를 꾸밀 수 있어요.", "en": "I can modify a noun with a sense of personal recollection using -던 N." },
-    { "ko": "-던 N과 -(으)ㄴ N의 뉘앙스 차이를 구별할 수 있어요.", "en": "I can distinguish the nuance difference between -던 N and -(으)ㄴ N." },
-    { "ko": "한국 형제자매 사이에서는 나이 차이가 있어도 반말을 쓴다는 걸 이해해요.", "en": "I understand that Korean siblings speak casually to each other regardless of age gap." }
-  ]
+   ]
+  },
+  {
+   "type": "reading",
+   "title": "어릴 때 놀던 곳이 작아 보이는 이유",
+   "subtitle": "Why childhood places look smaller now",
+   "passage": "어른이 되어서 어릴 때 놀던 곳에 다시 가 보면 신기하게도 다 작아 보인다. 사실 그 장소가 변한 게 아니라 우리 몸이 커진 것이다. 어릴 때는 개천이나 산책길이 아주 넓게 느껴졌지만, 몸이 자라면서 같은 공간이 좁게 느껴지는 것이다. 이런 경험은 우리가 얼마나 많이 컸는지 깨닫게 해 준다.",
+   "passage_en": "When adults go back to places they used to play as children, it's surprising how small everything looks. Actually, the place hasn't changed — our bodies have grown. As kids, a stream or a walking trail felt very wide, but as our bodies grow, the same space starts to feel narrow. This experience helps us realize just how much we've grown.",
+   "questions": [
+    {
+     "question_ko": "어릴 때 놀던 곳이 좁아 보이는 진짜 이유는?",
+     "question_en": "What is the real reason childhood places look narrower now?",
+     "options": [
+      "장소가 좁아져서",
+      "우리 몸이 커져서",
+      "기억이 잘못돼서"
+     ],
+     "answer": 1
+    },
+    {
+     "question_ko": "이 글에 따르면 이런 경험은 우리에게 무엇을 깨닫게 해줘요?",
+     "question_en": "According to the passage, what does this experience help us realize?",
+     "options": [
+      "장소가 변한 것",
+      "우리가 얼마나 컸는지",
+      "친구가 그리운 것"
+     ],
+     "answer": 1
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q04l4_1",
+   "audio_text": "할머니 여기가 전에 같이 왔던 그 개천이에요?",
+   "question_ko": "왔던 그 개천은 무슨 뜻이에요?",
+   "question_en": "What does 왔던 그 개천 mean?",
+   "options": [
+    "예전에 같이 왔던 기억이 있는 그 개천",
+    "지금 처음 오는 개천",
+    "앞으로 갈 개천",
+    "이름을 모르는 개천"
+   ],
+   "answer": 0,
+   "explanation": "-던 N은 예전 기억을 떠올리며 명사를 꾸며요 — '그때 왔던 바로 그곳'이라는 뜻이에요."
+  },
+  {
+   "id": "q04l4_2",
+   "audio_text": "형, 우리가 다니던 산책길도 훨씬 짧아졌더라고.",
+   "question_ko": "짧아졌더라고에 담긴 뉘앙스로 가장 알맞은 것은?",
+   "question_en": "What nuance does 짧아졌더라고 carry?",
+   "options": [
+    "직접 겪어보고 알게 된 사실을 전달",
+    "남에게 들은 이야기를 전달",
+    "미래에 대한 추측",
+    "단순한 명령"
+   ],
+   "answer": 0,
+   "explanation": "-더라고(요)는 화자가 직접 경험/목격하고 알게 된 사실을 전달할 때 써요."
+  },
+  {
+   "id": "q04l4_3",
+   "question_ko": "태오가 형에게 '-더라고요' 대신 '-더라고'라고 말한 이유는?",
+   "question_en": "Why does Taeo say '-더라고' instead of '-더라고요' to his older brother?",
+   "options": [
+    "형제 사이엔 반말이 자연스러워서",
+    "실수로 존댓말을 빼먹어서",
+    "화가 나서",
+    "문법이 틀려서"
+   ],
+   "answer": 0,
+   "explanation": "한국에서 형제자매는 나이 차이가 있어도 서로 반말을 쓰는 게 자연스러워요."
+  },
+  {
+   "id": "q04l4_4",
+   "audio_text": "귀여웠던 꼬맹이들이 이제 어른이 되어 버렸어.",
+   "question_ko": "귀여웠던 꼬맹이들이 뜻하는 것은?",
+   "question_en": "What does 귀여웠던 꼬맹이들 refer to?",
+   "options": [
+    "예전에 귀여웠던(지금은 다 큰) 아이들",
+    "지금도 귀여운 아이들",
+    "귀엽지 않은 아이들",
+    "처음 보는 아이들"
+   ],
+   "answer": 0,
+   "explanation": "형용사+던도 '예전엔 그랬던(지금은 다를 수도 있는)' 회상을 나타내요."
+  },
+  {
+   "id": "q04l4_5",
+   "question_ko": "다음 중 -던 N과 -(으)ㄴ N의 차이를 가장 잘 설명한 것은?",
+   "question_en": "Which best explains the difference between -던 N and -(으)ㄴ N?",
+   "options": [
+    "-던 N은 회상의 느낌이 있고, -(으)ㄴ N은 단순한 과거 사실만 말함",
+    "둘은 완전히 똑같다",
+    "-던 N은 미래를 말할 때만 쓴다",
+    "-(으)ㄴ N이 더 옛날 표현이다"
+   ],
+   "answer": 0,
+   "explanation": "-던 N은 예전 기억을 떠올리는 느낌이 있고, -(으)ㄴ N은 그냥 과거에 있었던 사실을 말해요."
+  },
+  {
+   "id": "q04l4_6",
+   "question_ko": "덩치가 커진 것도 생각해야지에서 덩치는 무슨 뜻이에요?",
+   "question_en": "What does 덩치 mean in 덩치가 커진 것도 생각해야지?",
+   "options": [
+    "몸의 크기/체격",
+    "성격",
+    "나이",
+    "키만 (身長만)"
+   ],
+   "answer": 0,
+   "explanation": "덩치는 몸 전체의 크기나 체격을 가리키는 말이에요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "-더-가 직접 경험/목격한 과거를 회상하는 표현의 기본이라는 걸 알아요.",
+   "en": "I know -더- is the base marker for recalling something I personally witnessed in the past."
+  },
+  {
+   "ko": "-더라고요(반말 -더라고)로 직접 알게 된 것을 자연스럽게 전달할 수 있어요.",
+   "en": "I can naturally share something I personally discovered using -더라고요 (or -더라고 in casual speech)."
+  },
+  {
+   "ko": "-던 N으로 예전 기억을 떠올리며 명사를 꾸밀 수 있어요.",
+   "en": "I can modify a noun with a sense of personal recollection using -던 N."
+  },
+  {
+   "ko": "-던 N과 -(으)ㄴ N의 뉘앙스 차이를 구별할 수 있어요.",
+   "en": "I can distinguish the nuance difference between -던 N and -(으)ㄴ N."
+  },
+  {
+   "ko": "한국 형제자매 사이에서는 나이 차이가 있어도 반말을 쓴다는 걸 이해해요.",
+   "en": "I understand that Korean siblings speak casually to each other regardless of age gap."
+  }
+ ]
 }

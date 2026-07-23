@@ -1,519 +1,736 @@
 {
-  "id": "ep01",
-  "level": "L4",
-  "title": "계십니까?",
-  "title_en": "Is Anybody Home?",
-  "scene": "🚪 할머니댁 대문 · Grandma's House — Front Gate",
-  "goal": {
-    "ko": "격식 있는 상황에서 -(으)ㅂ니다/습니다체로 말할 수 있어요",
-    "en": "I can speak using the formal -(으)ㅂ니다/습니다 style in official situations"
+ "id": "ep01",
+ "level": "L4",
+ "title": "계십니까?",
+ "title_en": "Is Anybody Home?",
+ "scene": "🏢 공공·격식 · Formal & Public",
+ "goal": {
+  "ko": "격식 있는 상황에서 -(으)ㅂ니다/습니다체로 말할 수 있어요",
+  "en": "I can speak using the formal -(으)ㅂ니다/습니다 style in official situations"
+ },
+ "key_points": [
+  "-(으)ㅂ니다/습니다체 — 가장 격식 있는 존댓말",
+  "-(으)십니까? — 격식체 의문형",
+  "계시다 — 있다의 높임말",
+  "해요체 ↔ 습니다체 — 상황에 따라 자연스럽게 바뀌는 말투"
+ ],
+ "characters": [
+  {
+   "id": "postal_worker",
+   "name": "우체국 직원",
+   "name_en": "Postal Worker",
+   "emoji": "📮",
+   "color": "var(--blue)"
   },
-  "key_points": [
-    "-(으)ㅂ니다/습니다체 — 가장 격식 있는 존댓말",
-    "-(으)십니까? — 격식체 의문형",
-    "계시다 — 있다의 높임말",
-    "해요체 ↔ 습니다체 — 상황에 따라 자연스럽게 바뀌는 말투"
-  ],
-  "characters": [
+  {
+   "id": "grandma",
+   "name": "할머니",
+   "name_en": "Grandma",
+   "emoji": "👵",
+   "color": "var(--coral)"
+  }
+ ],
+ "slides": [
+  "data/nhs/L4/slides/ep01/계십니까1.png",
+  "data/nhs/L4/slides/ep01/계십니까2.png",
+  "data/nhs/L4/slides/ep01/계십니까3.png",
+  "data/nhs/L4/slides/ep01/계십니까4.png",
+  "data/nhs/L4/slides/ep01/계십니까5.png",
+  "data/nhs/L4/slides/ep01/계십니까6.png",
+  "data/nhs/L4/slides/ep01/계십니까7.png",
+  "data/nhs/L4/slides/ep01/계십니까8.png",
+  "data/nhs/L4/slides/ep01/계십니까9.png",
+  "data/nhs/L4/slides/ep01/계십니까10.png",
+  "data/nhs/L4/slides/ep01/계십니까11.png",
+  "data/nhs/L4/slides/ep01/계십니까12.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "postal_worker",
+   "text": "계십니까?",
+   "en": "Hello? Is anybody home?",
+   "slide": 0,
+   "audio": "data/nhs/L4/TTS/ep01/audio_0_계십니까_.mp3",
+   "highlight": "계십니까",
+   "annotation": {
+    "highlight": "계십니까",
+    "grammar": "계시다 + -(으)십니까?",
+    "note": "계시다 = 있다의 높임말 (honorific 'to be present')\n계십니까? = 격식체 의문형 · a very formal way to ask 'is anyone there?'"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "누구세요?",
+   "en": "Who is it?",
+   "slide": 1,
+   "audio": "data/nhs/L4/TTS/ep01/audio_1_누구세요_.mp3"
+  },
+  {
+   "speaker": "postal_worker",
+   "text": "우체국에서 나왔습니다.",
+   "en": "I'm here from the post office.",
+   "slide": 2,
+   "audio": "data/nhs/L4/TTS/ep01/audio_2_우체국에서_나왔습니다_.mp3",
+   "highlight": "나왔습니다",
+   "annotation": {
+    "highlight": "나왔습니다",
+    "grammar": "-았/었습니다 (과거 + 습니다체)",
+    "note": "나오다 → 나왔다 → 나왔습니다\n과거형(-았/었) 뒤에는 항상 받침(ㅆ)이 생기니까 무조건 -습니다예요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "무슨 일이신데요?",
+   "en": "What is this regarding?",
+   "slide": 3,
+   "audio": "data/nhs/L4/TTS/ep01/audio_3_무슨_일이신데요_.mp3"
+  },
+  {
+   "speaker": "postal_worker",
+   "text": "신한글님 맞으십니까?",
+   "en": "Are you Ms. Shin Hangeul?",
+   "slide": 4,
+   "audio": "data/nhs/L4/TTS/ep01/audio_4_신한글님_맞으십니까_.mp3",
+   "highlight": "맞으십니까",
+   "annotation": {
+    "highlight": "맞으십니까",
+    "grammar": "-(으)십니까? (격식체 의문형)",
+    "note": "맞다(받침 있음) → 맞으십니까?\n낯선 사람의 신원을 정중하게 확인할 때 쓰는 표현이에요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "네 그런데요?",
+   "en": "Yes, that's right — why do you ask?",
+   "slide": 5,
+   "audio": "data/nhs/L4/TTS/ep01/audio_5_네_그런데요_.mp3"
+  },
+  {
+   "speaker": "postal_worker",
+   "text": "등기 우편이 왔습니다. 수령 확인이 필요합니다.",
+   "en": "A registered letter has arrived. I need confirmation of receipt.",
+   "slide": 6,
+   "audio": "data/nhs/L4/TTS/ep01/audio_6_등기_우편이_왔습니다__수령_확인이_필요합니다_.mp3",
+   "highlight": "필요합니다",
+   "annotation": {
+    "highlight": "필요합니다",
+    "grammar": "-ㅂ니다 (받침 없는 어간)",
+    "note": "필요하다 → 필요합니다\n어간(필요하)에 받침이 없으면 ㅂ이 새 받침이 되어 '합니다'가 돼요"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "누구한테서 온 거예요?",
+   "en": "Who's it from?",
+   "slide": 7,
+   "audio": "data/nhs/L4/TTS/ep01/audio_7_누구한테서_온_거예요_.mp3"
+  },
+  {
+   "speaker": "postal_worker",
+   "text": "HQ은행에서 왔네요. 신용카드인 것 같습니다.",
+   "en": "It's from HQ Bank. It looks like a credit card.",
+   "slide": 8,
+   "audio": "data/nhs/L4/TTS/ep01/audio_8_HQ은행에서_왔네요__신용카드인_것_같습니다_.mp3"
+  },
+  {
+   "speaker": "grandma",
+   "text": "아. 그렇군요. 어디에 사인하면 되나요?",
+   "en": "Oh, I see. Where should I sign?",
+   "slide": 9,
+   "audio": "data/nhs/L4/TTS/ep01/audio_9_아__그렇군요__어디에_사인하면_되나요_.mp3"
+  },
+  {
+   "speaker": "postal_worker",
+   "text": "여기 해 주시면 됩니다.",
+   "en": "Right here, please.",
+   "slide": 10,
+   "audio": "data/nhs/L4/TTS/ep01/audio_10_여기_해_주시면_됩니다_.mp3",
+   "highlight": "됩니다",
+   "annotation": {
+    "highlight": "됩니다",
+    "grammar": "-ㅂ니다 (받침 없는 어간)",
+    "note": "되다 → 됩니다 (받침 없는 어간 + ㅂ니다)"
+   }
+  },
+  {
+   "speaker": "grandma",
+   "text": "알겠습니다.",
+   "en": "Understood.",
+   "slide": 11,
+   "audio": "data/nhs/L4/TTS/ep01/audio_11_알겠습니다_.mp3",
+   "highlight": "알겠습니다",
+   "annotation": {
+    "highlight": "알겠습니다",
+    "grammar": "격식 vs 비격식 전환",
+    "note": "할머니는 계속 해요체(그런데요, 되나요)로 말하다가, 마지막 확인 순간에만 '알겠습니다'로 격식을 갖춰요.\n해요체와 습니다체는 둘 다 존댓말 — 상황에 따라 자연스럽게 섞여요"
+   }
+  }
+ ],
+ "vocab": [
+  {
+   "category": "📮 격식 상황 어휘 Formal Situation Vocab",
+   "items": [
     {
-      "id": "postal_worker",
-      "name": "우체국 직원",
-      "name_en": "Postal Worker",
-      "emoji": "📮",
-      "color": "var(--blue)"
+     "korean": "있다 / 계시다",
+     "romanization": "it-da / gye-si-da",
+     "english": "to be/exist / honorific: to be present",
+     "emoji": "🙋"
     },
     {
-      "id": "grandma",
-      "name": "할머니",
-      "name_en": "Grandma",
-      "emoji": "👵",
-      "color": "var(--coral)"
+     "korean": "우체국",
+     "romanization": "u-che-guk",
+     "english": "post office",
+     "emoji": "🏤"
+    },
+    {
+     "korean": "등기 우편",
+     "romanization": "deung-gi u-pyeon",
+     "english": "registered mail",
+     "emoji": "✉️"
+    },
+    {
+     "korean": "수령 확인",
+     "romanization": "su-ryeong hwa-gin",
+     "english": "confirmation of receipt",
+     "emoji": "✅"
+    },
+    {
+     "korean": "신용카드",
+     "romanization": "sin-yong-ka-deu",
+     "english": "credit card",
+     "emoji": "💳"
     }
-  ],
-  "slides": [
-    "data/nhs/L4/slides/ep01/계십니까1.png",
-    "data/nhs/L4/slides/ep01/계십니까2.png",
-    "data/nhs/L4/slides/ep01/계십니까3.png",
-    "data/nhs/L4/slides/ep01/계십니까4.png",
-    "data/nhs/L4/slides/ep01/계십니까5.png",
-    "data/nhs/L4/slides/ep01/계십니까6.png",
-    "data/nhs/L4/slides/ep01/계십니까7.png",
-    "data/nhs/L4/slides/ep01/계십니까8.png",
-    "data/nhs/L4/slides/ep01/계십니까9.png",
-    "data/nhs/L4/slides/ep01/계십니까10.png",
-    "data/nhs/L4/slides/ep01/계십니까11.png",
-    "data/nhs/L4/slides/ep01/계십니까12.png"
-  ],
-  "video": null,
-  "script": [
+   ]
+  },
+  {
+   "category": "📦 우체국·관공서 실전 어휘 (대본 외)",
+   "items": [
     {
-      "speaker": "postal_worker",
-      "text": "계십니까?",
-      "en": "Hello? Is anybody home?",
-      "slide": 0,
-      "audio": "data/nhs/L4/TTS/ep01/audio_0_계십니까_.mp3",
-      "highlight": "계십니까",
-      "annotation": {
-        "highlight": "계십니까",
-        "grammar": "계시다 + -(으)십니까?",
-        "note": "계시다 = 있다의 높임말 (honorific 'to be present')\n계십니까? = 격식체 의문형 · a very formal way to ask 'is anyone there?'"
-      }
+     "korean": "소포",
+     "romanization": "so-po",
+     "english": "parcel, package",
+     "emoji": "📦"
     },
     {
-      "speaker": "grandma",
-      "text": "누구세요?",
-      "en": "Who is it?",
-      "slide": 1,
-      "audio": "data/nhs/L4/TTS/ep01/audio_1_누구세요_.mp3"
+     "korean": "택배",
+     "romanization": "taek-bae",
+     "english": "courier delivery (door-to-door parcel service)",
+     "emoji": "🚚"
     },
     {
-      "speaker": "postal_worker",
-      "text": "우체국에서 나왔습니다.",
-      "en": "I'm here from the post office.",
-      "slide": 2,
-      "audio": "data/nhs/L4/TTS/ep01/audio_2_우체국에서_나왔습니다_.mp3",
-      "highlight": "나왔습니다",
-      "annotation": {
-        "highlight": "나왔습니다",
-        "grammar": "-았/었습니다 (과거 + 습니다체)",
-        "note": "나오다 → 나왔다 → 나왔습니다\n과거형(-았/었) 뒤에는 항상 받침(ㅆ)이 생기니까 무조건 -습니다예요"
-      }
+     "korean": "우표",
+     "romanization": "u-pyo",
+     "english": "stamp",
+     "emoji": "🎫"
     },
     {
-      "speaker": "grandma",
-      "text": "무슨 일이신데요?",
-      "en": "What is this regarding?",
-      "slide": 3,
-      "audio": "data/nhs/L4/TTS/ep01/audio_3_무슨_일이신데요_.mp3"
+     "korean": "우체통",
+     "romanization": "u-che-tong",
+     "english": "mailbox, postbox",
+     "emoji": "📮"
     },
     {
-      "speaker": "postal_worker",
-      "text": "신한글님 맞으십니까?",
-      "en": "Are you Ms. Shin Hangeul?",
-      "slide": 4,
-      "audio": "data/nhs/L4/TTS/ep01/audio_4_신한글님_맞으십니까_.mp3",
-      "highlight": "맞으십니까",
-      "annotation": {
-        "highlight": "맞으십니까",
-        "grammar": "-(으)십니까? (격식체 의문형)",
-        "note": "맞다(받침 있음) → 맞으십니까?\n낯선 사람의 신원을 정중하게 확인할 때 쓰는 표현이에요"
-      }
+     "korean": "발신인 / 수신인",
+     "romanization": "bal-sin-in / su-sin-in",
+     "english": "sender / recipient",
+     "emoji": "🔄"
     },
     {
-      "speaker": "grandma",
-      "text": "네 그런데요?",
-      "en": "Yes, that's right — why do you ask?",
-      "slide": 5,
-      "audio": "data/nhs/L4/TTS/ep01/audio_5_네_그런데요_.mp3"
+     "korean": "반송",
+     "romanization": "ban-song",
+     "english": "return to sender",
+     "emoji": "↩️"
     },
     {
-      "speaker": "postal_worker",
-      "text": "등기 우편이 왔습니다. 수령 확인이 필요합니다.",
-      "en": "A registered letter has arrived. I need confirmation of receipt.",
-      "slide": 6,
-      "audio": "data/nhs/L4/TTS/ep01/audio_6_등기_우편이_왔습니다__수령_확인이_필요합니다_.mp3",
-      "highlight": "필요합니다",
-      "annotation": {
-        "highlight": "필요합니다",
-        "grammar": "-ㅂ니다 (받침 없는 어간)",
-        "note": "필요하다 → 필요합니다\n어간(필요하)에 받침이 없으면 ㅂ이 새 받침이 되어 '합니다'가 돼요"
-      }
+     "korean": "신분증",
+     "romanization": "sin-bun-jeung",
+     "english": "ID card",
+     "emoji": "🪪"
     },
     {
-      "speaker": "grandma",
-      "text": "누구한테서 온 거예요?",
-      "en": "Who's it from?",
-      "slide": 7,
-      "audio": "data/nhs/L4/TTS/ep01/audio_7_누구한테서_온_거예요_.mp3"
-    },
-    {
-      "speaker": "postal_worker",
-      "text": "HQ은행에서 왔네요. 신용카드인 것 같습니다.",
-      "en": "It's from HQ Bank. It looks like a credit card.",
-      "slide": 8,
-      "audio": "data/nhs/L4/TTS/ep01/audio_8_HQ은행에서_왔네요__신용카드인_것_같습니다_.mp3"
-    },
-    {
-      "speaker": "grandma",
-      "text": "아. 그렇군요. 어디에 사인하면 되나요?",
-      "en": "Oh, I see. Where should I sign?",
-      "slide": 9,
-      "audio": "data/nhs/L4/TTS/ep01/audio_9_아__그렇군요__어디에_사인하면_되나요_.mp3"
-    },
-    {
-      "speaker": "postal_worker",
-      "text": "여기 해 주시면 됩니다.",
-      "en": "Right here, please.",
-      "slide": 10,
-      "audio": "data/nhs/L4/TTS/ep01/audio_10_여기_해_주시면_됩니다_.mp3",
-      "highlight": "됩니다",
-      "annotation": {
-        "highlight": "됩니다",
-        "grammar": "-ㅂ니다 (받침 없는 어간)",
-        "note": "되다 → 됩니다 (받침 없는 어간 + ㅂ니다)"
-      }
-    },
-    {
-      "speaker": "grandma",
-      "text": "알겠습니다.",
-      "en": "Understood.",
-      "slide": 11,
-      "audio": "data/nhs/L4/TTS/ep01/audio_11_알겠습니다_.mp3",
-      "highlight": "알겠습니다",
-      "annotation": {
-        "highlight": "알겠습니다",
-        "grammar": "격식 vs 비격식 전환",
-        "note": "할머니는 계속 해요체(그런데요, 되나요)로 말하다가, 마지막 확인 순간에만 '알겠습니다'로 격식을 갖춰요.\n해요체와 습니다체는 둘 다 존댓말 — 상황에 따라 자연스럽게 섞여요"
-      }
+     "korean": "서명",
+     "romanization": "seo-myeong",
+     "english": "signature (more formal than 사인)",
+     "emoji": "✍️"
     }
-  ],
-  "vocab": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g01_hamnida",
+   "tier": "core",
+   "title": "-(으)ㅂ니다/습니다체",
+   "title_en": "The Formal -(으)ㅂ니다/습니다 Style",
+   "emoji": "🎩",
+   "pattern": "받침 없음 어간 + -ㅂ니다 · 받침 있음 어간 + -습니다",
+   "scene_example": {
+    "korean": "우체국에서 나왔습니다.",
+    "english": "I'm here from the post office.",
+    "highlight": "나왔습니다"
+   },
+   "explanation_en": "This is the most formal speech style in Korean — more formal than -아/어요. Use it with strangers in official settings: government offices, businesses, customer service, the military, or news broadcasts. A mail carrier at your door is a perfect example.",
+   "rule_boxes": [
     {
-      "category": "📮 격식 상황 어휘 Formal Situation Vocab",
-      "items": [
-        {
-          "korean": "있다 / 계시다",
-          "romanization": "it-da / gye-si-da",
-          "english": "to be/exist / honorific: to be present",
-          "emoji": "🙋"
-        },
-        {
-          "korean": "우체국",
-          "romanization": "u-che-guk",
-          "english": "post office",
-          "emoji": "🏤"
-        },
-        {
-          "korean": "등기 우편",
-          "romanization": "deung-gi u-pyeon",
-          "english": "registered mail",
-          "emoji": "✉️"
-        },
-        {
-          "korean": "수령 확인",
-          "romanization": "su-ryeong hwa-gin",
-          "english": "confirmation of receipt",
-          "emoji": "✅"
-        },
-        {
-          "korean": "신용카드",
-          "romanization": "sin-yong-ka-deu",
-          "english": "credit card",
-          "emoji": "💳"
-        }
-      ]
+     "type": "blue",
+     "label": "받침 없음 → -ㅂ니다",
+     "content": "하다→합니다, 되다→됩니다",
+     "note": "어간 마지막 글자에 받침이 없으면 ㅂ이 새 받침이 돼요"
     },
     {
-      "category": "📦 우체국·관공서 실전 어휘 (대본 외)",
-      "items": [
-        { "korean": "소포", "romanization": "so-po", "english": "parcel, package", "emoji": "📦" },
-        { "korean": "택배", "romanization": "taek-bae", "english": "courier delivery (door-to-door parcel service)", "emoji": "🚚" },
-        { "korean": "우표", "romanization": "u-pyo", "english": "stamp", "emoji": "🎫" },
-        { "korean": "우체통", "romanization": "u-che-tong", "english": "mailbox, postbox", "emoji": "📮" },
-        { "korean": "발신인 / 수신인", "romanization": "bal-sin-in / su-sin-in", "english": "sender / recipient", "emoji": "🔄" },
-        { "korean": "반송", "romanization": "ban-song", "english": "return to sender", "emoji": "↩️" },
-        { "korean": "신분증", "romanization": "sin-bun-jeung", "english": "ID card", "emoji": "🪪" },
-        { "korean": "서명", "romanization": "seo-myeong", "english": "signature (more formal than 사인)", "emoji": "✍️" }
-      ]
-    }
-  ],
-  "grammar": [
+     "type": "green",
+     "label": "받침 있음 → -습니다",
+     "content": "있다→있습니다, 같다→같습니다",
+     "note": "어간에 이미 받침이 있으면 습니다를 붙여요"
+    },
     {
-      "id": "g01_hamnida",
-      "tier": "core",
-      "title": "-(으)ㅂ니다/습니다체",
-      "title_en": "The Formal -(으)ㅂ니다/습니다 Style",
-      "emoji": "🎩",
-      "pattern": "받침 없음 어간 + -ㅂ니다 · 받침 있음 어간 + -습니다",
-      "scene_example": {
-        "korean": "우체국에서 나왔습니다.",
-        "english": "I'm here from the post office.",
-        "highlight": "나왔습니다"
+     "type": "amber",
+     "label": "과거형은 항상 -습니다",
+     "content": "나오다→나왔습니다, 하다→했습니다",
+     "note": "-았/었(과거) 뒤에는 항상 받침(ㅆ)이 생기니까 무조건 -습니다예요 — 예외 없어요!"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "-습니다 · 받침 있는 어간 / 과거형",
+     "items": [
+      {
+       "ko": "등기 우편이 왔습니다.",
+       "en": "A registered letter has arrived."
       },
-      "explanation_en": "This is the most formal speech style in Korean — more formal than -아/어요. Use it with strangers in official settings: government offices, businesses, customer service, the military, or news broadcasts. A mail carrier at your door is a perfect example.",
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "label": "받침 없음 → -ㅂ니다",
-          "content": "하다→합니다, 되다→됩니다",
-          "note": "어간 마지막 글자에 받침이 없으면 ㅂ이 새 받침이 돼요"
-        },
-        {
-          "type": "green",
-          "label": "받침 있음 → -습니다",
-          "content": "있다→있습니다, 같다→같습니다",
-          "note": "어간에 이미 받침이 있으면 습니다를 붙여요"
-        },
-        {
-          "type": "amber",
-          "label": "과거형은 항상 -습니다",
-          "content": "나오다→나왔습니다, 하다→했습니다",
-          "note": "-았/었(과거) 뒤에는 항상 받침(ㅆ)이 생기니까 무조건 -습니다예요 — 예외 없어요!"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "-습니다 · 받침 있는 어간 / 과거형",
-          "items": [
-            { "ko": "등기 우편이 왔습니다.", "en": "A registered letter has arrived." },
-            { "ko": "수령 확인이 필요합니다.", "en": "Receipt confirmation is needed." },
-            { "ko": "신용카드인 것 같습니다.", "en": "It seems to be a credit card." },
-            { "ko": "알겠습니다.", "en": "Understood. (알겠다: 겠 받침 ㅆ)" }
-          ]
-        },
-        {
-          "label": "-ㅂ니다 · 받침 없는 어간",
-          "items": [
-            { "ko": "여기 해 주시면 됩니다.", "en": "Please do it here. (되다 → 됩니다)" },
-            { "ko": "수령 확인이 필요합니다.", "en": "Confirmation of receipt is needed. (필요하다 → 필요합니다)" }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "우체국에서 나___. (나오다, 과거)", "answer": "왔습니다", "hint": "과거형은 항상 -습니다" },
-        { "sentence": "여기 사인하면 ___. (되다)", "answer": "됩니다", "hint": "받침 없는 어간 → -ㅂ니다" }
-      ]
-    },
-    {
-      "id": "g01_sipnikka",
-      "tier": "core",
-      "title": "-(으)십니까?",
-      "title_en": "Formal Honorific Question Form",
-      "emoji": "❓",
-      "pattern": "받침 없음 + -십니까? · 받침 있음 + -으십니까?",
-      "scene_example": {
-        "korean": "신한글님 맞으십니까?",
-        "english": "Are you Ms. Shin Hangeul?",
-        "highlight": "맞으십니까"
+      {
+       "ko": "수령 확인이 필요합니다.",
+       "en": "Receipt confirmation is needed."
       },
-      "explanation_en": "This combines -(으)시- (honorific) with the formal question ending -ㅂ니까/습니까. Use it when formally questioning someone you're showing respect to — like a customer, a stranger, or an elder in an official context.",
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "label": "받침 없음 → -십니까?",
-          "content": "계시다→계십니까?, 가다→가십니까?",
-          "note": "어간에 받침이 없으면 -십니까?"
-        },
-        {
-          "type": "green",
-          "label": "받침 있음 → -으십니까?",
-          "content": "맞다→맞으십니까?, 앉다→앉으십니까?",
-          "note": "어간에 받침이 있으면 -으십니까?"
-        },
-        {
-          "type": "amber",
-          "label": "평서문과 짝지어 기억하기",
-          "content": "오십니다 ↔ 오십니까? / 맞으십니다 ↔ 맞으십니까?",
-          "note": "-(으)십니다(평서문)와 짝으로 외우면 헷갈리지 않아요"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "받침 없음 → -십니까?",
-          "items": [
-            { "ko": "계십니까?", "en": "Is anyone there? (honorific)" },
-            { "ko": "어디 가십니까?", "en": "Where are you going? (formal)" }
-          ]
-        },
-        {
-          "label": "받침 있음 → -으십니까?",
-          "items": [
-            { "ko": "신한글님 맞으십니까?", "en": "Are you Ms. Shin Hangeul?" },
-            { "ko": "여기 앉으십니까?", "en": "Will you sit here?" }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "실례지만, 신한글님 ___? (맞다)", "answer": "맞으십니까", "hint": "받침 있는 어간 → -으십니까?" },
-        { "sentence": "어디 ___? (가다)", "answer": "가십니까", "hint": "받침 없는 어간 → -십니까?" }
-      ]
-    },
-    {
-      "id": "g01_register",
-      "tier": "core",
-      "title": "해요체 ↔ 습니다체 전환",
-      "title_en": "Switching Between 해요체 and 습니다체",
-      "emoji": "🔄",
-      "pattern": "둘 다 존댓말! 상황에 따라 자연스럽게 섞여요",
-      "scene_example": {
-        "korean": "할머니는 '그런데요?', '되나요?'처럼 해요체로 말하다가, 확인하는 순간엔 '알겠습니다'로 답해요.",
-        "english": "Grandma speaks in 해요체 most of the time, but answers with the more formal 알겠습니다 at the key moment of confirmation.",
-        "highlight": "알겠습니다"
+      {
+       "ko": "신용카드인 것 같습니다.",
+       "en": "It seems to be a credit card."
       },
-      "explanation_en": "Korean has two levels of polite speech, and both are respectful: -아/어요 (해요체, friendly-polite, used in daily life) and -ㅂ니다/습니다 (습니다체, formal-polite, used with strangers in official roles, business, or announcements). 해요체 is NOT casual/banmal — it's already polite. 습니다체 is just stiffer and more official. Notice how the postal worker (a service role) stays in 습니다체 the whole time, while grandma mostly uses 해요체 but closes with a crisp '알겠습니다' — a fixed phrase people reach for even in casual registers to sound clear and definitive.",
-      "rule_boxes": [
-        {
-          "type": "blue",
-          "label": "해요체 = 일상적 존댓말",
-          "content": "누구세요?, 그런데요?, 되나요?",
-          "note": "친근하면서도 예의 바른 말투 — 일상 대화에서 제일 많이 써요"
-        },
-        {
-          "type": "green",
-          "label": "습니다체 = 공식적 존댓말",
-          "content": "나왔습니다, 필요합니다, 맞으십니까?",
-          "note": "낯선 사람과의 공식적 상황, 서비스 업무에서 써요"
-        },
-        {
-          "type": "amber",
-          "label": "한 사람이 섞어 쓰기도 해요",
-          "content": "할머니: 해요체로 대화하다가 '알겠습니다'로 마무리",
-          "note": "완전히 한 가지만 쓰지 않고, 대화 흐름 속에서 자연스럽게 섞이기도 해요"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "우체국 직원 — 계속 습니다체",
-          "items": [
-            { "ko": "우체국에서 나왔습니다.", "en": "I'm from the post office." },
-            { "ko": "신한글님 맞으십니까?", "en": "Are you Ms. Shin Hangeul?" },
-            { "ko": "여기 해 주시면 됩니다.", "en": "Right here, please." }
-          ]
-        },
-        {
-          "label": "할머니 — 해요체 위주, 마지막만 습니다체",
-          "items": [
-            { "ko": "누구세요?", "en": "Who is it? (해요체)" },
-            { "ko": "어디에 사인하면 되나요?", "en": "Where should I sign? (해요체)" },
-            { "ko": "알겠습니다.", "en": "Understood. (습니다체로 전환)" }
-          ]
-        }
-      ]
-    }
-  ],
-  "usage": [
-    {
-      "title": "-님 — 이름 뒤에 붙이는 높임 호칭",
-      "title_en": "-님: An Honorific Suffix for Names",
-      "explanation_en": "Attaching -님 to a name (or title) makes it formal and respectful — used by strangers, in business, or in official announcements. It's very common when someone doesn't know you personally but needs to address you politely.",
-      "examples": [
-        { "ko": "신한글님, 맞으십니까?", "en": "Ms. Shin Hangeul, is that correct?" },
-        { "ko": "고객님, 무엇을 도와드릴까요?", "en": "How may I help you, valued customer?" },
-        { "ko": "선생님", "en": "Teacher (님 attached to a role, not just a name)" }
-      ]
-    },
-    {
-      "title": "📦 우체국·관공서에서 자주 쓰는 표현 (대본 외)",
-      "title_en": "Common Post Office / Government Office Phrases (Beyond the Script)",
-      "explanation_en": "This episode focuses on the formal 습니다체 register, but a real visit to a post office or government office needs a few more concrete task-phrases — sending a package, asking how long it takes, or confirming ID. These naturally stay in the same formal register.",
-      "examples": [
-        { "ko": "소포를 보내려고 하는데요.", "en": "I'd like to send a package." },
-        { "ko": "이거 며칠 걸립니까?", "en": "How many days will this take?" },
-        { "ko": "신분증 좀 보여 주시겠습니까?", "en": "Could you show me your ID, please?" },
-        { "ko": "여기에 서명해 주십시오.", "en": "Please sign here." },
-        { "ko": "택배가 왔습니다.", "en": "A delivery has arrived." }
-      ]
-    }
-  ],
-  "pronunciation": [
-    {
-      "id": "pron_ep01_l4_01",
-      "title": "-ㅂ니다/습니다 → [-ㅁ니다] 비음화 (Nasalization)",
-      "rule": "받침 ㅂ(또는 ㅅ받침의 대표음 ㄷ→ㅂ 계열) 뒤에 ㄴ이 오면 ㅁ으로 바뀌어요 · A final ㅂ sound followed by ㄴ always changes to ㅁ — this happens in every -ㅂ니다/습니다 ending, no exceptions.",
-      "table": {
-        "columns": ["표기 · Spelling", "발음 · Sound", "규칙 · Rule"],
-        "rows": [
-          ["갑니다", "[감니다]", "ㅂ+ㄴ → ㅁ"],
-          ["습니다", "[슴니다]", "모든 -습니다 어미에 적용"],
-          ["있습니다", "[읻씀니다]", "ㅆ받침 대표음 ㄷ + 습니다 비음화"]
-        ]
+      {
+       "ko": "알겠습니다.",
+       "en": "Understood. (알겠다: 겠 받침 ㅆ)"
       }
+     ]
+    },
+    {
+     "label": "-ㅂ니다 · 받침 없는 어간",
+     "items": [
+      {
+       "ko": "여기 해 주시면 됩니다.",
+       "en": "Please do it here. (되다 → 됩니다)"
+      },
+      {
+       "ko": "수령 확인이 필요합니다.",
+       "en": "Confirmation of receipt is needed. (필요하다 → 필요합니다)"
+      }
+     ]
     }
-  ],
-  "real_life": [
+   ],
+   "fill_blanks": [
     {
-      "type": "kakao",
-      "title": "할머니가 딸에게 카톡을 보내요",
-      "subtitle": "Grandma texts her daughter about the delivery",
-      "messages": [
-        { "sender": "할머니", "text": "방금 우체국에서 왔었어. 등기 우편.", "side": "left" },
-        { "sender": "엄마", "text": "뭐였어요?", "side": "right" },
-        { "sender": "할머니", "text": "HQ은행 신용카드더라.", "side": "left" },
-        { "sender": "엄마", "text": "아~ 제가 신청한 거예요. 감사합니다!", "side": "right" },
-        { "sender": "할머니", "text": "그래, 잘 보관해 둘게.", "side": "left" }
-      ]
+     "sentence": "우체국에서 나___. (나오다, 과거)",
+     "answer": "왔습니다",
+     "hint": "과거형은 항상 -습니다"
     },
     {
-      "type": "reading",
-      "title": "은행에서 온 전화",
-      "subtitle": "A call from the bank",
-      "passage": "신한글 고객님, 안녕하십니까? HQ은행입니다. 신청하신 신용카드가 발급되어 등기 우편으로 발송되었습니다. 3일 후에 도착 예정입니다. 수령하시면 반드시 확인 서명을 부탁드립니다.",
-      "passage_en": "Hello, Ms. Shin Hangeul. This is HQ Bank. The credit card you applied for has been issued and sent by registered mail. It is expected to arrive in 3 days. When you receive it, please be sure to sign for confirmation.",
-      "questions": [
-        {
-          "question_ko": "신용카드는 어떻게 발송됐어요?",
-          "question_en": "How was the credit card sent?",
-          "options": ["일반 우편으로", "등기 우편으로", "이메일로"],
-          "answer": 1
-        },
-        {
-          "question_ko": "수령할 때 뭘 해야 해요?",
-          "question_en": "What should you do upon receiving it?",
-          "options": ["확인 서명을 해야 해요", "돈을 내야 해요", "전화를 해야 해요"],
-          "answer": 0
-        }
-      ]
+     "sentence": "여기 사인하면 ___. (되다)",
+     "answer": "됩니다",
+     "hint": "받침 없는 어간 → -ㅂ니다"
     }
-  ],
-  "quiz": [
+   ]
+  },
+  {
+   "id": "g01_sipnikka",
+   "tier": "core",
+   "title": "-(으)십니까?",
+   "title_en": "Formal Honorific Question Form",
+   "emoji": "❓",
+   "pattern": "받침 없음 + -십니까? · 받침 있음 + -으십니까?",
+   "scene_example": {
+    "korean": "신한글님 맞으십니까?",
+    "english": "Are you Ms. Shin Hangeul?",
+    "highlight": "맞으십니까"
+   },
+   "explanation_en": "This combines -(으)시- (honorific) with the formal question ending -ㅂ니까/습니까. Use it when formally questioning someone you're showing respect to — like a customer, a stranger, or an elder in an official context.",
+   "rule_boxes": [
     {
-      "id": "q01l4_1",
-      "audio_text": "계십니까?",
-      "question_ko": "우체부가 문 앞에서 뭐라고 해요?",
-      "question_en": "What does the postal worker say at the door?",
-      "options": ["계십니까? (Is anyone home?)", "안녕히 가세요 (Goodbye)", "이거 얼마예요? (How much is this?)", "들어가도 돼요? (Can I come in?)"],
-      "answer": 0,
-      "explanation": "계십니까? = 있다의 높임말 '계시다' + 격식 의문형 -십니까?. 집에 사람이 있는지 정중하게 물을 때 써요."
+     "type": "blue",
+     "label": "받침 없음 → -십니까?",
+     "content": "계시다→계십니까?, 가다→가십니까?",
+     "note": "어간에 받침이 없으면 -십니까?"
     },
     {
-      "id": "q01l4_2",
-      "audio_text": "우체국에서 나왔습니다.",
-      "question_ko": "우체국에서 나왔습니다는 무슨 뜻이에요?",
-      "question_en": "What does 우체국에서 나왔습니다 mean?",
-      "options": ["I'm from the post office", "I'm going to the post office", "The post office is closed", "I lost something at the post office"],
-      "answer": 0,
-      "explanation": "나왔습니다 = -습니다체 (formal past). '어디에서 나왔습니다' = to be from/representing a place or organization."
+     "type": "green",
+     "label": "받침 있음 → -으십니까?",
+     "content": "맞다→맞으십니까?, 앉다→앉으십니까?",
+     "note": "어간에 받침이 있으면 -으십니까?"
     },
     {
-      "id": "q01l4_3",
-      "audio_text": "신한글님 맞으십니까?",
-      "question_ko": "맞으십니까?는 어떤 상황에서 써요?",
-      "question_en": "When do you use 맞으십니까?",
-      "options": ["누군가의 신원을 정중하게 확인할 때", "음식이 맛있는지 물을 때", "길을 물을 때", "시간을 물을 때"],
-      "answer": 0,
-      "explanation": "맞으십니까? = -(으)십니까 (formal honorific question). 상대방이 맞는 사람인지 격식 있게 확인할 때 써요."
-    },
-    {
-      "id": "q01l4_4",
-      "question_ko": "다음 중 -습니다체가 아닌 것은?",
-      "question_en": "Which one is NOT in the -습니다 style?",
-      "options": ["그런데요?", "필요합니다", "알겠습니다", "됩니다"],
-      "answer": 0,
-      "explanation": "그런데요?는 해요체예요. 나머지(필요합니다, 알겠습니다, 됩니다)는 전부 -(스)ㅂ니다체입니다."
-    },
-    {
-      "id": "q01l4_5",
-      "audio_text": "등기 우편이 왔습니다. 수령 확인이 필요합니다.",
-      "question_ko": "우체부가 왜 사인을 받아요?",
-      "question_en": "Why does the postal worker need a signature?",
-      "options": ["등기 우편은 수령 확인이 필요해서", "선물을 주려고", "길을 물어보려고", "전화번호를 물어보려고"],
-      "answer": 0,
-      "explanation": "등기 우편(registered mail)은 받는 사람이 확실히 받았다는 걸 확인하는 절차가 필요해요. 그래서 사인을 받아요."
-    },
-    {
-      "id": "q01l4_6",
-      "question_ko": "할머니가 마지막에 '알겠습니다'라고 대답한 이유로 가장 알맞은 것은?",
-      "question_en": "What best explains why grandma answers with '알겠습니다' at the end?",
-      "options": ["해요체로 대화하다가도, 공식적인 확인 순간엔 습니다체로 자연스럽게 답할 수 있어서", "화가 나서", "우체부가 시켜서", "실수로"],
-      "answer": 0,
-      "explanation": "해요체와 습니다체는 둘 다 존댓말이에요. 할머니는 평소엔 해요체를 쓰지만, 서명 확인 같은 공식적인 순간엔 자연스럽게 습니다체로 마무리해요."
+     "type": "amber",
+     "label": "평서문과 짝지어 기억하기",
+     "content": "오십니다 ↔ 오십니까? / 맞으십니다 ↔ 맞으십니까?",
+     "note": "-(으)십니다(평서문)와 짝으로 외우면 헷갈리지 않아요"
     }
-  ],
-  "self_check": [
-    { "ko": "-(으)ㅂ니다/습니다체로 격식 있게 말할 수 있어요.", "en": "I can speak formally using -(으)ㅂ니다/습니다체." },
-    { "ko": "-(으)십니까?로 격식 있게 질문할 수 있어요.", "en": "I can ask formal questions using -(으)십니까?" },
-    { "ko": "계시다가 있다의 높임말이라는 걸 알아요.", "en": "I know 계시다 is the honorific form of 있다." },
-    { "ko": "등기 우편, 수령 확인 같은 우편 어휘를 알아요.", "en": "I know postal vocabulary like 등기 우편 and 수령 확인." },
-    { "ko": "해요체와 습니다체가 상황에 따라 자연스럽게 섞일 수 있다는 걸 이해해요.", "en": "I understand that 해요체 and 습니다체 can naturally mix depending on the situation." }
-  ]
+   ],
+   "example_groups": [
+    {
+     "label": "받침 없음 → -십니까?",
+     "items": [
+      {
+       "ko": "계십니까?",
+       "en": "Is anyone there? (honorific)"
+      },
+      {
+       "ko": "어디 가십니까?",
+       "en": "Where are you going? (formal)"
+      }
+     ]
+    },
+    {
+     "label": "받침 있음 → -으십니까?",
+     "items": [
+      {
+       "ko": "신한글님 맞으십니까?",
+       "en": "Are you Ms. Shin Hangeul?"
+      },
+      {
+       "ko": "여기 앉으십니까?",
+       "en": "Will you sit here?"
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "실례지만, 신한글님 ___? (맞다)",
+     "answer": "맞으십니까",
+     "hint": "받침 있는 어간 → -으십니까?"
+    },
+    {
+     "sentence": "어디 ___? (가다)",
+     "answer": "가십니까",
+     "hint": "받침 없는 어간 → -십니까?"
+    }
+   ]
+  },
+  {
+   "id": "g01_register",
+   "tier": "core",
+   "title": "해요체 ↔ 습니다체 전환",
+   "title_en": "Switching Between 해요체 and 습니다체",
+   "emoji": "🔄",
+   "pattern": "둘 다 존댓말! 상황에 따라 자연스럽게 섞여요",
+   "scene_example": {
+    "korean": "할머니는 '그런데요?', '되나요?'처럼 해요체로 말하다가, 확인하는 순간엔 '알겠습니다'로 답해요.",
+    "english": "Grandma speaks in 해요체 most of the time, but answers with the more formal 알겠습니다 at the key moment of confirmation.",
+    "highlight": "알겠습니다"
+   },
+   "explanation_en": "Korean has two levels of polite speech, and both are respectful: -아/어요 (해요체, friendly-polite, used in daily life) and -ㅂ니다/습니다 (습니다체, formal-polite, used with strangers in official roles, business, or announcements). 해요체 is NOT casual/banmal — it's already polite. 습니다체 is just stiffer and more official. Notice how the postal worker (a service role) stays in 습니다체 the whole time, while grandma mostly uses 해요체 but closes with a crisp '알겠습니다' — a fixed phrase people reach for even in casual registers to sound clear and definitive.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "해요체 = 일상적 존댓말",
+     "content": "누구세요?, 그런데요?, 되나요?",
+     "note": "친근하면서도 예의 바른 말투 — 일상 대화에서 제일 많이 써요"
+    },
+    {
+     "type": "green",
+     "label": "습니다체 = 공식적 존댓말",
+     "content": "나왔습니다, 필요합니다, 맞으십니까?",
+     "note": "낯선 사람과의 공식적 상황, 서비스 업무에서 써요"
+    },
+    {
+     "type": "amber",
+     "label": "한 사람이 섞어 쓰기도 해요",
+     "content": "할머니: 해요체로 대화하다가 '알겠습니다'로 마무리",
+     "note": "완전히 한 가지만 쓰지 않고, 대화 흐름 속에서 자연스럽게 섞이기도 해요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "우체국 직원 — 계속 습니다체",
+     "items": [
+      {
+       "ko": "우체국에서 나왔습니다.",
+       "en": "I'm from the post office."
+      },
+      {
+       "ko": "신한글님 맞으십니까?",
+       "en": "Are you Ms. Shin Hangeul?"
+      },
+      {
+       "ko": "여기 해 주시면 됩니다.",
+       "en": "Right here, please."
+      }
+     ]
+    },
+    {
+     "label": "할머니 — 해요체 위주, 마지막만 습니다체",
+     "items": [
+      {
+       "ko": "누구세요?",
+       "en": "Who is it? (해요체)"
+      },
+      {
+       "ko": "어디에 사인하면 되나요?",
+       "en": "Where should I sign? (해요체)"
+      },
+      {
+       "ko": "알겠습니다.",
+       "en": "Understood. (습니다체로 전환)"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "-님 — 이름 뒤에 붙이는 높임 호칭",
+   "title_en": "-님: An Honorific Suffix for Names",
+   "explanation_en": "Attaching -님 to a name (or title) makes it formal and respectful — used by strangers, in business, or in official announcements. It's very common when someone doesn't know you personally but needs to address you politely.",
+   "examples": [
+    {
+     "ko": "신한글님, 맞으십니까?",
+     "en": "Ms. Shin Hangeul, is that correct?"
+    },
+    {
+     "ko": "고객님, 무엇을 도와드릴까요?",
+     "en": "How may I help you, valued customer?"
+    },
+    {
+     "ko": "선생님",
+     "en": "Teacher (님 attached to a role, not just a name)"
+    }
+   ]
+  },
+  {
+   "title": "📦 우체국·관공서에서 자주 쓰는 표현 (대본 외)",
+   "title_en": "Common Post Office / Government Office Phrases (Beyond the Script)",
+   "explanation_en": "This episode focuses on the formal 습니다체 register, but a real visit to a post office or government office needs a few more concrete task-phrases — sending a package, asking how long it takes, or confirming ID. These naturally stay in the same formal register.",
+   "examples": [
+    {
+     "ko": "소포를 보내려고 하는데요.",
+     "en": "I'd like to send a package."
+    },
+    {
+     "ko": "이거 며칠 걸립니까?",
+     "en": "How many days will this take?"
+    },
+    {
+     "ko": "신분증 좀 보여 주시겠습니까?",
+     "en": "Could you show me your ID, please?"
+    },
+    {
+     "ko": "여기에 서명해 주십시오.",
+     "en": "Please sign here."
+    },
+    {
+     "ko": "택배가 왔습니다.",
+     "en": "A delivery has arrived."
+    }
+   ]
+  }
+ ],
+ "pronunciation": [
+  {
+   "id": "pron_ep01_l4_01",
+   "title": "-ㅂ니다/습니다 → [-ㅁ니다] 비음화 (Nasalization)",
+   "rule": "받침 ㅂ(또는 ㅅ받침의 대표음 ㄷ→ㅂ 계열) 뒤에 ㄴ이 오면 ㅁ으로 바뀌어요 · A final ㅂ sound followed by ㄴ always changes to ㅁ — this happens in every -ㅂ니다/습니다 ending, no exceptions.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "갑니다",
+      "[감니다]",
+      "ㅂ+ㄴ → ㅁ"
+     ],
+     [
+      "습니다",
+      "[슴니다]",
+      "모든 -습니다 어미에 적용"
+     ],
+     [
+      "있습니다",
+      "[읻씀니다]",
+      "ㅆ받침 대표음 ㄷ + 습니다 비음화"
+     ]
+    ]
+   }
+  }
+ ],
+ "real_life": [
+  {
+   "type": "kakao",
+   "title": "할머니가 딸에게 카톡을 보내요",
+   "subtitle": "Grandma texts her daughter about the delivery",
+   "messages": [
+    {
+     "sender": "할머니",
+     "text": "방금 우체국에서 왔었어. 등기 우편.",
+     "side": "left"
+    },
+    {
+     "sender": "엄마",
+     "text": "뭐였어요?",
+     "side": "right"
+    },
+    {
+     "sender": "할머니",
+     "text": "HQ은행 신용카드더라.",
+     "side": "left"
+    },
+    {
+     "sender": "엄마",
+     "text": "아~ 제가 신청한 거예요. 감사합니다!",
+     "side": "right"
+    },
+    {
+     "sender": "할머니",
+     "text": "그래, 잘 보관해 둘게.",
+     "side": "left"
+    }
+   ]
+  },
+  {
+   "type": "reading",
+   "title": "은행에서 온 전화",
+   "subtitle": "A call from the bank",
+   "passage": "신한글 고객님, 안녕하십니까? HQ은행입니다. 신청하신 신용카드가 발급되어 등기 우편으로 발송되었습니다. 3일 후에 도착 예정입니다. 수령하시면 반드시 확인 서명을 부탁드립니다.",
+   "passage_en": "Hello, Ms. Shin Hangeul. This is HQ Bank. The credit card you applied for has been issued and sent by registered mail. It is expected to arrive in 3 days. When you receive it, please be sure to sign for confirmation.",
+   "questions": [
+    {
+     "question_ko": "신용카드는 어떻게 발송됐어요?",
+     "question_en": "How was the credit card sent?",
+     "options": [
+      "일반 우편으로",
+      "등기 우편으로",
+      "이메일로"
+     ],
+     "answer": 1
+    },
+    {
+     "question_ko": "수령할 때 뭘 해야 해요?",
+     "question_en": "What should you do upon receiving it?",
+     "options": [
+      "확인 서명을 해야 해요",
+      "돈을 내야 해요",
+      "전화를 해야 해요"
+     ],
+     "answer": 0
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q01l4_1",
+   "audio_text": "계십니까?",
+   "question_ko": "우체부가 문 앞에서 뭐라고 해요?",
+   "question_en": "What does the postal worker say at the door?",
+   "options": [
+    "계십니까? (Is anyone home?)",
+    "안녕히 가세요 (Goodbye)",
+    "이거 얼마예요? (How much is this?)",
+    "들어가도 돼요? (Can I come in?)"
+   ],
+   "answer": 0,
+   "explanation": "계십니까? = 있다의 높임말 '계시다' + 격식 의문형 -십니까?. 집에 사람이 있는지 정중하게 물을 때 써요."
+  },
+  {
+   "id": "q01l4_2",
+   "audio_text": "우체국에서 나왔습니다.",
+   "question_ko": "우체국에서 나왔습니다는 무슨 뜻이에요?",
+   "question_en": "What does 우체국에서 나왔습니다 mean?",
+   "options": [
+    "I'm from the post office",
+    "I'm going to the post office",
+    "The post office is closed",
+    "I lost something at the post office"
+   ],
+   "answer": 0,
+   "explanation": "나왔습니다 = -습니다체 (formal past). '어디에서 나왔습니다' = to be from/representing a place or organization."
+  },
+  {
+   "id": "q01l4_3",
+   "audio_text": "신한글님 맞으십니까?",
+   "question_ko": "맞으십니까?는 어떤 상황에서 써요?",
+   "question_en": "When do you use 맞으십니까?",
+   "options": [
+    "누군가의 신원을 정중하게 확인할 때",
+    "음식이 맛있는지 물을 때",
+    "길을 물을 때",
+    "시간을 물을 때"
+   ],
+   "answer": 0,
+   "explanation": "맞으십니까? = -(으)십니까 (formal honorific question). 상대방이 맞는 사람인지 격식 있게 확인할 때 써요."
+  },
+  {
+   "id": "q01l4_4",
+   "question_ko": "다음 중 -습니다체가 아닌 것은?",
+   "question_en": "Which one is NOT in the -습니다 style?",
+   "options": [
+    "그런데요?",
+    "필요합니다",
+    "알겠습니다",
+    "됩니다"
+   ],
+   "answer": 0,
+   "explanation": "그런데요?는 해요체예요. 나머지(필요합니다, 알겠습니다, 됩니다)는 전부 -(스)ㅂ니다체입니다."
+  },
+  {
+   "id": "q01l4_5",
+   "audio_text": "등기 우편이 왔습니다. 수령 확인이 필요합니다.",
+   "question_ko": "우체부가 왜 사인을 받아요?",
+   "question_en": "Why does the postal worker need a signature?",
+   "options": [
+    "등기 우편은 수령 확인이 필요해서",
+    "선물을 주려고",
+    "길을 물어보려고",
+    "전화번호를 물어보려고"
+   ],
+   "answer": 0,
+   "explanation": "등기 우편(registered mail)은 받는 사람이 확실히 받았다는 걸 확인하는 절차가 필요해요. 그래서 사인을 받아요."
+  },
+  {
+   "id": "q01l4_6",
+   "question_ko": "할머니가 마지막에 '알겠습니다'라고 대답한 이유로 가장 알맞은 것은?",
+   "question_en": "What best explains why grandma answers with '알겠습니다' at the end?",
+   "options": [
+    "해요체로 대화하다가도, 공식적인 확인 순간엔 습니다체로 자연스럽게 답할 수 있어서",
+    "화가 나서",
+    "우체부가 시켜서",
+    "실수로"
+   ],
+   "answer": 0,
+   "explanation": "해요체와 습니다체는 둘 다 존댓말이에요. 할머니는 평소엔 해요체를 쓰지만, 서명 확인 같은 공식적인 순간엔 자연스럽게 습니다체로 마무리해요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "-(으)ㅂ니다/습니다체로 격식 있게 말할 수 있어요.",
+   "en": "I can speak formally using -(으)ㅂ니다/습니다체."
+  },
+  {
+   "ko": "-(으)십니까?로 격식 있게 질문할 수 있어요.",
+   "en": "I can ask formal questions using -(으)십니까?"
+  },
+  {
+   "ko": "계시다가 있다의 높임말이라는 걸 알아요.",
+   "en": "I know 계시다 is the honorific form of 있다."
+  },
+  {
+   "ko": "등기 우편, 수령 확인 같은 우편 어휘를 알아요.",
+   "en": "I know postal vocabulary like 등기 우편 and 수령 확인."
+  },
+  {
+   "ko": "해요체와 습니다체가 상황에 따라 자연스럽게 섞일 수 있다는 걸 이해해요.",
+   "en": "I understand that 해요체 and 습니다체 can naturally mix depending on the situation."
+  }
+ ]
 }

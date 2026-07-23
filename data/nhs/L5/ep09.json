@@ -1,382 +1,853 @@
 {
-  "id": "ep09",
-  "level": "L5",
-  "title": "서울을 알리는 사람이 되고 싶어요",
-  "title_en": "I Want to Be Someone Who Promotes Seoul",
-  "scene": "🎤 서울시 SNS 서포터즈 면접실 · Seoul City SNS Supporters Interview Room",
-  "goal": {
-    "ko": "격식 있는 면접 상황에서 자기소개와 지원동기를 말하고, -(으)로서/-았/었으면 합니다/-도록 하겠습니다를 쓸 수 있어요",
-    "en": "I can introduce myself and explain my motivation in a formal interview setting, using -(으)로서, -았/었으면 합니다, and -도록 하겠습니다"
+ "id": "ep09",
+ "level": "L5",
+ "title": "서울을 알리는 사람이 되고 싶어요",
+ "title_en": "I Want to Be Someone Who Promotes Seoul",
+ "scene": "💼 직장·면접 · Work & Interview",
+ "goal": {
+  "ko": "격식 있는 면접 상황에서 자기소개와 지원동기를 말하고, -(으)로서/-았/었으면 합니다/-도록 하겠습니다를 쓸 수 있어요",
+  "en": "I can introduce myself and explain my motivation in a formal interview setting, using -(으)로서, -았/었으면 합니다, and -도록 하겠습니다"
+ },
+ "key_points": [
+  "-(으)로서★NEW — 자격이나 역할을 나타낼 때",
+  "-았/었으면 합니다★NEW — 정중하게 바람을 표현할 때",
+  "-도록 하겠습니다★NEW — 격식 있게 다짐이나 약속을 할 때",
+  "-(으)ㄴ/는 편이다★복습(L3 ep10) — 자기소개에서 경향을 말할 때"
+ ],
+ "characters": [
+  {
+   "id": "mirae",
+   "name": "보미",
+   "name_en": "Bomi",
+   "emoji": "👧",
+   "color": "#F0B8D4"
   },
-  "key_points": [
-    "-(으)로서★NEW — 자격이나 역할을 나타낼 때",
-    "-았/었으면 합니다★NEW — 정중하게 바람을 표현할 때",
-    "-도록 하겠습니다★NEW — 격식 있게 다짐이나 약속을 할 때",
-    "-(으)ㄴ/는 편이다★복습(L3 ep10) — 자기소개에서 경향을 말할 때"
-  ],
-  "characters": [
-    { "id": "mirae", "name": "보미", "name_en": "Bomi", "emoji": "👧", "color": "#F0B8D4" },
-    { "id": "올리비아", "name": "올리비아", "name_en": "Olivia", "emoji": "👧", "color": "purple" },
-    { "id": "arthur", "name": "아르투", "name_en": "Arthur", "emoji": "👦", "color": "#FF9F43" },
-    { "id": "interviewer1", "name": "면접관1", "name_en": "Interviewer 1", "emoji": "👔", "color": "#5C6F84" },
-    { "id": "interviewer2", "name": "면접관2", "name_en": "Interviewer 2", "emoji": "🎙️", "color": "#B08968" }
-  ],
-  "slides": [
-    "data/nhs/L5/slides/ep09/아르투의 진로1.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로2.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로3.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로4.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로5.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로6.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로7.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로8.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로9.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로10.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로11.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로12.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로13.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로14.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로15.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로16.png",
-    "data/nhs/L5/slides/ep09/아르투의 진로17.png"
-  ],
-  "video": null,
-  "script": [
-    { "speaker": "올리비아", "text": "아르투, 긴장돼?", "en": "Arthur, are you nervous?", "slide": 0, "audio": "data/nhs/L5/TTS/ep09/audio_0_아르투__긴장돼_.mp3" },
-    { "speaker": "arthur", "text": "완전… 이런 격식 있는 면접은 처음이라.", "en": "Totally... this is my first time with such a formal interview.", "slide": 1, "audio": "data/nhs/L5/TTS/ep09/audio_1_완전__이런_격식_있는_면접은_처음이라_.mp3" },
-    { "speaker": "mirae", "text": "자기소개랑 지원동기만 잘 말해도 반은 성공이야. 파이팅!", "en": "If you just nail your self-introduction and motivation, that's already half the battle. Fighting!", "slide": 2, "audio": "data/nhs/L5/TTS/ep09/audio_2_자기소개랑_지원동기만_잘_말해도_반은_성공이야__파이팅_.mp3" },
-    { "speaker": "interviewer1", "text": "안녕하세요, 자기소개 부탁드립니다.", "en": "Hello, please introduce yourself.", "slide": 3, "audio": "data/nhs/L5/TTS/ep09/audio_3_안녕하세요__자기소개_부탁드립니다_.mp3" },
-    { "speaker": "arthur", "text": "안녕하십니까. 저는 브라질에서 온 아르투라고 합니다.", "en": "Hello. My name is Arthur, and I'm from Brazil.", "slide": 4, "audio": "data/nhs/L5/TTS/ep09/audio_4_안녕하십니까__저는_브라질에서_온_아르투라고_합니다_.mp3" },
-    { "speaker": "arthur", "text": "한글학당에서 한국어를 공부하고 있으며, 유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.", "en": "I'm studying Korean at Hangeul Hakdang, and as a YouTube creator, I've been traveling around Korea making videos.", "slide": 5, "audio": "data/nhs/L5/TTS/ep09/audio_5_한글학당에서_한국어를_공부하고_있으며__유튜브_크리에이터로서~.mp3", "highlight": "크리에이터로서", "annotation": { "highlight": "크리에이터로서", "grammar": "-(으)로서", "note": "크리에이터 + 로서 = 아르투가 자신의 자격/역할(유튜브 크리에이터)을 밝히면서 그 입장에서 해온 활동을 설명해요. 수단을 뜻하는 -(으)로써와 발음이 비슷하니 혼동하지 않도록 주의해요." } },
-    { "speaker": "interviewer1", "text": "이 활동에 지원하게 된 계기가 무엇인가요?", "en": "What made you decide to apply for this activity?", "slide": 6, "audio": "data/nhs/L5/TTS/ep09/audio_6_이_활동에_지원하게_된_계기가_무엇인가요_.mp3" },
-    { "speaker": "arthur", "text": "처음 한국에 왔을 때 몰랐던 것들을 하나씩 알아가면서, 저 같은 외국인들에게 서울을 더 알리고 싶다는 생각이 들었습니다.", "en": "As I got to know things I didn't know when I first came to Korea, I started wanting to help introduce Seoul to foreigners like myself.", "slide": 7, "audio": "data/nhs/L5/TTS/ep09/audio_7_처음_한국에_왔을_때_몰랐던_것들을_하나씩_알아가면서__저_~.mp3" },
-    { "speaker": "interviewer2", "text": "본인의 장점과 단점을 말씀해 주시겠어요?", "en": "Could you tell us about your strengths and weaknesses?", "slide": 8, "audio": "data/nhs/L5/TTS/ep09/audio_8_본인의_장점과_단점을_말씀해_주시겠어요_.mp3" },
-    { "speaker": "arthur", "text": "저는 새로운 곳에 가는 걸 두려워하지 않는 편입니다.", "en": "I tend not to be afraid of going to new places.", "slide": 9, "audio": "data/nhs/L5/TTS/ep09/audio_9_저는_새로운_곳에_가는_걸_두려워하지_않는_편입니다__.mp3", "highlight": "두려워하지 않는 편입니다", "annotation": { "highlight": "두려워하지 않는 편입니다", "grammar": "-(으)ㄴ/는 편이다 (복습, L3 ep10)", "note": "L3 ep10에서 배운 표현의 복습이에요 — 어떤 경향이나 성향을 말할 때 써요. 자기소개에서 성격을 설명하기 딱 좋은 표현이에요." } },
-    { "speaker": "arthur", "text": "다만 가끔 계획 없이 무작정 움직이는 편이라, 이 부분은 꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.", "en": "But I tend to sometimes act without a plan, so I will make sure to build the habit of preparing more carefully.", "slide": 10, "audio": "data/nhs/L5/TTS/ep09/audio_10_다만_가끔_계획_없이_무작정_움직이는_편이라__이_부분은_꼼~.mp3", "highlight": "기르도록 하겠습니다", "annotation": { "highlight": "기르도록 하겠습니다", "grammar": "-도록 하겠습니다", "note": "기르다 + 도록 하겠습니다 = 단점을 인정한 뒤, 그것을 개선하겠다고 격식 있게 다짐하는 표현이에요. 면접이나 공식적인 자리에서 자주 쓰여요." } },
-    { "speaker": "interviewer2", "text": "마지막으로 하고 싶은 말씀 있으신가요?", "en": "Is there anything you'd like to say, finally?", "slide": 11, "audio": "data/nhs/L5/TTS/ep09/audio_11_마지막으로_하고_싶은_말씀_있으신가요_.mp3" },
-    { "speaker": "arthur", "text": "이 활동을 통해 더 많은 사람들에게 서울의 매력을 알리는 데 기여했으면 합니다.", "en": "Through this activity, I hope to contribute to introducing Seoul's charm to more people.", "slide": 12, "audio": "data/nhs/L5/TTS/ep09/audio_12_이_활동을_통해_더_많은_사람들에게_서울의_매력을_알리는_데~.mp3", "highlight": "기여했으면 합니다", "annotation": { "highlight": "기여했으면 합니다", "grammar": "-았/었으면 합니다", "note": "기여하다 + 았으면 합니다 = -았/었으면 좋겠다의 격식체 버전이에요. 과거형 '았/었'이 붙어 있지만 실제로는 지금/앞으로의 바람을 뜻해요." } },
-    { "speaker": "interviewer1", "text": "네, 수고하셨습니다. 결과는 이메일로 안내해 드리겠습니다.", "en": "Alright, thank you for your effort today. We'll let you know the result by email.", "slide": 13, "audio": "data/nhs/L5/TTS/ep09/audio_13_네__수고하셨습니다__결과는_이메일로_안내해_드리겠습니다_.mp3" },
-    { "speaker": "mirae", "text": "어땠어?", "en": "How did it go?", "slide": 14, "audio": "data/nhs/L5/TTS/ep09/audio_14_어땠어_.mp3" },
-    { "speaker": "arthur", "text": "모르겠어… 근데 후회는 없어. 할 말은 다 했으니까.", "en": "I don't know... but I have no regrets. I said everything I wanted to say.", "slide": 15, "audio": "data/nhs/L5/TTS/ep09/audio_15_모르겠어__근데_후회는_없어__할_말은_다_했으니까_.mp3" },
-    { "speaker": "올리비아", "text": "그거면 됐지!", "en": "That's all that matters!", "slide": 16, "audio": "data/nhs/L5/TTS/ep09/audio_16_그거면_됐지_.mp3" }
-  ],
-  "vocab": [
+  {
+   "id": "올리비아",
+   "name": "올리비아",
+   "name_en": "Olivia",
+   "emoji": "👧",
+   "color": "purple"
+  },
+  {
+   "id": "arthur",
+   "name": "아르투",
+   "name_en": "Arthur",
+   "emoji": "👦",
+   "color": "#FF9F43"
+  },
+  {
+   "id": "interviewer1",
+   "name": "면접관1",
+   "name_en": "Interviewer 1",
+   "emoji": "👔",
+   "color": "#5C6F84"
+  },
+  {
+   "id": "interviewer2",
+   "name": "면접관2",
+   "name_en": "Interviewer 2",
+   "emoji": "🎙️",
+   "color": "#B08968"
+  }
+ ],
+ "slides": [
+  "data/nhs/L5/slides/ep09/아르투의 진로1.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로2.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로3.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로4.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로5.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로6.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로7.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로8.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로9.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로10.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로11.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로12.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로13.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로14.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로15.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로16.png",
+  "data/nhs/L5/slides/ep09/아르투의 진로17.png"
+ ],
+ "video": null,
+ "script": [
+  {
+   "speaker": "올리비아",
+   "text": "아르투, 긴장돼?",
+   "en": "Arthur, are you nervous?",
+   "slide": 0,
+   "audio": "data/nhs/L5/TTS/ep09/audio_0_아르투__긴장돼_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "완전… 이런 격식 있는 면접은 처음이라.",
+   "en": "Totally... this is my first time with such a formal interview.",
+   "slide": 1,
+   "audio": "data/nhs/L5/TTS/ep09/audio_1_완전__이런_격식_있는_면접은_처음이라_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "자기소개랑 지원동기만 잘 말해도 반은 성공이야. 파이팅!",
+   "en": "If you just nail your self-introduction and motivation, that's already half the battle. Fighting!",
+   "slide": 2,
+   "audio": "data/nhs/L5/TTS/ep09/audio_2_자기소개랑_지원동기만_잘_말해도_반은_성공이야__파이팅_.mp3"
+  },
+  {
+   "speaker": "interviewer1",
+   "text": "안녕하세요, 자기소개 부탁드립니다.",
+   "en": "Hello, please introduce yourself.",
+   "slide": 3,
+   "audio": "data/nhs/L5/TTS/ep09/audio_3_안녕하세요__자기소개_부탁드립니다_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "안녕하십니까. 저는 브라질에서 온 아르투라고 합니다.",
+   "en": "Hello. My name is Arthur, and I'm from Brazil.",
+   "slide": 4,
+   "audio": "data/nhs/L5/TTS/ep09/audio_4_안녕하십니까__저는_브라질에서_온_아르투라고_합니다_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "한글학당에서 한국어를 공부하고 있으며, 유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.",
+   "en": "I'm studying Korean at Hangeul Hakdang, and as a YouTube creator, I've been traveling around Korea making videos.",
+   "slide": 5,
+   "audio": "data/nhs/L5/TTS/ep09/audio_5_한글학당에서_한국어를_공부하고_있으며__유튜브_크리에이터로서~.mp3",
+   "highlight": "크리에이터로서",
+   "annotation": {
+    "highlight": "크리에이터로서",
+    "grammar": "-(으)로서",
+    "note": "크리에이터 + 로서 = 아르투가 자신의 자격/역할(유튜브 크리에이터)을 밝히면서 그 입장에서 해온 활동을 설명해요. 수단을 뜻하는 -(으)로써와 발음이 비슷하니 혼동하지 않도록 주의해요."
+   }
+  },
+  {
+   "speaker": "interviewer1",
+   "text": "이 활동에 지원하게 된 계기가 무엇인가요?",
+   "en": "What made you decide to apply for this activity?",
+   "slide": 6,
+   "audio": "data/nhs/L5/TTS/ep09/audio_6_이_활동에_지원하게_된_계기가_무엇인가요_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "처음 한국에 왔을 때 몰랐던 것들을 하나씩 알아가면서, 저 같은 외국인들에게 서울을 더 알리고 싶다는 생각이 들었습니다.",
+   "en": "As I got to know things I didn't know when I first came to Korea, I started wanting to help introduce Seoul to foreigners like myself.",
+   "slide": 7,
+   "audio": "data/nhs/L5/TTS/ep09/audio_7_처음_한국에_왔을_때_몰랐던_것들을_하나씩_알아가면서__저_~.mp3"
+  },
+  {
+   "speaker": "interviewer2",
+   "text": "본인의 장점과 단점을 말씀해 주시겠어요?",
+   "en": "Could you tell us about your strengths and weaknesses?",
+   "slide": 8,
+   "audio": "data/nhs/L5/TTS/ep09/audio_8_본인의_장점과_단점을_말씀해_주시겠어요_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "저는 새로운 곳에 가는 걸 두려워하지 않는 편입니다.",
+   "en": "I tend not to be afraid of going to new places.",
+   "slide": 9,
+   "audio": "data/nhs/L5/TTS/ep09/audio_9_저는_새로운_곳에_가는_걸_두려워하지_않는_편입니다__.mp3",
+   "highlight": "두려워하지 않는 편입니다",
+   "annotation": {
+    "highlight": "두려워하지 않는 편입니다",
+    "grammar": "-(으)ㄴ/는 편이다 (복습, L3 ep10)",
+    "note": "L3 ep10에서 배운 표현의 복습이에요 — 어떤 경향이나 성향을 말할 때 써요. 자기소개에서 성격을 설명하기 딱 좋은 표현이에요."
+   }
+  },
+  {
+   "speaker": "arthur",
+   "text": "다만 가끔 계획 없이 무작정 움직이는 편이라, 이 부분은 꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.",
+   "en": "But I tend to sometimes act without a plan, so I will make sure to build the habit of preparing more carefully.",
+   "slide": 10,
+   "audio": "data/nhs/L5/TTS/ep09/audio_10_다만_가끔_계획_없이_무작정_움직이는_편이라__이_부분은_꼼~.mp3",
+   "highlight": "기르도록 하겠습니다",
+   "annotation": {
+    "highlight": "기르도록 하겠습니다",
+    "grammar": "-도록 하겠습니다",
+    "note": "기르다 + 도록 하겠습니다 = 단점을 인정한 뒤, 그것을 개선하겠다고 격식 있게 다짐하는 표현이에요. 면접이나 공식적인 자리에서 자주 쓰여요."
+   }
+  },
+  {
+   "speaker": "interviewer2",
+   "text": "마지막으로 하고 싶은 말씀 있으신가요?",
+   "en": "Is there anything you'd like to say, finally?",
+   "slide": 11,
+   "audio": "data/nhs/L5/TTS/ep09/audio_11_마지막으로_하고_싶은_말씀_있으신가요_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "이 활동을 통해 더 많은 사람들에게 서울의 매력을 알리는 데 기여했으면 합니다.",
+   "en": "Through this activity, I hope to contribute to introducing Seoul's charm to more people.",
+   "slide": 12,
+   "audio": "data/nhs/L5/TTS/ep09/audio_12_이_활동을_통해_더_많은_사람들에게_서울의_매력을_알리는_데~.mp3",
+   "highlight": "기여했으면 합니다",
+   "annotation": {
+    "highlight": "기여했으면 합니다",
+    "grammar": "-았/었으면 합니다",
+    "note": "기여하다 + 았으면 합니다 = -았/었으면 좋겠다의 격식체 버전이에요. 과거형 '았/었'이 붙어 있지만 실제로는 지금/앞으로의 바람을 뜻해요."
+   }
+  },
+  {
+   "speaker": "interviewer1",
+   "text": "네, 수고하셨습니다. 결과는 이메일로 안내해 드리겠습니다.",
+   "en": "Alright, thank you for your effort today. We'll let you know the result by email.",
+   "slide": 13,
+   "audio": "data/nhs/L5/TTS/ep09/audio_13_네__수고하셨습니다__결과는_이메일로_안내해_드리겠습니다_.mp3"
+  },
+  {
+   "speaker": "mirae",
+   "text": "어땠어?",
+   "en": "How did it go?",
+   "slide": 14,
+   "audio": "data/nhs/L5/TTS/ep09/audio_14_어땠어_.mp3"
+  },
+  {
+   "speaker": "arthur",
+   "text": "모르겠어… 근데 후회는 없어. 할 말은 다 했으니까.",
+   "en": "I don't know... but I have no regrets. I said everything I wanted to say.",
+   "slide": 15,
+   "audio": "data/nhs/L5/TTS/ep09/audio_15_모르겠어__근데_후회는_없어__할_말은_다_했으니까_.mp3"
+  },
+  {
+   "speaker": "올리비아",
+   "text": "그거면 됐지!",
+   "en": "That's all that matters!",
+   "slide": 16,
+   "audio": "data/nhs/L5/TTS/ep09/audio_16_그거면_됐지_.mp3"
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🎤 면접 상황 · Interview Situation",
+   "items": [
     {
-      "category": "🎤 면접 상황 · Interview Situation",
-      "items": [
-        { "korean": "면접", "romanization": "myeon-jeop", "english": "interview", "emoji": "🎤" },
-        { "korean": "면접관", "romanization": "myeon-jeop-gwan", "english": "interviewer", "emoji": "👔" },
-        { "korean": "자기소개", "romanization": "ja-gi-so-gae", "english": "self-introduction", "emoji": "🙋" },
-        { "korean": "지원하다", "romanization": "ji-won-ha-da", "english": "to apply", "emoji": "📝" },
-        { "korean": "지원동기", "romanization": "ji-won-dong-gi", "english": "motivation for applying", "emoji": "💭" },
-        { "korean": "계기", "romanization": "gye-gi", "english": "occasion, trigger, motive", "emoji": "🔑" }
-      ]
+     "korean": "면접",
+     "romanization": "myeon-jeop",
+     "english": "interview",
+     "emoji": "🎤"
     },
     {
-      "category": "💪 장단점 표현 · Strengths & Weaknesses",
-      "items": [
-        { "korean": "장점", "romanization": "jang-jeom", "english": "strength, merit", "emoji": "💪" },
-        { "korean": "단점", "romanization": "dan-jeom", "english": "weakness, flaw", "emoji": "🌀" },
-        { "korean": "두려워하다", "romanization": "du-ryeo-wo-ha-da", "english": "to be afraid of", "emoji": "😨" },
-        { "korean": "무작정", "romanization": "mu-jak-jeong", "english": "recklessly, without a plan", "emoji": "🎲" },
-        { "korean": "꼼꼼하다", "romanization": "kkom-kkom-ha-da", "english": "to be meticulous, thorough", "emoji": "🔍", "note": "받침 ㅁ 뒤 예사소리는 된소리로 안 바뀌지만, 겹쳐 쓰는 의태어라 발음을 또박또박 끊어 읽어요" },
-        { "korean": "습관", "romanization": "seup-gwan", "english": "habit", "emoji": "🔁", "note": "받침 ㅂ 뒤의 ㄱ이 된소리 [ㄲ]로 바뀌어서 [습꽌]으로 발음돼요" },
-        { "korean": "기르다", "romanization": "gi-reu-da", "english": "to cultivate, build (a habit)", "emoji": "🌱" }
-      ]
+     "korean": "면접관",
+     "romanization": "myeon-jeop-gwan",
+     "english": "interviewer",
+     "emoji": "👔"
     },
     {
-      "category": "🌟 포부 표현 · Aspiration Expressions",
-      "items": [
-        { "korean": "기여하다", "romanization": "gi-yeo-ha-da", "english": "to contribute", "emoji": "🤝" },
-        { "korean": "매력", "romanization": "mae-ryeok", "english": "charm, appeal", "emoji": "✨" },
-        { "korean": "결과", "romanization": "gyeol-gwa", "english": "result", "emoji": "📩" },
-        { "korean": "안내하다", "romanization": "an-nae-ha-da", "english": "to inform, to guide", "emoji": "📨" }
-      ]
+     "korean": "자기소개",
+     "romanization": "ja-gi-so-gae",
+     "english": "self-introduction",
+     "emoji": "🙋"
+    },
+    {
+     "korean": "지원하다",
+     "romanization": "ji-won-ha-da",
+     "english": "to apply",
+     "emoji": "📝"
+    },
+    {
+     "korean": "지원동기",
+     "romanization": "ji-won-dong-gi",
+     "english": "motivation for applying",
+     "emoji": "💭"
+    },
+    {
+     "korean": "계기",
+     "romanization": "gye-gi",
+     "english": "occasion, trigger, motive",
+     "emoji": "🔑"
     }
-  ],
-  "grammar": [
+   ]
+  },
+  {
+   "category": "💪 장단점 표현 · Strengths & Weaknesses",
+   "items": [
     {
-      "id": "g09_l5_euroseo",
-      "tier": "core",
-      "title": "-(으)로서",
-      "title_en": "In the Capacity/Role of...",
-      "emoji": "🎓",
-      "pattern": "명사 + (으)로서 — 자격, 신분, 역할을 나타낼 때",
-      "scene_example": {
-        "korean": "유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.",
-        "english": "As a YouTube creator, I've been traveling around Korea making videos.",
-        "highlight": "크리에이터로서"
-      },
-      "explanation_en": "-(으)로서 marks a noun as the capacity, role, or identity from which the speaker acts or speaks — similar to English 'as a...'. It's often confused with -(으)로써 (means/method), which sounds almost identical but has a completely different meaning.",
-      "rule_boxes": [
-        { "type": "blue", "label": "형태", "content": "받침 없음 + 로서: 크리에이터 → 크리에이터로서\n받침 있음 + 으로서: 학생 → 학생으로서", "note": "받침 유무에 따라 으 삽입 여부 결정" },
-        { "type": "green", "label": "의미", "content": "자격·신분·역할을 나타냄\n\"그 입장/자격에서\"", "note": "면접, 자기소개, 발표에서 자주 쓰임" },
-        { "type": "amber", "label": "-(으)로서 vs -(으)로써 (주의)", "content": "크리에이터로서 활동하다 (자격 — as a creator)\n노력으로써 이뤄내다 (수단 — by means of effort)", "note": "발음이 거의 같아서 헷갈리기 쉬우니 의미로 구분해요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.", "en": "As a YouTube creator, I've been traveling around Korea making videos." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "선생님으로서 학생들을 도와야 해요.", "en": "As a teacher, I have to help my students." },
-            { "ko": "부모로서 최선을 다하고 있어요.", "en": "As a parent, I'm doing my best." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "저는 반장___ 책임감을 느껴요. (반장)", "answer": "으로서", "hint": "as class president, I feel a sense of responsibility" }
-      ]
+     "korean": "장점",
+     "romanization": "jang-jeom",
+     "english": "strength, merit",
+     "emoji": "💪"
     },
     {
-      "id": "g09_l5_asseumyeonhamnida",
-      "tier": "core",
-      "title": "-았/었으면 합니다",
-      "title_en": "I Hope That... (Formal, Polite Wish)",
-      "emoji": "🙏",
-      "pattern": "동사 어간 + 았/었으면 합니다 — 정중하게 바람이나 소망을 표현할 때",
-      "scene_example": {
-        "korean": "서울의 매력을 알리는 데 기여했으면 합니다.",
-        "english": "I hope to contribute to introducing Seoul's charm.",
-        "highlight": "기여했으면 합니다"
-      },
-      "explanation_en": "-았/었으면 합니다 is the more formal, polite version of -았/었으면 좋겠다 ('I wish/hope that...'). It's often used in formal contexts like interviews, speeches, or written statements, where -았/었으면 좋겠다 would sound too casual.",
-      "rule_boxes": [
-        { "type": "blue", "label": "형태", "content": "동사 어간 + 았/었으면 합니다\n기여하다 → 기여했으면 합니다\n되다 → 됐으면 합니다", "note": "일반 과거형과 같은 았/었 선택 규칙" },
-        { "type": "green", "label": "-았/었으면 좋겠다 vs -았/었으면 합니다", "content": "좋겠다 — 더 캐주얼, 친구 사이\n합니다 — 격식, 면접·발표·공식 석상", "note": "같은 뜻, 다른 격식 수준" },
-        { "type": "amber", "label": "주의 — 과거형처럼 보이지만", "content": "'기여했으면'은 과거 사실이 아니라 '기여하기를 바란다'는 지금/앞으로의 바람이에요", "note": "형태의 '았/었'에 속지 말 것" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "이 활동을 통해 더 많은 사람들에게 서울의 매력을 알리는 데 기여했으면 합니다.", "en": "Through this activity, I hope to contribute to introducing Seoul's charm to more people." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "앞으로 좋은 결과가 있었으면 합니다.", "en": "I hope there will be good results going forward." },
-            { "ko": "많은 분들이 함께해 주셨으면 합니다.", "en": "I hope many people will join us." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "이 프로젝트가 성공적으로 ___ . (끝나다)", "answer": "끝났으면 합니다", "hint": "I hope this project ends successfully" }
-      ]
+     "korean": "단점",
+     "romanization": "dan-jeom",
+     "english": "weakness, flaw",
+     "emoji": "🌀"
     },
     {
-      "id": "g09_l5_dorokhagesseumnida",
-      "tier": "core",
-      "title": "-도록 하겠습니다",
-      "title_en": "I Will Make Sure To... (Formal Commitment)",
-      "emoji": "✅",
-      "pattern": "동사 어간 + 도록 하겠습니다 — 격식 있는 자리에서 다짐이나 약속을 할 때",
-      "scene_example": {
-        "korean": "꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.",
-        "english": "I will make sure to build the habit of preparing more carefully.",
-        "highlight": "기르도록 하겠습니다"
-      },
-      "explanation_en": "-도록 하겠습니다 is a formal way to promise or commit to doing something going forward — literally 'I will make it so that [verb] happens.' It's common in interviews, workplaces, and official announcements, especially right after acknowledging a weakness and promising to improve.",
-      "rule_boxes": [
-        { "type": "blue", "label": "형태", "content": "동사 어간 + 도록 하겠습니다\n기르다 → 기르도록 하겠습니다\n노력하다 → 노력하도록 하겠습니다", "note": "형태 변화 없이 어간에 바로 붙음" },
-        { "type": "green", "label": "자주 쓰이는 맥락", "content": "단점을 인정한 뒤 개선을 다짐할 때\n(면접, 회의, 발표 등 격식 있는 자리)", "note": "겸손하면서도 확실한 약속의 느낌" },
-        { "type": "amber", "label": "-겠습니다 vs -도록 하겠습니다", "content": "하겠습니다 (단순한 의지 표현)\n하도록 하겠습니다 (그렇게 되도록 노력하겠다는 더 겸손하고 격식적인 톤)", "note": "후자가 더 부드럽고 격식 있게 들려요" }
-      ],
-      "example_groups": [
-        {
-          "label": "이 에피소드 속 예문",
-          "items": [
-            { "ko": "이 부분은 꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.", "en": "I will make sure to build the habit of preparing more carefully for this part." }
-          ]
-        },
-        {
-          "label": "다른 상황 예문",
-          "items": [
-            { "ko": "다음부터는 시간을 잘 지키도록 하겠습니다.", "en": "From now on, I will make sure to be on time." },
-            { "ko": "더 나은 모습을 보여드리도록 하겠습니다.", "en": "I will make sure to show you a better version of myself." }
-          ]
-        }
-      ],
-      "fill_blanks": [
-        { "sentence": "앞으로 실수하지 않도록 ___ . (주의하다)", "answer": "주의하도록 하겠습니다", "hint": "I will make sure to be careful not to make mistakes" }
-      ]
+     "korean": "두려워하다",
+     "romanization": "du-ryeo-wo-ha-da",
+     "english": "to be afraid of",
+     "emoji": "😨"
+    },
+    {
+     "korean": "무작정",
+     "romanization": "mu-jak-jeong",
+     "english": "recklessly, without a plan",
+     "emoji": "🎲"
+    },
+    {
+     "korean": "꼼꼼하다",
+     "romanization": "kkom-kkom-ha-da",
+     "english": "to be meticulous, thorough",
+     "emoji": "🔍",
+     "note": "받침 ㅁ 뒤 예사소리는 된소리로 안 바뀌지만, 겹쳐 쓰는 의태어라 발음을 또박또박 끊어 읽어요"
+    },
+    {
+     "korean": "습관",
+     "romanization": "seup-gwan",
+     "english": "habit",
+     "emoji": "🔁",
+     "note": "받침 ㅂ 뒤의 ㄱ이 된소리 [ㄲ]로 바뀌어서 [습꽌]으로 발음돼요"
+    },
+    {
+     "korean": "기르다",
+     "romanization": "gi-reu-da",
+     "english": "to cultivate, build (a habit)",
+     "emoji": "🌱"
     }
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "category": "🌟 포부 표현 · Aspiration Expressions",
+   "items": [
     {
-      "title": "-(으)ㄴ/는 편이다 — 복습 (L3 ep10)",
-      "title_en": "-(으)ㄴ/는 편이다 — Review (L3 ep10)",
-      "explanation_en": "두려워하지 않는 편입니다 = I tend not to be afraid — a review of the pattern from L3 ep10, very useful for describing general tendencies in a self-introduction.",
-      "examples": [
-        { "ko": "저는 새로운 곳에 가는 걸 두려워하지 않는 편입니다.", "en": "I tend not to be afraid of going to new places." },
-        { "ko": "다만 가끔 계획 없이 무작정 움직이는 편이라…", "en": "But I tend to sometimes act without a plan..." }
-      ]
+     "korean": "기여하다",
+     "romanization": "gi-yeo-ha-da",
+     "english": "to contribute",
+     "emoji": "🤝"
     },
     {
-      "title": "면접에서 자주 쓰는 격식 표현",
-      "title_en": "Common Formal Interview Expressions",
-      "explanation_en": "Korean interviews rely on a set of very formal, polite question-and-answer patterns. Notice how every question from the interviewers uses honorific endings (-십니까, -으십니까, -어 주시겠어요) even though Arthur is much younger — this formality is about the formality of the SITUATION, not the age of the person being addressed.",
-      "examples": [
-        { "ko": "자기소개 부탁드립니다.", "en": "Please introduce yourself." },
-        { "ko": "본인의 장점과 단점을 말씀해 주시겠어요?", "en": "Could you tell us about your strengths and weaknesses?" },
-        { "ko": "마지막으로 하고 싶은 말씀 있으신가요?", "en": "Is there anything you'd like to say, finally?" }
-      ]
+     "korean": "매력",
+     "romanization": "mae-ryeok",
+     "english": "charm, appeal",
+     "emoji": "✨"
+    },
+    {
+     "korean": "결과",
+     "romanization": "gyeol-gwa",
+     "english": "result",
+     "emoji": "📩"
+    },
+    {
+     "korean": "안내하다",
+     "romanization": "an-nae-ha-da",
+     "english": "to inform, to guide",
+     "emoji": "📨"
     }
-  ],
-  "pronunciation": {
-    "title": "발음 규칙 · Pronunciation Rules",
-    "items": [
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g09_l5_euroseo",
+   "tier": "core",
+   "title": "-(으)로서",
+   "title_en": "In the Capacity/Role of...",
+   "emoji": "🎓",
+   "pattern": "명사 + (으)로서 — 자격, 신분, 역할을 나타낼 때",
+   "scene_example": {
+    "korean": "유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.",
+    "english": "As a YouTube creator, I've been traveling around Korea making videos.",
+    "highlight": "크리에이터로서"
+   },
+   "explanation_en": "-(으)로서 marks a noun as the capacity, role, or identity from which the speaker acts or speaks — similar to English 'as a...'. It's often confused with -(으)로써 (means/method), which sounds almost identical but has a completely different meaning.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형태",
+     "content": "받침 없음 + 로서: 크리에이터 → 크리에이터로서\n받침 있음 + 으로서: 학생 → 학생으로서",
+     "note": "받침 유무에 따라 으 삽입 여부 결정"
+    },
+    {
+     "type": "green",
+     "label": "의미",
+     "content": "자격·신분·역할을 나타냄\n\"그 입장/자격에서\"",
+     "note": "면접, 자기소개, 발표에서 자주 쓰임"
+    },
+    {
+     "type": "amber",
+     "label": "-(으)로서 vs -(으)로써 (주의)",
+     "content": "크리에이터로서 활동하다 (자격 — as a creator)\n노력으로써 이뤄내다 (수단 — by means of effort)",
+     "note": "발음이 거의 같아서 헷갈리기 쉬우니 의미로 구분해요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
       {
-        "rule": "경음화 (격식)",
-        "tip": "받침 ㄱ 뒤에 예사소리 ㅅ이 오면 된소리 [ㅆ]으로 바뀌어요 · A batchim ㄱ tenses a following plain ㅅ into [ㅆ].",
-        "examples": [
-          { "written": "격식", "pronounced_standard": "[격씩]", "pronounced_actual": "[격씩]", "note": "격(ㄱ) + 식(ㅅ→된소리) → [격씩]" }
-        ]
-      },
-      {
-        "rule": "경음화 (습관)",
-        "tip": "받침 ㅂ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌어요 · A batchim ㅂ tenses a following plain ㄱ into [ㄲ].",
-        "examples": [
-          { "written": "습관", "pronounced_standard": "[습꽌]", "pronounced_actual": "[습꽌]", "note": "습(ㅂ) + 관(ㄱ→된소리) → [습꽌]" }
-        ]
-      },
-      {
-        "rule": "비음화 (-습니다)",
-        "tip": "받침 ㅂ 뒤에 ㄴ이 오면 ㅂ이 ㅁ으로 바뀌어요 · A batchim ㅂ becomes ㅁ when followed by ㄴ.",
-        "examples": [
-          { "written": "습니다 (예: 수고하셨습니다)", "pronounced_standard": "[슴니다]", "pronounced_actual": "[슴니다]", "note": "습(ㅂ) + 니 → ㅂ이 ㅁ으로 바뀌어 [슴니다]" }
-        ]
+       "ko": "유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.",
+       "en": "As a YouTube creator, I've been traveling around Korea making videos."
       }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "선생님으로서 학생들을 도와야 해요.",
+       "en": "As a teacher, I have to help my students."
+      },
+      {
+       "ko": "부모로서 최선을 다하고 있어요.",
+       "en": "As a parent, I'm doing my best."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "저는 반장___ 책임감을 느껴요. (반장)",
+     "answer": "으로서",
+     "hint": "as class president, I feel a sense of responsibility"
+    }
+   ]
+  },
+  {
+   "id": "g09_l5_asseumyeonhamnida",
+   "tier": "core",
+   "title": "-았/었으면 합니다",
+   "title_en": "I Hope That... (Formal, Polite Wish)",
+   "emoji": "🙏",
+   "pattern": "동사 어간 + 았/었으면 합니다 — 정중하게 바람이나 소망을 표현할 때",
+   "scene_example": {
+    "korean": "서울의 매력을 알리는 데 기여했으면 합니다.",
+    "english": "I hope to contribute to introducing Seoul's charm.",
+    "highlight": "기여했으면 합니다"
+   },
+   "explanation_en": "-았/었으면 합니다 is the more formal, polite version of -았/었으면 좋겠다 ('I wish/hope that...'). It's often used in formal contexts like interviews, speeches, or written statements, where -았/었으면 좋겠다 would sound too casual.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형태",
+     "content": "동사 어간 + 았/었으면 합니다\n기여하다 → 기여했으면 합니다\n되다 → 됐으면 합니다",
+     "note": "일반 과거형과 같은 았/었 선택 규칙"
+    },
+    {
+     "type": "green",
+     "label": "-았/었으면 좋겠다 vs -았/었으면 합니다",
+     "content": "좋겠다 — 더 캐주얼, 친구 사이\n합니다 — 격식, 면접·발표·공식 석상",
+     "note": "같은 뜻, 다른 격식 수준"
+    },
+    {
+     "type": "amber",
+     "label": "주의 — 과거형처럼 보이지만",
+     "content": "'기여했으면'은 과거 사실이 아니라 '기여하기를 바란다'는 지금/앞으로의 바람이에요",
+     "note": "형태의 '았/었'에 속지 말 것"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "이 활동을 통해 더 많은 사람들에게 서울의 매력을 알리는 데 기여했으면 합니다.",
+       "en": "Through this activity, I hope to contribute to introducing Seoul's charm to more people."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "앞으로 좋은 결과가 있었으면 합니다.",
+       "en": "I hope there will be good results going forward."
+      },
+      {
+       "ko": "많은 분들이 함께해 주셨으면 합니다.",
+       "en": "I hope many people will join us."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "이 프로젝트가 성공적으로 ___ . (끝나다)",
+     "answer": "끝났으면 합니다",
+     "hint": "I hope this project ends successfully"
+    }
+   ]
+  },
+  {
+   "id": "g09_l5_dorokhagesseumnida",
+   "tier": "core",
+   "title": "-도록 하겠습니다",
+   "title_en": "I Will Make Sure To... (Formal Commitment)",
+   "emoji": "✅",
+   "pattern": "동사 어간 + 도록 하겠습니다 — 격식 있는 자리에서 다짐이나 약속을 할 때",
+   "scene_example": {
+    "korean": "꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.",
+    "english": "I will make sure to build the habit of preparing more carefully.",
+    "highlight": "기르도록 하겠습니다"
+   },
+   "explanation_en": "-도록 하겠습니다 is a formal way to promise or commit to doing something going forward — literally 'I will make it so that [verb] happens.' It's common in interviews, workplaces, and official announcements, especially right after acknowledging a weakness and promising to improve.",
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "label": "형태",
+     "content": "동사 어간 + 도록 하겠습니다\n기르다 → 기르도록 하겠습니다\n노력하다 → 노력하도록 하겠습니다",
+     "note": "형태 변화 없이 어간에 바로 붙음"
+    },
+    {
+     "type": "green",
+     "label": "자주 쓰이는 맥락",
+     "content": "단점을 인정한 뒤 개선을 다짐할 때\n(면접, 회의, 발표 등 격식 있는 자리)",
+     "note": "겸손하면서도 확실한 약속의 느낌"
+    },
+    {
+     "type": "amber",
+     "label": "-겠습니다 vs -도록 하겠습니다",
+     "content": "하겠습니다 (단순한 의지 표현)\n하도록 하겠습니다 (그렇게 되도록 노력하겠다는 더 겸손하고 격식적인 톤)",
+     "note": "후자가 더 부드럽고 격식 있게 들려요"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "이 에피소드 속 예문",
+     "items": [
+      {
+       "ko": "이 부분은 꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.",
+       "en": "I will make sure to build the habit of preparing more carefully for this part."
+      }
+     ]
+    },
+    {
+     "label": "다른 상황 예문",
+     "items": [
+      {
+       "ko": "다음부터는 시간을 잘 지키도록 하겠습니다.",
+       "en": "From now on, I will make sure to be on time."
+      },
+      {
+       "ko": "더 나은 모습을 보여드리도록 하겠습니다.",
+       "en": "I will make sure to show you a better version of myself."
+      }
+     ]
+    }
+   ],
+   "fill_blanks": [
+    {
+     "sentence": "앞으로 실수하지 않도록 ___ . (주의하다)",
+     "answer": "주의하도록 하겠습니다",
+     "hint": "I will make sure to be careful not to make mistakes"
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "-(으)ㄴ/는 편이다 — 복습 (L3 ep10)",
+   "title_en": "-(으)ㄴ/는 편이다 — Review (L3 ep10)",
+   "explanation_en": "두려워하지 않는 편입니다 = I tend not to be afraid — a review of the pattern from L3 ep10, very useful for describing general tendencies in a self-introduction.",
+   "examples": [
+    {
+     "ko": "저는 새로운 곳에 가는 걸 두려워하지 않는 편입니다.",
+     "en": "I tend not to be afraid of going to new places."
+    },
+    {
+     "ko": "다만 가끔 계획 없이 무작정 움직이는 편이라…",
+     "en": "But I tend to sometimes act without a plan..."
+    }
+   ]
+  },
+  {
+   "title": "면접에서 자주 쓰는 격식 표현",
+   "title_en": "Common Formal Interview Expressions",
+   "explanation_en": "Korean interviews rely on a set of very formal, polite question-and-answer patterns. Notice how every question from the interviewers uses honorific endings (-십니까, -으십니까, -어 주시겠어요) even though Arthur is much younger — this formality is about the formality of the SITUATION, not the age of the person being addressed.",
+   "examples": [
+    {
+     "ko": "자기소개 부탁드립니다.",
+     "en": "Please introduce yourself."
+    },
+    {
+     "ko": "본인의 장점과 단점을 말씀해 주시겠어요?",
+     "en": "Could you tell us about your strengths and weaknesses?"
+    },
+    {
+     "ko": "마지막으로 하고 싶은 말씀 있으신가요?",
+     "en": "Is there anything you'd like to say, finally?"
+    }
+   ]
+  }
+ ],
+ "pronunciation": {
+  "title": "발음 규칙 · Pronunciation Rules",
+  "items": [
+   {
+    "rule": "경음화 (격식)",
+    "tip": "받침 ㄱ 뒤에 예사소리 ㅅ이 오면 된소리 [ㅆ]으로 바뀌어요 · A batchim ㄱ tenses a following plain ㅅ into [ㅆ].",
+    "examples": [
+     {
+      "written": "격식",
+      "pronounced_standard": "[격씩]",
+      "pronounced_actual": "[격씩]",
+      "note": "격(ㄱ) + 식(ㅅ→된소리) → [격씩]"
+     }
     ]
-  },
-  "banmal_jondaemal": {
-    "intro_ko": "트리오끼리는 대기실에서 반말로 대화하지만, 면접실 안에서는 아르투와 면접관들 모두 처음부터 끝까지 완전한 격식체(-습니다체)만 사용해요.",
-    "intro_en": "The trio speaks banmal in the waiting room, but inside the interview room, both Arthur and the interviewers use only fully formal -습니다체 speech from start to finish.",
-    "rows": [
-      {
-        "situation_ko": "트리오끼리 (대기실, 반말)",
-        "situation_en": "Among the trio (waiting room, casual)",
-        "banmal": "아르투, 긴장돼?",
-        "jondaemal": "(친구 사이라 존댓말로 바꿀 필요 없음)",
-        "note": "대기실 장면에서는 격식체 전환이 일어나지 않아요"
-      },
-      {
-        "situation_ko": "아르투 ↔ 면접관 (면접실, 격식체)",
-        "situation_en": "Arthur ↔ interviewers (interview room, formal)",
-        "banmal": "(면접에서는 이렇게 말하지 않음)",
-        "jondaemal": "안녕하십니까. 저는 브라질에서 온 아르투라고 합니다.",
-        "note": "면접실 안에서는 예외 없이 격식체만 사용해요"
-      }
-    ],
-    "tip": "면접처럼 공식적인 자리에서는 나이 차이와 상관없이 서로 격식체(-습니다체)를 써요. 면접관이 나이가 많든 적든, 지원자가 훨씬 어리든 상관없이 격식은 똑같이 유지돼요 — 격식은 '상황'이 정하는 거예요."
-  },
-  "real_life": [
-    {
-      "type": "tip",
-      "title": "🌏 외국인을 위한 서울시 SNS 서포터즈 활동",
-      "content_ko": "요즘 서울시에는 외국인을 대상으로 한 다양한 SNS 서포터즈·홍보 활동이 있어요. 서울에 관심이 많고 SNS 활동 경험이 있는 외국인이라면 지원할 수 있고, 보통 서류(또는 콘텐츠) 심사와 면접을 거쳐 선발돼요. 선발되면 몇 달 동안 매달 정해진 미션(축제·정책 소개 콘텐츠 제작 등)을 수행하게 돼요.",
-      "content_en": "These days, Seoul City runs various SNS supporter and promotion programs for foreigners. Foreigners interested in Seoul with some SNS experience can apply, usually going through document (or content) screening and an interview. Once selected, participants carry out monthly missions — like creating content about festivals or city policies — over several months."
-    },
-    {
-      "type": "reading",
-      "id": "rl_read_l5ep09",
-      "title": "🎤 한국 면접, 이것만은 알아두자! — 안내문",
-      "title_en": "Korean Interviews: What You Should Know! — A Guide",
-      "setup_ko": "아르투처럼 한국에서 격식 있는 면접을 처음 볼 때 알아두면 좋은 기본 예절을 소개하는 안내문이에요.",
-      "setup_en": "A guide introducing basic etiquette that's helpful to know when facing a formal Korean interview for the first time, just like Arthur.",
-      "passage": "한국에서 면접을 볼 때는 몇 가지 기본 예절이 있다. 우선 약속된 시간보다 10~15분 정도 일찍 도착하는 것이 좋다. 면접실에 들어갈 때는 가볍게 목례를 하고, 자리를 안내받기 전에는 앉지 않는 것이 예의다. 면접 내내 반드시 격식체(-습니다체)를 사용해야 하며, 이는 면접관의 나이와 상관없이 지켜야 하는 규칙이다.\n\n자주 나오는 질문으로는 자기소개, 지원동기, 장단점, 그리고 마지막으로 하고 싶은 말이 있다. 특히 단점을 말할 때는 단점만 나열하기보다, 그것을 어떻게 개선하고 있는지 함께 이야기하는 것이 좋은 인상을 준다. 면접이 끝난 후에는 \"감사합니다\" 또는 \"수고하셨습니다\"라는 인사로 마무리하며, 자리에서 일어나기 전에 가볍게 인사하는 것도 잊지 말아야 한다.",
-      "passage_en": "There are some basic manners to follow when interviewing in Korea. First, it's good to arrive about 10-15 minutes earlier than the scheduled time. When entering the interview room, give a light bow, and it's polite not to sit down until directed to a seat. Formal speech (-습니다체) must be used throughout the interview, regardless of the interviewer's age.\n\nCommon questions include self-introduction, motivation for applying, strengths and weaknesses, and any final remarks. When discussing weaknesses, rather than just listing them, mentioning how you're working to improve leaves a good impression. After the interview ends, wrap up with a greeting like \"감사합니다\" or \"수고하셨습니다,\" and don't forget to bow lightly before standing up from your seat.",
-      "questions": [
-        { "question_ko": "면접에 몇 분 정도 일찍 도착하는 게 좋아요?", "question_en": "How many minutes early is it good to arrive for an interview?", "options": ["10~15분", "30분", "1시간"], "answer": 0 },
-        { "question_ko": "면접실에서 지켜야 할 예절이 아닌 것은?", "question_en": "Which is NOT a manner to follow in the interview room?", "options": ["편하게 반말로 대답하기", "가볍게 목례하기", "안내받기 전에 앉지 않기"], "answer": 0 },
-        { "question_ko": "단점을 말할 때 좋은 인상을 주는 방법은?", "question_en": "What leaves a good impression when talking about weaknesses?", "options": ["개선하려는 노력을 함께 이야기하기", "단점이 없다고 말하기", "다른 사람 탓을 하기"], "answer": 0 },
-        { "question_ko": "격식체 사용은 면접관의 나이에 따라 달라져요?", "question_en": "Does the use of formal speech depend on the interviewer's age?", "options": ["아니요, 나이와 상관없이 지켜야 한다", "네, 나이 많은 면접관에게만 쓴다", "네, 나이 적은 면접관에게만 쓴다"], "answer": 0 }
-      ]
-    },
-    {
-      "type": "kakao",
-      "title": "💬 아르투가 브라질 친구에게 카톡을 보내요",
-      "messages": [
-        { "speaker": "아르투", "side": "right", "text": "오늘 드디어 면접 봤어! 완전 격식체로만 말해야 해서 진짜 긴장했어", "en": "Finally had my interview today! Had to speak in totally formal Korean the whole time, was so nervous" },
-        { "speaker": "친구", "side": "left", "text": "어땠는데?", "en": "How'd it go?" },
-        { "speaker": "아르투", "side": "right", "text": "장단점 물어보는데 순간 머리가 하얘졌잖아ㅋㅋ 그래도 할 말은 다 했어", "en": "When they asked about strengths and weaknesses my mind went totally blank lol, but I said everything I wanted to" },
-        { "speaker": "친구", "side": "left", "text": "결과는 언제 나와?", "en": "When do you find out the result?" },
-        { "speaker": "아르투", "side": "right", "text": "이메일로 알려준대. 기다리는 게 제일 떨려…", "en": "They said they'll email me. The waiting is the most nerve-wracking part..." }
-      ]
-    }
-  ],
-  "quiz": [
-    {
-      "id": "q09l5_1",
-      "audio_text": "한글학당에서 한국어를 공부하고 있으며, 유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.",
-      "question_ko": "🔊 음성을 듣고, 아르투를 가장 잘 설명한 것을 고르세요.",
-      "question_en": "Listen and choose what best describes Arthur.",
-      "options": ["유튜브 크리에이터로 한국 곳곳을 다니며 영상을 만들어 왔다", "한국 회사에서 일하고 있다", "유튜브를 그만두려고 한다", "한국어를 가르치고 있다"],
-      "answer": 0,
-      "explanation": "-(으)로서는 자격이나 역할을 나타내는 표현이에요."
-    },
-    {
-      "id": "q09l5_2",
-      "question_ko": "'-(으)로서'가 가장 자연스러운 상황은?",
-      "question_en": "When is it most natural to use -(으)로서?",
-      "options": ["자격이나 역할을 밝힐 때", "수단이나 방법을 말할 때", "장소를 나타낼 때", "시간을 나타낼 때"],
-      "answer": 0,
-      "explanation": "-(으)로서는 자격/신분/역할, -(으)로써는 수단/방법을 나타내요."
-    },
-    {
-      "id": "q09l5_3",
-      "audio_text": "다만 가끔 계획 없이 무작정 움직이는 편이라, 이 부분은 꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.",
-      "question_ko": "🔊 음성을 듣고, 아르투가 다짐한 내용을 고르세요.",
-      "question_en": "Listen and choose what Arthur commits to.",
-      "options": ["꼼꼼하게 준비하는 습관을 기르겠다", "더 무작정 움직이겠다", "면접을 그만 보겠다", "계획을 아예 안 세우겠다"],
-      "answer": 0,
-      "explanation": "-도록 하겠습니다는 격식 있는 다짐/약속을 나타내요."
-    },
-    {
-      "id": "q09l5_4",
-      "question_ko": "'-도록 하겠습니다'의 의미로 가장 알맞은 것은?",
-      "question_en": "Which meaning best fits -도록 하겠습니다?",
-      "options": ["격식 있게 다짐하거나 약속할 때", "단순한 사실을 설명할 때", "과거의 경험을 말할 때", "상대에게 명령할 때"],
-      "answer": 0,
-      "explanation": "특히 단점을 인정한 뒤 개선을 다짐할 때 자주 쓰여요."
-    },
-    {
-      "id": "q09l5_5",
-      "audio_text": "이 활동을 통해 더 많은 사람들에게 서울의 매력을 알리는 데 기여했으면 합니다.",
-      "question_ko": "🔊 음성을 듣고, 아르투의 바람을 고르세요.",
-      "question_en": "Listen and choose Arthur's hope.",
-      "options": ["더 많은 사람들에게 서울의 매력을 알리는 데 기여하고 싶다", "서울을 빨리 떠나고 싶다", "이 활동을 그만두고 싶다", "혼자 여행하고 싶다"],
-      "answer": 0,
-      "explanation": "-았/었으면 합니다는 -았/었으면 좋겠다의 격식체 버전이에요."
-    },
-    {
-      "id": "q09l5_6",
-      "question_ko": "'-았/었으면 합니다'와 '-았/었으면 좋겠다'의 차이로 가장 알맞은 것은?",
-      "question_en": "What's the main difference between -았/었으면 합니다 and -았/었으면 좋겠다?",
-      "options": ["의미는 같지만 격식 수준이 다르다", "의미가 완전히 반대다", "시제가 다르다", "높임말과 반말의 차이다"],
-      "answer": 0,
-      "explanation": "두 표현 다 '바람'을 나타내지만 합니다 쪽이 더 격식적이에요."
-    },
-    {
-      "id": "q09l5_7",
-      "question_ko": "아르투가 이 활동에 지원하게 된 계기는 무엇이에요?",
-      "question_en": "According to the episode, what motivated Arthur to apply for this activity?",
-      "options": ["처음 한국에 왔을 때 몰랐던 것들을 알아가며 서울을 더 알리고 싶어져서", "돈을 벌고 싶어서", "친구들이 시켜서", "학교 숙제라서"],
-      "answer": 0,
-      "explanation": "아르투는 자신의 경험에서 우러난 지원동기를 밝혔어요."
-    }
-  ],
-  "self_check": [
-    { "ko": "-(으)로서로 자격이나 역할을 나타낼 수 있어요.", "en": "I can use -(으)로서 to express a capacity or role." },
-    { "ko": "-았/었으면 합니다로 정중하게 바람을 표현할 수 있어요.", "en": "I can use -았/었으면 합니다 to politely express a hope." },
-    { "ko": "-도록 하겠습니다로 격식 있게 다짐할 수 있어요.", "en": "I can use -도록 하겠습니다 to make a formal commitment." },
-    { "ko": "-(으)ㄴ/는 편이다로 자기소개에서 경향을 말할 수 있어요.", "en": "I can use -(으)ㄴ/는 편이다 to describe a tendency in a self-introduction." },
-    { "ko": "면접 상황에서는 나이와 상관없이 격식체를 써야 한다는 걸 설명할 수 있어요.", "en": "I can explain that formal speech is used in interviews regardless of age." },
-    { "ko": "한국 면접의 기본 예절(도착 시간, 인사, 단점 말하기 방식)을 설명할 수 있어요.", "en": "I can explain basic Korean interview etiquette (arrival time, greetings, how to discuss weaknesses)." }
+   },
+   {
+    "rule": "경음화 (습관)",
+    "tip": "받침 ㅂ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌어요 · A batchim ㅂ tenses a following plain ㄱ into [ㄲ].",
+    "examples": [
+     {
+      "written": "습관",
+      "pronounced_standard": "[습꽌]",
+      "pronounced_actual": "[습꽌]",
+      "note": "습(ㅂ) + 관(ㄱ→된소리) → [습꽌]"
+     }
+    ]
+   },
+   {
+    "rule": "비음화 (-습니다)",
+    "tip": "받침 ㅂ 뒤에 ㄴ이 오면 ㅂ이 ㅁ으로 바뀌어요 · A batchim ㅂ becomes ㅁ when followed by ㄴ.",
+    "examples": [
+     {
+      "written": "습니다 (예: 수고하셨습니다)",
+      "pronounced_standard": "[슴니다]",
+      "pronounced_actual": "[슴니다]",
+      "note": "습(ㅂ) + 니 → ㅂ이 ㅁ으로 바뀌어 [슴니다]"
+     }
+    ]
+   }
   ]
+ },
+ "banmal_jondaemal": {
+  "intro_ko": "트리오끼리는 대기실에서 반말로 대화하지만, 면접실 안에서는 아르투와 면접관들 모두 처음부터 끝까지 완전한 격식체(-습니다체)만 사용해요.",
+  "intro_en": "The trio speaks banmal in the waiting room, but inside the interview room, both Arthur and the interviewers use only fully formal -습니다체 speech from start to finish.",
+  "rows": [
+   {
+    "situation_ko": "트리오끼리 (대기실, 반말)",
+    "situation_en": "Among the trio (waiting room, casual)",
+    "banmal": "아르투, 긴장돼?",
+    "jondaemal": "(친구 사이라 존댓말로 바꿀 필요 없음)",
+    "note": "대기실 장면에서는 격식체 전환이 일어나지 않아요"
+   },
+   {
+    "situation_ko": "아르투 ↔ 면접관 (면접실, 격식체)",
+    "situation_en": "Arthur ↔ interviewers (interview room, formal)",
+    "banmal": "(면접에서는 이렇게 말하지 않음)",
+    "jondaemal": "안녕하십니까. 저는 브라질에서 온 아르투라고 합니다.",
+    "note": "면접실 안에서는 예외 없이 격식체만 사용해요"
+   }
+  ],
+  "tip": "면접처럼 공식적인 자리에서는 나이 차이와 상관없이 서로 격식체(-습니다체)를 써요. 면접관이 나이가 많든 적든, 지원자가 훨씬 어리든 상관없이 격식은 똑같이 유지돼요 — 격식은 '상황'이 정하는 거예요."
+ },
+ "real_life": [
+  {
+   "type": "tip",
+   "title": "🌏 외국인을 위한 서울시 SNS 서포터즈 활동",
+   "content_ko": "요즘 서울시에는 외국인을 대상으로 한 다양한 SNS 서포터즈·홍보 활동이 있어요. 서울에 관심이 많고 SNS 활동 경험이 있는 외국인이라면 지원할 수 있고, 보통 서류(또는 콘텐츠) 심사와 면접을 거쳐 선발돼요. 선발되면 몇 달 동안 매달 정해진 미션(축제·정책 소개 콘텐츠 제작 등)을 수행하게 돼요.",
+   "content_en": "These days, Seoul City runs various SNS supporter and promotion programs for foreigners. Foreigners interested in Seoul with some SNS experience can apply, usually going through document (or content) screening and an interview. Once selected, participants carry out monthly missions — like creating content about festivals or city policies — over several months."
+  },
+  {
+   "type": "reading",
+   "id": "rl_read_l5ep09",
+   "title": "🎤 한국 면접, 이것만은 알아두자! — 안내문",
+   "title_en": "Korean Interviews: What You Should Know! — A Guide",
+   "setup_ko": "아르투처럼 한국에서 격식 있는 면접을 처음 볼 때 알아두면 좋은 기본 예절을 소개하는 안내문이에요.",
+   "setup_en": "A guide introducing basic etiquette that's helpful to know when facing a formal Korean interview for the first time, just like Arthur.",
+   "passage": "한국에서 면접을 볼 때는 몇 가지 기본 예절이 있다. 우선 약속된 시간보다 10~15분 정도 일찍 도착하는 것이 좋다. 면접실에 들어갈 때는 가볍게 목례를 하고, 자리를 안내받기 전에는 앉지 않는 것이 예의다. 면접 내내 반드시 격식체(-습니다체)를 사용해야 하며, 이는 면접관의 나이와 상관없이 지켜야 하는 규칙이다.\n\n자주 나오는 질문으로는 자기소개, 지원동기, 장단점, 그리고 마지막으로 하고 싶은 말이 있다. 특히 단점을 말할 때는 단점만 나열하기보다, 그것을 어떻게 개선하고 있는지 함께 이야기하는 것이 좋은 인상을 준다. 면접이 끝난 후에는 \"감사합니다\" 또는 \"수고하셨습니다\"라는 인사로 마무리하며, 자리에서 일어나기 전에 가볍게 인사하는 것도 잊지 말아야 한다.",
+   "passage_en": "There are some basic manners to follow when interviewing in Korea. First, it's good to arrive about 10-15 minutes earlier than the scheduled time. When entering the interview room, give a light bow, and it's polite not to sit down until directed to a seat. Formal speech (-습니다체) must be used throughout the interview, regardless of the interviewer's age.\n\nCommon questions include self-introduction, motivation for applying, strengths and weaknesses, and any final remarks. When discussing weaknesses, rather than just listing them, mentioning how you're working to improve leaves a good impression. After the interview ends, wrap up with a greeting like \"감사합니다\" or \"수고하셨습니다,\" and don't forget to bow lightly before standing up from your seat.",
+   "questions": [
+    {
+     "question_ko": "면접에 몇 분 정도 일찍 도착하는 게 좋아요?",
+     "question_en": "How many minutes early is it good to arrive for an interview?",
+     "options": [
+      "10~15분",
+      "30분",
+      "1시간"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "면접실에서 지켜야 할 예절이 아닌 것은?",
+     "question_en": "Which is NOT a manner to follow in the interview room?",
+     "options": [
+      "편하게 반말로 대답하기",
+      "가볍게 목례하기",
+      "안내받기 전에 앉지 않기"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "단점을 말할 때 좋은 인상을 주는 방법은?",
+     "question_en": "What leaves a good impression when talking about weaknesses?",
+     "options": [
+      "개선하려는 노력을 함께 이야기하기",
+      "단점이 없다고 말하기",
+      "다른 사람 탓을 하기"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "격식체 사용은 면접관의 나이에 따라 달라져요?",
+     "question_en": "Does the use of formal speech depend on the interviewer's age?",
+     "options": [
+      "아니요, 나이와 상관없이 지켜야 한다",
+      "네, 나이 많은 면접관에게만 쓴다",
+      "네, 나이 적은 면접관에게만 쓴다"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "type": "kakao",
+   "title": "💬 아르투가 브라질 친구에게 카톡을 보내요",
+   "messages": [
+    {
+     "speaker": "아르투",
+     "side": "right",
+     "text": "오늘 드디어 면접 봤어! 완전 격식체로만 말해야 해서 진짜 긴장했어",
+     "en": "Finally had my interview today! Had to speak in totally formal Korean the whole time, was so nervous"
+    },
+    {
+     "speaker": "친구",
+     "side": "left",
+     "text": "어땠는데?",
+     "en": "How'd it go?"
+    },
+    {
+     "speaker": "아르투",
+     "side": "right",
+     "text": "장단점 물어보는데 순간 머리가 하얘졌잖아ㅋㅋ 그래도 할 말은 다 했어",
+     "en": "When they asked about strengths and weaknesses my mind went totally blank lol, but I said everything I wanted to"
+    },
+    {
+     "speaker": "친구",
+     "side": "left",
+     "text": "결과는 언제 나와?",
+     "en": "When do you find out the result?"
+    },
+    {
+     "speaker": "아르투",
+     "side": "right",
+     "text": "이메일로 알려준대. 기다리는 게 제일 떨려…",
+     "en": "They said they'll email me. The waiting is the most nerve-wracking part..."
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q09l5_1",
+   "audio_text": "한글학당에서 한국어를 공부하고 있으며, 유튜브 크리에이터로서 한국 곳곳을 다니며 영상을 만들어 왔습니다.",
+   "question_ko": "🔊 음성을 듣고, 아르투를 가장 잘 설명한 것을 고르세요.",
+   "question_en": "Listen and choose what best describes Arthur.",
+   "options": [
+    "유튜브 크리에이터로 한국 곳곳을 다니며 영상을 만들어 왔다",
+    "한국 회사에서 일하고 있다",
+    "유튜브를 그만두려고 한다",
+    "한국어를 가르치고 있다"
+   ],
+   "answer": 0,
+   "explanation": "-(으)로서는 자격이나 역할을 나타내는 표현이에요."
+  },
+  {
+   "id": "q09l5_2",
+   "question_ko": "'-(으)로서'가 가장 자연스러운 상황은?",
+   "question_en": "When is it most natural to use -(으)로서?",
+   "options": [
+    "자격이나 역할을 밝힐 때",
+    "수단이나 방법을 말할 때",
+    "장소를 나타낼 때",
+    "시간을 나타낼 때"
+   ],
+   "answer": 0,
+   "explanation": "-(으)로서는 자격/신분/역할, -(으)로써는 수단/방법을 나타내요."
+  },
+  {
+   "id": "q09l5_3",
+   "audio_text": "다만 가끔 계획 없이 무작정 움직이는 편이라, 이 부분은 꼼꼼하게 준비하는 습관을 기르도록 하겠습니다.",
+   "question_ko": "🔊 음성을 듣고, 아르투가 다짐한 내용을 고르세요.",
+   "question_en": "Listen and choose what Arthur commits to.",
+   "options": [
+    "꼼꼼하게 준비하는 습관을 기르겠다",
+    "더 무작정 움직이겠다",
+    "면접을 그만 보겠다",
+    "계획을 아예 안 세우겠다"
+   ],
+   "answer": 0,
+   "explanation": "-도록 하겠습니다는 격식 있는 다짐/약속을 나타내요."
+  },
+  {
+   "id": "q09l5_4",
+   "question_ko": "'-도록 하겠습니다'의 의미로 가장 알맞은 것은?",
+   "question_en": "Which meaning best fits -도록 하겠습니다?",
+   "options": [
+    "격식 있게 다짐하거나 약속할 때",
+    "단순한 사실을 설명할 때",
+    "과거의 경험을 말할 때",
+    "상대에게 명령할 때"
+   ],
+   "answer": 0,
+   "explanation": "특히 단점을 인정한 뒤 개선을 다짐할 때 자주 쓰여요."
+  },
+  {
+   "id": "q09l5_5",
+   "audio_text": "이 활동을 통해 더 많은 사람들에게 서울의 매력을 알리는 데 기여했으면 합니다.",
+   "question_ko": "🔊 음성을 듣고, 아르투의 바람을 고르세요.",
+   "question_en": "Listen and choose Arthur's hope.",
+   "options": [
+    "더 많은 사람들에게 서울의 매력을 알리는 데 기여하고 싶다",
+    "서울을 빨리 떠나고 싶다",
+    "이 활동을 그만두고 싶다",
+    "혼자 여행하고 싶다"
+   ],
+   "answer": 0,
+   "explanation": "-았/었으면 합니다는 -았/었으면 좋겠다의 격식체 버전이에요."
+  },
+  {
+   "id": "q09l5_6",
+   "question_ko": "'-았/었으면 합니다'와 '-았/었으면 좋겠다'의 차이로 가장 알맞은 것은?",
+   "question_en": "What's the main difference between -았/었으면 합니다 and -았/었으면 좋겠다?",
+   "options": [
+    "의미는 같지만 격식 수준이 다르다",
+    "의미가 완전히 반대다",
+    "시제가 다르다",
+    "높임말과 반말의 차이다"
+   ],
+   "answer": 0,
+   "explanation": "두 표현 다 '바람'을 나타내지만 합니다 쪽이 더 격식적이에요."
+  },
+  {
+   "id": "q09l5_7",
+   "question_ko": "아르투가 이 활동에 지원하게 된 계기는 무엇이에요?",
+   "question_en": "According to the episode, what motivated Arthur to apply for this activity?",
+   "options": [
+    "처음 한국에 왔을 때 몰랐던 것들을 알아가며 서울을 더 알리고 싶어져서",
+    "돈을 벌고 싶어서",
+    "친구들이 시켜서",
+    "학교 숙제라서"
+   ],
+   "answer": 0,
+   "explanation": "아르투는 자신의 경험에서 우러난 지원동기를 밝혔어요."
+  }
+ ],
+ "self_check": [
+  {
+   "ko": "-(으)로서로 자격이나 역할을 나타낼 수 있어요.",
+   "en": "I can use -(으)로서 to express a capacity or role."
+  },
+  {
+   "ko": "-았/었으면 합니다로 정중하게 바람을 표현할 수 있어요.",
+   "en": "I can use -았/었으면 합니다 to politely express a hope."
+  },
+  {
+   "ko": "-도록 하겠습니다로 격식 있게 다짐할 수 있어요.",
+   "en": "I can use -도록 하겠습니다 to make a formal commitment."
+  },
+  {
+   "ko": "-(으)ㄴ/는 편이다로 자기소개에서 경향을 말할 수 있어요.",
+   "en": "I can use -(으)ㄴ/는 편이다 to describe a tendency in a self-introduction."
+  },
+  {
+   "ko": "면접 상황에서는 나이와 상관없이 격식체를 써야 한다는 걸 설명할 수 있어요.",
+   "en": "I can explain that formal speech is used in interviews regardless of age."
+  },
+  {
+   "ko": "한국 면접의 기본 예절(도착 시간, 인사, 단점 말하기 방식)을 설명할 수 있어요.",
+   "en": "I can explain basic Korean interview etiquette (arrival time, greetings, how to discuss weaknesses)."
+  }
+ ]
 }

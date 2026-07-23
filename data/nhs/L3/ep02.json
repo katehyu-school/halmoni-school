@@ -1,786 +1,786 @@
 {
-  "id": "ep02",
-  "level": "L3",
-  "title": "물티슈로 닦으라고!",
-  "title_en": "Wipe It with a Wet Wipe!",
-  "scene": "🎮 PC방 · PC Café",
-  "goal": {
-    "ko": "부탁이나 명령을 전할 수 있어요.",
-    "en": "I can relay a command or request."
+ "id": "ep02",
+ "level": "L3",
+ "title": "물티슈로 닦으라고!",
+ "title_en": "Wipe It with a Wet Wipe!",
+ "scene": "🎮 여가·일상 · Leisure & Daily",
+ "goal": {
+  "ko": "부탁이나 명령을 전할 수 있어요.",
+  "en": "I can relay a command or request."
+ },
+ "key_points": [
+  "물티슈로 닦으라고 하셨어 — 명령 간접화법 (-(으)라고 하다)",
+  "음식물을 가지고 들어오지 말라고 했어 — 금지 전달 (-지 말라고 하다)",
+  "여기로 갖다 달라고 하자 — 부탁 전달 (-아/어 달라고 하다)",
+  "콜, 말고, 된다/안 된다 — PC방 표현"
+ ],
+ "slides": [
+  "data/nhs/L3/slides/ep02/PC방1.png",
+  "data/nhs/L3/slides/ep02/PC방2.png",
+  "data/nhs/L3/slides/ep02/PC방3.png",
+  "data/nhs/L3/slides/ep02/PC방4.png",
+  "data/nhs/L3/slides/ep02/PC방5.png",
+  "data/nhs/L3/slides/ep02/PC방6.png",
+  "data/nhs/L3/slides/ep02/PC방7.png",
+  "data/nhs/L3/slides/ep02/PC방8.png",
+  "data/nhs/L3/slides/ep02/PC방9.png",
+  "data/nhs/L3/slides/ep02/PC방10.png",
+  "data/nhs/L3/slides/ep02/PC방11.png",
+  "data/nhs/L3/slides/ep02/PC방12.png",
+  "data/nhs/L3/slides/ep02/PC방13.png",
+  "data/nhs/L3/slides/ep02/PC방14.png",
+  "data/nhs/L3/slides/ep02/PC방15.png",
+  "data/nhs/L3/slides/ep02/PC방16.png",
+  "data/nhs/L3/slides/ep02/PC방17.png"
+ ],
+ "video": null,
+ "characters": [
+  {
+   "id": "riam",
+   "name": "라온",
+   "color": "#4A90D9",
+   "emoji": "👦"
   },
-  "key_points": [
-    "물티슈로 닦으라고 하셨어 — 명령 간접화법 (-(으)라고 하다)",
-    "음식물을 가지고 들어오지 말라고 했어 — 금지 전달 (-지 말라고 하다)",
-    "여기로 갖다 달라고 하자 — 부탁 전달 (-아/어 달라고 하다)",
-    "콜, 말고, 된다/안 된다 — PC방 표현"
-  ],
-  "slides": [
-    "data/nhs/L3/slides/ep02/PC방1.png",
-    "data/nhs/L3/slides/ep02/PC방2.png",
-    "data/nhs/L3/slides/ep02/PC방3.png",
-    "data/nhs/L3/slides/ep02/PC방4.png",
-    "data/nhs/L3/slides/ep02/PC방5.png",
-    "data/nhs/L3/slides/ep02/PC방6.png",
-    "data/nhs/L3/slides/ep02/PC방7.png",
-    "data/nhs/L3/slides/ep02/PC방8.png",
-    "data/nhs/L3/slides/ep02/PC방9.png",
-    "data/nhs/L3/slides/ep02/PC방10.png",
-    "data/nhs/L3/slides/ep02/PC방11.png",
-    "data/nhs/L3/slides/ep02/PC방12.png",
-    "data/nhs/L3/slides/ep02/PC방13.png",
-    "data/nhs/L3/slides/ep02/PC방14.png",
-    "data/nhs/L3/slides/ep02/PC방15.png",
-    "data/nhs/L3/slides/ep02/PC방16.png",
-    "data/nhs/L3/slides/ep02/PC방17.png"
-  ],
-  "video": null,
-  "characters": [
-    {
-      "id": "riam",
-      "name": "라온",
-      "color": "#4A90D9",
-      "emoji": "👦"
-    },
-    {
-      "id": "kayo",
-      "name": "태오",
-      "color": "#E8744A",
-      "emoji": "👦"
-    }
-  ],
-  "script": [
-    {
-      "speaker": "riam",
-      "text": "태오, 몇 시간?",
-      "slide": 0,
-      "audio": "data/nhs/L3/TTS/ep02/audio_0_카요__몇_시간_.mp3",
-      "en": "Taeo, how many hours?"
-    },
-    {
-      "speaker": "kayo",
-      "text": "한 시간. 아니 두 시간.",
-      "slide": 1,
-      "audio": "data/nhs/L3/TTS/ep02/audio_1_한_시간__아니_두_시간_.mp3",
-      "en": "One hour. No, two hours."
-    },
-    {
-      "speaker": "riam",
-      "text": "콜!",
-      "slide": 2,
-      "audio": "data/nhs/L3/TTS/ep02/audio_2_콜_.mp3",
-      "en": "Deal!"
-    },
-    {
-      "speaker": "kayo",
-      "text": "자판기에서 티켓을 사라고 했지?",
-      "slide": 3,
-      "audio": "data/nhs/L3/TTS/ep02/audio_3_자판기에서_티켓을_사라고_했지_.mp3",
-      "en": "We were told to buy a ticket from the machine, right?",
-      "annotation": {
-        "highlight": "사라고 했지",
-        "grammar": "V-(으)라고 하다 — 간접화법 (명령)",
-        "note": "동사 + (으)라고 하다 = (They) said to V\n티켓을 사라고 했지? = (They) told us to buy tickets, right?\n사다 → 사라고 (buy → told to buy)\n오다 → 오라고 / 가다 → 가라고"
-      }
-    },
-    {
-      "speaker": "riam",
-      "text": "응.",
-      "slide": 4,
-      "audio": "data/nhs/L3/TTS/ep02/audio_4_응_.mp3",
-      "en": "Yeah."
-    },
-    {
-      "speaker": "kayo",
-      "text": "할머니께서 PC를 만지기 전에 물티슈로 닦으라고 하셨어.",
-      "slide": 5,
-      "audio": "data/nhs/L3/TTS/ep02/audio_5_할머니께서_PC를_만지기_전에_물티슈로_닦으라고_하셨어_.mp3",
-      "en": "Grandma said to wipe the PC with a wet wipe before touching it.",
-      "annotation": {
-        "highlight": "닦으라고 하셨어",
-        "grammar": "V-(으)라고 하셨어 — 어른 명령 전달",
-        "note": "(으)라고 하셨어 = [She] told us to V (elder)\n할머니께서 닦으라고 하셨어\n= Grandma told us to wipe it\n닦다 → 닦으라고 (받침 ㄱ → 으라고)"
-      }
-    },
-    {
-      "speaker": "riam",
-      "text": "닦았다고!",
-      "slide": 6,
-      "audio": "data/nhs/L3/TTS/ep02/audio_6_닦았다고_.mp3",
-      "en": "I wiped it."
-    },
-    {
-      "speaker": "kayo",
-      "text": "언제? 손바닥 말고 물티슈로 닦으라고.",
-      "slide": 7,
-      "audio": "data/nhs/L3/TTS/ep02/audio_7_언제__손바닥_말고_물티슈로_닦으라고_.mp3",
-      "en": "When? Not with your palm — with a wet wipe.",
-      "annotation": {
-        "highlight": "닦으라고",
-        "grammar": "V-(으)라고 — indirect command (repeat/insist)",
-        "note": "닦으라고! = [I'm saying] to wipe it!\n= 명령을 재강조할 때 (강조·재촉)\n물티슈로 닦으라고\n= Use a wet wipe! (I'm telling you!)"
-      }
-    },
-    {
-      "speaker": "riam",
-      "text": "알았다고!",
-      "slide": 8,
-      "audio": "data/nhs/L3/TTS/ep02/audio_8_알았다고_.mp3",
-      "en": "I said I got it!"
-    },
-    {
-      "speaker": "kayo",
-      "text": "형, 주문부터 할까? 배 고파.",
-      "slide": 9,
-      "audio": "data/nhs/L3/TTS/ep02/audio_9_형__주문부터_할까__배_고파_.mp3",
-      "en": "Hey, should we order food first? I'm hungry."
-    },
-    {
-      "speaker": "riam",
-      "text": "뭐 먹을거야?",
-      "slide": 10,
-      "audio": "data/nhs/L3/TTS/ep02/audio_10_뭐_먹을거야_.mp3",
-      "en": "What are you going to eat?"
-    },
-    {
-      "speaker": "kayo",
-      "text": "나는 라면.",
-      "slide": 11,
-      "audio": "data/nhs/L3/TTS/ep02/audio_11_나는_라면_.mp3",
-      "en": "Ramyeon for me."
-    },
-    {
-      "speaker": "riam",
-      "text": "나는 삼겹살 덮밥.",
-      "slide": 12,
-      "audio": "data/nhs/L3/TTS/ep02/audio_12_나는_삼겹살_덮밥_.mp3",
-      "en": "Pork belly rice bowl for me."
-    },
-    {
-      "speaker": "kayo",
-      "text": "여기로 갖다 달라고 하자.",
-      "slide": 13,
-      "audio": "data/nhs/L3/TTS/ep02/audio_13_여기로_갖다_달라고_하자_.mp3",
-      "en": "Let's ask them to bring it here.",
-      "annotation": {
-        "highlight": "갖다 달라고 하자",
-        "grammar": "V-아/어 달라고 하다 — ask someone to do for you",
-        "note": "동사 + 아/어 달라고 해 = Ask [them] to do it for you\n여기로 갖다 달라고 하자\n= Let's ask them to bring it here\n갖다 주다(to us) → 달라고 = please give [to me]"
-      }
-    },
-    {
-      "speaker": "kayo",
-      "text": "형, 콜라는 어떻게 했어?",
-      "slide": 14,
-      "audio": "data/nhs/L3/TTS/ep02/audio_14_형__콜라는_어떻게_했어_.mp3",
-      "en": "Hey, what did you do with the cola?"
-    },
-    {
-      "speaker": "riam",
-      "text": "음식물은 가지고 들어오지 말라고 했어.",
-      "slide": 15,
-      "audio": "data/nhs/L3/TTS/ep02/audio_15_음식물은_가지고_들어오지_말라고_했어_.mp3",
-      "en": "They said not to bring food and drinks in.",
-      "annotation": {
-        "highlight": "가지고 들어오지 말라고 했어",
-        "grammar": "V-지 말라고 하다 — told not to",
-        "note": "동사 + 지 말라고 하다 = told not to V\n음식물은 가지고 들어오지 말라고 했어\n= They said not to bring food in\n↔ (으)라고 하다 (told TO do)\n지 말라고 (told NOT to do)"
-      }
-    },
-    {
-      "speaker": "kayo",
-      "text": "아. 그렇구나.",
-      "slide": 16,
-      "audio": "data/nhs/L3/TTS/ep02/audio_16_아__그렇구나_.mp3",
-      "en": "Oh. I see."
-    }
-  ],
-  "vocab": [
-    {
-      "category": "🎮 PC방 PC Café",
-      "items": [
-        {
-          "korean": "자판기",
-          "english": "vending machine / ticket machine",
-          "emoji": "🎫"
-        },
-        {
-          "korean": "티켓",
-          "english": "ticket (for PC time)",
-          "emoji": "🎟️"
-        },
-        {
-          "korean": "물티슈",
-          "english": "wet wipe",
-          "emoji": "🧻",
-          "note": "한국 PC방에서는 컴퓨터를 쓰기 전에 물티슈로 닦는 것이 예의예요."
-        },
-        {
-          "korean": "손바닥",
-          "english": "palm (of the hand)",
-          "emoji": "🖐️"
-        },
-        {
-          "korean": "주문",
-          "english": "order (food/drink)",
-          "emoji": "📋"
-        }
-      ]
-    },
-    {
-      "category": "🍜 PC방 음식 PC Café Food",
-      "items": [
-        {
-          "korean": "라면",
-          "english": "ramyeon (instant noodles)",
-          "emoji": "🍜"
-        },
-        {
-          "korean": "삼겹살 덮밥",
-          "english": "pork belly rice bowl",
-          "emoji": "🍚",
-          "note": "PC방에서 파는 대표 메뉴 중 하나예요."
-        }
-      ]
-    },
-    {
-      "category": "🔤 동사 Verbs",
-      "items": [
-        {
-          "korean": "닦다",
-          "english": "to wipe, to clean",
-          "emoji": "🧼"
-        },
-        {
-          "korean": "들어오다",
-          "english": "to come in, to enter",
-          "emoji": "🚪"
-        },
-        {
-          "korean": "나가다",
-          "english": "to go out, to leave",
-          "emoji": "🚶"
-        },
-        {
-          "korean": "갖다 주다",
-          "english": "to bring (and give)",
-          "emoji": "🤲",
-          "note": "가져다 주다의 줄임말. 갖다 달라고 = asking them to bring it for you."
-        },
-        {
-          "korean": "전하다",
-          "english": "to relay, to pass on (a message)",
-          "emoji": "📨"
-        }
-      ]
-    },
-    {
-      "category": "💬 표현 Expressions",
-      "items": [
-        {
-          "korean": "콜!",
-          "english": "Deal! / OK! (casual agreement)",
-          "emoji": "🤝",
-          "note": "영어 'call'에서 온 표현. 10대들이 많이 써요."
-        },
-        {
-          "korean": "말고",
-          "english": "not X, but Y / instead of",
-          "emoji": "↔️",
-          "note": "손바닥 말고 물티슈로 = not with your palm, but with a wet wipe"
-        },
-        {
-          "korean": "꼭",
-          "english": "for sure, definitely, without fail",
-          "emoji": "☑️"
-        },
-        {
-          "korean": "된다 / 안 된다",
-          "english": "it's allowed / it's not allowed",
-          "emoji": "✅❌"
-        },
-        {
-          "korean": "께서",
-          "english": "honorific subject particle (honorific form of 이/가)",
-          "note": "할머니께서, 선생님께서 — used when the subject is someone you respect",
-          "emoji": "🎩"
-        }
-      ]
-    }
-  ],
-  "grammar": [
-    {
-      "id": "gL3e02_eurago",
-      "tier": "core",
-      "title": "-(으)라고 하다",
-      "title_en": "Indirect Command — Relaying Orders",
-      "emoji": "📣",
-      "explanation_en": "Use -(으)라고 하다 to relay a command someone gave. The verb takes a special indirect imperative form — NOT the same as -(이)라고 (ep01), which quotes nouns.",
-      "pattern": "Verb stem + -으라고 (consonant)  |  Verb stem + -라고 (vowel)",
-      "scene_example": {
-        "korean": "물티슈로 닦으라고 하셨어.",
-        "english": "She said to wipe it with a wet wipe.",
-        "highlight": "닦으라고"
-      },
-      "rule_boxes": [
-        {
-          "content": "오다 → 오라고 해요 (said to come)\n가다 → 가라고 해요 (said to go)\n사다 → 사라고 해요 (said to buy)",
-          "type": "blue",
-          "label": "모음 어간 → -라고 · Vowel stem → -라고"
-        },
-        {
-          "content": "닦다 → 닦으라고 해요 (said to wipe)\n먹다 → 먹으라고 해요 (said to eat)\n읽다 → 읽으라고 해요 (said to read)",
-          "type": "green",
-          "label": "자음 어간 → -으라고 · Consonant stem → -으라고"
-        },
-        {
-          "content": "-(이)라고 = quoting a noun/phrase\n파전이라고 해 → It's called pajeon\n\n-(으)라고 = relaying a command\n닦으라고 해 → Said to wipe it",
-          "type": "amber",
-          "label": "⚠️ ep01 -(이)라고와 헷갈리지 마세요! · Don't mix up with ep01"
-        },
-        {
-          "content": "❌ 닦아라고 해요\n✅ 닦으라고 해요\n\n-아/어라 명령형을 그대로 붙이면 안 돼요.\n간접 명령은 항상 -(으)라고 형태!",
-          "type": "red",
-          "label": "❌ 흔한 오류 · Common mistake"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "모음 어간 (Vowel stems)",
-          "items": [
-            {
-              "ko": "선생님이 교실로 오라고 하셨어요.",
-              "en": "The teacher said to come to the classroom."
-            },
-            {
-              "ko": "엄마가 빨리 자라고 했어.",
-              "en": "Mom said to go to sleep quickly."
-            }
-          ]
-        },
-        {
-          "label": "자음 어간 (Consonant stems)",
-          "items": [
-            {
-              "ko": "의사가 많이 쉬라고 했어요.",
-              "en": "The doctor said to rest a lot."
-            },
-            {
-              "ko": "할머니께서 물티슈로 닦으라고 하셨어.",
-              "en": "Grandma said to wipe it with a wet wipe."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "gL3e02_jimalrago",
-      "tier": "core",
-      "title": "-지 말라고 하다",
-      "title_en": "Indirect Prohibition — Relaying 'Don't'",
-      "emoji": "🚫",
-      "explanation_en": "Use -지 말라고 하다 to relay a prohibition — when someone told you NOT to do something. It's the reported form of -지 마세요.",
-      "pattern": "Verb stem + -지 말라고 해요",
-      "scene_example": {
-        "korean": "음식물은 가지고 들어오지 말라고 했어.",
-        "english": "They said not to bring food and drinks in.",
-        "highlight": "들어오지 말라고"
-      },
-      "rule_boxes": [
-        {
-          "content": "-지 마세요 → -지 말라고 해요\n들어오지 마세요 → 들어오지 말라고 했어요\n먹지 마세요 → 먹지 말라고 했어요",
-          "type": "blue",
-          "label": "직접 금지 → 간접 전달 · Direct → Reported"
-        },
-        {
-          "content": "닦으라고 해요 → said TO wipe ✅\n닦지 말라고 해요 → said NOT TO wipe ✅\n\n명령(하라고) ↔ 금지(하지 말라고)",
-          "type": "green",
-          "label": "-(으)라고 vs -지 말라고 · Do vs Don't"
-        },
-        {
-          "content": "뛰지 말라고 했어요. (Said not to run.)\n늦지 말라고 하셨어. (Said not to be late.)\n핸드폰 쓰지 말라고 했어. (Said not to use the phone.)",
-          "type": "amber",
-          "label": "실생활 예시 · Real-life examples"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "학교 / 집 규칙 (School / Home rules)",
-          "items": [
-            {
-              "ko": "선생님이 뛰지 말라고 하셨어요.",
-              "en": "The teacher said not to run."
-            },
-            {
-              "ko": "엄마가 게임 너무 많이 하지 말라고 했어.",
-              "en": "Mom said not to play games too much."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "gL3e02_dalrago",
-      "tier": "core",
-      "title": "-아/어 달라고 하다",
-      "title_en": "Indirect Request — Relaying 'Please Do for Me'",
-      "emoji": "🙏",
-      "explanation_en": "Use -아/어 달라고 하다 to relay a request — when someone asked for something to be done for them. It's the reported form of -아/어 주세요 / 달라.",
-      "pattern": "Verb stem + -아/어 달라고 해요",
-      "scene_example": {
-        "korean": "여기로 갖다 달라고 하자.",
-        "english": "Let's ask them to bring it here.",
-        "highlight": "갖다 달라고"
-      },
-      "rule_boxes": [
-        {
-          "content": "-아/어 주세요 → -아/어 달라고 해요\n갖다 주세요 → 갖다 달라고 해요\n가르쳐 주세요 → 가르쳐 달라고 해요",
-          "type": "blue",
-          "label": "직접 부탁 → 간접 전달 · Request → Reported"
-        },
-        {
-          "content": "주라고 해요 = said to give (to someone else)\n달라고 해요 = asked to give (to me/us)\n\n예: 동생한테 주라고 해. (Tell him to give it to your sibling.)\n예: 나한테 달라고 해봐. (Ask him to give it to me.)",
-          "type": "amber",
-          "label": "주라고 vs 달라고 · 헷갈리는 쌍"
-        },
-        {
-          "content": "도와 달라고 했어요. (Asked me to help.)\n빨리 와 달라고 해요. (Asking to come quickly.)\n설명해 달라고 했어. (Asked to explain.)",
-          "type": "green",
-          "label": "활용 예시 · More examples"
-        }
-      ],
-      "example_groups": [
-        {
-          "label": "갖다/가져다 + 달라고",
-          "items": [
-            {
-              "ko": "여기로 갖다 달라고 하자.",
-              "en": "Let's ask them to bring it here."
-            },
-            {
-              "ko": "물 좀 갖다 달라고 했어요.",
-              "en": "I asked them to bring some water."
-            }
-          ]
-        },
-        {
-          "label": "기타 동사 (Other verbs)",
-          "items": [
-            {
-              "ko": "가르쳐 달라고 했어.",
-              "en": "I asked them to teach me."
-            },
-            {
-              "ko": "도와 달라고 할게요.",
-              "en": "I'll ask them to help."
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "pronunciation": [
-    {
-      "title": "닦으라고 → [다끄라고]",
-      "rule": "받침 ㄱ + 으 → 연음화",
-      "examples": [
-        {
-          "written": "닦으라고",
-          "after": "[다끄라고]"
-        },
-        {
-          "written": "읽으라고",
-          "after": "[일그라고]"
-        }
-      ]
-    },
-    {
-      "title": "말라고 → [말라고]",
-      "rule": "말다 (ㄹ 탈락 없음 — 말라고 그대로)",
-      "examples": [
-        {
-          "written": "먹지 말라고",
-          "after": "[먹찌 말라고]"
-        },
-        {
-          "written": "들어오지 말라고",
-          "after": "[드러오지 말라고]"
-        }
-      ]
-    },
-    {
-      "title": "갖다 → [갇따]",
-      "rule": "받침 ㅈ → [ㄷ] 중화 + 경음화",
-      "examples": [
-        {
-          "written": "갖다 달라고",
-          "after": "[갇따 달라고]"
-        }
-      ]
-    }
-  ],
-  "banmal_jondaemal": {
-    "title_ko": "명령과 부탁 — 반말 vs 존댓말",
-    "title_en": "Commands & Requests — Casual vs Formal",
-    "intro_ko": "같은 명령·부탁도 상대방에 따라 반말과 존댓말로 달라져요.",
-    "intro_en": "The same command or request changes form depending on who you're talking to.",
-    "rows": [
-      {
-        "situation": "친구한테 직접",
-        "banmal": "닦아.",
-        "jondaemal": "닦으세요.",
-        "note": "direct command"
-      },
-      {
-        "situation": "전달할 때",
-        "banmal": "닦으라고 해.",
-        "jondaemal": "닦으라고 하세요.",
-        "note": "indirect command"
-      },
-      {
-        "situation": "금지 전달",
-        "banmal": "하지 말라고 해.",
-        "jondaemal": "하지 말라고 하세요.",
-        "note": "indirect prohibition"
-      },
-      {
-        "situation": "부탁 전달",
-        "banmal": "갖다 달라고 해.",
-        "jondaemal": "갖다 달라고 하세요.",
-        "note": "indirect request"
-      }
-    ],
-    "adult_dialogue": {
-      "title_ko": "직장 상황 — 지시 전달",
-      "title_en": "Workplace — Relaying Instructions",
-      "setup_ko": "팀장이 팀원에게 고객 요청을 전달하는 상황이에요.",
-      "setup_en": "A team leader relays a client's request to a team member.",
-      "lines": [
-        {
-          "speaker": "팀장",
-          "text": "고객이 보고서를 내일까지 보내 달라고 하셨어요.",
-          "en": "The client asked us to send the report by tomorrow."
-        },
-        {
-          "speaker": "팀원",
-          "text": "네, 알겠습니다. 이메일로 보내 드릴까요?",
-          "en": "Yes, understood. Shall I send it by email?"
-        },
-        {
-          "speaker": "팀장",
-          "text": "네, 그리고 파일 크기를 줄여서 보내라고 하셨어요.",
-          "en": "Yes, and they said to reduce the file size before sending."
-        },
-        {
-          "speaker": "팀원",
-          "text": "파일을 압축하지 말라고 하셨나요, 아니면 크기만 줄이라고 하셨나요?",
-          "en": "Did they say not to compress it, or just to reduce the size?"
-        },
-        {
-          "speaker": "팀장",
-          "text": "크기만 줄이라고 하셨어요.",
-          "en": "They said just reduce the size."
-        }
-      ],
-      "note_ko": "존댓말에서는 -(으)라고 하셨어요 / -지 말라고 하셨어요처럼 '셨' 경어를 붙여 전달해요.",
-      "note_en": "In formal speech, add honorific 셨 when relaying what a senior or client said."
-    }
+  {
+   "id": "kayo",
+   "name": "태오",
+   "color": "#E8744A",
+   "emoji": "👦"
+  }
+ ],
+ "script": [
+  {
+   "speaker": "riam",
+   "text": "태오, 몇 시간?",
+   "slide": 0,
+   "audio": "data/nhs/L3/TTS/ep02/audio_0_카요__몇_시간_.mp3",
+   "en": "Taeo, how many hours?"
   },
-  "real_life": [
+  {
+   "speaker": "kayo",
+   "text": "한 시간. 아니 두 시간.",
+   "slide": 1,
+   "audio": "data/nhs/L3/TTS/ep02/audio_1_한_시간__아니_두_시간_.mp3",
+   "en": "One hour. No, two hours."
+  },
+  {
+   "speaker": "riam",
+   "text": "콜!",
+   "slide": 2,
+   "audio": "data/nhs/L3/TTS/ep02/audio_2_콜_.mp3",
+   "en": "Deal!"
+  },
+  {
+   "speaker": "kayo",
+   "text": "자판기에서 티켓을 사라고 했지?",
+   "slide": 3,
+   "audio": "data/nhs/L3/TTS/ep02/audio_3_자판기에서_티켓을_사라고_했지_.mp3",
+   "en": "We were told to buy a ticket from the machine, right?",
+   "annotation": {
+    "highlight": "사라고 했지",
+    "grammar": "V-(으)라고 하다 — 간접화법 (명령)",
+    "note": "동사 + (으)라고 하다 = (They) said to V\n티켓을 사라고 했지? = (They) told us to buy tickets, right?\n사다 → 사라고 (buy → told to buy)\n오다 → 오라고 / 가다 → 가라고"
+   }
+  },
+  {
+   "speaker": "riam",
+   "text": "응.",
+   "slide": 4,
+   "audio": "data/nhs/L3/TTS/ep02/audio_4_응_.mp3",
+   "en": "Yeah."
+  },
+  {
+   "speaker": "kayo",
+   "text": "할머니께서 PC를 만지기 전에 물티슈로 닦으라고 하셨어.",
+   "slide": 5,
+   "audio": "data/nhs/L3/TTS/ep02/audio_5_할머니께서_PC를_만지기_전에_물티슈로_닦으라고_하셨어_.mp3",
+   "en": "Grandma said to wipe the PC with a wet wipe before touching it.",
+   "annotation": {
+    "highlight": "닦으라고 하셨어",
+    "grammar": "V-(으)라고 하셨어 — 어른 명령 전달",
+    "note": "(으)라고 하셨어 = [She] told us to V (elder)\n할머니께서 닦으라고 하셨어\n= Grandma told us to wipe it\n닦다 → 닦으라고 (받침 ㄱ → 으라고)"
+   }
+  },
+  {
+   "speaker": "riam",
+   "text": "닦았다고!",
+   "slide": 6,
+   "audio": "data/nhs/L3/TTS/ep02/audio_6_닦았다고_.mp3",
+   "en": "I wiped it."
+  },
+  {
+   "speaker": "kayo",
+   "text": "언제? 손바닥 말고 물티슈로 닦으라고.",
+   "slide": 7,
+   "audio": "data/nhs/L3/TTS/ep02/audio_7_언제__손바닥_말고_물티슈로_닦으라고_.mp3",
+   "en": "When? Not with your palm — with a wet wipe.",
+   "annotation": {
+    "highlight": "닦으라고",
+    "grammar": "V-(으)라고 — indirect command (repeat/insist)",
+    "note": "닦으라고! = [I'm saying] to wipe it!\n= 명령을 재강조할 때 (강조·재촉)\n물티슈로 닦으라고\n= Use a wet wipe! (I'm telling you!)"
+   }
+  },
+  {
+   "speaker": "riam",
+   "text": "알았다고!",
+   "slide": 8,
+   "audio": "data/nhs/L3/TTS/ep02/audio_8_알았다고_.mp3",
+   "en": "I said I got it!"
+  },
+  {
+   "speaker": "kayo",
+   "text": "형, 주문부터 할까? 배 고파.",
+   "slide": 9,
+   "audio": "data/nhs/L3/TTS/ep02/audio_9_형__주문부터_할까__배_고파_.mp3",
+   "en": "Hey, should we order food first? I'm hungry."
+  },
+  {
+   "speaker": "riam",
+   "text": "뭐 먹을거야?",
+   "slide": 10,
+   "audio": "data/nhs/L3/TTS/ep02/audio_10_뭐_먹을거야_.mp3",
+   "en": "What are you going to eat?"
+  },
+  {
+   "speaker": "kayo",
+   "text": "나는 라면.",
+   "slide": 11,
+   "audio": "data/nhs/L3/TTS/ep02/audio_11_나는_라면_.mp3",
+   "en": "Ramyeon for me."
+  },
+  {
+   "speaker": "riam",
+   "text": "나는 삼겹살 덮밥.",
+   "slide": 12,
+   "audio": "data/nhs/L3/TTS/ep02/audio_12_나는_삼겹살_덮밥_.mp3",
+   "en": "Pork belly rice bowl for me."
+  },
+  {
+   "speaker": "kayo",
+   "text": "여기로 갖다 달라고 하자.",
+   "slide": 13,
+   "audio": "data/nhs/L3/TTS/ep02/audio_13_여기로_갖다_달라고_하자_.mp3",
+   "en": "Let's ask them to bring it here.",
+   "annotation": {
+    "highlight": "갖다 달라고 하자",
+    "grammar": "V-아/어 달라고 하다 — ask someone to do for you",
+    "note": "동사 + 아/어 달라고 해 = Ask [them] to do it for you\n여기로 갖다 달라고 하자\n= Let's ask them to bring it here\n갖다 주다(to us) → 달라고 = please give [to me]"
+   }
+  },
+  {
+   "speaker": "kayo",
+   "text": "형, 콜라는 어떻게 했어?",
+   "slide": 14,
+   "audio": "data/nhs/L3/TTS/ep02/audio_14_형__콜라는_어떻게_했어_.mp3",
+   "en": "Hey, what did you do with the cola?"
+  },
+  {
+   "speaker": "riam",
+   "text": "음식물은 가지고 들어오지 말라고 했어.",
+   "slide": 15,
+   "audio": "data/nhs/L3/TTS/ep02/audio_15_음식물은_가지고_들어오지_말라고_했어_.mp3",
+   "en": "They said not to bring food and drinks in.",
+   "annotation": {
+    "highlight": "가지고 들어오지 말라고 했어",
+    "grammar": "V-지 말라고 하다 — told not to",
+    "note": "동사 + 지 말라고 하다 = told not to V\n음식물은 가지고 들어오지 말라고 했어\n= They said not to bring food in\n↔ (으)라고 하다 (told TO do)\n지 말라고 (told NOT to do)"
+   }
+  },
+  {
+   "speaker": "kayo",
+   "text": "아. 그렇구나.",
+   "slide": 16,
+   "audio": "data/nhs/L3/TTS/ep02/audio_16_아__그렇구나_.mp3",
+   "en": "Oh. I see."
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🎮 PC방 PC Café",
+   "items": [
     {
-      "type": "kakao",
-      "title_ko": "할머니한테서 온 카톡",
-      "title_en": "KakaoTalk from Grandma",
-      "messages": [
-        {
-          "side": "left",
-          "speaker": "할머니",
-          "text": "라온아, PC방에서 꼭 물티슈로 닦고 써야 해!"
-        },
-        {
-          "side": "right",
-          "speaker": "라온",
-          "text": "네 할머니, 알겠어요 😊"
-        },
-        {
-          "side": "left",
-          "speaker": "할머니",
-          "text": "음식은 안으로 가지고 들어가지 마!"
-        },
-        {
-          "side": "right",
-          "speaker": "라온",
-          "text": "거기서 주문해서 먹을게요!"
-        },
-        {
-          "side": "left",
-          "speaker": "할머니",
-          "text": "그리고 두 시간 넘으면 안 돼. 알겠지? 👵"
-        }
-      ]
+     "korean": "자판기",
+     "english": "vending machine / ticket machine",
+     "emoji": "🎫"
     },
     {
-      "type": "reading",
-      "title_ko": "PC방 이용 안내",
-      "title_en": "PC Café Usage Guide",
-      "passage": "PC방 이용 안내\n\n1. 입장 전 자판기에서 티켓을 구매하세요.\n2. 컴퓨터를 사용하기 전에 물티슈로 깨끗이 닦으세요.\n3. 음식물은 매장 안에서만 드세요. 외부 음식물 반입 금지.\n4. 큰 소리를 내지 마세요.\n5. 자리를 떠날 때는 반드시 로그아웃하세요.",
-      "questions": [
-        {
-          "q": "PC방에 들어가기 전에 무엇을 해야 해요?",
-          "options": [
-            "물티슈로 닦아야 해요",
-            "자판기에서 티켓을 사야 해요",
-            "주문을 먼저 해야 해요",
-            "로그아웃해야 해요"
-          ],
-          "answer": 1
-        },
-        {
-          "q": "외부 음식물을 PC방 안으로 가지고 들어와도 돼요?",
-          "options": [
-            "네, 괜찮아요",
-            "아니요, 안 돼요",
-            "음료수만 돼요",
-            "포장된 것만 돼요"
-          ],
-          "answer": 1
-        }
-      ]
+     "korean": "티켓",
+     "english": "ticket (for PC time)",
+     "emoji": "🎟️"
+    },
+    {
+     "korean": "물티슈",
+     "english": "wet wipe",
+     "emoji": "🧻",
+     "note": "한국 PC방에서는 컴퓨터를 쓰기 전에 물티슈로 닦는 것이 예의예요."
+    },
+    {
+     "korean": "손바닥",
+     "english": "palm (of the hand)",
+     "emoji": "🖐️"
+    },
+    {
+     "korean": "주문",
+     "english": "order (food/drink)",
+     "emoji": "📋"
     }
-  ],
-  "quiz": [
+   ]
+  },
+  {
+   "category": "🍜 PC방 음식 PC Café Food",
+   "items": [
     {
-      "type": "listen",
-      "audio_text": "할머니께서 PC를 만지기 전에 물티슈로 닦으라고 하셨어.",
-      "question": "What did Grandma say to do?",
-      "options": [
-        "Wash your hands first",
-        "Wipe the PC with a wet wipe",
-        "Buy tickets at the machine",
-        "Don't bring food inside"
-      ],
-      "answer": 1
+     "korean": "라면",
+     "english": "ramyeon (instant noodles)",
+     "emoji": "🍜"
     },
     {
-      "type": "listen",
-      "audio_text": "음식물은 가지고 들어오지 말라고 했어.",
-      "question": "What rule did Raon relay?",
-      "options": [
-        "Order food at the counter",
-        "Don't bring food or drinks inside",
-        "Eat before you come in",
-        "Don't use the vending machine"
-      ],
-      "answer": 1
-    },
-    {
-      "type": "listen",
-      "audio_text": "여기로 갖다 달라고 하자.",
-      "question": "What is Taeo suggesting?",
-      "options": [
-        "Let's go pick up the food",
-        "Let's ask them to bring it here",
-        "Let's order two things",
-        "Let's pay at the counter"
-      ],
-      "answer": 1
-    },
-    {
-      "type": "mc",
-      "question": "어떻게 '명령'을 간접적으로 전달해요? How do you relay a command?",
-      "options": [
-        "동사 + -다고 해요",
-        "동사 + -(으)라고 해요",
-        "동사 + -(이)라고 해요",
-        "동사 + -냐고 해요"
-      ],
-      "answer": 1
-    },
-    {
-      "type": "mc",
-      "question": "'Don't run' → 어떻게 전달해요?",
-      "options": [
-        "뛰라고 해요",
-        "뛰냐고 해요",
-        "뛰지 말라고 해요",
-        "뛰다고 해요"
-      ],
-      "answer": 2
-    },
-    {
-      "type": "mc",
-      "question": "'갖다 달라고 해요' vs '갖다 주라고 해요' — 차이는?",
-      "options": [
-        "달라고 = bring it to someone else / 주라고 = bring it to me",
-        "달라고 = bring it to me (request for me) / 주라고 = give it to someone else",
-        "둘 다 같은 표현이에요",
-        "달라고 = 반말 / 주라고 = 존댓말"
-      ],
-      "answer": 1
+     "korean": "삼겹살 덮밥",
+     "english": "pork belly rice bowl",
+     "emoji": "🍚",
+     "note": "PC방에서 파는 대표 메뉴 중 하나예요."
     }
-  ],
-  "self_check": [
-    "할머니의 명령을 -(으)라고 해서 전달할 수 있어요.",
-    "금지 사항을 -지 말라고 해서 전달할 수 있어요.",
-    "부탁을 -아/어 달라고 해서 전달할 수 있어요.",
-    "-(으)라고 (명령)와 -(이)라고 (명사 인용)의 차이를 알아요.",
-    "PC방 이용 안내를 한국어로 읽고 이해할 수 있어요."
-  ],
-  "usage": [
+   ]
+  },
+  {
+   "category": "🔤 동사 Verbs",
+   "items": [
     {
-      "heading": "🎮 PC방 이용 표현 · Useful PC Café Phrases",
-      "content": "PC방에서 자주 쓰는 표현들이에요. 티켓 구매부터 음식 주문까지 한국어로 말해 봐요.",
-      "examples": [
-        {
-          "ko": "몇 시간 하실 거예요?",
-          "en": "How many hours will you be using?"
-        },
-        {
-          "ko": "한 시간 할게요.",
-          "en": "I'll do one hour."
-        },
-        {
-          "ko": "자판기에서 티켓 사세요.",
-          "en": "Please buy a ticket at the machine."
-        },
-        {
-          "ko": "여기로 갖다 주세요.",
-          "en": "Please bring it here."
-        },
-        {
-          "ko": "음식물 반입 금지예요.",
-          "en": "Outside food and drink is not allowed."
-        }
-      ]
+     "korean": "닦다",
+     "english": "to wipe, to clean",
+     "emoji": "🧼"
     },
     {
-      "heading": "📨 명령·금지·부탁 전달하기 · Relaying Commands, Rules & Requests",
-      "content": "실생활에서 누군가의 말을 전달할 때 쓰는 패턴이에요.",
-      "examples": [
-        {
-          "ko": "선생님이 내일까지 제출하라고 하셨어요.",
-          "en": "The teacher said to submit it by tomorrow."
-        },
-        {
-          "ko": "도서관에서 조용히 하라고 했어요.",
-          "en": "They said to be quiet in the library."
-        },
-        {
-          "ko": "핸드폰 쓰지 말라고 했어요.",
-          "en": "They said not to use your phone."
-        },
-        {
-          "ko": "창문 열지 말라고 하셨어요.",
-          "en": "He/she said not to open the window."
-        },
-        {
-          "ko": "조금만 도와 달라고 했어요.",
-          "en": "I asked them to help me a little."
-        },
-        {
-          "ko": "천천히 설명해 달라고 했어요.",
-          "en": "I asked them to explain it slowly."
-        }
-      ]
+     "korean": "들어오다",
+     "english": "to come in, to enter",
+     "emoji": "🚪"
+    },
+    {
+     "korean": "나가다",
+     "english": "to go out, to leave",
+     "emoji": "🚶"
+    },
+    {
+     "korean": "갖다 주다",
+     "english": "to bring (and give)",
+     "emoji": "🤲",
+     "note": "가져다 주다의 줄임말. 갖다 달라고 = asking them to bring it for you."
+    },
+    {
+     "korean": "전하다",
+     "english": "to relay, to pass on (a message)",
+     "emoji": "📨"
     }
-  ]
+   ]
+  },
+  {
+   "category": "💬 표현 Expressions",
+   "items": [
+    {
+     "korean": "콜!",
+     "english": "Deal! / OK! (casual agreement)",
+     "emoji": "🤝",
+     "note": "영어 'call'에서 온 표현. 10대들이 많이 써요."
+    },
+    {
+     "korean": "말고",
+     "english": "not X, but Y / instead of",
+     "emoji": "↔️",
+     "note": "손바닥 말고 물티슈로 = not with your palm, but with a wet wipe"
+    },
+    {
+     "korean": "꼭",
+     "english": "for sure, definitely, without fail",
+     "emoji": "☑️"
+    },
+    {
+     "korean": "된다 / 안 된다",
+     "english": "it's allowed / it's not allowed",
+     "emoji": "✅❌"
+    },
+    {
+     "korean": "께서",
+     "english": "honorific subject particle (honorific form of 이/가)",
+     "note": "할머니께서, 선생님께서 — used when the subject is someone you respect",
+     "emoji": "🎩"
+    }
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "gL3e02_eurago",
+   "tier": "core",
+   "title": "-(으)라고 하다",
+   "title_en": "Indirect Command — Relaying Orders",
+   "emoji": "📣",
+   "explanation_en": "Use -(으)라고 하다 to relay a command someone gave. The verb takes a special indirect imperative form — NOT the same as -(이)라고 (ep01), which quotes nouns.",
+   "pattern": "Verb stem + -으라고 (consonant)  |  Verb stem + -라고 (vowel)",
+   "scene_example": {
+    "korean": "물티슈로 닦으라고 하셨어.",
+    "english": "She said to wipe it with a wet wipe.",
+    "highlight": "닦으라고"
+   },
+   "rule_boxes": [
+    {
+     "content": "오다 → 오라고 해요 (said to come)\n가다 → 가라고 해요 (said to go)\n사다 → 사라고 해요 (said to buy)",
+     "type": "blue",
+     "label": "모음 어간 → -라고 · Vowel stem → -라고"
+    },
+    {
+     "content": "닦다 → 닦으라고 해요 (said to wipe)\n먹다 → 먹으라고 해요 (said to eat)\n읽다 → 읽으라고 해요 (said to read)",
+     "type": "green",
+     "label": "자음 어간 → -으라고 · Consonant stem → -으라고"
+    },
+    {
+     "content": "-(이)라고 = quoting a noun/phrase\n파전이라고 해 → It's called pajeon\n\n-(으)라고 = relaying a command\n닦으라고 해 → Said to wipe it",
+     "type": "amber",
+     "label": "⚠️ ep01 -(이)라고와 헷갈리지 마세요! · Don't mix up with ep01"
+    },
+    {
+     "content": "❌ 닦아라고 해요\n✅ 닦으라고 해요\n\n-아/어라 명령형을 그대로 붙이면 안 돼요.\n간접 명령은 항상 -(으)라고 형태!",
+     "type": "red",
+     "label": "❌ 흔한 오류 · Common mistake"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "모음 어간 (Vowel stems)",
+     "items": [
+      {
+       "ko": "선생님이 교실로 오라고 하셨어요.",
+       "en": "The teacher said to come to the classroom."
+      },
+      {
+       "ko": "엄마가 빨리 자라고 했어.",
+       "en": "Mom said to go to sleep quickly."
+      }
+     ]
+    },
+    {
+     "label": "자음 어간 (Consonant stems)",
+     "items": [
+      {
+       "ko": "의사가 많이 쉬라고 했어요.",
+       "en": "The doctor said to rest a lot."
+      },
+      {
+       "ko": "할머니께서 물티슈로 닦으라고 하셨어.",
+       "en": "Grandma said to wipe it with a wet wipe."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gL3e02_jimalrago",
+   "tier": "core",
+   "title": "-지 말라고 하다",
+   "title_en": "Indirect Prohibition — Relaying 'Don't'",
+   "emoji": "🚫",
+   "explanation_en": "Use -지 말라고 하다 to relay a prohibition — when someone told you NOT to do something. It's the reported form of -지 마세요.",
+   "pattern": "Verb stem + -지 말라고 해요",
+   "scene_example": {
+    "korean": "음식물은 가지고 들어오지 말라고 했어.",
+    "english": "They said not to bring food and drinks in.",
+    "highlight": "들어오지 말라고"
+   },
+   "rule_boxes": [
+    {
+     "content": "-지 마세요 → -지 말라고 해요\n들어오지 마세요 → 들어오지 말라고 했어요\n먹지 마세요 → 먹지 말라고 했어요",
+     "type": "blue",
+     "label": "직접 금지 → 간접 전달 · Direct → Reported"
+    },
+    {
+     "content": "닦으라고 해요 → said TO wipe ✅\n닦지 말라고 해요 → said NOT TO wipe ✅\n\n명령(하라고) ↔ 금지(하지 말라고)",
+     "type": "green",
+     "label": "-(으)라고 vs -지 말라고 · Do vs Don't"
+    },
+    {
+     "content": "뛰지 말라고 했어요. (Said not to run.)\n늦지 말라고 하셨어. (Said not to be late.)\n핸드폰 쓰지 말라고 했어. (Said not to use the phone.)",
+     "type": "amber",
+     "label": "실생활 예시 · Real-life examples"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "학교 / 집 규칙 (School / Home rules)",
+     "items": [
+      {
+       "ko": "선생님이 뛰지 말라고 하셨어요.",
+       "en": "The teacher said not to run."
+      },
+      {
+       "ko": "엄마가 게임 너무 많이 하지 말라고 했어.",
+       "en": "Mom said not to play games too much."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gL3e02_dalrago",
+   "tier": "core",
+   "title": "-아/어 달라고 하다",
+   "title_en": "Indirect Request — Relaying 'Please Do for Me'",
+   "emoji": "🙏",
+   "explanation_en": "Use -아/어 달라고 하다 to relay a request — when someone asked for something to be done for them. It's the reported form of -아/어 주세요 / 달라.",
+   "pattern": "Verb stem + -아/어 달라고 해요",
+   "scene_example": {
+    "korean": "여기로 갖다 달라고 하자.",
+    "english": "Let's ask them to bring it here.",
+    "highlight": "갖다 달라고"
+   },
+   "rule_boxes": [
+    {
+     "content": "-아/어 주세요 → -아/어 달라고 해요\n갖다 주세요 → 갖다 달라고 해요\n가르쳐 주세요 → 가르쳐 달라고 해요",
+     "type": "blue",
+     "label": "직접 부탁 → 간접 전달 · Request → Reported"
+    },
+    {
+     "content": "주라고 해요 = said to give (to someone else)\n달라고 해요 = asked to give (to me/us)\n\n예: 동생한테 주라고 해. (Tell him to give it to your sibling.)\n예: 나한테 달라고 해봐. (Ask him to give it to me.)",
+     "type": "amber",
+     "label": "주라고 vs 달라고 · 헷갈리는 쌍"
+    },
+    {
+     "content": "도와 달라고 했어요. (Asked me to help.)\n빨리 와 달라고 해요. (Asking to come quickly.)\n설명해 달라고 했어. (Asked to explain.)",
+     "type": "green",
+     "label": "활용 예시 · More examples"
+    }
+   ],
+   "example_groups": [
+    {
+     "label": "갖다/가져다 + 달라고",
+     "items": [
+      {
+       "ko": "여기로 갖다 달라고 하자.",
+       "en": "Let's ask them to bring it here."
+      },
+      {
+       "ko": "물 좀 갖다 달라고 했어요.",
+       "en": "I asked them to bring some water."
+      }
+     ]
+    },
+    {
+     "label": "기타 동사 (Other verbs)",
+     "items": [
+      {
+       "ko": "가르쳐 달라고 했어.",
+       "en": "I asked them to teach me."
+      },
+      {
+       "ko": "도와 달라고 할게요.",
+       "en": "I'll ask them to help."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "pronunciation": [
+  {
+   "title": "닦으라고 → [다끄라고]",
+   "rule": "받침 ㄱ + 으 → 연음화",
+   "examples": [
+    {
+     "written": "닦으라고",
+     "after": "[다끄라고]"
+    },
+    {
+     "written": "읽으라고",
+     "after": "[일그라고]"
+    }
+   ]
+  },
+  {
+   "title": "말라고 → [말라고]",
+   "rule": "말다 (ㄹ 탈락 없음 — 말라고 그대로)",
+   "examples": [
+    {
+     "written": "먹지 말라고",
+     "after": "[먹찌 말라고]"
+    },
+    {
+     "written": "들어오지 말라고",
+     "after": "[드러오지 말라고]"
+    }
+   ]
+  },
+  {
+   "title": "갖다 → [갇따]",
+   "rule": "받침 ㅈ → [ㄷ] 중화 + 경음화",
+   "examples": [
+    {
+     "written": "갖다 달라고",
+     "after": "[갇따 달라고]"
+    }
+   ]
+  }
+ ],
+ "banmal_jondaemal": {
+  "title_ko": "명령과 부탁 — 반말 vs 존댓말",
+  "title_en": "Commands & Requests — Casual vs Formal",
+  "intro_ko": "같은 명령·부탁도 상대방에 따라 반말과 존댓말로 달라져요.",
+  "intro_en": "The same command or request changes form depending on who you're talking to.",
+  "rows": [
+   {
+    "situation": "친구한테 직접",
+    "banmal": "닦아.",
+    "jondaemal": "닦으세요.",
+    "note": "direct command"
+   },
+   {
+    "situation": "전달할 때",
+    "banmal": "닦으라고 해.",
+    "jondaemal": "닦으라고 하세요.",
+    "note": "indirect command"
+   },
+   {
+    "situation": "금지 전달",
+    "banmal": "하지 말라고 해.",
+    "jondaemal": "하지 말라고 하세요.",
+    "note": "indirect prohibition"
+   },
+   {
+    "situation": "부탁 전달",
+    "banmal": "갖다 달라고 해.",
+    "jondaemal": "갖다 달라고 하세요.",
+    "note": "indirect request"
+   }
+  ],
+  "adult_dialogue": {
+   "title_ko": "직장 상황 — 지시 전달",
+   "title_en": "Workplace — Relaying Instructions",
+   "setup_ko": "팀장이 팀원에게 고객 요청을 전달하는 상황이에요.",
+   "setup_en": "A team leader relays a client's request to a team member.",
+   "lines": [
+    {
+     "speaker": "팀장",
+     "text": "고객이 보고서를 내일까지 보내 달라고 하셨어요.",
+     "en": "The client asked us to send the report by tomorrow."
+    },
+    {
+     "speaker": "팀원",
+     "text": "네, 알겠습니다. 이메일로 보내 드릴까요?",
+     "en": "Yes, understood. Shall I send it by email?"
+    },
+    {
+     "speaker": "팀장",
+     "text": "네, 그리고 파일 크기를 줄여서 보내라고 하셨어요.",
+     "en": "Yes, and they said to reduce the file size before sending."
+    },
+    {
+     "speaker": "팀원",
+     "text": "파일을 압축하지 말라고 하셨나요, 아니면 크기만 줄이라고 하셨나요?",
+     "en": "Did they say not to compress it, or just to reduce the size?"
+    },
+    {
+     "speaker": "팀장",
+     "text": "크기만 줄이라고 하셨어요.",
+     "en": "They said just reduce the size."
+    }
+   ],
+   "note_ko": "존댓말에서는 -(으)라고 하셨어요 / -지 말라고 하셨어요처럼 '셨' 경어를 붙여 전달해요.",
+   "note_en": "In formal speech, add honorific 셨 when relaying what a senior or client said."
+  }
+ },
+ "real_life": [
+  {
+   "type": "kakao",
+   "title_ko": "할머니한테서 온 카톡",
+   "title_en": "KakaoTalk from Grandma",
+   "messages": [
+    {
+     "side": "left",
+     "speaker": "할머니",
+     "text": "라온아, PC방에서 꼭 물티슈로 닦고 써야 해!"
+    },
+    {
+     "side": "right",
+     "speaker": "라온",
+     "text": "네 할머니, 알겠어요 😊"
+    },
+    {
+     "side": "left",
+     "speaker": "할머니",
+     "text": "음식은 안으로 가지고 들어가지 마!"
+    },
+    {
+     "side": "right",
+     "speaker": "라온",
+     "text": "거기서 주문해서 먹을게요!"
+    },
+    {
+     "side": "left",
+     "speaker": "할머니",
+     "text": "그리고 두 시간 넘으면 안 돼. 알겠지? 👵"
+    }
+   ]
+  },
+  {
+   "type": "reading",
+   "title_ko": "PC방 이용 안내",
+   "title_en": "PC Café Usage Guide",
+   "passage": "PC방 이용 안내\n\n1. 입장 전 자판기에서 티켓을 구매하세요.\n2. 컴퓨터를 사용하기 전에 물티슈로 깨끗이 닦으세요.\n3. 음식물은 매장 안에서만 드세요. 외부 음식물 반입 금지.\n4. 큰 소리를 내지 마세요.\n5. 자리를 떠날 때는 반드시 로그아웃하세요.",
+   "questions": [
+    {
+     "q": "PC방에 들어가기 전에 무엇을 해야 해요?",
+     "options": [
+      "물티슈로 닦아야 해요",
+      "자판기에서 티켓을 사야 해요",
+      "주문을 먼저 해야 해요",
+      "로그아웃해야 해요"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "외부 음식물을 PC방 안으로 가지고 들어와도 돼요?",
+     "options": [
+      "네, 괜찮아요",
+      "아니요, 안 돼요",
+      "음료수만 돼요",
+      "포장된 것만 돼요"
+     ],
+     "answer": 1
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "type": "listen",
+   "audio_text": "할머니께서 PC를 만지기 전에 물티슈로 닦으라고 하셨어.",
+   "question": "What did Grandma say to do?",
+   "options": [
+    "Wash your hands first",
+    "Wipe the PC with a wet wipe",
+    "Buy tickets at the machine",
+    "Don't bring food inside"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "listen",
+   "audio_text": "음식물은 가지고 들어오지 말라고 했어.",
+   "question": "What rule did Raon relay?",
+   "options": [
+    "Order food at the counter",
+    "Don't bring food or drinks inside",
+    "Eat before you come in",
+    "Don't use the vending machine"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "listen",
+   "audio_text": "여기로 갖다 달라고 하자.",
+   "question": "What is Taeo suggesting?",
+   "options": [
+    "Let's go pick up the food",
+    "Let's ask them to bring it here",
+    "Let's order two things",
+    "Let's pay at the counter"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "mc",
+   "question": "어떻게 '명령'을 간접적으로 전달해요? How do you relay a command?",
+   "options": [
+    "동사 + -다고 해요",
+    "동사 + -(으)라고 해요",
+    "동사 + -(이)라고 해요",
+    "동사 + -냐고 해요"
+   ],
+   "answer": 1
+  },
+  {
+   "type": "mc",
+   "question": "'Don't run' → 어떻게 전달해요?",
+   "options": [
+    "뛰라고 해요",
+    "뛰냐고 해요",
+    "뛰지 말라고 해요",
+    "뛰다고 해요"
+   ],
+   "answer": 2
+  },
+  {
+   "type": "mc",
+   "question": "'갖다 달라고 해요' vs '갖다 주라고 해요' — 차이는?",
+   "options": [
+    "달라고 = bring it to someone else / 주라고 = bring it to me",
+    "달라고 = bring it to me (request for me) / 주라고 = give it to someone else",
+    "둘 다 같은 표현이에요",
+    "달라고 = 반말 / 주라고 = 존댓말"
+   ],
+   "answer": 1
+  }
+ ],
+ "self_check": [
+  "할머니의 명령을 -(으)라고 해서 전달할 수 있어요.",
+  "금지 사항을 -지 말라고 해서 전달할 수 있어요.",
+  "부탁을 -아/어 달라고 해서 전달할 수 있어요.",
+  "-(으)라고 (명령)와 -(이)라고 (명사 인용)의 차이를 알아요.",
+  "PC방 이용 안내를 한국어로 읽고 이해할 수 있어요."
+ ],
+ "usage": [
+  {
+   "heading": "🎮 PC방 이용 표현 · Useful PC Café Phrases",
+   "content": "PC방에서 자주 쓰는 표현들이에요. 티켓 구매부터 음식 주문까지 한국어로 말해 봐요.",
+   "examples": [
+    {
+     "ko": "몇 시간 하실 거예요?",
+     "en": "How many hours will you be using?"
+    },
+    {
+     "ko": "한 시간 할게요.",
+     "en": "I'll do one hour."
+    },
+    {
+     "ko": "자판기에서 티켓 사세요.",
+     "en": "Please buy a ticket at the machine."
+    },
+    {
+     "ko": "여기로 갖다 주세요.",
+     "en": "Please bring it here."
+    },
+    {
+     "ko": "음식물 반입 금지예요.",
+     "en": "Outside food and drink is not allowed."
+    }
+   ]
+  },
+  {
+   "heading": "📨 명령·금지·부탁 전달하기 · Relaying Commands, Rules & Requests",
+   "content": "실생활에서 누군가의 말을 전달할 때 쓰는 패턴이에요.",
+   "examples": [
+    {
+     "ko": "선생님이 내일까지 제출하라고 하셨어요.",
+     "en": "The teacher said to submit it by tomorrow."
+    },
+    {
+     "ko": "도서관에서 조용히 하라고 했어요.",
+     "en": "They said to be quiet in the library."
+    },
+    {
+     "ko": "핸드폰 쓰지 말라고 했어요.",
+     "en": "They said not to use your phone."
+    },
+    {
+     "ko": "창문 열지 말라고 하셨어요.",
+     "en": "He/she said not to open the window."
+    },
+    {
+     "ko": "조금만 도와 달라고 했어요.",
+     "en": "I asked them to help me a little."
+    },
+    {
+     "ko": "천천히 설명해 달라고 했어요.",
+     "en": "I asked them to explain it slowly."
+    }
+   ]
+  }
+ ]
 }
