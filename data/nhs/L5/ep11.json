@@ -1,6 +1,6 @@
 {
  "id": "ep11",
- "level": "Level 5",
+ "level": "L5",
  "title": "보미의 어우렁더우렁 한마당",
  "title_en": "Bomi's Eowoureong-Deowoureong Festival",
  "scene": "🧩 성격·진로 · Personality & Career",
@@ -313,6 +313,12 @@
      "romanization": "jeok-seong",
      "english": "aptitude, what suits you",
      "emoji": "🎯"
+    },
+    {
+     "korean": "어떡해",
+     "romanization": "eo-tteok-hae",
+     "english": "oh no, what do I do",
+     "emoji": "😱"
     }
    ]
   },
@@ -338,22 +344,22 @@
      "emoji": "📚"
     },
     {
-     "korean": "넓히다",
-     "romanization": "neol-pi-da",
-     "english": "to broaden, widen",
-     "emoji": "📈"
+     "korean": "추진력",
+     "romanization": "chu-jin-nyeok",
+     "english": "drive, momentum",
+     "emoji": "🚀"
     },
     {
-     "korean": "성공하다",
-     "romanization": "seong-gong-ha-da",
-     "english": "to succeed",
-     "emoji": "🏆"
+     "korean": "적극적",
+     "romanization": "jeok-geuk-jeok",
+     "english": "active, proactive",
+     "emoji": "💪"
     },
     {
-     "korean": "어떡해",
-     "romanization": "eo-tteok-hae",
-     "english": "oh no, what do I do",
-     "emoji": "😱"
+     "korean": "긍정적",
+     "romanization": "geung-jeong-jeok",
+     "english": "positive",
+     "emoji": "🌞"
     }
    ]
   }
@@ -433,48 +439,57 @@
   {
    "id": "g11_l5_suffix",
    "tier": "foundation",
-   "title": "접미사 -적 / -성 / -화",
-   "title_en": "Suffixes that build abstract words",
+   "title": "접미사 -적 / -성 / -화 / -력 / -도",
+   "title_en": "Five suffixes that build abstract words",
    "emoji": "🧩",
-   "pattern": "어근 + -적(的) · -성(性) · -화(化) — 뜻을 확장하는 한자 접미사",
+   "pattern": "어근 + -적(的)·-성(性)·-화(化)·-력(力)·-도(度) — 뜻을 확장하는 한자 접미사 5종",
    "scene_example": {
-    "korean": "적극적이고 긍정적인 자세로 글로벌화된 세계의 다양성을 이해해요.",
-    "english": "With an active, positive attitude, I understand the diversity of a globalized world.",
+    "korean": "적극적이고 긍정적인 자세로 다양성에 대한 이해도를 넓히고 싶어요.",
+    "english": "With an active, positive attitude, I want to broaden my understanding of diversity.",
     "highlight": "적극적"
    },
-   "explanation_en": "Three Sino-Korean suffixes turn simple roots into abstract vocabulary — a huge shortcut for TOPIK-level reading. Learn the pattern and you can decode dozens of new words.",
+   "explanation_en": "Five Sino-Korean suffixes turn simple roots into abstract vocabulary — a huge shortcut for TOPIK reading and writing. Learn the pattern and you can decode and build dozens of words.",
    "rule_boxes": [
     {
-     "type": "blue",
-     "label": "-적 (的) = ~에 관한 / ~다운",
-     "content": "적극적 (active), 긍정적 (positive), 구체적 (concrete), 추상적 (abstract)"
-    },
-    {
      "type": "green",
-     "label": "-성 (性) = ~한 성질 (-ness/-ability)",
-     "content": "다양성 (diversity), 가능성 (possibility), 필요성 (necessity), 중요성 (importance), 안전성 (safety)"
-    },
-    {
-     "type": "amber",
-     "label": "-화 (化) = ~로 됨 (-ization)",
-     "content": "글로벌화 (globalization), 세계화, 변화 (change), 현대화 (modernization)"
+     "label": "이 에피소드에 등장 · In this episode",
+     "content": "적극적·긍정적 (-적) / 다양성 (-성) / 글로벌화 (-화) / 추진력 (-력) / 이해도 (-도)"
     }
    ],
-   "example_groups": [
-    {
-     "label": "이 에피소드에 등장",
-     "items": [
-      {
-       "ko": "적극적이고 긍정적인 자세",
-       "en": "an active and positive attitude"
-      },
-      {
-       "ko": "글로벌화된 세계에서 문화의 다양성",
-       "en": "cultural diversity in a globalized world"
-      }
+   "table": {
+    "columns": [
+     "접미사",
+     "뜻",
+     "예시 단어"
+    ],
+    "rows": [
+     [
+      "-적 (的)",
+      "~에 관한 / ~다운 (-like)",
+      "적극적, 긍정적, 호의적, 구체적, 추상적"
+     ],
+     [
+      "-성 (性)",
+      "~한 성질 (-ness)",
+      "다양성, 가능성, 중요성, 안정성"
+     ],
+     [
+      "-화 (化)",
+      "~로 됨/바뀜 (-ization)",
+      "글로벌화, 세계화, 민주화, 악마화"
+     ],
+     [
+      "-력 (力)",
+      "~하는 힘·능력 (-power)",
+      "추진력, 실행력, 친화력, 설득력, 이해력, 집중력, 기억력, 상상력, 판단력"
+     ],
+     [
+      "-도 (度)",
+      "~한 정도·수준 (-degree)",
+      "이해도, 만족도, 신뢰도, 친밀도, 충성도, 인지도"
      ]
-    }
-   ]
+    ]
+   }
   }
  ],
  "usage": [
@@ -678,6 +693,19 @@
    ],
    "answer": 1,
    "explanation": "-고자 = 목적. '가르치고자' = in order to teach."
+  },
+  {
+   "id": "q11l5_7",
+   "question_ko": "'끝까지 밀고 나가는 힘'을 뜻하는 말은?",
+   "question_en": "Which word means 'the power to push through to the end'?",
+   "options": [
+    "추진성",
+    "추진도",
+    "추진력",
+    "추진화"
+   ],
+   "answer": 2,
+   "explanation": "-력(力) = ~하는 힘·능력. 추진+력 = drive/momentum."
   }
  ],
  "self_check": [
