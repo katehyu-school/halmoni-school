@@ -781,9 +781,9 @@ function buildScript(){
     </div>
     <div class="shad-result" id="shad-result"></div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-      <button id="ap-btn" onclick="autoPlayToggle()" title="슬라이드 자동 재생" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">▶▶ 자동 재생</button>
+      <button id="ap-btn" onclick="autoPlayToggle()" title="슬라이드 자동 재생" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">▶▶ Auto-play</button>
       <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
-      <button id="rp-btn" onclick="rpOpen()" title="역할극 · Role-play" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--warm-900);white-space:nowrap">🎭 역할극</button>
+      <button id="rp-btn" onclick="rpOpen()" title="역할극 · Role-play" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--warm-900);white-space:nowrap">🎭 Role-play</button>
     </div>
     <div class="rp-panel" id="rp-panel" style="display:none"></div>
     <button class="script-toggle-btn" id="strip-toggle-btn" onclick="toggleStrip()"><i class="strip-chevron">▼</i> 전체 스크립트 보기</button>
@@ -970,7 +970,7 @@ function autoPlayToggle(){
   if(_autoPlay){autoPlayStop();return;}
   _autoPlay=true;
   const btn=document.getElementById('ap-btn');
-  if(btn){btn.textContent='⏹ 정지';btn.style.background='var(--coral)';}
+  if(btn){btn.textContent='⏹ Stop';btn.style.background='var(--coral)';}
   autoPlayStep();
 }
 
@@ -980,7 +980,7 @@ function autoPlayStop(){
   if(_audio){_audio.pause();_audio=null;}
   if(window.speechSynthesis)speechSynthesis.cancel();
   const btn=document.getElementById('ap-btn');
-  if(btn){btn.textContent='▶▶ 자동 재생';btn.style.background='var(--teal)';}
+  if(btn){btn.textContent='▶▶ Auto-play';btn.style.background='var(--teal)';}
 }
 
 function autoPlayStep(){
@@ -1229,39 +1229,59 @@ function wrCheckComp(i){
 }
 function toggleWG(sid){const m=document.getElementById('wg-model-'+sid),b=document.getElementById('wg-btn-'+sid);if(!m)return;const show=m.style.display==='none';m.style.display=show?'block':'none';if(b)b.textContent=show?'🙈 모범답안 숨기기':'📄 모범답안 보기';}
 
-// ── SPEAKING PROMPTS (말하기 — 문장완성의 말하기 버전, 미러 재활용) ──
+// ── SPEAKING PROMPTS (말하기 — 문장 말하기 + 1분 말하기, 미러 재활용) ──
+function _spkCard(prompt, promptEn, hintHtml, elId, btnId, modelHtml, mbId, mId){
+  return `<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:12px;padding:12px 14px;margin-bottom:10px">
+    <div style="font-size:13px;font-weight:600;color:var(--warm-900);line-height:1.6;white-space:pre-line">${prompt}</div>
+    ${promptEn?`<div style="font-size:11px;color:var(--warm-500);margin-top:3px">${promptEn}</div>`:''}
+    ${hintHtml||''}
+    <div style="margin-top:9px;display:flex;gap:8px;align-items:center">
+      <button id="${btnId}" onclick="spkMicEl(this,'${elId}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:14px;font-weight:700;cursor:pointer">🎤</button>
+      <span style="font-size:12px;color:var(--warm-500)">눌러서 말하기 · Tap &amp; speak</span>
+    </div>
+    <div id="${elId}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:9px 12px;font-size:14px;font-family:var(--font-serif)"></div>
+    <div style="margin-top:8px"><button id="${mbId}" onclick="spkToggle('${mId}','${mbId}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button>
+    <div id="${mId}" style="display:none;margin-top:8px;background:var(--warm-50);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--warm-900);line-height:1.7;font-family:var(--font-serif)">${modelHtml}</div></div>
+  </div>`;
+}
 function buildSpeakTab(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const comp=((WRITING_POOL[epKey]||{}).completion)||[];
+  const guided=(DATA.real_life||[]).filter(it=>it&&it.type==='writing_guided');
   let html='<div style="max-width:580px">';
-  html+='<div style="font-size:13px;font-weight:700;color:var(--warm-900);margin:4px 0 6px">🗣️ 말하기 · Speaking</div>';
-  html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">상황에 맞게 소리 내어 말해 보세요. 🎤를 누르면 말한 내용이 글로 떠요. (크롬·마이크 필요)</div>';
-  if(!comp.length){html+='<div style="font-size:12.5px;color:var(--warm-500)">이 편은 말하기 문항이 준비 중이에요.</div>';return html+'</div>';}
-  comp.forEach((c,i)=>{
-    const model=esc((c.answers||[''])[0]);
-    html+=`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:12px;padding:12px 14px;margin-bottom:10px">
-      <div style="font-size:13px;font-weight:600;color:var(--warm-900);line-height:1.6;white-space:pre-line">${esc(c.prompt)}</div>
-      ${c.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-top:3px">${esc(c.prompt_en)}</div>`:''}
-      ${c.hint?`<div style="font-size:11.5px;color:var(--teal-dark);margin-top:6px">💡 ${esc(c.hint)}</div>`:''}
-      <div style="margin-top:9px;display:flex;gap:8px;align-items:center">
-        <button id="spk-b${i}" onclick="spkMic(this,${i})" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:14px;font-weight:700;cursor:pointer">🎤</button>
-        <span style="font-size:12px;color:var(--warm-500)">눌러서 말하기</span>
-      </div>
-      <div id="spk-r${i}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:9px 12px;font-size:14px;font-family:var(--font-serif)"></div>
-      <div style="margin-top:8px"><button id="spk-mb${i}" onclick="spkModel(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button>
-      <div id="spk-m${i}" style="display:none;margin-top:8px;background:var(--warm-50);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--warm-900);line-height:1.7;font-family:var(--font-serif)">${model}${c.grammar?`<div style="font-size:10.5px;color:var(--warm-500);margin-top:4px">🎯 ${esc(c.grammar)}</div>`:''}</div></div>
-    </div>`;
-  });
+  if(!comp.length&&!guided.length){
+    html+='<div style="font-size:13px;font-weight:700;color:var(--warm-900);margin:4px 0 6px">🗣️ 말하기 · Speaking</div>';
+    html+='<div style="font-size:12.5px;color:var(--warm-500)">이 편은 말하기 문항이 준비 중이에요.</div>';
+    return html+'</div>';
+  }
+  html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:2px">🎤를 누르면 말한 내용이 글로 떠요. 판단은 스스로! (크롬·마이크 필요)</div>';
+  if(comp.length){
+    html+='<div style="font-size:13px;font-weight:700;color:var(--warm-900);margin:14px 0 8px">🗣️ 문장 말하기 · Sentence Speaking</div>';
+    comp.forEach((c,i)=>{
+      const hint=c.hint?`<div style="font-size:11.5px;color:var(--teal-dark);margin-top:6px">💡 ${esc(c.hint)}</div>`:'';
+      const model=esc((c.answers||[''])[0])+(c.grammar?`<div style="font-size:10.5px;color:var(--warm-500);margin-top:4px">🎯 ${esc(c.grammar)}</div>`:'');
+      html+=_spkCard(esc(c.prompt), c.prompt_en?esc(c.prompt_en):'', hint, 'spk-r'+i, 'spk-b'+i, model, 'spk-mb'+i, 'spk-m'+i);
+    });
+  }
+  if(guided.length){
+    html+='<div style="font-size:13px;font-weight:700;color:var(--warm-900);margin:18px 0 4px">🎤 1분 말하기 · Talk for a Minute</div>';
+    html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:8px">주제에 대해 여러 문장을 이어서 말해 보세요. 문장 뼈대를 참고하면 좋아요.</div>';
+    guided.forEach((g,i)=>{
+      const tmpl=(g.template||[]).map(l=>`<li style="margin-bottom:3px">${esc(l)}</li>`).join('');
+      const hint=tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:8px 0 3px">✏️ 문장 뼈대</div><ul style="margin:0;padding-left:18px;font-size:12px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:'';
+      html+=_spkCard(esc(g.prompt_ko||g.title||''), g.prompt_en?esc(g.prompt_en):'', hint, 'spk1-r'+i, 'spk1-b'+i, esc(g.model||''), 'spk1-mb'+i, 'spk1-m'+i);
+    });
+  }
   return html+'</div>';
 }
-function spkMic(btn,i){
+function spkMicEl(btn,elId){
   if(_shadRec){nhsShadStop();return;}
-  const el=document.getElementById('spk-r'+i);
+  const el=document.getElementById(elId);
   if(el){el.style.display='block';el.innerHTML='<span style="color:var(--warm-400)">🎤 듣고 있어요…</span>';}
-  _nhsShadStart(btn,'','spk-r'+i,false);
+  _nhsShadStart(btn,'',elId,false);
 }
-function spkModel(i){
-  const m=document.getElementById('spk-m'+i),b=document.getElementById('spk-mb'+i);
+function spkToggle(mId,bId){
+  const m=document.getElementById(mId),b=document.getElementById(bId);
   if(!m)return;const show=m.style.display==='none';m.style.display=show?'block':'none';
   if(b)b.textContent=show?'🙈 모범답안 숨기기':'📄 모범답안 보기';
 }
@@ -1272,7 +1292,7 @@ function _buildQuizTabBar(){
   const hasSp=!!(SP_QUIZ_POOL[epKey]);
   const _lvN=parseInt((DATA.level||'').replace(/[^0-9]/g,''))||0;
   const hasWr=(_lvN>=3&&DATA.script&&DATA.script.length>0)||!!(WRITING_POOL[epKey]);
-  const hasSpk=!!(WRITING_POOL[epKey]&&(WRITING_POOL[epKey].completion||[]).length);
+  const hasSpk=!!((WRITING_POOL[epKey]&&(WRITING_POOL[epKey].completion||[]).length)||(DATA.real_life||[]).some(it=>it&&it.type==='writing_guided'));
   if(!hasRd&&!hasSp&&!hasWr)return'';
   const tabs=[
     {id:'quiz',label:'✏️ 객관식'},
@@ -4182,14 +4202,14 @@ function rpOpen(){
   autoPlayStop();nhsShadStop();
   const panel=document.getElementById('rp-panel');if(!panel)return;
   const sp=rpSpeakers();
-  if(!sp.length){panel.style.display='block';panel.innerHTML='<div style="font-size:12px;color:var(--warm-500);padding:8px">이 에피소드는 역할극을 지원하지 않아요 (등장인물 없음).</div>';return;}
+  if(!sp.length){panel.style.display='block';panel.innerHTML='<div style="font-size:12px;color:var(--warm-500);padding:8px">Role-play is not available for this episode.</div>';return;}
   panel.style.display='block';
   panel.innerHTML='<div style="background:#fff;border:1.5px solid var(--teal);border-radius:12px;padding:13px 15px;margin-top:8px">'
-    +'<div style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:9px">🎭 역할극 · 어떤 인물을 맡을래요?</div>'
+    +'<div style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:9px">🎭 Role-play · Pick your character</div>'
     +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">'
     + sp.map(id=>'<button onclick="rpPick(\''+id+'\')" style="background:var(--warm-50);border:1.5px solid var(--warm-300);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;color:var(--warm-900);cursor:pointer">'+rpEmoji(id)+' '+esc(rpName(id))+'</button>').join('')
     +'</div>'
-    +'<div style="font-size:11px;color:var(--warm-500)">내 차례엔 🎤로 직접 말하고, 나머지 대사는 앱이 읽어줘요.</div>'
+    +'<div style="font-size:11px;color:var(--warm-500)">On your turn tap 🎤 and speak. The app reads the other lines.</div>'
     +'</div>';
 }
 function rpPick(id){_rp.active=true;_rp.role=id;sceneIdx=0;renderScene();rpStep();}
@@ -4206,22 +4226,22 @@ function rpStep(){
   if(!_rp.active)return;
   const line=DATA.script[sceneIdx];const panel=document.getElementById('rp-panel');
   if(!line||!panel)return;
-  const exitBtn='<button onclick="rpExit()" style="background:none;border:none;color:var(--warm-500);font-size:11px;cursor:pointer;text-decoration:underline;margin-left:auto">✕ 끝내기</button>';
+  const exitBtn='<button onclick="rpExit()" style="background:none;border:none;color:var(--warm-500);font-size:11px;cursor:pointer;text-decoration:underline;margin-left:auto">✕ Quit</button>';
   if(line.speaker!==_rp.role){
     rpBlur(false);panel.style.display='block';
-    panel.innerHTML='<div style="display:flex;align-items:center;gap:8px;background:var(--warm-50);border:1.5px solid var(--warm-300);border-radius:12px;padding:11px 14px;margin-top:8px;font-size:12.5px;color:var(--warm-700)">🔊 <b>'+esc(rpName(line.speaker))+'</b> (상대) 말하는 중…'+exitBtn+'</div>';
+    panel.innerHTML='<div style="display:flex;align-items:center;gap:8px;background:var(--warm-50);border:1.5px solid var(--warm-300);border-radius:12px;padding:11px 14px;margin-top:8px;font-size:12.5px;color:var(--warm-700)">🔊 <b>'+esc(rpName(line.speaker))+'</b> (partner) speaking…'+exitBtn+'</div>';
     rpPlayLine(line,()=>{if(!_rp.active)return;if(sceneIdx>=DATA.script.length-1){rpEnd();return;}sceneIdx++;renderScene();rpStep();});
   }else{
     if(_rp.hide)rpBlur(true);else rpBlur(false);
     panel.style.display='block';
     panel.innerHTML='<div style="background:#fff;border:1.5px solid var(--teal);border-radius:12px;padding:13px 15px;margin-top:8px">'
-      +'<div style="display:flex;align-items:center;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:3px">🎤 내 차례! · '+rpEmoji(line.speaker)+' '+esc(rpName(line.speaker))+exitBtn+'</div>'
+      +'<div style="display:flex;align-items:center;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:3px">🎤 My turn! · '+rpEmoji(line.speaker)+' '+esc(rpName(line.speaker))+exitBtn+'</div>'
       +'<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:10px">'+esc(line.en||line.translation||'')+'</div>'
       +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
-      +'<button onclick="nhsShadToggle()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">🎤 말하기</button>'
-      +'<label style="font-size:11px;color:var(--warm-500);display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(_rp.hide?'checked':'')+' onchange="rpToggleHide(this.checked)"> 대사 가리기</label>'
-      +(_rp.hide?'<button onclick="rpReveal()" style="background:none;border:none;color:var(--teal-dark);font-size:11px;cursor:pointer;text-decoration:underline">👀 살짝 보기</button>':'')
-      +'<button onclick="rpNext()" style="background:var(--teal-dark);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto">다음 →</button>'
+      +'<button onclick="nhsShadToggle()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">🎤 Speak</button>'
+      +'<label style="font-size:11px;color:var(--warm-500);display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(_rp.hide?'checked':'')+' onchange="rpToggleHide(this.checked)"> Hide line</label>'
+      +(_rp.hide?'<button onclick="rpReveal()" style="background:none;border:none;color:var(--teal-dark);font-size:11px;cursor:pointer;text-decoration:underline">👀 Peek</button>':'')
+      +'<button onclick="rpNext()" style="background:var(--teal-dark);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto">Next →</button>'
       +'</div></div>';
   }
 }
@@ -4230,10 +4250,10 @@ function rpEnd(){
   rpBlur(false);const nm=esc(rpName(_rp.role));const rid=_rp.role;
   panel.innerHTML='<div style="background:#fff;border:1.5px solid var(--teal);border-radius:12px;padding:18px 15px;margin-top:8px;text-align:center">'
     +'<div style="font-size:30px;margin-bottom:6px">🎉</div>'
-    +'<div style="font-size:14px;font-weight:700;color:var(--warm-900);margin-bottom:4px">역할극 완료!</div>'
-    +'<div style="font-size:12px;color:var(--warm-500);margin-bottom:14px">'+nm+' 역할로 대화를 끝까지 해냈어요.</div>'
-    +'<button onclick="rpPick(\''+rid+'\')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;margin-right:6px">다시 하기</button>'
-    +'<button onclick="rpOpen()" style="background:var(--warm-50);border:1.5px solid var(--warm-300);color:var(--warm-800);border-radius:20px;padding:8px 18px;font-size:13px;cursor:pointer">역할 바꾸기</button>'
+    +'<div style="font-size:14px;font-weight:700;color:var(--warm-900);margin-bottom:4px">Role-play complete!</div>'
+    +'<div style="font-size:12px;color:var(--warm-500);margin-bottom:14px">You did the whole dialogue as '+nm+'!</div>'
+    +'<button onclick="rpPick(\''+rid+'\')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;margin-right:6px">Try again</button>'
+    +'<button onclick="rpOpen()" style="background:var(--warm-50);border:1.5px solid var(--warm-300);color:var(--warm-800);border-radius:20px;padding:8px 18px;font-size:13px;cursor:pointer">Change role</button>'
     +'</div>';
   _rp.active=false;
 }
