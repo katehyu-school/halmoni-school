@@ -1276,9 +1276,10 @@ function buildSpeakTab(){
 }
 function spkMicEl(btn,elId){
   if(_shadRec){nhsShadStop();return;}
+  const cont=/^spk1-/.test(elId);
   const el=document.getElementById(elId);
-  if(el){el.style.display='block';el.innerHTML='<span style="color:var(--warm-400)">🎤 듣고 있어요…</span>';}
-  _nhsShadStart(btn,'',elId,false);
+  if(el){el.style.display='block';el.innerHTML='<span style="color:var(--warm-400)">🎤 듣고 있어요…'+(cont?' (다 말하면 ⏹를 누르세요)':'')+'</span>';}
+  _nhsShadStart(btn,'',elId,false,cont);
 }
 function spkToggle(mId,bId){
   const m=document.getElementById(mId),b=document.getElementById(bId);
@@ -4137,13 +4138,14 @@ function nhsShadLine(evt, targetText, resultId){
   _nhsShadStart(btn, targetText, fullResultId, false);
 }
 
-function _nhsShadStart(btn, targetText, resultDivId, isGlobal){
+function _nhsShadStart(btn, targetText, resultDivId, isGlobal, continuous){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){alert('Chrome 브라우저에서만 사용할 수 있어요. (설정 > 마이크 허용)');return;}
   const rec=new SR();
   _shadRec=rec; _shadBtnEl=btn; _shadResultId=resultDivId;
   rec.lang='ko-KR';
   rec.interimResults=true;
+  rec.continuous=!!continuous;
   rec.maxAlternatives=1;
   btn.textContent='⏹';btn.classList.add('rec-on');
   let final='';
