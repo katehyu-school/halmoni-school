@@ -783,7 +783,9 @@ function buildScript(){
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
       <button id="ap-btn" onclick="autoPlayToggle()" title="슬라이드 자동 재생" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">▶▶ 자동 재생</button>
       <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
+      <button id="rp-btn" onclick="rpOpen()" title="역할극 · Role-play" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--warm-900);white-space:nowrap">🎭 역할극</button>
     </div>
+    <div class="rp-panel" id="rp-panel" style="display:none"></div>
     <button class="script-toggle-btn" id="strip-toggle-btn" onclick="toggleStrip()"><i class="strip-chevron">▼</i> 전체 스크립트 보기</button>
     <div class="script-strip" id="script-strip"></div>
   </div></div>`;
@@ -4125,6 +4127,74 @@ function _shadShow(divId, target, said, isFinal, isGlobal){
     el.style.display='block';
     el.innerHTML='🎤 <strong>'+(said||'...')+'</strong>'+(isFinal?' <span style="color:#aaa;font-size:10px;">| 원문: '+esc(target)+'</span>':'');
   }
+}
+
+
+// ── ROLE-PLAY (역할극) — reuses mirror + audio, no auto-scoring ──
+let _rp={active:false,role:null,hide:true};
+function rpName(id){const c=(DATA.characters||[]).find(x=>x.id===id);return (c&&c.name)||id;}
+function rpEmoji(id){const c=(DATA.characters||[]).find(x=>x.id===id);return (c&&c.emoji)||(CHAR_CFG[id]||{}).emoji||'💬';}
+function rpSpeakers(){const seen=[];(DATA.script||[]).forEach(l=>{if(l.speaker&&l.speaker!=='narrator'&&!seen.includes(l.speaker))seen.push(l.speaker);});return seen;}
+function rpBlur(on){const el=document.querySelector('#scene-caption .caption-kr');if(el){el.style.filter=on?'blur(6px)':'none';el.style.userSelect=on?'none':'';el.style.transition='filter .15s';}}
+function rpOpen(){
+  if(!DATA||!DATA.script)return;
+  autoPlayStop();nhsShadStop();
+  const panel=document.getElementById('rp-panel');if(!panel)return;
+  const sp=rpSpeakers();
+  if(!sp.length){panel.style.display='block';panel.innerHTML='<div style="font-size:12px;color:var(--warm-500);padding:8px">이 에피소드는 역할극을 지원하지 않아요 (등장인물 없음).</div>';return;}
+  panel.style.display='block';
+  panel.innerHTML='<div style="background:#fff;border:1.5px solid var(--teal);border-radius:12px;padding:13px 15px;margin-top:8px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:9px">🎭 역할극 · 어떤 인물을 맡을래요?</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">'
+    + sp.map(id=>'<button onclick="rpPick(\''+id+'\')" style="background:var(--warm-50);border:1.5px solid var(--warm-300);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;color:var(--warm-900);cursor:pointer">'+rpEmoji(id)+' '+esc(rpName(id))+'</button>').join('')
+    +'</div>'
+    +'<div style="font-size:11px;color:var(--warm-500)">내 차례엔 🎤로 직접 말하고, 나머지 대사는 앱이 읽어줘요.</div>'
+    +'</div>';
+}
+function rpPick(id){_rp.active=true;_rp.role=id;sceneIdx=0;renderScene();rpStep();}
+function rpExit(){_rp.active=false;_rp.role=null;if(_audio){_audio.pause();_audio=null;}if(window.speechSynthesis)speechSynthesis.cancel();nhsShadStop();rpBlur(false);const p=document.getElementById('rp-panel');if(p){p.style.display='none';p.innerHTML='';}}
+function rpToggleHide(v){_rp.hide=v;rpStep();}
+function rpReveal(){rpBlur(false);}
+function rpNext(){if(!_rp.active)return;if(sceneIdx>=DATA.script.length-1){rpEnd();return;}sceneIdx++;renderScene();rpStep();}
+function rpPlayLine(line,cb){
+  if(_audio){_audio.pause();_audio=null;}
+  if(line.audio){_audio=new Audio(line.audio);_audio.onended=cb;_audio.onerror=()=>_apTTS(line.text,cb);_audio.play().catch(()=>_apTTS(line.text,cb));}
+  else{_apTTS(line.text,cb);}
+}
+function rpStep(){
+  if(!_rp.active)return;
+  const line=DATA.script[sceneIdx];const panel=document.getElementById('rp-panel');
+  if(!line||!panel)return;
+  const exitBtn='<button onclick="rpExit()" style="background:none;border:none;color:var(--warm-500);font-size:11px;cursor:pointer;text-decoration:underline;margin-left:auto">✕ 끝내기</button>';
+  if(line.speaker!==_rp.role){
+    rpBlur(false);panel.style.display='block';
+    panel.innerHTML='<div style="display:flex;align-items:center;gap:8px;background:var(--warm-50);border:1.5px solid var(--warm-300);border-radius:12px;padding:11px 14px;margin-top:8px;font-size:12.5px;color:var(--warm-700)">🔊 <b>'+esc(rpName(line.speaker))+'</b> (상대) 말하는 중…'+exitBtn+'</div>';
+    rpPlayLine(line,()=>{if(!_rp.active)return;if(sceneIdx>=DATA.script.length-1){rpEnd();return;}sceneIdx++;renderScene();rpStep();});
+  }else{
+    if(_rp.hide)rpBlur(true);else rpBlur(false);
+    panel.style.display='block';
+    panel.innerHTML='<div style="background:#fff;border:1.5px solid var(--teal);border-radius:12px;padding:13px 15px;margin-top:8px">'
+      +'<div style="display:flex;align-items:center;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:3px">🎤 내 차례! · '+rpEmoji(line.speaker)+' '+esc(rpName(line.speaker))+exitBtn+'</div>'
+      +'<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:10px">'+esc(line.en||line.translation||'')+'</div>'
+      +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+      +'<button onclick="nhsShadToggle()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">🎤 말하기</button>'
+      +'<label style="font-size:11px;color:var(--warm-500);display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" '+(_rp.hide?'checked':'')+' onchange="rpToggleHide(this.checked)"> 대사 가리기</label>'
+      +(_rp.hide?'<button onclick="rpReveal()" style="background:none;border:none;color:var(--teal-dark);font-size:11px;cursor:pointer;text-decoration:underline">👀 살짝 보기</button>':'')
+      +'<button onclick="rpNext()" style="background:var(--teal-dark);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto">다음 →</button>'
+      +'</div></div>';
+  }
+}
+function rpEnd(){
+  const panel=document.getElementById('rp-panel');if(!panel)return;
+  rpBlur(false);const nm=esc(rpName(_rp.role));const rid=_rp.role;
+  panel.innerHTML='<div style="background:#fff;border:1.5px solid var(--teal);border-radius:12px;padding:18px 15px;margin-top:8px;text-align:center">'
+    +'<div style="font-size:30px;margin-bottom:6px">🎉</div>'
+    +'<div style="font-size:14px;font-weight:700;color:var(--warm-900);margin-bottom:4px">역할극 완료!</div>'
+    +'<div style="font-size:12px;color:var(--warm-500);margin-bottom:14px">'+nm+' 역할로 대화를 끝까지 해냈어요.</div>'
+    +'<button onclick="rpPick(\''+rid+'\')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;margin-right:6px">다시 하기</button>'
+    +'<button onclick="rpOpen()" style="background:var(--warm-50);border:1.5px solid var(--warm-300);color:var(--warm-800);border-radius:20px;padding:8px 18px;font-size:13px;cursor:pointer">역할 바꾸기</button>'
+    +'</div>';
+  _rp.active=false;
 }
 
 // ═══════════════════════════ VERB DRILL GAME ═══════════════════════════
