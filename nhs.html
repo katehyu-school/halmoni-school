@@ -2121,7 +2121,7 @@ function getEpLabel(epKey){
 }
 
 // ── 빠른 참고 (Quick Reference) — Basics 참고자료를 어디서나 ──
-const QREF_TABS=[['greetings','👋 인사·교실'],['questions','❓ 의문사'],['honorifics','🙇 호칭'],['numbers','🔢 숫자']];
+const QREF_TABS=[['greetings','👋 인사·교실'],['questions','❓ 의문사'],['honorifics','🙇 호칭'],['numbers','🔢 숫자'],['verbs','⚙️ 동사 활용']];
 let _qrefCur='greetings';
 function openQuickRef(){var o=document.getElementById('qref-overlay');if(!o)return;o.classList.add('open');qrefRender(_qrefCur);}
 function closeQuickRef(){var o=document.getElementById('qref-overlay');if(o)o.classList.remove('open');}
@@ -2131,8 +2131,9 @@ function qrefRender(id){
   if(t)t.innerHTML=QREF_TABS.map(function(p){return '<div class="idx-tab'+(p[0]===id?' active':'')+'" onclick="qrefRender(\''+p[0]+'\')">'+p[1]+'</div>';}).join('');
   var b=document.getElementById('qref-body');if(!b)return;
   try{
-    b.innerHTML = id==='greetings'?buildGreetings():id==='questions'?buildQuestions():id==='honorifics'?buildHonorifics():id==='numbers'?buildNumbers():'';
+    b.innerHTML = id==='greetings'?buildGreetings():id==='questions'?buildQuestions():id==='honorifics'?buildHonorifics():id==='numbers'?buildNumbers():id==='verbs'?buildVerbs():'';
   }catch(e){b.innerHTML='<div style="padding:20px;color:var(--warm-500)">참고 자료를 불러오지 못했어요.</div>';}
+  if(id==='verbs')requestAnimationFrame(function(){try{renderVerbGame();}catch(e){}});
 }
 
 // ── 색인 모달 ───────────────────────────────────────────
