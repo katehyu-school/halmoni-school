@@ -1177,7 +1177,7 @@ function checkFill(id){
 // ── WRITING PRACTICE (받아쓰기 + 문장완성) ─────────────
 let _wrComp=[];
 function _wrNorm(s){return (s||'').replace(/\s+/g,'').replace(/[.!?…~,"'’]+$/,'').trim();}
-function buildWriting(){
+function buildWriteTab(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const wp=WRITING_POOL[epKey]||{};
   const dict=(DATA.script||[]).filter(l=>l.text&&_wrNorm(l.text).length>=10).slice(0,5);
@@ -1375,7 +1375,7 @@ function setQuizMode(mode){
     panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div id="spq-wrap" style="margin-top:4px;"></div></div>`;
     _spqPool=spPool;_spqIdx=0;_spqClicked=[];_spqRender();
   } else if(mode==='writing'){
-    panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div style="margin-top:4px;">${buildWriting()}</div></div>`;
+    panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div style="margin-top:4px;">${buildWriteTab()}</div></div>`;
   } else {
     quizMode='quiz';
     panel.innerHTML=buildQuiz();
