@@ -1176,7 +1176,7 @@ function checkFill(id){
 // ── QUIZ ───────────────────────────────────────────────
 // ── WRITING PRACTICE (받아쓰기 + 문장완성) ─────────────
 let _wrComp=[];
-function _wrNorm(s){return (s||'').replace(/\s+/g,'').replace(/[.!?…~,"'’]+$/,'').trim();}
+function _wrNorm(s){return (s||'').replace(/[\s.,!?…~·:;'"’‘“”()\[\]<>「」『』\-—_]/g,'').trim();}
 function wrPlayLine(src,text){if(src){try{const a=new Audio(src);a.play();return;}catch(e){}}speakTTS(text);}
 function buildWriteTab(){
   const epKey=`${DATA.level}_${DATA.id}`;
