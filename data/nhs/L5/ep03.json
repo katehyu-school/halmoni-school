@@ -678,36 +678,6 @@
    "content_en": "A government revenue stamp is a certificate used to pay various fees at government offices. The fee for issuing a foreign registration card can also be paid with one of these stamps. You can buy them online at the e-revenuestamp website, or in person at a nearby post office or bank counter."
   },
   {
-   "type": "kakao",
-   "title": "💬 아르투가 브라질 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "드디어 외국인등록증 신청했어! 친구들이 도와줘서 하나도 안 헷갈렸어",
-     "en": "I finally applied for my foreign registration card! My friends helped so I wasn't confused at all"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "오 잘됐다! 이제 뭐가 좋아져?",
-     "en": "Oh nice! What gets better now?"
-    },
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "은행 계좌도 만들고, 내 명의로 휴대전화도 개통할 수 있대",
-     "en": "I can open a bank account and get a phone in my own name"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "완전 진짜 정착이네ㅋㅋ",
-     "en": "Now that's real settling in lol"
-    }
-   ]
-  },
-  {
    "type": "reading",
    "id": "rl_read_l5ep03",
    "title": "📰 선배 유학생 인터뷰: 외국인등록증, 왜 중요할까? — 인터뷰 Q&A",
@@ -758,6 +728,49 @@
     "근거를 2개 이상 들었나요?",
     "-는 한·-(으)ㄹ 수밖에 없다를 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc03",
+   "title": "📊 도표 작문 — 국내 외국인 유학생 수 변화",
+   "title_en": "Chart Writing — Growth of int'l students in Korea",
+   "prompt_ko": "다음 도표를 보고 국내 외국인 유학생 수의 변화를 설명하는 글을 3~4문장 써 보세요. 흐름이 드러나게 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the change over time in 3–4 written-style sentences.",
+   "source": "교육부 통계 참고 (가상 수치)",
+   "chart": {
+    "unit": "만 명",
+    "data": [
+     {
+      "label": "2018년",
+      "value": 14
+     },
+     {
+      "label": "2020년",
+      "value": 15
+     },
+     {
+      "label": "2022년",
+      "value": 17
+     },
+     {
+      "label": "2024년",
+      "value": 21
+     }
+    ]
+   },
+   "template": [
+    "~년부터 ~년까지 ~의 변화를 조사했다. (도입)",
+    "~년 ~이던 ~은/는 꾸준히 증가했다. (시작)",
+    "특히 ~ (변화가 큰 구간)",
+    "~년에는 ~에 이르렀다. (결과)"
+   ],
+   "model": "2018년부터 2024년까지 국내 외국인 유학생 수의 변화를 조사했다. 2018년 14만 명이던 유학생 수는 꾸준히 증가했다. 특히 2022년 17만 명에서 2024년에는 21만 명으로 크게 늘었다. 이러한 증가 추세는 앞으로도 이어질 것으로 보인다.",
+   "rubric": [
+    "처음과 마지막 수치를 정확히 썼나요?",
+    "증가/감소 흐름을 설명했나요?",
+    "변화 표현(증가하다·두 배로 늘다·-에 이르다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

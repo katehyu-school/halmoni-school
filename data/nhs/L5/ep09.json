@@ -692,42 +692,6 @@
    ]
   },
   {
-   "type": "kakao",
-   "title": "💬 아르투가 브라질 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "오늘 드디어 면접 봤어! 완전 격식체로만 말해야 해서 진짜 긴장했어",
-     "en": "Finally had my interview today! Had to speak in totally formal Korean the whole time, was so nervous"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "어땠는데?",
-     "en": "How'd it go?"
-    },
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "장단점 물어보는데 순간 머리가 하얘졌잖아ㅋㅋ 그래도 할 말은 다 했어",
-     "en": "When they asked about strengths and weaknesses my mind went totally blank lol, but I said everything I wanted to"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "결과는 언제 나와?",
-     "en": "When do you find out the result?"
-    },
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "이메일로 알려준대. 기다리는 게 제일 떨려…",
-     "en": "They said they'll email me. The waiting is the most nerve-wracking part..."
-    }
-   ]
-  },
-  {
    "type": "writing_guided",
    "id": "wg09",
    "title": "✍️ 가이드 작문 — 지원 동기 써 보기 (면접)",
@@ -746,6 +710,49 @@
     "자신의 강점을 근거로 들었나요?",
     "-(으)로서·-았/었으면 합니다·-도록 하겠습니다를 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc09",
+   "title": "📊 도표 작문 — 면접에서 중요하게 보는 요소",
+   "title_en": "Chart Writing — What matters most in interviews",
+   "prompt_ko": "다음 도표를 보고 면접에서 중요하게 보는 요소을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "기업 인사담당자 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "인성·태도",
+      "value": 35
+     },
+     {
+      "label": "직무 능력",
+      "value": 30
+     },
+     {
+      "label": "의사소통",
+      "value": 22
+     },
+     {
+      "label": "외국어",
+      "value": 13
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "기업 인사담당자를 대상으로 면접에서 가장 중요하게 보는 요소를 조사했다. 조사 결과 '인성과 태도'가 35%로 가장 높게 나타났다. 다음으로 '직무 능력'이 30%, '의사소통 능력'이 22%로 뒤를 이었다. 반면 '외국어 능력'은 13%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

@@ -567,36 +567,6 @@
    "content_en": "Seoul's official 'Bamdokkaebi Night Market' runs from late March to late October every year at locations like Yeouido, Banpo, Cheonggyecheon, and DDP. It's typically open Friday and Saturday evenings (Cheonggyecheon is Saturday and Sunday) from 6pm to 11pm, featuring food trucks run by young entrepreneurs, handmade goods, and performance stages."
   },
   {
-   "type": "kakao",
-   "title": "💬 올리비아가 캐나다 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "야시장 진짜 최고야! 포장마차도 많고 완전 북적여",
-     "en": "The night market is the best! So many food stalls and it's super crowded"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "오 뭐 먹었어?",
-     "en": "Oh what did you eat?"
-    },
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "길거리 음식 진짜 많이 먹었어ㅋㅋ 아르투가 촬영한다고 계속 컷하고 다시 찍었어",
-     "en": "I ate so much street food lol Arthur kept cutting and reshooting for his video"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "완전 재밌었겠다!",
-     "en": "That sounds so fun!"
-    }
-   ]
-  },
-  {
    "type": "reading",
    "id": "rl_read_l5ep04",
    "title": "📰 한국의 야시장, 왜 인기가 많을까? — 설명문/정보글",
@@ -647,6 +617,49 @@
     "근거와 반론을 함께 다뤘나요?",
     "-(으)ㄴ가/나 보다·-(으)ㄴ/는 듯하다를 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc04",
+   "title": "📊 도표 작문 — 야시장을 찾는 이유",
+   "title_en": "Chart Writing — Why people visit night markets",
+   "prompt_ko": "다음 도표를 보고 야시장을 찾는 이유을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "야시장 방문객 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "다양한 먹거리",
+      "value": 40
+     },
+     {
+      "label": "볼거리·분위기",
+      "value": 28
+     },
+     {
+      "label": "저렴한 가격",
+      "value": 20
+     },
+     {
+      "label": "SNS 촬영",
+      "value": 12
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "야시장 방문객을 대상으로 야시장을 찾는 이유를 조사했다. 조사 결과 '다양한 먹거리'가 40%로 가장 높게 나타났다. 다음으로 '볼거리와 분위기'가 28%, '저렴한 가격'이 20%로 뒤를 이었다. 반면 'SNS 촬영'은 12%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

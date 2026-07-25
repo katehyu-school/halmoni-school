@@ -619,6 +619,12 @@
    "content_en": "For a sprained ankle, remember 'RICE': Rest the injury, Ice to reduce swelling, Compression with a bandage, and Elevation above heart level. If the pain is severe or a fracture is suspected, go to the hospital."
   },
   {
+   "type": "tip",
+   "title": "🌟 삼총사의 한국 정착기 — 대단원",
+   "content_ko": "미라(보미)·올리비아·아르투, 삼총사가 한글학당에서 만나 함께 한국에 정착한 이야기가 여기서 마무리돼요. 아르투는 콘텐츠로 세상과 소통하고, 보미는 사람을 모아 판을 벌이고, 올리비아는 몸과 마음을 돌봐요. 서로 다른 셋이 '어우렁더우렁' 어울리며, 각자의 길을 찾았습니다. 수고했어요, 삼총사! 그리고 여기까지 함께한 여러분도요. 🎉",
+   "content_en": "Bomi, Olivia, and Arthur — the trio who met at the Hangeul school and settled into life in Korea — reach the end of their story here. Arthur connects with the world through content, Bomi gathers people and stages events, and Olivia cares for body and mind. Three different people, mingling 'eowoureong-deowoureong,' each found their own path. Well done, trio — and well done to you for coming this far! 🎉"
+  },
+  {
    "type": "reading",
    "id": "rl12_essay",
    "title": "📝 몸과 마음을 함께 돌봐야 하는 이유 (논술)",
@@ -664,12 +670,6 @@
    ]
   },
   {
-   "type": "tip",
-   "title": "🌟 삼총사의 한국 정착기 — 대단원",
-   "content_ko": "미라(보미)·올리비아·아르투, 삼총사가 한글학당에서 만나 함께 한국에 정착한 이야기가 여기서 마무리돼요. 아르투는 콘텐츠로 세상과 소통하고, 보미는 사람을 모아 판을 벌이고, 올리비아는 몸과 마음을 돌봐요. 서로 다른 셋이 '어우렁더우렁' 어울리며, 각자의 길을 찾았습니다. 수고했어요, 삼총사! 그리고 여기까지 함께한 여러분도요. 🎉",
-   "content_en": "Bomi, Olivia, and Arthur — the trio who met at the Hangeul school and settled into life in Korea — reach the end of their story here. Arthur connects with the world through content, Bomi gathers people and stages events, and Olivia cares for body and mind. Three different people, mingling 'eowoureong-deowoureong,' each found their own path. Well done, trio — and well done to you for coming this far! 🎉"
-  },
-  {
    "type": "writing_guided",
    "id": "wg12",
    "title": "✍️ 가이드 작문 — 좋은 돌봄이란?",
@@ -688,6 +688,49 @@
     "근거를 2개 이상 들었나요?",
     "담화부사(첫째·게다가·따라서)를 사용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc12",
+   "title": "📊 도표 작문 — 건강을 위해 실천하는 활동",
+   "title_en": "Chart Writing — Habits people keep for health",
+   "prompt_ko": "다음 도표를 보고 건강을 위해 실천하는 활동을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "성인 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "규칙적 운동",
+      "value": 36
+     },
+     {
+      "label": "균형 잡힌 식사",
+      "value": 28
+     },
+     {
+      "label": "충분한 수면",
+      "value": 22
+     },
+     {
+      "label": "정기 검진",
+      "value": 14
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "성인을 대상으로 건강을 위해 실천하는 활동을 조사했다. 조사 결과 '규칙적인 운동'이 36%로 가장 높게 나타났다. 다음으로 '균형 잡힌 식사'가 28%, '충분한 수면'이 22%로 뒤를 이었다. 반면 '정기 건강검진'은 14%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

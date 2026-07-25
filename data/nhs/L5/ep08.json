@@ -885,42 +885,6 @@
    ]
   },
   {
-   "type": "kakao",
-   "title": "💬 아르투가 브라질 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "오늘 광장시장 갔는데 완전 망했어ㅋㅋ 예산 다 씀",
-     "en": "Went to Gwangjang Market today and totally blew it lol, spent my whole budget"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "왜 ㅋㅋ 뭐 샀는데",
-     "en": "Why lol, what did you buy"
-    },
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "시식하다가 명란젓 샀어… 근데 진짜 맛있었음",
-     "en": "Was sampling and ended up buying salted pollock roe... but it was seriously delicious"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "그래서 얼마 썼는데",
-     "en": "So how much did you spend"
-    },
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "비상금까지 다 썼어… 나 오늘부터 별명 바뀔듯ㅠㅠ",
-     "en": "Spent even my emergency fund... my nickname's probably changing starting today ㅠㅠ"
-    }
-   ]
-  },
-  {
    "type": "writing_guided",
    "id": "wg08",
    "title": "✍️ 가이드 작문 — 전통 음식 문화를 지키려면",
@@ -939,6 +903,49 @@
     "근거를 들었나요?",
     "-기는커녕·-(으)ㄹ 셈이다를 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc08",
+   "title": "📊 도표 작문 — 외국인이 좋아하는 전통시장 먹거리",
+   "title_en": "Chart Writing — Foreigners' favorite market foods",
+   "prompt_ko": "다음 도표를 보고 외국인이 좋아하는 전통시장 먹거리을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "광장시장 방문 외국인 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "빈대떡",
+      "value": 32
+     },
+     {
+      "label": "떡볶이",
+      "value": 27
+     },
+     {
+      "label": "호떡",
+      "value": 23
+     },
+     {
+      "label": "순대",
+      "value": 18
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "광장시장을 찾은 외국인에게 가장 좋아하는 먹거리를 물었다. 조사 결과 빈대떡이 32%로 가장 높게 나타났다. 다음으로 떡볶이가 27%, 호떡이 23%로 뒤를 이었다. 반면 순대는 18%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

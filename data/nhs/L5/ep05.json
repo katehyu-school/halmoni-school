@@ -669,42 +669,6 @@
    ]
   },
   {
-   "type": "kakao",
-   "title": "💬 올리비아가 캐나다 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "오늘 창덕궁 후원 왔는데 진짜 예쁘다ㅠㅠ",
-     "en": "I came to Changdeokgung's Huwon today, it's so pretty T_T"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "오 예약하고 간 거야?",
-     "en": "Oh, did you make a reservation?"
-    },
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "응, 해설사님이랑 같이 도는 거라 미리 예약해야 해",
-     "en": "Yeah, you tour it with a guide so you have to book ahead"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "정조대왕 이야기 들었어?",
-     "en": "Did you hear about King Jeongjo?"
-    },
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "응 근데 너무 슬픈 이야기라 눈물 날 뻔했어ㅋㅋ",
-     "en": "Yeah, but it's such a sad story I almost cried lol"
-    }
-   ]
-  },
-  {
    "type": "writing_guided",
    "id": "wg05",
    "title": "✍️ 가이드 작문 — 문화유산을 지켜야 하는 이유",
@@ -723,6 +687,49 @@
     "경험이나 근거를 들었나요?",
     "-았/었더니·-는다는 점·-(으)ㄹ 따름이다를 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc05",
+   "title": "📊 도표 작문 — 외국인이 방문한 서울 고궁",
+   "title_en": "Chart Writing — Palaces foreign tourists visited",
+   "prompt_ko": "다음 도표를 보고 외국인이 방문한 서울 고궁을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "서울 방문 외국인 관광객 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "경복궁",
+      "value": 45
+     },
+     {
+      "label": "창덕궁",
+      "value": 25
+     },
+     {
+      "label": "덕수궁",
+      "value": 18
+     },
+     {
+      "label": "창경궁",
+      "value": 12
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "서울을 찾은 외국인 관광객에게 방문한 고궁을 물었다. 조사 결과 경복궁이 45%로 가장 높게 나타났다. 다음으로 창덕궁이 25%, 덕수궁이 18%로 뒤를 이었다. 반면 창경궁은 12%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

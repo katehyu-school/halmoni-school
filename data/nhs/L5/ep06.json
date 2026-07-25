@@ -901,36 +901,6 @@
    ]
   },
   {
-   "type": "kakao",
-   "title": "💬 아르투가 브라질 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "우리 뉴스 동아리 과제 완성했어! 근데 문법 실수 찾느라 밤샜어ㅋㅋ",
-     "en": "We finished our news club assignment! But we stayed up all night finding grammar mistakes lol"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "무슨 실수?",
-     "en": "What mistakes?"
-    },
-    {
-     "speaker": "아르투",
-     "side": "right",
-     "text": "사동사랑 피동사를 계속 헷갈렸더라고. 근데 나 K드라마 대사로 사동사 완벽 이해했잖아",
-     "en": "We kept mixing up causative and passive verbs. But I totally got causative verbs from a K-drama line"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "역시 K드라마의 힘이네ㅋㅋ",
-     "en": "The power of K-dramas strikes again lol"
-    }
-   ]
-  },
-  {
    "type": "writing_guided",
    "id": "wg06",
    "title": "✍️ 가이드 작문 — 재난, 어떻게 대비할까?",
@@ -949,6 +919,53 @@
     "근거를 2개 이상 들었나요?",
     "-느라고·-(으)ㄹ지도 모른다를 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc06",
+   "title": "📊 도표 작문 — 산불의 주요 발생 원인",
+   "title_en": "Chart Writing — Main causes of wildfires",
+   "prompt_ko": "다음 도표를 보고 산불의 발생 원인을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "산림청 통계 참고 (가상 수치)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "입산자 실화",
+      "value": 33
+     },
+     {
+      "label": "소각 부주의",
+      "value": 25
+     },
+     {
+      "label": "담뱃불",
+      "value": 18
+     },
+     {
+      "label": "자연 발화",
+      "value": 14
+     },
+     {
+      "label": "기타",
+      "value": 10
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "최근 발생한 산불의 원인을 조사했다. 조사 결과 '입산자의 실화'가 33%로 가장 높게 나타났다. 다음으로 '소각 부주의'가 25%, '담뱃불'이 18%로 뒤를 이었다. 이처럼 산불의 대부분은 사람의 부주의 때문에 발생하는 것으로 나타났다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],

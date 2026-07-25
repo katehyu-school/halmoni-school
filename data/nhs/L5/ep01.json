@@ -894,36 +894,6 @@
    "content_en": "At Korean universities, people who entered in the same year are called 동기 (batch-mates), and asking someone's 학번 (entry year) is a normal part of introducing yourself. Classmates in the same year usually switch to casual speech and become comfortable with each other quickly — which is exactly what's happening when Arthur says 'if we're the same year, we're friends.'"
   },
   {
-   "type": "kakao",
-   "title": "💬 올리비아가 캐나다 친구에게 카톡을 보내요",
-   "messages": [
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "나 한글학당에서 새 친구 생겼어! 브라질에서 온 애야",
-     "en": "I made a new friend at Hangeul Hakdang! He's from Brazil"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "오 대박, 어떻게 만났어?",
-     "en": "Oh wow, how'd you meet?"
-    },
-    {
-     "speaker": "올리비아",
-     "side": "right",
-     "text": "숲속에서 보미랑 얘기하고 있는데 갑자기 나타났어 ㅋㅋ",
-     "en": "He just suddenly appeared while I was talking with Bomi in the forest lol"
-    },
-    {
-     "speaker": "친구",
-     "side": "left",
-     "text": "완전 영화 같다ㅋㅋㅋ 잘 지내!",
-     "en": "That sounds like a movie lol have fun!"
-    }
-   ]
-  },
-  {
    "type": "reading",
    "id": "rl_read_l5ep01",
    "title": "📖 유학, 왜 다시 배우러 갈까? — 설명문/정보글",
@@ -1026,6 +996,49 @@
     "근거를 2개 이상 들었나요?",
     "-뿐만 아니라·-을/를 통해서·-에 의하면을 활용했나요?",
     "4문장 이상 썼나요?"
+   ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc01",
+   "title": "📊 도표 작문 — 한국어를 배우는 이유",
+   "title_en": "Chart Writing — Why people learn Korean",
+   "prompt_ko": "다음 도표를 보고 한국어를 배우는 이유을/를 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe the data in 3–4 written-style sentences, from highest to lowest.",
+   "source": "한국어 학습자 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "K-콘텐츠",
+      "value": 38
+     },
+     {
+      "label": "취업·진로",
+      "value": 27
+     },
+     {
+      "label": "문화 관심",
+      "value": 20
+     },
+     {
+      "label": "유학·학업",
+      "value": 15
+     }
+    ]
+   },
+   "template": [
+    "○○를 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "한국어를 배우는 외국인 200명에게 그 이유를 물었다. 조사 결과 'K-콘텐츠에 대한 관심'이 38%로 가장 높게 나타났다. 다음으로 '취업·진로'가 27%, '한국 문화에 대한 관심'이 20%로 뒤를 이었다. 반면 '유학·학업'은 15%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
    ]
   }
  ],
