@@ -172,7 +172,7 @@ function renderLT(){
   const area=document.getElementById('lt-q-area');
   if(!area)return;
   const listenBtn=q.type==='listen'
-    ?`<button class="lt-listen-btn" onclick="speakTTS('${q.audio.replace(/'/g,"\'")}')">🔊 듣기</button><br>`
+    ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
     :'';
   area.innerHTML=
     `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'버스타기':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':q.ep==='ep10'?'손님 초대':'TOPIK 1급'}</div>`
@@ -281,7 +281,7 @@ function renderL2T(){
   const epLabels={ep01:'관형절',ep02:'허락표현',ep03:'-(으)니까',ep04:'-아/어 보다',ep05:'안 vs 못',ep06:'-아/어도',ep07:'-(으)려고',ep08:'-아/어야 해요',ep09:'-게 되다',ep10:'-잖아요',ep11:'-거든요',ep12:'-다고 하다',read1:'읽기 1',read2:'읽기 2'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
-    ?`<button class="lt-listen-btn" onclick="speakTTS('${(q.audio_text||'').replace(/'/g,"\\'")}')">🔊 듣기</button><br>`
+    ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
     :'';
   const passageHtml=q.passage
     ?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`
@@ -392,7 +392,7 @@ function renderL3T(){
   const epLabels={ep01:'-(이)나/-ㄹ까',ep02:'-(으)라고',ep03:'-ㅂ니다체',ep04:'-(으)려고',ep05:'-는 바람에',ep06:'아무리~도',ep07:'-(으)려면',ep08:'-군요',ep09:'-(으)면 되다',ep10:'-는 편이다',ep11:'-ㄹ 뻔하다',ep12:'-ㄴ다/는다',read1:'읽기 1',read2:'읽기 2'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
-    ?`<button class="lt-listen-btn" onclick="speakTTS('${(q.audio_text||'').replace(/'/g,"\'")}')">🔊 듣기</button><br>`
+    ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
     :'';
   const passageHtml=q.passage
     ?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`
@@ -504,7 +504,7 @@ function renderL4T(){
   const epLabels={ep01:'-습니다체/-십니까?',ep02:'-ㄹ 리가 없다',ep03:'-기 마련이다',ep04:'-더라고요',ep05:'-는 셈이다',ep06:'-는 탓에',ep07:'-을 정도로',ep08:'-자마자',ep09:'-고서야',ep10:'-는 한',ep11:'-다시피 하다',ep12:'격식체 총정리',read1:'읽기 1',read2:'읽기 2'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
-    ?`<button class="lt-listen-btn" onclick="speakTTS('${(q.audio_text||'').replace(/'/g,"\'")}')">🔊 듣기</button><br>`
+    ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
     :'';
   const passageHtml=q.passage
     ?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`
@@ -616,7 +616,7 @@ function renderL5T(){
   const epLabels={ep01:'-을 통해서',ep02:'-ㄹ까 봐/-ㄹ 줄이야',ep03:'-ㄹ 수밖에 없다',ep04:'-나 보다',ep05:'-았더니',ep06:'-느라고',ep07:'-지 않을 수 없다',ep08:'-기는커녕/-ㄹ 셈이다',ep09:'-(으)로서',ep10:'-로 미루어 보아',ep11:'-고자',ep12:'-아/어 봤자',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3',read4:'읽기 4'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
-    ?`<button class="lt-listen-btn" onclick="speakTTS('${(q.audio_text||'').replace(/'/g,"\'")}')">🔊 듣기</button><br>`
+    ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
     :'';
   const passageHtml=q.passage
     ?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`
