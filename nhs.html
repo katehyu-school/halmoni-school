@@ -1005,7 +1005,7 @@ function _apTTS(text,onEnd){
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
   u.lang='ko-KR';u.rate=0.88;u.onend=onEnd;
-  const go=()=>{const v=speechSynthesis.getVoices().find(v=>v.lang==='ko-KR');if(v)u.voice=v;speechSynthesis.speak(u);};
+  const go=()=>{const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ko'));const pref=vs.find(v=>/google|yuna|heami|sora|microsoft|natural|neural|siri/i.test(v.name))||vs[0];if(pref)u.voice=pref;speechSynthesis.speak(u);};
   speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
 
@@ -1014,7 +1014,7 @@ function speakTTS(text){
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
   u.lang='ko-KR';u.rate=0.88;
-  const go=()=>{const v=speechSynthesis.getVoices().find(v=>v.lang==='ko-KR');if(v)u.voice=v;speechSynthesis.speak(u);};
+  const go=()=>{const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ko'));const pref=vs.find(v=>/google|yuna|heami|sora|microsoft|natural|neural|siri/i.test(v.name))||vs[0];if(pref)u.voice=pref;speechSynthesis.speak(u);};
   speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
 function stopTTS(){ if(window.speechSynthesis) speechSynthesis.cancel(); }
@@ -1177,6 +1177,7 @@ function checkFill(id){
 // ── WRITING PRACTICE (받아쓰기 + 문장완성) ─────────────
 let _wrComp=[];
 function _wrNorm(s){return (s||'').replace(/\s+/g,'').replace(/[.!?…~,"'’]+$/,'').trim();}
+function wrPlayLine(src,text){if(src){try{const a=new Audio(src);a.play();return;}catch(e){}}speakTTS(text);}
 function buildWriteTab(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const wp=WRITING_POOL[epKey]||{};
@@ -1187,7 +1188,7 @@ function buildWriteTab(){
   html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">듣고 문장을 그대로 써 보세요.</div>';
   dict.forEach((l,i)=>{
     html+=`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:12px;padding:12px 14px;margin-bottom:10px">
-      <button onclick="speakTTS('${escA(l.text)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">🔊 듣기</button>
+      <button onclick="wrPlayLine('${escA(l.audio||'')}','${escA(l.text)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">🔊 듣기</button>
       <input id="wrd-${i}" data-ans="${escA(l.text)}" placeholder="들은 문장을 써 보세요" style="width:100%;box-sizing:border-box;margin-top:9px;padding:9px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif)">
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckDict(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인</button><span id="wrd-${i}-res" style="font-size:12.5px"></span></div>
     </div>`;
