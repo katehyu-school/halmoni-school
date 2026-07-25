@@ -125,7 +125,7 @@
     "prompt": "불이 다 꺼져 있어요. '-나 보다'로 추측을 쓰세요. (없다)",
     "prompt_en": "Guess with -나 보다.",
     "grammar": "-(으)ㄴ가/나 보다",
-    "must_include": "나 보",
+    "must_include": "나 봐",
     "hint": "없다 → 없나 보다",
     "answers": [
      "아무도 없나 봐요",
@@ -188,7 +188,7 @@
     "prompt": "'길이 막혀서 조금 ___.' 를 '-(으)ㄹ지도 모른다'로 완성하세요. (늦다)",
     "prompt_en": "Complete with -(으)ㄹ지도 모른다.",
     "grammar": "-(으)ㄹ지도 모른다",
-    "must_include": "지도 모",
+    "must_include": "을지도",
     "hint": "늦다 → 늦을지도 모른다",
     "answers": [
      "늦을지도 몰라요",
@@ -322,6 +322,677 @@
     "answers": [
      "저는 긍정적이에요",
      "저는 긍정적인 사람이에요"
+    ]
+   }
+  ]
+ },
+ "L4_ep01": {
+  "completion": [
+   {
+    "prompt": "다음 문장을 격식체(-(으)ㅂ니다/습니다체)로 바꿔 쓰세요.\n'저는 한국어를 배워요.'",
+    "prompt_en": "Rewrite in the formal -(으)ㅂ니다/습니다 style.",
+    "grammar": "-(으)ㅂ니다/습니다체",
+    "must_include": "배웁니다",
+    "hint": "배우다 → 배웁니다",
+    "answers": [
+     "저는 한국어를 배웁니다",
+     "한국어를 배웁니다"
+    ]
+   },
+   {
+    "prompt": "웃어른께 여쭙는 격식체 질문으로 바꿔 쓰세요.\n'어디 가세요?'",
+    "prompt_en": "Turn into a formal honorific question (-(으)십니까?).",
+    "grammar": "-(으)십니까?",
+    "must_include": "가십니까",
+    "hint": "가시다 → 가십니까?",
+    "answers": [
+     "어디 가십니까?",
+     "어디 가십니까",
+     "어디에 가십니까?"
+    ]
+   }
+  ]
+ },
+ "L4_ep02": {
+  "completion": [
+   {
+    "prompt": "착한 친구가 거짓말을 했다는 소문을 강하게 부정하는 한 문장을 '-(으)ㄹ 리가 없다'로 쓰세요.",
+    "prompt_en": "Firmly deny a rumor using -(으)ㄹ 리가 없다.",
+    "grammar": "-(으)ㄹ 리가 없다",
+    "must_include": "리가 없",
+    "hint": "거짓말을 하다 → 했을 리가 없다",
+    "answers": [
+     "그 친구가 거짓말을 했을 리가 없어요",
+     "거짓말을 했을 리가 없어요",
+     "그럴 리가 없어요"
+    ]
+   },
+   {
+    "prompt": "친구가 지금쯤 도착했을 거라고 추측하는 한 문장을 '-겠-'으로 쓰세요.",
+    "prompt_en": "Guess with -겠- that your friend has probably arrived.",
+    "grammar": "-겠-",
+    "must_include": "겠",
+    "hint": "도착하다 → 도착했겠다",
+    "answers": [
+     "지금쯤 도착했겠어요",
+     "지금쯤 도착했겠다",
+     "이제 도착했겠네요"
+    ]
+   }
+  ]
+ },
+ "L4_ep03": {
+  "completion": [
+   {
+    "prompt": "'사람은 누구나 실수한다'는 뜻을 '-기 마련이다'로 한 문장으로 쓰세요.",
+    "prompt_en": "Express that everyone makes mistakes, using -기 마련이다.",
+    "grammar": "-기 마련이다",
+    "must_include": "마련",
+    "hint": "실수하다 → 실수하기 마련이다",
+    "answers": [
+     "누구나 실수하기 마련이에요",
+     "사람은 누구나 실수하기 마련이다",
+     "실수하기 마련이에요"
+    ]
+   },
+   {
+    "prompt": "'노력하면 성공한다'는 이치를 '-는 법이다'로 한 문장으로 쓰세요.",
+    "prompt_en": "State the principle that effort leads to success, using -는 법이다.",
+    "grammar": "-는 법이다",
+    "must_include": "법이",
+    "hint": "노력하면 → 성공하는 법이다",
+    "answers": [
+     "노력하면 성공하는 법이에요",
+     "열심히 하면 잘되는 법이다",
+     "노력하면 성공하는 법이다"
+    ]
+   }
+  ]
+ },
+ "L4_ep04": {
+  "completion": [
+   {
+    "prompt": "어제 가 본 식당이 정말 맛있었다고 직접 겪은 느낌으로 '-더라고요'를 써서 쓰세요.",
+    "prompt_en": "Share your firsthand impression that the restaurant was delicious, using -더라고요.",
+    "grammar": "-더라고요",
+    "must_include": "더라고",
+    "hint": "맛있다 → 맛있더라고요",
+    "answers": [
+     "그 식당 음식이 정말 맛있더라고요",
+     "정말 맛있더라고요",
+     "생각보다 맛있더라고요"
+    ]
+   },
+   {
+    "prompt": "어릴 때 자주 가던 놀이터를 회상하는 '-던 N' 표현으로 한 구절을 쓰세요.",
+    "prompt_en": "Recall a playground you used to visit, using -던 N.",
+    "grammar": "-던 N",
+    "must_include": "던",
+    "hint": "가다 → 자주 가던 놀이터",
+    "answers": [
+     "어렸을 때 자주 가던 놀이터",
+     "자주 가던 놀이터",
+     "어릴 때 놀던 놀이터"
+    ]
+   }
+  ]
+ },
+ "L4_ep05": {
+  "completion": [
+   {
+    "prompt": "일을 거의 다 끝냈으니 '다 한 거나 마찬가지'라는 뜻을 '-는 셈이다'로 쓰세요.",
+    "prompt_en": "Say the work is basically done, using -는 셈이다.",
+    "grammar": "-는 셈이다",
+    "must_include": "셈",
+    "hint": "거의 다 하다 → 거의 다 한 셈이다",
+    "answers": [
+     "거의 다 한 셈이에요",
+     "이제 거의 다 끝난 셈이다",
+     "거의 다 끝낸 셈이에요"
+    ]
+   },
+   {
+    "prompt": "친구가 약속에 못 온다는 뜻인지 되묻는 문장을 '-다는 말이에요'로 쓰세요.",
+    "prompt_en": "Ask again whether it means your friend can't come, using -다는 말이에요.",
+    "grammar": "-다는 말이에요",
+    "must_include": "말이",
+    "hint": "못 오다 → 못 온다는 말이에요?",
+    "answers": [
+     "그러니까 못 온다는 말이에요?",
+     "못 온다는 말이에요?",
+     "안 온다는 말이에요?"
+    ]
+   }
+  ]
+ },
+ "L4_ep06": {
+  "completion": [
+   {
+    "prompt": "늦게 자는 부정적 습관 때문에 아침에 못 일어난다는 뜻을 '-는 탓에'로 쓰세요.",
+    "prompt_en": "Blame oversleeping on staying up late, using -는 탓에.",
+    "grammar": "-는 탓에",
+    "must_include": "탓",
+    "hint": "늦게 자다 → 늦게 자는 탓에",
+    "answers": [
+     "늦게 자는 탓에 아침에 못 일어나요",
+     "늦게 자는 탓에 늘 피곤해요",
+     "밤늦게 자는 탓에 아침에 힘들어요"
+    ]
+   },
+   {
+    "prompt": "'폭우 때문에 행사가 취소됐다'를 격식·문어체 '-(으)로 인해서'로 쓰세요.",
+    "prompt_en": "State that the event was canceled due to heavy rain, using -(으)로 인해서.",
+    "grammar": "-(으)로 인해",
+    "must_include": "인해",
+    "hint": "폭우 → 폭우로 인해서",
+    "answers": [
+     "폭우로 인해서 행사가 취소됐어요",
+     "폭우로 인해 행사가 취소되었다",
+     "폭우로 인해서 행사가 취소되었습니다"
+    ]
+   }
+  ]
+ },
+ "L4_ep07": {
+  "completion": [
+   {
+    "prompt": "너무 배가 고파서 쓰러질 것 같다는 과장을 '-(으)ㄹ 지경이다'로 쓰세요.",
+    "prompt_en": "Exaggerate that you're starving to the point of collapse, using -(으)ㄹ 지경이다.",
+    "grammar": "-(으)ㄹ 지경이다",
+    "must_include": "지경",
+    "hint": "쓰러지다 → 쓰러질 지경이다",
+    "answers": [
+     "배가 고파서 쓰러질 지경이에요",
+     "배고파서 쓰러질 지경이에요",
+     "너무 배고파서 쓰러질 지경이다"
+    ]
+   },
+   {
+    "prompt": "실수를 해서 너무 부끄럽다는 감정을 '-기 짝이 없다'로 강조해서 쓰세요.",
+    "prompt_en": "Emphasize how embarrassed you are, using -기 짝이 없다.",
+    "grammar": "-기 짝이 없다",
+    "must_include": "짝이 없",
+    "hint": "부끄럽다 → 부끄럽기 짝이 없다",
+    "answers": [
+     "부끄럽기 짝이 없어요",
+     "창피하기 짝이 없다",
+     "부끄럽기 짝이 없다"
+    ]
+   }
+  ]
+ },
+ "L4_ep08": {
+  "completion": [
+   {
+    "prompt": "'집에 오다'와 '자다'를 '-자마자'로 이어 한 문장으로 쓰세요.",
+    "prompt_en": "Connect 'come home' and 'sleep' with -자마자.",
+    "grammar": "-자마자",
+    "must_include": "자마자",
+    "hint": "오다 → 오자마자",
+    "answers": [
+     "집에 오자마자 잤어요",
+     "집에 도착하자마자 잤어요",
+     "집에 오자마자 잠들었어요"
+    ]
+   },
+   {
+    "prompt": "'비가 그치다'와 '기다리다'를 '-(으)ㄹ 때까지'로 이어 한 문장으로 쓰세요.",
+    "prompt_en": "Connect 'the rain stops' and 'wait' with -(으)ㄹ 때까지.",
+    "grammar": "-(으)ㄹ 때까지",
+    "must_include": "때까지",
+    "hint": "그치다 → 그칠 때까지",
+    "answers": [
+     "비가 그칠 때까지 기다리자",
+     "비가 그칠 때까지 기다렸어요",
+     "비가 그칠 때까지 기다릴게요"
+    ]
+   }
+  ]
+ },
+ "L4_ep09": {
+  "completion": [
+   {
+    "prompt": "계속 게으르게 살면 나중에 후회한다는 경고를 '-다가는'으로 쓰세요.",
+    "prompt_en": "Warn that laziness leads to regret, using -다가는.",
+    "grammar": "-다가는",
+    "must_include": "다가는",
+    "hint": "이렇게 살다 → 이렇게 살다가는",
+    "answers": [
+     "이렇게 살다가는 후회해요",
+     "계속 놀다가는 시험에 떨어져요",
+     "이렇게 게으르게 살다가는 후회해요"
+    ]
+   },
+   {
+    "prompt": "직접 겪고 나서야 비로소 그 마음을 알았다는 뜻을 '-고서야'로 쓰세요.",
+    "prompt_en": "Say you understood only after experiencing it, using -고서야.",
+    "grammar": "-고서야",
+    "must_include": "고서야",
+    "hint": "겪다 → 겪고서야",
+    "answers": [
+     "직접 겪고서야 그 마음을 알았어요",
+     "겪고서야 이해했어요",
+     "직접 겪고서야 알았어요"
+    ]
+   }
+  ]
+ },
+ "L4_ep10": {
+  "completion": [
+   {
+    "prompt": "포기하지 않는 한 기회는 있다는 조건을 '-는 한'으로 쓰세요.",
+    "prompt_en": "Say chances remain as long as you don't give up, using -는 한.",
+    "grammar": "-는 한",
+    "must_include": "는 한",
+    "hint": "포기하지 않다 → 포기하지 않는 한",
+    "answers": [
+     "포기하지 않는 한 기회는 있어요",
+     "노력하는 한 반드시 성공해요",
+     "포기하지 않는 한 기회는 있다"
+    ]
+   },
+   {
+    "prompt": "친구 말이 결국 '지금 바쁘다'는 뜻이냐고 구어 축약형 '-다는 거야'로 되물어 보세요.",
+    "prompt_en": "Ask, in casual speech, whether it means they're busy now, using -다는 거야.",
+    "grammar": "-다는 거야",
+    "must_include": "거야",
+    "hint": "바쁘다 → 바쁘다는 거야?",
+    "answers": [
+     "그러니까 지금 바쁘다는 거야?",
+     "바쁘다는 거야?",
+     "지금 바쁘다는 거야?"
+    ]
+   }
+  ]
+ },
+ "L4_ep11": {
+  "completion": [
+   {
+    "prompt": "이번 시험엔 반드시 합격하겠다는 굳은 결심을 '-고 말겠다'로 쓰세요.",
+    "prompt_en": "Express firm resolve to pass the exam, using -고 말겠다.",
+    "grammar": "-고 말겠",
+    "must_include": "고 말겠",
+    "hint": "합격하다 → 합격하고 말겠다",
+    "answers": [
+     "이번엔 꼭 합격하고 말겠어요",
+     "반드시 합격하고 말겠다",
+     "이번엔 꼭 합격하고 말겠다"
+    ]
+   },
+   {
+    "prompt": "한 번만 더 거짓말하면 가만두지 않겠다는 경고를 '-기만 해 봐'로 쓰세요.",
+    "prompt_en": "Warn 'just try lying one more time,' using -기만 해 봐.",
+    "grammar": "-기만 해 봐",
+    "must_include": "기만 해",
+    "hint": "거짓말하다 → 거짓말하기만 해 봐",
+    "answers": [
+     "한 번만 더 거짓말하기만 해 봐",
+     "거짓말하기만 해 봐",
+     "한 번만 더 거짓말하기만 해 봐라"
+    ]
+   }
+  ]
+ },
+ "L4_ep12": {
+  "completion": [
+   {
+    "prompt": "주민센터 창구에서 '증명서를 발급받으려고 왔다'를 격식체로 정중히 말해 보세요.",
+    "prompt_en": "Politely tell the clerk you came to get a certificate, in formal style.",
+    "grammar": "관공서 격식체",
+    "must_include": "왔습니다",
+    "hint": "발급받다 → 발급받으러 왔습니다",
+    "answers": [
+     "증명서를 발급받으러 왔습니다",
+     "서류를 발급받으러 왔습니다",
+     "증명서를 발급받고 싶습니다"
+    ]
+   },
+   {
+    "prompt": "도와준 직원에게 '도와줘서 고맙다'를 격식체로 정중히 말해 보세요.",
+    "prompt_en": "Thank the clerk for their help, in formal style.",
+    "grammar": "격식체 감사 표현",
+    "must_include": "주셔서",
+    "hint": "도와주다 → 도와주셔서 감사합니다",
+    "answers": [
+     "도와주셔서 감사합니다",
+     "도와주셔서 고맙습니다",
+     "친절하게 도와주셔서 감사합니다"
+    ]
+   }
+  ]
+ },
+ "L3_ep01": {
+  "completion": [
+   {
+    "prompt": "친구가 '내일 올게'라고 한 말을 다른 사람에게 전달하는 문장을 '-다고 하다'로 쓰세요.",
+    "prompt_en": "Relay 'I'll come tomorrow' using -다고 하다.",
+    "grammar": "-다고 하다",
+    "must_include": "다고",
+    "hint": "오다 → 온다고 했어요",
+    "answers": [
+     "친구가 내일 온다고 했어요",
+     "내일 온다고 했어요",
+     "친구가 내일 온다고 해요"
+    ]
+   },
+   {
+    "prompt": "친구가 '같이 밥 먹자'고 한 말을 전달하는 문장을 '-자고 하다'로 쓰세요.",
+    "prompt_en": "Relay 'let's eat together' using -자고 하다.",
+    "grammar": "-자고 하다",
+    "must_include": "자고",
+    "hint": "먹다 → 먹자고 했어요",
+    "answers": [
+     "친구가 같이 밥 먹자고 했어요",
+     "같이 밥 먹자고 했어요",
+     "친구가 밥 먹자고 해요"
+    ]
+   }
+  ]
+ },
+ "L3_ep02": {
+  "completion": [
+   {
+    "prompt": "선생님이 '조용히 해'라고 하신 말을 전달하는 문장을 '-(으)라고 하다'로 쓰세요.",
+    "prompt_en": "Relay the teacher's command 'be quiet' using -(으)라고 하다.",
+    "grammar": "-(으)라고 하다",
+    "must_include": "라고",
+    "hint": "조용히 하다 → 조용히 하라고 하셨어요",
+    "answers": [
+     "선생님이 조용히 하라고 하셨어요",
+     "조용히 하라고 했어요",
+     "선생님이 조용히 하라고 하셨다"
+    ]
+   },
+   {
+    "prompt": "친구가 '도와줘'라고 부탁한 말을 전달하는 문장을 '-아/어 달라고 하다'로 쓰세요.",
+    "prompt_en": "Relay the request 'please help me' using -아/어 달라고 하다.",
+    "grammar": "-아/어 달라고 하다",
+    "must_include": "달라고",
+    "hint": "돕다 → 도와 달라고 했어요",
+    "answers": [
+     "친구가 도와 달라고 했어요",
+     "도와 달라고 했어요",
+     "친구가 도와 달라고 해요"
+    ]
+   }
+  ]
+ },
+ "L3_ep03": {
+  "completion": [
+   {
+    "prompt": "바람에 문이 저절로 닫혔다는 뜻을 피동 표현(-이/히/리/기)으로 쓰세요.",
+    "prompt_en": "Say the door closed by itself in the wind, using a passive verb.",
+    "grammar": "피동 -이/히/리/기",
+    "must_include": "닫혔",
+    "hint": "닫다 → 닫히다 → 닫혔어요",
+    "answers": [
+     "문이 바람에 닫혔어요",
+     "바람에 문이 닫혔어요",
+     "문이 저절로 닫혔어요"
+    ]
+   },
+   {
+    "prompt": "봄이 되어 날씨가 점점 따뜻해진다는 변화를 '-아/어지다'로 쓰세요.",
+    "prompt_en": "Describe the weather gradually warming up, using -아/어지다.",
+    "grammar": "-아/어지다",
+    "must_include": "따뜻해",
+    "hint": "따뜻하다 → 따뜻해지다",
+    "answers": [
+     "날씨가 점점 따뜻해져요",
+     "날씨가 따뜻해졌어요",
+     "봄이 되니 날씨가 따뜻해져요"
+    ]
+   }
+  ]
+ },
+ "L3_ep04": {
+  "completion": [
+   {
+    "prompt": "엄마가 아이에게 밥을 먹게 했다는 뜻을 사동 접미사로 쓰세요.",
+    "prompt_en": "Say the mother fed the child, using a causative suffix.",
+    "grammar": "사동 접미사",
+    "must_include": "먹였",
+    "hint": "먹다 → 먹이다 → 먹였어요",
+    "answers": [
+     "엄마가 아이에게 밥을 먹였어요",
+     "아이에게 밥을 먹였어요",
+     "엄마가 아기에게 밥을 먹였어요"
+    ]
+   },
+   {
+    "prompt": "선생님이 학생들을 웃게 만들었다는 뜻을 '-게 하다'로 쓰세요.",
+    "prompt_en": "Say the teacher made the students laugh, using -게 하다.",
+    "grammar": "-게 하다",
+    "must_include": "웃게",
+    "hint": "웃다 → 웃게 하다",
+    "answers": [
+     "선생님이 학생들을 웃게 했어요",
+     "학생들을 웃게 했어요",
+     "선생님이 우리를 웃게 하셨어요"
+    ]
+   }
+  ]
+ },
+ "L3_ep05": {
+  "completion": [
+   {
+    "prompt": "늦잠을 자서 버스를 놓쳤다는 예상 밖 결과를 '-는 바람에'로 쓰세요.",
+    "prompt_en": "Say you missed the bus because you overslept, using -는 바람에.",
+    "grammar": "-는 바람에",
+    "must_include": "바람에",
+    "hint": "늦잠을 자다 → 늦잠을 자는 바람에",
+    "answers": [
+     "늦잠을 자는 바람에 버스를 놓쳤어요",
+     "늦잠을 자는 바람에 지각했어요",
+     "늦잠을 자는 바람에 버스를 못 탔어요"
+    ]
+   },
+   {
+    "prompt": "신발을 신은 그대로 방에 들어왔다는 상태 유지를 '-(으)ㄴ 채로'로 쓰세요.",
+    "prompt_en": "Say you came in with your shoes still on, using -(으)ㄴ 채로.",
+    "grammar": "-(으)ㄴ 채로",
+    "must_include": "채로",
+    "hint": "신다 → 신은 채로",
+    "answers": [
+     "신발을 신은 채로 들어왔어요",
+     "불을 켠 채로 잤어요",
+     "신발을 신은 채로 방에 들어왔어요"
+    ]
+   }
+  ]
+ },
+ "L3_ep06": {
+  "completion": [
+   {
+    "prompt": "열심히 공부하는데도 성적이 안 오른다는 뜻을 '-는데도'로 쓰세요.",
+    "prompt_en": "Say your grades don't improve even though you study hard, using -는데도.",
+    "grammar": "-는데도",
+    "must_include": "는데도",
+    "hint": "공부하다 → 공부하는데도",
+    "answers": [
+     "열심히 공부하는데도 성적이 안 올라요",
+     "공부하는데도 점수가 안 나와요",
+     "열심히 하는데도 성적이 그대로예요"
+    ]
+   },
+   {
+    "prompt": "아무리 바빠도 밥은 꼭 먹어야 한다는 뜻을 '아무리 -아/어도'로 쓰세요.",
+    "prompt_en": "Say no matter how busy, you must eat, using 아무리 -아/어도.",
+    "grammar": "아무리 -아/어도",
+    "must_include": "아무리",
+    "hint": "바쁘다 → 아무리 바빠도",
+    "answers": [
+     "아무리 바빠도 밥은 먹어야 해요",
+     "아무리 바빠도 밥은 꼭 먹어요",
+     "아무리 바빠도 운동은 해요"
+    ]
+   }
+  ]
+ },
+ "L3_ep07": {
+  "completion": [
+   {
+    "prompt": "한국어를 잘하려면 매일 연습해야 한다는 조건을 '-(으)려면'으로 쓰세요.",
+    "prompt_en": "Say to get good at Korean you must practice daily, using -(으)려면.",
+    "grammar": "-(으)려면",
+    "must_include": "려면",
+    "hint": "잘하다 → 잘하려면",
+    "answers": [
+     "한국어를 잘하려면 매일 연습해야 해요",
+     "잘하려면 열심히 연습해야 해요",
+     "한국어를 잘하려면 꾸준히 연습해야 해요"
+    ]
+   },
+   {
+    "prompt": "보면 볼수록 정이 든다는 비례 관계를 '-(으)ㄹ수록'으로 쓰세요.",
+    "prompt_en": "Say the more you see it, the more you grow attached, using -(으)ㄹ수록.",
+    "grammar": "-(으)ㄹ수록",
+    "must_include": "수록",
+    "hint": "보다 → 볼수록",
+    "answers": [
+     "볼수록 정이 들어요",
+     "보면 볼수록 좋아져요",
+     "만날수록 정이 들어요"
+    ]
+   }
+  ]
+ },
+ "L3_ep08": {
+  "completion": [
+   {
+    "prompt": "일기예보에서 '내일 비가 온다'고 들은 것을 전하는 문장을 '-대요'로 쓰세요.",
+    "prompt_en": "Relay the forecast that it'll rain tomorrow, using -대요.",
+    "grammar": "-대요",
+    "must_include": "온대",
+    "hint": "오다 → 온대요",
+    "answers": [
+     "내일 비가 온대요",
+     "내일 비 온대요",
+     "일기예보에서 내일 비가 온대요"
+    ]
+   },
+   {
+    "prompt": "상대가 내일 이사한다고 들었는데 맞는지 확인하는 문장을 '-다면서요?'로 쓰세요.",
+    "prompt_en": "Confirm the hearsay that they're moving tomorrow, using -다면서요?.",
+    "grammar": "-다면서요?",
+    "must_include": "면서요",
+    "hint": "이사하다 → 이사한다면서요?",
+    "answers": [
+     "내일 이사한다면서요?",
+     "이사한다면서요?",
+     "내일 이사 간다면서요?"
+    ]
+   }
+  ]
+ },
+ "L3_ep09": {
+  "completion": [
+   {
+    "prompt": "불이 꺼진 걸 보니 자는 것 같다는 추측을 '-는 모양이다'로 쓰세요.",
+    "prompt_en": "Guess someone is sleeping because the lights are off, using -는 모양이다.",
+    "grammar": "-는 모양이다",
+    "must_include": "모양",
+    "hint": "자다 → 자는 모양이다",
+    "answers": [
+     "불이 꺼진 걸 보니 자는 모양이에요",
+     "자는 모양이에요",
+     "불이 꺼진 걸 보니 자는 모양이다"
+    ]
+   },
+   {
+    "prompt": "이 영화를 추천할 만하다는 뜻을 '-(으)ㄹ 만하다'로 쓰세요.",
+    "prompt_en": "Recommend the movie as worth watching, using -(으)ㄹ 만하다.",
+    "grammar": "-(으)ㄹ 만하다",
+    "must_include": "만해",
+    "hint": "보다 → 볼 만하다",
+    "answers": [
+     "이 영화 볼 만해요",
+     "이 영화는 볼 만해요",
+     "이 책은 읽을 만해요"
+    ]
+   }
+  ]
+ },
+ "L3_ep10": {
+  "completion": [
+   {
+    "prompt": "자신은 매운 음식을 잘 먹는 편이라는 경향을 '-(으)ㄴ/는 편이다'로 쓰세요.",
+    "prompt_en": "Say you tend to handle spicy food well, using -(으)ㄴ/는 편이다.",
+    "grammar": "-(으)ㄴ/는 편이다",
+    "must_include": "편이",
+    "hint": "먹다 → 잘 먹는 편이다",
+    "answers": [
+     "저는 매운 음식을 잘 먹는 편이에요",
+     "매운 걸 잘 먹는 편이에요",
+     "저는 매운 음식을 잘 먹는 편이다"
+    ]
+   },
+   {
+    "prompt": "나가는 김에 쓰레기도 버렸다는 뜻을 '-는 김에'로 쓰세요.",
+    "prompt_en": "Say you took out the trash while you were heading out, using -는 김에.",
+    "grammar": "-는 김에",
+    "must_include": "김에",
+    "hint": "나가다 → 나가는 김에",
+    "answers": [
+     "나가는 김에 쓰레기도 버렸어요",
+     "마트에 가는 김에 우유도 샀어요",
+     "나가는 김에 쓰레기를 버렸어요"
+    ]
+   }
+  ]
+ },
+ "L3_ep11": {
+  "completion": [
+   {
+    "prompt": "계단에서 넘어질 뻔한 아찔한 순간을 '-(으)ㄹ 뻔하다'로 쓰세요.",
+    "prompt_en": "Describe almost falling on the stairs, using -(으)ㄹ 뻔하다.",
+    "grammar": "-(으)ㄹ 뻔하다",
+    "must_include": "뻔",
+    "hint": "넘어지다 → 넘어질 뻔했어요",
+    "answers": [
+     "계단에서 넘어질 뻔했어요",
+     "넘어질 뻔했어요",
+     "하마터면 넘어질 뻔했어요"
+    ]
+   },
+   {
+    "prompt": "부끄러워서 자는 척했다는 뜻을 '-는 척하다'로 쓰세요.",
+    "prompt_en": "Say you pretended to sleep out of embarrassment, using -는 척하다.",
+    "grammar": "-는 척하다",
+    "must_include": "척",
+    "hint": "자다 → 자는 척하다",
+    "answers": [
+     "부끄러워서 자는 척했어요",
+     "자는 척했어요",
+     "못 본 척했어요"
+    ]
+   }
+  ]
+ },
+ "L3_ep12": {
+  "completion": [
+   {
+    "prompt": "'나는 매일 아침 운동을 해요'를 문어체(-ㄴ다/는다)로 바꿔 쓰세요.",
+    "prompt_en": "Rewrite in documentary/written style using -ㄴ다/는다.",
+    "grammar": "-ㄴ다/는다 (문어체)",
+    "must_include": "한다",
+    "hint": "하다 → 한다",
+    "answers": [
+     "나는 매일 아침 운동을 한다",
+     "매일 아침 운동을 한다",
+     "나는 매일 운동을 한다"
+    ]
+   },
+   {
+    "prompt": "'독서란 무엇인가'를 정의하는 문어체 문장을 '-는 것이다'로 완성하세요. (예: 지식을 쌓다)",
+    "prompt_en": "Write a written-style definition of reading, using -는 것이다.",
+    "grammar": "-(으)ㄴ/는 것이다",
+    "must_include": "것이다",
+    "hint": "독서는 → 지식을 쌓는 것이다",
+    "answers": [
+     "독서란 지식을 쌓는 것이다",
+     "독서는 지식을 쌓는 것이다",
+     "독서란 마음의 양식을 쌓는 것이다"
     ]
    }
   ]
