@@ -3071,12 +3071,13 @@ function buildBasicsSidebar(){
     +'<div class="basics-topic-icon">'+t.icon+'</div>'
     +'<div class="basics-topic-name">'+t.label+'<span class="basics-topic-name-en">'+t.en+'</span></div>'
     +'</div>';
-  const grpHdr=txt=>'<div style="font-size:11px;font-weight:800;color:var(--warm-500);margin:12px 4px 6px;">'+txt+'</div>';
+  const grpHdr=(txt,bg,fg)=>'<div style="background:'+bg+';color:'+fg+';font-size:11.5px;font-weight:800;padding:7px 11px;border-radius:8px;margin:12px 2px 7px;letter-spacing:.2px;">'+txt+'</div>';
+  const grpWrap=(items,accent)=>'<div style="border-left:3px solid '+accent+';padding-left:7px;margin:0 0 4px 2px;">'+items+'</div>';
   const learn=BASICS_TOPICS.filter(t=>t.grp!=='ref');
   const ref=BASICS_TOPICS.filter(t=>t.grp==='ref');
   list.innerHTML=roadmap
-    +grpHdr('🌱 배우기 · Learn')+learn.map(item).join('')
-    +grpHdr('📌 레퍼런스 · Reference')+ref.map(item).join('')
+    +grpHdr('🌱 배우기 · Learn','var(--teal-50)','var(--teal-dark)')+grpWrap(learn.map(item).join(''),'var(--teal)')
+    +grpHdr('📌 레퍼런스 · Reference','var(--amber-lt)','var(--amber-600)')+grpWrap(ref.map(item).join(''),'var(--amber)')
     +'<div style="font-size:10.5px;color:var(--warm-400);margin:8px 4px 0;line-height:1.5">📌 레퍼런스는 상단 <b>빠른 참고</b>로도 어디서든 열려요.</div>';
 }
 
