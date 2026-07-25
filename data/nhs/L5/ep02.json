@@ -869,6 +869,49 @@
     "-기는 하다·-(으)ㄹ까 봐를 활용했나요?",
     "4문장 이상 썼나요?"
    ]
+  },
+  {
+   "type": "writing_chart",
+   "id": "wc02",
+   "title": "📊 도표 작문 — 유학생이 선택한 숙소 유형",
+   "title_en": "Chart Writing — Housing types international students choose",
+   "prompt_ko": "다음 도표를 보고 유학생이 선택한 숙소 유형을 설명하는 글을 3~4문장 써 보세요. 가장 높은 것부터 순서대로 쓰고, 문어체(-다)로 써 보세요.",
+   "prompt_en": "Look at the chart and describe international students' housing choices in 3–4 written-style sentences, from highest to lowest.",
+   "source": "○○대학교 유학생 200명 대상 설문 (가상 자료)",
+   "chart": {
+    "unit": "%",
+    "data": [
+     {
+      "label": "고시원",
+      "value": 42
+     },
+     {
+      "label": "원룸",
+      "value": 30
+     },
+     {
+      "label": "기숙사",
+      "value": 18
+     },
+     {
+      "label": "하숙",
+      "value": 10
+     }
+    ]
+   },
+   "template": [
+    "○○대학교 유학생을 대상으로 ~를 조사했다. (도입)",
+    "조사 결과 ~가 ~%로 가장 높게 나타났다. (1위)",
+    "다음으로 ~가 ~%, ~가 ~%로 뒤를 이었다. (2·3위)",
+    "반면 ~는 ~%에 그쳐 가장 낮았다. (최저)"
+   ],
+   "model": "○○대학교 유학생 200명을 대상으로 선호하는 숙소 유형을 조사했다. 조사 결과 고시원이 42%로 가장 높게 나타났다. 다음으로 원룸이 30%, 기숙사가 18%로 뒤를 이었다. 반면 하숙은 10%에 그쳐 가장 낮았다.",
+   "rubric": [
+    "가장 높은 항목과 수치를 정확히 썼나요?",
+    "높은 순서대로 자료를 설명했나요?",
+    "도표 표현(가장 높게 나타나다·뒤를 잇다·-에 그치다)을 활용했나요?",
+    "문어체(-다)로 일관되게 썼나요?"
+   ]
   }
  ],
  "quiz": [

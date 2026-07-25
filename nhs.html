@@ -1835,6 +1835,26 @@ function buildRealLife(){
         ${rubric?`<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:14px 0 6px">✅ 자기 점검</div>${rubric}`:''}
       </div>`;
     }
+    // chart writing (도표 작문 · TOPIK 53형)
+    if(item.type==='writing_chart'){
+      const sid=item.id||'wc';
+      const ch=item.chart||{};const data=ch.data||[];const unit=ch.unit||'';
+      const mx=Math.max(1,...data.map(d=>+d.value||0));
+      const bars=data.map(d=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="min-width:72px;font-size:12.5px;color:var(--warm-800);font-weight:600">${esc(d.label)}</span><div style="flex:1;background:var(--warm-100);border-radius:6px;overflow:hidden"><div style="width:${Math.round((+d.value||0)/mx*100)}%;min-width:36px;background:var(--teal);color:#fff;font-size:11px;font-weight:700;text-align:right;padding:3px 7px;border-radius:6px;box-sizing:border-box">${esc(String(d.value))}${esc(unit)}</div></div></div>`).join('');
+      const tmpl=(item.template||[]).map(l=>`<li style="margin-bottom:4px">${esc(l)}</li>`).join('');
+      const rubric=(item.rubric||[]).map(r=>`<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--warm-800);margin-bottom:6px;cursor:pointer"><input type="checkbox" style="margin-top:2px"><span>${esc(r)}</span></label>`).join('');
+      return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
+        <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">${esc(item.title||'')}</div>
+        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div style="background:var(--warm-50);border-radius:8px;padding:13px 15px;margin-bottom:10px">${bars}${item.source?`<div style="font-size:10.5px;color:var(--warm-500);margin-top:8px;text-align:right">※ ${esc(item.source)}</div>`:''}</div>
+        <div style="background:var(--teal-50);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.7;margin-bottom:6px">${esc(item.prompt_ko||'')}</div>
+        ${item.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
+        ${tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:6px 0 4px">✏️ 문장 뼈대</div><ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:''}
+        <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical"></textarea>
+        ${item.model?`<div style="margin-top:10px"><button id="wg-btn-${sid}" onclick="toggleWG('${sid}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button><div id="wg-model-${sid}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.8;font-family:var(--font-serif)">${esc(item.model)}</div></div>`:''}
+        ${rubric?`<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:14px 0 6px">✅ 자기 점검</div>${rubric}`:''}
+      </div>`;
+    }
     // tip card
     if(item.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--warm-900);line-height:1.75;margin-bottom:14px"><strong>${esc(item.title||'')}</strong><br>${esc(item.content_ko||item.content||'')}<div style="font-size:11px;color:var(--warm-500);margin-top:6px">${esc(item.content_en||'')}</div></div>`;
     // listening type: 듣기 활동 — 텍스트 숨김! Play/Stop + 스크립트 토글 (Sejong 스타일)
