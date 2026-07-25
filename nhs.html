@@ -1231,7 +1231,8 @@ function _buildQuizTabBar(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const hasRd=!!(READING_POOL[epKey]);
   const hasSp=!!(SP_QUIZ_POOL[epKey]);
-  const hasWr=!!(WRITING_POOL[epKey]);
+  const _lvN=parseInt((DATA.level||'').replace(/[^0-9]/g,''))||0;
+  const hasWr=(_lvN>=3&&DATA.script&&DATA.script.length>0)||!!(WRITING_POOL[epKey]);
   if(!hasRd&&!hasSp&&!hasWr)return'';
   const tabs=[
     {id:'quiz',label:'✏️ 객관식'},
