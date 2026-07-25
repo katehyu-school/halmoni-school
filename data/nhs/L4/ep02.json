@@ -650,6 +650,27 @@
      "answer": 1
     }
    ]
+  },
+  {
+   "type": "writing_guided",
+   "id": "wgL402",
+   "title": "✍️ 가이드 작문 — 사라진 물건 추리하기",
+   "title_en": "Guided Writing — Deduce the missing item",
+   "prompt_ko": "집에서 없어진 물건에 대해 누가 그럴 리 없고 누가 그랬을지 추리하는 글을 3~4문장 써 보세요.",
+   "prompt_en": "Write 3–4 sentences deducing who couldn't have and who probably did take a missing item.",
+   "template": [
+    "~가 사라졌습니다. (상황)",
+    "~는 ~니까 ~았/었을 리가 없습니다. (배제)",
+    "그렇다면 아마 ~겠지요. (추측)",
+    "왜냐하면 ~기 때문입니다. (근거)"
+   ],
+   "model": "어제 사 둔 초콜릿이 사라졌습니다. 동생은 단 것을 싫어하니 동생이 먹었을 리가 없습니다. 그렇다면 아마 형이 먹었겠지요. 형은 초콜릿을 아주 좋아하기 때문입니다.",
+   "rubric": [
+    "상황을 분명히 설명했나요?",
+    "누가 아닌지 근거를 들어 배제했나요?",
+    "-(으)ㄹ 리가 없다·-겠-을 활용했나요?",
+    "3문장 이상 썼나요?"
+   ]
   }
  ],
  "quiz": [
