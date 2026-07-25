@@ -690,7 +690,7 @@ function l5tRetry(){
 
 
 async function _doLoadEp(epId, level='L1'){
-  await Promise.all([_rdPoolReady, _spPoolReady, _sharedSetsReady]);
+  await Promise.all([_rdPoolReady, _spPoolReady, _sharedSetsReady, _wrPoolReady]);
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById(`ep-item-${level}-${epId}`);
   if(item)item.classList.add('active');
