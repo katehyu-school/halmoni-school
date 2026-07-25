@@ -665,7 +665,7 @@ function renderL5TScore(){
   if(pf)pf.style.width='100%';
   if(pl)pl.textContent=total+' / '+total;
   let grade,color,msg,next;
-  if(pct>=90){grade='A';color='#2e7d50';msg='🏆 완벽해요!';next='TOPIK 4급 실전 준비 완료! 🎯 삼총사 시리즈 완주 — 이제 드라마·뉴스에 도전해 보세요!';}
+  if(pct>=90){grade='A';color='#2e7d50';msg='🏆 완벽해요!';next='TOPIK 4급 실전 준비 완료! 삼총사와 함께 여기까지, 정말 잘 해냈어요! 🎉';}
   else if(pct>=80){grade='B';color='var(--teal-dark)';msg='🌟 훌륭해요!';next='TOPIK 4급에 충분히 도전할 수 있어요!';}
   else if(pct>=70){grade='C';color='var(--amber-600)';msg='👍 잘했어요!';next='틀린 에피소드를 복습하고 다시 도전해봐요!';}
   else{grade='D';color='#c0392b';msg='💪 더 연습해요!';next='Level 5 에피소드를 다시 복습하고 재도전해요!';}
@@ -1174,15 +1174,69 @@ function checkFill(id){
 }
 
 // ── QUIZ ───────────────────────────────────────────────
+// ── WRITING PRACTICE (받아쓰기 + 문장완성) ─────────────
+let _wrComp=[];
+function _wrNorm(s){return (s||'').replace(/\s+/g,'').replace(/[.!?…~,"'’]+$/,'').trim();}
+function buildWriting(){
+  const epKey=`${DATA.level}_${DATA.id}`;
+  const wp=WRITING_POOL[epKey]||{};
+  const dict=(DATA.script||[]).filter(l=>l.text&&_wrNorm(l.text).length>=10).slice(0,5);
+  _wrComp=wp.completion||[];
+  let html='<div style="max-width:580px">';
+  html+='<div style="font-size:13px;font-weight:700;color:var(--warm-900);margin:4px 0 6px">🎧 받아쓰기 · Dictation</div>';
+  html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">듣고 문장을 그대로 써 보세요.</div>';
+  dict.forEach((l,i)=>{
+    html+=`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:12px;padding:12px 14px;margin-bottom:10px">
+      <button onclick="speakTTS('${escA(l.text)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">🔊 듣기</button>
+      <input id="wrd-${i}" data-ans="${escA(l.text)}" placeholder="들은 문장을 써 보세요" style="width:100%;box-sizing:border-box;margin-top:9px;padding:9px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif)">
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckDict(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인</button><span id="wrd-${i}-res" style="font-size:12.5px"></span></div>
+    </div>`;
+  });
+  if(_wrComp.length){
+    html+='<div style="font-size:13px;font-weight:700;color:var(--warm-900);margin:20px 0 6px">✏️ 문장 완성 · Sentence Building</div>';
+    html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">상황에 맞게 문장을 직접 완성해 보세요. (TOPIK 쓰기 51·52형)</div>';
+    _wrComp.forEach((c,i)=>{
+      html+=`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:12px;padding:12px 14px;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:600;color:var(--warm-900);line-height:1.6;white-space:pre-line">${esc(c.prompt)}</div>
+        ${c.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-top:3px">${esc(c.prompt_en)}</div>`:''}
+        ${c.hint?`<div style="font-size:11.5px;color:var(--teal-dark);margin-top:6px">💡 ${esc(c.hint)}</div>`:''}
+        <input id="wrc-${i}" placeholder="문장을 완성해 보세요" style="width:100%;box-sizing:border-box;margin-top:9px;padding:9px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif)">
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckComp(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인</button><span id="wrc-${i}-res" style="font-size:12.5px"></span></div>
+      </div>`;
+    });
+  }
+  html+='</div>';
+  return html;
+}
+function wrCheckDict(i){
+  const inp=document.getElementById('wrd-'+i),res=document.getElementById('wrd-'+i+'-res');
+  if(!inp||!res)return;
+  const ans=inp.getAttribute('data-ans')||'',a=_wrNorm(inp.value),b=_wrNorm(ans);
+  if(a===b)res.innerHTML='<span style="color:var(--sage);font-weight:700">✅ 완벽해요!</span>';
+  else if(a.replace(/[.!?…~]/g,'')===b.replace(/[.!?…~]/g,''))res.innerHTML='<span style="color:var(--amber-600)">🟡 철자는 맞아요! 정답: '+esc(ans)+'</span>';
+  else res.innerHTML='<span style="color:#c0392b">❌ 정답: '+esc(ans)+'</span>';
+}
+function wrCheckComp(i){
+  const c=_wrComp[i],inp=document.getElementById('wrc-'+i),res=document.getElementById('wrc-'+i+'-res');
+  if(!c||!inp||!res)return;
+  const v=_wrNorm(inp.value),ok=(c.answers||[]).some(a=>_wrNorm(a)===v);
+  if(ok)res.innerHTML='<span style="color:var(--sage);font-weight:700">✅ 정답이에요!</span>';
+  else if(c.must_include&&inp.value.replace(/\s/g,'').includes(c.must_include.replace(/\s/g,'')))res.innerHTML='<span style="color:var(--amber-600)">🟡 목표 표현은 맞았어요! 모범답안: '+esc((c.answers||[''])[0])+'</span>';
+  else res.innerHTML='<span style="color:#c0392b">❌ 모범답안: '+esc((c.answers||[''])[0])+'</span>';
+}
+function toggleWG(sid){const m=document.getElementById('wg-model-'+sid),b=document.getElementById('wg-btn-'+sid);if(!m)return;const show=m.style.display==='none';m.style.display=show?'block':'none';if(b)b.textContent=show?'🙈 모범답안 숨기기':'📄 모범답안 보기';}
+
 function _buildQuizTabBar(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const hasRd=!!(READING_POOL[epKey]);
   const hasSp=!!(SP_QUIZ_POOL[epKey]);
-  if(!hasRd&&!hasSp)return'';
+  const hasWr=!!(WRITING_POOL[epKey]);
+  if(!hasRd&&!hasSp&&!hasWr)return'';
   const tabs=[
     {id:'quiz',label:'✏️ 객관식'},
     ...(hasRd?[{id:'reading',label:'📖 읽기'}]:[]),
     ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기'}]:[]),
+    ...(hasWr?[{id:'writing',label:'✍️ 쓰기'}]:[]),
   ];
   return`<div class="quiz-mode-bar" style="margin-bottom:16px">${tabs.map(t=>`<button class="quiz-mode-btn${quizMode===t.id?' active':''}" onclick="setQuizMode('${t.id}')">${t.label}</button>`).join('')}</div>`;
 }
@@ -1320,6 +1374,8 @@ function setQuizMode(mode){
     if(!spPool){panel.innerHTML='<div class="loading">띄어쓰기 데이터가 없어요.</div>';return;}
     panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div id="spq-wrap" style="margin-top:4px;"></div></div>`;
     _spqPool=spPool;_spqIdx=0;_spqClicked=[];_spqRender();
+  } else if(mode==='writing'){
+    panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div style="margin-top:4px;">${buildWriting()}</div></div>`;
   } else {
     quizMode='quiz';
     panel.innerHTML=buildQuiz();
@@ -1334,6 +1390,7 @@ function resetQuiz(){
 
 // ── READING PASSAGE GAME ────────────────────────────────
 let READING_POOL = {}; const _rdPoolReady = fetch('data/nhs/reading_pool.json').then(r=>r.json()).then(d=>{READING_POOL=d;}).catch(e=>{});
+let WRITING_POOL = {}; const _wrPoolReady = fetch('data/nhs/writing_pool.json').then(r=>r.json()).then(d=>{WRITING_POOL=d;}).catch(e=>{});
 let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{});
 // 여러 에피소드가 재사용하는 표현 세트({"ref":"set_name"}) 해석 — vocab/usage 배열 안에서 ref 항목을 실제 데이터로 치환
 function _resolveRefs(data){
@@ -1760,6 +1817,22 @@ function buildRealLife(){
   const rl=DATA.real_life;
   if(!rl||!rl.length)return'<div class="loading">데이터 준비 중이에요.</div>';
   return rl.map(item=>{
+    // guided writing (자기 점검)
+    if(item.type==='writing_guided'){
+      const sid=item.id||'wg';
+      const tmpl=(item.template||[]).map(l=>`<li style="margin-bottom:4px">${esc(l)}</li>`).join('');
+      const rubric=(item.rubric||[]).map(r=>`<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--warm-800);margin-bottom:6px;cursor:pointer"><input type="checkbox" style="margin-top:2px"><span>${esc(r)}</span></label>`).join('');
+      return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
+        <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">${esc(item.title||'')}</div>
+        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div style="background:var(--teal-50);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.7;margin-bottom:6px">${esc(item.prompt_ko||'')}</div>
+        ${item.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
+        ${tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:6px 0 4px">✏️ 문장 뼈대</div><ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:''}
+        <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical"></textarea>
+        ${item.model?`<div style="margin-top:10px"><button id="wg-btn-${sid}" onclick="toggleWG('${sid}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button><div id="wg-model-${sid}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.8;font-family:var(--font-serif)">${esc(item.model)}</div></div>`:''}
+        ${rubric?`<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:14px 0 6px">✅ 자기 점검</div>${rubric}`:''}
+      </div>`;
+    }
     // tip card
     if(item.type==='tip')return`<div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-md);padding:13px 17px;font-size:13px;color:var(--warm-900);line-height:1.75;margin-bottom:14px"><strong>${esc(item.title||'')}</strong><br>${esc(item.content_ko||item.content||'')}<div style="font-size:11px;color:var(--warm-500);margin-top:6px">${esc(item.content_en||'')}</div></div>`;
     // listening type: 듣기 활동 — 텍스트 숨김! Play/Stop + 스크립트 토글 (Sejong 스타일)
