@@ -3121,13 +3121,14 @@ function switchBtab(pfx,tabId){
 // ── HANGUL RENDER ──────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildHangul(){
-  const tabs=[['cons','자음 Consonants'],['vowels','모음 Vowels'],['batchim','받침 Batchim'],['syllable','음절 Syllables']];
+  const tabs=[['cons','자음 Consonants'],['vowels','모음 Vowels'],['batchim','받침 Batchim'],['syllable','음절 Syllables'],['practice','✍️ 연습 Practice']];
   return '<div class="basics-intro">한글(Hangul)은 1443년 세종대왕이 만든 소리 문자예요. 자음 19개 + 모음 21개로 이루어져 있어요.<br><em>Hangul is a phonetic alphabet invented by King Sejong in 1443.</em></div>'
     +'<div class="btab-bar">'+tabs.map(([id,lbl],i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-hangul" data-tab="'+id+'" onclick="switchBtab(\'bp-hangul\',\''+id+'\')">'+lbl+'</button>').join('')+'</div>'
     +'<div id="bp-hangul-cons" class="btab-panel active">'+buildConsPanel()+'</div>'
     +'<div id="bp-hangul-vowels" class="btab-panel">'+buildVowPanel()+'</div>'
     +'<div id="bp-hangul-batchim" class="btab-panel">'+buildBatchimPanel()+'</div>'
-    +'<div id="bp-hangul-syllable" class="btab-panel">'+buildSylPanel()+'</div>';
+    +'<div id="bp-hangul-syllable" class="btab-panel">'+buildSylPanel()+'</div>'
+    +'<div id="bp-hangul-practice" class="btab-panel">'+buildHangulPractice()+'</div>';
 }
 function hcHtml(item){
   return '<div class="hcard" onclick="speak(\''+item.kr+'\''+(item.audio?',\''+item.audio+'\'':'')+')">'
@@ -3205,6 +3206,132 @@ function buildBatchimPanel(){
     +'<div class="batchim-groups">'+grpHtml+'</div>'
     +'<div class="structure-note">💡 받침 뒤에 모음이 오면 연음이 돼요! <em>국어 → [구거], 음악 → [으막]</em><br><em>When batchim is followed by a vowel, the sound carries over!</em></div>';
 }
+
+// ══════════════════════════════════════════════════════
+// ── HANGUL PRACTICE (연습) ──────────────────────────────
+// ══════════════════════════════════════════════════════
+const HP_MODES=[
+  {id:'recog', ko:'자모 읽기',  en:'Letter → Sound'},
+  {id:'first', ko:'첫소리 찾기', en:'First Consonant'},
+  {id:'syl',   ko:'음절 읽기',  en:'Read Syllables'},
+  {id:'coda',  ko:'받침 대표음', en:'Final Sounds'}
+];
+const HP_SYL=[
+  {kr:'가',rom:'ga'},{kr:'노',rom:'no'},{kr:'미',rom:'mi'},{kr:'두',rom:'du'},
+  {kr:'소',rom:'so'},{kr:'하',rom:'ha'},{kr:'초',rom:'cho'},{kr:'배',rom:'bae'},
+  {kr:'리',rom:'ri'},{kr:'무',rom:'mu'},{kr:'제',rom:'je'},{kr:'토',rom:'to'},
+  {kr:'수',rom:'su'},{kr:'파',rom:'pa'},{kr:'개',rom:'gae'},{kr:'너',rom:'neo'}
+];
+const HP_CODA=[
+  {kr:'국',rep:'ㄱ'},{kr:'부엌',rep:'ㄱ'},{kr:'닭',rep:'ㄱ'},
+  {kr:'산',rep:'ㄴ'},{kr:'문',rep:'ㄴ'},
+  {kr:'꽃',rep:'ㄷ'},{kr:'옷',rep:'ㄷ'},{kr:'낮',rep:'ㄷ'},{kr:'끝',rep:'ㄷ'},
+  {kr:'말',rep:'ㄹ'},{kr:'달',rep:'ㄹ'},
+  {kr:'봄',rep:'ㅁ'},{kr:'곰',rep:'ㅁ'},
+  {kr:'밥',rep:'ㅂ'},{kr:'앞',rep:'ㅂ'},
+  {kr:'강',rep:'ㅇ'},{kr:'방',rep:'ㅇ'}
+];
+const HP_CODA_REPS=['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅇ'];
+
+let _hpMode=null,_hpRounds=[],_hpIdx=0,_hpScore=0;
+
+function _hpShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function buildHangulPractice(){
+  return '<div class="basics-intro">💡 <strong>읽기 먼저!</strong> 글자를 눈으로 읽고 소리를 고른 뒤 🔊로 확인하세요.<br><em>Read the letter first, choose the sound, then check with audio.</em></div>'
+    +'<div class="btab-bar">'+HP_MODES.map(function(m){return '<button class="btab" id="hp-mode-'+m.id+'" onclick="hpStart(\''+m.id+'\')">'+m.ko+'<br><span style="font-size:9px;opacity:.8;font-weight:600">'+m.en+'</span></button>';}).join('')+'</div>'
+    +'<div id="hp-area"><div class="basics-intro" style="text-align:center;background:var(--teal-50);color:var(--teal-dark)">위에서 연습 종류를 골라 시작하세요 · Pick a drill above to begin.</div></div>';
+}
+
+function _hpBuildRounds(mode){
+  const rounds=[];
+  if(mode==='recog'){
+    const cons=CONSONANTS.map(function(c){return {kr:c.kr,rom:c.rom,name:c.name,ex:c.ex,audio:c.audio,type:'c'};});
+    const vows=VOWELS.map(function(v){return {kr:v.kr,rom:v.rom,name:v.name,ex:v.ex,audio:v.audio,type:'v'};});
+    const pool=cons.concat(vows);
+    _hpShuffle(pool).slice(0,10).forEach(function(t){
+      const same=pool.filter(function(x){return x.type===t.type&&x.rom!==t.rom;});
+      const choices=_hpShuffle([t.rom].concat(_hpShuffle(same).slice(0,3).map(function(x){return x.rom;})));
+      rounds.push({
+        prompt:'<div style="font-size:72px;font-weight:800;color:var(--gray-900);line-height:1">'+t.kr+'</div>',
+        sub:'이 글자의 소리는? · What sound is this?',
+        choices:choices.map(function(c){return {label:c,ok:c===t.rom};}),
+        reveal:t.name+' · '+t.kr+' → '+t.ex, speak:t.kr, audio:t.audio
+      });
+    });
+  } else if(mode==='first'){
+    _hpShuffle(CONSONANTS).slice(0,10).forEach(function(c){
+      const word=(c.ex||'').split('(')[0];
+      const choices=_hpShuffle([c.kr].concat(_hpShuffle(CONSONANTS.filter(function(x){return x.kr!==c.kr;})).slice(0,3).map(function(x){return x.kr;})));
+      rounds.push({
+        prompt:'<div style="font-size:52px;font-weight:800;color:var(--gray-900);line-height:1.1">'+word+'</div>',
+        sub:'첫 자음은? · What is the first consonant?',
+        choices:choices.map(function(x){return {label:x,ok:x===c.kr};}),
+        reveal:word+' → 첫소리 '+c.kr+' ('+c.rom+')', speak:word
+      });
+    });
+  } else if(mode==='syl'){
+    _hpShuffle(HP_SYL).slice(0,10).forEach(function(s){
+      const choices=_hpShuffle([s.rom].concat(_hpShuffle(HP_SYL.filter(function(x){return x.rom!==s.rom;})).slice(0,3).map(function(x){return x.rom;})));
+      rounds.push({
+        prompt:'<div style="font-size:72px;font-weight:800;color:var(--gray-900);line-height:1">'+s.kr+'</div>',
+        sub:'이 음절을 읽으면? · How do you read this?',
+        choices:choices.map(function(x){return {label:x,ok:x===s.rom};}),
+        reveal:s.kr+' = '+s.rom, speak:s.kr
+      });
+    });
+  } else if(mode==='coda'){
+    _hpShuffle(HP_CODA).slice(0,10).forEach(function(w){
+      const choices=_hpShuffle([w.rep].concat(_hpShuffle(HP_CODA_REPS.filter(function(x){return x!==w.rep;})).slice(0,3)));
+      rounds.push({
+        prompt:'<div style="font-size:60px;font-weight:800;color:var(--gray-900);line-height:1.1">'+w.kr+'</div>',
+        sub:'받침의 <strong>대표 소리</strong>는? · Representative final sound?',
+        choices:choices.map(function(x){return {label:'['+x+']',ok:x===w.rep};}),
+        reveal:w.kr+' → 받침 대표음 ['+w.rep+']', speak:w.kr
+      });
+    });
+  }
+  return rounds;
+}
+
+function hpStart(mode){
+  _hpMode=mode;_hpRounds=_hpBuildRounds(mode);_hpIdx=0;_hpScore=0;
+  HP_MODES.forEach(function(m){const b=document.getElementById('hp-mode-'+m.id);if(b)b.classList.toggle('active',m.id===mode);});
+  hpRender();
+}
+
+function hpRender(){
+  const area=document.getElementById('hp-area');if(!area)return;
+  if(_hpIdx>=_hpRounds.length){
+    const pct=Math.round(_hpScore/_hpRounds.length*100);
+    area.innerHTML='<div style="text-align:center;padding:28px 20px;background:var(--teal-50);border-radius:var(--radius-md)">'
+      +'<div style="font-size:14px;color:var(--warm-600);margin-bottom:6px">연습 완료! · Drill complete</div>'
+      +'<div class="lt-score-box-num">'+_hpScore+' / '+_hpRounds.length+'</div>'
+      +'<div style="font-size:13px;color:var(--warm-500);margin:6px 0 16px">정답률 '+pct+'%</div>'
+      +'<button class="lt-next-btn" style="max-width:220px;margin:0 auto" onclick="hpStart(\''+_hpMode+'\')">↻ 다시 하기 · Try again</button></div>';
+    return;
+  }
+  const r=_hpRounds[_hpIdx];
+  area.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.08em;margin-bottom:10px">'+(_hpIdx+1)+' / '+_hpRounds.length+'</div>'
+    +'<div style="text-align:center;padding:18px 12px;background:var(--teal-50);border-radius:var(--radius-md);margin-bottom:14px">'+r.prompt+'</div>'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-700);margin-bottom:10px;text-align:center">'+r.sub+'</div>'
+    +'<div class="lt-opts" id="hp-opts">'+r.choices.map(function(c,i){return '<button class="lt-opt" onclick="hpChoose('+i+')">'+c.label+'</button>';}).join('')+'</div>'
+    +'<div id="hp-fb"></div>';
+}
+
+function hpChoose(i){
+  const r=_hpRounds[_hpIdx];const c=r.choices[i];
+  const opts=document.querySelectorAll('#hp-opts .lt-opt');
+  opts.forEach(function(b,j){b.onclick=null;if(r.choices[j].ok)b.classList.add('correct');});
+  if(c.ok){_hpScore++;}else{opts[i].classList.add('wrong');}
+  speak(r.speak,r.audio);
+  const fb=document.getElementById('hp-fb');
+  if(fb)fb.innerHTML='<div class="lt-exp" style="margin-top:12px">'+(c.ok?'✅ 정답! ':'❌ ')+r.reveal
+    +' <button onclick="speak(\''+r.speak+'\''+(r.audio?',\''+r.audio+'\'':'')+')" style="border:none;background:var(--teal-lt);color:var(--teal-dark);border-radius:6px;padding:2px 8px;cursor:pointer;font-size:12px">🔊</button></div>'
+    +'<button class="lt-next-btn" onclick="hpNext()">'+(_hpIdx+1>=_hpRounds.length?'결과 보기 · See results':'다음 · Next')+'</button>';
+}
+
+function hpNext(){_hpIdx++;hpRender();}
 
 // ══════════════════════════════════════════════════════
 // ── STRUCTURE RENDER ───────────────────────────────────
