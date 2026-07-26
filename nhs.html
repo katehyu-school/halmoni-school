@@ -18,7 +18,7 @@
 <div class="top-bar">
   <button class="sidebar-toggle-btn" onclick="toggleMobileSidebar()" aria-label="메뉴">☰</button>
   <div class="level-tabs">
-    <button class="level-btn level-btn-basis" onclick="setLevel(this)">🌱 시작하기</button>
+    <button class="level-btn level-btn-basis" onclick="setLevel(this)">🌱 Start Here</button>
     <button class="level-btn active" onclick="setLevel(this)">Level 1</button>
     <button class="level-btn" onclick="setLevel(this)">Level 2</button>
     <button class="level-btn" onclick="setLevel(this)">Level 3</button>
@@ -3482,6 +3482,46 @@ function buildGreetings(){
 // ══════════════════════════════════════════════════════
 // ── NUMBERS RENDER ─────────────────────────────────────
 // ══════════════════════════════════════════════════════
+// ── 큰 숫자 변환기 (Sino-Korean) ──────────────────────
+function _sinoGroup(v){
+  const d=['','일','이','삼','사','오','육','칠','팔','구'];
+  const th=Math.floor(v/1000), h=Math.floor(v/100)%10, t=Math.floor(v/10)%10, o=v%10;
+  let s='';
+  if(th) s+=(th===1?'':d[th])+'천';
+  if(h)  s+=(h===1?'':d[h])+'백';
+  if(t)  s+=(t===1?'':d[t])+'십';
+  if(o)  s+=d[o];
+  return s;
+}
+function _sinoRead(n){
+  if(n===0) return '영';
+  const units=['','만','억','조'];
+  let groups=[], x=n;
+  while(x>0){groups.push(x%10000);x=Math.floor(x/10000);}
+  let parts=[];
+  for(let i=groups.length-1;i>=0;i--){
+    const g=groups[i]; if(g===0) continue;
+    let gs=_sinoGroup(g);
+    if(i===1 && g===1) gs=''; // 만 그룹이 정확히 1이면 '일' 생략 → 만 (일만 X)
+    parts.push(gs+units[i]);
+  }
+  return parts.join(' ');
+}
+function convertBigNum(){
+  const inp=document.getElementById('bignum-input');
+  const res=document.getElementById('bignum-result');
+  if(!inp||!res) return;
+  const raw=(inp.value||'').trim();
+  if(raw===''){res.innerHTML='';return;}
+  const n=Math.floor(Number(raw));
+  if(!isFinite(n)||n<0){res.innerHTML='<span style="color:var(--coral);font-size:13px">0 이상의 숫자를 입력하세요 · Enter a number ≥ 0</span>';return;}
+  if(n>999999999999){res.innerHTML='<span style="color:var(--coral);font-size:13px">최대 999,999,999,999까지예요 · Max 999,999,999,999</span>';return;}
+  const kr=_sinoRead(n);
+  res.innerHTML='<div style="font-size:13px;color:var(--warm-500);margin-bottom:4px">'+n.toLocaleString('en-US')+'</div>'
+    +'<div style="font-size:22px;font-weight:800;color:var(--teal-dark);line-height:1.3">'+kr+'</div>'
+    +'<button onclick="speakTTS(\''+kr.replace(/ /g,'')+'\')" style="margin-top:10px;border:none;background:var(--teal);color:#fff;border-radius:8px;padding:6px 16px;font-size:14px;cursor:pointer;font-weight:700">🔊 듣기</button>';
+}
+
 function buildNumbers(){
   function nCards(list){
     return '<div class="num-grid">'+list.map(n=>'<div class="num-card" onclick="speakTTS(\''+n.kr+'\')">'
