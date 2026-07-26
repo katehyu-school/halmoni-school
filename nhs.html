@@ -3214,7 +3214,8 @@ const HP_MODES=[
   {id:'recog', ko:'자모 읽기',  en:'Letter → Sound'},
   {id:'first', ko:'첫소리 찾기', en:'First Consonant'},
   {id:'syl',   ko:'음절 읽기',  en:'Read Syllables'},
-  {id:'coda',  ko:'받침 대표음', en:'Final Sounds'}
+  {id:'coda',  ko:'받침 대표음', en:'Final Sounds'},
+  {id:'word',  ko:'단어 읽기',  en:'Read Words'}
 ];
 const HP_SYL=[
   {kr:'가',rom:'ga'},{kr:'노',rom:'no'},{kr:'미',rom:'mi'},{kr:'두',rom:'du'},
@@ -3235,6 +3236,18 @@ const HP_CODA_REPS=['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅇ'];
 // 자음 '소리'(자음+ㅡ) 음원 — 이름(기역)이 아니라 소리(그)를 재생. ㅋ은 음원 없어 TTS 폴백.
 const HP_CONS_SOUND={'ㄱ':{audio:'data/elem/level1/TTS/consonant_combo/audio_1_그.mp3',syl:'그'},'ㄴ':{audio:'data/elem/level1/TTS/consonant_combo/audio_3_느.mp3',syl:'느'},'ㄷ':{audio:'data/elem/level1/TTS/consonant_combo/audio_5_드.mp3',syl:'드'},'ㄹ':{audio:'data/elem/level1/TTS/consonant_combo/audio_7_르.mp3',syl:'르'},'ㅁ':{audio:'data/elem/level1/TTS/consonant_combo/audio_9_므.mp3',syl:'므'},'ㅂ':{audio:'data/elem/level1/TTS/consonant_combo/audio_11_브.mp3',syl:'브'},'ㅅ':{audio:'data/elem/level1/TTS/consonant_combo/audio_13_스.mp3',syl:'스'},'ㅇ':{audio:'data/elem/level1/TTS/consonant_combo/audio_15_으.mp3',syl:'으'},'ㅈ':{audio:'data/elem/level1/TTS/consonant_combo/audio_17_즈.mp3',syl:'즈'},'ㅊ':{audio:'data/elem/level1/TTS/consonant_combo/audio_19_츠.mp3',syl:'츠'},'ㅋ':{syl:'크'},'ㅌ':{audio:'data/elem/level1/TTS/consonant_combo/audio_21_트.mp3',syl:'트'},'ㅍ':{audio:'data/elem/level1/TTS/consonant_combo/audio_23_프.mp3',syl:'프'},'ㅎ':{audio:'data/elem/level1/TTS/consonant_combo/audio_25_흐.mp3',syl:'흐'},'ㄲ':{audio:'data/elem/level1/TTS/consonant_combo/audio_27_끄.mp3',syl:'끄'},'ㄸ':{audio:'data/elem/level1/TTS/consonant_combo/audio_29_뜨.mp3',syl:'뜨'},'ㅃ':{audio:'data/elem/level1/TTS/consonant_combo/audio_31_쁘.mp3',syl:'쁘'},'ㅆ':{audio:'data/elem/level1/TTS/consonant_combo/audio_33_쓰.mp3',syl:'쓰'},'ㅉ':{audio:'data/elem/level1/TTS/consonant_combo/audio_35_쯔.mp3',syl:'쯔'}};
 
+const HP_WORD=[
+ {kr:'나비',rom:'nabi',en:'butterfly',emoji:'🦋'},{kr:'하마',rom:'hama',en:'hippo',emoji:'🦛'},
+ {kr:'오이',rom:'oi',en:'cucumber',emoji:'🥒'},{kr:'우유',rom:'uyu',en:'milk',emoji:'🥛'},
+ {kr:'나무',rom:'namu',en:'tree',emoji:'🌳'},{kr:'바다',rom:'bada',en:'sea',emoji:'🌊'},
+ {kr:'사자',rom:'saja',en:'lion',emoji:'🦁'},{kr:'토끼',rom:'tokki',en:'rabbit',emoji:'🐰'},
+ {kr:'강아지',rom:'gangaji',en:'puppy',emoji:'🐶'},{kr:'고양이',rom:'goyangi',en:'cat',emoji:'🐱'},
+ {kr:'가방',rom:'gabang',en:'bag',emoji:'🎒'},{kr:'딸기',rom:'ttalgi',en:'strawberry',emoji:'🍓'},
+ {kr:'책',rom:'chaek',en:'book',emoji:'📚'},{kr:'밥',rom:'bap',en:'rice/meal',emoji:'🍚'},
+ {kr:'국',rom:'guk',en:'soup',emoji:'🍲'},{kr:'산',rom:'san',en:'mountain',emoji:'⛰️'},
+ {kr:'물',rom:'mul',en:'water',emoji:'💧'},{kr:'꽃',rom:'kkot',en:'flower',emoji:'🌸'},
+ {kr:'별',rom:'byeol',en:'star',emoji:'⭐'},{kr:'문',rom:'mun',en:'door',emoji:'🚪'}
+];
 let _hpMode=null,_hpRounds=[],_hpIdx=0,_hpScore=0;
 
 function _hpShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -3290,6 +3303,16 @@ function _hpBuildRounds(mode){
         sub:'받침의 <strong>대표 소리</strong>는? · Representative final sound?',
         choices:choices.map(function(x){return {label:'['+x+']',ok:x===w.rep};}),
         reveal:w.kr+' → 받침 대표음 ['+w.rep+']', speak:w.kr
+      });
+    });
+  } else if(mode==='word'){
+    _hpShuffle(HP_WORD).slice(0,10).forEach(function(w){
+      const choices=_hpShuffle([w.rom].concat(_hpShuffle(HP_WORD.filter(function(x){return x.rom!==w.rom;})).slice(0,3).map(function(x){return x.rom;})));
+      rounds.push({
+        prompt:'<div style="font-size:56px;font-weight:800;color:var(--gray-900);line-height:1.1">'+w.kr+'</div><div style="font-size:30px;margin-top:6px">'+w.emoji+'</div>',
+        sub:'이 단어를 읽으면? · How do you read this word?',
+        choices:choices.map(function(x){return {label:x,ok:x===w.rom};}),
+        reveal:w.kr+' = '+w.rom+' · '+w.en, speak:w.kr
       });
     });
   }
