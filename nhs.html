@@ -3232,6 +3232,8 @@ const HP_CODA=[
   {kr:'강',rep:'ㅇ'},{kr:'방',rep:'ㅇ'}
 ];
 const HP_CODA_REPS=['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅇ'];
+// 자음 '소리'(자음+ㅡ) 음원 — 이름(기역)이 아니라 소리(그)를 재생. ㅋ은 음원 없어 TTS 폴백.
+const HP_CONS_SOUND={'ㄱ':{audio:'data/elem/level1/TTS/consonant_combo/audio_1_그.mp3',syl:'그'},'ㄴ':{audio:'data/elem/level1/TTS/consonant_combo/audio_3_느.mp3',syl:'느'},'ㄷ':{audio:'data/elem/level1/TTS/consonant_combo/audio_5_드.mp3',syl:'드'},'ㄹ':{audio:'data/elem/level1/TTS/consonant_combo/audio_7_르.mp3',syl:'르'},'ㅁ':{audio:'data/elem/level1/TTS/consonant_combo/audio_9_므.mp3',syl:'므'},'ㅂ':{audio:'data/elem/level1/TTS/consonant_combo/audio_11_브.mp3',syl:'브'},'ㅅ':{audio:'data/elem/level1/TTS/consonant_combo/audio_13_스.mp3',syl:'스'},'ㅇ':{audio:'data/elem/level1/TTS/consonant_combo/audio_15_으.mp3',syl:'으'},'ㅈ':{audio:'data/elem/level1/TTS/consonant_combo/audio_17_즈.mp3',syl:'즈'},'ㅊ':{audio:'data/elem/level1/TTS/consonant_combo/audio_19_츠.mp3',syl:'츠'},'ㅋ':{syl:'크'},'ㅌ':{audio:'data/elem/level1/TTS/consonant_combo/audio_21_트.mp3',syl:'트'},'ㅍ':{audio:'data/elem/level1/TTS/consonant_combo/audio_23_프.mp3',syl:'프'},'ㅎ':{audio:'data/elem/level1/TTS/consonant_combo/audio_25_흐.mp3',syl:'흐'},'ㄲ':{audio:'data/elem/level1/TTS/consonant_combo/audio_27_끄.mp3',syl:'끄'},'ㄸ':{audio:'data/elem/level1/TTS/consonant_combo/audio_29_뜨.mp3',syl:'뜨'},'ㅃ':{audio:'data/elem/level1/TTS/consonant_combo/audio_31_쁘.mp3',syl:'쁘'},'ㅆ':{audio:'data/elem/level1/TTS/consonant_combo/audio_33_쓰.mp3',syl:'쓰'},'ㅉ':{audio:'data/elem/level1/TTS/consonant_combo/audio_35_쯔.mp3',syl:'쯔'}};
 
 let _hpMode=null,_hpRounds=[],_hpIdx=0,_hpScore=0;
 
@@ -3246,8 +3248,8 @@ function buildHangulPractice(){
 function _hpBuildRounds(mode){
   const rounds=[];
   if(mode==='recog'){
-    const cons=CONSONANTS.map(function(c){return {kr:c.kr,rom:c.rom,name:c.name,ex:c.ex,audio:c.audio,type:'c'};});
-    const vows=VOWELS.map(function(v){return {kr:v.kr,rom:v.rom,name:v.name,ex:v.ex,audio:v.audio,type:'v'};});
+    const cons=CONSONANTS.map(function(c){var s=HP_CONS_SOUND[c.kr]||{};return {kr:c.kr,rom:c.rom,name:c.name,ex:c.ex,audio:s.audio,snd:s.syl||c.kr,type:'c'};});
+    const vows=VOWELS.map(function(v){return {kr:v.kr,rom:v.rom,name:v.name,ex:v.ex,audio:v.audio,snd:v.kr,type:'v'};});
     const pool=cons.concat(vows);
     _hpShuffle(pool).slice(0,10).forEach(function(t){
       const same=pool.filter(function(x){return x.type===t.type&&x.rom!==t.rom;});
@@ -3256,7 +3258,7 @@ function _hpBuildRounds(mode){
         prompt:'<div style="font-size:72px;font-weight:800;color:var(--gray-900);line-height:1">'+t.kr+'</div>',
         sub:'이 글자의 소리는? · What sound is this?',
         choices:choices.map(function(c){return {label:c,ok:c===t.rom};}),
-        reveal:t.name+' · '+t.kr+' → '+t.ex, speak:t.kr, audio:t.audio
+        reveal:t.name+' · '+t.kr+' → '+t.ex, speak:t.snd, audio:t.audio
       });
     });
   } else if(mode==='first'){
