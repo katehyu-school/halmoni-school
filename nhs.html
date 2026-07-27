@@ -1469,6 +1469,7 @@ function resetQuiz(){
 
 // ── READING PASSAGE GAME ────────────────────────────────
 let READING_POOL = {}; const _rdPoolReady = fetch('data/nhs/reading_pool.json').then(r=>r.json()).then(d=>{READING_POOL=d;}).catch(e=>{});
+let GLOSSARY_POOL = {}; const _glossReady = fetch('data/nhs/glossary_pool.json').then(r=>r.json()).then(d=>{GLOSSARY_POOL=d;}).catch(e=>{});
 let WRITING_POOL = {}; const _wrPoolReady = fetch('data/nhs/writing_pool.json').then(r=>r.json()).then(d=>{WRITING_POOL=d;}).catch(e=>{});
 let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{});
 // 여러 에피소드가 재사용하는 표현 세트({"ref":"set_name"}) 해석 — vocab/usage 배열 안에서 ref 항목을 실제 데이터로 치환
@@ -2145,7 +2146,7 @@ async function openIndex(){
   // Pre-fetch any episodes not yet in cache
   const body=document.getElementById('idx-body');
   if(body) body.innerHTML='<div style="padding:20px;text-align:center">로딩 중…</div>';
-  await _sharedSetsReady;
+  await _sharedSetsReady; await _glossReady;
   await Promise.all([
     ...EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L1_'+ep.id]){
@@ -2217,6 +2218,7 @@ function _renderIdxVocabPage(){
       <div class="idx-vocab-kr">${esc(v.korean||'')} ${v.emoji||''}</div>
       <div style="font-size:11px;color:var(--warm-500);min-width:90px">${esc(v.romanization||'')}</div>
       <div class="idx-vocab-en">${esc(v.english||v.en||'')}</div>
+      ${v._gloss?'<span style="font-size:9px;background:var(--mint,#DFF5EE);color:var(--teal);border-radius:7px;padding:1px 6px;margin-right:3px;white-space:nowrap">실생활</span>':''}
       <span class="idx-ep-badge" style="cursor:pointer" onclick="loadEpAndTab('${escA(v.ep||'')}','vocab')">${esc(getEpLabel(v.ep||''))}</span>
       <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
     </div>`;
@@ -2259,6 +2261,10 @@ function renderIdxBody(){
       } else {
         vocab.forEach(v=>allWords.push({...v,ep:(ep.level||'L1')+'_'+ep.id,epTitle:ep.title}));
       }
+    });
+    // 색인 전용 어휘(실생활 광맥) — 새어휘 카드 없이 색인에만 노출
+    Object.entries(GLOSSARY_POOL).forEach(([key,list])=>{
+      (list||[]).forEach(v=>allWords.push({...v,ep:key,_gloss:true}));
     });
     // 검색 필터 + 정렬
     if(q) allWords=allWords.filter(v=>(v.korean||'').toLowerCase().includes(q)||(v.english||v.en||'').toLowerCase().includes(q));
@@ -3156,9 +3162,334 @@ function buildVowPanel(){
     +'세로 모음 (ㅏ ㅑ ㅓ ㅕ ㅣ) — consonant is on the <strong>left</strong>, vowel on the <strong>right</strong>: 가 나 다<br>'
     +'가로 모음 (ㅗ ㅛ ㅜ ㅠ ㅡ) — consonant is on <strong>top</strong>, vowel <strong>below</strong>: 고 노 도</div>';
 }
+const SYL_VISUAL = `
+        <div class="h-section-title">Korean syllables stack like Lego blocks — 한국어 음절은 레고 블록처럼 쌓아요</div>
+
+        <!-- 천지인 설명 -->
+        <div style="background:#fafaf7;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:16px;">
+          <div style="font-size:13px;font-weight:700;color:var(--gray-700);margin-bottom:10px;">The origin of Hangul vowels — 天地人 (Heaven · Earth · Human)</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+            <div style="flex:1;min-width:130px;background:var(--amber-lt);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;">
+              <div style="font-size:22px;font-weight:700;color:var(--amber);margin-bottom:4px;">•</div>
+              <div style="font-size:12px;font-weight:700;color:var(--amber);">天 Heaven (하늘)</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">Round shape of the sky</div>
+            </div>
+            <div style="flex:1;min-width:130px;background:var(--blue-lt);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;">
+              <div style="font-size:22px;font-weight:700;color:var(--blue);margin-bottom:4px;">ㅡ</div>
+              <div style="font-size:12px;font-weight:700;color:var(--blue);">地 Earth (땅)</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">The flat earth</div>
+            </div>
+            <div style="flex:1;min-width:130px;background:var(--teal-lt);border-radius:var(--radius-sm);padding:10px 14px;text-align:center;">
+              <div style="font-size:22px;font-weight:700;color:var(--teal);margin-bottom:4px;">ㅣ</div>
+              <div style="font-size:12px;font-weight:700;color:var(--teal);">人 Human (사람)</div>
+              <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">A person standing upright</div>
+            </div>
+          </div>
+          <!-- 모음 조합 원리 -->
+          <div style="font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:8px;">Combining these three makes every vowel:</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <div class="vowel-origin-pill" style="background:var(--teal-lt);border-color:#81c784">
+              <span style="color:var(--teal);font-weight:700">ㅏ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--teal)">ㅣ</span><span style="color:var(--gray-400);font-size:10px">(人)</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--amber)">•</span><span style="color:var(--gray-400);font-size:10px">(天)</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--teal-lt);border-color:#81c784">
+              <span style="color:var(--teal);font-weight:700">ㅓ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--amber)">•</span><span style="color:var(--gray-400);font-size:10px">(天)</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span><span style="color:var(--gray-400);font-size:10px">(人)</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--teal-lt);border-color:#81c784">
+              <span style="color:var(--teal);font-weight:700">ㅑ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--teal)">ㅣ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--amber)">••</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--blue-lt);border-color:#90caf9">
+              <span style="color:var(--blue);font-weight:700">ㅗ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅡ</span><span style="color:var(--gray-400);font-size:10px">(地)</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--amber)">•</span><span style="color:var(--gray-400);font-size:10px">(天)</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--blue-lt);border-color:#90caf9">
+              <span style="color:var(--blue);font-weight:700">ㅜ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅡ</span><span style="color:var(--gray-400);font-size:10px">(地)</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--amber)">•</span><span style="color:var(--gray-400);font-size:10px">(天 below)</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--blue-lt);border-color:#90caf9">
+              <span style="color:var(--blue);font-weight:700">ㅛ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅡ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--amber)">••</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--teal-lt);border-color:var(--teal)">
+              <span style="color:var(--teal);font-weight:700">ㅣ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--teal)">人</span>
+              <span style="color:var(--gray-500);font-size:11px">as is</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:var(--blue-lt);border-color:var(--blue)">
+              <span style="color:var(--blue);font-weight:700">ㅡ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">地</span>
+              <span style="color:var(--gray-500);font-size:11px">as is</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 음절 블록 시각화 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+
+          <!-- 세로 모음 (人 계열): 자음 옆에 -->
+          <div style="background:var(--teal-lt);border-radius:var(--radius-sm);padding:16px;">
+            <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:4px;">ㅣ (人 Human) group — <u>beside</u> the consonant</div>
+            <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">ㅏ ㅑ ㅓ ㅕ ㅣ</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+
+              <!-- 가 -->
+              <div class="syl-block" onclick="speak('가')">
+                <div style="display:flex;flex-direction:row;gap:2px;align-items:stretch;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:32px;height:40px;font-size:16px;">ㄱ</div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:40px;font-size:16px;">ㅏ</div>
+                </div>
+                <div class="syl-label">가</div>
+              </div>
+
+              <!-- 기 -->
+              <div class="syl-block" onclick="speak('기')">
+                <div style="display:flex;flex-direction:row;gap:2px;align-items:stretch;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:32px;height:40px;font-size:16px;">ㄱ</div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:40px;font-size:16px;">ㅣ</div>
+                </div>
+                <div class="syl-label">기</div>
+              </div>
+
+              <!-- 각 (받침 포함) -->
+              <div class="syl-block" onclick="speak('각')">
+                <div style="display:flex;flex-direction:column;gap:2px;">
+                  <div style="display:flex;flex-direction:row;gap:2px;">
+                    <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:32px;height:36px;font-size:15px;">ㄱ</div>
+                    <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:36px;font-size:15px;">ㅏ</div>
+                  </div>
+                  <div class="syl-c" style="background:#ef9a9a;color:#b71c1c;width:54px;height:22px;font-size:13px;border-radius:4px;">ㄱ</div>
+                </div>
+                <div class="syl-label">각</div>
+              </div>
+
+              <!-- 나 -->
+              <div class="syl-block" onclick="speak('나')">
+                <div style="display:flex;flex-direction:row;gap:2px;align-items:stretch;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:32px;height:40px;font-size:16px;">ㄴ</div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:40px;font-size:16px;">ㅏ</div>
+                </div>
+                <div class="syl-label">나</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 가로 모음 (地 계열): 자음 아래에 -->
+          <div style="background:var(--blue-lt);border-radius:var(--radius-sm);padding:16px;">
+            <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:4px;">ㅡ (地 Earth) group — <u>below</u> the consonant</div>
+            <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">ㅗ ㅛ ㅜ ㅠ ㅡ</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+
+              <!-- 고 -->
+              <div class="syl-block" onclick="speak('고')">
+                <div style="display:flex;flex-direction:column;gap:2px;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:44px;height:30px;font-size:16px;">ㄱ</div>
+                  <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:44px;height:22px;font-size:14px;">ㅗ</div>
+                </div>
+                <div class="syl-label">고</div>
+              </div>
+
+              <!-- 구 -->
+              <div class="syl-block" onclick="speak('구')">
+                <div style="display:flex;flex-direction:column;gap:2px;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:44px;height:30px;font-size:16px;">ㄱ</div>
+                  <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:44px;height:22px;font-size:14px;">ㅜ</div>
+                </div>
+                <div class="syl-label">구</div>
+              </div>
+
+              <!-- 곡 (받침 포함) -->
+              <div class="syl-block" onclick="speak('곡')">
+                <div style="display:flex;flex-direction:column;gap:2px;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:44px;height:28px;font-size:15px;">ㄱ</div>
+                  <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:44px;height:20px;font-size:13px;">ㅗ</div>
+                  <div class="syl-c" style="background:#ef9a9a;color:#b71c1c;width:44px;height:20px;font-size:13px;border-radius:4px;">ㄱ</div>
+                </div>
+                <div class="syl-label">곡</div>
+              </div>
+
+              <!-- 느 -->
+              <div class="syl-block" onclick="speak('느')">
+                <div style="display:flex;flex-direction:column;gap:2px;">
+                  <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:44px;height:30px;font-size:16px;">ㄴ</div>
+                  <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:44px;height:22px;font-size:14px;">ㅡ</div>
+                </div>
+                <div class="syl-label">느</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- 복합 모음 (ㅡ+ㅣ 결합): 자음 아래에 (넓게) -->
+        <div style="background:#f3e5f5;border-radius:var(--radius-sm);padding:16px;margin-bottom:16px;">
+          <div style="font-size:13px;font-weight:700;color:#7b1fa2;margin-bottom:4px;">ㅡ + ㅣ Compound group — <u>below and beside</u> the consonant</div>
+          <div style="font-size:11px;color:var(--gray-500);margin-bottom:10px;">These vowels are formed by combining an ㅡ-group vowel (地) + an ㅣ-group vowel (人)</div>
+          <!-- 조합 공식 -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅘ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅗ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅏ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅙ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅗ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅐ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅚ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅗ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅝ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅜ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅓ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅞ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅜ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅔ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#ce93d8">
+              <span style="color:#7b1fa2;font-weight:700">ㅟ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅜ</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span>
+            </div>
+            <div class="vowel-origin-pill" style="background:#f3e5f5;border-color:#7b1fa2">
+              <span style="color:#7b1fa2;font-weight:700">ㅢ</span>
+              <span style="color:var(--gray-500)">=</span>
+              <span style="color:var(--blue)">ㅡ</span><span style="color:var(--gray-400);font-size:10px">(地)</span>
+              <span style="color:var(--gray-500)">+</span>
+              <span style="color:var(--teal)">ㅣ</span><span style="color:var(--gray-400);font-size:10px">(人)</span>
+            </div>
+          </div>
+          <!-- 예시 블록 -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+
+            <!-- 뭐 (ㅁ+ㅝ) -->
+            <div class="syl-block" onclick="speak('뭐')">
+              <div style="display:flex;flex-direction:column;gap:2px;width:58px;">
+                <div style="display:flex;gap:2px;">
+                  <div style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:36px;height:26px;font-size:15px;">ㅁ</div>
+                    <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:36px;height:18px;font-size:13px;">ㅜ</div>
+                  </div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:46px;font-size:15px;">ㅓ</div>
+                </div>
+              </div>
+              <div class="syl-label">뭐 (ㅜ+ㅓ)</div>
+            </div>
+
+            <!-- 의 (ㅇ+ㅢ) -->
+            <div class="syl-block" onclick="speak('의')">
+              <div style="display:flex;flex-direction:column;gap:2px;width:58px;">
+                <div style="display:flex;gap:2px;">
+                  <div style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:36px;height:26px;font-size:15px;">ㅇ</div>
+                    <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:36px;height:18px;font-size:13px;">ㅡ</div>
+                  </div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:46px;font-size:15px;">ㅣ</div>
+                </div>
+              </div>
+              <div class="syl-label">의 (ㅡ+ㅣ)</div>
+            </div>
+
+            <!-- 곽 (ㄱ+ㅘ+ㄱ) -->
+            <div class="syl-block" onclick="speak('곽')">
+              <div style="display:flex;flex-direction:column;gap:2px;width:58px;">
+                <div style="display:flex;gap:2px;">
+                  <div style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:36px;height:26px;font-size:15px;">ㄱ</div>
+                    <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:36px;height:18px;font-size:13px;">ㅗ</div>
+                  </div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:46px;font-size:15px;">ㅏ</div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;background:#ef9a9a;color:#b71c1c;font-weight:700;border-radius:4px;height:18px;font-size:12px;">ㄱ</div>
+              </div>
+              <div class="syl-label">곽 (ㅘ+받침)</div>
+            </div>
+
+            <!-- 원 (ㅇ+ㅝ+ㄴ) -->
+            <div class="syl-block" onclick="speak('원')">
+              <div style="display:flex;flex-direction:column;gap:2px;width:58px;">
+                <div style="display:flex;gap:2px;">
+                  <div style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:36px;height:26px;font-size:15px;">ㅇ</div>
+                    <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:36px;height:18px;font-size:13px;">ㅜ</div>
+                  </div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:46px;font-size:15px;">ㅓ</div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:center;background:#ef9a9a;color:#b71c1c;font-weight:700;border-radius:4px;height:18px;font-size:12px;">ㄴ</div>
+              </div>
+              <div class="syl-label">원 (ㅝ+받침)</div>
+            </div>
+
+            <!-- 괅 (ㄱ+ㅘ+ㄺ 겹받침) -->
+            <div class="syl-block" onclick="speak('괅')">
+              <div style="display:flex;flex-direction:column;gap:2px;width:58px;">
+                <div style="display:flex;gap:2px;">
+                  <div style="display:flex;flex-direction:column;gap:2px;">
+                    <div class="syl-c" style="background:#ffcdd2;color:#c62828;width:36px;height:23px;font-size:13px;">ㄱ</div>
+                    <div class="syl-c" style="background:#bbdefb;color:#1565c0;width:36px;height:16px;font-size:11px;">ㅗ</div>
+                  </div>
+                  <div class="syl-c" style="background:#c8e6c9;color:#2e7d32;width:20px;height:41px;font-size:14px;">ㅏ</div>
+                </div>
+                <div style="display:flex;gap:2px;">
+                  <div style="display:flex;align-items:center;justify-content:center;background:#ef9a9a;color:#b71c1c;font-weight:700;border-radius:4px 0 0 4px;flex:1;height:16px;font-size:11px;">ㄹ</div>
+                  <div style="display:flex;align-items:center;justify-content:center;background:#ef9a9a;color:#b71c1c;font-weight:700;border-radius:0 4px 4px 0;flex:1;height:16px;font-size:11px;">ㄱ</div>
+                </div>
+              </div>
+              <div class="syl-label">괅 (ㅘ+겹받침 ㄺ)</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="h-tip">💡 Reading order: ① initial consonant → ② vowel → ③ final consonant (if any)<br>
+        <span style="color:var(--teal);font-weight:700">ㅣ (人) group</span> — vertical vowels → <strong>beside</strong> the consonant &nbsp;|&nbsp;
+        <span style="color:var(--blue);font-weight:700">ㅡ (地) group</span> — horizontal vowels → <strong>below</strong> the consonant &nbsp;|&nbsp;
+        <span style="color:#7b1fa2;font-weight:700">ㅡ+ㅣ Compound group</span> — two vowels fused together → <strong>below and beside</strong> the consonant</div>
+`;
 function buildSylPanel(){
   return '<div class="basics-intro" style="margin-bottom:16px;">한글 음절 = <strong>초성 + 중성 (+ 받침)</strong>으로 이루어져요.<br><em>Each syllable block = Onset + Vowel (+ optional final consonant)</em></div>'
-    +'<div class="syl-builder">'
+    +SYL_VISUAL
+    +'<div class="syl-builder" style="margin-top:20px;">'
     +'<div class="syl-builder-title">🧩 음절 만들기 · Build a Syllable</div>'
     +'<div class="syl-builder-desc">자음과 모음을 고르면 음절이 자동으로 만들어져요!</div>'
     +'<div class="syl-slots-row">'
