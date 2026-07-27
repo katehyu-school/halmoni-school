@@ -2631,7 +2631,8 @@ async function openFlashcards(){
   document.getElementById('fc-overlay').classList.add('open');
   document.getElementById('fc-modal').innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div><div style="font-size:15px;color:var(--warm-600);">단어 불러오는 중...<br><small>Loading vocabulary...</small></div></div>';
   await _sharedSetsReady;
-  const _lvRaw=(DATA&&DATA.level)||(typeof curLevel!=='undefined'?curLevel:'Level 1');
+  const _clv=(typeof curLevel!=='undefined'?curLevel:'');
+  const _lvRaw=(_clv&&_clv!=='Basics')?_clv:((DATA&&DATA.level)||'Level 1');
   let curNum=parseInt(String(_lvRaw).replace(/[^0-9]/g,''))||1;
   if(curNum<1)curNum=1; if(curNum>5)curNum=5;
   _fcCurNum=curNum;
