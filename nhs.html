@@ -2588,7 +2588,7 @@ async function _wuSkip(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); aw
 // ══ Flashcard System ══════════════════════════════════════
 // ══ SRS + Progress helpers ════════════════════════════════
 function _nmsProfile(){ return localStorage.getItem('nms_current')||''; }
-function _fcCardId(c){ return c.epId+'_'+c.korean; }
+function _fcCardId(c){ return (c.level||'L1')+'_'+c.epId+'_'+c.korean; }
 function _fcReviewSet(){
   const p=_nmsProfile(); if(!p) return new Set();
   return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_fc_review')||'[]'));
@@ -2624,7 +2624,7 @@ function _refreshSidebarDone(){
   });
 }
 
-let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcIdx=0,_fcFlipped=false;
+let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcLevels=[],_fcIdx=0,_fcFlipped=false;
 let _fcFilter=new Set(); // empty = all episodes
 
 async function openFlashcards(){
@@ -2632,29 +2632,36 @@ async function openFlashcards(){
   document.getElementById('fc-modal').innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div><div style="font-size:15px;color:var(--warm-600);">단어 불러오는 중...<br><small>Loading vocabulary...</small></div></div>';
   await _sharedSetsReady;
   const _lvRaw=(DATA&&DATA.level)||(typeof curLevel!=='undefined'?curLevel:'Level 1');
-  const lv=(_lvRaw==='L2'||_lvRaw==='Level 2')?'L2':'L1';
-  _fcEps=(lv==='L2'?L2_EPISODES:L1_EPISODES).filter(ep=>!ep.disabled);
-  const cards=[];
-  await Promise.all(_fcEps.map(async(ep)=>{
-    const epKey=lv+'_'+ep.id;
-    let data=EPISODE_DATA[epKey];
-    if(!data){
-      try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
-    }
-    if(!data||!data.vocab)return;
-    data.vocab.forEach(cat=>{
-      (cat.items||[]).forEach(item=>{
-        if(!item.korean||!item.english)return;
-        cards.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',note:item.note||'',epId:ep.id,ep:ep.label,cat:(cat.category||'').replace(/^[\u{1F300}-\u{1FAD6}\s]+/u,'').trim()});
+  let curNum=parseInt(String(_lvRaw).replace(/[^0-9]/g,''))||1;
+  if(curNum<1)curNum=1; if(curNum>5)curNum=5;
+  const _LVARR={1:L1_EPISODES,2:L2_EPISODES,3:L3_EPISODES,4:L4_EPISODES,5:L5_EPISODES};
+  _fcLevels=[]; const cards=[]; const _tasks=[];
+  for(let n=1;n<=curNum;n++){
+    const lv='L'+n;
+    const eps=(_LVARR[n]||[]).filter(ep=>!ep.disabled);
+    if(eps.length)_fcLevels.push(lv);
+    eps.forEach(ep=>{ _tasks.push((async()=>{
+      const epKey=lv+'_'+ep.id;
+      let data=EPISODE_DATA[epKey];
+      if(!data){
+        try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
+      }
+      if(!data||!data.vocab)return;
+      data.vocab.forEach(cat=>{
+        (cat.items||[]).forEach(item=>{
+          if(!item.korean||!item.english)return;
+          cards.push({korean:item.korean,rom:item.romanization||'',english:item.english,level:lv,emoji:item.emoji||'📖',note:item.note||'',epId:ep.id,ep:ep.label,cat:(cat.category||'').replace(/^[\u{1F300}-\u{1FAD6}\s]+/u,'').trim()});
+        });
       });
-    });
-  }));
+    })()); });
+  }
+  await Promise.all(_tasks);
   _fcAllCards=cards; _fcFilter=new Set();
   _fcApplyFilter();
 }
 
 function _fcApplyFilter(){
-  const pool=_fcFilter.size===0?_fcAllCards:_fcAllCards.filter(c=>_fcFilter.has(c.epId));
+  const pool=_fcFilter.size===0?_fcAllCards:_fcAllCards.filter(c=>_fcFilter.has(c.level));
   const rev=_fcReviewSet();
   const revCards=shuffleArr(pool.filter(c=>rev.has(_fcCardId(c))));
   const otherCards=shuffleArr(pool.filter(c=>!rev.has(_fcCardId(c))));
@@ -2662,9 +2669,9 @@ function _fcApplyFilter(){
   _fcIdx=0; _fcFlipped=false; _renderFC();
 }
 
-function _fcChip(epId){
-  if(epId===null){_fcFilter.clear();}
-  else{if(_fcFilter.has(epId))_fcFilter.delete(epId);else _fcFilter.add(epId);}
+function _fcChip(lvKey){
+  if(lvKey===null){_fcFilter.clear();}
+  else{if(_fcFilter.has(lvKey))_fcFilter.delete(lvKey);else _fcFilter.add(lvKey);}
   _fcApplyFilter();
 }
 
@@ -2734,8 +2741,8 @@ function _renderFC(){
   const allOn=_fcFilter.size===0;
   const chipsHtml='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">'
     +'<button class="fc-chip'+(allOn?' on':'')+'" onclick="_fcChip(null)">전체</button>'
-    +_fcEps.map(ep=>{const n=ep.id.replace('ep','');const on=_fcFilter.has(ep.id);return '<button class="fc-chip'+(on?' on':'')
-      +'" onclick="_fcChip(\''+(ep.id)+'\')">'+(parseInt(n))+'</button>';}).join('')
+    +_fcLevels.map(lv=>{const on=_fcFilter.has(lv);return '<button class="fc-chip'+(on?' on':'')
+      +'" onclick="_fcChip(\''+lv+'\')">'+lv.replace('L','Lv')+'</button>';}).join('')
     +'</div>';
   m.innerHTML=chipsHtml
     +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">'
