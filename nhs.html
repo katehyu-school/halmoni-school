@@ -2508,14 +2508,50 @@ async function loadEp(epId, level='L1'){
   const epKey=level+'_'+epId;
   if(_wuSeen.has(epKey)){ await _doLoadEp(epId,level); return; }
   const epNum=parseInt(epId.replace(/\D/g,''));
-  const pool=(level==='L1')
-    ? WARMUP_POOL.filter(q=>parseInt(q.ep.replace(/\D/g,''))<epNum)
-    : WARMUP_POOL;
+  let pool;
+  if(level==='L1'){
+    pool=WARMUP_POOL.filter(q=>parseInt(q.ep.replace(/\D/g,''))<epNum);
+  } else {
+    // L2~L5: 이전 편 어휘로 빠른 복습 문제 자동 생성 (정적 은행 대신)
+    pool=await _buildVocabWarmup(level, epNum);
+  }
   if(pool.length>=3){
     _showWarmup(epId, level, pool);
   } else {
     await _doLoadEp(epId, level);
   }
+}
+// 이전 편 어휘 기반 '뜻 맞추기' 빠른 복습 문제 생성 (현재 레벨 앞선 편, 부족하면 이전 레벨 보강)
+async function _buildVocabWarmup(level, epNum){
+  const LVARR={L1:L1_EPISODES,L2:L2_EPISODES,L3:L3_EPISODES,L4:L4_EPISODES,L5:L5_EPISODES};
+  const curN=parseInt(String(level).replace(/\D/g,''))||1;
+  const targets=[];
+  (LVARR[level]||[]).forEach(ep=>{ if(!ep.disabled && parseInt(ep.id.replace(/\D/g,''))<epNum) targets.push([level,ep]); });
+  if(targets.length<2 && curN>1){
+    const prev='L'+(curN-1);
+    (LVARR[prev]||[]).forEach(ep=>{ if(!ep.disabled) targets.push([prev,ep]); });
+  }
+  const words=[];
+  await Promise.all(targets.map(async ([lv,ep])=>{
+    const epKey=lv+'_'+ep.id;
+    let data=EPISODE_DATA[epKey];
+    if(!data){ try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json'); if(r.ok){data=await r.json(); _resolveRefs(data); EPISODE_DATA[epKey]=data;}}catch(e){return;} }
+    if(!data||!data.vocab)return;
+    data.vocab.forEach(cat=>(cat.items||[]).forEach(it=>{ if(it.korean&&it.english) words.push({korean:it.korean,english:it.english}); }));
+  }));
+  const seen=new Set(), uniq=[];
+  words.forEach(w=>{ if(!seen.has(w.korean)){seen.add(w.korean); uniq.push(w);} });
+  const allEng=[...new Set(uniq.map(x=>x.english))];
+  if(uniq.length<4 || allEng.length<4) return [];
+  const qs=[];
+  for(const w of shuffleArr(uniq)){
+    if(qs.length>=8)break;
+    const distract=shuffleArr(allEng.filter(e=>e!==w.english)).slice(0,3);
+    if(distract.length<3)continue;
+    const choices=shuffleArr([w.english,...distract]);
+    qs.push({q:'"'+w.korean+'"의 뜻은? · What does it mean?', choices:choices, ans:choices.indexOf(w.english)});
+  }
+  return qs;
 }
 
 function _showWarmup(epId, level, pool){
