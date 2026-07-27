@@ -2624,7 +2624,7 @@ function _refreshSidebarDone(){
   });
 }
 
-let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcLevels=[],_fcIdx=0,_fcFlipped=false;
+let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcLevels=[],_fcCurNum=1,_fcIdx=0,_fcFlipped=false;
 let _fcFilter=new Set(); // empty = all episodes
 
 async function openFlashcards(){
@@ -2634,6 +2634,7 @@ async function openFlashcards(){
   const _lvRaw=(DATA&&DATA.level)||(typeof curLevel!=='undefined'?curLevel:'Level 1');
   let curNum=parseInt(String(_lvRaw).replace(/[^0-9]/g,''))||1;
   if(curNum<1)curNum=1; if(curNum>5)curNum=5;
+  _fcCurNum=curNum;
   const _LVARR={1:L1_EPISODES,2:L2_EPISODES,3:L3_EPISODES,4:L4_EPISODES,5:L5_EPISODES};
   _fcLevels=[]; const cards=[]; const _tasks=[];
   for(let n=1;n<=curNum;n++){
@@ -2660,12 +2661,32 @@ async function openFlashcards(){
   _fcApplyFilter();
 }
 
+// 레벨 거리 기반 가중 샘플링 — 현재 레벨에 가까울수록 많이, 하위 레벨은 적게(누적 유지)
+function _fcWeightedPick(cards, need, curNum){
+  const byLv={};
+  cards.forEach(c=>{const n=parseInt(String(c.level||'L1').replace(/[^0-9]/g,''))||1;(byLv[n]=byLv[n]||[]).push(c);});
+  const lvls=Object.keys(byLv).map(Number);
+  lvls.forEach(n=>{byLv[n]=shuffleArr(byLv[n]);});
+  const out=[];
+  while(out.length<need){
+    const avail=lvls.filter(n=>byLv[n].length>0);
+    if(!avail.length)break;
+    let total=0; const w={};
+    avail.forEach(n=>{const wt=Math.pow(2,n-curNum); w[n]=wt; total+=wt;}); // 2^(레벨-현재): 현재=1, 한 단계 아래마다 1/2
+    let r=Math.random()*total, pick=avail[avail.length-1];
+    for(const n of avail){ r-=w[n]; if(r<=0){pick=n;break;} }
+    out.push(byLv[pick].pop());
+  }
+  return out;
+}
 function _fcApplyFilter(){
   const pool=_fcFilter.size===0?_fcAllCards:_fcAllCards.filter(c=>_fcFilter.has(c.level));
   const rev=_fcReviewSet();
-  const revCards=shuffleArr(pool.filter(c=>rev.has(_fcCardId(c))));
-  const otherCards=shuffleArr(pool.filter(c=>!rev.has(_fcCardId(c))));
-  _fcCards=[...revCards,...otherCards].slice(0,25);
+  const revCards=shuffleArr(pool.filter(c=>rev.has(_fcCardId(c)))).slice(0,25);
+  const need=25-revCards.length;
+  const others=pool.filter(c=>!rev.has(_fcCardId(c)));
+  const otherCards=need>0?_fcWeightedPick(others, need, _fcCurNum):[];
+  _fcCards=[...revCards,...otherCards];
   _fcIdx=0; _fcFlipped=false; _renderFC();
 }
 
