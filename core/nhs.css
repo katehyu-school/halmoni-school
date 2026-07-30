@@ -693,3 +693,6 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .scene-wrap-lg{max-width:100%;}
 .scene-wrap-lg .scene-col{max-width:960px;margin:0 auto;width:100%;}
 .scene-wrap-lg .scene-panel{height:auto;aspect-ratio:16/9;background-color:#0f1424;background-size:contain;}
+
+/* 문학 발췌본 중략 구분선 (영상 대본) */
+.script-omit{text-align:center;color:var(--warm-500);font-size:12px;letter-spacing:3px;margin:8px 0;padding:6px 0;border-top:1px dashed var(--warm-300);border-bottom:1px dashed var(--warm-300);opacity:.8;}

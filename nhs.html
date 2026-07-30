@@ -877,6 +877,7 @@ function buildVideoScript(){
   const charMap={};
   DATA.characters.forEach(c=>{charMap[c.id]=c;});
   const lines=DATA.script.map((line,i)=>{
+    if(line.divider) return '<div class="script-omit">〔 '+esc(line.text||'중략')+' 〕</div>';
     const ch=charMap[line.speaker]||{name:line.speaker,emoji:'💬',color:'#E0E0E0'};
     const tag=line.speech_type?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${esc(line.speech_type)}</span>`:'';
     const ttsBtn=line.audio
