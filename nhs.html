@@ -744,7 +744,7 @@ function render(){
   const _hasPron=_pr&&(Array.isArray(_pr)?_pr.length:((_pr.items&&_pr.items.length)||(_pr.groups&&_pr.groups.length)));
   const _hasQuiz=(DATA.quiz&&DATA.quiz.length)||(typeof READING_POOL!=='undefined'&&READING_POOL[_epK])||(typeof SP_QUIZ_POOL!=='undefined'&&SP_QUIZ_POOL[_epK]);
   const _tabDefs=[
-    ['script','📽 영상·Script',true],
+    ['script','📽 영상·Script',(DATA.video||(DATA.script&&DATA.script.length))],
     ['vocab','새어휘 Vocab',DATA.vocab&&DATA.vocab.length],
     ['grammar','문법 Grammar',DATA.grammar&&DATA.grammar.length],
     ['pron','발음 Pron',_hasPron],
@@ -757,6 +757,7 @@ function render(){
   const _shown=_tabDefs.filter(t=>t[2]);
   const tabs=_shown.map(t=>t[0]);
   const labels=_shown.map(t=>t[1]);
+  if(!tabs.includes(curTab)) curTab=tabs[0]||'vocab';
   document.getElementById('content-area').innerHTML=`
     <div class="ep-header">
       <div class="ep-num-badge">EP.${(DATA.id||'ep01').replace('ep','')} · ${esc(DATA.level)}</div>
@@ -910,6 +911,7 @@ function buildVideoScript(){
 
 function initSceneViewer(){
   if(DATA.video) return;  // video mode: no slide viewer
+  if(!DATA.script||!DATA.script.length) return;  // 대사 없는 어휘 편
   renderScene();
 }
 
