@@ -795,7 +795,8 @@ function showTab(name){
 // ── SCRIPT / SCENE VIEWER ──────────────────────────────
 function buildScript(){
   if(DATA.video) return buildVideoScript();
-  return `<div class="scene-wrap"><div class="scene-col">
+  const _wc=(DATA.level==='L6')?'scene-wrap scene-wrap-lg':'scene-wrap';
+  return `<div class="${_wc}"><div class="scene-col">
     <div class="scene-panel" id="scene-panel"></div>
     <div class="scene-caption" id="scene-caption"></div>
     <div class="scene-nav">
