@@ -828,6 +828,28 @@ function buildAnnoText(text, anno){
     +'<span class="anno-mark" data-grammar="'+esc(anno.grammar||'')+'" data-note="'+esc(anno.note||'')+'" onclick="showAnnoTooltipEl(event,this)" onmouseleave="hideAnnoTooltip()" title="'+esc(anno.grammar||'')+'">'+esc(anno.highlight)+' 📎</span>'
     +esc(text.slice(idx+anno.highlight.length));
 }
+// 여러 개 인라인 주석 (문학 편 어려운 어휘 풀이용)
+function buildAnnoTextMulti(text, annos){
+  if(!annos||!annos.length) return esc(text);
+  let marks=[];
+  annos.forEach(a=>{ if(a&&a.highlight){ const idx=text.indexOf(a.highlight); if(idx>=0) marks.push({idx:idx,len:a.highlight.length,hl:a.highlight,note:a.note||'',grammar:a.grammar||''}); } });
+  if(!marks.length) return esc(text);
+  marks.sort((x,y)=>x.idx-y.idx);
+  let filtered=[],lastEnd=-1;
+  marks.forEach(m=>{ if(m.idx>=lastEnd){ filtered.push(m); lastEnd=m.idx+m.len; } });
+  let out='',cur=0;
+  filtered.forEach(m=>{
+    out+=esc(text.slice(cur,m.idx));
+    if(m.note||m.grammar){
+      out+='<span class="anno-mark" data-grammar="'+esc(m.grammar)+'" data-note="'+esc(m.note)+'" onclick="showAnnoTooltipEl(event,this)" onmouseleave="hideAnnoTooltip()" title="'+esc(m.grammar)+'">'+esc(m.hl)+' 📎</span>';
+    } else {
+      out+='<span class="anno-hl">'+esc(m.hl)+'</span>';
+    }
+    cur=m.idx+m.len;
+  });
+  out+=esc(text.slice(cur));
+  return out;
+}
 function showAnnoTooltip(e,grammar,note){
   document.querySelectorAll('.anno-tooltip').forEach(t=>t.remove());
   const tip=document.createElement('div');
@@ -866,7 +888,7 @@ function buildVideoScript(){
       <div class="caption-avatar" style="background:${esc(ch.color||'#E0E0E0')}">${esc(ch.emoji||'💬')}</div>
       <div class="video-script-body">
         <div class="video-script-name">${esc(ch.name)}</div>
-        <div class="video-script-kr">${buildAnnoText(line.text, line.annotation)}</div>
+        <div class="video-script-kr">${(line.annotations?buildAnnoTextMulti(line.text,line.annotations):buildAnnoText(line.text, line.annotation))}</div>
         <div class="video-script-en">${esc(line.en||line.translation||'')}</div>
         ${tag}
         <div style="display:flex;align-items:center;gap:0;">${ttsBtn}${shadBtn}</div>
@@ -913,7 +935,7 @@ function renderScene(){
       <div class="caption-name">${esc(ch.name)}</div>
     </div>
     <div class="caption-body" style="flex:1">
-      <div class="caption-kr">${buildAnnoText(line.text, line.annotation)}</div>
+      <div class="caption-kr">${(line.annotations?buildAnnoTextMulti(line.text,line.annotations):buildAnnoText(line.text, line.annotation))}</div>
       <div class="caption-en">${esc(line.en||line.translation||'')}</div>
       ${tagHtml}
 

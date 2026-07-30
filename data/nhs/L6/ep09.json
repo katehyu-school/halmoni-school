@@ -1,102 +1,335 @@
 {
-  "id": "ep09",
-  "level": "L6",
-  "title": "김동인 《감자》",
-  "title_en": "Kim Dong-in, \"Potatoes\"",
-  "scene": "📖 소설 · 자연주의 · Naturalist Fiction",
-  "goal": { "en": "Read a naturalist opening and see how environment shapes a character" },
-  "video": "data/nhs/L6/videos/ep09.mp4",
-  "characters": [
-    { "id": "narrator", "name": "내레이터 · Narrator", "emoji": "📖", "color": "#7D5A50" }
-  ],
-  "script": [
-    { "speaker": "narrator", "text": "싸움, 간통, 살인, 도둑, 구걸, 징역, 이 세상의 온갖 비극과 활극의 근원지인 이 칠성문 밖 빈민굴로 오기 전까지는,", "en": "Fights, adultery, murder, theft, begging, prison — before coming to this slum outside Chilseongmun, the source of every tragedy and violent drama in this world," },
-    { "speaker": "narrator", "text": "복녀의 부부는 사농공상의 제이위에 드는 농민이었다.", "en": "Bongnyeo and her husband were farmers, second in the old order of scholar-farmer-artisan-merchant." },
-    { "speaker": "narrator", "text": "복녀는 원래 가난은 하나마 정직한 농가에서 규칙 있게 자라난 처녀였다.", "en": "Bongnyeo was originally a young woman raised with discipline in an honest, if poor, farming household." }
-  ],
-  "vocab": [
+ "id": "ep09",
+ "level": "L6",
+ "title": "김동인 《감자》",
+ "title_en": "Kim Dong-in, \"Potatoes\"",
+ "scene": "📖 소설 · 자연주의 · Naturalist Fiction",
+ "goal": {
+  "en": "Read a naturalist opening and see how environment shapes a character"
+ },
+ "video": "data/nhs/L6/videos/ep09.mp4",
+ "characters": [
+  {
+   "id": "narrator",
+   "name": "내레이터 · Narrator",
+   "emoji": "📖",
+   "color": "#7D5A50"
+  }
+ ],
+ "script": [
+  {
+   "speaker": "narrator",
+   "text": "싸움, 간통, 살인, 도둑, 구걸, 징역, 이 세상의 온갖 비극과 활극의 근원지인 이 칠성문 밖 빈민굴로 오기 전까지는,",
+   "en": "Fights, adultery, murder, theft, begging, prison — before coming to this slum outside Chilseongmun, the source of every tragedy and violent drama in this world,",
+   "annotations": [
     {
-      "category": "🏚️ 배경·자연주의 어휘 · Setting & Naturalism",
-      "items": [
-        { "korean": "근원지", "romanization": "geunwonji", "english": "source, root place", "emoji": "🌋" },
-        { "korean": "빈민굴", "romanization": "binmingul", "english": "slum", "emoji": "🏚️" },
-        { "korean": "온갖", "romanization": "ongat", "english": "all kinds of, every", "emoji": "🔀" },
-        { "korean": "비극", "romanization": "bigeuk", "english": "tragedy", "emoji": "🎭" },
-        { "korean": "사농공상", "romanization": "sanong-gongsang", "english": "the four classes (scholar·farmer·artisan·merchant)", "emoji": "📜" },
-        { "korean": "농가", "romanization": "nongga", "english": "farming household", "emoji": "🌾" },
-        { "korean": "규칙 있게", "romanization": "gyuchik itge", "english": "in an orderly way, with discipline", "emoji": "📏" },
-        { "korean": "정직하다", "romanization": "jeongjikhada", "english": "to be honest", "emoji": "🙂" },
-        { "korean": "처녀", "romanization": "cheonyeo", "english": "young unmarried woman", "emoji": "👧" }
-      ]
-    }
-  ],
-  "grammar": [
-    {
-      "id": "g01_nama",
-      "tier": "core",
-      "title": "-(이)나마 (비록 ~이지만, 그런대로)",
-      "title_en": "-(이)나마: even though it is (only) ~",
-      "emoji": "🤏",
-      "explanation_en": "Accepts something less-than-ideal: 'poor though it was,' 'even if only ~.' Here: 'poor though (they were), an honest household.'",
-      "pattern": "명사 + (이)나마 · (가난은) 하나마",
-      "scene_example": { "korean": "가난은 하나마 정직한 농가에서 자랐다.", "english": "She grew up in an honest household, poor though it was.", "highlight": "하나마" },
-      "rule_boxes": [
-        { "type": "blue", "title": "형태", "content": "명사 + (이)나마: 잠깐이나마 / 조금이나마\n'하나마' = 하다 + 나마 (비록 ~하지만)" },
-        { "type": "green", "title": "의미", "content": "부족하거나 아쉬운 것을 '비록 그렇지만 그런대로' 받아들여요.\n예) 짧게나마 인사를 나눴다." },
-        { "type": "amber", "title": "뉘앙스", "content": "완전하진 않아도 없는 것보다 낫다는 느낌. 문어·격식체에서 자주 나와요." }
-      ],
-      "examples": [
-        { "ko": "적은 돈이나마 도움이 되었다.", "en": "Little money though it was, it helped." },
-        { "ko": "잠깐이나마 쉴 수 있어 다행이다.", "en": "It's a relief I could rest, even if briefly." },
-        { "ko": "가난하나마 마음은 넉넉했다.", "en": "Poor though they were, their hearts were generous." }
-      ]
-    }
-  ],
-  "usage": [
-    {
-      "title": "명사 나열과 자연주의 시선",
-      "title_en": "Noun-listing and the naturalist view",
-      "explanation_en": "The opening piles up nouns (fight, murder, theft…) to hit us with the slum's brutality — the environment that will change honest Bongnyeo. This is naturalism: surroundings shape a person.",
-      "examples": [
-        { "ko": "명사 나열: 싸움, 간통, 살인, 도둑, 구걸, 징역", "en": "Noun list: fight, adultery, murder, theft, begging, prison." },
-        { "ko": "대비: (전) 정직한 농가의 처녀 ↔ (후) 빈민굴", "en": "Contrast: (before) an honest farm girl ↔ (after) the slum." },
-        { "ko": "자연주의: 환경이 인물을 바꾼다.", "en": "Naturalism: environment changes the person." }
-      ]
-    }
-  ],
-  "quiz": [
-    { "id": "q09l6_1", "question_ko": "'빈민굴'의 뜻으로 알맞은 것은?", "question_en": "What does 빈민굴 mean?", "options": ["가난한 사람들이 모여 사는 곳", "부유한 주택가", "시장", "학교"], "answer": 0, "explanation": "빈민굴 = 가난한 사람들이 모여 사는 지역이에요." },
-    { "id": "q09l6_2", "question_ko": "'근원지'의 뜻으로 알맞은 것은?", "question_en": "What does 근원지 mean?", "options": ["어떤 일이 비롯되는 근본이 되는 곳", "마지막 장소", "지나가는 길", "쉬는 곳"], "answer": 0, "explanation": "근원지 = 사물이나 일이 생겨나는 근본이 되는 곳이에요." },
-    { "id": "q09l6_3", "question_ko": "'가난은 하나마'에서 '-나마'의 뜻은?", "question_en": "What does -나마 mean in '가난은 하나마'?", "options": ["비록 ~이지만 (그런대로)", "~때문에", "~하려고", "~하자마자"], "answer": 0, "explanation": "-나마 = 비록 부족하지만 그런대로. '가난은 하나마' = 비록 가난했지만." },
-    { "id": "q09l6_4", "question_ko": "이 도입부가 보여 주는 관점(주제 의식)은?", "question_en": "What viewpoint does this opening show?", "options": ["환경이 인물을 바꾼다는 자연주의", "노력하면 성공한다는 교훈", "사랑이 모든 것을 이긴다", "웃음으로 고난을 이긴다"], "answer": 0, "explanation": "정직했던 복녀가 빈민굴이라는 환경 속에서 변해 간다는 자연주의 시선을 예고해요." }
-  ],
-  "real_life": [
-    {
-      "type": "tip",
-      "title": "🏚️ 자연주의 — 환경이 인물을 바꾼다",
-      "content_ko": "《감자》는 '환경이 사람을 결정한다'는 자연주의 시선을 보여 주는 작품이에요. 정직한 농가에서 규칙 있게 자란 복녀가, 온갖 비극이 들끓는 빈민굴로 오면서 서서히 변해 가지요. 도입부에서 '싸움·간통·살인…' 같은 명사를 강하게 나열해 환경의 참혹함을 먼저 보여 주는 것도 이 주제를 부각하는 장치예요."
+     "highlight": "간통",
+     "note": "간통: 부부가 아닌 남녀의 불륜 (adultery)"
     },
     {
-      "type": "reading",
-      "title": "🧠 주제·내용 읽기 — 《감자》",
-      "passage": "싸움, 간통, 살인, 도둑, 구걸, 징역, 이 세상의 온갖 비극의 근원지인 칠성문 밖 빈민굴로 오기 전까지, 복녀의 부부는 농민이었다. 복녀는 원래 가난은 하나마 정직한 농가에서 규칙 있게 자라난 처녀였다.",
-      "id": "rl_gamja",
-      "questions": [
-        { "question_ko": "빈민굴로 오기 전, 복녀는 원래 어떤 사람이었나?", "question_en": "What was Bongnyeo like before the slum?", "options": ["정직한 농가에서 규칙 있게 자란 처녀", "부잣집 딸", "도시의 상인", "게으른 사람"], "answer": 0, "explanation": "가난했지만 정직한 농가에서 규칙 있게 자란 처녀였어요." },
-        { "question_ko": "도입부에서 명사를 잔뜩 나열한 효과로 알맞은 것은?", "question_en": "What is the effect of listing many nouns at the start?", "options": ["환경의 참혹함을 강렬하게 각인시킨다", "밝고 평화로운 분위기를 만든다", "인물의 외모를 자세히 묘사한다", "시간의 흐름을 보여 준다"], "answer": 0, "explanation": "싸움·살인·도둑 등 부정적 명사의 나열로 빈민굴의 참혹함을 강하게 드러내요." },
-        { "question_ko": "이 글에서 짐작할 수 있는 앞으로의 전개는?", "question_en": "What does the opening foreshadow?", "options": ["환경 때문에 복녀가 변해 갈 것이다", "복녀가 큰 부자가 될 것이다", "복녀가 고향으로 돌아갈 것이다", "아무 일도 일어나지 않을 것이다"], "answer": 0, "explanation": "정직했던 복녀가 빈민굴이라는 환경 속에서 변해 갈 것을 예고해요(자연주의)." }
-      ]
+     "highlight": "구걸",
+     "note": "구걸: 남에게 빌어서 얻음 (begging)"
     },
     {
-      "type": "writing_guided",
-      "title": "✍️ 쓰기 — 환경이 사람에게 미치는 영향",
-      "prompt_ko": "'환경이 사람에게 큰 영향을 준다'는 생각에 대해, 자신의 경험이나 예를 들어 3~4문장으로 써 보세요. 격식체(-다)로 맺으세요.",
-      "model": "사람은 자신을 둘러싼 환경에 크게 영향을 받는다. 나는 조용한 도서관에서 공부할 때 훨씬 집중이 잘된다. 반대로 시끄럽고 어수선한 곳에서는 같은 시간에도 능률이 떨어진다. 결국 좋은 습관을 위해서는 좋은 환경을 먼저 만드는 것이 중요하다.",
-      "rubric": [
-        "환경의 영향이라는 주제가 분명한가?",
-        "구체적 예나 경험을 들었는가?",
-        "격식체(-다/-ㄴ다)로 맺었는가?"
-      ]
+     "highlight": "징역",
+     "note": "징역: 교도소에 가두는 형벌 (imprisonment)"
+    },
+    {
+     "highlight": "활극",
+     "note": "활극: 격렬한 사건/난투 (violent drama)"
+    },
+    {
+     "highlight": "근원지",
+     "note": "근원지: 일이 비롯되는 근본이 되는 곳 (source)"
+    },
+    {
+     "highlight": "칠성문",
+     "note": "칠성문: 평양 성곽의 한 문 (a gate of Pyongyang)"
+    },
+    {
+     "highlight": "빈민굴",
+     "note": "빈민굴: 가난한 사람들이 모여 사는 곳 (slum)"
     }
-  ]
+   ]
+  },
+  {
+   "speaker": "narrator",
+   "text": "복녀의 부부는 사농공상의 제이위에 드는 농민이었다.",
+   "en": "Bongnyeo and her husband were farmers, second in the old order of scholar-farmer-artisan-merchant.",
+   "annotations": [
+    {
+     "highlight": "사농공상",
+     "note": "사농공상: 선비·농민·장인·상인의 옛 신분 순서 (the four classes)"
+    },
+    {
+     "highlight": "제이위",
+     "note": "제이위(第二位): 둘째 자리 (second rank)"
+    }
+   ]
+  },
+  {
+   "speaker": "narrator",
+   "text": "복녀는 원래 가난은 하나마 정직한 농가에서 규칙 있게 자라난 처녀였다.",
+   "en": "Bongnyeo was originally a young woman raised with discipline in an honest, if poor, farming household.",
+   "annotations": [
+    {
+     "highlight": "하나마",
+     "note": "-나마: 비록 ~이지만 (하나마=가난하지만) (even though)"
+    },
+    {
+     "highlight": "농가",
+     "note": "농가: 농사짓는 집 (farming household)"
+    },
+    {
+     "highlight": "처녀",
+     "note": "처녀: 결혼하지 않은 젊은 여자 (young unmarried woman)"
+    }
+   ]
+  }
+ ],
+ "vocab": [
+  {
+   "category": "🏚️ 배경·자연주의 어휘 · Setting & Naturalism",
+   "items": [
+    {
+     "korean": "근원지",
+     "romanization": "geunwonji",
+     "english": "source, root place",
+     "emoji": "🌋"
+    },
+    {
+     "korean": "빈민굴",
+     "romanization": "binmingul",
+     "english": "slum",
+     "emoji": "🏚️"
+    },
+    {
+     "korean": "온갖",
+     "romanization": "ongat",
+     "english": "all kinds of, every",
+     "emoji": "🔀"
+    },
+    {
+     "korean": "비극",
+     "romanization": "bigeuk",
+     "english": "tragedy",
+     "emoji": "🎭"
+    },
+    {
+     "korean": "사농공상",
+     "romanization": "sanong-gongsang",
+     "english": "the four classes (scholar·farmer·artisan·merchant)",
+     "emoji": "📜"
+    },
+    {
+     "korean": "농가",
+     "romanization": "nongga",
+     "english": "farming household",
+     "emoji": "🌾"
+    },
+    {
+     "korean": "규칙 있게",
+     "romanization": "gyuchik itge",
+     "english": "in an orderly way, with discipline",
+     "emoji": "📏"
+    },
+    {
+     "korean": "정직하다",
+     "romanization": "jeongjikhada",
+     "english": "to be honest",
+     "emoji": "🙂"
+    },
+    {
+     "korean": "처녀",
+     "romanization": "cheonyeo",
+     "english": "young unmarried woman",
+     "emoji": "👧"
+    }
+   ]
+  }
+ ],
+ "grammar": [
+  {
+   "id": "g01_nama",
+   "tier": "core",
+   "title": "-(이)나마 (비록 ~이지만, 그런대로)",
+   "title_en": "-(이)나마: even though it is (only) ~",
+   "emoji": "🤏",
+   "explanation_en": "Accepts something less-than-ideal: 'poor though it was,' 'even if only ~.' Here: 'poor though (they were), an honest household.'",
+   "pattern": "명사 + (이)나마 · (가난은) 하나마",
+   "scene_example": {
+    "korean": "가난은 하나마 정직한 농가에서 자랐다.",
+    "english": "She grew up in an honest household, poor though it was.",
+    "highlight": "하나마"
+   },
+   "rule_boxes": [
+    {
+     "type": "blue",
+     "title": "형태",
+     "content": "명사 + (이)나마: 잠깐이나마 / 조금이나마\n'하나마' = 하다 + 나마 (비록 ~하지만)"
+    },
+    {
+     "type": "green",
+     "title": "의미",
+     "content": "부족하거나 아쉬운 것을 '비록 그렇지만 그런대로' 받아들여요.\n예) 짧게나마 인사를 나눴다."
+    },
+    {
+     "type": "amber",
+     "title": "뉘앙스",
+     "content": "완전하진 않아도 없는 것보다 낫다는 느낌. 문어·격식체에서 자주 나와요."
+    }
+   ],
+   "examples": [
+    {
+     "ko": "적은 돈이나마 도움이 되었다.",
+     "en": "Little money though it was, it helped."
+    },
+    {
+     "ko": "잠깐이나마 쉴 수 있어 다행이다.",
+     "en": "It's a relief I could rest, even if briefly."
+    },
+    {
+     "ko": "가난하나마 마음은 넉넉했다.",
+     "en": "Poor though they were, their hearts were generous."
+    }
+   ]
+  }
+ ],
+ "usage": [
+  {
+   "title": "명사 나열과 자연주의 시선",
+   "title_en": "Noun-listing and the naturalist view",
+   "explanation_en": "The opening piles up nouns (fight, murder, theft…) to hit us with the slum's brutality — the environment that will change honest Bongnyeo. This is naturalism: surroundings shape a person.",
+   "examples": [
+    {
+     "ko": "명사 나열: 싸움, 간통, 살인, 도둑, 구걸, 징역",
+     "en": "Noun list: fight, adultery, murder, theft, begging, prison."
+    },
+    {
+     "ko": "대비: (전) 정직한 농가의 처녀 ↔ (후) 빈민굴",
+     "en": "Contrast: (before) an honest farm girl ↔ (after) the slum."
+    },
+    {
+     "ko": "자연주의: 환경이 인물을 바꾼다.",
+     "en": "Naturalism: environment changes the person."
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q09l6_1",
+   "question_ko": "'빈민굴'의 뜻으로 알맞은 것은?",
+   "question_en": "What does 빈민굴 mean?",
+   "options": [
+    "가난한 사람들이 모여 사는 곳",
+    "부유한 주택가",
+    "시장",
+    "학교"
+   ],
+   "answer": 0,
+   "explanation": "빈민굴 = 가난한 사람들이 모여 사는 지역이에요."
+  },
+  {
+   "id": "q09l6_2",
+   "question_ko": "'근원지'의 뜻으로 알맞은 것은?",
+   "question_en": "What does 근원지 mean?",
+   "options": [
+    "어떤 일이 비롯되는 근본이 되는 곳",
+    "마지막 장소",
+    "지나가는 길",
+    "쉬는 곳"
+   ],
+   "answer": 0,
+   "explanation": "근원지 = 사물이나 일이 생겨나는 근본이 되는 곳이에요."
+  },
+  {
+   "id": "q09l6_3",
+   "question_ko": "'가난은 하나마'에서 '-나마'의 뜻은?",
+   "question_en": "What does -나마 mean in '가난은 하나마'?",
+   "options": [
+    "비록 ~이지만 (그런대로)",
+    "~때문에",
+    "~하려고",
+    "~하자마자"
+   ],
+   "answer": 0,
+   "explanation": "-나마 = 비록 부족하지만 그런대로. '가난은 하나마' = 비록 가난했지만."
+  },
+  {
+   "id": "q09l6_4",
+   "question_ko": "이 도입부가 보여 주는 관점(주제 의식)은?",
+   "question_en": "What viewpoint does this opening show?",
+   "options": [
+    "환경이 인물을 바꾼다는 자연주의",
+    "노력하면 성공한다는 교훈",
+    "사랑이 모든 것을 이긴다",
+    "웃음으로 고난을 이긴다"
+   ],
+   "answer": 0,
+   "explanation": "정직했던 복녀가 빈민굴이라는 환경 속에서 변해 간다는 자연주의 시선을 예고해요."
+  }
+ ],
+ "real_life": [
+  {
+   "type": "tip",
+   "title": "🏚️ 자연주의 — 환경이 인물을 바꾼다",
+   "content_ko": "《감자》는 '환경이 사람을 결정한다'는 자연주의 시선을 보여 주는 작품이에요. 정직한 농가에서 규칙 있게 자란 복녀가, 온갖 비극이 들끓는 빈민굴로 오면서 서서히 변해 가지요. 도입부에서 '싸움·간통·살인…' 같은 명사를 강하게 나열해 환경의 참혹함을 먼저 보여 주는 것도 이 주제를 부각하는 장치예요."
+  },
+  {
+   "type": "reading",
+   "title": "🧠 주제·내용 읽기 — 《감자》",
+   "passage": "싸움, 간통, 살인, 도둑, 구걸, 징역, 이 세상의 온갖 비극의 근원지인 칠성문 밖 빈민굴로 오기 전까지, 복녀의 부부는 농민이었다. 복녀는 원래 가난은 하나마 정직한 농가에서 규칙 있게 자라난 처녀였다.",
+   "id": "rl_gamja",
+   "questions": [
+    {
+     "question_ko": "빈민굴로 오기 전, 복녀는 원래 어떤 사람이었나?",
+     "question_en": "What was Bongnyeo like before the slum?",
+     "options": [
+      "정직한 농가에서 규칙 있게 자란 처녀",
+      "부잣집 딸",
+      "도시의 상인",
+      "게으른 사람"
+     ],
+     "answer": 0,
+     "explanation": "가난했지만 정직한 농가에서 규칙 있게 자란 처녀였어요."
+    },
+    {
+     "question_ko": "도입부에서 명사를 잔뜩 나열한 효과로 알맞은 것은?",
+     "question_en": "What is the effect of listing many nouns at the start?",
+     "options": [
+      "환경의 참혹함을 강렬하게 각인시킨다",
+      "밝고 평화로운 분위기를 만든다",
+      "인물의 외모를 자세히 묘사한다",
+      "시간의 흐름을 보여 준다"
+     ],
+     "answer": 0,
+     "explanation": "싸움·살인·도둑 등 부정적 명사의 나열로 빈민굴의 참혹함을 강하게 드러내요."
+    },
+    {
+     "question_ko": "이 글에서 짐작할 수 있는 앞으로의 전개는?",
+     "question_en": "What does the opening foreshadow?",
+     "options": [
+      "환경 때문에 복녀가 변해 갈 것이다",
+      "복녀가 큰 부자가 될 것이다",
+      "복녀가 고향으로 돌아갈 것이다",
+      "아무 일도 일어나지 않을 것이다"
+     ],
+     "answer": 0,
+     "explanation": "정직했던 복녀가 빈민굴이라는 환경 속에서 변해 갈 것을 예고해요(자연주의)."
+    }
+   ]
+  },
+  {
+   "type": "writing_guided",
+   "title": "✍️ 쓰기 — 환경이 사람에게 미치는 영향",
+   "prompt_ko": "'환경이 사람에게 큰 영향을 준다'는 생각에 대해, 자신의 경험이나 예를 들어 3~4문장으로 써 보세요. 격식체(-다)로 맺으세요.",
+   "model": "사람은 자신을 둘러싼 환경에 크게 영향을 받는다. 나는 조용한 도서관에서 공부할 때 훨씬 집중이 잘된다. 반대로 시끄럽고 어수선한 곳에서는 같은 시간에도 능률이 떨어진다. 결국 좋은 습관을 위해서는 좋은 환경을 먼저 만드는 것이 중요하다.",
+   "rubric": [
+    "환경의 영향이라는 주제가 분명한가?",
+    "구체적 예나 경험을 들었는가?",
+    "격식체(-다/-ㄴ다)로 맺었는가?"
+   ]
+  }
+ ]
 }
