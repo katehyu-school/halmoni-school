@@ -11980,6 +11980,45 @@ const KIDS_WU_POOL = {
     {unit:6, q:'"못 먹어요" means...', choices:['can\'t eat','don\'t eat','didn\'t eat','want to eat'], ans:0},
     {unit:6, q:'"먹으면 안 돼요" means...', choices:['You must not eat it.','You should eat it.','Can you eat it?','I want to eat it.'], ans:0},
     {unit:6, q:'"계란" means...', choices:['Egg 🥚','Milk','Meat','Fish'], ans:0},
+  ],
+  // Level 4 — unit별 3문제씩
+  L4: [
+    // unit01 — 지금 뭐 하고 있어요? (-고 있어요/계세요)
+    {unit:1, q:'"밥을 먹고 있어요" means...', choices:['I am eating (right now)','I ate','I will eat','I want to eat'], ans:0},
+    {unit:1, q:'"-고 계세요" is the ___ form of "-고 있어요".', choices:['honorific','past','future','negative'], ans:0},
+    {unit:1, q:'"지금" means...', choices:['now','later','yesterday','tomorrow'], ans:0},
+    // unit02 — 산책하러 갈까? (-(으)러 가다, (으)로, -ㄹ게요)
+    {unit:2, q:'"산책하러 가요" — -(으)러 means...', choices:['in order to (purpose)','because','but','after'], ans:0},
+    {unit:2, q:'"버스로 가요" — (으)로 here means...', choices:['by (means/method)','to (a place)','from','together'], ans:0},
+    {unit:2, q:'"산책" means...', choices:['a walk','a run','a nap','a meal'], ans:0},
+    // unit03 — 같이 해 봐요 (-아/어 보다, 만, 의)
+    {unit:3, q:'"먹어 봐요" means...', choices:['try eating (give it a go)','must eat','cannot eat','already ate'], ans:0},
+    {unit:3, q:'"나만" — 만 means...', choices:['only','also','and','but'], ans:0},
+    {unit:3, q:'"친구의 책" — 의 shows...', choices:['possession (friend\'s)','a place','a time','a direction'], ans:0},
+    // unit04 — 그래서 어떻게 됐어요? (연결어, -고 있었어요)
+    {unit:4, q:'"그래서" connects sentences meaning...', choices:['so / therefore','but','or','before'], ans:0},
+    {unit:4, q:'"비가 왔지만 갔어요" — -지만 means...', choices:['but / although','so','because','and then'], ans:0},
+    {unit:4, q:'"자고 있었어요" means...', choices:['was sleeping','am sleeping','will sleep','slept once'], ans:0},
+    // unit05 — 제가 따 올게요! (-(으)ㄹ게요, 과일)
+    {unit:5, q:'"제가 할게요" — -(으)ㄹ게요 expresses...', choices:['I will (a promise/intention)','I did it','please do it','I am doing it'], ans:0},
+    {unit:5, q:'"덜 익은 과일" means...', choices:['unripe fruit','rotten fruit','sweet fruit','dried fruit'], ans:0},
+    {unit:5, q:'"신 과일" — 시다 means...', choices:['sour','sweet','salty','spicy'], ans:0},
+    // unit06 — 할아버지 안녕하세요? (-(으)시- 높임, 인사)
+    {unit:6, q:'"안녕히 계세요" is said to someone who...', choices:['stays (you are leaving)','is leaving (you stay)','just arrived','is eating'], ans:0},
+    {unit:6, q:'"앉으세요" — -(으)세요 is used to...', choices:['politely ask someone to do something','say I did it','ask a yes/no question','make it past tense'], ans:0},
+    {unit:6, q:'"할아버지" means...', choices:['grandfather','grandmother','uncle','father'], ans:0},
+    // unit07 — 엄마 생신 축하합니다! (-아/어 드리다, 날짜)
+    {unit:7, q:'"도와 드려요" — -아/어 드리다 is the ___ form of -아/어 주다.', choices:['humble (honorific)','past','casual','negative'], ans:0},
+    {unit:7, q:'"생신" is the honorific word for...', choices:['birthday','name','age','house'], ans:0},
+    {unit:7, q:'"시월" is which month?', choices:['October','September','November','December'], ans:0},
+    // unit08 — 무서울 것 같아요 (-(으)ㄹ/ㄴ 것 같아요)
+    {unit:8, q:'"비가 올 것 같아요" means...', choices:['It looks like it will rain (a guess)','It rained','It is raining now','It will not rain'], ans:0},
+    {unit:8, q:'"-(으)ㄹ 것 같아요" is used to...', choices:['guess about the future','state a sure fact','give a command','ask permission'], ans:0},
+    {unit:8, q:'"무서워요" means...', choices:['It is scary','It is funny','It is pretty','It is boring'], ans:0},
+    // unit09 — 이 꽃의 꽃말은? (-(으)ㄴ/는 + 명사)
+    {unit:9, q:'"예쁜 꽃" — -(으)ㄴ makes an adjective into a...', choices:['modifier before a noun','a verb','a question','a past tense'], ans:0},
+    {unit:9, q:'"먹는 사람" — -는 + noun describes...', choices:['a present action (the eating person)','a past action','a future plan','a command'], ans:0},
+    {unit:9, q:'"꽃말" means...', choices:['the meaning of a flower','a flower shop','a flower pot','a flower seed'], ans:0},
   ]
 };
 
@@ -11989,7 +12028,7 @@ let _kwuCallback=null;
 function _kidsShowWarmup(book, unit, callback){
   _kwuBook=book; _kwuUnit=unit; _kwuCallback=callback;
   _kwuIdx=0; _kwuScore=0; _kwuChosen=null;
-  const pool = (book===3 ? KIDS_WU_POOL.L3 : KIDS_WU_POOL.L2).filter(q=>q.unit<unit);
+  const pool = (KIDS_WU_POOL['L'+book] || KIDS_WU_POOL.L2).filter(q=>q.unit<unit);
   if(pool.length<3){ callback(); return; }
   // pick 3 random
   const shuffled=pool.slice().sort(()=>Math.random()-.5);
@@ -12007,7 +12046,7 @@ function _kidsShowWarmup(book, unit, callback){
     '<div style="background:#fff;border-radius:20px;padding:28px 24px;width:100%;max-width:480px;box-shadow:0 8px 40px rgba(0,0,0,.25);font-family:Jua,sans-serif;">'
     +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">'
     +'<div><div style="font-size:22px;font-weight:900;color:#2a9d8f;">🔥 빠른 복습</div>'
-    +'<div style="font-size:12px;color:#aaa;margin-top:2px;">Quick Review · Book '+(book===3?'3 Level 3':'2 Level 2')+' · '+unit+'과 전</div></div>'
+    +'<div style="font-size:12px;color:#aaa;margin-top:2px;">Quick Review · Level '+book+' · '+unit+'과 전</div></div>'
     +'<button onclick="_kwuSkip()" style="background:none;border:1.5px solid #ddd;border-radius:20px;padding:5px 14px;font-size:12px;color:#aaa;cursor:pointer;font-family:Jua,sans-serif;">SKIP ›</button>'
     +'</div>'
     +'<div id="kwu-dots" style="display:flex;gap:8px;margin-bottom:22px;"></div>'
