@@ -1,0 +1,106 @@
+{
+  "id": "ep02",
+  "level": "L6",
+  "title": "인천 구도심 재개발 전면 재검토",
+  "title_en": "Incheon Old-Town Redevelopment Under Full Review",
+  "scene": "📺 시사·도시 뉴스 · City News",
+  "goal": { "en": "Listen to a formal TV news report and check comprehension" },
+  "video": "data/nhs/L6/videos/ep02.mp4",
+  "characters": [
+    { "id": "anchor", "name": "앵커 · News Anchor", "emoji": "📺", "color": "#8e44ad" }
+  ],
+  "script": [
+    { "speaker": "anchor", "text": "오래된 주택이 많은 인천 일부 지역의 재개발 계획이 다시 논의되고 있습니다.", "en": "The redevelopment plan for parts of Incheon with many old houses is being discussed again." },
+    { "speaker": "anchor", "text": "사업성 악화, 공사비 상승, 그리고 높은 추가분담금으로 인해 주민 의견이 갈리자, 인천시는 계획을 전면적으로 재검토하기로 했습니다.", "en": "As residents' opinions split due to worsening viability, rising construction costs, and high extra charges, the city decided to review the plan entirely." },
+    { "speaker": "anchor", "text": "한편, 공사 현장에서는 노후 주택의 장기 방치로 인해 뜻밖에 사고가 나기도 해,", "en": "Meanwhile, at construction sites, unexpected accidents have occurred due to long-neglected old houses," },
+    { "speaker": "anchor", "text": "전문가들은 안전 수칙을 반드시 지켜야 한다고 강조하고 있습니다.", "en": "and experts are emphasizing that safety rules must absolutely be followed." }
+  ],
+  "vocab": [
+    {
+      "category": "📺 도시·시사 뉴스 어휘 · City News Vocabulary",
+      "items": [
+        { "korean": "재개발", "romanization": "jaegaebal", "english": "redevelopment", "emoji": "🏗️" },
+        { "korean": "재검토", "romanization": "jaegeomto", "english": "review, reexamination", "emoji": "🔍" },
+        { "korean": "전면적", "romanization": "jeonmyeonjeok", "english": "full-scale, across-the-board", "emoji": "🔄" },
+        { "korean": "사업성", "romanization": "saeopseong", "english": "business viability", "emoji": "📊" },
+        { "korean": "악화", "romanization": "akhwa", "english": "worsening, deterioration", "emoji": "📉" },
+        { "korean": "공사비", "romanization": "gongsabi", "english": "construction cost", "emoji": "💰" },
+        { "korean": "추가분담금", "romanization": "chuga-bundamgeum", "english": "additional cost-sharing charge", "emoji": "🧾" },
+        { "korean": "노후 주택", "romanization": "nohu jutaek", "english": "old/aged housing", "emoji": "🏚️" },
+        { "korean": "장기 방치", "romanization": "janggi bangchi", "english": "long-term neglect", "emoji": "⏳" },
+        { "korean": "뜻밖에", "romanization": "tteutbakke", "english": "unexpectedly", "emoji": "❗" },
+        { "korean": "안전 수칙", "romanization": "anjeon suchik", "english": "safety rules", "emoji": "🦺" },
+        { "korean": "강조하다", "romanization": "gangjohada", "english": "to emphasize", "emoji": "📢" }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "g01_dago_gangjo",
+      "tier": "core",
+      "title": "-ㄴ다고/-다고 + 강조하다 (간접인용 + 전달)",
+      "title_en": "Indirect quotation + verbs of assertion",
+      "emoji": "📢",
+      "explanation_en": "News reports what people said using indirect quotation (-ㄴ다고/는다고 for verbs, -다고 for adjectives/이다, -았/었다고 for past) attached to a reporting verb like 강조하다(emphasize), 주장하다(argue), 밝히다(state), 전하다(report).",
+      "pattern": "Verb + -ㄴ다고/는다고 · Adj·이다 + -다고 · + 강조하다/주장하다/밝히다",
+      "scene_example": { "korean": "전문가들은 안전 수칙을 지켜야 한다고 강조하고 있습니다.", "english": "Experts are emphasizing that safety rules must be followed.", "highlight": "한다고 강조하고" },
+      "rule_boxes": [
+        { "color": "blue", "title": "간접인용 만들기", "content": "동사 → -ㄴ다고/는다고: 지킨다고, 먹는다고\n형용사·이다 → -다고: 중요하다고, 원인이라고\n과거 → -았/었다고: 발표했다고" },
+        { "color": "green", "title": "전달·강조 동사 결합", "content": "강조하다 · 주장하다 · 밝히다 · 경고하다 · 전하다\n예) 시는 재검토한다고 밝혔다." },
+        { "color": "amber", "title": "뉴스 문체", "content": "기사에서는 '-다고 강조했다 / 밝혔다 / 전했다'가 매우 자주 나와요. 인용 내용은 격식체로." }
+      ],
+      "examples": [
+        { "ko": "인천시는 계획을 재검토한다고 밝혔다.", "en": "The city stated it would review the plan." },
+        { "ko": "주민들은 분담금이 너무 높다고 주장했다.", "en": "Residents argued the charge is too high." },
+        { "ko": "전문가들은 사고 위험이 크다고 경고했다.", "en": "Experts warned that the accident risk is high." }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "title": "뉴스 전달 동사, 골라 쓰기",
+      "title_en": "Choosing reporting verbs in the news",
+      "explanation_en": "The same indirect quotation can take different reporting verbs depending on nuance: 밝히다 (state officially), 강조하다 (stress), 주장하다 (claim/argue), 경고하다 (warn).",
+      "examples": [
+        { "ko": "시는 사업을 중단한다고 밝혔다. (공식 발표)", "en": "The city stated it will halt the project. (official)" },
+        { "ko": "주민들은 보상이 부족하다고 주장했다. (주장)", "en": "Residents claimed compensation is insufficient. (claim)" },
+        { "ko": "전문가는 위험하다고 경고했다. (경고)", "en": "The expert warned it is dangerous. (warning)" }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "q02l6_1", "question_ko": "'재검토'의 뜻으로 알맞은 것은?", "question_en": "What does 재검토 mean?", "options": ["review / reexamination", "redevelopment", "construction cost", "safety rule"], "answer": 0, "explanation": "재(again)+검토(examine) = 다시 살펴봄 (review)." },
+    { "id": "q02l6_2", "question_ko": "'뜻밖에'의 뜻으로 알맞은 것은?", "question_en": "What does 뜻밖에 mean?", "options": ["unexpectedly", "on purpose", "gradually", "fortunately"], "answer": 0, "explanation": "뜻밖에 = 예상하지 못하게 (unexpectedly)." },
+    { "id": "q02l6_3", "question_ko": "간접인용 + 강조를 바르게 만든 것은?", "question_en": "Which correctly forms indirect quotation + emphasis?", "options": ["안전 수칙을 지켜야 한다고 강조했다.", "안전 수칙을 지켜야 해요고 강조했다.", "안전 수칙을 지켜야 한다 강조했다.", "안전 수칙을 지켜야 한대고 강조했다."], "answer": 0, "explanation": "동사는 -ㄴ다고(지킨다고/지켜야 한다고) + 강조했다." },
+    { "id": "q02l6_4", "audio_text": "인천시는 재개발 계획을 전면적으로 재검토하기로 했습니다.", "question_ko": "🔊 음성을 듣고 내용과 맞는 것을 고르세요.", "question_en": "Listen and choose the correct statement.", "options": ["인천시가 재개발 계획을 전면 재검토한다.", "재개발이 예정대로 시작된다.", "주민들이 재개발에 모두 찬성했다.", "공사비가 크게 내려갔다."], "answer": 0, "explanation": "인천시는 계획을 전면적으로 재검토하기로 했다고 했어요." }
+  ],
+  "real_life": [
+    {
+      "type": "tip",
+      "title": "📺 뉴스 듣기 요령",
+      "content_ko": "뉴스는 '누가·무엇을·왜·어떻게'를 빠르게 짚어요. 고유명사(인천시), 숫자, 그리고 '-다고 밝혔다/강조했다' 같은 전달 표현에 귀를 기울이면 핵심이 잡혀요. 먼저 영상만 듣고, 그다음 대본을 펼쳐 확인해 보세요."
+    },
+    {
+      "type": "reading",
+      "title": "📰 뉴스 원고 — 읽고 확인하기",
+      "passage": "오래된 주택이 많은 인천 일부 지역의 재개발 계획이 다시 논의되고 있다. 사업성 악화, 공사비 상승, 높은 추가분담금으로 주민 의견이 갈리자 인천시는 계획을 전면적으로 재검토하기로 했다. 한편 공사 현장에서는 노후 주택의 장기 방치로 뜻밖에 사고가 나기도 해, 전문가들은 안전 수칙을 반드시 지켜야 한다고 강조했다.",
+      "id": "rl_news_redev",
+      "questions": [
+        { "question_ko": "인천시가 재개발 계획을 재검토하기로 한 이유가 아닌 것은?", "question_en": "Which is NOT a reason the city decided to review the plan?", "options": ["관광객 감소", "사업성 악화", "공사비 상승", "높은 추가분담금"], "answer": 0, "explanation": "관광객은 언급되지 않았어요. 사업성 악화·공사비 상승·추가분담금이 이유예요." },
+        { "question_ko": "공사 현장에서 사고가 난 원인으로 제시된 것은?", "question_en": "What caused accidents at the construction site?", "options": ["노후 주택의 장기 방치", "새 장비 도입", "주민들의 항의", "폭우"], "answer": 0, "explanation": "노후 주택을 오래 방치해서 뜻밖에 사고가 났다고 했어요." },
+        { "question_ko": "전문가들이 강조한 것은?", "question_en": "What did experts emphasize?", "options": ["안전 수칙을 반드시 지킬 것", "재개발을 빨리 끝낼 것", "분담금을 올릴 것", "주택을 모두 철거할 것"], "answer": 0, "explanation": "안전 수칙을 반드시 지켜야 한다고 강조했어요." }
+      ]
+    },
+    {
+      "type": "writing_guided",
+      "title": "✍️ 쓰기 — 뉴스 한 문장 요약 (격식체)",
+      "prompt_ko": "위 뉴스를 '누가 + 무엇을 + 어떻게 했다' 형태의 한 문장으로 요약해 보세요. 격식체 종결어미(-다/-았다)로 맺으세요.",
+      "model": "인천시는 사업성 악화와 공사비 상승 등으로 구도심 재개발 계획을 전면적으로 재검토하기로 했다.",
+      "rubric": [
+        "핵심 주체(인천시)와 행동(재검토)이 드러났는가?",
+        "이유가 간단히 포함되었는가?",
+        "격식체(-다/-았다)로 맺었는가?"
+      ]
+    }
+  ]
+}
