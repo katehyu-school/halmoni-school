@@ -784,11 +784,7 @@ function fillAllPanels(){
 
 function showTab(name){
   curTab=name;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const baseTabs=['script','vocab','grammar','pron','banmal','usage','quiz','reallife'];
-  const tabs=DATA.self_check&&DATA.self_check.length?[...baseTabs,'selfcheck']:[...baseTabs];
-  const idx=tabs.indexOf(name);
-  if(idx>=0)document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.getAttribute('onclick')==="showTab('"+name+"')"));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   const p=document.getElementById('panel-'+name);
   if(p)p.classList.add('active');
