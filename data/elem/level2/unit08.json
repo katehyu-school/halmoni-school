@@ -145,6 +145,68 @@
           "example_en": "ten sheets of paper",
           "emoji": "📄"
         }
+      ],
+      "items": [
+        {
+          "korean": "살",
+          "english": "counter: age (years old)",
+          "romanization": "sal",
+          "emoji": "🎂"
+        },
+        {
+          "korean": "사람",
+          "english": "counter: people",
+          "romanization": "sa-ram",
+          "emoji": "👫"
+        },
+        {
+          "korean": "마리",
+          "english": "counter: animals",
+          "romanization": "ma-ri",
+          "emoji": "🐻"
+        },
+        {
+          "korean": "개",
+          "english": "counter: things / objects",
+          "romanization": "gae",
+          "emoji": "🍎"
+        },
+        {
+          "korean": "대",
+          "english": "counter: vehicles / machines",
+          "romanization": "dae",
+          "emoji": "🚗"
+        },
+        {
+          "korean": "잔",
+          "english": "counter: cups / glasses",
+          "romanization": "jan",
+          "emoji": "🥛"
+        },
+        {
+          "korean": "송이",
+          "english": "counter: flowers",
+          "romanization": "song-i",
+          "emoji": "🌹"
+        },
+        {
+          "korean": "명",
+          "english": "counter: people (formal)",
+          "romanization": "myeong",
+          "emoji": "🧑‍🎓"
+        },
+        {
+          "korean": "권",
+          "english": "counter: books",
+          "romanization": "gwon",
+          "emoji": "📚"
+        },
+        {
+          "korean": "장",
+          "english": "counter: sheets (paper)",
+          "romanization": "jang",
+          "emoji": "📄"
+        }
       ]
     },
     "grammar": {
@@ -156,9 +218,21 @@
           "pattern": "명사 + 숫자(관형형) + 단위명사",
           "description": "Korean uses special counting words depending on what you're counting. Numbers 1–4 change form before a counter!",
           "examples": [
-            {"korean": "사과 네 개 주세요.", "english": "Please give me four apples.", "highlight": "네 개"},
-            {"korean": "곰 세 마리예요.", "english": "There are three bears.", "highlight": "세 마리"},
-            {"korean": "우유 여섯 잔이에요.", "english": "It's six glasses of milk.", "highlight": "여섯 잔"}
+            {
+              "korean": "사과 네 개 주세요.",
+              "english": "Please give me four apples.",
+              "highlight": "네 개"
+            },
+            {
+              "korean": "곰 세 마리예요.",
+              "english": "There are three bears.",
+              "highlight": "세 마리"
+            },
+            {
+              "korean": "우유 여섯 잔이에요.",
+              "english": "It's six glasses of milk.",
+              "highlight": "여섯 잔"
+            }
           ],
           "rule_boxes": [
             {
@@ -199,37 +273,79 @@
         {
           "audio": "한 살",
           "answer": "살",
-          "choices": ["살", "사람", "마리", "개", "대"]
+          "choices": [
+            "살",
+            "사람",
+            "마리",
+            "개",
+            "대"
+          ]
         },
         {
           "audio": "두 사람",
           "answer": "사람",
-          "choices": ["사람", "살", "마리", "잔", "송이"]
+          "choices": [
+            "사람",
+            "살",
+            "마리",
+            "잔",
+            "송이"
+          ]
         },
         {
           "audio": "세 마리",
           "answer": "마리",
-          "choices": ["마리", "개", "사람", "살", "대"]
+          "choices": [
+            "마리",
+            "개",
+            "사람",
+            "살",
+            "대"
+          ]
         },
         {
           "audio": "네 개",
           "answer": "개",
-          "choices": ["개", "마리", "잔", "송이", "사람"]
+          "choices": [
+            "개",
+            "마리",
+            "잔",
+            "송이",
+            "사람"
+          ]
         },
         {
           "audio": "다섯 대",
           "answer": "대",
-          "choices": ["대", "개", "잔", "마리", "살"]
+          "choices": [
+            "대",
+            "개",
+            "잔",
+            "마리",
+            "살"
+          ]
         },
         {
           "audio": "여섯 잔",
           "answer": "잔",
-          "choices": ["잔", "대", "개", "송이", "사람"]
+          "choices": [
+            "잔",
+            "대",
+            "개",
+            "송이",
+            "사람"
+          ]
         },
         {
           "audio": "일곱 송이",
           "answer": "송이",
-          "choices": ["송이", "잔", "마리", "개", "살"]
+          "choices": [
+            "송이",
+            "잔",
+            "마리",
+            "개",
+            "살"
+          ]
         }
       ],
       "batchim_game": [
@@ -237,80 +353,184 @@
           "word": "살",
           "emoji": "🎂",
           "base": "사",
-          "steps": ["ㄹ"],
-          "distractors": ["ㄴ", "ㄷ", "ㅅ", "ㅂ", "ㅈ"]
+          "steps": [
+            "ㄹ"
+          ],
+          "distractors": [
+            "ㄴ",
+            "ㄷ",
+            "ㅅ",
+            "ㅂ",
+            "ㅈ"
+          ]
         },
         {
           "word": "잔",
           "emoji": "🥛",
           "base": "자",
-          "steps": ["ㄴ"],
-          "distractors": ["ㄱ", "ㄷ", "ㄹ", "ㅂ", "ㅅ"]
+          "steps": [
+            "ㄴ"
+          ],
+          "distractors": [
+            "ㄱ",
+            "ㄷ",
+            "ㄹ",
+            "ㅂ",
+            "ㅅ"
+          ]
         },
         {
           "word": "곰",
           "emoji": "🐻",
           "base": "고",
-          "steps": ["ㅁ"],
-          "distractors": ["ㄴ", "ㄷ", "ㄹ", "ㅅ", "ㅂ"]
+          "steps": [
+            "ㅁ"
+          ],
+          "distractors": [
+            "ㄴ",
+            "ㄷ",
+            "ㄹ",
+            "ㅅ",
+            "ㅂ"
+          ]
         },
         {
           "word": "한",
           "emoji": "1️⃣",
           "base": "하",
-          "steps": ["ㄴ"],
-          "distractors": ["ㄱ", "ㄷ", "ㄹ", "ㅂ", "ㅅ"]
+          "steps": [
+            "ㄴ"
+          ],
+          "distractors": [
+            "ㄱ",
+            "ㄷ",
+            "ㄹ",
+            "ㅂ",
+            "ㅅ"
+          ]
         },
         {
           "word": "일곱",
           "emoji": "🌹",
           "base": "일고",
-          "steps": ["ㅂ"],
-          "distractors": ["ㄱ", "ㄴ", "ㄷ", "ㅍ", "ㅅ"]
+          "steps": [
+            "ㅂ"
+          ],
+          "distractors": [
+            "ㄱ",
+            "ㄴ",
+            "ㄷ",
+            "ㅍ",
+            "ㅅ"
+          ]
         },
         {
           "word": "사람",
           "emoji": "👫",
           "base": "사라",
-          "steps": ["ㅁ"],
-          "distractors": ["ㄴ", "ㄷ", "ㄹ", "ㅅ", "ㅂ"]
+          "steps": [
+            "ㅁ"
+          ],
+          "distractors": [
+            "ㄴ",
+            "ㄷ",
+            "ㄹ",
+            "ㅅ",
+            "ㅂ"
+          ]
         }
       ],
       "sort_game": [
         {
           "id": 0,
-          "answer": ["나이", "한", "살"],
-          "distractors": ["두", "마리", "개"]
+          "answer": [
+            "나이",
+            "한",
+            "살"
+          ],
+          "distractors": [
+            "두",
+            "마리",
+            "개"
+          ]
         },
         {
           "id": 1,
-          "answer": ["우리", "두", "사람"],
-          "distractors": ["세", "살", "잔"]
+          "answer": [
+            "우리",
+            "두",
+            "사람"
+          ],
+          "distractors": [
+            "세",
+            "살",
+            "잔"
+          ]
         },
         {
           "id": 2,
-          "answer": ["곰", "세", "마리"],
-          "distractors": ["네", "개", "잔"]
+          "answer": [
+            "곰",
+            "세",
+            "마리"
+          ],
+          "distractors": [
+            "네",
+            "개",
+            "잔"
+          ]
         },
         {
           "id": 3,
-          "answer": ["사과", "네", "개"],
-          "distractors": ["다섯", "대", "마리"]
+          "answer": [
+            "사과",
+            "네",
+            "개"
+          ],
+          "distractors": [
+            "다섯",
+            "대",
+            "마리"
+          ]
         },
         {
           "id": 4,
-          "answer": ["자동차", "다섯", "대"],
-          "distractors": ["여섯", "잔", "개"]
+          "answer": [
+            "자동차",
+            "다섯",
+            "대"
+          ],
+          "distractors": [
+            "여섯",
+            "잔",
+            "개"
+          ]
         },
         {
           "id": 5,
-          "answer": ["우유", "여섯", "잔"],
-          "distractors": ["일곱", "송이", "대"]
+          "answer": [
+            "우유",
+            "여섯",
+            "잔"
+          ],
+          "distractors": [
+            "일곱",
+            "송이",
+            "대"
+          ]
         },
         {
           "id": 6,
-          "answer": ["장미", "일곱", "송이"],
-          "distractors": ["여섯", "잔", "마리"]
+          "answer": [
+            "장미",
+            "일곱",
+            "송이"
+          ],
+          "distractors": [
+            "여섯",
+            "잔",
+            "마리"
+          ]
         }
       ]
     }
