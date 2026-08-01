@@ -125,7 +125,7 @@ function buildSidebar(lv){
   const _done=_epDoneSet();
   const mkItem=(ep,i,level)=>ep.disabled
     ?`<div class="ep-item" style="cursor:default"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}${ep.locked?' 🔒':''}</div></div>`
-    :`<div class="ep-item" id="ep-item-${level}-${ep.id}" data-epkey="${level}_${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.label}${ep.tag?` <span class="ep-genre-tag-sm">${esc(ep.tag)}</span>`:''}</div><span class="ep-done" style="opacity:${_done.has(level+'_'+ep.id)?1:0}">✅</span></div>`;
+    :`<div class="ep-item" id="ep-item-${level}-${ep.id}" data-epkey="${level}_${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.tag?`<span class="ep-genre-tag-sm">${esc(ep.tag)}</span>`:''}${ep.label}</div><span class="ep-done" style="opacity:${_done.has(level+'_'+ep.id)?1:0}">✅</span></div>`;
   const trialLock=(list)=>NHS_IS_TRIAL?list.map(ep=>NHS_TRIAL_EPS.includes(ep.id)?ep:{...ep,disabled:true,locked:true}):list;
   let html='';
   if(lv==='L1'){
