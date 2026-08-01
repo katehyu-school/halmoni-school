@@ -155,16 +155,42 @@ function buildSidebar(lv){
 // ══════════════════════════════════════════════════════
 // ── LEVEL 1 TEST ───────────────────────────────────────
 // ══════════════════════════════════════════════════════
+
+// ── 마감/배치 테스트 오답 복습 링크 ─────────────────────
+function _ctTypeLabel(ep){
+  if(/^ep\d{2}$/.test(ep||''))return '';
+  if((ep||'').startsWith('read'))return '읽기 지문';
+  if((ep||'').startsWith('blank'))return '빈칸 채우기';
+  if((ep||'').startsWith('sim'))return '심정 추론';
+  if((ep||'').startsWith('order'))return '문장 순서 배열';
+  return 'TOPIK 유형';
+}
+function _ctWrongHtml(wrong,level){
+  if(!wrong||!wrong.length)
+    return `<div style="background:var(--teal-50);border-radius:10px;padding:11px 14px;margin:4px 0 16px;font-size:12.5px;color:var(--teal-dark);font-weight:700">🎉 틀린 문제가 하나도 없어요!</div>`;
+  const items=wrong.map(w=>{
+    const isEp=/^ep\d{2}$/.test(w.ep||'');
+    const q=(w.q||'').replace(/\n/g,' ').replace(/<[^>]+>/g,'').slice(0,46);
+    return isEp
+      ? `<div class="ct-wrong-item" onclick="loadEp('${w.ep}','${level}')"><span class="ct-wrong-ep">${(w.ep||'').toUpperCase()}</span><span class="ct-wrong-q">${esc(q)}…</span><span class="ct-wrong-go">복습하러 가기 →</span></div>`
+      : `<div class="ct-wrong-item ct-wrong-noep"><span class="ct-wrong-ep">${esc(_ctTypeLabel(w.ep))}</span><span class="ct-wrong-q">${esc(q)}…</span></div>`;
+  }).join('');
+  return `<div style="text-align:left;margin:8px 0 18px">`
+    +`<div style="font-size:12.5px;font-weight:800;color:var(--warm-700);margin-bottom:8px">📌 틀린 문제 ${wrong.length}개 — 눌러서 그 편으로 바로 가기</div>`
+    +items+`</div>`;
+}
+
 let L1Q=[]; const _l1qReady = fetch('data/nhs/L1/closing_test.json').then(r=>r.json()).then(d=>{L1Q=d;}).catch(e=>{});
 
 let ltIdx=0,ltScore=0,ltAnswered=false;
+let ltWrong=[];
 
 async function loadLevelTest(){
   await _l1qReady;
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
   const si=document.getElementById('lt-sidebar-item');
   if(si)si.classList.add('active');
-  ltIdx=0;ltScore=0;ltAnswered=false;
+  ltIdx=0;ltScore=0;ltAnswered=false;ltWrong=[];
   document.getElementById('content-area').innerHTML=renderLTPage();
   renderLT();
 }
@@ -208,6 +234,7 @@ function ltChoose(idx){
   const q=L1Q[ltIdx];
   const correct=q.ans===idx;
   if(correct)ltScore++;
+  else ltWrong.push({ep:q.ep,q:q.q});
   q.opts.forEach((_,i)=>{
     const el=document.getElementById('lt-opt-'+i);
     if(!el)return;
@@ -250,11 +277,12 @@ function renderLTScore(){
       +`<div class="lt-score-box"><div class="lt-score-box-num">${total-ltScore}</div><div class="lt-score-box-lbl">오답</div></div>`
     +`</div>`
     +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +_ctWrongHtml(ltWrong,'L1')
     +`<button class="lt-retry-btn" onclick="ltRetry()">↺ 다시 풀기</button>`
     +`</div>`;
 }
 function ltRetry(){
-  ltIdx=0;ltScore=0;ltAnswered=false;
+  ltIdx=0;ltScore=0;ltAnswered=false;ltWrong=[];
   document.getElementById('content-area').innerHTML=renderLTPage();
   renderLT();
 }
@@ -266,13 +294,14 @@ function ltRetry(){
 let L2Q=[]; const _l2qReady = fetch('data/nhs/L2/closing_test.json').then(r=>r.json()).then(d=>{L2Q=d;}).catch(e=>{});
 
 let l2tIdx=0,l2tScore=0,l2tAnswered=false;
+let l2tWrong=[];
 
 async function loadL2Test(){
   await _l2qReady;
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
   const si=document.getElementById('l2t-sidebar-item');
   if(si)si.classList.add('active');
-  l2tIdx=0;l2tScore=0;l2tAnswered=false;
+  l2tIdx=0;l2tScore=0;l2tAnswered=false;l2tWrong=[];
   document.getElementById('content-area').innerHTML=renderL2TPage();
   renderL2T();
 }
@@ -321,6 +350,7 @@ function l2tChoose(idx){
   const q=L2Q[l2tIdx];
   const correct=q.ans===idx;
   if(correct)l2tScore++;
+  else l2tWrong.push({ep:q.ep,q:q.q});
   q.opts.forEach((_,i)=>{
     const el=document.getElementById('l2t-opt-'+i);
     if(!el)return;
@@ -363,11 +393,12 @@ function renderL2TScore(){
       +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l2tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
     +`</div>`
     +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +_ctWrongHtml(l2tWrong,'L2')
     +`<button class="lt-retry-btn" onclick="l2tRetry()">↺ 다시 풀기</button>`
     +`</div>`;
 }
 function l2tRetry(){
-  l2tIdx=0;l2tScore=0;l2tAnswered=false;
+  l2tIdx=0;l2tScore=0;l2tAnswered=false;l2tWrong=[];
   document.getElementById('content-area').innerHTML=renderL2TPage();
   renderL2T();
 }
@@ -377,13 +408,14 @@ function l2tRetry(){
 let L3Q=[]; const _l3qReady = fetch('data/nhs/L3/closing_test.json').then(r=>r.json()).then(d=>{L3Q=d;}).catch(e=>{});
 
 let l3tIdx=0,l3tScore=0,l3tAnswered=false;
+let l3tWrong=[];
 
 async function loadL3Test(){
   await _l3qReady;
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
   const si=document.getElementById('l3t-sidebar-item');
   if(si)si.classList.add('active');
-  l3tIdx=0;l3tScore=0;l3tAnswered=false;
+  l3tIdx=0;l3tScore=0;l3tAnswered=false;l3tWrong=[];
   document.getElementById('content-area').innerHTML=renderL3TPage();
   renderL3T();
 }
@@ -432,6 +464,7 @@ function l3tChoose(idx){
   const q=L3Q[l3tIdx];
   const correct=q.ans===idx;
   if(correct)l3tScore++;
+  else l3tWrong.push({ep:q.ep,q:q.q});
   q.opts.forEach((_,i)=>{
     const el=document.getElementById('l3t-opt-'+i);
     if(!el)return;
@@ -474,11 +507,12 @@ function renderL3TScore(){
       +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l3tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
     +`</div>`
     +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +_ctWrongHtml(l3tWrong,'L3')
     +`<button class="lt-retry-btn" onclick="l3tRetry()">↺ 다시 풀기</button>`
     +`</div>`;
 }
 function l3tRetry(){
-  l3tIdx=0;l3tScore=0;l3tAnswered=false;
+  l3tIdx=0;l3tScore=0;l3tAnswered=false;l3tWrong=[];
   document.getElementById('content-area').innerHTML=renderL3TPage();
   renderL3T();
 }
@@ -489,13 +523,14 @@ function l3tRetry(){
 let L4Q=[]; const _l4qReady = fetch('data/nhs/L4/closing_test.json').then(r=>r.json()).then(d=>{L4Q=d;}).catch(e=>{});
 
 let l4tIdx=0,l4tScore=0,l4tAnswered=false;
+let l4tWrong=[];
 
 async function loadL4Test(){
   await _l4qReady;
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
   const si=document.getElementById('l4t-sidebar-item');
   if(si)si.classList.add('active');
-  l4tIdx=0;l4tScore=0;l4tAnswered=false;
+  l4tIdx=0;l4tScore=0;l4tAnswered=false;l4tWrong=[];
   document.getElementById('content-area').innerHTML=renderL4TPage();
   renderL4T();
 }
@@ -544,6 +579,7 @@ function l4tChoose(idx){
   const q=L4Q[l4tIdx];
   const correct=q.ans===idx;
   if(correct)l4tScore++;
+  else l4tWrong.push({ep:q.ep,q:q.q});
   q.opts.forEach((_,i)=>{
     const el=document.getElementById('l4t-opt-'+i);
     if(!el)return;
@@ -586,11 +622,12 @@ function renderL4TScore(){
       +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l4tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
     +`</div>`
     +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +_ctWrongHtml(l4tWrong,'L4')
     +`<button class="lt-retry-btn" onclick="l4tRetry()">↺ 다시 풀기</button>`
     +`</div>`;
 }
 function l4tRetry(){
-  l4tIdx=0;l4tScore=0;l4tAnswered=false;
+  l4tIdx=0;l4tScore=0;l4tAnswered=false;l4tWrong=[];
   document.getElementById('content-area').innerHTML=renderL4TPage();
   renderL4T();
 }
@@ -601,13 +638,14 @@ function l4tRetry(){
 let L5Q=[]; const _l5qReady = fetch('data/nhs/L5/closing_test.json').then(r=>r.json()).then(d=>{L5Q=d;}).catch(e=>{});
 
 let l5tIdx=0,l5tScore=0,l5tAnswered=false;
+let l5tWrong=[];
 
 async function loadL5Test(){
   await _l5qReady;
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
   const si=document.getElementById('l5t-sidebar-item');
   if(si)si.classList.add('active');
-  l5tIdx=0;l5tScore=0;l5tAnswered=false;
+  l5tIdx=0;l5tScore=0;l5tAnswered=false;l5tWrong=[];
   document.getElementById('content-area').innerHTML=renderL5TPage();
   renderL5T();
 }
@@ -656,6 +694,7 @@ function l5tChoose(idx){
   const q=L5Q[l5tIdx];
   const correct=q.ans===idx;
   if(correct)l5tScore++;
+  else l5tWrong.push({ep:q.ep,q:q.q});
   q.opts.forEach((_,i)=>{
     const el=document.getElementById('l5t-opt-'+i);
     if(!el)return;
@@ -698,11 +737,12 @@ function renderL5TScore(){
       +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l5tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
     +`</div>`
     +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +_ctWrongHtml(l5tWrong,'L5')
     +`<button class="lt-retry-btn" onclick="l5tRetry()">↺ 다시 풀기</button>`
     +`</div>`;
 }
 function l5tRetry(){
-  l5tIdx=0;l5tScore=0;l5tAnswered=false;
+  l5tIdx=0;l5tScore=0;l5tAnswered=false;l5tWrong=[];
   document.getElementById('content-area').innerHTML=renderL5TPage();
   renderL5T();
 }
@@ -713,13 +753,14 @@ function l5tRetry(){
 let L6Q=[]; const _l6qReady = fetch('data/nhs/L6/closing_test.json').then(r=>r.json()).then(d=>{L6Q=d;}).catch(e=>{});
 
 let l6tIdx=0,l6tScore=0,l6tAnswered=false;
+let l6tWrong=[];
 
 async function loadL6Test(){
   await _l6qReady;
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
   const si=document.getElementById('l6t-sidebar-item');
   if(si)si.classList.add('active');
-  l6tIdx=0;l6tScore=0;l6tAnswered=false;
+  l6tIdx=0;l6tScore=0;l6tAnswered=false;l6tWrong=[];
   document.getElementById('content-area').innerHTML=renderL6TPage();
   renderL6T();
 }
@@ -768,6 +809,7 @@ function l6tChoose(idx){
   const q=L6Q[l6tIdx];
   const correct=q.ans===idx;
   if(correct)l6tScore++;
+  else l6tWrong.push({ep:q.ep,q:q.q});
   q.opts.forEach((_,i)=>{
     const el=document.getElementById('l6t-opt-'+i);
     if(!el)return;
@@ -810,11 +852,12 @@ function renderL6TScore(){
       +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l6tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
     +`</div>`
     +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +_ctWrongHtml(l6tWrong,'L6')
     +`<button class="lt-retry-btn" onclick="l6tRetry()">↺ 다시 풀기</button>`
     +`</div>`;
 }
 function l6tRetry(){
-  l6tIdx=0;l6tScore=0;l6tAnswered=false;
+  l6tIdx=0;l6tScore=0;l6tAnswered=false;l6tWrong=[];
   document.getElementById('content-area').innerHTML=renderL6TPage();
   renderL6T();
 }
