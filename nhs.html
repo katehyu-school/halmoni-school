@@ -158,22 +158,33 @@ function buildSidebar(lv){
 // ══════════════════════════════════════════════════════
 
 
-// ── 🇬🇧 영어 병기 토글 (L5·L6는 기본 숨김 — 한국어 우선) ──
-function _enPref(){ try{return localStorage.getItem('nhs_en_pref');}catch(e){return null;} }
+// ── 🇬🇧 영어 병기 토글 ─────────────────────────────────
+//   기본값: L1~L4는 영어 함께 보기 / L5·L6는 한국어 우선(영어 접힘)
+//   버튼을 누르면 '그 레벨에 한해서만' 뒤집히고, 그 레벨을 다시 열 때 기억됩니다.
+let _enCurLv='L1';
+function _enPrefMap(){ try{return JSON.parse(localStorage.getItem('nhs_en_pref_by_level')||'{}');}catch(e){return {};} }
+function _enSavePref(lv,off){
+  try{ const m=_enPrefMap(); m[lv]=off?'off':'on'; localStorage.setItem('nhs_en_pref_by_level',JSON.stringify(m)); }catch(e){}
+}
+function _enDefaultFor(lv){ return lv==='L5'||lv==='L6'; }   // true = 한국어 우선
 function _enApply(off){
   document.body.classList.toggle('en-off',!!off);
   const b=document.getElementById('en-toggle-btn');
-  if(b){ b.textContent=off?'🇰🇷 KO':'🇬🇧 EN'; b.title=off?'지금은 한국어만 보고 있어요 — 누르면 영어 설명이 함께 나와요':'지금은 영어 설명이 함께 나와요 — 누르면 한국어만 남아요'; }
+  if(b){
+    b.textContent=off?'🇰🇷 KO':'🇬🇧 EN';
+    b.title=off?_enCurLv+': 한국어만 보고 있어요 — 누르면 이 레벨에서 영어가 함께 나와요'
+                :_enCurLv+': 영어가 함께 나와요 — 누르면 이 레벨에서 한국어만 남아요';
+  }
 }
 function nhsToggleEn(){
   const off=!document.body.classList.contains('en-off');
   _enApply(off);
-  try{localStorage.setItem('nhs_en_pref',off?'off':'on');}catch(e){}
+  _enSavePref(_enCurLv,off);
 }
 function _enAutoForLevel(lv){
-  const pref=_enPref();
-  if(pref){ _enApply(pref==='off'); return; }   // 사용자가 직접 고른 값이 우선
-  _enApply(lv==='L5'||lv==='L6');               // 기본값: L5·L6만 한국어 우선
+  _enCurLv=lv||'L1';
+  const pref=_enPrefMap()[_enCurLv];
+  _enApply(pref?pref==='off':_enDefaultFor(_enCurLv));
 }
 
 // ── 마감/배치 테스트 오답 복습 링크 ─────────────────────
@@ -1305,6 +1316,13 @@ function buildStrip(){
       <button class="shad-strip-btn" id="shad-s${i}" data-target="${_sShadEsc}" data-idx="${i}" onclick="nhsShadLine(event,this.dataset.target,parseInt(this.dataset.idx))" title="따라 말하기">🎤</button>
     </div><div class="shad-strip-result" id="shad-sr${i}"></div>`;
   }).join('');
+  const _tr=DATA.script.filter(l=>!l.divider&&(l.en||l.translation));
+  if(_tr.length){
+    strip.innerHTML+=`<details class="script-trans-block">
+      <summary class="script-trans-sum">📄 번역 보기 · Translations <span style="font-size:10.5px;color:var(--warm-400);font-weight:400">(먼저 한국어로 읽어 보세요)</span></summary>
+      <ol class="script-trans-list">${_tr.map(l=>`<li>${esc(l.en||l.translation||'')}</li>`).join('')}</ol>
+    </details>`;
+  }
 }
 
 function updateStripHighlight(){
@@ -5052,6 +5070,7 @@ function buildSpacing(){
 // ── INIT ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async ()=>{
   await _epIdxReady;
+  _enAutoForLevel('L1');
   buildSidebar();
   loadEp('ep01');
   if(NHS_IS_TRIAL){
