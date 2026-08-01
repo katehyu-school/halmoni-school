@@ -700,3 +700,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 /* L6 장르 태그 (기사·뉴스·토론·논술·소설 등) */
 .ep-genre-tag{display:inline-block;background:#fff;color:var(--teal-dark);border:1.5px solid var(--teal-300);border-radius:7px;font-size:12px;font-weight:800;padding:1px 9px;vertical-align:middle;margin-right:4px;letter-spacing:.02em;}
 .ep-genre-tag-sm{display:inline-block;background:var(--teal-lt);color:var(--teal-dark);border-radius:5px;font-size:9px;font-weight:800;padding:1px 5px;margin-right:6px;vertical-align:middle;flex:none;}
+
+/* 🔁 재순환 어휘 — 이전 편에서 배운 단어 (신규 카드와 구별) */
+.vocab-card.vc-recycled{position:relative;border-color:var(--amber);background:var(--warm-50);}
+.vc-recycle-badge{position:absolute;top:6px;left:6px;background:var(--amber-lt);color:var(--amber-600);font-size:9px;font-weight:800;padding:1px 5px;border-radius:5px;letter-spacing:.2px;z-index:2;}

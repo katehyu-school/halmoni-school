@@ -1000,5 +1000,317 @@
     ]
    }
   ]
+ },
+ "L6_ep01": {
+  "completion": [
+   {
+    "prompt": "'정부가 어제 대책을 발표했어요.'를 신문 기사 문체(문어체)로 바꿔 쓰세요.",
+    "prompt_en": "Rewrite in news-article (written) style.",
+    "grammar": "문어체 -다/-았다",
+    "must_include": "발표했다",
+    "hint": "-했어요 → -했다",
+    "answers": [
+     "정부가 어제 대책을 발표했다",
+     "정부는 어제 대책을 발표했다"
+    ]
+   },
+   {
+    "prompt": "'원재료 값이 올라서 비용이 커지고 있어요.'를 문어체로 바꿔 쓰세요.",
+    "prompt_en": "Rewrite in written style.",
+    "grammar": "문어체 -고 있다",
+    "must_include": "커지고 있다",
+    "hint": "-어서 → -아/어 · -있어요 → -있다",
+    "answers": [
+     "원재료 값이 올라 비용이 커지고 있다",
+     "원재료 가격이 올라 비용이 커지고 있다"
+    ]
+   }
+  ]
+ },
+ "L6_ep02": {
+  "completion": [
+   {
+    "prompt": "시장의 말 '안전을 최우선으로 하겠습니다'를 뉴스 문장으로 전달하세요. (밝히다)",
+    "prompt_en": "Report the mayor's words as a news sentence.",
+    "grammar": "간접인용 -겠다고 + 밝히다",
+    "must_include": "밝혔다",
+    "hint": "시장은 ~하겠다고 밝혔다",
+    "answers": [
+     "시장은 안전을 최우선으로 하겠다고 밝혔다",
+     "시장은 안전을 최우선으로 하겠다고 밝혔습니다"
+    ]
+   },
+   {
+    "prompt": "'사업성이 크게 나빠졌다'는 내용을 '-다고 + 지적하다'로 전달하세요.",
+    "prompt_en": "Report it using -다고 + 지적하다.",
+    "grammar": "간접인용 -다고 + 지적하다",
+    "must_include": "지적했다",
+    "hint": "전문가들은 ~다고 지적했다",
+    "answers": [
+     "전문가들은 사업성이 크게 나빠졌다고 지적했다",
+     "사업성이 크게 나빠졌다고 지적했다"
+    ]
+   }
+  ]
+ },
+ "L6_ep03": {
+  "completion": [
+   {
+    "prompt": "회의에서 상대 의견에 먼저 공감한 뒤 유보하는 말을 '다만'을 넣어 쓰세요.",
+    "prompt_en": "Agree first, then hold back, using 다만.",
+    "grammar": "공적 대화 틀 (공감 → 유보)",
+    "must_include": "다만",
+    "hint": "말씀하신 취지에는 공감합니다. 다만 ~",
+    "answers": [
+     "말씀하신 취지에는 공감합니다. 다만 시행 시기는 더 검토했으면 합니다",
+     "취지에는 공감합니다. 다만 조금 더 검토했으면 합니다"
+    ]
+   },
+   {
+    "prompt": "'이 문제를 같이 생각해 보자'를 회의에서 쓰는 정중한 표현으로 바꿔 쓰세요. (-았/었으면 합니다)",
+    "prompt_en": "Rephrase politely for a formal meeting.",
+    "grammar": "-았/었으면 합니다",
+    "must_include": "했으면 합니다",
+    "hint": "같이 검토했으면 합니다",
+    "answers": [
+     "이 문제를 함께 검토했으면 합니다",
+     "이 부분은 같이 고민했으면 합니다"
+    ]
+   }
+  ]
+ },
+ "L6_ep04": {
+  "completion": [
+   {
+    "prompt": "'사용료'와 '수업료'의 차이를 '-는/-(으)ㄴ 반면'을 써서 한 문장으로 쓰세요.",
+    "prompt_en": "Contrast the two using -는 반면.",
+    "grammar": "-는 반면(에)",
+    "must_include": "반면",
+    "hint": "사용료는 ~인 반면 수업료는 ~이다",
+    "answers": [
+     "사용료는 편의를 잠시 빌리는 값인 반면 수업료는 내게 남는 자산이다",
+     "사용료는 사라지는 값인 반면 수업료는 남는 값이다"
+    ]
+   },
+   {
+    "prompt": "'도시는 편리하다 / 시골은 여유롭다'를 '-(으)ㄴ 반면에'로 이어 쓰세요.",
+    "prompt_en": "Join the two with -(으)ㄴ 반면에.",
+    "grammar": "-(으)ㄴ 반면에",
+    "must_include": "반면",
+    "hint": "편리한 반면에",
+    "answers": [
+     "도시는 편리한 반면에 시골은 여유롭다",
+     "도시가 편리한 반면 시골은 여유롭다"
+    ]
+   }
+  ]
+ },
+ "L6_ep05": {
+  "completion": [
+   {
+    "prompt": "결론을 이끄는 연결어 '따라서'를 넣어 논설문의 마지막 문장을 쓰세요. (외국어 공부)",
+    "prompt_en": "Write a concluding sentence using 따라서.",
+    "grammar": "논설 연결어 (결론)",
+    "must_include": "따라서",
+    "hint": "따라서 ~은/는 여전히 필요하다",
+    "answers": [
+     "따라서 외국어 공부는 여전히 필요하다",
+     "따라서 외국어를 공부할 필요가 있다"
+    ]
+   },
+   {
+    "prompt": "반대 의견을 인정했다가 뒤집는 문장을 '물론 ~ 그러나 ~' 틀로 쓰세요.",
+    "prompt_en": "Concede then rebut using 물론 ~ 그러나 ~.",
+    "grammar": "논설 연결어 (양보·역접)",
+    "must_include": "그러나",
+    "hint": "물론 ~다. 그러나 ~다.",
+    "answers": [
+     "물론 번역기는 편리하다. 그러나 모든 것을 대신할 수는 없다",
+     "물론 편리하다. 그러나 사람만이 할 수 있는 일이 있다"
+    ]
+   }
+  ]
+ },
+ "L6_ep06": {
+  "completion": [
+   {
+    "prompt": "'하늘에 별이 아주 많았다'를 '~듯이'를 넣어 직유로 다시 쓰세요.",
+    "prompt_en": "Rewrite as a simile using ~듯이.",
+    "grammar": "직유 -듯이",
+    "must_include": "듯이",
+    "hint": "소금을 뿌린 듯이 / 쏟아질 듯이",
+    "answers": [
+     "하늘에 별이 소금을 뿌린 듯이 반짝였다",
+     "하늘에 별이 쏟아질 듯이 많았다"
+    ]
+   },
+   {
+    "prompt": "'손이 매우 차가웠다'를 '명사 + 같이'를 써서 직유로 쓰세요.",
+    "prompt_en": "Rewrite as a simile using 명사 + 같이.",
+    "grammar": "직유 명사+같이",
+    "must_include": "같이",
+    "hint": "얼음같이",
+    "answers": [
+     "손이 얼음같이 차가웠다",
+     "그의 손은 얼음같이 차가웠다"
+    ]
+   }
+  ]
+ },
+ "L6_ep07": {
+  "completion": [
+   {
+    "prompt": "'문을 열다 + 눈이 소복이 쌓여 있었다'를 '-았/었더니'로 이어 쓰세요.",
+    "prompt_en": "Join with -았/었더니.",
+    "grammar": "-았/었더니",
+    "must_include": "더니",
+    "hint": "열다 → 열었더니",
+    "answers": [
+     "문을 열었더니 눈이 소복이 쌓여 있었다",
+     "아침에 문을 열었더니 눈이 쌓여 있었다"
+    ]
+   },
+   {
+    "prompt": "'아무 일도 없는 것처럼 웃었다'를 '-다는 듯이'를 써서 다시 쓰세요.",
+    "prompt_en": "Rewrite using -다는 듯이.",
+    "grammar": "-는 듯이 / -다는 듯이",
+    "must_include": "듯이",
+    "hint": "아무 일도 없다는 듯이",
+    "answers": [
+     "아무 일도 없다는 듯이 웃었다",
+     "아무렇지도 않다는 듯이 웃었다"
+    ]
+   }
+  ]
+ },
+ "L6_ep08": {
+  "completion": [
+   {
+    "prompt": "'일하다 + 연락을 못 했다'를 '-느라(고)'로 이어 쓰세요.",
+    "prompt_en": "Join with -느라(고).",
+    "grammar": "-느라(고)",
+    "must_include": "느라",
+    "hint": "일하다 → 일하느라",
+    "answers": [
+     "일하느라 연락을 못 했다",
+     "일하느라고 연락을 못 했다"
+    ]
+   },
+   {
+    "prompt": "'아침부터 비가 오다 + 결국 길이 다 젖었다'를 '-더니'로 이어 쓰세요.",
+    "prompt_en": "Join with -더니.",
+    "grammar": "-더니",
+    "must_include": "더니",
+    "hint": "오다 → 오더니",
+    "answers": [
+     "아침부터 비가 오더니 결국 길이 다 젖었다",
+     "비가 오더니 길이 다 젖었다"
+    ]
+   }
+  ]
+ },
+ "L6_ep09": {
+  "completion": [
+   {
+    "prompt": "'적은 돈 + 부모님께 보태 드리고 싶었다'를 '-(이)나마'로 이어 쓰세요.",
+    "prompt_en": "Join with -(이)나마.",
+    "grammar": "-(이)나마",
+    "must_include": "나마",
+    "hint": "적은 돈이나마",
+    "answers": [
+     "적은 돈이나마 부모님께 보태 드리고 싶었다",
+     "적은 돈이나마 보태고 싶었다"
+    ]
+   },
+   {
+    "prompt": "'짧은 시간 + 쉴 수 있어서 다행이었다'를 '-(이)나마'로 쓰세요.",
+    "prompt_en": "Write using -(이)나마.",
+    "grammar": "-(이)나마",
+    "must_include": "나마",
+    "hint": "짧은 시간이나마",
+    "answers": [
+     "짧은 시간이나마 쉴 수 있어서 다행이었다",
+     "잠시나마 쉴 수 있어 다행이었다"
+    ]
+   }
+  ]
+ },
+ "L6_ep10": {
+  "completion": [
+   {
+    "prompt": "'저녁마다 노을을 오래 바라본다'를 반복되는 습관 '-곤 하다'로 바꿔 쓰세요.",
+    "prompt_en": "Rewrite as a habit using -곤 하다.",
+    "grammar": "-곤 하다",
+    "must_include": "곤 한다",
+    "hint": "바라보다 → 바라보곤 한다",
+    "answers": [
+     "저녁마다 노을을 오래 바라보곤 한다",
+     "나는 저녁마다 노을을 바라보곤 한다"
+    ]
+   },
+   {
+    "prompt": "'끝이 있다 + 오늘 하루가 소중하다'를 문어체 원인 '-기에'로 이어 쓰세요.",
+    "prompt_en": "Join with the written-style -기에.",
+    "grammar": "-기에",
+    "must_include": "기에",
+    "hint": "있다 → 있기에",
+    "answers": [
+     "끝이 있기에 오늘 하루가 소중하다",
+     "끝이 있기에 오늘이 더 소중하다"
+    ]
+   }
+  ]
+ },
+ "L6_ep11": {
+  "completion": [
+   {
+    "prompt": "어제 직접 본 일을 친구에게 전하세요. '그 카페에 사람이 많았다' → '-더라'",
+    "prompt_en": "Tell a friend what you observed, using -더라.",
+    "grammar": "-더라",
+    "must_include": "더라",
+    "hint": "많다 → 많더라",
+    "answers": [
+     "어제 가 보니 그 카페에 사람이 많더라",
+     "그 카페 사람이 정말 많더라"
+    ]
+   },
+   {
+    "prompt": "'네가 부담스러워하다 + 그래서 말하지 않았다'를 '-(으)ㄹ까 봐'로 이어 쓰세요.",
+    "prompt_en": "Join with -(으)ㄹ까 봐.",
+    "grammar": "-(으)ㄹ까 봐",
+    "must_include": "까 봐",
+    "hint": "부담스러워하다 → 부담스러워할까 봐",
+    "answers": [
+     "네가 부담스러워할까 봐 말하지 않았어",
+     "부담스러워할까 봐 말 안 했어"
+    ]
+   }
+  ]
+ },
+ "L6_ep12": {
+  "completion": [
+   {
+    "prompt": "'동생이 시험 결과 때문에 조마조마하다'를 남의 감정을 서술하는 형태로 고쳐 쓰세요.",
+    "prompt_en": "Fix it to describe another person's emotion.",
+    "grammar": "감정형용사 + -아/어하다",
+    "must_include": "조마조마해",
+    "hint": "조마조마하다 → 조마조마해하다",
+    "answers": [
+     "동생이 시험 결과 때문에 조마조마해했다",
+     "동생은 시험 결과 때문에 조마조마해한다"
+    ]
+   },
+   {
+    "prompt": "'친구가 고향을 그립다'는 틀린 문장입니다. 바르게 고쳐 쓰세요.",
+    "prompt_en": "This sentence is wrong. Correct it.",
+    "grammar": "감정형용사 + -아/어하다",
+    "must_include": "그리워",
+    "hint": "그립다 → 그리워하다",
+    "answers": [
+     "친구가 고향을 그리워한다",
+     "친구는 고향을 그리워했다"
+    ]
+   }
+  ]
  }
 }

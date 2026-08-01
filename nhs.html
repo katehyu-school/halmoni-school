@@ -819,6 +819,129 @@ function l6tRetry(){
   renderL6T();
 }
 
+// ══════════════════════════════════════════════════════
+// ── 배치 테스트 (Placement Test) — 어디서 시작할지 찾기
+// ══════════════════════════════════════════════════════
+let PTQ=[]; const _ptReady = fetch('data/nhs/placement_test.json').then(r=>r.json()).then(d=>{PTQ=d;}).catch(e=>{});
+const PT_LVS=['L1','L2','L3','L4','L5','L6'];
+let ptIdx=0,ptAnswered=false,ptLog=[],ptStreak=0,ptStopped=false;
+
+async function loadPlacementTest(){
+  await _ptReady;
+  document.querySelectorAll('.ep-item,.lt-item,.basics-topic-item,.pt-item').forEach(el=>el.classList.remove('active'));
+  const si=document.getElementById('pt-sidebar-item');
+  if(si)si.classList.add('active');
+  ptIdx=0;ptAnswered=false;ptLog=[];ptStreak=0;ptStopped=false;
+  document.getElementById('content-area').innerHTML=renderPTPage();
+  renderPT();
+}
+function renderPTPage(){
+  return`<div class="lt-page">`
+    +`<div class="lt-header">`
+      +`<div class="lt-title">🎯 배치 테스트 · Placement Test</div>`
+      +`<div class="lt-subtitle">쉬운 문제부터 점점 어려워져요 · 최대 ${PTQ.length}문제 · 연속 2문제를 틀리면 자동으로 끝납니다</div>`
+      +`<div class="lt-prog-bar"><div class="lt-prog-fill" id="pt-prog-fill" style="width:0%"></div></div>`
+      +`<div class="lt-prog-label" id="pt-prog-label">0 / ${PTQ.length}</div>`
+    +`</div>`
+    +`<div id="pt-q-area"></div>`
+  +`</div>`;
+}
+function renderPT(){
+  const q=PTQ[ptIdx];
+  const pf=document.getElementById('pt-prog-fill');
+  const pl=document.getElementById('pt-prog-label');
+  if(pf)pf.style.width=Math.round(ptIdx/PTQ.length*100)+'%';
+  if(pl)pl.textContent=ptIdx+' / '+PTQ.length;
+  ptAnswered=false;
+  const area=document.getElementById('pt-q-area');
+  if(!area)return;
+  area.innerHTML=
+    `<div class="lt-ep-badge">난이도 ${'●'.repeat(PT_LVS.indexOf(q.lv)+1)}${'○'.repeat(5-PT_LVS.indexOf(q.lv))}</div>`
+    +`<div class="lt-q-text">${ptIdx+1}. ${(q.q||'').replace(/\n/g,'<br>')}</div>`
+    +`<div class="lt-q-en">${q.en||''}</div>`
+    +`<div class="lt-opts">`
+    +q.opts.map((o,i)=>`<button class="lt-opt" id="pt-opt-${i}" onclick="ptChoose(${i})">${o}</button>`).join('')
+    +`</div><div id="pt-exp-area"></div>`;
+}
+function ptChoose(idx){
+  if(ptAnswered)return;
+  ptAnswered=true;
+  const q=PTQ[ptIdx];
+  const correct=q.ans===idx;
+  ptLog.push({lv:q.lv,correct:correct});
+  ptStreak=correct?0:ptStreak+1;
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('pt-opt-'+i);
+    if(!el)return;
+    el.disabled=true;
+    if(i===q.ans)el.classList.add('correct');
+    else if(i===idx&&!correct)el.classList.add('wrong');
+  });
+  const last=(ptIdx===PTQ.length-1)||(ptStreak>=2);
+  if(ptStreak>=2)ptStopped=true;
+  document.getElementById('pt-exp-area').innerHTML=
+    `<div class="lt-exp">${correct?'✅':'❌'} ${q.exp||''}</div>`
+    +`<button class="lt-next-btn" onclick="ptNext()">${last?'🎯 결과 보기':'다음 →'}</button>`;
+}
+function ptNext(){
+  if(ptStopped||ptIdx>=PTQ.length-1){renderPTScore();return;}
+  ptIdx++;
+  const pf=document.getElementById('pt-prog-fill');
+  const pl=document.getElementById('pt-prog-label');
+  if(pf)pf.style.width=Math.round(ptIdx/PTQ.length*100)+'%';
+  if(pl)pl.textContent=ptIdx+' / '+PTQ.length;
+  renderPT();
+}
+function renderPTScore(){
+  const pf=document.getElementById('pt-prog-fill');
+  const pl=document.getElementById('pt-prog-label');
+  if(pf)pf.style.width='100%';
+  if(pl)pl.textContent=ptLog.length+' / '+PTQ.length;
+  const stat={};
+  PT_LVS.forEach(l=>stat[l]={a:0,c:0});
+  ptLog.forEach(r=>{stat[r.lv].a++;if(r.correct)stat[r.lv].c++;});
+  let passed=-1;
+  PT_LVS.forEach((l,i)=>{
+    const s=stat[l];
+    if(s.a>0&&s.c>=Math.ceil(s.a/2))passed=i;
+  });
+  const startIdx=Math.min(passed+1,PT_LVS.length-1);
+  const startLv=PT_LVS[startIdx];
+  const startName='Level '+startLv.replace('L','');
+  const rows=PT_LVS.map(l=>{
+    const s=stat[l];
+    if(!s.a)return`<tr><td style="padding:4px 10px;color:var(--warm-400)">${l}</td><td style="padding:4px 10px;color:var(--warm-400)">—</td><td style="padding:4px 10px;color:var(--warm-400)">안 풀었어요</td></tr>`;
+    const ok=s.c>=Math.ceil(s.a/2);
+    return`<tr><td style="padding:4px 10px;font-weight:700">${l}</td><td style="padding:4px 10px">${s.c} / ${s.a}</td><td style="padding:4px 10px;color:${ok?'var(--teal-dark)':'#c0392b'}">${ok?'통과':'더 연습'}</td></tr>`;
+  }).join('');
+  const total=ptLog.length,corr=ptLog.filter(r=>r.correct).length;
+  const note=ptStopped?'연속으로 두 문제를 틀려서 여기서 마쳤어요. 지금 수준에 딱 맞는 지점을 찾은 거예요!':'끝까지 다 풀었어요!';
+  document.getElementById('pt-q-area').innerHTML=
+    `<div class="lt-score-wrap">`
+    +`<div class="lt-grade" style="color:var(--teal-dark);font-size:34px">${startName}</div>`
+    +`<div class="lt-grade-lbl" style="color:var(--teal-dark)">여기서 시작하는 걸 추천해요</div>`
+    +`<div class="lt-score-detail">`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${corr}/${total}</div><div class="lt-score-box-lbl">정답</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${passed>=0?PT_LVS[passed]:'—'}</div><div class="lt-score-box-lbl">통과 레벨</div></div>`
+    +`</div>`
+    +`<div style="font-size:12.5px;color:var(--warm-600);margin:12px 0 14px;line-height:1.6;">${note}</div>`
+    +`<table style="margin:0 auto 16px;font-size:12.5px;border-collapse:collapse">${rows}</table>`
+    +`<div style="font-size:11.5px;color:var(--warm-400);margin-bottom:14px;line-height:1.6">※ 배치 결과는 참고용이에요. 한 레벨 아래에서 시작해 복습하며 올라가도 좋아요.</div>`
+    +`<button class="lt-retry-btn" onclick="ptGoLevel('${startName}')" style="background:var(--teal);color:#fff;border-color:var(--teal)">${startName} 시작하기 →</button>`
+    +`<button class="lt-retry-btn" onclick="ptRetry()" style="margin-left:8px">↺ 다시 풀기</button>`
+    +`</div>`;
+}
+function ptGoLevel(name){
+  const btn=Array.from(document.querySelectorAll('.level-btn')).find(b=>b.textContent.trim()===name);
+  if(btn)setLevel(btn);
+}
+function ptRetry(){
+  ptIdx=0;ptAnswered=false;ptLog=[];ptStreak=0;ptStopped=false;
+  document.getElementById('content-area').innerHTML=renderPTPage();
+  renderPT();
+}
+
+
 
 
 async function _doLoadEp(epId, level='L1'){
@@ -1196,8 +1319,9 @@ function toggleRLScript(id){
 
 // ── VOCAB ──────────────────────────────────────────────
 function vocabCardHtml(v){
-  return `<div class="vocab-card" onclick="this.classList.toggle('flipped')">
+  return `<div class="vocab-card${v.recycled?' vc-recycled':''}" onclick="this.classList.toggle('flipped')">
       <div class="vc-front">
+        ${v.recycled?`<div class="vc-recycle-badge" title="이전 편에서 배운 어휘예요">🔁 복습</div>`:''}
         <div class="vc-emoji">${v.emoji||'📝'}</div>
         <div class="vc-kr">${esc(v.korean)}</div>
         ${v.romanization?`<div class="vc-rom">[${esc(v.romanization)}]</div>`:''}
@@ -3303,7 +3427,8 @@ function buildBasicsSidebar(){
   const grpWrap=(items,accent)=>'<div style="border-left:3px solid '+accent+';padding-left:7px;margin:0 0 4px 2px;">'+items+'</div>';
   const learn=BASICS_TOPICS.filter(t=>t.grp!=='ref');
   const ref=BASICS_TOPICS.filter(t=>t.grp==='ref');
-  list.innerHTML=roadmap
+  const ptItem='<div class="lt-item pt-item" id="pt-sidebar-item" onclick="loadPlacementTest()" style="background:var(--teal-50);border:1.5px solid var(--teal);margin-bottom:4px"><div class="lt-num">🎯</div><div class="lt-name">배치 테스트<span style="display:block;font-size:10.5px;font-weight:500;color:var(--warm-500)">내 레벨 찾기 · Placement</span></div></div>';
+  list.innerHTML=roadmap+ptItem
     +grpHdr('🌱 배우기 · Learn','var(--teal-50)','var(--teal-dark)')+grpWrap(learn.map(item).join(''),'var(--teal)')
     +grpHdr('📌 레퍼런스 · Reference','var(--amber-lt)','var(--amber-600)')+grpWrap(ref.map(item).join(''),'var(--amber)')
     +'<div style="font-size:10.5px;color:var(--warm-400);margin:8px 4px 0;line-height:1.5">📌 레퍼런스는 상단 <b>빠른 참고</b>로도 어디서든 열려요.</div>';
