@@ -1198,6 +1198,12 @@ function buildVideoScript(){
       </div>
     </div>`;
   }).join('');
+  // 한국어 우선 모드에서는 줄별 번역을 숨기고, 아래 접이식 블록으로 모아 보여 줍니다.
+  const _trLines=DATA.script.filter(l=>!l.divider&&(l.en||l.translation));
+  const transBlock=_trLines.length?`<details class="script-trans-block">
+      <summary class="script-trans-sum">📄 번역 보기 · Translations <span style="font-size:10.5px;color:var(--warm-400);font-weight:400">(먼저 한국어로 읽어 보세요)</span></summary>
+      <ol class="script-trans-list">${_trLines.map(l=>`<li>${esc(l.en||l.translation||'')}</li>`).join('')}</ol>
+    </details>`:'';
   return `<div class="video-wrap">
     <video controls playsinline preload="metadata">
       <source src="${esc(DATA.video)}" type="video/mp4">
@@ -1206,6 +1212,7 @@ function buildVideoScript(){
     <details class="video-script-panel">
       <summary class="video-script-header" style="cursor:pointer;">📝 대본 · Script <span style="font-size:11px;color:var(--warm-400);font-weight:400">(접기/펼치기)</span></summary>
       ${lines}
+      ${transBlock}
     </details>
   </div>`;
 }

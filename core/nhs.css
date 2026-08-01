@@ -722,3 +722,14 @@ body.en-off .quiz-q-en,
 body.en-off .lt-q-en,
 body.en-off .ep-title-en{display:none !important;}
 #en-toggle-btn{min-width:56px;}
+
+/* 자막 번역 — 한국어 우선 모드(L5·L6)에서는 대사에서 빼내어 아래 접이식 블록으로 모읍니다.
+   지우지 않는 이유: 빠져나갈 길은 남기되 '먼저 한국어를 읽게' 한 단계 마찰을 줍니다. */
+body.en-off .video-script-en,
+body.en-off .strip-en{display:none;}
+.script-trans-block{display:none;}
+body.en-off .script-trans-block{display:block;margin:14px 0 4px;border-top:1.5px dashed var(--warm-300);padding-top:12px;}
+.script-trans-sum{cursor:pointer;font-size:12px;font-weight:700;color:var(--warm-600);list-style:none;padding:6px 10px;background:var(--warm-50);border-radius:8px;}
+.script-trans-sum:hover{background:var(--warm-100);}
+.script-trans-list{margin:10px 0 0;padding-left:26px;}
+.script-trans-list li{font-size:12px;color:var(--warm-600);line-height:1.6;margin-bottom:7px;}
