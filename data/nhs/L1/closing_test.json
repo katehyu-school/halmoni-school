@@ -19,12 +19,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n오늘 학교_____ 공부해요.",
   "en": "I study _____ school today.",
   "opts": [
-   "에서",
    "이",
    "을",
-   "의"
+   "의",
+   "에서"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "에서 = at/in (location of an action). 학교에서 = at school."
  },
  {
@@ -33,12 +33,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n저는 사과_____ 좋아해요.",
   "en": "I like apples. Choose the correct particle.",
   "opts": [
-   "를",
    "이",
    "에서",
-   "도"
+   "도",
+   "를"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "를/을 = object marker. 사과 ends in vowel → 를."
  },
  {
@@ -47,12 +47,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n어제 공원에서 친구를 _____.",
   "en": "Yesterday I _____ my friend at the park.",
   "opts": [
-   "만났어요",
    "만나요",
+   "만났어요",
    "만날 거예요",
    "만나세요"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "어제 = yesterday → past tense. 만나다 → 만났어요. -았/었어요 = past tense."
  },
  {
@@ -61,27 +61,13 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n내일 친구하고 영화를 _____.",
   "en": "Tomorrow I will watch a movie with my friend.",
   "opts": [
-   "볼 거예요",
    "봤어요",
    "봐요",
+   "볼 거예요",
    "보세요"
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "내일 = tomorrow → future. 보다 → 볼 거예요. -(으)ㄹ 거예요 = future tense."
- },
- {
-  "ep": "topik",
-  "type": "mc",
-  "q": "다음 중 인사말이 아닌 것을 고르세요.",
-  "en": "Which one is NOT a greeting?",
-  "opts": [
-   "먹어요",
-   "안녕하세요",
-   "안녕히 가세요",
-   "반가워요"
-  ],
-  "ans": 0,
-  "exp": "먹어요 = eat — not a greeting. 안녕하세요 / 안녕히 가세요 / 반가워요 are greetings."
  },
  {
   "ep": "topik",
@@ -89,12 +75,12 @@
   "q": "밑줄 친 말과 반대 의미의 것을 고르세요.\n저는 사과를 <u>좋아해요</u>.",
   "en": "Choose the OPPOSITE of 좋아해요.",
   "opts": [
-   "싫어해요",
    "먹어요",
+   "싫어해요",
    "사요",
    "봐요"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "좋아해요 (like) ↔ 싫어해요 (dislike). 반의어 pair!"
  },
  {
@@ -103,12 +89,12 @@
   "q": "다음 중 부탁할 때 쓰는 표현은?",
   "en": "Which expression is used for a polite request?",
   "opts": [
-   "주세요",
    "감사합니다",
+   "주세요",
    "죄송합니다",
    "괜찮아요"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "주세요 = \"please give me / please do.\" Used for polite requests."
  },
  {
@@ -117,41 +103,13 @@
   "q": "교실에 학생이 다섯 _____ 있어요.",
   "en": "There are five students in the classroom. Choose the counter.",
   "opts": [
-   "명",
    "마리",
    "개",
-   "권"
+   "권",
+   "명"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "명 = counter for people. 다섯 명 = 5 people. 마리 = animals, 개 = things, 권 = books."
- },
- {
-  "ep": "topik",
-  "type": "mc",
-  "q": "다음을 읽고 맞는 것을 고르세요.\n\"저는 선생님이에요. 학교에서 일해요.\"",
-  "en": "Read and choose the correct answer.",
-  "opts": [
-   "이 사람은 학교에서 일해요",
-   "이 사람은 병원에서 일해요",
-   "이 사람은 식당에서 일해요",
-   "이 사람은 회사에서 일해요"
-  ],
-  "ans": 0,
-  "exp": "선생님 = teacher. 학교에서 일해요 = works at school."
- },
- {
-  "ep": "topik",
-  "type": "mc",
-  "q": "다음을 읽고 맞는 것을 고르세요.\n\"오늘은 월요일이에요. 내일은 화요일이에요.\"\n내일은 무슨 요일이에요?",
-  "en": "Today is Monday. What day is tomorrow?",
-  "opts": [
-   "화요일",
-   "수요일",
-   "일요일",
-   "토요일"
-  ],
-  "ans": 0,
-  "exp": "월요일 다음은 화요일. 요일 순서: 월화수목금토일."
  },
  {
   "ep": "topik",
@@ -166,6 +124,51 @@
   ],
   "ans": 0,
   "exp": "아니요 = No. 안 + 동사 = negative. 안 가요 = not going."
+ },
+ {
+  "ep": "read1",
+  "type": "reading",
+  "passage": "저는 선생님이에요. 학교에서 일해요. 아이들하고 같이 한국어를 공부해요. 학교는 우리 집에서 가까워요. 그래서 아침마다 걸어서 가요.",
+  "q": "이 글의 내용과 맞는 것을 고르세요.",
+  "en": "Choose what matches the passage.",
+  "opts": [
+   "이 사람은 걸어서 학교에 가요",
+   "이 사람은 병원에서 일해요",
+   "학교가 집에서 아주 멀어요",
+   "이 사람은 버스로 학교에 가요"
+  ],
+  "ans": 0,
+  "exp": "'학교는 우리 집에서 가까워요. 그래서 아침마다 걸어서 가요'라고 했어요."
+ },
+ {
+  "ep": "read2",
+  "type": "reading",
+  "passage": "<b>💬 문자 메시지</b><br><br>민수: 지수야, 내일 시간 있어?<br>지수: 내일은 화요일이지? 화요일에는 태권도 학원에 가.<br>민수: 그럼 수요일은 어때?<br>지수: 수요일은 괜찮아. 몇 시에 만날까?",
+  "q": "두 사람은 언제 만나요?",
+  "en": "When will the two meet?",
+  "opts": [
+   "화요일",
+   "수요일",
+   "월요일",
+   "토요일"
+  ],
+  "ans": 1,
+  "exp": "화요일에는 태권도 학원에 가서 안 되고, 수요일은 괜찮다고 했어요."
+ },
+ {
+  "ep": "read3",
+  "type": "reading",
+  "passage": "<b>🏫 한국어 교실 안내</b><br>· 시간: 월요일, 수요일 오후 4시<br>· 장소: 2층 교실<br>· 준비물: 공책, 연필<br>· 전화: 010-1234-5678",
+  "q": "이 글을 읽고 알 수 있는 것을 고르세요.",
+  "en": "What can you learn from this notice?",
+  "opts": [
+   "수업은 오전에 해요",
+   "교실은 1층에 있어요",
+   "책을 가지고 가야 해요",
+   "수업은 일주일에 두 번 있어요"
+  ],
+  "ans": 3,
+  "exp": "월요일과 수요일, 일주일에 두 번이에요. 오후 4시, 2층 교실, 준비물은 공책과 연필이에요."
  },
  {
   "ep": "topik",
@@ -190,12 +193,12 @@
   "q": "가방은 어디에 있어요?",
   "en": "Where is the bag?",
   "opts": [
-   "의자 위에 있어요",
    "의자 아래에 있어요",
    "의자 옆에 있어요",
+   "의자 위에 있어요",
    "의자 뒤에 있어요"
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "위에 있어요 = is on top of. 위/아래/옆/앞/뒤 + 에 있어요 for location.",
   "audio_file": "data/nhs/L1/TTS/closing/ct_listen_02.mp3"
  },
@@ -222,12 +225,12 @@
   "q": "이 사람은 어떻게 학교에 가요?",
   "en": "How does this person go to school?",
   "opts": [
-   "버스로",
    "지하철로",
    "자전거로",
+   "버스로",
    "걸어서"
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "(으)로 = by (means of transport). 버스로 = by bus.",
   "audio_file": "data/nhs/L1/TTS/closing/ct_listen_04.mp3"
  },
@@ -238,12 +241,12 @@
   "q": "보미는 몇 살이에요?",
   "en": "How old is Bomi?",
   "opts": [
-   "열다섯 살",
    "열네 살",
    "열여섯 살",
-   "열일곱 살"
+   "열일곱 살",
+   "열다섯 살"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "열다섯 = 15. 열 = 10, 다섯 = 5. 나이는 고유어 숫자!",
   "audio_file": "data/nhs/L1/TTS/closing/ct_listen_05.mp3"
  },
@@ -254,12 +257,12 @@
   "q": "이 사람은 무엇을 하고 싶어요?",
   "en": "What does this person want to do?",
   "opts": [
-   "수영을 하고 싶어요",
    "요리를 하고 싶어요",
+   "수영을 하고 싶어요",
    "공부를 하고 싶어요",
    "자고 싶어요"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "더워요 = it is hot. -고 싶어요 = want to do.",
   "audio_file": "data/nhs/L1/TTS/closing/ct_listen_06.mp3"
  },
@@ -270,12 +273,12 @@
   "q": "지금 몇 시예요?",
   "en": "What time is it now?",
   "opts": [
-   "오후 두 시",
    "오전 두 시",
    "오후 세 시",
+   "오후 두 시",
    "오전 세 시"
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "오후 = PM. 두 시 = 2 oclock. 시간은 고유어 숫자: 한/두/세/네...",
   "audio_file": "data/nhs/L1/TTS/closing/ct_listen_07.mp3"
  },
@@ -286,12 +289,12 @@
   "q": "오늘 날씨가 어때요?",
   "en": "What is the weather like today?",
   "opts": [
-   "비가 와요",
    "눈이 와요",
    "맑아요",
+   "비가 와요",
    "바람이 불어요"
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "비가 와요 = it is raining. 우산 = umbrella. 날씨: 비/눈/맑다/흐리다.",
   "audio_file": "data/nhs/L1/TTS/closing/ct_listen_08.mp3"
  }

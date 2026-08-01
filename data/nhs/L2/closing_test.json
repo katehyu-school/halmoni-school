@@ -19,12 +19,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\nA: 창문 열어도 돼요? B: 네, _____.",
   "en": "A: May I open the window? B: Yes, ___.",
   "opts": [
-   "열어도 돼요",
    "열어야 해요",
    "열겠어요",
+   "열어도 돼요",
    "여세요"
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "-아/어도 되다 = it's okay to / you may (permission). ↔ -(으)면 안 되다 = not allowed."
  },
  {
@@ -47,12 +47,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n감기에 걸려서 오늘 학교에 _____ 가요.",
   "en": "I caught a cold so I can't go to school today.",
   "opts": [
-   "못",
    "안",
+   "못",
    "별로",
    "아직"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "못 = inability (due to illness/circumstance). 안 = choice not to. 아파서 → 못."
  },
  {
@@ -61,12 +61,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n배가 고프_____ 먼저 밥을 먹읍시다.",
   "en": "Since we're hungry, let's eat first.",
   "opts": [
-   "으니까",
    "지만",
    "어도",
-   "다가"
+   "다가",
+   "으니까"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "-(으)니까 = because/since — used before suggestions, commands, decisions. -아/어서 cannot precede imperative forms."
  },
  {
@@ -75,12 +75,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\nA: 왜 이 길로 왔어요? B: 여기가 지름길이_____.",
   "en": "A: Why did you come this way? B: This is a shortcut, you see.",
   "opts": [
-   "거든요",
    "잖아요",
    "다고 해요",
-   "는 것 같아요"
+   "는 것 같아요",
+   "거든요"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "-거든요 = giving new background info listener didn't know. (the thing is / you see)"
  },
  {
@@ -89,12 +89,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\n뉴스에서 내일도 폭염이 계속_____.",
   "en": "The news said the heat wave will continue tomorrow.",
   "opts": [
-   "된다고 했어요",
    "됐잖아요",
+   "된다고 했어요",
    "되거든요",
    "되면 좋겠어요"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "-다고 하다 = indirect reported speech. 뉴스에서 ___다고 했어요 = The news said that..."
  },
  {
@@ -103,12 +103,12 @@
   "q": "밑줄 친 말과 의미가 가장 비슷한 것은?\n요리를 매일 하다 <u>보니</u> 실력이 늘었어요.",
   "en": "Choose the closest meaning to the underlined part.",
   "opts": [
-   "요리를 계속하면서 자연스럽게",
    "요리를 마치자마자",
+   "요리를 계속하면서 자연스럽게",
    "요리를 잘 해서",
    "요리를 배우고 나서"
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "-다 보니 = as you kept doing X, you naturally found Y. Gradual, unplanned outcome."
  },
  {
@@ -117,12 +117,12 @@
   "q": "빈칸에 알맞은 것을 고르세요.\nA: 그 카페 좋아요? B: 거기 분위기가 정말 좋_____.",
   "en": "A: Is that café good? B: The atmosphere there is really nice, you know.",
   "opts": [
-   "잖아요",
    "거든요",
    "다고 해요",
-   "는 것 같아요"
+   "는 것 같아요",
+   "잖아요"
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "-잖아요 = reminding listener of something they already know (both of you have been there)."
  },
  {
@@ -131,12 +131,12 @@
   "q": "다음 중 자연스럽지 않은 문장은?",
   "en": "Which sentence is NOT natural?",
   "opts": [
-   "어제 시험이 쉬웠으면 좋겠어요.",
    "이번 주말에 쉬었으면 좋겠어요.",
    "내일 비가 안 왔으면 좋겠어요.",
+   "어제 시험이 쉬웠으면 좋겠어요.",
    "날씨가 좀 더 시원해지면 좋겠어요."
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "-았/었으면 좋겠다 = wishing for something not yet done. 어제 시험은 이미 끝남 = already over, can't wish retroactively."
  },
  {
@@ -146,12 +146,12 @@
   "q": "이 사람이 새만금에서 느낀 것은?",
   "en": "What did this person feel at Saemangeum?",
   "opts": [
-   "바다 위를 달리는 것 같았어요.",
    "산을 오르는 것 같았어요.",
    "외국에 있는 것 같았어요.",
-   "지하철을 타는 것 같았어요."
+   "지하철을 타는 것 같았어요.",
+   "바다 위를 달리는 것 같았어요."
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "바다 위를 달리는 것 같아서 = felt like driving on top of the sea. 신기하다 = fascinating."
  },
  {
@@ -161,43 +161,43 @@
   "q": "이 글의 내용과 다른 것은?",
   "en": "Choose what does NOT match the passage.",
   "opts": [
-   "전라도 음식은 맛없기로 유명해요.",
    "백반에 반찬이 많이 나왔어요.",
+   "전라도 음식은 맛없기로 유명해요.",
    "처음으로 백반을 먹어 봤어요.",
    "또 가고 싶어졌어요."
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "전라도는 맛있기로 유명 ≠ 맛없기로 유명. Content is the opposite."
  },
  {
   "ep": "read2",
   "type": "reading",
-  "passage": "저는 한국어를 배우기 시작한 지 1년이 됐어요. 처음에는 발음이 너무 어렵다고 생각했어요. 하지만 매일 조금씩 연습하다 보니 실력이 많이 늘게 됐어요. 요즘은 한국 드라마를 자막 없이 보려고 하는데 아직은 조금 어려워요.",
-  "q": "이 사람의 현재 한국어 실력은?",
-  "en": "What is this person's current Korean level?",
+  "passage": "저는 한국어를 배우기 시작한 지 1년이 됐어요. 처음에는 발음이 너무 어렵다고 생각했어요. ( ㉠ ) 매일 조금씩 연습하다 보니 실력이 많이 늘게 됐어요. 요즘은 한국 드라마를 자막 없이 보려고 하는데 아직은 조금 어려워요.",
+  "q": "( ㉠ )에 들어갈 말로 알맞은 것은?",
+  "en": "Which connective fits in ( ㉠ )?",
   "opts": [
-   "많이 늘었지만 아직 어려운 부분이 있어요.",
-   "전혀 늘지 않았어요.",
-   "드라마를 자막 없이 잘 봐요.",
-   "한국어를 포기했어요."
+   "하지만",
+   "그래서",
+   "그리고",
+   "예를 들어"
   ],
   "ans": 0,
-  "exp": "연습하다 보니 늘게 됐어요 = improved through practice. 아직 조금 어려워요 = still a bit difficult."
+  "exp": "앞은 '어렵다고 생각했다', 뒤는 '실력이 늘었다'로 내용이 뒤집히므로 역접 '하지만'이 맞아요. '그래서'는 원인-결과일 때 씁니다."
  },
  {
-  "ep": "read2",
+  "ep": "read3",
   "type": "reading",
-  "passage": "저는 한국어를 배우기 시작한 지 1년이 됐어요. 처음에는 발음이 너무 어렵다고 생각했어요. 하지만 매일 조금씩 연습하다 보니 실력이 많이 늘게 됐어요. 요즘은 한국 드라마를 자막 없이 보려고 하는데 아직은 조금 어려워요.",
-  "q": "이 사람이 요즘 하려는 것은?",
-  "en": "What is this person currently trying to do?",
+  "passage": "<b>📚 도서관 이용 안내</b><br>· 시간: 월~금 오전 9시 ~ 오후 6시<br>· 토요일: 오전 9시 ~ 오후 1시<br>· 일요일: 쉽니다<br>· 책은 한 번에 세 권까지, 2주 동안 빌릴 수 있습니다.<br>· 도서관 안에서는 음식을 드시면 안 됩니다.",
+  "q": "이 안내문의 내용과 같은 것은?",
+  "en": "Which matches the notice?",
   "opts": [
-   "자막 없이 드라마를 보려고 해요.",
-   "한국어를 처음 배우려고 해요.",
-   "발음 공부를 시작하려고 해요.",
-   "한국어 공부를 그만두려고 해요."
+   "일요일에도 문을 열어요",
+   "토요일은 오후 6시까지 해요",
+   "책은 한 번에 세 권까지 빌릴 수 있어요",
+   "도서관에서 음식을 먹어도 돼요"
   ],
-  "ans": 0,
-  "exp": "드라마를 자막 없이 보려고 하는데 = trying to watch dramas without subtitles. -(으)려고 하다 = intending to."
+  "ans": 2,
+  "exp": "'한 번에 세 권까지, 2주 동안'이라고 했어요. 일요일은 쉬고, 토요일은 오후 1시까지이며, 음식은 안 됩니다."
  },
  {
   "ep": "ep04",
@@ -206,12 +206,12 @@
   "q": "이 사람이 말하는 것은?",
   "en": "What is this person saying?",
   "opts": [
-   "비가 올 것 같으니 우산을 챙기라고 해요.",
    "날씨가 맑다고 해요.",
    "우산을 잃어버렸다고 해요.",
+   "비가 올 것 같으니 우산을 챙기라고 해요.",
    "비가 이미 왔다고 해요."
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "-(으)ㄹ 것 같아요 = looks like / seems like (conjecture). 챙겨 가다 = take along.",
   "audio_file": "data/nhs/L2/TTS/closing/ct_listen_01.mp3"
  },
@@ -238,12 +238,12 @@
   "q": "한국어가 왜 늘었어요?",
   "en": "Why did the Korean ability improve?",
   "opts": [
-   "한국에서 계속 살면서 자연스럽게 늘었어요.",
    "학원을 다녀서요.",
    "책을 많이 읽어서요.",
+   "한국에서 계속 살면서 자연스럽게 늘었어요.",
    "선생님이 잘 가르쳐서요."
   ],
-  "ans": 0,
+  "ans": 2,
   "exp": "-다 보니까 = as I kept doing it, naturally... -게 되다 = came to be (unplanned outcome).",
   "audio_file": "data/nhs/L2/TTS/closing/ct_listen_03.mp3"
  },
@@ -254,12 +254,12 @@
   "q": "이 사람은 왜 제주도에 가고 싶어요?",
   "en": "Why does this person want to go to Jeju?",
   "opts": [
-   "한 번도 가 본 적이 없어서요.",
    "제주도가 싫어서요.",
+   "한 번도 가 본 적이 없어서요.",
    "친구가 제주도에 있어서요.",
    "제주도 음식이 먹고 싶어서요."
   ],
-  "ans": 0,
+  "ans": 1,
   "exp": "-았/었으면 좋겠다 = I wish/hope. 한 번도 못 가 봤거든요 = never been there, you see (-거든요 = background).",
   "audio_file": "data/nhs/L2/TTS/closing/ct_listen_04.mp3"
  },
@@ -270,12 +270,12 @@
   "q": "이 사람은 왜 책을 샀어요?",
   "en": "Why did this person buy the book?",
   "opts": [
-   "친구가 재미있다고 해서요.",
    "책 표지가 예뻐서요.",
    "선생님이 추천해서요.",
-   "할인을 해서요."
+   "할인을 해서요.",
+   "친구가 재미있다고 해서요."
   ],
-  "ans": 0,
+  "ans": 3,
   "exp": "-다고 하다 = reported speech. 친구가 ___다고 해서 = because my friend said... -아/어서 = reason.",
   "audio_file": "data/nhs/L2/TTS/closing/ct_listen_05.mp3"
  },

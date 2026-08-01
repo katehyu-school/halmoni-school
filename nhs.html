@@ -146,7 +146,8 @@ function buildSidebar(lv){
     html=L5_EPISODES.map((ep,i)=>mkItem(ep,i,'L5')).join('')
       +'<div class="lt-item" id="l5t-sidebar-item" onclick="loadL5Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 5 마감 테스트</div></div>';
   }else if(lv==='L6'){
-    html=L6_EPISODES.map((ep,i)=>mkItem(ep,i,'L6')).join('');
+    html=L6_EPISODES.map((ep,i)=>mkItem(ep,i,'L6')).join('')
+      +'<div class="lt-item" id="l6t-sidebar-item" onclick="loadL6Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 6 마감 테스트</div></div>';
   }
   document.getElementById('ep-list').innerHTML=html;
 }
@@ -192,8 +193,9 @@ function renderLT(){
     ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
     :'';
   area.innerHTML=
-    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'버스타기':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':q.ep==='ep10'?'손님 초대':'TOPIK 1급'}</div>`
-    +`<div class="lt-q-text">${ltIdx+1}. ${q.q}</div>`
+    `<div class="lt-ep-badge">${q.ep.toUpperCase()} · ${q.ep==='ep01'?'자기소개':q.ep==='ep02'?'식사':q.ep==='ep03'?'쇼핑':q.ep==='ep04'?'주문':q.ep==='ep05'?'버스타기':q.ep==='ep06'?'약속':q.ep==='ep07'?'위치':q.ep==='ep08'?'시장':q.ep==='ep09'?'소풍':q.ep==='ep10'?'손님 초대':q.ep==='read1'?'읽기 1':q.ep==='read2'?'읽기 2':q.ep==='read3'?'읽기 3':'TOPIK 1급'}</div>`
+    +(q.passage?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`:'')
+    +`<div class="lt-q-text">${ltIdx+1}. ${(q.q||'').replace(/\n/g,'<br>')}</div>`
     +`<div class="lt-q-en">${q.en}</div>`
     +listenBtn
     +`<div class="lt-opts">`
@@ -295,7 +297,7 @@ function renderL2T(){
   l2tAnswered=false;
   const area=document.getElementById('l2t-q-area');
   if(!area)return;
-  const epLabels={ep01:'관형절',ep02:'허락표현',ep03:'-(으)니까',ep04:'-아/어 보다',ep05:'안 vs 못',ep06:'-아/어도',ep07:'-(으)려고',ep08:'-아/어야 해요',ep09:'-게 되다',ep10:'-잖아요',ep11:'-거든요',ep12:'-다고 하다',read1:'읽기 1',read2:'읽기 2'};
+  const epLabels={ep01:'관형절',ep02:'허락표현',ep03:'-(으)니까',ep04:'-아/어 보다',ep05:'안 vs 못',ep06:'-아/어도',ep07:'-(으)려고',ep08:'-아/어야 해요',ep09:'-게 되다',ep10:'-잖아요',ep11:'-거든요',ep12:'-다고 하다',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
     ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
@@ -406,7 +408,7 @@ function renderL3T(){
   l3tAnswered=false;
   const area=document.getElementById('l3t-q-area');
   if(!area)return;
-  const epLabels={ep01:'-(이)나/-ㄹ까',ep02:'-(으)라고',ep03:'-ㅂ니다체',ep04:'-(으)려고',ep05:'-는 바람에',ep06:'아무리~도',ep07:'-(으)려면',ep08:'-군요',ep09:'-(으)면 되다',ep10:'-는 편이다',ep11:'-ㄹ 뻔하다',ep12:'-ㄴ다/는다',read1:'읽기 1',read2:'읽기 2'};
+  const epLabels={ep01:'-(이)나/-ㄹ까',ep02:'-(으)라고',ep03:'-ㅂ니다체',ep04:'-(으)려고',ep05:'-는 바람에',ep06:'아무리~도',ep07:'-(으)려면',ep08:'-군요',ep09:'-(으)면 되다',ep10:'-는 편이다',ep11:'-ㄹ 뻔하다',ep12:'-ㄴ다/는다',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
     ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
@@ -518,7 +520,7 @@ function renderL4T(){
   l4tAnswered=false;
   const area=document.getElementById('l4t-q-area');
   if(!area)return;
-  const epLabels={ep01:'-습니다체/-십니까?',ep02:'-ㄹ 리가 없다',ep03:'-기 마련이다',ep04:'-더라고요',ep05:'-는 셈이다',ep06:'-는 탓에',ep07:'-을 정도로',ep08:'-자마자',ep09:'-고서야',ep10:'-는 한',ep11:'-다시피 하다',ep12:'격식체 총정리',read1:'읽기 1',read2:'읽기 2'};
+  const epLabels={ep01:'-습니다체/-십니까?',ep02:'-ㄹ 리가 없다',ep03:'-기 마련이다',ep04:'-더라고요',ep05:'-는 셈이다',ep06:'-는 탓에',ep07:'-을 정도로',ep08:'-자마자',ep09:'-고서야',ep10:'-는 한',ep11:'-다시피 하다',ep12:'격식체 총정리',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3'};
   const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
   const listenBtn=q.type==='listen'
     ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
@@ -704,6 +706,119 @@ function l5tRetry(){
   document.getElementById('content-area').innerHTML=renderL5TPage();
   renderL5T();
 }
+
+// ══════════════════════════════════════════════════════
+// ── LEVEL 6 마감 테스트  (TOPIK 5급 입구 / CEFR B2)
+// ══════════════════════════════════════════════════════
+let L6Q=[]; const _l6qReady = fetch('data/nhs/L6/closing_test.json').then(r=>r.json()).then(d=>{L6Q=d;}).catch(e=>{});
+
+let l6tIdx=0,l6tScore=0,l6tAnswered=false;
+
+async function loadL6Test(){
+  await _l6qReady;
+  document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
+  const si=document.getElementById('l6t-sidebar-item');
+  if(si)si.classList.add('active');
+  l6tIdx=0;l6tScore=0;l6tAnswered=false;
+  document.getElementById('content-area').innerHTML=renderL6TPage();
+  renderL6T();
+}
+function renderL6TPage(){
+  return`<div class="lt-page">`
+    +`<div class="lt-header">`
+      +`<div class="lt-title">🏆 Level 6 마감 테스트</div>`
+      +`<div class="lt-subtitle">ep01~ep12 · 문법·읽기·듣기·TOPIK 신유형 · ${L6Q.length}문제 · TOPIK 5급 입구 / CEFR B2</div>`
+      +`<div class="lt-prog-bar"><div class="lt-prog-fill" id="l6t-prog-fill" style="width:0%"></div></div>`
+      +`<div class="lt-prog-label" id="l6t-prog-label">0 / ${L6Q.length}</div>`
+    +`</div>`
+    +`<div id="l6t-q-area"></div>`
+  +`</div>`;
+}
+function renderL6T(){
+  const q=L6Q[l6tIdx];
+  const pct=Math.round(l6tIdx/L6Q.length*100);
+  const pf=document.getElementById('l6t-prog-fill');
+  const pl=document.getElementById('l6t-prog-label');
+  if(pf)pf.style.width=pct+'%';
+  if(pl)pl.textContent=l6tIdx+' / '+L6Q.length;
+  l6tAnswered=false;
+  const area=document.getElementById('l6t-q-area');
+  if(!area)return;
+  const epLabels={ep01:'문어체 -다/ㄴ다',ep02:'간접인용 -다고',ep03:'토론 화법',ep04:'-는 반면(에)',ep05:'논설 연결어',ep06:'직유 -듯이',ep07:'-았/었더니',ep08:'-더니',ep09:'-(이)나마',ep10:'-기에',ep11:'겉말과 속마음',ep12:'감정 어휘',read1:'읽기 · 기사',read2:'읽기 · 논설',read3:'읽기 · 설명문',read4:'읽기 · 안내문',read5:'읽기 · 수필',read6:'읽기 · 도표',blank1:'빈칸 · 접속사',blank2:'빈칸 · 어휘',order1:'문장 순서 배열',sim1:'심정 추론',sim2:'심정 추론'};
+  const badge=`<div class="lt-ep-badge">${(q.ep||'').toUpperCase()} · ${epLabels[q.ep]||q.ep}</div>`;
+  const listenBtn=q.type==='listen'
+    ?`<button class="lt-listen-btn" onclick="wrPlayLine('${escA(q.audio_file||'')}','${escA(q.audio_text||'')}')">🔊 듣기</button><br>`
+    :'';
+  const passageHtml=q.passage
+    ?`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:10px;padding:14px 16px;margin:0 0 14px;font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--warm-900)">${q.passage}</div>`
+    :'';
+  area.innerHTML=
+    badge
+    +passageHtml
+    +`<div class="lt-q-text">${l6tIdx+1}. ${(q.q||'').replace(/\n/g,'<br>')}</div>`
+    +`<div class="lt-q-en">${q.en||''}</div>`
+    +listenBtn
+    +`<div class="lt-opts">`
+    +q.opts.map((o,i)=>`<button class="lt-opt" id="l6t-opt-${i}" onclick="l6tChoose(${i})">${o}</button>`).join('')
+    +`</div><div id="l6t-exp-area"></div>`;
+}
+function l6tChoose(idx){
+  if(l6tAnswered)return;
+  l6tAnswered=true;
+  const q=L6Q[l6tIdx];
+  const correct=q.ans===idx;
+  if(correct)l6tScore++;
+  q.opts.forEach((_,i)=>{
+    const el=document.getElementById('l6t-opt-'+i);
+    if(!el)return;
+    el.disabled=true;
+    if(i===q.ans)el.classList.add('correct');
+    else if(i===idx&&!correct)el.classList.add('wrong');
+  });
+  document.getElementById('l6t-exp-area').innerHTML=
+    `<div class="lt-exp">${correct?'✅':'❌'} ${q.exp||''}</div>`
+    +`<button class="lt-next-btn" onclick="l6tNext()">${l6tIdx===L6Q.length-1?'📊 결과 보기':'다음 →'}</button>`;
+}
+function l6tNext(){
+  l6tIdx++;
+  if(l6tIdx>=L6Q.length){renderL6TScore();return;}
+  const pf=document.getElementById('l6t-prog-fill');
+  const pl=document.getElementById('l6t-prog-label');
+  if(pf)pf.style.width=Math.round(l6tIdx/L6Q.length*100)+'%';
+  if(pl)pl.textContent=l6tIdx+' / '+L6Q.length;
+  renderL6T();
+}
+function renderL6TScore(){
+  const total=L6Q.length;
+  const pct=Math.round(l6tScore/total*100);
+  const pf=document.getElementById('l6t-prog-fill');
+  const pl=document.getElementById('l6t-prog-label');
+  if(pf)pf.style.width='100%';
+  if(pl)pl.textContent=total+' / '+total;
+  let grade,color,msg,next;
+  if(pct>=90){grade='A';color='#2e7d50';msg='🏆 완벽해요!';next='TOPIK 5급에 도전할 준비가 됐어요. 뉴스도 논술도 소설도 읽어 냈어요! 🎉';}
+  else if(pct>=80){grade='B';color='var(--teal-dark)';msg='🌟 훌륭해요!';next='TOPIK 5급 문턱에 서 있어요. 문학·수필 편을 한 번 더 읽어 보세요!';}
+  else if(pct>=70){grade='C';color='var(--amber-600)';msg='👍 잘했어요!';next='틀린 유형(심정 추론·순서 배열·빈칸)을 중심으로 복습해 봐요!';}
+  else{grade='D';color='#c0392b';msg='💪 더 연습해요!';next='Level 6 에피소드를 다시 읽고 재도전해요. 급하지 않아요!';}
+  document.getElementById('l6t-q-area').innerHTML=
+    `<div class="lt-score-wrap">`
+    +`<div class="lt-grade" style="color:${color}">${grade}</div>`
+    +`<div class="lt-grade-lbl" style="color:${color}">${msg}</div>`
+    +`<div class="lt-score-detail">`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${l6tScore}/${total}</div><div class="lt-score-box-lbl">정답</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${pct}%</div><div class="lt-score-box-lbl">정확도</div></div>`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${total-l6tScore}</div><div class="lt-score-box-lbl">오답</div></div>`
+    +`</div>`
+    +`<div style="font-size:13px;color:var(--warm-600);margin:12px 0 20px;line-height:1.6;">${next}</div>`
+    +`<button class="lt-retry-btn" onclick="l6tRetry()">↺ 다시 풀기</button>`
+    +`</div>`;
+}
+function l6tRetry(){
+  l6tIdx=0;l6tScore=0;l6tAnswered=false;
+  document.getElementById('content-area').innerHTML=renderL6TPage();
+  renderL6T();
+}
+
 
 
 async function _doLoadEp(epId, level='L1'){
@@ -1229,7 +1344,7 @@ function checkFill(id){
 // ── WRITING PRACTICE (받아쓰기 + 문장완성) ─────────────
 let _wrComp=[];
 function _wrNorm(s){return (s||'').replace(/[\s.,!?…~·:;'"’‘“”()\[\]<>「」『』\-—_]/g,'').trim();}
-function wrPlayLine(src,text){if(src){try{const a=new Audio(src);a.play();return;}catch(e){}}speakTTS(text);}
+function wrPlayLine(src,text){if(src){try{const a=new Audio(src);a.onerror=()=>speakTTS(text);const pr=a.play();if(pr&&pr.catch)pr.catch(()=>speakTTS(text));return;}catch(e){}}speakTTS(text);}
 function buildWriteTab(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const wp=WRITING_POOL[epKey]||{};
