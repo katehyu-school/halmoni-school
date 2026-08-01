@@ -28,6 +28,7 @@
   </div>
   <div class="school-title"><svg width="26" height="26" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="#0a2540" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="20" fill="white" letter-spacing="2">HQ</text></svg><span class="kq-logo"><span class="kq-k">Hangeul</span><span class="kq-q">Quest</span></span></div>
   <button class="index-btn" onclick="openIndex()">📖 색인</button>
+  <button class="index-btn" id="en-toggle-btn" onclick="nhsToggleEn()" title="설명을 한국어만 보기 / 영어 함께 보기">🇬🇧 EN</button>
   <button class="index-btn" onclick="openQuickRef()">📌 빠른 참고</button>
   <button class="nms-btn" onclick="openNMS()">📓 My Notes</button>
   <button class="nms-btn" onclick="openBoard()">📋 게시판</button>
@@ -155,6 +156,25 @@ function buildSidebar(lv){
 // ══════════════════════════════════════════════════════
 // ── LEVEL 1 TEST ───────────────────────────────────────
 // ══════════════════════════════════════════════════════
+
+
+// ── 🇬🇧 영어 병기 토글 (L5·L6는 기본 숨김 — 한국어 우선) ──
+function _enPref(){ try{return localStorage.getItem('nhs_en_pref');}catch(e){return null;} }
+function _enApply(off){
+  document.body.classList.toggle('en-off',!!off);
+  const b=document.getElementById('en-toggle-btn');
+  if(b){ b.textContent=off?'🇰🇷 KO':'🇬🇧 EN'; b.title=off?'지금은 한국어만 보고 있어요 — 누르면 영어 설명이 함께 나와요':'지금은 영어 설명이 함께 나와요 — 누르면 한국어만 남아요'; }
+}
+function nhsToggleEn(){
+  const off=!document.body.classList.contains('en-off');
+  _enApply(off);
+  try{localStorage.setItem('nhs_en_pref',off?'off':'on');}catch(e){}
+}
+function _enAutoForLevel(lv){
+  const pref=_enPref();
+  if(pref){ _enApply(pref==='off'); return; }   // 사용자가 직접 고른 값이 우선
+  _enApply(lv==='L5'||lv==='L6');               // 기본값: L5·L6만 한국어 우선
+}
 
 // ── 마감/배치 테스트 오답 복습 링크 ─────────────────────
 function _ctTypeLabel(ep){
@@ -1463,7 +1483,7 @@ function buildGrammar(){
     return`<div class="gram-card" style="${tierBorder?`border:${tierBorder};`:''}">
       ${tierBadge}${g.builds_on?`<div style="display:inline-block;background:#F0FDF4;color:#166534;border:1.5px solid #86EFAC;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 10px;margin:0 0 8px 6px">🔄 ${esc(g.builds_on)}</div>`:''}
       <div class="gram-title">${esc(g.title)}</div>
-      ${g.title_en?`<div style="font-size:11px;color:var(--warm-500);margin-top:-4px;margin-bottom:8px">${esc(g.title_en)}</div>`:''}
+      ${g.title_en?`<div class="en-gloss" style="font-size:11px;color:var(--warm-500);margin-top:-4px;margin-bottom:8px">${esc(g.title_en)}</div>`:''}
       <div class="gram-exp">${esc(g.explanation_en)}</div>
       ${g.rule?`<div class="gram-rule">📐 ${esc(g.rule)}</div>`:''}
       ${patternHtml}
@@ -2185,7 +2205,7 @@ function buildUsage(){
         </div>`).join('');
       return`<div style="margin-bottom:22px">
         <div style="font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--teal-lt)">${esc(sec.title)}</div>
-        <div style="font-size:12px;color:var(--warm-700);line-height:1.7;margin-bottom:10px">${esc(sec.explanation_en)}</div>
+        <div class="en-gloss" style="font-size:12px;color:var(--warm-700);line-height:1.7;margin-bottom:10px">${esc(sec.explanation_en)}</div>
         ${exHtml}
       </div>`;
     }
@@ -2223,9 +2243,9 @@ function buildRealLife(){
       const rubric=(item.rubric||[]).map(r=>`<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--warm-800);margin-bottom:6px;cursor:pointer"><input type="checkbox" style="margin-top:2px"><span>${esc(r)}</span></label>`).join('');
       return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
         <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">${esc(item.title||'')}</div>
-        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
         <div style="background:var(--teal-50);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.7;margin-bottom:6px">${esc(item.prompt_ko||'')}</div>
-        ${item.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
+        ${item.prompt_en?`<div class="en-gloss" style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
         ${tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:6px 0 4px">✏️ 문장 뼈대</div><ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:''}
         <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical"></textarea>
         ${item.model?`<div style="margin-top:10px"><button id="wg-btn-${sid}" onclick="toggleWG('${sid}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button><div id="wg-model-${sid}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.8;font-family:var(--font-serif)">${esc(item.model)}</div></div>`:''}
@@ -2242,10 +2262,10 @@ function buildRealLife(){
       const rubric=(item.rubric||[]).map(r=>`<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--warm-800);margin-bottom:6px;cursor:pointer"><input type="checkbox" style="margin-top:2px"><span>${esc(r)}</span></label>`).join('');
       return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
         <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">${esc(item.title||'')}</div>
-        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
         <div style="background:var(--warm-50);border-radius:8px;padding:13px 15px;margin-bottom:10px">${bars}${item.source?`<div style="font-size:10.5px;color:var(--warm-500);margin-top:8px;text-align:right">※ ${esc(item.source)}</div>`:''}</div>
         <div style="background:var(--teal-50);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.7;margin-bottom:6px">${esc(item.prompt_ko||'')}</div>
-        ${item.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
+        ${item.prompt_en?`<div class="en-gloss" style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
         ${tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:6px 0 4px">✏️ 문장 뼈대</div><ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:''}
         <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical"></textarea>
         ${item.model?`<div style="margin-top:10px"><button id="wg-btn-${sid}" onclick="toggleWG('${sid}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button><div id="wg-model-${sid}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.8;font-family:var(--font-serif)">${esc(item.model)}</div></div>`:''}
@@ -2264,7 +2284,7 @@ function buildRealLife(){
         : (item.audio_text?`<div id="rlscript-${sid}" style="display:none;margin-top:10px;background:var(--warm-50);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--warm-900);line-height:1.75">${esc(item.audio_text)}</div>`:'');
       return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
         <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">${esc(item.title||'')}</div>
-        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
         ${item.setup_ko?`<div style="font-size:12px;color:var(--warm-700);margin-bottom:10px">${esc(item.setup_ko)}<br><span style="font-size:11px;color:var(--warm-500)">${esc(item.setup_en||'')}</span></div>`:''}
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
           <button onclick="speakTTS('${escA(playSrc)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ 듣기 Play</button>
@@ -2281,7 +2301,7 @@ function buildRealLife(){
       const qHtml=buildRLQuiz(item.questions||[],sid);
       return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
         <div style="font-size:13px;font-weight:700;color:var(--warm-900);margin-bottom:4px">${esc(item.title||'')}</div>
-        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
         ${item.setup_ko?`<div style="font-size:12px;color:var(--warm-700);margin-bottom:10px">${esc(item.setup_ko)}<br><span style="font-size:11px;color:var(--warm-500)">${esc(item.setup_en||'')}</span></div>`:''}
         ${item.passage?`<div style="background:var(--teal-50);border-radius:var(--radius-sm);padding:13px 17px;margin-bottom:10px;font-size:13px;color:var(--warm-900);line-height:1.85;border-left:3px solid var(--teal)">${esc(item.passage)}</div>
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
@@ -2300,7 +2320,7 @@ function buildRealLife(){
       </div>`).join('');
       return`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:var(--radius-md);padding:18px 22px;margin-bottom:16px;box-shadow:var(--shadow-sm)">
         <div style="font-size:14px;font-weight:700;color:var(--warm-900);margin-bottom:3px">${esc(item.title||'')}</div>
-        <div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
+        <div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
         <div style="background:var(--amber-lt);border:1.5px solid #F0C980;border-radius:var(--radius-sm);padding:11px 14px;font-size:12.5px;color:var(--warm-900);line-height:1.75;margin-bottom:14px">
           ${esc(item.instruction_ko||'')}
           <div style="font-size:11px;color:var(--warm-500);margin-top:4px">${esc(item.instruction_en||'')}</div>
@@ -3454,6 +3474,7 @@ async function setLevel(btn){
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
     const lv=curLevel==='Level 6'?'L6':curLevel==='Level 5'?'L5':curLevel==='Level 4'?'L4':curLevel==='Level 3'?'L3':curLevel==='Level 2'?'L2':'L1';
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 '+curLevel;}
+    _enAutoForLevel(lv);
     buildSidebar(lv);
     loadEp('ep01',lv);
   }

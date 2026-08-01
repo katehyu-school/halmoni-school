@@ -713,3 +713,12 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .ct-wrong-ep{font-size:10px;font-weight:800;color:var(--teal-dark);background:var(--teal-50);border-radius:5px;padding:2px 6px;flex:none;}
 .ct-wrong-q{font-size:12px;color:var(--warm-700);flex:1;min-width:120px;line-height:1.45;}
 .ct-wrong-go{font-size:10.5px;font-weight:700;color:var(--teal);flex:none;}
+
+/* 🇬🇧 영어 병기 토글 — body.en-off 이면 '설명·지시문' 영어만 숨김.
+   어휘 뜻(.vc-en)·자막 번역·예문 번역은 안전망이라 항상 보입니다. */
+body.en-off .en-gloss,
+body.en-off .gram-exp,
+body.en-off .quiz-q-en,
+body.en-off .lt-q-en,
+body.en-off .ep-title-en{display:none !important;}
+#en-toggle-btn{min-width:56px;}
