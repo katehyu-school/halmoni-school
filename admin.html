@@ -638,8 +638,15 @@ async function saveMemberPin(memberName) {
 
   btn.disabled = true; btn.textContent = '저장 중…';
   try {
-    const { error } = await sb.from('members').update({ pin: newPin }).eq('name', memberName);
+    // members 직접 UPDATE 는 차단됨 — 관리자 인증이 들어간 RPC 사용
+    const { data: r, error } = await sb.rpc('admin_set_pin', {
+      p_admin: _adminName, p_admin_pin: _adminPw,
+      p_target: memberName, p_new_pin: newPin
+    });
     if (error) throw error;
+    if (!r || !r.ok) throw new Error(
+      r && r.error === 'denied'  ? '관리자 인증이 만료됐어요. 다시 로그인해 주세요.' :
+      r && r.error === 'bad_pin' ? 'PIN은 4자리 이상이어야 해요.' : '변경하지 못했어요.');
     input.value = '';
     toast(`✅ ${memberName} PIN 변경 완료!`);
     // 관리자 자신의 PIN이 바뀌었으면 세션 갱신
@@ -683,17 +690,29 @@ async function savePasswords() {
     for (const f of toChange) {
       const newPw = document.getElementById(f.id).value.trim();
       // members 테이블에서 해당 role의 모든 멤버 PIN 업데이트
-      const { error } = await sb.from('members').update({ pin: newPw }).eq('role', f.role);
+      const { data: r, error } = await sb.rpc('admin_set_pin_by_role', {
+        p_admin: _adminName, p_admin_pin: _adminPw,
+        p_role: f.role, p_new_pin: newPw
+      });
       if (error) throw new Error(`${f.role} 변경 실패: ${error.message}`);
-      if (f.role === 'admin') newAdminPw = newPw;
+      if (!r || !r.ok) throw new Error(`${f.role} 변경 실패: ` + (
+        r && r.error === 'denied' ? '관리자 인증 만료 — 다시 로그인해 주세요' :
+        r && r.error === 'bad_pin' ? 'PIN은 4자리 이상' : '알 수 없는 오류'));
+      // 관리자 자신의 PIN이 바뀌면 이후 호출이 인증에 실패하므로 즉시 갱신
+      if (f.role === 'admin') { newAdminPw = newPw; _adminPw = newPw; }
       document.getElementById(f.id).value = '';
       count++;
     }
 
     // 게스트 비밀번호 별도 처리 (name='guest'로 단일 업데이트)
     if (newGuestPw) {
-      const { error } = await sb.from('members').update({ pin: newGuestPw }).eq('name', 'guest');
+      const { data: r, error } = await sb.rpc('admin_set_pin', {
+        p_admin: _adminName, p_admin_pin: _adminPw,
+        p_target: 'guest', p_new_pin: newGuestPw
+      });
       if (error) throw new Error(`게스트 변경 실패: ${error.message}`);
+      if (!r || !r.ok) throw new Error('게스트 변경 실패: ' + (
+        r && r.error === 'denied' ? '관리자 인증 만료' : '알 수 없는 오류'));
       document.getElementById('newGuest').value = '';
       count++;
     }

@@ -776,6 +776,19 @@ const _sb    = supabase.createClient(_SBURL, _SBKEY);
 
 let editingIdx = -1;
 let _members = [];  // 멤버 목록 캐시
+// 관리자 RPC 인증용 — 메모리에만 두고 새로고침하면 사라짐(그때는 다시 물어봄)
+let _sessionPin = '';
+function _adminCreds() {
+  let u = null;
+  try { u = JSON.parse(sessionStorage.getItem('hq_user') || 'null'); } catch(e) {}
+  if (!u || !u.name) return null;
+  if (!_sessionPin) {
+    const p = prompt('확인을 위해 PIN을 한 번만 입력해 주세요 · Enter your PIN');
+    if (!p) return null;
+    _sessionPin = p.trim();
+  }
+  return { name: u.name, pin: _sessionPin };
+}
 
 // 페이지 로드 시 멤버 목록 fetch
 async function loadMembers() {
@@ -825,17 +838,21 @@ async function submitSignup() {
 
   btn.disabled = true; btn.textContent = '만드는 중…';
   try {
-    const { data: dup } = await _sb.from('members').select('name').eq('name', nick);
-    if (dup && dup.length) {
-      msg.textContent = '이미 쓰고 있는 이름이에요. 다른 이름으로 해 주세요.';
+    // 계정 생성은 서버 함수로만 가능 (role 은 서버가 trial 로 고정)
+    const { data: r, error } = await _sb.rpc('signup_trial', { p_name: nick, p_pin: pin });
+    if (error) throw new Error(error.message);
+    if (!r || !r.ok) {
+      msg.textContent =
+        r && r.error === 'duplicate' ? '이미 쓰고 있는 이름이에요. 다른 이름으로 해 주세요.' :
+        r && r.error === 'bad_name'  ? '이름은 한글·영문·숫자 2~20자로 정해 주세요.' :
+        r && r.error === 'bad_pin'   ? 'PIN은 4자리 이상으로 정해 주세요.' :
+        '계정을 만들지 못했어요.';
       btn.disabled = false; btn.textContent = '시작하기 · Start'; return;
     }
-    const { error } = await _sb.from('members')
-      .insert({ name: nick, display_name: nick, pin: pin, role: 'trial' });
-    if (error) throw new Error(error.message);
 
-    // 만들자마자 바로 입장
-    const { data } = await _sb.rpc('verify_login', { p_name: nick, p_pin: pin });
+    // 만들자마자 바로 입장 (아이디는 서버가 소문자로 저장)
+    _sessionPin = pin;
+    const { data } = await _sb.rpc('verify_login', { p_name: r.name, p_pin: pin });
     if (!data) { msg.textContent = '계정은 만들어졌어요. 로그인 화면에서 들어와 주세요.'; return; }
     sessionStorage.setItem('hq_user', JSON.stringify(data));
     localStorage.setItem('ms_current',  data.display_name);
@@ -889,17 +906,19 @@ async function submitPinChange() {
   btn.disabled = true; btn.textContent = '확인 중…'; msg.textContent = ''; msg.style.color = '#e74c3c';
 
   try {
-    // 1) 현재 PIN 검증 (verify_login RPC — pin 컬럼 직접 노출 없음)
-    const { data: ok, error: vErr } = await _sb.rpc('verify_login', { p_name: _pcCurrentUserName, p_pin: cur });
-    if (vErr) throw new Error(vErr.message);
-    if (!ok) {
-      msg.textContent = '현재 PIN이 맞지 않아요 · Current PIN is incorrect';
+    // 현재 PIN 확인과 저장을 서버에서 한 번에 (members 직접 UPDATE 는 차단됨)
+    const { data: r, error: uErr } = await _sb.rpc('change_own_pin', {
+      p_name: _pcCurrentUserName, p_current_pin: cur, p_new_pin: nw
+    });
+    if (uErr) throw new Error(uErr.message);
+    if (!r || !r.ok) {
+      msg.textContent = (r && r.error === 'bad_pin')
+        ? 'PIN은 4자리 이상으로 정해 주세요'
+        : '현재 PIN이 맞지 않아요 · Current PIN is incorrect';
       document.getElementById('pcCurrentPin').value = '';
       return;
     }
-    // 2) 새 PIN 저장
-    const { error: uErr } = await _sb.from('members').update({ pin: nw }).eq('name', _pcCurrentUserName);
-    if (uErr) throw new Error(uErr.message);
+    _sessionPin = nw;
 
     msg.style.color = '#4ecdc4';
     msg.textContent = '✅ PIN이 변경되었어요! · PIN updated!';
@@ -982,6 +1001,7 @@ async function checkPw() {
       modal.style.animation = 'shake .4s ease';
     } else {
       // 세션 저장
+      _sessionPin = pin;   // 관리자 작업(RPC 인증)용 — 메모리에만, 저장소엔 남기지 않음
       sessionStorage.setItem('hq_user', JSON.stringify(data));
       // My Space / My Notes 자동 프로필 연결
       localStorage.setItem('ms_current',  data.display_name);
@@ -1143,7 +1163,16 @@ async function saveEditName(memberName) {
   const input = document.getElementById('attinput-' + memberName);
   const newName = input.value.trim();
   if (!newName) return;
-  await _sb.from('members').update({ display_name: newName }).eq('name', memberName);
+  const c = _adminCreds();
+  if (!c) { loadAtt(); return; }
+  const { data: r } = await _sb.rpc('admin_set_display_name', {
+    p_admin: c.name, p_admin_pin: c.pin,
+    p_target: memberName, p_new_name: newName
+  });
+  if (!r || !r.ok) {
+    if (r && r.error === 'denied') { _sessionPin = ''; alert('권한 확인에 실패했어요. 다시 시도해 주세요.'); }
+    else alert('이름을 바꾸지 못했어요.');
+  }
   loadAtt();
 }
 function toggleAddForm() {
@@ -1161,8 +1190,25 @@ async function saveNewMember() {
   const isTrial = document.getElementById('newIsTrial').checked;
   const msg  = document.getElementById('addMemberMsg');
   if (!disp || !id || !pin) { msg.style.color='#e74c3c'; msg.textContent = '모든 항목을 입력해 주세요'; return; }
-  const { error } = await _sb.from('members').insert({ name: id, display_name: disp, pin: pin, role: isTrial ? 'trial' : 'student' });
-  if (error) { msg.style.color='#e74c3c'; msg.textContent = error.message; return; }
+  const c = _adminCreds();
+  if (!c) { msg.style.color='#e74c3c'; msg.textContent = 'PIN 확인이 필요해요'; return; }
+  const { data: r, error } = await _sb.rpc('admin_add_member', {
+    p_admin: c.name, p_admin_pin: c.pin,
+    p_name: id, p_display: disp, p_pin: pin, p_role: isTrial ? 'trial' : 'student'
+  });
+  if (error || !r || !r.ok) {
+    const code = r && r.error;
+    if (code === 'denied') _sessionPin = '';
+    msg.style.color='#e74c3c';
+    msg.textContent =
+      code === 'denied'    ? '권한이 없어요. PIN을 다시 확인해 주세요.' :
+      code === 'duplicate' ? '이미 쓰고 있는 아이디예요.' :
+      code === 'bad_name'  ? '아이디는 한글·영문 소문자·숫자 2~20자로 해 주세요.' :
+      code === 'bad_pin'   ? 'PIN은 4자리 이상이어야 해요.' :
+      code === 'bad_role'  ? '허용되지 않는 역할이에요.' :
+      (error ? error.message : '추가하지 못했어요.');
+    return;
+  }
   msg.style.color='#4ecdc4'; msg.textContent = disp + (isTrial ? ' 체험 계정 추가 완료! 🔓' : ' 추가 완료! ✅');
   document.getElementById('newDispName').value = '';
   document.getElementById('newLoginId').value = '';
