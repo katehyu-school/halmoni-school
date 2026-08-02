@@ -1010,6 +1010,15 @@ async function checkPw() {
       // attendance 테이블은 직접 접근이 막혀 있음(아이들 출결이 밖에서 조회되지 않게).
       _sb.rpc('record_own_attendance', { p_name: data.name, p_pin: pin })
         .then(()=>{}).catch(()=>{});
+
+      // Kids 반 코드 — 로그인한 멤버만 서버에서 받아 저장.
+      // core.js 가 같은 키를 읽으므로 링크에 ?c= 를 붙이지 않아도 명단이 열립니다.
+      _sb.rpc('class_code_for_member', { p_name: data.name, p_pin: pin })
+        .then(({ data: cc }) => {
+          if (cc && cc.ok && cc.code) {
+            try { localStorage.setItem('hq_class_code', cc.code); } catch(e) {}
+          }
+        }).catch(()=>{});
       closeLoginModal();
       enterAs(data);
     }
