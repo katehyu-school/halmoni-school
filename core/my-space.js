@@ -277,6 +277,20 @@ let msTool = 'pen', msBrushSize = 6, msStrokeColor = '#5BB8F5';
 let msCanvas, msCtx, msDrawing = false, msLastX = 0, msLastY = 0;
 
 // ── OPEN / CLOSE ─────────────────────────────────────────
+// 프로필별 저장 키 — 이름을 바꿀 때 이 목록 전체가 따라가야 합니다.
+// (이전에는 _notes·_av·_color·_stickers 만 옮겨서 플래시카드 기록과 작문이 사라졌습니다.)
+const MS_KEYS = ['_notes','_av','_color','_stickers','_writings','_fc_review','_fc_known'];
+function msMoveProfileData(from, to){
+  if(!from || !to || from === to) return;
+  MS_KEYS.forEach(k=>{
+    const v = localStorage.getItem('ms_'+from+k);
+    if(v !== null){
+      localStorage.setItem('ms_'+to+k, v);
+      localStorage.removeItem('ms_'+from+k);
+    }
+  });
+}
+
 function openMySpace() {
   document.getElementById('ms-overlay').classList.add('open');
   document.addEventListener('keydown', _msEscHandler);
@@ -625,15 +639,7 @@ function msSaveDeco() {
     const profiles = msGetJ('ms_profiles');
     const i = profiles.indexOf(msCurrent);
     if (i>-1) profiles[i] = newName;
-    // copy data
-    const notes = msGetJ('ms_'+msCurrent+'_notes');
-    const av = msGet('ms_'+msCurrent+'_av','🐨');
-    const col = msGet('ms_'+msCurrent+'_color','#5BB8F5');
-    const sk = msGet('ms_'+msCurrent+'_stickers','');
-    msSetJ('ms_'+newName+'_notes', notes);
-    msSet('ms_'+newName+'_av', av);
-    msSet('ms_'+newName+'_color', col);
-    msSet('ms_'+newName+'_stickers', sk);
+    msMoveProfileData(msCurrent, newName);   // 꾸미기·메모·플래시카드 기록까지 전부
     msSetJ('ms_profiles', profiles);
     msSet('ms_current', newName);
     msCurrent = newName;

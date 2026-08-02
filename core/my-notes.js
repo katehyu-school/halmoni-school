@@ -266,6 +266,41 @@ let nmsCurrent='', nmsSetupColor='#0f7c6e', nmsDecoColor='', nmsSetupAv='🦊', 
 let nmsTool='pen', nmsBrushSize=5, nmsStrokeColor='#0f7c6e';
 let nmsCanvas, nmsCtx, nmsDrawing=false, nmsLX=0, nmsLY=0;
 
+// ── 프로필별 저장 키 ─────────────────────────────────────
+// 프로필 이름을 바꾸거나 옮길 때는 반드시 이 목록 전체가 따라가야 합니다.
+// (2026-08-02 이전에는 _notes·_color·_av 3개만 옮겨서, 이름을 바꾸면
+//  완료한 편·테스트 점수·단어 복습 상자·작문이 통째로 사라졌습니다.)
+const NMS_KEYS = ['_notes','_color','_av','_writings',
+                  '_ep_done','_prog','_srs','_fc_review','_fc_known'];
+const NMS_AUTO_KEY = 'nms_auto_profile';
+
+function nmsMoveProfileData(from, to){
+  if(!from || !to || from === to) return;
+  NMS_KEYS.forEach(k=>{
+    const v = localStorage.getItem('nms_'+from+k);
+    if(v !== null){
+      localStorage.setItem('nms_'+to+k, v);
+      localStorage.removeItem('nms_'+from+k);
+    }
+  });
+}
+function nmsProfileHasData(name){
+  if(!name) return false;
+  return NMS_KEYS.some(k => localStorage.getItem('nms_'+name+k) !== null);
+}
+// 자동 생성 프로필을 정리하고, 쌓인 진도를 새 이름으로 넘깁니다
+function nmsAdoptAuto(newName){
+  const auto = localStorage.getItem(NMS_AUTO_KEY);
+  if(!auto || auto === newName) return;
+  if(nmsProfileHasData(auto) && !nmsProfileHasData(newName)){
+    nmsMoveProfileData(auto, newName);
+  }
+  const left = nmsGetJ('nms_profiles').filter(x => x !== auto);
+  if(!left.includes(newName)) left.push(newName);
+  nmsSetJ('nms_profiles', left);
+  localStorage.removeItem(NMS_AUTO_KEY);
+}
+
 // ── OPEN / CLOSE ─────────────────────────────────────────
 function openNMS(){
   document.getElementById('nms-overlay').classList.add('open');
@@ -274,13 +309,16 @@ function openNMS(){
   document.body.style.overflow='hidden';
   const profiles=nmsGetJ('nms_profiles');
   nmsCurrent=nmsGet('nms_current');
-  // My Space 와 같은 문제 — 로그인이 nms_current 만 바꾸고 목록엔 안 넣어서
-  // 활성 프로필이 카드 목록에 안 뜨던 것을 열 때 채워 넣습니다.
+  // 로그인이 nms_current 만 바꾸고 목록엔 안 넣어서 활성 프로필이
+  // 카드 목록에 안 뜨던 것을 열 때 채워 넣습니다.
   if(nmsCurrent && !profiles.includes(nmsCurrent)){
     profiles.push(nmsCurrent);
     nmsSetJ('nms_profiles', profiles);
   }
-  if(!profiles.length||!nmsCurrent){ nmsShowSetup(true); }
+  // 아직 이름을 정하지 않은 자동 프로필이면 첫 설정 화면부터 보여줍니다.
+  // (이름을 입력하면 그동안 쌓인 진도가 그 이름으로 따라갑니다)
+  const _isAuto = localStorage.getItem(NMS_AUTO_KEY) === nmsCurrent;
+  if(!profiles.length || !nmsCurrent || _isAuto){ nmsShowSetup(true); }
   else { nmsShowMain(); }
 }
 function _nmsEscHandler(e){if(e.key==='Escape')closeNMS();}
@@ -355,6 +393,8 @@ function nmsUpdateChip(){
 function nmsCreateProfile(){
   const name=document.getElementById('nms-setup-name').value.trim();
   if(!name){alert('이름을 입력해주세요!');return;}
+  // 자동 프로필로 공부하다가 이름을 정한 경우 — 진도를 이 이름으로 넘겨받습니다
+  nmsAdoptAuto(name);
   const profiles=nmsGetJ('nms_profiles');
   if(!profiles.includes(name)) profiles.push(name);
   nmsSetJ('nms_profiles',profiles);
@@ -365,6 +405,8 @@ function nmsCreateProfile(){
   nmsShowMain();
 }
 function nmsSwitchTo(name){
+  // 사용자가 직접 프로필을 고른 뒤로는 자동 이관을 하지 않습니다
+  try{ localStorage.removeItem(NMS_AUTO_KEY); }catch(e){}
   nmsSet('nms_current',name);
   nmsCurrent=name;
   nmsShowMain();
@@ -638,10 +680,8 @@ function nmsSaveDeco(){
     const profiles=nmsGetJ('nms_profiles');
     const i=profiles.indexOf(nmsCurrent);
     if(i>-1) profiles[i]=newName;
-    ['_notes','_color','_av'].forEach(k=>{
-      const v=localStorage.getItem('nms_'+nmsCurrent+k);
-      if(v) nmsSet('nms_'+newName+k,v);
-    });
+    nmsMoveProfileData(nmsCurrent, newName);   // 진도까지 전부 따라갑니다
+    if(localStorage.getItem(NMS_AUTO_KEY)===nmsCurrent) localStorage.removeItem(NMS_AUTO_KEY);
     nmsSetJ('nms_profiles',profiles);
     nmsSet('nms_current',newName);
     nmsCurrent=newName;
@@ -708,3 +748,28 @@ function nmsDeleteWriting(id){
 }
 
 // ═══════════════════════════════════════════════════════
+
+
+// ── 진도 기록용 기본 프로필 ────────────────────────────────
+// nhs.html 의 진도 함수는 nms_current 가 비어 있으면 아무것도 기록하지 않습니다.
+// 로그인도 My Notes 도 거치지 않은 방문자의 진도가 조용히 버려지던 문제를 막기 위해,
+// 처음 방문에 기본 프로필을 하나 만들어 둡니다.
+//   · My Notes 를 처음 열면 이름 입력 화면이 뜨고, 이름을 넣으면 진도가 따라갑니다
+//   · 나중에 로그인하면 로그인 이름으로 진도가 자동 이관됩니다
+(function nmsInitDefaultProfile(){
+  try{
+    const cur      = localStorage.getItem('nms_current');
+    const auto     = localStorage.getItem(NMS_AUTO_KEY);
+    const profiles = nmsGetJ('nms_profiles');
+
+    if(!cur){
+      const name = '나';
+      localStorage.setItem('nms_current', name);
+      if(!profiles.includes(name)){ profiles.push(name); nmsSetJ('nms_profiles', profiles); }
+      localStorage.setItem(NMS_AUTO_KEY, name);
+      return;
+    }
+    // 자동 프로필로 쓰다가 로그인해서 이름이 바뀐 경우
+    if(auto && cur !== auto) nmsAdoptAuto(cur);
+  }catch(e){}
+})();

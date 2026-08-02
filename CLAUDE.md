@@ -26,6 +26,12 @@
 > — **⚠️ 실시간 구독은 폴링으로 교체(3초)** — 테이블을 잠그면 `postgres_changes`가 오지 않습니다(출석부 8초와 같은 이유). 지목·손들기는 반응이 빨라야 해서 3초.
 > — **core.js API 변경**: `practice.raiseHand(name, choice?, unit?, qIndex?)` / `setStatus(status, clearPlayer?)` / **`nextQuestion(unit, qIndex)` 신설**. korean-app_v2.html의 직접 호출 3곳(`syncNext`·`u6Vote`·`u6RevealAnswer`)을 이 API로 교체.
 > — ✅ **검증**: 브라우저에서 게시판 4가지 상태(비로그인·학생·선생님·역할위조) + Kids 손들기/투표/리셋 전 과정 통과. 두 테이블 직접 접근은 `permission denied`. Supabase security advisor의 WARN 64건은 전부 "SECURITY DEFINER 함수를 anon이 호출 가능" — **이 구조의 설계 자체**라 정상(내부 헬퍼 `_session_member`·`_practice_row`는 anon 실행 차단 확인).
+> — 🧑‍🎓 **진도 기록 구조 정리 (같은 세션 후속)** — **HQ 진도는 서버가 아니라 localStorage**, 기준은 로그인 계정이 아니라 **My Notes 프로필 이름(`nms_current`)**. `nhs.html`은 `hq_user`를 한 번도 읽지 않음. 즉 **로그인 = 진도 접근 권한이 아니라 이름 자동 입력**. 방침 확정: **콘텐츠는 열어 두고 게시판만 회원 전용**(공개 베타 부담 낮추기), 서버 동기화는 나중(로드맵 B-6).
+>   · 🔴 **고쳐진 것 ① — 진도가 조용히 버려지고 있었음**: 진도 함수 7개가 전부 `if(!p) return`인데, `nms_current`를 만드는 곳은 index.html 로그인과 My Notes 이름 만들기 **딱 두 곳**. 둘 다 안 한 방문자는 한 시간 공부해도 **오류도 안내도 없이** 아무것도 안 남았음. → my-notes.js 로드 시 **기본 프로필 `나` 자동 생성**(`nms_auto_profile` 표시).
+>   · 🔴 **고쳐진 것 ② — 이름 바꾸면 진도가 사라졌음**: `nmsSaveDeco`가 `_notes`·`_color`·`_av` **3개만** 옮겼는데 실제 프로필 키는 9개. 빠진 6개가 전부 진도(`_ep_done`·`_prog`·`_srs`·`_fc_review`·`_fc_known`·`_writings`). → `NMS_KEYS` 목록 + `nmsMoveProfileData()`로 전부 이동. **my-space.js도 같은 버그**(`_writings`·`_fc_*` 누락) → `MS_KEYS`로 동일 처리.
+>   · **이관 규칙**: 자동 프로필로 쓰다가 ⓐ 로그인하거나 ⓑ My Notes에서 이름을 만들면 `nmsAdoptAuto()`가 진도를 새 이름으로 옮기고 `나`를 목록에서 지움. 사용자가 **직접 프로필을 전환한 뒤로는 이관 안 함**(`nmsSwitchTo`가 표시 제거) — 두 아이가 각자 프로필을 쓰는 경우를 건드리지 않기 위함.
+>   · **My Notes를 처음 열면** 자동 프로필 상태일 때 이름 입력 화면을 먼저 보여줌(그동안 쌓인 진도는 입력한 이름으로 따라감).
+>   · ✅ 브라우저 검증 8단계: 첫방문 → 로그인없이 학습(기록됨) → 로그인 이관(`나` 흔적 0, 목록도 정리) → 이름변경(진도 전부 따라감) → 두번째 프로필 생성(첫 프로필 진도 안 건드림) → 각자 학습 분리 → 전환 → 선생님 실제 데이터 원상복구(11키).
 > — 🔧 **덤 — My Space·My Notes 프로필 목록 버그**: 로그인하면 index.html이 `ms_current`/`nms_current`만 로그인 이름으로 바꾸고 **목록(`ms_profiles`/`nms_profiles`)에는 안 넣어서**, 활성 프로필인데 카드 목록에 안 떴음 → 다른 프로필로 한 번 넘어가면 돌아올 방법이 없었음(**한 화면을 두 아이가 같이 쓰는 Kids 수업에서 걸림**). 열 때 목록에 없으면 채워 넣도록 수정(`openMySpace`·`openNMS`). 검증: `["할머니"]` → `["할머니","선생님"]`, 카드 2개 정상 표시.
 > — ℹ️ **공용 화면(한 로그인, 두 아이) 확인 완료** — Kids 수업 기능은 로그인 계정이 아니라 **반 코드**로 열리고 아이 이름은 호출 때마다 넘어가므로, 출석·손들기·투표·지목 전부 두 아이가 각자 가능(브라우저에서 검증). 게시판만 글쓴이 이름을 서버가 세션에서 채우므로 로그인한 쪽 이름으로 올라감 — 단 게시판은 nhs.html에만 있고 Kids 앱에는 없음.
 > — 📌 **`_session_member`·`_practice_row`는 내부 전용** — `members` 전체 행(pin 포함)을 돌려주므로 anon/authenticated 실행 권한을 절대 주지 말 것.
