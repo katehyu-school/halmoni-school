@@ -28,6 +28,14 @@
   const urlParams = new URLSearchParams(window.location.search);
   const isTeacher = urlParams.has('teacher');
   const urlName = urlParams.get('name');
+  // 반 코드 — students/attendance 는 anon 직접 접근이 차단돼 있어 이 코드로만 열림.
+  // 수업 링크(?c=...)로 한 번 들어오면 저장해 두고 다음부터는 없어도 동작.
+  const _urlCode = urlParams.get('c');
+  if (_urlCode) { try { localStorage.setItem('hq_class_code', _urlCode); } catch(e) {} }
+  function classCode() {
+    if (_urlCode) return _urlCode;
+    try { return localStorage.getItem('hq_class_code') || ''; } catch(e) { return ''; }
+  }
 
   // ─── 날짜 유틸 ────────────────────────────────────────────────
   function todayStr() {
@@ -100,73 +108,89 @@
       checkedToday: new Set(),
     };
 
-    async function loadStudents() {
-      const { data } = await supa.from('students').select('name').order('created_at');
-      if (data) state.students = data.map(r => r.name);
-      options.onStudentsChange?.(state.students);
-      await loadAttendance();
+    // 명단·출결은 전부 서버 함수(RPC)로만 읽고 씁니다.
+    // 테이블 직접 접근은 막혀 있어요 — 아이들 이름이 밖에서 조회되지 않게 하려는 것.
+    let _codeWarned = false;
+    function _noCode() {
+      if (_codeWarned) return;
+      _codeWarned = true;
+      console.warn('[core] 반 코드가 없습니다. 수업 링크(?c=...)로 열어 주세요.');
+      options.onNoClassCode?.();
     }
 
-    async function loadAttendance() {
-      const { data } = await supa
-        .from('attendance').select('student_name').eq('class_date', todayStr());
-      if (data) state.checkedToday = new Set(data.map(r => r.student_name));
+    async function loadStudents() {
+      const code = classCode();
+      if (!code) { _noCode(); return; }
+      const { data } = await supa.rpc('class_roster_code', { p_code: code });
+      if (!data || !data.ok) { _noCode(); return; }
+      state.students = data.students || [];
+      state.checkedToday = new Set(data.present || []);
+      options.onStudentsChange?.(state.students);
       options.onAttendanceChange?.(state.checkedToday);
     }
 
+    // 이전 API 유지 — 이제는 명단과 함께 한 번에 받아옵니다
+    async function loadAttendance() { await loadStudents(); }
+
     async function checkIn(name) {
-      if (state.checkedToday.has(name)) {
-        await supa.from('attendance')
-          .delete().eq('student_name', name).eq('class_date', todayStr());
-      } else {
-        await supa.from('attendance')
-          .upsert({ student_name: name, class_date: todayStr() },
-                  { onConflict: 'student_name,class_date' });
-      }
-      await loadAttendance();
+      const code = classCode();
+      if (!code) { _noCode(); return; }
+      await supa.rpc('class_check_toggle_code', { p_code: code, p_name: name });
+      await loadStudents();
     }
+
+    // 학생 추가·삭제는 선생님 확인이 필요합니다
+    async function _teacherCreds() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem('hq_teacher') || 'null');
+        if (saved && saved.name && saved.pin) return saved;
+      } catch(e) {}
+      const n = prompt('선생님 아이디 · Teacher ID');
+      if (!n) return null;
+      const p = prompt('PIN');
+      if (!p) return null;
+      const cr = { name: n.trim(), pin: p.trim() };
+      try { sessionStorage.setItem('hq_teacher', JSON.stringify(cr)); } catch(e) {}
+      return cr;
+    }
+    function _forgetTeacher() { try { sessionStorage.removeItem('hq_teacher'); } catch(e) {} }
 
     async function addStudent(name) {
       if (!name) return { ok: false, error: '이름이 비었어요' };
       if (state.students.includes(name)) return { ok: false, error: '이미 있어요' };
-      const { error } = await supa.from('students').insert({ name });
-      if (error) return { ok: false, error: error.message };
+      const cr = await _teacherCreds();
+      if (!cr) return { ok: false, error: '선생님 확인이 필요해요' };
+      const { data } = await supa.rpc('class_add_student',
+        { p_teacher: cr.name, p_pin: cr.pin, p_name: name });
+      if (!data || !data.ok) {
+        if (data && data.error === 'denied') _forgetTeacher();
+        return { ok: false, error: data && data.error === 'denied'
+          ? '아이디나 PIN이 맞지 않아요' : '추가하지 못했어요' };
+      }
       await loadStudents();
       return { ok: true };
     }
 
     async function deleteStudent(name) {
-      const { error } = await supa.from('students').delete().eq('name', name);
-      if (error) return { ok: false, error: error.message };
+      const cr = await _teacherCreds();
+      if (!cr) return { ok: false, error: '선생님 확인이 필요해요' };
+      const { data } = await supa.rpc('class_remove_student',
+        { p_teacher: cr.name, p_pin: cr.pin, p_name: name });
+      if (!data || !data.ok) {
+        if (data && data.error === 'denied') _forgetTeacher();
+        return { ok: false, error: '삭제하지 못했어요' };
+      }
       await loadStudents();
       return { ok: true };
     }
 
-    // 실시간 구독
-    supa.channel('core-att-' + Math.random().toString(36).slice(2, 8))
-      .on('postgres_changes',
-          { event: 'INSERT', schema: 'public', table: 'attendance' },
-          payload => {
-            if (payload.new?.class_date === todayStr()) {
-              state.checkedToday.add(payload.new.student_name);
-              options.onAttendanceChange?.(state.checkedToday);
-            }
-          })
-      .on('postgres_changes',
-          { event: 'DELETE', schema: 'public', table: 'attendance' },
-          payload => {
-            if (payload.old?.student_name) {
-              state.checkedToday.delete(payload.old.student_name);
-              options.onAttendanceChange?.(state.checkedToday);
-            }
-          })
-      .subscribe();
-
-    supa.channel('core-stu-' + Math.random().toString(36).slice(2, 8))
-      .on('postgres_changes',
-          { event: '*', schema: 'public', table: 'students' },
-          () => loadStudents())
-      .subscribe();
+    // 실시간 구독 대신 주기적 새로고침.
+    // attendance/students 테이블은 anon 직접 접근이 막혀 있어 postgres_changes 가 오지 않습니다.
+    // 한 반에 두세 명이라 8초 간격이면 체감상 실시간과 다르지 않아요.
+    setInterval(() => {
+      if (document.hidden) return;
+      loadStudents();
+    }, 8000);
 
     // 초기 로드
     loadStudents();

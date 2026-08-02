@@ -1006,15 +1006,10 @@ async function checkPw() {
       // My Space / My Notes 자동 프로필 연결
       localStorage.setItem('ms_current',  data.display_name);
       localStorage.setItem('nms_current', data.display_name);
-      // 출석 자동 기록 — 정식 수강생(student)만. 체험·게스트 계정은 출석부에 남기지 않음
-      // (자습 가입이 늘어도 실제 수업 출석부가 섞이지 않게 하려는 것)
-      if (data.role === 'student') {
-        const _today = new Date().toISOString().slice(0,10);
-        _sb.from('attendance').upsert(
-          { student_name: data.display_name, class_date: _today, status: 'present', logged_in_at: new Date().toISOString() },
-          { onConflict: 'student_name,class_date' }
-        ).then(()=>{}).catch(()=>{});
-      }
+      // 출석 자동 기록 — 서버가 본인 확인 후 기록하고, 정식 수강생(student)이 아니면 건너뜀.
+      // attendance 테이블은 직접 접근이 막혀 있음(아이들 출결이 밖에서 조회되지 않게).
+      _sb.rpc('record_own_attendance', { p_name: data.name, p_pin: pin })
+        .then(()=>{}).catch(()=>{});
       closeLoginModal();
       enterAs(data);
     }
@@ -1124,11 +1119,16 @@ async function loadAtt() {
   const list = document.getElementById('attList');
   list.innerHTML = '<div class="att-empty">불러오는 중…</div>';
   try {
-    const today = new Date().toISOString().slice(0,10);
-    const [{ data: members }, { data: logs }] = await Promise.all([
-      _sb.from('members').select('name,display_name').eq('role','student').order('display_name'),
-      _sb.from('attendance').select('student_name,status,logged_in_at').eq('class_date', today)
-    ]);
+    const c = _adminCreds();
+    if (!c) { list.innerHTML = '<div class="att-empty">PIN 확인이 필요해요</div>'; return; }
+    const { data: att } = await _sb.rpc('attendance_today', { p_teacher: c.name, p_pin: c.pin });
+    if (!att || !att.ok) {
+      if (att && att.error === 'denied') _sessionPin = '';
+      list.innerHTML = '<div class="att-empty">권한 확인에 실패했어요. 다시 열어 주세요.</div>';
+      return;
+    }
+    const members = att.students || [];
+    const logs    = att.logs || [];
     if (!members || !members.length) {
       list.innerHTML = '<div class="att-empty">등록된 학생이 없어요</div>'; return;
     }
@@ -1222,11 +1222,14 @@ async function toggleAtt(name, current, btn) {
   btn.className = 'att-btn ' + next;
   btn.textContent = label;
   btn.onclick = () => toggleAtt(name, next, btn);
-  const today = new Date().toISOString().slice(0,10);
-  await _sb.from('attendance').upsert(
-    { student_name: name, class_date: today, status: next },
-    { onConflict: 'student_name,class_date' }
-  );
+  const c = _adminCreds();
+  if (!c) return;
+  const { data: r } = await _sb.rpc('attendance_set',
+    { p_teacher: c.name, p_pin: c.pin, p_student: name, p_status: next });
+  if (!r || !r.ok) {
+    if (r && r.error === 'denied') _sessionPin = '';
+    alert('출결을 저장하지 못했어요.');
+  }
 }
 
 </script>

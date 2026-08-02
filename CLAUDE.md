@@ -14,6 +14,19 @@
 | **모바일 앱 (hq-mobile.html)** | 프로토타입 → **실전 투입 중** / ⚠️ **오랫동안 미업데이트** (웹은 L6까지 갔는데 앱은 뒤처짐) | 🔜 **다음 세션 우선** — 웹 진도 반영·L4~L6 콘텐츠 연동·기능 확장 |
 | **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |
 
+> 🔐 **2026-08-02 완료 (자습 로드맵 + DB 보안 대수술 세션)** — 다음 세션은 이 블록부터 볼 것:
+> — **🔴 Supabase 직접 쓰기 전면 차단 — 코드 고칠 때 반드시 알 것.** `members`·`students`·`attendance` 세 테이블은 anon 권한이 **(none)**. `.from('members').update(...)` 같은 직접 호출은 **전부 조용히 실패함**. 반드시 아래 RPC를 쓸 것.
+>   · 계정: `signup_trial`(role은 서버가 trial 고정) / `change_own_pin` / `admin_add_member` / `admin_set_pin` / `admin_set_pin_by_role` / `admin_set_display_name`
+>   · 출결: `attendance_today` / `attendance_set` / `record_own_attendance`(로그인 시 본인, student 아니면 skip)
+>   · Kids 교실: `class_roster_code` / `class_check_toggle_code`(반 코드) · `class_add_student` / `class_remove_student`(선생님 아이디+PIN)
+>   · 관리자 계열은 전부 `_member_is_admin`(role admin/teacher)으로 자격 확인. **admin 역할은 RPC로 못 만듦** — 필요하면 Supabase 대시보드에서.
+> — **고쳐진 구멍**: members가 anon에게 INSERT/UPDATE/DELETE 전부 열려 있었음 → 누구나 남의 PIN을 바꾸거나 자기를 `role:'admin'`으로 승격 가능했음. 모든 테이블에 **TRUNCATE**도 열려 있었음(통째로 비우기 가능). `students`(아이 이름 9)·`attendance`(출결 35)는 anon이 그냥 SELECT 가능 → **미성년자 이름+출결이 API 한 번에 내려받아지는 상태**였음. 레거시 SECURITY DEFINER 함수 2개(`log_attendance`·`verify_member_login`) search_path 고정.
+> — **⚠️ Kids 수업 링크가 바뀜**: `korean-app_v2.html?name=Liam&c=halmoni-2026` — `?c=`가 반 코드(app_passwords의 role='kids_class'에 보관, anon 완전 차단). 한 번 들어오면 localStorage에 저장돼 이후 생략 가능. 코드 바꾸려면 그 행의 hash를 수정. **core.js의 실시간 구독은 폴링(8초)으로 교체** — 테이블을 잠그면 postgres_changes가 안 옴.
+> — **🧭 학습 로드맵 신설**(nhs.html `loadRoadmap`, Start Here 사이드바 맨 위): **자습 기준**(선생님 전제 제거)·영어 병기·Step 0 한글 입문 포함 5단계 + **📦 모르면 지나치는 기능 11개 표**(색인·빠른참고·플래시카드·빠른복습·EN토글·MyNotes·게시판·말하기·쓰기·자기점검·모바일) + 일주일 예시. 진행 체크는 `nms_{이름}_ep_done`/`_srs`/**신규 `_prog`**(배치·마감테스트 결과)에서 읽음.
+> — **진도 저장은 My Notes 이름 기준** — 로그인하거나 📓 My Notes에서 이름을 만들어야 `nms_current`가 생기고 그때부터 기록됨. 로드맵 맨 위에 이 안내 상시 노출.
+> — **부수**: 배치/마감테스트 결과 저장(`_saveTestScore`·`_savePlacement`) / SRS 상자번호(2/5) 설명 접이식(웹 플래시카드+모바일 단어장) / index.html **체험 계정 셀프 가입** 신설(드롭다운엔 trial 숨김, 재방문은 이름 직접 입력) / 출석 자동기록을 정식 student로 한정 / 모바일 홈 제목 하드코딩 `미래의 학습` → 로그인 이름 따라감 / **CSS 변수 `--warm-600`·`--warm-400`이 정의된 적 없이 48곳에서 쓰이던 것** nhs.css :root에 추가.
+> — **🔜 남은 보안 항목**: `practice_session`(손들기·지목)에 `current_player`·`raised_hands`로 아이 이름이 실시간으로 들어가는데 이 테이블은 아직 anon 개방. `board_posts`도 개방(author_name). 공개 베타 전에 같은 방식으로 잠글 것.
+
 > ✅ **2026-08-01 완료 (L6 완결 + 평가 체계 대수술 세션)** — 다음 세션은 이 블록부터 볼 것:
 > — **L6 ep10 수필 《저녁노을》 완성 → L6 ep01~12 전편 완결.** 영상 `data/nhs/L6/videos/ep10.mp4`(89초, 4단락 자막). 문법 4개: **-곤 하다**(전 레벨 최초)·**-기에**(전 레벨 최초)·-기 마련이다(L4 ep03 복습)·-느라(고)(L5 ep06·L6 ep08 복습). 초안의 "서운하기 마련"이 최종본에서 "미련이 남기 마련"으로 바뀌어(선생님이 ep11과 중복 피하려 수정) 어휘도 서운하다 → **미련**으로 교체.
 > — **🆕 L6 마감 테스트 신설**(`data/nhs/L6/closing_test.json`, 24문항) + nhs.html L6 함수세트(loadL6Test 등)·사이드바. 구성: 문법 mc 8 + 읽기 6 + 듣기 5 + **TOPIK 신유형 5**(심정추론 2·접속사 빈칸 1·어휘 빈칸 1·문장 순서 배열 1). 듣기 5개는 **녹음 대기**(TTS 크레딧 소진, 8/13 이후) — `data/nhs/L6/TTS/closing/ct_listen_01~05.mp3` 넣으면 자동 연결.
@@ -379,7 +392,7 @@ const urlName   = _hc ? _hc.urlName : null;
 ## 🌐 도메인 (2026-05-26 연결 완료 ✅)
 
 - **hangeulquest.com** → GitHub Pages 메인 도메인 연결 + HTTPS 🔒
-- **hangeulquestkids.com** → URL Redirect → `hangeulquest.com/korean-app_v2.html`
+- **hangeulquestkids.com** (+ www) → URL Redirect → `https://hangeulquest.com/` (**메인 루트**, Kids 앱 파일이 아님 — 2026-08-02 Namecheap 실제 설정 확인). Kids 앱으로 바로 가는 공개 링크는 없음. 아이들에게 의미 있는 문패라 유지하기로 함
 - Namecheap 구매, Free Domain Privacy 적용
 - **GitHub Pages**: `katehyu-school/halmoni-school` 리포, main 브랜치, CNAME 파일 자동 생성됨
 - 리포 분리 없이 단일 리포 유지 — 두 도메인 모두 정상 동작 중
