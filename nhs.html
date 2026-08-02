@@ -289,6 +289,7 @@ function ltNext(){
 function renderLTScore(){
   const total=L1Q.length;
   const pct=Math.round(ltScore/total*100);
+  _saveTestScore('L1',ltScore,total);
   const pf=document.getElementById('lt-prog-fill');
   const pl=document.getElementById('lt-prog-label');
   if(pf)pf.style.width='100%';
@@ -405,6 +406,7 @@ function l2tNext(){
 function renderL2TScore(){
   const total=L2Q.length;
   const pct=Math.round(l2tScore/total*100);
+  _saveTestScore('L2',l2tScore,total);
   const pf=document.getElementById('l2t-prog-fill');
   const pl=document.getElementById('l2t-prog-label');
   if(pf)pf.style.width='100%';
@@ -519,6 +521,7 @@ function l3tNext(){
 function renderL3TScore(){
   const total=L3Q.length;
   const pct=Math.round(l3tScore/total*100);
+  _saveTestScore('L3',l3tScore,total);
   const pf=document.getElementById('l3t-prog-fill');
   const pl=document.getElementById('l3t-prog-label');
   if(pf)pf.style.width='100%';
@@ -634,6 +637,7 @@ function l4tNext(){
 function renderL4TScore(){
   const total=L4Q.length;
   const pct=Math.round(l4tScore/total*100);
+  _saveTestScore('L4',l4tScore,total);
   const pf=document.getElementById('l4t-prog-fill');
   const pl=document.getElementById('l4t-prog-label');
   if(pf)pf.style.width='100%';
@@ -749,6 +753,7 @@ function l5tNext(){
 function renderL5TScore(){
   const total=L5Q.length;
   const pct=Math.round(l5tScore/total*100);
+  _saveTestScore('L5',l5tScore,total);
   const pf=document.getElementById('l5t-prog-fill');
   const pl=document.getElementById('l5t-prog-label');
   if(pf)pf.style.width='100%';
@@ -864,6 +869,7 @@ function l6tNext(){
 function renderL6TScore(){
   const total=L6Q.length;
   const pct=Math.round(l6tScore/total*100);
+  _saveTestScore('L6',l6tScore,total);
   const pf=document.getElementById('l6t-prog-fill');
   const pl=document.getElementById('l6t-prog-label');
   if(pf)pf.style.width='100%';
@@ -989,6 +995,7 @@ function renderPTScore(){
     return`<tr><td style="padding:4px 10px;font-weight:700">${l}</td><td style="padding:4px 10px">${s.c} / ${s.a}</td><td style="padding:4px 10px;color:${ok?'var(--teal-dark)':'#c0392b'}">${ok?'통과':'더 연습'}</td></tr>`;
   }).join('');
   const total=ptLog.length,corr=ptLog.filter(r=>r.correct).length;
+  _savePlacement(startLv,corr,total);
   const note=ptStopped?'연속으로 두 문제를 틀려서 여기서 마쳤어요. 지금 수준에 딱 맞는 지점을 찾은 거예요!':'끝까지 다 풀었어요!';
   document.getElementById('pt-q-area').innerHTML=
     `<div class="lt-score-wrap">`
@@ -3022,6 +3029,25 @@ function _markEpDone(epKey){
   // Refresh sidebar checkmarks
   _refreshSidebarDone();
 }
+// ── 학습 진행 저장 (배치·마감 테스트) ──────────────────
+//   저장: nms_{프로필}_prog = { placement:{...}, test_L1:{...} }
+function _progGet(){
+  const p=_nmsProfile(); if(!p) return {};
+  try{ return JSON.parse(localStorage.getItem('nms_'+p+'_prog')||'{}'); }catch(e){ return {}; }
+}
+function _progSet(key,val){
+  const p=_nmsProfile(); if(!p) return;
+  const o=_progGet(); o[key]=val;
+  try{ localStorage.setItem('nms_'+p+'_prog', JSON.stringify(o)); }catch(e){}
+}
+function _saveTestScore(lv,score,total){
+  if(!total) return;
+  _progSet('test_'+lv,{s:score,t:total,pct:Math.round(score/total*100),d:_srsToday()});
+}
+function _savePlacement(startLv,corr,total){
+  _progSet('placement',{lv:startLv,s:corr,t:total,d:_srsToday()});
+}
+
 function _refreshSidebarDone(){
   const done=_epDoneSet();
   document.querySelectorAll('.ep-item[data-epkey]').forEach(el=>{
@@ -3229,7 +3255,14 @@ function _renderFC(){
     +_fcLevels.map(lv=>{const on=_fcFilter.has(lv);return '<button class="fc-chip'+(on?' on':'')
       +'" onclick="_fcChip(\''+lv+'\')">'+lv.replace('L','Lv')+'</button>';}).join('')
     +'</div>';
-  m.innerHTML=chipsHtml
+  const srsHelpHtml='<details style="margin:0 0 12px;font-size:11.5px;">'
+    +'<summary style="cursor:pointer;font-weight:700;color:var(--teal-dark);">💡 상자 번호(1/5~5/5)가 뭔가요?</summary>'
+    +'<div style="margin-top:6px;line-height:1.75;background:var(--teal-50);border-radius:8px;padding:9px 11px;color:var(--warm-600);">'
+    +'맞히면 상자가 한 칸 올라가고 <b>다음 복습이 그만큼 미뤄져요.</b> 틀리면 1번으로 돌아옵니다.<br>'
+    +'<span style="color:var(--warm-500)">1번 = 내일 · 2번 = 3일 뒤 · 3번 = 일주일 뒤 · 4번 = 16일 뒤 · 5번 = 35일 뒤</span><br>'
+    +'🔄 빨강(1~2번)은 아직 약한 것, ✅ 초록(4~5번)은 거의 익힌 것이에요.'
+    +'</div></details>';
+  m.innerHTML=chipsHtml+srsHelpHtml
     +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">'
     +'<div style="font-size:12px;color:var(--warm-500);">'+(_fcIdx+1)+' / '+total+' 카드</div>'
     +'<div style="display:flex;align-items:center;gap:8px;">'
@@ -3563,9 +3596,111 @@ async function setLevel(btn){
   }
 }
 
+// ══════════════════════════════════════════════════════
+// 🧭 학습 로드맵 — 4단계 지도 + 진행 체크
+// ══════════════════════════════════════════════════════
+const RM_LV_ARRAYS = {L1:'L1_EPISODES',L2:'L2_EPISODES',L3:'L3_EPISODES',L4:'L4_EPISODES',L5:'L5_EPISODES',L6:'L6_EPISODES'};
+function _rmEpCounts(){
+  const done=_epDoneSet(), out={};
+  const arrs={L1:L1_EPISODES,L2:L2_EPISODES,L3:L3_EPISODES,L4:L4_EPISODES,L5:L5_EPISODES,L6:L6_EPISODES};
+  Object.keys(arrs).forEach(lv=>{
+    const eps=(arrs[lv]||[]).filter(e=>e&&e.id&&/^ep\d+$/.test(e.id));
+    const d=eps.filter(e=>done.has(lv+'_'+e.id)).length;
+    out[lv]={t:eps.length,d:d};
+  });
+  return out;
+}
+function _rmStepCard(num,icon,title,sub,body,ok){
+  return '<div style="display:flex;gap:13px;margin-bottom:14px;align-items:flex-start;">'
+    +'<div style="flex:none;width:34px;height:34px;border-radius:50%;background:'+(ok?'var(--teal)':'var(--gray-100)')
+      +';color:'+(ok?'#fff':'var(--warm-500)')+';font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;">'
+      +(ok?'✓':num)+'</div>'
+    +'<div style="flex:1;min-width:0;background:#fff;border:1.5px solid '+(ok?'var(--teal)':'var(--gray-200)')
+      +';border-radius:12px;padding:13px 15px;">'
+    +'<div style="font-size:15px;font-weight:800;color:var(--warm-700);">'+icon+' '+title+'</div>'
+    +'<div style="font-size:12px;color:var(--warm-500);margin-top:2px;">'+sub+'</div>'
+    +'<div style="margin-top:9px;font-size:13px;color:var(--warm-600);line-height:1.7;">'+body+'</div>'
+    +'</div></div>';
+}
+async function loadRoadmap(){
+  document.querySelectorAll('.basics-topic-item').forEach(el=>el.classList.remove('active'));
+  const ca=document.getElementById('content-area');
+  ca.innerHTML='<div style="padding:40px;text-align:center;color:var(--warm-500);">🧭 불러오는 중…</div>';
+  await _epIdxReady;
+  const prof=_nmsProfile();
+  const prog=_progGet();
+  const cnt=_rmEpCounts();
+  const srs=_srsMap(), srsN=Object.keys(srs).length, dueN=_srsDueCount();
+
+  // ① 배치 테스트
+  const pl=prog.placement;
+  const s1ok=!!pl;
+  const s1=pl
+    ? '<b style="color:var(--teal-dark)">'+esc(pl.lv||'')+'부터 시작</b>을 추천받았어요 <span style="color:var(--warm-400)">('+pl.s+'/'+pl.t+' · '+esc(pl.d||'')+')</span><br>'
+      +'<button class="lt-retry-btn" style="margin-top:8px;font-size:12.5px;padding:6px 14px" onclick="loadPlacementTest()">↺ 다시 풀어보기</button>'
+    : '아직 안 했어요. 15문제만 풀면 어느 레벨부터 시작할지 알려드려요.<br>'
+      +'<button class="lt-retry-btn" style="margin-top:8px;font-size:12.5px;padding:6px 14px;background:var(--teal);color:#fff;border-color:var(--teal)" onclick="loadPlacementTest()">🎯 배치 테스트 하기</button>';
+
+  // ② 에피소드
+  const bars=Object.keys(cnt).filter(lv=>cnt[lv].t>0).map(lv=>{
+    const c=cnt[lv], pct=c.t?Math.round(c.d/c.t*100):0;
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:12px;">'
+      +'<span style="flex:none;width:22px;font-weight:800;color:var(--warm-600)">'+lv+'</span>'
+      +'<span style="flex:1;height:7px;background:var(--gray-100);border-radius:4px;overflow:hidden;">'
+        +'<span style="display:block;height:100%;width:'+pct+'%;background:'+(pct===100?'var(--teal)':'var(--amber)')+';"></span></span>'
+      +'<span style="flex:none;width:52px;text-align:right;color:var(--warm-500)">'+c.d+' / '+c.t+'</span></div>';
+  }).join('');
+  const totD=Object.values(cnt).reduce((a,b)=>a+b.d,0);
+  const s2='<div style="margin-bottom:8px">한 편은 <b>영상 → 어휘 → 문법 → 퀴즈 → 실생활</b> 순서예요. 수업 시간에 선생님과 함께 보고, 퀴즈와 쓰기는 다음 날 혼자 풀어요.</div>'+bars;
+
+  // ③ 매일 복습
+  const s3ok=srsN>0;
+  const s3='<div>수업과 수업 사이 <b>6일이 진짜 승부처</b>예요. 하루 5분, 폰으로 단어만 넘겨도 잊지 않아요.</div>'
+    +'<div style="margin-top:8px;display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;">'
+    +'<span>만난 단어 <b style="color:var(--teal-dark)">'+srsN+'</b>개</span>'
+    +'<span>오늘 복습할 것 <b style="color:'+(dueN?'var(--amber-600)':'var(--warm-400)')+'">'+dueN+'</b>개</span></div>'
+    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">📱 폰에서는 <b>hangeulquest.com/hq-mobile.html</b> · 💻 여기서는 상단 <b>🃏 플래시카드</b></div>';
+
+  // ④ 마감 테스트
+  const trows=['L1','L2','L3','L4','L5','L6'].filter(lv=>cnt[lv].t>0).map(lv=>{
+    const t=prog['test_'+lv];
+    const g=t?(t.pct>=90?'A':t.pct>=80?'B':t.pct>=70?'C':'D'):'—';
+    const col=t?(t.pct>=80?'var(--teal-dark)':t.pct>=70?'var(--amber-600)':'#c0392b'):'var(--warm-400)';
+    return '<tr><td style="padding:3px 12px 3px 0;font-weight:700;color:var(--warm-600)">'+lv+'</td>'
+      +'<td style="padding:3px 12px 3px 0;color:'+col+';font-weight:800">'+g+'</td>'
+      +'<td style="padding:3px 0;color:var(--warm-500)">'+(t?(t.s+'/'+t.t+' · '+t.pct+'%'):'아직 안 봤어요')+'</td></tr>';
+  }).join('');
+  const s4ok=Object.keys(prog).some(k=>k.indexOf('test_')===0);
+  const s4='<div style="margin-bottom:8px">한 레벨 12편을 마치면 마감 테스트로 확인해요. <b>틀린 문제는 그 에피소드로 바로 갈 수 있어요.</b></div>'
+    +'<table style="font-size:12.5px;border-collapse:collapse">'+trows+'</table>';
+
+  ca.innerHTML='<div style="width:100%;max-width:760px;margin:0 auto;padding:24px;box-sizing:border-box;">'
+    +'<div class="basics-header"><div class="basics-icon-big">🧭</div>'
+    +'<div><div class="basics-title-kr">학습 로드맵</div><div class="basics-title-en">How to Study · Roadmap</div></div></div>'
+    +'<div style="background:var(--teal-50);border-radius:12px;padding:13px 16px;margin:0 0 20px;font-size:13.5px;color:var(--teal-dark);line-height:1.7;">'
+    +'💡 <b>웹은 배우는 곳, 폰은 안 잊는 곳.</b> 새로 배우는 건 여기서, 매일 짧게 지키는 건 폰에서 해요.'
+    +(prof?'':'<br><span style="font-size:12px;color:var(--warm-500)">※ 로그인하면 진행 상황이 이름별로 저장돼요.</span>')
+    +'</div>'
+    +_rmStepCard(1,'🎯','배치 테스트','한 번만 · 어디서 시작할지 찾기',s1,s1ok)
+    +_rmStepCard(2,'📺','에피소드로 배우기','수업 때 선생님과 · 주 1편',s2,totD>0)
+    +_rmStepCard(3,'🔁','매일 5분 단어 복습','수업 없는 날 · 폰으로',s3,s3ok)
+    +_rmStepCard(4,'🏆','레벨 마감 테스트','12편을 마치면',s4,s4ok)
+    +'<div style="margin-top:22px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:15px 17px;">'
+    +'<div style="font-size:15px;font-weight:800;color:var(--warm-700);margin-bottom:10px;">📅 일주일 리듬</div>'
+    +'<table style="width:100%;font-size:12.5px;border-collapse:collapse;line-height:1.9;">'
+    +'<tr style="color:var(--warm-500);font-size:11.5px;"><td></td><td style="padding:0 8px">💻 웹 (PC)</td><td>📱 폰 (5분)</td></tr>'
+    +'<tr><td style="font-weight:700;color:var(--warm-600);white-space:nowrap">수업하는 날</td><td style="padding:0 8px">새 에피소드 영상·어휘·문법</td><td style="color:var(--warm-400)">—</td></tr>'
+    +'<tr><td style="font-weight:700;color:var(--warm-600);white-space:nowrap">그 다음 날</td><td style="padding:0 8px">그 편 퀴즈·쓰기 15분</td><td>단어 복습</td></tr>'
+    +'<tr><td style="font-weight:700;color:var(--warm-600);white-space:nowrap">나머지 날</td><td style="padding:0 8px;color:var(--warm-400)">—</td><td>단어 복습 + 롤플레이</td></tr>'
+    +'<tr><td style="font-weight:700;color:var(--warm-600);white-space:nowrap">레벨 끝날 때</td><td style="padding:0 8px">마감 테스트 → 틀린 편 복습</td><td style="color:var(--warm-400)">—</td></tr>'
+    +'</table></div>'
+    +'<div style="margin-top:14px;font-size:11.5px;color:var(--warm-400);line-height:1.6;">※ 진행 상황은 이 브라우저에만 저장돼요. PC와 폰은 각각 따로 기록됩니다.</div>'
+    +'</div>';
+}
+
 function buildBasicsSidebar(){
   const list=document.getElementById('ep-list');
-  const roadmap='';
+  const roadmap='<div class="lt-item pt-item" id="roadmap-sidebar-item" onclick="loadRoadmap()" style="background:var(--amber-lt);border:1.5px solid var(--amber);margin-bottom:4px"><div class="lt-num">🧭</div><div class="lt-name">학습 로드맵<span style="display:block;font-size:10.5px;font-weight:500;color:var(--warm-500)">어떻게 공부하나요 · Roadmap</span></div></div>';
   const item=t=>'<div class="basics-topic-item'+(t.id===curBasicsTopic?' active':'')+'" id="bt-'+t.id+'" onclick="loadBasics(\''+t.id+'\')">'
     +'<div class="basics-topic-icon">'+t.icon+'</div>'
     +'<div class="basics-topic-name">'+t.label+'<span class="basics-topic-name-en">'+t.en+'</span></div>'

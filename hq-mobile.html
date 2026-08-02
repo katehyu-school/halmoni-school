@@ -539,6 +539,22 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <p id="contDesc">웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요</p>
       <button class="go-btn" id="contBtn" onclick="openEp(1)">▶ 5분 복습 시작 Start Review</button>
     </div>
+    <details class="card" style="padding:13px 15px">
+      <summary style="cursor:pointer;font-size:.92rem;font-weight:800;color:#eaf4f3;list-style:none">🧭 이렇게 공부해요 <span style="font-size:.7rem;color:#8fb0ad;font-weight:600">How to study</span></summary>
+      <div style="margin-top:11px;font-size:.78rem;color:#9fbcb8;line-height:1.8">
+        <div style="background:#16242b;border-radius:10px;padding:10px 12px;margin-bottom:11px;color:var(--teal);font-weight:700">
+          💡 웹은 <b>배우는 곳</b>, 폰은 <b>안 잊는 곳</b>.
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:.74rem;line-height:1.9">
+          <tr style="color:#7e9b97;font-size:.68rem"><td></td><td style="padding:0 6px">💻 웹</td><td>📱 폰</td></tr>
+          <tr><td style="font-weight:800;color:#c9dedb;white-space:nowrap">수업하는 날</td><td style="padding:0 6px">영상·어휘·문법</td><td style="color:#5e7975">—</td></tr>
+          <tr><td style="font-weight:800;color:#c9dedb;white-space:nowrap">그 다음 날</td><td style="padding:0 6px">퀴즈·쓰기 15분</td><td>단어 복습</td></tr>
+          <tr><td style="font-weight:800;color:#c9dedb;white-space:nowrap">나머지 날</td><td style="padding:0 6px;color:#5e7975">—</td><td>단어 복습 + 롤플레이</td></tr>
+          <tr><td style="font-weight:800;color:#c9dedb;white-space:nowrap">레벨 끝날 때</td><td style="padding:0 6px">마감 테스트</td><td style="color:#5e7975">—</td></tr>
+        </table>
+        <div style="margin-top:10px;font-size:.7rem;color:#7e9b97">📖 전체 로드맵(배치 테스트·레벨 진도)은 웹 <b>🌱 Start Here › 🧭 학습 로드맵</b>에 있어요.</div>
+      </div>
+    </details>
     <div class="card">
       <h3>📋 Daily Quest</h3>
       <div class="dq-item done"><span class="dq-check">✓</span><span>장면 다시 보기 (Watch)</span><span class="dq-xp">+10 XP</span></div>
@@ -853,6 +869,14 @@ function vocabRender(keepFocus){
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
       ${chip('🆕 처음 보는','only','new')}${chip('🔄 약한 것','only','weak')}${chip('✅ 익힌 것','only','done')}
     </div>
+    <details style="margin:0 0 12px;font-size:.72rem;color:#8fb0ad">
+      <summary style="cursor:pointer;font-weight:800;color:var(--teal);padding:2px 0">💡 단어 앞 숫자(2/5)가 뭔가요?</summary>
+      <div style="margin-top:7px;line-height:1.85;background:#16242b;border:1px solid #2b3d45;border-radius:10px;padding:10px 12px">
+        맞히면 상자가 한 칸 올라가고 <b style="color:#eaf4f3">다음 복습이 그만큼 미뤄져요.</b> 틀리면 1번으로 돌아옵니다.<br>
+        1번 = 내일 · 2번 = 3일 뒤 · 3번 = 일주일 뒤 · 4번 = 16일 뒤 · 5번 = 35일 뒤<br>
+        <span style="color:#7e9b97">빨강(1~2번)은 아직 약한 것, 초록(4~5번)은 거의 익힌 것이에요.</span>
+      </div>
+    </details>
     <div style="font-size:.72rem;color:#8fb0ad;margin-bottom:8px">${list.length}개${list.length>SHOW?` 중 ${SHOW}개 표시 — 검색으로 좁혀 보세요`:''}</div>
     ${shown.map(c=>{
       const st=m[_sId(c)];
