@@ -1224,6 +1224,61 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 </head>
 <body>
 
+<!-- ═══ 반 코드 잠금 — HQ Kids 는 비공개 가정반입니다 ═══
+     코드는 두 경로로 들어옵니다:
+       ① 수업 링크 ?c=...            ② 로그인(class_code_for_member: student/teacher/admin 에게만)
+     코드가 아예 없으면 잠급니다. 코드가 있으면 바로 열고 서버 확인은 뒤에서 합니다
+     (네트워크 오류로 수업이 막히지 않도록, 확인 실패는 통과시킵니다). -->
+<div id="kids-gate" style="display:none;position:fixed;inset:0;z-index:99999;background:#0a2f3a;
+     color:#eaf4f3;align-items:center;justify-content:center;padding:24px;
+     font-family:'Jua',system-ui,sans-serif;text-align:center;">
+  <div style="max-width:400px">
+    <div style="font-size:52px;margin-bottom:14px">🔒</div>
+    <h2 style="font-size:1.35rem;margin:0 0 10px;color:#4ECDC4">비공개 반이에요</h2>
+    <p style="font-size:.95rem;line-height:1.8;color:#9fbcb8;margin:0 0 8px">
+      HQ Kids 는 가정반 수업이라 초대받은 사람만 들어올 수 있어요.</p>
+    <p style="font-size:.78rem;line-height:1.7;color:#7e9b97;margin:0 0 24px;font-style:italic">
+      HQ Kids is a private family class.</p>
+    <a href="nhs.html" style="display:block;background:#4ECDC4;color:#06303a;text-decoration:none;
+       padding:14px;border-radius:14px;font-weight:900;margin-bottom:10px">
+      🌏 한글 퀘스트로 가기 · Go to Hangeul Quest</a>
+    <a href="index.html" style="display:block;background:none;color:#9fbcb8;text-decoration:none;
+       border:1.5px solid #2b3d45;padding:12px;border-radius:14px;font-size:.85rem">
+      학생·선생님이신가요? 로그인하기 · Sign in</a>
+  </div>
+</div>
+<script>
+(function(){
+  function _gateCode(){
+    try{
+      var c = new URLSearchParams(location.search).get('c');
+      if(c){ try{ localStorage.setItem('hq_class_code', c); }catch(e){} return c; }
+      return localStorage.getItem('hq_class_code') || '';
+    }catch(e){ return ''; }
+  }
+  function _showGate(){
+    var g = document.getElementById('kids-gate');
+    if(g) g.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  var code = _gateCode();
+  if(!code){ _showGate(); return; }
+  // 코드가 있으면 열어 두고, 서버 확인은 뒤에서 (실패해도 막지 않음)
+  window.addEventListener('load', function(){
+    try{
+      var sb = (typeof HalmoniCore !== 'undefined') ? HalmoniCore.getSupabase() : null;
+      if(!sb) return;
+      sb.rpc('class_roster_code', { p_code: code }).then(function(r){
+        if(r && r.data && r.data.ok === false){
+          try{ localStorage.removeItem('hq_class_code'); }catch(e){}
+          _showGate();
+        }
+      }).catch(function(){});
+    }catch(e){}
+  });
+})();
+</script>
+
 <!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>

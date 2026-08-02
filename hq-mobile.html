@@ -332,7 +332,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <div class="logo-txt" style="margin-top:8px">HANGEUL QUEST</div>
     <div class="sub" style="margin-top:6px">누가 학습할까요? · Who's learning today?</div>
   </div>
-  <button class="prof-card prof-kids" onclick="enterKids()">
+  <button class="prof-card prof-kids" id="profKidsCard" onclick="enterKids()">
     <svg width="46" height="52" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="#3DBDB5" stroke="#2da89f" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.1)"/><polygon points="8,12 10,18 16,18 11,22 13,28 8,24 3,28 5,22 0,18 6,18" fill="#FFD93D"/><polygon points="50,12 52,18 58,18 53,22 55,28 50,24 45,28 47,22 42,18 48,18" fill="#FFD93D"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">HQ</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>
     <span><h2>HQ Kids</h2><p>게임으로 배워요! · Play &amp; Learn</p></span>
   </button>
@@ -1083,7 +1083,28 @@ function renderKidsGames(){
       ${item('🐱','기초 다지기 게임들','Level 1 Games','자모/소리 복습 게임 모음','Jamo &amp; sound review games','play',"openFoundMap()")}
     </div>`;
 }
-function enterKids(){show('scr-kids-map')}
+// HQ Kids 는 비공개 가정반 — 반 코드(수업 링크 ?c= 또는 로그인 시 저장)가 있어야 열립니다
+function hqClassCode(){
+  try{
+    var c = new URLSearchParams(location.search).get('c');
+    if(c){ try{ localStorage.setItem('hq_class_code', c); }catch(e){} return c; }
+    return localStorage.getItem('hq_class_code') || '';
+  }catch(e){ return ''; }
+}
+function enterKids(){
+  if(!hqClassCode()){
+    toast('HQ Kids 는 가정반 수업이에요 — 로그인 후 이용해 주세요');
+    return;
+  }
+  show('scr-kids-map');
+}
+// 코드가 없는 방문자에게는 카드 자체를 보여주지 않습니다 (공개 QR 대응)
+document.addEventListener('DOMContentLoaded', function(){
+  if(!hqClassCode()){
+    var c = document.getElementById('profKidsCard');
+    if(c) c.style.display = 'none';
+  }
+});
 function enterHQ(){
   if(!localStorage.getItem('hqOnboardSeen')){show('scr-hq-onboard');return}
   renderHome();show('scr-hq-home')

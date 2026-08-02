@@ -600,15 +600,6 @@ body::before {
     </div>
     <div class="app-grid" id="appGrid">
 
-      <a class="app-card kinder" href="halmoni_kinder.html" id="card0">
-        <span class="edit-icon" onclick="openEdit(event,0)">✏️</span>
-        <span class="app-icon" id="icon0">🌷</span>
-        <div class="app-level" id="level0">Kindergarten · 유아반</div>
-        <div class="app-name"  id="name0">할머니 스쿨</div>
-        <div class="app-desc"  id="desc0">한글 기초 · 노래 · 그림<br>Hangul Basics & Fun</div>
-        <div class="app-arrow">입장하기 →</div>
-      </a>
-
       <a class="app-card elem" href="korean-app_v2.html" id="card1">
         <span class="edit-icon" onclick="openEdit(event,1)">✏️</span>
         <span class="app-icon" id="icon1"><svg width="58" height="66" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="rgba(255,255,255,0.18)" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.08)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(4,0)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(46,0)"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">HQ</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg></span>
@@ -1044,7 +1035,7 @@ function enterAs(user) {
   document.getElementById('pinChangeLinkWrap').style.display = (role === 'guest') ? 'none' : 'block';
 
   // 앱 카드 URL에 ?name=xxx 파라미터 추가 (수업 연동용)
-  ['card0','card1','card2'].forEach(id => {
+  ['card1','card2'].forEach(id => {
     const card = document.getElementById(id);
     const base = card.getAttribute('href').split('?')[0];
     card.setAttribute('href', base + '?name=' + encodeURIComponent(user.name)
@@ -1062,8 +1053,7 @@ function enterAs(user) {
   } else if (role === 'trial') {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
     document.querySelector('.welcome-text p').innerHTML = '🔓 체험 계정 · Hangeul Quest ep01·05·07 체험 가능 <span style="background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#4ecdc4;">TRIAL</span>';
-    // 체험 계정은 HQ(13+)만 노출 — Kindergarten/Kids는 비공개 가정반이라 숨김
-    document.getElementById('card0').style.display = 'none';
+    // 체험 계정은 HQ(13+)만 노출 — Kids는 비공개 가정반이라 숨김
     document.getElementById('card1').style.display = 'none';
   } else {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
