@@ -3055,8 +3055,9 @@ function _srsMap(){
 }
 function _srsSave(m){ const k=_srsKey(); if(!k)return; try{ localStorage.setItem(k,JSON.stringify(m)); }catch(e){} }
 function _srsUpdate(cardId,ok){
-  const m=_srsMap(), cur=m[cardId]||{b:0,due:_srsToday()};
-  const b=ok?Math.min((cur.b||0)+1,5):1;
+  const m=_srsMap(), cur=m[cardId]||{b:1,due:_srsToday()};
+  // 처음 보는 단어를 맞히면 상자 2(3일 뒤). 틀리면 언제나 상자 1(내일).
+  const b=ok?Math.min((cur.b||1)+1,5):1;
   m[cardId]={b:b,due:_srsPlus(SRS_GAP[b])};
   _srsSave(m);
 }

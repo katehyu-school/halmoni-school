@@ -494,6 +494,22 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   </div>
 </section>
 
+
+<!-- HQ: SRS 단어 복습 -->
+<section class="screen hq" id="scr-hq-vocab">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>🗂️ 단어 복습 Vocabulary</h1>
+  </div>
+  <div class="hq-pad" id="srsBody"></div>
+  <div class="bottomnav">
+    <button class="bn-item" onclick="show('scr-hq-home')"><span>🏠</span><span>홈</span></button>
+    <button class="bn-item" onclick="showEpList()"><span>📖</span><span>학습</span></button>
+    <button class="bn-item on"><span>🗂️</span><span>단어장</span></button>
+    <button class="bn-item" onclick="show('scr-profile')"><span>👤</span><span>프로필</span></button>
+  </div>
+</section>
+
 <!-- HQ: DASHBOARD -->
 <section class="screen hq" id="scr-hq-home">
   <div class="topbar">
@@ -523,6 +539,11 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <div class="dq-item" id="dq5"><span class="dq-check"></span><span>캐릭터 롤플레이 (Roleplay)</span><span class="dq-xp">+20 XP</span></div>
       <div class="dq-item" id="dq6"><span class="dq-check"></span><span>Kakao Talk Simulation</span><span class="dq-xp">+15 XP</span></div>
     </div>
+    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="srsOpen()">
+      <span style="font-size:1.6rem">🔁</span>
+      <span><b style="font-size:.92rem">오늘의 단어 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="srsHomeSub">불러오는 중…</span></span>
+      <span style="margin-left:auto;color:var(--teal);font-weight:900" id="srsHomeCnt">→</span>
+    </button>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
       <span style="font-size:1.6rem">🎭</span>
       <span><b style="font-size:.92rem">캐릭터 롤플레이 Roleplay <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="rpCardSub">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
@@ -544,8 +565,8 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   <div class="bottomnav">
     <button class="bn-item on"><span>🏠</span><span>홈</span></button>
     <button class="bn-item" onclick="showEpList()"><span>📖</span><span>학습</span></button>
-    <button class="bn-item" onclick="toast('프로토타입에서는 홈/학습만 열려요')"><span>🗂️</span><span>단어장</span></button>
-    <button class="bn-item" onclick="toast('프로토타입에서는 홈/학습만 열려요')"><span>👤</span><span>프로필</span></button>
+    <button class="bn-item" onclick="srsOpen()"><span>🗂️</span><span>단어장</span></button>
+    <button class="bn-item" onclick="show('scr-profile')"><span>👤</span><span>프로필</span></button>
   </div>
 </section>
 
@@ -719,6 +740,126 @@ function confetti(n){
     setTimeout(()=>c.remove(),3200);
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   SRS 단어 복습 — 웹(nhs.html)과 같은 저장소를 씁니다.
+   같은 브라우저면 nms_{프로필}_srs 를 공유해 진도가 이어집니다.
+   ═══════════════════════════════════════════════════ */
+const SRS_GAP={1:1,2:3,3:7,4:16,5:35};
+const SRS_CAP=20;
+function _sToday(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function _sPlus(n){const d=new Date();d.setDate(d.getDate()+n);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function _sProfile(){try{return localStorage.getItem('nms_current')||'me'}catch(e){return 'me'}}
+function _sKey(){return 'nms_'+_sProfile()+'_srs'}
+function _sMap(){
+  try{
+    const raw=localStorage.getItem(_sKey());
+    if(raw)return JSON.parse(raw);
+    const m={},t=_sToday(),p=_sProfile();
+    JSON.parse(localStorage.getItem('nms_'+p+'_fc_known')||'[]').forEach(id=>m[id]={b:3,due:t});
+    JSON.parse(localStorage.getItem('nms_'+p+'_fc_review')||'[]').forEach(id=>m[id]={b:1,due:t});
+    localStorage.setItem(_sKey(),JSON.stringify(m));
+    return m;
+  }catch(e){return {}}
+}
+function _sSave(m){try{localStorage.setItem(_sKey(),JSON.stringify(m))}catch(e){}}
+function _sId(c){return c.lv+'_'+c.ep+'_'+c.k}
+function _sMark(c,ok){
+  const m=_sMap(),cur=m[_sId(c)]||{b:1};
+  // 처음 보는 단어를 맞히면 상자 2(3일 뒤). 틀리면 언제나 상자 1(내일).
+  const b=ok?Math.min((cur.b||1)+1,5):1;
+  m[_sId(c)]={b:b,due:_sPlus(SRS_GAP[b])};
+  _sSave(m);
+  return b;
+}
+function _sDueCount(){const m=_sMap(),t=_sToday();return Object.keys(m).filter(k=>(m[k].due||'')<=t).length}
+
+let VOCAB_ALL=null,srsDeck=[],srsIdx=0,srsFlip=false,srsLog={ok:0,no:0};
+async function _sLoadVocab(){
+  if(VOCAB_ALL)return VOCAB_ALL;
+  const r=await fetch('data/nhs/vocab_index.json');
+  if(!r.ok)throw new Error('fetch fail');
+  VOCAB_ALL=await r.json();
+  return VOCAB_ALL;
+}
+function _sBuildDeck(){
+  const m=_sMap(),t=_sToday();
+  const due=VOCAB_ALL.filter(c=>{const st=m[_sId(c)];return st&&(st.due||'')<=t});
+  due.sort((a,b)=>(m[_sId(a)].b||1)-(m[_sId(b)].b||1));
+  const deck=due.slice(0,SRS_CAP);
+  if(deck.length<SRS_CAP){
+    const fresh=VOCAB_ALL.filter(c=>!m[_sId(c)]);
+    // 낮은 레벨부터 차례로 — 모바일은 복습이 주목적이라 무작위보다 순서대로
+    deck.push(...fresh.slice(0,SRS_CAP-deck.length));
+  }
+  srsDeck=deck;srsIdx=0;srsFlip=false;srsLog={ok:0,no:0};
+}
+async function srsOpen(){
+  show('scr-hq-vocab');
+  const b=document.getElementById('srsBody');
+  b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
+  try{await _sLoadVocab()}catch(e){
+    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b></div>';return;
+  }
+  _sBuildDeck();srsRender();
+}
+function srsRender(){
+  const b=document.getElementById('srsBody');if(!b)return;
+  if(!srsDeck.length){b.innerHTML='<div class="card cont-card" style="text-align:center"><h2>🎉 오늘 복습 끝!</h2><p>새로 볼 단어가 없어요. 내일 다시 만나요.</p></div>';srsHomeUpdate();return;}
+  if(srsIdx>=srsDeck.length){
+    const tot=srsLog.ok+srsLog.no;
+    b.innerHTML=`<div class="card cont-card" style="text-align:center">
+      <h2>🎉 ${tot}장 복습 완료!</h2>
+      <p>알아요 ${srsLog.ok}장 · 다시 볼래요 ${srsLog.no}장<br><span style="font-size:.72rem;color:#8fb0ad">틀린 단어는 내일 다시 나와요</span></p>
+      <button class="go-btn" onclick="srsOpen()">↻ 더 복습하기</button>
+      <button class="card ob-link" style="margin-top:8px" onclick="show('scr-hq-home')">홈으로</button>
+    </div>`;
+    srsHomeUpdate();return;
+  }
+  const c=srsDeck[srsIdx],m=_sMap(),st=m[_sId(c)];
+  const badge=st?`<span style="background:${st.b<=2?'#7a3b3b':'#2c5c52'};color:#eaf4f3;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">${st.b<=2?'🔄':'✅'} 상자 ${st.b}/5</span>`
+                :'<span style="background:#3a4a55;color:#cfe3e0;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">🆕 처음</span>';
+  const pct=Math.round(srsIdx/srsDeck.length*100);
+  b.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:#8fb0ad;margin-bottom:8px">
+      <span>${srsIdx+1} / ${srsDeck.length}</span><span>${c.lv} · ${c.ep}</span>
+    </div>
+    <div style="height:6px;background:#22333c;border-radius:99px;overflow:hidden;margin-bottom:14px"><div style="height:100%;width:${pct}%;background:var(--teal);transition:width .2s"></div></div>
+    <div class="card" style="text-align:center;padding:26px 18px;min-height:190px;cursor:pointer" onclick="srsFlipCard()">
+      <div style="margin-bottom:10px">${badge}</div>
+      <div style="font-size:2.4rem;margin-bottom:6px">${c.x||'📖'}</div>
+      <div style="font-size:1.5rem;font-weight:900;color:#eaf4f3;font-family:'Noto Serif KR',serif">${c.k}</div>
+      ${c.r?`<div style="font-size:.7rem;color:#8fb0ad;margin-top:3px">[${c.r}]</div>`:''}
+      ${srsFlip?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid #2b3d45">
+          <div style="font-size:1rem;color:var(--teal);font-weight:800">${c.e}</div>
+          ${c.n?`<div style="font-size:.72rem;color:#bcd6d3;margin-top:8px;line-height:1.55">${c.n}</div>`:''}
+          ${c.t?`<div style="font-size:.66rem;color:#7e9b97;margin-top:8px">📖 ${c.t}</div>`:''}
+        </div>`
+       :'<div style="font-size:.72rem;color:#7e9b97;margin-top:16px">탭하면 뜻이 보여요 · tap to flip</div>'}
+    </div>
+    <button class="card" style="width:100%;color:#eaf4f3;font-weight:800" onclick="speak('${c.k.replace(/'/g,"\\'")}')">🔊 듣기</button>
+    ${srsFlip?`<div style="display:flex;gap:10px;margin-top:6px">
+        <button class="go-btn" style="flex:1;background:#7a3b3b" onclick="srsAnswer(false)">😕 다시 볼래요</button>
+        <button class="go-btn" style="flex:1" onclick="srsAnswer(true)">😀 알아요</button>
+      </div>`
+     :'<button class="go-btn" style="width:100%;margin-top:6px" onclick="srsFlipCard()">뜻 보기 · Show meaning</button>'}
+  `;
+}
+function srsFlipCard(){srsFlip=true;srsRender()}
+function srsAnswer(ok){
+  const c=srsDeck[srsIdx];
+  _sMark(c,ok);
+  if(ok)srsLog.ok++;else srsLog.no++;
+  srsIdx++;srsFlip=false;srsRender();
+}
+function srsHomeUpdate(){
+  const sub=document.getElementById('srsHomeSub'),cnt=document.getElementById('srsHomeCnt');
+  const n=_sDueCount();
+  if(sub)sub.textContent=n?`오늘 복습할 단어 ${n}개 — 전 레벨에서 자동으로 골라 줘요`:'오늘 복습할 단어가 없어요 · 새 단어를 배워 보세요';
+  if(cnt)cnt.textContent=n?String(n):'→';
+  if(cnt)cnt.style.color=n?'var(--gold)':'var(--teal)';
+}
+
 /* ───────── KIDS: 진행도 + 별 (localStorage) ───────── */
 function loadKidsProgress(){
   try{ return Object.assign({stars:12,block:false,bat:false,word:false}, JSON.parse(localStorage.getItem('hqkProgress')||'{}')) }
@@ -832,8 +973,9 @@ function enterHQ(){
   if(!localStorage.getItem('hqOnboardSeen')){show('scr-hq-onboard');return}
   renderHome();show('scr-hq-home')
 }
-function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();show('scr-hq-home')}
+function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();srsHomeUpdate();show('scr-hq-home')}
 function renderHome(){
+  try{srsHomeUpdate()}catch(e){}
   const last=parseInt(localStorage.getItem('hqLastEp')||'1');
   const done=localStorage.getItem('hqLastEpDone')==='1';
   document.getElementById('contTag').textContent=`이어서 학습 Continue · L1 ep${String(last).padStart(2,'0')}`;
