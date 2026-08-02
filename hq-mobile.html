@@ -499,15 +499,24 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-vocab">
   <div class="topbar">
     <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>🗂️ 단어 복습 Vocabulary</h1>
+    <h1>🗂️ 단어장 Vocabulary</h1>
   </div>
-  <div class="hq-pad" id="srsBody"></div>
+  <div class="hq-pad" id="vocabBody"></div>
   <div class="bottomnav">
     <button class="bn-item" onclick="show('scr-hq-home')"><span>🏠</span><span>홈</span></button>
     <button class="bn-item" onclick="showEpList()"><span>📖</span><span>학습</span></button>
     <button class="bn-item on"><span>🗂️</span><span>단어장</span></button>
     <button class="bn-item" onclick="show('scr-profile')"><span>👤</span><span>프로필</span></button>
   </div>
+</section>
+
+<!-- HQ: SRS 복습 카드 -->
+<section class="screen hq" id="scr-hq-srs">
+  <div class="topbar">
+    <button class="back" onclick="vocabOpen()">←</button>
+    <h1>🔁 오늘의 복습 Review</h1>
+  </div>
+  <div class="hq-pad" id="srsBody"></div>
 </section>
 
 <!-- HQ: DASHBOARD -->
@@ -539,7 +548,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <div class="dq-item" id="dq5"><span class="dq-check"></span><span>캐릭터 롤플레이 (Roleplay)</span><span class="dq-xp">+20 XP</span></div>
       <div class="dq-item" id="dq6"><span class="dq-check"></span><span>Kakao Talk Simulation</span><span class="dq-xp">+15 XP</span></div>
     </div>
-    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="srsOpen()">
+    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="srsStart()">
       <span style="font-size:1.6rem">🔁</span>
       <span><b style="font-size:.92rem">오늘의 단어 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="srsHomeSub">불러오는 중…</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900" id="srsHomeCnt">→</span>
@@ -565,7 +574,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   <div class="bottomnav">
     <button class="bn-item on"><span>🏠</span><span>홈</span></button>
     <button class="bn-item" onclick="showEpList()"><span>📖</span><span>학습</span></button>
-    <button class="bn-item" onclick="srsOpen()"><span>🗂️</span><span>단어장</span></button>
+    <button class="bn-item" onclick="vocabOpen()"><span>🗂️</span><span>단어장</span></button>
     <button class="bn-item" onclick="show('scr-profile')"><span>👤</span><span>프로필</span></button>
   </div>
 </section>
@@ -784,18 +793,88 @@ async function _sLoadVocab(){
 }
 function _sBuildDeck(){
   const m=_sMap(),t=_sToday();
-  const due=VOCAB_ALL.filter(c=>{const st=m[_sId(c)];return st&&(st.due||'')<=t});
+  const POOL=(typeof _vMatch==='function'&&(vFilter.lv||vFilter.only||vFilter.q))?_vMatch():VOCAB_ALL;
+  const due=POOL.filter(c=>{const st=m[_sId(c)];return st&&(st.due||'')<=t});
   due.sort((a,b)=>(m[_sId(a)].b||1)-(m[_sId(b)].b||1));
   const deck=due.slice(0,SRS_CAP);
   if(deck.length<SRS_CAP){
-    const fresh=VOCAB_ALL.filter(c=>!m[_sId(c)]);
+    const fresh=POOL.filter(c=>!m[_sId(c)]);
     // 낮은 레벨부터 차례로 — 모바일은 복습이 주목적이라 무작위보다 순서대로
     deck.push(...fresh.slice(0,SRS_CAP-deck.length));
   }
   srsDeck=deck;srsIdx=0;srsFlip=false;srsLog={ok:0,no:0};
 }
-async function srsOpen(){
+/* ── 🗂️ 단어장: 목록 + 검색 + 내 SRS 현황 ── */
+let vFilter={lv:'',q:'',only:''};
+async function vocabOpen(){
   show('scr-hq-vocab');
+  const b=document.getElementById('vocabBody');
+  b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
+  try{await _sLoadVocab()}catch(e){
+    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b></div>';return;
+  }
+  vocabRender();
+}
+function vSet(k,val){vFilter[k]=(vFilter[k]===val?'':val);vocabRender()}
+function vSearch(v){vFilter.q=v.trim();vocabRender(true)}
+function _vMatch(){
+  const m=_sMap(),q=vFilter.q.toLowerCase();
+  return VOCAB_ALL.filter(c=>{
+    if(vFilter.lv&&c.lv!==vFilter.lv)return false;
+    const st=m[_sId(c)];
+    if(vFilter.only==='new'&&st)return false;
+    if(vFilter.only==='weak'&&!(st&&st.b<=2))return false;
+    if(vFilter.only==='done'&&!(st&&st.b>=4))return false;
+    if(q&&!(c.k.toLowerCase().includes(q)||(c.e||'').toLowerCase().includes(q)||(c.r||'').toLowerCase().includes(q)))return false;
+    return true;
+  });
+}
+function vocabRender(keepFocus){
+  const b=document.getElementById('vocabBody');if(!b)return;
+  const m=_sMap(),t=_sToday();
+  const seen=Object.keys(m).length, done=Object.values(m).filter(x=>x.b>=4).length, dueN=Object.values(m).filter(x=>(x.due||'')<=t).length;
+  const list=_vMatch(), SHOW=60, shown=list.slice(0,SHOW);
+  const chip=(lab,k,val)=>`<button onclick="vSet('${k}','${val}')" style="border:none;border-radius:99px;padding:6px 12px;font-size:.72rem;font-weight:800;cursor:pointer;background:${vFilter[k]===val?'var(--teal)':'#22333c'};color:${vFilter[k]===val?'#06231f':'#9fbcb8'}">${lab}</button>`;
+  b.innerHTML=`
+    <div class="card">
+      <h3>📊 내 어휘 지도</h3>
+      <div class="stat-row" style="margin:8px 0 0">
+        <div class="stat"><div class="v" style="font-size:1.1rem">${seen}<span style="font-size:.7rem;color:#8fb0ad">/${VOCAB_ALL.length}</span></div><div class="k">만난 단어</div></div>
+        <div class="stat"><div class="v" style="font-size:1.1rem">${done}</div><div class="k">거의 익힘</div></div>
+        <div class="stat"><div class="v" style="font-size:1.1rem;color:${dueN?'var(--gold)':'#8fb0ad'}">${dueN}</div><div class="k">오늘 복습</div></div>
+      </div>
+    </div>
+    <button class="go-btn" style="width:100%" onclick="srsStart()">🔁 ${vFilter.lv||vFilter.only||vFilter.q?'이 조건으로':'오늘의'} 복습 시작</button>
+    <input id="vq" value="${vFilter.q.replace(/"/g,'&quot;')}" oninput="vSearch(this.value)" placeholder="한국어·영어로 검색"
+      style="width:100%;box-sizing:border-box;margin:10px 0 8px;padding:11px 13px;border:1.5px solid #2b3d45;border-radius:12px;background:#16242b;color:#eaf4f3;font-size:.9rem">
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">
+      ${['L1','L2','L3','L4','L5','L6'].map(l=>chip(l,'lv',l)).join('')}
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+      ${chip('🆕 처음 보는','only','new')}${chip('🔄 약한 것','only','weak')}${chip('✅ 익힌 것','only','done')}
+    </div>
+    <div style="font-size:.72rem;color:#8fb0ad;margin-bottom:8px">${list.length}개${list.length>SHOW?` 중 ${SHOW}개 표시 — 검색으로 좁혀 보세요`:''}</div>
+    ${shown.map(c=>{
+      const st=m[_sId(c)];
+      const bg=st?(st.b<=2?'#7a3b3b':st.b>=4?'#2c5c52':'#3d5560'):'#2a3a44';
+      const lab=st?`${st.b}/5`:'🆕';
+      return `<div class="card" style="display:flex;align-items:center;gap:10px;padding:11px 13px;margin-bottom:7px">
+        <span style="background:${bg};color:#eaf4f3;font-size:.6rem;font-weight:900;padding:3px 7px;border-radius:7px;flex:none;min-width:26px;text-align:center">${lab}</span>
+        <span style="flex:1;min-width:0">
+          <span style="font-size:.95rem;font-weight:800;color:#eaf4f3;font-family:'Noto Serif KR',serif">${c.x||''} ${c.k}</span>
+          <span style="display:block;font-size:.74rem;color:#9fbcb8;margin-top:2px">${c.e}</span>
+          <span style="display:block;font-size:.64rem;color:#7e9b97;margin-top:2px">${c.lv} · ${c.t||c.ep}</span>
+        </span>
+        <button onclick="speak('${c.k.replace(/'/g,"\\'")}')" style="background:none;border:none;color:var(--teal);font-size:1.1rem;cursor:pointer;flex:none">🔊</button>
+      </div>`;}).join('')||'<div class="loading-ep">찾는 단어가 없어요 😊</div>'}
+  `;
+  if(keepFocus){const i=document.getElementById('vq');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length)}}
+}
+
+/* ── 🔁 복습 카드 (단어장에서 고른 조건을 그대로 씁니다) ── */
+async function srsOpen(){ return vocabOpen(); }
+async function srsStart(){
+  show('scr-hq-srs');
   const b=document.getElementById('srsBody');
   b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
   try{await _sLoadVocab()}catch(e){
@@ -805,14 +884,14 @@ async function srsOpen(){
 }
 function srsRender(){
   const b=document.getElementById('srsBody');if(!b)return;
-  if(!srsDeck.length){b.innerHTML='<div class="card cont-card" style="text-align:center"><h2>🎉 오늘 복습 끝!</h2><p>새로 볼 단어가 없어요. 내일 다시 만나요.</p></div>';srsHomeUpdate();return;}
+  if(!srsDeck.length){b.innerHTML='<div class="card cont-card" style="text-align:center"><h2>🎉 오늘 복습 끝!</h2><p>이 조건에 새로 볼 단어가 없어요.</p><button class="go-btn" onclick="vocabOpen()">🗂️ 단어장으로</button></div>';srsHomeUpdate();return;}
   if(srsIdx>=srsDeck.length){
     const tot=srsLog.ok+srsLog.no;
     b.innerHTML=`<div class="card cont-card" style="text-align:center">
       <h2>🎉 ${tot}장 복습 완료!</h2>
       <p>알아요 ${srsLog.ok}장 · 다시 볼래요 ${srsLog.no}장<br><span style="font-size:.72rem;color:#8fb0ad">틀린 단어는 내일 다시 나와요</span></p>
-      <button class="go-btn" onclick="srsOpen()">↻ 더 복습하기</button>
-      <button class="card ob-link" style="margin-top:8px" onclick="show('scr-hq-home')">홈으로</button>
+      <button class="go-btn" onclick="srsStart()">↻ 더 복습하기</button>
+      <button class="card ob-link" style="margin-top:8px" onclick="vocabOpen()">🗂️ 단어장으로</button>
     </div>`;
     srsHomeUpdate();return;
   }
