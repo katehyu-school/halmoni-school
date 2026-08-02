@@ -593,7 +593,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     </button>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="showEpList()">
       <span style="font-size:1.6rem">📚</span>
-      <span><b style="font-size:.92rem">전체 에피소드 All Episodes</b><br><span style="font-size:.72rem;color:#8fb0ad">Level 1 · ep01~12 복습/프리뷰</span></span>
+      <span><b style="font-size:.92rem">전체 에피소드 All Episodes</b><br><span style="font-size:.72rem;color:#8fb0ad" id="allEpsSub">Level 1~6 · 전 레벨 복습/프리뷰</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
     <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (다음 단계: Supabase 연동)</div>
@@ -611,7 +611,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-eps">
   <div class="topbar">
     <button class="back" onclick="show('scr-hq-home')">←</button>
-    <h1>📚 Level 1 에피소드 Episodes</h1>
+    <h1 id="epListTitle">📚 에피소드 Episodes</h1>
   </div>
   <div class="hq-pad" id="epList"></div>
 </section>
@@ -1098,20 +1098,25 @@ function renderHome(){
     if(_t) _t.textContent=_who?(_who+'의 학습'):'나의 학습';
   }catch(e){}
   const last=parseInt(localStorage.getItem('hqLastEp')||'1');
+  const lastLv=localStorage.getItem('hqLastLv')||'L1';
   const done=localStorage.getItem('hqLastEpDone')==='1';
-  document.getElementById('contTag').textContent=`이어서 학습 Continue · L1 ep${String(last).padStart(2,'0')}`;
-  document.getElementById('contTitle').textContent=EP_TITLES[last]||'';
-  document.getElementById('contTitleEn').textContent=EP_TITLES_EN[last]||'';
+  const _cached=EP_CACHE[lastLv+'_'+last];
+  document.getElementById('contTag').textContent=`이어서 학습 Continue · ${lastLv} ep${String(last).padStart(2,'0')}`;
+  document.getElementById('contTitle').textContent=epTitle(lastLv,last)||(_cached?_cached.title:'')||'';
+  document.getElementById('contTitleEn').textContent=_cached?(_cached.titleEn||''):'';
   document.getElementById('contDesc').textContent=done
     ?'오늘 복습 완료! 🎉 다른 에피소드도 둘러볼까요? Today\'s review is done! Want to explore another episode?'
     :'웹에서 영상 시청 완료 — 오늘의 5분 복습이 준비됐어요 Video watched on web — your 5-min review is ready';
   document.getElementById('contBtn').textContent=done?'🔁 다시 복습하기 Review Again':'▶ 5분 복습 시작 Start Review';
-  document.getElementById('contBtn').onclick=()=>openEp(last);
-  curEp=last;
+  document.getElementById('contBtn').onclick=()=>openEp(last,lastLv);
+  curEp=last;curLv=lastLv;
+  // 롤플레이·카톡은 아직 L1 대본만 있어서 L1 기준으로 안내합니다
   const pad=n=>String(n).padStart(2,'0');
-  const rd=RP_DATA[curEp]||RP_DATA[5], kd=KK_DATA[curEp]||KK_DATA[5];
-  document.getElementById('rpCardSub').textContent=`L1 ep${pad(curEp)} · ${rd.label_ko}`;
-  document.getElementById('kkCardSub').textContent=`L1 ep${pad(curEp)} · ${kd.label_ko}`;
+  const rpN=(lastLv==='L1'&&RP_DATA[last])?last:5;
+  const kkN=(lastLv==='L1'&&KK_DATA[last])?last:5;
+  const rd=RP_DATA[rpN], kd=KK_DATA[kkN];
+  document.getElementById('rpCardSub').textContent=`L1 ep${pad(rpN)} · ${rd.label_ko}`;
+  document.getElementById('kkCardSub').textContent=`L1 ep${pad(kkN)} · ${kd.label_ko}`;
 }
 let curEp=1;
 
@@ -1465,33 +1470,59 @@ function renderFoundMap(){
 function openFoundMap(){renderFoundMap();show('scr-found-map')}
 
 /* ───────── HQ: episode data (fetch from data/nhs/L1) ───────── */
-const EP_TITLES=[null,'안녕! 나는 정민이야.','누구예요?','잘 먹겠습니다','우리 몇 시에 만날까?','광장시장에 가요?','김밥 주세요','한국어 스터디 그룹을 만들어요','내 도시락은 어디에 있어요?','딸기 한 박스하고 사과 여섯 개 주세요','자전거 소풍을 가요','어서 오세요','경복궁에 갈 거예요!'];
-const EP_TITLES_EN=[null,"Hi! I'm Jeongmin.",'Who Is It?','Time for Dinner','What Time Shall We Meet?','Shall We Go to Gwangjang Market?','Kimbap, Please!',"Let's Make a Korean Study Group","Where's My Lunchbox?",'A Box of Strawberries and Six Apples, Please',"We're Going on a Bicycle Picnic",'Welcome!',"We're Going to Gyeongbokgung!"];
+/* ── 레벨별 에피소드 인덱스 — 웹과 같은 소스(data/nhs/episodes_index.json) ──
+   편이 추가되면 이 파일만 갱신되면 앱 목록도 자동으로 따라옵니다. */
+const HQ_LEVELS=['L1','L2','L3','L4','L5','L6'];
+let EP_INDEX=null;
+const _epIdxReady=fetch('data/nhs/episodes_index.json')
+  .then(r=>r.json()).then(d=>{EP_INDEX=d;return d}).catch(e=>null);
+function hqLv(){try{return localStorage.getItem('hqLv')||'L1'}catch(e){return 'L1'}}
+function hqSetLv(lv){try{localStorage.setItem('hqLv',lv)}catch(e){}showEpList()}
+function epArr(lv){return (EP_INDEX&&EP_INDEX[lv])?EP_INDEX[lv]:[]}
+function epMeta(lv,n){return epArr(lv).find(e=>e.id==='ep'+String(n).padStart(2,'0'))||null}
+function epTitle(lv,n){const m=epMeta(lv,n);return m?(m.label||''):''}
 const EP_EMOJI=[null,'🏞️','🏠','🍚','🛏️','🚌','🏪','🏫','🍳','🏮','🌸','🏠','🌞'];
 const EP_CACHE={};
-let EP=null; // current normalized episode
+let EP=null;     // current normalized episode
+let curLv='L1';  // 현재 열려 있는 에피소드의 레벨
+// 인덱스가 늦게 도착해도 홈의 '이어서 학습' 제목이 채워지도록 한 번 더 그립니다
+// (선언보다 위에서 호출하면 TDZ 오류가 나므로 반드시 이 아래에 둘 것)
+_epIdxReady.then(()=>{try{if(document.getElementById('contTag'))renderHome()}catch(e){}});
 
-function showEpList(){
-  const box=document.getElementById('epList');
-  box.innerHTML=EP_TITLES.map((t,n)=>{
-    if(!t)return'';
-    return `<button class="ep-item" onclick="openEp(${n})">
-      <span class="ep-no"><span>${EP_EMOJI[n]}</span><b>ep${String(n).padStart(2,'0')}</b></span>
-      <span><div class="ep-ti">${t}</div><div class="ep-ti-en">${EP_TITLES_EN[n]}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
-      <span class="arr">→</span></button>`;
-  }).join('');
+async function showEpList(){
   show('scr-hq-eps');
+  const box=document.getElementById('epList');
+  box.innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
+  await _epIdxReady;
+  const lv=hqLv();
+  const ttl=document.getElementById('epListTitle');
+  if(ttl)ttl.textContent='📚 '+lv.replace('L','Level ')+' 에피소드 Episodes';
+  const chips=HQ_LEVELS.map(l=>`<button onclick="hqSetLv('${l}')" style="border:none;border-radius:99px;padding:7px 15px;font-size:.76rem;font-weight:800;cursor:pointer;background:${l===lv?'var(--teal)':'#22333c'};color:${l===lv?'#06231f':'#9fbcb8'}">${l}</button>`).join('');
+  const arr=epArr(lv);
+  const list=arr.length?arr.map(e=>{
+    const n=parseInt(e.id.replace(/\D/g,''),10);
+    const tag=e.tag?`<span style="display:inline-block;background:#22333c;color:var(--teal);font-size:.58rem;font-weight:900;padding:2px 6px;border-radius:6px;margin-right:5px;vertical-align:middle">${e.tag}</span>`:'';
+    return `<button class="ep-item" onclick="openEp(${n},'${lv}')">
+      <span class="ep-no"><span>${lv==='L1'?(EP_EMOJI[n]||'📘'):'📘'}</span><b>${e.id}</b></span>
+      <span><div class="ep-ti">${tag}${e.label||''}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
+      <span class="arr">→</span></button>`;
+  }).join('')
+  :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+  box.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px">${chips}</div>`+list;
 }
-async function loadEp(n){
-  if(EP_CACHE[n])return EP_CACHE[n];
+async function loadEp(n,lv){
+  lv=lv||'L1';
+  const key=lv+'_'+n;
+  if(EP_CACHE[key])return EP_CACHE[key];
   const pad=String(n).padStart(2,'0');
-  const res=await fetch(`data/nhs/L1/ep${pad}.json`);
+  const res=await fetch(`data/nhs/${lv}/ep${pad}.json`);
   if(!res.ok)throw new Error('fetch fail');
   const d=await res.json();
-  EP_CACHE[n]=normalizeEp(n,d);
-  return EP_CACHE[n];
+  EP_CACHE[key]=normalizeEp(n,d,lv);
+  return EP_CACHE[key];
 }
-function normalizeEp(n,d){
+function normalizeEp(n,d,lv){
+  lv=lv||d.level||'L1';
   const chars={};
   (d.characters||[]).forEach(c=>{chars[c.id]={name:c.name||c.id,emoji:c.emoji||'🙂'}});
   const script=(d.script||[]).map(s=>({
@@ -1530,22 +1561,26 @@ function normalizeEp(n,d){
       lines:(bj.adult_dialogue.lines||[]).map(l=>({spk:l.speaker||'', ko:l.text||'', en:l.en||''}))
     }:null
   };
-  return {n, title:d.title||EP_TITLES[n], slides:d.slides||[], script, gram, quiz, vocab:vitems.slice(0,5), tone};
+  return {n, lv, title:d.title||epTitle(lv,n)||('ep'+String(n).padStart(2,'0')), titleEn:d.title_en||'',
+          video:d.video||null, slides:d.slides||[], script, gram, quiz, vocab:vitems.slice(0,5), tone};
 }
-async function openEp(n){
+async function openEp(n,lv){
+  lv=lv||hqLv();
   show('scr-hq-flow');
-  document.getElementById('flowTitle').textContent=`ep${String(n).padStart(2,'0')} 로딩 중...`;
+  document.getElementById('flowTitle').textContent=`${lv} · ep${String(n).padStart(2,'0')} 로딩 중...`;
   document.getElementById('flowBody').innerHTML='<div class="loading-ep">📡 에피소드를 불러오는 중...</div>';
   try{
-    EP=await loadEp(n);
+    await _epIdxReady;
+    EP=await loadEp(n,lv);
   }catch(e){
     document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('flowTitle').textContent='오프라인';
     return;
   }
-  document.getElementById('flowTitle').textContent=`ep${String(n).padStart(2,'0')} · ${EP.title}`;
-  curEp=n;
-  localStorage.setItem('hqLastEp',n);localStorage.setItem('hqLastEpDone','0');
+  document.getElementById('flowTitle').textContent=`${lv} · ep${String(n).padStart(2,'0')} · ${EP.title}`;
+  curEp=n;curLv=lv;
+  try{localStorage.setItem('hqLv',lv)}catch(e){}
+  localStorage.setItem('hqLastEp',n);localStorage.setItem('hqLastLv',lv);localStorage.setItem('hqLastEpDone','0');
   fStep=0;fQuiz=0;fCard=0;watchMode='list';shIdx=0;shCleanup();learnMode='gram';toneIdx=0;fRender();
 }
 
@@ -1572,17 +1607,22 @@ function fRender(){
   fSetStep();
   const b=document.getElementById('flowBody');
   if(fStep===0){ /* WATCH */
-    const toggle=`<div class="watch-toggle">
+    if(!EP.script.length&&!EP.video&&!EP.slides.length){fNext();return}
+    const toggle=EP.script.length?`<div class="watch-toggle">
       <button class="wt-btn${watchMode==='list'?' on':''}" onclick="watchSetMode('list')">📖 전체 보기</button>
       <button class="wt-btn${watchMode==='shadow'?' on':''}" onclick="watchSetMode('shadow')">🎙️ 쉐도잉 연습</button>
-    </div>`;
-    if(watchMode==='shadow'){
+    </div>`:'';
+    if(watchMode==='shadow'&&EP.script.length){
       b.innerHTML=toggle+shRenderCard()+
         `<div class="flow-nav"><button class="fn-next" onclick="fNext()">다음 단계: Learn 💡</button></div>`;
       return;
     }
-    const slideImg=EP.slides.length?`<img class="w-slide" id="wSlide" src="${encodeURI(EP.slides[0])}" alt="scene">`:'';
-    b.innerHTML=toggle+`<div class="card"><h3>👀 장면 다시 보기 Watch Again <span style="font-size:.62rem;color:#7e98a5;font-weight:400">— 대사를 누르면 소리가 나와요</span></h3>
+    // 📹 영상편(L6)은 데이터 절약을 위해 눌러야 받아옵니다 (preload="none")
+    const slideImg=EP.video
+      ? `<video class="w-slide" id="wVid" src="${encodeURI(EP.video)}" controls preload="none" playsinline style="width:100%;border-radius:12px;background:#000;display:block"></video>
+         <div style="font-size:.66rem;color:#7e9b97;margin:6px 0 10px;text-align:center">▶ 누를 때만 영상을 받아요 — 데이터 절약 · Tap to load (data-saver)</div>`
+      : (EP.slides.length?`<img class="w-slide" id="wSlide" src="${encodeURI(EP.slides[0])}" alt="scene">`:'');
+    b.innerHTML=toggle+`<div class="card"><h3>👀 장면 다시 보기 Watch Again <span style="font-size:.62rem;color:#7e98a5;font-weight:400">${EP.script.length?'— 대사를 누르면 소리가 나와요':''}</span></h3>
       ${slideImg}
       ${EP.script.map((s,i)=>`<div class="scene-line" onclick="wPlay(${i})"><div class="who">${s.who}</div>
         <div class="bubble" id="wb${i}"><div class="spk">${s.spk}</div><div class="ko">${s.ko} <span class="tts-sm">🔊</span></div><div class="en">${s.en}</div></div></div>`).join('')}
@@ -1590,9 +1630,13 @@ function fRender(){
       <div class="flow-nav"><button class="fn-next" onclick="fNext()">다음 단계: Learn 💡</button></div>`;
   }
   else if(fStep===1){ /* LEARN */
+    const _hasTone=!!(EP.tone&&EP.tone.rows&&EP.tone.rows.length);
+    if(!EP.gram.length&&!_hasTone){fNext();return}
+    if(learnMode==='tone'&&!_hasTone)learnMode='gram';
+    if(learnMode==='gram'&&!EP.gram.length)learnMode='tone';
     const toggle=`<div class="watch-toggle">
-      <button class="wt-btn${learnMode==='gram'?' on':''}" onclick="learnSetMode('gram')">💡 문법 카드</button>
-      <button class="wt-btn${learnMode==='tone'?' on':''}" onclick="learnSetMode('tone')">🗣️ 존댓말·반말</button>
+      ${EP.gram.length?`<button class="wt-btn${learnMode==='gram'?' on':''}" onclick="learnSetMode('gram')">💡 문법 카드</button>`:''}
+      ${_hasTone?`<button class="wt-btn${learnMode==='tone'?' on':''}" onclick="learnSetMode('tone')">🗣️ 존댓말·반말</button>`:''}
     </div>`;
     if(learnMode==='tone'){
       b.innerHTML=toggle+toneRenderCard()+
@@ -1623,12 +1667,12 @@ function fRender(){
   else{ /* REVIEW */
     if(fCard>=EP.vocab.length){
       b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 5분 복습 완료!</h2>
-        <p>ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
-        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="shareOpen({emoji:'🏆',title_ko:'오늘의 5분 복습 완료!',title_en:'5-min review complete!',sub_ko:'ep'+String(EP.n).padStart(2,'0')+' · '+EP.title,sub_en:EP_TITLES_EN[EP.n],xp:60,dqIds:[],confetti:false})">결과 공유하기 →</button>
-        <div style="display:flex;gap:8px;margin-top:10px">
+        <p>${EP.lv||'L1'} ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
+        <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="shareOpen({emoji:'🏆',title_ko:'오늘의 5분 복습 완료!',title_en:'5-min review complete!',sub_ko:(EP.lv||'L1')+' ep'+String(EP.n).padStart(2,'0')+' · '+EP.title,sub_en:EP.titleEn||'',xp:60,dqIds:[],confetti:false})">결과 공유하기 →</button>
+        ${(EP.lv==='L1'&&RP_DATA[EP.n]&&KK_DATA[EP.n])?`<div style="display:flex;gap:8px;margin-top:10px">
           <button class="fn-ghost" style="flex:1;padding:12px 14px;border-radius:14px;font-weight:700;font-size:.8rem" onclick="rpOpen(EP.n)">🎭 롤플레이 →</button>
           <button class="fn-ghost" style="flex:1;padding:12px 14px;border-radius:14px;font-weight:700;font-size:.8rem" onclick="kkOpen(EP.n)">💬 카톡 →</button>
-        </div>
+        </div>`:''}
         <button class="fn-ghost" style="padding:12px 30px;border-radius:14px;font-weight:700;margin-top:8px" onclick="showEpList()">다른 에피소드 →</button></div>`;
       confetti(30);dqDone('dq3');dqDone('dq4');
       return;
@@ -1665,7 +1709,13 @@ function fQuizNext(){
   else{dqDone('dq3');fNext()}
 }
 function fSrs(known){
-  toast(known?'😊 알아요 — 3일 뒤 다시 나와요':'🤔 몰라요 — 내일 다시 나와요');
+  // 단어장(🗂️)과 같은 SRS 저장소에 기록 — vocab_index.json 항목과 같은 id 규칙(lv_ep_단어)
+  const c=EP.vocab[fCard];
+  try{
+    if(c)_sMark({lv:EP.lv||'L1',ep:'ep'+String(EP.n).padStart(2,'0'),k:c.w},known);
+    srsHomeUpdate();
+  }catch(e){}
+  toast(known?'😊 알아요 — 상자가 한 칸 올라갔어요':'🤔 몰라요 — 내일 다시 나와요');
   fCard++;
   setTimeout(fRender,350);
 }
@@ -2986,6 +3036,8 @@ function shCleanup(){
   shRecorder=null;shChunks=[];shRecording=false;
 }
 function shRenderCard(){
+  if(!EP.script.length)return '<div class="loading-ep">이 편은 대사가 없어요 — 다음 단계로 넘어가세요 😊</div>';
+  if(shIdx>=EP.script.length)shIdx=0;
   const s=EP.script[shIdx];
   const total=EP.script.length;
   const slideImg=(s.slide!==null&&EP.slides[s.slide])?`<img class="w-slide" src="${encodeURI(EP.slides[s.slide])}" alt="scene">`:'';
