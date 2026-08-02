@@ -284,6 +284,14 @@ function openMySpace() {
   document.body.style.overflow = 'hidden';
   const profiles = msGetJ('ms_profiles');
   msCurrent = msGet('ms_current');
+  // 로그인하면 index.html 이 ms_current 를 로그인 이름으로 바꾸는데 목록(ms_profiles)에는
+  // 넣지 않습니다. 그래서 활성 프로필인데도 카드 목록에 안 떠서, 다른 프로필로 한 번
+  // 넘어가면 돌아올 방법이 없었습니다(한 화면을 두 아이가 같이 쓸 때 걸림).
+  // 열 때 목록에 없으면 여기서 채워 넣습니다.
+  if (msCurrent && !profiles.includes(msCurrent)) {
+    profiles.push(msCurrent);
+    msSetJ('ms_profiles', profiles);
+  }
   if (!profiles.length || !msCurrent) {
     msShowSetup(true);
   } else {

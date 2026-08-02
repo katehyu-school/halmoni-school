@@ -26,6 +26,8 @@
 > — **⚠️ 실시간 구독은 폴링으로 교체(3초)** — 테이블을 잠그면 `postgres_changes`가 오지 않습니다(출석부 8초와 같은 이유). 지목·손들기는 반응이 빨라야 해서 3초.
 > — **core.js API 변경**: `practice.raiseHand(name, choice?, unit?, qIndex?)` / `setStatus(status, clearPlayer?)` / **`nextQuestion(unit, qIndex)` 신설**. korean-app_v2.html의 직접 호출 3곳(`syncNext`·`u6Vote`·`u6RevealAnswer`)을 이 API로 교체.
 > — ✅ **검증**: 브라우저에서 게시판 4가지 상태(비로그인·학생·선생님·역할위조) + Kids 손들기/투표/리셋 전 과정 통과. 두 테이블 직접 접근은 `permission denied`. Supabase security advisor의 WARN 64건은 전부 "SECURITY DEFINER 함수를 anon이 호출 가능" — **이 구조의 설계 자체**라 정상(내부 헬퍼 `_session_member`·`_practice_row`는 anon 실행 차단 확인).
+> — 🔧 **덤 — My Space·My Notes 프로필 목록 버그**: 로그인하면 index.html이 `ms_current`/`nms_current`만 로그인 이름으로 바꾸고 **목록(`ms_profiles`/`nms_profiles`)에는 안 넣어서**, 활성 프로필인데 카드 목록에 안 떴음 → 다른 프로필로 한 번 넘어가면 돌아올 방법이 없었음(**한 화면을 두 아이가 같이 쓰는 Kids 수업에서 걸림**). 열 때 목록에 없으면 채워 넣도록 수정(`openMySpace`·`openNMS`). 검증: `["할머니"]` → `["할머니","선생님"]`, 카드 2개 정상 표시.
+> — ℹ️ **공용 화면(한 로그인, 두 아이) 확인 완료** — Kids 수업 기능은 로그인 계정이 아니라 **반 코드**로 열리고 아이 이름은 호출 때마다 넘어가므로, 출석·손들기·투표·지목 전부 두 아이가 각자 가능(브라우저에서 검증). 게시판만 글쓴이 이름을 서버가 세션에서 채우므로 로그인한 쪽 이름으로 올라감 — 단 게시판은 nhs.html에만 있고 Kids 앱에는 없음.
 > — 📌 **`_session_member`·`_practice_row`는 내부 전용** — `members` 전체 행(pin 포함)을 돌려주므로 anon/authenticated 실행 권한을 절대 주지 말 것.
 
 > 📱 **2026-08-02 완료 (모바일 앱 전 레벨 연동 세션)** — 다음 세션은 이 블록부터 볼 것:

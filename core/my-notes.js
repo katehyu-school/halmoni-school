@@ -274,6 +274,12 @@ function openNMS(){
   document.body.style.overflow='hidden';
   const profiles=nmsGetJ('nms_profiles');
   nmsCurrent=nmsGet('nms_current');
+  // My Space 와 같은 문제 — 로그인이 nms_current 만 바꾸고 목록엔 안 넣어서
+  // 활성 프로필이 카드 목록에 안 뜨던 것을 열 때 채워 넣습니다.
+  if(nmsCurrent && !profiles.includes(nmsCurrent)){
+    profiles.push(nmsCurrent);
+    nmsSetJ('nms_profiles', profiles);
+  }
   if(!profiles.length||!nmsCurrent){ nmsShowSetup(true); }
   else { nmsShowMain(); }
 }
