@@ -523,7 +523,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-home">
   <div class="topbar">
     <button class="back" onclick="show('scr-profile')">←</button>
-    <h1 style="display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">HQ</text></svg>미래의 학습</h1>
+    <h1 style="display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">HQ</text></svg><span id="hqHomeTitle">나의 학습</span></h1>
     <span style="font-size:1.4rem">🦊</span>
   </div>
   <div class="hq-pad">
@@ -1091,6 +1091,12 @@ function enterHQ(){
 function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();srsHomeUpdate();show('scr-hq-home')}
 function renderHome(){
   try{srsHomeUpdate()}catch(e){}
+  // 홈 제목 — 로그인/My Notes 이름을 따라감 (옛 하드코딩 '미래의 학습' 대체)
+  try{
+    const _who=(localStorage.getItem('nms_current')||'').trim();
+    const _t=document.getElementById('hqHomeTitle');
+    if(_t) _t.textContent=_who?(_who+'의 학습'):'나의 학습';
+  }catch(e){}
   const last=parseInt(localStorage.getItem('hqLastEp')||'1');
   const done=localStorage.getItem('hqLastEpDone')==='1';
   document.getElementById('contTag').textContent=`이어서 학습 Continue · L1 ep${String(last).padStart(2,'0')}`;

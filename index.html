@@ -665,6 +665,16 @@ body::before {
       </select>
     </div>
 
+    <div style="display:flex;align-items:center;gap:10px;margin:0 0 12px;color:rgba(180,215,235,.4);font-size:11px;letter-spacing:.1em">
+      <span style="flex:1;height:1px;background:rgba(78,205,196,.15)"></span>또는 · or<span style="flex:1;height:1px;background:rgba(78,205,196,.15)"></span>
+    </div>
+    <div style="margin-bottom:12px">
+      <input class="pw-input" type="text" id="selfNameInput" maxlength="20"
+        placeholder="체험 계정 이름 · Trial name"
+        style="letter-spacing:.05em"
+        onkeydown="if(event.key==='Enter')checkPw()">
+    </div>
+
     <div class="pw-wrap">
       <input class="pw-input" type="password" id="pwInput"
         placeholder="PIN 번호 입력"
@@ -674,6 +684,40 @@ body::before {
     </div>
     <button class="enter-btn" onclick="checkPw()">입장하기</button>
     <div class="error-msg" id="errMsg"></div>
+    <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7">
+      처음이세요? · First time here?<br>
+      <button onclick="openSignup()" style="margin-top:7px;background:none;border:1px solid rgba(78,205,196,.4);color:#4ecdc4;border-radius:20px;padding:7px 16px;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer">🔓 체험 계정 만들기 · Create account</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIGN UP MODAL -->
+<div class="modal-bg" id="signupModal" onclick="if(event.target===this)closeSignup()">
+  <div class="login-modal">
+    <button class="modal-close" onclick="closeSignup()">✕</button>
+    <span class="login-label">🔓 체험 계정 만들기 · Create Account</span>
+    <div style="font-size:12.5px;color:rgba(180,215,235,.65);line-height:1.7;margin-bottom:18px">
+      이름과 PIN만 정하면 바로 시작할 수 있어요.<br>
+      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Just pick a name and a PIN — that is all.</span>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <input class="pw-input" type="text" id="suName" maxlength="20"
+        placeholder="이름 · Name" style="letter-spacing:.05em">
+    </div>
+    <div class="pw-wrap">
+      <input class="pw-input" type="password" id="suPin" maxlength="20" placeholder="PIN (4자리 이상)">
+    </div>
+    <div class="pw-wrap">
+      <input class="pw-input" type="password" id="suPin2" maxlength="20"
+        placeholder="PIN 확인 · Confirm PIN"
+        onkeydown="if(event.key==='Enter')submitSignup()">
+    </div>
+    <button class="enter-btn" id="suBtn" onclick="submitSignup()">시작하기 · Start</button>
+    <div class="error-msg" id="suMsg"></div>
+    <div style="margin-top:14px;font-size:11px;color:rgba(180,215,235,.4);line-height:1.65">
+      ※ 체험 계정은 Hangeul Quest 일부 에피소드를 볼 수 있어요.<br>PIN을 잊으면 찾을 수 없으니 기억해 두세요.
+    </div>
   </div>
 </div>
 
@@ -742,7 +786,9 @@ async function loadMembers() {
       const sel = document.getElementById('nameSelect');
       sel.innerHTML = '<option value="">이름을 선택하세요 ▾</option>' +
         '<option value="__guest__">👀 게스트 · Guest</option>';
-      data.forEach(m => {
+      // 체험 계정(trial)은 목록에 넣지 않음 — 공개 가입이 늘어도 목록이 깨끗하게 유지됨.
+      // 체험 계정은 아래 '체험 계정 이름' 칸에 직접 입력해서 로그인합니다.
+      data.filter(m => m.role !== 'trial').forEach(m => {
         const opt = document.createElement('option');
         opt.value = m.name;
         opt.textContent = m.display_name;
@@ -750,6 +796,58 @@ async function loadMembers() {
       });
     }
   } catch(e) { console.warn('멤버 로드 실패', e); }
+}
+
+// ── 🔓 체험 계정 셀프 가입 ────────────────────────────
+function openSignup() {
+  document.getElementById('loginModal').classList.remove('open');
+  document.getElementById('signupModal').classList.add('open');
+  document.getElementById('suMsg').textContent = '';
+  ['suName','suPin','suPin2'].forEach(id => document.getElementById(id).value = '');
+  setTimeout(()=>document.getElementById('suName').focus(), 100);
+}
+function closeSignup() {
+  document.getElementById('signupModal').classList.remove('open');
+}
+async function submitSignup() {
+  const nick = document.getElementById('suName').value.trim();
+  const pin  = document.getElementById('suPin').value.trim();
+  const pin2 = document.getElementById('suPin2').value.trim();
+  const msg  = document.getElementById('suMsg');
+  const btn  = document.getElementById('suBtn');
+  msg.style.color = '';
+
+  if (!/^[가-힣a-zA-Z0-9_]{2,20}$/.test(nick)) {
+    msg.textContent = '이름은 한글·영문·숫자 2~20자로 정해 주세요.'; return;
+  }
+  if (pin.length < 4) { msg.textContent = 'PIN은 4자리 이상으로 정해 주세요.'; return; }
+  if (pin !== pin2)   { msg.textContent = '두 PIN이 서로 달라요.'; return; }
+
+  btn.disabled = true; btn.textContent = '만드는 중…';
+  try {
+    const { data: dup } = await _sb.from('members').select('name').eq('name', nick);
+    if (dup && dup.length) {
+      msg.textContent = '이미 쓰고 있는 이름이에요. 다른 이름으로 해 주세요.';
+      btn.disabled = false; btn.textContent = '시작하기 · Start'; return;
+    }
+    const { error } = await _sb.from('members')
+      .insert({ name: nick, display_name: nick, pin: pin, role: 'trial' });
+    if (error) throw new Error(error.message);
+
+    // 만들자마자 바로 입장
+    const { data } = await _sb.rpc('verify_login', { p_name: nick, p_pin: pin });
+    if (!data) { msg.textContent = '계정은 만들어졌어요. 로그인 화면에서 들어와 주세요.'; return; }
+    sessionStorage.setItem('hq_user', JSON.stringify(data));
+    localStorage.setItem('ms_current',  data.display_name);
+    localStorage.setItem('nms_current', data.display_name);
+    closeSignup();
+    enterAs(data);
+  } catch(e) {
+    console.error('[HQ Signup Error]', e);
+    msg.textContent = '계정을 만들지 못했어요. 잠시 후 다시 시도해 주세요.';
+  } finally {
+    btn.disabled = false; btn.textContent = '시작하기 · Start';
+  }
 }
 
 function openLoginModal() {
@@ -761,6 +859,7 @@ function closeLoginModal() {
   document.getElementById('loginModal').classList.remove('open');
   document.getElementById('errMsg').textContent = '';
   document.getElementById('pwInput').value = '';
+  const _sn = document.getElementById('selfNameInput'); if (_sn) _sn.value = '';
 }
 
 // ── 내 PIN 바꾸기 ──────────────────────────────
@@ -816,8 +915,8 @@ async function submitPinChange() {
 
 function handleNameSelect() {
   const v = document.getElementById('nameSelect').value;
-  const pinWrap = document.querySelector('.pw-wrap');
-  const btn = document.querySelector('.enter-btn');
+  const pinWrap = document.querySelector('#loginModal .pw-wrap');
+  const btn = document.querySelector('#loginModal .enter-btn');
   const pwInput = document.getElementById('pwInput');
   if (v === '__guest__') {
     pinWrap.style.display = '';
@@ -830,12 +929,13 @@ function handleNameSelect() {
   }
 }
 async function checkPw() {
-  const name = document.getElementById('nameSelect').value;
+  const _typed = (document.getElementById('selfNameInput')||{value:''}).value.trim();
+  const name = _typed || document.getElementById('nameSelect').value;
   const pin  = document.getElementById('pwInput').value.trim();
   const err  = document.getElementById('errMsg');
-  const btn  = document.querySelector('.enter-btn');
+  const btn  = document.querySelector('#loginModal .enter-btn');
 
-  if (!name) { err.textContent = '이름을 선택해 주세요'; return; }
+  if (!name) { err.textContent = '이름을 선택하거나 입력해 주세요'; return; }
   if (!pin)  {
     err.textContent = name === '__guest__'
       ? '방문자 비밀번호를 입력해 주세요 · Enter guest password'
@@ -886,13 +986,15 @@ async function checkPw() {
       // My Space / My Notes 자동 프로필 연결
       localStorage.setItem('ms_current',  data.display_name);
       localStorage.setItem('nms_current', data.display_name);
-      // 출석 자동 기록 (직접 upsert)
-      // 출석 자동 기록 — student_name은 display_name(한글)으로 저장 (Kids 앱 students 테이블과 통일)
-      const _today = new Date().toISOString().slice(0,10);
-      _sb.from('attendance').upsert(
-        { student_name: data.display_name, class_date: _today, status: 'present', logged_in_at: new Date().toISOString() },
-        { onConflict: 'student_name,class_date' }
-      ).then(()=>{}).catch(()=>{});
+      // 출석 자동 기록 — 정식 수강생(student)만. 체험·게스트 계정은 출석부에 남기지 않음
+      // (자습 가입이 늘어도 실제 수업 출석부가 섞이지 않게 하려는 것)
+      if (data.role === 'student') {
+        const _today = new Date().toISOString().slice(0,10);
+        _sb.from('attendance').upsert(
+          { student_name: data.display_name, class_date: _today, status: 'present', logged_in_at: new Date().toISOString() },
+          { onConflict: 'student_name,class_date' }
+        ).then(()=>{}).catch(()=>{});
+      }
       closeLoginModal();
       enterAs(data);
     }
