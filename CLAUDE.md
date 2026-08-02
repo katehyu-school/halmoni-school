@@ -429,6 +429,7 @@ const urlName   = _hc ? _hc.urlName : null;
 - Namecheap 구매, Free Domain Privacy 적용
 - **GitHub Pages**: `katehyu-school/halmoni-school` 리포, main 브랜치, CNAME 파일 자동 생성됨
 - 리포 분리 없이 단일 리포 유지 — 두 도메인 모두 정상 동작 중
+- 📱 **QR 코드** `qr/` — `QR_HangeulQuest.png`(웹 루트) · `QR_HangeulQuest_Mobile.png`(모바일 앱) · `HangeulQuest_QR카드.png`(둘 다 담긴 소개용 카드). 소개할 때 폰에서 바로 보여주는 용도. **URL이 바뀌면 다시 만들 것** — segno로 생성, `cv2.QRCodeDetector`로 디코드 검증함
 
 ---
 
