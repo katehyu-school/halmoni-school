@@ -12,7 +12,21 @@
 | **HQ (nhs.html)** | L1~L6 **전 레벨 12편씩 + 마감테스트 완성 ✅** / 배치테스트 ✅ / 색인 어휘풀 225개 ✅ / 플래시카드 누적+가중 ✅ / 빠른복습 자동생성 ✅ / 오답→편 이동 링크 ✅ | L6 마감테스트 **듣기 5개 녹음**(8/13 크레딧 복구 후) → 전편 리뷰·가다듬기 |
 | **HQ Kids (korean-app_v2.html)** | L1 완성 ✅ / L2 완성 ✅ / L3 unit01~10 완성 ✅ / **L4 unit01~06 완성 ✅** / **캐릭터 개명(화면 표시명) 리아→리나·카요→태오·리암→라온·애라→아라 완성 ✅ (2026-07-23, 미래는 유지)** | 재녹음 TTS/슬라이드 18세트 선생님 재작업 완료 |
 | **모바일 앱 (hq-mobile.html)** | **L1~L6 전 레벨 연동 완료 ✅** (2026-08-02) — 레벨 칩·영상편·빈 단계 자동 건너뛰기·SRS 실저장 | PWA(매니페스트·서비스워커) · Supabase 진도 동기화 |
-| **멤버/출석 시스템** | **index.html 이름+PIN 로그인 완성 ✅** / **출석부 패널 완성 ✅** / **admin.html members 테이블 연동 ✅** / **보안 강화 완성 ✅** (verify_login RPC, pin 컬럼 anon 차단) | PIN 개인별 관리 UI 개선 |
+| **멤버/출석 시스템** | 이름+PIN 로그인 ✅ / 출석부 패널 ✅ / admin.html 연동 ✅ / **DB 보안 완결 ✅** (전 테이블 anon 차단, RPC 전용, 로그인 세션 토큰) | PIN 개인별 관리 UI 개선 |
+
+> 🔒 **2026-08-02 완료 (남은 보안 구멍 차단 — practice_session · board_posts)** — 다음 세션은 이 블록부터 볼 것:
+> — **이제 anon 직접 접근이 열려 있는 테이블은 하나도 없습니다.** 두 테이블 모두 정책 삭제 + `REVOKE ALL`, RPC로만 열림.
+> — **🆕 로그인 세션 토큰 도입** — `member_sessions` 테이블(30일 만료, anon 완전 차단). **`verify_login`이 기존 반환값에 `token`을 추가로 내려줍니다.** index.html이 이미 반환 객체 전체를 `sessionStorage('hq_user')`에 넣고 있어서 **index.html 수정 없이** 토큰이 저장됨. 앞으로 "로그인한 사람만" 여는 기능은 전부 이 토큰을 쓰면 됩니다.
+> — **게시판(board_posts)**: `board_list` / `board_add` / `board_reply` / `board_delete` (전부 `p_token`). 읽기 권한 — **admin·teacher·student = 전체 글 / trial = 본인 글만**(선생님께 문의하는 통로는 열어 둠) **/ guest(공용 체험 계정) = 불가**. 글쓴이 이름은 서버가 세션에서 채우므로 **사칭 불가**.
+> — 🔴 **고쳐진 구멍 — 게시판 선생님 권한이 URL 한 줄이었음**: `board.js`가 `brdIsTeacher = _brdParams.has('teacher')` 였음. **주소창에 `nhs.html?teacher`만 치면 누구나** 답변 등록·게시글 삭제 버튼이 나왔고 테이블도 열려 있어 **실제로 지워졌음.** 이제 서버가 `role in ('admin','teacher')`로 판정 — 클라이언트에서 role을 위조해도 `denied`. 검증 완료.
+> — **Kids 실시간 수업(practice_session)**: `practice_state` / `practice_nominate` / `practice_hand` / `practice_status` / `practice_next` — **반 코드(`?c=`) 확인**(`_kids_code_ok`, 출석부와 같은 방식). `current_player`·`raised_hands`에 아이 이름이 실시간으로 들어가는데 그동안 누구나 조회·수정·삭제할 수 있었음.
+> — **덤 ① 경쟁 조건 제거**: 손들기·투표의 "읽고→고쳐서→쓰기"를 `practice_hand` 안으로 옮김. 두 아이가 동시에 눌러도 한쪽이 지워지지 않음. 같은 아이의 이전 투표·손들기는 서버가 중복 제거(`Liam`과 `Liam:2`가 같이 남던 것도 수정).
+> — **덤 ② 이름 검증**: `students` 명단에 없는 이름으로는 손을 들 수 없음(`unknown_student`).
+> — **덤 ③** 2시간 넘게 방치된 잔여 상태 정리(2026-07-06의 "11일간 지목 남아 있던" 버그 대응)를 클라이언트 → 서버(`_practice_row`)로 이동.
+> — **⚠️ 실시간 구독은 폴링으로 교체(3초)** — 테이블을 잠그면 `postgres_changes`가 오지 않습니다(출석부 8초와 같은 이유). 지목·손들기는 반응이 빨라야 해서 3초.
+> — **core.js API 변경**: `practice.raiseHand(name, choice?, unit?, qIndex?)` / `setStatus(status, clearPlayer?)` / **`nextQuestion(unit, qIndex)` 신설**. korean-app_v2.html의 직접 호출 3곳(`syncNext`·`u6Vote`·`u6RevealAnswer`)을 이 API로 교체.
+> — ✅ **검증**: 브라우저에서 게시판 4가지 상태(비로그인·학생·선생님·역할위조) + Kids 손들기/투표/리셋 전 과정 통과. 두 테이블 직접 접근은 `permission denied`. Supabase security advisor의 WARN 64건은 전부 "SECURITY DEFINER 함수를 anon이 호출 가능" — **이 구조의 설계 자체**라 정상(내부 헬퍼 `_session_member`·`_practice_row`는 anon 실행 차단 확인).
+> — 📌 **`_session_member`·`_practice_row`는 내부 전용** — `members` 전체 행(pin 포함)을 돌려주므로 anon/authenticated 실행 권한을 절대 주지 말 것.
 
 > 📱 **2026-08-02 완료 (모바일 앱 전 레벨 연동 세션)** — 다음 세션은 이 블록부터 볼 것:
 > — **hq-mobile.html이 L1~L6 전 레벨을 읽습니다.** 뜯어보니 HQ 4단계 흐름(`normalizeEp`/`fRender`)은 처음부터 nhs 에피소드 JSON 범용이었고, 경로 `data/nhs/L1/`과 제목 배열만 하드코딩이었음 → **레벨 변수만 뚫어서 해결(레벨별 렌더러 복제 안 함)**. `loadEp(n,lv)` / `normalizeEp(n,d,lv)` / `openEp(n,lv)`, 캐시 키 `L6_6`.
@@ -36,7 +50,7 @@
 > — **🧭 학습 로드맵 신설**(nhs.html `loadRoadmap`, Start Here 사이드바 맨 위): **자습 기준**(선생님 전제 제거)·영어 병기·Step 0 한글 입문 포함 5단계 + **📦 모르면 지나치는 기능 11개 표**(색인·빠른참고·플래시카드·빠른복습·EN토글·MyNotes·게시판·말하기·쓰기·자기점검·모바일) + 일주일 예시. 진행 체크는 `nms_{이름}_ep_done`/`_srs`/**신규 `_prog`**(배치·마감테스트 결과)에서 읽음.
 > — **진도 저장은 My Notes 이름 기준** — 로그인하거나 📓 My Notes에서 이름을 만들어야 `nms_current`가 생기고 그때부터 기록됨. 로드맵 맨 위에 이 안내 상시 노출.
 > — **부수**: 배치/마감테스트 결과 저장(`_saveTestScore`·`_savePlacement`) / SRS 상자번호(2/5) 설명 접이식(웹 플래시카드+모바일 단어장) / index.html **체험 계정 셀프 가입** 신설(드롭다운엔 trial 숨김, 재방문은 이름 직접 입력) / 출석 자동기록을 정식 student로 한정 / 모바일 홈 제목 하드코딩 `미래의 학습` → 로그인 이름 따라감 / **CSS 변수 `--warm-600`·`--warm-400`이 정의된 적 없이 48곳에서 쓰이던 것** nhs.css :root에 추가.
-> — **🔜 남은 보안 항목**: `practice_session`(손들기·지목)에 `current_player`·`raised_hands`로 아이 이름이 실시간으로 들어가는데 이 테이블은 아직 anon 개방. `board_posts`도 개방(author_name). 공개 베타 전에 같은 방식으로 잠글 것.
+> — ~~🔜 남은 보안 항목~~ — ✅ 2026-08-02 후속 세션에서 `practice_session`·`board_posts` 둘 다 잠금 완료(아래 🔒 블록 참고).
 
 > ✅ **2026-08-01 완료 (L6 완결 + 평가 체계 대수술 세션)** — 다음 세션은 이 블록부터 볼 것:
 > — **L6 ep10 수필 《저녁노을》 완성 → L6 ep01~12 전편 완결.** 영상 `data/nhs/L6/videos/ep10.mp4`(89초, 4단락 자막). 문법 4개: **-곤 하다**(전 레벨 최초)·**-기에**(전 레벨 최초)·-기 마련이다(L4 ep03 복습)·-느라(고)(L5 ep06·L6 ep08 복습). 초안의 "서운하기 마련"이 최종본에서 "미련이 남기 마련"으로 바뀌어(선생님이 ep11과 중복 피하려 수정) 어휘도 서운하다 → **미련**으로 교체.
@@ -653,7 +667,7 @@ const urlName   = _hc ? _hc.urlName : null;
 ### C. 나중
 8. **어휘 재순환 소급 적용** — 신규 편은 [[📐 어휘 재순환 규칙]] 적용 중. 기존 72편은 데이터가 쌓인 뒤 재검토.
 9. **HQ Kids** — L4로 개발 마무리 방침(`hq-kids-l4-conclusion`). L4 unit07+/L3 unit07~09는 우선순위 아님.
-10. **멤버/출석 시스템** — PIN 개인별 관리 UI 개선.
+10. **멤버/출석 시스템** — PIN 개인별 관리 UI 개선. (DB 보안은 2026-08-02로 전부 종료 — 남은 개방 테이블 없음)
 11. **PWA** — 매니페스트/서비스워커 등 기반 작업.
 
 ### ✅ 이번 세션에 종료된 항목

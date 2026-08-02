@@ -214,18 +214,18 @@
   //
   // 반환: { sessionId, nominate, raiseHand, updateQIndex }
 
-  // practice_session은 앱 전체에서 딱 한 줄만 쓰는 공유 상태라, 수업이
-  // 지목된 채로 끝나면(선생님이 리셋 안 하고 종료) 그 상태가 무기한 남아있게 됨.
-  // 2026-07-06: 6/25 수업의 "리암 차례" 상태가 11일간 안 지워져서, 그 사이
-  // 접속한 모든 사람 화면에 지목-아닌-차례 dim(불투명 막)이 걸리는 버그 발생.
-  // → updated_at이 일정 시간 이상 지난 상태는 "지난 수업의 잔여물"로 간주해 무시.
-  const PRACTICE_SESSION_MAX_AGE_MS = 2 * 60 * 60 * 1000; // 2시간
-
-  function isPracticeSessionFresh(data) {
-    if (!data || !data.updated_at) return false;
-    const age = Date.now() - new Date(data.updated_at).getTime();
-    return age < PRACTICE_SESSION_MAX_AGE_MS;
-  }
+  // practice_session 은 앱 전체에서 딱 한 줄만 쓰는 공유 상태입니다.
+  //
+  // 2026-08-02: 이 테이블은 anon 직접 접근이 차단됐습니다. current_player 와
+  // raised_hands 에 아이 이름이 실시간으로 들어가는데 누구나 조회할 수 있었기
+  // 때문입니다. 이제 반 코드(?c=)를 확인하는 RPC 로만 열립니다.
+  //   practice_state / practice_nominate / practice_hand / practice_status / practice_next
+  //
+  // 손들기·투표의 "읽고 → 고쳐서 → 쓰기"도 서버 안으로 옮겼습니다.
+  // 두 아이가 동시에 누르면 한쪽이 지워지던 경쟁 조건이 원천적으로 사라집니다.
+  //
+  // 지난 수업의 잔여 상태(2시간 초과) 정리도 서버가 합니다.
+  // (2026-07-06: 6/25 수업의 "리암 차례"가 11일간 안 지워져 모든 화면에 dim 이 걸린 적 있음)
 
   function createPracticeSession(options = {}) {
     const supa = getSupabase();
@@ -233,79 +233,74 @@
 
     const state = { sessionId: null, last: null };
 
-    async function load() {
-      const { data } = await supa
-        .from('practice_session').select('*').order('id').limit(1).single();
-      if (data) {
-        state.sessionId = data.id;
-        if (isPracticeSessionFresh(data)) {
-          state.last = data;
-        } else {
-          // 오래된 잔여 상태 — 화면엔 깨끗한 상태로 보여주고, DB도 같이 정리
-          // (다음 접속자가 또 이 검사를 반복할 필요 없도록 self-healing)
-          state.last = { ...data, current_player: null, status: 'waiting', raised_hands: [] };
-          supa.from('practice_session').update({
-            current_player: null, status: 'waiting', raised_hands: [],
-            updated_at: new Date().toISOString(),
-          }).eq('id', data.id).then(() => {});
-        }
-        options.onStateChange?.(state.last, false);
-      }
+    // 반 코드가 없으면 조용히 자습모드로 (수업 링크로 들어온 사람만 실시간 참여)
+    function _code() { return classCode(); }
+
+    function _apply(json, isRealtime) {
+      if (!json || !json.ok || !json.session) return false;
+      const s = json.session;
+      state.sessionId = s.id;
+      const changed = JSON.stringify(state.last) !== JSON.stringify(s);
+      state.last = s;
+      if (changed) options.onStateChange?.(s, !!isRealtime);
+      return true;
+    }
+
+    async function load(isRealtime) {
+      const code = _code();
+      if (!code) return;
+      const { data } = await supa.rpc('practice_state', { p_code: code });
+      _apply(data, isRealtime);
     }
 
     async function nominate(studentName, unit, qIndex) {
-      if (!state.sessionId) return;
-      const update = {
-        current_player: studentName,
-        unit,
-        q_index: qIndex,
-        raised_hands: [],
-        status: 'playing',
-        updated_at: new Date().toISOString(),
-      };
-      await supa.from('practice_session').update(update).eq('id', state.sessionId);
-      // 로컬 캐시에도 반영해 두어야 setStatus가 current_player를 알 수 있음
-      state.last = { ...(state.last || {}), ...update };
+      const code = _code();
+      if (!code) return;
+      const { data } = await supa.rpc('practice_nominate',
+        { p_code: code, p_name: studentName, p_unit: unit, p_q_index: qIndex });
+      _apply(data);
     }
 
-    async function raiseHand(name) {
-      if (!state.sessionId) return;
-      const { data } = await supa.from('practice_session')
-        .select('raised_hands').eq('id', state.sessionId).single();
-      const hands = data?.raised_hands || [];
-      const newHands = hands.includes(name) ? hands.filter(h => h !== name) : [...hands, name];
-      await supa.from('practice_session').update({
-        raised_hands: newHands,
-        status: 'waiting',
-        updated_at: new Date().toISOString(),
-      }).eq('id', state.sessionId);
-    }
-
-    async function setStatus(status) {
-      if (!state.sessionId) return;
-      // current_player를 함께 보내야 realtime payload.new에 포함됨
-      // (Supabase는 변경된 컬럼만 payload.new에 담으므로, 보내지 않으면 수신 측에서 player가 null이 됨)
-      await supa.from('practice_session').update({
-        status,
-        current_player: state.last?.current_player ?? null,
-        updated_at: new Date().toISOString(),
-      }).eq('id', state.sessionId);
-    }
-
-    supa.channel('core-prac-' + Math.random().toString(36).slice(2, 8))
-      .on('postgres_changes',
-          { event: 'UPDATE', schema: 'public', table: 'practice_session' },
-          payload => {
-            // payload.new는 변경된 컬럼만 올 수 있으므로, 기존 state.last와 머지해서 완전한 상태 유지
-            state.last = { ...(state.last || {}), ...payload.new };
-            options.onStateChange?.(state.last, true);
-          })
-      .subscribe((status) => {
-        // 구독 확인 후 초기 상태 로드 — 구독 전에 발생한 이벤트를 놓치지 않음
-        if (status === 'SUBSCRIBED') load();
+    // p_choice 가 null 이면 단순 손들기 토글, 숫자면 '이름:번호' 투표
+    async function raiseHand(name, choice, unit, qIndex) {
+      const code = _code();
+      if (!code) return;
+      const { data } = await supa.rpc('practice_hand', {
+        p_code: code, p_name: name,
+        p_choice: (choice === undefined ? null : choice),
+        p_unit: (unit === undefined ? null : unit),
+        p_q_index: (qIndex === undefined ? null : qIndex),
       });
+      _apply(data);
+    }
 
-    return { state, nominate, raiseHand, setStatus, reload: load };
+    async function setStatus(status, clearPlayer) {
+      const code = _code();
+      if (!code) return;
+      const { data } = await supa.rpc('practice_status',
+        { p_code: code, p_status: status, p_clear_player: !!clearPlayer });
+      _apply(data);
+    }
+
+    async function nextQuestion(unit, qIndex) {
+      const code = _code();
+      if (!code) return;
+      const { data } = await supa.rpc('practice_next',
+        { p_code: code, p_unit: unit, p_q_index: qIndex });
+      _apply(data);
+    }
+
+    // 실시간 구독 대신 폴링.
+    // 테이블을 잠그면 postgres_changes 이벤트가 오지 않습니다(출석부와 같은 이유).
+    // 지목·손들기는 출석부보다 반응이 빨라야 해서 3초로 잡았습니다.
+    setInterval(() => {
+      if (document.hidden) return;
+      load(true);
+    }, 3000);
+
+    load();
+
+    return { state, nominate, raiseHand, setStatus, nextQuestion, reload: load };
   }
 
   // ═══════════════════════════════════════════════════════════════

@@ -57,13 +57,14 @@
 
   <div class="brd-body">
 
-    <div class="brd-card" id="brd-name-card" style="display:none">
-      <div class="brd-sec-title">👋 이름을 알려주세요 · Your name</div>
-      <input class="nms-input" id="brd-name-input" placeholder="이름 · Name" maxlength="20" style="margin-bottom:10px;">
-      <button class="nms-save-btn" onclick="brdSaveName()">확인 · OK</button>
+    <div class="brd-card" id="brd-auth-card" style="display:none">
+      <div class="brd-sec-title">🔒 로그인이 필요해요 · Sign in required</div>
+      <div class="brd-hint" id="brd-auth-msg">게시판은 등록된 분만 이용할 수 있어요.<br>
+        <span style="color:var(--warm-500)">The board is for registered members only.</span></div>
+      <button class="nms-save-btn" onclick="location.href='index.html'">로그인하러 가기 · Sign in</button>
     </div>
 
-    <div class="brd-card">
+    <div class="brd-card" id="brd-write-card">
       <div class="brd-sec-title">✏️ 새 글쓰기 · New Post</div>
       <div class="brd-hint">선생님께 질문하거나 하고 싶은 말을 남겨주세요. 다른 학생들도 볼 수 있어요.</div>
       <input class="nms-input" id="brd-title-input" placeholder="제목 · Title" maxlength="80" style="margin-bottom:8px;">
@@ -74,7 +75,7 @@
       </div>
     </div>
 
-    <div class="brd-card">
+    <div class="brd-card" id="brd-posts-card">
       <div class="brd-sec-title">📋 게시글 · Posts</div>
       <div id="brd-list"><div class="brd-empty">불러오는 중…</div></div>
     </div>
@@ -101,45 +102,27 @@ function _brdClient(){
   return _brdSb;
 }
 
-const _brdParams = new URLSearchParams(location.search);
-const brdIsTeacher = _brdParams.has('teacher');
+// ── 로그인 세션 ────────────────────────────────────────────
+// board_posts 테이블은 anon 직접 접근이 차단돼 있습니다.
+// 로그인(verify_login) 시 발급된 토큰으로 RPC를 부를 때만 열립니다.
+//   admin/teacher/student → 전체 글   ·   trial → 본인 글만   ·   guest → 불가
+function _brdSession(){
+  try { return JSON.parse(sessionStorage.getItem('hq_user') || 'null') || null; }
+  catch(e) { return null; }
+}
+function _brdToken(){ const u = _brdSession(); return (u && u.token) || ''; }
+
+let brdIsTeacher = false;      // 서버가 최종 판단 — 화면 표시용
 let brdDisplayName = '';
-let _brdNameResolved = false;
-
-async function _brdResolveName(){
-  if (_brdNameResolved) return;
-  const loginId = _brdParams.get('name');
-  if (loginId) {
-    const sb = _brdClient();
-    if (sb) {
-      try {
-        const { data } = await sb.from('members').select('display_name').eq('name', loginId).single();
-        if (data && data.display_name) { brdDisplayName = data.display_name; _brdNameResolved = true; return; }
-      } catch(e) {}
-    }
-    brdDisplayName = loginId;
-    _brdNameResolved = true;
-    return;
-  }
-  brdDisplayName = localStorage.getItem('brd_name') || '';
-  _brdNameResolved = true;
-}
-
-function brdSaveName(){
-  const v = document.getElementById('brd-name-input').value.trim();
-  if (!v) return;
-  brdDisplayName = v;
-  localStorage.setItem('brd_name', v);
-  document.getElementById('brd-name-card').style.display = 'none';
-}
 
 // ── OPEN / CLOSE ─────────────────────────────────────────
 async function openBoard(){
   document.getElementById('brd-overlay').classList.add('open');
   document.addEventListener('keydown', _brdEscHandler);
   document.body.style.overflow = 'hidden';
-  await _brdResolveName();
-  document.getElementById('brd-name-card').style.display = brdDisplayName ? 'none' : 'block';
+  const u = _brdSession();
+  brdDisplayName = (u && u.display_name) || '';
+  brdIsTeacher = !!(u && (u.role === 'teacher' || u.role === 'admin'));
   brdLoadPosts();
 }
 function _brdEscHandler(e){ if (e.key === 'Escape') closeBoard(); }
@@ -149,24 +132,75 @@ function closeBoard(){
   document.body.style.overflow = '';
 }
 
+// 로그인 안내 화면으로 전환
+function _brdShowAuth(msgHtml){
+  const auth = document.getElementById('brd-auth-card');
+  const write = document.getElementById('brd-write-card');
+  const posts = document.getElementById('brd-posts-card');
+  if (auth) auth.style.display = 'block';
+  if (write) write.style.display = 'none';
+  if (posts) posts.style.display = 'none';
+  const m = document.getElementById('brd-auth-msg');
+  if (m && msgHtml) m.innerHTML = msgHtml;
+}
+function _brdShowBoard(){
+  const auth = document.getElementById('brd-auth-card');
+  const write = document.getElementById('brd-write-card');
+  const posts = document.getElementById('brd-posts-card');
+  if (auth) auth.style.display = 'none';
+  if (write) write.style.display = 'block';
+  if (posts) posts.style.display = 'block';
+}
+
 // ── POSTS ────────────────────────────────────────────────
-async function brdSubmitPost(){
-  const title = document.getElementById('brd-title-input').value.trim();
-  const content = document.getElementById('brd-content-input').value.trim();
-  if (!brdDisplayName) {
-    document.getElementById('brd-name-card').style.display = 'block';
+async function brdLoadPosts(){
+  const list = document.getElementById('brd-list');
+  const sb = _brdClient();
+  const token = _brdToken();
+  if (!token) {
+    _brdShowAuth('게시판은 등록된 분만 이용할 수 있어요.<br>' +
+      '<span style="color:var(--warm-500)">The board is for registered members only.</span>');
     return;
   }
+  if (!sb) { _brdShowBoard(); list.innerHTML = '<div class="brd-empty">게시판을 불러올 수 없어요.</div>'; return; }
+  try {
+    const { data, error } = await sb.rpc('board_list', { p_token: token });
+    if (error) throw error;
+    if (!data || !data.ok) {
+      if (data && data.error === 'guest') {
+        _brdShowAuth('공용 체험 계정으로는 게시판을 볼 수 없어요.<br>' +
+          '<span style="color:var(--warm-500)">Please sign in with your own account.</span>');
+      } else {
+        _brdShowAuth('로그인이 만료됐어요. 다시 로그인해 주세요.<br>' +
+          '<span style="color:var(--warm-500)">Your session expired — please sign in again.</span>');
+      }
+      return;
+    }
+    _brdShowBoard();
+    brdIsTeacher = (data.role === 'teacher' || data.role === 'admin');
+    brdDisplayName = data.me || brdDisplayName;
+    brdRenderPosts(data.posts || []);
+  } catch(e) {
+    _brdShowBoard();
+    list.innerHTML = '<div class="brd-empty">불러오기 실패: ' + _brdEsc(e.message || String(e)) + '</div>';
+  }
+}
+
+async function brdSubmitPost(){
+  const btn = event && event.target;
+  const title = document.getElementById('brd-title-input').value.trim();
+  const content = document.getElementById('brd-content-input').value.trim();
   if (!title || !content) return;
   const sb = _brdClient();
-  if (!sb) return;
-  const btn = event.target;
-  btn.disabled = true;
+  const token = _brdToken();
+  if (!sb || !token) { brdLoadPosts(); return; }
+  if (btn) btn.disabled = true;
   try {
-    const { error } = await sb.from('board_posts').insert({
-      author_name: brdDisplayName, title, content
-    });
+    const { data, error } = await sb.rpc('board_add',
+      { p_token: token, p_title: title, p_content: content });
     if (error) throw error;
+    if (!data || !data.ok) throw new Error(data && data.error === 'auth'
+      ? '로그인이 만료됐어요. 다시 로그인해 주세요.' : '등록되지 않았어요.');
     document.getElementById('brd-title-input').value = '';
     document.getElementById('brd-content-input').value = '';
     const msg = document.getElementById('brd-post-msg');
@@ -176,21 +210,7 @@ async function brdSubmitPost(){
   } catch(e) {
     alert('등록 실패: ' + (e.message || e));
   } finally {
-    btn.disabled = false;
-  }
-}
-
-async function brdLoadPosts(){
-  const list = document.getElementById('brd-list');
-  const sb = _brdClient();
-  if (!sb) { list.innerHTML = '<div class="brd-empty">게시판을 불러올 수 없어요.</div>'; return; }
-  try {
-    const { data, error } = await sb.from('board_posts')
-      .select('*').order('created_at', { ascending: false }).limit(50);
-    if (error) throw error;
-    brdRenderPosts(data || []);
-  } catch(e) {
-    list.innerHTML = '<div class="brd-empty">불러오기 실패: ' + (e.message || e) + '</div>';
+    if (btn) btn.disabled = false;
   }
 }
 
@@ -240,12 +260,14 @@ async function brdSubmitReply(id){
   const text = ta.value.trim();
   if (!text) return;
   const sb = _brdClient();
-  if (!sb) return;
+  const token = _brdToken();
+  if (!sb || !token) return;
   try {
-    const { error } = await sb.from('board_posts')
-      .update({ reply_content: text, reply_at: new Date().toISOString() })
-      .eq('id', id);
+    const { data, error } = await sb.rpc('board_reply',
+      { p_token: token, p_id: id, p_text: text });
     if (error) throw error;
+    if (!data || !data.ok) throw new Error(data && data.error === 'denied'
+      ? '선생님 계정으로 로그인해야 답변할 수 있어요.' : '등록되지 않았어요.');
     brdLoadPosts();
   } catch(e) {
     alert('답변 등록 실패: ' + (e.message || e));
@@ -255,10 +277,13 @@ async function brdSubmitReply(id){
 async function brdDeletePost(id){
   if (!confirm('이 게시글을 삭제할까요?')) return;
   const sb = _brdClient();
-  if (!sb) return;
+  const token = _brdToken();
+  if (!sb || !token) return;
   try {
-    const { error } = await sb.from('board_posts').delete().eq('id', id);
+    const { data, error } = await sb.rpc('board_delete', { p_token: token, p_id: id });
     if (error) throw error;
+    if (!data || !data.ok) throw new Error(data && data.error === 'denied'
+      ? '선생님 계정으로 로그인해야 삭제할 수 있어요.' : '삭제되지 않았어요.');
     brdLoadPosts();
   } catch(e) {
     alert('삭제 실패: ' + (e.message || e));
