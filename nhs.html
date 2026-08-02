@@ -77,7 +77,7 @@
     <div class="sidebar-hdr">📺 Episodes</div>
     <div id="ep-list"></div>
     <div style="padding:4px 2px 2px;">
-      <button class="fc-sidebar-btn" onclick="openFlashcards()">🃏 복습 플래시카드</button>
+      <button class="fc-sidebar-btn" onclick="openFlashcards()">🃏 복습 플래시카드<span id="fc-due-badge" style="font-weight:800"></span></button>
     </div>
   </div>
   <div class="content-area" id="content-area">
@@ -3005,6 +3005,7 @@ function _fcKnownSet(){
 function _fcMark(card, isReview){
   const p=_nmsProfile(); if(!p) return;
   const rev=_fcReviewSet(), kn=_fcKnownSet(), id=_fcCardId(card);
+  _srsUpdate(id, !isReview);
   if(isReview){ rev.add(id); kn.delete(id); }
   else{ kn.add(id); rev.delete(id); }
   localStorage.setItem('nms_'+p+'_fc_review', JSON.stringify([...rev]));
@@ -3027,6 +3028,47 @@ function _refreshSidebarDone(){
     const badge=el.querySelector('.ep-done');
     if(badge) badge.style.opacity=done.has(el.dataset.epkey)?'1':'0';
   });
+}
+
+
+// ══════════════════════════════════════════════════════
+// ── 간격 반복(SRS) — 어휘 재순환 엔진
+//   상자 1~5, 간격 1·3·7·16·35일. 맞히면 한 칸 위, 틀리면 1번으로.
+//   저장: nms_{프로필}_srs = { "L5_ep03_명의": {b:3, due:"2026-08-15"} }
+// ══════════════════════════════════════════════════════
+const SRS_GAP={1:1,2:3,3:7,4:16,5:35};
+function _srsToday(){ const d=new Date(); return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+function _srsPlus(days){ const d=new Date(); d.setDate(d.getDate()+days); return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
+function _srsKey(){ const p=_nmsProfile(); return p?('nms_'+p+'_srs'):''; }
+function _srsMap(){
+  const k=_srsKey(); if(!k) return {};
+  try{
+    const raw=localStorage.getItem(k);
+    if(raw) return JSON.parse(raw);
+    // 기존 기록 이사: 알아요 → 상자3, 다시볼래요 → 상자1
+    const m={}, t=_srsToday();
+    _fcKnownSet().forEach(id=>{ m[id]={b:3,due:t}; });
+    _fcReviewSet().forEach(id=>{ m[id]={b:1,due:t}; });
+    localStorage.setItem(k,JSON.stringify(m));
+    return m;
+  }catch(e){ return {}; }
+}
+function _srsSave(m){ const k=_srsKey(); if(!k)return; try{ localStorage.setItem(k,JSON.stringify(m)); }catch(e){} }
+function _srsUpdate(cardId,ok){
+  const m=_srsMap(), cur=m[cardId]||{b:0,due:_srsToday()};
+  const b=ok?Math.min((cur.b||0)+1,5):1;
+  m[cardId]={b:b,due:_srsPlus(SRS_GAP[b])};
+  _srsSave(m);
+}
+function _srsDueCount(){
+  const m=_srsMap(), t=_srsToday();
+  return Object.keys(m).filter(id=>(m[id].due||'')<=t).length;
+}
+function _srsUpdateBadge(){
+  const el=document.getElementById('fc-due-badge'); if(!el)return;
+  const n=_srsDueCount();
+  el.textContent=n?' ('+n+')':'';
+  el.style.color=n?'var(--coral)':'';
 }
 
 let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcLevels=[],_fcCurNum=1,_fcIdx=0,_fcFlipped=false;
@@ -3086,14 +3128,26 @@ function _fcWeightedPick(cards, need, curNum){
   return out;
 }
 function _fcApplyFilter(){
+  const CAP=25;
   const pool=_fcFilter.size===0?_fcAllCards:_fcAllCards.filter(c=>_fcFilter.has(c.level));
-  const rev=_fcReviewSet();
-  const revCards=shuffleArr(pool.filter(c=>rev.has(_fcCardId(c)))).slice(0,25);
-  const need=25-revCards.length;
-  const others=pool.filter(c=>!rev.has(_fcCardId(c)));
-  const otherCards=need>0?_fcWeightedPick(others, need, _fcCurNum):[];
-  _fcCards=[...revCards,...otherCards];
+  const m=_srsMap(), today=_srsToday();
+  // ① 오늘 복습할 카드 (낮은 상자부터 = 자주 틀린 것 먼저)
+  const due=pool.filter(c=>{const st=m[_fcCardId(c)];return st&&(st.due||'')<=today;});
+  const deck=shuffleArr(due).sort((a,b)=>(m[_fcCardId(a)].b||1)-(m[_fcCardId(b)].b||1)).slice(0,CAP);
+  // ② 남는 자리는 아직 한 번도 안 본 카드로 (레벨 가중)
+  if(deck.length<CAP){
+    const fresh=pool.filter(c=>!m[_fcCardId(c)]);
+    deck.push(..._fcWeightedPick(fresh, CAP-deck.length, _fcCurNum));
+  }
+  // ③ 그래도 모자라면 아직 복습일이 안 된 카드로 채움
+  if(deck.length<CAP){
+    const inDeck=new Set(deck.map(_fcCardId));
+    const later=pool.filter(c=>!inDeck.has(_fcCardId(c)));
+    deck.push(...shuffleArr(later).slice(0,CAP-deck.length));
+  }
+  _fcCards=deck;
   _fcIdx=0; _fcFlipped=false; _renderFC();
+  _srsUpdateBadge();
 }
 
 function _fcChip(lvKey){
@@ -3159,7 +3213,10 @@ function _renderFC(){
   const c=_fcCards[_fcIdx],total=_fcCards.length;
   const _rev=_fcReviewSet(),_kn=_fcKnownSet(),_cid=_fcCardId(c);
   const _isReview=_rev.has(_cid),_isKnown=_kn.has(_cid);
-  const _cardBadge=_isReview?'<span class="fc-card-badge fc-badge-review">🔄 복습</span>':_isKnown?'<span class="fc-card-badge fc-badge-known">✅ 알아요</span>':'';
+  const _st=_srsMap()[_cid];
+  const _cardBadge=_st
+    ?('<span class="fc-card-badge '+(_st.b<=2?'fc-badge-review':'fc-badge-known')+'" title="다음 복습: '+esc(_st.due||'')+'">'+(_st.b<=2?'🔄':'✅')+' 상자 '+_st.b+'/5</span>')
+    :'<span class="fc-card-badge" style="background:var(--warm-100);color:var(--warm-500)">🆕 처음</span>';
   const pct=total>1?Math.round((_fcIdx/(total-1))*100):100;
   const catClean=c.cat.replace(/^[\u{1F300}-\u{1FAD6} ]+/u,'').trim();
   const prevDis=_fcIdx===0,nextDis=_fcIdx===total-1;
@@ -5072,6 +5129,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   await _epIdxReady;
   _enAutoForLevel('L1');
   buildSidebar();
+  setTimeout(_srsUpdateBadge,0);
   loadEp('ep01');
   if(NHS_IS_TRIAL){
     document.querySelectorAll('.level-btn').forEach(b=>{
