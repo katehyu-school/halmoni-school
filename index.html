@@ -505,6 +505,7 @@ body::before {
 .att-refresh:hover { background:rgba(78,205,196,.1); }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="core/supabase-config.js"></script>
 </head>
 <body>
 
@@ -761,9 +762,8 @@ body::before {
 </div>
 
 <script>
-const _SBURL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
-const _SBKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnbmRndG5zcmNpZnN3bGV3bnBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NDE1NzIsImV4cCI6MjA5MjAxNzU3Mn0.U0PjtfoB61BJwl7D8eoHCBAUJ76Wus0ELl9X2XqxdBU';
-const _sb    = supabase.createClient(_SBURL, _SBKEY);
+// 주소·공개키는 core/supabase-config.js 한 곳에서만 관리합니다.
+const _sb    = HQ_SUPABASE.client();
 
 let editingIdx = -1;
 let _members = [];  // 멤버 목록 캐시

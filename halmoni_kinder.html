@@ -8,6 +8,7 @@
 <link rel="apple-touch-icon" href="/halmoni-school/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Black+Han+Sans&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="core/supabase-config.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -659,9 +660,8 @@ const vocabData = {
 // ══════════════════════════════
 // SUPABASE
 // ══════════════════════════════
-const SUPA_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
-const SUPA_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
-const supa = supabase.createClient(SUPA_URL, SUPA_KEY);
+// 주소·공개키는 core/supabase-config.js 한 곳에서만 관리합니다.
+const supa = HQ_SUPABASE.client();
 
 // 탭 정의 (순서/색상/이모지)
 const songTabs = {

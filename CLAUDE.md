@@ -14,6 +14,22 @@
 | **모바일 앱 (hq-mobile.html)** | **L1~L6 전 레벨 연동 완료 ✅** (2026-08-02) — 레벨 칩·영상편·빈 단계 자동 건너뛰기·SRS 실저장 | PWA(매니페스트·서비스워커) · Supabase 진도 동기화 |
 | **멤버/출석 시스템** | 이름+PIN 로그인 ✅ / 출석부 패널 ✅ / admin.html 연동 ✅ / **DB 보안 완결 ✅** (전 테이블 anon 차단, RPC 전용, 로그인 세션 토큰) | PIN 개인별 관리 UI 개선 |
 
+> 📗 **2026-08-02 완료 (인수인계 매뉴얼 + Supabase 설정 통합)** — 다음 세션은 이 블록부터 볼 것:
+> — **`docs/MAINTENANCE.md` 작성 완료** (약 640줄). **1부 운영편**(선생님 — 전체지도·계정·반코드·수업링크·출석·게시판·체험계정·에피소드 의뢰·진도가 어디 남는가·자주 겪는 문제) + **2부 기술편**(개발자 — 구조·파일지도·데이터계약·진도 스키마·인증모델·DB 레퍼런스·배포·함정·부채·Supabase 설정·첫주 체크리스트). **비밀값 0건** — 대신 "인수인계 시 따로 전달할 것" 9개 항목 표만. `_config.yml`이 `docs/`를 웹 공개에서 제외하지만 **리포 자체가 공개**라 어차피 적으면 안 됨.
+> — **⚠️ CLAUDE.md가 낡았던 부분(문서 작성 중 실물 확인으로 발견)**: ① **PWA는 이미 완료** — `manifest.json`·`sw.js` 존재, `hq-mobile.html`이 서비스워커 등록 중. "다음 단계 후보"에서 빼야 함. ② **Kids L4는 unit01~10 전부 존재**. ③ **`sb_publishable_` 형식이 supabase-js@2 CDN과 호환 안 된다는 서술은 틀림** — Kids·유아반이 계속 이 키로 돌고 있었음. ④ `loadL1Test`는 없음(L1만 옛 이름 `loadLevelTest`).
+> — **✅ DB 재검증**: `app_passwords`·`songs`는 GRANT가 열려 있지만 RLS(정책 `no_direct_access` / 정책 0개)가 막아 결과적으로 안전. `members`의 `public read members` 정책은 **GRANT가 없어 무력한 잔재** — 혼동 줄이려면 삭제 가능. anon 직접 접근 가능 테이블 **0개** 확인.
+> — **🔑 Supabase 접속 설정 통합 — `core/supabase-config.js` 신설**: 주소+공개키가 `index.html`·`admin.html`·`halmoni_kinder.html`·`core/core.js`·`core/board.js` **5곳에 복사**돼 있었고 **형식도 두 가지**(레거시 JWT 3곳 / 신형 `sb_publishable_` 2곳)였음. 키 교체 시 한 곳만 빠뜨리면 그 화면만 조용히 죽는 구조. → `window.HQ_SUPABASE`(`.URL`/`.KEY`/`.client()`) 하나로 통합, **신형 publishable로 통일**(Supabase MCP로 두 키 모두 `disabled:false` 확인, 신형이 권장 형식이고 이미 실사용 중). **클라이언트도 전체가 1개 공유**(예전엔 3개가 떠 있었음 — GoTrue 중복 경고 소멸). `nhs.html`·`korean-app_v2.html`에는 `<script src="core/supabase-config.js">` 한 줄만 추가. `HalmoniCore.SUPABASE_URL/KEY`는 하위호환으로 남기되 값은 설정에서 가져옴.
+> — ✅ **검증**: git HEAD 클린 확인 → `git show HEAD:파일` 클린 사본에서 Python 치환 → 복사 (CLAUDE.md 권장 절차). null byte 0 / **`</html>` 12개 파일 전부 host-side Grep 확인** / CRLF 0 / node --check (core 모듈 5개 + HTML 인라인 스크립트 전부) / **키 잔존 검사 — supabase-config.js 외 0건** / **Node로 세 모듈 실제 로드해 배선 10항목 테스트 전부 통과**(같은 클라이언트 공유·createClient 1회 호출 포함).
+> — 🔜 **매뉴얼에서 드러난 정리 대상**: `start.html` 고아(링크 0건) · `core/unit10.json`이 모듈 폴더에 잘못 위치 · 레거시 RPC 6개(`log_attendance`·`verify_member_login`·`verify_app_password`·`update_app_password`·`class_roster`·`class_check_toggle`) 호출자 없음 · `halmoni_kinder.html` 여전히 주소로 열림 · **L6 마감테스트 듣기 폴더 비어 있음**(다른 레벨은 5~8개).
+
+> 📘 **~~다음 세션 시작점~~ — 인수인계 매뉴얼 작성 (✅ 위 블록에서 완료)**
+> — **선생님 요청**: "다른 사람이 인수인계 받아도 관리할 수 있는 유지·관리 매뉴얼". 의도는 문서화 자체보다 **본인 생각 정리 + 미진한 부분 채우기**.
+> — **확정된 형식**: `docs/MAINTENANCE.md` (저장소 마크다운) · **1부 운영편**(선생님 — 학생 계정, 반 코드, 수업 링크, 에피소드 추가 의뢰, 출석) + **2부 기술편**(개발자 — 아키텍처, DB/RPC, 배포, 함정).
+> — **⚠️ 비밀값 금지**: PIN·반 코드·Supabase 키를 문서에 적지 말 것. 대신 **"인수인계 시 따로 전달할 것"** 목록만(무엇을·어디서 넘기는지). 리포가 공개라서.
+> — **성격 주의**: CLAUDE.md는 시간순 **세션 로그**, 매뉴얼은 **구조 중심**. 요약이 아니라 재구성이어야 함.
+> — **작성 전 반드시**: CLAUDE.md만 믿지 말고 실제 파일·DB에서 사실 확인([[feedback-curriculum-checkin]]). 이번 세션에도 낡은 기술이 여럿 나왔음(Kids L4는 06과가 아니라 10과, L6는 12편 완결, A2·A3 항목 이미 완료 등).
+> — **이미 수집한 사실**: 루트 HTML 12개(korean-app_v2 822KB · nhs 416KB · hq-mobile 191KB · sejong 215KB · dashboard 95KB) / `core/` 12개 파일(nhs.css 69KB, my-notes 42KB, my-space 39KB, core.js 17KB, board.js 15KB, adult-renderer 46KB) / `docs/`에 기존 설계문서 15개 — 매뉴얼에서 이들을 어떻게 정리·통합할지도 판단 필요.
+
 > 🚪 **2026-08-02 완료 (공개 전 입장 정리)** — 다음 세션은 이 블록부터 볼 것:
 > — **문제**: DB는 잠갔는데 **문은 열려 있었음.** `korean-app_v2.html`·`halmoni_kinder.html`은 주소만 알면 누구나 들어왔고(콘텐츠 잠금 0), `hq-mobile.html`은 `enterKids()`가 화면만 바꿔서 **한 탭이면 Kids 반**. index.html의 카드 숨김은 안내판일 뿐 자물쇠가 아니었음. 공개 QR을 뿌리면 그대로 노출되는 상태였음.
 > — **해법: 이미 있는 반 코드를 자물쇠로 재사용**(새 인증 체계 안 만듦). `hq_class_code`는 ⓐ 수업 링크 `?c=` ⓑ **로그인 시 서버가 내려줌**(`class_code_for_member` — 이 함수가 이미 `student·teacher·admin`에게만 주고 trial·guest는 거부) 두 경로로 배포되고 있었음.
@@ -22,7 +38,8 @@
 > — `index.html`: **유아반(할머니 스쿨) 카드 삭제** — 학생 1명이지만 사실상 미사용. **`halmoni_kinder.html` 파일은 그대로 둠**(선생님 지시). `enterAs`의 `['card0','card1','card2']` → `['card1','card2']`, trial 숨김도 card1만.
 > — ⚠️ **남은 것**: `halmoni_kinder.html`은 카드만 지웠을 뿐 **주소를 직접 치면 여전히 열림**. 유아반 자료는 개인정보가 없어 일단 둠 — 필요하면 같은 반 코드 잠금을 붙이면 됨.
 > — ✅ **검증(브라우저)**: 코드 없는 상태 → Kids 웹 잠금화면 ✓, 모바일 Kids 카드 사라짐 ✓ / 코드 있는 상태 → **`?c=` 없이 `?name=Liam`만으로도 Kids 정상 진입**(= 아이들 실제 경로: hangeulquest.com → 로그인 → HQ Kids) ✓, 모바일 Kids 카드 복귀 ✓ / index.html: card0 없음·유아반 링크 0건, 학생=카드2개, 체험=HQ만 ✓.
-> — 📌 **HQ Kids 모바일은 콘텐츠가 뒤처져 있음** — 웹은 L2(9과)·L3(10과)·L4(10과)인데 모바일은 **L2 9과 + L3 1과뿐, L4는 아예 없음**(`level4` fetch 0건). L3은 `openL3(1)` 하드코딩 "미리보기". Kids 모바일은 L2용·L3용 렌더러가 따로 복제된 구조라 L4를 붙이려면 세 번째 복제 또는 통합 리팩터 필요. [[hq-kids-l4-conclusion]] 방침과 함께 판단할 것.
+> — ✅ **Kids 모바일 범위 확정 (선생님 판단)** — L3·L4 모바일 이식 **안 함.** 이유는 기술이 아니라 사용자: **Kids 존은 부모가 모바일 기기를 허용하지 않음.** 실제 사용 상황은 "부모 폰을 잠깐 빌린 5분"뿐이라, 지금 들어 있는 **한글 기초 5단원 · 게임 3종 · L2 카드덱**이 오히려 그 상황에 맞는 형태. 20분짜리 스토리 모드(L3·L4)는 웹에서 수업 때 하는 게 맞음. → 모험맵의 "📖 스토리 모드 미리보기 · Level 3" 버튼 제거(1과만 열려 미완성으로 보이던 자리), 내 별 화면 안내도 "💻 스토리 모드는 웹에서"로 교체. **`openL3`/`scr-l3-flow` 코드는 남겨 둠**(되돌리기 쉽게).
+> — 📌 **참고 — 모바일이 웹보다 뒤처진 지점** — 웹은 L2(9과)·L3(10과)·L4(10과)인데 모바일은 **L2 9과 + L3 1과뿐, L4는 아예 없음**(`level4` fetch 0건). L3은 `openL3(1)` 하드코딩 "미리보기". Kids 모바일은 L2용·L3용 렌더러가 따로 복제된 구조라 L4를 붙이려면 세 번째 복제 또는 통합 리팩터 필요. [[hq-kids-l4-conclusion]] 방침과 함께 판단할 것.
 > — 📌 **CLAUDE.md가 낡았던 부분 정정**: Kids L4는 "unit01~06"이 아니라 **unit01~10 전부 존재**(4개 섹션 모두 채워짐), L3도 10과 전부.
 
 > 🔒 **2026-08-02 완료 (남은 보안 구멍 차단 — practice_session · board_posts)** — 다음 세션은 이 블록부터 볼 것:

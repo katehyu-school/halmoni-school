@@ -8,20 +8,23 @@
 (function(global) {
   'use strict';
 
-  // ─── Supabase 설정 (세 반 공통) ────────────────────────────────
-  const SUPABASE_URL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_c6WStIx6hRTnCUD4WP1KKQ_3hxU6UUa';
+  // ─── Supabase 설정 ─────────────────────────────────────────────
+  // 주소·공개키는 core/supabase-config.js 한 곳에서만 관리합니다.
+  // 이 파일보다 먼저 <script src="core/supabase-config.js"> 를 넣어 주세요.
+  const _cfg = () => (typeof HQ_SUPABASE !== 'undefined') ? HQ_SUPABASE : null;
+  const SUPABASE_URL = _cfg() ? _cfg().URL : '';
+  const SUPABASE_KEY = _cfg() ? _cfg().KEY : '';
 
   // Supabase 클라이언트는 supabase-js가 로드된 후에만 만들 수 있음
-  let _supabase = null;
   function getSupabase() {
-    if (_supabase) return _supabase;
-    if (typeof supabase === 'undefined') {
-      console.warn('[core] supabase-js가 먼저 로드되어야 합니다');
+    const c = _cfg();
+    if (!c) {
+      console.warn('[core] core/supabase-config.js 가 먼저 로드되어야 합니다');
       return null;
     }
-    _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    return _supabase;
+    const sb = c.client();
+    if (!sb) console.warn('[core] supabase-js가 먼저 로드되어야 합니다');
+    return sb;
   }
 
   // ─── URL 파라미터 (teacher 모드, 학생 이름) ────────────────────

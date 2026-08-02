@@ -92,14 +92,14 @@
 })();
 
 // ── 3. JS ──────────────────────────────────────────────────────
-const BRD_SBURL = 'https://lgndgtnsrcifswlewnpn.supabase.co';
-const BRD_SBKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnbmRndG5zcmNpZnN3bGV3bnBuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NDE1NzIsImV4cCI6MjA5MjAxNzU3Mn0.U0PjtfoB61BJwl7D8eoHCBAUJ76Wus0ELl9X2XqxdBU';
-let _brdSb = null;
+// 주소·공개키는 core/supabase-config.js 한 곳에서만 관리합니다.
+// 이 파일보다 먼저 <script src="core/supabase-config.js"> 를 넣어 주세요.
 function _brdClient(){
-  if (_brdSb) return _brdSb;
-  if (typeof supabase === 'undefined') return null;
-  _brdSb = supabase.createClient(BRD_SBURL, BRD_SBKEY);
-  return _brdSb;
+  if (typeof HQ_SUPABASE === 'undefined') {
+    console.warn('[board] core/supabase-config.js 가 먼저 로드되어야 합니다');
+    return null;
+  }
+  return HQ_SUPABASE.client();
 }
 
 // ── 로그인 세션 ────────────────────────────────────────────
