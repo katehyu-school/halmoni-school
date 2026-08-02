@@ -3734,8 +3734,25 @@ async function loadRoadmap(){
     +gem('🗣️','말하기 · 역할극','Speaking','Quiz 안','혼자여도 돼요 — <b>상대 대사는 앱이 읽어줍니다.</b> 채점 없으니 편하게.')
     +gem('✍️','쓰기','Writing','Quiz 안','받아쓰기 + 문장 완성(TOPIK 51·52형). 맞춤법만 보고 <b>띄어쓰기는 봐줘요</b>.')
     +gem('✅','자기점검','Self-check','편 맨 끝','다음 편으로 가도 될지 스스로 확인. <b>여기까지 해야 ✓ 표시가 됩니다.</b>')
-    +gem('📱','모바일 앱','Mobile','hq-mobile.html','밖에서 5분. 단어장·롤플레이·카톡 시뮬. <b>폰 홈 화면에 추가</b>해 두세요.')
+    +gem('📱','모바일 앱','Mobile','아래 QR','밖에서 5분. 단어장·롤플레이·카톡 시뮬. <b>바로 아래 QR을 찍으면</b> 폰에서 열려요. <b>홈 화면에 추가</b>해 두면 앱처럼 씁니다.')
     +'</table></div>';
+
+
+  // ── 폰으로 바로 열기 (QR) ──
+  const qrcard='<div style="margin-top:20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
+    +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📱 폰으로 바로 열기</div>'
+    +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-bottom:12px;">Open the mobile app on your phone</div>'
+    +'<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">'
+    +'<img src="qr/QR_HangeulQuest_Mobile.png" alt="모바일 앱 QR" width="140" height="140" '
+      +'style="flex:none;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;padding:4px;">'
+    +'<div style="flex:1;min-width:190px;font-size:12.5px;color:var(--warm-700);line-height:1.85;">'
+      +'폰 카메라로 이 QR을 비추면 <b>모바일 앱</b>이 열려요.<br>'
+      +'열린 뒤 브라우저 메뉴에서 <b>&ldquo;홈 화면에 추가&rdquo;</b>를 누르면 앱처럼 쓸 수 있어요.'
+      +'<div style="margin-top:7px;font-size:11.5px;color:var(--warm-500);font-style:italic;">'
+        +'Point your phone camera at the QR, then use &ldquo;Add to Home Screen&rdquo;.</div>'
+      +'<div style="margin-top:8px;font-size:12px;"><a href="hq-mobile.html" style="color:var(--teal-dark);font-weight:700;">'
+        +'또는 여기를 눌러 바로 열기 &rarr;</a></div>'
+    +'</div></div></div>';
 
   // ── 주간 리듬 (자습 기준) ──
   const rhythm='<div style="margin-top:20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
@@ -3764,6 +3781,7 @@ async function loadRoadmap(){
     +_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)
     +_rmStep(4,'🏆','레벨 마감 테스트','Step 4 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))
     +gems
+    +qrcard
     +rhythm
     +'<div style="margin-top:16px;font-size:11.5px;color:var(--warm-400);line-height:1.7;">※ 진행 상황은 이 브라우저에만 저장돼요. PC와 폰은 각각 따로 기록됩니다.'
     +'<div style="font-style:italic">Progress is saved in this browser only — PC and phone are tracked separately.</div></div>'
