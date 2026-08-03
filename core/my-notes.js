@@ -270,8 +270,11 @@ let nmsCanvas, nmsCtx, nmsDrawing=false, nmsLX=0, nmsLY=0;
 // 프로필 이름을 바꾸거나 옮길 때는 반드시 이 목록 전체가 따라가야 합니다.
 // (2026-08-02 이전에는 _notes·_color·_av 3개만 옮겨서, 이름을 바꾸면
 //  완료한 편·테스트 점수·단어 복습 상자·작문이 통째로 사라졌습니다.)
+// ⚠️ 진도 키를 새로 만들면 반드시 여기에 추가할 것.
+//    빠뜨리면 이름을 바꿀 때 그 진도만 조용히 사라집니다(2026-08-02에 겪음).
 const NMS_KEYS = ['_notes','_color','_av','_writings',
-                  '_ep_done','_prog','_srs','_fc_review','_fc_known'];
+                  '_ep_done','_prog','_srs','_fc_review','_fc_known',
+                  '_sc','_ep_star'];
 const NMS_AUTO_KEY = 'nms_auto_profile';
 
 function nmsMoveProfileData(from, to){
