@@ -1035,10 +1035,13 @@ function enterAs(user) {
   document.getElementById('pinChangeLinkWrap').style.display = (role === 'guest') ? 'none' : 'block';
 
   // 앱 카드 URL에 ?name=xxx 파라미터 추가 (수업 연동용)
+  // ⚠️ 반드시 display_name(화면에 뜨는 이름). Kids 앱은 students 테이블 이름과
+  //    글자 그대로 비교하므로(core.js urlName → STUDENTS.filter) 로그인 ID를 넣으면
+  //    자기 이름 버튼도 안 뜨고 자동 출석 체크인도 안 됩니다.
   ['card1','card2'].forEach(id => {
     const card = document.getElementById(id);
     const base = card.getAttribute('href').split('?')[0];
-    card.setAttribute('href', base + '?name=' + encodeURIComponent(user.name)
+    card.setAttribute('href', base + '?name=' + encodeURIComponent(user.display_name || user.name)
       + (role === 'teacher' || role === 'admin' ? '&teacher' : '')
       + (role === 'trial' ? '&trial' : ''));
   });
