@@ -27,14 +27,27 @@
 .brd-post-date{font-size:11px;color:var(--warm-400);margin-left:auto;}
 .brd-post-title{font-size:14px;font-weight:700;color:var(--warm-800);margin-bottom:4px;}
 .brd-post-content{font-size:13px;color:var(--warm-700);line-height:1.7;white-space:pre-wrap;margin-bottom:6px;}
-.brd-reply{background:var(--teal-lt);border-radius:8px;padding:10px 12px;margin-top:8px;}
-.brd-reply-badge{display:inline-block;background:var(--teal);color:#fff;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;margin-bottom:5px;}
-.brd-reply-text{font-size:13px;color:var(--teal-dark);line-height:1.6;white-space:pre-wrap;}
+.brd-post.pinned{border-left-color:var(--amber);background:#fffdf5;}
+.brd-pin-badge{display:inline-block;background:var(--amber);color:#fff;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;}
+.brd-replies{margin-top:8px;display:flex;flex-direction:column;gap:6px;}
+.brd-reply{background:#fff;border:1px solid var(--warm-300);border-radius:8px;padding:9px 12px;}
+.brd-reply.teacher{background:var(--teal-lt);border-color:transparent;}
+.brd-reply-head{display:flex;align-items:center;gap:7px;margin-bottom:4px;}
+.brd-reply-badge{display:inline-block;background:var(--teal);color:#fff;border-radius:20px;font-size:10.5px;font-weight:700;padding:2px 9px;}
+.brd-reply-who{font-size:12px;font-weight:700;color:var(--warm-700);}
+.brd-reply-date{font-size:10.5px;color:var(--warm-400);margin-left:auto;}
+.brd-reply-text{font-size:13px;color:var(--warm-700);line-height:1.6;white-space:pre-wrap;}
+.brd-reply.teacher .brd-reply-text{color:var(--teal-dark);}
 .brd-pending{font-size:11.5px;color:var(--warm-400);margin-top:4px;}
 .brd-reply-form{margin-top:8px;}
-.brd-reply-form textarea{min-height:70px;margin-bottom:6px;}
-.brd-del-btn{background:none;border:none;color:var(--warm-300);font-size:11px;cursor:pointer;padding:2px 4px;margin-top:4px;}
+.brd-reply-form textarea{min-height:56px;margin-bottom:6px;}
+.brd-post-actions{display:flex;gap:6px;align-items:center;margin-top:6px;}
+.brd-del-btn{background:none;border:none;color:var(--warm-300);font-size:11px;cursor:pointer;padding:2px 4px;}
 .brd-del-btn:hover{color:var(--coral);}
+.brd-pin-btn{background:none;border:1px solid var(--warm-300);border-radius:6px;color:var(--warm-500);font-size:11px;cursor:pointer;padding:2px 8px;}
+.brd-pin-btn:hover{border-color:var(--amber);color:var(--amber);}
+.brd-reply-del{background:none;border:none;color:var(--warm-300);font-size:11px;cursor:pointer;padding:0 2px;}
+.brd-reply-del:hover{color:var(--coral);}
 .brd-empty{text-align:center;padding:24px;color:var(--warm-500);font-size:13px;}
 `;
   document.head.appendChild(s);
@@ -66,7 +79,8 @@
 
     <div class="brd-card" id="brd-write-card">
       <div class="brd-sec-title">✏️ 새 글쓰기 · New Post</div>
-      <div class="brd-hint">선생님께 질문하거나 하고 싶은 말을 남겨주세요. 다른 학생들도 볼 수 있어요.</div>
+      <div class="brd-hint">선생님께 질문하거나 하고 싶은 말을 남겨주세요. 다른 학생들도 보고 <b>댓글</b>을 달 수 있어요.<br>
+        <span style="color:var(--warm-500)">Ask the teacher anything, or just say hello — classmates can reply too.</span></div>
       <input class="nms-input" id="brd-title-input" placeholder="제목 · Title" maxlength="80" style="margin-bottom:8px;">
       <textarea class="nms-textarea" id="brd-content-input" placeholder="내용을 적어주세요..."></textarea>
       <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
@@ -103,9 +117,12 @@ function _brdClient(){
 }
 
 // ── 로그인 세션 ────────────────────────────────────────────
-// board_posts 테이블은 anon 직접 접근이 차단돼 있습니다.
+// board_posts · board_replies 테이블은 anon 직접 접근이 차단돼 있습니다.
 // 로그인(verify_login) 시 발급된 토큰으로 RPC를 부를 때만 열립니다.
-//   admin/teacher/student → 전체 글   ·   trial → 본인 글만   ·   guest → 불가
+//   읽기  admin/teacher/student → 전체 글  ·  trial → 본인 글 + 📌공지  ·  guest → 불가
+//   댓글  guest 외 전부 가능 (글쓴이 이름·역할은 서버가 세션에서 채움 — 사칭 불가)
+//   삭제  admin/teacher → 전부  ·  그 외 → 본인 글·본인 댓글만
+//   📌공지 고정  admin/teacher만
 function _brdSession(){
   try { return JSON.parse(sessionStorage.getItem('hq_user') || 'null') || null; }
   catch(e) { return null; }
@@ -230,31 +247,50 @@ function brdRenderPosts(posts){
     return;
   }
   list.innerHTML = posts.map(p => {
-    let replyBlock;
-    if (p.reply_content) {
-      replyBlock = `<div class="brd-reply"><span class="brd-reply-badge">🍡 선생님 답변</span><div class="brd-reply-text">${_brdEsc(p.reply_content)}</div></div>`;
-    } else if (brdIsTeacher) {
-      replyBlock = `<div class="brd-reply-form">
-        <textarea class="nms-textarea" id="brd-reply-${p.id}" placeholder="답변을 입력하세요..."></textarea>
-        <button class="nms-save-btn" onclick="brdSubmitReply('${p.id}')">답변 등록</button>
+    const replies = p.replies || [];
+    // 댓글 — 선생님 것은 🍡 배지 + 민트 배경으로 눈에 띄게
+    const replyItems = replies.map(r => {
+      const isT = (r.author_role === 'teacher' || r.author_role === 'admin');
+      const canDelR = brdIsTeacher || r.author_name === brdDisplayName;
+      const who = isT
+        ? `<span class="brd-reply-badge">🍡 선생님</span>`
+        : `<span class="brd-reply-who">${_brdEsc(r.author_name)}</span>`;
+      const delR = canDelR
+        ? `<button class="brd-reply-del" onclick="brdDeleteReply('${r.id}')" title="댓글 삭제">🗑</button>` : '';
+      return `<div class="brd-reply${isT ? ' teacher' : ''}">
+        <div class="brd-reply-head">${who}<span class="brd-reply-date">${_brdDate(r.created_at)}</span>${delR}</div>
+        <div class="brd-reply-text">${_brdEsc(r.content)}</div>
       </div>`;
-    } else {
-      replyBlock = `<div class="brd-pending">💬 답변 대기 중</div>`;
-    }
-    const delBtn = brdIsTeacher ? `<button class="brd-del-btn" onclick="brdDeletePost('${p.id}')">🗑 삭제</button>` : '';
-    return `<div class="brd-post">
+    }).join('');
+
+    const replyBlock = (replies.length ? `<div class="brd-replies">${replyItems}</div>` : '')
+      + `<div class="brd-reply-form">
+        <textarea class="nms-textarea" id="brd-reply-${p.id}" placeholder="댓글을 남겨보세요… · Leave a comment"></textarea>
+        <button class="nms-save-btn" onclick="brdSubmitReply('${p.id}')">💬 댓글 달기</button>
+      </div>`;
+
+    const canDel = brdIsTeacher || p.author_name === brdDisplayName;
+    const delBtn = canDel
+      ? `<button class="brd-del-btn" onclick="brdDeletePost('${p.id}')">🗑 글 삭제</button>` : '';
+    const pinBtn = brdIsTeacher
+      ? `<button class="brd-pin-btn" onclick="brdTogglePin('${p.id}', ${p.is_pinned ? 'false' : 'true'})">${p.is_pinned ? '📌 공지 해제' : '📌 공지로 고정'}</button>` : '';
+    const pinBadge = p.is_pinned ? `<span class="brd-pin-badge">📌 공지</span>` : '';
+
+    return `<div class="brd-post${p.is_pinned ? ' pinned' : ''}">
       <div class="brd-post-head">
+        ${pinBadge}
         <span class="brd-post-author">${_brdEsc(p.author_name)}</span>
         <span class="brd-post-date">${_brdDate(p.created_at)}</span>
       </div>
       <div class="brd-post-title">${_brdEsc(p.title)}</div>
       <div class="brd-post-content">${_brdEsc(p.content)}</div>
       ${replyBlock}
-      ${delBtn}
+      <div class="brd-post-actions">${pinBtn}${delBtn}</div>
     </div>`;
   }).join('');
 }
 
+// 댓글 달기 — 선생님·학생 모두 가능. 이름은 서버가 채움.
 async function brdSubmitReply(id){
   const ta = document.getElementById('brd-reply-' + id);
   const text = ta.value.trim();
@@ -266,16 +302,35 @@ async function brdSubmitReply(id){
     const { data, error } = await sb.rpc('board_reply',
       { p_token: token, p_id: id, p_text: text });
     if (error) throw error;
-    if (!data || !data.ok) throw new Error(data && data.error === 'denied'
-      ? '선생님 계정으로 로그인해야 답변할 수 있어요.' : '등록되지 않았어요.');
+    if (!data || !data.ok) throw new Error(
+      data && data.error === 'denied' ? '이 글에는 댓글을 달 수 없어요.'
+      : data && data.error === 'notfound' ? '이미 지워진 글이에요.'
+      : '등록되지 않았어요.');
+    ta.value = '';
     brdLoadPosts();
   } catch(e) {
-    alert('답변 등록 실패: ' + (e.message || e));
+    alert('댓글 등록 실패: ' + (e.message || e));
+  }
+}
+
+async function brdDeleteReply(rid){
+  if (!confirm('이 댓글을 삭제할까요?')) return;
+  const sb = _brdClient();
+  const token = _brdToken();
+  if (!sb || !token) return;
+  try {
+    const { data, error } = await sb.rpc('board_reply_delete', { p_token: token, p_reply_id: rid });
+    if (error) throw error;
+    if (!data || !data.ok) throw new Error(data && data.error === 'denied'
+      ? '본인이 쓴 댓글만 지울 수 있어요.' : '삭제되지 않았어요.');
+    brdLoadPosts();
+  } catch(e) {
+    alert('삭제 실패: ' + (e.message || e));
   }
 }
 
 async function brdDeletePost(id){
-  if (!confirm('이 게시글을 삭제할까요?')) return;
+  if (!confirm('이 게시글을 삭제할까요? 달린 댓글도 함께 사라져요.')) return;
   const sb = _brdClient();
   const token = _brdToken();
   if (!sb || !token) return;
@@ -283,9 +338,26 @@ async function brdDeletePost(id){
     const { data, error } = await sb.rpc('board_delete', { p_token: token, p_id: id });
     if (error) throw error;
     if (!data || !data.ok) throw new Error(data && data.error === 'denied'
-      ? '선생님 계정으로 로그인해야 삭제할 수 있어요.' : '삭제되지 않았어요.');
+      ? '본인이 쓴 글만 지울 수 있어요.' : '삭제되지 않았어요.');
     brdLoadPosts();
   } catch(e) {
     alert('삭제 실패: ' + (e.message || e));
+  }
+}
+
+// 📌 공지 고정 — 선생님·관리자만. 고정된 글은 목록 맨 위에 뜨고
+// 체험(trial) 계정에도 보입니다.
+async function brdTogglePin(id, on){
+  const sb = _brdClient();
+  const token = _brdToken();
+  if (!sb || !token) return;
+  try {
+    const { data, error } = await sb.rpc('board_pin', { p_token: token, p_id: id, p_on: on });
+    if (error) throw error;
+    if (!data || !data.ok) throw new Error(data && data.error === 'denied'
+      ? '선생님 계정으로 로그인해야 공지를 고정할 수 있어요.' : '변경되지 않았어요.');
+    brdLoadPosts();
+  } catch(e) {
+    alert('공지 설정 실패: ' + (e.message || e));
   }
 }

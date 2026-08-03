@@ -172,14 +172,19 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 
 게시판은 **HQ(`nhs.html`)에만** 있습니다. Kids 앱에는 없습니다.
 
-| 역할 | 읽기 | 쓰기 | 답변 | 삭제 |
-|---|---|---|---|---|
-| admin · teacher | 전체 | ✅ | ✅ | ✅ |
-| student | 전체 | ✅ | ❌ | ❌ |
-| trial | **본인 글만** | ✅ | ❌ | ❌ |
-| guest / 비로그인 | ❌ | ❌ | ❌ | ❌ |
+**2026-08-03부터 "질문 1 + 답변 1"이 아니라 "글 1 + 댓글 여러 개"입니다.** 학생끼리도 서로 댓글을 달 수 있는 소통 창구입니다.
 
-- 글쓴이 이름은 **서버가 로그인 세션에서 채웁니다.** 남의 이름을 사칭할 수 없습니다.
+| 역할 | 읽기 | 글쓰기 | 댓글 | 글·댓글 삭제 | 📌 공지 고정 |
+|---|---|---|---|---|---|
+| admin · teacher | 전체 | ✅ | ✅ | **전부** | ✅ |
+| student | 전체 | ✅ | ✅ | **본인 것만** | ❌ |
+| trial | **본인 글 + 📌공지** | ✅ | 볼 수 있는 글에만 | 본인 것만 | ❌ |
+| guest / 비로그인 | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+- 글쓴이·댓글쓴이 이름은 **서버가 로그인 세션에서 채웁니다.** 남의 이름을 사칭할 수 없습니다.
+- **선생님 댓글은 `🍡 선생님` 배지**가 붙어 학생 댓글과 구분됩니다(역할도 서버가 기록).
+- **📌 공지** — 선생님이 글을 고정하면 목록 맨 위에 뜨고, **체험 계정에게도 보입니다**(공지는 모두가 봐야 하므로). 고정/해제는 글 아래 `📌 공지로 고정` 버튼.
+- 글을 지우면 **달린 댓글도 함께** 사라집니다.
 - 로그인 세션은 **30일**이면 만료됩니다. 그 뒤에는 다시 로그인해야 글이 써집니다.
 
 ---
@@ -498,7 +503,8 @@ data/basics/                       한글 기초 이미지
 | `member_sessions` | token, member_name, created_at, expires_at | ❌ |
 | `students` | id, name, created_at | ❌ |
 | `attendance` | id, student_name, logged_in_at, class_date, status | ❌ |
-| `board_posts` | id, author_name, title, content, reply_content, reply_at, created_at | ❌ |
+| `board_posts` | id, author_name, title, content, is_pinned, pinned_at, created_at, ~~reply_content, reply_at~~(레거시) | ❌ |
+| `board_replies` | id, post_id→board_posts(cascade), author_name, author_role, content, created_at | ❌ |
 | `practice_session` | id, unit, q_index, current_player, status, raised_hands, updated_at | ❌ |
 | `app_passwords` | role, hash, updated_at | ❌ (RLS `no_direct_access` = false) |
 | `songs` | id, tab, title, thumb, url, sort_order | ❌ (RLS on, 정책 0개) · 미사용으로 보임 |
@@ -523,7 +529,7 @@ data/basics/                       한글 기초 이미지
 | | `class_roster_code(code)` · `class_check_toggle_code(code, name)` | 반 코드 |
 | | `class_add_student(teacher, pin, name)` · `class_remove_student` | teacher PIN |
 | Kids 실시간 | `practice_state(code)` · `practice_nominate` · `practice_hand` · `practice_status` · `practice_next` | 반 코드 |
-| 게시판 | `board_list(token)` · `board_add` · `board_reply` · `board_delete` | **세션 토큰** |
+| 게시판 | `board_list(token)` · `board_add` · `board_reply`(댓글 추가) · `board_reply_delete` · `board_delete` · `board_pin` | **세션 토큰** |
 | 유지보수 | `clear_attendance_data(admin_pw, date?)` · `reset_session_data(admin_pw)` | admin |
 
 **내부 전용 (anon EXECUTE 차단됨 — 절대 권한을 주지 말 것)**
