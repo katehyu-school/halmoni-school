@@ -53,9 +53,10 @@ SITE = "https://hangeulquest.com"
 DEFAULT_LEVELS = ["L1", "L2"]          # 검증된 범위만 먼저 연다
 ALL_LEVELS = ["L1", "L2", "L3", "L4", "L5", "L6"]
 
-# 🔴 라이선스가 확정되면 이 두 줄만 고치면 전 페이지에 반영된다.
-LICENSE_LINE = "© 2026 Kate HaeOk Shin Yu · All rights reserved"
-LICENSE_NOTE = ""   # 예: '본문은 CC BY-NC-SA 4.0 · 음성·이미지는 사이트 내 재생 전용'
+# 🔴 라이선스 표기 — 이 두 줄만 고치면 전 페이지에 반영된다. (2026-08-06 확정)
+LICENSE_LINE = "© 2026 Kate HaeOk Shin Yu"
+LICENSE_NOTE = ("글·코드 <a href='/license.html'>CC BY-NC-SA 4.0</a>"
+                " · 음성·이미지는 사이트 내 재생 전용")
 
 # 📊 방문 통계 (Cloudflare Web Analytics — 무료·쿠키 없음·동의 배너 불필요)
 #    Cloudflare 대시보드 › Web Analytics 에서 사이트를 추가하면 토큰을 줍니다.
@@ -183,7 +184,7 @@ def page(title, desc, body, canonical, jsonld=None):
     if jsonld:
         ld = ('\n<script type="application/ld+json">'
               + json.dumps(jsonld, ensure_ascii=False) + "</script>")
-    note = f"<br>{esc(LICENSE_NOTE)}" if LICENSE_NOTE else ""
+    note = f"<br>{LICENSE_NOTE}" if LICENSE_NOTE else ""
     beacon = ""
     if CF_ANALYTICS_TOKEN.strip():
         tok = json.dumps({"token": CF_ANALYTICS_TOKEN.strip()}, ensure_ascii=False)
@@ -212,7 +213,7 @@ def page(title, desc, body, canonical, jsonld=None):
 {body}
 <footer>
 {esc(LICENSE_LINE)}{note}<br>
-<a href="/">Hangeul Quest 홈</a> · <a href="/learn/">학습 자료 전체</a>
+<a href="/">Hangeul Quest 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
 </footer>
 </main>{beacon}
 </body>
@@ -518,7 +519,7 @@ def build(levels):
     today = date.today().isoformat()
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for u in ["/", "/nhs.html", "/faq.html"] + urls:
+    for u in ["/", "/nhs.html", "/faq.html", "/license.html"] + urls:
         sm.append(f"  <url><loc>{SITE}{u}</loc><lastmod>{today}</lastmod></url>")
     sm.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")
@@ -534,7 +535,7 @@ def build(levels):
     print(f"✅ 레벨 {', '.join(levels)}")
     print(f"   문법 페이지   {n_gram}개")
     print(f"   에피소드 페이지 {sum(len(v) for v in hub.values())}개")
-    print(f"   sitemap URL   {len(urls) + 3}개")
+    print(f"   sitemap URL   {len(urls) + 4}개")
     print(f"   → {OUT}")
     stale = sorted(before - written)
     if stale:
