@@ -652,19 +652,15 @@ body::before {
     <span class="login-label">로그인 · Sign In</span>
 
     <div style="margin-bottom:12px">
-      <select id="nameSelect" onchange="handleNameSelect()" style="width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid rgba(78,205,196,.3);background:rgba(6,18,35,.7);color:#e8f4f8;font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .2s;cursor:pointer;appearance:none;text-align:center">
-        <option value="">이름을 선택하세요 ▾</option>
-      </select>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:10px;margin:0 0 12px;color:rgba(180,215,235,.4);font-size:11px;letter-spacing:.1em">
-      <span style="flex:1;height:1px;background:rgba(78,205,196,.15)"></span>또는 · or<span style="flex:1;height:1px;background:rgba(78,205,196,.15)"></span>
-    </div>
-    <div style="margin-bottom:12px">
-      <input class="pw-input" type="text" id="selfNameInput" maxlength="20"
-        placeholder="체험 계정 이름 · Trial name"
-        style="letter-spacing:.05em"
-        onkeydown="if(event.key==='Enter')checkPw()">
+      <input class="pw-input" type="text" id="loginNameInput" maxlength="20"
+        placeholder="이름 · Your name"
+        autocomplete="username" autocapitalize="none" spellcheck="false"
+        style="letter-spacing:.05em;text-align:center"
+        onkeydown="if(event.key==='Enter')document.getElementById('pwInput').focus()">
+      <div style="font-size:11.5px;color:rgba(180,215,235,.45);margin-top:6px;text-align:center;line-height:1.6">
+        선생님이 알려준 이름을 적어 주세요<br>
+        <span style="opacity:.75">Type the name your teacher gave you</span>
+      </div>
     </div>
 
     <div class="pw-wrap">
@@ -679,6 +675,7 @@ body::before {
     <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7">
       처음이세요? · First time here?<br>
       <button onclick="openSignup()" style="margin-top:7px;background:none;border:1px solid rgba(78,205,196,.4);color:#4ecdc4;border-radius:20px;padding:7px 16px;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer">🔓 체험 계정 만들기 · Create account</button>
+      <div style="margin-top:9px"><button onclick="useGuest()" style="background:none;border:none;color:rgba(180,215,235,.55);font-family:'Noto Sans KR',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline">👀 초대받으셨나요? 게스트로 둘러보기</button></div>
     </div>
   </div>
 </div>
@@ -781,26 +778,10 @@ function _adminCreds() {
   return { name: u.name, pin: _sessionPin };
 }
 
-// 페이지 로드 시 멤버 목록 fetch
-async function loadMembers() {
-  try {
-    const { data } = await _sb.from('members').select('name, display_name, role').order('display_name');
-    if (data) {
-      _members = data;
-      const sel = document.getElementById('nameSelect');
-      sel.innerHTML = '<option value="">이름을 선택하세요 ▾</option>' +
-        '<option value="__guest__">👀 게스트 · Guest</option>';
-      // 체험 계정(trial)은 목록에 넣지 않음 — 공개 가입이 늘어도 목록이 깨끗하게 유지됨.
-      // 체험 계정은 아래 '체험 계정 이름' 칸에 직접 입력해서 로그인합니다.
-      data.filter(m => m.role !== 'trial').forEach(m => {
-        const opt = document.createElement('option');
-        opt.value = m.name;
-        opt.textContent = m.display_name;
-        sel.appendChild(opt);
-      });
-    }
-  } catch(e) { console.warn('멤버 로드 실패', e); }
-}
+// 멤버 명단은 더 이상 내려받지 않습니다.
+// 예전에는 드롭다운을 채우려고 members 전체를 fetch 했는데,
+// 그 탓에 아이들 이름과 로그인 ID가 API 한 번이면 다 보였습니다.
+// 이제 로그인은 이름을 직접 입력하는 방식이고, 명단은 관리자만 RPC로 봅니다.
 
 // ── 🔓 체험 계정 셀프 가입 ────────────────────────────
 function openSignup() {
@@ -860,14 +841,22 @@ async function submitSignup() {
 
 function openLoginModal() {
   document.getElementById('loginModal').classList.add('open');
-  loadMembers();
-  setTimeout(()=>document.getElementById('nameSelect').focus(), 100);
+  // 이 기기에서 마지막으로 로그인한 이름을 미리 채워 둡니다(아이들이 매번 안 치도록)
+  try {
+    const last = localStorage.getItem('hq_last_name');
+    const el = document.getElementById('loginNameInput');
+    if (last && el && !el.value) el.value = last;
+  } catch(e) {}
+  setTimeout(()=>{
+    const el = document.getElementById('loginNameInput');
+    if (el) { el.focus(); if (el.value) document.getElementById('pwInput').focus(); }
+  }, 100);
 }
 function closeLoginModal() {
   document.getElementById('loginModal').classList.remove('open');
   document.getElementById('errMsg').textContent = '';
   document.getElementById('pwInput').value = '';
-  const _sn = document.getElementById('selfNameInput'); if (_sn) _sn.value = '';
+  // 이름은 지우지 않습니다 — 다시 열었을 때 그대로 있는 게 편합니다
 }
 
 // ── 내 PIN 바꾸기 ──────────────────────────────
@@ -923,38 +912,30 @@ async function submitPinChange() {
 }
 
 
-function handleNameSelect() {
-  const v = document.getElementById('nameSelect').value;
-  const pinWrap = document.querySelector('#loginModal .pw-wrap');
-  const btn = document.querySelector('#loginModal .enter-btn');
+// 초대받은 방문자 — 이름 칸을 guest 로 채우고 안내만 바꿉니다
+function useGuest() {
+  document.getElementById('loginNameInput').value = 'guest';
   const pwInput = document.getElementById('pwInput');
-  if (v === '__guest__') {
-    pinWrap.style.display = '';
-    pwInput.placeholder = '방문자 비밀번호 · Guest password';
-    btn.textContent = '👀 둘러보기 · Browse';
-  } else {
-    pinWrap.style.display = '';
-    pwInput.placeholder = 'PIN';
-    btn.textContent = '입장하기 · Enter';
-  }
+  pwInput.placeholder = '방문자 비밀번호 · Guest password';
+  document.querySelector('#loginModal .enter-btn').textContent = '👀 둘러보기 · Browse';
+  pwInput.focus();
 }
 async function checkPw() {
-  const _typed = (document.getElementById('selfNameInput')||{value:''}).value.trim();
-  const name = _typed || document.getElementById('nameSelect').value;
+  const name = document.getElementById('loginNameInput').value.trim().toLowerCase();
   const pin  = document.getElementById('pwInput').value.trim();
   const err  = document.getElementById('errMsg');
   const btn  = document.querySelector('#loginModal .enter-btn');
 
-  if (!name) { err.textContent = '이름을 선택하거나 입력해 주세요'; return; }
+  if (!name) { err.textContent = '이름을 입력해 주세요 · Enter your name'; return; }
   if (!pin)  {
-    err.textContent = name === '__guest__'
+    err.textContent = name === 'guest'
       ? '방문자 비밀번호를 입력해 주세요 · Enter guest password'
-      : 'PIN을 입력해 주세요';
+      : 'PIN을 입력해 주세요 · Enter your PIN';
     return;
   }
 
   // 게스트 로그인 — verify_login으로 비밀번호 검증
-  if (name === '__guest__') {
+  if (name === 'guest') {
     btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
     try {
       const { data, error } = await _sb.rpc('verify_login', { p_name: 'guest', p_pin: pin });
@@ -984,8 +965,11 @@ async function checkPw() {
   try {
     const { data, error } = await _sb.rpc('verify_login', { p_name: name, p_pin: pin });
     if (error) throw new Error(error.message);
-    if (!data) {
-      err.textContent = 'PIN이 맞지 않아요. Please try again.';
+    if (data && data.blocked) {
+      err.textContent = '이 계정은 현재 이용이 중지되었어요. 선생님께 문의해 주세요.';
+      document.getElementById('pwInput').value = '';
+    } else if (!data) {
+      err.textContent = '이름이나 PIN이 맞지 않아요 · Check your name and PIN';
       document.getElementById('pwInput').value = '';
       const modal = document.querySelector('.login-modal');
       modal.style.animation = 'none'; void modal.offsetHeight;
@@ -993,6 +977,7 @@ async function checkPw() {
     } else {
       // 세션 저장
       _sessionPin = pin;   // 관리자 작업(RPC 인증)용 — 메모리에만, 저장소엔 남기지 않음
+      try { localStorage.setItem('hq_last_name', data.name); } catch(e) {}  // 다음에 다시 안 치도록
       sessionStorage.setItem('hq_user', JSON.stringify(data));
       // My Space / My Notes 자동 프로필 연결
       localStorage.setItem('ms_current',  data.display_name);

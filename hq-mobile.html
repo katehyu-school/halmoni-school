@@ -366,7 +366,9 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   </div>
   <div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:8px">
     <button class="go-btn" style="background:#fff;color:#0a2540;border:2px solid var(--teal)" onclick="openFoundMap()">🐱 기초 다지기 · Level 1 복습하기</button>
-    <button class="go-btn" style="background:#fff;color:#0a2540;border:2px solid var(--coral)" onclick="openL3(1)">📖 스토리 모드 미리보기 · Level 3</button>
+    <!-- Level 3 스토리 모드 미리보기 버튼 제거 (2026-08-02) — 아래 openL3/scr-l3-flow 코드는 남겨 둠.
+         이유: Kids 모바일은 "부모 폰을 잠깐 빌린 5분"이 실제 사용 상황이라 20분짜리
+         스토리 모드가 맞지 않음. 1과만 열리는 미리보기가 미완성으로 보이던 것도 정리. -->
   </div>
   <div class="bottomnav">
     <button class="bn-item on"><span>🗺️</span><span>모험 맵<span class="en">Map</span></span></button>
@@ -1047,8 +1049,8 @@ function renderKidsStars(){
       <div class="q-sub">다음에 만날 과: ${l2cur}과 · Next up: Unit ${l2cur}</div>
     </div>
     <div class="card">
-      <h3>📖 스토리 모드 (Level 3)</h3>
-      <div class="q-sub">미리보기로 1과를 만나볼 수 있어요 · Preview Unit 1 available</div>
+      <h3>💻 스토리 모드는 웹에서</h3>
+      <div class="q-sub">Level 3·4 스토리는 큰 화면에서 해요 · Story mode lives on the web</div>
     </div>`;
 }
 function renderKidsGames(){

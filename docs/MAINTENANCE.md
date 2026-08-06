@@ -1,7 +1,7 @@
 # Hangeul Quest 유지·관리 매뉴얼
 
 > **이 문서의 목적** — 이 프로젝트를 처음 넘겨받는 사람이 **혼자서 학교를 계속 운영할 수 있게** 하는 것.
-> 최종 확인일: **2026-08-02** · 확인 방법: 실제 파일·Supabase DB 직접 조회 (CLAUDE.md 기술을 그대로 옮기지 않음)
+> 최종 확인일: **2026-08-05** · 확인 방법: 실제 파일·Supabase DB 직접 조회 (CLAUDE.md 기술을 그대로 옮기지 않음)
 
 **`CLAUDE.md`와 이 문서는 성격이 다릅니다.**
 
@@ -30,6 +30,75 @@
 | 7 | **도메인 계정** | Namecheap (hangeulquest.com, hangeulquestkids.com) |
 | 8 | **TTS·슬라이드 제작 도구 계정** | **Typecast**(음성) · Google Vids(슬라이드) 등 — 선생님 개인 계정 |
 | 9 | **문의용 이메일** | hangeulquest@gmail.com (체험판 안내 문구에 노출되어 있음) |
+
+---
+
+## 🧰 구독·서비스 한눈에
+
+**돈이 나가거나, 끊기면 학교가 멈추는 것들**입니다. 인수인계 때 계정 소유권과 결제 수단을 함께 넘겨야 합니다.
+
+| 서비스 | 쓰는 곳 | 주기 | 금액 (USD) | 다음 갱신일 |
+|---|---|---|---|---|
+| **Google Pro** | Image · Presentation · **Vids** · Flow — 슬라이드와 L6 영상 원본 | 연 | 269.99 | **2027-06-10** |
+| **Anthropic (Claude)** | 개발·구현 | 연 | 302.40 | **2027-04-16** |
+| **Typecast** | 캐릭터 음성(TTS) 전부 | **월** | 8.99 | **2026-08-12** |
+| **Namecheap** | 도메인 2개 — hangeulquest.com · hangeulquestkids.com | 연 | 22.96 | **2027-05-18** |
+| Supabase | 로그인·출석·게시판·Kids 실시간 | — | 무료 등급 | — |
+| GitHub Pages | 사이트 호스팅 | — | 무료 (public repo) | — |
+
+**끊기면 어떻게 되나**
+
+| | 결과 |
+|---|---|
+| Typecast | **새 에피소드 녹음이 막힙니다.** 이미 만든 mp3는 그대로 재생됩니다 |
+| Google Pro | 새 슬라이드·영상을 못 만듭니다. **원본이 전부 Vids에 있으므로 계정 접근이 가장 중요합니다** |
+| Supabase | **로그인·출석·게시판이 멈춥니다.** 학습 콘텐츠는 계속 열립니다(진도는 브라우저에 있음) |
+| GitHub Pages | 사이트 전체가 내려갑니다 |
+| Namecheap | **갱신을 놓치면 주소를 잃습니다** |
+| Anthropic | 개발이 멈출 뿐, 서비스는 계속 돕니다 |
+
+> 💡 **Typecast만 월 결제입니다.** 크레딧이 갱신일에 다시 차므로, **크레딧이 떨어지면 다음 갱신일까지 녹음을 못 합니다.**
+> 예: L6 마감 테스트 듣기 5개가 2026-08-12 갱신을 기다리는 중입니다.
+>
+> ⚠️ **무료로 도는 것도 사람 손이 필요합니다.** Supabase 무료 프로젝트는 오래 쓰지 않으면 일시 정지될 수 있습니다.
+> ⚠️ 갱신일을 **달력에 넣어 두세요.** 특히 도메인은 놓치면 되찾기 어렵습니다.
+
+### 🎙 캐릭터별 목소리 배정
+
+**1:1 고정이 아닙니다.** 같은 캐릭터라도 편의 분위기에 따라 목소리가 거슬리면 다른 것으로 바꿔 쓰셨습니다.
+그래서 아래는 "이 캐릭터에는 이 목소리만"이 아니라 **그동안 실제로 써 온 목소리 목록**입니다. 새 에피소드를 녹음할 때 이 안에서 고르면 기존 편들과 어긋나지 않습니다.
+
+| 캐릭터 | speaker 코드 | 나이·특징 | 그동안 쓴 목소리 |
+|---|---|---|---|
+| 정민 | `jeongmin` | 13세 남자 | Hajun, Taeji |
+| **보미** (옛 미래) | `mirae` | 15세 여자 · 사춘기 특유의 발랄함 | Maddi, Kelsey |
+| 올리비아 | `olivia` | 15세 여자 · 보미 친구 | Nana, Olivia |
+| 아르투 | `Arthur` | L5 삼총사 · 브라질 출신 | Jackson |
+| 마야 | `Maya` | 15세 여자 · 보미 친구 | Nana |
+| 보미 엄마 | `mirae_mom` | 어른 여자 | Rachel, Nova, Patricia |
+| 보미 아빠 | `mirae_dad` | 어른 남자 | Simon |
+| 라온 엄마 | `liam_mom` | 어른 여자 | Patricia, Alena |
+| 라온 아빠 | `liam_dad` | 어른 남자 | Joshua |
+| **리나** (옛 리아) | `Lia` | 13세 여자 · 귀여운 목소리 | Jenna, Starling, Ha Eun, Annie |
+| **라온** (옛 리암) | `Liam` | 13세 남자 · 아주 스윗한 남자아이 | Taeyui, Hobin, Changmin |
+| **태오** (옛 카요) | `Kayo` | 11세 남자 · 귀엽고 개구진 목소리 | Hajun, Siwoo, Siwon, Owen |
+| **아라** (옛 애라) | `Aera` | 막내 | Millie, Ella |
+| 할머니 | `할머니` | 70세 — **늙은 목소리 아님** | Magot, Elise |
+| 할아버지 | `할아버지` | 75세 | Robert, Jongdae |
+| 나레이터 | `narrator` | 중성적 여자 | Alena, Hyoeun |
+| 도깨비 | `도깨비` | | Billie |
+| 상인 | `상인` | | Sookhee |
+| 아줌마 | `아줌마` | | Agatha, Emma |
+| 엄마 (일반) | `엄마/mom` | | Rachel, Patricia |
+| 아빠 (일반) | `dad` | | Simon |
+| 동생 | `dongsaeng` | | Jenna |
+| 미나 | `mina` | | Nana |
+| 기사 | `driver` | | Hoon |
+| 직원 | `staff` | 관공서·서비스업 일회성 | Alena, Hestia, Hyejin |
+| 사무원 | `사무원` | | Chunsik Kang |
+
+> ⚠️ **캐릭터 이름은 2026-07에 바뀌었지만 `speaker` 코드와 파일 경로는 옛 이름 그대로입니다**(`mirae`·`Lia`·`Liam`·`Kayo`·`Aera`). 화면 표시명만 교체한 것이니 **일괄 치환하지 마세요.**
+> 📌 목소리 이름 중에는 Typecast 것과 예전에 쓰던 다른 도구 것이 섞여 있을 수 있습니다. 원본 대조표는 선생님이 따로 보관 중입니다.
 
 ---
 ---
@@ -63,7 +132,7 @@ hangeulquest.com  (index.html)
 
 - `faq.html` — 자주 묻는 질문
 - `privacy.html` — 개인정보 처리방침
-- `admin.html` — 관리자 패널. `admin` 계정으로 로그인하면 뜨는 **⚙️ 관리자 패널** 버튼으로만 열립니다. PIN 일괄 변경과 출석 데이터 초기화가 여기 있습니다
+- `admin.html` — 관리자 패널. `admin` 계정으로 로그인하면 뜨는 **⚙️ 관리자 패널** 버튼으로만 열립니다. **회원 관리**(검색·등급 변경·PIN 재설정·차단·삭제)와 출석 데이터 초기화가 여기 있습니다
 - `dashboard.html` — 학교와 무관한 개인 생산성 도구. 웹에 공개되지 않습니다
 
 ---
@@ -82,12 +151,29 @@ hangeulquest.com  (index.html)
 | `trial` | HQ만, **ep01·ep05·ep07 3편만**, 게시판은 본인 글만 | **학생이 직접 셀프 가입** |
 | `guest` | 공용 체험 계정. 게시판 불가 | 이미 만들어져 있음 |
 
+> **차단(block)** — 2026-08-05부터 계정을 지우지 않고 막을 수 있습니다. 역할은 그대로 남으므로 **풀면 원래 등급으로 돌아옵니다.** 차단하면 로그인이 막히고 **열려 있던 접속도 즉시 끊깁니다.**
+
+### 회원 관리 화면 (관리자 패널)
+
+`admin.html`의 **회원 관리** 한 장에서 전부 합니다.
+
+- **검색** — 표시명·로그인 ID 아무 쪽으로나
+- **필터** — `전체` / `정식 멤버` / `체험` / `차단됨`. 체험 가입자가 늘어도 `정식 멤버`만 보면 됩니다
+- **등급 드롭다운** — 학생·선생님·체험·게스트 사이 이동. **체험 → 정식 승격이 클릭 한 번**
+- **마지막 접속** — `오늘`·`3일 전` 식. 누가 실제로 쓰는지 보입니다
+- **새 PIN** — 개인별 재설정
+- **🚫 차단 / 🗑 삭제**
+
+> ⚠️ `admin` 계정은 이 목록에 **나오지 않습니다.** 앱에서는 admin을 만들 수도, 바꿀 수도 없습니다 — 의도된 안전장치입니다.
+> ⚠️ 자기 자신은 강등·차단·삭제할 수 없습니다(마지막 관리자가 스스로를 잠그는 사고 방지).
+> 📌 **역할별 비밀번호 일괄 변경**은 같은 화면 아래 **접이식**으로 내려 두었습니다. 열면 반 전체 PIN이 한꺼번에 바뀌므로 평소에는 접혀 있습니다.
+
 ### 학생 계정 추가하기
 
 1. hangeulquest.com에서 **선생님 또는 관리자 계정으로 로그인**
 2. 화면에 뜨는 **회원 관리** 영역에서 추가 폼 열기
 3. 넣는 값 4가지:
-   - **로그인 ID** — 학생이 입력할 영문 아이디 (예: `riam`)
+   - **로그인 ID** — 학생이 로그인 화면에 **직접 입력할** 영문 아이디. **표시 이름과 같게 만드는 편이 좋습니다**(예: `liam` ↔ `Liam`) — 아이들이 외우기 쉽습니다
    - **표시 이름(display name)** — 화면과 **출석부에 찍히는 이름**. 영문 이름으로 통일 (예: `Liam`)
    - **PIN**
    - **역할** — 보통 `student`
@@ -100,10 +186,10 @@ hangeulquest.com  (index.html)
 ### PIN 바꾸기
 
 - **학생 본인** — 로그인 후 "내 PIN 바꾸기". 현재 PIN을 알아야 함
-- **선생님/관리자가 남의 PIN을** — `admin.html`(관리자 패널)에서 개별 또는 역할별 일괄 변경
+- **선생님/관리자가 남의 PIN을** — `admin.html` 회원 관리 표의 **새 PIN** 칸 (역할별 일괄 변경은 그 아래 접이식)
 - **PIN을 완전히 잊었을 때** — 복구 절차가 없습니다. 관리자가 새로 지정해 주는 수밖에 없습니다
 
-> 📌 **현재 미완**: PIN을 학생별로 다루는 UI가 거칠어서(역할별 일괄 변경 위주) 개선 대상입니다.
+~~📌 현재 미완: PIN을 학생별로 다루는 UI가 거칠다~~ → ✅ **2026-08-05 해결** (위 회원 관리 화면 참고)
 
 ---
 
@@ -145,6 +231,8 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 | 모바일 앱 | `hangeulquest.com/hq-mobile.html` |
 
 - `?name=` 은 **로그인 ID가 아니라 화면에 뜰 이름**입니다. Kids 실시간 기능(손들기·지목)이 이 이름을 씁니다.
+  🔴 2026-08-05 수정: 로그인해서 들어갈 때 이 값에 **로그인 ID가 들어가고 있었습니다**(`?name=riam`). Kids 앱은 명단과 글자 그대로 비교하므로 자기 이름 버튼이 안 뜨고 자동 체크인도 안 됐습니다. 지금은 표시 이름이 들어갑니다.
+- **로그인 화면에는 이름 드롭다운이 없습니다**(2026-08-05부터). 학생이 자기 로그인 ID를 직접 칩니다. 그 기기에 마지막 이름이 기억되므로 두 번째부터는 PIN만 넣으면 됩니다.
 - `?teacher` 는 **더 이상 권한이 아닙니다.** 예전에는 주소에 `?teacher`만 붙이면 누구나 게시판 답변·삭제 버튼이 나왔지만(2026-08-02 수정), 지금은 서버가 로그인 세션으로 판정하므로 붙여도 권한이 생기지 않습니다.
 - 📱 **QR 코드**는 `qr/` 폴더에 3개 있습니다: 웹 루트 / 모바일 앱 / 둘 다 담긴 소개 카드.
   **주소가 바뀌면 QR도 다시 만들어야 합니다.**
@@ -193,6 +281,10 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 
 - 학생이 hangeulquest.com에서 **직접 가입**합니다(이름+PIN). 선생님이 만들어 줄 필요 없음.
 - 역할은 서버가 `trial`로 고정합니다 — 가입 화면을 조작해도 학생·선생님이 될 수 없습니다.
+- **하루 5개까지만** 가입됩니다. 넘으면 `daily_limit`으로 거부됩니다.
+  총량 상한을 두지 않은 이유: 누가 한 번 채워 버리면 그 뒤에 오는 **진짜 학생이 선생님이 치울 때까지 못 들어옵니다.** 하루 상한은 다음 날 저절로 다시 열립니다.
+- **30일 동안 접속이 없는 체험 계정은 자동으로 사라집니다**(관리자 목록을 열거나 새 가입이 있을 때 함께 정리).
+- 정식 학생으로 받으실 때는 관리자 패널에서 **등급을 `학생`으로 바꾸면** 됩니다 — 계정을 새로 만들 필요 없습니다.
 - 볼 수 있는 것: **HQ의 `🌱 Start Here` 전체 + Level 1의 ep01 · ep05 · ep07 3편.** Level 2 이상 탭과 나머지 편은 잠김.
   (Start Here에는 배치 테스트·학습 로드맵·한글 입문·빠른 참고가 들어 있어 체험만으로도 시작할 수 있습니다.)
 - **Kids는 보이지 않습니다** (비공개 가정반).
@@ -350,7 +442,6 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 | `adult-renderer.js` | 47KB | 구 성인반 5패널 렌더러 | sejong |
 | `adult-data-loader.js` / `data-loader.js` | | JSON 로더 | sejong / Kids |
 | `grammar-renderer.js` / `vocab-renderer.js` | | Kids 문법·어휘 렌더러 | Kids |
-| `unit10.json` | 29KB | ⚠️ **데이터 파일이 `core/`에 잘못 놓여 있음** |
 
 > `nhs.html`은 `core.js`를 **로드하지 않습니다.** 그래서 HQ에는 출석·실시간 기능이 없고, 게시판은 `board.js`가 독립적으로 Supabase에 접속합니다.
 
@@ -488,8 +579,14 @@ data/basics/                       한글 기초 이미지
 - **관리자 계열 RPC는 토큰이 아니라 `(admin이름, admin PIN)`을 매번 받습니다.** `_member_is_admin`이 role을 확인합니다. PIN은 `_sessionPin` 변수에 메모리로만 들고 있고 저장소에 남기지 않습니다.
 - **Kids 실시간·명단은 반 코드로 인증합니다**(`_kids_code_ok`). 로그인과 무관 — 그래서 한 로그인으로 여러 아이가 각자 참여할 수 있습니다.
 - **클라이언트에서 role을 위조해도 소용없습니다.** 서버가 매번 다시 판정합니다.
+- **로그인은 이름을 직접 입력합니다**(2026-08-05부터). 예전에는 회원 명단을 드롭다운으로 뿌렸는데, 그러려고 `members` 전체를 받아오는 바람에 **아이들 이름과 로그인 ID가 API 한 번이면 다 보였습니다.** 지금은 `members`에 anon 권한이 하나도 없습니다.
+  마지막에 로그인한 이름은 그 기기의 `localStorage 'hq_last_name'`에 남아 다음에 자동으로 채워집니다.
+- **차단된 계정**은 `verify_login`이 `{ blocked: true }`를 돌려주고 토큰을 주지 않습니다.
 
-> 🔴 **과거 사고**: `board.js`가 `brdIsTeacher = params.has('teacher')` 였습니다. 주소창에 `?teacher`만 치면 누구나 게시글을 삭제할 수 있었고 실제로 지워졌습니다. **URL 파라미터를 권한으로 쓰지 마세요.**
+> 🔴 **과거 사고 ①**: `board.js`가 `brdIsTeacher = params.has('teacher')` 였습니다. 주소창에 `?teacher`만 치면 누구나 게시글을 삭제할 수 있었고 실제로 지워졌습니다. **URL 파라미터를 권한으로 쓰지 마세요.**
+>
+> 🔴 **과거 사고 ②(2026-08-05)**: `members`의 읽기 정책을 "GRANT가 없으니 무력한 잔재"로 보고 지웠다가 **로그인 드롭다운과 관리자 목록이 통째로 비었습니다.** 이 테이블은 *테이블* GRANT가 아니라 **컬럼 GRANT**(name·display_name·role)로 열려 있었고, 정책과 짝을 이뤄 동작하고 있었습니다.
+> **권한을 지우기 전에 `information_schema.column_privileges`도 반드시 함께 확인하세요.** 테이블 권한만 보면 틀립니다.
 
 ---
 
@@ -501,20 +598,20 @@ data/basics/                       한글 기초 이미지
 
 | 테이블 | 컬럼 | anon 접근 |
 |---|---|---|
-| `members` | id, name, pin, role, display_name, created_at | ❌ (grant 없음) |
+| `members` | id, name, pin, role, display_name, created_at, **blocked, blocked_at, last_login_at** | ❌ (**2026-08-05 컬럼 GRANT까지 전부 회수**) |
 | `member_sessions` | token, member_name, created_at, expires_at | ❌ |
 | `students` | id, name, created_at | ❌ |
 | `attendance` | id, student_name, logged_in_at, class_date, status | ❌ |
 | `board_posts` | id, author_name, title, content, is_pinned, pinned_at, created_at, ~~reply_content, reply_at~~(레거시) | ❌ |
 | `board_replies` | id, post_id→board_posts(cascade), author_name, author_role, content, created_at | ❌ |
 | `practice_session` | id, unit, q_index, current_player, status, raised_hands, updated_at | ❌ |
-| `app_passwords` | role, hash, updated_at | ❌ (RLS `no_direct_access` = false) |
-| `songs` | id, tab, title, thumb, url, sort_order | ❌ (RLS on, 정책 0개) · 미사용으로 보임 |
+| `app_passwords` | role, hash, updated_at | ❌ (RLS `no_direct_access` = false + **2026-08-05 GRANT도 회수**) |
+| `songs` | id, tab, title, thumb, url, sort_order | ❌ (RLS on, 정책 0개) · **GRANT는 남아 있음** — `halmoni_kinder.html`이 아직 직접 부르지만 RLS가 막아 결과가 비어 옵니다 |
 
 **anon이 직접 읽거나 쓸 수 있는 테이블은 하나도 없습니다.** 검증 완료.
 
 > ⚠️ `.from('members').update(...)` 같은 **직접 호출은 전부 조용히 실패합니다.** 반드시 아래 RPC를 쓰세요.
-> `members`에 `public read members`(SELECT, qual=true) 정책이 남아 있지만 **테이블 GRANT가 없어 무력**합니다. 혼동을 줄이려면 삭제해도 됩니다.
+> ~~`members`의 `public read members` 정책~~ → ✅ **2026-08-05 삭제**(GRANT가 없어 무력했지만 오해를 부르는 잔재였음). 이제 `members`의 정책은 0개입니다.
 
 ### RPC 함수 (호출자 = 클라이언트)
 
@@ -525,6 +622,11 @@ data/basics/                       한글 기초 이미지
 | | `change_own_pin(name, current_pin, new_pin)` | 본인 PIN |
 | | `admin_add_member(admin, admin_pin, name, display, pin, role)` | admin PIN |
 | | `admin_set_pin` / `admin_set_pin_by_role` / `admin_set_display_name` | admin PIN |
+| 회원 관리 | `admin_list_members(admin, pin, 검색어, 필터)` — 검색·필터·마지막 접속 | admin PIN |
+| | `admin_set_role` — 등급 변경 (admin 승격 불가, 자기 강등 불가) | admin PIN |
+| | `admin_set_blocked` — 차단·해제 (차단 시 세션 즉시 삭제) | admin PIN |
+| | `admin_delete_member` — 완전 삭제 | admin PIN |
+| | `_purge_stale_trials()` — 30일 미접속 체험 계정 정리 (내부 전용) | — |
 | 출결 | `attendance_today(teacher, pin)` · `attendance_set(teacher, pin, student, status)` | teacher PIN |
 | | `record_own_attendance(name, pin)` | 본인 PIN (student가 아니면 skip) |
 | Kids 교실 | `class_code_for_member(name, pin)` | 본인 PIN → 반 코드 발급 |
@@ -538,8 +640,8 @@ data/basics/                       한글 기초 이미지
 `_session_member(token)` · `_member_is_admin(admin, pin)` · `_kids_code_ok(code)` · `_practice_row()`
 → `_session_member`는 `members` 행 전체(**pin 포함**)를 반환합니다.
 
-**레거시 — 클라이언트에서 호출되지 않음.** 정리 후보:
-`log_attendance` · `verify_member_login` · `verify_app_password` · `update_app_password` · `class_roster` · `class_check_toggle`
+~~**레거시 — 클라이언트에서 호출되지 않음.** 정리 후보~~ → ✅ **2026-08-05 전부 삭제**
+(`log_attendance` → `record_own_attendance` / `verify_member_login` → `verify_login` / `verify_app_password` → `class_code_for_member` / `update_app_password` → `admin_set_pin` / `class_roster` → `class_roster_code` / `class_check_toggle` → `class_check_toggle_code` 로 이미 대체돼 있었음)
 
 ### admin은 앱에서 만들 수 없습니다
 
@@ -631,9 +733,9 @@ TOPIK 문법 커버리지 감사에서 **요약표(편당 대표 문법 1개)만
 | **Kids 모바일이 웹보다 뒤처짐** | 웹은 L2 9과·L3 10과·L4 10과인데 모바일은 L2 9과 + L3 1과뿐, L4 없음. L2용·L3용 렌더러가 복제 구조라 L4를 붙이려면 세 번째 복제 또는 통합 리팩터 필요. **다만 이건 의도된 판단** — Kids는 부모가 모바일을 허용하지 않아 "폰 빌린 5분"이 실제 사용 상황이므로 20분짜리 스토리 모드는 웹이 맞음 |
 | **Kids L2 u08·u09 grammar 구형 포맷** | 구형 rule_boxes 직결. L3 표준(sections + id/tier/pattern)으로 재작성 + 공통 GrammarRenderer로 교체 필요 |
 | **Kids 내부 변수명이 옛 이름** | `b3*`, `book3-main` 등. 캐릭터 내부 id도 옛 이름(`mirae`/`lia`/`liam`/`kayo`) — **화면 표시명만 교체했고 파일 경로·id는 보존**. 의도된 것이므로 함부로 일괄 치환하지 말 것 |
-| **`core/unit10.json`** | 데이터 파일이 모듈 폴더에 잘못 놓임 |
+| ~~`core/unit10.json`~~ | ✅ **2026-08-05 삭제** — 참조 0건. 세종한국어 1A 10과의 **옛 사본**이었고, 실제로 쓰이는 것은 `data/adult/sejong/unit10.json`입니다 |
 | ~~`start.html` 고아~~ | ✅ **2026-08-03 삭제** — 링크 0건이라 제거 |
-| **레거시 RPC 6개** | 2-6 참고. 호출자 없음 |
+| ~~레거시 RPC 6개~~ | ✅ **2026-08-05 삭제** (2-6 참고) |
 | **어휘 재순환율 9.1%** | 고유 1,467개 중 1,333개가 1회 등장. 기존 72편은 소급 안 함, 신규 편부터 규칙 적용(1-8 참고) |
 | **L4~L6 학습자 검증 0회** | 아직 아무도 실제로 통과한 적 없음. 2026-08-01에 발견된 결함들(마감테스트 정답이 전부 1번, L5만 3지선다, L6 읽기 탭 누락)이 몇 달 방치된 이유가 이것 |
 | **L5~L6 문법 설명이 영어** | 전 문법카드가 `explanation_en`. L1~L3은 옳지만 TOPIK 5급 학습자에게는 한국어 사고를 끊음. 한국어를 앞에, 영어는 `<details>`로 접는 방향 |
@@ -705,4 +807,4 @@ const sb = HQ_SUPABASE.client();   // supabase-js가 아직 없으면 null
 
 ---
 
-*이 문서는 2026-08-02에 실제 파일과 Supabase DB를 직접 조회해 작성했습니다. 구조를 바꾸는 작업을 했다면 해당 절을 함께 갱신하세요.*
+*이 문서는 2026-08-02에 실제 파일과 Supabase DB를 직접 조회해 작성했고, 2026-08-05에 로그인·회원 관리 개편을 반영했습니다. 구조를 바꾸는 작업을 했다면 해당 절을 함께 갱신하세요.*

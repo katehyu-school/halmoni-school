@@ -33,7 +33,7 @@
   "_OPTIONAL_FIELDS": "banmal_jondaemal · pronunciation",
 
   "_TTS_NAMING_CONVENTION": "data/nhs/TTS/epN/{번호}_{대사일부}_slide{인덱스}.mp3 — 예: 01_안녕_나는_정민이야_slide5.mp3",
-  "_SLIDES_NAMING_CONVENTION": "data/nhs/slides/epN/{에피소드제목}{번호}.png — 또는 자유롭게 (경로만 정확하면 OK)",
+  "_SLIDES_NAMING_CONVENTION": "data/nhs/slides/epN/{에피소드제목}{번호}.webp — 또는 자유롭게 (경로만 정확하면 OK)",
 
   "============================================": "🎯 SECTION 1: META + GOAL",
 
@@ -62,9 +62,9 @@
 
   "_MEDIA_NOTE": "slides 또는 video 중 하나만 사용. video 필드가 truthy면 video 모드(mp4 플레이어), 아니면 slide 모드. ep01·02·03 모두 slide 모드 사용 중.",
   "slides": [
-    "data/nhs/slides/epN/slide_00.png",
-    "data/nhs/slides/epN/slide_01.png",
-    "data/nhs/slides/epN/slide_02.png"
+    "data/nhs/slides/epN/slide_00.webp",
+    "data/nhs/slides/epN/slide_01.webp",
+    "data/nhs/slides/epN/slide_02.webp"
   ],
   "video": null,
   "_video_example": "data/nhs/video/epN/main.mp4 — 사용 시 slides 배열도 함께 유지 가능 (백업용)",

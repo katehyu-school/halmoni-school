@@ -109,7 +109,11 @@ const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'
   else if (_p.has('name')) { try{ localStorage.removeItem('nhs_trial'); }catch(e){} } // 일반 로그인은 체험 플래그 해제
 })();
 const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial') || (function(){ try{ return localStorage.getItem('nhs_trial')==='1'; }catch(e){ return false; } })();
-const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];
+// 체험 계정에 열어 주는 범위 — 2026-08-06부터 Start Here + Level 1 '전체'.
+// 3편만 열던 때보다 학생이 레벨 하나를 온전히 끝까지 겪어 볼 수 있습니다.
+// 잠기는 것은 Level 2~6 탭뿐입니다(아래 setLevel 참고).
+const NHS_TRIAL_ALL_L1 = true;
+const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];   // NHS_TRIAL_ALL_L1=false 로 되돌릴 때 쓰는 목록
 let L1_EPISODES=[], L2_EPISODES=[], L3_EPISODES=[], L4_EPISODES=[], L5_EPISODES=[], L6_EPISODES=[];
 const EPISODES=L1_EPISODES; // 하위호환 — 같은 배열 참조를 유지해야 하므로 재할당(=) 대신 아래에서 push()로 채움
 // 에피소드 사이드바 목록은 data/nhs/episodes_index.json에서 fetch — 새 에피소드 추가 시 nhs.html을 건드리지 않아도 됨 (2026-07-04)
@@ -128,11 +132,11 @@ function buildSidebar(lv){
   const mkItem=(ep,i,level)=>ep.disabled
     ?`<div class="ep-item" style="cursor:default"><div class="ep-num" style="background:var(--warm-300);color:var(--warm-500)">${i+1}</div><div class="ep-name" style="color:var(--warm-300)">${ep.label||'…'}${ep.locked?' 🔒':''}</div></div>`
     :`<div class="ep-item" id="ep-item-${level}-${ep.id}" data-epkey="${level}_${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.tag?`<span class="ep-genre-tag-sm">${esc(ep.tag)}</span>`:''}${ep.label}</div><span class="ep-done" title="${_star.has(level+'_'+ep.id)?'자기점검까지 완료 · Fully reviewed':'Quiz 통과 · Quiz done'}" style="opacity:${(_done.has(level+'_'+ep.id)||_star.has(level+'_'+ep.id))?1:0}">${_star.has(level+'_'+ep.id)?'⭐':'✅'}</span></div>`;
-  const trialLock=(list)=>NHS_IS_TRIAL?list.map(ep=>NHS_TRIAL_EPS.includes(ep.id)?ep:{...ep,disabled:true,locked:true}):list;
+  const trialLock=(list)=>(NHS_IS_TRIAL&&!NHS_TRIAL_ALL_L1)?list.map(ep=>NHS_TRIAL_EPS.includes(ep.id)?ep:{...ep,disabled:true,locked:true}):list;
   let html='';
   if(lv==='L1'){
     html=trialLock(L1_EPISODES).map((ep,i)=>mkItem(ep,i,'L1')).join('');
-    html+=NHS_IS_TRIAL
+    html+=(NHS_IS_TRIAL&&!NHS_TRIAL_ALL_L1)
       ?'<div class="lt-item" style="opacity:.4;cursor:default" title="체험판에서는 이용할 수 없어요"><div class="lt-num">🔒</div><div class="lt-name">Level 1 마감 테스트</div></div>'
       :'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>';
   }else if(lv==='L2'){
@@ -3680,7 +3684,7 @@ function _rmBtn(label,fn,primary){
     +(primary?'background:var(--teal);color:#fff;border-color:var(--teal);':'')+'" onclick="'+fn+'">'+label+'</button>';
 }
 // 영어 보조 문장
-function _rmEn(t){ return '<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-top:3px;">'+t+'</div>'; }
+function _rmEn(t){ return '<div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-top:3px;">'+t+'</div>'; }
 
 async function loadRoadmap(){
   document.querySelectorAll('.basics-topic-item').forEach(el=>el.classList.remove('active'));
@@ -3705,10 +3709,14 @@ async function loadRoadmap(){
   const s0='혹시 <b>한글을 아직 못 읽으시나요?</b> 그럼 여기가 진짜 출발점이에요. 에피소드는 그다음입니다.'
     +_rmEn('Cannot read Hangeul yet? Start here, not with the episodes.')
     +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:1.9;">'
-    +'① <b>🔤 한글을 배워요</b> — 자음·모음·받침을 소리로 익혀요<br>'
-    +'② 같은 화면 <b>✍️ 연습</b> 탭 — 자모 읽기 → 첫소리 찾기 → 음절 읽기 → 받침 → 단어 읽기<br>'
-    +'③ <b>📓 My Notes › ✏️ 한글 쓰기</b> — 손가락으로 직접 써 보기</div>'
-    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루 20분이면 대개 <b>3~5일</b>에 읽을 수 있어요. 다 외우지 말고 <b>읽을 수만 있으면</b> 다음으로 넘어가세요.</div>'
+    +'① <b>🔤 한글을 배워요</b> — 자음·모음·받침을 소리로 익혀요'
+      +'<span class="en-gloss"><br><i>Learn the consonants, vowels and final consonants by sound.</i></span><br>'
+    +'② 같은 화면 <b>✍️ 연습</b> 탭 — 자모 읽기 → 첫소리 찾기 → 음절 읽기 → 받침 → 단어 읽기'
+      +'<span class="en-gloss"><br><i>Same screen, ✍️ Practice tab: read letters → find the first sound → read syllables → final consonants → read words.</i></span><br>'
+    +'③ <b>📓 My Notes › ✏️ 한글 쓰기</b> — 손가락으로 직접 써 보기'
+      +'<span class="en-gloss"><br><i>Trace the letters with your finger.</i></span></div>'
+    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루 20분이면 대개 <b>3~5일</b>에 읽을 수 있어요. 다 외우지 말고 <b>읽을 수만 있으면</b> 다음으로 넘어가세요.'
+      +'<span class="en-gloss"><br><i>20 minutes a day is usually enough to read Hangeul in 3–5 days. Don\'t memorise everything — move on once you can read.</i></span></div>'
     +_rmBtn('🔤 한글 배우러 가기 · Learn Hangeul',"loadBasics('hangul')",true);
 
   // ── Step 1. 배치 테스트 ──
@@ -3733,13 +3741,21 @@ async function loadRoadmap(){
   const s2='한 편이 하루치예요. <b>혼자서도 이 순서대로만 하면 됩니다.</b>'
     +_rmEn('One episode = one day. Just follow this order on your own.')
     +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:2;">'
-    +'<b>1.</b> 🔥 <b>빠른 복습</b> — 편을 열면 저절로 떠요. 지난 편 단어 확인이니 <b>건너뛰지 마세요</b><br>'
-    +'<b>2.</b> 📽 <b>영상</b> — 처음엔 자막 접고 한 번, 그다음 펴고 한 번. 🔊로 한 줄씩 따라 읽기<br>'
-    +'<b>3.</b> 📚 <b>새어휘 → 문법</b> — 문법 카드는 예문을 소리 내어 읽어야 남아요<br>'
-    +'<b>4.</b> 🗣 <b>발음 · 반말/존댓말</b> — 있는 편에만 나와요<br>'
-    +'<b>5.</b> ✏️ <b>Quiz</b> — 객관식 · 읽기 · 띄어쓰기 · 쓰기 · 말하기. <b>다섯 개 다 있는 걸 모르는 분이 많아요</b><br>'
-    +'<b>6.</b> 🌍 <b>Real Life</b> → ✅ <b>자기점검</b> — Quiz를 채점하면 목록에 <b>✅</b>, 자기점검까지 체크하면 <b>⭐</b>로 바뀌어요</div>'
-    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루에 두 편씩 나가지 마세요. <b>한 편을 이틀에 걸쳐</b>(첫날 1~4, 다음 날 5~6) 하는 게 더 오래 남아요.</div>'
+    +'<b>1.</b> 🔥 <b>빠른 복습</b> — 편을 열면 저절로 떠요. 지난 편 단어 확인이니 <b>건너뛰지 마세요</b>'
+      +'<span class="en-gloss"><br><i>Quick review opens by itself. It checks last episode\'s words — don\'t skip it.</i></span><br>'
+    +'<b>2.</b> 📽 <b>영상</b> — 처음엔 자막 접고 한 번, 그다음 펴고 한 번. 🔊로 한 줄씩 따라 읽고, 🎤 <b>따라 말하기</b>와 🎭 <b>역할극</b>으로 소리 내어 연습해요'
+      +'<span class="en-gloss"><br><i>Watch once with captions folded, once with them open. Then shadow each line with 🎤 and act the scene out with 🎭 Role-play.</i></span><br>'
+    +'<b>3.</b> 📚 <b>새어휘 → 문법</b> — 문법 카드는 예문을 소리 내어 읽어야 남아요'
+      +'<span class="en-gloss"><br><i>Read the grammar examples out loud — that is what makes them stay.</i></span><br>'
+    +'<b>4.</b> 🗣 <b>발음 · 반말/존댓말</b> — 있는 편에만 나와요'
+      +'<span class="en-gloss"><br><i>These two tabs appear only in some episodes.</i></span><br>'
+    +'<b>5.</b> 💬 <b>Usage</b> — 같은 말이 상황에 따라 어떻게 달라지는지 모아 둔 곳이에요. <b>여기를 건너뛰는 분이 많아요</b>'
+      +'<span class="en-gloss"><br><i>How the same expression shifts with the situation. Most learners skip this tab.</i></span><br>'
+    +'<b>6.</b> ✏️ <b>Quiz</b> — 객관식 · 읽기 · 띄어쓰기 · 쓰기 · 말하기. <b>다섯 개 다 있는 걸 모르는 분이 많아요</b>'
+      +'<span class="en-gloss"><br><i>Five kinds: multiple choice, reading, spacing, writing, speaking.</i></span><br>'
+    +'<b>7.</b> 🌍 <b>Real Life</b> → ✅ <b>자기점검</b> — Quiz를 채점하면 목록에 <b>✅</b>, 자기점검까지 체크하면 <b>⭐</b>로 바뀌어요'
+      +'<span class="en-gloss"><br><i>Grading the quiz marks ✅. Finishing the self-check turns it into ⭐.</i></span></div>'
+    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루에 두 편씩 나가지 마세요. <b>한 편을 이틀에 걸쳐</b>(첫날 1~4, 다음 날 5~7) 하는 게 더 오래 남아요.</div>'
     +(bars?'<div style="margin-top:11px">'+bars+'</div>':'');
 
   // ── Step 3. 매일 복습 ──
@@ -4488,7 +4504,7 @@ function buildStructure(){
     +exs.map(e=>'<tr><td style="cursor:pointer" onclick="speakTTS(\''+e.ko+'\')">'+e.ko+' 🔊</td><td>'+e.en+'</td></tr>').join('')+'</table>'
     +'<div class="structure-note" style="background:var(--purple-lt,#eeebfb);border-color:var(--purple-lt,#eeebfb);color:var(--purple);">⭐ Korean also uses <strong>particles</strong> (은/는, 이/가, 을/를) to mark roles — so word order can be flexible! See the 🏷️ 조사 tab! →</div>'
     +'<div class="structure-note" style="background:var(--teal-50);border-color:var(--teal-lt);color:var(--teal-dark);margin-top:14px;">📌 아래 다이어그램으로 한눈에 비교해 보세요! <em>Use the diagram below for a quick visual comparison!</em></div>'
-    +'<div style="text-align:center;margin-top:12px;"><img src="data/basics/Korean_Sentence_Structure.png" alt="Korean vs English Sentence Structure" style="max-width:70%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);"></div>';
+    +'<div style="text-align:center;margin-top:12px;"><img src="data/basics/Korean_Sentence_Structure.webp" alt="Korean vs English Sentence Structure" style="max-width:70%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1.5px solid var(--gray-200);"></div>';
 
   // ── Tab 2: 의문문 ──
   const tabQ =
@@ -4528,6 +4544,26 @@ function buildStructure(){
     +'<tr><td style="cursor:pointer" onclick="speakTTS(\'언제 와요?\')"><strong>언제</strong> 와요? 🔊</td><td>When are you coming?</td></tr>'
     +'<tr><td style="cursor:pointer" onclick="speakTTS(\'이거 얼마예요?\')">이거 <strong>얼마</strong>예요? 🔊</td><td>How much is this?</td></tr>'
     +'</table>'
+    +'<div style="font-size:12px;font-weight:700;color:var(--warm-500);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 8px;">💬 대답하기 — How to Answer</div>'
+    +'<div class="structure-note" style="margin-bottom:10px;">존댓말은 <strong>네 / 아니요</strong>, 반말은 <strong>응 / 아니</strong>로 답해요.<br><em>Polite: 네 / 아니요 &nbsp;·&nbsp; Casual: 응 / 아니</em></div>'
+    +'<table class="structure-ex-table">'
+    +'<tr><th>질문 Question</th><th>대답 Answer</th></tr>'
+    +'<tr><td style="cursor:pointer" onclick="speakTTS(\'학교에 가요?\')">학교에 가요? ↗ 🔊</td>'
+      +'<td style="cursor:pointer" onclick="speakTTS(\'네, 가요.\')"><strong>네</strong>, 가요. 🔊 <span style="color:var(--warm-400);font-size:11px;">Yes, I am.</span></td></tr>'
+    +'<tr><td style="cursor:pointer" onclick="speakTTS(\'학교에 가요?\')">학교에 가요? ↗ 🔊</td>'
+      +'<td style="cursor:pointer" onclick="speakTTS(\'아니요, 안 가요.\')"><strong>아니요</strong>, 안 가요. 🔊 <span style="color:var(--warm-400);font-size:11px;">No, I am not.</span></td></tr>'
+    +'</table>'
+    +'<div class="structure-note" style="background:var(--amber-lt);border-color:#e8b86a;color:var(--amber-600);margin-top:12px;">'
+      +'🔄 <strong>부정 질문은 영어와 반대예요!</strong> 한국어는 <strong>사실</strong>이 아니라 <strong>상대 말에 동의하는지</strong>로 답해요.<br>'
+      +'<em>With negative questions Korean answers whether you AGREE, not what the fact is.</em>'
+      +'<table class="structure-ex-table" style="margin-top:10px;">'
+      +'<tr><th>질문</th><th>한국어</th><th>English</th></tr>'
+      +'<tr><td style="cursor:pointer" onclick="speakTTS(\'안 가요?\')">안 가요? 🔊</td><td style="cursor:pointer" onclick="speakTTS(\'네, 안 가요.\')"><strong>네</strong>, 안 가요. 🔊</td><td><strong>No</strong>, I am not. <span style="font-size:11px;">(= 맞아요, 안 가요)</span></td></tr>'
+      +'<tr><td style="cursor:pointer" onclick="speakTTS(\'안 가요?\')">안 가요? 🔊</td><td style="cursor:pointer" onclick="speakTTS(\'아니요, 가요.\')"><strong>아니요</strong>, 가요. 🔊</td><td><strong>Yes</strong>, I am. <span style="font-size:11px;">(= 아니에요, 가요)</span></td></tr>'
+      +'</table></div>'
+    +'<div class="structure-note" style="margin-top:12px;">❓ <strong>의문사 질문에는 네/아니요로 답할 수 없어요.</strong> 물어본 자리에 <strong>정보를 넣어</strong> 답해요.<br>'
+      +'<span style="display:inline-block;margin-top:6px;line-height:1.9;">어디에 가요? → <strong>학교에</strong> 가요.<br>이름이 뭐예요? → 이름이 <strong>보미</strong>예요.<br>몇 시에 와요? → <strong>세 시에</strong> 와요.</span><br>'
+      +'<em>Question-word questions cannot take 네/아니요 — replace the question word with the answer.</em></div>'
     +'<div class="structure-note" style="background:var(--amber-lt);border-color:#e8b86a;color:var(--amber-600);margin-top:18px;">'
     +'⭐ <strong>핵심 정리 Key Takeaway</strong><br>'
     +'한국어 질문 = 평서문 + ↗ 올림 발음 (어순 변화 없음)<br>'
@@ -4827,7 +4863,7 @@ function buildVerbs(){
   // ── 개요 탭 ──
   const tabOverview =
     '<div class="basics-intro">한국어 동사는 항상 <strong>-다</strong>로 끝나요(사전형). 어간(Stem)에 어미(Ending)를 붙여서 시제·존댓말을 표현해요!<br><em>Korean verbs end in -다. Attach endings to the stem to express tense and speech level.</em></div>'
-    +'<img src="data/basics/Korean_verb_conjugation.png" alt="Korean Verb Conjugation Overview" class="vconj-overview-img">'
+    +'<img src="data/basics/Korean_verb_conjugation.webp" alt="Korean Verb Conjugation Overview" class="vconj-overview-img">'
     +'<div class="vconj-section-title">⚙️ 핵심 공식 · The Formula</div>'
     +'<div class="vconj-concept-grid">'
     +'<div class="vconj-concept-card"><div class="vconj-concept-icon">🧱</div><div class="vconj-concept-label">어간 Stem<span class="vconj-concept-label-en">The unchanged base</span></div><div class="vconj-concept-desc">기본형에서 <strong>-다</strong>를 제거한 부분이에요.<br><em>Remove -다 from the dictionary form.</em><br><br>가다 → <strong style="color:var(--teal-dark)">가-</strong> &nbsp;|&nbsp; 먹다 → <strong style="color:var(--teal-dark)">먹-</strong></div></div>'
@@ -5419,7 +5455,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     });
     const bar=document.createElement('div');
     bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
-    bar.innerHTML='🔓 체험판 · Trial — Level 1 '+NHS_TRIAL_EPS.join(', ')+' 열람 가능 · 전체 이용 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>'
+    bar.innerHTML='🔓 체험판 · Trial — '+(NHS_TRIAL_ALL_L1?'🌱 Start Here + Level 1 전체':'Level 1 '+NHS_TRIAL_EPS.join(', '))+' 이용 가능 · Level 2 이상 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>'
       +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">체험판 종료 · Exit trial view</a>';
     document.body.insertBefore(bar, document.body.firstChild);
   }
@@ -5749,7 +5785,6 @@ function vdRenderScore(gramId) {
     </div>
     <nav class="hq-footer-links">
       <a href="index.html">홈 · Home</a>
-      <a href="korean-app_v2.html">Hangeul Quest Kids</a>
       <a href="/faq.html">FAQ</a>
       <a href="/privacy.html">Privacy Policy</a>
       <a href="https://youtube.com/@hangeulquest" target="_blank" rel="noopener">▶ YouTube</a>

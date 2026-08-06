@@ -137,10 +137,31 @@ body {
 #adminPanel {
   display: none;
   width: 100%;
-  max-width: 660px;
+  max-width: 900px;
 }
 
+.mm-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px;}
+.mm-search{flex:1;min-width:180px;background:#0f1117;border:1px solid #2a2d38;border-radius:8px;
+  padding:9px 12px;color:#e8e8ea;font-size:0.9rem;}
+.mm-search:focus{outline:none;border-color:#7c6cf0;}
+.mm-chip{background:#0f1117;border:1px solid #2a2d38;border-radius:20px;padding:6px 14px;
+  font-size:0.8rem;color:#9a9aa5;cursor:pointer;white-space:nowrap;}
+.mm-chip:hover{border-color:#4a4d58;color:#e8e8ea;}
+.mm-chip.on{background:#7c6cf0;border-color:#7c6cf0;color:#fff;font-weight:600;}
+.mm-row-blocked{opacity:.5;}
+.mm-role-sel{background:#0f1117;border:1px solid #2a2d38;border-radius:6px;color:#e8e8ea;
+  padding:4px 6px;font-size:0.8rem;cursor:pointer;}
+.mm-act{background:none;border:1px solid #2a2d38;border-radius:6px;color:#9a9aa5;
+  font-size:0.73rem;padding:3px 7px;cursor:pointer;margin-left:3px;}
+.mm-act:hover{color:#e8e8ea;border-color:#4a4d58;}
+.mm-act.danger:hover{color:#ff6b6b;border-color:#ff6b6b;}
+.mm-badge-blocked{background:#3a2020;color:#ff8a8a;border-radius:10px;font-size:0.7rem;padding:2px 8px;}
+.mm-when{font-size:0.78rem;color:#6f727e;white-space:nowrap;}
+.mm-bulk{margin-top:18px;border-top:1px solid #23262f;padding-top:14px;}
+.mm-bulk summary{cursor:pointer;font-size:0.85rem;color:#9a9aa5;}
+.mm-bulk summary:hover{color:#e8e8ea;}
 .panel-header {
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -352,14 +373,21 @@ body {
 
 
 /* ── 멤버 PIN 테이블 ── */
+.mm-scroll { overflow-x: auto; }
 .member-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
 .member-table th {
   font-size: 0.72rem; color: var(--muted); font-weight: 600;
-  text-transform: uppercase; letter-spacing: .06em;
-  padding: 8px 10px; border-bottom: 1px solid var(--border);
+  letter-spacing: .04em; white-space: nowrap;
+  padding: 8px 6px; border-bottom: 1px solid var(--border);
   text-align: left;
 }
-.member-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle; }
+.member-table td { padding: 7px 6px; border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle; }
+/* 로그인 ID · 표시명 · 마지막 접속 · 관리 버튼은 줄바꿈 금지 — 접히면 표가 무너집니다 */
+.member-table td:nth-child(1),
+.member-table td:nth-child(2),
+.member-table td:nth-child(4),
+.member-table td:nth-child(6) { white-space: nowrap; }
+.member-table td:nth-child(5) { width: 100%; }   /* 새 PIN 칸이 남는 폭을 흡수 */
 .member-row:hover td { background: rgba(255,255,255,.02); }
 .role-badge {
   display: inline-block; font-size: 0.68rem; font-weight: 700;
@@ -379,12 +407,15 @@ body {
   transition: border-color .2s; min-width: 0;
 }
 .pin-inline input:focus { border-color: var(--accent); }
+.pin-inline { min-width: 90px; }
+.pin-inline input { width: 100%; min-width: 0; }
 .save-pin-btn {
   background: var(--accent); color: #fff; border: none; border-radius: 6px;
   padding: 7px 14px; font-size: 0.8rem; font-family: inherit; font-weight: 700;
   cursor: pointer; white-space: nowrap; transition: background .2s, opacity .2s;
 }
 .save-pin-btn:hover:not(:disabled) { background: var(--accent2); }
+.save-pin-btn { padding: 4px 10px; font-size: 0.75rem; }
 .save-pin-btn:disabled { opacity: .4; cursor: not-allowed; }
 /* ── 반응형 ── */
 @media (max-width: 480px) {
@@ -423,60 +454,57 @@ body {
     <button class="logout-btn" onclick="doLogout()">로그아웃</button>
   </div>
 
-  <!-- 멤버별 PIN 관리 -->
+  <!-- 회원 관리 -->
   <div class="section-card">
     <div class="section-head">
-      <span class="section-icon">👤</span>
+      <span class="section-icon">👥</span>
       <div>
-        <div class="section-title">멤버별 PIN 관리</div>
-        <div class="section-desc">개인별 PIN을 변경합니다 · Manage individual member PINs</div>
+        <div class="section-title">회원 관리</div>
+        <div class="section-desc">등급 변경 · PIN 재설정 · 차단 · 삭제 · Manage members</div>
       </div>
     </div>
+
+    <div class="mm-toolbar">
+      <input class="mm-search" id="mmSearch" placeholder="🔍 이름 또는 로그인 ID로 찾기"
+        oninput="mmDebounced()">
+      <button class="mm-chip on" data-f="all"     onclick="mmSetFilter('all',this)">전체</button>
+      <button class="mm-chip"    data-f="member"  onclick="mmSetFilter('member',this)">정식 멤버</button>
+      <button class="mm-chip"    data-f="trial"   onclick="mmSetFilter('trial',this)">체험</button>
+      <button class="mm-chip"    data-f="blocked" onclick="mmSetFilter('blocked',this)">차단됨</button>
+    </div>
+
     <div id="memberPinList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
-  </div>
 
-    <!-- 비밀번호 변경 (역할 일괄 변경) -->
-  <div class="section-card">
-    <div class="section-head">
-      <span class="section-icon">🔑</span>
-      <div>
-        <div class="section-title">비밀번호 변경</div>
-        <div class="section-desc">변경할 비밀번호만 입력하세요 (빈 칸은 그대로 유지)</div>
-      </div>
+    <div class="hint" style="margin-top:12px;">
+      관리자(admin) 계정은 이 목록에 나오지 않습니다 — Supabase 대시보드에서만 다룹니다.<br>
+      체험 계정은 <b>하루 5개까지</b> 가입할 수 있고, <b>30일 동안 접속이 없으면 자동으로 사라집니다.</b>
     </div>
 
-    <div class="pw-grid">
-      <div class="pw-group">
-        <div class="pw-role-label">
-          <span class="role-dot dot-student"></span> 학생 비밀번호
+    <details class="mm-bulk">
+      <summary>🔑 역할별 비밀번호 일괄 변경 — 반 전체가 한꺼번에 바뀝니다</summary>
+      <div class="pw-grid" style="margin-top:12px;">
+        <div class="pw-group">
+          <div class="pw-role-label"><span class="role-dot dot-student"></span> 학생 비밀번호</div>
+          <input class="pw-field" type="password" id="newStudent" placeholder="새 비밀번호">
         </div>
-        <input class="pw-field" type="password" id="newStudent" placeholder="새 비밀번호">
-      </div>
-      <div class="pw-group">
-        <div class="pw-role-label">
-          <span class="role-dot dot-teacher"></span> 선생님 비밀번호
+        <div class="pw-group">
+          <div class="pw-role-label"><span class="role-dot dot-teacher"></span> 선생님 비밀번호</div>
+          <input class="pw-field" type="password" id="newTeacher" placeholder="새 비밀번호">
         </div>
-        <input class="pw-field" type="password" id="newTeacher" placeholder="새 비밀번호">
-      </div>
-      <div class="pw-group">
-        <div class="pw-role-label">
-          <span class="role-dot dot-admin"></span> 관리자 비밀번호
+        <div class="pw-group">
+          <div class="pw-role-label"><span class="role-dot dot-admin"></span> 관리자 비밀번호</div>
+          <input class="pw-field" type="password" id="newAdmin" placeholder="새 비밀번호">
         </div>
-        <input class="pw-field" type="password" id="newAdmin" placeholder="새 비밀번호">
-      </div>
-      <div class="pw-group">
-        <div class="pw-role-label">
-          <span class="role-dot" style="background:#888;"></span> 👀 게스트 비밀번호
+        <div class="pw-group">
+          <div class="pw-role-label"><span class="role-dot" style="background:#888;"></span> 👀 게스트 비밀번호</div>
+          <input class="pw-field" type="password" id="newGuest" placeholder="새 비밀번호">
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">초대받은 방문자 공용 비밀번호</div>
         </div>
-        <input class="pw-field" type="password" id="newGuest" placeholder="새 비밀번호">
-        <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">초대받은 방문자 공용 비밀번호</div>
       </div>
-    </div>
-
-    <button class="action-btn btn-primary" id="savePwBtn" onclick="savePasswords()">
-      💾 변경사항 저장
-    </button>
-    <div class="hint">⚠️ 관리자 비밀번호를 변경하면 다음 로그인 시 새 비밀번호를 사용하세요.</div>
+      <button class="action-btn btn-primary" id="savePwBtn" onclick="savePasswords()">💾 변경사항 저장</button>
+      <div class="hint">⚠️ 개인별로 바꾸려면 위 표의 <b>새 PIN</b> 칸을 쓰세요. 여기는 <b>역할 전체</b>가 바뀝니다.<br>
+        관리자 비밀번호를 바꾸면 다음 로그인부터 새 비밀번호를 쓰세요.</div>
+    </details>
   </div>
 
   <!-- 연습 세션 리셋 -->
@@ -590,44 +618,104 @@ async function adminLogin() {
 }
 
 
-// ── 멤버별 PIN 로드 ────────────────────────────
+// ── 회원 목록 ─────────────────────────────────
+//   members 직접 조회 대신 admin_list_members RPC를 씁니다.
+//   (명단이 anon에게 그대로 내려가지 않도록)
+let _mmFilter = 'all';
+let _mmTimer  = null;
+function mmDebounced(){ clearTimeout(_mmTimer); _mmTimer = setTimeout(loadMemberPins, 250); }
+function mmSetFilter(f, btn){
+  _mmFilter = f;
+  document.querySelectorAll('.mm-chip').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  loadMemberPins();
+}
+function _mmWhen(iso){
+  if (!iso) return '—';
+  const d = new Date(iso), now = new Date();
+  const days = Math.floor((now - d) / 86400000);
+  if (days === 0) return '오늘';
+  if (days === 1) return '어제';
+  if (days < 30)  return days + '일 전';
+  return d.toLocaleDateString('ko-KR', { month:'short', day:'numeric' });
+}
+const _MM_ROLES = [['student','학생'],['teacher','선생님'],['trial','체험'],['guest','게스트']];
+
 async function loadMemberPins() {
   const wrap = document.getElementById('memberPinList');
+  const q = (document.getElementById('mmSearch') || {}).value || '';
   try {
-    const { data, error } = await sb.from('members')
-      .select('name, display_name, role')
-      .order('role').order('display_name');
+    const { data, error } = await sb.rpc('admin_list_members', {
+      p_admin: _adminName, p_pin: _adminPw, p_q: q, p_filter: _mmFilter
+    });
     if (error) throw error;
-    if (!data || !data.length) { wrap.innerHTML = '<div style="color:var(--muted)">멤버 없음</div>'; return; }
+    if (!data || !data.ok) throw new Error(
+      data && data.error === 'denied' ? '관리자 인증이 만료됐어요. 다시 로그인해 주세요.' : '불러오지 못했어요.');
+    const list = data.members || [];
+    if (!list.length) { wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">해당하는 회원이 없어요.</div>'; return; }
 
     wrap.innerHTML = `
-      <table class="member-table">
+      <div class="mm-scroll"><table class="member-table">
         <thead><tr>
-          <th>이름 (로그인 ID)</th>
-          <th>표시명</th>
-          <th>역할</th>
-          <th>새 PIN</th>
-          <th></th>
+          <th>로그인 ID</th><th>표시명</th><th>등급</th><th>마지막 접속</th><th>새 PIN</th><th></th>
         </tr></thead>
         <tbody>
-          ${data.map(m => `
-          <tr class="member-row" id="mrow-${m.name}">
+          ${list.map(m => `
+          <tr class="member-row${m.blocked ? ' mm-row-blocked' : ''}" id="mrow-${m.name}">
             <td style="font-family:monospace;font-size:0.85rem;color:var(--muted)">${m.name}</td>
-            <td style="font-weight:600">${m.display_name}</td>
-            <td><span class="role-badge role-${m.role}">${m.role}</span></td>
+            <td style="font-weight:600">${m.display_name}${m.blocked ? ' <span class="mm-badge-blocked">차단됨</span>' : ''}</td>
+            <td>
+              <select class="mm-role-sel" onchange="mmSetRole('${m.name}', this)">
+                ${_MM_ROLES.map(r => `<option value="${r[0]}"${m.role===r[0]?' selected':''}>${r[1]}</option>`).join('')}
+              </select>
+            </td>
+            <td class="mm-when">${_mmWhen(m.last_login_at)}</td>
             <td><div class="pin-inline">
-              <input type="password" id="pin-${m.name}" placeholder="새 PIN 입력" maxlength="30"
+              <input type="password" id="pin-${m.name}" placeholder="새 PIN" maxlength="30"
                 onkeydown="if(event.key==='Enter') saveMemberPin('${m.name}')">
             </div></td>
-            <td>
+            <td style="white-space:nowrap">
               <button class="save-pin-btn" id="pinbtn-${m.name}" onclick="saveMemberPin('${m.name}')">저장</button>
+              <button class="mm-act" onclick="mmBlock('${m.name}', ${m.blocked ? 'false' : 'true'})">${m.blocked ? '차단 해제' : '🚫 차단'}</button>
+              <button class="mm-act danger" onclick="mmDelete('${m.name}','${m.display_name}')">🗑</button>
             </td>
           </tr>`).join('')}
         </tbody>
-      </table>`;
+      </table></div>`;
   } catch(e) {
     wrap.innerHTML = `<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ${e.message}</div>`;
   }
+}
+
+const _MM_ERR = {
+  denied:  '관리자 인증이 만료됐어요. 다시 로그인해 주세요.',
+  is_admin:'관리자 계정은 여기서 바꿀 수 없어요.',
+  self:    '자기 자신은 바꿀 수 없어요.',
+  bad_role:'관리자로는 승격할 수 없어요 (Supabase에서만 가능).',
+  notfound:'그런 회원이 없어요.'
+};
+async function _mmCall(fn, args, okMsg){
+  try {
+    const { data, error } = await sb.rpc(fn, Object.assign({ p_admin:_adminName, p_pin:_adminPw }, args));
+    if (error) throw error;
+    if (!data || !data.ok) throw new Error(_MM_ERR[data && data.error] || '처리하지 못했어요.');
+    toast(okMsg);
+    loadMemberPins();
+    return true;
+  } catch(e) { toast('❌ ' + e.message, 'fail'); loadMemberPins(); return false; }
+}
+function mmSetRole(name, sel){
+  const role = sel.value;
+  if (!confirm(`${name} 의 등급을 "${role}" 로 바꿀까요?`)) { loadMemberPins(); return; }
+  _mmCall('admin_set_role', { p_target:name, p_role:role }, `✅ ${name} 등급 변경`);
+}
+function mmBlock(name, on){
+  if (on && !confirm(`${name} 을(를) 차단할까요?\n로그인이 막히고 지금 열려 있는 접속도 끊깁니다. 계정과 진도는 남습니다.`)) return;
+  _mmCall('admin_set_blocked', { p_target:name, p_on:on }, on ? `🚫 ${name} 차단됨` : `✅ ${name} 차단 해제`);
+}
+function mmDelete(name, disp){
+  if (!confirm(`${disp} (${name}) 계정을 완전히 삭제할까요?\n되돌릴 수 없습니다. 막기만 하려면 "차단"을 쓰세요.`)) return;
+  _mmCall('admin_delete_member', { p_target:name }, `🗑 ${name} 삭제됨`);
 }
 
 async function saveMemberPin(memberName) {
