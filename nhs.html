@@ -1081,7 +1081,7 @@ function render(){
   document.getElementById('content-area').innerHTML=`
     <div class="ep-header">
       <div class="ep-num-badge">EP.${(DATA.id||'ep01').replace('ep','')} · ${esc(DATA.level)}</div>
-      <div class="ep-title-wrap"><div class="ep-title-kr">${DATA.tag?`<span class="ep-genre-tag">${esc(DATA.tag)}</span> `:''}${esc(DATA.title)}</div>${DATA.goal&&DATA.goal.ko?`<div class="ep-goal-ko">🎯 ${esc(DATA.goal.ko)}</div>`:''}<div class="ep-title-en">${esc(DATA.title_en)}${DATA.goal&&DATA.goal.en?` <span class="ep-goal-badge">${esc(DATA.goal.en)}</span>`:''}</div></div>
+      <div class="ep-title-wrap"><div class="ep-title-kr">${DATA.tag?`<span class="ep-genre-tag">${esc(DATA.tag)}</span> `:''}${esc(DATA.title)}${DATA.title_en?`<span class="ep-title-en">${esc(DATA.title_en)}</span>`:''}</div>${DATA.goal&&DATA.goal.ko?`<div class="ep-goal-ko">${esc(DATA.goal.ko)}</div>`:''}${DATA.goal&&DATA.goal.en?`<div class="ep-goal-en">${esc(DATA.goal.en)}</div>`:''}</div>
       <div class="ep-scene-badge">${esc(DATA.scene)}</div>
     </div>
     <div class="tab-bar">${tabs.map((t,i)=>`<button class="tab-btn${curTab===t?' active':''}" onclick="showTab('${t}')">${labels[i]}</button>`).join('')}</div>
