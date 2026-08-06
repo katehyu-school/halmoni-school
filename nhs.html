@@ -119,6 +119,24 @@ const NHS_IS_TRIAL = new URLSearchParams(location.search).has('trial') || (funct
 // 체험 계정에 열어 주는 범위 — 2026-08-06부터 Start Here + Level 1 '전체'.
 // 3편만 열던 때보다 학생이 레벨 하나를 온전히 끝까지 겪어 볼 수 있습니다.
 // 잠기는 것은 Level 2~6 탭뿐입니다(아래 setLevel 참고).
+// ── 🔐 접근 등급 (2026-08-06 단계적 오픈) ─────────────────
+//   비로그인(검색 유입) · 체험 계정  →  🌱 Start Here + Level 1~2
+//   정식 회원(student·teacher·admin) →  전 레벨
+//   왜 이렇게 하나: L3 이상은 아직 실제 학습자가 통과한 적이 없어
+//   먼저 검증된 범위만 공개하고, 1년간 피드백을 받으며 넓힙니다.
+//   되돌리려면 NHS_OPEN_MAX 숫자만 바꾸면 됩니다(6 = 전부 공개).
+function _nhsUser(){
+  try { return JSON.parse(localStorage.getItem('hq_user')
+                       || sessionStorage.getItem('hq_user') || 'null'); }
+  catch(e) { return null; }
+}
+const NHS_USER = _nhsUser();
+const NHS_ROLE = (NHS_USER && NHS_USER.role) || null;
+const NHS_IS_MEMBER = ['admin','teacher','student'].indexOf(NHS_ROLE) >= 0;
+const NHS_OPEN_MAX = NHS_IS_MEMBER ? 6 : 2;      // 로그인 없이 열리는 최고 레벨
+const _lvNum = (name) => ({'Level 1':1,'Level 2':2,'Level 3':3,
+                           'Level 4':4,'Level 5':5,'Level 6':6}[name] || 0);
+
 const NHS_TRIAL_ALL_L1 = true;
 const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];   // NHS_TRIAL_ALL_L1=false 로 되돌릴 때 쓰는 목록
 let L1_EPISODES=[], L2_EPISODES=[], L3_EPISODES=[], L4_EPISODES=[], L5_EPISODES=[], L6_EPISODES=[];
@@ -3638,8 +3656,9 @@ const SPEAK_CARDS=[
 async function setLevel(btn){
   await _epIdxReady;
   const _lv=btn.classList.contains('level-btn-basis')?'Basics':btn.textContent.trim();
-  if(NHS_IS_TRIAL&&_lv!=='Level 1'&&_lv!=='Basics'){
-    alert('체험판에서는 Level 1의 일부 에피소드만 이용할 수 있어요.\n전체 이용은 hangeulquest@gmail.com으로 문의해 주세요!\n\nThis trial covers a few Level 1 episodes only. Email hangeulquest@gmail.com for full access.');
+  const _n = _lvNum(_lv);
+  if(_n > NHS_OPEN_MAX){
+    alert('Level 3부터는 회원만 이용할 수 있어요.\n\n지금은 Level 1·2를 공개하고 있고, 나머지는 내용을 더 다듬는 중입니다.\n무료 계정을 만들면 전 레벨이 열립니다 — 홈에서 "체험 계정 만들기"를 눌러 주세요.\n\nLevels 3+ are for members. Levels 1-2 are open to everyone; the rest are still being refined.\nCreate a free account from the home page to unlock everything.');
     return;
   }
   document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
@@ -3691,7 +3710,7 @@ function _rmBtn(label,fn,primary){
     +(primary?'background:var(--teal);color:#fff;border-color:var(--teal);':'')+'" onclick="'+fn+'">'+label+'</button>';
 }
 // 영어 보조 문장
-function _rmEn(t){ return '<div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-top:3px;">'+t+'</div>'; }
+function _rmEn(t){ return '<div class="en-gloss" style="font-size:11px;color:var(--warm-400);font-style:italic;margin-top:3px;">'+t+'</div>'; }
 
 async function loadRoadmap(){
   document.querySelectorAll('.basics-topic-item').forEach(el=>el.classList.remove('active'));
@@ -3706,10 +3725,10 @@ async function loadRoadmap(){
   const loginBox=prof
     ? '<div style="background:var(--teal-50);border:1.5px solid var(--teal);border-radius:12px;padding:12px 15px;margin-bottom:14px;font-size:13px;color:var(--teal-dark);line-height:1.7;">'
       +'📓 <b>'+esc(prof)+'</b> 님으로 기록되고 있어요. 공부한 편·외운 단어·시험 점수가 저장됩니다.'
-      +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-top:3px;">Your progress is being saved under this name.</div></div>'
+      +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-top:3px;">Your progress is being saved under this name.</div></div>'
     : '<div style="background:var(--amber-lt);border:1.5px solid var(--amber);border-radius:12px;padding:12px 15px;margin-bottom:14px;font-size:13px;color:var(--warm-900);line-height:1.7;">'
       +'📓 <b>먼저 이름을 만들어 주세요.</b> 상단 <b>📓 My Notes</b>에서 이름을 만들면 그때부터 <b>공부한 편·외운 단어·시험 점수</b>가 저장돼요. 이름이 없으면 아무것도 기록되지 않습니다.'
-      +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-top:3px;">Open 📓 My Notes and create a name first — otherwise nothing is saved.</div>'
+      +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-top:3px;">Open 📓 My Notes and create a name first — otherwise nothing is saved.</div>'
       +_rmBtn('📓 My Notes 열기 · Open','openNMS()',true)+'</div>';
 
   // ── Step 0. 한글 입문자 ──
@@ -3800,7 +3819,7 @@ async function loadRoadmap(){
     +'<td style="padding:9px 0;vertical-align:top;color:var(--warm-700);font-size:12.5px;line-height:1.7">'+when+'</td></tr>';
   const gems='<div style="margin-top:24px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
     +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📦 모르면 그냥 지나치는 것들</div>'
-    +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-bottom:12px;">Features you might never notice — but should use</div>'
+    +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-bottom:12px;">Features you might never notice — but should use</div>'
     +'<table style="width:100%;border-collapse:collapse">'
     +gem('📖','색인','Index','상단','단어나 문법이 기억 안 날 때. 전 레벨 <b>단어·문법</b>을 한국어·영어로 검색하고 <b>어느 편에 나왔는지</b> 알려줘요. 위쪽 탭으로 <b>단어 ↔ 문법</b>을 바꿔 볼 수 있어요.')
     +gem('📌','빠른 참고','Quick Ref','상단','숫자·의문사·호칭·인사표. 공부하다 막히면 <b>어느 화면에서든</b> 바로 열려요.')
@@ -3819,14 +3838,14 @@ async function loadRoadmap(){
   // ── 폰으로 바로 열기 (QR) ──
   const qrcard='<div style="margin-top:20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
     +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📱 폰으로 바로 열기</div>'
-    +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-bottom:12px;">Open the mobile app on your phone</div>'
+    +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-bottom:12px;">Open the mobile app on your phone</div>'
     +'<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">'
     +'<img src="qr/QR_HangeulQuest_Mobile.png" alt="모바일 앱 QR" width="140" height="140" '
       +'style="flex:none;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;padding:4px;">'
     +'<div style="flex:1;min-width:190px;font-size:12.5px;color:var(--warm-700);line-height:1.85;">'
       +'폰 카메라로 이 QR을 비추면 <b>모바일 앱</b>이 열려요.<br>'
       +'열린 뒤 브라우저 메뉴에서 <b>&ldquo;홈 화면에 추가&rdquo;</b>를 누르면 앱처럼 쓸 수 있어요.'
-      +'<div style="margin-top:7px;font-size:11.5px;color:var(--warm-500);font-style:italic;">'
+      +'<div style="margin-top:7px;font-size:11px;color:var(--warm-400);font-style:italic;">'
         +'Point your phone camera at the QR, then use &ldquo;Add to Home Screen&rdquo;.</div>'
       +'<div style="margin-top:8px;font-size:12px;"><a href="hq-mobile.html" style="color:var(--teal-dark);font-weight:700;">'
         +'또는 여기를 눌러 바로 열기 &rarr;</a></div>'
@@ -3835,7 +3854,7 @@ async function loadRoadmap(){
   // ── 주간 리듬 (자습 기준) ──
   const rhythm='<div style="margin-top:20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
     +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📅 일주일 예시</div>'
-    +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-bottom:12px;">A sample week — adjust freely</div>'
+    +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-bottom:12px;">A sample week — adjust freely</div>'
     +'<table style="width:100%;font-size:12.5px;border-collapse:collapse;line-height:1.95;">'
     +'<tr style="color:var(--warm-500);font-size:11.5px;"><td style="padding-right:12px"></td><td style="padding-right:12px">할 일 · What</td><td>시간 · Time</td></tr>'
     +'<tr style="border-top:1px solid var(--gray-100)"><td style="padding-right:12px;font-weight:700;color:var(--warm-700);white-space:nowrap">1·3·5일째</td><td style="padding-right:12px">새 편 앞부분 (빠른복습 → 영상 → 어휘·문법)</td><td style="color:var(--warm-500);white-space:nowrap">25분</td></tr>'
@@ -3852,7 +3871,7 @@ async function loadRoadmap(){
     +loginBox
     +'<div style="background:var(--teal-50);border-radius:12px;padding:13px 16px;margin-bottom:20px;font-size:13.5px;color:var(--teal-dark);line-height:1.75;">'
     +'🌱 <b>혼자서 처음부터 끝까지 할 수 있게 만들어졌어요.</b> 아래 순서대로만 따라오시면 됩니다.'
-    +'<div style="font-size:11.5px;color:var(--warm-500);font-style:italic;margin-top:3px;">Designed for self-study from zero. Just follow the steps below.</div></div>'
+    +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-top:3px;">Designed for self-study from zero. Just follow the steps below.</div></div>'
     +_rmStep(0,'🔤','한글부터 · 못 읽으면 여기','Step 0 — Learn the alphabet first',s0,false)
     +_rmStep(1,'🎯','내 레벨 찾기','Step 1 — Find your level',s1,!!pl)
     +_rmStep(2,'📺','에피소드로 배우기','Step 2 — Learn with episodes',s2,totD>0)
@@ -5455,15 +5474,25 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   buildSidebar();
   setTimeout(_srsUpdateBadge,0);
   loadEp('ep01');
-  if(NHS_IS_TRIAL){
+  // 잠긴 레벨 탭 흐리게 + 🔒
+  if(!NHS_IS_MEMBER){
     document.querySelectorAll('.level-btn').forEach(b=>{
-      const t=b.textContent.trim();
-      if(t==='Level 2'||t==='Level 3'||t==='Level 4'||t==='Level 5'||t==='Level 6'){ b.style.opacity='.4'; b.title='체험판에서는 이용할 수 없어요 · Not available in trial'; }
+      if(_lvNum(b.textContent.trim()) > NHS_OPEN_MAX){
+        b.style.opacity='.45';
+        b.title='회원만 이용할 수 있어요 · Members only';
+        if(b.textContent.indexOf('🔒')<0) b.textContent = b.textContent.trim()+' 🔒';
+      }
     });
+  }
+  if(!NHS_IS_MEMBER){
     const bar=document.createElement('div');
     bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
-    bar.innerHTML='🔓 체험판 · Trial — '+(NHS_TRIAL_ALL_L1?'🌱 Start Here + Level 1 전체':'Level 1 '+NHS_TRIAL_EPS.join(', '))+' 이용 가능 · Level 2 이상 문의: <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4;">hangeulquest@gmail.com</a>'
-      +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">체험판 종료 · Exit trial view</a>';
+    const _open='🌱 Start Here + Level 1·2';
+    bar.innerHTML = NHS_IS_TRIAL
+      ? '🔓 체험 계정 · Trial — '+_open+' 이용 중 · Level 3부터는 정식 회원 전용입니다'
+        +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">체험 표시 끄기 · Exit trial view</a>'
+      : '👋 지금 <b>'+_open+'</b>를 자유롭게 보고 계세요 · 무료 계정을 만들면 진도가 저장되고 Level 3부터도 열립니다'
+        +' · <a href="/" style="color:#4ecdc4;">계정 만들기 · Create a free account</a>';
     document.body.insertBefore(bar, document.body.firstChild);
   }
 });

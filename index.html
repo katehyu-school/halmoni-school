@@ -775,12 +775,33 @@ body::before {
 const _sb    = HQ_SUPABASE.client();
 
 let editingIdx = -1;
+// ── 🔐 로그인 정보 저장소 (2026-08-06) ──────────────────
+//   예전에는 sessionStorage 를 썼는데, 탭을 닫거나 nhs.html 을 북마크로
+//   직접 열면 로그인이 풀렸습니다. 서버 세션 토큰이 30일짜리이므로
+//   저장소도 localStorage 로 맞춥니다. 로그아웃하면 지웁니다.
+function _hqSaveUser(json){
+  try { localStorage.setItem('hq_user', json); } catch(e){}
+  try { sessionStorage.setItem('hq_user', json); } catch(e){}   // 하위호환
+}
+function _hqReadUser(){
+  try {
+    return JSON.parse(localStorage.getItem('hq_user')
+                   || sessionStorage.getItem('hq_user') || 'null');
+  } catch(e){ return null; }
+}
+function hqLogout(){
+  try { localStorage.removeItem('hq_user'); } catch(e){}
+  try { sessionStorage.removeItem('hq_user'); } catch(e){}
+  try { localStorage.removeItem('nhs_trial'); } catch(e){}
+  location.reload();
+}
+
 let _members = [];  // 멤버 목록 캐시
 // 관리자 RPC 인증용 — 메모리에만 두고 새로고침하면 사라짐(그때는 다시 물어봄)
 let _sessionPin = '';
 function _adminCreds() {
   let u = null;
-  try { u = JSON.parse(sessionStorage.getItem('hq_user') || 'null'); } catch(e) {}
+  try { u = _hqReadUser(); } catch(e) {}
   if (!u || !u.name) return null;
   if (!_sessionPin) {
     const p = prompt('확인을 위해 PIN을 한 번만 입력해 주세요 · Enter your PIN');
@@ -838,7 +859,7 @@ async function submitSignup() {
     _sessionPin = pin;
     const { data } = await _sb.rpc('verify_login', { p_name: r.name, p_pin: pin });
     if (!data) { msg.textContent = '계정은 만들어졌어요. 로그인 화면에서 들어와 주세요.'; return; }
-    sessionStorage.setItem('hq_user', JSON.stringify(data));
+    _hqSaveUser(JSON.stringify(data));
     localStorage.setItem('ms_current',  data.display_name);
     localStorage.setItem('nms_current', data.display_name);
     closeSignup();
@@ -960,7 +981,7 @@ async function checkPw() {
         modal.style.animation = 'shake .4s ease';
       } else {
         const guestData = { name: 'guest', display_name: '게스트', role: 'guest' };
-        sessionStorage.setItem('hq_user', JSON.stringify(guestData));
+        _hqSaveUser(JSON.stringify(guestData));
         closeLoginModal();
         enterAs(guestData);
       }
@@ -990,7 +1011,7 @@ async function checkPw() {
       // 세션 저장
       _sessionPin = pin;   // 관리자 작업(RPC 인증)용 — 메모리에만, 저장소엔 남기지 않음
       try { localStorage.setItem('hq_last_name', data.name); } catch(e) {}  // 다음에 다시 안 치도록
-      sessionStorage.setItem('hq_user', JSON.stringify(data));
+      _hqSaveUser(JSON.stringify(data));
       // My Space / My Notes 자동 프로필 연결
       localStorage.setItem('ms_current',  data.display_name);
       localStorage.setItem('nms_current', data.display_name);

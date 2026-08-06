@@ -90,7 +90,7 @@ body {
   max-height: 0; overflow: hidden;
   transition: max-height .3s ease;
 }
-.faq-item.open .faq-a { max-height: 600px; }
+.faq-item.open .faq-a { max-height: 900px; }
 .faq-a-inner {
   padding: 0 20px 18px;
   font-size: 13.5px; color: #2c4257; line-height: 1.8;
@@ -173,8 +173,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Hangeul Quest is a self-guided app — there are no live sessions to attend. But every episode, quiz, and grammar note was created by Haeok (Kate) — a Yonsei University graduate and certified Korean language instructor (Certificate of Completion, Institute for Training Korean Language Instructors, Yonsei University Institute of Language Research and Education, 2022). The curriculum is 100% original, distilled from years of real classroom teaching experience.
-          <div class="ko">Hangeul Quest는 정해진 라이브 수업 없이 스스로 학습하는 앱입니다. 다만 모든 에피소드와 문법 노트는 Haeok(Kate) 선생님이 직접 만들었습니다. 연세대학교 학부 졸업, 연세대학교 언어연구교육원 한국어교사연수소 수료(2022). 다년간의 실제 수업 경험이 콘텐츠에 그대로 녹아 있습니다.</div>
+          Hangeul Quest is made by <strong>one Korean teacher</strong>, not a company. Every episode, quiz and grammar note was written, illustrated and voiced by the same person — a certified Korean language instructor with years of real classroom experience. The curriculum is 100% original; nothing is licensed from a textbook publisher.
+          <div class="ko">Hangeul Quest는 회사가 아니라 <strong>한국어 교사 한 사람</strong>이 만들고 있습니다. 모든 에피소드·퀴즈·문법 노트를 같은 사람이 직접 쓰고, 그리고, 녹음했습니다. 한국어교원 연수를 마친 교사이며 다년간의 실제 수업 경험이 콘텐츠에 그대로 담겨 있습니다. 외부 교재를 가져다 쓰지 않은 100% 자체 개발 커리큘럼입니다.</div>
         </div></div>
       </div>
 
@@ -245,12 +245,45 @@ footer a { color: #4ecdc4; text-decoration: none; }
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggle(this)">
+          How much does it cost?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Nothing. Hangeul Quest is <strong>free</strong> — there is no paid tier, no trial that expires, and no card to enter. It is made by a teacher who wanted the material to reach people, not to sell it.
+          <div class="ko">무료입니다. 유료 등급도, 기간이 끝나는 체험판도, 카드를 넣는 곳도 없습니다. 팔려고 만든 게 아니라 자료가 사람들에게 닿기를 바라서 만든 것입니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Which levels can I see?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Without an account</strong> — 🌱 Start Here and Levels 1–2, freely.<br><br><strong>With a free account</strong> — all six levels, plus saved progress, flashcard review and the message board.<br><br>Levels 3 and up are held back for now because they are still being refined with feedback from real learners. They open as soon as you make an account, which is free.
+          <div class="ko"><strong>계정 없이</strong> — 🌱 Start Here와 Level 1·2를 자유롭게 보실 수 있습니다.<br><br><strong>무료 계정을 만들면</strong> — 여섯 레벨 전부, 그리고 진도 저장·복습 플래시카드·게시판까지 쓰실 수 있습니다.<br><br>Level 3 이상을 잠가 둔 것은 아직 실제 학습자의 피드백을 받아 다듬는 중이기 때문입니다. 계정을 만드시면 바로 열리고, 계정은 무료입니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Can I use these materials in my own class?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Yes, please do. The text and grammar explanations are released under <a href="/license.html">CC BY-NC-SA 4.0</a> — teachers may use, print and adapt them for their own students, with credit. The only exception is the audio and slide images, which may be played on this site but not redistributed.
+          <div class="ko">네, 그러셔도 됩니다. 글과 문법 설명은 <a href="/license.html">CC BY-NC-SA 4.0</a>으로 공개하고 있어서, 선생님들은 출처만 밝히면 수업에 쓰시고 인쇄하시고 반에 맞게 고쳐 쓰실 수 있습니다. 음성과 슬라이드 이미지만 예외로, 사이트 안에서 재생만 가능하고 재배포는 안 됩니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
           Can I try it before signing up?
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Yes — email us and we'll set you up with a short trial login so you can explore a few episodes before deciding to continue.
-          <div class="ko">네 — 이메일로 문의 주시면 몇 개 에피소드를 체험해 볼 수 있는 임시 로그인을 만들어 드립니다.</div>
+          You don't even need an account. <strong>Level 1 and Level 2 are open to everyone</strong> — just open the app and start. A free account is only needed for Level 3 and above.
+          <div class="ko">계정 없이도 됩니다. <strong>Level 1·2는 누구에게나 열려 있어요</strong> — 앱을 열고 바로 시작하시면 됩니다. 계정은 Level 3 이상을 볼 때만 필요합니다.</div>
         </div></div>
       </div>
 
@@ -260,8 +293,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Hangeul Quest (ages 13+) is currently open to new users. Send an email to <a href="mailto:hangeulquest@gmail.com">hangeulquest@gmail.com</a> with your age and current Korean level (none/beginner/some), and we'll set up a login for you. There's no live class to schedule — you can start exploring episodes as soon as your account is ready. We'll get back to you within 2 business days.
-          <div class="ko">Hangeul Quest(13세 이상)는 현재 신규 이용자를 받고 있습니다. <a href="mailto:hangeulquest@gmail.com">hangeulquest@gmail.com</a>으로 나이와 현재 한국어 수준을 알려주시면 로그인 계정을 만들어 드립니다. 별도로 예약할 라이브 수업이 없어 계정이 준비되는 대로 바로 시작하실 수 있어요. 2영업일 내로 답장드립니다.</div>
+          <strong>1.</strong> Just open the app and start — no sign-up, no download. Level 1 and Level 2 are open to everyone.<br><br><strong>2.</strong> Want Levels 3–6 as well? On the home page choose <strong>“Create account”</strong>, pick a name and a PIN. It takes about ten seconds and costs nothing.<br><br><strong>3.</strong> Not sure where to begin? Take the <strong>placement test</strong> in 🌱 Start Here — 15 questions, and it stops on its own once it gets too hard.
+          <div class="ko"><strong>1.</strong> 앱을 열고 바로 시작하세요 — 가입도, 설치도 필요 없습니다. Level 1·2는 누구에게나 열려 있습니다.<br><br><strong>2.</strong> Level 3~6까지 보시려면 홈에서 <strong>‘체험 계정 만들기’</strong>를 눌러 이름과 PIN만 정하시면 됩니다. 10초면 되고 무료입니다.<br><br><strong>3.</strong> 어디서 시작할지 모르겠다면 🌱 Start Here의 <strong>배치 테스트</strong>를 보세요 — 15문제이고, 어려워지면 저절로 멈춥니다.</div>
         </div></div>
       </div>
 
@@ -286,8 +319,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Our curriculum is entirely original — developed by our teacher and refined through real classroom experience. It draws on Korean cultural scenes and everyday situations, not textbook dialogues. The web app (lesson materials, quizzes, audio) is also custom-built.
-          <div class="ko">외부 교재 없이 자체 개발한 커리큘럼을 사용합니다. 실생활 장면과 한국 문화를 기반으로 설계되었습니다.</div>
+          Entirely original — <strong>6 levels, 72 episodes</strong>, written from scratch. Each episode follows one family through real situations (a night market, a grandmother's kitchen, a district office) and pulls the vocabulary and grammar out of what actually gets said. Slides, audio and quizzes are all custom-made. Nothing is licensed from a textbook publisher.
+          <div class="ko">전부 자체 개발입니다 — <strong>6개 레벨, 72편</strong>. 한 가족이 야시장·할머니 부엌·주민센터 같은 실제 상황을 지나가고, 그 안에서 오간 말에서 어휘와 문법을 끌어냅니다. 슬라이드·음성·퀴즈도 모두 직접 만들었습니다. 외부 교재를 가져다 쓴 부분은 없습니다.</div>
         </div></div>
       </div>
 
@@ -308,8 +341,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Our advanced levels are designed with TOPIK (Test of Proficiency in Korean) in mind — covering listening, vocabulary, grammar, and reading skills that align with TOPIK Level 1 and beyond.
-          <div class="ko">상위 레벨은 TOPIK 1급 이상을 목표로 듣기·어휘·문법·읽기를 체계적으로 다룹니다.</div>
+          Yes. The levels are built around TOPIK: Levels 1–2 cover TOPIK I (beginner), Levels 3–4 aim at TOPIK 3–4, and Levels 5–6 reach into TOPIK 4–5 with news articles, essays and modern Korean short stories. Each level ends with a closing test in TOPIK format, and the writing section follows TOPIK questions 51–53.
+          <div class="ko">네. 레벨 자체가 TOPIK 기준으로 설계돼 있습니다. Level 1·2는 TOPIK I(초급), Level 3·4는 3~4급, Level 5·6은 뉴스 기사·논술·근현대 단편소설을 다루며 4~5급까지 올라갑니다. 레벨마다 TOPIK 형식의 마감 테스트가 있고, 쓰기는 TOPIK 51~53번 유형을 따릅니다.</div>
         </div></div>
       </div>
     </div>
@@ -329,6 +362,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
     © 2026 Hangeul Quest &nbsp;·&nbsp;
     <a href="/">Home</a> &nbsp;·&nbsp;
     <a href="/privacy.html">Privacy Policy</a>
+     · 
+    <a href="/license.html" style="color:inherit">Terms · 이용 조건</a>
   </footer>
 
 </div>

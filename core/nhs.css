@@ -721,6 +721,12 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .ct-wrong-q{font-size:12px;color:var(--warm-700);flex:1;min-width:120px;line-height:1.45;}
 .ct-wrong-go{font-size:10.5px;font-weight:700;color:var(--teal);flex:none;}
 
+/* 🇬🇧 영어 병기 기본 모양 — 한국어보다 작고 흐리게, 이탤릭.
+   2026-08-06: 로드맵 등 일부 .en-gloss 에 크기·색 지정이 없어 한국어와 같은 크기·색으로
+   나와 화면이 어수선했습니다. 여기서 기본값을 주면 인라인 style이 있는 곳(문법 제목 등)은
+   그대로 두고, 지정이 없던 곳만 정리됩니다. 에피소드 헤더(.ep-title-en)와 같은 규칙입니다. */
+.en-gloss{font-size:11px;color:var(--warm-400);font-style:italic;}
+
 /* 🇬🇧 영어 병기 토글 — body.en-off 이면 '설명·지시문' 영어만 숨김.
    어휘 뜻(.vc-en)·자막 번역·예문 번역은 안전망이라 항상 보입니다. */
 body.en-off .en-gloss,

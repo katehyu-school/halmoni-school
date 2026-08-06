@@ -124,8 +124,12 @@ function _brdClient(){
 //   삭제  admin/teacher → 전부  ·  그 외 → 본인 글·본인 댓글만
 //   📌공지 고정  admin/teacher만
 function _brdSession(){
-  try { return JSON.parse(sessionStorage.getItem('hq_user') || 'null') || null; }
-  catch(e) { return null; }
+  // 2026-08-06: 로그인 정보가 localStorage 로 옮겨졌습니다(브라우저를 닫아도 유지).
+  //             예전 세션을 쓰던 사람을 위해 sessionStorage 도 함께 봅니다.
+  try {
+    return JSON.parse(localStorage.getItem('hq_user')
+                   || sessionStorage.getItem('hq_user') || 'null') || null;
+  } catch(e) { return null; }
 }
 function _brdToken(){ const u = _brdSession(); return (u && u.token) || ''; }
 
