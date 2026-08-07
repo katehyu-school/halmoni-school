@@ -205,6 +205,8 @@ def page(title, desc, body, canonical, jsonld=None):
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{esc(canonical)}">
 <meta property="og:site_name" content="Hangeul Quest">
+<link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>{CSS}</style>{ld}
