@@ -728,6 +728,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 </section>
 
 </div>
+<script src="core/supabase-config.js"></script>
 <script>
 /* ───────── shared ───────── */
 function show(id){
@@ -786,9 +787,77 @@ function confetti(n){
    ═══════════════════════════════════════════════════ */
 const SRS_GAP={1:1,2:3,3:7,4:16,5:35};
 const SRS_CAP=20;
+
+/* ── 📡 진도 서버 보관 (2026-08-07) ─────────────────────────
+   웹(nhs.html)과 같은 규칙입니다. localStorage가 원본이고
+   서버는 사본만 받습니다. 정식 회원 + 로그인 이름과 같은
+   프로필일 때만 보내고, 실패는 전부 무시합니다.
+   여기서는 supabase 라이브러리(CDN 약 40KB) 대신 fetch를
+   직접 씁니다 — 모바일 데이터를 아끼기 위해서입니다.
+   ⚠️ nms_{프로필}_* 키를 새로 만들면 PROG_KEYS에도 추가할 것 */
+const PROG_KEYS = ['_notes','_color','_av','_writings',
+                   '_ep_done','_prog','_srs','_fc_review','_fc_known',
+                   '_sc','_ep_star'];
+let _progTimer = null;
+function _progUser(){
+  try{
+    const u = JSON.parse(localStorage.getItem('hq_user')
+                      || sessionStorage.getItem('hq_user') || 'null');
+    if(!u || !u.token) return null;
+    if(['student','teacher','admin'].indexOf(u.role) < 0) return null;
+    return u;
+  }catch(e){ return null; }
+}
+function _progCollect(p){
+  const out = {};
+  PROG_KEYS.forEach(k=>{
+    const v = localStorage.getItem('nms_'+p+k);
+    if(v === null) return;
+    try{ out[k] = JSON.parse(v); }catch(e){ out[k] = v; }
+  });
+  return out;
+}
+function _progPush(){
+  if(_progTimer) clearTimeout(_progTimer);
+  _progTimer = setTimeout(_progPushNow, 3000);
+}
+function _progPushNow(){
+  _progTimer = null;
+  try{
+    const u = _progUser();  if(!u) return;
+    const p = _sProfile();  if(!p) return;
+    if(p !== (u.display_name || u.name)) return;
+    const cfg = window.HQ_SUPABASE; if(!cfg) return;
+    fetch(cfg.URL + '/rest/v1/rpc/progress_push', {
+      method : 'POST',
+      headers: { 'Content-Type':'application/json',
+                 'apikey': cfg.KEY, 'Authorization': 'Bearer ' + cfg.KEY },
+      body   : JSON.stringify({ p_token:u.token, p_profile:p, p_data:_progCollect(p) })
+    }).catch(function(){});
+  }catch(e){}
+}
+setTimeout(_progPushNow, 4000);
+
+/* 기본 프로필 이름을 웹과 맞춥니다 (me → 나).
+   my-notes.js가 자동으로 만드는 이름이 '나'인데 여기만 'me'였습니다.
+   그래서 로그인하지 않은 사람이 웹과 모바일을 오가면 진도가
+   두 군데로 갈려 쌓였습니다. 이미 쌓인 것은 한 번만 옮겨 줍니다. */
+(function(){
+  try{
+    if(localStorage.getItem('nms_current')) return;   // 이름을 쓰는 중이면 손대지 않음
+    ['_srs','_fc_known','_fc_review'].forEach(function(k){
+      const from = 'nms_me' + k, to = 'nms_\uB098' + k;
+      const v = localStorage.getItem(from);
+      if(v !== null && localStorage.getItem(to) === null){
+        localStorage.setItem(to, v);
+        localStorage.removeItem(from);
+      }
+    });
+  }catch(e){}
+})();
 function _sToday(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
 function _sPlus(n){const d=new Date();d.setDate(d.getDate()+n);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
-function _sProfile(){try{return localStorage.getItem('nms_current')||'me'}catch(e){return 'me'}}
+function _sProfile(){try{return localStorage.getItem('nms_current')||'나'}catch(e){return '나'}}
 function _sKey(){return 'nms_'+_sProfile()+'_srs'}
 function _sMap(){
   try{
@@ -801,7 +870,7 @@ function _sMap(){
     return m;
   }catch(e){return {}}
 }
-function _sSave(m){try{localStorage.setItem(_sKey(),JSON.stringify(m))}catch(e){}}
+function _sSave(m){try{localStorage.setItem(_sKey(),JSON.stringify(m));_progPush()}catch(e){}}
 function _sId(c){return c.lv+'_'+c.ep+'_'+c.k}
 function _sMark(c,ok){
   const m=_sMap(),cur=m[_sId(c)]||{b:1};

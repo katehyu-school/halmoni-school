@@ -3056,6 +3056,59 @@ async function _wuSkip(){ _wuCloseModal(); _wuSeen.add(_wuLevel+'_'+_wuEpId); aw
 // ══ Flashcard System ══════════════════════════════════════
 // ══ SRS + Progress helpers ════════════════════════════════
 function _nmsProfile(){ return localStorage.getItem('nms_current')||''; }
+
+// ── 📡 진도 서버 보관 (2026-08-07) ─────────────────────────
+//   localStorage가 여전히 '원본'이고 서버는 사본만 받습니다.
+//   서버가 로컬을 덮어쓰거나 지우는 경로는 없습니다(단방향).
+//   보내는 조건 — ① 로그인 토큰 있음 ② 정식 회원 ③ 공부 중인
+//   프로필 이름이 로그인 이름과 같음. 셋 중 하나라도 아니면 안 보냅니다.
+//   실패는 전부 무시합니다. 오프라인·토큰만료·서버장애 어느 쪽이든
+//   학습이 멈추면 안 되니까요.
+const PROG_KEYS = ['_notes','_color','_av','_writings',
+                   '_ep_done','_prog','_srs','_fc_review','_fc_known',
+                   '_sc','_ep_star'];   // my-notes.js의 NMS_KEYS와 같은 목록
+                   // ⚠️ nms_{프로필}_* 키를 새로 만들면 여기에도 추가할 것
+let _progTimer = null;
+
+function _progUser(){
+  try{
+    const u = JSON.parse(localStorage.getItem('hq_user')
+                      || sessionStorage.getItem('hq_user') || 'null');
+    if(!u || !u.token) return null;
+    if(['student','teacher','admin'].indexOf(u.role) < 0) return null;  // 체험·게스트 제외
+    return u;
+  }catch(e){ return null; }
+}
+function _progCollect(p){
+  const out = {};
+  PROG_KEYS.forEach(k=>{
+    const v = localStorage.getItem('nms_'+p+k);
+    if(v === null) return;
+    try{ out[k] = JSON.parse(v); }catch(e){ out[k] = v; }
+  });
+  return out;
+}
+function _progPush(){          // 연달아 눌러도 3초 뒤 한 번만
+  if(_progTimer) clearTimeout(_progTimer);
+  _progTimer = setTimeout(_progPushNow, 3000);
+}
+function _progPushNow(){
+  _progTimer = null;
+  try{
+    const u = _progUser();   if(!u) return;
+    const p = _nmsProfile(); if(!p) return;
+    // 다른 프로필로 공부 중이면 보내지 않습니다 (한 화면을 둘이 쓰는 경우)
+    if(p !== (u.display_name || u.name)) return;
+    if(!window.HQ_SUPABASE) return;
+    const sb = window.HQ_SUPABASE.client();
+    if(!sb) return;
+    sb.rpc('progress_push', { p_token: u.token, p_profile: p, p_data: _progCollect(p) })
+      .catch(function(){ /* 조용히 무시 */ });
+  }catch(e){ /* 조용히 무시 — 로컬은 그대로입니다 */ }
+}
+// 로그인한 채로 앱을 열면, 그전까지 쌓인 진도를 한 번 올립니다
+setTimeout(_progPushNow, 4000);
+
 function _fcCardId(c){ return (c.level||'L1')+'_'+c.epId+'_'+c.korean; }
 function _fcReviewSet(){
   const p=_nmsProfile(); if(!p) return new Set();
@@ -3073,6 +3126,7 @@ function _fcMark(card, isReview){
   else{ kn.add(id); rev.delete(id); }
   localStorage.setItem('nms_'+p+'_fc_review', JSON.stringify([...rev]));
   localStorage.setItem('nms_'+p+'_fc_known',  JSON.stringify([...kn]));
+  _progPush();
 }
 function _epDoneSet(){
   const p=_nmsProfile(); if(!p) return new Set();
@@ -3082,6 +3136,7 @@ function _markEpDone(epKey){
   const p=_nmsProfile(); if(!p) return;
   const done=_epDoneSet(); done.add(epKey);
   localStorage.setItem('nms_'+p+'_ep_done', JSON.stringify([...done]));
+  _progPush();
   // Refresh sidebar checkmarks
   _refreshSidebarDone();
 }
@@ -3097,6 +3152,7 @@ function _scSet(epKey,arr){
   const p=_nmsProfile(); if(!p) return;
   const o=_scGet(); o[epKey]=arr;
   try{ localStorage.setItem('nms_'+p+'_sc', JSON.stringify(o)); }catch(e){}
+  _progPush();
 }
 function _epStarSet(){
   const p=_nmsProfile(); if(!p) return new Set();
@@ -3107,6 +3163,7 @@ function _markEpStar(epKey,on){
   const st=_epStarSet();
   if(on) st.add(epKey); else st.delete(epKey);
   try{ localStorage.setItem('nms_'+p+'_ep_star', JSON.stringify([...st])); }catch(e){}
+  _progPush();
   _refreshSidebarDone();
 }
 // ── 학습 진행 저장 (배치·마감 테스트) ──────────────────
@@ -3119,6 +3176,7 @@ function _progSet(key,val){
   const p=_nmsProfile(); if(!p) return;
   const o=_progGet(); o[key]=val;
   try{ localStorage.setItem('nms_'+p+'_prog', JSON.stringify(o)); }catch(e){}
+  _progPush();
 }
 function _saveTestScore(lv,score,total){
   if(!total) return;
@@ -3163,7 +3221,7 @@ function _srsMap(){
     return m;
   }catch(e){ return {}; }
 }
-function _srsSave(m){ const k=_srsKey(); if(!k)return; try{ localStorage.setItem(k,JSON.stringify(m)); }catch(e){} }
+function _srsSave(m){ const k=_srsKey(); if(!k)return; try{ localStorage.setItem(k,JSON.stringify(m)); _progPush(); }catch(e){} }
 function _srsUpdate(cardId,ok){
   const m=_srsMap(), cur=m[cardId]||{b:1,due:_srsToday()};
   // 처음 보는 단어를 맞히면 상자 2(3일 뒤). 틀리면 언제나 상자 1(내일).
