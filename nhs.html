@@ -1826,7 +1826,7 @@ function renderQuizScore(){
   const spSection=(!rdPool&&spPool)?'<div id="spq-wrap" style="margin-top:28px;"></div>':'';
   // ── Progress tracking ──
   _markEpDone(`${DATA.level}_${DATA.id}`);
-  const _hasProfile=!!_nmsProfile();
+  const _hasProfile=!!_progOwner();
   const _profileNudge=_hasProfile?'':'<div style="font-size:12px;color:var(--warm-400);margin-top:12px;">💡 My Notes 프로필을 만들면 진도가 저장돼요!</div>';
   document.getElementById('quiz-content').innerHTML=`
     <div class="quiz-score-wrap">
@@ -3064,10 +3064,10 @@ function _nmsProfile(){ return localStorage.getItem('nms_current')||''; }
 //   프로필 이름이 로그인 이름과 같음. 셋 중 하나라도 아니면 안 보냅니다.
 //   실패는 전부 무시합니다. 오프라인·토큰만료·서버장애 어느 쪽이든
 //   학습이 멈추면 안 되니까요.
-const PROG_KEYS = ['_notes','_color','_av','_writings',
-                   '_ep_done','_prog','_srs','_fc_review','_fc_known',
-                   '_sc','_ep_star'];   // my-notes.js의 NMS_KEYS와 같은 목록
-                   // ⚠️ nms_{프로필}_* 키를 새로 만들면 여기에도 추가할 것
+// 진도(계정에 붙음) — 노트·색·아바타·작문은 여기 없습니다. 그건 My Notes 것.
+// ⚠️ 새 진도 키를 만들면 여기에도 추가할 것
+const PROG_KEYS = ['_ep_done','_ep_star','_sc','_prog',
+                   '_srs','_fc_review','_fc_known'];
 let _progTimer = null;
 
 function _progUser(){
@@ -3088,6 +3088,58 @@ function _progCollect(p){
   });
   return out;
 }
+
+/* ── 🔑 진도의 주인 (2026-08-07) ──────────────────────────
+   전에는 My Notes 프로필 이름이 진도의 주인이었습니다. 그래서
+   프로필을 바꾸거나 이름을 고치면 진도가 따라다녔습니다.
+   이제 로그인하면 진도는 '로그인 ID'에 붙습니다(@kate 꼴).
+   표시명이 아니라 로그인 ID인 이유 — 표시명은 언제든 바꿀 수
+   있는데 그때마다 진도가 끊기면 안 되기 때문입니다.
+   My Notes 는 이제 순수하게 메모·색·아바타·작문만 맡습니다.
+   로그인하지 않은 학습자는 예전 그대로 프로필 이름을 씁니다.   */
+function _progOwner(){
+  try{
+    const u = JSON.parse(localStorage.getItem('hq_user')
+                      || sessionStorage.getItem('hq_user') || 'null');
+    // guest(공용 체험 계정)는 여럿이 함께 쓰므로 계정에 묶지 않습니다
+    if(u && u.name && ['student','teacher','admin','trial'].indexOf(u.role) >= 0)
+      return '@' + u.name;
+  }catch(e){}
+  return localStorage.getItem('nms_current') || '';
+}
+function _progOwnerLabel(){          // 화면에 보여 줄 이름
+  try{
+    const u = JSON.parse(localStorage.getItem('hq_user')
+                      || sessionStorage.getItem('hq_user') || 'null');
+    if(u && u.name && ['student','teacher','admin','trial'].indexOf(u.role) >= 0)
+      return u.display_name || u.name;
+  }catch(e){}
+  return localStorage.getItem('nms_current') || '';
+}
+/* 예전에 프로필 이름으로 쌓인 진도를 계정으로 한 번만 옮깁니다.
+   ⚠️ '지금 켜 놓은 프로필이 내 표시명과 같을 때'만 옮깁니다 —
+      한 화면을 여럿이 쓰는 집에서 남의 진도를 가져오지 않도록. */
+function _progAdoptAccount(){
+  try{
+    const own = _progOwner();
+    if(own.charAt(0) !== '@') return;
+    const u = JSON.parse(localStorage.getItem('hq_user')
+                      || sessionStorage.getItem('hq_user') || 'null');
+    if(!u) return;
+    const cur = localStorage.getItem('nms_current') || '';
+    if(!cur || cur !== (u.display_name || u.name)) return;
+    if(PROG_KEYS.some(k => localStorage.getItem('nms_' + own + k) !== null)) return;
+    PROG_KEYS.forEach(function(k){
+      const v = localStorage.getItem('nms_' + cur + k);
+      if(v !== null){
+        localStorage.setItem('nms_' + own + k, v);
+        localStorage.removeItem('nms_' + cur + k);
+      }
+    });
+  }catch(e){}
+}
+_progAdoptAccount();
+
 function _progPush(){          // 연달아 눌러도 3초 뒤 한 번만
   if(_progTimer) clearTimeout(_progTimer);
   _progTimer = setTimeout(_progPushNow, 3000);
@@ -3096,13 +3148,14 @@ function _progPushNow(){
   _progTimer = null;
   try{
     const u = _progUser();   if(!u) return;
-    const p = _nmsProfile(); if(!p) return;
-    // 다른 프로필로 공부 중이면 보내지 않습니다 (한 화면을 둘이 쓰는 경우)
-    if(p !== (u.display_name || u.name)) return;
+    const own = _progOwner();
+    if(own !== '@' + u.name) return;   // 진도의 주인이 이 계정일 때만
     if(!window.HQ_SUPABASE) return;
     const sb = window.HQ_SUPABASE.client();
     if(!sb) return;
-    sb.rpc('progress_push', { p_token: u.token, p_profile: p, p_data: _progCollect(p) })
+    sb.rpc('progress_push', { p_token: u.token,
+                              p_profile: (u.display_name || u.name),
+                              p_data: _progCollect(own) })
       .catch(function(){ /* 조용히 무시 */ });
   }catch(e){ /* 조용히 무시 — 로컬은 그대로입니다 */ }
 }
@@ -3111,15 +3164,15 @@ setTimeout(_progPushNow, 4000);
 
 function _fcCardId(c){ return (c.level||'L1')+'_'+c.epId+'_'+c.korean; }
 function _fcReviewSet(){
-  const p=_nmsProfile(); if(!p) return new Set();
+  const p=_progOwner(); if(!p) return new Set();
   return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_fc_review')||'[]'));
 }
 function _fcKnownSet(){
-  const p=_nmsProfile(); if(!p) return new Set();
+  const p=_progOwner(); if(!p) return new Set();
   return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_fc_known')||'[]'));
 }
 function _fcMark(card, isReview){
-  const p=_nmsProfile(); if(!p) return;
+  const p=_progOwner(); if(!p) return;
   const rev=_fcReviewSet(), kn=_fcKnownSet(), id=_fcCardId(card);
   _srsUpdate(id, !isReview);
   if(isReview){ rev.add(id); kn.delete(id); }
@@ -3129,11 +3182,11 @@ function _fcMark(card, isReview){
   _progPush();
 }
 function _epDoneSet(){
-  const p=_nmsProfile(); if(!p) return new Set();
+  const p=_progOwner(); if(!p) return new Set();
   return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_ep_done')||'[]'));
 }
 function _markEpDone(epKey){
-  const p=_nmsProfile(); if(!p) return;
+  const p=_progOwner(); if(!p) return;
   const done=_epDoneSet(); done.add(epKey);
   localStorage.setItem('nms_'+p+'_ep_done', JSON.stringify([...done]));
   _progPush();
@@ -3145,21 +3198,21 @@ function _markEpDone(epKey){
 //   nms_{프로필}_ep_star = ["L1_ep01", ...]       자기점검까지 전부 체크한 편
 //   ✅ = Quiz 채점(_markEpDone)  ·  ⭐ = 자기점검까지 완료
 function _scGet(){
-  const p=_nmsProfile(); if(!p) return {};
+  const p=_progOwner(); if(!p) return {};
   try{ return JSON.parse(localStorage.getItem('nms_'+p+'_sc')||'{}'); }catch(e){ return {}; }
 }
 function _scSet(epKey,arr){
-  const p=_nmsProfile(); if(!p) return;
+  const p=_progOwner(); if(!p) return;
   const o=_scGet(); o[epKey]=arr;
   try{ localStorage.setItem('nms_'+p+'_sc', JSON.stringify(o)); }catch(e){}
   _progPush();
 }
 function _epStarSet(){
-  const p=_nmsProfile(); if(!p) return new Set();
+  const p=_progOwner(); if(!p) return new Set();
   try{ return new Set(JSON.parse(localStorage.getItem('nms_'+p+'_ep_star')||'[]')); }catch(e){ return new Set(); }
 }
 function _markEpStar(epKey,on){
-  const p=_nmsProfile(); if(!p) return;
+  const p=_progOwner(); if(!p) return;
   const st=_epStarSet();
   if(on) st.add(epKey); else st.delete(epKey);
   try{ localStorage.setItem('nms_'+p+'_ep_star', JSON.stringify([...st])); }catch(e){}
@@ -3169,11 +3222,11 @@ function _markEpStar(epKey,on){
 // ── 학습 진행 저장 (배치·마감 테스트) ──────────────────
 //   저장: nms_{프로필}_prog = { placement:{...}, test_L1:{...} }
 function _progGet(){
-  const p=_nmsProfile(); if(!p) return {};
+  const p=_progOwner(); if(!p) return {};
   try{ return JSON.parse(localStorage.getItem('nms_'+p+'_prog')||'{}'); }catch(e){ return {}; }
 }
 function _progSet(key,val){
-  const p=_nmsProfile(); if(!p) return;
+  const p=_progOwner(); if(!p) return;
   const o=_progGet(); o[key]=val;
   try{ localStorage.setItem('nms_'+p+'_prog', JSON.stringify(o)); }catch(e){}
   _progPush();
@@ -3207,7 +3260,7 @@ function _refreshSidebarDone(){
 const SRS_GAP={1:1,2:3,3:7,4:16,5:35};
 function _srsToday(){ const d=new Date(); return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
 function _srsPlus(days){ const d=new Date(); d.setDate(d.getDate()+days); return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10); }
-function _srsKey(){ const p=_nmsProfile(); return p?('nms_'+p+'_srs'):''; }
+function _srsKey(){ const p=_progOwner(); return p?('nms_'+p+'_srs'):''; }
 function _srsMap(){
   const k=_srsKey(); if(!k) return {};
   try{
@@ -3777,7 +3830,7 @@ async function loadRoadmap(){
   const ca=document.getElementById('content-area');
   ca.innerHTML='<div style="padding:40px;text-align:center;color:var(--warm-500);">🧭 불러오는 중… Loading</div>';
   await _epIdxReady;
-  const prof=_nmsProfile(), prog=_progGet(), cnt=_rmEpCounts();
+  const prof=_progOwnerLabel(), prog=_progGet(), cnt=_rmEpCounts();
   const srs=_srsMap(), srsN=Object.keys(srs).length, dueN=_srsDueCount();
   const totD=Object.values(cnt).reduce((a,b)=>a+b.d,0);
 

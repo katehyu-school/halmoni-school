@@ -795,9 +795,9 @@ const SRS_CAP=20;
    여기서는 supabase 라이브러리(CDN 약 40KB) 대신 fetch를
    직접 씁니다 — 모바일 데이터를 아끼기 위해서입니다.
    ⚠️ nms_{프로필}_* 키를 새로 만들면 PROG_KEYS에도 추가할 것 */
-const PROG_KEYS = ['_notes','_color','_av','_writings',
-                   '_ep_done','_prog','_srs','_fc_review','_fc_known',
-                   '_sc','_ep_star'];
+// 진도만 — 노트·색·아바타·작문은 My Notes 것이라 보내지 않습니다
+const PROG_KEYS = ['_ep_done','_ep_star','_sc','_prog',
+                   '_srs','_fc_review','_fc_known'];
 let _progTimer = null;
 function _progUser(){
   try{
@@ -825,14 +825,16 @@ function _progPushNow(){
   _progTimer = null;
   try{
     const u = _progUser();  if(!u) return;
-    const p = _sProfile();  if(!p) return;
-    if(p !== (u.display_name || u.name)) return;
+    const own = _sProfile();
+    if(own !== '@' + u.name) return;   // 진도의 주인이 이 계정일 때만
     const cfg = window.HQ_SUPABASE; if(!cfg) return;
     fetch(cfg.URL + '/rest/v1/rpc/progress_push', {
       method : 'POST',
       headers: { 'Content-Type':'application/json',
                  'apikey': cfg.KEY, 'Authorization': 'Bearer ' + cfg.KEY },
-      body   : JSON.stringify({ p_token:u.token, p_profile:p, p_data:_progCollect(p) })
+      body   : JSON.stringify({ p_token:u.token,
+                                p_profile:(u.display_name || u.name),
+                                p_data:_progCollect(own) })
     }).catch(function(){});
   }catch(e){}
 }
@@ -857,7 +859,17 @@ setTimeout(_progPushNow, 4000);
 })();
 function _sToday(){const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
 function _sPlus(n){const d=new Date();d.setDate(d.getDate()+n);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
-function _sProfile(){try{return localStorage.getItem('nms_current')||'나'}catch(e){return '나'}}
+/* 진도의 주인 — 로그인하면 로그인 ID(@kate 꼴), 아니면 My Notes 프로필.
+   웹(nhs.html)의 _progOwner 와 같은 규칙입니다. */
+function _sProfile(){
+  try{
+    const u = JSON.parse(localStorage.getItem('hq_user')
+                      || sessionStorage.getItem('hq_user') || 'null');
+    if(u && u.name && ['student','teacher','admin','trial'].indexOf(u.role) >= 0)
+      return '@' + u.name;
+  }catch(e){}
+  try{ return localStorage.getItem('nms_current') || '나'; }catch(e){ return '나'; }
+}
 function _sKey(){return 'nms_'+_sProfile()+'_srs'}
 function _sMap(){
   try{
