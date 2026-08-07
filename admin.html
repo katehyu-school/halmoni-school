@@ -516,6 +516,19 @@ body {
     </details>
   </div>
 
+  <!-- 학습 진도 -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">📈</span>
+      <div>
+        <div class="section-title">학습 진도</div>
+        <div class="section-desc">정식 학생이 공부한 만큼 자동으로 올라옵니다 · 체험 계정은 기록되지 않아요</div>
+      </div>
+      <button class="mm-act" style="margin-left:auto" onclick="loadProgress()">↺ 새로고침</button>
+    </div>
+    <div id="progressList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
+  </div>
+
   <!-- 연습 세션 리셋 -->
   <div class="section-card">
     <div class="section-head">
@@ -570,6 +583,7 @@ const sb    = HQ_SUPABASE.client();
 
 let _adminPw   = ''; // 로그인한 관리자 비밀번호 (세션 메모리에만 보관)
 let _adminName = ''; // 관리자 members.name (예: 'admin')
+let _adminToken = null; // verify_login이 준 세션 토큰 — 진도 조회(progress_report)에만 씀
 
 // ── 토스트 ──────────────────────────────────
 function toast(msg, type = 'ok') {
@@ -614,9 +628,11 @@ async function adminLogin() {
     } else {
       _adminPw = pw;
       _adminName = data.name || 'admin';
+      _adminToken = data.token || null;   // 진도 조회(progress_report)에 씁니다
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display  = 'block';
       loadMemberPins();
+      loadProgress();
     }
   } catch (e) {
     err.textContent = '서버 연결 오류: ' + e.message;
@@ -626,6 +642,93 @@ async function adminLogin() {
   }
 }
 
+
+// ── 📈 학습 진도 ───────────────────────────────
+//   서버에 쌓이는 것은 '정식 회원'의 진도뿐입니다(progress_push가 그렇게 막습니다).
+//   진도의 원본은 여전히 학생 브라우저의 localStorage이고, 여기 있는 건 사본입니다.
+//   그래서 이 표가 비어 있어도 학생 진도가 사라진 건 아닙니다 —
+//   아직 안 올라왔거나, 그 학생이 체험 계정인 것뿐입니다.
+const _PG_LV = ['L1','L2','L3','L4','L5','L6'];
+const _PG_EP_PER_LV = 12;
+
+function _pgWhen(iso){
+  if(!iso) return '—';
+  const d = new Date(iso), mins = Math.floor((new Date() - d) / 60000);
+  if (mins < 1)   return '방금';
+  if (mins < 60)  return mins + '분 전';
+  if (mins < 1440) return Math.floor(mins/60) + '시간 전';
+  const days = Math.floor(mins/1440);
+  if (days < 30)  return days + '일 전';
+  return d.toLocaleDateString('ko-KR', { month:'short', day:'numeric' });
+}
+function _pgBars(byLevel){
+  const b = byLevel || {};
+  return _PG_LV.map(lv=>{
+    const n = b[lv] || 0;
+    const pct = Math.round(n / _PG_EP_PER_LV * 100);
+    const col = n ? '#34c78a' : '#2a2d38';
+    return `<span title="${lv} — ${n}/${_PG_EP_PER_LV}편"
+      style="display:inline-block;width:26px;height:7px;border-radius:4px;margin-right:3px;
+             background:linear-gradient(to right,${col} ${pct}%,#2a2d38 ${pct}%)"></span>`;
+  }).join('') + `<span style="font-size:0.7rem;color:#6f727e;margin-left:4px">L1–L6</span>`;
+}
+function _pgTests(tests){
+  if(!tests) return '—';
+  const out = [];
+  if (tests.placement && tests.placement.lv) out.push('배치 → L' + tests.placement.lv);
+  Object.keys(tests).forEach(k=>{
+    if (k.indexOf('test_') !== 0) return;
+    const t = tests[k];
+    if (t && typeof t.pct === 'number') out.push(k.replace('test_','') + ' ' + t.pct + '%');
+  });
+  return out.length ? out.join(' · ') : '—';
+}
+
+async function loadProgress(){
+  const wrap = document.getElementById('progressList');
+  if(!wrap) return;
+  if(!_adminToken){
+    wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">다시 로그인하면 진도를 볼 수 있어요.</div>';
+    return;
+  }
+  try{
+    const { data, error } = await sb.rpc('progress_report', { p_token: _adminToken });
+    if (error) throw error;
+    if (data && data.error) throw new Error(
+      data.error === 'denied' ? '진도를 볼 권한이 없어요.' : '로그인이 만료됐어요. 다시 로그인해 주세요.');
+    const list = Array.isArray(data) ? data : [];
+    if(!list.length){
+      wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;line-height:1.7;">'
+        + '아직 올라온 진도가 없어요.<br>'
+        + '<span style="font-size:0.78rem">정식 학생이 퀴즈를 채점하면 몇 초 뒤에 여기 나타납니다. '
+        + '체험 계정은 기록되지 않아요.</span></div>';
+      return;
+    }
+    wrap.innerHTML = `
+      <div class="mm-scroll"><table class="member-table">
+        <thead><tr>
+          <th>학생</th><th>레벨별 진행</th><th>끝낸 편</th><th>⭐</th>
+          <th>단어</th><th>시험</th><th>마지막 학습</th>
+        </tr></thead>
+        <tbody>
+          ${list.map(r=>`
+          <tr class="member-row">
+            <td style="font-weight:600">${r.display_name || r.member_name}
+              <div style="font-family:monospace;font-size:0.72rem;color:var(--muted)">${r.member_name}</div></td>
+            <td style="white-space:nowrap">${_pgBars(r.by_level)}</td>
+            <td>${r.ep_done}<span style="color:var(--muted);font-size:0.78rem"> / 72</span></td>
+            <td>${r.ep_star || 0}</td>
+            <td style="white-space:nowrap">${r.srs_total || 0}개
+              ${r.srs_due ? `<span style="color:var(--amber);font-size:0.75rem">· 복습 ${r.srs_due}</span>` : ''}</td>
+            <td style="font-size:0.78rem">${_pgTests(r.tests)}</td>
+            <td class="mm-when">${_pgWhen(r.updated_at)}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table></div>`;
+  }catch(e){
+    wrap.innerHTML = `<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ${e.message}</div>`;
+  }
+}
 
 // ── 회원 목록 ─────────────────────────────────
 //   members 직접 조회 대신 admin_list_members RPC를 씁니다.
@@ -760,6 +863,7 @@ async function saveMemberPin(memberName) {
 // ── 로그아웃 ─────────────────────────────────
 function doLogout() {
   _adminPw = '';
+  _adminToken = null;
   document.getElementById('loginPw').value   = '';
   document.getElementById('adminPanel').style.display  = 'none';
   document.getElementById('loginScreen').style.display = 'block';
