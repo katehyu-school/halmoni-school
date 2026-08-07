@@ -40,21 +40,6 @@ body {
 .hero h1 { font-size: 30px; font-weight: 700; color: #0a2540; margin-bottom: 8px; }
 .hero p { font-size: 15px; color: #4a6275; }
 
-/* category tabs */
-.cat-tabs {
-  display: flex; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 32px;
-}
-.cat-tab {
-  padding: 6px 16px; border-radius: 20px; font-size: 13px;
-  border: 1.5px solid #d1e8e6; background: #fff;
-  color: #2c7a75; cursor: pointer; transition: all .15s;
-  font-family: inherit;
-}
-.cat-tab.active, .cat-tab:hover {
-  background: #4ecdc4; color: #fff; border-color: #4ecdc4;
-}
-
 /* FAQ accordion */
 .faq-group { margin-bottom: 36px; }
 .faq-group-title {
@@ -155,7 +140,7 @@ footer a { color: #4ecdc4; text-decoration: none; }
   <!-- FAQ groups -->
   <div id="faq-container">
 
-    <div class="faq-group" data-cat="about">
+    <div class="faq-group">
       <div class="faq-group-title">About the School · 학교 소개</div>
 
       <div class="faq-item">
@@ -192,7 +177,7 @@ footer a { color: #4ecdc4; text-decoration: none; }
       </div>
     </div>
 
-    <div class="faq-group" data-cat="classes">
+    <div class="faq-group">
       <div class="faq-group-title">How It Works · 이용 방법</div>
 
       <div class="faq-item">
@@ -201,8 +186,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Hangeul Quest is a self-paced web app — no live video sessions to attend. Log in from your browser (no downloads or installs needed) and work through episodes whenever suits you: explore the scene, learn vocabulary and grammar, then practice with quizzes and shadowing exercises.
-          <div class="ko">Hangeul Quest는 라이브 화상 수업 없이 스스로 학습하는 웹 앱입니다. 별도 설치 없이 브라우저에서 로그인해, 원하는 시간에 장면을 보고 어휘·문법을 익힌 뒤 퀴즈와 쉐도잉으로 연습합니다.</div>
+          It is a self-paced web app — no live sessions, nothing to install, no need to log in. Open it in your browser and work through episodes whenever suits you: watch the scene, learn the vocabulary and grammar behind what was said, then practise with quizzes, writing and shadowing.
+          <div class="ko">라이브 수업 없이 스스로 학습하는 웹 앱입니다. 설치할 것도, 로그인할 필요도 없이 브라우저에서 열고 원하는 시간에 하시면 됩니다. 장면을 보고, 거기서 오간 말의 어휘와 문법을 익히고, 퀴즈·쓰기·쉐도잉으로 연습합니다.</div>
         </div></div>
       </div>
 
@@ -212,8 +197,8 @@ footer a { color: #4ecdc4; text-decoration: none; }
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Not for Hangeul Quest — it's entirely self-guided, so there's no scheduled class or cohort to join. (Hangeul Quest Kids does include live sessions, but it is a private family class and not open to the public.)
-          <div class="ko">Hangeul Quest는 라이브 수업이나 정해진 반이 없는 완전한 셀프 학습입니다. (Hangeul Quest Kids는 라이브 수업이 있지만 비공개 가족 수업이라 공개하지 않습니다.)</div>
+          No — Hangeul Quest is entirely self-guided, so there is no scheduled class or cohort to join. If you get stuck, you can ask on the message board and I answer there.
+          <div class="ko">없습니다. 라이브 수업이나 정해진 반 없이 스스로 하는 학습입니다. 막히는 곳이 있으면 게시판에 물어보시면 제가 답을 답니다.</div>
         </div></div>
       </div>
 
@@ -230,18 +215,17 @@ footer a { color: #4ecdc4; text-decoration: none; }
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggle(this)">
-          Which track is right for us — Hangeul Quest or Hangeul Quest Kids?
+          Can I use it on my phone?
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          <strong>Hangeul Quest</strong> is for ages 13 and up through adults — a self-guided app with episode-style storytelling covering vocabulary, grammar, reading, and listening in depth. It's currently open to new users.<br><br>
-          <strong>Hangeul Quest Kids</strong> (ages 6–12) is a private family class. Because it is taught to young children, it will not be opened to the public.
-          <div class="ko">Hangeul Quest(13세 이상·성인)는 셀프 학습 앱이고 누구나 쓰실 수 있습니다. Kids(6~12세)는 <strong>비공개 가족 수업</strong>입니다. 어린이를 대상으로 한 수업이라서 앞으로도 공개할 계획이 없습니다.</div>
+          Yes. There is a mobile version at <a href="/hq-mobile.html">hangeulquest.com/hq-mobile.html</a>, made for short sessions — five or ten minutes of review, flashcards and word practice. The full app opens on a phone too, but the mobile version is easier on a small screen. Nothing to install either way.<br><br>One thing to know: within the same browser your progress carries over, but it does not yet travel between your computer and your phone.
+          <div class="ko">됩니다. <a href="/hq-mobile.html">hangeulquest.com/hq-mobile.html</a>에 모바일 버전이 있습니다 — 5~10분 짧게 복습하고 단어를 연습하는 용도예요. 웹 앱도 폰에서 열리지만 작은 화면에서는 모바일 쪽이 편합니다. 어느 쪽이든 설치할 건 없습니다.<br><br>한 가지만 알아 두세요 — 같은 브라우저 안에서는 진도가 이어지지만, 컴퓨터와 폰 사이에는 아직 이어지지 않습니다.</div>
         </div></div>
       </div>
     </div>
 
-    <div class="faq-group" data-cat="schedule">
+    <div class="faq-group">
       <div class="faq-group-title">Getting Started · 시작하기</div>
 
       <div class="faq-item">
@@ -263,17 +247,6 @@ footer a { color: #4ecdc4; text-decoration: none; }
         <div class="faq-a"><div class="faq-a-inner">
           🌱 Start Here and <strong>Levels 1–2</strong> are open to everyone — no account needed. That is two full levels, 24 episodes, with the vocabulary, grammar, quizzes and closing tests that go with them.<br><br>Levels 3 and up are locked for now: they are being tested with real students. They will open once they are ready.
           <div class="ko">🌱 Start Here와 <strong>Level 1·2</strong>는 계정 없이 누구나 보실 수 있습니다. 두 레벨 24편 전체와 어휘·문법·퀴즈·마감 테스트까지 그대로 열려 있습니다.<br><br>Level 3 이상은 실제 학생들을 대상으로 테스트 중이라 잠겨 있습니다. 준비되는 대로 열립니다.</div>
-        </div></div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          Can I use these materials in my own class?
-          <span class="arrow">▾</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">
-          Yes, please do. The text and grammar explanations are released under <a href="/license.html">CC BY-NC-SA 4.0</a> — teachers may use, print and adapt them for their own students, with credit. The only exception is the audio and slide images, which may be played on this site but not redistributed.
-          <div class="ko">네, 그러셔도 됩니다. 글과 문법 설명은 <a href="/license.html">CC BY-NC-SA 4.0</a>으로 공개하고 있어서, 선생님들은 출처만 밝히면 수업에 쓰시고 인쇄하시고 반에 맞게 고쳐 쓰실 수 있습니다. 음성과 슬라이드 이미지만 예외로, 사이트 안에서 재생만 가능하고 재배포는 안 됩니다.</div>
         </div></div>
       </div>
 
@@ -301,17 +274,17 @@ footer a { color: #4ecdc4; text-decoration: none; }
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggle(this)">
-          Is Hangeul Quest Kids currently accepting new students?
+          I forgot my PIN.
           <span class="arrow">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
-          Hangeul Quest Kids (ages 6–12) is a <strong>private family class</strong>. Because it is taught to young children, it will not be opened to the public. If you are looking for Korean lessons, <strong>Hangeul Quest</strong> (ages 13 and up) is the open one — and it is free.
-          <div class="ko">Kids(6~12세)는 <strong>비공개 가족 수업</strong>입니다. 어린이를 대상으로 한 수업이라서 앞으로도 공개할 계획이 없습니다. 한국어 수업을 찾고 계시다면 열려 있는 쪽은 <strong>Hangeul Quest</strong>(13세 이상)이고, 무료입니다.</div>
+          There is no way to recover it, I'm afraid. I don't ask for an email address, so there is nothing to send a reset to — which is also why an account costs you no personal information. Just make a new one under a different name; it takes a few seconds.<br><br>Your study progress is not lost: it lives in your browser. Open 📓 My Notes and pick your old name to carry on where you were.
+          <div class="ko">찾아 드릴 방법이 없습니다. 메일 주소를 받지 않아서 PIN을 보내 드릴 곳이 없거든요 — 대신 계정을 만드실 때 개인정보를 하나도 안 내셔도 되는 이유이기도 합니다. 다른 이름으로 새로 만드시면 됩니다. 몇 초면 돼요.<br><br>진도는 사라지지 않습니다. 브라우저 안에 남아 있어서, 📓 My Notes에서 예전 이름을 고르시면 그대로 이어집니다.</div>
         </div></div>
       </div>
     </div>
 
-    <div class="faq-group" data-cat="curriculum">
+    <div class="faq-group">
       <div class="faq-group-title">Curriculum · 커리큘럼</div>
 
       <div class="faq-item">
@@ -344,6 +317,43 @@ footer a { color: #4ecdc4; text-decoration: none; }
         <div class="faq-a"><div class="faq-a-inner">
           Yes. The levels are built around TOPIK: Levels 1–2 cover TOPIK I (beginner), Levels 3–4 aim at TOPIK 3–4, and Levels 5–6 reach into TOPIK 4–5 with news articles, essays and modern Korean short stories. Each level ends with a closing test in TOPIK format, and the writing section follows TOPIK questions 51–53.
           <div class="ko">네. 레벨 자체가 TOPIK 기준으로 설계돼 있습니다. Level 1·2는 TOPIK I(초급), Level 3·4는 3~4급, Level 5·6은 뉴스 기사·논술·근현대 단편소설을 다루며 4~5급까지 올라갑니다. 레벨마다 TOPIK 형식의 마감 테스트가 있고, 쓰기는 TOPIK 51~53번 유형을 따릅니다.</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="faq-group">
+      <div class="faq-group-title">Other Questions · 그 밖에</div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          Can I use these materials in my own class?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Yes, please do. The text and grammar explanations are released under <a href="/license.html">CC BY-NC-SA 4.0</a> — teachers may use, print and adapt them for their own students, with credit. The only exception is the audio and slide images, which may be played on this site but not redistributed.
+          <div class="ko">네, 그러셔도 됩니다. 글과 문법 설명은 <a href="/license.html">CC BY-NC-SA 4.0</a>으로 공개하고 있어서, 선생님들은 출처만 밝히면 수업에 쓰시고 인쇄하시고 반에 맞게 고쳐 쓰실 수 있습니다. 음성과 슬라이드 이미지만 예외로, 사이트 안에서 재생만 가능하고 재배포는 안 됩니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          What happens to my information?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Very little is collected. To study you need to give nothing at all. If you make an account, what is stored is the name you picked and your PIN — no email address, no phone number, no real name.<br><br>Your study progress is kept in your own browser, not on a server. Full details are in the <a href="/privacy.html">Privacy Policy</a>.
+          <div class="ko">모으는 것이 거의 없습니다. 공부하시는 데는 아무것도 내실 필요가 없고, 계정을 만드셔도 정하신 이름과 PIN만 저장됩니다 — 메일 주소도, 전화번호도, 실명도 받지 않습니다.<br><br>진도는 서버가 아니라 쓰시는 브라우저 안에 저장됩니다. 자세한 내용은 <a href="/privacy.html">개인정보처리방침</a>에 있습니다.</div>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggle(this)">
+          What about Hangeul Quest Kids?
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Hangeul Quest Kids</strong> (ages 6–12) is a private family class with live sessions, and it will not be opened to the public — it is taught to young children.<br><br>The open one is <strong>Hangeul Quest</strong>, for ages 13 through adult. That is this site, and it is free.
+          <div class="ko"><strong>Hangeul Quest Kids</strong>(6~12세)는 라이브 수업이 있는 <strong>비공개 가족 수업</strong>이고, 어린이를 대상으로 한 수업이라 앞으로도 공개하지 않습니다.<br><br>열려 있는 쪽은 13세 이상·성인을 위한 <strong>Hangeul Quest</strong>입니다. 지금 보고 계신 이곳이고, 무료입니다.</div>
         </div></div>
       </div>
     </div>
