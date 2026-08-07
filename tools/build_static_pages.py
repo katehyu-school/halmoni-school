@@ -528,11 +528,22 @@ def build(levels):
     sm.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")
 
+    # 🔒 슬라이드·음성·영상은 검색·AI 크롤러가 긁어가지 않도록 차단합니다.
+    #    Kids 슬라이드는 실사에서 파생된 캐릭터라 아이들 초상과 이어집니다.
+    #    JSON 은 막지 않습니다(앱이 읽어야 하고, 글자는 정적 페이지로 이미 공개).
     (ROOT / "robots.txt").write_text(
         "User-agent: *\n"
         "Allow: /\n"
         "Disallow: /admin.html\n"
         "Disallow: /dashboard.html\n"
+        "\n# 이미지·음성·영상 — 크롤링 금지\n"
+        "Disallow: /data/elem/\n"
+        "Disallow: /data/*/slides/\n"
+        "Disallow: /data/*/TTS/\n"
+        "Disallow: /data/*/videos/\n"
+        "\n# 이미지 검색에도 넣지 않음\n"
+        "User-agent: Googlebot-Image\n"
+        "Disallow: /data/\n"
         f"\nSitemap: {SITE}/sitemap.xml\n",
         encoding="utf-8")
 

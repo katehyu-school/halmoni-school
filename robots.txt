@@ -3,4 +3,14 @@ Allow: /
 Disallow: /admin.html
 Disallow: /dashboard.html
 
+# 이미지·음성·영상 — 크롤링 금지
+Disallow: /data/elem/
+Disallow: /data/*/slides/
+Disallow: /data/*/TTS/
+Disallow: /data/*/videos/
+
+# 이미지 검색에도 넣지 않음
+User-agent: Googlebot-Image
+Disallow: /data/
+
 Sitemap: https://hangeulquest.com/sitemap.xml
