@@ -164,6 +164,8 @@ th{background:#f3f4f6;font-weight:700}
 ul.ex{list-style:none;padding:0;margin:10px 0}
 ul.ex li{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}
 ul.ex .ko{font-weight:600}
+ul.ex .spk{color:var(--teal);font-weight:700}
+ul.ex .spk::after{content:':';color:var(--mute);font-weight:400;margin:0 6px 0 1px}
 ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .scene{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:14px 18px;margin:16px 0}
 .cta{display:block;background:var(--teal);color:#06302c!important;text-decoration:none;font-weight:700;
@@ -370,7 +372,7 @@ def episode_body(ep, lv, gram_links):
             for c in chars:
                 if c.get("id") == line.get("speaker"):
                     spk = c.get("name", "")
-            pre = f"<b>{esc(spk)}</b> " if spk else ""
+            pre = f"<b class='spk'>{esc(spk)}</b>" if spk else ""
             out += (f"<li>{pre}<span class='ko'>{rich(line.get('text',''))}</span>"
                     f"<span class='en'>{rich(line.get('en',''))}</span></li>")
         parts.append(out + "</ul>")

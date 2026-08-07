@@ -1495,12 +1495,37 @@ function openFoundMap(){renderFoundMap();show('scr-found-map')}
 /* ───────── HQ: episode data (fetch from data/nhs/L1) ───────── */
 /* ── 레벨별 에피소드 인덱스 — 웹과 같은 소스(data/nhs/episodes_index.json) ──
    편이 추가되면 이 파일만 갱신되면 앱 목록도 자동으로 따라옵니다. */
+// ── 🔐 접근 등급 (2026-08-06) — 웹(nhs.html)과 같은 규칙 ────────
+//   로그인 토큰 없음  →  Level 1~2
+//   정식 회원          →  전 레벨
+//   되돌리려면 HQM_OPEN_MAX 를 6 으로.
+function _hqmUser(){
+  try { return JSON.parse(localStorage.getItem('hq_user')
+                       || sessionStorage.getItem('hq_user') || 'null'); }
+  catch(e) { return null; }
+}
+const HQM_ROLE = (function(){ const u=_hqmUser(); return (u&&u.role)||null; })();
+const HQM_IS_MEMBER = ['admin','teacher','student'].indexOf(HQM_ROLE) >= 0;
+const HQM_OPEN_MAX = HQM_IS_MEMBER ? 6 : 2;
+function hqmLocked(lv){ return parseInt(String(lv).replace('L',''),10) > HQM_OPEN_MAX; }
+
 const HQ_LEVELS=['L1','L2','L3','L4','L5','L6'];
 let EP_INDEX=null;
 const _epIdxReady=fetch('data/nhs/episodes_index.json')
   .then(r=>r.json()).then(d=>{EP_INDEX=d;return d}).catch(e=>null);
-function hqLv(){try{return localStorage.getItem('hqLv')||'L1'}catch(e){return 'L1'}}
-function hqSetLv(lv){try{localStorage.setItem('hqLv',lv)}catch(e){}showEpList()}
+function hqLv(){
+  let v='L1';
+  try{ v=localStorage.getItem('hqLv')||'L1'; }catch(e){}
+  return hqmLocked(v) ? 'L1' : v;      // 잠긴 레벨이 저장돼 있으면 L1 로
+}
+function hqSetLv(lv){
+  if(hqmLocked(lv)){
+    alert('Level 3부터는 회원만 볼 수 있어요.\n무료 계정을 만들면 바로 열립니다.\n\nLevels 3+ are for members. Create a free account to unlock.');
+    return;
+  }
+  try{localStorage.setItem('hqLv',lv)}catch(e){}
+  showEpList();
+}
 function epArr(lv){return (EP_INDEX&&EP_INDEX[lv])?EP_INDEX[lv]:[]}
 function epMeta(lv,n){return epArr(lv).find(e=>e.id==='ep'+String(n).padStart(2,'0'))||null}
 function epTitle(lv,n){const m=epMeta(lv,n);return m?(m.label||''):''}
@@ -1520,7 +1545,12 @@ async function showEpList(){
   const lv=hqLv();
   const ttl=document.getElementById('epListTitle');
   if(ttl)ttl.textContent='📚 '+lv.replace('L','Level ')+' 에피소드 Episodes';
-  const chips=HQ_LEVELS.map(l=>`<button onclick="hqSetLv('${l}')" style="border:none;border-radius:99px;padding:7px 15px;font-size:.76rem;font-weight:800;cursor:pointer;background:${l===lv?'var(--teal)':'#22333c'};color:${l===lv?'#06231f':'#9fbcb8'}">${l}</button>`).join('');
+  const chips=HQ_LEVELS.map(l=>{const lk=hqmLocked(l);
+    return `<button onclick="hqSetLv('${l}')" style="border:none;border-radius:99px;padding:7px 15px;font-size:.76rem;font-weight:800;cursor:pointer;opacity:${lk?.45:1};background:${l===lv?'var(--teal)':'#22333c'};color:${l===lv?'#06231f':'#9fbcb8'}">${l}${lk?' 🔒':''}</button>`;}).join('');
+  const lockNote = HQM_IS_MEMBER ? '' :
+    '<div style="background:#22333c;border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:.7rem;color:#9fbcb8;line-height:1.6">'
+    +'👋 지금 <b style="color:var(--teal)">Level 1·2</b>를 보고 계세요 · Level 3부터는 무료 계정이 필요해요<br>'
+    +'<a href="index.html" style="color:var(--teal)">계정 만들기 · Create a free account</a></div>';
   const arr=epArr(lv);
   const list=arr.length?arr.map(e=>{
     const n=parseInt(e.id.replace(/\D/g,''),10);
@@ -1531,7 +1561,7 @@ async function showEpList(){
       <span class="arr">→</span></button>`;
   }).join('')
   :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
-  box.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px">${chips}</div>`+list;
+  box.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px">${chips}</div>`+lockNote+list;
 }
 async function loadEp(n,lv){
   lv=lv||'L1';
@@ -1589,6 +1619,10 @@ function normalizeEp(n,d,lv){
 }
 async function openEp(n,lv){
   lv=lv||hqLv();
+  if(hqmLocked(lv)){
+    alert('Level 3부터는 회원만 볼 수 있어요.\n무료 계정을 만들면 바로 열립니다.\n\nLevels 3+ are for members. Create a free account to unlock.');
+    return;
+  }
   show('scr-hq-flow');
   document.getElementById('flowTitle').textContent=`${lv} · ep${String(n).padStart(2,'0')} 로딩 중...`;
   document.getElementById('flowBody').innerHTML='<div class="loading-ep">📡 에피소드를 불러오는 중...</div>';
