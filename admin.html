@@ -436,6 +436,7 @@ body {
     <label class="field-label">관리자 비밀번호</label>
     <div class="pw-row">
       <input class="pw-input" type="password" id="loginPw" placeholder="관리자 비밀번호 입력"
+        autocomplete="current-password"
         onkeydown="if(event.key==='Enter') adminLogin()">
       <button class="eye-btn" id="eyeBtn" onclick="toggleEye()">👁</button>
     </div>
@@ -465,7 +466,15 @@ body {
     </div>
 
     <div class="mm-toolbar">
-      <input class="mm-search" id="mmSearch" placeholder="🔍 이름 또는 로그인 ID로 찾기"
+      <!-- 🔒 브라우저 비밀번호 자동완성 차단 (2026-08-07)
+           같은 페이지에 비밀번호 칸이 있으면 브라우저가 이 검색칸을
+           '아이디 칸'으로 오해해서 저장된 비밀번호를 밀어 넣습니다.
+           autocomplete만으로는 크롬이 무시하는 경우가 있어, 눌러서
+           커서를 놓기 전까지 readonly로 두는 방법을 함께 씁니다. -->
+      <input class="mm-search" id="mmSearch" name="member-filter" type="search"
+        placeholder="🔍 이름 또는 로그인 ID로 찾기"
+        autocomplete="off" autocorrect="off" spellcheck="false"
+        readonly onfocus="this.removeAttribute('readonly')"
         oninput="mmDebounced()">
       <button class="mm-chip on" data-f="all"     onclick="mmSetFilter('all',this)">전체</button>
       <button class="mm-chip"    data-f="member"  onclick="mmSetFilter('member',this)">정식 멤버</button>
@@ -485,19 +494,19 @@ body {
       <div class="pw-grid" style="margin-top:12px;">
         <div class="pw-group">
           <div class="pw-role-label"><span class="role-dot dot-student"></span> 학생 비밀번호</div>
-          <input class="pw-field" type="password" id="newStudent" placeholder="새 비밀번호">
+          <input class="pw-field" type="password" autocomplete="new-password" id="newStudent" placeholder="새 비밀번호">
         </div>
         <div class="pw-group">
           <div class="pw-role-label"><span class="role-dot dot-teacher"></span> 선생님 비밀번호</div>
-          <input class="pw-field" type="password" id="newTeacher" placeholder="새 비밀번호">
+          <input class="pw-field" type="password" autocomplete="new-password" id="newTeacher" placeholder="새 비밀번호">
         </div>
         <div class="pw-group">
           <div class="pw-role-label"><span class="role-dot dot-admin"></span> 관리자 비밀번호</div>
-          <input class="pw-field" type="password" id="newAdmin" placeholder="새 비밀번호">
+          <input class="pw-field" type="password" autocomplete="new-password" id="newAdmin" placeholder="새 비밀번호">
         </div>
         <div class="pw-group">
           <div class="pw-role-label"><span class="role-dot" style="background:#888;"></span> 👀 게스트 비밀번호</div>
-          <input class="pw-field" type="password" id="newGuest" placeholder="새 비밀번호">
+          <input class="pw-field" type="password" autocomplete="new-password" id="newGuest" placeholder="새 비밀번호">
           <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">초대받은 방문자 공용 비밀번호</div>
         </div>
       </div>
@@ -672,6 +681,7 @@ async function loadMemberPins() {
             <td class="mm-when">${_mmWhen(m.last_login_at)}</td>
             <td><div class="pin-inline">
               <input type="password" id="pin-${m.name}" placeholder="새 PIN" maxlength="30"
+                autocomplete="new-password"
                 onkeydown="if(event.key==='Enter') saveMemberPin('${m.name}')">
             </div></td>
             <td style="white-space:nowrap">
