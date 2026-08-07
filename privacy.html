@@ -89,7 +89,7 @@ footer {
   </div>
 
   <h1>Privacy Policy</h1>
-  <p class="effective">Effective date: July 2026 &nbsp;·&nbsp; hangeulquest.com</p>
+  <p class="effective">Effective date: August 2026 &nbsp;·&nbsp; hangeulquest.com</p>
 
   <div class="highlight">
     Hangeul Quest is a small, family-run online Korean language school. We collect only the minimum information needed to run our classes. We do not sell or share your data with advertisers or third parties.
@@ -103,7 +103,8 @@ footer {
     <li><strong>Name and display name</strong> — used to identify you in class and in the attendance record.</li>
     <li><strong>Login ID and PIN</strong> — used to authenticate you when you sign in. PINs are verified server-side and are never exposed to the browser.</li>
     <li><strong>Attendance records</strong> — date, time, and status (present / absent / late) of each class session.</li>
-    <li><strong>Learning progress</strong> — quiz scores and completed episodes, stored locally in your browser (localStorage). This data stays on your device and is not sent to our servers.</li>
+    <li><strong>Learning progress</strong> — completed episodes, quiz and test scores, and vocabulary review status. This is stored in your browser (localStorage). For enrolled students it is also copied to our server, so the teacher can see how lessons are going and so a record survives a lost or cleared browser. Visitors without an account, and trial accounts, are never copied to the server.</li>
+    <li><strong>Notes and writing</strong> — anything you type in My Notes, including guided-writing exercises, stays in your browser only. It is never sent to our server.</li>
   </ul>
   <p>We do not collect your email address, home address, phone number, or payment information through the app.</p>
 
@@ -111,13 +112,14 @@ footer {
   <ul>
     <li>To let you log in and access your class materials.</li>
     <li>To record attendance for the teacher's reference.</li>
+    <li>To let the teacher see how enrolled students are progressing, and to improve the lessons where learners get stuck.</li>
     <li>To personalize your in-class experience (e.g., displaying your name on the welcome screen).</li>
   </ul>
   <p>We do not use your information for advertising, automated profiling, or any purpose beyond running the class.</p>
 
   <h2>4. How We Store Your Information</h2>
   <p>Student data (names, PINs, attendance) is stored in <strong>Supabase</strong>, a cloud database service with encryption at rest and in transit. Access is protected by Row-Level Security policies — anonymous visitors cannot read PINs or sensitive fields.</p>
-  <p>Learning progress data (quiz scores, completed episodes) is stored in your browser's localStorage and never leaves your device.</p>
+  <p>Learning progress is kept in your browser's localStorage. For enrolled students a copy is also stored in Supabase alongside the account it belongs to, under the same Row-Level Security protection — it can only be read by the teacher. Notes and writing are never copied; they remain in your browser.</p>
 
   <h2>5. Third-Party Services</h2>
   <ul>
