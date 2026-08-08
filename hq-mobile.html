@@ -827,6 +827,9 @@ function _progPushNow(){
     const u = _progUser();  if(!u) return;
     const own = _sProfile();
     if(own !== '@' + u.name) return;   // 진도의 주인이 이 계정일 때만
+    const payload = _progCollect(own);
+    // 🔒 빈 진도로 서버를 덮어쓰지 않습니다 (새 기기·브라우저 데이터 삭제 직후)
+    if(Object.keys(payload).length === 0) return;
     const cfg = window.HQ_SUPABASE; if(!cfg) return;
     fetch(cfg.URL + '/rest/v1/rpc/progress_push', {
       method : 'POST',
@@ -834,7 +837,7 @@ function _progPushNow(){
                  'apikey': cfg.KEY, 'Authorization': 'Bearer ' + cfg.KEY },
       body   : JSON.stringify({ p_token:u.token,
                                 p_profile:(u.display_name || u.name),
-                                p_data:_progCollect(own) })
+                                p_data:payload })
     }).catch(function(){});
   }catch(e){}
 }

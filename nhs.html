@@ -3153,9 +3153,14 @@ function _progPushNow(){
     if(!window.HQ_SUPABASE) return;
     const sb = window.HQ_SUPABASE.client();
     if(!sb) return;
+    const payload = _progCollect(own);
+    // 🔒 빈 진도로 서버를 덮어쓰지 않습니다.
+    //    새 기기·새 주소·브라우저 데이터 삭제 직후에는 로컬이 비어 있는데,
+    //    그대로 보내면 서버에 쌓인 기록이 그 순간 지워집니다.
+    if(Object.keys(payload).length === 0) return;
     sb.rpc('progress_push', { p_token: u.token,
                               p_profile: (u.display_name || u.name),
-                              p_data: _progCollect(own) })
+                              p_data: payload })
       .catch(function(){ /* 조용히 무시 */ });
   }catch(e){ /* 조용히 무시 — 로컬은 그대로입니다 */ }
 }
