@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// core/my-space.js — Hangeul Quest Kids · My Space module
+// core/my-space.js — Doranchae Kids · My Space module
 // Self-contained: injects own CSS, HTML, and all JS functions.
 // ═══════════════════════════════════════════════════════════════
 

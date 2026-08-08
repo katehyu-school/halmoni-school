@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// core/board.js — Hangeul Quest · 게시판 (Board) module
+// core/board.js — Doranchae · 게시판 (Board) module
 // Self-contained: injects own CSS, HTML, and all JS functions.
 // Backed by Supabase (public.board_posts) so students and the
 // teacher can see the same posts/replies across devices.

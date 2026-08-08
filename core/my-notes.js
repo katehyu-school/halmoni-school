@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// core/my-notes.js — Hangeul Quest · My Notes module
+// core/my-notes.js — Doranchae · My Notes module
 // Self-contained: injects own CSS, HTML, and all JS functions.
 // ═══════════════════════════════════════════════════════════════
 

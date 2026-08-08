@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Hangeul Quest — 정적 학습 페이지 생성기
+Doranchae (구 Hangeul Quest) — 정적 학습 페이지 생성기
 =====================================
 data/nhs/L*/ep*.json 에 이미 들어 있는 내용으로 **검색엔진이 읽을 수 있는**
 정적 HTML 페이지를 만든다. 새 콘텐츠를 쓰는 게 아니라 "주소를 붙이는" 작업.
@@ -204,7 +204,7 @@ def page(title, desc, body, canonical, jsonld=None):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{esc(canonical)}">
-<meta property="og:site_name" content="Hangeul Quest">
+<meta property="og:site_name" content="Doranchae">
 <link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -212,12 +212,12 @@ def page(title, desc, body, canonical, jsonld=None):
 <style>{CSS}</style>{ld}
 </head>
 <body>
-<header class="site"><a href="/learn/">Hangeul <span>Quest</span> · 한국어 학습 자료</a></header>
+<header class="site"><a href="/learn/">Doran<span>chae</span> · 한국어 학습 자료</a></header>
 <main>
 {body}
 <footer>
 {esc(LICENSE_LINE)}{note}<br>
-<a href="/">Hangeul Quest 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
+<a href="/">Doranchae 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
 </footer>
 </main>{beacon}
 </body>
@@ -450,7 +450,7 @@ def build(levels):
                     i += 1
                 used_slugs.add(slug)
 
-                title = f"{g['title']} — 한국어 문법 | Hangeul Quest"
+                title = f"{g['title']} — 한국어 문법 | Doranchae"
                 desc = meta_desc(g.get("explanation_en") or g.get("rule") or g.get("title_en"))
                 canon = f"{SITE}/learn/grammar/{slug}.html"
                 ld = {
@@ -472,7 +472,7 @@ def build(levels):
                 gram_links.append((slug, g["title"], g.get("title_en", "")))
                 n_gram += 1
 
-            title = f"{ep['title']} — {lvl_name} 한국어 에피소드 | Hangeul Quest"
+            title = f"{ep['title']} — {lvl_name} 한국어 에피소드 | Doranchae"
             desc = meta_desc((ep.get("goal") or {}).get("ko"), ep.get("title_en"))
             canon = f"{SITE}/learn/episode/{ep_slug}.html"
             ld = {
@@ -513,7 +513,7 @@ def build(levels):
         b.append("</div>")
     written.add(OUT / "index.html")
     (OUT / "index.html").write_text(
-        page("한국어 학습 자료 — 문법·어휘·이야기 | Hangeul Quest",
+        page("한국어 학습 자료 — 문법·어휘·이야기 | Doranchae",
              "한국어 문법 설명과 어휘, 이야기 기반 에피소드. 한국어 선생님이 직접 만든 학습 자료입니다.",
              "\n".join(b), f"{SITE}/learn/"),
         encoding="utf-8")
