@@ -328,7 +328,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen on" id="scr-profile">
   <div class="proto-badge">PROTOTYPE v0.2</div>
   <div>
-    <svg width="96" height="105" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg"><path d="M18 52 Q22 47 29 51 L55 22 L81 51 Q88 47 92 52" fill="none" stroke="#4ECDC4" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 52 L55 22 L92 52" fill="#4ECDC4" opacity="0.07"/><line x1="20" y1="54" x2="90" y2="54" stroke="#4ECDC4" stroke-width="1" opacity="0.5"/><line x1="36" y1="54" x2="36" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><line x1="55" y1="54" x2="55" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><line x1="74" y1="54" x2="74" y2="60" stroke="#4ECDC4" stroke-width="0.9" opacity="0.3"/><rect x="24" y="66" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/><circle cx="35" cy="79" r="7.5" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><rect x="24" y="94" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/><line x1="55" y1="64" x2="55" y2="100" stroke="#4ECDC4" stroke-width="0.5" opacity="0.2"/><rect x="62" y="66" width="24" height="2.4" rx="1.2" fill="#FF6B6B"/><rect x="83" y="66" width="2.4" height="30" rx="1.2" fill="#FF6B6B"/><text x="55" y="112" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="7" fill="#4ECDC4" letter-spacing="1.5">DORANCHAE</text></svg>
+    <svg width="96" height="78" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg"><path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/><path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.07"/><line x1="156" y1="100" x2="284" y2="100" stroke="#4ECDC4" stroke-width="1.2" opacity="0.5"/><line x1="180" y1="100" x2="180" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="220" y1="100" x2="220" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="260" y1="100" x2="260" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/><rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><line x1="219" y1="114" x2="219" y2="158" stroke="#4ECDC4" stroke-width="0.6" opacity="0.2"/><circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/><rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/><line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/><line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/></svg>
     <div class="logo-txt" style="margin-top:8px">DORANCHAE</div>
     <div class="sub" style="margin-top:6px">누가 학습할까요? · Who's learning today?</div>
   </div>
@@ -925,7 +925,7 @@ async function vocabOpen(){
   const b=document.getElementById('vocabBody');
   b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
   try{await _sLoadVocab()}catch(e){
-    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b></div>';return;
+    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b></div>';return;
   }
   vocabRender();
 }
@@ -1000,7 +1000,7 @@ async function srsStart(){
   const b=document.getElementById('srsBody');
   b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
   try{await _sLoadVocab()}catch(e){
-    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b></div>';return;
+    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b></div>';return;
   }
   _sBuildDeck();srsRender();
 }
@@ -1502,7 +1502,7 @@ async function openFound(n){
   document.getElementById('fgBody').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ FNode=await loadFound(n) }
   catch(e){
-    document.getElementById('fgBody').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('fgBody').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('fgTitle').textContent='오프라인';
     return;
   }
@@ -1644,7 +1644,7 @@ async function showEpList(){
       <span><div class="ep-ti">${tag}${e.label||''}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
       <span class="arr">→</span></button>`;
   }).join('')
-  :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+  :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
   box.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px">${chips}</div>`+lockNote+list;
 }
 async function loadEp(n,lv){
@@ -1714,7 +1714,7 @@ async function openEp(n,lv){
     await _epIdxReady;
     EP=await loadEp(n,lv);
   }catch(e){
-    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('flowTitle').textContent='오프라인';
     return;
   }
@@ -1963,7 +1963,7 @@ async function openL2(n){
   document.getElementById('l2Body').innerHTML='<div class="loading-ep">📡 불러오는 중... Loading...</div>';
   try{ L2=await loadL2(n) }
   catch(e){
-    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요. Can\'t load.<br><br>이 기능은 서버에서 열어야 동작해요 · This needs to be opened from a server:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server · or VS Code Live Server)</div>';
+    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요. Can\'t load.<br><br>이 기능은 서버에서 열어야 동작해요 · This needs to be opened from a server:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b><br>(또는 VS Code Live Server · or VS Code Live Server)</div>';
     document.getElementById('l2Title').textContent='오프라인 · Offline';
     return;
   }
@@ -2125,7 +2125,7 @@ async function openL3(n){
   document.getElementById('l3Body').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ L3=await loadL3(n) }
   catch(e){
-    document.getElementById('l3Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">hangeulquest.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('l3Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('l3Title').textContent='오프라인';
     return;
   }
@@ -3126,7 +3126,7 @@ function shareDownload(){
   ctx.fillStyle='#FF6B6B';ctx.font='900 44px sans-serif';
   ctx.fillText('🔥 연속 학습 8일째!',cv.width/2,1040);
   ctx.fillStyle='#5a7a78';ctx.font='400 26px sans-serif';
-  ctx.fillText('hangeulquest.com',cv.width/2,1210);
+  ctx.fillText('doranchae.com',cv.width/2,1210);
   cv.toBlob(blob=>{
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);

@@ -71,16 +71,16 @@ footer a { color: #4ecdc4; text-decoration: none; }
 <div class="wrap">
 
   <div class="site-brand">
-    <svg width="36" height="40" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 52 Q22 47 29 51 L55 22 L81 51 Q88 47 92 52" fill="none" stroke="#4ECDC4" stroke-width="1.8"/>
-      <path d="M18 52 L55 22 L92 52" fill="#4ECDC4" opacity="0.1"/>
-      <rect x="24" y="66" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/>
-      <rect x="24" y="66" width="2.4" height="30.4" rx="1.2" fill="#4ECDC4"/>
-      <rect x="24" y="94" width="22" height="2.4" rx="1.2" fill="#4ECDC4"/>
-      <circle cx="75" cy="67" r="3" fill="#FF6B6B"/>
-      <rect x="63" y="75" width="24" height="2.4" rx="1.2" fill="#FF6B6B"/>
-      <line x1="75" y1="77.4" x2="66" y2="96" stroke="#FF6B6B" stroke-width="2.4" stroke-linecap="round"/>
-      <line x1="75" y1="77.4" x2="84" y2="96" stroke="#FF6B6B" stroke-width="2.4" stroke-linecap="round"/>
+    <svg width="40" height="32" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg">
+      <path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+      <path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.1"/>
+      <rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/>
+      <rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/>
+      <rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/>
+      <circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/>
+      <rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/>
+      <line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/>
+      <line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/>
     </svg>
     <div class="brand-name"><span>DORANCHAE</span></div>
     <a href="/" class="back-link no-print">← Back to Home</a>
@@ -154,7 +154,7 @@ footer a { color: #4ecdc4; text-decoration: none; }
   </div>
 
   <h2>Sending it to me · 보내는 방법</h2>
-  <p>Press the button below and your email program will open with everything filled in — just send it. If that does not work, print this page, or copy what you typed into an email to <a href="mailto:hangeulquest@gmail.com" style="color:#4ecdc4">hangeulquest@gmail.com</a>.</p>
+  <p>Press the button below and your email program will open with everything filled in — just send it. If that does not work, print this page, or copy what you typed into an email to <a href="mailto:hello@doranchae.com" style="color:#4ecdc4">hello@doranchae.com</a>.</p>
   <p>I will reply with the account name and PIN. Please allow a few days — this is a one-person school.</p>
   <div class="ko">아래 버튼을 누르면 메일 프로그램이 내용이 채워진 채로 열립니다. 보내기만 하시면 됩니다. 잘 안 되면 이 페이지를 인쇄하시거나, 적으신 내용을 그대로 메일로 보내 주셔도 됩니다. 계정 이름과 PIN으로 답장드리겠습니다. 혼자 운영하는 곳이라 며칠 걸릴 수 있습니다.</div>
 
@@ -208,10 +208,10 @@ function sendForm(){
     'Signed : ' + sign,
     'Date   : ' + date,
     '',
-    'Sent from hangeulquest.com/consent.html'
+    'Sent from doranchae.com/consent.html'
   ].join('\n');
 
-  location.href = 'mailto:hangeulquest@gmail.com'
+  location.href = 'mailto:hello@doranchae.com'
     + '?subject=' + encodeURIComponent('Parental consent — ' + child)
     + '&body=' + encodeURIComponent(body);
 }
