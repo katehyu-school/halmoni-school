@@ -48,7 +48,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "nhs"
 OUT = ROOT / "learn"
-SITE = "https://hangeulquest.com"
+SITE = "https://doranchae.com"
 
 DEFAULT_LEVELS = ["L1", "L2"]          # 검증된 범위만 먼저 연다
 ALL_LEVELS = ["L1", "L2", "L3", "L4", "L5", "L6"]
@@ -136,8 +136,10 @@ body{margin:0;background:var(--bg);color:var(--ink);
  line-height:1.75;font-size:17px}
 a{color:#0f766e}
 header.site{background:var(--navy);padding:14px 20px}
-header.site a{color:#fff;text-decoration:none;font-weight:700;letter-spacing:.5px}
-header.site span{color:var(--teal)}
+header.site a.dc-mark{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;
+ font-family:'Gaegu',cursive;font-weight:700;font-size:22px;letter-spacing:.01em}
+header.site a.dc-mark svg{flex-shrink:0}
+header.site .dc-desc{font-family:'Noto Sans KR',sans-serif;font-weight:400;font-size:14px;color:var(--teal);letter-spacing:0}
 main{max-width:780px;margin:0 auto;padding:28px 20px 64px}
 nav.crumb{font-size:14px;color:var(--mute);margin-bottom:18px}
 nav.crumb a{color:var(--mute)}
@@ -208,11 +210,24 @@ def page(title, desc, body, canonical, jsonld=None):
 <link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=Gaegu:wght@700&display=swap" rel="stylesheet">
 <style>{CSS}</style>{ld}
 </head>
 <body>
-<header class="site"><a href="/learn/">Doran<span>chae</span> · 한국어 학습 자료</a></header>
+<header class="site"><a href="/learn/" class="dc-mark">
+  <svg width="24" height="19" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg">
+    <path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+    <path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.1"/>
+    <rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/>
+    <rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/>
+    <rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/>
+    <circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/>
+    <rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/>
+    <line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/>
+    <line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/>
+  </svg>
+  Doranchae<span class="dc-desc"> · 한국어 학습 자료</span>
+</a></header>
 <main>
 {body}
 <footer>
