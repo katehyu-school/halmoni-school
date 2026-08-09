@@ -769,7 +769,7 @@ async function loadMemberPins() {
     wrap.innerHTML = `
       <div class="mm-scroll"><table class="member-table">
         <thead><tr>
-          <th>로그인 ID</th><th>표시명</th><th>등급</th><th>마지막 접속</th><th>새 PIN</th><th></th>
+          <th>로그인 ID</th><th>표시명</th><th>등급</th><th title="Kids(비공개 가정반) 반코드를 받을 수 있는지 — 등급과 별개">Kids 식구</th><th>마지막 접속</th><th>새 PIN</th><th></th>
         </tr></thead>
         <tbody>
           ${list.map(m => `
@@ -780,6 +780,10 @@ async function loadMemberPins() {
               <select class="mm-role-sel" onchange="mmSetRole('${m.name}', this)">
                 ${_MM_ROLES.map(r => `<option value="${r[0]}"${m.role===r[0]?' selected':''}>${r[1]}</option>`).join('')}
               </select>
+            </td>
+            <td style="text-align:center">
+              <input type="checkbox" title="Kids 반코드 접근 허용" ${m.kids_family ? 'checked' : ''}
+                onchange="mmSetKidsFamily('${m.name}', this.checked)">
             </td>
             <td class="mm-when">${_mmWhen(m.last_login_at)}</td>
             <td><div class="pin-inline">
@@ -807,6 +811,10 @@ const _MM_ERR = {
   bad_role:'관리자로는 승격할 수 없어요 (Supabase에서만 가능).',
   notfound:'그런 회원이 없어요.'
 };
+function mmSetKidsFamily(name, on){
+  _mmCall('admin_set_kids_family', { p_target:name, p_on:on },
+    on ? `✅ ${name} Kids 접근 허용` : `✅ ${name} Kids 접근 해제`);
+}
 async function _mmCall(fn, args, okMsg){
   try {
     const { data, error } = await sb.rpc(fn, Object.assign({ p_admin:_adminName, p_pin:_adminPw }, args));

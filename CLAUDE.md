@@ -7,12 +7,24 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🌐 **2026-08-09 완료 (DNS 이전 + 브랜드 크레스트 마감 + Kids 접근권 분리)**
+> — **DNS를 `hangeulquest.com` → `doranchae.com`으로 전환 완료.** Namecheap A레코드 4개(GitHub Pages IP) + `www` CNAME 등록, 기존 URL Redirect Record 삭제, GitHub Pages 커스텀 도메인 설정 확인. `canonical`/`og:url`이 CDN 캐시 지연으로 잠깐 옛 도메인을 보였으나 재확인 후 정상 반영됨(코드·DNS 자체는 처음부터 정상).
+> — `tools/build_static_pages.py`의 `SITE`를 `doranchae.com`으로 바꾸고 재실행 → `learn/` 117개 페이지 + `sitemap.xml`(122 URL) + `robots.txt` 전부 재생성.
+> — **크레스트를 `doranchae_crest.svg` 원본 좌표로 전 파일 통일**(index.html·nhs.html 상단+푸터·hq-mobile.html·HangeulQuest_Presentation_Video.html·privacy/faq/consent.html). 이 작업 중 **hq-mobile.html·발표영상 파일에 옛 "ㅎㄱ" 마크가 그대로 남아 있던 것 발견·수정**(앞선 개명 라운드에서 누락됐던 것).
+> — index.html 워드마크를 "도란채"(Gaegu 폰트, 한글) + "Doranchae"(작은 영문 캡션)로 확정(레이아웃 A). nhs.html 상단 nav 로고는 영문 "Doranchae"에 Gaegu 적용(한글은 못 읽는 독자가 있어 영문 유지, core/nhs.css `.kq-logo`).
+> — 🔴 **Kids(비공개 가정반) 접근권을 role과 분리 — `members.kids_family` 플래그 신설.** 발단: "student면 누구나 Kids 반코드를 받는 거냐"는 질문 → 확인해보니 `class_code_for_member`가 `role in ('student','teacher','admin')`만 보고 내려주고 있어서, **HQ 전용 학생(Mirae)도 Kids 식구(Liam·Lia·Kayo)와 구분 없이 같은 코드를 받고 있었음.** 더 큰 위험은 앞으로 공개 HQ 체험 가입자를 admin이 `student`로 승급시키면 그 사람도 자동으로 Kids 코드를 받게 되는 구조였다는 것.
+>   · **role 체계는 그대로 두고 `kids_family boolean default false` 컬럼만 추가**(role을 새로 쪼개면 여러 RPC의 권한 체크를 다 손봐야 해서 더 위험 — Kids 접근은 학습등급과 별개 축이라 플래그로 분리하는 쪽 선택). 현재 4명(Liam·Lia·Kayo·Mirae) 전부 `true`로 백필, 새 student는 기본 `false`.
+>   · `class_code_for_member` 수정 — **teacher·admin은 그대로 항상 허용**(반 관리 목적), **student는 `kids_family=true`일 때만** 코드 지급. `_kids_code_ok`로 게이트하는 다른 Kids RPC(`class_roster_code`·`practice_*` 등)는 코드 자체로만 검증하므로 **수정 불필요**(확인 완료 — 코드를 손에 넣는 딱 한 관문만 고치면 됨).
+>   · **관리 RPC 신설**: `admin_set_kids_family(p_admin,p_pin,p_target,p_on)` — `_member_is_admin` 확인, admin 계정은 대상에서 제외. `admin_list_members`도 `kids_family` 필드 포함하도록 확장.
+>   · **admin.html 회원 관리 표에 "Kids 식구" 체크박스 열 신설**(`mmSetKidsFamily`) — 등급 드롭다운 옆, 실시간 토글.
+>   · ✅ 검증: DB 재조회로 4명 `true`/나머지 `false` 확인, 파일 null byte 0·`</html>` 확인.
+
 | 앱 | 현재 상태 | 다음 작업 |
 |----|---------|---------|
 | **HQ (nhs.html)** | L1~L6 **전 레벨 12편씩 + 마감테스트 완성 ✅** / 배치테스트 ✅ / 색인 어휘풀 225개 ✅ / 플래시카드 누적+가중 ✅ / 빠른복습 자동생성 ✅ / 오답→편 이동 링크 ✅ / **자기점검 72편 전편 ✅**(L6 62항목 신설, 2026-08-02) / **자기점검 저장 + ✅·⭐ 2단계 진도 ✅**(2026-08-03) / **한국어 학습 목표 화면 노출 + L6 goal.ko 12편 ✅**(2026-08-03) | 🔴 **브랜드 교체 — `도란채/Doranchae`로 코드 이름 바꾸기**(로고·도메인·메일 준비 완료) → L6 마감테스트 **듣기 5개 녹음**(Typecast, 8/13 크레딧 복구 후) |
 | **HQ Kids (korean-app_v2.html)** | L1~L4 완성 ✅ (L2 9과 · L3 10과 · L4 10과) / 캐릭터 개명 완료 ✅ / **반 코드 잠금 ✅** (2026-08-02) | 모바일 Kids 콘텐츠가 L3 1과까지만 — 채울지 판단 필요 |
 | **모바일 앱 (hq-mobile.html)** | **L1~L6 전 레벨 연동 완료 ✅** (2026-08-02) / **진도 서버 전송 ✅**(2026-08-07, fetch 직접) | PWA · **진도 내려받기(pull)** — 지금은 올리기만 함 |
-| **멤버/출석 시스템** | 이름+PIN 로그인 ✅ / 출석부 패널 ✅ / **DB 보안 완결 ✅** / **회원 관리 개편 완료 ✅**(2026-08-05 — 검색·필터·등급 변경·차단, 명단 노출 차단, 체험 하루 5개+30일 만료) | 체험 계정에 Google 로그인 얹기(선택) |
+| **멤버/출석 시스템** | 이름+PIN 로그인 ✅ / 출석부 패널 ✅ / **DB 보안 완결 ✅** / **회원 관리 개편 완료 ✅**(2026-08-05 — 검색·필터·등급 변경·차단, 명단 노출 차단, 체험 하루 5개+30일 만료) / **Kids 접근권 role과 분리 ✅**(`kids_family` 플래그, 2026-08-09) | 체험 계정에 Google 로그인 얹기(선택) |
 | **게시판 (core/board.js)** | **댓글형 소통 창구로 개편 ✅ + 📌 공지 고정 ✅** (2026-08-03) | — |
 
 > 💬 **2026-08-03 완료 (게시판 댓글화 + 공지 · `?name=` 버그 · 매뉴얼 정정)** — 다음 세션은 이 블록부터 볼 것:
