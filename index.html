@@ -20,7 +20,7 @@
 <meta name="google-site-verification" content="x-HGbWYi7UanTShvljasEU-8x1GcIbocHDtImha-Qbo">
 <link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Gaegu:wght@700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -83,13 +83,17 @@ body::before {
 }
 
 .site-title {
-  font-family: Impact, 'Arial Narrow', sans-serif;
-  font-size: clamp(34px, 6vw, 62px);
-  font-weight: 900; letter-spacing: .14em;
-  color: #fff; line-height: 1.1; margin-bottom: 10px; text-transform: uppercase;
+  font-family: 'Gaegu', sans-serif;
+  font-size: clamp(38px, 8vw, 64px);
+  font-weight: 700; letter-spacing: .02em;
+  color: #4ecdc4; line-height: 1; margin-bottom: 8px;
 }
-.site-title .hq-teal { color: #4ecdc4; }
-.site-title .hq-white { color: #ffffff; }
+.site-title-en {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500; font-size: 15px; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255,255,255,.72);
+  margin-bottom: 10px;
+}
 
 .site-subtitle {
   font-size: 11px; letter-spacing: .22em;
@@ -385,7 +389,8 @@ body::before {
   .corner { width: 48px; height: 48px; }
   .wrap { padding: 32px 16px 56px; }
   .crest svg { width: 80px; height: 65px; }
-  .site-title { font-size: clamp(28px, 9vw, 44px); letter-spacing: .08em; }
+  .site-title { font-size: clamp(32px, 11vw, 48px); }
+  .site-title-en { font-size: 12px; letter-spacing: .18em; }
   .site-subtitle { font-size: 10px; letter-spacing: .14em; }
   .pw-input { font-size: 16px; }
   .features { gap: 8px; }
@@ -523,7 +528,8 @@ body::before {
     <div class="crest">
       <svg width="110" height="89" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg"><path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/><path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.07"/><line x1="156" y1="100" x2="284" y2="100" stroke="#4ECDC4" stroke-width="1.2" opacity="0.5"/><line x1="180" y1="100" x2="180" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="220" y1="100" x2="220" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="260" y1="100" x2="260" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/><rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><line x1="219" y1="114" x2="219" y2="158" stroke="#4ECDC4" stroke-width="0.6" opacity="0.2"/><circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/><rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/><line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/><line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/></svg>
     </div>
-    <h1 class="site-title"><span class="hq-teal">DORANCHAE</span></h1>
+    <h1 class="site-title">도란채</h1>
+    <div class="site-title-en">Doranchae</div>
     <p class="site-subtitle">한국어 온라인 스쿨 · Korean Language School</p>
   <!-- BETA BADGE: remove style="display:none" when ready to announce -->
   <div style="display:none;margin-top:10px">
