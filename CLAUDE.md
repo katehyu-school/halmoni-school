@@ -651,16 +651,12 @@ const urlName   = _hc ? _hc.urlName : null;
 
 ---
 
-## 🌐 도메인 (2026-05-26 연결 완료 ✅ / ⚠️ 2026-08-07 교체 예정)
+## 🌐 도메인 (2026-08-09 `doranchae.com`으로 이전 완료 ✅ / 2026-08-13 리다이렉트 정정)
 
-> 🔴 **`doranchae.com`으로 옮길 예정입니다.** 아래 두 주소는 **1년 유지하며 새 주소로 넘긴 뒤 갱신하지 않습니다.** 사유는 위 2026-08-07 블록 참고(미국 선사용자).
-
-
-- **hangeulquest.com** → GitHub Pages 메인 도메인 연결 + HTTPS 🔒
-- **hangeulquestkids.com** (+ www) → URL Redirect → `https://hangeulquest.com/` (**메인 루트**, Kids 앱 파일이 아님 — 2026-08-02 Namecheap 실제 설정 확인). Kids 앱으로 바로 가는 공개 링크는 없음. 아이들에게 의미 있는 문패라 유지하기로 함
+- **doranchae.com** → GitHub Pages 메인 도메인 연결 + HTTPS 🔒 (2026-08-09 이전 완료, 상세는 위 2026-08-09 세션 블록 참고)
+- **hangeulquest.com** · **hangeulquestkids.com** (+ www) → 둘 다 `doranchae.com`으로 URL Redirect (2026-08-13 선생님이 Namecheap에서 재정정 확인 — 이전엔 hangeulquestkids.com이 옛 hangeulquest.com을 가리키고 있었음). **1년간 유지하며 갱신은 하지 않을 예정**(QR·색인 때문, 미국 선사용자 이슈로 새 이름으로 옮긴 경위는 2026-08-07 블록 참고).
 - Namecheap 구매, Free Domain Privacy 적용
 - **GitHub Pages**: `katehyu-school/halmoni-school` 리포, main 브랜치, CNAME 파일 자동 생성됨
-- 리포 분리 없이 단일 리포 유지 — 두 도메인 모두 정상 동작 중
 - 📱 **QR 코드** `qr/` — `QR_HangeulQuest.png`(웹 루트) · `QR_HangeulQuest_Mobile.png`(모바일 앱) · `HangeulQuest_QR카드.png`(둘 다 담긴 소개용 카드). 소개할 때 폰에서 바로 보여주는 용도. **URL이 바뀌면 다시 만들 것** — segno로 생성, `cv2.QRCodeDetector`로 디코드 검증함
 
 ---

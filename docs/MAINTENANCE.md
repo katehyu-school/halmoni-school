@@ -27,9 +27,9 @@
 | 4 | **Supabase 프로젝트 접근 권한** | Supabase 계정 소유자 이전 또는 조직 멤버 초대 |
 | 5 | **Supabase 공개키 / project URL** | 전달할 것 없음 — `core/supabase-config.js`에 들어 있고, 공개키라 정상입니다. 단 **service_role 키는 절대 코드에 넣지 말 것** |
 | 6 | **GitHub 저장소 소유권** | `github.com/katehyu-school/halmoni-school` — Settings → Collaborators |
-| 7 | **도메인 계정** | Namecheap (hangeulquest.com, hangeulquestkids.com) |
+| 7 | **도메인 계정** | Namecheap — doranchae.com(메인, 2026-08-09부터) · hangeulquest.com·hangeulquestkids.com(구 도메인, doranchae.com으로 리다이렉트 중, 1년 후 갱신 안 함) |
 | 8 | **TTS·슬라이드 제작 도구 계정** | **Typecast**(음성) · Google Vids(슬라이드) 등 — 선생님 개인 계정 |
-| 9 | **문의용 이메일** | hangeulquest@gmail.com (체험판 안내 문구에 노출되어 있음) |
+| 9 | **문의용 이메일** | hello@doranchae.com (Namecheap 무료 전달 → kate.h.yu@gmail.com. 계정 자체가 아니라 전달 설정이라 별도 인수인계 불필요) |
 
 ---
 
@@ -42,7 +42,7 @@
 | **Google Pro** | Image · Presentation · **Vids** · Flow — 슬라이드와 L6 영상 원본 | 연 | 269.99 | **2027-06-10** |
 | **Anthropic (Claude)** | 개발·구현 | 연 | 302.40 | **2027-04-16** |
 | **Typecast** | 캐릭터 음성(TTS) 전부 | **월** | 8.99 | **2026-08-12** |
-| **Namecheap** | 도메인 2개 — hangeulquest.com · hangeulquestkids.com | 연 | 22.96 | **2027-05-18** |
+| **Namecheap** | 도메인 3개 — doranchae.com(메인) · hangeulquest.com·hangeulquestkids.com(구 도메인, 리다이렉트용) | 연 | 22.96 | **2027-05-18** |
 | Supabase | 로그인·출석·게시판·Kids 실시간 | — | 무료 등급 | — |
 | GitHub Pages | 사이트 호스팅 | — | 무료 (public repo) | — |
 
@@ -266,7 +266,7 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 - `?teacher` 는 **더 이상 권한이 아닙니다.** 예전에는 주소에 `?teacher`만 붙이면 누구나 게시판 답변·삭제 버튼이 나왔지만(2026-08-02 수정), 지금은 서버가 로그인 세션으로 판정하므로 붙여도 권한이 생기지 않습니다.
 - 📱 **QR 코드**는 `qr/` 폴더에 3개 있습니다: 웹 루트 / 모바일 앱 / 둘 다 담긴 소개 카드.
   **주소가 바뀌면 QR도 다시 만들어야 합니다.**
-- `hangeulquestkids.com` 은 Kids 앱이 아니라 **메인 루트로 리다이렉트**됩니다. 아이들에게 의미 있는 문패라 유지 중.
+- `hangeulquestkids.com` 은 Kids 앱이 아니라 **doranchae.com 메인 루트로 리다이렉트**됩니다(2026-08-13부터, 구 hangeulquest.com도 동일). 아이들에게 의미 있는 문패라 유지 중.
 
 ---
 
