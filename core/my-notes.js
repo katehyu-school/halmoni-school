@@ -144,6 +144,10 @@
               <select class="nms-select" id="nms-level-sel" onchange="nmsToggleEpSel()">
                 <option value="L1">Level 1</option>
                 <option value="L2">Level 2</option>
+                <option value="L3">Level 3</option>
+                <option value="L4">Level 4</option>
+                <option value="L5">Level 5</option>
+                <option value="L6">Level 6</option>
                 <option value="basics">Basics</option>
                 <option value="free">자유 메모 / Free</option>
               </select>
@@ -371,14 +375,12 @@ function nmsShowMain(){
   nmsRenderWritings();
   // Pre-select dropdown: last note's episode, or ep01 if no notes
   const _notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
-  const _last=_notes.find(n=>n.level==='L1'&&n.ep);
-  if(_last){
-    const lvEl=document.getElementById('nms-level-sel');
-    const epEl=document.getElementById('nms-ep-sel');
-    if(lvEl) lvEl.value='L1';
-    if(epEl) epEl.value=_last.ep;
-    nmsToggleEpSel();
-  }
+  const _last=_notes.find(n=>/^L[1-6]$/.test(n.level)&&n.ep);
+  const lvEl=document.getElementById('nms-level-sel');
+  const epEl=document.getElementById('nms-ep-sel');
+  if(_last && lvEl) lvEl.value=_last.level;
+  nmsToggleEpSel(); // always populate Ep — was previously skipped when there were no notes yet, leaving it empty
+  if(_last && epEl) epEl.value=_last.ep;
   nmsRenderHintWords();
 }
 
@@ -426,46 +428,25 @@ function nmsTab(t){
 }
 
 // ── NOTES ────────────────────────────────────────────────
-const NMS_EP_LISTS={
-  L1:[
-    {v:'ep01',t:'ep01 — 안녕! 나는 정민이야'},
-    {v:'ep02',t:'ep02 — 누구예요?'},
-    {v:'ep03',t:'ep03 — 잘 먹겠습니다'},
-    {v:'ep04',t:'ep04 — 우리 몇 시에 만날까?'},
-    {v:'ep05',t:'ep05 — 광장시장에 가요?'},
-    {v:'ep06',t:'ep06 — 김밥 주세요'},
-    {v:'ep07',t:'ep07 — 한국어 스터디 그룹을 만들어요'},
-    {v:'ep08',t:'ep08 — 내 도시락은 어디에 있어요?'},
-    {v:'ep09',t:'ep09 — 딸기 한 박스하고 사과 여섯 개 주세요'},
-    {v:'ep10',t:'ep10 — 자전거 소풍을 가요'},
-    {v:'ep11',t:'ep11 — 어서 오세요'},
-    {v:'ep12',t:'ep12 — 경복궁에 갈 거예요!'}
-  ],
-  L2:[
-    {v:'ep01',t:'ep01 — 한국에 도착했어요'},
-    {v:'ep02',t:'ep02 — 공항에서 잠실까지'},
-    {v:'ep03',t:'ep03 — 열이 펄펄 나요'},
-    {v:'ep04',t:'ep04 — 비가 올 것 같아요'},
-    {v:'ep05',t:'ep05 — 용문사에 가면'},
-    {v:'ep06',t:'ep06 — 회원권이 있으세요?'},
-    {v:'ep07',t:'ep07 — 같이 가실래요?'},
-    {v:'ep08',t:'ep08 — 할머니의 된장국'}
-  ]
-};
+// Ep dropdown is just ep01–ep12 for any level — no per-level title lookup.
+// (Titles used to be hardcoded per level and went stale the moment new
+// levels/episodes were added — L3–L6 had no entry at all, and L2 stopped
+// at ep08 even though it has 12 episodes. Plain numbers never go stale.)
 function nmsToggleEpSel(){
   const lv=document.getElementById('nms-level-sel').value;
   const wrap=document.getElementById('nms-ep-wrap');
   const sel=document.getElementById('nms-ep-sel');
-  const hasEp=(lv==='L1'||lv==='L2');
+  const hasEp=/^L[1-6]$/.test(lv);
   wrap.style.display=hasEp?'block':'none';
   if(hasEp){
-    const list=NMS_EP_LISTS[lv]||[];
-    sel.innerHTML=list.map(e=>`<option value="${e.v}">${e.t}</option>`).join('');
+    sel.innerHTML=Array.from({length:12},(_,i)=>{
+      const v='ep'+String(i+1).padStart(2,'0');
+      return `<option value="${v}">${v}</option>`;
+    }).join('');
   }
 }
 function nmsNoteTag(n){
-  if(n.level==='L1') return `L1 · ${n.ep}`;
-  if(n.level==='L2') return `L2 · ${n.ep}`;
+  if(/^L[1-6]$/.test(n.level)) return `${n.level} · ${n.ep}`;
   if(n.level==='basics') return 'Basics';
   if(n.level==='free') return '자유';
   return n.ep||''; // legacy
@@ -474,7 +455,7 @@ function nmsSaveNote(){
   const text=document.getElementById('nms-note-text').value.trim();
   if(!text) return;
   const lv=document.getElementById('nms-level-sel').value;
-  const ep=(lv==='L1'||lv==='L2')?document.getElementById('nms-ep-sel').value:'';
+  const ep=/^L[1-6]$/.test(lv)?document.getElementById('nms-ep-sel').value:'';
   const notes=nmsGetJ('nms_'+nmsCurrent+'_notes');
   notes.unshift({id:Date.now(),level:lv,ep,text,
     date:new Date().toLocaleDateString('ko-KR',{month:'short',day:'numeric'})});
