@@ -3786,7 +3786,7 @@ async function setLevel(btn){
   const _lv=btn.classList.contains('level-btn-basis')?'Basics':btn.textContent.trim();
   const _n = _lvNum(_lv);
   if(_n > NHS_OPEN_MAX){
-    alert('Level 3부터는 회원만 이용할 수 있어요.\n\n지금은 Level 1·2를 공개하고 있고, 나머지는 내용을 더 다듬는 중입니다.\n무료 계정을 만들면 전 레벨이 열립니다 — 홈에서 "체험 계정 만들기"를 눌러 주세요.\n\nLevels 3+ are for members. Levels 1-2 are open to everyone; the rest are still being refined.\nCreate a free account from the home page to unlock everything.');
+    alert('Level 3부터는 회원만 이용할 수 있어요.\n\n지금은 Level 1·2를 누구나 볼 수 있고, Level 3 이상은 실제 학생들과 함께 검증하는 중이라 잠겨 있어요.\n\nLevels 3+ are for members. Levels 1-2 are open to everyone — Level 3 and up are still being tested with real students.');
     return;
   }
   document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
