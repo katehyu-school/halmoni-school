@@ -7,6 +7,14 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> ⚖️ **2026-08-12 완료 (라이선스 — CC BY-NC-SA → Proprietary ToS 전환)**
+> — **계기**: 외부(AI) 의견이 CC BY-NC-SA의 위험을 경고 — 경쟁자가 콘텐츠를 무료로 복제해 갈 수 있고, 한번 배포된 사본은 되돌릴 수 없고, NC 조항이 나중에 유료화를 복잡하게 만든다는 내용. 선생님이 재검토 요청.
+> — **판단**: 경쟁자 복제·유료화 차단 우려는 2026-08-06에 확정한 "수익 목표 없음"과 대조하면 대부분 해당 안 됨(유료 전환 계획 자체가 없음). 상표는 이미 CC와 별개로 보호 중이라 브랜드 도용 우려도 해소됨. 다만 **"CC로 한번 공개하면 이미 나간 사본은 되돌릴 수 없다"는 지적은 사실** — 외부 학습자 0명인 지금이 되돌리기 가장 싼 시점이라는 게 핵심 논리. "닫힌 상태 → 나중에 열기"는 언제든 가능하지만 역방향은 불가능하므로, 방향이 완전히 확실해지기 전까지는 **잠정적으로 Proprietary ToS(모든 권리 보유)로 전환** — 선생님이 직접 이 옵션 선택. 나중에 확신이 서면 다시 CC로 열 수 있음(LICENSE·license.html에 명시).
+> — **반영 완료**: `LICENSE`·`license.html`(1번 섹션 전면 재작성 — "모든 권리 보유, 베타 기간 무료 열람, 무단 복제·재배포·상업적 이용 금지" + "왜 CC에서 바뀌었나" 박스, 상표 섹션의 "CC 라이선스는" 문구도 라이선스 중립적으로 수정) · `index.html`·`nhs.html` 푸터 · `faq.html` "수업에 써도 되나요" Q&A(CC 언급 → 게시판 문의 기반 허가로 변경) · `tools/build_static_pages.py`의 `LICENSE_NOTE` 상수 → **재실행하여 `learn/` 117개 페이지 + `learn/index.html` 전부 재생성**.
+> — 🔧 **재실행 중 덤 발견**: `sitemap.xml`·`robots.txt`가 8/9 도메인 이전 이후 다시 `hangeulquest.com`으로 되돌아가 있었음(원인 미확인 — 재실행이 누락됐거나 롤백된 것으로 추정). 이번 재실행으로 `doranchae.com`으로 재정정됨(스크립트의 `SITE` 변수는 처음부터 정상이었음).
+> — 음성·이미지(TTS mp3·슬라이드)는 원래부터 CC 대상이 아니었으므로(Typecast 약관) 실질적 변경 없음 — 이제 글·코드도 같은 톤("모든 권리 보유")으로 통일되어 조건이 단순해짐. 인용 문학(PD)·상표 섹션은 그대로.
+> — ✅ 검증: `grep`으로 CC BY-NC-SA/creativecommons 잔존 검사 — LICENSE·license.html의 "왜 바뀌었나" 역사적 설명 2곳 외 0건. `git diff --stat`로 learn/ 117개+robots.txt+sitemap.xml만 변경 확인, nhs.html null byte 0·`</html>` 확인.
+
 > 🌐 **2026-08-09 완료 (DNS 이전 + 브랜드 크레스트 마감 + Kids 접근권 분리)**
 > — **DNS를 `hangeulquest.com` → `doranchae.com`으로 전환 완료.** Namecheap A레코드 4개(GitHub Pages IP) + `www` CNAME 등록, 기존 URL Redirect Record 삭제, GitHub Pages 커스텀 도메인 설정 확인. `canonical`/`og:url`이 CDN 캐시 지연으로 잠깐 옛 도메인을 보였으나 재확인 후 정상 반영됨(코드·DNS 자체는 처음부터 정상).
 > — `tools/build_static_pages.py`의 `SITE`를 `doranchae.com`으로 바꾸고 재실행 → `learn/` 117개 페이지 + `sitemap.xml`(122 URL) + `robots.txt` 전부 재생성.

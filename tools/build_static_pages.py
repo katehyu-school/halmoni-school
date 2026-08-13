@@ -53,10 +53,9 @@ SITE = "https://doranchae.com"
 DEFAULT_LEVELS = ["L1", "L2"]          # 검증된 범위만 먼저 연다
 ALL_LEVELS = ["L1", "L2", "L3", "L4", "L5", "L6"]
 
-# 🔴 라이선스 표기 — 이 두 줄만 고치면 전 페이지에 반영된다. (2026-08-06 확정)
+# 🔴 라이선스 표기 — 이 두 줄만 고치면 전 페이지에 반영된다. (2026-08-12 확정 — Proprietary ToS로 전환, CC BY-NC-SA 폐기)
 LICENSE_LINE = "© 2026 Kate HaeOk Shin Yu"
-LICENSE_NOTE = ("글·코드 <a href='/license.html'>CC BY-NC-SA 4.0</a>"
-                " · 음성·이미지는 사이트 내 재생 전용")
+LICENSE_NOTE = "모든 권리 보유 · 베타 기간 무료 열람 · 무단 복제·재배포 금지"
 
 # 📊 방문 통계 (Cloudflare Web Analytics — 무료·쿠키 없음·동의 배너 불필요)
 #    Cloudflare 대시보드 › Web Analytics 에서 사이트를 추가하면 토큰을 줍니다.
