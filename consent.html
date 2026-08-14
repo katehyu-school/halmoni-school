@@ -165,7 +165,7 @@ footer a { color: #4ecdc4; text-decoration: none; }
   <p id="msg" style="margin-top:12px;color:#d1495b;font-size:13px"></p>
 
   <footer>
-    © 2026 Doranchae &nbsp;·&nbsp;
+    © <span data-cr-year></span> <span data-cr-brand></span> &nbsp;·&nbsp;
     <a href="/">Home</a> &nbsp;·&nbsp;
     <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
     <a href="/faq.html">FAQ</a>
@@ -217,5 +217,6 @@ function sendForm(){
 }
 document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
 </script>
+<script src="core/site-info.js"></script>
 </body>
 </html>

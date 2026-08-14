@@ -53,9 +53,9 @@ SITE = "https://doranchae.com"
 DEFAULT_LEVELS = ["L1", "L2"]          # 검증된 범위만 먼저 연다
 ALL_LEVELS = ["L1", "L2", "L3", "L4", "L5", "L6"]
 
-# 🔴 라이선스 표기 — 이 두 줄만 고치면 전 페이지에 반영된다. (2026-08-12 확정 — Proprietary ToS로 전환, CC BY-NC-SA 폐기)
-LICENSE_LINE = "© 2026 Kate HaeOk Shin Yu"
-LICENSE_NOTE = "모든 권리 보유 · 베타 기간 무료 열람 · 무단 복제·재배포 금지"
+# 🔴 저작권 표기는 이제 core/site-info.js가 단일 소스 (2026-08-14).
+# 이 스크립트는 <span data-cr-*> 자리표시자만 심고, 실제 이름/연도/문구는 JS가 채운다 —
+# index/nhs/Kids/Privacy/FAQ/Terms와 동일한 소스를 씀. 이름이 바뀌면 core/site-info.js만 고치면 됨.
 
 # 📊 방문 통계 (Cloudflare Web Analytics — 무료·쿠키 없음·동의 배너 불필요)
 #    Cloudflare 대시보드 › Web Analytics 에서 사이트를 추가하면 토큰을 줍니다.
@@ -187,7 +187,7 @@ def page(title, desc, body, canonical, jsonld=None):
     if jsonld:
         ld = ('\n<script type="application/ld+json">'
               + json.dumps(jsonld, ensure_ascii=False) + "</script>")
-    note = f"<br>{LICENSE_NOTE}" if LICENSE_NOTE else ""
+    note = "<br><span data-cr-note></span>"
     beacon = ""
     if CF_ANALYTICS_TOKEN.strip():
         tok = json.dumps({"token": CF_ANALYTICS_TOKEN.strip()}, ensure_ascii=False)
@@ -230,10 +230,11 @@ def page(title, desc, body, canonical, jsonld=None):
 <main>
 {body}
 <footer>
-{esc(LICENSE_LINE)}{note}<br>
+© <span data-cr-year></span> <span data-cr-name></span>{note}<br>
 <a href="/">Doranchae 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
 </footer>
 </main>{beacon}
+<script src="/core/site-info.js"></script>
 </body>
 </html>
 """

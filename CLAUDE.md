@@ -7,6 +7,33 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🧩 **2026-08-14 완료 (footer 저작권 표기 단일 소스화 — core/site-info.js 신설)**
+> — **계기**: "Kate HaeOk Shin Yu → HaeOk Shin Yu" 이름 수정이 LICENSE·license.html에만 반영되고 index.html·nhs.html·korean-app_v2.html(Kids)·privacy.html·halmoni_kinder.html·learn/ 118개엔 옛 이름이 남아있던 게 드러남 ("footer가 제각각").
+> — **해결**: `core/site-info.js` 신설 — `window.SITE_INFO = {year, name, brand, note}` 하나만 정의. 각 페이지 footer는 `<span data-cr-year>` 등 자리표시자만 갖고 스크립트가 채움. **이제 이름/연도/브랜드가 바뀌면 이 파일 하나만 고치면 전체(127개 파일) 반영됨.**
+> — `tools/build_static_pages.py`도 갱신 — 옛 `LICENSE_LINE`/`LICENSE_NOTE` 하드코딩 상수 제거, footer 템플릿이 동일한 `data-cr-*` 자리표시자를 심도록 수정(앞으로 재실행해도 이름이 다시 박히지 않음).
+> — ✅ 검증: 전체 html/js에서 "Kate HaeOk" 잔존 0건(LICENSE·license.html·index.html·nhs.html·korean-app_v2.html·privacy.html·faq.html·consent.html·halmoni_kinder.html·learn/ 118개 전부 확인). null byte 0, `</html>` 전부 확인.
+> — ⚠️ **의도적으로 안 고친 것**: `privacy.html` 100행 본문(footer 아님) — "run by Kate HaeOk Shin Yu" 문장에 실명 남음. footer 범위 밖이라 보류, 다음에 확인 필요.
+> — ⏳ **git add/commit/push 대기 중** — device_bash로 로컬 파일 직접 수정함, 커밋 명령어는 선생님께 전달됨.
+
+> ⚖️ **2026-08-14 진행 중 (상표 출원국 전략 뒤집음 — 한국 스킵, 캐나다 CIPO부터 셀프 출원)**
+> — 🔴 **08-07 결론 "미국·캐나다 확장은 접음"은 폐기.** 그 결론은 **옛 이름 `Hangeul Quest` 기준**이었음(Go!Go!World의 선사용 `Hangul Quest`와 충돌 위험 + 마드리드 5년 central attack) — `Doranchae`로 개명하면서 그 충돌 자체가 사라졌으므로 이 제약은 더 이상 적용 안 됨.
+> — 🔴 **새 계기**: 9월 한국 방문 변리사 입금 전날 결제 오류가 나서 재검토 → 원래 "한국 먼저 → 마드리드로 미국·캐나다 확장" 계획이 AI(Gemini 등) 일반론 조언이었지 선생님 상황엔 안 맞았음을 확인. 앱은 한국어를 모르는 아이들 대상이라 **한국 내 사용처가 없어 시급성 없음**. 반면 마드리드 의정서 기초관청 자격 요건(국적/거주/영업소 연결)을 확인해보니 **캐나다 쪽 연결점으로 CIPO를 마드리드 기초관청으로도 쓸 수 있음이 확인됨** — "한국 먼저"가 애초에 법적 전제조건이 아니었음. 순서 바꿔도 손해 없음(한국은 상표법 제6조상 재외자도 국내 체류 중이면 언제든 별도 자력출원 가능 — 9월 변리사 건은 보류, 재개 여부 미정).
+> — 🔴 **오늘 확정한 출원 계획**: CIPO에 **`DORANCHAE` 워드마크(표준문자, 로고 미포함)**로 **41류(교육)+42류(SaaS)** 셀프 출원. 로고는 아직 도란채 전용으로 확정된 디자인이 없어 워드마크 단독 우선(로고 확정되면 그때 별도 출원 — 결합 출원은 보호 범위가 좁아져서 지양).
+>   · ✅ **41+42류로 확정(9류 아님)** — line 99(구 계획, 08-07 기록)엔 "제9류(소프트웨어)"로 적혀 있었지만 재검토 후 폐기. 이유: PWA가 지금은 **웹사이트 복습 기능** 그 자체라 브라우저에서 돌아가는 비다운로드형 소프트웨어 — Class 9는 앱스토어(Google Play/App Store)에서 내려받는 컴파일된 바이너리에 붙는 분류라 지금 상태와 안 맞음. **PWA가 "설치 가능"하다는 것 자체는 분류를 안 바꿈** — 실제로 앱스토어에 컴파일 앱을 올리게 되면 그때 9류를 별도로 추가 출원.
+>   · **클리어런스 서치 갭**: 08-07 서치(줄 97)는 앱스토어·KIPRIS·USPTO·도메인만 확인, **CIPO 캐나다 상표 데이터베이스는 아직 검색 안 함** — 출원 전 필수.
+>   · G&S 문구 예시: 41류 "providing on-line courses of instruction in the Korean language for teenagers and adults" 계열 / 42류 "providing temporary use of on-line non-downloadable software for Korean language instruction" 계열. CIPO Goods and Services Manual에서 사전승인 문구 그대로 찾아 쓸 것(보정요구 회피).
+> — ✅ **line 134의 `consent.html` 관련 — 확인 완료, 불일치 아니었음.** `consent.html`(만 14세 미만 부모 동의서)은 **도란채(공개 앱) 전용 안전장치** — 개별 가입 경로로 만 14세 미만 아동이 도란채에서 배우고 싶어할 경우를 대비해 부모 동의를 받아두는 용도. "공개 대상은 14세+ 성인"이라는 기본 방향과 모순 아님(기본 타겟은 14+지만, 그 밖의 개별 케이스 대비 안전장치). **Kids는 이 얘기와 완전히 무관** — Kids는 여전히 가족 외부에 전혀 열려있지 않음(이 경로로도 안 열림).
+> — 🔜 **다음 세션 시작 시**: ① CIPO Goods and Services Manual에서 41/42류 정확한 사전승인 문구 확정 ② CIPO 캐나다 상표 데이터베이스에서 "Doranchae"/"도란채" 클리어런스 서치 ③ 08-13 블록의 git push 여부 확인.
+
+> 🧹 **2026-08-13 완료 (상표 등록 대비 사이트 일관성 감사 + 과대포장 정리 + OG 이미지 교체)**
+> — **도메인·브랜드 잔재 정리**: `hangeulquest.com` 잔존 참조 전수 검색 → `trial_welcome_email_template.txt`(도메인 2곳 + 낡은 체험범위 설명 "3개 에피소드"→"Start Here+Level 1 전체") 수정, `index.html`·`nhs.html`·`korean-app_v2.html`의 YouTube 링크 `@hangeulquest`→`@doranchae` 통일, `CLAUDE.md`·`docs/MAINTENANCE.md`의 도메인 섹션 현행화(8/9 doranchae.com 이전 + 8/13 hangeulquestkids.com 리다이렉트 재정정 반영). 고아 이미지 파일 4개 삭제(`HangeulQuest_Presentation.*`·`slide1_preview.jpg`·`slide5_preview.jpg`·`logos_preview.png`·`phone_mockup_preview.png`).
+> — **과대포장(TOPIK 실전 보장 뉘앙스) 수정**: nhs.html L2~L6 마감테스트 등급 메시지에서 "실전에도 문제없어요" 류 표현 전부 "형식 문제를 잘 풀어냈어요/익숙해졌어요"로 순화(검증된 학습자 0명, 마감테스트는 실전 기출이 아니라 TOPIK 문항 형식을 리서치해 자체 제작한 문제라는 사실에 근거). L6 B/C등급 메시지는 근거 없는 장르별 진단("문학·수필이 약하다") 대신 실제로 있는 `_ctWrongHtml` 오답→편 이동 기능을 가리키도록 수정. faq.html "TOPIK 대비되나요" 답변도 같은 톤으로 재작성(레벨별 TOPIK 급수 매핑은 유지, "실전 준비 완료" 뉘앙스만 제거).
+> — **license.html·LICENSE "왜 CC에서 바뀌었나" 박스 축약** — 장황한 설명 대신 법적으로 의미 있는 사실 한 줄(2026-08-12 이전 CC 배포본은 원 조건 유지)만 남김.
+> — 🔴 **저작권 표기 실명 제거 결정(중요, 아직 미실행)**: 선생님이 예전에 FAQ "Who's behind"에 약력(연세대 등)을 넣었다가 **구글 검색에 실명+약력이 함께 뜨는 걸 보고 놀란 경험**을 계기로, footer·LICENSE·license.html 등 사이트 전체에서 실명("Kate HaeOk Shin Yu")을 완전히 빼고 "Doranchae"로 통일하기로 최종 결정. **상표 등록 접수 당일 한꺼번에 처리 예정** — 상세 실행 계획은 메모 `project-trademark-followup-tasks.md` 참고(footer 최종형 "© 2026 Doranchae", faq 약력 문구 확정본 포함, 실행 시 `grep -rn "Kate HaeOk\|HaeOk Shin Yu\|신해옥"`로 잔존 확인 필수).
+> — **OG 링크 미리보기 이미지 교체**: 폰으로 doranchae.com을 공유하면 옛 HQ 로고가 뜨는 문제 발견 → 원인은 `slide1_preview.jpg`(6월 제작, 리브랜딩 전) 방치. `og_preview.jpg` 신규 제작(1200x630, 사이트와 동일한 네이비 그라디언트 + 현재 크레스트 + "도란채" 워드마크). **워드마크는 Gaegu 폰트 필요 → 샌드박스에 폰트 파일이 없어(네트워크로 바이너리 다운로드 불가) 선생님이 보내주신 실제 Gaegu 렌더링 스크린샷에서 글자만 오려내 합성**하는 방식으로 해결. `index.html`의 `og:image`/`twitter:image` 갱신 완료.
+> — ⏳ **git push 대기 중** — 이번 세션 변경사항 커밋 명령어는 선생님께 전달됨, 아직 실행 여부 미확인.
+> — 🔜 **다음 세션 시작 시**: 이 블록 확인 후 ① git push 여부 확인 ② 파일럿 대상·시기 미정(작업 #15) ③ 상표 등록 접수했으면 위 실명 제거 작업 진행.
+
 > ⚖️ **2026-08-12 완료 (라이선스 — CC BY-NC-SA → Proprietary ToS 전환)**
 > — **계기**: 외부(AI) 의견이 CC BY-NC-SA의 위험을 경고 — 경쟁자가 콘텐츠를 무료로 복제해 갈 수 있고, 한번 배포된 사본은 되돌릴 수 없고, NC 조항이 나중에 유료화를 복잡하게 만든다는 내용. 선생님이 재검토 요청.
 > — **판단**: 경쟁자 복제·유료화 차단 우려는 2026-08-06에 확정한 "수익 목표 없음"과 대조하면 대부분 해당 안 됨(유료 전환 계획 자체가 없음). 상표는 이미 CC와 별개로 보호 중이라 브랜드 도용 우려도 해소됨. 다만 **"CC로 한번 공개하면 이미 나간 사본은 되돌릴 수 없다"는 지적은 사실** — 외부 학습자 0명인 지금이 되돌리기 가장 싼 시점이라는 게 핵심 논리. "닫힌 상태 → 나중에 열기"는 언제든 가능하지만 역방향은 불가능하므로, 방향이 완전히 확실해지기 전까지는 **잠정적으로 Proprietary ToS(모든 권리 보유)로 전환** — 선생님이 직접 이 옵션 선택. 나중에 확신이 서면 다시 CC로 열 수 있음(LICENSE·license.html에 명시).
