@@ -417,31 +417,23 @@ body {
 .save-pin-btn:hover:not(:disabled) { background: var(--accent2); }
 .save-pin-btn { padding: 4px 10px; font-size: 0.75rem; }
 .save-pin-btn:disabled { opacity: .4; cursor: not-allowed; }
-/* ── 학습 진도 카드 + 수업 메모 ── */
-.pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 4px; }
-.pg-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
-.pg-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-.pg-name { font-weight: 700; font-size: 0.92rem; }
-.pg-id { font-family: monospace; font-size: 0.7rem; color: var(--muted); margin-left: 4px; }
-.pg-when { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
-.pg-bars { margin: 8px 0 6px; }
-.pg-stats { font-size: 0.76rem; color: var(--muted); margin-bottom: 8px; }
-.pg-rec { font-size: 0.78rem; color: var(--amber); background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.25); border-radius: 8px; padding: 6px 9px; margin-bottom: 10px; }
-.pg-rec.done { color: var(--green); background: rgba(52,199,138,.1); border-color: rgba(52,199,138,.25); }
-.pg-notes { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px; }
-.pg-note-item { font-size: 0.78rem; line-height: 1.5; padding: 6px 0; border-bottom: 1px dashed rgba(255,255,255,.06); }
-.pg-note-item:last-child { border-bottom: none; }
-.pg-note-meta { font-size: 0.68rem; color: var(--muted); display: flex; justify-content: space-between; gap: 6px; margin-top: 2px; }
-.pg-note-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.68rem; font-family: inherit; }
-.pg-note-del:hover { color: var(--red); }
-.pg-note-more { font-size: 0.72rem; color: var(--muted); cursor: pointer; margin-top: 4px; }
-.pg-note-more:hover { color: var(--text); }
-.pg-note-add { display: flex; gap: 6px; margin-top: 8px; }
-.pg-note-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; color: var(--text); font-size: 0.82rem; font-family: inherit; resize: vertical; min-height: 36px; outline: none; transition: border-color .2s; }
-.pg-note-input:focus { border-color: var(--accent); }
-.pg-note-btn { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 0 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: inherit; }
-.pg-note-btn:hover:not(:disabled) { background: var(--accent2); }
-.pg-note-btn:disabled { opacity: .4; cursor: not-allowed; }
+/* ── 학습 진도 개요 (레벨 분포 · 활동 현황 · 학생 표) ── */
+.pg-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.pg-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+.pg-stat-num { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.pg-stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+.pg-stat.good  .pg-stat-num { color: var(--green); }
+.pg-stat.warn  .pg-stat-num { color: var(--amber); }
+
+.pg-lvl-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+.pg-lvl-tag { width: 40px; flex-shrink: 0; font-size: 0.76rem; color: var(--muted); font-weight: 600; text-align: right; }
+.pg-lvl-track { flex: 1; height: 16px; background: #171a24; border-radius: 8px; overflow: hidden; position: relative; }
+.pg-lvl-fill { height: 100%; background: linear-gradient(to right, var(--accent2), var(--accent)); border-radius: 8px; transition: width .3s; }
+.pg-lvl-count { width: 28px; flex-shrink: 0; font-size: 0.78rem; color: var(--text); text-align: right; }
+
+.pg-table-wrap { margin-top: 4px; }
+.pg-when-stale { color: var(--amber); }
+
 /* ── 반응형 ── */
 @media (max-width: 480px) {
   .panel-header { flex-direction: column; align-items: flex-start; }
@@ -546,8 +538,8 @@ body {
     <div class="section-head">
       <span class="section-icon">📈</span>
       <div>
-        <div class="section-title">학습 진도 · 수업 메모</div>
-        <div class="section-desc">정식 학생 전원이 카드로 표시됩니다 · 진도는 자동으로, 메모는 선생님이 직접 남겨요</div>
+        <div class="section-title">학습 진도 개요</div>
+        <div class="section-desc">도란채는 셀프 진행 학습이라 학생별이 아니라 전체 진행 상황을 한눈에 봅니다</div>
       </div>
       <button class="mm-act" style="margin-left:auto" onclick="loadProgress()">↺ 새로고침</button>
     </div>
@@ -668,15 +660,16 @@ async function adminLogin() {
 }
 
 
-// ── 📈 학습 진도 · 🗒 수업 메모 ───────────────────
+// ── 📈 학습 진도 개요 ─────────────────────────
 //   서버에 쌓이는 것은 '정식 회원'의 진도뿐입니다(progress_push가 그렇게 막습니다).
 //   진도의 원본은 여전히 학생 브라우저의 localStorage이고, 여기 있는 건 사본입니다.
-//   그래서 진도가 0이어도 학생 진도가 사라진 건 아닙니다 — 아직 안 올라왔을 뿐입니다.
-//   카드는 정식 학생(student/teacher) 전원을 보여줍니다 — 진도가 아직 없어도 뜹니다.
-//   메모(class_notes)는 진도와 별개로 선생님이 직접 남기는 짧은 수업 기록입니다.
+//   도란채는 셀프 진행 학습이 기본 전제라, 학생 한 명당 카드가 아니라
+//   전체가 어떻게 진행되고 있는지 개요로 보여줍니다 — 학생 수가 늘어도 그대로 씁니다.
+//   (Kids 손주들은 구글밋 화면공유로 실시간 진행하는 별도 수업이라 이 개요와 무관합니다.
+//    kids_family 플래그는 "Kids 반 입장권" 표시일 뿐, 도란채 학생 여부와는 별개입니다.)
 const _PG_LV = ['L1','L2','L3','L4','L5','L6'];
 const _PG_EP_PER_LV = 12;
-let _pgNotesCache = {}; // member_name -> note[] (더보기 펼칠 때 재조회 없이 씀)
+const _PG_STALE_DAYS = 7;
 
 function _pgWhen(iso){
   if(!iso) return '—';
@@ -688,92 +681,13 @@ function _pgWhen(iso){
   if (days < 30)  return days + '일 전';
   return d.toLocaleDateString('ko-KR', { month:'short', day:'numeric' });
 }
-function _pgBars(byLevel){
-  const b = byLevel || {};
-  return _PG_LV.map(lv=>{
-    const n = b[lv] || 0;
-    const pct = Math.round(n / _PG_EP_PER_LV * 100);
-    const col = n ? '#34c78a' : '#2a2d38';
-    return `<span title="${lv} — ${n}/${_PG_EP_PER_LV}편"
-      style="display:inline-block;width:26px;height:7px;border-radius:4px;margin-right:3px;
-             background:linear-gradient(to right,${col} ${pct}%,#2a2d38 ${pct}%)"></span>`;
-  }).join('') + `<span style="font-size:0.7rem;color:#6f727e;margin-left:4px">L1–L6</span>`;
-}
-function _pgTests(tests){
-  if(!tests) return '—';
-  const out = [];
-  if (tests.placement && tests.placement.lv) out.push('배치 → L' + tests.placement.lv);
-  Object.keys(tests).forEach(k=>{
-    if (k.indexOf('test_') !== 0) return;
-    const t = tests[k];
-    if (t && typeof t.pct === 'number') out.push(k.replace('test_','') + ' ' + t.pct + '%');
-  });
-  return out.length ? out.join(' · ') : '—';
-}
-// 다음에 볼만한 편 추천 — 새 콘텐츠 없이 이미 있는 by_level 데이터로만 계산합니다.
-function _pgNextRec(byLevel){
+// 학생의 "현재 레벨" — 아직 12편을 못 채운 첫 레벨. 전부 채웠으면 'done', 진도가 아예 없으면 'none'.
+function _pgCurrentLevel(byLevel){
   const b = byLevel || {};
   for (const lv of _PG_LV){
-    const n = b[lv] || 0;
-    if (n < _PG_EP_PER_LV){
-      const label = (n === 0 && lv === 'L1') ? `${lv} 1편 (처음부터)` : `${lv} ${n+1}편`;
-      return { done:false, text: `📌 다음 추천: ${label}` };
-    }
+    if ((b[lv] || 0) < _PG_EP_PER_LV) return (b[lv] || 0) > 0 || Object.keys(b).length ? lv : 'none';
   }
-  return { done:true, text: '🎉 전체 레벨 완료!' };
-}
-function _pgEsc(s){
-  const d = document.createElement('div');
-  d.textContent = s == null ? '' : String(s);
-  return d.innerHTML;
-}
-function _pgNoteItem(n){
-  return `<div class="pg-note-item">${_pgEsc(n.note)}
-    <div class="pg-note-meta"><span>${_pgWhen(n.created_at)}</span>
-    <button class="pg-note-del" onclick="deleteNote(${n.id}, '${n.member_name}')">삭제</button></div>
-  </div>`;
-}
-function _pgExpandNotes(name){
-  const notes = (_pgNotesCache[name] || []).slice()
-    .sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
-  const el = document.getElementById('pgnotes-' + name);
-  if (!el) return;
-  el.innerHTML = notes.length
-    ? notes.map(n=>_pgNoteItem(n)).join('')
-    : '<div style="font-size:0.76rem;color:var(--muted);">메모 없음</div>';
-}
-function _pgCard(m, prog, notes){
-  const when     = prog ? _pgWhen(prog.updated_at) : '아직 시작 전';
-  const epDone   = prog ? prog.ep_done : 0;
-  const epStar   = prog ? (prog.ep_star || 0) : 0;
-  const srsTotal = prog ? (prog.srs_total || 0) : 0;
-  const srsDue   = prog ? prog.srs_due : 0;
-  const testsTxt = prog ? _pgTests(prog.tests) : '—';
-  const rec      = _pgNextRec(prog ? prog.by_level : {});
-
-  const sorted  = (notes || []).slice().sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
-  const SHOW_N  = 3;
-  const visible = sorted.slice(0, SHOW_N);
-  const rest    = sorted.length - visible.length;
-
-  return `
-  <div class="pg-card" id="pgcard-${m.name}">
-    <div class="pg-card-head">
-      <div><span class="pg-name">${_pgEsc(m.display_name)}</span><span class="pg-id">${_pgEsc(m.name)}</span></div>
-      <div class="pg-when">${when}</div>
-    </div>
-    <div class="pg-bars">${_pgBars(prog ? prog.by_level : {})}</div>
-    <div class="pg-stats">끝낸 편 ${epDone}<span style="color:var(--muted)">/72</span> · ⭐${epStar} · 단어 ${srsTotal}개${srsDue ? ` · 복습 ${srsDue}` : ''}${testsTxt !== '—' ? ` · ${testsTxt}` : ''}</div>
-    <div class="pg-rec${rec.done ? ' done' : ''}">${rec.text}</div>
-    <div class="pg-notes" id="pgnotes-${m.name}">
-      ${visible.length ? visible.map(n=>_pgNoteItem(n)).join('') : '<div style="font-size:0.76rem;color:var(--muted);">메모 없음</div>'}
-      ${rest > 0 ? `<div class="pg-note-more" onclick="_pgExpandNotes('${m.name}')">지난 메모 ${rest}개 더 보기</div>` : ''}
-    </div>
-    <div class="pg-note-add">
-      <textarea class="pg-note-input" id="pgin-${m.name}" placeholder="오늘 수업 메모…" rows="1"></textarea>
-      <button class="pg-note-btn" id="pgbtn-${m.name}" onclick="addNote('${m.name}')">추가</button>
-    </div>
-  </div>`;
+  return 'done';
 }
 
 async function loadProgress(){
@@ -785,14 +699,12 @@ async function loadProgress(){
   }
   wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div>';
   try{
-    const [rosterRes, progRes, noteRes] = await Promise.all([
+    const [rosterRes, progRes] = await Promise.all([
       sb.rpc('admin_list_members', { p_admin: _adminName, p_pin: _adminPw, p_q: '', p_filter: 'member' }),
-      sb.rpc('progress_report',   { p_token: _adminToken }),
-      sb.rpc('note_list',         { p_token: _adminToken, p_member: null, p_limit: 300 })
+      sb.rpc('progress_report',   { p_token: _adminToken })
     ]);
     if (rosterRes.error) throw rosterRes.error;
     if (progRes.error)   throw progRes.error;
-    if (noteRes.error)   throw noteRes.error;
 
     const rosterData = rosterRes.data;
     if (!rosterData || !rosterData.ok) throw new Error(
@@ -803,61 +715,78 @@ async function loadProgress(){
     const progByName = {};
     progList.forEach(r => { progByName[r.member_name] = r; });
 
-    const noteList = Array.isArray(noteRes.data) ? noteRes.data : [];
-    const notesByName = {};
-    noteList.forEach(n => { (notesByName[n.member_name] = notesByName[n.member_name] || []).push(n); });
-    _pgNotesCache = notesByName;
-
     if (!roster.length){
       wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">아직 등록된 학생이 없어요.</div>';
       return;
     }
 
-    const sorted = roster.slice().sort((a,b)=>
-      (a.display_name || a.name).localeCompare(b.display_name || b.name, 'ko'));
+    // ── 레벨 분포 ──
+    const lvlCount = { none:0, L1:0, L2:0, L3:0, L4:0, L5:0, L6:0, done:0 };
+    // ── 활동 현황 ──
+    let activeCnt = 0, staleCnt = 0, neverCnt = 0;
+    // ── SRS 복습 밀림 총량 ──
+    let srsDueTotal = 0;
+    const now = new Date();
 
-    wrap.innerHTML = `<div class="pg-grid">${
-      sorted.map(m => _pgCard(m, progByName[m.name], notesByName[m.name] || [])).join('')
-    }</div>`;
+    const rows = roster.map(m => {
+      const prog = progByName[m.name];
+      const lvl = _pgCurrentLevel(prog ? prog.by_level : {});
+      lvlCount[lvl] = (lvlCount[lvl] || 0) + 1;
+
+      if (!prog || !prog.updated_at){
+        neverCnt++;
+      } else {
+        const days = (now - new Date(prog.updated_at)) / 86400000;
+        if (days <= _PG_STALE_DAYS) activeCnt++; else staleCnt++;
+      }
+      if (prog && prog.srs_due) srsDueTotal += prog.srs_due;
+
+      const daysIdle = prog && prog.updated_at ? (now - new Date(prog.updated_at)) / 86400000 : null;
+      return {
+        name: m.display_name,
+        when: prog ? _pgWhen(prog.updated_at) : '아직 시작 전',
+        stale: daysIdle === null || daysIdle > _PG_STALE_DAYS,   // 시작 전 포함 — 둘 다 눈여겨봐야 하니까
+        lvl: lvl,
+        sortKey: daysIdle === null ? -1 : new Date(prog.updated_at).getTime()
+      };
+    }).sort((a,b) => a.sortKey - b.sortKey); // 오래 안 들어온 순 (맨 위가 제일 오래됨)
+
+    const total = roster.length;
+    const lvlLabel = { none:'시작 전', L1:'L1', L2:'L2', L3:'L3', L4:'L4', L5:'L5', L6:'L6', done:'완료' };
+    const lvlOrder = ['none','L1','L2','L3','L4','L5','L6','done'];
+    const maxLvlCnt = Math.max(1, ...lvlOrder.map(k => lvlCount[k]));
+
+    wrap.innerHTML = `
+      <div class="pg-stat-row">
+        <div class="pg-stat"><div class="pg-stat-num">${total}</div><div class="pg-stat-label">전체 학생</div></div>
+        <div class="pg-stat good"><div class="pg-stat-num">${activeCnt}</div><div class="pg-stat-label">최근 ${_PG_STALE_DAYS}일 내 활동</div></div>
+        <div class="pg-stat warn"><div class="pg-stat-num">${staleCnt + neverCnt}</div><div class="pg-stat-label">${_PG_STALE_DAYS}일 이상 조용함${neverCnt ? ` (${neverCnt}명은 아직 시작 전)` : ''}</div></div>
+        <div class="pg-stat"><div class="pg-stat-num">${srsDueTotal}</div><div class="pg-stat-label">밀린 복습 단어 (전체 합)</div></div>
+      </div>
+
+      <div style="margin-bottom:18px">
+        ${lvlOrder.map(k => `
+          <div class="pg-lvl-row">
+            <div class="pg-lvl-tag">${lvlLabel[k]}</div>
+            <div class="pg-lvl-track"><div class="pg-lvl-fill" style="width:${lvlCount[k] ? Math.max(6, Math.round(lvlCount[k]/maxLvlCnt*100)) : 0}%"></div></div>
+            <div class="pg-lvl-count">${lvlCount[k]}</div>
+          </div>`).join('')}
+      </div>
+
+      <div class="pg-table-wrap mm-scroll"><table class="member-table">
+        <thead><tr><th>학생</th><th>현재 레벨</th><th>마지막 학습</th></tr></thead>
+        <tbody>
+          ${rows.map(r => `
+          <tr class="member-row">
+            <td style="font-weight:600">${r.name}</td>
+            <td>${lvlLabel[r.lvl]}</td>
+            <td class="${r.stale ? 'pg-when-stale' : ''}">${r.when}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table></div>
+    `;
   }catch(e){
     wrap.innerHTML = `<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ${e.message}</div>`;
-  }
-}
-
-// ── 🗒 수업 메모 추가/삭제 ─────────────────────
-async function addNote(name){
-  const input = document.getElementById('pgin-' + name);
-  const btn   = document.getElementById('pgbtn-' + name);
-  if (!input || !btn) return;
-  const text = input.value.trim();
-  if (!text) { toast('메모 내용을 입력하세요', 'fail'); return; }
-
-  btn.disabled = true; btn.textContent = '저장 중…';
-  try{
-    const { data, error } = await sb.rpc('note_add', { p_token: _adminToken, p_member: name, p_note: text });
-    if (error) throw error;
-    if (!data || !data.ok) throw new Error(
-      data && data.error === 'denied'   ? '로그인이 만료됐어요. 다시 로그인해 주세요.' :
-      data && data.error === 'notfound' ? '학생 정보를 찾을 수 없어요.' : '저장하지 못했어요.');
-    toast('✅ 메모 저장됨');
-    loadProgress();
-  }catch(e){
-    toast(`❌ ${e.message}`, 'fail');
-  }finally{
-    btn.disabled = false; btn.textContent = '추가';
-  }
-}
-
-async function deleteNote(id, name){
-  if (!confirm('이 메모를 삭제할까요?')) return;
-  try{
-    const { data, error } = await sb.rpc('note_delete', { p_token: _adminToken, p_id: id });
-    if (error) throw error;
-    if (!data || !data.ok) throw new Error('삭제하지 못했어요.');
-    toast('🗑 메모 삭제됨');
-    loadProgress();
-  }catch(e){
-    toast(`❌ ${e.message}`, 'fail');
   }
 }
 
