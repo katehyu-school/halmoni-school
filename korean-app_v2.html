@@ -1222,6 +1222,7 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .hq-footer-copy{max-width:900px;margin:0 auto;padding:12px 0 20px;border-top:1px solid #f5f5f3;text-align:center;font-size:10.5px;color:#c2c8d0;letter-spacing:.03em;line-height:1.8;}
 @media (max-width:600px){.hq-footer-inner{flex-direction:column;align-items:flex-start;}}
 </style>
+<link rel="stylesheet" href="core/footer.css">
 </head>
 <body>
 
@@ -3585,22 +3586,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 </main>
 </div>
-<footer class="hq-footer">
-  <div class="hq-footer-inner">
-    <div class="hq-footer-brand">
-      <svg width="24" height="27" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="#0d9488" stroke="#0d9488" stroke-width="1.8" stroke-linejoin="round"/><polygon points="8,12 10,18 16,18 11,22 13,28 8,24 3,28 5,22 0,18 6,18" fill="#FFD93D"/><polygon points="50,12 52,18 58,18 53,22 55,28 50,24 45,28 47,22 42,18 48,18" fill="#FFD93D"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">DR</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>
-      <span class="hq-footer-name">Doranchae Kids</span>
-    </div>
-    <nav class="hq-footer-links">
-      <a href="index.html">홈 · Home</a>
-      <a href="nhs.html">Doranchae</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/privacy.html">Privacy Policy</a>
-      <a href="https://youtube.com/@doranchae" target="_blank" rel="noopener">▶ YouTube</a>
-    </nav>
-  </div>
-  <div class="hq-footer-copy">© <span data-cr-year></span> <span data-cr-name></span> · All rights reserved</div>
-</footer>
+<footer data-site-footer data-footer-brand="Doranchae Kids"></footer>
 <div class="confetti-wrap" id="confetti"></div>
 
 <script>
@@ -12961,5 +12947,6 @@ function b4SwitchTab(tab) {
 <div class="kids-fc-modal" id="kids-fc-modal"></div>
 
 <script src="core/site-info.js"></script>
+<script src="core/footer.js"></script>
 </body>
 </html>

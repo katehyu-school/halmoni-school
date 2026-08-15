@@ -515,6 +515,7 @@ body::before {
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="core/supabase-config.js"></script>
+<link rel="stylesheet" href="core/footer.css">
 </head>
 <body>
 
@@ -632,36 +633,7 @@ body::before {
     </div>
   </div>
 
-  <footer class="site-footer">
-    © <span data-cr-year></span> <span data-cr-name></span> &nbsp;·&nbsp; <span data-cr-note></span><br>
-    Doranchae &nbsp;·&nbsp;
-    <span style="color:rgba(180,215,235,.18);cursor:default;">Start Here</span> &nbsp;·&nbsp;
-    <a href="/learn/"
-       style="color:rgba(180,215,235,.4);text-decoration:none;transition:color .2s"
-       onmouseover="this.style.color='#4ecdc4'" onmouseout="this.style.color='rgba(180,215,235,.4)'">
-      학습 자료 · Free Lessons
-    </a> &nbsp;·&nbsp;
-    <a href="/faq.html"
-       style="color:rgba(180,215,235,.4);text-decoration:none;transition:color .2s"
-       onmouseover="this.style.color='#4ecdc4'" onmouseout="this.style.color='rgba(180,215,235,.4)'">
-      FAQ
-    </a> &nbsp;·&nbsp;
-    <a href="/privacy.html"
-       style="color:rgba(180,215,235,.4);text-decoration:none;transition:color .2s"
-       onmouseover="this.style.color='#4ecdc4'" onmouseout="this.style.color='rgba(180,215,235,.4)'">
-      Privacy Policy
-    </a> &nbsp;·&nbsp;
-    <a href="/license.html"
-       style="color:rgba(180,215,235,.4);text-decoration:none;transition:color .2s"
-       onmouseover="this.style.color='#4ecdc4'" onmouseout="this.style.color='rgba(180,215,235,.4)'">
-      이용 조건 · Terms
-    </a> &nbsp;·&nbsp;
-    <a href="https://youtube.com/@doranchae" target="_blank" rel="noopener"
-       style="color:rgba(180,215,235,.4);text-decoration:none;transition:color .2s"
-       onmouseover="this.style.color='#4ecdc4'" onmouseout="this.style.color='rgba(180,215,235,.4)'">
-      ▶ YouTube @doranchae
-    </a>
-  </footer>
+  <footer data-site-footer data-footer-theme="dark"></footer>
 
 </div>
 
@@ -1293,5 +1265,6 @@ async function toggleAtt(name, current, btn) {
 </div>
 
 <script src="core/site-info.js"></script>
+<script src="core/footer.js"></script>
 </body>
 </html>
