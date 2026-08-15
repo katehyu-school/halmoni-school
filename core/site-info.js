@@ -6,7 +6,7 @@
     year: "2026",
     name: "HaeOk Shin Yu",
     brand: "Doranchae",
-    note: "모든 권리 보유 · 베타 기간 무료 열람 · 무단 복제·재배포 금지"
+    note: "All rights reserved · Free to browse during the beta · Unauthorized copying or redistribution prohibited"
   };
   // apply(root) — root(기본값: 전체 문서) 안의 data-cr-* 자리표시자를 채웁니다.
   // core/footer.js 처럼 나중에 마크업을 주입하는 스크립트가 그 이후에 다시 호출할 수 있습니다.
