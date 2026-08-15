@@ -7,7 +7,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>HQ Mobile</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy1:#061525; --navy2:#0a2540; --navy3:#0d3350;
@@ -31,7 +31,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:#1a1d24;display:flex;justi
 button{font-family:inherit;border:none;cursor:pointer;background:none}
 #scr-profile{background:linear-gradient(160deg,var(--navy1),var(--navy2),var(--navy3));
   justify-content:center;align-items:center;gap:26px;padding:30px;text-align:center}
-#scr-profile .logo-txt{font-family:Impact,'Arial Black',sans-serif;font-size:1.6rem;color:var(--teal);letter-spacing:2px}
+#scr-profile .logo-txt-ko{font-family:'Gaegu',sans-serif;font-size:2rem;font-weight:700;color:var(--teal);letter-spacing:.02em;line-height:1}
+#scr-profile .logo-txt-en{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:4px}
 #scr-profile .sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-top:-16px}
 .prof-card{width:100%;max-width:300px;border-radius:22px;padding:22px;display:flex;align-items:center;gap:16px;
   text-align:left;transition:transform .15s;border:2px solid transparent}
@@ -329,7 +330,8 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   <div class="proto-badge">PROTOTYPE v0.2</div>
   <div>
     <svg width="96" height="78" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg"><path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/><path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.07"/><line x1="156" y1="100" x2="284" y2="100" stroke="#4ECDC4" stroke-width="1.2" opacity="0.5"/><line x1="180" y1="100" x2="180" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="220" y1="100" x2="220" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="260" y1="100" x2="260" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/><rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><line x1="219" y1="114" x2="219" y2="158" stroke="#4ECDC4" stroke-width="0.6" opacity="0.2"/><circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/><rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/><line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/><line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/></svg>
-    <div class="logo-txt" style="margin-top:8px">DORANCHAE</div>
+    <div class="logo-txt-ko" style="margin-top:8px">도란채</div>
+    <div class="logo-txt-en">DORANCHAE</div>
     <div class="sub" style="margin-top:6px">누가 학습할까요? · Who's learning today?</div>
   </div>
   <button class="prof-card prof-kids" id="profKidsCard" onclick="enterKids()">
