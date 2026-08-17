@@ -343,8 +343,26 @@
    "rule_boxes": [
     {
      "type": "blue",
-     "title": "날짜 = 한자어 숫자 · All dates use Sino-Korean",
-     "content": "1월 → 일월　2월 → 이월　3월 → 삼월\n5월 → 오월　9월 → 구월　12월 → 십이월\n1일 → 일일　9일 → 구일　15일 → 십오일"
+     "title": "월 (month) → 한자어 · Sino-Korean",
+     "label": "🗓️ 월 · MONTH",
+     "grid_items": [
+      { "n": "1월", "k": "일월" },
+      { "n": "2월", "k": "이월" },
+      { "n": "3월", "k": "삼월" },
+      { "n": "5월", "k": "오월" },
+      { "n": "9월", "k": "구월" },
+      { "n": "12월", "k": "십이월" }
+     ]
+    },
+    {
+     "type": "green",
+     "title": "일 (day) → 한자어 · Sino-Korean",
+     "label": "📆 일 · DAY",
+     "grid_items": [
+      { "n": "1일", "k": "일일" },
+      { "n": "9일", "k": "구일" },
+      { "n": "15일", "k": "십오일" }
+     ]
     },
     {
      "type": "red",
@@ -387,14 +405,14 @@
      "hint": "5 = 오 (한자어) + 월"
     },
     {
-     "sentence": "내 생일은 팔월 ___. (the 15th)",
+     "sentence": "내 생일은 팔월 ___이야. (the 15th)",
      "answer": "십오일",
      "hint": "15 = 십오 (한자어) + 일"
     },
     {
-     "sentence": "오늘이 몇 월 ___? (what date)",
+     "sentence": "오늘이 몇 월 ___이에요? (what date)",
      "answer": "며칠",
-     "hint": "날짜를 묻는 말 = 며칠"
+     "hint": "날짜를 묻는 말 = 며칠 (+ 이에요 완성)"
     }
    ]
   },
