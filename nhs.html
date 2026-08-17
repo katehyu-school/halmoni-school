@@ -1527,7 +1527,7 @@ function buildGrammar(){
     // pattern formula box
     const patternHtml=g.pattern?`<div class="gram-pattern">${esc(g.pattern)}</div>`:'';
     // table
-    const tableHtml=g.table?`<div class="gram-table-wrap"><table class="gram-table"><thead><tr>${(g.table.columns||[]).map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${(g.table.rows||[]).map(r=>`<tr>${r.map(cell=>`<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
+    const tableHtml=g.table?`<div class="gram-table-wrap"><table class="gram-table"><thead><tr>${(g.table.columns||g.table.headers||[]).map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${(g.table.rows||[]).map(r=>`<tr>${r.map(cell=>`<td>${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
     // fill in the blanks
     const fillId=`fill-${g.id}-${Math.random().toString(36).slice(2,6)}`;
     const imagesHtml=(g.images&&g.images.length)
@@ -1716,14 +1716,17 @@ function spkToggle(mId,bId){
 
 function _buildQuizTabBar(){
   const epKey=`${DATA.level}_${DATA.id}`;
-  const hasRd=!!(READING_POOL[epKey]);
+  // L1은 아직 읽기 지문이 그 편까지 배운 문법/어휘에 맞춰 검수되지 않아 임시로 숨김 (reading_pool.json 데이터는 그대로 둠 — 편별 검수 후 재활성화 예정)
+  const hasRd=!!(READING_POOL[epKey])&&DATA.level!=='L1';
   const hasSp=!!(SP_QUIZ_POOL[epKey]);
+  const hasSb=!!(DATA.grammar&&DATA.grammar.some(g=>g.examples&&g.examples.length));
   const _lvN=parseInt((DATA.level||'').replace(/[^0-9]/g,''))||0;
   const hasWr=(_lvN>=3&&DATA.script&&DATA.script.length>0)||!!(WRITING_POOL[epKey]);
   const hasSpk=!!((WRITING_POOL[epKey]&&(WRITING_POOL[epKey].completion||[]).length)||(DATA.real_life||[]).some(it=>it&&it.type==='writing_guided'));
-  if(!hasRd&&!hasSp&&!hasWr)return'';
+  if(!hasRd&&!hasSp&&!hasWr&&!hasSb)return'';
   const tabs=[
     {id:'quiz',label:'✏️ 객관식'},
+    ...(hasSb?[{id:'sentbuild',label:'🧩 문장 만들기'}]:[]),
     ...(hasRd?[{id:'reading',label:'📖 읽기'}]:[]),
     ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기'}]:[]),
     ...(hasWr?[{id:'writing',label:'✍️ 쓰기'}]:[]),
@@ -1855,7 +1858,10 @@ function setQuizMode(mode){
   quizIdx=0;quizScore=0;
   const epKey=`${DATA.level}_${DATA.id}`;
   const panel=document.getElementById('panel-quiz');
-  if(mode==='reading'){
+  if(mode==='sentbuild'){
+    panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div id="sb-wrap" style="margin-top:4px;"></div></div>`;
+    _sbInit();
+  } else if(mode==='reading'){
     const rdPool=READING_POOL[epKey]||null;
     if(!rdPool){panel.innerHTML='<div class="loading">읽기 데이터가 없어요.</div>';return;}
     panel.innerHTML=`<div style="max-width:580px">${_buildQuizTabBar()}<div id="rd-wrap" style="margin-top:4px;"></div></div>`;
@@ -1879,6 +1885,104 @@ function resetQuiz(){
   quizIdx=0;quizScore=0;
   document.getElementById('panel-quiz').innerHTML=buildQuiz();
   renderQuizQ();
+}
+
+// ── SENTENCE BUILDER (🧩 문장 만들기) ────────────────────
+// 새 콘텐츠 작성 없이 그 편 grammar[].examples(ko/en)를 그대로 재사용해 단어 순서 맞추기 게임을 만듦.
+let _sbPool=[], _sbIdx=0, _sbDone=[];
+function _sbInit(){
+  const pool=[]; const seen=new Set();
+  (DATA.grammar||[]).forEach(g=>{
+    (g.examples||[]).forEach(ex=>{
+      const ko=(ex&&ex.ko||'').trim();
+      if(ko&&ko.split(/\s+/).length>=2&&!seen.has(ko)){ seen.add(ko); pool.push({ko,en:ex.en||''}); }
+    });
+  });
+  _sbPool=pool; _sbIdx=0; _sbDone=new Array(pool.length).fill(false);
+  _sbRender();
+}
+function _sbRender(){
+  const wrap=document.getElementById('sb-wrap');
+  if(!wrap)return;
+  if(!_sbPool.length){ wrap.innerHTML='<div class="loading">문장 자료가 없어요.</div>'; return; }
+  const idx=_sbIdx, total=_sbPool.length, s=_sbPool[idx];
+  const poolWords=s.ko.split(/\s+/).sort(()=>Math.random()-.5);
+  const dotsHtml=_sbPool.map((_,i)=>`<span onclick="_sbGoto(${i})" style="width:9px;height:9px;border-radius:50%;display:inline-block;margin:0 2px;cursor:pointer;background:${i===idx?'var(--blue)':(_sbDone[i]?'var(--teal-md)':'var(--warm-300)')}"></span>`).join('');
+  const navHtml=total>1?`<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+      <button onclick="_sbGoto(${idx-1})" ${idx===0?'disabled':''} style="padding:5px 12px;border-radius:20px;border:1.5px solid var(--warm-300);background:transparent;font-size:12px;cursor:pointer;color:var(--warm-500);">← 이전 Prev</button>
+      <div>${dotsHtml}</div>
+      <span style="font-size:11.5px;color:var(--warm-500);">${idx+1} / ${total}</span>
+      <button onclick="_sbGoto(${idx+1})" ${idx===total-1?'disabled':''} style="padding:5px 12px;border-radius:20px;border:1.5px solid var(--warm-300);background:transparent;font-size:12px;cursor:pointer;color:var(--warm-500);">다음 Next →</button>
+    </div>`:'';
+  wrap.innerHTML=`<div style="background:#EEF3FF;border:2px solid #A8C0F0;border-radius:14px;padding:20px;">
+    <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:1px;margin-bottom:10px;">🧩 문장 만들기 · SENTENCE BUILDER</div>
+    ${navHtml}
+    <div style="font-size:13px;color:var(--warm-500);margin-bottom:10px;">📌 ${esc(s.en||'')}</div>
+    <div id="sb-pool" style="display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:1.5px dashed var(--warm-300);border-radius:10px;margin-bottom:10px;"></div>
+    <div id="sb-answer" style="display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:1.5px solid var(--blue);border-radius:10px;background:#fff;margin-bottom:12px;"><span style="color:var(--warm-500);font-size:12.5px;">여기에 순서대로 놓으세요 · Place words here in order</span></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button id="sb-check-btn" onclick="_sbCheck()" style="padding:8px 20px;border-radius:20px;background:var(--blue);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;">✅ 확인 Check</button>
+      <button id="sb-next" onclick="_sbNext()" style="display:none;padding:8px 20px;border-radius:20px;background:var(--teal-md);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;">다음 Next →</button>
+      <span id="sb-fb" style="font-size:13px;"></span>
+    </div>
+  </div>`;
+  const poolEl=document.getElementById('sb-pool');
+  poolWords.forEach(w=>{
+    const tile=document.createElement('div');
+    tile.className='sb-tile';
+    tile.textContent=w;
+    tile.style.cssText='padding:7px 14px;border-radius:8px;background:#fff;border:1.5px solid var(--warm-300);font-size:14px;font-weight:500;cursor:pointer;user-select:none;transition:all .15s;';
+    tile.onclick=()=>_sbMove(tile);
+    poolEl.appendChild(tile);
+  });
+}
+function _sbMove(tile){
+  const poolEl=document.getElementById('sb-pool');
+  const ansEl=document.getElementById('sb-answer');
+  if(tile.parentElement===poolEl){
+    tile.style.background='var(--blue)';tile.style.color='#fff';tile.style.borderColor='var(--blue)';
+    const ph=ansEl.querySelector('span');if(ph)ph.remove();
+    ansEl.appendChild(tile);
+  } else {
+    tile.style.background='#fff';tile.style.color='';tile.style.borderColor='var(--warm-300)';
+    poolEl.appendChild(tile);
+    if(!ansEl.querySelector('.sb-tile')){
+      ansEl.innerHTML='<span style="color:var(--warm-500);font-size:12.5px;">여기에 순서대로 놓으세요 · Place words here in order</span>';
+    }
+  }
+}
+function _sbCheck(){
+  const ansEl=document.getElementById('sb-answer');
+  const placed=Array.from(ansEl.querySelectorAll('.sb-tile')).map(el=>el.textContent);
+  const s=_sbPool[_sbIdx];
+  const target=s.ko.split(/\s+/);
+  const fb=document.getElementById('sb-fb');
+  if(!fb)return;
+  if(placed.length===target.length&&placed.every((w,i)=>w===target[i])){
+    _sbDone[_sbIdx]=true;
+    ansEl.querySelectorAll('.sb-tile').forEach(el=>{el.style.background='var(--teal-md)';el.style.borderColor='var(--teal-md)';});
+    fb.innerHTML='<span style="color:var(--teal-dark);font-weight:700;">🎉 정답이에요! Correct!</span>';
+  } else {
+    ansEl.querySelectorAll('.sb-tile').forEach(el=>{el.style.borderColor='var(--coral)';});
+    fb.innerHTML='<span style="color:var(--coral);font-weight:700;">다시 순서를 확인해 보세요. Try again.</span>';
+  }
+  const nextBtn=document.getElementById('sb-next');
+  if(nextBtn) nextBtn.style.display='inline-flex';
+}
+function _sbNext(){
+  if(_sbIdx+1<_sbPool.length){
+    _sbGoto(_sbIdx+1);
+  } else {
+    const fb=document.getElementById('sb-fb');
+    if(fb) fb.innerHTML='<span style="color:var(--teal-dark);font-weight:700;">🎉 다 했어요! All done!</span>';
+    const nextBtn=document.getElementById('sb-next');
+    if(nextBtn) nextBtn.style.display='none';
+  }
+}
+function _sbGoto(i){
+  if(i<0||i>=_sbPool.length)return;
+  _sbIdx=i;
+  _sbRender();
 }
 
 // ── READING PASSAGE GAME ────────────────────────────────
