@@ -1617,9 +1617,9 @@ function buildWriteTab(){
   html+='<div style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">듣고 문장을 그대로 써 보세요.</div>';
   dict.forEach((l,i)=>{
     html+=`<div style="background:#fff;border:1.5px solid var(--warm-300);border-radius:12px;padding:12px 14px;margin-bottom:10px">
-      <button onclick="wrPlayLine('${escA(l.audio||'')}','${escA(l.text)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">🔊 듣기</button>
+      <button onclick="wrPlayLine('${escA(l.audio||'')}','${escA(l.text)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer">🔊 듣기 Listen</button>
       <input id="wrd-${i}" data-ans="${escA(l.text)}" placeholder="들은 문장을 써 보세요" style="width:100%;box-sizing:border-box;margin-top:9px;padding:9px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif)">
-      <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckDict(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인</button><span id="wrd-${i}-res" style="font-size:12.5px"></span></div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckDict(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인 Check</button><span id="wrd-${i}-res" style="font-size:12.5px"></span></div>
     </div>`;
   });
   if(_wrComp.length){
@@ -1631,7 +1631,7 @@ function buildWriteTab(){
         ${c.prompt_en?`<div style="font-size:11px;color:var(--warm-500);margin-top:3px">${esc(c.prompt_en)}</div>`:''}
         ${c.hint?`<div style="font-size:11.5px;color:var(--teal-dark);margin-top:6px">💡 ${esc(c.hint)}</div>`:''}
         <input id="wrc-${i}" placeholder="문장을 완성해 보세요" style="width:100%;box-sizing:border-box;margin-top:9px;padding:9px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif)">
-        <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckComp(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인</button><span id="wrc-${i}-res" style="font-size:12.5px"></span></div>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="wrCheckComp(${i})" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">확인 Check</button><span id="wrc-${i}-res" style="font-size:12.5px"></span></div>
       </div>`;
     });
   }
@@ -1667,7 +1667,7 @@ function _spkCard(prompt, promptEn, hintHtml, elId, btnId, modelHtml, mbId, mId)
       <span style="font-size:12px;color:var(--warm-500)">눌러서 말하기 · Tap &amp; speak</span>
     </div>
     <div id="${elId}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:9px 12px;font-size:14px;font-family:var(--font-serif)"></div>
-    <div style="margin-top:8px"><button id="${mbId}" onclick="spkToggle('${mId}','${mbId}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button>
+    <div style="margin-top:8px"><button id="${mbId}" onclick="spkToggle('${mId}','${mbId}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기 Show answer</button>
     <div id="${mId}" style="display:none;margin-top:8px;background:var(--warm-50);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--warm-900);line-height:1.7;font-family:var(--font-serif)">${modelHtml}</div></div>
   </div>`;
 }
@@ -1711,7 +1711,7 @@ function spkMicEl(btn,elId){
 function spkToggle(mId,bId){
   const m=document.getElementById(mId),b=document.getElementById(bId);
   if(!m)return;const show=m.style.display==='none';m.style.display=show?'block':'none';
-  if(b)b.textContent=show?'🙈 모범답안 숨기기':'📄 모범답안 보기';
+  if(b)b.textContent=show?'🙈 모범답안 숨기기 Hide answer':'📄 모범답안 보기 Show answer';
 }
 
 function _buildQuizTabBar(){
@@ -1725,14 +1725,14 @@ function _buildQuizTabBar(){
   const hasSpk=!!((WRITING_POOL[epKey]&&(WRITING_POOL[epKey].completion||[]).length)||(DATA.real_life||[]).some(it=>it&&it.type==='writing_guided'));
   if(!hasRd&&!hasSp&&!hasWr&&!hasSb)return'';
   const tabs=[
-    {id:'quiz',label:'✏️ 객관식'},
-    ...(hasSb?[{id:'sentbuild',label:'🧩 문장 만들기'}]:[]),
-    ...(hasRd?[{id:'reading',label:'📖 읽기'}]:[]),
-    ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기'}]:[]),
-    ...(hasWr?[{id:'writing',label:'✍️ 쓰기'}]:[]),
-    ...(hasSpk?[{id:'speaking',label:'🗣️ 말하기'}]:[]),
+    {id:'quiz',label:'✏️ 객관식',en:'Multiple Choice'},
+    ...(hasSb?[{id:'sentbuild',label:'🧩 문장 만들기',en:'Sentence Builder'}]:[]),
+    ...(hasRd?[{id:'reading',label:'📖 읽기',en:'Reading'}]:[]),
+    ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기',en:'Spacing'}]:[]),
+    ...(hasWr?[{id:'writing',label:'✍️ 쓰기',en:'Writing'}]:[]),
+    ...(hasSpk?[{id:'speaking',label:'🗣️ 말하기',en:'Speaking'}]:[]),
   ];
-  return`<div class="quiz-mode-bar" style="margin-bottom:16px">${tabs.map(t=>`<button class="quiz-mode-btn${quizMode===t.id?' active':''}" onclick="setQuizMode('${t.id}')">${t.label}</button>`).join('')}</div>`;
+  return`<div class="quiz-mode-bar" style="margin-bottom:16px">${tabs.map(t=>`<button class="quiz-mode-btn${quizMode===t.id?' active':''}" onclick="setQuizMode('${t.id}')">${t.label}<div style="font-size:8.5px;font-weight:500;opacity:.75;margin-top:1px;">${t.en}</div></button>`).join('')}</div>`;
 }
 function buildQuiz(){
   if(!DATA.quiz||!DATA.quiz.length)return'<div class="loading">데이터 준비 중이에요.</div>';
@@ -1760,15 +1760,15 @@ function renderQuizQ(){
   if(isListen){
     inner=`<div class="quiz-listen-wrap" style="margin-bottom:18px;">
         <div style="font-size:12px;color:var(--teal);margin-bottom:10px">🔊 음성을 듣고 맞는 답을 고르세요 · Listen and choose</div>
-        <button class="quiz-listen-btn" onclick="speakTTS('${escA(q.audio_text)}')">🔊 듣기</button>
+        <button class="quiz-listen-btn" onclick="speakTTS('${escA(q.audio_text)}')">🔊 듣기 Listen</button>
       </div>
       <div class="quiz-opts">${opts}</div>
       <div class="quiz-exp" id="quiz-exp"></div>
-      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 →':'결과 보기 🎉'}</button>`;
+      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 → Next':'결과 보기 🎉 Results'}</button>`;
   } else {
     inner=`<div class="quiz-opts">${opts}</div>
       <div class="quiz-exp" id="quiz-exp"></div>
-      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 →':'결과 보기 🎉'}</button>`;
+      <button class="quiz-next-btn" id="quiz-next" onclick="nextQuizQ()">${qi+1<total?'다음 문제 → Next':'결과 보기 🎉 Results'}</button>`;
   }
 
   // 질문 표시: listen은 지시문 작게 (음성 듣기가 메인), mc는 질문 메인
@@ -1918,8 +1918,8 @@ function _sbRender(){
   if(!wrap)return;
   const set=_sbCurSet(), done=_sbCurDone();
   const stageTabHtml=_sbPool2.length?`<div style="display:flex;gap:6px;margin-bottom:12px;">
-      <button onclick="_sbSetStage(1)" style="padding:5px 14px;border-radius:16px;border:1.5px solid var(--blue);background:${_sbStage===1?'var(--blue)':'transparent'};color:${_sbStage===1?'#fff':'var(--blue)'};font-size:12px;font-weight:700;cursor:pointer;">1단계 · 덩어리 낱말</button>
-      <button onclick="_sbSetStage(2)" style="padding:5px 14px;border-radius:16px;border:1.5px solid var(--blue);background:${_sbStage===2?'var(--blue)':'transparent'};color:${_sbStage===2?'#fff':'var(--blue)'};font-size:12px;font-weight:700;cursor:pointer;">2단계 · 조사 분리</button>
+      <button onclick="_sbSetStage(1)" style="padding:5px 14px;border-radius:16px;border:1.5px solid var(--blue);background:${_sbStage===1?'var(--blue)':'transparent'};color:${_sbStage===1?'#fff':'var(--blue)'};font-size:12px;font-weight:700;cursor:pointer;">1단계 · 덩어리 낱말<div style="font-size:8.5px;font-weight:500;opacity:.8;margin-top:1px;">Stage 1 · Word Chunks</div></button>
+      <button onclick="_sbSetStage(2)" style="padding:5px 14px;border-radius:16px;border:1.5px solid var(--blue);background:${_sbStage===2?'var(--blue)':'transparent'};color:${_sbStage===2?'#fff':'var(--blue)'};font-size:12px;font-weight:700;cursor:pointer;">2단계 · 조사 분리<div style="font-size:8.5px;font-weight:500;opacity:.8;margin-top:1px;">Stage 2 · Split Particles</div></button>
     </div>`:'';
   if(!set.length){ wrap.innerHTML=stageTabHtml+'<div class="loading">문장 자료가 없어요.</div>'; return; }
   const idx=_sbIdx, total=set.length, s=set[idx];
@@ -1942,6 +1942,7 @@ function _sbRender(){
     <div id="sb-answer" style="display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:1.5px solid var(--blue);border-radius:10px;background:#fff;margin-bottom:12px;"><span style="color:var(--warm-500);font-size:12.5px;">여기에 순서대로 놓으세요 · Place words here in order</span></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
       <button id="sb-check-btn" onclick="_sbCheck()" style="padding:8px 20px;border-radius:20px;background:var(--blue);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;">✅ 확인 Check</button>
+      <button id="sb-next-btn" onclick="_sbNext()" style="display:none;padding:8px 20px;border-radius:20px;background:var(--teal-md);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;">다음 Next →</button>
       <span id="sb-fb" style="font-size:13px;"></span>
     </div>
   </div>`;
@@ -1978,6 +1979,7 @@ function _sbCheck(){
   const target=_sbTarget(s);
   const fb=document.getElementById('sb-fb');
   const btn=document.getElementById('sb-check-btn');
+  const nextBtn=document.getElementById('sb-next-btn');
   if(!fb||!btn)return;
   if(placed.length===target.length&&placed.every((w,i)=>w===target[i])){
     done[_sbIdx]=true;
@@ -1986,12 +1988,14 @@ function _sbCheck(){
     btn.textContent='다음 Next →';
     btn.style.background='var(--teal-md)';
     btn.onclick=_sbNext;
+    if(nextBtn) nextBtn.style.display='none';
   } else {
     ansEl.querySelectorAll('.sb-tile').forEach(el=>{el.style.borderColor='var(--coral)';});
     fb.innerHTML='<span style="color:var(--coral);font-weight:700;">다시 순서를 확인해 보세요. Try again.</span>';
     btn.textContent='🔄 다시 시도 Try Again';
     btn.style.background='var(--coral)';
     btn.onclick=_sbRetry;
+    if(nextBtn) nextBtn.style.display='inline-block';
   }
 }
 function _sbRetry(){
@@ -1999,6 +2003,7 @@ function _sbRetry(){
   const ansEl=document.getElementById('sb-answer');
   const fb=document.getElementById('sb-fb');
   const btn=document.getElementById('sb-check-btn');
+  const nextBtn=document.getElementById('sb-next-btn');
   if(!poolEl||!ansEl)return;
   Array.from(ansEl.querySelectorAll('.sb-tile')).forEach(tile=>{
     tile.style.background='#fff';tile.style.color='';tile.style.borderColor='var(--warm-300)';
@@ -2011,6 +2016,7 @@ function _sbRetry(){
     btn.style.background='var(--blue)';
     btn.onclick=_sbCheck;
   }
+  if(nextBtn) nextBtn.style.display='none';
 }
 function _sbNext(){
   const set=_sbCurSet();
@@ -2153,8 +2159,8 @@ function _spqRender(){
     '</div>'+
     '<div id="spq-fb" style="min-height:22px;text-align:center;font-size:0.85rem;margin-bottom:10px;"></div>'+
     '<div style="display:flex;gap:8px;justify-content:center;">'+
-      '<button onclick="_spqHint()" style="padding:7px 18px;background:white;border:2px solid #81C784;color:#2E7D32;border-radius:20px;font-size:0.82rem;cursor:pointer;">💡 힌트</button>'+
-      '<button onclick="_spqCheck()" style="padding:7px 18px;background:#43A047;color:white;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;">✅ 확인</button>'+
+      '<button onclick="_spqHint()" style="padding:7px 18px;background:white;border:2px solid #81C784;color:#2E7D32;border-radius:20px;font-size:0.82rem;cursor:pointer;">💡 힌트 Hint</button>'+
+      '<button onclick="_spqCheck()" style="padding:7px 18px;background:#43A047;color:white;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;">✅ 확인 Check</button>'+
     '</div>'+
     '</div>';
 }
@@ -2207,7 +2213,7 @@ function _spqDone(){
     '<div style="background:linear-gradient(135deg,#E8F5E9,#F0FFF4);border:2px solid #81C784;border-radius:18px;padding:20px;text-align:center;">'+
     '<div style="font-size:2rem;margin-bottom:4px;">🌿</div>'+
     '<div style="font-weight:700;color:#2E7D32;">띄어쓰기 완료! All done!</div>'+
-    '<button onclick="_spqIdx=0;_spqRender();" style="margin-top:12px;padding:7px 22px;background:#43A047;color:white;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;">🔄 다시</button>'+
+    '<button onclick="_spqIdx=0;_spqRender();" style="margin-top:12px;padding:7px 22px;background:#43A047;color:white;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;">🔄 다시 Retry</button>'+
     '</div>';
 }
 
