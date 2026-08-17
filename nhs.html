@@ -1445,7 +1445,18 @@ function speakTTS(text){
   const go=()=>{const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ko'));const pref=vs.find(v=>/google|yuna|heami|sora|microsoft|natural|neural|siri/i.test(v.name))||vs[0];if(pref)u.voice=pref;speechSynthesis.speak(u);};
   speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
-function stopTTS(){ if(window.speechSynthesis) speechSynthesis.cancel(); }
+function stopTTS(){ if(window.speechSynthesis) speechSynthesis.cancel(); if(_audio){_audio.pause();_audio=null;} }
+// Real Life 전용 재생: 미리 만든 Typecast mp3(audio)가 있으면 그걸 재생하고, 없거나 재생 실패하면 브라우저 TTS로 대체
+function rlPlay(src,text){
+  if(_audio){_audio.pause();_audio=null;}
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  if(src){
+    _audio=new Audio(src);
+    _audio.play().catch(()=>{_audio=null;speakTTS(text);});
+  } else {
+    speakTTS(text);
+  }
+}
 function toggleRLScript(id){
   const el=document.getElementById('rlscript-'+id);
   const btn=document.getElementById('rlscript-btn-'+id);
@@ -2518,7 +2529,7 @@ function buildRealLife(){
         <div class="en-gloss" style="font-size:11.5px;color:var(--warm-500);margin-bottom:12px">${esc(item.title_en||'')}</div>
         ${item.setup_ko?`<div style="font-size:12px;color:var(--warm-700);margin-bottom:10px">${esc(item.setup_ko)}<br><span style="font-size:11px;color:var(--warm-500)">${esc(item.setup_en||'')}</span></div>`:''}
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
-          <button onclick="speakTTS('${escA(playSrc)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ 듣기 Play</button>
+          <button onclick="rlPlay('${escA(item.audio||'')}','${escA(playSrc)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ 듣기 Play</button>
           <button onclick="stopTTS()" style="background:var(--warm-100);color:var(--warm-700);border:1px solid var(--warm-300);border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer">■ Stop</button>
           ${scriptBlock?`<button id="rlscript-btn-${sid}" onclick="toggleRLScript('${sid}')" style="background:none;border:none;color:var(--warm-500);font-size:12px;cursor:pointer;text-decoration:underline">📄 스크립트 보기</button>`:''}
         </div>
@@ -2536,7 +2547,7 @@ function buildRealLife(){
         ${item.setup_ko?`<div style="font-size:12px;color:var(--warm-700);margin-bottom:10px">${esc(item.setup_ko)}<br><span style="font-size:11px;color:var(--warm-500)">${esc(item.setup_en||'')}</span></div>`:''}
         ${item.passage?`<div style="background:var(--teal-50);border-radius:var(--radius-sm);padding:13px 17px;margin-bottom:10px;font-size:13px;color:var(--warm-900);line-height:1.85;border-left:3px solid var(--teal)">${esc(item.passage)}</div>
         <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
-          <button onclick="speakTTS('${escA(item.passage)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ 듣기 Play</button>
+          <button onclick="rlPlay('${escA(item.audio||'')}','${escA(item.passage)}')" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer">▶ 듣기 Play</button>
           <button onclick="stopTTS()" style="background:var(--warm-100);color:var(--warm-700);border:1px solid var(--warm-300);border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer">■ Stop</button>
         </div>`:''}
         <div style="margin-top:12px">${qHtml}</div>
@@ -2584,7 +2595,7 @@ function buildRealLife(){
       <div style="display:flex;gap:12px;margin-bottom:8px;font-size:13px;align-items:flex-start">
         <span style="font-weight:700;color:var(--teal);min-width:60px;flex-shrink:0">${esc(l.speaker)}</span>
         <div>
-          <div style="font-family:var(--font-serif);font-weight:600;color:var(--warm-900)">${esc(l.text)} <button onclick="speakTTS('${escA(l.text)}')" style="background:none;border:none;cursor:pointer;font-size:11px;opacity:.5">🔊</button></div>
+          <div style="font-family:var(--font-serif);font-weight:600;color:var(--warm-900)">${esc(l.text)} <button onclick="rlPlay('${escA(l.audio||'')}','${escA(l.text)}')" style="background:none;border:none;cursor:pointer;font-size:11px;opacity:.5">🔊</button></div>
           <div style="font-size:11px;color:var(--warm-500)">${esc(l.en||l.translation||'')}</div>
         </div>
       </div>`).join('');
