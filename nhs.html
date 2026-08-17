@@ -1750,9 +1750,10 @@ function renderQuizQ(){
   // - audio_text 없음 → 일반 객관식 (질문 + 영어 + 선택지)
   const isListen = !!q.audio_text;
 
+  const optsEn=q.options_en||q.choices_en||null;
   const opts=(q.options||q.choices||[]).map((opt,oi)=>`
     <button class="quiz-opt" id="qopt-${oi}" onclick="answerMC(${oi},${qi})">
-      <span style="font-weight:700;color:var(--teal-md);margin-right:7px">${oi+1}.</span>${esc(opt)}
+      <span style="font-weight:700;color:var(--teal-md);margin-right:7px">${oi+1}.</span>${esc(opt)}${optsEn&&optsEn[oi]?`<div style="font-size:11px;color:var(--warm-500);font-weight:400;margin-top:2px;margin-left:20px;">${esc(optsEn[oi])}</div>`:''}
     </button>`).join('');
 
   let inner='';
@@ -1889,7 +1890,8 @@ function resetQuiz(){
 
 // ── SENTENCE BUILDER (🧩 문장 만들기) ────────────────────
 // 새 콘텐츠 작성 없이 그 편 grammar[].examples(ko/en)를 그대로 재사용해 단어 순서 맞추기 게임을 만듦.
-let _sbPool=[], _sbIdx=0, _sbDone=[];
+// 1단계 = 덩어리 낱말(조사 붙은 채로), 2단계 = 조사 분리 + 오답 조사(distractor) 포함, sentbuild2_pool.json에서 로드.
+let _sbPool=[], _sbPool2=[], _sbStage=1, _sbIdx=0, _sbDone=[], _sbDone2=[];
 function _sbInit(){
   const pool=[]; const seen=new Set();
   (DATA.grammar||[]).forEach(g=>{
@@ -1898,31 +1900,48 @@ function _sbInit(){
       if(ko&&ko.split(/\s+/).length>=2&&!seen.has(ko)){ seen.add(ko); pool.push({ko,en:ex.en||''}); }
     });
   });
-  _sbPool=pool; _sbIdx=0; _sbDone=new Array(pool.length).fill(false);
+  const epKey=`${DATA.level}_${DATA.id}`;
+  _sbPool=pool; _sbPool2=SENTBUILD2_POOL[epKey]||[];
+  _sbStage=1; _sbIdx=0; _sbDone=new Array(pool.length).fill(false); _sbDone2=new Array(_sbPool2.length).fill(false);
   _sbRender();
+}
+function _sbCurSet(){ return _sbStage===2?_sbPool2:_sbPool; }
+function _sbCurDone(){ return _sbStage===2?_sbDone2:_sbDone; }
+function _sbTiles(item){ return _sbStage===2?[...item.target,...(item.distractors||[])]:item.ko.split(/\s+/); }
+function _sbTarget(item){ return _sbStage===2?item.target:item.ko.split(/\s+/); }
+function _sbSetStage(n){
+  if(n===2&&!_sbPool2.length)return;
+  _sbStage=n; _sbIdx=0; _sbRender();
 }
 function _sbRender(){
   const wrap=document.getElementById('sb-wrap');
   if(!wrap)return;
-  if(!_sbPool.length){ wrap.innerHTML='<div class="loading">문장 자료가 없어요.</div>'; return; }
-  const idx=_sbIdx, total=_sbPool.length, s=_sbPool[idx];
-  const poolWords=s.ko.split(/\s+/).sort(()=>Math.random()-.5);
-  const dotsHtml=_sbPool.map((_,i)=>`<span onclick="_sbGoto(${i})" style="width:9px;height:9px;border-radius:50%;display:inline-block;margin:0 2px;cursor:pointer;background:${i===idx?'var(--blue)':(_sbDone[i]?'var(--teal-md)':'var(--warm-300)')}"></span>`).join('');
+  const set=_sbCurSet(), done=_sbCurDone();
+  const stageTabHtml=_sbPool2.length?`<div style="display:flex;gap:6px;margin-bottom:12px;">
+      <button onclick="_sbSetStage(1)" style="padding:5px 14px;border-radius:16px;border:1.5px solid var(--blue);background:${_sbStage===1?'var(--blue)':'transparent'};color:${_sbStage===1?'#fff':'var(--blue)'};font-size:12px;font-weight:700;cursor:pointer;">1단계 · 덩어리 낱말</button>
+      <button onclick="_sbSetStage(2)" style="padding:5px 14px;border-radius:16px;border:1.5px solid var(--blue);background:${_sbStage===2?'var(--blue)':'transparent'};color:${_sbStage===2?'#fff':'var(--blue)'};font-size:12px;font-weight:700;cursor:pointer;">2단계 · 조사 분리</button>
+    </div>`:'';
+  if(!set.length){ wrap.innerHTML=stageTabHtml+'<div class="loading">문장 자료가 없어요.</div>'; return; }
+  const idx=_sbIdx, total=set.length, s=set[idx];
+  const poolWords=_sbTiles(s).sort(()=>Math.random()-.5);
+  const dotsHtml=set.map((_,i)=>`<span onclick="_sbGoto(${i})" style="width:9px;height:9px;border-radius:50%;display:inline-block;margin:0 2px;cursor:pointer;background:${i===idx?'var(--blue)':(done[i]?'var(--teal-md)':'var(--warm-300)')}"></span>`).join('');
   const navHtml=total>1?`<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
       <button onclick="_sbGoto(${idx-1})" ${idx===0?'disabled':''} style="padding:5px 12px;border-radius:20px;border:1.5px solid var(--warm-300);background:transparent;font-size:12px;cursor:pointer;color:var(--warm-500);">← 이전 Prev</button>
       <div>${dotsHtml}</div>
       <span style="font-size:11.5px;color:var(--warm-500);">${idx+1} / ${total}</span>
       <button onclick="_sbGoto(${idx+1})" ${idx===total-1?'disabled':''} style="padding:5px 12px;border-radius:20px;border:1.5px solid var(--warm-300);background:transparent;font-size:12px;cursor:pointer;color:var(--warm-500);">다음 Next →</button>
     </div>`:'';
+  const stage2Hint=_sbStage===2?'<div style="font-size:11.5px;color:var(--coral);margin-bottom:8px;">⚠️ 필요 없는 조사도 섞여 있어요 · Some particles here are distractors — don\'t use them all!</div>':'';
   wrap.innerHTML=`<div style="background:#EEF3FF;border:2px solid #A8C0F0;border-radius:14px;padding:20px;">
     <div style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:1px;margin-bottom:10px;">🧩 문장 만들기 · SENTENCE BUILDER</div>
+    ${stageTabHtml}
     ${navHtml}
     <div style="font-size:13px;color:var(--warm-500);margin-bottom:10px;">📌 ${esc(s.en||'')}</div>
+    ${stage2Hint}
     <div id="sb-pool" style="display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:1.5px dashed var(--warm-300);border-radius:10px;margin-bottom:10px;"></div>
     <div id="sb-answer" style="display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:10px;border:1.5px solid var(--blue);border-radius:10px;background:#fff;margin-bottom:12px;"><span style="color:var(--warm-500);font-size:12.5px;">여기에 순서대로 놓으세요 · Place words here in order</span></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
       <button id="sb-check-btn" onclick="_sbCheck()" style="padding:8px 20px;border-radius:20px;background:var(--blue);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;">✅ 확인 Check</button>
-      <button id="sb-next" onclick="_sbNext()" style="display:none;padding:8px 20px;border-radius:20px;background:var(--teal-md);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;">다음 Next →</button>
       <span id="sb-fb" style="font-size:13px;"></span>
     </div>
   </div>`;
@@ -1954,39 +1973,66 @@ function _sbMove(tile){
 function _sbCheck(){
   const ansEl=document.getElementById('sb-answer');
   const placed=Array.from(ansEl.querySelectorAll('.sb-tile')).map(el=>el.textContent);
-  const s=_sbPool[_sbIdx];
-  const target=s.ko.split(/\s+/);
+  const set=_sbCurSet(), done=_sbCurDone();
+  const s=set[_sbIdx];
+  const target=_sbTarget(s);
   const fb=document.getElementById('sb-fb');
-  if(!fb)return;
+  const btn=document.getElementById('sb-check-btn');
+  if(!fb||!btn)return;
   if(placed.length===target.length&&placed.every((w,i)=>w===target[i])){
-    _sbDone[_sbIdx]=true;
+    done[_sbIdx]=true;
     ansEl.querySelectorAll('.sb-tile').forEach(el=>{el.style.background='var(--teal-md)';el.style.borderColor='var(--teal-md)';});
     fb.innerHTML='<span style="color:var(--teal-dark);font-weight:700;">🎉 정답이에요! Correct!</span>';
+    btn.textContent='다음 Next →';
+    btn.style.background='var(--teal-md)';
+    btn.onclick=_sbNext;
   } else {
     ansEl.querySelectorAll('.sb-tile').forEach(el=>{el.style.borderColor='var(--coral)';});
     fb.innerHTML='<span style="color:var(--coral);font-weight:700;">다시 순서를 확인해 보세요. Try again.</span>';
+    btn.textContent='🔄 다시 시도 Try Again';
+    btn.style.background='var(--coral)';
+    btn.onclick=_sbRetry;
   }
-  const nextBtn=document.getElementById('sb-next');
-  if(nextBtn) nextBtn.style.display='inline-flex';
+}
+function _sbRetry(){
+  const poolEl=document.getElementById('sb-pool');
+  const ansEl=document.getElementById('sb-answer');
+  const fb=document.getElementById('sb-fb');
+  const btn=document.getElementById('sb-check-btn');
+  if(!poolEl||!ansEl)return;
+  Array.from(ansEl.querySelectorAll('.sb-tile')).forEach(tile=>{
+    tile.style.background='#fff';tile.style.color='';tile.style.borderColor='var(--warm-300)';
+    poolEl.appendChild(tile);
+  });
+  ansEl.innerHTML='<span style="color:var(--warm-500);font-size:12.5px;">여기에 순서대로 놓으세요 · Place words here in order</span>';
+  if(fb) fb.innerHTML='';
+  if(btn){
+    btn.textContent='✅ 확인 Check';
+    btn.style.background='var(--blue)';
+    btn.onclick=_sbCheck;
+  }
 }
 function _sbNext(){
-  if(_sbIdx+1<_sbPool.length){
+  const set=_sbCurSet();
+  if(_sbIdx+1<set.length){
     _sbGoto(_sbIdx+1);
   } else {
     const fb=document.getElementById('sb-fb');
     if(fb) fb.innerHTML='<span style="color:var(--teal-dark);font-weight:700;">🎉 다 했어요! All done!</span>';
-    const nextBtn=document.getElementById('sb-next');
-    if(nextBtn) nextBtn.style.display='none';
+    const btn=document.getElementById('sb-check-btn');
+    if(btn) btn.style.display='none';
   }
 }
 function _sbGoto(i){
-  if(i<0||i>=_sbPool.length)return;
+  const set=_sbCurSet();
+  if(i<0||i>=set.length)return;
   _sbIdx=i;
   _sbRender();
 }
 
 // ── READING PASSAGE GAME ────────────────────────────────
 let READING_POOL = {}; const _rdPoolReady = fetch('data/nhs/reading_pool.json').then(r=>r.json()).then(d=>{READING_POOL=d;}).catch(e=>{});
+let SENTBUILD2_POOL = {}; const _sb2PoolReady = fetch('data/nhs/sentbuild2_pool.json').then(r=>r.json()).then(d=>{SENTBUILD2_POOL=d;}).catch(e=>{});
 let GLOSSARY_POOL = {}; const _glossReady = fetch('data/nhs/glossary_pool.json').then(r=>r.json()).then(d=>{GLOSSARY_POOL=d;}).catch(e=>{});
 let WRITING_POOL = {}; const _wrPoolReady = fetch('data/nhs/writing_pool.json').then(r=>r.json()).then(d=>{WRITING_POOL=d;}).catch(e=>{});
 let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{});
@@ -2027,7 +2073,7 @@ function _rdRender(){
     +'<div style="font-weight:700;font-size:15px;color:#1B5E20;margin-bottom:12px;">'+q.q+'</div>'
     +'<div style="font-size:12px;color:#81C784;margin-bottom:12px;">'+q.q_en+'</div>'
     +'<div id="rd-opts" style="display:flex;flex-direction:column;gap:8px;">'
-    +q.options.map((opt,i)=>'<button class="rd-opt" onclick="_rdChoose('+i+')" data-i="'+i+'" style="background:#fff;border:2px solid #C8E6C9;border-radius:10px;padding:11px 14px;font-size:14px;cursor:pointer;text-align:left;transition:all 0.15s;color:#2E3B2E;">'+opt+'</button>').join('')
+    +q.options.map((opt,i)=>'<button class="rd-opt" onclick="_rdChoose('+i+')" data-i="'+i+'" style="background:#fff;border:2px solid #C8E6C9;border-radius:10px;padding:11px 14px;font-size:14px;cursor:pointer;text-align:left;transition:all 0.15s;color:#2E3B2E;">'+opt+(q.options_en&&q.options_en[i]?'<div style="font-size:11px;color:#81C784;font-weight:400;margin-top:2px;">'+q.options_en[i]+'</div>':'')+'</button>').join('')
     +'</div>'
     +'<div id="rd-fb" style="min-height:28px;margin-top:10px;"></div>'
     +'</div>';

@@ -432,6 +432,84 @@
    "tier": "core"
   },
   {
+   "id": "g08_counters",
+   "title": "단위 명사 — 무엇을 셀 때 어떤 말을 써요?",
+   "title_en": "Counter Words — Which One for What?",
+   "icon": "📦",
+   "rule": "세는 대상에 따라 단위 명사(분류사)가 달라져요. [숫자 관형형] + [단위 명사] + [명사]",
+   "explanation_en": "Korean uses different counter words (classifiers) depending on what you're counting — like English 'a piece of', 'a pair of', 'a bundle of'. Always pair them with the modifier-form native number (한, 두, 세...).",
+   "table": {
+    "columns": [
+     "단위",
+     "쓰임 · Use",
+     "예시"
+    ],
+    "rows": [
+     [
+      "개",
+      "일반적인 물건 · General objects",
+      "사과 한 개, 연필 두 개"
+     ],
+     [
+      "마리",
+      "동물 · Animals",
+      "강아지 한 마리, 고양이 두 마리"
+     ],
+     [
+      "벌",
+      "옷 (한 세트) · Clothes (a set)",
+      "한복 한 벌, 양복 두 벌"
+     ],
+     [
+      "켤레",
+      "신발·양말 등 쌍 · Pairs (shoes, socks)",
+      "신발 한 켤레, 양말 두 켤레"
+     ],
+     [
+      "채",
+      "집이나 건물 · Houses/buildings",
+      "집 한 채, 빌딩 두 채"
+     ],
+     [
+      "송이",
+      "꽃이나 열매 뭉치 · Flowers/fruit clusters",
+      "장미 한 송이, 포도 두 송이"
+     ],
+     [
+      "그릇 / 컵 / 잔",
+      "음식이나 음료 · Food/drinks (bowl/cup/glass)",
+      "밥 한 그릇, 물 한 잔"
+     ],
+     [
+      "대",
+      "자동차·비행기·악기 등 · Vehicles, machines, instruments",
+      "자동차 한 대, 피아노 두 대"
+     ],
+     [
+      "자루",
+      "긴 도구 · Long tools",
+      "연필 한 자루, 칼 두 자루"
+     ],
+     [
+      "장",
+      "종이나 얇은 물건 · Paper/thin flat things",
+      "종이 한 장, 사진 두 장"
+     ],
+     [
+      "근",
+      "고기 무게 단위 (약 600g) · Traditional weight unit for meat (~600g)",
+      "소고기 한 근, 돼지고기 두 근"
+     ],
+     [
+      "단",
+      "다발로 묶은 채소 · Bundled vegetables/greens",
+      "파 한 단, 시금치 두 단"
+     ]
+    ]
+   },
+   "tier": "core"
+  },
+  {
    "id": "g08_sino_vs_native",
    "title": "고유어 vs 한자어 — 언제 뭘 써요?",
    "title_en": "Native vs Sino-Korean — When to Use Which?",
@@ -494,19 +572,19 @@
    },
    "examples": [
     {
-     "ko": "딸기 만오천 원이에요. (price = 한자어)",
+     "ko": "딸기 만오천 원이에요.",
      "en": "Strawberries are 15,000 won."
     },
     {
-     "ko": "사과 여섯 개 주세요. (counting = 고유어)",
+     "ko": "사과 여섯 개 주세요.",
      "en": "Please give me six apples."
     },
     {
-     "ko": "두 시에 만나요. (hour = 고유어)",
+     "ko": "두 시에 만나요.",
      "en": "Let's meet at 2 o'clock."
     },
     {
-     "ko": "전화번호는 공일공-사오육칠-팔구일이예요. (phone = 한자어 · 0=공)",
+     "ko": "전화번호는 공일공-사오육칠-팔구일이예요.",
      "en": "My phone number is 010-4567-8912."
     }
    ],
@@ -641,7 +719,13 @@
     "딸기 두 박스 + 사과 여섯 개"
    ],
    "answer": 1,
-   "explanation": "딸기 한 박스하고 사과 여섯 개 — 1 box of strawberries and 6 apples."
+   "explanation": "딸기 한 박스하고 사과 여섯 개 — 1 box of strawberries and 6 apples.",
+   "options_en": [
+    "2 boxes of strawberries + 5 apples",
+    "1 box of strawberries + 6 apples",
+    "1 box of strawberries + 7 apples",
+    "2 boxes of strawberries + 6 apples"
+   ]
   },
   {
    "id": "q08_02",
@@ -668,7 +752,13 @@
     "만, 억, 조"
    ],
    "answer": 1,
-   "explanation": "하나, 둘, 셋 = 고유어 (Native Korean). 일, 이, 삼 = 한자어 (Sino-Korean)."
+   "explanation": "하나, 둘, 셋 = 고유어 (Native Korean). 일, 이, 삼 = 한자어 (Sino-Korean).",
+   "options_en": [
+    "il, i, sam (Sino-Korean 1,2,3)",
+    "hana, dul, set (Native Korean 1,2,3)",
+    "yeong, gong, jero (zero forms)",
+    "man, eok, jo (10K, 100M, trillion)"
+   ]
   },
   {
    "id": "q08_04",
@@ -681,7 +771,13 @@
     "사과 서 개"
    ],
    "answer": 1,
-   "explanation": "물건 셀 때는 고유어 관형형! 셋 → 세 (단위 앞), so 사과 세 개 ✅"
+   "explanation": "물건 셀 때는 고유어 관형형! 셋 → 세 (단위 앞), so 사과 세 개 ✅",
+   "options_en": [
+    "3 apples (사과 + Sino-Korean 삼, wrong counter form)",
+    "3 apples (사과 + Native Korean 세, correct)",
+    "3 apples (사과 + 셋, wrong form)",
+    "3 apples (사과 + 서, wrong form)"
+   ]
   },
   {
    "id": "q08_05",

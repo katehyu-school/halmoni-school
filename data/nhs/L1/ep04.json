@@ -191,6 +191,20 @@
      "note": "시 = 고유어 숫자 · hours use Native Korean"
     },
     {
+     "korean": "시",
+     "romanization": "si",
+     "english": "o'clock / hour",
+     "emoji": "🕑",
+     "note": "숫자는 고유어(한 시, 두 시...) · counts with Native Korean numbers"
+    },
+    {
+     "korean": "분",
+     "romanization": "bun",
+     "english": "minute",
+     "emoji": "⏱️",
+     "note": "숫자는 한자어(일 분, 이 분...) · counts with Sino-Korean numbers"
+    },
+    {
      "korean": "오전",
      "romanization": "o-jeon",
      "english": "a.m. / morning",
@@ -346,18 +360,56 @@
      "title": "월 (month) → 한자어 · Sino-Korean",
      "label": "🗓️ 월 · MONTH",
      "grid_items": [
-      { "n": "1월", "k": "일월" },
-      { "n": "2월", "k": "이월" },
-      { "n": "3월", "k": "삼월" },
-      { "n": "4월", "k": "사월" },
-      { "n": "5월", "k": "오월" },
-      { "n": "6월", "k": "유월", "badge": "불규칙" },
-      { "n": "7월", "k": "칠월" },
-      { "n": "8월", "k": "팔월" },
-      { "n": "9월", "k": "구월" },
-      { "n": "10월", "k": "시월", "badge": "불규칙" },
-      { "n": "11월", "k": "십일월" },
-      { "n": "12월", "k": "십이월" }
+      {
+       "n": "1월",
+       "k": "일월"
+      },
+      {
+       "n": "2월",
+       "k": "이월"
+      },
+      {
+       "n": "3월",
+       "k": "삼월"
+      },
+      {
+       "n": "4월",
+       "k": "사월"
+      },
+      {
+       "n": "5월",
+       "k": "오월"
+      },
+      {
+       "n": "6월",
+       "k": "유월",
+       "badge": "불규칙"
+      },
+      {
+       "n": "7월",
+       "k": "칠월"
+      },
+      {
+       "n": "8월",
+       "k": "팔월"
+      },
+      {
+       "n": "9월",
+       "k": "구월"
+      },
+      {
+       "n": "10월",
+       "k": "시월",
+       "badge": "불규칙"
+      },
+      {
+       "n": "11월",
+       "k": "십일월"
+      },
+      {
+       "n": "12월",
+       "k": "십이월"
+      }
      ]
     },
     {
@@ -365,16 +417,46 @@
      "title": "일 (day) → 한자어 · Sino-Korean",
      "label": "📆 일 · DAY",
      "grid_items": [
-      { "n": "1일", "k": "일일" },
-      { "n": "5일", "k": "오일" },
-      { "n": "9일", "k": "구일" },
-      { "n": "10일", "k": "십일" },
-      { "n": "11일", "k": "십일일" },
-      { "n": "15일", "k": "십오일" },
-      { "n": "20일", "k": "이십일" },
-      { "n": "25일", "k": "이십오일" },
-      { "n": "30일", "k": "삼십일" },
-      { "n": "31일", "k": "삼십일일" }
+      {
+       "n": "1일",
+       "k": "일일"
+      },
+      {
+       "n": "5일",
+       "k": "오일"
+      },
+      {
+       "n": "9일",
+       "k": "구일"
+      },
+      {
+       "n": "10일",
+       "k": "십일"
+      },
+      {
+       "n": "11일",
+       "k": "십일일"
+      },
+      {
+       "n": "15일",
+       "k": "십오일"
+      },
+      {
+       "n": "20일",
+       "k": "이십일"
+      },
+      {
+       "n": "25일",
+       "k": "이십오일"
+      },
+      {
+       "n": "30일",
+       "k": "삼십일"
+      },
+      {
+       "n": "31일",
+       "k": "삼십일일"
+      }
      ]
     },
     {
@@ -718,9 +800,9 @@
     "situation_en": "Asking where to meet"
    },
    {
-    "banmal": "알았어.",
-    "jondaemal": "알겠어요.",
-    "english": "Got it / Understood.",
+    "banmal": "응, 좋아.",
+    "jondaemal": "네, 좋아요.",
+    "english": "Yeah / Yes, sounds good.",
     "situation_ko": "확인",
     "situation_en": "Confirming"
    }
@@ -753,8 +835,8 @@
      "en": "Yes, understood. I'll see you then."
     }
    ],
-   "note_ko": "어른들은 존댓말(-세요, -죠, -겠습니다)을 써요. 며칠이야? → 며칠이에요?, 알았어 → 알겠습니다.",
-   "note_en": "Adults use polite forms. Compare: 며칠이야? (casual) → 며칠이에요? (polite), 알았어 → 알겠습니다."
+   "note_ko": "어른들은 존댓말(-세요, -죠, -겠습니다)을 써요. 며칠이야? → 며칠이에요?",
+   "note_en": "Adults use polite forms. Compare: 며칠이야? (casual) → 며칠이에요? (polite)"
   }
  },
  "pronunciation": [
@@ -872,7 +954,13 @@
     "오늘 약속 없어?"
    ],
    "answer": 1,
-   "explanation": "약속 없어? = Are you free? 없어(casual) vs 없어요(polite). 있어(have) vs 없어(don't have)."
+   "explanation": "약속 없어? = Are you free? 없어(casual) vs 없어요(polite). 있어(have) vs 없어(don't have).",
+   "options_en": [
+    "Do you have plans this weekend?",
+    "Are you free this weekend?",
+    "Are you free this weekend? (polite)",
+    "Are you free today?"
+   ]
   },
   {
    "id": "q2",
@@ -886,7 +974,13 @@
     "그게 몇 월이야?"
    ],
    "answer": 2,
-   "explanation": "며칠이야? = What date is it? (반말). 몇 시(time) vs 며칠(date) vs 무슨 요일(day of week)."
+   "explanation": "며칠이야? = What date is it? (반말). 몇 시(time) vs 며칠(date) vs 무슨 요일(day of week).",
+   "options_en": [
+    "What time is that?",
+    "What day of the week is that?",
+    "What date is that?",
+    "What month is that?"
+   ]
   },
   {
    "id": "q3",
@@ -914,7 +1008,13 @@
     "오후 2시에 지하철 3번 입구에서 어때?"
    ],
    "answer": 2,
-   "explanation": "오후(PM) 1시 + 입구(entrance). 입구(entrance) vs 출구(exit), 오전(AM) vs 오후(PM) 주의!"
+   "explanation": "오후(PM) 1시 + 입구(entrance). 입구(entrance) vs 출구(exit), 오전(AM) vs 오후(PM) 주의!",
+   "options_en": [
+    "How about 1pm at subway exit 3?",
+    "How about 1am at subway entrance 3?",
+    "How about 1pm at subway entrance 3?",
+    "How about 2pm at subway entrance 3?"
+   ]
   },
   {
    "id": "q5_mc",
@@ -927,7 +1027,13 @@
     "오전 한 시"
    ],
    "answer": 0,
-   "explanation": "시(hour)는 고유어 숫자! 1 → 한 (not 일/하나). 오후 한 시 = 1 PM."
+   "explanation": "시(hour)는 고유어 숫자! 1 → 한 (not 일/하나). 오후 한 시 = 1 PM.",
+   "options_en": [
+    "1pm (native number, correct)",
+    "1pm (Sino-Korean number, wrong)",
+    "1pm ('하나' form, wrong)",
+    "1am (native number)"
+   ]
   },
   {
    "id": "q6_mc",
@@ -940,7 +1046,13 @@
     "이 시 반"
    ],
    "answer": 0,
-   "explanation": "삼십 분 = 반(半)! 두 시 반 = 2:30. 반 is the handy shortcut for 'half past' in Korean."
+   "explanation": "삼십 분 = 반(半)! 두 시 반 = 2:30. 반 is the handy shortcut for 'half past' in Korean.",
+   "options_en": [
+    "2:30 (half past two)",
+    "middle of two o'clock (not real)",
+    "2:03 (wrong)",
+    "2:30 (Sino-Korean 이, wrong for hour)"
+   ]
   }
  ],
  "real_life": [

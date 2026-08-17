@@ -20,17 +20,17 @@
  "characters": [
   {
    "id": "jeongmin",
-   "name": "정민",
+   "name": "올리비아",
    "emoji": "👦",
    "color": "#5B9BD5",
    "description": "남자아이 (boy)"
   },
   {
    "id": "mina",
-   "name": "미나",
+   "name": "보미",
    "emoji": "👧",
    "color": "#E85D9A",
-   "description": "정민의 친구 (Jeongmin's friend)"
+   "description": "올리비아의 친구 (Olivia's friend)"
   },
   {
    "id": "ajumma",
@@ -341,7 +341,7 @@
    },
    "examples": [
     {
-     "ko": "떡볶이 1인분하고 김밥 2인분 주세요.",
+     "ko": "떡볶이 1인분 하고 김밥 2인분 주세요.",
      "en": "One serving of tteokbokki and two servings of kimbap, please.",
      "highlight": "하고"
     },
@@ -351,7 +351,7 @@
      "highlight": "이랑"
     },
     {
-     "ko": "친구하고 같이 왔어요.",
+     "ko": "친구 하고 같이 왔어요.",
      "en": "I came with my friend.",
      "highlight": "하고"
     }
@@ -545,11 +545,11 @@
   }
  ],
  "banmal_jondaemal": {
-  "intro_ko": "정민과 미나는 친구라서 서로 반말. 포장마차 아줌마(어른, 가게 직원)에게는 존댓말.",
-  "intro_en": "Jeongmin and Mina are friends → casual speech (반말). To the cart 아줌마 (adult, shop staff) → polite speech (존댓말).",
+  "intro_ko": "올리비아와 보미는 친구라서 서로 반말. 포장마차 아줌마(어른, 가게 직원)에게는 존댓말.",
+  "intro_en": "Olivia and Bomi are friends → casual speech (반말). To the cart 아줌마 (adult, shop staff) → polite speech (존댓말).",
   "rows": [
    {
-    "situation_ko": "친구끼리 (정민 ↔ 미나)",
+    "situation_ko": "친구끼리 (올리비아 ↔ 보미)",
     "situation_en": "Between friends (Jeongmin ↔ Mina)",
     "banmal": "우리 뭐 먹을까?",
     "jondaemal": "(쓰지 않음)",
@@ -657,7 +657,13 @@
     "떡볶이 1인분이랑 김밥 2인분 주세요."
    ],
    "answer": 1,
-   "explanation": "주문 표현 — 음식 + 숫자 + 인분 + 주세요. 인분 = portion 단위. 1인분/2인분 순서 잘 듣기!"
+   "explanation": "주문 표현 — 음식 + 숫자 + 인분 + 주세요. 인분 = portion 단위. 1인분/2인분 순서 잘 듣기!",
+   "options_en": [
+    "Please give me 2 servings of tteokbokki and 1 serving of gimbap.",
+    "Please give me 1 serving of tteokbokki and 2 servings of gimbap.",
+    "Please give me 1 piece of tteokbokki and 2 pieces of gimbap. (wrong counter)",
+    "Please give me 1 serving of tteokbokki and 2 servings of gimbap. (이랑 variant)"
+   ]
   },
   {
    "id": "q2",
@@ -671,7 +677,13 @@
     "들어 오세요!"
    ],
    "answer": 2,
-   "explanation": "어서 오세요 = 가게에서 손님 맞이하는 표준 인사. '어서' = quickly/please. '오세요' = please come."
+   "explanation": "어서 오세요 = 가게에서 손님 맞이하는 표준 인사. '어서' = quickly/please. '오세요' = please come.",
+   "options_en": [
+    "Goodbye! (to someone leaving)",
+    "Come again!",
+    "Welcome! (come in)",
+    "Come in!"
+   ]
   },
   {
    "id": "q3",
@@ -685,7 +697,13 @@
     "라면이랑 같이 먹으니 환상이야!"
    ],
    "answer": 1,
-   "explanation": "이랑 = 반말 conjunction. '환상이야' = 반말 감탄. 친구 사이에 쓰는 표현이에요."
+   "explanation": "이랑 = 반말 conjunction. '환상이야' = 반말 감탄. 친구 사이에 쓰는 표현이에요.",
+   "options_en": [
+    "It's amazing eaten together with gimbap! (하고, casual)",
+    "It's amazing eaten together with gimbap! (이랑, casual)",
+    "It's amazing eaten together with gimbap! (이랑, polite)",
+    "It's amazing eaten together with ramen! (casual)"
+   ]
   },
   {
    "id": "q4",
@@ -699,7 +717,13 @@
     "만오백 원이에요."
    ],
    "answer": 2,
-   "explanation": "만오천 = 만 (10,000) + 오천 (5,000) = 15,000원. 한자어 숫자로 가격 읽기."
+   "explanation": "만오천 = 만 (10,000) + 오천 (5,000) = 15,000원. 한자어 숫자로 가격 읽기.",
+   "options_en": [
+    "It's 5,000 won.",
+    "It's 10,000 won.",
+    "It's 15,000 won.",
+    "It's 10,500 won."
+   ]
   },
   {
    "id": "q5_mc",
@@ -712,7 +736,13 @@
     "또 만나요."
    ],
    "answer": 0,
-   "explanation": "내가 떠날 때, 상대가 머무는 곳에는 '안녕히 계세요' (Stay in peace). 상대가 떠나면 '안녕히 가세요' (Go in peace). 가게 손님이 떠날 때 = 안녕히 계세요."
+   "explanation": "내가 떠날 때, 상대가 머무는 곳에는 '안녕히 계세요' (Stay in peace). 상대가 떠나면 '안녕히 가세요' (Go in peace). 가게 손님이 떠날 때 = 안녕히 계세요.",
+   "options_en": [
+    "Goodbye (said by the one leaving, to the one staying).",
+    "Goodbye (said by the one staying, to the one leaving).",
+    "Welcome!",
+    "See you again."
+   ]
   },
   {
    "id": "q6",
@@ -726,7 +756,13 @@
     "안녕히 가세요! 또 와요."
    ],
    "answer": 1,
-   "explanation": "포장마차 아줌마의 정겨운 작별 인사. casual 존댓말로 친근함 + 격식. '놀러 와요' = come visit/play. 참고: '안녕히 가세요! 또 와요.'도 완전히 맞는 인사예요 — 더 격식 있는 표현이에요. 이 장면에서는 친근한 '잘 가요!'를 썼어요."
+   "explanation": "포장마차 아줌마의 정겨운 작별 인사. casual 존댓말로 친근함 + 격식. '놀러 와요' = come visit/play. 참고: '안녕히 가세요! 또 와요.'도 완전히 맞는 인사예요 — 더 격식 있는 표현이에요. 이 장면에서는 친근한 '잘 가요!'를 썼어요.",
+   "options_en": [
+    "Bye! Let's come hang out again. (polite, wrong direction verb)",
+    "Bye! Come hang out again. (polite)",
+    "Bye! Come hang out again. (casual)",
+    "Goodbye! Come again. (formal)"
+   ]
   }
  ],
  "real_life": [
@@ -769,25 +805,25 @@
    "title": "💬 포장마차 가자고 카톡",
    "messages": [
     {
-     "speaker": "정민",
+     "speaker": "올리비아",
      "side": "right",
      "text": "야 학교 끝나고 분식집 ㄱㄱ?",
      "en": "Hey, hit up the snack shop after school?"
     },
     {
-     "speaker": "미나",
+     "speaker": "보미",
      "side": "left",
      "text": "콜! 떡볶이 먹고 싶어 ㅠㅠ",
      "en": "Deal! I want tteokbokki ㅠㅠ"
     },
     {
-     "speaker": "정민",
+     "speaker": "올리비아",
      "side": "right",
      "text": "ㅋㅋ 4시 정문 앞",
      "en": "Haha 4 PM at the main gate"
     },
     {
-     "speaker": "미나",
+     "speaker": "보미",
      "side": "left",
      "text": "👍 환상",
      "en": "👍 fantastic"
