@@ -1736,14 +1736,14 @@ function _buildQuizTabBar(){
   const hasSpk=!!((WRITING_POOL[epKey]&&(WRITING_POOL[epKey].completion||[]).length)||(DATA.real_life||[]).some(it=>it&&it.type==='writing_guided'));
   if(!hasRd&&!hasSp&&!hasWr&&!hasSb)return'';
   const tabs=[
-    {id:'quiz',label:'✏️ 객관식',en:'Multiple Choice'},
-    ...(hasSb?[{id:'sentbuild',label:'🧩 문장 만들기',en:'Sentence Builder'}]:[]),
-    ...(hasRd?[{id:'reading',label:'📖 읽기',en:'Reading'}]:[]),
-    ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기',en:'Spacing'}]:[]),
-    ...(hasWr?[{id:'writing',label:'✍️ 쓰기',en:'Writing'}]:[]),
-    ...(hasSpk?[{id:'speaking',label:'🗣️ 말하기',en:'Speaking'}]:[]),
+    {id:'quiz',label:'✏️ 객관식'},
+    ...(hasSb?[{id:'sentbuild',label:'🧩 문장 만들기'}]:[]),
+    ...(hasRd?[{id:'reading',label:'📖 읽기'}]:[]),
+    ...(hasSp?[{id:'spacing',label:'📏 띄어쓰기'}]:[]),
+    ...(hasWr?[{id:'writing',label:'✍️ 쓰기'}]:[]),
+    ...(hasSpk?[{id:'speaking',label:'🗣️ 말하기'}]:[]),
   ];
-  return`<div class="quiz-mode-bar" style="margin-bottom:16px">${tabs.map(t=>`<button class="quiz-mode-btn${quizMode===t.id?' active':''}" onclick="setQuizMode('${t.id}')">${t.label}<div style="font-size:8.5px;font-weight:500;opacity:.75;margin-top:1px;">${t.en}</div></button>`).join('')}</div>`;
+  return`<div class="quiz-mode-bar" style="margin-bottom:16px">${tabs.map(t=>`<button class="quiz-mode-btn${quizMode===t.id?' active':''}" onclick="setQuizMode('${t.id}')">${t.label}</button>`).join('')}</div>`;
 }
 function buildQuiz(){
   if(!DATA.quiz||!DATA.quiz.length)return'<div class="loading">데이터 준비 중이에요.</div>';
