@@ -4067,7 +4067,7 @@ const ESSENTIAL_GROUPS=[
     {kr:'저녁',rom:'jeo-nyeok',en:'evening / dinner',ex:'저녁에 요리해요.'},
     {kr:'밤',rom:'bam',en:'night',ex:'밤에 잠을 자요.'},
   ]},
-  { cat:'🌦️ 자연·날씨', cat_en:'Nature & Weather', tab_en:'Nature & Weather', words:[
+  { cat:'🌦️ 자연·날씨', cat_en:'Nature & Weather', tab_en:'Nature & Weather', exprFrom:18, exprLabel:'☁️ 날씨 표현 · Weather Expressions', words:[
     {kr:'하늘',rom:'ha-neul',en:'sky',ex:'하늘이 파래요.'},
     {kr:'해',rom:'hae',en:'sun',ex:'해가 떴어요.'},
     {kr:'달',rom:'dal',en:'moon',ex:'달이 예뻐요.'},
@@ -4082,16 +4082,16 @@ const ESSENTIAL_GROUPS=[
     {kr:'가을',rom:'ga-eul',en:'fall / autumn',ex:'가을이 시원해요.'},
     {kr:'겨울',rom:'gyeo-ul',en:'winter',ex:'겨울이 추워요.'},
     {kr:'날씨',rom:'nal-ssi',en:'weather',ex:'오늘 날씨가 좋아요.'},
+    {kr:'태풍',rom:'tae-pung',en:'typhoon',ex:'태풍이 와요.'},
+    {kr:'비',rom:'bi',en:'rain',ex:'비가 와요.'},
+    {kr:'눈',rom:'nun',en:'snow',ex:'눈이 내려요.'},
+    {kr:'바람',rom:'ba-ram',en:'wind',ex:'바람이 불어요.'},
     {kr:'맑다',rom:'mak-da',en:'to be clear / sunny',ex:'하늘이 맑아요.'},
     {kr:'흐리다',rom:'heu-ri-da',en:'to be cloudy',ex:'오늘은 흐려요.'},
     {kr:'덥다',rom:'deop-da',en:'to be hot',ex:'날씨가 더워요.'},
     {kr:'춥다',rom:'chup-da',en:'to be cold',ex:'날씨가 추워요.'},
     {kr:'따뜻하다',rom:'tta-tteu-ta-da',en:'to be warm',ex:'날씨가 따뜻해요.'},
     {kr:'시원하다',rom:'si-won-ha-da',en:'to be cool',ex:'바람이 시원해요.'},
-    {kr:'태풍',rom:'tae-pung',en:'typhoon',ex:'태풍이 와요.'},
-    {kr:'비',rom:'bi',en:'rain',ex:'비가 와요.'},
-    {kr:'눈',rom:'nun',en:'snow',ex:'눈이 내려요.'},
-    {kr:'바람',rom:'ba-ram',en:'wind',ex:'바람이 불어요.'},
   ]},
   { cat:'🌍 나라', cat_en:'Countries', tab_en:'Countries', words:[
     {kr:'독일',flag:'de',rom:'dok-il',en:'Germany',ex:'독일에서 왔어요.'},
@@ -5890,10 +5890,17 @@ function _essCardHtml(w){
 const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries','jobs','colors','body','emotions'];
 function buildEssential(){
   const tabsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-ess" data-tab="'+ESS_TAB_IDS[i]+'" onclick="switchBtab(\'bp-ess\',\''+ESS_TAB_IDS[i]+'\')">'+g.cat+' <span style="font-weight:400;opacity:.75">'+g.tab_en+'</span></button>').join('');
-  const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
-      +'<div style="font-size:11.5px;color:var(--warm-400);margin-bottom:10px;">'+esc(g.cat_en)+'</div>'
-      +'<div class="ess-grid">'+g.words.map(_essCardHtml).join('')+'</div>'
-    +'</div>').join('');
+  const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>{
+      const hasExpr = typeof g.exprFrom==='number';
+      const mainWords = hasExpr ? g.words.slice(0,g.exprFrom) : g.words;
+      const exprWords = hasExpr ? g.words.slice(g.exprFrom) : [];
+      return '<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
+        +'<div style="font-size:11.5px;color:var(--warm-400);margin-bottom:10px;">'+esc(g.cat_en)+'</div>'
+        +'<div class="ess-grid">'+mainWords.map(_essCardHtml).join('')+'</div>'
+        +(hasExpr?('<div style="font-size:12.5px;font-weight:700;color:var(--warm-600);margin:16px 0 10px;padding-top:12px;border-top:1px dashed var(--gray-200);">'+esc(g.exprLabel)+'</div>'
+          +'<div class="ess-grid">'+exprWords.map(_essCardHtml).join('')+'</div>'):'')
+      +'</div>';
+    }).join('');
   return '<style>'
     +'.ess-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 16px;cursor:pointer;transition:border-color .15s;}'
     +'.ess-card:hover{border-color:var(--teal);}'
