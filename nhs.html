@@ -4082,26 +4082,26 @@ const ESSENTIAL_GROUPS=[
     {kr:'바람',rom:'ba-ram',en:'wind',ex:'바람이 불어요.'},
   ]},
   { cat:'🌍 나라', cat_en:'Countries', tab_en:'Countries', words:[
-    {kr:'독일',flag:'🇩🇪',rom:'dok-il',en:'Germany',ex:'독일에서 왔어요.'},
-    {kr:'말레이시아',flag:'🇲🇾',rom:'mal-le-i-si-a',en:'Malaysia',ex:'말레이시아에서 왔어요.'},
-    {kr:'멕시코',flag:'🇲🇽',rom:'mek-si-ko',en:'Mexico',ex:'멕시코에서 왔어요.'},
-    {kr:'미국',flag:'🇺🇸',rom:'mi-guk',en:'United States',ex:'미국에서 왔어요.'},
-    {kr:'베트남',flag:'🇻🇳',rom:'be-teu-nam',en:'Vietnam',ex:'베트남에서 왔어요.'},
-    {kr:'브라질',flag:'🇧🇷',rom:'beu-ra-jil',en:'Brazil',ex:'브라질에서 왔어요.'},
-    {kr:'스페인',flag:'🇪🇸',rom:'seu-pe-in',en:'Spain',ex:'스페인에서 왔어요.'},
-    {kr:'영국',flag:'🇬🇧',rom:'yeong-guk',en:'United Kingdom',ex:'영국에서 왔어요.'},
-    {kr:'이집트',flag:'🇪🇬',rom:'i-jip-teu',en:'Egypt',ex:'이집트에서 왔어요.'},
-    {kr:'인도',flag:'🇮🇳',rom:'in-do',en:'India',ex:'인도에서 왔어요.'},
-    {kr:'인도네시아',flag:'🇮🇩',rom:'in-do-ne-si-a',en:'Indonesia',ex:'인도네시아에서 왔어요.'},
-    {kr:'일본',flag:'🇯🇵',rom:'il-bon',en:'Japan',ex:'일본에서 왔어요.'},
-    {kr:'중국',flag:'🇨🇳',rom:'jung-guk',en:'China',ex:'중국에서 왔어요.'},
-    {kr:'캐나다',flag:'🇨🇦',rom:'kae-na-da',en:'Canada',ex:'캐나다에서 왔어요.'},
-    {kr:'태국',flag:'🇹🇭',rom:'tae-guk',en:'Thailand',ex:'태국에서 왔어요.'},
-    {kr:'페루',flag:'🇵🇪',rom:'pe-ru',en:'Peru',ex:'페루에서 왔어요.'},
-    {kr:'프랑스',flag:'🇫🇷',rom:'peu-rang-seu',en:'France',ex:'프랑스에서 왔어요.'},
-    {kr:'필리핀',flag:'🇵🇭',rom:'pil-li-pin',en:'Philippines',ex:'필리핀에서 왔어요.'},
-    {kr:'한국',flag:'🇰🇷',rom:'han-guk',en:'Korea',ex:'한국에서 왔어요.'},
-    {kr:'호주',flag:'🇦🇺',rom:'ho-ju',en:'Australia',ex:'호주에서 왔어요.'},
+    {kr:'독일',flag:'de',rom:'dok-il',en:'Germany',ex:'독일에서 왔어요.'},
+    {kr:'말레이시아',flag:'my',rom:'mal-le-i-si-a',en:'Malaysia',ex:'말레이시아에서 왔어요.'},
+    {kr:'멕시코',flag:'mx',rom:'mek-si-ko',en:'Mexico',ex:'멕시코에서 왔어요.'},
+    {kr:'미국',flag:'us',rom:'mi-guk',en:'United States',ex:'미국에서 왔어요.'},
+    {kr:'베트남',flag:'vn',rom:'be-teu-nam',en:'Vietnam',ex:'베트남에서 왔어요.'},
+    {kr:'브라질',flag:'br',rom:'beu-ra-jil',en:'Brazil',ex:'브라질에서 왔어요.'},
+    {kr:'스페인',flag:'es',rom:'seu-pe-in',en:'Spain',ex:'스페인에서 왔어요.'},
+    {kr:'영국',flag:'gb',rom:'yeong-guk',en:'United Kingdom',ex:'영국에서 왔어요.'},
+    {kr:'이집트',flag:'eg',rom:'i-jip-teu',en:'Egypt',ex:'이집트에서 왔어요.'},
+    {kr:'인도',flag:'in',rom:'in-do',en:'India',ex:'인도에서 왔어요.'},
+    {kr:'인도네시아',flag:'id',rom:'in-do-ne-si-a',en:'Indonesia',ex:'인도네시아에서 왔어요.'},
+    {kr:'일본',flag:'jp',rom:'il-bon',en:'Japan',ex:'일본에서 왔어요.'},
+    {kr:'중국',flag:'cn',rom:'jung-guk',en:'China',ex:'중국에서 왔어요.'},
+    {kr:'캐나다',flag:'ca',rom:'kae-na-da',en:'Canada',ex:'캐나다에서 왔어요.'},
+    {kr:'태국',flag:'th',rom:'tae-guk',en:'Thailand',ex:'태국에서 왔어요.'},
+    {kr:'페루',flag:'pe',rom:'pe-ru',en:'Peru',ex:'페루에서 왔어요.'},
+    {kr:'프랑스',flag:'fr',rom:'peu-rang-seu',en:'France',ex:'프랑스에서 왔어요.'},
+    {kr:'필리핀',flag:'ph',rom:'pil-li-pin',en:'Philippines',ex:'필리핀에서 왔어요.'},
+    {kr:'한국',flag:'kr',rom:'han-guk',en:'Korea',ex:'한국에서 왔어요.'},
+    {kr:'호주',flag:'au',rom:'ho-ju',en:'Australia',ex:'호주에서 왔어요.'},
   ]},
 ];
 
@@ -5797,7 +5797,7 @@ function buildHonorifics(){
 // ══════════════════════════════════════════════════════
 function _essCardHtml(w){
   return '<div class="ess-card" onclick="speakTTS(\''+escA(w.kr)+'\')">'
-    +'<div class="ess-card-kr">'+(w.flag?esc(w.flag)+' ':'')+esc(w.kr)+' <span class="ess-card-icon">🔊</span></div>'
+    +'<div class="ess-card-kr">'+(w.flag?'<img class="ess-flag" src="data/nhs/flags/'+escA(w.flag)+'.svg" alt="" loading="lazy"> ':'')+esc(w.kr)+' <span class="ess-card-icon">🔊</span></div>'
     +'<div class="ess-card-rom">'+esc(w.rom)+'</div>'
     +'<div class="ess-card-en">'+esc(w.en)+'</div>'
     +(w.ex?'<div class="ess-card-ex">'+esc(w.ex)+'</div>':'')
@@ -5814,6 +5814,7 @@ function buildEssential(){
     +'.ess-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 16px;cursor:pointer;transition:border-color .15s;}'
     +'.ess-card:hover{border-color:var(--teal);}'
     +'.ess-card-kr{font-size:19px;font-weight:700;color:var(--gray-900);}'
+    +'.ess-flag{width:22px;height:16px;object-fit:cover;border-radius:3px;border:1px solid var(--gray-200);vertical-align:middle;margin-right:2px;}'
     +'.ess-card-icon{font-size:11px;opacity:.5;}'
     +'.ess-card-rom{font-size:11px;color:var(--teal);font-weight:600;margin-top:2px;}'
     +'.ess-card-en{font-size:12.5px;color:var(--warm-500);margin-top:1px;}'
