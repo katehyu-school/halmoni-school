@@ -4067,7 +4067,7 @@ const ESSENTIAL_GROUPS=[
     {kr:'저녁',rom:'jeo-nyeok',en:'evening / dinner',ex:'저녁에 요리해요.'},
     {kr:'밤',rom:'bam',en:'night',ex:'밤에 잠을 자요.'},
   ]},
-  { cat:'🌳 자연', cat_en:'Nature', tab_en:'Nature', words:[
+  { cat:'🌦️ 자연·날씨', cat_en:'Nature & Weather', tab_en:'Nature & Weather', words:[
     {kr:'하늘',rom:'ha-neul',en:'sky',ex:'하늘이 파래요.'},
     {kr:'해',rom:'hae',en:'sun',ex:'해가 떴어요.'},
     {kr:'달',rom:'dal',en:'moon',ex:'달이 예뻐요.'},
@@ -4077,6 +4077,18 @@ const ESSENTIAL_GROUPS=[
     {kr:'산',rom:'san',en:'mountain',ex:'산에 올라가요.'},
     {kr:'바다',rom:'ba-da',en:'sea / ocean',ex:'바다에 가요.'},
     {kr:'강',rom:'gang',en:'river',ex:'강에서 낚시해요.'},
+    {kr:'봄',rom:'bom',en:'spring',ex:'봄이 왔어요.'},
+    {kr:'여름',rom:'yeo-reum',en:'summer',ex:'여름이 더워요.'},
+    {kr:'가을',rom:'ga-eul',en:'fall / autumn',ex:'가을이 시원해요.'},
+    {kr:'겨울',rom:'gyeo-ul',en:'winter',ex:'겨울이 추워요.'},
+    {kr:'날씨',rom:'nal-ssi',en:'weather',ex:'오늘 날씨가 좋아요.'},
+    {kr:'맑다',rom:'mak-da',en:'to be clear / sunny',ex:'하늘이 맑아요.'},
+    {kr:'흐리다',rom:'heu-ri-da',en:'to be cloudy',ex:'오늘은 흐려요.'},
+    {kr:'덥다',rom:'deop-da',en:'to be hot',ex:'날씨가 더워요.'},
+    {kr:'춥다',rom:'chup-da',en:'to be cold',ex:'날씨가 추워요.'},
+    {kr:'따뜻하다',rom:'tta-tteu-ta-da',en:'to be warm',ex:'날씨가 따뜻해요.'},
+    {kr:'시원하다',rom:'si-won-ha-da',en:'to be cool',ex:'바람이 시원해요.'},
+    {kr:'태풍',rom:'tae-pung',en:'typhoon',ex:'태풍이 와요.'},
     {kr:'비',rom:'bi',en:'rain',ex:'비가 와요.'},
     {kr:'눈',rom:'nun',en:'snow',ex:'눈이 내려요.'},
     {kr:'바람',rom:'ba-ram',en:'wind',ex:'바람이 불어요.'},
@@ -4114,6 +4126,19 @@ const ESSENTIAL_GROUPS=[
     {kr:'가수',rom:'ga-su',en:'singer',ex:'가수예요.'},
     {kr:'배우',rom:'bae-u',en:'actor',ex:'배우예요.'},
     {kr:'운동선수',rom:'un-dong-seon-su',en:'athlete',ex:'운동선수예요.'},
+  ]},
+  { cat:'🎨 색깔', cat_en:'Colors', tab_en:'Colors', words:[
+    {kr:'빨간색',rom:'ppal-gan-saek',en:'red',ex:'빨간색이에요.'},
+    {kr:'주황색',rom:'ju-hwang-saek',en:'orange',ex:'주황색이에요.'},
+    {kr:'노란색',rom:'no-ran-saek',en:'yellow',ex:'노란색이에요.'},
+    {kr:'초록색',rom:'cho-rok-saek',en:'green',ex:'초록색이에요.'},
+    {kr:'파란색',rom:'pa-ran-saek',en:'blue',ex:'파란색이에요.'},
+    {kr:'보라색',rom:'bo-ra-saek',en:'purple',ex:'보라색이에요.'},
+    {kr:'분홍색',rom:'bun-hong-saek',en:'pink',ex:'분홍색이에요.'},
+    {kr:'하얀색',rom:'ha-yan-saek',en:'white',ex:'하얀색이에요.'},
+    {kr:'검은색',rom:'geo-meun-saek',en:'black',ex:'검은색이에요.'},
+    {kr:'회색',rom:'hoe-saek',en:'gray',ex:'회색이에요.'},
+    {kr:'갈색',rom:'gal-saek',en:'brown',ex:'갈색이에요.'},
   ]},
 ];
 
@@ -5815,7 +5840,7 @@ function _essCardHtml(w){
     +(w.ex?'<div class="ess-card-ex">'+esc(w.ex)+'</div>':'')
     +'</div>';
 }
-const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries','jobs'];
+const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries','jobs','colors'];
 function buildEssential(){
   const tabsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-ess" data-tab="'+ESS_TAB_IDS[i]+'" onclick="switchBtab(\'bp-ess\',\''+ESS_TAB_IDS[i]+'\')">'+g.cat+' <span style="font-weight:400;opacity:.75">'+g.tab_en+'</span></button>').join('');
   const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
