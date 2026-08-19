@@ -4095,13 +4095,25 @@ const ESSENTIAL_GROUPS=[
     {kr:'인도네시아',flag:'id',rom:'in-do-ne-si-a',en:'Indonesia',ex:'인도네시아에서 왔어요.'},
     {kr:'일본',flag:'jp',rom:'il-bon',en:'Japan',ex:'일본에서 왔어요.'},
     {kr:'중국',flag:'cn',rom:'jung-guk',en:'China',ex:'중국에서 왔어요.'},
+    {kr:'칠레',flag:'cl',rom:'chil-le',en:'Chile',ex:'칠레에서 왔어요.'},
     {kr:'캐나다',flag:'ca',rom:'kae-na-da',en:'Canada',ex:'캐나다에서 왔어요.'},
     {kr:'태국',flag:'th',rom:'tae-guk',en:'Thailand',ex:'태국에서 왔어요.'},
-    {kr:'페루',flag:'pe',rom:'pe-ru',en:'Peru',ex:'페루에서 왔어요.'},
     {kr:'프랑스',flag:'fr',rom:'peu-rang-seu',en:'France',ex:'프랑스에서 왔어요.'},
     {kr:'필리핀',flag:'ph',rom:'pil-li-pin',en:'Philippines',ex:'필리핀에서 왔어요.'},
     {kr:'한국',flag:'kr',rom:'han-guk',en:'Korea',ex:'한국에서 왔어요.'},
     {kr:'호주',flag:'au',rom:'ho-ju',en:'Australia',ex:'호주에서 왔어요.'},
+  ]},
+  { cat:'💼 직업', cat_en:'Occupations', tab_en:'Jobs', words:[
+    {kr:'학생',rom:'hak-saeng',en:'student',ex:'학생이에요.'},
+    {kr:'선생님',rom:'seon-saeng-nim',en:'teacher',ex:'선생님이에요.'},
+    {kr:'회사원',rom:'hoe-sa-won',en:'office worker',ex:'회사원이에요.'},
+    {kr:'의사',rom:'ui-sa',en:'doctor',ex:'의사예요.'},
+    {kr:'간호사',rom:'gan-ho-sa',en:'nurse',ex:'간호사예요.'},
+    {kr:'요리사',rom:'yo-ri-sa',en:'cook / chef',ex:'요리사예요.'},
+    {kr:'경찰관',rom:'gyeong-chal-gwan',en:'police officer',ex:'경찰관이에요.'},
+    {kr:'가수',rom:'ga-su',en:'singer',ex:'가수예요.'},
+    {kr:'배우',rom:'bae-u',en:'actor',ex:'배우예요.'},
+    {kr:'운동선수',rom:'un-dong-seon-su',en:'athlete',ex:'운동선수예요.'},
   ]},
 ];
 
@@ -5803,7 +5815,7 @@ function _essCardHtml(w){
     +(w.ex?'<div class="ess-card-ex">'+esc(w.ex)+'</div>':'')
     +'</div>';
 }
-const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries'];
+const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries','jobs'];
 function buildEssential(){
   const tabsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-ess" data-tab="'+ESS_TAB_IDS[i]+'" onclick="switchBtab(\'bp-ess\',\''+ESS_TAB_IDS[i]+'\')">'+g.cat+' <span style="font-weight:400;opacity:.75">'+g.tab_en+'</span></button>').join('');
   const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
