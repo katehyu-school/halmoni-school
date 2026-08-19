@@ -1853,17 +1853,13 @@ function renderQuizScore(){
   const total=DATA.quiz.length;
   const pct=Math.round(quizScore/total*100);
   const msg=pct===100?'🏆 완벽해요!':pct>=80?'🌟 잘했어요!':pct>=60?'👍 좋아요!':'💪 다시 도전!';
-  const epKey=`${DATA.level}_${DATA.id}`;
-  const rdPool=READING_POOL[epKey]||null;
-  const spPool=SP_QUIZ_POOL[epKey]||null;
-  // If reading available: reading renders first, then reading→complete triggers spacing
-  // If no reading but spacing: spacing renders immediately
-  const rdSection=rdPool?'<div id="rd-wrap" style="margin-top:24px;"></div>':'';
-  const spSection=(!rdPool&&spPool)?'<div id="spq-wrap" style="margin-top:28px;"></div>':'';
   // ── Progress tracking ──
   _markEpDone(`${DATA.level}_${DATA.id}`);
   const _hasProfile=!!_progOwner();
   const _profileNudge=_hasProfile?'':'<div style="font-size:12px;color:var(--warm-400);margin-top:12px;">💡 My Notes 프로필을 만들면 진도가 저장돼요!</div>';
+  // ⚠️ 읽기·띄어쓰기는 각자 탭(setQuizMode('reading'/'spacing'))에서 따로 풀도록 분리되어 있음.
+  //    예전엔 객관식을 다 풀면 여기서 이어서 자동으로 렌더링됐는데(탭 도입 전 흔적),
+  //    지금은 탭이 있으므로 점수만 보여주고 끝냄(2026-08-20 정리).
   document.getElementById('quiz-content').innerHTML=`
     <div class="quiz-score-wrap">
       <div class="quiz-score-num">${quizScore}<span style="font-size:24px;color:var(--warm-500)">/${total}</span></div>
@@ -1871,9 +1867,7 @@ function renderQuizScore(){
       <div style="font-size:13px;color:var(--warm-500);margin-top:8px">${pct}% 정답</div>
       <button class="quiz-retry-btn" onclick="resetQuiz()">↺ 다시 풀기</button>
     ${_profileNudge}
-    </div>${rdSection}${spSection}`;
-  if(rdPool){ _rdPool=rdPool; _rdQIdx=0; _rdAnswered=0; _rdRender(); }
-  else if(spPool){ _spqPool=spPool; _spqIdx=0; _spqClicked=[]; _spqRender(); }
+    </div>`;
 }
 function setQuizMode(mode){
   quizMode=mode;
