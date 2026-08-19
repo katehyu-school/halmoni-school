@@ -4081,6 +4081,28 @@ const ESSENTIAL_GROUPS=[
     {kr:'눈',rom:'nun',en:'snow',ex:'눈이 내려요.'},
     {kr:'바람',rom:'ba-ram',en:'wind',ex:'바람이 불어요.'},
   ]},
+  { cat:'🌍 나라', cat_en:'Countries', tab_en:'Countries', words:[
+    {kr:'독일',flag:'🇩🇪',rom:'dok-il',en:'Germany',ex:'독일에서 왔어요.'},
+    {kr:'말레이시아',flag:'🇲🇾',rom:'mal-le-i-si-a',en:'Malaysia',ex:'말레이시아에서 왔어요.'},
+    {kr:'멕시코',flag:'🇲🇽',rom:'mek-si-ko',en:'Mexico',ex:'멕시코에서 왔어요.'},
+    {kr:'미국',flag:'🇺🇸',rom:'mi-guk',en:'United States',ex:'미국에서 왔어요.'},
+    {kr:'베트남',flag:'🇻🇳',rom:'be-teu-nam',en:'Vietnam',ex:'베트남에서 왔어요.'},
+    {kr:'브라질',flag:'🇧🇷',rom:'beu-ra-jil',en:'Brazil',ex:'브라질에서 왔어요.'},
+    {kr:'스페인',flag:'🇪🇸',rom:'seu-pe-in',en:'Spain',ex:'스페인에서 왔어요.'},
+    {kr:'영국',flag:'🇬🇧',rom:'yeong-guk',en:'United Kingdom',ex:'영국에서 왔어요.'},
+    {kr:'이집트',flag:'🇪🇬',rom:'i-jip-teu',en:'Egypt',ex:'이집트에서 왔어요.'},
+    {kr:'인도',flag:'🇮🇳',rom:'in-do',en:'India',ex:'인도에서 왔어요.'},
+    {kr:'인도네시아',flag:'🇮🇩',rom:'in-do-ne-si-a',en:'Indonesia',ex:'인도네시아에서 왔어요.'},
+    {kr:'일본',flag:'🇯🇵',rom:'il-bon',en:'Japan',ex:'일본에서 왔어요.'},
+    {kr:'중국',flag:'🇨🇳',rom:'jung-guk',en:'China',ex:'중국에서 왔어요.'},
+    {kr:'캐나다',flag:'🇨🇦',rom:'kae-na-da',en:'Canada',ex:'캐나다에서 왔어요.'},
+    {kr:'태국',flag:'🇹🇭',rom:'tae-guk',en:'Thailand',ex:'태국에서 왔어요.'},
+    {kr:'페루',flag:'🇵🇪',rom:'pe-ru',en:'Peru',ex:'페루에서 왔어요.'},
+    {kr:'프랑스',flag:'🇫🇷',rom:'peu-rang-seu',en:'France',ex:'프랑스에서 왔어요.'},
+    {kr:'필리핀',flag:'🇵🇭',rom:'pil-li-pin',en:'Philippines',ex:'필리핀에서 왔어요.'},
+    {kr:'한국',flag:'🇰🇷',rom:'han-guk',en:'Korea',ex:'한국에서 왔어요.'},
+    {kr:'호주',flag:'🇦🇺',rom:'ho-ju',en:'Australia',ex:'호주에서 왔어요.'},
+  ]},
 ];
 
 // ══════════════════════════════════════════════════════
@@ -5775,13 +5797,13 @@ function buildHonorifics(){
 // ══════════════════════════════════════════════════════
 function _essCardHtml(w){
   return '<div class="ess-card" onclick="speakTTS(\''+escA(w.kr)+'\')">'
-    +'<div class="ess-card-kr">'+esc(w.kr)+' <span class="ess-card-icon">🔊</span></div>'
+    +'<div class="ess-card-kr">'+(w.flag?esc(w.flag)+' ':'')+esc(w.kr)+' <span class="ess-card-icon">🔊</span></div>'
     +'<div class="ess-card-rom">'+esc(w.rom)+'</div>'
     +'<div class="ess-card-en">'+esc(w.en)+'</div>'
     +(w.ex?'<div class="ess-card-ex">'+esc(w.ex)+'</div>':'')
     +'</div>';
 }
-const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature'];
+const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries'];
 function buildEssential(){
   const tabsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-ess" data-tab="'+ESS_TAB_IDS[i]+'" onclick="switchBtab(\'bp-ess\',\''+ESS_TAB_IDS[i]+'\')">'+g.cat+' <span style="font-weight:400;opacity:.75">'+g.tab_en+'</span></button>').join('');
   const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
