@@ -5849,7 +5849,11 @@ function buildHonorifics(){
     ]},
   ];
 
-  const tableHtml = sections.map(sec=>'<div style="background:'+sec.color+';border:1.5px solid '+sec.border+';border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+  const siblingNote = '<div style="background:#FFF8E1;border:1.5px solid #FFD54F;border-radius:var(--radius-sm);padding:10px 16px;margin:-4px 0 14px;font-size:12px;line-height:1.7">'
+    +'🔎 언니·오빠·누나·형(손윗형제)은 호칭으로 부르지만, <strong>동생은 보통 이름을 불러요</strong>. "동생아~"처럼 부르는 건 특별히 다정함을 담은 경우예요.<br>'
+    +'<em>Older-sibling terms are used to call them directly, but younger siblings are usually called by name — calling them "동생" is a special, affectionate exception.</em></div>';
+
+  const tableHtml = sections.map((sec,i)=>'<div style="background:'+sec.color+';border:1.5px solid '+sec.border+';border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
     +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:10px">'+sec.title+'</div>'
     +'<table style="width:100%;border-collapse:collapse;font-size:12.5px">'
     +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">호칭</th><th style="text-align:left;padding:3px 8px 6px">발음</th><th style="text-align:left;padding:3px 8px 6px">뜻</th><th style="text-align:left;padding:3px 8px 6px">예문</th></tr>'
@@ -5859,7 +5863,8 @@ function buildHonorifics(){
       +'<td style="padding:5px 8px;color:var(--warm-600)">'+r[2]+'</td>'
       +'<td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+r[3]+'</td>'
       +'</tr>').join('')
-    +'</table></div>').join('');
+    +'</table></div>'
+    +(i===2?siblingNote:'')).join('');
 
   const noteBox = '<div style="background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:12px 16px;margin-top:4px;font-size:12.5px;line-height:1.8">'
     +'⚠️ <strong>헷갈리기 쉬운 것들 · Common Confusions</strong><br>'
