@@ -4036,7 +4036,7 @@ const ESSENTIAL_GROUPS=[
     {kr:'공항',rom:'gong-hang',en:'airport',ex:'공항에 도착했어요.'},
     {kr:'편의점',rom:'pyeon-ui-jeom',en:'convenience store',ex:'편의점에서 물을 사요.'},
   ]},
-  { cat:'🔌 물건 · 기기', cat_en:'Objects & Devices', tab_en:'Objects', words:[
+  { cat:'🔌 물건', cat_en:'Objects', tab_en:'Objects', words:[
     {kr:'휴대전화',rom:'hyu-dae-jeon-hwa',en:'cell phone',ex:'휴대전화가 어디 있어요?'},
     {kr:'컴퓨터',rom:'keom-pyu-teo',en:'computer',ex:'컴퓨터로 숙제해요.'},
     {kr:'텔레비전',rom:'tel-le-bi-jeon',en:'television',ex:'텔레비전을 봐요.'},
@@ -4139,6 +4139,34 @@ const ESSENTIAL_GROUPS=[
     {kr:'검은색',rom:'geo-meun-saek',en:'black',ex:'검은색이에요.'},
     {kr:'회색',rom:'hoe-saek',en:'gray',ex:'회색이에요.'},
     {kr:'갈색',rom:'gal-saek',en:'brown',ex:'갈색이에요.'},
+  ]},
+  { cat:'🧍 신체', cat_en:'Body', tab_en:'Body', words:[
+    {kr:'머리',rom:'meo-ri',en:'head',ex:'머리가 아파요.'},
+    {kr:'얼굴',rom:'eol-gul',en:'face',ex:'얼굴이 아파요.'},
+    {kr:'눈',rom:'nun',en:'eye',ex:'눈이 아파요.'},
+    {kr:'코',rom:'ko',en:'nose',ex:'코가 아파요.'},
+    {kr:'입',rom:'ip',en:'mouth',ex:'입이 아파요.'},
+    {kr:'귀',rom:'gwi',en:'ear',ex:'귀가 아파요.'},
+    {kr:'손',rom:'son',en:'hand',ex:'손이 아파요.'},
+    {kr:'발',rom:'bal',en:'foot',ex:'발이 아파요.'},
+    {kr:'다리',rom:'da-ri',en:'leg',ex:'다리가 아파요.'},
+    {kr:'팔',rom:'pal',en:'arm',ex:'팔이 아파요.'},
+    {kr:'배',rom:'bae',en:'stomach',ex:'배가 아파요.'},
+    {kr:'목',rom:'mok',en:'neck',ex:'목이 아파요.'},
+    {kr:'어깨',rom:'eo-kkae',en:'shoulder',ex:'어깨가 아파요.'},
+    {kr:'등',rom:'deung',en:'back',ex:'등이 아파요.'},
+  ]},
+  { cat:'😊 감정', cat_en:'Emotions', tab_en:'Emotions', words:[
+    {kr:'기쁘다',rom:'gi-ppeu-da',en:'to be glad',ex:'기뻐요.'},
+    {kr:'슬프다',rom:'seul-peu-da',en:'to be sad',ex:'슬퍼요.'},
+    {kr:'화나다',rom:'hwa-na-da',en:'to be angry',ex:'화가 나요.'},
+    {kr:'무섭다',rom:'mu-seop-da',en:'to be scared',ex:'무서워요.'},
+    {kr:'피곤하다',rom:'pi-gon-ha-da',en:'to be tired',ex:'피곤해요.'},
+    {kr:'행복하다',rom:'haeng-bok-ha-da',en:'to be happy',ex:'행복해요.'},
+    {kr:'신나다',rom:'sin-na-da',en:'to be excited',ex:'신나요.'},
+    {kr:'지루하다',rom:'ji-ru-ha-da',en:'to be bored',ex:'지루해요.'},
+    {kr:'부끄럽다',rom:'bu-kkeu-reop-da',en:'to be shy / embarrassed',ex:'부끄러워요.'},
+    {kr:'걱정되다',rom:'geok-jeong-doe-da',en:'to be worried',ex:'걱정돼요.'},
   ]},
 ];
 
@@ -5840,7 +5868,7 @@ function _essCardHtml(w){
     +(w.ex?'<div class="ess-card-ex">'+esc(w.ex)+'</div>':'')
     +'</div>';
 }
-const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries','jobs','colors'];
+const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature','countries','jobs','colors','body','emotions'];
 function buildEssential(){
   const tabsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-ess" data-tab="'+ESS_TAB_IDS[i]+'" onclick="switchBtab(\'bp-ess\',\''+ESS_TAB_IDS[i]+'\')">'+g.cat+' <span style="font-weight:400;opacity:.75">'+g.tab_en+'</span></button>').join('');
   const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
