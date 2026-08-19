@@ -1915,6 +1915,14 @@ function _sbInit(){
       if(ko&&ko.split(/\s+/).length>=2&&!seen.has(ko)){ seen.add(ko); pool.push({ko,en:ex.en||''}); }
     });
   });
+  // 🔒 1단계(덩어리 낱말) 최대 개수 제한 (2026-08-20) — 편마다 문법 예문을 전부 모으면
+  // 편차가 커서(72편 실측: 최소3·평균10.3·중앙값10·최대24) 많은 편은 피로도가 큼.
+  // 15개 넘는 편만(72편 중 7편) 무작위로 15개로 추림 — 대다수(65편)는 원래도 15개 이하라 그대로.
+  const SB_MAX=15;
+  if(pool.length>SB_MAX){
+    for(let i=pool.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [pool[i],pool[j]]=[pool[j],pool[i]]; }
+    pool.length=SB_MAX;
+  }
   const epKey=`${DATA.level}_${DATA.id}`;
   _sbPool=pool; _sbPool2=SENTBUILD2_POOL[epKey]||[];
   _sbStage=1; _sbIdx=0; _sbDone=new Array(pool.length).fill(false); _sbDone2=new Array(_sbPool2.length).fill(false);
