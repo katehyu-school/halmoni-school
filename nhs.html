@@ -3332,6 +3332,50 @@ function _progAdoptAccount(){
 }
 _progAdoptAccount();
 
+/* ── 🔄 진도 양방향 동기화 — 내려받기 (2026-08-20) ──────────
+   그동안은 올리기(push)만 있어서, 기기를 바꾸면 로그인 전까지
+   진도가 비어 보였습니다(서버엔 남아 있었지만 화면엔 안 옴).
+   이제 앱을 열 때마다 서버 진도를 한 번 받아서 로컬과 합칩니다.
+   🔒 절대 덮어쓰지 않고 "합치기"만 합니다 — 둘 중 어느 기기의
+   기록도 지워지지 않도록:
+     · 배열 키(_ep_done·_ep_star·_fc_review·_fc_known) → 합집합
+     · 객체 키(_sc·_prog·_srs) → 항목별로 합치되, 겹치면 로컬 우선
+   (진짜 실시간 동기화가 아니라 "매번 열 때 서로 보충"하는 방식) */
+function _progPullNow(){
+  try{
+    const u = _progUser();   if(!u) return;
+    const own = _progOwner();
+    if(own !== '@' + u.name) return;   // 진도의 주인이 이 계정일 때만
+    if(!window.HQ_SUPABASE) return;
+    const sb = window.HQ_SUPABASE.client();
+    if(!sb) return;
+    sb.rpc('progress_pull', { p_token: u.token }).then(function(res){
+      const r = res && res.data;
+      if(!r || r.error || !r.data) return;   // 서버에 저장된 진도 없음 — 조용히 종료
+      const remoteAll = r.data;
+      PROG_KEYS.forEach(function(k){
+        const remote = remoteAll[k];
+        if(remote === undefined || remote === null) return;
+        const raw = localStorage.getItem('nms_'+own+k);
+        let local = null;
+        try{ local = raw===null ? null : JSON.parse(raw); }catch(e){ local = null; }
+        if(Array.isArray(remote)){
+          const merged = Array.from(new Set([...(Array.isArray(local)?local:[]), ...remote]));
+          localStorage.setItem('nms_'+own+k, JSON.stringify(merged));
+        }else if(typeof remote === 'object'){
+          const merged = Object.assign({}, remote, (local && typeof local==='object')?local:{});
+          localStorage.setItem('nms_'+own+k, JSON.stringify(merged));
+        }else if(local === null){
+          localStorage.setItem('nms_'+own+k, JSON.stringify(remote));
+        }
+      });
+      _refreshSidebarDone();
+    }).catch(function(){ /* 조용히 무시 */ });
+  }catch(e){ /* 조용히 무시 */ }
+}
+// 로그인한 채로 앱을 열면, 서버 진도를 먼저 받아 로컬과 합칩니다(기기 이동 대비)
+setTimeout(_progPullNow, 1000);
+
 function _progPush(){          // 연달아 눌러도 3초 뒤 한 번만
   if(_progTimer) clearTimeout(_progTimer);
   _progTimer = setTimeout(_progPushNow, 3000);
@@ -3356,7 +3400,7 @@ function _progPushNow(){
       .catch(function(){ /* 조용히 무시 */ });
   }catch(e){ /* 조용히 무시 — 로컬은 그대로입니다 */ }
 }
-// 로그인한 채로 앱을 열면, 그전까지 쌓인 진도를 한 번 올립니다
+// 로그인한 채로 앱을 열면, (pull이 끝난 뒤) 합쳐진 진도를 서버에 다시 올립니다
 setTimeout(_progPushNow, 4000);
 
 function _fcCardId(c){ return (c.level||'L1')+'_'+c.epId+'_'+c.korean; }
