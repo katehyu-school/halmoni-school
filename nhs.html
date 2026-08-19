@@ -2839,7 +2839,7 @@ function _renderIdxVocabPage(){
       <div style="font-size:11px;color:var(--warm-500);min-width:90px">${esc(v.romanization||'')}</div>
       <div class="idx-vocab-en">${esc(v.english||v.en||'')}</div>
       ${v._gloss?'<span style="font-size:9px;background:var(--mint,#DFF5EE);color:var(--teal);border-radius:7px;padding:1px 6px;margin-right:3px;white-space:nowrap">실생활</span>':''}
-      <span class="idx-ep-badge" style="cursor:pointer" onclick="loadEpAndTab('${escA(v.ep||'')}','vocab')">${esc(getEpLabel(v.ep||''))}</span>
+      <span class="idx-ep-badge" style="cursor:pointer" onclick="${v._essential?"closeIndex();loadBasics('essential')":`loadEpAndTab('${escA(v.ep||'')}','vocab')`}">${v._essential?'🗝️ 필수낱말':esc(getEpLabel(v.ep||''))}</span>
       <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
     </div>`;
   });
@@ -2885,6 +2885,10 @@ function renderIdxBody(){
     // 색인 전용 어휘(실생활 광맥) — 새어휘 카드 없이 색인에만 노출
     Object.entries(GLOSSARY_POOL).forEach(([key,list])=>{
       (list||[]).forEach(v=>allWords.push({...v,ep:key,_gloss:true}));
+    });
+    // 필수낱말카드(Start Here) — 색인에도 등록, 배지 클릭 시 Basics로 이동
+    ESSENTIAL_GROUPS.forEach(g=>{
+      g.words.forEach(w=>allWords.push({korean:w.kr,english:w.en,romanization:w.rom,ep:'essential',_essential:true}));
     });
     // 검색 필터 + 정렬
     if(q) allWords=allWords.filter(v=>(v.korean||'').toLowerCase().includes(q)||(v.english||v.en||'').toLowerCase().includes(q));
@@ -2982,9 +2986,9 @@ function renderIdxBody(){
 
 const BASICS_TOPICS = [
   {id:'hangul',    icon:'🔤', label:'한글을 배워요',    en:'Korean Alphabet', grp:'learn'},
+  {id:'essential', icon:'🗝️', label:'필수낱말카드',    en:'Essential Word Cards', grp:'learn'},
   {id:'structure', icon:'🔡', label:'문장 구조',        en:'Sentence Structure', grp:'learn'},
   {id:'spacing',   icon:'📏', label:'띄어쓰기',          en:'Word Spacing', grp:'learn'},
-  {id:'speaking',  icon:'🎤', label:'발음 & 스피킹',    en:'Pronunciation & Speaking', grp:'learn'},
   {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice', grp:'learn'},
   {id:'greetings', icon:'👋', label:'인사 & 교실 표현', en:'Greetings & Classroom', grp:'ref'},
   {id:'numbers',   icon:'🔢', label:'한국 숫자',        en:'Korean Numbers', grp:'ref'},
@@ -3943,17 +3947,110 @@ const NATIVE_NUMS=[
 ];
 
 // ── SPEAKING DATA ──────────────────────────────────────
-const SPEAK_CARDS=[
-  {kr:'안녕하세요',en:'Hello',rom:'annyeonghaseyo'},
-  {kr:'감사합니다',en:'Thank you',rom:'gamsahamnida'},
-  {kr:'죄송합니다',en:"I'm sorry",rom:'joesonghamnida'},
-  {kr:'괜찮아요',en:"It's okay",rom:'gwaenchanayo'},
-  {kr:'저는 학생이에요',en:'I am a student',rom:'jeoneun haksaengieyo'},
-  {kr:'한국어를 배우고 있어요',en:'I am learning Korean',rom:'hangugeoreul baeugo isseoyo'},
-  {kr:'이름이 뭐예요?',en:'What is your name?',rom:'ireumi mwoyeyo'},
-  {kr:'반가워요',en:'Nice to meet you',rom:'bangawoyo'},
-  {kr:'맛있어요',en:'It is delicious',rom:'massisseoyo'},
-  {kr:'모르겠어요',en:"I don't know",rom:'moreugesseoyo'},
+// ── 필수낱말카드 (ESSENTIAL WORD CARDS) ────────────────
+// 2026-08-19: 발음&스피킹(SPEAK_CARDS, 문장 10개) 폐지 → 초급 필수 단어 카드로 교체.
+// 숫자·의문사는 이미 레퍼런스(한국 숫자·의문사 총정리)에 있어서 제외.
+const ESSENTIAL_GROUPS=[
+  { cat:'👤 대명사 · 지시어', cat_en:'Pronouns & Demonstratives', tab_en:'Pronouns', words:[
+    {kr:'나',rom:'na',en:'I / me (casual)',ex:'나는 학생이야.'},
+    {kr:'저',rom:'jeo',en:'I / me (polite)',ex:'저는 학생이에요.'},
+    {kr:'너',rom:'neo',en:'you (casual)',ex:'너는 어디 가?'},
+    {kr:'우리',rom:'u-ri',en:'we / us / our',ex:'우리는 친구예요.'},
+    {kr:'저희',rom:'jeo-hui',en:'we (humble)',ex:'저희 학교는 작아요.'},
+    {kr:'여러분',rom:'yeo-reo-bun',en:'everyone / all of you',ex:'여러분, 안녕하세요!'},
+    {kr:'이거',rom:'i-geo',en:'this (thing)',ex:'이거 얼마예요?'},
+    {kr:'그거',rom:'geu-geo',en:'that (thing, near you)',ex:'그거 뭐예요?'},
+    {kr:'저거',rom:'jeo-geo',en:'that (thing, over there)',ex:'저거 주세요.'},
+    {kr:'여기',rom:'yeo-gi',en:'here',ex:'여기 앉으세요.'},
+    {kr:'거기',rom:'geo-gi',en:'there (near you)',ex:'거기 몇 시에 가요?'},
+    {kr:'저기',rom:'jeo-gi',en:'over there',ex:'저기 화장실이 있어요.'},
+    {kr:'이',rom:'i',en:'this (+ noun)',ex:'이 책은 제 거예요.'},
+    {kr:'그',rom:'geu',en:'that (+ noun, near you)',ex:'그 사람 알아요?'},
+    {kr:'저',rom:'jeo',en:'that (+ noun, over there)',ex:'저 건물은 학교예요.'},
+  ]},
+  { cat:'🏃 기본 동사', cat_en:'Essential Verbs', tab_en:'Verbs', words:[
+    {kr:'가다',rom:'ga-da',en:'to go',ex:'학교에 가요.'},
+    {kr:'오다',rom:'o-da',en:'to come',ex:'친구가 와요.'},
+    {kr:'하다',rom:'ha-da',en:'to do',ex:'숙제를 해요.'},
+    {kr:'있다',rom:'it-da',en:'to exist / have',ex:'시간이 있어요.'},
+    {kr:'없다',rom:'eop-da',en:'to not exist / not have',ex:'돈이 없어요.'},
+    {kr:'되다',rom:'doe-da',en:'to become',ex:'선생님이 됐어요.'},
+    {kr:'보다',rom:'bo-da',en:'to see / watch',ex:'영화를 봐요.'},
+    {kr:'듣다',rom:'deut-da',en:'to listen / hear',ex:'음악을 들어요.'},
+    {kr:'말하다',rom:'mal-ha-da',en:'to speak / say',ex:'한국어로 말해요.'},
+    {kr:'먹다',rom:'meok-da',en:'to eat',ex:'밥을 먹어요.'},
+    {kr:'마시다',rom:'ma-si-da',en:'to drink',ex:'물을 마셔요.'},
+    {kr:'자다',rom:'ja-da',en:'to sleep',ex:'일찍 자요.'},
+    {kr:'일어나다',rom:'i-reo-na-da',en:'to get up / wake up',ex:'아침에 일어나요.'},
+    {kr:'사다',rom:'sa-da',en:'to buy',ex:'옷을 사요.'},
+    {kr:'주다',rom:'ju-da',en:'to give',ex:'선물을 줘요.'},
+    {kr:'받다',rom:'bat-da',en:'to receive',ex:'편지를 받아요.'},
+    {kr:'알다',rom:'al-da',en:'to know',ex:'저 사람을 알아요.'},
+    {kr:'모르다',rom:'mo-reu-da',en:'to not know',ex:'길을 몰라요.'},
+    {kr:'좋아하다',rom:'jo-a-ha-da',en:'to like',ex:'커피를 좋아해요.'},
+    {kr:'살다',rom:'sal-da',en:'to live',ex:'서울에 살아요.'},
+  ]},
+  { cat:'🏠 장소', cat_en:'Places', tab_en:'Places', words:[
+    {kr:'집',rom:'jip',en:'house / home',ex:'저는 지금 집에 있어요.'},
+    {kr:'학교',rom:'hak-gyo',en:'school',ex:'학교에 가요.'},
+    {kr:'회사',rom:'hoe-sa',en:'company / workplace',ex:'회사에서 일해요.'},
+    {kr:'병원',rom:'byeong-won',en:'hospital',ex:'병원에 가야 해요.'},
+    {kr:'식당',rom:'sik-dang',en:'restaurant',ex:'식당에서 밥을 먹어요.'},
+    {kr:'카페',rom:'ka-pe',en:'café',ex:'카페에서 커피를 마셔요.'},
+    {kr:'시장',rom:'si-jang',en:'market',ex:'시장에서 과일을 사요.'},
+    {kr:'마트',rom:'ma-teu',en:'grocery store / mart',ex:'마트에 가요.'},
+    {kr:'은행',rom:'eun-haeng',en:'bank',ex:'은행에서 돈을 찾아요.'},
+    {kr:'공원',rom:'gong-won',en:'park',ex:'공원에서 산책해요.'},
+    {kr:'화장실',rom:'hwa-jang-sil',en:'restroom',ex:'화장실이 어디예요?'},
+    {kr:'역',rom:'yeok',en:'station',ex:'지하철역이 가까워요.'},
+    {kr:'공항',rom:'gong-hang',en:'airport',ex:'공항에 도착했어요.'},
+    {kr:'편의점',rom:'pyeon-ui-jeom',en:'convenience store',ex:'편의점에서 물을 사요.'},
+  ]},
+  { cat:'🔌 물건 · 기기', cat_en:'Objects & Devices', tab_en:'Objects', words:[
+    {kr:'휴대전화',rom:'hyu-dae-jeon-hwa',en:'cell phone',ex:'휴대전화가 어디 있어요?'},
+    {kr:'컴퓨터',rom:'keom-pyu-teo',en:'computer',ex:'컴퓨터로 숙제해요.'},
+    {kr:'텔레비전',rom:'tel-le-bi-jeon',en:'television',ex:'텔레비전을 봐요.'},
+    {kr:'냉장고',rom:'naeng-jang-go',en:'refrigerator',ex:'냉장고에 우유가 있어요.'},
+    {kr:'시계',rom:'si-gye',en:'clock / watch',ex:'시계를 봐요.'},
+    {kr:'지갑',rom:'ji-gap',en:'wallet',ex:'지갑을 잃어버렸어요.'},
+    {kr:'가방',rom:'ga-bang',en:'bag',ex:'가방이 무거워요.'},
+    {kr:'우산',rom:'u-san',en:'umbrella',ex:'우산을 가져가세요.'},
+    {kr:'열쇠',rom:'yeol-soe',en:'key',ex:'열쇠가 없어요.'},
+    {kr:'카드',rom:'ka-deu',en:'card',ex:'카드로 계산할게요.'},
+    {kr:'충전기',rom:'chung-jeon-gi',en:'charger',ex:'충전기 좀 빌려주세요.'},
+    {kr:'세탁기',rom:'se-tak-gi',en:'washing machine',ex:'세탁기를 돌려요.'},
+  ]},
+  { cat:'🕐 시간', cat_en:'Time', tab_en:'Time', words:[
+    {kr:'월요일',rom:'wol-yo-il',en:'Monday',ex:'월요일에 학교에 가요.'},
+    {kr:'화요일',rom:'hwa-yo-il',en:'Tuesday',ex:'화요일에 만나요.'},
+    {kr:'수요일',rom:'su-yo-il',en:'Wednesday',ex:'수요일은 바빠요.'},
+    {kr:'목요일',rom:'mok-yo-il',en:'Thursday',ex:'목요일에 시험이 있어요.'},
+    {kr:'금요일',rom:'geum-yo-il',en:'Friday',ex:'금요일 저녁에 쉬어요.'},
+    {kr:'토요일',rom:'to-yo-il',en:'Saturday',ex:'토요일에 친구를 만나요.'},
+    {kr:'일요일',rom:'il-yo-il',en:'Sunday',ex:'일요일에는 집에 있어요.'},
+    {kr:'오늘',rom:'o-neul',en:'today',ex:'오늘 날씨가 좋아요.'},
+    {kr:'내일',rom:'nae-il',en:'tomorrow',ex:'내일 만나요.'},
+    {kr:'어제',rom:'eo-je',en:'yesterday',ex:'어제 집에 있었어요.'},
+    {kr:'지금',rom:'ji-geum',en:'now',ex:'지금 뭐 해요?'},
+    {kr:'아침',rom:'a-chim',en:'morning',ex:'아침에 운동해요.'},
+    {kr:'점심',rom:'jeom-sim',en:'lunch / midday',ex:'점심 먹었어요?'},
+    {kr:'저녁',rom:'jeo-nyeok',en:'evening / dinner',ex:'저녁에 요리해요.'},
+    {kr:'밤',rom:'bam',en:'night',ex:'밤에 잠을 자요.'},
+  ]},
+  { cat:'🌳 자연', cat_en:'Nature', tab_en:'Nature', words:[
+    {kr:'하늘',rom:'ha-neul',en:'sky',ex:'하늘이 파래요.'},
+    {kr:'해',rom:'hae',en:'sun',ex:'해가 떴어요.'},
+    {kr:'달',rom:'dal',en:'moon',ex:'달이 예뻐요.'},
+    {kr:'별',rom:'byeol',en:'star',ex:'별이 많아요.'},
+    {kr:'나무',rom:'na-mu',en:'tree',ex:'나무가 커요.'},
+    {kr:'꽃',rom:'kkot',en:'flower',ex:'꽃이 피었어요.'},
+    {kr:'산',rom:'san',en:'mountain',ex:'산에 올라가요.'},
+    {kr:'바다',rom:'ba-da',en:'sea / ocean',ex:'바다에 가요.'},
+    {kr:'강',rom:'gang',en:'river',ex:'강에서 낚시해요.'},
+    {kr:'비',rom:'bi',en:'rain',ex:'비가 와요.'},
+    {kr:'눈',rom:'nun',en:'snow',ex:'눈이 내려요.'},
+    {kr:'바람',rom:'ba-ram',en:'wind',ex:'바람이 불어요.'},
+  ]},
 ];
 
 // ══════════════════════════════════════════════════════
@@ -4228,7 +4325,7 @@ function loadBasics(topicId){
   if(topicId==='numbers')   body.innerHTML=buildNumbers();
   if(topicId==='writing')   body.innerHTML=buildWriting();
   if(topicId==='verbs')     body.innerHTML=buildVerbs();
-  if(topicId==='speaking')  body.innerHTML=buildSpeaking();
+  if(topicId==='essential') body.innerHTML=buildEssential();
   if(topicId==='questions') body.innerHTML=buildQuestions();
   if(topicId==='honorifics')body.innerHTML=buildHonorifics();
   if(topicId==='spacing')  body.innerHTML=buildSpacing();
@@ -5610,16 +5707,34 @@ function buildHonorifics(){
 
 // ── SPEAKING RENDER ────────────────────────────────────
 // ══════════════════════════════════════════════════════
-function buildSpeaking(){
-  return '<div class="basics-intro">🔊로 원어민 발음을 먼저 듣고, 따라 말해보세요!<br><em>Click 🔊 to hear native pronunciation, then repeat aloud.</em></div>'
-    +'<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">'
-    +SPEAK_CARDS.map(c=>'<div style="background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:14px 18px;">'
-      +'<div style="font-size:22px;font-weight:700;color:var(--gray-900);">'+c.kr+'</div>'
-      +'<div style="font-size:11px;color:var(--teal);font-weight:600;margin-top:3px;">'+c.rom+'</div>'
-      +'<div style="font-size:12.5px;color:var(--warm-500);margin-top:2px;margin-bottom:10px;">'+c.en+'</div>'
-      +'<button class="speak-tts-btn" onclick="speakTTS(\''+c.kr+'\')">🔊 듣기</button>'
-      +'</div>').join('')
+function _essCardHtml(w){
+  return '<div class="ess-card" onclick="speakTTS(\''+escA(w.kr)+'\')">'
+    +'<div class="ess-card-kr">'+esc(w.kr)+' <span class="ess-card-icon">🔊</span></div>'
+    +'<div class="ess-card-rom">'+esc(w.rom)+'</div>'
+    +'<div class="ess-card-en">'+esc(w.en)+'</div>'
+    +(w.ex?'<div class="ess-card-ex">'+esc(w.ex)+'</div>':'')
     +'</div>';
+}
+const ESS_TAB_IDS=['pronoun','verb','places','objects','time','nature'];
+function buildEssential(){
+  const tabsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-ess" data-tab="'+ESS_TAB_IDS[i]+'" onclick="switchBtab(\'bp-ess\',\''+ESS_TAB_IDS[i]+'\')">'+g.cat+' <span style="font-weight:400;opacity:.75">'+g.tab_en+'</span></button>').join('');
+  const panelsHtml=ESSENTIAL_GROUPS.map((g,i)=>'<div id="bp-ess-'+ESS_TAB_IDS[i]+'" class="btab-panel'+(i===0?' active':'')+'">'
+      +'<div style="font-size:11.5px;color:var(--warm-400);margin-bottom:10px;">'+esc(g.cat_en)+'</div>'
+      +'<div class="ess-grid">'+g.words.map(_essCardHtml).join('')+'</div>'
+    +'</div>').join('');
+  return '<style>'
+    +'.ess-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 16px;cursor:pointer;transition:border-color .15s;}'
+    +'.ess-card:hover{border-color:var(--teal);}'
+    +'.ess-card-kr{font-size:19px;font-weight:700;color:var(--gray-900);}'
+    +'.ess-card-icon{font-size:11px;opacity:.5;}'
+    +'.ess-card-rom{font-size:11px;color:var(--teal);font-weight:600;margin-top:2px;}'
+    +'.ess-card-en{font-size:12.5px;color:var(--warm-500);margin-top:1px;}'
+    +'.ess-card-ex{font-size:11.5px;color:var(--gray-700);margin-top:8px;padding-top:8px;border-top:1px dashed var(--gray-200);font-style:italic;}'
+    +'.ess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:6px;}'
+    +'</style>'
+    +'<div class="basics-intro">한글 초보가 꼭 알아야 할 필수 단어들이에요. 카드를 누르면 발음을 들을 수 있어요!<br><em>Essential words every Korean beginner should know. Click a card to hear the pronunciation.</em></div>'
+    +'<div class="btab-bar">'+tabsHtml+'</div>'
+    +panelsHtml;
 }
 
 
