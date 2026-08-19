@@ -1725,12 +1725,22 @@ function spkToggle(mId,bId){
   if(b)b.textContent=show?'🙈 모범답안 숨기기 Hide answer':'📄 모범답안 보기 Show answer';
 }
 
+function _gramExampleList(g){
+  // 문법카드의 예문은 두 스키마 중 하나에 들어있음: 단순형(examples 배열) 또는
+  // 규칙별로 묶인 그룹형(example_groups[].items). 둘 다 합쳐서 반환.
+  const out=[];
+  (g.examples||[]).forEach(ex=>{ if(ex&&ex.ko) out.push(ex); });
+  (g.example_groups||[]).forEach(grp=>{
+    (grp.items||[]).forEach(it=>{ if(it&&it.ko) out.push(it); });
+  });
+  return out;
+}
 function _buildQuizTabBar(){
   const epKey=`${DATA.level}_${DATA.id}`;
   // 2026-08-17: L1 ep01·02·04·06·07·08·09 지문을 그 편까지 배운 문법(현재형)만 쓰도록 재작성 완료 → 전체 L1 재활성화
   const hasRd=!!(READING_POOL[epKey]);
   const hasSp=!!(SP_QUIZ_POOL[epKey]);
-  const hasSb=!!(DATA.grammar&&DATA.grammar.some(g=>g.examples&&g.examples.length));
+  const hasSb=!!(DATA.grammar&&DATA.grammar.some(g=>_gramExampleList(g).some(ex=>ex&&ex.ko&&ex.ko.trim().split(/\s+/).length>=2)));
   const _lvN=parseInt((DATA.level||'').replace(/[^0-9]/g,''))||0;
   const hasWr=(_lvN>=3&&DATA.script&&DATA.script.length>0)||!!(WRITING_POOL[epKey]);
   const hasSpk=!!((WRITING_POOL[epKey]&&(WRITING_POOL[epKey].completion||[]).length)||(DATA.real_life||[]).some(it=>it&&it.type==='writing_guided'));
@@ -1906,7 +1916,7 @@ let _sbPool=[], _sbPool2=[], _sbStage=1, _sbIdx=0, _sbDone=[], _sbDone2=[];
 function _sbInit(){
   const pool=[]; const seen=new Set();
   (DATA.grammar||[]).forEach(g=>{
-    (g.examples||[]).forEach(ex=>{
+    _gramExampleList(g).forEach(ex=>{
       const ko=(ex&&ex.ko||'').trim();
       if(ko&&ko.split(/\s+/).length>=2&&!seen.has(ko)){ seen.add(ko); pool.push({ko,en:ex.en||''}); }
     });
