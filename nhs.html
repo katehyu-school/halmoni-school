@@ -2839,7 +2839,7 @@ function _renderIdxVocabPage(){
       <div style="font-size:11px;color:var(--warm-500);min-width:90px">${esc(v.romanization||'')}</div>
       <div class="idx-vocab-en">${esc(v.english||v.en||'')}</div>
       ${v._gloss?'<span style="font-size:9px;background:var(--mint,#DFF5EE);color:var(--teal);border-radius:7px;padding:1px 6px;margin-right:3px;white-space:nowrap">실생활</span>':''}
-      <span class="idx-ep-badge" style="cursor:pointer" onclick="${v._essential?"closeIndex();loadBasics('essential')":`loadEpAndTab('${escA(v.ep||'')}','vocab')`}">${v._essential?'🗝️ 필수낱말':esc(getEpLabel(v.ep||''))}</span>
+      <span class="idx-ep-badge" style="cursor:pointer" onclick="${v._essential?"closeIndex();loadBasics('essential')":`loadEpAndTab('${escA(v.ep||'')}','vocab')`}">${v._essential?'🗝️ 필수 낱말':esc(getEpLabel(v.ep||''))}</span>
       <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
     </div>`;
   });
@@ -2986,7 +2986,7 @@ function renderIdxBody(){
 
 const BASICS_TOPICS = [
   {id:'hangul',    icon:'🔤', label:'한글을 배워요',    en:'Korean Alphabet', grp:'learn'},
-  {id:'essential', icon:'🗝️', label:'필수낱말카드',    en:'Essential Word Cards', grp:'learn'},
+  {id:'essential', icon:'🗝️', label:'필수 낱말 카드',   en:'Essential Word Cards', grp:'learn'},
   {id:'structure', icon:'🔡', label:'문장 구조',        en:'Sentence Structure', grp:'learn'},
   {id:'spacing',   icon:'📏', label:'띄어쓰기',          en:'Word Spacing', grp:'learn'},
   {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice', grp:'learn'},
@@ -3944,6 +3944,36 @@ const NATIVE_NUMS=[
   {n:60,kr:'예순',rom:'yesun',hint:'60 things'},{n:70,kr:'일흔',rom:'ilheun',hint:'70 things'},
   {n:80,kr:'여든',rom:'yeodeun',hint:'80 things'},{n:90,kr:'아흔',rom:'aheun',hint:'90 things'},
   {n:100,kr:'백',rom:'baek',hint:'100 — Sino-Korean takes over here'},
+];
+
+// ── 단위 명사 (COUNTER WORDS) — L1 ep09 문법카드에서 발췌, 레퍼런스용 ──
+const COUNTER_FORMS=[
+  {num:'1',std:'하나',mod:'한',ex:'한 개 / 한 박스'},
+  {num:'2',std:'둘',mod:'두',ex:'두 개 / 두 마리'},
+  {num:'3',std:'셋',mod:'세',ex:'세 개 / 세 근'},
+  {num:'4',std:'넷',mod:'네',ex:'네 개 / 네 단'},
+  {num:'5',std:'다섯',mod:'다섯',ex:'다섯 개'},
+  {num:'6',std:'여섯',mod:'여섯',ex:'여섯 개'},
+  {num:'7',std:'일곱',mod:'일곱',ex:'일곱 개'},
+  {num:'8',std:'여덟',mod:'여덟',ex:'여덟 개'},
+  {num:'9',std:'아홉',mod:'아홉',ex:'아홉 개'},
+  {num:'10',std:'열',mod:'열',ex:'열 개'},
+  {num:'20',std:'스물',mod:'스무',ex:'스무 개'},
+  {num:'100',std:'백',mod:'백',ex:'백 개 (한자어와 동일)'},
+];
+const COUNTER_WORDS=[
+  {unit:'개',use:'일반적인 물건 · General objects',ex:'사과 한 개, 연필 두 개'},
+  {unit:'마리',use:'동물 · Animals',ex:'강아지 한 마리, 고양이 두 마리'},
+  {unit:'벌',use:'옷 (한 세트) · Clothes (a set)',ex:'한복 한 벌, 양복 두 벌'},
+  {unit:'켤레',use:'신발·양말 등 쌍 · Pairs (shoes, socks)',ex:'신발 한 켤레, 양말 두 켤레'},
+  {unit:'채',use:'집이나 건물 · Houses/buildings',ex:'집 한 채, 빌딩 두 채'},
+  {unit:'송이',use:'꽃이나 열매 뭉치 · Flowers/fruit clusters',ex:'장미 한 송이, 포도 두 송이'},
+  {unit:'그릇 / 컵 / 잔',use:'음식이나 음료 · Food/drinks (bowl/cup/glass)',ex:'밥 한 그릇, 물 한 잔'},
+  {unit:'대',use:'자동차·비행기·악기 등 · Vehicles, machines, instruments',ex:'자동차 한 대, 피아노 두 대'},
+  {unit:'자루',use:'긴 도구 · Long tools',ex:'연필 한 자루, 칼 두 자루'},
+  {unit:'장',use:'종이나 얇은 물건 · Paper/thin flat things',ex:'종이 한 장, 사진 두 장'},
+  {unit:'근',use:'고기 무게 단위 (약 600g) · Traditional weight unit for meat (~600g)',ex:'소고기 한 근, 돼지고기 두 근'},
+  {unit:'단',use:'다발로 묶은 채소 · Bundled vegetables/greens',ex:'파 한 단, 시금치 두 단'},
 ];
 
 // ── SPEAKING DATA ──────────────────────────────────────
@@ -5067,7 +5097,7 @@ function buildGreetings(){
         rows+='<tr>'+speakCell(r.ban)+speakCell(r.cas)+speakCell(r.for_)+'<td style="color:var(--warm-500);font-size:12px;font-style:italic;text-align:center;">'+(r.en||'—')+'</td></tr>';
       });
     });
-    return '<table class="structure-ex-table">'+rows+'</table>';
+    return '<table class="structure-ex-table greet-table"><colgroup><col style="width:22%"><col style="width:26%"><col style="width:30%"><col style="width:22%"></colgroup>'+rows+'</table>';
   }
   // 교실 표현 카드 (텍스트 중심)
   function cCards(list){
@@ -5238,35 +5268,70 @@ function buildNumbers(){
       +'<div id="bignum-result" class="bignum-result"></div>'
     +'</div>';
 
+  // ── 단위 명사 탭 콘텐츠 ──
+  const counterTab =
+    '<div class="basics-intro">뭔가를 셀 때는 <strong>[관형형 숫자] + [단위 명사] + [명사]</strong> 순서예요. 무엇을 세는지에 따라 단위 명사가 달라져요.<br><em>To count things: [modifier-form number] + [counter word] + [noun]. Which counter word you use depends on what you\'re counting.</em></div>'
+    +'<div class="vconj-section-title">🔤 관형형 — 단위 명사 앞에서 줄어드는 숫자</div>'
+    +'<div class="structure-note" style="margin-bottom:10px;">1~4와 20은 단위 명사 앞에서 형태가 살짝 바뀌어요 (하나→한, 둘→두, 셋→세, 넷→네, 스물→스무). 5 이상은 그대로예요.<br><em>1–4 and 20 shrink before a counter (하나→한, 둘→두...). 5 and up stay the same.</em></div>'
+    +'<table class="structure-ex-table"><tr><th>숫자</th><th>단독형</th><th>관형형</th><th>예시</th></tr>'
+    +COUNTER_FORMS.map(f=>'<tr><td>'+f.num+'</td><td onclick="speakTTS(\''+f.std+'\')" style="cursor:pointer">'+f.std+' 🔊</td><td onclick="speakTTS(\''+f.mod+'\')" style="cursor:pointer;font-weight:700;color:var(--teal-dark)">'+f.mod+' 🔊</td><td>'+f.ex+'</td></tr>').join('')
+    +'</table>'
+    +'<div class="vconj-section-title" style="margin-top:18px;">📦 무엇을 셀 때 어떤 단위 명사?</div>'
+    +'<table class="structure-ex-table"><tr><th>단위</th><th>쓰임 · Use</th><th>예시</th></tr>'
+    +COUNTER_WORDS.map(c=>'<tr><td style="font-weight:700;color:var(--teal-dark);white-space:nowrap;">'+c.unit+'</td><td style="font-size:12.5px;">'+c.use+'</td><td>'+c.ex+'</td></tr>').join('')
+    +'</table>'
+    +'<div class="vconj-section-title" style="margin-top:18px;">💬 예문 · Examples</div>'
+    +'<div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">'
+    +'<div class="qna-bubble a-bubble" onclick="speakTTS(\'사과 세 개 주세요\')" style="cursor:pointer">사과 세 개 주세요. 🔊<br><span style="font-size:11px;color:var(--warm-500)">Please give me three apples.</span></div>'
+    +'<div class="qna-bubble a-bubble" onclick="speakTTS(\'딸기 한 박스 주세요\')" style="cursor:pointer">딸기 한 박스 주세요. 🔊<br><span style="font-size:11px;color:var(--warm-500)">Please give me one box of strawberries.</span></div>'
+    +'<div class="qna-bubble a-bubble" onclick="speakTTS(\'강아지 두 마리가 있어요\')" style="cursor:pointer">강아지 두 마리가 있어요. 🔊<br><span style="font-size:11px;color:var(--warm-500)">There are two dogs.</span></div>'
+    +'</div>';
+
   return '<div class="btab-bar">'
     +'<button class="btab active" data-btab-group="bp-num" data-tab="sino" onclick="switchBtab(\'bp-num\',\'sino\')">한자어 Sino-Korean</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="native" onclick="switchBtab(\'bp-num\',\'native\')">고유어 Native Korean</button>'
+    +'<button class="btab" data-btab-group="bp-num" data-tab="counters" onclick="switchBtab(\'bp-num\',\'counters\')">📦 단위 명사</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="date" onclick="switchBtab(\'bp-num\',\'date\')">📅 날짜·요일</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="big" onclick="switchBtab(\'bp-num\',\'big\')">📈 큰 숫자 Big Numbers</button>'
     +'<button class="btab" data-btab-group="bp-num" data-tab="usage" onclick="switchBtab(\'bp-num\',\'usage\')">📌 사용법</button>'
     +'</div>'
     +'<div id="bp-num-sino" class="btab-panel active"><div class="basics-intro">전화번호, 날짜, 가격, 층, 연도에 사용해요.<br><em>Used for phone numbers, dates, prices, floors, years.</em></div>'+nCards(SINO_NUMS)+'</div>'
     +'<div id="bp-num-native" class="btab-panel"><div class="basics-intro">물건 세기, 나이, 시간(시), 회수에 사용해요.<br><em>Used for counting objects, age, hours, how many times.</em></div>'+nCards(NATIVE_NUMS)+'</div>'
+    +'<div id="bp-num-counters" class="btab-panel">'+counterTab+'</div>'
     +'<div id="bp-num-date" class="btab-panel">'+dateTab+'</div>'
     +'<div id="bp-num-big" class="btab-panel">'+bigNumTab+'</div>'
-    +'<div id="bp-num-usage" class="btab-panel"><div class="num-usage-box">'
-    +'📞 <strong>전화번호</strong> — Sino: 공일공-이삼사오-육칠팔구<br>'
-    +'📅 <strong>날짜</strong> — Sino: 오월 십오일 (May 15th)<br>'
-    +'💰 <strong>가격</strong> — Sino: 오천 원 (5,000 won)<br>'
-    +'📅 <strong>연도</strong> — Sino: 이천이십육년 (2026)<br><br>'
-    +'🍎 <strong>물건 세기</strong> — Native: 사과 세 개 (3 apples)<br>'
-    +'👴 <strong>나이</strong> — Native: 열다섯 살 (15 years old)<br>'
-    +'🕐 <strong>시</strong> — Native: 두 시 (2 o\'clock)<br>'
-    +'🔁 <strong>번</strong> — Native: 세 번 (3 times)'
+    +'<div id="bp-num-usage" class="btab-panel">'
+    +'<div class="basics-intro">한자어와 고유어, 언제 뭘 쓰는지 헷갈릴 때 여기를 보세요.<br><em>Quick reference — when to use Sino-Korean vs Native Korean numbers.</em></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">'
+      +'<div style="background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:12px 16px;">'
+        +'<div style="font-weight:800;color:var(--teal-dark);font-size:13px;margin-bottom:8px;">🔢 한자어 Sino-Korean</div>'
+        +'<div style="font-size:13px;color:var(--teal-dark);line-height:1.9;">'
+          +'📞 <strong>전화번호</strong> — 공일공-이삼사오-육칠팔구<br>'
+          +'📅 <strong>날짜</strong> — 오월 십오일 (May 15th)<br>'
+          +'💰 <strong>가격</strong> — 오천 원 (5,000 won)<br>'
+          +'📅 <strong>연도</strong> — 이천이십육년 (2026)'
+        +'</div>'
+      +'</div>'
+      +'<div style="background:#fff5f2;border:1.5px solid #fca89a;border-radius:var(--radius-sm);padding:12px 16px;">'
+        +'<div style="font-weight:800;color:var(--coral);font-size:13px;margin-bottom:8px;">🍎 고유어 Native Korean</div>'
+        +'<div style="font-size:13px;color:#8a3320;line-height:1.9;">'
+          +'🍎 <strong>물건 세기</strong> — 사과 세 개 (3 apples)<br>'
+          +'👴 <strong>나이</strong> — 열다섯 살 (15 years old)<br>'
+          +'🕐 <strong>시</strong> — 두 시 (2 o\'clock)<br>'
+          +'🔁 <strong>번</strong> — 세 번 (3 times)'
+        +'</div>'
+      +'</div>'
     +'</div>'
     +'<table class="structure-ex-table"><tr><th>표현</th><th>숫자 타입</th><th>예시</th></tr>'
-    +'<tr><td>전화번호</td><td>Sino 한자어</td><td>공일공–일이삼사–오육칠팔</td></tr>'
-    +'<tr><td>날짜</td><td>Sino 한자어</td><td>오월 십오일</td></tr>'
-    +'<tr><td>가격</td><td>Sino 한자어</td><td>만 이천 원</td></tr>'
-    +'<tr><td>나이(살)</td><td>Native 고유어</td><td>열다섯 살</td></tr>'
-    +'<tr><td>시각(시)</td><td>Native 고유어</td><td>두 시 삼십 분</td></tr>'
-    +'<tr><td>개수(개)</td><td>Native 고유어</td><td>사과 두 개</td></tr>'
-    +'</table></div>';
+    +'<tr><td>전화번호</td><td><span style="background:var(--teal-50);color:var(--teal-dark);padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;">Sino 한자어</span></td><td>공일공–일이삼사–오육칠팔</td></tr>'
+    +'<tr><td>날짜</td><td><span style="background:var(--teal-50);color:var(--teal-dark);padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;">Sino 한자어</span></td><td>오월 십오일</td></tr>'
+    +'<tr><td>가격</td><td><span style="background:var(--teal-50);color:var(--teal-dark);padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;">Sino 한자어</span></td><td>만 이천 원</td></tr>'
+    +'<tr><td>나이(살)</td><td><span style="background:#fff5f2;color:var(--coral);padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;">Native 고유어</span></td><td>열다섯 살</td></tr>'
+    +'<tr><td>시각(시)</td><td><span style="background:#fff5f2;color:var(--coral);padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;">Native 고유어</span></td><td>두 시 삼십 분</td></tr>'
+    +'<tr><td>개수(개)</td><td><span style="background:#fff5f2;color:var(--coral);padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;">Native 고유어</span></td><td>사과 두 개</td></tr>'
+    +'</table>'
+    +'<div class="structure-note" style="margin-top:12px;">🗝️ <strong>물건 세기</strong>는 단위 명사(개·마리·벌...)가 따로 있어요 — 📦 <strong>단위 명사</strong> 탭에서 자세히 볼 수 있어요.<br><em>Counting objects needs a counter word (개, 마리, 벌...) — see the 📦 Counters tab for the full list.</em></div>'
+    +'</div>';
 }
 
 
