@@ -1169,12 +1169,12 @@ function buildScript(){
       <button class="nav-btn" id="nav-next" onclick="autoPlayStop();moveScene(1)">&#8250;</button>
     </div>
     <div class="shad-result" id="shad-result"></div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
       <button id="ap-btn" onclick="autoPlayToggle()" title="슬라이드 자동 재생" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">▶▶ Auto-play</button>
       <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
       <button id="rp-btn" onclick="rpOpen()" title="역할극 · Role-play" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--warm-900);white-space:nowrap">🎭 Role-play</button>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-left:auto"><span style="font-size:11px;color:var(--warm-500);font-weight:700;white-space:nowrap">🔊 속도</span>${rlSpeedToggleHtml()}</div>
     </div>
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="font-size:11px;color:var(--warm-500);font-weight:700">🔊 속도</span>${rlSpeedToggleHtml()}</div>
     <div class="rp-panel" id="rp-panel" style="display:none"></div>
     <button class="script-toggle-btn" id="strip-toggle-btn" onclick="toggleStrip()"><i class="strip-chevron">▼</i> 전체 스크립트 보기</button>
     <div class="script-strip" id="script-strip"></div>
