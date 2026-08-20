@@ -450,7 +450,7 @@
    "title_en": "To a Person or Animal",
    "emoji": "🫱",
    "explanation_en": "Marks the target of your action — who you're giving something to, asking, requesting, or talking to. -한테 is casual spoken Korean; -에게 is more formal and used in writing.",
-   "pattern": "Person/animal + -한테 (casual) · Person/animal + -에게 (formal/written)",
+   "pattern": "Person/animal + -한테 (casual) · Person/animal + -에게 (formal/written) · Person + -께 (honorific)",
    "scene_example": {
     "korean": "은행나무한테 부탁할 거야.",
     "english": "I'm going to make a request to the ginkgo tree.",
@@ -465,9 +465,9 @@
     },
     {
      "type": "green",
-     "label": "-에게 · formal, written",
-     "content": "선생님에게 드리다 · 부모님에게 연락하다",
-     "note": "Used in letters, news, formal speech — same meaning as -한테"
+     "label": "-에게 · formal, written  ·  -께 · honorific (to a respected person)",
+     "content": "학생에게 주다 · 선생님께 드리다",
+     "note": "께 is the honorific version of 에게/한테 — used for teachers, parents, elders. It pairs with honorific verbs like 드리다: 선생님에게 드리다 (X) → 선생님께 드리다 (O)"
     },
     {
      "type": "amber",
@@ -492,6 +492,10 @@
     {
      "ko": "친구한테서 선물을 받았어요.",
      "en": "I received a gift from a friend."
+    },
+    {
+     "ko": "할머니께 선물을 드렸어요.",
+     "en": "I gave a gift to Grandma. (께 + 드리다 = honorific pair)"
     }
    ],
    "fill_blanks": [
@@ -760,7 +764,7 @@
  "quiz": [
   {
    "type": "listen",
-   "audio_text": "용문사에 가면 1,100살이 넘는 은행나무가 있어.",
+   "audio_text": "용문사에 가면 천백 살이 넘는 은행나무가 있어.",
    "question_ko": "은행나무가 몇 살이 넘어요?",
    "question_en": "How old is the ginkgo tree?",
    "options": [
