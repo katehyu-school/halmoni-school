@@ -3187,6 +3187,7 @@ async function loadEp(epId, level='L1'){
 }
 // 이전 편 어휘 기반 '뜻 맞추기' 빠른 복습 문제 생성 (현재 레벨 앞선 편, 부족하면 이전 레벨 보강)
 async function _buildVocabWarmup(level, epNum){
+  await _sharedSetsReady; // shared_expression_sets.json 로딩 전에 _resolveRefs가 실행되면 {ref:...} 항목이 못 풀리고 캐시에 그대로 박혀서, 나중에 그 에피소드를 열어도 어휘/사용법이 깨진 채로 보이는 문제 방지
   const LVARR={L1:L1_EPISODES,L2:L2_EPISODES,L3:L3_EPISODES,L4:L4_EPISODES,L5:L5_EPISODES,L6:L6_EPISODES};
   const curN=parseInt(String(level).replace(/\D/g,''))||1;
   const targets=[];
