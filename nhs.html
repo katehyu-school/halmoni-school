@@ -1174,6 +1174,7 @@ function buildScript(){
       <button class="nav-speak-btn" id="shad-btn" onclick="nhsShadToggle()" title="따라 말하기 · Shadowing">🎤</button>
       <button id="rp-btn" onclick="rpOpen()" title="역할극 · Role-play" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;color:var(--warm-900);white-space:nowrap">🎭 Role-play</button>
     </div>
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="font-size:11px;color:var(--warm-500);font-weight:700">🔊 속도</span>${rlSpeedToggleHtml()}</div>
     <div class="rp-panel" id="rp-panel" style="display:none"></div>
     <button class="script-toggle-btn" id="strip-toggle-btn" onclick="toggleStrip()"><i class="strip-chevron">▼</i> 전체 스크립트 보기</button>
     <div class="script-strip" id="script-strip"></div>
@@ -1245,7 +1246,7 @@ function buildVideoScript(){
     const tag=line.speech_type?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${esc(line.speech_type)}</span>`:'';
     const _vShadEsc=line.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     const _vAudioEsc=(line.audio||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-    const ttsBtn=`<button class="video-script-tts" data-tts="${_vShadEsc}" data-audio="${_vAudioEsc}" onclick="speak(this.dataset.tts,this.dataset.audio||undefined)">🔊 듣기</button>`;
+    const ttsBtn=`<button class="video-script-tts" data-tts="${_vShadEsc}" data-audio="${_vAudioEsc}" onclick="scriptSpeak(this.dataset.tts,this.dataset.audio||undefined)">🔊 듣기</button>`;
     const shadBtn=`<button class="video-script-tts shad-strip-btn" id="shad-v${i}" data-target="${_vShadEsc}" data-idx="v${i}" onclick="nhsShadLine(event,this.dataset.target,this.dataset.idx)" style="margin-left:6px;" title="따라 말하기">🎤</button>`;
     return `<div class="video-script-line">
       <div class="caption-avatar" style="background:${esc(ch.color||'#E0E0E0')}">${esc(ch.emoji||'💬')}</div>
@@ -1266,10 +1267,11 @@ function buildVideoScript(){
       <ol class="script-trans-list">${_trLines.map(l=>`<li>${esc(l.en||l.translation||'')}</li>`).join('')}</ol>
     </details>`:'';
   return `<div class="video-wrap">
-    <video controls playsinline preload="metadata">
+    <video controls playsinline preload="metadata" onloadedmetadata="this.playbackRate=_rlSpeed">
       <source src="${esc(DATA.video)}" type="video/mp4">
       브라우저가 동영상을 지원하지 않아요.
     </video>
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 4px"><span style="font-size:11px;color:var(--warm-500);font-weight:700">🔊 속도</span>${rlSpeedToggleHtml()}</div>
     <details class="video-script-panel">
       <summary class="video-script-header" style="cursor:pointer;">📝 대본 · Script <span style="font-size:11px;color:var(--warm-400);font-weight:400">(접기/펼치기)</span></summary>
       ${lines}
@@ -1336,7 +1338,7 @@ function jumpScene(i){
 
 function speakCurrent(){
   if(!DATA)return;
-  const line=DATA.script[sceneIdx];speak(line.text,line.audio);
+  const line=DATA.script[sceneIdx];scriptSpeak(line.text,line.audio);
 }
 
 function randomScene(){
@@ -1380,6 +1382,7 @@ function updateStripHighlight(){
 }
 
 // ── AUDIO ──────────────────────────────────────────────
+// 범용 재생 — 한글 자모 연습·필수 낱말카드 등 Script/영상 탭 밖에서도 두루 쓰임. 항상 기본 속도(0.88) 고정, _rlSpeed 영향 없음.
 function speak(text,audioSrc){
   if(audioSrc){
     if(_audio){_audio.pause();_audio=null;}
@@ -1387,6 +1390,17 @@ function speak(text,audioSrc){
     _audio.play().catch(()=>speakTTS(text));
   }else{
     speakTTS(text);
+  }
+}
+// Script/영상 탭 전용 재생 — speak()와 동일하지만 _rlSpeed를 반영함 (해당 탭의 🔊·Auto-play·Role-play가 전부 이 속도를 공유)
+function scriptSpeak(text,audioSrc){
+  if(audioSrc){
+    if(_audio){_audio.pause();_audio=null;}
+    _audio=new Audio(audioSrc);
+    _audio.playbackRate=_rlSpeed;
+    _audio.play().catch(()=>speakTTS(text,0.88*_rlSpeed));
+  }else{
+    speakTTS(text,0.88*_rlSpeed);
   }
 }
 // ── AUTO-PLAY ───────────────────────────────────────────
@@ -1421,6 +1435,7 @@ function autoPlayStep(){
   if(line.audio){
     if(_audio){_audio.pause();_audio=null;}
     _audio=new Audio(line.audio);
+    _audio.playbackRate=_rlSpeed;
     _audio.onended=onEnd;
     _audio.play().catch(()=>_apTTS(line.text,onEnd));
   }else{
@@ -1428,11 +1443,12 @@ function autoPlayStep(){
   }
 }
 
+// Auto-play·Role-play 전용 TTS 헬퍼 — 둘 다 Script/영상 탭 안이라 _rlSpeed를 반영함
 function _apTTS(text,onEnd){
   if(!window.speechSynthesis){onEnd();return;}
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='ko-KR';u.rate=0.88;u.onend=onEnd;
+  u.lang='ko-KR';u.rate=0.88*_rlSpeed;u.onend=onEnd;
   const go=()=>{const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ko'));const pref=vs.find(v=>/google|yuna|heami|sora|microsoft|natural|neural|siri/i.test(v.name))||vs[0];if(pref)u.voice=pref;speechSynthesis.speak(u);};
   speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
@@ -1459,10 +1475,11 @@ function rlPlay(src,text){
     speakTTS(text,0.88*_rlSpeed);
   }
 }
-// Real Life 재생 속도 토글 — 현재 재생 중인 오디오에도 즉시 반영
+// Real Life + 영상(Script 탭 video) 공통 재생 속도 토글 — 현재 재생 중인 오디오/영상에도 즉시 반영
 function setRLSpeed(sp){
   _rlSpeed=sp;
   if(_audio) _audio.playbackRate=sp;
+  document.querySelectorAll('.video-wrap video').forEach(v=>{v.playbackRate=sp;});
   document.querySelectorAll('.rl-speed-btn').forEach(b=>{
     const active=Math.abs(+b.dataset.sp-sp)<0.001;
     b.style.background=active?'var(--teal)':'var(--warm-100)';
@@ -6339,7 +6356,7 @@ function rpReveal(){rpBlur(false);}
 function rpNext(){if(!_rp.active)return;if(sceneIdx>=DATA.script.length-1){rpEnd();return;}sceneIdx++;renderScene();rpStep();}
 function rpPlayLine(line,cb){
   if(_audio){_audio.pause();_audio=null;}
-  if(line.audio){_audio=new Audio(line.audio);_audio.onended=cb;_audio.onerror=()=>_apTTS(line.text,cb);_audio.play().catch(()=>_apTTS(line.text,cb));}
+  if(line.audio){_audio=new Audio(line.audio);_audio.playbackRate=_rlSpeed;_audio.onended=cb;_audio.onerror=()=>_apTTS(line.text,cb);_audio.play().catch(()=>_apTTS(line.text,cb));}
   else{_apTTS(line.text,cb);}
 }
 function rpStep(){
