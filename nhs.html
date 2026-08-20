@@ -115,7 +115,7 @@ document.addEventListener('click', function(e){
   if(e.target.closest('.ep-item') || e.target.closest('.lt-item')) closeMobileSidebar();
 });
 
-let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null;
+let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null,_rlSpeed=1;
 let quizMode='mc',quizIdx=0,quizScore=0;
 let _nhsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false};
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -1437,25 +1437,45 @@ function _apTTS(text,onEnd){
   speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
 
-function speakTTS(text){
+function speakTTS(text,rate){
   if(!window.speechSynthesis)return;
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='ko-KR';u.rate=0.88;
+  u.lang='ko-KR';u.rate=(rate!=null?rate:0.88);
   const go=()=>{const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ko'));const pref=vs.find(v=>/google|yuna|heami|sora|microsoft|natural|neural|siri/i.test(v.name))||vs[0];if(pref)u.voice=pref;speechSynthesis.speak(u);};
   speechSynthesis.getVoices().length?go():(speechSynthesis.onvoiceschanged=()=>{go();speechSynthesis.onvoiceschanged=null;});
 }
 function stopTTS(){ if(window.speechSynthesis) speechSynthesis.cancel(); if(_audio){_audio.pause();_audio=null;} }
 // Real Life 전용 재생: 미리 만든 Typecast mp3(audio)가 있으면 그걸 재생하고, 없거나 재생 실패하면 브라우저 TTS로 대체
+// 재생 속도는 _rlSpeed(0.75/1/1.25)를 따름 — mp3는 playbackRate, TTS는 기본 0.88에 배율 적용
 function rlPlay(src,text){
   if(_audio){_audio.pause();_audio=null;}
   if(window.speechSynthesis) speechSynthesis.cancel();
   if(src){
     _audio=new Audio(src);
-    _audio.play().catch(()=>{_audio=null;speakTTS(text);});
+    _audio.playbackRate=_rlSpeed;
+    _audio.play().catch(()=>{_audio=null;speakTTS(text,0.88*_rlSpeed);});
   } else {
-    speakTTS(text);
+    speakTTS(text,0.88*_rlSpeed);
   }
+}
+// Real Life 재생 속도 토글 — 현재 재생 중인 오디오에도 즉시 반영
+function setRLSpeed(sp){
+  _rlSpeed=sp;
+  if(_audio) _audio.playbackRate=sp;
+  document.querySelectorAll('.rl-speed-btn').forEach(b=>{
+    const active=Math.abs(+b.dataset.sp-sp)<0.001;
+    b.style.background=active?'var(--teal)':'var(--warm-100)';
+    b.style.color=active?'#fff':'var(--warm-700)';
+    b.style.borderColor=active?'var(--teal)':'var(--warm-300)';
+  });
+}
+function rlSpeedBarHtml(){
+  const opts=[[0.75,'0.75x'],[1,'1x'],[1.25,'1.25x']];
+  return `<div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;flex-wrap:wrap">
+    <span style="font-size:11.5px;font-weight:700;color:var(--warm-600)">🔊 재생 속도 Speed</span>
+    ${opts.map(([sp,label])=>`<button class="rl-speed-btn" data-sp="${sp}" onclick="setRLSpeed(${sp})" style="background:${_rlSpeed===sp?'var(--teal)':'var(--warm-100)'};color:${_rlSpeed===sp?'#fff':'var(--warm-700)'};border:1.5px solid ${_rlSpeed===sp?'var(--teal)':'var(--warm-300)'};border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;cursor:pointer">${label}</button>`).join('')}
+  </div>`;
 }
 function toggleRLScript(id){
   const el=document.getElementById('rlscript-'+id);
@@ -2489,7 +2509,7 @@ function buildUsage(){
 function buildRealLife(){
   const rl=DATA.real_life;
   if(!rl||!rl.length)return'<div class="loading">데이터 준비 중이에요.</div>';
-  return rl.map(item=>{
+  return rlSpeedBarHtml()+rl.map(item=>{
     // guided writing (자기 점검)
     if(item.type==='writing_guided'){
       const sid=item.id||'wg';
