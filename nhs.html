@@ -2777,7 +2777,7 @@ function getEpLabel(epKey){
 }
 
 // ── 빠른 참고 (Quick Reference) — Basics 참고자료를 어디서나 ──
-const QREF_TABS=[['greetings','👋 인사·교실'],['questions','❓ 의문사'],['honorifics','🙇 호칭'],['numbers','🔢 숫자'],['verbs','⚙️ 동사 활용']];
+const QREF_TABS=[['greetings','👋 인사·교실'],['questions','❓ 의문사'],['honorifics','🙇 호칭'],['numbers','🔢 숫자'],['verbs','⚙️ 동사 활용'],['connectors','🔗 접속부사']];
 let _qrefCur='greetings';
 function openQuickRef(){var o=document.getElementById('qref-overlay');if(!o)return;o.classList.add('open');qrefRender(_qrefCur);}
 function closeQuickRef(){var o=document.getElementById('qref-overlay');if(o)o.classList.remove('open');}
@@ -2787,7 +2787,7 @@ function qrefRender(id){
   if(t)t.innerHTML=QREF_TABS.map(function(p){return '<div class="idx-tab'+(p[0]===id?' active':'')+'" onclick="qrefRender(\''+p[0]+'\')">'+p[1]+'</div>';}).join('');
   var b=document.getElementById('qref-body');if(!b)return;
   try{
-    b.innerHTML = id==='greetings'?buildGreetings():id==='questions'?buildQuestions():id==='honorifics'?buildHonorifics():id==='numbers'?buildNumbers():id==='verbs'?buildVerbs():'';
+    b.innerHTML = id==='greetings'?buildGreetings():id==='questions'?buildQuestions():id==='honorifics'?buildHonorifics():id==='numbers'?buildNumbers():id==='verbs'?buildVerbs():id==='connectors'?buildConnectors():'';
   }catch(e){b.innerHTML='<div style="padding:20px;color:var(--warm-500)">참고 자료를 불러오지 못했어요.</div>';}
   if(id==='verbs')requestAnimationFrame(function(){try{renderVerbGame();}catch(e){}});
 }
@@ -3035,6 +3035,7 @@ const BASICS_TOPICS = [
   {id:'verbs',     icon:'📝', label:'동사 활용',        en:'Verb Conjugation', grp:'ref'},
   {id:'questions', icon:'❓', label:'의문사 총정리',      en:'Question Words', grp:'ref'},
   {id:'honorifics',icon:'🙇', label:'한국의 호칭 문화',   en:'Korean Titles & Address', grp:'ref'},
+  {id:'connectors',icon:'🔗', label:'접속부사',          en:'Conjunctive Adverbs', grp:'ref'},
 ];
 
 let curBasicsTopic = 'hangul';
@@ -4536,6 +4537,7 @@ function loadBasics(topicId){
   if(topicId==='essential') body.innerHTML=buildEssential();
   if(topicId==='questions') body.innerHTML=buildQuestions();
   if(topicId==='honorifics')body.innerHTML=buildHonorifics();
+  if(topicId==='connectors')body.innerHTML=buildConnectors();
   if(topicId==='spacing')  body.innerHTML=buildSpacing();
   if(topicId==='hangul')  requestAnimationFrame(()=>updateSylResult());
   if(topicId==='writing') requestAnimationFrame(()=>initWritingCanvas());
@@ -5962,6 +5964,66 @@ function buildHonorifics(){
     +'• 이름을 부를 땐 뒤에 아/야 or 씨를 붙여요 — 보미야! (반말) / 보미 씨 (격식)</div>';
 
   return '<div class="basics-intro">한국어는 누구와 말하느냐에 따라 부르는 방법이 달라져요. 관계·나이·격식도에 따른 호칭을 알아봐요!<br><em>Korean address system depends on relationship, age, and formality. Learn who to call what!</em></div>'
+    + tipBox + tableHtml + noteBox;
+}
+
+// ── CONJUNCTIVE ADVERBS (접속부사) RENDER ───────────────
+// ══════════════════════════════════════════════════════
+function buildConnectors(){
+  const tipBox = '<div style="background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:13px;line-height:1.7">'
+    +'💡 <strong>접속부사란? · What are conjunctive adverbs?</strong><br>'
+    +'문장과 문장을 이어 주는 부사예요. <strong>문장 끝에 -고/-지만 같은 연결어미를 쓰는 대신</strong>, 두 문장을 따로 쓰고 그 사이에 넣어요.<br>'
+    +'<em>They link two separate sentences (unlike -고/-지만, which attach to the end of a verb). Great for writing and formal speech.</em></div>';
+
+  const sections = [
+    {title:'➕ 첨가 · Addition',color:'#E8F5E9',border:'#81C784',rows:[
+      ['그리고','and, and then','저는 학생이에요. 그리고 회사에서도 일해요.'],
+      ['또한','also, moreover','이 식당은 맛있어요. 또한 가격도 싸요.'],
+      ['게다가','on top of that','비가 와요. 게다가 바람도 세게 불어요.'],
+      ['더구나','what\'s more','길이 막혀요. 더구나 지금 많이 늦었어요.'],
+    ]},
+    {title:'↔️ 대조 · Contrast',color:'#FCE4EC',border:'#F06292',rows:[
+      ['하지만','but','열심히 공부했어요. 하지만 시험을 못 봤어요.'],
+      ['그러나','however','값이 비싸요. 그러나 품질이 좋아요.'],
+      ['그렇지만','but, even so','피곤해요. 그렇지만 계속 일해야 돼요.'],
+      ['반면에','on the other hand','형은 키가 커요. 반면에 동생은 키가 작아요.'],
+      ['그럼에도','even so, nevertheless','여러 번 실패했어요. 그럼에도 포기하지 않았어요.'],
+    ]},
+    {title:'➡️ 원인·결과 · Cause & Effect',color:'#FFF3E0',border:'#FFB74D',rows:[
+      ['그래서','so','배가 고파요. 그래서 밥을 먹었어요.'],
+      ['그러니까','so, that\'s why','벌써 늦었어요. 그러니까 빨리 가요.'],
+      ['그러므로','therefore (formal)','자료가 부족해요. 그러므로 결론을 내리기 어려워요.'],
+      ['따라서','therefore (formal)','매출이 줄었어요. 따라서 새 전략이 필요해요.'],
+    ]},
+    {title:'🔀 전환 · Switch & Transition',color:'#E3F2FD',border:'#64B5F6',rows:[
+      ['그런데','by the way, however','오늘 날씨가 좋아요. 그런데 내일은 비가 온대요.'],
+      ['한편','meanwhile','형은 공부해요. 한편 동생은 놀아요.'],
+    ]},
+    {title:'💬 설명·예시 · Explanation',color:'#F3E5F5',border:'#BA68C8',rows:[
+      ['예를 들면','for example','과일을 좋아해요. 예를 들면 사과랑 바나나요.'],
+      ['즉','that is, in other words','그는 삼촌의 아들, 즉 제 사촌이에요.'],
+      ['결국','in the end, eventually','여러 번 시도했어요. 결국 성공했어요.'],
+    ]},
+  ];
+
+  const tableHtml = sections.map(sec=>'<div style="background:'+sec.color+';border:1.5px solid '+sec.border+';border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:10px">'+sec.title+'</div>'
+    +'<table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+    +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">접속부사</th><th style="text-align:left;padding:3px 8px 6px">뜻</th><th style="text-align:left;padding:3px 8px 6px">예문</th></tr>'
+    +sec.rows.map(r=>'<tr style="border-top:1px solid rgba(0,0,0,.06)">'
+      +'<td style="padding:5px 8px;font-family:var(--font-serif);font-weight:700;font-size:14px" onclick="speakTTS(\''+escA(r[0])+'\')" title="Click to hear">'+esc(r[0])+' 🔊</td>'
+      +'<td style="padding:5px 8px;color:var(--warm-600)">'+esc(r[1])+'</td>'
+      +'<td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+esc(r[2])+'</td>'
+      +'</tr>').join('')
+    +'</table></div>').join('');
+
+  const noteBox = '<div style="background:var(--amber-50);border:1.5px solid var(--amber-lt);border-radius:var(--radius-sm);padding:12px 16px;margin-top:4px;font-size:12.5px;line-height:1.8">'
+    +'⚠️ <strong>헷갈리기 쉬운 것들 · Common Confusions</strong><br>'
+    +'• 그런데 vs 하지만 — 그런데는 화제 전환에도 쓰지만, 하지만은 순수하게 대조만 나타내요.<br>'
+    +'• 그래서 vs 그러니까 — 그래서는 결과 설명, 그러니까는 그 결과로 무엇을 하자는 제안/명령에 더 잘 어울려요.<br>'
+    +'• 그러므로/따라서는 뉴스·논문 같은 격식체 글에서 주로 써요 — 일상 대화에서는 그래서가 자연스러워요.</div>';
+
+  return '<div class="basics-intro">문장과 문장 사이를 이어 주는 접속부사를 정리했어요. 글쓰기와 격식체 말하기에 유용해요!<br><em>Conjunctive adverbs link one sentence to the next — useful for writing and formal speech.</em></div>'
     + tipBox + tableHtml + noteBox;
 }
 
