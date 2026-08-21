@@ -677,12 +677,18 @@
       "pronounced_standard": "[차자]",
       "pronounced_actual": "[차자]",
       "note": "찾(ㅈ받침) + 아 → ㅈ 연음"
-     },
+     }
+    ]
+   },
+   {
+    "rule": "격음화 · Aspiration",
+    "tip": "받침 ㄱ/ㄷ/ㅂ/ㅈ 뒤에 ㅎ이 오면(또는 ㅎ받침 뒤에 ㄱ/ㄷ/ㅂ/ㅈ이 오면) 거센소리로 축약돼요 · A ㄱ/ㄷ/ㅂ/ㅈ coda plus a following/preceding ㅎ contracts into an aspirated consonant",
+    "examples": [
      {
       "written": "도착했어",
       "pronounced_standard": "[도착캤서]",
       "pronounced_actual": "[도차캐써]",
-      "note": "착(ㄱ)+했(ㅎ) → 격음화 ㅋ · 표준은 음절경계 유지, 실제는 연음 적용"
+      "note": "착(받침 ㄱ) + 했(ㅎ) → ㄱ+ㅎ이 거센소리 ㅋ로 축약돼요 (착했→차캐)"
      },
      {
       "written": "무사히 도착했어",
@@ -825,21 +831,33 @@
   {
    "type": "reading",
    "title": "🚌 공항버스 이용 팁",
-   "passage": "인천공항에서 서울 시내로 가는 공항버스는 출국장 1층 또는 지하 1층 버스 매표소에서 살 수 있어요. 목적지에 따라 노선이 다르니 행선지를 확인하세요. 터미널행은 도심 공항 터미널까지 가는 버스예요.",
+   "passage": "공항에서 잠실까지 가야 돼요. 출구 근처에서 매표소를 찾아 볼게요. 표지판을 봐도 공항버스가 안 보여요. 사촌이 \"제가 한번 찾아 볼게요\"라고 말했어요. 드디어 공항버스를 찾았어요! 이 버스는 종점까지 가는 버스예요. 짐을 들고 버스를 타요. 갈아타지 않아도 종점까지 무사히 도착해요.",
    "questions": [
     {
-     "question_ko": "공항버스 매표소는 어디에 있어요?",
-     "question_en": "Where is the airport bus ticket booth?",
+     "question_ko": "사촌은 공항버스를 어떻게 찾았어요?",
+     "question_en": "How did the cousin find the airport bus?",
      "options": [
-      "1층 또는 지하 1층",
-      "3층",
-      "주차장",
-      "식당가"
+      "직접 찾아봤어요",
+      "직원한테 물어봤어요",
+      "인터넷으로 찾았어요",
+      "안 찾았어요"
+     ],
+     "answer": 0
+    },
+    {
+     "question_ko": "두 사람은 버스를 타고 어디까지 갔어요?",
+     "question_en": "Where did the two of them go by bus?",
+     "options": [
+      "종점",
+      "터미널",
+      "매표소",
+      "입구"
      ],
      "answer": 0
     }
    ],
-   "audio": "data/nhs/L2/TTS/ep02/RealLife/20260818_인천공항에서_서울_.mp3"
+   "audio": "data/nhs/L2/TTS/ep02/RealLife/20260818_인천공항에서_서울_.mp3",
+   "passage_en": "You need to get from the airport to Jamsil. You'll look for the ticket booth near the exit. Even looking at the signs, you can't see the airport bus. Your cousin said, \"I'll go take a look.\" You finally found the airport bus! This bus goes all the way to the last stop. You carry your luggage and get on the bus. Without needing to transfer, you arrive safely at the last stop."
   },
   {
    "type": "kakao",
