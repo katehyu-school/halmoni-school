@@ -574,15 +574,15 @@
   {
    "id": "g03_aseo_reason",
    "tier": "core",
-   "title": "-아/어서 (이유)",
-   "title_en": "Because / So (reason)",
+   "title": "-아/어서 (이유·순서)",
+   "title_en": "Because / So (reason) & And then (sequence)",
    "emoji": "🥇",
    "pattern": "Verb/adj stem + 아서/어서 → result (same vowel rule as 아요/어요)",
    "scene_example": {
     "ko": "놀아서 감기 걸린 것 같아.",
     "en": "It seems like you caught a cold because you were playing."
    },
-   "note": "⚠️ L1에서 -아/어서는 '순서'(and then)로 배웠어요. L2에서는 '이유'(because)로 새롭게 등장해요! · In L1, -아/어서 meant sequence. In L2, the same form means reason/cause.",
+   "note": "-아/어서에는 두 가지 쓰임이 있어요. ① 순서: 두 동작을 순서대로 연결해요 (반대 방향에서 타세요 같은 L1 문장 대신, 가서 타세요 = go there and take it). ② 이유: 원인과 결과를 연결해요 (아래 예문들처럼). 두 쓰임 모두 형태는 똑같아요 — 문맥으로 구별해요! · -아/어서 has two uses: ① sequence (do A, then do B) and ② reason/cause (because A, B). Same form, different context.",
    "rules": [
     {
      "condition": "ㅏ/ㅗ 어간",
@@ -601,6 +601,26 @@
     }
    ],
    "examples": [
+    {
+     "ko": "학교에 가서 공부해요.",
+     "en": "Go to school and study.",
+     "note": "순서 · sequence"
+    },
+    {
+     "ko": "앉아서 먹어요.",
+     "en": "Sit down and eat.",
+     "note": "순서 · sequence"
+    },
+    {
+     "ko": "일어나서 운동해요.",
+     "en": "Wake up and exercise.",
+     "note": "순서 · sequence"
+    },
+    {
+     "ko": "반대 방향에서 타세요.",
+     "en": "Take it from the opposite direction.",
+     "note": "L1 ep05 버스 기사 대사 (참고: 방향 표현)"
+    },
     {
      "ko": "기분이 좋아서 놀았어요.",
      "en": "Because I was in a good mood, we played.",
@@ -625,6 +645,11 @@
    "tip": "이유 -아/어서 뒤에는 명령문·청유문이 올 수 없어요 · Can't use commands after reason -아/어서. ❌ 바빠서 가세요 (X) → ✅ 바쁘니까 가세요 (O)",
    "fill_blanks": [
     {
+     "sentence": "학교에 ___ 공부해요. (가다)",
+     "answer": "가서",
+     "hint": "순서: 가다 → 가서"
+    },
+    {
      "sentence": "기분이 ___아서 모두 개울에서 놀았어요.",
      "answer": "좋",
      "hint": "기분이 좋다"
@@ -640,7 +665,7 @@
      "hint": "나다 → 나서"
     }
    ],
-   "explanation_en": "-아/어서 means 'because' or 'so' — a natural reason-and-result connection. The result flows directly from the reason. Important: DON'T use with commands or suggestions.",
+   "explanation_en": "-아/어서 has two uses that share the same form. (1) Sequence: \"do A, then do B\" — the two actions happen one after another with the same subject (학교에 가서 공부해요 = go to school and [then] study). (2) Reason: \"because A, B\" — a natural cause-and-result connection. Context tells you which one is meant. Important: the REASON use can't be followed by a command or suggestion, but the SEQUENCE use can.",
    "rule_boxes": [
     {
      "type": "blue",
@@ -649,11 +674,17 @@
     },
     {
      "type": "green",
-     "title": "Pattern: [reason] + 아/어서, [result]",
-     "content": "기분이 좋아서 노래해요.  I'm happy, so I'm singing.\n배가 고파서 먹었어요.  I was hungry, so I ate."
+     "title": "① 순서 · Sequence — 'do A, then B'",
+     "content": "가다 → 가서 타세요 = Go there, then take it\n앉다 → 앉아서 먹어요 = Sit down and eat\n일어나다 → 일어나서 운동해요 = Wake up and exercise",
+     "note": "주어가 같은 두 동작을 순서대로 연결할 때 써요. 뒤에 명령문·청유문이 와도 돼요."
     },
     {
      "type": "amber",
+     "title": "② 이유 · Reason — [reason] + 아/어서, [result]",
+     "content": "기분이 좋아서 노래해요.  I'm happy, so I'm singing.\n배가 고파서 먹었어요.  I was hungry, so I ate."
+    },
+    {
+     "type": "red",
      "title": "⚠️ Can NOT use with commands or suggestions!",
      "content": "피곤해서 쉬어요. ✅  Tired, so I rest.\n~~피곤해서 쉬세요!~~ ❌  (use -(으)니까 instead)"
     }

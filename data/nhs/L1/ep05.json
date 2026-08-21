@@ -96,10 +96,10 @@
   },
   {
    "speaker": "driver",
-   "text": "안 가요. 반대 방향으로 가서 타세요.",
-   "en": "It doesn't go there. Go to the opposite direction and take it there.",
+   "text": "안 가요. 반대 방향에서 타세요.",
+   "en": "It doesn't go there. Take it from the opposite direction.",
    "speech_type": "존댓말",
-   "audio": "data/nhs/L1/TTS/ep05/07안+가요_+반대+방향으로+가서+타세요_slide4.mp3",
+   "audio": "data/nhs/L1/TTS/ep05/audio_6_안_가요__반대_방향에서_타세요_.mp3",
    "slide": 3,
    "annotation": {
     "highlight": "안 가요",
@@ -572,79 +572,6 @@
      "en": "This isn't good."
     }
    ]
-  },
-  {
-   "id": "g05_aseo",
-   "title": "V-아/어서 — and then (sequence)",
-   "title_en": "Connecting two actions in order",
-   "icon": "🔗",
-   "tier": "core",
-   "rule": "두 동작을 순서대로 연결 · Connect two actions that happen one after another",
-   "pattern": "동사1 어간 + 아/어서 + 동사2",
-   "explanation_en": "Use -아/어서 to chain two actions: 'do A, and then do B'. The subject is usually the same for both actions. In this episode: 반대 방향으로 가서 타세요 = Go to the opposite side, and then take the bus.",
-   "table": {
-    "columns": [
-     "동사1 + 아/어서",
-     "동사2",
-     "뜻"
-    ],
-    "rows": [
-     [
-      "가서",
-      "타세요",
-      "Go (there) and take it"
-     ],
-     [
-      "앉아서",
-      "먹어요",
-      "Sit down and eat"
-     ],
-     [
-      "일어나서",
-      "운동해요",
-      "Wake up and exercise"
-     ]
-    ]
-   },
-   "fill_blanks": [
-    {
-     "sentence": "___ 타세요. (Go there and take it)",
-     "answer": "가서",
-     "hint": "가다 → 가서"
-    },
-    {
-     "sentence": "앉___ 먹어요. (Sit down and eat)",
-     "answer": "아서",
-     "hint": "앉다 → 앉아서"
-    }
-   ],
-   "rule_boxes": [
-    {
-     "type": "blue",
-     "title": "💡 붙이는 규칙 · How to Attach",
-     "content": "• ㅏ/ㅗ 어간: + 아서 → 가아서 → 가서\n• 그 외 어간: + 어서 → 먹어서\n• 하다: + 여서 → 해서"
-    },
-    {
-     "type": "amber",
-     "label": "💙 다음에 자세히 · Coming Soon",
-     "content": "-아/어서는 '이유/원인'도 표현해요! (reason/cause) — L2 ep03에서 완전 정복!",
-     "note": "미리 보기: 배가 고파서 밥을 먹어요. = I eat because I'm hungry."
-    }
-   ],
-   "examples": [
-    {
-     "ko": "반대 방향으로 가서 타세요.",
-     "en": "Go to the opposite direction and take it there."
-    },
-    {
-     "ko": "앉아서 먹어요.",
-     "en": "Sit down and eat."
-    },
-    {
-     "ko": "일어나서 운동해요.",
-     "en": "Wake up and exercise."
-    }
-   ]
   }
  ],
  "banmal_jondaemal": {
@@ -876,14 +803,14 @@
    "type": "mc",
    "question": "버스기사가 뭐라고 했어요? · What did the bus driver say?",
    "options": [
-    "안 가요. 반대 방향으로 가서 타세요.",
+    "안 가요. 반대 방향에서 타세요.",
     "네, 가요. 빨리 타세요.",
     "몇 번 버스를 원해요?",
     "감사합니다!"
    ],
    "answer": 0,
    "options_en": [
-    "No, it doesn't go there. Take the bus going the other way.",
+    "No, it doesn't go there. Take it from the opposite direction.",
     "Yes, it goes there. Hop on quick!",
     "Which bus number do you want?",
     "Thank you!"
