@@ -25,28 +25,22 @@
  "video": null,
  "characters": [
   {
-   "id": "엄마",
+   "id": "mom",
    "name": "엄마",
    "emoji": "👩",
    "color": "#e05a2b"
   },
   {
-   "id": "보미",
+   "id": "mire",
    "name": "보미",
    "emoji": "👧",
    "color": "#0d9488"
   },
   {
-   "id": "리나",
+   "id": "ria",
    "name": "리나",
    "emoji": "🧒",
    "color": "#7c3aed"
-  },
-  {
-   "id": "보미+리나",
-   "name": "보미 & 리나",
-   "emoji": "👭",
-   "color": "#B4739E"
   }
  ],
  "script": [
@@ -397,7 +391,12 @@
      "hint": "on top"
     }
    ],
-   "tier": "core"
+   "tier": "core",
+   "scene_example": {
+    "ko": "엄마, 내 점심 도시락 어디 있어요?",
+    "en": "Mom, where is my lunchbox?",
+    "highlight": "어디 있어요"
+   }
   },
   {
    "id": "g07_location",
@@ -490,7 +489,12 @@
      "hint": "next to"
     }
    ],
-   "tier": "core"
+   "tier": "core",
+   "scene_example": {
+    "ko": "거기, 식탁 위에 있어.",
+    "en": "There? It's on top of the dining table.",
+    "highlight": "식탁 위에"
+   }
   },
   {
    "id": "g07_have_to",
@@ -565,7 +569,12 @@
      "answer": "어야",
      "hint": "have to eat"
     }
-   ]
+   ],
+   "scene_example": {
+    "ko": "엄마, 늦었어요. 빨리 가야 해요.",
+    "en": "Mom, we're late. We have to go quickly.",
+    "highlight": "가야 해요"
+   }
   }
  ],
  "banmal_jondaemal": {
