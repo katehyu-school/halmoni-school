@@ -120,6 +120,11 @@ let quizMode='mc',quizIdx=0,quizScore=0;
 let _nhsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false};
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function escA(s){return s==null?'':String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/[\r\n]+/g,' ');}
+// script[].speech_type was authored inconsistently across episodes (반말/존댓말, banmal/jondaemal,
+// narrator/narration/나레이터, "casual 존댓말"...) — these normalize every variant seen in the data
+// so the 반말/존댓말 caption badge styles correctly instead of silently defaulting to 존댓말.
+function _isBanmalTag(st){return st==='반말'||st==='banmal';}
+function _isNarratorTag(st){return st==='narrator'||st==='narration'||st==='나레이터';}
 const CHAR_CFG={jeongmin:{bg:'#B8D4F0',emoji:'👦'},mirae:{bg:'#F0B8D4',emoji:'👧'},mom:{bg:'#B8D4B8',emoji:'👩'},narrator:{bg:'#E0E0E0',emoji:'📢'},jungmin:{bg:'#A8D8EA',emoji:'👦'},mina:{bg:'#FFB7C5',emoji:'👧'},staff:{bg:'#D4E8D0',emoji:'🎫'}};
 // ── TRIAL ACCOUNTS ── ?trial URL param (set by index.html for role='trial' members) → 지정된 에피소드만 열람 가능
 // localStorage에 플래그를 저장해서, start.html 등 쿼리스트링 없는 내부 링크를 거쳐도 잠금이 풀리지 않게 함
@@ -1253,7 +1258,7 @@ function buildVideoScript(){
   const lines=DATA.script.map((line,i)=>{
     if(line.divider) return '<div class="script-omit">〔 '+esc(line.text||'중략')+' 〕</div>';
     const ch=charMap[line.speaker]||{name:line.speaker,emoji:'💬',color:'#E0E0E0'};
-    const tag=line.speech_type?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${esc(line.speech_type)}</span>`:'';
+    const tag=(line.speech_type&&!_isNarratorTag(line.speech_type))?`<span class="caption-tag ${_isBanmalTag(line.speech_type)?'tag-banmal':'tag-jondaemal'}">${esc(line.speech_type)}</span>`:'';
     const _vShadEsc=line.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     const _vAudioEsc=(line.audio||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     const ttsBtn=`<button class="video-script-tts" data-tts="${_vShadEsc}" data-audio="${_vAudioEsc}" onclick="scriptSpeak(this.dataset.tts,this.dataset.audio||undefined)">🔊 듣기</button>`;
@@ -1311,7 +1316,7 @@ function renderScene(){
   const ch=charMap[line.speaker]||{name:line.speaker};
   const cfg_def=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
   const cfg={bg:ch.color||cfg_def.bg,emoji:ch.emoji||cfg_def.emoji};
-  const tagHtml=line.speech_type&&line.speech_type!=='narrator'?`<span class="caption-tag ${line.speech_type==='반말'?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`:'';
+  const tagHtml=(line.speech_type&&!_isNarratorTag(line.speech_type))?`<span class="caption-tag ${_isBanmalTag(line.speech_type)?'tag-banmal':'tag-jondaemal'}">${line.speech_type}</span>`:'';
   document.getElementById('scene-caption').innerHTML=`
     <div style="display:flex;flex-direction:column;align-items:center">
       <div class="caption-avatar" style="background:${cfg.bg}">${cfg.emoji}</div>
@@ -1840,6 +1845,9 @@ function renderQuizQ(){
   // - audio_text 없음 → 일반 객관식 (질문 + 영어 + 선택지)
   const isListen = !!q.audio_text;
 
+  // some quiz items point at their real recorded line via audio_index (an index into DATA.script)
+  // instead of carrying their own q.audio — resolve that here so the listen button can use it too.
+  const qAudio=q.audio||(q.audio_index!=null&&DATA.script&&DATA.script[q.audio_index]?DATA.script[q.audio_index].audio||'':'');
   const optsEn=q.options_en||q.choices_en||null;
   const opts=(q.options||q.choices||[]).map((opt,oi)=>`
     <button class="quiz-opt" id="qopt-${oi}" onclick="answerMC(${oi},${qi})">
@@ -1850,7 +1858,7 @@ function renderQuizQ(){
   if(isListen){
     inner=`<div class="quiz-listen-wrap" style="margin-bottom:18px;">
         <div style="font-size:12px;color:var(--teal);margin-bottom:10px">🔊 음성을 듣고 맞는 답을 고르세요 · Listen and choose</div>
-        <button class="quiz-listen-btn" onclick="scriptSpeak('${escA(q.audio_text)}','${escA(q.audio||'')}')">🔊 듣기 Listen</button>
+        <button class="quiz-listen-btn" onclick="scriptSpeak('${escA(q.audio_text)}','${escA(qAudio)}')">🔊 듣기 Listen</button>
       </div>
       <div class="quiz-opts">${opts}</div>
       <div class="quiz-exp" id="quiz-exp"></div>
