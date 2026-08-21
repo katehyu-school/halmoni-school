@@ -1374,8 +1374,11 @@ function toggleStrip(){
 function buildStrip(){
   const strip=document.getElementById('script-strip');
   if(!strip)return;
+  const _stripCharMap={};(DATA.characters||[]).forEach(c=>{_stripCharMap[c.id]=c;});
   strip.innerHTML=DATA.script.map((line,i)=>{
-    const cfg=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
+    const _sCh=_stripCharMap[line.speaker];
+    const cfg_def=CHAR_CFG[line.speaker]||CHAR_CFG.narrator;
+    const cfg={emoji:(_sCh&&_sCh.emoji)||cfg_def.emoji};
     const _sShadEsc=line.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     return `<div class="strip-row${i===sceneIdx?' current':''}">
       <div class="strip-avatar" onclick="jumpScene(${i});updateStripHighlight()">${cfg.emoji}</div>
@@ -2401,7 +2404,7 @@ function buildPron(){
       <div class="pron-rule">${esc(item.title?(item.rule||''):'')}</div>
       ${pronTableHtml}
       ${pronExHtml}
-      ${item.tip?`<div style="margin-top:12px;background:var(--amber-lt);border-radius:var(--radius-sm);padding:9px 13px;font-size:12px;color:var(--warm-700)">💡 ${esc(item.tip)}</div>`:''}
+      ${item.tip?`<div style="margin-top:12px;background:var(--amber-lt);border-radius:var(--radius-sm);padding:9px 13px;font-size:12px;color:var(--warm-700);white-space:pre-line;line-height:1.6">💡 ${esc(item.tip)}</div>`:''}
     </div>`;
   };
   const soundItems=items.filter(item=>item.category!=='verb_rule');

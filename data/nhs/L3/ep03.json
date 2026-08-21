@@ -193,6 +193,31 @@
      "emoji": "♟️"
     },
     {
+     "korean": "도",
+     "english": "\"do\" — 1 space (윷가락 1개만 뒤집힘)",
+     "emoji": "1️⃣"
+    },
+    {
+     "korean": "개",
+     "english": "\"gae\" — 2 spaces (윷가락 2개 뒤집힘)",
+     "emoji": "2️⃣"
+    },
+    {
+     "korean": "걸",
+     "english": "\"geol\" — 3 spaces (윷가락 3개 뒤집힘)",
+     "emoji": "3️⃣"
+    },
+    {
+     "korean": "윷",
+     "english": "\"yut\" — 4 spaces, 윷가락 4개 모두 뒤집힘 (한 번 더 던져요!)",
+     "emoji": "4️⃣"
+    },
+    {
+     "korean": "모",
+     "english": "\"mo\" — 5 spaces, 윷가락이 하나도 안 뒤집힘 (한 번 더 던져요!)",
+     "emoji": "5️⃣"
+    },
+    {
      "korean": "명절",
      "english": "traditional holiday (e.g. Chuseok, Seollal)",
      "emoji": "🎊"
@@ -486,16 +511,18 @@
    ]
   },
   {
-   "title": "잡힙니다 → [자핍니다]",
-   "rule": "ㅂ + ㄴ → 비음화 [ㅁ+ㄴ]",
+   "title": "잡힙니다 → [자핌니다]",
+   "rule": "ㅂ니다/습니다 앞에서 여러 변화가 겹친 뒤, 마지막엔 항상 비음화 [ㅁ+니다]",
    "examples": [
     {
      "written": "잡힙니다",
-     "after": "[자핍니다]"
+     "after": "[자핌니다]",
+     "note": "1단계: ㅂ+ㅎ → ㅍ (격음화, 거센소리) → 자핍니다\n2단계: ㅂ+ㄴ → ㅁ+ㄴ (비음화, 자음동화) → 자핌니다"
     },
     {
      "written": "먹습니다",
-     "after": "[먹씁니다]"
+     "after": "[먹씀니다]",
+     "note": "1단계: ㄱ+ㅅ → ㄱ+ㅆ (경음화, 된소리) → 먹씁니다\n2단계: ㅂ+ㄴ → ㅁ+ㄴ (비음화, 자음동화) → 먹씀니다"
     }
    ]
   },
@@ -525,14 +552,14 @@
     "meaning": "Do you know what this is?"
    },
    {
-    "banmal": "윷놀이라고 불러.",
-    "jondaemal_ayo": "윷놀이라고 불러요.",
+    "banmal": "윷놀이라고 불려.",
+    "jondaemal_ayo": "윷놀이라고 불려요.",
     "jondaemal_bnida": "윷놀이라고 불립니다.",
     "meaning": "It is called Yut Nori."
    },
    {
-    "banmal": "두 편으로 나눠.",
-    "jondaemal_ayo": "두 편으로 나눠요.",
+    "banmal": "두 편으로 나뉘어.",
+    "jondaemal_ayo": "두 편으로 나뉘어요.",
     "jondaemal_bnida": "두 편으로 나뉩니다.",
     "meaning": "Divide into two teams."
    }

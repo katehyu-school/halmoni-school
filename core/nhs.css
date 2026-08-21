@@ -323,7 +323,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .pron-before{font-family:var(--font-serif);font-size:14px;color:var(--warm-500);text-decoration:line-through;min-width:80px;}
 .pron-arrow{color:var(--warm-500);font-size:12px;}
 .pron-after{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--coral);}
-.pron-note{font-size:11px;color:var(--warm-500);flex:1;}
+.pron-note{font-size:11px;color:var(--warm-500);flex:1;white-space:pre-line;line-height:1.6;}
 
 /* ── 문법 패턴 공식 박스 ─────────────────────────────── */
 .gram-pattern{background:#EEF3FF;border:1.5px solid #A8C0F0;border-radius:var(--radius-md);padding:12px 18px;margin-bottom:12px;font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--blue);letter-spacing:0.01em;}
