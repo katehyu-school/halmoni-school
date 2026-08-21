@@ -1557,6 +1557,20 @@ function buildGrammar(){
         ${rb.note?`<div style="font-size:11px;color:var(--warm-500);margin-top:4px">${esc(rb.note)}</div>`:''}
       </div>`;
     }).join('');
+    // scene_example — the actual episode line where this grammar point appeared, with optional highlight
+    // (2026-08: wired up — field was authored across the curriculum but never rendered until now)
+    const seKo=g.scene_example?(g.scene_example.ko||g.scene_example.korean||''):'';
+    const seEn=g.scene_example?(g.scene_example.en||g.scene_example.english||''):'';
+    const seHl=g.scene_example&&g.scene_example.highlight;
+    const seSafeHl=seHl?seHl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'):'';
+    const seKoDisplay=(seHl&&seKo&&new RegExp(seSafeHl).test(seKo))
+      ? seKo.replace(new RegExp(`(${seSafeHl})`,'g'),'<mark style="background:#FFE1B8;padding:0 2px;border-radius:2px">$1</mark>')
+      : esc(seKo);
+    const sceneExampleHtml=seKo?`<div class="gram-scene-ex" style="background:linear-gradient(135deg,#FFF9F0,#FFFFFF);border:1.5px solid #F0DDBE;border-radius:var(--radius-md);padding:12px 16px;margin-bottom:12px">
+        <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#B8863D;margin-bottom:6px">🎬 이 장면에서 · From the scene</div>
+        <div style="font-family:var(--font-serif);font-size:14.5px;font-weight:700;color:var(--warm-900);line-height:1.6">${seKoDisplay} <button onclick="speakTTS('${escA(seKo)}')" style="background:none;border:none;cursor:pointer;font-size:12px;opacity:.5;">🔊</button></div>
+        ${seEn?`<div style="font-size:12px;color:var(--warm-500);margin-top:3px">${esc(seEn)}</div>`:''}
+      </div>`:'';
     // examples with optional highlight
     const exHtml=(g.examples||[]).map(ex=>{
       const safeHl=ex.highlight?ex.highlight.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'):'';
@@ -1607,6 +1621,7 @@ function buildGrammar(){
       ${g.title_en?`<div class="en-gloss" style="font-size:11px;color:var(--warm-500);margin-top:-4px;margin-bottom:8px">${esc(g.title_en)}</div>`:''}
       <div class="gram-exp">${esc(g.explanation_en)}</div>
       ${g.rule?`<div class="gram-rule">📐 ${esc(g.rule)}</div>`:''}
+      ${sceneExampleHtml}
       ${patternHtml}
       ${ruleBoxHtml}
       ${tableHtml}
