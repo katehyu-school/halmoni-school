@@ -2528,7 +2528,7 @@ function buildUsage(){
       const exHtml=(sec.examples||[]).map(ex=>`
         <div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--warm-300);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
           <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--warm-900)">${esc(ex.ko)}</div><div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(ex.en)}</div></div>
-          <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
+          <button onclick="speakTTS('${escA(ex.audio_text||ex.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
         </div>`).join('');
       return`<div style="margin-bottom:22px">
         <div style="font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--teal-lt)">${esc(sec.heading)}</div>
@@ -2540,7 +2540,7 @@ function buildUsage(){
       const exHtml=(sec.examples||[]).map(ex=>`
         <div style="background:#fff;border-radius:var(--radius-sm);border:1px solid var(--warm-300);padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-sm)">
           <div style="flex:1"><div style="font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--warm-900)">${esc(ex.ko)}</div><div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(ex.en)}</div></div>
-          <button onclick="speakTTS('${escA(ex.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
+          <button onclick="speakTTS('${escA(ex.audio_text||ex.ko)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
         </div>`).join('');
       return`<div style="margin-bottom:22px">
         <div style="font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:6px;padding-bottom:6px;border-bottom:2px solid var(--teal-lt)">${esc(sec.title)}</div>
@@ -2560,7 +2560,7 @@ function buildUsage(){
           <div style="font-size:11px;color:var(--warm-500);margin-top:2px">${esc(en)}</div>
           ${it.note?`<div style="font-size:10.5px;color:var(--teal-md);margin-top:3px;font-style:italic">${esc(it.note)}</div>`:''}
         </div>
-        <button onclick="speakTTS('${escA(kr)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
+        <button onclick="speakTTS('${escA(it.audio_text||kr)}')" style="background:none;border:none;font-size:15px;cursor:pointer;opacity:.5">🔊</button>
       </div>`;
     }).join('');
     return`<div style="margin-bottom:22px">
