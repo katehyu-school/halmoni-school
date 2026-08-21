@@ -115,7 +115,7 @@ document.addEventListener('click', function(e){
   if(e.target.closest('.ep-item') || e.target.closest('.lt-item')) closeMobileSidebar();
 });
 
-let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null,_rlSpeed=1;
+let DATA=null,curTab='script',sceneIdx=0,qAnswered={},_audio=null,_rlSpeed=1,_epLoadToken=0;
 let quizMode='mc',quizIdx=0,quizScore=0;
 let _nhsRec={stream:null,recorder:null,chunks:[],blobURL:null,recording:false};
 function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -1069,22 +1069,31 @@ function ptRetry(){
 
 
 async function _doLoadEp(epId, level='L1'){
+  // load-order guard: if the user taps two episodes quickly, only the LAST tap should ever render.
+  // each call grabs its own ticket; before doing anything that can change on-screen state, it checks
+  // the ticket is still current — a stale call (its fetch/awaits finished after a newer tap) bails out.
+  const _myToken=++_epLoadToken;
   await Promise.all([_rdPoolReady, _spPoolReady, _sharedSetsReady, _wrPoolReady]);
+  if(_myToken!==_epLoadToken)return; // superseded while waiting on pools
   document.querySelectorAll('.ep-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById(`ep-item-${level}-${epId}`);
   if(item)item.classList.add('active');
   document.getElementById('content-area').innerHTML='<div class="loading">로딩 중…</div>';
   Object.keys(rlAnswered).forEach(k=>delete rlAnswered[k]);
   const cacheKey=`${level}_${epId}`;
+  let _localData;
   if(EPISODE_DATA[cacheKey]){
-    DATA=EPISODE_DATA[cacheKey];
+    _localData=EPISODE_DATA[cacheKey];
   } else {
     try{
       const res=await fetch(`data/nhs/${level}/${epId}.json`);
-      if(res.ok){ DATA=await res.json(); _resolveRefs(DATA); EPISODE_DATA[cacheKey]=DATA; }
-      else DATA=null;
-    }catch(e){ DATA=null; }
+      if(_myToken!==_epLoadToken)return; // superseded while fetching
+      if(res.ok){ _localData=await res.json(); _resolveRefs(_localData); EPISODE_DATA[cacheKey]=_localData; }
+      else _localData=null;
+    }catch(e){ _localData=null; }
   }
+  if(_myToken!==_epLoadToken)return; // superseded while fetching/parsing
+  DATA=_localData;
   if(!DATA){
     document.getElementById('content-area').innerHTML='<div class="loading">⚠️ 에피소드 데이터가 없어요.</div>';
     return;
@@ -1095,6 +1104,7 @@ async function _doLoadEp(epId, level='L1'){
       new Promise(res=>{const img=new Image();img.onload=img.onerror=res;img.src=encodeURI(DATA.slides[0]);if(img.complete)res();}),
       new Promise(res=>setTimeout(res,600))
     ]);
+    if(_myToken!==_epLoadToken)return; // superseded while preloading the first slide
     DATA.slides.slice(1).forEach(s=>{const img=new Image();img.src=encodeURI(s);});
   }
   qAnswered={};curTab='script';sceneIdx=0;render();
@@ -1384,8 +1394,8 @@ function updateStripHighlight(){
 // ── AUDIO ──────────────────────────────────────────────
 // 범용 재생 — 한글 자모 연습·필수 낱말카드 등 Script/영상 탭 밖에서도 두루 쓰임. 항상 기본 속도(0.88) 고정, _rlSpeed 영향 없음.
 function speak(text,audioSrc){
+  stopTTS(); // stop any recorded audio AND any synthesized voice already playing, so old/new never overlap
   if(audioSrc){
-    if(_audio){_audio.pause();_audio=null;}
     _audio=new Audio(audioSrc);
     _audio.play().catch(()=>speakTTS(text));
   }else{
@@ -1394,8 +1404,8 @@ function speak(text,audioSrc){
 }
 // Script/영상 탭 전용 재생 — speak()와 동일하지만 _rlSpeed를 반영함 (해당 탭의 🔊·Auto-play·Role-play가 전부 이 속도를 공유)
 function scriptSpeak(text,audioSrc){
+  stopTTS(); // stop any recorded audio AND any synthesized voice already playing, so old/new never overlap
   if(audioSrc){
-    if(_audio){_audio.pause();_audio=null;}
     _audio=new Audio(audioSrc);
     _audio.playbackRate=_rlSpeed;
     _audio.play().catch(()=>speakTTS(text,0.88*_rlSpeed));
@@ -1670,7 +1680,13 @@ function checkFill(id){
 // ── WRITING PRACTICE (받아쓰기 + 문장완성) ─────────────
 let _wrComp=[];
 function _wrNorm(s){return (s||'').replace(/[\s.,!?…~·:;'"’‘“”()\[\]<>「」『』\-—_]/g,'').trim();}
-function wrPlayLine(src,text){if(src){try{const a=new Audio(src);a.onerror=()=>speakTTS(text);const pr=a.play();if(pr&&pr.catch)pr.catch(()=>speakTTS(text));return;}catch(e){}}speakTTS(text);}
+function wrPlayLine(src,text){
+  // was: fired a brand-new untracked Audio() every call — replaying fast stacked overlapping playback with no way to stop it.
+  // now: routed through the same _audio/stopTTS tracking as the rest of the app, so a new line always stops the previous one.
+  stopTTS();
+  if(src){try{_audio=new Audio(src);_audio.onerror=()=>speakTTS(text);const pr=_audio.play();if(pr&&pr.catch)pr.catch(()=>speakTTS(text));return;}catch(e){}}
+  speakTTS(text);
+}
 function buildWriteTab(){
   const epKey=`${DATA.level}_${DATA.id}`;
   const wp=WRITING_POOL[epKey]||{};
@@ -1834,7 +1850,7 @@ function renderQuizQ(){
   if(isListen){
     inner=`<div class="quiz-listen-wrap" style="margin-bottom:18px;">
         <div style="font-size:12px;color:var(--teal);margin-bottom:10px">🔊 음성을 듣고 맞는 답을 고르세요 · Listen and choose</div>
-        <button class="quiz-listen-btn" onclick="speakTTS('${escA(q.audio_text)}')">🔊 듣기 Listen</button>
+        <button class="quiz-listen-btn" onclick="scriptSpeak('${escA(q.audio_text)}','${escA(q.audio||'')}')">🔊 듣기 Listen</button>
       </div>
       <div class="quiz-opts">${opts}</div>
       <div class="quiz-exp" id="quiz-exp"></div>
@@ -1865,7 +1881,7 @@ function renderQuizQ(){
 function answerMC(chosen,qi){
   const q=DATA.quiz[qi];
   const correct=q.answer;
-  const hint=q.explanation||'';
+  const hint=q.explanation||q.exp||''; // a handful of quiz items were authored with 'exp' instead of 'explanation' — fall back so the answer feedback still shows
   for(let i=0;i<10;i++){
     const el=document.getElementById(`qopt-${i}`);
     if(!el)break;
@@ -1879,7 +1895,7 @@ function answerMC(chosen,qi){
 function checkWriteAnswer(qi){
   const q=DATA.quiz[qi];
   const correctText=q.audio_text||(q.options||[])[q.answer]||'';
-  const hint=q.explanation||'';
+  const hint=q.explanation||q.exp||''; // a handful of quiz items were authored with 'exp' instead of 'explanation' — fall back so the answer feedback still shows
   const input=document.getElementById('quiz-write-input');
   if(!input)return;
   const val=(input.value||'').trim().replace(/\s+/g,' ');
