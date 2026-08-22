@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0a2540">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>HQ Mobile</title>
+<title>Doranchae Mobile</title>
 <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -311,7 +311,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .kk-fb .en{font-size:.64rem;opacity:.8;margin-top:2px}
 .share-card{background:linear-gradient(160deg,#0d3350,#061525);border-radius:20px;padding:28px 20px;text-align:center;border:1px solid rgba(78,205,196,.2);margin-bottom:14px}
 .share-card .sc-emoji{font-size:3.2rem}
-.share-card .sc-brand{color:var(--teal);font-weight:900;font-size:.7rem;letter-spacing:.15em;margin-top:6px}
+.share-card .sc-brand{font-family:'Gaegu',sans-serif;color:var(--teal);font-weight:700;font-size:1.05rem;letter-spacing:.03em;margin-top:6px}
 .share-card .sc-title{margin:10px 0 2px;font-size:1.1rem}
 .share-card .sc-title-en{font-size:.74rem;color:#8fb0ad}
 .share-card .sc-sub{margin-top:14px;font-size:.86rem;color:#bcd6d3;line-height:1.5}
@@ -523,6 +523,15 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   <div class="hq-pad" id="srsBody"></div>
 </section>
 
+<!-- HQ: 경어법 문법 SRS 복습 (2026-08-22 신설) -->
+<section class="screen hq" id="scr-hq-gram">
+  <div class="topbar">
+    <button class="back" onclick="show('scr-hq-home')">←</button>
+    <h1>🙏 경어법 복습 Honorifics Review</h1>
+  </div>
+  <div class="hq-pad" id="gramBody"></div>
+</section>
+
 <!-- HQ: DASHBOARD -->
 <section class="screen hq" id="scr-hq-home">
   <div class="topbar">
@@ -584,6 +593,11 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <span style="font-size:1.6rem">🔁</span>
       <span><b style="font-size:.92rem">오늘의 단어 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="srsHomeSub">불러오는 중…</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900" id="srsHomeCnt">→</span>
+    </button>
+    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="gramStart()">
+      <span style="font-size:1.6rem">🙏</span>
+      <span><b style="font-size:.92rem">오늘의 경어법 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="gramHomeSub">불러오는 중…</span></span>
+      <span style="margin-left:auto;color:var(--teal);font-weight:900" id="gramHomeCnt">→</span>
     </button>
     <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
       <span style="font-size:1.6rem">🎭</span>
@@ -799,7 +813,7 @@ const SRS_CAP=20;
    ⚠️ nms_{프로필}_* 키를 새로 만들면 PROG_KEYS에도 추가할 것 */
 // 진도만 — 노트·색·아바타·작문은 My Notes 것이라 보내지 않습니다
 const PROG_KEYS = ['_ep_done','_ep_star','_sc','_prog',
-                   '_srs','_fc_review','_fc_known'];
+                   '_srs','_fc_review','_fc_known','_srs_gram'];
 let _progTimer = null;
 function _progUser(){
   try{
@@ -1063,6 +1077,113 @@ function srsHomeUpdate(){
   if(cnt)cnt.style.color=n?'var(--gold)':'var(--teal)';
 }
 
+/* ═══════════════════════════════════════════════════
+   🙏 경어법 문법 SRS (2026-08-22 신설)
+   단어 SRS(_sMap 등)와 완전히 분리된 저장소를 씁니다
+   (nms_{프로필}_srs_gram) — 상자·복습일이 단어 쪽과
+   섞이지 않도록. 알고리즘(SRS_GAP, 상자 1~5)은 동일 재사용.
+   데이터 출처: data/nhs/honorific_grammar_index.json
+   (기존 에피소드 grammar 카드에서 경어법 관련 항목만 선별,
+   새 커리큘럼 내용은 아님 — 콘텐츠 판단은 선생님 몫)
+   ═══════════════════════════════════════════════════ */
+let GRAM_ALL=null,gramDeck=[],gramIdx=0,gramFlip=false,gramLog={ok:0,no:0};
+async function _gLoadGrammar(){
+  if(GRAM_ALL)return GRAM_ALL;
+  const r=await fetch('data/nhs/honorific_grammar_index.json');
+  if(!r.ok)throw new Error('fetch fail');
+  GRAM_ALL=await r.json();
+  return GRAM_ALL;
+}
+function _gKey(){return 'nms_'+_sProfile()+'_srs_gram'}
+function _gId(c){return c.lv+'_'+c.ep+'_'+c.k}
+function _gMap(){
+  try{
+    const raw=localStorage.getItem(_gKey());
+    return raw?JSON.parse(raw):{};
+  }catch(e){return {}}
+}
+function _gSave(m){try{localStorage.setItem(_gKey(),JSON.stringify(m));_progPush()}catch(e){}}
+function _gMark(c,ok){
+  const m=_gMap(),cur=m[_gId(c)]||{b:1};
+  const b=ok?Math.min((cur.b||1)+1,5):1;
+  m[_gId(c)]={b:b,due:_sPlus(SRS_GAP[b])};
+  _gSave(m);
+  return b;
+}
+function _gDueCount(){const m=_gMap(),t=_sToday();return Object.keys(m).filter(k=>(m[k].due||'')<=t).length}
+function _gBuildDeck(){
+  const m=_gMap(),t=_sToday();
+  const due=GRAM_ALL.filter(c=>{const st=m[_gId(c)];return st&&(st.due||'')<=t});
+  due.sort((a,b)=>(m[_gId(a)].b||1)-(m[_gId(b)].b||1));
+  const deck=due.slice(0,SRS_CAP);
+  if(deck.length<SRS_CAP){
+    const fresh=GRAM_ALL.filter(c=>!m[_gId(c)]);
+    deck.push(...fresh.slice(0,SRS_CAP-deck.length));
+  }
+  gramDeck=deck;gramIdx=0;gramFlip=false;gramLog={ok:0,no:0};
+}
+async function gramStart(){
+  show('scr-hq-gram');
+  const b=document.getElementById('gramBody');
+  b.innerHTML='<div class="loading-ep">📡 경어법 카드를 불러오는 중...</div>';
+  try{await _gLoadGrammar()}catch(e){
+    b.innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/hq-mobile.html</b></div>';return;
+  }
+  _gBuildDeck();gramRender();
+}
+function gramRender(){
+  const b=document.getElementById('gramBody');if(!b)return;
+  if(!gramDeck.length){b.innerHTML='<div class="card cont-card" style="text-align:center"><h2>🎉 오늘 복습 끝!</h2><p>오늘 새로 볼 경어법 카드가 없어요.</p></div>';gramHomeUpdate();return;}
+  if(gramIdx>=gramDeck.length){
+    const tot=gramLog.ok+gramLog.no;
+    b.innerHTML=`<div class="card cont-card" style="text-align:center">
+      <h2>🎉 ${tot}장 복습 완료!</h2>
+      <p>알아요 ${gramLog.ok}장 · 다시 볼래요 ${gramLog.no}장<br><span style="font-size:.72rem;color:#8fb0ad">틀린 카드는 내일 다시 나와요</span></p>
+      <button class="go-btn" onclick="gramStart()">↻ 더 복습하기</button>
+      <button class="card ob-link" style="margin-top:8px" onclick="show('scr-hq-home')">🏠 홈으로</button>
+    </div>`;
+    gramHomeUpdate();return;
+  }
+  const c=gramDeck[gramIdx],m=_gMap(),st=m[_gId(c)];
+  const badge=st?`<span style="background:${st.b<=2?'#7a3b3b':'#2c5c52'};color:#eaf4f3;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">${st.b<=2?'🔄':'✅'} 상자 ${st.b}/5</span>`
+                :'<span style="background:#3a4a55;color:#cfe3e0;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">🆕 처음</span>';
+  const pct=Math.round(gramIdx/gramDeck.length*100);
+  b.innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:#8fb0ad;margin-bottom:8px">
+      <span>${gramIdx+1} / ${gramDeck.length}</span><span>${c.lv} · ${c.ep} · ${c.cat}</span>
+    </div>
+    <div style="height:6px;background:#22333c;border-radius:99px;overflow:hidden;margin-bottom:14px"><div style="height:100%;width:${pct}%;background:var(--teal);transition:width .2s"></div></div>
+    <div class="card" style="text-align:center;padding:26px 18px;min-height:190px;cursor:pointer" onclick="gramFlipCard()">
+      <div style="margin-bottom:10px">${badge}</div>
+      <div style="font-size:1.05rem;font-weight:800;color:#eaf4f3;line-height:1.5">${c.q}</div>
+      ${gramFlip?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid #2b3d45;text-align:left">
+          <div style="font-size:.95rem;color:var(--teal);font-weight:700;line-height:1.6">${c.a}</div>
+          ${c.ex?`<div style="font-size:.78rem;color:#bcd6d3;margin-top:10px;line-height:1.6">📝 ${c.ex}</div>`:''}
+        </div>`
+       :'<div style="font-size:.72rem;color:#7e9b97;margin-top:16px">탭하면 설명이 보여요 · tap to flip</div>'}
+    </div>
+    ${gramFlip?`<div style="display:flex;gap:10px;margin-top:6px">
+        <button class="go-btn" style="flex:1;background:#7a3b3b" onclick="gramAnswer(false)">😕 다시 볼래요</button>
+        <button class="go-btn" style="flex:1" onclick="gramAnswer(true)">😀 알아요</button>
+      </div>`
+     :'<button class="go-btn" style="width:100%;margin-top:6px" onclick="gramFlipCard()">설명 보기 · Show explanation</button>'}
+  `;
+}
+function gramFlipCard(){gramFlip=true;gramRender()}
+function gramAnswer(ok){
+  const c=gramDeck[gramIdx];
+  _gMark(c,ok);
+  if(ok)gramLog.ok++;else gramLog.no++;
+  gramIdx++;gramFlip=false;gramRender();
+}
+function gramHomeUpdate(){
+  const sub=document.getElementById('gramHomeSub'),cnt=document.getElementById('gramHomeCnt');
+  const n=_gDueCount();
+  if(sub)sub.textContent=n?`오늘 복습할 경어법 카드 ${n}개 — L1~L6 전체에서 골라 줘요`:'오늘 복습할 카드가 없어요 · 새 카드를 배워 보세요';
+  if(cnt)cnt.textContent=n?String(n):'→';
+  if(cnt)cnt.style.color=n?'var(--gold)':'var(--teal)';
+}
+
 /* ───────── KIDS: 진행도 + 별 (localStorage) ───────── */
 function loadKidsProgress(){
   try{ return Object.assign({stars:12,block:false,bat:false,word:false}, JSON.parse(localStorage.getItem('hqkProgress')||'{}')) }
@@ -1200,6 +1321,7 @@ function enterHQ(){
 function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();srsHomeUpdate();show('scr-hq-home')}
 function renderHome(){
   try{srsHomeUpdate()}catch(e){}
+  try{gramHomeUpdate()}catch(e){}
   // 홈 제목 — 로그인/My Notes 이름을 따라감 (옛 하드코딩 '미래의 학습' 대체)
   try{
     const _who=(localStorage.getItem('nms_current')||'').trim();
@@ -3060,7 +3182,7 @@ function shareRender(){
   document.getElementById('shareBody').innerHTML=`
     <div class="share-card" id="shareCardVisual">
       <div class="sc-emoji">${d.emoji}</div>
-      <div class="sc-brand">DORANCHAE</div>
+      <div class="sc-brand">도란채</div>
       <h2 class="sc-title">${d.title_ko}</h2>
       <div class="sc-title-en">${d.title_en}</div>
       <div class="sc-sub">${d.sub_ko}</div>
@@ -3102,7 +3224,8 @@ function shareWrapText(ctx,text,x,y,maxWidth,lineHeight){
   }
   ctx.fillText(line,x,ly);
 }
-function shareDownload(){
+async function shareDownload(){
+  await document.fonts.load("700 44px Gaegu").catch(()=>{});  // 캔버스에 그리기 전 폰트 로딩 보장
   const d=SHARE_DATA;
   const cv=document.createElement('canvas');
   cv.width=720;cv.height=1280;
@@ -3115,8 +3238,8 @@ function shareDownload(){
   ctx.textAlign='center';
   ctx.font='160px sans-serif';
   ctx.fillText(d.emoji,cv.width/2,330);
-  ctx.fillStyle='#4ECDC4';ctx.font='900 36px sans-serif';
-  ctx.fillText('DORANCHAE',cv.width/2,430);
+  ctx.fillStyle='#4ECDC4';ctx.font="700 44px 'Gaegu',sans-serif";
+  ctx.fillText('도란채',cv.width/2,430);
   ctx.fillStyle='#eaf4f3';ctx.font='900 52px "Noto Sans KR",sans-serif';
   shareWrapText(ctx,d.title_ko,cv.width/2,540,640,64);
   ctx.fillStyle='#8fb0ad';ctx.font='400 30px sans-serif';
@@ -3132,7 +3255,7 @@ function shareDownload(){
   cv.toBlob(blob=>{
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download='hangeul-quest-share.png';
+    a.download='doranchae-share.png';
     a.click();
     toast('이미지가 저장됐어요! · Image saved');
   });

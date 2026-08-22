@@ -7,6 +7,28 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🔧 **2026-08-22 사소한 수정**: 경어법 총정리 탭·L2 ep06 vocab note·vocab_index.json 세 곳의 예문 "할머니가 진지 드세요"를 선생님 지적으로 "할머니께서 진지 드세요"로 정정(진지·드시다가 이미 높임 표현이라 주어 조사도 께서로 맞추는 게 자연스러움). Node로 buildHonorifics() 재실행해 반영 확인.
+
+> 🙏 **2026-08-22 완료 (경어법 총정리 탭 — 높임 명사 세트 보강)**
+> — 선생님이 "명사어는 따로 넣지 않았네? 말씀·연세·댁·진지" 지적 → 확인해보니 정확함: 겸양 **동사** 5쌍(드리다·드시다·계시다·말씀하시다·여쭙다)은 앞 세션에서 보강했지만, 별개 축인 높임 **명사** 세트는 72편 전수조사 결과 `말씀`(L5 ep01) 하나만 있고 성함·연세·댁·진지는 전무했음.
+> — `data/nhs/L5/ep01.json`의 기존 "🗣️ 높임 표현 & 기타" 카테고리(말씀이 이미 있던 자리)에 **이름→성함·나이→연세·집→댁·밥→진지** 4개 추가 + `vocab_index.json` 동일 반영(모바일 SRS 자동 포함). `nhs.html` `buildHonorifics()`의 "경어법 총정리" 탭 객체높임 박스에 **"명사도 통째로 바뀌어요"** 표를 겸양 동사 표 바로 아래 추가(말씀·성함·연세·댁·진지 5개, 예문 포함) — 이제 겸양 동사 5개·높임 명사 5개로 대칭 구조. 출처 지도(sourceMapBox)에도 L5 ep01 추가.
+> — ✅ **검증**: JSON `json.load` 통과, `node --check` 통과, **Node vm으로 `buildHonorifics()` 직접 실행**해 성함/연세/댁/진지/"명사도 통째로"/"L5 ep01" 전부 반환값에 포함 확인(지난 세션의 죽은 코드 실수 재발 방지 차원에서 매번 직접 실행 검증), `lv_ep_k` id 중복 0건.
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`nhs.html`, `data/nhs/L5/ep01.json`, `data/nhs/vocab_index.json`, 이 문서).
+
+> 🙏 **2026-08-22 완료 (Start Here › 한국의 호칭 문화에 "경어법 총정리" 탭 신설 + 어휘 보강)**
+> — 선생님 지시로 `nhs.html`의 `buildHonorifics()`(Start Here → Reference → 한국의 호칭 문화)를 2탭 구조로 재구성: 기존 내용은 **"👨‍👩‍👧 호칭 · Titles"** 탭으로 그대로 유지, **"🙏 경어법 총정리 · Honorifics"** 탭을 새로 만들어 지금까지 L1~L6에 흩어져 있던 경어법 문법을 주체높임(-(으)시-, **께서 — 72편 전수조사 결과 어디서도 안 가르쳐서 이번에 신규 보강**)·객체높임/겸양(드리다·드시다·계시다·말씀하시다·여쭙다 5쌍 표 + -께 + -아/어 드리다)·상대높임(반말/해요체/합쇼체 미니 표)·사물높임 주의 네 박스 + 각 항목이 어느 편에서 나왔는지 보여주는 출처 지도로 구성. `switchBtab()` 기존 인프라 그대로 재사용(그룹명 `bp-hon`), 새 CSS 불필요.
+> — **어휘 보강**: L2 ep06 "존댓말 특수 어휘" vocab 카테고리에 드시다·계시다·말씀하시다·여쭙다 4개 추가(기존엔 드리다 1개뿐이었음 — 문법카드 rule_box엔 5개 다 언급되지만 vocab 카드로는 1개만 있었던 결손). `data/nhs/L2/ep06.json`(원본)과 `data/nhs/vocab_index.json`(플래시카드/모바일 SRS용 색인) 양쪽에 동일하게 반영 — 이제 모바일 단어 SRS에도 자동으로 뜸.
+> — 🔧 **패치 중 실수 발견·수정**: 처음 짠 패치가 기존 `return ...` 문 뒤에 새 탭 코드를 이어 붙이는 바람에 함수가 옛 return에서 먼저 끝나버려 새 탭이 죽은 코드가 되는 버그가 있었음 — **`node --check`(문법 검사)는 통과했지만 실제로 함수를 실행해서 반환값을 검사하니 새 마커(께서/bp-hon-system 등)가 하나도 없어서 발각**. 옛 return문을 제거하고 재검증. **교훈**: 대용량 함수를 패치할 때 `node --check`만으론 부족하고, Node `vm.runInThisContext`로 실제 함수를 호출해 반환 문자열까지 확인해야 함.
+> — ✅ **검증**: JSON `json.load` 통과 + `lv_ep_k` id 중복 0건, `node --check` 통과, **Node vm으로 `buildHonorifics()` 직접 실행**해 반환 문자열에 께서/사물높임/드시다/switchBtab(2개)/btab-bar 전부 포함 확인, null byte 0, `</html>` 1개.
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`nhs.html`, `data/nhs/L2/ep06.json`, `data/nhs/vocab_index.json`, 이 문서). **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
+> 🙏 **2026-08-22 완료 (모바일 앱 — 경어법 문법 SRS 신설, 단어 SRS와 완전 분리)**
+> — Haeok 선생님과 nhs.html/Start Here를 처음부터 다시 분석하는 세션에서 도출된 결론: 앱의 유일한 장기 리텐션 장치(`_sMap`/`_sBuildDeck`/`SRS_GAP` 간격 복습)가 `vocab_index.json`(어휘) 전용이라, -(으)시-·-께·사물높임 주의·격식체 전환 같은 문법 카드는 한 번 노출되면 다시 예약되어 뜨지 않음. **72편 전체 grammar 배열 title을 grep으로 전수조사**(요약표 대조 금지 원칙 준수 — 이번엔 처음부터 JSON 원본 검색) → 경어법 관련 카드 28개 후보 중 13개 선별 → `data/nhs/honorific_grammar_index.json` 신설(원자적 Q&A 카드, `k/lv/ep/cat/q/a/ex/src` 필드, 기존 `vocab_index.json`과 동일한 `lv_ep_k` id 규칙 — 새 그래머 카드 저작 없이 **기존 에피소드 grammar 카드에서만** 선별함).
+> — `hq-mobile.html`에 두 번째 SRS 엔진 추가 — 알고리즘(SRS_GAP 상자 1~5)은 재사용하되 **저장소는 `nms_{프로필}_srs_gram`로 완전히 분리**(단어 SRS 상자 카운트와 안 섞임). 새 함수: `_gLoadGrammar/_gMap/_gKey/_gId/_gSave/_gMark/_gDueCount/_gBuildDeck/gramStart/gramRender/gramFlipCard/gramAnswer/gramHomeUpdate`. 홈 화면에 "🙏 오늘의 경어법 복습" 카드 신설(기존 "오늘의 단어 복습" 카드 바로 아래), `scr-hq-gram` 화면 신설, `renderHome()`에 `gramHomeUpdate()` 훅 추가. `PROG_KEYS`에 `_srs_gram` 추가해 Supabase 진도 동기화도 자동 포함.
+> — ⚠️ **이번엔 안 건드린 것 — 선생님 콘텐츠 판단 필요**: (1) **께서**(주격 높임 조사)는 72편 어디에도 가르치는 카드가 없음(띄어쓰기 게임 예문엔 등장 — `nhs.html` `SP_DATA`) — 새 카드를 쓰는 건 콘텐츠 판단이라 이번엔 손대지 않음. (2) 드리다·드시다·계시다·여쭙다·말씀하시다는 L2 ep06 grammar 카드 텍스트 안에만 있고 `vocab_index.json`엔 없어서 단어 SRS 대상도 아님 — 원하시면 5줄만 추가하면 기존 단어 SRS에 바로 올라감.
+> — ✅ **검증**: 신규 JSON `json.load` 통과 + id 중복 0건, `hq-mobile.html` patch 후 `node --check` 통과, null byte 0, `</html>` 1개, `<section>`/`<div>` 개수 전후 균형 확인, 신규 함수명 전부 기존 코드와 grep 대조해 충돌 없음 확인.
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`data/nhs/honorific_grammar_index.json` 신설 + `hq-mobile.html` 수정 + 이 문서). **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 📝 **2026-08-22 완료 (L3~L6 오류수정 대량 검수 + 마감테스트 정답 힌트 유출 구조적 결함 발견·수정)**
 > — 🔴 **가장 큰 수확 — 마감테스트(closing_test) 배지가 정답을 미리 알려주던 구조적 결함 발견**: 선생님이 L3 ep06 문제에서 "빈칸 위에 뜬 문법명 배지(예: `[EP06 · 아무리~도]`)가 힌트가 되어 변별력이 떨어지지 않느냐"고 지적 → 확인해보니 **L1~L6 전체 마감테스트가 동일 구조**였음(에피소드 하나의 예시가 아니라 전 레벨 공통 설계 문제). 정답 선택 **전에** 문법명이 항상 보이는 구조였던 것을 **선택 후에만 보이도록** 전환(문제 풀 때는 EP코드만, 채점 후 전체 문법명 공개) — L1~L6 `renderXT`/`XTChoose` 함수 쌍 전부(`epLabels`를 top-level 상수로 호이스팅) 수정. 이 과정에서 **덤으로 배지가 아예 잘못된 문법명을 보여주고 있던 오답 사례**도 발견(L2 ep09, L3 ep10·ep11 — 문항의 실제 출제 포인트와 `ep` 값이 어긋나 있었음) → 문항별 `gram` 오버라이드 필드를 신설해 개별 정정. Node.js로 실제 렌더 함수를 추출·실행해 배지 전/후 노출 텍스트를 직접 검증.
 > — **발음(`<발음>`) 탭 형식 전 레벨 통일 완료**: L4 ep01~07의 표(table) 형식을 기준으로 L4 ep08~12·L5 전 12편·L6 전 12편(29개 파일)에 이어, **L1 ep01·ep02·ep12·L2 전 12편(15개 파일)까지 마무리** — 이제 **L1~L6 전 72편의 발음 탭이 전부 `id·title·rule·table{columns,rows}` 동일 구조**. 기존엔 레벨·편마다 `word/actual/note`·`examples[{written,pronounced,note}]`·`items[]` 등 형식이 제각각이었음(선생님이 직접 발견: "L3부터는 통일했는데 그 전 레벨은 들쑥날쑥"). 내용(규칙·예시)은 그대로 유지하며 구조만 재작성, L2 ep08 "볶아서" 규칙 라벨만 격음화→연음화로 정정(ㄲ은 격음이 아니므로 발견 시 함께 수정).

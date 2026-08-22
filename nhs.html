@@ -6033,8 +6033,80 @@ function buildHonorifics(){
     +'• -님 suffix는 존경을 더해요 — 선생 (teacher) → 선생님 (respected teacher)<br>'
     +'• 이름을 부를 땐 뒤에 아/야 or 씨를 붙여요 — 보미야! (반말) / 보미 씨 (격식)</div>';
 
-  return '<div class="basics-intro">한국어는 누구와 말하느냐에 따라 부르는 방법이 달라져요. 관계·나이·격식도에 따른 호칭을 알아봐요!<br><em>Korean address system depends on relationship, age, and formality. Learn who to call what!</em></div>'
+  const titlesTab = '<div class="basics-intro">한국어는 누구와 말하느냐에 따라 부르는 방법이 달라져요. 관계·나이·격식도에 따른 호칭을 알아봐요!<br><em>Korean address system depends on relationship, age, and formality. Learn who to call what!</em></div>'
     + tipBox + tableHtml + noteBox;
+
+  /* ══════════ 🙏 경어법 총정리 · Honorifics System (신규 탭, 2026-08-22) ══════════
+     호칭(누구를 뭐라고 부르나)과는 다른 축 — "그 사람에 대해 말할 때 문장 자체가
+     어떻게 높아지는가"를 주체높임·객체높임(겸양)·상대높임 세 갈래로 모음.
+     께서는 L1~L6 72편 전수조사 결과 어디서도 명시적으로 가르치지 않아 여기서 신규 보강. */
+  const sysIntro = '<div class="basics-intro">한국어 존댓말은 세 갈래로 움직여요 — <strong>①주체높임</strong>(문장의 주어를 높임) · <strong>②객체높임·겸양</strong>(행동을 받는 대상을 높이거나 나를 낮춤) · <strong>③상대높임</strong>(지금 듣는 사람에 따라 말투를 바꿈). 지금까지 배운 조각들을 한곳에 모았어요.<br><em>Korean honorifics move along three axes — who the sentence is ABOUT, who the action is done FOR/TO, and who you are SPEAKING to right now. Here is everything you\'ve learned, in one place.</em></div>';
+
+  const subjBox = '<div style="background:#E3F2FD;border:1.5px solid #64B5F6;border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:10px">🔵 ① 주체높임 · Subject Honorification — 문장의 주어를 높여요</div>'
+    +'<div style="font-size:12.5px;line-height:1.8;color:var(--warm-700)">'
+    +'<strong>-(으)시-</strong> — 동사 어간 + 시(모음/ㄹ어간) 또는 으시(자음어간). 가다→가세요, 있다→있으세요.<br>'
+    +'<em>Insert -(으)시- into the verb to show respect for whoever is doing the action.</em>'
+    +'<div style="font-size:11px;color:var(--warm-400);margin:4px 0 10px">🔄 L1 ep11에서 통문장으로 먼저 만나고, L2 ep06에서 규칙으로 배워요</div>'
+    +'<strong>께서</strong> — 은/는·이/가의 높임 형태예요. 존경하는 대상이 주어일 때 문장을 한층 더 공손·격식 있게 만들어요.<br>'
+    +'<em>께서 is the honorific form of 은/는·이/가 — it marks a respected subject.</em>'
+    +'<div style="background:#fff;border-radius:8px;padding:8px 10px;margin-top:6px;font-size:12px">'
+    +'할머니<strong>가</strong> 오세요 <span style="color:var(--warm-400)">— 일상 대화에서 흔하고 자연스러움 (-시-만으로 이미 존댓말)</span><br>'
+    +'할머니<strong style="color:var(--teal-dark)">께서</strong> 오세요 <span style="color:var(--warm-400)">— 더 공손·격식 있는 표현 (편지·발표·격식 있는 자리)</span>'
+    +'</div>'
+    +'<div style="font-size:11px;color:#c0392b;margin-top:6px">⚠️ 께서는 보통 -(으)시-와 짝을 이뤄요 — "할머니께서 오다" ❌ / "할머니께서 오세요" ✓</div>'
+    +'</div></div>';
+
+  const objBox = '<div style="background:#E8F5E9;border:1.5px solid #81C784;border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:10px">🟢 ② 객체높임 · 겸양 — 행동을 받는 대상을 높이거나 나를 낮춰요</div>'
+    +'<table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px">'
+    +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">평어</th><th style="text-align:left;padding:3px 8px 6px">→ 높임/겸양어</th><th style="text-align:left;padding:3px 8px 6px">예문</th></tr>'
+    +[['주다','드리다','계산해 드릴까요?'],['먹다/마시다','드시다','할머니께서 진지 드세요.'],['있다','계시다','선생님이 계세요?'],['말하다','말씀하시다','뭐라고 말씀하셨어요?'],['묻다','여쭙다(여쭤보다)','선생님께 여쭤봤어요.']]
+      .map(r=>'<tr style="border-top:1px solid rgba(0,0,0,.06)"><td style="padding:5px 8px">'+r[0]+'</td><td style="padding:5px 8px;font-weight:700;color:var(--teal-dark)" onclick="speakTTS(\''+r[1].split('(')[0]+'\')">'+r[1]+' 🔊</td><td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+r[2]+'</td></tr>').join('')
+    +'</table>'
+    +'<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:10px 0 6px">명사도 통째로 바뀌어요 · Nouns swap too</div>'
+    +'<table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px">'
+    +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">평어</th><th style="text-align:left;padding:3px 8px 6px">→ 높임 명사</th><th style="text-align:left;padding:3px 8px 6px">예문</th></tr>'
+    +[['말','말씀','뭐라고 말씀하셨어요?'],['이름','성함','성함이 어떻게 되세요?'],['나이','연세','연세가 어떻게 되세요?'],['집','댁','댁이 어디세요?'],['밥','진지','진지 드세요.']]
+      .map(r=>'<tr style="border-top:1px solid rgba(0,0,0,.06)"><td style="padding:5px 8px">'+r[0]+'</td><td style="padding:5px 8px;font-weight:700;color:var(--teal-dark)" onclick="speakTTS(\''+r[1]+'\')">'+r[1]+' 🔊</td><td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+r[2]+'</td></tr>').join('')
+    +'</table>'
+    +'<div style="font-size:12.5px;line-height:1.8;color:var(--warm-700)">'
+    +'<strong>-께</strong> — -에게의 높임형. 존경하는 대상에게 무언가를 향하게 할 때. 예) 선생님께 드리다<br>'
+    +'<strong>-아/어 드리다</strong> — 높임 대상을 위해 해주는 행동엔 -아/어 주다 대신 이걸 써요. 예) 도와 드릴게요'
+    +'<div style="font-size:11px;color:var(--warm-400);margin-top:4px">🔄 L2 ep05(-께) · L2 ep06(겸양 동사 5쌍) · L2 ep07(드리다) · L5 ep01(높임 명사 — 말씀·성함·연세·댁·진지)</div>'
+    +'</div></div>';
+
+  const addrBox = '<div style="background:#FFF3E0;border:1.5px solid #FFB74D;border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:10px">🟡 ③ 상대높임 · 지금 듣는 사람에 따라 말투가 바뀌어요</div>'
+    +'<table style="width:100%;border-collapse:collapse;font-size:12.5px">'
+    +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">단계</th><th style="text-align:left;padding:3px 8px 6px">누구에게</th><th style="text-align:left;padding:3px 8px 6px">예</th></tr>'
+    +[['반말','친구, 아랫사람, 아주 가까운 사이','안녕! 뭐 해?'],['해요체','처음 만난 사람, 어른, 일상적 존댓말','안녕하세요! 뭐 하세요?'],['합쇼체(하십시오체)','발표·뉴스·관공서 등 가장 격식 있는 자리','안녕하십니까!']]
+      .map(r=>'<tr style="border-top:1px solid rgba(0,0,0,.06)"><td style="padding:5px 8px;font-weight:700">'+r[0]+'</td><td style="padding:5px 8px;font-size:12px">'+r[1]+'</td><td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+r[2]+'</td></tr>').join('')
+    +'</table>'
+    +'<div style="font-size:11px;color:var(--warm-400);margin-top:6px">📌 전체 예문·회화는 <strong>👋 인사 & 교실 표현</strong> 탭에서 · 🔄 L4 ep01·ep12에서 상황별 전환을 배워요</div>'
+    +'</div>';
+
+  const samulBox = '<div style="background:#FFEBEE;border:1.5px solid #EF9A9A;border-radius:var(--radius-md);padding:14px 16px;margin-bottom:14px">'
+    +'<div style="font-size:13px;font-weight:700;color:var(--warm-800);margin-bottom:8px">🔴 사물높임 주의 · 흔하지만 틀린 표현</div>'
+    +'<div style="font-size:12.5px;line-height:1.8;color:var(--warm-700)">'
+    +'❌ 할인 되세요 &nbsp;·&nbsp; ❌ 주문이 나오셨어요<br>'
+    +'✅ 할인돼요 &nbsp;·&nbsp; ✅ 주문이 나왔어요<br>'
+    +'사람이 아닌 것(할인, 주문)에는 -(으)시-를 쓰지 않아요. 한국 서비스업에서 매우 흔히 들리지만 문법적으로는 틀린 표현이에요.<br>'
+    +'<em>You can only show respect to people — not to a discount or an order.</em>'
+    +'<div style="font-size:11px;color:var(--warm-400);margin-top:4px">🔄 L2 ep06</div>'
+    +'</div></div>';
+
+  const sourceMapBox = '<div style="background:var(--teal-50);border:1.5px solid var(--teal-lt);border-radius:var(--radius-sm);padding:12px 16px;font-size:11.5px;line-height:1.9;color:var(--warm-600)">'
+    +'📍 <strong>이 문법들을 어디서 배웠나요?</strong><br>'
+    +'L1 ep11 (-으셨어요 첫 노출) → L2 ep05 (-께) → L2 ep06 (-시-·겸양 동사·사물높임 주의) → L2 ep07 (드리다) → L5 ep01 (높임 명사) → L4 ep01·ep12 (해요체↔합쇼체 전환) → L6 ep01 (문어체 격식체)'
+    +'</div>';
+
+  const systemTab = sysIntro + subjBox + objBox + addrBox + samulBox + sourceMapBox;
+
+  const honTabs = [['titles','👨‍👩‍👧 호칭 · Titles'],['system','🙏 경어법 총정리 · Honorifics']];
+  return '<div class="btab-bar">' + honTabs.map(([id,lbl],i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-hon" data-tab="'+id+'" onclick="switchBtab(\'bp-hon\',\''+id+'\')">'+lbl+'</button>').join('') + '</div>'
+    + '<div id="bp-hon-titles" class="btab-panel active">' + titlesTab + '</div>'
+    + '<div id="bp-hon-system" class="btab-panel">' + systemTab + '</div>';
 }
 
 // ── CONJUNCTIVE ADVERBS (접속부사) RENDER ───────────────
