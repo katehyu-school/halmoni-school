@@ -665,59 +665,75 @@
    ]
   }
  },
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "연음화 · Liaison",
-    "tip": "받침이 뒤 음절 모음 앞으로 넘어가요 · The coda moves to the next syllable",
-    "examples": [
-     {
-      "written": "찾아",
-      "pronounced_standard": "[차자]",
-      "pronounced_actual": "[차자]",
-      "note": "찾(ㅈ받침) + 아 → ㅈ 연음"
-     }
-    ]
-   },
-   {
-    "rule": "격음화 · Aspiration",
-    "tip": "받침 ㄱ/ㄷ/ㅂ/ㅈ 뒤에 ㅎ이 오면(또는 ㅎ받침 뒤에 ㄱ/ㄷ/ㅂ/ㅈ이 오면) 거센소리로 축약돼요 · A ㄱ/ㄷ/ㅂ/ㅈ coda plus a following/preceding ㅎ contracts into an aspirated consonant",
-    "examples": [
-     {
-      "written": "도착했어",
-      "pronounced_standard": "[도착캤서]",
-      "pronounced_actual": "[도차캐써]",
-      "note": "착(받침 ㄱ) + 했(ㅎ) → ㄱ+ㅎ이 거센소리 ㅋ로 축약돼요 (착했→차캐)"
-     },
-     {
-      "written": "무사히 도착했어",
-      "pronounced_standard": "[무사히 도착캤서]",
-      "pronounced_actual": "[무사히 도차캐써]",
-      "note": "에피소드 대사 · 같은 규칙 적용"
-     }
-    ]
-   },
-   {
-    "rule": "경음화 · Tensification",
-    "tip": "받침 ㄱ/ㄷ/ㅂ 뒤의 자음이 된소리로 바뀌어요 · Consonant becomes tense after ㄱ/ㄷ/ㅂ coda",
-    "examples": [
-     {
-      "written": "못 찾겠어요",
-      "pronounced_standard": "[몯 찯껫써요]",
-      "pronounced_actual": "[몯 차께써요]",
-      "note": "찾(ㅈ→ㄷ)+겠(ㄱ→ㄲ) 경음화 · 실제 발화에서 받침 약화"
-     },
-     {
-      "written": "찾겠어요",
-      "pronounced_standard": "[찯껫써요]",
-      "pronounced_actual": "[차께써요]",
-      "note": "TOPIK 듣기는 표준발음 기준으로 녹음됨"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep02_l2_01",
+   "title": "연음화 — 찾아",
+   "rule": "받침이 뒤 음절 모음 앞으로 넘어가 이어져요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "찾아",
+      "[차자]",
+      "찾(ㅈ받침) + 아 → 연음"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep02_l2_02",
+   "title": "격음화 — 도착했어",
+   "rule": "받침 ㄱ/ㄷ/ㅂ/ㅈ 뒤(또는 ㅎ받침 뒤)에 ㅎ이 오면 거센소리로 축약돼요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "도착했어",
+      "[도차캐써]",
+      "착(ㄱ)+했(ㅎ) → 거센소리 ㅋ로 축약"
+     ],
+     [
+      "무사히 도착했어",
+      "[무사히 도차캐써]",
+      "같은 규칙 적용"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep02_l2_03",
+   "title": "경음화 — 못 찾겠어요",
+   "rule": "받침 ㄱ/ㄷ/ㅂ 뒤의 자음이 된소리로 바뀌어요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "못 찾겠어요",
+      "[몯 차께써요]",
+      "찾(ㄷ)+겠(ㄲ) 경음화, 실제 발화 시 받침 약화"
+     ],
+     [
+      "찾겠어요",
+      "[차께써요]",
+      "TOPIK 듣기는 표준발음 기준 녹음"
+     ]
+    ]
+   }
+  }
+ ],
  "usage": {
   "title": "Usage — N행 / -아/어 보다 확장",
   "sections": [

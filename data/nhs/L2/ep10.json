@@ -509,35 +509,84 @@
    ]
   }
  },
- "pronunciation": {
-  "intro": "소리가 바뀌는 부분을 주의해서 들어봐요.",
-  "items": [
-   {
-    "word": "참는",
-    "ipa": "[참는]",
-    "rule": "ㅁ + ㄴ → 비음 유지 (no change)",
-    "note": "참다 + 는 = 참는 — the ㄴ and ㅁ stay distinct. No assimilation here."
-   },
-   {
-    "word": "쉽지 않지",
-    "ipa": "[쉽찌 안치]",
-    "rule": "격음화 & 경음화",
-    "note": "쉽 + 지 → [쉽찌] (tensification: plain stop before 지 → tense) · 않 + 지 → [안치] (ㅎ + ㅈ → aspirate ㅊ)"
-   },
-   {
-    "word": "힘들어요",
-    "ipa": "[힘드러요]",
-    "rule": "ㄹ 유음화",
-    "note": "들 + 어 → [드러] — ㄹ following a vowel-final syllable triggers flapping"
-   },
-   {
-    "word": "나아진",
-    "ipa": "[나아진]",
-    "rule": "모음 연속 — 또박또박 발음",
-    "note": "나아지다 is a regular verb — each vowel is pronounced clearly: 나-아-진. Don't blend into [나진]. (This isn't liaison — there's no batchim to link here; it's just about not slurring the vowels together.)"
+ "pronunciation": [
+  {
+   "id": "pron_ep10_l2_01",
+   "title": "변화 없음 — 참는",
+   "rule": "ㅁ 뒤에 ㄴ이 와도 동화가 일어나지 않고 그대로 발음되는 경우도 있어요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "참는",
+      "[참는]",
+      "ㅁ+ㄴ → 변화 없이 그대로"
+     ]
+    ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep10_l2_02",
+   "title": "경음화·격음화 — 쉽지 않지",
+   "rule": "받침 뒤 예사소리는 된소리로, 받침 ㅎ 뒤 예사소리는 거센소리로 바뀌어요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "쉽지 않지",
+      "[쉽찌 안치]",
+      "쉽+지→[쉽찌] 경음화, 않+지→[안치] 격음화"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep10_l2_03",
+   "title": "유음화 — 힘들어요",
+   "rule": "모음으로 끝난 음절 뒤에 오는 ㄹ은 굴러가듯 부드럽게 발음돼요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "힘들어요",
+      "[힘드러요]",
+      "들+어 → [드러]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep10_l2_04",
+   "title": "모음 연속 — 나아진",
+   "rule": "받침 없이 모음이 이어질 때는 뭉개지 않고 또박또박 발음해요.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "나아진",
+      "[나아진]",
+      "나-아-진, [나진]으로 줄여 읽지 않기"
+     ]
+    ]
+   }
+  }
+ ],
  "usage": {
   "intro_ko": "-아/어지다, -게 되다, -는 것을 일상에서 어떻게 쓸 수 있을까요?",
   "intro_en": "Let's see how these patterns show up in everyday life.",
