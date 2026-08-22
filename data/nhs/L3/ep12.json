@@ -517,26 +517,66 @@
    ]
   }
  },
- "pronunciation": {
-  "title": "발음 포인트",
-  "items": [
-   {
-    "word": "굿",
-    "note": "받침 ㅅ은 단어 끝에서 [ㄷ]으로 발음돼요. 실제 발음은 [굳] — 'good'처럼 들리지만 영어 발음은 아님!",
-    "actual": "[굳]"
+ "pronunciation": [
+  {
+   "id": "pron_ep12_l3_01",
+   "title": "받침 ㅅ → 대표음 [ㄷ] (굿)",
+   "rule": "받침 ㅅ은 단어 끝(휴지 앞)에서 대표음 [ㄷ]으로 발음돼요 · A word-final batchim ㅅ is pronounced as its representative sound [ㄷ].",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "굿",
+      "[굳]",
+      "ㅅ → [ㄷ] (대표음화)"
+     ]
+    ]
    },
-   {
-    "word": "흔적이라고",
-    "note": "흔적 [흔적] + 이라고 연음 → [흔저기라고]",
-    "actual": "[흔저기라고]"
-   },
-   {
-    "word": "민속신앙",
-    "note": "민속 [민속] + 신앙 [시낭] 연결 → [민속씨낭] (ㄱ 다음 ㅅ = 경음화)",
-    "actual": "[민속씨낭]"
+   "tip": "'good'처럼 들리지만 영어 발음이 아니에요 — 한국어 받침 규칙일 뿐이에요 · It may sound like English 'good', but that's coincidence — this is just the Korean batchim rule."
+  },
+  {
+   "id": "pron_ep12_l3_02",
+   "title": "받침 ㄱ + 모음 → 연음화 (흔적이라고)",
+   "rule": "받침 ㄱ 뒤에 모음 '이'가 오면 다음 음절로 이어져요 · A batchim ㄱ links over to the next syllable before the vowel 이.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "흔적이라고",
+      "[흔저기라고]",
+      "ㄱ+이 → 연음화"
+     ]
+    ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep12_l3_03",
+   "title": "받침 ㄱ + ㅅ → [ㅆ] 경음화 (민속신앙)",
+   "rule": "받침 ㄱ 뒤에 예사소리 ㅅ이 오면 된소리 [ㅆ]으로 바뀌어요 · The plain consonant ㅅ tenses to [ㅆ] after the batchim ㄱ.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "민속신앙",
+      "[민속씨낭]",
+      "ㄱ+ㅅ → ㅆ (경음화)"
+     ]
+    ]
+   }
+  }
+ ],
  "real_life": [
   {
    "type": "reading",
