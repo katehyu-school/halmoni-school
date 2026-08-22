@@ -781,47 +781,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "경음화 (북부)",
-    "tip": "받침 ㄱ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌어요 · A batchim ㄱ tenses a following plain ㄱ into [ㄲ].",
-    "examples": [
-     {
-      "written": "북부",
-      "pronounced_standard": "[북뿌]",
-      "pronounced_actual": "[북뿌]",
-      "note": "받침 ㄱ 뒤에 예사소리 ㅂ이 오면 된소리 [뿌]로 바뀌어요 — 진짜 경음화 예시"
-     }
-    ]
-   },
-   {
-    "rule": "연음 (진화하는)",
-    "tip": "받침 ㄴ + 화 연음 · Liaison across syllables",
-    "examples": [
-     {
-      "written": "진화",
-      "pronounced_standard": "[지놔]",
-      "pronounced_actual": "[지놔]",
-      "note": "진(ㄴ) + 화 → ㄴ이 화의 초성으로 넘어가서 [지놔]"
-     }
-    ]
-   },
-   {
-    "rule": "격음화 예외 (심하게)",
-    "tip": "받침 ㅁ 뒤에 ㅎ이 오면 격음화 없이 그대로 발음돼요 (ㄱ/ㄷ/ㅂ/ㅈ 받침일 때만 격음화가 일어나요)",
-    "examples": [
-     {
-      "written": "심하게",
-      "pronounced_standard": "[심하게]",
-      "pronounced_actual": "[심하게]",
-      "note": "표준=실제 동일, 받침 ㅁ 뒤 ㅎ은 축약되지 않아요"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep06_l5_01",
+   "title": "경음화 (북부)",
+   "rule": "받침 ㄱ 뒤에 예사소리 ㅂ이 오면 된소리 [ㅃ]으로 바뀌어요 · A batchim ㄱ tenses a following plain ㅂ into [ㅃ].",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "북부",
+      "[북뿌]",
+      "받침 ㄱ 뒤에 예사소리 ㅂ이 오면 된소리 [뿌]로 바뀌어요 — 진짜 경음화 예시"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep06_l5_02",
+   "title": "연음 (진화)",
+   "rule": "받침 ㄴ 뒤에 오는 ㅎ이 약해지면서 ㄴ이 다음 음절로 넘어가요 · The ㅎ softens and the batchim ㄴ links over to the next syllable.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "진화",
+      "[지놔]",
+      "진(ㄴ) + 화 → ㄴ이 화의 초성으로 넘어가서 [지놔]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep06_l5_03",
+   "title": "격음화 예외 (심하게)",
+   "rule": "받침 ㅁ 뒤에 ㅎ이 오면 격음화 없이 그대로 발음돼요 (ㄱ/ㄷ/ㅂ/ㅈ 받침일 때만 격음화가 일어나요)",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "심하게",
+      "[심하게]",
+      "표준=실제 동일, 받침 ㅁ 뒤 ㅎ은 축약되지 않아요"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "트리오는 클럽 활동 중이라 계속 반말이지만, 뉴스 원고 자체는 완전히 격식체(-습니다체)로 되어 있어요 — 실제 방송 뉴스와 똑같은 톤이에요.",
   "intro_en": "The trio stays in casual banmal during their club activity, but the news script itself is entirely in the formal -습니다체 register — matching real broadcast news.",

@@ -649,47 +649,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "경음화 (격식)",
-    "tip": "받침 ㄱ 뒤에 예사소리 ㅅ이 오면 된소리 [ㅆ]으로 바뀌어요 · A batchim ㄱ tenses a following plain ㅅ into [ㅆ].",
-    "examples": [
-     {
-      "written": "격식",
-      "pronounced_standard": "[격씩]",
-      "pronounced_actual": "[격씩]",
-      "note": "격(ㄱ) + 식(ㅅ→된소리) → [격씩]"
-     }
-    ]
-   },
-   {
-    "rule": "경음화 (습관)",
-    "tip": "받침 ㅂ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌어요 · A batchim ㅂ tenses a following plain ㄱ into [ㄲ].",
-    "examples": [
-     {
-      "written": "습관",
-      "pronounced_standard": "[습꽌]",
-      "pronounced_actual": "[습꽌]",
-      "note": "습(ㅂ) + 관(ㄱ→된소리) → [습꽌]"
-     }
-    ]
-   },
-   {
-    "rule": "비음화 (-습니다)",
-    "tip": "받침 ㅂ 뒤에 ㄴ이 오면 ㅂ이 ㅁ으로 바뀌어요 · A batchim ㅂ becomes ㅁ when followed by ㄴ.",
-    "examples": [
-     {
-      "written": "습니다 (예: 수고하셨습니다)",
-      "pronounced_standard": "[슴니다]",
-      "pronounced_actual": "[슴니다]",
-      "note": "습(ㅂ) + 니 → ㅂ이 ㅁ으로 바뀌어 [슴니다]"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep09_l5_01",
+   "title": "경음화 (격식)",
+   "rule": "받침 ㄱ 뒤에 예사소리 ㅅ이 오면 된소리 [ㅆ]으로 바뀌어요 · A batchim ㄱ tenses a following plain ㅅ into [ㅆ].",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "격식",
+      "[격씩]",
+      "격(ㄱ) + 식(ㅅ→된소리) → [격씩]"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep09_l5_02",
+   "title": "경음화 (습관)",
+   "rule": "받침 ㅂ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌어요 · A batchim ㅂ tenses a following plain ㄱ into [ㄲ].",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "습관",
+      "[습꽌]",
+      "습(ㅂ) + 관(ㄱ→된소리) → [습꽌]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep09_l5_03",
+   "title": "비음화 (-습니다)",
+   "rule": "받침 ㅂ 뒤에 ㄴ이 오면 ㅂ이 ㅁ으로 바뀌어요 · A batchim ㅂ becomes ㅁ when followed by ㄴ.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "습니다 (예: 수고하셨습니다)",
+      "[슴니다]",
+      "습(ㅂ) + 니 → ㅂ이 ㅁ으로 바뀌어 [슴니다]"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "트리오끼리는 대기실에서 반말로 대화하지만, 면접실 안에서는 아르투와 면접관들 모두 처음부터 끝까지 완전한 격식체(-습니다체)만 사용해요.",
   "intro_en": "The trio speaks banmal in the waiting room, but inside the interview room, both Arthur and the interviewers use only fully formal -습니다체 speech from start to finish.",

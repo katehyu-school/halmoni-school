@@ -650,47 +650,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "받침 ㅎ + 모음 → ㅎ 탈락 (닿을)",
-    "tip": "받침 ㅎ 뒤에 모음이 오면 ㅎ이 소리 나지 않고 사라져요 · A batchim ㅎ disappears before a following vowel.",
-    "examples": [
-     {
-      "written": "닿을 때까지",
-      "pronounced_standard": "[다을 때까지]",
-      "pronounced_actual": "[다을 때까지]",
-      "note": "ㅎ 탈락 (h-deletion)"
-     }
-    ]
-   },
-   {
-    "rule": "겹받침 ㅀ + 모음 → 연음화 + ㅎ 탈락 (끓이시는)",
-    "tip": "겹받침 ㅀ(ㄹ+ㅎ) 뒤에 모음이 오면 ㄹ이 다음 음절로 넘어가고 ㅎ은 사라져요 · The double batchim ㅀ links its ㄹ to the next syllable while the ㅎ disappears.",
-    "examples": [
-     {
-      "written": "끓이시는",
-      "pronounced_standard": "[끄리시는]",
-      "pronounced_actual": "[끄리시는]",
-      "note": "ㅀ 연음 + ㅎ 탈락"
-     }
-    ]
-   },
-   {
-    "rule": "받침 ㄱ + ㄱ → 경음화, 이어서 연음화 (떡국을)",
-    "tip": "받침 ㄱ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌고, 그 뒤에 모음이 오면 연음도 함께 일어나요 · A batchim ㄱ tenses a following ㄱ into [ㄲ], and links to a vowel after that.",
-    "examples": [
-     {
-      "written": "떡국을",
-      "pronounced_standard": "[떡꾸글]",
-      "pronounced_actual": "[떡꾸글]",
-      "note": "경음화 + 연음화"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep08_l4_01",
+   "title": "받침 ㅎ + 모음 → ㅎ 탈락 (닿을)",
+   "rule": "받침 ㅎ 뒤에 모음이 오면 ㅎ이 소리 나지 않고 사라져요 · A batchim ㅎ disappears before a following vowel.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "닿을 때까지",
+      "[다을 때까지]",
+      "ㅎ 탈락 (h-deletion)"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep08_l4_02",
+   "title": "겹받침 ㅀ + 모음 → 연음화 + ㅎ 탈락 (끓이시는)",
+   "rule": "겹받침 ㅀ(ㄹ+ㅎ) 뒤에 모음이 오면 ㄹ이 다음 음절로 넘어가고 ㅎ은 사라져요 · The double batchim ㅀ links its ㄹ to the next syllable while the ㅎ disappears.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "끓이시는",
+      "[끄리시는]",
+      "ㅀ 연음 + ㅎ 탈락"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep08_l4_03",
+   "title": "받침 ㄱ + ㄱ → 경음화, 이어서 연음화 (떡국을)",
+   "rule": "받침 ㄱ 뒤에 예사소리 ㄱ이 오면 된소리 [ㄲ]으로 바뀌고, 그 뒤에 모음이 오면 연음도 함께 일어나요 · A batchim ㄱ tenses a following ㄱ into [ㄲ], and links to a vowel after that.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "떡국을",
+      "[떡꾸글]",
+      "경음화 + 연음화"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "이 에피소드는 다큐멘터리 나레이션(문어체)으로 쓰여 있어요. 같은 내용을 회화체(존댓말/반말)로 바꾸면 어떻게 달라지는지 비교해 볼게요.",
   "intro_en": "This episode is written in documentary narration style (문어체). Let's compare how the same content sounds in spoken Korean (polite/casual).",

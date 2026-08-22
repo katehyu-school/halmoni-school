@@ -590,47 +590,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "겹받침 ㄶ + 모음 → ㅎ 탈락 + 연음화 (많아요)",
-    "tip": "겹받침 ㄶ 뒤에 모음이 오면 ㅎ이 사라지고 ㄴ이 다음 음절로 넘어가요 · The ㅎ in the double batchim ㄶ disappears before a vowel, and the ㄴ links over.",
-    "examples": [
-     {
-      "written": "많아요",
-      "pronounced_standard": "[마나요]",
-      "pronounced_actual": "[마나요]",
-      "note": "ㅎ 탈락 + 연음화"
-     }
-    ]
-   },
-   {
-    "rule": "겹받침 ㄺ + 모음 → 연음화 (읽어)",
-    "tip": "겹받침 ㄺ(ㄹ+ㄱ) 뒤에 모음이 오면 ㄱ이 다음 음절로 넘어가요 · The ㄱ in the double batchim ㄺ links to the next syllable before a vowel.",
-    "examples": [
-     {
-      "written": "읽어",
-      "pronounced_standard": "[일거]",
-      "pronounced_actual": "[일거]",
-      "note": "ㄺ 연음화"
-     }
-    ]
-   },
-   {
-    "rule": "받침 ㅎ + 모음 → ㅎ 탈락 (쌓여)",
-    "tip": "받침 ㅎ 뒤에 모음이 오면 ㅎ이 소리 나지 않아요 · A batchim ㅎ disappears before a following vowel.",
-    "examples": [
-     {
-      "written": "쌓여",
-      "pronounced_standard": "[싸여]",
-      "pronounced_actual": "[싸여]",
-      "note": "ㅎ 탈락"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep09_l4_01",
+   "title": "겹받침 ㄶ + 모음 → ㅎ 탈락 + 연음화 (많아요)",
+   "rule": "겹받침 ㄶ 뒤에 모음이 오면 ㅎ이 사라지고 ㄴ이 다음 음절로 넘어가요 · The ㅎ in the double batchim ㄶ disappears before a vowel, and the ㄴ links over.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "많아요",
+      "[마나요]",
+      "ㅎ 탈락 + 연음화"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep09_l4_02",
+   "title": "겹받침 ㄺ + 모음 → 연음화 (읽어)",
+   "rule": "겹받침 ㄺ(ㄹ+ㄱ) 뒤에 모음이 오면 ㄱ이 다음 음절로 넘어가요 · The ㄱ in the double batchim ㄺ links to the next syllable before a vowel.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "읽어",
+      "[일거]",
+      "ㄺ 연음화"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep09_l4_03",
+   "title": "받침 ㅎ + 모음 → ㅎ 탈락 (쌓여)",
+   "rule": "받침 ㅎ 뒤에 모음이 오면 ㅎ이 소리 나지 않아요 · A batchim ㅎ disappears before a following vowel.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "쌓여",
+      "[싸여]",
+      "ㅎ 탈락"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "이 에피소드에서 라온 엄마는 아이들에게 반말을 쓰고, 라온과 태오는 엄마에게 존댓말을 써요. 부모-자녀 사이의 반말/존댓말도 집집마다 달라요 — 이 가족은 아이들이 엄마에게 존댓말을 쓰는 스타일이에요.",
   "intro_en": "In this episode, Raon's mom speaks casually (반말) to the kids, while Raon and Taeo speak politely (존댓말) to her. Speech level between parents and kids also varies by family — in this family, the kids happen to use polite speech with their mom.",

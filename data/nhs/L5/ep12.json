@@ -637,47 +637,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "음절끝소리 + 경음화 (붓다)",
-    "tip": "받침 ㅅ은 [ㄷ]으로 소리 나고, 뒤 ㄷ이 된소리가 돼요 · ㅅ batchim → [ㄷ], then tenses the next ㄷ.",
-    "examples": [
-     {
-      "written": "붓다",
-      "pronounced_standard": "[붇따]",
-      "pronounced_actual": "[붇따]",
-      "note": "낫다 → [낟따]도 같은 규칙"
-     }
-    ]
-   },
-   {
-    "rule": "경음화 (압박)",
-    "tip": "받침 [ㅂ] 뒤의 예사소리가 된소리로 바뀌어요 · A plain consonant after a [ㅂ] batchim becomes tense.",
-    "examples": [
-     {
-      "written": "압박붕대",
-      "pronounced_standard": "[압빡뿡대]",
-      "pronounced_actual": "[압빡뿡대]",
-      "note": "압박 → [압빡]"
-     }
-    ]
-   },
-   {
-    "rule": "ㅎ 탈락 (괜찮아질)",
-    "tip": "받침 ㄶ 뒤에 모음이 오면 ㅎ이 발음되지 않아요 · The ㅎ in ㄶ drops before a vowel.",
-    "examples": [
-     {
-      "written": "괜찮아질",
-      "pronounced_standard": "[괜차나질]",
-      "pronounced_actual": "[괜차나질]",
-      "note": "많아 → [마나]도 같은 원리"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep12_l5_01",
+   "title": "음절끝소리 + 경음화 (붓다)",
+   "rule": "받침 ㅅ은 [ㄷ]으로 소리 나고, 뒤 ㄷ이 된소리가 돼요 · ㅅ batchim → [ㄷ], then tenses the next ㄷ.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "붓다",
+      "[붇따]",
+      "낫다 → [낟따]도 같은 규칙"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep12_l5_02",
+   "title": "경음화 (압박)",
+   "rule": "받침 [ㅂ] 뒤의 예사소리가 된소리로 바뀌어요 · A plain consonant after a [ㅂ] batchim becomes tense.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "압박붕대",
+      "[압빡뿡대]",
+      "압박 → [압빡]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep12_l5_03",
+   "title": "ㅎ 탈락 (괜찮아질)",
+   "rule": "받침 ㄶ 뒤에 모음이 오면 ㅎ이 발음되지 않아요 · The ㅎ in ㄶ drops before a vowel.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "괜찮아질",
+      "[괜차나질]",
+      "많아 → [마나]도 같은 원리"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "삼총사는 친구라서 이 편도 처음부터 끝까지 반말로 대화해요. 아르투가 올리비아를 '선생님'이라고 부르는 건 진짜 존댓말이 아니라, 척척 응급처치하는 올리비아가 대단해서 장난스럽게 붙인 호칭이에요.",
   "intro_en": "The trio are friends, so this episode is all in banmal. When Arthur calls Olivia 'teacher,' it isn't real honorific speech — it's a playful nickname for how expertly she handles first aid.",

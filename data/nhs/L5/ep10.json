@@ -622,47 +622,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "자음군단순화 + 경음화 (닭갈비)",
-    "tip": "겹받침 ㄺ은 자음 앞에서 [ㄱ]으로 단순화되고, 그 ㄱ 뒤 예사소리는 된소리로 바뀌어요 · The double batchim ㄺ simplifies to [ㄱ] before a consonant, then tenses the following sound.",
-    "examples": [
-     {
-      "written": "닭갈비",
-      "pronounced_standard": "[닥깔비]",
-      "pronounced_actual": "[닥깔비]",
-      "note": "닭(ㄺ→ㄱㅋ) + 갈비(ㄱ→된소리) → [닥깔비]"
-     }
-    ]
-   },
-   {
-    "rule": "경음화 (막국수)",
-    "tip": "받침 ㄱ 뒤에 예사소리가 오면 된소리로 바뀌어요 · A batchim ㄱ tenses a following plain consonant.",
-    "examples": [
-     {
-      "written": "막국수",
-      "pronounced_standard": "[막꾹쑤]",
-      "pronounced_actual": "[막꾹쑤]",
-      "note": "막(ㄱ) + 국(ㄱ→된소리) + 수(ㅅ→된소리) → [막꾹쑤]"
-     }
-    ]
-   },
-   {
-    "rule": "경음화 (잡다)",
-    "tip": "받침 ㅂ 뒤에 예사소리 ㄷ이 오면 된소리로 바뀌어요 · A batchim ㅂ tenses a following plain ㄷ.",
-    "examples": [
-     {
-      "written": "감 잡다",
-      "pronounced_standard": "[감 잡따]",
-      "pronounced_actual": "[감 잡따]",
-      "note": "잡(ㅂ) + 다(ㄷ→된소리) → [잡따]"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep10_l5_01",
+   "title": "자음군단순화 + 경음화 (닭갈비)",
+   "rule": "겹받침 ㄺ은 자음 앞에서 [ㄱ]으로 단순화되고, 그 ㄱ 뒤 예사소리는 된소리로 바뀌어요 · The double batchim ㄺ simplifies to [ㄱ] before a consonant, then tenses the following sound.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "닭갈비",
+      "[닥깔비]",
+      "닭(ㄺ→ㄱㅋ) + 갈비(ㄱ→된소리) → [닥깔비]"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep10_l5_02",
+   "title": "경음화 (막국수)",
+   "rule": "받침 ㄱ 뒤에 예사소리가 오면 된소리로 바뀌어요 · A batchim ㄱ tenses a following plain consonant.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "막국수",
+      "[막꾹쑤]",
+      "막(ㄱ) + 국(ㄱ→된소리) + 수(ㅅ→된소리) → [막꾹쑤]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep10_l5_03",
+   "title": "경음화 (잡다)",
+   "rule": "받침 ㅂ 뒤에 예사소리 ㄷ이 오면 된소리로 바뀌어요 · A batchim ㅂ tenses a following plain ㄷ.",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "감 잡다",
+      "[감 잡따]",
+      "잡(ㅂ) + 다(ㄷ→된소리) → [잡따]"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "삼총사는 이 에피소드 내내 반말로 대화해요. 격식체처럼 보이는 두 문장('보입니다만?', '알 수 있습니다')은 진짜 존댓말이 아니라, 친구끼리 장난으로 격식을 흉내 내는 유머예요.",
   "intro_en": "The trio speaks banmal throughout this episode. The two sentences that look formal ('보입니다만?', '알 수 있습니다') aren't real politeness — they're friends jokingly imitating formal speech for comic effect.",

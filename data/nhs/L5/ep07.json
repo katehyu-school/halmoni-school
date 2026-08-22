@@ -611,47 +611,65 @@
    ]
   }
  ],
- "pronunciation": {
-  "title": "발음 규칙 · Pronunciation Rules",
-  "items": [
-   {
-    "rule": "비음화 (됐는데)",
-    "tip": "받침 ㅆ(ㄷ으로 발음) 뒤에 ㄴ이 오면 비음 [ㄴ]으로 바뀌어요",
-    "examples": [
-     {
-      "written": "됐는데",
-      "pronounced_standard": "[됀는데]",
-      "pronounced_actual": "[됀는데]",
-      "note": "받침 ㅆ + ㄴ → 비음화로 [됀는데]"
-     }
-    ]
-   },
-   {
-    "rule": "경음화 (걸렸을 텐데)",
-    "tip": "받침 ㄴ 뒤 예사소리 ㄷ은 표준적으로는 경음화되지 않지만, 강조할 때 [ㄸ]처럼 들리기도 해요",
-    "examples": [
-     {
-      "written": "텐데",
-      "pronounced_standard": "[텐데]",
-      "pronounced_actual": "[텐떼]",
-      "note": "받침 ㄴ 뒤 ㄷ은 경음화되지 않는 게 표준이지만, 실제 발화에서는 강조 시 [텐떼]에 가깝게 들리기도 해요"
-     }
-    ]
-   },
-   {
-    "rule": "연음화 (일인당)",
-    "tip": "받침 ㄹ + 이 연음",
-    "examples": [
-     {
-      "written": "일인당",
-      "pronounced_standard": "[이린당]",
-      "pronounced_actual": "[이린당]",
-      "note": "일(ㄹ) + 인 → ㄹ이 인의 초성으로 넘어가서 [이린당]"
-     }
+ "pronunciation": [
+  {
+   "id": "pron_ep07_l5_01",
+   "title": "비음화 (됐는데)",
+   "rule": "받침 ㅆ(ㄷ으로 발음) 뒤에 ㄴ이 오면 비음 [ㄴ]으로 바뀌어요",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "됐는데",
+      "[됀는데]",
+      "받침 ㅆ + ㄴ → 비음화로 [됀는데]"
+     ]
     ]
    }
-  ]
- },
+  },
+  {
+   "id": "pron_ep07_l5_02",
+   "title": "경음화 (걸렸을 텐데)",
+   "rule": "받침 ㄴ 뒤 예사소리 ㄷ은 표준적으로는 경음화되지 않지만, 강조할 때 [ㄸ]처럼 들리기도 해요",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "텐데",
+      "[텐떼]",
+      "받침 ㄴ 뒤 ㄷ은 경음화되지 않는 게 표준이지만, 실제 발화에서는 강조 시 [텐떼]에 가깝게 들리기도 해요"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pron_ep07_l5_03",
+   "title": "연음화 (일인당)",
+   "rule": "받침 ㄹ + 이 연음",
+   "table": {
+    "columns": [
+     "표기 · Spelling",
+     "발음 · Sound",
+     "규칙 · Rule"
+    ],
+    "rows": [
+     [
+      "일인당",
+      "[이린당]",
+      "일(ㄹ) + 인 → ㄹ이 인의 초성으로 넘어가서 [이린당]"
+     ]
+    ]
+   }
+  }
+ ],
  "banmal_jondaemal": {
   "intro_ko": "동아리방에 셋만 있는 편한 사이라 처음부터 끝까지 반말로만 대화해요 — 지금까지 L5 에피소드 중 가장 격식 없는 회화체예요.",
   "intro_en": "It's just the three close friends alone in the club room, so they speak entirely in banmal from start to finish — the most informal spoken register in L5 so far.",
