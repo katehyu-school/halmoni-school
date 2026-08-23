@@ -4793,8 +4793,39 @@ function hcHtml(item){
     +'<div class="hcard-rom">'+item.rom+'</div>'
     +'<div class="hcard-ex">'+item.ex+'</div></div>';
 }
+function sylBlockGuide(mode){
+  function cell(id,area,active,label,sub){
+    const palette={
+      c:{bg:'var(--amber-lt)',fg:'var(--amber-600)',bd:'var(--amber)'},
+      vb:{bg:'var(--green-100)',fg:'#15803d',bd:'var(--green-600)'},
+      vd:{bg:'var(--blue-lt)',fg:'var(--blue)',bd:'var(--blue)'},
+      f:{bg:'var(--amber-lt)',fg:'var(--amber-600)',bd:'var(--amber)'}
+    }[id];
+    const style=active
+      ? 'background:'+palette.bg+';color:'+palette.fg+';border:1.5px solid '+palette.bd+';font-weight:800;'
+      : 'background:var(--gray-100);color:var(--gray-400);border:1.5px dashed var(--gray-200);font-weight:600;';
+    return '<div style="grid-area:'+area+';border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;'+style+'font-size:10.5px;padding:2px;">'+label+(sub?'<span style="display:block;font-size:8px;font-weight:500;margin-top:1px;">'+sub+'</span>':'')+'</div>';
+  }
+  const isC=mode==='cons',isV=mode==='vowel',isF=mode==='cons'||mode==='batchim';
+  const grid='<div style="display:grid;grid-template-columns:46px 46px;grid-template-rows:30px 30px 26px;gap:3px;flex-shrink:0;">'
+    +cell('c','1 / 1 / 2 / 2',isC,'Consonant','자음')
+    +cell('vb','1 / 2 / 3 / 3',isV,'Vowel','모음')
+    +cell('vd','2 / 1 / 3 / 2',isV,'Vowel','모음')
+    +cell('f','3 / 1 / 4 / 3',isF,'Consonant','받침 (Optional)')
+    +'</div>';
+  const captions={
+    cons:'자음은 음절의 <strong>첫소리</strong>(왼쪽 위)로도, <strong>받침</strong>(맨 아래)으로도 올 수 있어요.<br><em>The same consonant can appear as the initial sound (top-left) or as the batchim (bottom) of a syllable.</em>',
+    vowel:'모음은 모양에 따라 자음 <strong>오른쪽</strong>(ㅏㅑㅓㅕㅣ) 또는 <strong>아래</strong>(ㅗㅛㅜㅠㅡ)에 와요.<br><em>Vowels sit beside or below the consonant, depending on their shape.</em>',
+    batchim:'받침(종성)은 블록의 <strong>맨 아래</strong>에 오는 자음이에요 — 있어도 되고 없어도 돼요.<br><em>The batchim sits at the bottom of the block. It is optional — not every syllable has one.</em>'
+  };
+  return '<div style="display:flex;align-items:center;gap:16px;background:#fafaf7;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:16px;flex-wrap:wrap;">'
+    +grid
+    +'<div style="flex:1;min-width:200px;font-size:12px;color:var(--gray-700);line-height:1.6;">'+captions[mode]+'</div>'
+    +'</div>';
+}
 function buildConsPanel(){
-  return '<div class="hangul-section-title">기본 자음 · Basic Consonants (14)</div>'
+  return sylBlockGuide('cons')
+    +'<div class="hangul-section-title">기본 자음 · Basic Consonants (14)</div>'
     +'<div class="hangul-grid">'+CONSONANTS.slice(0,14).map(hcHtml).join('')+'</div>'
     +'<div class="hangul-section-title">쌍자음 · Double Consonants (5)</div>'
     +'<div class="hangul-grid">'+CONSONANTS.slice(14).map(hcHtml).join('')+'</div>'
@@ -4804,7 +4835,8 @@ function buildConsPanel(){
     +'예: ㄱ → initial: <em>g</em> (가) / final: <em>k</em> (국) · Final consonants are always one of 7 representative sounds.</div>';
 }
 function buildVowPanel(){
-  return '<div class="hangul-section-title">기본 모음 · Simple Vowels (10)</div>'
+  return sylBlockGuide('vowel')
+    +'<div class="hangul-section-title">기본 모음 · Simple Vowels (10)</div>'
     +'<div class="hangul-grid">'+VOWELS.slice(0,10).map(hcHtml).join('')+'</div>'
     +'<div class="hangul-section-title">복합 모음 · Compound Vowels (11)</div>'
     +'<div class="hangul-grid">'+VOWELS.slice(10).map(hcHtml).join('')+'</div>'
@@ -5183,7 +5215,8 @@ function buildBatchimPanel(){
       +'<div class="batchim-members">'+mems+'</div>'
       +'</div>';
   }).join('');
-  return '<div class="basics-intro" style="margin-bottom:16px;"><strong>받침</strong>은 음절 아래에 오는 자음이에요. 어떤 자음이 와도 <strong>7가지 소리</strong>로만 발음돼요!<br><em>Batchim = final consonant. No matter which consonant, only 7 sounds are used.</em></div>'
+  return sylBlockGuide('batchim')
+    +'<div class="basics-intro" style="margin-bottom:16px;"><strong>받침</strong>은 음절 아래에 오는 자음이에요. 어떤 자음이 와도 <strong>7가지 소리</strong>로만 발음돼요!<br><em>Batchim = final consonant. No matter which consonant, only 7 sounds are used.</em></div>'
     +'<div class="batchim-groups">'+grpHtml+'</div>'
     +'<div class="structure-note">💡 받침 뒤에 모음이 오면 연음이 돼요! <em>국어 → [구거], 음악 → [으막]</em><br><em>When batchim is followed by a vowel, the sound carries over!</em></div>';
 }
