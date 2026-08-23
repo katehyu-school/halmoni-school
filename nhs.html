@@ -6067,7 +6067,7 @@ function buildHonorifics(){
     +'<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:10px 0 6px">명사도 통째로 바뀌어요 · Nouns swap too</div>'
     +'<table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:8px">'
     +'<tr style="color:var(--warm-400);font-size:11px"><th style="text-align:left;padding:3px 8px 6px">평어</th><th style="text-align:left;padding:3px 8px 6px">→ 높임 명사</th><th style="text-align:left;padding:3px 8px 6px">예문</th></tr>'
-    +[['말','말씀','뭐라고 말씀하셨어요?'],['이름','성함','성함이 어떻게 되세요?'],['나이','연세','연세가 어떻게 되세요?'],['집','댁','댁이 어디세요?'],['밥','진지','진지 드세요.']]
+    +[['말','말씀','우리 할머니 말씀에 의하면...'],['이름','성함','성함이 어떻게 되세요?'],['나이','연세','연세가 어떻게 되세요?'],['집','댁','댁이 어디세요?'],['밥','진지','진지 드세요.']]
       .map(r=>'<tr style="border-top:1px solid rgba(0,0,0,.06)"><td style="padding:5px 8px">'+r[0]+'</td><td style="padding:5px 8px;font-weight:700;color:var(--teal-dark)" onclick="speakTTS(\''+r[1]+'\')">'+r[1]+' 🔊</td><td style="padding:5px 8px;font-style:italic;color:var(--warm-500)">'+r[2]+'</td></tr>').join('')
     +'</table>'
     +'<div style="font-size:12.5px;line-height:1.8;color:var(--warm-700)">'
