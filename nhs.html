@@ -3974,19 +3974,26 @@ function pickIrregAns(btn, chosen, correct){
 // ── WRITING CANVAS ─────────────────────────────────────
 let wCanvas=null,wCtx=null,wDrawing=false,wLX=0,wLY=0;
 const WRITE_CHARS=[
-  {kr:'가',rom:'ga'},{kr:'나',rom:'na'},{kr:'다',rom:'da'},{kr:'라',rom:'ra'},
-  {kr:'마',rom:'ma'},{kr:'바',rom:'ba'},{kr:'사',rom:'sa'},{kr:'아',rom:'a'},
-  {kr:'자',rom:'ja'},{kr:'차',rom:'cha'},{kr:'카',rom:'ka'},{kr:'타',rom:'ta'},
-  {kr:'파',rom:'pa'},{kr:'하',rom:'ha'},{kr:'한',rom:'han'},{kr:'국',rom:'guk'},
-  {kr:'어',rom:'eo'},{kr:'학',rom:'hak'},{kr:'교',rom:'gyo'},{kr:'선',rom:'seon'},
-  {kr:'생',rom:'saeng'},{kr:'님',rom:'nim'},
+  {kr:'가',rom:'ga',grp:'syl'},{kr:'나',rom:'na',grp:'syl'},{kr:'다',rom:'da',grp:'syl'},{kr:'라',rom:'ra',grp:'syl'},
+  {kr:'마',rom:'ma',grp:'syl'},{kr:'바',rom:'ba',grp:'syl'},{kr:'사',rom:'sa',grp:'syl'},{kr:'아',rom:'a',grp:'syl'},
+  {kr:'자',rom:'ja',grp:'syl'},{kr:'차',rom:'cha',grp:'syl'},{kr:'카',rom:'ka',grp:'syl'},{kr:'타',rom:'ta',grp:'syl'},
+  {kr:'파',rom:'pa',grp:'syl'},{kr:'하',rom:'ha',grp:'syl'},{kr:'한',rom:'han',grp:'syl'},{kr:'국',rom:'guk',grp:'syl'},
+  {kr:'어',rom:'eo',grp:'syl'},{kr:'학',rom:'hak',grp:'syl'},{kr:'교',rom:'gyo',grp:'syl'},{kr:'선',rom:'seon',grp:'syl'},
+  {kr:'생',rom:'saeng',grp:'syl'},{kr:'님',rom:'nim',grp:'syl'},
+  // 의미 있는 기초 단어 — 위 낱글자들로 조합되는 실제 단어라 이어서 연습하면 자연스러움
+  {kr:'안녕',rom:'an-nyeong',grp:'word',en:'hi / bye'},{kr:'이름',rom:'i-reum',grp:'word',en:'name'},
+  {kr:'우리',rom:'u-ri',grp:'word',en:'we / our'},{kr:'학교',rom:'hak-gyo',grp:'word',en:'school'},
+  {kr:'한국',rom:'han-guk',grp:'word',en:'Korea'},{kr:'선생님',rom:'seon-saeng-nim',grp:'word',en:'teacher'},
 ];
 let curWriteChar=WRITE_CHARS[0];
+function _wGuideSize(str){ return str.length<=1?80:str.length===2?46:32; }
 function selectWriteChar(kr){
   curWriteChar=WRITE_CHARS.find(c=>c.kr===kr)||WRITE_CHARS[0];
   document.querySelectorAll('.wchar-btn').forEach(b=>b.classList.toggle('active',b.textContent===kr));
-  const gc=document.getElementById('wguide-char'),gr=document.getElementById('wguide-rom');
-  if(gc)gc.textContent=curWriteChar.kr;if(gr)gr.textContent=curWriteChar.rom;
+  const gc=document.getElementById('wguide-char'),gr=document.getElementById('wguide-rom'),ge=document.getElementById('wguide-en');
+  if(gc){gc.textContent=curWriteChar.kr;gc.style.fontSize=_wGuideSize(curWriteChar.kr)+'px';}
+  if(gr)gr.textContent=curWriteChar.rom;
+  if(ge)ge.textContent=curWriteChar.en||'';
   clearCanvas();
 }
 function initWritingCanvas(){
@@ -5595,13 +5602,19 @@ function buildNumbers(){
 // ── WRITING RENDER ─────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildWriting(){
+  const syl=WRITE_CHARS.filter(c=>c.grp!=='word'), word=WRITE_CHARS.filter(c=>c.grp==='word');
+  const btn=(c,i)=>'<button class="wchar-btn'+(i===0?' active':'')+'" onclick="selectWriteChar(\''+c.kr+'\')">'+c.kr+'</button>';
   return '<div class="basics-intro">글자를 고른 후 캔버스에 써보세요. 옆의 가이드를 보면서 따라 써요!<br><em>Choose a character and practice writing. Look at the guide!</em></div>'
-    +'<div class="writing-chars">'+WRITE_CHARS.map((c,i)=>'<button class="wchar-btn'+(i===0?' active':'')+'" onclick="selectWriteChar(\''+c.kr+'\')">'+c.kr+'</button>').join('')+'</div>'
+    +'<div class="hangul-section-title">글자 하나씩 · One Letter at a Time</div>'
+    +'<div class="writing-chars">'+syl.map((c,i)=>btn(c,i)).join('')+'</div>'
+    +'<div class="hangul-section-title">의미 있는 단어 · Real Words</div>'
+    +'<div class="writing-chars">'+word.map((c)=>btn(c,-1)).join('')+'</div>'
     +'<div class="writing-canvas-wrap">'
     +'<div class="writing-canvas-box"><canvas id="writing-canvas" class="writing-canvas" width="240" height="240"></canvas>'
     +'<div class="writing-btns" style="margin-top:10px;"><button class="writing-btn" onclick="clearCanvas()">↺ 지우기</button></div></div>'
-    +'<div class="writing-guide-box"><div class="writing-guide-char" id="wguide-char">'+WRITE_CHARS[0].kr+'</div>'
+    +'<div class="writing-guide-box"><div class="writing-guide-char" id="wguide-char" style="font-size:'+_wGuideSize(WRITE_CHARS[0].kr)+'px">'+WRITE_CHARS[0].kr+'</div>'
     +'<div class="writing-guide-rom" id="wguide-rom">'+WRITE_CHARS[0].rom+'</div>'
+    +'<div class="writing-guide-en" id="wguide-en" style="font-size:11px;color:var(--warm-500);margin-top:2px">'+(WRITE_CHARS[0].en||'')+'</div>'
     +'<div class="writing-guide-strokes">획순: 위→아래<br>왼→오른쪽</div></div></div>'
     +'<div class="structure-note">💡 <strong>획순 기본 원칙:</strong> ① 위에서 아래 ② 왼쪽에서 오른쪽 ③ 가로획 먼저<br><em>Stroke order: ① Top to bottom ② Left to right ③ Horizontal before vertical</em></div>';
 }

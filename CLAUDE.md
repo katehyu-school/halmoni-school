@@ -13,6 +13,13 @@
 > — ✅ **검증**: `json.load` 통과, 키 위치 L4 ep02/ep12와 동일 확인, **Node vm으로 `buildBanmal()` 직접 실행**해 intro/각 row/tip 문자열이 반환값에 실제 포함되는지 확인(단순 문법체크 아님 — 이전 dead-code 실수 재발 방지 원칙 유지). row별 `note` 필드는 buildBanmal()이 애초에 렌더링하지 않는 필드라는 것도 확인(L4 ep02/ep12도 마찬가지 — 기존 관행과 일치, 버그 아님).
 > — ⏳ **git add/commit/push 대기 중** — 선생님 검토 후 필요시 문구 수정.
 
+> ✍️ **2026-08-23 완료 (글쓰기 연습 — 낱글자만 있던 걸 의미 있는 단어까지 확장)**
+> — 앞선 세션에서 "약속했던" 보강. `WRITE_CHARS`가 가나다라... 22개 낱글자뿐이었던 걸, 그 낱글자들로 이미 조합되는 실제 단어 6개(안녕·이름·우리·학교·한국·선생님, 각각 `grp:'word'`+영어 뜻 `en` 필드 추가)를 이어서 추가. 안녕·이름은 L1 ep01 첫 어휘와 정확히 겹쳐서 자연스럽게 이어짐.
+> — `buildWriting()`을 "글자 하나씩"/"의미 있는 단어" 두 섹션으로 분리 렌더링(`hangul-section-title` 재사용, 새 CSS 불필요). 가이드 박스는 원래 글자 1개(80px) 기준이라 여러 글자 단어를 넣으면 156px 폭을 넘치는 문제가 있어서, `_wGuideSize(str)` 헬퍼로 길이에 따라 80px(1자)/46px(2자)/32px(3자+)로 자동 축소하도록 `selectWriteChar()`와 초기 렌더 양쪽에 적용. 단어 선택 시 영어 뜻도 가이드 박스에 같이 표시(`wguide-en`).
+> — ✅ **검증**: `node --check` 통과, **Node vm으로 `buildWriting()` + `selectWriteChar()` 직접 실행** — 두 섹션 타이틀 존재, 낱글자 버튼 22개 그대로, 단어 버튼(선생님 등) 존재, 3글자 선택 시 32px·2글자 46px·1글자 80px로 폰트 크기 정확히 전환, 단어 선택 시 영어 뜻 채워지고 낱글자 선택 시 비워지는 것까지 확인. null byte 0, `</html>` 1개.
+> — ⚠️ **다음 단계로 미룬 것**: "내 이름을 직접 입력해서 한글로 조립해보기"(영상 덱에서 논의됐던 개인화 활동)는 영어 이름 → 한글 발음 매핑 알고리즘이 필요해서 훨씬 큰 기능임 — 이번엔 정적 단어 목록 확장까지만 하고, 개인화 이름 조립 기능은 선생님 판단(어떤 영어 소리를 어떤 자모로 매핑할지 등)이 필요한 별도 작업으로 남겨둠.
+> — ⏳ **git add/commit/push 대기 중**.
+
 > 🌱 **2026-08-23 완료 (Start Here 사이드바 — 한글 기초 vs 레퍼런스 명확히 분리)**
 > — 선생님이 Start Here의 "배우기" 카테고리(11개 항목)가 첫 방문자에게 시각적으로 안 구분된다고 지적, "한글을 배워요"+"글쓰기 연습" 외 나머지(필수낱말카드·문장구조·띄어쓰기)는 사실 순차 학습이 아니라 참고자료 성격이라는 논의 끝에 재구성: `BASICS_TOPICS`에서 essential/structure/spacing의 `grp`를 `'learn'→'ref'`로 변경 — 이제 **한글 기초(learn) = hangul+writing 2개, 레퍼런스(ref) = 9개**(essential·structure·spacing·greetings·numbers·verbs·questions·honorifics·connectors).
 > — `buildBasicsSidebar()`에서 Learn 그룹 헤더를 "🌱 배우기 · Learn" → **"🔤 한글 기초 · Hangul Basics"**로 변경, hangul·writing 두 항목만 `basics-topic-item`(평범한 리스트 행) 대신 로드맵·배치테스트와 똑같은 `lt-item pt-item` 굵은 박스 스타일(`heroItem`)로 렌더링해 첫 진입자 눈에 확 띄게 함. `loadBasics()`의 active-토글 셀렉터도 `.basics-topic-item`만 지우던 걸 `.basics-topic-item,.lt-item,.pt-item`로 넓혀서 hero 항목 클릭 시에도 로드맵/배치테스트와 일관되게 active 상태가 관리되도록 함.
