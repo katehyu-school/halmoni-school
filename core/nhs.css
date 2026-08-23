@@ -613,6 +613,13 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .writing-guide-char{font-size:80px;font-weight:900;color:var(--teal-dark);line-height:1;}
 .writing-guide-rom{font-size:13px;color:var(--teal);font-weight:600;margin-top:4px;}
 .writing-guide-strokes{font-size:11px;color:var(--warm-500);margin-top:4px;}
+.writing-word-info{font-size:13.5px;color:var(--warm-700);margin-bottom:12px;}
+.writing-word-info #wword-rom{font-weight:700;color:var(--teal-dark);}
+.writing-word-cells{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+.writing-cell{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.writing-canvas-sm{width:120px;height:120px;}
+.writing-cell-label{font-size:13px;font-weight:700;color:var(--warm-700);text-align:center;}
+.writing-cell-rom{display:block;font-size:11px;color:var(--warm-400);font-weight:500;}
 .writing-btns{display:flex;gap:8px;flex-wrap:wrap;}
 .writing-btn{padding:7px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-xl);font-size:12px;cursor:pointer;background:#fff;color:var(--warm-700);font-family:var(--font-kr);transition:all .2s;}
 .writing-btn:hover{border-color:var(--teal);color:var(--teal);}

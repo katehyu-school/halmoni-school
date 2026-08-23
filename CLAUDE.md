@@ -7,6 +7,14 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> ✍️ **2026-08-23 완료 (글쓰기 연습 — 탭 분리 + 단어는 글자 수만큼 칸 나눔)**
+> — 바로 아래 항목("낱글자→단어 확장")에 이어서 선생님 지시로 UI 개선: "글자 하나씩"/"의미 있는 단어"를 단순 세로 배치가 아니라 **실제 탭**으로 전환(기존 재사용 가능한 탭 인프라 `switchBtab(pfx,tabId)` 그대로 활용, `pfx='wr'`, 탭 id `'syl'`/`'word'`), 그리고 단어 쓰기 모드는 캔버스 1개에 다 쑤셔넣던 것에서 **글자 수만큼 개별 캔버스 칸이 생기는 방식**으로 재설계(예: "선생님" 선택 시 3칸, 칸마다 해당 음절+로마자 표기).
+> — 기존에 단일 전역 캔버스(`wCanvas`/`wCtx`+마우스/터치 리스너)로 짜여있던 걸, 여러 캔버스가 동시에 존재할 수 있는 **클로저 기반 범용 함수**로 리팩터링: `_wBindCanvas(canvas)`(캔버스 하나를 받아 그 캔버스 전용 컨텍스트·그리기 리스너를 바인딩, `canvas._wBound`/`canvas._wCtx`로 중복 바인딩 방지)+`_wDrawGrid(canvas)`(米자 격자선을 해당 캔버스에 그림). 단어 모드는 `renderWordCells()`가 `curWriteWord.kr`을 음절 단위로 쪼개 그 개수만큼 `<canvas class="writing-canvas-sm">`를 동적 생성하고 각각 `_wBindCanvas`로 바인딩, 로마자는 기존에 하이픈으로 구분해둔 `rom`(예: `seon-saeng-nim`)을 `.split('-')`해서 칸마다 라벨링. `clearWordCanvases()`는 모든 칸을 순회하며 `_wDrawGrid` 재호출.
+> — `core/nhs.css`에 `.writing-word-info`/`.writing-word-cells`/`.writing-cell`/`.writing-canvas-sm`/`.writing-cell-label`/`.writing-cell-rom` 신규 추가(120×120 소형 칸, flex-wrap 배치).
+> — ✅ **검증**: `node --check` 통과(447,428자, 스크립트 블록 1개), **Node vm으로 실제 동작 테스트**(가짜 DOM/canvas/context 객체로 `buildWriting()`→탭 마커 존재, `initWritingCanvas()`→단일 캔버스 바인딩+기본 단어(안녕) 칸 2개 생성 및 바인딩 확인, `selectWriteChar('나')`→가이드 갱신, `selectWriteWord('선생님')`→칸 3개로 재생성+로마자/영어 뜻 갱신+재바인딩, `clearWordCanvases()`/`clearCanvas()`→각 캔버스 컨텍스트에 `clearRect` 호출 확인) 전부 통과. 파일 전체 sanity: null byte 0(바이트 레벨 재확인), `</html>` 1개, CSS 중괄호 654/654 균형.
+> — ⚠️ **다음 단계로 미룬 것**: 여전히 정적 단어 목록(6개)만 지원 — "내 이름 직접 입력해서 조립" 개인화 기능은 이전 항목과 동일하게 선생님의 영어음-한글자모 매핑 설계가 필요해 범위 밖으로 유지.
+> — ⏳ **git add/commit/push 대기 중**.
+
 > 🙏 **2026-08-23 완료 (L4 ep01 반말/존댓말 탭 신규 — 유일하게 빠져있던 편)**
 > — 선생님이 "L4 ep01엔 반말/존댓말이 없다"고 지적 → 확인 결과 **렌더링 버그 아님**: `nhs.html` 1141번 줄에서 `!!DATA.banmal_jondaemal` 조건부 렌더링이고, `L4/ep01.json`엔 이 키가 정말로 없었음(72편 중 유일). 우체국 직원↔할머니, 초면·공식 업무라 반말이 전혀 없는 장면인데, 똑같은 상황 유형인 L4 ep12(라온 엄마↔주민센터 직원)는 "반말이 없는 이유 설명 + 존댓말 예문 2줄 + 비교: 만약 친한 사이였다면? 가상 반말 1줄" 템플릿이 이미 있어서, 그 형식 그대로 맞춰 신규 작성 — 우연히 누락된 걸로 판단.
 > — `data/nhs/L4/ep01.json`에 `pronunciation` 다음, `real_life` 앞자리(다른 편들과 동일 위치)로 `banmal_jondaemal` 신설: intro(반말이 없는 이유)+rows 3개(할머니→직원 질문/직원→손님 안내/비교: 친한 사이였다면)+tip. 선생님 검토용 초안이라 콘텐츠 확정은 아님.
