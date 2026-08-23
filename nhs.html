@@ -4777,13 +4777,14 @@ function switchBtab(pfx,tabId){
 // ── HANGUL RENDER ──────────────────────────────────────
 // ══════════════════════════════════════════════════════
 function buildHangul(){
-  const tabs=[['cons','자음 Consonants'],['vowels','모음 Vowels'],['batchim','받침 Batchim'],['syllable','음절 Syllables'],['practice','✍️ 연습 Practice']];
+  const tabs=[['cons','자음 Consonants'],['vowels','모음 Vowels'],['batchim','받침 Batchim'],['syllable','음절 Syllables'],['pronounce','🔊 이름과 소리'],['practice','✍️ 연습 Practice']];
   return '<div class="basics-intro">한글(Hangul)은 1443년 세종대왕이 만든 소리 문자예요. 자음 19개 + 모음 21개로 이루어져 있어요.<br><em>Hangul is a phonetic alphabet invented by King Sejong in 1443.</em></div>'
     +'<div class="btab-bar">'+tabs.map(([id,lbl],i)=>'<button class="btab'+(i===0?' active':'')+'" data-btab-group="bp-hangul" data-tab="'+id+'" onclick="switchBtab(\'bp-hangul\',\''+id+'\')">'+lbl+'</button>').join('')+'</div>'
     +'<div id="bp-hangul-cons" class="btab-panel active">'+buildConsPanel()+'</div>'
     +'<div id="bp-hangul-vowels" class="btab-panel">'+buildVowPanel()+'</div>'
     +'<div id="bp-hangul-batchim" class="btab-panel">'+buildBatchimPanel()+'</div>'
     +'<div id="bp-hangul-syllable" class="btab-panel">'+buildSylPanel()+'</div>'
+    +'<div id="bp-hangul-pronounce" class="btab-panel">'+buildPronouncePanel()+'</div>'
     +'<div id="bp-hangul-practice" class="btab-panel">'+buildHangulPractice()+'</div>';
 }
 function hcHtml(item){
@@ -5198,17 +5199,21 @@ function buildSylPanel(){
     +'<button class="syl-clear-btn" onclick="clearSyl()">↺ 초기화</button>'
     +'</div>';
 }
+// 7대표음 그룹 — 같은 소리로 발음되는 받침들 (batchim 탭 + 이름과 소리 탭에서 공유)
+const BATCHIM_GROUPS=[
+  {sound:'ㄱ',rom:'k  (윽)',tts:'윽',audio:'data/elem/level1/TTS/batchim/02_윽.mp3',ex:'국 (soup)',members:[{kr:'ㄱ',ex:'국'},{kr:'ㅋ',ex:'부엌'},{kr:'ㄲ',ex:'닭'}]},
+  {sound:'ㄴ',rom:'n  (은)',tts:'은',audio:'data/elem/level1/TTS/batchim/04_은.mp3',ex:'산 (mountain)',members:[{kr:'ㄴ',ex:'산'}]},
+  {sound:'ㄷ',rom:'t  (읃)',tts:'읃',audio:'data/elem/level1/TTS/batchim/06_읃.mp3',ex:'곧 (straight)',members:[{kr:'ㄷ',ex:'곧'},{kr:'ㅅ',ex:'옷'},{kr:'ㅆ',ex:'있다'},{kr:'ㅈ',ex:'낮'},{kr:'ㅊ',ex:'꽃'},{kr:'ㅌ',ex:'끝'},{kr:'ㅎ',ex:'좋다'}]},
+  {sound:'ㄹ',rom:'l  (을)',tts:'을',audio:'data/elem/level1/TTS/batchim/08_을.mp3',ex:'말 (horse)',members:[{kr:'ㄹ',ex:'말'}]},
+  {sound:'ㅁ',rom:'m  (음)',tts:'음',audio:'data/elem/level1/TTS/batchim/10_음.mp3',ex:'봄 (spring)',members:[{kr:'ㅁ',ex:'봄'}]},
+  {sound:'ㅂ',rom:'p  (읍)',tts:'읍',audio:'data/elem/level1/TTS/batchim/12_읍.mp3',ex:'밥 (rice)',members:[{kr:'ㅂ',ex:'밥'},{kr:'ㅍ',ex:'앞'}]},
+  {sound:'ㅇ',rom:'ng (응)',tts:'응',audio:'data/elem/level1/TTS/batchim/14_응.mp3',ex:'강 (river)',members:[{kr:'ㅇ',ex:'강'}]},
+];
+// 자음 글자 → 받침소리(대표음) 역참조 맵 — 이름과 소리 탭에서 사용
+const BATCHIM_SOUND_BY_CONS={};
+BATCHIM_GROUPS.forEach(function(g){g.members.forEach(function(m){BATCHIM_SOUND_BY_CONS[m.kr]={tts:g.tts,audio:g.audio};});});
 function buildBatchimPanel(){
-  // 7대표음 그룹 — 같은 소리로 발음되는 받침들
-  const groups=[
-    {sound:'ㄱ',rom:'k  (윽)',tts:'윽',audio:'data/elem/level1/TTS/batchim/02_윽.mp3',ex:'국 (soup)',members:[{kr:'ㄱ',ex:'국'},{kr:'ㅋ',ex:'부엌'},{kr:'ㄲ',ex:'닭'}]},
-    {sound:'ㄴ',rom:'n  (은)',tts:'은',audio:'data/elem/level1/TTS/batchim/04_은.mp3',ex:'산 (mountain)',members:[{kr:'ㄴ',ex:'산'}]},
-    {sound:'ㄷ',rom:'t  (읃)',tts:'읃',audio:'data/elem/level1/TTS/batchim/06_읃.mp3',ex:'곧 (straight)',members:[{kr:'ㄷ',ex:'곧'},{kr:'ㅅ',ex:'옷'},{kr:'ㅆ',ex:'있다'},{kr:'ㅈ',ex:'낮'},{kr:'ㅊ',ex:'꽃'},{kr:'ㅌ',ex:'끝'},{kr:'ㅎ',ex:'좋다'}]},
-    {sound:'ㄹ',rom:'l  (을)',tts:'을',audio:'data/elem/level1/TTS/batchim/08_을.mp3',ex:'말 (horse)',members:[{kr:'ㄹ',ex:'말'}]},
-    {sound:'ㅁ',rom:'m  (음)',tts:'음',audio:'data/elem/level1/TTS/batchim/10_음.mp3',ex:'봄 (spring)',members:[{kr:'ㅁ',ex:'봄'}]},
-    {sound:'ㅂ',rom:'p  (읍)',tts:'읍',audio:'data/elem/level1/TTS/batchim/12_읍.mp3',ex:'밥 (rice)',members:[{kr:'ㅂ',ex:'밥'},{kr:'ㅍ',ex:'앞'}]},
-    {sound:'ㅇ',rom:'ng (응)',tts:'응',audio:'data/elem/level1/TTS/batchim/14_응.mp3',ex:'강 (river)',members:[{kr:'ㅇ',ex:'강'}]},
-  ];
+  const groups=BATCHIM_GROUPS;
   const grpHtml=groups.map(g=>{
     const mems=g.members.map(m=>'<div class="batchim-member"><div class="batchim-member-kr">'+m.kr+'</div><div class="batchim-member-ex">'+m.ex+'</div></div>').join('');
     return '<div class="batchim-group">'
@@ -5225,6 +5230,61 @@ function buildBatchimPanel(){
     +'<div class="basics-intro" style="margin-bottom:16px;"><strong>받침</strong>은 음절 아래에 오는 자음이에요. 어떤 자음이 와도 <strong>7가지 소리</strong>로만 발음돼요!<br><em>Batchim = final consonant. No matter which consonant, only 7 sounds are used.</em></div>'
     +'<div class="batchim-groups">'+grpHtml+'</div>'
     +'<div class="structure-note">💡 받침 뒤에 모음이 오면 연음이 돼요! <em>국어 → [구거], 음악 → [으막]</em><br><em>When batchim is followed by a vowel, the sound carries over!</em></div>';
+}
+
+// ══════════════════════════════════════════════════════
+// ── 이름과 소리 (자음 이름이 곧 발음 — Name → Sound) ────
+// ══════════════════════════════════════════════════════
+function buildPronouncePanel(){
+  const nameEx=[
+    {kr:'ㄱ',name:'기역',rom:'Gi-yeok',initSyl:'기',initSnd:'g',finSyl:'역',finSnd:'k'},
+    {kr:'ㄹ',name:'리을',rom:'Ri-eul',initSyl:'리',initSnd:'r',finSyl:'을',finSnd:'l'}
+  ];
+  const nameExHtml=nameEx.map(function(e){
+    return '<div class="pron-example-card">'
+      +'<div class="pron-example-hdr">&lt;'+e.kr+'&gt; '+e.name+' <span class="pron-example-rom">('+e.rom+')</span></div>'
+      +'<div class="pron-example-row"><span class="pron-example-label">초성 INITIAL SOUND (1)</span><span class="pron-example-val">'+e.initSyl+' <b style="color:var(--teal-dark)">('+e.initSnd+')</b></span></div>'
+      +'<div class="pron-example-row"><span class="pron-example-label">종성 FINAL SOUND (4 / 받침)</span><span class="pron-example-val">'+e.finSyl+' <b style="color:var(--coral)">('+e.finSnd+')</b></span></div>'
+      +'<div class="pron-example-note">💡 영어 표기는 달라도(<b>'+e.initSnd+'</b> vs <b>'+e.finSnd+'</b>) 한글에서는 같은 자음 '+e.kr+'예요 — 초성이냐 받침이냐에 따라 소리만 달라져요.<br><em>Even though the English spelling differs (<b>'+e.initSnd+'</b> vs <b>'+e.finSnd+'</b>), it is the same Korean consonant '+e.kr+' — only the sound changes depending on whether it is the initial or the final sound.</em></div>'
+      +'</div>';
+  }).join('');
+
+  const specials=[
+    {kr:'ㅇ',name:'이응',rom:'i-ung',initSyl:'이',initSnd:'∅',initNote:'첫소리일 땐 소리값이 없고, 다음 모음 소리만 나요.',initNoteEn:'As the initial sound, it has no sound of its own — you only hear the vowel that follows.',finSyl:'응',finSnd:'ng',finNote:'받침일 땐 \'ng\' 소리가 나요.',finNoteEn:'As the batchim, it sounds like \'ng\'.'},
+    {kr:'ㅅ',name:'시옷',rom:'si-ot',initSyl:'시',initSnd:'s',initNote:'초성 역할을 해요.',initNoteEn:'Acts as the initial sound.',finSyl:'옷',finSnd:'t',finNote:'이름은 \'옷\'이지만 받침일 땐 \'t\' 소리가 나요.',finNoteEn:'The name suggests \'ot\', but as the batchim it actually sounds like \'t\'.'},
+    {kr:'ㅈ',name:'지읒',rom:'ji-eut',initSyl:'지',initSnd:'j',initNote:'초성 역할을 해요.',initNoteEn:'Acts as the initial sound.',finSyl:'읒',finSnd:'t',finNote:'이름은 \'읒\'이지만 받침일 땐 \'t\' 소리가 나요.',finNoteEn:'The name suggests \'j\', but as the batchim it actually sounds like \'t\'.'}
+  ];
+  const specialsHtml=specials.map(function(s){
+    return '<div class="pron-special-card">'
+      +'<div class="pron-special-hdr">'+s.name+' <span class="pron-special-tag">&lt;'+s.kr+'&gt;</span></div>'
+      +'<div class="pron-special-pron">발음 · Pronounced as: <b>'+s.rom+'</b></div>'
+      +'<div class="pron-special-row"><b>'+s.initSyl+'</b> <span style="color:var(--teal-dark)">('+s.initSnd+')</span>: '+s.initNote+' <em>'+s.initNoteEn+'</em></div>'
+      +'<div class="pron-special-row"><b>'+s.finSyl+'</b> <span style="color:var(--coral)">('+s.finSnd+')</span>: '+s.finNote+' <em>'+s.finNoteEn+'</em></div>'
+      +'</div>';
+  }).join('');
+
+  const cardsHtml=CONSONANTS.slice(0,14).map(function(c){
+    const init=HP_CONS_SOUND[c.kr]||{};
+    const fin=BATCHIM_SOUND_BY_CONS[c.kr]||{};
+    return '<div class="pron-card">'
+      +'<div class="pron-card-kr">'+c.kr+'</div>'
+      +'<div class="pron-card-name">'+c.name+'</div>'
+      +'<div class="pron-sound-row">'
+      +'<button class="pron-btn pron-btn-init" onclick="speak(\''+(init.syl||c.kr)+'\''+(init.audio?',\''+init.audio+'\'':'')+')">🔊 첫소리<span class="pron-btn-en">Initial</span><span class="pron-btn-syl">'+(init.syl||'')+'</span></button>'
+      +(fin.tts?'<button class="pron-btn pron-btn-final" onclick="speak(\''+fin.tts+'\''+(fin.audio?',\''+fin.audio+'\'':'')+')">🔊 받침소리<span class="pron-btn-en">Batchim</span><span class="pron-btn-syl">'+fin.tts+'</span></button>':'')
+      +'</div>'
+      +'</div>';
+  }).join('');
+
+  return sylBlockGuide('syllable')
+    +'<div class="basics-intro">한글 자음의 <strong>이름 자체가 발음을 알려줘요!</strong> 이름의 앞 음절은 초성(첫소리), 뒤 음절은 종성(받침소리)이에요. 아래 카드의 (1), (4)는 위 그림의 위치 번호예요.<br><em>The name of a Korean consonant tells you how to pronounce it — the first syllable is the initial sound, the second syllable is the final (batchim) sound. The (1) and (4) below refer to the position numbers in the diagram above.</em></div>'
+    +'<div class="pron-examples">'+nameExHtml+'</div>'
+    +'<div class="hangul-section-title">이름이 살짝 다른 경우의 예시 · Examples of Special Cases</div>'
+    +'<div class="pron-specials">'+specialsHtml+'</div>'
+    +'<div class="structure-note">💡 기억나세요? ㅅ·ㅈ받침은 이름과 다르게 항상 [t]로 소리나요 — 받침 탭에서 배운 7대표음 규칙이 여기서도 그대로 적용돼요. (옷 → [옫], 낮 → [낟])<br><em>Remember? As a batchim, ㅅ and ㅈ always sound like [t] — the same 7-representative-sounds rule from the Batchim tab applies here too. (옷 → [ot], 낮 → [nat])</em> <a href="javascript:void(0)" onclick="switchBtab(\'bp-hangul\',\'batchim\')" style="color:var(--teal);font-weight:700;text-decoration:none;">→ 받침 탭에서 다시 보기</a></div>'
+    +'<div class="hangul-section-title">자음 카드로 듣기 · Listen to Each Consonant</div>'
+    +'<div class="basics-intro" style="margin-bottom:14px;">같은 자음이라도 <strong>첫소리</strong>일 때와 <strong>받침소리</strong>일 때 다르게 들려요. 버튼을 눌러 두 소리를 비교해 보세요!<br><em>The same consonant sounds different as an initial sound vs. a final (batchim) sound — tap the buttons to compare!</em></div>'
+    +'<div class="pron-cards-grid">'+cardsHtml+'</div>';
 }
 
 // ══════════════════════════════════════════════════════
@@ -5253,8 +5313,8 @@ const HP_CODA=[
   {kr:'강',rep:'ㅇ'},{kr:'방',rep:'ㅇ'}
 ];
 const HP_CODA_REPS=['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅇ'];
-// 자음 '소리'(자음+ㅡ) 음원 — 이름(기역)이 아니라 소리(그)를 재생. ㅋ은 음원 없어 TTS 폴백.
-const HP_CONS_SOUND={'ㄱ':{audio:'data/elem/level1/TTS/consonant_combo/audio_1_그.mp3',syl:'그'},'ㄴ':{audio:'data/elem/level1/TTS/consonant_combo/audio_3_느.mp3',syl:'느'},'ㄷ':{audio:'data/elem/level1/TTS/consonant_combo/audio_5_드.mp3',syl:'드'},'ㄹ':{audio:'data/elem/level1/TTS/consonant_combo/audio_7_르.mp3',syl:'르'},'ㅁ':{audio:'data/elem/level1/TTS/consonant_combo/audio_9_므.mp3',syl:'므'},'ㅂ':{audio:'data/elem/level1/TTS/consonant_combo/audio_11_브.mp3',syl:'브'},'ㅅ':{audio:'data/elem/level1/TTS/consonant_combo/audio_13_스.mp3',syl:'스'},'ㅇ':{audio:'data/elem/level1/TTS/consonant_combo/audio_15_으.mp3',syl:'으'},'ㅈ':{audio:'data/elem/level1/TTS/consonant_combo/audio_17_즈.mp3',syl:'즈'},'ㅊ':{audio:'data/elem/level1/TTS/consonant_combo/audio_19_츠.mp3',syl:'츠'},'ㅋ':{syl:'크'},'ㅌ':{audio:'data/elem/level1/TTS/consonant_combo/audio_21_트.mp3',syl:'트'},'ㅍ':{audio:'data/elem/level1/TTS/consonant_combo/audio_23_프.mp3',syl:'프'},'ㅎ':{audio:'data/elem/level1/TTS/consonant_combo/audio_25_흐.mp3',syl:'흐'},'ㄲ':{audio:'data/elem/level1/TTS/consonant_combo/audio_27_끄.mp3',syl:'끄'},'ㄸ':{audio:'data/elem/level1/TTS/consonant_combo/audio_29_뜨.mp3',syl:'뜨'},'ㅃ':{audio:'data/elem/level1/TTS/consonant_combo/audio_31_쁘.mp3',syl:'쁘'},'ㅆ':{audio:'data/elem/level1/TTS/consonant_combo/audio_33_쓰.mp3',syl:'쓰'},'ㅉ':{audio:'data/elem/level1/TTS/consonant_combo/audio_35_쯔.mp3',syl:'쯔'}};
+// 자음 '소리'(자음+ㅡ) 음원 — 이름(기역)이 아니라 소리(그)를 재생.
+const HP_CONS_SOUND={'ㄱ':{audio:'data/elem/level1/TTS/consonant_combo/audio_1_그.mp3',syl:'그'},'ㄴ':{audio:'data/elem/level1/TTS/consonant_combo/audio_3_느.mp3',syl:'느'},'ㄷ':{audio:'data/elem/level1/TTS/consonant_combo/audio_5_드.mp3',syl:'드'},'ㄹ':{audio:'data/elem/level1/TTS/consonant_combo/audio_7_르.mp3',syl:'르'},'ㅁ':{audio:'data/elem/level1/TTS/consonant_combo/audio_9_므.mp3',syl:'므'},'ㅂ':{audio:'data/elem/level1/TTS/consonant_combo/audio_11_브.mp3',syl:'브'},'ㅅ':{audio:'data/elem/level1/TTS/consonant_combo/audio_13_스.mp3',syl:'스'},'ㅇ':{audio:'data/elem/level1/TTS/consonant_combo/audio_15_으.mp3',syl:'으'},'ㅈ':{audio:'data/elem/level1/TTS/consonant_combo/audio_17_즈.mp3',syl:'즈'},'ㅊ':{audio:'data/elem/level1/TTS/consonant_combo/audio_19_츠.mp3',syl:'츠'},'ㅋ':{audio:'data/elem/level1/TTS/consonant_combo/audio_36_크.mp3',syl:'크'},'ㅌ':{audio:'data/elem/level1/TTS/consonant_combo/audio_21_트.mp3',syl:'트'},'ㅍ':{audio:'data/elem/level1/TTS/consonant_combo/audio_23_프.mp3',syl:'프'},'ㅎ':{audio:'data/elem/level1/TTS/consonant_combo/audio_25_흐.mp3',syl:'흐'},'ㄲ':{audio:'data/elem/level1/TTS/consonant_combo/audio_27_끄.mp3',syl:'끄'},'ㄸ':{audio:'data/elem/level1/TTS/consonant_combo/audio_29_뜨.mp3',syl:'뜨'},'ㅃ':{audio:'data/elem/level1/TTS/consonant_combo/audio_31_쁘.mp3',syl:'쁘'},'ㅆ':{audio:'data/elem/level1/TTS/consonant_combo/audio_33_쓰.mp3',syl:'쓰'},'ㅉ':{audio:'data/elem/level1/TTS/consonant_combo/audio_35_쯔.mp3',syl:'쯔'}};
 
 const HP_WORD=[
  {kr:'나비',rom:'nabi',en:'butterfly',emoji:'🦋'},{kr:'하마',rom:'hama',en:'hippo',emoji:'🦛'},
