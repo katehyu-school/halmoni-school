@@ -4830,7 +4830,8 @@ function sylBlockGuide(mode){
     +'</div>';
 }
 function buildConsPanel(){
-  return sylBlockGuide('cons')
+  return '<div class="basics-intro" style="margin-bottom:14px;">한글은 영어처럼 글자를 옆으로 쭉 늘어놓지 않아요. 자음과 모음이 모여 <strong>한 음절마다 네모난 블록</strong>을 이뤄요 (예: 한, 글). 아래 그림은 그 블록 안에서 각 글자가 어디에 오는지 보여줘요.<br><em>Korean doesn\'t write letters in a row like English. The letters of each syllable combine into one square block (e.g. 한, 글). The diagram below shows where each type of letter sits inside that block.</em></div>'
+    +sylBlockGuide('cons')
     +'<div class="hangul-section-title">기본 자음 · Basic Consonants (14)</div>'
     +'<div class="hangul-grid">'+CONSONANTS.slice(0,14).map(hcHtml).join('')+'</div>'
     +'<div class="hangul-section-title">쌍자음 · Double Consonants (5)</div>'
