@@ -4794,7 +4794,7 @@ function hcHtml(item){
     +'<div class="hcard-ex">'+item.ex+'</div></div>';
 }
 function sylBlockGuide(mode){
-  function cell(id,area,active,label,sub){
+  function cell(id,area,active,label,sub,numMode){
     const palette={
       c:{bg:'var(--amber-lt)',fg:'var(--amber-600)',bd:'var(--amber)'},
       vb:{bg:'var(--green-100)',fg:'#15803d',bd:'var(--green-600)'},
@@ -4804,19 +4804,24 @@ function sylBlockGuide(mode){
     const style=active
       ? 'background:'+palette.bg+';color:'+palette.fg+';border:1.5px solid '+palette.bd+';font-weight:800;'
       : 'background:var(--gray-100);color:var(--gray-400);border:1.5px dashed var(--gray-200);font-weight:600;';
-    return '<div style="grid-area:'+area+';border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;'+style+'font-size:10.5px;padding:2px;">'+label+(sub?'<span style="display:block;font-size:8px;font-weight:500;margin-top:1px;">'+sub+'</span>':'')+'</div>';
+    const subStyle=numMode
+      ? 'font-size:15px;font-weight:800;color:#c0392b;margin-top:2px;'
+      : 'font-size:8px;font-weight:500;margin-top:1px;';
+    return '<div style="grid-area:'+area+';border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;'+style+'font-size:10.5px;padding:2px;">'+label+(sub?'<span style="display:block;'+subStyle+'">'+sub+'</span>':'')+'</div>';
   }
-  const isC=mode==='cons',isV=mode==='vowel',isF=mode==='cons'||mode==='batchim';
+  const isSyl=mode==='syllable';
+  const isC=isSyl||mode==='cons',isV=isSyl||mode==='vowel',isF=isSyl||mode==='cons'||mode==='batchim';
   const grid='<div style="display:grid;grid-template-columns:46px 46px;grid-template-rows:30px 30px 26px;gap:3px;flex-shrink:0;">'
-    +cell('c','1 / 1 / 2 / 2',isC,'Consonant','자음')
-    +cell('vb','1 / 2 / 3 / 3',isV,'Vowel','모음')
-    +cell('vd','2 / 1 / 3 / 2',isV,'Vowel','모음')
-    +cell('f','3 / 1 / 4 / 3',isF,'Consonant','받침 (Optional)')
+    +cell('c','1 / 1 / 2 / 2',isC,'Consonant',isSyl?'1':'자음',isSyl)
+    +cell('vb','1 / 2 / 3 / 3',isV,'Vowel',isSyl?'3':'모음',isSyl)
+    +cell('vd','2 / 1 / 3 / 2',isV,'Vowel',isSyl?'2':'모음',isSyl)
+    +cell('f','3 / 1 / 4 / 3',isF,'Consonant',isSyl?'4':'받침 (Optional)',isSyl)
     +'</div>';
   const captions={
     cons:'자음은 음절의 <strong>첫소리</strong>(왼쪽 위)로도, <strong>받침</strong>(맨 아래)으로도 올 수 있어요.<br><em>The same consonant can appear as the initial sound (top-left) or as the batchim (bottom) of a syllable.</em>',
-    vowel:'모음은 모양에 따라 자음 <strong>오른쪽</strong>(ㅏㅑㅓㅕㅣ) 또는 <strong>아래</strong>(ㅗㅛㅜㅠㅡ)에 와요.<br><em>Vowels sit beside or below the consonant, depending on their shape.</em>',
-    batchim:'받침(종성)은 블록의 <strong>맨 아래</strong>에 오는 자음이에요 — 있어도 되고 없어도 돼요.<br><em>The batchim sits at the bottom of the block. It is optional — not every syllable has one.</em>'
+    vowel:'모음은 모양에 따라 자음 <strong>오른쪽</strong>(ㅏㅑㅓㅕㅣ), <strong>아래</strong>(ㅗㅛㅜㅠㅡ), 또는 <strong>둘 다</strong>(ㅘㅝㅢ 등 복합모음)에 와요.<br><em>Vowels sit beside, below, or both — depending on their shape (compound vowels like ㅘ, ㅝ, ㅢ use both positions).</em>',
+    batchim:'받침(종성)은 블록의 <strong>맨 아래</strong>에 오는 자음이에요 — 있어도 되고 없어도 돼요.<br><em>The batchim sits at the bottom of the block. It is optional — not every syllable has one.</em>',
+    syllable:'한 음절은 이 순서로 소리 나요: <strong>① 초성 → ② 모음(아래) / ③ 모음(옆) → ④ 받침(있으면)</strong>.<br><em>One syllable is read in this order: initial consonant → vowel → batchim (if present).</em>'
   };
   return '<div style="display:flex;align-items:center;gap:16px;background:#fafaf7;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:16px;flex-wrap:wrap;">'
     +grid
@@ -5169,7 +5174,8 @@ const SYL_VISUAL = `
         <span style="color:#7b1fa2;font-weight:700">ㅡ+ㅣ Compound group</span> — two vowels fused together → <strong>below and beside</strong> the consonant</div>
 `;
 function buildSylPanel(){
-  return '<div class="basics-intro" style="margin-bottom:16px;">한글 음절 = <strong>초성 + 중성 (+ 받침)</strong>으로 이루어져요.<br><em>Each syllable block = Onset + Vowel (+ optional final consonant)</em></div>'
+  return sylBlockGuide('syllable')
+    +'<div class="basics-intro" style="margin-bottom:16px;">한글 음절 = <strong>초성 + 중성 (+ 받침)</strong>으로 이루어져요.<br><em>Each syllable block = Onset + Vowel (+ optional final consonant)</em></div>'
     +SYL_VISUAL
     +'<div class="syl-builder" style="margin-top:20px;">'
     +'<div class="syl-builder-title">🧩 음절 만들기 · Build a Syllable</div>'
