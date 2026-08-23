@@ -13,6 +13,14 @@
 > — ✅ **검증**: `json.load` 통과, 키 위치 L4 ep02/ep12와 동일 확인, **Node vm으로 `buildBanmal()` 직접 실행**해 intro/각 row/tip 문자열이 반환값에 실제 포함되는지 확인(단순 문법체크 아님 — 이전 dead-code 실수 재발 방지 원칙 유지). row별 `note` 필드는 buildBanmal()이 애초에 렌더링하지 않는 필드라는 것도 확인(L4 ep02/ep12도 마찬가지 — 기존 관행과 일치, 버그 아님).
 > — ⏳ **git add/commit/push 대기 중** — 선생님 검토 후 필요시 문구 수정.
 
+> 🌱 **2026-08-23 완료 (Start Here 사이드바 — 한글 기초 vs 레퍼런스 명확히 분리)**
+> — 선생님이 Start Here의 "배우기" 카테고리(11개 항목)가 첫 방문자에게 시각적으로 안 구분된다고 지적, "한글을 배워요"+"글쓰기 연습" 외 나머지(필수낱말카드·문장구조·띄어쓰기)는 사실 순차 학습이 아니라 참고자료 성격이라는 논의 끝에 재구성: `BASICS_TOPICS`에서 essential/structure/spacing의 `grp`를 `'learn'→'ref'`로 변경 — 이제 **한글 기초(learn) = hangul+writing 2개, 레퍼런스(ref) = 9개**(essential·structure·spacing·greetings·numbers·verbs·questions·honorifics·connectors).
+> — `buildBasicsSidebar()`에서 Learn 그룹 헤더를 "🌱 배우기 · Learn" → **"🔤 한글 기초 · Hangul Basics"**로 변경, hangul·writing 두 항목만 `basics-topic-item`(평범한 리스트 행) 대신 로드맵·배치테스트와 똑같은 `lt-item pt-item` 굵은 박스 스타일(`heroItem`)로 렌더링해 첫 진입자 눈에 확 띄게 함. `loadBasics()`의 active-토글 셀렉터도 `.basics-topic-item`만 지우던 걸 `.basics-topic-item,.lt-item,.pt-item`로 넓혀서 hero 항목 클릭 시에도 로드맵/배치테스트와 일관되게 active 상태가 관리되도록 함.
+> — **"빠른 참고" 모달(`QREF_TABS`, 6개 탭)은 의도적으로 그대로 둠** — 선생님이 "레퍼런스가 모달로도 뜨는데 항목 늘면 복잡해진다"고 우려하셔서, essential/structure/spacing은 Start Here 사이드바(세로 리스트라 늘어나도 부담 적음)에만 추가하고 모달(가로 탭이라 늘어나면 부담)에는 안 넣기로 합의. 사이드바 레퍼런스=9개, 모달=여전히 6개로 두 표면의 항목 수가 의도적으로 다름.
+> — ⚠️ **이번엔 안 건드린 것**: "글쓰기 연습"(`buildWriting()`)은 지금도 `WRITE_CHARS` 22개 낱글자(가나다라...)를 하나씩 따라 쓰는 것뿐이고, 의미 있는 단어(예: 이름 쓰기) 연습은 없음 — 선생님이 원하시면 다음 단계로 이어서 보강 가능. 캔버스가 글자 1개 기준 크기(240×240)라 여러 글자 단어를 넣으려면 가이드 박스 폰트 크기 등 추가 UI 조정이 필요해 이번엔 범위에서 뺌.
+> — ✅ **검증**: `node --check` 통과, **Node vm으로 `buildBasicsSidebar()` 직접 실행**해 반환 HTML에 새 헤더("한글 기초") 있음/구 헤더("배우기 · Learn") 없음/hangul·writing hero 항목(`lt-item pt-item`) 2개/레퍼런스 `basics-topic-item` 9개/`lt-item pt-item` 총 4개(로드맵+배치테스트+hangul+writing) 전부 정확히 일치 확인. `QREF_TABS` 미변경 확인. null byte 0, `</html>` 1개.
+> — ⏳ **git add/commit/push 대기 중**.
+
 > 🚨 **2026-08-23 정정 (께서 — 아래 08-22 기록 두 건의 "72편 전수조사 결과 안 가르침" 주장은 틀렸음)**
 > — 선생님이 "L3 ep02 &lt;새 어휘&gt;에 께서가 있어!"라고 지적 → 확인해보니 **께서는 L3 ep02 vocab("💬 표현 Expressions" 카테고리)에 처음부터 있었고, `vocab_index.json`에도 이번 세션 작업 전부터 이미 들어가 있어서 단어 SRS로도 처음부터 커버되고 있었음.** 아래 25번 줄·28번 줄의 "72편 어디에도 안 가르침" 서술은 **틀린 주장**이었음 — 원인은 그때 감사가 각 episode JSON의 `grammar` 배열(title/pattern)만 grep했고 **`vocab` 배열은 검색하지 않았기 때문**(그 이전 한 번은 72편이 다 스테이징되기 전에 검색해서 놓침). "경어법 총정리" 탭의 께서 설명 자체는 틀린 내용이 아니라 그대로 둬도 되지만, "이번에 신규 보강"이라는 프레이밍은 정정 필요.
 > — **덤으로 발견한 것**: "드시다·계시다·말씀하시다·여쭙다 4개 다 vocab 전무" 주장(20번 줄)도 절반만 맞음 — 말씀하시다·여쭙다는 진짜 전무 확인(제대로 보강한 것 맞음), 但 **드시다는 L2 ep07에 "먹다 / 드시다" 쌍으로, 계시다는 L2 ep01("안녕히 계시다")·L4 ep01("있다/계시다")에 이미 있었음.** L2 ep06에 추가한 카드가 중복은 아니지만(활용형 중심 별도 카드) "완전 신규"는 아니었음. 반면 성함·연세·댁·진지(13번 줄 기록)는 재확인해도 진짜 전무했던 게 맞음 — 그 보강은 정당함. 사물높임 주의(L2 ep06)는 애초에 있었고 grep 검색어를 "사물높임"(붙여쓰기)로 잘못 써서 이전 감사에서 안 걸렸던 것뿐 — 실제 콘텐츠("사물 높임", 띄어쓰기)는 원래 있었음. 압존법만 vocab/grammar 통틀어 진짜 전무 확인(기존 판단대로 이 앱 목표 레벨에선 생략 유지).

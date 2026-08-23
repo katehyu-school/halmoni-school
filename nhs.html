@@ -3096,10 +3096,10 @@ function renderIdxBody(){
 
 const BASICS_TOPICS = [
   {id:'hangul',    icon:'🔤', label:'한글을 배워요',    en:'Korean Alphabet', grp:'learn'},
-  {id:'essential', icon:'🗝️', label:'필수 낱말 카드',   en:'Essential Word Cards', grp:'learn'},
-  {id:'structure', icon:'🔡', label:'문장 구조',        en:'Sentence Structure', grp:'learn'},
-  {id:'spacing',   icon:'📏', label:'띄어쓰기',          en:'Word Spacing', grp:'learn'},
   {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice', grp:'learn'},
+  {id:'essential', icon:'🗝️', label:'필수 낱말 카드',   en:'Essential Word Cards', grp:'ref'},
+  {id:'structure', icon:'🔡', label:'문장 구조',        en:'Sentence Structure', grp:'ref'},
+  {id:'spacing',   icon:'📏', label:'띄어쓰기',          en:'Word Spacing', grp:'ref'},
   {id:'greetings', icon:'👋', label:'인사 & 교실 표현', en:'Greetings & Classroom', grp:'ref'},
   {id:'numbers',   icon:'🔢', label:'한국 숫자',        en:'Korean Numbers', grp:'ref'},
   {id:'verbs',     icon:'📝', label:'동사 활용',        en:'Verb Conjugation', grp:'ref'},
@@ -4574,20 +4574,25 @@ function buildBasicsSidebar(){
     +'<div class="basics-topic-icon">'+t.icon+'</div>'
     +'<div class="basics-topic-name">'+t.label+'<span class="basics-topic-name-en">'+t.en+'</span></div>'
     +'</div>';
+  // 한글 기초(hangul + writing) — 첫 진입자가 한눈에 알아보도록 로드맵/배치테스트와 같은 굵은 박스 스타일로 강조
+  const heroItem=t=>'<div class="lt-item pt-item" id="bt-'+t.id+'" onclick="loadBasics(\''+t.id+'\')" style="background:var(--teal-50);border:1.5px solid var(--teal);margin-bottom:6px">'
+    +'<div class="lt-num" style="font-size:17px">'+t.icon+'</div>'
+    +'<div class="lt-name" style="color:var(--teal-dark)">'+t.label+'<span style="display:block;font-size:10.5px;font-weight:500;color:var(--warm-500)">'+t.en+'</span></div>'
+    +'</div>';
   const grpHdr=(txt,bg,fg)=>'<div style="background:'+bg+';color:'+fg+';font-size:11.5px;font-weight:800;padding:7px 11px;border-radius:8px;margin:12px 2px 7px;letter-spacing:.2px;">'+txt+'</div>';
   const grpWrap=(items,accent)=>'<div style="border-left:3px solid '+accent+';padding-left:7px;margin:0 0 4px 2px;">'+items+'</div>';
   const learn=BASICS_TOPICS.filter(t=>t.grp!=='ref');
   const ref=BASICS_TOPICS.filter(t=>t.grp==='ref');
   const ptItem='<div class="lt-item pt-item" id="pt-sidebar-item" onclick="loadPlacementTest()" style="background:var(--teal-50);border:1.5px solid var(--teal);margin-bottom:4px"><div class="lt-num">🎯</div><div class="lt-name">배치 테스트<span style="display:block;font-size:10.5px;font-weight:500;color:var(--warm-500)">내 레벨 찾기 · Placement</span></div></div>';
   list.innerHTML=roadmap+ptItem
-    +grpHdr('🌱 배우기 · Learn','var(--teal-50)','var(--teal-dark)')+grpWrap(learn.map(item).join(''),'var(--teal)')
+    +grpHdr('🔤 한글 기초 · Hangul Basics','var(--teal-50)','var(--teal-dark)')+grpWrap(learn.map(heroItem).join(''),'var(--teal)')
     +grpHdr('📌 레퍼런스 · Reference','var(--amber-lt)','var(--amber-600)')+grpWrap(ref.map(item).join(''),'var(--amber)')
-    +'<div style="font-size:10.5px;color:var(--warm-400);margin:8px 4px 0;line-height:1.5">📌 레퍼런스는 상단 <b>빠른 참고</b>로도 어디서든 열려요.</div>';
+    +'<div style="font-size:10.5px;color:var(--warm-400);margin:8px 4px 0;line-height:1.5">📌 레퍼런스는 상단 <b>빠른 참고</b>로도 일부 항목은 어디서든 열려요.</div>';
 }
 
 function loadBasics(topicId){
   curBasicsTopic=topicId;
-  document.querySelectorAll('.basics-topic-item').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.basics-topic-item,.lt-item,.pt-item').forEach(el=>el.classList.remove('active'));
   const item=document.getElementById('bt-'+topicId);
   if(item)item.classList.add('active');
   const topic=BASICS_TOPICS.find(t=>t.id===topicId);
