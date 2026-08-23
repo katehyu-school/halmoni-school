@@ -4475,11 +4475,12 @@ async function setLevel(btn){
   curLevel=_lv;
   const hdr=document.querySelector('.sidebar-hdr,.sidebar-hdr-amber');
   if(curLevel==='Basics'){
-    if(hdr){hdr.className='sidebar-hdr-amber';hdr.innerHTML='🌱 시작하기 · Start';}
+    // 사이드바 맨 위 "시작하기" 라벨은 안 보여줌 — 대신 아래 "🌱 한글 기초" 그룹이 눈에 띄게 함
+    if(hdr){hdr.style.display='none';}
     buildBasicsSidebar();
     loadBasics(curBasicsTopic);
   }else{
-    if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
+    if(hdr){hdr.style.display='';hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
     const lv=curLevel==='Level 6'?'L6':curLevel==='Level 5'?'L5':curLevel==='Level 4'?'L4':curLevel==='Level 3'?'L3':curLevel==='Level 2'?'L2':'L1';
     if(hdr){hdr.className='sidebar-hdr';hdr.innerHTML='📺 '+curLevel;}
     _enAutoForLevel(lv);
@@ -4712,7 +4713,7 @@ function buildBasicsSidebar(){
   const ref=BASICS_TOPICS.filter(t=>t.grp==='ref');
   const ptItem='<div class="lt-item pt-item" id="pt-sidebar-item" onclick="loadPlacementTest()" style="background:var(--teal-50);border:1.5px solid var(--teal);margin-bottom:4px"><div class="lt-num">🎯</div><div class="lt-name">배치 테스트<span style="display:block;font-size:10.5px;font-weight:500;color:var(--warm-500)">내 레벨 찾기 · Placement</span></div></div>';
   list.innerHTML=roadmap+ptItem
-    +grpHdr('🔤 한글 기초 · Hangul Basics','var(--teal-50)','var(--teal-dark)')+grpWrap(learn.map(heroItem).join(''),'var(--teal)')
+    +grpHdr('🌱 한글 기초 · Hangul Basics','var(--teal-50)','var(--teal-dark)')+grpWrap(learn.map(heroItem).join(''),'var(--teal)')
     +grpHdr('📌 레퍼런스 · Reference','var(--amber-lt)','var(--amber-600)')+grpWrap(ref.map(item).join(''),'var(--amber)')
     +'<div style="font-size:10.5px;color:var(--warm-400);margin:8px 4px 0;line-height:1.5">📌 레퍼런스는 상단 <b>빠른 참고</b>로도 일부 항목은 어디서든 열려요.</div>';
 }
@@ -5733,7 +5734,7 @@ function buildWriting(){
       +'<div class="writing-chars">'+syl.map((c,i)=>'<button class="wchar-btn'+(i===0?' active':'')+'" onclick="selectWriteChar(\''+c.kr+'\')">'+c.kr+'</button>').join('')+'</div>'
       +'<div class="writing-canvas-wrap">'
         +'<div class="writing-canvas-box"><canvas id="writing-canvas" class="writing-canvas" width="240" height="240"></canvas>'
-        +'<div class="writing-btns" style="margin-top:10px;"><button class="writing-btn" onclick="clearCanvas()">↺ 지우기</button></div></div>'
+        +'<div class="writing-btns" style="margin-top:10px;"><button class="writing-btn" onclick="clearCanvas()">↺ 지우기<span class="wbtn-en">Clear</span></button></div></div>'
         +'<div class="writing-guide-box"><div class="writing-guide-char" id="wguide-char" style="font-size:'+_wGuideSize(syl[0].kr)+'px">'+syl[0].kr+'</div>'
         +'<div class="writing-guide-rom" id="wguide-rom">'+syl[0].rom+'</div>'
         +'<div class="writing-guide-strokes">획순: 위→아래<br>왼→오른쪽</div></div>'
@@ -5743,7 +5744,7 @@ function buildWriting(){
       +'<div class="writing-chars">'+word.map((c,i)=>'<button class="wchar-btn wword-btn'+(i===0?' active':'')+'" onclick="selectWriteWord(\''+c.kr+'\')">'+c.kr+'</button>').join('')+'</div>'
       +'<div class="writing-word-info"><span id="wword-rom">'+(word[0]?word[0].rom:'')+'</span> · <span id="wword-en">'+(word[0]?word[0].en:'')+'</span></div>'
       +'<div class="writing-word-cells" id="writing-word-cells"></div>'
-      +'<div class="writing-btns" style="margin-top:10px;"><button class="writing-btn" onclick="clearWordCanvases()">↺ 전체 지우기</button></div>'
+      +'<div class="writing-btns" style="margin-top:10px;"><button class="writing-btn" onclick="clearWordCanvases()">↺ 전체 지우기<span class="wbtn-en">Clear All</span></button></div>'
     +'</div>'
     +'<div id="wr-name" class="btab-panel">'
       +'<div class="basics-intro">초성 · 중성 · 받침을 직접 골라서 내 이름이나 어떤 단어든 소리 나는 대로 한글로 만들어보세요!<br><em>Pick an onset + vowel + (optional) batchim to spell out any name or word, sound by sound.</em></div>'
@@ -5767,18 +5768,18 @@ function buildWriting(){
         +'<div class="syl-picker-label">③ 받침 고르기 (Optional)</div>'
         +'<div class="syl-picker" id="nb-coda-picker">'+SYL_BACH.map(c=>'<button class="spick" data-v="'+c+'" onclick="pickNbCoda(\''+c+'\')">'+(c||'∅')+'</button>').join('')+'</div>'
         +'<div class="writing-btns" style="margin-top:12px;">'
-          +'<button class="writing-btn" onclick="addNbSyllable()">＋ 이 글자 추가하기</button>'
-          +'<button class="writing-btn" onclick="clearNbPick()">↺ 다시 고르기</button>'
-          +'<button class="writing-btn" onclick="resetNbBuilder()">🗑 전체 초기화</button>'
+          +'<button class="writing-btn" onclick="addNbSyllable()">＋ 이 글자 추가하기<span class="wbtn-en">Add this syllable</span></button>'
+          +'<button class="writing-btn" onclick="clearNbPick()">↺ 다시 고르기<span class="wbtn-en">Reset pick</span></button>'
+          +'<button class="writing-btn" onclick="resetNbBuilder()">🗑 전체 초기화<span class="wbtn-en">Clear all</span></button>'
         +'</div>'
-        +'<button class="nb-finish-btn" id="nb-finish-btn" style="display:none;" onclick="finishNbName()">✅ 완성! 써보기</button>'
+        +'<button class="nb-finish-btn" id="nb-finish-btn" style="display:none;" onclick="finishNbName()">✅ 완성! 써보기<span class="wbtn-en">Done — trace it!</span></button>'
       +'</div>'
       +'<div id="nb-stage-write" style="display:none;">'
         +'<div class="writing-word-info"><span id="nb-write-result">…</span></div>'
         +'<div class="writing-word-cells" id="nb-write-cells"></div>'
         +'<div class="writing-btns" style="margin-top:10px;">'
-          +'<button class="writing-btn" onclick="clearNbCanvases()">↺ 전체 지우기</button>'
-          +'<button class="writing-btn" onclick="resetNbBuilder()">🧩 다시 만들기</button>'
+          +'<button class="writing-btn" onclick="clearNbCanvases()">↺ 전체 지우기<span class="wbtn-en">Clear All</span></button>'
+          +'<button class="writing-btn" onclick="resetNbBuilder()">🧩 다시 만들기<span class="wbtn-en">Build again</span></button>'
         +'</div>'
       +'</div>'
     +'</div>'
