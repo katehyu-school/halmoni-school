@@ -1,5 +1,5 @@
-const CACHE = 'hq-mobile-v1';
-const ASSETS = ['./hq-mobile.html', './manifest.json'];
+const CACHE = 'dr-mobile-v1';
+const ASSETS = ['./dr-mobile.html', './hq-mobile.html', './manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));

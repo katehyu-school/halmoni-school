@@ -4619,10 +4619,14 @@ async function loadRoadmap(){
     +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:1.9;">'
     +'① <b>🔤 한글을 배워요</b> — 자음·모음·받침을 소리로 익혀요'
       +'<span class="en-gloss"><br><i>Learn the consonants, vowels and final consonants by sound.</i></span><br>'
-    +'② 같은 화면 <b>✍️ 연습</b> 탭 — 자모 읽기 → 첫소리 찾기 → 음절 읽기 → 받침 → 단어 읽기'
+    +'② <b>🔊 이름과 소리</b> 탭 — 자음 이름이 곧 발음이라는 걸 확인하고, 첫소리·받침소리를 직접 들어봐요'
+      +'<span class="en-gloss"><br><i>The 🔊 Name &amp; Sound tab — see how a consonant\'s name is its pronunciation, and listen to the initial and final sounds yourself.</i></span><br>'
+    +'③ 같은 화면 <b>✍️ 연습</b> 탭 — 자모 읽기 → 첫소리 찾기 → 음절 읽기 → 받침 → 단어 읽기'
       +'<span class="en-gloss"><br><i>Same screen, ✍️ Practice tab: read letters → find the first sound → read syllables → final consonants → read words.</i></span><br>'
-    +'③ <b>📓 My Notes › ✏️ 한글 쓰기</b> — 손가락으로 직접 써 보기'
-      +'<span class="en-gloss"><br><i>Trace the letters with your finger.</i></span></div>'
+    +'④ <b>✍️ 글쓰기 연습</b> — 자모 획순 → 글자 하나씩 → 의미 있는 단어 순서로 손으로 써 본 다음'
+      +'<span class="en-gloss"><br><i>✍️ Writing practice — stroke order → one letter at a time → real words, written by hand.</i></span><br>'
+    +'⑤ 같은 화면 <b>🧩 내 이름 만들기</b> — 내 이름을 한글로 직접 조립한 다음 &lt;써 보기&gt;를 눌러 써 보세요!'
+      +'<span class="en-gloss"><br><i>Same screen, 🧩 Build My Name — assemble your own name in Hangeul, then tap "Write it" to trace it.</i></span></div>'
     +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루 20분이면 대개 <b>3~5일</b>에 읽을 수 있어요. 다 외우지 말고 <b>읽을 수만 있으면</b> 다음으로 넘어가세요.'
       +'<span class="en-gloss"><br><i>20 minutes a day is usually enough to read Hangeul in 3–5 days. Don\'t memorise everything — move on once you can read.</i></span></div>'
     +_rmBtn('🔤 한글 배우러 가기 · Learn Hangeul',"loadBasics('hangul')",true);
@@ -4646,24 +4650,26 @@ async function loadRoadmap(){
       +'<span style="flex:none;width:76px;text-align:right;color:var(--warm-500)">'+c.d+' / '+c.t
         +(c.s?' <span style="color:var(--amber)" title="자기점검까지 완료">⭐'+c.s+'</span>':'')+'</span></div>';
   }).join('');
-  const s2='한 편이 하루치예요. <b>혼자서도 이 순서대로만 하면 됩니다.</b>'
-    +_rmEn('One episode = one day. Just follow this order on your own.')
+  const s2='<b>혼자서도 이 순서대로만 하면 됩니다.</b>'
+    +_rmEn('Just follow this order on your own.')
     +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:2;">'
     +'<b>1.</b> 🔥 <b>빠른 복습</b> — 편을 열면 저절로 떠요. 지난 편 단어 확인이니 <b>건너뛰지 마세요</b>'
       +'<span class="en-gloss"><br><i>Quick review opens by itself. It checks last episode\'s words — don\'t skip it.</i></span><br>'
-    +'<b>2.</b> 📽 <b>영상</b> — 처음엔 자막 접고 한 번, 그다음 펴고 한 번. 🔊로 한 줄씩 따라 읽고, 🎤 <b>따라 말하기</b>와 🎭 <b>역할극</b>으로 소리 내어 연습해요'
-      +'<span class="en-gloss"><br><i>Watch once with captions folded, once with them open. Then shadow each line with 🎤 and act the scene out with 🎭 Role-play.</i></span><br>'
+    +'<b>2.</b> 📽 <b>영상</b> — 처음엔 자막 접고 한 번, 그다음 펴고 한 번. 🔊로 한 줄씩 따라 읽고, 🎤 <b>따라 말하기</b>로 연습해요'
+      +'<span class="en-gloss"><br><i>Watch once with captions folded, once with them open. Then shadow each line with 🎤.</i></span><br>'
     +'<b>3.</b> 📚 <b>새어휘 → 문법</b> — 문법 카드는 예문을 소리 내어 읽어야 남아요'
       +'<span class="en-gloss"><br><i>Read the grammar examples out loud — that is what makes them stay.</i></span><br>'
     +'<b>4.</b> 🗣 <b>발음 · 반말/존댓말</b> — 있는 편에만 나와요'
       +'<span class="en-gloss"><br><i>These two tabs appear only in some episodes.</i></span><br>'
-    +'<b>5.</b> 💬 <b>Usage</b> — 같은 말이 상황에 따라 어떻게 달라지는지 모아 둔 곳이에요. <b>여기를 건너뛰는 분이 많아요</b>'
+    +'<b>5.</b> 📽 <b>다시 영상으로</b> — Auto-play → 🎤 <b>따라 말하기</b> → 🎭 <b>역할극</b>을 연습해 보세요'
+      +'<span class="en-gloss"><br><i>Back to the video — practice with Auto-play → 🎤 Shadowing → 🎭 Role-play.</i></span><br>'
+    +'<b>6.</b> 💬 <b>Usage</b> — 같은 말이 상황에 따라 어떻게 달라지는지 모아 둔 곳이에요. <b>여기를 건너뛰는 분이 많아요</b>'
       +'<span class="en-gloss"><br><i>How the same expression shifts with the situation. Most learners skip this tab.</i></span><br>'
-    +'<b>6.</b> ✏️ <b>Quiz</b> — 객관식 · 읽기 · 띄어쓰기 · 쓰기 · 말하기. <b>다섯 개 다 있는 걸 모르는 분이 많아요</b>'
-      +'<span class="en-gloss"><br><i>Five kinds: multiple choice, reading, spacing, writing, speaking.</i></span><br>'
-    +'<b>7.</b> 🌍 <b>Real Life</b> → ✅ <b>자기점검</b> — Quiz를 채점하면 목록에 <b>✅</b>, 자기점검까지 체크하면 <b>⭐</b>로 바뀌어요'
+    +'<b>7.</b> ✏️ <b>Quiz</b> — Level 1·2는 ✏️객관식·🧩문장 만들기·📖읽기·📏띄어쓰기, <b>Level 3부터는</b> ✍️쓰기·🗣️말하기까지 더해져 여섯 가지예요. <b>다 있는 걸 모르는 분이 많아요</b>'
+      +'<span class="en-gloss"><br><i>Levels 1–2: multiple choice, sentence building, reading, spacing. From Level 3 on, writing and speaking are added too.</i></span><br>'
+    +'<b>8.</b> 🌍 <b>Real Life</b> → ✅ <b>자기점검</b> — Quiz를 채점하면 목록에 <b>✅</b>, 자기점검까지 체크하면 <b>⭐</b>로 바뀌어요'
       +'<span class="en-gloss"><br><i>Grading the quiz marks ✅. Finishing the self-check turns it into ⭐.</i></span></div>'
-    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루에 두 편씩 나가지 마세요. <b>한 편을 이틀에 걸쳐</b>(첫날 1~4, 다음 날 5~7) 하는 게 더 오래 남아요.</div>'
+    +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루에 두 편씩 나가지 마세요. <b>한 편을 이틀에 걸쳐</b>(첫날 1~5, 다음 날 6~8) 하는 게 더 오래 남아요.</div>'
     +(bars?'<div style="margin-top:11px">'+bars+'</div>':'');
 
   // ── Step 3. 매일 복습 ──
@@ -4674,7 +4680,7 @@ async function loadRoadmap(){
     +'<span>오늘 복습할 것 <b style="color:'+(dueN?'var(--amber-600)':'var(--warm-400)')+'">'+dueN+'</b>개 <span style="color:var(--warm-400)">Due today</span></span></div>'
     +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:1.9;">'
     +'💻 여기서는 왼쪽 아래 <b>🃏 복습 플래시카드</b> — 옆의 숫자가 오늘 몫이에요<br>'
-    +'📱 폰에서는 <b>doranchae.com/hq-mobile.html</b> → <b>🗂️ 단어장</b><br>'
+    +'📱 폰에서는 <b>doranchae.com/dr-mobile.html</b> → <b>🗂️ 단어장</b><br>'
     +'<span style="color:var(--warm-500)">둘은 같은 기록을 씁니다(같은 브라우저 기준). 상자가 올라갈수록 다시 나오는 간격이 길어져요.</span></div>'
     +_rmBtn('🃏 지금 복습하기 · Review now','openFlashcards()',dueN>0);
 
@@ -4729,7 +4735,7 @@ async function loadRoadmap(){
       +'열린 뒤 브라우저 메뉴에서 <b>&ldquo;홈 화면에 추가&rdquo;</b>를 누르면 앱처럼 쓸 수 있어요.'
       +'<div style="margin-top:7px;font-size:11px;color:var(--warm-400);font-style:italic;">'
         +'Point your phone camera at the QR, then use &ldquo;Add to Home Screen&rdquo;.</div>'
-      +'<div style="margin-top:8px;font-size:12px;"><a href="hq-mobile.html" style="color:var(--teal-dark);font-weight:700;">'
+      +'<div style="margin-top:8px;font-size:12px;"><a href="dr-mobile.html" style="color:var(--teal-dark);font-weight:700;">'
         +'또는 여기를 눌러 바로 열기 &rarr;</a></div>'
     +'</div></div></div>';
 

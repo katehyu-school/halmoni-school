@@ -7,6 +7,31 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 📱 **2026-08-24 완료 (로드맵 QR 새로 생성 + 에피소드 인트로 문구 수정)**
+> — `qr/QR_Doranchae_Mobile.png`가 실제로 `https://doranchae.com/hq-mobile.html`을 인코딩하고 있는 걸 pyzbar로 디코드해서 확인 → `https://doranchae.com/dr-mobile.html`을 가리키는 새 QR로 교체(같은 파일명, 같은 스타일/크기 430×430, 로고 없는 기본 흑백). 리다이렉트가 있어서 구QR도 계속 작동하지만, 새 QR은 한 단계(리다이렉트)를 건너뛰어 더 빠름. 새 QR도 디코드해서 정확한 주소로 스캔되는지 확인함.
+> — `docs/`의 다른 QR 파일(`QR_HangeulQuest_Mobile.png` 등)은 코드에서 참조되는 곳이 없어서 안 건드림.
+> — Step 2(에피소드로 배우기) 인트로에서 "한 편이 하루치예요." 삭제 — 아래 "한 편을 이틀에 걸쳐(1~5, 6~8) 하는 게 낫다"는 팁과 상충되고, 하루에 다 하기엔 벅찰 수 있다는 선생님 지적 반영. 영어 문구도 맞춰서 "One episode = one day." 부분 삭제.
+> — ✅ **검증**: `node --check` 통과, null byte 0/`</html>` 1개. QR 디코드로 실제 인코딩된 URL 재확인.
+> — ⏳ **git add/commit/push 대기 중**.
+
+> 🔀 **2026-08-24 완료 (모바일 앱 주소 hq-mobile.html → dr-mobile.html 변경, 안전장치 리다이렉트 포함)**
+> — 선생님 요청: "hq를 dr로" — 배포된 QR코드·전단지·taster lesson 자료에 있는 옛날 주소(doranchae.com/hq-mobile.html)는 계속 작동해야 하므로 "안전장치 남기기" 방식 선택.
+> — `dr-mobile.html` = 기존 `hq-mobile.html` 전체 내용을 그대로 복사한 새 정식 파일(앱 내부의 "서버에서 열어야 동작해요" 안내 문구 8곳도 새 주소로 갱신).
+> — `hq-mobile.html` = 0초 메타 리프레시 + JS `location.replace`로 `dr-mobile.html`로 자동 이동하는 얇은 리다이렉트 스텁으로 교체(수동 이동 링크도 같이 넣어둠). Playwright로 실제 리다이렉트 동작 확인함.
+> — `manifest.json`의 `start_url`을 `./dr-mobile.html`로 변경.
+> — `sw.js`: 캐시 버전을 `hq-mobile-v1` → `dr-mobile-v1`로 올려서(구버전 캐시 자동 삭제) 이전에 캐시된 옛 `hq-mobile.html` 전체 내용이 리다이렉트 스텁을 덮어쓰지 않게 함. `ASSETS`에 `dr-mobile.html`과 `hq-mobile.html` 둘 다 포함.
+> — `nhs.html`(로드맵 "폰으로 바로 열기" 2곳), `faq.html`(모바일 안내 2곳) 내부 링크도 새 주소로 갱신.
+> — QR 이미지(`qr/QR_Doranchae_Mobile.png`)는 그대로 둬도 됨 — 안전장치 리다이렉트 덕분에 기존에 인쇄된 QR도 계속 작동함. 다만 새로 인쇄할 자료가 있으면 dr-mobile.html을 직접 가리키는 QR로 새로 만드는 게 한 단계를 건너뛸 수 있어 더 좋음(선택 사항, 아직 안 함).
+> — `docs/CLAUDE_ARCHIVE.md` · `docs/MAINTENANCE.md` · `docs/MOBILE_KIDS_STRATEGY.md`에도 "hq-mobile.html" 언급이 남아있음 — 기능에는 영향 없는 참고 문서라 이번엔 안 건드림, 필요하면 다음에 정리.
+> — ✅ **검증**: `manifest.json` JSON 파싱 통과, `sw.js` `node --check` 통과, `nhs.html` `node --check` 통과, null byte 0/`</html>` 1개(각 파일). Playwright로 `hq-mobile.html` 접속 시 `dr-mobile.html`로 실제 이동하는 것 확인.
+> — ⏳ **git add/commit/push 대기 중**.
+
+> 🧭 **2026-08-24 완료 (로드맵 Step 0·Step 2 내용 업데이트)**
+> — Step 0(한글부터·못 읽으면 여기): 새로 만든 "🔊 이름과 소리" 탭과 "✍️ 글쓰기 연습(자모 획순)" 반영해서 5단계로 재구성 — ①한글을 배워요 ②이름과 소리 탭 ③연습 탭 ④글쓰기 연습(자모 획순→글자 하나씩→의미 있는 단어) ⑤내 이름 만들기.
+> — Step 2(에피소드로 배우기): 영상 단계에서 역할극을 빼고(🎤 따라 말하기만), 새 5번 단계 "다시 영상으로 — Auto-play → 🎤 따라 말하기 → 🎭 역할극"을 추가해서 총 8단계로 재구성(기존 Usage/Quiz/Real Life가 6·7·8번으로 밀림). 이틀 배분 팁도 "1~5, 6~8"로 맞춤.
+> — ✅ **검증**: `node --check` 통과, CSS 중괄호 711/711(CSS는 변경 없음). Node vm으로 `loadRoadmap()` 실제 실행해서 HTML을 뽑고 Playwright로 렌더링 확인 — Step 0 5개 항목, Step 2 8개 항목 모두 순서·내용 정상.
+> — ⏳ **git add/commit/push 대기 중**.
+
 > ⚠️ **2026-08-24 배포 프로세스 버그 발견/수정 — 채팅 전달 ≠ 실제 파일 반영**
 > — 선생님이 "고쳤다는 게 반영이 안 되고 새로고침도 소용없다"고 여러 번 보고 → 원인 파악해보니, 이 세션에서 SendUserFile로 채팅에 올린 파일들은 "다운로드 카드"로만 전달됐고, 컴퓨터의 실제 프로젝트 폴더(`C:\Users\kateh\Desktop\halmoni-school`)에는 자동 반영되지 않고 있었음 — 즉 브라우저가 계속 옛날 파일을 보고 있었던 것(캐시 문제가 아니었음).
 > — 마침 이 세션 중간에 컴퓨터 연결이 확인되어(`connectedFolders`), `device_commit_files`로 최종본을 실제 폴더에 직접 덮어써서 해결.
