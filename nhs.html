@@ -177,25 +177,34 @@ function buildSidebar(lv){
     :`<div class="ep-item" id="ep-item-${level}-${ep.id}" data-epkey="${level}_${ep.id}" onclick="loadEp('${ep.id}','${level}')"><div class="ep-num">${i+1}</div><div class="ep-name">${ep.tag?`<span class="ep-genre-tag-sm">${esc(ep.tag)}</span>`:''}${ep.label}</div><span class="ep-done" title="${_star.has(level+'_'+ep.id)?'자기점검까지 완료 · Fully reviewed':'Quiz 통과 · Quiz done'}" style="opacity:${(_done.has(level+'_'+ep.id)||_star.has(level+'_'+ep.id))?1:0}">${_star.has(level+'_'+ep.id)?'⭐':'✅'}</span></div>`;
   const trialLock=(list)=>(NHS_IS_TRIAL&&!NHS_TRIAL_ALL_L1)?list.map(ep=>NHS_TRIAL_EPS.includes(ep.id)?ep:{...ep,disabled:true,locked:true}):list;
   let html='';
+  const lvrItem=(n)=>(NHS_IS_TRIAL&&!NHS_TRIAL_ALL_L1&&n===1)
+    ?'<div class="lt-item" style="opacity:.4;cursor:default" title="체험판에서는 이용할 수 없어요"><div class="lt-num">🔒</div><div class="lt-name">Level '+n+' 복습</div></div>'
+    :'<div class="lt-item" id="lvr-sidebar-item-L'+n+'" onclick="loadLevelReview('+n+')"><div class="lt-num">🔁</div><div class="lt-name">Level '+n+' 복습</div></div>';
   if(lv==='L1'){
     html=trialLock(L1_EPISODES).map((ep,i)=>mkItem(ep,i,'L1')).join('');
+    html+=lvrItem(1);
     html+=(NHS_IS_TRIAL&&!NHS_TRIAL_ALL_L1)
       ?'<div class="lt-item" style="opacity:.4;cursor:default" title="체험판에서는 이용할 수 없어요"><div class="lt-num">🔒</div><div class="lt-name">Level 1 마감 테스트</div></div>'
       :'<div class="lt-item" id="lt-sidebar-item" onclick="loadLevelTest()"><div class="lt-num">🏆</div><div class="lt-name">Level 1 마감 테스트</div></div>';
   }else if(lv==='L2'){
     html=L2_EPISODES.map((ep,i)=>mkItem(ep,i,'L2')).join('')
+      +lvrItem(2)
       +'<div class="lt-item" id="l2t-sidebar-item" onclick="loadL2Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 2 마감 테스트</div></div>';
   }else if(lv==='L3'){
     html=L3_EPISODES.map((ep,i)=>mkItem(ep,i,'L3')).join('')
+      +lvrItem(3)
       +'<div class="lt-item" id="l3t-sidebar-item" onclick="loadL3Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 3 마감 테스트</div></div>';
   }else if(lv==='L4'){
     html=L4_EPISODES.map((ep,i)=>mkItem(ep,i,'L4')).join('')
+      +lvrItem(4)
       +'<div class="lt-item" id="l4t-sidebar-item" onclick="loadL4Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 4 마감 테스트</div></div>';
   }else if(lv==='L5'){
     html=L5_EPISODES.map((ep,i)=>mkItem(ep,i,'L5')).join('')
+      +lvrItem(5)
       +'<div class="lt-item" id="l5t-sidebar-item" onclick="loadL5Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 5 마감 테스트</div></div>';
   }else if(lv==='L6'){
     html=L6_EPISODES.map((ep,i)=>mkItem(ep,i,'L6')).join('')
+      +lvrItem(6)
       +'<div class="lt-item" id="l6t-sidebar-item" onclick="loadL6Test()"><div class="lt-num">🏆</div><div class="lt-name">Level 6 마감 테스트</div></div>';
   }
   document.getElementById('ep-list').innerHTML=html;
@@ -1575,7 +1584,11 @@ function buildVocab(){
 // ── GRAMMAR ────────────────────────────────────────────
 function buildGrammar(){
   if(!DATA.grammar||!DATA.grammar.length)return'<div class="loading">데이터 준비 중이에요.</div>';
-  return DATA.grammar.map(g=>{
+  return DATA.grammar.map(grammarCardHtml).join('');
+}
+// 2026-08-24: buildGrammar()의 카드 렌더링 본체를 독립 함수로 분리 — vocabCardHtml()과 같은 패턴.
+// 레벨 복습(loadLevelReview)처럼 여러 편의 grammar를 한 화면에 모아 그릴 때 재사용하기 위함.
+function grammarCardHtml(g){
     // rule_boxes — color-coded rule cards (red=warning, blue=pattern, green=tip, amber=note)
     const ruleBoxHtml=(g.rule_boxes||[]).map(rb=>{
       const colors={red:'#FFF0F0',blue:'#F0F6FF',green:'#EDF7F2',amber:'#FFFBF0'};
@@ -1598,7 +1611,7 @@ function buildGrammar(){
       ? seKo.replace(new RegExp(`(${seSafeHl})`,'g'),'<mark style="background:#FFE1B8;padding:0 2px;border-radius:2px">$1</mark>')
       : esc(seKo);
     // find the matching script line so we can play the real recorded TTS instead of synthesized speech
-    const seScriptLine=(seKo&&DATA.script)?DATA.script.find(l=>l.text&&(l.text.includes(seKo)||seKo.includes(l.text))):null;
+    const seScriptLine=(seKo&&DATA&&DATA.script)?DATA.script.find(l=>l.text&&(l.text.includes(seKo)||seKo.includes(l.text))):null;
     const seAudio=seScriptLine?(seScriptLine.audio||''):'';
     const sceneExampleHtml=seKo?`<div class="gram-scene-ex" style="background:linear-gradient(135deg,#FFF9F0,#FFFFFF);border:1.5px solid #F0DDBE;border-radius:var(--radius-md);padding:12px 16px;margin-bottom:12px">
         <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#B8863D;margin-bottom:6px">🎬 이 장면에서 · From the scene</div>
@@ -1675,7 +1688,256 @@ function buildGrammar(){
           </div>
         </div>`).join('')}</div>`:''}
     </div>`;
+}
+
+// ══════════════════════════════════════════════════════
+// ── 레벨별 복습 모드 (Level Review Mode) — 2026-08-24
+//   새 콘텐츠 제작 없이 기존 데이터만 재사용합니다.
+//   · 어휘: 레벨 전체(ep01~ep12) 단어로 자동 객관식 퀴즈를 만들고,
+//     결과는 플래시카드와 같은 SRS 저장소(_fcMark)에 기록됩니다.
+//   · 문법: 편별로 제목+한두줄 요약만 모아 보여주고, 전체 카드는 "자세히 보기"로 그 편에서 확인.
+// ══════════════════════════════════════════════════════
+let _lvrLv='L1',_lvrNum=1,_lvrTab='vocab';
+let _lvrVocabPool=[],_lvrGrammarByEp=[];
+let _lvrQueue=[],_lvrQIdx=0,_lvrScore=0,_lvrAnswered=false,_lvrCur=null,_lvrDir=true,_lvrCurOpts=[],_lvrCurCorrect=0;
+let _lvrGramPage=0;
+const LVR_GRAM_EPS_PER_PAGE=3;
+
+async function loadLevelReview(lvNum){
+  document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
+  const si=document.getElementById('lvr-sidebar-item-L'+lvNum);
+  if(si)si.classList.add('active');
+  _lvrNum=lvNum; _lvrLv='L'+lvNum; _lvrTab='vocab';
+  document.getElementById('content-area').innerHTML=
+    '<div style="text-align:center;padding:60px 20px;"><div style="font-size:40px;margin-bottom:14px;">⏳</div>'
+    +'<div style="font-size:15px;color:var(--warm-600);">복습 자료 모으는 중...<br><small>Gathering review material...</small></div></div>';
+  await _sharedSetsReady;
+  const _LVARR={1:L1_EPISODES,2:L2_EPISODES,3:L3_EPISODES,4:L4_EPISODES,5:L5_EPISODES,6:L6_EPISODES};
+  const eps=(_LVARR[lvNum]||[]).filter(ep=>!ep.disabled);
+  const vocab=[]; const gramByEp=[];
+  await Promise.all(eps.map(async ep=>{
+    const epKey=_lvrLv+'_'+ep.id;
+    let data=EPISODE_DATA[epKey];
+    if(!data){
+      try{const r=await fetch('data/nhs/'+_lvrLv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
+    }
+    if(!data)return;
+    (data.vocab||[]).forEach(cat=>{
+      (cat.items||[]).forEach(item=>{
+        if(!item.korean||!item.english)return;
+        // 재순환(recycled) 단어는 "다른 상황에서의 쓰임"을 보여주기 위해,
+        // 재등장한 이 편의 실제 대사(script)에서 그 단어가 쓰인 문장을 찾아 문맥 카드로 씁니다.
+        // (2026-08-24: 단어를 고립시켜 뜻만 묻던 방식은 재순환의 본래 취지 — 새 문맥 노출 — 를
+        //  담지 못한다는 지적에 따라, 실제로 다시 쓰인 문장이 있을 때는 그 문장을 그대로 재활용합니다.)
+        let ctx=null;
+        if(item.recycled&&data.script&&data.script.length){
+          const line=data.script.find(l=>l.text&&l.text.includes(item.korean));
+          if(line)ctx={ko:line.text,en:line.en||''};
+        }
+        vocab.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',recycled:!!item.recycled,level:_lvrLv,epId:ep.id,ctx});
+      });
+    });
+    if(data.grammar&&data.grammar.length)gramByEp.push({ep,grammar:data.grammar});
+  }));
+  gramByEp.sort((a,b)=>eps.indexOf(a.ep)-eps.indexOf(b.ep));
+  _lvrVocabPool=vocab; _lvrGrammarByEp=gramByEp; _lvrGramPage=0;
+  document.getElementById('content-area').innerHTML=_lvrRenderShell();
+  _lvrBuildQueue();
+  _lvrRenderVocab();
+}
+
+function _lvrRenderShell(){
+  return `<div class="lt-page">`
+    +`<div class="lt-header">`
+      +`<div class="lt-title">🔁 ${_lvrLv} 복습</div>`
+      +`<div class="lt-subtitle">ep01~ep12 어휘·문법 전체 모아보기 · Level-wide review</div>`
+      +`<div style="display:flex;gap:8px;margin-top:12px;">`
+        +`<button id="lvr-tab-vocab" class="lt-opt" style="flex:1;padding:9px;font-weight:800;${_lvrTab==='vocab'?'background:var(--teal);color:#fff;border-color:var(--teal);':''}" onclick="_lvrSwitchTab('vocab')">📇 어휘 퀴즈</button>`
+        +`<button id="lvr-tab-gram" class="lt-opt" style="flex:1;padding:9px;font-weight:800;${_lvrTab==='gram'?'background:var(--teal);color:#fff;border-color:var(--teal);':''}" onclick="_lvrSwitchTab('gram')">📖 문법 모아보기</button>`
+      +`</div>`
+    +`</div>`
+    +`<div id="lvr-body"></div>`
+  +`</div>`;
+}
+
+function _lvrSwitchTab(tab){
+  _lvrTab=tab;
+  const vb=document.getElementById('lvr-tab-vocab'), gb=document.getElementById('lvr-tab-gram');
+  if(vb)vb.style.cssText='flex:1;padding:9px;font-weight:800;'+(tab==='vocab'?'background:var(--teal);color:#fff;border-color:var(--teal);':'');
+  if(gb)gb.style.cssText='flex:1;padding:9px;font-weight:800;'+(tab==='gram'?'background:var(--teal);color:#fff;border-color:var(--teal);':'');
+  if(tab==='vocab'){ _lvrBuildQueue(); _lvrRenderVocab(); }
+  else{ _lvrRenderGrammar(); }
+}
+
+// 어휘 퀴즈 큐 만들기 — 아직 재순환된 적 없는(=<새 어휘>) 단어를 80%, 이미 재순환된 단어를 20% 비율로 섞습니다.
+// (재순환 단어는 커리큘럼 안에서 이미 한 번 더 노출됐지만, 단발성 단어는 이 복습 모드가 유일한 재노출 기회이기 때문)
+function _lvrBuildQueue(){
+  const pool=_lvrVocabPool;
+  const fresh=shuffleArr(pool.filter(c=>!c.recycled));
+  const rec=shuffleArr(pool.filter(c=>c.recycled));
+  const CAP=Math.min(30,pool.length);
+  const needRec=Math.round(CAP*0.2);
+  const queue=[...rec.slice(0,needRec),...fresh.slice(0,CAP-Math.min(needRec,rec.length))];
+  if(queue.length<CAP){
+    const used=new Set(queue.map(c=>c.korean));
+    const rest=shuffleArr(pool.filter(c=>!used.has(c.korean)));
+    queue.push(...rest.slice(0,CAP-queue.length));
+  }
+  _lvrQueue=shuffleArr(queue);
+  _lvrQIdx=0; _lvrScore=0;
+}
+
+let _lvrCurMode='meaning';   // 'meaning' = 고립된 단어-뜻 인지 확인 · 'cloze' = 재등장 문장 속 빈칸 채우기 (진짜 재순환)
+
+function _lvrRenderVocab(){
+  const body=document.getElementById('lvr-body'); if(!body)return;
+  if(!_lvrQueue.length){
+    body.innerHTML=`<div style="text-align:center;padding:40px 20px;color:var(--warm-500);">이 레벨에는 아직 어휘가 없어요.</div>`;
+    return;
+  }
+  if(_lvrQIdx>=_lvrQueue.length){ _lvrRenderVocabDone(); return; }
+  const progPct=Math.round(_lvrQIdx/_lvrQueue.length*100);
+  const c=_lvrQueue[_lvrQIdx];
+  _lvrAnswered=false;
+  _lvrCur=c;
+  const progHtml=`<div class="lt-prog-bar"><div class="lt-prog-fill" style="width:${progPct}%"></div></div>`
+    +`<div class="lt-prog-label">${_lvrQIdx} / ${_lvrQueue.length}</div>`;
+  if(c.ctx){
+    // ── 재순환(cloze) 카드 — 재등장한 이 편의 실제 문장 속에서 단어를 골라내는, 진짜 "다른 상황" 문제 ──
+    _lvrCurMode='cloze';
+    const distractPool=_lvrVocabPool.filter(v=>v.korean!==c.korean);
+    const distractors=shuffleArr(distractPool).slice(0,3);
+    const opts=shuffleArr([c,...distractors]);
+    _lvrCurOpts=opts; _lvrCurCorrect=opts.indexOf(c);
+    // 영어 번역은 문제 단계에서는 보여주지 않습니다 — 그대로 보여주면 번역문 안에 정답 단어의 영어 뜻이
+    // 그대로 노출돼서(예: "mom") 한국어 문맥을 안 읽고도 정답을 맞힐 수 있게 되기 때문입니다.
+    // (정답을 고른 뒤 설명에서만 보여줍니다.)
+    const blanked=esc(c.ctx.ko).replace(esc(c.korean),'<span style="display:inline-block;border-bottom:2.5px solid var(--teal);color:var(--teal-dark);font-weight:800;padding:0 2px;">＿＿＿＿</span>');
+    body.innerHTML=progHtml
+      +`<div class="lt-ep-badge">${c.epId.toUpperCase()} · 🔁 다른 장면에서 다시 만나는 단어예요</div>`
+      +`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:12px;padding:20px 18px;margin:10px 0 16px;">`
+        +`<div style="font-family:var(--font-serif);font-size:14.5px;font-weight:700;color:var(--warm-900);line-height:1.7">${blanked}</div>`
+      +`</div>`
+      +`<div style="font-size:13px;color:var(--warm-500);margin-bottom:6px;font-weight:700">빈칸에 들어갈 단어는?</div>`
+      +`<div class="lt-opts">`
+      +opts.map((o,i)=>`<button class="lt-opt" id="lvr-opt-${i}" onclick="_lvrChoose(${i})">${esc(o.korean)}${o.rom?` <span style="font-weight:400;opacity:.6;font-size:.85em">(${esc(o.rom)})</span>`:''}</button>`).join('')
+      +`</div><div id="lvr-exp-area"></div>`;
+  } else {
+    // ── 기존 방식 — 단어를 고립시켜 뜻(한↔영)을 확인하는 카드 ──
+    _lvrCurMode='meaning';
+    _lvrDir=(_lvrQIdx%2===0);   // 짝수 문제: 한국어→영어, 홀수 문제: 영어→한국어 (양방향 인식 훈련)
+    const distractPool=_lvrVocabPool.filter(v=>v.korean!==c.korean);
+    const distractors=shuffleArr(distractPool).slice(0,3);
+    const opts=shuffleArr([c,...distractors]);
+    _lvrCurOpts=opts; _lvrCurCorrect=opts.indexOf(c);
+    const qDisplay=_lvrDir
+      ?`<div style="font-size:2rem;margin-bottom:6px;">${c.emoji}</div><div style="font-size:1.5rem;font-weight:800;color:var(--warm-900);">${esc(c.korean)}</div>${c.rom?`<div style="font-size:.85rem;color:var(--warm-500);margin-top:2px;">${esc(c.rom)}</div>`:''}`
+      :`<div style="font-size:1.3rem;font-weight:700;color:var(--warm-900);">${esc(c.english)}</div>`;
+    body.innerHTML=progHtml
+      +`<div class="lt-ep-badge">${c.epId.toUpperCase()}${c.recycled?' · 🔁 복습 어휘':' · 새 어휘'}</div>`
+      +`<div style="text-align:center;background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:12px;padding:22px 16px;margin:10px 0 16px;">${qDisplay}</div>`
+      +`<div class="lt-opts">`
+      +opts.map((o,i)=>`<button class="lt-opt" id="lvr-opt-${i}" onclick="_lvrChoose(${i})">${esc(_lvrDir?o.english:o.korean)}</button>`).join('')
+      +`</div><div id="lvr-exp-area"></div>`;
+  }
+}
+
+function _lvrChoose(idx){
+  if(_lvrAnswered)return;
+  _lvrAnswered=true;
+  const correct=idx===_lvrCurCorrect;
+  if(correct)_lvrScore++;
+  _lvrCurOpts.forEach((_,i)=>{
+    const el=document.getElementById('lvr-opt-'+i);
+    if(!el)return;
+    el.disabled=true;
+    if(i===_lvrCurCorrect)el.classList.add('correct');
+    else if(i===idx&&!correct)el.classList.add('wrong');
+  });
+  // 플래시카드와 동일한 SRS 저장소에 결과를 반영 — 복습 모드와 플래시카드가 같은 기록을 공유합니다.
+  _fcMark({level:_lvrCur.level,epId:_lvrCur.epId,korean:_lvrCur.korean},!correct);
+  const c=_lvrCur;
+  const expMsg=_lvrCurMode==='cloze'
+    ?(correct?'✅ 정답이에요! '+esc(c.korean)+' = '+esc(c.english):'❌ 정답은 '+esc(c.korean)+'예요. ('+esc(c.english)+')')
+    :(correct?'✅ 정답이에요!':'❌ 정답은 '+esc(_lvrDir?c.english:c.korean)+'예요.')+(c.rom&&_lvrCurMode==='meaning'?' ('+esc(c.rom)+')':'');
+  const expCtxEn=(_lvrCurMode==='cloze'&&c.ctx&&c.ctx.en)
+    ?`<div style="font-size:13px;color:var(--warm-500);margin-top:4px">${esc(c.ctx.en)}</div>`:'';
+  document.getElementById('lvr-exp-area').innerHTML=
+    `<div class="lt-exp">${expMsg}${expCtxEn}</div>`
+    +`<button class="lt-next-btn" onclick="_lvrNext()">${_lvrQIdx===_lvrQueue.length-1?'📊 결과 보기':'다음 →'}</button>`;
+}
+
+function _lvrNext(){
+  _lvrQIdx++;
+  _lvrRenderVocab();
+}
+
+function _lvrRenderVocabDone(){
+  const body=document.getElementById('lvr-body'); if(!body)return;
+  const total=_lvrQueue.length;
+  const pct=total?Math.round(_lvrScore/total*100):0;
+  body.innerHTML=
+    `<div class="lt-score-wrap">`
+    +`<div class="lt-grade" style="color:var(--teal-dark)">${pct}%</div>`
+    +`<div class="lt-grade-lbl" style="color:var(--teal-dark)">${_lvrLv} 어휘 ${total}개 복습 완료!</div>`
+    +`<div class="lt-score-detail">`
+      +`<div class="lt-score-box"><div class="lt-score-box-num">${_lvrScore}/${total}</div><div class="lt-score-box-lbl">정답</div></div>`
+    +`</div>`
+    +`<div style="font-size:12.5px;color:var(--warm-500);margin:10px 0 18px;">맞고 틀린 기록은 플래시카드의 간격 반복(SRS)에도 함께 저장돼요.</div>`
+    +`<button class="lt-retry-btn" onclick="_lvrBuildQueue();_lvrRenderVocab();">↺ 다시 풀기</button>`
+    +`</div>`;
+}
+
+// ── 문법 모아보기 — 한두줄 요약만 보여주고, 전체 카드는 "자세히 보기"로 해당 편에서 확인 ──
+//   (2026-08-24: 처음엔 grammarCardHtml() 전체를 다 모아 보여줬는데, 한 레벨 12편 분량을
+//    한 화면에 쏟아내니 학습자가 질릴 정도로 많아서 요약+링크+페이지네이션 방식으로 변경)
+function _lvrGramShortDesc(g){
+  const t=(g.explanation_en||'').trim();
+  if(!t) return g.pattern?esc(g.pattern):'';
+  const sentences=t.match(/[^.!?]+[.!?]+(\s|$)/g)||[t];
+  let out=sentences.slice(0,2).join('').trim();
+  if(out.length>160) out=out.slice(0,157).trim()+'…';
+  return esc(out);
+}
+function _lvrRenderGrammar(){
+  const body=document.getElementById('lvr-body'); if(!body)return;
+  if(!_lvrGrammarByEp.length){
+    body.innerHTML=`<div style="text-align:center;padding:40px 20px;color:var(--warm-500);">이 레벨에는 아직 문법 카드가 없어요.</div>`;
+    return;
+  }
+  const totalPages=Math.max(1,Math.ceil(_lvrGrammarByEp.length/LVR_GRAM_EPS_PER_PAGE));
+  if(_lvrGramPage>=totalPages)_lvrGramPage=totalPages-1;
+  if(_lvrGramPage<0)_lvrGramPage=0;
+  const pageEps=_lvrGrammarByEp.slice(_lvrGramPage*LVR_GRAM_EPS_PER_PAGE,(_lvrGramPage+1)*LVR_GRAM_EPS_PER_PAGE);
+  const rows=pageEps.map(({ep,grammar})=>{
+    const epKey=_lvrLv+'_'+ep.id;
+    return `<div class="idx-section-hdr">${esc(ep.label||ep.id)} · ${ep.id.toUpperCase()}</div>`
+      +grammar.map(g=>`
+        <div class="idx-gram-row">
+          <div style="display:flex;align-items:flex-start;gap:8px">
+            <span style="font-size:16px">${esc(g.emoji||'📌')}</span>
+            <div style="flex:1;min-width:0">
+              <div class="idx-gram-title">${esc(g.title||'')}</div>
+              <div style="font-size:13px;color:var(--warm-500);margin-top:2px;line-height:1.5">${_lvrGramShortDesc(g)}</div>
+            </div>
+            <span class="idx-ep-badge" style="cursor:pointer;white-space:nowrap" onclick="loadEpAndTab('${escA(epKey)}','grammar')">자세히 보기 →</span>
+          </div>
+        </div>`).join('');
   }).join('');
+  const pagerHtml=totalPages>1
+    ?`<div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;">`
+      +`<button class="lt-opt" style="padding:7px 16px;${_lvrGramPage===0?'opacity:.4;cursor:default;':''}" ${_lvrGramPage===0?'disabled':''} onclick="_lvrGramGoPage(-1)">← 이전</button>`
+      +`<span style="font-size:12.5px;font-weight:700;color:var(--warm-600)">${_lvrGramPage+1} / ${totalPages}</span>`
+      +`<button class="lt-opt" style="padding:7px 16px;${_lvrGramPage===totalPages-1?'opacity:.4;cursor:default;':''}" ${_lvrGramPage===totalPages-1?'disabled':''} onclick="_lvrGramGoPage(1)">다음 →</button>`
+      +`</div>`
+    :'';
+  body.innerHTML=rows+pagerHtml;
+}
+function _lvrGramGoPage(delta){
+  _lvrGramPage+=delta;
+  _lvrRenderGrammar();
+  const body=document.getElementById('lvr-body');
+  if(body)body.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 // ── FILL IN THE BLANKS CHECK ───────────────────────────
@@ -4696,7 +4958,10 @@ async function loadRoadmap(){
   const s4='12편을 마치면 사이드바 맨 아래 <b>🏆 마감 테스트</b>가 있어요. <b>틀린 문제는 그 편으로 바로 가는 링크</b>가 나옵니다.'
     +_rmEn('After 12 episodes, take the level test. Wrong answers link back to the episode.')
     +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 <b>80% 아래면 다음 레벨로 가지 마세요.</b> 틀린 편만 다시 보고 재시험 보는 게 훨씬 빠릅니다.</div>'
-    +'<table style="margin-top:10px;font-size:12.5px;border-collapse:collapse">'+trows+'</table>';
+    +'<table style="margin-top:10px;font-size:12.5px;border-collapse:collapse">'+trows+'</table>'
+    +'<div style="margin-top:14px;background:var(--amber-lt);border:1.5px solid var(--amber);border-radius:10px;padding:11px 14px;font-size:12.5px;color:var(--warm-900);line-height:1.8;">'
+    +'📖 <b>Level 6부터는 목표가 바뀝니다.</b> L1~L5는 &ldquo;내가 이 문법으로 말하고 쓸 수 있는가&rdquo;가 목표였다면, L6는 뉴스·논설문·실제 한국 소설(《메밀꽃 필 무렵》 등 원문)을 <b>가공 없이 그대로</b> 읽어요. 여기서부터는 <b>완벽히 다 만들어 말하는 게 아니라, 읽고 분위기·의도를 짐작하는 것</b>이 목표예요. 모르는 단어·옛말투가 많이 나와도 정상입니다 — 문장마다 영어 번역과 낱말 설명이 붙어 있어요.'
+    +'<div style="font-size:13px;color:#8a6d1f;font-style:italic;margin-top:5px;">From Level 6 on, the goal changes. L1–L5 were about producing Korean yourself. L6 gives you real, unedited Korean writing — news, essays, and actual short stories — and the goal shifts to reading comprehension and inferring mood/meaning, not perfect production. Seeing unfamiliar or old-fashioned words is expected; every line has an English translation and word notes.</div></div>';
 
   // ── 놓치기 쉬운 기능 ──
   const gem=(icon,ko,en,where,when)=>
@@ -5339,7 +5604,7 @@ function buildPronouncePanel(){
   const cardsHtml=CONSONANTS.slice(0,14).map(function(c){
     const init=HP_CONS_SOUND[c.kr]||{};
     const fin=BATCHIM_SOUND_BY_CONS[c.kr]||{};
-    return '<div class="pron-card">'
+    return '<div class="pron-letter-card">'
       +'<div class="pron-card-kr">'+c.kr+'</div>'
       +'<div class="pron-card-name">'+c.name+'</div>'
       +'<div class="pron-sound-row">'

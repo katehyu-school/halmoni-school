@@ -330,7 +330,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .quiz-retry-btn{margin-top:18px;padding:12px 36px;background:var(--teal-md);color:#fff;border:none;border-radius:var(--radius-xl);font-size:13.5px;font-weight:700;font-family:var(--font-kr);cursor:pointer;}
 
 /* ── 발음 탭 ───────────────────────────────────────── */
-.pron-card{background:#fff;border:2px solid var(--warm-300);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm);}
+.pron-card{background:#fff;border:2px solid var(--warm-300);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow-sm);text-align:left;}
 .pron-title{font-size:14px;font-weight:700;color:var(--warm-900);margin-bottom:4px;}
 .pron-rule{font-size:12.5px;color:var(--coral);font-weight:600;margin-bottom:8px;}
 .pron-ex{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--warm-100);}
@@ -482,7 +482,7 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .pron-special-pron{font-size:11px;color:var(--warm-500);margin:4px 0 8px;}
 .pron-special-row{font-size:11.5px;color:var(--warm-600);line-height:1.6;}
 .pron-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:10px;}
-.pron-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 8px;text-align:center;}
+.pron-letter-card{background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 8px;text-align:center;}
 .pron-card-kr{font-size:32px;font-weight:800;color:var(--gray-900);font-family:var(--font-kr);line-height:1.1;}
 .pron-card-name{font-size:10.5px;color:var(--warm-400);font-weight:600;margin:2px 0 8px;}
 .pron-sound-row{display:flex;flex-direction:column;gap:5px;}

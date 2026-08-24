@@ -1809,7 +1809,7 @@ function normalizeEp(n,d,lv){
   })).filter(q=>q.opts.length>0);
   let vitems=[];
   (d.vocab||[]).forEach(cat=>{(cat.items||[]).forEach(it=>{
-    if(it.korean&&it.english)vitems.push({w:it.korean,m:it.english,ro:it.romanization||'',emoji:it.emoji||''});
+    if(it.korean&&it.english)vitems.push({w:it.korean,m:it.english,ro:it.romanization||'',emoji:it.emoji||'',recycled:!!it.recycled});
   })});
   // shuffle, pick 5
   for(let i=vitems.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[vitems[i],vitems[j]]=[vitems[j],vitems[i]]}
@@ -1939,14 +1939,14 @@ function fRender(){
           <button class="fn-ghost" style="flex:1;padding:12px 14px;border-radius:14px;font-weight:700;font-size:.8rem" onclick="kkOpen(EP.n)">💬 카톡 →</button>
         </div>`:''}
         <button class="fn-ghost" style="padding:12px 30px;border-radius:14px;font-weight:700;margin-top:8px" onclick="showEpList()">다른 에피소드 →</button></div>`;
-      confetti(30);dqDone('dq3');dqDone('dq4');
+      dqDone('dq3');dqDone('dq4');
       return;
     }
     const c=EP.vocab[fCard];
     b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:#7e98a5">🔁 단어 복습 ${fCard+1} / ${EP.vocab.length} — 카드를 탭해서 뒤집어 보세요</div>
       <div class="fcard" id="fcard" onclick="this.classList.toggle('flip')">
         <div class="fcard-inner">
-          <div class="fface ffront"><div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
+          <div class="fface ffront">${c.recycled?'<div style="position:absolute;top:10px;right:12px;font-size:.72rem;font-weight:700;background:rgba(78,205,196,.18);color:#4ecdc4;border-radius:20px;padding:3px 9px" title="이전 편에서 배운 어휘예요">🔁 복습</div>':''}<div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
           <div class="fface fback"><div class="m">${c.m}</div><div class="ex">${c.ro}</div></div>
         </div>
       </div>
@@ -3173,7 +3173,7 @@ let SHARE_DATA=null;
 function shareOpen(opts){
   SHARE_DATA=opts;
   if(opts.dqIds)opts.dqIds.forEach(id=>dqDone(id));
-  if(opts.confetti!==false)confetti(30);
+  if(opts.confetti===true)confetti(30); // 2026-08-24: HQ(성인) 플로우는 기본 off — Kids 쪽 confetti는 별도 코드라 영향 없음
   shareRender();
   show('scr-hq-share');
 }
