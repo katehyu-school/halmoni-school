@@ -667,6 +667,15 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .nb-chip{display:flex;align-items:center;gap:8px;background:var(--teal-lt);border:1.5px solid var(--teal-300);border-radius:var(--radius-md);padding:8px 10px 8px 14px;}
 .nb-chip-kr{font-family:var(--font-myeongjo);font-size:26px;font-weight:700;color:var(--teal-dark);line-height:1;}
 .nb-chip-rom{font-size:11px;color:var(--warm-500);font-weight:600;}
+.stroke-grid{display:flex;flex-direction:column;gap:6px;max-width:100%;overflow-x:auto;padding-bottom:4px;}
+.stroke-row{display:flex;gap:5px;align-items:center;padding-bottom:6px;border-bottom:1px solid var(--gray-100);}
+.stroke-cell{position:relative;flex:none;width:70px;height:70px;border:1.5px solid var(--gray-200);border-radius:8px;background:#fff;overflow:hidden;}
+.stroke-cell.stroke-ref{background:var(--teal-50);border-color:var(--teal-lt);}
+.stroke-ref-char{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-myeongjo);font-size:52px;font-weight:700;color:var(--gray-900);}
+.stroke-guide-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-myeongjo);font-size:52px;font-weight:700;color:#8a8a8a;pointer-events:none;}
+.stroke-canvas{position:absolute;inset:0;width:70px;height:70px;cursor:crosshair;touch-action:none;background:transparent;}
+.stroke-mark{position:absolute;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.92);border:1.2px solid var(--coral);color:var(--coral);font-size:6.5px;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1;z-index:2;}
+.stroke-arrow{position:absolute;transform:translate(6px,-14px);font-size:12px;color:var(--coral);font-weight:800;z-index:2;pointer-events:none;}
 .nb-chip-remove{border:none;background:none;color:var(--warm-400);font-size:13px;cursor:pointer;padding:2px 4px;line-height:1;}
 .nb-chip-remove:hover{color:var(--coral);}
 .nb-finish-btn{display:block;width:100%;padding:12px;background:var(--teal-md);color:#fff;border:none;border-radius:var(--radius-md);font-size:14px;font-weight:700;font-family:var(--font-kr);cursor:pointer;margin:14px 0 18px;transition:opacity .2s;}

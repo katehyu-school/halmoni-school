@@ -3996,6 +3996,70 @@ let curWriteChar=WRITE_CHARS.find(c=>c.grp==='syl');
 let curWriteWord=WRITE_CHARS.find(c=>c.grp==='word');
 function _wGuideSize(str){ return str.length<=1?80:str.length===2?46:32; }
 
+// ══════════════════════════════════════════════════════
+// 🔤 자모 획순(Stroke Order) — 기본 자음 14 + 기본 모음 10
+// 선생님이 실제 손글씨 기준으로 검증한 데이터: 펜을 안 떼고 이어서 쓰는 꺾임(ㄱ·ㄴ 모양)은 1획,
+// 네모(ㅁㅂㅍ)처럼 변이 여러 개 만나는 건 변마다 1획. ㅅ·ㅈ·ㅊ은 명조체 기준(고딕체는 다리 두 개가
+// 따로 갈라져 보여서 획순을 오해하기 쉬움) — ㅈ/ㅊ은 "위가로+왼쪽삐침"이 이어진 1획 + 그 중간에서
+// 갈라지는 "오른쪽삐침" 1획. x/y는 글자 박스 안 대략적 위치(%), a는 그 획 시작점의 방향 화살표.
+const STROKE_ORDER={
+  'ㄱ':[{x:27,y:32,a:'→'}],
+  'ㄴ':[{x:30,y:31,a:'↓'}],
+  'ㄷ':[{x:30,y:32,a:'→'},{x:27,y:41,a:'↓'}],
+  'ㄹ':[{x:29,y:30,a:'→'},{x:52,y:44,a:'→'},{x:27,y:56,a:'↓'}],
+  'ㅁ':[{x:27,y:36,a:'↓'},{x:45,y:29,a:'→'},{x:30,y:63,a:'→'}],
+  'ㅂ':[{x:30,y:29,a:'↓'},{x:69,y:29,a:'↓'},{x:47,y:46,a:'→'},{x:30,y:62,a:'→'}],
+  'ㅅ':[{x:42,y:33,a:'↙'},{x:57,y:33,a:'↘'}],
+  'ㅇ':[{x:50,y:31,a:'↺'}],
+  'ㅈ':[{x:28,y:32,a:'→'},{x:50,y:36,a:'↘'}],
+  'ㅊ':[{x:49,y:27,a:'↘'},{x:28,y:38,a:'→'},{x:49,y:41,a:'↘'}],
+  'ㅋ':[{x:28,y:32,a:'→'},{x:29,y:48,a:'→'}],
+  'ㅌ':[{x:29,y:30,a:'→'},{x:52,y:44,a:'→'},{x:27,y:56,a:'↓'}],
+  'ㅍ':[{x:28,y:29,a:'→'},{x:38,y:40,a:'↓'},{x:60,y:40,a:'↓'},{x:28,y:62,a:'→'}],
+  'ㅎ':[{x:49,y:28,a:'↘'},{x:29,y:38,a:'→'},{x:50,y:50,a:'↺'}],
+  'ㅏ':[{x:49,y:18,a:'↓'},{x:49,y:46,a:'→'}],
+  'ㅑ':[{x:49,y:19,a:'↓'},{x:49,y:40,a:'→'},{x:49,y:57,a:'→'}],
+  'ㅓ':[{x:54,y:47,a:'←'},{x:54,y:19,a:'↓'}],
+  'ㅕ':[{x:54,y:40,a:'←'},{x:54,y:57,a:'←'},{x:54,y:19,a:'↓'}],
+  'ㅗ':[{x:49,y:55,a:'↓'},{x:23,y:67,a:'→'}],
+  'ㅛ':[{x:39,y:55,a:'↓'},{x:60,y:55,a:'↓'},{x:23,y:67,a:'→'}],
+  'ㅜ':[{x:23,y:51,a:'→'},{x:49,y:57,a:'↓'}],
+  'ㅠ':[{x:23,y:51,a:'→'},{x:39,y:57,a:'↓'},{x:60,y:57,a:'↓'}],
+  'ㅡ':[{x:23,y:67,a:'→'}],
+  'ㅣ':[{x:49,y:19,a:'↓'}],
+};
+const STROKE_LETTERS=['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','ㅏ','ㅑ','ㅓ','ㅕ','ㅗ','ㅛ','ㅜ','ㅠ','ㅡ','ㅣ'];
+function strokeMarksHtml(kr){
+  const marks=STROKE_ORDER[kr]||[];
+  return marks.map(function(m,i){
+    return '<span class="stroke-mark" style="left:'+m.x+'%;top:'+m.y+'%;">'+(i+1)+'</span>'
+      +'<span class="stroke-arrow" style="left:'+m.x+'%;top:'+m.y+'%;">'+m.a+'</span>';
+  }).join('');
+}
+function buildStrokeOrder(){
+  const rows=STROKE_LETTERS.map(function(kr){
+    const traceCells=[0.55,0.32,0.16].map(function(op){
+      return '<div class="stroke-cell"><div class="stroke-guide-text" style="opacity:'+op+'">'+kr+'</div><canvas class="stroke-canvas" width="70" height="70"></canvas></div>';
+    }).join('');
+    const blankCells=[0,1].map(function(){
+      return '<div class="stroke-cell"><canvas class="stroke-canvas" width="70" height="70"></canvas></div>';
+    }).join('');
+    return '<div class="stroke-row">'
+      +'<div class="stroke-cell stroke-ref"><div class="stroke-ref-char">'+kr+'</div>'+strokeMarksHtml(kr)+'</div>'
+      +traceCells+blankCells
+    +'</div>';
+  }).join('');
+  return '<div class="basics-intro">왼쪽 견본의 번호·화살표 순서대로, 오른쪽 칸에 따라 써보세요. 뒤로 갈수록 흐려지고, 마지막 두 칸은 혼자 써 보는 연습이에요.<br><em>Follow the numbered stroke order on the left, then trace the fading copies. The last two boxes are for writing it on your own.</em></div>'
+    +'<div class="writing-btns" style="margin-bottom:10px;"><button class="writing-btn" onclick="clearStrokeCanvases()">↺ 전체 지우기<span class="wbtn-en">Clear All</span></button></div>'
+    +'<div class="stroke-grid">'+rows+'</div>';
+}
+function initStrokeCanvases(){
+  document.querySelectorAll('#wr-stroke .stroke-canvas').forEach(_wBindCanvas);
+}
+function clearStrokeCanvases(){
+  document.querySelectorAll('#wr-stroke .stroke-canvas').forEach(_wDrawGrid);
+}
+
 // ── 캔버스 하나에 그리기 이벤트를 붙이는 공용 함수 — 칸이 여러 개(단어 모드)여도 각자 독립적으로 동작 ──
 function _wBindCanvas(canvas){
   if(!canvas||canvas._wBound)return;
@@ -4042,6 +4106,7 @@ function initWritingCanvas(){
   renderWordCells();
   renderNbChips();
   updateNbResult();
+  initStrokeCanvases();
 }
 function clearCanvas(){ if(wCanvas)_wDrawGrid(wCanvas); }
 
@@ -4484,7 +4549,8 @@ async function setLevel(btn){
     // 사이드바 맨 위 "시작하기" 라벨은 안 보여줌 — 대신 아래 "🌱 한글 기초" 그룹이 눈에 띄게 함
     if(hdr){hdr.style.display='none';}
     buildBasicsSidebar();
-    loadBasics(curBasicsTopic);
+    // Start Here는 다른 레벨 버튼(항상 ep01로)과 동일하게 항상 고정 디폴트("한글을 배워요")로 열림 — 이전에 로드맵/배치테스트/다른 topic을 보고 있었어도 마찬가지.
+    loadBasics('hangul');
   }else{
     if(hdr){hdr.style.display='';hdr.className='sidebar-hdr';hdr.innerHTML='📺 Episodes';}
     const lv=curLevel==='Level 6'?'L6':curLevel==='Level 5'?'L5':curLevel==='Level 4'?'L4':curLevel==='Level 3'?'L3':curLevel==='Level 2'?'L2':'L1';
@@ -5844,11 +5910,13 @@ function buildWriting(){
   const syl=WRITE_CHARS.filter(c=>c.grp!=='word'), word=WRITE_CHARS.filter(c=>c.grp==='word');
   return '<div class="basics-intro">탭을 골라 연습하세요. 글자 하나씩은 칸 하나에, 단어는 글자 수만큼 칸이 나뉘어요.<br><em>Pick a tab. Single letters get one box; words get one box per syllable.</em></div>'
     +'<div class="btab-bar">'
-      +'<button class="btab active" data-btab-group="wr" data-tab="syl" onclick="switchBtab(\'wr\',\'syl\')">글자 하나씩 · One Letter</button>'
+      +'<button class="btab active" data-btab-group="wr" data-tab="stroke" onclick="switchBtab(\'wr\',\'stroke\')">🔤 자모 획순 · Stroke Order</button>'
+      +'<button class="btab" data-btab-group="wr" data-tab="syl" onclick="switchBtab(\'wr\',\'syl\')">글자 하나씩 · One Letter</button>'
       +'<button class="btab" data-btab-group="wr" data-tab="word" onclick="switchBtab(\'wr\',\'word\')">의미 있는 단어 · Real Words</button>'
       +'<button class="btab" data-btab-group="wr" data-tab="name" onclick="switchBtab(\'wr\',\'name\')">🧩 내 이름 만들기 · Build My Name</button>'
     +'</div>'
-    +'<div id="wr-syl" class="btab-panel active">'
+    +'<div id="wr-stroke" class="btab-panel active">'+buildStrokeOrder()+'</div>'
+    +'<div id="wr-syl" class="btab-panel">'
       +'<div class="writing-chars">'+syl.map((c,i)=>'<button class="wchar-btn'+(i===0?' active':'')+'" onclick="selectWriteChar(\''+c.kr+'\')">'+c.kr+'</button>').join('')+'</div>'
       +'<div class="writing-canvas-wrap">'
         +'<div class="writing-canvas-box"><canvas id="writing-canvas" class="writing-canvas" width="240" height="240"></canvas>'
