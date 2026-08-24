@@ -4978,6 +4978,7 @@ async function loadRoadmap(){
     +gem('📌','빠른 참고','Quick Ref','상단','숫자·의문사·호칭·인사표. 공부하다 막히면 <b>어느 화면에서든</b> 바로 열려요.')
     +gem('🃏','복습 플래시카드','Flashcards','왼쪽 아래','옆의 숫자가 <b>오늘 복습할 개수</b>. 시간 없는 날엔 이것만 눌러도 하루치가 됩니다.')
     +gem('🔥','빠른 복습','Warm-up','편 열 때 자동','지난 편 단어 3~5문제. 귀찮아도 <b>이게 재순환의 핵심</b>이에요.')
+    +gem('🔁','레벨 복습','Level Review','사이드바 맨 아래','12편을 다 안 끝내도 그 레벨 전체 <b>단어·문법을 한 번에</b> 훑어볼 수 있어요. 재순환 단어는 <b>다른 편의 실제 문장</b> 속에서 다시 물어봐요.')
     +gem('🇬🇧','EN 토글','English on/off','상단','영어 설명 끄기. 익숙해지면 꺼서 <b>한국어로만</b> 보세요. 레벨마다 따로 기억됩니다.')
     +gem('📓','My Notes','Notes','상단','<b>이름 만들기(진도 저장)</b> + 필기 + ✏️ 한글 쓰기 연습.')
     +gem('📋','게시판','Board','상단','막히는 게 있으면 올려 두세요. <b>다른 사람 질문과 답도 볼 수 있으니</b> 쓰기 전에 먼저 훑어보면 답이 있을 때가 많아요.')
@@ -4985,6 +4986,7 @@ async function loadRoadmap(){
     +gem('✍️','쓰기','Writing','Quiz 안','받아쓰기 + 문장 완성(TOPIK 51·52형). 맞춤법만 보고 <b>띄어쓰기는 봐줘요</b>.')
     +gem('✅','자기점검','Self-check','편 맨 끝','다음 편으로 가도 될지 스스로 확인. <b>여기까지 해야 ✓ 표시가 됩니다.</b>')
     +gem('📱','모바일 앱','Mobile','아래 QR','밖에서 5분. 단어장·롤플레이·카톡 시뮬. <b>바로 아래 QR을 찍으면</b> 폰에서 열려요. <b>홈 화면에 추가</b>해 두면 앱처럼 씁니다.')
+    +gem('📖','학습 자료','Open Resource','doranchae.com/learn/','로그인 없이 브라우저에서 바로 보는 <b>무료 문법 설명 페이지</b>예요. 헷갈리는 문법 하나만 빨리 찾아볼 때, 앱 없이 <b>링크로 공유</b>할 때 유용해요. (지금은 Level 1·2까지)')
     +'</table></div>';
 
 
@@ -5003,6 +5005,18 @@ async function loadRoadmap(){
       +'<div style="margin-top:8px;font-size:12px;"><a href="dr-mobile.html" style="color:var(--teal-dark);font-weight:700;">'
         +'또는 여기를 눌러 바로 열기 &rarr;</a></div>'
     +'</div></div></div>';
+
+  // ── 학습 자료 (무료 공개 웹페이지) ──
+  const learnResCard='<div style="margin-top:20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
+    +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📖 학습 자료 — 로그인 없이 보는 문법 페이지</div>'
+    +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-bottom:12px;">Free public grammar pages — no login needed</div>'
+    +'<div style="font-size:12.5px;color:var(--warm-700);line-height:1.85;">'
+    +'앱을 열지 않고 <b>브라우저에서 바로</b> 볼 수 있는 문법 설명 페이지예요. 헷갈리는 문법 하나만 빨리 다시 찾아보고 싶을 때, 폰으로 잠깐 확인만 하고 싶을 때, 친구한테 <b>링크 하나로 공유</b>하고 싶을 때 유용해요. (지금은 Level 1·2 편별 문법까지 실려 있어요)'
+    +'<div style="margin-top:7px;font-size:11px;color:var(--warm-400);font-style:italic;">'
+      +'Open straight in any browser, no account needed. Level 1–2 grammar is covered so far.</div>'
+    +'<div style="margin-top:8px;font-size:12px;"><a href="learn/" style="color:var(--teal-dark);font-weight:700;">'
+      +'학습 자료 전체 보기 &rarr;</a></div>'
+    +'</div></div>';
 
   // ── 주간 리듬 (자습 기준) ──
   const rhythm='<div style="margin-top:20px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
@@ -5032,6 +5046,7 @@ async function loadRoadmap(){
     +_rmStep(4,'🏆','레벨 마감 테스트','Step 4 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))
     +gems
     +qrcard
+    +learnResCard
     +rhythm
     +'<div style="margin-top:16px;font-size:11.5px;color:var(--warm-400);line-height:1.7;">※ 진행 상황은 이 브라우저에만 저장돼요. PC와 폰은 각각 따로 기록됩니다.'
     +'<div style="font-style:italic">Progress is saved in this browser only — PC and phone are tracked separately.</div></div>'
