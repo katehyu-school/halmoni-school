@@ -79,7 +79,7 @@ ALL_LEVELS = ["L1", "L2", "L3", "L4", "L5", "L6"]
 #    Cloudflare 대시보드 › Web Analytics 에서 사이트를 추가하면 토큰을 줍니다.
 #    그 토큰을 아래 따옴표 안에 붙여 넣고 다시 돌리면 전 페이지에 들어갑니다.
 #    비워 두면 아무 스크립트도 나가지 않습니다 (지금 상태).
-CF_ANALYTICS_TOKEN = ""
+CF_ANALYTICS_TOKEN = "ab5c8a27012d4f40b323317238dbeb2b"
 
 LEVEL_LABEL = {
     "L1": ("Level 1", "입문 · Beginner"),
@@ -265,8 +265,10 @@ def page(title, desc, body, canonical, jsonld=None, locked=False, extra_head="",
     beacon = ""
     if CF_ANALYTICS_TOKEN.strip():
         tok = json.dumps({"token": CF_ANALYTICS_TOKEN.strip()}, ensure_ascii=False)
-        beacon = ('\n<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
-                  f"data-cf-beacon='{tok}'></script>")
+        beacon = ("\n<!-- Cloudflare Web Analytics -->"
+                  "<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' "
+                  f"data-cf-beacon='{tok}'></script>"
+                  "<!-- End Cloudflare Web Analytics -->")
     return f"""<!DOCTYPE html>
 <html lang="ko">
 <head>

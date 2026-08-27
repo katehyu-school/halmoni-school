@@ -7,6 +7,18 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 📊 **2026-08-27 완료 (Cloudflare Web Analytics 실제 적용 — nhs.html·index.html·learn/ 전체)**
+> — 배경: 익명 방문(가입 없이 Start Here/Road Map 둘러보기)이 늘면서 몇 명이 오는지 전혀 알 수 없는 상태였음(사이트에 방문 통계 자체가 없었음) — 선생님이 예전에 Cloudflare Web Analytics를 시도하다가 대시보드에서 버튼을 못 찾아 중간에 포기했던 걸 이번에 마무리.
+> — 대시보드 진입은 `https://dash.cloudflare.com/?to=/:account/web-analytics` 직행 링크로 안내(메뉴 찾아 헤매는 문제 회피) → "Add a site"에서 `doranchae.com` 입력 → "Set up hostname"에서 "This hostname does not belong to any website on your Cloudflare account. You will need to install a JS Snippet"는 정상 안내(에러 아님, 우리가 원하는 수동 JS 스니펫 방식) → Done → Installation 단계에서 토큰 발급받음.
+> — **토큰**: `ab5c8a27012d4f40b323317238dbeb2b` (사이트: doranchae.com). 쿠키 없음·개인정보 없음·집계 통계만 제공(방문자 개별 추적 안 함 — Cloudflare 자체 안내 문구).
+> — 적용한 곳 3군데: ① `tools/build_static_pages.py`의 `CF_ANALYTICS_TOKEN`에 값 채움(이전 세션에 자리만 만들어두고 비워뒀던 것) — `page()`가 이 토큰이 있으면 `learn/` 전체(문법·에피소드·허브) 페이지 끝에 자동으로 비콘 스크립트를 심음, 리다이렉트 스텁 8개는 어차피 즉시 다른 곳으로 넘어가니 제외. ② `nhs.html` — 스크립트 생성 대상이 아닌 손으로 쓴 파일이라 `</body>` 직전에 직접 삽입(여기가 핵심 — "Start Here" 익명 방문 등 실제 앱 사용이 전부 이 파일에서 일어남). ③ `index.html`도 동일하게 직접 삽입(랜딩 방문 자체를 보려면 필요).
+> — 스니펫은 Cloudflare가 실제로 준 형식 그대로 사용: `<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"..."}'></script>` (예전에 스크립트에 미리 만들어뒀던 형식은 `defer` 속성이었는데, 실제 발급받은 스니펫엔 `type='module'`이라 그쪽으로 맞춤 — module 스크립트는 스펙상 자동으로 defer처럼 동작해서 기능은 동일).
+> — ✅ **검증**: `nhs.html`·`index.html`은 수정 전후로 `</html>` 태그 정확히 1개, null byte 0 확인. 두 파일의 인라인 `<script>` 블록(전체 앱 로직이 각각 하나의 큰 스크립트 블록으로 들어있음)을 추출해 `node --check` 통과 확인(마크업만 건드렸으니 JS는 원래 그대로지만, 재확인). Playwright로 `nhs.html?view=start`·`index.html`·`learn/index.html` 세 곳 모두 실제로 `beacon.min.js` 요청이 나가는지(네트워크 요청 캡처) 확인 — 컨테이너는 외부망이 막혀 있어 스크립트 자체가 로드되진 않지만, 브라우저가 그 주소로 요청을 시도하는 것까지 확인했으므로 실제 배포 환경에선 정상 로드될 것.
+> — 배포 중 한 번 걸림: `unzip -o`로 기존 파일 위에 덮어쓰려는데 "cannot delete old X — Operation not permitted" 대량 발생 — 이전에 받아둔 삭제 권한이 어느 시점엔가 풀려 있었던 것으로 보임(재연결 등으로 초기화됐을 수 있음). `device_request_delete_permission`을 다시 요청해 승인받고 재시도해서 정상 배포됨. **참고**: 삭제 권한은 세션 내내 유지된다고 보장하지 말고, `unzip -o`가 이런 에러를 내면 우선 권한을 다시 요청해 볼 것.
+> — 배포: zip으로 `device_commit_files`+`device_bash unzip` → `nhs.html`(561,832B)·`index.html`(65,662B)·`learn/`(315개 HTML, 그대로)·`sitemap.xml`·`robots.txt`·`tools/build_static_pages.py` 전부 기기에 반영, 컨테이너와 파일 크기 일치까지 확인.
+> — 다음에 대시보드에서 실제로 숫자가 쌓였는지 보려면: Cloudflare 대시보드 → Web Analytics → doranchae.com 선택. 데이터는 실시간이 아니라 약간의 지연 후 집계됨.
+> — ⏳ **git add/commit/push 대기 중**.
+
 > 🔀 **2026-08-27 완료 (learn/ 옛 주소 8개 — 리다이렉트 스텁 추가, 바로 아래 항목의 "미해결" 후속)**
 > — 선생님이 "리다이렉트가 필요할 여지가 있으면 해 놓자"고 요청 — 바로 아래 항목에서 미뤄뒀던 8개 URL 처리.
 > — 먼저 git 히스토리(`git show <commit>:<path>`)로 옛 8개 페이지의 실제 `<h1>` 제목을 다시 확인해 새 빌드와 재대조했더니, 지난번(문자열 완전일치로만 확인)엔 2개만 매칭됐던 것이 실제로는 **5개가 매칭됨**을 발견(제목 표현이 살짝 바뀌어서 놓쳤던 것 — 예: "respectful"→"plain & respectful", "Level 2"→"L2 ep01"): `l1-ep07-inability-more-ep08.html`→`l1-ep07-inability-more-l2.html`, `l1-ep09-counter-words-which-one-for-what.html`→`l1-ep09-counter-words-which.html`, `l1-ep12-coming-level-2-verb-modifiers.html`→`l1-ep12-coming-l2-ep01-verb-modifiers.html`, `l2-ep03-because-reason.html`→`l2-ep03-because-reason-then-sequence.html`, `l2-ep07-doing-something-someone-respectful.html`→`l2-ep07-doing-something-someone-plain-respectful.html`. 나머지 3개(`l1-ep05-connecting-two-actions-order.html`·`l2-ep07-person.html`·`l2-ep11-realization-from-what-you-were-told-oh-i.html`)는 그 문법 항목 자체가 해당 편의 grammar 배열에서 빠지고 다른 항목으로 교체돼 정확히 대응하는 새 페이지가 없음 → 이 3개는 해당 에피소드 페이지(`learn/episode/l1-ep05.html` 등)로 보냄.
