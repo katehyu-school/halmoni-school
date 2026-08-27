@@ -65,10 +65,19 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
-.lockcard{opacity:.55}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
 .lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
-@media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
+.lvl-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 18px;position:sticky;top:0;background:var(--bg);
+ padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+.lvl-tab{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;color:var(--mute);
+ background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer;
+ transition:all .15s ease}
+.lvl-tab:hover{border-color:var(--teal);color:var(--ink)}
+.lvl-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.lvl-panel h2{margin-top:6px}
+@media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}.lvl-tabs{top:0;gap:5px}.lvl-tab{font-size:13px;padding:6px 12px}}
 </style>
 </head>
 <body>
@@ -90,6 +99,8 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <h1>한국어 학습 자료<span class='en'>Free Korean lessons — grammar, vocabulary, stories</span></h1>
 <p class='lead'>이야기로 시작해서 문법으로 이어집니다. 여기 있는 설명은 미리 보기이고, 이야기·음성·연습 문제는 앱에서 이어집니다.</p>
 <a class='cta' href='/nhs.html'>▶ 앱에서 학습 시작하기 — 무료</a>
+<div class="lvl-tabs" role="tablist" aria-label="레벨 선택"><button class="lvl-tab active" id="lvl-tab-1" onclick="showLvl(1)">Level 1</button><button class="lvl-tab" id="lvl-tab-2" onclick="showLvl(2)">Level 2</button><button class="lvl-tab" id="lvl-tab-3" onclick="showLvl(3)">Level 3 🔒</button><button class="lvl-tab" id="lvl-tab-4" onclick="showLvl(4)">Level 4 🔒</button><button class="lvl-tab" id="lvl-tab-5" onclick="showLvl(5)">Level 5 🔒</button><button class="lvl-tab" id="lvl-tab-6" onclick="showLvl(6)">Level 6 🔒</button></div>
+<section class="lvl-panel" id="lvl-panel-1" data-lvl="1" style="display:block">
 <h2>Level 1 · 입문 · Beginner</h2><div class='cards'>
 <a class='card' href='/learn/episode/l1-ep01.html'><b>안녕! 나는 정민이야.</b><span>Hi! I&#x27;m Jeongmin.</span></a>
 <a class='card' href='/learn/episode/l1-ep02.html'><b>누구예요?</b><span>Who Is It?</span></a>
@@ -151,6 +162,8 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l1-ep12-coming-level-2-verb-modifiers.html'><b>다음 레벨 예고 💙 — _ㄴ/은 + 명사 · _(으)면</b><span>Coming in Level 2 — verb modifiers &amp; conditionals</span></a>
 <a class='card' href='/learn/grammar/l1-ep12-regular-vs-irregular-verbs-change.html'><b>📊 동사 활용표 참고 · Verb Conjugation Reference</b><span>Regular vs Irregular — how verbs change across tenses</span></a>
 </div>
+</section>
+<section class="lvl-panel" id="lvl-panel-2" data-lvl="2" style="display:none">
 <h2>Level 2 · 초급 · Elementary</h2><div class='cards'>
 <a class='card' href='/learn/episode/l2-ep01.html'><b>한국에 도착했어요</b><span>We Arrived in Korea!</span></a>
 <a class='card' href='/learn/episode/l2-ep02.html'><b>공항에서 잠실까지</b><span>From the Airport to Jamsil</span></a>
@@ -217,225 +230,242 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l2-ep12-completed-feeling-vs-prepared-advance.html'><b>-아/어 버리다  &amp;  -아/어 놓다</b><span>Completed with feeling (버리다) vs Prepared in advance (놓다)</span></a>
 <a class='card' href='/learn/grammar/l2-ep12-concession-even-if-even-though.html'><b>-더라도</b><span>Concession — &#x27;even if…&#x27; / &#x27;even though…&#x27;</span></a>
 </div>
+</section>
+<section class="lvl-panel" id="lvl-panel-3" data-lvl="3" style="display:none">
 <h2>Level 3 · 초중급 · Upper Elementary <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
-<a class='card lockcard' href='/learn/episode/l3-ep01.html'><b>파전이나 부쳐 먹을까?</b><span>How About Some Pajeon?</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep02.html'><b>물티슈로 닦으라고!</b><span>Wipe It with a Wet Wipe!</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep03.html'><b>윷놀이를 소개합니다</b><span>Let Me Introduce Yut Nori</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep04.html'><b>베이비 시터</b><span>Babysitter</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep05.html'><b>늦잠을 자는 바람에 머리도 못 감은 채로 나왔어요</b><span>I Overslept and Came Out Without Even Washing My Hair</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep06.html'><b>아무리 그래도 그렇지</b><span>Even So, That&#x27;s Still Too Much</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep07.html'><b>갈비를 맛있게 먹으려면</b><span>If You Want to Eat Galbi Deliciously</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep08.html'><b>날씨가 좋아요</b><span>Nice Weather</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep09.html'><b>조회수 백만 가자!</b><span>Let&#x27;s Get a Million Views!</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep10.html'><b>입을 옷이 하나도 없어</b><span>I Have Nothing to Wear</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep11.html'><b>깜빡 속을 뻔했어</b><span>I Almost Fell for It</span></a>
-<a class='card lockcard' href='/learn/episode/l3-ep12.html'><b>서낭당은 마을 신을 모신 사당이다</b><span>A Shrine for the Village&#x27;s Guardian Spirit</span></a>
+<div class='card lockcard'><b>파전이나 부쳐 먹을까?</b><span>How About Some Pajeon?</span></div>
+<div class='card lockcard'><b>물티슈로 닦으라고!</b><span>Wipe It with a Wet Wipe!</span></div>
+<div class='card lockcard'><b>윷놀이를 소개합니다</b><span>Let Me Introduce Yut Nori</span></div>
+<div class='card lockcard'><b>베이비 시터</b><span>Babysitter</span></div>
+<div class='card lockcard'><b>늦잠을 자는 바람에 머리도 못 감은 채로 나왔어요</b><span>I Overslept and Came Out Without Even Washing My Hair</span></div>
+<div class='card lockcard'><b>아무리 그래도 그렇지</b><span>Even So, That&#x27;s Still Too Much</span></div>
+<div class='card lockcard'><b>갈비를 맛있게 먹으려면</b><span>If You Want to Eat Galbi Deliciously</span></div>
+<div class='card lockcard'><b>날씨가 좋아요</b><span>Nice Weather</span></div>
+<div class='card lockcard'><b>조회수 백만 가자!</b><span>Let&#x27;s Get a Million Views!</span></div>
+<div class='card lockcard'><b>입을 옷이 하나도 없어</b><span>I Have Nothing to Wear</span></div>
+<div class='card lockcard'><b>깜빡 속을 뻔했어</b><span>I Almost Fell for It</span></div>
+<div class='card lockcard'><b>서낭당은 마을 신을 모신 사당이다</b><span>A Shrine for the Village&#x27;s Guardian Spirit</span></div>
 </div>
 <h3>문법 항목</h3><div class='cards'>
-<a class='card lockcard' href='/learn/grammar/l3-ep01-indirect-speech-statements.html'><b>-다고 하다</b><span>Indirect Speech — Statements</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep01-indirect-speech-nouns-quoted-phrases.html'><b>-(이)라고 하다</b><span>Indirect Speech — Nouns &amp; Quoted Phrases</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep01-indirect-speech-questions.html'><b>-냐고 하다</b><span>Indirect Speech — Questions</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep01-indirect-speech-suggestions.html'><b>-자고 하다</b><span>Indirect Speech — Suggestions</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep02-indirect-command-relaying-orders.html'><b>-(으)라고 하다</b><span>Indirect Command — Relaying Orders</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep02-indirect-prohibition-relaying-dont.html'><b>-지 말라고 하다</b><span>Indirect Prohibition — Relaying &#x27;Don&#x27;t&#x27;</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep02-indirect-request-relaying-please-do-for-me.html'><b>-아/어 달라고 하다</b><span>Indirect Request — Relaying &#x27;Please Do for Me&#x27;</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep03-passive-voice.html'><b>피동 -이/히/리/기</b><span>Passive Voice — -이/히/리/기</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep03-passive-change.html'><b>피동 -아/어지다</b><span>Passive Change — -아/어지다</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep03-formal-written-style.html'><b>ㅂ니다/습니다 문어체</b><span>Formal Written Style — ㅂ니다/습니다</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep04-causative-suffixes.html'><b>사동 접미사 — -이/히/리/기/우/구/추</b><span>Causative Suffixes — -이/히/리/기/우/구/추</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep04-let-make-someone-do.html'><b>-게 하다</b><span>Let / Make Someone Do — -게 하다</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep04-make-sure-to-see-to-it-that.html'><b>-도록 하다</b><span>Make Sure to / See to It That — -도록 하다</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep05-because-of-unexpected-cause.html'><b>-는 바람에</b><span>Because of ~ (Unexpected Cause)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep05-while-still-in-the-state-of.html'><b>-(으)ㄴ 채로</b><span>While Still in the State of ~</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep05-retrospective-preview.html'><b>-더라고요 (회상·발견)</b><span>Retrospective -더라고요 (preview)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep06-even-though-despite-the-fact-that.html'><b>-는데도 / -(으)ㄴ데도</b><span>Even though (despite the fact that)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep06-even-if-even-though-general-concession.html'><b>-아/어도</b><span>Even if / Even though (general concession)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep06-no-matter-how-even-if-extreme-concession.html'><b>아무리 ~(ㄹ/을)지라도 · -더라도</b><span>No matter how ~ / Even if (extreme concession)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep07-in-order-to-purpose.html'><b>-기 위해서</b><span>In order to (purpose)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep07-if-you-want-to-in-order-to-condition.html'><b>-(으)려면</b><span>If you want to / In order to (condition)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep07-the-more-the-more-proportional.html'><b>-(으)ㄹ수록</b><span>The more ~, the more ~ (proportional)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep08-comparison-compared-to-more-than.html'><b>-에 비해서 / -보다</b><span>Comparison: compared to / more than</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep08-confirming-hearsay-i-heard-that-is-it-true.html'><b>-다면서요?</b><span>Confirming hearsay: &#x27;I heard that... is it true?&#x27;</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep08-reporting-hearsay-they-say-that.html'><b>-대요 / -거래요 / -다고 해요</b><span>Reporting hearsay: &#x27;They say that...&#x27;</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep08-similarity-like-as.html'><b>-처럼 / -같이</b><span>Similarity: like, as</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep09-it-seems-like-looks-like.html'><b>-는 모양이다</b><span>It seems like / Looks like</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep09-worth-doing-pretty-decent.html'><b>-(으)ㄹ 만하다</b><span>Worth doing / Pretty decent</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep09-even-emphatic-often-negative.html'><b>조차</b><span>Even (emphatic — often negative)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep09-not-only-x-but-also-y.html'><b>-는 데다가</b><span>Not only X, but also Y</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep10-instead-of-in-exchange-for.html'><b>-는 대신에</b><span>Instead of / In exchange for</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep10-do-and-keep-set-aside-for-later.html'><b>-아/어 두다</b><span>Do and keep / Set aside for later</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep10-whereas-on-the-other-hand.html'><b>-는 반면에</b><span>Whereas / On the other hand</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep10-its-okay-to-may-i-you-can.html'><b>-아/어도 되다</b><span>It&#x27;s okay to / May I / You can ~</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep11-almost-did-but-didnt.html'><b>-(으)ㄹ 뻔하다</b><span>Almost did (but didn&#x27;t)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep11-pretend-to-act-like.html'><b>-는 척하다</b><span>Pretend to / Act like</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep11-it-is-reluctant-admission.html'><b>-기는 하다</b><span>It IS... (reluctant admission)</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep12-documentary-written-style.html'><b>-ㄴ다 / -는다</b><span>Documentary / Written style</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep12-is-in-formal-written-korean.html'><b>-이다 (격식체)</b><span>&#x27;-is&#x27; in formal written Korean</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep12-formal-written-explanation-definition.html'><b>-(으)ㄴ/는 것이다</b><span>Formal written explanation / definition</span></a>
-<a class='card lockcard' href='/learn/grammar/l3-ep12-after-doing-a-then-do-b.html'><b>-고 나서</b><span>After doing A, then do B</span></a>
+<div class='card lockcard'><b>-다고 하다</b><span>Indirect Speech — Statements</span></div>
+<div class='card lockcard'><b>-(이)라고 하다</b><span>Indirect Speech — Nouns &amp; Quoted Phrases</span></div>
+<div class='card lockcard'><b>-냐고 하다</b><span>Indirect Speech — Questions</span></div>
+<div class='card lockcard'><b>-자고 하다</b><span>Indirect Speech — Suggestions</span></div>
+<div class='card lockcard'><b>-(으)라고 하다</b><span>Indirect Command — Relaying Orders</span></div>
+<div class='card lockcard'><b>-지 말라고 하다</b><span>Indirect Prohibition — Relaying &#x27;Don&#x27;t&#x27;</span></div>
+<div class='card lockcard'><b>-아/어 달라고 하다</b><span>Indirect Request — Relaying &#x27;Please Do for Me&#x27;</span></div>
+<div class='card lockcard'><b>피동 -이/히/리/기</b><span>Passive Voice — -이/히/리/기</span></div>
+<div class='card lockcard'><b>피동 -아/어지다</b><span>Passive Change — -아/어지다</span></div>
+<div class='card lockcard'><b>ㅂ니다/습니다 문어체</b><span>Formal Written Style — ㅂ니다/습니다</span></div>
+<div class='card lockcard'><b>사동 접미사 — -이/히/리/기/우/구/추</b><span>Causative Suffixes — -이/히/리/기/우/구/추</span></div>
+<div class='card lockcard'><b>-게 하다</b><span>Let / Make Someone Do — -게 하다</span></div>
+<div class='card lockcard'><b>-도록 하다</b><span>Make Sure to / See to It That — -도록 하다</span></div>
+<div class='card lockcard'><b>-는 바람에</b><span>Because of ~ (Unexpected Cause)</span></div>
+<div class='card lockcard'><b>-(으)ㄴ 채로</b><span>While Still in the State of ~</span></div>
+<div class='card lockcard'><b>-더라고요 (회상·발견)</b><span>Retrospective -더라고요 (preview)</span></div>
+<div class='card lockcard'><b>-는데도 / -(으)ㄴ데도</b><span>Even though (despite the fact that)</span></div>
+<div class='card lockcard'><b>-아/어도</b><span>Even if / Even though (general concession)</span></div>
+<div class='card lockcard'><b>아무리 ~(ㄹ/을)지라도 · -더라도</b><span>No matter how ~ / Even if (extreme concession)</span></div>
+<div class='card lockcard'><b>-기 위해서</b><span>In order to (purpose)</span></div>
+<div class='card lockcard'><b>-(으)려면</b><span>If you want to / In order to (condition)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ수록</b><span>The more ~, the more ~ (proportional)</span></div>
+<div class='card lockcard'><b>-에 비해서 / -보다</b><span>Comparison: compared to / more than</span></div>
+<div class='card lockcard'><b>-다면서요?</b><span>Confirming hearsay: &#x27;I heard that... is it true?&#x27;</span></div>
+<div class='card lockcard'><b>-대요 / -거래요 / -다고 해요</b><span>Reporting hearsay: &#x27;They say that...&#x27;</span></div>
+<div class='card lockcard'><b>-처럼 / -같이</b><span>Similarity: like, as</span></div>
+<div class='card lockcard'><b>-는 모양이다</b><span>It seems like / Looks like</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 만하다</b><span>Worth doing / Pretty decent</span></div>
+<div class='card lockcard'><b>조차</b><span>Even (emphatic — often negative)</span></div>
+<div class='card lockcard'><b>-는 데다가</b><span>Not only X, but also Y</span></div>
+<div class='card lockcard'><b>-는 대신에</b><span>Instead of / In exchange for</span></div>
+<div class='card lockcard'><b>-아/어 두다</b><span>Do and keep / Set aside for later</span></div>
+<div class='card lockcard'><b>-는 반면에</b><span>Whereas / On the other hand</span></div>
+<div class='card lockcard'><b>-아/어도 되다</b><span>It&#x27;s okay to / May I / You can ~</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 뻔하다</b><span>Almost did (but didn&#x27;t)</span></div>
+<div class='card lockcard'><b>-는 척하다</b><span>Pretend to / Act like</span></div>
+<div class='card lockcard'><b>-기는 하다</b><span>It IS... (reluctant admission)</span></div>
+<div class='card lockcard'><b>-ㄴ다 / -는다</b><span>Documentary / Written style</span></div>
+<div class='card lockcard'><b>-이다 (격식체)</b><span>&#x27;-is&#x27; in formal written Korean</span></div>
+<div class='card lockcard'><b>-(으)ㄴ/는 것이다</b><span>Formal written explanation / definition</span></div>
+<div class='card lockcard'><b>-고 나서</b><span>After doing A, then do B</span></div>
 </div>
+</section>
+<section class="lvl-panel" id="lvl-panel-4" data-lvl="4" style="display:none">
 <h2>Level 4 · 중급 · Intermediate <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
-<a class='card lockcard' href='/learn/episode/l4-ep01.html'><b>계십니까?</b><span>Is Anybody Home?</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep02.html'><b>이게 왜 여기 있지?</b><span>Why Is This Here?</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep03.html'><b>우주 대스타의 삶이란</b><span>Such Is the Life of a Space Superstar</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep04.html'><b>여기가 왜 이렇게 좁아졌어요?</b><span>Why Did This Get So Narrow?</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep05.html'><b>속담 알아 맞추기</b><span>Guess the Proverb</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep06.html'><b>범인은 둘 다인 것 같습니다</b><span>It Seems Both of Us Are the Culprits</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep07.html'><b>냉면 한 그릇 하러 가실래요?</b><span>Shall We Go Get a Bowl of Naengmyeon?</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep08.html'><b>새해 복 많이 받으세요</b><span>Happy New Year! (새해 복 많이 받으세요)</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep09.html'><b>분리수거는 너무 복잡해요</b><span>Recycling Is So Complicated</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep10.html'><b>휴대전화 개통하기</b><span>Setting Up a Phone (The Phone-vs-Bank-Account Catch-22)</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep11.html'><b>오기만 해 봐</b><span>Just You Wait, Sister!</span></a>
-<a class='card lockcard' href='/learn/episode/l4-ep12.html'><b>동네 주민센터</b><span>The Neighborhood Community Center</span></a>
+<div class='card lockcard'><b>계십니까?</b><span>Is Anybody Home?</span></div>
+<div class='card lockcard'><b>이게 왜 여기 있지?</b><span>Why Is This Here?</span></div>
+<div class='card lockcard'><b>우주 대스타의 삶이란</b><span>Such Is the Life of a Space Superstar</span></div>
+<div class='card lockcard'><b>여기가 왜 이렇게 좁아졌어요?</b><span>Why Did This Get So Narrow?</span></div>
+<div class='card lockcard'><b>속담 알아 맞추기</b><span>Guess the Proverb</span></div>
+<div class='card lockcard'><b>범인은 둘 다인 것 같습니다</b><span>It Seems Both of Us Are the Culprits</span></div>
+<div class='card lockcard'><b>냉면 한 그릇 하러 가실래요?</b><span>Shall We Go Get a Bowl of Naengmyeon?</span></div>
+<div class='card lockcard'><b>새해 복 많이 받으세요</b><span>Happy New Year! (새해 복 많이 받으세요)</span></div>
+<div class='card lockcard'><b>분리수거는 너무 복잡해요</b><span>Recycling Is So Complicated</span></div>
+<div class='card lockcard'><b>휴대전화 개통하기</b><span>Setting Up a Phone (The Phone-vs-Bank-Account Catch-22)</span></div>
+<div class='card lockcard'><b>오기만 해 봐</b><span>Just You Wait, Sister!</span></div>
+<div class='card lockcard'><b>동네 주민센터</b><span>The Neighborhood Community Center</span></div>
 </div>
 <h3>문법 항목</h3><div class='cards'>
-<a class='card lockcard' href='/learn/grammar/l4-ep01-the-formal-style.html'><b>-(으)ㅂ니다/습니다체</b><span>The Formal -(으)ㅂ니다/습니다 Style</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep01-formal-honorific-question-form.html'><b>-(으)십니까?</b><span>Formal Honorific Question Form</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep01-switching-between-and.html'><b>해요체 ↔ 습니다체 전환</b><span>Switching Between 해요체 and 습니다체</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep02-theres-no-way-that.html'><b>-(으)ㄹ 리가 없다</b><span>There&#x27;s No Way That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep02-could-there-really-be-rhetorical.html'><b>-(으)ㄹ 리가 있다?</b><span>Could There Really Be...? (Rhetorical)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep02-guessing-or-firm-intention.html'><b>-겠-</b><span>-겠-: Guessing or Firm Intention</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep03-its-only-natural-that-bound-to-happen.html'><b>-기 마련이다</b><span>It&#x27;s Only Natural That... (Bound to Happen)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep03-thats-just-how-it-goes.html'><b>-는 법이다</b><span>That&#x27;s Just How It Goes</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep03-its-highly-likely-to-prone-to.html'><b>-기 십상이다</b><span>It&#x27;s Highly Likely To... (Prone To)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep04-i-recall-witnessed-retrospective-marker.html'><b>-더-</b><span>-더-: I Recall / Witnessed (Retrospective Marker)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep04-i-found-that-i-noticed-that.html'><b>-더라고요</b><span>I Found That... / I Noticed That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep04-n-that-used-to-be-n-i-recall.html'><b>-던 N</b><span>N That Used To Be / N I Recall Being</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep05-it-means-that-thats-saying-that.html'><b>-다는 말이에요</b><span>It Means That... / That&#x27;s Saying That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep05-it-amounts-to-basically.html'><b>-는 셈이다</b><span>It Amounts To... / Basically...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep06-because-of-blaming-a-negative-cause.html'><b>-는 탓에</b><span>Because Of... (Blaming a Negative Cause)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep06-due-to-formal-written-cause.html'><b>-(으)로 인해서/인하여</b><span>Due To... (Formal Written Cause)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep06-judging-from-inference-from-evidence.html'><b>-(으)로 보아</b><span>Judging From... (Inference From Evidence)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep07-to-the-point-of-exaggerated-extreme.html'><b>-(으)ㄹ 지경이다</b><span>To The Point Of... (Exaggerated Extreme)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep07-to-the-extent-that-degree-by-example.html'><b>-을 정도로</b><span>To The Extent That... (Degree by Example)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep07-theres-nothing-more-extreme-emphasis.html'><b>-기 짝이 없다</b><span>There&#x27;s Nothing More... (Extreme Emphasis)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep08-until.html'><b>-(으)ㄹ 때까지</b><span>Until...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep08-while-deepened-usage.html'><b>-는 동안에 (심화)</b><span>While... (Deepened Usage)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep08-as-soon-as.html'><b>-자마자</b><span>As Soon As...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep08-documentary-style-review.html'><b>-ㄴ다/는다, 이다 (문어체 복습)</b><span>Documentary Style Review (-ㄴ다/는다, 이다)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep09-if-you-keep-warning-of-a-bad-outcome.html'><b>-다가는</b><span>If You Keep... (Warning of a Bad Outcome)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep09-only-after.html'><b>-고서야</b><span>Only After...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep09-given-how-rhetorical-how-could-you-possibly.html'><b>-아/어서야</b><span>Given How... (Rhetorical &#x27;How Could You Possibly&#x27;)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep10-as-long-as-unless.html'><b>-는 한</b><span>As Long As... / Unless...</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep10-spoken-contraction-the-thing-is.html'><b>구어 축약형 -는 거야 (-다는/라는 거야)</b><span>Spoken Contraction: -는 거야 (&#x27;The Thing Is...&#x27;)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep10-you-know-review.html'><b>-잖아(요) (복습)</b><span>You Know... (Review)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep10-vs-turning-verbs-into-nouns.html'><b>-기 vs -ㅁ/음 — 동사를 명사로</b><span>-기 vs -ㅁ/음 — Turning verbs into nouns</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep11-just-try-it-warning-threat.html'><b>-기만 해(봐)</b><span>Just Try It... (Warning/Threat)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep11-i-will-definitely-strong-resolve.html'><b>-고 말겠다</b><span>I Will Definitely... (Strong Resolve)</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep11-practically-almost-like-doing.html'><b>-다시피 하다</b><span>Practically/Almost Like... Doing</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep12-formal-register-full-review.html'><b>격식체 총정리</b><span>Formal Register — Full Review</span></a>
-<a class='card lockcard' href='/learn/grammar/l4-ep12-essential-government-office-set-phrases.html'><b>관공서 필수 표현</b><span>Essential Government-Office Set Phrases</span></a>
+<div class='card lockcard'><b>-(으)ㅂ니다/습니다체</b><span>The Formal -(으)ㅂ니다/습니다 Style</span></div>
+<div class='card lockcard'><b>-(으)십니까?</b><span>Formal Honorific Question Form</span></div>
+<div class='card lockcard'><b>해요체 ↔ 습니다체 전환</b><span>Switching Between 해요체 and 습니다체</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 리가 없다</b><span>There&#x27;s No Way That...</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 리가 있다?</b><span>Could There Really Be...? (Rhetorical)</span></div>
+<div class='card lockcard'><b>-겠-</b><span>-겠-: Guessing or Firm Intention</span></div>
+<div class='card lockcard'><b>-기 마련이다</b><span>It&#x27;s Only Natural That... (Bound to Happen)</span></div>
+<div class='card lockcard'><b>-는 법이다</b><span>That&#x27;s Just How It Goes</span></div>
+<div class='card lockcard'><b>-기 십상이다</b><span>It&#x27;s Highly Likely To... (Prone To)</span></div>
+<div class='card lockcard'><b>-더-</b><span>-더-: I Recall / Witnessed (Retrospective Marker)</span></div>
+<div class='card lockcard'><b>-더라고요</b><span>I Found That... / I Noticed That...</span></div>
+<div class='card lockcard'><b>-던 N</b><span>N That Used To Be / N I Recall Being</span></div>
+<div class='card lockcard'><b>-다는 말이에요</b><span>It Means That... / That&#x27;s Saying That...</span></div>
+<div class='card lockcard'><b>-는 셈이다</b><span>It Amounts To... / Basically...</span></div>
+<div class='card lockcard'><b>-는 탓에</b><span>Because Of... (Blaming a Negative Cause)</span></div>
+<div class='card lockcard'><b>-(으)로 인해서/인하여</b><span>Due To... (Formal Written Cause)</span></div>
+<div class='card lockcard'><b>-(으)로 보아</b><span>Judging From... (Inference From Evidence)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 지경이다</b><span>To The Point Of... (Exaggerated Extreme)</span></div>
+<div class='card lockcard'><b>-을 정도로</b><span>To The Extent That... (Degree by Example)</span></div>
+<div class='card lockcard'><b>-기 짝이 없다</b><span>There&#x27;s Nothing More... (Extreme Emphasis)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 때까지</b><span>Until...</span></div>
+<div class='card lockcard'><b>-는 동안에 (심화)</b><span>While... (Deepened Usage)</span></div>
+<div class='card lockcard'><b>-자마자</b><span>As Soon As...</span></div>
+<div class='card lockcard'><b>-ㄴ다/는다, 이다 (문어체 복습)</b><span>Documentary Style Review (-ㄴ다/는다, 이다)</span></div>
+<div class='card lockcard'><b>-다가는</b><span>If You Keep... (Warning of a Bad Outcome)</span></div>
+<div class='card lockcard'><b>-고서야</b><span>Only After...</span></div>
+<div class='card lockcard'><b>-아/어서야</b><span>Given How... (Rhetorical &#x27;How Could You Possibly&#x27;)</span></div>
+<div class='card lockcard'><b>-는 한</b><span>As Long As... / Unless...</span></div>
+<div class='card lockcard'><b>구어 축약형 -는 거야 (-다는/라는 거야)</b><span>Spoken Contraction: -는 거야 (&#x27;The Thing Is...&#x27;)</span></div>
+<div class='card lockcard'><b>-잖아(요) (복습)</b><span>You Know... (Review)</span></div>
+<div class='card lockcard'><b>-기 vs -ㅁ/음 — 동사를 명사로</b><span>-기 vs -ㅁ/음 — Turning verbs into nouns</span></div>
+<div class='card lockcard'><b>-기만 해(봐)</b><span>Just Try It... (Warning/Threat)</span></div>
+<div class='card lockcard'><b>-고 말겠다</b><span>I Will Definitely... (Strong Resolve)</span></div>
+<div class='card lockcard'><b>-다시피 하다</b><span>Practically/Almost Like... Doing</span></div>
+<div class='card lockcard'><b>격식체 총정리</b><span>Formal Register — Full Review</span></div>
+<div class='card lockcard'><b>관공서 필수 표현</b><span>Essential Government-Office Set Phrases</span></div>
 </div>
+</section>
+<section class="lvl-panel" id="lvl-panel-5" data-lvl="5" style="display:none">
 <h2>Level 5 · 중고급 · Upper Intermediate <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
-<a class='card lockcard' href='/learn/episode/l5-ep01.html'><b>삼총사의 첫 만남</b><span>The Trio&#x27;s First Meeting</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep02.html'><b>숙소 구하기</b><span>Finding a Room</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep03.html'><b>외국인 등록증 신청하기</b><span>Applying for a Foreign Registration Card</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep04.html'><b>한국 야시장 탐방하기</b><span>Exploring a Korean Night Market</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep05.html'><b>창덕궁 방문</b><span>Visiting Changdeokgung Palace</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep06.html'><b>온타리오주 산불 발생, 확산 우려에 주민 대피령</b><span>Wildfire Breaks Out in Ontario, Residents Ordered to Evacuate Amid Spread Concerns</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep07.html'><b>동아리방에서 배달 체험하기</b><span>Trying Delivery Food at the Club Room</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep08.html'><b>광장시장은 역시 빈대떡이지!</b><span>When It Comes to Gwangjang Market, It&#x27;s Bindaetteok!</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep09.html'><b>서울을 알리는 사람이 되고 싶어요</b><span>I Want to Be Someone Who Promotes Seoul</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep10.html'><b>삼총사의 서울 근교 여행</b><span>The Trio&#x27;s Weekend Trip Near Seoul</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep11.html'><b>보미의 어우렁더우렁 한마당</b><span>Bomi&#x27;s Eowoureong-Deowoureong Festival</span></a>
-<a class='card lockcard' href='/learn/episode/l5-ep12.html'><b>삼총사의 구급대, 올리비아</b><span>Olivia, the Trio&#x27;s First-Aid Squad</span></a>
+<div class='card lockcard'><b>삼총사의 첫 만남</b><span>The Trio&#x27;s First Meeting</span></div>
+<div class='card lockcard'><b>숙소 구하기</b><span>Finding a Room</span></div>
+<div class='card lockcard'><b>외국인 등록증 신청하기</b><span>Applying for a Foreign Registration Card</span></div>
+<div class='card lockcard'><b>한국 야시장 탐방하기</b><span>Exploring a Korean Night Market</span></div>
+<div class='card lockcard'><b>창덕궁 방문</b><span>Visiting Changdeokgung Palace</span></div>
+<div class='card lockcard'><b>온타리오주 산불 발생, 확산 우려에 주민 대피령</b><span>Wildfire Breaks Out in Ontario, Residents Ordered to Evacuate Amid Spread Concerns</span></div>
+<div class='card lockcard'><b>동아리방에서 배달 체험하기</b><span>Trying Delivery Food at the Club Room</span></div>
+<div class='card lockcard'><b>광장시장은 역시 빈대떡이지!</b><span>When It Comes to Gwangjang Market, It&#x27;s Bindaetteok!</span></div>
+<div class='card lockcard'><b>서울을 알리는 사람이 되고 싶어요</b><span>I Want to Be Someone Who Promotes Seoul</span></div>
+<div class='card lockcard'><b>삼총사의 서울 근교 여행</b><span>The Trio&#x27;s Weekend Trip Near Seoul</span></div>
+<div class='card lockcard'><b>보미의 어우렁더우렁 한마당</b><span>Bomi&#x27;s Eowoureong-Deowoureong Festival</span></div>
+<div class='card lockcard'><b>삼총사의 구급대, 올리비아</b><span>Olivia, the Trio&#x27;s First-Aid Squad</span></div>
 </div>
 <h3>문법 항목</h3><div class='cards'>
-<a class='card lockcard' href='/learn/grammar/l5-ep01-not-only-but-also.html'><b>-(으)ㄹ 뿐만 아니라</b><span>Not Only... But Also</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep01-through-by-means-of.html'><b>-을/를 통해서</b><span>Through / By Means Of</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep01-according-to.html'><b>-에 의하면</b><span>According To...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep01-nominalization-as-in.html'><b>-ㅁ/음 (명사형) — 첫 &#x27;만남&#x27;</b><span>-ㅁ/음 nominalization — as in 첫 만남</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep02-worried-that-for-fear-that.html'><b>-(으)ㄹ까 봐</b><span>Worried That / For Fear That</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep02-i-never-imagined-that.html'><b>-(으)ㄹ 줄이야</b><span>I Never Imagined That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep02-reluctant-admission-review.html'><b>-기는 하다 (복습)</b><span>-기는 하다 — Reluctant Admission (Review)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep02-quotative-contraction-review.html'><b>-대 (복습)</b><span>-대 — Quotative Contraction (Review)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep03-should-have-regret.html'><b>-았/었어야 했는데</b><span>Should Have... (Regret)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep03-it-depends-on-how-you-do-it.html'><b>-기 나름이다</b><span>It Depends on How You Do It</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep03-cannot-help-but-bound-to.html'><b>-(으)ㄹ 수밖에 없다</b><span>Cannot Help But / Bound To</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep03-as-long-as-deepened.html'><b>-는 한 (심화)</b><span>-는 한 — As Long As (Deepened)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep03-nominalization-as-in.html'><b>-기 (명사형) — &#x27;신청하기&#x27;</b><span>-기 nominalization — as in 신청하기</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep04-must-be-seems-like-guessing-from-observation.html'><b>-(으)ㄴ가/나 보다</b><span>Must Be / Seems Like (Guessing From Observation)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep04-seems-appears-refined-conjecture.html'><b>-(으)ㄴ/는 듯하다</b><span>Seems / Appears (refined conjecture)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep04-deepened.html'><b>-기 싫다/좋다 (심화)</b><span>-기 싫다/좋다 — Deepened</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep05-as-a-result-of-doing-discovering-something-new.html'><b>-았/었더니</b><span>As a Result of Doing (Discovering Something New)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep05-simply-just-formal-literary-exclamation.html'><b>-(으)ㄹ 따름이다</b><span>Simply / Just (Formal, Literary Exclamation)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep05-the-point-fact-that.html'><b>-는다는/(ㄴ)다는 점</b><span>The Point/Fact That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep06-because-of-doing-effortful-cause-same-subject.html'><b>-느라고</b><span>Because of Doing... (Effortful Cause, Same Subject)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep06-might-its-possible-that.html'><b>-(으)ㄹ지도 모른다</b><span>Might... / It&#x27;s Possible That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep06-modest-denial-casual-speech.html'><b>-기는 (반말)</b><span>Modest Denial (Casual Speech)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep06-causative-vs-passive-how-to-tell-them-apart.html'><b>사동 vs 피동 구별법</b><span>Causative vs. Passive — How to Tell Them Apart</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep07-strong-assumption-so-but.html'><b>-(으)ㄹ 텐데</b><span>Strong Assumption... (So / But)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep07-at-the-same-time-as.html'><b>-는 동시에</b><span>At the Same Time As...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep07-cannot-help-but-double-negative.html'><b>-지 않을 수 없다</b><span>Cannot Help But... (Double Negative)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep08-planning-to-intending-to.html'><b>-(으)ㄹ 셈이다</b><span>Planning To / Intending To</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep08-because-of-the-chaos-situation-of.html'><b>-는 통에</b><span>Because of the Chaos/Situation of...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep08-far-from-let-alone.html'><b>-기는커녕</b><span>Far From... / Let Alone...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep08-youre-saying-didnt-you-say.html'><b>-다면서(요)?</b><span>You&#x27;re Saying...? / Didn&#x27;t You Say...?</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep09-in-the-capacity-role-of.html'><b>-(으)로서</b><span>In the Capacity/Role of...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep09-i-hope-that-formal-polite-wish.html'><b>-았/었으면 합니다</b><span>I Hope That... (Formal, Polite Wish)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep09-i-will-make-sure-to-formal-commitment.html'><b>-도록 하겠습니다</b><span>I Will Make Sure To... (Formal Commitment)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep10-judging-from-based-on.html'><b>-(으)로 미루어 보아</b><span>Judging From... / Based On...</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep10-it-seems-that-review-l5-ep01.html'><b>-(으)ㄹ 것으로 보이다</b><span>It Seems That... (Review, L5 ep01)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep10-one-can-tell-that-review-l5-ep01-real.html'><b>-다는 것을 알 수 있다</b><span>One Can Tell That... (Review, L5 ep01 real_life)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep11-in-order-to-intending-to-formal.html'><b>-고자 (하다)</b><span>In order to / intending to (formal)</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep11-five-suffixes-that-build-abstract-words.html'><b>접미사 -적 / -성 / -화 / -력 / -도</b><span>Five suffixes that build abstract words</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep11-tend-to-on-the-side.html'><b>-(으)ㄴ/는 편이다</b><span>Tend to / On the ~ side</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep12-even-if-no-use-doing.html'><b>-아/어 봤자</b><span>Even if / no use doing</span></a>
-<a class='card lockcard' href='/learn/grammar/l5-ep12-discourse-connectives.html'><b>담화부사 (문맥 연결어)</b><span>Discourse connectives</span></a>
+<div class='card lockcard'><b>-(으)ㄹ 뿐만 아니라</b><span>Not Only... But Also</span></div>
+<div class='card lockcard'><b>-을/를 통해서</b><span>Through / By Means Of</span></div>
+<div class='card lockcard'><b>-에 의하면</b><span>According To...</span></div>
+<div class='card lockcard'><b>-ㅁ/음 (명사형) — 첫 &#x27;만남&#x27;</b><span>-ㅁ/음 nominalization — as in 첫 만남</span></div>
+<div class='card lockcard'><b>-(으)ㄹ까 봐</b><span>Worried That / For Fear That</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 줄이야</b><span>I Never Imagined That...</span></div>
+<div class='card lockcard'><b>-기는 하다 (복습)</b><span>-기는 하다 — Reluctant Admission (Review)</span></div>
+<div class='card lockcard'><b>-대 (복습)</b><span>-대 — Quotative Contraction (Review)</span></div>
+<div class='card lockcard'><b>-았/었어야 했는데</b><span>Should Have... (Regret)</span></div>
+<div class='card lockcard'><b>-기 나름이다</b><span>It Depends on How You Do It</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 수밖에 없다</b><span>Cannot Help But / Bound To</span></div>
+<div class='card lockcard'><b>-는 한 (심화)</b><span>-는 한 — As Long As (Deepened)</span></div>
+<div class='card lockcard'><b>-기 (명사형) — &#x27;신청하기&#x27;</b><span>-기 nominalization — as in 신청하기</span></div>
+<div class='card lockcard'><b>-(으)ㄴ가/나 보다</b><span>Must Be / Seems Like (Guessing From Observation)</span></div>
+<div class='card lockcard'><b>-(으)ㄴ/는 듯하다</b><span>Seems / Appears (refined conjecture)</span></div>
+<div class='card lockcard'><b>-기 싫다/좋다 (심화)</b><span>-기 싫다/좋다 — Deepened</span></div>
+<div class='card lockcard'><b>-았/었더니</b><span>As a Result of Doing (Discovering Something New)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 따름이다</b><span>Simply / Just (Formal, Literary Exclamation)</span></div>
+<div class='card lockcard'><b>-는다는/(ㄴ)다는 점</b><span>The Point/Fact That...</span></div>
+<div class='card lockcard'><b>-느라고</b><span>Because of Doing... (Effortful Cause, Same Subject)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ지도 모른다</b><span>Might... / It&#x27;s Possible That...</span></div>
+<div class='card lockcard'><b>-기는 (반말)</b><span>Modest Denial (Casual Speech)</span></div>
+<div class='card lockcard'><b>사동 vs 피동 구별법</b><span>Causative vs. Passive — How to Tell Them Apart</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 텐데</b><span>Strong Assumption... (So / But)</span></div>
+<div class='card lockcard'><b>-는 동시에</b><span>At the Same Time As...</span></div>
+<div class='card lockcard'><b>-지 않을 수 없다</b><span>Cannot Help But... (Double Negative)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 셈이다</b><span>Planning To / Intending To</span></div>
+<div class='card lockcard'><b>-는 통에</b><span>Because of the Chaos/Situation of...</span></div>
+<div class='card lockcard'><b>-기는커녕</b><span>Far From... / Let Alone...</span></div>
+<div class='card lockcard'><b>-다면서(요)?</b><span>You&#x27;re Saying...? / Didn&#x27;t You Say...?</span></div>
+<div class='card lockcard'><b>-(으)로서</b><span>In the Capacity/Role of...</span></div>
+<div class='card lockcard'><b>-았/었으면 합니다</b><span>I Hope That... (Formal, Polite Wish)</span></div>
+<div class='card lockcard'><b>-도록 하겠습니다</b><span>I Will Make Sure To... (Formal Commitment)</span></div>
+<div class='card lockcard'><b>-(으)로 미루어 보아</b><span>Judging From... / Based On...</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 것으로 보이다</b><span>It Seems That... (Review, L5 ep01)</span></div>
+<div class='card lockcard'><b>-다는 것을 알 수 있다</b><span>One Can Tell That... (Review, L5 ep01 real_life)</span></div>
+<div class='card lockcard'><b>-고자 (하다)</b><span>In order to / intending to (formal)</span></div>
+<div class='card lockcard'><b>접미사 -적 / -성 / -화 / -력 / -도</b><span>Five suffixes that build abstract words</span></div>
+<div class='card lockcard'><b>-(으)ㄴ/는 편이다</b><span>Tend to / On the ~ side</span></div>
+<div class='card lockcard'><b>-아/어 봤자</b><span>Even if / no use doing</span></div>
+<div class='card lockcard'><b>담화부사 (문맥 연결어)</b><span>Discourse connectives</span></div>
 </div>
+</section>
+<section class="lvl-panel" id="lvl-panel-6" data-lvl="6" style="display:none">
 <h2>Level 6 · 고급 · Advanced <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
-<a class='card lockcard' href='/learn/episode/l6-ep01.html'><b>물가 상승 대처: 과제 및 대응책</b><span>Coping with Rising Prices: Challenges and Responses</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep02.html'><b>인천 구도심 재개발 전면 재검토</b><span>Incheon Old-Town Redevelopment Under Full Review</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep03.html'><b>삼총사의 노사 공동 포럼</b><span>The Trio&#x27;s Labor–Management Forum</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep04.html'><b>서비스 대가로서의 비용과 배움의 가치</b><span>Cost as a Price for Service, and the Value of Learning</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep05.html'><b>논설문 작성 요령 — AI 번역기, 외국어 공부는 필요할까?</b><span>How to Write an Argumentative Essay (TOPIK Writing #54)</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep06.html'><b>이효석 《메밀꽃 필 무렵》</b><span>Lee Hyo-seok, &quot;When the Buckwheat Blooms&quot;</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep07.html'><b>김유정 《동백꽃》</b><span>Kim Yu-jeong, &quot;Camellias&quot;</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep08.html'><b>현진건 《운수 좋은 날》</b><span>Hyun Jin-geon, &quot;A Lucky Day&quot;</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep09.html'><b>김동인 《감자》</b><span>Kim Dong-in, &quot;Potatoes&quot;</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep10.html'><b>수필 《저녁노을》</b><span>Essay: &quot;Evening Glow&quot;</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep11.html'><b>오해와 화해</b><span>Misunderstanding and Reconciliation</span></a>
-<a class='card lockcard' href='/learn/episode/l6-ep12.html'><b>감정 어휘 훈련장 — 6개씩 5세트</b><span>Emotion Vocabulary Gym — 30 words in 5 sets of 6</span></a>
+<div class='card lockcard'><b>물가 상승 대처: 과제 및 대응책</b><span>Coping with Rising Prices: Challenges and Responses</span></div>
+<div class='card lockcard'><b>인천 구도심 재개발 전면 재검토</b><span>Incheon Old-Town Redevelopment Under Full Review</span></div>
+<div class='card lockcard'><b>삼총사의 노사 공동 포럼</b><span>The Trio&#x27;s Labor–Management Forum</span></div>
+<div class='card lockcard'><b>서비스 대가로서의 비용과 배움의 가치</b><span>Cost as a Price for Service, and the Value of Learning</span></div>
+<div class='card lockcard'><b>논설문 작성 요령 — AI 번역기, 외국어 공부는 필요할까?</b><span>How to Write an Argumentative Essay (TOPIK Writing #54)</span></div>
+<div class='card lockcard'><b>이효석 《메밀꽃 필 무렵》</b><span>Lee Hyo-seok, &quot;When the Buckwheat Blooms&quot;</span></div>
+<div class='card lockcard'><b>김유정 《동백꽃》</b><span>Kim Yu-jeong, &quot;Camellias&quot;</span></div>
+<div class='card lockcard'><b>현진건 《운수 좋은 날》</b><span>Hyun Jin-geon, &quot;A Lucky Day&quot;</span></div>
+<div class='card lockcard'><b>김동인 《감자》</b><span>Kim Dong-in, &quot;Potatoes&quot;</span></div>
+<div class='card lockcard'><b>수필 《저녁노을》</b><span>Essay: &quot;Evening Glow&quot;</span></div>
+<div class='card lockcard'><b>오해와 화해</b><span>Misunderstanding and Reconciliation</span></div>
+<div class='card lockcard'><b>감정 어휘 훈련장 — 6개씩 5세트</b><span>Emotion Vocabulary Gym — 30 words in 5 sets of 6</span></div>
 </div>
 <h3>문법 항목</h3><div class='cards'>
-<a class='card lockcard' href='/learn/grammar/l6-ep01-formal-written-endings.html'><b>격식체 종결어미 (문어체 -다/ㄴ다)</b><span>Formal written endings (-다/-ㄴ다)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep02-indirect-quotation-verbs-of-assertion.html'><b>-ㄴ다고/-다고 + 강조하다 (간접인용 + 전달)</b><span>Indirect quotation + verbs of assertion</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep03-polite-frames-for-formal-public-discussion.html'><b>공적 대화의 정중한 말하기 틀</b><span>Polite frames for formal public discussion</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep04-whereas-on-the-other-hand.html'><b>-는 반면(에) (대조)</b><span>-는 반면(에): whereas / on the other hand</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep05-essential-connectors-for-argumentative-essays.html'><b>논설문 필수 연결 표현 (TOPIK 54번)</b><span>Essential connectors for argumentative essays</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep05-it-appears-is-expected-that.html'><b>-(으)ㄹ 것으로 보인다/보입니다</b><span>It Appears / Is Expected That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep05-we-can-see-tell-that.html'><b>-다는 것을 알 수 있다</b><span>We Can See / Tell That...</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep06-simile-like-as-if.html'><b>직유 — ~듯이 / ~같이 (비유)</b><span>Simile: ~듯이 / ~같이 (like / as if)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep06-amid-in-the-midst-of.html'><b>-(으)ㄴ/는 속에서 (~한 가운데)</b><span>-(으)ㄴ/는 속에서: amid, in the midst of</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep07-i-did-and-then-result-observed.html'><b>-았/었더니 (내가 ~했더니, 그랬더니)</b><span>-았/었더니: I did ~, and then (result observed)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep07-as-if-in-a-manner-of.html'><b>-는 듯이 / -다는 듯이 (마치 ~인 것처럼)</b><span>-는 듯이: as if, in a manner of</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep08-because-of-doing-with-a-costly-result.html'><b>-느라(고) (원인 · 주로 힘든/부정적 결과)</b><span>-느라(고): because of doing (with a costly result)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep08-i-observed-and-then-a-result-contrast.html'><b>-더니 (과거 회상 → 뒤의 결과·전환)</b><span>-더니: I observed ~, and then (a result/contrast)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep08-this-of-all-things-emphatic-the-very-one.html'><b>-이야말로 (강조 — 바로 그것이야말로)</b><span>-이야말로: this, of all things (emphatic &#x27;THE very one&#x27;)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep08-in-the-middle-of-doing-a-interruption-switch.html'><b>-다가 (동작의 중단·전환)</b><span>-다가: in the middle of doing A, ... (interruption/switch)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep09-nouns-verb-adjective-stems-even-though-it-is.html'><b>-(이)나마 / -(으)나마 (비록 ~이지만, 그런대로)</b><span>-(이)나마 (nouns) / -(으)나마 (verb &amp; adjective stems): even though it is (only) ~</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep10-often-do-used-to-do-repeated-habit.html'><b>-곤 하다 (반복되는 습관)</b><span>-곤 하다: often do / used to do (repeated habit)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep10-because-since-written-style.html'><b>-기에 (문어체 원인·근거)</b><span>-기에: because, since (written style)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep10-is-bound-to-naturally-so.html'><b>-기 마련이다 (그렇게 되는 것이 당연하다)</b><span>-기 마련이다: is bound to ~ (naturally so)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep10-because-i-was-busy-ing.html'><b>-느라(고) (~하는 데 매여서 · 원인)</b><span>-느라(고): because I was busy ~ing</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep11-i-saw-found-that-reporting-a-past-observation.html'><b>-더라 (과거에 직접 겪어 알게 된 것을 전달, 반말)</b><span>-더라: I saw/found that ~ (reporting a past observation, casual)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep11-for-fear-that-l5.html'><b>-(으)ㄹ까 봐 (~할까 봐 걱정해서)</b><span>-(으)ㄹ까 봐: for fear that ~ (L5 복습)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep11-go-because-of-doing-l5.html'><b>-느라(고) (앞의 일 때문에 · 원인)</b><span>-느라(go): because of doing ~ (L5 복습)</span></a>
-<a class='card lockcard' href='/learn/grammar/l6-ep12-emotion-adjective-describing-others-feelings.html'><b>감정 형용사 → -아/어하다 (남의 감정 서술)</b><span>Emotion adjective → -아/어하다 (describing others&#x27; feelings)</span></a>
+<div class='card lockcard'><b>격식체 종결어미 (문어체 -다/ㄴ다)</b><span>Formal written endings (-다/-ㄴ다)</span></div>
+<div class='card lockcard'><b>-ㄴ다고/-다고 + 강조하다 (간접인용 + 전달)</b><span>Indirect quotation + verbs of assertion</span></div>
+<div class='card lockcard'><b>공적 대화의 정중한 말하기 틀</b><span>Polite frames for formal public discussion</span></div>
+<div class='card lockcard'><b>-는 반면(에) (대조)</b><span>-는 반면(에): whereas / on the other hand</span></div>
+<div class='card lockcard'><b>논설문 필수 연결 표현 (TOPIK 54번)</b><span>Essential connectors for argumentative essays</span></div>
+<div class='card lockcard'><b>-(으)ㄹ 것으로 보인다/보입니다</b><span>It Appears / Is Expected That...</span></div>
+<div class='card lockcard'><b>-다는 것을 알 수 있다</b><span>We Can See / Tell That...</span></div>
+<div class='card lockcard'><b>직유 — ~듯이 / ~같이 (비유)</b><span>Simile: ~듯이 / ~같이 (like / as if)</span></div>
+<div class='card lockcard'><b>-(으)ㄴ/는 속에서 (~한 가운데)</b><span>-(으)ㄴ/는 속에서: amid, in the midst of</span></div>
+<div class='card lockcard'><b>-았/었더니 (내가 ~했더니, 그랬더니)</b><span>-았/었더니: I did ~, and then (result observed)</span></div>
+<div class='card lockcard'><b>-는 듯이 / -다는 듯이 (마치 ~인 것처럼)</b><span>-는 듯이: as if, in a manner of</span></div>
+<div class='card lockcard'><b>-느라(고) (원인 · 주로 힘든/부정적 결과)</b><span>-느라(고): because of doing (with a costly result)</span></div>
+<div class='card lockcard'><b>-더니 (과거 회상 → 뒤의 결과·전환)</b><span>-더니: I observed ~, and then (a result/contrast)</span></div>
+<div class='card lockcard'><b>-이야말로 (강조 — 바로 그것이야말로)</b><span>-이야말로: this, of all things (emphatic &#x27;THE very one&#x27;)</span></div>
+<div class='card lockcard'><b>-다가 (동작의 중단·전환)</b><span>-다가: in the middle of doing A, ... (interruption/switch)</span></div>
+<div class='card lockcard'><b>-(이)나마 / -(으)나마 (비록 ~이지만, 그런대로)</b><span>-(이)나마 (nouns) / -(으)나마 (verb &amp; adjective stems): even though it is (only) ~</span></div>
+<div class='card lockcard'><b>-곤 하다 (반복되는 습관)</b><span>-곤 하다: often do / used to do (repeated habit)</span></div>
+<div class='card lockcard'><b>-기에 (문어체 원인·근거)</b><span>-기에: because, since (written style)</span></div>
+<div class='card lockcard'><b>-기 마련이다 (그렇게 되는 것이 당연하다)</b><span>-기 마련이다: is bound to ~ (naturally so)</span></div>
+<div class='card lockcard'><b>-느라(고) (~하는 데 매여서 · 원인)</b><span>-느라(고): because I was busy ~ing</span></div>
+<div class='card lockcard'><b>-더라 (과거에 직접 겪어 알게 된 것을 전달, 반말)</b><span>-더라: I saw/found that ~ (reporting a past observation, casual)</span></div>
+<div class='card lockcard'><b>-(으)ㄹ까 봐 (~할까 봐 걱정해서)</b><span>-(으)ㄹ까 봐: for fear that ~ (L5 복습)</span></div>
+<div class='card lockcard'><b>-느라(고) (앞의 일 때문에 · 원인)</b><span>-느라(go): because of doing ~ (L5 복습)</span></div>
+<div class='card lockcard'><b>감정 형용사 → -아/어하다 (남의 감정 서술)</b><span>Emotion adjective → -아/어하다 (describing others&#x27; feelings)</span></div>
 </div>
+</section>
 <footer>
 © <span data-cr-year></span> <span data-cr-name></span><br><span data-cr-note></span><br>
 <a href="/">Doranchae 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
 </footer>
 </main>
+<script>
+function showLvl(n){
+  document.querySelectorAll('.lvl-panel').forEach(function(p){p.style.display = (p.dataset.lvl===String(n))?'block':'none';});
+  document.querySelectorAll('.lvl-tab').forEach(function(t){t.classList.remove('active');});
+  var tab=document.getElementById('lvl-tab-'+n); if(tab) tab.classList.add('active');
+  var bar=document.querySelector('.lvl-tabs'); if(bar) bar.scrollIntoView({block:'start',behavior:'smooth'});
+}
+</script>
 <script src="/core/site-info.js"></script>
 </body>
 </html>
