@@ -7070,7 +7070,16 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   _enAutoForLevel('L1');
   buildSidebar();
   setTimeout(_srsUpdateBadge,0);
-  loadEp('ep01');
+  // index.html의 "Start Here" / "Road Map" 바로가기 링크(?view=start / ?view=roadmap) 처리 (2026-08)
+  const _entryView=_p.get('view');
+  if(_entryView==='start'){
+    const _basisBtn=document.querySelector('.level-btn-basis');
+    if(_basisBtn) setLevel(_basisBtn); else loadEp('ep01');
+  }else if(_entryView==='roadmap'){
+    loadRoadmap();
+  }else{
+    loadEp('ep01');
+  }
   // 잠긴 레벨 탭 흐리게 + 🔒
   if(!NHS_IS_MEMBER){
     document.querySelectorAll('.level-btn').forEach(b=>{
