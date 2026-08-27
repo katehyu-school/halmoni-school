@@ -152,8 +152,14 @@ const NHS_USER = _nhsUser();
 const NHS_ROLE = (NHS_USER && NHS_USER.role) || null;
 const NHS_IS_MEMBER = ['admin','teacher','student'].indexOf(NHS_ROLE) >= 0;
 const NHS_OPEN_MAX = NHS_IS_MEMBER ? 6 : 2;      // 로그인 없이 열리는 최고 레벨
-const _lvNum = (name) => ({'Level 1':1,'Level 2':2,'Level 3':3,
-                           'Level 4':4,'Level 5':5,'Level 6':6}[name] || 0);
+// 원래는 {'Level 3':3,...} 식 정확일치 매핑이었는데, 비회원에게 잠금 표시를 붙일 때
+// 버튼 textContent 뒤에 " 🔒"를 그대로 append해서 "Level 3 🔒"가 되면 매칭이 실패해 0을 반환 →
+// setLevel()의 '_n > NHS_OPEN_MAX' 잠금 검사가 무력화되어 잠긴 레벨도 그냥 열리던 버그.
+// 정규식으로 "Level N" 부분만 뽑아내면 뒤에 이모지/장식이 붙어도 항상 정확히 잠금이 걸림.
+const _lvNum = (name) => {
+  const m = String(name||'').match(/Level\s*(\d+)/);
+  return m ? parseInt(m[1],10) : 0;
+};
 
 const NHS_TRIAL_ALL_L1 = true;
 const NHS_TRIAL_EPS = ['ep01','ep05','ep07'];   // NHS_TRIAL_ALL_L1=false 로 되돌릴 때 쓰는 목록
@@ -7098,11 +7104,16 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const bar=document.createElement('div');
     bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
     const _open='🌱 Start Here + Level 1·2';
+    const _krSub=s=>'<span style="display:block;font-size:10.5px;color:rgba(255,255,255,.5);margin-top:1px;font-style:italic;">'+s+'</span>';
+    // 안내는 영어를 1순위로 — 이걸 읽는 학습자가 한글 문장을 술술 이해한다면 이 배너가 필요 없는 레벨일 것.
+    // Level 3+는 "무료 계정"이 아니라 "정식 회원(정식 등록/결제)"에게만 열림 — 이전 문구는 이 둘을 혼동시켰음.
     bar.innerHTML = NHS_IS_TRIAL
-      ? '🔓 체험 계정 · Trial — '+_open+' 이용 중 · Level 3부터는 정식 회원 전용입니다'
-        +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">체험 표시 끄기 · Exit trial view</a>'
-      : '👋 지금 <b>'+_open+'</b>를 자유롭게 보고 계세요 · 무료 계정을 만들면 진도가 저장되고 Level 3부터도 열립니다'
-        +' · <a href="/" style="color:#4ecdc4;">계정 만들기 · Create a free account</a>';
+      ? '🔓 <b>Trial mode</b> — '+_open+' unlocked. Level 3+ is for registered members.'
+        +_krSub('체험 계정 이용 중 · Level 3부터는 정식 회원 전용입니다')
+        +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">Exit trial view</a>'
+      : '👋 You\'re free to explore <b>'+_open+'</b> — no account needed. Level 3+ is for registered members.'
+        +_krSub('지금 무료로 자유롭게 보고 계세요 · Level 3부터는 정식 회원 전용입니다')
+        +' · <a href="/" style="color:#4ecdc4;">Create a free account to save your progress</a>';
     document.body.insertBefore(bar, document.body.firstChild);
   }
 });
