@@ -261,7 +261,11 @@
       if (!code) return;
       const { data } = await supa.rpc('practice_nominate',
         { p_code: code, p_name: studentName, p_unit: unit, p_q_index: qIndex });
-      _apply(data);
+      // isRealtime=true — 이 응답은 방금 이 화면이 만든 최신 상태이므로 즉시 반영(지목 팝업 등).
+      // 이전 postgres_changes 실시간 구독 시절엔 자기 화면에도 이벤트가 와서 팝업이 바로 떴는데,
+      // 2026-08-02 폴링 전환(7c849c3) 때 이 인자가 빠지면서 지목한 화면 자신은 팝업을 못 보고,
+      // 3초 뒤 폴링도 이미 동기화된 상태라 변화가 없어 결국 팝업이 영영 안 뜨던 버그.
+      _apply(data, true);
     }
 
     // p_choice 가 null 이면 단순 손들기 토글, 숫자면 '이름:번호' 투표
@@ -274,7 +278,7 @@
         p_unit: (unit === undefined ? null : unit),
         p_q_index: (qIndex === undefined ? null : qIndex),
       });
-      _apply(data);
+      _apply(data, true);
     }
 
     async function setStatus(status, clearPlayer) {
@@ -282,7 +286,7 @@
       if (!code) return;
       const { data } = await supa.rpc('practice_status',
         { p_code: code, p_status: status, p_clear_player: !!clearPlayer });
-      _apply(data);
+      _apply(data, true);
     }
 
     async function nextQuestion(unit, qIndex) {
@@ -290,7 +294,7 @@
       if (!code) return;
       const { data } = await supa.rpc('practice_next',
         { p_code: code, p_unit: unit, p_q_index: qIndex });
-      _apply(data);
+      _apply(data, true);
     }
 
     // 실시간 구독 대신 폴링.

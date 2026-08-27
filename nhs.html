@@ -1142,13 +1142,15 @@ function render(){
   const _pr=DATA.pronunciation;
   const _hasPron=_pr&&(Array.isArray(_pr)?_pr.length:((_pr.items&&_pr.items.length)||(_pr.groups&&_pr.groups.length)));
   const _hasQuiz=(DATA.quiz&&DATA.quiz.length)||(typeof READING_POOL!=='undefined'&&READING_POOL[_epK])||(typeof SP_QUIZ_POOL!=='undefined'&&SP_QUIZ_POOL[_epK]);
+  const _us=DATA.usage;
+  const _hasUsage=_us&&(Array.isArray(_us)?_us.length:(_us.sections&&_us.sections.length));
   const _tabDefs=[
     ['script','📽 영상·Script',(DATA.video||(DATA.script&&DATA.script.length))],
     ['vocab','새어휘 Vocab',DATA.vocab&&DATA.vocab.length],
     ['grammar','문법 Grammar',DATA.grammar&&DATA.grammar.length],
     ['pron','발음 Pron',_hasPron],
     ['banmal','반말/존댓말',!!DATA.banmal_jondaemal],
-    ['usage','Usage',DATA.usage&&DATA.usage.length],
+    ['usage','Usage',_hasUsage],
     ['quiz','Quiz',_hasQuiz],
     ['reallife','Real Life',DATA.real_life&&DATA.real_life.length],
     ['selfcheck','✅ 자기점검',DATA.self_check&&DATA.self_check.length]
@@ -1714,7 +1716,7 @@ async function loadLevelReview(lvNum){
   await _sharedSetsReady;
   const _LVARR={1:L1_EPISODES,2:L2_EPISODES,3:L3_EPISODES,4:L4_EPISODES,5:L5_EPISODES,6:L6_EPISODES};
   const eps=(_LVARR[lvNum]||[]).filter(ep=>!ep.disabled);
-  const vocab=[]; const gramByEp=[];
+  const vocab=[]; const gramByEp=[]; const epTextPool={}; // epId -> [{ko,en}] 다른 편 재등장 탐색용 (2026-08-27)
   await Promise.all(eps.map(async ep=>{
     const epKey=_lvrLv+'_'+ep.id;
     let data=EPISODE_DATA[epKey];
@@ -1722,6 +1724,34 @@ async function loadLevelReview(lvNum){
       try{const r=await fetch('data/nhs/'+_lvrLv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
     }
     if(!data)return;
+    // ── 이 편의 모든 한국어 본문(대사·문법 예문·반말존댓말·Usage·Real life)을 검색 풀로 모아둡니다.
+    //   (2026-08-27 추가) 전수조사 결과 어휘 카드로 명시된 recycled 외에도, <문법><반말·존댓말>
+    //   <Usage><Real life>에서 이미 배운 단어가 새 문장으로 자주 재사용되고 있었습니다 — 아래
+    //   2단계에서 그 재등장을 찾아 cloze 카드 재료로 씁니다.
+    const pool=[];
+    (data.script||[]).forEach(l=>{if(l&&l.text)pool.push({ko:l.text,en:l.en||''});});
+    // <문법><반말·존댓말><Usage><Real life>는 편마다 JSON 필드 구조가 제각각이라(예: usage가 배열일 때도,
+    // {sections:[...]} 객체일 때도, real_life 안 대화가 messages/lines/script 등 이름이 다 달라요)
+    // 특정 키 이름에 의존하지 않고 트리를 통째로 훑어서 한글이 들어있는 문자열을 전부 문맥 후보로 모읍니다.
+    function _lvrHarvestKo(node, depth){
+      if(depth>6||node==null)return;
+      if(typeof node==='string'){
+        if(node.length>=2&&node.length<=400&&/[가-힣]/.test(node))pool.push({ko:node,en:''});
+        return;
+      }
+      if(Array.isArray(node)){node.forEach(n=>_lvrHarvestKo(n,depth+1));return;}
+      if(typeof node==='object'){
+        for(const k in node){
+          if(k==='audio'||k==='audio_text'||k==='id'||k==='emoji'||k==='slide')continue; // 파일 경로·id는 제외
+          _lvrHarvestKo(node[k],depth+1);
+        }
+      }
+    }
+    _lvrHarvestKo(data.grammar,0);
+    _lvrHarvestKo(data.banmal_jondaemal,0);
+    _lvrHarvestKo(data.usage,0);
+    _lvrHarvestKo(data.real_life,0);
+    epTextPool[ep.id]=pool;
     (data.vocab||[]).forEach(cat=>{
       (cat.items||[]).forEach(item=>{
         if(!item.korean||!item.english)return;
@@ -1729,16 +1759,29 @@ async function loadLevelReview(lvNum){
         // 재등장한 이 편의 실제 대사(script)에서 그 단어가 쓰인 문장을 찾아 문맥 카드로 씁니다.
         // (2026-08-24: 단어를 고립시켜 뜻만 묻던 방식은 재순환의 본래 취지 — 새 문맥 노출 — 를
         //  담지 못한다는 지적에 따라, 실제로 다시 쓰인 문장이 있을 때는 그 문장을 그대로 재활용합니다.)
-        let ctx=null;
+        let ctx=null, ctxEpId=null;
         if(item.recycled&&data.script&&data.script.length){
           const line=data.script.find(l=>l.text&&l.text.includes(item.korean));
-          if(line)ctx={ko:line.text,en:line.en||''};
+          if(line){ctx={ko:line.text,en:line.en||''};ctxEpId=ep.id;}
         }
-        vocab.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',recycled:!!item.recycled,level:_lvrLv,epId:ep.id,ctx});
+        vocab.push({korean:item.korean,rom:item.romanization||'',english:item.english,emoji:item.emoji||'📖',recycled:!!item.recycled,level:_lvrLv,epId:ep.id,ctx,ctxEpId});
       });
     });
     if(data.grammar&&data.grammar.length)gramByEp.push({ep,grammar:data.grammar});
   }));
+  // ── 2단계 (2026-08-27): recycled로 명시되진 않았지만, 다른 편의 문법 예문·반말존댓말·Usage·Real life·
+  //   대사 본문에서 이미 실제로 다시 쓰인 단어를 찾아 ctx를 채웁니다. (전수조사 기준 이 경로로 약 30%p 추가 확보)
+  const LVR_MIN_WORD_LEN=2; // 1글자 단어(나/저/네 등)는 부분 문자열 오탐이 많아 제외
+  vocab.forEach(v=>{
+    if(v.ctx)return; // 이미 recycled 경로에서 찾은 문장이 있으면 그대로 둡니다
+    const core=v.korean.replace(/[^가-힣]/g,'');
+    if(core.length<LVR_MIN_WORD_LEN)return;
+    for(const epId in epTextPool){
+      if(epId===v.epId)continue; // 자기 자신이 처음 나온 편은 건너뛰고, 진짜 "다른 상황"만 인정
+      const hit=epTextPool[epId].find(t=>t.ko.includes(v.korean));
+      if(hit){ v.ctx={ko:hit.ko,en:hit.en}; v.ctxEpId=epId; break; }
+    }
+  });
   gramByEp.sort((a,b)=>eps.indexOf(a.ep)-eps.indexOf(b.ep));
   _lvrVocabPool=vocab; _lvrGrammarByEp=gramByEp; _lvrGramPage=0;
   document.getElementById('content-area').innerHTML=_lvrRenderShell();
@@ -1769,15 +1812,19 @@ function _lvrSwitchTab(tab){
   else{ _lvrRenderGrammar(); }
 }
 
-// 어휘 퀴즈 큐 만들기 — 아직 재순환된 적 없는(=<새 어휘>) 단어를 80%, 이미 재순환된 단어를 20% 비율로 섞습니다.
-// (재순환 단어는 커리큘럼 안에서 이미 한 번 더 노출됐지만, 단발성 단어는 이 복습 모드가 유일한 재노출 기회이기 때문)
+// 어휘 퀴즈 큐 만들기 — 어디서도 다시 안 나오는(ctx 없는) 단어를 80%, 이미 다른 문맥에서
+// 자연스럽게 재등장하는(ctx 있는) 단어를 20% 비율로 섞습니다.
+// (2026-08-27: 기준을 recycled 플래그에서 ctx 유무로 바꿨습니다 — ctx가 있는 단어는 이미
+//  커리큘럼 어딘가에서 한 번 더 노출됐지만, ctx가 전혀 없는 단어는 이 복습 모드가 유일한
+//  재노출 기회이기 때문에 그쪽을 더 자주 보여줍니다. 어느 쪽이 뽑히든 ctx가 있으면
+//  _lvrRenderVocab이 자동으로 cloze 카드로 그려줍니다.)
 function _lvrBuildQueue(){
   const pool=_lvrVocabPool;
-  const fresh=shuffleArr(pool.filter(c=>!c.recycled));
-  const rec=shuffleArr(pool.filter(c=>c.recycled));
+  const noCtx=shuffleArr(pool.filter(c=>!c.ctx));
+  const hasCtx=shuffleArr(pool.filter(c=>c.ctx));
   const CAP=Math.min(30,pool.length);
-  const needRec=Math.round(CAP*0.2);
-  const queue=[...rec.slice(0,needRec),...fresh.slice(0,CAP-Math.min(needRec,rec.length))];
+  const needHasCtx=Math.round(CAP*0.2);
+  const queue=[...hasCtx.slice(0,needHasCtx),...noCtx.slice(0,CAP-Math.min(needHasCtx,hasCtx.length))];
   if(queue.length<CAP){
     const used=new Set(queue.map(c=>c.korean));
     const rest=shuffleArr(pool.filter(c=>!used.has(c.korean)));
@@ -1814,7 +1861,7 @@ function _lvrRenderVocab(){
     // (정답을 고른 뒤 설명에서만 보여줍니다.)
     const blanked=esc(c.ctx.ko).replace(esc(c.korean),'<span style="display:inline-block;border-bottom:2.5px solid var(--teal);color:var(--teal-dark);font-weight:800;padding:0 2px;">＿＿＿＿</span>');
     body.innerHTML=progHtml
-      +`<div class="lt-ep-badge">${c.epId.toUpperCase()} · 🔁 다른 장면에서 다시 만나는 단어예요</div>`
+      +`<div class="lt-ep-badge">${c.epId.toUpperCase()} · 🔁 ${c.ctxEpId?c.ctxEpId.toUpperCase()+'에서 ':''}다른 장면에서 다시 만나는 단어예요</div>`
       +`<div style="background:var(--warm-50);border:1.5px solid var(--warm-200);border-radius:12px;padding:20px 18px;margin:10px 0 16px;">`
         +`<div style="font-family:var(--font-serif);font-size:14.5px;font-weight:700;color:var(--warm-900);line-height:1.7">${blanked}</div>`
       +`</div>`
@@ -5078,7 +5125,7 @@ function buildBasicsSidebar(){
     return refSubHdr(g.label)+items.map(item).join('');
   }).join('');
   const heroGroup='<div class="basics-hero-group">'
-    +'<div class="basics-hero-group-hdr">🌱 한글 기초 · Hangul Basics</div>'
+    +'<div class="basics-hero-group-hdr">🌱 한글 기초 · Hangeul Basics</div>'
     +'<div class="basics-hero-group-body">'+learn.map(heroItem).join('')+'</div>'
     +'</div>';
   const ptItem='<div class="lt-item pt-item" id="pt-sidebar-item" onclick="loadPlacementTest()" style="background:var(--teal-50);border:1.5px solid transparent;margin-bottom:4px"><div class="lt-num">🎯</div><div class="lt-name">배치 테스트<span style="display:block;font-size:10.5px;font-weight:500;color:var(--warm-500)">내 레벨 찾기 · Placement</span></div></div>';

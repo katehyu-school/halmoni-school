@@ -141,6 +141,7 @@
               <select class="ms-select" id="ms-lv-sel">
                 <option value="2">Level 2</option>
                 <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
               </select>
             </div>
             <div>
@@ -262,7 +263,7 @@ const MS_L2_VOCAB = {
   6: ["동물원","빵가게","옷가게","꽃집","친구 집","만들어요","사요"],
   7: ["일","이","삼","사","오","육","칠","팔","구","십","십일","십이","십삼","십사","십오","하나","둘","셋","넷"],
 };
-const MS_UNITS = {2:[1,2,3,4,5,6,7,8,9], 3:[1,2,3,4,5]};
+const MS_UNITS = {2:[1,2,3,4,5,6,7,8,9], 3:[1,2,3,4,5], 4:[1,2,3,4,5,6,7,8,9,10]};
 
 // localStorage helpers
 const msGet = (k,d='') => { try{ return localStorage.getItem(k)||d; }catch(e){return d;} };
@@ -564,6 +565,13 @@ function msRenderHintWords() {
     el.innerHTML = words.map(w=>`<span onclick="msPickHint('${w.replace(/'/g,"\\'")}') " style="display:inline-block;padding:4px 10px;background:#E8F6FF;color:#1a7bbf;border-radius:20px;font-size:13px;cursor:pointer;margin-bottom:4px;">${w}</span>`).join('');
   }
 
+  // Level 4 — sync from B4_INLINE_DATA
+  if(lv==='4' && unit && typeof B4_INLINE_DATA!=='undefined' && B4_INLINE_DATA[unit]){
+    const vocab=B4_INLINE_DATA[unit].sections?.vocab||{};
+    const words=[];
+    Object.values(vocab).forEach(cat=>Array.isArray(cat)&&cat.forEach(item=>{if(item.kr)words.push(item.kr);}));
+    if(words.length){_render(words.slice(0,18),'Level 4 · '+unit+'과');return;}
+  }
   // Level 3 — sync from B3_INLINE_DATA
   if(lv==='3' && unit && typeof B3_INLINE_DATA!=='undefined' && B3_INLINE_DATA[unit]){
     const vocab=B3_INLINE_DATA[unit].sections?.vocab||{};
