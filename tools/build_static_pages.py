@@ -98,6 +98,33 @@ TIER_LABEL = {
 
 LOCK_TAG = "<span class='tag'>🔒 준비 중 · Coming Soon</span>"
 
+# 옛 주소 → 새 주소 리다이렉트 (2026-08-27~)
+# ---------------------------------------------------------------
+# learn/ 을 zip으로 옮기다가, 예전(유실된) 생성기 버전이 만들어둔 파일 114개가
+# 기기에 고아로 남아있는 걸 발견해 정리했다. 그중 8개는 L1·L2 문법 페이지였는데,
+# 그사이 data/nhs/*.json 의 grammar 배열 내용이 바뀌면서 slug가 달라진 것들이었다
+# (이 스크립트 재작성과는 무관 — 예전부터 있던 콘텐츠 drift). git 히스토리에서
+# 옛 페이지의 실제 제목을 확인해 새 페이지와 대조한 결과:
+#   - 5개는 같은 문법 항목이 새 slug로 그대로 살아있음 → 그 페이지로 리다이렉트.
+#   - 3개는 그 문법 항목 자체가 해당 편의 grammar 배열에서 빠짐(다른 항목으로 교체됨)
+#     → 정확히 대응하는 새 페이지가 없으므로, 해당 에피소드 페이지로 리다이렉트.
+# 사이트가 순수 정적이라 서버 차원의 301은 불가능 — hq-mobile.html과 동일하게
+# <meta refresh>+JS location.replace 스텁으로 처리(검색엔진엔 canonical로 알려줌).
+# build()가 매 실행마다 learn/ 을 통째로 새로 만들기 때문에, 리다이렉트도 반드시
+# 여기 REDIRECTS에 등록해야 재실행 후에도 사라지지 않는다 — 수작업으로 옆에 파일만
+# 만들어두면 다음 실행에서 함께 삭제된다.
+REDIRECTS = {
+    # old (learn/ 기준 상대경로) → new (사이트 루트 기준 절대경로)
+    "grammar/l1-ep05-connecting-two-actions-order.html": "/learn/episode/l1-ep05.html",
+    "grammar/l1-ep07-inability-more-ep08.html": "/learn/grammar/l1-ep07-inability-more-l2.html",
+    "grammar/l1-ep09-counter-words-which-one-for-what.html": "/learn/grammar/l1-ep09-counter-words-which.html",
+    "grammar/l1-ep12-coming-level-2-verb-modifiers.html": "/learn/grammar/l1-ep12-coming-l2-ep01-verb-modifiers.html",
+    "grammar/l2-ep03-because-reason.html": "/learn/grammar/l2-ep03-because-reason-then-sequence.html",
+    "grammar/l2-ep07-doing-something-someone-respectful.html": "/learn/grammar/l2-ep07-doing-something-someone-plain-respectful.html",
+    "grammar/l2-ep07-person.html": "/learn/episode/l2-ep07.html",
+    "grammar/l2-ep11-realization-from-what-you-were-told-oh-i.html": "/learn/episode/l2-ep11.html",
+}
+
 # ─────────────────────────────────────────────────────────────
 # 유틸
 # ─────────────────────────────────────────────────────────────
@@ -511,6 +538,37 @@ def locked_episode_body(ep, lv, gram_links):
     return "\n".join(parts)
 
 
+def redirect_page(target):
+    """옛 주소용 리다이렉트 스텁. hq-mobile.html과 동일 패턴(meta refresh + JS)."""
+    full = f"{SITE}{target}"
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이동 중… · Doranchae</title>
+<link rel="canonical" href="{esc(full)}">
+<meta http-equiv="refresh" content="0; url={esc(target)}">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
+<style>
+html,body{{height:100%;margin:0;background:#0a2540;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;}}
+.wrap{{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;box-sizing:border-box;}}
+.wrap a{{color:#7fd9c8;font-weight:700;}}
+</style>
+<script>location.replace('{target}' + location.hash);</script>
+</head>
+<body>
+<div class="wrap">
+  <p>이동 중이에요… Redirecting…</p>
+  <p>자동으로 이동하지 않으면 여기를 눌러주세요:<br>
+  <a href="{esc(target)}">doranchae.com{esc(target)}</a></p>
+</div>
+</body>
+</html>
+"""
+
+
 # ─────────────────────────────────────────────────────────────
 # 빌드
 # ─────────────────────────────────────────────────────────────
@@ -702,6 +760,13 @@ def build(open_levels):
         encoding="utf-8")
     urls.insert(0, "/learn/")
 
+    # ── 옛 주소 리다이렉트 (REDIRECTS 참고) ── sitemap에는 넣지 않음(진짜 페이지가 아니므로).
+    for old_rel, target in REDIRECTS.items():
+        rp = OUT / old_rel
+        rp.parent.mkdir(parents=True, exist_ok=True)
+        rp.write_text(redirect_page(target), encoding="utf-8")
+        written.add(rp)
+
     # ── sitemap · robots ── (sitemap은 공개 레벨 URL만 — urls 리스트가 이미 그렇게 쌓였음)
     today = date.today().isoformat()
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -735,6 +800,7 @@ def build(open_levels):
     print(f"   에피소드 페이지 {sum(len(v) for v in hub.values())}개 (그중 공개 "
           f"{sum(1 for v in hub.values() for e in v if e[4])}개)")
     print(f"   sitemap URL   {len(urls) + 4}개 (공개 레벨만)")
+    print(f"   옛 주소 리다이렉트 {len(REDIRECTS)}개")
     print(f"   → {OUT}")
     stale = sorted(before - written)
     if stale:
