@@ -7,6 +7,32 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🚪 **2026-08-27 완료 (index.html 랜딩페이지 대개편 + nhs.html 심각한 버그 2건 발견/수정 + sw.js 캐시 버그 수정)**
+> — 배경: "예전 대문이 너무 꼭꼭 잠겨 보인다"는 문제의식에서 시작, `index.html`을 카드형 레이아웃으로 재구성 — Kids 카드(바로 로그인 진입)와 도란채 카드(Start Here/Road Map/Member Login 3버튼)를 나란히 배치.
+>
+> **[index.html — 랜딩페이지]**
+> — 상단 실제화면 캡처 3장(`preview_script.png`/`preview_vocab.png`/`preview_grammar.png`, `nhs.html?ep=ep05&L1`의 Script/Vocab/Grammar 탭을 Playwright로 캡처) 추가 — 선생님 요청대로 상단 툴바/프로모션 배너를 크롭해서 제거하고, 이후 세로로 조금 더 키워서(1020×660) 최종 확정.
+> — hero tagline("Learn Korean the way it's actually lived...") 폰트 크기를 축소했다가(꽉 찬 느낌 원해서) 이번 세션 마지막에 다시 확대 — 최종 `clamp(20px,2.7vw,27px)`.
+> — Start Here/Road Map 버튼에 소제목 추가(`New to Korean?`/`How to study`), "가입 없이 Level 1–2 무료 체험" 안내 문구를 버튼 아래 별도 배치.
+> — `#landingBox` 폭을 860px→1100px로 확대(선생님이 큰 모니터에서 "꽉 찬" 느낌 선호), 그에 맞춰 헤더(로고/제목/부제) CSS를 비례적으로 1.28배 확대 — 안 그러면 카드만 커지고 헤더 글자가 상대적으로 작아 보이는 불균형 발생.
+> — 이번 세션 마지막 미세조정: `.wrap` 상단 padding 24px→56px(로고 위 여백 확대), tagline 폰트 재확대.
+> — 미리보기 화면-버튼카드 사이 여백을 320px까지 키웠다가("화면에 샘플화면+설명까지만 보여야 균형") 선생님 피드백("여백이 너무 커")으로 44px(다른 섹션과 동일한 리듬)로 되돌림.
+>
+> **[nhs.html — 🚨 심각한 버그 2건, 둘 다 이번 세션에 발견/수정]**
+> — **버그 1 (딥링크 전체 무력화)**: `index.html`의 Start Here/Road Map 버튼을 `nhs.html?view=start`/`?view=roadmap`으로 연결하면서 넣은 코드가, 트라이얼 플래그 처리용으로 IIFE 안에만 스코프된 `_p` 변수를 전역인 것처럼 잘못 참조(`_p.get('view')`) → 페이지 로드마다 `ReferenceError`가 터지면서 `DOMContentLoaded` 핸들러가 중간에 멈춰버림. 이 때문에 딥링크뿐 아니라 기본 `loadEp('ep01')` 진입, 잠긴 레벨 흐리게 표시, 비회원 배너까지 전부 조용히 broken 상태였음(아무도 몰랐던 기존 결함까지 이번에 같이 드러남). 선생님이 "링크는 수정 안 한 것 같은데?" 라고 재확인 요청한 게 발견 계기. `new URLSearchParams(location.search).get('view')`로 수정.
+> — 파생 버그: `?view=roadmap`으로 바로 들어가면 상단 네비가 "Level 1"로 표시되는 문제(`loadRoadmap()`은 active 상태를 안 건드림) → `loadRoadmap()` 호출 전에 `setLevel(_basisBtn)` 선행 호출로 해결.
+> — **버그 2 (🔴 보안/접근제어 우회, 더 심각)**: `_lvNum()`이 버튼 텍스트 "Level 3" 식 정확일치 매핑이었는데, 잠긴 레벨에 "🔒"를 텍스트 뒤에 그대로 append하는 기존 코드와 만나면 "Level 3 🔒"가 매칭 실패해 0을 반환 → `setLevel()`의 `_n > NHS_OPEN_MAX` 잠금 검사가 무력화돼 **비회원도 Level 3~6(유료 콘텐츠)에 그냥 접근 가능**했던 상태. 원래 있던 결함인데, 버그 1(_p 에러)이 잠금 표시 코드 자체를 실행 안 되게 막고 있어서 지금까지 드러나지 않았던 것 — 버그 1을 고치면서 역설적으로 재노출됨. 선생님이 "새 브라우저로도 Start Here 들어가면 모든 레벨이 열려있다"고 재현 확인. 정규식(`/Level\s*(\d+)/`)으로 레벨 숫자만 추출하도록 수정해 이모지 등 장식이 붙어도 항상 정확히 잠기게 함.
+> — 비회원 배너 문구 수정: "무료 계정 만들면 Level 3부터 열림"처럼 읽히던 오해 소지 문구를 "Level 3+ is for registered members"(무료 계정 ≠ 유료 레벨 오픈)로 명확화 + 영어를 1순위로, 한글은 작은 이탤릭 서브라인으로(한국어 학습자 대상이라 "이 안내를 한글로 이해하면 이미 배너가 필요 없는 수준"이라는 선생님 판단).
+> — 참고: 로그인 상태(`NHS_IS_MEMBER`)는 `localStorage.getItem('hq_user')`로 판단하므로 같은 브라우저의 새 탭은 로그인이 유지되고(정상 동작), 다른 브라우저/시크릿창에서는 정상적으로 잠김 — 선생님이 문의해서 확인, 버그 아님.
+>
+> **[sw.js — 캐시 버그]**
+> — 선생님이 "새로고침할 때마다 화면 크기(레이아웃)가 달라진다"고 보고 → 줌/창크기 아님을 하나씩 배제하다가 "같은 창을 새로고침했더니 작아졌다"는 결정적 단서로 서비스워커 의심. `dr-mobile.html`에서 scope 지정 없이 `sw.js`를 등록해서 캐시 핸들러가 사이트 전체(index.html/nhs.html 포함)의 GET 요청을 가로채고 있었음(원래는 모바일 PWA 오프라인 지원용으로만 쓰려던 것). fetch 핸들러를 `ASSETS`(dr-mobile.html/hq-mobile.html/manifest.json)에만 적용되도록 범위를 좁히고, `CACHE` 버전을 v1→v2로 올려 기존에 잘못 캐시된 항목을 강제 삭제, `skipWaiting()`+`clients.claim()` 추가해 새 워커가 열린 탭에도 즉시 적용되도록 함.
+>
+> — ✅ **검증**: 각 수정마다 `node --check` 통과 확인. Playwright로 `.basics-title-kr`/`.level-btn.active` 등 실제 DOM 상태를 직접 읽어 검증(이전에 쓰던 `page.content()` 문자열 검색 방식은 JS 소스 텍스트가 항상 남아있어 거짓 통과를 내는 결함이 있었음이 이번에 확인돼 폐기). 레벨 잠금 우회는 실제로 잠긴 레벨 버튼 클릭 시 `alert()` 다이얼로그가 뜨는지까지 시뮬레이션해 확인.
+> — 배포: `index.html`/`nhs.html`/`sw.js` 모두 `device_commit_files`로 `C:\Users\kateh\Desktop\halmoni-school`에 직접 반영 완료.
+> — ⏳ **git add/commit/push 대기 중** — 제안한 커밋 메시지: "index 미세조정(헤더 여백/tagline), nhs 딥링크·레벨락 버그 수정, sw.js 캐시 범위 수정". 이전 세션들의 미커밋 변경분(QR 재생성, hq→dr 주소 변경, 자모 획순 등, 아래 2026-08-24/23 항목들)도 아직 안 쌓여있으면 같이 커밋 대상.
+> — 참고(미해결): 이전부터 남아있던 관련 없는 stray git 변경분(.gitignore 줄바꿈 diff, TTS mp3, `doranchae_student_taster_lesson.pptx`, 삭제된 `slide1_preview.jpg`) — 선생님이 아직 포함 여부 답 안 하심, 다음 세션에서 재확인 필요.
+
 > 📱 **2026-08-24 완료 (로드맵 QR 새로 생성 + 에피소드 인트로 문구 수정)**
 > — `qr/QR_Doranchae_Mobile.png`가 실제로 `https://doranchae.com/hq-mobile.html`을 인코딩하고 있는 걸 pyzbar로 디코드해서 확인 → `https://doranchae.com/dr-mobile.html`을 가리키는 새 QR로 교체(같은 파일명, 같은 스타일/크기 430×430, 로고 없는 기본 흑백). 리다이렉트가 있어서 구QR도 계속 작동하지만, 새 QR은 한 단계(리다이렉트)를 건너뛰어 더 빠름. 새 QR도 디코드해서 정확한 주소로 스캔되는지 확인함.
 > — `docs/`의 다른 QR 파일(`QR_HangeulQuest_Mobile.png` 등)은 코드에서 참조되는 곳이 없어서 안 건드림.
