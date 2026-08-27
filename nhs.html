@@ -1102,6 +1102,15 @@ function ptRetry(){
 
 
 async function _doLoadEp(epId, level='L1'){
+  // 레벨 잠금 최종 검사 — setLevel()의 잠금 검사는 상단 레벨 탭 클릭에만 적용돼서,
+  // 색인(Index) 모달의 "자세히 보기"/단어 배지, 오답노트의 "복습하러 가기" 등
+  // 에피소드를 "직접" 여는 다른 진입 경로들은 전부 이 검사를 우회할 수 있었음(비회원이 잠긴 레벨 콘텐츠에 접근 가능했던 보안 버그).
+  // 모든 에피소드 로드가 결국 이 함수를 거치므로, 여기서 한 번 더 막으면 진입 경로에 상관없이 항상 막힘.
+  const _lvN=parseInt(String(level).replace(/\D/g,''),10)||0;
+  if(_lvN>NHS_OPEN_MAX){
+    alert('Level 3부터는 회원만 이용할 수 있어요.\n\n지금은 Level 1·2를 누구나 볼 수 있고, Level 3 이상은 실제 학생들과 함께 검증하는 중이라 잠겨 있어요.\n\nLevels 3+ are for members. Levels 1-2 are open to everyone — Level 3 and up are still being tested with real students.');
+    return;
+  }
   // load-order guard: if the user taps two episodes quickly, only the LAST tap should ever render.
   // each call grabs its own ticket; before doing anything that can change on-screen state, it checks
   // the ticket is still current — a stale call (its fetch/awaits finished after a newer tap) bails out.
@@ -3293,7 +3302,15 @@ function renderIdxBody(){
   if(!body)return;
 
   // 전체 에피소드 데이터 수집
-  const allEps=Object.values(EPISODE_DATA).filter(ep=>ep&&ep.id);
+  // 🔒 비회원에게는 잠긴 레벨(Level 3+)의 단어·문법·발음 내용 자체를 색인 검색결과에서 제외 —
+  // 이전엔 "자세히 보기" 클릭(에피소드 열기)만 막혀 있었고, 색인 목록 자체에는 잠긴 레벨의
+  // 실제 단어 뜻/문법 설명/예문까지 그대로 노출되고 있었음(진짜 콘텐츠 유출). 필수 낱말(essential)·
+  // 실생활 어휘(glossary)는 Start Here 소속(레벨 무관 무료)이라 이 필터 대상이 아님.
+  const allEps=Object.values(EPISODE_DATA).filter(ep=>{
+    if(!ep||!ep.id) return false;
+    const lvN=parseInt(String(ep.level||'L1').replace(/\D/g,''),10)||1;
+    return lvN<=NHS_OPEN_MAX;
+  });
 
   if(idxTab==='vocab'){
     // 전체 단어 수집
@@ -3308,7 +3325,10 @@ function renderIdxBody(){
       }
     });
     // 색인 전용 어휘(실생활 광맥) — 새어휘 카드 없이 색인에만 노출
+    // 🔒 GLOSSARY_POOL은 위 allEps 필터를 안 거치는 별도 데이터라 여기서도 따로 레벨 검사 필요(빠졌으면 잠긴 레벨의 실생활 어휘가 그대로 노출됨).
     Object.entries(GLOSSARY_POOL).forEach(([key,list])=>{
+      const lvN=parseInt(String(key).split('_')[0].replace(/\D/g,''),10)||1;
+      if(lvN>NHS_OPEN_MAX) return;
       (list||[]).forEach(v=>allWords.push({...v,ep:key,_gloss:true}));
     });
     // 필수낱말카드(Start Here) — 색인에도 등록, 배지 클릭 시 Basics로 이동
