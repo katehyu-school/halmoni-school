@@ -76,30 +76,30 @@ body::before {
 }
 
 /* ── HEADER ── */
-.site-header { text-align: center; margin-bottom: 18px; animation: fadeDown .8s ease both; }
+.site-header { text-align: center; margin-bottom: 22px; animation: fadeDown .8s ease both; }
 
 .crest {
-  width: 64px; height: 52px;
+  width: 78px; height: 63px;
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 6px;
+  margin: 0 auto 10px;
 }
 
 .site-title {
   font-family: 'Gaegu', sans-serif;
-  font-size: clamp(24px, 4.5vw, 38px);
+  font-size: clamp(28px, 5vw, 44px);
   font-weight: 700; letter-spacing: .02em;
-  color: #4ecdc4; line-height: 1; margin-bottom: 4px;
+  color: #4ecdc4; line-height: 1; margin-bottom: 6px;
 }
 .site-title-en {
   font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500; font-size: 12px; letter-spacing: .2em;
+  font-weight: 500; font-size: 13px; letter-spacing: .2em;
   text-transform: uppercase; color: rgba(255,255,255,.72);
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
 
 .site-subtitle {
-  font-size: 10px; letter-spacing: .2em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  font-size: 10.5px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
 }
 
 .divider { display: flex; align-items: center; gap: 10px; justify-content: center; }
@@ -115,11 +115,11 @@ body::before {
 
 .hero-text {
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 26px;
 }
 .hero-tagline {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(14px, 2vw, 19px);
+  font-size: clamp(14px, 1.9vw, 18px);
   font-style: italic;
   color: #fff;
   margin-bottom: 8px;
@@ -195,9 +195,16 @@ body::before {
   color: #fff; font-weight: 700; border-color: transparent;
 }
 .track-action-btn.primary:hover { opacity: .9; background: linear-gradient(135deg, #4ecdc4, #2ab3aa); }
+.track-action-sub {
+  display: block;
+  font-size: 9.5px; font-weight: 500; letter-spacing: .04em;
+  color: rgba(232,244,248,.5);
+  margin-bottom: 2px;
+}
+.track-action-btn.primary .track-action-sub { color: rgba(255,255,255,.8); }
 
 /* ── PREVIEW SCREENSHOTS ── */
-.preview-section { margin-bottom: 28px; }
+.preview-section { margin-bottom: 44px; }
 .preview-label {
   text-align: center;
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
@@ -666,10 +673,11 @@ body::before {
           <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">🎬 72 Episodes</span>
         </div>
         <div class="track-actions">
-          <button class="track-action-btn primary" onclick="location.href='nhs.html?view=start'">🌱 Start Here</button>
-          <button class="track-action-btn" onclick="location.href='nhs.html?view=roadmap'">🧭 Road Map</button>
+          <button class="track-action-btn primary" onclick="location.href='nhs.html?view=start'"><span class="track-action-sub">New to Korean?</span>🌱 Start Here</button>
+          <button class="track-action-btn" onclick="location.href='nhs.html?view=roadmap'"><span class="track-action-sub">How to study</span>🧭 Road Map</button>
           <button class="track-action-btn" onclick="openLoginModal('main')">👤 멤버 로그인 · Log in</button>
         </div>
+        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">가입 없이 Level 1–2 무료 체험 · Free preview through Level 2, no signup required</div>
       </div>
     </div>
 

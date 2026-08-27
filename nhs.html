@@ -7071,11 +7071,15 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   buildSidebar();
   setTimeout(_srsUpdateBadge,0);
   // index.html의 "Start Here" / "Road Map" 바로가기 링크(?view=start / ?view=roadmap) 처리 (2026-08)
-  const _entryView=_p.get('view');
+  const _entryView=new URLSearchParams(location.search).get('view');
   if(_entryView==='start'){
     const _basisBtn=document.querySelector('.level-btn-basis');
     if(_basisBtn) setLevel(_basisBtn); else loadEp('ep01');
   }else if(_entryView==='roadmap'){
+    // 로드맵도 "Start Here" 영역 소속이므로, 먼저 Basics 모드로 전환(상단 네비 active 표시 + 좌측 사이드바 구성)한 뒤
+    // 로드맵 화면으로 콘텐츠만 덮어씀 — 사이드바에서 직접 로드맵을 누르는 경우와 동일한 상태를 재현.
+    const _basisBtn=document.querySelector('.level-btn-basis');
+    if(_basisBtn) setLevel(_basisBtn);
     loadRoadmap();
   }else{
     loadEp('ep01');
