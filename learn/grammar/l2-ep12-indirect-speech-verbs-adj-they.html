@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -95,7 +98,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <h2>규칙</h2>
 <div class='box blue'><b>Present verb · 동사 현재</b>Action verb: stem + -ㄴ/는다고 하다<br>먹다 → 먹는다고 해 (they say he eats)<br>가다 → 간다고 해 (they say she&#x27;s going)<br>Adj: stem + -다고 하다<br>맛있다 → 맛있다고 해 (they say it&#x27;s delicious)</div>
 <div class='box green'><b>Past tense · 과거형</b>Verb/Adj stem + -았/었다고 하다<br>먹었다고 해 (they say he ate)<br>맛있었다고 해 (they say it was delicious)<br>소래사였다고 해 (they say it was called Soraesa)</div>
-<div class='box amber'><b>Shortened forms · 줄임말</b>-다고 해 → -대 (casual)<br>맛있다고 해 → 맛있대!<br>-다고 하다 → -다 하다 (writing)<br>In conversation: 다고 해, 다고 하더라고요, 다고 들었어요</div>
+<div class='box amber'><b>Shortened forms · 줄임말</b>-다고 해 → -대 (casual)<br>맛있다고 해 → 맛있대!<br>In conversation: 다고 해, 다고 하더라고요, 다고 들었어요</div>
 <h2>예문</h2>
 <h3>Reporting hearsay · 들은 것 전달</h3><ul class='ex'><li><span class='ko'>내일 비가 온다고 해요.</span><span class='en'>They say it will rain tomorrow.</span></li><li><span class='ko'>그 식당이 맛있다고 하더라고요.</span><span class='en'>I heard that restaurant is good.</span></li></ul>
 <h3>Reporting past events · 과거 전달</h3><ul class='ex'><li><span class='ko'>옛날에 여기가 바다였다고 해.</span><span class='en'>They say this used to be the sea long ago.</span></li><li><span class='ko'>호랑이가 절을 지었다고 해.</span><span class='en'>They say a tiger built the temple.</span></li></ul>

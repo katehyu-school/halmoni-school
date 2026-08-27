@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -92,6 +95,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <div class='pattern'>이거 (near me 🙋) | 그거 (near you 👂) | 저거 (far away 👉)</div>
 <p class='lead'>이거 (near me) · 그거 (near you) · 저거 (far from both)</p>
 <p class='lead'>이거 = this thing (near speaker), 그거 = that thing (near listener), 저거 = that thing over there (far from both). For places: 여기/거기/저기.</p>
+<h2>이야기 속에서는 이렇게 쓰입니다</h2><div class='scene'><b>엄마, 이거 너무 맛있어요!</b><br>Mom, this is so delicious!</div>
 <h2>규칙</h2>
 <div class='box blue'><b>이거 · This (near ME 🙋)</b>이거 뭐예요?  What is this?<br>이거 먹어요!  I&#x27;ll eat this!</div>
 <div class='box green'><b>그거 · That (near YOU 👂)</b>그거 맛있어요?  Is that (near you) delicious?</div>

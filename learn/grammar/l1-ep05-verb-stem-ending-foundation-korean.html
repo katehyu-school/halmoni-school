@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -92,8 +95,8 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <p class='lead'>모든 한국어 동사는 어간 + 어미로 이루어져요 · Every Korean verb = stem + ending</p>
 <p class='lead'>Before learning new verb patterns, you need to know how Korean verbs are built. The dictionary form always ends in -다. Remove -다 and you have the stem (어간). All grammar endings attach to the stem. Whether the stem ends in a consonant or vowel determines if you add (으) or not.</p>
 <h2>규칙</h2>
-<div class='box tip'>💡 간단 규칙 · The simple rule:<br>• 자음으로 끝나는 어간 + (으) + 어미<br>  먹- + 으러 → 먹으러<br>• 모음으로 끝나는 어간 + 어미 (으 없음)<br>  가- + 러 → 가러<br>• ㄹ 받침은 모음 취급 → (으) 없음<br>  놀- + 러 → 놀러<br><br>⚡ 이 에피소드에서 바로 씁니다!<br>먹으러 갈까? / 사러 갈까? / 놀러 갈까?</div>
-<table><thead><tr><th>기본형</th><th>어간 (stem)</th><th>끝소리</th><th>(으) 규칙</th></tr></thead><tbody><tr><td>먹다</td><td>먹-</td><td>받침 ㄱ ← 자음</td><td>(으) 추가 → 먹<strong>으</strong>러, 먹<strong>을</strong>까?</td></tr><tr><td>읽다</td><td>읽-</td><td>받침 ㄱ ← 자음</td><td>(으) 추가 → 읽<strong>으</strong>러, 읽<strong>을</strong>까?</td></tr><tr><td>가다</td><td>가-</td><td>ㅏ ← 모음</td><td>바로 연결 → 가<strong>러</strong>, 가<strong>ㄹ</strong>까?</td></tr><tr><td>보다</td><td>보-</td><td>ㅗ ← 모음</td><td>바로 연결 → 보<strong>러</strong>, 볼<strong>까</strong>?</td></tr><tr><td>마시다</td><td>마시-</td><td>ㅣ ← 모음</td><td>바로 연결 → 마시<strong>러</strong>, 마실<strong>까</strong>?</td></tr><tr><td>놀다</td><td>놀-</td><td>받침 ㄹ ← 특별!</td><td>ㄹ로 끝나면 (으) 없이 → 놀<strong>러</strong>, 놀<strong>까</strong>?</td></tr></tbody></table>
+<div class='box green'><b>💡 간단 규칙 · The Simple Rule</b>• 자음으로 끝나는 어간 + (으) + 어미<br>  먹- + 으러 → 먹으러<br>• 모음으로 끝나는 어간 + 어미 (으 없음)<br>  보- + 러 → 보러<br>• ㄹ 받침은 모음 취급 → (으) 없음<br>  놀- + 러 → 놀러<br><br>⚡ 이 에피소드에서 바로 씁니다!<br>먹으러 갈까? / 사러 갈까? / 놀러 갈까?</div>
+<table><thead><tr><th>기본형</th><th>어간 (stem)</th><th>끝소리</th><th>(으) 규칙</th></tr></thead><tbody><tr><td>먹다</td><td>먹-</td><td>받침 ㄱ ← 자음</td><td>(으) 추가 → 먹<strong>으</strong>러, 먹<strong>을</strong>까?</td></tr><tr><td>읽다</td><td>읽-</td><td>받침 ㄱ ← 자음</td><td>(으) 추가 → 읽<strong>으</strong>러, 읽<strong>을</strong>까?</td></tr><tr><td>보다</td><td>보-</td><td>ㅗ ← 모음</td><td>바로 연결 → 보<strong>러</strong>, 볼<strong>까</strong>?</td></tr><tr><td>마시다</td><td>마시-</td><td>ㅣ ← 모음</td><td>바로 연결 → 마시<strong>러</strong>, 마실<strong>까</strong>?</td></tr><tr><td>놀다</td><td>놀-</td><td>받침 ㄹ ← 특별!</td><td>ㄹ로 끝나면 (으) 없이 → 놀<strong>러</strong>, 놀<strong>까</strong>?</td></tr></tbody></table>
 <h2>어디에 나오나요</h2><p>이 문법은 <a href='/learn/episode/l1-ep05.html'>Level 1 ep05 「광장시장에 가요?」</a> 에 나옵니다. 이야기를 보고 듣고 연습하려면 아래에서 이어서 학습하세요.</p>
 <a class='cta' href='/nhs.html'>▶ 앱에서 이 편 학습하기 — 무료</a>
 <footer>

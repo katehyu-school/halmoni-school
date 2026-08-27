@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -93,10 +96,11 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <p class='lead'>N이/가 → 동작이나 상태의 주체 · Who is doing the action / what has the state</p>
 <p class='lead'>이/가 marks the SUBJECT — who or what is doing the action. Same rule as 은/는: 이 after consonant, 가 after vowel.</p>
 <p class='lead'>이/가 marks the SUBJECT — who is doing or being something.<br>은/는(topic)과 헷갈리기 쉬워요! Easy to confuse with 은/는!<br>받침(final consonant) 있으면 이, 없으면 가 · consonant → 이 / vowel → 가</p>
+<h2>이야기 속에서는 이렇게 쓰입니다</h2><div class='scene'><b>엄마가 전화해요.</b><br>Mom is on the phone.</div>
 <h2>규칙</h2>
 <div class='box blue'><b>받침 없으면 → 가 · Vowel ending → 가</b>엄마가, 보미가, 학교가, 친구가</div>
 <div class='box green'><b>받침 있으면 → 이 · Consonant ending → 이</b>집이, 학생이, 선생님이</div>
-<div class='box amber'><b>💡 은/는 vs 이/가 — what&#x27;s the difference?</b>나는 학생이에요. (topic — I&#x27;m talking about myself)<br>내가 먹었어요! (subject — I&#x27;m the one who ate it!)</div>
+<div class='box amber'><b>💡 은/는 vs 이/가 — what&#x27;s the difference?</b>나는 학생이에요. (topic — I&#x27;m talking about myself)<br>내가 먹어요! (subject — I&#x27;m the one eating it!)</div>
 <div class='box red'><b>⚠️ 나 · 저는 모양이 바뀌어요 · 나 and 저 change shape</b>나 + 가 → 내가 ⭕ (나가 ❌)<br>저 + 가 → 제가 ⭕ (저가 ❌)<br>※ 은/는을 붙일 때는 그대로: 나는 ⭕ 저는 ⭕</div>
 <table><thead><tr><th>받침?</th><th>조사</th><th>예시</th></tr></thead><tbody><tr><td>받침 X ❌ (모음)</td><td>가</td><td>엄마 → 엄마가</td></tr><tr><td>받침 X ❌ (모음)</td><td>가</td><td>언니 → 언니가</td></tr><tr><td>받침 O ✅ (자음)</td><td>이</td><td>동생(ㅇ) → 동생이</td></tr><tr><td>받침 X ❌ (모음)</td><td>가</td><td>강아지 → 강아지가</td></tr></tbody></table>
 <h2>예문</h2><ul class='ex'><li><span class='ko'>엄마가 전화해요.</span><span class='en'>Mom is making a phone call.</span></li><li><span class='ko'>언니가 노래해요.</span><span class='en'>My sister is singing.</span></li><li><span class='ko'>고양이가 있어요.</span><span class='en'>There is a cat.</span></li></ul>

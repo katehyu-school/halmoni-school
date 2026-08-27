@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -93,7 +96,8 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <p class='lead'>Korean uses Sino-Korean (한자어) numbers for ALL dates — months and days. To ask the date informally, use 며칠이야? (casual) or 며칠이에요? (polite).</p>
 <h2>이야기 속에서는 이렇게 쓰입니다</h2><div class='scene'><b>오월 구일이야.</b><br>It&#x27;s May 9th.</div>
 <h2>규칙</h2>
-<div class='box blue'><b>날짜 = 한자어 숫자 · All dates use Sino-Korean</b>1월 → 일월　2월 → 이월　3월 → 삼월<br>5월 → 오월　9월 → 구월　12월 → 십이월<br>1일 → 일일　9일 → 구일　15일 → 십오일</div>
+<div class='box blue'><b>월 (month) → 한자어 · Sino-Korean</b></div>
+<div class='box green'><b>일 (day) → 한자어 · Sino-Korean</b></div>
 <div class='box red'><b>⚠️ 불규칙 2개 — Only 2 irregular months!</b>6월 → 유월 (육월 ❌)<br>10월 → 시월 (십월 ❌)</div>
 <div class='box green'><b>날짜 묻기 · Asking the date</b>며칠이야? = What date is it? (반말)<br>며칠이에요? = What date is it? (존댓말)<br>몇 월이야? = What month is it?</div>
 <div class='box amber'><b>이번 vs 다음 · This vs Next</b>이번 주말 = this weekend<br>다음 주 = next week<br>이번 달 = this month</div>

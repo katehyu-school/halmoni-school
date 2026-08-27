@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -94,9 +97,9 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <p class='lead'>Time-of-day words (아침, 점심, 저녁) take particle 에. But relative date words (어제, 오늘, 내일) stand alone — no 에!</p>
 <h2>규칙</h2>
 <div class='box blue'><b>Time-of-day words → need 에 ✅</b>아침에 (in the morning)<br>점심에 (at lunch)<br>저녁에 (in the evening)<br>밤에 (at night)</div>
-<div class='box green'><b>Relative day words → NO 에 ❌</b>어제 (yesterday)  · 오늘 (today)  · 내일 (tomorrow)<br>어제 먹었어요. ✅   ~~어제에~~ ❌</div>
+<div class='box green'><b>Relative day words → NO 에 ❌</b>어제 (yesterday)  · 오늘 (today)  · 내일 (tomorrow)<br>내일 가요. ✅   ~~내일에~~ ❌</div>
 <table><thead><tr><th>종류 Type</th><th>단어 Word</th><th>조사 Particle</th><th>예문 Example</th></tr></thead><tbody><tr><td>시간대 Time-of-day</td><td>아침 / 점심 / 저녁</td><td>+ 에 ✅</td><td>저녁에 밥을 먹어요</td></tr><tr><td>날짜어 Date words</td><td>어제 / 오늘 / 내일</td><td>에 없음 ❌</td><td>오늘 밥을 먹어요</td></tr></tbody></table>
-<h2>예문</h2><ul class='ex'><li><span class='ko'>저녁에 밥을 먹어요.</span><span class='en'>I eat dinner in the evening. (에 ✅)</span></li><li><span class='ko'>아침에 학교에 가요.</span><span class='en'>I go to school in the morning. (에 ✅)</span></li><li><span class='ko'>오늘 밥을 먹어요.</span><span class='en'>I eat today. (에 ❌)</span></li><li><span class='ko'>어제 배구를 했어요.</span><span class='en'>I played volleyball yesterday. (에 ❌)</span></li></ul>
+<h2>예문</h2><ul class='ex'><li><span class='ko'>저녁에 밥을 먹어요.</span><span class='en'>I eat dinner in the evening. (에 ✅)</span></li><li><span class='ko'>아침에 학교에 가요.</span><span class='en'>I go to school in the morning. (에 ✅)</span></li><li><span class='ko'>오늘 밥을 먹어요.</span><span class='en'>I eat today. (에 ❌)</span></li><li><span class='ko'>내일 배구를 해요.</span><span class='en'>I play volleyball tomorrow. (에 ❌)</span></li></ul>
 <h2>어디에 나오나요</h2><p>이 문법은 <a href='/learn/episode/l1-ep03.html'>Level 1 ep03 「잘 먹겠습니다」</a> 에 나옵니다. 이야기를 보고 듣고 연습하려면 아래에서 이어서 학습하세요.</p>
 <a class='cta' href='/nhs.html'>▶ 앱에서 이 편 학습하기 — 무료</a>
 <footer>

@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -92,9 +95,11 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <div class='pattern'>안 + 동사</div>
 <p class='lead'>동사 앞에 &#x27;안&#x27;을 붙여서 부정 · Place 안 right before a verb to negate it</p>
 <p class='lead'>The simplest way to negate a verb in Korean: put 안 right before it. Works with almost any verb or adjective!</p>
+<h2>이야기 속에서는 이렇게 쓰입니다</h2><div class='scene'><b>안 가요. 반대 방향에서 타세요.</b><br>It doesn&#x27;t go there. Take it from the opposite direction.</div>
 <h2>규칙</h2>
-<div class='box tip'>⚠️ 중요 예외! · Important exception!<br>알다(to know) → &#x27;안 알아요&#x27;라고 하지 않아요!<br>&#x27;모르다&#x27;를 써요 → 몰라요<br>&#x27;I don&#x27;t know&#x27; = 몰라요 (NOT 안 알아요)</div>
+<div class='box red'><b>⚠️ 중요 예외! · Important Exception</b>알다(to know) → &#x27;안 알아요&#x27;라고 하지 않아요!<br>&#x27;모르다&#x27;를 써요 → 몰라요<br>&#x27;I don&#x27;t know&#x27; = 몰라요 (NOT 안 알아요)</div>
 <table><thead><tr><th>긍정 · Positive</th><th>부정 · Negative (안)</th></tr></thead><tbody><tr><td>가요</td><td>안 가요</td></tr><tr><td>먹어요</td><td>안 먹어요</td></tr><tr><td>좋아요</td><td>안 좋아요</td></tr><tr><td>멋있어요</td><td>안 멋있어요</td></tr><tr><td>알아요</td><td>안 알아요 → ❌ 몰라요 ✅</td></tr></tbody></table>
+<h2>예문</h2><ul class='ex'><li><span class='ko'>안 가요.</span><span class='en'>It doesn&#x27;t go there.</span></li><li><span class='ko'>저는 안 먹어요.</span><span class='en'>I don&#x27;t eat it.</span></li><li><span class='ko'>이거 안 좋아요.</span><span class='en'>This isn&#x27;t good.</span></li></ul>
 <h2>어디에 나오나요</h2><p>이 문법은 <a href='/learn/episode/l1-ep05.html'>Level 1 ep05 「광장시장에 가요?」</a> 에 나옵니다. 이야기를 보고 듣고 연습하려면 아래에서 이어서 학습하세요.</p>
 <a class='cta' href='/nhs.html'>▶ 앱에서 이 편 학습하기 — 무료</a>
 <footer>

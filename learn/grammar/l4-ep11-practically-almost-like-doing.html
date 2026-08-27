@@ -16,59 +16,60 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&family=Gaegu:wght@700&display=swap" rel="stylesheet">
 <style>
-:root{{--teal:#4ECDC4;--navy:#0a2540;--ink:#1f2937;--mute:#6b7280;--line:#e5e7eb;--bg:#fbfaf8;--amber:#F59E0B}}
-*{{box-sizing:border-box}}
-body{{margin:0;background:var(--bg);color:var(--ink);
+:root{--teal:#4ECDC4;--navy:#0a2540;--ink:#1f2937;--mute:#6b7280;--line:#e5e7eb;--bg:#fbfaf8;--amber:#F59E0B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
  font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
- line-height:1.75;font-size:17px}}
-a{{color:#0f766e}}
-header.site{{background:var(--navy);padding:14px 20px}}
-header.site a.dc-mark{{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;
- font-family:'Gaegu',cursive;font-weight:700;font-size:22px;letter-spacing:.01em}}
-header.site a.dc-mark svg{{flex-shrink:0}}
-header.site .dc-desc{{font-family:'Noto Sans KR',sans-serif;font-weight:400;font-size:14px;color:var(--teal);letter-spacing:0}}
-main{{max-width:780px;margin:0 auto;padding:28px 20px 64px}}
-nav.crumb{{font-size:14px;color:var(--mute);margin-bottom:18px}}
-nav.crumb a{{color:var(--mute)}}
-h1{{font-size:30px;line-height:1.35;margin:.2em 0 .1em}}
-h1 .en{{display:block;font-size:17px;font-weight:400;color:var(--mute);margin-top:6px}}
-h2{{font-size:21px;margin:2em 0 .6em;padding-bottom:6px;border-bottom:2px solid var(--line)}}
-h3{{font-size:17px;margin:1.4em 0 .4em}}
-.tagrow{{margin:10px 0 22px}}
-.tag{{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;
- padding:3px 12px;font-size:13px;color:var(--mute);margin:0 6px 6px 0}}
-.pattern{{background:var(--navy);color:#fff;border-radius:10px;padding:14px 18px;
- font-size:17px;margin:18px 0}}
-.lead{{font-size:17px;color:#374151}}
-.box{{border-radius:10px;padding:13px 16px;margin:12px 0;border-left:5px solid var(--line);background:#fff}}
-.box b{{display:block;margin-bottom:4px}}
-.box.blue{{border-color:#3b82f6;background:#eff6ff}}
-.box.green{{border-color:#10b981;background:#ecfdf5}}
-.box.amber{{border-color:var(--amber);background:#fffbeb}}
-.box.red{{border-color:#ef4444;background:#fef2f2}}
-.box.tip{{border-color:var(--teal);background:#f0fdfa}}
-table{{border-collapse:collapse;width:100%;margin:14px 0;background:#fff;font-size:15px}}
-th,td{{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}}
-th{{background:#f3f4f6;font-weight:700}}
-ul.ex{{list-style:none;padding:0;margin:10px 0}}
-ul.ex li{{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}}
-ul.ex .ko{{font-weight:600}}
-ul.ex .spk{{color:var(--teal);font-weight:700}}
-ul.ex .spk::after{{content:':';color:var(--mute);font-weight:400;margin:0 6px 0 1px}}
-ul.ex .en{{display:block;color:var(--mute);font-size:15px}}
-.scene{{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:14px 18px;margin:16px 0}}
-.cta{{display:block;background:var(--teal);color:#06302c!important;text-decoration:none;font-weight:700;
- text-align:center;border-radius:10px;padding:15px;margin:30px 0 10px}}
-.cards{{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}}
-.card{{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
- text-decoration:none;color:inherit}}
-.card:hover{{border-color:var(--teal)}}
-.card b{{display:block;font-size:16px}}
-.card span{{display:block;color:var(--mute);font-size:14px;margin-top:3px}}
-.lockcard{{opacity:.55}}
-.lockcard b::before{{content:'🔒 '}}
-footer{{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}}
-@media(max-width:600px){{body{{font-size:16px}}h1{{font-size:25px}}main{{padding:20px 16px 50px}}}}
+ line-height:1.75;font-size:17px}
+a{color:#0f766e}
+header.site{background:var(--navy);padding:14px 20px}
+header.site a.dc-mark{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;
+ font-family:'Gaegu',cursive;font-weight:700;font-size:22px;letter-spacing:.01em}
+header.site a.dc-mark svg{flex-shrink:0}
+header.site .dc-desc{font-family:'Noto Sans KR',sans-serif;font-weight:400;font-size:14px;color:var(--teal);letter-spacing:0}
+main{max-width:780px;margin:0 auto;padding:28px 20px 64px}
+nav.crumb{font-size:14px;color:var(--mute);margin-bottom:18px}
+nav.crumb a{color:var(--mute)}
+h1{font-size:30px;line-height:1.35;margin:.2em 0 .1em}
+h1 .en{display:block;font-size:17px;font-weight:400;color:var(--mute);margin-top:6px}
+h2{font-size:21px;margin:2em 0 .6em;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:17px;margin:1.4em 0 .4em}
+.tagrow{margin:10px 0 22px}
+.tag{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;
+ padding:3px 12px;font-size:13px;color:var(--mute);margin:0 6px 6px 0}
+.pattern{background:var(--navy);color:#fff;border-radius:10px;padding:14px 18px;
+ font-size:17px;margin:18px 0}
+.lead{font-size:17px;color:#374151}
+.box{border-radius:10px;padding:13px 16px;margin:12px 0;border-left:5px solid var(--line);background:#fff}
+.box b{display:block;margin-bottom:4px}
+.box.blue{border-color:#3b82f6;background:#eff6ff}
+.box.green{border-color:#10b981;background:#ecfdf5}
+.box.amber{border-color:var(--amber);background:#fffbeb}
+.box.red{border-color:#ef4444;background:#fef2f2}
+.box.tip{border-color:var(--teal);background:#f0fdfa}
+table{border-collapse:collapse;width:100%;margin:14px 0;background:#fff;font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f3f4f6;font-weight:700}
+ul.ex{list-style:none;padding:0;margin:10px 0}
+ul.ex li{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0}
+ul.ex .ko{font-weight:600}
+ul.ex .spk{color:var(--teal);font-weight:700}
+ul.ex .spk::after{content:':';color:var(--mute);font-weight:400;margin:0 6px 0 1px}
+ul.ex .en{display:block;color:var(--mute);font-size:15px}
+.scene{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:14px 18px;margin:16px 0}
+.cta{display:block;background:var(--teal);color:#06302c!important;text-decoration:none;font-weight:700;
+ text-align:center;border-radius:10px;padding:15px;margin:30px 0 10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+ text-decoration:none;color:inherit}
+.card:hover{border-color:var(--teal)}
+.card b{display:block;font-size:16px}
+.card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
+@media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "-다시피 하다", "alternateName": "Practically/Almost Like... Doing", "inLanguage": "ko", "learningResourceType": "grammar explanation", "educationalLevel": "Level 4", "isAccessibleForFree": false, "url": "https://doranchae.com/learn/grammar/l4-ep11-practically-almost-like-doing.html"}</script>
 <meta name='robots' content='noindex,follow'>
@@ -89,11 +90,11 @@ footer{{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:
   Doranchae<span class="dc-desc"> · 한국어 학습 자료</span>
 </a></header>
 <main>
-<nav class='crumb'><a href='/learn/'>학습 자료</a> › Level 4 › <a href='/learn/episode/l4-ep11.html'>오기만 해 봐</a> › 문법</nav>
+<nav class='crumb'><a href='/learn/'>학습 자료</a> › Level 4 › 오기만 해 봐 › 문법</nav>
 <h1>-다시피 하다<span class='en'>Practically/Almost Like... Doing</span></h1>
 <div class='tagrow'><span class='tag'>Level 4</span><span class='tag'>🔒 준비 중 · Coming Soon</span></div>
 <div class='box tip'><b>🔒 아직 공개되지 않았어요</b>이 문법 설명 페이지는 Level 4 공개와 함께 열려요.<br><span style='color:var(--mute);font-size:14px'>This grammar page unlocks when Level 4 goes public.</span></div>
-<h2>어디에 나오나요</h2><p>이 문법은 <a href='/learn/episode/l4-ep11.html'>Level 4 「오기만 해 봐」</a> 에 나올 예정이에요. 지금은 Level 1&ndash;2 자료를 먼저 만나보세요.</p>
+<h2>어디에 나오나요</h2><p>이 문법은 Level 4 「오기만 해 봐」 에 나올 예정이에요. 지금은 Level 1&ndash;2 자료를 먼저 만나보세요.</p>
 <a class='cta' href='/learn/'>← 지금 볼 수 있는 학습 자료 (Level 1&ndash;2)</a>
 <footer>
 © <span data-cr-year></span> <span data-cr-name></span><br><span data-cr-note></span><br>

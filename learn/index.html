@@ -69,6 +69,8 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .lockcard:hover{border-color:var(--line)}
 .lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
+@media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
+
 .lvl-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 18px;position:sticky;top:0;background:var(--bg);
  padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
 .lvl-tab{font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;color:var(--mute);
@@ -77,7 +79,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 .lvl-tab:hover{border-color:var(--teal);color:var(--ink)}
 .lvl-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
 .lvl-panel h2{margin-top:6px}
-@media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}.lvl-tabs{top:0;gap:5px}.lvl-tab{font-size:13px;padding:6px 12px}}
+@media(max-width:600px){.lvl-tabs{top:0;gap:5px}.lvl-tab{font-size:13px;padding:6px 12px}}
 </style>
 </head>
 <body>
@@ -101,7 +103,8 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='cta' href='/nhs.html'>▶ 앱에서 학습 시작하기 — 무료</a>
 <div class="lvl-tabs" role="tablist" aria-label="레벨 선택"><button class="lvl-tab active" id="lvl-tab-1" onclick="showLvl(1)">Level 1</button><button class="lvl-tab" id="lvl-tab-2" onclick="showLvl(2)">Level 2</button><button class="lvl-tab" id="lvl-tab-3" onclick="showLvl(3)">Level 3 🔒</button><button class="lvl-tab" id="lvl-tab-4" onclick="showLvl(4)">Level 4 🔒</button><button class="lvl-tab" id="lvl-tab-5" onclick="showLvl(5)">Level 5 🔒</button><button class="lvl-tab" id="lvl-tab-6" onclick="showLvl(6)">Level 6 🔒</button></div>
 <section class="lvl-panel" id="lvl-panel-1" data-lvl="1" style="display:block">
-<h2>Level 1 · 입문 · Beginner</h2><div class='cards'>
+<h2>Level 1 · 입문 · Beginner</h2>
+<div class='cards'>
 <a class='card' href='/learn/episode/l1-ep01.html'><b>안녕! 나는 정민이야.</b><span>Hi! I&#x27;m Jeongmin.</span></a>
 <a class='card' href='/learn/episode/l1-ep02.html'><b>누구예요?</b><span>Who Is It?</span></a>
 <a class='card' href='/learn/episode/l1-ep03.html'><b>잘 먹겠습니다</b><span>Time for Dinner</span></a>
@@ -133,12 +136,11 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l1-ep05-purpose-going-somewhere-something.html'><b>V-(으)러 가다 — in order to go</b><span>Purpose: going somewhere TO do something</span></a>
 <a class='card' href='/learn/grammar/l1-ep05-making-suggestion-thinking-aloud.html'><b>V-(으)ㄹ까? — Shall we? / I wonder?</b><span>Making a suggestion or thinking aloud</span></a>
 <a class='card' href='/learn/grammar/l1-ep05-saying-don-doesn.html'><b>안 + 동사 — Negation</b><span>Saying &#x27;don&#x27;t&#x27; or &#x27;doesn&#x27;t&#x27;</span></a>
-<a class='card' href='/learn/grammar/l1-ep05-connecting-two-actions-order.html'><b>V-아/어서 — and then (sequence)</b><span>Connecting two actions in order</span></a>
 <a class='card' href='/learn/grammar/l1-ep06-three-ways-say.html'><b>N하고 / N(이)랑 / 와·과 — and / with</b><span>Three ways to say &quot;and&quot; or &quot;with&quot;</span></a>
 <a class='card' href='/learn/grammar/l1-ep06-quick-guide-korean-question-words.html'><b>뭐 / 무엇 — what · 의문사 소개</b><span>&quot;What&quot; + Quick Guide to Korean Question Words</span></a>
 <a class='card' href='/learn/grammar/l1-ep06-counter-food-servings.html'><b>N + 인분 — Food Portions</b><span>Counter for food servings</span></a>
 <a class='card' href='/learn/grammar/l1-ep07-expressing-desire.html'><b>-고 싶다 — want to do</b><span>Expressing Desire</span></a>
-<a class='card' href='/learn/grammar/l1-ep07-inability-more-ep08.html'><b>못 + 동사 — can&#x27;t / couldn&#x27;t</b><span>못 — Inability (more in ep08!)</span></a>
+<a class='card' href='/learn/grammar/l1-ep07-inability-more-l2.html'><b>못 + 동사 — can&#x27;t / couldn&#x27;t</b><span>못 — Inability (more in L2!)</span></a>
 <a class='card' href='/learn/grammar/l1-ep07-shall-suggestion.html'><b>-(으)ㄹ까? — 같이 할까? (제안)</b><span>Shall we? (Suggestion)</span></a>
 <a class='card' href='/learn/grammar/l1-ep07-korean-sentence-structure.html'><b>한국어 문장 구조 — SOV</b><span>Korean Sentence Structure</span></a>
 <a class='card' href='/learn/grammar/l1-ep07-power-particles.html'><b>조사의 힘 — Particles</b><span>The Power of Particles</span></a>
@@ -146,11 +148,11 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l1-ep08-location-marker.html'><b>N 위치에 있어요</b><span>Location Marker -에</span></a>
 <a class='card' href='/learn/grammar/l1-ep08-have-must.html'><b>-(아/어)야 해요</b><span>Have To / Must</span></a>
 <a class='card' href='/learn/grammar/l1-ep09-native-korean-numbers-counting-things.html'><b>고유어 숫자 — 셀 때 쓰는 우리말 수</b><span>Native Korean Numbers — For Counting Things</span></a>
-<a class='card' href='/learn/grammar/l1-ep09-counter-words-which-one-for-what.html'><b>단위 명사 — 무엇을 셀 때 어떤 말을 써요?</b><span>Counter Words — Which One for What?</span></a>
+<a class='card' href='/learn/grammar/l1-ep09-counter-words-which.html'><b>단위 명사 — 무엇을 셀 때 어떤 말을 써요?</b><span>Counter Words — Which One for What?</span></a>
 <a class='card' href='/learn/grammar/l1-ep09-native-vs-sino-korean-use.html'><b>고유어 vs 한자어 — 언제 뭘 써요?</b><span>Native vs Sino-Korean — When to Use Which?</span></a>
 <a class='card' href='/learn/grammar/l1-ep10-past-tense.html'><b>-았/었어요 — 과거형 (Past Tense)</b><span>Past tense: -았어요 / -었어요</span></a>
 <a class='card' href='/learn/grammar/l1-ep10-progressive.html'><b>-고 있어요 / -고 계세요 — 진행형</b><span>Progressive: -고 있어요 / -고 계세요</span></a>
-<a class='card' href='/learn/grammar/l1-ep11-honorific-progressive-vs.html'><b>계세요 — 어른에게 쓰는 진행형</b><span>Honorific progressive: -고 계세요 vs -고 있어요</span></a>
+<a class='card' href='/learn/grammar/l1-ep11-honorific-progressive-vs.html'><b>-고 계세요 — 어른에게 쓰는 진행형</b><span>Honorific progressive: -고 계세요 vs -고 있어요</span></a>
 <a class='card' href='/learn/grammar/l1-ep11-welcoming-expressions.html'><b>어서 오세요 / 들어 오세요</b><span>Welcoming Expressions</span></a>
 <a class='card' href='/learn/grammar/l1-ep11-honorific-past-present.html'><b>-(으)셨어요 — 높임 과거</b><span>Honorific Past / Present</span></a>
 <a class='card' href='/learn/grammar/l1-ep11-i-ve-been-well-thanks.html'><b>덕분에 잘 지내고 있어요</b><span>I&#x27;ve Been Well, Thanks to You</span></a>
@@ -159,12 +161,13 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l1-ep12-will-going-talking-about-plans.html'><b>_(으)ㄹ 거예요 — 미래형 (Future Tense)</b><span>will / going to · talking about plans</span></a>
 <a class='card' href='/learn/grammar/l1-ep12-can-can-expressing-ability.html'><b>_(으)ㄹ 수 있어요 / 없어요 — 가능 표현</b><span>can do / can&#x27;t do · expressing ability</span></a>
 <a class='card' href='/learn/grammar/l1-ep12-like-english.html'><b>_의 — 소유격 조사 (Possessive Particle)</b><span>like &#x27;s in English · of / &#x27;s</span></a>
-<a class='card' href='/learn/grammar/l1-ep12-coming-level-2-verb-modifiers.html'><b>다음 레벨 예고 💙 — _ㄴ/은 + 명사 · _(으)면</b><span>Coming in Level 2 — verb modifiers &amp; conditionals</span></a>
+<a class='card' href='/learn/grammar/l1-ep12-coming-l2-ep01-verb-modifiers.html'><b>다음 레벨 예고 💙 — _ㄴ/은 + 명사 · _(으)면 (L2 ep01)</b><span>Coming in L2 ep01 — verb modifiers &amp; conditionals</span></a>
 <a class='card' href='/learn/grammar/l1-ep12-regular-vs-irregular-verbs-change.html'><b>📊 동사 활용표 참고 · Verb Conjugation Reference</b><span>Regular vs Irregular — how verbs change across tenses</span></a>
 </div>
 </section>
 <section class="lvl-panel" id="lvl-panel-2" data-lvl="2" style="display:none">
-<h2>Level 2 · 초급 · Elementary</h2><div class='cards'>
+<h2>Level 2 · 초급 · Elementary</h2>
+<div class='cards'>
 <a class='card' href='/learn/episode/l2-ep01.html'><b>한국에 도착했어요</b><span>We Arrived in Korea!</span></a>
 <a class='card' href='/learn/episode/l2-ep02.html'><b>공항에서 잠실까지</b><span>From the Airport to Jamsil</span></a>
 <a class='card' href='/learn/episode/l2-ep03.html'><b>열이 펄펄 나요</b><span>I Have a High Fever!</span></a>
@@ -188,7 +191,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l2-ep02-negation-won-state-choice.html'><b>안 + 동사</b><span>Negation — Won&#x27;t / Not (by state or choice)</span></a>
 <a class='card' href='/learn/grammar/l2-ep03-seems-like-i-think-observation.html'><b>-(으)ㄴ 것 같아요</b><span>It seems like ~ / I think ~ (observation/inference)</span></a>
 <a class='card' href='/learn/grammar/l2-ep03-because-since-subjective-reason.html'><b>-(으)니까</b><span>Because / Since (subjective reason)</span></a>
-<a class='card' href='/learn/grammar/l2-ep03-because-reason.html'><b>-아/어서 (이유)</b><span>Because / So (reason)</span></a>
+<a class='card' href='/learn/grammar/l2-ep03-because-reason-then-sequence.html'><b>-아/어서 (이유·순서)</b><span>Because / So (reason) &amp; And then (sequence)</span></a>
 <a class='card' href='/learn/grammar/l2-ep03-won-vs-can.html'><b>안 vs 못</b><span>Won&#x27;t vs Can&#x27;t</span></a>
 <a class='card' href='/learn/grammar/l2-ep03-nominalizing.html'><b>-기 (명사화)</b><span>Nominalizing with -기</span></a>
 <a class='card' href='/learn/grammar/l2-ep04-seems-like-i-think-will.html'><b>-(으)ㄹ 것 같아</b><span>Seems like / I think it will ~</span></a>
@@ -204,9 +207,8 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l2-ep06-if-review.html'><b>-(으)면 복습</b><span>If/When ~ (Review)</span></a>
 <a class='card' href='/learn/grammar/l2-ep07-about-planning.html'><b>-(으)려고 하다</b><span>About to / Planning to</span></a>
 <a class='card' href='/learn/grammar/l2-ep07-would-like-shall.html'><b>-(으)ㄹ래요?</b><span>Would you like to ~? / Shall we ~?</span></a>
-<a class='card' href='/learn/grammar/l2-ep07-doing-something-someone-respectful.html'><b>-아/어 드리다</b><span>Doing something FOR someone (respectful)</span></a>
+<a class='card' href='/learn/grammar/l2-ep07-doing-something-someone-plain-respectful.html'><b>-아/어 드리다 / -아/어 주다</b><span>Doing something FOR someone (plain &amp; respectful)</span></a>
 <a class='card' href='/learn/grammar/l2-ep07-cannot-due-circumstances.html'><b>-지 못하다</b><span>Cannot do (due to circumstances)</span></a>
-<a class='card' href='/learn/grammar/l2-ep07-person.html'><b>-한테서</b><span>From (a person)</span></a>
 <a class='card' href='/learn/grammar/l2-ep08-doing.html'><b>-기 전에</b><span>Before doing</span></a>
 <a class='card' href='/learn/grammar/l2-ep08-doing-2.html'><b>-(으)ㄴ 후에</b><span>After doing</span></a>
 <a class='card' href='/learn/grammar/l2-ep08-start-doing.html'><b>-기 시작하다</b><span>Start doing</span></a>
@@ -221,7 +223,6 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a class='card' href='/learn/grammar/l2-ep10-isn-won-vs-can-two.html'><b>-지 않다 vs -지 못하다</b><span>Isn&#x27;t / Won&#x27;t vs Can&#x27;t (two types of negation)</span></a>
 <a class='card' href='/learn/grammar/l2-ep11-background-explainer-see-thing.html'><b>-거든요</b><span>Background explainer — &#x27;you see&#x27; / &#x27;the thing is&#x27;</span></a>
 <a class='card' href='/learn/grammar/l2-ep11-shared-knowledge-know-know-remember.html'><b>-잖아요 (심화)</b><span>Shared knowledge — &#x27;you know&#x27; / &#x27;as you know&#x27; / &#x27;remember?&#x27;</span></a>
-<a class='card' href='/learn/grammar/l2-ep11-realization-from-what-you-were-told-oh-i.html'><b>-군요 / -구나</b><span>Realization from What You Were Told — &#x27;Oh, I see!&#x27; / &#x27;So that&#x27;s it!&#x27;</span></a>
 <a class='card' href='/learn/grammar/l2-ep11-fresh-realization-oh.html'><b>-네요</b><span>Fresh realization — &#x27;Oh, it is!&#x27; / &#x27;How ___!&#x27;</span></a>
 <a class='card' href='/learn/grammar/l2-ep11-wishing-i-hope-i-wish.html'><b>-았/었으면 좋겠다</b><span>Wishing — &#x27;I hope…&#x27; / &#x27;I wish…&#x27;</span></a>
 <a class='card' href='/learn/grammar/l2-ep11-resolve-i-should-i-d.html'><b>-아/어야겠다</b><span>Resolve — &#x27;I should…&#x27; / &#x27;I&#x27;d better…&#x27;</span></a>
@@ -232,7 +233,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 </div>
 </section>
 <section class="lvl-panel" id="lvl-panel-3" data-lvl="3" style="display:none">
-<h2>Level 3 · 초중급 · Upper Elementary <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
+<h2>Level 3 · 초중급 · Upper Elementary <span class='tag'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
 <div class='card lockcard'><b>파전이나 부쳐 먹을까?</b><span>How About Some Pajeon?</span></div>
@@ -293,7 +294,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 </div>
 </section>
 <section class="lvl-panel" id="lvl-panel-4" data-lvl="4" style="display:none">
-<h2>Level 4 · 중급 · Intermediate <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
+<h2>Level 4 · 중급 · Intermediate <span class='tag'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
 <div class='card lockcard'><b>계십니까?</b><span>Is Anybody Home?</span></div>
@@ -349,7 +350,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 </div>
 </section>
 <section class="lvl-panel" id="lvl-panel-5" data-lvl="5" style="display:none">
-<h2>Level 5 · 중고급 · Upper Intermediate <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
+<h2>Level 5 · 중상급 · Upper-Intermediate <span class='tag'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
 <div class='card lockcard'><b>삼총사의 첫 만남</b><span>The Trio&#x27;s First Meeting</span></div>
@@ -410,7 +411,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 </div>
 </section>
 <section class="lvl-panel" id="lvl-panel-6" data-lvl="6" style="display:none">
-<h2>Level 6 · 고급 · Advanced <span class='tag' style='font-size:12px;vertical-align:middle'>🔒 준비 중 · Coming Soon</span></h2>
+<h2>Level 6 · 고급 · Advanced <span class='tag'>🔒 준비 중 · Coming Soon</span></h2>
 <p class='lead' style='font-size:15px;color:var(--mute)'>이 레벨은 아직 공개 전이에요. 공개되면 이 페이지에서 바로 볼 수 있어요. Level 1&ndash;2를 먼저 만나보세요.</p>
 <div class='cards'>
 <div class='card lockcard'><b>물가 상승 대처: 과제 및 대응책</b><span>Coping with Rising Prices: Challenges and Responses</span></div>
@@ -458,6 +459,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <a href="/">Doranchae 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
 </footer>
 </main>
+<script src="/core/site-info.js"></script>
 <script>
 function showLvl(n){
   document.querySelectorAll('.lvl-panel').forEach(function(p){p.style.display = (p.dataset.lvl===String(n))?'block':'none';});
@@ -466,6 +468,6 @@ function showLvl(n){
   var bar=document.querySelector('.lvl-tabs'); if(bar) bar.scrollIntoView({block:'start',behavior:'smooth'});
 }
 </script>
-<script src="/core/site-info.js"></script>
+
 </body>
 </html>

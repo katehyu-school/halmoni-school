@@ -65,6 +65,9 @@ ul.ex .en{display:block;color:var(--mute);font-size:15px}
 .card:hover{border-color:var(--teal)}
 .card b{display:block;font-size:16px}
 .card span{display:block;color:var(--mute);font-size:14px;margin-top:3px}
+.lockcard{opacity:.55;cursor:default;pointer-events:none}
+.lockcard:hover{border-color:var(--line)}
+.lockcard b::before{content:'🔒 '}
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mute);font-size:14px}
 @media(max-width:600px){body{font-size:16px}h1{font-size:25px}main{padding:20px 16px 50px}}
 </style>
@@ -102,9 +105,9 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 </div>
 <h2>새 어휘</h2>
 <h3>📅 날짜·요일 · Date &amp; Days</h3>
-<table><thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead><tbody><tr><td>며칠</td><td>myeo-chil</td><td>what date / which day</td></tr><tr><td>이번 주말</td><td>i-beon ju-mal</td><td>this weekend</td></tr><tr><td>주말</td><td>ju-mal</td><td>weekend</td></tr><tr><td>주중</td><td>ju-jung</td><td>weekday</td></tr><tr><td>어제</td><td>eo-je</td><td>yesterday</td></tr><tr><td>오늘</td><td>o-neul</td><td>today</td></tr><tr><td>내일</td><td>nae-il</td><td>tomorrow</td></tr></tbody></table>
+<table><thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead><tbody><tr><td>며칠</td><td>myeo-chil</td><td>what date / which day</td></tr><tr><td>이번 주말</td><td>i-beon ju-mal</td><td>this weekend</td></tr><tr><td>주말</td><td>ju-mal</td><td>weekend</td></tr><tr><td>주중</td><td>ju-jung</td><td>weekday</td></tr><tr><td>어제</td><td>eo-je</td><td>yesterday</td></tr><tr><td>오늘</td><td>o-neul</td><td>today</td></tr><tr><td>내일</td><td>nae-il</td><td>tomorrow</td></tr><tr><td>달/월</td><td>dal/wol</td><td>month</td></tr><tr><td>날/일</td><td>nal/il</td><td>day</td></tr><tr><td>저번</td><td>jeo-beon</td><td>last (time) / previous</td></tr><tr><td>이번</td><td>i-beon</td><td>this (time)</td></tr><tr><td>다음</td><td>da-eum</td><td>next</td></tr><tr><td>생일</td><td>saeng-il</td><td>birthday</td></tr></tbody></table>
 <h3>⏰ 시간 · Time</h3>
-<table><thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead><tbody><tr><td>몇 시</td><td>myeot si</td><td>what time</td></tr><tr><td>오전</td><td>o-jeon</td><td>a.m. / morning</td></tr><tr><td>오후</td><td>o-hu</td><td>p.m. / afternoon</td></tr><tr><td>아침</td><td>a-chim</td><td>morning</td></tr><tr><td>점심</td><td>jeom-sim</td><td>noon / lunch</td></tr><tr><td>저녁</td><td>jeo-nyeok</td><td>evening</td></tr><tr><td>반</td><td>ban</td><td>half (= 30 minutes)</td></tr></tbody></table>
+<table><thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead><tbody><tr><td>몇 시</td><td>myeot si</td><td>what time</td></tr><tr><td>시</td><td>si</td><td>o&#x27;clock / hour</td></tr><tr><td>분</td><td>bun</td><td>minute</td></tr><tr><td>오전</td><td>o-jeon</td><td>a.m. / morning</td></tr><tr><td>오후</td><td>o-hu</td><td>p.m. / afternoon</td></tr><tr><td>아침</td><td>a-chim</td><td>morning</td></tr><tr><td>점심</td><td>jeom-sim</td><td>noon / lunch</td></tr><tr><td>저녁</td><td>jeo-nyeok</td><td>evening</td></tr><tr><td>반</td><td>ban</td><td>half (= 30 minutes)</td></tr></tbody></table>
 <h3>🚇 장소·교통 · Places &amp; Transport</h3>
 <table><thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead><tbody><tr><td>지하철</td><td>ji-ha-cheol</td><td>subway</td></tr><tr><td>입구</td><td>ip-gu</td><td>entrance</td></tr><tr><td>출구</td><td>chul-gu</td><td>exit</td></tr><tr><td>한강</td><td>han-gang</td><td>Han River</td></tr><tr><td>공원</td><td>gong-won</td><td>park</td></tr><tr><td>자전거</td><td>ja-jeon-geo</td><td>bicycle</td></tr></tbody></table>
 <h3>💬 표현 · Expressions</h3>
