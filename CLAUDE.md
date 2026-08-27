@@ -7,6 +7,15 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> ©️ **2026-08-27 완료 (license.html — 예전 CC BY-NC-SA 안내 문구 명확화, 구글 AI Overview 오해 소지 정리)**
+> — 선생님이 구글 검색 AI Overview에 "doranchae.com 자료는 Creative Commons 조건으로 자유롭게 쓸 수 있다"는 식으로 요약된 걸 발견 → "이전 카피라이트 찌꺼기 아니냐"고 확인 요청.
+> — 사이트 전체(`core/site-info.js`가 저작권 표기 단일 소스, 모든 페이지 메타 설명 등)를 grep으로 훑어본 결과 "Creative Commons"·"CC BY" 문구가 남아있는 곳은 `license.html` 딱 한 군데였음 — 2026-08-12에 라이선스 정책을 CC BY-NC-SA 4.0에서 "모든 권리 보유(베타 기간 무료)"로 바꾸면서, 그 이전에 이미 CC로 나간 사본은 되돌릴 수 없어 남겨둔 "이전 배포본 안내" 박스. 내용 자체는 틀린 게 아니지만(예전 사본에 대한 정당한 법적 고지), 페이지에서 "Creative Commons"가 언급되는 유일한 자리라 AI가 맥락(예전 사본 한정)을 놓치고 "이 사이트는 CC"로 과대 일반화한 것으로 보임.
+> — 지우지 않고(예전에 CC로 나간 사본의 권리는 실제로 유지해야 하므로 법적으로 필요한 문구) 문구만 훨씬 명확하게 강화: 제목에 "⚠️ 예전 사본에만 해당 — 지금 정책이 아닙니다" 추가, 본문에 "지금 doranchae.com의 콘텐츠는 더 이상 Creative Commons가 아니며, 위 1번의 '모든 권리 보유' 조건을 따릅니다"를 굵게 명시.
+> — ✅ **검증**: `HTMLParser`로 태그 균형 확인, null byte 0, `</html>` 1개.
+> — 배포: `device_commit_files`로 `license.html` 반영 완료.
+> — **참고**: 구글이 이 변경을 실제로 다시 읽어가서 AI Overview 요약이 바뀌기까지는 시간이 걸림(즉시 반영 안 됨) — 선생님이 Search Console 이미 연결해두셨으니, URL 검사(URL Inspection) 도구에서 `license.html` 재색인 요청하면 조금 더 빨리 반영될 수 있음(선택 사항, 다음에 원하시면 안내).
+> — ⏳ **git add/commit/push 대기 중**.
+
 > 📊 **2026-08-27 완료 (Cloudflare Web Analytics 실제 적용 — nhs.html·index.html·learn/ 전체)**
 > — 배경: 익명 방문(가입 없이 Start Here/Road Map 둘러보기)이 늘면서 몇 명이 오는지 전혀 알 수 없는 상태였음(사이트에 방문 통계 자체가 없었음) — 선생님이 예전에 Cloudflare Web Analytics를 시도하다가 대시보드에서 버튼을 못 찾아 중간에 포기했던 걸 이번에 마무리.
 > — 대시보드 진입은 `https://dash.cloudflare.com/?to=/:account/web-analytics` 직행 링크로 안내(메뉴 찾아 헤매는 문제 회피) → "Add a site"에서 `doranchae.com` 입력 → "Set up hostname"에서 "This hostname does not belong to any website on your Cloudflare account. You will need to install a JS Snippet"는 정상 안내(에러 아님, 우리가 원하는 수동 JS 스니펫 방식) → Done → Installation 단계에서 토큰 발급받음.
