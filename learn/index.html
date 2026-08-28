@@ -78,6 +78,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
  transition:all .15s ease}
 .lvl-tab:hover{border-color:var(--teal);color:var(--ink)}
 .lvl-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.lvl-tab.locked{opacity:.55;cursor:default;pointer-events:none}
 .lvl-panel h2{margin-top:6px}
 @media(max-width:600px){.lvl-tabs{top:0;gap:5px}.lvl-tab{font-size:13px;padding:6px 12px}}
 </style>
@@ -101,7 +102,7 @@ footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:v
 <h1>한국어 학습 자료<span class='en'>Free Korean lessons — grammar, vocabulary, stories</span></h1>
 <p class='lead'>이야기로 시작해서 문법으로 이어집니다. 여기 있는 설명은 미리 보기이고, 이야기·음성·연습 문제는 앱에서 이어집니다.</p>
 <a class='cta' href='/nhs.html'>▶ 앱에서 학습 시작하기 — 무료</a>
-<div class="lvl-tabs" role="tablist" aria-label="레벨 선택"><button class="lvl-tab active" id="lvl-tab-1" onclick="showLvl(1)">Level 1</button><button class="lvl-tab" id="lvl-tab-2" onclick="showLvl(2)">Level 2</button><button class="lvl-tab" id="lvl-tab-3" onclick="showLvl(3)">Level 3 🔒</button><button class="lvl-tab" id="lvl-tab-4" onclick="showLvl(4)">Level 4 🔒</button><button class="lvl-tab" id="lvl-tab-5" onclick="showLvl(5)">Level 5 🔒</button><button class="lvl-tab" id="lvl-tab-6" onclick="showLvl(6)">Level 6 🔒</button></div>
+<div class="lvl-tabs" role="tablist" aria-label="레벨 선택"><button class="lvl-tab active" id="lvl-tab-1" onclick="showLvl(1)">Level 1</button><button class="lvl-tab" id="lvl-tab-2" onclick="showLvl(2)">Level 2</button><button class="lvl-tab locked" id="lvl-tab-3" tabindex="-1" aria-disabled="true">Level 3 🔒</button><button class="lvl-tab locked" id="lvl-tab-4" tabindex="-1" aria-disabled="true">Level 4 🔒</button><button class="lvl-tab locked" id="lvl-tab-5" tabindex="-1" aria-disabled="true">Level 5 🔒</button><button class="lvl-tab locked" id="lvl-tab-6" tabindex="-1" aria-disabled="true">Level 6 🔒</button></div>
 <section class="lvl-panel" id="lvl-panel-1" data-lvl="1" style="display:block">
 <h2>Level 1 · 입문 · Beginner</h2>
 <div class='cards'>

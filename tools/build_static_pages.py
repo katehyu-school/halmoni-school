@@ -239,6 +239,7 @@ HUB_CSS = """
  transition:all .15s ease}
 .lvl-tab:hover{border-color:var(--teal);color:var(--ink)}
 .lvl-tab.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.lvl-tab.locked{opacity:.55;cursor:default;pointer-events:none}
 .lvl-panel h2{margin-top:6px}
 @media(max-width:600px){.lvl-tabs{top:0;gap:5px}.lvl-tab{font-size:13px;padding:6px 12px}}
 """
@@ -715,9 +716,11 @@ def build(open_levels):
     tabs = []
     for i, lv in enumerate(levels_present):
         is_open = lv in open_set
+        tab_cls = "lvl-tab" + (' active' if i == 0 else '') + ('' if is_open else ' locked')
+        tab_click = f"onclick=\"showLvl({i+1})\"" if is_open else 'tabindex="-1" aria-disabled="true"'
         tabs.append(
-            f"<button class=\"lvl-tab{' active' if i == 0 else ''}\" id=\"lvl-tab-{i+1}\" "
-            f"onclick=\"showLvl({i+1})\">{esc(LEVEL_LABEL.get(lv, (lv,''))[0])}"
+            f"<button class=\"{tab_cls}\" id=\"lvl-tab-{i+1}\" "
+            f"{tab_click}>{esc(LEVEL_LABEL.get(lv, (lv,''))[0])}"
             f"{' 🔒' if not is_open else ''}</button>"
         )
     b.append('<div class="lvl-tabs" role="tablist" aria-label="레벨 선택">' + "".join(tabs) + "</div>")

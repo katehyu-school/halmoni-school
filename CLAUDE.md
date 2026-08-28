@@ -7,6 +7,13 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🔒 **2026-08-28 완료 (learn/ 허브 — 잠긴 레벨 탭 자체를 클릭 불가로)**
+> — 선생님이 발견: `/learn/`에서 잠긴 레벨(L3+) 탭을 눌러도 패널이 열리면서(dim 처리된) 에피소드 제목·문법 항목이 다 보임 — 개별 카드는 `lockcard`라 클릭은 안 되지만 탭 자체가 열리는 게 지저분함.
+> — `tools/build_static_pages.py`: 잠긴 레벨의 `<button class="lvl-tab">`에서 `onclick="showLvl(n)"` 자체를 아예 안 붙임(`tabindex="-1" aria-disabled="true"`로 교체) + `.lvl-tab.locked{opacity:.55;cursor:default;pointer-events:none}` CSS 추가(기존 `.lockcard` 스타일과 동일한 패턴). 공개 레벨(L1·L2) 탭은 그대로 동작.
+> — 재생성 방식은 이전과 동일(클라우드 컨테이너에서 스크립트 실행 → zip → `device_commit_files`+`unzip -o`). 이번엔 `learn/index.html`(허브)만 실질적으로 바뀜 — 개별 에피소드/문법 페이지에는 레벨 탭 바가 없어서 영향 없음. sitemap.xml/robots.txt는 당일 재실행이라 diff 없음.
+> — ✅ **검증**: `learn/` 전체 null byte 0, `learn/index.html`에서 L3~L6 탭에 `onclick` 없음/`pointer-events:none` 확인, `git diff --stat` = `learn/index.html`·`tools/build_static_pages.py` 단 2개 파일만 변경.
+> — ⏳ **git add/commit/push 대기 중**. **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 🐛 **2026-08-28 완료 (nhs.html — 로드맵 버튼 전환 버그 수정: 숨은 기능 탭 눌러도 Step 4가 먼저 나오던 문제)**
 > — 선생님이 스크린샷으로 발견: [숨은 기능 & 루틴] 버튼을 눌러도 📦 목록이 아니라 🏆 레벨 마감 테스트가 버튼 바로 아래 먼저 나옴.
 > — 원인: Step 4(마감테스트)는 애초에 5개 버튼 목록에 없어서 `rm-s0~rm-s3` 탭 전환 대상에 안 넣고 항상 노출시켜 뒀는데, 그 위치가 하필 `rm-s3` 바로 다음이라 다른 탭(`rm-hidden` 포함)을 눌러도 Step 3만 숨겨지고 Step 4는 계속 그 자리에 남아 있었음.
