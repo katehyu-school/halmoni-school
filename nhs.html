@@ -4929,6 +4929,26 @@ function _rmBtn(label,fn,primary){
 // 영어 보조 문장
 function _rmEn(t){ return '<div class="en-gloss" style="font-size:11px;color:var(--warm-400);font-style:italic;margin-top:3px;">'+t+'</div>'; }
 
+// 접기/펼치기 토글 버튼 — 상세 내용은 기본으로 접어 두고 필요할 때만 펼침 (2026-08-28 로드맵 가독성 개선)
+function _rmToggleBtn(targetId,openLabel,closeLabel){
+  return '<button type="button" class="lt-retry-btn" data-open="'+esc(openLabel)+'" data-close="'+esc(closeLabel)+'" aria-expanded="false" '
+    +'style="margin:8px 0 0;font-size:12px;padding:5px 12px;background:var(--warm-50);border-color:var(--gray-200);color:var(--teal-dark);" '
+    +'onclick="_rmToggle(this,\''+targetId+'\')">'+esc(openLabel)+'</button>';
+}
+function _rmToggle(btn,id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const opening=el.style.display==='none';
+  el.style.display=opening?'block':'none';
+  btn.textContent=opening?btn.dataset.close:btn.dataset.open;
+  btn.setAttribute('aria-expanded',opening?'true':'false');
+}
+// 상단 퀵 점프 — 로드맵 섹션으로 바로 스크롤 이동
+function _rmJump(id,label){
+  return '<a href="#'+id+'" onclick="var t=document.getElementById(\''+id+'\');if(t)t.scrollIntoView({behavior:\'smooth\',block:\'start\'});return false;" '
+    +'style="flex:none;padding:6px 12px;border-radius:999px;background:var(--teal-50);color:var(--teal-dark);font-size:12px;font-weight:700;text-decoration:none;border:1px solid var(--teal);white-space:nowrap;">'+label+'</a>';
+}
+
 async function loadRoadmap(){
   document.querySelectorAll('.basics-topic-item').forEach(el=>el.classList.remove('active'));
   const ca=document.getElementById('content-area');
@@ -4987,7 +5007,8 @@ async function loadRoadmap(){
   }).join('');
   const s2='<b>혼자서도 이 순서대로만 하면 됩니다.</b>'
     +_rmEn('Just follow this order on your own.')
-    +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:2;">'
+    +_rmToggleBtn('rm-s2-detail','8단계 자세히 보기 · Show the 8 steps','접기 · Hide')
+    +'<div id="rm-s2-detail" style="display:none;margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:2;">'
     +'<b>1.</b> 🔥 <b>빠른 복습</b> — 편을 열면 저절로 떠요. 지난 편 단어 확인이니 <b>건너뛰지 마세요</b>'
       +'<span class="en-gloss"><br><i>Quick review opens by itself. It checks last episode\'s words — don\'t skip it.</i></span><br>'
     +'<b>2.</b> 📽 <b>영상</b> — 처음엔 자막 접고 한 번, 그다음 펴고 한 번. 🔊로 한 줄씩 따라 읽고, 🎤 <b>따라 말하기</b>로 연습해요'
@@ -5043,9 +5064,11 @@ async function loadRoadmap(){
       +'<div style="font-size:11px;color:var(--warm-400);font-style:italic">'+en+'</div></td>'
     +'<td style="padding:9px 12px 9px 0;white-space:nowrap;vertical-align:top;color:var(--teal-dark);font-size:12px">'+where+'</td>'
     +'<td style="padding:9px 0;vertical-align:top;color:var(--warm-700);font-size:12.5px;line-height:1.7">'+when+'</td></tr>';
-  const gems='<div style="margin-top:24px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
+  const gems='<div id="rm-hidden" style="scroll-margin-top:10px;margin-top:24px;background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;">'
     +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📦 모르면 그냥 지나치는 것들</div>'
     +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-bottom:12px;">Features you might never notice — but should use</div>'
+    +_rmToggleBtn('rm-gems-detail','12개 항목 보기 · Show all 12','접기 · Hide')
+    +'<div id="rm-gems-detail" style="display:none;margin-top:10px;">'
     +'<table style="width:100%;border-collapse:collapse">'
     +gem('📖','색인','Index','상단','단어나 문법이 기억 안 날 때. 전 레벨 <b>단어·문법</b>을 한국어·영어로 검색하고 <b>어느 편에 나왔는지</b> 알려줘요. 위쪽 탭으로 <b>단어 ↔ 문법</b>을 바꿔 볼 수 있어요.')
     +gem('📌','빠른 참고','Quick Ref','상단','숫자·의문사·호칭·인사표. 공부하다 막히면 <b>어느 화면에서든</b> 바로 열려요.')
@@ -5060,7 +5083,7 @@ async function loadRoadmap(){
     +gem('✅','자기점검','Self-check','편 맨 끝','다음 편으로 가도 될지 스스로 확인. <b>여기까지 해야 ✓ 표시가 됩니다.</b>')
     +gem('📱','모바일 앱','Mobile','아래 QR','밖에서 5분. 단어장·롤플레이·카톡 시뮬. <b>바로 아래 QR을 찍으면</b> 폰에서 열려요. <b>홈 화면에 추가</b>해 두면 앱처럼 씁니다.')
     +gem('📖','학습 자료','Open Resource','doranchae.com/learn/','로그인 없이 브라우저에서 바로 보는 <b>무료 문법 설명 페이지</b>예요. 헷갈리는 문법 하나만 빨리 찾아볼 때, 앱 없이 <b>링크로 공유</b>할 때 유용해요. (지금은 Level 1·2까지)')
-    +'</table></div>';
+    +'</table></div></div>';
 
 
   // ── 폰으로 바로 열기 (QR) ──
@@ -5105,6 +5128,15 @@ async function loadRoadmap(){
     +'<div style="margin-top:11px;font-size:12px;color:var(--warm-500);line-height:1.7">💡 <b>매일 20분이 주말 3시간보다 낫습니다.</b> 못 한 날이 있어도 그냥 이어서 하세요.'
     +'<div style="font-style:italic;color:var(--warm-400)">20 minutes a day beats 3 hours on Sunday. Missed a day? Just continue.</div></div></div>';
 
+  // 상단 퀵 점프 (2026-08-28 신설)
+  const quickJump='<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;">'
+    +_rmJump('rm-s0','0. 한글 기초')
+    +_rmJump('rm-s1','1. 레벨 찾기')
+    +_rmJump('rm-s2','2. 에피소드 학습법')
+    +_rmJump('rm-s3','3. 매일 복습')
+    +_rmJump('rm-hidden','숨은 기능 &amp; 루틴')
+    +'</div>';
+
   ca.innerHTML='<div style="width:100%;max-width:780px;margin:0 auto;padding:24px;box-sizing:border-box;">'
     +'<div class="basics-header"><div class="basics-icon-big">🧭</div>'
     +'<div><div class="basics-title-kr">학습 로드맵</div><div class="basics-title-en">How to Study on Your Own · Roadmap</div></div></div>'
@@ -5112,10 +5144,11 @@ async function loadRoadmap(){
     +'<div style="background:var(--teal-50);border-radius:12px;padding:13px 16px;margin-bottom:20px;font-size:13.5px;color:var(--teal-dark);line-height:1.75;">'
     +'🌱 <b>혼자서 처음부터 끝까지 할 수 있게 만들어졌어요.</b> 아래 순서대로만 따라오시면 됩니다.'
     +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-top:3px;">Designed for self-study from zero. Just follow the steps below.</div></div>'
-    +_rmStep(0,'🔤','한글부터 · 못 읽으면 여기','Step 0 — Learn the alphabet first',s0,false)
-    +_rmStep(1,'🎯','내 레벨 찾기','Step 1 — Find your level',s1,!!pl)
-    +_rmStep(2,'📺','에피소드로 배우기','Step 2 — Learn with episodes',s2,totD>0)
-    +_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)
+    +quickJump
+    +'<div id="rm-s0" style="scroll-margin-top:10px;">'+_rmStep(0,'🔤','한글부터 · 못 읽으면 여기','Step 0 — Learn the alphabet first',s0,false)+'</div>'
+    +'<div id="rm-s1" style="scroll-margin-top:10px;">'+_rmStep(1,'🎯','내 레벨 찾기','Step 1 — Find your level',s1,!!pl)+'</div>'
+    +'<div id="rm-s2" style="scroll-margin-top:10px;">'+_rmStep(2,'📺','에피소드로 배우기','Step 2 — Learn with episodes',s2,totD>0)+'</div>'
+    +'<div id="rm-s3" style="scroll-margin-top:10px;">'+_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)+'</div>'
     +_rmStep(4,'🏆','레벨 마감 테스트','Step 4 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))
     +gems
     +qrcard
