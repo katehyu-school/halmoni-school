@@ -7,6 +7,16 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🛡️ **2026-08-28 완료 (콘텐츠 도용 방지 기본 가드레일 — 우클릭/복사 차단 + learn/ 재생성, 중복 아이디 체크는 이미 있었음 확인)**
+> — 선생님 요청 3가지: ① 우클릭 방지 + 텍스트 선택/드래그 제한 ② 이미지·음원 핫링크 방지 ③ 체험 가입 시 중복 아이디 체크.
+> — **③은 이미 구현되어 있었음** — `signup_trial`/`admin_add_member` RPC가 처음부터 `duplicate` 에러를 반환하고, index.html이 "이미 쓰고 있는 이름이에요"로 바로 안내함(코드 확인만, 수정 없음).
+> — **① 신규 구현**: `core/anti-copy.js` 신설 — `contextmenu` 차단, `body{user-select:none}`(input/textarea/contenteditable/`.allow-select`는 예외라 PIN 입력·My Notes 필기·검색은 정상 동작), img/audio/video 드래그 방지. **로그인 없이 열리는 화면 전부**(`nhs.html`·`korean-app_v2.html`·`dr-mobile.html`·`halmoni_kinder.html`·`index.html`)에 `<script src="core/anti-copy.js">` 한 줄씩 삽입 + `tools/build_static_pages.py`의 `page()` 템플릿에도 반영해 `learn/` 308개 페이지 전부 포함되도록 재생성(리다이렉트 스텁 8개는 콘텐츠가 없어 제외).
+> — **learn/ 재생성 방식**: 이 마운트의 "기존 파일 덮어쓰기 권한 없음" 특성 때문에(`build()`가 `learn/`을 통째로 새로 씀) 이번에도 **클라우드 컨테이너에서 스크립트를 실행**(`data/nhs/*/ep*.json` 74개 + `tools/build_static_pages.py`를 zip으로 올려서 실행) → 결과를 zip으로 다시 내려받아 `device_commit_files`+`device_bash unzip -o`로 기기에 반영(2026-08-27 세션과 동일 패턴).
+> — **재생성 중 발견한 무관한 드리프트**: `data/nhs/L2/ep11.json`에 있는 문법 카드 하나(-군요/-구나, "Realization from What You Were Told")가 그동안 `learn/` 페이지에 반영된 적이 없었던 것으로 확인됨(소스 JSON은 최신인데 정적 페이지가 그 이후로 재생성된 적이 없었던 것으로 보임) — 이번 재생성으로 자동으로 새 파일(`learn/grammar/l2-ep11-realization-were-told-oh-i.html`)이 생기고 허브·sitemap에도 등록됨. 이번 요청과는 무관한 부수 효과지만 정상적인 반영이라 그대로 둠.
+> — **② 핫링크 방지는 이번엔 미적용** — `doranchae.com`은 GitHub Pages에 Namecheap A레코드를 직접 연결한 구조라(2026-08-09 DNS 이전 기록 참고) 서버 단에서 Referer 헤더를 검사해 차단하는 진짜 핫링크 방지는 지금 인프라로는 불가능함(GitHub Pages는 서버 설정 파일을 지원 안 함). 가능한 방법은 **Cloudflare를 프록시(주황 구름)로 앞에 세우고 무료 Hotlink Protection 토글을 켜는 것** — 다만 이건 네임서버를 Cloudflare로 옮기는 별도의 인프라 결정이라(DNS 전파 시간·HTTPS 인증서 재발급 등 수반) 이번 "최소한의 방책" 범위를 넘어선다고 판단해 코드 변경 없이 선생님께 설명만 하고 넘어감. 원하시면 다음 세션에서 진행 가능.
+> — ✅ **검증**: 5개 페이지(nhs/Kids/모바일/유아반/index) null byte 0, `</html>` 각 1개 확인. `tools/build_static_pages.py` `py_compile` 통과. learn/ 재생성물 316개 HTML 전부 null byte 0, `learn/index.html` `</html>` 1개, `git diff`로 sitemap.xml 변경분이 날짜 갱신 + 신규 URL 1건뿐임을 확인(구조 파괴 없음), 삭제된 파일 0건.
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`nhs.html`·`korean-app_v2.html`·`dr-mobile.html`·`halmoni_kinder.html`·`index.html`·`core/anti-copy.js`(신규)·`tools/build_static_pages.py`·`learn/` 308개·`sitemap.xml`). **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 🧭 **2026-08-28 완료 (nhs.html — Start Here 로드맵 UX 개선: 상단 버튼으로 섹션 전환, 아코디언은 폐기)**
 > — 선생님 요청: 로드맵 상단에 [0. 한글 기초] [1. 레벨 찾기] [2. 에피소드 학습법] [3. 매일 복습] [숨은 기능 & 루틴] 버튼.
 > — **1차 시도(스크롤 점프 + 아코디언 접기)는 선생님이 실제로 써 보시고 반려**: 아코디언은 내용을 숨겨서 오히려 불편, 퀵 점프는 섹션으로 스크롤된 뒤 다른 버튼을 누르려면 다시 위로 스크롤해야 해서 번거로움 — 편리성이 감점된다고 피드백.

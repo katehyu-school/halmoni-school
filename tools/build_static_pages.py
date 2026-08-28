@@ -310,7 +310,8 @@ def page(title, desc, body, canonical, jsonld=None, locked=False, extra_head="",
 <a href="/">Doranchae 홈</a> · <a href="/learn/">학습 자료 전체</a> · <a href="/license.html">이용 조건</a>
 </footer>
 </main>{beacon}
-<script src="/core/site-info.js"></script>{extra_body_end}
+<script src="/core/site-info.js"></script>
+<script src="/core/anti-copy.js"></script>{extra_body_end}
 </body>
 </html>
 """
