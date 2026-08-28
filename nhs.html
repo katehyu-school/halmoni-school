@@ -5149,8 +5149,7 @@ async function loadRoadmap(){
     +'<div id="rm-s0" style="display:block;">'+_rmStep(0,'🔤','한글부터 · 못 읽으면 여기','Step 0 — Learn the alphabet first',s0,false)+'</div>'
     +'<div id="rm-s1" style="display:none;">'+_rmStep(1,'🎯','내 레벨 찾기','Step 1 — Find your level',s1,!!pl)+'</div>'
     +'<div id="rm-s2" style="display:none;">'+_rmStep(2,'📺','에피소드로 배우기','Step 2 — Learn with episodes',s2,totD>0)+'</div>'
-    +'<div id="rm-s3" style="display:none;">'+_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)+'</div>'
-    +_rmStep(4,'🏆','레벨 마감 테스트','Step 4 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))
+    +'<div id="rm-s3" style="display:none;">'+_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)+_rmStep(4,'🏆','레벨 마감 테스트','Step 4 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))+'</div>'
     +gems
     +qrcard
     +learnResCard

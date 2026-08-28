@@ -7,6 +7,13 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🐛 **2026-08-28 완료 (nhs.html — 로드맵 버튼 전환 버그 수정: 숨은 기능 탭 눌러도 Step 4가 먼저 나오던 문제)**
+> — 선생님이 스크린샷으로 발견: [숨은 기능 & 루틴] 버튼을 눌러도 📦 목록이 아니라 🏆 레벨 마감 테스트가 버튼 바로 아래 먼저 나옴.
+> — 원인: Step 4(마감테스트)는 애초에 5개 버튼 목록에 없어서 `rm-s0~rm-s3` 탭 전환 대상에 안 넣고 항상 노출시켜 뒀는데, 그 위치가 하필 `rm-s3` 바로 다음이라 다른 탭(`rm-hidden` 포함)을 눌러도 Step 3만 숨겨지고 Step 4는 계속 그 자리에 남아 있었음.
+> — 수정: Step 4를 `rm-s3` 래퍼 안으로 옮겨서 '3. 매일 복습' 탭과 함께 보이고 숨겨지게 함(매일 복습 → 마감 테스트로 이어지는 흐름이라 묶는 게 자연스러움). 다른 탭에서는 더 이상 끼어들지 않음.
+> — ✅ **검증**: null byte 0, `</html>` 1개, 인라인 `<script>` 블록 `node --check` 통과, `git diff --stat` = `nhs.html | 3 (+1/-2)`.
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`nhs.html`). **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 🔢 **2026-08-28 완료 (nhs.html — Real Life 작문 입력창에 실시간 글자 수 표시, L5·L6 writing_guided/writing_chart)**
 > — 선생님 요청: Level 5·6 Real Life의 작문 문제(`<textarea>`)에 입력하면 그 아래에 글자 수가 뜨게.
 > — `buildRealLife()`의 `writing_guided`(가이드 작문)·`writing_chart`(도표 작문, TOPIK 53형) 두 타입 모두 텍스트 영역에 `id`+`oninput` 부여, 바로 아래 `0자 · 0 characters` 카운트 표시줄 추가. 공용 함수 `_rlUpdateCharCount(taId,cntId)` 신설(`toggleWG()` 바로 아래) — 입력할 때마다 `textarea.value.length`로 즉시 갱신. 두 타입이 같은 텍스트영역+모범답안+자기점검 마크업을 코드까지 그대로 복제해 쓰고 있어서, 두 블록에 각각 `wg-`/`wc-` 접두사로 따로 적용(기존 `wg-btn-`/`wg-model-` id 네이밍과 동일한 패턴).
