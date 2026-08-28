@@ -2081,6 +2081,7 @@ function wrCheckComp(i){
   else res.innerHTML='<span style="color:#c0392b">❌ 모범답안: '+esc((c.answers||[''])[0])+'</span>';
 }
 function toggleWG(sid){const m=document.getElementById('wg-model-'+sid),b=document.getElementById('wg-btn-'+sid);if(!m)return;const show=m.style.display==='none';m.style.display=show?'block':'none';if(b)b.textContent=show?'🙈 모범답안 숨기기':'📄 모범답안 보기';}
+function _rlUpdateCharCount(taId,cntId){const ta=document.getElementById(taId),cnt=document.getElementById(cntId);if(!ta||!cnt)return;const n=ta.value.length;cnt.textContent=n+'자 · '+n+' characters';}
 
 // ── SPEAKING PROMPTS (말하기 — 문장 말하기 + 1분 말하기, 미러 재활용) ──
 function _spkCard(prompt, promptEn, hintHtml, elId, btnId, modelHtml, mbId, mId){
@@ -2931,7 +2932,8 @@ function buildRealLife(){
         <div style="background:var(--teal-50);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.7;margin-bottom:6px">${esc(item.prompt_ko||'')}</div>
         ${item.prompt_en?`<div class="en-gloss" style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
         ${tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:6px 0 4px">✏️ 문장 뼈대</div><ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:''}
-        <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical"></textarea>
+        <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical" id="wg-ta-${sid}" oninput="_rlUpdateCharCount('wg-ta-${sid}','wg-cnt-${sid}')"></textarea>
+        <div id="wg-cnt-${sid}" style="text-align:right;font-size:11px;color:var(--warm-500);margin-top:4px;">0자 · 0 characters</div>
         ${item.model?`<div style="margin-top:10px"><button id="wg-btn-${sid}" onclick="toggleWG('${sid}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button><div id="wg-model-${sid}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.8;font-family:var(--font-serif)">${esc(item.model)}</div></div>`:''}
         ${rubric?`<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:14px 0 6px">✅ 자기 점검</div>${rubric}`:''}
       </div>`;
@@ -2951,7 +2953,8 @@ function buildRealLife(){
         <div style="background:var(--teal-50);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.7;margin-bottom:6px">${esc(item.prompt_ko||'')}</div>
         ${item.prompt_en?`<div class="en-gloss" style="font-size:11px;color:var(--warm-500);margin-bottom:10px">${esc(item.prompt_en)}</div>`:''}
         ${tmpl?`<div style="font-size:11.5px;font-weight:700;color:var(--teal-dark);margin:6px 0 4px">✏️ 문장 뼈대</div><ul style="margin:0 0 10px;padding-left:18px;font-size:12.5px;color:var(--warm-800);font-family:var(--font-serif)">${tmpl}</ul>`:''}
-        <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical"></textarea>
+        <textarea placeholder="여기에 직접 써 보세요…" style="width:100%;box-sizing:border-box;min-height:96px;padding:10px 12px;border:1.5px solid var(--warm-300);border-radius:8px;font-size:14px;font-family:var(--font-serif);line-height:1.7;resize:vertical" id="wc-ta-${sid}" oninput="_rlUpdateCharCount('wc-ta-${sid}','wc-cnt-${sid}')"></textarea>
+        <div id="wc-cnt-${sid}" style="text-align:right;font-size:11px;color:var(--warm-500);margin-top:4px;">0자 · 0 characters</div>
         ${item.model?`<div style="margin-top:10px"><button id="wg-btn-${sid}" onclick="toggleWG('${sid}')" style="background:var(--warm-100);border:1.5px solid var(--warm-300);border-radius:8px;padding:6px 14px;font-size:12.5px;cursor:pointer">📄 모범답안 보기</button><div id="wg-model-${sid}" style="display:none;margin-top:8px;background:var(--warm-50);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:11px 14px;font-size:13px;color:var(--warm-900);line-height:1.8;font-family:var(--font-serif)">${esc(item.model)}</div></div>`:''}
         ${rubric?`<div style="font-size:11.5px;font-weight:700;color:var(--warm-600);margin:14px 0 6px">✅ 자기 점검</div>${rubric}`:''}
       </div>`;
