@@ -7,6 +7,13 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🌐 **2026-08-28 완료 (nhs.html — 한글 모르는 방문자를 위한 영어 보완: 로드맵 버튼 + 빠른 복습 나가기 버튼)**
+> — 선생님 요청: ① 로드맵 상단 버튼을 영어로 ② 에피소드 열 때 뜨는 빠른 복습(Quick Review) 팝업의 '바로 보기' 버튼을 Exit/X로.
+> — ① `loadRoadmap()`의 5개 탭 버튼에 영어 병기: '0. 한글 기초 · Alphabet' / '1. 레벨 찾기 · Find Level' / '2. 에피소드 학습법 · Episodes' / '3. 매일 복습 · Daily Review' / '숨은 기능 & 루틴 · Hidden Features'. 한글은 그대로 두고 옆에 영어만 덧붙이는 방식이라 기존 학습자에게는 변화 없음(사이트 전반의 '한국어 · English' 표기 관례와 동일).
+> — ② `_showWarmup()`의 건너뛰기 버튼(`_wuSkip()` 호출) 라벨을 '📽 바로 보기' → '✕ Exit'로 교체. 기능은 그대로(퀴즈 건너뛰고 바로 에피소드로 진입)지만, 한글을 모르는 방문자가 이 팝업에서 빠져나가는 법을 못 찾는 문제를 해결.
+> — ✅ **검증**: null byte 0, `</html>` 1개, 인라인 `<script>` 블록 `node --check` 통과, `git diff --stat` = `nhs.html | 12 (+6/-6)`.
+> — ⏳ **git add/commit/push 대기 중**. **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 🔒 **2026-08-28 완료 (learn/ 허브 — 잠긴 레벨 탭 자체를 클릭 불가로)**
 > — 선생님이 발견: `/learn/`에서 잠긴 레벨(L3+) 탭을 눌러도 패널이 열리면서(dim 처리된) 에피소드 제목·문법 항목이 다 보임 — 개별 카드는 `lockcard`라 클릭은 안 되지만 탭 자체가 열리는 게 지저분함.
 > — `tools/build_static_pages.py`: 잠긴 레벨의 `<button class="lvl-tab">`에서 `onclick="showLvl(n)"` 자체를 아예 안 붙임(`tabindex="-1" aria-disabled="true"`로 교체) + `.lvl-tab.locked{opacity:.55;cursor:default;pointer-events:none}` CSS 추가(기존 `.lockcard` 스타일과 동일한 패턴). 공개 레벨(L1·L2) 탭은 그대로 동작.

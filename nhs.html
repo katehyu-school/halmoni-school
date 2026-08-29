@@ -3643,7 +3643,7 @@ function _showWarmup(epId, level, pool){
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">'
     +'<div><div style="font-size:22px;font-weight:800;color:var(--gray-900);">🔥 빠른 복습</div>'
     +'<div style="font-size:12px;color:var(--warm-500);margin-top:3px;">Quick Review — before the episode</div></div>'
-    +'<button onclick="_wuSkip()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(0,128,128,0.25);">📽 바로 보기</button>'
+    +'<button onclick="_wuSkip()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(0,128,128,0.25);">✕ Exit</button>'
     +'</div>'
     +'<div id="wu-dots" style="display:flex;gap:8px;margin-bottom:28px;"></div>'
     +'<div id="wu-body"></div>';
@@ -5131,11 +5131,11 @@ async function loadRoadmap(){
 
   // 상단 버튼 — 클릭하면 버튼 바로 아래에 해당 섹션만 표시 (2026-08-28: 스크롤 이동 방식 → 버튼 전환 방식으로 변경)
   const quickJump='<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;">'
-    +_rmTabBtn('rm-s0','0. 한글 기초')
-    +_rmTabBtn('rm-s1','1. 레벨 찾기')
-    +_rmTabBtn('rm-s2','2. 에피소드 학습법')
-    +_rmTabBtn('rm-s3','3. 매일 복습')
-    +_rmTabBtn('rm-hidden','숨은 기능 &amp; 루틴')
+    +_rmTabBtn('rm-s0','0. 한글 기초 · Alphabet')
+    +_rmTabBtn('rm-s1','1. 레벨 찾기 · Find Level')
+    +_rmTabBtn('rm-s2','2. 에피소드 학습법 · Episodes')
+    +_rmTabBtn('rm-s3','3. 매일 복습 · Daily Review')
+    +_rmTabBtn('rm-hidden','숨은 기능 &amp; 루틴 · Hidden Features')
     +'</div>';
 
   ca.innerHTML='<div style="width:100%;max-width:780px;margin:0 auto;padding:24px;box-sizing:border-box;">'
