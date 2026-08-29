@@ -7,6 +7,13 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 👀 **2026-08-28 완료 (index.html — 첫 대문에 "둘러보기 · Free to Browse" 버튼 추가)**
+> — 선생님 제안: Start Here / Road Map / 로그인 3개 버튼 옆에 "일단 실제 화면부터 보고 싶다"는 방문자를 위한 버튼 하나 더.
+> — `nhs.html`에 아무 쿼리 파라미터 없이 들어가면 이미 자동으로 Level 1 ep01을 여는 기존 동작(`DOMContentLoaded`의 `else{ loadEp('ep01'); }` 분기)을 그대로 활용 — nhs.html은 손대지 않고 index.html에 버튼 하나만 추가(`onclick="location.href='nhs.html'"`).
+> — 배치: [🌱 Start Here(안내)] → [👀 둘러보기 · Free to Browse(바로 콘텐츠, No account needed)] → [🧭 Road Map(공부법)] → [👤 로그인] 순 — 신규 방문자용 2개를 위로, 이미 알고 온 사람용 2개를 아래로 묶음.
+> — ✅ **검증**: null byte 0, `</html>` 1개, 인라인 `<script>` 블록 `node --check` 통과, `git diff --stat` = `index.html | 1 (+1)`.
+> — ⏳ **git add/commit/push 대기 중**. **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 🌐 **2026-08-28 완료 (nhs.html — 한글 모르는 방문자를 위한 영어 보완: 로드맵 버튼 + 빠른 복습 나가기 버튼)**
 > — 선생님 요청: ① 로드맵 상단 버튼을 영어로 ② 에피소드 열 때 뜨는 빠른 복습(Quick Review) 팝업의 '바로 보기' 버튼을 Exit/X로.
 > — ① `loadRoadmap()`의 5개 탭 버튼에 영어 병기: '0. 한글 기초 · Alphabet' / '1. 레벨 찾기 · Find Level' / '2. 에피소드 학습법 · Episodes' / '3. 매일 복습 · Daily Review' / '숨은 기능 & 루틴 · Hidden Features'. 한글은 그대로 두고 옆에 영어만 덧붙이는 방식이라 기존 학습자에게는 변화 없음(사이트 전반의 '한국어 · English' 표기 관례와 동일).
