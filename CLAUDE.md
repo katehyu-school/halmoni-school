@@ -7,6 +7,19 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🍼 **2026-08-29 완료 (halmoni_kinder.html → korean-app_v2.html 병합 — Kinder 탭 신설, 1차)**
+> — 선생님 요청: `halmoni_kinder.html`(유아반)을 도란채 키즈에 합병. Level 1 앞에 "Kinder" 탭 신설, halmoni_kinder 내용 중 **노래만 제외**하고 우선 반영. 폰트·색상은 도란채 키즈 톤에 맞춤.
+> — **탭 추가**: `.book-tabs`에 `Kinder` 탭을 Level 1보다 앞에 추가(`selectBook(0)`). `selectBook(n)`에 `n===0` 분기 신설(기존 1~4 분기와 동일 패턴으로 sidebar0/main0 show·hide 추가).
+> — **UI 구조**: halmoni_kinder의 독립 홈 화면(카드 그리드)·타이틀 화면은 걷어내고, 기존 Book1/3/4와 동일한 **사이드바 방식**으로 재구성 — `book0-sidebar`(동물·음식·색깔·숫자·신체·과일·교통수단 7개 + 매칭 게임) + `book0-main`(`b0-container`에 렌더링).
+> — **콘텐츠**: `KD_VOCAB` 객체로 7개 카테고리 이식(각 항목의 `song`/`url` 필드는 죽은 데이터라 제외 — 원본에서도 클릭 핸들러가 실제로 안 쓰고 있었음). 매칭 게임(드래그앤드롭)도 이식, 컨페티는 기존 `launchConfetti()`(HalmoniCore) 재사용.
+> — **폰트/스타일**: 새 CSS는 전부 도란채 키즈 기존 변수(`--sky`/`--coral`/`--mint`/`--green`/`--lavender`) + `Jua`(한글)/`Nanum Gothic`(영어 서브라벨) 재사용 — halmoni_kinder 전용 폰트(Black Han Sans)·독자 팔레트(`--pink`/`--orange`/`--yellow`)는 안 들여옴. `.card`/`.section-title`/`.lesson-item` 등 기존 컴포넌트 재사용, 신규 클래스는 전부 `kd-` 접두사로 격리(충돌 0건 확인).
+> — **TTS**: `_b1GetVoice()`(Book1 음성 선택 로직)는 재사용하되, 속도/피치는 halmoni_kinder가 의도적으로 튜닝해둔 값(rate 0.5, pitch 1.1 — "더 천천히·약간 높게") 그대로 유지 → `kdSpeak()` 신설.
+> — **작은 버그 수정**: 원본 매칭 게임이 SVG 전용 항목(어깨·무릎·허리)에서 `item.e`가 없어 카드에 "undefined"가 뜨는 버그가 있었음 — 이식하며 SVG 분기 추가로 같이 고침(다른 기능 변경 없음).
+> — **halmoni_kinder.html 자체는 그대로 둠** — 노래 포함 원본은 그 주소로 계속 존재. 이번 병합은 "일단 넣어보기" 1차 — 노래 탭은 다음에 논의.
+> — ✅ **검증**: null byte 0, `</html>` 1개(host-side grep), 가장 큰 인라인 `<script>` 블록 `node --check` 통과, `git diff --stat` = `korean-app_v2.html | 356 (+354/-2)`, diff hunk 6곳 전부 의도한 위치(탭 버튼·CSS·sidebar·main·selectBook 함수)에만 국한됨을 확인.
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`korean-app_v2.html`). **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
+
 > 👀 **2026-08-28 완료 (index.html — 첫 대문에 "둘러보기 · Free to Browse" 버튼 추가)**
 > — 선생님 제안: Start Here / Road Map / 로그인 3개 버튼 옆에 "일단 실제 화면부터 보고 싶다"는 방문자를 위한 버튼 하나 더.
 > — `nhs.html`에 아무 쿼리 파라미터 없이 들어가면 이미 자동으로 Level 1 ep01을 여는 기존 동작(`DOMContentLoaded`의 `else{ loadEp('ep01'); }` 분기)을 그대로 활용 — nhs.html은 손대지 않고 index.html에 버튼 하나만 추가(`onclick="location.href='nhs.html'"`).

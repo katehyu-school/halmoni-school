@@ -1222,6 +1222,74 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
 .hq-footer-links a:hover{color:var(--teal);}
 .hq-footer-copy{max-width:900px;margin:0 auto;padding:12px 0 20px;border-top:1px solid #f5f5f3;text-align:center;font-size:10.5px;color:#c2c8d0;letter-spacing:.03em;line-height:1.8;}
 @media (max-width:600px){.hq-footer-inner{flex-direction:column;align-items:flex-start;}}
+
+/* ══════════════ KINDER (Level 0) — halmoni_kinder.html 병합, 노래 제외 ══════════════ */
+.kd-cat-en { font-family:'Nanum Gothic',sans-serif; font-size:0.72rem; color:var(--muted); font-weight:400; }
+.kd-vocab-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr));
+  gap:14px; margin-top:16px;
+}
+.kd-vocab-card {
+  background:white; border-radius:18px; padding:16px 10px 12px;
+  text-align:center; cursor:pointer;
+  box-shadow:0 3px 12px rgba(0,0,0,0.07);
+  transition:all 0.2s; border:2.5px solid #f0f0f0;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+.kd-vocab-card:hover { transform:translateY(-4px) scale(1.03); box-shadow:0 8px 22px rgba(0,0,0,0.12); }
+.kd-vocab-card:active { transform:scale(0.96); }
+.kd-vocab-emoji { font-size:2.6rem; display:block; }
+.kd-vocab-word { font-family:'Jua',sans-serif; font-size:1.1rem; color:var(--text); font-weight:700; }
+.kd-vocab-sub { font-family:'Jua',sans-serif; font-size:1rem; color:var(--sky); font-weight:700; margin-top:-2px; }
+.kd-match-instruction { text-align:center; font-family:'Jua',sans-serif; font-size:1rem; color:var(--muted); margin-bottom:16px; }
+.kd-match-cat-select { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:20px; }
+.kd-mcat-btn {
+  font-family:'Jua',sans-serif; font-size:0.85rem;
+  padding:7px 16px; border-radius:20px; border:2px solid #ddd;
+  background:white; cursor:pointer; transition:all 0.2s;
+}
+.kd-mcat-btn.active { background:var(--mint); border-color:var(--mint); color:white; }
+.kd-match-game-wrap { display:flex; flex-direction:column; gap:4px; }
+.kd-match-col-title { font-family:'Jua',sans-serif; font-size:0.9rem; color:var(--muted); text-align:center; margin-bottom:10px; }
+.kd-match-items { display:flex; flex-direction:row; gap:10px; justify-content:center; flex-wrap:wrap; }
+.kd-match-emoji-card {
+  background:white; border-radius:18px; padding:12px;
+  text-align:center; font-size:2.6rem;
+  box-shadow:0 3px 12px rgba(0,0,0,0.07);
+  cursor:grab; border:2.5px solid #f0f0f0;
+  transition:all 0.2s; user-select:none;
+  flex:1; max-width:92px;
+  display:flex; align-items:center; justify-content:center;
+  aspect-ratio:1/1;
+}
+.kd-match-emoji-card:hover { transform:scale(1.05); box-shadow:0 6px 16px rgba(0,0,0,0.12); }
+.kd-match-emoji-card.dragging { opacity:0.4; transform:scale(0.95); }
+.kd-match-emoji-card.matched { border-color:var(--green); background:var(--green-light); opacity:0.5; pointer-events:none; cursor:default; }
+.kd-match-word-card {
+  background:white; border-radius:18px; padding:12px;
+  font-family:'Jua',sans-serif; font-size:1.1rem; text-align:center; font-weight:700; color:var(--text);
+  box-shadow:0 3px 12px rgba(0,0,0,0.07);
+  border:2.5px dashed #ccc; transition:all 0.2s;
+  flex:1; max-width:92px;
+  display:flex; align-items:center; justify-content:center;
+  aspect-ratio:1/1;
+}
+.kd-match-word-card.drag-over { border-color:var(--mint); background:var(--mint-light); }
+.kd-match-word-card.correct { border-color:var(--green); background:var(--green-light); border-style:solid; animation:kd-correct-pop 0.4s ease; }
+.kd-match-word-card.wrong { border-color:var(--coral); background:var(--coral-light); border-style:solid; animation:shake 0.4s ease; }
+@keyframes kd-correct-pop { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+.kd-match-score { text-align:center; font-family:'Jua',sans-serif; font-size:1.1rem; color:var(--green); margin-top:14px; font-weight:700; }
+.kd-match-reset {
+  display:block; margin:14px auto 0;
+  background:var(--mint); color:white; border:none; border-radius:30px;
+  padding:9px 26px; font-family:'Jua',sans-serif; font-size:0.95rem;
+  cursor:pointer; transition:all 0.2s;
+}
+.kd-match-reset:hover { transform:translateY(-2px); box-shadow:0 4px 14px rgba(78,205,196,0.35); }
+@media (max-width: 640px) {
+  .kd-vocab-grid { grid-template-columns:repeat(3,1fr); gap:10px; }
+  .kd-match-emoji-card, .kd-match-word-card { font-size:2rem; }
+}
 </style>
 <link rel="stylesheet" href="core/footer.css">
 </head>
@@ -1733,6 +1801,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <button class="sidebar-toggle-btn" onclick="toggleMobileSidebar()" aria-label="메뉴">☰</button>
   <div class="top-nav-brand" onclick="showTOC()"><svg width="28" height="32" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.08)"/><polygon points="8,12 10,18 16,18 11,22 13,28 8,24 3,28 5,22 0,18 6,18" fill="#FFD93D"/><polygon points="50,12 52,18 58,18 53,22 55,28 50,24 45,28 47,22 42,18 48,18" fill="#FFD93D"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">DR</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg> Doranchae Kids</div>
   <div class="book-tabs" id="book-tabs-wrap">
+    <button class="book-tab" onclick="selectBook(0)">Kinder</button>
     <button class="book-tab" onclick="selectBook(1)">Level 1</button>
     <button class="book-tab active" onclick="selectBook(2)">Level 2</button>
     <button class="book-tab" onclick="selectBook(3)">Level 3</button>
@@ -1856,6 +1925,43 @@ document.addEventListener('DOMContentLoaded', async () => {
   <div class="lesson-item fc-sidebar-btn" id="fc-sidebar-btn-2" onclick="openKidsFC()">
     <span class="lesson-num">🃏</span>
     <span class="lesson-title-text">복습 카드 · Review</span>
+  </div>
+</nav>
+<!-- ══════ Kinder 사이드바 ══════ -->
+<nav class="sidebar" id="book0-sidebar" style="display:none;">
+  <div class="sidebar-title">Kinder</div>
+  <div class="lesson-item active" id="b0-lesson-animals" onclick="kdOpenCategory('animals')">
+    <span class="lesson-num">🦁</span>
+    <span class="lesson-title-text">동물 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Animals</small></span>
+  </div>
+  <div class="lesson-item" id="b0-lesson-food" onclick="kdOpenCategory('food')">
+    <span class="lesson-num">🍚</span>
+    <span class="lesson-title-text">음식 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Food</small></span>
+  </div>
+  <div class="lesson-item" id="b0-lesson-colors" onclick="kdOpenCategory('colors')">
+    <span class="lesson-num">🌈</span>
+    <span class="lesson-title-text">색깔 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Colors</small></span>
+  </div>
+  <div class="lesson-item" id="b0-lesson-numbers" onclick="kdOpenCategory('numbers')">
+    <span class="lesson-num">🔢</span>
+    <span class="lesson-title-text">숫자 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Numbers</small></span>
+  </div>
+  <div class="lesson-item" id="b0-lesson-body" onclick="kdOpenCategory('body')">
+    <span class="lesson-num">👁️</span>
+    <span class="lesson-title-text">신체 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Body</small></span>
+  </div>
+  <div class="lesson-item" id="b0-lesson-fruits" onclick="kdOpenCategory('fruits')">
+    <span class="lesson-num">🍎</span>
+    <span class="lesson-title-text">과일 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Fruits</small></span>
+  </div>
+  <div class="lesson-item" id="b0-lesson-transport" onclick="kdOpenCategory('transport')">
+    <span class="lesson-num">🚌</span>
+    <span class="lesson-title-text">교통수단 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Transportation</small></span>
+  </div>
+  <div style="border-top:1px solid #e0e0e0;margin:6px 14px;"></div>
+  <div class="lesson-item" id="b0-lesson-match" onclick="kdOpenMatch()">
+    <span class="lesson-num">🎯</span>
+    <span class="lesson-title-text">매칭 게임 <small style="display:block;font-size:.72em;color:#aaa;font-weight:400;">Matching Game</small></span>
   </div>
 </nav>
 <!-- ══════ Book 1 사이드바 ══════ -->
@@ -2028,6 +2134,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 <!-- 컨텐츠 영역 -->
 <div class="app-content">
 
+<!-- ══════ Kinder CONTENT ══════ -->
+<div id="book0-main" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px;">
+  <div id="b0-container"></div>
+</div>
 <!-- ══════ Book 1 CONTENT ══════ -->
 <div id="book1-main" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px;">
   <div id="b1-unit-container"></div>
@@ -3958,14 +4068,235 @@ function _ltShowResult() {
 // ══════════════════════════════════════════
 // NAV
 // ══════════════════════════════════════════
+// ══════════════════════════════════════════
+// KINDER (Level 0) — 유아반, halmoni_kinder.html 병합 (2026-08-29)
+// 노래(songs) 기능은 이번 병합에서 제외 — halmoni_kinder.html에 그대로 유지
+// ══════════════════════════════════════════
+const KD_VOCAB = {
+  animals: { title:'동물', en:'Animals', badge:'🦁', items:[
+    {e:'🦋',w:'나비'}, {e:'🐻',w:'곰'}, {e:'🐷',w:'돼지'}, {e:'🐊',w:'악어'},
+    {e:'🐣',w:'병아리'}, {e:'🦈',w:'상어'}, {e:'🐘',w:'코끼리'}, {e:'🦓',w:'얼룩말'},
+    {e:'🐰',w:'토끼'}, {e:'🦁',w:'사자'}, {e:'🐒',w:'원숭이'}, {e:'🏛️',w:'동물원'},
+  ]},
+  food: { title:'음식', en:'Food', badge:'🍚', items:[
+    {e:'🍚',w:'밥'}, {e:'🍜',w:'국수'}, {e:'🥚',w:'계란'}, {e:'🍞',w:'빵'},
+    {e:'🥛',w:'우유'}, {e:'🍰',w:'케이크'}, {e:'🍕',w:'피자'}, {e:'🍦',w:'아이스크림'},
+    {e:'🍩',w:'도넛'}, {e:'🥗',w:'샐러드'}, {e:'🍗',w:'닭고기'}, {e:'🍫',w:'초콜릿'},
+  ]},
+  colors: { title:'색깔', en:'Colors', badge:'🌈', items:[
+    {e:'🔴',w:'빨강'}, {e:'🟠',w:'주황'}, {e:'🟡',w:'노랑'}, {e:'🟢',w:'초록'},
+    {e:'🔵',w:'파랑'}, {e:'🟣',w:'보라'}, {e:'⚫',w:'검정'}, {e:'⚪',w:'하양'},
+    {e:'🩷',w:'분홍'}, {e:'🟤',w:'갈색'}, {e:'🩵',w:'하늘색'}, {e:'🟩',w:'연두'},
+  ]},
+  numbers: { title:'숫자', en:'Numbers', badge:'🔢', items:[
+    {e:'🍎',w:'1 — 일', sub:'하나', count:1,  speak:'일'},
+    {e:'🍎',w:'2 — 이', sub:'둘',   count:2,  speak:'이'},
+    {e:'🍎',w:'3 — 삼', sub:'셋',   count:3,  speak:'삼'},
+    {e:'🍎',w:'4 — 사', sub:'넷',   count:4,  speak:'사'},
+    {e:'🍎',w:'5 — 오', sub:'다섯', count:5,  speak:'오'},
+    {e:'🍎',w:'6 — 육', sub:'여섯', count:6,  speak:'육'},
+    {e:'🍎',w:'7 — 칠', sub:'일곱', count:7,  speak:'칠'},
+    {e:'🍎',w:'8 — 팔', sub:'여덟', count:8,  speak:'팔'},
+    {e:'🍎',w:'9 — 구', sub:'아홉', count:9,  speak:'구'},
+    {e:'🍎',w:'10 — 십',sub:'열',   count:10, speak:'십'},
+  ]},
+  body: { title:'신체', en:'Body', badge:'👁️', items:[
+    {e:'👁️', w:'눈',  speak:'눈'}, {e:'👃', w:'코',  speak:'코'}, {e:'👂', w:'귀',  speak:'귀'},
+    {e:'👄', w:'입',  speak:'입'}, {e:'✋', w:'손',  speak:'손'}, {e:'🦶', w:'발',  speak:'발'},
+    {e:'💪', w:'팔',  speak:'팔'}, {e:'🦵', w:'다리',speak:'다리'}, {e:'🧒', w:'머리',speak:'머리'},
+    {e:'❤️', w:'심장',speak:'심장'}, {e:'🦷', w:'이',  speak:'이'}, {e:'🫃', w:'배',  speak:'배'},
+    {w:'어깨', speak:'어깨', svg:`<svg viewBox="0 0 120 150" style="width:70px;height:auto;"><rect x="38" y="75" width="44" height="55" rx="10" fill="#FFCC80"/><ellipse cx="28" cy="80" rx="16" ry="12" fill="#FF5252"/><ellipse cx="92" cy="80" rx="16" ry="12" fill="#FF5252"/><rect x="12" y="80" width="16" height="42" rx="8" fill="#FFCC80"/><rect x="92" y="80" width="16" height="42" rx="8" fill="#FFCC80"/><rect x="38" y="125" width="18" height="22" rx="8" fill="#FFCC80"/><rect x="64" y="125" width="18" height="22" rx="8" fill="#FFCC80"/><circle cx="60" cy="52" r="26" fill="#FFCC80"/><circle cx="50" cy="50" r="4" fill="white"/><circle cx="52" cy="51" r="2.5" fill="#333"/><circle cx="70" cy="50" r="4" fill="white"/><circle cx="72" cy="51" r="2.5" fill="#333"/><path d="M52 62 Q60 68 68 62" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="28" rx="26" ry="10" fill="#5D4037"/><ellipse cx="40" cy="34" rx="8" ry="14" fill="#5D4037"/><ellipse cx="80" cy="34" rx="8" ry="14" fill="#5D4037"/></svg>`},
+    {w:'무릎', speak:'무릎', svg:`<svg viewBox="0 0 120 150" style="width:70px;height:auto;"><rect x="38" y="58" width="44" height="50" rx="10" fill="#FFCC80"/><rect x="20" y="62" width="18" height="38" rx="8" fill="#FFCC80"/><rect x="82" y="62" width="18" height="38" rx="8" fill="#FFCC80"/><rect x="38" y="104" width="18" height="22" rx="6" fill="#FFCC80"/><rect x="64" y="104" width="18" height="22" rx="6" fill="#FFCC80"/><circle cx="47" cy="126" r="10" fill="#FF5252"/><circle cx="73" cy="126" r="10" fill="#FF5252"/><rect x="38" y="126" width="18" height="18" rx="6" fill="#FFCC80"/><rect x="64" y="126" width="18" height="18" rx="6" fill="#FFCC80"/><circle cx="60" cy="36" r="24" fill="#FFCC80"/><circle cx="51" cy="34" r="4" fill="white"/><circle cx="53" cy="35" r="2.5" fill="#333"/><circle cx="69" cy="34" r="4" fill="white"/><circle cx="71" cy="35" r="2.5" fill="#333"/><path d="M53 45 Q60 51 67 45" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="14" rx="24" ry="9" fill="#5D4037"/><ellipse cx="38" cy="20" rx="7" ry="12" fill="#5D4037"/><ellipse cx="82" cy="20" rx="7" ry="12" fill="#5D4037"/></svg>`},
+    {w:'허리', speak:'허리', svg:`<svg viewBox="0 0 120 150" style="width:70px;height:auto;"><rect x="36" y="55" width="48" height="36" rx="10" fill="#FFCC80"/><rect x="30" y="85" width="60" height="14" rx="7" fill="#FF5252"/><rect x="36" y="93" width="48" height="36" rx="10" fill="#FFCC80"/><rect x="16" y="58" width="20" height="40" rx="8" fill="#FFCC80"/><rect x="84" y="58" width="20" height="40" rx="8" fill="#FFCC80"/><rect x="36" y="125" width="20" height="22" rx="8" fill="#FFCC80"/><rect x="64" y="125" width="20" height="22" rx="8" fill="#FFCC80"/><circle cx="60" cy="34" r="24" fill="#FFCC80"/><circle cx="51" cy="32" r="4" fill="white"/><circle cx="53" cy="33" r="2.5" fill="#333"/><circle cx="69" cy="32" r="4" fill="white"/><circle cx="71" cy="33" r="2.5" fill="#333"/><path d="M53 43 Q60 49 67 43" fill="none" stroke="#E57373" stroke-width="2" stroke-linecap="round"/><ellipse cx="60" cy="12" rx="24" ry="9" fill="#5D4037"/><ellipse cx="38" cy="18" rx="7" ry="12" fill="#5D4037"/><ellipse cx="82" cy="18" rx="7" ry="12" fill="#5D4037"/><text x="60" y="96" text-anchor="middle" font-size="9" fill="white" font-weight="700">허리</text></svg>`},
+  ]},
+  fruits: { title:'과일', en:'Fruits', badge:'🍎', items:[
+    {e:'🍎',w:'사과'}, {e:'🍌',w:'바나나'}, {e:'🍇',w:'포도'}, {e:'🍓',w:'딸기'},
+    {e:'🍊',w:'귤'}, {e:'🍋',w:'레몬'}, {e:'🍉',w:'수박'}, {e:'🍑',w:'복숭아'},
+    {e:'🍍',w:'파인애플'}, {e:'🥝',w:'키위'}, {e:'🍒',w:'체리'}, {e:'🫐',w:'블루베리'},
+  ]},
+  transport: { title:'교통수단', en:'Transportation', badge:'🚌', items:[
+    {e:'🚌',w:'버스'}, {e:'🚗',w:'자동차'}, {e:'🚂',w:'기차'}, {e:'✈️',w:'비행기'},
+    {e:'🚢',w:'배'}, {e:'🚲',w:'자전거'}, {e:'🛵',w:'오토바이'}, {e:'🚕',w:'택시'},
+    {e:'🚒',w:'소방차'}, {e:'🚑',w:'구급차'}, {e:'🚁',w:'헬리콥터'}, {e:'🚀',w:'로켓'},
+  ]},
+};
+
+let kdCurrentCat = 'animals';
+let kdMatchCat = 'animals';
+let kdMatchScore = 0, kdMatchTotal = 0, kdDragSrcWord = null;
+
+// 유아반 전용 TTS 톤(더 천천히·살짝 높게) — 음성 선택은 Book1과 동일한 로직 재사용
+function kdSpeak(text){
+  if (!('speechSynthesis' in window) || !text) return;
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'ko-KR';
+  utt.rate = 0.5;
+  utt.pitch = 1.1;
+  const voice = (typeof _b1GetVoice === 'function') ? _b1GetVoice() : null;
+  if (voice) utt.voice = voice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utt);
+}
+
+function kdSetActiveLesson(id){
+  document.querySelectorAll('#book0-sidebar .lesson-item').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+function kdOpenCategory(cat){
+  kdCurrentCat = cat;
+  kdSetActiveLesson('b0-lesson-' + cat);
+  const data = KD_VOCAB[cat];
+  const wrap = document.getElementById('b0-container');
+  if (!wrap || !data) return;
+  let cardsHtml = '';
+  data.items.forEach(item => {
+    let inner;
+    if (item.svg){
+      inner = `<div style="display:flex;align-items:center;justify-content:center;min-height:70px;">${item.svg}</div><div class="kd-vocab-word">${item.w}</div>`;
+    } else if (item.count !== undefined){
+      const rows = [];
+      for (let r=0; r<item.count; r+=5) rows.push('🍎'.repeat(Math.min(5, item.count-r)));
+      inner = `<div style="font-size:${item.count<=5?'1.4rem':'1.05rem'};line-height:1.4;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">${rows.map(r=>`<div>${r}</div>`).join('')}</div><div class="kd-vocab-word">${item.w}</div>${item.sub ? `<div class="kd-vocab-sub">${item.sub}</div>` : ''}`;
+    } else {
+      inner = `<span class="kd-vocab-emoji">${item.e}</span><div class="kd-vocab-word">${item.w}</div>`;
+    }
+    const speakText = (item.speak || item.w).replace(/'/g, "\\'");
+    cardsHtml += `<div class="kd-vocab-card" onclick="kdSpeak('${speakText}')">${inner}</div>`;
+  });
+  wrap.innerHTML = `
+    <div class="card">
+      <div class="section-title">${data.badge} ${data.title}<span class="kd-cat-en"> · ${data.en}</span></div>
+      <div class="kd-vocab-grid">${cardsHtml}</div>
+    </div>`;
+}
+
+function kdOpenMatch(){
+  kdSetActiveLesson('b0-lesson-match');
+  const wrap = document.getElementById('b0-container');
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="card">
+      <div class="section-title">🎯 매칭 게임<span class="kd-cat-en"> · Matching Game</span></div>
+      <div class="kd-match-instruction">그림을 오른쪽 이름에 드래그하세요! 🐾</div>
+      <div class="kd-match-cat-select" id="kd-match-cat-select"></div>
+      <div class="kd-match-game-wrap">
+        <div class="kd-match-col-title">그림 🖼️</div>
+        <div class="kd-match-items" id="kd-match-emojis"></div>
+        <div class="kd-match-col-title" style="margin-top:16px;">이름 📝</div>
+        <div class="kd-match-items" id="kd-match-words"></div>
+      </div>
+      <div class="kd-match-score" id="kd-match-score"></div>
+      <button class="kd-match-reset" onclick="kdResetMatch()">🔄 다시 하기</button>
+    </div>`;
+  kdRenderMatchCatBtns();
+  kdBuildMatch(kdMatchCat);
+}
+
+function kdRenderMatchCatBtns(){
+  const wrap = document.getElementById('kd-match-cat-select');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  Object.entries(KD_VOCAB).forEach(([key, cat]) => {
+    const btn = document.createElement('button');
+    btn.className = 'kd-mcat-btn' + (key === kdMatchCat ? ' active' : '');
+    btn.textContent = cat.badge + ' ' + cat.title;
+    btn.onclick = () => {
+      kdMatchCat = key;
+      document.querySelectorAll('.kd-mcat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      kdBuildMatch(key);
+    };
+    wrap.appendChild(btn);
+  });
+}
+
+function kdBuildMatch(cat){
+  const data = KD_VOCAB[cat];
+  const pool = [...data.items].sort(() => Math.random() - 0.5).slice(0, 6);
+  kdMatchTotal = pool.length; kdMatchScore = 0;
+  const scoreEl = document.getElementById('kd-match-score');
+  if (scoreEl) scoreEl.textContent = '';
+
+  const emojiCol = document.getElementById('kd-match-emojis');
+  emojiCol.innerHTML = '';
+  [...pool].sort(() => Math.random() - 0.5).forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'kd-match-emoji-card';
+    card.dataset.word = item.w;
+    card.draggable = true;
+    if (item.count !== undefined){
+      const rows = [];
+      for (let r=0; r<item.count; r+=5) rows.push('🍎'.repeat(Math.min(5, item.count-r)));
+      card.style.fontSize = item.count<=5 ? '1.3rem' : '1rem';
+      card.style.lineHeight = '1.3';
+      card.innerHTML = rows.map(r=>`<div>${r}</div>`).join('');
+    } else if (item.svg){
+      card.innerHTML = item.svg;
+    } else {
+      card.textContent = item.e;
+    }
+    card.addEventListener('dragstart', e => {
+      kdDragSrcWord = item.w;
+      card.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', item.w);
+    });
+    card.addEventListener('dragend', () => card.classList.remove('dragging'));
+    card.addEventListener('touchstart', () => { kdDragSrcWord = item.w; card.classList.add('dragging'); }, {passive:true});
+    card.addEventListener('touchend', () => card.classList.remove('dragging'));
+    emojiCol.appendChild(card);
+  });
+
+  const wordCol = document.getElementById('kd-match-words');
+  wordCol.innerHTML = '';
+  [...pool].sort(() => Math.random() - 0.5).forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'kd-match-word-card';
+    card.textContent = item.w;
+    card.dataset.word = item.w;
+    card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag-over'); });
+    card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
+    card.addEventListener('drop', e => {
+      e.preventDefault(); card.classList.remove('drag-over');
+      kdCheckMatch(card, item.w);
+    });
+    wordCol.appendChild(card);
+  });
+}
+
+function kdCheckMatch(wordCard, targetWord){
+  if (!kdDragSrcWord) return;
+  if (kdDragSrcWord === targetWord){
+    wordCard.classList.add('correct');
+    document.querySelectorAll('.kd-match-emoji-card').forEach(ec => {
+      if (ec.dataset.word === kdDragSrcWord) ec.classList.add('matched');
+    });
+    kdMatchScore++;
+    const scoreEl = document.getElementById('kd-match-score');
+    if (scoreEl) scoreEl.textContent = `✅ ${kdMatchScore} / ${kdMatchTotal}`;
+    if (kdMatchScore === kdMatchTotal){
+      setTimeout(() => { launchConfetti(); if (scoreEl) scoreEl.textContent = '🎉 완벽해요! 다 맞혔어요!'; }, 300);
+    }
+  } else {
+    wordCard.classList.add('wrong');
+    setTimeout(() => wordCard.classList.remove('wrong'), 500);
+  }
+  kdDragSrcWord = null;
+}
+
+function kdResetMatch(){ kdBuildMatch(kdMatchCat); }
+
 function selectBook(n) {
   // 탭 active 클래스 전환
   document.querySelectorAll('.book-tab').forEach(btn => {
-    const isTarget = btn.textContent.trim() === 'Level ' + n;
+    const isTarget = btn.textContent.trim() === (n === 0 ? 'Kinder' : 'Level ' + n);
     if (!btn.classList.contains('locked')) {
       btn.classList.toggle('active', isTarget);
     }
   });
+  const sidebar0 = document.getElementById('book0-sidebar');
+  const main0    = document.getElementById('book0-main');
   const sidebar1 = document.getElementById('book1-sidebar');
   const main1    = document.getElementById('book1-main');
   const sidebar2 = document.getElementById('lesson-sidebar');
@@ -3975,7 +4306,22 @@ function selectBook(n) {
   const main3    = document.getElementById('book3-main');
   const sidebar4 = document.getElementById('book4-sidebar');
   const main4    = document.getElementById('book4-main');
-  if (n === 1) {
+  if (n === 0) {
+    if (sidebar0) sidebar0.style.display = '';
+    if (main0)    main0.style.display    = '';
+    if (sidebar1) sidebar1.style.display = 'none';
+    if (main1)    main1.style.display    = 'none';
+    if (sidebar2) sidebar2.style.display = 'none';
+    if (main2)    main2.style.display    = 'none';
+    if (tocScr)   tocScr.style.display   = 'none';
+    if (sidebar3) sidebar3.style.display = 'none';
+    if (main3)    main3.style.display    = 'none';
+    if (sidebar4) sidebar4.style.display = 'none';
+    if (main4)    main4.style.display    = 'none';
+    kdOpenCategory(kdCurrentCat || 'animals');
+  } else if (n === 1) {
+    if (sidebar0) sidebar0.style.display = 'none';
+    if (main0)    main0.style.display    = 'none';
     if (sidebar1) sidebar1.style.display = '';
     if (main1)    main1.style.display    = '';
     if (sidebar2) sidebar2.style.display = 'none';
@@ -3987,6 +4333,8 @@ function selectBook(n) {
     if (main4)    main4.style.display    = 'none';
     switchBook1Unit(typeof b1CurrentUnit !== 'undefined' ? b1CurrentUnit : 0);
   } else if (n === 2) {
+    if (sidebar0) sidebar0.style.display = 'none';
+    if (main0)    main0.style.display    = 'none';
     if (sidebar1) sidebar1.style.display = 'none';
     if (main1)    main1.style.display    = 'none';
     if (sidebar2) sidebar2.style.display = '';
@@ -3998,6 +4346,8 @@ function selectBook(n) {
     if (main4)    main4.style.display    = 'none';
     switchUnit(1);
   } else if (n === 3) {
+    if (sidebar0) sidebar0.style.display = 'none';
+    if (main0)    main0.style.display    = 'none';
     if (sidebar1) sidebar1.style.display = 'none';
     if (main1)    main1.style.display    = 'none';
     if (sidebar2) sidebar2.style.display = 'none';
@@ -4009,6 +4359,8 @@ function selectBook(n) {
     if (main4)    main4.style.display    = 'none';
     switchBook3Unit(b3CurrentUnit || 1);
   } else if (n === 4) {
+    if (sidebar0) sidebar0.style.display = 'none';
+    if (main0)    main0.style.display    = 'none';
     if (sidebar1) sidebar1.style.display = 'none';
     if (main1)    main1.style.display    = 'none';
     if (sidebar2) sidebar2.style.display = 'none';
