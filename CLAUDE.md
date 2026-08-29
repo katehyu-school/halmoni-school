@@ -7,6 +7,15 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 👥 **2026-08-29 완료 (admin.html — 회원 관리 표에 "새 회원 등록" 버튼 신설)**
+> — 선생님 질문: "admin 화면에서 회원 등록하는 옵션은 없나 봐? 아이디+패스워드로 등록하면 admin이 회원 등급을 조정하는 2 단계로 해야 돼?"
+> — 확인해보니 admin.html 회원 관리 표엔 정말로 등록 버튼이 없었음. 다만 **1단계로 등록하는 기능 자체는 이미 있었음** — 위치가 admin.html이 아니라 **index.html 출석부 패널**(`toggleAddForm()`/`saveNewMember()`, `admin_add_member` RPC 직접 호출)이라 못 찾으신 것. 진짜 2단계가 필요한 경우는 방문자가 index.html의 공개 "🔓 계정 만들기"로 **스스로** 가입할 때뿐(`signup_trial`이 무조건 `trial` 등급으로 고정 생성 → 나중에 admin.html에서 등급을 올려야 함) — 이건 의도된 설계(셀프 가입은 항상 체험 등급으로 시작).
+> — 선생님이 "admin.html에 추가 버튼을 새로 만들기"를 선택 → **회원 관리 섹션 헤더 바로 아래에 접이식(`<details>`) 등록 폼 신설**, 기존 "🔑 역할별 비밀번호 일괄 변경"과 똑같은 `.mm-bulk`/`.pw-grid`/`.pw-field`/`.action-btn.btn-primary` 컴포넌트를 그대로 재사용해 새 CSS 없이 톤을 맞춤. 필드: 표시명·로그인 ID·PIN + "체험 계정으로 만들기" 체크박스(기본은 정식 학생).
+> — 신규 함수 `mmAddMember()` — index.html의 `saveNewMember()`와 **동일한 RPC·파라미터·에러 코드 매핑**(`admin_add_member` / denied·duplicate·bad_name·bad_pin·bad_role) 그대로 사용해 두 등록 경로가 서버 쪽에서 완전히 같게 동작하도록 함. 성공 시 `loadMemberPins()`로 표 즉시 갱신 + `toast()` 알림.
+> — index.html의 기존 등록 폼(출석부 패널)은 그대로 둠 — 두 경로가 같은 RPC를 쓰므로 어느 쪽으로 등록해도 결과는 동일, 굳이 하나를 없앨 이유 없음.
+> — ✅ **검증**: git HEAD 클린 사본에서 Python 치환(앵커 2곳 각각 count==1 확인 후 진행) → null byte 0, `</html>` 1개(host-side grep), 인라인 `<script>` 블록(전체 코드가 한 블록) `node --check` 통과, 신규 id·함수명 8곳 전부 grep 대조 확인, `git diff --stat` = `admin.html | 69 (+69)`, diff hunk 정확히 2곳(HTML 폼 삽입 지점 + JS 함수 삽입 지점)에만 국한됨을 확인(순수 추가, 기존 코드 변경 없음).
+> — ⏳ **git add/commit/push 대기 중** — 로컬 파일만 수정됨(`admin.html`). **GitHub에 반영해야 서버(doranchae.com)에 적용됨.**
+
 > 🍼 **2026-08-29 완료 (halmoni_kinder.html → korean-app_v2.html 병합 — Kinder 탭 신설, 1차)**
 > — 선생님 요청: `halmoni_kinder.html`(유아반)을 도란채 키즈에 합병. Level 1 앞에 "Kinder" 탭 신설, halmoni_kinder 내용 중 **노래만 제외**하고 우선 반영. 폰트·색상은 도란채 키즈 톤에 맞춤.
 > — **탭 추가**: `.book-tabs`에 `Kinder` 탭을 Level 1보다 앞에 추가(`selectBook(0)`). `selectBook(n)`에 `n===0` 분기 신설(기존 1~4 분기와 동일 패턴으로 sidebar0/main0 show·hide 추가).
