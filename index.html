@@ -1332,6 +1332,13 @@ async function toggleAtt(name, current, btn) {
   }
 }
 
+  // URL에 ?login=1 이 있으면 '계정 만들기' 팝업을 바로 띄웁니다
+  // (nhs.html의 '무료 계정 만들기' 링크에서 넘어오는 경우)
+  try {
+    if (new URLSearchParams(location.search).get('login') === '1') {
+      openSignup();
+    }
+  } catch(e) {}
 </script>
 
 <!-- 출석부 패널 -->
