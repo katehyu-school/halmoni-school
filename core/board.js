@@ -74,7 +74,7 @@
       <div class="brd-sec-title">🔒 로그인이 필요해요 · Sign in required</div>
       <div class="brd-hint" id="brd-auth-msg">게시판은 등록된 분만 이용할 수 있어요.<br>
         <span style="color:var(--warm-500)">The board is for registered members only.</span></div>
-      <button class="nms-save-btn" onclick="location.href='index.html'">로그인하러 가기 · Sign in</button>
+      <button class="nms-save-btn" onclick="location.href='/?signin=1'">로그인하러 가기 · Sign in</button>
     </div>
 
     <div class="brd-card" id="brd-write-card">
