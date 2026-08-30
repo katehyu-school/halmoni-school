@@ -1,7 +1,8 @@
 /* core/footer.css — 사이트 공용 푸터 스타일 단일 소스 (2026-08-15).
    core/footer.js 가 채우는 [data-site-footer] 마크업에 대응합니다.
    레이아웃·색을 바꾸려면 이 파일만 고치면 전체 페이지에 반영됩니다. */
-[data-site-footer]{margin-top:44px;padding:24px 20px 0;border-top:1px solid rgba(120,140,160,.18);}
+[data-site-footer]{margin-top:44px;padding:24px 20px 0;border-top:1px solid rgba(120,140,160,.18);min-height:112px;box-sizing:border-box;}
+@media (max-width:640px){[data-site-footer]{min-height:172px;}}
 .df-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:14px;}
 .df-brand{display:flex;align-items:center;gap:8px;}
 .df-name{font-family:'Gaegu',sans-serif;font-weight:700;font-size:15px;color:#0a2540;}
