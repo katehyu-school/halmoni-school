@@ -915,11 +915,11 @@ async function submitSignup() {
     if (error) throw new Error(error.message);
     if (!r || !r.ok) {
       msg.textContent =
-        r && r.error === 'duplicate'   ? '이미 쓰고 있는 이름이에요. 다른 이름으로 해 주세요.' :
-        r && r.error === 'bad_name'    ? '이름은 한글·영문·숫자 2~20자로 정해 주세요.' :
-        r && r.error === 'bad_pin'     ? 'PIN은 4자리 이상으로 정해 주세요.' :
+        r && r.error === 'duplicate'   ? '이미 쓰고 있는 이름이에요. 다른 이름으로 해 주세요. · This name is already taken — please choose another.' :
+        r && r.error === 'bad_name'    ? '이름은 한글·영문·숫자 2~20자로 정해 주세요. · Name must be 2–20 characters (Korean, English letters, or numbers).' :
+        r && r.error === 'bad_pin'     ? 'PIN은 4자리 이상으로 정해 주세요. · PIN must be at least 4 digits.' :
         r && r.error === 'daily_limit' ? '새 계정 생성이 하루 한도를 초과했어요. 내일 다시 시도해 주세요. · Too many new accounts today — please try again tomorrow.' :
-        '계정을 만들지 못했어요.';
+        '계정을 만들지 못했어요. · Couldn\'t create the account. Please try again shortly.';
       btn.disabled = false; btn.textContent = '시작하기 · Start'; return;
     }
 
