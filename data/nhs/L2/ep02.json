@@ -771,7 +771,7 @@
  },
  "quiz": [
   {
-   "type": "listen",
+   "id": "q1",
    "audio_text": "출구 근처에 있는 공항버스 매표소를 찾아 봐.",
    "audio_index": 6,
    "question_ko": "할머니가 찾으라고 한 것은?",
@@ -782,10 +782,16 @@
     "편의점",
     "화장실"
    ],
-   "answer": 0
+   "answer": 0,
+   "options_en": [
+    "Airport bus ticket counter",
+    "Entrance",
+    "Convenience store",
+    "Restroom"
+   ]
   },
   {
-   "type": "listen",
+   "id": "q2",
    "audio_text": "안 보여요. 못 찾겠어요.",
    "audio_index": 7,
    "question_ko": "보미가 못 찾겠다고 한 것은?",
@@ -796,10 +802,16 @@
     "할머니",
     "버스"
    ],
-   "answer": 0
+   "answer": 0,
+   "options_en": [
+    "Ticket counter",
+    "Exit",
+    "Grandma",
+    "Bus"
+   ]
   },
   {
-   "type": "mc",
+   "id": "q3",
    "question_ko": "\"해 볼게요\" — 어떤 의미예요?",
    "question_en": "What does 해 볼게요 mean?",
    "options": [
@@ -811,7 +823,7 @@
    "answer": 0
   },
   {
-   "type": "mc",
+   "id": "q4",
    "question_ko": "못 + 동사 = ?",
    "question_en": "못 + verb means:",
    "options": [
@@ -823,7 +835,7 @@
    "answer": 0
   },
   {
-   "type": "listen",
+   "id": "q5",
    "audio_text": "시티 터미널행 공항버스를 타고 종점까지 오면 돼.",
    "audio_index": 9,
    "question_ko": "어디까지 오면 돼요?",
@@ -834,10 +846,16 @@
     "매표소",
     "편의점"
    ],
-   "answer": 0
+   "answer": 0,
+   "options_en": [
+    "Last stop / terminus",
+    "Entrance",
+    "Ticket counter",
+    "Convenience store"
+   ]
   },
   {
-   "type": "mc",
+   "id": "q6",
    "question_ko": "\"버스를 타고 와요\" — -고 의 역할은?",
    "question_en": "What does -고 do in 타고 와요?",
    "options": [
@@ -846,7 +864,13 @@
     "조건을 나타내요",
     "과거를 나타내요"
    ],
-   "answer": 0
+   "answer": 0,
+   "options_en": [
+    "Connects two actions in sequence",
+    "Indicates a reason",
+    "Indicates a condition",
+    "Indicates past tense"
+   ]
   }
  ],
  "real_life": [

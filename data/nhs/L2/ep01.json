@@ -968,7 +968,7 @@
  ],
  "quiz": [
   {
-   "type": "mc",
+   "id": "q1",
    "options": [
     "관형사형 — 뒤의 명사(사촌들)를 수식해요",
     "과거형 동사예요",
@@ -976,12 +976,18 @@
     "조건을 나타내요"
    ],
    "answer": 0,
+   "options_en": [
+    "Adnominal form — modifies the following noun (사촌들)",
+    "It's a past tense verb",
+    "It marks the object",
+    "It indicates a condition"
+   ],
    "question_ko": "\"캐나다에서 오는 사촌들\" — 오는 의 역할은?",
    "question_en": "What does 오는 do in this phrase?",
    "explanation": "-(으)는 + 명사 = adnominal form. 동사가 뒤의 명사를 수식해요. 오는 사촌들 = the cousins who are coming."
   },
   {
-   "type": "mc",
+   "id": "q2",
    "options": [
     "if / when ~하면",
     "because ~이기 때문에",
@@ -989,12 +995,18 @@
     "so ~아/어서"
    ],
    "answer": 0,
+   "options_en": [
+    "Condition — 'if / when': ~하면",
+    "Reason — 'because': ~이기 때문에",
+    "Contrast — 'but': ~지만",
+    "Result — 'so': ~아/어서"
+   ],
    "question_ko": "\"전화가 안 되면\" — 면 은 무슨 뜻이에요?",
    "question_en": "What does -(으)면 mean?",
    "explanation": "-(으)면 = if / when. 조건을 나타내요! 비가 오면 = if it rains."
   },
   {
-   "type": "mc",
+   "id": "q3",
    "options": [
     "못 = 상황 때문에 불가능, 안 = 의지로 안 함",
     "못 = 과거, 안 = 현재",
@@ -1002,12 +1014,18 @@
     "차이 없어요"
    ],
    "answer": 0,
+   "options_en": [
+    "못 = can't due to circumstance, 안 = choose not to (by will)",
+    "못 = past tense, 안 = present tense",
+    "못 = casual speech, 안 = polite speech",
+    "No difference"
+   ],
    "question_ko": "못 만나 vs 안 만나 — 차이는?",
    "question_en": "What is the difference between 못 and 안?",
    "explanation": "못 = can't (외부 상황). 안 = don't / won't (의지). 전화가 없어서 못 만나 vs 만나기 싫어서 안 만나."
   },
   {
-   "type": "listen",
+   "id": "q4",
    "audio_text": "저기 사촌들이 보여요!",
    "options": [
     "눈에 들어왔기 때문에 (passive — 보이다)",
@@ -1016,12 +1034,18 @@
     "존댓말이기 때문에"
    ],
    "answer": 0,
+   "options_en": [
+    "Because it caught their eye (passive — 보이다)",
+    "Because they looked on purpose (active — 보다)",
+    "Because it's past tense",
+    "Because it's polite speech"
+   ],
    "question_ko": "보여요 를 쓴 이유는?",
    "question_en": "Why is 보여요 used here (not 봐요)?",
    "explanation": "보여요 = 보이다 (passive) — 사촌들이 눈에 들어왔어요. 봐요 = 보다 (active) — 내가 의도적으로 봐요."
   },
   {
-   "type": "listen",
+   "id": "q5",
    "audio_text": "심카드 두 개 주세요.",
    "options": [
     "Two SIM cards, please.",
@@ -1035,7 +1059,7 @@
    "explanation": "N + 주세요 = N please / give me N. 두 개 = two (고유어 숫자 + 개). 공항, 식당, 가게에서 모두 쓸 수 있어요!"
   },
   {
-   "type": "mc",
+   "id": "q6",
    "options": [
     "This is where you take a number ticket.",
     "You should take a number ticket.",
