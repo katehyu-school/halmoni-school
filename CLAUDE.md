@@ -7,6 +7,14 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🔖 **2026-08-31 완료 (nhs.html — 색인 어휘·문법 북마크 기능, 정식 멤버 전용)**
+> — 선생님 아이디어: "웹에 콘텐츠가 워낙 탄탄하니 이걸 활용한 기능을 만들자 — 색인의 어휘·문법 탭에 북마크를 넣고, 색인에서 북마크만 필터링할 수 있게. 서버 부담 때문에 정식 멤버(student/teacher/admin)에게만."
+> — Supabase `bookmarks` 테이블 신설(member_name/item_type/item_key/item_data jsonb, RLS enabled + anon·authenticated revoke — `has_table_privilege`/`set local role anon`으로 직접 접근 차단 확인) + `bookmark_toggle`/`bookmark_list` RPC 2개. `nhs_get_episode`와 동일하게 `_session_member(p_token)`으로 세션 검증 후 role이 student/teacher/admin일 때만 통과(trial·guest는 서버에서 거부).
+> — 색인(📖) 모달: 어휘·문법 각 행에 🔖 토글 버튼(정식 멤버에게만 노출) + 검색창 아래 "🔖 즐겨찾기만 보기" 필터 버튼 신설. 어휘 키는 `ep+한국어단어`, 문법 키는 `ep+g.id(없으면 title)` 조합.
+> — My Notes에도 북마크 탭을 만들어 봤으나 목록 로딩이 제대로 안 되는 문제가 있었음 — 선생님이 "너무 에너지 낭비하지 말고 색인에만 있어도 된다"고 정리 → My Notes 쪽 추가분(`core/my-notes.js`의 탭·패널·`nmsRenderBookmarks()`)은 전부 되돌리고 **색인 기능만 유지**.
+> — ✅ **검증**: `nhs.html`/`core/nhs.css`/`core/my-notes.js` 전부 `node --check` 통과, null byte 0, `</html>` 1개. Supabase RLS 방어 쿼리로 확인. 선생님이 라이브 스크린샷으로 색인 🔖 버튼·필터 직접 확인 완료.
+> — ⏳ `core/my-notes.js` 되돌린 커밋 **git add/commit/push 대기 중**(선생님이 직접 커밋) — 나머지(`nhs.html`/`core/nhs.css`)는 이미 반영됨.
+
 > 👥 **2026-08-29 완료 (admin.html — 회원 관리 표에 "새 회원 등록" 버튼 신설)**
 > — 선생님 질문: "admin 화면에서 회원 등록하는 옵션은 없나 봐? 아이디+패스워드로 등록하면 admin이 회원 등급을 조정하는 2 단계로 해야 돼?"
 > — 확인해보니 admin.html 회원 관리 표엔 정말로 등록 버튼이 없었음. 다만 **1단계로 등록하는 기능 자체는 이미 있었음** — 위치가 admin.html이 아니라 **index.html 출석부 패널**(`toggleAddForm()`/`saveNewMember()`, `admin_add_member` RPC 직접 호출)이라 못 찾으신 것. 진짜 2단계가 필요한 경우는 방문자가 index.html의 공개 "🔓 계정 만들기"로 **스스로** 가입할 때뿐(`signup_trial`이 무조건 `trial` 등급으로 고정 생성 → 나중에 admin.html에서 등급을 올려야 함) — 이건 의도된 설계(셀프 가입은 항상 체험 등급으로 시작).
