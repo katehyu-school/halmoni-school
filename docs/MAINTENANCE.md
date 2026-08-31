@@ -386,20 +386,17 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 
 ## 1-9. 학생 진도는 어디에 남는가 — 꼭 알아야 할 한계
 
-> **HQ 학습 진도는 서버가 아니라 학생 브라우저에 저장됩니다.**
+> **기본 저장소는 학생 브라우저(localStorage)입니다. 정식 회원(trial 이상)이 로그인해 있으면 Supabase에도 자동 백업·병합됩니다.** (이 절은 원래 "서버 동기화 없음"이라고 썼던 부분인데 그 사이 추가돼 2026-08-31에 고쳤습니다 — 자세한 규칙은 2-4·2-12 참고.)
 
 이것이 뜻하는 바:
 
-- **기기를 바꾸면 진도가 따라오지 않습니다.** 집 노트북과 학교 태블릿의 진도는 별개입니다.
-- 브라우저 데이터를 지우면 진도도 사라집니다.
-- **로그인은 진도 접근 권한이 아니라 "이름 자동 입력"입니다.** 로그인하지 않아도 콘텐츠는 열리고 진도도 쌓입니다.
-- 진도의 기준은 로그인 계정이 아니라 **📓 My Notes의 프로필 이름**입니다.
+- **로그인하지 않았거나 guest 계정이면** — 여전히 브라우저에만 남습니다. 기기를 바꾸면 진도가 따라오지 않고, 브라우저 데이터를 지우면 진도도 사라집니다.
+- **trial 이상으로 로그인해 있으면** — 앱을 열 때마다 서버 진도를 받아와 로컬과 합치고(`progress_pull`), 바뀔 때마다 서버로 올립니다(`progress_push`, 3초 디바운스). **절대 덮어쓰지 않고 합치기만 하므로** 두 기기 중 어느 쪽 기록도 지워지지 않습니다. 이제 집 노트북과 학교 태블릿을 같은 계정으로 오가도 진도가 이어집니다.
+- 진도의 기준(저장 키가 붙는 이름)은 — **로그인해 있으면 로그인 ID**(`@이름` 꼴), **로그인하지 않았으면 📓 My Notes의 프로필 이름**입니다(2026-08-07부터 이 순서로 바뀜).
 
 **한 화면을 두 아이가 같이 쓸 때** — My Notes / My Space에서 프로필을 따로 만들면 진도가 분리됩니다. Kids 실시간 기능(출석·손들기·투표)은 로그인이 아니라 반 코드로 열리고 이름을 매번 넘기므로, 한 로그인으로 두 아이가 각자 참여할 수 있습니다.
 
 **게시판만 회원 전용**입니다. 콘텐츠는 열어 두고 게시판만 잠근 이유는 공개 베타의 부담을 낮추기 위해서입니다.
-
-> 🔜 서버 진도 동기화는 **아직 없습니다.** 로드맵에 있는 미완 항목입니다.
 
 ---
 
@@ -573,7 +570,7 @@ data/basics/                       한글 기초 이미지
 
 ## 2-4. 진도 저장 — localStorage 스키마
 
-**서버 동기화 없음.** 전부 브라우저에 있습니다.
+**기본은 브라우저 localStorage.** 정식 회원(student/teacher/admin/trial)이 로그인한 경우엔 일부가 Supabase `progress` 테이블에도 자동 백업·병합됩니다(`_srs`·`_ep_done`·`_srs_gram` 등 — 2-12 「복습·SRS 메카니즘」 참고). **로그인하지 않은 학습자는 여전히 브라우저에만 남습니다.**
 
 키 규칙: `nms_{프로필이름}{항목}`
 
@@ -639,8 +636,12 @@ data/basics/                       한글 기초 이미지
 | `practice_session` | id, unit, q_index, current_player, status, raised_hands, updated_at | ❌ |
 | `app_passwords` | role, hash, updated_at | ❌ (RLS `no_direct_access` = false + **2026-08-05 GRANT도 회수**) |
 | `songs` | id, tab, title, thumb, url, sort_order | ❌ (RLS on, 정책 0개) · **GRANT는 남아 있음** — `halmoni_kinder.html`이 아직 직접 부르지만 RLS가 막아 결과가 비어 옵니다 |
+| `progress` | member_name, profile, data jsonb, updated_at | ❌ (RPC 전용) |
+| `bookmarks` | id, member_name, item_type('vocab'/'grammar'), item_key, item_data jsonb, created_at, unique(member_name,item_type,item_key) | ❌ (RLS on + anon·authenticated REVOKE, RPC 전용) |
 
 **anon이 직접 읽거나 쓸 수 있는 테이블은 하나도 없습니다.** 검증 완료.
+
+> ⚠️ **이 표는 2026-08-02 실측 기준입니다.** 이후 Level 3-6 서버 게이팅(`nhs_content`/`nhs_get_episode`), 진도 동기화(`progress`), 색인 북마크(`bookmarks`) 등이 추가됐고 여기 다 반영하진 못했습니다 — 전체를 다시 실측해서 갱신할 필요가 있습니다. 방금 추가한 두 줄(`progress`·`bookmarks`)만 2-12 작성 중 확인한 것입니다.
 
 > ⚠️ `.from('members').update(...)` 같은 **직접 호출은 전부 조용히 실패합니다.** 반드시 아래 RPC를 쓰세요.
 > ~~`members`의 `public read members` 정책~~ → ✅ **2026-08-05 삭제**(GRANT가 없어 무력했지만 오해를 부르는 잔재였음). 이제 `members`의 정책은 0개입니다.
@@ -666,6 +667,8 @@ data/basics/                       한글 기초 이미지
 | | `class_add_student(teacher, pin, name)` · `class_remove_student` | teacher PIN |
 | Kids 실시간 | `practice_state(code)` · `practice_nominate` · `practice_hand` · `practice_status` · `practice_next` | 반 코드 |
 | 게시판 | `board_list(token)` · `board_add` · `board_reply`(댓글 추가) · `board_reply_delete` · `board_delete` · `board_pin` | **세션 토큰** |
+| 진도 동기화 | `progress_push(token, profile, data)` · `progress_pull(token)` | **세션 토큰** |
+| 색인 북마크 | `bookmark_toggle(token, type, key, data)` · `bookmark_list(token)` | **세션 토큰** (student/teacher/admin만 통과 — trial·guest는 서버에서 거부) |
 | 유지보수 | `clear_attendance_data(admin_pw, date?)` · `reset_session_data(admin_pw)` | admin |
 
 **내부 전용 (anon EXECUTE 차단됨 — 절대 권한을 주지 말 것)**
@@ -849,6 +852,33 @@ const sb = HQ_SUPABASE.client();   // supabase-js가 아직 없으면 null
 
 ---
 
+## 2-12. 복습·SRS 메카니즘 (2026-08-31)
+
+학습자가 "다시 보기"를 하는 경로가 여러 개(nhs.html 안에서만 4개 + 모바일 2개)이고 서로 겹치거나 연결되는 지점이 많아, 헷갈리지 않도록 여기 정리합니다. **함수명·구현 세부는 저장소 루트의 `어휘문법_복습메카니즘_총정리.md`가 더 자세히 다루고, 여기는 구조만.**
+
+| 기능 | 위치 | 콘텐츠 범위 | 저장 | 서버 동기화 |
+|---|---|---|---|---|
+| 🔥 빠른 복습 | nhs.html, 편 열 때 자동 | 직전 편 어휘 3문제 | 없음 — 세션 안에서만 | ❌ |
+| 🔁 레벨 복습 · 어휘 | nhs.html 사이드바 | 그 레벨 12편 전체 어휘, 최대 30문제 | `nms_{프로필}_srs` (플래시카드와 공유) | ✅ |
+| 🔁 레벨 복습 · 문법 | 〃 | 그 레벨 문법 + 색인 북마크 | `nms_{프로필}_srs_gram` | ✅ |
+| 🃏 플래시카드 | nhs.html 사이드바 | 1~현재 레벨 전체 어휘 + 어휘 북마크 | `nms_{프로필}_srs` | ✅ |
+| 🔖 색인 북마크 | nhs.html 색인 모달 | 사용자가 고른 어휘/문법 | Supabase `bookmarks` (계정 귀속) | ✅ (그 자체가 서버 저장) |
+| 📱 모바일 단어 SRS | dr-mobile.html | 웹과 같은 어휘 풀 | `nms_{프로필}_srs` (웹과 저장소 공유) | ✅ |
+| 📱 모바일 경어법 SRS | dr-mobile.html | 존댓말/반말 문법 14개 고정 | `nms_{프로필}_srs_gram` (웹과 저장소 공유) | ✅ |
+
+**핵심 메카니즘 — Leitner 상자 SRS**: 상자 1~5, 맞히면 +1(간격 1→3→7→16→35일), 틀리면 무조건 1(내일 재시험). 어휘용(`_srs`)과 문법용(`_srs_gram`) 두 저장소가 완전히 분리돼 있지만 알고리즘은 동일. 저장 키 `nms_{프로필}_srs*` — **웹과 모바일이 이름이 같은 키를 써서** 같은 계정으로 로그인하면 기기를 넘나들며 상자·복습일이 합쳐집니다.
+
+**서버 동기화 규칙 (`progress_push`/`progress_pull`, 정식 회원+trial만)**:
+- 절대 덮어쓰지 않고 **합치기만** 합니다 — 배열 키는 합집합, 객체 키(상자 맵)는 항목별 병합(로컬 우선).
+- push는 변경 3초 뒤 디바운스, pull은 앱을 열 때 1회(웹·모바일 둘 다, 2026-08-31부터 모바일도 pull 지원).
+- **guest만 제외**됩니다. 게스트 계정은 여럿이 같이 쓰므로 계정에 진도를 묶지 않습니다.
+
+**🔖 색인 북마크가 복습 큐에 꽂히는 방식**: 어휘 북마크는 플래시카드가 열릴 때, 문법 북마크는 레벨 복습의 "문법 모아보기" 탭이 열릴 때 각각 그 SRS 풀에 합류합니다(레벨 필터와 무관하게 항상 포함). 카드 id를 북마크 키(`에피소드::id`)와 똑같이 맞춰서 두 기능이 자연스럽게 연결됩니다.
+
+**알려진 한계**: 빠른 복습은 의도적으로 완전히 휘발성(세션마다 초기화, SRS 미기록) — 가벼운 준비운동으로 설계된 것이라 문제는 아니지만, 여기도 SRS에 반영할지는 선생님 판단 필요.
+
+---
+
 ## 📎 참고 문서
 
 | 문서 | 내용 |
@@ -861,8 +891,9 @@ const sb = HQ_SUPABASE.client();   // supabase-js가 아직 없으면 null
 | `docs/MOBILE_*.md` | 모바일 전략 3종 |
 | `TOPIK_문항유형_Quiz·RealLife_가이드.md` | 문항 유형 가이드 |
 | `마감테스트_듣기_녹음스크립트.md` | 마감테스트 듣기 녹음용 대본 |
+| `어휘문법_복습메카니즘_총정리.md` | 복습·SRS 6개 메카니즘의 함수명·데이터 흐름까지 자세한 버전 (2-12의 원본) |
 | `core/README.md` | core 모듈 설명 |
 
 ---
 
-*이 문서는 2026-08-02에 실제 파일과 Supabase DB를 직접 조회해 작성했고, 2026-08-05에 로그인·회원 관리 개편을 반영했습니다. 구조를 바꾸는 작업을 했다면 해당 절을 함께 갱신하세요.*
+*이 문서는 2026-08-02에 실제 파일과 Supabase DB를 직접 조회해 작성했고, 2026-08-05에 로그인·회원 관리 개편을, 2026-08-31에 복습·SRS 메카니즘(2-12)을 반영했습니다. 2-6 DB 레퍼런스는 2026-08-02 이후 추가된 기능(Level 3-6 서버 게이팅 등)을 전부 담진 못했습니다 — 구조를 바꾸는 작업을 했다면 해당 절을 함께 갱신하세요.*
