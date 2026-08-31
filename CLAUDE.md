@@ -7,13 +7,26 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🔄🙏 **2026-08-31 완료 (dr-mobile.html — 진도 pull 추가 / nhs.html — 웹 문법 SRS 도입)**
+> — 선생님 지시: "1. 체험판 유저 이상은 모바일 앱도 서버 진도를 받아오게 하고, 2. 웹도 모바일앱의 문법 전용 SRS 도입해서 복습 사이클에 연결하자." — 어휘·문법 복습 메카니즘 총정리 문서에서 발견한 두 한계(모바일 push-only, 웹에 문법 SRS 없음)를 선생님이 둘 다 고치자고 확정.
+> **1) dr-mobile.html — 진도 내려받기(pull) 추가**
+> — 지금까지 모바일은 진도를 서버에 올리기(push)만 하고 받아오지(pull) 않아서, 새 기기에서 앱을 열면 웹에서 쌓은 진도가 로그인 전까지는 안 보였음(서버엔 있는데 화면엔 안 뜸). 웹의 `_progPullNow()`와 완전히 같은 규칙으로 `_progPullNow()`를 모바일에도 추가(raw fetch 스타일로, 모바일이 supabase-js 대신 REST를 직접 쓰는 기존 관례 그대로) — 절대 덮어쓰지 않고 합치기만 함(배열은 합집합, 객체는 로컬 우선 병합). 앱을 열면 1초 후 pull, 4초 후 push(기존과 동일 타이밍, pull이 먼저).
+> — `_progUser()`가 그동안 student/teacher/admin만 허용하고 trial을 빼먹고 있었음(웹은 이미 2026-08-30에 trial 포함하도록 고쳐져 있었는데 모바일은 안 됨) — "체험판 유저 이상"이라는 선생님 지시에 맞춰 trial도 포함하도록 수정(게스트만 제외).
+> **2) nhs.html — 웹 문법 SRS 신설 → Level 복습 "문법 모아보기" 자리로 이전**
+> — 모바일 앱엔 이미 "경어법 복습"이라는 문법 전용 SRS(상자 1~5, `_srs_gram`)가 있었지만 존댓말 14개 항목만 다루는 좁은 세트였고, 웹엔 문법 복습 개념 자체가 없었음(색인에서 문법을 북마크해도 어디로도 이어지지 않았음). 같은 메카니즘(상자·SRS_GAP)을 웹 문법 콘텐츠로 확장해서 이식.
+> — 처음엔 사이드바에 "🙏 문법 복습" 버튼으로 독립 모달을 만들었는데, 선생님이 "Level() 복습의 '문법 모아보기'로 옮기자 — 모아보기는 색인과 기능이 완전히 중복 된다"고 지적. 실제로 그 탭은 편별 요약+"자세히 보기" 링크만 보여줘서 색인 문법 탭과 하는 일이 똑같았음 → 사이드바 버튼·모달을 없애고, **Level 복습 → "📖 문법 모아보기" 탭 자리에 이 SRS 복습을 대신 넣음**(`_lvrBuildGramDeck()`). 이제 그 탭을 열면 이 레벨(ep01~12) 문법을 카드 앞/뒤로 뒤집으며 복습하는 화면이 뜸(플래시카드와 같은 UI 컴포넌트 재사용, 타이핑 연습만 뺌). 페이지네이션 방식이던 예전 코드(`_lvrGramShortDesc`/`_lvrGramGoPage`/`LVR_GRAM_EPS_PER_PAGE`)는 제거.
+> — 색인에서 문법을 북마크하면 레벨과 무관하게 이 복습 큐에 자동으로 들어옴(플래시카드가 어휘 북마크를 흡수하는 것과 같은 방식) — 카드 id를 색인 북마크 키(`에피소드::id`)와 똑같이 맞춰서 두 기능이 자연스럽게 연결됨.
+> — 저장 키는 `nms_{프로필}_srs_gram` — **모바일과 이름이 완전히 같아서**, 오늘 추가한 진도 동기화(push/pull)로 웹·모바일 양쪽 문법 SRS 진도가 기기를 넘나들며 합쳐짐(PROG_KEYS 양쪽 다 `_srs_gram` 포함 확인).
+> — ✅ **검증**: `nhs.html`/`dr-mobile.html` 둘 다 null byte 0, `</html>` 1개, 인라인 `<script>` 블록 전부 `node --check` 통과. 사이드바 버튼·모달 제거 후 `gsrs-*`/`openGrammarReview`/`_lvrGramPage` 등 옛 참조가 하나도 안 남았는지 grep으로 확인. `git diff` 리뷰 완료.
+> — ⏳ **git add/commit/push 대기 중**(선생님이 직접 커밋).
+
 > 🔖 **2026-08-31 완료 (nhs.html — 색인 어휘·문법 북마크 기능, 정식 멤버 전용)**
 > — 선생님 아이디어: "웹에 콘텐츠가 워낙 탄탄하니 이걸 활용한 기능을 만들자 — 색인의 어휘·문법 탭에 북마크를 넣고, 색인에서 북마크만 필터링할 수 있게. 서버 부담 때문에 정식 멤버(student/teacher/admin)에게만."
 > — Supabase `bookmarks` 테이블 신설(member_name/item_type/item_key/item_data jsonb, RLS enabled + anon·authenticated revoke — `has_table_privilege`/`set local role anon`으로 직접 접근 차단 확인) + `bookmark_toggle`/`bookmark_list` RPC 2개. `nhs_get_episode`와 동일하게 `_session_member(p_token)`으로 세션 검증 후 role이 student/teacher/admin일 때만 통과(trial·guest는 서버에서 거부).
 > — 색인(📖) 모달: 어휘·문법 각 행에 🔖 토글 버튼(정식 멤버에게만 노출) + 검색창 아래 "🔖 즐겨찾기만 보기" 필터 버튼 신설. 어휘 키는 `ep+한국어단어`, 문법 키는 `ep+g.id(없으면 title)` 조합.
 > — My Notes에도 북마크 탭을 만들어 봤으나 목록 로딩이 제대로 안 되는 문제가 있었음 — 선생님이 "너무 에너지 낭비하지 말고 색인에만 있어도 된다"고 정리 → My Notes 쪽 추가분(`core/my-notes.js`의 탭·패널·`nmsRenderBookmarks()`)은 전부 되돌리고 **색인 기능만 유지**.
 > — ✅ **검증**: `nhs.html`/`core/nhs.css`/`core/my-notes.js` 전부 `node --check` 통과, null byte 0, `</html>` 1개. Supabase RLS 방어 쿼리로 확인. 선생님이 라이브 스크린샷으로 색인 🔖 버튼·필터 직접 확인 완료.
-> — ⏳ `core/my-notes.js` 되돌린 커밋 **git add/commit/push 대기 중**(선생님이 직접 커밋) — 나머지(`nhs.html`/`core/nhs.css`)는 이미 반영됨.
+> — ✅ `core/my-notes.js` 되돌린 커밋 포함 전부 커밋·푸시 완료(선생님 확인).
 
 > 👥 **2026-08-29 완료 (admin.html — 회원 관리 표에 "새 회원 등록" 버튼 신설)**
 > — 선생님 질문: "admin 화면에서 회원 등록하는 옵션은 없나 봐? 아이디+패스워드로 등록하면 admin이 회원 등급을 조정하는 2 단계로 해야 돼?"

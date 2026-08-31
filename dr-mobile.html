@@ -822,7 +822,7 @@ function _progUser(){
     const u = JSON.parse(localStorage.getItem('hq_user')
                       || sessionStorage.getItem('hq_user') || 'null');
     if(!u || !u.token) return null;
-    if(['student','teacher','admin'].indexOf(u.role) < 0) return null;
+    if(['student','teacher','admin','trial'].indexOf(u.role) < 0) return null;  // 게스트만 제외 (트라이얼도 서버 동기화 — 2026-08-31)
     return u;
   }catch(e){ return null; }
 }
@@ -835,6 +835,45 @@ function _progCollect(p){
   });
   return out;
 }
+/* 🔄 진도 내려받기 (2026-08-31) — 웹(nhs.html)의 _progPullNow와 같은 규칙.
+   절대 덮어쓰지 않고 "합치기"만 합니다(배열은 합집합, 객체는 로컬 우선 병합). */
+function _progPullNow(){
+  try{
+    const u = _progUser();   if(!u) return;
+    const own = _sProfile();
+    if(own !== '@' + u.name) return;   // 진도의 주인이 이 계정일 때만
+    const cfg = window.HQ_SUPABASE; if(!cfg) return;
+    fetch(cfg.URL + '/rest/v1/rpc/progress_pull', {
+      method : 'POST',
+      headers: { 'Content-Type':'application/json',
+                 'apikey': cfg.KEY, 'Authorization': 'Bearer ' + cfg.KEY },
+      body   : JSON.stringify({ p_token:u.token })
+    }).then(function(r){ return r.json(); }).then(function(res){
+      const remoteAll = res && res.data;
+      if(!res || res.error || !remoteAll) return;   // 서버에 저장된 진도 없음 — 조용히 종료
+      PROG_KEYS.forEach(function(k){
+        const remote = remoteAll[k];
+        if(remote === undefined || remote === null) return;
+        const raw = localStorage.getItem('nms_'+own+k);
+        let local = null;
+        try{ local = raw===null ? null : JSON.parse(raw); }catch(e){ local = null; }
+        if(Array.isArray(remote)){
+          const merged = Array.from(new Set([...(Array.isArray(local)?local:[]), ...remote]));
+          localStorage.setItem('nms_'+own+k, JSON.stringify(merged));
+        }else if(typeof remote === 'object'){
+          const merged = Object.assign({}, remote, (local && typeof local==='object')?local:{});
+          localStorage.setItem('nms_'+own+k, JSON.stringify(merged));
+        }else if(local === null){
+          localStorage.setItem('nms_'+own+k, JSON.stringify(remote));
+        }
+      });
+      try{ renderHome(); }catch(e){}
+    }).catch(function(){ /* 조용히 무시 */ });
+  }catch(e){ /* 조용히 무시 */ }
+}
+// 로그인한 채로 앱을 열면, 서버 진도를 먼저 받아 로컬과 합칩니다(기기 이동 대비)
+setTimeout(_progPullNow, 1000);
+
 function _progPush(){
   if(_progTimer) clearTimeout(_progTimer);
   _progTimer = setTimeout(_progPushNow, 3000);

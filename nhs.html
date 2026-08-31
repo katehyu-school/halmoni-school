@@ -1716,13 +1716,11 @@ function grammarCardHtml(g){
 //   새 콘텐츠 제작 없이 기존 데이터만 재사용합니다.
 //   · 어휘: 레벨 전체(ep01~ep12) 단어로 자동 객관식 퀴즈를 만들고,
 //     결과는 플래시카드와 같은 SRS 저장소(_fcMark)에 기록됩니다.
-//   · 문법: 편별로 제목+한두줄 요약만 모아 보여주고, 전체 카드는 "자세히 보기"로 그 편에서 확인.
+//   · 문법: 이 레벨 문법 + 색인 북마크를 문법 SRS 복습 카드로(2026-08-31, _lvrBuildGramDeck).
 // ══════════════════════════════════════════════════════
 let _lvrLv='L1',_lvrNum=1,_lvrTab='vocab';
 let _lvrVocabPool=[],_lvrGrammarByEp=[];
 let _lvrQueue=[],_lvrQIdx=0,_lvrScore=0,_lvrAnswered=false,_lvrCur=null,_lvrDir=true,_lvrCurOpts=[],_lvrCurCorrect=0;
-let _lvrGramPage=0;
-const LVR_GRAM_EPS_PER_PAGE=3;
 
 async function loadLevelReview(lvNum){
   document.querySelectorAll('.ep-item,.lt-item').forEach(el=>el.classList.remove('active'));
@@ -1802,7 +1800,7 @@ async function loadLevelReview(lvNum){
     }
   });
   gramByEp.sort((a,b)=>eps.indexOf(a.ep)-eps.indexOf(b.ep));
-  _lvrVocabPool=vocab; _lvrGrammarByEp=gramByEp; _lvrGramPage=0;
+  _lvrVocabPool=vocab; _lvrGrammarByEp=gramByEp;
   document.getElementById('content-area').innerHTML=_lvrRenderShell();
   _lvrBuildQueue();
   _lvrRenderVocab();
@@ -1954,56 +1952,17 @@ function _lvrRenderVocabDone(){
     +`</div>`;
 }
 
-// ── 문법 모아보기 — 한두줄 요약만 보여주고, 전체 카드는 "자세히 보기"로 해당 편에서 확인 ──
-//   (2026-08-24: 처음엔 grammarCardHtml() 전체를 다 모아 보여줬는데, 한 레벨 12편 분량을
-//    한 화면에 쏟아내니 학습자가 질릴 정도로 많아서 요약+링크+페이지네이션 방식으로 변경)
-function _lvrGramShortDesc(g){
-  const t=(g.explanation_en||'').trim();
-  if(!t) return g.pattern?esc(g.pattern):'';
-  const sentences=t.match(/[^.!?]+[.!?]+(\s|$)/g)||[t];
-  let out=sentences.slice(0,2).join('').trim();
-  if(out.length>160) out=out.slice(0,157).trim()+'…';
-  return esc(out);
-}
+// ── 문법 모아보기 → 문법 SRS 복습 (2026-08-31) ──
+//   예전엔 편별 요약 + "자세히 보기" 링크만 보여줬는데, 이게 색인(Index)
+//   문법 탭과 완전히 겹쳐서(둘 다 요약+링크) 이 자리에 SRS 복습 카드를
+//   넣었습니다. 실제 카드 풀 구성·렌더링은 _lvrBuildGramDeck()/_renderGS().
 function _lvrRenderGrammar(){
   const body=document.getElementById('lvr-body'); if(!body)return;
   if(!_lvrGrammarByEp.length){
     body.innerHTML=`<div style="text-align:center;padding:40px 20px;color:var(--warm-500);">이 레벨에는 아직 문법 카드가 없어요.</div>`;
     return;
   }
-  const totalPages=Math.max(1,Math.ceil(_lvrGrammarByEp.length/LVR_GRAM_EPS_PER_PAGE));
-  if(_lvrGramPage>=totalPages)_lvrGramPage=totalPages-1;
-  if(_lvrGramPage<0)_lvrGramPage=0;
-  const pageEps=_lvrGrammarByEp.slice(_lvrGramPage*LVR_GRAM_EPS_PER_PAGE,(_lvrGramPage+1)*LVR_GRAM_EPS_PER_PAGE);
-  const rows=pageEps.map(({ep,grammar})=>{
-    const epKey=_lvrLv+'_'+ep.id;
-    return `<div class="idx-section-hdr">${esc(ep.label||ep.id)} · ${ep.id.toUpperCase()}</div>`
-      +grammar.map(g=>`
-        <div class="idx-gram-row">
-          <div style="display:flex;align-items:flex-start;gap:8px">
-            <span style="font-size:16px">${esc(g.emoji||'📌')}</span>
-            <div style="flex:1;min-width:0">
-              <div class="idx-gram-title">${esc(g.title||'')}</div>
-              <div style="font-size:13px;color:var(--warm-500);margin-top:2px;line-height:1.5">${_lvrGramShortDesc(g)}</div>
-            </div>
-            <span class="idx-ep-badge" style="cursor:pointer;white-space:nowrap" onclick="loadEpAndTab('${escA(epKey)}','grammar')">자세히 보기 →</span>
-          </div>
-        </div>`).join('');
-  }).join('');
-  const pagerHtml=totalPages>1
-    ?`<div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;">`
-      +`<button class="lt-opt" style="padding:7px 16px;${_lvrGramPage===0?'opacity:.4;cursor:default;':''}" ${_lvrGramPage===0?'disabled':''} onclick="_lvrGramGoPage(-1)">← 이전</button>`
-      +`<span style="font-size:12.5px;font-weight:700;color:var(--warm-600)">${_lvrGramPage+1} / ${totalPages}</span>`
-      +`<button class="lt-opt" style="padding:7px 16px;${_lvrGramPage===totalPages-1?'opacity:.4;cursor:default;':''}" ${_lvrGramPage===totalPages-1?'disabled':''} onclick="_lvrGramGoPage(1)">다음 →</button>`
-      +`</div>`
-    :'';
-  body.innerHTML=rows+pagerHtml;
-}
-function _lvrGramGoPage(delta){
-  _lvrGramPage+=delta;
-  _lvrRenderGrammar();
-  const body=document.getElementById('lvr-body');
-  if(body)body.scrollIntoView({behavior:'smooth',block:'start'});
+  _lvrBuildGramDeck();
 }
 
 // ── FILL IN THE BLANKS CHECK ───────────────────────────
@@ -3797,7 +3756,7 @@ function _nmsProfile(){ return localStorage.getItem('nms_current')||''; }
 // 진도(계정에 붙음) — 노트·색·아바타·작문은 여기 없습니다. 그건 My Notes 것.
 // ⚠️ 새 진도 키를 만들면 여기에도 추가할 것
 const PROG_KEYS = ['_ep_done','_ep_star','_sc','_prog',
-                   '_srs','_fc_review','_fc_known'];
+                   '_srs','_fc_review','_fc_known','_srs_gram'];
 let _progTimer = null;
 
 function _progUser(){
@@ -4072,6 +4031,31 @@ function _srsUpdateBadge(){
   el.style.color=n?'var(--coral)':'';
 }
 
+/* ── 🙏 문법 SRS (2026-08-31) ─────────────────────────────
+   모바일 앱의 경어법 SRS(_srs_gram, 상자 1~5)와 같은 메카니즘을
+   웹 전체 문법 콘텐츠로 확장했습니다. 단어 SRS(_srs)와는 완전히
+   분리된 저장소(nms_{프로필}_srs_gram)를 쓰지만, 모바일과 키
+   이름이 같아서 진도 동기화(progress_push/pull)로 기기 간에도
+   상자·복습일이 합쳐집니다.
+   카드 id는 색인 🔖 북마크 키와 같은 규칙(에피소드::id) —
+   문법을 북마크하면 그대로 이 복습 큐에 들어옵니다. */
+function _gsrsId(g){ return g._gid || ((g.ep||'')+'::'+(g.id||g.title||'')); }
+function _gsrsKey(){ const p=_progOwner(); return p?('nms_'+p+'_srs_gram'):''; }
+function _gsrsMap(){
+  const k=_gsrsKey(); if(!k) return {};
+  try{ const raw=localStorage.getItem(k); return raw?JSON.parse(raw):{}; }catch(e){ return {}; }
+}
+function _gsrsSave(m){ const k=_gsrsKey(); if(!k)return; try{ localStorage.setItem(k,JSON.stringify(m)); _progPush(); }catch(e){} }
+function _gsrsUpdate(id,ok){
+  const m=_gsrsMap(), cur=m[id]||{b:1,due:_srsToday()};
+  const b=ok?Math.min((cur.b||1)+1,5):1;
+  m[id]={b:b,due:_srsPlus(SRS_GAP[b])};
+  _gsrsSave(m);
+}
+function _gsrsDueCount(){
+  const m=_gsrsMap(), t=_srsToday();
+  return Object.keys(m).filter(id=>(m[id].due||'')<=t).length;
+}
 let _fcAllCards=[],_fcCards=[],_fcEps=[],_fcLevels=[],_fcCurNum=1,_fcIdx=0,_fcFlipped=false;
 let _fcFilter=new Set(); // empty = all episodes
 
@@ -4309,6 +4293,136 @@ function _renderFC(){
     +'<button onclick="_fcPrev()" '+(prevDis?'disabled':'')+' style="'+btnStyle(prevDis,false)+'">← 이전</button>'
     +'<div style="font-size:12px;color:var(--warm-400);">'+(total>1?'카드 '+(_fcIdx+1):'')+'</div>'
     +'<button onclick="_fcNext()" '+(nextDis?'disabled':'')+' style="'+btnStyle(nextDis,true)+'">다음 →</button>'
+    +'</div>';
+}
+
+/* ═══════════════════════════════════════════════════
+   🙏 문법 복습 SRS (2026-08-31, 2026-08-31 Level 복습으로 이전)
+   모바일 앱 경어법 SRS(상자 1~5)와 같은 메카니즘. 처음엔 사이드바
+   전용 버튼으로 만들었는데, 이 레벨 문법을 그냥 훑어보기만 하던
+   "문법 모아보기" 탭이 색인(Index) 문법 탭과 기능이 완전히 겹쳐서
+   (둘 다 편별 요약 + "자세히 보기" 링크) — 그 탭 자리에 SRS 복습을
+   넣어 중복을 없앴습니다. 이 레벨(ep01~12) 문법 + 색인에서
+   북마크한 문법(레벨 무관, 플래시카드와 같은 방식)이 카드 풀이 됨.
+   카드 id는 색인 🔖 북마크 키와 같은 규칙(에피소드::id)이라 북마크
+   토글이 그대로 이 복습 큐에 연결됩니다. 저장 키(_srs_gram)는
+   모바일과 이름이 같아서 진도 동기화로 기기 간에도 합쳐집니다.
+   ═══════════════════════════════════════════════════ */
+let _gsCards=[],_gsIdx=0,_gsFlipped=false;
+
+async function _lvrBuildGramDeck(){
+  const body=document.getElementById('lvr-body');
+  if(body) body.innerHTML='<div style="text-align:center;padding:40px 20px;"><div style="font-size:32px;margin-bottom:10px;">⏳</div><div style="font-size:14px;color:var(--warm-600);">문법 카드 불러오는 중...</div></div>';
+  const cards=[];
+  _lvrGrammarByEp.forEach(({ep,grammar})=>{
+    const epKey=_lvrLv+'_'+ep.id;
+    (grammar||[]).forEach(g=>{
+      if(!g.title)return;
+      cards.push(Object.assign({},g,{ep:epKey,epTitle:ep.label||ep.id||''}));
+    });
+  });
+  // 🔖 북마크한 문법도 레벨과 무관하게 항상 포함 — 처음 등장하는 북마크는
+  // 오늘 바로 복습 큐에 뜨도록 시딩(플래시카드 북마크와 같은 방식).
+  if(NHS_IS_MEMBER){
+    await _loadBookmarks();
+    const existingIds=new Set(cards.map(_gsrsId));
+    const newBmCards=[];
+    Object.entries(_idxBmDataCache||{}).forEach(([k,d])=>{
+      if(!k.startsWith('grammar::')||!_bmKeys.has(k))return;
+      if(!d||!d.title)return;
+      const gid=k.slice('grammar::'.length); // 색인 북마크와 같은 키(에피소드::id)
+      if(existingIds.has(gid))return;
+      existingIds.add(gid);
+      newBmCards.push({_gid:gid,title:d.title,explanation_en:d.explanation_en||'',icon:d.icon||'📌',ep:d.ep||'',epTitle:d.epTitle||''});
+    });
+    if(newBmCards.length){
+      cards.push(...newBmCards);
+      const m=_gsrsMap(); const today=_srsToday(); let changed=false;
+      newBmCards.forEach(c=>{ const id=_gsrsId(c); if(!m[id]){ m[id]={b:1,due:today}; changed=true; } });
+      if(changed) _gsrsSave(m);
+    }
+  }
+  _gsBuildDeckFrom(cards);
+}
+
+function _gsBuildDeckFrom(pool){
+  const CAP=20;
+  const m=_gsrsMap(), today=_srsToday();
+  // ① 오늘 복습할 카드 (낮은 상자부터)
+  const due=pool.filter(c=>{const st=m[_gsrsId(c)];return st&&(st.due||'')<=today;});
+  const deck=shuffleArr(due).sort((a,b)=>(m[_gsrsId(a)].b||1)-(m[_gsrsId(b)].b||1)).slice(0,CAP);
+  // ② 남는 자리는 아직 한 번도 안 본 카드로
+  if(deck.length<CAP){
+    const fresh=pool.filter(c=>!m[_gsrsId(c)]);
+    deck.push(...shuffleArr(fresh).slice(0,CAP-deck.length));
+  }
+  // ③ 그래도 모자라면 복습일이 안 된 카드로 채움
+  if(deck.length<CAP){
+    const inDeck=new Set(deck.map(_gsrsId));
+    const later=pool.filter(c=>!inDeck.has(_gsrsId(c)));
+    deck.push(...shuffleArr(later).slice(0,CAP-deck.length));
+  }
+  _gsCards=deck; _gsIdx=0; _gsFlipped=false; _renderGS();
+}
+
+function _gsFlip(){
+  _gsFlipped=!_gsFlipped;
+  const c=document.getElementById('gs-card-inner');
+  if(c) c.classList.toggle('flipped',_gsFlipped);
+}
+function _gsPrev(){ if(_gsIdx>0){_gsIdx--;_gsFlipped=false;_renderGS();} }
+function _gsNext(){ if(_gsIdx<_gsCards.length-1){_gsIdx++;_gsFlipped=false;_renderGS();} }
+function _gsMarkAndNext(ok){
+  _gsrsUpdate(_gsrsId(_gsCards[_gsIdx]), ok);
+  if(_gsIdx<_gsCards.length-1){_gsIdx++;_gsFlipped=false;_renderGS();}
+  else{ _lvrBuildGramDeck(); }
+}
+
+function _renderGS(){
+  const m=document.getElementById('lvr-body'); if(!m)return;
+  if(!_gsCards.length){
+    m.innerHTML='<div style="text-align:center;padding:40px 20px;color:var(--warm-600);">🎉 오늘 복습할 문법이 없어요<br><span style="font-size:12px;color:var(--warm-400)">색인에서 문법을 북마크하면 여기 복습 큐에 들어와요.</span></div>';
+    return;
+  }
+  const c=_gsCards[_gsIdx], total=_gsCards.length, gid=_gsrsId(c);
+  const _st=_gsrsMap()[gid];
+  const _cardBadge=_st
+    ?('<span class="fc-card-badge '+(_st.b<=2?'fc-badge-review':'fc-badge-known')+'" title="다음 복습: '+esc(_st.due||'')+'">'+(_st.b<=2?'🔄':'✅')+' 상자 '+_st.b+'/5</span>')
+    :'<span class="fc-card-badge" style="background:var(--warm-100);color:var(--warm-500)">🆕 처음</span>';
+  const pct=total>1?Math.round((_gsIdx/(total-1))*100):100;
+  const prevDis=_gsIdx===0,nextDis=_gsIdx===total-1;
+  const btnStyle=(dis,active)=>
+    `padding:12px 22px;border:2px solid ${dis?'var(--gray-100)':active?'var(--teal)':'var(--gray-200)'};border-radius:12px;background:${active&&!dis?'var(--teal)':'#fff'};font-size:15px;cursor:${dis?'default':'pointer'};color:${dis?'var(--gray-300)':active?'#fff':'var(--gray-700)'};font-weight:700;transition:all 0.15s;`;
+  const ex=(c.examples&&c.examples[0])?c.examples[0]:null;
+  m.innerHTML='<div style="font-size:12.5px;color:var(--warm-500);margin-bottom:14px;">이 레벨 문법 + 색인 🔖 북마크한 문법을 상자(SRS)로 복습해요. 카드를 탭해서 뒤집으세요.</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">'
+    +'<div style="font-size:12px;color:var(--warm-500);">'+(_gsIdx+1)+' / '+total+' 카드</div>'
+    +'<div style="width:120px;height:5px;background:var(--gray-100);border-radius:3px;"><div style="height:100%;width:'+pct+'%;background:var(--teal);border-radius:3px;transition:width 0.3s;"></div></div>'
+    +'</div>'
+    +'<div class="fc-scene" onclick="_gsFlip()">'
+    +'<div class="fc-card" id="gs-card-inner">'
+    +'<div class="fc-face fc-front">'
+    +_cardBadge
+    +'<div style="font-size:34px;margin-bottom:10px;">'+esc(c.icon||'📌')+'</div>'
+    +'<div style="font-size:19px;font-weight:800;color:var(--gray-900);letter-spacing:-0.3px;line-height:1.4;">'+esc(c.title||'')+'</div>'
+    +(c.rule?'<div style="font-size:12.5px;color:var(--teal);margin-top:10px;">📐 '+esc(c.rule)+'</div>':'')
+    +'<div style="font-size:12px;color:var(--teal);margin-top:14px;opacity:0.7;">👆 탭해서 뒤집기</div>'
+    +'</div>'
+    +'<div class="fc-face fc-back">'
+    +'<div style="font-size:15px;color:var(--gray-900);line-height:1.6;max-width:290px;">'+esc(c.explanation_en||c.explanation||'')+'</div>'
+    +(ex?'<div style="margin-top:12px;font-size:13.5px;color:var(--teal-dark);border-top:1px solid var(--gray-100);padding-top:10px;">📝 '+esc(ex.ko||'')+(ex.en?'<div style="font-size:12px;color:var(--warm-500);margin-top:2px;">'+esc(ex.en)+'</div>':'')+'</div>':'')
+    +'<div style="margin-top:10px;font-size:11px;color:var(--warm-400);">📺 '+esc(c.epTitle||c.ep||'')+'</div>'
+    +'</div>'
+    +'</div>'
+    +'</div>'
+    +'<div class="fc-srs-row">'
+    +'<button class="fc-srs-btn fc-srs-no" onclick="_gsMarkAndNext(false)">❓ 다시 볼게요</button>'
+    +'<button class="fc-srs-btn fc-srs-yes" onclick="_gsMarkAndNext(true)">✅ 알아요!</button>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">'
+    +'<button onclick="_gsPrev()" '+(prevDis?'disabled':'')+' style="'+btnStyle(prevDis,false)+'">← 이전</button>'
+    +'<div style="font-size:12px;color:var(--warm-400);">'+(total>1?'카드 '+(_gsIdx+1):'')+'</div>'
+    +'<button onclick="_gsNext()" '+(nextDis?'disabled':'')+' style="'+btnStyle(nextDis,true)+'">다음 →</button>'
     +'</div>';
 }
 
