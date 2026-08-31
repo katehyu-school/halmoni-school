@@ -507,7 +507,7 @@ function l2tRetry(){
 // ══════════════════════════════════════════════════════
 // ── LEVEL 3 마감 테스트  (TOPIK 3급 / CEFR B1 입구)
 // ══════════════════════════════════════════════════════
-let L3Q=[]; const _l3qReady = fetch('data/nhs/L3/closing_test.json').then(r=>r.json()).then(d=>{L3Q=d;}).catch(e=>{});
+let L3Q=[]; const _l3qReady = _nhsFetchEpisode('L3','closing_test').then(d=>{ if(d) L3Q=d; }).catch(e=>{});
 const l3tEpLabels={ep01:'-(이)나/-ㄹ까',ep02:'-(으)라고',ep03:'-ㅂ니다체',ep04:'-(으)려고',ep05:'-는 바람에',ep06:'아무리~도',ep07:'-(으)려면',ep08:'-군요',ep09:'-(으)면 되다',ep10:'-는 편이다',ep11:'-ㄹ 뻔하다',ep12:'-ㄴ다/는다',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3'};
 
 let l3tIdx=0,l3tScore=0,l3tAnswered=false;
@@ -625,7 +625,7 @@ function l3tRetry(){
 // ══════════════════════════════════════════════════════
 // ── LEVEL 4 마감 테스트  (TOPIK 3-4급 / CEFR B1~B2)
 // ══════════════════════════════════════════════════════
-let L4Q=[]; const _l4qReady = fetch('data/nhs/L4/closing_test.json').then(r=>r.json()).then(d=>{L4Q=d;}).catch(e=>{});
+let L4Q=[]; const _l4qReady = _nhsFetchEpisode('L4','closing_test').then(d=>{ if(d) L4Q=d; }).catch(e=>{});
 const l4tEpLabels={ep01:'-습니다체/-십니까?',ep02:'-ㄹ 리가 없다',ep03:'-기 마련이다',ep04:'-더라고요',ep05:'-는 셈이다',ep06:'-는 탓에',ep07:'-을 정도로',ep08:'-자마자',ep09:'-고서야',ep10:'-는 한',ep11:'-다시피 하다',ep12:'격식체 총정리',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3'};
 
 let l4tIdx=0,l4tScore=0,l4tAnswered=false;
@@ -743,7 +743,7 @@ function l4tRetry(){
 // ══════════════════════════════════════════════════════
 // ── LEVEL 5 마감 테스트  (TOPIK 4급 / CEFR B1~B2)
 // ══════════════════════════════════════════════════════
-let L5Q=[]; const _l5qReady = fetch('data/nhs/L5/closing_test.json').then(r=>r.json()).then(d=>{L5Q=d;}).catch(e=>{});
+let L5Q=[]; const _l5qReady = _nhsFetchEpisode('L5','closing_test').then(d=>{ if(d) L5Q=d; }).catch(e=>{});
 const l5tEpLabels={ep01:'-을 통해서',ep02:'-ㄹ까 봐/-ㄹ 줄이야',ep03:'-ㄹ 수밖에 없다',ep04:'-나 보다',ep05:'-았더니',ep06:'-느라고',ep07:'-지 않을 수 없다',ep08:'-기는커녕/-ㄹ 셈이다',ep09:'-(으)로서',ep10:'-로 미루어 보아',ep11:'-고자',ep12:'-아/어 봤자',read1:'읽기 1',read2:'읽기 2',read3:'읽기 3',read4:'읽기 4'};
 
 let l5tIdx=0,l5tScore=0,l5tAnswered=false;
@@ -861,7 +861,7 @@ function l5tRetry(){
 // ══════════════════════════════════════════════════════
 // ── LEVEL 6 마감 테스트  (TOPIK 5급 입구 / CEFR B2)
 // ══════════════════════════════════════════════════════
-let L6Q=[]; const _l6qReady = fetch('data/nhs/L6/closing_test.json').then(r=>r.json()).then(d=>{L6Q=d;}).catch(e=>{});
+let L6Q=[]; const _l6qReady = _nhsFetchEpisode('L6','closing_test').then(d=>{ if(d) L6Q=d; }).catch(e=>{});
 const l6tEpLabels={ep01:'문어체 -다/ㄴ다',ep02:'간접인용 -다고',ep03:'토론 화법',ep04:'-는 반면(에)',ep05:'논설 연결어',ep06:'직유 -듯이',ep07:'-았/었더니',ep08:'-더니',ep09:'-(이)나마',ep10:'-기에',ep11:'겉말과 속마음',ep12:'감정 어휘',read1:'읽기 · 기사',read2:'읽기 · 논설',read3:'읽기 · 설명문',read4:'읽기 · 안내문',read5:'읽기 · 수필',read6:'읽기 · 도표',blank1:'빈칸 · 접속사',blank2:'빈칸 · 어휘',order1:'문장 순서 배열',sim1:'심정 추론',sim2:'심정 추론'};
 
 let l6tIdx=0,l6tScore=0,l6tAnswered=false;
@@ -1129,9 +1129,9 @@ async function _doLoadEp(epId, level='L1'){
     _localData=EPISODE_DATA[cacheKey];
   } else {
     try{
-      const res=await fetch(`data/nhs/${level}/${epId}.json`);
+      const _d=await _nhsFetchEpisode(level, epId);
       if(_myToken!==_epLoadToken)return; // superseded while fetching
-      if(res.ok){ _localData=await res.json(); _resolveRefs(_localData); EPISODE_DATA[cacheKey]=_localData; }
+      if(_d){ _localData=_d; _resolveRefs(_localData); EPISODE_DATA[cacheKey]=_localData; }
       else _localData=null;
     }catch(e){ _localData=null; }
   }
@@ -1737,7 +1737,7 @@ async function loadLevelReview(lvNum){
     const epKey=_lvrLv+'_'+ep.id;
     let data=EPISODE_DATA[epKey];
     if(!data){
-      try{const r=await fetch('data/nhs/'+_lvrLv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
+      try{const d=await _nhsFetchEpisode(_lvrLv,ep.id);if(d){data=d;_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
     }
     if(!data)return;
     // ── 이 편의 모든 한국어 본문(대사·문법 예문·반말존댓말·Usage·Real life)을 검색 풀로 모아둡니다.
@@ -2485,6 +2485,24 @@ let GLOSSARY_POOL = {}; const _glossReady = fetch('data/nhs/glossary_pool.json')
 let WRITING_POOL = {}; const _wrPoolReady = fetch('data/nhs/writing_pool.json').then(r=>r.json()).then(d=>{WRITING_POOL=d;}).catch(e=>{});
 let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{});
 // 여러 에피소드가 재사용하는 표현 세트({"ref":"set_name"}) 해석 — vocab/usage 배열 안에서 ref 항목을 실제 데이터로 치환
+async function _nhsFetchEpisode(level, epId){
+  if(level==='L1' || level==='L2'){
+    try{ const r=await fetch('data/nhs/'+level+'/'+epId+'.json'); if(r.ok) return await r.json(); }catch(e){}
+    return null;
+  }
+  // Level 3+: 잠긴 콘텐츠 — 정적 JSON 파일 대신, 로그인 토큰을 서버로 보내 검증된
+  // 회원(student/teacher/admin)에게만 내려주는 nhs_get_episode RPC를 통해서만 받아옵니다. (2026-08-31 보안 강화)
+  try{
+    const u=JSON.parse(localStorage.getItem('hq_user')||sessionStorage.getItem('hq_user')||'null');
+    if(!u||!u.token) return null;
+    if(!window.HQ_SUPABASE) return null;
+    const sb=window.HQ_SUPABASE.client();
+    if(!sb) return null;
+    const {data:res,error}=await sb.rpc('nhs_get_episode',{p_token:u.token,p_level:level,p_ep_id:epId});
+    if(error||!res||!res.ok) return null;
+    return res.data;
+  }catch(e){ return null; }
+}
 function _resolveRefs(data){
   if(!data) return data;
   ['vocab','usage'].forEach(key=>{
@@ -3203,32 +3221,32 @@ async function openIndex(){
   await Promise.all([
     ...EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L1_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L1/${ep.id}.json`);if(r.ok)EPISODE_DATA['L1_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+        try{const d=await _nhsFetchEpisode('L1',ep.id);if(d)EPISODE_DATA['L1_'+ep.id]=_resolveRefs(d);}catch(e){}
       }
     }),
     ...L2_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L2_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L2/${ep.id}.json`);if(r.ok)EPISODE_DATA['L2_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+        try{const d=await _nhsFetchEpisode('L2',ep.id);if(d)EPISODE_DATA['L2_'+ep.id]=_resolveRefs(d);}catch(e){}
       }
     }),
     ...L3_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L3_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L3/${ep.id}.json`);if(r.ok)EPISODE_DATA['L3_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+        try{const d=await _nhsFetchEpisode('L3',ep.id);if(d)EPISODE_DATA['L3_'+ep.id]=_resolveRefs(d);}catch(e){}
       }
     }),
     ...L4_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L4_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L4/${ep.id}.json`);if(r.ok)EPISODE_DATA['L4_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+        try{const d=await _nhsFetchEpisode('L4',ep.id);if(d)EPISODE_DATA['L4_'+ep.id]=_resolveRefs(d);}catch(e){}
       }
     }),
     ...L5_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L5_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L5/${ep.id}.json`);if(r.ok)EPISODE_DATA['L5_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+        try{const d=await _nhsFetchEpisode('L5',ep.id);if(d)EPISODE_DATA['L5_'+ep.id]=_resolveRefs(d);}catch(e){}
       }
     }),
     ...L6_EPISODES.map(async ep=>{
       if(!EPISODE_DATA['L6_'+ep.id]){
-        try{const r=await fetch(`data/nhs/L6/${ep.id}.json`);if(r.ok)EPISODE_DATA['L6_'+ep.id]=_resolveRefs(await r.json());}catch(e){}
+        try{const d=await _nhsFetchEpisode('L6',ep.id);if(d)EPISODE_DATA['L6_'+ep.id]=_resolveRefs(d);}catch(e){}
       }
     })
   ]);
@@ -3616,7 +3634,7 @@ async function _buildVocabWarmup(level, epNum){
   await Promise.all(targets.map(async ([lv,ep])=>{
     const epKey=lv+'_'+ep.id;
     let data=EPISODE_DATA[epKey];
-    if(!data){ try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json'); if(r.ok){data=await r.json(); _resolveRefs(data); EPISODE_DATA[epKey]=data;}}catch(e){return;} }
+    if(!data){ try{const d=await _nhsFetchEpisode(lv,ep.id); if(d){data=d; _resolveRefs(data); EPISODE_DATA[epKey]=data;}}catch(e){return;} }
     if(!data||!data.vocab)return;
     data.vocab.forEach(cat=>(cat.items||[]).forEach(it=>{ if(it.korean&&it.english) words.push({korean:it.korean,english:it.english}); }));
   }));
@@ -4013,7 +4031,7 @@ async function openFlashcards(){
       const epKey=lv+'_'+ep.id;
       let data=EPISODE_DATA[epKey];
       if(!data){
-        try{const r=await fetch('data/nhs/'+lv+'/'+ep.id+'.json');if(r.ok){data=await r.json();_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
+        try{const d=await _nhsFetchEpisode(lv,ep.id);if(d){data=d;_resolveRefs(data);EPISODE_DATA[epKey]=data;}}catch(e){return;}
       }
       if(!data||!data.vocab)return;
       data.vocab.forEach(cat=>{
