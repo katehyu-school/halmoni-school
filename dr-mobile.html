@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0a2540">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Doranchae Mobile</title>
@@ -1772,14 +1773,34 @@ async function showEpList(){
   :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
   box.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px">${chips}</div>`+lockNote+list;
 }
+// 2026-08-31: Level 3+는 정적 파일이 아니라 nhs_get_episode RPC로만 받아옵니다
+// (웹의 nhs.html과 동일한 서버측 권한 확인 — 로그인 토큰이 student/teacher/admin일 때만 통과)
+async function _hqmFetchEpisode(lv,pad){
+  if(lv==='L1'||lv==='L2'){
+    const res=await fetch(`data/nhs/${lv}/ep${pad}.json`);
+    if(!res.ok)throw new Error('fetch fail');
+    return await res.json();
+  }
+  const u=_hqmUser();
+  if(!u||!u.token)throw new Error('locked');
+  const cfg=window.HQ_SUPABASE;
+  if(!cfg)throw new Error('locked');
+  const r=await fetch(cfg.URL+'/rest/v1/rpc/nhs_get_episode',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':cfg.KEY,'Authorization':'Bearer '+cfg.KEY},
+    body:JSON.stringify({p_token:u.token,p_level:lv,p_ep_id:'ep'+pad})
+  });
+  if(!r.ok)throw new Error('fetch fail');
+  const res=await r.json();
+  if(!res||!res.ok)throw new Error('locked');
+  return res.data;
+}
 async function loadEp(n,lv){
   lv=lv||'L1';
   const key=lv+'_'+n;
   if(EP_CACHE[key])return EP_CACHE[key];
   const pad=String(n).padStart(2,'0');
-  const res=await fetch(`data/nhs/${lv}/ep${pad}.json`);
-  if(!res.ok)throw new Error('fetch fail');
-  const d=await res.json();
+  const d=await _hqmFetchEpisode(lv,pad);
   EP_CACHE[key]=normalizeEp(n,d,lv);
   return EP_CACHE[key];
 }
