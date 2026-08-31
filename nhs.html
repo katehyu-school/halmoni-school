@@ -69,6 +69,9 @@
       <div class="idx-tab" id="idx-tab-grammar" onclick="switchIdxTab('grammar')">📌 문법 · Grammar</div>
     </div>
     <div class="idx-search"><input id="idx-search-input" placeholder="검색..." oninput="renderIdxBody()"></div>
+    <div class="idx-bm-filter" id="idx-bm-filter" style="display:none">
+      <button class="idx-bm-filter-btn" id="idx-bm-filter-btn" onclick="toggleIdxBmFilter()">🔖 즐겨찾기만 보기</button>
+    </div>
     <div id="idx-jump-bar" class="idx-jump-bar"></div>
     <div class="idx-page-ctrl" id="idx-page-ctrl"></div>
     <div class="idx-body" id="idx-body"></div>
@@ -3208,6 +3211,52 @@ function qrefRender(id){
   if(id==='verbs')requestAnimationFrame(function(){try{renderVerbGame();}catch(e){}});
 }
 
+// ── 북마크(즐겨찾기) — 정식 멤버(student/teacher/admin) 전용 ──────
+let _bmKeys = new Set();      // 'vocab::ep::korean' / 'grammar::ep::id'
+let _bmLoaded = false;
+let _idxBmOnly = false;
+let _idxBmDataCache = {};     // fullKey -> display data, for My Notes / re-render
+async function _loadBookmarks(){
+  if(!NHS_IS_MEMBER || _bmLoaded) return;
+  try{
+    if(!NHS_USER || !NHS_USER.token || !window.HQ_SUPABASE) return;
+    const sb=window.HQ_SUPABASE.client();
+    if(!sb) return;
+    const {data:res,error}=await sb.rpc('bookmark_list',{p_token:NHS_USER.token});
+    if(error||!res||!res.ok) return;
+    (res.data||[]).forEach(b=>{
+      const fullKey=b.type+'::'+b.key;
+      _bmKeys.add(fullKey);
+      if(b.data) _idxBmDataCache[fullKey]=b.data;
+    });
+    _bmLoaded=true;
+  }catch(e){}
+}
+async function toggleBookmark(type,key,btnEl){
+  if(!NHS_IS_MEMBER||!NHS_USER||!NHS_USER.token) return;
+  const fullKey=type+'::'+key;
+  const wasOn=_bmKeys.has(fullKey);
+  if(btnEl) btnEl.classList.toggle('on', !wasOn);
+  try{
+    if(!window.HQ_SUPABASE) throw new Error('no sb');
+    const sb=window.HQ_SUPABASE.client();
+    if(!sb) throw new Error('no sb client');
+    const dataObj=_idxBmDataCache[fullKey]||{};
+    const {data:res,error}=await sb.rpc('bookmark_toggle',{p_token:NHS_USER.token,p_type:type,p_key:key,p_data:dataObj});
+    if(error||!res||!res.ok) throw new Error('rpc fail');
+    if(res.bookmarked) _bmKeys.add(fullKey); else _bmKeys.delete(fullKey);
+    if(_idxBmOnly) renderIdxBody();
+  }catch(e){
+    if(btnEl) btnEl.classList.toggle('on', wasOn); // revert optimistic UI on failure
+  }
+}
+function toggleIdxBmFilter(){
+  _idxBmOnly=!_idxBmOnly;
+  const btn=document.getElementById('idx-bm-filter-btn');
+  if(btn) btn.classList.toggle('active',_idxBmOnly);
+  renderIdxBody();
+}
+
 // ── 색인 모달 ───────────────────────────────────────────
 let idxTab='vocab';
 
@@ -3217,6 +3266,9 @@ async function openIndex(){
   // Pre-fetch any episodes not yet in cache
   const body=document.getElementById('idx-body');
   if(body) body.innerHTML='<div style="padding:20px;text-align:center">로딩 중…</div>';
+  const bmFilterBar=document.getElementById('idx-bm-filter');
+  if(bmFilterBar) bmFilterBar.style.display=NHS_IS_MEMBER?'flex':'none';
+  await _loadBookmarks();
   await _sharedSetsReady; await _glossReady;
   await Promise.all([
     ...EPISODES.map(async ep=>{
@@ -3290,6 +3342,8 @@ function _renderIdxVocabPage(){
   slice.forEach(v=>{
     const o=getOnset((v.korean||'')[0]||'');
     if(o!==cur){cur=o;html+=`<div class="idx-section-hdr">${esc(o)}</div>`;}
+    const _vBmKey=(v.ep||'')+'::'+(v.korean||'');
+    if(NHS_IS_MEMBER) _idxBmDataCache['vocab::'+_vBmKey]={korean:v.korean||'',english:v.english||v.en||'',romanization:v.romanization||'',ep:v.ep||'',epTitle:v.epTitle||''};
     html+=`<div class="idx-vocab-row">
       <div class="idx-vocab-kr">${esc(v.korean||'')} ${v.emoji||''}</div>
       <div style="font-size:11px;color:var(--warm-500);min-width:90px">${esc(v.romanization||'')}</div>
@@ -3297,6 +3351,7 @@ function _renderIdxVocabPage(){
       ${v._gloss?'<span style="font-size:9px;background:var(--mint,#DFF5EE);color:var(--teal);border-radius:7px;padding:1px 6px;margin-right:3px;white-space:nowrap">실생활</span>':''}
       <span class="idx-ep-badge" style="cursor:pointer" onclick="${v._essential?"closeIndex();loadBasics('essential')":`loadEpAndTab('${escA(v.ep||'')}','vocab')`}">${v._essential?'🗝️ 필수 낱말':esc(getEpLabel(v.ep||''))}</span>
       <button onclick="speakTTS('${escA(v.korean||'')}')" style="background:none;border:none;font-size:13px;cursor:pointer;opacity:.4">🔊</button>
+      ${NHS_IS_MEMBER?`<button class="idx-bm-btn${_bmKeys.has('vocab::'+_vBmKey)?' on':''}" onclick="toggleBookmark('vocab','${escA(_vBmKey)}',this)" title="북마크">🔖</button>`:''}
     </div>`;
   });
   document.getElementById('idx-body').innerHTML=html||'<div style="color:var(--warm-500);font-size:13px;text-align:center;padding:30px">검색 결과 없음</div>';
@@ -3357,6 +3412,8 @@ function renderIdxBody(){
     ESSENTIAL_GROUPS.forEach(g=>{
       g.words.forEach(w=>allWords.push({korean:w.kr,english:w.en,romanization:w.rom,ep:'essential',_essential:true}));
     });
+    // 🔖 즐겨찾기만 보기 필터 (정식 멤버 전용)
+    if(_idxBmOnly) allWords=allWords.filter(v=>_bmKeys.has('vocab::'+(v.ep||'')+'::'+(v.korean||'')));
     // 검색 필터 + 정렬
     if(q) allWords=allWords.filter(v=>(v.korean||'').toLowerCase().includes(q)||(v.english||v.en||'').toLowerCase().includes(q));
     allWords.sort((a,b)=>_koCompare(a.korean||'',b.korean||''));
@@ -3378,6 +3435,7 @@ function renderIdxBody(){
     allEps.forEach(ep=>{
       (ep.grammar||[]).forEach(g=>allGram.push({...g,ep:(ep.level||'L1')+'_'+ep.id,epTitle:ep.title}));
     });
+    if(_idxBmOnly) allGram=allGram.filter(g=>_bmKeys.has('grammar::'+(g.ep||'')+'::'+(g.id||g.title||'')));
     if(q) allGram=allGram.filter(g=>(g.title||'').toLowerCase().includes(q)||(g.explanation_en||'').toLowerCase().includes(q));
     let html='';
     if(!allGram.length){html='<div style="color:var(--warm-500);font-size:13px;text-align:center;padding:30px">검색 결과 없음</div>';}
@@ -3395,17 +3453,22 @@ function renderIdxBody(){
         const lvlMap2={'초급':'L1','중급':'L2','고급':'L3'};
         const lvlLabel=lvlMap2[lvlPart]||lvlPart;
         html+=`<div class="idx-section-hdr">${esc(lvlLabel)} · EP.${esc(epNum)} ${esc(ep?ep.title:'')}</div>`;
-        html+=byEp[epKey].map(g=>`
+        html+=byEp[epKey].map(g=>{
+          const gBmKey=(g.ep||'')+'::'+(g.id||g.title||'');
+          if(NHS_IS_MEMBER) _idxBmDataCache['grammar::'+gBmKey]={title:g.title||'',explanation_en:g.explanation_en||'',ep:g.ep||'',epTitle:ep?ep.title:'',icon:g.icon||'📌'};
+          return `
           <div class="idx-gram-row">
             <div style="display:flex;align-items:center;gap:8px">
               <span style="font-size:16px">${esc(g.icon||'📌')}</span>
-              <div>
+              <div style="flex:1">
                 <div class="idx-gram-title">${esc(g.title||'')} <span class="idx-ep-badge" style="cursor:pointer" onclick="loadEpAndTab('${escA(g.ep||'')}','grammar')">${esc(getEpLabel(g.ep||''))}</span></div>
                 ${g.rule?`<div class="idx-gram-rule">📐 ${esc(g.rule)}</div>`:''}
                 <div style="font-size:11.5px;color:var(--warm-500);margin-top:2px">${esc(g.explanation_en||'')}</div>
               </div>
+              ${NHS_IS_MEMBER?`<button class="idx-bm-btn${_bmKeys.has('grammar::'+gBmKey)?' on':''}" onclick="toggleBookmark('grammar','${escA(gBmKey)}',this)" title="북마크">🔖</button>`:''}
             </div>
-          </div>`).join('');
+          </div>`;
+        }).join('');
       });
     }
     body.innerHTML=html;

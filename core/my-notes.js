@@ -80,6 +80,13 @@
 .nms-setup-sub{font-size:13px;color:var(--warm-500);margin-bottom:24px;line-height:1.6;}
 .nms-empty{text-align:center;padding:24px;color:var(--warm-500);font-size:13px;}
 .nms-sec-title{font-size:14px;font-weight:700;color:var(--warm-700);margin-bottom:12px;}
+.nms-bm-group-title{font-size:12px;font-weight:700;color:var(--teal);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.04em;}
+.nms-bm-item{background:var(--warm-50);border-radius:8px;padding:10px 13px;margin-bottom:8px;display:flex;align-items:center;gap:10px;border-left:3px solid var(--teal-300);}
+.nms-bm-main{flex:1;min-width:0;}
+.nms-bm-kr{font-weight:700;color:var(--warm-700);font-size:13.5px;}
+.nms-bm-sub{font-size:11.5px;color:var(--warm-500);margin-top:2px;}
+.nms-bm-go{background:var(--teal-lt);color:var(--teal-dark);border:none;border-radius:20px;font-size:11px;font-weight:700;padding:4px 11px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.nms-bm-go:hover{opacity:.8;}
 
 `;
   document.head.appendChild(s);
@@ -132,6 +139,7 @@
         <button class="nms-tab active" id="nms-t-notes" onclick="nmsTab('notes')">📝 My Notes</button>
         <button class="nms-tab" id="nms-t-write" onclick="nmsTab('write')">✏️ 한글 쓰기</button>
         <button class="nms-tab" id="nms-t-deco" onclick="nmsTab('deco')">🎨 꾸미기</button>
+        <button class="nms-tab" id="nms-t-bm" onclick="nmsTab('bookmarks')" style="display:none">🔖 북마크</button>
       </div>
 
       <!-- NOTES -->
@@ -224,6 +232,14 @@
           <div id="nms-badge-display"></div>
         </div>
       </div>
+
+      <!-- BOOKMARKS -->
+      <div id="nms-panel-bookmarks" style="display:none">
+        <div class="nms-card">
+          <div class="nms-sec-title">🔖 북마크한 단어·문법</div>
+          <div id="nms-bm-body"><div class="nms-empty">불러오는 중…</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -311,6 +327,10 @@ function nmsAdoptAuto(newName){
 // ── OPEN / CLOSE ─────────────────────────────────────────
 function openNMS(){
   document.getElementById('nms-overlay').classList.add('open');
+  // 🔖 북마크 탭은 nhs.html(도란채)의 정식 멤버(student/teacher/admin)에게만 노출 —
+  // Kids 앱 등 다른 페이지에도 로드되는 공용 모듈이라 NHS_IS_MEMBER 존재 여부부터 확인.
+  const nmsBmTabBtn=document.getElementById('nms-t-bm');
+  if(nmsBmTabBtn) nmsBmTabBtn.style.display=(typeof NHS_IS_MEMBER!=='undefined'&&NHS_IS_MEMBER)?'':'none';
   document.addEventListener('keydown',_nmsEscHandler);
   document.body.style.overflow='hidden';
   document.body.style.overflow='hidden';
@@ -419,12 +439,56 @@ function nmsSwitchTo(name){
 
 // ── TABS ─────────────────────────────────────────────────
 function nmsTab(t){
-  ['notes','write','deco'].forEach(x=>{
+  ['notes','write','deco','bookmarks'].forEach(x=>{
     document.getElementById('nms-panel-'+x).style.display=x===t?'block':'none';
     document.getElementById('nms-t-'+x).classList.toggle('active',x===t);
   });
   if(t==='write'){ setTimeout(nmsResizeCanvas,50); nmsRenderHintWords(); }
   if(t==='deco')  nmsRenderDecoPanel();
+  if(t==='bookmarks') nmsRenderBookmarks();
+}
+// 🔖 북마크 목록 — nhs.html의 _loadBookmarks()/_bmKeys/_idxBmDataCache를 그대로 재사용
+// (같은 페이지에 로드된 전역 상태라 여기서 다시 fetch할 필요 없음. Kids 등에는
+// 이 함수들이 없으므로 typeof 가드로 안전하게 빠짐.)
+async function nmsRenderBookmarks(){
+  const body=document.getElementById('nms-bm-body');
+  if(!body) return;
+  if(typeof _loadBookmarks!=='function' || typeof NHS_USER==='undefined' || !NHS_USER){
+    body.innerHTML='<div class="nms-empty">이 기능은 도란채(nhs.html) 정식 멤버 전용이에요.</div>';
+    return;
+  }
+  await _loadBookmarks();
+  const items=Object.entries(_idxBmDataCache||{}).filter(([k])=>_bmKeys.has(k));
+  if(!items.length){
+    body.innerHTML='<div class="nms-empty">아직 북마크한 단어·문법이 없어요.<br>색인(📖)에서 🔖 버튼을 눌러 추가해 보세요!</div>';
+    return;
+  }
+  const vocabItems=items.filter(([k])=>k.startsWith('vocab::'));
+  const gramItems=items.filter(([k])=>k.startsWith('grammar::'));
+  let html='';
+  if(vocabItems.length){
+    html+='<div class="nms-bm-group-title">📚 단어 · Vocab</div>';
+    html+=vocabItems.map(([k,d])=>`
+      <div class="nms-bm-item">
+        <div class="nms-bm-main">
+          <div class="nms-bm-kr">${esc(d.korean||'')}</div>
+          <div class="nms-bm-sub">${esc(d.romanization||'')} · ${esc(d.english||'')}</div>
+        </div>
+        <button class="nms-bm-go" onclick="closeNMS();loadEpAndTab('${escA(d.ep||'')}','vocab')">보러 가기</button>
+      </div>`).join('');
+  }
+  if(gramItems.length){
+    html+='<div class="nms-bm-group-title">📌 문법 · Grammar</div>';
+    html+=gramItems.map(([k,d])=>`
+      <div class="nms-bm-item">
+        <div class="nms-bm-main">
+          <div class="nms-bm-kr">${esc(d.icon||'📌')} ${esc(d.title||'')}</div>
+          <div class="nms-bm-sub">${esc(d.explanation_en||'')}</div>
+        </div>
+        <button class="nms-bm-go" onclick="closeNMS();loadEpAndTab('${escA(d.ep||'')}','grammar')">보러 가기</button>
+      </div>`).join('');
+  }
+  body.innerHTML=html;
 }
 
 // ── NOTES ────────────────────────────────────────────────
