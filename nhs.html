@@ -4106,6 +4106,32 @@ async function openFlashcards(){
     })()); });
   }
   await Promise.all(_tasks);
+  // 🔖 북마크한 단어도 플래시카드 SRS 주기에 포함 — 현재 레벨 필터와 무관하게 항상
+  // 풀에 추가하고, 처음 등장하는 북마크는 오늘 바로 복습 큐에 뜨도록 due를 오늘로 시딩.
+  // (문법 북마크는 대상 아님 — 플래시카드는 단어 전용 포맷이라 문법 카드 UI 자체가 없음.)
+  if(NHS_IS_MEMBER){
+    await _loadBookmarks();
+    const existingIds=new Set(cards.map(_fcCardId));
+    const newBmCards=[];
+    Object.entries(_idxBmDataCache||{}).forEach(([k,d])=>{
+      if(!k.startsWith('vocab::')||!_bmKeys.has(k))return;
+      if(!d||!d.korean||!d.english)return;
+      if(!/^L[1-6]_/.test(d.ep||''))return; // 필수낱말·실생활 광맥 등 레벨 없는 항목은 제외
+      const lv=(d.ep||'L1').split('_')[0];
+      const epId=(d.ep||'').split('_').slice(1).join('_')||'';
+      const card={korean:d.korean,rom:d.romanization||'',english:d.english,level:lv,emoji:'🔖',note:'',epId:epId,ep:d.epTitle||epId,cat:'북마크'};
+      const id=_fcCardId(card);
+      if(existingIds.has(id))return;
+      existingIds.add(id);
+      newBmCards.push(card);
+    });
+    if(newBmCards.length){
+      cards.push(...newBmCards);
+      const m=_srsMap(); const today=_srsToday(); let changed=false;
+      newBmCards.forEach(c=>{ const id=_fcCardId(c); if(!m[id]){ m[id]={b:1,due:today}; changed=true; } });
+      if(changed) _srsSave(m);
+    }
+  }
   _fcAllCards=cards; _fcFilter=new Set();
   _fcApplyFilter();
 }
