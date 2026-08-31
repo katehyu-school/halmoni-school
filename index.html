@@ -751,10 +751,17 @@ body::before {
     </div>
     <button class="enter-btn" onclick="checkPw()">입장하기</button>
     <div class="error-msg" id="errMsg"></div>
-    <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7">
+    <div id="loginFooterMain" style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7">
       처음이세요? · First time here?<br>
       <button onclick="openSignup()" style="margin-top:7px;background:none;border:1px solid rgba(78,205,196,.4);color:#4ecdc4;border-radius:20px;padding:7px 16px;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer">🔓 계정 만들기 · Create account</button>
       <div style="margin-top:9px"><button onclick="useGuest()" style="background:none;border:none;color:rgba(180,215,235,.55);font-family:'Noto Sans KR',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline">👀 초대받으셨나요? 게스트로 둘러보기</button></div>
+    </div>
+    <!-- Kids는 초대된 가정만 이용하는 비공개 반이라 셀프 계정 생성·게스트 둘러보기 대상이 아닙니다 (2026-08-31) -->
+    <div id="loginFooterKids" style="display:none;margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7;text-align:center">
+      Doranchae Kids 는 초대받은 가정만 이용하는 비공개 반이에요.<br>
+      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Doranchae Kids is invite-only — it's not open to self-signup.</span><br>
+      <span style="display:block;margin-top:8px">선생님이 알려준 이름·PIN으로 로그인해 주세요.<br>
+      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Please log in with the name &amp; PIN your teacher gave you.</span></span>
     </div>
   </div>
 </div>
@@ -946,6 +953,9 @@ function openLoginModal(track) {
   _entryTrack = track || 'main';
   document.getElementById('loginModal').classList.add('open');
   document.querySelector('#loginModal .login-label').textContent = _entryTrack === 'kids' ? 'Doranchae Kids · 입장' : '로그인 · Sign In';
+  // Kids는 셀프 계정 생성·게스트 둘러보기 대상이 아니므로 그 안내 대신 초대 안내를 보여줍니다
+  document.getElementById('loginFooterMain').style.display = _entryTrack === 'kids' ? 'none' : 'block';
+  document.getElementById('loginFooterKids').style.display = _entryTrack === 'kids' ? 'block' : 'none';
   // 이 기기에서 마지막으로 로그인한 이름을 미리 채워 둡니다(아이들이 매번 안 치도록)
   try {
     const last = localStorage.getItem('hq_last_name');
