@@ -113,7 +113,7 @@
 | 대본 · 문법 설명 · 어휘 · 퀴즈 · 문서 · 코드 | **모든 권리 보유** — 베타 기간 사이트 내 무료 열람, 무단 복제·재배포·상업적 이용 금지. 수업용 사용은 게시판 문의 |
 | **TTS 음성 mp3 · 슬라이드 이미지 · 영상** | 위와 동일 조건(원래도 Typecast 약관상 CC 대상 아니었음). 사이트 내 재생만 허용, 다운로드·재배포 금지 |
 | 인용 문학 (메밀꽃·동백꽃·감자·운수 좋은 날) | 저작권 소멸(PD) — 문제 없음 |
-| 이름 · 로고 (`Hangeul Quest`, `HQ Kids`) | **상표.** CC 대상 아님 — 남이 이 이름으로 서비스를 낼 수 없음 |
+| 이름 · 로고 (`Doranchae`/도란채/DR, `Doranchae Kids`/DR Kids — 구명 `Hangeul Quest`/HQ) | **상표.** CC 대상 아님 — 남이 이 이름으로 서비스를 낼 수 없음 |
 
 > 🔴 **음성이 제외되는 이유**: Typecast 이용정책이 부여하는 권리가 *non-transferable* 이고, 생성 음성을 **개별 파일(isolated files)** 로 배포하는 것을 금지합니다. 우리 mp3는 문장 하나당 파일 하나라 정확히 그 형태이므로, **남에게 재배포를 허락할 권한이 우리에게 없습니다.**
 >
@@ -145,16 +145,16 @@
 hangeulquest.com  (index.html)
    │  이름 + PIN 로그인
    │
-   ├─ HQ Kids   (korean-app_v2.html)  🔒 반 코드 필요 — 초등, 게임 중심
-   ├─ HQ        (nhs.html)                 — 중고등 이상, 에피소드 커리큘럼
-   └─ 모바일 앱 (hq-mobile.html)           — 폰용 5~10분 복습 (QR / 홈 화면 설치)
+   ├─ DR Kids   (korean-app_v2.html)  🔒 반 코드 필요 — 초등, 게임 중심
+   ├─ DR        (nhs.html)                 — 중고등 이상, 에피소드 커리큘럼
+   └─ 모바일 앱 (dr-mobile.html)           — 폰용 5~10분 복습 (QR / 홈 화면 설치)
 ```
 
 | 앱 | 파일 | 대상 | 잠금 |
 |---|---|---|---|
-| **Hangeul Quest (HQ)** | `nhs.html` | 13세 이상 · TOPIK 1~5급 | 없음(콘텐츠 공개) · 체험 계정은 3편만 |
-| **Hangeul Quest Kids** | `korean-app_v2.html` | 초등 | **반 코드 필요** |
-| **모바일 앱** | `hq-mobile.html` | 전체 | HQ는 공개 / Kids 카드는 반 코드 있을 때만 |
+| **Doranchae (DR)** | `nhs.html` | 13세 이상 · TOPIK 1~5급 | 없음(콘텐츠 공개) · 체험 계정은 3편만 |
+| **Doranchae Kids (DR Kids)** | `korean-app_v2.html` | 초등 | **반 코드 필요** |
+| **모바일 앱** | `dr-mobile.html`(`hq-mobile.html`은 구 주소 — 자동으로 여기로 리다이렉트) | 전체 | DR은 공개 / Kids 카드는 반 코드 있을 때만 |
 | 유아반 | `halmoni_kinder.html` | 유아 | 없음 — **메인에서 링크는 지웠지만 주소를 알면 열림** |
 | (구) 성인반 | `sejong-korean_v1.html` | 참고용 | 더 이상 수정하지 않음 |
 
@@ -177,8 +177,8 @@ hangeulquest.com  (index.html)
 |---|---|---|
 | `admin` | 전부 + 관리자 패널 | **Supabase 대시보드에서만** (앱에서는 절대 못 만듦 — 의도된 안전장치) |
 | `teacher` | 전부 + 출석부 + 게시판 답변·삭제 | admin이 앱에서 추가 |
-| `student` | Kids·HQ 둘 다, 게시판 전체 | admin/teacher가 앱에서 추가 |
-| `trial` | HQ만, **ep01·ep05·ep07 3편만**, 게시판은 본인 글만 | **학생이 직접 셀프 가입** |
+| `student` | Kids·DR 둘 다, 게시판 전체 | admin/teacher가 앱에서 추가 |
+| `trial` | DR만, **ep01·ep05·ep07 3편만**, 게시판은 본인 글만 | **학생이 직접 셀프 가입** |
 | `guest` | 공용 체험 계정. 게시판 불가 | 이미 만들어져 있음 |
 
 > **차단(block)** — 2026-08-05부터 계정을 지우지 않고 막을 수 있습니다. 역할은 그대로 남으므로 **풀면 원래 등급으로 돌아옵니다.** 차단하면 로그인이 막히고 **열려 있던 접속도 즉시 끊깁니다.**
@@ -223,9 +223,9 @@ hangeulquest.com  (index.html)
 
 ---
 
-## 1-3. 반 코드 — HQ Kids의 자물쇠
+## 1-3. 반 코드 — DR Kids의 자물쇠
 
-HQ Kids는 **비공개 가정반**입니다. 아이들 이름이 화면에 실시간으로 뜨기 때문에 아무나 들어오면 안 됩니다.
+DR Kids는 **비공개 가정반**입니다. 아이들 이름이 화면에 실시간으로 뜨기 때문에 아무나 들어오면 안 됩니다.
 
 **반 코드가 전달되는 두 가지 경로 — 둘 중 하나만 되면 열립니다.**
 
@@ -237,7 +237,7 @@ HQ Kids는 **비공개 가정반**입니다. 아이들 이름이 화면에 실�
    hangeulquest.com에서 로그인 → 서버가 반 코드를 그 기기에 내려줍니다.
    `student`·`teacher`·`admin`에게만 주고 `trial`·`guest`에게는 주지 않습니다.
 
-**코드가 없으면**: Kids 웹은 잠금 화면(비공개 반 안내 + 로그인 버튼)이 뜨고, 모바일 앱에서는 **HQ Kids 카드 자체가 보이지 않습니다.**
+**코드가 없으면**: Kids 웹은 잠금 화면(비공개 반 안내 + 로그인 버튼)이 뜨고, 모바일 앱에서는 **DR Kids 카드 자체가 보이지 않습니다.**
 
 ### 반 코드를 바꾸고 싶을 때
 
@@ -254,8 +254,8 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 | 상황 | 주소 |
 |---|---|
 | 학생에게 알려줄 기본 주소 | `hangeulquest.com` |
-| HQ 수업 (이름 자동 입력) | `nhs.html?name=Bomi` |
-| HQ 선생님 모드 | `nhs.html?name=kate&teacher` |
+| DR 수업 (이름 자동 입력) | `nhs.html?name=Bomi` |
+| DR 선생님 모드 | `nhs.html?name=kate&teacher` |
 | Kids 수업 (첫 접속) | `korean-app_v2.html?name=Liam&c=<반코드>` |
 | Kids 수업 (이후) | `korean-app_v2.html?name=Liam` |
 | 모바일 앱 | `hangeulquest.com/hq-mobile.html` |
@@ -288,7 +288,7 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 
 ## 1-6. 게시판 (선생님에게 문의하는 통로)
 
-게시판은 **HQ(`nhs.html`)에만** 있습니다. Kids 앱에는 없습니다.
+게시판은 **DR(`nhs.html`)에만** 있습니다. Kids 앱에는 없습니다.
 
 **2026-08-03부터 "질문 1 + 답변 1"이 아니라 "글 1 + 댓글 여러 개"입니다.** 학생끼리도 서로 댓글을 달 수 있는 소통 창구입니다.
 
@@ -315,7 +315,7 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
   총량 상한을 두지 않은 이유: 누가 한 번 채워 버리면 그 뒤에 오는 **진짜 학생이 선생님이 치울 때까지 못 들어옵니다.** 하루 상한은 다음 날 저절로 다시 열립니다.
 - **30일 동안 접속이 없는 체험 계정은 자동으로 사라집니다**(관리자 목록을 열거나 새 가입이 있을 때 함께 정리).
 - 정식 학생으로 받으실 때는 관리자 패널에서 **등급을 `학생`으로 바꾸면** 됩니다 — 계정을 새로 만들 필요 없습니다.
-- 볼 수 있는 것: **HQ의 `🌱 Start Here` 전체 + Level 1의 ep01 · ep05 · ep07 3편.** Level 2 이상 탭과 나머지 편은 잠김.
+- 볼 수 있는 것: **DR의 `🌱 Start Here` 전체 + Level 1의 ep01 · ep05 · ep07 3편.** Level 2 이상 탭과 나머지 편은 잠김.
   (Start Here에는 배치 테스트·학습 로드맵·한글 입문·빠른 참고가 들어 있어 체험만으로도 시작할 수 있습니다.)
 - **Kids는 보이지 않습니다** (비공개 가정반).
 - 전체 이용 문의는 앱이 `hangeulquest@gmail.com` 으로 안내합니다.
@@ -448,36 +448,36 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 | 파일 | 크기 | 역할 |
 |---|---|---|
 | `index.html` | 61KB | 로그인 · 역할 분기 · 회원 관리 · 출석부 패널 · 체험 셀프가입 |
-| `nhs.html` | 426KB | **HQ 본체.** 범용 에피소드 렌더러 (L1~L6 공유) |
-| `korean-app_v2.html` | 841KB | **HQ Kids.** 반 코드 잠금 + 게임 + 실시간 수업 |
-| `hq-mobile.html` | 196KB | 모바일 PWA. Watch→Learn→Practice→Review 4단계 |
+| `nhs.html` | 426KB | **DR 본체.** 범용 에피소드 렌더러 (L1~L6 공유) |
+| `korean-app_v2.html` | 841KB | **DR Kids.** 반 코드 잠금 + 게임 + 실시간 수업 |
+| `dr-mobile.html` | 212KB | 모바일 PWA. Watch→Learn→Practice→Review 4단계 (`hq-mobile.html`은 1KB 리다이렉트 스텁만 남음 — 구 주소 호환용) |
 | `admin.html` | 25KB | 관리자 패널 (PIN 일괄변경, 출석 초기화) |
 | `halmoni_kinder.html` | 62KB | 유아반. **링크는 지웠으나 파일은 살아 있음** |
 | `sejong-korean_v1.html` | 220KB | 구 성인반. **동결 — 수정하지 않음** |
 | `faq.html` / `privacy.html` | | 공개 보조 페이지 |
 | `dashboard.html` | 98KB | 학교와 무관한 개인 도구. `_config.yml`이 웹 공개에서 제외 |
-| `manifest.json` / `sw.js` | | **PWA — 이미 작동 중** (`hq-mobile.html`만 등록) |
+| `manifest.json` / `sw.js` | | **PWA — 이미 작동 중** (`dr-mobile.html`이 `start_url`; `sw.js`는 구 주소 `hq-mobile.html`도 캐시에 같이 넣어 호환 유지) |
 
 ### 공유 모듈 (`core/`)
 
 | 파일 | 크기 | 역할 | 누가 로드하나 |
 |---|---|---|---|
-| **`supabase-config.js`** | 3KB | **Supabase 주소·공개키의 유일한 출처.** `window.HQ_SUPABASE` (`.URL` `.KEY` `.client()`) | HQ, Kids, 유아반, index, admin |
+| **`supabase-config.js`** | 3KB | **Supabase 주소·공개키의 유일한 출처.** `window.HQ_SUPABASE` (`.URL` `.KEY` `.client()` — 전역 변수 이름 자체는 코드에 그대로 남아 있음) | DR, Kids, 유아반, index, admin |
 | `core.js` | 18KB | `window.HalmoniCore` — Supabase 클라이언트, TTS, 출석 매니저, 실시간 세션, 컨페티, 모달 | Kids, 유아반 |
-| `nhs.css` | 71KB | HQ 스타일시트 | nhs.html |
-| `my-notes.js` | 43KB | HQ 학생 노트 + **진도 저장소** (CSS·HTML·JS 자체 주입) | nhs.html |
+| `nhs.css` | 71KB | DR 스타일시트 | nhs.html |
+| `my-notes.js` | 43KB | DR 학생 노트 + **진도 저장소** (CSS·HTML·JS 자체 주입) | nhs.html |
 | `my-space.js` | 40KB | Kids 학생 공간 | Kids |
 | `board.js` | 15KB | 게시판 (자체 Supabase 클라이언트 보유) | nhs.html |
 | `adult-renderer.js` | 47KB | 구 성인반 5패널 렌더러 | sejong |
 | `adult-data-loader.js` / `data-loader.js` | | JSON 로더 | sejong / Kids |
 | `grammar-renderer.js` / `vocab-renderer.js` | | Kids 문법·어휘 렌더러 | Kids |
 
-> `nhs.html`은 `core.js`를 **로드하지 않습니다.** 그래서 HQ에는 출석·실시간 기능이 없고, 게시판은 `board.js`가 독립적으로 Supabase에 접속합니다.
+> `nhs.html`은 `core.js`를 **로드하지 않습니다.** 그래서 DR에는 출석·실시간 기능이 없고, 게시판은 `board.js`가 독립적으로 Supabase에 접속합니다.
 
 ### 콘텐츠 (`data/`) — 2026-08-02 실측
 
 ```
-data/nhs/                          HQ
+data/nhs/                          DR
   ├── episodes_index.json          사이드바 목록의 유일한 소스 (L1~L6 × 12편)
   ├── L1~L6/ep01~12.json           72편 전부 존재 ✅
   ├── L1~L6/closing_test.json      레벨별 마감 테스트
@@ -786,7 +786,7 @@ TOPIK 문법 커버리지 감사에서 **요약표(편당 대표 문법 1개)만
 
 | 항목 | 내용 |
 |---|---|
-| **서버 진도 동기화 없음** | HQ 진도 전부 localStorage. 기기 간 이동 불가 |
+| ~~**서버 진도 동기화 없음**~~ | ✅ **해결** — `progress_push`/`progress_pull` 도입(정식 회원+trial, 웹·모바일 둘 다). 2-4·2-12 참고 |
 | ~~Supabase anon key가 5개 파일에 하드코딩~~ | ✅ **2026-08-02 해결** — `core/supabase-config.js` 한 곳으로 통합, 신형 `sb_publishable_` 형식으로 통일 (2-10 참고) |
 | **유아반 문이 열려 있음** | `halmoni_kinder.html`은 주소만 알면 접근 가능 |
 | **L6 마감 테스트 듣기 5개 미녹음** | `data/nhs/L6/TTS/closing/` **비어 있음**(다른 레벨은 5~8개 존재). Typecast 크레딧 대기 중(복구 예정 8/13). 파일을 넣으면 자동 연결, 그전까지는 브라우저 TTS 폴백 |
@@ -885,7 +885,7 @@ const sb = HQ_SUPABASE.client();   // supabase-js가 아직 없으면 null
 |---|---|
 | `CLAUDE.md` | 세션 로그 (최신 작업 맥락) |
 | `docs/CLAUDE_ARCHIVE.md` | 오래된 완료 기록 |
-| `docs/K_QUEST_CURRICULUM_MAP.md` | HQ 커리큘럼 지도 |
+| `docs/K_QUEST_CURRICULUM_MAP.md` | DR 커리큘럼 지도 |
 | `docs/GRAMMAR_CURRICULUM_MAP.md` · `KIDS_GRAMMAR_ROADMAP_L1-6.md` | 문법 로드맵 |
 | `docs/V2_ARCHITECTURE.md` | Kids 앱 아키텍처 |
 | `docs/MOBILE_*.md` | 모바일 전략 3종 |

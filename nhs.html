@@ -5267,7 +5267,16 @@ async function loadRoadmap(){
     +'<span style="color:var(--warm-500)">둘은 같은 기록을 씁니다(같은 브라우저 기준). 상자가 올라갈수록 다시 나오는 간격이 길어져요.</span></div>'
     +_rmBtn('🃏 지금 복습하기 · Review now','openFlashcards()',dueN>0);
 
-  // ── Step 4. 마감 테스트 ──
+  // ── Step 4. 레벨 복습 (2026-09-01 추가) ──
+  const s3b='12편을 다 안 끝냈어도 사이드바 맨 아래 <b>🔁 레벨 복습</b>을 아무 때나 눌러볼 수 있어요. <b>마감 테스트 보기 전에 한 번 훑어보는 걸 추천해요.</b>'
+    +_rmEn('Open Level Review from the sidebar any time, even before finishing all 12 episodes. Doing it once before the level test is a good idea.')
+    +'<div style="margin-top:9px;background:var(--warm-50);border-radius:9px;padding:9px 12px;font-size:12.5px;line-height:1.9;">'
+    +'📇 <b>어휘 퀴즈</b> — 이 레벨에서 만난 단어를 다시 물어봐요'
+      +'<span class="en-gloss"><br><i>Vocab quiz — re-tests words from this level.</i></span><br>'
+    +'📖 <b>문법 모아보기</b> — 이 레벨 문법 + 색인에서 🔖 북마크한 문법을 상자(SRS) 카드로 복습해요. 카드를 탭해서 뒤집고 맞았는지 O/X로 표시하면 다음에 나올 간격이 조절돼요'
+      +'<span class="en-gloss"><br><i>Grammar review — flip-card SRS practice covering the grammar for this level, plus anything you bookmarked in Index (색인).</i></span></div>';
+
+  // ── Step 5. 마감 테스트 ──
   const trows=['L1','L2','L3','L4','L5','L6'].filter(lv=>cnt[lv].t>0).map(lv=>{
     const t=prog['test_'+lv];
     const g=t?(t.pct>=90?'A':t.pct>=80?'B':t.pct>=70?'C':'D'):'—';
@@ -5295,7 +5304,7 @@ async function loadRoadmap(){
     +'<div style="font-size:16px;font-weight:800;color:var(--warm-900);">📦 모르면 그냥 지나치는 것들</div>'
     +'<div style="font-size:11px;color:var(--warm-400);font-style:italic;margin-bottom:12px;">Features you might never notice — but should use</div>'
     +'<table style="width:100%;border-collapse:collapse">'
-    +gem('📖','색인','Index','상단','단어나 문법이 기억 안 날 때. 전 레벨 <b>단어·문법</b>을 한국어·영어로 검색하고 <b>어느 편에 나왔는지</b> 알려줘요. 위쪽 탭으로 <b>단어 ↔ 문법</b>을 바꿔 볼 수 있어요.')
+    +gem('📖','색인','Index','상단','단어나 문법이 기억 안 날 때. 전 레벨 <b>단어·문법</b>을 한국어·영어로 검색하고 <b>어느 편에 나왔는지</b> 알려줘요. 위쪽 탭으로 <b>단어 ↔ 문법</b>을 바꿔 볼 수 있어요. <b>가입 회원</b>은 각 항목의 🔖 버튼으로 북마크할 수 있고, 북마크한 단어·문법은 각각 복습 플래시카드 · 레벨 복습의 문법 SRS 큐에도 자동으로 들어가요.')
     +gem('📌','빠른 참고','Quick Ref','상단','숫자·의문사·호칭·인사표. 공부하다 막히면 <b>어느 화면에서든</b> 바로 열려요.')
     +gem('🃏','복습 플래시카드','Flashcards','왼쪽 아래','옆의 숫자가 <b>오늘 복습할 개수</b>. 시간 없는 날엔 이것만 눌러도 하루치가 됩니다.')
     +gem('🔥','빠른 복습','Warm-up','편 열 때 자동','지난 편 단어 3~5문제. 귀찮아도 <b>이게 재순환의 핵심</b>이에요.')
@@ -5373,7 +5382,7 @@ async function loadRoadmap(){
     +'<div id="rm-s0" style="display:block;">'+_rmStep(0,'🔤','한글부터 · 못 읽으면 여기','Step 0 — Learn the alphabet first',s0,false)+'</div>'
     +'<div id="rm-s1" style="display:none;">'+_rmStep(1,'🎯','내 레벨 찾기','Step 1 — Find your level',s1,!!pl)+'</div>'
     +'<div id="rm-s2" style="display:none;">'+_rmStep(2,'📺','에피소드로 배우기','Step 2 — Learn with episodes',s2,totD>0)+'</div>'
-    +'<div id="rm-s3" style="display:none;">'+_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)+_rmStep(4,'🏆','레벨 마감 테스트','Step 4 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))+'</div>'
+    +'<div id="rm-s3" style="display:none;">'+_rmStep(3,'🔁','매일 단어 복습','Step 3 — Review every day',s3,srsN>0)+_rmStep(4,'🔁','레벨 복습','Step 4 — Review the whole level',s3b,false)+_rmStep(5,'🏆','레벨 마감 테스트','Step 5 — Check your level',s4,Object.keys(prog).some(k=>k.indexOf('test_')===0))+'</div>'
     +gems
     +qrcard
     +learnResCard
