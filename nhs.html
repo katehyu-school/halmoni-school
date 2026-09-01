@@ -7406,8 +7406,12 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   }
 });
 function nhsExitTrial(){
+  // 2026-09-01: 배너 플래그(nhs_trial)만 지우고 실제 로그인(hq_user)은 남아있던 버그 수정.
+  // "Exit trial view"는 유저 입장에서 로그아웃을 의미하므로 index.html의 hqLogout()과 동일하게 완전히 로그아웃시킴.
   try{ localStorage.removeItem('nhs_trial'); }catch(e){}
-  location.href = location.pathname; // 쿼리스트링 없이 새로고침 → 체험 플래그 완전 해제
+  try{ localStorage.removeItem('hq_user'); }catch(e){}
+  try{ sessionStorage.removeItem('hq_user'); }catch(e){}
+  location.href = location.pathname; // 쿼리스트링 없이 새로고침 → 체험 플래그·로그인 완전 해제
 }
 
 
