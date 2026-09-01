@@ -869,6 +869,10 @@ function hqLogout(){
   try { localStorage.removeItem('hq_user'); } catch(e){}
   try { sessionStorage.removeItem('hq_user'); } catch(e){}
   try { localStorage.removeItem('nhs_trial'); } catch(e){}
+  // 로그인 시 nms_current(My Notes 활성 프로필)를 로그인 이름으로 맞춰 놓으므로(위 941/1099행),
+  // 로그아웃에서도 nhs.html의 nhsLogout()과 동일하게 이 포인터를 비움(2026-09-01) —
+  // 실제 진도 데이터는 그대로 두고, "지금 로그인/기록 중"으로 보이는 흔적만 없앰.
+  try { localStorage.removeItem('nms_current'); } catch(e){}
   location.reload();
 }
 

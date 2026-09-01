@@ -7422,7 +7422,12 @@ function nhsLogout(){
   try{ localStorage.removeItem('nhs_trial'); }catch(e){}
   try{ localStorage.removeItem('hq_user'); }catch(e){}
   try{ sessionStorage.removeItem('hq_user'); }catch(e){}
-  location.href = location.pathname; // 쿼리스트링 없이 새로고침 → 체험 플래그·로그인 완전 해제
+  // 로그인 시 index.html이 nms_current(My Notes 활성 프로필)를 로그인 이름으로 맞춰 놓는데(941/1099행),
+  // 로그아웃에서 이걸 안 지우면 My Notes 로컬 기록이 그대로 남아있어서 로드맵이 계속 그 이름으로
+  // "기록되고 있어요"라고 안내함 — 실제 진도 데이터(nms_이름_*)는 안 지우고, "현재 활성 프로필" 포인터만
+  // 비움(My Notes 쪽에서 이미 nms_current가 비면 "이름 만들기" 화면을 보여주도록 되어 있음, 안전).
+  try{ localStorage.removeItem('nms_current'); }catch(e){}
+  location.href = location.pathname; // 쿼리스트링 없이 새로고침 → 체험 플래그·로그인·활성 프로필 전부 해제
 }
 function nhsExitTrial(){ nhsLogout(); }
 
