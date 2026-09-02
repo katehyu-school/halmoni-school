@@ -4,8 +4,10 @@
 // ═══════════════════════════════════════════════════════════════
 
 // ── 1. INJECT CSS ────────────────────────────────────────────────
-(function(){
+function _msInjectCSS(){
+  if (document.getElementById('ms-style')) return;
   const s = document.createElement('style');
+  s.id = 'ms-style';
   s.textContent = `
 /* ── MY SPACE ─────────────────────────────────────────── */
 .ms-btn{padding:5px 12px;border:1.5px solid rgba(255,255,255,.5);border-radius:7px;background:rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Jua',sans-serif;white-space:nowrap;transition:all .15s;}
@@ -77,11 +79,11 @@
 .ms-select{width:auto;border:1.5px solid #e0e0e0;border-radius:10px;padding:7px 10px;font-size:13px;font-family:'Nanum Gothic',sans-serif;background:#fafafa;outline:none;}
 `;
   document.head.appendChild(s);
-})();
+}
+_msInjectCSS();
 
 // ── 2. INJECT HTML ───────────────────────────────────────────────
-(function(){
-  function _inject(){
+function _msInjectHTML(){
     if (document.getElementById('ms-overlay')) return;
     const wrap = document.createElement('div');
     wrap.innerHTML = `
@@ -229,10 +231,9 @@
 </div>
 `;
     document.body.appendChild(wrap.firstElementChild);
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _inject);
-  else _inject();
-})();
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _msInjectHTML);
+else _msInjectHTML();
 
 // ── 3. JS (constants + functions — all global) ───────────────────
 // ═══════════════ MY SPACE ═══════════════════════════════
@@ -293,6 +294,11 @@ function msMoveProfileData(from, to){
 }
 
 function openMySpace() {
+  // 방어적 자가복구: document.write() 로 페이지를 새로 그릴 때 브라우저에 따라
+  // 위 1/2번 즉시-주입 코드가 실행되지 않는 경우가 있어(원인 미상, 2026-09-02 확인),
+  // 여기서 한 번 더 확실하게 CSS/HTML을 주입해 둡니다. 이미 있으면 그냥 return 하므로 안전합니다.
+  _msInjectCSS();
+  _msInjectHTML();
   document.getElementById('ms-overlay').classList.add('open');
   document.addEventListener('keydown', _msEscHandler);
   document.body.style.overflow='hidden';
