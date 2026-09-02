@@ -6634,11 +6634,37 @@ const TP_KEYS_ROW3 = [
   {main:'ㅠ',mtype:'v'},{main:'ㅜ',mtype:'v'},{main:'ㅡ',mtype:'v'},
 ];
 function _tpFn(type){ return type==='c' ? 'tpPressC' : 'tpPressV'; }
+let tpShiftOn = false;
+function tpToggleShift(){
+  tpShiftOn = !tpShiftOn;
+  document.querySelectorAll('.tp-shiftkey').forEach(b=>b.classList.toggle('active', tpShiftOn));
+}
+function tpKeyMainClick(main, mtype, shift, stype){
+  if (tpShiftOn && shift){
+    (stype==='c' ? tpPressC : tpPressV)(shift);
+    tpShiftOn = false;
+    document.querySelectorAll('.tp-shiftkey').forEach(b=>b.classList.remove('active'));
+  } else {
+    (mtype==='c' ? tpPressC : tpPressV)(main);
+  }
+}
+function tpPressSpace(){
+  tpSnapshot();
+  if (tpCur.onset && tpCur.vowel) tpDone += combineSyl(tpCur.onset, tpCur.vowel, tpCur.coda||'');
+  else if (tpCur.onset) tpDone += tpCur.onset;
+  else if (tpCur.vowel) tpDone += tpCur.vowel;
+  tpCur = {onset:null, vowel:null, coda:null};
+  tpDone += ' ';
+  tpRefresh();
+}
 function _tpKeyHtml(k){
   const shiftHtml = k.shift
     ? ('<span class="tp-key-shift" onclick="event.stopPropagation();'+_tpFn(k.stype)+'(\''+k.shift+'\')">'+k.shift+'</span>')
     : '';
-  return '<div class="tp-key">'+shiftHtml+'<span class="tp-key-main" onclick="'+_tpFn(k.mtype)+'(\''+k.main+'\')">'+k.main+'</span></div>';
+  const mainClick = k.shift
+    ? ('tpKeyMainClick(\''+k.main+'\',\''+k.mtype+'\',\''+k.shift+'\',\''+k.stype+'\')')
+    : (_tpFn(k.mtype)+'(\''+k.main+'\')');
+  return '<div class="tp-key">'+shiftHtml+'<span class="tp-key-main" onclick="'+mainClick+'">'+k.main+'</span></div>';
 }
 function _tpRowHtml(keys, rowClass){
   return '<div class="tp-kbd-row '+rowClass+'">'+keys.map(_tpKeyHtml).join('')+'</div>';
@@ -6665,6 +6691,14 @@ function buildTyping(){
     +'.tp-key-shift{position:absolute;top:2px;right:4px;font-family:var(--font-kr);font-size:0.62rem;font-weight:700;color:var(--teal);cursor:pointer;padding:2px;}'
     +'.tp-key-shift:hover{color:var(--teal-dark);text-decoration:underline;}'
     +'.tp-kbd-legend{font-size:11px;color:var(--warm-400);margin-bottom:16px;}'
+    +'.tp-kbd-row.r4{margin-top:2px;}'
+    +'.tp-shiftkey{width:64px;height:50px;flex-shrink:0;border-radius:8px;border:1.5px solid var(--gray-200);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-kr);font-size:.85rem;font-weight:700;color:var(--gray-900);cursor:pointer;transition:all .15s;}'
+    +'.tp-shiftkey span{font-size:.55rem;font-weight:600;color:var(--warm-400);}'
+    +'.tp-shiftkey:hover{border-color:var(--teal-md);background:var(--teal-50);}'
+    +'.tp-shiftkey.active{background:var(--teal);border-color:var(--teal);color:#fff;}'
+    +'.tp-shiftkey.active span{color:#e0f5f2;}'
+    +'.tp-spacekey{flex:1;max-width:340px;height:50px;border-radius:8px;border:1.5px solid var(--gray-200);background:#fff;font-family:var(--font-kr);font-size:.8rem;font-weight:700;color:var(--warm-500);cursor:pointer;transition:all .15s;}'
+    +'.tp-spacekey:hover{border-color:var(--teal-md);background:var(--teal-50);}'
     +'</style>'
     +'<div class="basics-intro">자음과 모음(ㅏ~ㅖ)만 순서대로 눌러 보세요! 실제 키보드처럼 겹모음(ㅗ+ㅏ=ㅘ)과 받침이 저절로 조립돼요. 여러 글자를 이어서 단어도 만들 수 있어요.<br><em>Press consonants and vowels (ㅏ–ㅖ) in order, just like a real keyboard — compound vowels and batchim assemble automatically. Keep pressing to type whole words.</em></div>'
     +'<div class="tp-display empty" id="tp-display"></div>'
@@ -6677,6 +6711,11 @@ function buildTyping(){
       +_tpRowHtml(TP_KEYS_ROW1,'r1')
       +_tpRowHtml(TP_KEYS_ROW2,'r2')
       +_tpRowHtml(TP_KEYS_ROW3,'r3')
+      +'<div class="tp-kbd-row r4">'
+        +'<button class="tp-shiftkey" onclick="tpToggleShift()">⇧<span>Shift</span></button>'
+        +'<button class="tp-spacekey" onclick="tpPressSpace()">Space</button>'
+        +'<button class="tp-shiftkey" onclick="tpToggleShift()">⇧<span>Shift</span></button>'
+      +'</div>'
     +'</div></div>'
     +'<div class="tp-kbd-legend">💡 작게 표시된 글자는 실제 자판에서 Shift와 함께 누르는 키예요 (쌍자음·이중모음).<br><em>The small letters are typed with Shift on a real keyboard (tense consonants, ㅒ/ㅖ).</em></div>';
 }
@@ -6736,6 +6775,8 @@ function tpBackspace(){
 }
 function tpClear(){
   tpDone=''; tpCur={onset:null,vowel:null,coda:null}; tpHist=[];
+  tpShiftOn = false;
+  document.querySelectorAll('.tp-shiftkey').forEach(b=>b.classList.remove('active'));
   tpRefresh();
 }
 function tpCurText(){
