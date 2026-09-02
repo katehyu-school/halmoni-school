@@ -7,6 +7,17 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 📐 **2026-09-02 완료 (Kids 문법 도우미 모달 신설 — 음절 만들기·조사·의문사·시제)**
+> — 선생님 요청: Kids에 모달 하나, 안에 4개 탭(음절 만들기 / 조사 / 의문사 / 시제). "음절 만들기"는 nhs.html Start Here > 한글을 배워요 > 음절 탭의 그 위젯과 내용이 100% 동일해야 함(Kids CSS로만 재구성), 나머지 3탭은 Kids 학생 눈높이로 쉽게.
+> — ⚠️ **작업 전 발견한 것 (중요)**: 이번 세션이 아닌 사이(8/30~31)에 크롤러 노출 사고로 Kids 콘텐츠 전체가 AES-256-GCM 암호화 번들(`data/kids/bundle.b64`) 구조로 바뀌어 있었는데, 이 변경이 CLAUDE.md에 전혀 기록이 안 되어 있었음. `korean-app_v2.html`은 이제 얇은 껍데기(잠금 화면 + 복호화 로직)일 뿐이고, 실제 콘텐츠(지난 세션의 Kinder 병합 포함 — 다행히 그대로 살아있었음)는 전부 그 암호화 파일 안에 있음. **새로 알아낸 편집 워크플로는 아래 "📱 초등반 앱 구조 > 🔐 콘텐츠 보안 구조" 섹션에 영구 기록해둠 — 다음 세션은 Kids 콘텐츠 손대기 전에 그거 먼저 볼 것.**
+> — 신설 위치: top-nav에 "📐 문법" 버튼(📖 단어 / ✏️ My Space 옆) → 기존 "학생 관리" 모달의 `.modal-overlay`/`.modal-box` 패턴을 그대로 재사용하고 폭만 640px로 확장(`grammar-modal-box`). 탭 전환은 칩 버튼(`.gm-tab`) + `gmSetTab()` 디스패처, 내용은 `#gm-content`에 매번 새로 렌더링.
+> — **음절 만들기**: nhs.html의 자모 목록(SYL_CONS/SYL_VOWS/SYL_BACH)과 `combineSyl()` 유니코드 조합 알고리즘을 그대로 이식(`GM_` 접두사, 로직 100% 동일 — 5개 예시 조합(가/한/글/맑 등)으로 수동 검증 완료). 스타일만 Kids 색상 변수(`--sky`/`--sun`/`--lavender`)로 새로 그림 — 초성·중성·받침 고르면 결과 글자 + 로마자 표기 + 🔊 발음 버튼.
+> — **조사·의문사·시제**: nhs.html 문법 레퍼런스(핵심 조사 4개, 의문사 8개, 규칙 동사 3개 시제표)에서 그대로 가져오되 Kids 카드/표 스타일로 단순화 — 교육 내용 자체는 nhs.html에 이미 있던 검증된 데이터 기반이라 오류 위험 낮음. 발음은 기존 `kdSpeak()` 재사용.
+> — ✅ **검증**: null byte 0, `</html>` 1개, 인라인 `<script>` 4블록 전부 `node --check` 통과, 원본(git dd41e03) 대비 diff 5개 hunk 전부 의도한 위치(CSS·nav버튼·모달HTML·JS블록)에만 국한됨을 확인.
+> — 🔐 **재암호화 + 배포까지 이번 세션에서 완료**: 기존 key/iv로 복호화 → 위 내용 편집 → 새 랜덤 IV로 재암호화 → 라운드트립 복호화로 원본과 바이트 단위 일치 확인 → `data/kids/bundle.b64` 교체 + Supabase `kids_bundle_key` 테이블의 `iv_hex`를 새 값으로 UPDATE 완료(key_hex는 유지, IV만 회전 — GCM 재사용 금지 원칙). **`korean-app_v2.html`은 이번에 안 바뀜 — git에 올릴 건 `data/kids/bundle.b64` 하나뿐.**
+> — ⚠️ **참고**: 작업 중 `.git/index.lock` 파일 삭제 시도가 권한 거부로 실패함(다른 프로그램이 잠그고 있을 가능성) — git 커밋이 안 되면 선생님 쪽에서 VS Code나 다른 git 도구를 닫았다가 다시 시도해 볼 것.
+> — ⏳ **git add/commit/push 대기 중** — `data/kids/bundle.b64`만 커밋하면 됨(korean-app_v2.html은 그대로).
+
 > 🧭 **2026-09-01 완료 (nhs.html — 학습 로드맵 2건 추가 / hangeulquest.com 리다이렉트 버그 수정)**
 > — 선생님 지시 3건: "1. 학습 로드맵 - 매일 복습에 레벨() 복습 단계를 마감 테스트 앞에 추가, 2. 학습 로드맵 - 숨은 기능 - 색인에 가입 회원 북마크 기능 설명 추가, 3. 어휘문법 복습 메카니즘 총정리 문서 최신화 확인."
 > **1) `loadRoadmap()` — "3. 매일 복습" 탭에 "레벨 복습" 스텝 신설**
@@ -926,6 +937,23 @@
 ---
 
 ## 📱 초등반 앱 구조 (`korean-app_v2.html`)
+
+### 🔐 콘텐츠 보안 구조 (2026-08-31~ AES 암호화 번들) — ⚠️ 다음 세션 필독, 편집 전에 꼭 볼 것
+- **배경**: 2026-08-30 크롤러가 비공개 Kids 콘텐츠 전체를 색인해버린 사고 발생(`74b9242`→`3d6e0c3`→`9e98dff` 커밋) — 이 변경이 CLAUDE.md에 기록이 안 되어 있었어서 2026-09-02 세션이 처음부터 git log로 재구성함. 앞으로는 이 섹션이 최신 상태를 유지해야 함.
+- **지금 구조**:
+  - `korean-app_v2.html` = **얇은 껍데기**일 뿐 — `#kids-gate` 잠금 화면 + 복호화 스크립트만 있음(약 1,400줄). 사이드바·과 목록·KD_VOCAB·selectBook() 등 **실제 앱 콘텐츠는 이 파일 안에 없음.**
+  - 실제 콘텐츠는 `data/kids/bundle.b64` — 원래 korean-app_v2.html 전체 내용을 AES-256-GCM으로 암호화해서 base64로 저장한 파일.
+  - 흐름: 반코드 있는 사용자가 페이지 열기 → Supabase RPC `kids_get_bundle(p_code)` → `_kids_code_ok()`로 반코드 검증 → 통과하면 `kids_bundle_key` 테이블(id=1)에서 `key_hex`/`iv_hex`/`bundle_url` 반환 → 브라우저가 `bundle.b64` 받아서 `crypto.subtle.decrypt`(AES-GCM)로 복호화 → `document.write()`로 페이지 전체를 그 내용으로 교체.
+  - Supabase 프로젝트 ref: `lgndgtnsrcifswlewnpn` (Supabase MCP 도구로 직접 SQL 조회/수정 가능).
+- **⚠️ Kids 콘텐츠(korean-app_v2.html 실제 내용)를 고치려면 — 이 순서 그대로**:
+  1. `select key_hex, iv_hex, bundle_url from kids_bundle_key where id=1;` 로 현재 key/iv 확인.
+  2. `data/kids/bundle.b64`를 그 key/iv로 복호화(Node `crypto.createDecipheriv('aes-256-gcm', key, iv)` — 마지막 16바이트가 GCM 인증 태그이므로 분리해서 `setAuthTag()`) → 평문 HTML 획득.
+  3. 그 평문을 **평소처럼**(Python exact-match 문자열 치환, 이 문서 "🛠 기술 스택 & 작업 방식" 참고) 편집.
+  4. **새 랜덤 IV**를 뽑아서 같은 key + 새 IV로 재암호화(`crypto.createCipheriv`) → ciphertext+tag를 base64로 저장 → `data/kids/bundle.b64` 교체.
+     - ⚠️ **키는 재사용해도 되지만 IV는 절대 재사용 금지** — 같은 key+IV로 다른 평문을 암호화하면 AES-GCM 보안이 깨짐. 재암호화할 때마다 반드시 새 IV.
+  5. Supabase `kids_bundle_key` 테이블의 `iv_hex`를 새 값으로 UPDATE (`key_hex`/`bundle_url`은 그대로 둠).
+  6. 재암호화 직후 **반드시** 그 key+새IV로 다시 복호화해서 원본 평문과 바이트 단위로 일치하는지 라운드트립 검증 후에 배포.
+  7. git에는 `data/kids/bundle.b64`만 커밋하면 됨 — `korean-app_v2.html`(껍데기)은 안 바뀜.
 
 ### 전체 구조
 - **단일 HTML 파일** (CSS + JS 인라인)

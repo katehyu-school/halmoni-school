@@ -1108,12 +1108,17 @@ async function checkPw() {
 
       // Kids 반 코드 — 로그인한 멤버만 서버에서 받아 저장.
       // core.js 가 같은 키를 읽으므로 링크에 ?c= 를 붙이지 않아도 명단이 열립니다.
-      _sb.rpc('class_code_for_member', { p_name: data.name, p_pin: pin })
-        .then(({ data: cc }) => {
-          if (cc && cc.ok && cc.code) {
-            try { localStorage.setItem('hq_class_code', cc.code); } catch(e) {}
-          }
-        }).catch(()=>{});
+      // ⚠️ 2026-09-02 수정: 예전엔 fire-and-forget(.then)이라 반코드가 localStorage에
+      //    저장되기 전에 바로 아래 enterAs()가 korean-app_v2.html로 넘어가버려서,
+      //    특히 teacher/admin처럼 선택 화면 없이 Kids로 바로 이동하는 경우 반코드가
+      //    아직 저장 안 된 채로 도착해 잠금 화면이 뜨는 사고가 있었음(선생님 로그인 거절 버그).
+      //    반드시 await로 저장 완료를 기다린 뒤에 이동하도록 수정.
+      try {
+        const { data: cc } = await _sb.rpc('class_code_for_member', { p_name: data.name, p_pin: pin });
+        if (cc && cc.ok && cc.code) {
+          try { localStorage.setItem('hq_class_code', cc.code); } catch(e) {}
+        }
+      } catch(e) {}
       closeLoginModal();
       enterAs(data);
     }
