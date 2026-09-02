@@ -1364,9 +1364,12 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 60px; }
       if(!bundleRes.ok) return false;
       var b64 = (await bundleRes.text()).trim();
 
+      // 2026-09-02: IV는 더 이상 서버(Supabase)에 따로 안 두고, 번들 파일 맨 앞 12바이트에
+      // 함께 저장합니다 — 그래야 파일과 IV가 항상 한 몸으로 배포되어 어긋날 일이 없어요.
       var keyBytes = _hexToBytes(r.key);
-      var ivBytes  = _hexToBytes(r.iv);
-      var ctBytes  = _b64ToBytes(b64);
+      var allBytes = _b64ToBytes(b64);
+      var ivBytes  = allBytes.slice(0, 12);
+      var ctBytes  = allBytes.slice(12);
 
       var cryptoKey = await crypto.subtle.importKey('raw', keyBytes, {name:'AES-GCM'}, false, ['decrypt']);
       var plainBuf  = await crypto.subtle.decrypt({name:'AES-GCM', iv: ivBytes}, cryptoKey, ctBytes);
