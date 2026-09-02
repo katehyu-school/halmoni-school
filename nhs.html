@@ -3477,6 +3477,7 @@ function renderIdxBody(){
 const BASICS_TOPICS = [
   {id:'hangul',    icon:'🔤', label:'한글을 배워요',    en:'Korean Alphabet', grp:'learn'},
   {id:'writing',   icon:'✍️', label:'글쓰기 연습',      en:'Writing Practice', grp:'learn'},
+  {id:'typing',    icon:'⌨️', label:'자판 연습',        en:'Typing Practice', grp:'learn'},
   {id:'essential', icon:'🗝️', label:'필수 낱말 카드',   en:'Essential Word Cards', grp:'ref', refGroup:'vocab'},
   {id:'numbers',   icon:'🔢', label:'한국 숫자',        en:'Korean Numbers', grp:'ref', refGroup:'vocab'},
   {id:'greetings', icon:'👋', label:'인사 & 교실 표현', en:'Greetings & Classroom', grp:'ref', refGroup:'vocab'},
@@ -5209,7 +5210,9 @@ async function loadRoadmap(){
     +'④ <b>✍️ 글쓰기 연습</b> — 자모 획순 → 글자 하나씩 → 의미 있는 단어 순서로 손으로 써 본 다음'
       +'<span class="en-gloss"><br><i>✍️ Writing practice — stroke order → one letter at a time → real words, written by hand.</i></span><br>'
     +'⑤ 같은 화면 <b>🧩 내 이름 만들기</b> — 내 이름을 한글로 직접 조립한 다음 &lt;써 보기&gt;를 눌러 써 보세요!'
-      +'<span class="en-gloss"><br><i>Same screen, 🧩 Build My Name — assemble your own name in Hangeul, then tap "Write it" to trace it.</i></span></div>'
+      +'<span class="en-gloss"><br><i>Same screen, 🧩 Build My Name — assemble your own name in Hangeul, then tap "Write it" to trace it.</i></span><br>'
+    +'⑥ <b>⌨️ 자판 연습</b> — 실제 키보드처럼 자음·모음을 눌러서 단어를 타이핑해 봐요'
+      +'<span class="en-gloss"><br><i>⌨️ Typing Practice — press consonants and vowels like a real keyboard to type out words.</i></span></div>'
     +'<div style="margin-top:8px;font-size:12px;color:var(--warm-500)">💡 하루 20분이면 대개 <b>3~5일</b>에 읽을 수 있어요. 다 외우지 말고 <b>읽을 수만 있으면</b> 다음으로 넘어가세요.'
       +'<span class="en-gloss"><br><i>20 minutes a day is usually enough to read Hangeul in 3–5 days. Don\'t memorise everything — move on once you can read.</i></span></div>'
     +_rmBtn('🔤 한글 배우러 가기 · Learn Hangeul',"loadBasics('hangul')",true);
@@ -5453,10 +5456,12 @@ function loadBasics(topicId){
   if(topicId==='honorifics')body.innerHTML=buildHonorifics();
   if(topicId==='connectors')body.innerHTML=buildConnectors();
   if(topicId==='spacing')  body.innerHTML=buildSpacing();
+  if(topicId==='typing')   body.innerHTML=buildTyping();
   if(topicId==='hangul')  requestAnimationFrame(()=>updateSylResult());
   if(topicId==='writing') requestAnimationFrame(()=>initWritingCanvas());
   if(topicId==='verbs')   requestAnimationFrame(()=>renderVerbGame());
   if(topicId==='spacing') requestAnimationFrame(()=>renderSpGame());
+  if(topicId==='typing')  requestAnimationFrame(()=>tpClear());
 }
 
 function switchBtab(pfx,tabId){
@@ -6597,6 +6602,116 @@ function buildWriting(){
       +'</div>'
     +'</div>'
     +'<div class="structure-note">💡 <strong>획순 기본 원칙:</strong> ① 위에서 아래 ② 왼쪽에서 오른쪽 ③ 가로획 먼저<br><em>Stroke order: ① Top to bottom ② Left to right ③ Horizontal before vertical</em></div>';
+}
+
+// ══════════════════════════════════════════════════════
+// ── ⌨️ 자판 연습 · Typing Practice (2026-09-02 신규) ──
+//   Kids 앱의 '음절 만들기 2단계'와 동일한 두벌식 조합 로직을 도란채용으로 이식.
+//   실제 키보드처럼 자음 19개 + 기본모음 14개(ㅏ~ㅖ)만 주고, 겹모음(ㅗ+ㅏ=ㅘ 등)·받침·
+//   재음절화(받침 뒤에 모음이 오면 받침이 다음 글자 초성으로 넘어가는 것)는 로직으로 자동 처리.
+//   combineSyl()/SYL_CONS/SYL_VOWS는 위에서 이미 정의된 전역을 그대로 재사용.
+// ══════════════════════════════════════════════════════
+const TP_VOWS_BASIC = SYL_VOWS.slice(0, 14);
+const TP_VOWEL_COMBO = {'ㅗ':{'ㅏ':'ㅘ','ㅐ':'ㅙ','ㅣ':'ㅚ'}, 'ㅜ':{'ㅓ':'ㅝ','ㅔ':'ㅞ','ㅣ':'ㅟ'}, 'ㅡ':{'ㅣ':'ㅢ'}};
+const TP_CODA_COMBO = {'ㄱ':{'ㅅ':'ㄳ'}, 'ㄴ':{'ㅈ':'ㄵ','ㅎ':'ㄶ'}, 'ㄹ':{'ㄱ':'ㄺ','ㅁ':'ㄻ','ㅂ':'ㄼ','ㅅ':'ㄽ','ㅌ':'ㄾ','ㅍ':'ㄿ','ㅎ':'ㅀ'}, 'ㅂ':{'ㅅ':'ㅄ'}};
+const TP_CODA_SPLIT = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ']};
+let tpDone='', tpCur={onset:null,vowel:null,coda:null}, tpHist=[];
+
+function buildTyping(){
+  return '<style>'
+    +'.tp-display{min-height:64px;background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 18px;margin-bottom:14px;font-family:var(--font-kr);font-size:2rem;font-weight:700;color:var(--gray-900);display:flex;align-items:center;flex-wrap:wrap;gap:4px;word-break:break-all;}'
+    +'.tp-display.empty{color:var(--warm-300);font-size:1rem;font-weight:400;}'
+    +'.tp-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}'
+    +'.tp-btn{padding:8px 16px;border:none;border-radius:var(--radius-xl);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:var(--font-kr);}'
+    +'.tp-btn.back,.tp-btn.clear{background:var(--gray-100);color:var(--warm-700);}'
+    +'.tp-btn.back:hover,.tp-btn.clear:hover{background:var(--gray-200);}'
+    +'.tp-btn.speak{background:var(--teal);color:#fff;}'
+    +'.tp-btn.speak:hover{background:var(--teal-dark);}'
+    +'</style>'
+    +'<div class="basics-intro">자음과 모음(ㅏ~ㅖ)만 순서대로 눌러 보세요! 실제 키보드처럼 겹모음(ㅗ+ㅏ=ㅘ)과 받침이 저절로 조립돼요. 여러 글자를 이어서 단어도 만들 수 있어요.<br><em>Press consonants and vowels (ㅏ–ㅖ) in order, just like a real keyboard — compound vowels and batchim assemble automatically. Keep pressing to type whole words.</em></div>'
+    +'<div class="tp-display empty" id="tp-display"></div>'
+    +'<div class="tp-controls">'
+      +'<button class="tp-btn back" onclick="tpBackspace()">⌫ 한 글자 지우기</button>'
+      +'<button class="tp-btn clear" onclick="tpClear()">↺ 처음부터</button>'
+      +'<button class="tp-btn speak" id="tp-speak-btn" style="display:none" onclick="speakTTS(document.getElementById(\'tp-display\').textContent)">🔊 듣기</button>'
+    +'</div>'
+    +'<div class="syl-picker-label">자음 · Consonants</div>'
+    +'<div class="syl-picker">'+SYL_CONS.map(c=>'<button class="spick" onclick="tpPressC(\''+c+'\')">'+c+'</button>').join('')+'</div>'
+    +'<div class="syl-picker-label">모음 · Vowels</div>'
+    +'<div class="syl-picker">'+TP_VOWS_BASIC.map(v=>'<button class="spick" onclick="tpPressV(\''+v+'\')">'+v+'</button>').join('')+'</div>';
+}
+function tpSnapshot(){
+  tpHist.push({done:tpDone, cur:{onset:tpCur.onset, vowel:tpCur.vowel, coda:tpCur.coda}});
+}
+function tpPressC(c){
+  tpSnapshot();
+  if (tpCur.onset===null && tpCur.vowel!==null && tpCur.coda===null){
+    tpDone += tpCur.vowel;
+    tpCur = {onset:null, vowel:null, coda:null};
+  }
+  if (tpCur.vowel===null){
+    if (tpCur.onset===null){ tpCur.onset=c; }
+    else { tpDone += tpCur.onset; tpCur={onset:c, vowel:null, coda:null}; }
+  } else {
+    if (tpCur.coda===null){ tpCur.coda=c; }
+    else {
+      const combo = TP_CODA_COMBO[tpCur.coda] && TP_CODA_COMBO[tpCur.coda][c];
+      if (combo){ tpCur.coda=combo; }
+      else {
+        tpDone += combineSyl(tpCur.onset, tpCur.vowel, tpCur.coda);
+        tpCur = {onset:c, vowel:null, coda:null};
+      }
+    }
+  }
+  tpRefresh();
+}
+function tpPressV(v){
+  tpSnapshot();
+  if (tpCur.onset===null && tpCur.vowel===null){
+    tpDone += v;
+  } else if (tpCur.vowel===null){
+    tpCur.vowel = v;
+  } else if (tpCur.coda===null){
+    const combo = TP_VOWEL_COMBO[tpCur.vowel] && TP_VOWEL_COMBO[tpCur.vowel][v];
+    if (combo){ tpCur.vowel = combo; }
+    else {
+      tpDone += (tpCur.onset ? combineSyl(tpCur.onset, tpCur.vowel, '') : tpCur.vowel);
+      tpCur = {onset:null, vowel:v, coda:null};
+    }
+  } else {
+    const split = TP_CODA_SPLIT[tpCur.coda];
+    const staysCoda = split ? split[0] : '';
+    const movingC   = split ? split[1] : tpCur.coda;
+    tpDone += combineSyl(tpCur.onset, tpCur.vowel, staysCoda);
+    tpCur = {onset:movingC, vowel:v, coda:null};
+  }
+  tpRefresh();
+}
+function tpBackspace(){
+  if (!tpHist.length) return;
+  const prev = tpHist.pop();
+  tpDone = prev.done;
+  tpCur = prev.cur;
+  tpRefresh();
+}
+function tpClear(){
+  tpDone=''; tpCur={onset:null,vowel:null,coda:null}; tpHist=[];
+  tpRefresh();
+}
+function tpCurText(){
+  if (tpCur.onset && tpCur.vowel) return combineSyl(tpCur.onset, tpCur.vowel, tpCur.coda||'');
+  if (tpCur.onset) return tpCur.onset;
+  if (tpCur.vowel) return tpCur.vowel;
+  return '';
+}
+function tpRefresh(){
+  const disp = document.getElementById('tp-display');
+  if (!disp) return;
+  const text = tpDone + tpCurText();
+  disp.textContent = text || '';
+  disp.classList.toggle('empty', !text);
+  const btn = document.getElementById('tp-speak-btn');
+  if (btn) btn.style.display = text ? '' : 'none';
 }
 
 // ══════════════════════════════════════════════════════
