@@ -3158,7 +3158,7 @@ function getEpLabel(epKey){
 const QREF_TABS=[['greetings','👋 인사·교실'],['questions','❓ 의문사'],['honorifics','🙇 호칭'],['numbers','🔢 숫자'],['verbs','⚙️ 동사 활용'],['connectors','🔗 접속부사'],['spacing','📏 띄어쓰기']];
 let _qrefCur='greetings';
 function openQuickRef(){var o=document.getElementById('qref-overlay');if(!o)return;o.classList.add('open');qrefRender(_qrefCur);}
-function closeQuickRef(){var o=document.getElementById('qref-overlay');if(o)o.classList.remove('open');}
+function closeQuickRef(){var o=document.getElementById('qref-overlay');if(o)o.classList.remove('open');var b=document.getElementById('qref-body');if(b)b.innerHTML='';}
 function qrefRender(id){
   _qrefCur=id;
   var t=document.getElementById('qref-tabs');
@@ -6970,7 +6970,7 @@ function buildHonorifics(){
 
   const sections = [
     {title:'👨‍👩‍👧 가족 호칭 · Family Titles (일반적 호칭 · General)',color:'#E8F5E9',border:'#81C784',rows:[
-      ['엄마 / 어머니','eom-ma / eo-meo-ni','Mom / Mother (formal)','엄마, 밥 먹자!'],
+      ['엄마 / 어머니','eom-ma / eo-meo-ni','Mom / Mother (formal)','엄마 밥 먹어요 / 어머니 식사하세요'],
       ['아빠 / 아버지','a-ppa / a-beo-ji','Dad / Father (formal)','아버지, 안녕히 계세요.'],
       ['동생','dong-saeng','Younger sibling','동생이 귀여워요.'],
       ['할머니 / 할아버지','hal-meo-ni / ha-ra-beo-ji','Grandmother / Grandfather','할머니, 보고 싶어요!'],
