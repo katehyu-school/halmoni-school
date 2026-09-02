@@ -6617,6 +6617,32 @@ const TP_CODA_COMBO = {'ㄱ':{'ㅅ':'ㄳ'}, 'ㄴ':{'ㅈ':'ㄵ','ㅎ':'ㄶ'}, '�
 const TP_CODA_SPLIT = {'ㄳ':['ㄱ','ㅅ'],'ㄵ':['ㄴ','ㅈ'],'ㄶ':['ㄴ','ㅎ'],'ㄺ':['ㄹ','ㄱ'],'ㄻ':['ㄹ','ㅁ'],'ㄼ':['ㄹ','ㅂ'],'ㄽ':['ㄹ','ㅅ'],'ㄾ':['ㄹ','ㅌ'],'ㄿ':['ㄹ','ㅍ'],'ㅀ':['ㄹ','ㅎ'],'ㅄ':['ㅂ','ㅅ']};
 let tpDone='', tpCur={onset:null,vowel:null,coda:null}, tpHist=[];
 
+// 표준 두벌식(2-beolsik) 물리 자판 배치 — 각 키는 기본(main) 글자 + (있으면) Shift 글자(shift)를 가짐.
+// mtype/stype: 'c'=자음(tpPressC 호출), 'v'=모음(tpPressV 호출)
+const TP_KEYS_ROW1 = [
+  {main:'ㅂ',mtype:'c',shift:'ㅃ',stype:'c'},{main:'ㅈ',mtype:'c',shift:'ㅉ',stype:'c'},
+  {main:'ㄷ',mtype:'c',shift:'ㄸ',stype:'c'},{main:'ㄱ',mtype:'c',shift:'ㄲ',stype:'c'},
+  {main:'ㅅ',mtype:'c',shift:'ㅆ',stype:'c'},{main:'ㅛ',mtype:'v'},{main:'ㅕ',mtype:'v'},
+  {main:'ㅑ',mtype:'v'},{main:'ㅐ',mtype:'v',shift:'ㅒ',stype:'v'},{main:'ㅔ',mtype:'v',shift:'ㅖ',stype:'v'},
+];
+const TP_KEYS_ROW2 = [
+  {main:'ㅁ',mtype:'c'},{main:'ㄴ',mtype:'c'},{main:'ㅇ',mtype:'c'},{main:'ㄹ',mtype:'c'},{main:'ㅎ',mtype:'c'},
+  {main:'ㅗ',mtype:'v'},{main:'ㅓ',mtype:'v'},{main:'ㅏ',mtype:'v'},{main:'ㅣ',mtype:'v'},
+];
+const TP_KEYS_ROW3 = [
+  {main:'ㅋ',mtype:'c'},{main:'ㅌ',mtype:'c'},{main:'ㅊ',mtype:'c'},{main:'ㅍ',mtype:'c'},
+  {main:'ㅠ',mtype:'v'},{main:'ㅜ',mtype:'v'},{main:'ㅡ',mtype:'v'},
+];
+function _tpFn(type){ return type==='c' ? 'tpPressC' : 'tpPressV'; }
+function _tpKeyHtml(k){
+  const shiftHtml = k.shift
+    ? ('<span class="tp-key-shift" onclick="event.stopPropagation();'+_tpFn(k.stype)+'(\''+k.shift+'\')">'+k.shift+'</span>')
+    : '';
+  return '<div class="tp-key">'+shiftHtml+'<span class="tp-key-main" onclick="'+_tpFn(k.mtype)+'(\''+k.main+'\')">'+k.main+'</span></div>';
+}
+function _tpRowHtml(keys, rowClass){
+  return '<div class="tp-kbd-row '+rowClass+'">'+keys.map(_tpKeyHtml).join('')+'</div>';
+}
 function buildTyping(){
   return '<style>'
     +'.tp-display{min-height:64px;background:#fff;border:2px solid var(--gray-200);border-radius:var(--radius-md);padding:12px 18px;margin-bottom:14px;font-family:var(--font-kr);font-size:2rem;font-weight:700;color:var(--gray-900);display:flex;align-items:center;flex-wrap:wrap;gap:4px;word-break:break-all;}'
@@ -6627,6 +6653,18 @@ function buildTyping(){
     +'.tp-btn.back:hover,.tp-btn.clear:hover{background:var(--gray-200);}'
     +'.tp-btn.speak{background:var(--teal);color:#fff;}'
     +'.tp-btn.speak:hover{background:var(--teal-dark);}'
+    +'.tp-kbd-wrap{overflow-x:auto;padding-bottom:6px;margin-bottom:8px;}'
+    +'.tp-kbd{display:inline-flex;flex-direction:column;gap:6px;}'
+    +'.tp-kbd-row{display:flex;gap:6px;}'
+    +'.tp-kbd-row.r2{margin-left:22px;}'
+    +'.tp-kbd-row.r3{margin-left:44px;}'
+    +'.tp-key{position:relative;width:50px;height:50px;flex-shrink:0;border-radius:8px;border:1.5px solid var(--gray-200);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .15s;}'
+    +'.tp-key:hover{border-color:var(--teal-md);background:var(--teal-50);}'
+    +'.tp-key-main{font-family:var(--font-kr);font-size:1.15rem;font-weight:700;color:var(--gray-900);cursor:pointer;padding:8px;}'
+    +'.tp-key-main:hover{color:var(--teal-dark);}'
+    +'.tp-key-shift{position:absolute;top:2px;right:4px;font-family:var(--font-kr);font-size:0.62rem;font-weight:700;color:var(--teal);cursor:pointer;padding:2px;}'
+    +'.tp-key-shift:hover{color:var(--teal-dark);text-decoration:underline;}'
+    +'.tp-kbd-legend{font-size:11px;color:var(--warm-400);margin-bottom:16px;}'
     +'</style>'
     +'<div class="basics-intro">자음과 모음(ㅏ~ㅖ)만 순서대로 눌러 보세요! 실제 키보드처럼 겹모음(ㅗ+ㅏ=ㅘ)과 받침이 저절로 조립돼요. 여러 글자를 이어서 단어도 만들 수 있어요.<br><em>Press consonants and vowels (ㅏ–ㅖ) in order, just like a real keyboard — compound vowels and batchim assemble automatically. Keep pressing to type whole words.</em></div>'
     +'<div class="tp-display empty" id="tp-display"></div>'
@@ -6635,10 +6673,12 @@ function buildTyping(){
       +'<button class="tp-btn clear" onclick="tpClear()">↺ 처음부터</button>'
       +'<button class="tp-btn speak" id="tp-speak-btn" style="display:none" onclick="speakTTS(document.getElementById(\'tp-display\').textContent)">🔊 듣기</button>'
     +'</div>'
-    +'<div class="syl-picker-label">자음 · Consonants</div>'
-    +'<div class="syl-picker">'+SYL_CONS.map(c=>'<button class="spick" onclick="tpPressC(\''+c+'\')">'+c+'</button>').join('')+'</div>'
-    +'<div class="syl-picker-label">모음 · Vowels</div>'
-    +'<div class="syl-picker">'+TP_VOWS_BASIC.map(v=>'<button class="spick" onclick="tpPressV(\''+v+'\')">'+v+'</button>').join('')+'</div>';
+    +'<div class="tp-kbd-wrap"><div class="tp-kbd">'
+      +_tpRowHtml(TP_KEYS_ROW1,'r1')
+      +_tpRowHtml(TP_KEYS_ROW2,'r2')
+      +_tpRowHtml(TP_KEYS_ROW3,'r3')
+    +'</div></div>'
+    +'<div class="tp-kbd-legend">💡 작게 표시된 글자는 실제 자판에서 Shift와 함께 누르는 키예요 (쌍자음·이중모음).<br><em>The small letters are typed with Shift on a real keyboard (tense consonants, ㅒ/ㅖ).</em></div>';
 }
 function tpSnapshot(){
   tpHist.push({done:tpDone, cur:{onset:tpCur.onset, vowel:tpCur.vowel, coda:tpCur.coda}});
