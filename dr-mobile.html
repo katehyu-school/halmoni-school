@@ -37,6 +37,26 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 #scr-profile .logo-txt-ko{font-family:'Gaegu',sans-serif;font-size:2rem;font-weight:700;color:var(--teal);letter-spacing:.02em;line-height:1}
 #scr-profile .logo-txt-en{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:4px}
 #scr-profile .sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-top:-16px}
+/* 🔑 로그인 (2026-09-05) */
+.dr-auth{width:100%;max-width:340px;margin:2px auto 0;text-align:center}
+.dr-auth button.dr-login-open{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(78,205,196,.45);
+  background:rgba(78,205,196,.08);color:var(--teal);font-family:'Noto Sans KR',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer}
+.dr-auth button.dr-login-open:active{background:rgba(78,205,196,.18)}
+.dr-auth .dr-who{font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.7}
+.dr-auth .dr-who b{color:var(--teal)}
+.dr-auth .dr-out{background:none;border:none;color:rgba(255,255,255,.45);font-size:.72rem;text-decoration:underline;cursor:pointer;font-family:inherit;padding:2px 6px}
+.dr-login-back{position:fixed;inset:0;background:rgba(4,12,20,.72);backdrop-filter:blur(3px);z-index:80;display:none;align-items:center;justify-content:center;padding:22px}
+.dr-login-back.on{display:flex}
+.dr-login-sheet{width:100%;max-width:330px;background:#16242b;border:1px solid #2b3d45;border-radius:16px;padding:20px 18px;text-align:left}
+.dr-login-sheet h3{margin:0 0 6px;font-size:1rem;color:#eaf4f3}
+.dr-login-desc{margin:0 0 14px;font-size:.74rem;color:#9fbcb8;line-height:1.7}
+.dr-login-sheet label{display:block;font-size:.7rem;color:#8fb0ad;margin:0 0 4px}
+.dr-login-sheet input{width:100%;box-sizing:border-box;margin-bottom:11px;padding:11px 12px;border:1.5px solid #2b3d45;
+  border-radius:10px;background:#0f1b21;color:#eaf4f3;font-size:.95rem;font-family:inherit}
+.dr-login-err{min-height:17px;font-size:.72rem;color:#ff9d9d;margin-bottom:6px}
+.dr-login-cancel{width:100%;margin-top:8px;background:none;border:none;color:#7e9b97;font-size:.76rem;cursor:pointer;font-family:inherit;padding:6px}
+.dr-login-foot{margin-top:10px;font-size:.7rem;color:#7e9b97;text-align:center}
+.dr-login-foot a{color:var(--teal);text-decoration:none}
 .prof-card{width:100%;max-width:300px;border-radius:22px;padding:22px;display:flex;align-items:center;gap:16px;
   text-align:left;transition:transform .15s;border:2px solid transparent}
 .prof-card:active{transform:scale(.97)}
@@ -345,8 +365,25 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <svg width="46" height="46" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg>
     <span><h2>Doranchae</h2><p>복습 · 프리뷰 · Daily Quest</p></span>
   </button>
+  <div id="drAuthBox" class="dr-auth"></div>
   <div class="sub" style="font-size:.68rem;opacity:.7">하나의 앱, 두 개의 모습 — 프로필에 따라 전체 UI가 바뀝니다</div>
 </section>
+
+<!-- 🔑 로그인 시트 — 프로필 화면의 로그인 버튼에서 열림 (2026-09-05) -->
+<div class="dr-login-back" id="drLoginBack" onclick="if(event.target===this)drLoginClose()">
+  <div class="dr-login-sheet" role="dialog" aria-label="로그인">
+    <h3>🔑 로그인 · Log in</h3>
+    <p class="dr-login-desc">도란채 계정으로 로그인하면 <b>진도가 서버에 저장</b>되고, 정식 회원은 <b>Level 3 이상</b>도 열립니다.</p>
+    <label>아이디 · ID</label>
+    <input id="drLoginId" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="예: kate">
+    <label>비밀번호 · Password</label>
+    <input id="drLoginPw" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')drLoginSubmit()">
+    <div class="dr-login-err" id="drLoginErr"></div>
+    <button class="go-btn" style="width:100%" id="drLoginBtn" onclick="drLoginSubmit()">로그인</button>
+    <button class="dr-login-cancel" onclick="drLoginClose()">닫기</button>
+    <div class="dr-login-foot">아직 계정이 없나요? <a href="index.html?login=1">웹에서 무료로 만들기 →</a></div>
+  </div>
+</div>
 
 <!-- KIDS: QUEST MAP -->
 <section class="screen kids" id="scr-kids-map">
@@ -1385,6 +1422,73 @@ function hqClassCode(){
     return localStorage.getItem('hq_class_code') || '';
   }catch(e){ return ''; }
 }
+/* ── 🔑 로그인 · 로그아웃 (2026-09-05) ─────────────────────────
+   여태 모바일 앱은 "웹(index.html)에서 이미 로그인한 브라우저의 hq_user를 빌려 쓰는" 구조라,
+   앱만 설치한 사람은 로그인할 방법이 아예 없었습니다 — 계속 비회원(Level 1·2)에 머물고
+   진도도 서버에 저장되지 않았음. 여기서 직접 로그인할 수 있게 함.
+   supabase-js를 싣지 않는 모바일 관례대로 verify_login을 REST로 부릅니다.
+   ⚠️ 로그인 성공 후에는 화면을 새로 고칩니다 — HQM_ROLE·HQM_OPEN_MAX 같은 판정값이
+   페이지가 열릴 때 const로 한 번만 계산되기 때문에, 부분 갱신보다 새로고침이 확실합니다. */
+function drAuthRender(){
+  const box=document.getElementById('drAuthBox'); if(!box) return;
+  const u=_hqmUser();
+  if(u && u.name){
+    const nm=(u.display_name||u.name);
+    const badge = HQM_IS_MEMBER ? '정식 회원 · 전 레벨' : (u.role==='trial' ? '체험 계정 · Level 1·2' : 'Level 1·2');
+    box.innerHTML='<div class="dr-who">👤 <b>'+nm+'</b>님으로 로그인 중<br><span style="opacity:.6">'+badge+'</span>'
+      +'<br><button class="dr-out" onclick="drLogout()">로그아웃 · Log out</button></div>';
+  }else{
+    box.innerHTML='<button class="dr-login-open" onclick="drLoginOpen()">🔑 로그인 · Log in</button>'
+      +'<div class="dr-who" style="opacity:.55;font-size:.7rem;margin-top:6px">로그인하면 진도가 저장되고, 정식 회원은 Level 3 이상이 열려요</div>';
+  }
+}
+function drLoginOpen(){
+  document.getElementById('drLoginErr').textContent='';
+  document.getElementById('drLoginBack').classList.add('on');
+  setTimeout(function(){ const el=document.getElementById('drLoginId'); if(el) el.focus(); },80);
+}
+function drLoginClose(){
+  document.getElementById('drLoginBack').classList.remove('on');
+  document.getElementById('drLoginPw').value='';
+}
+async function drLoginSubmit(){
+  const id=(document.getElementById('drLoginId').value||'').trim().toLowerCase();
+  const pw=document.getElementById('drLoginPw').value||'';
+  const err=document.getElementById('drLoginErr'), btn=document.getElementById('drLoginBtn');
+  if(!id||!pw){ err.textContent='아이디와 비밀번호를 입력해 주세요.'; return; }
+  const cfg=window.HQ_SUPABASE;
+  if(!cfg){ err.textContent='서버 설정을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.'; return; }
+  btn.disabled=true; btn.textContent='확인 중…'; err.textContent='';
+  try{
+    const res=await fetch(cfg.URL+'/rest/v1/rpc/verify_login',{method:'POST',
+      headers:{'Content-Type':'application/json','apikey':cfg.KEY,'Authorization':'Bearer '+cfg.KEY},
+      body:JSON.stringify({p_name:id,p_pin:pw})}).then(function(r){return r.json()});
+    if(res && res.blocked){ err.textContent='이 계정은 현재 이용이 중지되었어요. 선생님께 문의해 주세요.'; return; }
+    if(!res || !res.name){ err.textContent='아이디나 비밀번호가 맞지 않아요.'; document.getElementById('drLoginPw').value=''; return; }
+    const json=JSON.stringify(res);
+    try{ localStorage.setItem('hq_user',json); sessionStorage.setItem('hq_user',json); }catch(e){}
+    try{ localStorage.setItem('nms_current', res.display_name||res.name);
+         localStorage.setItem('ms_current',  res.display_name||res.name); }catch(e){}
+    // Kids 반 코드 — 웹 로그인과 같은 절차(가정반 카드가 열리도록). 실패해도 로그인은 성립.
+    try{
+      const cc=await fetch(cfg.URL+'/rest/v1/rpc/class_code_for_member',{method:'POST',
+        headers:{'Content-Type':'application/json','apikey':cfg.KEY,'Authorization':'Bearer '+cfg.KEY},
+        body:JSON.stringify({p_name:res.name,p_pin:pw})}).then(function(r){return r.json()});
+      if(cc && cc.ok && cc.code) localStorage.setItem('hq_class_code', cc.code);
+    }catch(e){}
+    location.reload();
+  }catch(e){
+    err.textContent='서버 연결 오류. 잠시 후 다시 시도해 주세요.';
+  }finally{
+    btn.disabled=false; btn.textContent='로그인';
+  }
+}
+function drLogout(){
+  if(!confirm('로그아웃할까요? 이 기기에 저장된 진도는 그대로 남아 있어요.')) return;
+  try{ localStorage.removeItem('hq_user'); sessionStorage.removeItem('hq_user'); }catch(e){}
+  location.reload();
+}
+
 function enterKids(){
   if(!hqClassCode()){
     toast('Doranchae Kids 는 가정반 수업이에요 — 로그인 후 이용해 주세요');
@@ -1398,6 +1502,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var c = document.getElementById('profKidsCard');
     if(c) c.style.display = 'none';
   }
+  drAuthRender();          // 프로필 화면의 로그인/로그아웃 표시
 });
 function enterHQ(){
   if(!localStorage.getItem('hqOnboardSeen')){show('scr-hq-onboard');return}

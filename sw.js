@@ -1,4 +1,9 @@
-const CACHE = 'dr-mobile-v2'; // v1→v2: 아래 버그로 사이트 전체가 잘못 캐시돼 있던 걸 강제로 비우기 위해 이름을 올림
+const CACHE = 'dr-mobile-v4'; // v1→v2: 아래 버그로 사이트 전체가 잘못 캐시돼 있던 걸 강제로 비우기 위해 이름을 올림
+// v3→v4 (2026-09-05): dr-mobile.html에 로그인 버튼이 추가돼 다시 올림.
+// v2→v3 (2026-09-05): dr-mobile.html에 단어장 레벨 잠금이 들어가서, 예전 파일이 캐시에 남아 있으면
+//   기존 이용자에게 잠금 없는 옛 화면이 한 번 더 보일 수 있었음.
+// ⚠️ 앞으로도 dr-mobile.html을 고치면 이 버전 숫자를 반드시 한 칸 올릴 것 —
+//   안 올리면 이미 앱을 깔아 둔 사람에게는 다음 접속까지 옛 화면이 그대로 보입니다.
 const ASSETS = ['./dr-mobile.html', './hq-mobile.html', './manifest.json'];
 
 self.addEventListener('install', e => {
