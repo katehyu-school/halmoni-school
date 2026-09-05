@@ -964,7 +964,7 @@ async function _sLoadVocab(){
 }
 function _sBuildDeck(){
   const m=_sMap(),t=_sToday();
-  const POOL=(typeof _vMatch==='function'&&(vFilter.lv||vFilter.only||vFilter.q))?_vMatch():VOCAB_ALL;
+  const POOL=(typeof _vMatch==='function'&&(vFilter.lv||vFilter.only||vFilter.q))?_vMatch():_vPool();
   const due=POOL.filter(c=>{const st=m[_sId(c)];return st&&(st.due||'')<=t});
   due.sort((a,b)=>(m[_sId(a)].b||1)-(m[_sId(b)].b||1));
   const deck=due.slice(0,SRS_CAP);
@@ -976,6 +976,21 @@ function _sBuildDeck(){
   srsDeck=deck;srsIdx=0;srsFlip=false;srsLog={ok:0,no:0};
 }
 /* ── 🗂️ 단어장: 목록 + 검색 + 내 SRS 현황 ── */
+/* 🔒 2026-09-05 — 비회원(그리고 체험 계정)에게 잠긴 레벨(L3+)의 단어가 단어장 목록·검색·복습에
+   그대로 노출되던 것을 원천에서 차단. 웹 색인(nhs.html)에 2026-08-27에 넣은 규칙과 같음.
+   hqmLocked()는 이 아래에서 선언되지만, 이 함수들은 사용자가 화면을 열 때 호출되므로
+   (스크립트 최상위 실행 시점이 아님) TDZ 문제 없음. */
+function _vPool(){ return (VOCAB_ALL||[]).filter(c=>!hqmLocked(c.lv)); }
+function _gPool(){ return (GRAM_ALL||[]).filter(c=>!hqmLocked(c.lv)); }
+function vLockedMsg(){
+  alert('Level 3부터는 회원만 볼 수 있어요.\n무료 계정을 만들면 바로 열립니다.\n\nLevels 3+ are for members. Create a free account to unlock.');
+}
+function _vLvChips(){
+  return ['L1','L2','L3','L4','L5','L6'].map(function(l){
+    var lk=hqmLocked(l), on=(vFilter.lv===l);
+    return '<button onclick="'+(lk?'vLockedMsg()':"vSet('lv','"+l+"')")+'" style="border:none;border-radius:99px;padding:6px 12px;font-size:.72rem;font-weight:800;cursor:pointer;opacity:'+(lk?'.45':'1')+';background:'+(on?'var(--teal)':'#22333c')+';color:'+(on?'#06231f':'#9fbcb8')+'">'+l+(lk?' 🔒':'')+'</button>';
+  }).join('');
+}
 let vFilter={lv:'',q:'',only:''};
 async function vocabOpen(){
   show('scr-hq-vocab');
@@ -990,7 +1005,7 @@ function vSet(k,val){vFilter[k]=(vFilter[k]===val?'':val);vocabRender()}
 function vSearch(v){vFilter.q=v.trim();vocabRender(true)}
 function _vMatch(){
   const m=_sMap(),q=vFilter.q.toLowerCase();
-  return VOCAB_ALL.filter(c=>{
+  return _vPool().filter(c=>{
     if(vFilter.lv&&c.lv!==vFilter.lv)return false;
     const st=m[_sId(c)];
     if(vFilter.only==='new'&&st)return false;
@@ -1010,7 +1025,7 @@ function vocabRender(keepFocus){
     <div class="card">
       <h3>📊 내 어휘 지도</h3>
       <div class="stat-row" style="margin:8px 0 0">
-        <div class="stat"><div class="v" style="font-size:1.1rem">${seen}<span style="font-size:.7rem;color:#8fb0ad">/${VOCAB_ALL.length}</span></div><div class="k">만난 단어</div></div>
+        <div class="stat"><div class="v" style="font-size:1.1rem">${seen}<span style="font-size:.7rem;color:#8fb0ad">/${_vPool().length}</span></div><div class="k">만난 단어</div></div>
         <div class="stat"><div class="v" style="font-size:1.1rem">${done}</div><div class="k">거의 익힘</div></div>
         <div class="stat"><div class="v" style="font-size:1.1rem;color:${dueN?'var(--gold)':'#8fb0ad'}">${dueN}</div><div class="k">오늘 복습</div></div>
       </div>
@@ -1019,8 +1034,9 @@ function vocabRender(keepFocus){
     <input id="vq" value="${vFilter.q.replace(/"/g,'&quot;')}" oninput="vSearch(this.value)" placeholder="한국어·영어로 검색"
       style="width:100%;box-sizing:border-box;margin:10px 0 8px;padding:11px 13px;border:1.5px solid #2b3d45;border-radius:12px;background:#16242b;color:#eaf4f3;font-size:.9rem">
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">
-      ${['L1','L2','L3','L4','L5','L6'].map(l=>chip(l,'lv',l)).join('')}
+      ${_vLvChips()}
     </div>
+    ${HQM_IS_MEMBER?'':'<div style="background:#22333c;border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:.7rem;color:#9fbcb8;line-height:1.6">👋 지금 <b style="color:var(--teal)">Level 1·2</b> 단어를 보고 계세요 · Level 3부터는 무료 계정이 필요해요<br><a href="index.html" style="color:var(--teal)">계정 만들기 · Create a free account</a></div>'}
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
       ${chip('🆕 처음 보는','only','new')}${chip('🔄 약한 것','only','weak')}${chip('✅ 익힌 것','only','done')}
     </div>
@@ -1154,11 +1170,11 @@ function _gMark(c,ok){
 function _gDueCount(){const m=_gMap(),t=_sToday();return Object.keys(m).filter(k=>(m[k].due||'')<=t).length}
 function _gBuildDeck(){
   const m=_gMap(),t=_sToday();
-  const due=GRAM_ALL.filter(c=>{const st=m[_gId(c)];return st&&(st.due||'')<=t});
+  const due=_gPool().filter(c=>{const st=m[_gId(c)];return st&&(st.due||'')<=t});
   due.sort((a,b)=>(m[_gId(a)].b||1)-(m[_gId(b)].b||1));
   const deck=due.slice(0,SRS_CAP);
   if(deck.length<SRS_CAP){
-    const fresh=GRAM_ALL.filter(c=>!m[_gId(c)]);
+    const fresh=_gPool().filter(c=>!m[_gId(c)]);
     deck.push(...fresh.slice(0,SRS_CAP-deck.length));
   }
   gramDeck=deck;gramIdx=0;gramFlip=false;gramLog={ok:0,no:0};
