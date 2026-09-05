@@ -5493,7 +5493,7 @@ function hcHtml(item){
     +'<div class="hcard-ex">'+item.ex+'</div></div>';
 }
 function sylBlockGuide(mode){
-  function cell(id,area,active,label,sub,numMode){
+  function cell(id,area,active,label,sub,numMode,dashed){
     const palette={
       c:{bg:'var(--amber-lt)',fg:'var(--amber-600)',bd:'var(--amber)'},
       vb:{bg:'var(--green-100)',fg:'#15803d',bd:'var(--green-600)'},
@@ -5501,26 +5501,33 @@ function sylBlockGuide(mode){
       f:{bg:'var(--amber-lt)',fg:'var(--amber-600)',bd:'var(--amber)'}
     }[id];
     const style=active
-      ? 'background:'+palette.bg+';color:'+palette.fg+';border:1.5px solid '+palette.bd+';font-weight:800;'
+      ? 'background:'+palette.bg+';color:'+palette.fg+';border:1.5px '+(dashed?'dashed':'solid')+' '+palette.bd+';font-weight:800;'
       : 'background:var(--gray-100);color:var(--gray-400);border:1.5px dashed var(--gray-200);font-weight:600;';
     const subStyle=numMode
       ? 'font-size:15px;font-weight:800;color:#c0392b;margin-top:2px;'
       : 'font-size:8px;font-weight:500;margin-top:1px;';
     return '<div style="grid-area:'+area+';border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;'+style+'font-size:10.5px;padding:2px;">'+label+(sub?'<span style="display:block;'+subStyle+'">'+sub+'</span>':'')+'</div>';
   }
-  const isSyl=mode==='syllable';
+  const isTyp=mode==='typing';                  // ⌨️ 자판 연습 전용 — 받침 칸을 겹받침(④⑤)까지 세분화
+  const isSyl=mode==='syllable'||isTyp;         // 번호 표시 방식은 음절 모드와 동일
   const isC=isSyl||mode==='cons',isV=isSyl||mode==='vowel',isF=isSyl||mode==='cons'||mode==='batchim';
   const grid='<div style="display:grid;grid-template-columns:46px 46px;grid-template-rows:30px 30px 26px;gap:3px;flex-shrink:0;">'
     +cell('c','1 / 1 / 2 / 2',isC,'Consonant',isSyl?'1':'자음',isSyl)
     +cell('vb','1 / 2 / 3 / 3',isV,'Vowel',isSyl?'3':'모음',isSyl)
     +cell('vd','2 / 1 / 3 / 2',isV,'Vowel',isSyl?'2':'모음',isSyl)
-    +cell('f','3 / 1 / 4 / 3',isF,'Consonant',isSyl?'4':'받침 (Optional)',isSyl)
+    +(isTyp
+      // 겹받침을 칠 때의 순서를 보여주려고 받침 줄을 두 칸으로 나눔.
+      // ⑤(둘째 받침)는 겹받침일 때만 있으므로 점선 테두리로 '있을 수도 있음'을 표시.
+      ? cell('f','3 / 1 / 4 / 2',true,'Cons.','4',true)
+        +cell('f','3 / 2 / 4 / 3',true,'Cons.','5',true,true)
+      : cell('f','3 / 1 / 4 / 3',isF,'Consonant',isSyl?'4':'받침 (Optional)',isSyl))
     +'</div>';
   const captions={
     cons:'자음은 음절의 <strong>첫소리</strong>(왼쪽 위)로도, <strong>받침</strong>(맨 아래)으로도 올 수 있어요.<br><em>The same consonant can appear as the initial sound (top-left) or as the batchim (bottom) of a syllable.</em>',
     vowel:'모음은 모양에 따라 자음 <strong>오른쪽</strong>(ㅏㅑㅓㅕㅣ), <strong>아래</strong>(ㅗㅛㅜㅠㅡ), 또는 <strong>둘 다</strong>(ㅘㅝㅢ 등 복합모음)에 와요.<br><em>Vowels sit beside, below, or both — depending on their shape (compound vowels like ㅘ, ㅝ, ㅢ use both positions).</em>',
     batchim:'받침(종성)은 블록의 <strong>맨 아래</strong>에 오는 자음이에요 — 있어도 되고 없어도 돼요.<br><em>The batchim sits at the bottom of the block. It is optional — not every syllable has one.</em>',
-    syllable:'한 음절은 이 순서로 소리 나요: <strong>① 초성 → ② 모음(아래) / ③ 모음(옆) → ④ 받침(있으면)</strong>.<br><em>One syllable is read in this order: initial consonant → vowel → batchim (if present).</em>'
+    syllable:'한 음절은 이 순서로 소리 나요: <strong>① 초성 → ② 모음(아래) / ③ 모음(옆) → ④ 받침(있으면)</strong>.<br><em>One syllable is read in this order: initial consonant → vowel → batchim (if present).</em>',
+    typing:'자판도 이 순서 그대로 눌러요: <strong>① 첫 자음 → ② 모음(아래) → ③ 모음(옆) → ④ 받침 → ⑤ 겹받침의 둘째 자음</strong>. ⑤는 겹받침(ㄳ·ㄵ·ㄺ·ㅄ …)일 때만 있어요 — 두 자음을 순서대로 누르면 저절로 합쳐집니다. 예: <strong>값</strong> = ㄱ+ㅏ+ㅂ+ㅅ, <strong>화</strong> = ㅎ+ㅗ+ㅏ.<br><em>Type in the same order: initial consonant → vowel (below first, then beside) → batchim → the second consonant of a double batchim. Slot 5 appears only for double batchim — just press the two consonants one after the other.</em>'
   };
   return '<div style="display:flex;align-items:center;gap:16px;background:#fafaf7;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:16px;flex-wrap:wrap;">'
     +grid
@@ -6700,6 +6707,7 @@ function buildTyping(){
     +'.tp-spacekey{flex:1;max-width:340px;height:50px;border-radius:8px;border:1.5px solid var(--gray-200);background:#fff;font-family:var(--font-kr);font-size:.8rem;font-weight:700;color:var(--warm-500);cursor:pointer;transition:all .15s;}'
     +'.tp-spacekey:hover{border-color:var(--teal-md);background:var(--teal-50);}'
     +'</style>'
+    +sylBlockGuide('typing')
     +'<div class="basics-intro">자음과 모음(ㅏ~ㅖ)만 순서대로 눌러 보세요! 실제 키보드처럼 겹모음(ㅗ+ㅏ=ㅘ)과 받침이 저절로 조립돼요. 여러 글자를 이어서 단어도 만들 수 있어요.<br><em>Press consonants and vowels (ㅏ–ㅖ) in order, just like a real keyboard — compound vowels and batchim assemble automatically. Keep pressing to type whole words.</em></div>'
     +'<div class="tp-display empty" id="tp-display"></div>'
     +'<div class="tp-controls">'
