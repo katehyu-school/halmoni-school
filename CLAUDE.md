@@ -7,6 +7,32 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🏠 **2026-09-05 완료 (파비콘을 한옥 크레스트로 통일 — 구글 검색결과 아이콘 교체)**
+> — 선생님 발견: 구글 Search Console에 뜨는 사이트 아이콘이 아직 **"DR" 글자 원형**. 요청: "사이트 전체 상징은 한옥 모양(doranchae_crest), Kids와 성인은 **원형 vs 방패**로 구별."
+> — **원인**: 크레스트 파비콘 파일(`favicon-doranchae.svg` 등)은 2026-08-08에 만들어져 있었지만 **어느 페이지에서도 참조되지 않았음**. 실제로 걸려 있던 건 ① `index.html`·`nhs.html` 등의 `/logo_hq.png`(옛 이름, 내용은 DR 원형) ② nhs.html·korean-app_v2.html의 인라인 data-URI "DR" 아이콘. 게다가 기존 `favicon-doranchae.svg`에는 **한옥 지붕이 없었음**(ㄷ·ㅊ만) — 선생님이 말씀하신 상징의 핵심이 빠져 있었던 것.
+> — **새로 그림**: 크레스트(`doranchae_crest.svg`)의 지붕·ㄷ(툇마루)·ㅊ(사람, 훈민정음 옛 형태의 둥근 점) 형태를 **작은 크기에서도 읽히도록 굵기를 다시 잡아** 64px 뷰박스로 재작도. 축소 변형이 아니라 재작도인 이유: 원본 stroke 2px를 0.3배로 줄이면 화면에서 사라짐.
+>   · **원형 = 도란채(성인·사이트 전체)** — 네이비 바탕 + 민트 링 + 민트 지붕/ㄷ + 코랄 ㅊ
+>   · **방패 = Kids** — 키즈 틸 방패 + 흰 테두리 + 흰 지붕/ㄷ + 코랄 ㅊ (별·KIDS 글자는 16~32px에서 뭉개져 뺌)
+> — **파일 URL은 그대로 두고 내용만 교체** — 구글 문서가 "파비콘 URL은 자주 바꾸지 말 것"이라고 명시하고, `/logo_hq.png`는 이미 **learn/ 316개 페이지 + 루트 6개 페이지**가 가리키는 주소라서. 이름이 옛 브랜드(`hq`)인 건 감수 — 파일을 바꾸면 316개 페이지를 재생성해야 하고 구글도 새 주소를 다시 익혀야 함.
+> — 교체·신규 파일 10개: `logo_hq.png`(464) · `apple-touch-icon.png`(180, 네이비 배경 — 애플은 투명 금지) · `apple-touch-icon-doranchae.png` · `favicon-doranchae.svg` · `favicon-doranchae-32/96/192` · `favicon-doranchae-kids.svg` · `favicon-doranchae-kids-32/96`.
+> — 배선: 성인 페이지 6개(index·nhs·faq·privacy·license·consent)에 SVG 한 줄 추가(브라우저 탭용) + 기존 PNG 유지(**구글은 SVG를 파비콘 형식으로 안 받음** — PNG가 구글이 읽는 쪽). nhs.html의 인라인 DR 아이콘 삭제. Kids(korean-app_v2 껍데기)·유아반은 방패로 교체. dr-mobile.html은 아이콘 선언이 애플용 하나뿐이라 신설. `tools/build_static_pages.py` 템플릿에도 반영(다음 재생성 때 learn/에 SVG 줄 추가 — 지금은 PNG 교체만으로 이미 새 아이콘).
+> — ⚠️ **구글은 호스트당 파비콘 1개만 지원** — doranchae.com 하나이므로 **검색결과에서는 Kids도 원형 크레스트로 보임**. 원형/방패 구별은 브라우저 탭·홈 화면에서만 나타남(같은 도메인 안에서는 어쩔 수 없음).
+> — ⏳ **반영 시간**: 구글이 대문을 다시 크롤링해야 바뀜(며칠~몇 주). Search Console → URL 검사 → `https://doranchae.com/` 색인 요청하면 앞당길 수 있음.
+> — ✅ **검증**: 9개 아이콘 URL 전부 200 + 실제 픽셀 크기 확인(464·180·96·192·32), 9개 페이지 null byte 0·`</html>` 1개·아이콘 선언 정상, `manifest.json` 파싱 OK, `build_static_pages.py` py_compile 통과. 16/24/32/48/128px 렌더링 시트로 축소 가독성 눈으로 확인.
+> — ⏳ **git add/commit/push 대기 중**.
+
+> 📦 **2026-09-05 완료 (정적 학습 풀 → Supabase 이관 — L3+ 콘텐츠 공개 파일에서 제거)**
+> — 선생님 지시: "정적 파일은 learn 폴더만 그대로 두고 Supabase로 옮기자. **Kids 때처럼 나중에 수정할 때 복잡해지지 않게** 처음부터 신경 써 달라."
+> — **옮긴 것(235줄)**: `reading_pool` 48 · `spacing_pool` 48 · `writing_pool` 48 · `glossary_pool` 35 · `vocab_index` 48줄(단어 1,071개) · `honorific_grammar_index` 6 · `shared_sets` 2. **안 옮긴 것**: `learn/`(선생님 지시), `placement_test.json`(배치 테스트는 비회원이 봐야 하는 입구), `episodes_index.json`(편 제목뿐이고 learn/ 허브에 이미 공개), `sentbuild2_pool.json`(L1 전용), L1·L2 전부(무료 공개).
+> — 🔑 **수정 편의를 위해 "편 단위 한 줄" 구조로 저장** — Kids의 통짜 암호화 번들과 정반대. `nhs_pool(pool, key, data)`에 `reading_pool / L4_ep05` 같은 줄이 235개. **한 편만 고칠 때 그 줄만 건드리면 되고, 복호화·재암호화·IV 교체 같은 절차가 아예 없음.** 자세한 편집 방법은 아래 "🔐 잠긴 학습 풀(L3+) 구조와 수정 방법" 영구 섹션 참고.
+> — 신규 RPC 4개: `nhs_get_pools`(학습자용 — `nhs_get_episode`와 완전히 같은 세션 검사, 정식 회원만) / `nhs_pool_admin_set`·`nhs_pool_admin_get`·`nhs_pool_admin_del`(관리자 아이디+비밀번호 확인). 테이블은 RLS on + anon·authenticated 권한 0.
+> — **동기화 도구 신설 `tools/pool-sync.html`** — 브라우저에서 Live Server로 열고 관리자 아이디·비밀번호만 넣으면 ① 정적 파일의 L3+를 Supabase로 올리고 ② 서버 내용을 JSON 한 파일로 백업받음. 터미널·파이썬·비밀키 파일 전부 불필요(선생님이 직접 쓰실 수 있는 경로). `tools/`는 `_config.yml` exclude에 추가해 사이트에 안 올라감.
+> — **정적 파일 잘라내기**: `tools/trim_static_pools.py --check / --apply` — 잘라낼 규칙 자체를 코드로 남겨서, 나중에 실수로 L3+가 다시 섞여 들어가도 한 줄로 청소 가능. 실행 결과 vocab 1626→555, reading 72→24, spacing 72→24, glossary 54→19, writing 48→0(`{}`), shared 2→0(`{}`), honorific 14→8.
+> — 앱 쪽은 "정적 파일(L1·L2) 로드 → 회원이면 서버에서 받아 합치기" 한 줄씩만 덧붙임(`nhs.html`의 각 풀 promise 꼬리 + `dr-mobile.html`의 `_lockedPools()`), 기존 `await _rdPoolReady` 같은 코드는 손대지 않음.
+> — 🔧 **덤으로 발견·수정**: `sw.js` 캐시 이름이 `dr-mobile-v2` 그대로여서, 오늘 고친 모바일 단어장 잠금이 **이미 앱을 깔아둔 사람에게는 예전 화면으로 한 번 더 보일 수 있었음**(실제로 검증 중에 캐시된 옛 파일이 떠서 발각). `v3`으로 올리고, "dr-mobile.html을 고치면 이 숫자를 올릴 것"이라는 경고 주석을 파일 맨 위에 남김.
+> — ✅ **검증(3중)**: ① **업로드 무결성** — 서버와 로컬에서 각각 pool별 md5 집계 해시를 계산해 7개 pool 전부 일치(=235줄이 바이트 단위로 동일). ② **비회원 회귀** — 컨테이너에 정적 서버를 띄우고 Playwright로 확인: nhs.html 페이지 에러 0, `READING_POOL` 24개(L1·L2만)·L4 키 없음·L1 읽기 정상, 모바일 단어장 555개. ③ **회원 실사용** — 선생님 Chrome + Live Server(=잘라낸 파일을 실제로 서빙)에서 로그인 상태로 확인: 웹은 잠긴 풀 7개 전부 수신 후 reading 72·spacing 72·writing 48·glossary 54·shared 2로 원래 총량 복원, `L4_ep05`·`L6_ep12` 존재. 모바일은 단어 1,626개(555+1,071)·경어법 카드 14개(8+6).
+> — ⏳ **git add/commit/push 대기 중** — `nhs.html`·`dr-mobile.html`·`sw.js`·`_config.yml`·`data/nhs/*.json` 7개·`tools/pool-sync.html`(신규)·`tools/trim_static_pools.py`(신규). ⚠️ **앱 파일과 데이터 파일을 반드시 같이 올릴 것** — 데이터만 먼저 올라가면 회원에게 L3+ 퀴즈가 잠깐 비어 보입니다.
+
 > 🔴 **2026-09-05 완료 (🚨 보안 — 모바일 단어장이 비회원에게 잠긴 레벨 단어를 전부 보여주던 문제 수정)**
 > — 선생님 발견: 비회원으로 `dr-mobile.html`에 들어가 **🗂️ 단어장**을 열면 레벨 칩이 L1~L6 전부 눌리고 잠긴 레벨 단어까지 다 보임(에피소드 목록은 L3+가 정상적으로 잠겨 있는데 단어장만 안 잠겼음).
 > — **원인**: `hqmLocked()`(레벨 잠금 판정)는 에피소드 목록(`showEpList`/`hqSetLv`)에만 걸려 있었고, 단어장은 `vocab_index.json` **1,626개 전체를 그대로** 목록·검색·복습 덱에 썼음. 즉 잠긴 L3~L6 단어 1,071개(한국어·영어 뜻·출처 편 제목까지)가 비회원에게 노출. 2026-08-27에 웹 색인에서 고친 것과 **같은 종류의 구멍**(접근 검사가 한 진입로에만 걸려 있던 것).
@@ -963,6 +989,36 @@
 - **TOPIK 연계 전략** (Level Test 목표):
   - 듣기(`listen`) ✅ / 어휘·문법(`fill_blanks`) ✅ / 읽기(`reading`) → 에피소드마다 진도에 맞는 짧은 지문 추가
   - Level Test = TOPIK 1급(초급) 실전 수준으로 설계
+
+---
+
+## 🔐 잠긴 학습 풀(L3+) 구조와 수정 방법 (2026-09-05~) — ⚠️ L3 이상 콘텐츠 손대기 전에 읽을 것
+
+**왜 이렇게 됐나**: `data/nhs/*.json`은 GitHub Pages에 그대로 올라가는 공개 파일이라 주소만 알면 누구나 받을 수 있었음(모바일 단어장이 비회원에게 L3+ 단어를 다 보여주던 사고가 계기). 그래서 **무료 공개인 L1·L2만 정적 파일에 남기고, Level 3 이상은 Supabase로 옮김.**
+
+| | 어디에 있나 |
+|---|---|
+| L1·L2 (무료) | `data/nhs/*.json` 정적 파일 그대로 |
+| L3~L6 에피소드 본문 | Supabase `nhs_content` (2026-08-31 이관) — RPC `nhs_get_episode` |
+| L3~L6 읽기·띄어쓰기·쓰기·색인어휘·단어장·경어법 | Supabase `nhs_pool` (2026-09-05 이관) — RPC `nhs_get_pools` |
+| `learn/` 정적 페이지 | 그대로 둠(SEO용, L1·L2 콘텐츠만 실려 있음) |
+
+**`nhs_pool` 구조 — 편 단위 한 줄**: `pool`(reading_pool·spacing_pool·writing_pool·glossary_pool·vocab_index·honorific_grammar_index·shared_sets) + `key`(`L4_ep05` 형태, shared_sets는 세트 이름) + `data`(jsonb). 총 235줄.
+· `vocab_index`·`honorific_grammar_index`는 원래 배열인데, **편별로 묶어서** 한 줄에 그 편 항목 배열이 통째로 들어 있음. 앱이 받아서 key 순서대로 이어붙임.
+
+### ✏️ L3+ 내용을 고치는 방법 (Kids와 달리 암호화·재빌드 없음)
+- **한 편만 고칠 때(대부분)** — Supabase MCP로 그 줄만:
+  1. `select data from nhs_pool where pool='reading_pool' and key='L4_ep05';`
+  2. 고친 JSON으로 `update nhs_pool set data = '...'::jsonb, updated_at=now() where pool=... and key=...;`
+  3. 정적 파일은 **건드리지 않음**(거기엔 L1·L2만 있음). git 커밋도 필요 없음 — DB가 곧 배포임.
+- **여러 편·대량 작업** — `tools/pool-sync.html`을 Live Server로 열고 관리자 아이디+비밀번호 입력 → ⬆️ 올리기. (정적 파일에 L3+를 임시로 넣어 두고 올리는 방식이라면, 올린 뒤 반드시 `python3 tools/trim_static_pools.py --apply`로 다시 잘라낼 것.)
+- **백업** — 같은 페이지의 ⬇️ 백업 내려받기 → `doranchae_locked_backup_날짜.json` 한 파일. **정기적으로 받아 두면 안전**(현재 잠긴 콘텐츠의 사본은 Supabase와 git 히스토리에만 있음).
+- **L1·L2를 고칠 때**는 예전과 똑같이 `data/nhs/*.json`을 고치고 git push.
+
+### ⚠️ 주의
+- 정적 파일에 L3+를 다시 넣지 말 것 — 넣으면 그대로 공개됨. `tools/trim_static_pools.py --check`로 언제든 확인 가능.
+- `nhs_get_pools`는 **정식 회원(student/teacher/admin)만** 통과 — 체험(trial)·게스트는 서버가 거부(에피소드 본문과 같은 규칙).
+- **`dr-mobile.html`을 고치면 `sw.js`의 `CACHE` 버전을 올릴 것** — 안 올리면 이미 앱을 깔아 둔 사람에게 옛 화면이 한 번 더 보임.
 
 ---
 

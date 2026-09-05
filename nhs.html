@@ -11,7 +11,7 @@
 <meta property="og:description" content="이야기로 시작해서 문법으로 이어지는 무료 한국어 학습 앱. 입문부터 고급까지 72편의 에피소드.">
 <meta property="og:url" content="https://doranchae.com/nhs.html">
 <meta property="og:site_name" content="Doranchae">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22%230a2540%22%20stroke%3D%22%234ECDC4%22%20stroke-width%3D%221.5%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%234ECDC4%22%20stroke-width%3D%220.6%22%20opacity%3D%220.5%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2221%22%20text-anchor%3D%22middle%22%20font-family%3D%22Impact%2CArial%20Black%2Csans-serif%22%20font-size%3D%2213%22%20fill%3D%22white%22%20letter-spacing%3D%221%22%3EDR%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="/favicon-doranchae.svg">
 <link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2441,11 +2441,34 @@ function _sbGoto(i){
 }
 
 // ── READING PASSAGE GAME ────────────────────────────────
-let READING_POOL = {}; const _rdPoolReady = fetch('data/nhs/reading_pool.json').then(r=>r.json()).then(d=>{READING_POOL=d;}).catch(e=>{});
+/* 🔒 잠긴 레벨(L3+) 학습 풀 — 2026-09-05
+   정적 파일(data/nhs/*.json)에는 무료 공개인 L1·L2만 들어 있고, Level 3 이상은
+   Supabase(nhs_pool 테이블)에 편 단위로 나뉘어 있다가 로그인한 정식 회원에게만
+   nhs_get_pools RPC로 내려옵니다. 에피소드 본문(nhs_get_episode)과 같은 규칙.
+   ▸ 아래 각 풀은 "정적 파일 로드 → 잠긴 부분 합치기" 순서로 한 약속(promise) 안에서
+     끝나므로, 기존의 `await _rdPoolReady` 같은 코드는 그대로 두면 됩니다. */
+const _lockedPoolsReady = (async function(){
+  try{
+    const u=JSON.parse(localStorage.getItem('hq_user')||sessionStorage.getItem('hq_user')||'null');
+    if(!u||!u.token||!window.HQ_SUPABASE) return null;
+    const sb=window.HQ_SUPABASE.client(); if(!sb) return null;
+    const {data:res,error}=await sb.rpc('nhs_get_pools',{p_token:u.token});
+    if(error||!res||!res.ok) return null;
+    return res.data||null;
+  }catch(e){ return null; }
+})();
+// 편(key)별로 저장된 것을 원래 형태로 되돌립니다 — 사전형은 합치고, 배열형은 편 순서대로 이어붙임
+function _mergeLocked(target,obj){ if(obj) Object.keys(obj).forEach(k=>{target[k]=obj[k];}); return target; }
+
+let READING_POOL = {}; const _rdPoolReady = fetch('data/nhs/reading_pool.json').then(r=>r.json()).then(d=>{READING_POOL=d;}).catch(e=>{})
+  .then(()=>_lockedPoolsReady).then(L=>{ if(L) _mergeLocked(READING_POOL, L.reading_pool); });
 let SENTBUILD2_POOL = {}; const _sb2PoolReady = fetch('data/nhs/sentbuild2_pool.json').then(r=>r.json()).then(d=>{SENTBUILD2_POOL=d;}).catch(e=>{});
-let GLOSSARY_POOL = {}; const _glossReady = fetch('data/nhs/glossary_pool.json').then(r=>r.json()).then(d=>{GLOSSARY_POOL=d;}).catch(e=>{});
-let WRITING_POOL = {}; const _wrPoolReady = fetch('data/nhs/writing_pool.json').then(r=>r.json()).then(d=>{WRITING_POOL=d;}).catch(e=>{});
-let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{});
+let GLOSSARY_POOL = {}; const _glossReady = fetch('data/nhs/glossary_pool.json').then(r=>r.json()).then(d=>{GLOSSARY_POOL=d;}).catch(e=>{})
+  .then(()=>_lockedPoolsReady).then(L=>{ if(L) _mergeLocked(GLOSSARY_POOL, L.glossary_pool); });
+let WRITING_POOL = {}; const _wrPoolReady = fetch('data/nhs/writing_pool.json').then(r=>r.json()).then(d=>{WRITING_POOL=d;}).catch(e=>{})
+  .then(()=>_lockedPoolsReady).then(L=>{ if(L) _mergeLocked(WRITING_POOL, L.writing_pool); });
+let SHARED_SETS = {}; const _sharedSetsReady = fetch('data/nhs/shared_expression_sets.json').then(r=>r.json()).then(d=>{SHARED_SETS=d;}).catch(e=>{})
+  .then(()=>_lockedPoolsReady).then(L=>{ if(L) _mergeLocked(SHARED_SETS, L.shared_sets); });
 // 여러 에피소드가 재사용하는 표현 세트({"ref":"set_name"}) 해석 — vocab/usage 배열 안에서 ref 항목을 실제 데이터로 치환
 async function _nhsFetchEpisode(level, epId){
   if(level==='L1' || level==='L2'){
@@ -2548,7 +2571,8 @@ function _rdComplete(){
 }
 
 // ── QUIZ SPACING GAME ────────────────────────────────
-let SP_QUIZ_POOL = {}; const _spPoolReady = fetch('data/nhs/spacing_pool.json').then(r=>r.json()).then(d=>{SP_QUIZ_POOL=d;}).catch(e=>{});
+let SP_QUIZ_POOL = {}; const _spPoolReady = fetch('data/nhs/spacing_pool.json').then(r=>r.json()).then(d=>{SP_QUIZ_POOL=d;}).catch(e=>{})
+  .then(()=>_lockedPoolsReady).then(L=>{ if(L) _mergeLocked(SP_QUIZ_POOL, L.spacing_pool); });
 
 let _spqPool=null, _spqIdx=0, _spqClicked=[];
 

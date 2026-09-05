@@ -283,6 +283,7 @@ def page(title, desc, body, canonical, jsonld=None, locked=False, extra_head="",
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{esc(canonical)}">
 <meta property="og:site_name" content="Doranchae">
+<link rel="icon" type="image/svg+xml" href="/favicon-doranchae.svg">
 <link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -554,6 +555,7 @@ def redirect_page(target):
 <link rel="canonical" href="{esc(full)}">
 <meta http-equiv="refresh" content="0; url={esc(target)}">
 <meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/svg+xml" href="/favicon-doranchae.svg">
 <link rel="icon" type="image/png" sizes="464x464" href="/logo_hq.png">
 <style>
 html,body{{height:100%;margin:0;background:#0a2540;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;}}

@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#0a2540">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="favicon-doranchae.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96-doranchae.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Doranchae Mobile</title>
 <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -954,12 +956,36 @@ function _sMark(c,ok){
 }
 function _sDueCount(){const m=_sMap(),t=_sToday();return Object.keys(m).filter(k=>(m[k].due||'')<=t).length}
 
+/* 🔒 잠긴 레벨(L3+) 학습 풀 — 2026-09-05
+   정적 파일에는 무료 공개인 L1·L2만 있고, Level 3 이상은 Supabase(nhs_pool)에
+   편 단위로 나뉘어 있다가 로그인한 정식 회원에게만 nhs_get_pools RPC로 내려옵니다.
+   (웹 nhs.html과 같은 규칙 / 모바일 관례대로 supabase-js 없이 REST 직접 호출) */
+function _lockedPools(pools){
+  return new Promise(function(resolve){
+    try{
+      const u=_hqmUser();
+      if(!u||!u.token||!HQM_IS_MEMBER) return resolve(null);
+      const cfg=window.HQ_SUPABASE; if(!cfg) return resolve(null);
+      fetch(cfg.URL+'/rest/v1/rpc/nhs_get_pools',{method:'POST',
+        headers:{'Content-Type':'application/json','apikey':cfg.KEY,'Authorization':'Bearer '+cfg.KEY},
+        body:JSON.stringify({p_token:u.token,p_pools:pools})})
+        .then(function(r){return r.json()})
+        .then(function(res){ resolve(res&&res.ok?res.data:null) })
+        .catch(function(){ resolve(null) });
+    }catch(e){ resolve(null); }
+  });
+}
+// 편(key)별로 저장된 배열을 편 순서대로 하나로 이어붙입니다
+function _lockedArr(obj){ return obj?Object.keys(obj).sort().reduce(function(a,k){return a.concat(obj[k])},[]):[]; }
+
 let VOCAB_ALL=null,srsDeck=[],srsIdx=0,srsFlip=false,srsLog={ok:0,no:0};
 async function _sLoadVocab(){
   if(VOCAB_ALL)return VOCAB_ALL;
   const r=await fetch('data/nhs/vocab_index.json');
   if(!r.ok)throw new Error('fetch fail');
   VOCAB_ALL=await r.json();
+  const L=await _lockedPools(['vocab_index']);          // 정식 회원이면 L3+ 단어를 이어붙임
+  if(L&&L.vocab_index) VOCAB_ALL=VOCAB_ALL.concat(_lockedArr(L.vocab_index));
   return VOCAB_ALL;
 }
 function _sBuildDeck(){
@@ -1149,6 +1175,8 @@ async function _gLoadGrammar(){
   const r=await fetch('data/nhs/honorific_grammar_index.json');
   if(!r.ok)throw new Error('fetch fail');
   GRAM_ALL=await r.json();
+  const L=await _lockedPools(['honorific_grammar_index']);   // 정식 회원이면 L3+ 문법 카드를 이어붙임
+  if(L&&L.honorific_grammar_index) GRAM_ALL=GRAM_ALL.concat(_lockedArr(L.honorific_grammar_index));
   return GRAM_ALL;
 }
 function _gKey(){return 'nms_'+_sProfile()+'_srs_gram'}
