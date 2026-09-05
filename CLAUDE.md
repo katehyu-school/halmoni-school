@@ -7,6 +7,14 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🧹 **2026-09-05 완료 (유아반 `halmoni_kinder.html` 폐기 — Kids Kinder 탭으로 일원화)**
+> — 파비콘 작업 중 확인해보니 **유아반 파일만 robots.txt 차단도, noindex 메타도 없었음**(Kids·모바일은 둘 다 걸려 있었음) — 8/30 크롤러 사고와 같은 경로가 하나 열려 있던 셈. 선생님 판단: "킨더 파일은 지워도 돼. Kids로 병합했어."
+> — ⚠️ **노래 탭은 아직 Kids에 없음** — 2026-08-29 병합은 "노래만 제외하고 우선 반영"이었음. 즉 노래 화면은 이 파일에만 있었고, 삭제하면 **git 히스토리에만** 남음(복구: `git show <이전커밋>:halmoni_kinder.html > halmoni_kinder.html`). 나중에 Kids에 노래 탭을 넣을 때 그 파일을 꺼내 참고하면 됨.
+> — 코드 참조는 **주석 2곳뿐**(`core/supabase-config.js`·`korean-app_v2.html`의 병합 안내 주석)이라 실동작 영향 0. index.html 카드는 2026-08-02에 이미 제거됨.
+> — 🔒 **덤 — `songs` 테이블 anon 권한 회수**: 2026-08-05에 "halmoni_kinder.html이 `.from('songs')`를 직접 부르고 있어서 GRANT를 남겨 둔다"고 기록해 뒀던 것 — 유일한 호출자가 사라졌으므로 회수 완료(RLS·정책 0개로 이미 막혀 있었지만, 훗날 누가 RLS를 끄면 열릴 자리였음). 확인: anon/authenticated 권한 0건.
+> — `docs/MAINTENANCE.md` 4곳 갱신(유아반 행·파일 목록·"아직 열려 있는 문" 경고·songs 행).
+> — ⏳ **선생님이 직접 삭제**: `git rm halmoni_kinder.html` — 이 한 줄이 디스크에서도 지우고 저장소에서도 빼줍니다(제 쪽 마운트는 삭제 권한이 없음).
+
 > 🏠 **2026-09-05 완료 (파비콘을 한옥 크레스트로 통일 — 구글 검색결과 아이콘 교체)**
 > — 선생님 발견: 구글 Search Console에 뜨는 사이트 아이콘이 아직 **"DR" 글자 원형**. 요청: "사이트 전체 상징은 한옥 모양(doranchae_crest), Kids와 성인은 **원형 vs 방패**로 구별."
 > — **원인**: 크레스트 파비콘 파일(`favicon-doranchae.svg` 등)은 2026-08-08에 만들어져 있었지만 **어느 페이지에서도 참조되지 않았음**. 실제로 걸려 있던 건 ① `index.html`·`nhs.html` 등의 `/logo_hq.png`(옛 이름, 내용은 DR 원형) ② nhs.html·korean-app_v2.html의 인라인 data-URI "DR" 아이콘. 게다가 기존 `favicon-doranchae.svg`에는 **한옥 지붕이 없었음**(ㄷ·ㅊ만) — 선생님이 말씀하신 상징의 핵심이 빠져 있었던 것.

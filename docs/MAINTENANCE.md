@@ -155,7 +155,7 @@ hangeulquest.com  (index.html)
 | **Doranchae (DR)** | `nhs.html` | 13세 이상 · TOPIK 1~5급 | 없음(콘텐츠 공개) · 체험 계정은 3편만 |
 | **Doranchae Kids (DR Kids)** | `korean-app_v2.html` | 초등 | **반 코드 필요** |
 | **모바일 앱** | `dr-mobile.html`(`hq-mobile.html`은 구 주소 — 자동으로 여기로 리다이렉트) | 전체 | DR은 공개 / Kids 카드는 반 코드 있을 때만 |
-| 유아반 | `halmoni_kinder.html` | 유아 | 없음 — **메인에서 링크는 지웠지만 주소를 알면 열림** |
+| 유아반 | *(2026-09-05 삭제)* | — | Kids의 **Kinder 탭**으로 병합됨(korean-app_v2.html). 옛 파일은 git 히스토리에만 있음 |
 | (구) 성인반 | `sejong-korean_v1.html` | 참고용 | 더 이상 수정하지 않음 |
 
 **보조 페이지**
@@ -245,7 +245,7 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 직접 하기 어렵다면 개발자에게 "반 코드 교체" 한 줄로 의뢰하면 됩니다.
 **바꾸면** 학생들 기기에 저장된 옛 코드가 무효가 되므로, 아이들이 다시 로그인하거나 새 링크로 한 번 들어와야 합니다.
 
-> ⚠️ **아직 열려 있는 문**: `halmoni_kinder.html`(유아반)은 메인에서 카드만 지웠을 뿐, **주소를 직접 치면 여전히 열립니다.** 개인정보가 없어 그대로 두었지만, 필요하면 Kids와 같은 반 코드 잠금을 붙일 수 있습니다.
+> ✅ **(해소됨 2026-09-05)** 예전에는 `halmoni_kinder.html`(유아반)이 메인에서 카드만 지워진 채 주소로는 열렸는데, 유아반 내용이 Kids의 **Kinder 탭**으로 병합되면서 파일 자체를 삭제했습니다.
 
 ---
 
@@ -452,7 +452,7 @@ Supabase 대시보드 → `app_passwords` 테이블 → `role='kids_class'` 행�
 | `korean-app_v2.html` | 841KB | **DR Kids.** 반 코드 잠금 + 게임 + 실시간 수업 |
 | `dr-mobile.html` | 212KB | 모바일 PWA. Watch→Learn→Practice→Review 4단계 (`hq-mobile.html`은 1KB 리다이렉트 스텁만 남음 — 구 주소 호환용) |
 | `admin.html` | 25KB | 관리자 패널 (PIN 일괄변경, 출석 초기화) |
-| `halmoni_kinder.html` | 62KB | 유아반. **링크는 지웠으나 파일은 살아 있음** |
+| ~~`halmoni_kinder.html`~~ | — | 2026-09-05 삭제 — Kids의 Kinder 탭으로 병합. 노래 탭은 아직 Kids에 없음(옛 파일은 git 히스토리에서 복구 가능) |
 | `sejong-korean_v1.html` | 220KB | 구 성인반. **동결 — 수정하지 않음** |
 | `faq.html` / `privacy.html` | | 공개 보조 페이지 |
 | `dashboard.html` | 98KB | 학교와 무관한 개인 도구. `_config.yml`이 웹 공개에서 제외 |
@@ -635,7 +635,7 @@ data/basics/                       한글 기초 이미지
 | `board_replies` | id, post_id→board_posts(cascade), author_name, author_role, content, created_at | ❌ |
 | `practice_session` | id, unit, q_index, current_player, status, raised_hands, updated_at | ❌ |
 | `app_passwords` | role, hash, updated_at | ❌ (RLS `no_direct_access` = false + **2026-08-05 GRANT도 회수**) |
-| `songs` | id, tab, title, thumb, url, sort_order | ❌ (RLS on, 정책 0개) · **GRANT는 남아 있음** — `halmoni_kinder.html`이 아직 직접 부르지만 RLS가 막아 결과가 비어 옵니다 |
+| `songs` | id, tab, title, thumb, url, sort_order | ❌ (RLS on, 정책 0개) · **anon 권한 회수 완료(2026-09-05)** — 유아반 파일 삭제로 직접 호출자가 사라짐|
 | `progress` | member_name, profile, data jsonb, updated_at | ❌ (RPC 전용) |
 | `bookmarks` | id, member_name, item_type('vocab'/'grammar'), item_key, item_data jsonb, created_at, unique(member_name,item_type,item_key) | ❌ (RLS on + anon·authenticated REVOKE, RPC 전용) |
 
@@ -788,7 +788,7 @@ TOPIK 문법 커버리지 감사에서 **요약표(편당 대표 문법 1개)만
 |---|---|
 | ~~**서버 진도 동기화 없음**~~ | ✅ **해결** — `progress_push`/`progress_pull` 도입(정식 회원+trial, 웹·모바일 둘 다). 2-4·2-12 참고 |
 | ~~Supabase anon key가 5개 파일에 하드코딩~~ | ✅ **2026-08-02 해결** — `core/supabase-config.js` 한 곳으로 통합, 신형 `sb_publishable_` 형식으로 통일 (2-10 참고) |
-| **유아반 문이 열려 있음** | `halmoni_kinder.html`은 주소만 알면 접근 가능 |
+| ~~유아반 문이 열려 있음~~ | 2026-09-05 파일 삭제로 해소 |
 | **L6 마감 테스트 듣기 5개 미녹음** | `data/nhs/L6/TTS/closing/` **비어 있음**(다른 레벨은 5~8개 존재). Typecast 크레딧 대기 중(복구 예정 8/13). 파일을 넣으면 자동 연결, 그전까지는 브라우저 TTS 폴백 |
 | **레벨별 마감테스트 코드가 6벌 복제** | `loadL2Test`…`loadL6Test` — 제너릭화 안 됨. **L1만 이름이 다릅니다**(`loadLevelTest` — 처음 만들 때의 이름이 그대로 남음) |
 | **Kids 모바일이 웹보다 뒤처짐** | 웹은 L2 9과·L3 10과·L4 10과인데 모바일은 L2 9과 + L3 1과뿐, L4 없음. L2용·L3용 렌더러가 복제 구조라 L4를 붙이려면 세 번째 복제 또는 통합 리팩터 필요. **다만 이건 의도된 판단** — Kids는 부모가 모바일을 허용하지 않아 "폰 빌린 5분"이 실제 사용 상황이므로 20분짜리 스토리 모드는 웹이 맞음 |
