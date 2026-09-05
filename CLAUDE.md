@@ -7,6 +7,20 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 📐 **2026-09-05 완료 (CLS 수정 — Cloudflare에서 nhs.html만 빨갛던 원인)**
+> — 선생님 발견: Cloudflare 웹 분석의 **CLS(레이아웃 이동)**가 nhs.html만 Poor 58%, 문제 요소는 `html>body>div.main-layout` (CLS 0.936). doranchae.com/ 은 전부 Good.
+> — **원인**: 비회원 안내 배너("👋 You're free to explore…")를 **화면을 다 그린 뒤에** `DOMContentLoaded`에서 `document.body.insertBefore(bar, body.firstChild)`로 끼워 넣고 있었음 → 상단바·본문·사이드바가 통째로 **55~60px 아래로 밀림**. 이 배너는 **비회원에게만** 붙기 때문에, 로그인해서 쓰는 선생님 눈에는 절대 안 보이는 문제였고 검색 유입(대부분 비회원) 통계에서만 빨갛게 나타났음.
+> — **고친 방법**: 배너 생성 코드를 `nhsMountTopBanner()` 함수로 빼서 **플래그(NHS_IS_MEMBER 등) 정의 직후에 즉시 실행**. 이 인라인 `<script>`는 `<body>` 안(.top-bar 다음)에서 파싱 중 실행되므로, 배너가 **첫 화면부터 레이아웃의 일부**가 되어 밀림이 사라짐. 회원 여부는 localStorage에서 동기적으로 읽으므로 기다릴 필요가 없었던 것 — 굳이 DOMContentLoaded까지 미룰 이유가 없었음.
+> — 추가로 `core/nhs.css`에 **자리 예약** 2줄: `.main-layout{min-height:calc(100vh - 130px)}`(본문이 나중에 채워져도 아래 링크·푸터가 안 밀리게) + `.nhs-topbanner{min-height:60px / 좁은 화면 78px}`(글꼴이 늦게 와도 배너 높이가 안 변하게). 실제 렌더 높이를 폭 390/768/1280px에서 재서 정한 값.
+> — ✅ **측정으로 검증** (컨테이너에 정적 서버 + Playwright, `PerformanceObserver('layout-shift')`로 실제 수치):
+>   · 데스크톱 1280px: **0.578 → 0.031** (약 95% 감소)
+>   · 모바일 390px·느린 네트워크(400kbps·CPU 4배 감속): **0.248 → 0.092**
+>   · 세 가지 상태(비회원·회원·체험) 모두 배너 정상 표시, 페이지 에러 0건. 기준: 0.1 이하 Good.
+> — 남은 모바일 0.09는 웹폰트가 늦게 적용되며 상단바 높이가 변하는 것(측정 샌드박스는 구글 폰트가 차단돼 과장됨). Good 범위라 더 손대지 않음.
+> — 👀 **곁가지 관찰(안 고침)**: 체험 계정으로 로그인해도 배너 문구가 비회원용("no account needed")으로 나옴 — `NHS_IS_TRIAL`이 role이 아니라 `localStorage.nhs_trial`/`?trial`만 보기 때문. 기존 동작이고 기능 문제는 없어서 그대로 뒀음.
+> — ⚠️ **반영 시간**: Cloudflare 숫자는 실제 방문자 데이터가 쌓여야 바뀌므로 며칠 걸림.
+> — ⏳ **git add/commit/push 대기 중** — `nhs.html`·`core/nhs.css`.
+
 > 🔓 **2026-09-05 완료 (admin.html — 체험 계정 활동을 별도 섹션으로 신설)**
 > — 선생님 질문 "관리자 창에서 체험계정 활동을 볼 수 있을까?" → 확인해보니 **데이터는 이미 서버에 다 있었는데 화면에서만 빠져 있었음**. `progress_push`는 2026-08-30부터 trial 진도도 저장하고(주석에 "체험자가 실제로 공부하는지 확인할 수 있는 장치"), `progress_report`도 trial을 걸러내지 않음. 문제는 `loadProgress()`가 명단을 `admin_list_members(p_filter:'member')` = student/teacher만 불러오고 있던 것 하나뿐이었음.
 > — 선생님 지시 "정식학생하고 체험을 분리시키자" → 한 표에 섞고 배지로 구분하는 대신 **별도 섹션 카드 신설**(🔓 체험 계정 활동). 위 진도 개요의 요약 숫자·레벨 분포는 **정식 학생만**으로 유지(성격이 다른 모집단이 통계에 섞이지 않게).

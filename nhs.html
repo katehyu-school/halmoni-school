@@ -156,6 +156,46 @@ const NHS_USER = _nhsUser();
 const NHS_ROLE = (NHS_USER && NHS_USER.role) || null;
 const NHS_IS_MEMBER = ['admin','teacher','student'].indexOf(NHS_ROLE) >= 0;
 const NHS_OPEN_MAX = NHS_IS_MEMBER ? 6 : 2;      // 로그인 없이 열리는 최고 레벨
+
+// ── 상단 안내 배너 (비회원 / 체험 / 로그인 중) ──────────────────
+//   ⚠️ 이 배너는 반드시 "첫 화면이 그려지기 전"에 붙어야 합니다.
+//   예전에는 DOMContentLoaded에서 body 맨 앞에 끼워 넣었는데, 그러면 이미 그려진 화면이
+//   통째로 55~60px 아래로 밀리면서 CLS(레이아웃 이동 점수)가 0.5~0.9까지 튀었습니다
+//   — Cloudflare 웹 분석에서 nhs.html만 빨갛게(Poor 58%) 나오던 원인이 이것이었음 (2026-09-05).
+//   이 <script>는 <body> 안, .top-bar 바로 다음에서 실행되므로 여기서 붙이면
+//   배너가 처음부터 레이아웃의 일부가 되어 밀림이 0이 됩니다.
+function nhsMountTopBanner(){
+  if(!document.body) return;              // 방어 — 이 스크립트는 body 안에 있으므로 정상 상황에선 항상 있음
+  if(!NHS_IS_MEMBER){
+    const bar=document.createElement('div');
+    bar.className='nhs-topbanner';   // 높이 예약(core/nhs.css) — 글꼴이 늦게 와도 밀리지 않게
+    bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
+    const _open='🌱 Start Here + Level 1·2';
+    const _krSub=s=>'<span style="display:block;font-size:10.5px;color:rgba(255,255,255,.5);margin-top:1px;font-style:italic;">'+s+'</span>';
+    // 안내는 영어를 1순위로 — 이걸 읽는 학습자가 한글 문장을 술술 이해한다면 이 배너가 필요 없는 레벨일 것.
+    // Level 3+는 "무료 계정"이 아니라 "정식 회원(정식 등록/결제)"에게만 열림 — 이전 문구는 이 둘을 혼동시켰음.
+    bar.innerHTML = NHS_IS_TRIAL
+      ? '🔓 <b>Trial mode</b> — '+_open+' unlocked. Level 3+ is for registered members.'
+        +_krSub('체험 계정 이용 중 · Level 3부터는 정식 회원 전용입니다')
+        +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">Exit trial view</a>'
+      : '👋 You\'re free to explore <b>'+_open+'</b> — no account needed. Level 3+ is for registered members.'
+        +_krSub('지금 무료로 자유롭게 보고 계세요 · Level 3부터는 정식 회원 전용입니다')
+        +' · <a href="/?login=1" style="color:#4ecdc4;">Create a free account to save your progress</a>';
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+  // 정식 회원(로그인 상태) — 상단 아이콘 네비는 이미 꽉 차 있어서(아이패드 폭에서 특히) 버튼을 더 추가하지 않고,
+  // 대신 트라이얼 배너와 같은 자리(맨 위 얇은 줄)에 "로그인 중" 표시 + 로그아웃 링크만 추가 (2026-09-01)
+  if(NHS_IS_MEMBER && NHS_USER){
+    const bar=document.createElement('div');
+    bar.className='nhs-topbanner';
+    bar.style.cssText='background:var(--warm-50);color:var(--warm-600);font-size:11.5px;text-align:right;padding:5px 16px;border-bottom:1px solid var(--gray-200);';
+    const nm=esc(NHS_USER.display_name||NHS_USER.name||'');
+    bar.innerHTML='👤 <b style="color:var(--warm-800)">'+nm+'</b>님으로 로그인 중 · Logged in'
+      +' · <a href="#" onclick="nhsLogout();return false;" style="color:var(--teal-dark);font-weight:700;">로그아웃 · Log out</a>';
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+}
+nhsMountTopBanner();
 // 원래는 {'Level 3':3,...} 식 정확일치 매핑이었는데, 비회원에게 잠금 표시를 붙일 때
 // 버튼 textContent 뒤에 " 🔒"를 그대로 append해서 "Level 3 🔒"가 되면 매칭이 실패해 0을 반환 →
 // setLevel()의 '_n > NHS_OPEN_MAX' 잠금 검사가 무력화되어 잠긴 레벨도 그냥 열리던 버그.
@@ -7616,32 +7656,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
       }
     });
   }
-  if(!NHS_IS_MEMBER){
-    const bar=document.createElement('div');
-    bar.style.cssText='background:linear-gradient(135deg,#0a2540,#0d3d5c);color:#fff;font-size:12.5px;text-align:center;padding:8px 16px;letter-spacing:.02em;';
-    const _open='🌱 Start Here + Level 1·2';
-    const _krSub=s=>'<span style="display:block;font-size:10.5px;color:rgba(255,255,255,.5);margin-top:1px;font-style:italic;">'+s+'</span>';
-    // 안내는 영어를 1순위로 — 이걸 읽는 학습자가 한글 문장을 술술 이해한다면 이 배너가 필요 없는 레벨일 것.
-    // Level 3+는 "무료 계정"이 아니라 "정식 회원(정식 등록/결제)"에게만 열림 — 이전 문구는 이 둘을 혼동시켰음.
-    bar.innerHTML = NHS_IS_TRIAL
-      ? '🔓 <b>Trial mode</b> — '+_open+' unlocked. Level 3+ is for registered members.'
-        +_krSub('체험 계정 이용 중 · Level 3부터는 정식 회원 전용입니다')
-        +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">Exit trial view</a>'
-      : '👋 You\'re free to explore <b>'+_open+'</b> — no account needed. Level 3+ is for registered members.'
-        +_krSub('지금 무료로 자유롭게 보고 계세요 · Level 3부터는 정식 회원 전용입니다')
-        +' · <a href="/?login=1" style="color:#4ecdc4;">Create a free account to save your progress</a>';
-    document.body.insertBefore(bar, document.body.firstChild);
-  }
-  // 정식 회원(로그인 상태) — 상단 아이콘 네비는 이미 꽉 차 있어서(아이패드 폭에서 특히) 버튼을 더 추가하지 않고,
-  // 대신 트라이얼 배너와 같은 자리(맨 위 얇은 줄)에 "로그인 중" 표시 + 로그아웃 링크만 추가 (2026-09-01)
-  if(NHS_IS_MEMBER && NHS_USER){
-    const bar=document.createElement('div');
-    bar.style.cssText='background:var(--warm-50);color:var(--warm-600);font-size:11.5px;text-align:right;padding:5px 16px;border-bottom:1px solid var(--gray-200);';
-    const nm=esc(NHS_USER.display_name||NHS_USER.name||'');
-    bar.innerHTML='👤 <b style="color:var(--warm-800)">'+nm+'</b>님으로 로그인 중 · Logged in'
-      +' · <a href="#" onclick="nhsLogout();return false;" style="color:var(--teal-dark);font-weight:700;">로그아웃 · Log out</a>';
-    document.body.insertBefore(bar, document.body.firstChild);
-  }
+  // 📌 상단 안내 배너는 여기서 만들지 않습니다 — 첫 화면이 그려지기 전에 이미 붙어 있어요.
+  //    (레이아웃 밀림(CLS) 방지 — 스크립트 위쪽 nhsMountTopBanner() 참고, 2026-09-05)
 });
 function nhsLogout(){
   // 2026-09-01: 배너 플래그(nhs_trial)만 지우고 실제 로그인(hq_user)은 남아있던 버그를 고치며 신설.

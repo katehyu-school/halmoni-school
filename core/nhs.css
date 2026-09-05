@@ -40,6 +40,14 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .index-btn{padding:6px 16px;background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-300);border-radius:var(--radius-xl);font-size:11.5px;font-family:var(--font-kr);text-decoration:none;cursor:pointer;transition:all .2s;}
 .index-btn:hover{background:rgba(255,255,255,0.32);}
 .main-layout{display:flex;flex:1;min-height:0;}
+/* 📌 CLS(레이아웃 밀림) 방지 — 2026-09-05
+   본문은 JS가 나중에 채우므로, 자리를 미리 잡아 두지 않으면 콘텐츠가 도착할 때
+   아래에 있던 링크·푸터가 통째로 밀려 내려갑니다(모바일에서 특히 큼).
+   화면 높이만큼 최소 높이를 잡아 두면 푸터가 처음부터 화면 밖에 있어 밀림이 잡히지 않습니다. */
+.main-layout{min-height:calc(100vh - 130px);}
+/* 상단 안내 배너 — 글꼴이 늦게 오거나 문구가 줄바꿈돼도 높이가 변하지 않도록 자리를 고정 */
+.nhs-topbanner{min-height:60px;box-sizing:border-box;}
+@media (max-width:640px){.nhs-topbanner{min-height:78px;}}   /* 좁은 화면에선 문구가 줄바꿈돼 더 높음 */
 .sidebar{width:230px;flex-shrink:0;background:#fff;border-right:1px solid var(--warm-300);padding:20px 12px;display:flex;flex-direction:column;gap:3px;box-shadow:2px 0 8px rgba(0,0,0,0.04);}
 .sidebar-hdr{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--teal-lt);}
 .ep-item{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;border:1.5px solid transparent;}
