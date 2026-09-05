@@ -53,6 +53,8 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .dr-login-sheet label{display:block;font-size:.7rem;color:#8fb0ad;margin:0 0 4px}
 .dr-login-sheet input{width:100%;box-sizing:border-box;margin-bottom:11px;padding:11px 12px;border:1.5px solid #2b3d45;
   border-radius:10px;background:#0f1b21;color:#eaf4f3;font-size:.95rem;font-family:inherit}
+.dr-login-note{background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:9px;
+  padding:9px 11px;margin-bottom:10px;font-size:.75rem;color:#bfe9e4;line-height:1.6}
 .dr-login-err{min-height:17px;font-size:.72rem;color:#ff9d9d;margin-bottom:6px}
 .dr-login-cancel{width:100%;margin-top:8px;background:none;border:none;color:#7e9b97;font-size:.76rem;cursor:pointer;font-family:inherit;padding:6px}
 .dr-login-foot{margin-top:10px;font-size:.7rem;color:#7e9b97;text-align:center}
@@ -363,7 +365,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
   </button>
   <button class="prof-card prof-hq" onclick="enterHQ()">
     <svg width="46" height="46" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg>
-    <span><h2>Doranchae</h2><p>복습 · 프리뷰 · Daily Quest</p></span>
+    <span><h2>Doranchae</h2><p id="profHqSub">복습 · 프리뷰 · Daily Quest</p></span>
   </button>
   <div id="drAuthBox" class="dr-auth"></div>
   <div class="sub" style="font-size:.68rem;opacity:.7">하나의 앱, 두 개의 모습 — 프로필에 따라 전체 UI가 바뀝니다</div>
@@ -373,6 +375,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <div class="dr-login-back" id="drLoginBack" onclick="if(event.target===this)drLoginClose()">
   <div class="dr-login-sheet" role="dialog" aria-label="로그인">
     <h3>🔑 로그인 · Log in</h3>
+    <div class="dr-login-note" id="drLoginNote" style="display:none"></div>
     <p class="dr-login-desc">도란채 계정으로 로그인하면 <b>진도가 서버에 저장</b>되고, 정식 회원은 <b>Level 3 이상</b>도 열립니다.</p>
     <label>아이디 · ID</label>
     <input id="drLoginId" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="예: kate">
@@ -1432,18 +1435,30 @@ function hqClassCode(){
 function drAuthRender(){
   const box=document.getElementById('drAuthBox'); if(!box) return;
   const u=_hqmUser();
-  if(u && u.name){
+  const sub=document.getElementById('profHqSub');
+  if(u && u.name && drHasAccount()){
     const nm=(u.display_name||u.name);
     const badge = HQM_IS_MEMBER ? '정식 회원 · 전 레벨' : (u.role==='trial' ? '체험 계정 · Level 1·2' : 'Level 1·2');
     box.innerHTML='<div class="dr-who">👤 <b>'+nm+'</b>님으로 로그인 중<br><span style="opacity:.6">'+badge+'</span>'
       +'<br><button class="dr-out" onclick="drLogout()">로그아웃 · Log out</button></div>';
+    if(sub) sub.textContent='복습 · 프리뷰 · Daily Quest';
+  }else if(u && u.name){
+    // 로그인은 돼 있지만 앱을 쓸 수 없는 등급(게스트) — 상태를 솔직히 보여주고 다른 계정으로 갈 길을 냄
+    box.innerHTML='<div class="dr-who">👤 <b>'+(u.display_name||u.name)+'</b>님으로 로그인 중'
+      +'<br><span style="opacity:.6">이 등급으로는 앱을 쓸 수 없어요 · 체험 계정 이상 필요</span></div>'
+      +'<button class="dr-login-open" style="margin-top:8px" onclick="drLoginOpen(\'체험 계정 이상으로 로그인해 주세요.\')">🔑 다른 계정으로 로그인</button>'
+      +'<div class="dr-who"><button class="dr-out" onclick="drLogout()">로그아웃 · Log out</button></div>';
+    if(sub) sub.textContent='🔒 로그인이 필요해요 · Sign in required';
   }else{
     box.innerHTML='<button class="dr-login-open" onclick="drLoginOpen()">🔑 로그인 · Log in</button>'
-      +'<div class="dr-who" style="opacity:.55;font-size:.7rem;margin-top:6px">로그인하면 진도가 저장되고, 정식 회원은 Level 3 이상이 열려요</div>';
+      +'<div class="dr-who" style="opacity:.55;font-size:.7rem;margin-top:6px">앱은 계정이 있어야 쓸 수 있어요 · 체험 계정도 괜찮아요</div>';
+    if(sub) sub.textContent='🔒 로그인이 필요해요 · Sign in required';
   }
 }
-function drLoginOpen(){
+function drLoginOpen(msg){
   document.getElementById('drLoginErr').textContent='';
+  const note=document.getElementById('drLoginNote');
+  if(note){ note.textContent = msg || ''; note.style.display = msg ? 'block' : 'none'; }
   document.getElementById('drLoginBack').classList.add('on');
   setTimeout(function(){ const el=document.getElementById('drLoginId'); if(el) el.focus(); },80);
 }
@@ -1504,11 +1519,31 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   drAuthRender();          // 프로필 화면의 로그인/로그아웃 표시
 });
+/* 🔒 앱 입장 조건 (2026-09-05) — 웹과 다른 정책입니다.
+   웹(doranchae.com)은 게스트도 Level 1·2를 볼 수 있게 열어 두지만,
+   앱은 검색에 안 잡히고(robots 차단+noindex) QR·링크로만 오는 "이미 아는 사람"용 도구라
+   입구에서 계정을 요구합니다. 이유는 유입이 아니라 진도 때문 —
+   로그인 전 진도는 nms_나_*, 로그인 후는 nms_@아이디_* 로 서랍이 갈려서
+   게스트로 한참 공부한 뒤 로그인하면 그 기록이 이어지지 않습니다.
+   체험(trial) 계정이면 통과 — 게스트 등급은 진도가 서버에 저장되지 않으므로 제외. */
+const DR_ALLOWED_ROLES = ['student','teacher','admin','trial'];
+function drHasAccount(){
+  const u=_hqmUser();
+  return !!(u && u.name && DR_ALLOWED_ROLES.indexOf(u.role) >= 0);
+}
 function enterHQ(){
+  if(!drHasAccount()){
+    const u=_hqmUser();
+    drLoginOpen(u && u.name
+      ? '이 계정(' + (u.display_name||u.name) + ')으로는 앱을 쓸 수 없어요 — 체험 계정 이상으로 로그인해 주세요.'
+      : '앱을 이용하려면 로그인이 필요해요. 체험 계정도 괜찮아요!');
+    return;
+  }
   if(!localStorage.getItem('hqOnboardSeen')){show('scr-hq-onboard');return}
   renderHome();show('scr-hq-home')
 }
-function finishOnboard(){localStorage.setItem('hqOnboardSeen','1');renderHome();srsHomeUpdate();show('scr-hq-home')}
+function finishOnboard(){if(!drHasAccount()){show('scr-profile');drLoginOpen('앱을 이용하려면 로그인이 필요해요.');return}
+  localStorage.setItem('hqOnboardSeen','1');renderHome();srsHomeUpdate();show('scr-hq-home')}
 function renderHome(){
   try{srsHomeUpdate()}catch(e){}
   try{gramHomeUpdate()}catch(e){}

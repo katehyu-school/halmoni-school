@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>도란채 — 잠긴 콘텐츠 동기화 도구</title>
+<meta name="robots" content="noindex,nofollow">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../core/supabase-config.js"></script>
+<style>
+ body{font-family:system-ui,'Malgun Gothic',sans-serif;background:#f7f7f4;color:#292524;margin:0;padding:28px;line-height:1.6}
+ .wrap{max-width:860px;margin:0 auto}
+ h1{font-size:1.35rem;margin:0 0 4px} .sub{color:#78716c;font-size:.86rem;margin-bottom:22px}
+ .card{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:18px 20px;margin-bottom:16px}
+ h2{font-size:1rem;margin:0 0 10px}
+ table{width:100%;border-collapse:collapse;font-size:.86rem}
+ th,td{text-align:left;padding:6px 8px;border-bottom:1px solid #f0efec}
+ th{color:#78716c;font-weight:600;font-size:.78rem}
+ td.n{text-align:right;font-variant-numeric:tabular-nums}
+ .row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+ label{display:block;font-size:.78rem;color:#78716c;margin-bottom:3px}
+ input{padding:9px 11px;border:1.5px solid #e7e5e4;border-radius:8px;font-size:.92rem;width:170px}
+ button{padding:10px 18px;border:none;border-radius:999px;font-size:.9rem;font-weight:700;cursor:pointer}
+ .primary{background:#0d9488;color:#fff} .primary:disabled{background:#a8a29e;cursor:default}
+ .ghost{background:#f5f5f4;color:#44403c;border:1px solid #e7e5e4}
+ #log{background:#1c1917;color:#d6d3d1;border-radius:10px;padding:14px 16px;font:12.5px/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap;max-height:330px;overflow:auto;margin-top:14px}
+ .warn{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:11px 14px;font-size:.84rem;margin-bottom:16px}
+ code{background:#f5f5f4;padding:1px 5px;border-radius:4px;font-size:.85em}
+</style></head><body><div class="wrap">
+
+<h1>🔐 잠긴 콘텐츠 동기화 도구</h1>
+<div class="sub">Level 3 이상 학습 데이터를 정적 파일 ↔ Supabase 사이에서 옮깁니다. 이 페이지는 사이트에 올라가지 않고(로컬 전용), 관리자 아이디+비밀번호가 있어야 동작합니다.</div>
+
+<div class="warn">
+  ⚠️ <b>Live Server로 열어야 동작합니다</b> (파일을 직접 더블클릭해서 열면 데이터 파일을 못 읽어요).<br>
+  VS Code에서 이 파일 → 우클릭 → <b>Open with Live Server</b>.
+</div>
+
+<div class="card">
+  <h2>1. 올릴 내용 확인</h2>
+  <div id="preview">읽는 중…</div>
+  <div style="margin-top:10px"><button class="ghost" onclick="scan()">↺ 다시 읽기</button></div>
+</div>
+
+<div class="card">
+  <h2>2. Supabase로 올리기</h2>
+  <div class="row">
+    <div><label>관리자 아이디</label><input id="aid" placeholder="admin 또는 kate"></div>
+    <div><label>비밀번호</label><input id="apin" type="password" placeholder="••••"></div>
+    <button class="primary" id="pushBtn" onclick="push()">⬆️ 올리기</button>
+    <button class="ghost" onclick="backup()">⬇️ 백업 내려받기</button>
+  </div>
+  <div style="font-size:.78rem;color:#78716c;margin-top:8px">
+    🔑 여기서 쓰는 것은 <b>도란채 사이트에 관리자로 로그인할 때 쓰시는 그 아이디·비밀번호</b>예요
+    (Supabase 대시보드의 구글 로그인과는 다른 것입니다).<br>
+    같은 편(key)을 다시 올리면 <b>덮어씁니다</b>. 없는 편은 새로 생기고, 기존 것은 그대로 둡니다.<br>
+    ⬇️ 백업은 Supabase에 들어 있는 내용을 <code>doranchae_locked_backup_날짜.json</code> 파일 하나로 내려받습니다.
+  </div>
+  <div id="log">준비됨.</div>
+</div>
+
+<script>
+const FILES = [
+  {pool:'reading_pool',             file:'../data/nhs/reading_pool.json',             kind:'dict'},
+  {pool:'spacing_pool',             file:'../data/nhs/spacing_pool.json',             kind:'dict'},
+  {pool:'writing_pool',             file:'../data/nhs/writing_pool.json',             kind:'dict'},
+  {pool:'glossary_pool',            file:'../data/nhs/glossary_pool.json',            kind:'dict'},
+  {pool:'vocab_index',              file:'../data/nhs/vocab_index.json',              kind:'arr'},
+  {pool:'honorific_grammar_index',  file:'../data/nhs/honorific_grammar_index.json',  kind:'arr'},
+  {pool:'shared_sets',              file:'../data/nhs/shared_expression_sets.json',   kind:'all'}
+];
+const OPEN_MAX = 2;                                   // L1·L2는 무료 공개 — 정적 파일에 그대로 둡니다
+const lvOf  = k => parseInt(String(k).replace(/^L/,'').split('_')[0], 10) || 0;
+const locked = k => lvOf(k) > OPEN_MAX;
+let ROWS = [];
+
+function log(m){ const el=document.getElementById('log'); el.textContent += '\n'+m; el.scrollTop=el.scrollHeight; }
+
+async function scan(){
+  ROWS = []; const lines = [];
+  for (const f of FILES){
+    let d; try{ d = await (await fetch(f.file)).json(); }
+    catch(e){ lines.push([f.pool,'⚠️ 파일을 못 읽음','-']); continue; }
+    let rows = [];
+    if (f.kind === 'dict')      rows = Object.keys(d).filter(locked).map(k=>({pool:f.pool,key:k,data:d[k]}));
+    else if (f.kind === 'all')  rows = Object.keys(d).map(k=>({pool:f.pool,key:k,data:d[k]}));
+    else {                                            // 배열 — 편(lv_ep)별로 묶어서 한 줄로
+      const g = {};
+      d.forEach(it=>{ const k = it.lv+'_'+it.ep; (g[k] = g[k] || []).push(it); });
+      rows = Object.keys(g).filter(locked).map(k=>({pool:f.pool,key:k,data:g[k]}));
+    }
+    rows.sort((a,b)=>a.key.localeCompare(b.key));
+    ROWS.push(...rows);
+    const items = f.kind==='arr' ? rows.reduce((s,r)=>s+r.data.length,0) : rows.length;
+    lines.push([f.pool, rows.length+'줄', f.kind==='arr' ? items+'개 항목' : '—']);
+  }
+  document.getElementById('preview').innerHTML =
+    '<table><tr><th>pool</th><th>올릴 줄 수 (편 단위)</th><th>항목</th></tr>'
+    + lines.map(r=>`<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`).join('')
+    + `<tr><td><b>합계</b></td><td class="n"><b>${ROWS.length}줄</b></td><td></td></tr></table>`;
+  log('스캔 완료 — 올릴 줄 '+ROWS.length+'개 (Level 3 이상만).');
+}
+
+function sb(){ const c = window.HQ_SUPABASE && HQ_SUPABASE.client(); if(!c) throw new Error('Supabase 라이브러리를 못 불러왔어요 (인터넷 연결 확인)'); return c; }
+function creds(){
+  const id=document.getElementById('aid').value.trim(), pin=document.getElementById('apin').value;
+  if(!id||!pin) throw new Error('관리자 아이디와 비밀번호를 입력하세요.');
+  return {id,pin};
+}
+
+async function push(){
+  const btn=document.getElementById('pushBtn');
+  try{
+    const {id,pin}=creds(); if(!ROWS.length) await scan();
+    btn.disabled=true; log('\n올리는 중… (한 번에 12줄씩)');
+    let done=0;
+    for(let i=0;i<ROWS.length;i+=12){
+      const chunk=ROWS.slice(i,i+12);
+      const {data,error}=await sb().rpc('nhs_pool_admin_set',{p_admin:id,p_pin:pin,p_rows:chunk});
+      if(error) throw new Error(error.message);
+      if(!data||!data.ok) throw new Error(data&&data.error==='denied'?'아이디 또는 비밀번호가 맞지 않아요.':JSON.stringify(data));
+      done+=chunk.length; log('  '+done+' / '+ROWS.length+'  ('+chunk[chunk.length-1].pool+' · '+chunk[chunk.length-1].key+')');
+    }
+    log('\n✅ 끝났습니다 — '+done+'줄을 Supabase에 올렸어요.');
+  }catch(e){ log('\n❌ '+e.message); }
+  finally{ btn.disabled=false; }
+}
+
+async function backup(){
+  try{
+    const {id,pin}=creds(); log('\n백업을 받는 중…');
+    const {data,error}=await sb().rpc('nhs_pool_admin_get',{p_admin:id,p_pin:pin});
+    if(error) throw new Error(error.message);
+    if(!data||!data.ok) throw new Error(data&&data.error==='denied'?'아이디 또는 비밀번호가 맞지 않아요.':JSON.stringify(data));
+    const blob=new Blob([JSON.stringify(data.data,null,1)],{type:'application/json'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='doranchae_locked_backup_'+new Date().toISOString().slice(0,10)+'.json';
+    a.click(); URL.revokeObjectURL(a.href);
+    const pools=Object.keys(data.data);
+    log('✅ 내려받았습니다 — pool '+pools.length+'개: '+pools.join(', '));
+  }catch(e){ log('\n❌ '+e.message); }
+}
+scan();
+</script>
+</div></body></html>
