@@ -425,6 +425,9 @@ body {
 .pg-stat.good  .pg-stat-num { color: var(--green); }
 .pg-stat.warn  .pg-stat-num { color: var(--amber); }
 
+.pg-trial-table th, .pg-trial-table td { white-space: nowrap; }
+.pg-trial-table td:nth-child(5) { width: auto; }
+.pg-trial-table td:nth-child(1) { width: 100%; }   /* 이름 칸이 남는 폭을 흡수 */
 .pg-lvl-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
 .pg-lvl-tag { width: 40px; flex-shrink: 0; font-size: 0.76rem; color: var(--muted); font-weight: 600; text-align: right; }
 .pg-lvl-track { flex: 1; height: 16px; background: #171a24; border-radius: 8px; overflow: hidden; position: relative; }
@@ -568,6 +571,19 @@ body {
       <button class="mm-act" style="margin-left:auto" onclick="loadProgress()">↺ 새로고침</button>
     </div>
     <div id="progressList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
+  </div>
+
+  <!-- 체험 계정 활동 — 정식 학생과 섞이지 않도록 별도 섹션 -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">🔓</span>
+      <div>
+        <div class="section-title">체험 계정 활동</div>
+        <div class="section-desc">스스로 가입한 체험 계정만 따로 봅니다 · 위 진도 개요의 통계에는 섞지 않습니다</div>
+      </div>
+      <button class="mm-act" style="margin-left:auto" onclick="loadProgress()">↺ 새로고침</button>
+    </div>
+    <div id="trialList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
   </div>
 
   <!-- 연습 세션 리셋 -->
@@ -714,6 +730,68 @@ function _pgCurrentLevel(byLevel){
   return 'done';
 }
 
+// ── 🔓 체험 계정 활동 ─────────────────────────
+//   정식 학생과 성격이 달라서(스스로 가입 · 30일 미접속 시 자동 삭제 · L1·L2만 열림)
+//   위 진도 개요의 통계·레벨 분포에는 넣지 않고 여기서만 따로 봅니다.
+//   "마지막 접속"과 "마지막 학습"을 나눠 보여주는 게 핵심 —
+//   둘러보기만 하고 간 사람과 실제로 공부한 사람을 구별하려는 것입니다.
+const _TRIAL_LIFE_DAYS = 30;   // 서버의 _purge_stale_trials()와 같은 값
+function _pgDaysSince(iso){ return iso ? (new Date() - new Date(iso)) / 86400000 : null; }
+
+function _renderTrials(trials, progByName){
+  const wrap = document.getElementById('trialList');
+  if (!wrap) return;
+  if (!trials.length){
+    wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">아직 체험 가입자가 없어요.</div>';
+    return;
+  }
+  const lvlLabel = { none:'시작 전', L1:'L1', L2:'L2', L3:'L3', L4:'L4', L5:'L5', L6:'L6', done:'완료' };
+  let studied = 0;
+
+  const rows = trials.map(m => {
+    const prog = progByName[m.name];
+    if (prog && prog.updated_at) studied++;
+    const idleDays = _pgDaysSince(m.last_login_at || m.created_at);
+    const left = Math.max(0, Math.ceil(_TRIAL_LIFE_DAYS - (idleDays === null ? 0 : idleDays)));
+    return {
+      name: m.display_name || m.name,
+      id: m.name,
+      lvl: lvlLabel[_pgCurrentLevel(prog ? prog.by_level : {})],
+      joined: _pgWhen(m.created_at),
+      seen: _pgWhen(m.last_login_at),
+      learned: prog && prog.updated_at ? _pgWhen(prog.updated_at) : '기록 없음',
+      noLearn: !(prog && prog.updated_at),
+      left: left,
+      sortKey: new Date(m.created_at || 0).getTime()
+    };
+  }).sort((a,b) => b.sortKey - a.sortKey);   // 최근 가입 순
+
+  wrap.innerHTML = `
+    <div class="pg-stat-row">
+      <div class="pg-stat"><div class="pg-stat-num">${trials.length}</div><div class="pg-stat-label">체험 계정</div></div>
+      <div class="pg-stat good"><div class="pg-stat-num">${studied}</div><div class="pg-stat-label">학습 기록이 있는 사람</div></div>
+      <div class="pg-stat warn"><div class="pg-stat-num">${trials.length - studied}</div><div class="pg-stat-label">가입만 하고 아직 안 함</div></div>
+    </div>
+    <div class="pg-table-wrap mm-scroll"><table class="member-table pg-trial-table">
+      <thead><tr><th>체험 계정</th><th>현재 레벨</th><th>가입</th><th>마지막 접속</th><th>마지막 학습</th><th>자동 삭제까지</th></tr></thead>
+      <tbody>
+        ${rows.map(r => `
+        <tr class="member-row">
+          <td style="font-weight:600">${r.name} <span style="color:var(--muted);font-weight:400;font-size:.78em">${r.id}</span></td>
+          <td>${r.lvl}</td>
+          <td>${r.joined}</td>
+          <td>${r.seen}</td>
+          <td class="${r.noLearn ? 'pg-when-stale' : ''}">${r.learned}</td>
+          <td class="${r.left <= 7 ? 'pg-when-stale' : ''}">${r.left}일</td>
+        </tr>`).join('')}
+      </tbody>
+    </table></div>
+    <div style="color:var(--muted);font-size:0.75rem;margin-top:8px">
+      체험 계정은 Level 1·2만 열립니다. 30일 동안 접속이 없으면 자동으로 사라지니,
+      계속 쓰게 하려면 위 <b>회원 관리</b>에서 등급을 <b>학생</b>으로 바꿔 주세요.
+    </div>`;
+}
+
 async function loadProgress(){
   const wrap = document.getElementById('progressList');
   if(!wrap) return;
@@ -723,9 +801,11 @@ async function loadProgress(){
   }
   wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div>';
   try{
-    const [rosterRes, progRes] = await Promise.all([
+    const [rosterRes, progRes, trialRes] = await Promise.all([
       sb.rpc('admin_list_members', { p_admin: _adminName, p_pin: _adminPw, p_q: '', p_filter: 'member' }),
-      sb.rpc('progress_report',   { p_token: _adminToken })
+      sb.rpc('progress_report',   { p_token: _adminToken }),
+      // 체험 계정은 따로 불러와 따로 그립니다 — 아래 요약 통계·레벨 분포에는 섞지 않습니다
+      sb.rpc('admin_list_members', { p_admin: _adminName, p_pin: _adminPw, p_q: '', p_filter: 'trial' })
     ]);
     if (rosterRes.error) throw rosterRes.error;
     if (progRes.error)   throw progRes.error;
@@ -738,6 +818,9 @@ async function loadProgress(){
     const progList = Array.isArray(progRes.data) ? progRes.data : [];
     const progByName = {};
     progList.forEach(r => { progByName[r.member_name] = r; });
+
+    // 체험 계정 표 (정식 학생 통계와 완전히 분리)
+    _renderTrials((trialRes.data && trialRes.data.members) || [], progByName);
 
     if (!roster.length){
       wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">아직 등록된 학생이 없어요.</div>';
@@ -811,6 +894,8 @@ async function loadProgress(){
     `;
   }catch(e){
     wrap.innerHTML = `<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ${e.message}</div>`;
+    const tw = document.getElementById('trialList');
+    if (tw) tw.innerHTML = `<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ${e.message}</div>`;
   }
 }
 
