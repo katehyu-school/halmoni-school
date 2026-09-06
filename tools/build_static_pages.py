@@ -779,7 +779,7 @@ def build(open_levels):
     today = date.today().isoformat()
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for u in ["/", "/nhs.html", "/faq.html", "/license.html"] + urls:
+    for u in ["/", "/nhs.html", "/dr-play.html", "/faq.html", "/license.html"] + urls:
         sm.append(f"  <url><loc>{SITE}{u}</loc><lastmod>{today}</lastmod></url>")
     sm.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")

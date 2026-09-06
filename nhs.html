@@ -7627,6 +7627,36 @@ function buildSpacing(){
 }
 
 // ── INIT ───────────────────────────────────────────────
+// ── 에피소드 딥링크 (?ep=ep06 / ?ep=L2_ep03 [&tab=vocab]) — 2026-09-06 신설 ──
+// 바깥(게임·페이스북·learn/ 등)에서 특정 편으로 바로 들어올 수 있게 하는 진입로.
+// setLevel()은 항상 그 레벨의 ep01을 열어버리므로 여기서는 레벨 표시만 직접 맞춘 뒤 원하는 편을 연다.
+// 레벨 잠금 검사는 _doLoadEp() 안에서 이미 하므로 여기서 중복하지 않음(진입로마다 검사를 흩뿌리지 않는다는 기존 방침).
+async function _openEpDeepLink(raw, tab){
+  await _epIdxReady;
+  const m=String(raw||'').trim().match(/^(?:(L[1-6])[_-])?(ep\d{1,2})$/i);
+  if(!m){ loadEp('ep01'); return; }
+  const level=(m[1]||'L1').toUpperCase();
+  const epId=m[2].toLowerCase();
+  const lvLabel='Level '+level.slice(1);
+  if((parseInt(level.slice(1),10)||1) > NHS_OPEN_MAX){
+    await _doLoadEp(epId, level);   // 잠긴 레벨이면 안내만 뜨고 끝
+    loadEp('ep01');                 // 화면이 비지 않게 기본 편으로
+    return;
+  }
+  const btn=Array.from(document.querySelectorAll('.level-btn'))
+    .find(b=>b.textContent.trim().replace(/\s*🔒$/,'')===lvLabel);
+  if(btn){
+    document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  curLevel=lvLabel;
+  const hdr=document.querySelector('.sidebar-hdr,.sidebar-hdr-amber');
+  if(hdr){ hdr.style.display=''; hdr.className='sidebar-hdr'; hdr.innerHTML='📺 '+lvLabel; }
+  _enAutoForLevel(level);
+  buildSidebar(level);
+  await _doLoadEp(epId, level);
+  if(tab) showTab(tab);
+}
 document.addEventListener('DOMContentLoaded', async ()=>{
   await _epIdxReady;
   _enAutoForLevel('L1');
@@ -7634,6 +7664,9 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   setTimeout(_srsUpdateBadge,0);
   // index.html의 "Start Here" / "Road Map" 바로가기 링크(?view=start / ?view=roadmap) 처리 (2026-08)
   const _entryView=new URLSearchParams(location.search).get('view');
+  // 에피소드 딥링크 — ?ep=ep06 / ?ep=L2_ep03 (+ 선택 &tab=vocab). 2026-09-06 신설.
+  const _entryEp=new URLSearchParams(location.search).get('ep');
+  const _entryTab=new URLSearchParams(location.search).get('tab');
   if(_entryView==='start'){
     const _basisBtn=document.querySelector('.level-btn-basis');
     if(_basisBtn) setLevel(_basisBtn); else loadEp('ep01');
@@ -7643,6 +7676,8 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const _basisBtn=document.querySelector('.level-btn-basis');
     if(_basisBtn) setLevel(_basisBtn);
     loadRoadmap();
+  }else if(_entryEp){
+    await _openEpDeepLink(_entryEp, _entryTab);
   }else{
     loadEp('ep01');
   }

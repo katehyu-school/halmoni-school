@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>포장마차 탈출 · Escape the Pojangmacha | 도란채</title>
+<meta name="description" content="한국어를 몰라도 5분이면 포장마차에서 김밥을 주문할 수 있어요. 도란채의 한국어 방탈출 게임 — 무료, 가입 없이.">
+<link rel="canonical" href="https://doranchae.com/dr-play.html">
+<!-- 페이스북·카톡 링크 미리보기 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도란채 · Doranchae">
+<meta property="og:url" content="https://doranchae.com/dr-play.html">
+<meta property="og:title" content="포장마차 탈출 · Escape the Pojangmacha">
+<meta property="og:description" content="한국어를 하나도 몰라도 5분이면 떡볶이와 김밥을 주문할 수 있어요. 가입 없이 무료로 해보세요. / Order tteokbokki in Korean in 5 minutes — free, no sign-up.">
+<meta property="og:image" content="https://doranchae.com/og_play.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="포장마차 탈출 · Escape the Pojangmacha">
+<meta name="twitter:description" content="한국어를 하나도 몰라도 5분이면 떡볶이와 김밥을 주문할 수 있어요. 무료 · 가입 없이.">
+<meta name="twitter:image" content="https://doranchae.com/og_play.jpg">
+<link rel="icon" href="favicon-doranchae.svg" type="image/svg+xml">
+<link rel="icon" href="logo_hq.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7c6e; --teal-lt:#e0f5f2; --teal-md:#5bbfb0; --teal-dark:#0b5c52; --teal-600:#1a9485;
+  --amber:#c47a1a; --amber-lt:#fdf3e0; --coral:#c74d36; --coral-lt:#fdeae6;
+  --blue:#1a5fa8; --blue-lt:#e6f0fb; --purple:#5a3fa0;
+  --warm-900:#1C1917; --warm-800:#292524; --warm-700:#44403C; --warm-600:#57534E; --warm-500:#78716C;
+  --paper:#fbf8f3; --line:#e7ddd0;
+  --font-kr:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-kr);
+  background:#12100e;
+  color:var(--warm-900);
+  min-height:100vh;
+  display:flex; align-items:flex-start; justify-content:center;
+  padding:0;
+}
+#stage{
+  width:100%; max-width:760px; background:var(--paper);
+  min-height:100vh; display:flex; flex-direction:column;
+  box-shadow:0 0 60px rgba(0,0,0,.5);
+}
+
+/* ── 상단 HUD ───────────────────────── */
+#hud{
+  background:var(--teal-dark); color:#fff; padding:9px 14px;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  font-size:12.5px; position:sticky; top:0; z-index:20;
+}
+#hud .goal{flex:1; min-width:150px; font-weight:500; line-height:1.4}
+#hud .goal small{display:block; opacity:.75; font-size:10.5px; font-weight:400}
+.chip{background:rgba(255,255,255,.14); border-radius:999px; padding:4px 10px; white-space:nowrap; font-variant-numeric:tabular-nums}
+
+/* ── 장면 ───────────────────────────── */
+#sceneWrap{position:relative; width:100%; aspect-ratio:16/9; background:#241f1a}
+#sceneImg{width:100%; height:100%; object-fit:cover; display:block}
+#sceneFallback{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg,#0b5c52,#1a9485);
+}
+/* ⚠️ display를 지정하면 hidden 속성이 무시됨 — 반드시 같이 둘 것 */
+#sceneFallback[hidden]{display:none}
+#sceneWrap[hidden]{display:none}
+#sceneFallback span{font-size:76px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.35))}
+#body{padding:16px 16px 26px; flex:1}
+
+.narr{
+  background:var(--amber-lt); border:1.5px solid #f0c980; border-radius:var(--radius);
+  padding:12px 15px; font-size:13.5px; line-height:1.75; color:var(--warm-800); margin-bottom:14px;
+}
+.narr b{color:var(--amber)}
+
+/* 대사 말풍선 */
+.say{display:flex; gap:10px; margin-bottom:12px; align-items:flex-start}
+.say .who{
+  flex:0 0 auto; width:44px; text-align:center; font-size:11px; color:var(--warm-600); line-height:1.3;
+}
+.say .who .em{display:block; font-size:26px; line-height:1.1}
+.bub{
+  flex:1; background:#fff; border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:11px 14px; position:relative;
+}
+.bub.ajumma{background:var(--coral-lt); border-color:#f0b8ab}
+.bub.bomi{background:var(--blue-lt); border-color:#b9d3ef}
+.bub.me{background:var(--teal-lt); border-color:var(--teal-md)}
+.bub .ko{font-size:16px; font-weight:500; line-height:1.65; color:var(--warm-900)}
+.bub .en{font-size:12px; color:var(--warm-600); margin-top:3px; line-height:1.5}
+.spk{
+  background:none; border:none; cursor:pointer; font-size:15px; padding:2px 4px;
+  float:right; margin:-2px -4px 0 6px; opacity:.55;
+}
+.spk:hover{opacity:1}
+
+/* 살펴보기 */
+.look-wrap{margin:16px 0 6px}
+.sec-t{font-size:12px; font-weight:700; color:var(--warm-600); letter-spacing:.4px; margin-bottom:8px}
+.looks{display:flex; gap:8px; flex-wrap:wrap}
+.look{
+  background:#fff; border:1.5px solid var(--line); border-radius:999px;
+  padding:8px 14px; font-size:13.5px; cursor:pointer; transition:.15s;
+}
+.look:hover{border-color:var(--amber); background:var(--amber-lt)}
+.look.seen{opacity:.5}
+
+/* 선택지 */
+.opts{display:flex; flex-direction:column; gap:9px; margin-top:6px}
+.opt{
+  text-align:left; background:#fff; border:2px solid var(--line); border-radius:var(--radius);
+  padding:12px 15px; cursor:pointer; font-family:inherit; transition:.15s; width:100%;
+}
+.opt:hover{border-color:var(--teal); background:var(--teal-lt); transform:translateX(2px)}
+.opt .ko{font-size:16px; font-weight:500; color:var(--warm-900); line-height:1.55}
+.opt .en{font-size:11.5px; color:var(--warm-500); margin-top:2px}
+
+/* 주문 조립기 */
+.builder{background:#fff; border:2px solid var(--teal-md); border-radius:var(--radius); padding:14px; margin-top:6px}
+.brow{margin-bottom:13px}
+.blabel{font-size:11.5px; font-weight:700; color:var(--teal); margin-bottom:6px}
+.bchips{display:flex; gap:7px; flex-wrap:wrap}
+.bchip{
+  background:#fff; border:1.5px solid var(--line); border-radius:999px;
+  padding:7px 13px; font-size:14px; cursor:pointer; font-family:inherit; transition:.12s;
+}
+.bchip:hover{border-color:var(--teal-md)}
+.bchip.on{background:var(--teal); border-color:var(--teal); color:#fff; font-weight:600}
+.bchip small{opacity:.7; font-size:11px; margin-left:3px}
+.preview{
+  background:var(--teal-lt); border:1.5px dashed var(--teal-md); border-radius:10px;
+  padding:12px 14px; margin:4px 0 12px; font-size:17px; font-weight:500; color:var(--teal-dark);
+  min-height:52px; line-height:1.5;
+}
+.preview .ph{color:var(--warm-500); font-weight:400; font-size:14px}
+.preview .tot{display:block; font-size:12px; color:var(--warm-600); font-weight:400; margin-top:5px}
+.preview .over{color:var(--coral); font-weight:700}
+
+/* 버튼 */
+.btn{
+  background:var(--teal); color:#fff; border:none; border-radius:999px;
+  padding:12px 26px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+}
+.btn:hover{background:var(--teal-600)}
+.btn:disabled{background:#c9c2b8; cursor:not-allowed}
+.btn.ghost{background:none; color:var(--warm-600); border:1.5px solid var(--line); font-weight:500}
+.btn.ghost:hover{background:#fff; color:var(--warm-900)}
+.btnrow{display:flex; gap:9px; align-items:center; flex-wrap:wrap; margin-top:12px}
+
+/* 힌트 */
+.hint{
+  background:var(--blue-lt); border:1.5px solid #b9d3ef; border-radius:var(--radius);
+  padding:11px 14px; font-size:13.5px; line-height:1.7; color:var(--warm-800); margin-top:12px;
+}
+
+/* 잠김 표시 */
+.locked{
+  background:#fff; border:2px dashed #d8ccbb; border-radius:var(--radius);
+  padding:13px 15px; font-size:13.5px; color:var(--warm-600); margin-top:10px; line-height:1.6;
+}
+
+/* 타이틀 / 엔딩 */
+.center{text-align:center; padding:26px 6px}
+.center h1{font-family:'Gaegu',var(--font-kr); font-size:40px; margin:8px 0 2px; color:var(--teal-dark); line-height:1.15}
+.center .sub{font-size:14px; color:var(--warm-600); margin-bottom:20px}
+.card{
+  background:#fff; border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px; text-align:left; font-size:14px; line-height:1.8; margin:14px 0;
+}
+.card h3{margin:0 0 8px; font-size:14px; color:var(--teal)}
+.note{
+  background:#fffdf5; border:1.5px solid #e8d9a8; border-radius:6px;
+  padding:16px 18px; font-family:'Gaegu',var(--font-kr); font-size:21px; line-height:1.7;
+  color:#5c4a1e; box-shadow:2px 3px 0 rgba(0,0,0,.06); transform:rotate(-.6deg); text-align:left;
+}
+.note .en{font-family:var(--font-kr); font-size:12.5px; color:#8a7440; margin-top:7px; line-height:1.5}
+.score{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:16px 0}
+.score div{background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:10px 16px; min-width:88px}
+.score b{display:block; font-size:21px; color:var(--teal-dark); font-variant-numeric:tabular-nums}
+.score span{font-size:11px; color:var(--warm-600)}
+.big-emoji{font-size:56px; line-height:1}
+
+footer{padding:16px; text-align:center; font-size:11.5px; color:var(--warm-500); border-top:1px solid var(--line)}
+footer a{color:var(--teal); text-decoration:none}
+
+@media(max-width:520px){
+  .center h1{font-size:32px}
+  .bub .ko,.opt .ko{font-size:15px}
+  #hud{font-size:11.5px}
+  .preview{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="hud">
+    <div class="goal" id="hudGoal">🏪 포장마차 탈출<small>Escape the Pojangmacha</small></div>
+    <div class="chip" id="hudMoney">💰 10,000원</div>
+    <div class="chip" id="hudTime">⏱ 0:00</div>
+  </div>
+  <div id="sceneWrap" hidden>
+    <img id="sceneImg" alt="">
+    <div id="sceneFallback" hidden><span></span></div>
+  </div>
+  <div id="body"></div>
+  <footer>
+    도란채 · Doranchae — Level 1 ep06 「김밥 주세요」 ·
+    <a href="nhs.html?ep=ep06">이 편 공부하러 가기 →</a>
+  </footer>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   ✏️  선생님이 고치실 곳은 여기 SCRIPT 뿐입니다.
+       ko = 한국어 대사 / en = 영어 뜻
+       아래 엔진(ENGINE)은 건드리지 않으셔도 됩니다.
+   ══════════════════════════════════════════════════════════════════ */
+
+const SCRIPT = {
+
+  /* ── 시작 ─────────────────────────────────────────── */
+  title      : { ko:'포장마차 탈출',        en:'Escape the Pojangmacha' },
+  subtitle   : { ko:'할머니 심부름을 마치고 집에 돌아가세요.', en:'Finish Grandma’s errand and get home.' },
+  grandmaNote: { ko:'떡볶이 1인분하고 김밥 2인분 사 오렴.\n잔돈은 네가 가져. — 할머니',
+                 en:'Buy 1 portion of tteokbokki and 2 portions of kimbap. Keep the change. — Grandma' },
+  howto      : { ko:'막히면 옆에 있는 보미에게 물어보세요.', en:'Stuck? Ask Bomi, standing next to you.' },
+
+  /* ── 관문 ① 들어가기 ──────────────────────────────── */
+  g1_narr    : { ko:'김이 뿌옇게 서려서 안이 잘 안 보인다.', en:'Steam clouds the plastic sheet. You can’t see inside.' },
+  /* 슬라이드 그림 속 메뉴판을 그대로 옮긴 것 — 그림과 어긋나지 않게 */
+  g1_look_menu : { ko:'오뎅 (1꼬치) 1,000원\n떡볶이 (1인분) 3,500원\n순대 (1인분) 4,000원\n튀김 (모듬) 3,000원\n김밥 2,500원',
+                   en:'Fish cake (1 skewer) 1,000 · Tteokbokki (1 portion) 3,500 · Sundae (1 portion) 4,000 · Fritters (assorted) 3,000 · Kimbap 2,500' },
+  g1_look_bomi : { ko:'우리 뭐 먹을까?',   en:'What shall we eat?' },
+  g1_look_tent : { ko:'안에서 아줌마 목소리가 들린다.', en:'You hear the ajumma’s voice inside.' },
+  g1_locked    : { ko:'그냥 들어가기엔 좀 그렇다. 뭐라고 말을 걸어 볼까?', en:'You can’t just walk in. What could you say?' },
+
+  g1_opts: [
+    { ko:'들어가도 되나?', en:'May I go in?',        ok:true  },
+    { ko:'뭐 먹을까?',     en:'What shall we eat?',  ok:false, reply:{ ko:'보미: 나한테 물어본 거야?', en:'Bomi: Were you asking me?' } },
+    { ko:'말없이 들어간다', en:'Walk in without a word', ok:false, reply:{ ko:'아줌마가 빤히 쳐다본다. 어색해서 다시 나왔다.', en:'The ajumma stares. Too awkward — you step back out.' } }
+  ],
+
+  /* ── 관문 ② 인사 + 주문 ───────────────────────────── */
+  g2_welcome : { ko:'어서 오세요!', en:'Welcome!', audio:'3어서+오세요_slide3.mp3' },
+  g2_greet_opts: [
+    { ko:'안녕하세요.',   en:'Hello.',       ok:true  },
+    { ko:'어서 오세요.',  en:'Welcome.',     ok:false, reply:{ ko:'아줌마: 하하, 그건 내가 할 말인데?', en:'Ajumma: Haha — that’s my line!' } },
+    { ko:'감사합니다.',   en:'Thank you.',   ok:false, reply:{ ko:'아줌마: 뭐가 벌써 감사해요?', en:'Ajumma: Thanks for what, already?' } }
+  ],
+
+  g2_ask     : { ko:'뭐 드릴까요?', en:'What can I get you?' },
+  g2_build_t : { ko:'주문을 만들어 보세요', en:'Build your order' },
+  g2_lbl_food: { ko:'무엇을?',   en:'What?' },
+  g2_lbl_qty : { ko:'얼마나?',   en:'How much?' },
+  g2_lbl_conn: { ko:'두 개를 이을 때는?', en:'To join two things?' },
+  g2_say     : { ko:'주세요!',   en:'Order it!' },
+
+  /* 아줌마가 못 알아듣는 경우들 */
+  g2_fail_conn : { ko:'떡볶이요? 김밥이요? 뭘 달라는 거예요?', en:'Tteokbokki? Kimbap? Which one do you want?' },
+  g2_fail_qty  : { ko:'한 개요? 1인분이요? 음식은 인분으로 말해요.', en:'One piece? One portion? For food we count in 인분 (portions).' },
+  g2_fail_over : { ko:'어이구, 그렇게 많이? 돈이 모자랄 텐데요.', en:'Goodness, that much? You won’t have enough money.' },
+  g2_fail_wrong: { ko:'네, 그런데 할머니가 시키신 게 맞아요?', en:'Sure — but is that what Grandma asked for?' },
+  g2_ok        : { ko:'네! 조금만 기다리세요.', en:'Coming right up!' },
+  g2_conn_note : { ko:'보미: 「와/과」는 글 쓸 때 쓰는 말인데… 통했네!', en:'Bomi: 「와/과」 is more for writing… but it worked!' },
+
+  /* ── 관문 ③ 맛 · 계산 · 작별 ──────────────────────── */
+  g3_eat_narr: { ko:'떡볶이에서 김이 올라온다. 한 입 먹어 본다.', en:'Steam rises off the tteokbokki. You take a bite.' },
+  g3_eat_opts: [
+    { ko:'정말 맛있다!',            en:'Really delicious!', ok:true,
+      reply:{ ko:'아줌마: 그렇죠? 우리 집이 제일 맛있어요.', en:'Ajumma: Right? Mine’s the best around.' } },
+    { ko:'환상이야!',              en:'Fantastic!', ok:true,
+      reply:{ ko:'아줌마: 어이구, 한국말 잘하네!', en:'Ajumma: My, your Korean is good!' } },
+    { ko:'맛없다.',                en:'Not tasty.', ok:false,
+      reply:{ ko:'…정적. 보미가 옆구리를 쿡 찌른다.', en:'…Silence. Bomi elbows you.' } }
+  ],
+
+  g3_pay_narr: { ko:'다 먹었다. 이제 값을 치러야 나갈 수 있다.', en:'All finished. You must pay before you can leave.' },
+  g3_pay_opts: [
+    { ko:'저희 얼마예요?', en:'How much do we owe?', ok:true },
+    { ko:'얼마예요?',      en:'How much?',           ok:true, note:{ ko:'보미: 「저희」를 붙이면 더 공손해.', en:'Bomi: Adding 「저희」 sounds more polite.' } },
+    { ko:'말없이 돈을 내민다', en:'Hand over money silently', ok:false,
+      reply:{ ko:'아줌마: 얼만지 안 물어봐요?', en:'Ajumma: Aren’t you going to ask how much?' } }
+  ],
+  /* 값은 메뉴판 기준 3,500 + 2,500×2 = 8,500원.
+     원작 mp3(8만오천+원이에요)는 금액이 달라 쓰지 않았습니다.
+     Typecast로 「팔천오백 원이에요.」 한 줄 녹음하시면 audio:'파일명.mp3' 를 붙여 주세요. */
+  g3_price   : { ko:'팔천오백 원이에요.', en:'That’ll be 8,500 won.' },
+
+  g3_bye_narr: { ko:'계산을 마쳤다. 마지막으로 인사를 하고 나가자.', en:'Paid. One last thing — say goodbye and go.' },
+  g3_bye_opts: [
+    { ko:'안녕히 계세요.', en:'Goodbye. (to the one staying)', ok:true },
+    { ko:'안녕히 가세요.', en:'Goodbye. (to the one leaving)', ok:false,
+      reply:{ ko:'아줌마: 어? 나 안 가는데?', en:'Ajumma: Huh? I’m not going anywhere.' } },
+    { ko:'잘 가요.',      en:'Bye! (casual)', ok:false,
+      reply:{ ko:'아줌마의 눈이 동그래진다. 어른한테 할 말이 아니다.', en:'The ajumma’s eyes go wide — not something you say to an elder.' } }
+  ],
+  g3_farewell: { ko:'잘 가요! 또 놀러 와요.', en:'Bye! Come visit again.', audio:'11잘+가요!+또+놀러+와요_slide6.mp3' },
+
+  /* ── 엔딩 ─────────────────────────────────────────── */
+  /* 엔딩 조건: 🏆 실수 0~1 & 힌트 0 / 😅 그 사이 / 😳 실수 3회 이상 */
+  end_best  : { emoji:'🏆', ko:'단골 엔딩',     en:'Regular Customer Ending',
+                msg:{ ko:'아줌마가 손을 흔든다. 다음에 또 오면 얼굴을 기억하겠지.', en:'The ajumma waves. She’ll remember your face next time.' } },
+  end_mid   : { emoji:'😅', ko:'아슬아슬 엔딩', en:'Close Call Ending',
+                msg:{ ko:'몇 번 버벅였지만 김밥은 손에 들려 있다. 그거면 됐다.', en:'You fumbled a few times — but the kimbap is in your hands. Good enough.' } },
+  end_awk   : { emoji:'😳', ko:'어색한 엔딩',   en:'Awkward Ending',
+                msg:{ ko:'통하긴 했다. 그런데 아줌마가 계속 웃고 있었다.', en:'You got through it — but the ajumma kept giggling.' } },
+
+  /* ── 힌트 (보미) ──────────────────────────────────── */
+  hints: {
+    g1     : { ko:'보미: 그냥 들어가긴 좀 그래. 「들어가도 되나?」 하고 물어봐.', en:'Bomi: Don’t just barge in. Try asking 「들어가도 되나?」' },
+    g2greet: { ko:'보미: 손님은 「안녕하세요」라고 하는 거야.', en:'Bomi: A customer says 「안녕하세요」.' },
+    g2order: { ko:'보미: 할머니 쪽지 다시 봐. 그리고 음식은 「인분」으로 세고, 두 개를 이을 땐 「하고」를 써.',
+               en:'Bomi: Re-read Grandma’s note. Count food in 「인분」, and join two items with 「하고」.' },
+    g3eat  : { ko:'보미: 맛있으면 「정말 맛있다!」 하고 말해 봐.', en:'Bomi: If it’s good, say 「정말 맛있다!」' },
+    g3pay  : { ko:'보미: 「저희 얼마예요?」 하고 물어봐.', en:'Bomi: Ask 「저희 얼마예요?」' },
+    g3bye  : { ko:'보미: 아줌마는 여기 남아 계시잖아. 남는 사람한테는 「계세요」야.', en:'Bomi: The ajumma is staying here. For someone staying, it’s 「계세요」.' }
+  }
+};
+
+/* 주문할 수 있는 것 — 가격은 슬라이드 메뉴판 그대로. 바꾸시면 계산도 자동으로 따라갑니다.
+   (오뎅·튀김은 세는 단위가 달라서(꼬치·모듬) 이번 파일럿에서는 메뉴판에만 두었습니다) */
+const MENU = [
+  { ko:'떡볶이', en:'tteokbokki',   price:3500 },
+  { ko:'김밥',   en:'kimbap',       price:2500 },
+  { ko:'순대',   en:'sundae',       price:4000 }
+];
+/* 할머니가 시킨 정답 — { 음식이름: 인분 } */
+const CORRECT_ORDER = { '떡볶이':1, '김밥':2 };   /* = 3,500 + 5,000 = 8,500원 */
+const WALLET = 10000;
+
+/* 수량 칩 — native:true 는 고유어(한 개/두 개)라 아줌마가 되묻습니다 */
+const QTYS = [
+  { label:'한 개', n:1, native:true  }, { label:'1인분', n:1, native:false },
+  { label:'두 개', n:2, native:true  }, { label:'2인분', n:2, native:false },
+  { label:'세 개', n:3, native:true  }, { label:'3인분', n:3, native:false }
+];
+/* 연결어미 — ok:false 면 아줌마가 못 알아듣습니다 */
+const CONNS = [
+  { label:'하고',    ok:true  },
+  { label:'(이)랑',  ok:true  },
+  { label:'와/과',   ok:true, bookish:true },
+  { label:'안 씀',   ok:false }
+];
+
+/* 장면 배경 이미지 */
+const SLIDES = 'data/nhs/L1/slides/ep06/';
+const TTS    = 'data/nhs/L1/TTS/ep06/';
+const BG = { g1:'포장마차1.webp', g1b:'포장마차2.webp', g2:'포장마차3.webp',
+             g3eat:'포장마차4.webp', g3pay:'포장마차5.webp', g3bye:'포장마차6.webp' };
+
+/* ══════════════════════════════════════════════════════════════════
+   ENGINE — 여기서부터는 고치지 않으셔도 됩니다
+   ══════════════════════════════════════════════════════════════════ */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const won = n => n.toLocaleString('en-US') + '원';
+
+const S = {
+  scene:'title', started:0, mistakes:0, hints:0, overordered:false,
+  paid:0, seen:{}, order:{ food:[], qty:{}, conn:null }, msg:null, hintOpen:false
+};
+
+/* ── 소리 ── */
+let voiceKo = null;
+function pickVoice(){
+  try{
+    const vs = speechSynthesis.getVoices()||[];
+    voiceKo = vs.find(v=>/ko[-_]KR/i.test(v.lang)) || vs.find(v=>/^ko/i.test(v.lang)) || null;
+  }catch(e){}
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+let curAudio = null;
+function say(line){
+  if(!line) return;
+  try{ if(curAudio){ curAudio.pause(); curAudio=null; } }catch(e){}
+  if(line.audio){
+    const a = new Audio(TTS + encodeURIComponent(line.audio));
+    curAudio = a;
+    a.play().catch(()=>speakTTS(line.ko));
+    return;
+  }
+  speakTTS(line.ko);
+}
+function speakTTS(text){
+  if(!window.speechSynthesis || !text) return;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/\n/g,' '));
+    u.lang = 'ko-KR'; u.rate = 0.88;
+    if(voiceKo) u.voice = voiceKo;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ── 조각 ── */
+/* 대사를 등록해 두고 번호로 재생 — 따옴표·특수문자 문제를 피하기 위함 */
+const LINES = [];
+function reg(line){ LINES.push(line); return LINES.length-1; }
+function sayIdx(i){ say(LINES[i]); }
+
+function bub(cls, emoji, who, line, withSpk){
+  const idx = reg(line);
+  return `<div class="say">
+    <div class="who"><span class="em">${emoji}</span>${esc(who)}</div>
+    <div class="bub ${cls}">
+      ${withSpk!==false?`<button class="spk" onclick="sayIdx(${idx})" title="듣기">🔊</button>`:''}
+      <div class="ko">${esc(line.ko).replace(/\n/g,'<br>')}</div>
+      <div class="en">${esc(line.en)}</div>
+    </div></div>`;
+}
+const ajumma = l => bub('ajumma','👩‍🍳','아줌마', l);
+const bomi   = l => bub('bomi','👧','보미', l);
+const me     = l => bub('me','🧒','나', l);
+const narr   = l => `<div class="narr">${esc(l.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(l.en)}</div></div>`;
+
+function optBtn(o, i, handler){
+  return `<button class="opt" onclick="${handler}(${i})">
+    <div class="ko">${esc(o.ko)}</div><div class="en">${esc(o.en)}</div></button>`;
+}
+function hintBox(key){
+  const h = SCRIPT.hints[key];
+  return `<div class="btnrow">
+      <button class="btn ghost" onclick="toggleHint('${key}')">👧 ${S.hintOpen?'힌트 닫기':'보미에게 물어보기 · Ask Bomi'}</button>
+    </div>` + (S.hintOpen && h ? `<div class="hint">${esc(h.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(h.en)}</div></div>` : '');
+}
+function toggleHint(key){
+  if(!S.hintOpen) S.hints++;
+  S.hintOpen = !S.hintOpen;
+  render();
+}
+/* 한 번만 보여주는 알림. kind: 'bad'(빨강) | 'good'(초록) */
+function flash(line, kind){ if(line) S.msg = { line:line, kind:kind||'bad' }; }
+function msgBox(){
+  if(!S.msg) return '';
+  const m = S.msg; S.msg = null;
+  const style = m.kind==='good'
+    ? 'background:var(--teal-lt);border-color:var(--teal-md)'
+    : 'background:var(--coral-lt);border-color:#f0b8ab';
+  return `<div class="narr" style="${style}">${esc(m.line.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(m.line.en)}</div></div>`;
+}
+
+/* ── HUD ── */
+function hud(){
+  const goals = {
+    title:'🏪 포장마차 탈출', g1:'🔑 관문 1 — 들어가기', g2greet:'🔑 관문 2 — 인사하기',
+    g2order:'🔑 관문 2 — 주문하기', g3eat:'🍢 맛보기', g3pay:'🔑 관문 3 — 계산하기',
+    g3bye:'🔑 관문 3 — 인사하고 나가기', end:'🎬 탈출!'
+  };
+  const goalsEn = {
+    title:'Escape the Pojangmacha', g1:'Gate 1 — Get inside', g2greet:'Gate 2 — Greet',
+    g2order:'Gate 2 — Order', g3eat:'Taste it', g3pay:'Gate 3 — Pay',
+    g3bye:'Gate 3 — Say goodbye', end:'Escaped!'
+  };
+  $('hudGoal').innerHTML = `${esc(goals[S.scene]||'')}<small>${esc(goalsEn[S.scene]||'')}</small>`;
+  $('hudMoney').textContent = '💰 ' + won(WALLET - S.paid);
+}
+function tick(){
+  if(!S.started || S.scene==='end') return;
+  const s = Math.floor((Date.now()-S.started)/1000);
+  $('hudTime').textContent = '⏱ ' + Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+}
+setInterval(tick, 500);
+
+/* 그림이 없거나 못 불러와도 화면이 깨지지 않게 — 대신 색 배경 + 이모지 */
+const BG_EMOJI = { g1:'🏪', g1b:'🏪', g2:'👩‍🍳', g3eat:'🍢', g3pay:'💰', g3bye:'👋' };
+function setBg(key){
+  const wrap = $('sceneWrap'), img = $('sceneImg'), fb = $('sceneFallback');
+  if(!key){ wrap.hidden = true; return; }
+  wrap.hidden = false;
+  fb.firstElementChild.textContent = BG_EMOJI[key] || '🏪';
+  img.onerror = () => { img.style.visibility='hidden'; fb.hidden = false; };
+  img.onload  = () => { img.style.visibility='visible'; fb.hidden = true; };
+  img.src = SLIDES + encodeURIComponent(BG[key]);
+}
+
+/* ══ 화면들 ══ */
+function render(){
+  hud();
+  LINES.length = 0;
+  const b = $('body');
+  if(S.scene==='title')   return setBg(null), b.innerHTML = viewTitle();
+  if(S.scene==='g1')      return setBg(S.seen.bomi?'g1b':'g1'), b.innerHTML = viewG1();
+  if(S.scene==='g2greet') return setBg('g2'), b.innerHTML = viewG2Greet();
+  if(S.scene==='g2order') return setBg('g2'), b.innerHTML = viewG2Order();
+  if(S.scene==='g3eat')   return setBg('g3eat'), b.innerHTML = viewG3Eat();
+  if(S.scene==='g3pay')   return setBg('g3pay'), b.innerHTML = viewG3Pay();
+  if(S.scene==='g3bye')   return setBg('g3bye'), b.innerHTML = viewG3Bye();
+  if(S.scene==='end')     return setBg('g3bye'), b.innerHTML = viewEnd();
+}
+
+function viewTitle(){
+  return `<div class="center">
+    <div class="big-emoji">🏪</div>
+    <h1>${esc(SCRIPT.title.ko)}</h1>
+    <div class="sub">${esc(SCRIPT.title.en)}</div>
+    <div class="note">${esc(SCRIPT.grandmaNote.ko).replace(/\n/g,'<br>')}
+      <div class="en">${esc(SCRIPT.grandmaNote.en)}</div></div>
+    <div class="card">
+      <h3>🎯 ${esc(SCRIPT.subtitle.ko)}</h3>
+      ${esc(SCRIPT.subtitle.en)}<br>
+      <span style="color:var(--warm-600);font-size:13px">💰 ${won(WALLET)} · 👧 ${esc(SCRIPT.howto.ko)}</span>
+    </div>
+    <button class="btn" onclick="start()">시작하기 · Start</button>
+  </div>`;
+}
+function start(){ S.started = Date.now(); S.scene='g1'; S.hintOpen=false; render(); }
+
+/* 관문 1 */
+function viewG1(){
+  let h = msgBox() + narr(SCRIPT.g1_narr);
+  h += `<div class="look-wrap"><div class="sec-t">🔍 살펴보기 · LOOK AROUND</div><div class="looks">
+    <button class="look ${S.seen.menu?'seen':''}" onclick="look('menu')">📋 메뉴판</button>
+    <button class="look ${S.seen.bomi?'seen':''}" onclick="look('bomi')">👧 보미</button>
+    <button class="look ${S.seen.note?'seen':''}" onclick="look('note')">📄 할머니 쪽지</button>
+    <button class="look ${S.seen.tent?'seen':''}" onclick="look('tent')">⛺ 천막</button>
+  </div></div>`;
+  if(S.seen.menu) h += `<div class="card"><h3>📋 메뉴판</h3>
+    <div style="font-size:16px;line-height:1.9">${esc(SCRIPT.g1_look_menu.ko).replace(/\n/g,'<br>')}</div>
+    <div style="font-size:11.5px;color:var(--warm-600);margin-top:6px">${esc(SCRIPT.g1_look_menu.en)}</div></div>`;
+  if(S.seen.note) h += `<div class="note" style="margin:10px 0">${esc(SCRIPT.grandmaNote.ko).replace(/\n/g,'<br>')}<div class="en">${esc(SCRIPT.grandmaNote.en)}</div></div>`;
+  if(S.seen.bomi) h += bomi(SCRIPT.g1_look_bomi);
+  if(S.seen.tent) h += narr(SCRIPT.g1_look_tent);
+
+  h += `<div class="locked">🔒 ${esc(SCRIPT.g1_locked.ko)}<div style="font-size:11.5px;margin-top:3px">${esc(SCRIPT.g1_locked.en)}</div></div>`;
+  h += `<div class="opts">${SCRIPT.g1_opts.map((o,i)=>optBtn(o,i,'chooseG1')).join('')}</div>`;
+  h += hintBox('g1');
+  return h;
+}
+function look(k){ S.seen[k]=true; render(); }
+function chooseG1(i){
+  const o = SCRIPT.g1_opts[i];
+  say(o);
+  if(o.ok){ S.scene='g2greet'; S.hintOpen=false; setTimeout(()=>say(SCRIPT.g2_welcome), 700); }
+  else { S.mistakes++; flash(o.reply); }
+  render();
+}
+
+/* 관문 2 — 인사 */
+function viewG2Greet(){
+  let h = msgBox() + ajumma(SCRIPT.g2_welcome);
+  h += `<div class="sec-t" style="margin-top:16px">💬 뭐라고 대답할까요? · WHAT DO YOU SAY?</div>`;
+  h += `<div class="opts">${SCRIPT.g2_greet_opts.map((o,i)=>optBtn(o,i,'chooseGreet')).join('')}</div>`;
+  h += hintBox('g2greet');
+  return h;
+}
+function chooseGreet(i){
+  const o = SCRIPT.g2_greet_opts[i];
+  say(o);
+  if(o.ok){ S.scene='g2order'; S.hintOpen=false; }
+  else { S.mistakes++; flash(o.reply); }
+  render();
+}
+
+/* 관문 2 — 주문 조립 */
+function orderText(){
+  const parts = S.order.food.map(f=>{
+    const q = S.order.qty[f];
+    return esc(f) + (q ? ' ' + esc(q.label) : '');
+  });
+  if(!parts.length) return null;
+  if(parts.length === 1) return parts[0] + ' 주세요.';
+  const c = S.order.conn;
+  // 앞말에 받침이 있으면 「이랑 / 과」, 없으면 「랑 / 와」 — 「하고」는 항상 같음
+  const hasBatchim = w => { const ch=w.charCodeAt(w.length-1); return ch>=0xAC00&&ch<=0xD7A3 ? (ch-0xAC00)%28!==0 : false; };
+  const bat = hasBatchim(parts[0]);
+  let joiner = ' ';
+  if(c && c.ok) joiner = c.label==='(이)랑' ? (bat?'이랑 ':'랑 ')
+                       : c.label==='와/과'  ? (bat?'과 ':'와 ')
+                       : '하고 ';
+  return parts.join(joiner) + ' 주세요.';
+}
+function orderTotal(){
+  return S.order.food.reduce((t,f)=>{
+    const m = MENU.find(x=>x.ko===f), q = S.order.qty[f];
+    return t + (m && q ? m.price*q.n : 0);
+  },0);
+}
+function viewG2Order(){
+  const txt = orderText(), tot = orderTotal(), over = tot > WALLET;
+  let h = msgBox() + ajumma(SCRIPT.g2_ask);
+  h += `<div class="sec-t" style="margin-top:14px">🔒 ${esc(SCRIPT.g2_build_t.ko)} · ${esc(SCRIPT.g2_build_t.en)}</div>`;
+  h += `<div class="builder">
+    <div class="preview">${txt ? esc(txt) : `<span class="ph">아래에서 골라 보세요 · Pick below</span>`}
+      ${txt?`<span class="tot ${over?'over':''}">합계 ${won(tot)}${over?' — 돈이 모자라요!':''}</span>`:''}</div>
+
+    <div class="brow"><div class="blabel">① ${esc(SCRIPT.g2_lbl_food.ko)} · ${esc(SCRIPT.g2_lbl_food.en)}</div><div class="bchips">
+      ${MENU.map(m=>`<button class="bchip ${S.order.food.includes(m.ko)?'on':''}" onclick="pickFood('${esc(m.ko)}')">${esc(m.ko)}<small>${won(m.price)}</small></button>`).join('')}
+    </div></div>
+
+    ${S.order.food.map(f=>`<div class="brow"><div class="blabel">② ${esc(f)} — ${esc(SCRIPT.g2_lbl_qty.ko)}</div><div class="bchips">
+      ${QTYS.map((q,qi)=>`<button class="bchip ${S.order.qty[f]&&S.order.qty[f].label===q.label?'on':''}" onclick="pickQty('${esc(f)}',${qi})">${esc(q.label)}</button>`).join('')}
+    </div></div>`).join('')}
+
+    ${S.order.food.length>1?`<div class="brow"><div class="blabel">③ ${esc(SCRIPT.g2_lbl_conn.ko)} · ${esc(SCRIPT.g2_lbl_conn.en)}</div><div class="bchips">
+      ${CONNS.map((c,ci)=>`<button class="bchip ${S.order.conn&&S.order.conn.label===c.label?'on':''}" onclick="pickConn(${ci})">${esc(c.label)}</button>`).join('')}
+    </div></div>`:''}
+
+    <div class="btnrow">
+      <button class="btn" onclick="submitOrder()" ${txt?'':'disabled'}>${esc(SCRIPT.g2_say.ko)} · ${esc(SCRIPT.g2_say.en)}</button>
+      <button class="btn ghost" onclick="resetOrder()">다시 고르기</button>
+    </div>
+  </div>`;
+  h += hintBox('g2order');
+  return h;
+}
+function pickFood(f){
+  const i = S.order.food.indexOf(f);
+  if(i>=0){ S.order.food.splice(i,1); delete S.order.qty[f]; }
+  else if(S.order.food.length<2) S.order.food.push(f);
+  render();
+}
+function pickQty(f, qi){ S.order.qty[f] = QTYS[qi]; render(); }
+function pickConn(ci){ S.order.conn = CONNS[ci]; render(); }
+function resetOrder(){ S.order = { food:[], qty:{}, conn:null }; render(); }
+
+function submitOrder(){
+  const txt = orderText(); if(!txt) return;
+  speakTTS(txt);
+  const foods = S.order.food, tot = orderTotal();
+
+  if(foods.some(f=>!S.order.qty[f])){ S.mistakes++; flash(SCRIPT.g2_fail_qty); return render(); }
+  if(foods.some(f=>S.order.qty[f].native)){ S.mistakes++; flash(SCRIPT.g2_fail_qty); return render(); }
+  if(foods.length>1 && (!S.order.conn || !S.order.conn.ok)){ S.mistakes++; flash(SCRIPT.g2_fail_conn); return render(); }
+  if(tot > WALLET){ S.mistakes++; S.overordered = true; flash(SCRIPT.g2_fail_over); return render(); }
+
+  const want = Object.keys(CORRECT_ORDER);
+  const okSet = foods.length===want.length && want.every(w=>foods.includes(w) && S.order.qty[w] && S.order.qty[w].n===CORRECT_ORDER[w]);
+  if(!okSet){ S.mistakes++; flash(SCRIPT.g2_fail_wrong); return render(); }
+
+  if(S.order.conn && S.order.conn.bookish) flash(SCRIPT.g2_conn_note, 'good');
+  S.paid = tot;
+  S.scene = 'g3eat'; S.hintOpen = false;
+  setTimeout(()=>say(SCRIPT.g2_ok), 500);
+  render();
+}
+
+/* 관문 3 — 맛 */
+function viewG3Eat(){
+  let h = msgBox() + ajumma(SCRIPT.g2_ok) + narr(SCRIPT.g3_eat_narr);
+  h += `<div class="sec-t" style="margin-top:14px">💬 한 마디 · SAY SOMETHING</div>`;
+  h += `<div class="opts">${SCRIPT.g3_eat_opts.map((o,i)=>optBtn(o,i,'chooseEat')).join('')}</div>`;
+  h += hintBox('g3eat');
+  return h;
+}
+function chooseEat(i){
+  const o = SCRIPT.g3_eat_opts[i];
+  say(o);
+  if(o.ok){ S.scene='g3pay'; S.hintOpen=false; flash(o.reply,'good'); }
+  else { S.mistakes++; flash(o.reply); }
+  render();
+}
+
+/* 관문 3 — 계산 */
+function viewG3Pay(){
+  let h = msgBox() + narr(SCRIPT.g3_pay_narr);
+  h += `<div class="locked">🔒 값을 물어봐야 계산할 수 있어요.<div style="font-size:11.5px;margin-top:3px">You need to ask the price first.</div></div>`;
+  h += `<div class="opts">${SCRIPT.g3_pay_opts.map((o,i)=>optBtn(o,i,'choosePay')).join('')}</div>`;
+  h += hintBox('g3pay');
+  return h;
+}
+function choosePay(i){
+  const o = SCRIPT.g3_pay_opts[i];
+  say(o);
+  if(o.ok){ S.scene='g3bye'; S.hintOpen=false; flash(o.note,'good'); setTimeout(()=>say(SCRIPT.g3_price), 800); }
+  else { S.mistakes++; flash(o.reply); }
+  render();
+}
+
+/* 관문 3 — 작별 */
+function viewG3Bye(){
+  let h = msgBox() + ajumma(SCRIPT.g3_price);
+  h += `<div style="font-size:13px;color:var(--warm-600);margin:2px 0 12px">💰 ${won(S.paid)} 냈어요. 남은 돈 ${won(WALLET-S.paid)}.</div>`;
+  h += narr(SCRIPT.g3_bye_narr);
+  h += `<div class="locked">🔒 인사를 잘못하면 문이 안 열려요.<div style="font-size:11.5px;margin-top:3px">The wrong goodbye won’t open the door.</div></div>`;
+  h += `<div class="opts">${SCRIPT.g3_bye_opts.map((o,i)=>optBtn(o,i,'chooseBye')).join('')}</div>`;
+  h += hintBox('g3bye');
+  return h;
+}
+function chooseBye(i){
+  const o = SCRIPT.g3_bye_opts[i];
+  say(o);
+  if(o.ok){ S.scene='end'; setTimeout(()=>say(SCRIPT.g3_farewell), 700); }
+  else { S.mistakes++; flash(o.reply); }
+  render();
+}
+
+/* 엔딩 */
+function viewEnd(){
+  const secs = Math.floor((Date.now()-S.started)/1000);
+  const end = S.mistakes >= 3               ? SCRIPT.end_awk
+            : (S.mistakes <= 1 && S.hints===0) ? SCRIPT.end_best
+            :                                    SCRIPT.end_mid;
+  return `<div class="center">
+    ${ajumma(SCRIPT.g3_farewell)}
+    <div class="big-emoji" style="margin-top:14px">${end.emoji}</div>
+    <h1 style="font-size:32px">${esc(end.ko)}</h1>
+    <div class="sub">${esc(end.en)}</div>
+    <div class="card">${esc(end.msg.ko)}<div style="font-size:12px;color:var(--warm-600);margin-top:5px">${esc(end.msg.en)}</div></div>
+    <div class="score">
+      <div><b>${won(WALLET-S.paid).replace('원','')}</b><span>남은 돈 · change</span></div>
+      <div><b>${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}</b><span>걸린 시간 · time</span></div>
+      <div><b>${S.hints}</b><span>힌트 · hints</span></div>
+      <div><b>${S.mistakes}</b><span>실수 · slips</span></div>
+    </div>
+    <div class="btnrow" style="justify-content:center">
+      <button class="btn" onclick="restart()">다시 하기 · Play again</button>
+      <a class="btn ghost" style="text-decoration:none" href="nhs.html?ep=ep06">이 편 공부하기 →</a>
+    </div>
+  </div>`;
+}
+function restart(){
+  Object.assign(S, { scene:'title', started:0, mistakes:0, hints:0, overordered:false,
+    paid:0, seen:{}, order:{ food:[], qty:{}, conn:null }, msg:null, hintOpen:false });
+  $('hudTime').textContent = '⏱ 0:00';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
