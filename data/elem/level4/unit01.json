@@ -65,7 +65,7 @@
             }
           ],
           "examples": [
-            { "korean": "애라는 그림을 그리고 있어요.", "english": "Aera is drawing a picture.", "highlight": "그리고 있어요" },
+            { "korean": "아라는 그림을 그리고 있어요.", "english": "Ara is drawing a picture.", "highlight": "그리고 있어요" },
             { "korean": "지금 뭐 하고 있어요?", "english": "What are you doing right now?", "highlight": "하고 있어요" },
             { "korean": "나는 밥을 먹고 있어요.", "english": "I'm eating.", "highlight": "먹고 있어요" }
           ]
@@ -110,7 +110,7 @@
           "scene": "📞 전화 통화 중",
           "scene_en": "During a phone call",
           "lines": [
-            { "speaker": "할머니", "color": "coral", "text": "리아야, 지금 뭐 하고 있어?", "en": "Lia, what are you doing right now?", "type": "given" },
+            { "speaker": "할머니", "color": "coral", "text": "리나야, 지금 뭐 하고 있어?", "en": "Lina, what are you doing right now?", "type": "given" },
             { "speaker": "나", "color": "teal", "text": "숙제를 ___ 있어요.", "en": "I'm doing my homework.", "type": "fill", "ans": "하고", "opts": ["하고", "해서", "하면"] },
             { "speaker": "할머니", "color": "coral", "text": "그래, 열심히 해!", "en": "Good, work hard!", "type": "given" }
           ]
@@ -119,9 +119,9 @@
           "scene": "🏠 집에서",
           "scene_en": "At home",
           "lines": [
-            { "speaker": "리아", "color": "blue", "text": "엄마 지금 뭐 하고 있어?", "en": "What is Mom doing right now?", "type": "given" },
+            { "speaker": "리나", "color": "blue", "text": "엄마 지금 뭐 하고 있어?", "en": "What is Mom doing right now?", "type": "given" },
             { "speaker": "나", "color": "teal", "text": "엄마는 밥을 ___ 있어요.", "en": "Mom is cooking.", "type": "fill", "ans": "만들고", "opts": ["만들고", "먹고", "자고"] },
-            { "speaker": "리아", "color": "blue", "text": "배고파! 빨리 먹고 싶어!", "en": "I'm hungry! I want to eat fast!", "type": "given" }
+            { "speaker": "리나", "color": "blue", "text": "배고파! 빨리 먹고 싶어!", "en": "I'm hungry! I want to eat fast!", "type": "given" }
           ]
         },
         {
@@ -136,14 +136,14 @@
       ],
       "fill_items": [
         { "q": "나는 지금 책을 읽", "suffix": " 있어요.", "ans": "고", "opts": ["고", "어서", "으면"], "en": "I'm reading a book right now." },
-        { "q": "애라가 그림을 그리고", "suffix": ".", "ans": "있어요", "opts": ["있어요", "없어요", "왔어요"], "en": "Aera is drawing a picture." },
+        { "q": "아라가 그림을 그리고", "suffix": ".", "ans": "있어요", "opts": ["있어요", "없어요", "왔어요"], "en": "Ara is drawing a picture." },
         { "q": "엄마는 일 하시고", "suffix": ".", "ans": "계세요", "opts": ["계세요", "있어요", "없어요"], "en": "Mom is working (polite)." },
         { "q": "지금 뭐 하", "suffix": " 있어요?", "ans": "고", "opts": ["고", "면", "서"], "en": "What are you doing right now?" },
         { "q": "동생이 자고", "suffix": ".", "ans": "있어요", "opts": ["있어요", "계세요", "없어요"], "en": "My sibling is sleeping." }
       ],
       "listen_quiz": [
         {
-          "audio": "애라는 언니 방에서 그림을 그리고 있어요.",
+          "audio": "아라는 언니 방에서 그림을 그리고 있어요.",
           "correct": 1,
           "choices": [
             { "emoji": "😴", "kr": "자고 있어요", "en": "is sleeping" },
@@ -173,11 +173,11 @@
       "step1_chunks": [
         {
           "scene": "🖌️",
-          "english": "Aera is drawing a picture.",
+          "english": "Ara is drawing a picture.",
           "hint": "동사 + 고 있어요 = is -ing",
-          "sentence": "애라가 그림을 그리고 있어요.",
+          "sentence": "아라가 그림을 그리고 있어요.",
           "chunks": [
-            { "text": "애라가", "type": "name", "en": "Aera (subject)" },
+            { "text": "아라가", "type": "name", "en": "Ara (subject)" },
             { "text": "그림을", "type": "name", "en": "picture (object)" },
             { "text": "그리고 있어요.", "type": "verb", "en": "is drawing" }
           ]
@@ -206,11 +206,11 @@
         },
         {
           "scene": "🌈",
-          "english": "Aera is drawing a rainbow in her sister's room.",
+          "english": "Ara is drawing a rainbow in her sister's room.",
           "hint": "방에서 = in the room",
-          "sentence": "애라는 언니 방에서 무지개를 그리고 있어요.",
+          "sentence": "아라는 언니 방에서 무지개를 그리고 있어요.",
           "chunks": [
-            { "text": "애라는", "type": "name", "en": "Aera (topic)" },
+            { "text": "아라는", "type": "name", "en": "Ara (topic)" },
             { "text": "언니 방에서", "type": "place", "en": "in her sister's room" },
             { "text": "무지개를", "type": "name", "en": "rainbow (object)" },
             { "text": "그리고 있어요.", "type": "verb", "en": "is drawing" }
@@ -242,10 +242,10 @@
       "step2_words": [
         {
           "scene": "🖌️",
-          "english": "Aera is drawing a rainbow right now.",
+          "english": "Ara is drawing a rainbow right now.",
           "hint": "그리다 → 그리고 있어요",
-          "sentence": "애라는 지금 무지개를 그리고 있어요.",
-          "answer": ["애라는", "지금", "무지개를", "그리고", "있어요."],
+          "sentence": "아라는 지금 무지개를 그리고 있어요.",
+          "answer": ["아라는", "지금", "무지개를", "그리고", "있어요."],
           "types": ["name", "particle", "name", "verb", "verb"]
         },
         {
@@ -258,21 +258,21 @@
         },
         {
           "scene": "🌈",
-          "english": "Lia says Aera is drawing a rainbow in her sister's room.",
+          "english": "Lina says Ara is drawing a rainbow in her sister's room.",
           "hint": "🌈 마지막 문제! 그린대요 = they say she's drawing",
-          "sentence": "애라는 언니 방에서 무지개를 그린대요.",
-          "answer": ["애라는", "언니", "방에서", "무지개를", "그린대요."],
+          "sentence": "아라는 언니 방에서 무지개를 그린대요.",
+          "answer": ["아라는", "언니", "방에서", "무지개를", "그린대요."],
           "types": ["name", "name", "place", "name", "verb"]
         }
       ],
       "write_items": [
         {
           "prompt": "진행형 문장을 써봐요 ✏️",
-          "question": "🖌️ 애라 / 그림 그리다 → 지금?",
-          "question_en": "Aera is drawing a picture right now.",
+          "question": "🖌️ 아라 / 그림 그리다 → 지금?",
+          "question_en": "Ara is drawing a picture right now.",
           "hint": "그리 + 고 있어요",
-          "answer": "애라는 지금 그림을 그리고 있어요.",
-          "answer_en": "Aera is drawing a picture right now."
+          "answer": "아라는 지금 그림을 그리고 있어요.",
+          "answer_en": "Ara is drawing a picture right now."
         },
         {
           "prompt": "한국어로 써봐요 ✏️",

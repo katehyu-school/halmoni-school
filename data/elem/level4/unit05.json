@@ -59,7 +59,7 @@
             {
               "color": "red",
               "label": "⚠️ 내가 하는 것만! · Only for YOUR own action",
-              "examples": ["✅ 제가 할게요. (I'll do it.)", "❌ 리아가 할게요. (can't use for others)", "→ 리아가 할 거예요. (Lia will do it. = prediction)"]
+              "examples": ["✅ 제가 할게요. (I'll do it.)", "❌ 리나가 할게요. (can't use for others)", "→ 리나가 할 거예요. (Lina will do it. = prediction)"]
             }
           ],
           "examples": [
@@ -105,23 +105,23 @@
           "scene": "🫐 구스베리 따기",
           "scene_en": "Picking gooseberries",
           "lines": [
-            { "speaker": "할머니", "color": "green", "text": "리암아, 구스베리 좀 따 올래?", "en": "Liam, can you go pick some gooseberries?", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "네! 제가 따 올게요!", "en": "Yes! I'll go pick them!", "type": "given" },
+            { "speaker": "할머니", "color": "green", "text": "라온아, 구스베리 좀 따 올래?", "en": "Raon, can you go pick some gooseberries?", "type": "given" },
+            { "speaker": "라온", "color": "blue", "text": "네! 제가 따 올게요!", "en": "Yes! I'll go pick them!", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "딸 때, 가시 조심해.", "en": "Watch out for the thorns when picking.", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "알아요.", "en": "I know.", "type": "given" }
+            { "speaker": "라온", "color": "blue", "text": "알아요.", "en": "I know.", "type": "given" }
           ]
         },
         {
           "scene": "😖 맛 보기",
           "scene_en": "Tasting a berry",
           "lines": [
-            { "speaker": "리암", "color": "blue", "text": "맛 좀 볼까?", "en": "Should I taste one?", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "우웩! 할머니! 아직 안 익었어요!", "en": "Yuck! Grandma! They're not ripe yet!", "type": "given" },
+            { "speaker": "라온", "color": "blue", "text": "맛 좀 볼까?", "en": "Should I taste one?", "type": "given" },
+            { "speaker": "라온", "color": "blue", "text": "우웩! 할머니! 아직 안 익었어요!", "en": "Yuck! Grandma! They're not ripe yet!", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "괜찮아. 구스베리 청을 만들거야. 덜 익은 과일이 더 좋아.", "en": "It's okay. We're making gooseberry cheong. Less ripe fruit is better.", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "청이 뭐예요?", "en": "What is cheong?", "type": "given" },
+            { "speaker": "라온", "color": "blue", "text": "청이 뭐예요?", "en": "What is cheong?", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "신 과일에 설탕을 넣어서 만든거야.", "en": "It's made by adding sugar to sour fruit.", "type": "given" },
             { "speaker": "할머니", "color": "green", "text": "핑크색 주스 생각나지?", "en": "You remember the pink juice, right?", "type": "given" },
-            { "speaker": "리암", "color": "blue", "text": "아항. 할머니 많이 따 갈게요!", "en": "Ahh! Grandma, I'll pick a lot!", "type": "given" }
+            { "speaker": "라온", "color": "blue", "text": "아항. 할머니 많이 따 갈게요!", "en": "Ahh! Grandma, I'll pick a lot!", "type": "given" }
           ]
         }
       ],
@@ -164,11 +164,11 @@
       "step1_chunks": [
         {
           "scene": "🫐",
-          "sentence": "리암아, 구스베리 좀 따 올래?",
-          "english": "Liam, can you go pick some gooseberries?",
+          "sentence": "라온아, 구스베리 좀 따 올래?",
+          "english": "Raon, can you go pick some gooseberries?",
           "hint": "따 올래? = will you go pick (and come back)?",
           "chunks": [
-            { "text": "리암아,", "type": "name", "en": "Liam," },
+            { "text": "라온아,", "type": "name", "en": "Raon," },
             { "text": "구스베리", "type": "object", "en": "gooseberries" },
             { "text": "좀", "type": "adv", "en": "a bit" },
             { "text": "따 올래?", "type": "verb", "en": "will you go pick?" }
