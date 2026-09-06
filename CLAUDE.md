@@ -7,6 +7,17 @@
 ## 🔴 현재 작업 상태 (매 세션 업데이트)
 > 이 섹션이 가장 최신
 
+> 🎬 **2026-09-06 완료 (Kids 문법에 "이 장면에서 · FROM THE SCENE" 신설 — 도란채와 동일)**
+> — 선생님 요청: 도란채 문법 탭처럼 Kids 문법에도 그 문법이 실제로 나오는 대사를 붙이자.
+> — **데이터(32건)**: 각 과의 `dialogue_practice`(장면 54개·대사 190줄)에서 문법 표지가 실제로 등장하는 줄을 자동 매칭 → 선생님 검수 → `scene_example: {korean, english, highlight}` 형식으로 삽입. 기존 3건(L3 unit10)과 합쳐 **문법 71개 중 35개**에 장면 대사가 붙음. 나머지 36개는 그 과에 아직 역할극 대사가 없는 2권 위주 — 대사를 만들 때 같이.
+> — 삽입 방식: JSON 재출력(json.dump)은 44개 중 24개 파일의 들여쓰기를 바꿔버려서 diff가 폭발함 → **`"id"` 줄 바로 뒤에 한 줄로 텍스트 삽입**해 원본 포맷 보존(16파일 +34/-2).
+> — 선생님 검수 반영 2건: `야, 저기 곰이 몇 마리야?` → `저기 곰이 몇 마리야?` / `책 빌리러 가는 거야` → `책을 빌리러 가는 거야`. **역할극 원본 대사도 같이 고침**(앱과 문법 카드가 어긋나지 않게). 두 줄 다 오디오가 없어 재녹음 불필요.
+> — **코드**: 번들 안의 `renderB3Grammar`(3권)·`renderB4Grammar`(4권) 두 곳에 장면 블록 추가. 도란채와 같은 앰버 카드 모양 + 표지 하이라이트 + 🔊 버튼(`speakKorean` 재사용).
+> — ✅ **검증**: 평문 `<script>` 4블록 전부 `node --check` 통과 → 새 IV로 재암호화 → **라운드트립 `cmp` 바이트 일치** → Supabase `iv_hex` 갱신 → 브라우저에서 실제 복호화·렌더 확인(3권 unit01 2개, 4권 unit02 2개 블록 생성). JSON 44개 파싱 정상.
+> — 🔴 **문서 정정(중요)**: 위 "🔐 콘텐츠 보안 구조" 절차가 **낡아 있었음** — 2026-09-02부터 IV가 DB가 아니라 **번들 파일 맨 앞 12바이트**에 들어감. 옛 절차대로 DB의 `iv_hex`로 복호화하면 인증 실패로 막힘(오늘 실제로 겪고 원인 추적함). 절차 문서를 새 형식으로 고쳐 둠.
+> — 👀 곁가지: 화면 상단 출석부의 `Liam·Lia·Kayo·Aera`는 Supabase `students` 테이블의 **실제 학생 계정**이라 인물명 개명 대상이 아님(문서에 명시).
+> — ⏳ **git add/commit/push 대기 중** — `data/elem/*`·`data/kids/bundle.b64`·`docs/`·`CLAUDE.md`.
+
 > 👧 **2026-09-05 완료 (Kids 교재 인물 이름 교체 — 2026-07 개명의 미완 부분 마무리)**
 > — Kids 문법에 "이 장면에서" 넣는 작업 준비 중 발견: **2026-07-23 개명(리아→리나·카요→태오·리암→라온·애라→아라)이 교재 데이터(`data/elem`)에는 절반만 반영돼 있었음** — 옛 이름만 쓰는 파일 17개, 새 이름만 4개, **두 이름이 섞인 파일 2개**(2권 2·6과). 같은 아이가 과마다 다른 이름으로 불리고 있었음.
 > — 교체 범위: `data/elem` 19개 파일(한글 199건 + 영어 78건) + `dr-mobile.html` 52건(역할극 대사) + `core/core.js` 주석 1건 = **총 330건**. 영어 표기는 이미 바뀐 파일들의 선례를 따름 — **Lia→Lina · Kayo→Taeo · Liam→Raon · Aera→Ara**.
@@ -1094,15 +1105,17 @@
   - 실제 콘텐츠는 `data/kids/bundle.b64` — 원래 korean-app_v2.html 전체 내용을 AES-256-GCM으로 암호화해서 base64로 저장한 파일.
   - 흐름: 반코드 있는 사용자가 페이지 열기 → Supabase RPC `kids_get_bundle(p_code)` → `_kids_code_ok()`로 반코드 검증 → 통과하면 `kids_bundle_key` 테이블(id=1)에서 `key_hex`/`iv_hex`/`bundle_url` 반환 → 브라우저가 `bundle.b64` 받아서 `crypto.subtle.decrypt`(AES-GCM)로 복호화 → `document.write()`로 페이지 전체를 그 내용으로 교체.
   - Supabase 프로젝트 ref: `lgndgtnsrcifswlewnpn` (Supabase MCP 도구로 직접 SQL 조회/수정 가능).
-- **⚠️ Kids 콘텐츠(korean-app_v2.html 실제 내용)를 고치려면 — 이 순서 그대로**:
-  1. `select key_hex, iv_hex, bundle_url from kids_bundle_key where id=1;` 로 현재 key/iv 확인.
-  2. `data/kids/bundle.b64`를 그 key/iv로 복호화(Node `crypto.createDecipheriv('aes-256-gcm', key, iv)` — 마지막 16바이트가 GCM 인증 태그이므로 분리해서 `setAuthTag()`) → 평문 HTML 획득.
-  3. 그 평문을 **평소처럼**(Python exact-match 문자열 치환, 이 문서 "🛠 기술 스택 & 작업 방식" 참고) 편집.
-  4. **새 랜덤 IV**를 뽑아서 같은 key + 새 IV로 재암호화(`crypto.createCipheriv`) → ciphertext+tag를 base64로 저장 → `data/kids/bundle.b64` 교체.
-     - ⚠️ **키는 재사용해도 되지만 IV는 절대 재사용 금지** — 같은 key+IV로 다른 평문을 암호화하면 AES-GCM 보안이 깨짐. 재암호화할 때마다 반드시 새 IV.
-  5. Supabase `kids_bundle_key` 테이블의 `iv_hex`를 새 값으로 UPDATE (`key_hex`/`bundle_url`은 그대로 둠).
-  6. 재암호화 직후 **반드시** 그 key+새IV로 다시 복호화해서 원본 평문과 바이트 단위로 일치하는지 라운드트립 검증 후에 배포.
-  7. git에는 `data/kids/bundle.b64`만 커밋하면 됨 — `korean-app_v2.html`(껍데기)은 안 바뀜.
+- **⚠️ Kids 앱 *코드*를 고치려면 — 이 순서 그대로** (2026-09-06 절차 정정):
+  0. **먼저 이게 정말 번들 작업인지 확인** — 학습 *내용*(단어·문법·연습·대사)은 번들이 아니라 **평문 `data/elem/level*/unit*.json`**에 있고 앱이 실행 중에 fetch함. 내용 수정이면 번들은 건드릴 필요 없음. 번들에는 **코드(렌더러·게임·UI)**만 들어 있음.
+  1. `select key_hex from kids_bundle_key where id=1;` — **key만** 쓰면 됨.
+  2. **⚠️ IV는 DB가 아니라 번들 파일 맨 앞 12바이트에 있음** (2026-09-02 변경 — 파일과 IV가 어긋나지 않게 한 몸으로 배포). 즉 파일 = `IV(12바이트) + 암호문 + GCM태그(16바이트)`. 예전 문서대로 DB의 `iv_hex`로 복호화하면 **"Unsupported state or unable to authenticate data"** 오류가 남(2026-09-06에 실제로 겪음).
+     - 복호화: base64 디코드 → `iv=all[0:12]`, `rest=all[12:]`, `tag=rest[-16:]`, `data=rest[:-16]` → `createDecipheriv('aes-256-gcm',key,iv).setAuthTag(tag)`.
+  3. 평문을 **평소처럼** 편집(Python exact-match 문자열 치환) → `<script>` 블록별로 `node --check` 통과 확인.
+  4. **새 랜덤 IV 12바이트**를 뽑아 같은 key로 재암호화 → `IV + 암호문 + 태그`를 base64로 저장 → `data/kids/bundle.b64` 교체. **IV 재사용 절대 금지.**
+  5. `kids_bundle_key.iv_hex`도 새 IV로 UPDATE — 앱은 이제 이 값을 안 쓰지만, 남겨두면 다음 사람이 옛 값으로 복호화를 시도하게 되므로 **진실을 유지하는 용도**로 갱신.
+  6. 재암호화 직후 **반드시 라운드트립 검증**(새 파일을 다시 복호화해 편집본과 `cmp`로 바이트 비교) 후 배포.
+  7. git에는 `data/kids/bundle.b64`만 커밋(껍데기 `korean-app_v2.html`은 안 바뀜). 브라우저에서 열어 복호화·렌더까지 실제로 확인할 것.
+- **출석부 이름(Liam·Lia·Kayo·Aera)은 Supabase `students` 테이블의 실제 학생 계정** — 스토리 인물명(리나·태오·라온·아라)과 다른 것이 정상. 인물 개명 작업 때 **여기는 바꾸지 말 것.**
 
 ### 전체 구조
 - **단일 HTML 파일** (CSS + JS 인라인)
