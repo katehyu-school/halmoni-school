@@ -676,7 +676,10 @@ body::before {
   gap:24px !important;                 /* 원본 16px — 두 카드가 붙어 보이던 원인 */
   max-width:1020px; width:100%; margin-left:auto; margin-right:auto;
 }
-.track-card{padding:22px 28px !important; border-radius:22px !important}
+.track-card{padding:22px 28px !important; border-radius:22px !important;
+  display:flex; flex-direction:column}
+/* 카드마다 글줄 수가 달라도 버튼은 항상 같은 높이에 오게 (글자를 더하지 않고 맞춤) */
+.track-card .track-actions{margin-top:auto !important}
 .track-icon{margin-bottom:10px !important}
 .track-icon svg{width:52px;height:auto}
 .track-age{font-size:10.5px !important;margin-bottom:5px !important}
@@ -718,6 +721,38 @@ body::before{ display:none !important; }
 .hero-text{ margin-top:2px !important; }
 .dn-badge{ background:rgba(23,163,148,.10) !important; border-color:rgba(23,163,148,.30) !important; color:var(--bronze-dk) !important; }
 .dn-stats{ margin-top:8px !important; }
+
+/* ── 사이트 헤더(본문 밖) ── */
+.dn-header{
+  position:sticky; top:0; z-index:60;
+  background:rgba(253,246,236,.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(21,59,82,.10);
+}
+.dn-header-in{
+  max-width:1100px; margin:0 auto; padding:12px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+}
+/* .dn-topnav → .dn-header 로 옮겨오면서 링크 스타일이 끊겼던 것 복구 */
+.dn-header .dn-links a{
+  color:rgba(21,59,82,.68); text-decoration:none; letter-spacing:.02em;
+  white-space:nowrap; font-size:12.5px;
+}
+.dn-header .dn-links a:hover{ color:var(--bronze-dk); }
+.dn-header .dn-links a.dn-login{ color:var(--bronze-dk); font-weight:700; }
+.dn-header .dn-brand{ text-decoration:none; }
+.wrap{ padding-top:20px !important; min-height:auto !important; }
+
+/* 카드 안 숫자 — 버튼처럼 보이지 않게 그냥 한 줄 */
+.track-facts{
+  font-size:11.5px; letter-spacing:.02em; line-height:1.6;
+  color:rgba(21,59,82,.5); margin:-2px 0 14px;
+}
+
+@media(max-width:640px){
+  .dn-header-in{flex-direction:column; gap:8px; padding:10px 16px}
+  .dn-links{gap:13px; justify-content:center; font-size:11.5px}
+  .dn-brand-en{display:none}
+}
 
 /* 상단 브랜드 바 */
 .dn-brand-ko{ color:var(--bronze-dk) !important; }
@@ -794,6 +829,9 @@ body::before{ display:none !important; }
 .track-action-sub{ color:rgba(255,255,255,.85) !important; }
 
 .dn-note{ color:rgba(21,59,82,.5) !important; }
+.dn-note-link{ color:var(--bronze-dk) !important; font-weight:700; text-decoration:none;
+  border-bottom:1px solid rgba(23,163,148,.45); padding-bottom:1px; }
+.dn-note-link:hover{ border-bottom-color:var(--bronze-dk); }
 .dn-secondary a{ color:rgba(21,59,82,.66) !important; border-bottom-color:rgba(21,59,82,.28) !important; }
 .dn-secondary a b{ color:var(--bronze-dk) !important; }
 .dn-secondary a:hover{ color:var(--bronze) !important; border-bottom-color:var(--bronze) !important; }
@@ -854,22 +892,24 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
 <div class="corner bl"></div>
 <div class="corner br"></div>
 
-<div class="wrap">
-
-  <!-- TOP UTILITY NAV (시안 B 신규) — 카드에 쌓여 있던 Road Map·학습자료·로그인을 여기로 -->
-  <nav class="dn-topnav">
+<!-- SITE HEADER — 로고·이름·메뉴. 본문(.wrap) 밖으로 분리 (2026-09-07) -->
+<header class="dn-header">
+  <div class="dn-header-in">
     <a class="dn-brand" href="index.html">
       <svg width="34" height="28" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg"><path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/><path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.07"/><line x1="156" y1="100" x2="284" y2="100" stroke="#4ECDC4" stroke-width="1.2" opacity="0.5"/><line x1="180" y1="100" x2="180" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="220" y1="100" x2="220" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="260" y1="100" x2="260" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/><rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><line x1="219" y1="114" x2="219" y2="158" stroke="#4ECDC4" stroke-width="0.6" opacity="0.2"/><circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/><rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/><line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/><line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/></svg>
       <span class="dn-brand-ko">도란채</span>
       <span class="dn-brand-en">Doranchae</span>
     </a>
-    <div class="dn-links">
+    <nav class="dn-links">
       <a href="learn/">📖 Free Lessons · 학습 자료</a>
       <a href="nhs.html?view=roadmap">🧭 Road Map</a>
       <a href="faq.html">FAQ</a>
       <a href="#" class="dn-login" onclick="openLoginModal('main');return false;">👤 Log in</a>
-    </div>
-  </nav>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
 
   <!-- HEADER -->
   <header class="site-header">
@@ -896,10 +936,7 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
     <div class="hero-text">
       <div class="dn-badge">한국어 온라인 스쿨 · Korean Language School</div>
       <p class="hero-tagline">Learn Korean through <span>stories</span>,<br>not drills.</p>
-      <p class="dn-sub">이야기로 배우는 한국어 · 실제로 쓰이는 말을, 실제 장면에서</p>
-      <div class="dn-stats">
-        <span>🎬 72 episodes</span><span>📚 Levels 1–6</span><span>🎁 Free through Level 2</span>
-      </div>
+      <p class="dn-sub">Two ways to start — same story world, paced for who's learning.</p>
     </div>
 
     <div class="preview-section">
@@ -925,26 +962,27 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
         <div class="track-icon">
           <svg width="52" height="60" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="rgba(255,255,255,0.18)" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.08)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(4,0)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(46,0)"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">DR</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>
         </div>
-        <div class="track-age">Ages 6–12 · 초등</div>
+        <div class="track-age">Ages 6–12 · Private family class</div>
         <div class="track-name">Doranchae Kids</div>
         <div class="track-desc">Play-based lessons — from first sounds to full sentences.</div>
         <div class="track-actions">
-          <button class="track-action-btn primary" onclick="openLoginModal('kids')"><span class="track-action-sub">Invited families only</span>🔑 Kids 입장하기</button>
+          <button class="track-action-btn primary" onclick="openLoginModal('kids')">🔑 Have an invite? Enter</button>
         </div>
-        <div class="dn-note">초대받은 가정 전용 · Private family class, by invitation</div>
+        <!-- 도란채 카드에는 버튼 아래 한 줄이 있어서, 여기에 같은 높이의 빈 자리를 둬야 좌우 버튼이 나란해집니다 -->
+        <div class="dn-note" aria-hidden="true">&nbsp;</div>
       </div>
       <div class="track-card hq">
         <div class="track-icon">
           <svg width="52" height="52" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg>
         </div>
-        <div class="track-age">Ages 14 &amp; up · 청소년·성인</div>
+        <div class="track-age">For adults &amp; teens (14+)</div>
         <div class="track-name">Doranchae</div>
         <div class="track-desc">Follow one family through real scenes — markets, kitchens, campsites.</div>
+        <div class="track-facts">72 episodes · Levels 1–6 · Free through Level 2</div>
         <div class="track-actions">
-          <button class="track-action-btn primary" onclick="location.href='nhs.html?ep=ep01'"><span class="track-action-sub">Open to everyone</span>🌱 Start Learning Free</button>
+          <button class="track-action-btn primary" onclick="location.href='nhs.html?ep=ep01'">🌱 Start Learning Free</button>
         </div>
-        <div class="dn-secondary"><a href="nhs.html?view=start">New to Korean? <b>한글 기초 · Hangeul Basics</b> →</a></div>
-        <div class="dn-note">가입 없이 Level 1–2 무료 · Free through Level 2, no signup</div>
+        <div class="dn-note">Make a <a href="#" class="dn-note-link" onclick="openSignup();return false;">free account</a> to sync your progress across devices.</div>
       </div>
     </div>
 
@@ -993,40 +1031,40 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
 <div class="modal-bg" id="loginModal" onclick="if(event.target===this)closeLoginModal()">
   <div class="login-modal">
     <button class="modal-close" onclick="closeLoginModal()">✕</button>
-    <span class="login-label">로그인 · Sign In</span>
+    <span class="login-label">Sign in · 로그인</span>
 
     <div style="margin-bottom:12px">
       <input class="pw-input" type="text" id="loginNameInput" maxlength="20"
-        placeholder="이름 · Your name"
+        placeholder="Your name · 이름"
         autocomplete="username" autocapitalize="none" spellcheck="false"
         style="letter-spacing:.05em;text-align:center"
         onkeydown="if(event.key==='Enter')document.getElementById('pwInput').focus()">
       <div style="font-size:11.5px;color:rgba(180,215,235,.45);margin-top:6px;text-align:center;line-height:1.6">
-        선생님이 알려준 이름을 적어 주세요<br>
-        <span style="opacity:.75">Type the name your teacher gave you</span>
+        Type the name your teacher gave you<br>
+        <span style="opacity:.75">선생님이 알려준 이름을 적어 주세요</span>
       </div>
     </div>
 
     <div class="pw-wrap">
       <input class="pw-input" type="password" id="pwInput"
-        placeholder="PIN 번호 입력"
+        placeholder="PIN"
         maxlength="20"
         onkeydown="if(event.key==='Enter')checkPw()">
       <button class="eye-btn" onclick="toggleEye()" id="eyeBtn">👁</button>
     </div>
-    <button class="enter-btn" onclick="checkPw()">입장하기</button>
+    <button class="enter-btn" onclick="checkPw()">Enter</button>
     <div class="error-msg" id="errMsg"></div>
     <div id="loginFooterMain" style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7">
-      처음이세요? · First time here?<br>
-      <button onclick="openSignup()" style="margin-top:7px;background:none;border:1px solid rgba(78,205,196,.4);color:#4ecdc4;border-radius:20px;padding:7px 16px;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer">🔓 계정 만들기 · Create account</button>
-      <div style="margin-top:9px"><button onclick="useGuest()" style="background:none;border:none;color:rgba(180,215,235,.55);font-family:'Noto Sans KR',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline">👀 초대받으셨나요? 게스트로 둘러보기</button></div>
+      First time here?<br>
+      <button onclick="openSignup()" style="margin-top:7px;background:none;border:1px solid rgba(78,205,196,.4);color:#4ecdc4;border-radius:20px;padding:7px 16px;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer">🔓 Create a free account</button>
+      <div style="margin-top:9px"><button onclick="useGuest()" style="background:none;border:none;color:rgba(180,215,235,.55);font-family:'Noto Sans KR',sans-serif;font-size:12px;cursor:pointer;text-decoration:underline">👀 Invited? Take a look as a guest</button></div>
     </div>
     <!-- Kids는 초대된 가정만 이용하는 비공개 반이라 셀프 계정 생성·게스트 둘러보기 대상이 아닙니다 (2026-08-31) -->
     <div id="loginFooterKids" style="display:none;margin-top:18px;padding-top:16px;border-top:1px solid rgba(78,205,196,.15);font-size:12.5px;color:rgba(180,215,235,.6);line-height:1.7;text-align:center">
-      Doranchae Kids 는 초대받은 가정만 이용하는 비공개 반이에요.<br>
-      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Doranchae Kids is invite-only — it's not open to self-signup.</span><br>
-      <span style="display:block;margin-top:8px">선생님이 알려준 이름·PIN으로 로그인해 주세요.<br>
-      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Please log in with the name &amp; PIN your teacher gave you.</span></span>
+      Doranchae Kids is a private class — invite only.<br>
+      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Doranchae Kids 는 초대받은 가정만 이용하는 비공개 반이에요.</span><br>
+      <span style="display:block;margin-top:8px">Please log in with the name &amp; PIN your teacher gave you.<br>
+      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">선생님이 알려준 이름·PIN으로 로그인해 주세요.</span></span>
     </div>
   </div>
 </div>
@@ -1035,30 +1073,30 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
 <div class="modal-bg" id="signupModal" onclick="if(event.target===this)closeSignup()">
   <div class="login-modal">
     <button class="modal-close" onclick="closeSignup()">✕</button>
-    <span class="login-label">🔓 계정 만들기 · Create Account</span>
+    <span class="login-label">🔓 Create a free account</span>
     <div style="font-size:12.5px;color:rgba(180,215,235,.65);line-height:1.7;margin-bottom:18px">
-      이름과 PIN만 정하면 바로 시작할 수 있어요.<br>
-      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">Just pick a name and a PIN — that is all.</span>
+      Just pick a name and a PIN — that's all.<br>
+      <span style="font-size:11.5px;color:rgba(180,215,235,.45)">이름과 PIN만 정하면 바로 시작할 수 있어요.</span>
     </div>
 
     <div style="margin-bottom:12px">
       <input class="pw-input" type="text" id="suName" maxlength="20"
-        placeholder="이름 · Name" style="letter-spacing:.05em">
+        placeholder="Name · 이름" style="letter-spacing:.05em">
     </div>
     <div class="pw-wrap">
-      <input class="pw-input" type="password" id="suPin" maxlength="20" placeholder="PIN (4자리 이상)">
+      <input class="pw-input" type="password" id="suPin" maxlength="20" placeholder="PIN (4 digits or more)">
     </div>
     <div class="pw-wrap">
       <input class="pw-input" type="password" id="suPin2" maxlength="20"
-        placeholder="PIN 확인 · Confirm PIN"
+        placeholder="Confirm PIN"
         onkeydown="if(event.key==='Enter')submitSignup()">
     </div>
-    <button class="enter-btn" id="suBtn" onclick="submitSignup()">시작하기 · Start</button>
+    <button class="enter-btn" id="suBtn" onclick="submitSignup()">Start</button>
     <div class="error-msg" id="suMsg"></div>
     <div style="margin-top:14px;font-size:11px;color:rgba(180,215,235,.4);line-height:1.65">
-      ※ 이건 정식 등록이 아닌 체험(trial) 계정이에요 — 게시판에서 선생님께 질문할 수 있고, 🌱 Start Here와 Level 1·2를 볼 수 있어요. Level 3부터는 등록된 학생만 이용할 수 있습니다.<br>
-      This is a trial account, not full registration — you can ask questions on the board and access Level 1·2. Level 3+ is for registered students only.<br>
-      PIN을 잊으면 찾을 수 없으니 기억해 두세요. · Remember your PIN — it can't be recovered.
+      ※ This is a free trial account, not full registration.<br>
+      It opens 🌱 Level 0 and Levels 1–2, and lets you ask the teacher questions on the board. Level 3 and up is for registered students.<br>
+      Remember your PIN — it can't be recovered. · PIN을 잊으면 찾을 수 없으니 기억해 두세요.
     </div>
   </div>
 </div>
@@ -1067,19 +1105,19 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
 <div class="modal-bg" id="pinChangeModal" onclick="if(event.target===this)closePinChangeModal()">
   <div class="login-modal">
     <button class="modal-close" onclick="closePinChangeModal()">✕</button>
-    <span class="login-label">🔑 내 PIN 바꾸기 · Change PIN</span>
+    <span class="login-label">🔑 Change your PIN</span>
 
     <div class="pw-wrap">
-      <input class="pw-input" type="password" id="pcCurrentPin" placeholder="현재 PIN · Current PIN" maxlength="20">
+      <input class="pw-input" type="password" id="pcCurrentPin" placeholder="Current PIN" maxlength="20">
     </div>
     <div class="pw-wrap">
-      <input class="pw-input" type="password" id="pcNewPin" placeholder="새 PIN · New PIN" maxlength="20">
+      <input class="pw-input" type="password" id="pcNewPin" placeholder="New PIN" maxlength="20">
     </div>
     <div class="pw-wrap">
-      <input class="pw-input" type="password" id="pcConfirmPin" placeholder="새 PIN 확인 · Confirm New PIN" maxlength="20"
+      <input class="pw-input" type="password" id="pcConfirmPin" placeholder="Confirm new PIN" maxlength="20"
         onkeydown="if(event.key==='Enter')submitPinChange()">
     </div>
-    <button class="enter-btn" id="pcSubmitBtn" onclick="submitPinChange()">변경하기 · Update PIN</button>
+    <button class="enter-btn" id="pcSubmitBtn" onclick="submitPinChange()">Update PIN</button>
     <div class="error-msg" id="pcMsg"></div>
   </div>
 </div>
@@ -1221,7 +1259,7 @@ async function submitSignup() {
 function openLoginModal(track) {
   _entryTrack = track || 'main';
   document.getElementById('loginModal').classList.add('open');
-  document.querySelector('#loginModal .login-label').textContent = _entryTrack === 'kids' ? 'Doranchae Kids · 입장' : '로그인 · Sign In';
+  document.querySelector('#loginModal .login-label').textContent = _entryTrack === 'kids' ? 'Doranchae Kids · Enter' : 'Sign in · 로그인';
   // Kids는 셀프 계정 생성·게스트 둘러보기 대상이 아니므로 그 안내 대신 초대 안내를 보여줍니다
   document.getElementById('loginFooterMain').style.display = _entryTrack === 'kids' ? 'none' : 'block';
   document.getElementById('loginFooterKids').style.display = _entryTrack === 'kids' ? 'block' : 'none';
@@ -1440,7 +1478,7 @@ function enterAs(user) {
     if (isAdmin) activateAdmin();
   } else if (role === 'trial') {
     document.querySelector('.welcome-text h2').textContent = '어서 오세요, ' + name + '! 👋';
-    document.querySelector('.welcome-text p').innerHTML = '📋 게시판에서 질문하실 수 있어요 · 🌱 Start Here와 Level 1·2 열림 <span style="background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#4ecdc4;">ACCOUNT</span>';
+    document.querySelector('.welcome-text p').innerHTML = '📋 게시판에서 질문하실 수 있어요 · 🌱 Level 0와 Level 1·2 열림 <span style="background:rgba(78,205,196,.2);border:1px solid rgba(78,205,196,.4);border-radius:20px;padding:2px 10px;font-size:11px;color:#4ecdc4;">ACCOUNT</span>';
     // 체험 계정은 HQ(13+)만 노출 — Kids는 비공개 가정반이라 숨김
     document.getElementById('card1').style.display = 'none';
   } else {
@@ -1649,7 +1687,7 @@ async function toggleAtt(name, current, btn) {
       <input type="text" id="newPin"      placeholder="PIN 번호 · PIN  예: 1234" maxlength="8">
       <label style="display:flex;align-items:center;gap:7px;margin:2px 2px 8px;font-size:12px;color:rgba(180,215,235,.6);cursor:pointer">
         <input type="checkbox" id="newIsTrial" style="width:14px;height:14px;accent-color:#4ecdc4">
-        🔓 체험 계정 (🌱 Start Here · Level 1·2까지 열람) · Trial account
+        🔓 체험 계정 (🌱 Level 0 · Level 1·2까지 열람) · Trial account
       </label>
       <div class="att-add-form-btns">
         <button class="att-form-save"   onclick="saveNewMember()">저장</button>

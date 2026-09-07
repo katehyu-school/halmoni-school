@@ -33,10 +33,29 @@ body{font-family:var(--font-kr);background:#f4f3ef;min-height:100vh;display:flex
 .level-btn:hover:not(.active){border-color:var(--teal);color:var(--teal);}
 .level-btn-basis{color:var(--amber)!important;border-color:var(--amber-lt)!important;}
 .level-btn-basis.active{background:var(--amber)!important;border-color:var(--amber)!important;color:#fff!important;}
-.school-title{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;line-height:1;}
+.school-title{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;line-height:1;text-decoration:none;color:inherit;}
+.school-title:hover,.school-title:focus{text-decoration:none;}
 .kq-logo{font-family:'Gaegu',cursive;font-size:24px;font-weight:700;letter-spacing:0.01em;}
 .kq-logo .kq-k{color:var(--teal-dark);}
 .kq-logo .kq-q{color:#5a8c3c;}
+/* ── 상단 ⋯ 더보기 메뉴 (2026-09-07) ─────────────────────────
+   상단에 도구 버튼이 5개나 늘어서 있어 처음 온 사람에게 복잡해 보였음.
+   Ko/EN 토글만 남기고 나머지(색인·빠른참고·My Notes·게시판)는 여기에 넣음. */
+.tb-more{position:relative;flex-shrink:0;}
+.tb-more-btn{font-size:15px;line-height:1;padding:5px 12px;letter-spacing:1px;}
+.tb-more-menu{
+  display:none;position:absolute;right:0;top:calc(100% + 8px);z-index:120;
+  background:var(--white);border:1px solid var(--gray-200);border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.14);padding:6px;min-width:196px;
+}
+.tb-more-menu.open{display:block;}
+.tb-more-menu button{
+  display:block;width:100%;text-align:left;background:none;border:none;
+  padding:9px 12px;border-radius:8px;cursor:pointer;
+  font-family:var(--font-kr);font-size:13px;color:var(--warm-800);white-space:nowrap;
+}
+.tb-more-menu button:hover{background:var(--teal-lt);color:var(--teal);}
+
 .index-btn{padding:6px 16px;background:var(--teal-lt);color:var(--teal);border:1px solid var(--teal-300);border-radius:var(--radius-xl);font-size:11.5px;font-family:var(--font-kr);text-decoration:none;cursor:pointer;transition:all .2s;}
 .index-btn:hover{background:rgba(255,255,255,0.32);}
 .main-layout{display:flex;flex:1;min-height:0;}

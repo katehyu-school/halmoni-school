@@ -1627,3 +1627,36 @@ const urlName   = _hc ? _hc.urlName : null;
 - ~~HQ 쓰기 기능 확장~~ — 문장완성 L3~L6 전편 완료, 가이드작문 전편 확산 완료, 도표작문 L5(순위형)+L6(추이형) 완료
 - ~~배치 테스트 부재~~ — 15문항 신설, Start Here 사이드바에 진입점
 - ~~마감테스트 정답 위치 쏠림~~ — 전 레벨 재배치
+
+---
+
+## 🇬🇧 초급자 진입 경로 영어화 (2026-09-07)
+
+한글도 못 읽는 사람이 처음 만나는 화면들을 영어 우선으로 정리했다. 배경: 딸의 index 초안 리뷰에서 "타겟(한글 모르는 자)이 정확히 누군지 파악하고 영어로 읽기 편하게" 하자는 의견.
+
+### 무엇을 바꿨나
+1. **index.html 모달 3종** (로그인·가입·PIN 변경) — 영어 우선, 한국어는 작게 아래 또는 제거.
+   - 로그인 라벨은 `openLoginModal()` 안에서 JS가 덮어쓰므로 **HTML만 고치면 안 되고 그 줄도 같이 고쳐야 한다**(`_entryTrack === 'kids' ? … : …`).
+   - 가입 모달의 체험 계정 설명은 옛 영어 문구가 Level 0를 빠뜨리고 있었음 → 한국어와 내용 일치시킴.
+2. **로드맵 전면 재작성** (`loadRoadmap`, 271줄 → 215줄) — 탭 5개(`_rmTabShow`/`RM_TAB_IDS`) 제거하고 **영어 한 페이지**로. Step 0 한글 → 1 레벨 찾기 → 2 에피소드 → 3 매일 복습 → 4 진도 확인 + Good to know / QR / 무료 문법 페이지 / A sample week.
+3. **배치 테스트** — UI 문구 전부 영어, 그리고 **시험 전 관문 화면**(`renderPTGate` → `ptStart`) 추가: 「안녕하세요」를 보여주고 "읽을 수 있나요?" → *Not yet*이면 `loadBasics('hangul')`로 보냄. `placement_test.json`은 **지시문만** 영어로("빈칸에 알맞은 것을 고르세요." → "Choose the word that fits the blank."). 선택지·`exp`는 한국어 유지(정답 자체가 한국어라서).
+4. 사이드바 `학습 로드맵`→**Roadmap**, `배치 테스트`→**Placement Test**. `.school-title`(로고+도란채)의 링크 밑줄 제거.
+
+### ⚠️ 이 작업에서 배운 것
+- **영어 전용 화면에 `.en-gloss`를 쓰면 안 된다.** `body.en-off`가 `.en-gloss`·`.lt-q-en`·`.gram-exp` 등을 `display:none`으로 지우기 때문에, 🇬🇧 EN을 끄는 순간 페이지가 통째로 빈 화면이 된다. 옛 로드맵이 정확히 그 상태였다. 새 코드는 `_rmNote`/`_rmList` 같은 평범한 div만 쓴다.
+  - 같은 이유로 **배치 테스트 지시문은 `q`에 넣어야 한다** — `en` 필드는 `.lt-q-en`으로 렌더되어 EN을 끄면 사라진다.
+- 문자열 앵커 치환 시 **같은 문자열이 다른 시험에도 있는지 count로 먼저 확인**할 것. `<div class="lt-score-box-lbl">정답</div>`는 8군데였다.
+- **브라우저에서 시험을 끝까지 돌리면 `_savePlacement`가 선생님 프로필에 진짜로 저장된다.** 검증 후 `nms_{프로필}_prog`의 `placement` 키를 지울 것.
+
+5. **레퍼런스 정리** — Level 0 사이드바에는 `essential`(필수 낱말 카드)·`structure`(문장 구조) **둘만** 남기고, 나머지 7개(greetings·questions·honorifics·numbers·verbs·connectors·spacing)는 삭제. 이 7개는 원래부터 `QREF_TABS`와 정확히 같은 목록이라 📌 Quick Reference 모달에 이미 전부 있었음 — 사이드바 쪽이 중복이었던 것. 사이드바 소분류(`refSubHdr`/`REF_GROUPS` 묶음)는 항목이 하나씩만 남아 없앴고, 대신 "나머지는 ··· → 📌 Quick Reference에 있어요" 안내 + 바로 여는 링크를 달았다.
+   - 로드맵 `📦 Good to know` 표의 위치 칸도 `Top bar` → `Top bar → ···`로 정정(Index·Quick Reference·My Notes·Board 4개).
+   - Quick Reference 모달 제목·탭 7개 전부 영어로(`👋 Greetings` … `📏 Spacing`).
+
+6. **Quick Reference 안쪽 영어 병기** — 하위 버튼과 표 머리글에 `한국어 · English` 병기(`👋 기본 인사 · Greetings`, `<th>호칭 · Title</th>` 등). **원칙: 초급자가 보는 화면은 최소한 영어 병기.** 단어·예문 같은 학습 콘텐츠와 문법 용어 칩(`ㄷ 불규칙` 등)은 그대로 둠 — 상위 탭 `🔄 불규칙 동사 · Irregular`가 이미 뜻을 풀어 준다.
+   - 같은 문자열이 다른 함수에도 있어서(`>뜻<` 3곳, `>예문<` 4곳 등) **함수 경계로 범위를 잘라 치환**했다. 전역 치환 금지.
+7. **찌꺼기 정리** — `nhs.html.testwrite`, `nhs.html.tmp3`, `nul`, `_to_delete/`(9.7MB) 삭제.
+8. **Level 0 사이드바 최종 구조** — 🧭 Roadmap · 🎯 Placement Test 두 개만 낱개로 두고, 나머지는 전부 **🌱 Hangeul Basics 한 그룹**에 넣었다(한글을 배워요 / 글쓰기 연습 / 자판 연습 / 필수 낱말 카드 / 문장 구조). 별도 `📌 Reference` 그룹 헤더와 `grpHdr`·`grpWrap`·`item()` 헬퍼는 제거. 목록은 `BASICS_IN_SIDEBAR` 배열 한 곳에서 관리.
+
+### 확정된 방침
+- **배치 테스트 오답 해설(`exp`)은 한국어 유지** (2026-09-07 선생님 결정).
+- **초급자 화면은 최소한 영어 병기**. 레퍼런스류는 사이드바에 중복해 두지 말고 **모달로 완전 이전**하는 것이 목적 — 중복이 화면을 복잡하게 만든다는 지적에서 나온 방침.
