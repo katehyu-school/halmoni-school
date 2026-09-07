@@ -665,22 +665,25 @@ body::before {
   font-size:10.5px; letter-spacing:.12em; font-weight:700; line-height:1.5;
   background:rgba(78,205,196,.10); border:1px solid rgba(78,205,196,.30); color:#7eddd7;
 }
-.hero-tagline{font-size:clamp(26px,4.2vw,40px) !important;line-height:1.24 !important}
+.hero-tagline{font-size:clamp(25px,3.9vw,37px) !important;line-height:1.24 !important}
 .dn-sub{margin-top:8px !important;font-size:13px}
 .dn-stats{margin-top:18px}
 .dn-stats span{font-size:11.5px;padding:5px 13px}
 
 /* 카드 — 설명을 뺀 만큼 단순하게, 대신 넉넉히 */
 .track-grid{
-  margin-top:26px !important;
+  margin-top:14px !important;
   gap:24px !important;                 /* 원본 16px — 두 카드가 붙어 보이던 원인 */
   max-width:1020px; width:100%; margin-left:auto; margin-right:auto;
 }
-.track-card{padding:30px 30px !important; border-radius:22px !important}
+.track-card{padding:22px 28px !important; border-radius:22px !important}
 .track-icon{margin-bottom:10px !important}
 .track-icon svg{width:52px;height:auto}
 .track-age{font-size:10.5px !important;margin-bottom:5px !important}
-.track-name{font-size:23px !important;margin-bottom:18px !important}
+.track-name{font-size:23px !important;margin-bottom:9px !important}
+.track-desc{font-size:12.5px !important;line-height:1.65 !important;margin-bottom:14px !important;
+  max-width:34ch;margin-left:auto;margin-right:auto;
+  min-height:calc(12.5px * 1.65 * 2)}   /* 두 줄 자리 확보 — 좌우 버튼 높이 맞춤 */
 .track-actions{margin-top:0 !important}
 .dn-note{margin-top:9px;font-size:10px;color:rgba(255,255,255,.52);line-height:1.5;text-align:center}
 .dn-secondary{margin-top:10px}
@@ -712,9 +715,9 @@ body::before{ display:none !important; }
 .corner{ display:none !important; }
 
 /* 색 띠·원 아이콘이 더해진 만큼 위쪽 여백을 조금 줄임 */
-.hero-text{ margin-top:6px !important; }
+.hero-text{ margin-top:2px !important; }
 .dn-badge{ background:rgba(23,163,148,.10) !important; border-color:rgba(23,163,148,.30) !important; color:var(--bronze-dk) !important; }
-.dn-stats{ margin-top:10px !important; }
+.dn-stats{ margin-top:8px !important; }
 
 /* 상단 브랜드 바 */
 .dn-brand-ko{ color:var(--bronze-dk) !important; }
@@ -764,6 +767,7 @@ body::before{ display:none !important; }
 .track-age{ color:var(--bronze-dk) !important; }
 .track-card.kids .track-age{ color:#C9503A !important; }
 .track-name{ color:var(--navy) !important; }
+.track-desc{ color:rgba(21,59,82,.62) !important; }
 /* 아이콘 — 흰 카드에 묻히지 않게 색 원 안에 넣음 (따님 시안의 색 블록과 같은 느낌) */
 .track-icon{
   width:66px; height:66px; margin:0 auto 10px !important; border-radius:50%;
@@ -923,6 +927,7 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
         </div>
         <div class="track-age">Ages 6–12 · 초등</div>
         <div class="track-name">Doranchae Kids</div>
+        <div class="track-desc">Play-based lessons — from first sounds to full sentences.</div>
         <div class="track-actions">
           <button class="track-action-btn primary" onclick="openLoginModal('kids')"><span class="track-action-sub">Invited families only</span>🔑 Kids 입장하기</button>
         </div>
@@ -934,6 +939,7 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
         </div>
         <div class="track-age">Ages 14 &amp; up · 청소년·성인</div>
         <div class="track-name">Doranchae</div>
+        <div class="track-desc">Follow one family through real scenes — markets, kitchens, campsites.</div>
         <div class="track-actions">
           <button class="track-action-btn primary" onclick="location.href='nhs.html?ep=ep01'"><span class="track-action-sub">Open to everyone</span>🌱 Start Learning Free</button>
         </div>
