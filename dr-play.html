@@ -289,9 +289,9 @@ const SCRIPT = {
       reply:{ ko:'아줌마: 얼만지 안 물어봐요?', en:'Ajumma: Aren’t you going to ask how much?' } }
   ],
   /* 값은 메뉴판 기준 3,500 + 2,500×2 = 8,500원.
-     원작 mp3(8만오천+원이에요)는 금액이 달라 쓰지 않았습니다.
-     Typecast로 「팔천오백 원이에요.」 한 줄 녹음하시면 audio:'파일명.mp3' 를 붙여 주세요. */
-  g3_price   : { ko:'팔천오백 원이에요.', en:'That’ll be 8,500 won.' },
+     ⚠️ mp3 파일명은 옛 금액(만오천) 그대로지만 2026-09-07에 「팔천오백 원이에요.」로 재녹음됨.
+        관례대로 같은 이름에 덮어쓴 것이니 파일명만 보고 판단하지 말 것. */
+  g3_price   : { ko:'팔천오백 원이에요.', en:'That’ll be 8,500 won.', audio:'8만오천+원이에요_slide5.mp3' },
 
   g3_bye_narr: { ko:'계산을 마쳤다. 마지막으로 인사를 하고 나가자.', en:'Paid. One last thing — say goodbye and go.' },
   g3_bye_opts: [
