@@ -594,6 +594,254 @@ body::before {
 <script src="core/supabase-config.js"></script>
 <script src="core/anti-copy.js"></script>
 <link rel="stylesheet" href="core/footer.css">
+<style>
+/* ═══ 시안 B 오버라이드 — 원본 CSS는 안 건드림 ═══ */
+/* 순서: 히어로 → 두 카드 → 실제 화면(증거). 마크업 대신 order로만 바꿈 */
+#landingBox{display:flex;flex-direction:column}
+.hero-text{order:1}
+.track-grid{order:2}
+.preview-section{order:3;margin-top:46px !important}
+
+/* 상단 유틸 내비 */
+.dn-topnav{display:flex;gap:20px;justify-content:flex-end;align-items:center;padding:14px 6px 0;font-size:12.5px;flex-wrap:wrap}
+.dn-topnav a{color:rgba(180,215,235,.72);text-decoration:none;letter-spacing:.02em;white-space:nowrap}
+.dn-topnav a:hover{color:#4ECDC4}
+.dn-topnav .dn-login{color:#4ECDC4;font-weight:700}
+
+/* 머리글을 줄여서 첫 화면에 버튼이 들어오게 */
+.site-header{padding-top:12px !important}
+.site-header .crest svg{width:76px;height:62px}
+.site-title{font-size:clamp(28px,5vw,38px) !important;margin:6px 0 0 !important}
+.site-title-en{font-size:11.5px !important}
+.site-subtitle{font-size:11px !important;margin-top:4px !important}
+.site-header .divider{margin:14px auto 0 !important}
+
+/* 히어로 */
+.hero-tagline{font-size:clamp(26px,4.6vw,42px) !important;line-height:1.24 !important}
+.dn-sub{margin-top:12px;font-size:13px;color:rgba(180,215,235,.7);text-align:center}
+.dn-stats{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.dn-stats span{font-size:11.5px;background:rgba(78,205,196,.10);border:1px solid rgba(78,205,196,.28);
+  border-radius:20px;padding:5px 13px;color:#9fdad5;letter-spacing:.03em;white-space:nowrap}
+.dn-cta{margin-top:24px;text-align:center}
+.dn-cta-btn{background:linear-gradient(135deg,#4ECDC4,#2fb3aa);color:#06231f;border:none;border-radius:30px;
+  padding:15px 34px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;
+  box-shadow:0 6px 22px rgba(78,205,196,.28)}
+.dn-cta-btn:hover{filter:brightness(1.08)}
+.dn-cta-note{margin-top:10px;font-size:11.5px;color:rgba(180,215,235,.6);line-height:1.6}
+
+/* 카드 안 보조 링크 */
+.dn-secondary{margin-top:12px;text-align:center}
+.dn-secondary a{font-size:12.5px;color:rgba(180,215,235,.72);text-decoration:none;
+  border-bottom:1px dotted rgba(180,215,235,.35);padding-bottom:2px}
+.dn-secondary a:hover{color:#4ECDC4;border-bottom-color:#4ECDC4}
+
+/* 상단 줄 = 브랜드 바 (로고·이름을 여기로 올림) */
+.dn-topnav{
+  display:flex !important; align-items:center; justify-content:space-between;
+  gap:18px; padding:16px 6px 0 !important; flex-wrap:wrap;
+}
+.dn-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex:0 0 auto}
+.dn-brand svg{flex:none;display:block}
+.dn-brand-ko{font-size:20px;font-weight:800;color:#4ECDC4;letter-spacing:.02em;line-height:1}
+.dn-brand-en{font-size:10.5px;letter-spacing:.22em;color:rgba(180,215,235,.55);
+  text-transform:uppercase;padding-left:2px;line-height:1}
+.dn-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+/* 큰 머리글(크레스트·도란채·부제·구분선)과 아래 실제 화면 3장은 숨김 */
+.site-header{display:none !important}
+.preview-section{display:none !important}
+
+/* 첫 화면에 두 카드가 들어오도록 위쪽을 압축 */
+.dn-topnav{padding:10px 6px 0 !important}
+.site-header{padding-top:8px !important;padding-bottom:0 !important}
+.site-header .crest svg{width:56px;height:45px}
+.site-title{font-size:clamp(21px,3.4vw,27px) !important;margin:4px 0 0 !important}
+.site-title-en{font-size:10px !important}
+.site-subtitle{font-size:10px !important;margin-top:3px !important}
+.site-header .divider{margin:10px auto 0 !important}
+.hero-text{margin-top:26px !important}
+.dn-badge{
+  display:inline-block; margin:0 auto 10px; padding:4px 14px; border-radius:20px;
+  font-size:10.5px; letter-spacing:.12em; font-weight:700; line-height:1.5;
+  background:rgba(78,205,196,.10); border:1px solid rgba(78,205,196,.30); color:#7eddd7;
+}
+.hero-tagline{font-size:clamp(26px,4.2vw,40px) !important;line-height:1.24 !important}
+.dn-sub{margin-top:8px !important;font-size:13px}
+.dn-stats{margin-top:18px}
+.dn-stats span{font-size:11.5px;padding:5px 13px}
+
+/* 카드 — 설명을 뺀 만큼 단순하게, 대신 넉넉히 */
+.track-grid{
+  margin-top:26px !important;
+  gap:24px !important;                 /* 원본 16px — 두 카드가 붙어 보이던 원인 */
+  max-width:1020px; width:100%; margin-left:auto; margin-right:auto;
+}
+.track-card{padding:30px 30px !important; border-radius:22px !important}
+.track-icon{margin-bottom:10px !important}
+.track-icon svg{width:52px;height:auto}
+.track-age{font-size:10.5px !important;margin-bottom:5px !important}
+.track-name{font-size:23px !important;margin-bottom:18px !important}
+.track-actions{margin-top:0 !important}
+.dn-note{margin-top:9px;font-size:10px;color:rgba(255,255,255,.52);line-height:1.5;text-align:center}
+.dn-secondary{margin-top:10px}
+.dn-secondary a b{font-weight:700;color:#7eddd7}
+
+@media(max-width:640px){
+  .dn-topnav{gap:10px;font-size:11.5px;justify-content:center;flex-direction:column}
+  .dn-links{gap:13px;justify-content:center}
+  .dn-brand-en{display:none}
+  .dn-cta-btn{padding:14px 26px;font-size:15px}
+}
+</style>
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   시안 C — 따님 시안의 밝은 색조에 우리 버튼·링크를 그대로 적용
+   (구조는 시안 B와 동일. 색과 질감만 바꿈)
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --cream:#FDF6EC; --cream-dk:#F6EBDC;
+  --bronze:#17A394; --bronze-lt:#3FBFB2; --bronze-dk:#0E7F73;
+  --brown:#153B52; --brown-md:#3D6076;
+  --muted:rgba(21,59,82,.62);
+  --border:rgba(21,59,82,.14);
+  --coral:#EF7259; --sun:#F7C948; --navy:#153B52;
+}
+body{ background:#FDF6EC !important; color:var(--navy) !important; }
+body::before{ display:none !important; }
+.corner{ display:none !important; }
+
+/* 색 띠·원 아이콘이 더해진 만큼 위쪽 여백을 조금 줄임 */
+.hero-text{ margin-top:6px !important; }
+.dn-badge{ background:rgba(23,163,148,.10) !important; border-color:rgba(23,163,148,.30) !important; color:var(--bronze-dk) !important; }
+.dn-stats{ margin-top:10px !important; }
+
+/* 상단 브랜드 바 */
+.dn-brand-ko{ color:var(--bronze-dk) !important; }
+.dn-brand-en{ color:rgba(21,59,82,.45) !important; }
+.dn-brand svg path[stroke]{ stroke:var(--bronze) !important; }
+.dn-brand svg rect[fill="#4ECDC4"]{ fill:var(--bronze) !important; }
+.dn-brand svg line[stroke="#4ECDC4"]{ stroke:var(--bronze) !important; }
+
+/* 카드 높이 조금 줄이기 (색 띠 + 원 아이콘이 더해진 만큼) */
+.track-card{ padding-top:44px !important; }
+.track-card::before{ height:30px !important; }
+.track-icon{ width:52px !important; height:52px !important; margin-bottom:7px !important; }
+.track-icon svg{ width:29px !important; }
+
+.dn-topnav a{ color:rgba(21,59,82,.66) !important; }
+.dn-topnav a:hover{ color:var(--bronze) !important; }
+.dn-topnav .dn-login{ color:var(--bronze) !important; }
+
+/* 머리글 */
+.site-header .crest svg path,
+.site-header .crest svg line,
+.site-header .crest svg circle{ stroke:var(--bronze) !important; }
+.site-title{ color:var(--bronze-dk) !important; }
+.site-title-en{ color:rgba(21,59,82,.55) !important; }
+.site-subtitle{ color:rgba(21,59,82,.52) !important; }
+.divider-line{ background:linear-gradient(90deg,transparent,rgba(23,163,148,.5)) !important; }
+.divider-line.r{ background:linear-gradient(90deg,rgba(23,163,148,.5),transparent) !important; }
+.divider-dot{ background:var(--bronze) !important; }
+
+/* 히어로 */
+.hero-tagline{ color:var(--navy) !important; font-family:inherit !important; font-style:normal !important; font-weight:800 !important; }
+.hero-tagline span{ color:var(--bronze) !important; font-style:normal !important; }
+.dn-sub{ color:rgba(21,59,82,.6) !important; }
+.dn-stats span{ background:rgba(23,163,148,.10) !important; border-color:rgba(23,163,148,.28) !important; color:var(--bronze-dk) !important; }
+
+/* 카드 — 흰 카드 + 부드러운 그림자 + 위쪽 색 띠 */
+.track-card{
+  background:#fff !important; border:1px solid rgba(21,59,82,.10) !important;
+  box-shadow:0 10px 30px rgba(21,59,82,.08) !important; overflow:hidden;
+  position:relative; padding-top:64px !important;
+}
+.track-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:44px; }
+.track-card.kids::before{ background:linear-gradient(135deg,#FDE4DC,#FBD5CA); }
+.track-card.hq::before  { background:linear-gradient(135deg,#D6F1EC,#C3E9E2); }
+.track-card:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(21,59,82,.12) !important; }
+
+.track-age{ color:var(--bronze-dk) !important; }
+.track-card.kids .track-age{ color:#C9503A !important; }
+.track-name{ color:var(--navy) !important; }
+/* 아이콘 — 흰 카드에 묻히지 않게 색 원 안에 넣음 (따님 시안의 색 블록과 같은 느낌) */
+.track-icon{
+  width:66px; height:66px; margin:0 auto 10px !important; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.track-card.kids .track-icon{ background:var(--coral); box-shadow:0 4px 14px rgba(239,114,89,.30); }
+.track-card.hq   .track-icon{ background:var(--bronze); box-shadow:0 4px 14px rgba(23,163,148,.28); }
+.track-icon svg{ width:36px !important; height:auto !important; }
+.track-icon svg text{ fill:#fff !important; }
+.track-icon svg path[stroke]{ stroke:#fff !important; }
+.track-icon svg circle[stroke]{ stroke:#fff !important; }
+.track-icon svg polygon{ fill:var(--sun) !important; }
+
+/* 버튼 — Kids=코랄, 도란채=틸 (따님 시안 그대로) */
+.track-action-btn.primary{
+  background:var(--bronze) !important; color:#fff !important; border:none !important;
+  box-shadow:0 4px 14px rgba(23,163,148,.28) !important;
+}
+.track-action-btn.primary:hover{ background:var(--bronze-dk) !important; }
+.track-card.kids .track-action-btn.primary{
+  background:var(--coral) !important; box-shadow:0 4px 14px rgba(239,114,89,.30) !important;
+}
+.track-card.kids .track-action-btn.primary:hover{ background:#DC5C43 !important; }
+.track-action-sub{ color:rgba(255,255,255,.85) !important; }
+
+.dn-note{ color:rgba(21,59,82,.5) !important; }
+.dn-secondary a{ color:rgba(21,59,82,.66) !important; border-bottom-color:rgba(21,59,82,.28) !important; }
+.dn-secondary a b{ color:var(--bronze-dk) !important; }
+.dn-secondary a:hover{ color:var(--bronze) !important; border-bottom-color:var(--bronze) !important; }
+
+/* 실제 화면 3장 */
+.preview-label{ color:var(--bronze-dk) !important; }
+.preview-card{ background:#fff !important; border:1px solid rgba(21,59,82,.10) !important; box-shadow:0 8px 24px rgba(21,59,82,.07) !important; }
+.preview-card figcaption{ background:#F6EBDC !important; color:var(--navy) !important; }
+
+/* 푸터 */
+footer[data-site-footer]{ background:transparent !important; border-top:1px solid rgba(21,59,82,.12) !important; }
+footer[data-site-footer] *{ color:rgba(21,59,82,.62) !important; }
+footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
+</style>
+
+<style>
+/* ═══ 로그인 후 화면 · 모달도 밝은 색조로 ═══ */
+.welcome-text h2{ color:var(--navy) !important; }
+.welcome-text p{ color:rgba(21,59,82,.6) !important; }
+#teacherBar, #pinChangeLinkWrap a{ color:rgba(21,59,82,.6) !important; }
+
+/* 수업 카드(로그인 후)는 원래 색 그대로 두고 그림자만 밝게 */
+.app-card{ box-shadow:0 8px 24px rgba(21,59,82,.14) !important; }
+.app-card:hover{ box-shadow:0 12px 32px rgba(21,59,82,.20) !important; }
+
+/* 모달 */
+.modal-bg{ background:rgba(21,59,82,.35) !important; }
+.login-modal{
+  background:#fff !important; border:1px solid rgba(21,59,82,.12) !important;
+  box-shadow:0 14px 50px rgba(21,59,82,.20) !important; color:var(--navy) !important;
+}
+.login-modal h2, .login-modal h3, .login-modal .modal-title{ color:var(--navy) !important; }
+.login-modal, .login-modal *{ border-color:rgba(21,59,82,.14) !important; }
+.login-modal p, .login-modal div, .login-modal span, .login-modal label{ color:rgba(21,59,82,.72) !important; }
+.login-modal a{ color:var(--bronze-dk) !important; }
+.pw-input{
+  background:#FBF6EF !important; border:1.5px solid rgba(21,59,82,.16) !important;
+  color:var(--navy) !important;
+}
+.pw-input::placeholder{ color:rgba(21,59,82,.38) !important; }
+.pw-input:focus{ border-color:var(--bronze) !important; background:#fff !important; }
+.enter-btn{ background:var(--bronze) !important; color:#fff !important; }
+.enter-btn:hover{ background:var(--bronze-dk) !important; }
+.eye-btn{ color:rgba(21,59,82,.5) !important; }
+.error-msg{ color:#C9503A !important; }
+.login-cta{ background:var(--bronze) !important; color:#fff !important;
+  box-shadow:0 4px 16px rgba(23,163,148,.28) !important; }
+.login-cta-secondary{ color:rgba(21,59,82,.72) !important; border-color:rgba(21,59,82,.22) !important; }
+.login-cta-secondary:hover{ background:rgba(23,163,148,.08) !important; color:var(--navy) !important;
+  border-color:var(--bronze) !important; }
+.login-hint{ color:rgba(21,59,82,.5) !important; }
+</style>
 </head>
 <body>
 
@@ -603,6 +851,21 @@ body::before {
 <div class="corner br"></div>
 
 <div class="wrap">
+
+  <!-- TOP UTILITY NAV (시안 B 신규) — 카드에 쌓여 있던 Road Map·학습자료·로그인을 여기로 -->
+  <nav class="dn-topnav">
+    <a class="dn-brand" href="index.html">
+      <svg width="34" height="28" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg"><path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/><path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.07"/><line x1="156" y1="100" x2="284" y2="100" stroke="#4ECDC4" stroke-width="1.2" opacity="0.5"/><line x1="180" y1="100" x2="180" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="220" y1="100" x2="220" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="260" y1="100" x2="260" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/><rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><line x1="219" y1="114" x2="219" y2="158" stroke="#4ECDC4" stroke-width="0.6" opacity="0.2"/><circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/><rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/><line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/><line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <span class="dn-brand-ko">도란채</span>
+      <span class="dn-brand-en">Doranchae</span>
+    </a>
+    <div class="dn-links">
+      <a href="learn/">📖 Free Lessons · 학습 자료</a>
+      <a href="nhs.html?view=roadmap">🧭 Road Map</a>
+      <a href="faq.html">FAQ</a>
+      <a href="#" class="dn-login" onclick="openLoginModal('main');return false;">👤 Log in</a>
+    </div>
+  </nav>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -627,7 +890,12 @@ body::before {
   <div id="landingBox">
 
     <div class="hero-text">
-      <p class="hero-tagline">Learn Korean the way it's <span>actually lived</span> —<br>one story at a time.</p>
+      <div class="dn-badge">한국어 온라인 스쿨 · Korean Language School</div>
+      <p class="hero-tagline">Learn Korean through <span>stories</span>,<br>not drills.</p>
+      <p class="dn-sub">이야기로 배우는 한국어 · 실제로 쓰이는 말을, 실제 장면에서</p>
+      <div class="dn-stats">
+        <span>🎬 72 episodes</span><span>📚 Levels 1–6</span><span>🎁 Free through Level 2</span>
+      </div>
     </div>
 
     <div class="preview-section">
@@ -649,39 +917,28 @@ body::before {
     </div>
 
     <div class="track-grid">
-      <div class="track-card kids clickable" onclick="openLoginModal('kids')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openLoginModal('kids')">
+      <div class="track-card kids">
         <div class="track-icon">
           <svg width="52" height="60" viewBox="0 0 58 66" xmlns="http://www.w3.org/2000/svg"><path d="M5 10 L53 10 L53 42 L29 60 L5 42 Z" fill="rgba(255,255,255,0.18)" stroke="white" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 16 L47 16 L47 39 L29 54 L11 39 Z" fill="rgba(255,255,255,0.08)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(4,0)"/><polygon points="4,12 6,18 12,18 7,22 9,28 4,24 -1,28 1,22 -4,18 2,18" fill="#FFD93D" transform="translate(46,0)"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="19" fill="white" letter-spacing="1">DR</text><text x="29" y="48" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="7.5" fill="#FFD93D" letter-spacing="3.5">KIDS</text></svg>
         </div>
         <div class="track-age">Ages 6–12 · 초등</div>
         <div class="track-name">Doranchae Kids</div>
-        <div class="track-desc">Game-based learning built around play. From your first Korean sounds to full sentences.</div>
-        <div style="margin-top:14px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
-          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">👨‍👩‍👧‍👦 Private Family Class</span>
-          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">🎮 Game-Based</span>
+        <div class="track-actions">
+          <button class="track-action-btn primary" onclick="openLoginModal('kids')"><span class="track-action-sub">Invited families only</span>🔑 Kids 입장하기</button>
         </div>
-        <div class="track-enter">Kids 입장하기 →</div>
-        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">초대받은 가정 전용 · Looking for lessons instead? <b>Doranchae</b> (13+) is the open one, on the right.</div>
+        <div class="dn-note">초대받은 가정 전용 · Private family class, by invitation</div>
       </div>
       <div class="track-card hq">
         <div class="track-icon">
           <svg width="52" height="52" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg>
         </div>
-        <div class="track-age">Ages 13 & up · 청소년·성인</div>
+        <div class="track-age">Ages 14 &amp; up · 청소년·성인</div>
         <div class="track-name">Doranchae</div>
-        <div class="track-desc">Follow Bomi, Lina, Raon, Taeo and Ara through markets, temples, campsites and kitchens.</div>
-        <div style="margin-top:14px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
-          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">Level 1–6</span>
-          <span style="font-size:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.8);letter-spacing:.06em">🎬 72 Episodes</span>
-        </div>
         <div class="track-actions">
-          <button class="track-action-btn primary" onclick="location.href='nhs.html?view=start'"><span class="track-action-sub">New to Korean?</span>🌱 Start Here</button>
-          <button class="track-action-btn" onclick="location.href='nhs.html'"><span class="track-action-sub">No account needed</span>👀 둘러보기 · Free to Browse</button>
-          <button class="track-action-btn" onclick="location.href='nhs.html?view=roadmap'"><span class="track-action-sub">How to study</span>🧭 Road Map</button>
-          <a class="track-action-btn" href="learn/"><span class="track-action-sub">Free grammar pages · no app needed</span>📖 학습 자료 · Free Lessons</a>
-          <button class="track-action-btn" onclick="openLoginModal('main')">👤 멤버 로그인 · Log in</button>
+          <button class="track-action-btn primary" onclick="location.href='nhs.html?ep=ep01'"><span class="track-action-sub">Open to everyone</span>🌱 Start Learning Free</button>
         </div>
-        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">가입 없이 Level 1–2 무료 체험 · Free preview through Level 2, no signup required</div>
+        <div class="dn-secondary"><a href="nhs.html?view=start">New to Korean? <b>한글 기초 · Hangeul Basics</b> →</a></div>
+        <div class="dn-note">가입 없이 Level 1–2 무료 · Free through Level 2, no signup</div>
       </div>
     </div>
 
