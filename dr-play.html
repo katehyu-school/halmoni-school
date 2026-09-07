@@ -154,11 +154,17 @@ body{
 .btn.ghost:hover{background:#fff; color:var(--warm-900)}
 .btnrow{display:flex; gap:9px; align-items:center; flex-wrap:wrap; margin-top:12px}
 
-/* 힌트 */
+/* 힌트(해답) — 주문 조립기처럼 굵은 테두리로 다른 안내 상자들과 확실히 구별 */
 .hint{
-  background:var(--blue-lt); border:1.5px solid #b9d3ef; border-radius:var(--radius);
-  padding:11px 14px; font-size:13.5px; line-height:1.7; color:var(--warm-800); margin-top:12px;
+  background:var(--blue-lt); border:2px solid var(--blue); border-radius:var(--radius);
+  padding:13px 15px; font-size:13.5px; line-height:1.7; color:var(--warm-800); margin-top:12px;
+  box-shadow:0 2px 0 rgba(26,95,168,.10);
 }
+.hint .hint-t{
+  font-size:11.5px; font-weight:700; color:var(--blue); letter-spacing:.4px;
+  margin-bottom:6px; display:flex; align-items:center; gap:5px;
+}
+
 
 /* 잠김 표시 */
 .locked{
@@ -213,6 +219,7 @@ footer a{color:var(--teal); text-decoration:none}
   <footer>
     도란채 · Doranchae — Level 1 ep06 「김밥 주세요」 ·
     <a href="nhs.html?ep=ep06">이 편 공부하러 가기 →</a>
+    <span style="opacity:.5"> · build 09-07c</span>
   </footer>
 </div>
 
@@ -239,20 +246,29 @@ const SCRIPT = {
                    en:'Fish cake (1 skewer) 1,000 · Tteokbokki (1 portion) 3,500 · Sundae (1 portion) 4,000 · Fritters (assorted) 3,000 · Kimbap 2,500' },
   g1_look_bomi : { ko:'우리 뭐 먹을까?',   en:'What shall we eat?' },
   g1_look_tent : { ko:'안에서 아줌마 목소리가 들린다.', en:'You hear the ajumma’s voice inside.' },
-  g1_locked    : { ko:'그냥 들어가기엔 좀 그렇다. 뭐라고 말을 걸어 볼까?', en:'You can’t just walk in. What could you say?' },
+  g1_locked    : { ko:'혼자 들어가기엔 좀 그렇다. 옆에 있는 보미에게 먼저 물어보자. 뭐라고 할까?',
+                   en:'You don’t want to go in alone. Ask Bomi first — what do you say?' },
+  g1_bomi_ok   : { ko:'응, 들어가자!', en:'Yeah, let’s go in!' },
 
+  /* ⚠️ mp3 파일명은 옛 대사(들어가도 되나) 그대로지만 2026-09-07에 「들어가도 될까?」로 재녹음됨 */
   g1_opts: [
-    { ko:'들어가도 되나?', en:'May I go in?',        ok:true  },
-    { ko:'뭐 먹을까?',     en:'What shall we eat?',  ok:false, reply:{ ko:'보미: 나한테 물어본 거야?', en:'Bomi: Were you asking me?' } },
-    { ko:'말없이 들어간다', en:'Walk in without a word', ok:false, reply:{ ko:'아줌마가 빤히 쳐다본다. 어색해서 다시 나왔다.', en:'The ajumma stares. Too awkward — you step back out.' } }
+    { ko:'들어가도 될까?', en:'Shall we go in? (casual — to a friend)', ok:true, audio:'1들어가도+되나_slide1.mp3' },
+    { ko:'들어가도 돼요?', en:'May we come in? (polite)', ok:false,
+      reply:{ ko:'보미: 왜 나한테 존댓말을 해? 우리 친구잖아.',
+              en:'Bomi: Why so formal with me? We’re friends!' } },
+    { ko:'말없이 들어간다', en:'Walk in without a word', ok:false,
+      reply:{ ko:'보미가 소매를 붙잡는다. "같이 가자니까."',
+              en:'Bomi grabs your sleeve. “Wait for me!”' } }
   ],
 
   /* ── 관문 ② 인사 + 주문 ───────────────────────────── */
   g2_welcome : { ko:'어서 오세요!', en:'Welcome!', audio:'3어서+오세요_slide3.mp3' },
   g2_greet_opts: [
     { ko:'안녕하세요.',   en:'Hello.',       ok:true  },
-    { ko:'어서 오세요.',  en:'Welcome.',     ok:false, reply:{ ko:'아줌마: 하하, 그건 내가 할 말인데?', en:'Ajumma: Haha — that’s my line!' } },
-    { ko:'감사합니다.',   en:'Thank you.',   ok:false, reply:{ ko:'아줌마: 뭐가 벌써 감사해요?', en:'Ajumma: Thanks for what, already?' } }
+    { ko:'어서 오세요.',  en:'Welcome.',     ok:false, reply:{ ko:'하하, 그건 내가 할 말인데?', en:'Haha — that’s my line!' } },
+    { ko:'안녕.',        en:'Hi. (casual)', ok:false,
+      reply:{ ko:'어이구, 반말이네?  — 어른께는 「안녕하세요」라고 해야지.',
+              en:'My, that’s casual!  — To an adult it’s 「안녕하세요」.' } }
   ],
 
   g2_ask     : { ko:'뭐 드릴까요?', en:'What can I get you?' },
@@ -274,19 +290,19 @@ const SCRIPT = {
   g3_eat_narr: { ko:'떡볶이에서 김이 올라온다. 한 입 먹어 본다.', en:'Steam rises off the tteokbokki. You take a bite.' },
   g3_eat_opts: [
     { ko:'정말 맛있다!',            en:'Really delicious!', ok:true,
-      reply:{ ko:'아줌마: 그렇죠? 우리 집이 제일 맛있어요.', en:'Ajumma: Right? Mine’s the best around.' } },
+      reply:{ ko:'그렇죠? 우리 집이 제일 맛있어요.', en:'Right? Mine’s the best around.' } },
     { ko:'환상이야!',              en:'Fantastic!', ok:true,
-      reply:{ ko:'아줌마: 어이구, 한국말 잘하네!', en:'Ajumma: My, your Korean is good!' } },
+      reply:{ ko:'어이구, 한국말 잘하네!', en:'My, your Korean is good!' } },
     { ko:'맛없다.',                en:'Not tasty.', ok:false,
       reply:{ ko:'…정적. 보미가 옆구리를 쿡 찌른다.', en:'…Silence. Bomi elbows you.' } }
   ],
 
   g3_pay_narr: { ko:'다 먹었다. 이제 값을 치러야 나갈 수 있다.', en:'All finished. You must pay before you can leave.' },
   g3_pay_opts: [
-    { ko:'저희 얼마예요?', en:'How much do we owe?', ok:true },
+    { ko:'저희 얼마예요?', en:'How much do we owe?', ok:true, audio:'7저희+얼마예요_slide5.mp3' },
     { ko:'얼마예요?',      en:'How much?',           ok:true, note:{ ko:'보미: 「저희」를 붙이면 더 공손해.', en:'Bomi: Adding 「저희」 sounds more polite.' } },
     { ko:'말없이 돈을 내민다', en:'Hand over money silently', ok:false,
-      reply:{ ko:'아줌마: 얼만지 안 물어봐요?', en:'Ajumma: Aren’t you going to ask how much?' } }
+      reply:{ ko:'얼만지 안 물어봐요?', en:'Aren’t you going to ask how much?' } }
   ],
   /* 값은 메뉴판 기준 3,500 + 2,500×2 = 8,500원.
      ⚠️ mp3 파일명은 옛 금액(만오천) 그대로지만 2026-09-07에 「팔천오백 원이에요.」로 재녹음됨.
@@ -297,7 +313,7 @@ const SCRIPT = {
   g3_bye_opts: [
     { ko:'안녕히 계세요.', en:'Goodbye. (to the one staying)', ok:true },
     { ko:'안녕히 가세요.', en:'Goodbye. (to the one leaving)', ok:false,
-      reply:{ ko:'아줌마: 어? 나 안 가는데?', en:'Ajumma: Huh? I’m not going anywhere.' } },
+      reply:{ ko:'어? 나 안 가는데?', en:'Huh? I’m not going anywhere.' } },
     { ko:'잘 가요.',      en:'Bye! (casual)', ok:false,
       reply:{ ko:'아줌마의 눈이 동그래진다. 어른한테 할 말이 아니다.', en:'The ajumma’s eyes go wide — not something you say to an elder.' } }
   ],
@@ -314,8 +330,10 @@ const SCRIPT = {
 
   /* ── 힌트 (보미) ──────────────────────────────────── */
   hints: {
-    g1     : { ko:'보미: 그냥 들어가긴 좀 그래. 「들어가도 되나?」 하고 물어봐.', en:'Bomi: Don’t just barge in. Try asking 「들어가도 되나?」' },
-    g2greet: { ko:'보미: 손님은 「안녕하세요」라고 하는 거야.', en:'Bomi: A customer says 「안녕하세요」.' },
+    g1     : { ko:'보미: 나는 네 친구잖아. 「-요」는 빼고 「들어가도 될까?」 하면 돼.',
+               en:'Bomi: I’m your friend — drop the 「-요」 and say 「들어가도 될까?」' },
+    g2greet: { ko:'보미: 아줌마는 어른이시잖아. 이번엔 「-요」를 붙여서 「안녕하세요」라고 해.',
+               en:'Bomi: The ajumma is an adult — this time add 「-요」 and say 「안녕하세요」.' },
     g2order: { ko:'보미: 할머니 쪽지 다시 봐. 그리고 음식은 「인분」으로 세고, 두 개를 이을 땐 「하고」를 써.',
                en:'Bomi: Re-read Grandma’s note. Count food in 「인분」, and join two items with 「하고」.' },
     g3eat  : { ko:'보미: 맛있으면 「정말 맛있다!」 하고 말해 봐.', en:'Bomi: If it’s good, say 「정말 맛있다!」' },
@@ -378,27 +396,56 @@ function pickVoice(){
 }
 if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 
-let curAudio = null;
-function say(line){
-  if(!line) return;
-  try{ if(curAudio){ curAudio.pause(); curAudio=null; } }catch(e){}
+let curAudio = null, playToken = 0;
+
+/* 재생 중인 것을 mp3·브라우저음성 양쪽 다 확실히 멈춤 — 겹쳐 들리는 걸 막는 핵심 */
+function stopAudio(){
+  playToken++;
+  try{ if(curAudio){ curAudio.onended=null; curAudio.pause(); curAudio.currentTime=0; curAudio=null; } }catch(e){}
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+}
+
+/* say(대사, 끝난뒤할일) — 두 번째 인자를 주면 이 대사가 끝난 뒤에 이어서 재생됨(동시에 안 나옴) */
+function say(line, then){
+  if(!line){ if(then) then(); return; }
+  stopAudio();
+  const my = playToken;
+  let fired = false;
+  const done = ()=>{ if(fired || my!==playToken) return; fired = true; if(then) then(); };
   if(line.audio){
     const a = new Audio(TTS + encodeURIComponent(line.audio));
     curAudio = a;
-    a.play().catch(()=>speakTTS(line.ko));
+    a.onended = done;
+    a.onerror = ()=>{ if(my===playToken) speakTTS(line.ko, my, then); };
+    // ⚠️ 반드시 '소리가 실제로 나기 시작한' playing 시점 기준으로 예약할 것.
+    //    loadedmetadata 시점으로 재면 버퍼링 시간만큼 일찍 울려서 다음 대사가 겹쳐 나옴(2026-09-07 실제 버그).
+    a.onplaying = ()=>{
+      if(isFinite(a.duration) && a.duration>0)
+        setTimeout(done, Math.max(0, a.duration - a.currentTime)*1000 + 500);
+    };
+    // 최후 안전장치 — 자동재생이 막히거나 파일이 안 열려도 대화가 멈추지 않게
+    setTimeout(done, 15000);
+    a.play().catch(()=>{ if(my===playToken) speakTTS(line.ko, my, then); });
     return;
   }
-  speakTTS(line.ko);
+  speakTTS(line.ko, my, then);
 }
-function speakTTS(text){
-  if(!window.speechSynthesis || !text) return;
+
+function speakTTS(text, tok, then){
+  if(!window.speechSynthesis || !text){ if(then) then(); return; }
+  if(tok===undefined) { stopAudio(); tok = playToken; }
+  if(tok!==playToken) return;
+  let fired = false;
+  const done = ()=>{ if(fired || tok!==playToken) return; fired = true; if(then) then(); };
   try{
-    speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(String(text).replace(/\n/g,' '));
     u.lang = 'ko-KR'; u.rate = 0.88;
     if(voiceKo) u.voice = voiceKo;
+    u.onend = done; u.onerror = done;
     speechSynthesis.speak(u);
-  }catch(e){}
+    // 안전장치: 일부 브라우저에서 onend가 안 옴 — 글자 수로 대략 잡아 둠
+    setTimeout(done, 900 + String(text).length * 190);
+  }catch(e){ done(); }
 }
 
 /* ── 조각 ── */
@@ -430,7 +477,7 @@ function hintBox(key){
   const h = SCRIPT.hints[key];
   return `<div class="btnrow">
       <button class="btn ghost" onclick="toggleHint('${key}')">👧 ${S.hintOpen?'힌트 닫기':'보미에게 물어보기 · Ask Bomi'}</button>
-    </div>` + (S.hintOpen && h ? `<div class="hint">${esc(h.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(h.en)}</div></div>` : '');
+    </div>` + (S.hintOpen && h ? `<div class="hint"><div class="hint-t">💡 해답 · ANSWER</div>${esc(h.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(h.en)}</div></div>` : '');
 }
 function toggleHint(key){
   if(!S.hintOpen) S.hints++;
@@ -538,10 +585,14 @@ function viewG1(){
 function look(k){ S.seen[k]=true; render(); }
 function chooseG1(i){
   const o = SCRIPT.g1_opts[i];
-  say(o);
-  if(o.ok){ S.scene='g2greet'; S.hintOpen=false; setTimeout(()=>say(SCRIPT.g2_welcome), 700); }
-  else { S.mistakes++; flash(o.reply); }
-  render();
+  if(o.ok){
+    S.scene='g2greet'; S.hintOpen=false;
+    flash(SCRIPT.g1_bomi_ok, 'good');
+    // 내 말 → 보미 대답 → 아줌마 인사, 하나씩 이어서(겹치지 않게)
+    say(o, ()=> say(SCRIPT.g1_bomi_ok, ()=>{ if(S.scene==='g2greet') say(SCRIPT.g2_welcome); }));
+    render(); return;
+  }
+  S.mistakes++; flash(o.reply); say(o); render();
 }
 
 /* 관문 2 — 인사 */
@@ -554,10 +605,8 @@ function viewG2Greet(){
 }
 function chooseGreet(i){
   const o = SCRIPT.g2_greet_opts[i];
-  say(o);
-  if(o.ok){ S.scene='g2order'; S.hintOpen=false; }
-  else { S.mistakes++; flash(o.reply); }
-  render();
+  if(o.ok){ S.scene='g2order'; S.hintOpen=false; say(o, ()=>{ if(S.scene==='g2order') say(SCRIPT.g2_ask); }); render(); return; }
+  S.mistakes++; flash(o.reply); say(o, ()=>say(o.reply)); render();
 }
 
 /* 관문 2 — 주문 조립 */
@@ -624,22 +673,27 @@ function resetOrder(){ S.order = { food:[], qty:{}, conn:null }; render(); }
 
 function submitOrder(){
   const txt = orderText(); if(!txt) return;
-  speakTTS(txt);
+  const spoken = { ko: txt, en: '' };
   const foods = S.order.food, tot = orderTotal();
 
-  if(foods.some(f=>!S.order.qty[f])){ S.mistakes++; flash(SCRIPT.g2_fail_qty); return render(); }
-  if(foods.some(f=>S.order.qty[f].native)){ S.mistakes++; flash(SCRIPT.g2_fail_qty); return render(); }
-  if(foods.length>1 && (!S.order.conn || !S.order.conn.ok)){ S.mistakes++; flash(SCRIPT.g2_fail_conn); return render(); }
-  if(tot > WALLET){ S.mistakes++; S.overordered = true; flash(SCRIPT.g2_fail_over); return render(); }
+  let bad = null;
+  if(foods.some(f=>!S.order.qty[f]))                             bad = SCRIPT.g2_fail_qty;
+  else if(foods.some(f=>S.order.qty[f].native))                  bad = SCRIPT.g2_fail_qty;
+  else if(foods.length>1 && (!S.order.conn || !S.order.conn.ok)) bad = SCRIPT.g2_fail_conn;
+  else if(tot > WALLET){ S.overordered = true;                   bad = SCRIPT.g2_fail_over; }
+  else {
+    const want = Object.keys(CORRECT_ORDER);
+    const okSet = foods.length===want.length && want.every(w=>foods.includes(w) && S.order.qty[w] && S.order.qty[w].n===CORRECT_ORDER[w]);
+    if(!okSet) bad = SCRIPT.g2_fail_wrong;
+  }
 
-  const want = Object.keys(CORRECT_ORDER);
-  const okSet = foods.length===want.length && want.every(w=>foods.includes(w) && S.order.qty[w] && S.order.qty[w].n===CORRECT_ORDER[w]);
-  if(!okSet){ S.mistakes++; flash(SCRIPT.g2_fail_wrong); return render(); }
+  // 내가 말한 주문을 먼저 들려주고, 끝난 뒤에 아줌마가 대답 — 겹치지 않게
+  if(bad){ S.mistakes++; flash(bad); say(spoken, ()=>say(bad)); return render(); }
 
   if(S.order.conn && S.order.conn.bookish) flash(SCRIPT.g2_conn_note, 'good');
   S.paid = tot;
   S.scene = 'g3eat'; S.hintOpen = false;
-  setTimeout(()=>say(SCRIPT.g2_ok), 500);
+  say(spoken, ()=>{ if(S.scene==='g3eat') say(SCRIPT.g2_ok); });
   render();
 }
 
@@ -653,10 +707,8 @@ function viewG3Eat(){
 }
 function chooseEat(i){
   const o = SCRIPT.g3_eat_opts[i];
-  say(o);
-  if(o.ok){ S.scene='g3pay'; S.hintOpen=false; flash(o.reply,'good'); }
-  else { S.mistakes++; flash(o.reply); }
-  render();
+  if(o.ok){ S.scene='g3pay'; S.hintOpen=false; flash(o.reply,'good'); say(o, ()=>{ if(S.scene==='g3pay') say(o.reply); }); render(); return; }
+  S.mistakes++; flash(o.reply); say(o); render();
 }
 
 /* 관문 3 — 계산 */
@@ -669,10 +721,8 @@ function viewG3Pay(){
 }
 function choosePay(i){
   const o = SCRIPT.g3_pay_opts[i];
-  say(o);
-  if(o.ok){ S.scene='g3bye'; S.hintOpen=false; flash(o.note,'good'); setTimeout(()=>say(SCRIPT.g3_price), 800); }
-  else { S.mistakes++; flash(o.reply); }
-  render();
+  if(o.ok){ S.scene='g3bye'; S.hintOpen=false; flash(o.note,'good'); say(o, ()=>{ if(S.scene==='g3bye') say(SCRIPT.g3_price); }); render(); return; }
+  S.mistakes++; flash(o.reply); say(o); render();
 }
 
 /* 관문 3 — 작별 */
@@ -687,10 +737,8 @@ function viewG3Bye(){
 }
 function chooseBye(i){
   const o = SCRIPT.g3_bye_opts[i];
-  say(o);
-  if(o.ok){ S.scene='end'; setTimeout(()=>say(SCRIPT.g3_farewell), 700); }
-  else { S.mistakes++; flash(o.reply); }
-  render();
+  if(o.ok){ S.scene='end'; say(o, ()=>{ if(S.scene==='end') say(SCRIPT.g3_farewell); }); render(); return; }
+  S.mistakes++; flash(o.reply); say(o); render();
 }
 
 /* 엔딩 */
@@ -718,6 +766,7 @@ function viewEnd(){
   </div>`;
 }
 function restart(){
+  stopAudio();
   Object.assign(S, { scene:'title', started:0, mistakes:0, hints:0, overordered:false,
     paid:0, seen:{}, order:{ food:[], qty:{}, conn:null }, msg:null, hintOpen:false });
   $('hudTime').textContent = '⏱ 0:00';
