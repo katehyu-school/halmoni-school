@@ -296,7 +296,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .game-tile.bat{background:var(--block-bat);box-shadow:0 5px 0 #3a73ad}
 .done-banner{text-align:center;padding:34px 20px;display:flex;flex-direction:column;gap:10px;align-items:center}
 .done-banner .big{font-size:3rem}
-.done-banner h2{color:var(--teal)}
+.done-banner h2{color:var(--bronze-dk)}
 .done-banner p{font-size:.8rem;color:rgba(21,59,82,.55);line-height:1.6}
 .web-sync{font-size:.68rem;color:rgba(21,59,82,.5);text-align:center;padding:4px 24px;line-height:1.5}
 .web-sync b{color:var(--bronze-dk)}
@@ -1071,7 +1071,7 @@ async function vocabOpen(){
   const b=document.getElementById('vocabBody');
   b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
   try{await _sLoadVocab()}catch(e){
-    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b></div>';return;
+    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b></div>';return;
   }
   vocabRender();
 }
@@ -1128,7 +1128,7 @@ function vocabRender(keepFocus){
       const bg=st?(st.b<=2?'#7a3b3b':st.b>=4?'#2c5c52':'#3d5560'):'#2a3a44';
       const lab=st?`${st.b}/5`:'🆕';
       return `<div class="card" style="display:flex;align-items:center;gap:10px;padding:11px 13px;margin-bottom:7px">
-        <span style="background:${bg};color:#153B52;font-size:.6rem;font-weight:900;padding:3px 7px;border-radius:7px;flex:none;min-width:26px;text-align:center">${lab}</span>
+        <span style="background:${bg};color:#fff;font-size:.6rem;font-weight:900;padding:3px 7px;border-radius:7px;flex:none;min-width:26px;text-align:center">${lab}</span>
         <span style="flex:1;min-width:0">
           <span style="font-size:.95rem;font-weight:800;color:#153B52;font-family:'Noto Serif KR',serif">${c.x||''} ${c.k}</span>
           <span style="display:block;font-size:.74rem;color:rgba(21,59,82,.55);margin-top:2px">${c.e}</span>
@@ -1147,7 +1147,7 @@ async function srsStart(){
   const b=document.getElementById('srsBody');
   b.innerHTML='<div class="loading-ep">📡 단어를 불러오는 중...</div>';
   try{await _sLoadVocab()}catch(e){
-    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b></div>';return;
+    b.innerHTML='<div class="loading-ep">⚠️ 단어를 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b></div>';return;
   }
   _sBuildDeck();srsRender();
 }
@@ -1165,7 +1165,7 @@ function srsRender(){
     srsHomeUpdate();return;
   }
   const c=srsDeck[srsIdx],m=_sMap(),st=m[_sId(c)];
-  const badge=st?`<span style="background:${st.b<=2?'#7a3b3b':'#2c5c52'};color:#153B52;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">${st.b<=2?'🔄':'✅'} 상자 ${st.b}/5</span>`
+  const badge=st?`<span style="background:${st.b<=2?'#7a3b3b':'#2c5c52'};color:#fff;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">${st.b<=2?'🔄':'✅'} 상자 ${st.b}/5</span>`
                 :'<span style="background:#3a4a55;color:#cfe3e0;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">🆕 처음</span>';
   const pct=Math.round(srsIdx/srsDeck.length*100);
   b.innerHTML=`
@@ -1179,7 +1179,7 @@ function srsRender(){
       <div style="font-size:1.5rem;font-weight:900;color:#153B52;font-family:'Noto Serif KR',serif">${c.k}</div>
       ${c.r?`<div style="font-size:.7rem;color:rgba(21,59,82,.5);margin-top:3px">[${c.r}]</div>`:''}
       ${srsFlip?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(21,59,82,.12)">
-          <div style="font-size:1rem;color:var(--teal);font-weight:800">${c.e}</div>
+          <div style="font-size:1rem;color:var(--bronze-dk);font-weight:800">${c.e}</div>
           ${c.n?`<div style="font-size:.72rem;color:rgba(21,59,82,.7);margin-top:8px;line-height:1.55">${c.n}</div>`:''}
           ${c.t?`<div style="font-size:.66rem;color:rgba(21,59,82,.45);margin-top:8px">📖 ${c.t}</div>`:''}
         </div>`
@@ -1187,7 +1187,7 @@ function srsRender(){
     </div>
     <button class="card" style="width:100%;color:#153B52;font-weight:800" onclick="speak('${c.k.replace(/'/g,"\\'")}')">🔊 듣기</button>
     ${srsFlip?`<div style="display:flex;gap:10px;margin-top:6px">
-        <button class="go-btn" style="flex:1;background:#7a3b3b" onclick="srsAnswer(false)">😕 다시 볼래요</button>
+        <button class="go-btn" style="flex:1;background:#7a3b3b;color:#fff" onclick="srsAnswer(false)">😕 다시 볼래요</button>
         <button class="go-btn" style="flex:1" onclick="srsAnswer(true)">😀 알아요</button>
       </div>`
      :'<button class="go-btn" style="width:100%;margin-top:6px" onclick="srsFlipCard()">뜻 보기 · Show meaning</button>'}
@@ -1260,7 +1260,7 @@ async function gramStart(){
   const b=document.getElementById('gramBody');
   b.innerHTML='<div class="loading-ep">📡 경어법 카드를 불러오는 중...</div>';
   try{await _gLoadGrammar()}catch(e){
-    b.innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b></div>';return;
+    b.innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b></div>';return;
   }
   _gBuildDeck();gramRender();
 }
@@ -1278,7 +1278,7 @@ function gramRender(){
     gramHomeUpdate();return;
   }
   const c=gramDeck[gramIdx],m=_gMap(),st=m[_gId(c)];
-  const badge=st?`<span style="background:${st.b<=2?'#7a3b3b':'#2c5c52'};color:#153B52;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">${st.b<=2?'🔄':'✅'} 상자 ${st.b}/5</span>`
+  const badge=st?`<span style="background:${st.b<=2?'#7a3b3b':'#2c5c52'};color:#fff;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">${st.b<=2?'🔄':'✅'} 상자 ${st.b}/5</span>`
                 :'<span style="background:#3a4a55;color:#cfe3e0;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:8px">🆕 처음</span>';
   const pct=Math.round(gramIdx/gramDeck.length*100);
   b.innerHTML=`
@@ -1290,13 +1290,13 @@ function gramRender(){
       <div style="margin-bottom:10px">${badge}</div>
       <div style="font-size:1.05rem;font-weight:800;color:#153B52;line-height:1.5">${c.q}</div>
       ${gramFlip?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(21,59,82,.12);text-align:left">
-          <div style="font-size:.95rem;color:var(--teal);font-weight:700;line-height:1.6">${c.a}</div>
+          <div style="font-size:.95rem;color:var(--bronze-dk);font-weight:700;line-height:1.6">${c.a}</div>
           ${c.ex?`<div style="font-size:.78rem;color:rgba(21,59,82,.7);margin-top:10px;line-height:1.6">📝 ${c.ex}</div>`:''}
         </div>`
        :'<div style="font-size:.72rem;color:rgba(21,59,82,.45);margin-top:16px">탭하면 설명이 보여요 · tap to flip</div>'}
     </div>
     ${gramFlip?`<div style="display:flex;gap:10px;margin-top:6px">
-        <button class="go-btn" style="flex:1;background:#7a3b3b" onclick="gramAnswer(false)">😕 다시 볼래요</button>
+        <button class="go-btn" style="flex:1;background:#7a3b3b;color:#fff" onclick="gramAnswer(false)">😕 다시 볼래요</button>
         <button class="go-btn" style="flex:1" onclick="gramAnswer(true)">😀 알아요</button>
       </div>`
      :'<button class="go-btn" style="width:100%;margin-top:6px" onclick="gramFlipCard()">설명 보기 · Show explanation</button>'}
@@ -1859,7 +1859,7 @@ async function openFound(n){
   document.getElementById('fgBody').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ FNode=await loadFound(n) }
   catch(e){
-    document.getElementById('fgBody').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('fgBody').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('fgTitle').textContent='오프라인';
     return;
   }
@@ -1990,8 +1990,8 @@ async function showEpList(){
     return `<button onclick="hqSetLv('${l}')" style="border:none;border-radius:99px;padding:7px 15px;font-size:.76rem;font-weight:800;cursor:pointer;opacity:${lk?.45:1};background:${l===lv?'var(--teal)':'rgba(21,59,82,.08)'};color:${l===lv?'#06231f':'rgba(21,59,82,.55)'}">${l}${lk?' 🔒':''}</button>`;}).join('');
   const lockNote = HQM_IS_MEMBER ? '' :
     '<div style="background:rgba(23,163,148,.08);border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:.7rem;color:rgba(21,59,82,.55);line-height:1.6">'
-    +'👋 지금 <b style="color:var(--teal)">Level 1·2</b>를 보고 계세요 · Level 3부터는 무료 계정이 필요해요<br>'
-    +'<a href="index.html" style="color:var(--teal)">계정 만들기 · Create a free account</a></div>';
+    +'👋 지금 <b style="color:var(--bronze-dk)">Level 1·2</b>를 보고 계세요 · Level 3부터는 무료 계정이 필요해요<br>'
+    +'<a href="index.html" style="color:var(--bronze-dk)">계정 만들기 · Create a free account</a></div>';
   const arr=epArr(lv);
   const list=arr.length?arr.map(e=>{
     const n=parseInt(e.id.replace(/\D/g,''),10);
@@ -2001,7 +2001,7 @@ async function showEpList(){
       <span><div class="ep-ti">${tag}${e.label||''}</div><div class="ep-sub">5분 복습 · Watch→Learn→Practice→Review</div></span>
       <span class="arr">→</span></button>`;
   }).join('')
-  :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+  :'<div class="loading-ep">⚠️ 에피소드 목록을 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
   box.innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px">${chips}</div>`+lockNote+list;
 }
 // 2026-08-31: Level 3+는 정적 파일이 아니라 nhs_get_episode RPC로만 받아옵니다
@@ -2091,7 +2091,7 @@ async function openEp(n,lv){
     await _epIdxReady;
     EP=await loadEp(n,lv);
   }catch(e){
-    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('flowBody').innerHTML='<div class="loading-ep">⚠️ 에피소드를 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('flowTitle').textContent='오프라인';
     return;
   }
@@ -2178,14 +2178,14 @@ function fRender(){
       ${q.qen&&q.qen!==q.q?`<div class="q-sub">${q.qen}</div>`:'<div style="height:8px"></div>'}
       ${listenBtn}
       ${q.opts.map((o,i)=>`<button class="opt" onclick="fAnswer(this,${i})">${o}</button>`).join('')}
-      <div class="game-msg" id="fqMsg" style="color:var(--teal);font-size:.85rem"></div></div>
+      <div class="game-msg" id="fqMsg" style="color:var(--bronze-dk);font-size:.85rem"></div></div>
       <div class="flow-nav" id="fqNav" style="display:none"><button class="fn-next" onclick="fQuizNext()">계속 →</button></div>`;
     if(q.type==='listen'&&q.audio)setTimeout(()=>speak(q.audio,0.8),400);
   }
   else{ /* REVIEW */
     if(fCard>=EP.vocab.length){
       b.innerHTML=`<div class="done-banner"><div class="big">🏆</div><h2>오늘의 5분 복습 완료!</h2>
-        <p>${EP.lv||'L1'} ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--teal)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
+        <p>${EP.lv||'L1'} ep${String(EP.n).padStart(2,'0')} · ${EP.title}<br>Daily Quest 달성 · +60 XP · 🔥 연속 학습 8일째!<br><br>몰라요 표시한 카드는 <b style="color:var(--bronze-dk)">내일 다시</b> 나타나요 (간격 복습 SRS)</p>
         <button class="fn-next" style="padding:14px 40px;border-radius:14px;font-weight:900;background:var(--teal);color:#06303a" onclick="shareOpen({emoji:'🏆',title_ko:'오늘의 5분 복습 완료!',title_en:'5-min review complete!',sub_ko:(EP.lv||'L1')+' ep'+String(EP.n).padStart(2,'0')+' · '+EP.title,sub_en:EP.titleEn||'',xp:60,dqIds:[],confetti:false})">결과 공유하기 →</button>
         ${(EP.lv==='L1'&&RP_DATA[EP.n]&&KK_DATA[EP.n])?`<div style="display:flex;gap:8px;margin-top:10px">
           <button class="fn-ghost" style="flex:1;padding:12px 14px;border-radius:14px;font-weight:700;font-size:.8rem" onclick="rpOpen(EP.n)">🎭 롤플레이 →</button>
@@ -2340,7 +2340,7 @@ async function openL2(n){
   document.getElementById('l2Body').innerHTML='<div class="loading-ep">📡 불러오는 중... Loading...</div>';
   try{ L2=await loadL2(n) }
   catch(e){
-    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요. Can\'t load.<br><br>이 기능은 서버에서 열어야 동작해요 · This needs to be opened from a server:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server · or VS Code Live Server)</div>';
+    document.getElementById('l2Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요. Can\'t load.<br><br>이 기능은 서버에서 열어야 동작해요 · This needs to be opened from a server:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server · or VS Code Live Server)</div>';
     document.getElementById('l2Title').textContent='오프라인 · Offline';
     return;
   }
@@ -2360,7 +2360,7 @@ function l2Render(){
   if(l2Step===0){ /* 단어 카드 */
     if(!L2.vocab.length){l2Next();return}
     if(l2Card>=L2.vocab.length){
-      b.innerHTML=`<div style="text-align:center;padding:20px"><div style="font-size:2.4rem">🃏</div><h2 style="color:var(--teal)">단어 카드 완료!</h2><div class="q-sub">Vocabulary cards done!</div></div>
+      b.innerHTML=`<div style="text-align:center;padding:20px"><div style="font-size:2.4rem">🃏</div><h2 style="color:var(--bronze-dk)">단어 카드 완료!</h2><div class="q-sub">Vocabulary cards done!</div></div>
         <div class="flow-nav"><button class="fn-next" onclick="l2Next()">다음: 문법 카드 📌<br><small style="font-weight:500;opacity:.8">Next: Grammar Cards</small></button></div>`;
       return;
     }
@@ -2394,7 +2394,7 @@ function l2Render(){
     b.innerHTML=`<div class="card"><h3>✏️ 빈칸 퀴즈 ${l2Quiz+1} / ${L2.quiz.length}<br><small style="font-weight:500;opacity:.7">Fill-in-the-blank Quiz</small></h3>
       <div class="q-prompt">${q.q}</div>
       ${q.opts.map((o,i)=>`<button class="opt" onclick="l2Answer(this,${i})">${o}</button>`).join('')}
-      <div class="game-msg" id="l2qMsg" style="color:var(--teal);font-size:.85rem"></div></div>
+      <div class="game-msg" id="l2qMsg" style="color:var(--bronze-dk);font-size:.85rem"></div></div>
       <div class="flow-nav" id="l2qNav" style="display:none"><button class="fn-next" onclick="l2QuizNext()">계속 → <small style="font-weight:500;opacity:.8">Continue</small></button></div>`;
   }
   else{ /* 문장 만들기 */
@@ -2502,7 +2502,7 @@ async function openL3(n){
   document.getElementById('l3Body').innerHTML='<div class="loading-ep">📡 불러오는 중...</div>';
   try{ L3=await loadL3(n) }
   catch(e){
-    document.getElementById('l3Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--teal)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
+    document.getElementById('l3Body').innerHTML='<div class="loading-ep">⚠️ 불러올 수 없어요.<br><br>이 기능은 서버에서 열어야 동작해요:<br><b style="color:var(--bronze-dk)">doranchae.com/dr-mobile.html</b><br>(또는 VS Code Live Server)</div>';
     document.getElementById('l3Title').textContent='오프라인';
     return;
   }
@@ -2547,7 +2547,7 @@ function l3Render(){
     b.innerHTML=`<div class="card"><h3>🔊 듣기 퀴즈 ${l3Quiz+1} / ${L3.quiz.length}</h3>
       <div class="q-prompt">잘 듣고 맞는 그림을 골라보세요 <button class="tts-sm" onclick="speak('${q.audio.replace(/'/g,"\\'")}',0.85)">🔊</button></div>
       ${q.choices.map((c,i)=>`<button class="opt" onclick="l3QuizAnswer(this,${i})">${c.emoji} ${c.kr} <span class="en">(${c.en})</span></button>`).join('')}
-      <div class="game-msg" id="l3qMsg" style="color:var(--teal);font-size:.85rem"></div></div>
+      <div class="game-msg" id="l3qMsg" style="color:var(--bronze-dk);font-size:.85rem"></div></div>
       <div class="flow-nav" id="l3qNav" style="display:none"><button class="fn-next" onclick="l3QuizNext()">계속 →</button></div>`;
     setTimeout(()=>speak(q.audio,0.85),400);
   }
