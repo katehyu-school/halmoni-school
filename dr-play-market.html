@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>재래시장 탈출 · Escape the Market | 도란채</title>
+<meta name="description" content="한국어를 몰라도 5분이면 재래시장에서 딸기랑 사과를 살 수 있어요. 도란채의 한국어 방탈출 게임 — 무료, 가입 없이.">
+<link rel="canonical" href="https://doranchae.com/dr-play-market.html">
+<!-- 페이스북·카톡 링크 미리보기 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도란채 · Doranchae">
+<meta property="og:url" content="https://doranchae.com/dr-play-market.html">
+<meta property="og:title" content="재래시장 탈출 · Escape the Market">
+<meta property="og:description" content="한국어를 하나도 몰라도 5분이면 딸기랑 사과를 살 수 있어요. 가입 없이 무료로 해보세요. / Buy strawberries and apples in Korean in 5 minutes — free, no sign-up.">
+<meta property="og:image" content="https://doranchae.com/og_market.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="재래시장 탈출 · Escape the Market">
+<meta name="twitter:description" content="한국어를 하나도 몰라도 5분이면 딸기랑 사과를 살 수 있어요. 무료 · 가입 없이.">
+<meta name="twitter:image" content="https://doranchae.com/og_market.jpg">
+<link rel="icon" href="favicon-doranchae.svg" type="image/svg+xml">
+<link rel="icon" href="logo_hq.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7c6e; --teal-lt:#e0f5f2; --teal-md:#5bbfb0; --teal-dark:#0b5c52; --teal-600:#1a9485;
+  --amber:#c47a1a; --amber-lt:#fdf3e0; --coral:#c74d36; --coral-lt:#fdeae6;
+  --blue:#1a5fa8; --blue-lt:#e6f0fb; --purple:#5a3fa0;
+  --warm-900:#1C1917; --warm-800:#292524; --warm-700:#44403C; --warm-600:#57534E; --warm-500:#78716C;
+  --paper:#fbf8f3; --line:#e7ddd0;
+  --font-kr:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-kr);
+  background:#12100e;
+  color:var(--warm-900);
+  min-height:100vh;
+  display:flex; align-items:flex-start; justify-content:center;
+  padding:0;
+}
+#stage{
+  width:100%; max-width:760px; background:var(--paper);
+  min-height:100vh; display:flex; flex-direction:column;
+  box-shadow:0 0 60px rgba(0,0,0,.5);
+}
+
+/* ── 상단 HUD ───────────────────────── */
+#hud{
+  background:var(--teal-dark); color:#fff; padding:9px 14px;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  font-size:12.5px; position:sticky; top:0; z-index:20;
+}
+#hud .goal{flex:1; min-width:150px; font-weight:500; line-height:1.4}
+#hud .goal small{display:block; opacity:.75; font-size:10.5px; font-weight:400}
+.chip{background:rgba(255,255,255,.14); border-radius:999px; padding:4px 10px; white-space:nowrap; font-variant-numeric:tabular-nums}
+
+/* ── 장면 ───────────────────────────── */
+#sceneWrap{position:relative; width:100%; aspect-ratio:16/9; background:#241f1a}
+#sceneImg{width:100%; height:100%; object-fit:cover; display:block}
+#sceneFallback{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg,#0b5c52,#1a9485);
+}
+/* ⚠️ display를 지정하면 hidden 속성이 무시됨 — 반드시 같이 둘 것 */
+#sceneFallback[hidden]{display:none}
+#sceneWrap[hidden]{display:none}
+#sceneFallback span{font-size:76px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.35))}
+#body{padding:16px 16px 26px; flex:1}
+
+.narr{
+  background:var(--amber-lt); border:1.5px solid #f0c980; border-radius:var(--radius);
+  padding:12px 15px; font-size:13.5px; line-height:1.75; color:var(--warm-800); margin-bottom:14px;
+}
+.narr b{color:var(--amber)}
+
+/* 대사 말풍선 */
+.say{display:flex; gap:10px; margin-bottom:12px; align-items:flex-start}
+.say .who{
+  flex:0 0 auto; width:44px; text-align:center; font-size:11px; color:var(--warm-600); line-height:1.3;
+}
+.say .who .em{display:block; font-size:26px; line-height:1.1}
+.bub{
+  flex:1; background:#fff; border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:11px 14px; position:relative;
+}
+.bub.ajumma{background:var(--coral-lt); border-color:#f0b8ab}
+.bub.bomi{background:var(--blue-lt); border-color:#b9d3ef}
+.bub.me{background:var(--teal-lt); border-color:var(--teal-md)}
+.bub .ko{font-size:16px; font-weight:500; line-height:1.65; color:var(--warm-900)}
+.bub .en{font-size:12px; color:var(--warm-600); margin-top:3px; line-height:1.5}
+.spk{
+  background:none; border:none; cursor:pointer; font-size:15px; padding:2px 4px;
+  float:right; margin:-2px -4px 0 6px; opacity:.55;
+}
+.spk:hover{opacity:1}
+
+/* 살펴보기 */
+.look-wrap{margin:16px 0 6px}
+.sec-t{font-size:12px; font-weight:700; color:var(--warm-600); letter-spacing:.4px; margin-bottom:8px}
+.looks{display:flex; gap:8px; flex-wrap:wrap}
+.look{
+  background:#fff; border:1.5px solid var(--line); border-radius:999px;
+  padding:8px 14px; font-size:13.5px; cursor:pointer; transition:.15s;
+}
+.look:hover{border-color:var(--amber); background:var(--amber-lt)}
+.look.seen{opacity:.5}
+
+/* 선택지 */
+.opts{display:flex; flex-direction:column; gap:9px; margin-top:6px}
+.opt{
+  text-align:left; background:#fff; border:2px solid var(--line); border-radius:var(--radius);
+  padding:12px 15px; cursor:pointer; font-family:inherit; transition:.15s; width:100%;
+}
+.opt:hover{border-color:var(--teal); background:var(--teal-lt); transform:translateX(2px)}
+.opt .ko{font-size:16px; font-weight:500; color:var(--warm-900); line-height:1.55}
+.opt .en{font-size:11.5px; color:var(--warm-500); margin-top:2px}
+
+/* 주문 조립기 */
+.builder{background:#fff; border:2px solid var(--teal-md); border-radius:var(--radius); padding:14px; margin-top:6px}
+.brow{margin-bottom:13px}
+.blabel{font-size:11.5px; font-weight:700; color:var(--teal); margin-bottom:6px}
+.bchips{display:flex; gap:7px; flex-wrap:wrap}
+.bchip{
+  background:#fff; border:1.5px solid var(--line); border-radius:999px;
+  padding:7px 13px; font-size:14px; cursor:pointer; font-family:inherit; transition:.12s;
+}
+.bchip:hover{border-color:var(--teal-md)}
+.bchip.on{background:var(--teal); border-color:var(--teal); color:#fff; font-weight:600}
+.bchip small{opacity:.7; font-size:11px; margin-left:3px}
+.preview{
+  background:var(--teal-lt); border:1.5px dashed var(--teal-md); border-radius:10px;
+  padding:12px 14px; margin:4px 0 12px; font-size:17px; font-weight:500; color:var(--teal-dark);
+  min-height:52px; line-height:1.5;
+}
+.preview .ph{color:var(--warm-500); font-weight:400; font-size:14px}
+.preview .tot{display:block; font-size:12px; color:var(--warm-600); font-weight:400; margin-top:5px}
+.preview .over{color:var(--coral); font-weight:700}
+
+/* 버튼 */
+.btn{
+  background:var(--teal); color:#fff; border:none; border-radius:999px;
+  padding:12px 26px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+}
+.btn:hover{background:var(--teal-600)}
+.btn:disabled{background:#c9c2b8; cursor:not-allowed}
+.btn.ghost{background:none; color:var(--warm-600); border:1.5px solid var(--line); font-weight:500}
+.btn.ghost:hover{background:#fff; color:var(--warm-900)}
+.btnrow{display:flex; gap:9px; align-items:center; flex-wrap:wrap; margin-top:12px}
+
+/* 힌트(해답) */
+.hint{
+  background:var(--blue-lt); border:2px solid var(--blue); border-radius:var(--radius);
+  padding:13px 15px; font-size:13.5px; line-height:1.7; color:var(--warm-800); margin-top:12px;
+  box-shadow:0 2px 0 rgba(26,95,168,.10);
+}
+.hint .hint-t{
+  font-size:11.5px; font-weight:700; color:var(--blue); letter-spacing:.4px;
+  margin-bottom:6px; display:flex; align-items:center; gap:5px;
+}
+
+/* 잠김 표시 */
+.locked{
+  background:#fff; border:2px dashed #d8ccbb; border-radius:var(--radius);
+  padding:13px 15px; font-size:13.5px; color:var(--warm-600); margin-top:10px; line-height:1.6;
+}
+
+/* 타이틀 / 엔딩 */
+.center{text-align:center; padding:26px 6px}
+.center h1{font-family:'Gaegu',var(--font-kr); font-size:40px; margin:8px 0 2px; color:var(--teal-dark); line-height:1.15}
+.center .sub{font-size:14px; color:var(--warm-600); margin-bottom:20px}
+.card{
+  background:#fff; border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px; text-align:left; font-size:14px; line-height:1.8; margin:14px 0;
+}
+.card h3{margin:0 0 8px; font-size:14px; color:var(--teal)}
+.note{
+  background:#fffdf5; border:1.5px solid #e8d9a8; border-radius:6px;
+  padding:16px 18px; font-family:'Gaegu',var(--font-kr); font-size:21px; line-height:1.7;
+  color:#5c4a1e; box-shadow:2px 3px 0 rgba(0,0,0,.06); transform:rotate(-.6deg); text-align:left;
+}
+.note .en{font-family:var(--font-kr); font-size:12.5px; color:#8a7440; margin-top:7px; line-height:1.5}
+.score{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:16px 0}
+.score div{background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:10px 16px; min-width:88px}
+.score b{display:block; font-size:21px; color:var(--teal-dark); font-variant-numeric:tabular-nums}
+.score span{font-size:11px; color:var(--warm-600)}
+.big-emoji{font-size:56px; line-height:1}
+
+/* 듣기 문제(거스름돈) */
+.listen-box{background:#fff; border:2px solid var(--teal-md); border-radius:var(--radius); padding:16px; margin-top:6px; text-align:center}
+.listen-big{background:var(--teal); color:#fff; border:none; border-radius:999px; padding:14px 30px; font-size:22px; cursor:pointer; font-family:inherit}
+.listen-big:hover{background:var(--teal-600)}
+
+footer{padding:16px; text-align:center; font-size:11.5px; color:var(--warm-500); border-top:1px solid var(--line)}
+footer a{color:var(--teal); text-decoration:none}
+
+@media(max-width:520px){
+  .center h1{font-size:32px}
+  .bub .ko,.opt .ko{font-size:15px}
+  #hud{font-size:11.5px}
+  .preview{font-size:15px}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="hud">
+    <div class="goal" id="hudGoal">🏪 재래시장 탈출<small>Escape the Market</small></div>
+    <div class="chip" id="hudMoney">💰 30,000원</div>
+    <div class="chip" id="hudTime">⏱ 0:00</div>
+  </div>
+  <div id="sceneWrap" hidden>
+    <img id="sceneImg" alt="">
+    <div id="sceneFallback" hidden><span></span></div>
+  </div>
+  <div id="body"></div>
+  <footer>
+    도란채 · Doranchae — Level 1 ep09 「딸기 한 박스하고 사과 여섯 개 주세요」 ·
+    <a href="nhs.html?ep=ep09">이 편 공부하러 가기 →</a>
+    <span style="opacity:.5"> · build 09-08a</span>
+  </footer>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   ✏️  선생님이 고치실 곳은 여기 SCRIPT 뿐입니다.
+       ko = 한국어 대사 / en = 영어 뜻
+       아래 엔진(ENGINE)은 건드리지 않으셔도 됩니다.
+       (ep06 「포장마차 탈출」과 같은 엔진을 재사용 — 상품 가격 구조만
+        박스/개 단위로 바뀌었으니, 이 파일만의 작은 차이는 그때그때 주석 참고)
+   ══════════════════════════════════════════════════════════════════ */
+
+const SCRIPT = {
+
+  /* ── 시작 ─────────────────────────────────────────── */
+  title      : { ko:'재래시장 탈출',          en:'Escape the Market' },
+  subtitle   : { ko:'할머니가 사려는 걸 대신 주문해 보세요.', en:'Order what Grandma wants to buy, on her behalf.' },
+  grandmaNote: { ko:'딸기 한 박스, 사과 여섯 개.\n거스름돈 잘 챙기고! — 할머니',
+                 en:'One box of strawberries, six apples.\nDon’t forget the change! — Grandma' },
+  howto      : { ko:'막히면 옆에 있는 할머니에게 물어보세요.', en:'Stuck? Ask Grandma, standing next to you.' },
+
+  /* ── 관문 ① 인사하기 ──────────────────────────────── */
+  g1_narr      : { ko:'리어카에 과일이 가득 쌓여 있다. 상인이 우리를 쳐다본다.', en:'The cart overflows with fruit. The vendor notices you.' },
+  g1_look_berry: { ko:'딸기 (1박스) 15,000원',  en:'Strawberries (1 box) 15,000 won' },
+  g1_look_apple: { ko:'사과 (3개) 5,000원',    en:'Apples (3) 5,000 won' },
+  g1_look_grandma: { ko:'오늘 뭐 사야 하는지 기억하지?', en:'Do you remember what we need today?' },
+  g1_locked    : { ko:'인사를 안 하면 계속 쳐다보실 것 같다. 뭐라고 할까?',
+                   en:'She’ll just keep looking at you if you don’t say hello. What do you say?' },
+
+  /* ⚠️ 이 mp3는 ep09 본편 대사(할아버지) 그대로 재사용한 것 — 실제 성우 녹음 */
+  g1_opts: [
+    { ko:'안녕하세요?', en:'Hello! (polite)', ok:true, audio:'1안녕하세요_slide1.mp3' },
+    { ko:'안녕?',       en:'Hi! (casual)',     ok:false,
+      reply:{ ko:'할머니: 어이구, 낯선 어른한테 반말을 하면 어떡해.', en:'Grandma: Goodness — you can’t speak casually to a stranger who’s an adult.' } },
+    { ko:'말없이 쳐다본다', en:'Just stare silently', ok:false,
+      reply:{ ko:'할머니가 옆구리를 쿡 찌른다. "인사해야지."', en:'Grandma elbows you. “Say hello.”' } }
+  ],
+
+  /* ── 관문 ② 물어보기 + 주문 ───────────────────────── */
+  g2_welcome : { ko:'어서 오세요!', en:'Welcome!', audio:'2어서+오세요_slide2.mp3', vol:0.82 },
+  g2_ask_t   : { ko:'뭐라고 물어볼까요? · WHAT DO YOU ASK?' },
+  g2_ask_opts: [
+    { ko:'오늘 과일 뭐가 좋아요?', en:'What fruit is good today?', ok:true, audio:'3오늘+과일+뭐가+좋아요_slide3.mp3' },
+    { ko:'딸기 있어요?', en:'Do you have strawberries?', ok:false,
+      reply:{ ko:'그럼요! 그런데 다른 것도 있는데 안 보실래요?', en:'Of course! But don’t you want to see what else we have?' } },
+    { ko:'이거 얼마예요?', en:'How much is this?', ok:false,
+      reply:{ ko:'어떤 거요? 하나씩 물어보세요.', en:'Which one? Ask about them one at a time.' } }
+  ],
+  g2_pitch   : { ko:'요새 딸기가 제철이에요. 아주 맛있어요.', en:'Strawberries are in season these days. They’re very delicious.',
+                 audio:'4요새+딸기가+제철이에요_+아주+맛있어요_slide4.mp3' },
+
+  g2_build_t : { ko:'주문을 만들어 보세요', en:'Build your order' },
+  g2_lbl_food: { ko:'무엇을?',   en:'What?' },
+  g2_lbl_qty : { ko:'얼마나?',   en:'How much?' },
+  g2_lbl_conn: { ko:'두 개를 이을 때는?', en:'To join two things?' },
+  g2_say     : { ko:'주세요!',   en:'Order it!' },
+
+  /* 상인이 못 알아듣는 경우들 */
+  g2_fail_qty  : { ko:'수량을 먼저 골라 주세요.', en:'Pick a quantity for each item first.' },
+  g2_fail_conn : { ko:'딸기요? 사과요? 뭘 달라는 거예요?', en:'Strawberries? Apples? Which do you want?' },
+  g2_fail_over : { ko:'어이구, 그렇게 많이? 돈이 모자랄 텐데요.', en:'Goodness, that much? You won’t have enough money.' },
+  g2_fail_wrong: { ko:'네, 그런데 할머니가 시키신 게 맞아요?', en:'Sure — but is that what Grandma asked for?' },
+  g2_ok        : { ko:'네, 딸기 만오천 원하고 사과 만 원, 모두 이만오천 원이에요.',
+                   en:'Yes, strawberries are 15,000 won and apples are 10,000 won — 25,000 won in total.',
+                   audio:'6네+딸기+만오천+원하고+사과+만+원+모두+이만오천+원이에요_slide6.mp3', vol:0.82 },
+  g2_conn_note : { ko:'할머니: 「와/과」는 글 쓸 때 쓰는 말인데… 통했네!', en:'Grandma: 「와/과」 is more for writing… but it worked!' },
+
+  /* ── 관문 ③ 잘 듣기(거스름돈) ─────────────────────── */
+  g3_pay_narr  : { ko:'지갑에서 돈을 꺼내 낸다.', en:'You take out some money and pay.' },
+  g3_change_q  : { ko:'상인이 하는 말을 잘 들어 보세요. 거스름돈이 얼마죠?',
+                   en:'Listen carefully to what the vendor says. How much change is it?' },
+  g3_change_line: { ko:'감사합니다. 거스름돈 오천 원 여기요.', en:'Thank you. Here’s your change — 5,000 won.',
+                    audio:'8감사합니다_+거스름+돈+오천+원+여기요_slide8.mp3', vol:0.82 },
+  g3_change_opts: [
+    { label:'3,000원', ok:false },
+    { label:'5,000원', ok:true  },
+    { label:'10,000원', ok:false }
+  ],
+  g3_change_bad : { ko:'다시 한번 들어 보세요.', en:'Give it another listen.' },
+  g3_change_ok  : { ko:'맞아요! 잘 들었네요.', en:'That’s right! Good listening.' },
+
+  /* ── 관문 ③ 보너스 + 작별 ─────────────────────────── */
+  g3_bonus_ask : { ko:'소고기는 한 근에 얼마예요?', en:'How much is beef per geun (600g)?',
+                   audio:'9소고기는+한근에+얼마예요_slide9.mp3' },
+  g3_bonus_reply: { ko:'그건, 잘 모르겠는데요.', en:'That, I’m not sure about.',
+                    audio:'10그건+잘+모르겠는데요_slide10.mp3' },
+  g3_bye_narr  : { ko:'장을 다 봤다. 이제 인사하고 집에 갈 시간이다.', en:'Shopping done. Time to say goodbye and head home.' },
+  g3_bye_opts: [
+    { ko:'안녕히 계세요.', en:'Goodbye. (to the one staying)', ok:true },
+    { ko:'안녕히 가세요.', en:'Goodbye. (to the one leaving)', ok:false,
+      reply:{ ko:'어? 저 안 가는데요?', en:'Huh? I’m not going anywhere.' } },
+    { ko:'잘 가요.',      en:'Bye! (casual)', ok:false,
+      reply:{ ko:'할머니가 눈을 흘긴다. 어른한테 그렇게 말하면 안 되지.', en:'Grandma shoots you a look. You can’t say that to an elder.' } }
+  ],
+  g3_farewell: { ko:'안녕히 가세요! 또 오세요~', en:'Goodbye! Come again~' },
+
+  /* ── 엔딩 ─────────────────────────────────────────── */
+  end_best  : { emoji:'🏆', ko:'단골 손님 엔딩',   en:'Regular Customer Ending',
+                msg:{ ko:'상인이 딸기를 몇 개 더 얹어준다. "덤이에요!"', en:'The vendor tosses in a few extra strawberries. “On the house!”' } },
+  end_mid   : { emoji:'😅', ko:'그럭저럭 엔딩',   en:'Close Call Ending',
+                msg:{ ko:'몇 번 헤맸지만 장바구니는 가득 찼다. 그거면 됐다.', en:'You fumbled a few times — but the basket is full. Good enough.' } },
+  end_awk   : { emoji:'😳', ko:'어색한 엔딩',     en:'Awkward Ending',
+                msg:{ ko:'장은 다 봤다. 그런데 상인이 자꾸 웃었다.', en:'You got the shopping done — but the vendor kept giggling.' } },
+
+  /* ── 힌트 (할머니) ──────────────────────────────────── */
+  hints: {
+    g1     : { ko:'할머니: 낯선 어른한테는 「안녕하세요?」라고 인사하는 거야.',
+               en:'Grandma: Greet a stranger who’s an adult with 「안녕하세요?」' },
+    g2greet: { ko:'할머니: 뭐가 좋은지 물어보자 — 「오늘 과일 뭐가 좋아요?」',
+               en:'Grandma: Let’s ask what’s good — 「오늘 과일 뭐가 좋아요?」' },
+    g2order: { ko:'할머니: 목록 다시 봐 — 딸기는 「박스」로, 사과는 「개」로 세고, 두 개를 이을 땐 「하고」를 써.',
+               en:'Grandma: Check the list again — count strawberries by 박스 (box), apples by 개 (count), and join them with 하고.' },
+    g3pay  : { ko:'할머니: 상인이 말한 숫자를 잘 들어봐 — 🔊 버튼으로 다시 들을 수 있어.',
+               en:'Grandma: Listen carefully to the number she says — tap 🔊 to hear it again.' },
+    g3bye  : { ko:'할머니: 우리가 여기를 떠나는 사람이니까 「안녕히 계세요」가 맞아.',
+               en:'Grandma: We’re the ones leaving, so 「안녕히 계세요」 is right.' }
+  }
+};
+
+/* 주문할 수 있는 것 — 딸기는 박스, 사과·배는 개수로 세서 단가×수량이 아니라
+   수량별 고정 가격을 씁니다(실제 대사 속 금액 25,000원과 정확히 맞추기 위함).
+   bad*이 정답이 아니라도 그 자체가 "틀린" 건 아니고, 할머니가 시킨 것과 다를 뿐입니다. */
+const MENU = [
+  { ko:'딸기', en:'strawberry', qtys:[
+      { label:'한 박스', n:1, price:15000 },
+      { label:'두 박스', n:2, price:30000 }
+  ]},
+  { ko:'사과', en:'apple', qtys:[
+      { label:'세 개',  n:3, price:5000  },
+      { label:'여섯 개', n:6, price:10000 },
+      { label:'아홉 개', n:9, price:15000 }
+  ]},
+  { ko:'배', en:'pear', qtys:[
+      { label:'세 개',  n:3, price:6000  },
+      { label:'여섯 개', n:6, price:12000 }
+  ]}
+];
+/* 할머니가 시킨 정답 — { 물건이름: 수량(n) } */
+const CORRECT_ORDER = { '딸기':1, '사과':6 };   /* = 15,000 + 10,000 = 25,000원 */
+const WALLET = 30000;   /* 30,000 - 25,000 = 거스름돈 5,000원 (실제 대사와 일치) */
+
+/* 연결어미 — ok:false 면 상인이 못 알아듣습니다 */
+const CONNS = [
+  { label:'하고',    ok:true  },
+  { label:'(이)랑',  ok:true  },
+  { label:'와/과',   ok:true, bookish:true },
+  { label:'안 씀',   ok:false }
+];
+
+/* 장면 배경 이미지 — 재래시장1~10.webp는 ep09 본편 슬라이드를 그대로 재사용 (숫자 = 대사 순서) */
+const SLIDES = 'data/nhs/L1/slides/ep09/';
+const TTS    = 'data/nhs/L1/TTS/ep09/';
+const BG = { g1:'재래시장1.webp', g2greet:'재래시장3.webp', g2order:'재래시장5.webp',
+             g3pay:'재래시장7.webp', g3bye:'재래시장9.webp' };
+
+/* ══════════════════════════════════════════════════════════════════
+   ENGINE — 여기서부터는 고치지 않으셔도 됩니다
+   ══════════════════════════════════════════════════════════════════ */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const won = n => n.toLocaleString('en-US') + '원';
+
+const S = {
+  scene:'title', started:0, mistakes:0, hints:0, overordered:false,
+  paid:0, seen:{}, order:{ food:[], qty:{}, conn:null }, msg:null, hintOpen:false
+};
+
+/* ── 소리 ── */
+let voiceKo = null;
+function pickVoice(){
+  try{
+    const vs = speechSynthesis.getVoices()||[];
+    voiceKo = vs.find(v=>/ko[-_]KR/i.test(v.lang)) || vs.find(v=>/^ko/i.test(v.lang)) || null;
+  }catch(e){}
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+let curAudio = null, playToken = 0;
+
+/* 재생 중인 것을 mp3·브라우저음성 양쪽 다 확실히 멈춤 — 겹쳐 들리는 걸 막는 핵심 */
+function stopAudio(){
+  playToken++;
+  try{ if(curAudio){ curAudio.onended=null; curAudio.pause(); curAudio.currentTime=0; curAudio=null; } }catch(e){}
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+}
+
+/* say(대사, 끝난뒤할일) — 두 번째 인자를 주면 이 대사가 끝난 뒤에 이어서 재생됨(동시에 안 나옴) */
+function say(line, then){
+  if(!line){ if(then) then(); return; }
+  stopAudio();
+  const my = playToken;
+  let fired = false;
+  const done = ()=>{ if(fired || my!==playToken) return; fired = true; if(then) then(); };
+  if(line.audio){
+    const a = new Audio(TTS + encodeURIComponent(line.audio));
+    a.volume = line.vol || 1;
+    curAudio = a;
+    a.onended = done;
+    a.onerror = ()=>{ if(my===playToken) speakTTS(line.ko, my, then); };
+    a.onplaying = ()=>{
+      if(isFinite(a.duration) && a.duration>0)
+        setTimeout(done, Math.max(0, a.duration - a.currentTime)*1000 + 500);
+    };
+    setTimeout(done, 15000);
+    a.play().catch(()=>{ if(my===playToken) speakTTS(line.ko, my, then); });
+    return;
+  }
+  speakTTS(line.ko, my, then);
+}
+
+function speakTTS(text, tok, then){
+  if(!window.speechSynthesis || !text){ if(then) then(); return; }
+  if(tok===undefined) { stopAudio(); tok = playToken; }
+  if(tok!==playToken) return;
+  let fired = false;
+  const done = ()=>{ if(fired || tok!==playToken) return; fired = true; if(then) then(); };
+  try{
+    const u = new SpeechSynthesisUtterance(String(text).replace(/\n/g,' '));
+    u.lang = 'ko-KR'; u.rate = 0.88;
+    if(voiceKo) u.voice = voiceKo;
+    u.onend = done; u.onerror = done;
+    speechSynthesis.speak(u);
+    setTimeout(done, 900 + String(text).length * 190);
+  }catch(e){ done(); }
+}
+
+/* ── 조각 ── */
+const LINES = [];
+function reg(line){ LINES.push(line); return LINES.length-1; }
+function sayIdx(i){ say(LINES[i]); }
+
+function bub(cls, emoji, who, line, withSpk){
+  const idx = reg(line);
+  return `<div class="say">
+    <div class="who"><span class="em">${emoji}</span>${esc(who)}</div>
+    <div class="bub ${cls}">
+      ${withSpk!==false?`<button class="spk" onclick="sayIdx(${idx})" title="듣기">🔊</button>`:''}
+      <div class="ko">${esc(line.ko).replace(/\n/g,'<br>')}</div>
+      <div class="en">${esc(line.en)}</div>
+    </div></div>`;
+}
+const merchant = l => bub('ajumma','🧑‍🍳','상인', l);
+const grandma  = l => bub('bomi','👵','할머니', l);
+const narr     = l => `<div class="narr">${esc(l.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(l.en)}</div></div>`;
+
+function optBtn(o, i, handler){
+  return `<button class="opt" onclick="${handler}(${i})">
+    <div class="ko">${esc(o.ko)}</div><div class="en">${esc(o.en)}</div></button>`;
+}
+function hintBox(key){
+  const h = SCRIPT.hints[key];
+  return `<div class="btnrow">
+      <button class="btn ghost" onclick="toggleHint('${key}')">👵 ${S.hintOpen?'힌트 닫기':'할머니에게 물어보기 · Ask Grandma'}</button>
+    </div>` + (S.hintOpen && h ? `<div class="hint"><div class="hint-t">💡 해답 · ANSWER</div>${esc(h.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(h.en)}</div></div>` : '');
+}
+function toggleHint(key){
+  if(!S.hintOpen) S.hints++;
+  S.hintOpen = !S.hintOpen;
+  render();
+}
+function flash(line, kind){ if(line) S.msg = { line:line, kind:kind||'bad' }; }
+function msgBox(){
+  if(!S.msg) return '';
+  const m = S.msg; S.msg = null;
+  const style = m.kind==='good'
+    ? 'background:var(--teal-lt);border-color:var(--teal-md)'
+    : 'background:var(--coral-lt);border-color:#f0b8ab';
+  return `<div class="narr" style="${style}">${esc(m.line.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(m.line.en)}</div></div>`;
+}
+
+/* ── HUD ── */
+function hud(){
+  const goals = {
+    title:'🏪 재래시장 탈출', g1:'🔑 관문 1 — 인사하기', g2greet:'🔑 관문 2 — 물어보기',
+    g2order:'🔑 관문 2 — 주문하기', g3pay:'👂 관문 3 — 잘 듣기',
+    g3bye:'🔑 관문 3 — 인사하고 가기', end:'🎬 장보기 완료!'
+  };
+  const goalsEn = {
+    title:'Escape the Market', g1:'Gate 1 — Greet', g2greet:'Gate 2 — Ask',
+    g2order:'Gate 2 — Order', g3pay:'Gate 3 — Listen',
+    g3bye:'Gate 3 — Say goodbye', end:'Shopping Done!'
+  };
+  $('hudGoal').innerHTML = `${esc(goals[S.scene]||'')}<small>${esc(goalsEn[S.scene]||'')}</small>`;
+  $('hudMoney').textContent = '💰 ' + won(WALLET - S.paid);
+}
+function tick(){
+  if(!S.started || S.scene==='end') return;
+  const s = Math.floor((Date.now()-S.started)/1000);
+  $('hudTime').textContent = '⏱ ' + Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+}
+setInterval(tick, 500);
+
+/* 그림이 없거나 못 불러와도 화면이 깨지지 않게 — 대신 색 배경 + 이모지 */
+const BG_EMOJI = { g1:'🏪', g2greet:'🍓', g2order:'🛒', g3pay:'💰', g3bye:'👋' };
+function setBg(key){
+  const wrap = $('sceneWrap'), img = $('sceneImg'), fb = $('sceneFallback');
+  if(!key){ wrap.hidden = true; return; }
+  wrap.hidden = false;
+  fb.firstElementChild.textContent = BG_EMOJI[key] || '🏪';
+  img.onerror = () => { img.style.visibility='hidden'; fb.hidden = false; };
+  img.onload  = () => { img.style.visibility='visible'; fb.hidden = true; };
+  img.src = SLIDES + encodeURIComponent(BG[key]);
+}
+
+/* ══ 화면들 ══ */
+function render(){
+  hud();
+  LINES.length = 0;
+  const b = $('body');
+  if(S.scene==='title')   return setBg(null), b.innerHTML = viewTitle();
+  if(S.scene==='g1')      return setBg('g1'), b.innerHTML = viewG1();
+  if(S.scene==='g2greet') return setBg('g2greet'), b.innerHTML = viewG2Greet();
+  if(S.scene==='g2order') return setBg('g2order'), b.innerHTML = viewG2Order();
+  if(S.scene==='g3pay')   return setBg('g3pay'), b.innerHTML = viewG3Pay();
+  if(S.scene==='g3bye')   return setBg('g3bye'), b.innerHTML = viewG3Bye();
+  if(S.scene==='end')     return setBg('g3bye'), b.innerHTML = viewEnd();
+}
+
+function viewTitle(){
+  return `<div class="center">
+    <div class="big-emoji">🏪</div>
+    <h1>${esc(SCRIPT.title.ko)}</h1>
+    <div class="sub">${esc(SCRIPT.title.en)}</div>
+    <div class="note">${esc(SCRIPT.grandmaNote.ko).replace(/\n/g,'<br>')}
+      <div class="en">${esc(SCRIPT.grandmaNote.en)}</div></div>
+    <div class="card">
+      <h3>🎯 ${esc(SCRIPT.subtitle.ko)}</h3>
+      ${esc(SCRIPT.subtitle.en)}<br>
+      <span style="color:var(--warm-600);font-size:13px">💰 ${won(WALLET)} · 👵 ${esc(SCRIPT.howto.ko)}</span>
+    </div>
+    <button class="btn" onclick="start()">시작하기 · Start</button>
+  </div>`;
+}
+function start(){ S.started = Date.now(); S.scene='g1'; S.hintOpen=false; render(); }
+
+/* 관문 1 — 인사하기 */
+function viewG1(){
+  let h = msgBox() + narr(SCRIPT.g1_narr);
+  h += `<div class="look-wrap"><div class="sec-t">🔍 살펴보기 · LOOK AROUND</div><div class="looks">
+    <button class="look ${S.seen.berry?'seen':''}" onclick="look('berry')">🍓 딸기</button>
+    <button class="look ${S.seen.apple?'seen':''}" onclick="look('apple')">🍎 사과</button>
+    <button class="look ${S.seen.grandma?'seen':''}" onclick="look('grandma')">👵 할머니</button>
+    <button class="look ${S.seen.note?'seen':''}" onclick="look('note')">📋 목록</button>
+  </div></div>`;
+  if(S.seen.berry) h += narr(SCRIPT.g1_look_berry);
+  if(S.seen.apple) h += narr(SCRIPT.g1_look_apple);
+  if(S.seen.grandma) h += grandma(SCRIPT.g1_look_grandma);
+  if(S.seen.note) h += `<div class="note" style="margin:10px 0">${esc(SCRIPT.grandmaNote.ko).replace(/\n/g,'<br>')}<div class="en">${esc(SCRIPT.grandmaNote.en)}</div></div>`;
+
+  h += `<div class="locked">🔒 ${esc(SCRIPT.g1_locked.ko)}<div style="font-size:11.5px;margin-top:3px">${esc(SCRIPT.g1_locked.en)}</div></div>`;
+  h += `<div class="opts">${SCRIPT.g1_opts.map((o,i)=>optBtn(o,i,'chooseG1')).join('')}</div>`;
+  h += hintBox('g1');
+  return h;
+}
+function look(k){ S.seen[k]=true; render(); }
+function chooseG1(i){
+  const o = SCRIPT.g1_opts[i];
+  if(o.ok){
+    S.scene='g2greet'; S.hintOpen=false;
+    say(o, ()=>{ if(S.scene==='g2greet') say(SCRIPT.g2_welcome); });
+    render(); return;
+  }
+  S.mistakes++; flash(o.reply); say(o); render();
+}
+
+/* 관문 2 — 물어보기 */
+function viewG2Greet(){
+  let h = msgBox() + merchant(SCRIPT.g2_welcome);
+  h += `<div class="sec-t" style="margin-top:16px">${esc(SCRIPT.g2_ask_t.ko)}</div>`;
+  h += `<div class="opts">${SCRIPT.g2_ask_opts.map((o,i)=>optBtn(o,i,'chooseAsk')).join('')}</div>`;
+  h += hintBox('g2greet');
+  return h;
+}
+function chooseAsk(i){
+  const o = SCRIPT.g2_ask_opts[i];
+  if(o.ok){ S.scene='g2order'; S.hintOpen=false; say(o, ()=>{ if(S.scene==='g2order') say(SCRIPT.g2_pitch); }); render(); return; }
+  S.mistakes++; flash(o.reply); say(o, ()=>say(o.reply)); render();
+}
+
+/* 관문 2 — 주문 조립 */
+function orderText(){
+  const parts = S.order.food.map(f=>{
+    const q = S.order.qty[f];
+    return esc(f) + (q ? ' ' + esc(q.label) : '');
+  });
+  if(!parts.length) return null;
+  if(parts.length === 1) return parts[0] + ' 주세요.';
+  const c = S.order.conn;
+  const hasBatchim = w => { const ch=w.charCodeAt(w.length-1); return ch>=0xAC00&&ch<=0xD7A3 ? (ch-0xAC00)%28!==0 : false; };
+  const bat = hasBatchim(parts[0]);
+  let joiner = ' ';
+  if(c && c.ok) joiner = c.label==='(이)랑' ? (bat?'이랑 ':'랑 ')
+                       : c.label==='와/과'  ? (bat?'과 ':'와 ')
+                       : '하고 ';
+  return parts.join(joiner) + ' 주세요.';
+}
+function orderTotal(){
+  return S.order.food.reduce((t,f)=>{
+    const q = S.order.qty[f];
+    return t + (q ? q.price : 0);
+  },0);
+}
+function viewG2Order(){
+  const txt = orderText(), tot = orderTotal(), over = tot > WALLET;
+  let h = msgBox() + merchant(SCRIPT.g2_pitch);
+  h += `<div class="sec-t" style="margin-top:14px">🔒 ${esc(SCRIPT.g2_build_t.ko)} · ${esc(SCRIPT.g2_build_t.en)}</div>`;
+  h += `<div class="builder">
+    <div class="preview">${txt ? esc(txt) : `<span class="ph">아래에서 골라 보세요 · Pick below</span>`}
+      ${txt?`<span class="tot ${over?'over':''}">합계 ${won(tot)}${over?' — 돈이 모자라요!':''}</span>`:''}</div>
+
+    <div class="brow"><div class="blabel">① ${esc(SCRIPT.g2_lbl_food.ko)} · ${esc(SCRIPT.g2_lbl_food.en)}</div><div class="bchips">
+      ${MENU.map(m=>`<button class="bchip ${S.order.food.includes(m.ko)?'on':''}" onclick="pickFood('${esc(m.ko)}')">${esc(m.ko)}</button>`).join('')}
+    </div></div>
+
+    ${S.order.food.map(f=>{
+      const m = MENU.find(x=>x.ko===f);
+      return `<div class="brow"><div class="blabel">② ${esc(f)} — ${esc(SCRIPT.g2_lbl_qty.ko)}</div><div class="bchips">
+      ${m.qtys.map((q,qi)=>`<button class="bchip ${S.order.qty[f]&&S.order.qty[f].label===q.label?'on':''}" onclick="pickQty('${esc(f)}',${qi})">${esc(q.label)}<small>${won(q.price)}</small></button>`).join('')}
+    </div></div>`;
+    }).join('')}
+
+    ${S.order.food.length>1?`<div class="brow"><div class="blabel">③ ${esc(SCRIPT.g2_lbl_conn.ko)} · ${esc(SCRIPT.g2_lbl_conn.en)}</div><div class="bchips">
+      ${CONNS.map((c,ci)=>`<button class="bchip ${S.order.conn&&S.order.conn.label===c.label?'on':''}" onclick="pickConn(${ci})">${esc(c.label)}</button>`).join('')}
+    </div></div>`:''}
+
+    <div class="btnrow">
+      <button class="btn" onclick="submitOrder()" ${txt?'':'disabled'}>${esc(SCRIPT.g2_say.ko)} · ${esc(SCRIPT.g2_say.en)}</button>
+      <button class="btn ghost" onclick="resetOrder()">다시 고르기</button>
+    </div>
+  </div>`;
+  h += hintBox('g2order');
+  return h;
+}
+function pickFood(f){
+  const i = S.order.food.indexOf(f);
+  if(i>=0){ S.order.food.splice(i,1); delete S.order.qty[f]; }
+  else if(S.order.food.length<2) S.order.food.push(f);
+  render();
+}
+function pickQty(f, qi){ const m = MENU.find(x=>x.ko===f); S.order.qty[f] = m.qtys[qi]; render(); }
+function pickConn(ci){ S.order.conn = CONNS[ci]; render(); }
+function resetOrder(){ S.order = { food:[], qty:{}, conn:null }; render(); }
+
+function submitOrder(){
+  const txt = orderText(); if(!txt) return;
+  const spoken = { ko: txt, en: '' };
+  const foods = S.order.food, tot = orderTotal();
+
+  let bad = null;
+  if(foods.some(f=>!S.order.qty[f]))                             bad = SCRIPT.g2_fail_qty;
+  else if(foods.length>1 && (!S.order.conn || !S.order.conn.ok)) bad = SCRIPT.g2_fail_conn;
+  else if(tot > WALLET){ S.overordered = true;                   bad = SCRIPT.g2_fail_over; }
+  else {
+    const want = Object.keys(CORRECT_ORDER);
+    const okSet = foods.length===want.length && want.every(w=>foods.includes(w) && S.order.qty[w] && S.order.qty[w].n===CORRECT_ORDER[w]);
+    if(!okSet) bad = SCRIPT.g2_fail_wrong;
+  }
+
+  if(bad){ S.mistakes++; flash(bad); say(spoken, ()=>say(bad)); return render(); }
+
+  if(S.order.conn && S.order.conn.bookish) flash(SCRIPT.g2_conn_note, 'good');
+  S.paid = tot;
+  S.scene = 'g3pay'; S.hintOpen = false;
+  say(spoken, ()=>{ if(S.scene==='g3pay') say(SCRIPT.g2_ok); });
+  render();
+}
+
+/* 관문 3 — 잘 듣기(거스름돈) */
+function viewG3Pay(){
+  let h = msgBox() + merchant(SCRIPT.g2_ok) + narr(SCRIPT.g3_pay_narr);
+  h += `<div class="listen-box">
+    <div style="font-size:13px;color:var(--warm-600);margin-bottom:10px">${esc(SCRIPT.g3_change_q.ko)}<div style="font-size:11px;margin-top:2px">${esc(SCRIPT.g3_change_q.en)}</div></div>
+    <button class="listen-big" onclick="say(SCRIPT.g3_change_line)">🔊 듣기</button>
+  </div>`;
+  h += `<div class="sec-t" style="margin-top:16px">💬 거스름돈은 얼마일까요? · HOW MUCH CHANGE?</div>`;
+  h += `<div class="opts">${SCRIPT.g3_change_opts.map((o,i)=>`<button class="opt" onclick="chooseChange(${i})"><div class="ko">${esc(o.label)}</div></button>`).join('')}</div>`;
+  h += hintBox('g3pay');
+  return h;
+}
+function chooseChange(i){
+  const o = SCRIPT.g3_change_opts[i];
+  if(o.ok){ S.scene='g3bye'; S.hintOpen=false; flash(SCRIPT.g3_change_ok,'good');
+    say(SCRIPT.g3_bonus_ask, ()=>{ if(S.scene==='g3bye') say(SCRIPT.g3_bonus_reply); });
+    render(); return; }
+  S.mistakes++; flash(SCRIPT.g3_change_bad); say(SCRIPT.g3_change_line); render();
+}
+
+/* 관문 3 — 작별 */
+function viewG3Bye(){
+  let h = msgBox() + bub('ajumma','🧑‍🍳','상인', SCRIPT.g3_bonus_reply);
+  h += `<div style="font-size:13px;color:var(--warm-600);margin:2px 0 12px">💰 ${won(S.paid)} 냈어요. 거스름돈 ${won(WALLET-S.paid)} 받았어요.</div>`;
+  h += narr(SCRIPT.g3_bye_narr);
+  h += `<div class="locked">🔒 인사를 잘못하면 문이 안 열려요.<div style="font-size:11.5px;margin-top:3px">The wrong goodbye won’t open the door.</div></div>`;
+  h += `<div class="opts">${SCRIPT.g3_bye_opts.map((o,i)=>optBtn(o,i,'chooseBye')).join('')}</div>`;
+  h += hintBox('g3bye');
+  return h;
+}
+function chooseBye(i){
+  const o = SCRIPT.g3_bye_opts[i];
+  if(o.ok){ S.scene='end'; say(o, ()=>{ if(S.scene==='end') say(SCRIPT.g3_farewell); }); render(); return; }
+  S.mistakes++; flash(o.reply); say(o); render();
+}
+
+/* 엔딩 */
+function viewEnd(){
+  const secs = Math.floor((Date.now()-S.started)/1000);
+  const end = S.mistakes >= 3               ? SCRIPT.end_awk
+            : (S.mistakes <= 1 && S.hints===0) ? SCRIPT.end_best
+            :                                    SCRIPT.end_mid;
+  return `<div class="center">
+    ${merchant(SCRIPT.g3_farewell)}
+    <div class="big-emoji" style="margin-top:14px">${end.emoji}</div>
+    <h1 style="font-size:32px">${esc(end.ko)}</h1>
+    <div class="sub">${esc(end.en)}</div>
+    <div class="card">${esc(end.msg.ko)}<div style="font-size:12px;color:var(--warm-600);margin-top:5px">${esc(end.msg.en)}</div></div>
+    <div class="score">
+      <div><b>${won(WALLET-S.paid).replace('원','')}</b><span>거스름돈 · change</span></div>
+      <div><b>${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}</b><span>걸린 시간 · time</span></div>
+      <div><b>${S.hints}</b><span>힌트 · hints</span></div>
+      <div><b>${S.mistakes}</b><span>실수 · slips</span></div>
+    </div>
+    <div class="btnrow" style="justify-content:center">
+      <button class="btn" onclick="restart()">다시 하기 · Play again</button>
+      <a class="btn ghost" style="text-decoration:none" href="nhs.html?ep=ep09">이 편 공부하기 →</a>
+    </div>
+  </div>`;
+}
+function restart(){
+  stopAudio();
+  Object.assign(S, { scene:'title', started:0, mistakes:0, hints:0, overordered:false,
+    paid:0, seen:{}, order:{ food:[], qty:{}, conn:null }, msg:null, hintOpen:false });
+  $('hudTime').textContent = '⏱ 0:00';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
