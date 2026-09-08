@@ -1182,7 +1182,7 @@ async function _doLoadEp(epId, level='L1'){
   // 모든 에피소드 로드가 결국 이 함수를 거치므로, 여기서 한 번 더 막으면 진입 경로에 상관없이 항상 막힘.
   const _lvN=parseInt(String(level).replace(/\D/g,''),10)||0;
   if(_lvN>NHS_OPEN_MAX){
-    alert('Level 3부터는 회원만 이용할 수 있어요.\n\n지금은 Level 1·2를 누구나 볼 수 있고, Level 3 이상은 실제 학생들과 함께 검증하는 중이라 잠겨 있어요.\n\nLevels 3+ are for members. Levels 1-2 are open to everyone — Level 3 and up are still being tested with real students.');
+    alert('Level 3부터는 회원만 이용할 수 있어요.\n\nLevel 0-2는 누구나 무료로 볼 수 있어요.\n\nLevels 3+ are for members. Levels 0-2 are free for everyone.');
     return;
   }
   // load-order guard: if the user taps two episodes quickly, only the LAST tap should ever render.
@@ -5195,7 +5195,7 @@ async function setLevel(btn){
   const _lv=btn.classList.contains('level-btn-basis')?'Basics':btn.textContent.trim();
   const _n = _lvNum(_lv);
   if(_n > NHS_OPEN_MAX){
-    alert('Level 3부터는 회원만 이용할 수 있어요.\n\n지금은 Level 1·2를 누구나 볼 수 있고, Level 3 이상은 실제 학생들과 함께 검증하는 중이라 잠겨 있어요.\n\nLevels 3+ are for members. Levels 1-2 are open to everyone — Level 3 and up are still being tested with real students.');
+    alert('Level 3부터는 회원만 이용할 수 있어요.\n\nLevel 0-2는 누구나 무료로 볼 수 있어요.\n\nLevels 3+ are for members. Levels 0-2 are free for everyone.');
     return;
   }
   document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
