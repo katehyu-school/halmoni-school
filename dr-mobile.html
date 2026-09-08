@@ -17,6 +17,7 @@
   --teal:#4ECDC4; --coral:#FF6B6B; --gold:#FFD93D;
   --kids-bg:#FFF8EC; --kids-card:#FFFFFF;
   --block-con:#FF6B6B; --block-vow:#43B97F; --block-bat:#4A90D9;
+  --cream:#FDF6EC; --cream-dk:#F6EBDC; --bronze:#17A394; --bronze-dk:#0E7F73; --ink:#153B52;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
@@ -32,44 +33,42 @@ body{font-family:'Noto Sans KR',sans-serif;background:#1a1d24;display:flex;justi
 .fade-in{animation:fadeIn .35s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 button{font-family:inherit;border:none;cursor:pointer;background:none}
-#scr-profile{background:linear-gradient(160deg,var(--navy1),var(--navy2),var(--navy3));
+#scr-profile{background:linear-gradient(160deg,var(--cream),var(--cream-dk));
   justify-content:center;align-items:center;gap:26px;padding:30px;text-align:center}
 #scr-profile .logo-txt-ko{font-family:'Gaegu',sans-serif;font-size:2rem;font-weight:700;color:var(--teal);letter-spacing:.02em;line-height:1}
-#scr-profile .logo-txt-en{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:4px}
-#scr-profile .sub{color:rgba(255,255,255,.55);font-size:.85rem;margin-top:-16px}
+#scr-profile .logo-txt-en{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(21,59,82,.72);margin-top:4px}
+#scr-profile .sub{color:rgba(21,59,82,.55);font-size:.85rem;margin-top:-16px}
 /* 🔑 로그인 (2026-09-05) */
 .dr-auth{width:100%;max-width:340px;margin:2px auto 0;text-align:center}
 .dr-auth button.dr-login-open{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(78,205,196,.45);
-  background:rgba(78,205,196,.08);color:var(--teal);font-family:'Noto Sans KR',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer}
+  background:rgba(78,205,196,.08);color:var(--bronze-dk);font-family:'Noto Sans KR',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer}
 .dr-auth button.dr-login-open:active{background:rgba(78,205,196,.18)}
-.dr-auth .dr-who{font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.7}
-.dr-auth .dr-who b{color:var(--teal)}
-.dr-auth .dr-out{background:none;border:none;color:rgba(255,255,255,.45);font-size:.72rem;text-decoration:underline;cursor:pointer;font-family:inherit;padding:2px 6px}
+.dr-auth .dr-who{font-size:.78rem;color:rgba(21,59,82,.75);line-height:1.7}
+.dr-auth .dr-who b{color:var(--bronze-dk)}
+.dr-auth .dr-out{background:none;border:none;color:rgba(21,59,82,.45);font-size:.72rem;text-decoration:underline;cursor:pointer;font-family:inherit;padding:2px 6px}
 .dr-login-back{position:fixed;inset:0;background:rgba(4,12,20,.72);backdrop-filter:blur(3px);z-index:80;display:none;align-items:center;justify-content:center;padding:22px}
 .dr-login-back.on{display:flex}
-.dr-login-sheet{width:100%;max-width:330px;background:#16242b;border:1px solid #2b3d45;border-radius:16px;padding:20px 18px;text-align:left}
-.dr-login-sheet h3{margin:0 0 6px;font-size:1rem;color:#eaf4f3}
-.dr-login-desc{margin:0 0 14px;font-size:.74rem;color:#9fbcb8;line-height:1.7}
-.dr-login-sheet label{display:block;font-size:.7rem;color:#8fb0ad;margin:0 0 4px}
-.dr-login-sheet input{width:100%;box-sizing:border-box;margin-bottom:11px;padding:11px 12px;border:1.5px solid #2b3d45;
-  border-radius:10px;background:#0f1b21;color:#eaf4f3;font-size:.95rem;font-family:inherit}
+.dr-login-sheet{width:100%;max-width:330px;background:#fff;border:1px solid rgba(21,59,82,.12);border-radius:16px;padding:20px 18px;text-align:left}
+.dr-login-sheet h3{margin:0 0 6px;font-size:1rem;color:#153B52}
+.dr-login-desc{margin:0 0 14px;font-size:.74rem;color:rgba(21,59,82,.65);line-height:1.7}
+.dr-login-sheet label{display:block;font-size:.7rem;color:rgba(21,59,82,.55);margin:0 0 4px}
+.dr-login-sheet input{width:100%;box-sizing:border-box;margin-bottom:11px;padding:11px 12px;border:1.5px solid rgba(21,59,82,.18);
+  border-radius:10px;background:#FDF6EC;color:#153B52;font-size:.95rem;font-family:inherit}
 .dr-login-note{background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:9px;
-  padding:9px 11px;margin-bottom:10px;font-size:.75rem;color:#bfe9e4;line-height:1.6}
-.dr-login-err{min-height:17px;font-size:.72rem;color:#ff9d9d;margin-bottom:6px}
-.dr-login-cancel{width:100%;margin-top:8px;background:none;border:none;color:#7e9b97;font-size:.76rem;cursor:pointer;font-family:inherit;padding:6px}
-.dr-login-foot{margin-top:10px;font-size:.7rem;color:#7e9b97;text-align:center}
-.dr-login-foot a{color:var(--teal);text-decoration:none}
+  padding:9px 11px;margin-bottom:10px;font-size:.75rem;color:#0E7F73;line-height:1.6}
+.dr-login-err{min-height:17px;font-size:.72rem;color:#DC4444;margin-bottom:6px}
+.dr-login-cancel{width:100%;margin-top:8px;background:none;border:none;color:rgba(21,59,82,.5);font-size:.76rem;cursor:pointer;font-family:inherit;padding:6px}
+.dr-login-foot{margin-top:10px;font-size:.7rem;color:rgba(21,59,82,.55);text-align:center}
+.dr-login-foot a{color:var(--bronze-dk);text-decoration:none}
 .prof-card{width:100%;max-width:300px;border-radius:22px;padding:22px;display:flex;align-items:center;gap:16px;
-  text-align:left;transition:transform .15s;border:2px solid transparent}
+  text-align:left;transition:transform .15s;background:#fff;border:1px solid rgba(21,59,82,.10);box-shadow:0 10px 30px rgba(21,59,82,.08)}
 .prof-card:active{transform:scale(.97)}
-.prof-kids{background:linear-gradient(135deg,#fff,#fff8e2);border-color:var(--gold)}
-.prof-hq{background:rgba(255,255,255,.06);border-color:var(--teal)}
 .prof-card h2{font-size:1.15rem}
 .prof-kids h2{color:#0a2540}
-.prof-hq h2{color:#fff}
+.prof-hq h2{color:#153B52}
 .prof-card p{font-size:.78rem;margin-top:3px}
 .prof-kids p{color:#8a7340}
-.prof-hq p{color:rgba(255,255,255,.6)}
+.prof-hq p{color:rgba(21,59,82,.62)}
 .topbar{display:flex;align-items:center;gap:10px;padding:14px 18px 10px;position:sticky;top:0;z-index:5}
 .topbar .back{font-size:1.3rem;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .topbar h1{font-size:1.05rem;flex:1}
