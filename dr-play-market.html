@@ -243,6 +243,7 @@ const SCRIPT = {
   subtitle   : { ko:'할머니가 사려는 걸 대신 주문해 보세요.', en:'Order what Grandma wants to buy, on her behalf.' },
   grandmaNote: { ko:'딸기 한 박스, 사과 여섯 개.\n거스름돈 잘 챙기고! — 할머니',
                  en:'One box of strawberries, six apples.\nDon’t forget the change! — Grandma' },
+  /* 초급 학습자 대상 안내문 — 한국어 대신 영어로 표시(아래 렌더링에서 .en만 사용) */
   howto      : { ko:'막히면 옆에 있는 할머니에게 물어보세요.', en:'Stuck? Ask Grandma, standing next to you.' },
 
   /* ── 관문 ① 인사하기 ──────────────────────────────── */
@@ -318,7 +319,7 @@ const SCRIPT = {
     { ko:'잘 가요.',      en:'Bye! (casual)', ok:false,
       reply:{ ko:'할머니가 눈을 흘긴다. 어른한테 그렇게 말하면 안 되지.', en:'Grandma shoots you a look. You can’t say that to an elder.' } }
   ],
-  g3_farewell: { ko:'안녕히 가세요! 또 오세요~', en:'Goodbye! Come again~' },
+  g3_farewell: { ko:'안녕히 가세요! 또 오세요.', en:'Goodbye! Come again.' },
 
   /* ── 엔딩 ─────────────────────────────────────────── */
   end_best  : { emoji:'🏆', ko:'단골 손님 엔딩',   en:'Regular Customer Ending',
@@ -442,7 +443,8 @@ function speakTTS(text, tok, then){
   let fired = false;
   const done = ()=>{ if(fired || tok!==playToken) return; fired = true; if(then) then(); };
   try{
-    const u = new SpeechSynthesisUtterance(String(text).replace(/\n/g,' '));
+    // 물결표(~)는 오디오 파일이 없을 때만 쓰는 브라우저 TTS가 "물결표시"라고 그대로 읽어버려서 미리 제거
+    const u = new SpeechSynthesisUtterance(String(text).replace(/\n/g,' ').replace(/~/g,''));
     u.lang = 'ko-KR'; u.rate = 0.88;
     if(voiceKo) u.voice = voiceKo;
     u.onend = done; u.onerror = done;
@@ -553,7 +555,7 @@ function viewTitle(){
     <div class="card">
       <h3>🎯 ${esc(SCRIPT.subtitle.ko)}</h3>
       ${esc(SCRIPT.subtitle.en)}<br>
-      <span style="color:var(--warm-600);font-size:13px">💰 ${won(WALLET)} · 👵 ${esc(SCRIPT.howto.ko)}</span>
+      <span style="color:var(--warm-600);font-size:13px">💰 ${won(WALLET)} · 👵 ${esc(SCRIPT.howto.en)}</span>
     </div>
     <button class="btn" onclick="start()">시작하기 · Start</button>
   </div>`;
