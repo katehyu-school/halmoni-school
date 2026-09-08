@@ -70,8 +70,6 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .prof-card p{font-size:.78rem;margin-top:3px}
 .prof-kids p{color:#8a7340}
 .prof-hq p{color:rgba(255,255,255,.6)}
-.proto-badge{position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:.62rem;padding:4px 12px;border-radius:99px;letter-spacing:1px}
 .topbar{display:flex;align-items:center;gap:10px;padding:14px 18px 10px;position:sticky;top:0;z-index:5}
 .topbar .back{font-size:1.3rem;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .topbar h1{font-size:1.05rem;flex:1}
@@ -352,7 +350,6 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 
 <!-- PROFILE SELECT -->
 <section class="screen on" id="scr-profile">
-  <div class="proto-badge">PROTOTYPE v0.2</div>
   <div>
     <svg width="96" height="78" viewBox="147 46 146 118" xmlns="http://www.w3.org/2000/svg"><path d="M153 98 Q158 93 166 97 L220 52 L274 97 Q281 93 287 98" fill="none" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/><path d="M153 98 L220 52 L287 98" fill="#4ECDC4" opacity="0.07"/><line x1="156" y1="100" x2="284" y2="100" stroke="#4ECDC4" stroke-width="1.2" opacity="0.5"/><line x1="180" y1="100" x2="180" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="220" y1="100" x2="220" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><line x1="260" y1="100" x2="260" y2="108" stroke="#4ECDC4" stroke-width="1" opacity="0.3"/><rect x="181" y="117" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><rect x="181" y="117" width="2.8" height="36" rx="1.4" fill="#4ECDC4"/><rect x="181" y="150.2" width="26" height="2.8" rx="1.4" fill="#4ECDC4"/><line x1="219" y1="114" x2="219" y2="158" stroke="#4ECDC4" stroke-width="0.6" opacity="0.2"/><circle cx="243" cy="119" r="3.6" fill="#FF6B6B"/><rect x="228" y="128" width="30" height="2.8" rx="1.4" fill="#FF6B6B"/><line x1="243" y1="132" x2="232" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/><line x1="243" y1="132" x2="254" y2="152" stroke="#FF6B6B" stroke-width="2.8" stroke-linecap="round"/></svg>
     <div class="logo-txt-ko" style="margin-top:8px">도란채</div>
@@ -364,7 +361,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     <span><h2>Doranchae Kids</h2><p>게임으로 배워요! · Play &amp; Learn</p></span>
   </button>
   <button class="prof-card prof-hq" onclick="enterHQ()">
-    <svg width="46" height="46" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="#4ECDC4" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg>
+    <svg width="46" height="46" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><circle cx="29" cy="29" r="25" fill="#4ECDC4" stroke="#2da89f" stroke-width="1.8"/><circle cx="29" cy="29" r="19" fill="none" stroke="white" stroke-width="0.6" opacity="0.35"/><path d="M10 18 A 25 25 0 0 1 48 18" fill="none" stroke="white" stroke-width="0.8" opacity="0.3"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg>
     <span><h2>Doranchae</h2><p id="profHqSub">복습 · 프리뷰 · Daily Quest</p></span>
   </button>
   <div id="drAuthBox" class="dr-auth"></div>

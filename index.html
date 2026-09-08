@@ -642,7 +642,7 @@ body::before {
 }
 .dn-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex:0 0 auto}
 .dn-brand svg{flex:none;display:block}
-.dn-brand-ko{font-size:20px;font-weight:800;color:#4ECDC4;letter-spacing:.02em;line-height:1}
+.dn-brand-ko{font-family:'Gaegu',sans-serif;font-size:23px;font-weight:700;color:#4ECDC4;letter-spacing:.01em;line-height:1}
 .dn-brand-en{font-size:10.5px;letter-spacing:.22em;color:rgba(180,215,235,.55);
   text-transform:uppercase;padding-left:2px;line-height:1}
 .dn-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
@@ -661,10 +661,16 @@ body::before {
 .site-header .divider{margin:10px auto 0 !important}
 .hero-text{margin-top:26px !important}
 .dn-badge{
-  display:inline-block; margin:0 auto 10px; padding:4px 14px; border-radius:20px;
+  display:inline-flex; align-items:center; gap:6px; margin:0 auto 13px; padding:6px 16px; border-radius:20px;
   font-size:10.5px; letter-spacing:.12em; font-weight:700; line-height:1.5;
   background:rgba(78,205,196,.10); border:1px solid rgba(78,205,196,.30); color:#7eddd7;
 }
+.dn-badge svg{ flex:none; }
+/* 히어로 배경의 작은 색 점 장식 (시안의 sc-if 데코 참고, 2026-09-08) */
+.hero-text{ position:relative; }
+.hero-dot{ position:absolute; border-radius:50%; pointer-events:none; }
+.hero-dot.a{ left:6%; top:-2px; width:10px; height:10px; background:var(--sun); }
+@media(max-width:640px){ .hero-dot{ display:none; } }
 .hero-tagline{font-size:clamp(25px,3.9vw,37px) !important;line-height:1.24 !important}
 .dn-sub{margin-top:8px !important;font-size:13px}
 .dn-stats{margin-top:18px}
@@ -785,7 +791,7 @@ body::before{ display:none !important; }
 /* 히어로 */
 .hero-tagline{ color:var(--navy) !important; font-family:inherit !important; font-style:normal !important; font-weight:800 !important; }
 .hero-tagline span{ color:var(--bronze) !important; font-style:normal !important; }
-.dn-sub{ color:rgba(21,59,82,.6) !important; }
+.dn-sub{ color:rgba(21,59,82,.72) !important; font-size:16px !important; font-weight:600 !important; margin-top:15px !important; }
 .dn-stats span{ background:rgba(23,163,148,.10) !important; border-color:rgba(23,163,148,.28) !important; color:var(--bronze-dk) !important; }
 
 /* 카드 — 흰 카드 + 부드러운 그림자 + 위쪽 색 띠 */
@@ -815,17 +821,24 @@ body::before{ display:none !important; }
 .track-icon svg path[stroke]{ stroke:#fff !important; }
 .track-icon svg circle[stroke]{ stroke:#fff !important; }
 .track-icon svg polygon{ fill:var(--sun) !important; }
+.track-card.kids .track-icon svg path[fill="rgba(255,255,255,0.18)"]{ fill:rgba(255,255,255,.32) !important; }
+.track-card.kids .track-icon svg path[fill="rgba(255,255,255,0.08)"]{ fill:rgba(255,255,255,.16) !important; }
+.track-card.kids .track-icon svg path[stroke]{ stroke-width:2.2 !important; }
 
-/* 버튼 — Kids=코랄, 도란채=틸 (따님 시안 그대로) */
+/* 버튼 — Kids=코랄, 도란채=틸. 눌리는 촉감(offset shadow + press) 추가 (2026-09-08) */
 .track-action-btn.primary{
   background:var(--bronze) !important; color:#fff !important; border:none !important;
-  box-shadow:0 4px 14px rgba(23,163,148,.28) !important;
+  box-shadow:0 4px 0 var(--bronze-dk) !important;
+  transform:translateY(0);
+  transition:transform .08s ease, box-shadow .08s ease, background .15s ease;
 }
-.track-action-btn.primary:hover{ background:var(--bronze-dk) !important; }
+.track-action-btn.primary:hover{ background:var(--bronze-dk) !important; transform:translateY(1px); }
+.track-action-btn.primary:active{ transform:translateY(4px); box-shadow:0 0 0 var(--bronze-dk) !important; }
 .track-card.kids .track-action-btn.primary{
-  background:var(--coral) !important; box-shadow:0 4px 14px rgba(239,114,89,.30) !important;
+  background:var(--coral) !important; box-shadow:0 4px 0 #C24A34 !important;
 }
 .track-card.kids .track-action-btn.primary:hover{ background:#DC5C43 !important; }
+.track-card.kids .track-action-btn.primary:active{ box-shadow:0 0 0 #C24A34 !important; }
 .track-action-sub{ color:rgba(255,255,255,.85) !important; }
 
 .dn-note{ color:rgba(21,59,82,.5) !important; }
@@ -873,8 +886,11 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
 }
 .pw-input::placeholder{ color:rgba(21,59,82,.38) !important; }
 .pw-input:focus{ border-color:var(--bronze) !important; background:#fff !important; }
-.enter-btn{ background:var(--bronze) !important; color:#fff !important; }
-.enter-btn:hover{ background:var(--bronze-dk) !important; }
+.enter-btn{ background:var(--bronze) !important; color:#fff !important;
+  box-shadow:0 4px 0 var(--bronze-dk) !important; transform:translateY(0);
+  transition:transform .08s ease, box-shadow .08s ease, background .15s ease; }
+.enter-btn:hover{ background:var(--bronze-dk) !important; transform:translateY(1px); }
+.enter-btn:active{ transform:translateY(4px) !important; box-shadow:0 0 0 var(--bronze-dk) !important; }
 .eye-btn{ color:rgba(21,59,82,.5) !important; }
 .error-msg{ color:#C9503A !important; }
 .login-cta{ background:var(--bronze) !important; color:#fff !important;
@@ -934,7 +950,8 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
   <div id="landingBox">
 
     <div class="hero-text">
-      <div class="dn-badge">한국어 온라인 스쿨 · Korean Language School</div>
+      <span class="hero-dot a" aria-hidden="true"></span>
+      <div class="dn-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"></path></svg>한국어 온라인 스쿨 · Korean Language School</div>
       <p class="hero-tagline">Learn Korean through <span>stories</span>,<br>not drills.</p>
       <p class="dn-sub">Two ways to start — same story world, paced for who's learning.</p>
     </div>
@@ -968,8 +985,7 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
         <div class="track-actions">
           <button class="track-action-btn primary" onclick="openLoginModal('kids')">🔑 Have an invite? Enter</button>
         </div>
-        <!-- 도란채 카드에는 버튼 아래 한 줄이 있어서, 여기에 같은 높이의 빈 자리를 둬야 좌우 버튼이 나란해집니다 -->
-        <div class="dn-note" aria-hidden="true">&nbsp;</div>
+        <div class="dn-note">Log in with the name &amp; PIN your teacher gave you.</div>
       </div>
       <div class="track-card hq">
         <div class="track-icon">
@@ -978,7 +994,7 @@ footer[data-site-footer] a:hover{ color:var(--bronze) !important; }
         <div class="track-age">For adults &amp; teens (14+)</div>
         <div class="track-name">Doranchae</div>
         <div class="track-desc">Follow one family through real scenes — markets, kitchens, campsites.</div>
-        <div class="track-facts">72 episodes · Levels 1–6 · Free through Level 2</div>
+        <div class="track-facts">72 episodes · Levels 0–6 · Free through Level 2</div>
         <div class="track-actions">
           <button class="track-action-btn primary" onclick="location.href='nhs.html?ep=ep01'">🌱 Start Learning Free</button>
         </div>
