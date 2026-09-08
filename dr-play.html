@@ -262,7 +262,7 @@ const SCRIPT = {
   ],
 
   /* ── 관문 ② 인사 + 주문 ───────────────────────────── */
-  g2_welcome : { ko:'어서 오세요!', en:'Welcome!', audio:'3어서+오세요_slide3.mp3' },
+  g2_welcome : { ko:'어서 오세요!', en:'Welcome!', audio:'3어서+오세요_slide3.mp3', vol:0.82 },
   g2_greet_opts: [
     { ko:'안녕하세요.',   en:'Hello.',       ok:true  },
     { ko:'어서 오세요.',  en:'Welcome.',     ok:false, reply:{ ko:'하하, 그건 내가 할 말인데?', en:'Haha — that’s my line!' } },
@@ -307,7 +307,7 @@ const SCRIPT = {
   /* 값은 메뉴판 기준 3,500 + 2,500×2 = 8,500원.
      ⚠️ mp3 파일명은 옛 금액(만오천) 그대로지만 2026-09-07에 「팔천오백 원이에요.」로 재녹음됨.
         관례대로 같은 이름에 덮어쓴 것이니 파일명만 보고 판단하지 말 것. */
-  g3_price   : { ko:'팔천오백 원이에요.', en:'That’ll be 8,500 won.', audio:'8만오천+원이에요_slide5.mp3' },
+  g3_price   : { ko:'팔천오백 원이에요.', en:'That’ll be 8,500 won.', audio:'8만오천+원이에요_slide5.mp3', vol:0.82 },
 
   g3_bye_narr: { ko:'계산을 마쳤다. 마지막으로 인사를 하고 나가자.', en:'Paid. One last thing — say goodbye and go.' },
   g3_bye_opts: [
@@ -317,7 +317,7 @@ const SCRIPT = {
     { ko:'잘 가요.',      en:'Bye! (casual)', ok:false,
       reply:{ ko:'아줌마의 눈이 동그래진다. 어른한테 할 말이 아니다.', en:'The ajumma’s eyes go wide — not something you say to an elder.' } }
   ],
-  g3_farewell: { ko:'잘 가요! 또 놀러 와요.', en:'Bye! Come visit again.', audio:'11잘+가요!+또+놀러+와요_slide6.mp3' },
+  g3_farewell: { ko:'잘 가요! 또 놀러 와요.', en:'Bye! Come visit again.', audio:'11잘+가요!+또+놀러+와요_slide6.mp3', vol:0.82 },
 
   /* ── 엔딩 ─────────────────────────────────────────── */
   /* 엔딩 조건: 🏆 실수 0~1 & 힌트 0 / 😅 그 사이 / 😳 실수 3회 이상 */
@@ -414,6 +414,7 @@ function say(line, then){
   const done = ()=>{ if(fired || my!==playToken) return; fired = true; if(then) then(); };
   if(line.audio){
     const a = new Audio(TTS + encodeURIComponent(line.audio));
+    a.volume = line.vol || 1;  // 아줌마 목소리 톤이 높다는 피드백 — 볼륨만 살짝 낮춤(피치는 mp3라 코드로는 못 바꿈)
     curAudio = a;
     a.onended = done;
     a.onerror = ()=>{ if(my===playToken) speakTTS(line.ko, my, then); };

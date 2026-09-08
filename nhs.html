@@ -1374,7 +1374,8 @@ function buildVideoScript(){
     const tag=(line.speech_type&&!_isNarratorTag(line.speech_type))?`<span class="caption-tag ${_isBanmalTag(line.speech_type)?'tag-banmal':'tag-jondaemal'}">${esc(line.speech_type)}</span>`:'';
     const _vShadEsc=line.text.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
     const _vAudioEsc=(line.audio||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
-    const ttsBtn=`<button class="video-script-tts" data-tts="${_vShadEsc}" data-audio="${_vAudioEsc}" onclick="scriptSpeak(this.dataset.tts,this.dataset.audio||undefined)">🔊 듣기</button>`;
+    const _vSpkEsc=(line.speaker||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    const ttsBtn=`<button class="video-script-tts" data-tts="${_vShadEsc}" data-audio="${_vAudioEsc}" data-speaker="${_vSpkEsc}" onclick="scriptSpeak(this.dataset.tts,this.dataset.audio||undefined,this.dataset.speaker||undefined)">🔊 듣기</button>`;
     const shadBtn=`<button class="video-script-tts shad-strip-btn" id="shad-v${i}" data-target="${_vShadEsc}" data-idx="v${i}" onclick="nhsShadLine(event,this.dataset.target,this.dataset.idx)" style="margin-left:6px;" title="따라 말하기">🎤</button>`;
     return `<div class="video-script-line">
       <div class="caption-avatar" style="background:${esc(ch.color||'#E0E0E0')}">${esc(ch.emoji||'💬')}</div>
@@ -1466,7 +1467,7 @@ function jumpScene(i){
 
 function speakCurrent(){
   if(!DATA)return;
-  const line=DATA.script[sceneIdx];scriptSpeak(line.text,line.audio);
+  const line=DATA.script[sceneIdx];scriptSpeak(line.text,line.audio,line.speaker);
 }
 
 function randomScene(){
@@ -1513,22 +1514,28 @@ function updateStripHighlight(){
 }
 
 // ── AUDIO ──────────────────────────────────────────────
+// 목소리별 볼륨 보정(2026-09-08) — 녹음된 mp3는 피치(톤)를 코드로 바꿀 수 없어서
+// (Typecast 쪽에서 다시 뽑아야 함), 대신 유독 거슬린다고 하신 목소리만 볼륨을 살짝 낮춥니다.
+// 새로 거슬리는 목소리가 나오면 캐릭터 id/이름을 여기 한 줄만 추가하면 됩니다.
+const SPEAKER_VOL = { '상인': 0.82, 'ajumma': 0.82 };  // 포장마차 아줌마(ep06)·재래시장 상인(ep09) — 같은 목소리, 톤이 높다는 피드백
 // 범용 재생 — 한글 자모 연습·필수 낱말카드 등 Script/영상 탭 밖에서도 두루 쓰임. 항상 기본 속도(0.88) 고정, _rlSpeed 영향 없음.
-function speak(text,audioSrc){
+function speak(text,audioSrc,speaker){
   stopTTS(); // stop any recorded audio AND any synthesized voice already playing, so old/new never overlap
   if(audioSrc){
     _audio=new Audio(audioSrc);
+    _audio.volume=SPEAKER_VOL[speaker]||1;
     _audio.play().catch(()=>speakTTS(text));
   }else{
     speakTTS(text);
   }
 }
 // Script/영상 탭 전용 재생 — speak()와 동일하지만 _rlSpeed를 반영함 (해당 탭의 🔊·Auto-play·Role-play가 전부 이 속도를 공유)
-function scriptSpeak(text,audioSrc){
+function scriptSpeak(text,audioSrc,speaker){
   stopTTS(); // stop any recorded audio AND any synthesized voice already playing, so old/new never overlap
   if(audioSrc){
     _audio=new Audio(audioSrc);
     _audio.playbackRate=_rlSpeed;
+    _audio.volume=SPEAKER_VOL[speaker]||1;
     _audio.play().catch(()=>speakTTS(text,0.88*_rlSpeed));
   }else{
     speakTTS(text,0.88*_rlSpeed);
@@ -1567,6 +1574,7 @@ function autoPlayStep(){
     if(_audio){_audio.pause();_audio=null;}
     _audio=new Audio(line.audio);
     _audio.playbackRate=_rlSpeed;
+    _audio.volume=SPEAKER_VOL[line.speaker]||1;
     _audio.onended=onEnd;
     _audio.play().catch(()=>_apTTS(line.text,onEnd));
   }else{
