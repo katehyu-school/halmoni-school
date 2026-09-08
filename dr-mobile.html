@@ -259,12 +259,12 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .fcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
 .fcard.flip .fcard-inner{transform:rotateY(180deg)}
 .fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.ffront{background:linear-gradient(135deg,#11405c,#0d3350);border:1px solid rgba(78,205,196,.3)}
-.ffront .w{font-size:1.7rem;font-weight:900;text-align:center;padding:0 14px;color:#eaf4f3}
-.ffront .hint{font-size:.68rem;color:rgba(234,244,243,.55)}
-.fback{background:linear-gradient(135deg,#1f5a54,#17443f);border:1px solid #2da89f;transform:rotateY(180deg)}
-.fback .m{font-size:1.1rem;font-weight:700;text-align:center;padding:0 16px;color:#eafaf7}
-.fback .ex{font-size:.74rem;color:#bdeae6;text-align:center;padding:0 18px;line-height:1.5}
+.ffront{background:linear-gradient(135deg,var(--cream),var(--cream-dk));border:1px solid rgba(23,163,148,.25)}
+.ffront .w{font-size:1.7rem;font-weight:900;text-align:center;padding:0 14px;color:#153B52}
+.ffront .hint{font-size:.68rem;color:rgba(21,59,82,.5)}
+.fback{background:linear-gradient(135deg,#EAF6F4,#DCEFEC);border:1px solid #2da89f;transform:rotateY(180deg)}
+.fback .m{font-size:1.1rem;font-weight:700;text-align:center;padding:0 16px;color:#153B52}
+.fback .ex{font-size:.74rem;color:rgba(21,59,82,.6);text-align:center;padding:0 18px;line-height:1.5}
 .srs-btns{display:flex;gap:10px}
 .srs-btns button{flex:1;padding:13px;border-radius:13px;font-weight:700;font-size:.88rem}
 .srs-no{background:#7a3b3b;border:1.5px solid #7a3b3b;color:#fff}
@@ -2199,7 +2199,7 @@ function fRender(){
     b.innerHTML=`<div style="text-align:center;font-size:.72rem;color:rgba(21,59,82,.45)">🔁 단어 복습 ${fCard+1} / ${EP.vocab.length} — 카드를 탭해서 뒤집어 보세요</div>
       <div class="fcard" id="fcard" onclick="this.classList.toggle('flip')">
         <div class="fcard-inner">
-          <div class="fface ffront">${c.recycled?'<div style="position:absolute;top:10px;right:12px;font-size:.72rem;font-weight:700;background:rgba(78,205,196,.18);color:#4ecdc4;border-radius:20px;padding:3px 9px" title="이전 편에서 배운 어휘예요">🔁 복습</div>':''}<div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
+          <div class="fface ffront">${c.recycled?'<div style="position:absolute;top:10px;right:12px;font-size:.72rem;font-weight:700;background:rgba(23,163,148,.12);color:var(--bronze-dk);border-radius:20px;padding:3px 9px" title="이전 편에서 배운 어휘예요">🔁 복습</div>':''}<div style="font-size:2rem">${c.emoji}</div><div class="w">${c.w}</div><div class="hint">탭해서 뜻 보기 · <button class="tts-sm" onclick="event.stopPropagation();speak('${c.w.replace(/'/g,"\\'")}')">🔊</button></div></div>
           <div class="fface fback"><div class="m">${c.m}</div><div class="ex">${c.ro}</div></div>
         </div>
       </div>
@@ -3486,10 +3486,10 @@ async function shareDownload(){
   const g=ctx.createLinearGradient(0,0,0,cv.height);
   g.addColorStop(0,'#0d3350');g.addColorStop(1,'#061525');
   ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
-  ctx.fillStyle='rgba(78,205,196,.12)';
+  ctx.fillStyle='rgba(78,205,196,.22)';
   ctx.beginPath();ctx.arc(cv.width/2,260,260,0,Math.PI*2);ctx.fill();
   ctx.textAlign='center';
-  ctx.font='160px sans-serif';
+  ctx.font='160px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji","Segoe UI Symbol",sans-serif';
   ctx.fillText(d.emoji,cv.width/2,330);
   ctx.fillStyle='#4ECDC4';ctx.font="700 44px 'Gaegu',sans-serif";
   ctx.fillText('도란채',cv.width/2,430);
