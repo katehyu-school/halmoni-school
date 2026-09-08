@@ -177,7 +177,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .dq-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(21,59,82,.25);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
 .dq-item.done .dq-check{background:var(--teal);border-color:var(--teal);color:#06303a}
 .dq-item.done span{color:rgba(21,59,82,.4);text-decoration:line-through}
-.dq-xp{margin-left:auto;font-size:.68rem;color:#B8860B;font-weight:700}
+.dq-xp{margin-left:auto;font-size:.68rem;color:#8B6508;font-weight:700}
 /* episode list */
 .ep-item{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:13px 15px;margin-bottom:10px;color:#eaf4f3;transition:transform .12s}
@@ -642,28 +642,28 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
     </div>
     <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="srsStart()">
       <span style="font-size:1.6rem">🔁</span>
-      <span><b style="font-size:.92rem">오늘의 단어 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="srsHomeSub">불러오는 중…</span></span>
-      <span style="margin-left:auto;color:var(--teal);font-weight:900" id="srsHomeCnt">→</span>
+      <span><b style="font-size:.92rem">오늘의 단어 복습 <span style="color:#8B6508;font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:rgba(21,59,82,.55)" id="srsHomeSub">불러오는 중…</span></span>
+      <span style="margin-left:auto;color:var(--bronze-dk);font-weight:900" id="srsHomeCnt">→</span>
     </button>
     <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="gramStart()">
       <span style="font-size:1.6rem">🙏</span>
-      <span><b style="font-size:.92rem">오늘의 경어법 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="gramHomeSub">불러오는 중…</span></span>
-      <span style="margin-left:auto;color:var(--teal);font-weight:900" id="gramHomeCnt">→</span>
+      <span><b style="font-size:.92rem">오늘의 경어법 복습 <span style="color:#8B6508;font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:rgba(21,59,82,.55)" id="gramHomeSub">불러오는 중…</span></span>
+      <span style="margin-left:auto;color:var(--bronze-dk);font-weight:900" id="gramHomeCnt">→</span>
     </button>
     <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
       <span style="font-size:1.6rem">🎭</span>
-      <span><b style="font-size:.92rem">캐릭터 롤플레이 Roleplay <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="rpCardSub">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
-      <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
+      <span><b style="font-size:.92rem">캐릭터 롤플레이 Roleplay <span style="color:#8B6508;font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:rgba(21,59,82,.55)" id="rpCardSub">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
+      <span style="margin-left:auto;color:var(--bronze-dk);font-weight:900">→</span>
     </button>
     <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="kkOpen()">
       <span style="font-size:1.6rem">💬</span>
-      <span><b style="font-size:.92rem">Kakao Talk Simulation <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="kkCardSub">L1 ep05 · 친구와 약속 잡기 — 반말 연습</span></span>
-      <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
+      <span><b style="font-size:.92rem">Kakao Talk Simulation <span style="color:#8B6508;font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:rgba(21,59,82,.55)" id="kkCardSub">L1 ep05 · 친구와 약속 잡기 — 반말 연습</span></span>
+      <span style="margin-left:auto;color:var(--bronze-dk);font-weight:900">→</span>
     </button>
     <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="showEpList()">
       <span style="font-size:1.6rem">📚</span>
-      <span><b style="font-size:.92rem">전체 에피소드 All Episodes</b><br><span style="font-size:.72rem;color:#8fb0ad" id="allEpsSub">Level 1~6 · 전 레벨 복습/프리뷰</span></span>
-      <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
+      <span><b style="font-size:.92rem">전체 에피소드 All Episodes</b><br><span style="font-size:.72rem;color:rgba(21,59,82,.55)" id="allEpsSub">Level 1~6 · 전 레벨 복습/프리뷰</span></span>
+      <span style="margin-left:auto;color:var(--bronze-dk);font-weight:900">→</span>
     </button>
     <div class="web-sync">🔄 <b>웹 연동</b> — PC에서 본 에피소드 진도가 자동으로 동기화됩니다 (다음 단계: Supabase 연동)</div>
     <button class="card ob-link" onclick="show('scr-hq-onboard')">❓ 이용 방법 다시 보기</button>
@@ -1205,7 +1205,7 @@ function srsHomeUpdate(){
   const n=_sDueCount();
   if(sub)sub.textContent=n?`오늘 복습할 단어 ${n}개 — 전 레벨에서 자동으로 골라 줘요`:'오늘 복습할 단어가 없어요 · 새 단어를 배워 보세요';
   if(cnt)cnt.textContent=n?String(n):'→';
-  if(cnt)cnt.style.color=n?'var(--gold)':'var(--teal)';
+  if(cnt)cnt.style.color=n?'#8B6508':'var(--bronze-dk)';
 }
 
 /* ═══════════════════════════════════════════════════
@@ -1314,7 +1314,7 @@ function gramHomeUpdate(){
   const n=_gDueCount();
   if(sub)sub.textContent=n?`오늘 복습할 경어법 카드 ${n}개 — L1~L6 전체에서 골라 줘요`:'오늘 복습할 카드가 없어요 · 새 카드를 배워 보세요';
   if(cnt)cnt.textContent=n?String(n):'→';
-  if(cnt)cnt.style.color=n?'var(--gold)':'var(--teal)';
+  if(cnt)cnt.style.color=n?'#8B6508':'var(--bronze-dk)';
 }
 
 /* ───────── KIDS: 진행도 + 별 (localStorage) ───────── */
