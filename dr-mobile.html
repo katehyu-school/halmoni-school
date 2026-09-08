@@ -147,44 +147,56 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .slot.base-result{width:auto;min-width:88px;padding:0 14px;font-size:2.2rem}
 .cf{position:fixed;top:-12px;font-size:1.3rem;z-index:99;animation:cfall linear forwards;pointer-events:none}
 @keyframes cfall{to{transform:translateY(110vh) rotate(720deg)}}
-.hq{background:linear-gradient(160deg,var(--navy1),var(--navy2) 45%,var(--navy3));color:#eaf4f3}
-.hq .topbar{background:rgba(6,21,37,.85);backdrop-filter:blur(8px)}
-.hq .topbar .back{background:rgba(255,255,255,.08);color:#fff}
-.hq .bottomnav{background:rgba(6,21,37,.92);backdrop-filter:blur(8px)}
-.hq .bn-item{color:#9fb6c9}.hq .bn-item.on{color:var(--teal)}
+.hq{background:linear-gradient(160deg,var(--cream),var(--cream-dk) 45%,var(--cream-dk));color:#153B52}
+.hq .topbar{background:rgba(253,246,236,.85);backdrop-filter:blur(8px)}
+.hq .topbar .back{background:rgba(21,59,82,.08);color:#153B52}
+.hq .bottomnav{background:rgba(253,246,236,.92);backdrop-filter:blur(8px)}
+.hq .bn-item{color:rgba(21,59,82,.55)}.hq .bn-item.on{color:var(--bronze-dk)}
 .hq-brand{font-family:Impact,'Arial Black',sans-serif;letter-spacing:1.5px;color:var(--teal)}
 .hq-pad{padding:0 18px 24px;display:flex;flex-direction:column;gap:14px}
 .stat-row{display:flex;gap:10px}
 .stat{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(78,205,196,.25);border-radius:16px;padding:12px;text-align:center}
 .stat .v{font-size:1.3rem;font-weight:900;color:var(--teal)}
 .stat .k{font-size:.66rem;color:#9fb6c9;margin-top:2px}
+.hq .stat{background:#fff;border:1px solid rgba(23,163,148,.20);box-shadow:0 6px 16px rgba(21,59,82,.05)}
+.hq .stat .v{color:var(--bronze-dk)}
+.hq .stat .k{color:rgba(21,59,82,.55)}
 .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:16px}
 .card h3{font-size:.92rem;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.hq .card{background:#fff;border:1px solid rgba(21,59,82,.10);box-shadow:0 6px 20px rgba(21,59,82,.06)}
 .cont-card{background:linear-gradient(135deg,rgba(78,205,196,.18),rgba(78,205,196,.05));border-color:rgba(78,205,196,.4)}
+.hq .cont-card{background:linear-gradient(135deg,rgba(23,163,148,.14),rgba(23,163,148,.04));border-color:rgba(23,163,148,.35)}
 .cont-card .ep-tag{font-size:.64rem;background:var(--teal);color:#06303a;font-weight:700;padding:3px 9px;border-radius:99px}
 .cont-card h2{font-size:1.15rem;margin:8px 0 4px}
 .cont-card p{font-size:.78rem;color:#a8c4c1}
+.hq .cont-card p{color:rgba(21,59,82,.65)}
 .go-btn{margin-top:12px;width:100%;background:var(--teal);color:#06303a;font-weight:900;font-size:.95rem;padding:13px;border-radius:14px}
 .go-btn:active{opacity:.85}
-.dq-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82rem}
+.dq-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(21,59,82,.08);font-size:.82rem}
 .dq-item:last-child{border:none}
-.dq-check{width:22px;height:22px;border-radius:50%;border:2px solid #51707f;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
+.dq-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(21,59,82,.25);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
 .dq-item.done .dq-check{background:var(--teal);border-color:var(--teal);color:#06303a}
-.dq-item.done span{color:#7e98a5;text-decoration:line-through}
-.dq-xp{margin-left:auto;font-size:.68rem;color:var(--gold);font-weight:700}
+.dq-item.done span{color:rgba(21,59,82,.4);text-decoration:line-through}
+.dq-xp{margin-left:auto;font-size:.68rem;color:#B8860B;font-weight:700}
 /* episode list */
 .ep-item{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:13px 15px;margin-bottom:10px;color:#eaf4f3;transition:transform .12s}
+.hq .ep-item{background:#fff;border:1px solid rgba(21,59,82,.10);color:#153B52;box-shadow:0 6px 16px rgba(21,59,82,.05)}
 .ep-item:active{transform:scale(.98)}
 .ep-item .ep-no{width:44px;height:44px;border-radius:13px;background:rgba(78,205,196,.14);border:1px solid rgba(78,205,196,.3);
   display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
 .ep-item .ep-no b{font-size:.78rem;color:var(--teal)}
+.hq .ep-item .ep-no{background:rgba(23,163,148,.12);border:1px solid rgba(23,163,148,.3)}
+.hq .ep-item .ep-no b{color:var(--bronze-dk)}
 .ep-item .ep-no span{font-size:1rem}
 .ep-item .ep-ti{font-size:.9rem;font-weight:700}
 .ep-item .ep-ti-en{font-size:.72rem;color:#8fb0ad;margin-top:1px}
 .ep-item .ep-sub{font-size:.68rem;color:#8fb0ad;margin-top:2px}
+.hq .ep-item .ep-ti-en,.hq .ep-item .ep-sub{color:rgba(21,59,82,.5)}
 .cont-card .ti-en{font-size:.78rem;color:#8fb0ad;margin:-2px 0 6px;font-weight:400}
+.hq .cont-card .ti-en{color:rgba(21,59,82,.5)}
 .ep-item .arr{margin-left:auto;color:var(--teal);font-weight:900}
+.hq .ep-item .arr{color:var(--bronze-dk)}
 .stepper{display:flex;justify-content:space-between;padding:14px 26px 4px;position:relative}
 .stepper::before{content:'';position:absolute;left:48px;right:48px;top:29px;height:3px;background:rgba(255,255,255,.12)}
 .step{display:flex;flex-direction:column;align-items:center;gap:5px;z-index:2;font-size:.6rem;color:#7e98a5}
@@ -286,15 +298,15 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 .done-banner .big{font-size:3rem}
 .done-banner h2{color:var(--teal)}
 .done-banner p{font-size:.8rem;color:#9fb6c9;line-height:1.6}
-.web-sync{font-size:.68rem;color:#7e98a5;text-align:center;padding:4px 24px;line-height:1.5}
-.web-sync b{color:var(--teal)}
+.web-sync{font-size:.68rem;color:rgba(21,59,82,.5);text-align:center;padding:4px 24px;line-height:1.5}
+.web-sync b{color:var(--bronze-dk)}
 .loading-ep{text-align:center;padding:50px 20px;color:#9fb6c9;font-size:.85rem}
 .ob-step{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .ob-step:last-child{border:none}
 .ob-ico{font-size:1.4rem;width:34px;text-align:center;flex-shrink:0}
 .ob-step b{font-size:.88rem}
 .ob-d{font-size:.74rem;color:#8fb0ad;margin-top:2px;line-height:1.5}
-.ob-link{text-align:center;color:var(--teal);font-size:.78rem;font-weight:700;padding:12px}
+.ob-link{text-align:center;color:var(--bronze-dk);font-size:.78rem;font-weight:700;padding:12px}
 .rp-row{display:flex;gap:8px;margin-bottom:10px;align-items:flex-end}
 .rp-row.user{flex-direction:row-reverse}
 .rp-av{font-size:1.6rem;flex-shrink:0}
@@ -575,7 +587,7 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
 <section class="screen hq" id="scr-hq-home">
   <div class="topbar">
     <button class="back" onclick="show('scr-profile')">←</button>
-    <h1 style="display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="none" stroke="#4ECDC4" stroke-width="2.2"/><circle cx="29" cy="29" r="19" fill="none" stroke="#4ECDC4" stroke-width="0.6" opacity="0.4"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg><span id="hqHomeTitle">나의 학습</span></h1>
+    <h1 style="display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg"><circle cx="29" cy="29" r="25" fill="#4ECDC4" stroke="#2da89f" stroke-width="1.8"/><circle cx="29" cy="29" r="19" fill="none" stroke="white" stroke-width="0.6" opacity="0.35"/><text x="29" y="36" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="22" fill="white" letter-spacing="2">DR</text></svg><span id="hqHomeTitle">나의 학습</span></h1>
     <span style="font-size:1.4rem">🦊</span>
   </div>
   <div class="hq-pad">
@@ -592,29 +604,29 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <button class="go-btn" id="contBtn" onclick="openEp(1)">▶ 5분 복습 시작 Start Review</button>
     </div>
     <details class="card" style="padding:13px 15px">
-      <summary style="cursor:pointer;font-size:.92rem;font-weight:800;color:#eaf4f3;list-style:none">🧭 혼자 공부하는 법 <span style="font-size:.7rem;color:#8fb0ad;font-weight:600">How to study on your own</span></summary>
-      <div style="margin-top:11px;font-size:.78rem;color:#9fbcb8;line-height:1.8">
-        <div style="background:#16242b;border-radius:10px;padding:10px 12px;margin-bottom:11px;color:var(--teal);font-weight:700">
+      <summary style="cursor:pointer;font-size:.92rem;font-weight:800;color:#153B52;list-style:none">🧭 혼자 공부하는 법 <span style="font-size:.7rem;color:rgba(21,59,82,.55);font-weight:600">How to study on your own</span></summary>
+      <div style="margin-top:11px;font-size:.78rem;color:rgba(21,59,82,.7);line-height:1.8">
+        <div style="background:rgba(23,163,148,.08);border-radius:10px;padding:10px 12px;margin-bottom:11px;color:var(--bronze-dk);font-weight:700">
           💡 웹은 <b>배우는 곳</b>, 폰은 <b>안 잊는 곳</b>.
-          <div style="font-size:.68rem;color:#8fb0ad;font-weight:500;font-style:italic;margin-top:2px">Learn on the web · Remember on your phone</div>
+          <div style="font-size:.68rem;color:rgba(21,59,82,.55);font-weight:500;font-style:italic;margin-top:2px">Learn on the web · Remember on your phone</div>
         </div>
-        <div style="font-weight:800;color:#c9dedb;margin-bottom:4px">📱 폰에서 하는 것 · On your phone</div>
+        <div style="font-weight:800;color:#153B52;margin-bottom:4px">📱 폰에서 하는 것 · On your phone</div>
         <div style="margin-bottom:10px">
           🗂️ <b>단어장</b> — 하루 5분, 이것만 해도 충분해요<br>
           🎭 <b>롤플레이</b> · 💬 <b>카톡</b> — 말하기 감각 유지<br>
-          <span style="color:#7e9b97;font-style:italic;font-size:.72rem">Vocabulary daily · Roleplay for speaking</span>
+          <span style="color:rgba(21,59,82,.5);font-style:italic;font-size:.72rem">Vocabulary daily · Roleplay for speaking</span>
         </div>
-        <div style="font-weight:800;color:#c9dedb;margin-bottom:4px">💻 웹에서 하는 것 · On the web</div>
+        <div style="font-weight:800;color:#153B52;margin-bottom:4px">💻 웹에서 하는 것 · On the web</div>
         <div style="margin-bottom:10px">
           새 에피소드(영상·어휘·문법·퀴즈), 레벨 테스트, 한글 배우기<br>
-          <span style="color:#7e9b97;font-style:italic;font-size:.72rem">New episodes, level tests, the alphabet</span>
+          <span style="color:rgba(21,59,82,.5);font-style:italic;font-size:.72rem">New episodes, level tests, the alphabet</span>
         </div>
-        <div style="background:#16242b;border-radius:10px;padding:10px 12px;font-size:.74rem">
-          📖 <b style="color:#c9dedb">전체 로드맵</b>은 웹에 있어요 —<br>
-          <b style="color:var(--teal)">🌱 Level 0 › 🧭 Roadmap</b><br>
-          <span style="color:#7e9b97">한글 입문부터 마감 테스트까지 순서대로 안내해요.</span>
+        <div style="background:rgba(23,163,148,.08);border-radius:10px;padding:10px 12px;font-size:.74rem">
+          📖 <b style="color:#153B52">전체 로드맵</b>은 웹에 있어요 —<br>
+          <b style="color:var(--bronze-dk)">🌱 Level 0 › 🧭 Roadmap</b><br>
+          <span style="color:rgba(21,59,82,.55)">한글 입문부터 마감 테스트까지 순서대로 안내해요.</span>
         </div>
-        <div style="margin-top:10px;font-size:.72rem;color:#7e9b97">
+        <div style="margin-top:10px;font-size:.72rem;color:rgba(21,59,82,.55)">
           💡 못 한 날이 있어도 그냥 이어서 하세요. <b>매일 5분이 주말 2시간보다 낫습니다.</b>
         </div>
       </div>
@@ -628,27 +640,27 @@ button{font-family:inherit;border:none;cursor:pointer;background:none}
       <div class="dq-item" id="dq5"><span class="dq-check"></span><span>캐릭터 롤플레이 (Roleplay)</span><span class="dq-xp">+20 XP</span></div>
       <div class="dq-item" id="dq6"><span class="dq-check"></span><span>Kakao Talk Simulation</span><span class="dq-xp">+15 XP</span></div>
     </div>
-    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="srsStart()">
+    <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="srsStart()">
       <span style="font-size:1.6rem">🔁</span>
       <span><b style="font-size:.92rem">오늘의 단어 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="srsHomeSub">불러오는 중…</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900" id="srsHomeCnt">→</span>
     </button>
-    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="gramStart()">
+    <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="gramStart()">
       <span style="font-size:1.6rem">🙏</span>
       <span><b style="font-size:.92rem">오늘의 경어법 복습 <span style="color:var(--gold);font-size:.6rem;font-weight:900">SRS</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="gramHomeSub">불러오는 중…</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900" id="gramHomeCnt">→</span>
     </button>
-    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
+    <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="rpOpen()">
       <span style="font-size:1.6rem">🎭</span>
       <span><b style="font-size:.92rem">캐릭터 롤플레이 Roleplay <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="rpCardSub">L1 ep05 · 길 묻기 — 존댓말 연습</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
-    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="kkOpen()">
+    <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="kkOpen()">
       <span style="font-size:1.6rem">💬</span>
       <span><b style="font-size:.92rem">Kakao Talk Simulation <span style="color:var(--gold);font-size:.6rem;font-weight:900">NEW</span></b><br><span style="font-size:.72rem;color:#8fb0ad" id="kkCardSub">L1 ep05 · 친구와 약속 잡기 — 반말 연습</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
     </button>
-    <button class="card" style="text-align:left;color:#eaf4f3;display:flex;align-items:center;gap:12px" onclick="showEpList()">
+    <button class="card" style="text-align:left;color:#153B52;display:flex;align-items:center;gap:12px" onclick="showEpList()">
       <span style="font-size:1.6rem">📚</span>
       <span><b style="font-size:.92rem">전체 에피소드 All Episodes</b><br><span style="font-size:.72rem;color:#8fb0ad" id="allEpsSub">Level 1~6 · 전 레벨 복습/프리뷰</span></span>
       <span style="margin-left:auto;color:var(--teal);font-weight:900">→</span>
