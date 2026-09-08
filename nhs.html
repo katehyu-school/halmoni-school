@@ -58,6 +58,7 @@
       <button role="menuitem" onclick="nhsCloseMore();openQuickRef()">📌 Quick Reference</button>
       <button role="menuitem" onclick="nhsCloseMore();openNMS()">📓 My Notes</button>
       <button role="menuitem" onclick="nhsCloseMore();openBoard()">📋 Board</button>
+      <button role="menuitem" onclick="nhsCloseMore();openGameRoom()">🎮 게임 룸</button>
     </div>
   </div>
 
@@ -81,6 +82,17 @@
     <div id="idx-jump-bar" class="idx-jump-bar"></div>
     <div class="idx-page-ctrl" id="idx-page-ctrl"></div>
     <div class="idx-body" id="idx-body"></div>
+  </div>
+</div>
+
+<!-- 게임 룸 모달 -->
+<div class="idx-overlay" id="gameroom-overlay" onclick="if(event.target===this)closeGameRoom()">
+  <div class="idx-modal" style="max-width:520px">
+    <div class="idx-header">
+      <h2>🎮 게임 룸 · Game Room</h2>
+      <button class="idx-close" onclick="closeGameRoom()">✕</button>
+    </div>
+    <div class="idx-body" id="gameroom-body"></div>
   </div>
 </div>
 
@@ -7627,6 +7639,45 @@ document.addEventListener('click', e=>{
   if(w && !w.contains(e.target)) nhsCloseMore();
 });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') nhsCloseMore(); });
+
+// ── 🎮 게임 룸 (2026-09-08) ───────────────────────────────
+// 각 게임은 독립된 정적 페이지(dr-play*.html)라서 새 탭으로 링크만 걸어줌.
+// 새 게임을 추가할 땐 이 배열에 한 줄만 더하면 됨.
+const GAMES=[
+  {emoji:'🍜', href:'dr-play.html', ep:'L1 ep06',
+   title:'포장마차 탈출', title_en:'Escape the Pojangmacha',
+   desc:'떡볶이와 김밥 주문하기', desc_en:'Order tteokbokki & gimbap'},
+  {emoji:'🍓', href:'dr-play-market.html', ep:'L1 ep09',
+   title:'재래시장 탈출', title_en:'Escape the Market',
+   desc:'딸기와 사과 주문하고 거스름돈 받기', desc_en:'Order fruit & listen for change'},
+  {emoji:'🍱', href:'dr-play-lunchbox.html', ep:'L1 ep08',
+   title:'도시락을 찾아라!', title_en:'Find the Lunchbox!',
+   desc:'위치 표현으로 숨은그림찾기', desc_en:'Hidden-object with location words'}
+];
+function openGameRoom(){
+  const o=document.getElementById('gameroom-overlay'); if(!o) return;
+  o.classList.add('open');
+  renderGameRoom();
+}
+function closeGameRoom(){
+  const o=document.getElementById('gameroom-overlay'); if(o) o.classList.remove('open');
+}
+function renderGameRoom(){
+  const b=document.getElementById('gameroom-body'); if(!b) return;
+  b.innerHTML=
+    '<div style="font-size:12.5px;color:var(--warm-600);margin-bottom:14px;line-height:1.6;">배운 표현을 게임으로 연습해 보세요. 로그인 없이 누구나 할 수 있어요.<br><em>Practice what you\'ve learned with a mini-game. No login needed.</em></div>'
+    +GAMES.map(g=>
+      '<a class="gr-card" href="'+g.href+'" target="_blank" rel="noopener">'
+      +'<div class="gr-emoji">'+g.emoji+'</div>'
+      +'<div class="gr-info">'
+        +'<div class="gr-title">'+g.title+' <span class="gr-en">· '+g.title_en+'</span></div>'
+        +'<div class="gr-desc">'+g.desc+' · '+g.desc_en+'</div>'
+        +'<div class="gr-meta">'+g.ep+'</div>'
+      +'</div>'
+      +'<div class="gr-arrow">▶</div>'
+      +'</a>'
+    ).join('');
+}
 
 // ── INIT ───────────────────────────────────────────────
 // ── 에피소드 딥링크 (?ep=ep06 / ?ep=L2_ep03 [&tab=vocab]) — 2026-09-06 신설 ──
