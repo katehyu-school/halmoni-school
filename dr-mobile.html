@@ -3489,6 +3489,7 @@ async function shareDownload(){
   ctx.fillStyle='rgba(78,205,196,.22)';
   ctx.beginPath();ctx.arc(cv.width/2,260,260,0,Math.PI*2);ctx.fill();
   ctx.textAlign='center';
+  ctx.fillStyle='#ffffff';  // glow circle's rgba alpha was leaking into the emoji, washing it out
   ctx.font='160px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji","Segoe UI Symbol",sans-serif';
   ctx.fillText(d.emoji,cv.width/2,330);
   ctx.fillStyle='#4ECDC4';ctx.font="700 44px 'Gaegu',sans-serif";
