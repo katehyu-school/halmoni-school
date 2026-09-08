@@ -1057,7 +1057,7 @@ function _sBuildDeck(){
 function _vPool(){ return (VOCAB_ALL||[]).filter(c=>!hqmLocked(c.lv)); }
 function _gPool(){ return (GRAM_ALL||[]).filter(c=>!hqmLocked(c.lv)); }
 function vLockedMsg(){
-  alert('Level 3부터는 회원만 볼 수 있어요.\n무료 계정을 만들면 바로 열립니다.\n\nLevels 3+ are for members. Create a free account to unlock.');
+  alert('Level 3부터는 정식 회원 전용이에요.\nLevel 1-2는 무료로 볼 수 있어요.\n\nLevel 3+ is for registered members. Levels 1-2 are free to explore.');
 }
 function _vLvChips(){
   return ['L1','L2','L3','L4','L5','L6'].map(function(l){
@@ -1110,7 +1110,7 @@ function vocabRender(keepFocus){
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">
       ${_vLvChips()}
     </div>
-    ${HQM_IS_MEMBER?'':'<div style="background:rgba(23,163,148,.08);border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:.7rem;color:rgba(21,59,82,.55);line-height:1.6">👋 지금 <b style="color:var(--bronze-dk)">Level 1·2</b> 단어를 보고 계세요 · Level 3부터는 무료 계정이 필요해요<br><a href="index.html" style="color:var(--bronze-dk)">계정 만들기 · Create a free account</a></div>'}
+    ${HQM_IS_MEMBER?'':'<div style="background:rgba(23,163,148,.08);border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:.7rem;color:rgba(21,59,82,.55);line-height:1.6">👋 지금 <b style="color:var(--bronze-dk)">Level 1·2</b>를 무료로 보고 계세요 · Level 3부터는 정식 회원 전용이에요<br><a href="index.html" style="color:var(--bronze-dk)">진도 저장하려면 계정 만들기 · Create a free account to save progress</a></div>'}
     <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">
       ${chip('🆕 처음 보는','only','new')}${chip('🔄 약한 것','only','weak')}${chip('✅ 익힌 것','only','done')}
     </div>
@@ -1961,7 +1961,7 @@ function hqLv(){
 }
 function hqSetLv(lv){
   if(hqmLocked(lv)){
-    alert('Level 3부터는 회원만 볼 수 있어요.\n무료 계정을 만들면 바로 열립니다.\n\nLevels 3+ are for members. Create a free account to unlock.');
+    alert('Level 3부터는 정식 회원 전용이에요.\nLevel 1-2는 무료로 볼 수 있어요.\n\nLevel 3+ is for registered members. Levels 1-2 are free to explore.');
     return;
   }
   try{localStorage.setItem('hqLv',lv)}catch(e){}
@@ -1990,8 +1990,8 @@ async function showEpList(){
     return `<button onclick="hqSetLv('${l}')" style="border:none;border-radius:99px;padding:7px 15px;font-size:.76rem;font-weight:800;cursor:pointer;opacity:${lk?.45:1};background:${l===lv?'var(--teal)':'rgba(21,59,82,.08)'};color:${l===lv?'#06231f':'rgba(21,59,82,.55)'}">${l}${lk?' 🔒':''}</button>`;}).join('');
   const lockNote = HQM_IS_MEMBER ? '' :
     '<div style="background:rgba(23,163,148,.08);border-radius:10px;padding:9px 12px;margin-bottom:11px;font-size:.7rem;color:rgba(21,59,82,.55);line-height:1.6">'
-    +'👋 지금 <b style="color:var(--bronze-dk)">Level 1·2</b>를 보고 계세요 · Level 3부터는 무료 계정이 필요해요<br>'
-    +'<a href="index.html" style="color:var(--bronze-dk)">계정 만들기 · Create a free account</a></div>';
+    +'👋 지금 <b style="color:var(--bronze-dk)">Level 1·2</b>를 무료로 보고 계세요 · Level 3부터는 정식 회원 전용이에요<br>'
+    +'<a href="index.html" style="color:var(--bronze-dk)">진도 저장하려면 계정 만들기 · Create a free account to save progress</a></div>';
   const arr=epArr(lv);
   const list=arr.length?arr.map(e=>{
     const n=parseInt(e.id.replace(/\D/g,''),10);
@@ -2081,7 +2081,7 @@ function normalizeEp(n,d,lv){
 async function openEp(n,lv){
   lv=lv||hqLv();
   if(hqmLocked(lv)){
-    alert('Level 3부터는 회원만 볼 수 있어요.\n무료 계정을 만들면 바로 열립니다.\n\nLevels 3+ are for members. Create a free account to unlock.');
+    alert('Level 3부터는 정식 회원 전용이에요.\nLevel 1-2는 무료로 볼 수 있어요.\n\nLevel 3+ is for registered members. Levels 1-2 are free to explore.');
     return;
   }
   show('scr-hq-flow');
