@@ -1196,6 +1196,31 @@ function hqLogout(){
   location.reload();
 }
 
+// ── 헤더 로그인 표시 (2026-09-09) ────────────────────────
+//   nhs.html 은 로그인 상태를 헤더에 실시간으로 보여주는데(_nhsUser/nhsMountTopBanner),
+//   index.html 은 hq_user 를 읽는 헬퍼(_hqReadUser)는 있으면서도 정작
+//   헤더의 "Log in" 링크는 한 번도 갱신한 적이 없어서, 로그인한 채로
+//   돌아와도 항상 "Log in"으로만 보이는 버그가 있었습니다.
+//   → 로그인되어 있으면 이름 표시 + 로그아웃으로 바꿔줌.
+function esc(s){ return s==null ? '' : String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function _hqUpdateHeaderLogin(){
+  const a = document.querySelector('.dn-header .dn-login');
+  if (!a) return;
+  let u = null;
+  try { u = _hqReadUser(); } catch(e){}
+  if (u && (u.name || u.display_name)) {
+    const nm = esc(u.display_name || u.name);
+    a.innerHTML = '👤 ' + nm + '님 · 로그아웃 · Log out';
+    a.title = 'Logged in · ' + nm;
+    a.onclick = function(){ hqLogout(); return false; };
+  } else {
+    a.innerHTML = '👤 Log in';
+    a.title = '';
+    a.onclick = function(){ openLoginModal('main'); return false; };
+  }
+}
+_hqUpdateHeaderLogin();
+
 let _members = [];  // 멤버 목록 캐시
 // 관리자 RPC 인증용 — 메모리에만 두고 새로고침하면 사라짐(그때는 다시 물어봄)
 let _sessionPin = '';
@@ -1456,6 +1481,7 @@ let _entryTrack = 'main'; // 'kids' 카드로 들어왔으면 로그인 성공 �
 function enterAs(user) {
   const role = user.role;
   const name = user.display_name;
+  try { _hqUpdateHeaderLogin(); } catch(e){}
 
   // Kids 카드에서 들어온 로그인 — 선택 화면 없이 바로 Kids 앱으로.
   // trial(셀프가입 체험 계정)은 Kids 대상이 아니므로 제외 — 아래 appBox에서 원래대로 안내됨.
