@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>도서관의 비밀 · The Library Secret | 도란채</title>
+<meta name="description" content="숨겨진 낱말을 찾아 마법의 문장을 완성하고 비밀의 문을 열어보세요. 도란채의 한국어 조사 게임 — 무료, 가입 없이.">
+<link rel="canonical" href="https://doranchae.com/dr-play-library.html">
+<!-- 페이스북·카톡 링크 미리보기 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="도란채 · Doranchae">
+<meta property="og:url" content="https://doranchae.com/dr-play-library.html">
+<meta property="og:title" content="도서관의 비밀 · The Library Secret">
+<meta property="og:description" content="책장 속에 숨은 낱말을 찾아 마법의 문장을 완성하면, 서가 사이로 비밀의 문이 열려요! 가입 없이 무료로 해보세요. / Find the hidden words, cast the magic sentence, and open the secret door between the bookshelves — free, no sign-up.">
+<meta property="og:image" content="https://doranchae.com/og_library.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="도서관의 비밀 · The Library Secret">
+<meta name="twitter:description" content="책장 속에 숨은 낱말을 찾아 마법의 문장을 완성하면, 서가 사이로 비밀의 문이 열려요!">
+<meta name="twitter:image" content="https://doranchae.com/og_library.jpg">
+<link rel="icon" href="favicon-doranchae.svg" type="image/svg+xml">
+<link rel="icon" href="logo_hq.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7c6e; --teal-lt:#e0f5f2; --teal-md:#5bbfb0; --teal-dark:#0b5c52; --teal-600:#1a9485;
+  --amber:#c47a1a; --amber-lt:#fdf3e0; --coral:#c74d36; --coral-lt:#fdeae6;
+  --blue:#1a5fa8; --blue-lt:#e6f0fb; --purple:#5a3fa0; --gold:#b8860b; --gold-lt:#fdf6e3;
+  --warm-900:#1C1917; --warm-800:#292524; --warm-700:#44403C; --warm-600:#57534E; --warm-500:#78716C;
+  --paper:#fbf8f3; --line:#e7ddd0;
+  --font-kr:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-kr);
+  background:#12100e;
+  color:var(--warm-900);
+  min-height:100vh;
+  display:flex; align-items:flex-start; justify-content:center;
+  padding:0;
+}
+#stage{
+  width:100%; max-width:760px; background:var(--paper);
+  min-height:100vh; display:flex; flex-direction:column;
+  box-shadow:0 0 60px rgba(0,0,0,.5);
+}
+
+/* ── 상단 HUD ───────────────────────── */
+#hud{
+  background:var(--teal-dark); color:#fff; padding:9px 14px;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  font-size:12.5px; position:sticky; top:0; z-index:20;
+}
+#hud .goal{flex:1; min-width:150px; font-weight:500; line-height:1.4}
+#hud .goal small{display:block; opacity:.75; font-size:10.5px; font-weight:400}
+.chip{background:rgba(255,255,255,.14); border-radius:999px; padding:4px 10px; white-space:nowrap; font-variant-numeric:tabular-nums}
+
+/* ── 룬(모은 낱말) 트레이 ───────────────── */
+#runeTray{
+  display:flex; gap:7px; padding:9px 14px; background:#fff; border-bottom:1px solid var(--line);
+  overflow-x:auto; position:sticky; top:37px; z-index:19;
+}
+#runeTray[hidden]{display:none}
+.rune{
+  flex:0 0 auto; min-width:44px; text-align:center; padding:7px 9px; border-radius:10px;
+  border:2px dashed var(--line); font-size:13.5px; color:var(--warm-500); font-weight:700;
+}
+.rune.found{border-style:solid; border-color:var(--gold); background:var(--gold-lt); color:#7a5c05}
+
+/* ── 장면 ───────────────────────────── */
+#sceneWrap{position:relative; width:100%; aspect-ratio:16/9; background:#241f1a}
+#sceneWrap img, #sceneWrap video{width:100%; height:100%; object-fit:cover; display:block}
+/* ⚠️ 위 display:block이 명시도가 더 높아서 [hidden] 속성이 무시되는 문제가 있었음 —
+   화면에는 안 보이는데 클릭은 가로채는 상태가 됐었음(2026-09-09 테스트 중 발견) */
+#sceneWrap img[hidden], #sceneWrap video[hidden]{display:none}
+#sceneFallback{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg,#3a2a12,#6b4a1a);
+}
+#sceneFallback[hidden]{display:none}
+#sceneWrap[hidden]{display:none}
+#sceneFallback span{font-size:76px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.35))}
+#body{padding:16px 16px 26px; flex:1}
+
+.narr{
+  background:var(--amber-lt); border:1.5px solid #f0c980; border-radius:var(--radius);
+  padding:12px 15px; font-size:13.5px; line-height:1.75; color:var(--warm-800); margin-bottom:14px;
+}
+.narr b{color:var(--amber)}
+
+/* 대사 말풍선 */
+.say{display:flex; gap:10px; margin-bottom:12px; align-items:flex-start}
+.say .who{
+  flex:0 0 auto; width:44px; text-align:center; font-size:11px; color:var(--warm-600); line-height:1.3;
+}
+.say .who .em{display:block; font-size:26px; line-height:1.1}
+.bub{
+  flex:1; background:#fff; border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:11px 14px; position:relative;
+}
+.bub.bomi{background:var(--teal-lt); border-color:var(--teal-md)}
+.bub.maya{background:var(--amber-lt); border-color:#f0c980}
+.bub .ko{font-size:16px; font-weight:500; line-height:1.65; color:var(--warm-900)}
+.bub .en{font-size:12px; color:var(--warm-600); margin-top:3px; line-height:1.5}
+.spk{
+  background:none; border:none; cursor:pointer; font-size:15px; padding:2px 4px;
+  float:right; margin:-2px -4px 0 6px; opacity:.55;
+}
+.spk:hover{opacity:1}
+
+/* 선택지 */
+.opts{display:flex; flex-direction:column; gap:9px; margin-top:6px}
+.opt{
+  text-align:left; background:#fff; border:2px solid var(--line); border-radius:var(--radius);
+  padding:12px 15px; cursor:pointer; font-family:inherit; transition:.15s; width:100%;
+}
+.opt:hover{border-color:var(--teal); background:var(--teal-lt); transform:translateX(2px)}
+.opt .ko{font-size:16px; font-weight:500; color:var(--warm-900); line-height:1.55}
+.opt .en{font-size:11.5px; color:var(--warm-500); margin-top:2px}
+
+/* 힌트(해답) */
+.hint{
+  background:var(--blue-lt); border:2px solid var(--blue); border-radius:var(--radius);
+  padding:13px 15px; font-size:13.5px; line-height:1.7; color:var(--warm-800); margin-top:12px;
+  box-shadow:0 2px 0 rgba(26,95,168,.10);
+}
+.hint .hint-t{
+  font-size:11.5px; font-weight:700; color:var(--blue); letter-spacing:.4px;
+  margin-bottom:6px; display:flex; align-items:center; gap:5px;
+}
+
+/* 버튼 */
+.btn{
+  background:var(--teal); color:#fff; border:none; border-radius:999px;
+  padding:12px 26px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+}
+.btn:hover{background:var(--teal-600)}
+.btn:disabled{background:#c9c2b8; cursor:not-allowed}
+.btn.ghost{background:none; color:var(--warm-600); border:1.5px solid var(--line); font-weight:500}
+.btn.ghost:hover{background:#fff; color:var(--warm-900)}
+.btnrow{display:flex; gap:9px; align-items:center; flex-wrap:wrap; margin-top:12px}
+
+/* 타이틀 / 엔딩 */
+.center{text-align:center; padding:26px 6px}
+.center h1{font-family:'Gaegu',var(--font-kr); font-size:38px; margin:8px 0 2px; color:var(--teal-dark); line-height:1.15}
+.center .sub{font-size:14px; color:var(--warm-600); margin-bottom:20px}
+.card{
+  background:#fff; border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px; text-align:left; font-size:14px; line-height:1.8; margin:14px 0;
+}
+.card h3{margin:0 0 8px; font-size:14px; color:var(--teal)}
+.note{
+  background:#fffdf5; border:1.5px solid #e8d9a8; border-radius:6px;
+  padding:16px 18px; font-family:'Gaegu',var(--font-kr); font-size:21px; line-height:1.7;
+  color:#5c4a1e; box-shadow:2px 3px 0 rgba(0,0,0,.06); transform:rotate(-.6deg); text-align:left;
+}
+.note .en{font-family:var(--font-kr); font-size:12.5px; color:#8a7440; margin-top:7px; line-height:1.5}
+.score{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:16px 0}
+.score div{background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:10px 16px; min-width:88px}
+.score b{display:block; font-size:21px; color:var(--teal-dark); font-variant-numeric:tabular-nums}
+.score span{font-size:11px; color:var(--warm-600)}
+.big-emoji{font-size:56px; line-height:1}
+.title-art{width:100%; max-width:420px; border-radius:var(--radius); margin:0 auto 6px; display:block; box-shadow:0 6px 20px rgba(0,0,0,.18)}
+
+/* ── 마법의 문장 조립 ───────────────────── */
+.slots{
+  display:flex; flex-wrap:wrap; gap:8px; min-height:56px; align-items:center;
+  padding:12px; border:2px dashed var(--gold); border-radius:var(--radius); margin:12px 0;
+  background:var(--gold-lt);
+}
+.slots .placeholder{font-size:12.5px; color:#a08a3f}
+.slot-tile{
+  background:var(--teal); color:#fff; border:none; border-radius:10px;
+  padding:11px 15px; font-size:16px; font-weight:700; cursor:pointer; font-family:inherit;
+}
+.slot-tile:hover{background:var(--teal-600)}
+.tilebank{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px}
+.tile{
+  background:#fff; border:2px solid var(--teal-md); border-radius:10px;
+  padding:11px 15px; font-size:16px; font-weight:700; color:var(--teal-dark);
+  cursor:pointer; font-family:inherit;
+}
+.tile:hover{background:var(--teal-lt)}
+.tile:disabled{opacity:.3; cursor:not-allowed}
+
+footer{padding:16px; text-align:center; font-size:11.5px; color:var(--warm-500); border-top:1px solid var(--line)}
+footer a{color:var(--teal); text-decoration:none}
+
+@media(max-width:520px){
+  .center h1{font-size:30px}
+  .bub .ko,.opt .ko{font-size:15px}
+  #hud{font-size:11.5px}
+  #runeTray{top:34px}
+  .tile,.slot-tile{padding:9px 12px; font-size:14.5px}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="hud">
+    <div class="goal" id="hudGoal">📚 도서관의 비밀<small>The Library Secret</small></div>
+    <div class="chip" id="hudMiss">😅 0 실수</div>
+    <div class="chip" id="hudTime">⏱ 0:00</div>
+  </div>
+  <div id="runeTray" hidden></div>
+  <div id="sceneWrap" hidden>
+    <img id="sceneImg" alt="" hidden>
+    <video id="sceneVideo" hidden muted playsinline></video>
+    <div id="sceneFallback" hidden><span></span></div>
+  </div>
+  <div id="body"></div>
+  <footer>
+    도란채 · Doranchae — Level 1 ep07 「한국어 스터디 그룹을 만들어요」 ·
+    <a href="nhs.html?ep=ep07">이 편 공부하러 가기 →</a>
+    <span style="opacity:.5"> · build 09-09a</span>
+  </footer>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   ✏️  선생님이 고치실 곳은 여기 SCRIPT · PAGES · MAGIC 뿐입니다.
+       ko = 한국어 대사 / en = 영어 뜻
+       아래 엔진(ENGINE)은 건드리지 않으셔도 됩니다.
+       (dr-play-lunchbox.html과 같은 뼈대를 쓰되, 조사를 찾는 5개의
+        "책장" 퀴즈 → 모은 낱말로 마법의 문장 조립 → 비밀의 문 열기
+        순서로 구성되어 있습니다)
+   ══════════════════════════════════════════════════════════════════ */
+
+const SCRIPT = {
+
+  /* ── 시작 ─────────────────────────────────────────── */
+  title    : { ko:'도서관의 비밀', en:'The Library Secret' },
+  subtitle : { ko:'보미와 마야가 도서관에서 공부하다가, 책장에서 낡고 신비한 책을 발견했어요. 책장을 넘길 때마다 수수께끼가 나타나요.',
+               en:'While studying at the library, Bomi and Maya found an old, mysterious book on the shelf. Each page they turn reveals a new riddle.' },
+  storyNote: { ko:'책장마다 숨은 낱말을 찾아서, 마법의 문장을 완성해봐!', en:'Find the hidden word on every page — then use them to cast the magic sentence!' },
+  /* 초급 학습자 대상 안내문 — 영어로 표시 */
+  howto    : { en:'Tap the correct word on each page. Collect all 5, then arrange them to open the secret door.' },
+
+  /* ── 엔딩 ─────────────────────────────────────────── */
+  end_best : { emoji:'🏆', ko:'최고의 마법사 엔딩', en:'Master Wizard Ending',
+               msg:{ ko:'한 번에 완벽하게! 서가 사이로 눈부신 빛이 쏟아져 들어온다.', en:'Perfect on the first try! Brilliant light pours in between the bookshelves.' } },
+  end_mid  : { emoji:'😊', ko:'견습 마법사 엔딩', en:'Apprentice Wizard Ending',
+               msg:{ ko:'몇 번 헤맸지만, 결국 주문을 완성했다! 비밀의 문이 활짝 열린다.', en:'It took a few tries, but the spell is complete! The secret door swings wide open.' } },
+  end_awk  : { emoji:'😅', ko:'우당탕 마법사 엔딩', en:'Trial-and-Error Wizard Ending',
+               msg:{ ko:'이리저리 시도한 끝에, 마침내 문이 열렸다!', en:'After a lot of trial and error, the door finally opens!' } }
+};
+
+/* ── 책장 5장 — 조사 찾기 퀴즈 ─────────────────────────
+   각 장: 실제 ep07 대사(오디오 포함) + 과제 + 선택지(4개, ok:true가 정답)
+   정답을 찾으면 rune(마법 낱말)로 바뀌어 트레이에 쌓입니다. */
+const PAGES = [
+  { id:'topic', speaker:'bomi',
+    line: { ko:'나는 한국어를 공부해.', en:'I study Korean.', audio:'audio_1_나는_한국어를_공부해_.mp3' },
+    task: { ko:'주제를 나타내는 조사를 찾아보세요', en:'Find the topic marker' },
+    opts: [
+      { ko:'는', en:'topic marker', ok:true },
+      { ko:'가', en:'subject marker', reply:{ ko:'가는 "이/가"처럼 주어를 표시해요 — 이 문장엔 안 쓰였어요.', en:'가 marks a subject (like 이) — it isn’t the one used here.' } },
+      { ko:'를', en:'object marker', reply:{ ko:'를은 목적어(한국어)에 붙어요 — 주제 조사가 아니에요.', en:'를 marks the object (한국어) — not the topic particle.' } },
+      { ko:'도', en:'also / too', reply:{ ko:'도는 "~도"(also/too)라는 뜻이에요 — 이 문장엔 없어요.', en:'도 means "also/too" — it’s not in this sentence.' } }
+    ],
+    hint: { ko:'는은 주제를 표시하는 조사예요 — "나" 뒤에 붙어서 "나는(이야기의 주제는 나)"이 돼요.', en:'는 marks the topic — attached to 나, it becomes 나는 (as for me).' },
+    rune: '는' },
+
+  { id:'subj', speaker:'maya',
+    line: { ko:'우와! 나도 한국어를 배우고 싶어.', en:'Wow! I want to learn Korean too.', audio:'audio_2_우와__나도_한국어를_배우고_싶어_.mp3' },
+    task: { ko:'주어(행동을 하는 사람)를 찾아보세요', en:'Find the subject' },
+    opts: [
+      { ko:'나', en:'I / me', ok:true },
+      { ko:'한국어', en:'Korean (language)', reply:{ ko:'한국어는 배우고 싶은 대상(목적어)이지, 배우는 사람이 아니에요.', en:'한국어 is the object being learned — not the person doing the learning.' } },
+      { ko:'배우고', en:'learning (part of verb)', reply:{ ko:'배우고는 동사의 일부예요 — 주어가 아니에요.', en:'배우고 is part of the verb — not the subject.' } },
+      { ko:'싶어', en:'want to (part of verb)', reply:{ ko:'싶어도 동사 표현의 일부예요.', en:'싶어 is also part of the verb phrase.' } }
+    ],
+    hint: { ko:'이 문장의 주어는 "나"예요 — "배우고 싶다"고 말하는 사람이니까요.', en:'The subject is 나 (I) — the person who wants to do the action.' },
+    rune: '나' },
+
+  { id:'obj', speaker:'maya',
+    line: { ko:'응, 그런데 조금 어려워.', en:'Yeah, but it’s a little hard.', audio:'audio_4_응__그런데_조금_어려워_.mp3' },
+    task: { ko:'숨은 목적어를 찾아보세요 — 문장엔 안 써 있지만, 뭐가 어렵다는 걸까요?', en:'Find the hidden object — it’s not written, but what is she finding hard?' },
+    opts: [
+      { ko:'한국어', en:'Korean', ok:true },
+      { ko:'숙제', en:'homework', reply:{ ko:'숙제 얘기는 안 나왔어요 — 계속 이야기하던 건 한국어예요.', en:'Homework was never mentioned — they’ve been talking about Korean this whole time.' } },
+      { ko:'시험', en:'a test', reply:{ ko:'시험 얘기도 안 나왔어요.', en:'No test was mentioned either.' } },
+      { ko:'영어', en:'English', reply:{ ko:'영어가 아니라, 배우고 있는 한국어가 어렵다는 거예요.', en:'It’s not English — it’s the Korean they’re learning that’s hard.' } }
+    ],
+    hint: { ko:'마야는 "뭐가" 어렵다고 했을까요? 바로 앞에서 계속 이야기하던 것 — 한국어예요!', en:'What is Maya finding hard? The thing they were just talking about — Korean!' },
+    rune: '한국어' },
+
+  { id:'objmark', speaker:'maya',
+    line: { ko:'나는 아직 한국어를 잘 못 읽어.', en:'I still can’t read Korean well.', audio:'audio_5_나는_아직_한국어를_잘_못_읽어_.mp3' },
+    task: { ko:'목적어를 나타내는 조사를 찾아보세요', en:'Find the object marker' },
+    opts: [
+      { ko:'를', en:'object marker', ok:true },
+      { ko:'는', en:'topic marker', reply:{ ko:'는은 주제를 표시해요 — 이미 "나" 뒤에 쓰였어요.', en:'는 marks the topic — it’s already attached to 나.' } },
+      { ko:'가', en:'subject marker', reply:{ ko:'가는 주어를 표시하는 조사예요 — 목적어 조사가 아니에요.', en:'가 is a subject-marking particle — not an object particle.' } },
+      { ko:'도', en:'also / too', reply:{ ko:'도는 "~도"라는 뜻이에요 — 이 문장엔 없어요.', en:'도 means "also/too" — not used here.' } }
+    ],
+    hint: { ko:'를은 목적어를 표시하는 조사예요 — "한국어" 뒤에 붙어서 "한국어를"이 돼요.', en:'를 marks the object — attached to 한국어, it becomes 한국어를.' },
+    rune: '를' },
+
+  { id:'verb', speaker:'bomi',
+    line: { ko:'괜찮아! 나도 같이 공부하고 싶어.', en:'It’s okay! I want to study together too.', audio:'audio_6_괜찮아__나도_같이_공부하고_싶어_.mp3' },
+    task: { ko:'"공부하고 싶다"는 뜻의 표현을 찾아보세요', en:'Find the phrase that means "want to study"' },
+    opts: [
+      { ko:'공부하고 싶어', en:'want to study', ok:true },
+      { ko:'읽고 싶어', en:'want to read', reply:{ ko:'읽고 싶어는 "읽다"(read)에서 온 말이에요.', en:'읽고 싶어 comes from 읽다 (read) — not the verb used here.' } },
+      { ko:'만들고 싶어', en:'want to make', reply:{ ko:'만들고 싶어는 "만들다"(make)에서 온 말이에요.', en:'만들고 싶어 comes from 만들다 (make).' } },
+      { ko:'가고 싶어', en:'want to go', reply:{ ko:'가고 싶어는 "가다"(go)에서 온 말이에요.', en:'가고 싶어 comes from 가다 (go).' } }
+    ],
+    hint: { ko:'"~하고 싶어"는 "~하고 싶다"의 반말형이에요 — "공부하고 싶어" = want to study.', en:'~하고 싶어 is the casual form of wanting to do something — 공부하고 싶어 = want to study.' },
+    rune: '공부하고 싶어' }
+];
+
+/* ── 마법의 문장 ────────────────────────────────────────
+   찾은 순서(는·나·한국어·를·공부하고 싶어)와 마법의 순서는 다릅니다 —
+   이게 바로 이 게임의 핵심! 조사가 있으면 어순이 바뀌어도 뜻이 통해요.
+   NATURAL = 학생들이 처음에 자연스럽게 만드는 "표준" 순서(나는 한국어를 공부하고 싶어) — 문법은 맞지만 마법은 안 통함.
+   MAGIC   = 목적어가 앞으로 나온 "뜻밖의" 순서(한국어를 나는 공부하고 싶어) — 이 순서라야 문이 열림. */
+const MAGIC   = ['obj','objmark','subj','topic','verb'];   // 한국어 + 를 + 나 + 는 + 공부하고 싶어
+const NATURAL = ['subj','topic','obj','objmark','verb'];   // 나 + 는 + 한국어 + 를 + 공부하고 싶어
+
+const NATURAL_HINT = {
+  ko:'오, 문법은 완벽해! 그런데… 마법의 문은 꼼짝도 안 하네. 🤔 동사(공부하고 싶어)는 언제나 문장 맨 끝에 와야 해요. 그런데 "는"과 "를" 같은 조사가 있으면, 주어와 목적어는 자리를 바꿔도 뜻이 그대로 통해요! 다르게 배열해서 다시 외워보세요.',
+  en:'That’s a perfectly good sentence! But… the magic door won’t budge. 🤔 The verb (공부하고 싶어) must always come last — but since 는 and 를 each mark their own word, the subject and object can swap places and it still makes sense! Try a different order.'
+};
+const WRONG_HINT = {
+  ko:'음… 그 순서로는 마법이 안 통해요. 동사(공부하고 싶어)는 언제나 문장 맨 끝에 있어야 해요!',
+  en:'Hmm, that order doesn’t work. The verb (공부하고 싶어) must always come at the very end!'
+};
+
+/* 그림 · 영상 자료 (halmoni-school/Quiz 폴더) */
+const ASSET = 'Quiz/';
+const IMG_TITLE = '스터디그룹 (1).png';   // 타이틀 — 반짝이는 책과 두 아이
+const IMG_QUIZ  = '스터디그룹 (2).png';   // 책장 넘기는 장면 — 퀴즈·조립 화면 배경
+const IMG_DOOR  = '스터디그룹 (3).png';   // 비밀의 문 — 엔딩 정지 화면
+const VID_DOOR  = 'ending_door';          // 문이 열리는 짧은 영상 (원본 영상의 마지막 3초) — .mp4/.webm 둘 다 있음
+const TTS = 'data/nhs/L1/TTS/ep07/';
+
+/* ══════════════════════════════════════════════════════════════════
+   ENGINE — 여기서부터는 고치지 않으셔도 됩니다
+   ══════════════════════════════════════════════════════════════════ */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const S = { scene:'title', started:0, mistakes:0, hints:0, page:0, found:{}, msg:null, hintOpen:false,
+            bank:[], placed:[] };
+
+/* ── 소리 ── */
+let voiceKo = null;
+function pickVoice(){
+  try{
+    const vs = speechSynthesis.getVoices()||[];
+    voiceKo = vs.find(v=>/ko[-_]KR/i.test(v.lang)) || vs.find(v=>/^ko/i.test(v.lang)) || null;
+  }catch(e){}
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+let curAudio = null, playToken = 0;
+function stopAudio(){
+  playToken++;
+  try{ if(curAudio){ curAudio.onended=null; curAudio.pause(); curAudio.currentTime=0; curAudio=null; } }catch(e){}
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+}
+function say(line, then){
+  if(!line){ if(then) then(); return; }
+  stopAudio();
+  const my = playToken;
+  let fired = false;
+  const done = ()=>{ if(fired || my!==playToken) return; fired = true; if(then) then(); };
+  if(line.audio){
+    const a = new Audio(TTS + encodeURIComponent(line.audio));
+    a.volume = line.vol || 1;
+    curAudio = a;
+    a.onended = done;
+    a.onerror = ()=>{ if(my===playToken) speakTTS(line.ko, my, then); };
+    a.onplaying = ()=>{
+      if(isFinite(a.duration) && a.duration>0)
+        setTimeout(done, Math.max(0, a.duration - a.currentTime)*1000 + 500);
+    };
+    setTimeout(done, 15000);
+    a.play().catch(()=>{ if(my===playToken) speakTTS(line.ko, my, then); });
+    return;
+  }
+  speakTTS(line.ko, my, then);
+}
+function speakTTS(text, tok, then){
+  if(!window.speechSynthesis || !text){ if(then) then(); return; }
+  if(tok===undefined) { stopAudio(); tok = playToken; }
+  if(tok!==playToken) return;
+  let fired = false;
+  const done = ()=>{ if(fired || tok!==playToken) return; fired = true; if(then) then(); };
+  try{
+    // 물결표(~)는 오디오 파일이 없을 때만 쓰는 브라우저 TTS가 "물결표시"라고 그대로 읽어버려서 미리 제거
+    const u = new SpeechSynthesisUtterance(String(text).replace(/\n/g,' ').replace(/~/g,''));
+    u.lang = 'ko-KR'; u.rate = 0.88;
+    if(voiceKo) u.voice = voiceKo;
+    u.onend = done; u.onerror = done;
+    speechSynthesis.speak(u);
+    setTimeout(done, 900 + String(text).length * 190);
+  }catch(e){ done(); }
+}
+
+/* ── 조각 ── */
+const LINES = [];
+function reg(line){ LINES.push(line); return LINES.length-1; }
+function sayIdx(i){ say(LINES[i]); }
+
+function bub(cls, emoji, who, line){
+  const idx = reg(line);
+  return `<div class="say">
+    <div class="who"><span class="em">${emoji}</span>${esc(who)}</div>
+    <div class="bub ${cls}">
+      <button class="spk" onclick="sayIdx(${idx})" title="듣기">🔊</button>
+      <div class="ko">${esc(line.ko)}</div>
+      <div class="en">${esc(line.en)}</div>
+    </div></div>`;
+}
+const bomi = l => bub('bomi','👩','보미', l);
+const maya = l => bub('maya','👧','마야', l);
+const narr = l => `<div class="narr">${esc(l.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(l.en)}</div></div>`;
+
+function optBtn(o, i, handler){
+  return `<button class="opt" onclick="${handler}(${i})">
+    <div class="ko">${esc(o.ko)}</div><div class="en">${esc(o.en)}</div></button>`;
+}
+function hintBox(hint){
+  return `<div class="btnrow">
+      <button class="btn ghost" onclick="toggleHint()">📖 ${S.hintOpen?'힌트 닫기':'책에게 물어보기 · Ask the Book'}</button>
+    </div>` + (S.hintOpen && hint ? `<div class="hint"><div class="hint-t">💡 해답 · ANSWER</div>${esc(hint.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(hint.en)}</div></div>` : '');
+}
+function toggleHint(){
+  if(!S.hintOpen) S.hints++;
+  S.hintOpen = !S.hintOpen;
+  render();
+}
+function flash(line, kind){ if(line) S.msg = { line:line, kind:kind||'bad' }; }
+function msgBox(){
+  if(!S.msg) return '';
+  const m = S.msg; S.msg = null;
+  const style = m.kind==='good'
+    ? 'background:var(--teal-lt);border-color:var(--teal-md)'
+    : 'background:var(--coral-lt);border-color:#f0b8ab';
+  return `<div class="narr" style="${style}">${esc(m.line.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(m.line.en)}</div></div>`;
+}
+
+/* ── HUD & 룬 트레이 ── */
+function hud(){
+  const n = S.page + 1;
+  const goals = { title:'📚 도서관의 비밀', assembly:'🔮 마법의 문장', end:'🎬 완료!' };
+  const goalsEn = { title:'The Library Secret', assembly:'The Magic Sentence', end:'Done!' };
+  let g = goals[S.scene], e = goalsEn[S.scene];
+  if(S.scene==='page'){ g = `📖 페이지 ${n} / 5`; e = `Page ${n} of 5`; }
+  $('hudGoal').innerHTML = `${esc(g||'')}<small>${esc(e||'')}</small>`;
+  $('hudMiss').textContent = '😅 ' + S.mistakes + ' 실수';
+}
+function tick(){
+  if(!S.started || S.scene==='end') return;
+  const s = Math.floor((Date.now()-S.started)/1000);
+  $('hudTime').textContent = '⏱ ' + Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+}
+setInterval(tick, 500);
+
+function runeTray(){
+  const t = $('runeTray');
+  if(S.scene==='title'){ t.hidden = true; return; }
+  t.hidden = false;
+  t.innerHTML = PAGES.map(p=>{
+    const on = !!S.found[p.id];
+    return `<div class="rune ${on?'found':''}">${on ? esc(p.rune) : '❓'}</div>`;
+  }).join('');
+}
+
+/* ── 배경 그림 / 영상 ── */
+function setBg(kind, key){
+  const wrap = $('sceneWrap'), img = $('sceneImg'), vid = $('sceneVideo'), fb = $('sceneFallback');
+  stopVideo();
+  if(!kind){ wrap.hidden = true; img.hidden = true; vid.hidden = true; return; }
+  wrap.hidden = false;
+  if(kind==='img'){
+    vid.hidden = true; img.hidden = false;
+    fb.firstElementChild.textContent = '📖';
+    img.onerror = () => { img.style.visibility='hidden'; fb.hidden = false; };
+    img.onload  = () => { img.style.visibility='visible'; fb.hidden = true; };
+    img.src = ASSET + encodeURIComponent(key);
+  } else if(kind==='video'){
+    img.hidden = true; vid.hidden = false;
+    /* 영상이 재생 안 되는 브라우저(구형/특이 환경)를 위해, 실패하면
+       비밀의 문 정지 이미지(IMG_DOOR)로 자동 대체 — 완전히 막히지 않게 함 */
+    vid.onerror = () => setBg('img', IMG_DOOR);
+    vid.onloadeddata = () => { vid.style.visibility='visible'; fb.hidden = true; };
+    vid.innerHTML =
+      `<source src="${ASSET}${encodeURIComponent(key+'.mp4')}" type="video/mp4">` +
+      `<source src="${ASSET}${encodeURIComponent(key+'.webm')}" type="video/webm">`;
+    vid.load();
+    vid.play().catch(()=>{});
+  }
+}
+function stopVideo(){ try{ const v=$('sceneVideo'); v.pause(); }catch(e){} }
+
+/* ══ 화면들 ══ */
+function render(){
+  hud(); runeTray();
+  LINES.length = 0;
+  const b = $('body');
+  if(S.scene==='title')    return setBg(null), b.innerHTML = viewTitle();
+  if(S.scene==='page')     return setBg('img', IMG_QUIZ), b.innerHTML = viewPage();
+  if(S.scene==='assembly') return setBg('img', IMG_QUIZ), b.innerHTML = viewAssembly();
+  if(S.scene==='end')      return b.innerHTML = viewEnd();
+}
+
+function viewTitle(){
+  return `<div class="center">
+    <img class="title-art" src="${ASSET}${encodeURIComponent(IMG_TITLE)}" alt=""
+         onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'big-emoji',textContent:'📚✨'}))">
+    <h1>${esc(SCRIPT.title.ko)}</h1>
+    <div class="sub">${esc(SCRIPT.title.en)}</div>
+    <div class="note">${esc(SCRIPT.storyNote.ko)}<div class="en">${esc(SCRIPT.storyNote.en)}</div></div>
+    <div class="card">
+      <h3>🎯 ${esc(SCRIPT.subtitle.ko)}</h3>
+      ${esc(SCRIPT.subtitle.en)}<br>
+      <span style="color:var(--warm-600);font-size:13px">📖 ${esc(SCRIPT.howto.en)}</span>
+    </div>
+    <button class="btn" onclick="start()">시작하기 · Start</button>
+  </div>`;
+}
+function start(){
+  S.started = Date.now();
+  Object.assign(S, { scene:'page', page:0, found:{}, mistakes:0, hints:0, hintOpen:false, bank:[], placed:[] });
+  render();
+  say(PAGES[0].line);
+}
+
+/* 책장 퀴즈 (5장) */
+function viewPage(){
+  const p = PAGES[S.page];
+  const speak = p.speaker==='bomi' ? bomi : maya;
+  let h = msgBox() + speak(p.line);
+  h += `<div class="narr" style="margin-top:-4px">🔎 ${esc(p.task.ko)}<div style="font-size:11.5px;margin-top:3px">${esc(p.task.en)}</div></div>`;
+  h += `<div class="opts">${p.opts.map((o,i)=>optBtn(o,i,'choosePage')).join('')}</div>`;
+  h += hintBox(p.hint);
+  return h;
+}
+function choosePage(i){
+  const p = PAGES[S.page];
+  const o = p.opts[i];
+  if(o.ok){
+    S.found[p.id] = true;
+    flash({ ko:'✨ "'+p.rune+'" 획득!', en:'✨ Found the word "'+p.rune+'"!' }, 'good');
+    say(p.line, ()=>{
+      if(S.page < PAGES.length-1){
+        S.page++; S.hintOpen=false; render(); say(PAGES[S.page].line);
+      }else{
+        S.scene='assembly'; S.hintOpen=false;
+        S.bank = shuffle(PAGES.map(pp=>pp.id));
+        S.placed = [];
+        render();
+      }
+    });
+    render(); return;
+  }
+  S.mistakes++; flash(o.reply); render();
+}
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  // 처음부터 정답 순서가 나오면 재미없으니, 마법 순서와 같으면 한 번 더 섞음
+  if(a.join()===MAGIC.join()) return shuffle(arr);
+  return a;
+}
+
+/* 마법의 문장 조립 */
+function runeWord(id){ return PAGES.find(p=>p.id===id).rune; }
+function viewAssembly(){
+  let h = msgBox();
+  h += `<div class="narr">🔮 ${esc('찾은 낱말들을 순서대로 배열해서 주문을 외워보세요!')}<div style="font-size:11.5px;margin-top:3px">Arrange the words you found to cast the spell!</div></div>`;
+  h += `<div class="slots" id="slotsWrap">`;
+  if(S.placed.length===0) h += `<span class="placeholder">여기를 채워보세요 · Tap words below to place them here</span>`;
+  h += S.placed.map((id,i)=>`<button class="slot-tile" onclick="unplace(${i})">${esc(runeWord(id))}</button>`).join('');
+  h += `</div>`;
+  h += `<div class="tilebank">${S.bank.map((id,i)=>{
+    const used = S.placed.indexOf(id) >= 0;
+    return `<button class="tile" ${used?'disabled':''} onclick="place('${id}')">${esc(runeWord(id))}</button>`;
+  }).join('')}</div>`;
+  h += `<div class="btnrow">
+      <button class="btn" ${S.placed.length===PAGES.length?'':'disabled'} onclick="castSpell()">✨ 주문 외우기 · Cast the Spell</button>
+      <button class="btn ghost" onclick="clearSlots()">다시 배열 · Clear</button>
+    </div>`;
+  return h;
+}
+function place(id){
+  if(S.placed.indexOf(id) >= 0) return;
+  if(S.placed.length >= PAGES.length) return;
+  S.placed.push(id);
+  render();
+}
+function unplace(i){ S.placed.splice(i,1); render(); }
+function clearSlots(){ S.placed = []; render(); }
+function castSpell(){
+  const order = S.placed.join(',');
+  if(order === MAGIC.join(',')){
+    S.scene='end'; render();
+    setBg('video', VID_DOOR);
+    say({ ko:'마법의 문이 열렸다!', en:'The secret door has opened!' });
+    return;
+  }
+  S.mistakes++;
+  if(order === NATURAL.join(',')){
+    flash(NATURAL_HINT);
+  }else{
+    flash(WRONG_HINT);
+  }
+  render();
+}
+
+/* 엔딩 */
+function viewEnd(){
+  const secs = Math.floor((Date.now()-S.started)/1000);
+  const end = S.mistakes >= 4 ? SCRIPT.end_awk
+            : S.mistakes === 0 ? SCRIPT.end_best
+            :                    SCRIPT.end_mid;
+  return `<div class="center">
+    <div class="big-emoji" style="margin-top:4px">${end.emoji}</div>
+    <h1 style="font-size:30px">${esc(end.ko)}</h1>
+    <div class="sub">${esc(end.en)}</div>
+    <div class="card">${esc(end.msg.ko)}<div style="font-size:12px;color:var(--warm-600);margin-top:5px">${esc(end.msg.en)}</div></div>
+    <div class="score">
+      <div><b>${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}</b><span>걸린 시간 · time</span></div>
+      <div><b>${S.hints}</b><span>힌트 · hints</span></div>
+      <div><b>${S.mistakes}</b><span>실수 · slips</span></div>
+    </div>
+    <div class="btnrow" style="justify-content:center">
+      <button class="btn" onclick="restart()">다시 하기 · Play again</button>
+      <a class="btn ghost" style="text-decoration:none" href="nhs.html?ep=ep07">이 편 공부하기 →</a>
+    </div>
+  </div>`;
+}
+function restart(){
+  stopAudio();
+  Object.assign(S, { scene:'title', started:0, mistakes:0, hints:0, page:0, found:{}, msg:null, hintOpen:false, bank:[], placed:[] });
+  $('hudTime').textContent = '⏱ 0:00';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
