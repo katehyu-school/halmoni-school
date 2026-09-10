@@ -423,14 +423,24 @@ function say(line, then){
     const a = new Audio(TTS + encodeURIComponent(line.audio));
     a.volume = line.vol || 1;
     curAudio = a;
+    /* ⚠️ 오디오가 404 등으로 실패하면 onerror 이벤트와 play()의 Promise 거부가
+       "따로" 둘 다 발생할 수 있어서, 가드 없이 두 곳에서 speakTTS()를 부르면
+       같은 문장이 두 번 겹쳐 재생되는 버그가 있었음 — 한 번만 실행되도록 막음
+       (2026-09-10, dr-play-library.html에서 실제 재생 중복 제보로 발견 후 공통 수정) */
+    let fallbackFired = false;
+    const fallback = ()=>{
+      if(fallbackFired || my!==playToken) return;
+      fallbackFired = true;
+      speakTTS(line.ko, my, then);
+    };
     a.onended = done;
-    a.onerror = ()=>{ if(my===playToken) speakTTS(line.ko, my, then); };
+    a.onerror = fallback;
     a.onplaying = ()=>{
       if(isFinite(a.duration) && a.duration>0)
         setTimeout(done, Math.max(0, a.duration - a.currentTime)*1000 + 500);
     };
     setTimeout(done, 15000);
-    a.play().catch(()=>{ if(my===playToken) speakTTS(line.ko, my, then); });
+    a.play().catch(fallback);
     return;
   }
   speakTTS(line.ko, my, then);
