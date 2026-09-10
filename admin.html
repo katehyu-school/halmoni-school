@@ -586,6 +586,19 @@ body {
     <div id="trialList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
   </div>
 
+  <!-- 후기 · Reviews -->
+  <div class="section-card">
+    <div class="section-head">
+      <span class="section-icon">⭐</span>
+      <div>
+        <div class="section-title">후기 · Reviews</div>
+        <div class="section-desc">무료 체험 배너의 "Leave a review" 버튼으로 들어온 별점·후기입니다</div>
+      </div>
+      <button class="mm-act" style="margin-left:auto" onclick="loadReviews()">↺ 새로고침</button>
+    </div>
+    <div id="reviewList"><div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div></div>
+  </div>
+
   <!-- 연습 세션 리셋 -->
   <div class="section-card">
     <div class="section-head">
@@ -690,6 +703,7 @@ async function adminLogin() {
       document.getElementById('adminPanel').style.display  = 'block';
       loadMemberPins();
       loadProgress();
+      loadReviews();
     }
   } catch (e) {
     err.textContent = '서버 연결 오류: ' + e.message;
@@ -790,6 +804,57 @@ function _renderTrials(trials, progByName){
       체험 계정은 Level 1·2만 열립니다. 30일 동안 접속이 없으면 자동으로 사라지니,
       계속 쓰게 하려면 위 <b>회원 관리</b>에서 등급을 <b>학생</b>으로 바꿔 주세요.
     </div>`;
+}
+
+async function loadReviews(){
+  const wrap = document.getElementById('reviewList');
+  if(!wrap) return;
+  wrap.innerHTML = '<div style="color:var(--muted);font-size:0.85rem;">불러오는 중…</div>';
+  try{
+    const { data, error } = await sb.rpc('review_list', { p_admin: _adminName, p_admin_pin: _adminPw });
+    if (error) throw error;
+    if (!data || !data.ok) throw new Error(
+      data && data.error === 'denied' ? '관리자 인증이 만료됐어요. 다시 로그인해 주세요.' : '후기를 불러오지 못했어요.');
+
+    const reviews = data.reviews || [];
+    const avg = data.avg != null ? data.avg : 0;
+    const count = data.count || 0;
+
+    const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
+    // 후기는 로그인 없이 누구나 남길 수 있어요 — 이 페이지의 다른 값과 달리
+    // 완전히 익명·비인증 입력이라 반드시 이스케이프해서 넣습니다.
+    const _rvwEsc = t => String(t == null ? '' : t)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+    const summary = `
+      <div class="pg-stat-row">
+        <div class="pg-stat"><div class="pg-stat-num">${count}</div><div class="pg-stat-label">받은 후기</div></div>
+        <div class="pg-stat good"><div class="pg-stat-num">${count ? avg : '—'}</div><div class="pg-stat-label">평균 별점 (5점 만점)</div></div>
+      </div>`;
+
+    if (!reviews.length){
+      wrap.innerHTML = summary + '<div style="color:var(--muted);font-size:0.85rem;margin-top:10px;">아직 남겨진 후기가 없어요.</div>';
+      return;
+    }
+
+    const rows = reviews.map(r => {
+      const when = new Date(r.created_at).toLocaleDateString('ko-KR', { year:'numeric', month:'short', day:'numeric' });
+      const name = r.author_name ? _rvwEsc(r.author_name) : '<span style="color:var(--muted)">익명</span>';
+      const text = r.review_text ? `<div style="font-size:0.85rem;color:var(--text);line-height:1.6;margin-top:4px;">${_rvwEsc(r.review_text)}</div>` : '';
+      return `<div style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.85rem;">
+          <span style="color:#ffb400;letter-spacing:1px;">${stars(r.rating)}</span>
+          <span style="font-weight:600;">${name}</span>
+          <span style="color:var(--muted);margin-left:auto;font-size:0.78rem;">${when}</span>
+        </div>
+        ${text}
+      </div>`;
+    }).join('');
+
+    wrap.innerHTML = summary + '<div style="margin-top:12px;">' + rows + '</div>';
+  } catch(e){
+    wrap.innerHTML = '<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ' + (e.message || String(e)) + '</div>';
+  }
 }
 
 async function loadProgress(){
