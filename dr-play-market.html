@@ -266,11 +266,14 @@ const SCRIPT = {
   /* ── 관문 ② 물어보기 + 주문 ───────────────────────── */
   g2_welcome : { ko:'어서 오세요!', en:'Welcome!', audio:'2어서+오세요_slide2.mp3', vol:0.82 },
   g2_ask_t   : { ko:'뭐라고 물어볼까요? · WHAT DO YOU ASK?' },
+  /* 셋 다 시장에서 실제로 물어볼 법한 자연스러운 질문이라 정답으로 인정함 —
+     이 상인(할머니)은 좀 수다스러운/소셜라이징 스타일이라, 어떤 질문을 해도
+     한 마디씩 자기 얘기를 하고서 딸기 이야기(g2_pitch)로 넘어감 (2026-09-10) */
   g2_ask_opts: [
     { ko:'오늘 과일 뭐가 좋아요?', en:'What fruit is good today?', ok:true, audio:'3오늘+과일+뭐가+좋아요_slide3.mp3' },
-    { ko:'딸기 있어요?', en:'Do you have strawberries?', ok:false,
+    { ko:'딸기 있어요?', en:'Do you have strawberries?', ok:true,
       reply:{ ko:'그럼요! 그런데 다른 것도 있는데 안 보실래요?', en:'Of course! But don’t you want to see what else we have?' } },
-    { ko:'이거 얼마예요?', en:'How much is this?', ok:false,
+    { ko:'이거 얼마예요?', en:'How much is this?', ok:true,
       reply:{ ko:'어떤 거요? 하나씩 물어보세요.', en:'Which one? Ask about them one at a time.' } }
   ],
   g2_pitch   : { ko:'요새 딸기가 제철이에요. 아주 맛있어요.', en:'Strawberries are in season these days. They’re very delicious.',
@@ -612,7 +615,18 @@ function viewG2Greet(){
 }
 function chooseAsk(i){
   const o = SCRIPT.g2_ask_opts[i];
-  if(o.ok){ S.scene='g2order'; S.hintOpen=false; say(o, ()=>{ if(S.scene==='g2order') say(SCRIPT.g2_pitch); }); render(); return; }
+  if(o.ok){
+    S.scene='g2order'; S.hintOpen=false;
+    /* 셋 다 정답이지만, 물어본 게 딸기/가격이면 상인이 한마디 하고 나서
+       (o.reply) 딸기 이야기(g2_pitch)로 넘어감 — 실수 아님, 초록색으로 표시 */
+    if(o.reply) flash(o.reply, 'good');
+    say(o, ()=>{
+      if(S.scene!=='g2order') return;
+      if(o.reply) say(o.reply, ()=>{ if(S.scene==='g2order') say(SCRIPT.g2_pitch); });
+      else say(SCRIPT.g2_pitch);
+    });
+    render(); return;
+  }
   S.mistakes++; flash(o.reply); say(o, ()=>say(o.reply)); render();
 }
 
