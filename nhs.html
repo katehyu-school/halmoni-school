@@ -208,7 +208,7 @@ function nhsMountTopBanner(){
   // 대신 트라이얼 배너와 같은 자리(맨 위 얇은 줄)에 "로그인 중" 표시 + 로그아웃 링크만 추가 (2026-09-01)
   if(NHS_IS_MEMBER && NHS_USER){
     const bar=document.createElement('div');
-    bar.className='nhs-topbanner';
+    bar.className='nhs-topbanner nhs-topbanner-member';   // 회원 배너는 한 줄뿐이라 게스트 배너용 min-height(60px)는 과함 — core/nhs.css 참고
     bar.style.cssText='background:var(--warm-50);color:var(--warm-600);font-size:11.5px;text-align:right;padding:5px 16px;border-bottom:1px solid var(--gray-200);';
     const nm=esc(NHS_USER.display_name||NHS_USER.name||'');
     bar.innerHTML='👤 <b style="color:var(--warm-800)">'+nm+'</b>님으로 로그인 중 · Logged in'
