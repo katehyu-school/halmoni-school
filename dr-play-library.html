@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>도서관의 비밀 · The Library Secret | 도란채</title>
+<title>도서관의 비밀 · The Secret of the Library | 도란채</title>
 <meta name="description" content="숨겨진 낱말을 찾아 마법의 문장을 완성하고 비밀의 문을 열어보세요. 도란채의 한국어 조사 게임 — 무료, 가입 없이.">
 <link rel="canonical" href="https://doranchae.com/dr-play-library.html">
 <!-- 페이스북·카톡 링크 미리보기 -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="도란채 · Doranchae">
 <meta property="og:url" content="https://doranchae.com/dr-play-library.html">
-<meta property="og:title" content="도서관의 비밀 · The Library Secret">
+<meta property="og:title" content="도서관의 비밀 · The Secret of the Library">
 <meta property="og:description" content="책장 속에 숨은 낱말을 찾아 마법의 문장을 완성하면, 서가 사이로 비밀의 문이 열려요! 가입 없이 무료로 해보세요. / Find the hidden words, cast the magic sentence, and open the secret door between the bookshelves — free, no sign-up.">
 <meta property="og:image" content="https://doranchae.com/og_library.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="도서관의 비밀 · The Library Secret">
+<meta name="twitter:title" content="도서관의 비밀 · The Secret of the Library">
 <meta name="twitter:description" content="책장 속에 숨은 낱말을 찾아 마법의 문장을 완성하면, 서가 사이로 비밀의 문이 열려요!">
 <meta name="twitter:image" content="https://doranchae.com/og_library.jpg">
 <link rel="icon" href="favicon-doranchae.svg" type="image/svg+xml">
@@ -204,7 +204,7 @@ footer a{color:var(--teal); text-decoration:none}
 <body>
 <div id="stage">
   <div id="hud">
-    <div class="goal" id="hudGoal">📚 도서관의 비밀<small>The Library Secret</small></div>
+    <div class="goal" id="hudGoal">📚 도서관의 비밀<small>The Secret of the Library</small></div>
     <div class="chip" id="hudMiss">😅 0 실수</div>
     <div class="chip" id="hudTime">⏱ 0:00</div>
   </div>
@@ -235,7 +235,7 @@ footer a{color:var(--teal); text-decoration:none}
 const SCRIPT = {
 
   /* ── 시작 ─────────────────────────────────────────── */
-  title    : { ko:'도서관의 비밀', en:'The Library Secret' },
+  title    : { ko:'도서관의 비밀', en:'The Secret of the Library' },
   subtitle : { ko:'보미와 마야가 도서관에서 공부하다가, 책장에서 낡고 신비한 책을 발견했어요. 책장을 넘길 때마다 수수께끼가 나타나요.',
                en:'While studying at the library, Bomi and Maya found an old, mysterious book on the shelf. Each page they turn reveals a new riddle.' },
   storyNote: { ko:'책장마다 숨은 낱말을 찾아서, 마법의 문장을 완성해봐!', en:'Find the hidden word on every page — then use them to cast the magic sentence!' },
@@ -257,60 +257,60 @@ const SCRIPT = {
 const PAGES = [
   { id:'topic', speaker:'bomi',
     line: { ko:'나는 한국어를 공부해.', en:'I study Korean.', audio:'audio_1_나는_한국어를_공부해_.mp3' },
-    task: { ko:'주제를 나타내는 조사를 찾아보세요', en:'Find the topic marker' },
+    task: 'Find the topic marker',
     opts: [
-      { ko:'는', en:'topic marker', ok:true },
-      { ko:'가', en:'subject marker', reply:{ ko:'가는 "이/가"처럼 주어를 표시해요 — 이 문장엔 안 쓰였어요.', en:'가 marks a subject (like 이) — it isn’t the one used here.' } },
-      { ko:'를', en:'object marker', reply:{ ko:'를은 목적어(한국어)에 붙어요 — 주제 조사가 아니에요.', en:'를 marks the object (한국어) — not the topic particle.' } },
-      { ko:'도', en:'also / too', reply:{ ko:'도는 "~도"(also/too)라는 뜻이에요 — 이 문장엔 없어요.', en:'도 means "also/too" — it’s not in this sentence.' } }
+      { ko:'는', ok:true },
+      { ko:'가', reply:{ ko:'가는 "이/가"처럼 주어를 표시해요 — 이 문장엔 안 쓰였어요.', en:'가 marks a subject (like 이) — it isn’t the one used here.' } },
+      { ko:'를', reply:{ ko:'를은 목적어(한국어)에 붙어요 — 주제 조사가 아니에요.', en:'를 marks the object (한국어) — not the topic particle.' } },
+      { ko:'도', reply:{ ko:'도는 "~도"(also/too)라는 뜻이에요 — 이 문장엔 없어요.', en:'도 means "also/too" — it’s not in this sentence.' } }
     ],
     hint: { ko:'는은 주제를 표시하는 조사예요 — "나" 뒤에 붙어서 "나는(이야기의 주제는 나)"이 돼요.', en:'는 marks the topic — attached to 나, it becomes 나는 (as for me).' },
     rune: '는' },
 
   { id:'subj', speaker:'maya',
     line: { ko:'우와! 나도 한국어를 배우고 싶어.', en:'Wow! I want to learn Korean too.', audio:'audio_2_우와__나도_한국어를_배우고_싶어_.mp3' },
-    task: { ko:'주어(행동을 하는 사람)를 찾아보세요', en:'Find the subject' },
+    task: 'Find the subject',
     opts: [
-      { ko:'나', en:'I / me', ok:true },
-      { ko:'한국어', en:'Korean (language)', reply:{ ko:'한국어는 배우고 싶은 대상(목적어)이지, 배우는 사람이 아니에요.', en:'한국어 is the object being learned — not the person doing the learning.' } },
-      { ko:'배우고', en:'learning (part of verb)', reply:{ ko:'배우고는 동사의 일부예요 — 주어가 아니에요.', en:'배우고 is part of the verb — not the subject.' } },
-      { ko:'싶어', en:'want to (part of verb)', reply:{ ko:'싶어도 동사 표현의 일부예요.', en:'싶어 is also part of the verb phrase.' } }
+      { ko:'나', ok:true },
+      { ko:'한국어', reply:{ ko:'한국어는 배우고 싶은 대상(목적어)이지, 배우는 사람이 아니에요.', en:'한국어 is the object being learned — not the person doing the learning.' } },
+      { ko:'배우고', reply:{ ko:'배우고는 동사의 일부예요 — 주어가 아니에요.', en:'배우고 is part of the verb — not the subject.' } },
+      { ko:'싶어', reply:{ ko:'싶어도 동사 표현의 일부예요.', en:'싶어 is also part of the verb phrase.' } }
     ],
     hint: { ko:'이 문장의 주어는 "나"예요 — "배우고 싶다"고 말하는 사람이니까요.', en:'The subject is 나 (I) — the person who wants to do the action.' },
     rune: '나' },
 
   { id:'obj', speaker:'maya',
     line: { ko:'응, 그런데 조금 어려워.', en:'Yeah, but it’s a little hard.', audio:'audio_4_응__그런데_조금_어려워_.mp3' },
-    task: { ko:'숨은 목적어를 찾아보세요 — 문장엔 안 써 있지만, 뭐가 어렵다는 걸까요?', en:'Find the hidden object — it’s not written, but what is she finding hard?' },
+    task: 'Find the hidden object — it’s not written, but what is she finding hard?',
     opts: [
-      { ko:'한국어', en:'Korean', ok:true },
-      { ko:'숙제', en:'homework', reply:{ ko:'숙제 얘기는 안 나왔어요 — 계속 이야기하던 건 한국어예요.', en:'Homework was never mentioned — they’ve been talking about Korean this whole time.' } },
-      { ko:'시험', en:'a test', reply:{ ko:'시험 얘기도 안 나왔어요.', en:'No test was mentioned either.' } },
-      { ko:'영어', en:'English', reply:{ ko:'영어가 아니라, 배우고 있는 한국어가 어렵다는 거예요.', en:'It’s not English — it’s the Korean they’re learning that’s hard.' } }
+      { ko:'한국어', ok:true },
+      { ko:'숙제', reply:{ ko:'숙제 얘기는 안 나왔어요 — 계속 이야기하던 건 한국어예요.', en:'Homework was never mentioned — they’ve been talking about Korean this whole time.' } },
+      { ko:'시험', reply:{ ko:'시험 얘기도 안 나왔어요.', en:'No test was mentioned either.' } },
+      { ko:'영어', reply:{ ko:'영어가 아니라, 배우고 있는 한국어가 어렵다는 거예요.', en:'It’s not English — it’s the Korean they’re learning that’s hard.' } }
     ],
     hint: { ko:'마야는 "뭐가" 어렵다고 했을까요? 바로 앞에서 계속 이야기하던 것 — 한국어예요!', en:'What is Maya finding hard? The thing they were just talking about — Korean!' },
     rune: '한국어' },
 
   { id:'objmark', speaker:'maya',
     line: { ko:'나는 아직 한국어를 잘 못 읽어.', en:'I still can’t read Korean well.', audio:'audio_5_나는_아직_한국어를_잘_못_읽어_.mp3' },
-    task: { ko:'목적어를 나타내는 조사를 찾아보세요', en:'Find the object marker' },
+    task: 'Find the object marker',
     opts: [
-      { ko:'를', en:'object marker', ok:true },
-      { ko:'는', en:'topic marker', reply:{ ko:'는은 주제를 표시해요 — 이미 "나" 뒤에 쓰였어요.', en:'는 marks the topic — it’s already attached to 나.' } },
-      { ko:'가', en:'subject marker', reply:{ ko:'가는 주어를 표시하는 조사예요 — 목적어 조사가 아니에요.', en:'가 is a subject-marking particle — not an object particle.' } },
-      { ko:'도', en:'also / too', reply:{ ko:'도는 "~도"라는 뜻이에요 — 이 문장엔 없어요.', en:'도 means "also/too" — not used here.' } }
+      { ko:'를', ok:true },
+      { ko:'는', reply:{ ko:'는은 주제를 표시해요 — 이미 "나" 뒤에 쓰였어요.', en:'는 marks the topic — it’s already attached to 나.' } },
+      { ko:'가', reply:{ ko:'가는 주어를 표시하는 조사예요 — 목적어 조사가 아니에요.', en:'가 is a subject-marking particle — not an object particle.' } },
+      { ko:'도', reply:{ ko:'도는 "~도"라는 뜻이에요 — 이 문장엔 없어요.', en:'도 means "also/too" — not used here.' } }
     ],
     hint: { ko:'를은 목적어를 표시하는 조사예요 — "한국어" 뒤에 붙어서 "한국어를"이 돼요.', en:'를 marks the object — attached to 한국어, it becomes 한국어를.' },
     rune: '를' },
 
   { id:'verb', speaker:'bomi',
     line: { ko:'괜찮아! 나도 같이 공부하고 싶어.', en:'It’s okay! I want to study together too.', audio:'audio_6_괜찮아__나도_같이_공부하고_싶어_.mp3' },
-    task: { ko:'"공부하고 싶다"는 뜻의 표현을 찾아보세요', en:'Find the phrase that means "want to study"' },
+    task: 'Find the phrase that means "want to study"',
     opts: [
-      { ko:'공부하고 싶어', en:'want to study', ok:true },
-      { ko:'읽고 싶어', en:'want to read', reply:{ ko:'읽고 싶어는 "읽다"(read)에서 온 말이에요.', en:'읽고 싶어 comes from 읽다 (read) — not the verb used here.' } },
-      { ko:'만들고 싶어', en:'want to make', reply:{ ko:'만들고 싶어는 "만들다"(make)에서 온 말이에요.', en:'만들고 싶어 comes from 만들다 (make).' } },
-      { ko:'가고 싶어', en:'want to go', reply:{ ko:'가고 싶어는 "가다"(go)에서 온 말이에요.', en:'가고 싶어 comes from 가다 (go).' } }
+      { ko:'공부하고 싶어', ok:true },
+      { ko:'읽고 싶어', reply:{ ko:'읽고 싶어는 "읽다"(read)에서 온 말이에요.', en:'읽고 싶어 comes from 읽다 (read) — not the verb used here.' } },
+      { ko:'만들고 싶어', reply:{ ko:'만들고 싶어는 "만들다"(make)에서 온 말이에요.', en:'만들고 싶어 comes from 만들다 (make).' } },
+      { ko:'가고 싶어', reply:{ ko:'가고 싶어는 "가다"(go)에서 온 말이에요.', en:'가고 싶어 comes from 가다 (go).' } }
     ],
     hint: { ko:'"~하고 싶어"는 "~하고 싶다"의 반말형이에요 — "공부하고 싶어" = want to study.', en:'~하고 싶어 is the casual form of wanting to do something — 공부하고 싶어 = want to study.' },
     rune: '공부하고 싶어' }
@@ -426,8 +426,11 @@ const maya = l => bub('maya','👧','마야', l);
 const narr = l => `<div class="narr">${esc(l.ko)}<div style="font-size:11.5px;color:var(--warm-600);margin-top:4px">${esc(l.en)}</div></div>`;
 
 function optBtn(o, i, handler){
+  /* 선택지는 한국어만 — 영어 뜻을 같이 보여주면 정답을 그대로 알려주는
+     힌트가 돼버려서(예: "topic marker"라고 써 있으면 "Find the topic marker"
+     문제의 답이 바로 보임), 일부러 한국어만 남겨둠 (2026-09-10) */
   return `<button class="opt" onclick="${handler}(${i})">
-    <div class="ko">${esc(o.ko)}</div><div class="en">${esc(o.en)}</div></button>`;
+    <div class="ko">${esc(o.ko)}</div></button>`;
 }
 function hintBox(hint){
   return `<div class="btnrow">
@@ -453,7 +456,7 @@ function msgBox(){
 function hud(){
   const n = S.page + 1;
   const goals = { title:'📚 도서관의 비밀', assembly:'🔮 마법의 문장', end:'🎬 완료!' };
-  const goalsEn = { title:'The Library Secret', assembly:'The Magic Sentence', end:'Done!' };
+  const goalsEn = { title:'The Secret of the Library', assembly:'The Magic Sentence', end:'Done!' };
   let g = goals[S.scene], e = goalsEn[S.scene];
   if(S.scene==='page'){ g = `📖 페이지 ${n} / 5`; e = `Page ${n} of 5`; }
   $('hudGoal').innerHTML = `${esc(g||'')}<small>${esc(e||'')}</small>`;
@@ -541,7 +544,7 @@ function viewPage(){
   const p = PAGES[S.page];
   const speak = p.speaker==='bomi' ? bomi : maya;
   let h = msgBox() + speak(p.line);
-  h += `<div class="narr" style="margin-top:-4px">🔎 ${esc(p.task.ko)}<div style="font-size:11.5px;margin-top:3px">${esc(p.task.en)}</div></div>`;
+  h += `<div class="narr" style="margin-top:-4px">🔎 ${esc(p.task)}</div>`;
   h += `<div class="opts">${p.opts.map((o,i)=>optBtn(o,i,'choosePage')).join('')}</div>`;
   h += hintBox(p.hint);
   return h;
