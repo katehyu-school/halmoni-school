@@ -24,6 +24,7 @@
 <script src="core/supabase-config.js"></script>
 <script src="core/anti-copy.js"></script>
 <script src="core/board.js"></script>
+<script src="core/review.js"></script>
 <link rel="stylesheet" href="core/footer.css">
 </head>
 <body>
@@ -198,7 +199,8 @@ function nhsMountTopBanner(){
         +' · <a href="#" onclick="nhsExitTrial();return false;" style="color:#ffb84d;">Exit trial view</a>'
       : '👋 You\'re free to explore <b>'+_open+'</b> — no account needed. Level 3+ is for registered members.'
         +_krSub('지금 무료로 자유롭게 보고 계세요 · Level 3부터는 정식 회원 전용입니다')
-        +' · <a href="/?login=1" style="color:#4ecdc4;">Create a free account to save your progress</a>';
+        +' · <a href="/?login=1" style="color:#4ecdc4;">Create a free account to save your progress</a>'
+        +' · <a href="#" onclick="openReview();return false;" style="color:#ffd166;">⭐ Leave a review</a>';
     document.body.insertBefore(bar, document.body.firstChild);
   }
   // 정식 회원(로그인 상태) — 상단 아이콘 네비는 이미 꽉 차 있어서(아이패드 폭에서 특히) 버튼을 더 추가하지 않고,
