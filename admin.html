@@ -846,6 +846,8 @@ async function loadReviews(){
           <span style="color:#ffb400;letter-spacing:1px;">${stars(r.rating)}</span>
           <span style="font-weight:600;">${name}</span>
           <span style="color:var(--muted);margin-left:auto;font-size:0.78rem;">${when}</span>
+          <button onclick="reviewDelete('${r.id}')" title="이 후기 삭제"
+            style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;padding:0 2px;">🗑</button>
         </div>
         ${text}
       </div>`;
@@ -854,6 +856,19 @@ async function loadReviews(){
     wrap.innerHTML = summary + '<div style="margin-top:12px;">' + rows + '</div>';
   } catch(e){
     wrap.innerHTML = '<div style="color:var(--red);font-size:0.85rem;">불러오기 실패: ' + (e.message || String(e)) + '</div>';
+  }
+}
+
+async function reviewDelete(id){
+  if (!confirm('이 후기를 삭제할까요? 되돌릴 수 없어요.')) return;
+  try{
+    const { data, error } = await sb.rpc('review_delete', { p_admin: _adminName, p_admin_pin: _adminPw, p_id: id });
+    if (error) throw error;
+    if (!data || !data.ok) throw new Error(data && data.error === 'denied'
+      ? '관리자 인증이 만료됐어요. 다시 로그인해 주세요.' : '삭제되지 않았어요.');
+    loadReviews();
+  } catch(e){
+    alert('삭제 실패: ' + (e.message || e));
   }
 }
 
